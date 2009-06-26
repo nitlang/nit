@@ -22,30 +22,30 @@ import syntax_base
 # Stack escapable blocks
 class EscapableContext
 	# Stack of blocks
-	attr _stack: Array[EscapableBlock] = new Array[EscapableBlock]
+	var _stack: Array[EscapableBlock] = new Array[EscapableBlock]
 
 	# Push a new escapable block
-	meth push(block: EscapableBlock)
+	fun push(block: EscapableBlock)
 	do
 		_stack.push(block)
 	end
 
 	# Is there no block in the stack?
-	meth is_empty: Bool do return _stack.is_empty
+	fun is_empty: Bool do return _stack.is_empty
 
 	# Return the current block (the last stacked)
-	meth head: EscapableBlock
+	fun head: EscapableBlock
 	do
 		return _stack.last
 	end
 
 	# Remove the last block (the last stacked)
-	meth pop
+	fun pop
 	do
 		var n = _stack.pop
 	end
 
-	readable attr _visitor: AbsSyntaxVisitor
+	readable var _visitor: AbsSyntaxVisitor
 	init (v: AbsSyntaxVisitor)
 	do
 		_visitor = v
@@ -58,18 +58,18 @@ end
 # For and while use this class. closures uses the EscapableClosure subclass.
 class EscapableBlock
 	# The syntax node of the block
-	readable attr _node: PNode
+	readable var _node: PNode
 
 	# Is self a break closure ?
-	meth is_break_block: Bool do return false
+	fun is_break_block: Bool do return false
 
 	# Collected expressions used in breaks.
 	# null if break does not accept values.
 	# break_list is used to store expressions used in break statments and perform type checks latter
-	meth break_list: nullable Array[PExpr] do return null
+	fun break_list: nullable Array[PExpr] do return null
 
 	# The static type required by the continue statement (if any)
-	meth continue_stype: nullable MMType do return null
+	fun continue_stype: nullable MMType do return null
 
 	init(node: PNode)
 	do
@@ -81,13 +81,13 @@ end
 class EscapableClosure
 special EscapableBlock
 	# The associated closure
-	readable attr _closure: MMClosure
+	readable var _closure: MMClosure
 
-	redef meth is_break_block do return _closure.is_break
+	redef fun is_break_block do return _closure.is_break
 
-	redef readable attr _break_list: nullable Array[PExpr]
+	redef readable var _break_list: nullable Array[PExpr]
 
-	redef meth continue_stype do return _closure.signature.return_type
+	redef fun continue_stype do return _closure.signature.return_type
 
 	init(node: PNode, closure: MMClosure, break_list: nullable Array[PExpr])
 	do
@@ -102,13 +102,13 @@ end
 class AEscapeExpr
 special PNode
 	# The associated escapable block
-	readable attr _escapable_block: nullable EscapableBlock
+	readable var _escapable_block: nullable EscapableBlock
 
 	# The name of the keyword
-	meth kwname: String is abstract
+	fun kwname: String is abstract
 
 	# Compute, set and return the _abelable_node value
-	meth compute_escapable_block(lctx: EscapableContext): nullable EscapableBlock
+	fun compute_escapable_block(lctx: EscapableContext): nullable EscapableBlock
 	do
 		var block: EscapableBlock
 		if lctx.is_empty then
@@ -123,11 +123,11 @@ end
 
 redef class AContinueExpr
 special AEscapeExpr
-	redef meth kwname do return "continue"
+	redef fun kwname do return "continue"
 end
 
 redef class ABreakExpr
 special AEscapeExpr
-	redef meth kwname do return "break"
+	redef fun kwname do return "break"
 end
 

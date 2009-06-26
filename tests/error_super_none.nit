@@ -16,7 +16,7 @@
 
 import kernel
 class A
-	meth foo
+	fun foo
 	do
 		super
 	end

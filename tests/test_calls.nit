@@ -15,11 +15,11 @@
 # limitations under the License.
 
 class A
-	meth foo
+	fun foo
 	do
 		1.output
 	end
-	meth bar
+	fun bar
 	do
 		foo
 	end
@@ -29,7 +29,7 @@ end
 
 class B
 special A
-	redef meth foo
+	redef fun foo
 	do
 		2.output
 	end
@@ -39,7 +39,7 @@ end
 
 class C
 special B
-	meth baz
+	fun baz
 	do
 		bar
 	end

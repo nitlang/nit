@@ -23,14 +23,14 @@ private import compiling
 # The main class of the nitcompiler program
 class NitCompiler
 special AbstractCompiler
-	readable attr _opt_output: OptionString = new OptionString("Output file", "-o", "--output")
-	readable attr _opt_boost: OptionBool = new OptionBool("Optimize compilation", "-O", "--boost")
-	readable attr _opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no_cc")
-	readable attr _opt_global: OptionBool = new OptionBool("Use global compilation", "--global")
-	readable attr _opt_clibdir: OptionString = new OptionString("NIT C library directory", "--clibdir")
-	readable attr _opt_bindir: OptionString = new OptionString("NIT tools directory", "--bindir")
-	readable attr _opt_compdir: OptionString = new OptionString("Intermediate compilation directory", "--compdir")
-	readable attr _opt_extension_prefix: OptionString = new OptionString("Append prefix to file extension", "-p", "--extension-prefix")
+	readable var _opt_output: OptionString = new OptionString("Output file", "-o", "--output")
+	readable var _opt_boost: OptionBool = new OptionBool("Optimize compilation", "-O", "--boost")
+	readable var _opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no_cc")
+	readable var _opt_global: OptionBool = new OptionBool("Use global compilation", "--global")
+	readable var _opt_clibdir: OptionString = new OptionString("NIT C library directory", "--clibdir")
+	readable var _opt_bindir: OptionString = new OptionString("NIT tools directory", "--bindir")
+	readable var _opt_compdir: OptionString = new OptionString("Intermediate compilation directory", "--compdir")
+	readable var _opt_extension_prefix: OptionString = new OptionString("Append prefix to file extension", "-p", "--extension-prefix")
 
 	init
 	do
@@ -38,7 +38,7 @@ special AbstractCompiler
 		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix)
 	end
 
-	redef meth process_options
+	redef fun process_options
 	do
 		super
 		output_file = opt_output.value
@@ -92,7 +92,7 @@ special AbstractCompiler
 		end
 	end
 
-	redef meth perform_work(mods)
+	redef fun perform_work(mods)
 	do
 		for mod in mods do
 			assert mod isa MMSrcModule

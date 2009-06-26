@@ -15,30 +15,30 @@
 # limitations under the License.
 
 class A
-	readable writable attr _a: Int = 0#!alt1#
-	#alt1#readable writable attr _a: Object = 0
+	readable writable var _a: Int = 0#!alt1#
+	#alt1#readable writable var _a: Object = 0
 	init do end
-	meth foo
+	fun foo
 	do
 		_a += 2
 	end
 
-	meth next: Int
+	fun next: Int
 	do
 		_a += 1
 		return a
 	end
 
-	meth [](a: Int): Int do return a
-	meth []=(a: Int, b: Int) do print "{a} {b}"
+	fun [](a: Int): Int do return a
+	fun []=(a: Int, b: Int) do print "{a} {b}"
 end
 
 redef class Int
-	meth sum(o: Int): Int do 
+	fun sum(o: Int): Int do 
 		print "{self} + {o} = {self + o}?"
 		return self + o
 	end
-	meth sum=(o: Int, r: Int) do print "{self} + {o} = {r}!"
+	fun sum=(o: Int, r: Int) do print "{self} + {o} = {r}!"
 end
 
 var a = new A

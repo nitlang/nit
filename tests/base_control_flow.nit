@@ -16,14 +16,14 @@
 
 import kernel
 
-meth a: Int
+fun a: Int
 do
 	a
 	return 0
 	a
 end
 
-meth b: Int
+fun b: Int
 do
 	a
 	if true then return 0
@@ -31,7 +31,7 @@ do
 	return 1#!alt1#
 end
 
-meth c: Int
+fun c: Int
 do
 	a
 	if true then
@@ -43,7 +43,7 @@ do
 	return 2#!alt1#
 end
 
-meth d: Int
+fun d: Int
 do
 	a
 	if true then

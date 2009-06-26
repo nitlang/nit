@@ -14,25 +14,25 @@
 # Super class of all option's class
 class Option
 	# Names for the option (including long and short ones)
-	readable attr _names: Array[String]
+	readable var _names: Array[String]
 
 	# Type of the value of the option
 	type VALUE: nullable Object
 
 	# Human readable description of the option
-	readable attr _helptext: String 
+	readable var _helptext: String 
 
 	# Is this option mandatory?
-	readable writable attr _mandatory: Bool 
+	readable writable var _mandatory: Bool 
 
 	# Current value of this option
-	writable attr _value: nullable VALUE
+	writable var _value: nullable VALUE
 
 	# Current value of this option
-	meth value: VALUE do return _value.as(VALUE)
+	fun value: VALUE do return _value.as(VALUE)
 
 	# Default value of this option
-	readable writable attr _default_value: nullable VALUE
+	readable writable var _default_value: nullable VALUE
 
 	# Create a new option
 	init init_opt(help: String, default: nullable VALUE, names: nullable Array[String])
@@ -49,13 +49,13 @@ class Option
 	end
 
 	# Add new aliases for this option
-	meth add_aliases(names: String...) do _names.add_all(names)
+	fun add_aliases(names: String...) do _names.add_all(names)
 	
 	# An help text for this option with default settings
-	redef meth to_s do return pretty(2)
+	redef fun to_s do return pretty(2)
 	
 	# A pretty print for this help
-	meth pretty(off: Int): String
+	fun pretty(off: Int): String
 	do
 		var text = new Buffer.from("  ")
 		text.append(_names.join(", "))
@@ -67,7 +67,7 @@ class Option
 		return text.to_s
 	end
 
-	meth pretty_default: String
+	fun pretty_default: String
 	do
 		if default_value != null then
 			return " ({default_value})"
@@ -76,16 +76,16 @@ class Option
 	end
 
 	# Consume parameters for this option
-	protected meth read_param(it: Iterator[String]) is abstract
+	protected fun read_param(it: Iterator[String]) is abstract
 end
 
 class OptionText
 special Option
 	init(text: String) do init_opt(text, null, null)
 
-	redef meth pretty(off) do return to_s
+	redef fun pretty(off) do return to_s
 
-	redef meth to_s do return helptext
+	redef fun to_s do return helptext
 end
 
 class OptionBool
@@ -94,7 +94,7 @@ special Option
 
 	init(help: String, names: String...) do init_opt(help, false, names)
 
-	redef meth read_param(it) do value = true
+	redef fun read_param(it) do value = true
 end
 
 class OptionCount
@@ -103,15 +103,15 @@ special Option
 
 	init(help: String, names: String...) do init_opt(help, 0, names)
 
-	redef meth read_param(it) do value += 1
+	redef fun read_param(it) do value += 1
 end
 
 # Option with one mandatory parameter
 class OptionParameter
 special Option
-	protected meth convert(str: String): VALUE is abstract
+	protected fun convert(str: String): VALUE is abstract
 
-	redef meth read_param(it)
+	redef fun read_param(it)
 	do
 		if it.is_ok then
 			value = convert(it.item)
@@ -130,13 +130,13 @@ special OptionParameter
 
 	init(help: String, names: String...) do init_opt(help, null, names)
 
-	redef meth convert(str) do return str
+	redef fun convert(str) do return str
 end
 
 class OptionEnum
 special OptionParameter
 	redef type VALUE: Int
-	attr _enum: Array[String]
+	var _enum: Array[String]
 
 	init(enum: Array[String], help: String, default: Int, names: String...)
 	do
@@ -145,13 +145,13 @@ special OptionParameter
 		init_opt("{help} <{enum.join(", ")}>", default, names)
 	end
 
-	redef meth convert(str)
+	redef fun convert(str)
 	do
 		var id = _enum.index_of(str)
 		return id
 	end
 
-	redef meth pretty_default
+	redef fun pretty_default
 	do
 		if default_value != null then
 			return " ({_enum[default_value.as(not null)]})"
@@ -167,7 +167,7 @@ special OptionParameter
 
 	init(help: String, default: Int, names: String...) do init_opt(help, default, names)
 	
-	redef meth convert(str) do return str.to_i
+	redef fun convert(str) do return str.to_i
 end
 
 class OptionArray
@@ -180,8 +180,8 @@ special OptionParameter
 		init_opt(help, _values, names)
 	end
 
-	attr _values: Array[String]	
-	redef meth convert(str)
+	var _values: Array[String]	
+	redef fun convert(str)
 	do
 		_values.add(str)
 		return _values
@@ -189,12 +189,12 @@ special OptionParameter
 end
 
 class OptionContext
-	readable attr _options: Array[Option] 
-	readable attr _rest: Array[String] 
+	readable var _options: Array[Option] 
+	readable var _rest: Array[String] 
 
-	attr _optmap: Map[String, Option]
+	var _optmap: Map[String, Option]
 	
-	meth usage
+	fun usage
 	do
 		var lmax = 1
 		for i in _options do
@@ -211,13 +211,13 @@ class OptionContext
 	end
 
 	# Parse ans assign options everywhere is the argument list
-	meth parse(argv: Collection[String])
+	fun parse(argv: Collection[String])
 	do
 		var it = argv.iterator
 		parse_intern(it)
 	end
 
-	protected meth parse_intern(it: Iterator[String])
+	protected fun parse_intern(it: Iterator[String])
 	do
 		var parseargs = true
 		build
@@ -242,7 +242,7 @@ class OptionContext
 		end
 	end
 
-	meth add_option(opts: Option...)
+	fun add_option(opts: Option...)
 	do
 		for opt in opts do
 			_options.add(opt)
@@ -256,7 +256,7 @@ class OptionContext
 		_rest = new Array[String]
 	end
 
-	private meth build
+	private fun build
 	do
 		for o in _options do
 			for n in o.names do

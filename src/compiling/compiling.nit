@@ -26,7 +26,7 @@ redef class MMSrcModule
 	# Compile the program
 	# Generate all sep files (_sep.[ch]), the main file (_table.c) and the build file (_build.sh)
 	# Then execute the build.sh
-	meth compile_prog_to_c(tc: ToolContext)
+	fun compile_prog_to_c(tc: ToolContext)
 	do
 		for m in mhe.greaters_and_self do
 			assert m isa MMSrcModule
@@ -78,7 +78,7 @@ redef class MMSrcModule
 	end
 
 	# Compile the main file
-	private meth compile_main(tc: ToolContext, ga: GlobalAnalysis)
+	private fun compile_main(tc: ToolContext, ga: GlobalAnalysis)
 	do
 		var v = new GlobalCompilerVisitor(self, tc, ga)
 		v.add_decl("#include <nit_common.h>")
@@ -94,7 +94,7 @@ redef class MMSrcModule
 	end
 
 	# Compile the sep files (of the current module only)
-	private meth compile_separate_module(tc: ToolContext, ga: GlobalAnalysis)
+	private fun compile_separate_module(tc: ToolContext, ga: GlobalAnalysis)
 	do
 		var v = new GlobalCompilerVisitor(self, tc, ga)
 		v.add_decl("#include <nit_common.h>")

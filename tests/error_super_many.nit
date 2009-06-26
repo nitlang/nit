@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	meth foo
+	fun foo
 	do
 		0.output
 	end
@@ -25,7 +25,7 @@ end
 
 class B
 special A
-	redef meth foo
+	redef fun foo
 	do
 		1.output
 	end
@@ -33,7 +33,7 @@ end
 
 class C
 special A
-	redef meth foo
+	redef fun foo
 	do
 		2.output
 	end
@@ -42,7 +42,7 @@ end
 class D
 special B
 special C
-	redef meth foo
+	redef fun foo
 	do
 		super
 	end

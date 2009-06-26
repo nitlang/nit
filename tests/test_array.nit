@@ -16,7 +16,7 @@
 
 
 class Ant
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		return "*"
 	end

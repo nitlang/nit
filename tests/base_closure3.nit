@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	meth foo(i, j: Int)
+	fun foo(i, j: Int)
 		with bar(k, l: Int, a: A)
 	do
 		i.output

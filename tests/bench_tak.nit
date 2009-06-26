@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-meth tak(x: Int, y: Int, z: Int): Int
+fun tak(x: Int, y: Int, z: Int): Int
 do
 	if not y < x then
 		return z

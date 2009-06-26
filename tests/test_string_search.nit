@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-meth search_and_split(s: String, p: Pattern)
+fun search_and_split(s: String, p: Pattern)
     do
 	print("string: \"{s}\" ; pattern: \"{p}\"")
 	print("searches:")

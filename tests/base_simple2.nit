@@ -20,20 +20,20 @@ class Object
 end
 
 class Int
-	meth output is intern
+	fun output is intern
 end
 
 class A
-	meth foo(i: Int)
+	fun foo(i: Int)
 	do
 		i.output
 		i.output
 	end
-	meth bar(i: Int)
+	fun bar(i: Int)
 	do
 		0.output
 	end
-	meth baz(a: A)
+	fun baz(a: A)
 	do
 		0.output
 	end
@@ -45,19 +45,19 @@ end
 
 class B
 special A
-	redef meth bar(i: Int)
+	redef fun bar(i: Int)
 	do
 		i.output
 		i.output
 		i.output
 	end
 
-	redef meth baz(a: A)
+	redef fun baz(a: A)
 	do
 		4.output
 	end
 
-	meth this_is_a_dead_method
+	fun this_is_a_dead_method
 	do
 		0.output
 	end
@@ -69,7 +69,7 @@ special A
 end
 
 class Sys
-	meth foo(a: A)
+	fun foo(a: A)
 	do
 		a.baz(a)
 	end

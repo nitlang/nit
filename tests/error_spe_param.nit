@@ -16,10 +16,10 @@
 
 import kernel
 class A
-meth toto(i: Int) do end
+fun toto(i: Int) do end
 end
 
 class B
 special A
-redef meth toto(c: Object) do end
+redef fun toto(c: Object) do end
 end

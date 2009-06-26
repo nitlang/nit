@@ -21,8 +21,8 @@ import parser
 
 class PrintTreeVisitor
 special Visitor
-	attr _rank: Int
-	meth visit(n: PNode)
+	var _rank: Int
+	fun visit(n: PNode)
 	do
 		printn("  " * _rank, n.to_s, "\n")
 		_rank = _rank + 1

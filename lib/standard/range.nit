@@ -19,19 +19,19 @@ import abstract_collection
 class Range[E: Discrete]
 special Collection[E]
 
-	redef readable attr _first: E
+	redef readable var _first: E
 
 	# Get the last element.
-	readable attr _last: E
+	readable var _last: E
 
 	# Get the element after the last one.
-	readable attr _after: E
+	readable var _after: E
 
-	redef meth has(item) do return item >= _first and item <= _last
+	redef fun has(item) do return item >= _first and item <= _last
 
-	redef meth has_only(item) do return _first == item and item == _last
+	redef fun has_only(item) do return _first == item and item == _last
 
-	redef meth count(item)
+	redef fun count(item)
 	do
 		if has(item) then
 			return 1
@@ -40,9 +40,9 @@ special Collection[E]
 		end
 	end
 
-	redef meth iterator do return new IteratorRange[E](self)
+	redef fun iterator do return new IteratorRange[E](self)
 
-	redef meth length
+	redef fun length
 	do
 		var nb = _first.distance(_after)
 		if nb > 0 then
@@ -52,7 +52,7 @@ special Collection[E]
 		end
 	end
 
-	redef meth is_empty do return _first >= _after
+	redef fun is_empty do return _first >= _after
 
 	# Create a range [`from', `to'].
 	# The syntax [`from'..`to'[ is equivalent.
@@ -76,12 +76,12 @@ end
 class IteratorRange[E: Discrete]
 	# Iterator on ranges.
 special Iterator[E]
-	attr _range: Range[E]	
-	redef readable attr _item: E
+	var _range: Range[E]	
+	redef readable var _item: E
 
-	redef meth is_ok do return _item < _range.after
+	redef fun is_ok do return _item < _range.after
 	
-	redef meth next do _item = _item.succ
+	redef fun next do _item = _item.succ
 	
 	init(r: Range[E])
 	do

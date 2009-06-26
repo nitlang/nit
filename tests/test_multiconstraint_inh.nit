@@ -20,23 +20,23 @@ class A
 end
 
 class I[F]
-   meth foo do 1.output end
+   fun foo do 1.output end
 end
 
 class J
 special I[A]
-   meth bar do 2.output end
+   fun bar do 2.output end
 
 	init do end
 end
 
 class G[E]
-   meth baz(e: I[E]) do e.foo end
+   fun baz(e: I[E]) do e.foo end
 end
 
 class H[F]
 special G[A]
-   redef meth baz(e: J) do e.bar end
+   redef fun baz(e: J) do e.bar end
 
    init do end
 end

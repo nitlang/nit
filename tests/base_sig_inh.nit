@@ -17,28 +17,28 @@
 import kernel
 
 class A
-	meth f0 is abstract
-	meth f1(a,b: Int) is abstract 
-	meth f2(a,b: Int) is abstract
-	meth f3(a,b: Int): Int is abstract
-	meth f4: Int is abstract
+	fun f0 is abstract
+	fun f1(a,b: Int) is abstract 
+	fun f2(a,b: Int) is abstract
+	fun f3(a,b: Int): Int is abstract
+	fun f4: Int is abstract
 end
 
 class B
 special A
-	redef meth f0 do 0.output
-	redef meth f1(a: Int, b: Int) do (a+b).output
-	redef meth f2(a,b) do (a+b).output
-	redef meth f3(a,b) do return a+b
-	redef meth f4 do return 4
+	redef fun f0 do 0.output
+	redef fun f1(a: Int, b: Int) do (a+b).output
+	redef fun f2(a,b) do (a+b).output
+	redef fun f3(a,b) do return a+b
+	redef fun f4 do return 4
 	init do end
 end
 
 
-meth m1 do 1.output
-meth m2(a:Int) do a.output
-meth m3(a,b:Int) do (a+b).output
-#alt1#meth e1(a,b:Int...) do (a.first).output
+fun m1 do 1.output
+fun m2(a:Int) do a.output
+fun m3(a,b:Int) do (a+b).output
+#alt1#fun e1(a,b:Int...) do (a.first).output
 
 m1
 m2(2)

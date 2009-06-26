@@ -27,9 +27,9 @@ class SrcModuleLoader
 special ModuleLoader
 	redef type MODULE: MMSrcModule
 
-	redef meth file_type do return "nit"
+	redef fun file_type do return "nit"
 
-	redef meth parse_file(context, file, filename, name, dir)
+	redef fun parse_file(context, file, filename, name, dir)
 	do
 		var lexer = new Lexer(file, filename)
 		var parser = new Parser(lexer)
@@ -46,7 +46,7 @@ special ModuleLoader
 		return module
 	end
 
-	redef meth process_metamodel(context, module)
+	redef fun process_metamodel(context, module)
 	do
 		module.process_supermodules(context)
 		module.process_syntax(context)
@@ -57,14 +57,14 @@ end
 
 redef class MMSrcModule
 	# Loading and syntax analysis of super modules
-	private meth process_supermodules(tc: ToolContext)
+	private fun process_supermodules(tc: ToolContext)
 	do
 		node.import_super_modules(tc, self)
 	end
 
 	# Syntax analysis and MM construction for the module
 	# Require than supermodules are processed
-	private meth process_syntax(tc: ToolContext)
+	private fun process_syntax(tc: ToolContext)
 	do
 		do_mmbuilder(tc)
 		if tc.error_count > 0 then exit(1)

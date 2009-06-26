@@ -6,7 +6,7 @@ class A
 		'A'.output
 	end
 
-	meth foo
+	fun foo
 	do
 		'a'.output
 		'\n'.output
@@ -15,7 +15,7 @@ end
 
 class M
 special A
-	redef meth foo
+	redef fun foo
 	do
 		'm'.output
 		super
@@ -32,7 +32,7 @@ special A
 		'}'.output
 	end
 
-	redef meth foo
+	redef fun foo
 	do
 		'b'.output
 		super
@@ -41,7 +41,7 @@ end
 
 class N
 special A
-	redef meth foo
+	redef fun foo
 	do
 		'n'.output
 		super
@@ -51,7 +51,7 @@ end
 class O
 special M
 special B
-	redef meth foo
+	redef fun foo
 	do
 		'o'.output
 		super
@@ -61,7 +61,7 @@ end
 class P
 special B
 special N
-	redef meth foo
+	redef fun foo
 	do
 		'p'.output
 		super
@@ -81,7 +81,7 @@ class Q
 	
 #alt3#special O
 #alt3#special P
-	redef meth foo
+	redef fun foo
 	do
 		'q'.output
 		super

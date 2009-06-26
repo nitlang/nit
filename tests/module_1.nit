@@ -17,22 +17,22 @@
 import module_0
 
 class A # class 1
-   meth a1 
+   fun a1 
    do 
 	   print(1)
 	   print(1)
    end
-   meth a12 
+   fun a12 
    do
 	   print(12)
 	   print(1)
    end
-   meth a13
+   fun a13
    do
 	   print(13) 
 	   print(1)
    end
-   meth a123 
+   fun a123 
    do
 	   print(123)
 	   print(1)
@@ -41,24 +41,24 @@ end
 
 class B # class 2
 special A
-   redef meth a12 
+   redef fun a12 
    do
 	   print(12)
 	   print(2)
    end
-   redef meth a123
+   redef fun a123
    do
 	   print(123)
 	   print(2)
    end
-   meth all2
+   fun all2
    do
 	   a1
 	   a12
 	   a13
 	   a123
    end
-   meth all25
+   fun all25
    do
 	   print(250)
 	   print(2)

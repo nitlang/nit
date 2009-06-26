@@ -19,7 +19,7 @@ import kernel
 class A
 	type E: T
 	
-	readable writable attr _e: nullable E = null
+	readable writable var _e: nullable E = null
 end
 
 class B
@@ -28,13 +28,13 @@ special A
 end
 
 class T
-	meth foo do 0.output
+	fun foo do 0.output
 	init do end
 end
 
 class U
 special T
-	redef meth foo do 1.output
+	redef fun foo do 1.output
 	init do end
 end
 

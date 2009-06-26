@@ -18,7 +18,7 @@ private import base_prot
 
 class A2
 special A
-	meth o
+	fun o
 	do
 		pub
 		pro
@@ -28,7 +28,7 @@ special A
 end
 
 class O2
-	meth o
+	fun o
 	do
 		var a = new A
 		a.pub

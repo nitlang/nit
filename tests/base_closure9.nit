@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	meth indent(i: Int, j, c: Char)
+	fun indent(i: Int, j, c: Char)
 	do
 		var ii = i
 		while ii > 0 do
@@ -30,7 +30,7 @@ class A
 		i.output
 	end
 
-	meth foo(i: Int, j: Char)
+	fun foo(i: Int, j: Char)
 		with bar
 	do
 		if i >= 3 then
@@ -54,7 +54,7 @@ class A
 	end
 end
 
-meth start
+fun start
 do
 	var a = new A
 	0.output

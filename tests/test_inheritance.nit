@@ -15,26 +15,26 @@
 # limitations under the License.
 
 class A
-	meth f do print(1) end
-	meth g do print(1) end
-	meth h do print(1) end
-	meth i do print(1) end
+	fun f do print(1) end
+	fun g do print(1) end
+	fun h do print(1) end
+	fun i do print(1) end
 
 	init do end
 end
 
 class B
 special A
-	redef meth g do print(2) end
-	redef meth i do print(2) end
+	redef fun g do print(2) end
+	redef fun i do print(2) end
 
 	init do end
 end
 
 class C
 special A
-	redef meth h do print(3) end
-	redef meth i do print(3) end
+	redef fun h do print(3) end
+	redef fun i do print(3) end
 
 	init do end
 end
@@ -42,7 +42,7 @@ end
 class D
 special B
 special C
-	redef meth i do print(4) end
+	redef fun i do print(4) end
 
 	init do end
 end

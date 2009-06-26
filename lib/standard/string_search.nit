@@ -21,14 +21,14 @@ class Pattern
 	# Search `self' into `s' from a certain position.
 	# Return the position of the first character of the matching section.
 	# Return -1 if not found.
-	meth search_index_in(s: String, from: Int): Int is abstract
+	fun search_index_in(s: String, from: Int): Int is abstract
 
 	# Search `self' into `s' from a certain position.
 	# Return null if not found.
-	meth search_in(s: String, from: Int): nullable Match is abstract
+	fun search_in(s: String, from: Int): nullable Match is abstract
 
 	# Search all `self' occucences into `s'.
-	meth search_all_in(s: String): Array[Match]
+	fun search_all_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
 		var match = search_in(s, 0)
@@ -40,7 +40,7 @@ class Pattern
 	end
 
 	# Split `s' using `self' is separator.
-	meth split_in(s: String): Array[Match]
+	fun split_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
 		var i = 0 # Cursor
@@ -64,10 +64,10 @@ end
 # see also http://www.cs.utexas.edu/users/moore/best-ideas/string-searching/index.html
 class BM_Pattern
 special Pattern 
-	redef meth to_s do return _motif
+	redef fun to_s do return _motif
 
 	# boyer-moore search gives the position of the first occurence of a pattern starting at position `from'
-	redef meth search_index_in(s, from)
+	redef fun search_index_in(s, from)
 	do
 		assert from >= 0
 		var n = s.length
@@ -94,7 +94,7 @@ special Pattern
 	end
 
 	# boyer-moore search. Return null if not found 
-	redef meth search_in(s, from)
+	redef fun search_in(s, from)
 	do
 		var to = search_index_in(s, from)
 		if to < 0 then
@@ -116,12 +116,12 @@ special Pattern
 	end
 
 	# searched motif
-	attr _motif: String
+	var _motif: String
 
 	# length of the motif
-	attr _length: Int
+	var _length: Int
 
-	private meth bc(e: Char): Int
+	private fun bc(e: Char): Int
 	do 
 		if _bc_table.has_key(e) then
 			return _bc_table[e]
@@ -131,12 +131,12 @@ special Pattern
 	end
 
 	# good shifts
-	attr _gs: Array[Int]
+	var _gs: Array[Int]
 	
 	# bad characters
-	attr _bc_table: Map[Char, Int]
+	var _bc_table: Map[Char, Int]
 
-	private meth compute_bc
+	private fun compute_bc
 	do
 		var x = _motif
 		var m = _length
@@ -147,7 +147,7 @@ special Pattern
 		end
 	end
 
-	private meth suffixes: Array[Int]
+	private fun suffixes: Array[Int]
 	do
 		var x = _motif
 		var m = _length
@@ -170,7 +170,7 @@ special Pattern
 		return suff
 	end
 
-	private meth compute_gs
+	private fun compute_gs
 	do
 		var x = _motif
 		var m = _length
@@ -202,20 +202,20 @@ end
 # Matches are a part of a string.
 class Match
 	# The base string matched
-	readable attr _string: String
+	readable var _string: String
 
 	# The starting position in the string
-	readable attr _from: Int
+	readable var _from: Int
 
 	# The length of the mathching part
-	readable attr _length: Int
+	readable var _length: Int
 
 	# The position of the first character just after the matching part.
 	# May be out of the base string
-	meth after: Int do return _from + _length
+	fun after: Int do return _from + _length
 
 	# The contents of the mathing part
-	redef meth to_s do return _string.substring(_from, _length)
+	redef fun to_s do return _string.substring(_from, _length)
 
 	# Matches `len' characters of `s' from `f'.
 	init(s: String, f: Int, len: Int)
@@ -231,7 +231,7 @@ end
 
 redef class Char
 special Pattern
-	redef meth search_index_in(s, from)
+	redef fun search_index_in(s, from)
 	do
 		var stop = s.length
 		while from < stop do
@@ -241,7 +241,7 @@ special Pattern
 		return -1
 	end
 
-	redef meth search_in(s, from)
+	redef fun search_in(s, from)
 	do
 		var pos = search_index_in(s, from)
 		if pos < 0 then
@@ -254,7 +254,7 @@ end
 
 redef class String
 special Pattern
-	redef meth search_index_in(s, from)
+	redef fun search_index_in(s, from)
 	do
 		assert from >= 0
 		var stop = s.length - length + 1
@@ -269,7 +269,7 @@ special Pattern
 		return -1
 	end
 
-	redef meth search_in(s, from)
+	redef fun search_in(s, from)
 	do
 		var pos = search_index_in(s, from)
 		if pos < 0 then
@@ -280,12 +280,12 @@ special Pattern
 	end
 
 	# Like `search_from' but from the first chararter.
-	meth search(p: Pattern): nullable Match do return p.search_in(self, 0)
+	fun search(p: Pattern): nullable Match do return p.search_in(self, 0)
 
 	# Search the given pattern into self from a.
 	# The search starts at `from'.
 	# Return null if not found.
-	meth search_from(p: Pattern, from: Int): nullable Match do return p.search_in(self, from)
+	fun search_from(p: Pattern, from: Int): nullable Match do return p.search_in(self, from)
 
 	# Search all occurences of p into self.
 	#
@@ -294,11 +294,11 @@ special Pattern
 	#       a.add(i.from)
 	#   end
 	#   a    # -> [4, 7]
-	meth search_all(p: Pattern): Array[Match] do return p.search_all_in(self)
+	fun search_all(p: Pattern): Array[Match] do return p.search_all_in(self)
 
 	# Split self using p is separator.
 	#   "hello world".split('o')     # -> ["hell", " w", "rld"]
-	meth split_with(p: Pattern): Array[String]
+	fun split_with(p: Pattern): Array[String]
 	do
 		var matches = p.split_in(self)
 		var res = new Array[String].with_capacity(matches.length)
@@ -308,5 +308,5 @@ special Pattern
 
 	# Split self using '\n' is separator.
 	#   "hello\nworld".split     # -> ["hello","world"]
-	meth split: Array[String] do return split_with('\n')
+	fun split: Array[String] do return split_with('\n')
 end

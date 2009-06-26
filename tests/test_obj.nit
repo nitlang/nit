@@ -16,12 +16,12 @@
 
 
 class O
-   meth foo
+   fun foo
    do
       printn(10)
    end
    
-   meth bar
+   fun bar
    do
       printn(20)
    end
@@ -31,12 +31,12 @@ end
 
 class A
 special O
-   redef meth foo
+   redef fun foo
    do
       printn(11)
    end
    
-   redef meth bar
+   redef fun bar
    do
       printn(21)
    end
@@ -46,12 +46,12 @@ end
 
 class B
 special A
-   redef meth foo
+   redef fun foo
    do
       printn(12)
    end
    
-   meth baz
+   fun baz
    do
       printn(32)
    end

@@ -14,22 +14,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-meth foo(a: Int...)
+fun foo(a: Int...)
     do
 	print(a)
     end
 
-meth bar(b: Int, a: Int...)
+fun bar(b: Int, a: Int...)
     do
 	print("{b}, {a}")
     end
 
-meth baz(a: Int..., b: Int)
+fun baz(a: Int..., b: Int)
     do
 	print("{a}, {b}")
     end
 
-meth foobar(b: Int, a: Int..., c: Int)
+fun foobar(b: Int, a: Int..., c: Int)
     do
 	print("{c}, {a}, {b}")
     end

@@ -17,8 +17,8 @@
 import kernel
 
 class A
-	attr _i: Int
-	redef meth output do _i.output
+	var _i: Int
+	redef fun output do _i.output
 	init(i: Int) do _i = i
 end
 
@@ -26,8 +26,8 @@ class B
 special A
 end
 
-meth outa(a: A) do a.output
-meth outb(b: B) do b.output
+fun outa(a: A) do a.output
+fun outb(b: B) do b.output
 
 var a: A = new A(1)
 var ab: A = new B(2)

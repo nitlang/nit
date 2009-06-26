@@ -21,8 +21,8 @@ class A
 end
 class B
 special A
-	meth foo(i: Int) do i.output
-	meth bar: Bool do return true
+	fun foo(i: Int) do i.output
+	fun bar: Bool do return true
 	init do end
 end
 

@@ -17,12 +17,12 @@
 import kernel
 
 class Foo
-	redef meth output
+	redef fun output
 	do
 		10.output
 	end
 
-	redef meth ==(o: nullable Object): Bool
+	redef fun ==(o: nullable Object): Bool
 	do
 		return true
 	end

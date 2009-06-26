@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-meth test_coll(c: IndexedCollection[Object], e: Object...)
+fun test_coll(c: IndexedCollection[Object], e: Object...)
     do
 	print("c: {c.to_s.is_empty}")
 	print("empty: {c.is_empty}")

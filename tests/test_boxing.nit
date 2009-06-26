@@ -18,8 +18,8 @@
 # By Flop
 
 class Gene[T]
-	readable attr _a_ : T 
-	meth a: T
+	readable var _a_ : T 
+	fun a: T
 	do
 		return _a_
 	end
@@ -28,7 +28,7 @@ class Gene[T]
 
 end
 class GeneBool special Gene[Bool]
-	meth a=(b: Bool)
+	fun a=(b: Bool)
 	do
 		_a_ = b
 	end

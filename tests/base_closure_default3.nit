@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	meth foo
+	fun foo
 		with bar: Int do
 			#alt1# return
 			#alt2# return 1

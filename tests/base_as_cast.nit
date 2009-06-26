@@ -17,7 +17,7 @@
 import kernel
 
 class O
-	redef meth output do 0.output
+	redef fun output do 0.output
 end
 
 class A
@@ -26,13 +26,13 @@ special O
 end
 
 class U
-	redef meth output do 1.output
+	redef fun output do 1.output
 end
 
 class B
 special A
 special U
-	redef meth output do 2.output
+	redef fun output do 2.output
 	init do end
 end
 

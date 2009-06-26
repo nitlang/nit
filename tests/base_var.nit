@@ -16,8 +16,8 @@
 
 import kernel
 
-meth foo: Int do return 1
-meth bar do end
+fun foo: Int do return 1
+fun bar do end
 
 var a1: Int
 var b1: Float

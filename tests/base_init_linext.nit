@@ -22,7 +22,7 @@ class A
 		' '.output
 	end
 	init inita do init
-	meth work do '\n'.output
+	fun work do '\n'.output
 end
 
 class B

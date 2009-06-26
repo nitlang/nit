@@ -35,9 +35,9 @@ special ToolContext
 
 	# The name of the tool
 	# Used in help messages for instance
-	readable attr _tool_name: String
+	readable var _tool_name: String
 
-	meth exec_cmd_line
+	fun exec_cmd_line
 	do
 		process_options
 
@@ -73,9 +73,9 @@ special ToolContext
 		end
 	end
 
-	meth perform_work(mods: Array[MMModule]) is abstract
+	fun perform_work(mods: Array[MMModule]) is abstract
 
-	meth dump_context_info
+	fun dump_context_info
 	do
 		for mod in module_hierarchy do
 			mod.dump_module_info
@@ -95,7 +95,7 @@ special ToolContext
 end
 
 redef class MMModule
-	meth dump_module_info
+	fun dump_module_info
 	do
 		var p = filename.file_path
 		var fname = "{p}/{name}"
@@ -113,7 +113,7 @@ redef class MMModule
 end
 
 redef class MMLocalClass
-	meth dump_properties(file: OStream)
+	fun dump_properties(file: OStream)
 	do
 		file.write("class {self}\n")
 		for p in global_properties do

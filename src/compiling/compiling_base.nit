@@ -21,14 +21,14 @@ import syntax
 private import utils
 
 redef class ToolContext
-	readable writable attr _global: Bool = false
-	readable writable attr _compdir: nullable String = null
-	readable writable attr _clibdir: nullable String = null
-	readable writable attr _bindir: nullable String = null
-	readable writable attr _output_file: nullable String = null
-	readable writable attr _boost: Bool = false
-	readable writable attr _no_cc: Bool = false
-	readable writable attr _ext_prefix: String = ""
+	readable writable var _global: Bool = false
+	readable writable var _compdir: nullable String = null
+	readable writable var _clibdir: nullable String = null
+	readable writable var _bindir: nullable String = null
+	readable writable var _output_file: nullable String = null
+	readable writable var _boost: Bool = false
+	readable writable var _no_cc: Bool = false
+	readable writable var _ext_prefix: String = ""
 end
 
 # Class used to generate files.
@@ -36,7 +36,7 @@ end
 # Note also that this class is unefficient and poorly designed thus requires love.
 class CompilerVisitor
 	# Add a line in the current declaration block
-	meth add_decl(s: String)
+	fun add_decl(s: String)
 	do
 		if _indent_level >= 8 then
 			_ctx.decls.add("\t\t" + s)
@@ -46,7 +46,7 @@ class CompilerVisitor
 	end
 
 	# Add a line in the current instr block
-	meth add_instr(s: String)
+	fun add_instr(s: String)
 	do
 		if _indent_level >= 8 then
 			_ctx.instrs.add("\t\t" + s)
@@ -56,28 +56,28 @@ class CompilerVisitor
 	end
 
 	# Return a unique new number for the instance
-	meth new_number: Int
+	fun new_number: Int
 	do
 		var res = _number_cpt
 		_number_cpt = res + 1
 		return res
 	end
 	# next number for new_number
-	attr _number_cpt: Int = 0
+	var _number_cpt: Int = 0
 
 	# Add an indent level.
 	# New decl and instr will be indented.
-	meth indent do _indent_level += 1
+	fun indent do _indent_level += 1
 
 	# Remove an indent level.
-	meth unindent
+	fun unindent
 	do
 		_indent_level -= 1
 		if _indent_level < 0 then _indent_level = 0
 	end
 
 	# Return a big string containing all decl and instr
-	redef meth to_s
+	redef fun to_s
 	do
 		var out = new Array[String]
 		out.append(_ctx.decls)
@@ -87,16 +87,16 @@ class CompilerVisitor
 	end
 
 	# The processed module
-	readable attr _module: MMSrcModule
+	readable var _module: MMSrcModule
 
 	# Where instr and decl are stored
-	readable writable attr _ctx: CContext = new CContext
+	readable writable var _ctx: CContext = new CContext
 
 	# The current indent lever
-	readable writable attr _indent_level: Int = 0
+	readable writable var _indent_level: Int = 0
 
 	# The ToolContext info
-	readable attr _tc: ToolContext
+	readable var _tc: ToolContext
 
 	# Create a new CompilerVisitor based on a module
 	init(module: MMSrcModule, tc: ToolContext)
@@ -109,16 +109,16 @@ end
 # Where instr and decl are stored for a module
 # Note that this class is as badly designed as CompilerVisitor
 class CContext
-	readable attr _decls: Array[String] = new Array[String] 
-	readable attr _instrs: Array[String] = new Array[String]
+	readable var _decls: Array[String] = new Array[String] 
+	readable var _instrs: Array[String] = new Array[String]
 
-	meth append(c: CContext)
+	fun append(c: CContext)
 	do
 		_instrs.append(c.decls)
 		_instrs.append(c.instrs)
 	end
 	
-	meth merge(c: CContext)
+	fun merge(c: CContext)
 	do
 		_decls.append(c.decls)
 		_instrs.append(c.instrs)
@@ -129,13 +129,13 @@ end
 
 redef class MMGlobalProperty
 	# C symbol refering a method inocation
-	meth meth_call: String
+	fun meth_call: String
 	do
 		return "CALL_{intro.cname}"
 	end
 
 	# C symbol refering an attribure access
-	meth attr_access: String
+	fun attr_access: String
 	do
 		return "ATTR_{intro.cname}"
 	end
@@ -143,19 +143,19 @@ end
 
 redef class MMGlobalClass
 	# C symbol refering the identifier of the class
-	meth id_id: String
+	fun id_id: String
 	do
 		return "ID_{intro.name}"
 	end
 
 	# C symbol refering the color of the class (for subtype tests)
-	meth color_id: String
+	fun color_id: String
 	do
 		return "COLOR_{intro.name}"
 	end
 
 	# C symbol refering the init table position of the class (for constructor linearization)
-	meth init_table_pos_id: String
+	fun init_table_pos_id: String
 	do
 		return "INIT_TABLE_POS_{intro.name}"
 	end
@@ -163,15 +163,15 @@ end
 
 redef class MMLocalClass
 	# Cached primitive_info result
-	attr _primitive_info_cache: nullable PrimitiveInfo = null
+	var _primitive_info_cache: nullable PrimitiveInfo = null
 
 	# If primitive_info result cached?
-	attr _primitive_info_b: Bool = false
+	var _primitive_info_b: Bool = false
 
 	# Return the primitive information of the class.
 	# Return null if the class is not primitive
 	# FIXME: Only here since there is no universal type yet
-	meth primitive_info: nullable PrimitiveInfo
+	fun primitive_info: nullable PrimitiveInfo
 	do
 		if _primitive_info_b == true then return _primitive_info_cache
 
@@ -199,7 +199,7 @@ redef class MMLocalClass
 	end
 
 	# Static information of primitive types
-	private meth primitive_ctypes: HashMap[Symbol, PrimitiveInfo]
+	private fun primitive_ctypes: HashMap[Symbol, PrimitiveInfo]
 	do
 		var res = new HashMap[Symbol, PrimitiveInfo]
 		var pnames = ["Int",    "Char", "Bool", "Float", "NativeString", "NativeArray", "Pointer"]
@@ -217,13 +217,13 @@ end
 # Information about a primitive class
 class PrimitiveInfo
 	# The name of the class
-	readable attr _name: Symbol
+	readable var _name: Symbol
 
 	# Is the class tagged (aka not boxed)
-	readable attr _tagged: Bool
+	readable var _tagged: Bool
 
 	# The corresponding c type for the primitive value
-	readable attr _cname: String
+	readable var _cname: String
 
 	private init(n: Symbol, t: Bool, c: String)
 	do
@@ -235,7 +235,7 @@ end
 
 redef class MMType
 	# The corresponding c type
-	meth cname: String
+	fun cname: String
 	do
 		var pi = local_class.primitive_info
 		if pi == null then
@@ -247,7 +247,7 @@ redef class MMType
 
 	# The default c value for uninitialized types.
 	# Return "null" for non primitive types and something more specific for primitive types
-	meth default_cvalue: String
+	fun default_cvalue: String
 	do
 		var pi = local_class.primitive_info
 		if pi != null and pi.tagged then
@@ -259,7 +259,7 @@ redef class MMType
 
 	# Box (or tag) a primitive value
 	# Is identity if not primitive
-	meth boxtype(s: String): String
+	fun boxtype(s: String): String
 	do
 		var pi = local_class.primitive_info
 		if pi == null then
@@ -273,7 +273,7 @@ redef class MMType
 
 	# Unbox (or untag) a primitive value
 	# Is identity if not primitive
-	meth unboxtype(s: String): String
+	fun unboxtype(s: String): String
 	do
 		var pi = local_class.primitive_info
 		if pi == null then
@@ -288,10 +288,10 @@ end
 
 redef class MMLocalProperty
 	# Cacher result of cname
-	attr _cname_cache: nullable String
+	var _cname_cache: nullable String
 
 	# The mangled name of the method
-	meth cname: String
+	fun cname: String
 	do
 		var cname = _cname_cache
 		if cname == null then
@@ -302,7 +302,7 @@ redef class MMLocalProperty
 	end
 
 	# C macro used to get the function for the call of a super property
-	meth super_meth_call: String
+	fun super_meth_call: String
 	do
 		return "CALL_SUPER_{cname}"
 	end

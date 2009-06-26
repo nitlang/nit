@@ -28,12 +28,12 @@ class @ename
 special ${../@ename}
 $ foreach {elem}
 $   if @is_list
-    readable writable attr _n_@name: List[@etype] = new List[@etype]
+    readable writable var _n_@name: List[@etype] = new List[@etype]
 $   else
 $   if @modifier
-    readable writable attr _n_@name: nullable @etype = null
+    readable writable var _n_@name: nullable @etype = null
 $   else
-    readable writable attr _n_@name: @etype
+    readable writable var _n_@name: @etype
 $   end
 $   end
 $ end
@@ -42,8 +42,8 @@ $ end
 
 class Start
 special Prod
-    readable writable attr _n_base: nullable $baseprod 
-    readable writable attr _n_eof: EOF 
+    readable writable var _n_base: nullable $baseprod 
+    readable writable var _n_eof: EOF 
 end
 $ end template
 
@@ -54,7 +54,7 @@ redef class @ename
 $ foreach {elem}
 $   if @is_list
 $   else
-    redef meth n_@name=(n)
+    redef fun n_@name=(n)
     do
         _n_@name = n
 $   if @modifier
@@ -106,7 +106,7 @@ $   end
 $ end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
 $ foreach {elem}
 $   if @is_list
@@ -141,7 +141,7 @@ $   end
 $ end foreach
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
 $   foreach {elem}
 $     if @is_list
@@ -160,7 +160,7 @@ $     end
 $   end foreach
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
 $   foreach {elem}
 $     if @is_list
@@ -194,7 +194,7 @@ redef class Start
         _n_eof = n_eof
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_base == old_child then
             if new_child == null then
@@ -208,14 +208,14 @@ redef class Start
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_base != null then
             v.visit(_n_base.as(not null))
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_base != null then
             v.visit(_n_base.as(not null))

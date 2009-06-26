@@ -18,7 +18,7 @@ private import hash
 
 redef class String
 	# Get the unique corresponding to the string
-	meth to_symbol: Symbol
+	fun to_symbol: Symbol
 	do
 		var symbol_dictionary = once new HashMap[String, Symbol]
 		if symbol_dictionary.has_key(self) then
@@ -33,8 +33,8 @@ end
 
 # A symbol is a unique unmutable string
 class Symbol
-	attr _string: String
-	redef meth to_s do return _string.to_s
+	var _string: String
+	redef fun to_s do return _string.to_s
 
 	# Only used by String::to_symbol
 	private init(s: String) do _string = s

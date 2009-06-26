@@ -17,7 +17,7 @@
 import kernel
 
 class A
-   meth foo
+   fun foo
    do
       11.output
    end
@@ -27,11 +27,11 @@ end
 
 class B
 special A
-   redef  meth foo
+   redef  fun foo
    do
       21.output
    end
-   meth bar
+   fun bar
    do
       22.output
    end
@@ -41,11 +41,11 @@ end
 
 class C
 special B
-   redef meth foo
+   redef fun foo
    do
       31.output
    end
-   redef meth bar
+   redef fun bar
    do
       32.output
    end
@@ -54,7 +54,7 @@ special B
 end
 
 class G[E]
-   meth out0
+   fun out0
    do
       0.output
    end
@@ -62,13 +62,13 @@ class G[E]
    init do end
 end
 class G[E: A]
-   meth out1(e: E)
+   fun out1(e: E)
    do
       e.foo
    end
 end
 class G[E: B]
-   meth out2(e: E)
+   fun out2(e: E)
    do
       e.foo
       e.bar

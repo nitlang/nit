@@ -23,26 +23,26 @@ redef class Object
 # Simple I/O
 
 	# Print `objects' on the standard output (`stdout').
-	protected meth printn(objects: Object...)
+	protected fun printn(objects: Object...)
 	do
 		stdout.write(objects.to_s)
 	end
 
 	# Print an `object' on the standard output (`stdout') and add a newline.
-	protected meth print(object: Object)
+	protected fun print(object: Object)
 	do
 		stdout.write(object.to_s)
 		stdout.write("\n")
 	end
 
 	# Read a character from the standard input (`stdin').
-	protected meth getc: Char
+	protected fun getc: Char
 	do
 		return stdin.read_char.ascii
 	end
 
 	# Read a line from the standard input (`stdin').
-	protected meth gets: String
+	protected fun gets: String
 	do
 		return stdin.read_line
 	end
@@ -53,12 +53,12 @@ class FStream
 special IOS
 special NativeFileCapable
 	# The path of the file.
-	readable attr _path: nullable String = null
+	readable var _path: nullable String = null
 
 	# The FILE *.
-	attr _file: nullable NativeFile = null
+	var _file: nullable NativeFile = null
 
-	meth file_stat: FileStat
+	fun file_stat: FileStat
 	do return _file.file_stat end
 end
 
@@ -68,7 +68,7 @@ special FStream
 special BufferedIStream
 	# Misc
 
-	meth reopen
+	fun reopen
 	do
 		if not eof then close
 		_file = io_open_read(_path.to_cstring)
@@ -77,14 +77,14 @@ special BufferedIStream
 		_buffer.clear
 	end
 
-	redef meth close
+	redef fun close
 	do
 		var i = _file.io_close
 		_end_reached = true
 	end
 
 	# Fill the internal read buffer. Needed by read operations.
-	redef meth fill_buffer
+	redef fun fill_buffer
 	do
 		var nb = _file.io_read(_buffer._items, _buffer._capacity)
 		if nb <= 0 then
@@ -96,7 +96,7 @@ special BufferedIStream
 	end
 	
 	# End of file?
-	redef readable attr _end_reached: Bool = false
+	redef readable var _end_reached: Bool = false
 
 	# Open the file at `path' for reading.
 	init open(path: String)
@@ -117,25 +117,25 @@ special FStream
 special OStream
 	
 	# Write a string.
-	redef meth write(s)
+	redef fun write(s)
 	do
 		assert _writable
 		write_native(s.to_cstring, s.length)
 	end
 
-	redef meth is_writable do return _writable
+	redef fun is_writable do return _writable
 	
-	redef meth close
+	redef fun close
 	do
 		var i = _file.io_close
 		_writable = false
 	end
 
 	# Is the file open in write mode
-	attr _writable: Bool
+	var _writable: Bool
 	
 	# Write `len' bytes from `native'.
-	private meth write_native(native: NativeString, len: Int)
+	private fun write_native(native: NativeString, len: Int)
 	do
 		assert _writable
 		var err = _file.io_write(native, len)
@@ -191,13 +191,13 @@ end
 
 redef class String
 	# return true if a file with this names exists
-	meth file_exists: Bool do return to_cstring.file_exists
+	fun file_exists: Bool do return to_cstring.file_exists
 
-	meth file_stat: FileStat do return to_cstring.file_stat
+	fun file_stat: FileStat do return to_cstring.file_stat
 
-	meth file_delete: Bool do return to_cstring.file_delete
+	fun file_delete: Bool do return to_cstring.file_delete
 
-	meth strip_extension(ext: String): String
+	fun strip_extension(ext: String): String
 	do
 		if has_suffix(ext) then
 			return substring(0, length - ext.length)
@@ -205,7 +205,7 @@ redef class String
 		return self
 	end
 
-	meth basename(ext: String): String
+	fun basename(ext: String): String
 	do
 		var pos = last_index_of_from('/', _length - 1)
 		var n = self
@@ -215,7 +215,7 @@ redef class String
 		return n.strip_extension(ext)
 	end
 
-	meth dirname: String
+	fun dirname: String
 	do
 		var pos = last_index_of_from('/', _length - 1)
 		if pos >= 0 then
@@ -225,7 +225,7 @@ redef class String
 		end
 	end
 
-	meth file_path: String
+	fun file_path: String
 	do
 		var l = _length
 		var pos = last_index_of_from('/', l - 1)
@@ -236,7 +236,7 @@ redef class String
 	end
 
 	# Create a directory (and all intermediate directories if needed)
-	meth mkdir
+	fun mkdir
 	do
 		var dirs = self.split_with("/")
 		var path = new Buffer
@@ -255,44 +255,44 @@ redef class String
 end
 
 redef class NativeString
-	private meth file_exists: Bool is extern "string_NativeString_NativeString_file_exists_0"
-	private meth file_stat: FileStat is extern "string_NativeString_NativeString_file_stat_0"
-	private meth file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
-	private meth file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
+	private fun file_exists: Bool is extern "string_NativeString_NativeString_file_exists_0"
+	private fun file_stat: FileStat is extern "string_NativeString_NativeString_file_stat_0"
+	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
+	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
 end
 
 universal FileStat
 special Pointer
 # This class is system dependent ... must reify the vfs
-	meth mode: Int is extern "file_FileStat_FileStat_mode_0"
-	meth atime: Int is extern "file_FileStat_FileStat_atime_0"
-	meth ctime: Int is extern "file_FileStat_FileStat_ctime_0"
-	meth mtime: Int is extern "file_FileStat_FileStat_mtime_0"
-	meth size: Int is extern "file_FileStat_FileStat_size_0"
+	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
+	fun atime: Int is extern "file_FileStat_FileStat_atime_0"
+	fun ctime: Int is extern "file_FileStat_FileStat_ctime_0"
+	fun mtime: Int is extern "file_FileStat_FileStat_mtime_0"
+	fun size: Int is extern "file_FileStat_FileStat_size_0"
 end
 
 # Instance of this class are standard FILE * pointers
 private universal NativeFile
 special Pointer
-	meth io_read(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_read_2"
-	meth io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
-	meth io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
-	meth file_stat: FileStat is extern "file_NativeFile_NativeFile_file_stat_0"
+	fun io_read(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_read_2"
+	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
+	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
+	fun file_stat: FileStat is extern "file_NativeFile_NativeFile_file_stat_0"
 end
 
 private interface NativeFileCapable
-	meth io_open_read(path: NativeString): NativeFile is extern "file_NativeFileCapable_NativeFileCapable_io_open_read_1"
-	meth io_open_write(path: NativeString): NativeFile is extern "file_NativeFileCapable_NativeFileCapable_io_open_write_1"
-	meth native_stdin: NativeFile is extern "file_NativeFileCapable_NativeFileCapable_native_stdin_0"
-	meth native_stdout: NativeFile is extern "file_NativeFileCapable_NativeFileCapable_native_stdout_0"
-	meth native_stderr: NativeFile is extern "file_NativeFileCapable_NativeFileCapable_native_stderr_0"
+	fun io_open_read(path: NativeString): NativeFile is extern "file_NativeFileCapable_NativeFileCapable_io_open_read_1"
+	fun io_open_write(path: NativeString): NativeFile is extern "file_NativeFileCapable_NativeFileCapable_io_open_write_1"
+	fun native_stdin: NativeFile is extern "file_NativeFileCapable_NativeFileCapable_native_stdin_0"
+	fun native_stdout: NativeFile is extern "file_NativeFileCapable_NativeFileCapable_native_stdout_0"
+	fun native_stderr: NativeFile is extern "file_NativeFileCapable_NativeFileCapable_native_stderr_0"
 end
 
 # Standard input.
-meth stdin: IFStream do return once new Stdin
+fun stdin: IFStream do return once new Stdin
 
 # Standard output.
-meth stdout: OFStream do return once new Stdout
+fun stdout: OFStream do return once new Stdout
 
 # Standard output for error.
-meth stderr: OFStream do return once new Stderr
+fun stderr: OFStream do return once new Stderr

@@ -16,7 +16,7 @@
 
 
 redef class Range[K]
-	meth for_each(x: Int)
+	fun for_each(x: Int)
 		with each(i: K)
 	do
 		var c = first

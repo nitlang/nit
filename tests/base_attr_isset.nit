@@ -20,30 +20,30 @@ interface Object
 end
 
 universal Int
-	meth output is intern
-	meth +(o: Int): Int is intern
+	fun output is intern
+	fun +(o: Int): Int is intern
 end
 
 universal Bool
-	meth output is intern
+	fun output is intern
 end
 
 class Integer
-	readable writable attr _val: Int
+	readable writable var _val: Int
 	init(val: Int) do _val = val
-	meth output do _val.output
+	fun output do _val.output
 end
 
 class Foo
-	attr _a1: Integer
-	readable attr _a2: Integer
-	meth run
+	var _a1: Integer
+	readable var _a2: Integer
+	fun run
 	do
 		_a1.output
 		a2.output
 	end
 
-	meth show(i: Int)
+	fun show(i: Int)
 	do
 		i.output
 		(isset _a1).output
@@ -64,17 +64,17 @@ end
 
 class Bar
 special Foo
-	attr _a3: Integer#!alt1# #!alt2#
-	#alt1#attr _a3: Integer = new Integer(9000)
-	#alt2#attr _a3: nullable Integer
-	redef meth run
+	var _a3: Integer#!alt1# #!alt2#
+	#alt1#var _a3: Integer = new Integer(9000)
+	#alt2#var _a3: nullable Integer
+	redef fun run
 	do
 		_a1.output
 		_a2.output
 		_a3.output
 	end
 
-	redef meth show(i)
+	redef fun show(i)
 	do
 		super
 		(isset _a3).output

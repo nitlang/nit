@@ -17,13 +17,13 @@
 import end
 
 class Object
-	meth ==(o: nullable Object): Bool do return self is o
-	meth !=(o: nullable Object): Bool do return not (self == o)
-	meth output is intern
+	fun ==(o: nullable Object): Bool do return self is o
+	fun !=(o: nullable Object): Bool do return not (self == o)
+	fun output is intern
 end
 
 class Bool
-	redef meth output is intern
+	redef fun output is intern
 end
 
 class A

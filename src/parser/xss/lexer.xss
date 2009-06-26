@@ -22,41 +22,41 @@ $ template make_lexer()
 # It is better user with the Parser
 class Lexer
 	# Last peeked token
-	attr _token: nullable Token
+	var _token: nullable Token
 
 	# Lexer current state
-	attr _state: Int = 0
+	var _state: Int = 0
 
 	# Name of the stream (as given to tokens)
-	readable attr _filename: String 
+	readable var _filename: String 
 
 	# Input stream where character are read
-	attr _stream: IStream
+	var _stream: IStream
 
 	# Pushback buffer to store unread character
-	attr _stream_buf: Buffer
+	var _stream_buf: Buffer
 
 	# Number of character stored in the pushback buffer
-	attr _stream_pos: Int
+	var _stream_pos: Int
 
 	# Current line number in the input stream
-	attr _line: Int = 0
+	var _line: Int = 0
 
 	# Current column in the input stream
-	attr _pos: Int = 0
+	var _pos: Int = 0
 
 	# Was the last character a cariage-return?
-	attr _cr: Bool = false
+	var _cr: Bool = false
 
 	# If the end of stream?
-	attr _eof: Bool = false
+	var _eof: Bool = false
 
 	# Current working text read from the input stream
-	attr _text: Buffer
+	var _text: Buffer
 
 $ foreach {lexer_data/state}
 	# Constante state values
-	private meth state_${translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}: Int do return @id end
+	private fun state_${translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}: Int do return @id end
 $ end foreach
 
 	# Create a new lexer for a stream (and a name)
@@ -72,7 +72,7 @@ $ end foreach
 	end
 
 	# Give the next token (but do not consume it)
-	meth peek: Token
+	fun peek: Token
 	do
 		while _token == null do
 			_token = get_token
@@ -81,7 +81,7 @@ $ end foreach
 	end
 
 	# Give and consume the next token
-	meth next: Token
+	fun next: Token
 	do
 		var result = _token
 		while result == null do
@@ -92,7 +92,7 @@ $ end foreach
 	end
 
 	# Get a token, or null if it is discarded
-	private meth get_token: nullable Token
+	private fun get_token: nullable Token
 	do
 		var dfa_state = 0
 
@@ -217,7 +217,7 @@ $ end foreach
 
 	# Read the next character.
 	# The character is read from the stream of from the pushback buffer.
-	private meth get_char: Int
+	private fun get_char: Int
 	do
 		if _eof then
 			return -1
@@ -243,7 +243,7 @@ $ end foreach
 
 	# Unread some characters.
 	# Unread characters are stored in the pushback buffer.
-	private meth push_back(accept_length: Int)
+	private fun push_back(accept_length: Int)
 	do
 		var length = _text.length
 		var i = length - 1
@@ -255,8 +255,8 @@ $ end foreach
 		end
 	end
 
-	attr _goto_table: Array[Array[Array[Array[Int]]]]
-	private meth build_goto_table
+	var _goto_table: Array[Array[Array[Array[Int]]]]
+	private fun build_goto_table
 	do
 		_goto_table = once [
 $ foreach {lexer_data/goto_table/state}
@@ -277,13 +277,13 @@ $ end foreach
 		]
 	end
     
-	private meth nil_array: Array[Array[Int]]
+	private fun nil_array: Array[Array[Int]]
 	do
 		return once new Array[Array[Int]]
 	end
 
-	attr _accept_table: Array[Array[Int]]
-	private meth build_accept_table do
+	var _accept_table: Array[Array[Int]]
+	private fun build_accept_table do
 		_accept_table = once [
 $ foreach {lexer_data/accept_table/state}
             		[

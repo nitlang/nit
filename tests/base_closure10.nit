@@ -16,7 +16,7 @@
 
 import kernel
 
-meth foo with k
+fun foo with k
 do
 	' '.output
 	'<'.output
@@ -27,7 +27,7 @@ do
 	1.output
 end
 
-meth test
+fun test
 do
 	'<'.output
 	0.output

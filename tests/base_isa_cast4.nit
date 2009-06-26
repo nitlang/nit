@@ -22,11 +22,11 @@ end
 
 class B
 special A
-	meth foo(i: Int) do i.output
+	fun foo(i: Int) do i.output
 	init do end
 end
 
-meth maybe: Bool do return true
+fun maybe: Bool do return true
 
 var a: A = new B
 

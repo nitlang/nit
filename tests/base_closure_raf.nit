@@ -18,7 +18,7 @@ import base_closure2
 
 class B
 special A
-	redef meth foo
+	redef fun foo
 		with bar(i: Int) #!alt13# #!alt14# #!alt15#
 		#alt13# with bar
 		#alt14# with bar(b: Bool)
@@ -33,7 +33,7 @@ special A
 	end
 end
 
-meth work2
+fun work2
 do
 	var a: A = new B
 	a.foo with x do #!alt11#

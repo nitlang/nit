@@ -16,7 +16,7 @@
 
 import kernel
 
-meth repeat(x: Int)
+fun repeat(x: Int)
 	with each(i: Int)
 do
 	var c = 0
@@ -26,7 +26,7 @@ do
 	end
 end
 
-meth work
+fun work
 do
 	repeat(4) with i do
 		i.output

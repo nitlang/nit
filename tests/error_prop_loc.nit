@@ -19,15 +19,15 @@ class Object
 end
 
 class A
-	meth toto do end
+	fun toto do end
 end
 class B
 special A
-	redef meth toto do end
+	redef fun toto do end
 end
 class C
 special A
-	redef meth toto do end
+	redef fun toto do end
 end
 class D
 special B

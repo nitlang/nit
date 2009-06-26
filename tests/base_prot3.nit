@@ -18,7 +18,7 @@ private import base_prot2
 intrude import base_prot
 
 class O3
-	meth o
+	fun o
 	do
 		var a = new A
 		a.pub

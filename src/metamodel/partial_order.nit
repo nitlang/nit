@@ -22,27 +22,27 @@ package partial_order
 class PartialOrder[E]
 special Collection[E]
 	# Elements
-	attr _elements: Map[E, PartialOrderElement[E]]
+	var _elements: Map[E, PartialOrderElement[E]]
 
 	# Elements
-	attr _elements_list: Array[E]
+	var _elements_list: Array[E]
 
 	# The roots of the hierarchy are elements without greaters
-	readable attr _roots: Array[E]
+	readable var _roots: Array[E]
 
 # Collection
 
-	redef meth is_empty do return _elements.is_empty
+	redef fun is_empty do return _elements.is_empty
 	
-	redef meth length do return _elements.length
+	redef fun length do return _elements.length
 
-	redef meth first do return _elements_list.first
+	redef fun first do return _elements_list.first
 
-	redef meth has(e) do return _elements.has_key(e)
+	redef fun has(e) do return _elements.has_key(e)
 
-	redef meth has_only(e) do return _elements.length == 1 and _elements.first == e
+	redef fun has_only(e) do return _elements.length == 1 and _elements.first == e
 
-	redef meth count(e)
+	redef fun count(e)
 	do
 		if has(e) then
 			return 1
@@ -51,18 +51,18 @@ special Collection[E]
 		end
 	end
 
-	redef meth iterator do return _elements_list.iterator
+	redef fun iterator do return _elements_list.iterator
 
 # Access	
 
 	# Return the element associed with the item
-	meth [](e: E): PartialOrderElement[E]
+	fun [](e: E): PartialOrderElement[E]
 	do
 		return _elements[e]
 	end
 
 	# Return a dot representation
-	meth to_dot: String
+	fun to_dot: String
 	do
 		var s = new Buffer
 		s.append(to_dot_header)
@@ -77,25 +77,25 @@ special Collection[E]
 	end
 
 	# Called to display the header
-	protected meth to_dot_header: String
+	protected fun to_dot_header: String
 	do
 		return "digraph G \{\ngraph [rankdir=BT];\n"
 	end
 	
 	# Called to display a node
-	protected meth to_dot_node(e: E): String
+	protected fun to_dot_node(e: E): String
 	do
 		return "\"{e}\";\n"
 	end
 
 	# Called to draw an edge between `e1' and `e2' when `e1' < `e2' 
-	protected meth to_dot_edge(e1: E, e2: E): String
+	protected fun to_dot_edge(e1: E, e2: E): String
 	do
 		return "\"{e1}\" -> \"{e2}\";\n"
 	end
 
 	# Get an array consisting of only minimal elements
-	meth select_smallests(c: nullable Collection[E]): Array[E]
+	fun select_smallests(c: nullable Collection[E]): Array[E]
 	do
 		if c == null then return new Array[E]
 		assert has_all(c)
@@ -116,7 +116,7 @@ special Collection[E]
 	end
 
 	# Add a new element inferior of some others
-	meth add(e: E, supers: nullable Collection[E]): PartialOrderElement[E]
+	fun add(e: E, supers: nullable Collection[E]): PartialOrderElement[E]
 	do
 		assert not has(e)
 		assert supers == null or has_all(supers)
@@ -131,7 +131,7 @@ special Collection[E]
 	end
 
 	# Are all these elements in the order
-	meth has_all(e: Collection[E]): Bool
+	fun has_all(e: Collection[E]): Bool
 	do
 		for i in e do
 			if not has(i) then
@@ -142,12 +142,12 @@ special Collection[E]
 	end
 
 	# factory for partial order elements
-	protected meth new_poe(e: E, directs: Array[E]): PartialOrderElement[E]
+	protected fun new_poe(e: E, directs: Array[E]): PartialOrderElement[E]
 	do
 		return new PartialOrderElement[E](self, e, directs)
 	end
 
-	protected meth add_to_smallests(e: E, from: Array[E], to: Array[E]): Bool
+	protected fun add_to_smallests(e: E, from: Array[E], to: Array[E]): Bool
 	# an element `e' 
 	# some others elements `from' incomparable two by two
 	# Return false if `from' < e
@@ -168,7 +168,7 @@ special Collection[E]
 		return true
 	end
 
-	protected meth compute_smallers_for(poe: PartialOrderElement[E], set: Set[E])
+	protected fun compute_smallers_for(poe: PartialOrderElement[E], set: Set[E])
 	do
 		var e = poe.value
 		for s in _elements do
@@ -188,31 +188,31 @@ end
 
 class PartialOrderElement[E]
 	# The partial order where belong self
-	readable attr _order: PartialOrder[E] 
+	readable var _order: PartialOrder[E] 
 
 	# The value handled by self
-	readable attr _value: E 
+	readable var _value: E 
 	
 	# Current rank in the hierarchy
 	# Roots have 0
 	# Sons of roots have 1
 	# Etc.
-	readable attr _rank: Int 
+	readable var _rank: Int 
 
 	# Elements that are direclty greater than self
-	readable attr _direct_greaters: Array[E]
+	readable var _direct_greaters: Array[E]
 	
 	# Elements that are direclty smallers than self
-	readable attr _direct_smallers: Array[E]
+	readable var _direct_smallers: Array[E]
 
 	# Elements that are strictly greater than self
-	readable attr _greaters: Set[E]
+	readable var _greaters: Set[E]
 
 	# Cached result of greaters_and_self
-	attr _greaters_and_self_cache: nullable Array[E]
+	var _greaters_and_self_cache: nullable Array[E]
 
 	# Elements that are self or greater than self
-	meth greaters_and_self: Collection[E]
+	fun greaters_and_self: Collection[E]
 	do
 		if _greaters_and_self_cache == null then
 			_greaters_and_self_cache = _greaters.to_a
@@ -222,13 +222,13 @@ class PartialOrderElement[E]
 	end
 	
 	# Cached value of _order.length to validade smallers_cache
-	attr _smallers_last_length: Int = 0
+	var _smallers_last_length: Int = 0
 
 	# Cached result of smallers
-	attr _smallers_cache: Set[E]
+	var _smallers_cache: Set[E]
 
 	# Elements that are strictly smaller than self
-	meth smallers: Collection[E]
+	fun smallers: Collection[E]
 	do
 		if _smallers_last_length < _order.length then
 			_order.compute_smallers_for(self, _smallers_cache)
@@ -238,11 +238,11 @@ class PartialOrderElement[E]
 	end
 
 	# Cached result of linear_extension
-	attr _linear_extension_cache: nullable Array[E]
+	var _linear_extension_cache: nullable Array[E]
 
 	# Return a linear extension of self
 	# FIXME: Uses the C++ algo that is not good!
-	meth linear_extension: Array[E]
+	fun linear_extension: Array[E]
 	do
 		if _linear_extension_cache == null then
 			var res = new Array[E]
@@ -266,11 +266,11 @@ class PartialOrderElement[E]
 	end
 
 	# Cached result of reverse_linear_extension
-	attr _reverse_linear_extension_cache: nullable Array[E]
+	var _reverse_linear_extension_cache: nullable Array[E]
 
 	# Return a reverse linear extension of self
 	# FIXME: Uses the C++ algo that is not good!
-	meth reverse_linear_extension: Array[E]
+	fun reverse_linear_extension: Array[E]
 	do
 		if _reverse_linear_extension_cache == null then
 			var res = new HashSet[E]
@@ -285,30 +285,30 @@ class PartialOrderElement[E]
 	end
 
 	# Is value < o according to order?
-	meth <(o: E): Bool
+	fun <(o: E): Bool
 	do
 		return _greaters.has(o)
 	end
 
 	# Is value <= o according to order?
-	meth <=(o: E): Bool
+	fun <=(o: E): Bool
 	do
 		return _value == o or _greaters.has(o)
 	end
 
 	# Is value > o according to order?
-	meth >(o: E): Bool
+	fun >(o: E): Bool
 	do
 		return _order[o] < _value
 	end
 
 	# Is value >= o according to order?
-	meth >=(o: E): Bool
+	fun >=(o: E): Bool
 	do
 		return _value == o or _order[o] < _value
 	end
 
-	protected meth register_direct_smallers(e: E)
+	protected fun register_direct_smallers(e: E)
 	do
 		_direct_smallers.add(e)
 	end

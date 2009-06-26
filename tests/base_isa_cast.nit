@@ -21,12 +21,12 @@ class A
 end
 class B
 special A
-	meth foo do 0.output
+	fun foo do 0.output
 	init do end
 end
 class C
 special B
-	meth bar do 1.output
+	fun bar do 1.output
 	init do end
 end
 

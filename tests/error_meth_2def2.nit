@@ -15,6 +15,6 @@
 # limitations under the License.
 
 class A
-	meth toto(a: Int) do end
-	meth toto(a: Int): Int do return 0 end
+	fun toto(a: Int) do end
+	fun toto(a: Int): Int do return 0 end
 end

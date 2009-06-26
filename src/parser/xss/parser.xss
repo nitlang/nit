@@ -21,10 +21,10 @@ $ template make_parser()
 # State of the parser automata as stored in the parser stack.
 private class State
 	# The internal state number
-	readable writable attr _state: Int
+	readable writable var _state: Int
 
 	# The node stored with the state in the stack
-	readable writable attr _nodes: nullable Object 
+	readable writable var _nodes: nullable Object 
 
 	init(state: Int, nodes: nullable Object)
 	do
@@ -36,13 +36,13 @@ end
 class Parser
 special ParserTable
 	# Associated lexer
-	attr _lexer: Lexer
+	var _lexer: Lexer
 
 	# Stack of pushed states and productions
-	attr _stack: Array[State]
+	var _stack: Array[State]
 
 	# Position in the stack
-	attr _stack_pos: Int
+	var _stack_pos: Int
 
 	# Create a new parser based on a given lexer
 	init(lexer: Lexer)
@@ -56,7 +56,7 @@ special ParserTable
 	end
 
 	# Do a transition in the automata
-	private meth go_to(index: Int): Int
+	private fun go_to(index: Int): Int
 	do
 		var state = state
 		var table = _goto_table[index]
@@ -80,7 +80,7 @@ special ParserTable
 	end
 
 	# Push someting in the state stack
-	private meth push(numstate: Int, list_node: nullable Object)
+	private fun push(numstate: Int, list_node: nullable Object)
 	do
 		var pos = _stack_pos + 1
 		_stack_pos = pos
@@ -94,13 +94,13 @@ special ParserTable
 	end
 
 	# The current state
-	private meth state: Int
+	private fun state: Int
 	do
 		return _stack[_stack_pos].state
 	end
 
 	# Pop something from the stack state
-	private meth pop: nullable Object
+	private fun pop: nullable Object
 	do
 		var res = _stack[_stack_pos].nodes
 		_stack_pos = _stack_pos -1
@@ -108,7 +108,7 @@ special ParserTable
 	end
 
 	# Build and return a full AST.
-	meth parse: Start
+	fun parse: Start
 	do
 		push(0, null)
 
@@ -166,8 +166,8 @@ special ParserTable
 		abort
 	end
 
-	attr _reduce_table: Array[ReduceAction]
-	private meth build_reduce_table
+	var _reduce_table: Array[ReduceAction]
+	private fun build_reduce_table
 	do
 		_reduce_table = new Array[ReduceAction].with_items(
 $ foreach {rules/rule}
@@ -180,9 +180,9 @@ end
 # Find first and last tokens of production nodes
 private class SearchTokensVisitor
 special Visitor
-	attr _untokenned_nodes: Array[Prod]
-	attr _last_token: nullable Token = null
-	redef meth visit(n: nullable PNode)
+	var _untokenned_nodes: Array[Prod]
+	var _last_token: nullable Token = null
+	redef fun visit(n: nullable PNode)
 	do
 		if n == null then
 			return
@@ -207,13 +207,13 @@ end
 
 # Each reduca action has its own class, this one is the root of the hierarchy.
 private abstract class ReduceAction
-	meth action(p: Parser) is abstract
+	fun action(p: Parser) is abstract
 end
 
 $ foreach {rules/rule}
 private class ReduceAction@index
 special ReduceAction
-	redef meth action(p: Parser)
+	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
 $   foreach {action}
@@ -279,8 +279,8 @@ $ end template
 $ template make_parser_tables()
 # Parser that build a full AST
 abstract class ParserTable
-	attr _action_table: Array[Array[Int]]
-	private meth build_action_table
+	var _action_table: Array[Array[Int]]
+	private fun build_action_table
 	do
 		_action_table = once [ 
 $ foreach {parser_data/action_table/row}
@@ -290,7 +290,7 @@ $ end foreach
 	end
 
 $ foreach {parser_data/action_table/row}
-	private meth action_table_row${position()}: Array[Int]
+	private fun action_table_row${position()}: Array[Int]
 	do
 		return [
 $   foreach {action}
@@ -300,8 +300,8 @@ $   end foreach
 	end
 $ end foreach
 
-	attr _goto_table: Array[Array[Int]]
-	private meth build_goto_table
+	var _goto_table: Array[Array[Int]]
+	private fun build_goto_table
 	do
 		_goto_table = once [ 
 $ foreach {parser_data/goto_table/row}
@@ -314,7 +314,7 @@ $ end foreach
 		]
 	end
 
-	private meth error_messages: Array[String]
+	private fun error_messages: Array[String]
 	do
 		return once [
 $ foreach {parser_data/error_messages/msg}
@@ -323,7 +323,7 @@ $ end
 		]
 	end
 
-	private meth errors: Array[Int]
+	private fun errors: Array[Int]
 	do
 		return once [
             		[-foreach {parser_data/errors/i}-]${.} [-sep ','-] [-end-]

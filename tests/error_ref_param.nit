@@ -17,5 +17,5 @@
 import module_simple
 
 redef class C
-	redef meth r(x: C) do end
+	redef fun r(x: C) do end
 end

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 redef class Map[K, V]
-	meth get(k: K): V
+	fun get(k: K): V
 		with default: V do abort
 	do
 		if has_key(k) then return self[k]

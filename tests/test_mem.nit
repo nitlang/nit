@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-meth foo(n: Int): List[Int]
+fun foo(n: Int): List[Int]
     do
 	var a: List[Int]
 	if n > 0 then

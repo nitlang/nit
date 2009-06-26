@@ -19,7 +19,7 @@ import array
 
 class C
 special A
-	readable writable attr _tab: nullable Array[E]
+	readable writable var _tab: nullable Array[E]
 	init do end
 end
 

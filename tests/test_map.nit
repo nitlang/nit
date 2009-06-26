@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-meth test1(h: Map[Int, Int])
+fun test1(h: Map[Int, Int])
 do
 	print("* test 1 *")
 	h[1] = 2
@@ -37,7 +37,7 @@ do
 	print(s)
 end
 
-meth test2(h: Map[Int, Int])
+fun test2(h: Map[Int, Int])
 do
 	print("* test 2 *")
 	var nb = 999
@@ -83,7 +83,7 @@ do
 end
 
 
-meth test3(m: Map[String, String])
+fun test3(m: Map[String, String])
 do
 	print("* test 3 *")
 	print("* start:")

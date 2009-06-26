@@ -26,25 +26,25 @@ import abstracttool
 class DocContext
 special AbstractCompiler
 	# Destination directory
-	readable writable attr _dir: String = "."
+	readable writable var _dir: String = "."
 
 	# Content of a generated file
-	attr _stage_context: StageContext = new StageContext(null)
+	var _stage_context: StageContext = new StageContext(null)
 
 	# Add a string in the content
-	meth add(s: String) do
+	fun add(s: String) do
 		_stage_context.content.add(s)
 		_stage_context.validate = true
 	end
 
 	# Add a string in the content iff some other string are added
-	meth stage(s: String) do _stage_context.content.add(s)
+	fun stage(s: String) do _stage_context.content.add(s)
 
 	# Create a new stage in the content
-	meth open_stage do _stage_context = new StageContext(_stage_context)
+	fun open_stage do _stage_context = new StageContext(_stage_context)
 
 	# Close the current stage in the content
-	meth close_stage
+	fun close_stage
 	do
 		var s = _stage_context.parent
 		if _stage_context.validate then
@@ -56,7 +56,7 @@ special AbstractCompiler
 	end
 
 	# Write the content to a new file
-	meth write_to(filename: String)
+	fun write_to(filename: String)
 	do
 		print "Generate {filename}"
 		var f = new OFStream.open(filename)
@@ -67,19 +67,19 @@ special AbstractCompiler
 	end
 
 	# Currently computed module
-	readable attr _module: nullable MMSrcModule
+	readable var _module: nullable MMSrcModule
 
 	# Is the current directory module computed as a simple modude ?
-	readable writable attr _inside_mode: Bool = false
+	readable writable var _inside_mode: Bool = false
 
 	# Is the current module computed as a intruded one ?
-	readable writable attr _intrude_mode: Bool = false
+	readable writable var _intrude_mode: Bool = false
 
 	# Compued introducing entities (for the index)
-	attr _entities: Array[MMEntity] = new Array[MMEntity]
+	var _entities: Array[MMEntity] = new Array[MMEntity]
 
 	# Register an entity (for the index)
-	meth register(e: MMEntity)
+	fun register(e: MMEntity)
 	do
 		_entities.add(e)
 		if e isa MMSrcModule then
@@ -88,13 +88,13 @@ special AbstractCompiler
 	end
 
 	# Start a new file
-	meth clear
+	fun clear
 	do
 		_stage_context = new StageContext(null)
 	end
 
 	# Generate common files (frames, index, overview)
-	meth extract_other_doc
+	fun extract_other_doc
 	do
 		_module = null
 		inside_mode = false
@@ -180,7 +180,7 @@ special AbstractCompiler
 		write_to("{dir}/index.html")
 	end
 
-	meth add_header(title: String)
+	fun add_header(title: String)
 	do
 		add("<html><head><title>{title}</title></head>\n<body>\n")
 		add("<table border=\"0\" width=\"100%\" cellpadding=\"1\" cellspacing=\"0\"><tr><td bgcolor=\"#eeeeff\">\n")
@@ -208,19 +208,19 @@ special AbstractCompiler
 	end
 
 	# Sorter of entities in alphabetical order
-	attr _sorter: AlphaSorter[MMEntity] = new AlphaSorter[MMEntity]
+	var _sorter: AlphaSorter[MMEntity] = new AlphaSorter[MMEntity]
 
 	# Sort entities in the alphabetical order
-	meth sort(array: Array[MMEntity])
+	fun sort(array: Array[MMEntity])
 	do
 		_sorter.sort(array)
 	end
 
-	readable writable attr _owned_modules: Array[MMModule] = new Array[MMModule]
+	readable writable var _owned_modules: Array[MMModule] = new Array[MMModule]
 
 	# Return the known_owner for current module
 	# if inside_mode is set, it could be a different result
-	meth known_owner_of(m: MMModule): MMModule
+	fun known_owner_of(m: MMModule): MMModule
 	do
 		var module = module
 		if module == null then return m
@@ -232,9 +232,9 @@ special AbstractCompiler
 		end
 	end
 
-	readable attr _opt_dir: OptionString = new OptionString("Directory where doc is generated", "-d", "--dir")
+	readable var _opt_dir: OptionString = new OptionString("Directory where doc is generated", "-d", "--dir")
 
-	redef meth perform_work(mods)
+	redef fun perform_work(mods)
 	do
 		dir.mkdir
 
@@ -251,7 +251,7 @@ special AbstractCompiler
 		option_context.add_option(opt_dir)
 	end
 
-	redef meth process_options
+	redef fun process_options
 	do
 		super
 		var d = opt_dir.value
@@ -262,13 +262,13 @@ end
 # Conditionnal part of the text content of a DocContext
 class StageContext
 	# Content of the current stage
-	readable attr _content: Array[String] = new Array[String]
+	readable var _content: Array[String] = new Array[String]
 
 	# Is a normal string already added?
-	readable writable attr _validate: Bool = false
+	readable writable var _validate: Bool = false
 
 	# Parent stage is any
-	readable attr _parent: nullable StageContext = null
+	readable var _parent: nullable StageContext = null
 
 	init(parent: nullable StageContext) do _parent = parent
 end
@@ -277,7 +277,7 @@ end
 # Efficiently sort object with their to_s method
 class AlphaSorter[E: Object]
 special AbstractSorter[E]
-	redef meth compare(a, b)
+	redef fun compare(a, b)
 	do
 		var sa: String
 		var sb: String
@@ -298,7 +298,7 @@ special AbstractSorter[E]
 	end
 
 	# Keep track of to_s values
-	attr _dico: HashMap[Object, String] = new HashMap[Object, String]
+	var _dico: HashMap[Object, String] = new HashMap[Object, String]
 
 	init do end
 end
@@ -306,42 +306,42 @@ end
 # Generalization of metamodel entities
 class MMEntity
 	# Return a link to
-	meth html_link(dctx: DocContext): String is abstract
+	fun html_link(dctx: DocContext): String is abstract
 
 	# Is the entity should appear in the generaed doc
-	meth need_doc(dctx: DocContext): Bool is abstract
+	fun need_doc(dctx: DocContext): Bool is abstract
 
 	# Return a one liner description
-	meth short_doc: String do return "&nbsp;"
+	fun short_doc: String do return "&nbsp;"
 
 	# The doc node from the AST
 	# Return null is none
-	meth doc: nullable ADoc do return null
+	fun doc: nullable ADoc do return null
 
 	# Human redable location of the entity (module/class/property)
-	meth locate(dctx: DocContext): String do return ""
+	fun locate(dctx: DocContext): String do return ""
 
 	# Part of the prototype before the name (kind, modifiers, qualifier)
-	meth prototype_head(dctx: DocContext): String is abstract
+	fun prototype_head(dctx: DocContext): String is abstract
 
 	# Part of the property after the name (signature, modifiers)
-	meth prototype_body(dctx: DocContext): String do return ""
+	fun prototype_body(dctx: DocContext): String do return ""
 end
 
 redef class MMModule
 special MMEntity
-	redef meth html_link(dctx) do 
+	redef fun html_link(dctx) do 
 		if dctx.module == self then 
 			return "{self}"
 		else
 			return "<a href=\"{self}.html\">{self}</a>"
 		end
 	end
-	redef meth need_doc(dctx) do return true
-	redef meth prototype_head(dctx) do return "module "
+	redef fun need_doc(dctx) do return true
+	redef fun prototype_head(dctx) do return "module "
 
-	attr _known_owner_of_cache: Map[MMModule, MMModule] = new HashMap[MMModule, MMModule]
-	meth known_owner_of(module: MMModule): MMModule
+	var _known_owner_of_cache: Map[MMModule, MMModule] = new HashMap[MMModule, MMModule]
+	fun known_owner_of(module: MMModule): MMModule
 	do 
 		if _known_owner_of_cache.has_key(module) then return _known_owner_of_cache[module]
 		var res = module
@@ -355,7 +355,7 @@ special MMEntity
 	end
 
 	# Return the most general module that own self
-	meth owner(from: MMModule): MMModule
+	fun owner(from: MMModule): MMModule
 	do
 		var res = self
 		var d: nullable MMDirectory = directory
@@ -367,7 +367,7 @@ special MMEntity
 		return res
 	end
 
-	private meth known_owner_of_intern(module: MMModule, from: MMModule, as_owner: Bool): MMModule
+	private fun known_owner_of_intern(module: MMModule, from: MMModule, as_owner: Bool): MMModule
 	do
 		if module == self then return self
 		var candidates = new Array[MMModule]
@@ -393,12 +393,12 @@ end
 redef class MMLocalProperty
 special MMEntity
 	# Anchor of the property description in the module html file
-	meth html_anchor: String
+	fun html_anchor: String
 	do
 		return "PROP_{local_class}_{cmangle(name)}"
 	end
 
-	redef meth html_link(dctx)
+	redef fun html_link(dctx)
 	do
 		var m = module
 		if not need_doc(dctx) then m = global.intro.module
@@ -410,22 +410,22 @@ special MMEntity
 		end
 	end
 	
-	# Kind of property (meth, attr, etc.)
-	meth kind: String is abstract
+	# Kind of property (fun, attr, etc.)
+	fun kind: String is abstract
 
-	redef meth locate(dctx)
+	redef fun locate(dctx)
 	do
 		return "in {module.html_link(dctx)}::{local_class.html_link(dctx)}"
 	end
 
-	meth known_intro_class(dctx: DocContext): MMLocalClass
+	fun known_intro_class(dctx: DocContext): MMLocalClass
 	do
 		var mod = dctx.known_owner_of(global.intro.local_class.module)
 		var cla = mod[global.intro.local_class.global]
 		return cla
 	end
 
-	redef meth prototype_head(dctx)
+	redef fun prototype_head(dctx)
 	do
 		var res = new Buffer
 		var intro_class = known_intro_class(dctx)
@@ -449,7 +449,7 @@ special MMEntity
 		return res.to_s
 	end
 
-	redef meth prototype_body(dctx)
+	redef fun prototype_body(dctx)
 	do
 		var res = new Buffer
 		res.append(signature.to_html(dctx))
@@ -464,7 +464,7 @@ special MMEntity
 		return res.to_s
 	end
 
-	redef meth need_doc(dctx)
+	redef fun need_doc(dctx)
 	do
 		if global.visibility_level >= 3 or self isa MMAttribute then
 			if not dctx.intrude_mode then return false
@@ -476,7 +476,7 @@ special MMEntity
 		return doc != null
 	end
 
-	redef meth short_doc
+	redef fun short_doc
 	do
 		var d = doc
 		if d != null then
@@ -488,7 +488,7 @@ special MMEntity
 		end
 	end
 	
-	redef meth doc
+	redef fun doc
 	do
 		var n = node
 		if n == null or not node isa PPropdef then
@@ -508,18 +508,18 @@ special MMEntity
 	end
 end
 redef class MMMethod
-	redef meth kind do return if global.is_init then "init" else "meth"
+	redef fun kind do return if global.is_init then "init" else "meth"
 end
 redef class MMAttribute
-	redef meth kind do return "attr"
+	redef fun kind do return "attr"
 end
 redef class MMTypeProperty
-	redef meth kind do return "type"
+	redef fun kind do return "type"
 end
 
 redef class MMSrcModule
 	# Extract and generate html file for the module
-	meth extract_module_doc(dctx: DocContext)
+	fun extract_module_doc(dctx: DocContext)
 	do
 		dctx.register(self)
 
@@ -542,7 +542,7 @@ redef class MMSrcModule
 		end
 	end
 
-	meth extract_module_doc_inside(dctx: DocContext)
+	fun extract_module_doc_inside(dctx: DocContext)
 	do
 		dctx.add_header("Module {self}")
 		dctx.add("<h1>Module {self}</h1>\n<dl>")
@@ -641,7 +641,7 @@ redef class MMSrcModule
 		dctx.add("</body></html>\n")
 	end
 
-	redef meth short_doc
+	redef fun short_doc
 	do
 		var d = doc
 		if d != null then
@@ -651,7 +651,7 @@ redef class MMSrcModule
 		end
 	end
 
-	redef meth doc
+	redef fun doc
 	do
 		var n = node
 		if n.n_packagedecl == null then
@@ -674,7 +674,7 @@ end
 
 redef class ADoc
 	# Html transcription of the doc
-	meth to_html: String
+	fun to_html: String
 	do
 		var res = new Buffer
 		for c in n_comment do
@@ -684,7 +684,7 @@ redef class ADoc
 	end
 
 	# Oneliner transcription of the doc
-	meth short: String
+	fun short: String
 	do
 		return n_comment.first.text.substring_from(1)
 	end
@@ -693,9 +693,9 @@ end
 redef class MMLocalClass
 special MMEntity
 	# Anchor of the class description in the module html file
-	meth html_anchor: String do return "CLASS_{self}"
+	fun html_anchor: String do return "CLASS_{self}"
 
-	redef meth html_link(dctx)
+	redef fun html_link(dctx)
 	do
 		var m = module
 		if not need_doc(dctx) then m = global.module
@@ -707,11 +707,11 @@ special MMEntity
 		end
 	end
 
-	redef meth short_doc do return global.intro.short_doc
+	redef fun short_doc do return global.intro.short_doc
 
-	redef meth doc do return global.intro.doc
+	redef fun doc do return global.intro.doc
 
-	redef meth need_doc(dctx) do
+	redef fun need_doc(dctx) do
 		if module == dctx.module then
 			for m in dctx.owned_modules do
 				if m.global_classes.has(global) then
@@ -723,11 +723,11 @@ special MMEntity
 		return false
 	end
 
-	redef meth locate(dctx) do return "in {module.html_link(dctx)}"
+	redef fun locate(dctx) do return "in {module.html_link(dctx)}"
 
-	meth known_intro(dctx: DocContext): MMLocalClass do return dctx.known_owner_of(global.intro.module)[global]
+	fun known_intro(dctx: DocContext): MMLocalClass do return dctx.known_owner_of(global.intro.module)[global]
 
-	redef meth prototype_head(dctx)
+	redef fun prototype_head(dctx)
 	do
 		var res = new Buffer
 		var ki = known_intro(dctx)
@@ -739,7 +739,7 @@ special MMEntity
 		return res.to_s
 	end
 
-	redef meth prototype_body(dctx)
+	redef fun prototype_body(dctx)
 	do
 		var res = new Buffer
 		if arity > 0 then
@@ -756,7 +756,7 @@ special MMEntity
 	end
 
 	# Extract the doc of a class
-	meth extract_class_doc(dctx: DocContext)
+	fun extract_class_doc(dctx: DocContext)
 	do
 		dctx.add("<a name=\"{html_anchor}\"></a><h2>{self}</h2><small>{module.html_link(dctx)}::</small><br/>{prototype_head(dctx)}<b>{self}</b>{prototype_body(dctx)}\n")
 		dctx.add("<blockquote>\n")
@@ -842,13 +842,13 @@ special MMEntity
 		dctx.add("</blockquote><hr/>\n")
 	end
 
-	meth pass_name(pass: Int): String
+	fun pass_name(pass: Int): String
 	do
 		var names = once ["Virtual Types", "Consructors", "Methods", "Attributes"]
 		return names[pass]
 	end
 	
-	meth accept_prop(p: MMLocalProperty, pass: Int): Bool
+	fun accept_prop(p: MMLocalProperty, pass: Int): Bool
 	do
 		if pass == 0 then
 			return p isa MMTypeProperty
@@ -862,7 +862,7 @@ special MMEntity
 		abort
 	end
 
-	meth property_summary(dctx: DocContext, pass: Int): Array[MMLocalProperty]
+	fun property_summary(dctx: DocContext, pass: Int): Array[MMLocalProperty]
 	do
 		var passname = pass_name(pass)
 		dctx.open_stage
@@ -1006,7 +1006,7 @@ special MMEntity
 		return new_props
 	end
 
-	meth property_detail(dctx: DocContext, pass: Int, new_props: Array[MMLocalProperty])
+	fun property_detail(dctx: DocContext, pass: Int, new_props: Array[MMLocalProperty])
 	do
 		var passname = pass_name(pass)
 		dctx.open_stage
@@ -1034,7 +1034,7 @@ special MMEntity
 	end
 
 	# Add rows for properties inheriterd to some heirs
-	meth properties_inherited_from(dctx: DocContext, heir: MMLocalClass, pass: Int)
+	fun properties_inherited_from(dctx: DocContext, heir: MMLocalClass, pass: Int)
 	do
 		var properties = new Array[String]
 		for g in global_properties do
@@ -1056,7 +1056,7 @@ special MMEntity
 end
 
 redef class MMSrcLocalClass
-	redef meth short_doc
+	redef fun short_doc
 	do
 		var d = doc
 		if d != null then
@@ -1069,7 +1069,7 @@ redef class MMSrcLocalClass
 		end
 	end
 
-	redef meth doc
+	redef fun doc
 	do
 		var n = nodes.first
 		if not n isa AClassdef then
@@ -1088,7 +1088,7 @@ redef class MMSrcLocalClass
 		end
 	end
 
-	redef meth need_doc(dctx)
+	redef fun need_doc(dctx)
 	do
 		if global.visibility_level >= 3 then
 			if not dctx.intrude_mode then return false
@@ -1108,7 +1108,7 @@ end
 
 redef class MMSignature
 	# Htlm transcription of the signature (with nested links)
-	meth to_html(dctx: DocContext): String
+	fun to_html(dctx: DocContext): String
 	do
 		var res = new Buffer
 		if arity > 0 then
@@ -1130,15 +1130,15 @@ end
 
 redef class MMType
 	# Htlm transcription of the type (with nested links)
-	meth html_link(dctx: DocContext): String do return to_s
+	fun html_link(dctx: DocContext): String do return to_s
 end
 
 redef class MMTypeSimpleClass
-	redef meth html_link(dctx) do return local_class.html_link(dctx)
+	redef fun html_link(dctx) do return local_class.html_link(dctx)
 end
 
 redef class MMTypeGeneric
-	redef meth html_link(dctx)
+	redef fun html_link(dctx)
 	do
 		var res = new Buffer
 		res.append(local_class.html_link(dctx))

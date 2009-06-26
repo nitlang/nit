@@ -17,9 +17,9 @@
 import kernel
 
 class A
-	attr _i: Int
-	attr _b: Bool
-	attr _c: Char
+	var _i: Int
+	var _b: Bool
+	var _c: Char
 
 	init
 	do

@@ -16,7 +16,7 @@
 
 import kernel
 
-meth a do end
+fun a do end
 
 while true do
 	a

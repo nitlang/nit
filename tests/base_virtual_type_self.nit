@@ -18,11 +18,11 @@ import kernel
 
 class A[E]
 	type T: E
-	attr _t: T
-	meth foo(t: T) do end
-	meth foo2: T do return _t
-	meth bar(t: A[T]) do end
-	meth bar2: A[T] do return self
+	var _t: T
+	fun foo(t: T) do end
+	fun foo2: T do return _t
+	fun bar(t: A[T]) do end
+	fun bar2: A[T] do return self
 
 	init do end
 end
@@ -31,7 +31,7 @@ class B
 #alt3#special A[Int]
 	type U: Int
 
-	meth test
+	fun test
 	do
 		#alt1#var a = new A[Int]
 		#alt2#var a = new A[U]

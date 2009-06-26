@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	meth foo(i: Int)
+	fun foo(i: Int)
 	do
 		i.output
 		if i == 1 then
@@ -30,7 +30,7 @@ class A
 		end
 	end
 
-	meth bar(i: Int)
+	fun bar(i: Int)
 	do
 		foo(i/2)
 	end
@@ -40,7 +40,7 @@ end
 
 class B
 special A
-	redef meth foo(i: Int)
+	redef fun foo(i: Int)
 	do
 		if i == 1 then
 			var a: A
@@ -52,7 +52,7 @@ special A
 	init do end
 end
 
-meth baz(a: A, i: Int)
+fun baz(a: A, i: Int)
 do
 	a.foo(i+3)
 end

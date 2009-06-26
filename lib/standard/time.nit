@@ -15,5 +15,5 @@ package time
 import kernel
 
 redef class Object
-	protected meth get_time: Int is extern "kernel_Any_Any_get_time_0"
+	protected fun get_time: Int is extern "kernel_Any_Any_get_time_0"
 end

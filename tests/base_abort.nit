@@ -16,7 +16,7 @@
 
 import kernel
 
-meth foo: Int
+fun foo: Int
 do
 	abort
 end

@@ -15,6 +15,6 @@
 # limitations under the License.
 
 class A
-	attr _toto: Int
-	attr _toto: Object
+	var _toto: Int
+	var _toto: Object
 end

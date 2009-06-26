@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	readable attr _a: Int 
+	readable var _a: Int 
 	
 	init(a: Int)
 	do
@@ -27,7 +27,7 @@ end
 
 class B
 special A
-	redef meth ==(a: nullable Object): Bool
+	redef fun ==(a: nullable Object): Bool
 	do
 		if not a isa B then
 			return false

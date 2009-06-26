@@ -17,25 +17,25 @@
 import kernel
 
 redef class Object
-	meth foo(i: Int)
+	fun foo(i: Int)
 	do
 		0.output
 	end
 end
 
 redef class Int
-	redef meth foo(i: Int)
+	redef fun foo(i: Int)
 	do
 		(-i).output
 	end
 end
 
 class A
-	redef meth foo(i: Int)
+	redef fun foo(i: Int)
 	do
 		i.output
 	end
-	meth bar(i: Int)
+	fun bar(i: Int)
 	do
 		(i*10).output
 	end
@@ -45,7 +45,7 @@ end
 
 class B
 special A
-	redef meth bar(i: Int)
+	redef fun bar(i: Int)
 	do
 		(i*100).output
 	end

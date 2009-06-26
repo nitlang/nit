@@ -20,7 +20,7 @@ package procedural_array
 
 # The sum of the elements of `a'.
 # Uses a 'for' control structure.
-meth array_sum(a: Array[Int]): Int
+fun array_sum(a: Array[Int]): Int
 do
 	var sum = 0
 	for i in a do
@@ -31,7 +31,7 @@ end
 
 # The sum of the elements of `a' (alternative version).
 # Uses a 'while' control structure.
-meth array_sum_alt(a: Array[Int]): Int
+fun array_sum_alt(a: Array[Int]): Int
 do
 	var sum = 0
 	var i = 0

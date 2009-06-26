@@ -18,17 +18,17 @@ import string
 # Abstract stream class
 class IOS
 	# close the stream
-	meth close is abstract
+	fun close is abstract
 end
 
 # Abstract input streams
 class IStream
 special IOS
 	# Read a character. Return its ASCII value, -1 on EOF or timeout
-	meth read_char: Int is abstract
+	fun read_char: Int is abstract
 
 	# Read at most i bytes
-	meth read(i: Int): String
+	fun read(i: Int): String
 	do
 		var s = new Buffer.with_capacity(i)
 		while i > 0 and not eof do
@@ -42,7 +42,7 @@ special IOS
 	end
 
 	# Read a string until the end of the line.
-	meth read_line: String
+	fun read_line: String
 	do
 		assert not eof
 		var s = new Buffer
@@ -51,7 +51,7 @@ special IOS
 	end
 
 	# Read all the stream until the eof.
-	meth read_all: String
+	fun read_all: String
 	do
 		var s = new Buffer
 		while not eof do
@@ -62,7 +62,7 @@ special IOS
 	end
 
 	# Read a string until the end of the line and append it to `s'.
-	meth append_line_to(s: Buffer)
+	fun append_line_to(s: Buffer)
 	do
 		while true do
 			var x = read_char
@@ -77,23 +77,23 @@ special IOS
 	end
 
 	# Is there something to read.
-	meth eof: Bool is abstract
+	fun eof: Bool is abstract
 end
 
 # Abstract output stream
 class OStream
 special IOS
 	# write a string
-	meth write(s: String) is abstract
+	fun write(s: String) is abstract
 
 	# Can the stream be used to write
-	meth is_writable: Bool is abstract
+	fun is_writable: Bool is abstract
 end
 
 # Input streams with a buffer
 class BufferedIStream
 special IStream
-	redef meth read_char
+	redef fun read_char
 	do
 		assert not eof
 		if _buffer_pos >= _buffer.length then
@@ -107,7 +107,7 @@ special IStream
 		return c.ascii
 	end
 
-	redef meth read(i)
+	redef fun read(i)
 	do
 		var s = new Buffer.with_capacity(i)
 		var j = _buffer_pos
@@ -129,7 +129,7 @@ special IStream
 		return s.to_s
 	end
 
-	redef meth read_all
+	redef fun read_all
 	do
 		var s = new Buffer
 		while not eof do
@@ -145,7 +145,7 @@ special IStream
 		return s.to_s
 	end   
 
-	redef meth append_line_to(s)
+	redef fun append_line_to(s)
 	do
 		while true do
 			# First phase: look for a '\n'
@@ -181,22 +181,22 @@ special IStream
 		end
 	end
 
-	redef meth eof do return _buffer_pos >= _buffer.length and end_reached
+	redef fun eof do return _buffer_pos >= _buffer.length and end_reached
 
 	# The buffer
-	attr _buffer: nullable Buffer = null
+	var _buffer: nullable Buffer = null
 
 	# The current position in the buffer
-	attr _buffer_pos: Int = 0
+	var _buffer_pos: Int = 0
 
 	# Fill the buffer
-	protected meth fill_buffer is abstract
+	protected fun fill_buffer is abstract
 
 	# Is the last fill_buffer reach the end 
-	protected meth end_reached: Bool is abstract
+	protected fun end_reached: Bool is abstract
 
 	# Allocate a `_buffer' for a given `capacity'.
-	protected meth prepare_buffer(capacity: Int)
+	protected fun prepare_buffer(capacity: Int)
 	do
 		_buffer = new Buffer.with_capacity(capacity)
 		_buffer_pos = 0 # need to read
@@ -213,14 +213,14 @@ end
 class FDStream
 special IOS
 	# File description
-	attr _fd: Int
+	var _fd: Int
 
-	redef meth close do native_close(_fd)
+	redef fun close do native_close(_fd)
 
-	private meth native_close(i: Int): Int is extern "stream_FDStream_FDStream_native_close_1"
-	private meth native_read_char(i: Int): Int is extern "stream_FDStream_FDStream_native_read_char_1"
-	private meth native_read(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_read_3"
-	private meth native_write(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_write_3"
+	private fun native_close(i: Int): Int is extern "stream_FDStream_FDStream_native_close_1"
+	private fun native_read_char(i: Int): Int is extern "stream_FDStream_FDStream_native_read_char_1"
+	private fun native_read(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_read_3"
+	private fun native_write(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_write_3"
 
 	init(fd: Int) do _fd = fd
 end
@@ -228,9 +228,9 @@ end
 class FDIStream
 special FDStream
 special IStream
-	redef readable attr _eof: Bool = false
+	redef readable var _eof: Bool = false
 	
-	redef meth read_char
+	redef fun read_char
 	do
 		var nb = native_read_char(_fd)
 		if nb == -1 then _eof = true
@@ -243,9 +243,9 @@ end
 class FDOStream
 special FDStream
 special OStream
-	redef readable attr _is_writable: Bool
+	redef readable var _is_writable: Bool
 
-	redef meth write(s)
+	redef fun write(s)
 	do
 		var nb = native_write(_fd, s.to_cstring, s.length)
 		if nb < s.length then _is_writable = false

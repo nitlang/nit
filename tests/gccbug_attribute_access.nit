@@ -21,8 +21,8 @@
 # * try to change the optimization flags
 # * try to update your gcc version
 class Foo
-	attr _count: Int = 0
-	meth run: Int
+	var _count: Int = 0
+	fun run: Int
 	do
 		# Under some case gcc produce bad code here and make the if
 		# evaluate the old _count value

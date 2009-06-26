@@ -13,12 +13,12 @@
 class DummyArray
 special Set[Int]
 special ArrayCapable[Int]
-	attr _capacity: Int 
-	redef readable attr _length: Int 
-	attr _keys: NativeArray[Int]
-	attr _values: NativeArray[Int]
+	var _capacity: Int 
+	redef readable var _length: Int 
+	var _keys: NativeArray[Int]
+	var _values: NativeArray[Int]
 
-	redef meth add(value: Int)
+	redef fun add(value: Int)
 	do
 		assert full: _length < (_capacity-1)
 		var l = _length
@@ -27,7 +27,7 @@ special ArrayCapable[Int]
 		_length = l + 1
 	end
 
-	redef meth remove(value: Int)
+	redef fun remove(value: Int)
 	do
 		assert not is_empty
 		var l = _length
@@ -40,7 +40,7 @@ special ArrayCapable[Int]
 		_length = l - 1
 	end
 
-	redef meth has(value: Int): Bool
+	redef fun has(value: Int): Bool
 	do
 		assert value < _capacity
 		var pos = _keys[value]
@@ -50,28 +50,28 @@ special ArrayCapable[Int]
 		return false
 	end
 
-	redef meth first: Int
+	redef fun first: Int
 	do
 		assert _length > 0
 		return _values[0]
 	end
 
-	redef meth is_empty: Bool
+	redef fun is_empty: Bool
 	do
 		return not (_length > 0)
 	end
 
-	redef meth clear
+	redef fun clear
 	do
 		_length = 0
 	end
 
-	redef meth iterator: DummyIterator
+	redef fun iterator: DummyIterator
 	do
 		return new DummyIterator(self)
 	end
 
-	private meth value_at(pos: Int): Int
+	private fun value_at(pos: Int): Int
 	do
 		return _values[pos]
 	end
@@ -86,21 +86,21 @@ end
 
 class DummyIterator
 special Iterator[Int]
-	attr _array: DummyArray
-	attr _pos: Int
+	var _array: DummyArray
+	var _pos: Int
 
-	redef meth item: Int
+	redef fun item: Int
 	do
 		assert is_ok
 		return _array.value_at(_pos)
 	end
 
-	redef meth is_ok: Bool
+	redef fun is_ok: Bool
 	do
 		return _pos < _array.length
 	end
 
-	redef meth next do _pos = _pos + 1 end
+	redef fun next do _pos = _pos + 1 end
 
 	init(array: DummyArray)
 	do

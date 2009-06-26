@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-meth count_421(n: Int): Int
+fun count_421(n: Int): Int
 # Return the number of steps to come back to 1
 do
 	var steps = 0

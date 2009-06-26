@@ -22,9 +22,9 @@ intrude import array
 
 abstract class AbstractString
 special AbstractArrayRead[Char]
-	readable private attr _items: NativeString
+	readable private var _items: NativeString
 
-	redef meth [](index) do return _items[index]
+	redef fun [](index) do return _items[index]
 
 	# Create a substring.
 	#
@@ -32,7 +32,7 @@ special AbstractArrayRead[Char]
 	# "abcd".substring(-1, 2)	# --> "a"
 	# "abcd".substring(1, 0)     # --> ""
 	# "abcd".substring(2, 5)     # --> "cd"
-	meth substring(from: Int, count: Int): String
+	fun substring(from: Int, count: Int): String
 	do
 		assert count >= 0
 		count += from
@@ -55,7 +55,7 @@ special AbstractArrayRead[Char]
 	# "abcd".substring(1) 	# --> "bcd"
 	# "abcd".substring(-1)	# --> "abcd"
 	# "abcd".substring(2)     # --> "cd"
-	meth substring_from(from: Int): String
+	fun substring_from(from: Int): String
 	do
 		assert from < length
 		return substring(from, length - from)
@@ -65,7 +65,7 @@ special AbstractArrayRead[Char]
 	#
 	# "bc".is_substring("abcd",1) 	# --> true
 	# "bc".is_substring("abcd",2) 	# --> false
-	meth has_substring(str: String, pos: Int): Bool
+	fun has_substring(str: String, pos: Int): Bool
 	do
 		var itsindex = str.length - 1
 		var myindex = pos + itsindex
@@ -84,26 +84,26 @@ special AbstractArrayRead[Char]
 	#
 	# "abc".is_prefix("abcd") 	# --> true
 	# "bc".is_prefix("abcd") 	# --> false
-	meth has_prefix(prefix: String): Bool do return has_substring(prefix,0)
+	fun has_prefix(prefix: String): Bool do return has_substring(prefix,0)
 
 	# Is this string suffixed by 'suffix'
 	#
 	# "abcd".has_suffix("abc") 	# --> false
 	# "abcd".has_suffix("bcd") 	# --> true
-	meth has_suffix(suffix: String): Bool do return has_substring(suffix, length - suffix.length)
+	fun has_suffix(suffix: String): Bool do return has_substring(suffix, length - suffix.length)
 
 	# If `self' contains only digits, return the corresponding integer
-	meth to_i: Int
+	fun to_i: Int
 	do
 		# Shortcut
 		return to_s.to_cstring.atoi
 	end
 
 	# If `self' contains only digits and alpha <= 'f', return the corresponding integer.
-	meth to_hex: Int do return a_to(16)
+	fun to_hex: Int do return a_to(16)
 
 	# If `self' contains only digits and letters, return the corresponding integer in a given base
-	meth a_to(base: Int) : Int
+	fun a_to(base: Int) : Int
 	do
 		var i = 0
 		var neg = false
@@ -131,7 +131,7 @@ special AbstractArrayRead[Char]
 	end
 
 	# String to upper case
-	meth to_upper: String
+	fun to_upper: String
 	do
 		var s = new Buffer.with_capacity(length)
 		for i in self do s.add(i.to_upper)
@@ -139,7 +139,7 @@ special AbstractArrayRead[Char]
 	end
 
 	# String to lower case
-	meth to_lower : String
+	fun to_lower : String
 	do
 		var s = new Buffer.with_capacity(length)
 		for i in self do s.add(i.to_lower)
@@ -147,7 +147,7 @@ special AbstractArrayRead[Char]
 	end
 
 
-	redef meth output
+	redef fun output
 	do
 		var i = 0
 		while i < length do
@@ -180,12 +180,12 @@ special AbstractString
 	end
 
 	# Return a null terminated char *
-	meth to_cstring: NativeString
+	fun to_cstring: NativeString
 	do
 		return _items
 	end
 
-	redef meth ==(o)
+	redef fun ==(o)
 	do
 		if not o isa String or o is null then return false
 		var l = length
@@ -200,7 +200,7 @@ special AbstractString
 		return true
 	end
 
-	redef meth <(s)
+	redef fun <(s)
 	do
 		var i = 0
 		var l1 = length
@@ -225,7 +225,7 @@ special AbstractString
 	end
 
 	# The concatenation of `self' with `r'
-	meth +(s: String): String
+	fun +(s: String): String
 	do
 		var r = new Buffer.with_capacity(length + s.length)
 		r.append(self)
@@ -234,7 +234,7 @@ special AbstractString
 	end
 
 	# i repetitions of self
-	meth *(i: Int): String
+	fun *(i: Int): String
 	do
 		assert i >= 0
 		var r = new Buffer.with_capacity(length * i)
@@ -245,7 +245,7 @@ special AbstractString
 		return r.to_s
 	end
 
-	redef meth to_s do return self
+	redef fun to_s do return self
 end
 
 # Strings are arrays of characters.
@@ -257,7 +257,7 @@ special AbstractArray[Char]
 
 	redef type OTHER: String
 
-	redef meth []=(index, item)
+	redef fun []=(index, item)
 	do
 		if index == length then
 			add(item)
@@ -267,14 +267,14 @@ special AbstractArray[Char]
 		_items[index] = item
 	end
 
-	redef meth add(c)
+	redef fun add(c)
 	do
 		if _capacity <= length then enlarge(length + 5)
 		_items[length] = c
 		_length += 1
 	end
 
-	redef meth enlarge(cap)
+	redef fun enlarge(cap)
 	do
 		var c = _capacity
 		if cap <= c then return
@@ -285,7 +285,7 @@ special AbstractArray[Char]
 		_capacity = c
 	end
 
-	redef meth append(s)
+	redef fun append(s)
 	do
 		if s isa String then
 			var sl = s.length
@@ -297,7 +297,7 @@ special AbstractArray[Char]
 		end
 	end
 
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		var l = length
 		var a = calloc_string(l+1)
@@ -309,7 +309,7 @@ special AbstractArray[Char]
 		return new String.with_native(a, length)
 	end
 
-	redef meth <(s)
+	redef fun <(s)
 	do
 		var i = 0
 		var l1 = length
@@ -355,7 +355,7 @@ special AbstractArray[Char]
 		_length = 0
 	end
 
-	redef meth ==(o)
+	redef fun ==(o)
 	do
 		if not o isa Buffer or o is null then return false
 		var l = length
@@ -370,7 +370,7 @@ special AbstractArray[Char]
 		return true
 	end
 
-	readable private attr _capacity: Int 
+	readable private var _capacity: Int 
 end
 
 ###############################################################################
@@ -378,14 +378,14 @@ end
 ###############################################################################
 
 redef class Object
-	#   meth class_name: String is extern intern # The name of the class
+	#   fun class_name: String is extern intern # The name of the class
 
 	# User redeable representation of `self'.
-	meth to_s: String do return inspect
+	fun to_s: String do return inspect
 
 	# Developper readable representation of `self'.
 	# Usualy, it uses the form "<CLASSNAME:#OBJECTID bla bla bla>"
-	meth inspect: String
+	fun inspect: String
 	do
 		var r = inspect_head
 		# r.add('>')
@@ -394,19 +394,19 @@ redef class Object
 
 	# Return "<CLASSNAME:#OBJECTID".
 	# This fuction is mainly used with the redefinition of the inspect(0) method
-	protected meth inspect_head: String
+	protected fun inspect_head: String
 	do
 		return "<{object_id.to_hex}"
 	end
 
-	protected meth args: IndexedCollection[String]
+	protected fun args: IndexedCollection[String]
 	do
 		return sys.args
 	end
 end
 
 redef class Bool
-	redef meth to_s
+	redef fun to_s
 	do 
 		if self then 
 			return once "true" 
@@ -417,7 +417,7 @@ redef class Bool
 end
 
 redef class Int
-	meth fill_buffer(s: Buffer, base: Int, signed: Bool)
+	fun fill_buffer(s: Buffer, base: Int, signed: Bool)
 	# Fill `s' with the digits in base 'base' of `self' (and with the '-' sign if 'signed' and negative).
 	# assume < to_c max const of char
 	do
@@ -442,13 +442,13 @@ redef class Int
 	end
 
 	# return displayable int in base 10 and signed
-	redef meth to_s do return to_base(10,true)
+	redef fun to_s do return to_base(10,true)
 	
 	# return displayable int in hexadecimal (unsigned (not now))
-	meth to_hex: String do return to_base(16,false)
+	fun to_hex: String do return to_base(16,false)
 
 	# return displayable int in base base and signed
-	meth to_base(base: Int, signed: Bool): String
+	fun to_base(base: Int, signed: Bool): String
 	do
 		var l = digit_count(base)
 		var s = new Buffer.from(" " * l)
@@ -458,10 +458,10 @@ redef class Int
 end
 
 redef class Float
-	redef meth to_s do return to_precision(6)
+	redef fun to_s do return to_precision(6)
 
 	# `self' representation with `nb' digits after the '.'.
-	meth to_precision(nb: Int): String
+	fun to_precision(nb: Int): String
 	do
 		if nb == 0 then return to_i.to_s
 
@@ -477,7 +477,7 @@ redef class Float
 end
 
 redef class Char
-	redef meth to_s
+	redef fun to_s
 	do
 		var s = new Buffer.with_capacity(1)
 		s[0] = self
@@ -487,7 +487,7 @@ end
 
 redef class Collection[E]
 	# Concatenate elements.
-	redef meth to_s
+	redef fun to_s
 	do
 		var s = new Buffer
 		for e in self do if e != null then s.append(e.to_s)
@@ -495,7 +495,7 @@ redef class Collection[E]
 	end
 
 	# Concatenate and separate each elements with `sep'. 
-	meth join(sep: String): String
+	fun join(sep: String): String
 	do
 		if is_empty then return ""
 		
@@ -520,7 +520,7 @@ end
 
 redef class Array[E]
 	# Fast implementation
-	redef meth to_s
+	redef fun to_s
 	do
 		var s = new Buffer
 		var i = 0
@@ -536,7 +536,7 @@ end
 
 redef class Map[K,V]
 	# Concatenate couple of 'key value' separate by 'couple_sep' and separate each couple with `sep'. 
-	meth map_join(sep: String, couple_sep: String): String
+	fun map_join(sep: String, couple_sep: String): String
 	do
 		if is_empty then return ""
 		
@@ -567,42 +567,42 @@ end
 
 # Native strings are simple C char *
 class NativeString
-	meth [](index: Int): Char is intern
-	meth []=(index: Int, item: Char) is intern
-	meth copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
+	fun [](index: Int): Char is intern
+	fun []=(index: Int, item: Char) is intern
+	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
 	
 	# Position of the first nul character.
-	meth cstring_length: Int
+	fun cstring_length: Int
 	do
 		var l = 0
 		while self[l] != '\0' do l += 1
 		return l
 	end
-	meth atoi: Int is intern
+	fun atoi: Int is intern
 end
 
 # StringCapable objects can create native strings
 class StringCapable
-	protected meth calloc_string(size: Int): NativeString is intern
+	protected fun calloc_string(size: Int): NativeString is intern
 end
 
 redef class Sys
-	attr _args_cache: nullable IndexedCollection[String]
+	var _args_cache: nullable IndexedCollection[String]
 
-	redef meth args: IndexedCollection[String]
+	redef fun args: IndexedCollection[String]
 	do
 		if _args_cache == null then init_args
 		return _args_cache.as(not null)
 	end
 
 	# The name of the program as given by the OS
-	meth program_name: String
+	fun program_name: String
 	do
 		return new String.from_cstring(native_argv(0))
 	end
 
 	# Initialize `args' with the contents of `native_argc' and `native_argv'.
-	private meth init_args
+	private fun init_args
 	do
 		var argc = native_argc
 		var args = new Array[String].with_capacity(0)
@@ -614,8 +614,8 @@ redef class Sys
 		_args_cache = args
 	end
 
-	private meth native_argc: Int is extern "kernel_Sys_Sys_native_argc_0" # First argument of the main C function.
+	private fun native_argc: Int is extern "kernel_Sys_Sys_native_argc_0" # First argument of the main C function.
 	
-	private meth native_argv(i: Int): NativeString is extern "kernel_Sys_Sys_native_argv_1" # Second argument of the main C function.
+	private fun native_argv(i: Int): NativeString is extern "kernel_Sys_Sys_native_argv_1" # Second argument of the main C function.
 end
 

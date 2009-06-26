@@ -15,22 +15,22 @@
 # limitations under the License.
 
 class A
-    meth foo: A
+    fun foo: A
     do 
 	    return new A
     end
     
-    meth bar: B 
+    fun bar: B 
     do 
 	    return new B 
     end
     
-    meth baz: Int 
+    fun baz: Int 
     do 
 	    return 5 
     end
     
-    redef meth output 
+    redef fun output 
     do 
 	    'A'.output 
     end
@@ -40,19 +40,19 @@ end
 
 class B
 special A
-    redef meth foo: B 
+    redef fun foo: B 
     do 
 	    return new B 
     end
-    redef meth bar: Int 
+    redef fun bar: Int 
     do 
 	    return 6 
     end
-    redef meth baz: Int 
+    redef fun baz: Int 
     do 
 	    return 7 
     end
-    redef meth output 
+    redef fun output 
     do 
 	    'B'.output 
     end
@@ -62,15 +62,15 @@ end
 
 redef class Int
 special B
-    redef meth foo: Int 
+    redef fun foo: Int 
     do 
 	    return 8 
     end
-    redef meth bar: Int 
+    redef fun bar: Int 
     do
 	    return 9
     end
-    redef meth output is intern
+    redef fun output is intern
 end
 
 var a = new A

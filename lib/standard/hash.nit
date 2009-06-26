@@ -22,11 +22,11 @@ redef class Object
 	# Assuming that a = b -> a.hash = b.hash
 	##
 	# Without redefinition, it is the `id' of the instance.
-	meth hash: Int do return object_id / 8
+	fun hash: Int do return object_id / 8
 end
 
 redef class String
-	redef meth hash
+	redef fun hash
 	do
 		# djb2 hash algorythm
 		var h = 5381
@@ -42,15 +42,15 @@ redef class String
 end
 
 redef class Int
-	redef meth hash do return self
+	redef fun hash do return self
 end
 
 redef class Char
-	redef meth hash do return ascii
+	redef fun hash do return ascii
 end
 
 redef class Bool
-	redef meth hash
+	redef fun hash
 	do
 		if self then
 			return 1
@@ -64,21 +64,21 @@ end
 private class HashCollection[K: Object, N: HashNode[K], E]
 special Collection[E]
 special ArrayCapable[nullable N]
-	attr _array: nullable NativeArray[nullable N] = null # Used to store items
-	attr _capacity: Int = 0 # Size of _array
-	redef readable attr _length: Int = 0 # Number of items in the map
+	var _array: nullable NativeArray[nullable N] = null # Used to store items
+	var _capacity: Int = 0 # Size of _array
+	redef readable var _length: Int = 0 # Number of items in the map
 
-	readable attr _first_item: nullable N = null # First added item (used to visit items in nice order)
-	attr _last_item: nullable N = null # Last added item (same)
+	readable var _first_item: nullable N = null # First added item (used to visit items in nice order)
+	var _last_item: nullable N = null # Last added item (same)
 
 	# The last index accessed
-	attr _last_accessed_index: Int = -1
+	var _last_accessed_index: Int = -1
 
 	# The last key accessed
-	attr _last_accessed_key: nullable K = null
+	var _last_accessed_key: nullable K = null
 
 	# Return the index of the k element
-	meth index_at(k: K): Int
+	fun index_at(k: K): Int
 	do
 		var arr = _array
 
@@ -106,7 +106,7 @@ special ArrayCapable[nullable N]
 	end
 
 	# Add a new node (should be free)
-	meth store(index: Int, node: N)
+	fun store(index: Int, node: N)
 	do
 		# Store the item in the list
 		if _first_item == null then
@@ -128,7 +128,7 @@ special ArrayCapable[nullable N]
 		end
 	end
 
-	meth remove_index(i: Int)
+	fun remove_index(i: Int)
 	do
 		assert correct_index: i >= 0 and i < _capacity
 		var node = _array[i]
@@ -168,7 +168,7 @@ special ArrayCapable[nullable N]
 		end
 	end
 
-	meth raz
+	fun raz
 	do
 		var i = _capacity - 1
 		while i >= 0 do
@@ -181,7 +181,7 @@ special ArrayCapable[nullable N]
 		_last_accessed_key = null
 	end
 
-	meth enlarge(cap: Int)
+	fun enlarge(cap: Int)
 	do
 		var old_cap = _capacity
 		# get a new capacity
@@ -218,27 +218,27 @@ special ArrayCapable[nullable N]
 end
 
 private class HashNode[K]
-	meth key: K is abstract
+	fun key: K is abstract
 	type N: HashNode[K]
-	readable writable attr _next_item: nullable N = null
-	readable writable attr _prev_item: nullable N = null
+	readable writable var _next_item: nullable N = null
+	readable writable var _prev_item: nullable N = null
 end
 
 class HashMap[K, V]
 special CoupleMap[K, V]
 special HashCollection[K, HashMapNode[K, V], V]
 
-	redef meth iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
+	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
 
-	redef meth first
+	redef fun first
 	do
 		assert _length > 0
 		return _first_item.second
 	end
 
-	redef meth is_empty do return _length == 0
+	redef fun is_empty do return _length == 0
 
-	redef meth count(item)
+	redef fun count(item)
 	do
 		var nb = 0
 		var i = 0
@@ -250,7 +250,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 		return nb
 	end
 
-	redef meth has(item)
+	redef fun has(item)
 	do
 		var i = 0
 		while i < _capacity do
@@ -261,7 +261,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 		return false
 	end
 
-	redef meth has_only(item)
+	redef fun has_only(item)
 	do
 		var i = 0
 		while i < _capacity do
@@ -272,7 +272,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 		return true
 	end
 
-	redef meth []=(key, v)
+	redef fun []=(key, v)
 	do
 		assert key != null
 		var i = index_at(key)
@@ -285,7 +285,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 		end
 	end
 
-	redef meth remove(item)
+	redef fun remove(item)
 	do
 		var i = 0
 		while i < _capacity do
@@ -298,11 +298,11 @@ special HashCollection[K, HashMapNode[K, V], V]
 		end
 	end
 
-	redef meth remove_at(key) do remove_index(index_at(key))
+	redef fun remove_at(key) do remove_index(index_at(key))
 
-	redef meth clear do raz
+	redef fun clear do raz
 
-	redef meth couple_at(key) do return _array[index_at(key)]
+	redef fun couple_at(key) do return _array[index_at(key)]
 
 	init
 	do
@@ -315,7 +315,7 @@ end
 class HashMapNode[K, V]
 special Couple[K, V]
 special HashNode[K]
-	redef meth key do return first
+	redef fun key do return first
 	redef type N: HashMapNode[K, V]
 
 	init(k: K, v: V)
@@ -327,37 +327,37 @@ end
 
 class HashMapIterator[K, V]
 special MapIterator[K, V]
-	redef meth is_ok do return _node != null
+	redef fun is_ok do return _node != null
 
-	redef meth item
+	redef fun item
 	do
 		assert is_ok
 		return _node.second
 	end
 
-	#redef meth item=(value)
+	#redef fun item=(value)
 	#do
 	#	assert is_ok
 	#	_node.second = value
 	#end
 
-	redef meth key
+	redef fun key
 	do
 		assert is_ok
 		return _node.first
 	end
 
-	redef meth next
+	redef fun next
 	do
 		assert is_ok
 		_node = _node.next_item
 	end
 
 	# The map to iterate on
-	attr _map: HashMap[K, V]
+	var _map: HashMap[K, V]
 
 	# The current node
-	attr _node: nullable HashMapNode[K, V]
+	var _node: nullable HashMapNode[K, V]
 
 	init(map: HashMap[K, V])
 	do
@@ -370,20 +370,20 @@ class HashSet[E]
 special Set[E]
 special HashCollection[E, HashSetNode[E], E]
 
-	redef meth is_empty do return _length == 0
+	redef fun is_empty do return _length == 0
 
-	redef meth first
+	redef fun first
 	do
 		assert _length > 0
 		return _first_item.key
 	end
 
-	redef meth has(item)
+	redef fun has(item)
 	do
 		return _array[index_at(item)] != null
 	end
 
-	redef meth add(item)
+	redef fun add(item)
 	do
 		var i = index_at(item)
 		var c = _array[i]
@@ -394,11 +394,11 @@ special HashCollection[E, HashSetNode[E], E]
 		end
 	end
 
-	redef meth remove(item) do remove_index(index_at(item))
+	redef fun remove(item) do remove_index(index_at(item))
 
-	redef meth clear do raz
+	redef fun clear do raz
 
-	redef meth iterator do return new HashSetIterator[E](self)
+	redef fun iterator do return new HashSetIterator[E](self)
 
 	init
 	do
@@ -412,7 +412,7 @@ class HashSetNode[E]
 special HashNode[E]
 	redef type N: HashSetNode[E]
 
-	redef readable writable attr _key: E
+	redef readable writable var _key: E
 
 	init(e: E)
 	do
@@ -422,25 +422,25 @@ end
 
 class HashSetIterator[E]
 special Iterator[E]
-	redef meth is_ok do return _node != null
+	redef fun is_ok do return _node != null
 
-	redef meth item
+	redef fun item
 	do
 		assert is_ok
 		return _node.key
 	end
 
-	redef meth next
+	redef fun next
 	do
 		assert is_ok
 		_node = _node.next_item
 	end
 
 	# The set to iterate on
-	attr _set: HashSet[E]
+	var _set: HashSet[E]
 
 	# The position in the internal map storage
-	attr _node: nullable HashSetNode[E]
+	var _node: nullable HashSetNode[E]
 
 	init(set: HashSet[E])
 	do

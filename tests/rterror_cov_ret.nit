@@ -16,7 +16,7 @@
 
 import rterror_cov_param
 redef class A
-	redef meth ret: Object
+	redef fun ret: Object
 	do
 		return 5
 	end

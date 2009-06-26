@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-meth toto
+fun toto
 do
 	return 5
 end

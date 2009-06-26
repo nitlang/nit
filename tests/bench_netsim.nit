@@ -15,29 +15,29 @@
 # limitations under the License.
 
 class Node
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		return _name
 	end
-	attr _name: String = "noname"
+	var _name: String = "noname"
 end
 
 class WakeUpNode
 special Node
-	meth wake_up is abstract
+	fun wake_up is abstract
 	# Wake up the node
-	meth wake_up_in(d: Int)
+	fun wake_up_in(d: Int)
 	# Ask to be weaked up in `d' time units
 	do
 		_scheduler.add_event(self, d)
 	end
-	attr _scheduler: Scheduler
+	var _scheduler: Scheduler
 end
 
 class NodeSource
 special Node
-	attr _nexts: nullable ArraySet[NodeSink] = null
-	meth attach(n: NodeSink)
+	var _nexts: nullable ArraySet[NodeSink] = null
+	fun attach(n: NodeSink)
 	# Add the sink `n' the the connected nodes
 	# Do nothing if `n' is already connected
 	do
@@ -49,7 +49,7 @@ special Node
 		_nexts.add(n)
 	end
 	
-	meth detach(n: NodeSink)
+	fun detach(n: NodeSink)
 	# Remove the sink `n' from the connected nodes
 	# Do nothing if `n' is not connected
 	do
@@ -57,7 +57,7 @@ special Node
 		_nexts.remove(n)
 	end
 
-	protected meth send
+	protected fun send
 	# Notify the sinks by calling the recieve(1) method of each sink
 	do
 		if _nexts == null then
@@ -71,23 +71,23 @@ end
 
 class NodeSink
 special Node
-	meth recieve(n: NodeSource) is abstract
+	fun recieve(n: NodeSource) is abstract
 	# the `n' has emeted a signal
 end
 
 #
 
 class Scheduler
-	attr _time_list: Array[Couple[Int, WakeUpNode]] = new Array[Couple[Int, WakeUpNode]]
-	attr _time: Int = 0 # What time is it ?
-	meth add_event(n: WakeUpNode, d: Int)
+	var _time_list: Array[Couple[Int, WakeUpNode]] = new Array[Couple[Int, WakeUpNode]]
+	var _time: Int = 0 # What time is it ?
+	fun add_event(n: WakeUpNode, d: Int)
 	# The node `n' whant to be weaked up in `d' time units
 	do
 		var entry = new Couple[Int, WakeUpNode](d+_time, n)
 		_time_list.add(entry)
 	end
 
-	meth next_event: nullable WakeUpNode
+	fun next_event: nullable WakeUpNode
 	# Get the
 	do
 		if _time_list.is_empty then
@@ -107,7 +107,7 @@ class Scheduler
 		return entry.second
 	end
 
-	meth run_for(time_limit: Int)
+	fun run_for(time_limit: Int)
 	do
 		while true do
 			var node = next_event 
@@ -133,13 +133,13 @@ end
 class BeepSource
 special NodeSource
 special WakeUpNode
-	redef meth wake_up
+	redef fun wake_up
 	do
 		send
 		wake_up_in(_delay)
 	end
-	attr _delay: Int
-	meth start
+	var _delay: Int
+	fun start
 	do
 		wake_up_in(_delay)
 	end
@@ -154,8 +154,8 @@ end
 
 class CountSink
 special NodeSink
-	readable attr _count: Int = 0
-	redef meth recieve(n: NodeSource)
+	readable var _count: Int = 0
+	redef fun recieve(n: NodeSource)
 	do
 		_count = _count + 1
 	end
@@ -173,8 +173,8 @@ end
 class NodeAlternate
 special NodeSink
 special NodeSource
-	attr _last: nullable NodeSource
-	redef meth recieve(n: NodeSource)
+	var _last: nullable NodeSource
+	redef fun recieve(n: NodeSource)
 	do
 		if n != _last then
 			_last = n
@@ -191,8 +191,8 @@ end
 class NodeEat
 special CountSink
 special NodeSource
-	attr _limit: Int
-	redef meth recieve(n: NodeSource)
+	var _limit: Int
+	redef fun recieve(n: NodeSource)
 	do
 		var c = _count + 1
 		if c >= _limit then
@@ -214,12 +214,12 @@ class NodeDelay
 special NodeSource
 special NodeSink
 special WakeUpNode
-	attr _delay: Int
-	redef meth recieve(n: NodeSource)
+	var _delay: Int
+	redef fun recieve(n: NodeSource)
 	do
 		wake_up_in(_delay)
 	end
-	redef meth wake_up
+	redef fun wake_up
 	do
 		send
 	end

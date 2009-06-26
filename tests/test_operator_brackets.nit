@@ -19,13 +19,13 @@
 class Matrice
 	# A matrice of integers
 
-	meth [](x: Int, y: Int): Int
+	fun [](x: Int, y: Int): Int
 	# The integer at (x,y)
 	do
 		return _tab[x][y]
 	end
 
-	meth []=(x: Int, y: Int, v: Int)
+	fun []=(x: Int, y: Int, v: Int)
 	# Put v in (x, y)
 	do
 		# Buld more arrays if needed
@@ -49,7 +49,7 @@ class Matrice
 	end
 
 private
-	attr _tab: Array[Array[Int]] # An array of array to store items
+	var _tab: Array[Array[Int]] # An array of array to store items
 
 
 	init

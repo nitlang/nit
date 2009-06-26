@@ -15,6 +15,6 @@
 # limitations under the License.
 
 class A
-	meth foo do end
+	fun foo do end
 end
 var b = new A.foo

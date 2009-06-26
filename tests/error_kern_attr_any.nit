@@ -15,5 +15,5 @@
 # limitations under the License.
 
 redef class Object
-	attr _toto: Bool
+	var _toto: Bool
 end

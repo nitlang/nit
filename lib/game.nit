@@ -27,13 +27,13 @@ import sdl
 class TickCounter
 	# Register a new tick
 	# Return true every time interval
-	meth update: Bool
+	fun update: Bool
 	do
 		return update_with(sdl_get_ticks)
 	end
 
 	# Like `update' but with an explicit time instead of `sdl_get_ticks`
-	meth update_with(time: Int): Bool
+	fun update_with(time: Int): Bool
 	do
 		var f = _ticks + 1
 		var dt = time - _time
@@ -54,21 +54,21 @@ class TickCounter
 	end
 
 	# The number of ticks in the last time interval
-	readable attr _count: Int 
+	readable var _count: Int 
 	
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		return _count.to_s
 	end
 
 	# A ticks counter
-	attr _ticks: Int
+	var _ticks: Int
 
 	# Last update time
-	attr _time: Int
+	var _time: Int
 
 	# The time interval
-	readable writable attr _time_interval: Int
+	readable writable var _time_interval: Int
 
 	# Create a new counter (time interval is 1000)
 	init
@@ -84,14 +84,14 @@ class TickCounter
 end
 
 class Rectangle
-	meth left: Int is abstract
-	meth right: Int is abstract
-	meth top: Int is abstract
-	meth bottom: Int is abstract
-	meth width: Int is abstract
-	meth height: Int is abstract
+	fun left: Int is abstract
+	fun right: Int is abstract
+	fun top: Int is abstract
+	fun bottom: Int is abstract
+	fun width: Int is abstract
+	fun height: Int is abstract
 	
-	meth contain_pixel(x: Int, y: Int): Bool
+	fun contain_pixel(x: Int, y: Int): Bool
 	# Is `self' contains the point (`x',`y') ?
 	do
 		return x >= left and
@@ -100,7 +100,7 @@ class Rectangle
 			y < bottom
 	end
 
-	meth collide(o: Rectangle): Bool
+	fun collide(o: Rectangle): Bool
 	do
 		var s_l = left
 		var s_r = right
@@ -127,29 +127,29 @@ class Sprite
 special Rectangle
 
 	# Absolute X coordinate of the main pixel in the screen
-	readable writable attr _x: Int
+	readable writable var _x: Int
 
 	# Absolute Y coordinate of the main pixel in the screen
-	readable writable attr _y: Int
+	readable writable var _y: Int
 
 	# Set two coordinates in one instruction
-	meth set_xy(x: Int, y: Int)
+	fun set_xy(x: Int, y: Int)
 	do
 		self.x = x
 		self.y = y
 	end
 
 	# The current image of the object
-	readable attr _image: SDL_Surface
+	readable var _image: SDL_Surface
 
 	# Relative X cordinate of the main pixel in the image
-	readable attr _x_image: Int
+	readable var _x_image: Int
 
 	# Relative Y cordinate of the main pixel in the image
-	readable attr _y_image: Int
+	readable var _y_image: Int
 	
 	# Set image and relative coordinates in one instruction
-	meth set_image(i: SDL_Surface, x: Int, y: Int)
+	fun set_image(i: SDL_Surface, x: Int, y: Int)
 	do
 		_image = i
 		_x_image = x
@@ -157,45 +157,45 @@ special Rectangle
 	end
 	
 	# Set image centered on the main pixel (adjust x_image and y_image)
-	meth set_centered_image(i: SDL_Surface)
+	fun set_centered_image(i: SDL_Surface)
 	do
 		_image = i
 		_x_image = i.width / 2
 		_y_image = i.height / 2
 	end
 
-	redef meth left: Int
+	redef fun left: Int
 	do
 		return _x - _x_image
 	end
 	
-	redef meth top: Int
+	redef fun top: Int
 	do
 		return _y - _y_image
 	end
 
-	redef meth right: Int
+	redef fun right: Int
 	do
 		return _x - _x_image + _image.width
 	end
 
-	redef meth bottom: Int
+	redef fun bottom: Int
 	do
 		return _y - _y_image + _image.height
 	end
 
-	redef meth width: Int
+	redef fun width: Int
 	do
 		return _image.width
 	end
 
-	redef meth height: Int
+	redef fun height: Int
 	do
 		return _image.height
 	end
 	
 	# Draw the image on the surface
-	meth blit_on(s: SDL_Surface)
+	fun blit_on(s: SDL_Surface)
 	do
 		_image.blit_on_xy(s, _x - _x_image, _y - _y_image)
 	end

@@ -17,7 +17,7 @@
 # The fibbonacci program
 
 redef class Int
-	meth fib: Int
+	fun fib: Int
 	# Unefficient recursive implementation
 	do
 		if self <= 0 then

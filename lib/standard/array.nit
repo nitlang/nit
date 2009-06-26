@@ -21,11 +21,11 @@ import abstract_collection
 class AbstractArrayRead[E]
 special IndexedCollectionRead[E]
 	# The current length
-	redef readable attr _length: Int = 0
+	redef readable var _length: Int = 0
 
-	redef meth is_empty do return _length == 0
+	redef fun is_empty do return _length == 0
 
-	redef meth has(item)
+	redef fun has(item)
 	do
 		var i = 0
 		var l = length
@@ -36,7 +36,7 @@ special IndexedCollectionRead[E]
 		return false
 	end
 
-	redef meth has_only(item)
+	redef fun has_only(item)
 	do
 		var i = 0
 		var l = length
@@ -47,9 +47,9 @@ special IndexedCollectionRead[E]
 		return true
 	end
 
-	redef meth has_key(index) do return index >= 0 and index < length
+	redef fun has_key(index) do return index >= 0 and index < length
 
-	redef meth count(item)
+	redef fun count(item)
 	do
 		var res = 0
 		var i = 0
@@ -61,11 +61,11 @@ special IndexedCollectionRead[E]
 		return res
 	end
 
-	redef meth index_of(item) do return index_of_from(item, 0)
+	redef fun index_of(item) do return index_of_from(item, 0)
 
-	meth last_index_of(item: E): Int do return last_index_of_from(item, length-1)
+	fun last_index_of(item: E): Int do return last_index_of_from(item, length-1)
 
-	meth index_of_from(item: E, pos: Int): Int
+	fun index_of_from(item: E, pos: Int): Int
 	do
 		var i = pos
 		var len = length
@@ -78,7 +78,7 @@ special IndexedCollectionRead[E]
 		return -1
 	end
 
-	meth last_index_of_from(item: E, pos: Int): Int
+	fun last_index_of_from(item: E, pos: Int): Int
 	do
 		var i = pos
 		while i >= 0 do
@@ -91,7 +91,7 @@ special IndexedCollectionRead[E]
 		return -1
 	end
 
-	meth reversed: Array[E]
+	fun reversed: Array[E]
 	do
 		var cmp = _length
 		var result = new Array[E].with_capacity(cmp)
@@ -102,7 +102,7 @@ special IndexedCollectionRead[E]
 		return result
 	end
 
-	protected meth copy_to(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
+	protected fun copy_to(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
 	do
 		# TODO native one
 		var i = len
@@ -112,7 +112,7 @@ special IndexedCollectionRead[E]
 		end
 	end
 
-	redef meth output
+	redef fun output
 	do
 		var i = 0
 		var l = length
@@ -123,10 +123,10 @@ special IndexedCollectionRead[E]
 		end
 	end
 
-	redef meth iterator: ArrayIterator[E] do return new ArrayIterator[E](self)
+	redef fun iterator: ArrayIterator[E] do return new ArrayIterator[E](self)
 
 	# Two arrays are equals if they have the same items in the same order.
-	redef meth ==(o)
+	redef fun ==(o)
 	do
 		if not o isa AbstractArray[E] or o is null then return false
 		var l = length
@@ -144,11 +144,11 @@ end
 class AbstractArray[E]
 special AbstractArrayRead[E]
 special IndexedCollection[E]
-	meth enlarge(cap: Int) is abstract
+	fun enlarge(cap: Int) is abstract
 
-	redef meth push(item) do add(item)
+	redef fun push(item) do add(item)
 
-	redef meth pop
+	redef fun pop
 	do
 		assert not_empty: not is_empty
 		var r = last
@@ -156,7 +156,7 @@ special IndexedCollection[E]
 		return r
 	end
 
-	redef meth shift
+	redef fun shift
 	do
 		assert not_empty: not is_empty
 		var r = first
@@ -170,7 +170,7 @@ special IndexedCollection[E]
 		return r
 	end
 
-	redef meth unshift(item)
+	redef fun unshift(item)
 	do
 		var i = length - 1
 		while i > 0 do
@@ -180,20 +180,20 @@ special IndexedCollection[E]
 		self[0] = item
 	end
 
-	meth insert(item: E, pos: Int)
+	fun insert(item: E, pos: Int)
 	do
 		enlarge(length + 1)
 		copy_to(pos, length-pos, self, pos + 1)
 		self[pos] = item
 	end
 
-	redef meth add(item) do self[length] = item
+	redef fun add(item) do self[length] = item
 
-	redef meth clear do _length = 0
+	redef fun clear do _length = 0
 
-	redef meth remove(item) do remove_at(index_of(item))
+	redef fun remove(item) do remove_at(index_of(item))
 
-	redef meth remove_all(item)
+	redef fun remove_all(item)
 	do
 		var i = index_of(item)
 		while i >= 0 do
@@ -202,7 +202,7 @@ special IndexedCollection[E]
 		end
 	end
 
-	redef meth remove_at(i)
+	redef fun remove_at(i)
 	do
 		var l = length
 		if i >= 0 and i < l then
@@ -228,13 +228,13 @@ end
 class Array[E]
 special AbstractArray[E]
 special ArrayCapable[E]
-	redef meth [](index)
+	redef fun [](index)
 	do
 		assert index: index >= 0 and index < _length
 		return _items[index]
 	end
 
-	redef meth []=(index, item)
+	redef fun []=(index, item)
 	do
 		assert index: index >= 0 and index < _length + 1
 		if _capacity <= index then
@@ -246,7 +246,7 @@ special ArrayCapable[E]
 		_items[index] = item
 	end
 
-	redef meth enlarge(cap)
+	redef fun enlarge(cap)
 	do
 		var c = _capacity
 		if cap <= c then return
@@ -305,22 +305,22 @@ special ArrayCapable[E]
 	end
 
 	# The internal storage.
-	attr _items: nullable NativeArray[E] = null
+	var _items: nullable NativeArray[E] = null
 
 	# The size of `_items'.
-	attr _capacity: Int = 0
+	var _capacity: Int = 0
 end
 
 # An `Iterator' on `AbstractArray'
 class ArrayIterator[E]
 special IndexedIterator[E]
-	redef meth item do return _array[_index]
+	redef fun item do return _array[_index]
 
-	# redef meth item=(e) do _array[_index] = e
+	# redef fun item=(e) do _array[_index] = e
 
-	redef meth is_ok do return _index < _array.length
+	redef fun is_ok do return _index < _array.length
 
-	redef meth next do _index += 1
+	redef fun next do _index += 1
 
 	init(a: AbstractArrayRead[E])
 	do
@@ -328,8 +328,8 @@ special IndexedIterator[E]
 		_index = 0
 	end
 
-	redef readable attr _index: Int = 0
-	attr _array: AbstractArrayRead[E]
+	redef readable var _index: Int = 0
+	var _array: AbstractArrayRead[E]
 end
 
 # Others collections ##########################################################
@@ -338,38 +338,38 @@ end
 class ArraySet[E]
 special Set[E]
 	# The stored elements.
-	attr _array: Array[E]
+	var _array: Array[E]
 
-	redef meth has(e) do return _array.has(e)
+	redef fun has(e) do return _array.has(e)
 
-	redef meth add(e) do if not _array.has(e) then _array.add(e)
+	redef fun add(e) do if not _array.has(e) then _array.add(e)
 
-	redef meth is_empty do return _array.is_empty
+	redef fun is_empty do return _array.is_empty
 
-	redef meth length do return _array.length
+	redef fun length do return _array.length
 
-	redef meth first
+	redef fun first
 	do
 		assert _array.length > 0
 		return _array.first
 	end
 
-	redef meth remove(item)
+	redef fun remove(item)
 	do
 		var i = _array.index_of(item)
 		if i >= 0 then remove_at(i)
 	end
 
-	redef meth remove_all(item) do remove(item)
+	redef fun remove_all(item) do remove(item)
 
-	redef meth clear do _array.clear
+	redef fun clear do _array.clear
 
-	redef meth iterator do return new ArraySetIterator[E](_array.iterator)
+	redef fun iterator do return new ArraySetIterator[E](_array.iterator)
 
 	# Assume the capacitydd is at least `cap'.
-	meth enlarge(cap: Int) do _array.enlarge(cap)
+	fun enlarge(cap: Int) do _array.enlarge(cap)
 
-	private meth remove_at(i: Int)
+	private fun remove_at(i: Int)
 	do
 		_array[i] = _array.last
 		_array.pop
@@ -386,15 +386,15 @@ end
 class ArraySetIterator[E]
 special Iterator[E]
 
-	redef meth is_ok do return _iter.is_ok
+	redef fun is_ok do return _iter.is_ok
 
-	redef meth next do _iter.next
+	redef fun next do _iter.next
 
-	redef meth item: E do return _iter.item
+	redef fun item: E do return _iter.item
 
 	init(iter: ArrayIterator[E]) do _iter = iter
 
-	attr _iter: ArrayIterator[E]
+	var _iter: ArrayIterator[E]
 end
 
 
@@ -403,7 +403,7 @@ class ArrayMap[K, E]
 special CoupleMap[K, E]
 
 	# O(n)
-	redef meth [](key)
+	redef fun [](key)
 	do
 		var i = index(key)
 		if i >= 0 then
@@ -414,7 +414,7 @@ special CoupleMap[K, E]
 	end
 
 	# O(n)
-	redef meth []=(key, item)
+	redef fun []=(key, item)
 	do
 		var i = index(key)
 		if i >= 0 then
@@ -425,40 +425,40 @@ special CoupleMap[K, E]
 	end
 
 	# O(n)
-	redef meth has_key(key) do return index(key) >= 0
+	redef fun has_key(key) do return index(key) >= 0
 
 	# O(n)
-	redef meth has(item)
+	redef fun has(item)
 	do
 		for i in _items do if i.second == item then return true
 		return false
 	end
 
 	# O(n)
-	redef meth has_only(item)
+	redef fun has_only(item)
 	do
 		for i in _items do if i.second != item then return false
 		return true
 	end
 
 	# O(1)
-	redef meth length do return _items.length
+	redef fun length do return _items.length
 
-	redef meth first do return _items.first.first
+	redef fun first do return _items.first.first
 
 	# O(n)
-	redef meth count(item)
+	redef fun count(item)
 	do
 		var nb = 0
 		for i in _items do if i.second == item then nb += 1
 		return nb
 	end
 
-	redef meth iterator: CoupleMapIterator[K, E] do return new CoupleMapIterator[K, E](_items.iterator)
+	redef fun iterator: CoupleMapIterator[K, E] do return new CoupleMapIterator[K, E](_items.iterator)
 
-	redef meth is_empty do return _items.is_empty
+	redef fun is_empty do return _items.is_empty
 
-	redef meth remove(item)
+	redef fun remove(item)
 	do
 		var i = _items.length - 1
 		while i >= 0 do
@@ -470,7 +470,7 @@ special CoupleMap[K, E]
 		end
 	end
 
-	redef meth remove_all(item: E)
+	redef fun remove_all(item: E)
 	do
 		var i = _items.length - 1
 		while i >= 0 do
@@ -481,18 +481,18 @@ special CoupleMap[K, E]
 		end
 	end
 
-	redef meth remove_at(key)
+	redef fun remove_at(key)
 	do
 		var i = index(key)
 		if i >= 0 then remove_at_index(i)
 	end
 
-	redef meth clear do _items.clear
+	redef fun clear do _items.clear
 
 	# Assume the capacity to be at least `cap'.
-	meth enlarge(cap: Int) do _items.enlarge(cap)
+	fun enlarge(cap: Int) do _items.enlarge(cap)
 
-	redef meth couple_at(key)
+	redef fun couple_at(key)
 	do
 		var i = index(key)
 		if i >= 0 then
@@ -503,21 +503,21 @@ special CoupleMap[K, E]
 	end
 
 	# Internal storage.
-	attr _items: Array[Couple[K,E]]
+	var _items: Array[Couple[K,E]]
 
 	# fast remove the ith element of the array
-	private meth remove_at_index(i: Int)
+	private fun remove_at_index(i: Int)
 	do
 		_items[i] = _items.last
 		_items.pop
 	end
 
 	# The last positive result given by a index(1) call
-	attr _last_index: Int = 0
+	var _last_index: Int = 0
 
 	# Where is the `key' in `_item'?
 	# return -1 if not found
-	private meth index(key: K): Int
+	private fun index(key: K): Int
 	do
 		var l = _last_index
 		if l < _items.length and _items[l].first == key then return l
@@ -544,7 +544,7 @@ end
 
 redef class Iterator[E]
 	# Interate on `self' and build an array
-	meth to_a: Array[E]
+	fun to_a: Array[E]
 	do
 		var res = new Array[E]
 		while is_ok do
@@ -557,7 +557,7 @@ end
 
 redef class Collection[E]
 	# Build a new array from a collection
-	meth to_a: Array[E]
+	fun to_a: Array[E]
 	do
 		return iterator.to_a
 	end
@@ -568,14 +568,14 @@ end
 # Subclasses of this class can create native arrays
 interface ArrayCapable[E]
 	# Get a new array of `size' elements.
-	protected meth calloc_array(size: Int): NativeArray[E] is intern
+	protected fun calloc_array(size: Int): NativeArray[E] is intern
 end
 
 # Native C array (void ...).
 universal NativeArray[E]
-	meth [](index: Int): E is intern
-	meth []=(index: Int, item: E) is intern
-	meth copy_to(dest: NativeArray[E], length: Int) is intern
-	#meth =(o: NativeArray[E]): Bool is intern
-	#meth !=(o: NativeArray[E]): Bool is intern
+	fun [](index: Int): E is intern
+	fun []=(index: Int, item: E) is intern
+	fun copy_to(dest: NativeArray[E], length: Int) is intern
+	#fun =(o: NativeArray[E]): Bool is intern
+	#fun !=(o: NativeArray[E]): Bool is intern
 end

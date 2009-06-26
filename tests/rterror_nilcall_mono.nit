@@ -17,12 +17,12 @@
 import kernel
 
 class Foo
-	meth bar
+	fun bar
 	do
 		baz.output
 	end
 
-	meth baz: Int
+	fun baz: Int
 	do
 		return 5
 	end

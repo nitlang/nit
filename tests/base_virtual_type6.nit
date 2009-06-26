@@ -20,9 +20,9 @@ class G[E]
 	type F: E
 	type F2: F
 
-	readable writable attr _e: E
-	readable writable attr _f: F
-	readable writable attr _f2: F2
+	readable writable var _e: E
+	readable writable var _f: F
+	readable writable var _f2: F2
 
 	init(e: E, f: F, f2: F2)
 	do

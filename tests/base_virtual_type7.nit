@@ -19,7 +19,7 @@ import kernel
 class A
 	type E: F
 	type F: E
-	readable writable attr _e: nullable E = null
+	readable writable var _e: nullable E = null
 	init do end
 end
 

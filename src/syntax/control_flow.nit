@@ -24,7 +24,7 @@ import syntax_base
 abstract class VariableContext
 	# Look for the variable from its name
 	# Return null if nothing found
-	meth [](s: Symbol): nullable Variable
+	fun [](s: Symbol): nullable Variable
 	do
 		if _dico.has_key(s) then
 			return _dico[s]
@@ -34,18 +34,18 @@ abstract class VariableContext
 	end
 
 	# Register a new variable with its name
-	meth add(v: Variable)
+	fun add(v: Variable)
 	do
 		_dico[v.name] = v
 		_all_variables.add(v)
 	end
 
-	meth mark_is_set(v: Variable)
+	fun mark_is_set(v: Variable)
 	do
 		_set_variables.add(v)
 	end
 
-	meth check_is_set(n: PNode, v: Variable)
+	fun check_is_set(n: PNode, v: Variable)
 	do
 		if v.must_be_set and not is_set(v) then
 			_visitor.error(n, "Error: variable '{v}' is possibly unset.")
@@ -64,7 +64,7 @@ abstract class VariableContext
 
 	# The effective static type of a given variable
 	# May be different from the declaration static type
-	meth stype(v: Variable): nullable MMType
+	fun stype(v: Variable): nullable MMType
 	do
 		if _stypes.has_key(v) then
 			return _stypes[v]
@@ -75,28 +75,28 @@ abstract class VariableContext
 
 	# Set effective static type of a given variable
 	# May be different from the declaration static type
-	meth stype=(v: Variable, t: nullable MMType)
+	fun stype=(v: Variable, t: nullable MMType)
 	do
 		_stypes[v] = t
 	end
 
 	# Variables by name (in the current context only)
-	attr _dico: Map[Symbol, Variable]
+	var _dico: Map[Symbol, Variable]
 
 	# All variables in all contextes
-	attr _all_variables: Set[Variable]
+	var _all_variables: Set[Variable]
 
 	# Updated static type of variables
-	attr _stypes: Map[Variable, nullable MMType] = new HashMap[Variable, nullable MMType]
+	var _stypes: Map[Variable, nullable MMType] = new HashMap[Variable, nullable MMType]
 
 	# Build a new VariableContext
-	meth sub(node: PNode): SubVariableContext
+	fun sub(node: PNode): SubVariableContext
 	do
 		return new SubVariableContext.with_prev(self, node)
 	end
 
 	# Build a nested VariableContext with new variable information
-	meth sub_with(node: PNode, v: Variable, t: MMType): SubVariableContext
+	fun sub_with(node: PNode, v: Variable, t: MMType): SubVariableContext
 	do
 		var ctx = sub(node)
 		ctx.stype(v) = t
@@ -104,10 +104,10 @@ abstract class VariableContext
 	end
 
 	# The visitor of the context (used to display error)
-	attr _visitor: AbsSyntaxVisitor
+	var _visitor: AbsSyntaxVisitor
 
 	# The syntax node that introduced the context
-	readable attr _node: PNode
+	readable var _node: PNode
 
 	init(visitor: AbsSyntaxVisitor, node: PNode)
 	do
@@ -117,23 +117,23 @@ abstract class VariableContext
 	end
 
 	# Is a control flow break met? (return, break, continue)
-	readable writable attr _unreash: Bool = false
+	readable writable var _unreash: Bool = false
 
 	# Is a control flow already broken?
 	# Used to avoid repeating the same error message
-	readable writable attr _already_unreash: Bool = false
+	readable writable var _already_unreash: Bool = false
 
 	# Set of variable that are set (assigned)
-	readable attr _set_variables: HashSet[Variable] = new HashSet[Variable]
+	readable var _set_variables: HashSet[Variable] = new HashSet[Variable]
 
 	# Is a variable set?
-	meth is_set(v: Variable): Bool
+	fun is_set(v: Variable): Bool
 	do
 		return _set_variables.has(v)
 	end
 
 	# Merge back one flow context information
-	meth merge(ctx: VariableContext)
+	fun merge(ctx: VariableContext)
 	do
 		if ctx.unreash then
 			unreash = true
@@ -151,7 +151,7 @@ abstract class VariableContext
 	end
 
 	# Merge back two alternative flow context informations
-	meth merge2(ctx1, ctx2, basectx: VariableContext)
+	fun merge2(ctx1, ctx2, basectx: VariableContext)
 	do
 		if ctx1.unreash then
 			merge(ctx2)
@@ -180,7 +180,7 @@ abstract class VariableContext
 		end
 	end
 
-	redef meth to_s
+	redef fun to_s
 	do
 		var s = new Buffer
 		s.append(node.locate)
@@ -204,9 +204,9 @@ end
 
 class SubVariableContext
 special VariableContext
-	readable attr _prev: VariableContext
+	readable var _prev: VariableContext
 
-	redef meth [](s)
+	redef fun [](s)
 	do
 		if _dico.has_key(s) then
 			return _dico[s]
@@ -215,7 +215,7 @@ special VariableContext
 		end
 	end
 
-	redef meth stype(v)
+	redef fun stype(v)
 	do
 		if _stypes.has_key(v) then
 			return _stypes[v]
@@ -231,7 +231,7 @@ special VariableContext
 		_all_variables = p._all_variables
 	end
 
-	redef meth is_set(v)
+	redef fun is_set(v)
 	do
 		return _set_variables.has(v) or _prev.is_set(v)
 	end
@@ -239,9 +239,9 @@ end
 
 redef class Variable
 	# Is the variable must be set before being used ?
-	meth must_be_set: Bool do return false
+	fun must_be_set: Bool do return false
 end
 
 redef class VarVariable
-	redef meth must_be_set do return true
+	redef fun must_be_set do return true
 end

@@ -15,8 +15,8 @@
 # limitations under the License.
 
 class A
-	attr _toto: Int
-	meth m
+	var _toto: Int
+	fun m
 	do
 		_toto = 't'
 	end

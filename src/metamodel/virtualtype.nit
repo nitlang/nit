@@ -22,14 +22,14 @@ import type_formal
 
 redef class MMGlobalProperty
 	# Is self a virtual type
-	meth is_virtual_type: Bool do return intro isa MMTypeProperty
+	fun is_virtual_type: Bool do return intro isa MMTypeProperty
 end
 
 # Virtual type properties
 class MMTypeProperty
 special MMLocalProperty
 	# The virtual static type associated
-	meth stype_for(recv: MMType): nullable MMVirtualType
+	fun stype_for(recv: MMType): nullable MMVirtualType
 	do
 		var prop = recv.local_class[global]
 		assert prop isa MMTypeProperty
@@ -37,9 +37,9 @@ special MMLocalProperty
 	end
 
 	# Cached results of stype
-	attr _stypes_cache: HashMap[MMType, MMVirtualType] = new HashMap[MMType, MMVirtualType]
+	var _stypes_cache: HashMap[MMType, MMVirtualType] = new HashMap[MMType, MMVirtualType]
 
-	private meth real_stype_for(recv: MMType): nullable MMVirtualType
+	private fun real_stype_for(recv: MMType): nullable MMVirtualType
 	do
 		# If the signature is not build: Circular definition
 		if signature == null then return null
@@ -56,10 +56,10 @@ end
 class MMVirtualType
 special MMTypeFormal
 	# The property associed
-	readable attr _property: MMTypeProperty
+	readable var _property: MMTypeProperty
 
 	# The receiver type
-	readable attr _recv: MMType
+	readable var _recv: MMType
 
 	protected init(p: MMTypeProperty, recv: MMType)
 	do
@@ -68,27 +68,27 @@ special MMTypeFormal
 		_recv = recv
 	end
 
-	redef meth module do return _recv.module
+	redef fun module do return _recv.module
 
-	redef meth for_module(mod)
+	redef fun for_module(mod)
 	do
 		if mod == module then return self
 		return adapt_to(recv.for_module(mod))
 	end
 
-	redef meth not_for_self
+	redef fun not_for_self
 	do
 		return bound.not_for_self
 	end
 
-	redef meth adapt_to(recv)
+	redef fun adapt_to(recv)
 	do
 		return property.stype_for(recv).as(not null)
 	end
 end
 
 redef class MMLocalClass
-	meth virtual_type(s: Symbol): MMGlobalProperty
+	fun virtual_type(s: Symbol): MMGlobalProperty
 	do
 		var prop = get_property_by_name(s)
 		if prop.is_virtual_type then
@@ -98,7 +98,7 @@ redef class MMLocalClass
 	end
 
 	# Select a virtual type property by its name
-	meth select_virtual_type(name: Symbol): MMTypeProperty
+	fun select_virtual_type(name: Symbol): MMTypeProperty
 	do
 		var gp = virtual_type(name)
 		var res = self[gp]

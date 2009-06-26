@@ -24,37 +24,37 @@ import end # Mark this module is a top level one. (must be only one)
 # Each class implicitely specialize Object.
 interface Object
 	# The unique object identifier in the class
-	meth object_id: Int is intern
+	fun object_id: Int is intern
 
 	# Return true is `self' and `other' have the same dynamic type
-	meth is_same_type(other: Object): Bool is intern
+	fun is_same_type(other: Object): Bool is intern
 
 	# Have `self' and `other' the same value?
 	##
 	# Implicitely, the default implementation, is ==
-	meth ==(other: nullable Object): Bool do return self is other
+	fun ==(other: nullable Object): Bool do return self is other
 
 	# Have `self' and `other' different values?
 	##
 	# != is equivament with "not =".
-	meth !=(other: nullable Object): Bool do return not (self == other)
+	fun !=(other: nullable Object): Bool do return not (self == other)
 
 	# Display self on stdout (debug only).
-	meth output
+	fun output
 	do
 		'<'.output
 		object_id.output
 		'>'.output
 	end
 
-	protected meth exit(exit_value: Int) is intern # Quit the program.
-	protected meth sys: Sys is intern # The global sys object
+	protected fun exit(exit_value: Int) is intern # Quit the program.
+	protected fun sys: Sys is intern # The global sys object
 end
 
 # The main class of the program.
 class Sys
 	# Instructions outside classes implicetely redefine this method.
-	meth main do end
+	fun main do end
 end
 
 ###############################################################################
@@ -67,19 +67,19 @@ interface Comparable
 	type OTHER: Comparable
 
 	# Is `self' lesser than `other'
-	meth <(other: OTHER): Bool is abstract 
+	fun <(other: OTHER): Bool is abstract 
 
 	# not `other' < `self'
-	meth <=(other: OTHER): Bool do return not other < self
+	fun <=(other: OTHER): Bool do return not other < self
 
 	# not `self' < `other' 
-	meth >=(other: OTHER): Bool do return not self < other
+	fun >=(other: OTHER): Bool do return not self < other
 
 	# `other' < `self'
-	meth >(other: OTHER): Bool do return other < self
+	fun >(other: OTHER): Bool do return other < self
 
 	# -1 if <, +1 if > and 0 otherwise
-	meth <=>(other: OTHER): Int
+	fun <=>(other: OTHER): Int
 	do
 		if self < other then
 			return -1
@@ -91,13 +91,13 @@ interface Comparable
 	end
 
 	# c <= self <= d
-	meth is_between(c: OTHER, d: OTHER): Bool
+	fun is_between(c: OTHER, d: OTHER): Bool
 	do
 		return c <= self and self <= d
 	end
 
 	# The maximum between `self' and `other' (prefers `self' if equals).
-	meth max(other: OTHER): OTHER
+	fun max(other: OTHER): OTHER
 	do
 		if self < other then
 			return other
@@ -107,7 +107,7 @@ interface Comparable
 	end
 
 	# The minimum between `self' and `c' (prefer `self' if equals)
-	meth min(c: OTHER): OTHER
+	fun min(c: OTHER): OTHER
 	do
 		if c < self then
 			return c
@@ -124,21 +124,21 @@ special Comparable
 	redef type OTHER: Discrete
 
 	# The next element.
-	meth succ: OTHER do return self + 1
+	fun succ: OTHER do return self + 1
 
 	# The previous element.
-	meth prec: OTHER do return self - 1
+	fun prec: OTHER do return self - 1
 
 	# The `i' th successor element.
-	meth +(i: Int): OTHER is abstract
+	fun +(i: Int): OTHER is abstract
 
 	# The `i' th previous element.
-	meth -(i: Int): OTHER is abstract
+	fun -(i: Int): OTHER is abstract
 
 	# The distance between self and d.
 	# 10.distance(15)	# --> 5
 	# 'Z'.distance('A')	# --> 25
-	meth distance(d: OTHER): Int
+	fun distance(d: OTHER): Int
 	do
 		var cursor: OTHER
 		var stop: OTHER
@@ -171,30 +171,30 @@ end
 #	 `and', `or', `not'.
 # Booleans are mainly used by conditional statement and loops.
 universal Bool
-	redef meth object_id is intern
-	redef meth ==(b) is intern
-	redef meth !=(b) is intern
-	redef meth output is intern
+	redef fun object_id is intern
+	redef fun ==(b) is intern
+	redef fun !=(b) is intern
+	redef fun output is intern
 end
 
 # Native floating point numbers.
 # Corresponds to C float.
 universal Float
-	redef meth object_id is intern
-	redef meth output is intern
+	redef fun object_id is intern
+	redef fun output is intern
 
-	meth <=(i: Float): Bool is intern
-	meth <(i: Float): Bool is intern
-	meth >=(i: Float): Bool is intern
-	meth >(i: Float): Bool is intern
-	meth +(i: Float): Float is intern
-	meth -: Float is intern
-	meth -(i: Float): Float is intern
-	meth *(i: Float): Float is intern
-	meth /(i: Float): Float is intern
+	fun <=(i: Float): Bool is intern
+	fun <(i: Float): Bool is intern
+	fun >=(i: Float): Bool is intern
+	fun >(i: Float): Bool is intern
+	fun +(i: Float): Float is intern
+	fun -: Float is intern
+	fun -(i: Float): Float is intern
+	fun *(i: Float): Float is intern
+	fun /(i: Float): Float is intern
 	
 	# The integer part of `self'.
-	meth to_i: Int is intern
+	fun to_i: Int is intern
 end
 
 # Native integer numbers.
@@ -203,30 +203,30 @@ universal Int
 special Discrete
 	redef type OTHER: Int
 
-	redef meth object_id is intern
-	redef meth ==(i) is intern
-	redef meth !=(i) is intern
-	redef meth output is intern
+	redef fun object_id is intern
+	redef fun ==(i) is intern
+	redef fun !=(i) is intern
+	redef fun output is intern
 
-	redef meth <=(i) is intern
-	redef meth <(i) is intern
-	redef meth >=(i) is intern
-	redef meth >(i) is intern
-	redef meth +(i) is intern
-	meth -: Int is intern
-	redef meth -(i) is intern
-	meth *(i: Int): Int is intern
-	meth /(i: Int): Int is intern
-	meth %(i: Int): Int is intern   
-	meth lshift(i: Int): Int is intern
-	meth rshift(i: Int): Int is intern   
+	redef fun <=(i) is intern
+	redef fun <(i) is intern
+	redef fun >=(i) is intern
+	redef fun >(i) is intern
+	redef fun +(i) is intern
+	fun -: Int is intern
+	redef fun -(i) is intern
+	fun *(i: Int): Int is intern
+	fun /(i: Int): Int is intern
+	fun %(i: Int): Int is intern   
+	fun lshift(i: Int): Int is intern
+	fun rshift(i: Int): Int is intern   
 
 	# The float equivalent of `self'
-	meth to_f: Float is intern
+	fun to_f: Float is intern
 
-	redef meth succ is intern
-	redef meth prec is intern
-	redef meth distance(i)
+	redef fun succ is intern
+	redef fun prec is intern
+	redef fun distance(i)
 	do
 		var d = self - i
 		if d >= 0 then
@@ -236,7 +236,7 @@ special Discrete
 		end
 	end
 	
-	redef meth <=>(other)
+	redef fun <=>(other)
 	do
 		if self < other then
 			return -1
@@ -247,7 +247,7 @@ special Discrete
 		end
 	end
 
-	redef meth is_between(c, d)
+	redef fun is_between(c, d)
 	do
 		if self < c or d < self then 
 			return false
@@ -256,7 +256,7 @@ special Discrete
 		end
 	end
 
-	redef meth max(other)
+	redef fun max(other)
 	do
 		if self < other then
 			return other
@@ -265,7 +265,7 @@ special Discrete
 		end
 	end
 
-	redef meth min(c)
+	redef fun min(c)
 	do
 		if c < self then
 			return c
@@ -275,10 +275,10 @@ special Discrete
 	end
 
 	# The character whose ASCII value is `self'.
-	meth ascii: Char is intern
+	fun ascii: Char is intern
 
 	# Number of digits of an integer in base `b' plus one if negative)
-	meth digit_count(b: Int): Int
+	fun digit_count(b: Int): Int
 	do
 		var d: Int # number of digits
 		var n: Int # current number
@@ -303,7 +303,7 @@ special Discrete
 	# Return the corresponding digit character
 	# If 0 <= `self' <= 9, return the corresponding character.
 	# If 10 <= `self' <= 36, return the corresponding letter [a..z].
-	meth to_c: Char
+	fun to_c: Char
 	do
 		assert self >= 0 and self <= 36 # TODO plan for this
 		if self < 10 then
@@ -321,20 +321,20 @@ universal Char
 special Discrete
 	redef type OTHER: Char
 
-	redef meth object_id is intern
-	redef meth ==(o) is intern
-	redef meth !=(o) is intern
-	redef meth output is intern
+	redef fun object_id is intern
+	redef fun ==(o) is intern
+	redef fun !=(o) is intern
+	redef fun output is intern
 
-	redef meth <=(i) is intern
-	redef meth <(i) is intern
-	redef meth >=(i) is intern
-	redef meth >(i) is intern
+	redef fun <=(i) is intern
+	redef fun <(i) is intern
+	redef fun >=(i) is intern
+	redef fun >(i) is intern
 
-	redef meth succ is intern
-	redef meth prec is intern
+	redef fun succ is intern
+	redef fun prec is intern
 
-	redef meth distance(c)
+	redef fun distance(c)
 	do
 		var d = self.ascii - c.ascii
 		if d >= 0 then
@@ -345,7 +345,7 @@ special Discrete
 	end
 
 	# If `self' is a digit then return this digit.
-	meth to_i: Int
+	fun to_i: Int
 	do
 
 		if self == '-' then
@@ -358,13 +358,13 @@ special Discrete
 	end
 
 	# the ascii value of self
-	meth ascii: Int is intern
+	fun ascii: Int is intern
 
-	redef meth +(i) is intern
-	redef meth -(i) is intern
+	redef fun +(i) is intern
+	redef fun -(i) is intern
 
 	# Char to lower case
-	meth to_lower : Char
+	fun to_lower : Char
 	do
 		if self >= 'A' and self <= 'Z' then
 			return (ascii + ('a'.distance('A'))).ascii
@@ -374,7 +374,7 @@ special Discrete
 	end
 
 	# Char to upper case
-	meth to_upper : Char
+	fun to_upper : Char
 	do
 		if self >= 'a' and self <= 'z' then
 			return (ascii - ('a'.distance('A'))).ascii

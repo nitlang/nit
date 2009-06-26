@@ -16,12 +16,12 @@
 
 
 class Toto[E]
-   attr _item: E
-   meth set(e: E)
+   var _item: E
+   fun set(e: E)
       do _item = e end
-   meth get: E
+   fun get: E
       do return _item end
-   redef meth to_s: String
+   redef fun to_s: String
       do return _item.to_s end
 
    init do end
@@ -49,14 +49,14 @@ end
 
 
 
-meth test_toto
+fun test_toto
 do
 	var t = new Toto[Int]
 	t.set(5)
 	print(t)
 end
 
-meth test_array
+fun test_array
 do
 	var a = new Array[Int].with_capacity(3)
 	a.add(1)

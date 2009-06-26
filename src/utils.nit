@@ -19,7 +19,7 @@
 package utils
 
 # Mangle an array of symbol using only alphanums and underscores
-meth cmangle(symbols: Symbol...): String
+fun cmangle(symbols: Symbol...): String
 do
 	var table = once cmangle_table
 	var res = new Buffer
@@ -56,7 +56,7 @@ do
 end
 
 # Build the table that associates character to mangle to string
-private meth cmangle_table: HashMap[Char, String]
+private fun cmangle_table: HashMap[Char, String]
 do
 	var res = new HashMap[Char, String]
 	res['+'] = "plus"

@@ -19,23 +19,23 @@
 import kernel
 
 class Client
-	attr _credit: Int
+	var _credit: Int
 	
-	meth regarde(t: Tableau)
+	fun regarde(t: Tableau)
 	do
 		if t.joli and _credit >= t.etiquette.prix then
 			achete(t)
 		end
 	end
 	
-	meth achete(t: Tableau) is abstract
+	fun achete(t: Tableau) is abstract
 end
 
 class Tableau
-	meth joli: Bool is abstract
-	meth etiquette: Etiquette is abstract
+	fun joli: Bool is abstract
+	fun etiquette: Etiquette is abstract
 end
 
 class Etiquette
-	meth prix: Int is abstract
+	fun prix: Int is abstract
 end

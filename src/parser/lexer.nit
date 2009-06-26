@@ -5,20 +5,20 @@ package lexer
 import parser_nodes
 
 redef class Token
-    readable writable attr _text: String 
-    readable attr _filename: String 
-    readable attr _line: Int 
-    readable attr _pos: Int 
+    readable writable var _text: String 
+    readable var _filename: String 
+    readable var _line: Int 
+    readable var _pos: Int 
     
-    meth parser_index: Int is abstract
+    fun parser_index: Int is abstract
 
-    redef meth to_s: String do
+    redef fun to_s: String do
         return "'{_text}'"
     end
 end
 
 redef class TEol
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 0
     end
@@ -33,7 +33,7 @@ redef class TEol
 end
 
 redef class TComment
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 1
     end
@@ -48,7 +48,7 @@ redef class TComment
 end
 
 redef class TKwpackage
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 2
     end
@@ -63,7 +63,7 @@ redef class TKwpackage
 end
 
 redef class TKwimport
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 3
     end
@@ -78,7 +78,7 @@ redef class TKwimport
 end
 
 redef class TKwclass
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 4
     end
@@ -93,7 +93,7 @@ redef class TKwclass
 end
 
 redef class TKwabstract
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 5
     end
@@ -108,7 +108,7 @@ redef class TKwabstract
 end
 
 redef class TKwinterface
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 6
     end
@@ -123,7 +123,7 @@ redef class TKwinterface
 end
 
 redef class TKwuniversal
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 7
     end
@@ -138,7 +138,7 @@ redef class TKwuniversal
 end
 
 redef class TKwspecial
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 8
     end
@@ -153,7 +153,7 @@ redef class TKwspecial
 end
 
 redef class TKwend
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 9
     end
@@ -168,7 +168,7 @@ redef class TKwend
 end
 
 redef class TKwmeth
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 10
     end
@@ -183,7 +183,7 @@ redef class TKwmeth
 end
 
 redef class TKwtype
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 11
     end
@@ -198,7 +198,7 @@ redef class TKwtype
 end
 
 redef class TKwattr
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 12
     end
@@ -213,7 +213,7 @@ redef class TKwattr
 end
 
 redef class TKwinit
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 13
     end
@@ -228,7 +228,7 @@ redef class TKwinit
 end
 
 redef class TKwredef
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 14
     end
@@ -243,7 +243,7 @@ redef class TKwredef
 end
 
 redef class TKwis
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 15
     end
@@ -258,7 +258,7 @@ redef class TKwis
 end
 
 redef class TKwdo
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 16
     end
@@ -273,7 +273,7 @@ redef class TKwdo
 end
 
 redef class TKwreadable
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 17
     end
@@ -288,7 +288,7 @@ redef class TKwreadable
 end
 
 redef class TKwwritable
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 18
     end
@@ -303,7 +303,7 @@ redef class TKwwritable
 end
 
 redef class TKwvar
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 19
     end
@@ -318,7 +318,7 @@ redef class TKwvar
 end
 
 redef class TKwintern
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 20
     end
@@ -333,7 +333,7 @@ redef class TKwintern
 end
 
 redef class TKwextern
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 21
     end
@@ -348,7 +348,7 @@ redef class TKwextern
 end
 
 redef class TKwprotected
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 22
     end
@@ -363,7 +363,7 @@ redef class TKwprotected
 end
 
 redef class TKwprivate
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 23
     end
@@ -378,7 +378,7 @@ redef class TKwprivate
 end
 
 redef class TKwintrude
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 24
     end
@@ -393,7 +393,7 @@ redef class TKwintrude
 end
 
 redef class TKwif
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 25
     end
@@ -408,7 +408,7 @@ redef class TKwif
 end
 
 redef class TKwthen
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 26
     end
@@ -423,7 +423,7 @@ redef class TKwthen
 end
 
 redef class TKwelse
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 27
     end
@@ -438,7 +438,7 @@ redef class TKwelse
 end
 
 redef class TKwwhile
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 28
     end
@@ -453,7 +453,7 @@ redef class TKwwhile
 end
 
 redef class TKwfor
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 29
     end
@@ -468,7 +468,7 @@ redef class TKwfor
 end
 
 redef class TKwin
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 30
     end
@@ -483,7 +483,7 @@ redef class TKwin
 end
 
 redef class TKwand
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 31
     end
@@ -498,7 +498,7 @@ redef class TKwand
 end
 
 redef class TKwor
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 32
     end
@@ -513,7 +513,7 @@ redef class TKwor
 end
 
 redef class TKwnot
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 33
     end
@@ -528,7 +528,7 @@ redef class TKwnot
 end
 
 redef class TKwreturn
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 34
     end
@@ -543,7 +543,7 @@ redef class TKwreturn
 end
 
 redef class TKwcontinue
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 35
     end
@@ -558,7 +558,7 @@ redef class TKwcontinue
 end
 
 redef class TKwbreak
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 36
     end
@@ -573,7 +573,7 @@ redef class TKwbreak
 end
 
 redef class TKwabort
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 37
     end
@@ -588,7 +588,7 @@ redef class TKwabort
 end
 
 redef class TKwassert
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 38
     end
@@ -603,7 +603,7 @@ redef class TKwassert
 end
 
 redef class TKwnew
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 39
     end
@@ -618,7 +618,7 @@ redef class TKwnew
 end
 
 redef class TKwisa
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 40
     end
@@ -633,7 +633,7 @@ redef class TKwisa
 end
 
 redef class TKwonce
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 41
     end
@@ -648,7 +648,7 @@ redef class TKwonce
 end
 
 redef class TKwsuper
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 42
     end
@@ -663,7 +663,7 @@ redef class TKwsuper
 end
 
 redef class TKwself
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 43
     end
@@ -678,7 +678,7 @@ redef class TKwself
 end
 
 redef class TKwtrue
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 44
     end
@@ -693,7 +693,7 @@ redef class TKwtrue
 end
 
 redef class TKwfalse
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 45
     end
@@ -708,7 +708,7 @@ redef class TKwfalse
 end
 
 redef class TKwnull
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 46
     end
@@ -723,7 +723,7 @@ redef class TKwnull
 end
 
 redef class TKwas
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 47
     end
@@ -738,7 +738,7 @@ redef class TKwas
 end
 
 redef class TKwwith
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 48
     end
@@ -753,7 +753,7 @@ redef class TKwwith
 end
 
 redef class TKwnullable
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 49
     end
@@ -768,7 +768,7 @@ redef class TKwnullable
 end
 
 redef class TKwisset
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 50
     end
@@ -783,7 +783,7 @@ redef class TKwisset
 end
 
 redef class TOpar
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 51
     end
@@ -798,7 +798,7 @@ redef class TOpar
 end
 
 redef class TCpar
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 52
     end
@@ -813,7 +813,7 @@ redef class TCpar
 end
 
 redef class TObra
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 53
     end
@@ -828,7 +828,7 @@ redef class TObra
 end
 
 redef class TCbra
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 54
     end
@@ -843,7 +843,7 @@ redef class TCbra
 end
 
 redef class TComma
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 55
     end
@@ -858,7 +858,7 @@ redef class TComma
 end
 
 redef class TColumn
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 56
     end
@@ -873,7 +873,7 @@ redef class TColumn
 end
 
 redef class TQuad
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 57
     end
@@ -888,7 +888,7 @@ redef class TQuad
 end
 
 redef class TAssign
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 58
     end
@@ -903,7 +903,7 @@ redef class TAssign
 end
 
 redef class TPluseq
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 59
     end
@@ -918,7 +918,7 @@ redef class TPluseq
 end
 
 redef class TMinuseq
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 60
     end
@@ -933,7 +933,7 @@ redef class TMinuseq
 end
 
 redef class TDotdotdot
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 61
     end
@@ -948,7 +948,7 @@ redef class TDotdotdot
 end
 
 redef class TDotdot
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 62
     end
@@ -963,7 +963,7 @@ redef class TDotdot
 end
 
 redef class TDot
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 63
     end
@@ -978,7 +978,7 @@ redef class TDot
 end
 
 redef class TPlus
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 64
     end
@@ -993,7 +993,7 @@ redef class TPlus
 end
 
 redef class TMinus
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 65
     end
@@ -1008,7 +1008,7 @@ redef class TMinus
 end
 
 redef class TStar
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 66
     end
@@ -1023,7 +1023,7 @@ redef class TStar
 end
 
 redef class TSlash
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 67
     end
@@ -1038,7 +1038,7 @@ redef class TSlash
 end
 
 redef class TPercent
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 68
     end
@@ -1053,7 +1053,7 @@ redef class TPercent
 end
 
 redef class TEq
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 69
     end
@@ -1068,7 +1068,7 @@ redef class TEq
 end
 
 redef class TNe
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 70
     end
@@ -1083,7 +1083,7 @@ redef class TNe
 end
 
 redef class TLt
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 71
     end
@@ -1098,7 +1098,7 @@ redef class TLt
 end
 
 redef class TLe
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 72
     end
@@ -1113,7 +1113,7 @@ redef class TLe
 end
 
 redef class TGt
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 73
     end
@@ -1128,7 +1128,7 @@ redef class TGt
 end
 
 redef class TGe
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 74
     end
@@ -1143,7 +1143,7 @@ redef class TGe
 end
 
 redef class TStarship
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 75
     end
@@ -1158,7 +1158,7 @@ redef class TStarship
 end
 
 redef class TClassid
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 76
     end
@@ -1173,7 +1173,7 @@ redef class TClassid
 end
 
 redef class TId
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 77
     end
@@ -1188,7 +1188,7 @@ redef class TId
 end
 
 redef class TAttrid
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 78
     end
@@ -1203,7 +1203,7 @@ redef class TAttrid
 end
 
 redef class TNumber
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 79
     end
@@ -1218,7 +1218,7 @@ redef class TNumber
 end
 
 redef class TFloat
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 80
     end
@@ -1233,7 +1233,7 @@ redef class TFloat
 end
 
 redef class TChar
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 81
     end
@@ -1248,7 +1248,7 @@ redef class TChar
 end
 
 redef class TString
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 82
     end
@@ -1263,7 +1263,7 @@ redef class TString
 end
 
 redef class TStartString
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 83
     end
@@ -1278,7 +1278,7 @@ redef class TStartString
 end
 
 redef class TMidString
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 84
     end
@@ -1293,7 +1293,7 @@ redef class TMidString
 end
 
 redef class TEndString
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 85
     end
@@ -1309,7 +1309,7 @@ end
 
 
 redef class EOF 
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return 86
     end
@@ -1324,7 +1324,7 @@ redef class EOF
 end
 
 redef class PError
-    readable writable attr _message: String 
+    readable writable var _message: String 
     
     init init_error(fname: String, line: Int, pos: Int, message: String)
     do
@@ -1338,40 +1338,40 @@ end
 # It is better user with the Parser
 class Lexer
 	# Last peeked token
-	attr _token: nullable Token
+	var _token: nullable Token
 
 	# Lexer current state
-	attr _state: Int = 0
+	var _state: Int = 0
 
 	# Name of the stream (as given to tokens)
-	readable attr _filename: String 
+	readable var _filename: String 
 
 	# Input stream where character are read
-	attr _stream: IStream
+	var _stream: IStream
 
 	# Pushback buffer to store unread character
-	attr _stream_buf: Buffer
+	var _stream_buf: Buffer
 
 	# Number of character stored in the pushback buffer
-	attr _stream_pos: Int
+	var _stream_pos: Int
 
 	# Current line number in the input stream
-	attr _line: Int = 0
+	var _line: Int = 0
 
 	# Current column in the input stream
-	attr _pos: Int = 0
+	var _pos: Int = 0
 
 	# Was the last character a cariage-return?
-	attr _cr: Bool = false
+	var _cr: Bool = false
 
 	# If the end of stream?
-	attr _eof: Bool = false
+	var _eof: Bool = false
 
 	# Current working text read from the input stream
-	attr _text: Buffer
+	var _text: Buffer
 
 	# Constante state values
-	private meth state_initial: Int do return 0 end
+	private fun state_initial: Int do return 0 end
 
 	# Create a new lexer for a stream (and a name)
 	init(stream: IStream, fname: String)
@@ -1386,7 +1386,7 @@ class Lexer
 	end
 
 	# Give the next token (but do not consume it)
-	meth peek: Token
+	fun peek: Token
 	do
 		while _token == null do
 			_token = get_token
@@ -1395,7 +1395,7 @@ class Lexer
 	end
 
 	# Give and consume the next token
-	meth next: Token
+	fun next: Token
 	do
 		var result = _token
 		while result == null do
@@ -1406,7 +1406,7 @@ class Lexer
 	end
 
 	# Get a token, or null if it is discarded
-	private meth get_token: nullable Token
+	private fun get_token: nullable Token
 	do
 		var dfa_state = 0
 
@@ -2124,7 +2124,7 @@ class Lexer
 
 	# Read the next character.
 	# The character is read from the stream of from the pushback buffer.
-	private meth get_char: Int
+	private fun get_char: Int
 	do
 		if _eof then
 			return -1
@@ -2150,7 +2150,7 @@ class Lexer
 
 	# Unread some characters.
 	# Unread characters are stored in the pushback buffer.
-	private meth push_back(accept_length: Int)
+	private fun push_back(accept_length: Int)
 	do
 		var length = _text.length
 		var i = length - 1
@@ -2162,8 +2162,8 @@ class Lexer
 		end
 	end
 
-	attr _goto_table: Array[Array[Array[Array[Int]]]]
-	private meth build_goto_table
+	var _goto_table: Array[Array[Array[Array[Int]]]]
+	private fun build_goto_table
 	do
 		_goto_table = once [
 			[
@@ -3373,13 +3373,13 @@ class Lexer
 		]
 	end
     
-	private meth nil_array: Array[Array[Int]]
+	private fun nil_array: Array[Array[Int]]
 	do
 		return once new Array[Array[Int]]
 	end
 
-	attr _accept_table: Array[Array[Int]]
-	private meth build_accept_table do
+	var _accept_table: Array[Array[Int]]
+	private fun build_accept_table do
 		_accept_table = once [
             		[
 				-1 , 0 , 1 , 1 , 0 , -1 , -1 , -1 , 69 , -1 , 52 , 53 , 67 , 65 , 56 , 66 , 64 , 68 , 80 , 57 , 72 , 59 , 74 , 77 , 54 , 55 , -1 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , -1 , 1 , 71 , -1 , 83 , -1 , 84 , -1 , 2 , 2 , -1 , 82 , 60 , 61 , 63 , 81 , -1 , 58 , 73 , 70 , 75 , 77 , 77 , 77 , 77 , 79 , 78 , 78 , 78 , 78 , 78 , 78 , 48 , 78 , 78 , 78 , 78 , 17 , 78 , 78 , 78 , 78 , 78 , 78 , 26 , 78 , 31 , 16 , 78 , 78 , 78 , 78 , 78 , 33 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , -1 , 86 , -1 , 85 , -1 , 2 , 62 , 76 , 79 , 79 , 79 , 79 , 78 , 78 , 32 , 78 , 78 , 78 , 78 , 78 , 78 , 10 , 78 , 78 , 30 , 11 , 78 , 78 , 78 , 41 , 78 , 78 , 40 , 34 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 78 , 20 , 78 , 78 , 78 , -1 , 78 , 78 , 78 , 13 , 78 , 78 , 78 , 28 , 78 , 78 , 78 , 14 , 78 , 78 , 78 , 11 , 47 , 42 , 78 , 78 , 78 , 78 , 78 , 78 , 44 , 78 , 78 , 27 , 45 , 12 , 78 , 78 , 49 , 78 , 38 , 78 , 78 , 37 , 5 , 78 , 78 , 46 , 78 , 78 , 78 , 51 , 78 , 78 , 78 , 78 , 78 , 15 , 78 , 78 , 43 , 78 , 29 , 78 , 78 , 39 , 78 , 22 , 4 , 78 , 21 , 78 , 78 , 78 , 78 , 78 , 78 , 35 , 78 , 78 , 78 , 78 , 78 , 78 , 25 , 78 , 3 , 24 , 78 , 78 , 9 , 78 , 78 , 6 , 36 , 78 , 50 , 78 , 18 , 78 , 19 , 7 , 23 , 8  

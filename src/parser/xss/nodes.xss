@@ -35,19 +35,19 @@ $ end template
 $ template make_nodes()
 redef class PNode
 	# Parent of the node in the AST
-	readable writable attr _parent: nullable PNode
+	readable writable var _parent: nullable PNode
 
 	# Remove a child from the AST
-	meth remove_child(child: PNode)
+	fun remove_child(child: PNode)
 	do
 		replace_child(child, null)
 	end
 
 	# Replace a child with an other node in the AST
-	meth replace_child(old_child: PNode, new_child: nullable PNode) is abstract
+	fun replace_child(old_child: PNode, new_child: nullable PNode) is abstract
 
 	# Replace itself with an other node in the AST
-	meth replace_with(node: PNode)
+	fun replace_with(node: PNode)
 	do
 		if (_parent != null) then
 			_parent.replace_child(self, node)
@@ -56,46 +56,46 @@ redef class PNode
 
 	# Visit all nodes in order.
 	# Thus, call "v.visit(e)" for each node e
-	meth visit_all(v: Visitor) is abstract
+	fun visit_all(v: Visitor) is abstract
 
 	# Visit all nodes in reverse order.
 	# Thus, call "v.visit(e)" for each node e starting from the last child
-	meth visit_all_reverse(v: Visitor) is abstract
+	fun visit_all_reverse(v: Visitor) is abstract
 
 	# Give a human readable location of the node.
-	meth locate: String is abstract
+	fun locate: String is abstract
 
 	# Return only the line number of the node
-	meth line_number: Int is abstract
+	fun line_number: Int is abstract
 
 	# Debug method: output a message prefixed with the location.
-	meth printl(str: String)
+	fun printl(str: String)
 	do
 		print("{locate}: {str}\n")
 	end
 end
 
 redef class Token
-	redef meth visit_all(v: Visitor) do end
-	redef meth visit_all_reverse(v: Visitor) do end
-	redef meth replace_child(old_child: PNode, new_child: nullable PNode) do end
+	redef fun visit_all(v: Visitor) do end
+	redef fun visit_all_reverse(v: Visitor) do end
+	redef fun replace_child(old_child: PNode, new_child: nullable PNode) do end
 
-	redef meth locate: String
+	redef fun locate: String
 	do
 		return "{filename}:{line},{pos}"
 	end
 
-	redef meth line_number do return line
+	redef fun line_number do return line
 end
 
 redef class Prod
 	# The first token of the production node
-	readable writable attr _first_token: nullable Token
+	readable writable var _first_token: nullable Token
 
 	# The last token of the production node
-	readable writable attr _last_token: nullable Token
+	readable writable var _last_token: nullable Token
 
-	redef meth locate: String
+	redef fun locate: String
 	do
 		if first_token == null then
 			return "????"
@@ -111,7 +111,7 @@ redef class Prod
 		end
 	end
 
-	redef meth replace_with(n: PNode)
+	redef fun replace_with(n: PNode)
         do
                 super
                 assert n isa Prod
@@ -119,7 +119,7 @@ redef class Prod
                 n.last_token = last_token
         end
 
-	redef meth line_number
+	redef fun line_number
 	do
 		if first_token != null then
 			return first_token.line
@@ -134,7 +134,7 @@ class Visitor
         # Ask the visitor to visit a given node.
         # Usually automatically called by visit_all* methods.
         # Concrete visitors should redefine this method.
-        meth visit(e: nullable PNode) is abstract
+        fun visit(e: nullable PNode) is abstract
 end
 
 $ end template

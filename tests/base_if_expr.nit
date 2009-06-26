@@ -18,10 +18,10 @@ import kernel
 
 class A
 	init do end
-	redef meth output do 'A'.output
+	redef fun output do 'A'.output
 end
 
-meth max(a: Int, b: Int): Int do return if a > b then a else b
+fun max(a: Int, b: Int): Int do return if a > b then a else b
 
 var x = if true then 1 else 0
 x.output

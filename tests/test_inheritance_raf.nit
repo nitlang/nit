@@ -17,12 +17,12 @@
 import test_inheritance
 
 redef class A
-	redef meth h do print(5) end
-	redef meth i do print(5) end
+	redef fun h do print(5) end
+	redef fun i do print(5) end
 end
 
 redef class C
-	redef meth i do print(7) end
+	redef fun i do print(7) end
 end
 
 var a = new A

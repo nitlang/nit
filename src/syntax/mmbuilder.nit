@@ -24,7 +24,7 @@ import syntax_base
 # Class specialization hierarchy sorter
 private class CSHSorter
 special AbstractSorter[MMLocalClass]
-	redef meth compare(a, b)
+	redef fun compare(a, b)
 	do
 		return a.cshe.rank <=> b.cshe.rank
 	end
@@ -35,7 +35,7 @@ end
 redef class MMSrcModule
 	# Syntax analysis and MM construction for the module
 	# Require that supermodules are processed
-	meth do_mmbuilder(tc: ToolContext)
+	fun do_mmbuilder(tc: ToolContext)
 	do
 		# Import global classes
 		import_global_classes
@@ -123,18 +123,18 @@ end
 
 redef class MMLocalClass
 	# Accept a class visitor (on class nodes)
-	private meth accept_class_visitor(v: AbsSyntaxVisitor)
+	private fun accept_class_visitor(v: AbsSyntaxVisitor)
 	do
 	end
 
 	# Accept a class visitor (on class properties)
-	private meth accept_properties_visitor(v: AbsSyntaxVisitor)
+	private fun accept_properties_visitor(v: AbsSyntaxVisitor)
 	do
 	end
 end
 
 redef class MMSrcLocalClass
-	redef meth accept_class_visitor(v)
+	redef fun accept_class_visitor(v)
 	do
 		for n in nodes do
 			v.visit(n)
@@ -142,7 +142,7 @@ redef class MMSrcLocalClass
 	end
 
 	# Accept a class visitor (on class properties)
-	redef meth accept_properties_visitor(v)
+	redef fun accept_properties_visitor(v)
 	do
 		for n in nodes do
 			v.visit(n)
@@ -154,7 +154,7 @@ redef class MMSrcLocalClass
 	end
 
 	# Introduce or inherit default constructors
-	private meth process_default_constructors(v: PropertyBuilderVisitor)
+	private fun process_default_constructors(v: PropertyBuilderVisitor)
 	do
 		# Is there already a constructor ?
 		for gp in global_properties do
@@ -231,7 +231,7 @@ redef class MMSrcLocalClass
 
 	# Add a source property
 	# Register it to the class and attach it to global property
-	private meth add_src_local_property(v: PropertyBuilderVisitor, prop: MMLocalProperty)
+	private fun add_src_local_property(v: PropertyBuilderVisitor, prop: MMLocalProperty)
 	do
 		var pname = prop.name
 		# Check double definition in the same class
@@ -255,14 +255,14 @@ redef class MMSrcLocalClass
 end
 
 redef class MMLocalProperty
-	private meth accept_property_visitor(v: AbsSyntaxVisitor)
+	private fun accept_property_visitor(v: AbsSyntaxVisitor)
 	do
 	end
 end
 
 redef class MMImplicitInit
-	readable attr _super_init: nullable MMLocalProperty = null
-	redef meth accept_property_visitor(v)
+	readable var _super_init: nullable MMLocalProperty = null
+	redef fun accept_property_visitor(v)
 	do
 		var base: nullable MMLocalProperty = null
 		for p in super_inits do
@@ -298,8 +298,8 @@ end
 class MMSrcAncestor
 special MMAncestor
 	# The related AST node
-	readable attr _node: ASuperclass
-	redef readable attr _local_class: MMLocalClass
+	readable var _node: ASuperclass
+	redef readable var _local_class: MMLocalClass
 
 	init(n: ASuperclass, c: MMLocalClass)
 	do
@@ -316,12 +316,12 @@ end
 private class ClassBuilderVisitor
 special AbsSyntaxVisitor
 	# Current class arity
-	readable writable attr _local_class_arity: Int = 0
+	readable writable var _local_class_arity: Int = 0
 
 	# Current class formal parameters
-	readable writable attr _formals: nullable Map[Symbol, MMTypeFormalParameter]
+	readable writable var _formals: nullable Map[Symbol, MMTypeFormalParameter]
 
-	redef meth visit(n) do n.accept_class_builder(self)
+	redef fun visit(n) do n.accept_class_builder(self)
 	init(tc, m) do super
 end
 
@@ -329,7 +329,7 @@ end
 # * Build ancertors (with only class informations not the type one)
 private class ClassSpecializationBuilderVisitor
 special AbsSyntaxVisitor
-	redef meth visit(n) do n.accept_class_specialization_builder(self)
+	redef fun visit(n) do n.accept_class_specialization_builder(self)
 	init(tc, m) do super
 end
 
@@ -337,7 +337,7 @@ end
 # * Compute types in ancestors
 private class ClassAncestorBuilder
 special AbsSyntaxVisitor
-	redef meth visit(n) do n.accept_class_ancestor_builder(self)
+	redef fun visit(n) do n.accept_class_ancestor_builder(self)
 	init(tc, m) do super
 end
 
@@ -345,7 +345,7 @@ end
 # * Checks classes in regard to superclasses
 private class ClassVerifierVisitor
 special AbsSyntaxVisitor
-	redef meth visit(n) do n.accept_class_verifier(self)
+	redef fun visit(n) do n.accept_class_verifier(self)
 	init(tc, m) do super
 end
 
@@ -356,7 +356,7 @@ end
 # * Attach bound to formal types
 private class PropertyBuilderVisitor
 special AbsSyntaxVisitor
-	redef meth visit(n) do n.accept_property_builder(self)
+	redef fun visit(n) do n.accept_property_builder(self)
 	init(tc, m) do super
 end
 
@@ -366,9 +366,9 @@ private class PropertyVerifierVisitor
 special AbsSyntaxVisitor
 
 	# The signature currently build
-	readable writable attr _signature_builder: SignatureBuilder
+	readable writable var _signature_builder: SignatureBuilder
 
-	redef meth visit(n) do n.accept_property_verifier(self)
+	redef fun visit(n) do n.accept_property_verifier(self)
 
 	init(tc, m)
 	do
@@ -380,35 +380,35 @@ end
 # Information about a signature currently build
 private class SignatureBuilder
 	# Current visited parameter types
-	readable writable attr _params: Array[PParam] = new Array[PParam]
+	readable writable var _params: Array[PParam] = new Array[PParam]
 	
 	# Visited parameters without type information added
-	readable writable attr _untyped_params: Array[PParam] = new Array[PParam]
+	readable writable var _untyped_params: Array[PParam] = new Array[PParam]
 
 	# Position of the current star parameter
-	readable writable attr _vararg_rank: Int = -1
+	readable writable var _vararg_rank: Int = -1
 
 	# Current closure declarations
-	readable writable attr _closure_decls: Array[AClosureDecl] = new Array[AClosureDecl]
+	readable writable var _closure_decls: Array[AClosureDecl] = new Array[AClosureDecl]
 
 	# Current signature
-	readable writable attr _signature: nullable MMSignature = null 
+	readable writable var _signature: nullable MMSignature = null 
 end
 
 ###############################################################################
 
 redef class PNode
-	private meth accept_class_builder(v: ClassBuilderVisitor) do accept_abs_syntax_visitor(v)
-	private meth accept_class_specialization_builder(v: ClassSpecializationBuilderVisitor) do accept_abs_syntax_visitor(v)
-	private meth accept_class_ancestor_builder(v: ClassAncestorBuilder) do accept_abs_syntax_visitor(v)
-	private meth accept_class_verifier(v: ClassVerifierVisitor) do accept_abs_syntax_visitor(v)
-	private meth accept_property_builder(v: PropertyBuilderVisitor) do accept_abs_syntax_visitor(v)
-	private meth accept_property_verifier(v: PropertyVerifierVisitor) do accept_abs_syntax_visitor(v)
+	private fun accept_class_builder(v: ClassBuilderVisitor) do accept_abs_syntax_visitor(v)
+	private fun accept_class_specialization_builder(v: ClassSpecializationBuilderVisitor) do accept_abs_syntax_visitor(v)
+	private fun accept_class_ancestor_builder(v: ClassAncestorBuilder) do accept_abs_syntax_visitor(v)
+	private fun accept_class_verifier(v: ClassVerifierVisitor) do accept_abs_syntax_visitor(v)
+	private fun accept_property_builder(v: PropertyBuilderVisitor) do accept_abs_syntax_visitor(v)
+	private fun accept_property_verifier(v: PropertyVerifierVisitor) do accept_abs_syntax_visitor(v)
 end
 
 redef class AModule
 	# Import supermodules and compute visibility
-	meth import_super_modules(tc: ToolContext, mod: MMSrcModule)
+	fun import_super_modules(tc: ToolContext, mod: MMSrcModule)
 	do
 		# Import super-modules
 		var module_names_to_import = new Array[Symbol]
@@ -444,7 +444,7 @@ redef class AModule
 end
 
 redef class APackagedecl
-	redef meth accept_class_builder(v)
+	redef fun accept_class_builder(v)
 	do
 		if n_id.to_symbol != v.module.name then
 			v.error(n_id, "Error: Package name missmatch between {v.module.name} and {n_id.to_symbol}")
@@ -454,23 +454,23 @@ end
 
 redef class PImport
 	# Imported module name (or null)
-	meth module_name: nullable Symbol is abstract
+	fun module_name: nullable Symbol is abstract
 
 	# Visibility level (intrude/public/private)
-	meth visibility_level: Int is abstract
+	fun visibility_level: Int is abstract
 end
 redef class AImport
-	redef meth module_name
+	redef fun module_name
 	do
 		return n_id.to_symbol
 	end
-	redef meth visibility_level
+	redef fun visibility_level
 	do
 		return n_visibility.level
 	end
 end
 redef class ANoImport
-	redef meth module_name
+	redef fun module_name
 	do
 		return null
 	end
@@ -478,36 +478,36 @@ end
 
 redef class PVisibility
 	# Visibility level
-	meth level: Int is abstract
+	fun level: Int is abstract
 end
 redef class APublicVisibility
-	redef meth level do return 1
+	redef fun level do return 1
 end
 redef class AProtectedVisibility
-	redef meth level do return 2
+	redef fun level do return 2
 end
 redef class APrivateVisibility
-	redef meth level do return 3
+	redef fun level do return 3
 end
 redef class AIntrudeVisibility
-	redef meth level do return 0
+	redef fun level do return 0
 end
 
 
 redef class PClassdef
-	redef meth local_class: MMSrcLocalClass do return _local_class.as(not null)
-	attr _local_class: nullable MMSrcLocalClass
+	redef fun local_class: MMSrcLocalClass do return _local_class.as(not null)
+	var _local_class: nullable MMSrcLocalClass
 
 	# Name of the class
-	meth name: Symbol is abstract
+	fun name: Symbol is abstract
 
 	# Number of formal parameters
-	meth arity: Int do return 0
+	fun arity: Int do return 0
 
 	# Visibility of the class
-	meth visibility_level: Int do return 1
+	fun visibility_level: Int do return 1
 
-	redef meth accept_class_builder(v)
+	redef fun accept_class_builder(v)
 	do
 		var local_class: MMSrcLocalClass
 		var mod = v.module
@@ -541,7 +541,7 @@ redef class PClassdef
 		v.formals = null
 	end
 
-	redef meth accept_abs_syntax_visitor(v)
+	redef fun accept_abs_syntax_visitor(v)
 	do
 		v.local_class = _local_class
 		super
@@ -550,31 +550,31 @@ redef class PClassdef
 end
 
 redef class PClasskind
-	meth is_interface: Bool do return false
-	meth is_universal: Bool do return false
-	meth is_abstract: Bool do return false
+	fun is_interface: Bool do return false
+	fun is_universal: Bool do return false
+	fun is_abstract: Bool do return false
 end
 
 redef class AInterfaceClasskind
-	redef meth is_interface do return true
+	redef fun is_interface do return true
 end
 redef class AUniversalClasskind
-	redef meth is_universal do return true
+	redef fun is_universal do return true
 end
 redef class AAbstractClasskind
-	redef meth is_abstract do return true
+	redef fun is_abstract do return true
 end
 
 redef class AClassdef
-	redef meth name
+	redef fun name
 	do
 		return n_id.to_symbol
 	end
-	redef meth arity
+	redef fun arity
 	do
 		return n_formaldefs.length
 	end
-	redef meth accept_class_verifier(v)
+	redef fun accept_class_verifier(v)
 	do
 		super
 		var glob = _local_class.global
@@ -631,21 +631,21 @@ redef class AClassdef
 		end
 	end
 
-	redef meth visibility_level
+	redef fun visibility_level
 	do
 		return n_visibility.level
 	end
 end
 
 redef class AMainClassdef
-	redef meth name
+	redef fun name
 	do
 		return once "Sys".to_symbol
 	end
 end
 
 redef class ATopClassdef
-	redef meth name
+	redef fun name
 	do
 		return once "Object".to_symbol
 	end
@@ -654,7 +654,7 @@ end
 class MMSrcTypeFormalParameter
 special MMTypeFormalParameter
 	# The associated node
-	readable attr _node: AFormaldef 
+	readable var _node: AFormaldef 
 
 	init(name: Symbol, pos: Int, local_class: MMLocalClass, n: AFormaldef)
 	do
@@ -665,9 +665,9 @@ end
 
 redef class AFormaldef
 	# The associated formal generic parameter (MM entity)
-	attr _formal: nullable MMSrcTypeFormalParameter
+	var _formal: nullable MMSrcTypeFormalParameter
 
-	redef meth accept_class_builder(v)
+	redef fun accept_class_builder(v)
 	do
 		var name = n_id.to_symbol
 		var formal_type = new MMSrcTypeFormalParameter(name, v.local_class_arity, v.local_class, self)
@@ -678,7 +678,7 @@ redef class AFormaldef
 		super
 	end
 
-	redef meth accept_class_verifier(v)
+	redef fun accept_class_verifier(v)
 	do
 		super
 		var c = v.local_class
@@ -704,9 +704,9 @@ redef class AFormaldef
 end
 
 redef class ASuperclass
-	readable attr _ancestor: nullable MMSrcAncestor
+	readable var _ancestor: nullable MMSrcAncestor
 
-	redef meth accept_class_specialization_builder(v)
+	redef fun accept_class_specialization_builder(v)
 	do
 		super
 		var c = n_type.get_local_class(v)
@@ -716,14 +716,14 @@ redef class ASuperclass
 		v.local_class.add_direct_parent(ancestor)
 	end
 
-	redef meth accept_class_ancestor_builder(v)
+	redef fun accept_class_ancestor_builder(v)
 	do
 		super
 		_ancestor.stype = n_type.get_unchecked_stype(v)
 		_ancestor.inheriter = v.local_class.get_type
 	end
 
-	redef meth accept_class_verifier(v)
+	redef fun accept_class_verifier(v)
 	do
 		super
 		n_type.check_conform(v)
@@ -737,7 +737,7 @@ redef class PPropdef
 	# * Check redef errors.
 	# * Check forbiden attribute definitions.
 	# * Check signature conformance.
-	private meth process_and_check(v: PropertyVerifierVisitor, prop: MMLocalProperty, has_redef: Bool, visibility_level: Int)
+	private fun process_and_check(v: PropertyVerifierVisitor, prop: MMLocalProperty, has_redef: Bool, visibility_level: Int)
 	do
 		if prop.global.intro == prop then
 			do_and_check_intro(v, prop, has_redef, visibility_level)
@@ -747,7 +747,7 @@ redef class PPropdef
 	end
 
 	# The part of process_and_check when prop is an introduction
-	private meth do_and_check_intro(v: PropertyVerifierVisitor, prop: MMLocalProperty, has_redef: Bool, visibility_level: Int)
+	private fun do_and_check_intro(v: PropertyVerifierVisitor, prop: MMLocalProperty, has_redef: Bool, visibility_level: Int)
 	do
 		var glob = prop.global
 		var gbc = prop.local_class.global
@@ -790,7 +790,7 @@ redef class PPropdef
 		end
 	end
 
-	private meth inherit_signature(v: PropertyVerifierVisitor, prop: MMLocalProperty, supers: Array[MMLocalProperty])
+	private fun inherit_signature(v: PropertyVerifierVisitor, prop: MMLocalProperty, supers: Array[MMLocalProperty])
 	do
 		var s = prop.signature
 		for ip in supers do
@@ -817,7 +817,7 @@ redef class PPropdef
 	end
 
 	# The part of process_and_check when prop is a redefinition
-	private meth do_and_check_redef(v: PropertyVerifierVisitor, prop: MMLocalProperty, has_redef: Bool, visibility_level: Int)
+	private fun do_and_check_redef(v: PropertyVerifierVisitor, prop: MMLocalProperty, has_redef: Bool, visibility_level: Int)
 	do
 		var is_init = self isa AConcreteInitPropdef
 		var glob = prop.global
@@ -904,12 +904,12 @@ redef class PPropdef
 end
 
 redef class AAttrPropdef
-	redef readable attr _readmethod: nullable MMSrcMethod
-	redef readable attr _writemethod: nullable MMSrcMethod
-	attr _prop: nullable MMSrcAttribute
-	redef meth prop do return _prop.as(not null)
+	redef readable var _readmethod: nullable MMSrcMethod
+	redef readable var _writemethod: nullable MMSrcMethod
+	var _prop: nullable MMSrcAttribute
+	redef fun prop do return _prop.as(not null)
 
-	redef meth accept_property_builder(v)
+	redef fun accept_property_builder(v)
 	do
 		super
 		var name = n_id.to_symbol
@@ -932,7 +932,7 @@ redef class AAttrPropdef
 		end
 	end
 	
-	redef meth accept_property_verifier(v)
+	redef fun accept_property_verifier(v)
 	do
 		super
 		var t: MMType
@@ -963,7 +963,7 @@ redef class AAttrPropdef
 		end
 	end
 
-	redef meth accept_abs_syntax_visitor(v)
+	redef fun accept_abs_syntax_visitor(v)
 	do
 		v.local_property = _prop
 		super
@@ -973,12 +973,12 @@ end
 
 redef class AMethPropdef
 	# Name of the method
-	readable attr _name: nullable Symbol 
+	readable var _name: nullable Symbol 
 
-	attr _method: nullable MMMethSrcMethod
-	redef meth method do return _method.as(not null)
+	var _method: nullable MMMethSrcMethod
+	redef fun method do return _method.as(not null)
 
-	redef meth accept_property_builder(v)
+	redef fun accept_property_builder(v)
 	do
 		super
 		var name: Symbol
@@ -1004,7 +1004,7 @@ redef class AMethPropdef
 		v.local_class.add_src_local_property(v, prop)
 	end
 
-	redef meth accept_property_verifier(v)
+	redef fun accept_property_verifier(v)
 	do
 		v.signature_builder = new SignatureBuilder
 		super
@@ -1022,7 +1022,7 @@ redef class AMethPropdef
 		if n_signature != null then n_signature.check_visibility(v, method)
 	end
 
-	redef meth accept_abs_syntax_visitor(v)
+	redef fun accept_abs_syntax_visitor(v)
 	do
 		v.local_property = _method
 		super
@@ -1031,7 +1031,7 @@ redef class AMethPropdef
 end
 
 redef class AMainMethPropdef
-	redef meth process_and_check(v, prop, has_redef, visibility_level)
+	redef fun process_and_check(v, prop, has_redef, visibility_level)
 	do
 		prop.global.visibility_level = visibility_level
 		prop.signature = new MMSignature(new Array[MMType], null, v.local_class.get_type)
@@ -1040,10 +1040,10 @@ redef class AMainMethPropdef
 end
 
 redef class ATypePropdef
-	redef meth prop do return _prop.as(not null)
-	attr _prop: nullable MMSrcTypeProperty
+	redef fun prop do return _prop.as(not null)
+	var _prop: nullable MMSrcTypeProperty
 
-	redef meth accept_property_builder(v)
+	redef fun accept_property_builder(v)
 	do
 		super
 		var name = n_id.to_symbol
@@ -1052,7 +1052,7 @@ redef class ATypePropdef
 		v.local_class.add_src_local_property(v, prop)
 	end
 	
-	redef meth accept_property_verifier(v)
+	redef fun accept_property_verifier(v)
 	do
 		super
 		var signature = new MMSignature(new Array[MMType], n_type.get_stype(v), v.local_class.get_type)
@@ -1061,7 +1061,7 @@ redef class ATypePropdef
 		process_and_check(v, prop, n_kwredef != null, visibility_level)
 	end
 	
-	redef meth accept_abs_syntax_visitor(v)
+	redef fun accept_abs_syntax_visitor(v)
 	do
 		v.local_property = _prop
 		super
@@ -1072,8 +1072,8 @@ end
 # Visitor used to build a full method name from multiple tokens
 private class MethidAccumulator
 special Visitor
-	readable attr _name: Buffer = new Buffer
-	redef meth visit(n)
+	readable var _name: Buffer = new Buffer
+	redef fun visit(n)
 	do
 		if n isa Token then
 			_name.append(n.text)
@@ -1085,9 +1085,9 @@ end
 
 redef class PMethid
 	# Method name
-	readable attr _name: nullable Symbol 
+	readable var _name: nullable Symbol 
 
-	redef meth accept_property_builder(v)
+	redef fun accept_property_builder(v)
 	do
 		var accumulator = new MethidAccumulator
 		accumulator.visit(self)
@@ -1098,11 +1098,11 @@ end
 
 redef class PSignature
 	# Check that visibilities of types in the signature are compatible with the visibility of the property.
-	meth check_visibility(v: AbsSyntaxVisitor, p: MMLocalProperty) is abstract
+	fun check_visibility(v: AbsSyntaxVisitor, p: MMLocalProperty) is abstract
 end
 
 redef class ASignature
-	redef meth accept_property_verifier(v)
+	redef fun accept_property_verifier(v)
 	do
 		super
 		if not v.signature_builder.untyped_params.is_empty then
@@ -1129,7 +1129,7 @@ redef class ASignature
 		end
 	end
 
-	redef meth check_visibility(v, p)
+	redef fun check_visibility(v, p)
 	do
 		if p.global.visibility_level >= 3 then return
 		for n in n_params do
@@ -1140,15 +1140,15 @@ redef class ASignature
 end
 
 redef class PParam
-	redef readable attr _position: Int = 0
+	redef readable var _position: Int = 0
 
-	redef meth variable: ParamVariable do return _variable.as(not null)
-	attr _variable: nullable ParamVariable
+	redef fun variable: ParamVariable do return _variable.as(not null)
+	var _variable: nullable ParamVariable
 
 	# The type of the parameter in signature
-	readable writable attr _stype: nullable MMType
+	readable writable var _stype: nullable MMType
 
-	redef meth accept_property_verifier(v)
+	redef fun accept_property_verifier(v)
 	do
 		super
 		_position = v.signature_builder.params.length
@@ -1173,18 +1173,18 @@ redef class PParam
 		end
 	end
 
-	meth is_vararg: Bool is abstract
+	fun is_vararg: Bool is abstract
 end
 
 redef class AParam
-	redef meth is_vararg do return n_dotdotdot != null
+	redef fun is_vararg do return n_dotdotdot != null
 end
 
 redef class AClosureDecl
-	redef meth variable: ClosureVariable do return _variable.as(not null)
-	attr _variable: nullable ClosureVariable
+	redef fun variable: ClosureVariable do return _variable.as(not null)
+	var _variable: nullable ClosureVariable
 
-	redef meth accept_property_verifier(v)
+	redef fun accept_property_verifier(v)
 	do
 		var old_signature_builder = v.signature_builder
 		v.signature_builder = new SignatureBuilder
@@ -1211,11 +1211,11 @@ end
 
 redef class PType
 	# Check that visibilities of types in the signature are compatible with the visibility of the property.
-	private meth check_visibility(v: AbsSyntaxVisitor, p: MMLocalProperty) is abstract
+	private fun check_visibility(v: AbsSyntaxVisitor, p: MMLocalProperty) is abstract
 end
 
 redef class AType
-	redef meth check_visibility(v, p)
+	redef fun check_visibility(v, p)
 	do
 		if p.global.visibility_level >= 3 then return
 		var t = get_stype(v)
@@ -1231,7 +1231,7 @@ redef class AType
 end
 
 redef class PExpr
-	redef meth accept_class_builder(v) do end
-	redef meth accept_property_builder(v) do end
-	redef meth accept_property_verifier(v) do end
+	redef fun accept_class_builder(v) do end
+	redef fun accept_property_builder(v) do end
+	redef fun accept_property_verifier(v) do end
 end

@@ -23,14 +23,14 @@ intrude import inheritance
 
 redef class MMLocalClass
 	# The pos-th formal type parameter
-	meth get_formal(pos: Int): MMTypeFormalParameter
+	fun get_formal(pos: Int): MMTypeFormalParameter
 	do
 		return formals_types[pos]
 	end
 
 	# Register a new formal type
 	# Called in order during the building of the class
-	meth register_formal(f: MMTypeFormalParameter)
+	fun register_formal(f: MMTypeFormalParameter)
 	do
 		assert f.def_class == self
 		assert f.position == _formals_types.length
@@ -38,10 +38,10 @@ redef class MMLocalClass
 	end
 
 	# All the insanciated types of the class
-	attr _types: Array[MMTypeGeneric] = new Array[MMTypeGeneric]
+	var _types: Array[MMTypeGeneric] = new Array[MMTypeGeneric]
 
 	# Instanciate a type from the generic class
-	meth get_instantiate_type(t: Array[MMType]): MMType
+	fun get_instantiate_type(t: Array[MMType]): MMType
 	do
 		for g in _types do
 			if g.params_equals(t) then return g
@@ -52,11 +52,11 @@ redef class MMLocalClass
 	end
 
 	# The formal types of the class
-	attr _formals_types: Array[MMTypeFormalParameter] = new Array[MMTypeFormalParameter]
+	var _formals_types: Array[MMTypeFormalParameter] = new Array[MMTypeFormalParameter]
 
 	# Return the definition formal types for the class
 	# Import them from the intro class if needed
-	private meth formals_types: Array[MMTypeFormalParameter]
+	private fun formals_types: Array[MMTypeFormalParameter]
 	do
 		if _formals_types.is_empty then
 			assert not self isa MMConcreteClass
@@ -77,7 +77,7 @@ redef class MMLocalClass
 		return _formals_types
 	end
 
-	redef meth get_type
+	redef fun get_type
 	do
 		if _base_type_cache == null and is_generic then
 			_base_type_cache = get_instantiate_type(formals_types)
@@ -88,30 +88,30 @@ redef class MMLocalClass
 	end
 
 	# Is the class a generic one?
-	meth is_generic: Bool do return arity > 0
+	fun is_generic: Bool do return arity > 0
 end
 
 redef class MMType
 	# TODO: IS this useful? 
-	meth is_generic: Bool is abstract
+	fun is_generic: Bool is abstract
 end
 
 redef class MMTypeFormal
-	redef meth is_generic do return _bound.is_generic
+	redef fun is_generic do return _bound.is_generic
 end
 
 redef class MMTypeSimpleClass
-	redef meth is_generic  do return false
+	redef fun is_generic  do return false
 end
 
 class MMTypeGeneric
 special MMTypeClass
 	# Formal arguments
-	readable attr _params: Array[MMType] 
+	readable var _params: Array[MMType] 
 
-	redef meth is_generic do return true
+	redef fun is_generic do return true
 
-	redef meth is_supertype(t)
+	redef fun is_supertype(t)
 	do
 		if t.local_class.cshe <= _local_class then
 			var u = t.upcast_for(_local_class)
@@ -122,7 +122,7 @@ special MMTypeClass
 		return false
 	end
 
-	redef meth upcast_for(c)
+	redef fun upcast_for(c)
 	do
 		var t = super
 		if t != self then
@@ -131,7 +131,7 @@ special MMTypeClass
 		return t
 	end
 
-	redef meth for_module(mod)
+	redef fun for_module(mod)
 	do
 		var t: MMType = self
 		if module != mod then
@@ -145,7 +145,7 @@ special MMTypeClass
 		return t
 	end
 
-	redef meth adapt_to(r)
+	redef fun adapt_to(r)
 	do
 		var rv = new Array[MMType]
 		for i in _params do
@@ -155,7 +155,7 @@ special MMTypeClass
 		return l
 	end
 
-	private meth params_equals(t: Array[MMType]): Bool
+	private fun params_equals(t: Array[MMType]): Bool
 	do
 		if t.length != _params.length then
 			return false
@@ -168,14 +168,14 @@ special MMTypeClass
 		return true
 	end
 
-	redef meth to_s
+	redef fun to_s
 	do
 		return "{super}[{_params.join(", ")}]"
 	end
 	
 	# Is self a subtype of t?
 	# Require that t.local_class = self.local_class
-	private meth is_subtype(t: MMTypeGeneric) : Bool
+	private fun is_subtype(t: MMTypeGeneric) : Bool
 	do
 		for i in [0.._params.length[
 		do
@@ -196,14 +196,14 @@ end
 class MMTypeFormalParameter
 special MMTypeFormal
 	# The class where self is defined
-	readable attr _def_class: MMLocalClass 
+	readable var _def_class: MMLocalClass 
 
 	# The position is self in def_class
-	readable attr _position: Int 
+	readable var _position: Int 
 
-	redef meth module do return _def_class.module
+	redef fun module do return _def_class.module
 
-	redef meth for_module(mod)
+	redef fun for_module(mod)
 	do
 		var t: MMType = self
 		if module != mod then
@@ -212,15 +212,15 @@ special MMTypeFormal
 		return t
 	end
 
-	redef meth upcast_for(c) do return _bound.upcast_for(c)
+	redef fun upcast_for(c) do return _bound.upcast_for(c)
 
- 	meth bound=(t: MMType)
+ 	fun bound=(t: MMType)
  	do
 		assert _bound == null
  		_bound = t
  	end
 
-	redef meth adapt_to(r)
+	redef fun adapt_to(r)
 	do
 		r = r.direct_type
 		var old_r = r.upcast_for(def_class)
@@ -248,7 +248,7 @@ special MMTypeFormal
 end
 
 redef class MMTypeNone
-	redef meth is_generic do return false
- 	redef meth for_module(mod) do return self
- 	redef meth adapt_to(r) do return self
+	redef fun is_generic do return false
+ 	redef fun for_module(mod) do return self
+ 	redef fun adapt_to(r) do return self
 end

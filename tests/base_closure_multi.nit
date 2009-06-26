@@ -16,7 +16,7 @@
 
 import kernel
 
-meth a
+fun a
 	with a1
 	with a2 #!alt1#
 #alt2#	with a3
@@ -26,7 +26,7 @@ do
 #alt2#	a3
 end
 
-meth b
+fun b
 	with b1
 	with b2
 do
@@ -34,13 +34,13 @@ do
 	b2
 end
 
-meth c
+fun c
 	with c1
 do
 	c1
 end
 
-meth d
+fun d
 	with d1
 	with d2
 	with d3

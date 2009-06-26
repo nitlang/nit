@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-meth nsieve(n: Int): Int
+fun nsieve(n: Int): Int
 do
 	var count = 0
 	var array = new Buffer.with_capacity(n)
@@ -34,7 +34,7 @@ do
 	return count
 end
 
-meth test(n: Int)
+fun test(n: Int)
 do
 	var m = 10000.lshift(n)
 	print("Primes up to {m} {nsieve(m)}")

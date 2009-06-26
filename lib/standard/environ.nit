@@ -17,7 +17,7 @@ import symbol
 
 redef class Symbol
 	# Return environement valued for this symbol
-	meth environ: String
+	fun environ: String
 	do
 		var res = to_s.to_cstring.get_environ
 		# FIXME: There is no proper way to handle NULL C string yet. What a pitty.
@@ -34,5 +34,5 @@ end
 
 redef class NativeString
 # Refinned to add environement bindings
-	private meth get_environ: NativeString is extern "string_NativeString_NativeString_get_environ_0"
+	private fun get_environ: NativeString is extern "string_NativeString_NativeString_get_environ_0"
 end

@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	meth foo
+	fun foo
 		with bar(i: Int)
 	do
 		1.output
@@ -29,7 +29,7 @@ class A
 	end
 end
 
-meth work
+fun work
 do
 	var a = new A
 	a.foo with x do #!alt11#

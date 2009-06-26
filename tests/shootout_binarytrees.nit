@@ -20,9 +20,9 @@
 # contributed by Jean Privat
 
 class TreeNode
-    attr _left: nullable TreeNode
-    attr _right: nullable TreeNode
-    attr _item: Int
+    var _left: nullable TreeNode
+    var _right: nullable TreeNode
+    var _item: Int
 
 
     init(left: nullable TreeNode, right: nullable TreeNode, item: Int)
@@ -33,7 +33,7 @@ class TreeNode
 	end
 
 
-    meth item_check: Int
+    fun item_check: Int
 	do
 	    if _left == null then
 		return _item
@@ -43,7 +43,7 @@ class TreeNode
 	end
 end
 
-meth bottom_up_tree(item: Int, depth: Int): TreeNode
+fun bottom_up_tree(item: Int, depth: Int): TreeNode
     do
 	if depth > 0 then
 	    var item_item = 2 * item

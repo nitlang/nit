@@ -17,9 +17,9 @@
 import kernel
 
 class A
-	attr _i: Int
+	var _i: Int
 	init (i: Int) do _i = i
-	redef meth output do _i.output
+	redef fun output do _i.output
 end
 
 var a: A

@@ -61,9 +61,9 @@ private
 # Dans un bloc "private", les propriétés déclarées sont seulement accessibles au
 # receveur ("self")
 
-# Les attributs sont déclarés par le mot clé "meth" et commencent par un "@"
-	attr _nom_: String 		# Un entrepôt a un nom (de type chaîne).
-	attr _rayons: Array[Rayon] 	# Il est composé d'un ensemble de rayon.
+# Les attributs sont déclarés par le mot clé "fun" et commencent par un "@"
+	var _nom_: String 		# Un entrepôt a un nom (de type chaîne).
+	var _rayons: Array[Rayon] 	# Il est composé d'un ensemble de rayon.
 	# "Array" est une classe paramétrée, les crochets en sont la marque.
 	# La classe "Rayon" est définie plus loin
 
@@ -71,9 +71,9 @@ private
 # Les propriétés déclarées dans un bloc "public" sont accessibles à tout le
 # monde.
 
-# Les méthodes (fonctions et procédures) sont déclarées par le mot clé "meth"
+# Les méthodes (fonctions et procédures) sont déclarées par le mot clé "fun"
 	# nom est une fonction qui retourne une chaîne
-	meth nom: String
+	fun nom: String
 	do
 		# "return" sort de la fonction
 		return _nom_
@@ -83,21 +83,21 @@ private
 	end
 	
 	# set_nom est une procédure qui prend une chaîne en paramètre
-	meth set_nom(n: String)
+	fun set_nom(n: String)
 	do
 		_nom_ = n		# "=" désigne l'affectation
 		# Les affectations sont des instructions et ne sont pas
 		# chaînées
 	end
 
-	meth add_rayon(r: Rayon)
+	fun add_rayon(r: Rayon)
 	do
 		_rayons.add(r)		# "add" ajoute un élément
 	end
 
 	# to_s est la méthode implicitement appelée par "print" et "println"
 	# Il s'agit de la représentation "humaine" d'un objet
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		# Les variables sont déclarées par "var", leur portée va de leur
 		# déclaration jusqu'au "end" correspondant
@@ -156,19 +156,19 @@ end
 
 class Produit
 private
-	attr _nom_: String 		# Désignation du produit
-	attr _qte_: Int 			# Quantité en stock
+	var _nom_: String 		# Désignation du produit
+	var _qte_: Int 			# Quantité en stock
 
 
 
 	# Comme nous l'avons vu, les accesseurs en lecture sont
 	# généralement homonymes aux attributs (au @ près).
-	meth nom: String
+	fun nom: String
 	do
 		return _nom_
 	end
 
-	meth qte: Int
+	fun qte: Int
 	do
 		return _qte_
 	end
@@ -176,7 +176,7 @@ private
 	# Toutefois, pour les accesseurs en écriture, il est d'usage en NIT 
 	# d'utiliser un type de méthode particulier appelé "accesseur universel"
 	# son nom se caractérise par un "=" final
-	meth qte=(i: Int)
+	fun qte=(i: Int)
 	do
 		_qte_ = i
 	end
@@ -190,7 +190,7 @@ private
 	# la quantité d'un produit.
 
 
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		# On peut aussi utiliser "+" pour concaténer les chaînes
 		return _nom_ + ":" + _qte_.to_s
@@ -208,11 +208,11 @@ end
 
 class Rayon
 private
-	attr _stock: Array[Produit]		# Des produits en stock
-	attr _rubrique: String			# La catégorie des produits stockés
+	var _stock: Array[Produit]		# Des produits en stock
+	var _rubrique: String			# La catégorie des produits stockés
 
 	# Cette fonction est utilisé par to_s pour afficher un petit titre
-	meth to_s_head: String
+	fun to_s_head: String
 	do
 		# Les déclarations de type sont optionnelles dans un bloc "var".
 		# Si une expression est passée comme valeur initiale d'une
@@ -227,7 +227,7 @@ private
 		return s.to_s
 	end
 
-	meth cherche_produit(n: String): nullable Produit
+	fun cherche_produit(n: String): nullable Produit
 	do
 		var i = _stock.iterator
 		while i.is_ok do
@@ -243,7 +243,7 @@ private
 	end
 
 
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		var s = new Buffer
 		s.append(to_s_head)
@@ -269,7 +269,7 @@ private
 
 	# Cette fonction permet de retourner la quantité d'un produit donné
 	# Ce service est très simple à implémenter si on utilise cherche_produit
-	meth quantite(n: String): Int
+	fun quantite(n: String): Int
 	do
 		var p = cherche_produit(n)
 		# "==" est l'opérateur d'égalité d'identité
@@ -283,7 +283,7 @@ private
 	# Le service dual consiste à définir la quantité d'un produit
 	# En NIT, il est d'usage de définir ce genre de service par un accesseur
 	# universel :
-	meth quantite=(n: String, i: Int)
+	fun quantite=(n: String, i: Int)
 	do
 		var p = cherche_produit(n)
 		if p == null then
@@ -321,15 +321,15 @@ special Rayon
 
 # Tant qu'on parle d'implicite, en l'absence de bloc de propriétés,
 # celles-ci sont déclarées en tant que "public"
-	meth temp_max: Int
+	fun temp_max: Int
 	do
 		return _temp_max_	# Attribut défini juste en dessous
 	end
 
-	attr _temp_max_: Int 		# Une température maximale
+	var _temp_max_: Int 		# Une température maximale
 	# Les autres attributs sont bien sûr hérités !
 
-	redef meth to_s_head: String 		# On redéfinit cette méthode
+	redef fun to_s_head: String 		# On redéfinit cette méthode
 	do
 	# nous avons vu le "append" et le "+" sur les chaînes, mais la
 	# méthode la plus simple reste la construction "{}" qui

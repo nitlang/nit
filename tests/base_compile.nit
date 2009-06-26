@@ -17,25 +17,25 @@
 import kernel
 
 class Client
-	attr _budjet: Int # 
-	meth regarde(t: Tableau)
+	var _budjet: Int # 
+	fun regarde(t: Tableau)
 	do
 		if t.joli and dans_mes_moyens(t.etiquette.prix) then
 			achette(t)
 		end
 	end
-	meth achette(t: Tableau) is abstract
-	meth dans_mes_moyens(i: Int): Bool
+	fun achette(t: Tableau) is abstract
+	fun dans_mes_moyens(i: Int): Bool
 	do
 		return i < _budjet
 	end
 end
 
 class Tableau
-	meth joli: Bool is abstract
-	meth etiquette: Etiquette is abstract
+	fun joli: Bool is abstract
+	fun etiquette: Etiquette is abstract
 end
 
 class Etiquette
-	meth prix: Int is abstract
+	fun prix: Int is abstract
 end

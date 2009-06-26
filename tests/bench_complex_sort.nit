@@ -16,23 +16,23 @@
 
 
 interface Elt
-	meth val1: Int is abstract
-	meth val2: Int do return val1
+	fun val1: Int is abstract
+	fun val2: Int do return val1
 end
 
 class A
 special Elt
-	attr _a: Int
-	redef meth val1: Int do return _a
+	var _a: Int
+	redef fun val1: Int do return _a
 
 	init(i: Int) do _a = i
 end
 
 class Elt2
 special Elt
-	attr _b: Int
-	redef meth val1: Int do return _b/2
-	redef meth val2: Int do return _b
+	var _b: Int
+	redef fun val1: Int do return _b/2
+	redef fun val2: Int do return _b
 	init initelt2(i: Int) do _b = i
 end
 
@@ -43,10 +43,10 @@ end
 
 class C
 special Elt
-	attr _c: Int
-	attr _d: Int
-	redef meth val1: Int do return _c end
-	redef meth val2: Int do return _d end
+	var _c: Int
+	var _d: Int
+	redef fun val1: Int do return _c end
+	redef fun val2: Int do return _d end
 
 	init init2(i: Int, j: Int) do
 		_c = i
@@ -57,8 +57,8 @@ end
 class D
 special A
 special Elt2
-	redef meth val1: Int do return _a end
-	redef meth val2: Int do return _b end
+	redef fun val1: Int do return _a end
+	redef fun val2: Int do return _b end
 
 	init init2(i: Int, j: Int) do
 		init(i)
@@ -68,14 +68,14 @@ end
 
 class E
 special Elt2
-	redef meth val1: Int do return 5 end
+	redef fun val1: Int do return 5 end
 
 	init(i: Int) do initelt2(i)
 end
 
 class EltSorter
 special AbstractSorter[Elt]
-	redef meth compare(a: Elt, b: Elt): Int
+	redef fun compare(a: Elt, b: Elt): Int
 	do
 		if _is_val1 then
 			return a.val1 <=> b.val1
@@ -84,17 +84,17 @@ special AbstractSorter[Elt]
 		end
 	end
 	
-	meth toggle
+	fun toggle
 	do
 		_is_val1 = not _is_val1
 	end
 	
-	attr _is_val1: Bool = false
+	var _is_val1: Bool = false
 
 	init do end
 end
 
-meth generator: Elt
+fun generator: Elt
 do
 	var r = 5.rand
 	if r == 0 then

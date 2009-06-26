@@ -15,14 +15,14 @@
 # limitations under the License.
 
 class A
-	attr _a_: Int = 0
+	var _a_: Int = 0
 
-	meth a: Int
+	fun a: Int
 	do
 		return _a_ * 10
 	end
 
-	meth a=(a: Int)
+	fun a=(a: Int)
 	do
 		_a_ = a / 10
 	end

@@ -20,5 +20,5 @@ end
 class Int
 end
 class A
-	attr _i: Int = 1
+	var _i: Int = 1
 end

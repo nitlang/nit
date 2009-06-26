@@ -17,12 +17,12 @@
 import kernel
 
 class A
-	readable attr _i: Int = 1
+	readable var _i: Int = 1
 	init do end
 end
 
 class B
-	readable attr _a: A = new A
+	readable var _a: A = new A
 	init do end
 end
 

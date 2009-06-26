@@ -21,30 +21,30 @@ import stream
 class Process
 
 	# The pid of the processus
-	meth id: Int do return _data.id
+	fun id: Int do return _data.id
 
 	# Is the processus finished?
-	meth is_finished: Bool do return _data.is_finished
+	fun is_finished: Bool do return _data.is_finished
 
 	# wait the terminaison of the process
-	meth wait
+	fun wait
 	do
 		_data.wait
 		assert is_finished
 	end
 	
 	# The status once finished
-	meth status: Int
+	fun status: Int
 	do
 		assert is_finished
 		return _data.status
 	end
 
 	# send a signal to the process
-	meth kill(signal: Int) do _data.kill(signal)
+	fun kill(signal: Int) do _data.kill(signal)
 
 	# send the TERM (15) signal
-	meth term do kill(15)
+	fun term do kill(15)
 
 	# launch a command with some arguments
 	init(command: String, arguments: String...)
@@ -74,21 +74,21 @@ class Process
 		_data = basic_exec_execute(command.to_cstring, args.to_s.to_cstring, l, pipeflags)
 	end
 	
-	attr _data: NativeProcess
-	private meth basic_exec_execute(p: NativeString, av: NativeString, ac: Int, pf: Int): NativeProcess is extern "exec_Process_Process_basic_exec_execute_4"
+	var _data: NativeProcess
+	private fun basic_exec_execute(p: NativeString, av: NativeString, ac: Int, pf: Int): NativeProcess is extern "exec_Process_Process_basic_exec_execute_4"
 end
 
 # stdout of the processus is readable
 class IProcess
 special Process
 special IStream
-	attr _in: FDIStream
+	var _in: FDIStream
 	
-	redef meth close do _in.close
+	redef fun close do _in.close
 	
-	redef meth read_char do return _in.read_char
+	redef fun read_char do return _in.read_char
 
-	redef meth eof do return _in.eof
+	redef fun eof do return _in.eof
 
 	init(command: String, arguments: String...)
 	do
@@ -107,13 +107,13 @@ end
 class OProcess
 special Process
 special OStream
-	attr _out: OStream
+	var _out: OStream
 
-	redef meth close do _out.close
+	redef fun close do _out.close
 
-	redef meth is_writable do return _out.is_writable
+	redef fun is_writable do return _out.is_writable
 
-	redef meth write(s) do _out.write(s)
+	redef fun write(s) do _out.write(s)
 	
 	init(command: String, arguments: String...)
 	do
@@ -134,7 +134,7 @@ special IProcess
 special OProcess
 special IOStream
 
-	redef meth close
+	redef fun close
 	do
 		_in.close
 		_out.close
@@ -157,26 +157,26 @@ end
 
 redef class Sys
 	# Execute a shell command and return it's error code
-	meth system(command: String): Int
+	fun system(command: String): Int
 	do
 		return command.to_cstring.system	
 	end
 end
 
 redef class NativeString
-	meth system: Int is extern "string_NativeString_NativeString_system_0"
+	fun system: Int is extern "string_NativeString_NativeString_system_0"
 end
 
 private universal NativeProcess
 special Pointer
-	meth id: Int is extern "exec_NativeProcess_NativeProcess_id_0"
-	meth is_finished: Bool is extern "exec_NativeProcess_NativeProcess_is_finished_0"
-	meth status: Int is extern "exec_NativeProcess_NativeProcess_status_0"
-	meth wait is extern "exec_NativeProcess_NativeProcess_wait_0"
-	meth kill(s: Int) is extern "exec_NativeProcess_NativeProcess_kill_1"
+	fun id: Int is extern "exec_NativeProcess_NativeProcess_id_0"
+	fun is_finished: Bool is extern "exec_NativeProcess_NativeProcess_is_finished_0"
+	fun status: Int is extern "exec_NativeProcess_NativeProcess_status_0"
+	fun wait is extern "exec_NativeProcess_NativeProcess_wait_0"
+	fun kill(s: Int) is extern "exec_NativeProcess_NativeProcess_kill_1"
 
-	meth in_fd: Int is extern "exec_NativeProcess_NativeProcess_in_fd_0"
-	meth out_fd: Int is extern "exec_NativeProcess_NativeProcess_out_fd_0"
-	meth err_fd: Int is extern "exec_NativeProcess_NativeProcess_err_fd_0"
+	fun in_fd: Int is extern "exec_NativeProcess_NativeProcess_in_fd_0"
+	fun out_fd: Int is extern "exec_NativeProcess_NativeProcess_out_fd_0"
+	fun err_fd: Int is extern "exec_NativeProcess_NativeProcess_err_fd_0"
 end
 

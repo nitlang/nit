@@ -16,21 +16,21 @@
 
 import kernel
 class A
-	meth bar(a: Object)
+	fun bar(a: Object)
 	do
 		a.output
 	end
-	redef meth output
+	redef fun output
 	do
 		'A'.output
 	end
 
-	meth ret_test
+	fun ret_test
 	# see rterror_cov_ret
 	do
 		ret.output
 	end
-	meth ret: A
+	fun ret: A
 	do
 		return self
 	end
@@ -40,15 +40,15 @@ end
 
 class B
 special A
-	redef meth bar(a: B)
+	redef fun bar(a: B)
 	do
 		a.output
 	end
-	redef meth output
+	redef fun output
 	do
 		'B'.output
 	end
-	redef meth ret: B
+	redef fun ret: B
 	do
 		return self
 	end

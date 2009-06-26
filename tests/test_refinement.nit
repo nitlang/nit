@@ -16,11 +16,11 @@
 
 
 redef class Int
-    meth fact0: Int
+    fun fact0: Int
 	do
 	    return fact(1)
 	end
-    meth fact(r: Int): Int
+    fun fact(r: Int): Int
 	do
 	    if self <= 1 then
 		return r
@@ -30,7 +30,7 @@ redef class Int
 	    return 1
 	end
 
-    meth fact2: Int
+    fun fact2: Int
 	do
 	    var r = 1
 	    var i = self
@@ -43,7 +43,7 @@ redef class Int
 end
 
 redef class Array[F]
-    redef meth add(item: F)
+    redef fun add(item: F)
 	do
 	    self[length] = item
 	    self[length] = item
@@ -51,7 +51,7 @@ redef class Array[F]
 end
 
 redef class Object
-    redef meth printn(a: Object...)
+    redef fun printn(a: Object...)
 	do
             stdout.write("print:")
 	    stdout.write(a.to_s)

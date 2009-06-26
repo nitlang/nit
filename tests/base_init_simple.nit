@@ -3,7 +3,7 @@ import kernel
 class A
 	init do 'A'.output
 	init init2 do 'a'.output
-	meth foo do '\n'.output
+	fun foo do '\n'.output
 end
 
 class B

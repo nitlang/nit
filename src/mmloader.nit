@@ -25,20 +25,20 @@ import opts
 class ToolContext
 special MMContext
 	# Number of errors
-	readable attr _error_count: Int = 0 
+	readable var _error_count: Int = 0 
 
 	# Number of warnings
-	readable attr _warning_count: Int = 0
+	readable var _warning_count: Int = 0
 
 	# Display an error
-	meth error(s: String)
+	fun error(s: String)
 	do
 		stderr.write("{s}\n")
 		_error_count = _error_count + 1
 	end
 
 	# Display a warning
-	meth warning(s: String)
+	fun warning(s: String)
 	do
 		if _opt_warn.value == 0 then return
 		stderr.write("{s}\n")
@@ -50,34 +50,34 @@ special MMContext
 	end
 
 	# Paths where to locate modules files
-	readable attr _paths: Array[String] = new Array[String]
+	readable var _paths: Array[String] = new Array[String]
 
 	# List of module loaders
-	attr _loaders: Array[ModuleLoader] = new Array[ModuleLoader]
+	var _loaders: Array[ModuleLoader] = new Array[ModuleLoader]
 	
 	# Global OptionContext
-	readable attr _option_context: OptionContext = new OptionContext
+	readable var _option_context: OptionContext = new OptionContext
 
 	# Option --warn
-	readable attr _opt_warn: OptionCount = new OptionCount("Show warnings", "-W", "--warn")
+	readable var _opt_warn: OptionCount = new OptionCount("Show warnings", "-W", "--warn")
 
 	# Option --path
-	readable attr _opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
+	readable var _opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
 
 	# Option --lop
-	readable attr _opt_log: OptionBool = new OptionBool("Generate various log files", "--log")
+	readable var _opt_log: OptionBool = new OptionBool("Generate various log files", "--log")
 	
 	# Option --only-metamodel
-	readable attr _opt_only_metamodel: OptionBool = new OptionBool("Stop after meta-model processing", "--only-metamodel")
+	readable var _opt_only_metamodel: OptionBool = new OptionBool("Stop after meta-model processing", "--only-metamodel")
 
 	# Option --only-parse
-	readable attr _opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
+	readable var _opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
 
 	# Option --help
-	readable attr _opt_help: OptionBool = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
+	readable var _opt_help: OptionBool = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
 
 	# Option --version
-	readable attr _opt_version: OptionBool = new OptionBool("Show version and exit", "--version")
+	readable var _opt_version: OptionBool = new OptionBool("Show version and exit", "--version")
 
 	init
 	do
@@ -86,7 +86,7 @@ special MMContext
 	end
 
 	# Parse and process the options given on the command line
-	meth process_options
+	fun process_options
 	do
 		# init options
 		option_context.parse(args)
@@ -112,7 +112,7 @@ special MMContext
 	# Load and process a module in a directory (or a parent directory).
 	# If the module is already loaded, just return it without further processing.
 	# If no module is found, just return null without complaining.
-	private meth try_to_load(module_name: Symbol, dir: MMDirectory): nullable MMModule
+	private fun try_to_load(module_name: Symbol, dir: MMDirectory): nullable MMModule
 	do
 		# Look in the module directory
 		for m in dir.modules do
@@ -153,12 +153,12 @@ special MMContext
 
 	# List of module currently processed.
 	# Used to prevent dependence loops.
-	attr _processing_modules: HashSet[Symbol] = new HashSet[Symbol]
+	var _processing_modules: HashSet[Symbol] = new HashSet[Symbol]
 
 	# Locate, load and analysis a module (and its supermodules) from its file name.
 	# If the module is already loaded, just return it without further processing.
 	# Beware, the files are automatically considered root of their directory.
-	meth get_module_from_filename(filename: String): MMModule
+	fun get_module_from_filename(filename: String): MMModule
 	do
 		var path = filename.dirname
 		var module_name = filename.basename(".nit").to_symbol
@@ -192,7 +192,7 @@ special MMContext
 
 	# Locate, load and analysis a module (and its supermodules).
 	# If the module is already loaded, just return it without further processing.
-	meth get_module(module_name: Symbol, from: nullable MMModule): MMModule
+	fun get_module(module_name: Symbol, from: nullable MMModule): MMModule
 	do
 		var m: MMModule
 		if from != null then
@@ -215,7 +215,7 @@ special MMContext
 	end
 
 	# Return the module directory associated with a given path
-	private meth directory_for(path: String): MMDirectory
+	private fun directory_for(path: String): MMDirectory
 	do
 		if _path_dirs.has_key(path) then return _path_dirs[path]
 		var dir = new MMDirectory(path.to_symbol, path, null) 
@@ -224,10 +224,10 @@ special MMContext
 	end
 
 	# Association bwtween plain path and module directories
-	attr _path_dirs: Map[String, MMDirectory] = new HashMap[String, MMDirectory]
+	var _path_dirs: Map[String, MMDirectory] = new HashMap[String, MMDirectory]
 
 	# Register a new module loader
-	meth register_loader(ml: ModuleLoader) do _loaders.add(ml)
+	fun register_loader(ml: ModuleLoader) do _loaders.add(ml)
 end
 
 # A load handler know how to load a specific module type
@@ -236,10 +236,10 @@ class ModuleLoader
 	type MODULE: MMModule
 
 	# Extension that the loadhandler accepts
-	meth file_type: String is abstract
+	fun file_type: String is abstract
 
 	# Try to load a new module directory
-	meth try_to_load_dir(dirname: Symbol, parent_dir: MMDirectory): nullable MMDirectory
+	fun try_to_load_dir(dirname: Symbol, parent_dir: MMDirectory): nullable MMDirectory
 	do
 		var fname = "{parent_dir.path}/{dirname}/"
 		if not fname.file_exists then return null
@@ -250,7 +250,7 @@ class ModuleLoader
 
 	# Can the loadhandler load a given module?
 	# Return the file found
-	meth can_handle(module_name: Symbol, dir: MMDirectory): Bool
+	fun can_handle(module_name: Symbol, dir: MMDirectory): Bool
 	do
 		var fname = "{dir.path}/{module_name}.{file_type}"
 		if fname.file_exists then return true
@@ -259,7 +259,7 @@ class ModuleLoader
 
 	# Load the module and process it
 	# filename is the result of can_handle
-	meth load_and_process_module(context: ToolContext, module_name: Symbol, dir: MMDirectory): MODULE
+	fun load_and_process_module(context: ToolContext, module_name: Symbol, dir: MMDirectory): MODULE
 	do
 		var filename = "{dir.path}/{module_name}.{file_type}"
 		var m = load_module(context, module_name, dir, filename)
@@ -268,7 +268,7 @@ class ModuleLoader
 	end
 
 	# Load an parse the module
-	private meth load_module(context: ToolContext, module_name: Symbol, dir: MMDirectory, filename: String): MODULE
+	private fun load_module(context: ToolContext, module_name: Symbol, dir: MMDirectory, filename: String): MODULE
 	do
 		var file: IFStream
 		if filename == "-" then
@@ -288,15 +288,15 @@ class ModuleLoader
 	end
 
 	# Parse the file to load a module
-	protected meth parse_file(context: ToolContext, file: IFStream, filename: String, module_name: Symbol, dir: MMDirectory): MODULE is abstract
+	protected fun parse_file(context: ToolContext, file: IFStream, filename: String, module_name: Symbol, dir: MMDirectory): MODULE is abstract
 
 	# Process a parsed module
-	protected meth process_metamodel(context: ToolContext, module: MODULE) is abstract
+	protected fun process_metamodel(context: ToolContext, module: MODULE) is abstract
 end
 
 redef class MMModule
 	# Recurcivelty process an import modules
-	meth import_supers_modules(names: Collection[Symbol])
+	fun import_supers_modules(names: Collection[Symbol])
 	do
 		var c = context
 		assert c isa ToolContext

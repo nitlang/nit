@@ -7,19 +7,19 @@ intrude import parser_nodes
 
 redef class PNode
 	# Parent of the node in the AST
-	readable writable attr _parent: nullable PNode
+	readable writable var _parent: nullable PNode
 
 	# Remove a child from the AST
-	meth remove_child(child: PNode)
+	fun remove_child(child: PNode)
 	do
 		replace_child(child, null)
 	end
 
 	# Replace a child with an other node in the AST
-	meth replace_child(old_child: PNode, new_child: nullable PNode) is abstract
+	fun replace_child(old_child: PNode, new_child: nullable PNode) is abstract
 
 	# Replace itself with an other node in the AST
-	meth replace_with(node: PNode)
+	fun replace_with(node: PNode)
 	do
 		if (_parent != null) then
 			_parent.replace_child(self, node)
@@ -28,46 +28,46 @@ redef class PNode
 
 	# Visit all nodes in order.
 	# Thus, call "v.visit(e)" for each node e
-	meth visit_all(v: Visitor) is abstract
+	fun visit_all(v: Visitor) is abstract
 
 	# Visit all nodes in reverse order.
 	# Thus, call "v.visit(e)" for each node e starting from the last child
-	meth visit_all_reverse(v: Visitor) is abstract
+	fun visit_all_reverse(v: Visitor) is abstract
 
 	# Give a human readable location of the node.
-	meth locate: String is abstract
+	fun locate: String is abstract
 
 	# Return only the line number of the node
-	meth line_number: Int is abstract
+	fun line_number: Int is abstract
 
 	# Debug method: output a message prefixed with the location.
-	meth printl(str: String)
+	fun printl(str: String)
 	do
 		print("{locate}: {str}\n")
 	end
 end
 
 redef class Token
-	redef meth visit_all(v: Visitor) do end
-	redef meth visit_all_reverse(v: Visitor) do end
-	redef meth replace_child(old_child: PNode, new_child: nullable PNode) do end
+	redef fun visit_all(v: Visitor) do end
+	redef fun visit_all_reverse(v: Visitor) do end
+	redef fun replace_child(old_child: PNode, new_child: nullable PNode) do end
 
-	redef meth locate: String
+	redef fun locate: String
 	do
 		return "{filename}:{line},{pos}"
 	end
 
-	redef meth line_number do return line
+	redef fun line_number do return line
 end
 
 redef class Prod
 	# The first token of the production node
-	readable writable attr _first_token: nullable Token
+	readable writable var _first_token: nullable Token
 
 	# The last token of the production node
-	readable writable attr _last_token: nullable Token
+	readable writable var _last_token: nullable Token
 
-	redef meth locate: String
+	redef fun locate: String
 	do
 		if first_token == null then
 			return "????"
@@ -83,7 +83,7 @@ redef class Prod
 		end
 	end
 
-	redef meth replace_with(n: PNode)
+	redef fun replace_with(n: PNode)
         do
                 super
                 assert n isa Prod
@@ -91,7 +91,7 @@ redef class Prod
                 n.last_token = last_token
         end
 
-	redef meth line_number
+	redef fun line_number
 	do
 		if first_token != null then
 			return first_token.line
@@ -106,11 +106,11 @@ class Visitor
         # Ask the visitor to visit a given node.
         # Usually automatically called by visit_all* methods.
         # Concrete visitors should redefine this method.
-        meth visit(e: nullable PNode) is abstract
+        fun visit(e: nullable PNode) is abstract
 end
 
 redef class AModule
-    redef meth n_packagedecl=(n)
+    redef fun n_packagedecl=(n)
     do
         _n_packagedecl = n
         if n != null then
@@ -143,7 +143,7 @@ redef class AModule
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_packagedecl == old_child then
             if new_child != null then
@@ -181,7 +181,7 @@ redef class AModule
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_packagedecl != null then
             v.visit(_n_packagedecl.as(not null))
@@ -194,7 +194,7 @@ redef class AModule
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_packagedecl != null then
             v.visit(_n_packagedecl.as(not null))
@@ -216,19 +216,19 @@ redef class AModule
     end
 end
 redef class APackagedecl
-    redef meth n_doc=(n)
+    redef fun n_doc=(n)
     do
         _n_doc = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwpackage=(n)
+    redef fun n_kwpackage=(n)
     do
         _n_kwpackage = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
@@ -253,7 +253,7 @@ redef class APackagedecl
 	n_id.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_doc == old_child then
             if new_child != null then
@@ -287,7 +287,7 @@ redef class APackagedecl
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -296,7 +296,7 @@ redef class APackagedecl
         v.visit(_n_id)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -306,17 +306,17 @@ redef class APackagedecl
     end
 end
 redef class AImport
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_kwimport=(n)
+    redef fun n_kwimport=(n)
     do
         _n_kwimport = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
@@ -339,7 +339,7 @@ redef class AImport
 	n_id.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_visibility == old_child then
             if new_child != null then
@@ -373,14 +373,14 @@ redef class AImport
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_visibility)
         v.visit(_n_kwimport)
         v.visit(_n_id)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_visibility)
         v.visit(_n_kwimport)
@@ -388,17 +388,17 @@ redef class AImport
     end
 end
 redef class ANoImport
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_kwimport=(n)
+    redef fun n_kwimport=(n)
     do
         _n_kwimport = n
 	n.parent = self
     end
-    redef meth n_kwend=(n)
+    redef fun n_kwend=(n)
     do
         _n_kwend = n
 	n.parent = self
@@ -421,7 +421,7 @@ redef class ANoImport
 	n_kwend.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_visibility == old_child then
             if new_child != null then
@@ -455,14 +455,14 @@ redef class ANoImport
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_visibility)
         v.visit(_n_kwimport)
         v.visit(_n_kwend)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_visibility)
         v.visit(_n_kwimport)
@@ -478,20 +478,20 @@ redef class APublicVisibility
         empty_init
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
     end
 end
 redef class APrivateVisibility
-    redef meth n_kwprivate=(n)
+    redef fun n_kwprivate=(n)
     do
         _n_kwprivate = n
 	n.parent = self
@@ -508,7 +508,7 @@ redef class APrivateVisibility
 	n_kwprivate.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwprivate == old_child then
             if new_child != null then
@@ -522,18 +522,18 @@ redef class APrivateVisibility
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwprivate)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwprivate)
     end
 end
 redef class AProtectedVisibility
-    redef meth n_kwprotected=(n)
+    redef fun n_kwprotected=(n)
     do
         _n_kwprotected = n
 	n.parent = self
@@ -550,7 +550,7 @@ redef class AProtectedVisibility
 	n_kwprotected.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwprotected == old_child then
             if new_child != null then
@@ -564,18 +564,18 @@ redef class AProtectedVisibility
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwprotected)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwprotected)
     end
 end
 redef class AIntrudeVisibility
-    redef meth n_kwintrude=(n)
+    redef fun n_kwintrude=(n)
     do
         _n_kwintrude = n
 	n.parent = self
@@ -592,7 +592,7 @@ redef class AIntrudeVisibility
 	n_kwintrude.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwintrude == old_child then
             if new_child != null then
@@ -606,42 +606,42 @@ redef class AIntrudeVisibility
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwintrude)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwintrude)
     end
 end
 redef class AClassdef
-    redef meth n_doc=(n)
+    redef fun n_doc=(n)
     do
         _n_doc = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_classkind=(n)
+    redef fun n_classkind=(n)
     do
         _n_classkind = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
         if n != null then
@@ -696,7 +696,7 @@ redef class AClassdef
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_doc == old_child then
             if new_child != null then
@@ -786,7 +786,7 @@ redef class AClassdef
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -810,7 +810,7 @@ redef class AClassdef
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -862,7 +862,7 @@ redef class ATopClassdef
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         for i in [0.._n_propdefs.length[ do
             if _n_propdefs[i] == old_child then
@@ -878,14 +878,14 @@ redef class ATopClassdef
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
             for n in _n_propdefs do
                 v.visit(n)
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
 	do
 	    var i = _n_propdefs.length
@@ -912,7 +912,7 @@ redef class AMainClassdef
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         for i in [0.._n_propdefs.length[ do
             if _n_propdefs[i] == old_child then
@@ -928,14 +928,14 @@ redef class AMainClassdef
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
             for n in _n_propdefs do
                 v.visit(n)
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
 	do
 	    var i = _n_propdefs.length
@@ -947,7 +947,7 @@ redef class AMainClassdef
     end
 end
 redef class AConcreteClasskind
-    redef meth n_kwclass=(n)
+    redef fun n_kwclass=(n)
     do
         _n_kwclass = n
 	n.parent = self
@@ -964,7 +964,7 @@ redef class AConcreteClasskind
 	n_kwclass.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwclass == old_child then
             if new_child != null then
@@ -978,23 +978,23 @@ redef class AConcreteClasskind
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwclass)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwclass)
     end
 end
 redef class AAbstractClasskind
-    redef meth n_kwabstract=(n)
+    redef fun n_kwabstract=(n)
     do
         _n_kwabstract = n
 	n.parent = self
     end
-    redef meth n_kwclass=(n)
+    redef fun n_kwclass=(n)
     do
         _n_kwclass = n
 	n.parent = self
@@ -1014,7 +1014,7 @@ redef class AAbstractClasskind
 	n_kwclass.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwabstract == old_child then
             if new_child != null then
@@ -1038,20 +1038,20 @@ redef class AAbstractClasskind
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwabstract)
         v.visit(_n_kwclass)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwabstract)
         v.visit(_n_kwclass)
     end
 end
 redef class AInterfaceClasskind
-    redef meth n_kwinterface=(n)
+    redef fun n_kwinterface=(n)
     do
         _n_kwinterface = n
 	n.parent = self
@@ -1068,7 +1068,7 @@ redef class AInterfaceClasskind
 	n_kwinterface.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwinterface == old_child then
             if new_child != null then
@@ -1082,18 +1082,18 @@ redef class AInterfaceClasskind
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwinterface)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwinterface)
     end
 end
 redef class AUniversalClasskind
-    redef meth n_kwuniversal=(n)
+    redef fun n_kwuniversal=(n)
     do
         _n_kwuniversal = n
 	n.parent = self
@@ -1110,7 +1110,7 @@ redef class AUniversalClasskind
 	n_kwuniversal.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwuniversal == old_child then
             if new_child != null then
@@ -1124,23 +1124,23 @@ redef class AUniversalClasskind
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwuniversal)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwuniversal)
     end
 end
 redef class AFormaldef
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_type=(n)
+    redef fun n_type=(n)
     do
         _n_type = n
         if n != null then
@@ -1164,7 +1164,7 @@ redef class AFormaldef
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -1188,7 +1188,7 @@ redef class AFormaldef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_id)
         if _n_type != null then
@@ -1196,7 +1196,7 @@ redef class AFormaldef
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_id)
         if _n_type != null then
@@ -1205,12 +1205,12 @@ redef class AFormaldef
     end
 end
 redef class ASuperclass
-    redef meth n_kwspecial=(n)
+    redef fun n_kwspecial=(n)
     do
         _n_kwspecial = n
 	n.parent = self
     end
-    redef meth n_type=(n)
+    redef fun n_type=(n)
     do
         _n_type = n
 	n.parent = self
@@ -1230,7 +1230,7 @@ redef class ASuperclass
 	n_type.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwspecial == old_child then
             if new_child != null then
@@ -1254,79 +1254,79 @@ redef class ASuperclass
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwspecial)
         v.visit(_n_type)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwspecial)
         v.visit(_n_type)
     end
 end
 redef class AAttrPropdef
-    redef meth n_doc=(n)
+    redef fun n_doc=(n)
     do
         _n_doc = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_readable=(n)
+    redef fun n_readable=(n)
     do
         _n_readable = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_writable=(n)
+    redef fun n_writable=(n)
     do
         _n_writable = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_kwattr=(n)
+    redef fun n_kwattr=(n)
     do
         _n_kwattr = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwvar=(n)
+    redef fun n_kwvar=(n)
     do
         _n_kwvar = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_type=(n)
+    redef fun n_type=(n)
     do
         _n_type = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
         if n != null then
@@ -1388,7 +1388,7 @@ redef class AAttrPropdef
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_doc == old_child then
             if new_child != null then
@@ -1492,7 +1492,7 @@ redef class AAttrPropdef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -1522,7 +1522,7 @@ redef class AAttrPropdef
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -1553,31 +1553,31 @@ redef class AAttrPropdef
     end
 end
 redef class AMethPropdef
-    redef meth n_doc=(n)
+    redef fun n_doc=(n)
     do
         _n_doc = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_methid=(n)
+    redef fun n_methid=(n)
     do
         _n_methid = n
 	n.parent = self
     end
-    redef meth n_signature=(n)
+    redef fun n_signature=(n)
     do
         _n_signature = n
 	n.parent = self
@@ -1610,7 +1610,7 @@ redef class AMethPropdef
 	n_signature.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_doc == old_child then
             if new_child != null then
@@ -1664,7 +1664,7 @@ redef class AMethPropdef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -1677,7 +1677,7 @@ redef class AMethPropdef
         v.visit(_n_signature)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -1691,36 +1691,36 @@ redef class AMethPropdef
     end
 end
 redef class ADeferredMethPropdef
-    redef meth n_doc=(n)
+    redef fun n_doc=(n)
     do
         _n_doc = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_kwmeth=(n)
+    redef fun n_kwmeth=(n)
     do
         _n_kwmeth = n
 	n.parent = self
     end
-    redef meth n_methid=(n)
+    redef fun n_methid=(n)
     do
         _n_methid = n
 	n.parent = self
     end
-    redef meth n_signature=(n)
+    redef fun n_signature=(n)
     do
         _n_signature = n
 	n.parent = self
@@ -1756,7 +1756,7 @@ redef class ADeferredMethPropdef
 	n_signature.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_doc == old_child then
             if new_child != null then
@@ -1820,7 +1820,7 @@ redef class ADeferredMethPropdef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -1834,7 +1834,7 @@ redef class ADeferredMethPropdef
         v.visit(_n_signature)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -1849,36 +1849,36 @@ redef class ADeferredMethPropdef
     end
 end
 redef class AInternMethPropdef
-    redef meth n_doc=(n)
+    redef fun n_doc=(n)
     do
         _n_doc = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_kwmeth=(n)
+    redef fun n_kwmeth=(n)
     do
         _n_kwmeth = n
 	n.parent = self
     end
-    redef meth n_methid=(n)
+    redef fun n_methid=(n)
     do
         _n_methid = n
 	n.parent = self
     end
-    redef meth n_signature=(n)
+    redef fun n_signature=(n)
     do
         _n_signature = n
 	n.parent = self
@@ -1914,7 +1914,7 @@ redef class AInternMethPropdef
 	n_signature.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_doc == old_child then
             if new_child != null then
@@ -1978,7 +1978,7 @@ redef class AInternMethPropdef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -1992,7 +1992,7 @@ redef class AInternMethPropdef
         v.visit(_n_signature)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -2007,41 +2007,41 @@ redef class AInternMethPropdef
     end
 end
 redef class AExternMethPropdef
-    redef meth n_doc=(n)
+    redef fun n_doc=(n)
     do
         _n_doc = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_kwmeth=(n)
+    redef fun n_kwmeth=(n)
     do
         _n_kwmeth = n
 	n.parent = self
     end
-    redef meth n_methid=(n)
+    redef fun n_methid=(n)
     do
         _n_methid = n
 	n.parent = self
     end
-    redef meth n_signature=(n)
+    redef fun n_signature=(n)
     do
         _n_signature = n
 	n.parent = self
     end
-    redef meth n_extern=(n)
+    redef fun n_extern=(n)
     do
         _n_extern = n
         if n != null then
@@ -2084,7 +2084,7 @@ redef class AExternMethPropdef
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_doc == old_child then
             if new_child != null then
@@ -2158,7 +2158,7 @@ redef class AExternMethPropdef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -2175,7 +2175,7 @@ redef class AExternMethPropdef
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -2193,41 +2193,41 @@ redef class AExternMethPropdef
     end
 end
 redef class AConcreteMethPropdef
-    redef meth n_doc=(n)
+    redef fun n_doc=(n)
     do
         _n_doc = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_kwmeth=(n)
+    redef fun n_kwmeth=(n)
     do
         _n_kwmeth = n
 	n.parent = self
     end
-    redef meth n_methid=(n)
+    redef fun n_methid=(n)
     do
         _n_methid = n
 	n.parent = self
     end
-    redef meth n_signature=(n)
+    redef fun n_signature=(n)
     do
         _n_signature = n
 	n.parent = self
     end
-    redef meth n_block=(n)
+    redef fun n_block=(n)
     do
         _n_block = n
         if n != null then
@@ -2270,7 +2270,7 @@ redef class AConcreteMethPropdef
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_doc == old_child then
             if new_child != null then
@@ -2344,7 +2344,7 @@ redef class AConcreteMethPropdef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -2361,7 +2361,7 @@ redef class AConcreteMethPropdef
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -2379,43 +2379,43 @@ redef class AConcreteMethPropdef
     end
 end
 redef class AConcreteInitPropdef
-    redef meth n_doc=(n)
+    redef fun n_doc=(n)
     do
         _n_doc = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_kwinit=(n)
+    redef fun n_kwinit=(n)
     do
         _n_kwinit = n
 	n.parent = self
     end
-    redef meth n_methid=(n)
+    redef fun n_methid=(n)
     do
         _n_methid = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_signature=(n)
+    redef fun n_signature=(n)
     do
         _n_signature = n
 	n.parent = self
     end
-    redef meth n_block=(n)
+    redef fun n_block=(n)
     do
         _n_block = n
         if n != null then
@@ -2460,7 +2460,7 @@ redef class AConcreteInitPropdef
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_doc == old_child then
             if new_child != null then
@@ -2534,7 +2534,7 @@ redef class AConcreteInitPropdef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -2553,7 +2553,7 @@ redef class AConcreteInitPropdef
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -2573,14 +2573,14 @@ redef class AConcreteInitPropdef
     end
 end
 redef class AMainMethPropdef
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_block=(n)
+    redef fun n_block=(n)
     do
         _n_block = n
         if n != null then
@@ -2606,7 +2606,7 @@ redef class AMainMethPropdef
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwredef == old_child then
             if new_child != null then
@@ -2630,7 +2630,7 @@ redef class AMainMethPropdef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_kwredef != null then
             v.visit(_n_kwredef.as(not null))
@@ -2640,7 +2640,7 @@ redef class AMainMethPropdef
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_kwredef != null then
             v.visit(_n_kwredef.as(not null))
@@ -2651,36 +2651,36 @@ redef class AMainMethPropdef
     end
 end
 redef class ATypePropdef
-    redef meth n_doc=(n)
+    redef fun n_doc=(n)
     do
         _n_doc = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_visibility=(n)
+    redef fun n_visibility=(n)
     do
         _n_visibility = n
 	n.parent = self
     end
-    redef meth n_kwtype=(n)
+    redef fun n_kwtype=(n)
     do
         _n_kwtype = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_type=(n)
+    redef fun n_type=(n)
     do
         _n_type = n
 	n.parent = self
@@ -2716,7 +2716,7 @@ redef class ATypePropdef
 	n_type.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_doc == old_child then
             if new_child != null then
@@ -2780,7 +2780,7 @@ redef class ATypePropdef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -2794,7 +2794,7 @@ redef class ATypePropdef
         v.visit(_n_type)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
             v.visit(_n_doc.as(not null))
@@ -2809,14 +2809,14 @@ redef class ATypePropdef
     end
 end
 redef class AReadAble
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwreadable=(n)
+    redef fun n_kwreadable=(n)
     do
         _n_kwreadable = n
 	n.parent = self
@@ -2838,7 +2838,7 @@ redef class AReadAble
 	n_kwreadable.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwredef == old_child then
             if new_child != null then
@@ -2862,7 +2862,7 @@ redef class AReadAble
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_kwredef != null then
             v.visit(_n_kwredef.as(not null))
@@ -2870,7 +2870,7 @@ redef class AReadAble
         v.visit(_n_kwreadable)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_kwredef != null then
             v.visit(_n_kwredef.as(not null))
@@ -2879,14 +2879,14 @@ redef class AReadAble
     end
 end
 redef class AWriteAble
-    redef meth n_kwredef=(n)
+    redef fun n_kwredef=(n)
     do
         _n_kwredef = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwwritable=(n)
+    redef fun n_kwwritable=(n)
     do
         _n_kwwritable = n
 	n.parent = self
@@ -2908,7 +2908,7 @@ redef class AWriteAble
 	n_kwwritable.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwredef == old_child then
             if new_child != null then
@@ -2932,7 +2932,7 @@ redef class AWriteAble
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_kwredef != null then
             v.visit(_n_kwredef.as(not null))
@@ -2940,7 +2940,7 @@ redef class AWriteAble
         v.visit(_n_kwwritable)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_kwredef != null then
             v.visit(_n_kwredef.as(not null))
@@ -2949,7 +2949,7 @@ redef class AWriteAble
     end
 end
 redef class AIdMethid
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
@@ -2966,7 +2966,7 @@ redef class AIdMethid
 	n_id.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -2980,18 +2980,18 @@ redef class AIdMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_id)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_id)
     end
 end
 redef class APlusMethid
-    redef meth n_plus=(n)
+    redef fun n_plus=(n)
     do
         _n_plus = n
 	n.parent = self
@@ -3008,7 +3008,7 @@ redef class APlusMethid
 	n_plus.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_plus == old_child then
             if new_child != null then
@@ -3022,18 +3022,18 @@ redef class APlusMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_plus)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_plus)
     end
 end
 redef class AMinusMethid
-    redef meth n_minus=(n)
+    redef fun n_minus=(n)
     do
         _n_minus = n
 	n.parent = self
@@ -3050,7 +3050,7 @@ redef class AMinusMethid
 	n_minus.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_minus == old_child then
             if new_child != null then
@@ -3064,18 +3064,18 @@ redef class AMinusMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_minus)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_minus)
     end
 end
 redef class AStarMethid
-    redef meth n_star=(n)
+    redef fun n_star=(n)
     do
         _n_star = n
 	n.parent = self
@@ -3092,7 +3092,7 @@ redef class AStarMethid
 	n_star.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_star == old_child then
             if new_child != null then
@@ -3106,18 +3106,18 @@ redef class AStarMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_star)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_star)
     end
 end
 redef class ASlashMethid
-    redef meth n_slash=(n)
+    redef fun n_slash=(n)
     do
         _n_slash = n
 	n.parent = self
@@ -3134,7 +3134,7 @@ redef class ASlashMethid
 	n_slash.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_slash == old_child then
             if new_child != null then
@@ -3148,18 +3148,18 @@ redef class ASlashMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_slash)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_slash)
     end
 end
 redef class APercentMethid
-    redef meth n_percent=(n)
+    redef fun n_percent=(n)
     do
         _n_percent = n
 	n.parent = self
@@ -3176,7 +3176,7 @@ redef class APercentMethid
 	n_percent.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_percent == old_child then
             if new_child != null then
@@ -3190,18 +3190,18 @@ redef class APercentMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_percent)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_percent)
     end
 end
 redef class AEqMethid
-    redef meth n_eq=(n)
+    redef fun n_eq=(n)
     do
         _n_eq = n
 	n.parent = self
@@ -3218,7 +3218,7 @@ redef class AEqMethid
 	n_eq.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_eq == old_child then
             if new_child != null then
@@ -3232,18 +3232,18 @@ redef class AEqMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_eq)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_eq)
     end
 end
 redef class ANeMethid
-    redef meth n_ne=(n)
+    redef fun n_ne=(n)
     do
         _n_ne = n
 	n.parent = self
@@ -3260,7 +3260,7 @@ redef class ANeMethid
 	n_ne.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_ne == old_child then
             if new_child != null then
@@ -3274,18 +3274,18 @@ redef class ANeMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_ne)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_ne)
     end
 end
 redef class ALeMethid
-    redef meth n_le=(n)
+    redef fun n_le=(n)
     do
         _n_le = n
 	n.parent = self
@@ -3302,7 +3302,7 @@ redef class ALeMethid
 	n_le.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_le == old_child then
             if new_child != null then
@@ -3316,18 +3316,18 @@ redef class ALeMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_le)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_le)
     end
 end
 redef class AGeMethid
-    redef meth n_ge=(n)
+    redef fun n_ge=(n)
     do
         _n_ge = n
 	n.parent = self
@@ -3344,7 +3344,7 @@ redef class AGeMethid
 	n_ge.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_ge == old_child then
             if new_child != null then
@@ -3358,18 +3358,18 @@ redef class AGeMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_ge)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_ge)
     end
 end
 redef class ALtMethid
-    redef meth n_lt=(n)
+    redef fun n_lt=(n)
     do
         _n_lt = n
 	n.parent = self
@@ -3386,7 +3386,7 @@ redef class ALtMethid
 	n_lt.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_lt == old_child then
             if new_child != null then
@@ -3400,18 +3400,18 @@ redef class ALtMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_lt)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_lt)
     end
 end
 redef class AGtMethid
-    redef meth n_gt=(n)
+    redef fun n_gt=(n)
     do
         _n_gt = n
 	n.parent = self
@@ -3428,7 +3428,7 @@ redef class AGtMethid
 	n_gt.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_gt == old_child then
             if new_child != null then
@@ -3442,23 +3442,23 @@ redef class AGtMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_gt)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_gt)
     end
 end
 redef class ABraMethid
-    redef meth n_obra=(n)
+    redef fun n_obra=(n)
     do
         _n_obra = n
 	n.parent = self
     end
-    redef meth n_cbra=(n)
+    redef fun n_cbra=(n)
     do
         _n_cbra = n
 	n.parent = self
@@ -3478,7 +3478,7 @@ redef class ABraMethid
 	n_cbra.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_obra == old_child then
             if new_child != null then
@@ -3502,20 +3502,20 @@ redef class ABraMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_obra)
         v.visit(_n_cbra)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_obra)
         v.visit(_n_cbra)
     end
 end
 redef class AStarshipMethid
-    redef meth n_starship=(n)
+    redef fun n_starship=(n)
     do
         _n_starship = n
 	n.parent = self
@@ -3532,7 +3532,7 @@ redef class AStarshipMethid
 	n_starship.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_starship == old_child then
             if new_child != null then
@@ -3546,23 +3546,23 @@ redef class AStarshipMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_starship)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_starship)
     end
 end
 redef class AAssignMethid
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_assign=(n)
+    redef fun n_assign=(n)
     do
         _n_assign = n
 	n.parent = self
@@ -3582,7 +3582,7 @@ redef class AAssignMethid
 	n_assign.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -3606,30 +3606,30 @@ redef class AAssignMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_id)
         v.visit(_n_assign)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_id)
         v.visit(_n_assign)
     end
 end
 redef class ABraassignMethid
-    redef meth n_obra=(n)
+    redef fun n_obra=(n)
     do
         _n_obra = n
 	n.parent = self
     end
-    redef meth n_cbra=(n)
+    redef fun n_cbra=(n)
     do
         _n_cbra = n
 	n.parent = self
     end
-    redef meth n_assign=(n)
+    redef fun n_assign=(n)
     do
         _n_assign = n
 	n.parent = self
@@ -3652,7 +3652,7 @@ redef class ABraassignMethid
 	n_assign.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_obra == old_child then
             if new_child != null then
@@ -3686,14 +3686,14 @@ redef class ABraassignMethid
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_obra)
         v.visit(_n_cbra)
         v.visit(_n_assign)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_obra)
         v.visit(_n_cbra)
@@ -3701,7 +3701,7 @@ redef class ABraassignMethid
     end
 end
 redef class ASignature
-    redef meth n_type=(n)
+    redef fun n_type=(n)
     do
         _n_type = n
         if n != null then
@@ -3734,7 +3734,7 @@ redef class ASignature
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         for i in [0.._n_params.length[ do
             if _n_params[i] == old_child then
@@ -3772,7 +3772,7 @@ redef class ASignature
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
             for n in _n_params do
                 v.visit(n)
@@ -3785,7 +3785,7 @@ redef class ASignature
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
 	do
 	    var i = _n_params.length
@@ -3807,19 +3807,19 @@ redef class ASignature
     end
 end
 redef class AParam
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_type=(n)
+    redef fun n_type=(n)
     do
         _n_type = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_dotdotdot=(n)
+    redef fun n_dotdotdot=(n)
     do
         _n_dotdotdot = n
         if n != null then
@@ -3848,7 +3848,7 @@ redef class AParam
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -3882,7 +3882,7 @@ redef class AParam
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_id)
         if _n_type != null then
@@ -3893,7 +3893,7 @@ redef class AParam
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_id)
         if _n_type != null then
@@ -3905,29 +3905,29 @@ redef class AParam
     end
 end
 redef class AClosureDecl
-    redef meth n_kwwith=(n)
+    redef fun n_kwwith=(n)
     do
         _n_kwwith = n
 	n.parent = self
     end
-    redef meth n_kwbreak=(n)
+    redef fun n_kwbreak=(n)
     do
         _n_kwbreak = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_signature=(n)
+    redef fun n_signature=(n)
     do
         _n_signature = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
         if n != null then
@@ -3962,7 +3962,7 @@ redef class AClosureDecl
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwwith == old_child then
             if new_child != null then
@@ -4016,7 +4016,7 @@ redef class AClosureDecl
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwwith)
         if _n_kwbreak != null then
@@ -4029,7 +4029,7 @@ redef class AClosureDecl
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwwith)
         if _n_kwbreak != null then
@@ -4043,14 +4043,14 @@ redef class AClosureDecl
     end
 end
 redef class AType
-    redef meth n_kwnullable=(n)
+    redef fun n_kwnullable=(n)
     do
         _n_kwnullable = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
@@ -4078,7 +4078,7 @@ redef class AType
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwnullable == old_child then
             if new_child != null then
@@ -4114,7 +4114,7 @@ redef class AType
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_kwnullable != null then
             v.visit(_n_kwnullable.as(not null))
@@ -4125,7 +4125,7 @@ redef class AType
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_kwnullable != null then
             v.visit(_n_kwnullable.as(not null))
@@ -4156,7 +4156,7 @@ redef class ABlockExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         for i in [0.._n_expr.length[ do
             if _n_expr[i] == old_child then
@@ -4172,14 +4172,14 @@ redef class ABlockExpr
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
             for n in _n_expr do
                 v.visit(n)
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
 	do
 	    var i = _n_expr.length
@@ -4191,31 +4191,31 @@ redef class ABlockExpr
     end
 end
 redef class AVardeclExpr
-    redef meth n_kwvar=(n)
+    redef fun n_kwvar=(n)
     do
         _n_kwvar = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_type=(n)
+    redef fun n_type=(n)
     do
         _n_type = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_assign=(n)
+    redef fun n_assign=(n)
     do
         _n_assign = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
         if n != null then
@@ -4252,7 +4252,7 @@ redef class AVardeclExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwvar == old_child then
             if new_child != null then
@@ -4306,7 +4306,7 @@ redef class AVardeclExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwvar)
         v.visit(_n_id)
@@ -4321,7 +4321,7 @@ redef class AVardeclExpr
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwvar)
         v.visit(_n_id)
@@ -4337,12 +4337,12 @@ redef class AVardeclExpr
     end
 end
 redef class AReturnExpr
-    redef meth n_kwreturn=(n)
+    redef fun n_kwreturn=(n)
     do
         _n_kwreturn = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
         if n != null then
@@ -4366,7 +4366,7 @@ redef class AReturnExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwreturn == old_child then
             if new_child != null then
@@ -4390,7 +4390,7 @@ redef class AReturnExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwreturn)
         if _n_expr != null then
@@ -4398,7 +4398,7 @@ redef class AReturnExpr
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwreturn)
         if _n_expr != null then
@@ -4407,12 +4407,12 @@ redef class AReturnExpr
     end
 end
 redef class ABreakExpr
-    redef meth n_kwbreak=(n)
+    redef fun n_kwbreak=(n)
     do
         _n_kwbreak = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
         if n != null then
@@ -4436,7 +4436,7 @@ redef class ABreakExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwbreak == old_child then
             if new_child != null then
@@ -4460,7 +4460,7 @@ redef class ABreakExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwbreak)
         if _n_expr != null then
@@ -4468,7 +4468,7 @@ redef class ABreakExpr
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwbreak)
         if _n_expr != null then
@@ -4477,7 +4477,7 @@ redef class ABreakExpr
     end
 end
 redef class AAbortExpr
-    redef meth n_kwabort=(n)
+    redef fun n_kwabort=(n)
     do
         _n_kwabort = n
 	n.parent = self
@@ -4494,7 +4494,7 @@ redef class AAbortExpr
 	n_kwabort.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwabort == old_child then
             if new_child != null then
@@ -4508,23 +4508,23 @@ redef class AAbortExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwabort)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwabort)
     end
 end
 redef class AContinueExpr
-    redef meth n_kwcontinue=(n)
+    redef fun n_kwcontinue=(n)
     do
         _n_kwcontinue = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
         if n != null then
@@ -4548,7 +4548,7 @@ redef class AContinueExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwcontinue == old_child then
             if new_child != null then
@@ -4572,7 +4572,7 @@ redef class AContinueExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwcontinue)
         if _n_expr != null then
@@ -4580,7 +4580,7 @@ redef class AContinueExpr
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwcontinue)
         if _n_expr != null then
@@ -4589,12 +4589,12 @@ redef class AContinueExpr
     end
 end
 redef class ADoExpr
-    redef meth n_kwdo=(n)
+    redef fun n_kwdo=(n)
     do
         _n_kwdo = n
 	n.parent = self
     end
-    redef meth n_block=(n)
+    redef fun n_block=(n)
     do
         _n_block = n
         if n != null then
@@ -4618,7 +4618,7 @@ redef class ADoExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwdo == old_child then
             if new_child != null then
@@ -4642,7 +4642,7 @@ redef class ADoExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwdo)
         if _n_block != null then
@@ -4650,7 +4650,7 @@ redef class ADoExpr
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwdo)
         if _n_block != null then
@@ -4659,24 +4659,24 @@ redef class ADoExpr
     end
 end
 redef class AIfExpr
-    redef meth n_kwif=(n)
+    redef fun n_kwif=(n)
     do
         _n_kwif = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_then=(n)
+    redef fun n_then=(n)
     do
         _n_then = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_else=(n)
+    redef fun n_else=(n)
     do
         _n_else = n
         if n != null then
@@ -4708,7 +4708,7 @@ redef class AIfExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwif == old_child then
             if new_child != null then
@@ -4752,7 +4752,7 @@ redef class AIfExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwif)
         v.visit(_n_expr)
@@ -4764,7 +4764,7 @@ redef class AIfExpr
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwif)
         v.visit(_n_expr)
@@ -4777,32 +4777,32 @@ redef class AIfExpr
     end
 end
 redef class AIfexprExpr
-    redef meth n_kwif=(n)
+    redef fun n_kwif=(n)
     do
         _n_kwif = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_kwthen=(n)
+    redef fun n_kwthen=(n)
     do
         _n_kwthen = n
 	n.parent = self
     end
-    redef meth n_then=(n)
+    redef fun n_then=(n)
     do
         _n_then = n
 	n.parent = self
     end
-    redef meth n_kwelse=(n)
+    redef fun n_kwelse=(n)
     do
         _n_kwelse = n
 	n.parent = self
     end
-    redef meth n_else=(n)
+    redef fun n_else=(n)
     do
         _n_else = n
 	n.parent = self
@@ -4834,7 +4834,7 @@ redef class AIfexprExpr
 	n_else.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwif == old_child then
             if new_child != null then
@@ -4898,7 +4898,7 @@ redef class AIfexprExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwif)
         v.visit(_n_expr)
@@ -4908,7 +4908,7 @@ redef class AIfexprExpr
         v.visit(_n_else)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwif)
         v.visit(_n_expr)
@@ -4919,22 +4919,22 @@ redef class AIfexprExpr
     end
 end
 redef class AWhileExpr
-    redef meth n_kwwhile=(n)
+    redef fun n_kwwhile=(n)
     do
         _n_kwwhile = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_kwdo=(n)
+    redef fun n_kwdo=(n)
     do
         _n_kwdo = n
 	n.parent = self
     end
-    redef meth n_block=(n)
+    redef fun n_block=(n)
     do
         _n_block = n
         if n != null then
@@ -4964,7 +4964,7 @@ redef class AWhileExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwwhile == old_child then
             if new_child != null then
@@ -5008,7 +5008,7 @@ redef class AWhileExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwwhile)
         v.visit(_n_expr)
@@ -5018,7 +5018,7 @@ redef class AWhileExpr
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwwhile)
         v.visit(_n_expr)
@@ -5029,27 +5029,27 @@ redef class AWhileExpr
     end
 end
 redef class AForExpr
-    redef meth n_kwfor=(n)
+    redef fun n_kwfor=(n)
     do
         _n_kwfor = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_kwdo=(n)
+    redef fun n_kwdo=(n)
     do
         _n_kwdo = n
 	n.parent = self
     end
-    redef meth n_block=(n)
+    redef fun n_block=(n)
     do
         _n_block = n
         if n != null then
@@ -5082,7 +5082,7 @@ redef class AForExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwfor == old_child then
             if new_child != null then
@@ -5136,7 +5136,7 @@ redef class AForExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwfor)
         v.visit(_n_id)
@@ -5147,7 +5147,7 @@ redef class AForExpr
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwfor)
         v.visit(_n_id)
@@ -5159,19 +5159,19 @@ redef class AForExpr
     end
 end
 redef class AAssertExpr
-    redef meth n_kwassert=(n)
+    redef fun n_kwassert=(n)
     do
         _n_kwassert = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
@@ -5196,7 +5196,7 @@ redef class AAssertExpr
 	n_expr.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwassert == old_child then
             if new_child != null then
@@ -5230,7 +5230,7 @@ redef class AAssertExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwassert)
         if _n_id != null then
@@ -5239,7 +5239,7 @@ redef class AAssertExpr
         v.visit(_n_expr)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwassert)
         if _n_id != null then
@@ -5249,12 +5249,12 @@ redef class AAssertExpr
     end
 end
 redef class AOnceExpr
-    redef meth n_kwonce=(n)
+    redef fun n_kwonce=(n)
     do
         _n_kwonce = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
@@ -5274,7 +5274,7 @@ redef class AOnceExpr
 	n_expr.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwonce == old_child then
             if new_child != null then
@@ -5298,20 +5298,20 @@ redef class AOnceExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwonce)
         v.visit(_n_expr)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwonce)
         v.visit(_n_expr)
     end
 end
 redef class ASendExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
@@ -5328,7 +5328,7 @@ redef class ASendExpr
 	n_expr.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -5342,23 +5342,23 @@ redef class ASendExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
     end
 end
 redef class ABinopExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -5378,7 +5378,7 @@ redef class ABinopExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -5402,25 +5402,25 @@ redef class ABinopExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AOrExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -5440,7 +5440,7 @@ redef class AOrExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -5464,25 +5464,25 @@ redef class AOrExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AAndExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -5502,7 +5502,7 @@ redef class AAndExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -5526,25 +5526,25 @@ redef class AAndExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class ANotExpr
-    redef meth n_kwnot=(n)
+    redef fun n_kwnot=(n)
     do
         _n_kwnot = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
@@ -5564,7 +5564,7 @@ redef class ANotExpr
 	n_expr.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwnot == old_child then
             if new_child != null then
@@ -5588,25 +5588,25 @@ redef class ANotExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwnot)
         v.visit(_n_expr)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwnot)
         v.visit(_n_expr)
     end
 end
 redef class AEqExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -5626,7 +5626,7 @@ redef class AEqExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -5650,25 +5650,25 @@ redef class AEqExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AEeExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -5688,7 +5688,7 @@ redef class AEeExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -5712,25 +5712,25 @@ redef class AEeExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class ANeExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -5750,7 +5750,7 @@ redef class ANeExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -5774,25 +5774,25 @@ redef class ANeExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class ALtExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -5812,7 +5812,7 @@ redef class ALtExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -5836,25 +5836,25 @@ redef class ALtExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class ALeExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -5874,7 +5874,7 @@ redef class ALeExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -5898,25 +5898,25 @@ redef class ALeExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AGtExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -5936,7 +5936,7 @@ redef class AGtExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -5960,25 +5960,25 @@ redef class AGtExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AGeExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -5998,7 +5998,7 @@ redef class AGeExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6022,25 +6022,25 @@ redef class AGeExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AIsaExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_type=(n)
+    redef fun n_type=(n)
     do
         _n_type = n
 	n.parent = self
@@ -6060,7 +6060,7 @@ redef class AIsaExpr
 	n_type.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6084,25 +6084,25 @@ redef class AIsaExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_type)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_type)
     end
 end
 redef class APlusExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -6122,7 +6122,7 @@ redef class APlusExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6146,25 +6146,25 @@ redef class APlusExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AMinusExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -6184,7 +6184,7 @@ redef class AMinusExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6208,25 +6208,25 @@ redef class AMinusExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AStarshipExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -6246,7 +6246,7 @@ redef class AStarshipExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6270,25 +6270,25 @@ redef class AStarshipExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AStarExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -6308,7 +6308,7 @@ redef class AStarExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6332,25 +6332,25 @@ redef class AStarExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class ASlashExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -6370,7 +6370,7 @@ redef class ASlashExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6394,25 +6394,25 @@ redef class ASlashExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class APercentExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -6432,7 +6432,7 @@ redef class APercentExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6456,25 +6456,25 @@ redef class APercentExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AUminusExpr
-    redef meth n_minus=(n)
+    redef fun n_minus=(n)
     do
         _n_minus = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
@@ -6494,7 +6494,7 @@ redef class AUminusExpr
 	n_expr.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_minus == old_child then
             if new_child != null then
@@ -6518,30 +6518,30 @@ redef class AUminusExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_minus)
         v.visit(_n_expr)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_minus)
         v.visit(_n_expr)
     end
 end
 redef class ANewExpr
-    redef meth n_kwnew=(n)
+    redef fun n_kwnew=(n)
     do
         _n_kwnew = n
 	n.parent = self
     end
-    redef meth n_type=(n)
+    redef fun n_type=(n)
     do
         _n_type = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
         if n != null then
@@ -6574,7 +6574,7 @@ redef class ANewExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwnew == old_child then
             if new_child != null then
@@ -6620,7 +6620,7 @@ redef class ANewExpr
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwnew)
         v.visit(_n_type)
@@ -6632,7 +6632,7 @@ redef class ANewExpr
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwnew)
         v.visit(_n_type)
@@ -6649,12 +6649,12 @@ redef class ANewExpr
     end
 end
 redef class AAttrExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
@@ -6674,7 +6674,7 @@ redef class AAttrExpr
 	n_id.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6698,35 +6698,35 @@ redef class AAttrExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
     end
 end
 redef class AAttrAssignExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_assign=(n)
+    redef fun n_assign=(n)
     do
         _n_assign = n
 	n.parent = self
     end
-    redef meth n_value=(n)
+    redef fun n_value=(n)
     do
         _n_value = n
 	n.parent = self
@@ -6752,7 +6752,7 @@ redef class AAttrAssignExpr
 	n_value.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6796,7 +6796,7 @@ redef class AAttrAssignExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
@@ -6804,7 +6804,7 @@ redef class AAttrAssignExpr
         v.visit(_n_value)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
@@ -6813,22 +6813,22 @@ redef class AAttrAssignExpr
     end
 end
 redef class AAttrReassignExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_assign_op=(n)
+    redef fun n_assign_op=(n)
     do
         _n_assign_op = n
 	n.parent = self
     end
-    redef meth n_value=(n)
+    redef fun n_value=(n)
     do
         _n_value = n
 	n.parent = self
@@ -6854,7 +6854,7 @@ redef class AAttrReassignExpr
 	n_value.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -6898,7 +6898,7 @@ redef class AAttrReassignExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
@@ -6906,7 +6906,7 @@ redef class AAttrReassignExpr
         v.visit(_n_value)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
@@ -6915,12 +6915,12 @@ redef class AAttrReassignExpr
     end
 end
 redef class ACallExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
@@ -6952,7 +6952,7 @@ redef class ACallExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -7000,7 +7000,7 @@ redef class ACallExpr
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
@@ -7012,7 +7012,7 @@ redef class ACallExpr
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
@@ -7033,22 +7033,22 @@ redef class ACallExpr
     end
 end
 redef class ACallAssignExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_assign=(n)
+    redef fun n_assign=(n)
     do
         _n_assign = n
 	n.parent = self
     end
-    redef meth n_value=(n)
+    redef fun n_value=(n)
     do
         _n_value = n
 	n.parent = self
@@ -7080,7 +7080,7 @@ redef class ACallAssignExpr
 	n_value.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -7136,7 +7136,7 @@ redef class ACallAssignExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
@@ -7147,7 +7147,7 @@ redef class ACallAssignExpr
         v.visit(_n_value)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
@@ -7163,22 +7163,22 @@ redef class ACallAssignExpr
     end
 end
 redef class ACallReassignExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_assign_op=(n)
+    redef fun n_assign_op=(n)
     do
         _n_assign_op = n
 	n.parent = self
     end
-    redef meth n_value=(n)
+    redef fun n_value=(n)
     do
         _n_value = n
 	n.parent = self
@@ -7210,7 +7210,7 @@ redef class ACallReassignExpr
 	n_value.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -7266,7 +7266,7 @@ redef class ACallReassignExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
@@ -7277,7 +7277,7 @@ redef class ACallReassignExpr
         v.visit(_n_value)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_id)
@@ -7293,14 +7293,14 @@ redef class ACallReassignExpr
     end
 end
 redef class ASuperExpr
-    redef meth n_qualified=(n)
+    redef fun n_qualified=(n)
     do
         _n_qualified = n
         if n != null then
 	    n.parent = self
         end
     end
-    redef meth n_kwsuper=(n)
+    redef fun n_kwsuper=(n)
     do
         _n_kwsuper = n
 	n.parent = self
@@ -7328,7 +7328,7 @@ redef class ASuperExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_qualified == old_child then
             if new_child != null then
@@ -7364,7 +7364,7 @@ redef class ASuperExpr
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_qualified != null then
             v.visit(_n_qualified.as(not null))
@@ -7375,7 +7375,7 @@ redef class ASuperExpr
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_qualified != null then
             v.visit(_n_qualified.as(not null))
@@ -7391,12 +7391,12 @@ redef class ASuperExpr
     end
 end
 redef class AInitExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_kwinit=(n)
+    redef fun n_kwinit=(n)
     do
         _n_kwinit = n
 	n.parent = self
@@ -7422,7 +7422,7 @@ redef class AInitExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -7458,7 +7458,7 @@ redef class AInitExpr
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_kwinit)
@@ -7467,7 +7467,7 @@ redef class AInitExpr
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_kwinit)
@@ -7481,7 +7481,7 @@ redef class AInitExpr
     end
 end
 redef class ABraExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
@@ -7510,7 +7510,7 @@ redef class ABraExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -7548,7 +7548,7 @@ redef class ABraExpr
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
             for n in _n_args do
@@ -7559,7 +7559,7 @@ redef class ABraExpr
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
 	do
@@ -7579,17 +7579,17 @@ redef class ABraExpr
     end
 end
 redef class ABraAssignExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_assign=(n)
+    redef fun n_assign=(n)
     do
         _n_assign = n
 	n.parent = self
     end
-    redef meth n_value=(n)
+    redef fun n_value=(n)
     do
         _n_value = n
 	n.parent = self
@@ -7618,7 +7618,7 @@ redef class ABraAssignExpr
 	n_value.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -7664,7 +7664,7 @@ redef class ABraAssignExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
             for n in _n_args do
@@ -7674,7 +7674,7 @@ redef class ABraAssignExpr
         v.visit(_n_value)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
 	do
@@ -7689,17 +7689,17 @@ redef class ABraAssignExpr
     end
 end
 redef class ABraReassignExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_assign_op=(n)
+    redef fun n_assign_op=(n)
     do
         _n_assign_op = n
 	n.parent = self
     end
-    redef meth n_value=(n)
+    redef fun n_value=(n)
     do
         _n_value = n
 	n.parent = self
@@ -7728,7 +7728,7 @@ redef class ABraReassignExpr
 	n_value.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -7774,7 +7774,7 @@ redef class ABraReassignExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
             for n in _n_args do
@@ -7784,7 +7784,7 @@ redef class ABraReassignExpr
         v.visit(_n_value)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
 	do
@@ -7799,7 +7799,7 @@ redef class ABraReassignExpr
     end
 end
 redef class AClosureCallExpr
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
@@ -7828,7 +7828,7 @@ redef class AClosureCallExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -7866,7 +7866,7 @@ redef class AClosureCallExpr
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_id)
             for n in _n_args do
@@ -7877,7 +7877,7 @@ redef class AClosureCallExpr
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_id)
 	do
@@ -7897,7 +7897,7 @@ redef class AClosureCallExpr
     end
 end
 redef class AVarExpr
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
@@ -7914,7 +7914,7 @@ redef class AVarExpr
 	n_id.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -7928,28 +7928,28 @@ redef class AVarExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_id)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_id)
     end
 end
 redef class AVarAssignExpr
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_assign=(n)
+    redef fun n_assign=(n)
     do
         _n_assign = n
 	n.parent = self
     end
-    redef meth n_value=(n)
+    redef fun n_value=(n)
     do
         _n_value = n
 	n.parent = self
@@ -7972,7 +7972,7 @@ redef class AVarAssignExpr
 	n_value.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -8006,14 +8006,14 @@ redef class AVarAssignExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_id)
         v.visit(_n_assign)
         v.visit(_n_value)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_id)
         v.visit(_n_assign)
@@ -8021,17 +8021,17 @@ redef class AVarAssignExpr
     end
 end
 redef class AVarReassignExpr
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
     end
-    redef meth n_assign_op=(n)
+    redef fun n_assign_op=(n)
     do
         _n_assign_op = n
 	n.parent = self
     end
-    redef meth n_value=(n)
+    redef fun n_value=(n)
     do
         _n_value = n
 	n.parent = self
@@ -8054,7 +8054,7 @@ redef class AVarReassignExpr
 	n_value.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -8088,14 +8088,14 @@ redef class AVarReassignExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_id)
         v.visit(_n_assign_op)
         v.visit(_n_value)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_id)
         v.visit(_n_assign_op)
@@ -8103,12 +8103,12 @@ redef class AVarReassignExpr
     end
 end
 redef class ARangeExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -8128,7 +8128,7 @@ redef class ARangeExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -8152,25 +8152,25 @@ redef class ARangeExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class ACrangeExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -8190,7 +8190,7 @@ redef class ACrangeExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -8214,25 +8214,25 @@ redef class ACrangeExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 end
 redef class AOrangeExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_expr2=(n)
+    redef fun n_expr2=(n)
     do
         _n_expr2 = n
 	n.parent = self
@@ -8252,7 +8252,7 @@ redef class AOrangeExpr
 	n_expr2.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -8276,13 +8276,13 @@ redef class AOrangeExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_expr2)
@@ -8304,7 +8304,7 @@ redef class AArrayExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         for i in [0.._n_exprs.length[ do
             if _n_exprs[i] == old_child then
@@ -8320,14 +8320,14 @@ redef class AArrayExpr
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
             for n in _n_exprs do
                 v.visit(n)
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
 	do
 	    var i = _n_exprs.length
@@ -8339,7 +8339,7 @@ redef class AArrayExpr
     end
 end
 redef class ASelfExpr
-    redef meth n_kwself=(n)
+    redef fun n_kwself=(n)
     do
         _n_kwself = n
 	n.parent = self
@@ -8356,7 +8356,7 @@ redef class ASelfExpr
 	n_kwself.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwself == old_child then
             if new_child != null then
@@ -8370,12 +8370,12 @@ redef class ASelfExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwself)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwself)
     end
@@ -8389,20 +8389,20 @@ redef class AImplicitSelfExpr
         empty_init
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
     end
 end
 redef class ATrueExpr
-    redef meth n_kwtrue=(n)
+    redef fun n_kwtrue=(n)
     do
         _n_kwtrue = n
 	n.parent = self
@@ -8419,7 +8419,7 @@ redef class ATrueExpr
 	n_kwtrue.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwtrue == old_child then
             if new_child != null then
@@ -8433,18 +8433,18 @@ redef class ATrueExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwtrue)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwtrue)
     end
 end
 redef class AFalseExpr
-    redef meth n_kwfalse=(n)
+    redef fun n_kwfalse=(n)
     do
         _n_kwfalse = n
 	n.parent = self
@@ -8461,7 +8461,7 @@ redef class AFalseExpr
 	n_kwfalse.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwfalse == old_child then
             if new_child != null then
@@ -8475,18 +8475,18 @@ redef class AFalseExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwfalse)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwfalse)
     end
 end
 redef class ANullExpr
-    redef meth n_kwnull=(n)
+    redef fun n_kwnull=(n)
     do
         _n_kwnull = n
 	n.parent = self
@@ -8503,7 +8503,7 @@ redef class ANullExpr
 	n_kwnull.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwnull == old_child then
             if new_child != null then
@@ -8517,18 +8517,18 @@ redef class ANullExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwnull)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwnull)
     end
 end
 redef class AIntExpr
-    redef meth n_number=(n)
+    redef fun n_number=(n)
     do
         _n_number = n
 	n.parent = self
@@ -8545,7 +8545,7 @@ redef class AIntExpr
 	n_number.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_number == old_child then
             if new_child != null then
@@ -8559,18 +8559,18 @@ redef class AIntExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_number)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_number)
     end
 end
 redef class AFloatExpr
-    redef meth n_float=(n)
+    redef fun n_float=(n)
     do
         _n_float = n
 	n.parent = self
@@ -8587,7 +8587,7 @@ redef class AFloatExpr
 	n_float.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_float == old_child then
             if new_child != null then
@@ -8601,18 +8601,18 @@ redef class AFloatExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_float)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_float)
     end
 end
 redef class ACharExpr
-    redef meth n_char=(n)
+    redef fun n_char=(n)
     do
         _n_char = n
 	n.parent = self
@@ -8629,7 +8629,7 @@ redef class ACharExpr
 	n_char.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_char == old_child then
             if new_child != null then
@@ -8643,18 +8643,18 @@ redef class ACharExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_char)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_char)
     end
 end
 redef class AStringExpr
-    redef meth n_string=(n)
+    redef fun n_string=(n)
     do
         _n_string = n
 	n.parent = self
@@ -8671,7 +8671,7 @@ redef class AStringExpr
 	n_string.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_string == old_child then
             if new_child != null then
@@ -8685,18 +8685,18 @@ redef class AStringExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_string)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_string)
     end
 end
 redef class AStartStringExpr
-    redef meth n_string=(n)
+    redef fun n_string=(n)
     do
         _n_string = n
 	n.parent = self
@@ -8713,7 +8713,7 @@ redef class AStartStringExpr
 	n_string.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_string == old_child then
             if new_child != null then
@@ -8727,18 +8727,18 @@ redef class AStartStringExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_string)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_string)
     end
 end
 redef class AMidStringExpr
-    redef meth n_string=(n)
+    redef fun n_string=(n)
     do
         _n_string = n
 	n.parent = self
@@ -8755,7 +8755,7 @@ redef class AMidStringExpr
 	n_string.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_string == old_child then
             if new_child != null then
@@ -8769,18 +8769,18 @@ redef class AMidStringExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_string)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_string)
     end
 end
 redef class AEndStringExpr
-    redef meth n_string=(n)
+    redef fun n_string=(n)
     do
         _n_string = n
 	n.parent = self
@@ -8797,7 +8797,7 @@ redef class AEndStringExpr
 	n_string.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_string == old_child then
             if new_child != null then
@@ -8811,12 +8811,12 @@ redef class AEndStringExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_string)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_string)
     end
@@ -8837,7 +8837,7 @@ redef class ASuperstringExpr
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         for i in [0.._n_exprs.length[ do
             if _n_exprs[i] == old_child then
@@ -8853,14 +8853,14 @@ redef class ASuperstringExpr
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
             for n in _n_exprs do
                 v.visit(n)
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
 	do
 	    var i = _n_exprs.length
@@ -8872,7 +8872,7 @@ redef class ASuperstringExpr
     end
 end
 redef class AParExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
@@ -8889,7 +8889,7 @@ redef class AParExpr
 	n_expr.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -8903,28 +8903,28 @@ redef class AParExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
     end
 end
 redef class AAsCastExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_kwas=(n)
+    redef fun n_kwas=(n)
     do
         _n_kwas = n
 	n.parent = self
     end
-    redef meth n_type=(n)
+    redef fun n_type=(n)
     do
         _n_type = n
 	n.parent = self
@@ -8947,7 +8947,7 @@ redef class AAsCastExpr
 	n_type.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -8981,14 +8981,14 @@ redef class AAsCastExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_kwas)
         v.visit(_n_type)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_kwas)
@@ -8996,22 +8996,22 @@ redef class AAsCastExpr
     end
 end
 redef class AAsNotnullExpr
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_kwas=(n)
+    redef fun n_kwas=(n)
     do
         _n_kwas = n
 	n.parent = self
     end
-    redef meth n_kwnot=(n)
+    redef fun n_kwnot=(n)
     do
         _n_kwnot = n
 	n.parent = self
     end
-    redef meth n_kwnull=(n)
+    redef fun n_kwnull=(n)
     do
         _n_kwnull = n
 	n.parent = self
@@ -9037,7 +9037,7 @@ redef class AAsNotnullExpr
 	n_kwnull.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_expr == old_child then
             if new_child != null then
@@ -9081,7 +9081,7 @@ redef class AAsNotnullExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_kwas)
@@ -9089,7 +9089,7 @@ redef class AAsNotnullExpr
         v.visit(_n_kwnull)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_expr)
         v.visit(_n_kwas)
@@ -9098,17 +9098,17 @@ redef class AAsNotnullExpr
     end
 end
 redef class AIssetAttrExpr
-    redef meth n_kwisset=(n)
+    redef fun n_kwisset=(n)
     do
         _n_kwisset = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
 	n.parent = self
     end
-    redef meth n_id=(n)
+    redef fun n_id=(n)
     do
         _n_id = n
 	n.parent = self
@@ -9131,7 +9131,7 @@ redef class AIssetAttrExpr
 	n_id.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwisset == old_child then
             if new_child != null then
@@ -9165,14 +9165,14 @@ redef class AIssetAttrExpr
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwisset)
         v.visit(_n_expr)
         v.visit(_n_id)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwisset)
         v.visit(_n_expr)
@@ -9180,7 +9180,7 @@ redef class AIssetAttrExpr
     end
 end
 redef class APlusAssignOp
-    redef meth n_pluseq=(n)
+    redef fun n_pluseq=(n)
     do
         _n_pluseq = n
 	n.parent = self
@@ -9197,7 +9197,7 @@ redef class APlusAssignOp
 	n_pluseq.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_pluseq == old_child then
             if new_child != null then
@@ -9211,18 +9211,18 @@ redef class APlusAssignOp
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_pluseq)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_pluseq)
     end
 end
 redef class AMinusAssignOp
-    redef meth n_minuseq=(n)
+    redef fun n_minuseq=(n)
     do
         _n_minuseq = n
 	n.parent = self
@@ -9239,7 +9239,7 @@ redef class AMinusAssignOp
 	n_minuseq.parent = self
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_minuseq == old_child then
             if new_child != null then
@@ -9253,28 +9253,28 @@ redef class AMinusAssignOp
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_minuseq)
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_minuseq)
     end
 end
 redef class AClosureDef
-    redef meth n_kwwith=(n)
+    redef fun n_kwwith=(n)
     do
         _n_kwwith = n
 	n.parent = self
     end
-    redef meth n_kwdo=(n)
+    redef fun n_kwdo=(n)
     do
         _n_kwdo = n
 	n.parent = self
     end
-    redef meth n_expr=(n)
+    redef fun n_expr=(n)
     do
         _n_expr = n
         if n != null then
@@ -9307,7 +9307,7 @@ redef class AClosureDef
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_kwwith == old_child then
             if new_child != null then
@@ -9353,7 +9353,7 @@ redef class AClosureDef
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         v.visit(_n_kwwith)
             for n in _n_id do
@@ -9365,7 +9365,7 @@ redef class AClosureDef
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         v.visit(_n_kwwith)
 	do
@@ -9382,7 +9382,7 @@ redef class AClosureDef
     end
 end
 redef class AQualified
-    redef meth n_classid=(n)
+    redef fun n_classid=(n)
     do
         _n_classid = n
         if n != null then
@@ -9409,7 +9409,7 @@ redef class AQualified
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         for i in [0.._n_id.length[ do
             if _n_id[i] == old_child then
@@ -9435,7 +9435,7 @@ redef class AQualified
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
             for n in _n_id do
                 v.visit(n)
@@ -9445,7 +9445,7 @@ redef class AQualified
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
 	do
 	    var i = _n_id.length
@@ -9475,7 +9475,7 @@ redef class ADoc
 	end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         for i in [0.._n_comment.length[ do
             if _n_comment[i] == old_child then
@@ -9491,14 +9491,14 @@ redef class ADoc
         end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
             for n in _n_comment do
                 v.visit(n)
 	    end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
 	do
 	    var i = _n_comment.length
@@ -9519,7 +9519,7 @@ redef class Start
         _n_eof = n_eof
     end
 
-    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_base == old_child then
             if new_child == null then
@@ -9533,14 +9533,14 @@ redef class Start
 	end
     end
 
-    redef meth visit_all(v: Visitor)
+    redef fun visit_all(v: Visitor)
     do
         if _n_base != null then
             v.visit(_n_base.as(not null))
         end
     end
 
-    redef meth visit_all_reverse(v: Visitor)
+    redef fun visit_all_reverse(v: Visitor)
     do
         if _n_base != null then
             v.visit(_n_base.as(not null))

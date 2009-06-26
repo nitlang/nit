@@ -19,7 +19,7 @@ package fibonacci
 
 redef class Int
 	# Calculate the self-th element of the fibonacci sequence.
-	meth fibonacci: Int
+	fun fibonacci: Int
 	do
 		if self < 2 then
 			return 1
@@ -30,7 +30,7 @@ redef class Int
 end
 
 # Print usage and exit.
-meth usage
+fun usage
 do
 	print "Usage: fibonnaci <integer>" 
 	exit 0 

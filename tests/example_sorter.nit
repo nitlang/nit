@@ -17,7 +17,7 @@
 
 class BackIntSorter
 special AbstractSorter[Int]
-	redef meth compare(a: Int, b: Int): Int
+	redef fun compare(a: Int, b: Int): Int
 	do
 		return b <=> a
 	end
@@ -27,7 +27,7 @@ end
 
 class DecimalSorter
 special AbstractSorter[Int]
-	redef meth compare(a: Int, b: Int): Int
+	redef fun compare(a: Int, b: Int): Int
 	do
 		return (a%10) <=> (b%10)
 	end
@@ -35,7 +35,7 @@ special AbstractSorter[Int]
 	init do end
 end
 
-meth get_an_array(nb: Int): Array[Int]
+fun get_an_array(nb: Int): Array[Int]
 do
 	var res = new Array[Int].with_capacity(nb)
 	var j = 64

@@ -17,12 +17,12 @@
 import module_1
 
 redef class A # class 3
-   redef meth a13
+   redef fun a13
    do
 	   print(13)
 	   print(3)
    end
-   redef meth a123
+   redef fun a123
    do
 	   print(123)
 	   print(3)
@@ -35,7 +35,7 @@ end
 
 class C # class 5
 special B
-   redef meth all25
+   redef fun all25
    do
 	   print(250)
 	   print(5)

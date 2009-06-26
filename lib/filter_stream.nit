@@ -13,15 +13,15 @@
 class FilterIStream
 special IStream
 	# Filter readed elements
-	readable attr _stream: IStream 
+	readable var _stream: IStream 
 
-	redef meth eof: Bool
+	redef fun eof: Bool
 	do
 		assert stream != null
 		return stream.eof
 	end
 
-	private meth stream=(i: IStream)
+	private fun stream=(i: IStream)
 	do
 		_stream = i
 	end
@@ -30,16 +30,16 @@ end
 class FilterOStream
 special OStream
 	# Filter outputed elements
-	readable attr _stream: OStream 
+	readable var _stream: OStream 
 
 	# Can the stream be used to write
-	redef meth is_writable: Bool
+	redef fun is_writable: Bool
 	do
 		assert stream != null
 		return stream.is_writable
 	end
 
-	private meth stream=(i: OStream)
+	private fun stream=(i: OStream)
 	do
 		_stream = i
 	end
@@ -47,9 +47,9 @@ end
 
 class StreamCat
 special FilterIStream
-	attr _streams: Iterator[IStream]
+	var _streams: Iterator[IStream]
 
-	redef meth eof: Bool
+	redef fun eof: Bool
 	do
 		if stream == null then
 			return true
@@ -62,7 +62,7 @@ special FilterIStream
 		end
 	end
 
-	redef meth stream: IStream
+	redef fun stream: IStream
 	do
 		if _stream == null and _streams.is_ok then
 			stream = _streams.item
@@ -72,13 +72,13 @@ special FilterIStream
 		return _stream
 	end
 
-	redef meth read_char: Int
+	redef fun read_char: Int
 	do
 		assert not eof
 		return stream.read_char
 	end
 
-	redef meth close
+	redef fun close
 	do
 		while stream != null do
 			stream.close
@@ -98,9 +98,9 @@ end
 
 class StreamDemux
 special FilterOStream
-	attr _streams: Array[OStream]
+	var _streams: Array[OStream]
 
-	redef meth is_writable: Bool
+	redef fun is_writable: Bool
 	do
 		if stream.is_writable then
 			return true
@@ -115,7 +115,7 @@ special FilterOStream
 		end
 	end
 
-	redef meth write(s: String)
+	redef fun write(s: String)
 	do
 		for i in _streams
 		do

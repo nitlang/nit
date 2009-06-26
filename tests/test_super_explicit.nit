@@ -17,14 +17,14 @@
 import test_super
 
 redef class A
-	redef meth foo
+	redef fun foo
 	do
 		10.output
 	end
 end
 
 redef class B
-	redef meth foo
+	redef fun foo
 	do
 		11.output
 		test_super::super

@@ -17,10 +17,10 @@
 class A
 	type T: A
 	type U: B
-	meth foo(a: T) do a.output
-	meth bar(b: U) do b.output
-	meth baz(i: Int) do i.output
-	redef meth output do 'A'.output
+	fun foo(a: T) do a.output
+	fun bar(b: U) do b.output
+	fun baz(i: Int) do i.output
+	redef fun output do 'A'.output
 
 	init do end
 end
@@ -29,10 +29,10 @@ class B
 special A
 	redef type T: B
 	redef type U: Int
-	redef meth foo(a: T) do a.output
-	redef meth bar(b: U) do b.output
-	redef meth baz(i: Int) do i.output
-	redef meth output do 'B'.output
+	redef fun foo(a: T) do a.output
+	redef fun bar(b: U) do b.output
+	redef fun baz(i: Int) do i.output
+	redef fun output do 'B'.output
 
 	init do end
 end
@@ -40,9 +40,9 @@ end
 redef class Int
 special B
 	redef type T: Int
-	redef meth foo(a: T) do a.output
-	redef meth bar(b: U) do b.output
-	redef meth output is intern
+	redef fun foo(a: T) do a.output
+	redef fun bar(b: U) do b.output
+	redef fun output is intern
 end
 
 var a = new A

@@ -15,9 +15,9 @@
 # limitations under the License.
 
 class A
-	attr _a: Int
+	var _a: Int
 end
 class B
 special A
-	redef attr _a: Object
+	redef var _a: Object
 end

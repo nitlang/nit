@@ -17,7 +17,7 @@
 import kernel
 
 redef class Object
-	meth printn(a: Object)
+	fun printn(a: Object)
 	do
 		if a == null then
 			'n'.output

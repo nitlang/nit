@@ -26,20 +26,20 @@ class MMContext
 	init do end
 
 	# The module dependence hierarchy
-	readable attr _module_hierarchy: PartialOrder[MMModule] = new PartialOrder[MMModule]
+	readable var _module_hierarchy: PartialOrder[MMModule] = new PartialOrder[MMModule]
 
 	# The class refinement and specialization hierarchy
 	# It is not the real hierarchy since non concrete classes can only be leaves
-	readable attr _class_hierarchy: PartialOrder[MMLocalClass] = new PartialOrder[MMLocalClass]
+	readable var _class_hierarchy: PartialOrder[MMLocalClass] = new PartialOrder[MMLocalClass]
 
 	# All known global classes
-	attr _global_classes: Array[MMGlobalClass] = new Array[MMGlobalClass]
+	var _global_classes: Array[MMGlobalClass] = new Array[MMGlobalClass]
 
 	# All known modules
-	readable attr _modules: Array[MMModule] = new Array[MMModule]
+	readable var _modules: Array[MMModule] = new Array[MMModule]
 
 	# Register a new module with the modules it depends on
-	meth add_module(module: MMModule, supers: Array[MMModule])
+	fun add_module(module: MMModule, supers: Array[MMModule])
 	do
 		_module_hierarchy.add(module, _module_hierarchy.select_smallests(supers))
 		_modules.add(module)
@@ -47,10 +47,10 @@ class MMContext
 	end
 
 	# Register a global class
-	private meth add_global_class(c: MMGlobalClass) do _global_classes.add(c)
+	private fun add_global_class(c: MMGlobalClass) do _global_classes.add(c)
 
 	# Register a local class
-	meth add_local_class(c: MMLocalClass, sup: Array[MMLocalClass])
+	fun add_local_class(c: MMLocalClass, sup: Array[MMLocalClass])
 	do
 		var csup = new Array[MMLocalClass]
 		var csups = new Array[String]
@@ -72,23 +72,23 @@ end
 # Directory of modules
 class MMDirectory
 	# Full name of the directory
-	readable attr _name: Symbol
+	readable var _name: Symbol
 
 	# Full path
-	readable attr _path: String
+	readable var _path: String
 
 	# Parent directory
 	# null if none
-	readable attr _parent: nullable MMDirectory
+	readable var _parent: nullable MMDirectory
 
 	# The module that introduces the directory if any
-	readable writable attr _owner: nullable MMModule = null
+	readable writable var _owner: nullable MMModule = null
 
 	# Known modules in the directory
-	readable attr _modules: Map[Symbol, MMModule] = new HashMap[Symbol, MMModule]
+	readable var _modules: Map[Symbol, MMModule] = new HashMap[Symbol, MMModule]
 
 	# Register a new module
-	meth add_module(module: MMModule)
+	fun add_module(module: MMModule)
 	do
 		assert not _modules.has_key(module.name)
 		_modules[module.name] = module
@@ -101,7 +101,7 @@ class MMDirectory
 	end
 
 	# The fullname of a a potentiel module in the directory
-	meth full_name_for(module_name: Symbol): Symbol do
+	fun full_name_for(module_name: Symbol): Symbol do
 		return "{name}/{module_name}".to_symbol
 	end
 end
@@ -109,49 +109,49 @@ end
 # A module is a NIT package
 class MMModule
 	# Global context
-	readable attr _context: MMContext 
+	readable var _context: MMContext 
 
 	# Short name of the module
-	readable attr _name: Symbol
+	readable var _name: Symbol
 
 	# Full name of the module
-	readable attr _full_name: Symbol
+	readable var _full_name: Symbol
 
 	# The directory of the module
-	readable attr _directory: MMDirectory
+	readable var _directory: MMDirectory
 
 	# The filename of the module
-	readable attr _filename: String
+	readable var _filename: String
 
 	# Module dependence hierarchy element
-	readable attr _mhe: nullable PartialOrderElement[MMModule]
+	readable var _mhe: nullable PartialOrderElement[MMModule]
 
 	# All global classes of the module (defined and imported)
-	readable attr _global_classes: Array[MMGlobalClass] = new Array[MMGlobalClass]
+	readable var _global_classes: Array[MMGlobalClass] = new Array[MMGlobalClass]
 
 	# All local classes of the module (defined and imported)
-	readable attr _local_classes: Array[MMLocalClass] = new Array[MMLocalClass]
+	readable var _local_classes: Array[MMLocalClass] = new Array[MMLocalClass]
 
 	# Class specialization hierarchy of the module.
-	readable attr _class_specialization_hierarchy: PartialOrder[MMLocalClass] = new PartialOrder[MMLocalClass]
+	readable var _class_specialization_hierarchy: PartialOrder[MMLocalClass] = new PartialOrder[MMLocalClass]
 
 	# Modules intruded (directly or not)
-	attr _intrude_modules: Set[MMModule] = new HashSet[MMModule]
+	var _intrude_modules: Set[MMModule] = new HashSet[MMModule]
 
 	# Module publicly imported (directly or not)
-	attr _public_modules: Set[MMModule] = new HashSet[MMModule]
+	var _public_modules: Set[MMModule] = new HashSet[MMModule]
 
 	# Module privately imported (directly or not)
-	attr _private_modules: Set[MMModule] = new HashSet[MMModule]
+	var _private_modules: Set[MMModule] = new HashSet[MMModule]
 
 	# Explicit imported modules
-	readable attr _explicit_imported_modules: Set[MMModule] = new HashSet[MMModule]
+	readable var _explicit_imported_modules: Set[MMModule] = new HashSet[MMModule]
 
 	# Association between local class and global classes
-	attr _local_class_by_global: Map[MMGlobalClass, MMLocalClass] = new HashMap[MMGlobalClass, MMLocalClass]
+	var _local_class_by_global: Map[MMGlobalClass, MMLocalClass] = new HashMap[MMGlobalClass, MMLocalClass]
 
 	# Dictionary of global classes
-	attr _global_class_by_name: Map[Symbol, MMGlobalClass] = new HashMap[Symbol, MMGlobalClass]
+	var _global_class_by_name: Map[Symbol, MMGlobalClass] = new HashMap[Symbol, MMGlobalClass]
 
 	protected init(name: Symbol, dir: MMDirectory, context: MMContext, filename: String)
 	do
@@ -166,7 +166,7 @@ class MMModule
 	# 0 -> intrude
 	# 1 -> public
 	# 3 -> private
-	meth add_super_module(m: MMModule, visibility_level: Int)
+	fun add_super_module(m: MMModule, visibility_level: Int)
 	do
 		_explicit_imported_modules.add(m)
 		if visibility_level == 0 then
@@ -191,7 +191,7 @@ class MMModule
 	# 2 -> public => see public and protected
 	# 1 -> private => see public and protected
 	# 0 -> nothing => see nothing
-	meth visibility_for(m: MMModule): Int
+	fun visibility_for(m: MMModule): Int
 	do
 		if m == self or _intrude_modules.has(m) then
 			return 3
@@ -206,34 +206,34 @@ class MMModule
 
 
 	# Get the local class associated with a global class 
-	meth [](c: MMGlobalClass): MMLocalClass
+	fun [](c: MMGlobalClass): MMLocalClass
 	do
 		return _local_class_by_global[c]
 	end
 
 	# Get a local class by its name
-	meth class_by_name(n: Symbol): MMLocalClass
+	fun class_by_name(n: Symbol): MMLocalClass
 	do
 		return self[_global_class_by_name[n]]
 	end
 
 	# Is there a global class with this name
-	meth has_global_class_named(n: Symbol): Bool
+	fun has_global_class_named(n: Symbol): Bool
 	do
 		return _global_class_by_name.has_key(n)
 	end
 
 	# Get a global class by its name.
 	# Return null if not class match this name
-	meth global_class_named(n: Symbol): MMGlobalClass
+	fun global_class_named(n: Symbol): MMGlobalClass
 	do
 		return _global_class_by_name[n]
 	end
 
-	redef meth to_s do return name.to_s
+	redef fun to_s do return name.to_s
 
 	# Assign super_classes for a local class
-	meth set_supers_class(c: MMLocalClass, supers: Array[MMLocalClass])
+	fun set_supers_class(c: MMLocalClass, supers: Array[MMLocalClass])
 	do
 		var tab = _class_specialization_hierarchy.select_smallests(supers)
 		c._cshe = _class_specialization_hierarchy.add(c,tab)
@@ -243,7 +243,7 @@ class MMModule
 	end
 
 	# Register a local class and its global class in the module
-	private meth register_global_class(c: MMLocalClass)
+	private fun register_global_class(c: MMLocalClass)
 	do
 		_local_class_by_global[c.global] = c
 	end
@@ -251,11 +251,11 @@ end
 
 class MMGlobalClass
 	# The introducing local class
-	readable attr _intro: MMLocalClass 
+	readable var _intro: MMLocalClass 
 
 	# Class refinement hierarchy
 	# It is not the real hierarchy since non concrete classes can only be leaves
-	readable attr _class_refinement_hierarchy: PartialOrder[MMLocalClass] = new PartialOrder[MMLocalClass] 
+	readable var _class_refinement_hierarchy: PartialOrder[MMLocalClass] = new PartialOrder[MMLocalClass] 
 
 	# Create a new global class introduced with a given local class
 	init(c: MMLocalClass)
@@ -265,24 +265,24 @@ class MMGlobalClass
 	end
 
 	# The name of the global class
-	meth name: Symbol
+	fun name: Symbol
 	do
 		return intro.name
 	end
 
 	# The module that introduces the global class
-	meth module: MMModule
+	fun module: MMModule
 	do
 		return intro.module
 	end
 
-	redef meth to_s
+	redef fun to_s
 	do
 		return intro.to_s
 	end
 
 	# register a new Local class to local class hierarchy (set the crhe value)
-	private meth register_local_class(c: MMLocalClass)
+	private fun register_local_class(c: MMLocalClass)
 	do
 		var sup = new Array[MMLocalClass]
 		for s in class_refinement_hierarchy do
@@ -294,22 +294,22 @@ class MMGlobalClass
 	end
 
 	# Is the global class an interface?
-	readable writable attr _is_interface: Bool = false
+	readable writable var _is_interface: Bool = false
 
 	# Is the global class an abstract class?
-	readable writable attr _is_abstract: Bool = false
+	readable writable var _is_abstract: Bool = false
 
 	# Is the global class a universal class?
-	readable writable attr _is_universal: Bool = false
+	readable writable var _is_universal: Bool = false
 
 	# Visibility of the global class
 	# 1 -> public
 	# 3 -> private
-	readable writable attr _visibility_level: Int = 1 # FIXME: why this should be defined ?
+	readable writable var _visibility_level: Int = 1 # FIXME: why this should be defined ?
 
 	# Is the global class a mixin class?
 	# A mixin class inherits all constructors from a superclass
-	meth is_mixin: Bool
+	fun is_mixin: Bool
 	do
 		return _mixin_of != self
 	end
@@ -317,46 +317,46 @@ class MMGlobalClass
 	# Indicate the superclass the class is a mixin of.
 	# If mixin_of == self then the class is not a mixin
 	# Is two classes have the same mixin_of value, then they both belong to the same mixing group
-	readable writable attr _mixin_of: MMGlobalClass = self
+	readable writable var _mixin_of: MMGlobalClass = self
 
 end
 
 # Local classes are classes defined, refined or imported in a module
 class MMLocalClass
 	# The name of the local class
-        readable attr _name: Symbol
+        readable var _name: Symbol
 
 	# Arity of the local class (if generic)
 	# FIXME: How to move this into the generic module in a sane way?
-	readable attr _arity : Int 
+	readable var _arity : Int 
 
 	# The module of the local class
-	readable attr _module: MMModule
+	readable var _module: MMModule
 
 	# The global class of the local class
-	meth global: MMGlobalClass do return _global.as(not null)
-	attr _global: nullable MMGlobalClass
+	fun global: MMGlobalClass do return _global.as(not null)
+	var _global: nullable MMGlobalClass
 
 	# The local class refinement hierarchy element
-	meth crhe: PartialOrderElement[MMLocalClass] do return _crhe.as(not null)
-	attr _crhe: nullable PartialOrderElement[MMLocalClass]
+	fun crhe: PartialOrderElement[MMLocalClass] do return _crhe.as(not null)
+	var _crhe: nullable PartialOrderElement[MMLocalClass]
 
 	# The local class specialization hierarchy element
-	meth cshe: PartialOrderElement[MMLocalClass] do return _cshe.as(not null)
-	attr _cshe: nullable PartialOrderElement[MMLocalClass]
+	fun cshe: PartialOrderElement[MMLocalClass] do return _cshe.as(not null)
+	var _cshe: nullable PartialOrderElement[MMLocalClass]
 
 	# The local class full hierarchy element
-	meth che: PartialOrderElement[MMLocalClass] do return _che.as(not null)
-	attr _che: nullable PartialOrderElement[MMLocalClass]
+	fun che: PartialOrderElement[MMLocalClass] do return _che.as(not null)
+	var _che: nullable PartialOrderElement[MMLocalClass]
 
 	# Association between local properties and global properties
-	attr _local_property_by_global: Map[MMGlobalProperty, MMLocalProperty] = new HashMap[MMGlobalProperty, MMLocalProperty]
+	var _local_property_by_global: Map[MMGlobalProperty, MMLocalProperty] = new HashMap[MMGlobalProperty, MMLocalProperty]
 
 	# All known global properties
-	readable attr _global_properties: Set[MMGlobalProperty] = new HashSet[MMGlobalProperty]
+	readable var _global_properties: Set[MMGlobalProperty] = new HashSet[MMGlobalProperty]
 
 	# Dictionnary of global properties
-	attr _properties_by_name: Map[Symbol, Array[MMGlobalProperty]] = new HashMap[Symbol, Array[MMGlobalProperty]]
+	var _properties_by_name: Map[Symbol, Array[MMGlobalProperty]] = new HashMap[Symbol, Array[MMGlobalProperty]]
 
 	# Create a new class with a given name and arity
 	protected init(mod: MMModule, name: Symbol, arity: Int)
@@ -368,13 +368,13 @@ class MMLocalClass
 	end
 
 	# The corresponding local class in another module
-	meth for_module(m: MMModule): MMLocalClass
+	fun for_module(m: MMModule): MMLocalClass
 	do
 		return m[global]
 	end
 	
 	# Introduce a new global class to a new global one and register to hierarchy with no refine
-	meth new_global
+	fun new_global
 	do
 		var g = new MMGlobalClass(self)
 		_module._global_classes.add(g)
@@ -385,7 +385,7 @@ class MMLocalClass
 	# Associate this local class to a global one and register to hierarchy
 	# the global class for this class
 	# refined classes for this class
-	meth set_global(g: MMGlobalClass)
+	fun set_global(g: MMGlobalClass)
 	do
 		_global = g
 		_global.register_local_class(self)
@@ -394,14 +394,14 @@ class MMLocalClass
 
 	# Is there a global propery with a given name
 	# TODO: Will disapear when qualified names will be available
-	meth has_global_property_by_name(n: Symbol): Bool
+	fun has_global_property_by_name(n: Symbol): Bool
 	do
 		return _properties_by_name.has_key(n) and _properties_by_name[n].length == 1
 	end
 
 	# Get a global property by its name
 	# TODO: Will disapear when qualified names will be available
-	meth get_property_by_name(n: Symbol): MMGlobalProperty
+	fun get_property_by_name(n: Symbol): MMGlobalProperty
 	do
 		if not has_global_property_by_name(n) then abort
 		var props = _properties_by_name[n]
@@ -410,21 +410,21 @@ class MMLocalClass
 
 	# Get a attribute by its name
 	# TODO: Will disapear when qualified names will be available
-	meth attribute(a: Symbol): MMGlobalProperty
+	fun attribute(a: Symbol): MMGlobalProperty
 	do
 		return get_property_by_name(a)
 	end
 
 	# Get a method by its name
 	# TODO: Will disapear when qualified names will be available
-	meth method(na: Symbol): MMGlobalProperty
+	fun method(na: Symbol): MMGlobalProperty
 	do
 		return _properties_by_name[na].first
 	end
 
 	# Select a method from its name
 	# TODO: Will disapear when qualified names will be available
-	meth select_method(name: Symbol): MMMethod
+	fun select_method(name: Symbol): MMMethod
 	do
 		var gp = method(name)
 		var res = self[gp]
@@ -434,7 +434,7 @@ class MMLocalClass
 	
 	# Select an attribute from its name
 	# TODO: Will disapear when qualified names will be available
-	meth select_attribute(name: Symbol): MMAttribute
+	fun select_attribute(name: Symbol): MMAttribute
 	do
 		var gp = attribute(name)
 		var res = self[gp]
@@ -444,7 +444,7 @@ class MMLocalClass
 	
 	# Look in super-classes (by specialization) and return properties with name
 	# Beware, global property of results is not intended to be the same
-	meth super_methods_named(n: Symbol): Array[MMLocalProperty] 
+	fun super_methods_named(n: Symbol): Array[MMLocalProperty] 
 	do
 		var classes = new Array[MMLocalClass]
 		for c in cshe.greaters do
@@ -461,13 +461,13 @@ class MMLocalClass
 	end
 
 	# Register a local property and associate it with its global property
-	meth register_local_property(p: MMLocalProperty)
+	fun register_local_property(p: MMLocalProperty)
 	do
 		_local_property_by_global[p.global] = p
 	end
 
 	# Register a global property and associate it with its name
-	meth register_global_property(glob: MMGlobalProperty)
+	fun register_global_property(glob: MMGlobalProperty)
 	do
 		var prop = glob.intro
 		var name = prop.name
@@ -481,21 +481,21 @@ class MMLocalClass
 	end
 
 	# Does the global property belong to the class?
-	meth has_global_property(glob: MMGlobalProperty): Bool
+	fun has_global_property(glob: MMGlobalProperty): Bool
 	do
 		return _global_properties.has(glob)
 	end
 
 	# Get a local proprty by its global property
-	meth [](glob: MMGlobalProperty): MMLocalProperty
+	fun [](glob: MMGlobalProperty): MMLocalProperty
 	do
 		return _local_property_by_global[glob]
 	end
 
 	# The current MMContext
-	meth context: MMContext do return module.context
+	fun context: MMContext do return module.context
 
-	redef meth to_s
+	redef fun to_s
 	do
 		return _name.to_s
 	end
@@ -506,16 +506,16 @@ class MMGlobalProperty
 	# The local property for each class that has the global property
 
 	# The introducing local property
-	readable attr _intro: MMLocalProperty
+	readable var _intro: MMLocalProperty
 
 	# The local class that introduces the global property
-	meth local_class: MMLocalClass
+	fun local_class: MMLocalClass
 	do
 		return intro.local_class
 	end
 
 	# The property redefinition hierarchy
-	readable attr _property_hierarchy: PartialOrder[MMLocalProperty] = new PartialOrder[MMLocalProperty]
+	readable var _property_hierarchy: PartialOrder[MMLocalProperty] = new PartialOrder[MMLocalProperty]
 
 	# Create a new global property introduced by a local one
 	protected init(p: MMLocalProperty)
@@ -524,25 +524,25 @@ class MMGlobalProperty
 		add_local_property(p, new Array[MMLocalProperty])
 	end
 
-	redef meth to_s do return intro.full_name
+	redef fun to_s do return intro.full_name
 
 	# Register a new local property
-	meth add_local_property(i: MMLocalProperty, sup: Array[MMLocalProperty])
+	fun add_local_property(i: MMLocalProperty, sup: Array[MMLocalProperty])
 	do
 		i._prhe = _property_hierarchy.add(i,sup)
 	end
 
 	# Is the global property an attribute ?
-	meth is_attribute: Bool do return intro isa MMAttribute
+	fun is_attribute: Bool do return intro isa MMAttribute
 
 	# Is the global property a method (or a constructor)?
-	meth is_method: Bool do return intro isa MMMethod
+	fun is_method: Bool do return intro isa MMMethod
 
 	# Is the global property a constructor (thus also a method)?
-	readable writable attr _is_init: Bool = false
+	readable writable var _is_init: Bool = false
 
 	# Is the global property a constructor for a given class?
-	meth is_init_for(c: MMLocalClass): Bool
+	fun is_init_for(c: MMLocalClass): Bool
 	do
 		if not is_init then return false
 		var sc = intro.local_class
@@ -554,33 +554,33 @@ class MMGlobalProperty
 	# 1 -> public
 	# 2 -> protected
 	# 3 -> private
-	readable writable attr _visibility_level: Int = 1 # FIXME: why this should be defined ?
+	readable writable var _visibility_level: Int = 1 # FIXME: why this should be defined ?
 end
 
 # Local properties are properties defined (explicitely or not) in a local class
 class MMLocalProperty
 	# The name of the property
-	readable attr _name: Symbol
+	readable var _name: Symbol
 
 	# The local class who own the local property
-	readable attr _local_class: MMLocalClass
+	readable var _local_class: MMLocalClass
 
 	# The global property where belong the local property
-	attr _global: nullable MMGlobalProperty
+	var _global: nullable MMGlobalProperty
 
-	meth global: MMGlobalProperty do return _global.as(not null)
-	meth is_global_set: Bool do return _global != null
+	fun global: MMGlobalProperty do return _global.as(not null)
+	fun is_global_set: Bool do return _global != null
 
 	# Redefinition hierarchy of the local property
-	attr _prhe: nullable PartialOrderElement[MMLocalProperty]
+	var _prhe: nullable PartialOrderElement[MMLocalProperty]
 
-	meth prhe: PartialOrderElement[MMLocalProperty] do return _prhe.as(not null)
+	fun prhe: PartialOrderElement[MMLocalProperty] do return _prhe.as(not null)
 
 	# The module of the local property
-	meth module: MMModule do return _local_class.module
+	fun module: MMModule do return _local_class.module
 
 	# Full expanded name with all qualifications
-	meth full_name: String
+	fun full_name: String
 	do
 		if _global == null then
 			return "{local_class.module}::{local_class}::(?::{name})"
@@ -592,14 +592,14 @@ class MMLocalProperty
 	end
 
 	# set the global property for this property
-	meth set_global(g: MMGlobalProperty)
+	fun set_global(g: MMGlobalProperty)
 	do
 		_global = g
 		_local_class.register_local_property(self)
 	end
 
 	# Introduce a new global property for this local one
-	meth new_global
+	fun new_global
 	do
 		assert _global == null
 		var global = new MMGlobalProperty(self)
@@ -607,10 +607,10 @@ class MMLocalProperty
 		_local_class.register_global_property(global)
 	end
 
-	redef meth to_s do return name.to_s
+	redef fun to_s do return name.to_s
 
 	# Is the concrete property contain a `super' in the body?
-	readable writable attr _need_super: Bool = false
+	readable writable var _need_super: Bool = false
 
 	protected init(n: Symbol, bc: MMLocalClass)
  	do

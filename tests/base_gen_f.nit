@@ -17,16 +17,16 @@
 import kernel
 
 class G[E: G[E]]
-	meth ide(e: E): E
+	fun ide(e: E): E
 	do
 		return e
 	end
-	meth foo is abstract
+	fun foo is abstract
 end
 
 class G1
 special G[G1]
-	redef meth foo
+	redef fun foo
 	do
 		1.output
 	end
@@ -36,7 +36,7 @@ end
 
 class G2
 special G[G2]
-	redef meth foo
+	redef fun foo
 	do
 		2.output
 	end

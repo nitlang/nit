@@ -15,9 +15,9 @@
 # limitations under the License.
 
 redef class Sys
-	attr _i: Int
-	attr _j: Int
-	redef meth main
+	var _i: Int
+	var _j: Int
+	redef fun main
 	do
 		printn(5)
 		_i = 5

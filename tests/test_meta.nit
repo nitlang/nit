@@ -16,19 +16,19 @@
 
 
 class A
-   meth foo
+   fun foo
       do
           printn("A")
       end
-   meth blup(a: Int)
+   fun blup(a: Int)
       do
          blup2(a, 1)
       end
-   meth blup2(a: Int, b : Int)
+   fun blup2(a: Int, b : Int)
       do
          printn(a+b)
       end
-   meth blop(a: Int, b: Int...)
+   fun blop(a: Int, b: Int...)
       do
          var i = b.iterator
          while i.is_ok do
@@ -40,7 +40,7 @@ end
 
 class B
 special A
-   redef meth foo
+   redef fun foo
       do
           printn("B")
       end
@@ -48,7 +48,7 @@ end
 
 class C
 special A
-   meth foo2
+   fun foo2
       do
           printn("C")
       end
@@ -57,7 +57,7 @@ end
 class D
 special B
 special C
-   redef meth foo
+   redef fun foo
       do
           printn("D")
       end
@@ -65,7 +65,7 @@ special C
    init do end
 end
 
-meth test1
+fun test1
 do
 	var b: B
 	b = new D
@@ -74,7 +74,7 @@ do
 	b.blup(3)
 end
 
-meth test2
+fun test2
 do
 	var b = new D
 	var a = [1,2,3]

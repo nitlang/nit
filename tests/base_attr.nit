@@ -20,13 +20,13 @@ class Object
 end
 
 class Int
-	meth output is intern
+	fun output is intern
 end
 
 class Foo
-	attr _a1: Int
-	attr _a2: Int
-	meth run
+	var _a1: Int
+	var _a2: Int
+	fun run
 	do
 		_a1.output
 		_a2.output
@@ -41,8 +41,8 @@ end
 
 class Bar
 special Foo
-	attr _a3: Int
-	redef meth run
+	var _a3: Int
+	redef fun run
 	do
 		_a1.output
 		_a2.output

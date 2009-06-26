@@ -15,11 +15,11 @@
 # limitations under the License.
 
 class A
-   meth p=(i: Int)
+   fun p=(i: Int)
    do
       printn("p: ", i)
    end
-   meth q=(i: Int, j: Int)
+   fun q=(i: Int, j: Int)
    do
       printn("q: ", i, j)
    end

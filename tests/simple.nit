@@ -17,13 +17,13 @@
 import module_0
 
 redef class Sys
-   attr _a: Object
-   attr _b: Int
-   meth printn(i: Object)
+   var _a: Object
+   var _b: Int
+   fun printn(i: Object)
       do
          i.output
       end
-   redef meth main
+   redef fun main
       do
          _a = 53
          _b = 53

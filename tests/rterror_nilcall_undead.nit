@@ -17,11 +17,11 @@
 import kernel
 
 class A
-	meth foo
+	fun foo
 	do
 		1.output
 	end
-	meth bar: Int
+	fun bar: Int
 	do
 		return 2
 	end

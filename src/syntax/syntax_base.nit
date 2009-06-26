@@ -24,10 +24,10 @@ import mmloader
 class MMSrcModule
 special MMModule
 	# The related AST node
-	readable attr _node: AModule
+	readable var _node: AModule
 
 	# Concrete NIT source local classs by name
-	readable attr _src_local_classes: Map[Symbol, MMSrcLocalClass]
+	readable var _src_local_classes: Map[Symbol, MMSrcLocalClass]
 
 	init(c: MMContext, source: AModule, dir: MMDirectory, name: Symbol, filename: String)
 	do
@@ -39,7 +39,7 @@ end
 
 redef class MMGlobalClass
 	# Check that a module can access a class
-	meth check_visibility(v: AbsSyntaxVisitor, n: PNode, cm: MMSrcModule): Bool do
+	fun check_visibility(v: AbsSyntaxVisitor, n: PNode, cm: MMSrcModule): Bool do
 		var pm = intro.module
 		assert pm isa MMSrcModule
 		var vpm = cm.visibility_for(pm)
@@ -60,13 +60,13 @@ end
 class MMSrcLocalClass
 special MMConcreteClass
 	# The related AST nodes
-	readable attr _nodes: Array[PClassdef]
+	readable var _nodes: Array[PClassdef]
 
 	# Concrete NIT source generic formal parameter by name
-	readable attr _formal_dict: Map[Symbol, MMTypeFormalParameter] = new HashMap[Symbol, MMTypeFormalParameter]
+	readable var _formal_dict: Map[Symbol, MMTypeFormalParameter] = new HashMap[Symbol, MMTypeFormalParameter]
 
 	# Concrete NIT source properties by name
-	readable attr _src_local_properties: Map[Symbol, MMLocalProperty]
+	readable var _src_local_properties: Map[Symbol, MMLocalProperty]
 
 	init(mod: MMSrcModule, n: Symbol, cla: PClassdef, a: Int)
 	do
@@ -78,7 +78,7 @@ end
 
 redef class MMGlobalProperty
 	# Check that a module can access a property
-	meth check_visibility(v: AbsSyntaxVisitor, n: PNode, cm: MMSrcModule, allows_protected: Bool): Bool do
+	fun check_visibility(v: AbsSyntaxVisitor, n: PNode, cm: MMSrcModule, allows_protected: Bool): Bool do
 		var pm = local_class.module
 		assert pm isa MMSrcModule
 		var vpm = cm.visibility_for(pm)
@@ -101,16 +101,16 @@ end
 
 redef class MMLocalProperty
 	# The attached node (if any)
-	meth node: nullable PNode do return null
+	fun node: nullable PNode do return null
 
 	# Is the concrete method defined as init
-	meth is_init: Bool do return false
+	fun is_init: Bool do return false
 end
 
 # Concrete NIT source attribute
 class MMSrcAttribute
 special MMAttribute
-	redef readable attr _node: AAttrPropdef
+	redef readable var _node: AAttrPropdef
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
 		super(name, cla)
@@ -126,7 +126,7 @@ end
 # Concrete NIT source method for an automatic accesor
 class MMAttrImplementationMethod
 special MMSrcMethod
-	redef readable attr _node: AAttrPropdef
+	redef readable var _node: AAttrPropdef
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
 		super(name, cla)
@@ -155,8 +155,8 @@ end
 # Concrete NIT source method for an explicit method
 class MMMethSrcMethod
 special MMSrcMethod
-	redef meth is_init do return _node isa AConcreteInitPropdef
-	redef readable attr _node: nullable AMethPropdef
+	redef fun is_init do return _node isa AConcreteInitPropdef
+	redef readable var _node: nullable AMethPropdef
 	init(name: Symbol, cla: MMLocalClass, n: nullable AMethPropdef)
 	do
 		super(name, cla)
@@ -168,7 +168,7 @@ end
 class MMSrcTypeProperty
 special MMLocalProperty
 special MMTypeProperty
-	redef readable attr _node: ATypePropdef
+	redef readable var _node: ATypePropdef
 	init(name: Symbol, cla: MMLocalClass, n: ATypePropdef)
 	do
 		super(name, cla)
@@ -179,9 +179,9 @@ end
 # Concrete NIT implicit constructor
 class MMImplicitInit
 special MMMethSrcMethod
-	redef meth is_init do return true
-	readable attr _unassigned_attributes: Array[MMSrcAttribute]
-	readable attr _super_inits: Array[MMLocalProperty]
+	redef fun is_init do return true
+	readable var _unassigned_attributes: Array[MMSrcAttribute]
+	readable var _super_inits: Array[MMLocalProperty]
 	init(cla: MMLocalClass, unassigned_attributes: Array[MMSrcAttribute], super_inits: Array[MMLocalProperty])
 	do
 		super(once "init".to_symbol, cla, null)
@@ -193,17 +193,17 @@ end
 # Local variables
 abstract class Variable
 	# Name of the variable
-	readable attr _name: Symbol
+	readable var _name: Symbol
 
 	# Declaration AST node
-	readable attr _decl: nullable PNode
+	readable var _decl: nullable PNode
 
 	# Static type
-	readable writable attr _stype: nullable MMType
+	readable writable var _stype: nullable MMType
 
-	redef meth to_s do return _name.to_s
+	redef fun to_s do return _name.to_s
 
-	meth kind: String is abstract
+	fun kind: String is abstract
 
 	init(n: Symbol, d: nullable PNode)
 	do
@@ -215,21 +215,21 @@ end
 # Variable declared with 'var'
 class VarVariable
 special Variable
-	redef meth kind do return once "variable"
+	redef fun kind do return once "variable"
 	init(n: Symbol, d: PNode) do super
 end
 
 # Parameter of method (declared in signature)
 class ParamVariable
 special Variable
-	redef meth kind do return once "parameter"
+	redef fun kind do return once "parameter"
 	init(n: Symbol, d: nullable PNode) do super
 end
 
 # Automatic variable (like in the 'for' statement)
 class AutoVariable
 special Variable
-	redef meth kind do return once "automatic variable"
+	redef fun kind do return once "automatic variable"
 	init(n: Symbol, d: PNode) do super
 end
 
@@ -237,10 +237,10 @@ end
 # Lives in the same namespace than variables
 class ClosureVariable
 special Variable
-	redef meth kind do return once "closure"
+	redef fun kind do return once "closure"
 
 	# The signature of the closure
-	readable attr _closure: MMClosure
+	readable var _closure: MMClosure
 
 	init(n: Symbol, d: PNode, c: MMClosure)
 	do
@@ -255,106 +255,106 @@ end
 class AbsSyntaxVisitor
 special Visitor
 	# The root type Object
-	meth type_object: MMType
+	fun type_object: MMType
 	do
 		return _module.class_by_name(once ("Object".to_symbol)).get_type
 	end
 
 	# The primitive type Bool
-	meth type_bool: MMType
+	fun type_bool: MMType
 	do
 		return _module.class_by_name(once ("Bool".to_symbol)).get_type
 	end
 	
 	# The primitive type Int 
-	meth type_int: MMType
+	fun type_int: MMType
 	do
 		return _module.class_by_name(once ("Int".to_symbol)).get_type
 	end
 
 	# The primitive type Float
-	meth type_float: MMType
+	fun type_float: MMType
 	do
 		return _module.class_by_name(once ("Float".to_symbol)).get_type
 	end
 
 	# The primitive type Char
-	meth type_char: MMType
+	fun type_char: MMType
 	do
 		return _module.class_by_name(once ("Char".to_symbol)).get_type
 	end
 
 	# The primitive type String
-	meth type_string: MMType
+	fun type_string: MMType
 	do
 		return _module.class_by_name(once ("String".to_symbol)).get_type
 	end
 
 	# The primitive type Collection[nullable Object]
-	meth type_collection: MMType
+	fun type_collection: MMType
 	do
 		return _module.class_by_name(once ("Collection".to_symbol)).get_instantiate_type([type_object.as_nullable])
 	end
 
 	# The primitive type Array[?]
-	meth type_array(stype: MMType): MMType
+	fun type_array(stype: MMType): MMType
 	do
 		return _module.class_by_name(once ("Array".to_symbol)).get_instantiate_type([stype])
 	end
 
 	# The primitive type Discrete
-	meth type_discrete: MMType
+	fun type_discrete: MMType
 	do
 		return _module.class_by_name(once ("Discrete".to_symbol)).get_type
 	end
 
 	# The primitive type Range[?]
-	meth type_range(stype: MMType): MMType
+	fun type_range(stype: MMType): MMType
 	do
 		return _module.class_by_name(once ("Range".to_symbol)).get_instantiate_type([stype])
 	end
 
 	# The primitive type of null
-	meth type_none: MMType
+	fun type_none: MMType
 	do
 		return _module.type_none
 	end
 
 	# The current module
-	readable attr _module: MMSrcModule
+	readable var _module: MMSrcModule
 
 	# The current class
-	meth local_class: MMSrcLocalClass do return _local_class.as(not null)
-	writable attr _local_class: nullable MMSrcLocalClass
+	fun local_class: MMSrcLocalClass do return _local_class.as(not null)
+	writable var _local_class: nullable MMSrcLocalClass
 
 	# The current property
-	meth local_property: MMLocalProperty do return _local_property.as(not null)
-	writable attr _local_property: nullable MMLocalProperty
+	fun local_property: MMLocalProperty do return _local_property.as(not null)
+	writable var _local_property: nullable MMLocalProperty
 
 	# The current tool configuration/status
-	readable attr _tc: ToolContext 
+	readable var _tc: ToolContext 
 
 	# Display an error for a given syntax node
-	meth error(n: nullable PNode, s: String)
+	fun error(n: nullable PNode, s: String)
 	do
 		_tc.error("{locate(n)}: {s}")
 	end
 
 	# Display a warning for a given syntax node
-	meth warning(n: nullable PNode, s: String)
+	fun warning(n: nullable PNode, s: String)
 	do
 		_tc.warning("{locate(n)}: {s}")
 	end
 
 	#
-	meth locate(n: nullable PNode): String
+	fun locate(n: nullable PNode): String
 	do
 		if n != null then return n.locate
 		return _module.filename
 	end
 
 	# Check conformity and display error
-	meth check_conform(n: PNode, subtype: nullable MMType, stype: nullable MMType): Bool
+	fun check_conform(n: PNode, subtype: nullable MMType, stype: nullable MMType): Bool
 	do
 		if stype == null or subtype == null then
 			return false
@@ -369,7 +369,7 @@ special Visitor
 	# Check that an expression has a static type and that 
 	# Display an error and return false if n is a statement
 	# Require that the static type of n is known
-	meth check_expr(n: PExpr): Bool
+	fun check_expr(n: PExpr): Bool
 	do
 		if not n.is_typed then
 			if tc.error_count == 0 then
@@ -387,7 +387,7 @@ special Visitor
 	end
 
 	# Combine check_conform and check_expr
-	meth check_conform_expr(n: PExpr, stype: nullable MMType): Bool
+	fun check_conform_expr(n: PExpr, stype: nullable MMType): Bool
 	do
 		if stype == null then return false
 		if check_expr(n) then return check_conform(n, n.stype, stype) else return false
@@ -403,7 +403,7 @@ special Visitor
 	#   Int, Int, Object => return Object
 	#   Int, Float => display error, return null
 	#   nullable Int, Object => return nullable Object
-	meth check_conform_multiexpr(stype: nullable MMType, nodes: Collection[PExpr]): nullable MMType
+	fun check_conform_multiexpr(stype: nullable MMType, nodes: Collection[PExpr]): nullable MMType
 	do
 		var node: nullable PExpr = null # candidate node
 		for n in nodes do
@@ -442,15 +442,15 @@ end
 ###############################################################################
 
 redef class PNode
-	protected meth accept_abs_syntax_visitor(v: AbsSyntaxVisitor) do visit_all(v)
+	protected fun accept_abs_syntax_visitor(v: AbsSyntaxVisitor) do visit_all(v)
 end
 
 redef class Token
-	attr _symbol_cache: nullable Symbol
+	var _symbol_cache: nullable Symbol
 
 	# Symbol associated with the text
 	# Lazily computed
-	meth to_symbol: Symbol
+	fun to_symbol: Symbol
 	do
 		var s = _symbol_cache
 		if s == null then
@@ -463,73 +463,73 @@ end
 
 redef class PClassdef
 	# Associated class (MM entity)
-	meth local_class: MMSrcLocalClass is abstract
+	fun local_class: MMSrcLocalClass is abstract
 end
 
 redef class AAttrPropdef
 	# Associated attribute (MM entity)
-	meth prop: MMSrcAttribute is abstract
+	fun prop: MMSrcAttribute is abstract
 
 	# Associated read accessor (MM entity)
-	meth readmethod: nullable MMSrcMethod is abstract
+	fun readmethod: nullable MMSrcMethod is abstract
 
 	# Associated write accessor (MM entity)
-	meth writemethod: nullable MMSrcMethod is abstract
+	fun writemethod: nullable MMSrcMethod is abstract
 end
 
 redef class AMethPropdef
 	# Associated method (MM entity)
-	meth method: MMMethSrcMethod is abstract
+	fun method: MMMethSrcMethod is abstract
 
 	# Associated 'self' variable
-	meth self_var: ParamVariable is abstract
+	fun self_var: ParamVariable is abstract
 end
 
 redef class ATypePropdef
 	# Associated formal type (MM entity)
-	meth prop: MMSrcTypeProperty is abstract
+	fun prop: MMSrcTypeProperty is abstract
 end
 
 redef class PParam
 	# Position in the signature
-	meth position: Int is abstract
+	fun position: Int is abstract
 
 	# Associated local variable
-	meth variable: ParamVariable is abstract 
+	fun variable: ParamVariable is abstract 
 end
 
 redef class PClosureDecl
 	# Associated closure variable
-	meth variable: ClosureVariable is abstract
+	fun variable: ClosureVariable is abstract
 end
 
 redef class PType
 	# Retrieve the local class corresponding to the type.
 	# Display an error and return null if there is no class
 	# Display an error and return null if the type is not class based (formal one)
-	meth get_local_class(v: AbsSyntaxVisitor): nullable MMLocalClass is abstract
+	fun get_local_class(v: AbsSyntaxVisitor): nullable MMLocalClass is abstract
 
 	# Retrieve corresponding static type.
 	# Display an error and return null if there is a problem
-	meth get_stype(v: AbsSyntaxVisitor): nullable MMType is abstract
+	fun get_stype(v: AbsSyntaxVisitor): nullable MMType is abstract
 
 	# Retrieve corresponding static type.
 	# Display an error and return null if there is a problem
 	# But do not performs any subtype check.
 	# get_unchecked_stype should be called to check that the static type is fully valid
-	meth get_unchecked_stype(v: AbsSyntaxVisitor): nullable MMType is abstract
+	fun get_unchecked_stype(v: AbsSyntaxVisitor): nullable MMType is abstract
 
 	# Check that a static definition type is conform with regard to formal types
 	# Useful with get_unchecked_stype
 	# Remember that conformance check need that ancestors are totaly computed
-	meth check_conform(v: AbsSyntaxVisitor) is abstract
+	fun check_conform(v: AbsSyntaxVisitor) is abstract
 end
 
 redef class AType
-	attr _stype_cache: nullable MMType = null
-	attr _stype_cached: Bool = false
+	var _stype_cache: nullable MMType = null
+	var _stype_cached: Bool = false
 
-	redef meth get_local_class(v)
+	redef fun get_local_class(v)
 	do
 		var name = n_id.to_symbol
 		var mod = v.module
@@ -552,7 +552,7 @@ redef class AType
 		return local_class
 	end
 
-	redef meth get_unchecked_stype(v)
+	redef fun get_unchecked_stype(v)
 	do
 		if _stype_cached then return _stype_cache
 		_stype_cached = true
@@ -613,7 +613,7 @@ redef class AType
 		return t
 	end
 	
-	redef meth get_stype(v)
+	redef fun get_stype(v)
 	do
 		var t = get_unchecked_stype(v)
 		if t == null then return null
@@ -622,7 +622,7 @@ redef class AType
 		return t
 	end
 
-	redef meth check_conform(v)
+	redef fun check_conform(v)
 	do
 		var st = get_unchecked_stype(v)
 		if st == null then return 
@@ -646,52 +646,52 @@ redef class PExpr
 	# Is the expression node correcly typed
 	# Return false if typed was not yet computed or
 	# if an error occured during the typing computation
-	meth is_typed: Bool is abstract
+	fun is_typed: Bool is abstract
 
 	# Is the expression node a statement? (ie has no return value)
 	# require: is_typed
-	meth is_statement: Bool is abstract
+	fun is_statement: Bool is abstract
 
 	# The static type of the expression
 	# require: is_typed and not is_statement
-	meth stype: MMType is abstract
+	fun stype: MMType is abstract
 end
 
 redef class AVardeclExpr
 	# Assiociated local variable
-	meth variable: VarVariable is abstract
-	#readable writable attr _variable: nullable VarVariable
+	fun variable: VarVariable is abstract
+	#readable writable var _variable: nullable VarVariable
 end
 
 redef class AForExpr
 	# Associated automatic local variable
-	meth variable: AutoVariable is abstract
-	#readable writable attr _variable: nullable AutoVariable
+	fun variable: AutoVariable is abstract
+	#readable writable var _variable: nullable AutoVariable
 end
 
 redef class ASelfExpr
 	# Associated local variable
-	meth variable: ParamVariable is abstract
-	#readable writable attr _variable: nullable ParamVariable
+	fun variable: ParamVariable is abstract
+	#readable writable var _variable: nullable ParamVariable
 end
 
 redef class AVarFormExpr
 	# Associated local variable
-	meth variable: Variable is abstract
-	#readable writable attr _variable: nullable Variable
+	fun variable: Variable is abstract
+	#readable writable var _variable: nullable Variable
 end
 
 redef class AClosureCallExpr
 	# Associated closure variable
-	meth variable: ClosureVariable is abstract
-	#readable writable attr _variable: nullable ClosureVariable
+	fun variable: ClosureVariable is abstract
+	#readable writable var _variable: nullable ClosureVariable
 end
 
 redef class PClosureDef
 	# Associated closure
-	#readable writable attr _closure: nullable MMClosure
-	meth closure: MMClosure is abstract
+	#readable writable var _closure: nullable MMClosure
+	fun closure: MMClosure is abstract
 
 	# Automatic variables
-	readable writable attr _variables: nullable Array[AutoVariable]
+	readable writable var _variables: nullable Array[AutoVariable]
 end

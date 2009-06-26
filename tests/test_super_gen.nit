@@ -17,7 +17,7 @@
 import kernel
 
 class A[E: Object, F: Object]
-	meth foo(e: E, f: F): F
+	fun foo(e: E, f: F): F
 	do
 		0.output
 		return f
@@ -26,7 +26,7 @@ end
 
 class B[G: Int]
 special A[Bool,G]
-	redef meth foo(b: Bool, g: G): G
+	redef fun foo(b: Bool, g: G): G
 	do
 		1.output
 		super

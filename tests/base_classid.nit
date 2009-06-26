@@ -22,7 +22,7 @@ end
 
 class B
 special A
-	meth unreasheable
+	fun unreasheable
 	do
 		var a: A
 		a = new B

@@ -19,7 +19,7 @@
 #
 # contributed by Jean Privat
 
-meth ack(m: Int, n: Int): Int
+fun ack(m: Int, n: Int): Int
     do
 	if m == 0 then
 	    return n + 1

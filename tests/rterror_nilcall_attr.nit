@@ -17,7 +17,7 @@
 import kernel
 
 class Foo
-	attr _attr: Object
+	var _attr: Object
 
 	init do 
 		_attr = 0

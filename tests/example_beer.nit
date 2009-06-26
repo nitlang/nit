@@ -18,9 +18,9 @@
 # Just for fun
 
 class Bottle
-	meth sing is abstract
+	fun sing is abstract
 private
-	meth sing_start
+	fun sing_start
 	do
 		printn(self, " of beer on the wall.\n")
 		printn(self, " of beer.\n")
@@ -30,13 +30,13 @@ end
 
 class OneBottle
 special Bottle
-	redef meth sing
+	redef fun sing
 	do
 		sing_start
 		printn("No more bottles of appear on the wall!\n\n")
 	end
 
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		return "One bottle"
 	end
@@ -46,13 +46,13 @@ end
 
 class TwoBottles
 special Bottle
-	redef meth sing
+	redef fun sing
 	do
 		sing_start
 		printn("One bottle appears on the wall\n\n")
 	end
 
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		return "2 bottles"
 	end
@@ -63,13 +63,13 @@ end
 class Bottles
 special Bottle
 
-	redef meth sing
+	redef fun sing
 	do
 		sing_start
 		printn(_quantity - 1," bottles appear on the wall!\n\n")
 	end
 
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		return _quantity.to_s + " bottles"
 	end
@@ -79,7 +79,7 @@ special Bottle
 		_quantity = i
 	end
 
-	attr _quantity: Int
+	var _quantity: Int
 end
 
 var i = 99

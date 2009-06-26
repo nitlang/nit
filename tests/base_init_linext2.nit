@@ -33,7 +33,7 @@ class A
 		c.output
 		' '.output
 	end
-	meth work do '\n'.output
+	fun work do '\n'.output
 end
 
 class B

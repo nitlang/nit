@@ -17,7 +17,7 @@
 import end
 
 class Object
-	meth i_to_s(i: Int)
+	fun i_to_s(i: Int)
 	do
 		i.output
 	end
@@ -28,16 +28,16 @@ class A
 end
 
 class Int
-	meth output is intern
-	meth +(i: Int): Int is intern
-	redef meth i_to_s(i: Int)
+	fun output is intern
+	fun +(i: Int): Int is intern
+	redef fun i_to_s(i: Int)
 	do
 		(self+i).output
 	end
 end
 
 class G[E: Object]
-	meth i_to_s2(a: E, i: Int)
+	fun i_to_s2(a: E, i: Int)
 	do
 		a.i_to_s(i)
 	end

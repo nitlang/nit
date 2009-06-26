@@ -22,14 +22,14 @@ intrude import static_type
 
 redef class MMModule
 	# The root of the class hierarchy
-	meth type_any: MMType
+	fun type_any: MMType
 	do
 		var c_name = class_by_name(once ("Object".to_symbol))
 		return c_name.get_type
 	end
 
 	# Import global classes from supermodules
-	meth import_global_classes
+	fun import_global_classes
 	do
 		var globals = new HashMap[MMGlobalClass,HashSet[MMLocalClass]]
 		assert mhe != null
@@ -44,7 +44,7 @@ redef class MMModule
 	end 
 	
 	# Create implicit local classes for global classes that are not refined
-	meth import_local_classes
+	fun import_local_classes
 	do
 		for g in _global_classes do
 			if _local_class_by_global.has_key(g) then continue
@@ -55,14 +55,14 @@ end
 
 redef class MMLocalClass
 	# List of all parents
-	attr _direct_parents: Array[MMAncestor] = new Array[MMAncestor]
+	var _direct_parents: Array[MMAncestor] = new Array[MMAncestor]
 
 	# Is the class computing super.
 	# Used to detect specialization loops.
-	attr _computing_super: Bool = false 
+	var _computing_super: Bool = false 
 
 	# Compute super classes of a class
-	meth compute_super_classes
+	fun compute_super_classes
 	do
 		if computed_super_classes then
 			# do no recompute if allready done
@@ -88,7 +88,7 @@ redef class MMLocalClass
 	end
 
 	# Compute ancestors for a class
-	meth compute_ancestors
+	fun compute_ancestors
 	do
 		assert computed_super_classes
 		if computed_ancestors then return
@@ -106,10 +106,10 @@ redef class MMLocalClass
 		end
 	end
 
-	attr _are_global_properties_inherited: Bool = false
+	var _are_global_properties_inherited: Bool = false
 
 	# Inherit global properties for a class
-	meth inherit_global_properties
+	fun inherit_global_properties
 	do
 		if _are_global_properties_inherited then return
 		_are_global_properties_inherited = true
@@ -135,7 +135,7 @@ redef class MMLocalClass
 	end
 
 	# Make the name of a global property meaningful in the class
-	meth make_visible_an_inherited_global_property(glob: MMGlobalProperty)
+	fun make_visible_an_inherited_global_property(glob: MMGlobalProperty)
 	do
 		var names = _properties_by_name
 		var gname = glob.intro.name
@@ -150,26 +150,26 @@ redef class MMLocalClass
 	end
 
 	# Add super stype of this current local class
-	meth add_direct_parent(p: MMAncestor)
+	fun add_direct_parent(p: MMAncestor)
 	do
 		_direct_parents.add(p)
 	end
 
 	# Are super-class already computed?
-	meth computed_super_classes: Bool
+	fun computed_super_classes: Bool
 	do
 		return _crhe != null and _cshe != null
 	end
 	
 	# Are ancestors already computed
-	meth computed_ancestors: Bool
+	fun computed_ancestors: Bool
 	do
 		return _ancestors != null
 	end
 
 	# Get the ancestor for a given class
 	# TODO: is this useful?
-	private meth ancestor_for(c: MMLocalClass): MMAncestor
+	private fun ancestor_for(c: MMLocalClass): MMAncestor
 	do	
 		assert ancestors != null
 
@@ -190,7 +190,7 @@ redef class MMLocalClass
 		return ra
 	end
 
-	redef meth [](glob)
+	redef fun [](glob)
 	do
 		if _local_property_by_global.has_key(glob) then
 			return _local_property_by_global[glob]
@@ -202,7 +202,7 @@ redef class MMLocalClass
 	end
 
 	# Add default super class in direct parent and in super classes if this is not the Object class
-	private meth add_default_any_class(supers: Array[MMLocalClass])
+	private fun add_default_any_class(supers: Array[MMLocalClass])
 	do
 		if supers.is_empty and name != once ("Object".to_symbol) then
 			var t_any = module.type_any
@@ -213,7 +213,7 @@ redef class MMLocalClass
 	end
 	
 	# Adding inherited class from previous refinement of self
-	private meth add_super_classes(supers: Array[MMLocalClass])
+	private fun add_super_classes(supers: Array[MMLocalClass])
 	do
 		assert _crhe != null
 		for ref in _crhe.direct_greaters do
@@ -225,7 +225,7 @@ redef class MMLocalClass
 	end
 	
 	# Add self parents of this local class
-	private meth add_explicit_classes(supers: Array[MMLocalClass])
+	private fun add_explicit_classes(supers: Array[MMLocalClass])
 	do
 		for p in _direct_parents do
 			supers.add(p.local_class)
@@ -233,7 +233,7 @@ redef class MMLocalClass
 	end
 
 	# Ensure all super parents are computed
-	private meth compute_super_parents(supers: Array[MMLocalClass])
+	private fun compute_super_parents(supers: Array[MMLocalClass])
 	do
 		for p in supers do
 			p.compute_super_classes
@@ -241,7 +241,7 @@ redef class MMLocalClass
 	end
 
 	# compute all ancestors for a class (multiple)
-	private meth build_ancestors: Array[MMAncestor]
+	private fun build_ancestors: Array[MMAncestor]
 	do
 		var all_ancestors = new Array[MMAncestor]
 		# Refined classes are ancestors
@@ -259,7 +259,7 @@ redef class MMLocalClass
 	end
 
 	# Build an ancestor map indexed by LocalClass
-	private meth group_ancestors(all: Array[MMAncestor]): Map[MMLocalClass, Set[MMAncestor]]
+	private fun group_ancestors(all: Array[MMAncestor]): Map[MMLocalClass, Set[MMAncestor]]
 	do
 		#print "process {self}"
 		var map = new HashMap[MMLocalClass, Set[MMAncestor]]
@@ -281,7 +281,7 @@ redef class MMLocalClass
 	end
 
 	# Remove duplicate ancestors and merge if compatible, in the other case do an error
-	private meth merge_ancestors(set: Set[MMAncestor]): MMAncestor
+	private fun merge_ancestors(set: Set[MMAncestor]): MMAncestor
 	do
 		var marks = new HashSet[MMAncestor]
 		var res = new Array[MMAncestor]
@@ -316,7 +316,7 @@ redef class MMLocalClass
 	# Inherit a local property
 	# Is lazily called
 	# FIXME: dont crash lazily
-	private meth inherit_local_property(glob: MMGlobalProperty): MMLocalProperty
+	private fun inherit_local_property(glob: MMGlobalProperty): MMLocalProperty
 	do
 		assert not _local_property_by_global.has_key(glob)
 
@@ -368,7 +368,7 @@ end
 
 redef class MMLocalProperty
 	# Attach self to a global property
-	meth inherit_global(g: MMGlobalProperty)
+	fun inherit_global(g: MMGlobalProperty)
 	do
 		set_global(g)
 		var impls = new Array[MMLocalProperty]
@@ -382,7 +382,7 @@ end
 
 redef class MMAncestor
 	# Add this ancestor and it's super one in tab
-	private meth add_in(tab: Array[MMAncestor])
+	private fun add_in(tab: Array[MMAncestor])
 	do
 		tab.add(self)
 		stype.local_class.compute_ancestors
@@ -419,7 +419,7 @@ end
 
 class MMRefineAncestor
 special MMAncestor
-	redef readable attr _local_class: MMLocalClass
+	redef readable var _local_class: MMLocalClass
 
 	init(b: MMLocalClass, a: MMLocalClass)
 	do
@@ -432,7 +432,7 @@ end
 
 class MMSpecAncestor
 special MMAncestor
-	redef meth local_class do return stype.local_class
+	redef fun local_class do return stype.local_class
 
 	init(inheriter: MMType, stype: MMType)
 	do
@@ -443,7 +443,7 @@ end
 
 class MMDefaultAncestor
 special MMAncestor
-	redef meth local_class do return stype.local_class
+	redef fun local_class do return stype.local_class
 
 	init(b: MMLocalClass, anc: MMType)
 	do

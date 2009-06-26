@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-meth foo: Int is extern "foo"
-meth bar(i: Int): Int is extern "bar"
-meth baz(a: Object): Object is extern "baz"
+fun foo: Int is extern "foo"
+fun bar(i: Int): Int is extern "bar"
+fun baz(a: Object): Object is extern "baz"
 
 print(foo)
 print(bar(1))

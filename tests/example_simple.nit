@@ -16,7 +16,7 @@
 
 # This program is a simple program without explicit class definition
 
-meth say_goodnight(name: String): String
+fun say_goodnight(name: String): String
 do
 	var gn = "Goodnight"
 	return gn + ", " + name

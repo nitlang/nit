@@ -16,62 +16,62 @@
 
 
 class A
-   meth +(a: A): A
+   fun +(a: A): A
    do
 	   2.output
 	   return self
    end
-   meth -: A
+   fun -: A
    do
 	   1.output
 	   return self
    end
-   meth -(a: A): A
+   fun -(a: A): A
    do
 	   6.output
 	   return self
    end
-   meth *(a: A): A
+   fun *(a: A): A
    do
 	   3.output
 	   return self
    end
-   meth /(a: A): A
+   fun /(a: A): A
    do
 	   4.output
 	   return self
    end
-   meth %(a: A): A
+   fun %(a: A): A
    do
 	   5.output
 	   return self
    end
-   redef meth ==(a: nullable Object): Bool
+   redef fun ==(a: nullable Object): Bool
    do
 	   7.output
 	   return true
    end
-   meth <(a: A): Bool
+   fun <(a: A): Bool
    do
 	   9.output
 	   return true
    end
-   meth >(a: A): Bool
+   fun >(a: A): Bool
    do
 	   10.output
 	   return true
    end
-   meth <=(a: A): Bool
+   fun <=(a: A): Bool
    do
 	   11.output
 	   return true
    end
-   meth >=(a: A): Bool
+   fun >=(a: A): Bool
    do
 	   12.output
 	   return true
    end
-   meth <=>(a: A): Int
+   fun <=>(a: A): Int
    do
 	   13.output
 	   return 0

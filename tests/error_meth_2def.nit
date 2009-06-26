@@ -15,6 +15,6 @@
 # limitations under the License.
 
 class A
-	meth toto(a: Int) do end
-	meth toto(a: Char) do end
+	fun toto(a: Int) do end
+	fun toto(a: Char) do end
 end

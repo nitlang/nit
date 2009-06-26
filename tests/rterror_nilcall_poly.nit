@@ -17,28 +17,28 @@
 import kernel
 
 redef class Object
-	meth foo
+	fun foo
 	do
 		0.output
 	end
 end
 
 redef class Int
-	redef meth foo
+	redef fun foo
 	do
 		output
 	end
 end
 
 redef class Char
-	redef meth foo
+	redef fun foo
 	do
 		ascii.foo
 	end
 end
 
 class Foo
-	redef meth foo
+	redef fun foo
 	do
 		5.output
 	end
@@ -47,7 +47,7 @@ class Foo
 end
 
 class Bar
-	redef meth foo
+	redef fun foo
 	do
 		6.output
 	end

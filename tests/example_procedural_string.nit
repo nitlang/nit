@@ -16,7 +16,7 @@
 
 # A procedural program (without explicit class).
 
-meth first_word(s: String): String
+fun first_word(s: String): String
 do
 	var result = new Buffer
 	var i = 0

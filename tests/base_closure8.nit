@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	meth foo(i: Int)
+	fun foo(i: Int)
 		with bar
 	do
 		'['.output
@@ -31,7 +31,7 @@ class A
 	end
 end
 
-meth start
+fun start
 do
 	var a = new A
 	0.output

@@ -22,17 +22,17 @@ intrude import abstractmetamodel
 
 redef class MMLocalClass
 	# Cached result of get_type
-	attr _base_type_cache: nullable MMType
+	var _base_type_cache: nullable MMType
 
 	# Return the type of self for this class
-	meth get_type: MMType
+	fun get_type: MMType
 	do
 		if _base_type_cache == null then _base_type_cache = new MMTypeSimpleClass(self)
 		return _base_type_cache.as(not null)
 	end
 
 	# Register a new ancestor
-	protected meth add_ancestor(a: MMAncestor)
+	protected fun add_ancestor(a: MMAncestor)
 	do
 		assert not _ancestors.has_key(a.local_class)
 		assert a.local_class != self
@@ -40,10 +40,10 @@ redef class MMLocalClass
 	end
 
 	# Array of ancestor that associate each superclass with the corresponding ancestor
-	readable attr _ancestors: nullable Map[MMLocalClass, MMAncestor]
+	readable var _ancestors: nullable Map[MMLocalClass, MMAncestor]
 
 	# The ancestor type for a given superclass
-	meth ancestor(c: MMLocalClass): MMType
+	fun ancestor(c: MMLocalClass): MMType
 	do
 		return _ancestors[c].stype
 	end
@@ -51,12 +51,12 @@ end
 
 redef class MMLocalProperty
 	# The signature of the property (where it is declared)
-	readable writable attr _signature: nullable MMSignature
+	readable writable var _signature: nullable MMSignature
 
-	attr _signatures_cache: HashMap[MMType, MMSignature] = new HashMap[MMType, MMSignature]
+	var _signatures_cache: HashMap[MMType, MMSignature] = new HashMap[MMType, MMSignature]
 
 	# Return the adapted signature of self for a receiver of type t
-	meth signature_for(t: MMType): MMSignature do
+	fun signature_for(t: MMType): MMSignature do
 		if t == local_class.get_type then return signature.as(not null)
 
 		if _signatures_cache.has_key(t) then return _signatures_cache[t]
@@ -70,25 +70,25 @@ end
 # Signature for local properties
 class MMSignature
 	# The type of the reveiver
-	readable attr _recv: MMType
+	readable var _recv: MMType
 
 	# The parameter types
-	attr _params: Array[MMType]
+	var _params: Array[MMType]
 
 	# The return type
-	readable attr _return_type: nullable MMType
+	readable var _return_type: nullable MMType
 
 	# The closure parameters
-	readable attr _closures: Array[MMClosure] = new Array[MMClosure]
+	readable var _closures: Array[MMClosure] = new Array[MMClosure]
 
 	# Number of parameters
-	meth arity: Int
+	fun arity: Int
 	do
 		return _params.length
 	end
 
 	# Is self a valid subtype of an other signature
-	meth <(s: MMSignature): Bool
+	fun <(s: MMSignature): Bool
 	do
 		if self == s then
 			return true
@@ -115,13 +115,13 @@ class MMSignature
 	end
 
 	# The type of the i-th parameter
-	meth [](i: Int): MMType
+	fun [](i: Int): MMType
 	do
 		assert _params.length > i
 		return _params[i]
 	end
 
-	redef meth to_s
+	redef fun to_s
 	do
 		var s = new Buffer
 		if _params.length > 0 then
@@ -142,7 +142,7 @@ class MMSignature
 	end
 
 	# Adapt the signature to a different receiver
-	meth adaptation_to(r: MMType): MMSignature
+	fun adaptation_to(r: MMType): MMSignature
 	do
 		if _recv == r then
 			return self
@@ -163,11 +163,11 @@ class MMSignature
 		return res
 	end
 
-	attr _not_for_self_cache: nullable MMSignature = null
+	var _not_for_self_cache: nullable MMSignature = null
 
 	# Return a type approximation if the reveiver is not self
 	# Useful for virtual types
-	meth not_for_self: MMSignature
+	fun not_for_self: MMSignature
 	do
 		if _not_for_self_cache != null then return _not_for_self_cache.as(not null)
 
@@ -215,18 +215,18 @@ end
 # A closure in a signature
 class MMClosure
 	# The signature of the closure
-	readable attr _signature: MMSignature
+	readable var _signature: MMSignature
 
 	# Is the closure a brek one
 	# aka is defined with the break keyword thus does not return
-	readable attr _is_break: Bool
+	readable var _is_break: Bool
 
 	# Is the closure optional?
 	# ie is there a default definition
-	readable attr _is_optional: Bool
+	readable var _is_optional: Bool
 
 	# Adapt the signature to a different receiver
-	meth adaptation_to(r: MMType): MMClosure
+	fun adaptation_to(r: MMType): MMClosure
 	do
 		return new MMClosure(_signature.adaptation_to(r), _is_break, _is_optional)
 	end
@@ -238,7 +238,7 @@ class MMClosure
 		_is_optional = is_optional
 	end
 
-	meth not_for_self: MMClosure
+	fun not_for_self: MMClosure
 	do
 		var sig = _signature.not_for_self
 		if sig != _signature then
@@ -248,7 +248,7 @@ class MMClosure
 		end
 	end
 
-	meth <(c: MMClosure): Bool
+	fun <(c: MMClosure): Bool
 	do
 		if c.is_optional and not is_optional then return false
 		if not c.is_break and is_break then return false
@@ -259,29 +259,29 @@ end
 # Inheritance relation between two types
 abstract class MMAncestor
 	# The inherited type
-	writable attr _stype: nullable MMType = null
+	writable var _stype: nullable MMType = null
 
 	# The inherited type
-	meth stype: MMType do return _stype.as(not null)
+	fun stype: MMType do return _stype.as(not null)
 
 	# The inheriter (heir) type
-	writable attr _inheriter: nullable MMType = null
+	writable var _inheriter: nullable MMType = null
 
 	# The inheriter (heir) type
-	meth inheriter: MMType do return _inheriter.as(not null)
+	fun inheriter: MMType do return _inheriter.as(not null)
 
-	meth is_reffinement: Bool do
+	fun is_reffinement: Bool do
 		return stype.module != stype.module
 	end
 
-	meth is_specialisation: Bool do
+	fun is_specialisation: Bool do
 		return stype.local_class.global != inheriter.local_class.global
 	end
 
 	# The inherited class
-	meth local_class: MMLocalClass is abstract
+	fun local_class: MMLocalClass is abstract
 
-	redef meth to_s
+	redef fun to_s
 	do
 		if _stype == null then
 			return local_class.to_s
@@ -295,29 +295,29 @@ end
 # Note that static type a related to a specific module
 abstract class MMType
 	# The module where self makes sence
-	meth module: MMModule is abstract
+	fun module: MMModule is abstract
 
 	# The local class that self direclty or indirectly refers to
-	meth local_class: MMLocalClass is abstract
+	fun local_class: MMLocalClass is abstract
 
 	# Is the type a valid one
 	# For instance, circular dependency on formal types is invalid
-	meth is_valid: Bool do return true
+	fun is_valid: Bool do return true
 
 	# Is self a valid subtype of t
-	meth <(t : MMType): Bool is abstract
+	fun <(t : MMType): Bool is abstract
 
 	# Is self a valid supertype of t
 	# This method must be only called within definition of < if
 	# a double dispatch is needed
-	meth is_supertype(t: MMType): Bool is abstract
+	fun is_supertype(t: MMType): Bool is abstract
 
 	# Adapt self to another module
-	meth for_module(mod: MMModule): MMType is abstract
+	fun for_module(mod: MMModule): MMType is abstract
 
 	# Get the type adapted to another receiver type
 	# Useful for formal types
-	meth adapt_to(recv: MMType): MMType is abstract
+	fun adapt_to(recv: MMType): MMType is abstract
 
 	# Adapt self to another local class context
 	# Useful for genericity
@@ -339,21 +339,21 @@ abstract class MMType
 	# 'D'.upcast_for('C') -> 'C[Float]'
 	# 'D'.upcast_for('B') -> 'C[String]'
 	# 'D'.upcast_for('A') -> 'A[String]'
-	meth upcast_for(c: MMLocalClass): MMType is abstract
+	fun upcast_for(c: MMLocalClass): MMType is abstract
 
 	# Return a type approximation if the reveiver is not self
 	# Useful for virtual types
-	meth not_for_self: MMType do return self
+	fun not_for_self: MMType do return self
 
 	# The nullable version of self (if needed)
-	attr _as_nullable_cache: nullable MMType = null
+	var _as_nullable_cache: nullable MMType = null
 
 	# IS the type can accept null?
-	meth is_nullable: Bool do return false
+	fun is_nullable: Bool do return false
 
 	# Return the nullable version of the type
 	# Noop if already nullable
-	meth as_nullable: MMType do
+	fun as_nullable: MMType do
 		var cache = _as_nullable_cache
 		if cache != null then return cache
 		var res = new MMNullableType(self)
@@ -363,53 +363,53 @@ abstract class MMType
 
 	# Return the not null version of the type
 	# Noop if already not null
-	meth as_notnull: MMType do return self
+	fun as_notnull: MMType do return self
 end
 
 class MMNullableType
 special MMType
-	attr _base_type: MMType
-	redef meth is_valid do return _base_type.is_valid
-	redef meth is_nullable: Bool do return true
-	redef meth as_notnull do return _base_type
-	redef meth as_nullable do return self
+	var _base_type: MMType
+	redef fun is_valid do return _base_type.is_valid
+	redef fun is_nullable: Bool do return true
+	redef fun as_notnull do return _base_type
+	redef fun as_nullable do return self
 	init(t: MMType) do _base_type = t
 
-	redef meth module do return _base_type.module
+	redef fun module do return _base_type.module
 
-	redef meth local_class do return _base_type.local_class
+	redef fun local_class do return _base_type.local_class
 
-	redef meth <(t)
+	redef fun <(t)
 	do
 		return t isa MMNullableType and _base_type < t.as_notnull
 	end
 
-	redef meth to_s
+	redef fun to_s
 	do
 		return "nullable {_base_type}"
 	end
 
-	redef meth is_supertype(t)
+	redef fun is_supertype(t)
 	do
 		return _base_type.is_supertype(t)
 	end
 
-	redef meth for_module(mod)
+	redef fun for_module(mod)
 	do
 		return _base_type.for_module(mod).as_nullable
 	end
 
-	redef meth adapt_to(recv)
+	redef fun adapt_to(recv)
 	do
 		return _base_type.adapt_to(recv).as_nullable
 	end
 
-	redef meth upcast_for(c)
+	redef fun upcast_for(c)
 	do
 		return _base_type.upcast_for(c)
 	end
 
-	redef meth not_for_self
+	redef fun not_for_self
 	do
 		return _base_type.not_for_self.as_nullable
 	end
@@ -417,16 +417,16 @@ end
 
 class MMTypeClass 
 special MMType
-	redef readable attr _local_class: MMLocalClass
-	redef meth module do return _local_class.module end
-	redef meth <(t) do return t.is_supertype(self)
+	redef readable var _local_class: MMLocalClass
+	redef fun module do return _local_class.module end
+	redef fun <(t) do return t.is_supertype(self)
 
-	redef meth to_s
+	redef fun to_s
 	do
 		return _local_class.to_s
 	end
 
-	redef meth upcast_for(c)
+	redef fun upcast_for(c)
 	do
 		var t: MMType = self
 		if _local_class != c then
@@ -443,12 +443,12 @@ end
 
 class MMTypeSimpleClass
 special MMTypeClass
-	redef meth is_supertype(t)
+	redef fun is_supertype(t)
 	do
 		return  t.local_class.cshe <= _local_class
 	end
 
-	redef meth for_module(mod)
+	redef fun for_module(mod)
 	do
 		var t: MMType = self
 		if module != mod then
@@ -457,7 +457,7 @@ special MMTypeClass
 		return t
 	end
 
-	redef meth adapt_to(recv) do return self
+	redef fun adapt_to(recv) do return self
 
 	init(c: MMLocalClass)
 	do
@@ -468,20 +468,20 @@ end
 # The type of null
 class MMTypeNone
 special MMType
-	redef readable attr _module: MMModule
-	redef meth is_nullable: Bool do return true
-	redef meth <(t) do return t isa MMTypeNone or t isa MMNullableType
-	redef meth to_s do return "null"
-	redef meth is_supertype(t) do return false
-	redef meth local_class do abort
-	redef meth upcast_for(c) do abort
-	redef meth as_nullable do return self
-	redef meth as_notnull do abort
+	redef readable var _module: MMModule
+	redef fun is_nullable: Bool do return true
+	redef fun <(t) do return t isa MMTypeNone or t isa MMNullableType
+	redef fun to_s do return "null"
+	redef fun is_supertype(t) do return false
+	redef fun local_class do abort
+	redef fun upcast_for(c) do abort
+	redef fun as_nullable do return self
+	redef fun as_notnull do abort
 
 	private init(m: MMModule) do _module = m
 end
 
 redef class MMModule
 	# The type of null
-	readable attr _type_none: MMTypeNone = new MMTypeNone(self)
+	readable var _type_none: MMTypeNone = new MMTypeNone(self)
 end

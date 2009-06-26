@@ -14,24 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-meth a
+fun a
 do
 	return
 end
 
-meth b: Int
+fun b: Int
 do
 	return 1
 end
 
-meth c: Int
+fun c: Int
 do
 	do
 		return 1
 	end
 end
 
-meth d: Int
+fun d: Int
 do
 	if true then
 	else
@@ -40,7 +40,7 @@ do
 	return 1
 end
 
-meth e: Int
+fun e: Int
 do
 	while true do
 		return 1
@@ -48,7 +48,7 @@ do
 	return 0
 end
 
-meth f: Int
+fun f: Int
 do
 	if true then
 		return 1

@@ -18,10 +18,10 @@ import kernel
 
 class Gen1[E, F]
 special Object
-   readable writable attr _e: E
-   attr _f_: F
-   meth f: F do return _f_ end 
-   meth f=(x: F) do _f_ = x end
+   readable writable var _e: E
+   var _f_: F
+   fun f: F do return _f_ end 
+   fun f=(x: F) do _f_ = x end
 
    init(e:E) do _e = e
 end
@@ -33,10 +33,10 @@ end
 
 class Gen3[H: Int]
 special Gen1[H, Char]
-   redef readable redef writable redef attr _e: H
-   redef attr _f_: Char = 'N'
-   redef meth f: Char do return _f_ end 
-   redef meth f=(x: Char) do _f_ = x end
+   redef readable redef writable redef var _e: H
+   redef var _f_: Char = 'N'
+   redef fun f: Char do return _f_ end 
+   redef fun f=(x: Char) do _f_ = x end
 
    init(e:H) do super(e)
 end

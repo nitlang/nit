@@ -15,26 +15,26 @@
 # limitations under the License.
 
 class A
-	attr _attribute: nullable A
-	attr _num: Char
+	var _attribute: nullable A
+	var _num: Char
 
-	meth foo=(a: nullable A)
+	fun foo=(a: nullable A)
 	do
 		_attribute = a
 	end
 
-	meth foo: nullable A
+	fun foo: nullable A
 	do
 		return _attribute
 	end
 
-	meth bar=(c: Char, a: nullable A)   
+	fun bar=(c: Char, a: nullable A)   
 	do
 		_num = c
 		_attribute = a
 	end
 
-	meth bar(c: Char): nullable A
+	fun bar(c: Char): nullable A
 	do
 		if c == _num then
 			return _attribute
@@ -43,7 +43,7 @@ class A
 		end
 	end
 
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		var s = _num.to_s
 		if _attribute == null then

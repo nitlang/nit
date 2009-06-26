@@ -17,7 +17,7 @@
 import example_sorts
 
 redef class Int
-	meth random: Int
+	fun random: Int
 	# Return a random generated number between 0 and self
 	do
 		var val = (last_number.value * 3877 + 29573) % 139968
@@ -25,14 +25,14 @@ redef class Int
 		return val % self
 	end
 
-	meth last_number: Integer
+	fun last_number: Integer
 	do
 		return once new Integer
 	end
 end
 
 class Integer
-	readable writable attr _value: Int 
+	readable writable var _value: Int 
 
 	init
 	do

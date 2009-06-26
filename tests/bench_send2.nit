@@ -15,15 +15,15 @@
 # limitations under the License.
 
 redef class Object
-	meth foo do end
+	fun foo do end
 end
 class A
-	redef meth foo do end
+	redef fun foo do end
 	init do end
 end
 class B
 special A
-	redef meth foo do end
+	redef fun foo do end
 	init do end
 
 end
@@ -41,14 +41,14 @@ end
 class E
 special B
 special C
-	redef meth foo do end
+	redef fun foo do end
 	init do end
 
 end
 class F
 special D
 special E
-	redef meth foo do end
+	redef fun foo do end
 	init do end
 
 end

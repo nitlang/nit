@@ -15,10 +15,10 @@
 # limitations under the License.
 
 class A
-meth toto: Int do return 1 end
+fun toto: Int do return 1 end
 end
 
 class B
 special A
-redef meth toto do end
+redef fun toto do end
 end

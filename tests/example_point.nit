@@ -16,42 +16,42 @@
 
 class Point
 private
-	attr _x: Int	# Abscisse
-	attr _y: Int	# Ordonnée
+	var _x: Int	# Abscisse
+	var _y: Int	# Ordonnée
 
 
-	meth x: Int
+	fun x: Int
 	do
 		return _x
 	end
-	meth x=(i: Int)
+	fun x=(i: Int)
 	do
 		_x = i
 	end
 
-	meth y: Int
+	fun y: Int
 	do
 		return _y
 	end
-	meth y=(i: Int)
+	fun y=(i: Int)
 	do
 		_y = i
 	end
 
 	# Change la position d'un point
-	meth moveto(x: Int, y: Int)
+	fun moveto(x: Int, y: Int)
 	do
 		_x = x
 		_y = y
 	end
 
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		var s = "({_x}:{_y})"
 		return s
 	end
 
-	redef meth ==(p)
+	redef fun ==(p)
 	do
 		return not p is null and p isa Point and _x == p.x and _y == p.y
 	end

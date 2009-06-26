@@ -22,9 +22,9 @@
 # Incorrect without bignums
 
 class PiDigitSpigot
-    attr _z: Transformation
-    attr _x: Transformation
-    attr _inverse: Transformation
+    var _z: Transformation
+    var _x: Transformation
+    var _inverse: Transformation
     
 
     init
@@ -35,7 +35,7 @@ class PiDigitSpigot
 	end
 
 
-    meth next: Int
+    fun next: Int
 	do
 	    var y = digit
 	    if is_safe(y) then
@@ -47,7 +47,7 @@ class PiDigitSpigot
 	    end
 	end
 	
-    meth next_: Int
+    fun next_: Int
 	do
     	    var y = digit
 	    while not is_safe(y) do
@@ -58,22 +58,22 @@ class PiDigitSpigot
 	    return y
 	end
 
-    meth digit: Int
+    fun digit: Int
 	do
 	    return _z.extract(3)
 	end
 
-    meth is_safe(digit: Int): Bool
+    fun is_safe(digit: Int): Bool
 	do
 	    return digit == _z.extract(4)
 	end
 
-    meth produce(i: Int): Transformation
+    fun produce(i: Int): Transformation
 	do
 	    return _inverse.qrst(10,-10*i,0,1).compose(_z)
 	end
 
-    meth consume(a: Transformation): Transformation
+    fun consume(a: Transformation): Transformation
 	do
 	    return _z.compose(a)
 	end
@@ -81,18 +81,18 @@ end
 
 
 class Transformation
-    attr _q: Int
-    attr _r: Int
-    attr _s: Int
-    attr _t: Int
-    attr _k: Int
+    var _q: Int
+    var _r: Int
+    var _s: Int
+    var _t: Int
+    var _k: Int
 
     init(q: Int, r: Int, s: Int, t: Int)
         do
 	    set(q, r, s, t)
 	end
 
-    meth set(q: Int, r: Int, s: Int, t: Int)
+    fun set(q: Int, r: Int, s: Int, t: Int)
 	do
 	    _q = q
 	    _r = r
@@ -102,7 +102,7 @@ class Transformation
 	end
 
 
-    meth next: Transformation
+    fun next: Transformation
 	do
 	    _k = _k + 1
 	    _q = _k
@@ -112,12 +112,12 @@ class Transformation
 	    return self
 	end
 
-    meth extract(j: Int): Int
+    fun extract(j: Int): Int
 	do
 	    return (_q * j + _r) / (_s * j + _t)
 	end
 
-    meth compose(a: Transformation): Transformation
+    fun compose(a: Transformation): Transformation
 	do
 	    return new Transformation(
 	    	_q * a._q,
@@ -127,7 +127,7 @@ class Transformation
 		)
 	end
 
-    meth qrst(q: Int, r: Int, s: Int, t: Int): Transformation
+    fun qrst(q: Int, r: Int, s: Int, t: Int): Transformation
 	do
 	    set(q, r, s, t)
 	    return self

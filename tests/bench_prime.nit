@@ -16,7 +16,7 @@
 
 
 redef class Int
-	meth is_premier: Bool
+	fun is_premier: Bool
 	do
 		var i = 2
 		while i < self do

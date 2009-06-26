@@ -15,26 +15,26 @@
 # limitations under the License.
 
 class Pair[F, S]
-	meth first: F
+	fun first: F
 		do
 			return _first
 		end
-	meth second: S
+	fun second: S
 		do
 			return _second
 		end
-	meth set(f: F, s: S)
+	fun set(f: F, s: S)
 		do
 			_first = f
 			_second =  s
 		end
-	redef meth to_s: String
+	redef fun to_s: String
 		do
 			return "{first}:{_second}"
 		end
 private
-	attr _first: F
-	attr _second: S
+	var _first: F
+	var _second: S
 
 	init(f: F, s: S)
 		do
@@ -44,7 +44,7 @@ end
 
 class Pair[E: Comparable, E: Comparable]
 
-	meth >(p: Pair[Comparable, Comparable]): Bool
+	fun >(p: Pair[Comparable, Comparable]): Bool
 		do
 			return _first > p.first or 
 				first == p.first and second > p._second
@@ -53,7 +53,7 @@ end
 
 class Pair[E: Int, E: Int]
 
-	meth sum: Int
+	fun sum: Int
 		do
 			return first + _second
 		end

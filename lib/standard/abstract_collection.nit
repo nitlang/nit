@@ -40,64 +40,64 @@ import kernel
 # Subclasses may redefine them with an efficient implementation.
 interface Collection[E]
 	# Get a new iterator on the collection.
-	meth iterator: Iterator[E] is abstract
+	fun iterator: Iterator[E] is abstract
 
 	# Is there no item in the collection ?
-	meth is_empty: Bool is abstract 
+	fun is_empty: Bool is abstract 
 
 	# Number of items in the collection.
-	meth length: Int is abstract
+	fun length: Int is abstract
 
 	# Is `item' in the collection ?
 	# Comparaisons are done with ==
-	meth has(item: E): Bool is abstract
+	fun has(item: E): Bool is abstract
 
 	# Is the collection contain only `item' ?
 	# Comparaisons are done with ==
 	# Return true if the collection is empty.
-	meth has_only(item: E): Bool is abstract
+	fun has_only(item: E): Bool is abstract
 
 	# How many occurences of `item' are in the collection ?
 	# Comparaisons are done with ==
-	meth count(item: E): Int is abstract
+	fun count(item: E): Int is abstract
 
 	# Return one the item of the collection
-	meth first: E is abstract
+	fun first: E is abstract
 end
 
 # Naive implementation of collections method
 # You only have to define iterator!
 interface NaiveCollection[E]
 special Collection[E]
-	redef meth is_empty do return length == 0
+	redef fun is_empty do return length == 0
 
-	redef meth length
+	redef fun length
 	do
 		var nb = 0
 		for i in self do nb += nb
 		return nb
 	end
 
-	redef meth has(item)
+	redef fun has(item)
 	do
 		for i in self do if i == item then return true
 		return false
 	end
 
-	redef meth has_only(item)
+	redef fun has_only(item)
 	do
 		for i in self do if i != item then return false
 		return true
 	end
 
-	redef meth count(item)
+	redef fun count(item)
 	do
 		var nb = 0
 		for i in self do if i == item then nb += 1
 		return nb
 	end
 
-	redef meth first
+	redef fun first
 	do
 		assert length > 0
 		return iterator.item
@@ -109,31 +109,31 @@ end
 interface Iterator[E]
 	# The current item.
 	# Require `is_ok'.
-	meth item: E is abstract
+	fun item: E is abstract
 
 	# Jump to the next item.
 	# Require `is_ok'.
-	meth next is abstract
+	fun next is abstract
 
 	# Is there a current item ?
-	meth is_ok: Bool is abstract
+	fun is_ok: Bool is abstract
 end
 
 # A collection that contains only one item.
 class Container[E]
 special Collection[E]
 
-	redef meth first do return _item
+	redef fun first do return _item
 
-	redef meth is_empty do return false
+	redef fun is_empty do return false
 
-	redef meth length do return 1
+	redef fun length do return 1
 
-	redef meth has(an_item) do return _item == an_item
+	redef fun has(an_item) do return _item == an_item
 
-	redef meth has_only(an_item) do return _item == an_item
+	redef fun has_only(an_item) do return _item == an_item
 
-	redef meth count(an_item)
+	redef fun count(an_item)
 	do
 		if _item == an_item then
 			return 1
@@ -142,40 +142,40 @@ special Collection[E]
 		end
 	end
 
-	redef meth iterator do return new ContainerIterator[E](self)
+	redef fun iterator do return new ContainerIterator[E](self)
 
 	# Create a new instance with a given initial value.
 	init(e: E) do _item = e
 
 	# The stored item
-	readable writable attr _item: E
+	readable writable var _item: E
 end
 
 # This iterator is quite stupid since it is used for only one item.
 class ContainerIterator[E]
 special Iterator[E]
-	redef meth item do return _container.item
+	redef fun item do return _container.item
 
-	redef meth next do _is_ok = false
+	redef fun next do _is_ok = false
 
 	init(c: Container[E]) do _container = c
 
-	redef readable attr _is_ok: Bool = true
+	redef readable var _is_ok: Bool = true
 
-	attr _container: Container[E]
+	var _container: Container[E]
 end
 
 # Items can be removed from this collection
 interface RemovableCollection[E]
 special Collection[E]
 	# Remove all items
-	meth clear is abstract
+	fun clear is abstract
 
 	# Remove an occucence of `item'
-	meth remove(item: E) is abstract
+	fun remove(item: E) is abstract
 
 	# Remove all occurences of `item'
-	meth remove_all(item: E) do while has(item) do remove(item)
+	fun remove_all(item: E) do while has(item) do remove(item)
 end
 
 # Items can be added to these collections.
@@ -183,10 +183,10 @@ interface SimpleCollection[E]
 special RemovableCollection[E]
 	# Add an item in a collection.
 	# Ensure col.has(item)
-	meth add(item: E) is abstract
+	fun add(item: E) is abstract
 
 	# Add each item of `coll`.
-	meth add_all(coll: Collection[E]) do for i in coll do add(i)
+	fun add_all(coll: Collection[E]) do for i in coll do add(i)
 end
 
 # Abstract sets.
@@ -201,7 +201,7 @@ end
 interface Set[E]
 special SimpleCollection[E]
 
-	redef meth has_only(item)
+	redef fun has_only(item)
 	do
 		var l = length
 		if l == 1 then
@@ -214,7 +214,7 @@ special SimpleCollection[E]
 	end
 
 	# Only 0 or 1
-	redef meth count(item)
+	redef fun count(item)
 	do
 		if has(item) then
 			return 1
@@ -224,18 +224,18 @@ special SimpleCollection[E]
 	end
 
 	# Synonym of remove since there is only one item
-	redef meth remove_all(item) do remove(item)
+	redef fun remove_all(item) do remove(item)
 end
 
 interface MapRead[K, E]
 special Collection[E]
 	# Get the item at `key'.
-	meth [](key: K): E is abstract
+	fun [](key: K): E is abstract
 
 	# Is there an item at `key'.
-	meth has_key(key: K): Bool is abstract
+	fun has_key(key: K): Bool is abstract
 
-	redef meth iterator: MapIterator[K, E] is abstract
+	redef fun iterator: MapIterator[K, E] is abstract
 end
 
 # Maps are associative collections: `key' -> `item'.
@@ -254,14 +254,14 @@ interface Map[K, E]
 special RemovableCollection[E]
 special MapRead[K, E]
 	# Set the`item' at `key'.
-	meth []=(key: K, item: E) is abstract
+	fun []=(key: K, item: E) is abstract
 
 	# Remove the item at `key'
-	meth remove_at(key: K) is abstract
+	fun remove_at(key: K) is abstract
 
 	# Add each (key,value) of `map' into `self'.
 	# If a same key exists in `map' and `self', then the value in self is discarded.
-	meth recover_with(map: Map[K, E])
+	fun recover_with(map: Map[K, E])
 	do
 		var i = map.iterator
 		while i.is_ok do
@@ -275,10 +275,10 @@ end
 interface MapIterator[K, E]
 special Iterator[E]
 	# The key of the current item.
-	meth key: K is abstract
+	fun key: K is abstract
 
 	# Set a new `item' at `key'.
-	#meth item=(item: E) is abstract
+	#fun item=(item: E) is abstract
 end
 
 # Indexed collection are ordoned collections.
@@ -287,7 +287,7 @@ interface IndexedCollectionRead[E]
 special MapRead[Int, E]
 	# Get the first item.
 	# Is equivalent with `self'[0].
-	redef meth first
+	redef fun first
 	do
 		assert not_empty: not is_empty
 		return self[0]
@@ -295,7 +295,7 @@ special MapRead[Int, E]
 	
 	# Get the last item.
 	# Is equivalent with `self'[`length'-1].
-	meth last: E
+	fun last: E
 	do
 		assert not_empty: not is_empty
 		return self[length-1]
@@ -303,7 +303,7 @@ special MapRead[Int, E]
 
 	# Return the index of the first occurence of `item'.
 	# Return -1 if `item' is not found
-	meth index_of(item: E): Int
+	fun index_of(item: E): Int
 	do
 		var i = iterator
 		while i.is_ok do
@@ -313,7 +313,7 @@ special MapRead[Int, E]
 		return -1
 	end
 
-	redef meth iterator: IndexedIterator[E] is abstract
+	redef fun iterator: IndexedIterator[E] is abstract
 end
 
 # Indexed collection are ordoned collections.
@@ -324,12 +324,12 @@ special Map[Int, E]
 special SimpleCollection[E]
 	# Set the first item.
 	# Is equivalent with `self'[0] = `item'.
-	meth first=(item: E)
+	fun first=(item: E)
 	do self[0] = item end
 
 	# Set the last item.
 	# Is equivalent with `self'[length-1] = `item'.
-	meth last=(item: E) 
+	fun last=(item: E) 
 	do 
 		var l = length
 		if l > 0 then
@@ -340,23 +340,23 @@ special SimpleCollection[E]
 	end
 
 	# A synonym of `push'
-	redef meth add(e) do push(e)
+	redef fun add(e) do push(e)
 
 	# Add an item after the last.
-	meth push(e: E) is abstract
+	fun push(e: E) is abstract
 
 	# Add each item of `coll` after the last.
-	meth append(coll: Collection[E]) do for i in coll do push(i)
+	fun append(coll: Collection[E]) do for i in coll do push(i)
 
 	# Remove the last item.
-	meth pop: E is abstract
+	fun pop: E is abstract
 
 	# Add an item before the last.
-	meth unshift(e: E) is abstract
+	fun unshift(e: E) is abstract
 
 	# Remove the first item.
 	# The second item become the first.
-	meth shift: E is abstract
+	fun shift: E is abstract
 
 end
 
@@ -364,10 +364,10 @@ end
 interface IndexedIterator[E]
 special MapIterator[Int, E]
 	# The index of the current item.
-	meth index: Int is abstract
+	fun index: Int is abstract
 
 	# A synonym of index.
-	redef meth key do return index
+	redef fun key do return index
 end
 
 # Associatives arrays that internally uses couples to represent each (key, value) pairs.
@@ -375,9 +375,9 @@ interface CoupleMap[K, E]
 special Map[K, E]
 	# Return the couple of the corresponding key
 	# Return null if the key is no associated element
-	protected meth couple_at(key: K): nullable Couple[K, E] is abstract
+	protected fun couple_at(key: K): nullable Couple[K, E] is abstract
 
-	redef meth [](key)
+	redef fun [](key)
 	do
 		var c = couple_at(key)
 		if c == null then
@@ -387,7 +387,7 @@ special Map[K, E]
 		end
 	end
 
-	redef meth has_key(key) do return couple_at(key) != null
+	redef fun has_key(key) do return couple_at(key) != null
 end
 
 # Iterator on CoupleMap
@@ -395,20 +395,20 @@ end
 # Actually is is a wrapper around an iterator of the internal array of the map.
 class CoupleMapIterator[K, E]
 special MapIterator[K, E]
-	redef meth item do return _iter.item.second
+	redef fun item do return _iter.item.second
 	
-	#redef meth item=(e) do _iter.item.second = e
+	#redef fun item=(e) do _iter.item.second = e
 
-	redef meth key do return _iter.item.first
+	redef fun key do return _iter.item.first
 
-	redef meth is_ok do return _iter.is_ok
+	redef fun is_ok do return _iter.is_ok
 
-	redef meth next
+	redef fun next
 	do 
 		_iter.next
 	end
 
-	attr _iter: Iterator[Couple[K,E]]
+	var _iter: Iterator[Couple[K,E]]
 
 	init(i: Iterator[Couple[K,E]]) do _iter = i
 end
@@ -419,10 +419,10 @@ end
 class Couple[F, S]
 
 	# The first element of the couple.
-	readable writable attr _first: F
+	readable writable var _first: F
 
 	# The second element of the couple.
-	readable writable attr _second: S
+	readable writable var _second: S
 
 	# Create a new instance with a first and a second object.
 	init(f: F, s: S)

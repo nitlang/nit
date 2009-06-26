@@ -15,12 +15,12 @@
 # limitations under the License.
 
 
-meth quicksort(a: Array[Comparable])
+fun quicksort(a: Array[Comparable])
 do
 	sub_quicksort(a, 0, a.length-1)
 end
 
-meth sub_quicksort(a: Array[Comparable], g: Int, d: Int)
+fun sub_quicksort(a: Array[Comparable], g: Int, d: Int)
 do
 	if g >= d then
 		return
@@ -47,7 +47,7 @@ do
 	sub_quicksort(a, i+1, d)
 end
 
-meth heapsort(a: Array[Comparable])
+fun heapsort(a: Array[Comparable])
 do
 	var i = a.length / 2 - 1 
 	while i >= 0 do
@@ -65,7 +65,7 @@ do
 	end
 end
 
-meth sift_down(a: Array[Comparable], root: Int, bottom: Int)
+fun sift_down(a: Array[Comparable], root: Int, bottom: Int)
 do
 	var done = false
 	while not done do

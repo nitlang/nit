@@ -20,24 +20,24 @@
 # The Time class represents a quantity of time
 class Time
 	# Internally, the quantity of time is stored in minutes
-	readable writable attr _min: Int = 0
+	readable writable var _min: Int = 0
 
 	# The quantity ot time (in hours)
-	meth hour: Int
+	fun hour: Int
 	do
 		# Need to transform minutes in hours
 		return _min / 60
 	end
 
 	# Set the quantity of time (in hour)
-	meth hour=(i: Int)
+	fun hour=(i: Int)
 	do
 		# Need to transform hours in minutes
 		_min = i * 60
 	end
 
 	# The quantity of tyme in human readable form (h:m)
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		var s = "{hour}:{min%60}"
 		return s

@@ -18,32 +18,32 @@
 
 class Tower
 	# A tower is a stack of discus.
-	meth top: Int
+	fun top: Int
 	# Diameter of the last discus.
 	do
 		return _t.last
 	end
 
-	meth height: Int
+	fun height: Int
 	# Number of discus.
 	do
 		return _t.length
 	end
 
-	meth push(i: Int)
+	fun push(i: Int)
 	# Put an discus of diameter `i'.
 	do
 		_t.push(i)
 	end
 
-	meth pop: Int
+	fun pop: Int
 	# Remove the last discus and get its diameter.
 	do
 		assert not_empty: not _t.is_empty
 		return _t.pop
 	end
 
-	redef meth to_s: String
+	redef fun to_s: String
 	# Display the tower
 	do
 		if _t.is_empty then
@@ -53,7 +53,7 @@ class Tower
 		end
 	end
 
-	attr _t: Array[Int] # The stack of discus (only the diameter is stored).
+	var _t: Array[Int] # The stack of discus (only the diameter is stored).
 
 	init full(n: Int)
 	# Build a new tower with `n' discus.
@@ -74,12 +74,12 @@ end
 
 class Hanoi
 	# Hanoi is a city with 3 towers.
-	meth run
+	fun run
 	do
 		move(_tower1.height, _tower1, _tower2, _tower3)
 	end
 
-	private meth move(nb: Int, source: Tower, intermediate: Tower, destination: Tower)
+	private fun move(nb: Int, source: Tower, intermediate: Tower, destination: Tower)
 	do
 		if nb <= 0 then
 			return
@@ -90,14 +90,14 @@ class Hanoi
 		move(nb-1, intermediate, source, destination)
 	end
 
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		return "{_tower1} {_tower2} {_tower3}"
 	end
 
-	attr _tower1: Tower
-	attr _tower2: Tower
-	attr _tower3: Tower
+	var _tower1: Tower
+	var _tower2: Tower
+	var _tower3: Tower
 
 	init(nb: Int)
 	do
@@ -107,7 +107,7 @@ class Hanoi
 	end
 end
 
-meth usage
+fun usage
 do
 	print("Usage: hanoi <number of discus>")
 	exit(0)

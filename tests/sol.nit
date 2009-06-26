@@ -19,7 +19,7 @@ import game
 
 class Playing
 special SDL_EventListener
-	redef meth on_mouse_button(evt: SDL_MouseButtonEvent)
+	redef fun on_mouse_button(evt: SDL_MouseButtonEvent)
 	do
 		if evt.is_pressed then
 			if evt.button == 1 then
@@ -34,21 +34,21 @@ special SDL_EventListener
 		end
 	end
 
-	redef meth on_mouse_motion(evt: SDL_MouseMotionEvent)
+	redef fun on_mouse_motion(evt: SDL_MouseMotionEvent)
 	do
 		_mouse_x = evt.x
 		_mouse_y = evt.y
 	end
 
-	redef meth on_quit
+	redef fun on_quit
 	do
 		_quit_requested = true
 	end
 
-	readable attr _quit_requested: Bool 
+	readable var _quit_requested: Bool 
 
-	attr _last_t: Int
-	meth update
+	var _last_t: Int
+	fun update
 	do
 		var t = sdl_get_ticks	# Current time (ms)
 		var quantum = 10	# Quantum of time (ms) for one step
@@ -73,7 +73,7 @@ special SDL_EventListener
 	end
 
 private
-	meth update_one_step
+	fun update_one_step
 	do
 		var mx = _mouse_x
 		var my = _mouse_y
@@ -116,12 +116,12 @@ private
 		end
 	end
 
-	meth update_draw(frames: Int)
+	fun update_draw(frames: Int)
 	do
 		_player.update_draw(frames)
 	end
 
-	meth draw
+	fun draw
 	do
 		_screen.clear
 		for b in _boxes do
@@ -134,7 +134,7 @@ private
 		_screen.flip
 	end
 
-	private meth load_level(l: Int)
+	private fun load_level(l: Int)
 	do
 		_level = l
 		_boxes.clear
@@ -150,7 +150,7 @@ private
 		init_level(lev.data)
 	end
 
-	private meth init_level(s: String)
+	private fun init_level(s: String)
 	do
 		var height = 1
 		var width = 0
@@ -189,17 +189,17 @@ private
 	end
 
 private
-	attr _screen: SDL_Screen
+	var _screen: SDL_Screen
 
-	attr _mouse_x: Int
-	attr _mouse_y: Int
+	var _mouse_x: Int
+	var _mouse_y: Int
 
-	attr _fps: TickCounter
-	attr _player: Player
-	attr _boxes: Array[Box]
-	attr _others: Array[Particle]
+	var _fps: TickCounter
+	var _player: Player
+	var _boxes: Array[Box]
+	var _others: Array[Particle]
 
-	attr _level: Int
+	var _level: Int
 	
 
 
@@ -221,7 +221,7 @@ private
 end
 
 redef class Sprite
-	private meth load_images(name: String, number: Int): Array[SDL_Surface]
+	private fun load_images(name: String, number: Int): Array[SDL_Surface]
 	do
 		print("load images '{name}' ({number})")
 		var res = new Array[SDL_Surface].with_capacity(number)
@@ -241,17 +241,17 @@ end
 
 class MovingSprite
 special Sprite
-	attr _rx: Float # Real X axis (sub-pixel)
-	attr _ry: Float # Real Y axix (sub-pixel)
-	readable attr _vx: Float # X velocity (speed)
-	readable attr _vy: Float # Y velovity (speed)
+	var _rx: Float # Real X axis (sub-pixel)
+	var _ry: Float # Real Y axix (sub-pixel)
+	readable var _vx: Float # X velocity (speed)
+	readable var _vy: Float # Y velovity (speed)
 	
-	redef meth x=(x: Int)
+	redef fun x=(x: Int)
 	do
 		_x = x
 		_rx = x.to_f
 	end
-	redef meth y=(y: Int)
+	redef fun y=(y: Int)
 	do
 		_y = y
 		_ry = y.to_f
@@ -261,7 +261,7 @@ end
 class Player
 special MovingSprite
 
-	meth update_one_step(mx: Int, my: Int)
+	fun update_one_step(mx: Int, my: Int)
 	do
 		var vx = _vx
 		var vy = _vy
@@ -315,7 +315,7 @@ special MovingSprite
 		_y = ry.to_i
 	end
 
-	meth update_draw(frames: Int)
+	fun update_draw(frames: Int)
 	do
 		var a = - atan2(_vx, _vy)
 		var x = ((a / 2.0 / pi + 0.5) * 16.0 + 0.5).to_i % 16
@@ -334,9 +334,9 @@ special MovingSprite
 		_image_number = inum
 	end
 
-	attr _boost: Bool 
-	attr _images: Array[Array[SDL_Surface]]
-	attr _image_number: Int
+	var _boost: Bool 
+	var _images: Array[Array[SDL_Surface]]
+	var _image_number: Int
 	
 
 	init(x: Int, y: Int)
@@ -349,7 +349,7 @@ special MovingSprite
 		set_centered_image(_images.first.first)
 		#set_centered_image(once sdl_load_bmp("data/ship-up.png"))
 	end
-	meth load_ship_images: Array[Array[SDL_Surface]]
+	fun load_ship_images: Array[Array[SDL_Surface]]
 	do
 		var res = new Array[Array[SDL_Surface]]
 		for i in ["up", "22", "45", "68", "90", "112", "135", "158", "180", "202", "225", "248", "270", "292", "315", "338"] do
@@ -362,12 +362,12 @@ end
 
 class Box
 special Sprite
-	attr _images: Array[SDL_Surface]
-	attr _image_number: Int
-	attr _image_delay: Int
-	attr _back_rotate: Bool
+	var _images: Array[SDL_Surface]
+	var _image_number: Int
+	var _image_delay: Int
+	var _back_rotate: Bool
 
-	meth update_one_step
+	fun update_one_step
 	do
 		_image_delay = _image_delay + 1
 		if _image_delay > 0 and _image_delay % 8 == 0 then
@@ -384,14 +384,14 @@ special Sprite
 		end
 	end
 
-	redef meth blit_on(s: SDL_Surface)
+	redef fun blit_on(s: SDL_Surface)
 	do
 		if _image_delay > 0 then
 			_image.blit_on_xy(s, _x - _x_image, _y - _y_image)
 		end
 	end
 
-	meth gettable: Bool
+	fun gettable: Bool
 	do
 		return _image_delay > 0
 	end
@@ -412,7 +412,7 @@ end
 
 class Particle
 special MovingSprite
-	meth update_one_step: Bool
+	fun update_one_step: Bool
 	do
 		_ttl = _ttl - 1
 		if _ttl < 0 then
@@ -432,8 +432,8 @@ special MovingSprite
 		return false
 	end
 
-	attr _ttl: Int
-	attr _images: Array[SDL_Surface]
+	var _ttl: Int
+	var _images: Array[SDL_Surface]
 
 
 	init(x: Int, y: Int, vx: Float, vy: Float, ttl: Int)
@@ -448,11 +448,11 @@ special MovingSprite
 end
 
 class Level
-	readable attr _number: Int 
-	readable attr _name: String 
-	readable attr _data: String 
+	readable var _number: Int 
+	readable var _name: String 
+	readable var _data: String 
 
-	redef meth to_s: String
+	redef fun to_s: String
 	do
 		return "level {_number}"
 	end
@@ -466,7 +466,7 @@ class Level
 	end
 end
 
-meth load_levels(filename: String): Array[Level]
+fun load_levels(filename: String): Array[Level]
 do
 	var levels = new Array[Level]
 	var f = new IFStream.open(filename)

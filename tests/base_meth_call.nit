@@ -17,14 +17,14 @@
 import kernel
 
 class A
-	meth foo(a: Int) do a.output
-	meth bar(a: Int): Int do
+	fun foo(a: Int) do a.output
+	fun bar(a: Int): Int do
 		' '.output
 		a.output
 		return a
 	end
 
-	meth baz do
+	fun baz do
 		foo(1)
 		bar(2).output
 		var i = bar(3)

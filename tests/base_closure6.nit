@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	meth foo: U
+	fun foo: U
 		with bar
 	do
 		return new U

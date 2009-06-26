@@ -20,10 +20,10 @@ class Object
 end
 
 class A
-	meth toto do end
+	fun toto do end
 end
 class B
-	meth toto do end
+	fun toto do end
 end
 class C
 special A

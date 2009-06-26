@@ -16,26 +16,26 @@ package math
 import kernel
 
 redef class Int
-	meth rand: Int is extern "kernel_Int_Int_rand_0"
+	fun rand: Int is extern "kernel_Int_Int_rand_0"
 end
 
 redef class Float
-	meth sqrt: Float is extern "kernel_Float_Float_sqrt_0"
-	meth cos: Float is extern "kernel_Float_Float_cos_0"
-	meth sin: Float is extern "kernel_Float_Float_sin_0"
-	meth tan: Float is extern "kernel_Float_Float_tan_0"
-	meth acos: Float is extern "kernel_Float_Float_acos_0"
-	meth asin: Float is extern "kernel_Float_Float_asin_0"
-	meth atan: Float is extern "kernel_Float_Float_atan_0"
+	fun sqrt: Float is extern "kernel_Float_Float_sqrt_0"
+	fun cos: Float is extern "kernel_Float_Float_cos_0"
+	fun sin: Float is extern "kernel_Float_Float_sin_0"
+	fun tan: Float is extern "kernel_Float_Float_tan_0"
+	fun acos: Float is extern "kernel_Float_Float_acos_0"
+	fun asin: Float is extern "kernel_Float_Float_asin_0"
+	fun atan: Float is extern "kernel_Float_Float_atan_0"
 
-	meth pow(e: Float): Float is extern "kernel_Float_Float_pow_1"
-	meth log: Float is extern "kernel_Float_Float_log_0"
-	meth exp: Float is extern "kernel_Float_Float_exp_0"
+	fun pow(e: Float): Float is extern "kernel_Float_Float_pow_1"
+	fun log: Float is extern "kernel_Float_Float_log_0"
+	fun exp: Float is extern "kernel_Float_Float_exp_0"
 	
-	meth rand: Float is extern "kernel_Float_Float_rand_0"
+	fun rand: Float is extern "kernel_Float_Float_rand_0"
 end
 
-meth atan2(x: Float, y: Float): Float is extern "kernel_Any_Any_atan2_2"
-meth pi: Float is extern "kernel_Any_Any_pi_0"
-meth srand_from(x: Int) is extern "kernel_Any_Any_srand_from_1"
-meth srand is extern "kernel_Any_Any_srand_0"
+fun atan2(x: Float, y: Float): Float is extern "kernel_Any_Any_atan2_2"
+fun pi: Float is extern "kernel_Any_Any_pi_0"
+fun srand_from(x: Int) is extern "kernel_Any_Any_srand_from_1"
+fun srand is extern "kernel_Any_Any_srand_0"

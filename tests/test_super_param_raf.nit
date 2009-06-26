@@ -17,7 +17,7 @@
 import test_super_param
 
 redef class B
-	redef meth foo(a: Int): Int
+	redef fun foo(a: Int): Int
 	do
 		return super * 2
 	end

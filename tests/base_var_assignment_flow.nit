@@ -17,18 +17,18 @@
 import end
 
 interface Object
-	meth output is abstract
+	fun output is abstract
 end
 
 universal Int
-	redef meth output is intern
+	redef fun output is intern
 end
 
 universal Bool
-	redef meth output is intern
+	redef fun output is intern
 end
 
-meth maybe: Bool do return false
+fun maybe: Bool do return false
 
 var a: Object
 #alt1#a.output

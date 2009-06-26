@@ -17,14 +17,14 @@
 import base_super_linext
 
 redef class A
-	redef meth foo
+	redef fun foo
 	do
 		'a'.output
 		'['.output
 		super
 		']'.output
 	end
-	redef meth bar
+	redef fun bar
 	do 
 		super.output
 		return 'a'
@@ -32,14 +32,14 @@ redef class A
 end
 
 redef class B
-	redef meth foo
+	redef fun foo
 	do
 		'b'.output
 		'['.output
 		super
 		']'.output
 	end
-	redef meth bar
+	redef fun bar
 	do 
 		super.output
 		return 'b'
@@ -47,14 +47,14 @@ redef class B
 end
 
 redef class C
-	redef meth foo
+	redef fun foo
 	do
 		'c'.output
 		'['.output
 		super
 		']'.output
 	end
-	redef meth bar
+	redef fun bar
 	do 
 		super.output
 		return 'c'
@@ -62,14 +62,14 @@ redef class C
 end
 
 redef class D
-	redef meth foo
+	redef fun foo
 	do
 		'd'.output
 		'['.output
 		super
 		']'.output
 	end
-	redef meth bar
+	redef fun bar
 	do 
 		super.output
 		return 'd'

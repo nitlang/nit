@@ -17,23 +17,23 @@
 import end
 
 class Object
-	meth output 
+	fun output 
 	do
 		0.output
 	end
 
-	meth print(a: Object)
+	fun print(a: Object)
 	do
 		a.output
 	end
 end
 
 class Int
-	redef meth output is intern
+	redef fun output is intern
 end
 
 class Sys
-	meth main
+	fun main
 	do
 	end
 end

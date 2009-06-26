@@ -16,8 +16,8 @@
 
 
 class A
-	readable writable attr _val: Int = 0
-	meth hop(a: A, b: A, c: A)
+	readable writable var _val: Int = 0
+	fun hop(a: A, b: A, c: A)
 	do
 		if a.val > val then
 			a.hop(b, c, self)
@@ -27,7 +27,7 @@ class A
 		foo(b, c)
 		foo(c, b)
 	end
-	meth foo(a: A, b: A)
+	fun foo(a: A, b: A)
 	do
 		if a.val > val then
 			a.foo(b, self)
@@ -35,14 +35,14 @@ class A
 		bar(a)
 		bar(b)
 	end
-	meth bar(a: A)
+	fun bar(a: A)
 	do
 		if a.val > val then
 			a.bar(self)
 		end
 		baz
 	end
-	meth baz
+	fun baz
 	do
 	end
 
@@ -53,7 +53,7 @@ end
 
 class B
 special A
-	redef meth val: Int
+	redef fun val: Int
 	do
 		return 1
 	end
@@ -65,7 +65,7 @@ end
 
 class C
 special A
-	redef meth val: Int
+	redef fun val: Int
 	do
 		return 2
 	end
@@ -77,7 +77,7 @@ end
 
 class D
 special A
-	redef meth val: Int
+	redef fun val: Int
 	do
 		return 3
 	end

@@ -17,15 +17,15 @@
 import kernel
 
 redef class Object
-	meth printn(a: Object)
+	fun printn(a: Object)
 	do
 		a.output
 	end
 end
 
 class Toto
-	attr _a: Int
-	redef meth output
+	var _a: Int
+	redef fun output
 	do
 		printn(_a)
 	end
@@ -47,7 +47,7 @@ class Toto
 end
 
 class Test
-	attr _t: Toto
+	var _t: Toto
 
 	init
 	do

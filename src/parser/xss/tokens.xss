@@ -37,14 +37,14 @@ $ end template
 $ template make_tokens()
 
 redef class Token
-    readable writable attr _text: String 
-    readable attr _filename: String 
-    readable attr _line: Int 
-    readable attr _pos: Int 
+    readable writable var _text: String 
+    readable var _filename: String 
+    readable var _line: Int 
+    readable var _pos: Int 
     
-    meth parser_index: Int is abstract
+    fun parser_index: Int is abstract
 
-    redef meth to_s: String do
+    redef fun to_s: String do
         return "'{_text}'"
     end
 end
@@ -52,7 +52,7 @@ end
 $ foreach {//token}
 $ if {@parser_index}    
 redef class @ename
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return @parser_index
     end
@@ -76,7 +76,7 @@ $ end if
 $ end foreach
 
 redef class EOF 
-    redef meth parser_index: Int
+    redef fun parser_index: Int
     do
     	return ${tokens/eof/@parser_index}
     end
@@ -91,7 +91,7 @@ redef class EOF
 end
 
 redef class PError
-    readable writable attr _message: String 
+    readable writable var _message: String 
     
     init init_error(fname: String, line: Int, pos: Int, message: String)
     do

@@ -15,19 +15,19 @@
 # limitations under the License.
 
 class A
-    attr _foo: nullable Object
-    attr _bar: nullable A
-    attr _baz: nullable Int
-    redef meth output do 'A'.output end
+    var _foo: nullable Object
+    var _bar: nullable A
+    var _baz: nullable Int
+    redef fun output do 'A'.output end
 
     init do end
 end
 
 class B
 special A
-    redef attr _foo: nullable Int
-    redef attr _bar: nullable B
-    redef meth output do 'B'.output end
+    redef var _foo: nullable Int
+    redef var _bar: nullable B
+    redef fun output do 'B'.output end
 
     init do end
 end

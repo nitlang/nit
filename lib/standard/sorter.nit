@@ -24,13 +24,13 @@ class AbstractSorter[E: Object]
 	# 	-1 if a < b
 	#	0  if a = b
 	#	1  if a > b
-	protected meth compare(a: E, b: E): Int is abstract
+	protected fun compare(a: E, b: E): Int is abstract
 
 	# Sort `array' using the `compare' function.
-	meth sort(array: Array[E]) do sub_sort(array, 0, array.length-1)
+	fun sort(array: Array[E]) do sub_sort(array, 0, array.length-1)
 
 	# Sort `array' between `from' and `to' indices
-	private meth sub_sort(array: Array[E], from: Int, to: Int)
+	private fun sub_sort(array: Array[E], from: Int, to: Int)
 	do
 		if from >= to then
 			return
@@ -42,7 +42,7 @@ class AbstractSorter[E: Object]
 	end
 
 	# Quick-sort `array' between `from' and `to' indices
-	private meth quick_sort(array: Array[E], from: Int, to: Int)
+	private fun quick_sort(array: Array[E], from: Int, to: Int)
 	do
 		var pivot = array[from]
 		var i = from
@@ -63,7 +63,7 @@ class AbstractSorter[E: Object]
 	end
 	
 	# Bubble-sort `array' between `from' and `to' indices
-	private meth bubble_sort(array: Array[E], from: Int, to: Int)
+	private fun bubble_sort(array: Array[E], from: Int, to: Int)
 	do
 		var i = from
 		while i < to do
@@ -91,7 +91,7 @@ end
 class ComparableSorter[E: Comparable]
 special AbstractSorter[E]
 	# Return a <=> b
-	redef meth compare(a, b) do return a <=> b
+	redef fun compare(a, b) do return a <=> b
 
 	init do end
 end

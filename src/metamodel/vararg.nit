@@ -22,22 +22,22 @@ import genericity
 
 redef class MMSignature
 	# Position of the vararg parameter. -1 in no vararg parameter
-	readable writable attr _vararg_rank: Int 
+	readable writable var _vararg_rank: Int 
 
 	# Is there a vararg parameter in the signature?
-	meth has_vararg: Bool
+	fun has_vararg: Bool
 	do
 		return _vararg_rank >= 0
 	end
 
-	redef meth adaptation_to(r)
+	redef fun adaptation_to(r)
 	do
 		var s = super(r)
 		s.vararg_rank = _vararg_rank
 		return s
 	end
 
-	redef meth not_for_self
+	redef fun not_for_self
 	do
 		var s = super
 		s.vararg_rank = _vararg_rank

@@ -23,22 +23,22 @@ private import syntax
 
 # Something that store color of table elements
 class ColorContext
-	attr _colors: HashMap[TableElt, Int] = new HashMap[TableElt, Int]
+	var _colors: HashMap[TableElt, Int] = new HashMap[TableElt, Int]
 
 	# The color of a table element.
-	meth color(e: TableElt): Int
+	fun color(e: TableElt): Int
 	do
 		return _colors[e]
 	end
 
 	# Is a table element already colored?
-	meth has_color(e: TableElt): Bool
+	fun has_color(e: TableElt): Bool
 	do
 		return _colors.has_key(e)
 	end
 
 	# Assign a color to a table element.
-	meth color=(e: TableElt, c: Int)
+	fun color=(e: TableElt, c: Int)
 	do
 		_colors[e] = c
 		var idx = c
@@ -53,13 +53,13 @@ end
 class GlobalAnalysis
 special ColorContext
 	# Associate global classes to compiled classes
-	readable attr _compiled_classes: HashMap[MMGlobalClass, CompiledClass] = new HashMap[MMGlobalClass, CompiledClass]
+	readable var _compiled_classes: HashMap[MMGlobalClass, CompiledClass] = new HashMap[MMGlobalClass, CompiledClass]
 
 	# The main module of the program globally analysed
-	readable attr _module: MMModule
+	readable var _module: MMModule
 
 	# FIXME: do something better.
-	readable writable attr _max_class_table_length: Int = 0
+	readable writable var _max_class_table_length: Int = 0
 
 	init(module: MMSrcModule)
 	do
@@ -70,7 +70,7 @@ end
 class GlobalCompilerVisitor
 special CompilerVisitor
 	# The global analysis result
-	readable attr _global_analysis: GlobalAnalysis
+	readable var _global_analysis: GlobalAnalysis
 	init(m: MMSrcModule, tc: ToolContext, ga: GlobalAnalysis)
 	do
 		super(m, tc)
@@ -82,39 +82,39 @@ end
 class CompiledClass
 special ColorContext
 	# The corresponding local class in the main module of the prgram
-	readable attr _local_class: MMLocalClass
+	readable var _local_class: MMLocalClass
 
 	# The identifier of the class
-	readable writable attr _id: Int = 0
+	readable writable var _id: Int = 0
 
 	# The full class table of the class
-	readable attr _class_table: Array[nullable TableElt] = new Array[nullable TableElt]
+	readable var _class_table: Array[nullable TableElt] = new Array[nullable TableElt]
 
 	# The full instance table of the class
-	readable attr _instance_table: Array[nullable TableElt] = new Array[nullable TableElt]
+	readable var _instance_table: Array[nullable TableElt] = new Array[nullable TableElt]
 
 	# The proper class table part (no superclasses but all refinements)
-	readable writable attr _class_layout: TableEltComposite = new TableEltComposite(self)
+	readable writable var _class_layout: TableEltComposite = new TableEltComposite(self)
 
 	# The proper instance table part (no superclasses but all refinements)
-	readable writable attr _instance_layout: TableEltComposite = new TableEltComposite(self)
+	readable writable var _instance_layout: TableEltComposite = new TableEltComposite(self)
 
 	init(c: MMLocalClass) do _local_class = c
 end
 
 redef class MMSrcLocalClass
 	# The table element of the subtype check
-	meth class_color_pos: TableEltClassColor do return _class_color_pos.as(not null)
-	attr _class_color_pos: nullable TableEltClassColor
+	fun class_color_pos: TableEltClassColor do return _class_color_pos.as(not null)
+	var _class_color_pos: nullable TableEltClassColor
 
 	# The proper local class table part (nor superclasses nor refinments)
-	readable attr _class_layout: Array[TableElt] = new Array[TableElt]
+	readable var _class_layout: Array[TableElt] = new Array[TableElt]
 
 	# The proper local instance table part (nor superclasses nor refinments)
-	readable attr _instance_layout: Array[TableElt] = new Array[TableElt]
+	readable var _instance_layout: Array[TableElt] = new Array[TableElt]
 
 	# Build the local layout of the class and feed the module table
-	meth build_layout_in(tc: ToolContext, module_table: Array[ModuleTableElt])
+	fun build_layout_in(tc: ToolContext, module_table: Array[ModuleTableElt])
 	do
 		var clt = _class_layout
 		var ilt = _instance_layout
@@ -156,10 +156,10 @@ end
 
 redef class MMSrcModule
 	# The local table of the module (refers things introduced in the module)
-	attr _local_table: Array[ModuleTableElt] = new Array[ModuleTableElt]
+	var _local_table: Array[ModuleTableElt] = new Array[ModuleTableElt]
 
 	# Builds the local tables and local classes layouts
-	meth local_analysis(tc: ToolContext)
+	fun local_analysis(tc: ToolContext)
 	do
 		for c in src_local_classes do
 			c.build_layout_in(tc, _local_table)
@@ -167,7 +167,7 @@ redef class MMSrcModule
 	end
 
 	# Do the complete global analysis
-	meth global_analysis(cctx: ToolContext): GlobalAnalysis
+	fun global_analysis(cctx: ToolContext): GlobalAnalysis
 	do
 		#print "Do the complete global analysis"
 		var ga = new GlobalAnalysis(self)
@@ -319,7 +319,7 @@ redef class MMSrcModule
 		return ga
 	end
 
-	private meth append_to_table(cc: ColorContext, table: Array[nullable TableElt], cmp: TableEltComposite)
+	private fun append_to_table(cc: ColorContext, table: Array[nullable TableElt], cmp: TableEltComposite)
 	do
 		for j in [0..cmp.length[ do
 			var e = cmp.item(j)
@@ -328,7 +328,7 @@ redef class MMSrcModule
 		end
 	end
 
-	private meth build_tables_in(table: Array[nullable TableElt], ga: GlobalAnalysis, c: MMLocalClass, elts: Array[TableElt])
+	private fun build_tables_in(table: Array[nullable TableElt], ga: GlobalAnalysis, c: MMLocalClass, elts: Array[TableElt])
 	do
 		var tab = new HashMap[Int, TableElt]
 		var len = 0
@@ -358,7 +358,7 @@ redef class MMSrcModule
 	end
 
 	# Perform coloring
-	meth colorize(ga: GlobalAnalysis, elts: Array[TableElt], classes: Collection[MMLocalClass], startcolor: Int)
+	fun colorize(ga: GlobalAnalysis, elts: Array[TableElt], classes: Collection[MMLocalClass], startcolor: Int)
 	do
 		var colors = new HashMap[Int, Array[TableElt]]
 		var rel_classes = new Array[MMLocalClass]
@@ -401,7 +401,7 @@ redef class MMSrcModule
 		end
 	end
 
-	private meth free_color(es: Array[TableElt], c: MMLocalClass): Bool
+	private fun free_color(es: Array[TableElt], c: MMLocalClass): Bool
 	do
 		for e2 in es do
 			if e2.is_related_to(c) then
@@ -412,7 +412,7 @@ redef class MMSrcModule
 	end
 
 	# Compile module and class tables
-	meth compile_tables_to_c(v: GlobalCompilerVisitor)
+	fun compile_tables_to_c(v: GlobalCompilerVisitor)
 	do
 		for m in mhe.greaters_and_self do
 			assert m isa MMSrcModule
@@ -435,7 +435,7 @@ redef class MMSrcModule
 	end
 
 	# Declare class table (for _sep.h)
-	meth declare_class_tables_to_c(v: GlobalCompilerVisitor)
+	fun declare_class_tables_to_c(v: GlobalCompilerVisitor)
 	do
 		for c in local_classes do
 			if c.global.module == self then
@@ -445,7 +445,7 @@ redef class MMSrcModule
 	end
 
 	# Compile main part (for _table.c)
-	meth compile_main_part(v: GlobalCompilerVisitor)
+	fun compile_main_part(v: GlobalCompilerVisitor)
 	do
 		v.add_instr("int main(int argc, char **argv) \{")
 		v.indent
@@ -471,7 +471,7 @@ redef class MMSrcModule
 	end
 
 	# Compile sep files
-	meth compile_mod_to_c(v: GlobalCompilerVisitor)
+	fun compile_mod_to_c(v: GlobalCompilerVisitor)
 	do
 		v.add_decl("extern const char *LOCATE_{name};")
 		if not v.tc.global then
@@ -507,7 +507,7 @@ redef class MMSrcModule
 	end
 
 	# Compile module file for the current module
-	meth compile_local_table_to_c(v: GlobalCompilerVisitor)
+	fun compile_local_table_to_c(v: GlobalCompilerVisitor)
 	do
 		v.add_instr("const char *LOCATE_{name} = \"{filename}\";")
 
@@ -530,7 +530,7 @@ end
 # An element of a class, an instance or a module table
 abstract class AbsTableElt
 	# Compile the macro needed to use the element and other related elements
-	meth compile_macros(v: GlobalCompilerVisitor, value: String) is abstract
+	fun compile_macros(v: GlobalCompilerVisitor, value: String) is abstract
 end
 
 # An element of a class or an instance table
@@ -538,16 +538,16 @@ end
 abstract class TableElt
 special AbsTableElt
 	# Is the element conflict to class `c' (used for coloring)
-	meth is_related_to(c: MMLocalClass): Bool is abstract
+	fun is_related_to(c: MMLocalClass): Bool is abstract
 
 	# Number of sub-elements. 1 if none
-	meth length: Int do return 1
+	fun length: Int do return 1
 
 	# Access the ith subelement.
-	meth item(i: Int): TableElt do return self
+	fun item(i: Int): TableElt do return self
 
 	# Return the value of the element for a given class
-	meth compile_to_c(v: GlobalCompilerVisitor, c: MMLocalClass): String is abstract
+	fun compile_to_c(v: GlobalCompilerVisitor, c: MMLocalClass): String is abstract
 end
 
 # An element of a module table
@@ -555,16 +555,16 @@ end
 abstract class ModuleTableElt
 special AbsTableElt
 	# Return the value of the element once the global analisys is performed
-	meth value(ga: GlobalAnalysis): String is abstract
+	fun value(ga: GlobalAnalysis): String is abstract
 end
 
 # An element of a module table that represents a group of TableElt defined in the same local class
 class ModuleTableEltGroup
 special ModuleTableElt
-	readable attr _elements: Array[TableElt] = new Array[TableElt]
+	readable var _elements: Array[TableElt] = new Array[TableElt]
 
-	redef meth value(ga) do return "{ga.color(_elements.first)} /* Group of ? */"
-	redef meth compile_macros(v, value)
+	redef fun value(ga) do return "{ga.color(_elements.first)} /* Group of ? */"
+	redef fun compile_macros(v, value)
 	do
 		var i = 0
 		for e in _elements do
@@ -577,7 +577,7 @@ end
 # An element that represents a class property
 abstract class TableEltProp
 special TableElt
-	attr _property: MMLocalProperty
+	var _property: MMLocalProperty
 
 	init(p: MMLocalProperty)
 	do
@@ -588,13 +588,13 @@ end
 # An element that represents a function pointer to a global method
 class TableEltMeth
 special TableEltProp
-	redef meth compile_macros(v, value)
+	redef fun compile_macros(v, value)
 	do
 		var pg = _property.global
 		v.add_decl("#define {pg.meth_call}(recv) (({pg.intro.cname}_t)CALL((recv), ({value})))")
 	end
 
-	redef meth compile_to_c(v, c)
+	redef fun compile_to_c(v, c)
 	do
 		var p = c[_property.global]
 		return p.cname
@@ -604,13 +604,13 @@ end
 # An element that represents a function pointer to the super method of a local method
 class TableEltSuper
 special TableEltProp
-	redef meth compile_macros(v, value)
+	redef fun compile_macros(v, value)
 	do
 		var p = _property
 		v.add_decl("#define {p.super_meth_call}(recv) (({p.cname}_t)CALL((recv), ({value})))")
 	end
 
-	redef meth compile_to_c(v, c)
+	redef fun compile_to_c(v, c)
 	do
 		var pc = _property.local_class
 		var g = _property.global
@@ -634,13 +634,13 @@ end
 # An element that represents the value stored for a global attribute
 class TableEltAttr
 special TableEltProp
-	redef meth compile_macros(v, value)
+	redef fun compile_macros(v, value)
 	do
 		var pg = _property.global
 		v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, ({value}))")
 	end
 
-	redef meth compile_to_c(v, c)
+	redef fun compile_to_c(v, c)
 	do
 		var ga = v.global_analysis
 		var p = c[_property.global]
@@ -652,7 +652,7 @@ end
 class AbsTableEltClass
 special AbsTableElt
 	# The local class where the information comes from
-	attr _local_class: MMLocalClass
+	var _local_class: MMLocalClass
 
 	init(c: MMLocalClass)
 	do
@@ -660,9 +660,9 @@ special AbsTableElt
 	end
 
 	# The C macro name refering the value
-	meth symbol: String is abstract
+	fun symbol: String is abstract
 
-	redef meth compile_macros(v, value)
+	redef fun compile_macros(v, value)
 	do
 		v.add_decl("#define {symbol} ({value})")
 	end
@@ -672,7 +672,7 @@ end
 class TableEltClass
 special TableElt
 special AbsTableEltClass
-	redef meth is_related_to(c)
+	redef fun is_related_to(c)
 	do
 		var bc = c.module[_local_class.global]
 		return c.cshe <= bc
@@ -683,9 +683,9 @@ end
 class TableEltClassId
 special ModuleTableElt
 special AbsTableEltClass
-	redef meth symbol do return _local_class.global.id_id
+	redef fun symbol do return _local_class.global.id_id
 
-	redef meth value(ga)
+	redef fun value(ga)
 	do
 		return "{ga.compiled_classes[_local_class.global].id} /* Id of {_local_class} */"
 	end
@@ -694,9 +694,9 @@ end
 # An element representing the constructor marker position in a class table
 class TableEltClassInitTable
 special TableEltClass
-	redef meth symbol do return _local_class.global.init_table_pos_id
+	redef fun symbol do return _local_class.global.init_table_pos_id
 
-	redef meth compile_to_c(v, c)
+	redef fun compile_to_c(v, c)
 	do
 		var ga = v.global_analysis
 		var cc = ga.compiled_classes[_local_class.global]
@@ -716,14 +716,14 @@ end
 class TableEltClassColor
 special TableEltClass
 special ModuleTableElt
-	redef meth symbol do return _local_class.global.color_id
+	redef fun symbol do return _local_class.global.color_id
 
-	redef meth value(ga)
+	redef fun value(ga)
 	do
 		return "{ga.color(self)} /* Color of {_local_class} */"
 	end
 
-	redef meth compile_to_c(v, c)
+	redef fun compile_to_c(v, c)
 	do
 		var ga = v.global_analysis
 		var cc = ga.compiled_classes[_local_class.global]
@@ -734,21 +734,21 @@ end
 # A Group of elements introduced in the same global-class that are colored together
 class TableEltComposite
 special TableElt
-	attr _table: Array[TableElt]
-	attr _cc: CompiledClass
-	attr _offsets: HashMap[MMLocalClass, Int]
-	redef meth length do return _table.length
-	redef meth is_related_to(c) do return c.cshe <= _cc.local_class
+	var _table: Array[TableElt]
+	var _cc: CompiledClass
+	var _offsets: HashMap[MMLocalClass, Int]
+	redef fun length do return _table.length
+	redef fun is_related_to(c) do return c.cshe <= _cc.local_class
 
-	meth add(c: MMLocalClass, tab: Array[TableElt])
+	fun add(c: MMLocalClass, tab: Array[TableElt])
 	do
 		_offsets[c] = _table.length
 		_table.append(tab)
 	end
 
-	redef meth item(i) do return _table[i]
+	redef fun item(i) do return _table[i]
 
-	redef meth compile_to_c(v, c) do abort
+	redef fun compile_to_c(v, c) do abort
 
 	init(cc: CompiledClass)
 	do
@@ -761,8 +761,8 @@ end
 # The element that represent the class id
 class TableEltClassSelfId
 special TableElt
-	redef meth is_related_to(c) do return true
-	redef meth compile_to_c(v, c)
+	redef fun is_related_to(c) do return true
+	redef fun compile_to_c(v, c)
 	do
 		var ga = v.global_analysis
 		return "{v.global_analysis.compiled_classes[c.global].id} /* {ga.color(self)}: Identity */"
@@ -772,8 +772,8 @@ end
 # The element that
 class TableEltVftPointer
 special TableElt
-	redef meth is_related_to(c) do return true
-	redef meth compile_to_c(v, c)
+	redef fun is_related_to(c) do return true
+	redef fun compile_to_c(v, c)
 	do
 		var ga = v.global_analysis
 		return "/* {ga.color(self)}: Pointer to the classtable */"
@@ -786,13 +786,13 @@ end
 # The total order superset the class refinement and the class specialisation relations
 class ClassSorter
 special AbstractSorter[MMLocalClass]
-	redef meth compare(a, b) do return a.compare(b)
+	redef fun compare(a, b) do return a.compare(b)
 	init do end
 end
 
 redef class MMLocalClass
 	# Comparaison in a total order that superset the class refinement and the class specialisation relations
-	meth compare(b: MMLocalClass): Int
+	fun compare(b: MMLocalClass): Int
 	do
 		var a = self
 		if a == b then
@@ -814,7 +814,7 @@ redef class MMLocalClass
 	end
 
 	# Declaration and macros related to the class table
-	meth declare_tables_to_c(v: GlobalCompilerVisitor)
+	fun declare_tables_to_c(v: GlobalCompilerVisitor)
 	do
 		v.add_decl("")
 		var pi = primitive_info
@@ -831,7 +831,7 @@ redef class MMLocalClass
 	end
 
 	# Compilation of table and new (or box)
-	meth compile_tables_to_c(v: GlobalCompilerVisitor)
+	fun compile_tables_to_c(v: GlobalCompilerVisitor)
 	do
 		var cc = v.global_analysis.compiled_classes[self.global]
 		var ctab = cc.class_table

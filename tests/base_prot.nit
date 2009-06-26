@@ -17,14 +17,14 @@
 import kernel
 
 class A
-	meth pub do 0.output
-	protected meth pro do 1.output
-	private meth pri do 2.output
+	fun pub do 0.output
+	protected fun pro do 1.output
+	private fun pri do 2.output
 	init do end
 end
 
 class O1
-	meth o
+	fun o
 	do
 		var a = new A
 		a.pub

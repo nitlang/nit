@@ -17,27 +17,27 @@
 import kernel
 
 class A
-	meth work do
+	fun work do
 		foo
 		'\n'.output
 		bar.output
 		'\n'.output
 	end
-	meth foo do 'A'.output
-	meth bar: Char do return 'A'
+	fun foo do 'A'.output
+	fun bar: Char do return 'A'
 	init do end
 end
 
 class B
 special A
-	redef meth foo
+	redef fun foo
 	do
 		'B'.output
 		'['.output
 		super
 		']'.output
 	end
-	redef meth bar
+	redef fun bar
 	do 
 		super.output
 		return 'B'
@@ -47,14 +47,14 @@ end
 
 class C
 special A
-	redef meth foo
+	redef fun foo
 	do
 		'C'.output
 		'['.output
 		super
 		']'.output
 	end
-	redef meth bar
+	redef fun bar
 	do 
 		super.output
 		return 'C'
@@ -65,14 +65,14 @@ end
 class D
 special B
 special C
-	redef meth foo
+	redef fun foo
 	do
 		'D'.output
 		'['.output
 		super
 		']'.output
 	end
-	redef meth bar
+	redef fun bar
 	do 
 		super.output
 		return 'D'

@@ -17,7 +17,7 @@
 import kernel
 
 class A
-	meth foo(i: Int): Int
+	fun foo(i: Int): Int
 	do
 		return i + 10
 	end
@@ -25,7 +25,7 @@ end
 
 class B
 special A
-	redef meth foo(i: Int): Int
+	redef fun foo(i: Int): Int
 	do
 		return super + 5
 	end

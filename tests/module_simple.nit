@@ -15,18 +15,18 @@
 # limitations under the License.
 
 class A
-	meth p(x: A, y: Int, z: Array[A]): A do return self end
-	meth q(x: A): A do return self end
+	fun p(x: A, y: Int, z: Array[A]): A do return self end
+	fun q(x: A): A do return self end
 end
 
 class B
 special A
-	redef meth q(x: A): B do return self end
+	redef fun q(x: A): B do return self end
 end
 
 class C
 special B
-	meth r(x: B) do end
-	meth s: B do return self end
-	attr _a: B
+	fun r(x: B) do end
+	fun s: B do return self end
+	var _a: B
 end
