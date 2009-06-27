@@ -127,6 +127,15 @@ special FilterOStream
 		end
 	end
 
+	redef fun close
+	do
+		for i in _streams
+		do
+			stream = i
+			stream.close
+		end
+	end
+
 	init with_streams(streams: Array[OStream])
 	do
 		_streams = streams
