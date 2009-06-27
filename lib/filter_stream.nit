@@ -1,6 +1,7 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2006 Floréal Morandat <morandat@lirmm.fr>
+# Copyright 2009 Jean-Sebastien Gelinas <calestar@gmail.com>
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
@@ -13,7 +14,7 @@
 class FilterIStream
 special IStream
 	# Filter readed elements
-	readable var _stream: IStream 
+	readable var _stream: nullable IStream
 
 	redef fun eof: Bool
 	do
@@ -21,7 +22,7 @@ special IStream
 		return stream.eof
 	end
 
-	private fun stream=(i: IStream)
+	private fun stream=(i: nullable IStream)
 	do
 		_stream = i
 	end
@@ -30,7 +31,7 @@ end
 class FilterOStream
 special OStream
 	# Filter outputed elements
-	readable var _stream: OStream 
+	readable var _stream: nullable OStream
 
 	# Can the stream be used to write
 	redef fun is_writable: Bool
@@ -62,7 +63,7 @@ special FilterIStream
 		end
 	end
 
-	redef fun stream: IStream
+	redef fun stream: nullable IStream
 	do
 		if _stream == null and _streams.is_ok then
 			stream = _streams.item
