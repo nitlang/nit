@@ -16,58 +16,62 @@
 
 import kernel
 
-(-(1)).output
-(2+3).output
-(2-3).output
-(2*3).output
-(2/3).output
-(2%3).output
+fun one: Int do return 1
+fun two: Int do return 2
+fun three: Int do return 3
+
+(-(one)).output
+(two+three).output
+(two-three).output
+(two*three).output
+(two/three).output
+(two%three).output
 '\n'.output
 
-(3+2).output
-(3-2).output
-(3*2).output
-(3/2).output
-(3%2).output
+(three+two).output
+(three-two).output
+(three*two).output
+(three/two).output
+(three%two).output
 '\n'.output
 
-(not 1==2).output
-(2==2).output
+(not one==two).output
+(two==two).output
 '\n'.output
 
-(not 1 is 2).output
-(2 is 2).output
+(not one is two).output
+(two is two).output
 '\n'.output
 
-(not 1>2).output
-(not 2>2).output
-(3>2).output
+(not one>two).output
+(not two>two).output
+(three>two).output
 '\n'.output
 
-(not 1>=2).output
-(2>=2).output
-(3>=2).output
+(not one>=two).output
+(two>=two).output
+(three>=two).output
 '\n'.output
 
-(1<2).output
-(not 2<2).output
-(not 3<2).output
+(one<two).output
+(not two<two).output
+(not three<two).output
 '\n'.output
 
-(1<=2).output
-(2<=2).output
-(not 3<=2).output
+(one<=two).output
+(two<=two).output
+(not three<=two).output
 '\n'.output
 
-(not 1>=2).output
-(2>=2).output
-(3>=2).output
+(not one>=two).output
+(two>=two).output
+(three>=two).output
 '\n'.output
 
-(1<=>2).output
-(2<=>2).output
-(3<=>2).output
+(one<=>two).output
+(two<=>two).output
+(three<=>two).output
 '\n'.output
 
-1.succ.output
-3.prec.output
+one.succ.output
+three.prec.output
