@@ -907,6 +907,7 @@ redef class ACrangeExpr
 	redef fun after_typing(v)
 	do
 		super
+		if not is_typed then return
 		_meth_init = stype.local_class.select_method(once "init".to_symbol)
 	end
 end
@@ -914,6 +915,7 @@ redef class AOrangeExpr
 	redef fun after_typing(v)
 	do
 		super
+		if not is_typed then return
 		_meth_init = stype.local_class.select_method(once "without_last".to_symbol)
 	end
 end
@@ -1361,7 +1363,7 @@ redef class AEqExpr
 	redef fun after_typing(v)
 	do
 		super
-		if not is_typed then return
+		if not n_expr.is_typed or not n_expr2.is_typed then return
 		if n_expr.stype isa MMTypeNone and not n_expr2.stype.is_nullable or
 		n_expr2.stype isa MMTypeNone and not n_expr.stype.is_nullable then
 			v.warning(self, "Warning: comparaison between null and a non nullable value.")
@@ -1387,7 +1389,7 @@ redef class ANeExpr
 	redef fun after_typing(v)
 	do
 		super
-		if not is_typed then return
+		if not n_expr.is_typed or not n_expr2.is_typed then return
 		if n_expr.stype isa MMTypeNone and not n_expr2.stype.is_nullable or
 		n_expr2.stype isa MMTypeNone and not n_expr.stype.is_nullable then
 			v.warning(self, "Warning: comparaison between null and a non nullable value.")
