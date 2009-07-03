@@ -151,6 +151,8 @@ end
 redef class PClassdef
 	redef fun accept_typing(v)
 	do
+		v.variable_ctx = new RootVariableContext(v, self)
+		v.base_variable_ctx = v.variable_ctx
 		v.self_var = new ParamVariable("self".to_symbol, self)
 		v.self_var.stype = local_class.get_type
 		super
@@ -160,10 +162,13 @@ end
 redef class AAttrPropdef
 	redef fun accept_typing(v)
 	do
+		var old_var_ctx = v.variable_ctx
+		v.variable_ctx = old_var_ctx.sub(self)
 		super
 		if n_expr != null then
 			v.check_conform_expr(n_expr.as(not null), prop.signature.return_type.as(not null))
 		end
+		v.variable_ctx = old_var_ctx
 	end
 end
 
@@ -172,15 +177,16 @@ redef class AMethPropdef
 	var _self_var: nullable ParamVariable
 	redef fun accept_typing(v)
 	do
-		v.variable_ctx = new RootVariableContext(v, self)
-		v.base_variable_ctx = v.variable_ctx
+		var old_var_ctx = v.variable_ctx
+		v.variable_ctx = old_var_ctx.sub(self)
 		_self_var = v.self_var
 		super
+		v.variable_ctx = old_var_ctx
 	end
 end
 
 redef class AConcreteMethPropdef
-	redef fun accept_typing(v)
+	redef fun after_typing(v)
 	do
 		super
 		if v.variable_ctx.unreash == false and method.signature.return_type != null then
