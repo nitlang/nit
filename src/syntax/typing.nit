@@ -289,6 +289,7 @@ end
 
 redef class PType
 	fun stype: MMType do return _stype.as(not null)
+	fun is_typed: Bool do return _stype != null
 	var _stype: nullable MMType
 
 	redef fun after_typing(v)
@@ -342,6 +343,7 @@ redef class AVardeclExpr
 		if n_expr != null then v.variable_ctx.mark_is_set(va)
 
 		if n_type != null then
+			if not n_type.is_typed then return
 			va.stype = n_type.stype
 			if n_expr != null then
 				v.check_conform_expr(n_expr.as(not null), va.stype)
@@ -1248,7 +1250,7 @@ redef class ANewExpr
 special AAbsSendExpr
 	redef fun after_typing(v)
 	do
-		if n_type._stype == null then return
+		if not n_type.is_typed then return
 		var t = n_type.stype
 		if t.local_class.global.is_abstract then
 			v.error(self, "Error: try to instantiate abstract class {t.local_class}.")
@@ -1633,6 +1635,7 @@ special PExpr
 	private fun check_expr_cast(v: TypingVisitor, n_expr: PExpr, n_type: PType)
 	do
 		if not v.check_expr(n_expr) then return
+		if not n_type.is_typed then return
 		var etype = n_expr.stype
 		var ttype = n_type.stype
 		if etype == ttype then
@@ -1660,6 +1663,7 @@ special ATypeCheckExpr
 	redef fun after_typing(v)
 	do
 		check_expr_cast(v, n_expr, n_type)
+		if not n_type.is_typed then return
 		var variable = n_expr.its_variable
 		if variable != null then
 			_if_true_variable_ctx = v.variable_ctx.sub_with(self, variable, n_type.stype)
@@ -1674,6 +1678,7 @@ special ATypeCheckExpr
 	redef fun after_typing(v)
 	do
 		check_expr_cast(v, n_expr, n_type)
+		if not n_type.is_typed then return
 		_stype = n_type.stype
 		_is_typed = _stype != null
 	end
