@@ -690,14 +690,18 @@ redef class AFormaldef
 			if n_type == null then
 				_formal.bound = v.module.type_any.as_nullable
 			else
-				_formal.bound = n_type.get_stype(v).as(not null)
+				var stype = n_type.get_stype(v)
+				if stype == null then return
+				_formal.bound = stype
 			end
 		else
 			var ob = o.get_formal(_formal.position).bound.for_module(v.module)
 			if n_type == null then
 				_formal.bound = ob
 			else
-				_formal.bound = n_type.get_stype(v).as(not null)
+				var stype = n_type.get_stype(v)
+				if stype == null then return
+				_formal.bound = stype
 				if _formal.bound != ob then
 					v.error(self, "Redef error: Cannot change formal parameter type of class {c}; got {_formal.bound}, expected {ob}.")
 				end
