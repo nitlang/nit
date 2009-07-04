@@ -591,9 +591,15 @@ redef class AType
 		var local_class = get_local_class(v)
 		if local_class == null then return null
 
-		var arity = n_types.length 
+		var arity = n_types.length
 		if local_class.arity != arity then
-			v.error(self, "Type error: '{local_class}' has {local_class.arity} parameters which differs from the {arity} params.")
+			if arity == 0 then
+				v.error(self, "Type error: '{local_class}' is a generic class.")
+			else if local_class.arity == 0 then
+				v.error(self, "Type error: '{local_class}' is not a generic class.")
+			else
+				v.error(self, "Type error: '{local_class}' has {local_class.arity} parameters ({arity} are provided).")
+			end
 			return null
 		end
 
