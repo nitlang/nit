@@ -1,0 +1,7 @@
+./error_type_not_ok4.nit:25,16: Type error: class Fail not found in module error_type_not_ok4.
+./error_type_not_ok4.nit:29,28: Type error: class Fail not found in module error_type_not_ok4.
+./error_type_not_ok4.nit:30,12: Type error: class Fail not found in module error_type_not_ok4.
+./error_type_not_ok4.nit:31,18: Type error: class Fail not found in module error_type_not_ok4.
+./error_type_not_ok4.nit:32,10: Type error: class Fail not found in module error_type_not_ok4.
+./error_type_not_ok4.nit:33,16: Type error: class Fail not found in module error_type_not_ok4.
+./error_type_not_ok4.nit:21,10: Type error: class Fail not found in module error_type_not_ok4.

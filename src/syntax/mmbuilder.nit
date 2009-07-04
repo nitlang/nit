@@ -391,6 +391,9 @@ private class SignatureBuilder
 	# Current closure declarations
 	readable writable var _closure_decls: Array[AClosureDecl] = new Array[AClosureDecl]
 
+	# True is a problen occured durring building
+	readable writable var _has_error_occured: Bool = false
+
 	# Current signature
 	readable writable var _signature: nullable MMSignature = null 
 end
@@ -777,7 +780,7 @@ redef class PPropdef
 				var supers = prop.local_class.super_methods_named(prop.name)
 				inherit_signature(v, prop, supers)
 			end
-			if prop.signature != null then
+			if prop.signature != null or v.signature_builder.has_error_occured then
 				# ok
 			else if not v.signature_builder.untyped_params.is_empty then
 				v.error(v.signature_builder.untyped_params.first, "Error: Untyped parameter.")
@@ -1009,6 +1012,8 @@ redef class AMethPropdef
 		v.signature_builder = new SignatureBuilder
 		super
 
+		if v.signature_builder.has_error_occured then return
+
 		if v.signature_builder.signature == null then
 			#_method.signature = new MMSignature(new Array[MMType], null, v.local_class.get_type)
 		else
@@ -1105,7 +1110,9 @@ redef class ASignature
 	redef fun accept_property_verifier(v)
 	do
 		super
-		if not v.signature_builder.untyped_params.is_empty then
+		if v.signature_builder.has_error_occured then
+			return
+		else if not v.signature_builder.untyped_params.is_empty then
 			if v.signature_builder.untyped_params.first != v.signature_builder.params.first or n_type != null then
 				v.error(v.signature_builder.untyped_params.first, "Syntax error: untyped parameter.")
 				return
@@ -1118,6 +1125,10 @@ redef class ASignature
 			var ret: nullable MMType = null
 			if n_type != null then
 				ret = n_type.get_stype(v)
+				if ret == null then
+					v.signature_builder.has_error_occured = true
+					return
+				end
 			end
 			v.signature_builder.signature = new MMSignature(pars, ret, v.local_class.get_type)
 			if v.signature_builder.vararg_rank >= 0 then
@@ -1156,7 +1167,11 @@ redef class PParam
 		v.signature_builder.params.add(self)
 		v.signature_builder.untyped_params.add(self)
 		if n_type != null then
-			var stype = n_type.get_stype(v).as(not null)
+			var stype = n_type.get_stype(v)
+			if stype == null then
+				v.signature_builder.has_error_occured = true
+				return
+			end
 			for p in v.signature_builder.untyped_params do
 				p.stype = stype
 				if is_vararg then
@@ -1189,6 +1204,9 @@ redef class AClosureDecl
 		var old_signature_builder = v.signature_builder
 		v.signature_builder = new SignatureBuilder
 		super
+		if v.signature_builder.has_error_occured then
+			return
+		end
 		var sig = v.signature_builder.signature
 		if sig == null then
 			sig = new MMSignature(new Array[MMType], null, v.local_class.get_type)
