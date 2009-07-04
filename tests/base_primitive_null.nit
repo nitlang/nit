@@ -17,13 +17,13 @@
 import kernel
 
 class A
-	var _i: Int
-	var _b: Bool
-	var _c: Char
+	var _i: nullable Int = null
+	var _b: nullable Bool = null
+	var _c: nullable Char = null
 
 	init
 	do
-		var o: Object
+		var o: nullable Object
 		'I'.output
 		'\n'.output
 		(_i == null).output
