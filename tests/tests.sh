@@ -26,15 +26,18 @@ usage()
 	cat<<END
 Usage: $e [options] modulenames
 -o option   Pass option to nitc
+-v          Verbose (show tests steps)
 -h          This help
 END
 }
 
+verbose=false
 stop=false
 while [ $stop = false ]; do
 	case $1 in
 		-o) OPT="$OPT $2"; shift; shift;;
-		-h|"") usage; exit;;
+		-v) verbose=true; shift;;
+		-h) usage; exit;;
 		*) stop=true
 	esac
 done
@@ -83,8 +86,16 @@ for ii in "$@"; do
 		rm "$ff.res" "$ff.err" "$ff.write" 2> /dev/null
 
 		# Compile
+		if [ "x$verbose" = "xtrue" ]; then
+			echo ""
+			echo $NITC $OPT -o "$f.bin" "$i" -I . -I alt -I ../lib/standard
+		fi
 		$NITC $OPT -o "$f.bin" "$i" -I . -I alt -I ../lib/standard 2> "$ff.cmp.err" > "$ff.compile.log"
 		ERR=$?
+		if [ "x$verbose" = "xtrue" ]; then
+			cat "$ff.compile.log"
+			cat >&2 "$ff.cmp.err"
+		fi
 		mv "$f.bin" "$ff.bin" 2> /dev/null
 		egrep '^[A-Z0-9_]*$' "$ff.compile.log" > "$ff.res"
 		if [ "$ERR" != 0 ]; then
@@ -98,10 +109,18 @@ for ii in "$@"; do
 			else
 				args=""
 			fi
+			if [ "x$verbose" = "xtrue" ]; then
+				echo ""
+				echo "./$ff.bin" $args
+			fi
 			if [ -f "$f.inputs" ]; then
 				"./$ff.bin" $args < "$f.inputs" > "$ff.res" 2>"$ff.err"
 			else
 				"./$ff.bin" $args > "$ff.res" 2>"$ff.err"
+			fi
+			if [ "x$verbose" = "xtrue" ]; then
+				cat "$ff.res"
+				cat >&2 "$ff.err"
 			fi
 			if [ -f "$ff.write" ]; then
 				cat "$ff.write" >> "$ff.res"
