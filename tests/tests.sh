@@ -15,14 +15,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This shell script compile, run and verify NIT program files
+# This shell script compile, run and verify Nit program files
 
-# Ruby binary (none if you want to let the program to decide)
-#RUBY=
+# The default nitc compiler
 [ -z "$NITC" ] && NITC=../bin/nitc
 
-# Options to use with the ruby compiler
-# OPT=
+usage()
+{
+	e=`basename "$0"`
+	cat<<END
+Usage: $e [options] modulenames
+-o option   Pass option to nitc
+-h          This help
+END
+}
+
+stop=false
+while [ $stop = false ]; do
+	case $1 in
+		-o) OPT="$OPT $2"; shift; shift;;
+		-h|"") usage; exit;;
+		*) stop=true
+	esac
+done
 
 # Mark to distinguish files among tests
 # MARK=
@@ -32,7 +47,8 @@
 ERRLIST=${ERRLIST:-errlist}
 
 if [ $# = 0 ]; then
-	echo "usage: $0 file.nit ..."
+	usage;
+	exit
 fi
 
 # Backup and initiate new ERRLIST
