@@ -17,10 +17,10 @@
 class A
 	type T: A
 	type U: B
-	fun foo(a: T) do a.output
-	fun bar(b: U) do b.output
-	fun baz(i: Int) do i.output
-	redef fun output do 'A'.output
+	fun foo(a: T) do a.out
+	fun bar(b: U) do b.out
+	fun baz(i: Int) do i.out
+	fun out do 'A'.output
 
 	init do end
 end
@@ -29,10 +29,10 @@ class B
 special A
 	redef type T: B
 	redef type U: Int
-	redef fun foo(a: T) do a.output
-	redef fun bar(b: U) do b.output
-	redef fun baz(i: Int) do i.output
-	redef fun output do 'B'.output
+	redef fun foo(a: T) do a.out
+	redef fun bar(b: U) do b.out
+	redef fun baz(i: Int) do i.out
+	redef fun out do 'B'.output
 
 	init do end
 end
@@ -40,9 +40,19 @@ end
 redef class Int
 special B
 	redef type T: Int
-	redef fun foo(a: T) do a.output
-	redef fun bar(b: U) do b.output
+	redef fun foo(a: T) do a.out
+	redef fun bar(b: U) do b.out
 	redef fun output is intern
+	redef fun out
+	do
+		var i: Object = self
+		if i isa Int then
+			i.output
+		else
+			'X'.output
+		end
+	end
+
 end
 
 var a = new A

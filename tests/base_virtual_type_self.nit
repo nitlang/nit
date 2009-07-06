@@ -39,7 +39,7 @@ class B
 		#alt4#var a = new A[A[Int]]
 		#alt5#var a = new A[A[U]]
 
-		var f: Float
+		var f: Float = 1.0
 
 		a.foo(f)
 		f = a.foo2
