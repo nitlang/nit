@@ -7,7 +7,7 @@
 2
 2
 2
-Cast failled in base_as_cast_alt5::Sys::(kernel::Sys::main) (alt/base_as_cast_alt5.nit:57)
+Cast failed in base_as_cast_alt5::Sys::(kernel::Sys::main) (alt/base_as_cast_alt5.nit:57)
 ,---- Stack trace -- - -  -
 | base_as_cast_alt5::Sys::(kernel::Sys::main) (alt/base_as_cast_alt5.nit:39)
 `------------------- - -  -

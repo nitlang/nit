@@ -1,7 +1,7 @@
 0
 0
 0
-Cast failled in base_as_cast_alt1::Sys::(kernel::Sys::main) (alt/base_as_cast_alt1.nit:45)
+Cast failed in base_as_cast_alt1::Sys::(kernel::Sys::main) (alt/base_as_cast_alt1.nit:45)
 ,---- Stack trace -- - -  -
 | base_as_cast_alt1::Sys::(kernel::Sys::main) (alt/base_as_cast_alt1.nit:39)
 `------------------- - -  -

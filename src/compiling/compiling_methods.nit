@@ -665,14 +665,14 @@ redef class MMType
 			# FIXME This is used to not break code without the nullable KW
 			s = "({recv}!=NIT_NULL) && "
 		end
-		v.add_instr("if ({s}!VAL_ISA({recv}, {g.color_id}, {g.id_id})) \{ fprintf(stderr, \"Cast failled\"); {v.printf_locate_error(n)} nit_exit(1); } /*cast {self}*/;")
+		v.add_instr("if ({s}!VAL_ISA({recv}, {g.color_id}, {g.id_id})) \{ fprintf(stderr, \"Cast failed\"); {v.printf_locate_error(n)} nit_exit(1); } /*cast {self}*/;")
 	end
 
 	# Compile a notnull cast assertion
 	fun compile_notnull_check(v: CompilerVisitor, recv: String, n: PNode)
 	do
 		if is_nullable then
-			v.add_instr("if (({recv}==NIT_NULL)) \{ fprintf(stderr, \"Cast failled\"); {v.printf_locate_error(n)} nit_exit(1); } /*cast {self}*/;")
+			v.add_instr("if (({recv}==NIT_NULL)) \{ fprintf(stderr, \"Cast failed\"); {v.printf_locate_error(n)} nit_exit(1); } /*cast {self}*/;")
 		end
 	end
 end
