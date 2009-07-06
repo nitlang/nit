@@ -40,7 +40,7 @@ if [ ! -f nitc.nit ]; then
 	fi
 fi
 
-VN=$(git describe --tags --always HEAD)
+VN=$(git describe --always HEAD 2>/dev/null)
 if [ -z "$VN" ]; then
 	VN="undefined"
 fi
