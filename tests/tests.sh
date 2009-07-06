@@ -131,16 +131,42 @@ for ii in "$@"; do
 		fi
 
 		# Result
+		SAV=""
+		FAIL=""
 		if [ -r "sav/$ff.sav" ]; then
-			diff -u "$ff.res" "sav/$ff.sav" > "$ff.diff.log"
+			diff -u "$ff.res" "sav/$ff.sav" > "$ff.diff.sav.log"
 			if [ "$?" == 0 ]; then
-				echo "[ok] $ff.res"
-				ok="$ok $ff"
+				SAV=OK
 			else
-				echo "[======= fail $ff.res sav/$ff.sav =======]"
-				nok="$nok $ff"
-				echo "$ii" >> "$ERRLIST"
+				SAV=NOK
 			fi
+		fi
+		if [ -r "sav/$ff.fail" ]; then
+			diff -u "$ff.res" "sav/$ff.fail" > "$ff.diff.fail.log"
+			if [ "$?" == 0 ]; then
+				FAIL=OK
+			else
+				FAIL=NOK
+			fi
+		fi
+		if [ "x$SAV" = "xOK" ]; then
+			if [ "x$FAIL" = "x" ]; then
+				echo "[ok] $ff.res"
+			else
+				echo "[ok] $ff.res - but sav/$ff.fail remains!"
+			fi
+			ok="$ok $ff"
+		elif [ "x$FAIL" = "xOK" ]; then
+			echo "[fail] $ff.res"
+			ok="$ok $ff"
+		elif [ "x$SAV" = "xNOK" ]; then
+			echo "[======= fail $ff.res sav/$ff.sav =======]"
+			nok="$nok $ff"
+			echo "$ii" >> "$ERRLIST"
+		elif [ "x$FAIL" = "xNOK" ]; then
+			echo "[======= changed $ff.res sav/$ff.fail ======]"
+			nok="$nok $ff"
+			echo "$ii" >> "$ERRLIST"
 		else
 			echo "[=== no sav ===] $ff.res"
 			nos="$nos $ff"
