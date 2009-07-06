@@ -41,13 +41,21 @@ if [ ! -f nitc.nit ]; then
 fi
 
 VN=$(git describe --always HEAD 2>/dev/null)
+if [ "$?" != "0" ]; then
+	if [ -r ../VERSION ]; then
+		VN="$(cat ../VERSION)"
+	else
+		echo >&2 "Error: no VERSION file and not a .git repository."
+		exit 1
+	fi
+fi
 if [ -z "$VN" ]; then
 	VN="undefined"
 fi
 if [ -n "$1" ]; then
 	VN="${VN}_$1"
 fi
-if [ -n "$(git diff HEAD)" ]; then
+if [ -n "$(git diff HEAD 2>/dev/null)" ]; then
 	VN="${VN}_dirty"
 fi
 
