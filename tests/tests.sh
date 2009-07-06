@@ -178,7 +178,7 @@ echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos | wc -w`
 
 if [ -n "$nok" ]; then
 	echo "fail: $nok"
-	echo "There were errors ! (see file $ERRLIST)"
+	echo "There were $(echo $nok | wc -w) errors ! (see file $ERRLIST)"
 fi
 if [ -n "$nos" ]; then
 	echo "no sav: $nos"
