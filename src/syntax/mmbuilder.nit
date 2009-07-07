@@ -60,6 +60,7 @@ redef class MMSrcModule
 			end
 			c.compute_super_classes
 		end
+		if tc.error_count > 0 then exit(1)
 
 		# Class that we will process now are those in the hierarchy
 		# Its mean all the visible classes and their super-classes
@@ -74,9 +75,9 @@ redef class MMSrcModule
 		var mmbv1b = new ClassAncestorBuilder(tc, self)
 		for c in classes do
 			c.accept_class_visitor(mmbv1b)
+			if tc.error_count > 0 then exit(1)
 			c.compute_ancestors
 		end
-		if tc.error_count > 0 then exit(1)
 
 		# Check class conformity
 		var mmbv1b = new ClassVerifierVisitor(tc, self)
