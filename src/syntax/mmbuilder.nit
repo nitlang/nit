@@ -45,6 +45,10 @@ redef class MMSrcModule
 		mmbv.visit(node)
 		if tc.error_count > 0 then exit(1)
 
+		if mhe.direct_greaters.is_empty then
+			process_default_classes(tc)
+		end
+
 		# Import unrefined local classes and attach them to global classes
 		import_local_classes
 
@@ -119,6 +123,23 @@ redef class MMSrcModule
 		end
 
 		if tc.error_count > 0 then exit(1)
+	end
+
+	# Create some primitive default classes if they do not exists
+	fun process_default_classes(tc: ToolContext)
+	do
+		var name = once ("Object".to_symbol)
+		if not has_global_class_named(name) then
+			var c = new MMSrcLocalClass(self, name, null, 0)
+			c.new_global
+			src_local_classes[name] = c
+		end
+		name = once ("Bool".to_symbol)
+		if not has_global_class_named(name) then
+			var c = new MMSrcLocalClass(self, name, null, 0)
+			c.new_global
+			src_local_classes[name] = c
+		end
 	end
 end
 

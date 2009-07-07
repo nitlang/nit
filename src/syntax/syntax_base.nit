@@ -68,10 +68,14 @@ special MMConcreteClass
 	# Concrete NIT source properties by name
 	readable var _src_local_properties: Map[Symbol, MMLocalProperty]
 
-	init(mod: MMSrcModule, n: Symbol, cla: PClassdef, a: Int)
+	init(mod: MMSrcModule, n: Symbol, cla: nullable PClassdef, a: Int)
 	do
 		super(mod, n, a)
-		_nodes = [cla]
+		if cla == null then
+			_nodes = new Array[PClassdef]
+		else
+			_nodes = [cla]
+		end
 		_src_local_properties = new HashMap[Symbol, MMLocalProperty]
 	end
 end
