@@ -15,6 +15,7 @@
 # limitations under the License.
 
 import kernel
+#alt1#import array
 
 class A
 	fun f0 is abstract
