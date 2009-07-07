@@ -17,6 +17,9 @@
 
 # This shell script compile, run and verify Nit program files
 
+# Set lang do default to avoid failed tests because of locale
+export LANG=C
+
 # The default nitc compiler
 [ -z "$NITC" ] && NITC=../bin/nitc
 
