@@ -103,7 +103,7 @@ for ii in "$@"; do
 		if [ "$ERR" != 0 ]; then
 			echo -n "! "
 			cp "$ff.cmp.err" "$ff.res"
-		else
+		elif [ -x "./$ff.bin" ]; then
 			echo -n ". "
 			# Execute
 			if [ -f "$f.args" ]; then
@@ -130,6 +130,9 @@ for ii in "$@"; do
 			if [ -s "$ff.err" ]; then
 				cat "$ff.err" >> "$ff.res"
 			fi
+		else
+			echo -n "! "
+			echo "Compilation error" > "$ff.res"
 		fi
 
 		# Result
