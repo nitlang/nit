@@ -86,20 +86,19 @@ for ii in "$@"; do
 
 		echo -n "=> $i: "
 
-		rm "$ff.res" "$ff.err" "$ff.write" 2> /dev/null
+		rm "$ff.res" "$ff.err" "$ff.write" "$ff.bin" 2> /dev/null
 
 		# Compile
 		if [ "x$verbose" = "xtrue" ]; then
 			echo ""
-			echo $NITC $OPT -o "$f.bin" "$i" -I . -I alt -I ../lib/standard
+			echo $NITC $OPT -o "$ff.bin" "$i" -I . -I alt -I ../lib/standard
 		fi
-		$NITC $OPT -o "$f.bin" "$i" -I . -I alt -I ../lib/standard 2> "$ff.cmp.err" > "$ff.compile.log"
+		$NITC $OPT -o "$ff.bin" "$i" -I . -I alt -I ../lib/standard 2> "$ff.cmp.err" > "$ff.compile.log"
 		ERR=$?
 		if [ "x$verbose" = "xtrue" ]; then
 			cat "$ff.compile.log"
 			cat >&2 "$ff.cmp.err"
 		fi
-		mv "$f.bin" "$ff.bin" 2> /dev/null
 		egrep '^[A-Z0-9_]*$' "$ff.compile.log" > "$ff.res"
 		if [ "$ERR" != 0 ]; then
 			echo -n "! "
