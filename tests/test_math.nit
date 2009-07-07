@@ -1,6 +1,7 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2005-2008 Jean Privat <jean@pryen.org>
+# Copyright 2009 Jean-Sebastien Gelinas <calestar@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +35,12 @@ print(0.1.sin.asin.sin.asin)
 print(0.1.tan.atan.tan.atan)
 print(0.1.exp.log.exp.log)
 
-for i in [0..10] do
-	printn(i.rand, ", ", i.to_f.rand, ", ")
+var random_int: Int
+var random_float: Float
+for i in [0..100] do
+	random_int = 1.rand
+	random_float = 1.0.rand
+	if random_int > 1 or random_int < 0 then print "Erroneous random int"
+	if random_float > 1.0 or random_float < 0.0 then print "Erroneous random float"
 end
 
