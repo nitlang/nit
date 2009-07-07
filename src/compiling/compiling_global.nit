@@ -61,7 +61,7 @@ special ColorContext
 	# FIXME: do something better.
 	readable writable var _max_class_table_length: Int = 0
 
-	init(module: MMSrcModule)
+	init(module: MMModule)
 	do
 		_module = module
 	end
@@ -71,7 +71,7 @@ class GlobalCompilerVisitor
 special CompilerVisitor
 	# The global analysis result
 	readable var _global_analysis: GlobalAnalysis
-	init(m: MMSrcModule, tc: ToolContext, ga: GlobalAnalysis)
+	init(m: MMModule, tc: ToolContext, ga: GlobalAnalysis)
 	do
 		super(m, tc)
 		_global_analysis = ga
@@ -102,7 +102,7 @@ special ColorContext
 	init(c: MMLocalClass) do _local_class = c
 end
 
-redef class MMSrcLocalClass
+redef class MMConcreteClass
 	# The table element of the subtype check
 	fun class_color_pos: TableEltClassColor do return _class_color_pos.as(not null)
 	var _class_color_pos: nullable TableEltClassColor
@@ -126,16 +126,16 @@ redef class MMSrcLocalClass
 			module_table.add(cpp)
 			clt.add(new TableEltClassInitTable(self))
 		end
-		for p in src_local_properties do
+		for p in local_local_properties do
 			var pg = p.global
 			if pg.intro == p then
-				if p isa MMSrcAttribute then
+				if p isa MMAttribute then
 					ilt.add(new TableEltAttr(p))
-				else if p isa MMSrcMethod then
+				else if p isa MMMethod then
 					clt.add(new TableEltMeth(p))
 				end
 			end
-			if p isa MMSrcMethod and p.need_super then
+			if p isa MMMethod and p.need_super then
 				clt.add(new TableEltSuper(p))
 			end
 		end
@@ -154,15 +154,17 @@ redef class MMSrcLocalClass
 	end
 end
 
-redef class MMSrcModule
+redef class MMModule
 	# The local table of the module (refers things introduced in the module)
 	var _local_table: Array[ModuleTableElt] = new Array[ModuleTableElt]
 
 	# Builds the local tables and local classes layouts
 	fun local_analysis(tc: ToolContext)
 	do
-		for c in src_local_classes do
-			c.build_layout_in(tc, _local_table)
+		for c in local_classes do
+			if c isa MMConcreteClass then
+				c.build_layout_in(tc, _local_table)
+			end
 		end
 	end
 
@@ -218,7 +220,7 @@ redef class MMSrcModule
 
 			# Store the colortableelt in the class table pool
 			var bc = c.global.intro
-			assert bc isa MMSrcLocalClass
+			assert bc isa MMConcreteClass
 			ctab.add(bc.class_color_pos)
 		end
 
@@ -252,7 +254,7 @@ redef class MMSrcModule
 				assert cc.class_table.is_empty
 				cc.class_table.add_all(scc.class_table)
 				var bc = c.global.intro
-				assert bc isa MMSrcLocalClass
+				assert bc isa MMConcreteClass
 				var colpos = bc.class_color_pos
 				var colposcolor = cc.class_table.length
 				ga.color(colpos) = colposcolor
@@ -268,7 +270,7 @@ redef class MMSrcModule
 			var cte = cc.class_layout
 			var ite = cc.instance_layout
 			for sc in c.crhe.greaters_and_self do
-				if sc isa MMSrcLocalClass then
+				if sc isa MMConcreteClass then
 					cte.add(sc, sc.class_layout)
 					ite.add(sc, sc.instance_layout)
 				end
@@ -303,7 +305,7 @@ redef class MMSrcModule
 				cc.class_table.clear
 				cc.class_table.add_all(scc.class_table)
 				var bc = c.global.intro
-				assert bc isa MMSrcLocalClass
+				assert bc isa MMConcreteClass
 				var colpos = bc.class_color_pos
 				cc.class_table[ga.color(colpos)] = colpos
 				while cc.class_table.length <= maxcolor do
@@ -415,7 +417,6 @@ redef class MMSrcModule
 	fun compile_tables_to_c(v: GlobalCompilerVisitor)
 	do
 		for m in mhe.greaters_and_self do
-			assert m isa MMSrcModule
 			m.compile_local_table_to_c(v)
 		end
 
@@ -488,7 +489,8 @@ redef class MMSrcModule
 			end
 			e.compile_macros(v, value)
 		end
-		for c in src_local_classes do
+		for c in local_classes do
+			if not c isa MMConcreteClass then continue
 			for pg in c.global_properties do
 				var p = c[pg]
 				if p.local_class == c then

@@ -272,7 +272,7 @@ end
 # A Nit method currenlty compiled
 class NitMethodContext
 	# Current method compiled
-	readable var _method: nullable MMSrcMethod
+	readable var _method: nullable MMMethod
 
 	# Association between parameters and the corresponding variables
 	readable writable var _method_params: nullable Array[ParamVariable]
@@ -295,7 +295,7 @@ class NitMethodContext
 	# Variable where a functionnal nit continue must store its value
 	readable writable var _continue_value: nullable String
 
-	init(method: nullable MMSrcMethod)
+	init(method: nullable MMMethod)
 	do
 		_method = method
 	end
@@ -305,6 +305,36 @@ end
 
 redef class ClosureVariable
 	readable writable var _ctypename: nullable String
+end
+
+redef class MMAttribute
+	# Compile a read acces on selffor a given reciever.
+	fun compile_isset(v: CompilerVisitor, n: PNode, recv: String): String
+	do
+		return "TAG_Bool({global.attr_access}({recv})!=NIT_NULL) /* isset {local_class}::{name}*/"
+	end
+
+	# Compile a read acces on selffor a given reciever.
+	fun compile_read_access(v: CompilerVisitor, n: PNode, recv: String): String
+	do
+		var res = "{global.attr_access}({recv}) /*{local_class}::{name}*/"
+		if not signature.return_type.is_nullable then
+			res = v.ensure_var(res, "{local_class}::{name}")
+			v.add_instr("if ({res} == NIT_NULL) \{ fprintf(stderr, \"Uninitialized attribute %s\", \"{name}\"); {v.printf_locate_error(n)} nit_exit(1); } /* implicit isset */;")
+		end
+		return res
+	end
+
+	# Compile a write acces on selffor a given reciever.
+	fun compile_write_access(v: CompilerVisitor, n: nullable PNode, recv: String, value: String)
+	do
+		v.add_instr("{global.attr_access}({recv}) /*{local_class}::{name}*/ = {value};")
+	end
+end
+
+redef class MMLocalProperty
+	# Compile the property as a C property
+	fun compile_property_to_c(v: CompilerVisitor) do end
 end
 
 redef class MMMethod
@@ -451,39 +481,6 @@ redef class MMMethod
 	do
 		return "FWBT_{cname}_{i}"
 	end
-end
-
-redef class MMAttribute
-	# Compile a read acces on selffor a given reciever.
-	fun compile_isset(v: CompilerVisitor, n: PNode, recv: String): String
-	do
-		return "TAG_Bool({global.attr_access}({recv})!=NIT_NULL) /* isset {local_class}::{name}*/"
-	end
-
-	# Compile a read acces on selffor a given reciever.
-	fun compile_read_access(v: CompilerVisitor, n: PNode, recv: String): String
-	do
-		var res = "{global.attr_access}({recv}) /*{local_class}::{name}*/"
-		if not signature.return_type.is_nullable then
-			res = v.ensure_var(res, "{local_class}::{name}")
-			v.add_instr("if ({res} == NIT_NULL) \{ fprintf(stderr, \"Uninitialized attribute %s\", \"{name}\"); {v.printf_locate_error(n)} nit_exit(1); } /* implicit isset */;")
-		end
-		return res
-	end
-
-	# Compile a write acces on selffor a given reciever.
-	fun compile_write_access(v: CompilerVisitor, n: nullable PNode, recv: String, value: String)
-	do
-		v.add_instr("{global.attr_access}({recv}) /*{local_class}::{name}*/ = {value};")
-	end
-end
-
-redef class MMLocalProperty
-	# Compile the property as a C property
-	fun compile_property_to_c(v: CompilerVisitor) do end
-end
-
-redef class MMSrcMethod
 
 	# Compile and declare the signature to C
 	protected fun decl_csignature(v: CompilerVisitor, args: Array[String]): String
@@ -681,7 +678,7 @@ end
 
 redef class AMethPropdef
 	# Compile the method body
-	fun do_compile_inside(v: CompilerVisitor, method: MMSrcMethod, params: Array[String]): nullable String is abstract
+	fun do_compile_inside(v: CompilerVisitor, method: MMMethod, params: Array[String]): nullable String is abstract
 end
 
 redef class PSignature

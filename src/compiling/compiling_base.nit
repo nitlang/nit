@@ -87,7 +87,7 @@ class CompilerVisitor
 	end
 
 	# The processed module
-	readable var _module: MMSrcModule
+	readable var _module: MMModule
 
 	# Where instr and decl are stored
 	readable writable var _ctx: CContext = new CContext
@@ -99,7 +99,7 @@ class CompilerVisitor
 	readable var _tc: ToolContext
 
 	# Create a new CompilerVisitor based on a module
-	init(module: MMSrcModule, tc: ToolContext)
+	init(module: MMModule, tc: ToolContext)
 	do
 		_module = module
 		_tc = tc

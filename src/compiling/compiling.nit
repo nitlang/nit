@@ -22,7 +22,7 @@ private import compiling_methods
 private import compiling_global
 private import syntax
 
-redef class MMSrcModule
+redef class MMModule
 	# Compile the program
 	# Generate all sep files (_sep.[ch]), the main file (_table.c) and the build file (_build.sh)
 	# Then execute the build.sh
@@ -30,7 +30,6 @@ redef class MMSrcModule
 	do
 		tc.info("Building tables",1)
 		for m in mhe.greaters_and_self do
-			assert m isa MMSrcModule
 			tc.info("Building tables for module: {m.name}",2)
 			m.local_analysis(tc)
 		end
@@ -45,7 +44,6 @@ redef class MMSrcModule
 		files.add("$CLIBDIR/nit_main.c")
 		tc.info("Generating C code",1)
 		for m in mhe.greaters_and_self do
-			assert m isa MMSrcModule
 			files.add("{tc.compdir}/{m.name}._sep.c")
 			tc.info("Generating C code for module: {m.name}",2)
 			m.compile_separate_module(tc, ga)

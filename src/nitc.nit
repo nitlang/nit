@@ -95,7 +95,6 @@ special AbstractCompiler
 	redef fun perform_work(mods)
 	do
 		for mod in mods do
-			assert mod isa MMSrcModule
 			mod.compile_prog_to_c(self)
 		end
 
