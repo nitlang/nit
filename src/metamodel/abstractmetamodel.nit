@@ -355,6 +355,9 @@ class MMLocalClass
 	# All known global properties
 	readable var _global_properties: Set[MMGlobalProperty] = new HashSet[MMGlobalProperty]
 
+	# All locally defined local properties
+	readable var _local_local_properties: Set[MMLocalProperty] = new HashSet[MMLocalProperty]
+
 	# Dictionnary of global properties
 	var _properties_by_name: Map[Symbol, Array[MMGlobalProperty]] = new HashMap[Symbol, Array[MMGlobalProperty]]
 
@@ -464,6 +467,9 @@ class MMLocalClass
 	fun register_local_property(p: MMLocalProperty)
 	do
 		_local_property_by_global[p.global] = p
+		if p.local_class == self then
+			_local_local_properties.add(p)
+		end
 	end
 
 	# Register a global property and associate it with its name
