@@ -183,6 +183,7 @@ end
 # Concrete NIT implicit constructor
 class MMImplicitInit
 special MMMethSrcMethod
+	fun super_init: nullable MMLocalProperty is abstract
 	redef fun is_init do return true
 	readable var _unassigned_attributes: Array[MMSrcAttribute]
 	readable var _super_inits: Array[MMLocalProperty]
@@ -298,6 +299,12 @@ special Visitor
 	fun type_collection: MMType
 	do
 		return _module.class_by_name(once ("Collection".to_symbol)).get_instantiate_type([type_object.as_nullable])
+	end
+
+	# The primitive type NativeString
+	fun type_nativestring: MMType
+	do
+		return _module.class_by_name(once ("NativeString".to_symbol)).get_type
 	end
 
 	# The primitive type Array[?]
@@ -481,6 +488,11 @@ redef class AAttrPropdef
 	fun writemethod: nullable MMSrcMethod is abstract
 end
 
+redef class AConcreteInitPropdef
+	readable var _super_init_calls: Array[MMMethod] = new Array[MMMethod]
+	readable var _explicit_super_init_calls: Array[MMMethod] = new Array[MMMethod]
+end
+
 redef class AMethPropdef
 	# Associated method (MM entity)
 	fun method: MMMethSrcMethod is abstract
@@ -527,6 +539,14 @@ redef class PType
 	# Useful with get_unchecked_stype
 	# Remember that conformance check need that ancestors are totaly computed
 	fun check_conform(v: AbsSyntaxVisitor) is abstract
+
+	# Is the node correcly typed
+	# Return false if typed was not yet computed or
+	# if an error occured during the typing computation
+	fun is_typed: Bool is abstract
+
+	# Return corresponding static type. (require is_typed)
+	fun stype: MMType is abstract
 end
 
 redef class AType
@@ -667,6 +687,92 @@ redef class PExpr
 	fun stype: MMType is abstract
 end
 
+class AAbsAbsSendExpr
+special PExpr
+	# The signature of the called property (require is_typed)
+	fun prop_signature: MMSignature is abstract
+
+	# The real arguments used (after star transformation) (require is_typed)
+	fun arguments: Array[PExpr] is abstract
+end
+
+class AAbsSendExpr
+special AAbsAbsSendExpr
+	# The invoked method (require is_typed)
+	fun prop: MMMethod is abstract
+
+	# The return type (if any) (once computed)
+	fun return_type: nullable MMType is abstract
+end
+
+class ASuperInitCall
+special AAbsSendExpr
+end
+
+redef class ASuperExpr
+special ASuperInitCall
+	fun init_in_superclass: nullable MMMethod is abstract
+end
+
+redef class ANewExpr
+special AAbsSendExpr
+end
+
+redef class ASendExpr
+special ASuperInitCall
+	# Closure definitions
+	fun closure_defs: nullable Array[PClosureDef] is abstract
+end
+
+redef class AReassignFormExpr
+	# Method used through the reassigment operator (require is_typed)
+	fun assign_method: MMMethod is abstract
+end
+
+class ASendReassignExpr
+special ASendExpr
+special AReassignFormExpr
+	# The invoked method used to read (require is_typed)
+	# prop is the method used to write
+	fun read_prop: MMMethod is abstract
+end
+
+redef class ACallReassignExpr
+special ASendReassignExpr
+end
+
+redef class ABraReassignExpr
+special ASendReassignExpr
+end
+
+redef class AAttrFormExpr
+	# Attribute accessed (require is_typed)
+	fun prop: MMAttribute is abstract
+
+	# Attribute type of the acceded attribute (require is_typed)
+	fun attr_type: MMType is abstract
+end
+
+redef class AStringFormExpr
+	fun meth_with_native: MMMethod is abstract
+end
+
+redef class ASuperstringExpr
+	fun meth_with_capacity: MMMethod is abstract
+	fun meth_add: MMMethod is abstract
+	fun meth_to_s: MMMethod is abstract
+	fun atype: MMType is abstract
+end
+
+redef class AArrayExpr
+	fun meth_with_capacity: MMMethod is abstract
+	fun meth_add: MMMethod is abstract
+end
+
+redef class ARangeExpr
+	fun meth_init: MMMethod is abstract
+end
+
 redef class AVardeclExpr
 	# Assiociated local variable
 	fun variable: VarVariable is abstract
@@ -676,7 +782,10 @@ end
 redef class AForExpr
 	# Associated automatic local variable
 	fun variable: AutoVariable is abstract
-	#readable writable var _variable: nullable AutoVariable
+	fun meth_iterator: MMMethod is abstract
+	fun meth_is_ok: MMMethod is abstract
+	fun meth_item: MMMethod is abstract
+	fun meth_next: MMMethod is abstract
 end
 
 redef class ASelfExpr
@@ -692,6 +801,7 @@ redef class AVarFormExpr
 end
 
 redef class AClosureCallExpr
+special AAbsAbsSendExpr
 	# Associated closure variable
 	fun variable: ClosureVariable is abstract
 	#readable writable var _variable: nullable ClosureVariable

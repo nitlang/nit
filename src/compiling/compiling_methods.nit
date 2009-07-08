@@ -1392,7 +1392,7 @@ end
 redef class ASuperstringExpr
 	redef fun compile_expr(v)
 	do
-		var array = meth_with_capacity.compile_constructor_call(v, atype.as(not null), ["TAG_Int({n_exprs.length})"])
+		var array = meth_with_capacity.compile_constructor_call(v, atype, ["TAG_Int({n_exprs.length})"])
 		array = v.ensure_var(array, "Array (for super-string)")
 
 		for ne in n_exprs do
@@ -1520,7 +1520,7 @@ redef class AAbsAbsSendExpr
 	# Compile each argument and add them to the array
 	fun compile_arguments_in(v: CompilerVisitor, cargs: Array[String])
 	do
-		for a in arguments.as(not null) do
+		for a in arguments do
 			cargs.add(v.compile_expr(a))
 		end
 	end

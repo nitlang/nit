@@ -196,8 +196,6 @@ redef class AConcreteMethPropdef
 end
 
 redef class AConcreteInitPropdef
-	readable var _super_init_calls: Array[MMMethod] = new Array[MMMethod]
-	readable var _explicit_super_init_calls: Array[MMMethod] = new Array[MMMethod]
 	redef fun accept_typing(v)
 	do
 		v.top_block = n_block
@@ -288,8 +286,8 @@ redef class AClosureDecl
 end
 
 redef class PType
-	fun stype: MMType do return _stype.as(not null)
-	fun is_typed: Bool do return _stype != null
+	redef fun stype: MMType do return _stype.as(not null)
+	redef fun is_typed: Bool do return _stype != null
 	var _stype: nullable MMType
 
 	redef fun after_typing(v)
@@ -522,13 +520,13 @@ redef class AForExpr
 	readable var _escapable: nullable EscapableBlock
 
 	var _meth_iterator: nullable MMMethod
-	fun meth_iterator: MMMethod do return _meth_iterator.as(not null)
+	redef fun meth_iterator: MMMethod do return _meth_iterator.as(not null)
 	var _meth_is_ok: nullable MMMethod
-	fun meth_is_ok: MMMethod do return _meth_is_ok.as(not null)
+	redef fun meth_is_ok: MMMethod do return _meth_is_ok.as(not null)
 	var _meth_item: nullable MMMethod
-	fun meth_item: MMMethod do return _meth_item.as(not null)
+	redef fun meth_item: MMMethod do return _meth_item.as(not null)
 	var _meth_next: nullable MMMethod
-	fun meth_next: MMMethod do return _meth_next.as(not null)
+	redef fun meth_next: MMMethod do return _meth_next.as(not null)
 	redef fun accept_typing(v)
 	do
 		var escapable = new EscapableBlock(self)
@@ -648,8 +646,8 @@ redef class AReassignFormExpr
 		return psig.return_type.not_for_self
 	end
 
-	# Method used through the reassigment operator (once computed)
-	readable var _assign_method: nullable MMMethod
+	redef fun assign_method do return _assign_method.as(not null)
+	var _assign_method: nullable MMMethod
 end
 
 redef class AVarReassignExpr
@@ -817,7 +815,7 @@ end
 
 redef class AStringFormExpr
 	var _meth_with_native: nullable MMMethod
-	fun meth_with_native: MMMethod do return _meth_with_native.as(not null)
+	redef fun meth_with_native: MMMethod do return _meth_with_native.as(not null)
 	redef fun after_typing(v)
 	do
 		_stype = v.type_string
@@ -828,13 +826,14 @@ redef class AStringFormExpr
 end
 
 redef class ASuperstringExpr
-	fun meth_with_capacity: MMMethod do return _meth_with_capacity.as(not null)
+	redef fun meth_with_capacity: MMMethod do return _meth_with_capacity.as(not null)
 	var _meth_with_capacity: nullable MMMethod
-	fun meth_add: MMMethod do return _meth_add.as(not null)
+	redef fun meth_add: MMMethod do return _meth_add.as(not null)
 	var _meth_add: nullable MMMethod
-	fun meth_to_s: MMMethod do return _meth_to_s.as(not null)
+	redef fun meth_to_s: MMMethod do return _meth_to_s.as(not null)
 	var _meth_to_s: nullable MMMethod
-	readable var _atype: nullable MMType
+	redef fun atype do return _atype.as(not null)
+	var _atype: nullable MMType
 	redef fun after_typing(v)
 	do
 		var stype = v.type_string
@@ -860,9 +859,9 @@ redef class ANullExpr
 end
 
 redef class AArrayExpr
-	fun meth_with_capacity: MMMethod do return _meth_with_capacity.as(not null)
+	redef fun meth_with_capacity: MMMethod do return _meth_with_capacity.as(not null)
 	var _meth_with_capacity: nullable MMMethod
-	fun meth_add: MMMethod do return _meth_add.as(not null)
+	redef fun meth_add: MMMethod do return _meth_add.as(not null)
 	var _meth_add: nullable MMMethod
 
 	redef fun after_typing(v)
@@ -885,7 +884,7 @@ redef class AArrayExpr
 end
 
 redef class ARangeExpr
-	fun meth_init: MMMethod do return _meth_init.as(not null)
+	redef fun meth_init: MMMethod do return _meth_init.as(not null)
 	var _meth_init: nullable MMMethod
 	redef fun after_typing(v)
 	do
@@ -924,9 +923,7 @@ end
 
 
 redef class ASuperExpr
-special ASuperInitCall
-	# readable var _prop: MMSrcMethod
-	readable var _init_in_superclass: nullable MMMethod
+	redef readable var _init_in_superclass: nullable MMMethod
 	redef fun after_typing(v)
 	do
 		var precs: Array[MMLocalProperty] = v.local_property.prhe.direct_greaters
@@ -985,11 +982,11 @@ special ASuperInitCall
 end
 
 redef class AAttrFormExpr
-	# Attribute accessed
-	readable var _prop: nullable MMAttribute
+	redef fun prop do return _prop.as(not null)
+	var _prop: nullable MMAttribute
 
-	# Attribute type of the acceded attribute
-	readable var _attr_type: nullable MMType
+	redef fun attr_type do return _attr_type.as(not null)
+	var _attr_type: nullable MMType
 
 	# Compute the attribute accessed
 	private fun do_typing(v: TypingVisitor)
@@ -1017,7 +1014,7 @@ redef class AAttrExpr
 	redef fun after_typing(v)
 	do
 		do_typing(v)
-		if prop == null then return
+		if _prop == null then return
 		_stype = attr_type
 		_is_typed = true
 	end
@@ -1027,7 +1024,7 @@ redef class AAttrAssignExpr
 	redef fun after_typing(v)
 	do
 		do_typing(v)
-		if prop == null then return
+		if _prop == null then return
 		if not v.check_conform_expr(n_value, attr_type) then return
 		_is_typed = true
 	end
@@ -1037,7 +1034,7 @@ redef class AAttrReassignExpr
 	redef fun after_typing(v)
 	do
 		do_typing(v)
-		if prop == null then return
+		if _prop == null then return
 		var t = do_rvalue_typing(v, attr_type)
 		if t == null then return
 		v.check_conform(self, t, n_value.stype)
@@ -1049,7 +1046,7 @@ redef class AIssetAttrExpr
 	redef fun after_typing(v)
 	do
 		do_typing(v)
-		if prop == null then return
+		if _prop == null then return
 		if attr_type.is_nullable then
 			v.error(self, "Error: isset on a nullable attribute.")
 		end
@@ -1058,13 +1055,14 @@ redef class AIssetAttrExpr
 	end
 end
 
-class AAbsAbsSendExpr
-special PExpr
+redef class AAbsAbsSendExpr
 	# The signature of the called property
-	readable var _prop_signature: nullable MMSignature
+	redef fun prop_signature do return _prop_signature.as(not null)
+	var _prop_signature: nullable MMSignature
 
 	# The real arguments used (after star transformation) (once computed)
-	readable var _arguments: nullable Array[PExpr]
+	redef fun arguments do return _arguments.as(not null)
+	var _arguments: nullable Array[PExpr]
 
 	# Check the conformity of a set of arguments `raw_args' to a signature.
 	private fun process_signature(v: TypingVisitor, psig: MMSignature, name: Symbol, raw_args: nullable Array[PExpr]): nullable Array[PExpr]
@@ -1144,8 +1142,7 @@ special PExpr
 	end
 end
 
-class AAbsSendExpr
-special AAbsAbsSendExpr
+redef class AAbsSendExpr
 	# Compute the called global property
 	private fun do_typing(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, recv_is_self: Bool, name: Symbol, raw_args: nullable Array[PExpr], closure_defs: nullable Array[PClosureDef])
 	do
@@ -1200,16 +1197,16 @@ special AAbsAbsSendExpr
 	end
 
 	# The invoked method (once computed)
-	readable var _prop: nullable MMMethod
+	redef fun prop do return _prop.as(not null)
+	var _prop: nullable MMMethod
 
 	# The return type (if any) (once computed)
-	readable var _return_type: nullable MMType
+	redef readable var _return_type: nullable MMType
 end
 
 # A possible call of constructor in a super class
 # Could be an explicit call or with the 'super' keyword
-class ASuperInitCall
-special AAbsSendExpr
+redef class ASuperInitCall
 	private fun register_super_init_call(v: TypingVisitor, property: MMMethod)
 	do
 		if parent != v.top_block and self != v.top_block then
@@ -1247,7 +1244,6 @@ special AAbsSendExpr
 end
 
 redef class ANewExpr
-special AAbsSendExpr
 	redef fun after_typing(v)
 	do
 		if not n_type.is_typed then return
@@ -1264,7 +1260,7 @@ special AAbsSendExpr
 		end
 
 		do_typing(v, t, false, false, name, n_args.to_a, null)
-		if prop == null then return
+		if _prop == null then return
 
 		if not prop.global.is_init then
 			v.error(self, "Error: {prop} is not a constructor.")
@@ -1277,7 +1273,6 @@ end
 
 
 redef class ASendExpr
-special ASuperInitCall
 	# Name of the invoked property
 	fun name: Symbol is abstract 
 
@@ -1285,7 +1280,7 @@ special ASuperInitCall
 	fun raw_arguments: nullable Array[PExpr] is abstract
 
 	# Closure definitions
-	fun closure_defs: nullable Array[PClosureDef] do return null
+	redef fun closure_defs: nullable Array[PClosureDef] do return null
 
 	redef fun after_typing(v)
 	do
@@ -1314,10 +1309,9 @@ special ASuperInitCall
 	end
 end
 
-class ASendReassignExpr
-special ASendExpr
-special AReassignFormExpr
-	readable var _read_prop: nullable MMMethod
+redef class ASendReassignExpr
+	redef fun read_prop do return _read_prop.as(not null)
+	var _read_prop: nullable MMMethod
 	redef fun do_all_typing(v)
 	do
 		if not v.check_expr(n_expr) then return
@@ -1516,7 +1510,6 @@ redef class ACallAssignExpr
 end
 
 redef class ACallReassignExpr
-special ASendReassignExpr
 	redef fun variable_create(variable)
 	do
 		return new AVarReassignExpr.init_avarreassignexpr(n_id, n_assign_op, n_value)
@@ -1541,7 +1534,6 @@ redef class ABraAssignExpr
 end
 
 redef class ABraReassignExpr
-special ASendReassignExpr
 	redef fun name do return once "[]".to_symbol
 	redef fun raw_arguments do return n_args.to_a
 end
@@ -1552,7 +1544,6 @@ redef class AInitExpr
 end
 
 redef class AClosureCallExpr
-special AAbsAbsSendExpr
 	var _variable: nullable ClosureVariable
 	redef fun variable do return _variable.as(not null)
 

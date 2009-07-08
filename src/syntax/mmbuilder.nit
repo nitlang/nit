@@ -283,7 +283,7 @@ redef class MMLocalProperty
 end
 
 redef class MMImplicitInit
-	readable var _super_init: nullable MMLocalProperty = null
+	redef readable var _super_init: nullable MMLocalProperty = null
 	redef fun accept_property_visitor(v)
 	do
 		var base: nullable MMLocalProperty = null
