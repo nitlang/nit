@@ -471,6 +471,7 @@ redef class MMMethod
 	# Compile a call as call-next-method on self with given args
 	fun compile_super_call(v: CompilerVisitor, cargs: Array[String]): String
 	do
+		if global.is_init then cargs.add("init_table")
 		var m = "{super_meth_call}({cargs[0]})"
 		var vcall = "{m}({cargs.join(", ")}) /*super {local_class}::{name}*/"
 		return vcall
@@ -548,13 +549,26 @@ redef class MMMethod
 
 		v.out_contexts.clear
 
+		var itpos: nullable String = null
+		if global.is_init then
+			itpos = "itpos{v.new_number}"
+			v.add_decl("int {itpos} = VAL2OBJ(self)->vft[{local_class.global.init_table_pos_id}].i;")
+			v.add_instr("if (init_table[{itpos}]) return;")
+		end
+
 		var ln = 0
 		var s = self
 		if s.node != null then ln = s.node.line_number
 		v.add_decl("struct trace_t trace = \{NULL, NULL, {ln}, LOCATE_{cname}};")
 		v.add_instr("trace.prev = tracehead; tracehead = &trace;")
 		v.add_instr("trace.file = LOCATE_{module.name};")
+
 		var s = do_compile_inside(v, args)
+
+		if itpos != null then
+			v.add_instr("init_table[{itpos}] = 1;")
+		end
+
 		v.add_instr("tracehead = trace.prev;")
 		if s == null then
 			v.add_instr("return;")
@@ -726,13 +740,6 @@ redef class AConcreteMethPropdef
 			n_signature.compile_parameters(v, orig_sig, params)
 		end
 
-		var itpos: nullable String = null
-		if self isa AConcreteInitPropdef then
-			itpos = "VAL2OBJ({selfcname})->vft[{method.local_class.global.init_table_pos_id}].i"
-			# v.add_instr("printf(\"{method.full_name}: inittable[%d] = %d\\n\", {itpos}, init_table[{itpos}]);")
-			v.add_instr("if (init_table[{itpos}]) return;")
-		end
-
 		v.nmc.return_label = "return_label{v.new_number}"
 		v.nmc.return_value = v.cfc.get_var("Method return value and escape marker")
 		if self isa AConcreteInitPropdef then
@@ -740,9 +747,6 @@ redef class AConcreteMethPropdef
 		end
 		v.compile_stmt(n_block)
 		v.add_instr("{v.nmc.return_label}: while(false);")
-		if self isa AConcreteInitPropdef then
-			v.add_instr("init_table[{itpos}] = 1;")
-		end
 
 		var ret: nullable String = null
 		if method.signature.return_type != null then
@@ -1471,7 +1475,6 @@ redef class ASuperExpr
 		if init_in_superclass != null then
 			return init_in_superclass.intern_compile_call(v, args)
 		else
-			if prop.global.is_init then args.add("init_table")
 			return prop.compile_super_call(v, args)
 		end
 	end
