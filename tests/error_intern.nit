@@ -14,33 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import end
-
-class Object
-	fun ==(o: nullable Object): Bool do return self is o
-	fun !=(o: nullable Object): Bool do return not (self == o)
-end
-
-class Bool
-	fun output is intern
-end
+import kernel
 
 class A
+	fun foo is intern
 end
 
 var a = new A
-var b: nullable A = new A
+a.foo
 
-(a == a).output
-(not a == b).output
-(not a == null).output
-(not b == a).output
-(b == b).output
-(not b == null).output
-
-(not a != a).output
-(a != b).output
-(a != null).output
-(b != a).output
-(not b != b).output
-(b != null).output

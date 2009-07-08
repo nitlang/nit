@@ -963,7 +963,8 @@ redef class AInternMethPropdef
 			s = "BOX_NativeString((char*)malloc((UNTAG_Int({p[1]}) * sizeof(char))))"
 
 		else
-			v.add_instr("fprintf(stderr, \"Intern {n}\\n\"); nit_exit(1);")
+			stderr.write("{locate}: Fatal error: unknown intern method {method.full_name}.\n")
+			exit(1)
 		end
 		if method.signature.return_type != null and s == null then
 			s = "NIT_NULL /*stub*/"
