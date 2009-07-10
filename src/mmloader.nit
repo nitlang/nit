@@ -73,6 +73,13 @@ special MMContext
 		_error_count = _error_count + 1
 	end
 
+	# Add an error, show errors and quit
+	fun fatal_error(l: nullable Location, s: String)
+	do
+		error(l,s)
+		check_errors
+	end
+
 	# Display a warning
 	fun warning(l: nullable Location, s: String)
 	do
@@ -189,8 +196,7 @@ special MMContext
 				var full_name = dir.full_name_for(module_name)
 				if _processing_modules.has(full_name) then
 					# FIXME: Generate better error
-					error(null, "Error: Dependency loop for module {full_name}")
-					check_errors
+					fatal_error(null, "Error: Dependency loop for module {full_name}")
 				end
 				_processing_modules.add(full_name)
 				var m = l.load_and_process_module(self, module_name, dir)
@@ -228,8 +234,7 @@ special MMContext
 		end
 
 		if not filename.file_exists then
-			error(null, "Error: File {filename} not found.")
-			check_errors
+			fatal_error(null, "Error: File {filename} not found.")
 			abort
 		end
 
@@ -237,8 +242,7 @@ special MMContext
 		var m = try_to_load(module_name, dir)
 		if m != null then return m
 
-		error(null, "Error: {filename} is not a NIT source module.")
-		check_errors
+		fatal_error(null, "Error: {filename} is not a NIT source module.")
 		abort
 	end
 
@@ -261,8 +265,7 @@ special MMContext
 			if m != null then return m
 		end
 		# FIXME: Generate better error
-		error(null, "Error: No ressource found for module {module_name}.")
-		check_errors
+		fatal_error(null, "Error: No ressource found for module {module_name}.")
 		abort
 	end
 
@@ -330,8 +333,7 @@ class ModuleLoader
 		end
 
 		if file.eof then
-			context.error(null, "Error: Problem in opening file {filename}")
-			context.check_errors
+			context.fatal_error(null, "Error: Problem in opening file {filename}")
 		end
 		var m = parse_file(context, file, filename, module_name, dir)
 		if file != stdin then file.close

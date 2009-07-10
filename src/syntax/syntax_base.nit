@@ -358,6 +358,12 @@ special Visitor
 		_tc.error(n.location, "{locate(n)}: {s}")
 	end
 
+	# Add an error, show errors and quit
+	fun fatal_error(n: nullable PNode, s: String)
+	do
+		_tc.fatal_error(n.location, "{locate(n)}: {s}")
+	end
+
 	# Display a warning for a given syntax node
 	fun warning(n: nullable PNode, s: String)
 	do

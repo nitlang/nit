@@ -37,8 +37,7 @@ special ModuleLoader
 		if node_tree.n_base == null then
 			var err = node_tree.n_eof
 			assert err isa PError
-			context.error(err.location, "{err.locate}: {err.message}")
-			context.check_errors
+			context.fatal_error(err.location, "{err.locate}: {err.message}")
 		end
 		var node_module = node_tree.n_base
 		assert node_module isa AModule
