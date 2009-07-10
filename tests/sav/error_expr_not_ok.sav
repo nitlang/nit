@@ -19,7 +19,7 @@
 ./error_expr_not_ok.nit:55,1--12: Error: Method or variable 'fail' unknown in Sys.
 ./error_expr_not_ok.nit:58,2--5: Error: Method or variable 'fail' unknown in Sys.
 ./error_expr_not_ok.nit:60,4--7: Error: Method or variable 'fail' unknown in Sys.
-./error_expr_not_ok.nit:60,20--20: Type error: expected A, got Int
+./error_expr_not_ok.nit:60,20: Type error: expected A, got Int
 ./error_expr_not_ok.nit:61,14--17: Error: Method or variable 'fail' unknown in Sys.
 ./error_expr_not_ok.nit:61,24--27: Error: Method or variable 'fail' unknown in Sys.
 ./error_expr_not_ok.nit:62,10--13: Error: Method or variable 'fail' unknown in Sys.
@@ -28,7 +28,7 @@
 ./error_expr_not_ok.nit:64,20--23: Error: Method or variable 'fail' unknown in Sys.
 ./error_expr_not_ok.nit:64,30--33: Error: Method or variable 'fail' unknown in Sys.
 ./error_expr_not_ok.nit:66,7--10: Error: Method or variable 'fail' unknown in Sys.
-./error_expr_not_ok.nit:66,21--21: Type error: expected A, got Int
+./error_expr_not_ok.nit:66,21: Type error: expected A, got Int
 ./error_expr_not_ok.nit:67,15--18: Error: Method or variable 'fail' unknown in Sys.
 ./error_expr_not_ok.nit:69,10--13: Error: Method or variable 'fail' unknown in Sys.
 ./error_expr_not_ok.nit:70,20--23: Error: Method or variable 'fail' unknown in Sys.

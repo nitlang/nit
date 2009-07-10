@@ -179,9 +179,11 @@ $    if {not(@text)}
 $        if {@parser_index}
 	    					var token_text = _text.substring(0, accept_length)
 						var token = new @ename.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
+						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 $        end
 $    else
 						var token = new @ename.init_tk(_filename, start_line + 1, start_pos + 1)
+						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 $    end
 						push_back(accept_length)
 						_pos = accept_pos
@@ -204,9 +206,11 @@ $ end foreach
 				else
 					if _text.length > 0 then
 						var token = new PError.init_error(_filename, start_line + 1, start_pos + 1, "Unknown token: {_text}")
+						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						return token
 					else
 						var token = new EOF(_filename, start_line + 1, start_pos + 1)
+						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						return token
 					end
 				end

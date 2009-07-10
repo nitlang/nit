@@ -3,14 +3,14 @@ alt/error_expr_not_ok_alt2.nit:21,11--14: Error: Method or variable 'fail' unkno
 alt/error_expr_not_ok_alt2.nit:22,26--29: Error: Method or variable 'fail' unknown in A.
 alt/error_expr_not_ok_alt2.nit:24,8--11: Error: Method or variable 'fail' unknown in A.
 alt/error_expr_not_ok_alt2.nit:25,9--12: Error: Method or variable 'fail' unknown in A.
-alt/error_expr_not_ok_alt2.nit:33,11: Type error: class Fail not found in module error_expr_not_ok_alt2.
-alt/error_expr_not_ok_alt2.nit:33,22: Type error: class Fail not found in module error_expr_not_ok_alt2.
+alt/error_expr_not_ok_alt2.nit:33,11--14: Type error: class Fail not found in module error_expr_not_ok_alt2.
+alt/error_expr_not_ok_alt2.nit:33,22--25: Type error: class Fail not found in module error_expr_not_ok_alt2.
 alt/error_expr_not_ok_alt2.nit:40,1--7: Error: Method 'fail' doesn't exists in Int.
 alt/error_expr_not_ok_alt2.nit:42,7--9: Type error: expected A, got Int
 alt/error_expr_not_ok_alt2.nit:43,1--8: Error: Method 'fail' doesn't exists in Int.
-alt/error_expr_not_ok_alt2.nit:60,20--20: Type error: expected A, got Int
+alt/error_expr_not_ok_alt2.nit:60,20: Type error: expected A, got Int
 alt/error_expr_not_ok_alt2.nit:62,7--27: Type error: expected A, got Int
-alt/error_expr_not_ok_alt2.nit:66,21--21: Type error: expected A, got Int
+alt/error_expr_not_ok_alt2.nit:66,21: Type error: expected A, got Int
 alt/error_expr_not_ok_alt2.nit:73,7--18: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt2.nit:74,7--18: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt2.nit:75,7--18: Type error: expected A, got Bool

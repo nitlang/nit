@@ -1,2 +1,2 @@
-./base_closure6.nit:55,25--25: Type error: no most general type. Got V and U.
-./base_closure6.nit:65,8--8: Type error: no most general type. Got V and U at ./base_closure6.nit:64,8--8.
+./base_closure6.nit:55,25: Type error: no most general type. Got V and U.
+./base_closure6.nit:65,8: Type error: no most general type. Got V and U at ./base_closure6.nit:64,8.

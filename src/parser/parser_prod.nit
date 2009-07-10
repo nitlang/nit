@@ -35,7 +35,14 @@ redef class PNode
 	fun visit_all_reverse(v: Visitor) is abstract
 
 	# Give a human readable location of the node.
-	fun locate: String is abstract
+	fun locate: String
+	do
+		if location == null then
+			return "????"
+		end
+		return location.to_s
+	end
+
 
 	# Return only the line number of the node
 	fun line_number: Int is abstract
@@ -52,11 +59,6 @@ redef class Token
 	redef fun visit_all_reverse(v: Visitor) do end
 	redef fun replace_child(old_child: PNode, new_child: nullable PNode) do end
 
-	redef fun locate: String
-	do
-		return "{filename}:{line},{pos}"
-	end
-
 	redef fun line_number do return line
 end
 
@@ -67,28 +69,13 @@ redef class Prod
 	# The last token of the production node
 	readable writable var _last_token: nullable Token
 
-	redef fun locate: String
-	do
-		if first_token == null then
-			return "????"
-		end
-		if last_token == null then
-			return "{first_token.locate}--????"
-		end
-		var lastpos = last_token.pos + last_token.text.length - 1
-		if first_token.line == last_token.line then
-			return "{first_token.locate}--{lastpos}"
-		else
-			return "{first_token.locate}--{last_token.line}:{lastpos}"
-		end
-	end
-
 	redef fun replace_with(n: PNode)
         do
                 super
                 assert n isa Prod
                 n.first_token = first_token
                 n.last_token = last_token
+                n._location = location
         end
 
 	redef fun line_number

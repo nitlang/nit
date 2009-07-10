@@ -2,6 +2,7 @@
 #
 # Copyright 2006-2008 Floréal Morandat <morandat@lirmm.fr>
 # Copyright 2008 Jean Privat <jean@pryen.org>
+# Copyright 2009 Jean-Sebastien Gelinas <calestar@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +21,26 @@ package mmloader
 
 import metamodel
 import opts
+
+class Location
+	readable var _file: String
+	readable var _line_start: Int
+	readable var _line_end: Int
+	readable var _column_start: Int
+	readable var _column_end: Int
+
+	redef meth to_s: String do
+		if line_start == line_end then
+			if column_start == column_end then
+				return "{file}:{line_start},{column_start}"
+			else
+				return "{file}:{line_start},{column_start}--{column_end}"
+			end
+		else
+			return "{file}:{line_start},{column_start}--{line_end}:{column_end}"
+		end
+	end
+end
 
 # Global context for tools
 class ToolContext

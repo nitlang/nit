@@ -1,4 +1,4 @@
 alt/base_closure6_alt1.nit:53,5--25: Type error: expected U, got T
-alt/base_closure6_alt1.nit:55,25--25: Type error: no most general type. Got V and U.
+alt/base_closure6_alt1.nit:55,25: Type error: no most general type. Got V and U.
 alt/base_closure6_alt1.nit:57,5--61:8: Type error: expected U, got T
-alt/base_closure6_alt1.nit:65,8--8: Type error: no most general type. Got V and U at alt/base_closure6_alt1.nit:64,8--8.
+alt/base_closure6_alt1.nit:65,8: Type error: no most general type. Got V and U at alt/base_closure6_alt1.nit:64,8.
