@@ -23,6 +23,11 @@ import metamodel
 import opts
 import location
 
+private class Message
+	readable attr _location: nullable Location
+	readable attr _text: String
+end
+
 # Global context for tools
 class ToolContext
 special MMContext
@@ -32,15 +37,26 @@ special MMContext
 	# Number of warnings
 	readable var _warning_count: Int = 0
 
+	# Messages
+	var _messages: Array[Message] = new Array[Message]
+
 	fun check_errors
 	do
+		if _messages.length > 0 then
+			for m in _messages do
+				stderr.write("{m.text}\n")
+			end
+
+			_messages.clear
+		end
+
 		if error_count > 0 then exit(1)
 	end
 
 	# Display an error
 	fun error(l: nullable Location, s: String)
 	do
-		stderr.write("{s}\n")
+		_messages.add(new Message(l,s))
 		_error_count = _error_count + 1
 	end
 
@@ -48,7 +64,7 @@ special MMContext
 	fun warning(l: nullable Location, s: String)
 	do
 		if _opt_warn.value == 0 then return
-		stderr.write("{s}\n")
+		_messages.add(new Message(l,s))
 		if _opt_warn.value == 1 then
 			_warning_count = _warning_count + 1
 		else
