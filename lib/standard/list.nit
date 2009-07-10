@@ -170,7 +170,7 @@ special IndexedCollection[E]
 	end
 
 
-	redef fun iterator: ListIterator[E] do return new ListIterator[E](_head)
+	redef fun iterator: ListIterator[E] do return new ListIterator[E](self)
 
 	# Build an empty list.
 	init do end
@@ -245,7 +245,7 @@ class ListIterator[E]
 special IndexedIterator[E]
 	redef fun item do return _node.item
 
-	# redef fun item=(e) do _node.item = e
+	fun item=(e: E) do _node.item = e
 
 	redef fun is_ok do return not _node == null
 
@@ -256,17 +256,33 @@ special IndexedIterator[E]
 	end
 
 	# Build a new iterator from `node'.
-	private init(node: nullable ListNode[E])
+	private init(list: List[E])
 	do
-		_node = node
+		_list = list
+		_node = list._head
 		_index = 0
 	end
+
+	# The current list
+	var _list: List[E]
 
 	# The current node of the list
 	var _node: nullable ListNode[E]
 
 	# The index of the current node
 	redef readable var _index: Int
+
+	# Remove the current item
+	fun delete
+	do
+		_list.remove_node(_node.as(not null))
+	end
+
+	# Insert before the current item
+	fun insert_before(element: E)
+	do
+		_list.insert_before(element, _node.as(not null))
+	end
 end
 
 # Linked nodes that constitute a linked list.
