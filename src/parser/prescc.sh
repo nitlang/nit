@@ -1,6 +1,7 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2009 Jean Privat <jean@pryen.org>
+# Copyright 2009 Jean-Sebastien Gelinas <calestar@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,11 +67,28 @@ for token in `perl -ne 'if (/\~(\w+)/ && !$found{$1}) {print "$1\n"; $found{$1}=
 do
 	echo "Parameter ~$token"
 	# first, sed starts from first line to the AST line and removes ~xxx and !xxx
-	sed -n -e "1,/^Abstract Syntax Tree/{/^Abstract Syntax Tree/b;s/[\~!]$token//g;p}" "$outfile" > "$tmpfile"
+	sed -n -e "
+		1,/^Abstract Syntax Tree/{
+			/^Abstract Syntax Tree/b
+			s/[\~!]$token//g
+			p
+		}
+	" "$outfile" > "$tmpfile"
 	# second, sed clones ~xxx parametrized productions, substitute ~xxx with _xxx and delete !xxx lines
-	sed -n -e "/\~$token/,/;/{s/\~$token/_$token/g;/!$token/d;p}" "$outfile" >> "$tmpfile"
+	sed -n -e "
+		/\~$token/,/;/{
+			s/\~$token/_$token/g
+			/!$token/d
+			p
+		}
+	" "$outfile" >> "$tmpfile"
 	# third, sed continues fron AST line to last line and remove ~xxx and !xxx
-	sed -n -e "/^Abstract Syntax Tree/,\${s/[\~!]$token//g;p}" "$outfile" >> "$tmpfile"
+	sed -n -e "
+		/^Abstract Syntax Tree/,\${
+			s/[\~!]$token//g
+			p
+		}
+	" "$outfile" >> "$tmpfile"
 	mv "$tmpfile" "$outfile"
 done
 
