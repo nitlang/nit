@@ -38,9 +38,6 @@ $ template make_tokens()
 
 redef class Token
     readable writable var _text: String 
-    readable var _filename: String 
-    readable var _line: Int 
-    readable var _pos: Int 
     
     fun parser_index: Int is abstract
 
@@ -58,17 +55,15 @@ redef class @ename
     end
 
 $ if {not(@text)}
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
 $ else
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "${sablecc:string2escaped_unicode(@text)}"
 $ end
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -81,22 +76,20 @@ redef class EOF
     	return ${tokens/eof/@parser_index}
     end
     
-    init(fname: String, line: Int, pos: Int)
+    init(loc: Location)
     do
-    	_filename = fname
         _text = ""
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
 redef class PError
     readable writable var _message: String 
     
-    init init_error(fname: String, line: Int, pos: Int, message: String)
+    init init_error(message: String, loc: Location)
     do
-        init(fname, line, pos)
-	_message = message
+		init(loc)
+		_message = message
     end
 end
 

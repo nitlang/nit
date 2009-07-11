@@ -115,8 +115,8 @@ special ParserTable
 		var lexer = _lexer
 		while true do
 			var token = lexer.peek
-			var last_pos = token.pos
-			var last_line = token.line
+			var last_pos = token.location.column_start
+			var last_line = token.location.line_start
 
 			if token isa PError then
 				return new Start(null, token)
@@ -158,8 +158,8 @@ special ParserTable
 				(new SearchTokensVisitor).visit(node)
 				return node
 			else if action_type == 3 then # ERROR
-				var node2 = new PError.init_error(lexer.filename, last_line, last_pos, error_messages[errors[action_value]])
-				node2._location = new Location(lexer.filename, last_line, last_line, last_pos, last_pos)
+				var location = new Location(lexer.filename, last_line, last_line, last_pos, last_pos)
+				var node2 = new PError.init_error(error_messages[errors[action_value]],location)
 				var node = new Start(null, node2)
 				return node
 			end
@@ -209,7 +209,7 @@ special Visitor
 					var line_end = end_location.line_end
 					var column_start = start_location.column_start
 					var column_end = end_location.column_end
-					n._location = new Location(file, line_start, line_end, column_start, column_end)
+					n.location = new Location(file, line_start, line_end, column_start, column_end)
 				end
 			end
 		end

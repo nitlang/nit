@@ -17,6 +17,7 @@ end
 # Ancestor of all productions
 abstract class Prod
 special PNode
+	fun location=(loc: nullable Location) do _location = loc
 end
 class TEol
 special Token

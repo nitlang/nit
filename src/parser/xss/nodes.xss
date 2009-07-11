@@ -30,6 +30,7 @@ end
 # Ancestor of all productions
 abstract class Prod
 special PNode
+	fun location=(loc: nullable Location) do _location = loc
 end
 $ end template
 
@@ -72,10 +73,6 @@ redef class PNode
 		return location.to_s
 	end
 
-
-	# Return only the line number of the node
-	fun line_number: Int is abstract
-
 	# Debug method: output a message prefixed with the location.
 	fun printl(str: String)
 	do
@@ -87,8 +84,6 @@ redef class Token
 	redef fun visit_all(v: Visitor) do end
 	redef fun visit_all_reverse(v: Visitor) do end
 	redef fun replace_child(old_child: PNode, new_child: nullable PNode) do end
-
-	redef fun line_number do return line
 end
 
 redef class Prod
@@ -104,17 +99,8 @@ redef class Prod
                 assert n isa Prod
                 n.first_token = first_token
                 n.last_token = last_token
-                n._location = location
+                n.location = location
         end
-
-	redef fun line_number
-	do
-		if first_token != null then
-			return first_token.line
-		else
-			return 0
-		end
-	end
 end
 
 # Abstract standard visitor

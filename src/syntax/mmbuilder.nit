@@ -541,7 +541,7 @@ redef class PClassdef
 			local_class = local_classes[name]
 			if self isa AClassdef then
 				# If we are not a special implicit class then rant
-				v.error(self, "Error: A class {name} is already defined at line {local_class.nodes.first.first_token.line}.")
+				v.error(self, "Error: A class {name} is already defined at line {local_class.nodes.first.first_token.location.line_start}.")
 				return
 			end
 			local_class.nodes.add(self)

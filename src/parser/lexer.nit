@@ -6,9 +6,6 @@ intrude import parser_nodes
 
 redef class Token
     readable writable var _text: String 
-    readable var _filename: String 
-    readable var _line: Int 
-    readable var _pos: Int 
     
     fun parser_index: Int is abstract
 
@@ -23,12 +20,10 @@ redef class TEol
     	return 0
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -38,12 +33,10 @@ redef class TComment
     	return 1
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -53,12 +46,10 @@ redef class TKwpackage
     	return 2
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "package"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -68,12 +59,10 @@ redef class TKwimport
     	return 3
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "import"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -83,12 +72,10 @@ redef class TKwclass
     	return 4
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "class"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -98,12 +85,10 @@ redef class TKwabstract
     	return 5
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "abstract"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -113,12 +98,10 @@ redef class TKwinterface
     	return 6
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "interface"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -128,12 +111,10 @@ redef class TKwuniversal
     	return 7
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "universal"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -143,12 +124,10 @@ redef class TKwspecial
     	return 8
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "special"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -158,12 +137,10 @@ redef class TKwend
     	return 9
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "end"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -173,12 +150,10 @@ redef class TKwmeth
     	return 10
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -188,12 +163,10 @@ redef class TKwtype
     	return 11
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "type"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -203,12 +176,10 @@ redef class TKwattr
     	return 12
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "attr"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -218,12 +189,10 @@ redef class TKwinit
     	return 13
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "init"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -233,12 +202,10 @@ redef class TKwredef
     	return 14
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "redef"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -248,12 +215,10 @@ redef class TKwis
     	return 15
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "is"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -263,12 +228,10 @@ redef class TKwdo
     	return 16
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "do"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -278,12 +241,10 @@ redef class TKwreadable
     	return 17
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "readable"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -293,12 +254,10 @@ redef class TKwwritable
     	return 18
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "writable"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -308,12 +267,10 @@ redef class TKwvar
     	return 19
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "var"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -323,12 +280,10 @@ redef class TKwintern
     	return 20
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "intern"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -338,12 +293,10 @@ redef class TKwextern
     	return 21
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "extern"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -353,12 +306,10 @@ redef class TKwprotected
     	return 22
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "protected"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -368,12 +319,10 @@ redef class TKwprivate
     	return 23
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "private"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -383,12 +332,10 @@ redef class TKwintrude
     	return 24
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "intrude"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -398,12 +345,10 @@ redef class TKwif
     	return 25
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "if"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -413,12 +358,10 @@ redef class TKwthen
     	return 26
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "then"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -428,12 +371,10 @@ redef class TKwelse
     	return 27
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "else"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -443,12 +384,10 @@ redef class TKwwhile
     	return 28
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "while"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -458,12 +397,10 @@ redef class TKwfor
     	return 29
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "for"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -473,12 +410,10 @@ redef class TKwin
     	return 30
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "in"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -488,12 +423,10 @@ redef class TKwand
     	return 31
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "and"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -503,12 +436,10 @@ redef class TKwor
     	return 32
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "or"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -518,12 +449,10 @@ redef class TKwnot
     	return 33
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "not"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -533,12 +462,10 @@ redef class TKwreturn
     	return 34
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "return"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -548,12 +475,10 @@ redef class TKwcontinue
     	return 35
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "continue"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -563,12 +488,10 @@ redef class TKwbreak
     	return 36
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "break"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -578,12 +501,10 @@ redef class TKwabort
     	return 37
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "abort"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -593,12 +514,10 @@ redef class TKwassert
     	return 38
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "assert"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -608,12 +527,10 @@ redef class TKwnew
     	return 39
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "new"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -623,12 +540,10 @@ redef class TKwisa
     	return 40
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "isa"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -638,12 +553,10 @@ redef class TKwonce
     	return 41
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "once"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -653,12 +566,10 @@ redef class TKwsuper
     	return 42
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "super"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -668,12 +579,10 @@ redef class TKwself
     	return 43
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "self"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -683,12 +592,10 @@ redef class TKwtrue
     	return 44
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "true"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -698,12 +605,10 @@ redef class TKwfalse
     	return 45
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "false"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -713,12 +618,10 @@ redef class TKwnull
     	return 46
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "null"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -728,12 +631,10 @@ redef class TKwas
     	return 47
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "as"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -743,12 +644,10 @@ redef class TKwwith
     	return 48
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "with"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -758,12 +657,10 @@ redef class TKwnullable
     	return 49
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "nullable"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -773,12 +670,10 @@ redef class TKwisset
     	return 50
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "isset"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -788,12 +683,10 @@ redef class TOpar
     	return 51
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "("
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -803,12 +696,10 @@ redef class TCpar
     	return 52
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once ")"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -818,12 +709,10 @@ redef class TObra
     	return 53
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "["
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -833,12 +722,10 @@ redef class TCbra
     	return 54
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "]"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -848,12 +735,10 @@ redef class TComma
     	return 55
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once ","
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -863,12 +748,10 @@ redef class TColumn
     	return 56
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once ":"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -878,12 +761,10 @@ redef class TQuad
     	return 57
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "::"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -893,12 +774,10 @@ redef class TAssign
     	return 58
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "="
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -908,12 +787,10 @@ redef class TPluseq
     	return 59
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "+="
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -923,12 +800,10 @@ redef class TMinuseq
     	return 60
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "-="
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -938,12 +813,10 @@ redef class TDotdotdot
     	return 61
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "..."
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -953,12 +826,10 @@ redef class TDotdot
     	return 62
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once ".."
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -968,12 +839,10 @@ redef class TDot
     	return 63
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "."
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -983,12 +852,10 @@ redef class TPlus
     	return 64
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "+"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -998,12 +865,10 @@ redef class TMinus
     	return 65
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "-"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1013,12 +878,10 @@ redef class TStar
     	return 66
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "*"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1028,12 +891,10 @@ redef class TSlash
     	return 67
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "/"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1043,12 +904,10 @@ redef class TPercent
     	return 68
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "%"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1058,12 +917,10 @@ redef class TEq
     	return 69
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "=="
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1073,12 +930,10 @@ redef class TNe
     	return 70
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "!="
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1088,12 +943,10 @@ redef class TLt
     	return 71
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "<"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1103,12 +956,10 @@ redef class TLe
     	return 72
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "<="
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1118,12 +969,10 @@ redef class TGt
     	return 73
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once ">"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1133,12 +982,10 @@ redef class TGe
     	return 74
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once ">="
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1148,12 +995,10 @@ redef class TStarship
     	return 75
     end
 
-    init init_tk(fname: String, line: Int, pos: Int)
+    init init_tk(loc: Location)
     do
         _text = once "<=>"
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1163,12 +1008,10 @@ redef class TClassid
     	return 76
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1178,12 +1021,10 @@ redef class TId
     	return 77
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1193,12 +1034,10 @@ redef class TAttrid
     	return 78
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1208,12 +1047,10 @@ redef class TNumber
     	return 79
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1223,12 +1060,10 @@ redef class TFloat
     	return 80
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1238,12 +1073,10 @@ redef class TChar
     	return 81
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1253,12 +1086,10 @@ redef class TString
     	return 82
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1268,12 +1099,10 @@ redef class TStartString
     	return 83
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1283,12 +1112,10 @@ redef class TMidString
     	return 84
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1298,12 +1125,10 @@ redef class TEndString
     	return 85
     end
 
-    init init_tk(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, loc: Location)
     do
         _text = text
-	_filename = fname
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
@@ -1314,22 +1139,20 @@ redef class EOF
     	return 86
     end
     
-    init(fname: String, line: Int, pos: Int)
+    init(loc: Location)
     do
-    	_filename = fname
         _text = ""
-        _line = line
-        _pos = pos
+		_location = loc
     end
 end
 
 redef class PError
     readable writable var _message: String 
     
-    init init_error(fname: String, line: Int, pos: Int, message: String)
+    init init_error(message: String, loc: Location)
     do
-        init(fname, line, pos)
-	_message = message
+		init(loc)
+		_message = message
     end
 end
 
@@ -1488,720 +1311,720 @@ class Lexer
 			else
 				if accept_state != -1 then
 					if accept_token == 0 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return null
 					end
 					if accept_token == 1 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TEol.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TEol.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 2 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TComment.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TComment.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 3 then
-						var token = new TKwpackage.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwpackage.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 4 then
-						var token = new TKwimport.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwimport.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 5 then
-						var token = new TKwclass.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwclass.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 6 then
-						var token = new TKwabstract.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwabstract.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 7 then
-						var token = new TKwinterface.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwinterface.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 8 then
-						var token = new TKwuniversal.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwuniversal.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 9 then
-						var token = new TKwspecial.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwspecial.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 10 then
-						var token = new TKwend.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwend.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 11 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TKwmeth.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwmeth.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 12 then
-						var token = new TKwtype.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwtype.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 13 then
-						var token = new TKwattr.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwattr.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 14 then
-						var token = new TKwinit.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwinit.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 15 then
-						var token = new TKwredef.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwredef.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 16 then
-						var token = new TKwis.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwis.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 17 then
-						var token = new TKwdo.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwdo.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 18 then
-						var token = new TKwreadable.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwreadable.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 19 then
-						var token = new TKwwritable.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwwritable.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 20 then
-						var token = new TKwvar.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwvar.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 21 then
-						var token = new TKwintern.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwintern.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 22 then
-						var token = new TKwextern.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwextern.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 23 then
-						var token = new TKwprotected.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwprotected.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 24 then
-						var token = new TKwprivate.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwprivate.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 25 then
-						var token = new TKwintrude.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwintrude.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 26 then
-						var token = new TKwif.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwif.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 27 then
-						var token = new TKwthen.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwthen.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 28 then
-						var token = new TKwelse.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwelse.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 29 then
-						var token = new TKwwhile.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwwhile.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 30 then
-						var token = new TKwfor.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwfor.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 31 then
-						var token = new TKwin.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwin.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 32 then
-						var token = new TKwand.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwand.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 33 then
-						var token = new TKwor.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwor.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 34 then
-						var token = new TKwnot.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwnot.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 35 then
-						var token = new TKwreturn.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwreturn.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 36 then
-						var token = new TKwcontinue.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwcontinue.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 37 then
-						var token = new TKwbreak.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwbreak.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 38 then
-						var token = new TKwabort.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwabort.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 39 then
-						var token = new TKwassert.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwassert.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 40 then
-						var token = new TKwnew.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwnew.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 41 then
-						var token = new TKwisa.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwisa.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 42 then
-						var token = new TKwonce.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwonce.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 43 then
-						var token = new TKwsuper.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwsuper.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 44 then
-						var token = new TKwself.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwself.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 45 then
-						var token = new TKwtrue.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwtrue.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 46 then
-						var token = new TKwfalse.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwfalse.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 47 then
-						var token = new TKwnull.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwnull.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 48 then
-						var token = new TKwas.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwas.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 49 then
-						var token = new TKwwith.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwwith.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 50 then
-						var token = new TKwnullable.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwnullable.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 51 then
-						var token = new TKwisset.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TKwisset.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 52 then
-						var token = new TOpar.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TOpar.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 53 then
-						var token = new TCpar.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TCpar.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 54 then
-						var token = new TObra.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TObra.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 55 then
-						var token = new TCbra.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TCbra.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 56 then
-						var token = new TComma.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TComma.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 57 then
-						var token = new TColumn.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TColumn.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 58 then
-						var token = new TQuad.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TQuad.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 59 then
-						var token = new TAssign.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TAssign.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 60 then
-						var token = new TPluseq.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TPluseq.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 61 then
-						var token = new TMinuseq.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TMinuseq.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 62 then
-						var token = new TDotdotdot.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TDotdotdot.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 63 then
-						var token = new TDotdot.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TDotdot.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 64 then
-						var token = new TDot.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TDot.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 65 then
-						var token = new TPlus.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TPlus.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 66 then
-						var token = new TMinus.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TMinus.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 67 then
-						var token = new TStar.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TStar.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 68 then
-						var token = new TSlash.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TSlash.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 69 then
-						var token = new TPercent.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TPercent.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 70 then
-						var token = new TEq.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TEq.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 71 then
-						var token = new TNe.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TNe.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 72 then
-						var token = new TLt.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TLt.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 73 then
-						var token = new TLe.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TLe.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 74 then
-						var token = new TGt.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TGt.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 75 then
-						var token = new TGe.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TGe.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 76 then
-						var token = new TStarship.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TStarship.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 77 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TClassid.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TClassid.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 78 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TId.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TId.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 79 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TAttrid.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TAttrid.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 80 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TNumber.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TNumber.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 81 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TFloat.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TFloat.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 82 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TChar.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TChar.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 83 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TString.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TString.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 84 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TStartString.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TStartString.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 85 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TMidString.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TMidString.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 86 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TEndString.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new TEndString.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 				else
+					var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 					if _text.length > 0 then
-						var token = new PError.init_error(_filename, start_line + 1, start_pos + 1, "Unknown token: {_text}")
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new PError.init_error("Unknown token: {_text}", location)
 						return token
 					else
-						var token = new EOF(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new EOF(location)
 						return token
 					end
 				end

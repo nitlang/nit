@@ -175,15 +175,14 @@ $ end foreach
 				if accept_state != -1 then
 $ foreach {//token}
 					if accept_token == ${position()-1} then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 $    if {not(@text)}
 $        if {@parser_index}
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new @ename.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new @ename.init_tk(token_text, location)
 $        end
 $    else
-						var token = new @ename.init_tk(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new @ename.init_tk(location)
 $    end
 						push_back(accept_length)
 						_pos = accept_pos
@@ -204,13 +203,12 @@ $    end
 					end
 $ end foreach
 				else
+					var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 					if _text.length > 0 then
-						var token = new PError.init_error(_filename, start_line + 1, start_pos + 1, "Unknown token: {_text}")
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new PError.init_error("Unknown token: {_text}", location)
 						return token
 					else
-						var token = new EOF(_filename, start_line + 1, start_pos + 1)
-						token._location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token = new EOF(location)
 						return token
 					end
 				end

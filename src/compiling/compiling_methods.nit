@@ -81,7 +81,7 @@ redef class CompilerVisitor
 		if nmc != null then s.append(" in %s")
 		s.append(" (%s:%d)\\n\", ")
 		if nmc != null then s.append("LOCATE_{nmc.method.cname}, ")
-		s.append("LOCATE_{module.name}, {node.line_number});")
+		s.append("LOCATE_{module.name}, {node.location.line_start});")
 		return s.to_s
 	end
 
@@ -558,7 +558,7 @@ redef class MMMethod
 
 		var ln = 0
 		var s = self
-		if s.node != null then ln = s.node.line_number
+		if s.node != null then ln = s.node.location.line_start
 		v.add_decl("struct trace_t trace = \{NULL, NULL, {ln}, LOCATE_{cname}};")
 		v.add_instr("trace.prev = tracehead; tracehead = &trace;")
 		v.add_instr("trace.file = LOCATE_{module.name};")
@@ -1636,7 +1636,7 @@ redef class AClosureDef
 		var ctx_old2 = v.ctx
 		v.ctx = new CContext
 
-		v.add_decl("struct trace_t trace = \{NULL, NULL, {line_number}, LOCATE_{v.nmc.method.cname}};")
+		v.add_decl("struct trace_t trace = \{NULL, NULL, {location.line_start}, LOCATE_{v.nmc.method.cname}};")
 		v.add_instr("trace.prev = tracehead; tracehead = &trace;")
 		
 		v.add_instr("trace.file = LOCATE_{v.module.name};")
