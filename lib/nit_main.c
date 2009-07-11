@@ -52,6 +52,7 @@ void prepare_signals(void) {
 	signal(SIGILL, exithandler);
 	signal(SIGFPE, exithandler);
 	signal(SIGTERM,exithandler);
+	signal(SIGBUS, exithandler);
 }
 struct trace_t *tracehead = NULL;
 void nit_exit(int i) {
