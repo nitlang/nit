@@ -38,7 +38,7 @@ special ModuleLoader
 			var err = node_tree.n_eof
 			assert err isa PError
 			context.error("{err.locate}: {err.message}")
-			exit(1)
+			context.check_errors
 		end
 		var node_module = node_tree.n_base
 		assert node_module isa AModule
@@ -68,10 +68,10 @@ redef class MMSrcModule
 	private fun process_syntax(tc: ToolContext)
 	do
 		do_mmbuilder(tc)
-		if tc.error_count > 0 then exit(1)
+		tc.check_errors
 
 		do_typing(tc)
-		if tc.error_count > 0 then exit(1)
+		tc.check_errors
 	end
 end
 

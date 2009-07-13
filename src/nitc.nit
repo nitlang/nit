@@ -71,7 +71,7 @@ special AbstractCompiler
 			end
 			if clibdir == null then
 				error("Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR.")
-				exit(1)
+				check_errors
 			end
 		end
 		bindir = opt_bindir.value
@@ -87,7 +87,7 @@ special AbstractCompiler
 			end
 			if bindir == null then
 				error("Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR.")
-				exit(1)
+				check_errors
 			end
 		end
 	end

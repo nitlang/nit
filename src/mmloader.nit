@@ -46,10 +46,15 @@ end
 class ToolContext
 special MMContext
 	# Number of errors
-	readable var _error_count: Int = 0 
+	readable var _error_count: Int = 0
 
 	# Number of warnings
 	readable var _warning_count: Int = 0
+
+	fun check_errors
+	do
+		if error_count > 0 then exit(1)
+	end
 
 	# Display an error
 	fun error(s: String)
@@ -175,8 +180,7 @@ special MMContext
 				if _processing_modules.has(full_name) then
 					# FIXME: Generate better error
 					error("Error: Dependency loop for module {full_name}")
-					exit(1)
-					abort
+					check_errors
 				end
 				_processing_modules.add(full_name)
 				var m = l.load_and_process_module(self, module_name, dir)
@@ -215,7 +219,7 @@ special MMContext
 
 		if not filename.file_exists then
 			error("Error: File {filename} not found.")
-			exit(1)
+			check_errors
 			abort
 		end
 
@@ -224,7 +228,7 @@ special MMContext
 		if m != null then return m
 
 		error("Error: {filename} is not a NIT source module.")
-		exit(1)
+		check_errors
 		abort
 	end
 
@@ -248,7 +252,7 @@ special MMContext
 		end
 		# FIXME: Generate better error
 		error("Error: No ressource found for module {module_name}.")
-		exit(1)
+		check_errors
 		abort
 	end
 
@@ -317,8 +321,7 @@ class ModuleLoader
 
 		if file.eof then
 			context.error("Error: Problem in opening file {filename}")
-			exit(1)
-			abort
+			context.check_errors
 		end
 		var m = parse_file(context, file, filename, module_name, dir)
 		if file != stdin then file.close

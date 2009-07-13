@@ -43,7 +43,7 @@ redef class MMSrcModule
 		# Create local classes and attach them to global classes
 		var mmbv = new ClassBuilderVisitor(tc, self)
 		mmbv.visit(node)
-		if tc.error_count > 0 then exit(1)
+		tc.check_errors
 
 		if mhe.direct_greaters.is_empty then
 			process_default_classes(tc)
@@ -55,7 +55,7 @@ redef class MMSrcModule
 		# Resolve classes in super clauses
 		var mmbv1 = new ClassSpecializationBuilderVisitor(tc, self)
 		mmbv1.visit(node)
-		if tc.error_count > 0 then exit(1)
+		tc.check_errors
 
 		# Compute specialization relation
 		for c in local_classes do
@@ -64,7 +64,7 @@ redef class MMSrcModule
 			end
 			c.compute_super_classes
 		end
-		if tc.error_count > 0 then exit(1)
+		tc.check_errors
 
 		# Class that we will process now are those in the hierarchy
 		# Its mean all the visible classes and their super-classes
@@ -79,7 +79,7 @@ redef class MMSrcModule
 		var mmbv1b = new ClassAncestorBuilder(tc, self)
 		for c in classes do
 			c.accept_class_visitor(mmbv1b)
-			if tc.error_count > 0 then exit(1)
+			tc.check_errors
 			c.compute_ancestors
 		end
 
@@ -88,7 +88,7 @@ redef class MMSrcModule
 		for c in classes do
 			c.accept_class_visitor(mmbv1b)
 		end
-		if tc.error_count > 0 then exit(1)
+		tc.check_errors
 
 		# Property inhritance and introduction
 		var mmbv2 = new PropertyBuilderVisitor(tc, self)
@@ -106,7 +106,7 @@ redef class MMSrcModule
 
 			# Note that inherited unredefined property are processed on demand latter
 		end
-		if tc.error_count > 0 then exit(1)
+		tc.check_errors
 
 		# Property signature analysis and inheritance conformance
 		var mmbv3 = new PropertyVerifierVisitor(tc, self)
@@ -122,7 +122,7 @@ redef class MMSrcModule
 			end
 		end
 
-		if tc.error_count > 0 then exit(1)
+		tc.check_errors
 	end
 
 	# Create some primitive default classes if they do not exists
