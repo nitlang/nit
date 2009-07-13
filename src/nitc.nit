@@ -70,7 +70,7 @@ special AbstractCompiler
 				if dir.file_exists then clibdir = dir
 			end
 			if clibdir == null then
-				error("Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR.")
+				error(null, "Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR.")
 				check_errors
 			end
 		end
@@ -86,7 +86,7 @@ special AbstractCompiler
 				if dir.file_exists then bindir = dir
 			end
 			if bindir == null then
-				error("Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR.")
+				error(null, "Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR.")
 				check_errors
 			end
 		end

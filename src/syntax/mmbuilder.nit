@@ -450,7 +450,7 @@ redef class AModule
 		end
 		if no_import != null then
 			if not module_names_to_import.is_empty then
-				tc.error("{no_import.locate}: Error: Top modules cannot import other modules.")
+				tc.error(null, "{no_import.locate}: Error: Top modules cannot import other modules.")
 			end
 		else if module_names_to_import.is_empty then
 			var stdname = once "standard".to_symbol

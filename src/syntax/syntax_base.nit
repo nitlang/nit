@@ -355,13 +355,13 @@ special Visitor
 	# Display an error for a given syntax node
 	fun error(n: nullable PNode, s: String)
 	do
-		_tc.error("{locate(n)}: {s}")
+		_tc.error(n.location, "{locate(n)}: {s}")
 	end
 
 	# Display a warning for a given syntax node
 	fun warning(n: nullable PNode, s: String)
 	do
-		_tc.warning("{locate(n)}: {s}")
+		_tc.warning(n.location, "{locate(n)}: {s}")
 	end
 
 	#
