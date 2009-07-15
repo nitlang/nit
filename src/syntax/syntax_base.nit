@@ -515,6 +515,9 @@ redef class PParam
 end
 
 redef class PClosureDecl
+	# Position in the signature
+	fun position: Int is abstract
+
 	# Associated closure variable
 	fun variable: ClosureVariable is abstract
 end

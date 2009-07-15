@@ -1222,6 +1222,8 @@ redef class AParam
 end
 
 redef class AClosureDecl
+	redef readable var _position: Int = 0
+
 	redef fun variable: ClosureVariable do return _variable.as(not null)
 	var _variable: nullable ClosureVariable
 
@@ -1248,6 +1250,7 @@ redef class AClosureDecl
 
 		var clos = new MMClosure(sig, n_kwbreak != null, n_expr != null)
 		v.signature_builder = old_signature_builder
+		_position = old_signature_builder.closure_decls.length
 		old_signature_builder.closure_decls.add(self)
 		_variable = new ClosureVariable(n_id.to_symbol, self, clos)
 	end
