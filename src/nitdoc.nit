@@ -454,10 +454,10 @@ special MMEntity
 		var res = new Buffer
 		res.append(signature.to_html(dctx))
 		var s = self
-		if s.node != null then
-			if s.node isa ADeferredMethPropdef then
+		if s isa MMMethod then
+			if s.is_abstract then
 				res.append(" is abstract")
-			else if s.node isa AInternMethPropdef then
+			else if s.is_intern then
 				res.append(" is intern")
 			end
 		end

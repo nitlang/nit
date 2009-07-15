@@ -633,6 +633,11 @@ end
 # Method local properties
 class MMMethod
 special MMLocalProperty
+	# Is the method defined with intern
+	fun is_intern: Bool is abstract
+
+	# Is the method abstract
+	fun is_abstract: Bool is abstract
 end
 
 # Concrete local classes

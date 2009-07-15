@@ -125,6 +125,8 @@ end
 # Concrete NIT source method
 class MMSrcMethod
 special MMMethod
+	redef fun is_intern do return false
+	redef fun is_abstract do return false
 end
 
 # Concrete NIT source method for an automatic accesor
@@ -159,12 +161,17 @@ end
 # Concrete NIT source method for an explicit method
 class MMMethSrcMethod
 special MMSrcMethod
-	redef fun is_init do return _node isa AConcreteInitPropdef
+	redef readable var _is_init: Bool
+	redef readable var _is_intern: Bool
+	redef readable var _is_abstract: Bool
 	redef readable var _node: nullable AMethPropdef
 	init(name: Symbol, cla: MMLocalClass, n: nullable AMethPropdef)
 	do
 		super(name, cla)
 		_node = n
+		_is_init = node isa AConcreteInitPropdef
+		_is_intern = node isa AInternMethPropdef
+		_is_abstract = node isa ADeferredMethPropdef
 	end
 end
 
