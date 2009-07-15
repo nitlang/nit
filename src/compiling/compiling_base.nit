@@ -56,6 +56,17 @@ class CompilerVisitor
 		end
 	end
 
+	# Add a assignment between a variable and an expression
+	fun add_assignment(v: String, s: String)
+	do
+		if v != s then
+			add_instr("{v} = {s};")
+		end
+	end
+
+	# C outputs written outside the current C function.
+	readable writable var _out_contexts: Array[CContext] = new Array[CContext]
+
 	# Return a unique new number for the instance
 	fun new_number: Int
 	do

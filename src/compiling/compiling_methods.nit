@@ -59,20 +59,9 @@ redef class CompilerVisitor
 		return v
 	end
 
-	# Add a assignment between a variable and an expression
-	fun add_assignment(v: String, s: String)
-	do
-		if v != s then
-			add_instr("{v} = {s};")
-		end
-	end
-
 	readable writable var _cfc: nullable CFunctionContext
 
 	readable writable var _nmc: nullable NitMethodContext
-
-	# C outputs written outside the current C function.
-	readable writable var _out_contexts: Array[CContext] = new Array[CContext]
 
 	# Generate an fprintf to display an error location
 	fun printf_locate_error(node: PNode): String
