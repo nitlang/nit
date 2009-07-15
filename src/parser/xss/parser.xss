@@ -155,7 +155,7 @@ special ParserTable
 				var node1 = pop
 				assert node1 isa ${/parser/prods/prod/@ename}
 				var node = new Start(node1, node2)
-				(new SearchTokensVisitor).visit(node)
+				(new SearchTokensVisitor).enter_visit(node)
 				return node
 			else if action_type == 3 then # ERROR
 				var location = new Location(lexer.filename, last_line, last_line, last_pos, last_pos)

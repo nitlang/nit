@@ -27,7 +27,7 @@ redef class MMSrcModule
 	fun do_typing(tc: ToolContext)
 	do
 		var tv = new TypingVisitor(tc, self)
-		tv.visit(node)
+		tv.enter_visit(node)
 	end
 end
 
@@ -365,7 +365,7 @@ redef class ABlockExpr
 				v.variable_ctx.already_unreash = true
 				v.warning(e, "Warning: unreachable statement.")
 			end
-			v.visit(e)
+			v.enter_visit(e)
 		end
 
 		old_var_ctx.merge(v.variable_ctx)
@@ -446,7 +446,7 @@ redef class AIfExpr
 	redef fun accept_typing(v)
 	do
 		var old_var_ctx = v.variable_ctx
-		v.visit(n_expr)
+		v.enter_visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
 
 		# Prepare 'then' context
@@ -455,7 +455,7 @@ redef class AIfExpr
 		# Process the 'then'
 		if n_then != null then
 			v.variable_ctx = v.variable_ctx.sub(n_then.as(not null))
-			v.visit(n_then)
+			v.enter_visit(n_then)
 		end
 
 		# Remember what appened in the 'then'
@@ -468,7 +468,7 @@ redef class AIfExpr
 		# Process the 'else'
 		if n_else != null then
 			v.variable_ctx = v.variable_ctx.sub(n_else.as(not null))
-			v.visit(n_else)
+			v.enter_visit(n_else)
 		end
 
 		# Merge 'then' and 'else' contexts
@@ -493,7 +493,7 @@ redef class AWhileExpr
 		v.variable_ctx = v.variable_ctx.sub(self)
 
 		# Process condition
-		v.visit(n_expr)
+		v.enter_visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
 
 		# Prepare inside context (assert cond)
@@ -502,7 +502,7 @@ redef class AWhileExpr
 		# Process inside
 		if n_block != null then
 			v.variable_ctx = v.variable_ctx.sub(n_block.as(not null))
-			v.visit(n_block)
+			v.enter_visit(n_block)
 		end
 
 		v.variable_ctx = old_var_ctx
@@ -541,7 +541,7 @@ redef class AForExpr
 		_variable = va
 		v.variable_ctx.add(va)
 
-		v.visit(n_expr)
+		v.enter_visit(n_expr)
 
 		if not v.check_conform_expr(n_expr, v.type_collection) then return
 		var expr_type = n_expr.stype
@@ -571,7 +571,7 @@ redef class AForExpr
 		if not n_expr.is_self then t = t.not_for_self
 		va.stype = t
 
-		if n_block != null then v.visit(n_block)
+		if n_block != null then v.enter_visit(n_block)
 
 		# pop context
 		v.variable_ctx = old_var_ctx
@@ -705,12 +705,12 @@ redef class AIfexprExpr
 	do
 		var old_var_ctx = v.variable_ctx
 
-		v.visit(n_expr)
+		v.enter_visit(n_expr)
 		v.use_if_true_variable_ctx(n_expr)
-		v.visit(n_then)
+		v.enter_visit(n_then)
 		v.variable_ctx = old_var_ctx
 		v.use_if_false_variable_ctx(n_expr)
-		v.visit(n_else)
+		v.enter_visit(n_else)
 
 		v.check_conform_expr(n_expr, v.type_bool)
 
@@ -732,10 +732,10 @@ redef class AOrExpr
 	do
 		var old_var_ctx = v.variable_ctx
 
-		v.visit(n_expr)
+		v.enter_visit(n_expr)
 		v.use_if_false_variable_ctx(n_expr)
 
-		v.visit(n_expr2)
+		v.enter_visit(n_expr2)
 		if n_expr2.if_false_variable_ctx != null then 
 			_if_false_variable_ctx = n_expr2.if_false_variable_ctx
 		else
@@ -756,10 +756,10 @@ redef class AAndExpr
 	do
 		var old_var_ctx = v.variable_ctx
 
-		v.visit(n_expr)
+		v.enter_visit(n_expr)
 		v.use_if_true_variable_ctx(n_expr)
 
-		v.visit(n_expr2)
+		v.enter_visit(n_expr2)
 		if n_expr2.if_true_variable_ctx != null then 
 			_if_true_variable_ctx = n_expr2.if_true_variable_ctx
 		else

@@ -146,15 +146,15 @@ $ end foreach
 $   foreach {elem}
 $     if @is_list
             for n in _n_@{name} do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
 $     else
 $       if @modifier
         if _n_@{name} != null then
-            v.visit(_n_@{name}.as(not null))
+            v.enter_visit(_n_@{name}.as(not null))
         end
 $       else
-        v.visit(_n_@{name})
+        v.enter_visit(_n_@{name})
 $       end
 $     end
 $   end foreach
@@ -167,17 +167,17 @@ $     if @is_list
 	do
 	    var i = _n_@{name}.length
             while i >= 0 do
-                v.visit(_n_@{name}[i])
+                v.enter_visit(_n_@{name}[i])
 		i = i - 1
 	    end
 	end
 $     else
 $       if @modifier
         if _n_@{name} != null then
-            v.visit(_n_@{name}.as(not null))
+            v.enter_visit(_n_@{name}.as(not null))
         end
 $       else
-        v.visit(_n_@{name})
+        v.enter_visit(_n_@{name})
 $       end
 $     end
 $   end foreach
@@ -211,14 +211,14 @@ redef class Start
     redef fun visit_all(v: Visitor)
     do
         if _n_base != null then
-            v.visit(_n_base.as(not null))
+            v.enter_visit(_n_base.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_base != null then
-            v.visit(_n_base.as(not null))
+            v.enter_visit(_n_base.as(not null))
         end
     end
 end

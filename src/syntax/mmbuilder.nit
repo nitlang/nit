@@ -42,7 +42,7 @@ redef class MMSrcModule
 
 		# Create local classes and attach them to global classes
 		var mmbv = new ClassBuilderVisitor(tc, self)
-		mmbv.visit(node)
+		mmbv.enter_visit(node)
 		tc.check_errors
 
 		if mhe.direct_greaters.is_empty then
@@ -54,7 +54,7 @@ redef class MMSrcModule
 
 		# Resolve classes in super clauses
 		var mmbv1 = new ClassSpecializationBuilderVisitor(tc, self)
-		mmbv1.visit(node)
+		mmbv1.enter_visit(node)
 		tc.check_errors
 
 		# Compute specialization relation
@@ -159,7 +159,7 @@ redef class MMSrcLocalClass
 	redef fun accept_class_visitor(v)
 	do
 		for n in nodes do
-			v.visit(n)
+			v.enter_visit(n)
 		end
 	end
 
@@ -167,7 +167,7 @@ redef class MMSrcLocalClass
 	redef fun accept_properties_visitor(v)
 	do
 		for n in nodes do
-			v.visit(n)
+			v.enter_visit(n)
 		end
 
 		for p in src_local_properties do
@@ -1121,7 +1121,7 @@ redef class PMethid
 	redef fun accept_property_builder(v)
 	do
 		var accumulator = new MethidAccumulator
-		accumulator.visit(self)
+		accumulator.enter_visit(self)
 		_name = accumulator.name.to_s.to_symbol
 		super
 	end

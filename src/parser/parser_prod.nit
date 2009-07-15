@@ -75,10 +75,23 @@ end
 
 # Abstract standard visitor
 class Visitor
+	# What the visitor do when a node is visited
+        # Concrete visitors should redefine this method.
+        protected fun visit(e: nullable PNode) is abstract
+
         # Ask the visitor to visit a given node.
         # Usually automatically called by visit_all* methods.
-        # Concrete visitors should redefine this method.
-        fun visit(e: nullable PNode) is abstract
+	# This methos should not be redefined
+        fun enter_visit(e: nullable PNode)
+	do
+		var old = _current_node
+		_current_node = e
+		visit(e)
+		_current_node = old
+	end
+
+	# The current visited node
+	readable var _current_node: nullable PNode = null
 end
 
 redef class AModule
@@ -156,32 +169,32 @@ redef class AModule
     redef fun visit_all(v: Visitor)
     do
         if _n_packagedecl != null then
-            v.visit(_n_packagedecl.as(not null))
+            v.enter_visit(_n_packagedecl.as(not null))
         end
             for n in _n_imports do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
             for n in _n_classdefs do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_packagedecl != null then
-            v.visit(_n_packagedecl.as(not null))
+            v.enter_visit(_n_packagedecl.as(not null))
         end
 	do
 	    var i = _n_imports.length
             while i >= 0 do
-                v.visit(_n_imports[i])
+                v.enter_visit(_n_imports[i])
 		i = i - 1
 	    end
 	end
 	do
 	    var i = _n_classdefs.length
             while i >= 0 do
-                v.visit(_n_classdefs[i])
+                v.enter_visit(_n_classdefs[i])
 		i = i - 1
 	    end
 	end
@@ -262,19 +275,19 @@ redef class APackagedecl
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
-        v.visit(_n_kwpackage)
-        v.visit(_n_id)
+        v.enter_visit(_n_kwpackage)
+        v.enter_visit(_n_id)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
-        v.visit(_n_kwpackage)
-        v.visit(_n_id)
+        v.enter_visit(_n_kwpackage)
+        v.enter_visit(_n_id)
     end
 end
 redef class AImport
@@ -347,16 +360,16 @@ redef class AImport
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_visibility)
-        v.visit(_n_kwimport)
-        v.visit(_n_id)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwimport)
+        v.enter_visit(_n_id)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_visibility)
-        v.visit(_n_kwimport)
-        v.visit(_n_id)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwimport)
+        v.enter_visit(_n_id)
     end
 end
 redef class ANoImport
@@ -429,16 +442,16 @@ redef class ANoImport
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_visibility)
-        v.visit(_n_kwimport)
-        v.visit(_n_kwend)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwimport)
+        v.enter_visit(_n_kwend)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_visibility)
-        v.visit(_n_kwimport)
-        v.visit(_n_kwend)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwimport)
+        v.enter_visit(_n_kwend)
     end
 end
 redef class APublicVisibility
@@ -496,12 +509,12 @@ redef class APrivateVisibility
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwprivate)
+        v.enter_visit(_n_kwprivate)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwprivate)
+        v.enter_visit(_n_kwprivate)
     end
 end
 redef class AProtectedVisibility
@@ -538,12 +551,12 @@ redef class AProtectedVisibility
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwprotected)
+        v.enter_visit(_n_kwprotected)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwprotected)
+        v.enter_visit(_n_kwprotected)
     end
 end
 redef class AIntrudeVisibility
@@ -580,12 +593,12 @@ redef class AIntrudeVisibility
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwintrude)
+        v.enter_visit(_n_kwintrude)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwintrude)
+        v.enter_visit(_n_kwintrude)
     end
 end
 redef class AClassdef
@@ -761,58 +774,58 @@ redef class AClassdef
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_classkind)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_classkind)
         if _n_id != null then
-            v.visit(_n_id.as(not null))
+            v.enter_visit(_n_id.as(not null))
         end
             for n in _n_formaldefs do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
             for n in _n_superclasses do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
             for n in _n_propdefs do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_classkind)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_classkind)
         if _n_id != null then
-            v.visit(_n_id.as(not null))
+            v.enter_visit(_n_id.as(not null))
         end
 	do
 	    var i = _n_formaldefs.length
             while i >= 0 do
-                v.visit(_n_formaldefs[i])
+                v.enter_visit(_n_formaldefs[i])
 		i = i - 1
 	    end
 	end
 	do
 	    var i = _n_superclasses.length
             while i >= 0 do
-                v.visit(_n_superclasses[i])
+                v.enter_visit(_n_superclasses[i])
 		i = i - 1
 	    end
 	end
 	do
 	    var i = _n_propdefs.length
             while i >= 0 do
-                v.visit(_n_propdefs[i])
+                v.enter_visit(_n_propdefs[i])
 		i = i - 1
 	    end
 	end
@@ -853,7 +866,7 @@ redef class ATopClassdef
     redef fun visit_all(v: Visitor)
     do
             for n in _n_propdefs do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
@@ -862,7 +875,7 @@ redef class ATopClassdef
 	do
 	    var i = _n_propdefs.length
             while i >= 0 do
-                v.visit(_n_propdefs[i])
+                v.enter_visit(_n_propdefs[i])
 		i = i - 1
 	    end
 	end
@@ -903,7 +916,7 @@ redef class AMainClassdef
     redef fun visit_all(v: Visitor)
     do
             for n in _n_propdefs do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
@@ -912,7 +925,7 @@ redef class AMainClassdef
 	do
 	    var i = _n_propdefs.length
             while i >= 0 do
-                v.visit(_n_propdefs[i])
+                v.enter_visit(_n_propdefs[i])
 		i = i - 1
 	    end
 	end
@@ -952,12 +965,12 @@ redef class AConcreteClasskind
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwclass)
+        v.enter_visit(_n_kwclass)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwclass)
+        v.enter_visit(_n_kwclass)
     end
 end
 redef class AAbstractClasskind
@@ -1012,14 +1025,14 @@ redef class AAbstractClasskind
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwabstract)
-        v.visit(_n_kwclass)
+        v.enter_visit(_n_kwabstract)
+        v.enter_visit(_n_kwclass)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwabstract)
-        v.visit(_n_kwclass)
+        v.enter_visit(_n_kwabstract)
+        v.enter_visit(_n_kwclass)
     end
 end
 redef class AInterfaceClasskind
@@ -1056,12 +1069,12 @@ redef class AInterfaceClasskind
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwinterface)
+        v.enter_visit(_n_kwinterface)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwinterface)
+        v.enter_visit(_n_kwinterface)
     end
 end
 redef class AUniversalClasskind
@@ -1098,12 +1111,12 @@ redef class AUniversalClasskind
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwuniversal)
+        v.enter_visit(_n_kwuniversal)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwuniversal)
+        v.enter_visit(_n_kwuniversal)
     end
 end
 redef class AFormaldef
@@ -1162,17 +1175,17 @@ redef class AFormaldef
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
         if _n_type != null then
-            v.visit(_n_type.as(not null))
+            v.enter_visit(_n_type.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
         if _n_type != null then
-            v.visit(_n_type.as(not null))
+            v.enter_visit(_n_type.as(not null))
         end
     end
 end
@@ -1228,14 +1241,14 @@ redef class ASuperclass
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwspecial)
-        v.visit(_n_type)
+        v.enter_visit(_n_kwspecial)
+        v.enter_visit(_n_type)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwspecial)
-        v.visit(_n_type)
+        v.enter_visit(_n_kwspecial)
+        v.enter_visit(_n_type)
     end
 end
 redef class AAttrPropdef
@@ -1467,60 +1480,60 @@ redef class AAttrPropdef
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_readable != null then
-            v.visit(_n_readable.as(not null))
+            v.enter_visit(_n_readable.as(not null))
         end
         if _n_writable != null then
-            v.visit(_n_writable.as(not null))
+            v.enter_visit(_n_writable.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
+        v.enter_visit(_n_visibility)
         if _n_kwattr != null then
-            v.visit(_n_kwattr.as(not null))
+            v.enter_visit(_n_kwattr.as(not null))
         end
         if _n_kwvar != null then
-            v.visit(_n_kwvar.as(not null))
+            v.enter_visit(_n_kwvar.as(not null))
         end
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
         if _n_type != null then
-            v.visit(_n_type.as(not null))
+            v.enter_visit(_n_type.as(not null))
         end
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_readable != null then
-            v.visit(_n_readable.as(not null))
+            v.enter_visit(_n_readable.as(not null))
         end
         if _n_writable != null then
-            v.visit(_n_writable.as(not null))
+            v.enter_visit(_n_writable.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
+        v.enter_visit(_n_visibility)
         if _n_kwattr != null then
-            v.visit(_n_kwattr.as(not null))
+            v.enter_visit(_n_kwattr.as(not null))
         end
         if _n_kwvar != null then
-            v.visit(_n_kwvar.as(not null))
+            v.enter_visit(_n_kwvar.as(not null))
         end
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
         if _n_type != null then
-            v.visit(_n_type.as(not null))
+            v.enter_visit(_n_type.as(not null))
         end
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 end
@@ -1639,27 +1652,27 @@ redef class AMethPropdef
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_methid)
-        v.visit(_n_signature)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_methid)
+        v.enter_visit(_n_signature)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_methid)
-        v.visit(_n_signature)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_methid)
+        v.enter_visit(_n_signature)
     end
 end
 redef class ADeferredMethPropdef
@@ -1795,29 +1808,29 @@ redef class ADeferredMethPropdef
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwmeth)
-        v.visit(_n_methid)
-        v.visit(_n_signature)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwmeth)
+        v.enter_visit(_n_methid)
+        v.enter_visit(_n_signature)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwmeth)
-        v.visit(_n_methid)
-        v.visit(_n_signature)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwmeth)
+        v.enter_visit(_n_methid)
+        v.enter_visit(_n_signature)
     end
 end
 redef class AInternMethPropdef
@@ -1953,29 +1966,29 @@ redef class AInternMethPropdef
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwmeth)
-        v.visit(_n_methid)
-        v.visit(_n_signature)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwmeth)
+        v.enter_visit(_n_methid)
+        v.enter_visit(_n_signature)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwmeth)
-        v.visit(_n_methid)
-        v.visit(_n_signature)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwmeth)
+        v.enter_visit(_n_methid)
+        v.enter_visit(_n_signature)
     end
 end
 redef class AExternMethPropdef
@@ -2133,34 +2146,34 @@ redef class AExternMethPropdef
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwmeth)
-        v.visit(_n_methid)
-        v.visit(_n_signature)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwmeth)
+        v.enter_visit(_n_methid)
+        v.enter_visit(_n_signature)
         if _n_extern != null then
-            v.visit(_n_extern.as(not null))
+            v.enter_visit(_n_extern.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwmeth)
-        v.visit(_n_methid)
-        v.visit(_n_signature)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwmeth)
+        v.enter_visit(_n_methid)
+        v.enter_visit(_n_signature)
         if _n_extern != null then
-            v.visit(_n_extern.as(not null))
+            v.enter_visit(_n_extern.as(not null))
         end
     end
 end
@@ -2319,34 +2332,34 @@ redef class AConcreteMethPropdef
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwmeth)
-        v.visit(_n_methid)
-        v.visit(_n_signature)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwmeth)
+        v.enter_visit(_n_methid)
+        v.enter_visit(_n_signature)
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwmeth)
-        v.visit(_n_methid)
-        v.visit(_n_signature)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwmeth)
+        v.enter_visit(_n_methid)
+        v.enter_visit(_n_signature)
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 end
@@ -2509,38 +2522,38 @@ redef class AConcreteInitPropdef
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwinit)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwinit)
         if _n_methid != null then
-            v.visit(_n_methid.as(not null))
+            v.enter_visit(_n_methid.as(not null))
         end
-        v.visit(_n_signature)
+        v.enter_visit(_n_signature)
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwinit)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwinit)
         if _n_methid != null then
-            v.visit(_n_methid.as(not null))
+            v.enter_visit(_n_methid.as(not null))
         end
-        v.visit(_n_signature)
+        v.enter_visit(_n_signature)
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 end
@@ -2605,20 +2618,20 @@ redef class AMainMethPropdef
     redef fun visit_all(v: Visitor)
     do
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 end
@@ -2755,29 +2768,29 @@ redef class ATypePropdef
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwtype)
-        v.visit(_n_id)
-        v.visit(_n_type)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwtype)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_type)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_doc != null then
-            v.visit(_n_doc.as(not null))
+            v.enter_visit(_n_doc.as(not null))
         end
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_visibility)
-        v.visit(_n_kwtype)
-        v.visit(_n_id)
-        v.visit(_n_type)
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwtype)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_type)
     end
 end
 redef class AReadAble
@@ -2837,17 +2850,17 @@ redef class AReadAble
     redef fun visit_all(v: Visitor)
     do
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_kwreadable)
+        v.enter_visit(_n_kwreadable)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_kwreadable)
+        v.enter_visit(_n_kwreadable)
     end
 end
 redef class AWriteAble
@@ -2907,17 +2920,17 @@ redef class AWriteAble
     redef fun visit_all(v: Visitor)
     do
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_kwwritable)
+        v.enter_visit(_n_kwwritable)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_kwredef != null then
-            v.visit(_n_kwredef.as(not null))
+            v.enter_visit(_n_kwredef.as(not null))
         end
-        v.visit(_n_kwwritable)
+        v.enter_visit(_n_kwwritable)
     end
 end
 redef class AIdMethid
@@ -2954,12 +2967,12 @@ redef class AIdMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
     end
 end
 redef class APlusMethid
@@ -2996,12 +3009,12 @@ redef class APlusMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_plus)
+        v.enter_visit(_n_plus)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_plus)
+        v.enter_visit(_n_plus)
     end
 end
 redef class AMinusMethid
@@ -3038,12 +3051,12 @@ redef class AMinusMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_minus)
+        v.enter_visit(_n_minus)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_minus)
+        v.enter_visit(_n_minus)
     end
 end
 redef class AStarMethid
@@ -3080,12 +3093,12 @@ redef class AStarMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_star)
+        v.enter_visit(_n_star)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_star)
+        v.enter_visit(_n_star)
     end
 end
 redef class ASlashMethid
@@ -3122,12 +3135,12 @@ redef class ASlashMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_slash)
+        v.enter_visit(_n_slash)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_slash)
+        v.enter_visit(_n_slash)
     end
 end
 redef class APercentMethid
@@ -3164,12 +3177,12 @@ redef class APercentMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_percent)
+        v.enter_visit(_n_percent)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_percent)
+        v.enter_visit(_n_percent)
     end
 end
 redef class AEqMethid
@@ -3206,12 +3219,12 @@ redef class AEqMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_eq)
+        v.enter_visit(_n_eq)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_eq)
+        v.enter_visit(_n_eq)
     end
 end
 redef class ANeMethid
@@ -3248,12 +3261,12 @@ redef class ANeMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_ne)
+        v.enter_visit(_n_ne)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_ne)
+        v.enter_visit(_n_ne)
     end
 end
 redef class ALeMethid
@@ -3290,12 +3303,12 @@ redef class ALeMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_le)
+        v.enter_visit(_n_le)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_le)
+        v.enter_visit(_n_le)
     end
 end
 redef class AGeMethid
@@ -3332,12 +3345,12 @@ redef class AGeMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_ge)
+        v.enter_visit(_n_ge)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_ge)
+        v.enter_visit(_n_ge)
     end
 end
 redef class ALtMethid
@@ -3374,12 +3387,12 @@ redef class ALtMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_lt)
+        v.enter_visit(_n_lt)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_lt)
+        v.enter_visit(_n_lt)
     end
 end
 redef class AGtMethid
@@ -3416,12 +3429,12 @@ redef class AGtMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_gt)
+        v.enter_visit(_n_gt)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_gt)
+        v.enter_visit(_n_gt)
     end
 end
 redef class ABraMethid
@@ -3476,14 +3489,14 @@ redef class ABraMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_obra)
-        v.visit(_n_cbra)
+        v.enter_visit(_n_obra)
+        v.enter_visit(_n_cbra)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_obra)
-        v.visit(_n_cbra)
+        v.enter_visit(_n_obra)
+        v.enter_visit(_n_cbra)
     end
 end
 redef class AStarshipMethid
@@ -3520,12 +3533,12 @@ redef class AStarshipMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_starship)
+        v.enter_visit(_n_starship)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_starship)
+        v.enter_visit(_n_starship)
     end
 end
 redef class AAssignMethid
@@ -3580,14 +3593,14 @@ redef class AAssignMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_id)
-        v.visit(_n_assign)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_assign)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_id)
-        v.visit(_n_assign)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_assign)
     end
 end
 redef class ABraassignMethid
@@ -3660,16 +3673,16 @@ redef class ABraassignMethid
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_obra)
-        v.visit(_n_cbra)
-        v.visit(_n_assign)
+        v.enter_visit(_n_obra)
+        v.enter_visit(_n_cbra)
+        v.enter_visit(_n_assign)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_obra)
-        v.visit(_n_cbra)
-        v.visit(_n_assign)
+        v.enter_visit(_n_obra)
+        v.enter_visit(_n_cbra)
+        v.enter_visit(_n_assign)
     end
 end
 redef class ASignature
@@ -3747,13 +3760,13 @@ redef class ASignature
     redef fun visit_all(v: Visitor)
     do
             for n in _n_params do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
         if _n_type != null then
-            v.visit(_n_type.as(not null))
+            v.enter_visit(_n_type.as(not null))
         end
             for n in _n_closure_decls do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
@@ -3762,17 +3775,17 @@ redef class ASignature
 	do
 	    var i = _n_params.length
             while i >= 0 do
-                v.visit(_n_params[i])
+                v.enter_visit(_n_params[i])
 		i = i - 1
 	    end
 	end
         if _n_type != null then
-            v.visit(_n_type.as(not null))
+            v.enter_visit(_n_type.as(not null))
         end
 	do
 	    var i = _n_closure_decls.length
             while i >= 0 do
-                v.visit(_n_closure_decls[i])
+                v.enter_visit(_n_closure_decls[i])
 		i = i - 1
 	    end
 	end
@@ -3856,23 +3869,23 @@ redef class AParam
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
         if _n_type != null then
-            v.visit(_n_type.as(not null))
+            v.enter_visit(_n_type.as(not null))
         end
         if _n_dotdotdot != null then
-            v.visit(_n_dotdotdot.as(not null))
+            v.enter_visit(_n_dotdotdot.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
         if _n_type != null then
-            v.visit(_n_type.as(not null))
+            v.enter_visit(_n_type.as(not null))
         end
         if _n_dotdotdot != null then
-            v.visit(_n_dotdotdot.as(not null))
+            v.enter_visit(_n_dotdotdot.as(not null))
         end
     end
 end
@@ -3990,27 +4003,27 @@ redef class AClosureDecl
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwwith)
+        v.enter_visit(_n_kwwith)
         if _n_kwbreak != null then
-            v.visit(_n_kwbreak.as(not null))
+            v.enter_visit(_n_kwbreak.as(not null))
         end
-        v.visit(_n_id)
-        v.visit(_n_signature)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_signature)
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwwith)
+        v.enter_visit(_n_kwwith)
         if _n_kwbreak != null then
-            v.visit(_n_kwbreak.as(not null))
+            v.enter_visit(_n_kwbreak.as(not null))
         end
-        v.visit(_n_id)
-        v.visit(_n_signature)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_signature)
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 end
@@ -4089,24 +4102,24 @@ redef class AType
     redef fun visit_all(v: Visitor)
     do
         if _n_kwnullable != null then
-            v.visit(_n_kwnullable.as(not null))
+            v.enter_visit(_n_kwnullable.as(not null))
         end
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
             for n in _n_types do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_kwnullable != null then
-            v.visit(_n_kwnullable.as(not null))
+            v.enter_visit(_n_kwnullable.as(not null))
         end
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
 	do
 	    var i = _n_types.length
             while i >= 0 do
-                v.visit(_n_types[i])
+                v.enter_visit(_n_types[i])
 		i = i - 1
 	    end
 	end
@@ -4147,7 +4160,7 @@ redef class ABlockExpr
     redef fun visit_all(v: Visitor)
     do
             for n in _n_expr do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
@@ -4156,7 +4169,7 @@ redef class ABlockExpr
 	do
 	    var i = _n_expr.length
             while i >= 0 do
-                v.visit(_n_expr[i])
+                v.enter_visit(_n_expr[i])
 		i = i - 1
 	    end
 	end
@@ -4280,31 +4293,31 @@ redef class AVardeclExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwvar)
-        v.visit(_n_id)
+        v.enter_visit(_n_kwvar)
+        v.enter_visit(_n_id)
         if _n_type != null then
-            v.visit(_n_type.as(not null))
+            v.enter_visit(_n_type.as(not null))
         end
         if _n_assign != null then
-            v.visit(_n_assign.as(not null))
+            v.enter_visit(_n_assign.as(not null))
         end
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwvar)
-        v.visit(_n_id)
+        v.enter_visit(_n_kwvar)
+        v.enter_visit(_n_id)
         if _n_type != null then
-            v.visit(_n_type.as(not null))
+            v.enter_visit(_n_type.as(not null))
         end
         if _n_assign != null then
-            v.visit(_n_assign.as(not null))
+            v.enter_visit(_n_assign.as(not null))
         end
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 end
@@ -4364,17 +4377,17 @@ redef class AReturnExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwreturn)
+        v.enter_visit(_n_kwreturn)
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwreturn)
+        v.enter_visit(_n_kwreturn)
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 end
@@ -4434,17 +4447,17 @@ redef class ABreakExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwbreak)
+        v.enter_visit(_n_kwbreak)
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwbreak)
+        v.enter_visit(_n_kwbreak)
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 end
@@ -4482,12 +4495,12 @@ redef class AAbortExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwabort)
+        v.enter_visit(_n_kwabort)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwabort)
+        v.enter_visit(_n_kwabort)
     end
 end
 redef class AContinueExpr
@@ -4546,17 +4559,17 @@ redef class AContinueExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwcontinue)
+        v.enter_visit(_n_kwcontinue)
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwcontinue)
+        v.enter_visit(_n_kwcontinue)
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 end
@@ -4616,17 +4629,17 @@ redef class ADoExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwdo)
+        v.enter_visit(_n_kwdo)
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwdo)
+        v.enter_visit(_n_kwdo)
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 end
@@ -4726,25 +4739,25 @@ redef class AIfExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwif)
-        v.visit(_n_expr)
+        v.enter_visit(_n_kwif)
+        v.enter_visit(_n_expr)
         if _n_then != null then
-            v.visit(_n_then.as(not null))
+            v.enter_visit(_n_then.as(not null))
         end
         if _n_else != null then
-            v.visit(_n_else.as(not null))
+            v.enter_visit(_n_else.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwif)
-        v.visit(_n_expr)
+        v.enter_visit(_n_kwif)
+        v.enter_visit(_n_expr)
         if _n_then != null then
-            v.visit(_n_then.as(not null))
+            v.enter_visit(_n_then.as(not null))
         end
         if _n_else != null then
-            v.visit(_n_else.as(not null))
+            v.enter_visit(_n_else.as(not null))
         end
     end
 end
@@ -4872,22 +4885,22 @@ redef class AIfexprExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwif)
-        v.visit(_n_expr)
-        v.visit(_n_kwthen)
-        v.visit(_n_then)
-        v.visit(_n_kwelse)
-        v.visit(_n_else)
+        v.enter_visit(_n_kwif)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwthen)
+        v.enter_visit(_n_then)
+        v.enter_visit(_n_kwelse)
+        v.enter_visit(_n_else)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwif)
-        v.visit(_n_expr)
-        v.visit(_n_kwthen)
-        v.visit(_n_then)
-        v.visit(_n_kwelse)
-        v.visit(_n_else)
+        v.enter_visit(_n_kwif)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwthen)
+        v.enter_visit(_n_then)
+        v.enter_visit(_n_kwelse)
+        v.enter_visit(_n_else)
     end
 end
 redef class AWhileExpr
@@ -4982,21 +4995,21 @@ redef class AWhileExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwwhile)
-        v.visit(_n_expr)
-        v.visit(_n_kwdo)
+        v.enter_visit(_n_kwwhile)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwdo)
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwwhile)
-        v.visit(_n_expr)
-        v.visit(_n_kwdo)
+        v.enter_visit(_n_kwwhile)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwdo)
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 end
@@ -5110,23 +5123,23 @@ redef class AForExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwfor)
-        v.visit(_n_id)
-        v.visit(_n_expr)
-        v.visit(_n_kwdo)
+        v.enter_visit(_n_kwfor)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwdo)
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwfor)
-        v.visit(_n_id)
-        v.visit(_n_expr)
-        v.visit(_n_kwdo)
+        v.enter_visit(_n_kwfor)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwdo)
         if _n_block != null then
-            v.visit(_n_block.as(not null))
+            v.enter_visit(_n_block.as(not null))
         end
     end
 end
@@ -5204,20 +5217,20 @@ redef class AAssertExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwassert)
+        v.enter_visit(_n_kwassert)
         if _n_id != null then
-            v.visit(_n_id.as(not null))
+            v.enter_visit(_n_id.as(not null))
         end
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwassert)
+        v.enter_visit(_n_kwassert)
         if _n_id != null then
-            v.visit(_n_id.as(not null))
+            v.enter_visit(_n_id.as(not null))
         end
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
     end
 end
 redef class AOnceExpr
@@ -5272,14 +5285,14 @@ redef class AOnceExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwonce)
-        v.visit(_n_expr)
+        v.enter_visit(_n_kwonce)
+        v.enter_visit(_n_expr)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwonce)
-        v.visit(_n_expr)
+        v.enter_visit(_n_kwonce)
+        v.enter_visit(_n_expr)
     end
 end
 redef class ASendExpr
@@ -5316,12 +5329,12 @@ redef class ASendExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
     end
 end
 redef class ABinopExpr
@@ -5376,14 +5389,14 @@ redef class ABinopExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AOrExpr
@@ -5438,14 +5451,14 @@ redef class AOrExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AAndExpr
@@ -5500,14 +5513,14 @@ redef class AAndExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class ANotExpr
@@ -5562,14 +5575,14 @@ redef class ANotExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwnot)
-        v.visit(_n_expr)
+        v.enter_visit(_n_kwnot)
+        v.enter_visit(_n_expr)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwnot)
-        v.visit(_n_expr)
+        v.enter_visit(_n_kwnot)
+        v.enter_visit(_n_expr)
     end
 end
 redef class AEqExpr
@@ -5624,14 +5637,14 @@ redef class AEqExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AEeExpr
@@ -5686,14 +5699,14 @@ redef class AEeExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class ANeExpr
@@ -5748,14 +5761,14 @@ redef class ANeExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class ALtExpr
@@ -5810,14 +5823,14 @@ redef class ALtExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class ALeExpr
@@ -5872,14 +5885,14 @@ redef class ALeExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AGtExpr
@@ -5934,14 +5947,14 @@ redef class AGtExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AGeExpr
@@ -5996,14 +6009,14 @@ redef class AGeExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AIsaExpr
@@ -6058,14 +6071,14 @@ redef class AIsaExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_type)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_type)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_type)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_type)
     end
 end
 redef class APlusExpr
@@ -6120,14 +6133,14 @@ redef class APlusExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AMinusExpr
@@ -6182,14 +6195,14 @@ redef class AMinusExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AStarshipExpr
@@ -6244,14 +6257,14 @@ redef class AStarshipExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AStarExpr
@@ -6306,14 +6319,14 @@ redef class AStarExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class ASlashExpr
@@ -6368,14 +6381,14 @@ redef class ASlashExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class APercentExpr
@@ -6430,14 +6443,14 @@ redef class APercentExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AUminusExpr
@@ -6492,14 +6505,14 @@ redef class AUminusExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_minus)
-        v.visit(_n_expr)
+        v.enter_visit(_n_minus)
+        v.enter_visit(_n_expr)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_minus)
-        v.visit(_n_expr)
+        v.enter_visit(_n_minus)
+        v.enter_visit(_n_expr)
     end
 end
 redef class ANewExpr
@@ -6594,27 +6607,27 @@ redef class ANewExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwnew)
-        v.visit(_n_type)
+        v.enter_visit(_n_kwnew)
+        v.enter_visit(_n_type)
         if _n_id != null then
-            v.visit(_n_id.as(not null))
+            v.enter_visit(_n_id.as(not null))
         end
             for n in _n_args do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwnew)
-        v.visit(_n_type)
+        v.enter_visit(_n_kwnew)
+        v.enter_visit(_n_type)
         if _n_id != null then
-            v.visit(_n_id.as(not null))
+            v.enter_visit(_n_id.as(not null))
         end
 	do
 	    var i = _n_args.length
             while i >= 0 do
-                v.visit(_n_args[i])
+                v.enter_visit(_n_args[i])
 		i = i - 1
 	    end
 	end
@@ -6672,14 +6685,14 @@ redef class AAttrExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
     end
 end
 redef class AAttrAssignExpr
@@ -6770,18 +6783,18 @@ redef class AAttrAssignExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
-        v.visit(_n_assign)
-        v.visit(_n_value)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_assign)
+        v.enter_visit(_n_value)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
-        v.visit(_n_assign)
-        v.visit(_n_value)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_assign)
+        v.enter_visit(_n_value)
     end
 end
 redef class AAttrReassignExpr
@@ -6872,18 +6885,18 @@ redef class AAttrReassignExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
-        v.visit(_n_assign_op)
-        v.visit(_n_value)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_assign_op)
+        v.enter_visit(_n_value)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
-        v.visit(_n_assign_op)
-        v.visit(_n_value)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_assign_op)
+        v.enter_visit(_n_value)
     end
 end
 redef class ACallExpr
@@ -6974,31 +6987,31 @@ redef class ACallExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
             for n in _n_args do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
             for n in _n_closure_defs do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
 	do
 	    var i = _n_args.length
             while i >= 0 do
-                v.visit(_n_args[i])
+                v.enter_visit(_n_args[i])
 		i = i - 1
 	    end
 	end
 	do
 	    var i = _n_closure_defs.length
             while i >= 0 do
-                v.visit(_n_closure_defs[i])
+                v.enter_visit(_n_closure_defs[i])
 		i = i - 1
 	    end
 	end
@@ -7110,28 +7123,28 @@ redef class ACallAssignExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
             for n in _n_args do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
-        v.visit(_n_assign)
-        v.visit(_n_value)
+        v.enter_visit(_n_assign)
+        v.enter_visit(_n_value)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
 	do
 	    var i = _n_args.length
             while i >= 0 do
-                v.visit(_n_args[i])
+                v.enter_visit(_n_args[i])
 		i = i - 1
 	    end
 	end
-        v.visit(_n_assign)
-        v.visit(_n_value)
+        v.enter_visit(_n_assign)
+        v.enter_visit(_n_value)
     end
 end
 redef class ACallReassignExpr
@@ -7240,28 +7253,28 @@ redef class ACallReassignExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
             for n in _n_args do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
-        v.visit(_n_assign_op)
-        v.visit(_n_value)
+        v.enter_visit(_n_assign_op)
+        v.enter_visit(_n_value)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_id)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
 	do
 	    var i = _n_args.length
             while i >= 0 do
-                v.visit(_n_args[i])
+                v.enter_visit(_n_args[i])
 		i = i - 1
 	    end
 	end
-        v.visit(_n_assign_op)
-        v.visit(_n_value)
+        v.enter_visit(_n_assign_op)
+        v.enter_visit(_n_value)
     end
 end
 redef class ASuperExpr
@@ -7339,24 +7352,24 @@ redef class ASuperExpr
     redef fun visit_all(v: Visitor)
     do
         if _n_qualified != null then
-            v.visit(_n_qualified.as(not null))
+            v.enter_visit(_n_qualified.as(not null))
         end
-        v.visit(_n_kwsuper)
+        v.enter_visit(_n_kwsuper)
             for n in _n_args do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_qualified != null then
-            v.visit(_n_qualified.as(not null))
+            v.enter_visit(_n_qualified.as(not null))
         end
-        v.visit(_n_kwsuper)
+        v.enter_visit(_n_kwsuper)
 	do
 	    var i = _n_args.length
             while i >= 0 do
-                v.visit(_n_args[i])
+                v.enter_visit(_n_args[i])
 		i = i - 1
 	    end
 	end
@@ -7432,21 +7445,21 @@ redef class AInitExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_kwinit)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwinit)
             for n in _n_args do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_kwinit)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwinit)
 	do
 	    var i = _n_args.length
             while i >= 0 do
-                v.visit(_n_args[i])
+                v.enter_visit(_n_args[i])
 		i = i - 1
 	    end
 	end
@@ -7522,29 +7535,29 @@ redef class ABraExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
             for n in _n_args do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
             for n in _n_closure_defs do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
 	do
 	    var i = _n_args.length
             while i >= 0 do
-                v.visit(_n_args[i])
+                v.enter_visit(_n_args[i])
 		i = i - 1
 	    end
 	end
 	do
 	    var i = _n_closure_defs.length
             while i >= 0 do
-                v.visit(_n_closure_defs[i])
+                v.enter_visit(_n_closure_defs[i])
 		i = i - 1
 	    end
 	end
@@ -7638,26 +7651,26 @@ redef class ABraAssignExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
             for n in _n_args do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
-        v.visit(_n_assign)
-        v.visit(_n_value)
+        v.enter_visit(_n_assign)
+        v.enter_visit(_n_value)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
 	do
 	    var i = _n_args.length
             while i >= 0 do
-                v.visit(_n_args[i])
+                v.enter_visit(_n_args[i])
 		i = i - 1
 	    end
 	end
-        v.visit(_n_assign)
-        v.visit(_n_value)
+        v.enter_visit(_n_assign)
+        v.enter_visit(_n_value)
     end
 end
 redef class ABraReassignExpr
@@ -7748,26 +7761,26 @@ redef class ABraReassignExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
             for n in _n_args do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
-        v.visit(_n_assign_op)
-        v.visit(_n_value)
+        v.enter_visit(_n_assign_op)
+        v.enter_visit(_n_value)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
 	do
 	    var i = _n_args.length
             while i >= 0 do
-                v.visit(_n_args[i])
+                v.enter_visit(_n_args[i])
 		i = i - 1
 	    end
 	end
-        v.visit(_n_assign_op)
-        v.visit(_n_value)
+        v.enter_visit(_n_assign_op)
+        v.enter_visit(_n_value)
     end
 end
 redef class AClosureCallExpr
@@ -7840,29 +7853,29 @@ redef class AClosureCallExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
             for n in _n_args do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
             for n in _n_closure_defs do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
 	do
 	    var i = _n_args.length
             while i >= 0 do
-                v.visit(_n_args[i])
+                v.enter_visit(_n_args[i])
 		i = i - 1
 	    end
 	end
 	do
 	    var i = _n_closure_defs.length
             while i >= 0 do
-                v.visit(_n_closure_defs[i])
+                v.enter_visit(_n_closure_defs[i])
 		i = i - 1
 	    end
 	end
@@ -7902,12 +7915,12 @@ redef class AVarExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_id)
+        v.enter_visit(_n_id)
     end
 end
 redef class AVarAssignExpr
@@ -7980,16 +7993,16 @@ redef class AVarAssignExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_id)
-        v.visit(_n_assign)
-        v.visit(_n_value)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_assign)
+        v.enter_visit(_n_value)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_id)
-        v.visit(_n_assign)
-        v.visit(_n_value)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_assign)
+        v.enter_visit(_n_value)
     end
 end
 redef class AVarReassignExpr
@@ -8062,16 +8075,16 @@ redef class AVarReassignExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_id)
-        v.visit(_n_assign_op)
-        v.visit(_n_value)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_assign_op)
+        v.enter_visit(_n_value)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_id)
-        v.visit(_n_assign_op)
-        v.visit(_n_value)
+        v.enter_visit(_n_id)
+        v.enter_visit(_n_assign_op)
+        v.enter_visit(_n_value)
     end
 end
 redef class ARangeExpr
@@ -8126,14 +8139,14 @@ redef class ARangeExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class ACrangeExpr
@@ -8188,14 +8201,14 @@ redef class ACrangeExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AOrangeExpr
@@ -8250,14 +8263,14 @@ redef class AOrangeExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_expr2)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
     end
 end
 redef class AArrayExpr
@@ -8295,7 +8308,7 @@ redef class AArrayExpr
     redef fun visit_all(v: Visitor)
     do
             for n in _n_exprs do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
@@ -8304,7 +8317,7 @@ redef class AArrayExpr
 	do
 	    var i = _n_exprs.length
             while i >= 0 do
-                v.visit(_n_exprs[i])
+                v.enter_visit(_n_exprs[i])
 		i = i - 1
 	    end
 	end
@@ -8344,12 +8357,12 @@ redef class ASelfExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwself)
+        v.enter_visit(_n_kwself)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwself)
+        v.enter_visit(_n_kwself)
     end
 end
 redef class AImplicitSelfExpr
@@ -8407,12 +8420,12 @@ redef class ATrueExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwtrue)
+        v.enter_visit(_n_kwtrue)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwtrue)
+        v.enter_visit(_n_kwtrue)
     end
 end
 redef class AFalseExpr
@@ -8449,12 +8462,12 @@ redef class AFalseExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwfalse)
+        v.enter_visit(_n_kwfalse)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwfalse)
+        v.enter_visit(_n_kwfalse)
     end
 end
 redef class ANullExpr
@@ -8491,12 +8504,12 @@ redef class ANullExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwnull)
+        v.enter_visit(_n_kwnull)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwnull)
+        v.enter_visit(_n_kwnull)
     end
 end
 redef class AIntExpr
@@ -8533,12 +8546,12 @@ redef class AIntExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_number)
+        v.enter_visit(_n_number)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_number)
+        v.enter_visit(_n_number)
     end
 end
 redef class AFloatExpr
@@ -8575,12 +8588,12 @@ redef class AFloatExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_float)
+        v.enter_visit(_n_float)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_float)
+        v.enter_visit(_n_float)
     end
 end
 redef class ACharExpr
@@ -8617,12 +8630,12 @@ redef class ACharExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_char)
+        v.enter_visit(_n_char)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_char)
+        v.enter_visit(_n_char)
     end
 end
 redef class AStringExpr
@@ -8659,12 +8672,12 @@ redef class AStringExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_string)
+        v.enter_visit(_n_string)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_string)
+        v.enter_visit(_n_string)
     end
 end
 redef class AStartStringExpr
@@ -8701,12 +8714,12 @@ redef class AStartStringExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_string)
+        v.enter_visit(_n_string)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_string)
+        v.enter_visit(_n_string)
     end
 end
 redef class AMidStringExpr
@@ -8743,12 +8756,12 @@ redef class AMidStringExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_string)
+        v.enter_visit(_n_string)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_string)
+        v.enter_visit(_n_string)
     end
 end
 redef class AEndStringExpr
@@ -8785,12 +8798,12 @@ redef class AEndStringExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_string)
+        v.enter_visit(_n_string)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_string)
+        v.enter_visit(_n_string)
     end
 end
 redef class ASuperstringExpr
@@ -8828,7 +8841,7 @@ redef class ASuperstringExpr
     redef fun visit_all(v: Visitor)
     do
             for n in _n_exprs do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
@@ -8837,7 +8850,7 @@ redef class ASuperstringExpr
 	do
 	    var i = _n_exprs.length
             while i >= 0 do
-                v.visit(_n_exprs[i])
+                v.enter_visit(_n_exprs[i])
 		i = i - 1
 	    end
 	end
@@ -8877,12 +8890,12 @@ redef class AParExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
+        v.enter_visit(_n_expr)
     end
 end
 redef class AAsCastExpr
@@ -8955,16 +8968,16 @@ redef class AAsCastExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_kwas)
-        v.visit(_n_type)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwas)
+        v.enter_visit(_n_type)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_kwas)
-        v.visit(_n_type)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwas)
+        v.enter_visit(_n_type)
     end
 end
 redef class AAsNotnullExpr
@@ -9055,18 +9068,18 @@ redef class AAsNotnullExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_kwas)
-        v.visit(_n_kwnot)
-        v.visit(_n_kwnull)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwas)
+        v.enter_visit(_n_kwnot)
+        v.enter_visit(_n_kwnull)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_expr)
-        v.visit(_n_kwas)
-        v.visit(_n_kwnot)
-        v.visit(_n_kwnull)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_kwas)
+        v.enter_visit(_n_kwnot)
+        v.enter_visit(_n_kwnull)
     end
 end
 redef class AIssetAttrExpr
@@ -9139,16 +9152,16 @@ redef class AIssetAttrExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwisset)
-        v.visit(_n_expr)
-        v.visit(_n_id)
+        v.enter_visit(_n_kwisset)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwisset)
-        v.visit(_n_expr)
-        v.visit(_n_id)
+        v.enter_visit(_n_kwisset)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_id)
     end
 end
 redef class APlusAssignOp
@@ -9185,12 +9198,12 @@ redef class APlusAssignOp
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_pluseq)
+        v.enter_visit(_n_pluseq)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_pluseq)
+        v.enter_visit(_n_pluseq)
     end
 end
 redef class AMinusAssignOp
@@ -9227,12 +9240,12 @@ redef class AMinusAssignOp
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_minuseq)
+        v.enter_visit(_n_minuseq)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_minuseq)
+        v.enter_visit(_n_minuseq)
     end
 end
 redef class AClosureDef
@@ -9327,29 +9340,29 @@ redef class AClosureDef
 
     redef fun visit_all(v: Visitor)
     do
-        v.visit(_n_kwwith)
+        v.enter_visit(_n_kwwith)
             for n in _n_id do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
-        v.visit(_n_kwdo)
+        v.enter_visit(_n_kwdo)
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.visit(_n_kwwith)
+        v.enter_visit(_n_kwwith)
 	do
 	    var i = _n_id.length
             while i >= 0 do
-                v.visit(_n_id[i])
+                v.enter_visit(_n_id[i])
 		i = i - 1
 	    end
 	end
-        v.visit(_n_kwdo)
+        v.enter_visit(_n_kwdo)
         if _n_expr != null then
-            v.visit(_n_expr.as(not null))
+            v.enter_visit(_n_expr.as(not null))
         end
     end
 end
@@ -9410,10 +9423,10 @@ redef class AQualified
     redef fun visit_all(v: Visitor)
     do
             for n in _n_id do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
         if _n_classid != null then
-            v.visit(_n_classid.as(not null))
+            v.enter_visit(_n_classid.as(not null))
         end
     end
 
@@ -9422,12 +9435,12 @@ redef class AQualified
 	do
 	    var i = _n_id.length
             while i >= 0 do
-                v.visit(_n_id[i])
+                v.enter_visit(_n_id[i])
 		i = i - 1
 	    end
 	end
         if _n_classid != null then
-            v.visit(_n_classid.as(not null))
+            v.enter_visit(_n_classid.as(not null))
         end
     end
 end
@@ -9466,7 +9479,7 @@ redef class ADoc
     redef fun visit_all(v: Visitor)
     do
             for n in _n_comment do
-                v.visit(n)
+                v.enter_visit(n)
 	    end
     end
 
@@ -9475,7 +9488,7 @@ redef class ADoc
 	do
 	    var i = _n_comment.length
             while i >= 0 do
-                v.visit(_n_comment[i])
+                v.enter_visit(_n_comment[i])
 		i = i - 1
 	    end
 	end
@@ -9508,14 +9521,14 @@ redef class Start
     redef fun visit_all(v: Visitor)
     do
         if _n_base != null then
-            v.visit(_n_base.as(not null))
+            v.enter_visit(_n_base.as(not null))
         end
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
         if _n_base != null then
-            v.visit(_n_base.as(not null))
+            v.enter_visit(_n_base.as(not null))
         end
     end
 end
