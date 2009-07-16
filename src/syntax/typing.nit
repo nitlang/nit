@@ -302,11 +302,11 @@ redef class PExpr
 	redef fun stype
 	do
 		if not is_typed then
-			print "{locate}: not is_typed"
+			print "{location}: not is_typed"
 			abort
 		end
 		if is_statement then
-			print "{locate}: is_statement"
+			print "{location}: is_statement"
 			abort
 		end
 		return _stype.as(not null)

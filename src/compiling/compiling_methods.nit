@@ -952,7 +952,7 @@ redef class AInternMethPropdef
 			s = "BOX_NativeString((char*)malloc((UNTAG_Int({p[1]}) * sizeof(char))))"
 
 		else
-			stderr.write("{locate}: Fatal error: unknown intern method {method.full_name}.\n")
+			stderr.write("{location}: Fatal error: unknown intern method {method.full_name}.\n")
 			exit(1)
 		end
 		if method.signature.return_type != null and s == null then

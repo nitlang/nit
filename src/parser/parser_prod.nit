@@ -34,19 +34,14 @@ redef class PNode
 	# Thus, call "v.visit(e)" for each node e starting from the last child
 	fun visit_all_reverse(v: Visitor) is abstract
 
-	# Give a human readable location of the node.
-	fun locate: String
-	do
-		if location == null then
-			return "????"
-		end
-		return location.to_s
-	end
-
 	# Debug method: output a message prefixed with the location.
 	fun printl(str: String)
 	do
-		print("{locate}: {str}\n")
+		if location == null then
+			print("???: {str}\n")
+		else
+			print("{location}: {str}\n")
+		end
 	end
 end
 

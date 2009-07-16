@@ -355,26 +355,19 @@ special Visitor
 	# Display an error for a given syntax node
 	fun error(n: nullable PNode, s: String)
 	do
-		_tc.error(n.location, "{locate(n)}: {s}")
+		_tc.error(if n == null then null else n.location, s)
 	end
 
 	# Add an error, show errors and quit
 	fun fatal_error(n: nullable PNode, s: String)
 	do
-		_tc.fatal_error(n.location, "{locate(n)}: {s}")
+		_tc.fatal_error(if n == null then null else n.location, s)
 	end
 
 	# Display a warning for a given syntax node
 	fun warning(n: nullable PNode, s: String)
 	do
-		_tc.warning(n.location, "{locate(n)}: {s}")
-	end
-
-	#
-	fun locate(n: nullable PNode): String
-	do
-		if n != null then return n.locate
-		return _module.location.file
+		_tc.warning(if n == null then null else n.location, s)
 	end
 
 	# Check conformity and display error
@@ -397,7 +390,12 @@ special Visitor
 	do
 		if not n.is_typed then
 			if tc.error_count == 0 then
-				print("{n.locate} not typed but not error")
+				var loc = n.location
+				if loc == null then
+					print("Unknown node not typed but not error")
+				else
+					print("{loc} not typed but not error")
+				end
 				abort
 			end
 			# An error occured in a sub node,

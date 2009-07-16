@@ -36,6 +36,14 @@ special Comparable
 
 		return location.as(not null) < other.location.as(not null)
 	end
+
+	redef fun to_s: String do
+		if location == null then
+			return text
+		else
+			return "{location}: {text}"
+		end
+	end
 end
 
 # Global context for tools
@@ -57,7 +65,7 @@ special MMContext
 			_message_sorter.sort(_messages)
 
 			for m in _messages do
-				stderr.write("{m.text}\n")
+				stderr.write("{m}\n")
 			end
 
 			_messages.clear
