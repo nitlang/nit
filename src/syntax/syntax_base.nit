@@ -448,7 +448,12 @@ special Visitor
 				if node == null then
 					error(n, "Type error: no most general type. Got {n.stype} and {stype}.")
 				else
-					error(n, "Type error: no most general type. Got {n.stype} and {stype} at {node.locate}.")
+					var loc = node.location
+					if loc == null then
+						error(n, "Type error: no most general type. Got {n.stype} and {stype} at ????.")
+					else
+						error(n, "Type error: no most general type. Got {n.stype} and {stype} at {loc.relative_to(n.location)}.")
+					end
 				end
 				return null
 			end

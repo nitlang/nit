@@ -68,15 +68,28 @@ special Comparable
 	end
 
 	redef fun to_s: String do
+		var file_part = file
+		if file_part.length > 0 then file_part += ":"
+
 		if line_start == line_end then
 			if column_start == column_end then
-				return "{file}:{line_start},{column_start}"
+				return "{file_part}{line_start},{column_start}"
 			else
-				return "{file}:{line_start},{column_start}--{column_end}"
+				return "{file_part}{line_start},{column_start}--{column_end}"
 			end
 		else
-			return "{file}:{line_start},{column_start}--{line_end}:{column_end}"
+			return "{file_part}{line_start},{column_start}--{line_end}:{column_end}"
 		end
+	end
+
+	fun relative_to(loc: nullable Location): String do
+		var relative: Location
+		if loc != null and loc.file == self.file then
+			relative = new Location("", self.line_start, self.line_end, self.column_start, self.column_end)
+		else
+			relative = new Location(self.file, self.line_start, self.line_end, self.column_start, self.column_end)
+		end
+		return relative.to_s
 	end
 
 	redef fun <(other: OTHER): Bool do
