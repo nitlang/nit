@@ -19,6 +19,7 @@
 package abstractmetamodel
 
 import partial_order
+import location
 
 # The main singleton which knows everything
 class MMContext
@@ -120,8 +121,8 @@ class MMModule
 	# The directory of the module
 	readable var _directory: MMDirectory
 
-	# The filename of the module
-	readable var _filename: String
+	# Location of this module
+	readable var _location: Location
 
 	# Module dependence hierarchy element
 	readable var _mhe: nullable PartialOrderElement[MMModule]
@@ -153,13 +154,13 @@ class MMModule
 	# Dictionary of global classes
 	var _global_class_by_name: Map[Symbol, MMGlobalClass] = new HashMap[Symbol, MMGlobalClass]
 
-	protected init(name: Symbol, dir: MMDirectory, context: MMContext, filename: String)
+	protected init(name: Symbol, dir: MMDirectory, context: MMContext, loc: Location)
 	do
 		_name = name
 		_directory = dir
 		_context = context
 		_full_name = dir.full_name_for(name)
-		_filename = filename
+		_location = loc
 	end
 
 	# Register that a module is imported with a visibility

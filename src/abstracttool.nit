@@ -98,7 +98,7 @@ end
 redef class MMModule
 	fun dump_module_info
 	do
-		var p = filename.file_path
+		var p = location.file.file_path
 		var fname = "{p}/{name}"
 		var f = new OFStream.open("{fname}.class_hierarchy.new.dot")
 		f.write(class_specialization_hierarchy.to_dot)

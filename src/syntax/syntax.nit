@@ -42,7 +42,8 @@ special ModuleLoader
 		end
 		var node_module = node_tree.n_base
 		assert node_module isa AModule
-		var module = new MMSrcModule(context, node_module, dir, name, filename)
+		var module_loc = new Location.with_file(filename)
+		var module = new MMSrcModule(context, node_module, dir, name, module_loc)
 		return module
 	end
 

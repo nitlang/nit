@@ -29,9 +29,9 @@ special MMModule
 	# Concrete NIT source local classs by name
 	readable var _src_local_classes: Map[Symbol, MMSrcLocalClass]
 
-	init(c: MMContext, source: AModule, dir: MMDirectory, name: Symbol, filename: String)
+	init(c: MMContext, source: AModule, dir: MMDirectory, name: Symbol, loc: Location)
 	do
-		super(name, dir, c, filename)
+		super(name, dir, c, loc)
 		_node = source
 		_src_local_classes = new HashMap[Symbol, MMSrcLocalClass]
 	end
@@ -368,7 +368,7 @@ special Visitor
 	fun locate(n: nullable PNode): String
 	do
 		if n != null then return n.locate
-		return _module.filename
+		return _module.location.file
 	end
 
 	# Check conformity and display error

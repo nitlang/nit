@@ -511,7 +511,7 @@ redef class MMModule
 	# Compile module file for the current module
 	fun compile_local_table_to_c(v: GlobalCompilerVisitor)
 	do
-		v.add_instr("const char *LOCATE_{name} = \"{filename}\";")
+		v.add_instr("const char *LOCATE_{name} = \"{location.file}\";")
 
 		if v.tc.global or _local_table.is_empty then
 			return

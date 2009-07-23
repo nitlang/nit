@@ -47,7 +47,7 @@ redef class MMModule
 			files.add("{tc.compdir}/{m.name}._sep.c")
 			tc.info("Generating C code for module: {m.name}",2)
 			m.compile_separate_module(tc, ga)
-			var native_name = m.filename.strip_extension(".nit")
+			var native_name = m.location.file.strip_extension(".nit")
 			if (native_name + "_nit.h").file_exists then
 				includes.add("-I {native_name.dirname}")
 			end
@@ -110,7 +110,7 @@ redef class MMModule
 	do
 		var v = new GlobalCompilerVisitor(self, tc, ga)
 		v.add_decl("#include <nit_common.h>")
-		var native_name = filename.strip_extension(".nit")
+		var native_name = location.file.strip_extension(".nit")
 		native_name += ("_nit.h")
 		if native_name.file_exists then v.add_decl("#include <{native_name.basename("")}>")
 		declare_class_tables_to_c(v)
