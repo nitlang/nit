@@ -34,6 +34,54 @@ Usage: $e [options] modulenames
 END
 }
 
+# As argument: the pattern used for the file
+function process_result()
+{
+	# Result
+	pattern=$1
+	SAV=""
+	FAIL=""
+	if [ -r "sav/$pattern.sav" ]; then
+		diff -u "$pattern.res" "sav/$pattern.sav" > "$pattern.diff.sav.log"
+		if [ "$?" == 0 ]; then
+			SAV=OK
+		else
+			SAV=NOK
+		fi
+	fi
+	if [ -r "sav/$pattern.fail" ]; then
+		diff -u "$pattern.res" "sav/$pattern.fail" > "$pattern.diff.fail.log"
+		if [ "$?" == 0 ]; then
+			FAIL=OK
+		else
+			FAIL=NOK
+		fi
+	fi
+	if [ "x$SAV" = "xOK" ]; then
+		if [ "x$FAIL" = "x" ]; then
+			echo "[ok] $pattern.res"
+		else
+			echo "[ok] $pattern.res - but sav/$pattern.fail remains!"
+		fi
+		ok="$ok $pattern"
+	elif [ "x$FAIL" = "xOK" ]; then
+		echo "[fail] $pattern.res"
+		ok="$ok $pattern"
+	elif [ "x$SAV" = "xNOK" ]; then
+		echo "[======= fail $pattern.res sav/$pattern.sav =======]"
+		nok="$nok $ff"
+		echo "$ii" >> "$ERRLIST"
+	elif [ "x$FAIL" = "xNOK" ]; then
+		echo "[======= changed $pattern.res sav/$pattern.fail ======]"
+		nok="$nok $ff"
+		echo "$ii" >> "$ERRLIST"
+	else
+		echo "[=== no sav ===] $pattern.res"
+		nos="$nos $pattern"
+	fi
+}
+
+
 verbose=false
 stop=false
 while [ $stop = false ]; do
@@ -103,14 +151,11 @@ for ii in "$@"; do
 		if [ "$ERR" != 0 ]; then
 			echo -n "! "
 			cp "$ff.cmp.err" "$ff.res"
+			process_result $ff
 		elif [ -x "./$ff.bin" ]; then
 			echo -n ". "
 			# Execute
-			if [ -f "$f.args" ]; then
-				args=`cat "$f.args"`
-			else
-				args=""
-			fi
+			args=""
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
 				echo "./$ff.bin" $args
@@ -130,51 +175,43 @@ for ii in "$@"; do
 			if [ -s "$ff.err" ]; then
 				cat "$ff.err" >> "$ff.res"
 			fi
+			process_result $ff
+
+			if [ -f "$f.args" ]; then
+				fargs=$f.args
+				cptr=0
+				cat $fargs |
+				while read line; do
+					((cptr=cptr+1))
+					args=$line
+					fff=$ff"_args"$cptr
+					if [ "x$verbose" = "xtrue" ]; then
+						echo ""
+						echo "./$ff.bin" $args
+					fi
+					echo -n "==> args #"$cptr " "
+					if [ -f "$f.inputs" ]; then
+						"./$ff.bin" $args < "$f.inputs" > "$fff.res" 2>"$fff.err"
+					else
+						sh -c "./$ff.bin  ''$args > $fff.res 2>$fff.err"
+					fi
+					if [ "x$verbose" = "xtrue" ]; then
+						cat "$fff.res"
+						cat >&2 "$fff.err"
+					fi
+					if [ -f "$fff.write" ]; then
+						cat "$fff.write" >> "$fff.res"
+					fi
+					if [ -s "$fff.err" ]; then
+						cat "$fff.err" >> "$fff.res"
+					fi
+					process_result $fff
+				done
+			fi
 		else
 			echo -n "! "
 			echo "Compilation error" > "$ff.res"
-		fi
-
-		# Result
-		SAV=""
-		FAIL=""
-		if [ -r "sav/$ff.sav" ]; then
-			diff -u "$ff.res" "sav/$ff.sav" > "$ff.diff.sav.log"
-			if [ "$?" == 0 ]; then
-				SAV=OK
-			else
-				SAV=NOK
-			fi
-		fi
-		if [ -r "sav/$ff.fail" ]; then
-			diff -u "$ff.res" "sav/$ff.fail" > "$ff.diff.fail.log"
-			if [ "$?" == 0 ]; then
-				FAIL=OK
-			else
-				FAIL=NOK
-			fi
-		fi
-		if [ "x$SAV" = "xOK" ]; then
-			if [ "x$FAIL" = "x" ]; then
-				echo "[ok] $ff.res"
-			else
-				echo "[ok] $ff.res - but sav/$ff.fail remains!"
-			fi
-			ok="$ok $ff"
-		elif [ "x$FAIL" = "xOK" ]; then
-			echo "[fail] $ff.res"
-			ok="$ok $ff"
-		elif [ "x$SAV" = "xNOK" ]; then
-			echo "[======= fail $ff.res sav/$ff.sav =======]"
-			nok="$nok $ff"
-			echo "$ii" >> "$ERRLIST"
-		elif [ "x$FAIL" = "xNOK" ]; then
-			echo "[======= changed $ff.res sav/$ff.fail ======]"
-			nok="$nok $ff"
-			echo "$ii" >> "$ERRLIST"
-		else
-			echo "[=== no sav ===] $ff.res"
-			nos="$nos $ff"
+			process_result $ff
 		fi
 	done
 done

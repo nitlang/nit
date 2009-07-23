@@ -1,0 +1,5 @@
+Assert 'not_empty'  failed in abstract_collection::IndexedCollectionRead::(abstract_collection::Collection::first) (../lib/standard/abstract_collection.nit:292)
+,---- Stack trace -- - -  -
+| abstract_collection::IndexedCollectionRead::(abstract_collection::Collection::first) (../lib/standard/abstract_collection.nit:288)
+| shootout_pidigits::Sys::(kernel::Sys::main) (./shootout_pidigits.nit:138)
+`------------------- - -  -
