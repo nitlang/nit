@@ -21,26 +21,7 @@ package mmloader
 
 import metamodel
 import opts
-
-class Location
-	readable var _file: String
-	readable var _line_start: Int
-	readable var _line_end: Int
-	readable var _column_start: Int
-	readable var _column_end: Int
-
-	redef meth to_s: String do
-		if line_start == line_end then
-			if column_start == column_end then
-				return "{file}:{line_start},{column_start}"
-			else
-				return "{file}:{line_start},{column_start}--{column_end}"
-			end
-		else
-			return "{file}:{line_start},{column_start}--{line_end}:{column_end}"
-		end
-	end
-end
+import location
 
 # Global context for tools
 class ToolContext
