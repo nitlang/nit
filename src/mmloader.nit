@@ -23,9 +23,19 @@ import metamodel
 import opts
 import location
 
-private class Message
+class Message
+special Comparable
+	redef type OTHER: Message
+
 	readable attr _location: nullable Location
 	readable attr _text: String
+
+	redef fun <(other: OTHER): Bool do
+		if location == null then return true
+		if other.location == null then return false
+
+		return location.as(not null) < other.location.as(not null)
+	end
 end
 
 # Global context for tools
@@ -39,10 +49,13 @@ special MMContext
 
 	# Messages
 	var _messages: Array[Message] = new Array[Message]
+	var _message_sorter: ComparableSorter[Message] = new ComparableSorter[Message]
 
 	fun check_errors
 	do
 		if _messages.length > 0 then
+			_message_sorter.sort(_messages)
+
 			for m in _messages do
 				stderr.write("{m.text}\n")
 			end
