@@ -36,6 +36,37 @@ special Comparable
 
 	init with_file(f: String) do init(f,0,0,0,0)
 
+	redef fun ==(other: nullable Object): Bool do
+		if other == null then return false
+		if not other isa Location then return false
+
+		if other.file != file then return false
+		if other.line_start != line_start then return false
+		if other.line_end != line_end then return false
+		if other.column_start != column_start then return false
+		if other.column_end != column_end then return false
+
+		return true
+	end
+
+	fun located_in(loc: nullable Location): Bool do
+		if loc == null then return false
+
+		if line_start < loc.line_start then return false
+		if line_start > loc.line_end then return false
+
+		if line_end > loc.line_end then return false
+
+		if line_start == loc.line_start then
+			if column_start < loc.column_start then return false
+			if column_start > loc.column_end then return false
+		end
+
+		if line_end == loc.line_end and column_end > loc.column_end then return false
+
+		return true
+	end
+
 	redef fun to_s: String do
 		if line_start == line_end then
 			if column_start == column_end then
@@ -49,6 +80,10 @@ special Comparable
 	end
 
 	redef fun <(other: OTHER): Bool do
+		if self == other then return false
+		if self.located_in(other) then return true
+		if other.located_in(self) then return false
+
 		if line_start != other.line_start then return line_start < other.line_start
 		if column_start != other.column_start then return column_start < other.column_start
 		if line_end != other.line_end then return line_end < other.line_end
