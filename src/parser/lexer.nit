@@ -1244,29 +1244,33 @@ class Lexer
 
 		var goto_table = _goto_table[_state]
 		var accept = _accept_table[_state]
-		_text.clear
+		var text = _text
+		text.clear
 
 		while true do
 			var c = get_char
 
 			if c != -1 then
+				var cr = _cr
+				var line = _line
+				var pos = _pos
 				if c == 10 then
-					if _cr then
-						_cr = false
+					if cr then
+						cr = false
 					else
-						_line = _line + 1
-						_pos = 0
+						line = line + 1
+						pos = 0
 					end
 				else if c == 13 then
-					_line = _line + 1
-					_pos = 0
-					_cr = true
+					line = line + 1
+					pos = 0
+					cr = true
 				else
-					_pos = _pos + 1
-					_cr = false
+					pos = pos + 1
+					cr = false
 				end
 
-				_text.add(c.ascii)
+				text.add(c.ascii)
 
 				var first_loop = true # aka until
 				while dfa_state < -1 or first_loop do
@@ -1277,25 +1281,32 @@ class Lexer
 
 					dfa_state = -1
 
-					var tmp1 = goto_table[old_state]
+					var tmp0 = goto_table[old_state]
 					var low = 0
-					var high = tmp1.length - 1
+					var high = tmp0.length - 1
 
-					while low <= high do
-						var middle = (low + high) / 2
-						var tmp2 = tmp1[middle]
+					if high >= 0 then
+						var tmp1 = tmp0.intern_items
+						while low <= high do
+							var middle = (low + high) / 2
+							var tmp2 = tmp1[middle].intern_items
 
-						if c < tmp2[0] then
-							high = middle - 1
-						else if c > tmp2[1] then
-							low = middle + 1
-						else
-							dfa_state = tmp2[2]
-							low = high + 1 # aka break
+							if c < tmp2[0] then
+								high = middle - 1
+							else if c > tmp2[1] then
+								low = middle + 1
+							else
+								dfa_state = tmp2[2]
+								low = high + 1 # aka break
+							end
 						end
 					end
 					first_loop = false # aka until
 				end
+
+				_cr = cr
+				_line = line
+				_pos = pos
 			else
 				dfa_state = -1
 			end
@@ -1304,7 +1315,7 @@ class Lexer
 				if accept[dfa_state] != -1 then
 					accept_state = dfa_state
 					accept_token = accept[dfa_state]
-					accept_length = _text.length
+					accept_length = text.length
 					accept_pos = _pos
 					accept_line = _line
 				end
@@ -1319,7 +1330,7 @@ class Lexer
 					end
 					if accept_token == 1 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TEol.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -1328,7 +1339,7 @@ class Lexer
 					end
 					if accept_token == 2 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TComment.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -1401,7 +1412,7 @@ class Lexer
 					end
 					if accept_token == 11 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TKwmeth.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -1930,7 +1941,7 @@ class Lexer
 					end
 					if accept_token == 77 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TClassid.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -1939,7 +1950,7 @@ class Lexer
 					end
 					if accept_token == 78 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TId.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -1948,7 +1959,7 @@ class Lexer
 					end
 					if accept_token == 79 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TAttrid.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -1957,7 +1968,7 @@ class Lexer
 					end
 					if accept_token == 80 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TNumber.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -1966,7 +1977,7 @@ class Lexer
 					end
 					if accept_token == 81 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TFloat.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -1975,7 +1986,7 @@ class Lexer
 					end
 					if accept_token == 82 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TChar.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -1984,7 +1995,7 @@ class Lexer
 					end
 					if accept_token == 83 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TString.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -1993,7 +2004,7 @@ class Lexer
 					end
 					if accept_token == 84 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TStartString.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -2002,7 +2013,7 @@ class Lexer
 					end
 					if accept_token == 85 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TMidString.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -2011,7 +2022,7 @@ class Lexer
 					end
 					if accept_token == 86 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-	    					var token_text = _text.substring(0, accept_length)
+						var token_text = text.substring(0, accept_length)
 						var token = new TEndString.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
@@ -2020,8 +2031,8 @@ class Lexer
 					end
 				else
 					var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-					if _text.length > 0 then
-						var token = new PError.init_error("Unknown token: {_text}", location)
+					if text.length > 0 then
+						var token = new PError.init_error("Unknown token: {text}", location)
 						return token
 					else
 						var token = new EOF(location)
