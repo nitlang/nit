@@ -246,6 +246,16 @@ special ArrayCapable[E]
 		_items[index] = item
 	end
 
+	redef fun add(item)
+	do
+		var l = _length
+		if _capacity <= l then
+			enlarge(l + 1)
+		end
+		_length = l + 1
+		_items[l] = item
+	end
+
 	redef fun enlarge(cap)
 	do
 		var c = _capacity
