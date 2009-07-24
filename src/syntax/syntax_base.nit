@@ -287,12 +287,14 @@ class AbsSyntaxVisitor
 special Visitor
 	fun get_type_by_name(clsname: Symbol): MMType
 	do
+		if not _module.has_global_class_named(clsname) then _tc.fatal_error(_module.location, "Missing necessary class: \"{clsname}\"")
 		var cls = _module.class_by_name(clsname)
 		return cls.get_type
 	end
 
 	fun get_instantiated_type_by_name(clsname: Symbol, vtype: Array[MMType]): MMType
 	do
+		if not _module.has_global_class_named(clsname) then _tc.fatal_error(_module.location, "Missing necessary class: \"{clsname}\"")
 		var cls = _module.class_by_name(clsname)
 		return cls.get_instantiate_type(vtype)
 	end
