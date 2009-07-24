@@ -99,19 +99,18 @@ done
 # File where error tests are outputed
 # Old ERRLIST is backuped
 ERRLIST=${ERRLIST:-errlist}
+ERRLIST_TARGET=$ERRLIST
 
 if [ $# = 0 ]; then
 	usage;
 	exit
 fi
 
-# Backup and initiate new ERRLIST
+# Initiate new ERRLIST
 if [ "x$ERRLIST" = "x" ]; then
 	ERRLIST=/dev=null
 else
-	if [ -x "$ERRLIST" ]; then
-		mv "$ERRLIST" "${ERRLIST}.bak"
-	fi
+	ERRLIST=$ERRLIST.tmp
 	> "$ERRLIST"
 fi
 
@@ -224,6 +223,14 @@ if [ -n "$nok" ]; then
 fi
 if [ -n "$nos" ]; then
 	echo "no sav: $nos"
+fi
+
+# write $ERRLIST
+if [ "x$ERRLIST" != "x" ]; then
+	if [ -x "$ERRLIST_TARGET" ]; then
+		mv "$ERRLIST_TARGET" "${ERRLIST_TARGET}.bak"
+	fi
+	mv $ERRLIST $ERRLIST_TARGET
 fi
 
 if [ -n "$nok" ]; then
