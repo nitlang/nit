@@ -102,12 +102,12 @@ end
 class AEscapeExpr
 special PNode
 	# The associated escapable block
-	readable var _escapable_block: nullable EscapableBlock
+	readable var _escapable: nullable EscapableBlock
 
 	# The name of the keyword
 	fun kwname: String is abstract
 
-	# Compute, set and return the _abelable_node value
+	# Compute, set and return the associated escapable block
 	fun compute_escapable_block(lctx: EscapableContext): nullable EscapableBlock
 	do
 		var block: EscapableBlock
@@ -116,7 +116,7 @@ special PNode
 			return null
 		end
 		block = lctx.head
-		_escapable_block = block
+		_escapable = block
 		return block
 	end
 end

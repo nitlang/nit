@@ -338,6 +338,15 @@ special Visitor
 		return _module.type_none
 	end
 
+	fun get_method(recv: MMType, name: Symbol): MMMethod
+	do
+		if not recv.local_class.has_global_property_by_name(name) then
+			error(current_node, "Fatal Error: {recv} must have a property named {name}.")
+			exit(1)
+		end
+		return recv.local_class.select_method(name)
+	end
+
 	# The current module
 	readable var _module: MMSrcModule
 
@@ -493,6 +502,11 @@ redef class PClassdef
 	fun local_class: MMSrcLocalClass is abstract
 end
 
+redef class PPropdef
+	# Associated 'self' variable
+	fun self_var: ParamVariable is abstract
+end
+
 redef class AAttrPropdef
 	# Associated attribute (MM entity)
 	fun prop: MMSrcAttribute is abstract
@@ -512,9 +526,6 @@ end
 redef class AMethPropdef
 	# Associated method (MM entity)
 	fun method: MMMethSrcMethod is abstract
-
-	# Associated 'self' variable
-	fun self_var: ParamVariable is abstract
 end
 
 redef class ATypePropdef

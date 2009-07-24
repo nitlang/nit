@@ -159,11 +159,17 @@ redef class PClassdef
 	end
 end
 
+redef class PPropdef
+	redef fun self_var do return _self_var.as(not null)
+	var _self_var: nullable ParamVariable
+end
+
 redef class AAttrPropdef
 	redef fun accept_typing(v)
 	do
 		var old_var_ctx = v.variable_ctx
 		v.variable_ctx = old_var_ctx.sub(self)
+		_self_var = v.self_var
 		super
 		if n_expr != null then
 			v.check_conform_expr(n_expr.as(not null), prop.signature.return_type.as(not null))
@@ -173,8 +179,6 @@ redef class AAttrPropdef
 end
 
 redef class AMethPropdef
-	redef fun self_var do return _self_var.as(not null)
-	var _self_var: nullable ParamVariable
 	redef fun accept_typing(v)
 	do
 		var old_var_ctx = v.variable_ctx
@@ -201,6 +205,11 @@ redef class AConcreteInitPropdef
 		v.top_block = n_block
 		v.explicit_super_init_calls = explicit_super_init_calls
 		v.explicit_other_init_call = false
+		super
+	end
+
+	redef fun after_typing(v)
+	do
 		super
 		if v.explicit_other_init_call or method.global.intro != method then
 			# TODO: something?
@@ -312,6 +321,12 @@ redef class PExpr
 		return _stype.as(not null)
 	end
 	var _stype: nullable MMType
+
+	redef fun after_typing(v)
+	do
+		# Default behavior is to be happy
+		_is_typed = true
+	end
 
 	# Is the expression the implicit receiver
 	fun is_implicit_self: Bool do return false
@@ -439,6 +454,7 @@ redef class AAbortExpr
 	redef fun after_typing(v)
 	do
 		v.variable_ctx.unreash = true
+		_is_typed = true
 	end
 end
 
@@ -541,6 +557,7 @@ redef class AForExpr
 		_variable = va
 		v.variable_ctx.add(va)
 
+		# Process collection
 		v.enter_visit(n_expr)
 
 		if not v.check_conform_expr(n_expr, v.type_collection) then return
@@ -571,6 +588,7 @@ redef class AForExpr
 		if not n_expr.is_self then t = t.not_for_self
 		va.stype = t
 
+		# Body evaluation
 		if n_block != null then v.enter_visit(n_block)
 
 		# pop context
@@ -705,17 +723,28 @@ redef class AIfexprExpr
 	do
 		var old_var_ctx = v.variable_ctx
 
+		# Process condition
 		v.enter_visit(n_expr)
-		v.use_if_true_variable_ctx(n_expr)
-		v.enter_visit(n_then)
-		v.variable_ctx = old_var_ctx
-		v.use_if_false_variable_ctx(n_expr)
-		v.enter_visit(n_else)
-
 		v.check_conform_expr(n_expr, v.type_bool)
 
-		_stype = v.check_conform_multiexpr(null, [n_then, n_else])
-		_is_typed = _stype != null
+		# Prepare 'then' context
+		v.use_if_true_variable_ctx(n_expr)
+
+		# Process 'then'
+		v.enter_visit(n_then)
+
+		# Prepare 'else' context
+		v.variable_ctx = old_var_ctx
+		v.use_if_false_variable_ctx(n_expr)
+
+		# Process 'else'
+		v.enter_visit(n_else)
+
+		var stype = v.check_conform_multiexpr(null, [n_then, n_else])
+		if stype == null then return
+
+		_stype = stype
+		_is_typed = true
 	end
 end
 
@@ -731,12 +760,18 @@ redef class AOrExpr
 	redef fun accept_typing(v)
 	do
 		var old_var_ctx = v.variable_ctx
+		var stype = v.type_bool
+		_stype = stype
 
+		# Process left operand
 		v.enter_visit(n_expr)
+
+		# Prepare right operand context
 		v.use_if_false_variable_ctx(n_expr)
 
+		# Process right operand
 		v.enter_visit(n_expr2)
-		if n_expr2.if_false_variable_ctx != null then 
+		if n_expr2.if_false_variable_ctx != null then
 			_if_false_variable_ctx = n_expr2.if_false_variable_ctx
 		else
 			_if_false_variable_ctx = v.variable_ctx
@@ -744,9 +779,9 @@ redef class AOrExpr
 
 		v.variable_ctx = old_var_ctx
 
-		v.check_conform_expr(n_expr, v.type_bool)
-		v.check_conform_expr(n_expr2, v.type_bool)
-		_stype = v.type_bool
+		v.check_conform_expr(n_expr, stype)
+		v.check_conform_expr(n_expr2, stype)
+		_stype = stype
 		_is_typed = true
 	end
 end
@@ -755,12 +790,17 @@ redef class AAndExpr
 	redef fun accept_typing(v)
 	do
 		var old_var_ctx = v.variable_ctx
+		var stype = v.type_bool
 
+		# Process left operand
 		v.enter_visit(n_expr)
+
+		# Prepare right operand context
 		v.use_if_true_variable_ctx(n_expr)
 
+		# Process right operand
 		v.enter_visit(n_expr2)
-		if n_expr2.if_true_variable_ctx != null then 
+		if n_expr2.if_true_variable_ctx != null then
 			_if_true_variable_ctx = n_expr2.if_true_variable_ctx
 		else
 			_if_true_variable_ctx = v.variable_ctx
@@ -768,9 +808,9 @@ redef class AAndExpr
 
 		v.variable_ctx = old_var_ctx
 
-		v.check_conform_expr(n_expr, v.type_bool)
-		v.check_conform_expr(n_expr2, v.type_bool)
-		_stype = v.type_bool
+		v.check_conform_expr(n_expr, stype)
+		v.check_conform_expr(n_expr2, stype)
+		_stype = stype
 		_is_typed = true
 	end
 end
@@ -1110,10 +1150,12 @@ redef class AAbsAbsSendExpr
 		for c in cs do
 			if not c.is_optional then min_arity += 1
 		end
-		if cd != null then
-			if cs.length == 0 then
-				v.error(self, "Error: {name} does not require blocks.")
-			else if cd.length > cs.length or cd.length < min_arity then
+		var arity = 0
+		if cd != null then arity = cd.length
+		if cs.length > 0 then
+			if arity == 0 and min_arity > 0 then
+				v.error(self, "Error: {name} requires {cs.length} blocks.")
+			else if arity > cs.length or arity < min_arity then
 				v.error(self, "Error: {name} requires {cs.length} blocks, {cd.length} found.")
 			else
 				# Initialize the break list if a value is required for breaks (ie. if the method is a function)
@@ -1121,7 +1163,7 @@ redef class AAbsAbsSendExpr
 				if t != null then break_list = new Array[ABreakExpr]
 
 				# Process each closure definition
-				for i in [0..cd.length[ do
+				for i in [0..arity[ do
 					var csi = cs[i]
 					var cdi = cd[i]
 					var esc = new EscapableClosure(cdi, csi, break_list)
@@ -1135,8 +1177,8 @@ redef class AAbsAbsSendExpr
 					t = v.check_conform_multiexpr(t, break_list)
 				end
 			end
-		else if min_arity != 0 then
-			v.error(self, "Error: {name} requires {cs.length} blocks.")
+		else if arity != 0 then
+			v.error(self, "Error: {name} does not require blocks.")
 		end
 		return t
 	end
@@ -1449,23 +1491,21 @@ redef class ACallFormExpr
 			var name = n_id.to_symbol
 			var variable = v.variable_ctx[name]
 			if variable != null then
+				var n: PExpr
 				if variable isa ClosureVariable then
-					var n = new AClosureCallExpr.init_aclosurecallexpr(n_id, n_args, n_closure_defs)
-					replace_with(n)
+					n = new AClosureCallExpr.init_aclosurecallexpr(n_id, n_args, n_closure_defs)
 					n._variable = variable
-					n.after_typing(v)
-					return
 				else
 					if not n_args.is_empty then
 						v.error(self, "Error: {name} is variable, not a function.")
 						return
 					end
-					var vform = variable_create(variable)
-					vform._variable = variable
-					replace_with(vform)
-					vform.after_typing(v)
-					return
+					n = variable_create(variable)
+					n._variable = variable
 				end
+				replace_with(n)
+				n.after_typing(v)
+				return
 			end
 		end
 
