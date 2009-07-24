@@ -285,70 +285,82 @@ end
 # Visitor used during the syntax analysis
 class AbsSyntaxVisitor
 special Visitor
+	fun get_type_by_name(clsname: Symbol): MMType
+	do
+		var cls = _module.class_by_name(clsname)
+		return cls.get_type
+	end
+
+	fun get_instantiated_type_by_name(clsname: Symbol, vtype: Array[MMType]): MMType
+	do
+		var cls = _module.class_by_name(clsname)
+		return cls.get_instantiate_type(vtype)
+	end
+
 	# The root type Object
 	fun type_object: MMType
 	do
-		return _module.class_by_name(once ("Object".to_symbol)).get_type
+		return get_type_by_name(once ("Object".to_symbol))
 	end
 
 	# The primitive type Bool
 	fun type_bool: MMType
 	do
-		return _module.class_by_name(once ("Bool".to_symbol)).get_type
+		return get_type_by_name(once ("Bool".to_symbol))
 	end
 	
 	# The primitive type Int 
 	fun type_int: MMType
 	do
-		return _module.class_by_name(once ("Int".to_symbol)).get_type
+		return get_type_by_name(once ("Int".to_symbol))
 	end
 
 	# The primitive type Float
 	fun type_float: MMType
 	do
-		return _module.class_by_name(once ("Float".to_symbol)).get_type
+		return get_type_by_name(once ("Float".to_symbol))
 	end
 
 	# The primitive type Char
 	fun type_char: MMType
 	do
-		return _module.class_by_name(once ("Char".to_symbol)).get_type
+		return get_type_by_name(once ("Char".to_symbol))
 	end
 
 	# The primitive type String
 	fun type_string: MMType
 	do
-		return _module.class_by_name(once ("String".to_symbol)).get_type
+		return get_type_by_name(once ("String".to_symbol))
 	end
 
 	# The primitive type Collection[nullable Object]
 	fun type_collection: MMType
 	do
-		return _module.class_by_name(once ("Collection".to_symbol)).get_instantiate_type([type_object.as_nullable])
+		return get_instantiated_type_by_name(once ("Collection".to_symbol), [type_object.as_nullable])
 	end
 
 	# The primitive type NativeString
 	fun type_nativestring: MMType
 	do
-		return _module.class_by_name(once ("NativeString".to_symbol)).get_type
+		return get_type_by_name(once ("NativeString".to_symbol))
 	end
 
 	# The primitive type Array[?]
 	fun type_array(stype: MMType): MMType
 	do
-		return _module.class_by_name(once ("Array".to_symbol)).get_instantiate_type([stype])
+		return get_instantiated_type_by_name(once ("Array".to_symbol), [stype])
 	end
 
 	# The primitive type Discrete
 	fun type_discrete: MMType
 	do
-		return _module.class_by_name(once ("Discrete".to_symbol)).get_type
+		return get_type_by_name(once ("Discrete".to_symbol))
 	end
 
 	# The primitive type Range[?]
 	fun type_range(stype: MMType): MMType
 	do
-		return _module.class_by_name(once ("Range".to_symbol)).get_instantiate_type([stype])
+		return get_instantiated_type_by_name(once ("Range".to_symbol), [stype])
 	end
 
 	# The primitive type of null
