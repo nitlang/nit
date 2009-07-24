@@ -20,9 +20,6 @@
 # Set lang do default to avoid failed tests because of locale
 export LANG=C
 
-# The default nitc compiler
-[ -z "$NITC" ] && NITC=../bin/nitc
-
 usage()
 {
 	e=`basename "$0"`
@@ -81,6 +78,19 @@ function process_result()
 	fi
 }
 
+find_nitc()
+{
+	recent=`ls -t ../src/nitc ../src/nitc_[0-9] ../bin/nitc ../c_src/nitc 2>/dev/null | head -1`
+	if [[ "x$recent" == "x" ]]; then
+		echo 'Could not find nitc, aborting'
+		exit 1
+	fi
+	echo 'Using nitc from: '$recent
+	NITC=$recent
+}
+
+# The default nitc compiler
+[ -z "$NITC" ] && find_nitc
 
 verbose=false
 stop=false
