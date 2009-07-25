@@ -55,10 +55,10 @@ class Foo
 		show(1)
 		_a1 = new Integer(1)
 		show(2)
-		_a2 = new Integer(_a1.val + 1)
+		_a2 = new Integer(_a1.val + 1) #!alt3# #!alt4#
 		show(3)
 	end
-
+		#alt3#
 	init nop do end
 end
 
@@ -93,6 +93,11 @@ special Foo
 	end
 end
 
+class Baz
+special Foo
+end
+
+#alt4# var b2 = new Baz
 var f = new Foo
 var b = new Bar
 f.run

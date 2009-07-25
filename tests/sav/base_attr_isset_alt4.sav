@@ -1,0 +1,13 @@
+1
+false
+false
+2
+true
+false
+3
+true
+false
+Uninitialized attribute base_attr_isset_alt4::Foo::_a2 at base_attr_isset_alt4::Foo::init for Baz.
+,---- Stack trace -- - -  -
+| base_attr_isset_alt4::Sys::main (alt/base_attr_isset_alt4.nit:99)
+`------------------- - -  -
