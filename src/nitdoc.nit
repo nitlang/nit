@@ -247,6 +247,7 @@ special AbstractCompiler
 
 	init
 	do
+		keep_ast = true
 		super("nitdoc")
 		option_context.add_option(opt_dir)
 	end

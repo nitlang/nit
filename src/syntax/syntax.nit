@@ -76,6 +76,13 @@ redef class MMSrcModule
 
 		generate_icode(tc)
 		tc.check_errors
+
+		if not tc.keep_ast then clear_ast
 	end
 end
 
+redef class ToolContext
+	# Should the AST be preserved in source modules after syntax processing?
+	# Default is false.
+	readable writable var _keep_ast: Bool = false
+end

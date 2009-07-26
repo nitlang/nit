@@ -24,7 +24,12 @@ import mmloader
 class MMSrcModule
 special MMModule
 	# A source module can locate AST nodes of related MM entities
+	# Once a source module AST is no more needed, _nodes is set to null
+	# See ToolContext::keep_ast property in syntax.nit for details
 	var _nodes: nullable HashMap[Object, nullable PNode] = new HashMap[Object, nullable PNode]
+
+	# Release the AST
+	fun clear_ast do _nodes = null
 
 	# The related AST node
 	fun node: AModule do return nodes(self).as(AModule)
