@@ -149,6 +149,7 @@ class ICodeBuilder
 			return reg
 		end
 
+		if args.first.stype.is_nullable then add_null_reciever_check(args.first)
 		var rtype = prop.signature.return_type
 		if rtype != null then
 			return expr(icall, rtype)

@@ -1149,6 +1149,7 @@ redef class AAttrExpr
 	redef fun generate_icode(v)
 	do
 		var e = v.generate_expr(n_expr)
+		if n_expr.stype.is_nullable then v.add_null_reciever_check(e)
 		return v.add_attr_read(prop, e)
 	end
 end
@@ -1157,6 +1158,7 @@ redef class AAttrAssignExpr
 	redef fun generate_icode(v)
 	do
 		var e = v.generate_expr(n_expr)
+		if n_expr.stype.is_nullable then v.add_null_reciever_check(e)
 		var e2 = v.generate_expr(n_value)
 		v.stmt(new IAttrWrite(prop, e, e2))
 		return null
@@ -1166,6 +1168,7 @@ redef class AAttrReassignExpr
 	redef fun generate_icode(v)
 	do
 		var e1 = v.generate_expr(n_expr)
+		if n_expr.stype.is_nullable then v.add_null_reciever_check(e1)
 		var e2 = v.expr(new IAttrRead(prop, e1), attr_type)
 		var e3 = v.generate_expr(n_value)
 		var e4 = v.expr(new ICall(assign_method, [e2, e3]), attr_type)
@@ -1178,6 +1181,7 @@ redef class AIssetAttrExpr
 	redef fun generate_icode(v)
 	do
 		var e = v.generate_expr(n_expr)
+		if n_expr.stype.is_nullable then v.add_null_reciever_check(e)
 		return v.expr(new IAttrIsset(prop, e), stype)
 	end
 end
@@ -1249,6 +1253,7 @@ redef class ASendReassignExpr
 	redef fun generate_icode(v)
 	do
 		var recv = v.generate_expr(n_expr)
+		if n_expr.stype.is_nullable then v.add_null_reciever_check(recv)
 		var args = new Array[IRegister]
 		args.add(recv)
 		generate_icode_for_arguments_in(v, args)

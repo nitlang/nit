@@ -1,0 +1,16 @@
+I
+true
+true
+true
+true
+B
+true
+true
+true
+true
+Reciever is null in base_primitive_null_alt2::A::init (alt/base_primitive_null_alt2.nit:43)
+,---- Stack trace -- - -  -
+| base_primitive_null_alt2::A::init (alt/base_primitive_null_alt2.nit:24)
+| new A base_primitive_null_alt2::A::init (alt/base_primitive_null_alt2.nit:24)
+| base_primitive_null_alt2::Sys::(kernel::Sys::main) (alt/base_primitive_null_alt2.nit:56)
+`------------------- - -  -

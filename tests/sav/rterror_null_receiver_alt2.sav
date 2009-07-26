@@ -1,0 +1,6 @@
+true
+false
+Reciever is null in rterror_null_receiver_alt2::Sys::(kernel::Sys::main) (alt/rterror_null_receiver_alt2.nit:27)
+,---- Stack trace -- - -  -
+| rterror_null_receiver_alt2::Sys::(kernel::Sys::main) (alt/rterror_null_receiver_alt2.nit:23)
+`------------------- - -  -
