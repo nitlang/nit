@@ -23,8 +23,11 @@ import mmloader
 # Concrete NIT source module
 class MMSrcModule
 special MMModule
+	# A source module can locate AST nodes of related MM entities
+	var _nodes: nullable HashMap[Object, nullable PNode] = new HashMap[Object, nullable PNode]
+
 	# The related AST node
-	readable var _node: AModule
+	fun node: AModule do return nodes(self).as(AModule)
 
 	# Concrete NIT source local classs by name
 	readable var _src_local_classes: Map[Symbol, MMSrcLocalClass]
@@ -32,9 +35,26 @@ special MMModule
 	init(c: MMContext, source: AModule, dir: MMDirectory, name: Symbol, loc: Location)
 	do
 		super(name, dir, c, loc)
-		_node = source
+		nodes(self) = source
 		_src_local_classes = new HashMap[Symbol, MMSrcLocalClass]
 	end
+
+	redef fun nodes(o: Object): nullable PNode
+	do
+		if _nodes != null and _nodes.has_key(o) then return _nodes[o] else return null
+	end
+	redef fun nodes=(o: Object, n: nullable PNode)
+	do
+		assert not _nodes.has_key(o)
+		_nodes[o] = n
+	end
+end
+
+redef class MMModule
+	# The AST node of some entity
+	private fun nodes(o: Object): nullable PNode do return null
+	# The AST node of some entity
+	private fun nodes=(o: Object, n: nullable PNode) do abort
 end
 
 redef class MMGlobalClass
@@ -60,7 +80,7 @@ end
 class MMSrcLocalClass
 special MMConcreteClass
 	# The first related AST node (if any)
-	readable var _node: nullable PClassdef
+	fun node: nullable PClassdef do return module.nodes(self).as(nullable PClassdef)
 
 	# Concrete NIT source generic formal parameter by name
 	readable var _formal_dict: Map[Symbol, MMTypeFormalParameter] = new HashMap[Symbol, MMTypeFormalParameter]
@@ -71,7 +91,7 @@ special MMConcreteClass
 	init(mod: MMSrcModule, n: Symbol, cla: nullable PClassdef, a: Int)
 	do
 		super(mod, n, a)
-		_node = cla
+		mod.nodes(self) = cla
 		_src_local_properties = new HashMap[Symbol, MMLocalProperty]
 	end
 end
@@ -110,11 +130,11 @@ end
 # Concrete NIT source attribute
 class MMSrcAttribute
 special MMAttribute
-	redef readable var _node: AAttrPropdef
+	redef fun node: nullable AAttrPropdef do return module.nodes(self).as(nullable AAttrPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
 		super(name, cla)
-		_node = n
+		cla.module.nodes(self) = n
 	end
 end
 
@@ -128,11 +148,11 @@ end
 # Concrete NIT source method for an automatic accesor
 class MMAttrImplementationMethod
 special MMSrcMethod
-	redef readable var _node: AAttrPropdef
+	redef fun node: nullable AAttrPropdef do return module.nodes(self).as(nullable AAttrPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
 		super(name, cla)
-		_node = n
+		cla.module.nodes(self) = n
 	end
 end
 
@@ -160,11 +180,11 @@ special MMSrcMethod
 	redef readable var _is_init: Bool
 	redef readable var _is_intern: Bool
 	redef readable var _is_abstract: Bool
-	redef readable var _node: nullable AMethPropdef
+	redef fun node: nullable AMethPropdef do return module.nodes(self).as(nullable AMethPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: nullable AMethPropdef)
 	do
 		super(name, cla)
-		_node = n
+		cla.module.nodes(self) = n
 		_is_init = node isa AConcreteInitPropdef
 		_is_intern = node isa AInternMethPropdef
 		_is_abstract = node isa ADeferredMethPropdef
@@ -175,11 +195,9 @@ end
 class MMSrcTypeProperty
 special MMLocalProperty
 special MMTypeProperty
-	redef readable var _node: ATypePropdef
 	init(name: Symbol, cla: MMLocalClass, n: ATypePropdef)
 	do
 		super(name, cla)
-		_node = n
 	end
 end
 
