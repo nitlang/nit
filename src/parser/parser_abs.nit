@@ -172,6 +172,9 @@ end
 class TKwisset
 special Token
 end
+class TKwlabel
+special Token
+end
 class TOpar
 special Token
 end
@@ -301,6 +304,7 @@ class ASignature special Prod end
 class AParam special Prod end
 class AClosureDecl special Prod end
 class AType special Prod end
+class ALabel special Prod end
 class AExpr special Prod end
 class AAssignOp special Prod end
 class AClosureDef special Prod end
@@ -579,6 +583,11 @@ special AType
     readable writable var _n_id: TClassid
     readable writable var _n_types: List[AType] = new List[AType]
 end
+class ALabel
+special ALabel
+    readable writable var _n_kwlabel: TKwlabel
+    readable writable var _n_id: TId
+end
 class ABlockExpr
 special AExpr
     readable writable var _n_expr: List[AExpr] = new List[AExpr]
@@ -599,6 +608,7 @@ end
 class ABreakExpr
 special AExpr
     readable writable var _n_kwbreak: TKwbreak
+    readable writable var _n_label: nullable ALabel = null
     readable writable var _n_expr: nullable AExpr = null
 end
 class AAbortExpr
@@ -608,12 +618,14 @@ end
 class AContinueExpr
 special AExpr
     readable writable var _n_kwcontinue: TKwcontinue
+    readable writable var _n_label: nullable ALabel = null
     readable writable var _n_expr: nullable AExpr = null
 end
 class ADoExpr
 special AExpr
     readable writable var _n_kwdo: TKwdo
     readable writable var _n_block: nullable AExpr = null
+    readable writable var _n_label: nullable ALabel = null
 end
 class AIfExpr
 special AExpr
@@ -637,6 +649,7 @@ special AExpr
     readable writable var _n_expr: AExpr
     readable writable var _n_kwdo: TKwdo
     readable writable var _n_block: nullable AExpr = null
+    readable writable var _n_label: nullable ALabel = null
 end
 class AForExpr
 special AExpr
@@ -645,6 +658,7 @@ special AExpr
     readable writable var _n_expr: AExpr
     readable writable var _n_kwdo: TKwdo
     readable writable var _n_block: nullable AExpr = null
+    readable writable var _n_label: nullable ALabel = null
 end
 class AAssertExpr
 special AExpr
@@ -966,6 +980,7 @@ special AClosureDef
     readable writable var _n_id: List[TId] = new List[TId]
     readable writable var _n_kwdo: TKwdo
     readable writable var _n_expr: nullable AExpr = null
+    readable writable var _n_label: nullable ALabel = null
 end
 class AQualified
 special AQualified

@@ -189,6 +189,9 @@ end
 class TKwisset
 special Token
 end
+class TKwlabel
+special Token
+end
 class TOpar
 special Token
 end
@@ -553,6 +556,11 @@ special Prod
     readable writable var _n_id: TClassid
     readable writable var _n_types: List[AType] = new List[AType]
 end
+class ALabel
+special Prod
+    readable writable var _n_kwlabel: TKwlabel
+    readable writable var _n_id: TId
+end
 class AExpr special Prod end
 class ABlockExpr
 special AExpr
@@ -571,8 +579,13 @@ special AExpr
     readable writable var _n_kwreturn: TKwreturn
     readable writable var _n_expr: nullable AExpr = null
 end
+class ALabelable
+special Prod
+    readable writable var _n_label: nullable ALabel = null
+end
 class ABreakExpr
 special AExpr
+special ALabelable
     readable writable var _n_kwbreak: TKwbreak
     readable writable var _n_expr: nullable AExpr = null
 end
@@ -582,11 +595,13 @@ special AExpr
 end
 class AContinueExpr
 special AExpr
+special ALabelable
     readable writable var _n_kwcontinue: TKwcontinue
     readable writable var _n_expr: nullable AExpr = null
 end
 class ADoExpr
 special AExpr
+special ALabelable
     readable writable var _n_kwdo: TKwdo
     readable writable var _n_block: nullable AExpr = null
 end
@@ -608,6 +623,7 @@ special AExpr
 end
 class AWhileExpr
 special AExpr
+special ALabelable
     readable writable var _n_kwwhile:  TKwwhile
     readable writable var _n_expr: AExpr
     readable writable var _n_kwdo: TKwdo
@@ -615,6 +631,7 @@ special AExpr
 end
 class AForExpr
 special AExpr
+special ALabelable
     readable writable var _n_kwfor: TKwfor
     readable writable var _n_id: TId
     readable writable var _n_expr: AExpr
@@ -909,7 +926,7 @@ special AAssignOp
     readable writable var _n_minuseq: TMinuseq
 end
 class AClosureDef
-special Prod
+special ALabelable
     readable writable var _n_kwwith: TKwwith
     readable writable var _n_id: List[TId] = new List[TId]
     readable writable var _n_kwdo: TKwdo

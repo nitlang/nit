@@ -4120,6 +4120,68 @@ redef class AType
 	end
     end
 end
+redef class ALabel
+    redef fun n_kwlabel=(n)
+    do
+        _n_kwlabel = n
+	n.parent = self
+    end
+    redef fun n_id=(n)
+    do
+        _n_id = n
+	n.parent = self
+    end
+
+    private init empty_init do end
+
+    init init_alabel (
+            n_kwlabel: nullable TKwlabel ,
+            n_id: nullable TId 
+    )
+    do
+        empty_init
+        _n_kwlabel = n_kwlabel.as(not null)
+	n_kwlabel.parent = self
+        _n_id = n_id.as(not null)
+	n_id.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_kwlabel == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwlabel
+                _n_kwlabel = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_id == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TId
+                _n_id = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_kwlabel)
+        v.enter_visit(_n_id)
+    end
+
+    redef fun visit_all_reverse(v: Visitor)
+    do
+        v.enter_visit(_n_kwlabel)
+        v.enter_visit(_n_id)
+    end
+end
 redef class ABlockExpr
 
     private init empty_init do end
@@ -4392,6 +4454,13 @@ redef class ABreakExpr
         _n_kwbreak = n
 	n.parent = self
     end
+    redef fun n_label=(n)
+    do
+        _n_label = n
+        if n != null then
+	    n.parent = self
+        end
+    end
     redef fun n_expr=(n)
     do
         _n_expr = n
@@ -4404,12 +4473,17 @@ redef class ABreakExpr
 
     init init_abreakexpr (
             n_kwbreak: nullable TKwbreak ,
+            n_label: nullable ALabel ,
             n_expr: nullable AExpr 
     )
     do
         empty_init
         _n_kwbreak = n_kwbreak.as(not null)
 	n_kwbreak.parent = self
+        _n_label = n_label
+	if n_label != null then
+		n_label.parent = self
+	end
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -4428,6 +4502,16 @@ redef class ABreakExpr
             end
             return
 	end
+        if _n_label == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa ALabel
+                _n_label = new_child
+	    else
+		_n_label = null
+            end
+            return
+	end
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -4443,6 +4527,9 @@ redef class ABreakExpr
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwbreak)
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
+        end
         if _n_expr != null then
             v.enter_visit(_n_expr.as(not null))
         end
@@ -4451,6 +4538,9 @@ redef class ABreakExpr
     redef fun visit_all_reverse(v: Visitor)
     do
         v.enter_visit(_n_kwbreak)
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
+        end
         if _n_expr != null then
             v.enter_visit(_n_expr.as(not null))
         end
@@ -4504,6 +4594,13 @@ redef class AContinueExpr
         _n_kwcontinue = n
 	n.parent = self
     end
+    redef fun n_label=(n)
+    do
+        _n_label = n
+        if n != null then
+	    n.parent = self
+        end
+    end
     redef fun n_expr=(n)
     do
         _n_expr = n
@@ -4516,12 +4613,17 @@ redef class AContinueExpr
 
     init init_acontinueexpr (
             n_kwcontinue: nullable TKwcontinue ,
+            n_label: nullable ALabel ,
             n_expr: nullable AExpr 
     )
     do
         empty_init
         _n_kwcontinue = n_kwcontinue.as(not null)
 	n_kwcontinue.parent = self
+        _n_label = n_label
+	if n_label != null then
+		n_label.parent = self
+	end
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -4540,6 +4642,16 @@ redef class AContinueExpr
             end
             return
 	end
+        if _n_label == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa ALabel
+                _n_label = new_child
+	    else
+		_n_label = null
+            end
+            return
+	end
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -4555,6 +4667,9 @@ redef class AContinueExpr
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwcontinue)
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
+        end
         if _n_expr != null then
             v.enter_visit(_n_expr.as(not null))
         end
@@ -4563,6 +4678,9 @@ redef class AContinueExpr
     redef fun visit_all_reverse(v: Visitor)
     do
         v.enter_visit(_n_kwcontinue)
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
+        end
         if _n_expr != null then
             v.enter_visit(_n_expr.as(not null))
         end
@@ -4581,12 +4699,20 @@ redef class ADoExpr
 	    n.parent = self
         end
     end
+    redef fun n_label=(n)
+    do
+        _n_label = n
+        if n != null then
+	    n.parent = self
+        end
+    end
 
     private init empty_init do end
 
     init init_adoexpr (
             n_kwdo: nullable TKwdo ,
-            n_block: nullable AExpr 
+            n_block: nullable AExpr ,
+            n_label: nullable ALabel 
     )
     do
         empty_init
@@ -4595,6 +4721,10 @@ redef class ADoExpr
         _n_block = n_block
 	if n_block != null then
 		n_block.parent = self
+	end
+        _n_label = n_label
+	if n_label != null then
+		n_label.parent = self
 	end
     end
 
@@ -4620,6 +4750,16 @@ redef class ADoExpr
             end
             return
 	end
+        if _n_label == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa ALabel
+                _n_label = new_child
+	    else
+		_n_label = null
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -4628,6 +4768,9 @@ redef class ADoExpr
         if _n_block != null then
             v.enter_visit(_n_block.as(not null))
         end
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
+        end
     end
 
     redef fun visit_all_reverse(v: Visitor)
@@ -4635,6 +4778,9 @@ redef class ADoExpr
         v.enter_visit(_n_kwdo)
         if _n_block != null then
             v.enter_visit(_n_block.as(not null))
+        end
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
         end
     end
 end
@@ -4921,6 +5067,13 @@ redef class AWhileExpr
 	    n.parent = self
         end
     end
+    redef fun n_label=(n)
+    do
+        _n_label = n
+        if n != null then
+	    n.parent = self
+        end
+    end
 
     private init empty_init do end
 
@@ -4928,7 +5081,8 @@ redef class AWhileExpr
             n_kwwhile: nullable TKwwhile ,
             n_expr: nullable AExpr ,
             n_kwdo: nullable TKwdo ,
-            n_block: nullable AExpr 
+            n_block: nullable AExpr ,
+            n_label: nullable ALabel 
     )
     do
         empty_init
@@ -4941,6 +5095,10 @@ redef class AWhileExpr
         _n_block = n_block
 	if n_block != null then
 		n_block.parent = self
+	end
+        _n_label = n_label
+	if n_label != null then
+		n_label.parent = self
 	end
     end
 
@@ -4986,6 +5144,16 @@ redef class AWhileExpr
             end
             return
 	end
+        if _n_label == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa ALabel
+                _n_label = new_child
+	    else
+		_n_label = null
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -4996,6 +5164,9 @@ redef class AWhileExpr
         if _n_block != null then
             v.enter_visit(_n_block.as(not null))
         end
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
+        end
     end
 
     redef fun visit_all_reverse(v: Visitor)
@@ -5005,6 +5176,9 @@ redef class AWhileExpr
         v.enter_visit(_n_kwdo)
         if _n_block != null then
             v.enter_visit(_n_block.as(not null))
+        end
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
         end
     end
 end
@@ -5036,6 +5210,13 @@ redef class AForExpr
 	    n.parent = self
         end
     end
+    redef fun n_label=(n)
+    do
+        _n_label = n
+        if n != null then
+	    n.parent = self
+        end
+    end
 
     private init empty_init do end
 
@@ -5044,7 +5225,8 @@ redef class AForExpr
             n_id: nullable TId ,
             n_expr: nullable AExpr ,
             n_kwdo: nullable TKwdo ,
-            n_block: nullable AExpr 
+            n_block: nullable AExpr ,
+            n_label: nullable ALabel 
     )
     do
         empty_init
@@ -5059,6 +5241,10 @@ redef class AForExpr
         _n_block = n_block
 	if n_block != null then
 		n_block.parent = self
+	end
+        _n_label = n_label
+	if n_label != null then
+		n_label.parent = self
 	end
     end
 
@@ -5114,6 +5300,16 @@ redef class AForExpr
             end
             return
 	end
+        if _n_label == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa ALabel
+                _n_label = new_child
+	    else
+		_n_label = null
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -5125,6 +5321,9 @@ redef class AForExpr
         if _n_block != null then
             v.enter_visit(_n_block.as(not null))
         end
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
+        end
     end
 
     redef fun visit_all_reverse(v: Visitor)
@@ -5135,6 +5334,9 @@ redef class AForExpr
         v.enter_visit(_n_kwdo)
         if _n_block != null then
             v.enter_visit(_n_block.as(not null))
+        end
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
         end
     end
 end
@@ -9261,6 +9463,13 @@ redef class AClosureDef
 	    n.parent = self
         end
     end
+    redef fun n_label=(n)
+    do
+        _n_label = n
+        if n != null then
+	    n.parent = self
+        end
+    end
 
     private init empty_init do end
 
@@ -9268,7 +9477,8 @@ redef class AClosureDef
             n_kwwith: nullable TKwwith ,
             n_id: Collection[Object] , # Should be Collection[TId]
             n_kwdo: nullable TKwdo ,
-            n_expr: nullable AExpr 
+            n_expr: nullable AExpr ,
+            n_label: nullable ALabel 
     )
     do
         empty_init
@@ -9284,6 +9494,10 @@ redef class AClosureDef
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
+	end
+        _n_label = n_label
+	if n_label != null then
+		n_label.parent = self
 	end
     end
 
@@ -9331,6 +9545,16 @@ redef class AClosureDef
             end
             return
 	end
+        if _n_label == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa ALabel
+                _n_label = new_child
+	    else
+		_n_label = null
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -9342,6 +9566,9 @@ redef class AClosureDef
         v.enter_visit(_n_kwdo)
         if _n_expr != null then
             v.enter_visit(_n_expr.as(not null))
+        end
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
         end
     end
 
@@ -9358,6 +9585,9 @@ redef class AClosureDef
         v.enter_visit(_n_kwdo)
         if _n_expr != null then
             v.enter_visit(_n_expr.as(not null))
+        end
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
         end
     end
 end

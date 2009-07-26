@@ -106,6 +106,7 @@ kwas = 'as';
 kwwith = 'with';
 kwnullable = 'nullable';
 kwisset = 'isset';
+kwlabel = 'label';
 
 opar = '(';
 cpar = ')';
@@ -293,11 +294,11 @@ typing {-> type}
 	= column no type {-> type};
 
 /* STATMENTS *****************************************************************/
-stmtso~withelse {-> expr?}
-	= {oneline} stmt~withelse {-> stmt~withelse.expr}
-	| {block} n stmts [n2]:n kwend {-> stmts.expr}
+stmtso~withelse~withend {-> expr?}
+	= {block} n stmts [n2]:n kwend {-> stmts.expr}
 	| {emptyblock} n kwend {-> New expr.block([])}
 	| {emptyoneline} kwend {-> New expr.block([])}
+!withend| {oneline} stmt~withelse {-> stmt~withelse.expr}
 	;
 stmts {-> expr}
 	= stmt stmts_tail* {-> New expr.block([stmt.expr, stmts_tail.expr])};
@@ -307,9 +308,9 @@ stmt~withelse {-> expr}
 	= {vardecl} vardecl~withelse {-> vardecl~withelse.expr}
 	| {assign} assignment~withelse {-> assignment~withelse.expr}
 	| {return} kwreturn expr_final~withelse? {-> New expr.return(kwreturn, expr_final~withelse.expr)}
-	| {break} kwbreak expr_final~withelse? {-> New expr.break(kwbreak, expr_final~withelse.expr)}
+	| {break} kwbreak label? expr_final~withelse? {-> New expr.break(kwbreak, label, expr_final~withelse.expr)}
 	| {abort} kwabort {-> New expr.abort(kwabort)}
-	| {continue} kwcontinue expr_final~withelse? {-> New expr.continue(kwcontinue, expr_final~withelse.expr)}
+	| {continue} kwcontinue label? expr_final~withelse? {-> New expr.continue(kwcontinue, label, expr_final~withelse.expr)}
 	| {do} do~withelse {-> do~withelse.expr}
 	| {if} if~withelse {-> if~withelse.expr}
 	| {while} while~withelse {-> while~withelse.expr}
@@ -320,18 +321,21 @@ stmt~withelse {-> expr}
 	| {init} recv kwinit args_nopar {-> New expr.init(recv.expr, kwinit, [args_nopar.expr])}
 	;
 
+label= kwlabel id;
+
 closure_defs~withelse {-> closure_def*}
 	= {one} closure_def_last~withelse {-> [closure_def_last~withelse.closure_def]}
 	| closure_def closure_defs~withelse {-> [closure_def, closure_defs~withelse.closure_def]}
 	;
 
 closure_def_last~withelse {-> closure_def}
-	= kwwith idlist? kwdo stmtso~withelse {-> New closure_def(kwwith, [idlist.id], kwdo, stmtso~withelse.expr)}
+	= kwwith idlist? kwdo stmtso~withelse_withend label? {-> New closure_def(kwwith, [idlist.id], kwdo, stmtso~withelse_withend.expr, label)}
+	| {noend} kwwith idlist? kwdo stmt~withelse {-> New closure_def(kwwith, [idlist.id], kwdo, stmt~withelse.expr, Null)}
 	;
 
 closure_def {-> closure_def}
-	= kwwith idlist? kwdo n stmts [n2]:n {-> New closure_def(kwwith, [idlist.id], kwdo, stmts.expr)}
-	| {empty} kwwith idlist? kwdo n {-> New closure_def(kwwith, [idlist.id], kwdo, Null)}
+	= kwwith idlist? kwdo n stmts [n2]:n {-> New closure_def(kwwith, [idlist.id], kwdo, stmts.expr, Null)}
+	| {empty} kwwith idlist? kwdo n {-> New closure_def(kwwith, [idlist.id], kwdo, Null, Null)}
 	;
 
 vardecl~withelse{-> expr}
@@ -353,7 +357,8 @@ assign_op
 	;
 
 do~withelse {-> expr}
-	= kwdo stmtso~withelse {-> New expr.do(kwdo, stmtso~withelse.expr)}
+	= kwdo stmtso~withelse_withend label? {-> New expr.do(kwdo, stmtso~withelse_withend.expr, label)}
+	| {noend} kwdo stmt~withelse {-> New expr.do(kwdo, stmt~withelse.expr, Null)}
 	;
 
 if~withelse {-> expr}
@@ -368,10 +373,14 @@ elsepartblock {-> expr?}
 	;
 
 while~withelse {-> expr}
-	= kwwhile no expr [n2]:no kwdo stmtso~withelse {-> New expr.while(kwwhile, expr, kwdo, stmtso~withelse.expr)};
- 
+	= kwwhile no expr [n2]:no kwdo stmtso~withelse_withend label? {-> New expr.while(kwwhile, expr, kwdo, stmtso~withelse_withend.expr, label)}
+	| {noend} kwwhile no expr [n2]:no kwdo stmt~withelse {-> New expr.while(kwwhile, expr, kwdo, stmt~withelse.expr, Null)}
+	;
+
 for~withelse {-> expr}
-	= kwfor no id [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso~withelse {-> New expr.for(kwfor, id, expr, kwdo, stmtso~withelse.expr)};
+	= kwfor no id [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso~withelse_withend label? {-> New expr.for(kwfor, id, expr, kwdo, stmtso~withelse_withend.expr, label)}
+	| {noend} kwfor no id [n2]:no kwin [n3]:no expr [n4]:no kwdo stmt~withelse {-> New expr.for(kwfor, id, expr, kwdo, stmt~withelse.expr, Null)}
+	;
 
 assert~withelse {-> expr}
 	= kwassert assertid? expr_final~withelse {-> New expr.assert(kwassert, assertid.id, expr_final~withelse.expr)};
@@ -588,17 +597,19 @@ closure_decl = kwwith kwbreak? id signature expr?
 
 type	= kwnullable? [id]:classid [types]:type*;
 
+label = kwlabel id;
+
 expr	= {block} expr* 
 	| {vardecl} kwvar id type? assign? expr? 
 	| {return} kwreturn expr? 
-	| {break} kwbreak expr?
+	| {break} kwbreak label? expr?
 	| {abort} kwabort
-	| {continue} kwcontinue expr?
-	| {do} kwdo [block]:expr? 
+	| {continue} kwcontinue label? expr?
+	| {do} kwdo [block]:expr? label?
 	| {if} kwif expr [then]:expr? [else]:expr? 
 	| {ifexpr} kwif expr kwthen [then]:expr kwelse [else]:expr
-	| {while} kwwhile expr kwdo [block]:expr? 
-	| {for} kwfor id expr kwdo [block]:expr? 
+	| {while} kwwhile expr kwdo [block]:expr? label?
+	| {for} kwfor id expr kwdo [block]:expr? label?
 	| {assert} kwassert id? expr 
 	| {once} kwonce expr 
 	| {send} expr 
@@ -665,7 +676,7 @@ assign_op
 	;
 
 closure_def
-	= kwwith id* kwdo expr?
+	= kwwith id* kwdo expr? label?
 	;
 
 qualified = id* classid? ;
