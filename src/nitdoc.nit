@@ -492,15 +492,13 @@ special MMEntity
 	redef fun doc
 	do
 		var n = node
-		if n == null or not node isa PPropdef then
+		if n == null or not n isa APropdef then
 			return null
 		end
-		assert n isa PPropdef
 		var d = n.n_doc
 		if d == null then
 			return null
 		end
-		assert d isa ADoc
 		if d.n_comment.is_empty then
 			return null
 		else
@@ -660,12 +658,10 @@ redef class MMSrcModule
 			return null
 		end
 		var np = n.n_packagedecl
-		assert np isa APackagedecl
 		var d = np.n_doc
 		if d == null then
 			return null
 		end
-		assert d isa ADoc
 		if d.n_comment.is_empty then
 			return null
 		else
@@ -1077,12 +1073,10 @@ redef class MMSrcLocalClass
 		if not n isa AStdClassdef then
 			return null
 		end
-		assert n isa AStdClassdef
 		var d = n.n_doc
 		if d == null then
 			return null
 		end
-		assert d isa ADoc
 		if d.n_comment.is_empty then
 			return null
 		else

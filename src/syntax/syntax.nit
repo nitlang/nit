@@ -37,11 +37,11 @@ special ModuleLoader
 		var node_tree = parser.parse
 		if node_tree.n_base == null then
 			var err = node_tree.n_eof
-			assert err isa PError
+			assert err isa AError
 			context.fatal_error(err.location, err.message)
 		end
 		var node_module = node_tree.n_base
-		assert node_module isa AModule
+		assert node_module != null
 		var module_loc = new Location.with_file(filename)
 		var module = new MMSrcModule(context, node_module, dir, name, module_loc)
 		return module

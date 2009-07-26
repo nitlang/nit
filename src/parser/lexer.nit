@@ -1146,7 +1146,7 @@ redef class EOF
     end
 end
 
-redef class PError
+redef class AError
     readable writable var _message: String 
     
     init init_error(message: String, loc: Location)
@@ -2032,7 +2032,7 @@ class Lexer
 				else
 					var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 					if text.length > 0 then
-						var token = new PError.init_error("Unknown token: {text}", location)
+						var token = new AError.init_error("Unknown token: {text}", location)
 						return token
 					else
 						var token = new EOF(location)

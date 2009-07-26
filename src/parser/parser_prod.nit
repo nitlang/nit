@@ -5,21 +5,21 @@ package parser_prod
 import lexer
 intrude import parser_nodes
 
-redef class PNode
+redef class ANode
 	# Parent of the node in the AST
-	readable writable var _parent: nullable PNode
+	readable writable var _parent: nullable ANode
 
 	# Remove a child from the AST
-	fun remove_child(child: PNode)
+	fun remove_child(child: ANode)
 	do
 		replace_child(child, null)
 	end
 
 	# Replace a child with an other node in the AST
-	fun replace_child(old_child: PNode, new_child: nullable PNode) is abstract
+	fun replace_child(old_child: ANode, new_child: nullable ANode) is abstract
 
 	# Replace itself with an other node in the AST
-	fun replace_with(node: PNode)
+	fun replace_with(node: ANode)
 	do
 		if (_parent != null) then
 			_parent.replace_child(self, node)
@@ -48,7 +48,7 @@ end
 redef class Token
 	redef fun visit_all(v: Visitor) do end
 	redef fun visit_all_reverse(v: Visitor) do end
-	redef fun replace_child(old_child: PNode, new_child: nullable PNode) do end
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode) do end
 end
 
 redef class Prod
@@ -58,7 +58,7 @@ redef class Prod
 	# The last token of the production node
 	readable writable var _last_token: nullable Token
 
-	redef fun replace_with(n: PNode)
+	redef fun replace_with(n: ANode)
         do
                 super
                 assert n isa Prod
@@ -72,12 +72,12 @@ end
 class Visitor
 	# What the visitor do when a node is visited
         # Concrete visitors should redefine this method.
-        protected fun visit(e: nullable PNode) is abstract
+        protected fun visit(e: nullable ANode) is abstract
 
         # Ask the visitor to visit a given node.
         # Usually automatically called by visit_all* methods.
 	# This methos should not be redefined
-        fun enter_visit(e: nullable PNode)
+        fun enter_visit(e: nullable ANode)
 	do
 		var old = _current_node
 		_current_node = e
@@ -86,7 +86,7 @@ class Visitor
 	end
 
 	# The current visited node
-	readable var _current_node: nullable PNode = null
+	readable var _current_node: nullable ANode = null
 end
 
 redef class AModule
@@ -101,9 +101,9 @@ redef class AModule
     private init empty_init do end
 
     init init_amodule (
-            n_packagedecl: nullable PPackagedecl ,
-            n_imports: Collection[Object] , # Should be Collection[PImport]
-            n_classdefs: Collection[Object]  # Should be Collection[PClassdef]
+            n_packagedecl: nullable APackagedecl ,
+            n_imports: Collection[Object] , # Should be Collection[AImport]
+            n_classdefs: Collection[Object]  # Should be Collection[AClassdef]
     )
     do
         empty_init
@@ -112,23 +112,23 @@ redef class AModule
 		n_packagedecl.parent = self
 	end
 	for n in n_imports do
-		assert n isa PImport
+		assert n isa AImport
 		_n_imports.add(n)
 		n.parent = self
 	end
 	for n in n_classdefs do
-		assert n isa PClassdef
+		assert n isa AClassdef
 		_n_classdefs.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_packagedecl == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PPackagedecl
+		assert new_child isa APackagedecl
                 _n_packagedecl = new_child
 	    else
 		_n_packagedecl = null
@@ -138,7 +138,7 @@ redef class AModule
         for i in [0.._n_imports.length[ do
             if _n_imports[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PImport
+		    assert new_child isa AImport
                     _n_imports[i] = new_child
                     new_child.parent = self
                 else
@@ -150,7 +150,7 @@ redef class AModule
         for i in [0.._n_classdefs.length[ do
             if _n_classdefs[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PClassdef
+		    assert new_child isa AClassdef
                     _n_classdefs[i] = new_child
                     new_child.parent = self
                 else
@@ -217,7 +217,7 @@ redef class APackagedecl
     private init empty_init do end
 
     init init_apackagedecl (
-            n_doc: nullable PDoc ,
+            n_doc: nullable ADoc ,
             n_kwpackage: nullable TKwpackage ,
             n_id: nullable TId 
     )
@@ -233,12 +233,12 @@ redef class APackagedecl
 	n_id.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_doc == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PDoc
+		assert new_child isa ADoc
                 _n_doc = new_child
 	    else
 		_n_doc = null
@@ -305,7 +305,7 @@ redef class AStdImport
     private init empty_init do end
 
     init init_astdimport (
-            n_visibility: nullable PVisibility ,
+            n_visibility: nullable AVisibility ,
             n_kwimport: nullable TKwimport ,
             n_id: nullable TId 
     )
@@ -319,12 +319,12 @@ redef class AStdImport
 	n_id.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -387,7 +387,7 @@ redef class ANoImport
     private init empty_init do end
 
     init init_anoimport (
-            n_visibility: nullable PVisibility ,
+            n_visibility: nullable AVisibility ,
             n_kwimport: nullable TKwimport ,
             n_kwend: nullable TKwend 
     )
@@ -401,12 +401,12 @@ redef class ANoImport
 	n_kwend.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -458,7 +458,7 @@ redef class APublicVisibility
         empty_init
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
     end
 
@@ -488,7 +488,7 @@ redef class APrivateVisibility
 	n_kwprivate.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwprivate == old_child then
             if new_child != null then
@@ -530,7 +530,7 @@ redef class AProtectedVisibility
 	n_kwprotected.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwprotected == old_child then
             if new_child != null then
@@ -572,7 +572,7 @@ redef class AIntrudeVisibility
 	n_kwintrude.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwintrude == old_child then
             if new_child != null then
@@ -632,14 +632,14 @@ redef class AStdClassdef
     private init empty_init do end
 
     init init_astdclassdef (
-            n_doc: nullable PDoc ,
+            n_doc: nullable ADoc ,
             n_kwredef: nullable TKwredef ,
-            n_visibility: nullable PVisibility ,
-            n_classkind: nullable PClasskind ,
+            n_visibility: nullable AVisibility ,
+            n_classkind: nullable AClasskind ,
             n_id: nullable TClassid ,
-            n_formaldefs: Collection[Object] , # Should be Collection[PFormaldef]
-            n_superclasses: Collection[Object] , # Should be Collection[PSuperclass]
-            n_propdefs: Collection[Object]  # Should be Collection[PPropdef]
+            n_formaldefs: Collection[Object] , # Should be Collection[AFormaldef]
+            n_superclasses: Collection[Object] , # Should be Collection[ASuperclass]
+            n_propdefs: Collection[Object]  # Should be Collection[APropdef]
     )
     do
         empty_init
@@ -660,28 +660,28 @@ redef class AStdClassdef
 		n_id.parent = self
 	end
 	for n in n_formaldefs do
-		assert n isa PFormaldef
+		assert n isa AFormaldef
 		_n_formaldefs.add(n)
 		n.parent = self
 	end
 	for n in n_superclasses do
-		assert n isa PSuperclass
+		assert n isa ASuperclass
 		_n_superclasses.add(n)
 		n.parent = self
 	end
 	for n in n_propdefs do
-		assert n isa PPropdef
+		assert n isa APropdef
 		_n_propdefs.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_doc == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PDoc
+		assert new_child isa ADoc
                 _n_doc = new_child
 	    else
 		_n_doc = null
@@ -701,7 +701,7 @@ redef class AStdClassdef
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -711,7 +711,7 @@ redef class AStdClassdef
         if _n_classkind == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PClasskind
+		assert new_child isa AClasskind
                 _n_classkind = new_child
 	    else
 		abort
@@ -731,7 +731,7 @@ redef class AStdClassdef
         for i in [0.._n_formaldefs.length[ do
             if _n_formaldefs[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PFormaldef
+		    assert new_child isa AFormaldef
                     _n_formaldefs[i] = new_child
                     new_child.parent = self
                 else
@@ -743,7 +743,7 @@ redef class AStdClassdef
         for i in [0.._n_superclasses.length[ do
             if _n_superclasses[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PSuperclass
+		    assert new_child isa ASuperclass
                     _n_superclasses[i] = new_child
                     new_child.parent = self
                 else
@@ -755,7 +755,7 @@ redef class AStdClassdef
         for i in [0.._n_propdefs.length[ do
             if _n_propdefs[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PPropdef
+		    assert new_child isa APropdef
                     _n_propdefs[i] = new_child
                     new_child.parent = self
                 else
@@ -831,23 +831,23 @@ redef class ATopClassdef
     private init empty_init do end
 
     init init_atopclassdef (
-            n_propdefs: Collection[Object]  # Should be Collection[PPropdef]
+            n_propdefs: Collection[Object]  # Should be Collection[APropdef]
     )
     do
         empty_init
 	for n in n_propdefs do
-		assert n isa PPropdef
+		assert n isa APropdef
 		_n_propdefs.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         for i in [0.._n_propdefs.length[ do
             if _n_propdefs[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PPropdef
+		    assert new_child isa APropdef
                     _n_propdefs[i] = new_child
                     new_child.parent = self
                 else
@@ -881,23 +881,23 @@ redef class AMainClassdef
     private init empty_init do end
 
     init init_amainclassdef (
-            n_propdefs: Collection[Object]  # Should be Collection[PPropdef]
+            n_propdefs: Collection[Object]  # Should be Collection[APropdef]
     )
     do
         empty_init
 	for n in n_propdefs do
-		assert n isa PPropdef
+		assert n isa APropdef
 		_n_propdefs.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         for i in [0.._n_propdefs.length[ do
             if _n_propdefs[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PPropdef
+		    assert new_child isa APropdef
                     _n_propdefs[i] = new_child
                     new_child.parent = self
                 else
@@ -944,7 +944,7 @@ redef class AConcreteClasskind
 	n_kwclass.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwclass == old_child then
             if new_child != null then
@@ -994,7 +994,7 @@ redef class AAbstractClasskind
 	n_kwclass.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwabstract == old_child then
             if new_child != null then
@@ -1048,7 +1048,7 @@ redef class AInterfaceClasskind
 	n_kwinterface.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwinterface == old_child then
             if new_child != null then
@@ -1090,7 +1090,7 @@ redef class AUniversalClasskind
 	n_kwuniversal.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwuniversal == old_child then
             if new_child != null then
@@ -1132,7 +1132,7 @@ redef class AFormaldef
 
     init init_aformaldef (
             n_id: nullable TClassid ,
-            n_type: nullable PType 
+            n_type: nullable AType 
     )
     do
         empty_init
@@ -1144,7 +1144,7 @@ redef class AFormaldef
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -1159,7 +1159,7 @@ redef class AFormaldef
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PType
+		assert new_child isa AType
                 _n_type = new_child
 	    else
 		_n_type = null
@@ -1200,7 +1200,7 @@ redef class ASuperclass
 
     init init_asuperclass (
             n_kwspecial: nullable TKwspecial ,
-            n_type: nullable PType 
+            n_type: nullable AType 
     )
     do
         empty_init
@@ -1210,7 +1210,7 @@ redef class ASuperclass
 	n_type.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwspecial == old_child then
             if new_child != null then
@@ -1225,7 +1225,7 @@ redef class ASuperclass
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PType
+		assert new_child isa AType
                 _n_type = new_child
 	    else
 		abort
@@ -1317,16 +1317,16 @@ redef class AAttrPropdef
     private init empty_init do end
 
     init init_aattrpropdef (
-            n_doc: nullable PDoc ,
-            n_readable: nullable PAble ,
-            n_writable: nullable PAble ,
+            n_doc: nullable ADoc ,
+            n_readable: nullable AAble ,
+            n_writable: nullable AAble ,
             n_kwredef: nullable TKwredef ,
-            n_visibility: nullable PVisibility ,
+            n_visibility: nullable AVisibility ,
             n_kwattr: nullable TKwattr ,
             n_kwvar: nullable TKwvar ,
             n_id: nullable TAttrid ,
-            n_type: nullable PType ,
-            n_expr: nullable PExpr 
+            n_type: nullable AType ,
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -1368,12 +1368,12 @@ redef class AAttrPropdef
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_doc == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PDoc
+		assert new_child isa ADoc
                 _n_doc = new_child
 	    else
 		_n_doc = null
@@ -1383,7 +1383,7 @@ redef class AAttrPropdef
         if _n_readable == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PAble
+		assert new_child isa AAble
                 _n_readable = new_child
 	    else
 		_n_readable = null
@@ -1393,7 +1393,7 @@ redef class AAttrPropdef
         if _n_writable == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PAble
+		assert new_child isa AAble
                 _n_writable = new_child
 	    else
 		_n_writable = null
@@ -1413,7 +1413,7 @@ redef class AAttrPropdef
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -1453,7 +1453,7 @@ redef class AAttrPropdef
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PType
+		assert new_child isa AType
                 _n_type = new_child
 	    else
 		_n_type = null
@@ -1463,7 +1463,7 @@ redef class AAttrPropdef
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		_n_expr = null
@@ -1566,11 +1566,11 @@ redef class AMethPropdef
     private init empty_init do end
 
     init init_amethpropdef (
-            n_doc: nullable PDoc ,
+            n_doc: nullable ADoc ,
             n_kwredef: nullable TKwredef ,
-            n_visibility: nullable PVisibility ,
-            n_methid: nullable PMethid ,
-            n_signature: nullable PSignature 
+            n_visibility: nullable AVisibility ,
+            n_methid: nullable AMethid ,
+            n_signature: nullable ASignature 
     )
     do
         empty_init
@@ -1590,12 +1590,12 @@ redef class AMethPropdef
 	n_signature.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_doc == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PDoc
+		assert new_child isa ADoc
                 _n_doc = new_child
 	    else
 		_n_doc = null
@@ -1615,7 +1615,7 @@ redef class AMethPropdef
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -1625,7 +1625,7 @@ redef class AMethPropdef
         if _n_methid == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PMethid
+		assert new_child isa AMethid
                 _n_methid = new_child
 	    else
 		abort
@@ -1635,7 +1635,7 @@ redef class AMethPropdef
         if _n_signature == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PSignature
+		assert new_child isa ASignature
                 _n_signature = new_child
 	    else
 		abort
@@ -1709,12 +1709,12 @@ redef class ADeferredMethPropdef
     private init empty_init do end
 
     init init_adeferredmethpropdef (
-            n_doc: nullable PDoc ,
+            n_doc: nullable ADoc ,
             n_kwredef: nullable TKwredef ,
-            n_visibility: nullable PVisibility ,
+            n_visibility: nullable AVisibility ,
             n_kwmeth: nullable TKwmeth ,
-            n_methid: nullable PMethid ,
-            n_signature: nullable PSignature 
+            n_methid: nullable AMethid ,
+            n_signature: nullable ASignature 
     )
     do
         empty_init
@@ -1736,12 +1736,12 @@ redef class ADeferredMethPropdef
 	n_signature.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_doc == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PDoc
+		assert new_child isa ADoc
                 _n_doc = new_child
 	    else
 		_n_doc = null
@@ -1761,7 +1761,7 @@ redef class ADeferredMethPropdef
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -1781,7 +1781,7 @@ redef class ADeferredMethPropdef
         if _n_methid == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PMethid
+		assert new_child isa AMethid
                 _n_methid = new_child
 	    else
 		abort
@@ -1791,7 +1791,7 @@ redef class ADeferredMethPropdef
         if _n_signature == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PSignature
+		assert new_child isa ASignature
                 _n_signature = new_child
 	    else
 		abort
@@ -1867,12 +1867,12 @@ redef class AInternMethPropdef
     private init empty_init do end
 
     init init_ainternmethpropdef (
-            n_doc: nullable PDoc ,
+            n_doc: nullable ADoc ,
             n_kwredef: nullable TKwredef ,
-            n_visibility: nullable PVisibility ,
+            n_visibility: nullable AVisibility ,
             n_kwmeth: nullable TKwmeth ,
-            n_methid: nullable PMethid ,
-            n_signature: nullable PSignature 
+            n_methid: nullable AMethid ,
+            n_signature: nullable ASignature 
     )
     do
         empty_init
@@ -1894,12 +1894,12 @@ redef class AInternMethPropdef
 	n_signature.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_doc == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PDoc
+		assert new_child isa ADoc
                 _n_doc = new_child
 	    else
 		_n_doc = null
@@ -1919,7 +1919,7 @@ redef class AInternMethPropdef
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -1939,7 +1939,7 @@ redef class AInternMethPropdef
         if _n_methid == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PMethid
+		assert new_child isa AMethid
                 _n_methid = new_child
 	    else
 		abort
@@ -1949,7 +1949,7 @@ redef class AInternMethPropdef
         if _n_signature == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PSignature
+		assert new_child isa ASignature
                 _n_signature = new_child
 	    else
 		abort
@@ -2032,12 +2032,12 @@ redef class AExternMethPropdef
     private init empty_init do end
 
     init init_aexternmethpropdef (
-            n_doc: nullable PDoc ,
+            n_doc: nullable ADoc ,
             n_kwredef: nullable TKwredef ,
-            n_visibility: nullable PVisibility ,
+            n_visibility: nullable AVisibility ,
             n_kwmeth: nullable TKwmeth ,
-            n_methid: nullable PMethid ,
-            n_signature: nullable PSignature ,
+            n_methid: nullable AMethid ,
+            n_signature: nullable ASignature ,
             n_extern: nullable TString 
     )
     do
@@ -2064,12 +2064,12 @@ redef class AExternMethPropdef
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_doc == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PDoc
+		assert new_child isa ADoc
                 _n_doc = new_child
 	    else
 		_n_doc = null
@@ -2089,7 +2089,7 @@ redef class AExternMethPropdef
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -2109,7 +2109,7 @@ redef class AExternMethPropdef
         if _n_methid == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PMethid
+		assert new_child isa AMethid
                 _n_methid = new_child
 	    else
 		abort
@@ -2119,7 +2119,7 @@ redef class AExternMethPropdef
         if _n_signature == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PSignature
+		assert new_child isa ASignature
                 _n_signature = new_child
 	    else
 		abort
@@ -2218,13 +2218,13 @@ redef class AConcreteMethPropdef
     private init empty_init do end
 
     init init_aconcretemethpropdef (
-            n_doc: nullable PDoc ,
+            n_doc: nullable ADoc ,
             n_kwredef: nullable TKwredef ,
-            n_visibility: nullable PVisibility ,
+            n_visibility: nullable AVisibility ,
             n_kwmeth: nullable TKwmeth ,
-            n_methid: nullable PMethid ,
-            n_signature: nullable PSignature ,
-            n_block: nullable PExpr 
+            n_methid: nullable AMethid ,
+            n_signature: nullable ASignature ,
+            n_block: nullable AExpr 
     )
     do
         empty_init
@@ -2250,12 +2250,12 @@ redef class AConcreteMethPropdef
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_doc == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PDoc
+		assert new_child isa ADoc
                 _n_doc = new_child
 	    else
 		_n_doc = null
@@ -2275,7 +2275,7 @@ redef class AConcreteMethPropdef
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -2295,7 +2295,7 @@ redef class AConcreteMethPropdef
         if _n_methid == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PMethid
+		assert new_child isa AMethid
                 _n_methid = new_child
 	    else
 		abort
@@ -2305,7 +2305,7 @@ redef class AConcreteMethPropdef
         if _n_signature == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PSignature
+		assert new_child isa ASignature
                 _n_signature = new_child
 	    else
 		abort
@@ -2315,7 +2315,7 @@ redef class AConcreteMethPropdef
         if _n_block == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_block = new_child
 	    else
 		_n_block = null
@@ -2406,13 +2406,13 @@ redef class AConcreteInitPropdef
     private init empty_init do end
 
     init init_aconcreteinitpropdef (
-            n_doc: nullable PDoc ,
+            n_doc: nullable ADoc ,
             n_kwredef: nullable TKwredef ,
-            n_visibility: nullable PVisibility ,
+            n_visibility: nullable AVisibility ,
             n_kwinit: nullable TKwinit ,
-            n_methid: nullable PMethid ,
-            n_signature: nullable PSignature ,
-            n_block: nullable PExpr 
+            n_methid: nullable AMethid ,
+            n_signature: nullable ASignature ,
+            n_block: nullable AExpr 
     )
     do
         empty_init
@@ -2440,12 +2440,12 @@ redef class AConcreteInitPropdef
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_doc == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PDoc
+		assert new_child isa ADoc
                 _n_doc = new_child
 	    else
 		_n_doc = null
@@ -2465,7 +2465,7 @@ redef class AConcreteInitPropdef
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -2485,7 +2485,7 @@ redef class AConcreteInitPropdef
         if _n_methid == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PMethid
+		assert new_child isa AMethid
                 _n_methid = new_child
 	    else
 		_n_methid = null
@@ -2495,7 +2495,7 @@ redef class AConcreteInitPropdef
         if _n_signature == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PSignature
+		assert new_child isa ASignature
                 _n_signature = new_child
 	    else
 		abort
@@ -2505,7 +2505,7 @@ redef class AConcreteInitPropdef
         if _n_block == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_block = new_child
 	    else
 		_n_block = null
@@ -2572,7 +2572,7 @@ redef class AMainMethPropdef
 
     init init_amainmethpropdef (
             n_kwredef: nullable TKwredef ,
-            n_block: nullable PExpr 
+            n_block: nullable AExpr 
     )
     do
         empty_init
@@ -2586,7 +2586,7 @@ redef class AMainMethPropdef
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwredef == old_child then
             if new_child != null then
@@ -2601,7 +2601,7 @@ redef class AMainMethPropdef
         if _n_block == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_block = new_child
 	    else
 		_n_block = null
@@ -2669,12 +2669,12 @@ redef class ATypePropdef
     private init empty_init do end
 
     init init_atypepropdef (
-            n_doc: nullable PDoc ,
+            n_doc: nullable ADoc ,
             n_kwredef: nullable TKwredef ,
-            n_visibility: nullable PVisibility ,
+            n_visibility: nullable AVisibility ,
             n_kwtype: nullable TKwtype ,
             n_id: nullable TClassid ,
-            n_type: nullable PType 
+            n_type: nullable AType 
     )
     do
         empty_init
@@ -2696,12 +2696,12 @@ redef class ATypePropdef
 	n_type.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_doc == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PDoc
+		assert new_child isa ADoc
                 _n_doc = new_child
 	    else
 		_n_doc = null
@@ -2721,7 +2721,7 @@ redef class ATypePropdef
         if _n_visibility == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PVisibility
+		assert new_child isa AVisibility
                 _n_visibility = new_child
 	    else
 		abort
@@ -2751,7 +2751,7 @@ redef class ATypePropdef
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PType
+		assert new_child isa AType
                 _n_type = new_child
 	    else
 		abort
@@ -2818,7 +2818,7 @@ redef class AReadAble
 	n_kwreadable.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwredef == old_child then
             if new_child != null then
@@ -2888,7 +2888,7 @@ redef class AWriteAble
 	n_kwwritable.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwredef == old_child then
             if new_child != null then
@@ -2946,7 +2946,7 @@ redef class AIdMethid
 	n_id.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -2988,7 +2988,7 @@ redef class APlusMethid
 	n_plus.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_plus == old_child then
             if new_child != null then
@@ -3030,7 +3030,7 @@ redef class AMinusMethid
 	n_minus.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_minus == old_child then
             if new_child != null then
@@ -3072,7 +3072,7 @@ redef class AStarMethid
 	n_star.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_star == old_child then
             if new_child != null then
@@ -3114,7 +3114,7 @@ redef class ASlashMethid
 	n_slash.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_slash == old_child then
             if new_child != null then
@@ -3156,7 +3156,7 @@ redef class APercentMethid
 	n_percent.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_percent == old_child then
             if new_child != null then
@@ -3198,7 +3198,7 @@ redef class AEqMethid
 	n_eq.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_eq == old_child then
             if new_child != null then
@@ -3240,7 +3240,7 @@ redef class ANeMethid
 	n_ne.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_ne == old_child then
             if new_child != null then
@@ -3282,7 +3282,7 @@ redef class ALeMethid
 	n_le.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_le == old_child then
             if new_child != null then
@@ -3324,7 +3324,7 @@ redef class AGeMethid
 	n_ge.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_ge == old_child then
             if new_child != null then
@@ -3366,7 +3366,7 @@ redef class ALtMethid
 	n_lt.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_lt == old_child then
             if new_child != null then
@@ -3408,7 +3408,7 @@ redef class AGtMethid
 	n_gt.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_gt == old_child then
             if new_child != null then
@@ -3458,7 +3458,7 @@ redef class ABraMethid
 	n_cbra.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_obra == old_child then
             if new_child != null then
@@ -3512,7 +3512,7 @@ redef class AStarshipMethid
 	n_starship.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_starship == old_child then
             if new_child != null then
@@ -3562,7 +3562,7 @@ redef class AAssignMethid
 	n_assign.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -3632,7 +3632,7 @@ redef class ABraassignMethid
 	n_assign.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_obra == old_child then
             if new_child != null then
@@ -3692,14 +3692,14 @@ redef class ASignature
     private init empty_init do end
 
     init init_asignature (
-            n_params: Collection[Object] , # Should be Collection[PParam]
-            n_type: nullable PType ,
-            n_closure_decls: Collection[Object]  # Should be Collection[PClosureDecl]
+            n_params: Collection[Object] , # Should be Collection[AParam]
+            n_type: nullable AType ,
+            n_closure_decls: Collection[Object]  # Should be Collection[AClosureDecl]
     )
     do
         empty_init
 	for n in n_params do
-		assert n isa PParam
+		assert n isa AParam
 		_n_params.add(n)
 		n.parent = self
 	end
@@ -3708,18 +3708,18 @@ redef class ASignature
 		n_type.parent = self
 	end
 	for n in n_closure_decls do
-		assert n isa PClosureDecl
+		assert n isa AClosureDecl
 		_n_closure_decls.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         for i in [0.._n_params.length[ do
             if _n_params[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PParam
+		    assert new_child isa AParam
                     _n_params[i] = new_child
                     new_child.parent = self
                 else
@@ -3731,7 +3731,7 @@ redef class ASignature
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PType
+		assert new_child isa AType
                 _n_type = new_child
 	    else
 		_n_type = null
@@ -3741,7 +3741,7 @@ redef class ASignature
         for i in [0.._n_closure_decls.length[ do
             if _n_closure_decls[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PClosureDecl
+		    assert new_child isa AClosureDecl
                     _n_closure_decls[i] = new_child
                     new_child.parent = self
                 else
@@ -3811,7 +3811,7 @@ redef class AParam
 
     init init_aparam (
             n_id: nullable TId ,
-            n_type: nullable PType ,
+            n_type: nullable AType ,
             n_dotdotdot: nullable TDotdotdot 
     )
     do
@@ -3828,7 +3828,7 @@ redef class AParam
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -3843,7 +3843,7 @@ redef class AParam
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PType
+		assert new_child isa AType
                 _n_type = new_child
 	    else
 		_n_type = null
@@ -3921,8 +3921,8 @@ redef class AClosureDecl
             n_kwwith: nullable TKwwith ,
             n_kwbreak: nullable TKwbreak ,
             n_id: nullable TId ,
-            n_signature: nullable PSignature ,
-            n_expr: nullable PExpr 
+            n_signature: nullable ASignature ,
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -3942,7 +3942,7 @@ redef class AClosureDecl
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwwith == old_child then
             if new_child != null then
@@ -3977,7 +3977,7 @@ redef class AClosureDecl
         if _n_signature == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PSignature
+		assert new_child isa ASignature
                 _n_signature = new_child
 	    else
 		abort
@@ -3987,7 +3987,7 @@ redef class AClosureDecl
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		_n_expr = null
@@ -4041,7 +4041,7 @@ redef class AType
     init init_atype (
             n_kwnullable: nullable TKwnullable ,
             n_id: nullable TClassid ,
-            n_types: Collection[Object]  # Should be Collection[PType]
+            n_types: Collection[Object]  # Should be Collection[AType]
     )
     do
         empty_init
@@ -4052,13 +4052,13 @@ redef class AType
         _n_id = n_id.as(not null)
 	n_id.parent = self
 	for n in n_types do
-		assert n isa PType
+		assert n isa AType
 		_n_types.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwnullable == old_child then
             if new_child != null then
@@ -4083,7 +4083,7 @@ redef class AType
         for i in [0.._n_types.length[ do
             if _n_types[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PType
+		    assert new_child isa AType
                     _n_types[i] = new_child
                     new_child.parent = self
                 else
@@ -4125,23 +4125,23 @@ redef class ABlockExpr
     private init empty_init do end
 
     init init_ablockexpr (
-            n_expr: Collection[Object]  # Should be Collection[PExpr]
+            n_expr: Collection[Object]  # Should be Collection[AExpr]
     )
     do
         empty_init
 	for n in n_expr do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_expr.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         for i in [0.._n_expr.length[ do
             if _n_expr[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_expr[i] = new_child
                     new_child.parent = self
                 else
@@ -4208,9 +4208,9 @@ redef class AVardeclExpr
     init init_avardeclexpr (
             n_kwvar: nullable TKwvar ,
             n_id: nullable TId ,
-            n_type: nullable PType ,
+            n_type: nullable AType ,
             n_assign: nullable TAssign ,
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -4232,7 +4232,7 @@ redef class AVardeclExpr
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwvar == old_child then
             if new_child != null then
@@ -4257,7 +4257,7 @@ redef class AVardeclExpr
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PType
+		assert new_child isa AType
                 _n_type = new_child
 	    else
 		_n_type = null
@@ -4277,7 +4277,7 @@ redef class AVardeclExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		_n_expr = null
@@ -4334,7 +4334,7 @@ redef class AReturnExpr
 
     init init_areturnexpr (
             n_kwreturn: nullable TKwreturn ,
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -4346,7 +4346,7 @@ redef class AReturnExpr
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwreturn == old_child then
             if new_child != null then
@@ -4361,7 +4361,7 @@ redef class AReturnExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		_n_expr = null
@@ -4404,7 +4404,7 @@ redef class ABreakExpr
 
     init init_abreakexpr (
             n_kwbreak: nullable TKwbreak ,
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -4416,7 +4416,7 @@ redef class ABreakExpr
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwbreak == old_child then
             if new_child != null then
@@ -4431,7 +4431,7 @@ redef class ABreakExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		_n_expr = null
@@ -4474,7 +4474,7 @@ redef class AAbortExpr
 	n_kwabort.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwabort == old_child then
             if new_child != null then
@@ -4516,7 +4516,7 @@ redef class AContinueExpr
 
     init init_acontinueexpr (
             n_kwcontinue: nullable TKwcontinue ,
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -4528,7 +4528,7 @@ redef class AContinueExpr
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwcontinue == old_child then
             if new_child != null then
@@ -4543,7 +4543,7 @@ redef class AContinueExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		_n_expr = null
@@ -4586,7 +4586,7 @@ redef class ADoExpr
 
     init init_adoexpr (
             n_kwdo: nullable TKwdo ,
-            n_block: nullable PExpr 
+            n_block: nullable AExpr 
     )
     do
         empty_init
@@ -4598,7 +4598,7 @@ redef class ADoExpr
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwdo == old_child then
             if new_child != null then
@@ -4613,7 +4613,7 @@ redef class ADoExpr
         if _n_block == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_block = new_child
 	    else
 		_n_block = null
@@ -4668,9 +4668,9 @@ redef class AIfExpr
 
     init init_aifexpr (
             n_kwif: nullable TKwif ,
-            n_expr: nullable PExpr ,
-            n_then: nullable PExpr ,
-            n_else: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_then: nullable AExpr ,
+            n_else: nullable AExpr 
     )
     do
         empty_init
@@ -4688,7 +4688,7 @@ redef class AIfExpr
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwif == old_child then
             if new_child != null then
@@ -4703,7 +4703,7 @@ redef class AIfExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -4713,7 +4713,7 @@ redef class AIfExpr
         if _n_then == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_then = new_child
 	    else
 		_n_then = null
@@ -4723,7 +4723,7 @@ redef class AIfExpr
         if _n_else == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_else = new_child
 	    else
 		_n_else = null
@@ -4792,11 +4792,11 @@ redef class AIfexprExpr
 
     init init_aifexprexpr (
             n_kwif: nullable TKwif ,
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_kwthen: nullable TKwthen ,
-            n_then: nullable PExpr ,
+            n_then: nullable AExpr ,
             n_kwelse: nullable TKwelse ,
-            n_else: nullable PExpr 
+            n_else: nullable AExpr 
     )
     do
         empty_init
@@ -4814,7 +4814,7 @@ redef class AIfexprExpr
 	n_else.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwif == old_child then
             if new_child != null then
@@ -4829,7 +4829,7 @@ redef class AIfexprExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -4849,7 +4849,7 @@ redef class AIfexprExpr
         if _n_then == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_then = new_child
 	    else
 		abort
@@ -4869,7 +4869,7 @@ redef class AIfexprExpr
         if _n_else == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_else = new_child
 	    else
 		abort
@@ -4926,9 +4926,9 @@ redef class AWhileExpr
 
     init init_awhileexpr (
             n_kwwhile: nullable TKwwhile ,
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_kwdo: nullable TKwdo ,
-            n_block: nullable PExpr 
+            n_block: nullable AExpr 
     )
     do
         empty_init
@@ -4944,7 +4944,7 @@ redef class AWhileExpr
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwwhile == old_child then
             if new_child != null then
@@ -4959,7 +4959,7 @@ redef class AWhileExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -4979,7 +4979,7 @@ redef class AWhileExpr
         if _n_block == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_block = new_child
 	    else
 		_n_block = null
@@ -5042,9 +5042,9 @@ redef class AForExpr
     init init_aforexpr (
             n_kwfor: nullable TKwfor ,
             n_id: nullable TId ,
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_kwdo: nullable TKwdo ,
-            n_block: nullable PExpr 
+            n_block: nullable AExpr 
     )
     do
         empty_init
@@ -5062,7 +5062,7 @@ redef class AForExpr
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwfor == old_child then
             if new_child != null then
@@ -5087,7 +5087,7 @@ redef class AForExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5107,7 +5107,7 @@ redef class AForExpr
         if _n_block == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_block = new_child
 	    else
 		_n_block = null
@@ -5162,7 +5162,7 @@ redef class AAssertExpr
     init init_aassertexpr (
             n_kwassert: nullable TKwassert ,
             n_id: nullable TId ,
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -5176,7 +5176,7 @@ redef class AAssertExpr
 	n_expr.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwassert == old_child then
             if new_child != null then
@@ -5201,7 +5201,7 @@ redef class AAssertExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5244,7 +5244,7 @@ redef class AOnceExpr
 
     init init_aonceexpr (
             n_kwonce: nullable TKwonce ,
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -5254,7 +5254,7 @@ redef class AOnceExpr
 	n_expr.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwonce == old_child then
             if new_child != null then
@@ -5269,7 +5269,7 @@ redef class AOnceExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5300,7 +5300,7 @@ redef class ASendExpr
     private init empty_init do end
 
     init init_asendexpr (
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -5308,12 +5308,12 @@ redef class ASendExpr
 	n_expr.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5347,8 +5347,8 @@ redef class ABinopExpr
     private init empty_init do end
 
     init init_abinopexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -5358,12 +5358,12 @@ redef class ABinopExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5373,7 +5373,7 @@ redef class ABinopExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -5409,8 +5409,8 @@ redef class AOrExpr
     private init empty_init do end
 
     init init_aorexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -5420,12 +5420,12 @@ redef class AOrExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5435,7 +5435,7 @@ redef class AOrExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -5471,8 +5471,8 @@ redef class AAndExpr
     private init empty_init do end
 
     init init_aandexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -5482,12 +5482,12 @@ redef class AAndExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5497,7 +5497,7 @@ redef class AAndExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -5534,7 +5534,7 @@ redef class ANotExpr
 
     init init_anotexpr (
             n_kwnot: nullable TKwnot ,
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -5544,7 +5544,7 @@ redef class ANotExpr
 	n_expr.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwnot == old_child then
             if new_child != null then
@@ -5559,7 +5559,7 @@ redef class ANotExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5595,8 +5595,8 @@ redef class AEqExpr
     private init empty_init do end
 
     init init_aeqexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -5606,12 +5606,12 @@ redef class AEqExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5621,7 +5621,7 @@ redef class AEqExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -5657,8 +5657,8 @@ redef class AEeExpr
     private init empty_init do end
 
     init init_aeeexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -5668,12 +5668,12 @@ redef class AEeExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5683,7 +5683,7 @@ redef class AEeExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -5719,8 +5719,8 @@ redef class ANeExpr
     private init empty_init do end
 
     init init_aneexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -5730,12 +5730,12 @@ redef class ANeExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5745,7 +5745,7 @@ redef class ANeExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -5781,8 +5781,8 @@ redef class ALtExpr
     private init empty_init do end
 
     init init_altexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -5792,12 +5792,12 @@ redef class ALtExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5807,7 +5807,7 @@ redef class ALtExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -5843,8 +5843,8 @@ redef class ALeExpr
     private init empty_init do end
 
     init init_aleexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -5854,12 +5854,12 @@ redef class ALeExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5869,7 +5869,7 @@ redef class ALeExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -5905,8 +5905,8 @@ redef class AGtExpr
     private init empty_init do end
 
     init init_agtexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -5916,12 +5916,12 @@ redef class AGtExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5931,7 +5931,7 @@ redef class AGtExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -5967,8 +5967,8 @@ redef class AGeExpr
     private init empty_init do end
 
     init init_ageexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -5978,12 +5978,12 @@ redef class AGeExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -5993,7 +5993,7 @@ redef class AGeExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -6029,8 +6029,8 @@ redef class AIsaExpr
     private init empty_init do end
 
     init init_aisaexpr (
-            n_expr: nullable PExpr ,
-            n_type: nullable PType 
+            n_expr: nullable AExpr ,
+            n_type: nullable AType 
     )
     do
         empty_init
@@ -6040,12 +6040,12 @@ redef class AIsaExpr
 	n_type.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6055,7 +6055,7 @@ redef class AIsaExpr
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PType
+		assert new_child isa AType
                 _n_type = new_child
 	    else
 		abort
@@ -6091,8 +6091,8 @@ redef class APlusExpr
     private init empty_init do end
 
     init init_aplusexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -6102,12 +6102,12 @@ redef class APlusExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6117,7 +6117,7 @@ redef class APlusExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -6153,8 +6153,8 @@ redef class AMinusExpr
     private init empty_init do end
 
     init init_aminusexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -6164,12 +6164,12 @@ redef class AMinusExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6179,7 +6179,7 @@ redef class AMinusExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -6215,8 +6215,8 @@ redef class AStarshipExpr
     private init empty_init do end
 
     init init_astarshipexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -6226,12 +6226,12 @@ redef class AStarshipExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6241,7 +6241,7 @@ redef class AStarshipExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -6277,8 +6277,8 @@ redef class AStarExpr
     private init empty_init do end
 
     init init_astarexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -6288,12 +6288,12 @@ redef class AStarExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6303,7 +6303,7 @@ redef class AStarExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -6339,8 +6339,8 @@ redef class ASlashExpr
     private init empty_init do end
 
     init init_aslashexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -6350,12 +6350,12 @@ redef class ASlashExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6365,7 +6365,7 @@ redef class ASlashExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -6401,8 +6401,8 @@ redef class APercentExpr
     private init empty_init do end
 
     init init_apercentexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -6412,12 +6412,12 @@ redef class APercentExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6427,7 +6427,7 @@ redef class APercentExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -6464,7 +6464,7 @@ redef class AUminusExpr
 
     init init_auminusexpr (
             n_minus: nullable TMinus ,
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -6474,7 +6474,7 @@ redef class AUminusExpr
 	n_expr.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_minus == old_child then
             if new_child != null then
@@ -6489,7 +6489,7 @@ redef class AUminusExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6533,9 +6533,9 @@ redef class ANewExpr
 
     init init_anewexpr (
             n_kwnew: nullable TKwnew ,
-            n_type: nullable PType ,
+            n_type: nullable AType ,
             n_id: nullable TId ,
-            n_args: Collection[Object]  # Should be Collection[PExpr]
+            n_args: Collection[Object]  # Should be Collection[AExpr]
     )
     do
         empty_init
@@ -6548,13 +6548,13 @@ redef class ANewExpr
 		n_id.parent = self
 	end
 	for n in n_args do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_args.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwnew == old_child then
             if new_child != null then
@@ -6569,7 +6569,7 @@ redef class ANewExpr
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PType
+		assert new_child isa AType
                 _n_type = new_child
 	    else
 		abort
@@ -6589,7 +6589,7 @@ redef class ANewExpr
         for i in [0.._n_args.length[ do
             if _n_args[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_args[i] = new_child
                     new_child.parent = self
                 else
@@ -6643,7 +6643,7 @@ redef class AAttrExpr
     private init empty_init do end
 
     init init_aattrexpr (
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_id: nullable TAttrid 
     )
     do
@@ -6654,12 +6654,12 @@ redef class AAttrExpr
 	n_id.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6715,10 +6715,10 @@ redef class AAttrAssignExpr
     private init empty_init do end
 
     init init_aattrassignexpr (
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_id: nullable TAttrid ,
             n_assign: nullable TAssign ,
-            n_value: nullable PExpr 
+            n_value: nullable AExpr 
     )
     do
         empty_init
@@ -6732,12 +6732,12 @@ redef class AAttrAssignExpr
 	n_value.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6767,7 +6767,7 @@ redef class AAttrAssignExpr
         if _n_value == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_value = new_child
 	    else
 		abort
@@ -6817,10 +6817,10 @@ redef class AAttrReassignExpr
     private init empty_init do end
 
     init init_aattrreassignexpr (
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_id: nullable TAttrid ,
-            n_assign_op: nullable PAssignOp ,
-            n_value: nullable PExpr 
+            n_assign_op: nullable AAssignOp ,
+            n_value: nullable AExpr 
     )
     do
         empty_init
@@ -6834,12 +6834,12 @@ redef class AAttrReassignExpr
 	n_value.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6859,7 +6859,7 @@ redef class AAttrReassignExpr
         if _n_assign_op == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PAssignOp
+		assert new_child isa AAssignOp
                 _n_assign_op = new_child
 	    else
 		abort
@@ -6869,7 +6869,7 @@ redef class AAttrReassignExpr
         if _n_value == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_value = new_child
 	    else
 		abort
@@ -6909,10 +6909,10 @@ redef class ACallExpr
     private init empty_init do end
 
     init init_acallexpr (
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_id: nullable TId ,
-            n_args: Collection[Object] , # Should be Collection[PExpr]
-            n_closure_defs: Collection[Object]  # Should be Collection[PClosureDef]
+            n_args: Collection[Object] , # Should be Collection[AExpr]
+            n_closure_defs: Collection[Object]  # Should be Collection[AClosureDef]
     )
     do
         empty_init
@@ -6921,23 +6921,23 @@ redef class ACallExpr
         _n_id = n_id.as(not null)
 	n_id.parent = self
 	for n in n_args do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_args.add(n)
 		n.parent = self
 	end
 	for n in n_closure_defs do
-		assert n isa PClosureDef
+		assert n isa AClosureDef
 		_n_closure_defs.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -6957,7 +6957,7 @@ redef class ACallExpr
         for i in [0.._n_args.length[ do
             if _n_args[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_args[i] = new_child
                     new_child.parent = self
                 else
@@ -6969,7 +6969,7 @@ redef class ACallExpr
         for i in [0.._n_closure_defs.length[ do
             if _n_closure_defs[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PClosureDef
+		    assert new_child isa AClosureDef
                     _n_closure_defs[i] = new_child
                     new_child.parent = self
                 else
@@ -7037,11 +7037,11 @@ redef class ACallAssignExpr
     private init empty_init do end
 
     init init_acallassignexpr (
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_id: nullable TId ,
-            n_args: Collection[Object] , # Should be Collection[PExpr]
+            n_args: Collection[Object] , # Should be Collection[AExpr]
             n_assign: nullable TAssign ,
-            n_value: nullable PExpr 
+            n_value: nullable AExpr 
     )
     do
         empty_init
@@ -7050,7 +7050,7 @@ redef class ACallAssignExpr
         _n_id = n_id.as(not null)
 	n_id.parent = self
 	for n in n_args do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_args.add(n)
 		n.parent = self
 	end
@@ -7060,12 +7060,12 @@ redef class ACallAssignExpr
 	n_value.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -7085,7 +7085,7 @@ redef class ACallAssignExpr
         for i in [0.._n_args.length[ do
             if _n_args[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_args[i] = new_child
                     new_child.parent = self
                 else
@@ -7107,7 +7107,7 @@ redef class ACallAssignExpr
         if _n_value == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_value = new_child
 	    else
 		abort
@@ -7167,11 +7167,11 @@ redef class ACallReassignExpr
     private init empty_init do end
 
     init init_acallreassignexpr (
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_id: nullable TId ,
-            n_args: Collection[Object] , # Should be Collection[PExpr]
-            n_assign_op: nullable PAssignOp ,
-            n_value: nullable PExpr 
+            n_args: Collection[Object] , # Should be Collection[AExpr]
+            n_assign_op: nullable AAssignOp ,
+            n_value: nullable AExpr 
     )
     do
         empty_init
@@ -7180,7 +7180,7 @@ redef class ACallReassignExpr
         _n_id = n_id.as(not null)
 	n_id.parent = self
 	for n in n_args do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_args.add(n)
 		n.parent = self
 	end
@@ -7190,12 +7190,12 @@ redef class ACallReassignExpr
 	n_value.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -7215,7 +7215,7 @@ redef class ACallReassignExpr
         for i in [0.._n_args.length[ do
             if _n_args[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_args[i] = new_child
                     new_child.parent = self
                 else
@@ -7227,7 +7227,7 @@ redef class ACallReassignExpr
         if _n_assign_op == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PAssignOp
+		assert new_child isa AAssignOp
                 _n_assign_op = new_child
 	    else
 		abort
@@ -7237,7 +7237,7 @@ redef class ACallReassignExpr
         if _n_value == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_value = new_child
 	    else
 		abort
@@ -7289,9 +7289,9 @@ redef class ASuperExpr
     private init empty_init do end
 
     init init_asuperexpr (
-            n_qualified: nullable PQualified ,
+            n_qualified: nullable AQualified ,
             n_kwsuper: nullable TKwsuper ,
-            n_args: Collection[Object]  # Should be Collection[PExpr]
+            n_args: Collection[Object]  # Should be Collection[AExpr]
     )
     do
         empty_init
@@ -7302,18 +7302,18 @@ redef class ASuperExpr
         _n_kwsuper = n_kwsuper.as(not null)
 	n_kwsuper.parent = self
 	for n in n_args do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_args.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_qualified == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PQualified
+		assert new_child isa AQualified
                 _n_qualified = new_child
 	    else
 		_n_qualified = null
@@ -7333,7 +7333,7 @@ redef class ASuperExpr
         for i in [0.._n_args.length[ do
             if _n_args[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_args[i] = new_child
                     new_child.parent = self
                 else
@@ -7385,9 +7385,9 @@ redef class AInitExpr
     private init empty_init do end
 
     init init_ainitexpr (
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_kwinit: nullable TKwinit ,
-            n_args: Collection[Object]  # Should be Collection[PExpr]
+            n_args: Collection[Object]  # Should be Collection[AExpr]
     )
     do
         empty_init
@@ -7396,18 +7396,18 @@ redef class AInitExpr
         _n_kwinit = n_kwinit.as(not null)
 	n_kwinit.parent = self
 	for n in n_args do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_args.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -7427,7 +7427,7 @@ redef class AInitExpr
         for i in [0.._n_args.length[ do
             if _n_args[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_args[i] = new_child
                     new_child.parent = self
                 else
@@ -7470,32 +7470,32 @@ redef class ABraExpr
     private init empty_init do end
 
     init init_abraexpr (
-            n_expr: nullable PExpr ,
-            n_args: Collection[Object] , # Should be Collection[PExpr]
-            n_closure_defs: Collection[Object]  # Should be Collection[PClosureDef]
+            n_expr: nullable AExpr ,
+            n_args: Collection[Object] , # Should be Collection[AExpr]
+            n_closure_defs: Collection[Object]  # Should be Collection[AClosureDef]
     )
     do
         empty_init
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
 	for n in n_args do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_args.add(n)
 		n.parent = self
 	end
 	for n in n_closure_defs do
-		assert n isa PClosureDef
+		assert n isa AClosureDef
 		_n_closure_defs.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -7505,7 +7505,7 @@ redef class ABraExpr
         for i in [0.._n_args.length[ do
             if _n_args[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_args[i] = new_child
                     new_child.parent = self
                 else
@@ -7517,7 +7517,7 @@ redef class ABraExpr
         for i in [0.._n_closure_defs.length[ do
             if _n_closure_defs[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PClosureDef
+		    assert new_child isa AClosureDef
                     _n_closure_defs[i] = new_child
                     new_child.parent = self
                 else
@@ -7578,17 +7578,17 @@ redef class ABraAssignExpr
     private init empty_init do end
 
     init init_abraassignexpr (
-            n_expr: nullable PExpr ,
-            n_args: Collection[Object] , # Should be Collection[PExpr]
+            n_expr: nullable AExpr ,
+            n_args: Collection[Object] , # Should be Collection[AExpr]
             n_assign: nullable TAssign ,
-            n_value: nullable PExpr 
+            n_value: nullable AExpr 
     )
     do
         empty_init
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
 	for n in n_args do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_args.add(n)
 		n.parent = self
 	end
@@ -7598,12 +7598,12 @@ redef class ABraAssignExpr
 	n_value.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -7613,7 +7613,7 @@ redef class ABraAssignExpr
         for i in [0.._n_args.length[ do
             if _n_args[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_args[i] = new_child
                     new_child.parent = self
                 else
@@ -7635,7 +7635,7 @@ redef class ABraAssignExpr
         if _n_value == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_value = new_child
 	    else
 		abort
@@ -7688,17 +7688,17 @@ redef class ABraReassignExpr
     private init empty_init do end
 
     init init_abrareassignexpr (
-            n_expr: nullable PExpr ,
-            n_args: Collection[Object] , # Should be Collection[PExpr]
-            n_assign_op: nullable PAssignOp ,
-            n_value: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_args: Collection[Object] , # Should be Collection[AExpr]
+            n_assign_op: nullable AAssignOp ,
+            n_value: nullable AExpr 
     )
     do
         empty_init
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
 	for n in n_args do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_args.add(n)
 		n.parent = self
 	end
@@ -7708,12 +7708,12 @@ redef class ABraReassignExpr
 	n_value.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -7723,7 +7723,7 @@ redef class ABraReassignExpr
         for i in [0.._n_args.length[ do
             if _n_args[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_args[i] = new_child
                     new_child.parent = self
                 else
@@ -7735,7 +7735,7 @@ redef class ABraReassignExpr
         if _n_assign_op == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PAssignOp
+		assert new_child isa AAssignOp
                 _n_assign_op = new_child
 	    else
 		abort
@@ -7745,7 +7745,7 @@ redef class ABraReassignExpr
         if _n_value == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_value = new_child
 	    else
 		abort
@@ -7789,26 +7789,26 @@ redef class AClosureCallExpr
 
     init init_aclosurecallexpr (
             n_id: nullable TId ,
-            n_args: Collection[Object] , # Should be Collection[PExpr]
-            n_closure_defs: Collection[Object]  # Should be Collection[PClosureDef]
+            n_args: Collection[Object] , # Should be Collection[AExpr]
+            n_closure_defs: Collection[Object]  # Should be Collection[AClosureDef]
     )
     do
         empty_init
         _n_id = n_id.as(not null)
 	n_id.parent = self
 	for n in n_args do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_args.add(n)
 		n.parent = self
 	end
 	for n in n_closure_defs do
-		assert n isa PClosureDef
+		assert n isa AClosureDef
 		_n_closure_defs.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -7823,7 +7823,7 @@ redef class AClosureCallExpr
         for i in [0.._n_args.length[ do
             if _n_args[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_args[i] = new_child
                     new_child.parent = self
                 else
@@ -7835,7 +7835,7 @@ redef class AClosureCallExpr
         for i in [0.._n_closure_defs.length[ do
             if _n_closure_defs[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PClosureDef
+		    assert new_child isa AClosureDef
                     _n_closure_defs[i] = new_child
                     new_child.parent = self
                 else
@@ -7894,7 +7894,7 @@ redef class AVarExpr
 	n_id.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -7940,7 +7940,7 @@ redef class AVarAssignExpr
     init init_avarassignexpr (
             n_id: nullable TId ,
             n_assign: nullable TAssign ,
-            n_value: nullable PExpr 
+            n_value: nullable AExpr 
     )
     do
         empty_init
@@ -7952,7 +7952,7 @@ redef class AVarAssignExpr
 	n_value.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -7977,7 +7977,7 @@ redef class AVarAssignExpr
         if _n_value == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_value = new_child
 	    else
 		abort
@@ -8021,8 +8021,8 @@ redef class AVarReassignExpr
 
     init init_avarreassignexpr (
             n_id: nullable TId ,
-            n_assign_op: nullable PAssignOp ,
-            n_value: nullable PExpr 
+            n_assign_op: nullable AAssignOp ,
+            n_value: nullable AExpr 
     )
     do
         empty_init
@@ -8034,7 +8034,7 @@ redef class AVarReassignExpr
 	n_value.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_id == old_child then
             if new_child != null then
@@ -8049,7 +8049,7 @@ redef class AVarReassignExpr
         if _n_assign_op == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PAssignOp
+		assert new_child isa AAssignOp
                 _n_assign_op = new_child
 	    else
 		abort
@@ -8059,7 +8059,7 @@ redef class AVarReassignExpr
         if _n_value == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_value = new_child
 	    else
 		abort
@@ -8097,8 +8097,8 @@ redef class ARangeExpr
     private init empty_init do end
 
     init init_arangeexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -8108,12 +8108,12 @@ redef class ARangeExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -8123,7 +8123,7 @@ redef class ARangeExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -8159,8 +8159,8 @@ redef class ACrangeExpr
     private init empty_init do end
 
     init init_acrangeexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -8170,12 +8170,12 @@ redef class ACrangeExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -8185,7 +8185,7 @@ redef class ACrangeExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -8221,8 +8221,8 @@ redef class AOrangeExpr
     private init empty_init do end
 
     init init_aorangeexpr (
-            n_expr: nullable PExpr ,
-            n_expr2: nullable PExpr 
+            n_expr: nullable AExpr ,
+            n_expr2: nullable AExpr 
     )
     do
         empty_init
@@ -8232,12 +8232,12 @@ redef class AOrangeExpr
 	n_expr2.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -8247,7 +8247,7 @@ redef class AOrangeExpr
         if _n_expr2 == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr2 = new_child
 	    else
 		abort
@@ -8273,23 +8273,23 @@ redef class AArrayExpr
     private init empty_init do end
 
     init init_aarrayexpr (
-            n_exprs: Collection[Object]  # Should be Collection[PExpr]
+            n_exprs: Collection[Object]  # Should be Collection[AExpr]
     )
     do
         empty_init
 	for n in n_exprs do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_exprs.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         for i in [0.._n_exprs.length[ do
             if _n_exprs[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_exprs[i] = new_child
                     new_child.parent = self
                 else
@@ -8336,7 +8336,7 @@ redef class ASelfExpr
 	n_kwself.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwself == old_child then
             if new_child != null then
@@ -8369,7 +8369,7 @@ redef class AImplicitSelfExpr
         empty_init
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
     end
 
@@ -8399,7 +8399,7 @@ redef class ATrueExpr
 	n_kwtrue.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwtrue == old_child then
             if new_child != null then
@@ -8441,7 +8441,7 @@ redef class AFalseExpr
 	n_kwfalse.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwfalse == old_child then
             if new_child != null then
@@ -8483,7 +8483,7 @@ redef class ANullExpr
 	n_kwnull.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwnull == old_child then
             if new_child != null then
@@ -8525,7 +8525,7 @@ redef class AIntExpr
 	n_number.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_number == old_child then
             if new_child != null then
@@ -8567,7 +8567,7 @@ redef class AFloatExpr
 	n_float.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_float == old_child then
             if new_child != null then
@@ -8609,7 +8609,7 @@ redef class ACharExpr
 	n_char.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_char == old_child then
             if new_child != null then
@@ -8651,7 +8651,7 @@ redef class AStringExpr
 	n_string.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_string == old_child then
             if new_child != null then
@@ -8693,7 +8693,7 @@ redef class AStartStringExpr
 	n_string.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_string == old_child then
             if new_child != null then
@@ -8735,7 +8735,7 @@ redef class AMidStringExpr
 	n_string.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_string == old_child then
             if new_child != null then
@@ -8777,7 +8777,7 @@ redef class AEndStringExpr
 	n_string.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_string == old_child then
             if new_child != null then
@@ -8806,23 +8806,23 @@ redef class ASuperstringExpr
     private init empty_init do end
 
     init init_asuperstringexpr (
-            n_exprs: Collection[Object]  # Should be Collection[PExpr]
+            n_exprs: Collection[Object]  # Should be Collection[AExpr]
     )
     do
         empty_init
 	for n in n_exprs do
-		assert n isa PExpr
+		assert n isa AExpr
 		_n_exprs.add(n)
 		n.parent = self
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         for i in [0.._n_exprs.length[ do
             if _n_exprs[i] == old_child then
                 if new_child != null then
-		    assert new_child isa PExpr
+		    assert new_child isa AExpr
                     _n_exprs[i] = new_child
                     new_child.parent = self
                 else
@@ -8861,7 +8861,7 @@ redef class AParExpr
     private init empty_init do end
 
     init init_aparexpr (
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -8869,12 +8869,12 @@ redef class AParExpr
 	n_expr.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -8913,9 +8913,9 @@ redef class AAsCastExpr
     private init empty_init do end
 
     init init_aascastexpr (
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_kwas: nullable TKwas ,
-            n_type: nullable PType 
+            n_type: nullable AType 
     )
     do
         empty_init
@@ -8927,12 +8927,12 @@ redef class AAsCastExpr
 	n_type.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -8952,7 +8952,7 @@ redef class AAsCastExpr
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PType
+		assert new_child isa AType
                 _n_type = new_child
 	    else
 		abort
@@ -9000,7 +9000,7 @@ redef class AAsNotnullExpr
     private init empty_init do end
 
     init init_aasnotnullexpr (
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_kwas: nullable TKwas ,
             n_kwnot: nullable TKwnot ,
             n_kwnull: nullable TKwnull 
@@ -9017,12 +9017,12 @@ redef class AAsNotnullExpr
 	n_kwnull.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -9098,7 +9098,7 @@ redef class AIssetAttrExpr
 
     init init_aissetattrexpr (
             n_kwisset: nullable TKwisset ,
-            n_expr: nullable PExpr ,
+            n_expr: nullable AExpr ,
             n_id: nullable TAttrid 
     )
     do
@@ -9111,7 +9111,7 @@ redef class AIssetAttrExpr
 	n_id.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwisset == old_child then
             if new_child != null then
@@ -9126,7 +9126,7 @@ redef class AIssetAttrExpr
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		abort
@@ -9177,7 +9177,7 @@ redef class APlusAssignOp
 	n_pluseq.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_pluseq == old_child then
             if new_child != null then
@@ -9219,7 +9219,7 @@ redef class AMinusAssignOp
 	n_minuseq.parent = self
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_minuseq == old_child then
             if new_child != null then
@@ -9268,7 +9268,7 @@ redef class AClosureDef
             n_kwwith: nullable TKwwith ,
             n_id: Collection[Object] , # Should be Collection[TId]
             n_kwdo: nullable TKwdo ,
-            n_expr: nullable PExpr 
+            n_expr: nullable AExpr 
     )
     do
         empty_init
@@ -9287,7 +9287,7 @@ redef class AClosureDef
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_kwwith == old_child then
             if new_child != null then
@@ -9324,7 +9324,7 @@ redef class AClosureDef
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa PExpr
+		assert new_child isa AExpr
                 _n_expr = new_child
 	    else
 		_n_expr = null
@@ -9389,7 +9389,7 @@ redef class AQualified
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         for i in [0.._n_id.length[ do
             if _n_id[i] == old_child then
@@ -9455,7 +9455,7 @@ redef class ADoc
 	end
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         for i in [0.._n_comment.length[ do
             if _n_comment[i] == old_child then
@@ -9492,20 +9492,20 @@ end
 
 redef class Start
     init(
-        n_base: nullable PModule,
+        n_base: nullable AModule,
         n_eof: EOF)
     do
         _n_base = n_base
         _n_eof = n_eof
     end
 
-    redef fun replace_child(old_child: PNode, new_child: nullable PNode)
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_base == old_child then
             if new_child == null then
             else
                 new_child.parent = self
-		assert new_child isa PModule
+		assert new_child isa AModule
                 _n_base = new_child
             end
             old_child.parent = null

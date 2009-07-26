@@ -45,7 +45,7 @@ abstract class VariableContext
 		_set_variables.add(v)
 	end
 
-	fun check_is_set(n: PNode, v: Variable)
+	fun check_is_set(n: ANode, v: Variable)
 	do
 		if v.must_be_set and not is_set(v) then
 			_visitor.error(n, "Error: variable '{v}' is possibly unset.")
@@ -91,13 +91,13 @@ abstract class VariableContext
 	var _stypes: Map[Variable, nullable MMType] = new HashMap[Variable, nullable MMType]
 
 	# Build a new VariableContext
-	fun sub(node: PNode): SubVariableContext
+	fun sub(node: ANode): SubVariableContext
 	do
 		return new SubVariableContext.with_prev(self, node)
 	end
 
 	# Build a nested VariableContext with new variable information
-	fun sub_with(node: PNode, v: Variable, t: MMType): SubVariableContext
+	fun sub_with(node: ANode, v: Variable, t: MMType): SubVariableContext
 	do
 		var ctx = sub(node)
 		ctx.stype(v) = t
@@ -108,9 +108,9 @@ abstract class VariableContext
 	var _visitor: AbsSyntaxVisitor
 
 	# The syntax node that introduced the context
-	readable var _node: PNode
+	readable var _node: ANode
 
-	init(visitor: AbsSyntaxVisitor, node: PNode)
+	init(visitor: AbsSyntaxVisitor, node: ANode)
 	do
 		_visitor = visitor
 		_node = node
@@ -196,7 +196,7 @@ end
 
 class RootVariableContext
 special VariableContext
-	init(visitor: AbsSyntaxVisitor, node: PNode)
+	init(visitor: AbsSyntaxVisitor, node: ANode)
 	do
 		super(visitor, node)
 		_all_variables = new HashSet[Variable]
@@ -225,7 +225,7 @@ special VariableContext
 		end
 	end
 
-	init with_prev(p: VariableContext, node: PNode)
+	init with_prev(p: VariableContext, node: ANode)
 	do
 		init(p._visitor, node)
 		_prev = p

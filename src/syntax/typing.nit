@@ -59,7 +59,7 @@ special AbsSyntaxVisitor
 	writable var _self_var: nullable ParamVariable
 
 	# Block of the current method
-	readable writable var _top_block: nullable PExpr
+	readable writable var _top_block: nullable AExpr
 
 	# List of explicit invocation of constructors of super-classes
 	readable writable var _explicit_super_init_calls: nullable Array[MMMethod]
@@ -68,14 +68,14 @@ special AbsSyntaxVisitor
 	readable writable var _explicit_other_init_call: Bool = false
 
 	# Make the if_true_variable_ctx of the expression effective
-	private fun use_if_true_variable_ctx(e: PExpr)
+	private fun use_if_true_variable_ctx(e: AExpr)
 	do
 		var ctx = e.if_true_variable_ctx
 		if ctx != null then variable_ctx = ctx
 	end
 
 	# Make the if_false_variable_ctx of the expression effective
-	private fun use_if_false_variable_ctx(e: PExpr)
+	private fun use_if_false_variable_ctx(e: AExpr)
 	do
 		var ctx = e.if_false_variable_ctx
 		if ctx != null then variable_ctx = ctx
@@ -86,7 +86,7 @@ special AbsSyntaxVisitor
 
 	init(tc, module) do super
 
-	private fun get_default_constructor_for(n: PNode, c: MMLocalClass, prop: MMSrcMethod): nullable MMMethod
+	private fun get_default_constructor_for(n: ANode, c: MMLocalClass, prop: MMSrcMethod): nullable MMMethod
 	do
 		var v = self
 		#var prop = v.local_property
@@ -139,7 +139,7 @@ end
 
 ###############################################################################
 
-redef class PNode
+redef class ANode
 	private fun accept_typing(v: TypingVisitor) 
 	do
 		accept_abs_syntax_visitor(v)
@@ -148,7 +148,7 @@ redef class PNode
 	private fun after_typing(v: TypingVisitor) do end
 end
 
-redef class PClassdef
+redef class AClassdef
 	redef fun accept_typing(v)
 	do
 		v.variable_ctx = new RootVariableContext(v, self)
@@ -159,7 +159,7 @@ redef class PClassdef
 	end
 end
 
-redef class PPropdef
+redef class APropdef
 	redef fun self_var do return _self_var.as(not null)
 	var _self_var: nullable ParamVariable
 end
@@ -250,7 +250,7 @@ redef class AConcreteInitPropdef
 	end
 end
 
-redef class PParam
+redef class AParam
 	redef fun after_typing(v)
 	do
 		v.variable_ctx.add(variable)
@@ -294,7 +294,7 @@ redef class AClosureDecl
 	end
 end
 
-redef class PType
+redef class AType
 	redef fun stype: MMType do return _stype.as(not null)
 	redef fun is_typed: Bool do return _stype != null
 	var _stype: nullable MMType
@@ -305,7 +305,7 @@ redef class PType
 	end
 end
 
-redef class PExpr
+redef class AExpr
 	redef readable var _is_typed: Bool = false
 	redef fun is_statement: Bool do return _stype == null
 	redef fun stype
@@ -663,7 +663,7 @@ redef class AVarReassignExpr
 	end
 end
 
-redef class PAssignOp
+redef class AAssignOp
 	fun method_name: Symbol is abstract
 end
 redef class APlusAssignOp
@@ -1030,10 +1030,10 @@ redef class AAbsAbsSendExpr
 
 	# The real arguments used (after star transformation) (once computed)
 	redef fun arguments do return _arguments.as(not null)
-	var _arguments: nullable Array[PExpr]
+	var _arguments: nullable Array[AExpr]
 
 	# Check the conformity of a set of arguments `raw_args' to a signature.
-	private fun process_signature(v: TypingVisitor, psig: MMSignature, name: Symbol, raw_args: nullable Array[PExpr]): nullable Array[PExpr]
+	private fun process_signature(v: TypingVisitor, psig: MMSignature, name: Symbol, raw_args: nullable Array[AExpr]): nullable Array[AExpr]
 	do
 		var par_vararg = psig.vararg_rank
 		var par_arity = psig.arity
@@ -1044,12 +1044,12 @@ redef class AAbsAbsSendExpr
 			return null
 		end
 		var arg_idx = 0
-		var args = new Array[PExpr]
+		var args = new Array[AExpr]
 		for par_idx in [0..par_arity[ do
-			var a: PExpr
+			var a: AExpr
 			var par_type = psig[par_idx]
 			if par_idx == par_vararg then
-				var star = new Array[PExpr]
+				var star = new Array[AExpr]
 				for i in [0..(raw_arity-par_arity)] do
 					a = raw_args[arg_idx]
 					v.check_conform_expr(a, par_type)
@@ -1070,7 +1070,7 @@ redef class AAbsAbsSendExpr
 	end
 
 	# Check the conformity of a set of defined closures
-	private fun process_closures(v: TypingVisitor, psig: MMSignature, name: Symbol, cd: nullable Array[PClosureDef]): nullable MMType
+	private fun process_closures(v: TypingVisitor, psig: MMSignature, name: Symbol, cd: nullable Array[AClosureDef]): nullable MMType
 	do
 		var t = psig.return_type
 		var cs = psig.closures # Declared closures
@@ -1114,7 +1114,7 @@ end
 
 redef class AAbsSendExpr
 	# Compute the called global property
-	private fun do_typing(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, recv_is_self: Bool, name: Symbol, raw_args: nullable Array[PExpr], closure_defs: nullable Array[PClosureDef])
+	private fun do_typing(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, recv_is_self: Bool, name: Symbol, raw_args: nullable Array[AExpr], closure_defs: nullable Array[AClosureDef])
 	do
 		var prop = get_property(v, type_recv, is_implicit_self, name)
 		if prop == null then return
@@ -1247,10 +1247,10 @@ redef class ASendExpr
 	fun name: Symbol is abstract 
 
 	# Raw arguments used (withour star transformation)
-	fun raw_arguments: nullable Array[PExpr] is abstract
+	fun raw_arguments: nullable Array[AExpr] is abstract
 
 	# Closure definitions
-	redef fun closure_defs: nullable Array[PClosureDef] do return null
+	redef fun closure_defs: nullable Array[AClosureDef] do return null
 
 	redef fun after_typing(v)
 	do
@@ -1342,7 +1342,7 @@ redef class AEqExpr
 		end
 	end
 
-	private fun try_to_isa(v: TypingVisitor, n: PExpr)
+	private fun try_to_isa(v: TypingVisitor, n: AExpr)
 	do
 		var variable = n.its_variable
 		if variable != null then
@@ -1368,7 +1368,7 @@ redef class ANeExpr
 		end
 	end
 
-	private fun try_to_isa(v: TypingVisitor, n: PExpr)
+	private fun try_to_isa(v: TypingVisitor, n: AExpr)
 	do
 		var variable = n.its_variable
 		if variable != null then
@@ -1419,7 +1419,7 @@ redef class ACallFormExpr
 			var name = n_id.to_symbol
 			var variable = v.variable_ctx[name]
 			if variable != null then
-				var n: PExpr
+				var n: AExpr
 				if variable isa ClosureVariable then
 					n = new AClosureCallExpr.init_aclosurecallexpr(n_id, n_args, n_closure_defs)
 					n._variable = variable
@@ -1532,7 +1532,7 @@ redef class AClosureCallExpr
 	end
 end
 
-redef class PClosureDef
+redef class AClosureDef
 	var _closure: nullable MMClosure
 	redef fun closure do return _closure.as(not null)
 
@@ -1546,11 +1546,7 @@ redef class PClosureDef
 		if _accept_typing2 then super
 	end
 
-	private fun accept_typing2(v: TypingVisitor, esc: EscapableClosure) is abstract
-end
-
-redef class AClosureDef
-	redef fun accept_typing2(v, esc)
+	private fun accept_typing2(v: TypingVisitor, esc: EscapableClosure)
 	do
 		_escapable = esc
 
@@ -1590,8 +1586,8 @@ redef class AClosureDef
 end
 
 class ATypeCheckExpr
-special PExpr
-	private fun check_expr_cast(v: TypingVisitor, n_expr: PExpr, n_type: PType)
+special AExpr
+	private fun check_expr_cast(v: TypingVisitor, n_expr: AExpr, n_type: AType)
 	do
 		if not v.check_expr(n_expr) then return
 		if not n_type.is_typed then return

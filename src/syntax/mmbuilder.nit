@@ -403,10 +403,10 @@ end
 # Information about a signature currently build
 private class SignatureBuilder
 	# Current visited parameter types
-	readable writable var _params: Array[PParam] = new Array[PParam]
+	readable writable var _params: Array[AParam] = new Array[AParam]
 	
 	# Visited parameters without type information added
-	readable writable var _untyped_params: Array[PParam] = new Array[PParam]
+	readable writable var _untyped_params: Array[AParam] = new Array[AParam]
 
 	# Position of the current star parameter
 	readable writable var _vararg_rank: Int = -1
@@ -423,7 +423,7 @@ end
 
 ###############################################################################
 
-redef class PNode
+redef class ANode
 	private fun accept_class_builder(v: ClassBuilderVisitor) do accept_abs_syntax_visitor(v)
 	private fun accept_class_specialization_builder(v: ClassSpecializationBuilderVisitor) do accept_abs_syntax_visitor(v)
 	private fun accept_class_ancestor_builder(v: ClassAncestorBuilder) do accept_abs_syntax_visitor(v)
@@ -439,7 +439,7 @@ redef class AModule
 		# Import super-modules
 		var module_names_to_import = new Array[Symbol]
 		var module_visibility = new HashMap[Symbol, Int]
-		var no_import: nullable PImport = null
+		var no_import: nullable AImport = null
 		for i in n_imports do
 			var n = i.module_name
 			if n != null then
@@ -478,7 +478,7 @@ redef class APackagedecl
 	end
 end
 
-redef class PImport
+redef class AImport
 	# Imported module name (or null)
 	fun module_name: nullable Symbol is abstract
 
@@ -502,7 +502,7 @@ redef class ANoImport
 	end
 end
 
-redef class PVisibility
+redef class AVisibility
 	# Visibility level
 	fun level: Int is abstract
 end
@@ -520,7 +520,7 @@ redef class AIntrudeVisibility
 end
 
 
-redef class PClassdef
+redef class AClassdef
 	redef fun local_class: MMSrcLocalClass do return _local_class.as(not null)
 	var _local_class: nullable MMSrcLocalClass
 
@@ -578,7 +578,7 @@ redef class PClassdef
 	end
 end
 
-redef class PClasskind
+redef class AClasskind
 	fun is_interface: Bool do return false
 	fun is_universal: Bool do return false
 	fun is_abstract: Bool do return false
@@ -751,7 +751,7 @@ redef class ASuperclass
 	end
 end
 
-redef class PPropdef
+redef class APropdef
 	# Process and check properties of the property.
 	# * Distinguish inits and methods
 	# * Inherit or check visibility.
@@ -1014,7 +1014,7 @@ redef class AMethPropdef
 			# FIXME: Add the 'unary' keyword
 			if n_methid.name == (once "-".to_symbol) then
 				var ns = n_signature
-				if ns isa ASignature and ns.n_params.length == 0 then
+				if ns != null and ns.n_params.length == 0 then
 					name = once "unary -".to_symbol
 				end
 			end
@@ -1106,7 +1106,7 @@ special Visitor
 	end
 end
 
-redef class PMethid
+redef class AMethid
 	# Method name
 	readable var _name: nullable Symbol 
 
@@ -1117,11 +1117,6 @@ redef class PMethid
 		_name = accumulator.name.to_s.to_symbol
 		super
 	end
-end
-
-redef class PSignature
-	# Check that visibilities of types in the signature are compatible with the visibility of the property.
-	fun check_visibility(v: AbsSyntaxVisitor, p: MMLocalProperty) is abstract
 end
 
 redef class ASignature
@@ -1158,7 +1153,8 @@ redef class ASignature
 		end
 	end
 
-	redef fun check_visibility(v, p)
+	# Check that visibilities of types in the signature are compatible with the visibility of the property.
+	fun check_visibility(v: AbsSyntaxVisitor, p: MMLocalProperty)
 	do
 		if p.global.visibility_level >= 3 then return
 		for n in n_params do
@@ -1168,7 +1164,7 @@ redef class ASignature
 	end
 end
 
-redef class PParam
+redef class AParam
 	redef readable var _position: Int = 0
 
 	redef fun variable: ParamVariable do return _variable.as(not null)
@@ -1206,11 +1202,7 @@ redef class PParam
 		end
 	end
 
-	fun is_vararg: Bool is abstract
-end
-
-redef class AParam
-	redef fun is_vararg do return n_dotdotdot != null
+	fun is_vararg: Bool do return n_dotdotdot != null
 end
 
 redef class AClosureDecl
@@ -1248,13 +1240,9 @@ redef class AClosureDecl
 	end
 end
 
-redef class PType
-	# Check that visibilities of types in the signature are compatible with the visibility of the property.
-	private fun check_visibility(v: AbsSyntaxVisitor, p: MMLocalProperty) is abstract
-end
-
 redef class AType
-	redef fun check_visibility(v, p)
+	# Check that visibilities of types in the signature are compatible with the visibility of the property.
+	private fun check_visibility(v: AbsSyntaxVisitor, p: MMLocalProperty)
 	do
 		if p.global.visibility_level >= 3 then return
 		var t = get_stype(v)
@@ -1269,7 +1257,7 @@ redef class AType
 	end
 end
 
-redef class PExpr
+redef class AExpr
 	redef fun accept_class_builder(v) do end
 	redef fun accept_property_builder(v) do end
 	redef fun accept_property_verifier(v) do end

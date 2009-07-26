@@ -58,7 +58,7 @@ end
 # For and while use this class. closures uses the EscapableClosure subclass.
 class EscapableBlock
 	# The syntax node of the block
-	readable var _node: PNode
+	readable var _node: ANode
 
 	# Is self a break closure ?
 	fun is_break_block: Bool do return false
@@ -66,12 +66,12 @@ class EscapableBlock
 	# Collected expressions used in breaks.
 	# null if break does not accept values.
 	# break_list is used to store expressions used in break statments and perform type checks latter
-	fun break_list: nullable Array[PExpr] do return null
+	fun break_list: nullable Array[AExpr] do return null
 
 	# The static type required by the continue statement (if any)
 	fun continue_stype: nullable MMType do return null
 
-	init(node: PNode)
+	init(node: ANode)
 	do
 		_node = node
 	end
@@ -85,11 +85,11 @@ special EscapableBlock
 
 	redef fun is_break_block do return _closure.is_break
 
-	redef readable var _break_list: nullable Array[PExpr]
+	redef readable var _break_list: nullable Array[AExpr]
 
 	redef fun continue_stype do return _closure.signature.return_type
 
-	init(node: PNode, closure: MMClosure, break_list: nullable Array[PExpr])
+	init(node: ANode, closure: MMClosure, break_list: nullable Array[AExpr])
 	do
 		super(node)
 		_closure = closure
@@ -100,7 +100,7 @@ end
 ###############################################################################
 
 class AEscapeExpr
-special PNode
+special ANode
 	# The associated escapable block
 	readable var _escapable: nullable EscapableBlock
 

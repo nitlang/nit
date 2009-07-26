@@ -130,11 +130,11 @@ special ICodeBuilder
 		end
 	end
 
-	# The current  PExpr
-	var _current_node: nullable PExpr = null
+	# The current  AExpr
+	var _current_node: nullable AExpr = null
 
 	# Generate icode in the current sequence from a statement
-	fun generate_stmt(n: nullable PExpr)
+	fun generate_stmt(n: nullable AExpr)
 	do
 		if n == null then return
 		var old = _current_node
@@ -144,7 +144,7 @@ special ICodeBuilder
 	end
 
 	# Generate icode in the current sequence from an expression
-	fun generate_expr(n: PExpr): IRegister
+	fun generate_expr(n: AExpr): IRegister
 	do
 		var old = _current_node
 		_current_node = n
@@ -285,7 +285,7 @@ end
 
 ###############################################################################
 
-redef class PNode
+redef class ANode
 	fun accept_icode_generation(v: A2IVisitor) do accept_abs_syntax_visitor(v) end
 end
 
@@ -313,12 +313,8 @@ redef class AMethPropdef
 	fun fill_iroutine(v: A2IContext, method: MMSrcMethod) is abstract
 end
 
-redef class PSignature
-	fun fill_iroutine_parameters(v: A2IContext, orig_sig: MMSignature, params: IndexedCollection[IRegister], closdecls: nullable IndexedCollection[IClosureDecl]) is abstract
-end
-
 redef class ASignature
-	redef fun fill_iroutine_parameters(v: A2IContext, orig_sig: MMSignature, params: IndexedCollection[IRegister], closdecls: nullable IndexedCollection[IClosureDecl])
+	fun fill_iroutine_parameters(v: A2IContext, orig_sig: MMSignature, params: IndexedCollection[IRegister], closdecls: nullable IndexedCollection[IClosureDecl])
 	do
 		for ap in n_params do
 			var reg = v.variable(ap.variable)
@@ -603,7 +599,7 @@ end
 
 ###############################################################################
 
-redef class PExpr
+redef class AExpr
 	redef fun accept_icode_generation(v) do end
 
 	# Generate icode sequence in the current A2IContext
@@ -1301,14 +1297,10 @@ redef class AOnceExpr
 end
 
 
-redef class PClosureDef
+redef class AClosureDef
 	var _iclosure_def: nullable IClosureDef
 
-	fun generate_iclosuredef(v: A2IContext): IClosureDef is abstract
-end
-
-redef class AClosureDef
-	redef fun generate_iclosuredef(v)
+	fun generate_iclosuredef(v: A2IContext): IClosureDef
 	do
 		# Prepare signature
 		var args = new Array[IRegister]
@@ -1362,7 +1354,7 @@ redef class AClosureCallExpr
 			var iseq = new ISeq
 			icall.break_seq = iseq
 			v.seq = iseq
-			v.generate_stmt(n_closure_defs.first.as(AClosureDef).n_expr)
+			v.generate_stmt(n_closure_defs.first.n_expr)
 			v.seq = seq_old
 		end
 

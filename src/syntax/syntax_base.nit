@@ -26,7 +26,7 @@ special MMModule
 	# A source module can locate AST nodes of related MM entities
 	# Once a source module AST is no more needed, _nodes is set to null
 	# See ToolContext::keep_ast property in syntax.nit for details
-	var _nodes: nullable HashMap[Object, nullable PNode] = new HashMap[Object, nullable PNode]
+	var _nodes: nullable HashMap[Object, nullable ANode] = new HashMap[Object, nullable ANode]
 
 	# Release the AST
 	fun clear_ast do _nodes = null
@@ -44,11 +44,11 @@ special MMModule
 		_src_local_classes = new HashMap[Symbol, MMSrcLocalClass]
 	end
 
-	redef fun nodes(o: Object): nullable PNode
+	redef fun nodes(o: Object): nullable ANode
 	do
 		if _nodes != null and _nodes.has_key(o) then return _nodes[o] else return null
 	end
-	redef fun nodes=(o: Object, n: nullable PNode)
+	redef fun nodes=(o: Object, n: nullable ANode)
 	do
 		assert not _nodes.has_key(o)
 		_nodes[o] = n
@@ -57,14 +57,14 @@ end
 
 redef class MMModule
 	# The AST node of some entity
-	private fun nodes(o: Object): nullable PNode do return null
+	private fun nodes(o: Object): nullable ANode do return null
 	# The AST node of some entity
-	private fun nodes=(o: Object, n: nullable PNode) do abort
+	private fun nodes=(o: Object, n: nullable ANode) do abort
 end
 
 redef class MMGlobalClass
 	# Check that a module can access a class
-	fun check_visibility(v: AbsSyntaxVisitor, n: PNode, cm: MMSrcModule): Bool do
+	fun check_visibility(v: AbsSyntaxVisitor, n: ANode, cm: MMSrcModule): Bool do
 		var pm = intro.module
 		assert pm isa MMSrcModule
 		var vpm = cm.visibility_for(pm)
@@ -85,7 +85,7 @@ end
 class MMSrcLocalClass
 special MMConcreteClass
 	# The first related AST node (if any)
-	fun node: nullable PClassdef do return module.nodes(self).as(nullable PClassdef)
+	fun node: nullable AClassdef do return module.nodes(self).as(nullable AClassdef)
 
 	# Concrete NIT source generic formal parameter by name
 	readable var _formal_dict: Map[Symbol, MMTypeFormalParameter] = new HashMap[Symbol, MMTypeFormalParameter]
@@ -93,7 +93,7 @@ special MMConcreteClass
 	# Concrete NIT source properties by name
 	readable var _src_local_properties: Map[Symbol, MMLocalProperty]
 
-	init(mod: MMSrcModule, n: Symbol, cla: nullable PClassdef, a: Int)
+	init(mod: MMSrcModule, n: Symbol, cla: nullable AClassdef, a: Int)
 	do
 		super(mod, n, a)
 		mod.nodes(self) = cla
@@ -103,7 +103,7 @@ end
 
 redef class MMGlobalProperty
 	# Check that a module can access a property
-	fun check_visibility(v: AbsSyntaxVisitor, n: PNode, cm: MMSrcModule, allows_protected: Bool): Bool do
+	fun check_visibility(v: AbsSyntaxVisitor, n: ANode, cm: MMSrcModule, allows_protected: Bool): Bool do
 		var pm = local_class.module
 		assert pm isa MMSrcModule
 		var vpm = cm.visibility_for(pm)
@@ -126,7 +126,7 @@ end
 
 redef class MMLocalProperty
 	# The attached node (if any)
-	fun node: nullable PNode do return null
+	fun node: nullable ANode do return null
 
 	# Is the concrete method defined as init
 	fun is_init: Bool do return false
@@ -227,7 +227,7 @@ abstract class Variable
 	readable var _name: Symbol
 
 	# Declaration AST node
-	readable var _decl: nullable PNode
+	readable var _decl: nullable ANode
 
 	# Static type
 	readable writable var _stype: nullable MMType
@@ -236,7 +236,7 @@ abstract class Variable
 
 	fun kind: String is abstract
 
-	init(n: Symbol, d: nullable PNode)
+	init(n: Symbol, d: nullable ANode)
 	do
 		_name = n
 		_decl = d
@@ -247,21 +247,21 @@ end
 class VarVariable
 special Variable
 	redef fun kind do return once "variable"
-	init(n: Symbol, d: PNode) do super
+	init(n: Symbol, d: ANode) do super
 end
 
 # Parameter of method (declared in signature)
 class ParamVariable
 special Variable
 	redef fun kind do return once "parameter"
-	init(n: Symbol, d: nullable PNode) do super
+	init(n: Symbol, d: nullable ANode) do super
 end
 
 # Automatic variable (like in the 'for' statement)
 class AutoVariable
 special Variable
 	redef fun kind do return once "automatic variable"
-	init(n: Symbol, d: PNode) do super
+	init(n: Symbol, d: ANode) do super
 end
 
 # False variable corresponding to closures declared in signatures
@@ -273,7 +273,7 @@ special Variable
 	# The signature of the closure
 	readable var _closure: MMClosure
 
-	init(n: Symbol, d: PNode, c: MMClosure)
+	init(n: Symbol, d: ANode, c: MMClosure)
 	do
 		super(n, d)
 		_closure = c
@@ -381,25 +381,25 @@ special Visitor
 	readable var _tc: ToolContext 
 
 	# Display an error for a given syntax node
-	fun error(n: nullable PNode, s: String)
+	fun error(n: nullable ANode, s: String)
 	do
 		_tc.error(if n == null then null else n.location, s)
 	end
 
 	# Add an error, show errors and quit
-	fun fatal_error(n: nullable PNode, s: String)
+	fun fatal_error(n: nullable ANode, s: String)
 	do
 		_tc.fatal_error(if n == null then null else n.location, s)
 	end
 
 	# Display a warning for a given syntax node
-	fun warning(n: nullable PNode, s: String)
+	fun warning(n: nullable ANode, s: String)
 	do
 		_tc.warning(if n == null then null else n.location, s)
 	end
 
 	# Check conformity and display error
-	fun check_conform(n: PNode, subtype: nullable MMType, stype: nullable MMType): Bool
+	fun check_conform(n: ANode, subtype: nullable MMType, stype: nullable MMType): Bool
 	do
 		if stype == null or subtype == null then
 			return false
@@ -414,7 +414,7 @@ special Visitor
 	# Check that an expression has a static type and that 
 	# Display an error and return false if n is a statement
 	# Require that the static type of n is known
-	fun check_expr(n: PExpr): Bool
+	fun check_expr(n: AExpr): Bool
 	do
 		if not n.is_typed then
 			if tc.error_count == 0 then
@@ -437,7 +437,7 @@ special Visitor
 	end
 
 	# Combine check_conform and check_expr
-	fun check_conform_expr(n: PExpr, stype: nullable MMType): Bool
+	fun check_conform_expr(n: AExpr, stype: nullable MMType): Bool
 	do
 		if stype == null then return false
 		if check_expr(n) then return check_conform(n, n.stype, stype) else return false
@@ -453,9 +453,9 @@ special Visitor
 	#   Int, Int, Object => return Object
 	#   Int, Float => display error, return null
 	#   nullable Int, Object => return nullable Object
-	fun check_conform_multiexpr(stype: nullable MMType, nodes: Collection[PExpr]): nullable MMType
+	fun check_conform_multiexpr(stype: nullable MMType, nodes: Collection[AExpr]): nullable MMType
 	do
-		var node: nullable PExpr = null # candidate node
+		var node: nullable AExpr = null # candidate node
 		for n in nodes do
 			if not check_expr(n) then return null
 			var ntype = n.stype
@@ -496,7 +496,7 @@ end
 
 ###############################################################################
 
-redef class PNode
+redef class ANode
 	protected fun accept_abs_syntax_visitor(v: AbsSyntaxVisitor) do visit_all(v)
 end
 
@@ -516,15 +516,15 @@ redef class Token
 	end
 end
 
-redef class PClassdef
+redef class AClassdef
 	# Associated class (MM entity)
 	fun local_class: MMSrcLocalClass is abstract
 
-	# Next PClassdef of the same class (if any)
-	readable writable var _next_node: nullable PClassdef = null
+	# Next AClassdef of the same class (if any)
+	readable writable var _next_node: nullable AClassdef = null
 end
 
-redef class PPropdef
+redef class APropdef
 	# Associated 'self' variable
 	fun self_var: ParamVariable is abstract
 end
@@ -555,7 +555,7 @@ redef class ATypePropdef
 	fun prop: MMSrcTypeProperty is abstract
 end
 
-redef class PParam
+redef class AParam
 	# Position in the signature
 	fun position: Int is abstract
 
@@ -563,7 +563,7 @@ redef class PParam
 	fun variable: ParamVariable is abstract 
 end
 
-redef class PClosureDecl
+redef class AClosureDecl
 	# Position in the signature
 	fun position: Int is abstract
 
@@ -571,27 +571,7 @@ redef class PClosureDecl
 	fun variable: ClosureVariable is abstract
 end
 
-redef class PType
-	# Retrieve the local class corresponding to the type.
-	# Display an error and return null if there is no class
-	# Display an error and return null if the type is not class based (formal one)
-	fun get_local_class(v: AbsSyntaxVisitor): nullable MMLocalClass is abstract
-
-	# Retrieve corresponding static type.
-	# Display an error and return null if there is a problem
-	fun get_stype(v: AbsSyntaxVisitor): nullable MMType is abstract
-
-	# Retrieve corresponding static type.
-	# Display an error and return null if there is a problem
-	# But do not performs any subtype check.
-	# get_unchecked_stype should be called to check that the static type is fully valid
-	fun get_unchecked_stype(v: AbsSyntaxVisitor): nullable MMType is abstract
-
-	# Check that a static definition type is conform with regard to formal types
-	# Useful with get_unchecked_stype
-	# Remember that conformance check need that ancestors are totaly computed
-	fun check_conform(v: AbsSyntaxVisitor) is abstract
-
+redef class AType
 	# Is the node correcly typed
 	# Return false if typed was not yet computed or
 	# if an error occured during the typing computation
@@ -599,13 +579,14 @@ redef class PType
 
 	# Return corresponding static type. (require is_typed)
 	fun stype: MMType is abstract
-end
 
-redef class AType
 	var _stype_cache: nullable MMType = null
 	var _stype_cached: Bool = false
 
-	redef fun get_local_class(v)
+	# Retrieve the local class corresponding to the type.
+	# Display an error and return null if there is no class
+	# Display an error and return null if the type is not class based (formal one)
+	fun get_local_class(v: AbsSyntaxVisitor): nullable MMLocalClass
 	do
 		var name = n_id.to_symbol
 		var mod = v.module
@@ -628,7 +609,11 @@ redef class AType
 		return local_class
 	end
 
-	redef fun get_unchecked_stype(v)
+	# Retrieve corresponding static type.
+	# Display an error and return null if there is a problem
+	# But do not performs any subtype check.
+	# get_unchecked_stype should be called to check that the static type is fully valid
+	fun get_unchecked_stype(v: AbsSyntaxVisitor): nullable MMType
 	do
 		if _stype_cached then return _stype_cache
 		_stype_cached = true
@@ -694,8 +679,10 @@ redef class AType
 		_stype_cache = t
 		return t
 	end
-	
-	redef fun get_stype(v)
+
+	# Retrieve corresponding static type.
+	# Display an error and return null if there is a problem
+	fun get_stype(v: AbsSyntaxVisitor): nullable MMType
 	do
 		var t = get_unchecked_stype(v)
 		if t == null then return null
@@ -704,7 +691,10 @@ redef class AType
 		return t
 	end
 
-	redef fun check_conform(v)
+	# Check that a static definition type is conform with regard to formal types
+	# Useful with get_unchecked_stype
+	# Remember that conformance check need that ancestors are totaly computed
+	fun check_conform(v: AbsSyntaxVisitor)
 	do
 		var st = get_unchecked_stype(v)
 		if st == null then return 
@@ -724,7 +714,7 @@ redef class AType
 	end
 end
 
-redef class PExpr
+redef class AExpr
 	# Is the expression node correcly typed
 	# Return false if typed was not yet computed or
 	# if an error occured during the typing computation
@@ -740,12 +730,12 @@ redef class PExpr
 end
 
 class AAbsAbsSendExpr
-special PExpr
+special AExpr
 	# The signature of the called property (require is_typed)
 	fun prop_signature: MMSignature is abstract
 
 	# The real arguments used (after star transformation) (require is_typed)
-	fun arguments: Array[PExpr] is abstract
+	fun arguments: Array[AExpr] is abstract
 end
 
 class AAbsSendExpr
@@ -773,7 +763,7 @@ end
 redef class ASendExpr
 special ASuperInitCall
 	# Closure definitions
-	fun closure_defs: nullable Array[PClosureDef] is abstract
+	fun closure_defs: nullable Array[AClosureDef] is abstract
 end
 
 redef class AReassignFormExpr
@@ -836,7 +826,7 @@ special AAbsAbsSendExpr
 	fun variable: ClosureVariable is abstract
 end
 
-redef class PClosureDef
+redef class AClosureDef
 	# Associated closure
 	fun closure: MMClosure is abstract
 

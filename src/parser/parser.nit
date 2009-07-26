@@ -105,7 +105,7 @@ special ParserTable
 			var last_pos = token.location.column_start
 			var last_line = token.location.line_start
 
-			if token isa PError then
+			if token isa AError then
 				return new Start(null, token)
 			end
 
@@ -140,13 +140,13 @@ special ParserTable
 				var node2 = lexer.next
 				assert node2 isa EOF
 				var node1 = pop
-				assert node1 isa PModule
+				assert node1 isa AModule
 				var node = new Start(node1, node2)
 				(new SearchTokensVisitor).enter_visit(node)
 				return node
 			else if action_type == 3 then # ERROR
 				var location = new Location(lexer.filename, last_line, last_line, last_pos, last_pos)
-				var node2 = new PError.init_error(error_messages[errors[action_value]],location)
+				var node2 = new AError.init_error(error_messages[errors[action_value]],location)
 				var node = new Start(null, node2)
 				return node
 			end
@@ -905,7 +905,7 @@ private class SearchTokensVisitor
 special Visitor
 	var _untokenned_nodes: Array[Prod]
 	var _last_token: nullable Token = null
-	redef fun visit(n: nullable PNode)
+	redef fun visit(n: nullable ANode)
 	do
 		if n == null then
 			return
@@ -973,7 +973,7 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode4 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
@@ -1021,7 +1021,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -1078,7 +1078,7 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 #					if listnode4 != null then
@@ -1146,7 +1146,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -1186,7 +1186,7 @@ special ReduceAction
 					var listnode7 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var ppropdefnode5 = nodearraylist1
-					assert ppropdefnode5 isa nullable PPropdef
+					assert ppropdefnode5 isa nullable APropdef
 					if ppropdefnode5 != null then
 						listnode6.add(ppropdefnode5)
 					end
@@ -1218,7 +1218,7 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode5 = nodearraylist1
-					assert ppropdefnode5 isa nullable PPropdef
+					assert ppropdefnode5 isa nullable APropdef
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
 					if ppropdefnode5 != null then
@@ -1258,10 +1258,10 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode6 = new Array[Object]
 					var ppropdefnode5 = nodearraylist2
-					assert ppropdefnode5 isa nullable PPropdef
+					assert ppropdefnode5 isa nullable APropdef
 					if ppropdefnode5 != null then
 						listnode6.add(ppropdefnode5)
 					end
@@ -1293,10 +1293,10 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode8 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode7 = new Array[Object]
 					var ppropdefnode5 = nodearraylist2
-					assert ppropdefnode5 isa nullable PPropdef
+					assert ppropdefnode5 isa nullable APropdef
 					var listnode6 = nodearraylist4
 					assert listnode6 isa Array[Object]
 					if ppropdefnode5 != null then
@@ -1346,7 +1346,7 @@ special ReduceAction
 #					end
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
@@ -1388,7 +1388,7 @@ special ReduceAction
 #					end
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					var listnode7 = nodearraylist4
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
@@ -1429,7 +1429,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode8 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -1441,7 +1441,7 @@ special ReduceAction
 #					end
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
@@ -1474,7 +1474,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -1486,7 +1486,7 @@ special ReduceAction
 #					end
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					var listnode7 = nodearraylist5
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
@@ -1529,7 +1529,7 @@ special ReduceAction
 					assert listnode4 isa Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
@@ -1571,7 +1571,7 @@ special ReduceAction
 					assert listnode4 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					var listnode7 = nodearraylist4
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
@@ -1619,12 +1619,12 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode8 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
@@ -1664,12 +1664,12 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					var listnode7 = nodearraylist5
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
@@ -1729,7 +1729,7 @@ special ReduceAction
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode7 = nodearraylist3
-					assert ppropdefnode7 isa nullable PPropdef
+					assert ppropdefnode7 isa nullable APropdef
 					if ppropdefnode7 != null then
 						listnode8.add(ppropdefnode7)
 					end
@@ -1781,7 +1781,7 @@ special ReduceAction
 					assert listnode5 isa Array[Object]
 					var listnode9 = new Array[Object]
 					var ppropdefnode7 = nodearraylist3
-					assert ppropdefnode7 isa nullable PPropdef
+					assert ppropdefnode7 isa nullable APropdef
 					var listnode8 = nodearraylist5
 					assert listnode8 isa Array[Object]
 					if ppropdefnode7 != null then
@@ -1830,7 +1830,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -1844,7 +1844,7 @@ special ReduceAction
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode7 = nodearraylist4
-					assert ppropdefnode7 isa nullable PPropdef
+					assert ppropdefnode7 isa nullable APropdef
 					if ppropdefnode7 != null then
 						listnode8.add(ppropdefnode7)
 					end
@@ -1885,7 +1885,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -1899,7 +1899,7 @@ special ReduceAction
 					assert listnode5 isa Array[Object]
 					var listnode9 = new Array[Object]
 					var ppropdefnode7 = nodearraylist4
-					assert ppropdefnode7 isa nullable PPropdef
+					assert ppropdefnode7 isa nullable APropdef
 					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
 					if ppropdefnode7 != null then
@@ -1944,7 +1944,7 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var pclassdefnode4 = nodearraylist1
-					assert pclassdefnode4 isa nullable PClassdef
+					assert pclassdefnode4 isa nullable AClassdef
 					if pclassdefnode4 != null then
 						listnode5.add(pclassdefnode4)
 					end
@@ -1968,9 +1968,9 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var pclassdefnode4 = nodearraylist2
-					assert pclassdefnode4 isa nullable PClassdef
+					assert pclassdefnode4 isa nullable AClassdef
 					if pclassdefnode4 != null then
 						listnode5.add(pclassdefnode4)
 					end
@@ -2003,7 +2003,7 @@ special ReduceAction
 						end
 #					end
 					var pclassdefnode5 = nodearraylist2
-					assert pclassdefnode5 isa nullable PClassdef
+					assert pclassdefnode5 isa nullable AClassdef
 					if pclassdefnode5 != null then
 						listnode6.add(pclassdefnode5)
 					end
@@ -2028,7 +2028,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -2039,7 +2039,7 @@ special ReduceAction
 						end
 #					end
 					var pclassdefnode5 = nodearraylist3
-					assert pclassdefnode5 isa nullable PClassdef
+					assert pclassdefnode5 isa nullable AClassdef
 					if pclassdefnode5 != null then
 						listnode6.add(pclassdefnode5)
 					end
@@ -2065,7 +2065,7 @@ special ReduceAction
 					var listnode4 = nodearraylist1
 					assert listnode4 isa Array[Object]
 					var pclassdefnode5 = nodearraylist2
-					assert pclassdefnode5 isa nullable PClassdef
+					assert pclassdefnode5 isa nullable AClassdef
 #					if listnode4 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode4
@@ -2097,11 +2097,11 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var pclassdefnode5 = nodearraylist3
-					assert pclassdefnode5 isa nullable PClassdef
+					assert pclassdefnode5 isa nullable AClassdef
 #					if listnode4 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode4
@@ -2144,7 +2144,7 @@ special ReduceAction
 					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
 					var pclassdefnode6 = nodearraylist3
-					assert pclassdefnode6 isa nullable PClassdef
+					assert pclassdefnode6 isa nullable AClassdef
 #					if listnode5 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode5
@@ -2177,7 +2177,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -2190,7 +2190,7 @@ special ReduceAction
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					var pclassdefnode6 = nodearraylist4
-					assert pclassdefnode6 isa nullable PClassdef
+					assert pclassdefnode6 isa nullable AClassdef
 #					if listnode5 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode5
@@ -2223,7 +2223,7 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var ppropdefnode5 = nodearraylist1
-					assert ppropdefnode5 isa nullable PPropdef
+					assert ppropdefnode5 isa nullable APropdef
 					if ppropdefnode5 != null then
 						listnode6.add(ppropdefnode5)
 					end
@@ -2231,7 +2231,7 @@ special ReduceAction
 						listnode6
 					)
 					var pclassdefnode7 = nodearraylist3
-					assert pclassdefnode7 isa nullable PClassdef
+					assert pclassdefnode7 isa nullable AClassdef
 					if pclassdefnode4 != null then
 						listnode8.add(pclassdefnode4)
 					end
@@ -2261,7 +2261,7 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode5 = nodearraylist1
-					assert ppropdefnode5 isa nullable PPropdef
+					assert ppropdefnode5 isa nullable APropdef
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
 					if ppropdefnode5 != null then
@@ -2278,7 +2278,7 @@ special ReduceAction
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist4
-					assert pclassdefnode8 isa nullable PClassdef
+					assert pclassdefnode8 isa nullable AClassdef
 					if pclassdefnode4 != null then
 						listnode9.add(pclassdefnode4)
 					end
@@ -2307,10 +2307,10 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode8 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode6 = new Array[Object]
 					var ppropdefnode5 = nodearraylist2
-					assert ppropdefnode5 isa nullable PPropdef
+					assert ppropdefnode5 isa nullable APropdef
 					if ppropdefnode5 != null then
 						listnode6.add(ppropdefnode5)
 					end
@@ -2318,7 +2318,7 @@ special ReduceAction
 						listnode6
 					)
 					var pclassdefnode7 = nodearraylist4
-					assert pclassdefnode7 isa nullable PClassdef
+					assert pclassdefnode7 isa nullable AClassdef
 					if pclassdefnode4 != null then
 						listnode8.add(pclassdefnode4)
 					end
@@ -2348,10 +2348,10 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode7 = new Array[Object]
 					var ppropdefnode5 = nodearraylist2
-					assert ppropdefnode5 isa nullable PPropdef
+					assert ppropdefnode5 isa nullable APropdef
 					var listnode6 = nodearraylist4
 					assert listnode6 isa Array[Object]
 					if ppropdefnode5 != null then
@@ -2368,7 +2368,7 @@ special ReduceAction
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist5
-					assert pclassdefnode8 isa nullable PClassdef
+					assert pclassdefnode8 isa nullable AClassdef
 					if pclassdefnode4 != null then
 						listnode9.add(pclassdefnode4)
 					end
@@ -2407,7 +2407,7 @@ special ReduceAction
 #					end
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
@@ -2415,7 +2415,7 @@ special ReduceAction
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist4
-					assert pclassdefnode8 isa nullable PClassdef
+					assert pclassdefnode8 isa nullable AClassdef
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
@@ -2455,7 +2455,7 @@ special ReduceAction
 #					end
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					var listnode7 = nodearraylist4
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
@@ -2472,7 +2472,7 @@ special ReduceAction
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist5
-					assert pclassdefnode9 isa nullable PClassdef
+					assert pclassdefnode9 isa nullable AClassdef
 					if pclassdefnode5 != null then
 						listnode10.add(pclassdefnode5)
 					end
@@ -2502,7 +2502,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -2514,7 +2514,7 @@ special ReduceAction
 #					end
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
@@ -2522,7 +2522,7 @@ special ReduceAction
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist5
-					assert pclassdefnode8 isa nullable PClassdef
+					assert pclassdefnode8 isa nullable AClassdef
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
@@ -2553,7 +2553,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -2565,7 +2565,7 @@ special ReduceAction
 #					end
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					var listnode7 = nodearraylist5
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
@@ -2582,7 +2582,7 @@ special ReduceAction
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist6
-					assert pclassdefnode9 isa nullable PClassdef
+					assert pclassdefnode9 isa nullable AClassdef
 					if pclassdefnode5 != null then
 						listnode10.add(pclassdefnode5)
 					end
@@ -2614,7 +2614,7 @@ special ReduceAction
 					assert listnode4 isa Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
@@ -2622,7 +2622,7 @@ special ReduceAction
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist4
-					assert pclassdefnode8 isa nullable PClassdef
+					assert pclassdefnode8 isa nullable AClassdef
 #					if listnode4 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode4
@@ -2662,7 +2662,7 @@ special ReduceAction
 					assert listnode4 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					var listnode7 = nodearraylist4
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
@@ -2679,7 +2679,7 @@ special ReduceAction
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist5
-					assert pclassdefnode9 isa nullable PClassdef
+					assert pclassdefnode9 isa nullable AClassdef
 #					if listnode4 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode4
@@ -2716,12 +2716,12 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
@@ -2729,7 +2729,7 @@ special ReduceAction
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist5
-					assert pclassdefnode8 isa nullable PClassdef
+					assert pclassdefnode8 isa nullable AClassdef
 #					if listnode4 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode4
@@ -2767,12 +2767,12 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa nullable PPropdef
+					assert ppropdefnode6 isa nullable APropdef
 					var listnode7 = nodearraylist5
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
@@ -2789,7 +2789,7 @@ special ReduceAction
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist6
-					assert pclassdefnode9 isa nullable PClassdef
+					assert pclassdefnode9 isa nullable AClassdef
 #					if listnode4 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode4
@@ -2838,7 +2838,7 @@ special ReduceAction
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode7 = nodearraylist3
-					assert ppropdefnode7 isa nullable PPropdef
+					assert ppropdefnode7 isa nullable APropdef
 					if ppropdefnode7 != null then
 						listnode8.add(ppropdefnode7)
 					end
@@ -2846,7 +2846,7 @@ special ReduceAction
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist5
-					assert pclassdefnode9 isa nullable PClassdef
+					assert pclassdefnode9 isa nullable AClassdef
 #					if listnode5 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode5
@@ -2896,7 +2896,7 @@ special ReduceAction
 					assert listnode5 isa Array[Object]
 					var listnode9 = new Array[Object]
 					var ppropdefnode7 = nodearraylist3
-					assert ppropdefnode7 isa nullable PPropdef
+					assert ppropdefnode7 isa nullable APropdef
 					var listnode8 = nodearraylist5
 					assert listnode8 isa Array[Object]
 					if ppropdefnode7 != null then
@@ -2913,7 +2913,7 @@ special ReduceAction
 						listnode9
 					)
 					var pclassdefnode10 = nodearraylist6
-					assert pclassdefnode10 isa nullable PClassdef
+					assert pclassdefnode10 isa nullable AClassdef
 #					if listnode5 != null then
 						if listnode11.is_empty then
 							listnode11 = listnode5
@@ -2951,7 +2951,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -2965,7 +2965,7 @@ special ReduceAction
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode7 = nodearraylist4
-					assert ppropdefnode7 isa nullable PPropdef
+					assert ppropdefnode7 isa nullable APropdef
 					if ppropdefnode7 != null then
 						listnode8.add(ppropdefnode7)
 					end
@@ -2973,7 +2973,7 @@ special ReduceAction
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist6
-					assert pclassdefnode9 isa nullable PClassdef
+					assert pclassdefnode9 isa nullable AClassdef
 #					if listnode5 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode5
@@ -3012,7 +3012,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable PPackagedecl
+					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -3026,7 +3026,7 @@ special ReduceAction
 					assert listnode5 isa Array[Object]
 					var listnode9 = new Array[Object]
 					var ppropdefnode7 = nodearraylist4
-					assert ppropdefnode7 isa nullable PPropdef
+					assert ppropdefnode7 isa nullable APropdef
 					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
 					if ppropdefnode7 != null then
@@ -3043,7 +3043,7 @@ special ReduceAction
 						listnode9
 					)
 					var pclassdefnode10 = nodearraylist7
-					assert pclassdefnode10 isa nullable PClassdef
+					assert pclassdefnode10 isa nullable AClassdef
 #					if listnode5 != null then
 						if listnode11.is_empty then
 							listnode11 = listnode5
@@ -3078,7 +3078,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwpackagenode3 = nodearraylist2
 					assert tkwpackagenode3 isa nullable TKwpackage
 					var tidnode4 = nodearraylist4
@@ -3105,7 +3105,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pvisibilitynode2 = nodearraylist2
-					assert pvisibilitynode2 isa nullable PVisibility
+					assert pvisibilitynode2 isa nullable AVisibility
 					var tkwimportnode3 = nodearraylist3
 					assert tkwimportnode3 isa nullable TKwimport
 					var tidnode4 = nodearraylist5
@@ -3132,7 +3132,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pvisibilitynode2 = nodearraylist2
-					assert pvisibilitynode2 isa nullable PVisibility
+					assert pvisibilitynode2 isa nullable AVisibility
 					var tkwimportnode3 = nodearraylist3
 					assert tkwimportnode3 isa nullable TKwimport
 					var tkwendnode4 = nodearraylist5
@@ -3155,7 +3155,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var ppropdefnode2 = nodearraylist1
-					assert ppropdefnode2 isa nullable PPropdef
+					assert ppropdefnode2 isa nullable APropdef
 					if ppropdefnode2 != null then
 						listnode3.add(ppropdefnode2)
 					end
@@ -3188,7 +3188,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode4 = nodearraylist2
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					if pexprnode4 != null then
 						listnode5.add(pexprnode4)
 					end
@@ -3215,7 +3215,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
 					var pexprnode4 = nodearraylist2
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					if pexprnode4 != null then
@@ -3256,11 +3256,11 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
@@ -3295,13 +3295,13 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
@@ -3336,11 +3336,11 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist6
@@ -3385,13 +3385,13 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist7
@@ -3435,11 +3435,11 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var listnode8 = nodearraylist6
@@ -3484,13 +3484,13 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var listnode8 = nodearraylist7
@@ -3535,11 +3535,11 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist6
@@ -3594,13 +3594,13 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist7
@@ -3654,15 +3654,15 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var ppropdefnode9 = nodearraylist6
-					assert ppropdefnode9 isa nullable PPropdef
+					assert ppropdefnode9 isa nullable APropdef
 					if ppropdefnode9 != null then
 						listnode10.add(ppropdefnode9)
 					end
@@ -3700,15 +3700,15 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var ppropdefnode9 = nodearraylist6
-					assert ppropdefnode9 isa nullable PPropdef
+					assert ppropdefnode9 isa nullable APropdef
 					var listnode10 = nodearraylist8
 					assert listnode10 isa Array[Object]
 					if ppropdefnode9 != null then
@@ -3755,17 +3755,17 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var ppropdefnode9 = nodearraylist7
-					assert ppropdefnode9 isa nullable PPropdef
+					assert ppropdefnode9 isa nullable APropdef
 					if ppropdefnode9 != null then
 						listnode10.add(ppropdefnode9)
 					end
@@ -3804,17 +3804,17 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var ppropdefnode9 = nodearraylist7
-					assert ppropdefnode9 isa nullable PPropdef
+					assert ppropdefnode9 isa nullable APropdef
 					var listnode10 = nodearraylist9
 					assert listnode10 isa Array[Object]
 					if ppropdefnode9 != null then
@@ -3861,11 +3861,11 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist6
@@ -3878,7 +3878,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode10 = nodearraylist7
-					assert ppropdefnode10 isa nullable PPropdef
+					assert ppropdefnode10 isa nullable APropdef
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
@@ -3917,11 +3917,11 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist6
@@ -3934,7 +3934,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode10 = nodearraylist7
-					assert ppropdefnode10 isa nullable PPropdef
+					assert ppropdefnode10 isa nullable APropdef
 					var listnode11 = nodearraylist9
 					assert listnode11 isa Array[Object]
 					if ppropdefnode10 != null then
@@ -3982,13 +3982,13 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist7
@@ -4001,7 +4001,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode10 = nodearraylist8
-					assert ppropdefnode10 isa nullable PPropdef
+					assert ppropdefnode10 isa nullable APropdef
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
@@ -4041,13 +4041,13 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist7
@@ -4060,7 +4060,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode10 = nodearraylist8
-					assert ppropdefnode10 isa nullable PPropdef
+					assert ppropdefnode10 isa nullable APropdef
 					var listnode11 = nodearraylist10
 					assert listnode11 isa Array[Object]
 					if ppropdefnode10 != null then
@@ -4107,11 +4107,11 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var listnode8 = nodearraylist6
@@ -4124,7 +4124,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode10 = nodearraylist7
-					assert ppropdefnode10 isa nullable PPropdef
+					assert ppropdefnode10 isa nullable APropdef
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
@@ -4163,11 +4163,11 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var listnode8 = nodearraylist6
@@ -4180,7 +4180,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode10 = nodearraylist7
-					assert ppropdefnode10 isa nullable PPropdef
+					assert ppropdefnode10 isa nullable APropdef
 					var listnode11 = nodearraylist9
 					assert listnode11 isa Array[Object]
 					if ppropdefnode10 != null then
@@ -4228,13 +4228,13 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var listnode8 = nodearraylist7
@@ -4247,7 +4247,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode10 = nodearraylist8
-					assert ppropdefnode10 isa nullable PPropdef
+					assert ppropdefnode10 isa nullable APropdef
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
@@ -4287,13 +4287,13 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var listnode8 = nodearraylist7
@@ -4306,7 +4306,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode10 = nodearraylist8
-					assert ppropdefnode10 isa nullable PPropdef
+					assert ppropdefnode10 isa nullable APropdef
 					var listnode11 = nodearraylist10
 					assert listnode11 isa Array[Object]
 					if ppropdefnode10 != null then
@@ -4354,11 +4354,11 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist6
@@ -4380,7 +4380,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode11 = nodearraylist8
-					assert ppropdefnode11 isa nullable PPropdef
+					assert ppropdefnode11 isa nullable APropdef
 					if ppropdefnode11 != null then
 						listnode12.add(ppropdefnode11)
 					end
@@ -4420,11 +4420,11 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode13 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist6
@@ -4446,7 +4446,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode11 = nodearraylist8
-					assert ppropdefnode11 isa nullable PPropdef
+					assert ppropdefnode11 isa nullable APropdef
 					var listnode12 = nodearraylist10
 					assert listnode12 isa Array[Object]
 					if ppropdefnode11 != null then
@@ -4495,13 +4495,13 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist7
@@ -4523,7 +4523,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode11 = nodearraylist9
-					assert ppropdefnode11 isa nullable PPropdef
+					assert ppropdefnode11 isa nullable APropdef
 					if ppropdefnode11 != null then
 						listnode12.add(ppropdefnode11)
 					end
@@ -4564,13 +4564,13 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode13 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa nullable PClasskind
+					assert pclasskindnode5 isa nullable AClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist7
@@ -4592,7 +4592,7 @@ special ReduceAction
 						end
 #					end
 					var ppropdefnode11 = nodearraylist9
-					assert ppropdefnode11 isa nullable PPropdef
+					assert ppropdefnode11 isa nullable APropdef
 					var listnode12 = nodearraylist11
 					assert listnode12 isa Array[Object]
 					if ppropdefnode11 != null then
@@ -4700,7 +4700,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pformaldefnode1 = nodearraylist3
-					assert pformaldefnode1 isa nullable PFormaldef
+					assert pformaldefnode1 isa nullable AFormaldef
 					if pformaldefnode1 != null then
 						listnode2.add(pformaldefnode1)
 					end
@@ -4722,7 +4722,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pformaldefnode1 = nodearraylist3
-					assert pformaldefnode1 isa nullable PFormaldef
+					assert pformaldefnode1 isa nullable AFormaldef
 					var listnode2 = nodearraylist4
 					assert listnode2 isa Array[Object]
 					if pformaldefnode1 != null then
@@ -4749,7 +4749,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pformaldefnode1 = nodearraylist3
-					assert pformaldefnode1 isa nullable PFormaldef
+					assert pformaldefnode1 isa nullable AFormaldef
 					node_list = pformaldefnode1
 					p.push(p.go_to(8), node_list)
 	end
@@ -4782,7 +4782,7 @@ special ReduceAction
 					var tclassidnode2 = nodearraylist1
 					assert tclassidnode2 isa nullable TClassid
 					var ptypenode3 = nodearraylist2
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var pformaldefnode1: nullable AFormaldef = new AFormaldef.init_aformaldef(
 						tclassidnode2,
 						ptypenode3
@@ -4804,7 +4804,7 @@ special ReduceAction
 					var tkwspecialnode2 = nodearraylist2
 					assert tkwspecialnode2 isa nullable TKwspecial
 					var ptypenode3 = nodearraylist4
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var psuperclassnode1: nullable ASuperclass = new ASuperclass.init_asuperclass(
 						tkwspecialnode2,
 						ptypenode3
@@ -4822,7 +4822,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var ppropdefnode1 = nodearraylist1
-					assert ppropdefnode1 isa nullable PPropdef
+					assert ppropdefnode1 isa nullable APropdef
 					node_list = ppropdefnode1
 					p.push(p.go_to(11), node_list)
 	end
@@ -4841,17 +4841,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						null,
@@ -4880,19 +4880,19 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -4921,17 +4921,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						null,
@@ -4961,19 +4961,19 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -5001,15 +5001,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var ppropdefnode1: nullable ADeferredMethPropdef = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
 						null,
@@ -5037,17 +5037,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var ppropdefnode1: nullable ADeferredMethPropdef = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -5074,15 +5074,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var ppropdefnode1: nullable AInternMethPropdef = new AInternMethPropdef.init_ainternmethpropdef(
 						pdocnode2,
 						null,
@@ -5110,17 +5110,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var ppropdefnode1: nullable AInternMethPropdef = new AInternMethPropdef.init_ainternmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -5147,15 +5147,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						null,
@@ -5184,17 +5184,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -5223,15 +5223,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var tstringnode8 = nodearraylist8
 					assert tstringnode8 isa nullable TString
 					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
@@ -5263,17 +5263,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var tstringnode8 = nodearraylist9
 					assert tstringnode8 isa nullable TString
 					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
@@ -5302,7 +5302,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -5316,7 +5316,7 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist5
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist6
@@ -5351,7 +5351,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -5367,7 +5367,7 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
@@ -5400,7 +5400,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -5408,7 +5408,7 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist4
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
@@ -5443,7 +5443,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -5459,7 +5459,7 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
@@ -5495,7 +5495,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -5513,7 +5513,7 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
@@ -5547,7 +5547,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -5557,7 +5557,7 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
@@ -5590,7 +5590,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -5598,7 +5598,7 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist4
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
@@ -5632,7 +5632,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -5642,7 +5642,7 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
@@ -5674,9 +5674,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwattrnode7 = nodearraylist3
 					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist4
@@ -5711,7 +5711,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -5727,7 +5727,7 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist4
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
@@ -5763,7 +5763,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -5781,7 +5781,7 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
@@ -5815,7 +5815,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -5825,7 +5825,7 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
@@ -5861,7 +5861,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -5879,7 +5879,7 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
@@ -5916,7 +5916,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -5936,7 +5936,7 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist6
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist8
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist9
@@ -5971,7 +5971,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -5983,7 +5983,7 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist6
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
@@ -6017,7 +6017,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -6027,7 +6027,7 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
@@ -6062,7 +6062,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -6074,7 +6074,7 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist6
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
@@ -6107,11 +6107,11 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwattrnode7 = nodearraylist4
 					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist5
@@ -6146,7 +6146,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -6160,13 +6160,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist5
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist6
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist7
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6198,7 +6198,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -6214,13 +6214,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6250,7 +6250,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -6258,13 +6258,13 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist4
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6296,7 +6296,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -6312,13 +6312,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6351,7 +6351,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -6369,13 +6369,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6406,7 +6406,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -6416,13 +6416,13 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6452,7 +6452,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -6460,13 +6460,13 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist4
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -6497,7 +6497,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -6507,13 +6507,13 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -6542,15 +6542,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwattrnode7 = nodearraylist3
 					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist4
 					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist5
-					assert ptypenode10 isa nullable PType
+					assert ptypenode10 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -6582,7 +6582,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -6598,13 +6598,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist4
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6637,7 +6637,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -6655,13 +6655,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6692,7 +6692,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -6702,13 +6702,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6741,7 +6741,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -6759,13 +6759,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6799,7 +6799,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -6819,13 +6819,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist6
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist8
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist9
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist10
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6857,7 +6857,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -6869,13 +6869,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist6
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -6906,7 +6906,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -6916,13 +6916,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -6954,7 +6954,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -6966,13 +6966,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist6
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -7002,17 +7002,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwattrnode7 = nodearraylist4
 					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist5
 					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist6
-					assert ptypenode10 isa nullable PType
+					assert ptypenode10 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -7045,7 +7045,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -7059,13 +7059,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist5
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist6
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist9
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7099,7 +7099,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -7115,13 +7115,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7153,7 +7153,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -7161,13 +7161,13 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist4
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist8
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7201,7 +7201,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -7217,13 +7217,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7258,7 +7258,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -7276,13 +7276,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7315,7 +7315,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -7325,13 +7325,13 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7363,7 +7363,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -7371,13 +7371,13 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist4
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist8
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -7410,7 +7410,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -7420,13 +7420,13 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -7457,15 +7457,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwattrnode7 = nodearraylist3
 					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist4
 					assert tattridnode9 isa nullable TAttrid
 					var pexprnode11 = nodearraylist7
-					assert pexprnode11 isa nullable PExpr
+					assert pexprnode11 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -7499,7 +7499,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -7515,13 +7515,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist4
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7556,7 +7556,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -7574,13 +7574,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7613,7 +7613,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -7623,13 +7623,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7664,7 +7664,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -7682,13 +7682,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7724,7 +7724,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -7744,13 +7744,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist6
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist8
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist9
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7784,7 +7784,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -7796,13 +7796,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist6
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -7835,7 +7835,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -7845,13 +7845,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -7885,7 +7885,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -7897,13 +7897,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist6
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -7935,17 +7935,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwattrnode7 = nodearraylist4
 					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist5
 					assert tattridnode9 isa nullable TAttrid
 					var pexprnode11 = nodearraylist8
-					assert pexprnode11 isa nullable PExpr
+					assert pexprnode11 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -7979,7 +7979,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -7993,15 +7993,15 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist5
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist6
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist7
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8036,7 +8036,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -8052,15 +8052,15 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8093,7 +8093,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -8101,15 +8101,15 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist4
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8144,7 +8144,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -8160,15 +8160,15 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8204,7 +8204,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -8222,15 +8222,15 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8264,7 +8264,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -8274,15 +8274,15 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8315,7 +8315,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -8323,15 +8323,15 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist4
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -8365,7 +8365,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -8375,15 +8375,15 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -8415,17 +8415,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwattrnode7 = nodearraylist3
 					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist4
 					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist5
-					assert ptypenode10 isa nullable PType
+					assert ptypenode10 isa nullable AType
 					var pexprnode11 = nodearraylist8
-					assert pexprnode11 isa nullable PExpr
+					assert pexprnode11 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -8460,7 +8460,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -8476,15 +8476,15 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist4
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist6
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8520,7 +8520,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -8538,15 +8538,15 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8580,7 +8580,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -8590,15 +8590,15 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8634,7 +8634,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -8652,15 +8652,15 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist7
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8697,7 +8697,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -8717,15 +8717,15 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist6
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwattrnode11 = nodearraylist8
 					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist9
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist10
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist13
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8760,7 +8760,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -8772,15 +8772,15 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist6
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist11
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -8814,7 +8814,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -8824,15 +8824,15 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist5
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -8867,7 +8867,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -8879,15 +8879,15 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwattrnode9 = nodearraylist6
 					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist11
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -8920,19 +8920,19 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwattrnode7 = nodearraylist4
 					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist5
 					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist6
-					assert ptypenode10 isa nullable PType
+					assert ptypenode10 isa nullable AType
 					var pexprnode11 = nodearraylist9
-					assert pexprnode11 isa nullable PExpr
+					assert pexprnode11 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -8962,7 +8962,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -8976,7 +8976,7 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist5
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist6
@@ -9011,7 +9011,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -9027,7 +9027,7 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
@@ -9060,7 +9060,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -9068,7 +9068,7 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist4
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
@@ -9103,7 +9103,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -9119,7 +9119,7 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
@@ -9155,7 +9155,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -9173,7 +9173,7 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
@@ -9207,7 +9207,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -9217,7 +9217,7 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
@@ -9250,7 +9250,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -9258,7 +9258,7 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist4
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
@@ -9292,7 +9292,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -9302,7 +9302,7 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
@@ -9334,9 +9334,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwvarnode8 = nodearraylist3
 					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist4
@@ -9371,7 +9371,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -9387,7 +9387,7 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist4
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
@@ -9423,7 +9423,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -9441,7 +9441,7 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
@@ -9475,7 +9475,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -9485,7 +9485,7 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
@@ -9521,7 +9521,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -9539,7 +9539,7 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
@@ -9576,7 +9576,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -9596,7 +9596,7 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist6
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist8
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist9
@@ -9631,7 +9631,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -9643,7 +9643,7 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist6
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
@@ -9677,7 +9677,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -9687,7 +9687,7 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
@@ -9722,7 +9722,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -9734,7 +9734,7 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist6
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
@@ -9767,11 +9767,11 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwvarnode8 = nodearraylist4
 					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist5
@@ -9806,7 +9806,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -9820,13 +9820,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist5
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist6
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist7
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -9858,7 +9858,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -9874,13 +9874,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -9910,7 +9910,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -9918,13 +9918,13 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist4
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -9956,7 +9956,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -9972,13 +9972,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10011,7 +10011,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -10029,13 +10029,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10066,7 +10066,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -10076,13 +10076,13 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10112,7 +10112,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -10120,13 +10120,13 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist4
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -10157,7 +10157,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -10167,13 +10167,13 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -10202,15 +10202,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwvarnode8 = nodearraylist3
 					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist4
 					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist5
-					assert ptypenode10 isa nullable PType
+					assert ptypenode10 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -10242,7 +10242,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -10258,13 +10258,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist4
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10297,7 +10297,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -10315,13 +10315,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10352,7 +10352,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -10362,13 +10362,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10401,7 +10401,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -10419,13 +10419,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10459,7 +10459,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -10479,13 +10479,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist6
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist8
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist9
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist10
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10517,7 +10517,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -10529,13 +10529,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist6
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10566,7 +10566,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -10576,13 +10576,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -10614,7 +10614,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -10626,13 +10626,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist6
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -10662,17 +10662,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwvarnode8 = nodearraylist4
 					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist5
 					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist6
-					assert ptypenode10 isa nullable PType
+					assert ptypenode10 isa nullable AType
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -10705,7 +10705,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -10719,13 +10719,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist5
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist6
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist9
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10759,7 +10759,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -10775,13 +10775,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10813,7 +10813,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -10821,13 +10821,13 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist4
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist8
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10861,7 +10861,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -10877,13 +10877,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10918,7 +10918,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -10936,13 +10936,13 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -10975,7 +10975,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -10985,13 +10985,13 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11023,7 +11023,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -11031,13 +11031,13 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist4
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist8
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -11070,7 +11070,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -11080,13 +11080,13 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -11117,15 +11117,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwvarnode8 = nodearraylist3
 					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist4
 					assert tattridnode9 isa nullable TAttrid
 					var pexprnode11 = nodearraylist7
-					assert pexprnode11 isa nullable PExpr
+					assert pexprnode11 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -11159,7 +11159,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -11175,13 +11175,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist4
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11216,7 +11216,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -11234,13 +11234,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11273,7 +11273,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -11283,13 +11283,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11324,7 +11324,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -11342,13 +11342,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11384,7 +11384,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -11404,13 +11404,13 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist6
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist8
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist9
 					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11444,7 +11444,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -11456,13 +11456,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist6
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11495,7 +11495,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -11505,13 +11505,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -11545,7 +11545,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -11557,13 +11557,13 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist6
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -11595,17 +11595,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwvarnode8 = nodearraylist4
 					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist5
 					assert tattridnode9 isa nullable TAttrid
 					var pexprnode11 = nodearraylist8
-					assert pexprnode11 isa nullable PExpr
+					assert pexprnode11 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -11639,7 +11639,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -11653,15 +11653,15 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist5
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist6
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist7
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11696,7 +11696,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -11712,15 +11712,15 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11753,7 +11753,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -11761,15 +11761,15 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist4
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11804,7 +11804,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -11820,15 +11820,15 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11864,7 +11864,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -11882,15 +11882,15 @@ special ReduceAction
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11924,7 +11924,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -11934,15 +11934,15 @@ special ReduceAction
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -11975,7 +11975,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -11983,15 +11983,15 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist4
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -12025,7 +12025,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -12035,15 +12035,15 @@ special ReduceAction
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -12075,17 +12075,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwvarnode8 = nodearraylist3
 					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist4
 					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist5
-					assert ptypenode10 isa nullable PType
+					assert ptypenode10 isa nullable AType
 					var pexprnode11 = nodearraylist8
-					assert pexprnode11 isa nullable PExpr
+					assert pexprnode11 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -12120,7 +12120,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -12136,15 +12136,15 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist4
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist6
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -12180,7 +12180,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -12198,15 +12198,15 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -12240,7 +12240,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwreadablenode5 = nodearraylist2
 					assert tkwreadablenode5 isa nullable TKwreadable
 					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
@@ -12250,15 +12250,15 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -12294,7 +12294,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -12312,15 +12312,15 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist5
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist7
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -12357,7 +12357,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -12377,15 +12377,15 @@ special ReduceAction
 					var tkwredefnode9 = nodearraylist6
 					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa nullable PVisibility
+					assert pvisibilitynode10 isa nullable AVisibility
 					var tkwvarnode12 = nodearraylist8
 					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist9
 					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist10
-					assert ptypenode14 isa nullable PType
+					assert ptypenode14 isa nullable AType
 					var pexprnode15 = nodearraylist13
-					assert pexprnode15 isa nullable PExpr
+					assert pexprnode15 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -12420,7 +12420,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode4 = nodearraylist2
 					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
@@ -12432,15 +12432,15 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist6
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist11
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
@@ -12474,7 +12474,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwwritablenode6 = nodearraylist2
 					assert tkwwritablenode6 isa nullable TKwwritable
 					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
@@ -12484,15 +12484,15 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist3
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist5
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -12527,7 +12527,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
@@ -12539,15 +12539,15 @@ special ReduceAction
 					var tkwredefnode7 = nodearraylist4
 					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa nullable PVisibility
+					assert pvisibilitynode8 isa nullable AVisibility
 					var tkwvarnode10 = nodearraylist6
 					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
 					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa nullable PType
+					assert ptypenode12 isa nullable AType
 					var pexprnode13 = nodearraylist11
-					assert pexprnode13 isa nullable PExpr
+					assert pexprnode13 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -12580,19 +12580,19 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode5 = nodearraylist2
 					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa nullable PVisibility
+					assert pvisibilitynode6 isa nullable AVisibility
 					var tkwvarnode8 = nodearraylist4
 					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist5
 					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist6
-					assert ptypenode10 isa nullable PType
+					assert ptypenode10 isa nullable AType
 					var pexprnode11 = nodearraylist9
-					assert pexprnode11 isa nullable PExpr
+					assert pexprnode11 isa nullable AExpr
 					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
@@ -12622,15 +12622,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwinitnode5 = nodearraylist3
 					assert tkwinitnode5 isa nullable TKwinit
 					var psignaturenode7 = nodearraylist4
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist6
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						null,
@@ -12658,17 +12658,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwinitnode5 = nodearraylist4
 					assert tkwinitnode5 isa nullable TKwinit
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -12696,17 +12696,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwinitnode5 = nodearraylist3
 					assert tkwinitnode5 isa nullable TKwinit
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						null,
@@ -12735,19 +12735,19 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwinitnode5 = nodearraylist4
 					assert tkwinitnode5 isa nullable TKwinit
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -12775,15 +12775,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwinitnode5 = nodearraylist3
 					assert tkwinitnode5 isa nullable TKwinit
 					var psignaturenode7 = nodearraylist4
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist6
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						null,
@@ -12812,17 +12812,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwinitnode5 = nodearraylist4
 					assert tkwinitnode5 isa nullable TKwinit
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -12851,17 +12851,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwinitnode5 = nodearraylist3
 					assert tkwinitnode5 isa nullable TKwinit
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						null,
@@ -12891,19 +12891,19 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwinitnode5 = nodearraylist4
 					assert tkwinitnode5 isa nullable TKwinit
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -12929,15 +12929,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwtypenode5 = nodearraylist3
 					assert tkwtypenode5 isa nullable TKwtype
 					var tclassidnode6 = nodearraylist4
 					assert tclassidnode6 isa nullable TClassid
 					var ptypenode7 = nodearraylist5
-					assert ptypenode7 isa nullable PType
+					assert ptypenode7 isa nullable AType
 					var ppropdefnode1: nullable ATypePropdef = new ATypePropdef.init_atypepropdef(
 						pdocnode2,
 						null,
@@ -12963,17 +12963,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwtypenode5 = nodearraylist4
 					assert tkwtypenode5 isa nullable TKwtype
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
 					var ptypenode7 = nodearraylist6
-					assert ptypenode7 isa nullable PType
+					assert ptypenode7 isa nullable AType
 					var ppropdefnode1: nullable ATypePropdef = new ATypePropdef.init_atypepropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -13396,7 +13396,7 @@ special ReduceAction
 					var listnode2 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var ptypenode3 = nodearraylist1
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 #					if listnode4 != null then
@@ -13436,7 +13436,7 @@ special ReduceAction
 						end
 #					end
 					var ptypenode4 = nodearraylist2
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 #					if listnode5 != null then
@@ -13512,7 +13512,7 @@ special ReduceAction
 					var listnode2 = new Array[Object]
 					var listnode4 = new Array[Object]
 					var ptypenode3 = nodearraylist1
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						ptypenode3,
@@ -13543,7 +13543,7 @@ special ReduceAction
 						end
 #					end
 					var ptypenode4 = nodearraylist2
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						ptypenode4,
@@ -13607,7 +13607,7 @@ special ReduceAction
 					var listnode2 = new Array[Object]
 					var listnode4 = new Array[Object]
 					var ptypenode3 = nodearraylist1
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						ptypenode3,
@@ -13637,7 +13637,7 @@ special ReduceAction
 						end
 #					end
 					var ptypenode4 = nodearraylist2
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						ptypenode4,
@@ -13660,7 +13660,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pparamnode1 = nodearraylist3
-					assert pparamnode1 isa nullable PParam
+					assert pparamnode1 isa nullable AParam
 					if pparamnode1 != null then
 						listnode2.add(pparamnode1)
 					end
@@ -13682,7 +13682,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pparamnode1 = nodearraylist3
-					assert pparamnode1 isa nullable PParam
+					assert pparamnode1 isa nullable AParam
 					var listnode2 = nodearraylist4
 					assert listnode2 isa Array[Object]
 					if pparamnode1 != null then
@@ -13723,7 +13723,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pparamnode1 = nodearraylist3
-					assert pparamnode1 isa nullable PParam
+					assert pparamnode1 isa nullable AParam
 					node_list = pparamnode1
 					p.push(p.go_to(18), node_list)
 	end
@@ -13757,7 +13757,7 @@ special ReduceAction
 					var tidnode2 = nodearraylist1
 					assert tidnode2 isa nullable TId
 					var ptypenode3 = nodearraylist2
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var pparamnode1: nullable AParam = new AParam.init_aparam(
 						tidnode2,
 						ptypenode3,
@@ -13779,7 +13779,7 @@ special ReduceAction
 					var tidnode2 = nodearraylist1
 					assert tidnode2 isa nullable TId
 					var ptypenode3 = nodearraylist2
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var tdotdotdotnode4 = nodearraylist3
 					assert tdotdotdotnode4 isa nullable TDotdotdot
 					var pparamnode1: nullable AParam = new AParam.init_aparam(
@@ -13829,7 +13829,7 @@ special ReduceAction
 					var tidnode4 = nodearraylist3
 					assert tidnode4 isa nullable TId
 					var psignaturenode5 = nodearraylist4
-					assert psignaturenode5 isa nullable PSignature
+					assert psignaturenode5 isa nullable ASignature
 					var pclosuredeclnode1: nullable AClosureDecl = new AClosureDecl.init_aclosuredecl(
 						tkwwithnode2,
 						null,
@@ -13860,7 +13860,7 @@ special ReduceAction
 					var tidnode4 = nodearraylist4
 					assert tidnode4 isa nullable TId
 					var psignaturenode5 = nodearraylist5
-					assert psignaturenode5 isa nullable PSignature
+					assert psignaturenode5 isa nullable ASignature
 					var pclosuredeclnode1: nullable AClosureDecl = new AClosureDecl.init_aclosuredecl(
 						tkwwithnode2,
 						tkwbreaknode3,
@@ -13890,9 +13890,9 @@ special ReduceAction
 					var tidnode4 = nodearraylist3
 					assert tidnode4 isa nullable TId
 					var psignaturenode5 = nodearraylist4
-					assert psignaturenode5 isa nullable PSignature
+					assert psignaturenode5 isa nullable ASignature
 					var pexprnode6 = nodearraylist6
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pclosuredeclnode1: nullable AClosureDecl = new AClosureDecl.init_aclosuredecl(
 						tkwwithnode2,
 						null,
@@ -13925,9 +13925,9 @@ special ReduceAction
 					var tidnode4 = nodearraylist4
 					assert tidnode4 isa nullable TId
 					var psignaturenode5 = nodearraylist5
-					assert psignaturenode5 isa nullable PSignature
+					assert psignaturenode5 isa nullable ASignature
 					var pexprnode6 = nodearraylist7
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pclosuredeclnode1: nullable AClosureDecl = new AClosureDecl.init_aclosuredecl(
 						tkwwithnode2,
 						tkwbreaknode3,
@@ -14058,7 +14058,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var ptypenode1 = nodearraylist1
-					assert ptypenode1 isa nullable PType
+					assert ptypenode1 isa nullable AType
 					if ptypenode1 != null then
 						listnode2.add(ptypenode1)
 					end
@@ -14076,7 +14076,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var ptypenode1 = nodearraylist1
-					assert ptypenode1 isa nullable PType
+					assert ptypenode1 isa nullable AType
 					var listnode2 = nodearraylist2
 					assert listnode2 isa Array[Object]
 					if ptypenode1 != null then
@@ -14103,7 +14103,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var ptypenode1 = nodearraylist3
-					assert ptypenode1 isa nullable PType
+					assert ptypenode1 isa nullable AType
 					node_list = ptypenode1
 					p.push(p.go_to(24), node_list)
 	end
@@ -14118,7 +14118,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var ptypenode1 = nodearraylist3
-					assert ptypenode1 isa nullable PType
+					assert ptypenode1 isa nullable AType
 					node_list = ptypenode1
 					p.push(p.go_to(25), node_list)
 	end
@@ -14131,7 +14131,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(26), node_list)
 	end
@@ -14148,7 +14148,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					if pexprnode2 != null then
 						listnode3.add(pexprnode2)
 					end
@@ -14172,7 +14172,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist3
 					assert listnode3 isa Array[Object]
 					if pexprnode2 != null then
@@ -14232,7 +14232,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist2
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(27), node_list)
 	end
@@ -14245,7 +14245,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14258,7 +14258,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14291,7 +14291,7 @@ special ReduceAction
 					var tkwreturnnode2 = nodearraylist1
 					assert tkwreturnnode2 isa nullable TKwreturn
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AReturnExpr = new AReturnExpr.init_areturnexpr(
 						tkwreturnnode2,
 						pexprnode3
@@ -14328,7 +14328,7 @@ special ReduceAction
 					var tkwbreaknode2 = nodearraylist1
 					assert tkwbreaknode2 isa nullable TKwbreak
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ABreakExpr = new ABreakExpr.init_abreakexpr(
 						tkwbreaknode2,
 						pexprnode3
@@ -14381,7 +14381,7 @@ special ReduceAction
 					var tkwcontinuenode2 = nodearraylist1
 					assert tkwcontinuenode2 isa nullable TKwcontinue
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AContinueExpr = new AContinueExpr.init_acontinueexpr(
 						tkwcontinuenode2,
 						pexprnode3
@@ -14398,7 +14398,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14411,7 +14411,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14424,7 +14424,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14437,7 +14437,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14450,7 +14450,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14469,7 +14469,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -14539,7 +14539,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -14653,7 +14653,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa nullable PQualified
+					assert pqualifiednode2 isa nullable AQualified
 					var tkwsupernode3 = nodearraylist2
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
@@ -14687,7 +14687,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwinitnode3 = nodearraylist4
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist5
@@ -14748,7 +14748,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pclosuredefnode1 = nodearraylist1
-					assert pclosuredefnode1 isa nullable PClosureDef
+					assert pclosuredefnode1 isa nullable AClosureDef
 					if pclosuredefnode1 != null then
 						listnode2.add(pclosuredefnode1)
 					end
@@ -14766,7 +14766,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pclosuredefnode1 = nodearraylist1
-					assert pclosuredefnode1 isa nullable PClosureDef
+					assert pclosuredefnode1 isa nullable AClosureDef
 					var listnode2 = nodearraylist2
 					assert listnode2 isa Array[Object]
 					if pclosuredefnode1 != null then
@@ -14798,7 +14798,7 @@ special ReduceAction
 					var tkwdonode4 = nodearraylist2
 					assert tkwdonode4 isa nullable TKwdo
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode3,
@@ -14834,7 +14834,7 @@ special ReduceAction
 					var tkwdonode5 = nodearraylist3
 					assert tkwdonode5 isa nullable TKwdo
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode4,
@@ -14863,7 +14863,7 @@ special ReduceAction
 					assert tkwdonode4 isa nullable TKwdo
 					var listnode7 = new Array[Object]
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					if pexprnode6 != null then
 						listnode7.add(pexprnode6)
 					end
@@ -14899,7 +14899,7 @@ special ReduceAction
 					assert tkwdonode4 isa nullable TKwdo
 					var listnode8 = new Array[Object]
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var listnode7 = nodearraylist5
 					assert listnode7 isa Array[Object]
 					if pexprnode6 != null then
@@ -14953,7 +14953,7 @@ special ReduceAction
 					assert tkwdonode5 isa nullable TKwdo
 					var listnode8 = new Array[Object]
 					var pexprnode7 = nodearraylist5
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					if pexprnode7 != null then
 						listnode8.add(pexprnode7)
 					end
@@ -14999,7 +14999,7 @@ special ReduceAction
 					assert tkwdonode5 isa nullable TKwdo
 					var listnode9 = new Array[Object]
 					var pexprnode7 = nodearraylist5
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
 					if pexprnode7 != null then
@@ -15120,7 +15120,7 @@ special ReduceAction
 					var tidnode3 = nodearraylist2
 					assert tidnode3 isa nullable TId
 					var ptypenode4 = nodearraylist3
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
@@ -15150,7 +15150,7 @@ special ReduceAction
 					var tassignnode5 = nodearraylist3
 					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist5
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
@@ -15179,11 +15179,11 @@ special ReduceAction
 					var tidnode3 = nodearraylist2
 					assert tidnode3 isa nullable TId
 					var ptypenode4 = nodearraylist3
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var tassignnode5 = nodearraylist4
 					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist6
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
@@ -15208,13 +15208,13 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tattridnode3 = nodearraylist4
 					assert tattridnode3 isa nullable TAttrid
 					var tassignnode4 = nodearraylist5
 					assert tassignnode4 isa nullable TAssign
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
 						pexprnode2,
 						tattridnode3,
@@ -15241,7 +15241,7 @@ special ReduceAction
 					var tassignnode4 = nodearraylist2
 					assert tassignnode4 isa nullable TAssign
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
 						pexprnode2,
 						tattridnode3,
@@ -15267,7 +15267,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -15282,7 +15282,7 @@ special ReduceAction
 					var tassignnode6 = nodearraylist6
 					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist7
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
 						tidnode3,
@@ -15321,7 +15321,7 @@ special ReduceAction
 					var tassignnode6 = nodearraylist3
 					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist4
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
 						tidnode3,
@@ -15345,7 +15345,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -15358,7 +15358,7 @@ special ReduceAction
 					var tassignnode5 = nodearraylist3
 					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pexprnode1: nullable ABraAssignExpr = new ABraAssignExpr.init_abraassignexpr(
 						pexprnode2,
 						listnode4,
@@ -15382,13 +15382,13 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tattridnode3 = nodearraylist4
 					assert tattridnode3 isa nullable TAttrid
 					var passignopnode4 = nodearraylist5
-					assert passignopnode4 isa nullable PAssignOp
+					assert passignopnode4 isa nullable AAssignOp
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
 						pexprnode2,
 						tattridnode3,
@@ -15413,9 +15413,9 @@ special ReduceAction
 					var tattridnode3 = nodearraylist1
 					assert tattridnode3 isa nullable TAttrid
 					var passignopnode4 = nodearraylist2
-					assert passignopnode4 isa nullable PAssignOp
+					assert passignopnode4 isa nullable AAssignOp
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
 						pexprnode2,
 						tattridnode3,
@@ -15441,7 +15441,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -15454,9 +15454,9 @@ special ReduceAction
 						end
 #					end
 					var passignopnode6 = nodearraylist6
-					assert passignopnode6 isa nullable PAssignOp
+					assert passignopnode6 isa nullable AAssignOp
 					var pexprnode7 = nodearraylist7
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
 						tidnode3,
@@ -15493,9 +15493,9 @@ special ReduceAction
 						end
 #					end
 					var passignopnode6 = nodearraylist3
-					assert passignopnode6 isa nullable PAssignOp
+					assert passignopnode6 isa nullable AAssignOp
 					var pexprnode7 = nodearraylist4
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
 						tidnode3,
@@ -15519,7 +15519,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -15530,9 +15530,9 @@ special ReduceAction
 						end
 #					end
 					var passignopnode5 = nodearraylist3
-					assert passignopnode5 isa nullable PAssignOp
+					assert passignopnode5 isa nullable AAssignOp
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pexprnode1: nullable ABraReassignExpr = new ABraReassignExpr.init_abrareassignexpr(
 						pexprnode2,
 						listnode4,
@@ -15586,7 +15586,7 @@ special ReduceAction
 					var tkwdonode2 = nodearraylist1
 					assert tkwdonode2 isa nullable TKwdo
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ADoExpr = new ADoExpr.init_adoexpr(
 						tkwdonode2,
 						pexprnode3
@@ -15612,11 +15612,11 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode4 = nodearraylist6
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					var pexprnode5 = nodearraylist8
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -15642,9 +15642,9 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode4 = nodearraylist6
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -15673,10 +15673,10 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var listnode6 = new Array[Object]
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					if pexprnode5 != null then
 						listnode6.add(pexprnode5)
 					end
@@ -15684,7 +15684,7 @@ special ReduceAction
 						listnode6
 					)
 					var pexprnode7 = nodearraylist9
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -15714,10 +15714,10 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var listnode7 = new Array[Object]
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var listnode6 = nodearraylist8
 					assert listnode6 isa Array[Object]
 					if pexprnode5 != null then
@@ -15734,7 +15734,7 @@ special ReduceAction
 						listnode7
 					)
 					var pexprnode8 = nodearraylist10
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -15760,9 +15760,9 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -15789,9 +15789,9 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -15811,7 +15811,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist2
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(37), node_list)
 	end
@@ -15842,11 +15842,11 @@ special ReduceAction
 					var tkwwhilenode2 = nodearraylist1
 					assert tkwwhilenode2 isa nullable TKwwhile
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var tkwdonode4 = nodearraylist5
 					assert tkwdonode4 isa nullable TKwdo
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AWhileExpr = new AWhileExpr.init_awhileexpr(
 						tkwwhilenode2,
 						pexprnode3,
@@ -15878,11 +15878,11 @@ special ReduceAction
 					var tidnode3 = nodearraylist3
 					assert tidnode3 isa nullable TId
 					var pexprnode4 = nodearraylist7
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					var tkwdonode5 = nodearraylist9
 					assert tkwdonode5 isa nullable TKwdo
 					var pexprnode6 = nodearraylist10
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pexprnode1: nullable AForExpr = new AForExpr.init_aforexpr(
 						tkwfornode2,
 						tidnode3,
@@ -15905,7 +15905,7 @@ special ReduceAction
 					var tkwassertnode2 = nodearraylist1
 					assert tkwassertnode2 isa nullable TKwassert
 					var pexprnode4 = nodearraylist2
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					var pexprnode1: nullable AAssertExpr = new AAssertExpr.init_aassertexpr(
 						tkwassertnode2,
 						null,
@@ -15929,7 +15929,7 @@ special ReduceAction
 					var tidnode3 = nodearraylist2
 					assert tidnode3 isa nullable TId
 					var pexprnode4 = nodearraylist3
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					var pexprnode1: nullable AAssertExpr = new AAssertExpr.init_aassertexpr(
 						tkwassertnode2,
 						tidnode3,
@@ -15961,7 +15961,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(42), node_list)
 	end
@@ -15981,7 +15981,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -16067,7 +16067,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -16103,7 +16103,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(43), node_list)
 	end
@@ -16128,15 +16128,15 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var tkwthennode4 = nodearraylist5
 					assert tkwthennode4 isa nullable TKwthen
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var tkwelsenode6 = nodearraylist9
 					assert tkwelsenode6 isa nullable TKwelse
 					var pexprnode7 = nodearraylist11
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable AIfexprExpr = new AIfexprExpr.init_aifexprexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -16157,7 +16157,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(44), node_list)
 	end
@@ -16173,9 +16173,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AOrExpr = new AOrExpr.init_aorexpr(
 						pexprnode2,
 						pexprnode3
@@ -16195,9 +16195,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AAndExpr = new AAndExpr.init_aandexpr(
 						pexprnode2,
 						pexprnode3
@@ -16214,7 +16214,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(45), node_list)
 	end
@@ -16231,7 +16231,7 @@ special ReduceAction
 					var tkwnotnode2 = nodearraylist1
 					assert tkwnotnode2 isa nullable TKwnot
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ANotExpr = new ANotExpr.init_anotexpr(
 						tkwnotnode2,
 						pexprnode3
@@ -16248,7 +16248,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(46), node_list)
 	end
@@ -16264,9 +16264,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AEqExpr = new AEqExpr.init_aeqexpr(
 						pexprnode2,
 						pexprnode3
@@ -16286,9 +16286,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AEeExpr = new AEeExpr.init_aeeexpr(
 						pexprnode2,
 						pexprnode3
@@ -16308,9 +16308,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ANeExpr = new ANeExpr.init_aneexpr(
 						pexprnode2,
 						pexprnode3
@@ -16330,9 +16330,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ALtExpr = new ALtExpr.init_altexpr(
 						pexprnode2,
 						pexprnode3
@@ -16352,9 +16352,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ALeExpr = new ALeExpr.init_aleexpr(
 						pexprnode2,
 						pexprnode3
@@ -16374,9 +16374,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AGtExpr = new AGtExpr.init_agtexpr(
 						pexprnode2,
 						pexprnode3
@@ -16396,9 +16396,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AGeExpr = new AGeExpr.init_ageexpr(
 						pexprnode2,
 						pexprnode3
@@ -16418,9 +16418,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AStarshipExpr = new AStarshipExpr.init_astarshipexpr(
 						pexprnode2,
 						pexprnode3
@@ -16440,9 +16440,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var ptypenode3 = nodearraylist4
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var pexprnode1: nullable AIsaExpr = new AIsaExpr.init_aisaexpr(
 						pexprnode2,
 						ptypenode3
@@ -16459,7 +16459,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(47), node_list)
 	end
@@ -16475,9 +16475,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable APlusExpr = new APlusExpr.init_aplusexpr(
 						pexprnode2,
 						pexprnode3
@@ -16497,9 +16497,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AMinusExpr = new AMinusExpr.init_aminusexpr(
 						pexprnode2,
 						pexprnode3
@@ -16516,7 +16516,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(48), node_list)
 	end
@@ -16532,9 +16532,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AStarExpr = new AStarExpr.init_astarexpr(
 						pexprnode2,
 						pexprnode3
@@ -16554,9 +16554,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ASlashExpr = new ASlashExpr.init_aslashexpr(
 						pexprnode2,
 						pexprnode3
@@ -16576,9 +16576,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable APercentExpr = new APercentExpr.init_apercentexpr(
 						pexprnode2,
 						pexprnode3
@@ -16595,7 +16595,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(49), node_list)
 	end
@@ -16612,7 +16612,7 @@ special ReduceAction
 					var tminusnode2 = nodearraylist1
 					assert tminusnode2 isa nullable TMinus
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AUminusExpr = new AUminusExpr.init_auminusexpr(
 						tminusnode2,
 						pexprnode3
@@ -16633,7 +16633,7 @@ special ReduceAction
 					var tkwoncenode2 = nodearraylist1
 					assert tkwoncenode2 isa nullable TKwonce
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AOnceExpr = new AOnceExpr.init_aonceexpr(
 						tkwoncenode2,
 						pexprnode3
@@ -16650,7 +16650,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(50), node_list)
 	end
@@ -16669,7 +16669,7 @@ special ReduceAction
 					var tkwnewnode2 = nodearraylist1
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
 #					if listnode5 != null then
@@ -16703,7 +16703,7 @@ special ReduceAction
 					var tkwissetnode2 = nodearraylist1
 					assert tkwissetnode2 isa nullable TKwisset
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var tattridnode4 = nodearraylist5
 					assert tattridnode4 isa nullable TAttrid
 					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
@@ -16749,7 +16749,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tattridnode3 = nodearraylist4
 					assert tattridnode3 isa nullable TAttrid
 					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
@@ -16793,7 +16793,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -16888,7 +16888,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa nullable PQualified
+					assert pqualifiednode2 isa nullable AQualified
 					var tkwsupernode3 = nodearraylist2
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
@@ -16922,7 +16922,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwinitnode3 = nodearraylist4
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist5
@@ -16985,7 +16985,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -17021,7 +17021,7 @@ special ReduceAction
 					var tkwnewnode2 = nodearraylist1
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var tidnode4 = nodearraylist6
 					assert tidnode4 isa nullable TId
 					var listnode5 = nodearraylist7
@@ -17059,9 +17059,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist3
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist7
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ACrangeExpr = new ACrangeExpr.init_acrangeexpr(
 						pexprnode2,
 						pexprnode3
@@ -17086,9 +17086,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist3
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist7
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AOrangeExpr = new AOrangeExpr.init_aorangeexpr(
 						pexprnode2,
 						pexprnode3
@@ -17257,7 +17257,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(51), node_list)
 	end
@@ -17272,7 +17272,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist2
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(51), node_list)
 	end
@@ -17294,11 +17294,11 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwasnode3 = nodearraylist4
 					assert tkwasnode3 isa nullable TKwas
 					var ptypenode4 = nodearraylist8
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var pexprnode1: nullable AAsCastExpr = new AAsCastExpr.init_aascastexpr(
 						pexprnode2,
 						tkwasnode3,
@@ -17327,7 +17327,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwasnode3 = nodearraylist4
 					assert tkwasnode3 isa nullable TKwas
 					var tkwnotnode4 = nodearraylist8
@@ -17356,7 +17356,7 @@ special ReduceAction
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 #					if listnode2 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode2
@@ -17389,7 +17389,7 @@ special ReduceAction
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 					var pexprnode4 = nodearraylist3
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 #					if listnode2 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode2
@@ -17426,9 +17426,9 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					var pexprnode2 = nodearraylist3
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					if pexprnode1 != null then
 						listnode3.add(pexprnode1)
 					end
@@ -17467,9 +17467,9 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					var pexprnode2 = nodearraylist3
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					if pexprnode1 != null then
 						listnode3.add(pexprnode1)
 					end
@@ -17525,7 +17525,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -17547,7 +17547,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					var listnode2 = nodearraylist5
 					assert listnode2 isa Array[Object]
 					if pexprnode1 != null then
@@ -17602,7 +17602,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -17624,7 +17624,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					var listnode2 = nodearraylist5
 					assert listnode2 isa Array[Object]
 					if pexprnode1 != null then
@@ -17650,7 +17650,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -17696,7 +17696,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -17718,7 +17718,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					var listnode2 = nodearraylist5
 					assert listnode2 isa Array[Object]
 					if pexprnode1 != null then
@@ -17746,7 +17746,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(61), node_list)
 	end
@@ -17997,7 +17997,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pdocnode1 = nodearraylist1
-					assert pdocnode1 isa nullable PDoc
+					assert pdocnode1 isa nullable ADoc
 					node_list = pdocnode1
 					p.push(p.go_to(68), node_list)
 	end
@@ -18044,7 +18044,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var ppropdefnode1 = nodearraylist1
-					assert ppropdefnode1 isa nullable PPropdef
+					assert ppropdefnode1 isa nullable APropdef
 					node_list = ppropdefnode1
 					p.push(p.go_to(70), node_list)
 	end
@@ -18063,17 +18063,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						null,
@@ -18102,19 +18102,19 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -18143,17 +18143,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						null,
@@ -18183,19 +18183,19 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa nullable PExpr
+					assert pexprnode8 isa nullable AExpr
 					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -18223,15 +18223,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						null,
@@ -18260,17 +18260,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -18299,15 +18299,15 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var tstringnode8 = nodearraylist8
 					assert tstringnode8 isa nullable TString
 					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
@@ -18339,17 +18339,17 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa nullable PDoc
+					assert pdocnode2 isa nullable ADoc
 					var tkwredefnode3 = nodearraylist2
 					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa nullable PVisibility
+					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa nullable PMethid
+					assert pmethidnode6 isa nullable AMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa nullable PSignature
+					assert psignaturenode7 isa nullable ASignature
 					var tstringnode8 = nodearraylist9
 					assert tstringnode8 isa nullable TString
 					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
@@ -18414,7 +18414,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(73), node_list)
 	end
@@ -18434,7 +18434,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -18516,7 +18516,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(74), node_list)
 	end
@@ -18541,15 +18541,15 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var tkwthennode4 = nodearraylist5
 					assert tkwthennode4 isa nullable TKwthen
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var tkwelsenode6 = nodearraylist9
 					assert tkwelsenode6 isa nullable TKwelse
 					var pexprnode7 = nodearraylist11
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable AIfexprExpr = new AIfexprExpr.init_aifexprexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -18570,7 +18570,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(75), node_list)
 	end
@@ -18586,9 +18586,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AOrExpr = new AOrExpr.init_aorexpr(
 						pexprnode2,
 						pexprnode3
@@ -18608,9 +18608,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AAndExpr = new AAndExpr.init_aandexpr(
 						pexprnode2,
 						pexprnode3
@@ -18627,7 +18627,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(76), node_list)
 	end
@@ -18644,7 +18644,7 @@ special ReduceAction
 					var tkwnotnode2 = nodearraylist1
 					assert tkwnotnode2 isa nullable TKwnot
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ANotExpr = new ANotExpr.init_anotexpr(
 						tkwnotnode2,
 						pexprnode3
@@ -18661,7 +18661,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(77), node_list)
 	end
@@ -18677,9 +18677,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AEqExpr = new AEqExpr.init_aeqexpr(
 						pexprnode2,
 						pexprnode3
@@ -18699,9 +18699,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AEeExpr = new AEeExpr.init_aeeexpr(
 						pexprnode2,
 						pexprnode3
@@ -18721,9 +18721,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ANeExpr = new ANeExpr.init_aneexpr(
 						pexprnode2,
 						pexprnode3
@@ -18743,9 +18743,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ALtExpr = new ALtExpr.init_altexpr(
 						pexprnode2,
 						pexprnode3
@@ -18765,9 +18765,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ALeExpr = new ALeExpr.init_aleexpr(
 						pexprnode2,
 						pexprnode3
@@ -18787,9 +18787,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AGtExpr = new AGtExpr.init_agtexpr(
 						pexprnode2,
 						pexprnode3
@@ -18809,9 +18809,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AGeExpr = new AGeExpr.init_ageexpr(
 						pexprnode2,
 						pexprnode3
@@ -18831,9 +18831,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AStarshipExpr = new AStarshipExpr.init_astarshipexpr(
 						pexprnode2,
 						pexprnode3
@@ -18853,9 +18853,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var ptypenode3 = nodearraylist4
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var pexprnode1: nullable AIsaExpr = new AIsaExpr.init_aisaexpr(
 						pexprnode2,
 						ptypenode3
@@ -18872,7 +18872,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(78), node_list)
 	end
@@ -18888,9 +18888,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable APlusExpr = new APlusExpr.init_aplusexpr(
 						pexprnode2,
 						pexprnode3
@@ -18910,9 +18910,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AMinusExpr = new AMinusExpr.init_aminusexpr(
 						pexprnode2,
 						pexprnode3
@@ -18929,7 +18929,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(79), node_list)
 	end
@@ -18945,9 +18945,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AStarExpr = new AStarExpr.init_astarexpr(
 						pexprnode2,
 						pexprnode3
@@ -18967,9 +18967,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ASlashExpr = new ASlashExpr.init_aslashexpr(
 						pexprnode2,
 						pexprnode3
@@ -18989,9 +18989,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable APercentExpr = new APercentExpr.init_apercentexpr(
 						pexprnode2,
 						pexprnode3
@@ -19008,7 +19008,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(80), node_list)
 	end
@@ -19025,7 +19025,7 @@ special ReduceAction
 					var tminusnode2 = nodearraylist1
 					assert tminusnode2 isa nullable TMinus
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AUminusExpr = new AUminusExpr.init_auminusexpr(
 						tminusnode2,
 						pexprnode3
@@ -19046,7 +19046,7 @@ special ReduceAction
 					var tkwoncenode2 = nodearraylist1
 					assert tkwoncenode2 isa nullable TKwonce
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AOnceExpr = new AOnceExpr.init_aonceexpr(
 						tkwoncenode2,
 						pexprnode3
@@ -19063,7 +19063,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(81), node_list)
 	end
@@ -19082,7 +19082,7 @@ special ReduceAction
 					var tkwnewnode2 = nodearraylist1
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
 #					if listnode5 != null then
@@ -19116,7 +19116,7 @@ special ReduceAction
 					var tkwissetnode2 = nodearraylist1
 					assert tkwissetnode2 isa nullable TKwisset
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var tattridnode4 = nodearraylist5
 					assert tattridnode4 isa nullable TAttrid
 					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
@@ -19162,7 +19162,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tattridnode3 = nodearraylist4
 					assert tattridnode3 isa nullable TAttrid
 					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
@@ -19206,7 +19206,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -19301,7 +19301,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa nullable PQualified
+					assert pqualifiednode2 isa nullable AQualified
 					var tkwsupernode3 = nodearraylist2
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
@@ -19335,7 +19335,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwinitnode3 = nodearraylist4
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist5
@@ -19404,7 +19404,7 @@ special ReduceAction
 					var tkwnewnode2 = nodearraylist1
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var tidnode4 = nodearraylist6
 					assert tidnode4 isa nullable TId
 					var listnode5 = nodearraylist7
@@ -19562,7 +19562,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(82), node_list)
 	end
@@ -19577,7 +19577,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist2
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(82), node_list)
 	end
@@ -19599,11 +19599,11 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwasnode3 = nodearraylist4
 					assert tkwasnode3 isa nullable TKwas
 					var ptypenode4 = nodearraylist8
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var pexprnode1: nullable AAsCastExpr = new AAsCastExpr.init_aascastexpr(
 						pexprnode2,
 						tkwasnode3,
@@ -19632,7 +19632,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwasnode3 = nodearraylist4
 					assert tkwasnode3 isa nullable TKwas
 					var tkwnotnode4 = nodearraylist8
@@ -19657,7 +19657,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(83), node_list)
 	end
@@ -19674,7 +19674,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					if pexprnode2 != null then
 						listnode3.add(pexprnode2)
 					end
@@ -19698,7 +19698,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist3
 					assert listnode3 isa Array[Object]
 					if pexprnode2 != null then
@@ -19757,7 +19757,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19770,7 +19770,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19803,7 +19803,7 @@ special ReduceAction
 					var tkwreturnnode2 = nodearraylist1
 					assert tkwreturnnode2 isa nullable TKwreturn
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AReturnExpr = new AReturnExpr.init_areturnexpr(
 						tkwreturnnode2,
 						pexprnode3
@@ -19840,7 +19840,7 @@ special ReduceAction
 					var tkwbreaknode2 = nodearraylist1
 					assert tkwbreaknode2 isa nullable TKwbreak
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ABreakExpr = new ABreakExpr.init_abreakexpr(
 						tkwbreaknode2,
 						pexprnode3
@@ -19893,7 +19893,7 @@ special ReduceAction
 					var tkwcontinuenode2 = nodearraylist1
 					assert tkwcontinuenode2 isa nullable TKwcontinue
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AContinueExpr = new AContinueExpr.init_acontinueexpr(
 						tkwcontinuenode2,
 						pexprnode3
@@ -19910,7 +19910,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19923,7 +19923,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19936,7 +19936,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19949,7 +19949,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19962,7 +19962,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19981,7 +19981,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -20051,7 +20051,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -20165,7 +20165,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa nullable PQualified
+					assert pqualifiednode2 isa nullable AQualified
 					var tkwsupernode3 = nodearraylist2
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
@@ -20199,7 +20199,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwinitnode3 = nodearraylist4
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist5
@@ -20260,7 +20260,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pclosuredefnode1 = nodearraylist1
-					assert pclosuredefnode1 isa nullable PClosureDef
+					assert pclosuredefnode1 isa nullable AClosureDef
 					if pclosuredefnode1 != null then
 						listnode2.add(pclosuredefnode1)
 					end
@@ -20278,7 +20278,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pclosuredefnode1 = nodearraylist1
-					assert pclosuredefnode1 isa nullable PClosureDef
+					assert pclosuredefnode1 isa nullable AClosureDef
 					var listnode2 = nodearraylist2
 					assert listnode2 isa Array[Object]
 					if pclosuredefnode1 != null then
@@ -20310,7 +20310,7 @@ special ReduceAction
 					var tkwdonode4 = nodearraylist2
 					assert tkwdonode4 isa nullable TKwdo
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode3,
@@ -20346,7 +20346,7 @@ special ReduceAction
 					var tkwdonode5 = nodearraylist3
 					assert tkwdonode5 isa nullable TKwdo
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode4,
@@ -20394,7 +20394,7 @@ special ReduceAction
 					var tidnode3 = nodearraylist2
 					assert tidnode3 isa nullable TId
 					var ptypenode4 = nodearraylist3
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
@@ -20424,7 +20424,7 @@ special ReduceAction
 					var tassignnode5 = nodearraylist3
 					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist5
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
@@ -20453,11 +20453,11 @@ special ReduceAction
 					var tidnode3 = nodearraylist2
 					assert tidnode3 isa nullable TId
 					var ptypenode4 = nodearraylist3
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var tassignnode5 = nodearraylist4
 					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist6
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
@@ -20482,13 +20482,13 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tattridnode3 = nodearraylist4
 					assert tattridnode3 isa nullable TAttrid
 					var tassignnode4 = nodearraylist5
 					assert tassignnode4 isa nullable TAssign
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
 						pexprnode2,
 						tattridnode3,
@@ -20515,7 +20515,7 @@ special ReduceAction
 					var tassignnode4 = nodearraylist2
 					assert tassignnode4 isa nullable TAssign
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
 						pexprnode2,
 						tattridnode3,
@@ -20541,7 +20541,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -20556,7 +20556,7 @@ special ReduceAction
 					var tassignnode6 = nodearraylist6
 					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist7
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
 						tidnode3,
@@ -20595,7 +20595,7 @@ special ReduceAction
 					var tassignnode6 = nodearraylist3
 					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist4
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
 						tidnode3,
@@ -20619,7 +20619,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -20632,7 +20632,7 @@ special ReduceAction
 					var tassignnode5 = nodearraylist3
 					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pexprnode1: nullable ABraAssignExpr = new ABraAssignExpr.init_abraassignexpr(
 						pexprnode2,
 						listnode4,
@@ -20656,13 +20656,13 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tattridnode3 = nodearraylist4
 					assert tattridnode3 isa nullable TAttrid
 					var passignopnode4 = nodearraylist5
-					assert passignopnode4 isa nullable PAssignOp
+					assert passignopnode4 isa nullable AAssignOp
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
 						pexprnode2,
 						tattridnode3,
@@ -20687,9 +20687,9 @@ special ReduceAction
 					var tattridnode3 = nodearraylist1
 					assert tattridnode3 isa nullable TAttrid
 					var passignopnode4 = nodearraylist2
-					assert passignopnode4 isa nullable PAssignOp
+					assert passignopnode4 isa nullable AAssignOp
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
 						pexprnode2,
 						tattridnode3,
@@ -20715,7 +20715,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -20728,9 +20728,9 @@ special ReduceAction
 						end
 #					end
 					var passignopnode6 = nodearraylist6
-					assert passignopnode6 isa nullable PAssignOp
+					assert passignopnode6 isa nullable AAssignOp
 					var pexprnode7 = nodearraylist7
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
 						tidnode3,
@@ -20767,9 +20767,9 @@ special ReduceAction
 						end
 #					end
 					var passignopnode6 = nodearraylist3
-					assert passignopnode6 isa nullable PAssignOp
+					assert passignopnode6 isa nullable AAssignOp
 					var pexprnode7 = nodearraylist4
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
 						tidnode3,
@@ -20793,7 +20793,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -20804,9 +20804,9 @@ special ReduceAction
 						end
 #					end
 					var passignopnode5 = nodearraylist3
-					assert passignopnode5 isa nullable PAssignOp
+					assert passignopnode5 isa nullable AAssignOp
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pexprnode1: nullable ABraReassignExpr = new ABraReassignExpr.init_abrareassignexpr(
 						pexprnode2,
 						listnode4,
@@ -20828,7 +20828,7 @@ special ReduceAction
 					var tkwdonode2 = nodearraylist1
 					assert tkwdonode2 isa nullable TKwdo
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ADoExpr = new ADoExpr.init_adoexpr(
 						tkwdonode2,
 						pexprnode3
@@ -20854,11 +20854,11 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode4 = nodearraylist6
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					var pexprnode5 = nodearraylist8
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -20884,11 +20884,11 @@ special ReduceAction
 					var tkwwhilenode2 = nodearraylist1
 					assert tkwwhilenode2 isa nullable TKwwhile
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var tkwdonode4 = nodearraylist5
 					assert tkwdonode4 isa nullable TKwdo
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var pexprnode1: nullable AWhileExpr = new AWhileExpr.init_awhileexpr(
 						tkwwhilenode2,
 						pexprnode3,
@@ -20920,11 +20920,11 @@ special ReduceAction
 					var tidnode3 = nodearraylist3
 					assert tidnode3 isa nullable TId
 					var pexprnode4 = nodearraylist7
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					var tkwdonode5 = nodearraylist9
 					assert tkwdonode5 isa nullable TKwdo
 					var pexprnode6 = nodearraylist10
-					assert pexprnode6 isa nullable PExpr
+					assert pexprnode6 isa nullable AExpr
 					var pexprnode1: nullable AForExpr = new AForExpr.init_aforexpr(
 						tkwfornode2,
 						tidnode3,
@@ -20947,7 +20947,7 @@ special ReduceAction
 					var tkwassertnode2 = nodearraylist1
 					assert tkwassertnode2 isa nullable TKwassert
 					var pexprnode4 = nodearraylist2
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					var pexprnode1: nullable AAssertExpr = new AAssertExpr.init_aassertexpr(
 						tkwassertnode2,
 						null,
@@ -20971,7 +20971,7 @@ special ReduceAction
 					var tidnode3 = nodearraylist2
 					assert tidnode3 isa nullable TId
 					var pexprnode4 = nodearraylist3
-					assert pexprnode4 isa nullable PExpr
+					assert pexprnode4 isa nullable AExpr
 					var pexprnode1: nullable AAssertExpr = new AAssertExpr.init_aassertexpr(
 						tkwassertnode2,
 						tidnode3,
@@ -20989,7 +20989,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(94), node_list)
 	end
@@ -21009,7 +21009,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -21095,7 +21095,7 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 #					if listnode3 != null then
@@ -21131,7 +21131,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(95), node_list)
 	end
@@ -21151,7 +21151,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -21233,7 +21233,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(96), node_list)
 	end
@@ -21253,7 +21253,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -21335,7 +21335,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(97), node_list)
 	end
@@ -21360,15 +21360,15 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var tkwthennode4 = nodearraylist5
 					assert tkwthennode4 isa nullable TKwthen
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var tkwelsenode6 = nodearraylist9
 					assert tkwelsenode6 isa nullable TKwelse
 					var pexprnode7 = nodearraylist11
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable AIfexprExpr = new AIfexprExpr.init_aifexprexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -21389,7 +21389,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(98), node_list)
 	end
@@ -21405,9 +21405,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AOrExpr = new AOrExpr.init_aorexpr(
 						pexprnode2,
 						pexprnode3
@@ -21427,9 +21427,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AAndExpr = new AAndExpr.init_aandexpr(
 						pexprnode2,
 						pexprnode3
@@ -21446,7 +21446,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(99), node_list)
 	end
@@ -21463,7 +21463,7 @@ special ReduceAction
 					var tkwnotnode2 = nodearraylist1
 					assert tkwnotnode2 isa nullable TKwnot
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ANotExpr = new ANotExpr.init_anotexpr(
 						tkwnotnode2,
 						pexprnode3
@@ -21480,7 +21480,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(100), node_list)
 	end
@@ -21496,9 +21496,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AEqExpr = new AEqExpr.init_aeqexpr(
 						pexprnode2,
 						pexprnode3
@@ -21518,9 +21518,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AEeExpr = new AEeExpr.init_aeeexpr(
 						pexprnode2,
 						pexprnode3
@@ -21540,9 +21540,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ANeExpr = new ANeExpr.init_aneexpr(
 						pexprnode2,
 						pexprnode3
@@ -21562,9 +21562,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ALtExpr = new ALtExpr.init_altexpr(
 						pexprnode2,
 						pexprnode3
@@ -21584,9 +21584,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ALeExpr = new ALeExpr.init_aleexpr(
 						pexprnode2,
 						pexprnode3
@@ -21606,9 +21606,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AGtExpr = new AGtExpr.init_agtexpr(
 						pexprnode2,
 						pexprnode3
@@ -21628,9 +21628,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AGeExpr = new AGeExpr.init_ageexpr(
 						pexprnode2,
 						pexprnode3
@@ -21650,9 +21650,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AStarshipExpr = new AStarshipExpr.init_astarshipexpr(
 						pexprnode2,
 						pexprnode3
@@ -21672,9 +21672,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var ptypenode3 = nodearraylist4
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var pexprnode1: nullable AIsaExpr = new AIsaExpr.init_aisaexpr(
 						pexprnode2,
 						ptypenode3
@@ -21691,7 +21691,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(101), node_list)
 	end
@@ -21707,9 +21707,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable APlusExpr = new APlusExpr.init_aplusexpr(
 						pexprnode2,
 						pexprnode3
@@ -21729,9 +21729,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AMinusExpr = new AMinusExpr.init_aminusexpr(
 						pexprnode2,
 						pexprnode3
@@ -21748,7 +21748,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(102), node_list)
 	end
@@ -21764,9 +21764,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AStarExpr = new AStarExpr.init_astarexpr(
 						pexprnode2,
 						pexprnode3
@@ -21786,9 +21786,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ASlashExpr = new ASlashExpr.init_aslashexpr(
 						pexprnode2,
 						pexprnode3
@@ -21808,9 +21808,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable APercentExpr = new APercentExpr.init_apercentexpr(
 						pexprnode2,
 						pexprnode3
@@ -21827,7 +21827,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(103), node_list)
 	end
@@ -21844,7 +21844,7 @@ special ReduceAction
 					var tminusnode2 = nodearraylist1
 					assert tminusnode2 isa nullable TMinus
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AUminusExpr = new AUminusExpr.init_auminusexpr(
 						tminusnode2,
 						pexprnode3
@@ -21865,7 +21865,7 @@ special ReduceAction
 					var tkwoncenode2 = nodearraylist1
 					assert tkwoncenode2 isa nullable TKwonce
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AOnceExpr = new AOnceExpr.init_aonceexpr(
 						tkwoncenode2,
 						pexprnode3
@@ -21882,7 +21882,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(104), node_list)
 	end
@@ -21901,7 +21901,7 @@ special ReduceAction
 					var tkwnewnode2 = nodearraylist1
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
 #					if listnode5 != null then
@@ -21935,7 +21935,7 @@ special ReduceAction
 					var tkwissetnode2 = nodearraylist1
 					assert tkwissetnode2 isa nullable TKwisset
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var tattridnode4 = nodearraylist5
 					assert tattridnode4 isa nullable TAttrid
 					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
@@ -21981,7 +21981,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tattridnode3 = nodearraylist4
 					assert tattridnode3 isa nullable TAttrid
 					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
@@ -22025,7 +22025,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -22120,7 +22120,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa nullable PQualified
+					assert pqualifiednode2 isa nullable AQualified
 					var tkwsupernode3 = nodearraylist2
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
@@ -22154,7 +22154,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwinitnode3 = nodearraylist4
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist5
@@ -22223,7 +22223,7 @@ special ReduceAction
 					var tkwnewnode2 = nodearraylist1
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var tidnode4 = nodearraylist6
 					assert tidnode4 isa nullable TId
 					var listnode5 = nodearraylist7
@@ -22381,7 +22381,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(105), node_list)
 	end
@@ -22403,11 +22403,11 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwasnode3 = nodearraylist4
 					assert tkwasnode3 isa nullable TKwas
 					var ptypenode4 = nodearraylist8
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var pexprnode1: nullable AAsCastExpr = new AAsCastExpr.init_aascastexpr(
 						pexprnode2,
 						tkwasnode3,
@@ -22436,7 +22436,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwasnode3 = nodearraylist4
 					assert tkwasnode3 isa nullable TKwas
 					var tkwnotnode4 = nodearraylist8
@@ -22461,7 +22461,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(106), node_list)
 	end
@@ -22481,7 +22481,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -22563,7 +22563,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(107), node_list)
 	end
@@ -22588,15 +22588,15 @@ special ReduceAction
 					var tkwifnode2 = nodearraylist1
 					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var tkwthennode4 = nodearraylist5
 					assert tkwthennode4 isa nullable TKwthen
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa nullable PExpr
+					assert pexprnode5 isa nullable AExpr
 					var tkwelsenode6 = nodearraylist9
 					assert tkwelsenode6 isa nullable TKwelse
 					var pexprnode7 = nodearraylist11
-					assert pexprnode7 isa nullable PExpr
+					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable AIfexprExpr = new AIfexprExpr.init_aifexprexpr(
 						tkwifnode2,
 						pexprnode3,
@@ -22617,7 +22617,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(108), node_list)
 	end
@@ -22633,9 +22633,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AOrExpr = new AOrExpr.init_aorexpr(
 						pexprnode2,
 						pexprnode3
@@ -22655,9 +22655,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AAndExpr = new AAndExpr.init_aandexpr(
 						pexprnode2,
 						pexprnode3
@@ -22674,7 +22674,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(109), node_list)
 	end
@@ -22691,7 +22691,7 @@ special ReduceAction
 					var tkwnotnode2 = nodearraylist1
 					assert tkwnotnode2 isa nullable TKwnot
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ANotExpr = new ANotExpr.init_anotexpr(
 						tkwnotnode2,
 						pexprnode3
@@ -22708,7 +22708,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(110), node_list)
 	end
@@ -22724,9 +22724,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AEqExpr = new AEqExpr.init_aeqexpr(
 						pexprnode2,
 						pexprnode3
@@ -22746,9 +22746,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AEeExpr = new AEeExpr.init_aeeexpr(
 						pexprnode2,
 						pexprnode3
@@ -22768,9 +22768,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ANeExpr = new ANeExpr.init_aneexpr(
 						pexprnode2,
 						pexprnode3
@@ -22790,9 +22790,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ALtExpr = new ALtExpr.init_altexpr(
 						pexprnode2,
 						pexprnode3
@@ -22812,9 +22812,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ALeExpr = new ALeExpr.init_aleexpr(
 						pexprnode2,
 						pexprnode3
@@ -22834,9 +22834,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AGtExpr = new AGtExpr.init_agtexpr(
 						pexprnode2,
 						pexprnode3
@@ -22856,9 +22856,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AGeExpr = new AGeExpr.init_ageexpr(
 						pexprnode2,
 						pexprnode3
@@ -22878,9 +22878,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AStarshipExpr = new AStarshipExpr.init_astarshipexpr(
 						pexprnode2,
 						pexprnode3
@@ -22900,9 +22900,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var ptypenode3 = nodearraylist4
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var pexprnode1: nullable AIsaExpr = new AIsaExpr.init_aisaexpr(
 						pexprnode2,
 						ptypenode3
@@ -22919,7 +22919,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(111), node_list)
 	end
@@ -22935,9 +22935,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable APlusExpr = new APlusExpr.init_aplusexpr(
 						pexprnode2,
 						pexprnode3
@@ -22957,9 +22957,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AMinusExpr = new AMinusExpr.init_aminusexpr(
 						pexprnode2,
 						pexprnode3
@@ -22976,7 +22976,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(112), node_list)
 	end
@@ -22992,9 +22992,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AStarExpr = new AStarExpr.init_astarexpr(
 						pexprnode2,
 						pexprnode3
@@ -23014,9 +23014,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable ASlashExpr = new ASlashExpr.init_aslashexpr(
 						pexprnode2,
 						pexprnode3
@@ -23036,9 +23036,9 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable APercentExpr = new APercentExpr.init_apercentexpr(
 						pexprnode2,
 						pexprnode3
@@ -23055,7 +23055,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(113), node_list)
 	end
@@ -23072,7 +23072,7 @@ special ReduceAction
 					var tminusnode2 = nodearraylist1
 					assert tminusnode2 isa nullable TMinus
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AUminusExpr = new AUminusExpr.init_auminusexpr(
 						tminusnode2,
 						pexprnode3
@@ -23093,7 +23093,7 @@ special ReduceAction
 					var tkwoncenode2 = nodearraylist1
 					assert tkwoncenode2 isa nullable TKwonce
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var pexprnode1: nullable AOnceExpr = new AOnceExpr.init_aonceexpr(
 						tkwoncenode2,
 						pexprnode3
@@ -23110,7 +23110,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(114), node_list)
 	end
@@ -23129,7 +23129,7 @@ special ReduceAction
 					var tkwnewnode2 = nodearraylist1
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
 #					if listnode5 != null then
@@ -23161,7 +23161,7 @@ special ReduceAction
 					var tkwissetnode2 = nodearraylist1
 					assert tkwissetnode2 isa nullable TKwisset
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa nullable PExpr
+					assert pexprnode3 isa nullable AExpr
 					var tattridnode4 = nodearraylist3
 					assert tattridnode4 isa nullable TAttrid
 					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
@@ -23182,7 +23182,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tattridnode3 = nodearraylist2
 					assert tattridnode3 isa nullable TAttrid
 					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
@@ -23205,7 +23205,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist2
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist3
@@ -23267,7 +23267,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa nullable PQualified
+					assert pqualifiednode2 isa nullable AQualified
 					var tkwsupernode3 = nodearraylist2
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
@@ -23299,7 +23299,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwinitnode3 = nodearraylist2
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist3
@@ -23337,7 +23337,7 @@ special ReduceAction
 					var tkwnewnode2 = nodearraylist1
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa nullable PType
+					assert ptypenode3 isa nullable AType
 					var tidnode4 = nodearraylist6
 					assert tidnode4 isa nullable TId
 					var listnode5 = nodearraylist7
@@ -23495,7 +23495,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(115), node_list)
 	end
@@ -23517,11 +23517,11 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwasnode3 = nodearraylist4
 					assert tkwasnode3 isa nullable TKwas
 					var ptypenode4 = nodearraylist8
-					assert ptypenode4 isa nullable PType
+					assert ptypenode4 isa nullable AType
 					var pexprnode1: nullable AAsCastExpr = new AAsCastExpr.init_aascastexpr(
 						pexprnode2,
 						tkwasnode3,
@@ -23550,7 +23550,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tkwasnode3 = nodearraylist4
 					assert tkwasnode3 isa nullable TKwas
 					var tkwnotnode4 = nodearraylist8
@@ -23577,7 +23577,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(116), node_list)
 	end
@@ -23602,7 +23602,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(117), node_list)
 	end
@@ -23622,7 +23622,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -23704,7 +23704,7 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
 					p.push(p.go_to(118), node_list)
 	end
@@ -23724,7 +23724,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 					var tidnode3 = nodearraylist4
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
@@ -23807,7 +23807,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pimportnode1 = nodearraylist1
-					assert pimportnode1 isa nullable PImport
+					assert pimportnode1 isa nullable AImport
 					if pimportnode1 != null then
 						listnode2.add(pimportnode1)
 					end
@@ -23827,7 +23827,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pimportnode2 = nodearraylist2
-					assert pimportnode2 isa nullable PImport
+					assert pimportnode2 isa nullable AImport
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
@@ -23851,7 +23851,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pclassdefnode1 = nodearraylist1
-					assert pclassdefnode1 isa nullable PClassdef
+					assert pclassdefnode1 isa nullable AClassdef
 					if pclassdefnode1 != null then
 						listnode2.add(pclassdefnode1)
 					end
@@ -23871,7 +23871,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pclassdefnode2 = nodearraylist2
-					assert pclassdefnode2 isa nullable PClassdef
+					assert pclassdefnode2 isa nullable AClassdef
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
@@ -23895,7 +23895,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var psuperclassnode1 = nodearraylist1
-					assert psuperclassnode1 isa nullable PSuperclass
+					assert psuperclassnode1 isa nullable ASuperclass
 					if psuperclassnode1 != null then
 						listnode2.add(psuperclassnode1)
 					end
@@ -23915,7 +23915,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var psuperclassnode2 = nodearraylist2
-					assert psuperclassnode2 isa nullable PSuperclass
+					assert psuperclassnode2 isa nullable ASuperclass
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
@@ -23939,7 +23939,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pformaldefnode1 = nodearraylist1
-					assert pformaldefnode1 isa nullable PFormaldef
+					assert pformaldefnode1 isa nullable AFormaldef
 					if pformaldefnode1 != null then
 						listnode2.add(pformaldefnode1)
 					end
@@ -23959,7 +23959,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pformaldefnode2 = nodearraylist2
-					assert pformaldefnode2 isa nullable PFormaldef
+					assert pformaldefnode2 isa nullable AFormaldef
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
@@ -23983,7 +23983,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var ppropdefnode1 = nodearraylist1
-					assert ppropdefnode1 isa nullable PPropdef
+					assert ppropdefnode1 isa nullable APropdef
 					if ppropdefnode1 != null then
 						listnode2.add(ppropdefnode1)
 					end
@@ -24003,7 +24003,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var ppropdefnode2 = nodearraylist2
-					assert ppropdefnode2 isa nullable PPropdef
+					assert ppropdefnode2 isa nullable APropdef
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
@@ -24027,7 +24027,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pparamnode1 = nodearraylist1
-					assert pparamnode1 isa nullable PParam
+					assert pparamnode1 isa nullable AParam
 					if pparamnode1 != null then
 						listnode2.add(pparamnode1)
 					end
@@ -24047,7 +24047,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pparamnode2 = nodearraylist2
-					assert pparamnode2 isa nullable PParam
+					assert pparamnode2 isa nullable AParam
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
@@ -24071,7 +24071,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pclosuredeclnode1 = nodearraylist1
-					assert pclosuredeclnode1 isa nullable PClosureDecl
+					assert pclosuredeclnode1 isa nullable AClosureDecl
 					if pclosuredeclnode1 != null then
 						listnode2.add(pclosuredeclnode1)
 					end
@@ -24091,7 +24091,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pclosuredeclnode2 = nodearraylist2
-					assert pclosuredeclnode2 isa nullable PClosureDecl
+					assert pclosuredeclnode2 isa nullable AClosureDecl
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
@@ -24115,7 +24115,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var ptypenode1 = nodearraylist1
-					assert ptypenode1 isa nullable PType
+					assert ptypenode1 isa nullable AType
 					if ptypenode1 != null then
 						listnode2.add(ptypenode1)
 					end
@@ -24135,7 +24135,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var ptypenode2 = nodearraylist2
-					assert ptypenode2 isa nullable PType
+					assert ptypenode2 isa nullable AType
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
@@ -24159,7 +24159,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -24179,7 +24179,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
@@ -24255,7 +24255,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa nullable PExpr
+					assert pexprnode1 isa nullable AExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -24275,7 +24275,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa nullable PExpr
+					assert pexprnode2 isa nullable AExpr
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
@@ -24431,7 +24431,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var ppropdefnode1 = nodearraylist1
-					assert ppropdefnode1 isa nullable PPropdef
+					assert ppropdefnode1 isa nullable APropdef
 					if ppropdefnode1 != null then
 						listnode2.add(ppropdefnode1)
 					end
@@ -24451,7 +24451,7 @@ special ReduceAction
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var ppropdefnode2 = nodearraylist2
-					assert ppropdefnode2 isa nullable PPropdef
+					assert ppropdefnode2 isa nullable APropdef
 #					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1

@@ -22,7 +22,7 @@ import parser
 class PrintTreeVisitor
 special Visitor
 	var _rank: Int
-	fun visit(n: PNode)
+	fun visit(n: ANode)
 	do
 		printn("  " * _rank, n.to_s, "\n")
 		_rank = _rank + 1
