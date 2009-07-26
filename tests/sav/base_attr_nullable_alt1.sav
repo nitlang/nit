@@ -2,5 +2,6 @@ Uninitialized attribute _a1 in base_attr_nullable_alt1::Foo::run (alt/base_attr_
 ,---- Stack trace -- - -  -
 | base_attr_nullable_alt1::Foo::run (alt/base_attr_nullable_alt1.nit:36)
 | base_attr_nullable_alt1::Foo::init (alt/base_attr_nullable_alt1.nit:48)
+| new Foo base_attr_nullable_alt1::Foo::init (alt/base_attr_nullable_alt1.nit:48)
 | base_attr_nullable_alt1::Sys::main (alt/base_attr_nullable_alt1.nit:81)
 `------------------- - -  -

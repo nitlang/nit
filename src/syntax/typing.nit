@@ -535,14 +535,6 @@ redef class AForExpr
 	# The corresponding escapable block
 	readable var _escapable: nullable EscapableBlock
 
-	var _meth_iterator: nullable MMMethod
-	redef fun meth_iterator: MMMethod do return _meth_iterator.as(not null)
-	var _meth_is_ok: nullable MMMethod
-	redef fun meth_is_ok: MMMethod do return _meth_is_ok.as(not null)
-	var _meth_item: nullable MMMethod
-	redef fun meth_item: MMMethod do return _meth_item.as(not null)
-	var _meth_next: nullable MMMethod
-	redef fun meth_next: MMMethod do return _meth_next.as(not null)
 	redef fun accept_typing(v)
 	do
 		var escapable = new EscapableBlock(self)
@@ -563,30 +555,13 @@ redef class AForExpr
 		if not v.check_conform_expr(n_expr, v.type_collection) then return
 		var expr_type = n_expr.stype
 
-		_meth_iterator = expr_type.local_class.select_method(once ("iterator".to_symbol))
-		if _meth_iterator == null then
-			v.error(self, "Error: Collection MUST have an iterate method")
-			return
-		end
-		var iter_type = _meth_iterator.signature_for(expr_type).return_type.as(not null)
-		_meth_is_ok = iter_type.local_class.select_method(once ("is_ok".to_symbol))
-		if _meth_is_ok == null then
-			v.error(self, "Error: {iter_type} MUST have an is_ok method")
-			return
-		end
-		_meth_item = iter_type.local_class.select_method(once ("item".to_symbol))
-		if _meth_item == null then
-			v.error(self, "Error: {iter_type} MUST have an item method")
-			return
-		end
-		_meth_next = iter_type.local_class.select_method(once ("next".to_symbol))
-		if _meth_next == null then
-			v.error(self, "Error: {iter_type} MUST have a next method")
-			return
-		end
-		var t = _meth_item.signature_for(iter_type).return_type
-		if not n_expr.is_self then t = t.not_for_self
-		va.stype = t
+		# Get iterator
+		var meth_iterator = v.get_method(expr_type, once "iterator".to_symbol)
+		var iter_type = meth_iterator.signature_for(expr_type).return_type.as(not null)
+		var meth_item = v.get_method(iter_type, once ("item".to_symbol))
+		var va_stype = meth_item.signature_for(iter_type).return_type.as(not null)
+		if not n_expr.is_self then va_stype = va_stype.not_for_self
+		va.stype = va_stype
 
 		# Body evaluation
 		if n_block != null then v.enter_visit(n_block)
@@ -854,24 +829,14 @@ redef class ACharExpr
 end
 
 redef class AStringFormExpr
-	var _meth_with_native: nullable MMMethod
-	redef fun meth_with_native: MMMethod do return _meth_with_native.as(not null)
 	redef fun after_typing(v)
 	do
 		_stype = v.type_string
 		_is_typed = true
-		_meth_with_native = _stype.local_class.select_method(once "with_native".to_symbol)
-		if _meth_with_native == null then v.error(self, "{_stype} MUST have a with_native method.")
 	end
 end
 
 redef class ASuperstringExpr
-	redef fun meth_with_capacity: MMMethod do return _meth_with_capacity.as(not null)
-	var _meth_with_capacity: nullable MMMethod
-	redef fun meth_add: MMMethod do return _meth_add.as(not null)
-	var _meth_add: nullable MMMethod
-	redef fun meth_to_s: MMMethod do return _meth_to_s.as(not null)
-	var _meth_to_s: nullable MMMethod
 	redef fun atype do return _atype.as(not null)
 	var _atype: nullable MMType
 	redef fun after_typing(v)
@@ -880,12 +845,6 @@ redef class ASuperstringExpr
 		_stype = stype
 		var atype = v.type_array(stype)
 		_atype = atype
-		_meth_with_capacity = atype.local_class.select_method(once "with_capacity".to_symbol)
-		if _meth_with_capacity == null then v.error(self, "{_atype} MUST have a with_capacity method.")
-		_meth_add = atype.local_class.select_method(once "add".to_symbol)
-		if _meth_add == null then v.error(self, "{_atype} MUST have an add method.")
-		_meth_to_s = v.type_object.local_class.select_method(once "to_s".to_symbol)
-		if _meth_to_s == null then v.error(self, "Object MUST have a to_s method.")
 		_is_typed = true
 	end
 end
@@ -899,11 +858,6 @@ redef class ANullExpr
 end
 
 redef class AArrayExpr
-	redef fun meth_with_capacity: MMMethod do return _meth_with_capacity.as(not null)
-	var _meth_with_capacity: nullable MMMethod
-	redef fun meth_add: MMMethod do return _meth_add.as(not null)
-	var _meth_add: nullable MMMethod
-
 	redef fun after_typing(v)
 	do
 		var stype = v.check_conform_multiexpr(null, n_exprs)
@@ -913,19 +867,11 @@ redef class AArrayExpr
 	private fun do_typing(v: TypingVisitor, element_type: MMType)
 	do
 		_stype = v.type_array(element_type)
-
-		_meth_with_capacity = _stype.local_class.select_method(once "with_capacity".to_symbol)
-		if _meth_with_capacity == null then v.error(self, "{_stype} MUST have a with_capacity method.")
-		_meth_add = _stype.local_class.select_method(once "add".to_symbol)
-		if _meth_add == null then v.error(self, "{_stype} MUST have an add method.")
-
 		_is_typed = true
 	end
 end
 
 redef class ARangeExpr
-	redef fun meth_init: MMMethod do return _meth_init.as(not null)
-	var _meth_init: nullable MMMethod
 	redef fun after_typing(v)
 	do
 		if not v.check_expr(n_expr) or not v.check_expr(n_expr2) then return
@@ -943,24 +889,6 @@ redef class ARangeExpr
 		_is_typed = true
 	end
 end
-
-redef class ACrangeExpr
-	redef fun after_typing(v)
-	do
-		super
-		if not is_typed then return
-		_meth_init = stype.local_class.select_method(once "init".to_symbol)
-	end
-end
-redef class AOrangeExpr
-	redef fun after_typing(v)
-	do
-		super
-		if not is_typed then return
-		_meth_init = stype.local_class.select_method(once "without_last".to_symbol)
-	end
-end
-
 
 redef class ASuperExpr
 	redef readable var _init_in_superclass: nullable MMMethod

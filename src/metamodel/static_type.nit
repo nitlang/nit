@@ -484,4 +484,10 @@ end
 redef class MMModule
 	# The type of null
 	readable var _type_none: MMTypeNone = new MMTypeNone(self)
+
+	# The type of bool
+	fun type_bool: MMType
+	do
+		return class_by_name(once ("Bool".to_symbol)).get_type
+	end
 end

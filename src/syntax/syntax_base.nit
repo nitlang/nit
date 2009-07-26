@@ -783,24 +783,8 @@ redef class AAttrFormExpr
 	fun attr_type: MMType is abstract
 end
 
-redef class AStringFormExpr
-	fun meth_with_native: MMMethod is abstract
-end
-
 redef class ASuperstringExpr
-	fun meth_with_capacity: MMMethod is abstract
-	fun meth_add: MMMethod is abstract
-	fun meth_to_s: MMMethod is abstract
 	fun atype: MMType is abstract
-end
-
-redef class AArrayExpr
-	fun meth_with_capacity: MMMethod is abstract
-	fun meth_add: MMMethod is abstract
-end
-
-redef class ARangeExpr
-	fun meth_init: MMMethod is abstract
 end
 
 redef class AVardeclExpr
@@ -812,34 +796,26 @@ end
 redef class AForExpr
 	# Associated automatic local variable
 	fun variable: AutoVariable is abstract
-	fun meth_iterator: MMMethod is abstract
-	fun meth_is_ok: MMMethod is abstract
-	fun meth_item: MMMethod is abstract
-	fun meth_next: MMMethod is abstract
 end
 
 redef class ASelfExpr
 	# Associated local variable
 	fun variable: ParamVariable is abstract
-	#readable writable var _variable: nullable ParamVariable
 end
 
 redef class AVarFormExpr
 	# Associated local variable
 	fun variable: Variable is abstract
-	#readable writable var _variable: nullable Variable
 end
 
 redef class AClosureCallExpr
 special AAbsAbsSendExpr
 	# Associated closure variable
 	fun variable: ClosureVariable is abstract
-	#readable writable var _variable: nullable ClosureVariable
 end
 
 redef class PClosureDef
 	# Associated closure
-	#readable writable var _closure: nullable MMClosure
 	fun closure: MMClosure is abstract
 
 	# Automatic variables

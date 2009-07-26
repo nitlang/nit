@@ -17,9 +17,7 @@
 # Compute and generate tables for classes and modules.
 package compiling_global
 
-#import compiling_base
-private import compiling_methods
-private import syntax
+private import compiling_icode
 
 # Something that store color of table elements
 class ColorContext
@@ -493,7 +491,7 @@ redef class MMModule
 			if not c isa MMConcreteClass then continue
 			for pg in c.global_properties do
 				var p = c[pg]
-				if p.local_class == c then
+				if p.local_class == c and p isa MMMethod then
 					p.compile_property_to_c(v)
 				end
 				if pg.is_init_for(c) then
@@ -867,57 +865,57 @@ redef class MMLocalClass
 
 		var pi = primitive_info
 		if pi == null then
-			v.cfc = new CFunctionContext(v)
-			v.nmc = new NitMethodContext(null)
-			var s = "val_t NEW_{name}(void)"
-			v.add_instr(s + " \{")
-			v.indent
-			var ctx_old = v.ctx
-			v.ctx = new CContext
-
-			var self_var = new ParamVariable(once ("self".to_symbol), null)
-			var self_var_cname = v.cfc.register_variable(self_var)
-			v.nmc.method_params = [self_var]
-
-			v.add_instr("obj_t obj;")
-			v.add_instr("obj = alloc(sizeof(val_t) * {itab.length});")
-			v.add_instr("obj->vft = (classtable_elt_t*)VFT_{name};")
-			v.add_assignment(self_var_cname, "OBJ2VAL(obj)")
+			var iself = new IRegister(get_type)
+			var iselfa = [iself]
+			var iroutine = new IRoutine(new Array[IRegister], iself)
+			var icb = new ICodeBuilder(module, iroutine, null)
+			var obj = new INative("OBJ2VAL(obj)", null)
+			obj.result = iself
+			icb.stmt(obj)
 
 			for g in global_properties do
 				var p = self[g]
 				var t = p.signature.return_type
 				if p isa MMAttribute and t != null then
+					var ir = p.iroutine
+					if ir == null then continue
 					# FIXME: Not compatible with sep compilation
-					assert p isa MMSrcAttribute
-					var np = p.node
-					var ne = np.n_expr
-					if ne != null then
-						var e = ne.compile_expr(v)
-						v.add_instr("{p.global.attr_access}(obj) = {e};")
-					end
+					var e = ir.inline_in_seq(icb.seq, iselfa).as(not null)
+					icb.stmt(new IAttrWrite(p, iself, e))
 				end
 			end
-			v.add_instr("return OBJ2VAL(obj);")
-			v.cfc.generate_var_decls
+
+			var cname = "NEW_{name}"
+			var args = iroutine.compile_signature_to_c(v, cname, "new {name}", null, null)
+			var ctx_old = v.ctx
+			v.ctx = new CContext
+			v.add_decl("obj_t obj;")
+			v.add_instr("obj = alloc(sizeof(val_t) * {itab.length});")
+			v.add_instr("obj->vft = (classtable_elt_t*)VFT_{name};")
+			var r = iroutine.compile_to_c(v, cname, args).as(not null)
+			v.add_instr("return {r};")
 			ctx_old.append(v.ctx)
 			v.ctx = ctx_old
 			v.unindent
 			v.add_instr("}")
 
 			# Compile CHECKNAME
-			var s = "void CHECKNEW_{name}(val_t self, char *from)"
-			v.add_instr(s + " \{")
-			v.indent
-			var ctx_old = v.ctx
-			v.ctx = new CContext
+			var iself = new IRegister(get_type)
+			var iselfa = [iself]
+			var iroutine = new IRoutine(iselfa, null)
+			var icb = new ICodeBuilder(module, iroutine, null)
 			for g in global_properties do
 				var p = self[g]
 				var t = p.signature.return_type
 				if p isa MMAttribute and t != null and not t.is_nullable then
-					v.add_instr("if ({p.global.attr_access}(self) == NIT_NULL) \{ fprintf(stderr, \"Uninitialized attribute %s at %s.\\n\", \"{p.full_name}\", from); nit_exit(1); \}")
+					icb.add_attr_check(p, iself)
 				end
 			end
+			var cname = "CHECKNEW_{name}"
+			var args = iroutine.compile_signature_to_c(v, cname, "check new {name}", null, null)
+			var ctx_old = v.ctx
+			v.ctx = new CContext
+			iroutine.compile_to_c(v, cname, args)
 			ctx_old.append(v.ctx)
 			v.ctx = ctx_old
 			v.unindent
@@ -930,21 +928,32 @@ redef class MMLocalClass
 				var p = self[g]
 				# FIXME skip invisible constructors
 				if not p.global.is_init_for(self) then continue
-				var params = new Array[String]
-				var args = ["self"]
-				for i in [0..p.signature.arity[ do
-					params.add("val_t p{i}")
-					args.add("p{i}")
-				end
-				args.add("init_table")
-				var s = "val_t NEW_{self}_{p.global.intro.cname}({params.join(", ")}) \{"
-				v.add_instr(s)
-				v.indent
+				assert p isa MMMethod
+
+				var iself = new IRegister(get_type)
+				var iparams = new Array[IRegister]
+				for i in [0..p.signature.arity[ do iparams.add(new IRegister(p.signature[i]))
+				var iroutine = new IRoutine(iparams, iself)
+				iroutine.location = p.iroutine.location
+				var icb = new ICodeBuilder(module, iroutine, p)
+
+				var inew = new INative("NEW_{name}()", null)
+				inew.result = iself
+				icb.stmt(inew)
+				var iargs = [iself]
+				iargs.add_all(iparams)
+				icb.stmt(new INative("{p.cname}(@@@{", @@@"*iparams.length}, init_table)", iargs))
+				icb.stmt(new INative("CHECKNEW_{name}(@@@)", [iself]))
+
+				var cname = "NEW_{self}_{p.global.intro.cname}"
+				var new_args = iroutine.compile_signature_to_c(v, cname, "new {self} {p.full_name}", null, null)
+				var ctx_old = v.ctx
+				v.ctx = new CContext
 				v.add_instr(init_table_decl)
-				v.add_instr("val_t self = NEW_{name}();")
-				v.add_instr("{p.cname}({args.join(", ")});")
-				v.add_instr("CHECKNEW_{name}(self, \"{p.full_name} for {self}\");")
-				v.add_instr("return self;")
+				var e = iroutine.compile_to_c(v, cname, new_args).as(not null)
+				v.add_instr("return {e};")
+				ctx_old.append(v.ctx)
+				v.ctx = ctx_old
 				v.unindent
 				v.add_instr("}")
 			end
@@ -960,6 +969,47 @@ redef class MMLocalClass
 			v.unindent
 			v.add_instr("}")
 		end
+	end
+end
+
+redef class MMMethod
+	fun compile_property_to_c(v: CompilerVisitor)
+	do
+		var ir = iroutine
+		assert ir != null
+
+		var more_params: nullable String = null
+		if global.is_init then more_params = "int* init_table"
+		var args = ir.compile_signature_to_c(v, cname, full_name, null, more_params)
+		var ctx_old = v.ctx
+		v.ctx = new CContext
+
+		v.out_contexts.clear
+
+		var itpos: nullable String = null
+		if global.is_init then
+			itpos = "itpos{v.new_number}"
+			v.add_decl("int {itpos} = VAL2OBJ({args.first})->vft[{local_class.global.init_table_pos_id}].i;")
+			v.add_instr("if (init_table[{itpos}]) return;")
+		end
+
+		var s = ir.compile_to_c(v, cname, args)
+
+		if itpos != null then
+			v.add_instr("init_table[{itpos}] = 1;")
+		end
+		if s == null then
+			v.add_instr("return;")
+		else
+			v.add_instr("return ", s, ";")
+		end
+
+		ctx_old.append(v.ctx)
+		v.ctx = ctx_old
+		v.unindent
+		v.add_instr("}")
+
+		for ctx in v.out_contexts do v.ctx.merge(ctx)
 	end
 end
 

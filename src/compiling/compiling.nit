@@ -18,9 +18,8 @@
 package compiling
 
 import compiling_base
-private import compiling_methods
 private import compiling_global
-private import syntax
+private import compiling_icode
 
 redef class MMModule
 	# Compile the program

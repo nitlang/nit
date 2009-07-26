@@ -17,7 +17,7 @@
 # Common things for NIT compilation and C generation
 package compiling_base
 
-import syntax
+import mmloader
 private import utils
 import primitive_info
 

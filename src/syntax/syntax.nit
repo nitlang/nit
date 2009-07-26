@@ -21,6 +21,7 @@ package syntax
 import mmloader
 import mmbuilder
 import typing
+import icode_generation
 
 # Loader of nit source files
 class SrcModuleLoader
@@ -71,6 +72,9 @@ redef class MMSrcModule
 		tc.check_errors
 
 		do_typing(tc)
+		tc.check_errors
+
+		generate_icode(tc)
 		tc.check_errors
 	end
 end

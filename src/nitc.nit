@@ -18,7 +18,9 @@
 package nitc
 
 import abstracttool
+import analysis
 private import compiling
+private import syntax
 
 # The main class of the nitcompiler program
 class NitCompiler
@@ -31,11 +33,12 @@ special AbstractCompiler
 	readable var _opt_bindir: OptionString = new OptionString("NIT tools directory", "--bindir")
 	readable var _opt_compdir: OptionString = new OptionString("Intermediate compilation directory", "--compdir")
 	readable var _opt_extension_prefix: OptionString = new OptionString("Append prefix to file extension", "-p", "--extension-prefix")
+	readable var _opt_dump: OptionBool = new OptionBool("Dump intermediate code", "--dump")
 
 	init
 	do
 		super("nitc")
-		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix)
+		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix, opt_dump)
 	end
 
 	redef fun process_options
@@ -90,8 +93,36 @@ special AbstractCompiler
 		end
 	end
 
+	fun dump_intermediate_code(mods: Collection[MMModule])
+	do
+		for mod in mods do
+			for c in mod.local_classes do
+				if not c isa MMConcreteClass then continue
+				for p in c.local_local_properties do
+					var routine: nullable IRoutine = null
+					if p isa MMAttribute then
+						routine = p.iroutine
+					else if p isa MMMethod then
+						routine = p.iroutine
+					end
+					if routine == null then continue
+					print "**** Property {p.full_name} ****"
+					var icd = new ICodeDumper
+					routine.dump(icd)
+					print "**** OPTIMIZE {p.full_name} ****"
+					routine.optimize
+					icd = new ICodeDumper
+					routine.dump(icd)
+				end
+			end
+		end
+	end
+
 	redef fun perform_work(mods)
 	do
+		if opt_dump.value then
+			dump_intermediate_code(mods)
+		end
 		for mod in mods do
 			mod.compile_prog_to_c(self)
 		end
