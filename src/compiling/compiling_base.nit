@@ -37,30 +37,37 @@ end
 # Note also that this class is unefficient and poorly designed thus requires love.
 class CompilerVisitor
 	# Add a line in the current declaration block
-	fun add_decl(s: String)
+	fun add_decl(s: String...)
 	do
-		if _indent_level >= 8 then
-			_ctx.decls.add("\t\t" + s)
-		else
-			_ctx.decls.add("  " * _indent_level + s)
-		end
+		add_line_to(_ctx.decls, s)
 	end
 
 	# Add a line in the current instr block
-	fun add_instr(s: String)
+	fun add_instr(s: String...)
+	do
+		add_line_to(_ctx.instrs, s)
+	end
+
+	fun add_line_to(a: Array[String], s: Array[String])
 	do
 		if _indent_level >= 8 then
-			_ctx.instrs.add("\t\t" + s)
+			a.add("\t\t")
 		else
-			_ctx.instrs.add("  " * _indent_level + s)
+			for i in [0.._indent_level[ do
+				a.add("  ")
+			end
 		end
+		for i in s do
+			a.add(i)
+		end
+		a.add("\n")
 	end
 
 	# Add a assignment between a variable and an expression
 	fun add_assignment(v: String, s: String)
 	do
 		if v != s then
-			add_instr("{v} = {s};")
+			add_instr(v, " = ", s, ";")
 		end
 	end
 
@@ -94,8 +101,7 @@ class CompilerVisitor
 		var out = new Array[String]
 		out.append(_ctx.decls)
 		out.append(_ctx.instrs)
-		out.add("")
-		return out.join("\n")
+		return out.to_s
 	end
 
 	# The processed module
