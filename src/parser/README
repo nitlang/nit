@@ -4,10 +4,11 @@ In order to generate nit parser, you need the alternate SableCC3 generator ( htt
 Contents:
 
 	Makefile: Update grammar and generate .nit files
-	nit.sablecc3xx: Extended sablecc3 grammar (see Makefile)
-	parser_nodes.nit: token and nodes classes hierarchy used by the parser ans lexer
-	test_parser.nit
-	xss/*.xss: Template files for the NIT language
+	nit.sablecc3xx: Extended sablecc3 grammar (see prescc.sh)
+	prescc.sh: Program to transform an extended sablecc3 to a standard one
+	parser_nodes.nit: token and nodes classes hierarchy used by the parser and the lexer
+	test_parser.nit:
+	xss/*.xss: alternate SableCC3 template files for the Nit language
 
 
 The following are generated but present to avoid the need of sablecc3:
@@ -21,8 +22,6 @@ The following are generated but present to avoid the need of sablecc3:
 
 Other temp files produced by the Makefile:
 
-	nit.sablecc3: Sablecc3 grammar after processing (readolny to avoid modifying it)
-	nit.sablecc3.dump: Dump of the grammar to improve sablecc3 multiple runs
-	parser_abs.patch: Change between old and new parser_abs.nit to keep parser_nodes.nit in sync
-
+	.nit.sablecc3: Sablecc3 grammar after processing
+	.nit.sablecc3.dump: Dump of the grammar to improve sablecc3 multiple runs
 
