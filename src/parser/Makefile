@@ -24,13 +24,10 @@ all: parser.nit
 
 # Note that parser_nodes is automatically synced with the grammar
 parser.nit: .nit.sablecc3 xss/*.xss
-	cp parser_abs.nit parser_abs.nit.bak || true
 	${SABLECC} -c .nit.sablecc3.dump -t xss/main.xss -p usermodule parser_nodes .nit.sablecc3
-	diff -u parser_abs.nit.bak parser_abs.nit > parser_abs.patch || true
-	patch parser_nodes.nit < parser_abs.patch || true
 
 clean:
-	rm -f -- .nit.sablecc3 .nit.sablecc3.dump parser_abs.patch || true
+	rm -f -- .nit.sablecc3 .nit.sablecc3.dump || true
 
 dist-clean: clean
-	rm -f -- parser.nit parser_abs.nit parser_abs.patch parser_abs.nit.bak parser_prod.nit parser_tables.nit lexer.nit || true
+	rm -f -- parser.nit parser_abs.nit parser_prod.nit parser_tables.nit lexer.nit || true

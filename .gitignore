@@ -11,8 +11,6 @@ src/nitc
 src/nitc_?
 src/parser/.nit.sablecc3
 src/parser/.nit.sablecc3.dump
-src/parser/parser_abs.patch
-src/parser/parser_nodes.nit.rej
 src/nit_version.nit
 
 c_src/*.o
