@@ -59,8 +59,8 @@ end
 # Concrete NIT source local classes
 class MMSrcLocalClass
 special MMConcreteClass
-	# The related AST nodes
-	readable var _nodes: Array[PClassdef]
+	# The first related AST node (if any)
+	readable var _node: nullable PClassdef
 
 	# Concrete NIT source generic formal parameter by name
 	readable var _formal_dict: Map[Symbol, MMTypeFormalParameter] = new HashMap[Symbol, MMTypeFormalParameter]
@@ -71,11 +71,7 @@ special MMConcreteClass
 	init(mod: MMSrcModule, n: Symbol, cla: nullable PClassdef, a: Int)
 	do
 		super(mod, n, a)
-		if cla == null then
-			_nodes = new Array[PClassdef]
-		else
-			_nodes = [cla]
-		end
+		_node = cla
 		_src_local_properties = new HashMap[Symbol, MMLocalProperty]
 	end
 end
@@ -500,6 +496,9 @@ end
 redef class PClassdef
 	# Associated class (MM entity)
 	fun local_class: MMSrcLocalClass is abstract
+
+	# Next PClassdef of the same class (if any)
+	readable writable var _next_node: nullable PClassdef = null
 end
 
 redef class PPropdef

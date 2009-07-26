@@ -158,16 +158,20 @@ end
 redef class MMSrcLocalClass
 	redef fun accept_class_visitor(v)
 	do
-		for n in nodes do
+		var n = node
+		while n != null do
 			v.enter_visit(n)
+			n = n.next_node
 		end
 	end
 
 	# Accept a class visitor (on class properties)
 	redef fun accept_properties_visitor(v)
 	do
-		for n in nodes do
+		var n = node
+		while n != null do
 			v.enter_visit(n)
+			n = n.next_node
 		end
 
 		for p in src_local_properties do
@@ -228,7 +232,7 @@ redef class MMSrcLocalClass
 			var superclass: nullable MMLocalClass = null # This most specific non-mixin superclass (if any)
 
 			if supers.length > 1 then
-				v.error(nodes.first, "Error: Explicit constructor required in {self} since multiple inheritance of constructor is forbiden. Conflicting classes are {supers.join(", ")}. Costructors are {super_constructors.join(", ")}.")
+				v.error(node, "Error: Explicit constructor required in {self} since multiple inheritance of constructor is forbiden. Conflicting classes are {supers.join(", ")}. Costructors are {super_constructors.join(", ")}.")
 				return
 			else if supers.length == 1 then
 				superclass = supers.first
@@ -538,10 +542,13 @@ redef class PClassdef
 			local_class = local_classes[name]
 			if self isa AClassdef then
 				# If we are not a special implicit class then rant
-				v.error(self, "Error: A class {name} is already defined at line {local_class.nodes.first.first_token.location.line_start}.")
+				v.error(self, "Error: A class {name} is already defined at line {local_class.node.location.line_start}.")
 				return
 			end
-			local_class.nodes.add(self)
+			# Add the new node after the last node
+			var n = local_class.node
+			while n.next_node != null do n = n.next_node
+			n.next_node = self
 		else
 			local_class = new MMSrcLocalClass(mod, name, self, arity)
 			local_classes[name] = local_class

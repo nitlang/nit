@@ -1072,7 +1072,7 @@ redef class MMSrcLocalClass
 
 	redef fun doc
 	do
-		var n = nodes.first
+		var n = node
 		if not n isa AClassdef then
 			return null
 		end
