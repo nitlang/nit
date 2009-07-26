@@ -319,13 +319,10 @@ end
 # Concrete NIT class specialization relation
 class MMSrcAncestor
 special MMAncestor
-	# The related AST node
-	readable var _node: ASuperclass
 	redef readable var _local_class: MMLocalClass
 
-	init(n: ASuperclass, c: MMLocalClass)
+	init(c: MMLocalClass)
 	do
-		_node = n
 		_local_class = c
 	end
 end
@@ -728,7 +725,7 @@ redef class ASuperclass
 		super
 		var c = n_type.get_local_class(v)
 		if c == null then return
-		var ancestor = new MMSrcAncestor(self, c)
+		var ancestor = new MMSrcAncestor(c)
 		_ancestor = ancestor
 		v.local_class.add_direct_parent(ancestor)
 	end
