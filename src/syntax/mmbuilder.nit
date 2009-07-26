@@ -676,26 +676,14 @@ redef class ATopClassdef
 	end
 end
 
-class MMSrcTypeFormalParameter
-special MMTypeFormalParameter
-	# The associated node
-	readable var _node: AFormaldef 
-
-	init(name: Symbol, pos: Int, local_class: MMLocalClass, n: AFormaldef)
-	do
-		super(name, pos, local_class)
-		_node = n
-	end
-end
-
 redef class AFormaldef
 	# The associated formal generic parameter (MM entity)
-	var _formal: nullable MMSrcTypeFormalParameter
+	var _formal: nullable MMTypeFormalParameter
 
 	redef fun accept_class_builder(v)
 	do
 		var name = n_id.to_symbol
-		var formal_type = new MMSrcTypeFormalParameter(name, v.local_class_arity, v.local_class, self)
+		var formal_type = new MMTypeFormalParameter(name, v.local_class_arity, v.local_class)
 		_formal = formal_type
 		v.local_class_arity = v.local_class_arity + 1
 		v.local_class.register_formal(formal_type)
