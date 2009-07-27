@@ -887,7 +887,7 @@ redef class AOrExpr
 		v.stmt(iif)
 		var seq_old = v.seq
 		v.seq = iif.then_seq
-		v.add_assignment(reg, v.generate_expr(n_expr))
+		v.add_assignment(reg, v.lit_true_reg)
 
 		# Process right operand (in the else)
 		v.seq = iif.else_seq
@@ -909,7 +909,7 @@ redef class AAndExpr
 		v.stmt(iif)
 		var seq_old = v.seq
 		v.seq = iif.else_seq
-		v.add_assignment(reg, v.generate_expr(n_expr))
+		v.add_assignment(reg, v.lit_false_reg)
 
 		# Process right operand (in the then)
 		v.seq = iif.then_seq
@@ -957,14 +957,14 @@ end
 redef class ATrueExpr
 	redef fun generate_icode(v)
 	do
-		return v.expr(new INative("TAG_Bool(true)", null), stype)
+		return v.lit_true_reg
 	end
 end
 
 redef class AFalseExpr
 	redef fun generate_icode(v)
 	do
-		return v.expr(new INative("TAG_Bool(false)", null), stype)
+		return v.lit_false_reg
 	end
 end
 
@@ -1073,7 +1073,7 @@ end
 redef class ANullExpr
 	redef fun generate_icode(v)
 	do
-		return v.new_register(stype)
+		return v.lit_null_reg
 	end
 end
 

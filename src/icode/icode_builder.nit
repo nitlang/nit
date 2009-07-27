@@ -48,7 +48,7 @@ class ICodeBuilder
 	# Check that the reciever e is not null (IIs + IAbort)
 	fun add_null_reciever_check(e: IRegister)
 	do
-		var nul = new_register(module.type_none)
+		var nul = lit_null_reg
 		var c = expr(new IIs(e, nul), module.type_bool)
 		var iif = new IIf(c)
 		stmt(iif)
@@ -135,12 +135,12 @@ class ICodeBuilder
 			seq = iif.else_seq
 			# Do the "x != null" part iff x is nullable
 			if args[0].stype.is_nullable then
-				var nul = new_register(module.type_none)
+				var nul = lit_null_reg
 				cond = expr(new IIs(args[0], nul), module.type_bool)
 				iif = new IIf(cond)
 				stmt(iif)
 				seq = iif.then_seq
-				add_assignment(reg, expr(new INative("TAG_Bool(false)", null), module.type_bool))
+				add_assignment(reg, lit_false_reg)
 				seq = iif.else_seq
 			end
 			# "x.==(y)"
@@ -157,6 +157,26 @@ class ICodeBuilder
 			stmt(icall)
 			return null
 		end
+	end
+
+	# Return a literal "null" value
+	fun lit_null_reg: IRegister
+	do
+		return new_register(module.type_none)
+	end
+
+	# Return a literal "true" value
+	fun lit_true_reg: IRegister
+	do
+		var e = new INative("TAG_Bool(true)", null)
+		return expr(e, module.type_bool)
+	end
+
+	# Return a literal "false" value
+	fun lit_false_reg: IRegister
+	do
+		var e = new INative("TAG_Bool(false)", null)
+		return expr(e, module.type_bool)
 	end
 
 	# Get a new register
