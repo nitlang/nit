@@ -105,6 +105,14 @@ redef class MMType
 		end
 	end
 
+	# Is the type tagged?
+	fun is_tagged: Bool
+	do
+		if is_nullable then return false
+		var pi = local_class.primitive_info
+		return pi != null and pi.tagged
+	end
+
 	# The default c value for uninitialized types.
 	# Return "null" for non primitive types and something more specific for primitive types
 	fun default_cvalue: String

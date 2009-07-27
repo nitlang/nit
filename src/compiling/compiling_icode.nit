@@ -46,7 +46,7 @@ class I2CCompilerVisitor
 			else
 				var s: String
 				var strs: HashMap[Int, String]
-				if e.in_bool_slots then
+				if e.in_tag_slots then
 					strs = once new HashMap[Int, String]
 					if not strs.has_key(i) then strs[i] = "REGB{i}"
 				else if closure and not e.is_local then
@@ -274,7 +274,7 @@ redef class IRoutine
 		else
 			v.add_decl("val_t REG[{std_slots_nb}];")
 		end
-		for i in [0..bool_slots_nb[ do
+		for i in [0..tag_slots_nb[ do
 			v.add_decl("val_t REGB{i};")
 		end
 		var iclosdecls = closure_decls

@@ -18,6 +18,7 @@
 package allocate_iregister_slots
 
 import icode
+private import primitive_info
 
 # The main class that performs the iregister slot allocation
 # The algorithm is quite naive but works
@@ -149,8 +150,8 @@ special ICodeVisitor
 			end
 			_current_ir = old_ir
 		else
-			var old_bool_slots = _bool_slots
-			_bool_slots = new SlotGroup
+			var old_tag_slots = _tag_slots
+			_tag_slots = new SlotGroup
 			var old_std_slots = _std_slots
 			if ir isa IClosureDef then
 				_std_slots = new SlotGroup
@@ -160,8 +161,8 @@ special ICodeVisitor
 			end
 			super
 			if res != null then free(res)
-			ir._bool_slots_nb = _bool_slots._next_index
-			_bool_slots = old_bool_slots
+			ir._tag_slots_nb = _tag_slots._next_index
+			_tag_slots = old_tag_slots
 			ir._std_slots_nb = _std_slots._next_index
 			_std_slots = old_std_slots
 		end
@@ -174,8 +175,8 @@ special ICodeVisitor
 	# In main iroutine, _global_slots == _std_slots
 	var _std_slots: SlotGroup
 
-	# Bool slots are used to store local boolean registers
-	var _bool_slots: SlotGroup = new SlotGroup
+	# Tag slots are used to store local tagged object registers
+	var _tag_slots: SlotGroup = new SlotGroup
 
 	# Assign a slot to a register according to its locality and its type
 	fun register(r: IRegister)
@@ -185,9 +186,9 @@ special ICodeVisitor
 		_live.add(r)
 		if not r._is_local then
 			_global_slots.register(r)
-		else if (r.stype.local_class.name == once ("Bool".to_symbol)) then
-			r._in_bool_slots = true
-			_bool_slots.register(r)
+		else if r.stype.is_tagged then
+			r._in_tag_slots = true
+			_tag_slots.register(r)
 		else
 			_std_slots.register(r)
 		end
@@ -201,8 +202,8 @@ special ICodeVisitor
 		if not _live.has(r) then
 			_deferred.add(r)
 		else if _lasts.has_key(r) then
-			if r._in_bool_slots then
-				_bool_slots.free(r)
+			if r._in_tag_slots then
+				_tag_slots.free(r)
 			else if r._is_local then
 				_std_slots.free(r)
 			else
@@ -267,8 +268,8 @@ redef class IRoutine
 	# The number of standard slots (stored in an array)
 	readable var _std_slots_nb: Int = 0
 
-	# The number of bool slots
-	readable var _bool_slots_nb: Int = 0
+	# The number of tag slots
+	readable var _tag_slots_nb: Int = 0
 
 	fun allocate_iregister_slots
 	do
@@ -289,6 +290,6 @@ redef class IRegister
 	# If is_local, then what iroutine
 	readable writable var _local_iroutine: nullable IRoutine
 
-	# Is the register stored in the bool slot groups?
-	readable writable var _in_bool_slots: Bool = false
+	# Is the register stored in the tag slot group?
+	readable writable var _in_tag_slots: Bool = false
 end
