@@ -23,6 +23,7 @@ if exists("b:current_syntax")
 endif
 
 " Expression Substitution and Backslash Notation
+syn match NITExprSubstError "{\|}" contained
 syn match NITExprSubst "\\." contained
 syn match NITExprSubst "{[^}]*}" contained
 
@@ -30,16 +31,18 @@ syn match NITExprSubst "{[^}]*}" contained
 syn match NITNumber "\<\(\d\+\.\d\+\|\d\+\)\>"
 
 " Identifiers
-syn match NITClass		"\u\w*"
+syn match NITClass		"\<\u\w*"
 syn match NITAttribute		"\<_\h\w*"
 
 " Literal strings
-syn region NITString matchgroup=NITStringDelimit start="\"" end="\"" skip="\\\\\|\\\"" contains=NITExprSubst
+syn region NITString matchgroup=NITStringDelimit start="\"" end="\"" skip="\\\\\|\\\"" contains=NITExprSubst,NITExprSubstError
 syn region NITString matchgroup=NITStringDelimit start="'"  end="'"  skip="\\\\\|\\'"
 
+" Labels
+syn match NITLabel "\<label \h\w*"
 
 " Fallback highlight keywords
-syn match NITBoolean "\<\(null\)\>"
+syn match NITNull "\<\(null\)\>"
 syn match NITControl "\<\(init\|end\|not null\|not\|var\|do\|then\|else\|with\)\>"
 " Unmatchning error
 syn match Error "\<end\>"
@@ -65,15 +68,14 @@ syn match  NITSharpBang	"\%^#!.*"
 syn match  NITComment	"#.*" contains=NITTodo
 
 " Keywords
-syn keyword NITKeyword	 is abstract intern extern
+syn keyword NITKeyword	 is abstract intern extern super new
 syn keyword NITDefine	 private public protected intrude readable writable redef
-syn keyword NITControl   if while for assert
-syn keyword NITControl   and or in as isa
-syn keyword NITControl   break continue return label abort
-syn keyword NITKeyword   super new nullable
+syn keyword NITControl   if while for assert and or in as isa once break continue return abort
+syn keyword NITClass     nullable
 syn keyword NITInclude   special
 syn keyword NITTodo      FIXME NOTE TODO XXX contained
-syn keyword NITBoolean   true false self
+syn keyword NITBoolean   true false
+syn keyword NITSelf      self
 
 " Define the default highlighting.
 hi def link NITDefine			Define
@@ -83,9 +85,12 @@ hi def link NITTypeDecl			Function
 hi def link NITAttrDecl			Function
 hi def link NITInitDecl			Function
 hi def link NITControl			Statement
+hi def link NITLabel			PreProc
 hi def link NITInclude			Include
 hi def link NITNumber			Number
 hi def link NITBoolean			Boolean
+hi def link NITNull			Constant
+hi def link NITSelf			Constant
 hi def link NITClass			Type
 hi def link NITAttribute		Identifier
 hi def link NITSharpBang		PreProc
@@ -94,6 +99,7 @@ hi def link NITKeyword			Keyword
 hi def link NITString			String
 hi def link NITStringDelimit		Delimiter
 hi def link NITExprSubst		Special
+hi def link NITExprSubstError		Error
 
 hi def link NITComment			Comment
 hi def link NITTodo			Todo
