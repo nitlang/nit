@@ -909,6 +909,7 @@ end
 
 redef class ASuperExpr
 	redef readable var _init_in_superclass: nullable MMMethod
+	redef fun compute_raw_arguments do return n_args.to_a
 	redef fun after_typing(v)
 	do
 		var precs: Array[MMLocalProperty] = v.local_property.prhe.direct_greaters
@@ -936,7 +937,7 @@ redef class ASuperExpr
 			register_super_init_call(v, p)
 			if n_args.length > 0 then
 				var signature = get_signature(v, v.self_var.stype.as(not null), p, true)
-				_arguments = process_signature(v, signature, p.name, n_args.to_a)
+				process_signature(v, signature, p.name, compute_raw_arguments)
 			end
 		else
 			v.error(self, "Error: No super method to call for {v.local_property}.")
@@ -1045,6 +1046,27 @@ redef class AAbsAbsSendExpr
 	redef fun prop_signature do return _prop_signature.as(not null)
 	var _prop_signature: nullable MMSignature
 
+	# Raw arguments used (without vararg transformation)
+	redef fun raw_arguments: Array[AExpr]
+	do
+		var res = _raw_arguments_cache
+		if res != null then
+			return res
+		else
+			res = compute_raw_arguments
+			if res == null then res = new Array[AExpr]
+			_raw_arguments_cache = res
+			return res
+		end
+	end
+
+	var _raw_arguments_cache: nullable Array[AExpr] = null
+
+	fun compute_raw_arguments: nullable Array[AExpr]
+	do
+		print "{location} no compute_raw_arguments"
+		return null
+	end
 	# The real arguments used (after star transformation) (once computed)
 	redef fun arguments do return _arguments.as(not null)
 	var _arguments: nullable Array[AExpr]
@@ -1234,6 +1256,7 @@ redef class ASuperInitCall
 end
 
 redef class ANewExpr
+	redef fun compute_raw_arguments do return n_args.to_a
 	redef fun after_typing(v)
 	do
 		if not n_type.is_typed then return
@@ -1249,7 +1272,7 @@ redef class ANewExpr
 			name = n_id.to_symbol
 		end
 
-		do_typing(v, t, false, false, name, n_args.to_a, null)
+		do_typing(v, t, false, false, name, raw_arguments, null)
 		if _prop == null then return
 
 		if not prop.global.is_init then
@@ -1265,9 +1288,6 @@ end
 redef class ASendExpr
 	# Name of the invoked property
 	fun name: Symbol is abstract 
-
-	# Raw arguments used (withour star transformation)
-	fun raw_arguments: nullable Array[AExpr] is abstract
 
 	# Closure definitions
 	redef fun closure_defs: nullable Array[AClosureDef] do return null
@@ -1324,6 +1344,7 @@ redef class ASendReassignExpr
 		v.check_conform(self, t2, n_value.stype)
 
 		_read_prop = prop
+		raw_args = raw_args.to_a
 		var old_args = arguments
 		raw_args.add(n_value)
 
@@ -1342,7 +1363,7 @@ redef class ASendReassignExpr
 end
 
 redef class ABinopExpr
-	redef fun raw_arguments do return [n_expr2]
+	redef fun compute_raw_arguments do return [n_expr2]
 end
 redef class AEqExpr
 	redef fun name do return once "==".to_symbol
@@ -1429,7 +1450,7 @@ end
 
 redef class AUminusExpr
 	redef fun name do return once "unary -".to_symbol
-	redef fun raw_arguments do return null
+	redef fun compute_raw_arguments do return null
 end
 
 redef class ACallFormExpr
@@ -1480,7 +1501,7 @@ redef class ACallExpr
 	end
 
 	redef fun name do return n_id.to_symbol
-	redef fun raw_arguments do return n_args.to_a
+	redef fun compute_raw_arguments do return n_args.to_a
 end
 
 redef class ACallAssignExpr
@@ -1490,7 +1511,7 @@ redef class ACallAssignExpr
 	end
 
 	redef fun name do return (n_id.text + "=").to_symbol
-	redef fun raw_arguments do
+	redef fun compute_raw_arguments do
 		var res = n_args.to_a
 		res.add(n_value)
 		return res
@@ -1504,17 +1525,17 @@ redef class ACallReassignExpr
 	end
 
 	redef fun name do return n_id.to_symbol
-	redef fun raw_arguments do return n_args.to_a
+	redef fun compute_raw_arguments do return n_args.to_a
 end
 
 redef class ABraExpr
 	redef fun name do return once "[]".to_symbol
-	redef fun raw_arguments do return n_args.to_a
+	redef fun compute_raw_arguments do return n_args.to_a
 end
 
 redef class ABraAssignExpr
 	redef fun name do return once "[]=".to_symbol
-	redef fun raw_arguments do
+	redef fun compute_raw_arguments do
 		var res = n_args.to_a
 		res.add(n_value)
 		return res
@@ -1523,17 +1544,18 @@ end
 
 redef class ABraReassignExpr
 	redef fun name do return once "[]".to_symbol
-	redef fun raw_arguments do return n_args.to_a
+	redef fun compute_raw_arguments do return n_args.to_a
 end
 
 redef class AInitExpr
 	redef fun name do return once "init".to_symbol
-	redef fun raw_arguments do return n_args.to_a
+	redef fun compute_raw_arguments do return n_args.to_a
 end
 
 redef class AClosureCallExpr
 	var _variable: nullable ClosureVariable
 	redef fun variable do return _variable.as(not null)
+	redef fun compute_raw_arguments do return n_args.to_a
 
 	redef fun after_typing(v)
 	do

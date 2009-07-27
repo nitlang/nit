@@ -748,6 +748,8 @@ special AExpr
 	# The signature of the called property (require is_typed)
 	fun prop_signature: MMSignature is abstract
 
+	# The raw arguments used (without vararg transformation) (require is_typed)
+	fun raw_arguments: Array[AExpr] is abstract
 	# The real arguments used (after star transformation) (require is_typed)
 	fun arguments: Array[AExpr] is abstract
 end
