@@ -630,7 +630,15 @@ end
 redef class ADoExpr
 	redef fun generate_icode(v)
 	do
+		var seq_old = v.seq
+		var seq = new ISeq
+		v.stmt(seq)
+		escapable.break_seq = seq
+		v.seq = seq
+
 		v.generate_stmt(n_block)
+
+		v.seq = seq_old
 		return null
 	end
 end

@@ -414,7 +414,7 @@ redef class AContinueExpr
 		if esc == null then return
 
 		if esc.is_break_block then
-			v.error(self, "Error: 'continue' forbiden in break blocks.")
+			v.error(self, "Error: cannot 'continue', only 'break'.")
 			return
 		end
 
@@ -454,6 +454,23 @@ redef class AAbortExpr
 	redef fun after_typing(v)
 	do
 		v.variable_ctx.unreash = true
+		_is_typed = true
+	end
+end
+
+redef class ADoExpr
+	# The corresponding escapable block
+	readable var _escapable: nullable EscapableBlock
+
+	redef fun accept_typing(v)
+	do
+		var escapable = new BreakOnlyEscapableBlock(self)
+		_escapable = escapable
+		v.escapable_ctx.push(escapable, n_label)
+
+		super
+
+		v.escapable_ctx.pop
 		_is_typed = true
 	end
 end

@@ -88,7 +88,9 @@ end
 ###############################################################################
 
 # A escapable block correspond to a block statement where break and/or continue can by used
-# For and while use this class. closures uses the EscapableClosure subclass.
+# 'for' and 'while' use this class
+# 'do' uses the BreakOnlyEscapableBlock subclass
+# closures uses the EscapableClosure subclass
 class EscapableBlock
 	# The syntax node of the block
 	readable var _node: ANode
@@ -112,6 +114,14 @@ class EscapableBlock
 	do
 		_node = node
 	end
+end
+
+# specific EscapableBlock where only break can be used
+class BreakOnlyEscapableBlock
+special EscapableBlock
+	redef fun is_break_block: Bool do return true
+
+	init(node: ANode) do super
 end
 
 # specific EscapableBlock for closures
