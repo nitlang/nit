@@ -169,6 +169,7 @@ class ICodeBuilder
 	fun lit_true_reg: IRegister
 	do
 		var e = new INative("TAG_Bool(true)", null)
+		e.is_pure = true
 		return expr(e, module.type_bool)
 	end
 
@@ -176,6 +177,7 @@ class ICodeBuilder
 	fun lit_false_reg: IRegister
 	do
 		var e = new INative("TAG_Bool(false)", null)
+		e.is_pure = true
 		return expr(e, module.type_bool)
 	end
 

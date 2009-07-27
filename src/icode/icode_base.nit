@@ -88,6 +88,9 @@ abstract class ICode
 
 	# The location of the icode (if any)
 	readable writable var _location: nullable Location = null
+
+	# Is the icode side effect free?
+	fun is_pure: Bool do return false
 end
 
 # An icode that uses no registers (no args)
@@ -274,6 +277,8 @@ special ICodeN
 		super(e)
 		_code = c
 	end
+
+	redef readable writable var _is_pure: Bool = false
 end
 
 # A register assigment
@@ -286,6 +291,8 @@ special ICode1
 		super(e)
 		_result = r
 	end
+
+	redef fun is_pure do return true
 end
 
 # An attribute read access
@@ -300,6 +307,8 @@ special ICode1
 		super(r)
 		_property = p
 	end
+
+	redef fun is_pure do return true
 end
 
 # An attribute assignment
@@ -329,6 +338,8 @@ special ICode1
 		super(r)
 		_property = p
 	end
+
+	redef fun is_pure do return true
 end
 
 # A type check
@@ -343,6 +354,8 @@ special ICode1
 		super(e)
 		_stype = t
 	end
+
+	redef fun is_pure do return true
 end
 
 # The 'is' operator
@@ -353,6 +366,8 @@ special ICode2
 	do
 		super
 	end
+
+	redef fun is_pure do return true
 end
 
 # The unary 'not' operation
@@ -363,6 +378,8 @@ special ICode1
 	do
 		super
 	end
+
+	redef fun is_pure do return true
 end
 
 # Evaluate body once them return the same value again and again
@@ -383,6 +400,8 @@ special ICode0
 	do
 		_closure_decl = c
 	end
+
+	redef fun is_pure do return true
 end
 
 #################################################

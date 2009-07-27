@@ -358,7 +358,9 @@ redef class ICode
 		if r != null and r.slot_index != null then
 			assert s != null
 			v.add_assignment(v.register(r), s)
-		else if s != null and not self isa IMove then
+		else if s != null and not is_pure then
+			# ICode with side effects must be evaluated
+			# even if the result is not wanted
 			v.add_instr(s + ";")
 		end
 	end
