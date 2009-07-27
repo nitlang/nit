@@ -819,7 +819,6 @@ redef class APropdef
 
 			if s == null then
 				if v.signature_builder.params.length != isig.arity then
-					#prop.node.printl("v.params.length {v.params.length} != isig.arity {isig.arity} ; {prop.full_name} vs {ip.full_name}")
 					return
 				end
 				for p in v.signature_builder.params do
