@@ -273,7 +273,7 @@ redef class AClosureDecl
 
 		var escapable = new EscapableClosure(self, variable.closure, null)
 		_escapable = escapable
-		v.escapable_ctx.push(escapable)
+		v.escapable_ctx.push(escapable, null)
 
 		super
 
@@ -502,7 +502,7 @@ redef class AWhileExpr
 	do
 		var escapable = new EscapableBlock(self)
 		_escapable = escapable
-		v.escapable_ctx.push(escapable)
+		v.escapable_ctx.push(escapable, n_label)
 		var old_var_ctx = v.variable_ctx
 		var old_base_var_ctx = v.base_variable_ctx
 		v.base_variable_ctx = v.variable_ctx
@@ -539,7 +539,7 @@ redef class AForExpr
 	do
 		var escapable = new EscapableBlock(self)
 		_escapable = escapable
-		v.escapable_ctx.push(escapable)
+		v.escapable_ctx.push(escapable, n_label)
 
 		var old_var_ctx = v.variable_ctx
 		var old_base_var_ctx = v.base_variable_ctx
@@ -1090,12 +1090,15 @@ redef class AAbsAbsSendExpr
 				var break_list: nullable Array[ABreakExpr] = null
 				if t != null then break_list = new Array[ABreakExpr]
 
+				# The n_label, is any in only set on the last decl
+				var n_label = if arity > 0 then cd[arity-1].n_label else null
+
 				# Process each closure definition
 				for i in [0..arity[ do
 					var csi = cs[i]
 					var cdi = cd[i]
 					var esc = new EscapableClosure(cdi, csi, break_list)
-					v.escapable_ctx.push(esc)
+					v.escapable_ctx.push(esc, n_label)
 					cdi.accept_typing2(v, esc)
 					v.escapable_ctx.pop
 				end

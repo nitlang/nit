@@ -24,10 +24,27 @@ class EscapableContext
 	# Stack of blocks
 	var _stack: Array[EscapableBlock] = new Array[EscapableBlock]
 
+	# Known labels
+	# (all labels, even out of scopes ones)
+	# Used to find duplicates
+	var _labels: Array[ALabel] = new Array[ALabel]
+
 	# Push a new escapable block
-	fun push(block: EscapableBlock)
+	# Display error message if tere is a problem with the label
+	fun push(block: EscapableBlock, n_label: nullable ALabel)
 	do
 		_stack.push(block)
+		if n_label != null then
+			var lab = n_label.n_id.to_symbol
+			for nl in _labels do
+				if n_label != nl and lab == nl.n_id.to_symbol then
+					visitor.error(n_label, "Syntax error: label {lab} already defined at {nl.location.relative_to(n_label.location)}.")
+					return
+				end
+			end
+			_labels.add(n_label)
+			block._lab = lab
+		end
 	end
 
 	# Is there no block in the stack?
@@ -37,6 +54,22 @@ class EscapableContext
 	fun head: EscapableBlock
 	do
 		return _stack.last
+	end
+
+	# Return the block associed to a label
+	# Output an error end return null if the label is not known
+	fun get_by_label(nl: ALabel): nullable EscapableBlock
+	do
+		var i = _stack.length - 1
+		var block: nullable EscapableBlock = null
+		var lab = nl.n_id.to_symbol
+		while i >= 0 do
+			var b = _stack[i]
+			if b.lab == lab then return b
+			i -= 1
+		end
+		visitor.error(nl, "Syntax error: invalid label {lab}.")
+		return null
 	end
 
 	# Remove the last block (the last stacked)
@@ -59,6 +92,10 @@ end
 class EscapableBlock
 	# The syntax node of the block
 	readable var _node: ANode
+
+	# The label of the block (if any)
+	# Set by the push in EscapableContext
+	readable var _lab: nullable Symbol
 
 	# Is self a break closure ?
 	fun is_break_block: Bool do return false
@@ -100,7 +137,7 @@ end
 ###############################################################################
 
 class AEscapeExpr
-special ANode
+special ALabelable
 	# The associated escapable block
 	readable var _escapable: nullable EscapableBlock
 
@@ -110,12 +147,16 @@ special ANode
 	# Compute, set and return the associated escapable block
 	fun compute_escapable_block(lctx: EscapableContext): nullable EscapableBlock
 	do
-		var block: EscapableBlock
-		if lctx.is_empty then
+		var block: nullable EscapableBlock
+		var nl = n_label
+		if nl != null then
+			block = lctx.get_by_label(nl)
+		else if lctx.is_empty then
 			lctx.visitor.error(self, "Syntax Error: '{kwname}' statment outside block.")
 			return null
+		else
+			block = lctx.head
 		end
-		block = lctx.head
 		_escapable = block
 		return block
 	end
