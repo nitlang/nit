@@ -128,6 +128,10 @@ ok=""
 nok=""
 
 for ii in "$@"; do
+	if [ ! -f $ii ]; then
+		echo "File '$ii' does not exist."
+		continue
+	fi
 	for alt in "" `sed -n 's/.*#!*\(alt[0-9]*\)#.*/\1/p' "$ii" | sort -u`; do
 		f=`basename "$ii" .nit`
 		d=`dirname "$ii"`
