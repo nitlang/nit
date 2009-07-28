@@ -1067,12 +1067,9 @@ redef class AAbsAbsSendExpr
 		print "{location} no compute_raw_arguments"
 		return null
 	end
-	# The real arguments used (after star transformation) (once computed)
-	redef fun arguments do return _arguments.as(not null)
-	var _arguments: nullable Array[AExpr]
 
 	# Check the conformity of a set of arguments `raw_args' to a signature.
-	private fun process_signature(v: TypingVisitor, psig: MMSignature, name: Symbol, raw_args: nullable Array[AExpr]): nullable Array[AExpr]
+	private fun process_signature(v: TypingVisitor, psig: MMSignature, name: Symbol, raw_args: nullable Array[AExpr]): Bool
 	do
 		var par_vararg = psig.vararg_rank
 		var par_arity = psig.arity
@@ -1080,32 +1077,25 @@ redef class AAbsAbsSendExpr
 		if raw_args == null then raw_arity = 0 else raw_arity = raw_args.length
 		if par_arity > raw_arity or (par_arity != raw_arity and par_vararg == -1) then
 			v.error(self, "Error: '{name}' arity missmatch.")
-			return null
+			return false
 		end
 		var arg_idx = 0
-		var args = new Array[AExpr]
 		for par_idx in [0..par_arity[ do
 			var a: AExpr
 			var par_type = psig[par_idx]
 			if par_idx == par_vararg then
-				var star = new Array[AExpr]
 				for i in [0..(raw_arity-par_arity)] do
 					a = raw_args[arg_idx]
 					v.check_conform_expr(a, par_type)
-					star.add(a)
 					arg_idx = arg_idx + 1
 				end
-				var aa = new AArrayExpr.init_aarrayexpr(star)
-				aa.do_typing(v, par_type)
-				a = aa
 			else
 				a = raw_args[arg_idx]
 				v.check_conform_expr(a, par_type)
 				arg_idx = arg_idx + 1
 			end
-			args.add(a)
 		end
-		return args
+		return true
 	end
 
 	# Check the conformity of a set of defined closures
@@ -1161,13 +1151,11 @@ redef class AAbsSendExpr
 		var prop = get_property(v, type_recv, is_implicit_self, name)
 		if prop == null then return
 		var sig = get_signature(v, type_recv, prop, recv_is_self)
-		var args = process_signature(v, sig, prop.name, raw_args)
-		if args == null then return
+		if not process_signature(v, sig, prop.name, raw_args) then return
 		var rtype = process_closures(v, sig, prop.name, closure_defs)
 		if rtype == null and sig.return_type != null then return
 		_prop = prop
 		_prop_signature = sig
-		_arguments = args
 		_return_type = rtype
 	end
 
@@ -1345,7 +1333,6 @@ redef class ASendReassignExpr
 
 		_read_prop = prop
 		raw_args = raw_args.to_a
-		var old_args = arguments
 		raw_args.add(n_value)
 
 		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, "{name}=".to_symbol, raw_args, null)
@@ -1357,7 +1344,6 @@ redef class ASendReassignExpr
 			end
 		end
 
-		_arguments = old_args # FIXME: What if star parameters do not match betwen the two methods?
 		_is_typed = true
 	end
 end
@@ -1562,13 +1548,12 @@ redef class AClosureCallExpr
 		var va = variable
 		if va.closure.is_break then v.variable_ctx.unreash = true
 		var sig = va.closure.signature
-		var args = process_signature(v, sig, n_id.to_symbol, n_args.to_a)
+		var s = process_signature(v, sig, n_id.to_symbol, compute_raw_arguments)
 		if not n_closure_defs.is_empty then
 			process_closures(v, sig, n_id.to_symbol, n_closure_defs.to_a)
 		end
-		if args == null then return
+		if not s then return
 		_prop_signature = sig
-		_arguments = args
 		_stype = sig.return_type
 		_is_typed = true
 	end

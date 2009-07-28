@@ -750,8 +750,6 @@ special AExpr
 
 	# The raw arguments used (without vararg transformation) (require is_typed)
 	fun raw_arguments: Array[AExpr] is abstract
-	# The real arguments used (after star transformation) (require is_typed)
-	fun arguments: Array[AExpr] is abstract
 end
 
 class AAbsSendExpr

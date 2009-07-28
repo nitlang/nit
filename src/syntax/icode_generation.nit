@@ -1192,10 +1192,29 @@ end
 
 redef class AAbsAbsSendExpr
 	# Compile each argument and add them to the array
-	fun generate_icode_for_arguments_in(v: A2IContext, args: Array[IRegister])
+	fun generate_icode_for_arguments_in(v: A2IContext, args: Array[IRegister], signature: MMSignature)
 	do
-		for a in arguments do
-			args.add(v.generate_expr(a))
+		var par_arity = signature.arity
+		var par_vararg = signature.vararg_rank
+		var raw_args = raw_arguments
+		var raw_arity = raw_args.length
+		var arg_idx = 0
+		for par_idx in [0..par_arity[ do
+			var a: AExpr
+			var par_type = signature[par_idx]
+			if par_idx == par_vararg then
+				var arr = v.add_new_array(v.visitor.type_array(par_type), raw_arity-par_arity)
+				for i in [0..(raw_arity-par_arity)] do
+					a = raw_args[arg_idx]
+					v.add_call_array_add(arr, v.generate_expr(a))
+					arg_idx = arg_idx + 1
+				end
+				args.add(arr)
+			else
+				a = raw_args[arg_idx]
+				args.add(v.generate_expr(a))
+				arg_idx = arg_idx + 1
+			end
 		end
 	end
 end
@@ -1206,8 +1225,8 @@ redef class ASendExpr
 		var recv = v.generate_expr(n_expr)
 		var args = new Array[IRegister]
 		args.add(recv)
-		generate_icode_for_arguments_in(v, args)
 		var prop = prop
+		generate_icode_for_arguments_in(v, args, prop.signature.as(not null))
 		var r: nullable IRegister = null # The full result of the send (raw call + breaks)
 		var r2: nullable IRegister # The raw result of the call
 
@@ -1260,7 +1279,7 @@ redef class ASendReassignExpr
 		if n_expr.stype.is_nullable then v.add_null_reciever_check(recv)
 		var args = new Array[IRegister]
 		args.add(recv)
-		generate_icode_for_arguments_in(v, args)
+		generate_icode_for_arguments_in(v, args, read_prop.signature.as(not null))
 
 		var e2 = v.expr(new ICall(read_prop, args), read_prop.signature.return_type.as(not null))
 		var e3 = v.generate_expr(n_value)
@@ -1276,7 +1295,7 @@ redef class ANewExpr
 	redef fun generate_icode(v)
 	do
 		var args = new Array[IRegister]
-		generate_icode_for_arguments_in(v, args)
+		generate_icode_for_arguments_in(v, args, prop.signature.as(not null))
 		return v.expr(new INew(stype, prop, args), stype)
 	end
 end
@@ -1350,7 +1369,7 @@ redef class AClosureCallExpr
 	do
 		# Geneate arguments
 		var args = new Array[IRegister]
-		generate_icode_for_arguments_in(v, args)
+		generate_icode_for_arguments_in(v, args, variable.closure.signature)
 
 		# Prepare icall
 		var closdecl = v.closurevariables[variable]
