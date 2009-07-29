@@ -42,18 +42,10 @@ redef class Token
 end
 
 redef class Prod
-	# The first token of the production node
-	readable writable var _first_token: nullable Token
-
-	# The last token of the production node
-	readable writable var _last_token: nullable Token
-
 	redef fun replace_with(n: ANode)
         do
                 super
                 assert n isa Prod
-                n.first_token = first_token
-                n.last_token = last_token
                 n.location = location
         end
 end

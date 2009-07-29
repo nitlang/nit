@@ -154,7 +154,7 @@ special ParserTable
 				var node1 = pop
 				assert node1 isa ${/parser/prods/prod/@ename}
 				var node = new Start(node1, node2)
-				(new SearchTokensVisitor).enter_visit(node)
+				(new ComputeProdLocationVisitor).enter_visit(node)
 				return node
 			else if action_type == 3 then # ERROR
 				var location = new Location(lexer.filename, last_line, last_line, last_pos, last_pos)
@@ -177,46 +177,101 @@ $ end foreach
 	end
 end
 
-# Find first and last tokens of production nodes
-private class SearchTokensVisitor
+redef class Prod
+	# Location on the first token after the start of a production
+	# So outside the production for epilon production
+	var _first_location: nullable Location
+
+	# Location of the last token before the end of a production
+	# So outside the production for epilon production
+	var _last_location: nullable Location
+end
+
+# Find location of production nodes
+# Uses existing token locations to infer location of productions.
+private class ComputeProdLocationVisitor
 special Visitor
-	var _untokenned_nodes: Array[Prod]
-	var _last_token: nullable Token = null
+	# Currenlty visited productions that need a first token
+	var _need_first_prods: Array[Prod] = new Array[Prod]
+
+	# Already visited epsilon productions that waits something after them
+	var _need_after_epsilons: Array[Prod] = new Array[Prod]
+
+	# Already visited epsilon production that waits something before them
+	var _need_before_epsilons: Array[Prod] = new Array[Prod]
+
+	# Location of the last visited token in the current production
+	var _last_location: nullable Location = null
+
 	redef fun visit(n: nullable PNode)
 	do
 		if n == null then
 			return
 		else if n isa Token then
-			_last_token = n
-			for no in _untokenned_nodes do
-				no.first_token = n
+			var loc = n.location
+			_last_location = loc
+
+			# Add a first token to productions that need one
+			for no in _need_first_prods do
+				no._first_location = loc
 			end
-			_untokenned_nodes.clear
+			_need_first_prods.clear
+
+			# Find location for already visited epsilon production that need one
+			for no in _need_after_epsilons do
+				# Epsilon production that is in the middle of a non-epsilon production
+				# The epsilon production has both a token before and after it
+				var endl = loc
+				var startl = no._last_location
+				no.location = new Location(endl.file, startl.line_end, endl.line_start, startl.column_end, endl.column_start)
+			end
+			_need_after_epsilons.clear
 		else
 			assert n isa Prod
-			_untokenned_nodes.add(n)
+			_need_first_prods.add(n)
+
+			var old_last = _last_location
+			_last_location = null
 			n.visit_all(self)
-			n.last_token = _last_token
+			var endl = _last_location
+			if endl == null then _last_location = old_last
 
-			if n.first_token != null then
-				var start_location = n.first_token.location
-				var end_location = _last_token.location
+			n._last_location = endl
+			var startl = n._first_location
+			if startl != null then
+				# Non-epsilon production
+				assert endl != null
 
-				if start_location != null and end_location != null then
-					var file = end_location.file
-					var line_start = start_location.line_start
-					var line_end = end_location.line_end
-					var column_start = start_location.column_start
-					var column_end = end_location.column_end
-					n.location = new Location(file, line_start, line_end, column_start, column_end)
+				n.location = new Location(startl.file, startl.line_start, endl.line_end, startl.column_start, endl.column_end)
+
+				for no in _need_before_epsilons do
+					# Epsilon production that starts the current non-epsilon production
+					#var startl = n.location
+					no.location = new Location(startl.file, startl.line_start, startl.line_start, startl.column_start, startl.column_start)
+				end
+				_need_before_epsilons.clear
+
+				for no in _need_after_epsilons do
+					# Epsilon production that finishes the current non-epsilon production
+					#var endl = n.location
+					no.location = new Location(endl.file, endl.line_end, endl.line_end, endl.column_end, endl.column_end)
+				end
+				_need_after_epsilons.clear
+			else
+				# No first token means epsilon production (or "throw all my tokens" production)
+				# So, it must be located it later
+				if endl == null then
+					# Epsilon production that starts a parent non-epsilon production
+					_need_before_epsilons.add(n)
+				else
+					# Epsilon production in the middle or that finishes a parent non-epsilon production
+					_need_after_epsilons.add(n)
 				end
 			end
 		end
 	end
-	init
-	do
-		_untokenned_nodes = new Array[Prod]
-	end
+
+	init do end
 end
 
 # Each reduca action has its own class, this one is the root of the hierarchy.
