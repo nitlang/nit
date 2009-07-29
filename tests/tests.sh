@@ -132,16 +132,27 @@ for ii in "$@"; do
 		echo "File '$ii' does not exist."
 		continue
 	fi
+
+	tmp=${ii/../AA}
+	if [ "x$tmp" = "x$ii" ]; then
+		oincludes="-I . -I ../lib/standard"
+	else
+		oincludes=""
+	fi
+
 	for alt in "" `sed -n 's/.*#!*\(alt[0-9]*\)#.*/\1/p' "$ii" | sort -u`; do
 		f=`basename "$ii" .nit`
 		d=`dirname "$ii"`
 		ff="$f"
 		i="$ii"
+		includes="$oincludes"
+
 		if [ "x$alt" != "x" ]; then
 			test -d alt || mkdir -p alt
 			i="alt/${f}_$alt.nit"
 			ff="${ff}_$alt"
 			sed "s/#$alt#//g;/#!$alt#/d" "$ii" > "$i"
+			includes="$includes -I alt"
 		fi
 		ff="$ff$MARK"
 
@@ -152,9 +163,9 @@ for ii in "$@"; do
 		# Compile
 		if [ "x$verbose" = "xtrue" ]; then
 			echo ""
-			echo $NITC $OPT -o "$ff.bin" "$i" -I . -I alt -I ../lib/standard
+			echo $NITC $OPT -o "$ff.bin" "$i" "$includes"
 		fi
-		$NITC $OPT -o "$ff.bin" "$i" -I . -I alt -I ../lib/standard 2> "$ff.cmp.err" > "$ff.compile.log"
+		$NITC $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
 		ERR=$?
 		if [ "x$verbose" = "xtrue" ]; then
 			cat "$ff.compile.log"
