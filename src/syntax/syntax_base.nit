@@ -432,12 +432,7 @@ special Visitor
 	do
 		if not n.is_typed then
 			if tc.error_count == 0 then
-				var loc = n.location
-				if loc == null then
-					print("Unknown node not typed but not error")
-				else
-					print("{loc} not typed but not error")
-				end
+				print("{n.location} not typed but not error")
 				abort
 			end
 			# An error occured in a sub node,
@@ -488,12 +483,7 @@ special Visitor
 				if node == null then
 					error(n, "Type error: no most general type. Got {n.stype} and {stype}.")
 				else
-					var loc = node.location
-					if loc == null then
-						error(n, "Type error: no most general type. Got {n.stype} and {stype} at ????.")
-					else
-						error(n, "Type error: no most general type. Got {n.stype} and {stype} at {loc.relative_to(n.location)}.")
-					end
+					error(n, "Type error: no most general type. Got {n.stype} and {stype} at {node.location.relative_to(n.location)}.")
 				end
 				return null
 			end

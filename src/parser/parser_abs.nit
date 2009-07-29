@@ -6,7 +6,11 @@ import mmloader
 
 # Root of the AST hierarchy
 abstract class ANode
-	readable var _location: nullable Location
+	var _location: nullable Location
+
+	# Location is set during AST building. Once built, location cannon be null
+	# However, manual instanciated nodes may need mode care
+	fun location: Location do return _location.as(not null)
 end
 
 # Ancestor of all tokens
@@ -17,7 +21,7 @@ end
 # Ancestor of all productions
 abstract class Prod
 special ANode
-	fun location=(loc: nullable Location) do _location = loc
+	fun location=(loc: Location) do _location = loc
 end
 class TEol
 special Token

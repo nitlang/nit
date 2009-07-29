@@ -49,17 +49,6 @@ abstract class VariableContext
 	do
 		if v.must_be_set and not is_set(v) then
 			_visitor.error(n, "Error: variable '{v}' is possibly unset.")
-			var x = self
-			while true do
-				var loc = x.node.location
-				print "  {if loc != null then loc.to_s else "????"}: {x._set_variables.join(", ")} ; {x._dico.join(", ")}"
-				var x0 = x
-				if x0 isa SubVariableContext then
-					x = x0.prev
-				else
-					break
-				end
-			end
 		end
 	end
 
