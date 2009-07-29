@@ -78,7 +78,7 @@ special Comparable
 				return "{file_part}{line_start},{column_start}--{column_end}"
 			end
 		else
-			return "{file_part}{line_start},{column_start}--{line_end}:{column_end}"
+			return "{file_part}{line_start},{column_start}--{line_end},{column_end}"
 		end
 	end
 

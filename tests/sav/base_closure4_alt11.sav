@@ -1,1 +1,1 @@
-alt/base_closure4_alt11.nit:34,8--42:12: Error: 0 automatic variable names expected, 1 found.
+alt/base_closure4_alt11.nit:34,8--42,12: Error: 0 automatic variable names expected, 1 found.

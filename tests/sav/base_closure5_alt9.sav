@@ -1,1 +1,1 @@
-alt/base_closure5_alt9.nit:33,16--34:10: Control error: Reached end of block (a 'continue' with a value was expected).
+alt/base_closure5_alt9.nit:33,16--34,10: Control error: Reached end of block (a 'continue' with a value was expected).

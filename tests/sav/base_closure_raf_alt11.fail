@@ -1,1 +1,1 @@
-alt/base_closure_raf_alt11.nit:39,8--47:14: Error: 1 automatic variable names expected, 0 found.
+alt/base_closure_raf_alt11.nit:39,8--47,14: Error: 1 automatic variable names expected, 0 found.
