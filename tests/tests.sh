@@ -147,7 +147,7 @@ for ii in "$@"; do
 
 		echo -n "=> $i: "
 
-		rm "$ff.res" "$ff.err" "$ff.write" "$ff.bin" 2> /dev/null
+		rm -rf "$ff.res" "$ff.err" "$ff.write" "$ff.bin" 2> /dev/null
 
 		# Compile
 		if [ "x$verbose" = "xtrue" ]; then
@@ -184,6 +184,8 @@ for ii in "$@"; do
 			fi
 			if [ -f "$ff.write" ]; then
 				cat "$ff.write" >> "$ff.res"
+			elif [ -d "$ff.write" ]; then
+				ls -F $ff.write >> "$ff.res"
 			fi
 			if [ -s "$ff.err" ]; then
 				cat "$ff.err" >> "$ff.res"
@@ -214,6 +216,8 @@ for ii in "$@"; do
 					fi
 					if [ -f "$fff.write" ]; then
 						cat "$fff.write" >> "$fff.res"
+					elif [ -d "$fff.write" ]; then
+						ls -F $fff.write >> "$fff.res"
 					fi
 					if [ -s "$fff.err" ]; then
 						cat "$fff.err" >> "$fff.res"
