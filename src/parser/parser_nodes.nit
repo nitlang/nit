@@ -19,7 +19,7 @@
 # Was previously based on parser_abs.nit.
 package parser_nodes
 
-import mmloader
+import location
 
 # Root of the AST hierarchy
 abstract class ANode
