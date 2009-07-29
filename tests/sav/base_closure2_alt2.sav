@@ -1,1 +1,1 @@
-alt/base_closure2_alt2.nit:25,3--5: Error: 'bar' arity missmatch.
+alt/base_closure2_alt2.nit:25,3--5: Error: arity missmatch; prototype is 'bar(Int)'.

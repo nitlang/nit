@@ -1,4 +1,4 @@
-alt/error_init_auto_alt1.nit:34,5--11: Error: 'init' arity missmatch.
-alt/error_init_auto_alt1.nit:35,5--14: Error: 'init' arity missmatch.
-alt/error_init_auto_alt1.nit:36,5--17: Error: 'init' arity missmatch.
+alt/error_init_auto_alt1.nit:34,5--11: Error: arity missmatch; prototype is 'init'.
+alt/error_init_auto_alt1.nit:35,5--14: Error: arity missmatch; prototype is 'init'.
+alt/error_init_auto_alt1.nit:36,5--17: Error: arity missmatch; prototype is 'init'.
 alt/error_init_auto_alt1.nit:37,5--15: Error: Method 'foo' doesn't exists in A.
