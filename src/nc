@@ -30,5 +30,10 @@ esac
 ./git-gen-version.sh "$name"
 
 echo ${NITC} ${NITCOPTS} ${opts} "$@"
-${NITC} ${NITCOPTS} ${opts} "$@"
-
+k=$(mktemp nc.stderr.XXXXX)
+rm "$k"
+trap "rm -f $k; exit 1" INT TERM
+mkfifo "$k"
+${NITC} ${NITCOPTS} ${opts} "$@" 2>"$k" &
+./showerr.sh <"$k"
+rm "$k"
