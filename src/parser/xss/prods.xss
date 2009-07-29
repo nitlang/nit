@@ -212,10 +212,12 @@ redef class Start
         if _n_base != null then
             v.enter_visit(_n_base.as(not null))
         end
+	v.enter_visit(_n_eof)
     end
 
     redef fun visit_all_reverse(v: Visitor)
     do
+	v.enter_visit(_n_eof)
         if _n_base != null then
             v.enter_visit(_n_base.as(not null))
         end
