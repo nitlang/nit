@@ -22,9 +22,10 @@ import parser
 class PrintTreeVisitor
 special Visitor
 	var _rank: Int
-	fun visit(n: ANode)
+	redef fun visit(n: nullable ANode)
 	do
-		printn("  " * _rank, n.to_s, "\n")
+		if n == null then return
+		printn("  " * _rank, n.to_s, " ... ", n.location, "\n")
 		_rank = _rank + 1
 		n.visit_all(self)
 		_rank = _rank - 1
@@ -41,13 +42,13 @@ var only_lexer = false
 var need_help = false
 
 while not args.is_empty and args.first.first == '-' do
-	if args.first = "-n" then
+	if args.first == "-n" then
 		no_print = true
-	else if args.first = "-l" then
+	else if args.first == "-l" then
 		only_lexer = true
-	else if args.first = "-p" then
+	else if args.first == "-p" then
 		only_lexer = false 
-	else if args.first = "-h" or args.first = "-?" then
+	else if args.first == "-h" or args.first == "-?" then
 		need_help = true
 	else
 		stderr.write("Unknown option {args.first}.\n")
@@ -72,7 +73,7 @@ else
 			var token = lexer.next
 			while not token isa EOF do
 				if not no_print then
-					print("Read token at [{token.line},{token.pos}] text='{token.text}'")
+					print("Read token at {token.location} text='{token.text}'")
 				end
 				token = lexer.next
 			end
@@ -83,7 +84,7 @@ else
 			f.close
 
 			if not no_print then
-				(new PrintTreeVisitor).visit(tree)
+				(new PrintTreeVisitor).enter_visit(tree)
 			end
 		end
 	end
