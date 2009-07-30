@@ -50,9 +50,9 @@ syn match Error "\<end\>"
 " Declarations, definitions and blocks
 syn region NITPackageDecl matchgroup=NITDefine start="\<\(import\|package\)\>\s*" matchgroup=NONE end="\ze\(\s\|:\|(\|$\)"  oneline
 syn region NITClassBlock matchgroup=NITDefine start="\<\(class\|universal\|interface\)\>" matchgroup=NITDefine end="\<end\>" contains=ALL fold
-syn region NITFunctionDecl matchgroup=NITDefine start="\<\(meth\|fun\)\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline
+syn region NITFunctionDecl matchgroup=NITDefine start="\<fun\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline
 syn region NITTypeDecl matchgroup=NITDefine start="\<type\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
-syn region NITAttrDecl matchgroup=NITDefine start="\<\(var\|attr\)\>\s*\ze_" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
+syn region NITAttrDecl matchgroup=NITDefine start="\<var\>\s*\ze_" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 syn region NITInitDecl matchgroup=NITDefine start="\<init\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 
 syn region NITStmtBlock matchgroup=NITControl start="\<\(do\|then\|else\)\>\ze\s*\(#\|$\)" matchgroup=NITControl end="^\s*\<\(end\|\zeelse\|with\)\>" contains=ALLBUT,NITTypeDecl,NITAttrDecl,NITInitDecl

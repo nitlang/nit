@@ -1262,19 +1262,10 @@ redef class AAttrPropdef
         _n_visibility = n
 	n.parent = self
     end
-    redef fun n_kwattr=(n)
-    do
-        _n_kwattr = n
-        if n != null then
-	    n.parent = self
-        end
-    end
     redef fun n_kwvar=(n)
     do
         _n_kwvar = n
-        if n != null then
-	    n.parent = self
-        end
+	n.parent = self
     end
     redef fun n_id=(n)
     do
@@ -1304,7 +1295,6 @@ redef class AAttrPropdef
             n_writable: nullable AAble,
             n_kwredef: nullable TKwredef,
             n_visibility: nullable AVisibility,
-            n_kwattr: nullable TKwattr,
             n_kwvar: nullable TKwvar,
             n_id: nullable TAttrid,
             n_type: nullable AType,
@@ -1330,14 +1320,8 @@ redef class AAttrPropdef
 	end
         _n_visibility = n_visibility.as(not null)
 	n_visibility.parent = self
-        _n_kwattr = n_kwattr
-	if n_kwattr != null then
-		n_kwattr.parent = self
-	end
-        _n_kwvar = n_kwvar
-	if n_kwvar != null then
-		n_kwvar.parent = self
-	end
+        _n_kwvar = n_kwvar.as(not null)
+	n_kwvar.parent = self
         _n_id = n_id.as(not null)
 	n_id.parent = self
         _n_type = n_type
@@ -1402,23 +1386,13 @@ redef class AAttrPropdef
             end
             return
 	end
-        if _n_kwattr == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TKwattr
-                _n_kwattr = new_child
-	    else
-		_n_kwattr = null
-            end
-            return
-	end
         if _n_kwvar == old_child then
             if new_child != null then
                 new_child.parent = self
 		assert new_child isa TKwvar
                 _n_kwvar = new_child
 	    else
-		_n_kwvar = null
+		abort
             end
             return
 	end
@@ -1469,12 +1443,7 @@ redef class AAttrPropdef
             v.enter_visit(_n_kwredef.as(not null))
         end
         v.enter_visit(_n_visibility)
-        if _n_kwattr != null then
-            v.enter_visit(_n_kwattr.as(not null))
-        end
-        if _n_kwvar != null then
-            v.enter_visit(_n_kwvar.as(not null))
-        end
+        v.enter_visit(_n_kwvar)
         v.enter_visit(_n_id)
         if _n_type != null then
             v.enter_visit(_n_type.as(not null))
@@ -1499,12 +1468,7 @@ redef class AAttrPropdef
             v.enter_visit(_n_kwredef.as(not null))
         end
         v.enter_visit(_n_visibility)
-        if _n_kwattr != null then
-            v.enter_visit(_n_kwattr.as(not null))
-        end
-        if _n_kwvar != null then
-            v.enter_visit(_n_kwvar.as(not null))
-        end
+        v.enter_visit(_n_kwvar)
         v.enter_visit(_n_id)
         if _n_type != null then
             v.enter_visit(_n_type.as(not null))

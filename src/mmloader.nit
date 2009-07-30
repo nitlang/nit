@@ -27,8 +27,8 @@ class Message
 special Comparable
 	redef type OTHER: Message
 
-	readable attr _location: nullable Location
-	readable attr _text: String
+	readable var _location: nullable Location
+	readable var _text: String
 
 	redef fun <(other: OTHER): Bool do
 		if location == null then return true
@@ -101,7 +101,7 @@ special MMContext
 	end
 
 	# Display an info
-	meth info(s: String, level: Int)
+	fun info(s: String, level: Int)
 	do
 		if level <= verbose_level then
 			print "{s}"

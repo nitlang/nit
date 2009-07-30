@@ -507,10 +507,10 @@ special MMEntity
 	end
 end
 redef class MMMethod
-	redef fun kind do return if global.is_init then "init" else "meth"
+	redef fun kind do return if global.is_init then "init" else "fun"
 end
 redef class MMAttribute
-	redef fun kind do return "attr"
+	redef fun kind do return "var"
 end
 redef class MMTypeProperty
 	redef fun kind do return "type"

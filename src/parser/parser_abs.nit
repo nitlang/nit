@@ -59,9 +59,6 @@ end
 class TKwtype
 special Token
 end
-class TKwattr
-special Token
-end
 class TKwinit
 special Token
 end
@@ -407,8 +404,7 @@ special APropdef
     readable writable var _n_writable: nullable AAble = null
     readable writable var _n_kwredef: nullable TKwredef = null
     readable writable var _n_visibility: AVisibility
-    readable writable var _n_kwattr: nullable TKwattr = null
-    readable writable var _n_kwvar: nullable TKwvar = null
+    readable writable var _n_kwvar: TKwvar
     readable writable var _n_id: TAttrid
     readable writable var _n_type: nullable AType = null
     readable writable var _n_expr: nullable AExpr = null
