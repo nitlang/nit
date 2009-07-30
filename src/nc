@@ -34,6 +34,8 @@ k=$(mktemp nc.stderr.XXXXX)
 rm "$k"
 trap "rm -f $k; exit 1" INT TERM
 mkfifo "$k"
-${NITC} ${NITCOPTS} ${opts} "$@" 2>"$k" &
-./showerr.sh <"$k"
+./showerr.sh <"$k" &
+${NITC} ${NITCOPTS} ${opts} "$@" 2>"$k"
+err=$?
 rm "$k"
+exit $err
