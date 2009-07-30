@@ -2029,9 +2029,9 @@ class Lexer
 						return token
 					end
 				else
-					var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+					var location = new Location(_filename, start_line + 1, start_line + 1, start_pos + 1, start_pos + 1)
 					if text.length > 0 then
-						var token = new AError.init_error("Unknown token: {text}", location)
+						var token = new AError.init_error("Syntax error: unknown token {text}.", location)
 						return token
 					else
 						var token = new EOF(location)

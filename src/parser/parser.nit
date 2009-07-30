@@ -102,9 +102,6 @@ special ParserTable
 		var lexer = _lexer
 		while true do
 			var token = lexer.peek
-			var last_pos = token.location.column_start
-			var last_line = token.location.line_start
-
 			if token isa AError then
 				return new Start(null, token)
 			end
@@ -145,8 +142,7 @@ special ParserTable
 				(new ComputeProdLocationVisitor).enter_visit(node)
 				return node
 			else if action_type == 3 then # ERROR
-				var location = new Location(lexer.filename, last_line, last_line, last_pos, last_pos)
-				var node2 = new AError.init_error(error_messages[errors[action_value]],location)
+				var node2 = new AError.init_error("Syntax error: unexpected token.", token.location)
 				var node = new Start(null, node2)
 				return node
 			end

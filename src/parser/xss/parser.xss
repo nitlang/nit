@@ -114,9 +114,6 @@ special ParserTable
 		var lexer = _lexer
 		while true do
 			var token = lexer.peek
-			var last_pos = token.location.column_start
-			var last_line = token.location.line_start
-
 			if token isa PError then
 				return new Start(null, token)
 			end
@@ -157,8 +154,7 @@ special ParserTable
 				(new ComputeProdLocationVisitor).enter_visit(node)
 				return node
 			else if action_type == 3 then # ERROR
-				var location = new Location(lexer.filename, last_line, last_line, last_pos, last_pos)
-				var node2 = new PError.init_error(error_messages[errors[action_value]],location)
+				var node2 = new PError.init_error("Syntax error: unexpected token.", token.location)
 				var node = new Start(null, node2)
 				return node
 			end
@@ -380,22 +376,6 @@ $   foreach {goto}
 $   end foreach
 			][-sep ','-]
 $ end foreach
-		]
-	end
-
-	private fun error_messages: Array[String]
-	do
-		return once [
-$ foreach {parser_data/error_messages/msg}
-			"${sablecc:string2escaped_unicode(.)}"[-sep ','-]
-$ end
-		]
-	end
-
-	private fun errors: Array[Int]
-	do
-		return once [
-			[-foreach {parser_data/errors/i}-]${.}[-sep ','-][-end-]
 		]
 	end
 
