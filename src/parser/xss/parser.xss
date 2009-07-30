@@ -24,7 +24,7 @@ private class State
 	readable writable var _state: Int
 
 	# The node stored with the state in the stack
-	readable writable var _nodes: nullable Object 
+	readable writable var _nodes: nullable Object
 
 	init(state: Int, nodes: nullable Object)
 	do
@@ -297,9 +297,9 @@ abstract class ParserTable
 	var _action_table: Array[Array[Int]]
 	private fun build_action_table
 	do
-		_action_table = once [ 
+		_action_table = once [
 $ foreach {parser_data/action_table/row}
-            		action_table_row${position()}[-sep ','-]
+			action_table_row${position()}[-sep ','-]
 $ end foreach
 	        ]
 	end
@@ -309,22 +309,22 @@ $ foreach {parser_data/action_table/row}
 	do
 		return [
 $   foreach {action}
-        	        	@from, @action, @to [-sep ','-]
+				@from, @action, @to[-sep ','-]
 $   end foreach
-            		]
+			]
 	end
 $ end foreach
 
 	var _goto_table: Array[Array[Int]]
 	private fun build_goto_table
 	do
-		_goto_table = once [ 
+		_goto_table = once [
 $ foreach {parser_data/goto_table/row}
 			[
 $   foreach {goto}
-				@from, @to [-sep ','-]
+				@from, @to[-sep ','-]
 $   end foreach
-			] [-sep ','-]
+			][-sep ','-]
 $ end foreach
 		]
 	end
@@ -333,7 +333,7 @@ $ end foreach
 	do
 		return once [
 $ foreach {parser_data/error_messages/msg}
-			"${sablecc:string2escaped_unicode(.)}" [-sep ','-]
+			"${sablecc:string2escaped_unicode(.)}"[-sep ','-]
 $ end
 		]
 	end
@@ -341,7 +341,7 @@ $ end
 	private fun errors: Array[Int]
 	do
 		return once [
-            		[-foreach {parser_data/errors/i}-]${.} [-sep ','-] [-end-]
+			[-foreach {parser_data/errors/i}-]${.}[-sep ','-][-end-]
 		]
 	end
 

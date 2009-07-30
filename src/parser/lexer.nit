@@ -5,8 +5,8 @@ package lexer
 intrude import parser_nodes
 
 redef class Token
-    readable writable var _text: String 
-    
+    readable writable var _text: String
+
     fun parser_index: Int is abstract
 
     redef fun to_s: String do
@@ -17,7 +17,7 @@ end
 redef class TEol
     redef fun parser_index: Int
     do
-    	return 0
+	return 0
     end
 
     init init_tk(text: String, loc: Location)
@@ -30,7 +30,7 @@ end
 redef class TComment
     redef fun parser_index: Int
     do
-    	return 1
+	return 1
     end
 
     init init_tk(text: String, loc: Location)
@@ -43,7 +43,7 @@ end
 redef class TKwpackage
     redef fun parser_index: Int
     do
-    	return 2
+	return 2
     end
 
     init init_tk(loc: Location)
@@ -56,7 +56,7 @@ end
 redef class TKwimport
     redef fun parser_index: Int
     do
-    	return 3
+	return 3
     end
 
     init init_tk(loc: Location)
@@ -69,7 +69,7 @@ end
 redef class TKwclass
     redef fun parser_index: Int
     do
-    	return 4
+	return 4
     end
 
     init init_tk(loc: Location)
@@ -82,7 +82,7 @@ end
 redef class TKwabstract
     redef fun parser_index: Int
     do
-    	return 5
+	return 5
     end
 
     init init_tk(loc: Location)
@@ -95,7 +95,7 @@ end
 redef class TKwinterface
     redef fun parser_index: Int
     do
-    	return 6
+	return 6
     end
 
     init init_tk(loc: Location)
@@ -108,7 +108,7 @@ end
 redef class TKwuniversal
     redef fun parser_index: Int
     do
-    	return 7
+	return 7
     end
 
     init init_tk(loc: Location)
@@ -121,7 +121,7 @@ end
 redef class TKwspecial
     redef fun parser_index: Int
     do
-    	return 8
+	return 8
     end
 
     init init_tk(loc: Location)
@@ -134,7 +134,7 @@ end
 redef class TKwend
     redef fun parser_index: Int
     do
-    	return 9
+	return 9
     end
 
     init init_tk(loc: Location)
@@ -147,7 +147,7 @@ end
 redef class TKwmeth
     redef fun parser_index: Int
     do
-    	return 10
+	return 10
     end
 
     init init_tk(text: String, loc: Location)
@@ -160,7 +160,7 @@ end
 redef class TKwtype
     redef fun parser_index: Int
     do
-    	return 11
+	return 11
     end
 
     init init_tk(loc: Location)
@@ -173,7 +173,7 @@ end
 redef class TKwattr
     redef fun parser_index: Int
     do
-    	return 12
+	return 12
     end
 
     init init_tk(loc: Location)
@@ -186,7 +186,7 @@ end
 redef class TKwinit
     redef fun parser_index: Int
     do
-    	return 13
+	return 13
     end
 
     init init_tk(loc: Location)
@@ -199,7 +199,7 @@ end
 redef class TKwredef
     redef fun parser_index: Int
     do
-    	return 14
+	return 14
     end
 
     init init_tk(loc: Location)
@@ -212,7 +212,7 @@ end
 redef class TKwis
     redef fun parser_index: Int
     do
-    	return 15
+	return 15
     end
 
     init init_tk(loc: Location)
@@ -225,7 +225,7 @@ end
 redef class TKwdo
     redef fun parser_index: Int
     do
-    	return 16
+	return 16
     end
 
     init init_tk(loc: Location)
@@ -238,7 +238,7 @@ end
 redef class TKwreadable
     redef fun parser_index: Int
     do
-    	return 17
+	return 17
     end
 
     init init_tk(loc: Location)
@@ -251,7 +251,7 @@ end
 redef class TKwwritable
     redef fun parser_index: Int
     do
-    	return 18
+	return 18
     end
 
     init init_tk(loc: Location)
@@ -264,7 +264,7 @@ end
 redef class TKwvar
     redef fun parser_index: Int
     do
-    	return 19
+	return 19
     end
 
     init init_tk(loc: Location)
@@ -277,7 +277,7 @@ end
 redef class TKwintern
     redef fun parser_index: Int
     do
-    	return 20
+	return 20
     end
 
     init init_tk(loc: Location)
@@ -290,7 +290,7 @@ end
 redef class TKwextern
     redef fun parser_index: Int
     do
-    	return 21
+	return 21
     end
 
     init init_tk(loc: Location)
@@ -303,7 +303,7 @@ end
 redef class TKwprotected
     redef fun parser_index: Int
     do
-    	return 22
+	return 22
     end
 
     init init_tk(loc: Location)
@@ -316,7 +316,7 @@ end
 redef class TKwprivate
     redef fun parser_index: Int
     do
-    	return 23
+	return 23
     end
 
     init init_tk(loc: Location)
@@ -329,7 +329,7 @@ end
 redef class TKwintrude
     redef fun parser_index: Int
     do
-    	return 24
+	return 24
     end
 
     init init_tk(loc: Location)
@@ -342,7 +342,7 @@ end
 redef class TKwif
     redef fun parser_index: Int
     do
-    	return 25
+	return 25
     end
 
     init init_tk(loc: Location)
@@ -355,7 +355,7 @@ end
 redef class TKwthen
     redef fun parser_index: Int
     do
-    	return 26
+	return 26
     end
 
     init init_tk(loc: Location)
@@ -368,7 +368,7 @@ end
 redef class TKwelse
     redef fun parser_index: Int
     do
-    	return 27
+	return 27
     end
 
     init init_tk(loc: Location)
@@ -381,7 +381,7 @@ end
 redef class TKwwhile
     redef fun parser_index: Int
     do
-    	return 28
+	return 28
     end
 
     init init_tk(loc: Location)
@@ -394,7 +394,7 @@ end
 redef class TKwfor
     redef fun parser_index: Int
     do
-    	return 29
+	return 29
     end
 
     init init_tk(loc: Location)
@@ -407,7 +407,7 @@ end
 redef class TKwin
     redef fun parser_index: Int
     do
-    	return 30
+	return 30
     end
 
     init init_tk(loc: Location)
@@ -420,7 +420,7 @@ end
 redef class TKwand
     redef fun parser_index: Int
     do
-    	return 31
+	return 31
     end
 
     init init_tk(loc: Location)
@@ -433,7 +433,7 @@ end
 redef class TKwor
     redef fun parser_index: Int
     do
-    	return 32
+	return 32
     end
 
     init init_tk(loc: Location)
@@ -446,7 +446,7 @@ end
 redef class TKwnot
     redef fun parser_index: Int
     do
-    	return 33
+	return 33
     end
 
     init init_tk(loc: Location)
@@ -459,7 +459,7 @@ end
 redef class TKwreturn
     redef fun parser_index: Int
     do
-    	return 34
+	return 34
     end
 
     init init_tk(loc: Location)
@@ -472,7 +472,7 @@ end
 redef class TKwcontinue
     redef fun parser_index: Int
     do
-    	return 35
+	return 35
     end
 
     init init_tk(loc: Location)
@@ -485,7 +485,7 @@ end
 redef class TKwbreak
     redef fun parser_index: Int
     do
-    	return 36
+	return 36
     end
 
     init init_tk(loc: Location)
@@ -498,7 +498,7 @@ end
 redef class TKwabort
     redef fun parser_index: Int
     do
-    	return 37
+	return 37
     end
 
     init init_tk(loc: Location)
@@ -511,7 +511,7 @@ end
 redef class TKwassert
     redef fun parser_index: Int
     do
-    	return 38
+	return 38
     end
 
     init init_tk(loc: Location)
@@ -524,7 +524,7 @@ end
 redef class TKwnew
     redef fun parser_index: Int
     do
-    	return 39
+	return 39
     end
 
     init init_tk(loc: Location)
@@ -537,7 +537,7 @@ end
 redef class TKwisa
     redef fun parser_index: Int
     do
-    	return 40
+	return 40
     end
 
     init init_tk(loc: Location)
@@ -550,7 +550,7 @@ end
 redef class TKwonce
     redef fun parser_index: Int
     do
-    	return 41
+	return 41
     end
 
     init init_tk(loc: Location)
@@ -563,7 +563,7 @@ end
 redef class TKwsuper
     redef fun parser_index: Int
     do
-    	return 42
+	return 42
     end
 
     init init_tk(loc: Location)
@@ -576,7 +576,7 @@ end
 redef class TKwself
     redef fun parser_index: Int
     do
-    	return 43
+	return 43
     end
 
     init init_tk(loc: Location)
@@ -589,7 +589,7 @@ end
 redef class TKwtrue
     redef fun parser_index: Int
     do
-    	return 44
+	return 44
     end
 
     init init_tk(loc: Location)
@@ -602,7 +602,7 @@ end
 redef class TKwfalse
     redef fun parser_index: Int
     do
-    	return 45
+	return 45
     end
 
     init init_tk(loc: Location)
@@ -615,7 +615,7 @@ end
 redef class TKwnull
     redef fun parser_index: Int
     do
-    	return 46
+	return 46
     end
 
     init init_tk(loc: Location)
@@ -628,7 +628,7 @@ end
 redef class TKwas
     redef fun parser_index: Int
     do
-    	return 47
+	return 47
     end
 
     init init_tk(loc: Location)
@@ -641,7 +641,7 @@ end
 redef class TKwwith
     redef fun parser_index: Int
     do
-    	return 48
+	return 48
     end
 
     init init_tk(loc: Location)
@@ -654,7 +654,7 @@ end
 redef class TKwnullable
     redef fun parser_index: Int
     do
-    	return 49
+	return 49
     end
 
     init init_tk(loc: Location)
@@ -667,7 +667,7 @@ end
 redef class TKwisset
     redef fun parser_index: Int
     do
-    	return 50
+	return 50
     end
 
     init init_tk(loc: Location)
@@ -680,7 +680,7 @@ end
 redef class TKwlabel
     redef fun parser_index: Int
     do
-    	return 51
+	return 51
     end
 
     init init_tk(loc: Location)
@@ -693,7 +693,7 @@ end
 redef class TOpar
     redef fun parser_index: Int
     do
-    	return 52
+	return 52
     end
 
     init init_tk(loc: Location)
@@ -706,7 +706,7 @@ end
 redef class TCpar
     redef fun parser_index: Int
     do
-    	return 53
+	return 53
     end
 
     init init_tk(loc: Location)
@@ -719,7 +719,7 @@ end
 redef class TObra
     redef fun parser_index: Int
     do
-    	return 54
+	return 54
     end
 
     init init_tk(loc: Location)
@@ -732,7 +732,7 @@ end
 redef class TCbra
     redef fun parser_index: Int
     do
-    	return 55
+	return 55
     end
 
     init init_tk(loc: Location)
@@ -745,7 +745,7 @@ end
 redef class TComma
     redef fun parser_index: Int
     do
-    	return 56
+	return 56
     end
 
     init init_tk(loc: Location)
@@ -758,7 +758,7 @@ end
 redef class TColumn
     redef fun parser_index: Int
     do
-    	return 57
+	return 57
     end
 
     init init_tk(loc: Location)
@@ -771,7 +771,7 @@ end
 redef class TQuad
     redef fun parser_index: Int
     do
-    	return 58
+	return 58
     end
 
     init init_tk(loc: Location)
@@ -784,7 +784,7 @@ end
 redef class TAssign
     redef fun parser_index: Int
     do
-    	return 59
+	return 59
     end
 
     init init_tk(loc: Location)
@@ -797,7 +797,7 @@ end
 redef class TPluseq
     redef fun parser_index: Int
     do
-    	return 60
+	return 60
     end
 
     init init_tk(loc: Location)
@@ -810,7 +810,7 @@ end
 redef class TMinuseq
     redef fun parser_index: Int
     do
-    	return 61
+	return 61
     end
 
     init init_tk(loc: Location)
@@ -823,7 +823,7 @@ end
 redef class TDotdotdot
     redef fun parser_index: Int
     do
-    	return 62
+	return 62
     end
 
     init init_tk(loc: Location)
@@ -836,7 +836,7 @@ end
 redef class TDotdot
     redef fun parser_index: Int
     do
-    	return 63
+	return 63
     end
 
     init init_tk(loc: Location)
@@ -849,7 +849,7 @@ end
 redef class TDot
     redef fun parser_index: Int
     do
-    	return 64
+	return 64
     end
 
     init init_tk(loc: Location)
@@ -862,7 +862,7 @@ end
 redef class TPlus
     redef fun parser_index: Int
     do
-    	return 65
+	return 65
     end
 
     init init_tk(loc: Location)
@@ -875,7 +875,7 @@ end
 redef class TMinus
     redef fun parser_index: Int
     do
-    	return 66
+	return 66
     end
 
     init init_tk(loc: Location)
@@ -888,7 +888,7 @@ end
 redef class TStar
     redef fun parser_index: Int
     do
-    	return 67
+	return 67
     end
 
     init init_tk(loc: Location)
@@ -901,7 +901,7 @@ end
 redef class TSlash
     redef fun parser_index: Int
     do
-    	return 68
+	return 68
     end
 
     init init_tk(loc: Location)
@@ -914,7 +914,7 @@ end
 redef class TPercent
     redef fun parser_index: Int
     do
-    	return 69
+	return 69
     end
 
     init init_tk(loc: Location)
@@ -927,7 +927,7 @@ end
 redef class TEq
     redef fun parser_index: Int
     do
-    	return 70
+	return 70
     end
 
     init init_tk(loc: Location)
@@ -940,7 +940,7 @@ end
 redef class TNe
     redef fun parser_index: Int
     do
-    	return 71
+	return 71
     end
 
     init init_tk(loc: Location)
@@ -953,7 +953,7 @@ end
 redef class TLt
     redef fun parser_index: Int
     do
-    	return 72
+	return 72
     end
 
     init init_tk(loc: Location)
@@ -966,7 +966,7 @@ end
 redef class TLe
     redef fun parser_index: Int
     do
-    	return 73
+	return 73
     end
 
     init init_tk(loc: Location)
@@ -979,7 +979,7 @@ end
 redef class TGt
     redef fun parser_index: Int
     do
-    	return 74
+	return 74
     end
 
     init init_tk(loc: Location)
@@ -992,7 +992,7 @@ end
 redef class TGe
     redef fun parser_index: Int
     do
-    	return 75
+	return 75
     end
 
     init init_tk(loc: Location)
@@ -1005,7 +1005,7 @@ end
 redef class TStarship
     redef fun parser_index: Int
     do
-    	return 76
+	return 76
     end
 
     init init_tk(loc: Location)
@@ -1018,7 +1018,7 @@ end
 redef class TClassid
     redef fun parser_index: Int
     do
-    	return 77
+	return 77
     end
 
     init init_tk(text: String, loc: Location)
@@ -1031,7 +1031,7 @@ end
 redef class TId
     redef fun parser_index: Int
     do
-    	return 78
+	return 78
     end
 
     init init_tk(text: String, loc: Location)
@@ -1044,7 +1044,7 @@ end
 redef class TAttrid
     redef fun parser_index: Int
     do
-    	return 79
+	return 79
     end
 
     init init_tk(text: String, loc: Location)
@@ -1057,7 +1057,7 @@ end
 redef class TNumber
     redef fun parser_index: Int
     do
-    	return 80
+	return 80
     end
 
     init init_tk(text: String, loc: Location)
@@ -1070,7 +1070,7 @@ end
 redef class TFloat
     redef fun parser_index: Int
     do
-    	return 81
+	return 81
     end
 
     init init_tk(text: String, loc: Location)
@@ -1083,7 +1083,7 @@ end
 redef class TChar
     redef fun parser_index: Int
     do
-    	return 82
+	return 82
     end
 
     init init_tk(text: String, loc: Location)
@@ -1096,7 +1096,7 @@ end
 redef class TString
     redef fun parser_index: Int
     do
-    	return 83
+	return 83
     end
 
     init init_tk(text: String, loc: Location)
@@ -1109,7 +1109,7 @@ end
 redef class TStartString
     redef fun parser_index: Int
     do
-    	return 84
+	return 84
     end
 
     init init_tk(text: String, loc: Location)
@@ -1122,7 +1122,7 @@ end
 redef class TMidString
     redef fun parser_index: Int
     do
-    	return 85
+	return 85
     end
 
     init init_tk(text: String, loc: Location)
@@ -1135,7 +1135,7 @@ end
 redef class TEndString
     redef fun parser_index: Int
     do
-    	return 86
+	return 86
     end
 
     init init_tk(text: String, loc: Location)
@@ -1146,12 +1146,12 @@ redef class TEndString
 end
 
 
-redef class EOF 
+redef class EOF
     redef fun parser_index: Int
     do
-    	return 87
+	return 87
     end
-    
+
     init(loc: Location)
     do
         _text = ""
@@ -1160,8 +1160,8 @@ redef class EOF
 end
 
 redef class AError
-    readable writable var _message: String 
-    
+    readable writable var _message: String
+
     init init_error(message: String, loc: Location)
     do
 		init(loc)
@@ -1180,7 +1180,7 @@ class Lexer
 	var _state: Int = 0
 
 	# Name of the stream (as given to tokens)
-	readable var _filename: String 
+	readable var _filename: String
 
 	# Input stream where character are read
 	var _stream: IStream
@@ -2111,1235 +2111,1235 @@ class Lexer
 		_goto_table = once [
 			[
 				[
-					[9, 9, 1] ,
-					[10, 10, 2] ,
-					[13, 13, 3] ,
-					[32, 32, 4] ,
-					[33, 33, 5] ,
-					[34, 34, 6] ,
-					[35, 35, 7] ,
-					[37, 37, 8] ,
-					[39, 39, 9] ,
-					[40, 40, 10] ,
-					[41, 41, 11] ,
-					[42, 42, 12] ,
-					[43, 43, 13] ,
-					[44, 44, 14] ,
-					[45, 45, 15] ,
-					[46, 46, 16] ,
-					[47, 47, 17] ,
-					[48, 57, 18] ,
-					[58, 58, 19] ,
-					[60, 60, 20] ,
-					[61, 61, 21] ,
-					[62, 62, 22] ,
-					[65, 90, 23] ,
-					[91, 91, 24] ,
-					[93, 93, 25] ,
-					[95, 95, 26] ,
-					[97, 97, 27] ,
-					[98, 98, 28] ,
-					[99, 99, 29] ,
-					[100, 100, 30] ,
-					[101, 101, 31] ,
-					[102, 102, 32] ,
-					[103, 104, 33] ,
-					[105, 105, 34] ,
-					[106, 107, 33] ,
-					[108, 108, 35] ,
-					[109, 109, 36] ,
-					[110, 110, 37] ,
-					[111, 111, 38] ,
-					[112, 112, 39] ,
-					[113, 113, 33] ,
-					[114, 114, 40] ,
-					[115, 115, 41] ,
-					[116, 116, 42] ,
-					[117, 117, 43] ,
-					[118, 118, 44] ,
-					[119, 119, 45] ,
-					[120, 122, 33] ,
-					[125, 125, 46] 
-				] ,
-				[
-					[9, 9, 1] ,
-					[32, 32, 4] 
-				] ,
-				nil_array ,
-				[
-					[10, 10, 47] 
-				] ,
-				[
-					[9, 32, -3] 
-				] ,
-				[
-					[61, 61, 48] 
-				] ,
-				[
-					[0, 9, 49] ,
-					[11, 12, 49] ,
-					[14, 33, 49] ,
-					[34, 34, 50] ,
-					[35, 91, 49] ,
-					[92, 92, 51] ,
-					[93, 122, 49] ,
-					[123, 123, 52] ,
-					[124, 255, 49] 
-				] ,
-				[
-					[0, 9, 53] ,
-					[10, 10, 54] ,
-					[11, 12, 53] ,
-					[13, 13, 55] ,
-					[14, 255, 53] 
-				] ,
-				nil_array ,
-				[
-					[0, 9, 56] ,
-					[11, 12, 56] ,
-					[14, 38, 56] ,
-					[39, 39, 57] ,
-					[40, 255, 56] 
-				] ,
-				nil_array ,
-				nil_array ,
-				nil_array ,
-				[
-					[61, 61, 58] 
-				] ,
-				nil_array ,
-				[
-					[61, 61, 59] 
-				] ,
-				[
-					[46, 46, 60] ,
-					[48, 57, 61] 
-				] ,
-				nil_array ,
-				[
-					[46, 46, 62] ,
-					[48, 57, 18] 
-				] ,
-				[
-					[58, 58, 63] 
-				] ,
-				[
-					[61, 61, 64] 
-				] ,
-				[
-					[61, 61, 65] 
-				] ,
-				[
-					[61, 61, 66] 
-				] ,
-				[
-					[48, 57, 67] ,
-					[65, 90, 68] ,
-					[95, 95, 69] ,
-					[97, 122, 70] 
-				] ,
-				nil_array ,
-				nil_array ,
-				[
-					[97, 122, 71] 
-				] ,
-				[
-					[48, 57, 72] ,
-					[65, 90, 73] ,
-					[95, 95, 74] ,
-					[97, 97, 75] ,
-					[98, 98, 76] ,
-					[99, 109, 75] ,
-					[110, 110, 77] ,
-					[111, 114, 75] ,
-					[115, 115, 78] ,
-					[116, 116, 79] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 113, 75] ,
-					[114, 114, 80] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 107, 75] ,
-					[108, 108, 81] ,
-					[109, 110, 75] ,
-					[111, 111, 82] ,
-					[112, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 110, 75] ,
-					[111, 111, 83] ,
-					[112, 122, 75] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 84] ,
-					[109, 109, 75] ,
-					[110, 110, 85] ,
-					[111, 119, 75] ,
-					[120, 120, 86] ,
-					[121, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 87] ,
-					[98, 110, 75] ,
-					[111, 111, 88] ,
-					[112, 116, 75] ,
-					[117, 117, 89] ,
-					[118, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 101, 75] ,
-					[102, 102, 90] ,
-					[103, 108, 75] ,
-					[109, 109, 91] ,
-					[110, 110, 92] ,
-					[111, 114, 75] ,
-					[115, 115, 93] ,
-					[116, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 94] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 100, 75] ,
-					[101, 101, 95] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 96] ,
-					[102, 110, 75] ,
-					[111, 111, 97] ,
-					[112, 116, 75] ,
-					[117, 117, 98] ,
-					[118, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 109, 75] ,
-					[110, 110, 99] ,
-					[111, 113, 75] ,
-					[114, 114, 100] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 101] ,
-					[98, 113, 75] ,
-					[114, 114, 102] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 103] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 104] ,
-					[102, 111, 75] ,
-					[112, 112, 105] ,
-					[113, 116, 75] ,
-					[117, 117, 106] ,
-					[118, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 103, 75] ,
-					[104, 104, 107] ,
-					[105, 113, 75] ,
-					[114, 114, 108] ,
-					[115, 120, 75] ,
-					[121, 121, 109] ,
-					[122, 122, 75] 
-				] ,
-				[
-					[48, 109, -40] ,
-					[110, 110, 110] ,
-					[111, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 111] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 103, -44] ,
-					[104, 104, 112] ,
-					[105, 105, 113] ,
-					[106, 113, 75] ,
-					[114, 114, 114] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[0, 9, 115] ,
-					[11, 12, 115] ,
-					[14, 33, 115] ,
-					[34, 34, 116] ,
-					[35, 91, 115] ,
-					[92, 92, 117] ,
-					[93, 122, 115] ,
-					[123, 123, 118] ,
-					[124, 255, 115] 
-				] ,
-				nil_array ,
-				nil_array ,
-				[
-					[0, 255, -8] 
-				] ,
-				nil_array ,
-				[
-					[0, 9, 119] ,
-					[11, 12, 119] ,
-					[14, 255, 119] 
-				] ,
-				nil_array ,
-				[
-					[0, 255, -9] 
-				] ,
-				nil_array ,
-				[
-					[10, 10, 120] 
-				] ,
-				[
-					[0, 255, -11] 
-				] ,
-				nil_array ,
-				nil_array ,
-				nil_array ,
-				[
-					[46, 46, 121] 
-				] ,
-				[
-					[48, 57, 61] 
-				] ,
-				[
-					[48, 57, 61] 
-				] ,
-				nil_array ,
-				[
-					[62, 62, 122] 
-				] ,
-				nil_array ,
-				nil_array ,
-				[
-					[48, 122, -25] 
-				] ,
-				[
-					[48, 122, -25] 
-				] ,
-				[
-					[48, 122, -25] 
-				] ,
-				[
-					[48, 122, -25] 
-				] ,
-				[
-					[48, 57, 123] ,
-					[65, 90, 124] ,
-					[95, 95, 125] ,
-					[97, 122, 126] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 110, -32] ,
-					[111, 111, 127] ,
-					[112, 114, 75] ,
-					[115, 115, 128] ,
-					[116, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 99, 75] ,
-					[100, 100, 129] ,
-					[101, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 114, 75] ,
-					[115, 115, 130] ,
-					[116, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 115, 75] ,
-					[116, 116, 131] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 132] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 133] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 109, -40] ,
-					[110, 110, 134] ,
-					[111, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 114, -80] ,
-					[115, 115, 135] ,
-					[116, 122, 75] 
-				] ,
-				[
-					[48, 99, -79] ,
-					[100, 100, 136] ,
-					[101, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 137] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 138] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 139] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 109, -40] ,
-					[110, 110, 140] ,
-					[111, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 111, 75] ,
-					[112, 112, 141] ,
-					[113, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 104, 75] ,
-					[105, 105, 142] ,
-					[106, 115, 75] ,
-					[116, 116, 143] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 144] ,
-					[98, 114, 75] ,
-					[115, 115, 145] ,
-					[116, 122, 75] 
-				] ,
-				[
-					[48, 97, -29] ,
-					[98, 98, 146] ,
-					[99, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 147] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 118, 75] ,
-					[119, 119, 148] ,
-					[120, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 149] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 150] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 98, 75] ,
-					[99, 99, 151] ,
-					[100, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 98, -101] ,
-					[99, 99, 152] ,
-					[100, 122, 75] 
-				] ,
-				[
-					[48, 104, -94] ,
-					[105, 105, 153] ,
-					[106, 110, 75] ,
-					[111, 111, 154] ,
-					[112, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 155] ,
-					[98, 99, 75] ,
-					[100, 100, 156] ,
-					[101, 115, 75] ,
-					[116, 116, 157] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 158] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 159] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 111, -93] ,
-					[112, 112, 160] ,
-					[113, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 161] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 116, 75] ,
-					[117, 117, 162] ,
-					[118, 122, 75] 
-				] ,
-				[
-					[48, 111, -93] ,
-					[112, 112, 163] ,
-					[113, 122, 75] 
-				] ,
-				[
-					[48, 104, -94] ,
-					[105, 105, 164] ,
-					[106, 122, 75] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 165] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 104, -94] ,
-					[105, 105, 166] ,
-					[106, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 167] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 104, -94] ,
-					[105, 105, 168] ,
-					[106, 122, 75] 
-				] ,
-				[
-					[0, 255, -48] 
-				] ,
-				nil_array ,
-				[
-					[0, 9, 169] ,
-					[11, 12, 169] ,
-					[14, 255, 169] 
-				] ,
-				nil_array ,
-				[
-					[0, 255, -8] 
-				] ,
-				nil_array ,
-				nil_array ,
-				nil_array ,
-				[
-					[48, 122, -73] 
-				] ,
-				[
-					[48, 122, -73] 
-				] ,
-				[
-					[48, 122, -73] 
-				] ,
-				[
-					[48, 122, -73] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 170] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 171] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 172] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 173] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 174] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 114, -80] ,
-					[115, 115, 175] ,
-					[116, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 176] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 177] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 178] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 114, -80] ,
-					[115, 115, 179] ,
-					[116, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 110, -32] ,
-					[111, 111, 180] ,
-					[112, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 181] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 182] ,
-					[102, 113, 75] ,
-					[114, 114, 183] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 184] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 185] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 103, -44] ,
-					[104, 104, 186] ,
-					[105, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 187] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 188] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 106, 75] ,
-					[107, 107, 189] ,
-					[108, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 117, 75] ,
-					[118, 118, 190] ,
-					[119, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 191] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 99, -79] ,
-					[100, 100, 192] ,
-					[101, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 193] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 116, -110] ,
-					[117, 117, 194] ,
-					[118, 122, 75] 
-				] ,
-				[
-					[48, 101, -36] ,
-					[102, 102, 195] ,
-					[103, 122, 75] 
-				] ,
-				[
-					[48, 98, -101] ,
-					[99, 99, 196] ,
-					[100, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 197] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 109, -40] ,
-					[110, 110, 198] ,
-					[111, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 199] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 200] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 117, -155] ,
-					[118, 118, 201] ,
-					[119, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 202] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 103, -44] ,
-					[104, 104, 203] ,
-					[105, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 204] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[0, 255, -48] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 205] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 206] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 207] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 106, -154] ,
-					[107, 107, 208] ,
-					[108, 122, 75] 
-				] ,
-				[
-					[48, 114, -80] ,
-					[115, 115, 209] ,
-					[116, 122, 75] 
-				] ,
-				[
-					[48, 104, -94] ,
-					[105, 105, 210] ,
-					[106, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 211] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 212] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 213] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 214] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 116, -110] ,
-					[117, 117, 215] ,
-					[118, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 216] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 217] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 218] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 219] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 220] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 221] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 222] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 101, -36] ,
-					[102, 102, 223] ,
-					[103, 122, 75] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 224] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 104, -94] ,
-					[105, 105, 225] ,
-					[106, 122, 75] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 226] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 227] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 228] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 229] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 230] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 231] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 109, -40] ,
-					[110, 110, 232] ,
-					[111, 122, 75] 
-				] ,
-				[
-					[48, 109, -40] ,
-					[110, 110, 233] ,
-					[111, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 234] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 101, -36] ,
-					[102, 102, 235] ,
-					[103, 109, 75] ,
-					[110, 110, 236] ,
-					[111, 122, 75] 
-				] ,
-				[
-					[48, 99, -79] ,
-					[100, 100, 237] ,
-					[101, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 97, -29] ,
-					[98, 98, 238] ,
-					[99, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 102, 75] ,
-					[103, 103, 239] ,
-					[104, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 240] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 98, -101] ,
-					[99, 99, 241] ,
-					[100, 122, 75] 
-				] ,
-				[
-					[48, 97, -29] ,
-					[98, 98, 242] ,
-					[99, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 109, -40] ,
-					[110, 110, 243] ,
-					[111, 122, 75] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 244] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 113, -30] ,
-					[114, 114, 245] ,
-					[115, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 97, -29] ,
-					[98, 98, 246] ,
-					[99, 122, 75] 
-				] ,
-				[
-					[48, 98, -101] ,
-					[99, 99, 247] ,
-					[100, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 116, -110] ,
-					[117, 117, 248] ,
-					[118, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 249] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 250] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 251] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 252] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 253] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 254] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 255] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 256] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 114, -80] ,
-					[115, 115, 257] ,
-					[116, 122, 75] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 258] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 115, -81] ,
-					[116, 116, 259] ,
-					[117, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 260] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 98, -101] ,
-					[99, 99, 261] ,
-					[100, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 262] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 263] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 264] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 95, -29] ,
-					[97, 97, 265] ,
-					[98, 122, 75] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 266] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 100, -38] ,
-					[101, 101, 267] ,
-					[102, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 99, -79] ,
-					[100, 100, 268] ,
-					[101, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 107, -31] ,
-					[108, 108, 269] ,
-					[109, 122, 75] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] ,
-				[
-					[48, 122, -35] 
-				] 
-			] 
+					[9, 9, 1],
+					[10, 10, 2],
+					[13, 13, 3],
+					[32, 32, 4],
+					[33, 33, 5],
+					[34, 34, 6],
+					[35, 35, 7],
+					[37, 37, 8],
+					[39, 39, 9],
+					[40, 40, 10],
+					[41, 41, 11],
+					[42, 42, 12],
+					[43, 43, 13],
+					[44, 44, 14],
+					[45, 45, 15],
+					[46, 46, 16],
+					[47, 47, 17],
+					[48, 57, 18],
+					[58, 58, 19],
+					[60, 60, 20],
+					[61, 61, 21],
+					[62, 62, 22],
+					[65, 90, 23],
+					[91, 91, 24],
+					[93, 93, 25],
+					[95, 95, 26],
+					[97, 97, 27],
+					[98, 98, 28],
+					[99, 99, 29],
+					[100, 100, 30],
+					[101, 101, 31],
+					[102, 102, 32],
+					[103, 104, 33],
+					[105, 105, 34],
+					[106, 107, 33],
+					[108, 108, 35],
+					[109, 109, 36],
+					[110, 110, 37],
+					[111, 111, 38],
+					[112, 112, 39],
+					[113, 113, 33],
+					[114, 114, 40],
+					[115, 115, 41],
+					[116, 116, 42],
+					[117, 117, 43],
+					[118, 118, 44],
+					[119, 119, 45],
+					[120, 122, 33],
+					[125, 125, 46]
+				],
+				[
+					[9, 9, 1],
+					[32, 32, 4]
+				],
+				nil_array,
+				[
+					[10, 10, 47]
+				],
+				[
+					[9, 32, -3]
+				],
+				[
+					[61, 61, 48]
+				],
+				[
+					[0, 9, 49],
+					[11, 12, 49],
+					[14, 33, 49],
+					[34, 34, 50],
+					[35, 91, 49],
+					[92, 92, 51],
+					[93, 122, 49],
+					[123, 123, 52],
+					[124, 255, 49]
+				],
+				[
+					[0, 9, 53],
+					[10, 10, 54],
+					[11, 12, 53],
+					[13, 13, 55],
+					[14, 255, 53]
+				],
+				nil_array,
+				[
+					[0, 9, 56],
+					[11, 12, 56],
+					[14, 38, 56],
+					[39, 39, 57],
+					[40, 255, 56]
+				],
+				nil_array,
+				nil_array,
+				nil_array,
+				[
+					[61, 61, 58]
+				],
+				nil_array,
+				[
+					[61, 61, 59]
+				],
+				[
+					[46, 46, 60],
+					[48, 57, 61]
+				],
+				nil_array,
+				[
+					[46, 46, 62],
+					[48, 57, 18]
+				],
+				[
+					[58, 58, 63]
+				],
+				[
+					[61, 61, 64]
+				],
+				[
+					[61, 61, 65]
+				],
+				[
+					[61, 61, 66]
+				],
+				[
+					[48, 57, 67],
+					[65, 90, 68],
+					[95, 95, 69],
+					[97, 122, 70]
+				],
+				nil_array,
+				nil_array,
+				[
+					[97, 122, 71]
+				],
+				[
+					[48, 57, 72],
+					[65, 90, 73],
+					[95, 95, 74],
+					[97, 97, 75],
+					[98, 98, 76],
+					[99, 109, 75],
+					[110, 110, 77],
+					[111, 114, 75],
+					[115, 115, 78],
+					[116, 116, 79],
+					[117, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 113, 75],
+					[114, 114, 80],
+					[115, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 107, 75],
+					[108, 108, 81],
+					[109, 110, 75],
+					[111, 111, 82],
+					[112, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 110, 75],
+					[111, 111, 83],
+					[112, 122, 75]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 84],
+					[109, 109, 75],
+					[110, 110, 85],
+					[111, 119, 75],
+					[120, 120, 86],
+					[121, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 87],
+					[98, 110, 75],
+					[111, 111, 88],
+					[112, 116, 75],
+					[117, 117, 89],
+					[118, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 101, 75],
+					[102, 102, 90],
+					[103, 108, 75],
+					[109, 109, 91],
+					[110, 110, 92],
+					[111, 114, 75],
+					[115, 115, 93],
+					[116, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 94],
+					[98, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 100, 75],
+					[101, 101, 95],
+					[102, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 96],
+					[102, 110, 75],
+					[111, 111, 97],
+					[112, 116, 75],
+					[117, 117, 98],
+					[118, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 109, 75],
+					[110, 110, 99],
+					[111, 113, 75],
+					[114, 114, 100],
+					[115, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 101],
+					[98, 113, 75],
+					[114, 114, 102],
+					[115, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 103],
+					[102, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 104],
+					[102, 111, 75],
+					[112, 112, 105],
+					[113, 116, 75],
+					[117, 117, 106],
+					[118, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 103, 75],
+					[104, 104, 107],
+					[105, 113, 75],
+					[114, 114, 108],
+					[115, 120, 75],
+					[121, 121, 109],
+					[122, 122, 75]
+				],
+				[
+					[48, 109, -40],
+					[110, 110, 110],
+					[111, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 111],
+					[98, 122, 75]
+				],
+				[
+					[48, 103, -44],
+					[104, 104, 112],
+					[105, 105, 113],
+					[106, 113, 75],
+					[114, 114, 114],
+					[115, 122, 75]
+				],
+				[
+					[0, 9, 115],
+					[11, 12, 115],
+					[14, 33, 115],
+					[34, 34, 116],
+					[35, 91, 115],
+					[92, 92, 117],
+					[93, 122, 115],
+					[123, 123, 118],
+					[124, 255, 115]
+				],
+				nil_array,
+				nil_array,
+				[
+					[0, 255, -8]
+				],
+				nil_array,
+				[
+					[0, 9, 119],
+					[11, 12, 119],
+					[14, 255, 119]
+				],
+				nil_array,
+				[
+					[0, 255, -9]
+				],
+				nil_array,
+				[
+					[10, 10, 120]
+				],
+				[
+					[0, 255, -11]
+				],
+				nil_array,
+				nil_array,
+				nil_array,
+				[
+					[46, 46, 121]
+				],
+				[
+					[48, 57, 61]
+				],
+				[
+					[48, 57, 61]
+				],
+				nil_array,
+				[
+					[62, 62, 122]
+				],
+				nil_array,
+				nil_array,
+				[
+					[48, 122, -25]
+				],
+				[
+					[48, 122, -25]
+				],
+				[
+					[48, 122, -25]
+				],
+				[
+					[48, 122, -25]
+				],
+				[
+					[48, 57, 123],
+					[65, 90, 124],
+					[95, 95, 125],
+					[97, 122, 126]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 110, -32],
+					[111, 111, 127],
+					[112, 114, 75],
+					[115, 115, 128],
+					[116, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 99, 75],
+					[100, 100, 129],
+					[101, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 114, 75],
+					[115, 115, 130],
+					[116, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 115, 75],
+					[116, 116, 131],
+					[117, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 132],
+					[102, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 133],
+					[98, 122, 75]
+				],
+				[
+					[48, 109, -40],
+					[110, 110, 134],
+					[111, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 114, -80],
+					[115, 115, 135],
+					[116, 122, 75]
+				],
+				[
+					[48, 99, -79],
+					[100, 100, 136],
+					[101, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 137],
+					[117, 122, 75]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 138],
+					[109, 122, 75]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 139],
+					[115, 122, 75]
+				],
+				[
+					[48, 109, -40],
+					[110, 110, 140],
+					[111, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 95, -29],
+					[97, 111, 75],
+					[112, 112, 141],
+					[113, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 104, 75],
+					[105, 105, 142],
+					[106, 115, 75],
+					[116, 116, 143],
+					[117, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 144],
+					[98, 114, 75],
+					[115, 115, 145],
+					[116, 122, 75]
+				],
+				[
+					[48, 97, -29],
+					[98, 98, 146],
+					[99, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 147],
+					[117, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 118, 75],
+					[119, 119, 148],
+					[120, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 149],
+					[117, 122, 75]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 150],
+					[109, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 98, 75],
+					[99, 99, 151],
+					[100, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 98, -101],
+					[99, 99, 152],
+					[100, 122, 75]
+				],
+				[
+					[48, 104, -94],
+					[105, 105, 153],
+					[106, 110, 75],
+					[111, 111, 154],
+					[112, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 155],
+					[98, 99, 75],
+					[100, 100, 156],
+					[101, 115, 75],
+					[116, 116, 157],
+					[117, 122, 75]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 158],
+					[109, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 159],
+					[102, 122, 75]
+				],
+				[
+					[48, 111, -93],
+					[112, 112, 160],
+					[113, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 161],
+					[102, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 116, 75],
+					[117, 117, 162],
+					[118, 122, 75]
+				],
+				[
+					[48, 111, -93],
+					[112, 112, 163],
+					[113, 122, 75]
+				],
+				[
+					[48, 104, -94],
+					[105, 105, 164],
+					[106, 122, 75]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 165],
+					[115, 122, 75]
+				],
+				[
+					[48, 104, -94],
+					[105, 105, 166],
+					[106, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 167],
+					[117, 122, 75]
+				],
+				[
+					[48, 104, -94],
+					[105, 105, 168],
+					[106, 122, 75]
+				],
+				[
+					[0, 255, -48]
+				],
+				nil_array,
+				[
+					[0, 9, 169],
+					[11, 12, 169],
+					[14, 255, 169]
+				],
+				nil_array,
+				[
+					[0, 255, -8]
+				],
+				nil_array,
+				nil_array,
+				nil_array,
+				[
+					[48, 122, -73]
+				],
+				[
+					[48, 122, -73]
+				],
+				[
+					[48, 122, -73]
+				],
+				[
+					[48, 122, -73]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 170],
+					[115, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 171],
+					[117, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 172],
+					[102, 122, 75]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 173],
+					[115, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 174],
+					[98, 122, 75]
+				],
+				[
+					[48, 114, -80],
+					[115, 115, 175],
+					[116, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 176],
+					[117, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 177],
+					[102, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 178],
+					[102, 122, 75]
+				],
+				[
+					[48, 114, -80],
+					[115, 115, 179],
+					[116, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 110, -32],
+					[111, 111, 180],
+					[112, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 181],
+					[117, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 182],
+					[102, 113, 75],
+					[114, 114, 183],
+					[115, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 184],
+					[102, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 185],
+					[102, 122, 75]
+				],
+				[
+					[48, 103, -44],
+					[104, 104, 186],
+					[105, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 187],
+					[109, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 188],
+					[102, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 106, 75],
+					[107, 107, 189],
+					[108, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 117, 75],
+					[118, 118, 190],
+					[119, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 191],
+					[117, 122, 75]
+				],
+				[
+					[48, 99, -79],
+					[100, 100, 192],
+					[101, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 193],
+					[102, 122, 75]
+				],
+				[
+					[48, 116, -110],
+					[117, 117, 194],
+					[118, 122, 75]
+				],
+				[
+					[48, 101, -36],
+					[102, 102, 195],
+					[103, 122, 75]
+				],
+				[
+					[48, 98, -101],
+					[99, 99, 196],
+					[100, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 197],
+					[102, 122, 75]
+				],
+				[
+					[48, 109, -40],
+					[110, 110, 198],
+					[111, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 199],
+					[102, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 200],
+					[102, 122, 75]
+				],
+				[
+					[48, 117, -155],
+					[118, 118, 201],
+					[119, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 202],
+					[109, 122, 75]
+				],
+				[
+					[48, 103, -44],
+					[104, 104, 203],
+					[105, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 204],
+					[117, 122, 75]
+				],
+				[
+					[0, 255, -48]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 205],
+					[117, 122, 75]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 206],
+					[115, 122, 75]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 207],
+					[115, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 106, -154],
+					[107, 107, 208],
+					[108, 122, 75]
+				],
+				[
+					[48, 114, -80],
+					[115, 115, 209],
+					[116, 122, 75]
+				],
+				[
+					[48, 104, -94],
+					[105, 105, 210],
+					[106, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 211],
+					[115, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 212],
+					[102, 122, 75]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 213],
+					[115, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 214],
+					[115, 122, 75]
+				],
+				[
+					[48, 116, -110],
+					[117, 117, 215],
+					[118, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 216],
+					[117, 122, 75]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 217],
+					[109, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 218],
+					[98, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 219],
+					[98, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 220],
+					[98, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 221],
+					[102, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 222],
+					[98, 122, 75]
+				],
+				[
+					[48, 101, -36],
+					[102, 102, 223],
+					[103, 122, 75]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 224],
+					[115, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 104, -94],
+					[105, 105, 225],
+					[106, 122, 75]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 226],
+					[115, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 227],
+					[102, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 228],
+					[102, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 229],
+					[98, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 230],
+					[98, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 231],
+					[117, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 109, -40],
+					[110, 110, 232],
+					[111, 122, 75]
+				],
+				[
+					[48, 109, -40],
+					[110, 110, 233],
+					[111, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 234],
+					[117, 122, 75]
+				],
+				[
+					[48, 101, -36],
+					[102, 102, 235],
+					[103, 109, 75],
+					[110, 110, 236],
+					[111, 122, 75]
+				],
+				[
+					[48, 99, -79],
+					[100, 100, 237],
+					[101, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 97, -29],
+					[98, 98, 238],
+					[99, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 102, 75],
+					[103, 103, 239],
+					[104, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 240],
+					[117, 122, 75]
+				],
+				[
+					[48, 98, -101],
+					[99, 99, 241],
+					[100, 122, 75]
+				],
+				[
+					[48, 97, -29],
+					[98, 98, 242],
+					[99, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 109, -40],
+					[110, 110, 243],
+					[111, 122, 75]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 244],
+					[98, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 245],
+					[115, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 97, -29],
+					[98, 98, 246],
+					[99, 122, 75]
+				],
+				[
+					[48, 98, -101],
+					[99, 99, 247],
+					[100, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 116, -110],
+					[117, 117, 248],
+					[118, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 249],
+					[98, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 250],
+					[102, 122, 75]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 251],
+					[109, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 252],
+					[102, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 253],
+					[102, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 254],
+					[117, 122, 75]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 255],
+					[109, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 256],
+					[109, 122, 75]
+				],
+				[
+					[48, 114, -80],
+					[115, 115, 257],
+					[116, 122, 75]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 258],
+					[109, 122, 75]
+				],
+				[
+					[48, 115, -81],
+					[116, 116, 259],
+					[117, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 260],
+					[102, 122, 75]
+				],
+				[
+					[48, 98, -101],
+					[99, 99, 261],
+					[100, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 262],
+					[102, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 263],
+					[102, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 264],
+					[102, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 265],
+					[98, 122, 75]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 266],
+					[102, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 267],
+					[102, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 99, -79],
+					[100, 100, 268],
+					[101, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 269],
+					[109, 122, 75]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				]
+			]
 		]
 	end
-    
+
 	private fun nil_array: Array[Array[Int]]
 	do
 		return once new Array[Array[Int]]
@@ -3348,10 +3348,10 @@ class Lexer
 	var _accept_table: Array[Array[Int]]
 	private fun build_accept_table do
 		_accept_table = once [
-            		[
-				-1 , 0 , 1 , 1 , 0 , -1 , -1 , -1 , 70 , -1 , 53 , 54 , 68 , 66 , 57 , 67 , 65 , 69 , 81 , 58 , 73 , 60 , 75 , 78 , 55 , 56 , -1 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , -1 , 1 , 72 , -1 , 84 , -1 , 85 , -1 , 2 , 2 , -1 , 83 , 61 , 62 , 64 , 82 , -1 , 59 , 74 , 71 , 76 , 78 , 78 , 78 , 78 , 80 , 79 , 79 , 79 , 79 , 79 , 79 , 48 , 79 , 79 , 79 , 79 , 17 , 79 , 79 , 79 , 79 , 79 , 79 , 26 , 79 , 31 , 16 , 79 , 79 , 79 , 79 , 79 , 79 , 33 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , -1 , 87 , -1 , 86 , -1 , 2 , 63 , 77 , 80 , 80 , 80 , 80 , 79 , 79 , 32 , 79 , 79 , 79 , 79 , 79 , 79 , 10 , 79 , 79 , 30 , 11 , 79 , 79 , 79 , 41 , 79 , 79 , 79 , 40 , 34 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 79 , 20 , 79 , 79 , 79 , -1 , 79 , 79 , 79 , 13 , 79 , 79 , 79 , 28 , 79 , 79 , 79 , 14 , 79 , 79 , 79 , 79 , 11 , 47 , 42 , 79 , 79 , 79 , 79 , 79 , 79 , 44 , 79 , 79 , 27 , 45 , 12 , 79 , 79 , 49 , 79 , 38 , 79 , 79 , 37 , 5 , 79 , 79 , 46 , 79 , 79 , 79 , 51 , 52 , 79 , 79 , 79 , 79 , 79 , 15 , 79 , 79 , 43 , 79 , 29 , 79 , 79 , 39 , 79 , 22 , 4 , 79 , 21 , 79 , 79 , 79 , 79 , 79 , 79 , 35 , 79 , 79 , 79 , 79 , 79 , 79 , 25 , 79 , 3 , 24 , 79 , 79 , 9 , 79 , 79 , 6 , 36 , 79 , 50 , 79 , 18 , 79 , 19 , 7 , 23 , 8  
+			[
+				-1,0,1,1,0,-1,-1,-1,70,-1,53,54,68,66,57,67,65,69,81,58,73,60,75,78,55,56,-1,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,-1,1,72,-1,84,-1,85,-1,2,2,-1,83,61,62,64,82,-1,59,74,71,76,78,78,78,78,80,79,79,79,79,79,79,48,79,79,79,79,17,79,79,79,79,79,79,26,79,31,16,79,79,79,79,79,79,33,79,79,79,79,79,79,79,79,79,79,79,79,79,79,-1,87,-1,86,-1,2,63,77,80,80,80,80,79,79,32,79,79,79,79,79,79,10,79,79,30,11,79,79,79,41,79,79,79,40,34,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,20,79,79,79,-1,79,79,79,13,79,79,79,28,79,79,79,14,79,79,79,79,11,47,42,79,79,79,79,79,79,44,79,79,27,45,12,79,79,49,79,38,79,79,37,5,79,79,46,79,79,79,51,52,79,79,79,79,79,15,79,79,43,79,29,79,79,39,79,22,4,79,21,79,79,79,79,79,79,35,79,79,79,79,79,79,25,79,3,24,79,79,9,79,79,6,36,79,50,79,18,79,19,7,23,8
 
-			] 
+			]
 		]
 	end
 end

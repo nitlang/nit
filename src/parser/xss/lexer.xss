@@ -28,7 +28,7 @@ class Lexer
 	var _state: Int = 0
 
 	# Name of the stream (as given to tokens)
-	readable var _filename: String 
+	readable var _filename: String
 
 	# Input stream where character are read
 	var _stream: IStream
@@ -278,18 +278,18 @@ $     foreach {row}
 $         if {count(goto)!=0}
 				[
 $             foreach {goto}
-					[@low, @high, @state] [-sep ','-]
+					[@low, @high, @state][-sep ','-]
 $             end foreach
-				] [-sep ','-]
+				][-sep ','-]
 $         else
-				nil_array [-sep ','-]
+				nil_array[-sep ','-]
 $         end
 $     end foreach
-			] [-sep ','-]
+			][-sep ','-]
 $ end foreach
 		]
 	end
-    
+
 	private fun nil_array: Array[Array[Int]]
 	do
 		return once new Array[Array[Int]]
@@ -299,10 +299,10 @@ $ end foreach
 	private fun build_accept_table do
 		_accept_table = once [
 $ foreach {lexer_data/accept_table/state}
-            		[
-				[-foreach {i}-]${.} [-sep ','-] [-end foreach-]
+			[
+				[-foreach {i}-]${.}[-sep ','-][-end foreach-]
 
-			] [-sep ','-]
+			][-sep ','-]
 $ end foreach
 		]
 	end

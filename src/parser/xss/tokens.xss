@@ -24,7 +24,7 @@ special Token
 end
 $ end
 $ end
-class EOF 
+class EOF
 special Token
 private init noinit do end
 end
@@ -37,8 +37,8 @@ $ end template
 $ template make_tokens()
 
 redef class Token
-    readable writable var _text: String 
-    
+    readable writable var _text: String
+
     fun parser_index: Int is abstract
 
     redef fun to_s: String do
@@ -47,11 +47,11 @@ redef class Token
 end
 
 $ foreach {//token}
-$ if {@parser_index}    
+$ if {@parser_index}
 redef class @ename
     redef fun parser_index: Int
     do
-    	return @parser_index
+	return @parser_index
     end
 
 $ if {not(@text)}
@@ -67,15 +67,15 @@ $ end
     end
 end
 
-$ end if 
+$ end if
 $ end foreach
 
-redef class EOF 
+redef class EOF
     redef fun parser_index: Int
     do
-    	return ${tokens/eof/@parser_index}
+	return ${tokens/eof/@parser_index}
     end
-    
+
     init(loc: Location)
     do
         _text = ""
@@ -84,8 +84,8 @@ redef class EOF
 end
 
 redef class PError
-    readable writable var _message: String 
-    
+    readable writable var _message: String
+
     init init_error(message: String, loc: Location)
     do
 		init(loc)

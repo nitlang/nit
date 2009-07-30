@@ -297,7 +297,7 @@ end
 class TEndString
 special Token
 end
-class EOF 
+class EOF
 special Token
 private init noinit do end
 end
@@ -395,7 +395,7 @@ special Prod
     readable writable var _n_kwspecial: TKwspecial
     readable writable var _n_type: AType
 end
-class APropdef special Prod 
+class APropdef special Prod
     readable writable var _n_doc: nullable ADoc = null
 end
 class AAttrPropdef
@@ -761,20 +761,20 @@ special ASendExpr
 end
 class AAttrReassignExpr
 special AExpr
-special AAttrFormExpr 
-special AReassignFormExpr 
+special AAttrFormExpr
+special AReassignFormExpr
 end
 class ACallExpr
 special ACallFormExpr
 end
 class ACallAssignExpr
 special ACallFormExpr
-special AAssignFormExpr 
+special AAssignFormExpr
 end
 class ACallReassignExpr
 special AExpr
 special ACallFormExpr
-special AReassignFormExpr 
+special AReassignFormExpr
 end
 class ASuperExpr
 special AExpr
@@ -796,7 +796,7 @@ special ABraFormExpr
 end
 class ABraAssignExpr
 special ABraFormExpr
-special AAssignFormExpr 
+special AAssignFormExpr
 end
 class AVarFormExpr
 special AExpr
@@ -804,7 +804,7 @@ special AExpr
 end
 class ABraReassignExpr
 special ABraFormExpr
-special AReassignFormExpr 
+special AReassignFormExpr
 end
 class AClosureCallExpr
 special AExpr
@@ -817,11 +817,11 @@ special AVarFormExpr
 end
 class AVarAssignExpr
 special AVarFormExpr
-special AAssignFormExpr 
+special AAssignFormExpr
 end
 class AVarReassignExpr
 special AVarFormExpr
-special AReassignFormExpr 
+special AReassignFormExpr
 end
 class ARangeExpr
 special AExpr

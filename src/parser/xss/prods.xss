@@ -42,8 +42,8 @@ $ end
 
 class Start
 special Prod
-    readable writable var _n_base: nullable $baseprod 
-    readable writable var _n_eof: EOF 
+    readable writable var _n_base: nullable $baseprod
+    readable writable var _n_eof: EOF
 end
 $ end template
 
@@ -74,9 +74,9 @@ $ if {count(elem)!=0}
     init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} (
 $ foreach {elem}
 $   if {@is_list}
-            n_@{name}: Collection[Object] [-sep ','-] # Should be Collection[@etype]
+            n_@{name}: Collection[Object][-sep ','-] # Should be Collection[@etype]
 $   else
-            n_@{name}: nullable @etype [-sep ','-]
+            n_@{name}: nullable @etype[-sep ','-]
 $   end
 $ end
     )
