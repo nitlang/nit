@@ -17,9 +17,9 @@
 import kernel
 
 fun a
-	with a1
-	with a2 #!alt1#
-#alt2#	with a3
+	!a1
+	!a2 #!alt1#
+#alt2#	!a3
 do
 	a1
 	a2 #!alt1#
@@ -27,23 +27,23 @@ do
 end
 
 fun b
-	with b1
-	with b2
+	!b1
+	!b2
 do
 	b1
 	b2
 end
 
 fun c
-	with c1
+	!c1
 do
 	c1
 end
 
 fun d
-	with d1
-	with d2
-	with d3
+	!d1
+	!d2
+	!d3
 do
 	d1
 	d2
@@ -51,23 +51,26 @@ do
 end
 
 0.output
-a with do
-	b with do
+a !a1 do
+	b !b1 do
 		1.output
-	with do #!alt3#
+	!b2 do #!alt3#
 		2.output #!alt3#
-#alt4#	with do
+#alt4#	!b3 do
 #alt4#		20.output
 	end
-with do
+!a2 do
 	3.output
 end
 4.output
-c with do
-	d with do
+c !c1 do
+	d !d1 do
 		5.output
-	with do
+	!d2 do
 		6.output
-	with do 7.output
+	!d3 do 7.output
 end
+#alt5#a !a2 do
+#alt5#!a1 do
+#alt5#end
 8.output

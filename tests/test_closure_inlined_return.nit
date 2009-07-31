@@ -1,4 +1,4 @@
-fun foo with k
+fun foo !k
 do
 	' '.output
 	'<'.output
@@ -16,7 +16,7 @@ do
 	0.output
 	var i = 0
 	while i < 3 do
-		foo with do
+		foo !each do
 			' '.output
 			' '.output
 			'<'.output

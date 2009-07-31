@@ -164,9 +164,6 @@ end
 class TKwas
 special Token
 end
-class TKwwith
-special Token
-end
 class TKwnullable
 special Token
 end
@@ -251,6 +248,9 @@ end
 class TStarship
 special Token
 end
+class TBang
+special Token
+end
 class TClassid
 special Token
 end
@@ -309,6 +309,7 @@ class ALabel special Prod end
 class AExpr special Prod end
 class AAssignOp special Prod end
 class AClosureDef special Prod end
+class AClosureId special Prod end
 class AQualified special Prod end
 class ADoc special Prod end
 
@@ -571,8 +572,8 @@ special AParam
 end
 class AClosureDecl
 special AClosureDecl
-    readable writable var _n_kwwith: TKwwith
     readable writable var _n_kwbreak: nullable TKwbreak = null
+    readable writable var _n_bang: TBang
     readable writable var _n_id: TId
     readable writable var _n_signature: ASignature
     readable writable var _n_expr: nullable AExpr = null
@@ -976,11 +977,20 @@ special AAssignOp
 end
 class AClosureDef
 special AClosureDef
-    readable writable var _n_kwwith: TKwwith
-    readable writable var _n_id: List[TId] = new List[TId]
+    readable writable var _n_bang: TBang
+    readable writable var _n_id: AClosureId
+    readable writable var _n_ids: List[TId] = new List[TId]
     readable writable var _n_kwdo: TKwdo
     readable writable var _n_expr: nullable AExpr = null
     readable writable var _n_label: nullable ALabel = null
+end
+class ASimpleClosureId
+special AClosureId
+    readable writable var _n_id: TId
+end
+class ABreakClosureId
+special AClosureId
+    readable writable var _n_kwbreak: TKwbreak
 end
 class AQualified
 special AQualified

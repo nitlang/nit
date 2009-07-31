@@ -17,11 +17,11 @@
 import kernel
 
 fun foo
-	with x
+	!x
 do
 	'F'.output
 	0.output
-	bar with do
+	bar !y do
 		'F'.output
 		1.output
 		x
@@ -33,7 +33,7 @@ do
 end
 
 fun bar
-	with y
+	!y
 do
 	'B'.output
 	0.output
@@ -44,10 +44,10 @@ end
 
 'M'.output
 0.output
-foo with do
+foo !x do
 	'M'.output
 	1.output
-	foo with do
+	foo !x do
 		'M'.output
 		2.output
 		#alt1#break

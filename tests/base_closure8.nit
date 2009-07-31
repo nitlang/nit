@@ -18,14 +18,15 @@ import kernel
 
 class A
 	fun foo(i: Int)
-		with bar
+		!bar
 	do
 		'['.output
 		i.output
-		bar with do
+		bar !break do
 			'!'.output
 			i.output
 		end
+		#alt4#bar !baz do abort
 		']'.output
 		i.output
 	end
@@ -35,9 +36,9 @@ fun start
 do
 	var a = new A
 	0.output
-	a.foo(1) with do 
+	a.foo(1) !bar do
 		2.output
-		a.foo(3) with do
+		a.foo(3) !bar do
 			4.output
 			#alt1#break
 			#alt2#continue

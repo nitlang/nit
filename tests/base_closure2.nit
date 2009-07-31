@@ -18,7 +18,7 @@ import kernel
 
 class A
 	fun foo
-		with bar(i: Int)
+		!bar(i: Int)
 	do
 		1.output
 		bar(2) #!alt1#
@@ -32,8 +32,8 @@ end
 fun work
 do
 	var a = new A
-	a.foo with x do #!alt11#
-	#alt11#a.foo with do
+	a.foo !bar x do #!alt11#
+	#alt11#a.foo !bar do
 		x.output
 		#alt4#break
 		#alt5#break 'x'

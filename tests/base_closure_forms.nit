@@ -18,7 +18,7 @@ import kernel
 
 class Array[E]
 	fun sort
-		with cmp(a, b: E): Int
+		!cmp(a, b: E): Int
 	do
 		var e1 = _e1
 		var e2 = _e2
@@ -29,7 +29,7 @@ class Array[E]
 	end
 
 	fun iterate
-		with each(e: E)
+		!each(e: E)
 	do
 		each(_e1)
 		each(_e2)
@@ -57,11 +57,11 @@ end
 
 class Map[K, V]
 	fun get(k: K): V
-		with def: V do abort
+		!def: V do abort
 	do
 		if _k == k then return _v
 		var n = _next
-		if n != null then return n.get(k) with do continue def
+		if n != null then return n.get(k) !def do continue def
 		var v = def
 		_next = new Map[K, V](k, v)
 		return v
@@ -73,7 +73,7 @@ class Map[K, V]
 		if n != null then return n.has_key(k) else return false
 	end
 	fun iterate
-		with each2(k: K, v: V)
+		!each2(k: K, v: V)
 	do
 		var n: nullable Map[K, V] = self
 		while n != null do
@@ -128,12 +128,12 @@ class File
 end
 
 fun file_open(i: Int)
-	with work(f: File)
-	with break error(i: Int) do abort
+	!work(f: File)
+	break !error(i: Int) do abort
 do
 	var f = new File(i)
 	if not f.is_open then error(404)
-	work(f) with do f.close
+	work(f) !break do f.close
 	f.close
 end
 
@@ -143,11 +143,11 @@ fun test_sort
 do
 	var a = new Array[Char]('2', '1')
 	a.output
-	a.sort with x, y do continue x <=> y
+	a.sort !cmp(x, y) do continue x <=> y
 	a.output
-	a.sort with x, y do continue y <=> x
+	a.sort !cmp(x, y) do continue y <=> x
 	a.output
-	a.iterate with i do i.output
+	a.iterate !each i do i.output
 	'\n'.output
 end
 
@@ -169,7 +169,7 @@ do
 	if m.has_key('V') then (-2).output
 	'V'.output
 	'='.output
-	i = m.get('V') with do continue '5'
+	i = m.get('V') !def do continue '5'
 	i.output
 	'\n'.output
 
@@ -178,7 +178,7 @@ do
 	if not m.has_key('V') then (-3).output
 	'V'.output
 	'='.output
-	i = m.get('V') with do continue '6'
+	i = m.get('V') !def do continue '6'
 	i.output
 	'\n'.output
 
@@ -187,7 +187,7 @@ do
 	if m.has_key('X') then (-4).output
 	'X'.output
 	'='.output
-	i = m.get('X') with do break '0'
+	i = m.get('X') !def do break '0'
 	i.output
 	'\n'.output
 
@@ -195,7 +195,7 @@ do
 
 	if m.has_key('X') then (-5).output
 
-	m.iterate with k, v do
+	m.iterate !each2(k,v) do
 		k.output
 		'='.output
 		v.output
@@ -207,12 +207,12 @@ end
 fun test_file(i: Int)
 do
 	var f_escape: nullable File = null
-	file_open(i) with f do
+	file_open(i) !work(f) do
 		'O'.output
 		'?'.output
 		f.is_open.output
 		f_escape = f
-	with e do
+	!error(e) do
 		'E'.output
 		e.output
 		break

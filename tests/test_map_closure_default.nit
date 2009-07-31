@@ -16,10 +16,10 @@
 
 redef class Map[K, V]
 	fun get(k: K): V
-		with default: V do abort
+		!def: V do abort
 	do
 		if has_key(k) then return self[k]
-		var d = default
+		var d = def
 		self[k] = d
 		return d
 	end
@@ -31,7 +31,7 @@ h["bleu"] = "blue"
 print "B:"
 
 print h.has_key("bleu")
-var v = h.get("bleu") with do
+var v = h.get("bleu") !def do
 	print "Error"
 	abort
 end
@@ -40,7 +40,7 @@ print v
 print "R:"
 
 print h.has_key("rouge")
-v = h.get("rouge") with do continue "red"
+v = h.get("rouge") !def do continue "red"
 print v
 print h.has_key("rouge")
 v = h.get("rouge")
@@ -49,7 +49,7 @@ print v
 print "N:"
 
 print h.has_key("noir")
-v = h.get("noir") with do break "black"
+v = h.get("noir") !def do break "black"
 print v
 print h.has_key("noir")
 

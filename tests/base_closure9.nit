@@ -31,7 +31,7 @@ class A
 	end
 
 	fun foo(i: Int, j: Char)
-		with bar
+		!bar
 	do
 		if i >= 3 then
 			indent(i, j, '{')
@@ -41,9 +41,9 @@ class A
 		end
 
 		indent(i, j, '[')
-		foo(i+1, 'a') with do
-			foo(i+1, 'b') with do
-				foo(i+1, 'c') with do
+		foo(i+1, 'a') !bar do
+			foo(i+1, 'b') !bar do
+				foo(i+1, 'c') !bar do
 					indent(i, j, '<')
 					bar
 					indent(i, j, '>')
@@ -58,9 +58,9 @@ fun start
 do
 	var a = new A
 	0.output
-	a.foo(0, 'A') with do 
-		a.foo(0, 'B') with do 
-			a.foo(0, 'C') with do 
+	a.foo(0, 'A') !bar do
+		a.foo(0, 'B') !bar do
+			a.foo(0, 'C') !bar do
 				1.output
 				#alt1# break
 				#alt2# return

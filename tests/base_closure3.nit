@@ -18,7 +18,7 @@ import kernel
 
 class A
 	fun foo(i, j: Int)
-		with bar(k, l: Int, a: A)
+		!bar(k, l: Int, a: A)
 	do
 		i.output
 		bar(i+1, j-1, self)
@@ -29,10 +29,10 @@ end
 
 var a = new A
 0.output
-a.foo(1,8) with x, y, b do #!alt2#
-#alt2#a.foo(1,8) with x, y do
+a.foo(1,8) !bar x, y, b do #!alt2#
+#alt2#a.foo(1,8) !bar x, y do
 	x.output
-	b.foo(x+1, y-1) with z, t, c do
+	b.foo(x+1, y-1) !bar z, t, c do
 		z.output
 		#alt4#break
 		#alt5#break 'x'

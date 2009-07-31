@@ -17,19 +17,19 @@
 import kernel
 
 fun foo
-	with bar do end
-	with baz do end
+	!bar do end
+	!baz do end
 do
 	bar
 	baz
 end
 
 1.output
-foo with do
+foo !bar do
 	2.output
-	foo with do
+	foo !bar do
 		3.output
-		foo with do end label l3
+		foo !bar do end label l3
 		#alt1#break label l2
 		#alt2#break label l3
 		#alt3#break label l4
@@ -37,14 +37,14 @@ foo with do
 		#alt5#continue label l1
 		break label l1
 		4.output
-	with do
+	!baz do
 		40.output
 	end label l2#!alt6#
 	#alt6#end label l1
 	5.output
-with do
+!baz do
 	50.output
 end label l1
 6.output
 
-#alt7#foo with do end label l1
+#alt7#foo !bar do end label l1

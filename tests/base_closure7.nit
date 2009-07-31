@@ -17,7 +17,7 @@
 import kernel
 
 fun repeat(x: Int)
-	with each(i: Int)
+	!each(i: Int)
 do
 	var c = 0
 	while c < x do
@@ -28,9 +28,9 @@ end
 
 fun work
 do
-	repeat(4) with i do
+	repeat(4) !each i do
 		i.output
-		repeat(4) with j do
+		repeat(4) !each j do
 			if i == 1 and j == 1 then continue
 			if i == 2 and j == 2 then break
 			if i == 3 and j == 3 then return

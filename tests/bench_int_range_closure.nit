@@ -17,7 +17,7 @@
 
 redef class Range[K]
 	fun for_each(x: Int)
-		with each(i: K)
+		!each(i: K)
 	do
 		var c = first
 		var s = after
@@ -34,9 +34,9 @@ if not args.is_empty then nb = args.first.to_i
 
 var cpt = 0
 var r = [0..nb[
-r.for_each(0) with ii1 do
-	r.for_each(1) with ii2 do
-		r.for_each(2) with ii3 do
+r.for_each(0) !each ii1 do
+	r.for_each(1) !each ii2 do
+		r.for_each(2) !each ii3 do
 			if ii1 == ii2 and ii2 == ii3 then cpt += 1
 		end
 	end

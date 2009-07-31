@@ -41,9 +41,12 @@ syn region NITString matchgroup=NITStringDelimit start="'"  end="'"  skip="\\\\\
 " Labels
 syn match NITLabel "\<label \h\w*"
 
+" Closures
+syn match NITClosure "!\h\w*"
+
 " Fallback highlight keywords
 syn match NITNull "\<\(null\)\>"
-syn match NITControl "\<\(init\|end\|not null\|not\|var\|do\|then\|else\|with\)\>"
+syn match NITControl "\<\(init\|end\|not null\|not\|var\|do\|then\|else\)\>"
 " Unmatchning error
 syn match Error "\<end\>"
 
@@ -55,7 +58,7 @@ syn region NITTypeDecl matchgroup=NITDefine start="\<type\>\s*" matchgroup=NONE 
 syn region NITAttrDecl matchgroup=NITDefine start="\<var\>\s*\ze_" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 syn region NITInitDecl matchgroup=NITDefine start="\<init\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 
-syn region NITStmtBlock matchgroup=NITControl start="\<\(do\|then\|else\)\>\ze\s*\(#\|$\)" matchgroup=NITControl end="^\s*\<\(end\|\zeelse\|with\)\>" contains=ALLBUT,NITTypeDecl,NITAttrDecl,NITInitDecl
+syn region NITStmtBlock matchgroup=NITControl start="\<\(do\|then\|else\)\>\ze\s*\(#\|$\)" matchgroup=NITControl end="^\s*\<\(end\|\zeelse\|\ze!\)\>" contains=ALLBUT,NITTypeDecl,NITAttrDecl,NITInitDecl
 syn region NITStmtBlock matchgroup=NITControl start="\<\(do\|then\|else\)\>" matchgroup=NITControl end="\<end\>" oneline
 
 if !exists("NIT_minlines")
@@ -93,6 +96,7 @@ hi def link NITNull			Constant
 hi def link NITSelf			Constant
 hi def link NITClass			Type
 hi def link NITAttribute		Identifier
+hi def link NITClosure			Function
 hi def link NITSharpBang		PreProc
 hi def link NITKeyword			Keyword
 

@@ -1578,8 +1578,8 @@ redef class AClosureDef
 		_escapable = esc
 
 		var sig = esc.closure.signature
-		if sig.arity != n_id.length then
-			v.error(self, "Error: {sig.arity} automatic variable names expected, {n_id.length} found.")
+		if sig.arity != n_ids.length then
+			v.error(self, "Error: {sig.arity} automatic variable names expected, {n_ids.length} found.")
 			return
 		end
 
@@ -1590,8 +1590,8 @@ redef class AClosureDef
 		v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
 		variables = new Array[AutoVariable]
-		for i in [0..n_id.length[ do
-			var va = new AutoVariable(n_id[i].to_symbol, self)
+		for i in [0..n_ids.length[ do
+			var va = new AutoVariable(n_ids[i].to_symbol, self)
 			variables.add(va)
 			va.stype = sig[i]
 			v.variable_ctx.add(va)

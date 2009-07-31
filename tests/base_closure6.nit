@@ -18,7 +18,7 @@ import kernel
 
 class A
 	fun foo: U
-		with bar
+		!bar
 	do
 		return new U
 	end
@@ -49,18 +49,18 @@ var w: W = new W
 
 var y: Object
 #alt1#var y: U
-y = a.foo with do 0.output
-y = a.foo with do break t
-y = a.foo with do break u
-y = a.foo with do break v
-y = a.foo with do break w
-y = a.foo with do
+y = a.foo !bar do 0.output
+y = a.foo !bar do break t
+y = a.foo !bar do break u
+y = a.foo !bar do break v
+y = a.foo !bar do break w
+y = a.foo !bar do
 	break t
 	break u
 	break v
 	break w
 end
-y = a.foo with do
+y = a.foo !bar do
 	break u
 	break v
 	break w

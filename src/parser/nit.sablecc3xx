@@ -102,7 +102,6 @@ kwtrue = 'true';
 kwfalse = 'false';
 kwnull = 'null';
 kwas = 'as';
-kwwith = 'with';
 kwnullable = 'nullable';
 kwisset = 'isset';
 kwlabel = 'label';
@@ -132,6 +131,7 @@ le = '<=';
 gt = '>';
 ge = '>=';
 starship = '<=>';
+bang='!';
 
 classid = uppercase letter*;
 id = lowercase letter*;
@@ -273,8 +273,8 @@ param
 closure_decls {->closure_decl*}
 	= no closure_decl+ {-> [closure_decl]};
 closure_decl
-	= kwwith kwbreak? [no2]:no id signature_noclosures n {-> New closure_decl(kwwith, kwbreak, id, signature_noclosures.signature, Null)}
-	| {optionnal} kwwith kwbreak? [no2]:no id signature_noclosures kwdo stmtso n {-> New closure_decl(kwwith, kwbreak, id, signature_noclosures.signature, stmtso.expr)}
+	= kwbreak? bang id signature_noclosures n {-> New closure_decl(kwbreak, bang, id, signature_noclosures.signature, Null)}
+	| {optionnal} kwbreak? bang id signature_noclosures kwdo stmtso n {-> New closure_decl(kwbreak, bang, id, signature_noclosures.signature, stmtso.expr)}
 	;
 
 /* TYPES *********************************************************************/
@@ -325,13 +325,17 @@ closure_defs~withelse {-> closure_def*}
 	;
 
 closure_def_last~withelse {-> closure_def}
-	= kwwith idlist? kwdo stmtso~withelse_withend label? {-> New closure_def(kwwith, [idlist.id], kwdo, stmtso~withelse_withend.expr, label)}
-	| {noend} kwwith idlist? kwdo stmt~withelse {-> New closure_def(kwwith, [idlist.id], kwdo, stmt~withelse.expr, Null)}
+	= bang [id]:closure_id idlist? kwdo stmtso~withelse_withend label? {-> New closure_def(bang, id, [idlist.id], kwdo, stmtso~withelse_withend.expr, label)}
+	| {noend} bang [id]:closure_id idlist? kwdo stmt~withelse {-> New closure_def(bang, id, [idlist.id], kwdo, stmt~withelse.expr, Null)}
 	;
 
 closure_def {-> closure_def}
-	= kwwith idlist? kwdo n stmts [n2]:n {-> New closure_def(kwwith, [idlist.id], kwdo, stmts.expr, Null)}
-	| {empty} kwwith idlist? kwdo n {-> New closure_def(kwwith, [idlist.id], kwdo, Null, Null)}
+	= bang [id]:closure_id idlist? kwdo n stmts [n2]:n {-> New closure_def(bang, id, [idlist.id], kwdo, stmts.expr, Null)}
+	| {empty} bang [id]:closure_id idlist? kwdo n {-> New closure_def(bang, id, [idlist.id], kwdo, Null, Null)}
+	;
+closure_id
+	= {simple} id
+	| {break} kwbreak
 	;
 
 vardecl~withelse{-> expr}
@@ -504,8 +508,12 @@ braargs	{-> expr*}
 args_tail {-> expr} 
 	= comma no expr [n2]:no {-> expr};
 idlist {-> id*}
+	= opar idlist_nopar cpar {-> [idlist_nopar.id]}
+	| {nopar} idlist_nopar {-> [idlist_nopar.id]}
+	;
+idlist_nopar {-> id*}
 	= {single} id {-> [id]}
-	| {more} idlist no comma [n2]:no id {-> [idlist.id, id]}
+	| {more} idlist_nopar no comma [n2]:no id {-> [idlist_nopar.id, id]}
 	;
 
 qualified 
@@ -588,7 +596,7 @@ signature = [params]:param* type? [closure_decls]:closure_decl*;
 param	= id type? dotdotdot? 
 	;
 
-closure_decl = kwwith kwbreak? id signature expr?
+closure_decl = kwbreak? bang id signature expr?
 	;
 
 type	= kwnullable? [id]:classid [types]:type*;
@@ -672,7 +680,11 @@ assign_op
 	;
 
 closure_def
-	= kwwith id* kwdo expr? label?
+	= bang [id]:closure_id [ids]:id* kwdo expr? label?
+	;
+closure_id
+	= {simple} id
+	| {break} kwbreak
 	;
 
 qualified = id* classid? ;

@@ -18,7 +18,7 @@ import kernel
 
 class A
 	fun foo
-		with bar do
+		!bar do
 			#alt1# return
 			#alt2# return 1
 			#alt3# abort
@@ -35,7 +35,7 @@ end
 
 var a = new A
 0.output
-a.foo with do 2.output
+a.foo !bar do 2.output
 0.output
 a.foo
 0.output

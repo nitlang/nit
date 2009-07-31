@@ -19,10 +19,10 @@ import base_closure2
 class B
 special A
 	redef fun foo
-		with bar(i: Int) #!alt13# #!alt14# #!alt15#
-		#alt13# with bar
-		#alt14# with bar(b: Bool)
-		#alt15# with bar(i: Int): Int
+		!bar(i: Int) #!alt13# #!alt14# #!alt15#
+		#alt13# !bar
+		#alt14# !bar(b: Bool)
+		#alt15# !bar(i: Int): Int
 	do
 		10.output
 		bar(20) #!alt1#
@@ -36,8 +36,8 @@ end
 fun work2
 do
 	var a: A = new B
-	a.foo with x do #!alt11#
-	#alt11#a.foo with do
+	a.foo !bar x do #!alt11#
+	#alt11#a.foo !bar do
 		x.output
 		#alt4#break
 		#alt5#break 'x'

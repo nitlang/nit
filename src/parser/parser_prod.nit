@@ -3831,17 +3831,17 @@ redef class AParam
     end
 end
 redef class AClosureDecl
-    redef fun n_kwwith=(n)
-    do
-        _n_kwwith = n
-	n.parent = self
-    end
     redef fun n_kwbreak=(n)
     do
         _n_kwbreak = n
         if n != null then
 	    n.parent = self
         end
+    end
+    redef fun n_bang=(n)
+    do
+        _n_bang = n
+	n.parent = self
     end
     redef fun n_id=(n)
     do
@@ -3864,20 +3864,20 @@ redef class AClosureDecl
     private init empty_init do end
 
     init init_aclosuredecl (
-            n_kwwith: nullable TKwwith,
             n_kwbreak: nullable TKwbreak,
+            n_bang: nullable TBang,
             n_id: nullable TId,
             n_signature: nullable ASignature,
             n_expr: nullable AExpr
     )
     do
         empty_init
-        _n_kwwith = n_kwwith.as(not null)
-	n_kwwith.parent = self
         _n_kwbreak = n_kwbreak
 	if n_kwbreak != null then
 		n_kwbreak.parent = self
 	end
+        _n_bang = n_bang.as(not null)
+	n_bang.parent = self
         _n_id = n_id.as(not null)
 	n_id.parent = self
         _n_signature = n_signature.as(not null)
@@ -3890,16 +3890,6 @@ redef class AClosureDecl
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
-        if _n_kwwith == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TKwwith
-                _n_kwwith = new_child
-	    else
-		abort
-            end
-            return
-	end
         if _n_kwbreak == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -3907,6 +3897,16 @@ redef class AClosureDecl
                 _n_kwbreak = new_child
 	    else
 		_n_kwbreak = null
+            end
+            return
+	end
+        if _n_bang == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TBang
+                _n_bang = new_child
+	    else
+		abort
             end
             return
 	end
@@ -3944,10 +3944,10 @@ redef class AClosureDecl
 
     redef fun visit_all(v: Visitor)
     do
-        v.enter_visit(_n_kwwith)
         if _n_kwbreak != null then
             v.enter_visit(_n_kwbreak.as(not null))
         end
+        v.enter_visit(_n_bang)
         v.enter_visit(_n_id)
         v.enter_visit(_n_signature)
         if _n_expr != null then
@@ -3957,10 +3957,10 @@ redef class AClosureDecl
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.enter_visit(_n_kwwith)
         if _n_kwbreak != null then
             v.enter_visit(_n_kwbreak.as(not null))
         end
+        v.enter_visit(_n_bang)
         v.enter_visit(_n_id)
         v.enter_visit(_n_signature)
         if _n_expr != null then
@@ -9392,9 +9392,14 @@ redef class AMinusAssignOp
     end
 end
 redef class AClosureDef
-    redef fun n_kwwith=(n)
+    redef fun n_bang=(n)
     do
-        _n_kwwith = n
+        _n_bang = n
+	n.parent = self
+    end
+    redef fun n_id=(n)
+    do
+        _n_id = n
 	n.parent = self
     end
     redef fun n_kwdo=(n)
@@ -9420,19 +9425,22 @@ redef class AClosureDef
     private init empty_init do end
 
     init init_aclosuredef (
-            n_kwwith: nullable TKwwith,
-            n_id: Collection[Object], # Should be Collection[TId]
+            n_bang: nullable TBang,
+            n_id: nullable AClosureId,
+            n_ids: Collection[Object], # Should be Collection[TId]
             n_kwdo: nullable TKwdo,
             n_expr: nullable AExpr,
             n_label: nullable ALabel
     )
     do
         empty_init
-        _n_kwwith = n_kwwith.as(not null)
-	n_kwwith.parent = self
-	for n in n_id do
+        _n_bang = n_bang.as(not null)
+	n_bang.parent = self
+        _n_id = n_id.as(not null)
+	n_id.parent = self
+	for n in n_ids do
 		assert n isa TId
-		_n_id.add(n)
+		_n_ids.add(n)
 		n.parent = self
 	end
         _n_kwdo = n_kwdo.as(not null)
@@ -9449,24 +9457,34 @@ redef class AClosureDef
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
-        if _n_kwwith == old_child then
+        if _n_bang == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa TKwwith
-                _n_kwwith = new_child
+		assert new_child isa TBang
+                _n_bang = new_child
 	    else
 		abort
             end
             return
 	end
-        for i in [0.._n_id.length[ do
-            if _n_id[i] == old_child then
+        if _n_id == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AClosureId
+                _n_id = new_child
+	    else
+		abort
+            end
+            return
+	end
+        for i in [0.._n_ids.length[ do
+            if _n_ids[i] == old_child then
                 if new_child != null then
 		    assert new_child isa TId
-                    _n_id[i] = new_child
+                    _n_ids[i] = new_child
                     new_child.parent = self
                 else
-                    _n_id.remove_at(i)
+                    _n_ids.remove_at(i)
                 end
                 return
             end
@@ -9505,8 +9523,9 @@ redef class AClosureDef
 
     redef fun visit_all(v: Visitor)
     do
-        v.enter_visit(_n_kwwith)
-            for n in _n_id do
+        v.enter_visit(_n_bang)
+        v.enter_visit(_n_id)
+            for n in _n_ids do
                 v.enter_visit(n)
 	    end
         v.enter_visit(_n_kwdo)
@@ -9520,11 +9539,12 @@ redef class AClosureDef
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.enter_visit(_n_kwwith)
+        v.enter_visit(_n_bang)
+        v.enter_visit(_n_id)
 	do
-	    var i = _n_id.length
+	    var i = _n_ids.length
             while i >= 0 do
-                v.enter_visit(_n_id[i])
+                v.enter_visit(_n_ids[i])
 		i = i - 1
 	    end
 	end
@@ -9535,6 +9555,90 @@ redef class AClosureDef
         if _n_label != null then
             v.enter_visit(_n_label.as(not null))
         end
+    end
+end
+redef class ASimpleClosureId
+    redef fun n_id=(n)
+    do
+        _n_id = n
+	n.parent = self
+    end
+
+    private init empty_init do end
+
+    init init_asimpleclosureid (
+            n_id: nullable TId
+    )
+    do
+        empty_init
+        _n_id = n_id.as(not null)
+	n_id.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_id == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TId
+                _n_id = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_id)
+    end
+
+    redef fun visit_all_reverse(v: Visitor)
+    do
+        v.enter_visit(_n_id)
+    end
+end
+redef class ABreakClosureId
+    redef fun n_kwbreak=(n)
+    do
+        _n_kwbreak = n
+	n.parent = self
+    end
+
+    private init empty_init do end
+
+    init init_abreakclosureid (
+            n_kwbreak: nullable TKwbreak
+    )
+    do
+        empty_init
+        _n_kwbreak = n_kwbreak.as(not null)
+	n_kwbreak.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_kwbreak == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwbreak
+                _n_kwbreak = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_kwbreak)
+    end
+
+    redef fun visit_all_reverse(v: Visitor)
+    do
+        v.enter_visit(_n_kwbreak)
     end
 end
 redef class AQualified

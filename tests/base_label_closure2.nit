@@ -17,18 +17,18 @@
 import kernel
 
 fun foo: Int
-	with bar: Int
+	!bar: Int
 do
-	var i = bar with do 'X'.output
+	var i = bar !break do 'X'.output
 	return i * 10
 end
 
 1.output
-var i = foo with do
+var i = foo !bar do
 	2.output
-	var j = foo with do
+	var j = foo !bar do
 		3.output
-		foo with do
+		foo !bar do
 			continue 0
 		end label l3
 		#alt1#break label l2 10
@@ -47,6 +47,6 @@ end label l1
 i.output
 6.output
 
-#alt7#foo with do
+#alt7#foo !bar do
 #alt7#	continue 0
 #alt7#end label l1
