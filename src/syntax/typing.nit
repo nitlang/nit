@@ -1517,6 +1517,14 @@ end
 redef class ABraExpr
 	redef fun name do return once "[]".to_symbol
 	redef fun compute_raw_arguments do return n_args.to_a
+	redef fun closure_defs
+	do
+		if n_closure_defs.is_empty then
+			return null
+		else
+			return n_closure_defs.to_a
+		end
+	end
 end
 
 redef class ABraAssignExpr

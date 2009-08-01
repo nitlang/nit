@@ -56,12 +56,12 @@ class Array[E]
 end
 
 class Map[K, V]
-	fun get(k: K): V
+	fun [](k: K): V
 		!def: V do abort
 	do
 		if _k == k then return _v
 		var n = _next
-		if n != null then return n.get(k) !def do continue def
+		if n != null then return n[k] !def do continue def
 		var v = def
 		_next = new Map[K, V](k, v)
 		return v
@@ -160,7 +160,7 @@ do
 	if not m.has_key('I') then (-1).output
 	'I'.output
 	'='.output
-	var i = m.get('I')
+	var i = m['I']
 	i.output
 	'\n'.output
 
@@ -169,7 +169,7 @@ do
 	if m.has_key('V') then (-2).output
 	'V'.output
 	'='.output
-	i = m.get('V') !def = '5'
+	i = m['V'] !def = '5'
 	i.output
 	'\n'.output
 
@@ -178,7 +178,7 @@ do
 	if not m.has_key('V') then (-3).output
 	'V'.output
 	'='.output
-	i = m.get('V') !def = '6'
+	i = m['V'] !def = '6'
 	i.output
 	'\n'.output
 
@@ -187,7 +187,7 @@ do
 	if m.has_key('X') then (-4).output
 	'X'.output
 	'='.output
-	i = m.get('X') !def do break '0'
+	i = m['X'] !def do break '0'
 	i.output
 	'\n'.output
 
