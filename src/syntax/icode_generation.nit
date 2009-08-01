@@ -1244,14 +1244,24 @@ redef class ASendExpr
 			closcns = new Array[nullable IClosureDef]
 			var cdarity = 0
 			if closure_defs != null then cdarity = closure_defs.length
-			for i in [0..cdarity[ do
-				closure_defs[i].escapable.break_seq = seq
-				closure_defs[i].escapable.break_value = r
-				var cn = closure_defs[i].generate_iclosuredef(v)
-				closcns.add(cn)
-			end
-			for i in [cdarity..prop_signature.closures.length[ do
-				closcns.add(null)
+			var closure_defs = closure_defs
+			for mmc in prop_signature.closures do
+				var found = false
+				var name = mmc.name
+				if closure_defs != null then
+					for cd in closure_defs do
+						if cd.n_id.to_symbol != name then continue
+						assert found == false
+						found = true
+						cd.escapable.break_seq = seq
+						cd.escapable.break_value = r
+						var cn = cd.generate_iclosuredef(v)
+						closcns.add(cn)
+					end
+				end
+				if not found then
+					closcns.add(null)
+				end
 			end
 		end
 

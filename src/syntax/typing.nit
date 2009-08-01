@@ -1124,12 +1124,23 @@ redef class AAbsAbsSendExpr
 
 				# Process each closure definition
 				for i in [0..arity[ do
-					var csi = cs[i]
 					var cdi = cd[i]
-					var esc = new EscapableClosure(cdi, csi, break_list)
-					v.escapable_ctx.push(esc, n_label)
-					cdi.accept_typing2(v, esc)
-					v.escapable_ctx.pop
+					var cni = cdi.n_id.to_symbol
+					var csi = psig.closure_named(cni)
+					if csi != null then
+						var esc = new EscapableClosure(cdi, csi, break_list)
+						v.escapable_ctx.push(esc, n_label)
+						cdi.accept_typing2(v, esc)
+						v.escapable_ctx.pop
+					else if cs.length == 1 then
+						v.error(cdi.n_id, "Error: no closure named '!{cni}' in {name}; only closure is !{cs.first.name}.")
+					else
+						var a = new Array[String]
+						for c in cs do
+							a.add("!{c.name}")
+						end
+						v.error(cdi.n_id, "Error: no closure named '!{cni}' in {name}; only closures are {a.join(",")}.")
+					end
 				end
 
 				# Check break type conformity
@@ -1565,6 +1576,16 @@ redef class AClosureCallExpr
 		_stype = sig.return_type
 		_is_typed = true
 	end
+end
+
+redef class AClosureId
+	fun to_symbol: Symbol is abstract
+end
+redef class ASimpleClosureId
+	redef fun to_symbol: Symbol do return n_id.to_symbol
+end
+redef class ABreakClosureId
+	redef fun to_symbol: Symbol do return n_kwbreak.to_symbol
 end
 
 redef class AClosureDef

@@ -81,6 +81,15 @@ class MMSignature
 	# The closure parameters
 	readable var _closures: Array[MMClosure] = new Array[MMClosure]
 
+	# Return the closure named 'name'. Null if no such a closure exists.
+	fun closure_named(name: Symbol): nullable MMClosure
+	do
+		for c in _closures do
+			if c.name == name then return c
+		end
+		return null
+	end
+
 	# Number of parameters
 	fun arity: Int
 	do
@@ -214,6 +223,9 @@ end
 
 # A closure in a signature
 class MMClosure
+	# The name of the closure (without the !)
+	readable var _name: Symbol
+
 	# The signature of the closure
 	readable var _signature: MMSignature
 
@@ -228,11 +240,12 @@ class MMClosure
 	# Adapt the signature to a different receiver
 	fun adaptation_to(r: MMType): MMClosure
 	do
-		return new MMClosure(_signature.adaptation_to(r), _is_break, _is_optional)
+		return new MMClosure(_name, _signature.adaptation_to(r), _is_break, _is_optional)
 	end
 
-	init(s: MMSignature, is_break: Bool, is_optional: Bool)
+	init(name: Symbol, s: MMSignature, is_break: Bool, is_optional: Bool)
 	do
+		_name = name
 		_signature = s
 		_is_break = is_break
 		_is_optional = is_optional
@@ -242,7 +255,7 @@ class MMClosure
 	do
 		var sig = _signature.not_for_self
 		if sig != _signature then
-			return new MMClosure(sig, _is_break, _is_optional)
+			return new MMClosure(_name, sig, _is_break, _is_optional)
 		else
 			return self
 		end

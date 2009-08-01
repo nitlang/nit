@@ -15,11 +15,11 @@
 # limitations under the License.
 
 import kernel
-
 fun a
 	!a1
 	!a2 #!alt1#
 #alt2#	!a3
+#alt6#  !a1
 do
 	a1
 	a2 #!alt1#

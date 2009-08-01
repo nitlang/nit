@@ -16,7 +16,7 @@ do
 	0.output
 	var i = 0
 	while i < 3 do
-		foo !each do
+		foo !k do
 			' '.output
 			' '.output
 			'<'.output

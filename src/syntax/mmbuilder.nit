@@ -1228,10 +1228,17 @@ redef class AClosureDecl
 
 		# Add the finalizer to the closure signature
 		var finalize_sig = new MMSignature(new Array[MMType], null, v.module.type_any) # FIXME should be no receiver
-		var finalizer_clos = new MMClosure(finalize_sig, false, true)
+		var finalizer_clos = new MMClosure(once ("break".to_symbol), finalize_sig, false, true)
 		sig.closures.add(finalizer_clos)
 
-		var clos = new MMClosure(sig, n_kwbreak != null, n_expr != null)
+		var name = n_id.to_symbol
+		var clos = new MMClosure(name, sig, n_kwbreak != null, n_expr != null)
+		for c in old_signature_builder.closure_decls do
+			if c.n_id.to_symbol == name then
+				v.error(n_id, "A closure '!{name}' already defined at {c.n_id.location.relative_to(n_id.location)}.")
+				return
+			end
+		end
 		v.signature_builder = old_signature_builder
 		_position = old_signature_builder.closure_decls.length
 		old_signature_builder.closure_decls.add(self)
