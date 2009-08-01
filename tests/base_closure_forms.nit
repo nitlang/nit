@@ -143,9 +143,9 @@ fun test_sort
 do
 	var a = new Array[Char]('2', '1')
 	a.output
-	a.sort !cmp(x, y) do continue x <=> y
+	a.sort !cmp(x, y) = x <=> y
 	a.output
-	a.sort !cmp(x, y) do continue y <=> x
+	a.sort !cmp(x, y) = y <=> x
 	a.output
 	a.iterate !each i do i.output
 	'\n'.output
@@ -169,7 +169,7 @@ do
 	if m.has_key('V') then (-2).output
 	'V'.output
 	'='.output
-	i = m.get('V') !def do continue '5'
+	i = m.get('V') !def = '5'
 	i.output
 	'\n'.output
 
@@ -178,7 +178,7 @@ do
 	if not m.has_key('V') then (-3).output
 	'V'.output
 	'='.output
-	i = m.get('V') !def do continue '6'
+	i = m.get('V') !def = '6'
 	i.output
 	'\n'.output
 

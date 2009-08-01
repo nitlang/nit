@@ -575,7 +575,7 @@ special AExpr
 end
 class AReturnExpr
 special AExpr
-    readable writable var _n_kwreturn: TKwreturn
+    readable writable var _n_kwreturn: nullable TKwreturn = null
     readable writable var _n_expr: nullable AExpr = null
 end
 class ALabelable
@@ -595,7 +595,7 @@ end
 class AContinueExpr
 special AExpr
 special ALabelable
-    readable writable var _n_kwcontinue: TKwcontinue
+    readable writable var _n_kwcontinue: nullable TKwcontinue = null
     readable writable var _n_expr: nullable AExpr = null
 end
 class ADoExpr
@@ -929,7 +929,7 @@ special ALabelable
     readable writable var _n_bang: TBang
     readable writable var _n_id: AClosureId
     readable writable var _n_ids: List[TId] = new List[TId]
-    readable writable var _n_kwdo: TKwdo
+    readable writable var _n_kwdo: nullable TKwdo = null
     readable writable var _n_expr: nullable AExpr = null
 end
 class AClosureId

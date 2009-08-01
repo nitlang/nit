@@ -208,6 +208,7 @@ propdefs_tail~toplevel {-> propdef}
 	;
 propdef~toplevel {-> propdef}
 	= {meth} [doc]:no redef visibility kwmeth methid signature kwdo stmtso kwend? {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, stmtso.expr)}
+	| {assign_return} [doc]:no redef visibility kwmeth methid_noassign signature_withret assign no assign_return {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid_noassign.methid, signature_withret.signature, assign_return.expr)}
 !toplevel| {deferred} [doc]:no redef visibility kwmeth methid signature kwis kwabstract {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
 !toplevel| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
 	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string? {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, string)}
@@ -232,28 +233,30 @@ visibility
 	| {intrude} kwintrude no {-> New visibility.intrude(kwintrude)}
 	;
 
-methid
-	= {id} id
-	| {plus} plus
-	| {minus} minus
-	| {star} star
-	| {slash} slash
-	| {percent} percent
-	| {eq} eq
-	| {ne} ne
-	| {le} le
-	| {ge} ge
-	| {lt} lt
-	| {gt} gt
-	| {bra} obra cbra
-	| {starship} starship
-	| {assign} id assign
-	| {braassign} obra cbra assign
+methid~noassign {-> methid}
+	= {id} id {-> New methid.id(id)}
+	| {plus} plus {-> New methid.plus(plus)}
+	| {minus} minus {-> New methid.minus(minus)}
+	| {star} star {-> New methid.star(star)}
+	| {slash} slash {-> New methid.slash(slash)}
+	| {percent} percent {-> New methid.percent(percent)}
+	| {eq} eq {-> New methid.eq(eq)}
+	| {ne} ne {-> New methid.ne(ne)}
+	| {le} le {-> New methid.le(le)}
+	| {ge} ge {-> New methid.ge(ge)}
+	| {lt} lt {-> New methid.lt(lt)}
+	| {gt} gt {-> New methid.gt(gt)}
+	| {bra} obra cbra {-> New methid.bra(obra, cbra)}
+	| {starship} starship {-> New methid.starship(starship)}
+!noassign	| {assign} id assign {-> New methid.assign(id, assign)}
+!noassign	| {braassign} obra cbra assign {-> New methid.braassign(obra, cbra, assign)}
 	;
 
-signature
-	= params? typing? closure_decls {-> New signature([params.param], typing.type, [closure_decls.closure_decl])}
-	| {noclosures} params? typing? no {-> New signature([params.param], typing.type, [])}
+signature~withret {-> signature}
+	= params? typing closure_decls {-> New signature([params.param], typing.type, [closure_decls.closure_decl])}
+	| {noclosures} params? typing no {-> New signature([params.param], typing.type, [])}
+!withret| {noret} params? closure_decls {-> New signature([params.param], Null, [closure_decls.closure_decl])}
+!withret| {noretnoclosures} params? no {-> New signature([params.param], Null, [])}
 	;
 
 signature_noclosures {-> signature}
@@ -275,7 +278,13 @@ closure_decls {->closure_decl*}
 closure_decl
 	= kwbreak? bang id signature_noclosures n {-> New closure_decl(kwbreak, bang, id, signature_noclosures.signature, Null)}
 	| {optionnal} kwbreak? bang id signature_noclosures kwdo stmtso n {-> New closure_decl(kwbreak, bang, id, signature_noclosures.signature, stmtso.expr)}
+	| {assign} kwbreak? bang id signature_noclosures assign no assign_continue n {-> New closure_decl(kwbreak, bang, id, signature_noclosures.signature, assign_continue.expr)}
 	;
+
+assign_return{-> expr}
+	= expr_final {-> New expr.return(Null, expr_final.expr)}
+	;
+
 
 /* TYPES *********************************************************************/
 type~nobra {-> type}
@@ -327,6 +336,7 @@ closure_defs~withelse {-> closure_def*}
 closure_def_last~withelse {-> closure_def}
 	= bang [id]:closure_id idlist? kwdo stmtso~withelse_withend label? {-> New closure_def(bang, id, [idlist.id], kwdo, stmtso~withelse_withend.expr, label)}
 	| {noend} bang [id]:closure_id idlist? kwdo stmt~withelse {-> New closure_def(bang, id, [idlist.id], kwdo, stmt~withelse.expr, Null)}
+	| {assign} bang [id]:closure_id idlist? assign no assign_continue~withelse {-> New closure_def(bang, id, [idlist.id], Null, assign_continue~withelse.expr, Null)}
 	;
 
 closure_def {-> closure_def}
@@ -336,6 +346,10 @@ closure_def {-> closure_def}
 closure_id
 	= {simple} id
 	| {break} kwbreak
+	;
+
+assign_continue~withelse{-> expr}
+	= expr_final~withelse {-> New expr.continue(Null, Null, expr_final~withelse.expr)}
 	;
 
 vardecl~withelse{-> expr}
@@ -605,10 +619,10 @@ label = kwlabel id;
 
 expr	= {block} expr* 
 	| {vardecl} kwvar id type? assign? expr? 
-	| {return} kwreturn expr? 
+	| {return} kwreturn? expr?
 	| {break} kwbreak label? expr?
 	| {abort} kwabort
-	| {continue} kwcontinue label? expr?
+	| {continue} kwcontinue? label? expr?
 	| {do} kwdo [block]:expr? label?
 	| {if} kwif expr [then]:expr? [else]:expr? 
 	| {ifexpr} kwif expr kwthen [then]:expr kwelse [else]:expr
@@ -680,7 +694,7 @@ assign_op
 	;
 
 closure_def
-	= bang [id]:closure_id [ids]:id* kwdo expr? label?
+	= bang [id]:closure_id [ids]:id* kwdo? expr? label?
 	;
 closure_id
 	= {simple} id

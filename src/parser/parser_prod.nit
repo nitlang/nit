@@ -4328,7 +4328,9 @@ redef class AReturnExpr
     redef fun n_kwreturn=(n)
     do
         _n_kwreturn = n
-	n.parent = self
+        if n != null then
+	    n.parent = self
+        end
     end
     redef fun n_expr=(n)
     do
@@ -4346,8 +4348,10 @@ redef class AReturnExpr
     )
     do
         empty_init
-        _n_kwreturn = n_kwreturn.as(not null)
-	n_kwreturn.parent = self
+        _n_kwreturn = n_kwreturn
+	if n_kwreturn != null then
+		n_kwreturn.parent = self
+	end
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -4362,7 +4366,7 @@ redef class AReturnExpr
 		assert new_child isa TKwreturn
                 _n_kwreturn = new_child
 	    else
-		abort
+		_n_kwreturn = null
             end
             return
 	end
@@ -4380,7 +4384,9 @@ redef class AReturnExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.enter_visit(_n_kwreturn)
+        if _n_kwreturn != null then
+            v.enter_visit(_n_kwreturn.as(not null))
+        end
         if _n_expr != null then
             v.enter_visit(_n_expr.as(not null))
         end
@@ -4388,7 +4394,9 @@ redef class AReturnExpr
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.enter_visit(_n_kwreturn)
+        if _n_kwreturn != null then
+            v.enter_visit(_n_kwreturn.as(not null))
+        end
         if _n_expr != null then
             v.enter_visit(_n_expr.as(not null))
         end
@@ -4538,7 +4546,9 @@ redef class AContinueExpr
     redef fun n_kwcontinue=(n)
     do
         _n_kwcontinue = n
-	n.parent = self
+        if n != null then
+	    n.parent = self
+        end
     end
     redef fun n_label=(n)
     do
@@ -4564,8 +4574,10 @@ redef class AContinueExpr
     )
     do
         empty_init
-        _n_kwcontinue = n_kwcontinue.as(not null)
-	n_kwcontinue.parent = self
+        _n_kwcontinue = n_kwcontinue
+	if n_kwcontinue != null then
+		n_kwcontinue.parent = self
+	end
         _n_label = n_label
 	if n_label != null then
 		n_label.parent = self
@@ -4584,7 +4596,7 @@ redef class AContinueExpr
 		assert new_child isa TKwcontinue
                 _n_kwcontinue = new_child
 	    else
-		abort
+		_n_kwcontinue = null
             end
             return
 	end
@@ -4612,7 +4624,9 @@ redef class AContinueExpr
 
     redef fun visit_all(v: Visitor)
     do
-        v.enter_visit(_n_kwcontinue)
+        if _n_kwcontinue != null then
+            v.enter_visit(_n_kwcontinue.as(not null))
+        end
         if _n_label != null then
             v.enter_visit(_n_label.as(not null))
         end
@@ -4623,7 +4637,9 @@ redef class AContinueExpr
 
     redef fun visit_all_reverse(v: Visitor)
     do
-        v.enter_visit(_n_kwcontinue)
+        if _n_kwcontinue != null then
+            v.enter_visit(_n_kwcontinue.as(not null))
+        end
         if _n_label != null then
             v.enter_visit(_n_label.as(not null))
         end
@@ -9405,7 +9421,9 @@ redef class AClosureDef
     redef fun n_kwdo=(n)
     do
         _n_kwdo = n
-	n.parent = self
+        if n != null then
+	    n.parent = self
+        end
     end
     redef fun n_expr=(n)
     do
@@ -9443,8 +9461,10 @@ redef class AClosureDef
 		_n_ids.add(n)
 		n.parent = self
 	end
-        _n_kwdo = n_kwdo.as(not null)
-	n_kwdo.parent = self
+        _n_kwdo = n_kwdo
+	if n_kwdo != null then
+		n_kwdo.parent = self
+	end
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -9495,7 +9515,7 @@ redef class AClosureDef
 		assert new_child isa TKwdo
                 _n_kwdo = new_child
 	    else
-		abort
+		_n_kwdo = null
             end
             return
 	end
@@ -9528,7 +9548,9 @@ redef class AClosureDef
             for n in _n_ids do
                 v.enter_visit(n)
 	    end
-        v.enter_visit(_n_kwdo)
+        if _n_kwdo != null then
+            v.enter_visit(_n_kwdo.as(not null))
+        end
         if _n_expr != null then
             v.enter_visit(_n_expr.as(not null))
         end
@@ -9548,7 +9570,9 @@ redef class AClosureDef
 		i = i - 1
 	    end
 	end
-        v.enter_visit(_n_kwdo)
+        if _n_kwdo != null then
+            v.enter_visit(_n_kwdo.as(not null))
+        end
         if _n_expr != null then
             v.enter_visit(_n_expr.as(not null))
         end
