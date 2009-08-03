@@ -206,7 +206,6 @@ for ii in "$@"; do
 			if [ -f "$f.args" ]; then
 				fargs=$f.args
 				cptr=0
-				cat $fargs |
 				while read line; do
 					((cptr=cptr+1))
 					args=$line
@@ -234,7 +233,7 @@ for ii in "$@"; do
 						cat "$fff.err" >> "$fff.res"
 					fi
 					process_result $fff
-				done
+				done < $fargs
 			fi
 		else
 			echo -n "! "
