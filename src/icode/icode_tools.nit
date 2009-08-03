@@ -93,7 +93,7 @@ end
 
 redef class IRoutine
 	# Inline an iroutine in an icode sequence
-	fun inline_in_seq(seq: ISeq, args: IndexedCollection[IRegister]): nullable IRegister
+	fun inline_in_seq(seq: ISeq, args: Sequence[IRegister]): nullable IRegister
 	do
 		var d = new ICodeDupContext
 		if args.length != params.length then print "{args.length} != {params.length}"
@@ -129,7 +129,7 @@ private class ICodeDupContext
 
 	# Duplicate a bunch of registers
 	# Subsequent invocation will return the same registers
-	fun dup_iregs(regs: IndexedCollection[IRegister]): IndexedCollection[IRegister]
+	fun dup_iregs(regs: Sequence[IRegister]): Sequence[IRegister]
 	do
 		var a = new Array[IRegister].with_capacity(regs.length)
 		for r in regs do

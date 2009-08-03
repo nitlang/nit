@@ -17,7 +17,7 @@ import abstract_collection
 
 # Double linked lists.
 class List[E]
-special IndexedCollection[E]
+special Sequence[E]
 # Access
 	redef fun [](index) do return get_node(index).item
 

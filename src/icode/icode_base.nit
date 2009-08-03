@@ -46,10 +46,10 @@ end
 # A routine is a sequence of icodes with entry iregisters (params) and an exit iregister (result)
 class IRoutine
 	# The parameters of the routine
-	readable var _params: IndexedCollection[IRegister]
+	readable var _params: Sequence[IRegister]
 
 	# The closure declared
-	readable writable var _closure_decls: nullable IndexedCollection[IClosureDecl] = null
+	readable writable var _closure_decls: nullable Sequence[IClosureDecl] = null
 
 	# The result of the routine
 	readable var _result: nullable IRegister
@@ -60,7 +60,7 @@ class IRoutine
 	# The location of the iroutine (if any)
 	readable writable var _location: nullable Location = null
 
-	init(p: IndexedCollection[IRegister], r: nullable IRegister)
+	init(p: Sequence[IRegister], r: nullable IRegister)
 	do
 		_params = p.to_a
 		_result = r
@@ -134,12 +134,12 @@ special ICode
 	redef fun arity do return _exprs.length
 
 	# All arguments
-	readable var _exprs: IndexedCollection[IRegister]
+	readable var _exprs: Sequence[IRegister]
 
 	# All closure definition
-	readable writable var _closure_defs: nullable IndexedCollection[nullable IClosureDef]
+	readable writable var _closure_defs: nullable Sequence[nullable IClosureDef]
 
-	init(e: nullable IndexedCollection[IRegister])
+	init(e: nullable Sequence[IRegister])
 	do
 		if e == null then
 			_exprs = new Array[IRegister]
@@ -212,7 +212,7 @@ special ICodeN
 	# The called method
 	readable var _property: MMMethod
 
-	init(p: MMMethod, e: IndexedCollection[IRegister])
+	init(p: MMMethod, e: Sequence[IRegister])
 	do
 		super(e)
 		_property = p
@@ -239,7 +239,7 @@ class INew
 special ICall
 	# The type to instantiate
 	readable var _stype: MMType
-	init(t: MMType, p: MMMethod, a: IndexedCollection[IRegister])
+	init(t: MMType, p: MMMethod, a: Sequence[IRegister])
 	do
 		super(p, a)
 		_stype = t
@@ -256,7 +256,7 @@ special ICodeN
 	# The !break sequence (if any)
 	readable writable var _break_seq: nullable ISeq = null
 
-	init(c: IClosureDecl, e: IndexedCollection[IRegister])
+	init(c: IClosureDecl, e: Sequence[IRegister])
 	do
 		super(e)
 		_closure_decl = c
@@ -272,7 +272,7 @@ special ICodeN
 	# Special character sequence '@@@' will be substitued in order with the arguments
 	readable var _code: String
 
-	init(c: String, e: nullable IndexedCollection[IRegister])
+	init(c: String, e: nullable Sequence[IRegister])
 	do
 		super(e)
 		_code = c

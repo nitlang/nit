@@ -19,7 +19,7 @@ import abstract_collection
 
 # One dimention array of objects.
 class AbstractArrayRead[E]
-special IndexedCollectionRead[E]
+special SequenceRead[E]
 	# The current length
 	redef readable var _length: Int = 0
 
@@ -143,7 +143,7 @@ end
 # Resizeable one dimention array of objects.
 class AbstractArray[E]
 special AbstractArrayRead[E]
-special IndexedCollection[E]
+special Sequence[E]
 	fun enlarge(cap: Int) is abstract
 
 	redef fun push(item) do add(item)

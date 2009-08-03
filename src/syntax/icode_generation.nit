@@ -314,7 +314,7 @@ redef class AMethPropdef
 end
 
 redef class ASignature
-	fun fill_iroutine_parameters(v: A2IContext, orig_sig: MMSignature, params: IndexedCollection[IRegister], closdecls: nullable IndexedCollection[IClosureDecl])
+	fun fill_iroutine_parameters(v: A2IContext, orig_sig: MMSignature, params: Sequence[IRegister], closdecls: nullable Sequence[IClosureDecl])
 	do
 		for ap in n_params do
 			var reg = v.variable(ap.variable)

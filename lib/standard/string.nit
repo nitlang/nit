@@ -414,7 +414,7 @@ redef class Object
 		return "<{object_id.to_hex}"
 	end
 
-	protected fun args: IndexedCollection[String]
+	protected fun args: Sequence[String]
 	do
 		return sys.args
 	end
@@ -602,9 +602,9 @@ class StringCapable
 end
 
 redef class Sys
-	var _args_cache: nullable IndexedCollection[String]
+	var _args_cache: nullable Sequence[String]
 
-	redef fun args: IndexedCollection[String]
+	redef fun args: Sequence[String]
 	do
 		if _args_cache == null then init_args
 		return _args_cache.as(not null)

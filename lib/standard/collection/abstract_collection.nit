@@ -283,7 +283,7 @@ end
 
 # Indexed collection are ordoned collections.
 # The first item is 0. The last is `length'-1.
-interface IndexedCollectionRead[E]
+interface SequenceRead[E]
 special MapRead[Int, E]
 	# Get the first item.
 	# Is equivalent with `self'[0].
@@ -318,8 +318,8 @@ end
 
 # Indexed collection are ordoned collections.
 # The first item is 0. The last is `length'-1.
-interface IndexedCollection[E]
-special IndexedCollectionRead[E]
+interface Sequence[E]
+special SequenceRead[E]
 special Map[Int, E]
 special SimpleCollection[E]
 	# Set the first item.
