@@ -30,15 +30,27 @@ setlocal nosmartindent
 setlocal nocindent
 setlocal autoindent
 setlocal comments=:#
-setlocal indentkeys+==end,=else,=do,=var,=with,=then,=special,=class,=interface,=universal
+setlocal indentkeys+==end,=else,=do,=var,0!,=then,=special,=class,=interface,=universal
 setlocal sw=8
 
 " Indent after
-let s:relative_indent = '\<\(do\|then\|else\|if\)\s*$\|^\s*\(\<\(redef\|private\)\>\s*\)\?\(\<abstract\>\s*\)\?\<\(class\|interface\|universal\|special\)\>'
+let s:relative_indent = '\<\(do\|then\|else\|if\)\s*\(#\|$\)\|^\s*\(\<\(redef\|private\)\>\s*\)\?\(\<abstract\>\s*\)\?\<\(class\|interface\|universal\|special\)\>'
 " Unindent on them
-let s:outdent = '^\s*\(else\|then\|with\|end\)\>'
+let s:outdent = '^\s*\(else\|then\|end\)\>'
 " At 0
 let s:no_indent = '^\s*\(class\|import\|special\)\>'
+
+let s:syng_strcom = '\<nit\%(String\|StringDelimiter\|Escape\|Comment\|Documentation\)\>'
+
+" Check if the character at lnum:col is inside a string, comment, or is ascii.
+function s:IsInStringOrComment(lnum, col)
+	  return synIDattr(synID(a:lnum, a:col, 0), 'name') =~ s:syng_strcom
+endfunction
+
+function s:Match(lnum, regex)
+	let col = match(getline(a:lnum), a:regex) + 1
+	return col > 0 && !s:IsInStringOrComment(a:lnum, col) ? col : 0
+endfunction
 
 " Only define the function once.
 if exists("*GetNITIndent")
@@ -47,35 +59,58 @@ endif
 
 function GetNITIndent()
 	" Find a non-blank line above the current line.
-	let lnum = prevnonblank(v:lnum - 1)
+	let plnum = prevnonblank(v:lnum - 1)
 
 	" At the start of the file use zero indent.
-	if lnum == 0
+	if plnum == 0
 		return 0
 	endif
 
 	let cline = getline(v:lnum) " The line to indent
-	let prevline=getline(lnum) " The previous nonempty line
-	let ind = indent(lnum) " The previous nonempty indent level
+	let prevline=getline(plnum) " The previous nonempty line
+	let ind = indent(plnum) " The previous nonempty indent level
 
 	" Add a 'shiftwidth' after lines that start with an indent word
-	if prevline =~ s:relative_indent
+	if s:Match(plnum, s:relative_indent)
+	"if prevline =~ s:relative_indent
 		let ind = ind + &sw
 	endif
 
 	" Subtract a 'shiftwidth', for lines that start with an outdent word
-	if cline =~ s:outdent
+	"if cline =~ s:outdent
+	if s:Match(v:lnum, s:outdent)
 		let ind = ind - &sw
+	endif
+
+	" Unindent line after a closure declaration
+	if prevline =~ '^\s*\(break\)\=\s*!'
+		let col = match(prevline, "!")
+		let ctx = synIDattr(synID(plnum, col, 0), 'name')
+		echo "prev is " ctx
+		if ctx !~ "NITStmtBlock"
+			" closure declaration
+			let ind = ind - &sw
+		end
+	endif
+
+	" Indent line of a closure declaration
+	" Unindent line of a closure definition
+	if cline =~ '^\s*\(break\)\=\s*!'
+		let col = match(cline, "!")
+		let ctx = synIDattr(synID(v:lnum, col, 0), 'name')
+		if ctx =~ "NITStmtBlock"
+			" closure definition
+			let ind = ind - &sw
+		else
+			" closure declaration
+			let ind = ind + &sw
+		end
 	endif
 
 	" The following should always be at the start of a line, no indenting
-	if cline =~ s:no_indent
+	"if cline =~ s:no_indent
+	if s:Match(v:lnum, s:no_indent)
 		let ind = 0
-	endif
-
-	" Subtract a shiftwidth for end statements
-	if prevline =~ '$\s*end\s*\(#|$\)'
-		let ind = ind - &sw
 	endif
 
 	return ind
