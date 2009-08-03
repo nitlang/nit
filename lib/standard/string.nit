@@ -15,6 +15,7 @@
 package string
 
 intrude import collection # FIXME should be collection::array
+import hash
 
 ###############################################################################
 # String                                                                      #
@@ -246,6 +247,20 @@ special AbstractString
 	end
 
 	redef fun to_s do return self
+
+	redef fun hash
+	do
+		# djb2 hash algorythm
+		var h = 5381
+		var i = _length - 1
+		var it = _items
+		while i >= 0 do
+			h = (h * 32) + h + it[i].ascii
+			i -= 1
+		end
+		return h
+
+	end
 end
 
 # Strings are arrays of characters.

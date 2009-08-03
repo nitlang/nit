@@ -18,3 +18,4 @@ import range
 import list
 intrude import array # FIXME because of string.nit
 import sorter
+import hash_collection
