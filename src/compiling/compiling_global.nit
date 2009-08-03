@@ -17,6 +17,7 @@
 # Compute and generate tables for classes and modules.
 package compiling_global
 
+import program
 private import compiling_icode
 
 # Something that store color of table elements
@@ -152,25 +153,11 @@ redef class MMConcreteClass
 	end
 end
 
-redef class MMModule
-	# The local table of the module (refers things introduced in the module)
-	var _local_table: Array[ModuleTableElt] = new Array[ModuleTableElt]
-
-	# Builds the local tables and local classes layouts
-	fun local_analysis(tc: ToolContext)
-	do
-		for c in local_classes do
-			if c isa MMConcreteClass then
-				c.build_layout_in(tc, _local_table)
-			end
-		end
-	end
-
+redef class Program
 	# Do the complete global analysis
 	fun global_analysis(cctx: ToolContext): GlobalAnalysis
 	do
-		#print "Do the complete global analysis"
-		var ga = new GlobalAnalysis(self)
+		var ga = new GlobalAnalysis(module)
 		var smallest_classes = new Array[MMLocalClass]
 		var global_properties = new HashSet[MMGlobalProperty]
 		var ctab = new Array[TableElt]
@@ -186,7 +173,7 @@ redef class MMModule
 
 		# We have to work on ALL the classes of the module
 		var classes = new Array[MMLocalClass]
-		for c in local_classes do
+		for c in module.local_classes do
 			c.compute_super_classes
 			classes.add(c)
 		end
@@ -321,44 +308,6 @@ redef class MMModule
 		return ga
 	end
 
-	private fun append_to_table(cc: ColorContext, table: Array[nullable TableElt], cmp: TableEltComposite)
-	do
-		for j in [0..cmp.length[ do
-			var e = cmp.item(j)
-			cc.color(e) = table.length
-			table.add(e)
-		end
-	end
-
-	private fun build_tables_in(table: Array[nullable TableElt], ga: GlobalAnalysis, c: MMLocalClass, elts: Array[TableElt])
-	do
-		var tab = new HashMap[Int, TableElt]
-		var len = 0
-		for e in elts do
-			if e.is_related_to(c) then
-				var col = ga.color(e)
-				var l = col + e.length
-				tab[col] = e
-				if len < l then
-					len = l
-				end
-			end
-		end
-		var i = 0
-		while i < len do
-			if tab.has_key(i) then
-				var e = tab[i]
-				for j in [0..e.length[ do
-					table[i] = e.item(j)
-					i = i + 1
-				end
-			else
-				table[i] = null
-				i = i + 1
-			end
-		end
-	end
-
 	# Perform coloring
 	fun colorize(ga: GlobalAnalysis, elts: Array[TableElt], classes: Collection[MMLocalClass], startcolor: Int)
 	do
@@ -413,19 +362,57 @@ redef class MMModule
 		return true
 	end
 
+	private fun append_to_table(cc: ColorContext, table: Array[nullable TableElt], cmp: TableEltComposite)
+	do
+		for j in [0..cmp.length[ do
+			var e = cmp.item(j)
+			cc.color(e) = table.length
+			table.add(e)
+		end
+	end
+
+	private fun build_tables_in(table: Array[nullable TableElt], ga: GlobalAnalysis, c: MMLocalClass, elts: Array[TableElt])
+	do
+		var tab = new HashMap[Int, TableElt]
+		var len = 0
+		for e in elts do
+			if e.is_related_to(c) then
+				var col = ga.color(e)
+				var l = col + e.length
+				tab[col] = e
+				if len < l then
+					len = l
+				end
+			end
+		end
+		var i = 0
+		while i < len do
+			if tab.has_key(i) then
+				var e = tab[i]
+				for j in [0..e.length[ do
+					table[i] = e.item(j)
+					i = i + 1
+				end
+			else
+				table[i] = null
+				i = i + 1
+			end
+		end
+	end
+
 	# Compile module and class tables
 	fun compile_tables_to_c(v: GlobalCompilerVisitor)
 	do
-		for m in mhe.greaters_and_self do
+		for m in module.mhe.greaters_and_self do
 			m.compile_local_table_to_c(v)
 		end
 
-		for c in local_classes do
+		for c in module.local_classes do
 			c.compile_tables_to_c(v)
 		end
 		var s = new Buffer.from("classtable_t TAG2VFT[4] = \{NULL")
 		for t in ["Int","Char","Bool"] do
-			if has_global_class_named(t.to_symbol) then
+			if module.has_global_class_named(t.to_symbol) then
 				s.append(", (const classtable_t)VFT_{t}")
 			else
 				s.append(", NULL")
@@ -433,16 +420,6 @@ redef class MMModule
 		end
 		s.append("};")
 		v.add_instr(s.to_s)
-	end
-
-	# Declare class table (for _sep.h)
-	fun declare_class_tables_to_c(v: GlobalCompilerVisitor)
-	do
-		for c in local_classes do
-			if c.global.module == self then
-				c.declare_tables_to_c(v)
-			end
-		end
 	end
 
 	# Compile main part (for _table.c)
@@ -453,10 +430,10 @@ redef class MMModule
 		v.add_instr("prepare_signals();")
 		v.add_instr("glob_argc = argc; glob_argv = argv;")
 		var sysname = once "Sys".to_symbol
-		if not has_global_class_named(sysname) then
+		if not module.has_global_class_named(sysname) then
 			print("No main")
 		else
-			var sys = class_by_name(sysname)
+			var sys = module.class_by_name(sysname)
 			var name = once "main".to_symbol
 			if not sys.has_global_property_by_name(name) then
 				print("No main")
@@ -470,6 +447,31 @@ redef class MMModule
 		v.add_instr("return 0;")
 		v.unindent
 		v.add_instr("}")
+	end
+end
+
+redef class MMModule
+	# The local table of the module (refers things introduced in the module)
+	var _local_table: Array[ModuleTableElt] = new Array[ModuleTableElt]
+
+	# Builds the local tables and local classes layouts
+	fun local_analysis(tc: ToolContext)
+	do
+		for c in local_classes do
+			if c isa MMConcreteClass then
+				c.build_layout_in(tc, _local_table)
+			end
+		end
+	end
+
+	# Declare class table (for _sep.h)
+	fun declare_class_tables_to_c(v: GlobalCompilerVisitor)
+	do
+		for c in local_classes do
+			if c.global.module == self then
+				c.declare_tables_to_c(v)
+			end
+		end
 	end
 
 	# Compile sep files

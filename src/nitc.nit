@@ -19,6 +19,7 @@ package nitc
 
 import abstracttool
 import analysis
+import program
 private import compiling
 private import syntax
 
@@ -124,9 +125,9 @@ special AbstractCompiler
 			dump_intermediate_code(mods)
 		end
 		for mod in mods do
-			mod.compile_prog_to_c(self)
+			var p = new Program(mod)
+			p.compile_prog_to_c(self)
 		end
-
 	end
 end
 
