@@ -135,7 +135,7 @@ for ii in "$@"; do
 
 	tmp=${ii/../AA}
 	if [ "x$tmp" = "x$ii" ]; then
-		oincludes="-I . -I ../lib/standard"
+		oincludes="-I . -I ../lib/standard -I ../lib/standard/collection"
 	else
 		oincludes=""
 	fi

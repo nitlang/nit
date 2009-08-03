@@ -14,7 +14,7 @@
 # This module is about character strings.
 package string
 
-intrude import array
+intrude import collection # FIXME should be collection::array
 
 ###############################################################################
 # String                                                                      #
