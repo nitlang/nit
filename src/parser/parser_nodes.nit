@@ -123,6 +123,9 @@ end
 class TKwwhile
 special Token
 end
+class TKwloop
+special Token
+end
 class TKwfor
 special Token
 end
@@ -626,6 +629,12 @@ special ALabelable
     readable writable var _n_kwwhile:  TKwwhile
     readable writable var _n_expr: AExpr
     readable writable var _n_kwdo: TKwdo
+    readable writable var _n_block: nullable AExpr = null
+end
+class ALoopExpr
+special AExpr
+special ALabelable
+    readable writable var _n_kwloop: TKwloop
     readable writable var _n_block: nullable AExpr = null
 end
 class AForExpr

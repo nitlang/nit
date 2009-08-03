@@ -738,6 +738,29 @@ redef class AWhileExpr
 	end
 end
 
+redef class ALoopExpr
+	redef fun generate_icode(v)
+	do
+		var seq_old = v.seq
+		var iloop = new ILoop
+		v.stmt(iloop)
+		escapable.break_seq = iloop
+		v.seq = iloop
+
+		# Process inside
+		if n_block != null then
+			var seq = new ISeq
+			v.stmt(seq)
+			v.seq = seq
+			escapable.continue_seq = seq
+			v.generate_stmt(n_block)
+		end
+
+		v.seq = seq_old
+		return null
+	end
+end
+
 redef class AForExpr
 	redef fun generate_icode(v)
 	do

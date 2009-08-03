@@ -5144,6 +5144,104 @@ redef class AWhileExpr
         end
     end
 end
+redef class ALoopExpr
+    redef fun n_kwloop=(n)
+    do
+        _n_kwloop = n
+	n.parent = self
+    end
+    redef fun n_block=(n)
+    do
+        _n_block = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef fun n_label=(n)
+    do
+        _n_label = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+
+    private init empty_init do end
+
+    init init_aloopexpr (
+            n_kwloop: nullable TKwloop,
+            n_block: nullable AExpr,
+            n_label: nullable ALabel
+    )
+    do
+        empty_init
+        _n_kwloop = n_kwloop.as(not null)
+	n_kwloop.parent = self
+        _n_block = n_block
+	if n_block != null then
+		n_block.parent = self
+	end
+        _n_label = n_label
+	if n_label != null then
+		n_label.parent = self
+	end
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_kwloop == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwloop
+                _n_kwloop = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_block == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExpr
+                _n_block = new_child
+	    else
+		_n_block = null
+            end
+            return
+	end
+        if _n_label == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa ALabel
+                _n_label = new_child
+	    else
+		_n_label = null
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_kwloop)
+        if _n_block != null then
+            v.enter_visit(_n_block.as(not null))
+        end
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
+        end
+    end
+
+    redef fun visit_all_reverse(v: Visitor)
+    do
+        v.enter_visit(_n_kwloop)
+        if _n_block != null then
+            v.enter_visit(_n_block.as(not null))
+        end
+        if _n_label != null then
+            v.enter_visit(_n_label.as(not null))
+        end
+    end
+end
 redef class AForExpr
     redef fun n_kwfor=(n)
     do

@@ -378,10 +378,23 @@ redef class TKwwhile
     end
 end
 
-redef class TKwfor
+redef class TKwloop
     redef fun parser_index: Int
     do
 	return 28
+    end
+
+    init init_tk(loc: Location)
+    do
+        _text = once "loop"
+		_location = loc
+    end
+end
+
+redef class TKwfor
+    redef fun parser_index: Int
+    do
+	return 29
     end
 
     init init_tk(loc: Location)
@@ -394,7 +407,7 @@ end
 redef class TKwin
     redef fun parser_index: Int
     do
-	return 29
+	return 30
     end
 
     init init_tk(loc: Location)
@@ -407,7 +420,7 @@ end
 redef class TKwand
     redef fun parser_index: Int
     do
-	return 30
+	return 31
     end
 
     init init_tk(loc: Location)
@@ -420,7 +433,7 @@ end
 redef class TKwor
     redef fun parser_index: Int
     do
-	return 31
+	return 32
     end
 
     init init_tk(loc: Location)
@@ -433,7 +446,7 @@ end
 redef class TKwnot
     redef fun parser_index: Int
     do
-	return 32
+	return 33
     end
 
     init init_tk(loc: Location)
@@ -446,7 +459,7 @@ end
 redef class TKwreturn
     redef fun parser_index: Int
     do
-	return 33
+	return 34
     end
 
     init init_tk(loc: Location)
@@ -459,7 +472,7 @@ end
 redef class TKwcontinue
     redef fun parser_index: Int
     do
-	return 34
+	return 35
     end
 
     init init_tk(loc: Location)
@@ -472,7 +485,7 @@ end
 redef class TKwbreak
     redef fun parser_index: Int
     do
-	return 35
+	return 36
     end
 
     init init_tk(loc: Location)
@@ -485,7 +498,7 @@ end
 redef class TKwabort
     redef fun parser_index: Int
     do
-	return 36
+	return 37
     end
 
     init init_tk(loc: Location)
@@ -498,7 +511,7 @@ end
 redef class TKwassert
     redef fun parser_index: Int
     do
-	return 37
+	return 38
     end
 
     init init_tk(loc: Location)
@@ -511,7 +524,7 @@ end
 redef class TKwnew
     redef fun parser_index: Int
     do
-	return 38
+	return 39
     end
 
     init init_tk(loc: Location)
@@ -524,7 +537,7 @@ end
 redef class TKwisa
     redef fun parser_index: Int
     do
-	return 39
+	return 40
     end
 
     init init_tk(loc: Location)
@@ -537,7 +550,7 @@ end
 redef class TKwonce
     redef fun parser_index: Int
     do
-	return 40
+	return 41
     end
 
     init init_tk(loc: Location)
@@ -550,7 +563,7 @@ end
 redef class TKwsuper
     redef fun parser_index: Int
     do
-	return 41
+	return 42
     end
 
     init init_tk(loc: Location)
@@ -563,7 +576,7 @@ end
 redef class TKwself
     redef fun parser_index: Int
     do
-	return 42
+	return 43
     end
 
     init init_tk(loc: Location)
@@ -576,7 +589,7 @@ end
 redef class TKwtrue
     redef fun parser_index: Int
     do
-	return 43
+	return 44
     end
 
     init init_tk(loc: Location)
@@ -589,7 +602,7 @@ end
 redef class TKwfalse
     redef fun parser_index: Int
     do
-	return 44
+	return 45
     end
 
     init init_tk(loc: Location)
@@ -602,7 +615,7 @@ end
 redef class TKwnull
     redef fun parser_index: Int
     do
-	return 45
+	return 46
     end
 
     init init_tk(loc: Location)
@@ -615,7 +628,7 @@ end
 redef class TKwas
     redef fun parser_index: Int
     do
-	return 46
+	return 47
     end
 
     init init_tk(loc: Location)
@@ -628,7 +641,7 @@ end
 redef class TKwnullable
     redef fun parser_index: Int
     do
-	return 47
+	return 48
     end
 
     init init_tk(loc: Location)
@@ -641,7 +654,7 @@ end
 redef class TKwisset
     redef fun parser_index: Int
     do
-	return 48
+	return 49
     end
 
     init init_tk(loc: Location)
@@ -654,7 +667,7 @@ end
 redef class TKwlabel
     redef fun parser_index: Int
     do
-	return 49
+	return 50
     end
 
     init init_tk(loc: Location)
@@ -667,7 +680,7 @@ end
 redef class TOpar
     redef fun parser_index: Int
     do
-	return 50
+	return 51
     end
 
     init init_tk(loc: Location)
@@ -680,7 +693,7 @@ end
 redef class TCpar
     redef fun parser_index: Int
     do
-	return 51
+	return 52
     end
 
     init init_tk(loc: Location)
@@ -693,7 +706,7 @@ end
 redef class TObra
     redef fun parser_index: Int
     do
-	return 52
+	return 53
     end
 
     init init_tk(loc: Location)
@@ -706,7 +719,7 @@ end
 redef class TCbra
     redef fun parser_index: Int
     do
-	return 53
+	return 54
     end
 
     init init_tk(loc: Location)
@@ -719,7 +732,7 @@ end
 redef class TComma
     redef fun parser_index: Int
     do
-	return 54
+	return 55
     end
 
     init init_tk(loc: Location)
@@ -732,7 +745,7 @@ end
 redef class TColumn
     redef fun parser_index: Int
     do
-	return 55
+	return 56
     end
 
     init init_tk(loc: Location)
@@ -745,7 +758,7 @@ end
 redef class TQuad
     redef fun parser_index: Int
     do
-	return 56
+	return 57
     end
 
     init init_tk(loc: Location)
@@ -758,7 +771,7 @@ end
 redef class TAssign
     redef fun parser_index: Int
     do
-	return 57
+	return 58
     end
 
     init init_tk(loc: Location)
@@ -771,7 +784,7 @@ end
 redef class TPluseq
     redef fun parser_index: Int
     do
-	return 58
+	return 59
     end
 
     init init_tk(loc: Location)
@@ -784,7 +797,7 @@ end
 redef class TMinuseq
     redef fun parser_index: Int
     do
-	return 59
+	return 60
     end
 
     init init_tk(loc: Location)
@@ -797,7 +810,7 @@ end
 redef class TDotdotdot
     redef fun parser_index: Int
     do
-	return 60
+	return 61
     end
 
     init init_tk(loc: Location)
@@ -810,7 +823,7 @@ end
 redef class TDotdot
     redef fun parser_index: Int
     do
-	return 61
+	return 62
     end
 
     init init_tk(loc: Location)
@@ -823,7 +836,7 @@ end
 redef class TDot
     redef fun parser_index: Int
     do
-	return 62
+	return 63
     end
 
     init init_tk(loc: Location)
@@ -836,7 +849,7 @@ end
 redef class TPlus
     redef fun parser_index: Int
     do
-	return 63
+	return 64
     end
 
     init init_tk(loc: Location)
@@ -849,7 +862,7 @@ end
 redef class TMinus
     redef fun parser_index: Int
     do
-	return 64
+	return 65
     end
 
     init init_tk(loc: Location)
@@ -862,7 +875,7 @@ end
 redef class TStar
     redef fun parser_index: Int
     do
-	return 65
+	return 66
     end
 
     init init_tk(loc: Location)
@@ -875,7 +888,7 @@ end
 redef class TSlash
     redef fun parser_index: Int
     do
-	return 66
+	return 67
     end
 
     init init_tk(loc: Location)
@@ -888,7 +901,7 @@ end
 redef class TPercent
     redef fun parser_index: Int
     do
-	return 67
+	return 68
     end
 
     init init_tk(loc: Location)
@@ -901,7 +914,7 @@ end
 redef class TEq
     redef fun parser_index: Int
     do
-	return 68
+	return 69
     end
 
     init init_tk(loc: Location)
@@ -914,7 +927,7 @@ end
 redef class TNe
     redef fun parser_index: Int
     do
-	return 69
+	return 70
     end
 
     init init_tk(loc: Location)
@@ -927,7 +940,7 @@ end
 redef class TLt
     redef fun parser_index: Int
     do
-	return 70
+	return 71
     end
 
     init init_tk(loc: Location)
@@ -940,7 +953,7 @@ end
 redef class TLe
     redef fun parser_index: Int
     do
-	return 71
+	return 72
     end
 
     init init_tk(loc: Location)
@@ -953,7 +966,7 @@ end
 redef class TGt
     redef fun parser_index: Int
     do
-	return 72
+	return 73
     end
 
     init init_tk(loc: Location)
@@ -966,7 +979,7 @@ end
 redef class TGe
     redef fun parser_index: Int
     do
-	return 73
+	return 74
     end
 
     init init_tk(loc: Location)
@@ -979,7 +992,7 @@ end
 redef class TStarship
     redef fun parser_index: Int
     do
-	return 74
+	return 75
     end
 
     init init_tk(loc: Location)
@@ -992,7 +1005,7 @@ end
 redef class TBang
     redef fun parser_index: Int
     do
-	return 75
+	return 76
     end
 
     init init_tk(loc: Location)
@@ -1005,7 +1018,7 @@ end
 redef class TClassid
     redef fun parser_index: Int
     do
-	return 76
+	return 77
     end
 
     init init_tk(text: String, loc: Location)
@@ -1018,7 +1031,7 @@ end
 redef class TId
     redef fun parser_index: Int
     do
-	return 77
+	return 78
     end
 
     init init_tk(text: String, loc: Location)
@@ -1031,7 +1044,7 @@ end
 redef class TAttrid
     redef fun parser_index: Int
     do
-	return 78
+	return 79
     end
 
     init init_tk(text: String, loc: Location)
@@ -1044,7 +1057,7 @@ end
 redef class TNumber
     redef fun parser_index: Int
     do
-	return 79
+	return 80
     end
 
     init init_tk(text: String, loc: Location)
@@ -1057,7 +1070,7 @@ end
 redef class TFloat
     redef fun parser_index: Int
     do
-	return 80
+	return 81
     end
 
     init init_tk(text: String, loc: Location)
@@ -1070,7 +1083,7 @@ end
 redef class TChar
     redef fun parser_index: Int
     do
-	return 81
+	return 82
     end
 
     init init_tk(text: String, loc: Location)
@@ -1083,7 +1096,7 @@ end
 redef class TString
     redef fun parser_index: Int
     do
-	return 82
+	return 83
     end
 
     init init_tk(text: String, loc: Location)
@@ -1096,7 +1109,7 @@ end
 redef class TStartString
     redef fun parser_index: Int
     do
-	return 83
+	return 84
     end
 
     init init_tk(text: String, loc: Location)
@@ -1109,7 +1122,7 @@ end
 redef class TMidString
     redef fun parser_index: Int
     do
-	return 84
+	return 85
     end
 
     init init_tk(text: String, loc: Location)
@@ -1122,7 +1135,7 @@ end
 redef class TEndString
     redef fun parser_index: Int
     do
-	return 85
+	return 86
     end
 
     init init_tk(text: String, loc: Location)
@@ -1136,7 +1149,7 @@ end
 redef class EOF
     redef fun parser_index: Int
     do
-	return 86
+	return 87
     end
 
     init(loc: Location)
@@ -1556,7 +1569,7 @@ class Lexer
 					end
 					if accept_token == 29 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwfor.init_tk(location)
+						var token = new TKwloop.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1564,7 +1577,7 @@ class Lexer
 					end
 					if accept_token == 30 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwin.init_tk(location)
+						var token = new TKwfor.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1572,7 +1585,7 @@ class Lexer
 					end
 					if accept_token == 31 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwand.init_tk(location)
+						var token = new TKwin.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1580,7 +1593,7 @@ class Lexer
 					end
 					if accept_token == 32 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwor.init_tk(location)
+						var token = new TKwand.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1588,7 +1601,7 @@ class Lexer
 					end
 					if accept_token == 33 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnot.init_tk(location)
+						var token = new TKwor.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1596,7 +1609,7 @@ class Lexer
 					end
 					if accept_token == 34 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwreturn.init_tk(location)
+						var token = new TKwnot.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1604,7 +1617,7 @@ class Lexer
 					end
 					if accept_token == 35 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwcontinue.init_tk(location)
+						var token = new TKwreturn.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1612,7 +1625,7 @@ class Lexer
 					end
 					if accept_token == 36 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwbreak.init_tk(location)
+						var token = new TKwcontinue.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1620,7 +1633,7 @@ class Lexer
 					end
 					if accept_token == 37 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwabort.init_tk(location)
+						var token = new TKwbreak.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1628,7 +1641,7 @@ class Lexer
 					end
 					if accept_token == 38 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwassert.init_tk(location)
+						var token = new TKwabort.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1636,7 +1649,7 @@ class Lexer
 					end
 					if accept_token == 39 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnew.init_tk(location)
+						var token = new TKwassert.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1644,7 +1657,7 @@ class Lexer
 					end
 					if accept_token == 40 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwisa.init_tk(location)
+						var token = new TKwnew.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1652,7 +1665,7 @@ class Lexer
 					end
 					if accept_token == 41 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwonce.init_tk(location)
+						var token = new TKwisa.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1660,7 +1673,7 @@ class Lexer
 					end
 					if accept_token == 42 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwsuper.init_tk(location)
+						var token = new TKwonce.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1668,7 +1681,7 @@ class Lexer
 					end
 					if accept_token == 43 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwself.init_tk(location)
+						var token = new TKwsuper.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1676,7 +1689,7 @@ class Lexer
 					end
 					if accept_token == 44 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwtrue.init_tk(location)
+						var token = new TKwself.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1684,7 +1697,7 @@ class Lexer
 					end
 					if accept_token == 45 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwfalse.init_tk(location)
+						var token = new TKwtrue.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1692,7 +1705,7 @@ class Lexer
 					end
 					if accept_token == 46 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnull.init_tk(location)
+						var token = new TKwfalse.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1700,7 +1713,7 @@ class Lexer
 					end
 					if accept_token == 47 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwas.init_tk(location)
+						var token = new TKwnull.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1708,7 +1721,7 @@ class Lexer
 					end
 					if accept_token == 48 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnullable.init_tk(location)
+						var token = new TKwas.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1716,7 +1729,7 @@ class Lexer
 					end
 					if accept_token == 49 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwisset.init_tk(location)
+						var token = new TKwnullable.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1724,7 +1737,7 @@ class Lexer
 					end
 					if accept_token == 50 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwlabel.init_tk(location)
+						var token = new TKwisset.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1732,7 +1745,7 @@ class Lexer
 					end
 					if accept_token == 51 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TOpar.init_tk(location)
+						var token = new TKwlabel.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1740,7 +1753,7 @@ class Lexer
 					end
 					if accept_token == 52 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TCpar.init_tk(location)
+						var token = new TOpar.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1748,7 +1761,7 @@ class Lexer
 					end
 					if accept_token == 53 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TObra.init_tk(location)
+						var token = new TCpar.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1756,7 +1769,7 @@ class Lexer
 					end
 					if accept_token == 54 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TCbra.init_tk(location)
+						var token = new TObra.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1764,7 +1777,7 @@ class Lexer
 					end
 					if accept_token == 55 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TComma.init_tk(location)
+						var token = new TCbra.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1772,7 +1785,7 @@ class Lexer
 					end
 					if accept_token == 56 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TColumn.init_tk(location)
+						var token = new TComma.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1780,7 +1793,7 @@ class Lexer
 					end
 					if accept_token == 57 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TQuad.init_tk(location)
+						var token = new TColumn.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1788,7 +1801,7 @@ class Lexer
 					end
 					if accept_token == 58 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TAssign.init_tk(location)
+						var token = new TQuad.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1796,7 +1809,7 @@ class Lexer
 					end
 					if accept_token == 59 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TPluseq.init_tk(location)
+						var token = new TAssign.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1804,7 +1817,7 @@ class Lexer
 					end
 					if accept_token == 60 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TMinuseq.init_tk(location)
+						var token = new TPluseq.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1812,7 +1825,7 @@ class Lexer
 					end
 					if accept_token == 61 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TDotdotdot.init_tk(location)
+						var token = new TMinuseq.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1820,7 +1833,7 @@ class Lexer
 					end
 					if accept_token == 62 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TDotdot.init_tk(location)
+						var token = new TDotdotdot.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1828,7 +1841,7 @@ class Lexer
 					end
 					if accept_token == 63 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TDot.init_tk(location)
+						var token = new TDotdot.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1836,7 +1849,7 @@ class Lexer
 					end
 					if accept_token == 64 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TPlus.init_tk(location)
+						var token = new TDot.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1844,7 +1857,7 @@ class Lexer
 					end
 					if accept_token == 65 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TMinus.init_tk(location)
+						var token = new TPlus.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1852,7 +1865,7 @@ class Lexer
 					end
 					if accept_token == 66 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TStar.init_tk(location)
+						var token = new TMinus.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1860,7 +1873,7 @@ class Lexer
 					end
 					if accept_token == 67 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TSlash.init_tk(location)
+						var token = new TStar.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1868,7 +1881,7 @@ class Lexer
 					end
 					if accept_token == 68 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TPercent.init_tk(location)
+						var token = new TSlash.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1876,7 +1889,7 @@ class Lexer
 					end
 					if accept_token == 69 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TEq.init_tk(location)
+						var token = new TPercent.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1884,7 +1897,7 @@ class Lexer
 					end
 					if accept_token == 70 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TNe.init_tk(location)
+						var token = new TEq.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1892,7 +1905,7 @@ class Lexer
 					end
 					if accept_token == 71 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TLt.init_tk(location)
+						var token = new TNe.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1900,7 +1913,7 @@ class Lexer
 					end
 					if accept_token == 72 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TLe.init_tk(location)
+						var token = new TLt.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1908,7 +1921,7 @@ class Lexer
 					end
 					if accept_token == 73 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TGt.init_tk(location)
+						var token = new TLe.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1916,7 +1929,7 @@ class Lexer
 					end
 					if accept_token == 74 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TGe.init_tk(location)
+						var token = new TGt.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1924,7 +1937,7 @@ class Lexer
 					end
 					if accept_token == 75 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TStarship.init_tk(location)
+						var token = new TGe.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1932,7 +1945,7 @@ class Lexer
 					end
 					if accept_token == 76 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TBang.init_tk(location)
+						var token = new TStarship.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1940,8 +1953,7 @@ class Lexer
 					end
 					if accept_token == 77 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token_text = text.substring(0, accept_length)
-						var token = new TClassid.init_tk(token_text, location)
+						var token = new TBang.init_tk(location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1950,7 +1962,7 @@ class Lexer
 					if accept_token == 78 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TId.init_tk(token_text, location)
+						var token = new TClassid.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1959,7 +1971,7 @@ class Lexer
 					if accept_token == 79 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TAttrid.init_tk(token_text, location)
+						var token = new TId.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1968,7 +1980,7 @@ class Lexer
 					if accept_token == 80 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TNumber.init_tk(token_text, location)
+						var token = new TAttrid.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1977,7 +1989,7 @@ class Lexer
 					if accept_token == 81 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TFloat.init_tk(token_text, location)
+						var token = new TNumber.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1986,7 +1998,7 @@ class Lexer
 					if accept_token == 82 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TChar.init_tk(token_text, location)
+						var token = new TFloat.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1995,7 +2007,7 @@ class Lexer
 					if accept_token == 83 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TString.init_tk(token_text, location)
+						var token = new TChar.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -2004,7 +2016,7 @@ class Lexer
 					if accept_token == 84 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TStartString.init_tk(token_text, location)
+						var token = new TString.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -2013,13 +2025,22 @@ class Lexer
 					if accept_token == 85 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TMidString.init_tk(token_text, location)
+						var token = new TStartString.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 86 then
+						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+						var token_text = text.substring(0, accept_length)
+						var token = new TMidString.init_tk(token_text, location)
+						push_back(accept_length)
+						_pos = accept_pos
+						_line = accept_line
+						return token
+					end
+					if accept_token == 87 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
 						var token = new TEndString.init_tk(token_text, location)
@@ -2289,84 +2310,86 @@ class Lexer
 				[
 					[48, 95, -29],
 					[97, 97, 92],
-					[98, 122, 74]
+					[98, 110, 74],
+					[111, 111, 93],
+					[112, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 100, 74],
-					[101, 101, 93],
+					[101, 101, 94],
 					[102, 110, 74],
-					[111, 111, 94],
+					[111, 111, 95],
 					[112, 116, 74],
-					[117, 117, 95],
+					[117, 117, 96],
 					[118, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 109, 74],
-					[110, 110, 96],
+					[110, 110, 97],
 					[111, 113, 74],
-					[114, 114, 97],
+					[114, 114, 98],
 					[115, 122, 74]
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 98],
+					[97, 97, 99],
 					[98, 113, 74],
-					[114, 114, 99],
+					[114, 114, 100],
 					[115, 122, 74]
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 100],
+					[101, 101, 101],
 					[102, 122, 74]
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 101],
+					[101, 101, 102],
 					[102, 111, 74],
-					[112, 112, 102],
+					[112, 112, 103],
 					[113, 116, 74],
-					[117, 117, 103],
+					[117, 117, 104],
 					[118, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 103, 74],
-					[104, 104, 104],
+					[104, 104, 105],
 					[105, 113, 74],
-					[114, 114, 105],
+					[114, 114, 106],
 					[115, 120, 74],
-					[121, 121, 106],
+					[121, 121, 107],
 					[122, 122, 74]
 				],
 				[
 					[48, 109, -39],
-					[110, 110, 107],
+					[110, 110, 108],
 					[111, 122, 74]
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 108],
+					[97, 97, 109],
 					[98, 122, 74]
 				],
 				[
 					[48, 103, -43],
-					[104, 104, 109],
+					[104, 104, 110],
 					[105, 113, 74],
-					[114, 114, 110],
+					[114, 114, 111],
 					[115, 122, 74]
 				],
 				[
-					[0, 9, 111],
-					[11, 12, 111],
-					[14, 33, 111],
-					[34, 34, 112],
-					[35, 91, 111],
-					[92, 92, 113],
-					[93, 122, 111],
-					[123, 123, 114],
-					[124, 255, 111]
+					[0, 9, 112],
+					[11, 12, 112],
+					[14, 33, 112],
+					[34, 34, 113],
+					[35, 91, 112],
+					[92, 92, 114],
+					[93, 122, 112],
+					[123, 123, 115],
+					[124, 255, 112]
 				],
 				nil_array,
 				nil_array,
@@ -2375,9 +2398,9 @@ class Lexer
 				],
 				nil_array,
 				[
-					[0, 9, 115],
-					[11, 12, 115],
-					[14, 255, 115]
+					[0, 9, 116],
+					[11, 12, 116],
+					[14, 255, 116]
 				],
 				nil_array,
 				[
@@ -2385,7 +2408,7 @@ class Lexer
 				],
 				nil_array,
 				[
-					[10, 10, 116]
+					[10, 10, 117]
 				],
 				[
 					[0, 255, -11]
@@ -2394,7 +2417,7 @@ class Lexer
 				nil_array,
 				nil_array,
 				[
-					[46, 46, 117]
+					[46, 46, 118]
 				],
 				[
 					[48, 57, 60]
@@ -2404,7 +2427,7 @@ class Lexer
 				],
 				nil_array,
 				[
-					[62, 62, 118]
+					[62, 62, 119]
 				],
 				nil_array,
 				nil_array,
@@ -2421,10 +2444,10 @@ class Lexer
 					[48, 122, -25]
 				],
 				[
-					[48, 57, 119],
-					[65, 90, 120],
-					[95, 95, 121],
-					[97, 122, 122]
+					[48, 57, 120],
+					[65, 90, 121],
+					[95, 95, 122],
+					[97, 122, 123]
 				],
 				[
 					[48, 122, -35]
@@ -2440,36 +2463,36 @@ class Lexer
 				],
 				[
 					[48, 110, -32],
-					[111, 111, 123],
+					[111, 111, 124],
 					[112, 114, 74],
-					[115, 115, 124],
+					[115, 115, 125],
 					[116, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 99, 74],
-					[100, 100, 125],
+					[100, 100, 126],
 					[101, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 114, 74],
-					[115, 115, 126],
+					[115, 115, 127],
 					[116, 122, 74]
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 127],
+					[101, 101, 128],
 					[102, 122, 74]
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 128],
+					[97, 97, 129],
 					[98, 122, 74]
 				],
 				[
 					[48, 109, -39],
-					[110, 110, 129],
+					[110, 110, 130],
 					[111, 122, 74]
 				],
 				[
@@ -2477,33 +2500,33 @@ class Lexer
 				],
 				[
 					[48, 114, -79],
-					[115, 115, 130],
+					[115, 115, 131],
 					[116, 122, 74]
 				],
 				[
 					[48, 99, -78],
-					[100, 100, 131],
+					[100, 100, 132],
 					[101, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 115, 74],
-					[116, 116, 132],
+					[116, 116, 133],
 					[117, 122, 74]
 				],
 				[
 					[48, 107, -31],
-					[108, 108, 133],
+					[108, 108, 134],
 					[109, 122, 74]
 				],
 				[
 					[48, 113, -30],
-					[114, 114, 134],
+					[114, 114, 135],
 					[115, 122, 74]
 				],
 				[
 					[48, 109, -39],
-					[110, 110, 135],
+					[110, 110, 136],
 					[111, 122, 74]
 				],
 				[
@@ -2512,89 +2535,84 @@ class Lexer
 				[
 					[48, 95, -29],
 					[97, 111, 74],
-					[112, 112, 136],
+					[112, 112, 137],
 					[113, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 104, 74],
-					[105, 105, 137],
+					[105, 105, 138],
 					[106, 115, 74],
-					[116, 116, 138],
+					[116, 116, 139],
 					[117, 122, 74]
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 139],
+					[97, 97, 140],
 					[98, 114, 74],
-					[115, 115, 140],
+					[115, 115, 141],
 					[116, 122, 74]
 				],
 				[
 					[48, 97, -29],
-					[98, 98, 141],
+					[98, 98, 142],
 					[99, 122, 74]
+				],
+				[
+					[48, 110, -32],
+					[111, 111, 143],
+					[112, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 118, 74],
-					[119, 119, 142],
+					[119, 119, 144],
 					[120, 122, 74]
 				],
 				[
 					[48, 115, -86],
-					[116, 116, 143],
+					[116, 116, 145],
 					[117, 122, 74]
 				],
 				[
 					[48, 107, -31],
-					[108, 108, 144],
+					[108, 108, 146],
 					[109, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 98, 74],
-					[99, 99, 145],
+					[99, 99, 147],
 					[100, 122, 74]
 				],
 				[
 					[48, 122, -35]
 				],
 				[
-					[48, 98, -98],
-					[99, 99, 146],
+					[48, 98, -99],
+					[99, 99, 148],
 					[100, 122, 74]
 				],
 				[
 					[48, 104, -92],
-					[105, 105, 147],
+					[105, 105, 149],
 					[106, 110, 74],
-					[111, 111, 148],
+					[111, 111, 150],
 					[112, 122, 74]
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 149],
+					[97, 97, 151],
 					[98, 99, 74],
-					[100, 100, 150],
+					[100, 100, 152],
 					[101, 115, 74],
-					[116, 116, 151],
+					[116, 116, 153],
 					[117, 122, 74]
 				],
 				[
 					[48, 107, -31],
-					[108, 108, 152],
+					[108, 108, 154],
 					[109, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 153],
-					[102, 122, 74]
-				],
-				[
-					[48, 111, -91],
-					[112, 112, 154],
-					[113, 122, 74]
 				],
 				[
 					[48, 100, -38],
@@ -2602,25 +2620,25 @@ class Lexer
 					[102, 122, 74]
 				],
 				[
+					[48, 111, -91],
+					[112, 112, 156],
+					[113, 122, 74]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 157],
+					[102, 122, 74]
+				],
+				[
 					[48, 95, -29],
 					[97, 116, 74],
-					[117, 117, 156],
+					[117, 117, 158],
 					[118, 122, 74]
 				],
 				[
 					[48, 111, -91],
-					[112, 112, 157],
+					[112, 112, 159],
 					[113, 122, 74]
-				],
-				[
-					[48, 104, -92],
-					[105, 105, 158],
-					[106, 122, 74]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 159],
-					[115, 122, 74]
 				],
 				[
 					[48, 104, -92],
@@ -2628,8 +2646,18 @@ class Lexer
 					[106, 122, 74]
 				],
 				[
+					[48, 113, -30],
+					[114, 114, 161],
+					[115, 122, 74]
+				],
+				[
 					[48, 104, -92],
-					[105, 105, 161],
+					[105, 105, 162],
+					[106, 122, 74]
+				],
+				[
+					[48, 104, -92],
+					[105, 105, 163],
 					[106, 122, 74]
 				],
 				[
@@ -2637,9 +2665,9 @@ class Lexer
 				],
 				nil_array,
 				[
-					[0, 9, 162],
-					[11, 12, 162],
-					[14, 255, 162]
+					[0, 9, 164],
+					[11, 12, 164],
+					[14, 255, 164]
 				],
 				nil_array,
 				[
@@ -2662,12 +2690,12 @@ class Lexer
 				],
 				[
 					[48, 113, -30],
-					[114, 114, 163],
+					[114, 114, 165],
 					[115, 122, 74]
 				],
 				[
 					[48, 115, -86],
-					[116, 116, 164],
+					[116, 116, 166],
 					[117, 122, 74]
 				],
 				[
@@ -2675,27 +2703,27 @@ class Lexer
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 165],
+					[101, 101, 167],
 					[102, 122, 74]
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 166],
+					[97, 97, 168],
 					[98, 122, 74]
 				],
 				[
 					[48, 114, -79],
-					[115, 115, 167],
+					[115, 115, 169],
 					[116, 122, 74]
 				],
 				[
 					[48, 115, -86],
-					[116, 116, 168],
+					[116, 116, 170],
 					[117, 122, 74]
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 169],
+					[101, 101, 171],
 					[102, 122, 74]
 				],
 				[
@@ -2703,12 +2731,12 @@ class Lexer
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 170],
+					[101, 101, 172],
 					[102, 122, 74]
 				],
 				[
 					[48, 114, -79],
-					[115, 115, 171],
+					[115, 115, 173],
 					[116, 122, 74]
 				],
 				[
@@ -2719,19 +2747,19 @@ class Lexer
 				],
 				[
 					[48, 110, -32],
-					[111, 111, 172],
+					[111, 111, 174],
 					[112, 122, 74]
 				],
 				[
 					[48, 115, -86],
-					[116, 116, 173],
+					[116, 116, 175],
 					[117, 122, 74]
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 174],
+					[101, 101, 176],
 					[102, 113, 74],
-					[114, 114, 175],
+					[114, 114, 177],
 					[115, 122, 74]
 				],
 				[
@@ -2739,24 +2767,8 @@ class Lexer
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 176],
+					[101, 101, 178],
 					[102, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 177],
-					[102, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 178],
-					[109, 122, 74]
 				],
 				[
 					[48, 100, -38],
@@ -2764,61 +2776,67 @@ class Lexer
 					[102, 122, 74]
 				],
 				[
+					[48, 111, -91],
+					[112, 112, 180],
+					[113, 122, 74]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 181],
+					[109, 122, 74]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 182],
+					[102, 122, 74]
+				],
+				[
 					[48, 95, -29],
 					[97, 106, 74],
-					[107, 107, 180],
+					[107, 107, 183],
 					[108, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 117, 74],
-					[118, 118, 181],
+					[118, 118, 184],
 					[119, 122, 74]
 				],
 				[
 					[48, 115, -86],
-					[116, 116, 182],
+					[116, 116, 185],
 					[117, 122, 74]
 				],
 				[
 					[48, 99, -78],
-					[100, 100, 183],
+					[100, 100, 186],
 					[101, 122, 74]
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 184],
+					[101, 101, 187],
 					[102, 122, 74]
 				],
 				[
-					[48, 116, -107],
-					[117, 117, 185],
+					[48, 116, -108],
+					[117, 117, 188],
 					[118, 122, 74]
 				],
 				[
 					[48, 101, -36],
-					[102, 102, 186],
+					[102, 102, 189],
 					[103, 122, 74]
 				],
 				[
-					[48, 98, -98],
-					[99, 99, 187],
+					[48, 98, -99],
+					[99, 99, 190],
 					[100, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 188],
-					[102, 122, 74]
-				],
-				[
-					[48, 109, -39],
-					[110, 110, 189],
-					[111, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 190],
-					[102, 122, 74]
 				],
 				[
 					[48, 100, -38],
@@ -2826,8 +2844,23 @@ class Lexer
 					[102, 122, 74]
 				],
 				[
-					[48, 117, -149],
-					[118, 118, 192],
+					[48, 109, -39],
+					[110, 110, 192],
+					[111, 122, 74]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 193],
+					[102, 122, 74]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 194],
+					[102, 122, 74]
+				],
+				[
+					[48, 117, -151],
+					[118, 118, 195],
 					[119, 122, 74]
 				],
 				[
@@ -2835,12 +2868,12 @@ class Lexer
 				],
 				[
 					[48, 107, -31],
-					[108, 108, 193],
+					[108, 108, 196],
 					[109, 122, 74]
 				],
 				[
 					[48, 115, -86],
-					[116, 116, 194],
+					[116, 116, 197],
 					[117, 122, 74]
 				],
 				[
@@ -2848,51 +2881,33 @@ class Lexer
 				],
 				[
 					[48, 115, -86],
-					[116, 116, 195],
+					[116, 116, 198],
 					[117, 122, 74]
 				],
 				[
 					[48, 113, -30],
-					[114, 114, 196],
+					[114, 114, 199],
 					[115, 122, 74]
 				],
 				[
 					[48, 113, -30],
-					[114, 114, 197],
+					[114, 114, 200],
 					[115, 122, 74]
 				],
 				[
-					[48, 106, -148],
-					[107, 107, 198],
+					[48, 106, -150],
+					[107, 107, 201],
 					[108, 122, 74]
 				],
 				[
 					[48, 114, -79],
-					[115, 115, 199],
+					[115, 115, 202],
 					[116, 122, 74]
 				],
 				[
 					[48, 104, -92],
-					[105, 105, 200],
+					[105, 105, 203],
 					[106, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 201],
-					[115, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 202],
-					[102, 122, 74]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 203],
-					[115, 122, 74]
 				],
 				[
 					[48, 122, -35]
@@ -2903,42 +2918,48 @@ class Lexer
 					[115, 122, 74]
 				],
 				[
-					[48, 116, -107],
-					[117, 117, 205],
+					[48, 100, -38],
+					[101, 101, 205],
+					[102, 122, 74]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 206],
+					[115, 122, 74]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 113, -30],
+					[114, 114, 207],
+					[115, 122, 74]
+				],
+				[
+					[48, 116, -108],
+					[117, 117, 208],
 					[118, 122, 74]
 				],
 				[
 					[48, 115, -86],
-					[116, 116, 206],
+					[116, 116, 209],
 					[117, 122, 74]
 				],
 				[
 					[48, 107, -31],
-					[108, 108, 207],
+					[108, 108, 210],
 					[109, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 208],
-					[98, 122, 74]
 				],
 				[
 					[48, 122, -35]
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 209],
+					[97, 97, 211],
 					[98, 122, 74]
 				],
 				[
-					[48, 95, -29],
-					[97, 97, 210],
-					[98, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 211],
-					[102, 122, 74]
+					[48, 122, -35]
 				],
 				[
 					[48, 95, -29],
@@ -2946,13 +2967,28 @@ class Lexer
 					[98, 122, 74]
 				],
 				[
+					[48, 95, -29],
+					[97, 97, 213],
+					[98, 122, 74]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 214],
+					[102, 122, 74]
+				],
+				[
+					[48, 95, -29],
+					[97, 97, 215],
+					[98, 122, 74]
+				],
+				[
 					[48, 101, -36],
-					[102, 102, 213],
+					[102, 102, 216],
 					[103, 122, 74]
 				],
 				[
 					[48, 113, -30],
-					[114, 114, 214],
+					[114, 114, 217],
 					[115, 122, 74]
 				],
 				[
@@ -2960,12 +2996,12 @@ class Lexer
 				],
 				[
 					[48, 104, -92],
-					[105, 105, 215],
+					[105, 105, 218],
 					[106, 122, 74]
 				],
 				[
 					[48, 113, -30],
-					[114, 114, 216],
+					[114, 114, 219],
 					[115, 122, 74]
 				],
 				[
@@ -2979,17 +3015,17 @@ class Lexer
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 217],
+					[101, 101, 220],
 					[102, 122, 74]
 				],
 				[
 					[48, 100, -38],
-					[101, 101, 218],
+					[101, 101, 221],
 					[102, 122, 74]
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 219],
+					[97, 97, 222],
 					[98, 122, 74]
 				],
 				[
@@ -2997,32 +3033,8 @@ class Lexer
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 220],
+					[97, 97, 223],
 					[98, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 221],
-					[117, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 109, -39],
-					[110, 110, 222],
-					[111, 122, 74]
-				],
-				[
-					[48, 109, -39],
-					[110, 110, 223],
-					[111, 122, 74]
-				],
-				[
-					[48, 122, -35]
 				],
 				[
 					[48, 115, -86],
@@ -3030,15 +3042,39 @@ class Lexer
 					[117, 122, 74]
 				],
 				[
-					[48, 101, -36],
-					[102, 102, 225],
-					[103, 109, 74],
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 109, -39],
+					[110, 110, 225],
+					[111, 122, 74]
+				],
+				[
+					[48, 109, -39],
 					[110, 110, 226],
 					[111, 122, 74]
 				],
 				[
+					[48, 122, -35]
+				],
+				[
+					[48, 115, -86],
+					[116, 116, 227],
+					[117, 122, 74]
+				],
+				[
+					[48, 101, -36],
+					[102, 102, 228],
+					[103, 109, 74],
+					[110, 110, 229],
+					[111, 122, 74]
+				],
+				[
 					[48, 99, -78],
-					[100, 100, 227],
+					[100, 100, 230],
 					[101, 122, 74]
 				],
 				[
@@ -3049,28 +3085,28 @@ class Lexer
 				],
 				[
 					[48, 97, -29],
-					[98, 98, 228],
+					[98, 98, 231],
 					[99, 122, 74]
 				],
 				[
 					[48, 95, -29],
 					[97, 102, 74],
-					[103, 103, 229],
+					[103, 103, 232],
 					[104, 122, 74]
 				],
 				[
 					[48, 115, -86],
-					[116, 116, 230],
+					[116, 116, 233],
 					[117, 122, 74]
 				],
 				[
-					[48, 98, -98],
-					[99, 99, 231],
+					[48, 98, -99],
+					[99, 99, 234],
 					[100, 122, 74]
 				],
 				[
 					[48, 97, -29],
-					[98, 98, 232],
+					[98, 98, 235],
 					[99, 122, 74]
 				],
 				[
@@ -3078,12 +3114,12 @@ class Lexer
 				],
 				[
 					[48, 109, -39],
-					[110, 110, 233],
+					[110, 110, 236],
 					[111, 122, 74]
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 234],
+					[97, 97, 237],
 					[98, 122, 74]
 				],
 				[
@@ -3091,7 +3127,7 @@ class Lexer
 				],
 				[
 					[48, 113, -30],
-					[114, 114, 235],
+					[114, 114, 238],
 					[115, 122, 74]
 				],
 				[
@@ -3099,20 +3135,20 @@ class Lexer
 				],
 				[
 					[48, 97, -29],
-					[98, 98, 236],
+					[98, 98, 239],
 					[99, 122, 74]
 				],
 				[
-					[48, 98, -98],
-					[99, 99, 237],
+					[48, 98, -99],
+					[99, 99, 240],
 					[100, 122, 74]
 				],
 				[
 					[48, 122, -35]
 				],
 				[
-					[48, 116, -107],
-					[117, 117, 238],
+					[48, 116, -108],
+					[117, 117, 241],
 					[118, 122, 74]
 				],
 				[
@@ -3123,26 +3159,11 @@ class Lexer
 				],
 				[
 					[48, 95, -29],
-					[97, 97, 239],
+					[97, 97, 242],
 					[98, 122, 74]
 				],
 				[
 					[48, 122, -35]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 240],
-					[102, 122, 74]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 241],
-					[109, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 242],
-					[102, 122, 74]
 				],
 				[
 					[48, 100, -38],
@@ -3150,27 +3171,24 @@ class Lexer
 					[102, 122, 74]
 				],
 				[
+					[48, 107, -31],
+					[108, 108, 244],
+					[109, 122, 74]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 245],
+					[102, 122, 74]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 246],
+					[102, 122, 74]
+				],
+				[
 					[48, 115, -86],
-					[116, 116, 244],
+					[116, 116, 247],
 					[117, 122, 74]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 245],
-					[109, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 246],
-					[109, 122, 74]
-				],
-				[
-					[48, 114, -79],
-					[115, 115, 247],
-					[116, 122, 74]
 				],
 				[
 					[48, 107, -31],
@@ -3178,33 +3196,27 @@ class Lexer
 					[109, 122, 74]
 				],
 				[
+					[48, 122, -35]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 249],
+					[109, 122, 74]
+				],
+				[
+					[48, 114, -79],
+					[115, 115, 250],
+					[116, 122, 74]
+				],
+				[
+					[48, 107, -31],
+					[108, 108, 251],
+					[109, 122, 74]
+				],
+				[
 					[48, 115, -86],
-					[116, 116, 249],
+					[116, 116, 252],
 					[117, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 250],
-					[102, 122, 74]
-				],
-				[
-					[48, 98, -98],
-					[99, 99, 251],
-					[100, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 252],
-					[102, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
 				],
 				[
 					[48, 100, -38],
@@ -3212,28 +3224,28 @@ class Lexer
 					[102, 122, 74]
 				],
 				[
+					[48, 98, -99],
+					[99, 99, 254],
+					[100, 122, 74]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
 					[48, 100, -38],
-					[101, 101, 254],
+					[101, 101, 255],
 					[102, 122, 74]
 				],
 				[
 					[48, 122, -35]
 				],
 				[
-					[48, 95, -29],
-					[97, 97, 255],
-					[98, 122, 74]
+					[48, 122, -35]
 				],
 				[
 					[48, 100, -38],
 					[101, 101, 256],
 					[102, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
 				],
 				[
 					[48, 100, -38],
@@ -3244,8 +3256,32 @@ class Lexer
 					[48, 122, -35]
 				],
 				[
+					[48, 95, -29],
+					[97, 97, 258],
+					[98, 122, 74]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 259],
+					[102, 122, 74]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
+					[48, 100, -38],
+					[101, 101, 260],
+					[102, 122, 74]
+				],
+				[
+					[48, 122, -35]
+				],
+				[
 					[48, 99, -78],
-					[100, 100, 258],
+					[100, 100, 261],
 					[101, 122, 74]
 				],
 				[
@@ -3253,7 +3289,7 @@ class Lexer
 				],
 				[
 					[48, 107, -31],
-					[108, 108, 259],
+					[108, 108, 262],
 					[109, 122, 74]
 				],
 				[
@@ -3281,7 +3317,7 @@ class Lexer
 	private fun build_accept_table do
 		_accept_table = once [
 			[
-				-1,0,1,1,0,76,-1,-1,68,-1,51,52,66,64,55,65,63,67,80,56,71,58,73,77,53,54,-1,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,-1,1,70,-1,83,-1,84,-1,2,2,-1,82,59,60,62,81,-1,57,72,69,74,77,77,77,77,79,78,78,78,78,78,78,47,78,78,78,16,78,78,78,78,78,78,25,78,30,15,78,78,78,78,78,32,78,78,78,78,78,78,78,78,78,78,78,78,78,-1,86,-1,85,-1,2,61,75,79,79,79,79,78,78,31,78,78,78,78,78,10,78,78,29,11,78,78,78,40,78,78,39,33,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,19,78,78,-1,78,78,78,78,78,78,27,78,78,78,13,78,78,78,78,46,41,78,78,78,78,78,78,43,78,78,26,44,12,78,78,78,37,78,78,36,5,78,78,45,78,78,78,49,50,78,78,78,78,78,14,78,78,42,78,28,78,78,38,78,21,4,78,20,78,78,78,78,78,78,34,78,78,78,78,78,78,24,78,3,23,78,78,9,78,78,6,35,78,48,78,17,78,18,7,22,8
+				-1,0,1,1,0,77,-1,-1,69,-1,52,53,67,65,56,66,64,68,81,57,72,59,74,78,54,55,-1,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,-1,1,71,-1,84,-1,85,-1,2,2,-1,83,60,61,63,82,-1,58,73,70,75,78,78,78,78,80,79,79,79,79,79,79,48,79,79,79,16,79,79,79,79,79,79,25,79,31,15,79,79,79,79,79,79,33,79,79,79,79,79,79,79,79,79,79,79,79,79,-1,87,-1,86,-1,2,62,76,80,80,80,80,79,79,32,79,79,79,79,79,10,79,79,30,11,79,79,79,41,79,79,79,40,34,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,19,79,79,-1,79,79,79,79,79,79,27,79,79,79,13,79,79,79,79,29,47,42,79,79,79,79,79,79,44,79,79,26,45,12,79,79,79,38,79,79,37,5,79,79,46,79,79,79,50,51,79,79,79,79,79,14,79,79,43,79,28,79,79,39,79,21,4,79,20,79,79,79,79,79,79,35,79,79,79,79,79,79,24,79,3,23,79,79,9,79,79,6,36,79,49,79,17,79,18,7,22,8
 
 			]
 		]

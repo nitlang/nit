@@ -83,6 +83,7 @@ kwif = 'if';
 kwthen = 'then';
 kwelse = 'else';
 kwwhile = 'while';
+kwloop = 'loop';
 kwfor = 'for';
 kwin = 'in';
 kwand = 'and';
@@ -319,6 +320,7 @@ stmt~withelse {-> expr}
 	| {do} do~withelse {-> do~withelse.expr}
 	| {if} if~withelse {-> if~withelse.expr}
 	| {while} while~withelse {-> while~withelse.expr}
+	| {loop} loop~withelse {-> loop~withelse.expr}
 	| {for} for~withelse {-> for~withelse.expr}
 	| {assert} assert~withelse {-> assert~withelse.expr}
 	| {call} recv id args_nopar closure_defs~withelse? {-> New expr.call(recv.expr, id, [args_nopar.expr], [closure_defs~withelse.closure_def])}
@@ -384,6 +386,11 @@ if~withelse {-> expr}
 elsepartblock {-> expr?}
 	= {else} kwelse stmtso {-> stmtso.expr}
 	| {empty} kwend {-> Null}
+	;
+
+loop~withelse {-> expr}
+	= kwloop stmtso~withelse_withend label? {-> New expr.loop(kwloop, stmtso~withelse_withend.expr, label)}
+	| {noend} kwloop stmt~withelse {-> New expr.loop(kwloop, stmt~withelse.expr, Null)}
 	;
 
 while~withelse {-> expr}
@@ -627,6 +634,7 @@ expr	= {block} expr*
 	| {if} kwif expr [then]:expr? [else]:expr? 
 	| {ifexpr} kwif expr kwthen [then]:expr kwelse [else]:expr
 	| {while} kwwhile expr kwdo [block]:expr? label?
+	| {loop} kwloop [block]:expr? label?
 	| {for} kwfor id expr kwdo [block]:expr? label?
 	| {assert} kwassert id? expr 
 	| {once} kwonce expr 

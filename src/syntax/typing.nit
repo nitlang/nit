@@ -545,6 +545,33 @@ redef class AWhileExpr
 	end
 end
 
+redef class ALoopExpr
+	# The corresponding escapable block
+	readable var _escapable: nullable EscapableBlock
+
+	redef fun accept_typing(v)
+	do
+		var escapable = new EscapableBlock(self)
+		_escapable = escapable
+		v.escapable_ctx.push(escapable, n_label)
+		var old_var_ctx = v.variable_ctx
+		var old_base_var_ctx = v.base_variable_ctx
+		v.base_variable_ctx = v.variable_ctx
+		v.variable_ctx = v.variable_ctx.sub(self)
+
+		# Process inside
+		if n_block != null then
+			v.variable_ctx = v.variable_ctx.sub(n_block.as(not null))
+			v.enter_visit(n_block)
+		end
+
+		v.variable_ctx = old_var_ctx
+		v.base_variable_ctx = old_base_var_ctx
+		v.escapable_ctx.pop
+		_is_typed = true
+	end
+end
+
 redef class AForExpr
 	var _variable: nullable AutoVariable
 	redef fun variable do return _variable.as(not null)

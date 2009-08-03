@@ -30,11 +30,11 @@ setlocal nosmartindent
 setlocal nocindent
 setlocal autoindent
 setlocal comments=:#
-setlocal indentkeys+==end,=else,=do,=var,0!,=then,=special,=class,=interface,=universal
+setlocal indentkeys+==end,=else,=do,=var,0!,=then,=loop,=special,=class,=interface,=universal
 setlocal sw=8
 
 " Indent after
-let s:relative_indent = '\<\(do\|then\|else\|if\)\s*\(#\|$\)\|^\s*\(\<\(redef\|private\)\>\s*\)\?\(\<abstract\>\s*\)\?\<\(class\|interface\|universal\|special\)\>'
+let s:relative_indent = '\<\(do\|loop\|then\|else\|if\)\s*\(#\|$\)\|^\s*\(\<\(redef\|private\)\>\s*\)\?\(\<abstract\>\s*\)\?\<\(class\|interface\|universal\|special\)\>'
 " Unindent on them
 let s:outdent = '^\s*\(else\|then\|end\)\>'
 " At 0
