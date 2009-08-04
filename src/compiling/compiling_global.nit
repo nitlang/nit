@@ -49,31 +49,20 @@ class ColorContext
 end
 
 # All information and results of the global analysis.
-class GlobalAnalysis
+class TableInformation
 special ColorContext
-	# Associate global classes to compiled classes
-	readable var _compiled_classes: HashMap[MMGlobalClass, CompiledClass] = new HashMap[MMGlobalClass, CompiledClass]
-
-	# The main module of the program globally analysed
-	readable var _module: MMModule
-
 	# FIXME: do something better.
 	readable writable var _max_class_table_length: Int = 0
-
-	init(module: MMModule)
-	do
-		_module = module
-	end
 end
 
 class GlobalCompilerVisitor
 special CompilerVisitor
 	# The global analysis result
-	readable var _global_analysis: GlobalAnalysis
-	init(m: MMModule, tc: ToolContext, ga: GlobalAnalysis)
+	readable var _program: Program
+	init(m: MMModule, tc: ToolContext, prog: Program)
 	do
 		super(m, tc)
-		_global_analysis = ga
+		_program = prog
 	end
 end
 
@@ -154,10 +143,15 @@ redef class MMConcreteClass
 end
 
 redef class Program
+	# Information about the class tables
+	readable var _table_information: TableInformation = new TableInformation
+
+	# Associate global classes to compiled classes
+	readable var _compiled_classes: HashMap[MMGlobalClass, CompiledClass] = new HashMap[MMGlobalClass, CompiledClass]
+
 	# Do the complete global analysis
-	fun global_analysis(cctx: ToolContext): GlobalAnalysis
+	fun global_analysis(cctx: ToolContext)
 	do
-		var ga = new GlobalAnalysis(module)
 		var smallest_classes = new Array[MMLocalClass]
 		var global_properties = new HashSet[MMGlobalProperty]
 		var ctab = new Array[TableElt]
@@ -186,7 +180,7 @@ redef class Program
 
 			# Associate a CompiledClass to the class
 			var cc = new CompiledClass(c)
-			ga.compiled_classes[c.global] = cc
+			compiled_classes[c.global] = cc
 
 			# Assign a unique class identifier
 			# (negative are for primitive classes)
@@ -224,36 +218,36 @@ redef class Program
 		#print("nbclasses: {classes.length} leaves: {smallest_classes.length} crown: {crown_classes.length} core: {core_classes.length}")
 
 		# Colorize core color for typechecks
-		colorize(ga, ctab, crown_classes, 0)
+		colorize(ctab, crown_classes, 0)
 
 		# Compute tables for typechecks
 		var maxcolor = 0
 		for c in classes do
-			var cc = ga.compiled_classes[c.global]
+			var cc = compiled_classes[c.global]
 			if core_classes.has(c) then
 				# For core classes, just build the table
-				build_tables_in(cc.class_table, ga, c, ctab)
+				build_tables_in(cc.class_table, c, ctab)
 				if maxcolor < cc.class_table.length then maxcolor = cc.class_table.length
 			else
 				# For other classes, it's easier: just append to the parent tables
 				var sc = c.cshe.direct_greaters.first
-				var scc = ga.compiled_classes[sc.global]
+				var scc = compiled_classes[sc.global]
 				assert cc.class_table.is_empty
 				cc.class_table.add_all(scc.class_table)
 				var bc = c.global.intro
 				assert bc isa MMConcreteClass
 				var colpos = bc.class_color_pos
 				var colposcolor = cc.class_table.length
-				ga.color(colpos) = colposcolor
+				table_information.color(colpos) = colposcolor
 				cc.class_table.add(colpos)
 				if maxcolor < colposcolor then maxcolor = colposcolor
 			end
 		end
-		ga.max_class_table_length = maxcolor + 1
+		table_information.max_class_table_length = maxcolor + 1
 
 		# Fill class table and instance tables pools
 		for c in classes do
-			var cc = ga.compiled_classes[c.global]
+			var cc = compiled_classes[c.global]
 			var cte = cc.class_layout
 			var ite = cc.instance_layout
 			for sc in c.crhe.greaters_and_self do
@@ -274,50 +268,48 @@ redef class Program
 		end
 
 		# Colorize all elements in pools tables
-		colorize(ga, ctab, crown_classes, maxcolor+1)
-		colorize(ga, itab, crown_classes, 0)
+		colorize(ctab, crown_classes, maxcolor+1)
+		colorize(itab, crown_classes, 0)
 
 		# Build class and instance tables now things are colored
-		ga.max_class_table_length = 0
+		table_information.max_class_table_length = 0
 		for c in classes do
-			var cc = ga.compiled_classes[c.global]
+			var cc = compiled_classes[c.global]
 			if core_classes.has(c) then
 				# For core classes, just build the table
-				build_tables_in(cc.class_table, ga, c, ctab)
-				build_tables_in(cc.instance_table, ga, c, itab)
+				build_tables_in(cc.class_table, c, ctab)
+				build_tables_in(cc.instance_table, c, itab)
 			else
 				# For other classes, it's easier: just append to the parent tables
 				var sc = c.cshe.direct_greaters.first
-				var scc = ga.compiled_classes[sc.global]
+				var scc = compiled_classes[sc.global]
 				cc.class_table.clear
 				cc.class_table.add_all(scc.class_table)
 				var bc = c.global.intro
 				assert bc isa MMConcreteClass
 				var colpos = bc.class_color_pos
-				cc.class_table[ga.color(colpos)] = colpos
+				cc.class_table[table_information.color(colpos)] = colpos
 				while cc.class_table.length <= maxcolor do
 					cc.class_table.add(null)
 				end
-				append_to_table(ga, cc.class_table, cc.class_layout)
+				append_to_table(cc.class_table, cc.class_layout)
 				assert cc.instance_table.is_empty
 				cc.instance_table.add_all(scc.instance_table)
-				append_to_table(ga, cc.instance_table, cc.instance_layout)
+				append_to_table(cc.instance_table, cc.instance_layout)
 			end
 		end
-
-		return ga
 	end
 
 	# Perform coloring
-	fun colorize(ga: GlobalAnalysis, elts: Array[TableElt], classes: Collection[MMLocalClass], startcolor: Int)
+	fun colorize(elts: Array[TableElt], classes: Collection[MMLocalClass], startcolor: Int)
 	do
 		var colors = new HashMap[Int, Array[TableElt]]
 		var rel_classes = new Array[MMLocalClass]
 		for e in elts do
 			var color = -1
 			var len = e.length
-			if ga.has_color(e) then
-				color = ga.color(e)
+			if table_information.has_color(e) then
+				color = table_information.color(e)
 			else
 				rel_classes.clear
 				for c in classes do
@@ -340,7 +332,7 @@ redef class Program
 						end
 					end
 				end
-				ga.color(e) = color
+				table_information.color(e) = color
 			end
 			for idx in [0..len[ do
 				if colors.has_key(color + idx) then
@@ -362,22 +354,22 @@ redef class Program
 		return true
 	end
 
-	private fun append_to_table(cc: ColorContext, table: Array[nullable TableElt], cmp: TableEltComposite)
+	private fun append_to_table(table: Array[nullable TableElt], cmp: TableEltComposite)
 	do
 		for j in [0..cmp.length[ do
 			var e = cmp.item(j)
-			cc.color(e) = table.length
+			table_information.color(e) = table.length
 			table.add(e)
 		end
 	end
 
-	private fun build_tables_in(table: Array[nullable TableElt], ga: GlobalAnalysis, c: MMLocalClass, elts: Array[TableElt])
+	private fun build_tables_in(table: Array[nullable TableElt], c: MMLocalClass, elts: Array[TableElt])
 	do
 		var tab = new HashMap[Int, TableElt]
 		var len = 0
 		for e in elts do
 			if e.is_related_to(c) then
-				var col = ga.color(e)
+				var col = table_information.color(e)
 				var l = col + e.length
 				tab[col] = e
 				if len < l then
@@ -485,7 +477,7 @@ redef class MMModule
 		for e in _local_table do
 			var value: String
 			if v.tc.global then
-				value = "{e.value(v.global_analysis)}"
+				value = "{e.value(v.program)}"
 			else
 				value = "SFT_{name}[{i}]"
 				i = i + 1
@@ -523,7 +515,7 @@ redef class MMModule
 		v.add_instr("const int SFT_{name}[{_local_table.length}] = \{")
 		v.indent
 		for e in _local_table do
-			v.add_instr(e.value(v.global_analysis) + ",")
+			v.add_instr(e.value(v.program) + ",")
 		end
 		v.unindent
 		v.add_instr("\};")
@@ -560,7 +552,7 @@ end
 abstract class ModuleTableElt
 special AbsTableElt
 	# Return the value of the element once the global analisys is performed
-	fun value(ga: GlobalAnalysis): String is abstract
+	fun value(prog: Program): String is abstract
 end
 
 # An element of a module table that represents a group of TableElt defined in the same local class
@@ -568,7 +560,7 @@ class ModuleTableEltGroup
 special ModuleTableElt
 	readable var _elements: Array[TableElt] = new Array[TableElt]
 
-	redef fun value(ga) do return "{ga.color(_elements.first)} /* Group of ? */"
+	redef fun value(prog) do return "{prog.table_information.color(_elements.first)} /* Group of ? */"
 	redef fun compile_macros(v, value)
 	do
 		var i = 0
@@ -647,9 +639,9 @@ special TableEltProp
 
 	redef fun compile_to_c(v, c)
 	do
-		var ga = v.global_analysis
+		var prog = v.program
 		var p = c[_property.global]
-		return "/* {ga.color(self)}: Attribute {c}::{p} */"
+		return "/* {prog.table_information.color(self)}: Attribute {c}::{p} */"
 	end
 end
 
@@ -690,9 +682,9 @@ special ModuleTableElt
 special AbsTableEltClass
 	redef fun symbol do return _local_class.global.id_id
 
-	redef fun value(ga)
+	redef fun value(prog)
 	do
-		return "{ga.compiled_classes[_local_class.global].id} /* Id of {_local_class} */"
+		return "{prog.compiled_classes[_local_class.global].id} /* Id of {_local_class} */"
 	end
 end
 
@@ -703,14 +695,14 @@ special TableEltClass
 
 	redef fun compile_to_c(v, c)
 	do
-		var ga = v.global_analysis
-		var cc = ga.compiled_classes[_local_class.global]
+		var prog = v.program
+		var cc = prog.compiled_classes[_local_class.global]
 		var linext = c.cshe.reverse_linear_extension
 		var i = 0
 		while linext[i].global != _local_class.global do
 			i += 1
 		end
-		return "{i} /* {ga.color(self)}: {c} < {cc.local_class}: superclass init_table position */"
+		return "{i} /* {prog.table_information.color(self)}: {c} < {cc.local_class}: superclass init_table position */"
 	end
 end
 
@@ -723,16 +715,16 @@ special TableEltClass
 special ModuleTableElt
 	redef fun symbol do return _local_class.global.color_id
 
-	redef fun value(ga)
+	redef fun value(prog)
 	do
-		return "{ga.color(self)} /* Color of {_local_class} */"
+		return "{prog.table_information.color(self)} /* Color of {_local_class} */"
 	end
 
 	redef fun compile_to_c(v, c)
 	do
-		var ga = v.global_analysis
-		var cc = ga.compiled_classes[_local_class.global]
-		return "{cc.id} /* {ga.color(self)}: {c} < {cc.local_class}: superclass typecheck marker */"
+		var prog = v.program
+		var cc = prog.compiled_classes[_local_class.global]
+		return "{cc.id} /* {prog.table_information.color(self)}: {c} < {cc.local_class}: superclass typecheck marker */"
 	end
 end
 
@@ -769,8 +761,8 @@ special TableElt
 	redef fun is_related_to(c) do return true
 	redef fun compile_to_c(v, c)
 	do
-		var ga = v.global_analysis
-		return "{v.global_analysis.compiled_classes[c.global].id} /* {ga.color(self)}: Identity */"
+		var prog = v.program
+		return "{prog.compiled_classes[c.global].id} /* {prog.table_information.color(self)}: Identity */"
 	end
 end
 
@@ -782,17 +774,17 @@ special TableElt
 	redef fun compile_to_c(v, c)
 	do
         var nb = 0
-        var ga = v.global_analysis
+        var p = v.program
 		if c.name == "NativeArray".to_symbol then
 			nb = -1
 		else
-			var cc = ga.compiled_classes[c.global]
+			var cc = p.compiled_classes[c.global]
 			var itab = cc.instance_table
 			for e in itab do
 				nb += 1
 			end
 		end
-		return "{nb} /* {ga.color(self)}: Object size (-1 if a NativeArray)*/"
+		return "{nb} /* {p.table_information.color(self)}: Object size (-1 if a NativeArray)*/"
 	end
 end
 
@@ -802,8 +794,8 @@ special TableElt
 	redef fun is_related_to(c) do return true
 	redef fun compile_to_c(v, c)
 	do
-		var ga = v.global_analysis
-		return "/* {ga.color(self)}: Object_id */"
+		var p = v.program
+		return "/* {p.table_information.color(self)}: Object_id */"
 	end
 end
 
@@ -813,8 +805,8 @@ special TableElt
 	redef fun is_related_to(c) do return true
 	redef fun compile_to_c(v, c)
 	do
-		var ga = v.global_analysis
-		return "/* {ga.color(self)}: Pointer to the classtable */"
+		var prog = v.program
+		return "/* {prog.table_information.color(self)}: Pointer to the classtable */"
 	end
 end
 
@@ -873,11 +865,11 @@ redef class MMLocalClass
 	# Compilation of table and new (or box)
 	fun compile_tables_to_c(v: GlobalCompilerVisitor)
 	do
-		var cc = v.global_analysis.compiled_classes[self.global]
+		var cc = v.program.compiled_classes[self.global]
 		var ctab = cc.class_table
 		var clen = ctab.length
-		if v.global_analysis.max_class_table_length > ctab.length then
-			clen = v.global_analysis.max_class_table_length
+		if v.program.table_information.max_class_table_length > ctab.length then
+			clen = v.program.table_information.max_class_table_length
 		end
 
 		v.add_instr("const classtable_elt_t VFT_{name}[{clen}] = \{")

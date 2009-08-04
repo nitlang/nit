@@ -34,7 +34,7 @@ redef class Program
 		end
 
 		tc.info("Merging all tables",2)
-		var ga = global_analysis(tc)
+		global_analysis(tc)
 
 		tc.compdir.mkdir
 
@@ -47,7 +47,7 @@ redef class Program
 		for m in module.mhe.greaters_and_self do
 			files.add("{tc.compdir}/{m.name}._sep.c")
 			tc.info("Generating C code for module: {m.name}",2)
-			m.compile_separate_module(tc, ga)
+			m.compile_separate_module(tc, self)
 			var native_name = m.location.file.strip_extension(".nit")
 			if (native_name + "_nit.h").file_exists then
 				includes.add("-I {native_name.dirname}")
@@ -58,7 +58,7 @@ redef class Program
 
 		tc.info("Generating main, tables and makefile ...",1)
 		files.add("{tc.compdir}/{module.name}._tables.c")
-		compile_main(tc, ga)
+		compile_main(tc)
 
 		var fn = "{tc.compdir}/{module.name}._build.sh"
 		var f = new OFStream.open(fn)
@@ -91,9 +91,9 @@ redef class Program
 	end
 
 	# Compile the main file
-	private fun compile_main(tc: ToolContext, ga: GlobalAnalysis)
+	private fun compile_main(tc: ToolContext)
 	do
-		var v = new GlobalCompilerVisitor(module, tc, ga)
+		var v = new GlobalCompilerVisitor(module, tc, self)
 		v.add_decl("#include <nit_common.h>")
 		compile_tables_to_c(v)
 		compile_main_part(v)
@@ -109,9 +109,9 @@ end
 
 redef class MMModule
 	# Compile the sep files (of the current module only)
-	private fun compile_separate_module(tc: ToolContext, ga: GlobalAnalysis)
+	private fun compile_separate_module(tc: ToolContext, program: Program)
 	do
-		var v = new GlobalCompilerVisitor(self, tc, ga)
+		var v = new GlobalCompilerVisitor(self, tc, program)
 		v.add_decl("#include <nit_common.h>")
 		var native_name = location.file.strip_extension(".nit")
 		native_name += ("_nit.h")
