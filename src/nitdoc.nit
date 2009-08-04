@@ -403,7 +403,7 @@ special MMEntity
 	do
 		var m = module
 		if not need_doc(dctx) then m = global.intro.module
-		var m = dctx.known_owner_of(m)
+		m = dctx.known_owner_of(m)
 		if m == dctx.module then
 			return "<a href=\"#{html_anchor}\">{self}</a>"
 		else
@@ -697,7 +697,7 @@ special MMEntity
 	do
 		var m = module
 		if not need_doc(dctx) then m = global.module
-		var m = dctx.known_owner_of(m)
+		m = dctx.known_owner_of(m)
 		if m == dctx.module then
 			return "<a href=\"#{html_anchor}\">{self}</a>"
 		else
@@ -904,7 +904,6 @@ special MMEntity
 			# skip pass 1 because constructors are not inherited
 			var cmap = new HashMap[MMLocalClass, Array[MMLocalProperty]]
 			var mmap = new HashMap[MMModule, Array[MMLocalProperty]]
-			var props = new Array[MMLocalClass]
 			for c in che.greaters do
 				if c isa MMSrcLocalClass then
 					var km = dctx.known_owner_of(c.module)
@@ -962,7 +961,6 @@ special MMEntity
 		end
 
 		var mmap = new HashMap[MMModule, Array[MMLocalProperty]]
-		var props = new Array[MMLocalClass]
 		for c in crhe.order do
 			if module.mhe <= c.module or dctx.owned_modules.has(c.module) or not c isa MMSrcLocalClass then continue
 			var km = dctx.known_owner_of(c.module)

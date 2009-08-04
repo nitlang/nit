@@ -160,7 +160,6 @@ special ArrayCapable[nullable N]
 
 		if _capacity <= old_cap then return
 
-		var new_array = _array
 		# Reput items in the array
 		var node = _first_item
 		while node != null do

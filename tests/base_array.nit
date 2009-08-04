@@ -24,4 +24,4 @@ for i in a do
 	(i*10).output
 end
 
-#alt1# var a = [10, true]
+#alt1# var b = [10, true]

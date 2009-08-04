@@ -16,7 +16,7 @@
 
 import kernel
 
-var i = 1
+var i = 1#!alt1#
 #alt1#var i: Object = 1
 i += 2
 i.output

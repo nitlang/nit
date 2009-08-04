@@ -20,5 +20,5 @@ fun some_fun do
 #alt7#	var v = [1..10]
 #alt8#  for i in new L do
 #alt8#  end
-	var v: Object
+	var y: Object
 end

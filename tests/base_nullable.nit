@@ -22,10 +22,10 @@ class A
 	redef fun output do _i.output
 end
 
-var a: A
-var na: nullable A
-var o: Object
-var no: nullable Object
+
+
+
+
 
 var a: A = new A(1)
 var na: nullable A = new A(2)

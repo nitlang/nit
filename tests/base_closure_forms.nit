@@ -129,7 +129,7 @@ end
 
 fun file_open(i: Int)
 	!work(f: File)
-	break !error(i: Int) do abort
+	break !error(j: Int) do abort
 do
 	var f = new File(i)
 	if not f.is_open then error(404)

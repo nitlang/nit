@@ -67,7 +67,7 @@ while fail do trash(0)
 while true do fail
 
 for i in fail do trash(0) # no rtype (hum...)
-for i in [0..1] do fail
+for j in [0..1] do fail
 assert fail
 trash(once fail) # no rtype
 trash(fail or true)

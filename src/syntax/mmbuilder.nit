@@ -84,9 +84,9 @@ redef class MMSrcModule
 		end
 
 		# Check class conformity
-		var mmbv1b = new ClassVerifierVisitor(tc, self)
+		var mmbv1c = new ClassVerifierVisitor(tc, self)
 		for c in classes do
-			c.accept_class_visitor(mmbv1b)
+			c.accept_class_visitor(mmbv1c)
 		end
 		tc.check_errors
 
@@ -892,9 +892,9 @@ redef class APropdef
 			if s.arity != isig.arity then
 				v.error(self, "Redef error: {prop.local_class}::{prop} redefines {ip.local_class}::{ip} with {isig.arity} parameter(s).")
 			else
-				for i in [0..s.arity[ do
-					if s[i] != isig[i] then
-						v.error(self, "Redef error: Expected {isig[i]} (as in {ip.local_class}::{ip}), got {s[i]} in {prop.local_class}::{prop}.")
+				for j in [0..s.arity[ do
+					if s[j] != isig[j] then
+						v.error(self, "Redef error: Expected {isig[j]} (as in {ip.local_class}::{ip}), got {s[j]} in {prop.local_class}::{prop}.")
 					end
 				end
 			end

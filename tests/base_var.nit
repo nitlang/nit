@@ -50,5 +50,5 @@ var a4: Int = foo
 a4.output
 var a5 = foo
 a5.output
-#alt7#var a4: Int = bar
-#alt8#var a5 = bar
+#alt7#var a6: Int = bar
+#alt8#var a7 = bar

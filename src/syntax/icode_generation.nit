@@ -115,17 +115,17 @@ special ICodeBuilder
 		end
 		var l = n.super_init_calls.length
 		while i < l do
-			var p = n.super_init_calls[i]
-			if p == stop_prop then break
+			var sp = n.super_init_calls[i]
+			if sp == stop_prop then break
 			var cargs = new Array[IRegister]
-			if p.signature.arity == 0 then
+			if sp.signature.arity == 0 then
 				cargs.add(iroutine.params.first)
 			else
 				for va in iroutine.params do
 					cargs.add(va)
 				end
 			end
-			stmt(new ICall(p, cargs))
+			stmt(new ICall(sp, cargs))
 			i += 1
 		end
 	end
@@ -1160,7 +1160,7 @@ redef class ASuperExpr
 				return null
 			end
 		else
-			var p = prop
+			p = prop
 			var rtype = p.signature.return_type
 			if rtype == null then
 				v.stmt(new ISuper(p, args))

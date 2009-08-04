@@ -283,12 +283,11 @@ redef class IRoutine
 		else
 			v.add_decl("struct WBT_ **CREG = NULL;")
 		end
-		var i = 0
+		var k = 0
 		for r in params do
-			if r.slot_index != null then v.add_assignment(v.register(r), args[i])
-			i += 1
+			if r.slot_index != null then v.add_assignment(v.register(r), args[k])
+			k += 1
 		end
-		var iclosdecls = closure_decls
 		if iclosdecls != null then
 			for i in [0..iclosdecls.length[ do
 				var iclosdecl = iclosdecls[i]

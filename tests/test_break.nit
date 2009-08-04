@@ -23,16 +23,18 @@ for i in [0..10[ do
 	print(i)
 end
 
-var i = 0
-while i < 10 do
-	if i == 3 then
-		i = i + 2
-		continue
-	else if i == 7 then
-		break
+do
+	var i = 0
+	while i < 10 do
+		if i == 3 then
+			i = i + 2
+			continue
+		else if i == 7 then
+			break
+		end
+		print(i)
+		i = i + 1
 	end
-	print(i)
-	i = i + 1
 end
 
 for i in [0..10[ do

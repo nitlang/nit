@@ -66,7 +66,7 @@ special AbstractCompiler
 		if clibdir == null then
 			var dir = once ("NIT_DIR".to_symbol).environ
 			if dir.is_empty then 
-				var dir = "{sys.program_name.dirname}/../lib"
+				dir = "{sys.program_name.dirname}/../lib"
 				if dir.file_exists then clibdir = dir
 			else
 				dir = "{dir}/lib"
@@ -81,7 +81,7 @@ special AbstractCompiler
 		if bindir == null then
 			var dir = once ("NIT_DIR".to_symbol).environ
 			if dir.is_empty then 
-				var dir = "{sys.program_name.dirname}/../bin"
+				dir = "{sys.program_name.dirname}/../bin"
 				if dir.file_exists then bindir = dir
 			else
 				dir = "{dir}/bin"

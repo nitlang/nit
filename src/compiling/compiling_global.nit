@@ -497,8 +497,8 @@ redef class MMModule
 				if pg.is_init_for(c) then
 					# Declare constructors
 					var params = new Array[String]
-					for i in [0..p.signature.arity[ do
-						params.add("val_t p{i}")
+					for j in [0..p.signature.arity[ do
+						params.add("val_t p{j}")
 					end
 					v.add_decl("val_t NEW_{c}_{p.global.intro.cname}({params.join(", ")});")
 				end
@@ -865,61 +865,65 @@ redef class MMLocalClass
 
 		var pi = primitive_info
 		if pi == null then
-			var iself = new IRegister(get_type)
-			var iselfa = [iself]
-			var iroutine = new IRoutine(new Array[IRegister], iself)
-			var icb = new ICodeBuilder(module, iroutine, null)
-			var obj = new INative("OBJ2VAL(obj)", null)
-			obj.result = iself
-			icb.stmt(obj)
+			do
+				var iself = new IRegister(get_type)
+				var iselfa = [iself]
+				var iroutine = new IRoutine(new Array[IRegister], iself)
+				var icb = new ICodeBuilder(module, iroutine, null)
+				var obj = new INative("OBJ2VAL(obj)", null)
+				obj.result = iself
+				icb.stmt(obj)
 
-			for g in global_properties do
-				var p = self[g]
-				var t = p.signature.return_type
-				if p isa MMAttribute and t != null then
-					var ir = p.iroutine
-					if ir == null then continue
-					# FIXME: Not compatible with sep compilation
-					var e = ir.inline_in_seq(icb.seq, iselfa).as(not null)
-					icb.stmt(new IAttrWrite(p, iself, e))
+				for g in global_properties do
+					var p = self[g]
+					var t = p.signature.return_type
+					if p isa MMAttribute and t != null then
+						var ir = p.iroutine
+						if ir == null then continue
+						# FIXME: Not compatible with sep compilation
+						var e = ir.inline_in_seq(icb.seq, iselfa).as(not null)
+						icb.stmt(new IAttrWrite(p, iself, e))
+					end
 				end
+
+				var cname = "NEW_{name}"
+				var args = iroutine.compile_signature_to_c(v, cname, "new {name}", null, null)
+				var ctx_old = v.ctx
+				v.ctx = new CContext
+				v.add_decl("obj_t obj;")
+				v.add_instr("obj = alloc(sizeof(val_t) * {itab.length});")
+				v.add_instr("obj->vft = (classtable_elt_t*)VFT_{name};")
+				var r = iroutine.compile_to_c(v, cname, args).as(not null)
+				v.add_instr("return {r};")
+				ctx_old.append(v.ctx)
+				v.ctx = ctx_old
+				v.unindent
+				v.add_instr("}")
 			end
 
-			var cname = "NEW_{name}"
-			var args = iroutine.compile_signature_to_c(v, cname, "new {name}", null, null)
-			var ctx_old = v.ctx
-			v.ctx = new CContext
-			v.add_decl("obj_t obj;")
-			v.add_instr("obj = alloc(sizeof(val_t) * {itab.length});")
-			v.add_instr("obj->vft = (classtable_elt_t*)VFT_{name};")
-			var r = iroutine.compile_to_c(v, cname, args).as(not null)
-			v.add_instr("return {r};")
-			ctx_old.append(v.ctx)
-			v.ctx = ctx_old
-			v.unindent
-			v.add_instr("}")
-
-			# Compile CHECKNAME
-			var iself = new IRegister(get_type)
-			var iselfa = [iself]
-			var iroutine = new IRoutine(iselfa, null)
-			var icb = new ICodeBuilder(module, iroutine, null)
-			for g in global_properties do
-				var p = self[g]
-				var t = p.signature.return_type
-				if p isa MMAttribute and t != null and not t.is_nullable then
-					icb.add_attr_check(p, iself)
+			do
+				# Compile CHECKNAME
+				var iself = new IRegister(get_type)
+				var iselfa = [iself]
+				var iroutine = new IRoutine(iselfa, null)
+				var icb = new ICodeBuilder(module, iroutine, null)
+				for g in global_properties do
+					var p = self[g]
+					var t = p.signature.return_type
+					if p isa MMAttribute and t != null and not t.is_nullable then
+						icb.add_attr_check(p, iself)
+					end
 				end
+				var cname = "CHECKNEW_{name}"
+				var args = iroutine.compile_signature_to_c(v, cname, "check new {name}", null, null)
+				var ctx_old = v.ctx
+				v.ctx = new CContext
+				iroutine.compile_to_c(v, cname, args)
+				ctx_old.append(v.ctx)
+				v.ctx = ctx_old
+				v.unindent
+				v.add_instr("}")
 			end
-			var cname = "CHECKNEW_{name}"
-			var args = iroutine.compile_signature_to_c(v, cname, "check new {name}", null, null)
-			var ctx_old = v.ctx
-			v.ctx = new CContext
-			iroutine.compile_to_c(v, cname, args)
-			ctx_old.append(v.ctx)
-			v.ctx = ctx_old
-			v.unindent
-			v.add_instr("}")
 
 			var init_table_size = cshe.greaters.length + 1
 			var init_table_decl = "int init_table[{init_table_size}] = \{0{", 0" * (init_table_size-1)}};"

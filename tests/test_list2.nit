@@ -17,17 +17,21 @@
 var l = new List[Int]
 l.add_all([1, 2, 3, 4, 5, 6])
 print l.join(", ")
-var it = l.iterator
-while it.is_ok do
-	it.item += 10
-	it.next
+do
+	var it = l.iterator
+	while it.is_ok do
+		it.item += 10
+		it.next
+	end
 end
 print l.join(", ")
-var it = l.iterator
-while it.is_ok do
-	it.insert_before(it.item-10)
-	it.insert_before(it.item+10)
-	it.delete
-	it.next
+do
+	var it = l.iterator
+	while it.is_ok do
+		it.insert_before(it.item-10)
+		it.insert_before(it.item+10)
+		it.delete
+		it.next
+	end
 end
 print l.join(", ")

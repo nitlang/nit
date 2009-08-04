@@ -47,7 +47,7 @@ var u: U = new U
 var v: V = new V
 var w: W = new W
 
-var y: Object
+var y: Object#!alt1#
 #alt1#var y: U
 y = a.foo !bar do 0.output
 y = a.foo !bar do break t

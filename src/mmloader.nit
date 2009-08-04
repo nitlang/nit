@@ -258,7 +258,6 @@ special MMContext
 	# If the module is already loaded, just return it without further processing.
 	fun get_module(module_name: Symbol, from: nullable MMModule): MMModule
 	do
-		var m: MMModule
 		if from != null then
 			var dir: nullable MMDirectory = from.directory
 			while dir != null do
