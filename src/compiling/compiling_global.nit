@@ -17,43 +17,8 @@
 # Compute and generate tables for classes and modules.
 package compiling_global
 
-import program
+import table_computation
 private import compiling_icode
-
-# Something that store color of table elements
-class ColorContext
-	var _colors: HashMap[TableElt, Int] = new HashMap[TableElt, Int]
-
-	# The color of a table element.
-	fun color(e: TableElt): Int
-	do
-		return _colors[e]
-	end
-
-	# Is a table element already colored?
-	fun has_color(e: TableElt): Bool
-	do
-		return _colors.has_key(e)
-	end
-
-	# Assign a color to a table element.
-	fun color=(e: TableElt, c: Int)
-	do
-		_colors[e] = c
-		var idx = c
-		for i in [0..e.length[ do
-			_colors[e.item(i)] = idx
-			idx = idx + 1
-		end
-	end
-end
-
-# All information and results of the global analysis.
-class TableInformation
-special ColorContext
-	# FIXME: do something better.
-	readable writable var _max_class_table_length: Int = 0
-end
 
 class GlobalCompilerVisitor
 special CompilerVisitor
@@ -66,332 +31,7 @@ special CompilerVisitor
 	end
 end
 
-# A compiled class is a class in a program
-class CompiledClass
-special ColorContext
-	# The corresponding local class in the main module of the prgram
-	readable var _local_class: MMLocalClass
-
-	# The identifier of the class
-	readable writable var _id: Int = 0
-
-	# The full class table of the class
-	readable var _class_table: Array[nullable TableElt] = new Array[nullable TableElt]
-
-	# The full instance table of the class
-	readable var _instance_table: Array[nullable TableElt] = new Array[nullable TableElt]
-
-	# The proper class table part (no superclasses but all refinements)
-	readable writable var _class_layout: TableEltComposite = new TableEltComposite(self)
-
-	# The proper instance table part (no superclasses but all refinements)
-	readable writable var _instance_layout: TableEltComposite = new TableEltComposite(self)
-
-	init(c: MMLocalClass) do _local_class = c
-end
-
-redef class MMConcreteClass
-	# The table element of the subtype check
-	fun class_color_pos: TableEltClassColor do return _class_color_pos.as(not null)
-	var _class_color_pos: nullable TableEltClassColor
-
-	# The proper local class table part (nor superclasses nor refinments)
-	readable var _class_layout: Array[TableElt] = new Array[TableElt]
-
-	# The proper local instance table part (nor superclasses nor refinments)
-	readable var _instance_layout: Array[TableElt] = new Array[TableElt]
-
-	# Build the local layout of the class and feed the module table
-	fun build_layout_in(tc: ToolContext, module_table: Array[ModuleTableElt])
-	do
-		var clt = _class_layout
-		var ilt = _instance_layout
-
-		if global.intro == self then
-			module_table.add(new TableEltClassId(self))
-			var cpp = new TableEltClassColor(self)
-			_class_color_pos = cpp
-			module_table.add(cpp)
-			clt.add(new TableEltClassInitTable(self))
-		end
-		for p in local_local_properties do
-			var pg = p.global
-			if pg.intro == p then
-				if p isa MMAttribute then
-					ilt.add(new TableEltAttr(p))
-				else if p isa MMMethod then
-					clt.add(new TableEltMeth(p))
-				end
-			end
-			if p isa MMMethod and p.need_super then
-				clt.add(new TableEltSuper(p))
-			end
-		end
-
-		if not ilt.is_empty then
-			var teg = new ModuleTableEltGroup
-			teg.elements.append(ilt)
-			module_table.add(teg)
-		end
-
-		if not clt.is_empty then
-			var teg = new ModuleTableEltGroup
-			teg.elements.append(clt)
-			module_table.add(teg)
-		end
-	end
-end
-
 redef class Program
-	# Information about the class tables
-	readable var _table_information: TableInformation = new TableInformation
-
-	# Associate global classes to compiled classes
-	readable var _compiled_classes: HashMap[MMGlobalClass, CompiledClass] = new HashMap[MMGlobalClass, CompiledClass]
-
-	# Do the complete global analysis
-	fun global_analysis(cctx: ToolContext)
-	do
-		var smallest_classes = new Array[MMLocalClass]
-		var global_properties = new HashSet[MMGlobalProperty]
-		var ctab = new Array[TableElt]
-		var itab = new Array[TableElt]
-
-		ctab.add(new TableEltClassSelfId)
-		ctab.add(new TableEltClassObjectSize)
-		itab.add(new TableEltVftPointer)
-		itab.add(new TableEltObjectId)
-
-		var pclassid = -1
-		var classid = 3
-
-		# We have to work on ALL the classes of the module
-		var classes = new Array[MMLocalClass]
-		for c in module.local_classes do
-			c.compute_super_classes
-			classes.add(c)
-		end
-		(new ClassSorter).sort(classes)
-
-		for c in classes do
-			# Finish processing the class (if invisible)
-			c.compute_ancestors
-			c.inherit_global_properties
-
-			# Associate a CompiledClass to the class
-			var cc = new CompiledClass(c)
-			compiled_classes[c.global] = cc
-
-			# Assign a unique class identifier
-			# (negative are for primitive classes)
-			var gc = c.global
-			var bm = gc.module
-			if c.primitive_info != null then
-				cc.id = pclassid
-				pclassid = pclassid - 4
-			else
-				cc.id = classid
-				classid = classid + 4
-			end
-
-			# Register is the class is a leaf
-			if c.cshe.direct_smallers.is_empty then
-				smallest_classes.add(c)
-			end
-
-			# Store the colortableelt in the class table pool
-			var bc = c.global.intro
-			assert bc isa MMConcreteClass
-			ctab.add(bc.class_color_pos)
-		end
-
-		# Compute core and crown classes for colorization
-		var crown_classes = new HashSet[MMLocalClass]
-		var core_classes = new HashSet[MMLocalClass]
-		for c in smallest_classes do
-			while c.cshe.direct_greaters.length == 1 do
-				c = c.cshe.direct_greaters.first
-			end
-			crown_classes.add(c)
-			core_classes.add_all(c.cshe.greaters_and_self)
-		end
-		#print("nbclasses: {classes.length} leaves: {smallest_classes.length} crown: {crown_classes.length} core: {core_classes.length}")
-
-		# Colorize core color for typechecks
-		colorize(ctab, crown_classes, 0)
-
-		# Compute tables for typechecks
-		var maxcolor = 0
-		for c in classes do
-			var cc = compiled_classes[c.global]
-			if core_classes.has(c) then
-				# For core classes, just build the table
-				build_tables_in(cc.class_table, c, ctab)
-				if maxcolor < cc.class_table.length then maxcolor = cc.class_table.length
-			else
-				# For other classes, it's easier: just append to the parent tables
-				var sc = c.cshe.direct_greaters.first
-				var scc = compiled_classes[sc.global]
-				assert cc.class_table.is_empty
-				cc.class_table.add_all(scc.class_table)
-				var bc = c.global.intro
-				assert bc isa MMConcreteClass
-				var colpos = bc.class_color_pos
-				var colposcolor = cc.class_table.length
-				table_information.color(colpos) = colposcolor
-				cc.class_table.add(colpos)
-				if maxcolor < colposcolor then maxcolor = colposcolor
-			end
-		end
-		table_information.max_class_table_length = maxcolor + 1
-
-		# Fill class table and instance tables pools
-		for c in classes do
-			var cc = compiled_classes[c.global]
-			var cte = cc.class_layout
-			var ite = cc.instance_layout
-			for sc in c.crhe.greaters_and_self do
-				if sc isa MMConcreteClass then
-					cte.add(sc, sc.class_layout)
-					ite.add(sc, sc.instance_layout)
-				end
-			end
-
-			if core_classes.has(c) then
-				if cte.length > 0 then
-					ctab.add(cte)
-				end
-				if ite.length > 0 then
-					itab.add(ite)
-				end
-			end
-		end
-
-		# Colorize all elements in pools tables
-		colorize(ctab, crown_classes, maxcolor+1)
-		colorize(itab, crown_classes, 0)
-
-		# Build class and instance tables now things are colored
-		table_information.max_class_table_length = 0
-		for c in classes do
-			var cc = compiled_classes[c.global]
-			if core_classes.has(c) then
-				# For core classes, just build the table
-				build_tables_in(cc.class_table, c, ctab)
-				build_tables_in(cc.instance_table, c, itab)
-			else
-				# For other classes, it's easier: just append to the parent tables
-				var sc = c.cshe.direct_greaters.first
-				var scc = compiled_classes[sc.global]
-				cc.class_table.clear
-				cc.class_table.add_all(scc.class_table)
-				var bc = c.global.intro
-				assert bc isa MMConcreteClass
-				var colpos = bc.class_color_pos
-				cc.class_table[table_information.color(colpos)] = colpos
-				while cc.class_table.length <= maxcolor do
-					cc.class_table.add(null)
-				end
-				append_to_table(cc.class_table, cc.class_layout)
-				assert cc.instance_table.is_empty
-				cc.instance_table.add_all(scc.instance_table)
-				append_to_table(cc.instance_table, cc.instance_layout)
-			end
-		end
-	end
-
-	# Perform coloring
-	fun colorize(elts: Array[TableElt], classes: Collection[MMLocalClass], startcolor: Int)
-	do
-		var colors = new HashMap[Int, Array[TableElt]]
-		var rel_classes = new Array[MMLocalClass]
-		for e in elts do
-			var color = -1
-			var len = e.length
-			if table_information.has_color(e) then
-				color = table_information.color(e)
-			else
-				rel_classes.clear
-				for c in classes do
-					if e.is_related_to(c) then
-						rel_classes.add(c)
-					end
-				end
-				var trycolor = startcolor
-				while trycolor != color do
-					color = trycolor
-					for c in rel_classes do
-						var idx = 0
-						while idx < len do
-							if colors.has_key(trycolor + idx) and not free_color(colors[trycolor + idx], c) then
-								trycolor = trycolor + idx + 1
-								idx = 0
-							else
-								idx = idx + 1
-							end
-						end
-					end
-				end
-				table_information.color(e) = color
-			end
-			for idx in [0..len[ do
-				if colors.has_key(color + idx) then
-					colors[color + idx].add(e)
-				else
-					colors[color + idx] = [e]
-				end
-			end
-		end
-	end
-
-	private fun free_color(es: Array[TableElt], c: MMLocalClass): Bool
-	do
-		for e2 in es do
-			if e2.is_related_to(c) then
-				return false
-			end
-		end
-		return true
-	end
-
-	private fun append_to_table(table: Array[nullable TableElt], cmp: TableEltComposite)
-	do
-		for j in [0..cmp.length[ do
-			var e = cmp.item(j)
-			table_information.color(e) = table.length
-			table.add(e)
-		end
-	end
-
-	private fun build_tables_in(table: Array[nullable TableElt], c: MMLocalClass, elts: Array[TableElt])
-	do
-		var tab = new HashMap[Int, TableElt]
-		var len = 0
-		for e in elts do
-			if e.is_related_to(c) then
-				var col = table_information.color(e)
-				var l = col + e.length
-				tab[col] = e
-				if len < l then
-					len = l
-				end
-			end
-		end
-		var i = 0
-		while i < len do
-			if tab.has_key(i) then
-				var e = tab[i]
-				for j in [0..e.length[ do
-					table[i] = e.item(j)
-					i = i + 1
-				end
-			else
-				table[i] = null
-				i = i + 1
-			end
-		end
-	end
-
 	# Compile module and class tables
 	fun compile_tables_to_c(v: GlobalCompilerVisitor)
 	do
@@ -443,19 +83,6 @@ redef class Program
 end
 
 redef class MMModule
-	# The local table of the module (refers things introduced in the module)
-	var _local_table: Array[ModuleTableElt] = new Array[ModuleTableElt]
-
-	# Builds the local tables and local classes layouts
-	fun local_analysis(tc: ToolContext)
-	do
-		for c in local_classes do
-			if c isa MMConcreteClass then
-				c.build_layout_in(tc, _local_table)
-			end
-		end
-	end
-
 	# Declare class table (for _sep.h)
 	fun declare_class_tables_to_c(v: GlobalCompilerVisitor)
 	do
@@ -474,7 +101,7 @@ redef class MMModule
 			v.add_decl("extern const int SFT_{name}[];")
 		end
 		var i = 0
-		for e in _local_table do
+		for e in local_table do
 			var value: String
 			if v.tc.global then
 				value = "{e.value(v.program)}"
@@ -508,13 +135,13 @@ redef class MMModule
 	do
 		v.add_instr("const char *LOCATE_{name} = \"{location.file}\";")
 
-		if v.tc.global or _local_table.is_empty then
+		if v.tc.global or local_table.is_empty then
 			return
 		end
 
-		v.add_instr("const int SFT_{name}[{_local_table.length}] = \{")
+		v.add_instr("const int SFT_{name}[{local_table.length}] = \{")
 		v.indent
-		for e in _local_table do
+		for e in local_table do
 			v.add_instr(e.value(v.program) + ",")
 		end
 		v.unindent
@@ -524,93 +151,58 @@ end
 
 ###############################################################################
 
-# An element of a class, an instance or a module table
-abstract class AbsTableElt
+redef class AbsTableElt
 	# Compile the macro needed to use the element and other related elements
 	fun compile_macros(v: GlobalCompilerVisitor, value: String) is abstract
 end
 
-# An element of a class or an instance table
-# Such an elements represent method function pointers, attribute values, etc.
-abstract class TableElt
-special AbsTableElt
-	# Is the element conflict to class `c' (used for coloring)
-	fun is_related_to(c: MMLocalClass): Bool is abstract
-
-	# Number of sub-elements. 1 if none
-	fun length: Int do return 1
-
-	# Access the ith subelement.
-	fun item(i: Int): TableElt do return self
-
+redef class TableElt
 	# Return the value of the element for a given class
 	fun compile_to_c(v: GlobalCompilerVisitor, c: MMLocalClass): String is abstract
 end
 
-# An element of a module table
-# Such an elements represent colors or identifiers
-abstract class ModuleTableElt
-special AbsTableElt
+redef class ModuleTableElt
 	# Return the value of the element once the global analisys is performed
 	fun value(prog: Program): String is abstract
 end
 
-# An element of a module table that represents a group of TableElt defined in the same local class
-class ModuleTableEltGroup
-special ModuleTableElt
-	readable var _elements: Array[TableElt] = new Array[TableElt]
-
-	redef fun value(prog) do return "{prog.table_information.color(_elements.first)} /* Group of ? */"
+redef class ModuleTableEltGroup
+	redef fun value(prog) do return "{prog.table_information.color(elements.first)} /* Group of ? */"
 	redef fun compile_macros(v, value)
 	do
 		var i = 0
-		for e in _elements do
+		for e in elements do
 			e.compile_macros(v, "{value} + {i}")
 			i += 1
 		end
 	end
 end
 
-# An element that represents a class property
-abstract class TableEltProp
-special TableElt
-	var _property: MMLocalProperty
-
-	init(p: MMLocalProperty)
-	do
-		_property = p
-	end
-end
-
-# An element that represents a function pointer to a global method
-class TableEltMeth
-special TableEltProp
+redef class TableEltMeth
 	redef fun compile_macros(v, value)
 	do
-		var pg = _property.global
+		var pg = property.global
 		v.add_decl("#define {pg.meth_call}(recv) (({pg.intro.cname}_t)CALL((recv), ({value})))")
 	end
 
 	redef fun compile_to_c(v, c)
 	do
-		var p = c[_property.global]
+		var p = c[property.global]
 		return p.cname
 	end
 end
 
-# An element that represents a function pointer to the super method of a local method
-class TableEltSuper
-special TableEltProp
+redef class TableEltSuper
 	redef fun compile_macros(v, value)
 	do
-		var p = _property
+		var p = property
 		v.add_decl("#define {p.super_meth_call}(recv) (({p.cname}_t)CALL((recv), ({value})))")
 	end
 
 	redef fun compile_to_c(v, c)
 	do
-		var pc = _property.local_class
-		var g = _property.global
+		var pc = property.local_class
+		var g = property.global
 		var lin = c.che.linear_extension
 		var found = false
 		for s in lin do
@@ -628,34 +220,22 @@ special TableEltProp
 	end
 end
 
-# An element that represents the value stored for a global attribute
-class TableEltAttr
-special TableEltProp
+redef class TableEltAttr
 	redef fun compile_macros(v, value)
 	do
-		var pg = _property.global
+		var pg = property.global
 		v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, ({value}))")
 	end
 
 	redef fun compile_to_c(v, c)
 	do
 		var prog = v.program
-		var p = c[_property.global]
+		var p = c[property.global]
 		return "/* {prog.table_information.color(self)}: Attribute {c}::{p} */"
 	end
 end
 
-# An element representing a class information
-class AbsTableEltClass
-special AbsTableElt
-	# The local class where the information comes from
-	var _local_class: MMLocalClass
-
-	init(c: MMLocalClass)
-	do
-		_local_class = c
-	end
-
+redef class AbsTableEltClass
 	# The C macro name refering the value
 	fun symbol: String is abstract
 
@@ -665,100 +245,52 @@ special AbsTableElt
 	end
 end
 
-# An element of a class table representing a class information
-class TableEltClass
-special TableElt
-special AbsTableEltClass
-	redef fun is_related_to(c)
-	do
-		var bc = c.module[_local_class.global]
-		return c.cshe <= bc
-	end
-end
-
-# An element representing the id of a class in a module table
-class TableEltClassId
-special ModuleTableElt
-special AbsTableEltClass
-	redef fun symbol do return _local_class.global.id_id
+redef class TableEltClassId
+	redef fun symbol do return local_class.global.id_id
 
 	redef fun value(prog)
 	do
-		return "{prog.compiled_classes[_local_class.global].id} /* Id of {_local_class} */"
+		return "{prog.compiled_classes[local_class.global].id} /* Id of {local_class} */"
 	end
 end
 
-# An element representing the constructor marker position in a class table
-class TableEltClassInitTable
-special TableEltClass
-	redef fun symbol do return _local_class.global.init_table_pos_id
+redef class TableEltClassInitTable
+	redef fun symbol do return local_class.global.init_table_pos_id
 
 	redef fun compile_to_c(v, c)
 	do
 		var prog = v.program
-		var cc = prog.compiled_classes[_local_class.global]
+		var cc = prog.compiled_classes[local_class.global]
 		var linext = c.cshe.reverse_linear_extension
 		var i = 0
-		while linext[i].global != _local_class.global do
+		while linext[i].global != local_class.global do
 			i += 1
 		end
 		return "{i} /* {prog.table_information.color(self)}: {c} < {cc.local_class}: superclass init_table position */"
 	end
 end
 
-# An element used for a cast
-# Note: this element is both a TableElt and a ModuleTableElt.
-# At the TableElt offset, there is the id of the super-class
-# At the ModuleTableElt offset, there is the TableElt offset (ie. the color of the super-class).
-class TableEltClassColor
-special TableEltClass
-special ModuleTableElt
-	redef fun symbol do return _local_class.global.color_id
+redef class TableEltClassColor
+	redef fun symbol do return local_class.global.color_id
 
 	redef fun value(prog)
 	do
-		return "{prog.table_information.color(self)} /* Color of {_local_class} */"
+		return "{prog.table_information.color(self)} /* Color of {local_class} */"
 	end
 
 	redef fun compile_to_c(v, c)
 	do
 		var prog = v.program
-		var cc = prog.compiled_classes[_local_class.global]
+		var cc = prog.compiled_classes[local_class.global]
 		return "{cc.id} /* {prog.table_information.color(self)}: {c} < {cc.local_class}: superclass typecheck marker */"
 	end
 end
 
-# A Group of elements introduced in the same global-class that are colored together
-class TableEltComposite
-special TableElt
-	var _table: Array[TableElt]
-	var _cc: CompiledClass
-	var _offsets: HashMap[MMLocalClass, Int]
-	redef fun length do return _table.length
-	redef fun is_related_to(c) do return c.cshe <= _cc.local_class
-
-	fun add(c: MMLocalClass, tab: Array[TableElt])
-	do
-		_offsets[c] = _table.length
-		_table.append(tab)
-	end
-
-	redef fun item(i) do return _table[i]
-
+redef class TableEltComposite
 	redef fun compile_to_c(v, c) do abort
-
-	init(cc: CompiledClass)
-	do
-		_cc = cc
-		_table = new Array[TableElt]
-		_offsets = new HashMap[MMLocalClass, Int]
-	end
 end
 
-# The element that represent the class id
-class TableEltClassSelfId
-special TableElt
-	redef fun is_related_to(c) do return true
+redef class TableEltClassSelfId
 	redef fun compile_to_c(v, c)
 	do
 		var prog = v.program
@@ -766,11 +298,7 @@ special TableElt
 	end
 end
 
-
-# The element that represent the Object Size
-class TableEltClassObjectSize
-special TableElt
-	redef fun is_related_to(c) do return true
+redef class TableEltClassObjectSize
 	redef fun compile_to_c(v, c)
 	do
         var nb = 0
@@ -788,10 +316,7 @@ special TableElt
 	end
 end
 
-# The element that represent the object id
-class TableEltObjectId
-special TableElt
-	redef fun is_related_to(c) do return true
+redef class TableEltObjectId
 	redef fun compile_to_c(v, c)
 	do
 		var p = v.program
@@ -799,10 +324,7 @@ special TableElt
 	end
 end
 
-# The element that
-class TableEltVftPointer
-special TableElt
-	redef fun is_related_to(c) do return true
+redef class TableEltVftPointer
 	redef fun compile_to_c(v, c)
 	do
 		var prog = v.program
@@ -812,37 +334,7 @@ end
 
 ###############################################################################
 
-# Used to sort local class in a deterministic total order
-# The total order superset the class refinement and the class specialisation relations
-class ClassSorter
-special AbstractSorter[MMLocalClass]
-	redef fun compare(a, b) do return a.compare(b)
-	init do end
-end
-
 redef class MMLocalClass
-	# Comparaison in a total order that superset the class refinement and the class specialisation relations
-	fun compare(b: MMLocalClass): Int
-	do
-		var a = self
-		if a == b then
-			return 0
-		else if a.module.mhe < b.module then
-			return 1
-		else if b.module.mhe < a.module then
-			return -1
-		end
-		var ar = a.cshe.rank
-		var br = b.cshe.rank
-		if ar > br then
-			return 1
-		else if br > ar then
-			return -1
-		else
-			return b.name.to_s <=> a.name.to_s
-		end
-	end
-
 	# Declaration and macros related to the class table
 	fun declare_tables_to_c(v: GlobalCompilerVisitor)
 	do

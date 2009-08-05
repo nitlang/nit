@@ -17,6 +17,7 @@
 # Compute and generate tables for classes and modules.
 package compiling
 
+import table_computation
 import compiling_base
 private import compiling_global
 private import compiling_icode
@@ -27,15 +28,6 @@ redef class Program
 	# Then execute the build.sh
 	fun compile_prog_to_c(tc: ToolContext)
 	do
-		tc.info("Building tables",1)
-		for m in module.mhe.greaters_and_self do
-			tc.info("Building tables for module: {m.name}",2)
-			m.local_analysis(tc)
-		end
-
-		tc.info("Merging all tables",2)
-		global_analysis(tc)
-
 		tc.compdir.mkdir
 
 		var files = new Array[String]

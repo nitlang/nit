@@ -126,6 +126,7 @@ special AbstractCompiler
 		end
 		for mod in mods do
 			var p = new Program(mod)
+			p.do_table_computation(self)
 			p.compile_prog_to_c(self)
 		end
 	end
