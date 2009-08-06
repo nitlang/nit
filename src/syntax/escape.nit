@@ -47,13 +47,16 @@ class EscapableContext
 		end
 	end
 
-	# Is there no block in the stack?
-	fun is_empty: Bool do return _stack.is_empty
-
-	# Return the current block (the last stacked)
-	fun head: EscapableBlock
+	# Return the last stacked block that accepts unlabelled break/continue
+	fun head: nullable EscapableBlock
 	do
-		return _stack.last
+		var i = _stack.length - 1
+		while i >= 0 do
+			var h = _stack[i]
+			if not (h isa BreakOnlyEscapableBlock) then return h
+			i -= 1
+		end
+		return null
 	end
 
 	# Return the block associed to a label
@@ -116,7 +119,7 @@ class EscapableBlock
 	end
 end
 
-# specific EscapableBlock where only break can be used
+# specific EscapableBlock where only labelled break can be used
 class BreakOnlyEscapableBlock
 special EscapableBlock
 	redef fun is_break_block: Bool do return true
@@ -161,11 +164,11 @@ special ALabelable
 		var nl = n_label
 		if nl != null then
 			block = lctx.get_by_label(nl)
-		else if lctx.is_empty then
-			lctx.visitor.error(self, "Syntax Error: '{kwname}' statment outside block.")
-			return null
 		else
 			block = lctx.head
+			if block == null then
+				lctx.visitor.error(self, "Syntax Error: '{kwname}' statment outside block.")
+			end
 		end
 		_escapable = block
 		return block
