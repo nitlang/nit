@@ -36,6 +36,10 @@ abstract class VariableContext
 	# Register a new variable with its name
 	fun add(v: Variable)
 	do
+		var old_var = self[v.name]
+		if old_var != null then
+			_visitor.error(v.decl, "Error: '{v}' already defined at {old_var.decl.location.relative_to(v.decl.location)}.")
+		end
 		_dico[v.name] = v
 		_all_variables.add(v)
 	end
