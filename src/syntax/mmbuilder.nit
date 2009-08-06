@@ -1176,7 +1176,7 @@ redef class AParam
 	do
 		super
 		_position = v.signature_builder.params.length
-		_variable = new ParamVariable(n_id.to_symbol, self)
+		_variable = new ParamVariable(n_id.to_symbol, n_id)
 		v.signature_builder.params.add(self)
 		v.signature_builder.untyped_params.add(self)
 		if n_type != null then
@@ -1242,7 +1242,7 @@ redef class AClosureDecl
 		v.signature_builder = old_signature_builder
 		_position = old_signature_builder.closure_decls.length
 		old_signature_builder.closure_decls.add(self)
-		_variable = new ClosureVariable(n_id.to_symbol, self, clos)
+		_variable = new ClosureVariable(n_id.to_symbol, n_id, clos)
 	end
 end
 

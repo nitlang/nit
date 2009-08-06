@@ -350,7 +350,7 @@ redef class AVardeclExpr
 
 	redef fun after_typing(v)
 	do
-		var va = new VarVariable(n_id.to_symbol, self)
+		var va = new VarVariable(n_id.to_symbol, n_id)
 		_variable = va
 		v.variable_ctx.add(va)
 		if n_expr != null then v.variable_ctx.mark_is_set(va)
@@ -589,7 +589,7 @@ redef class AForExpr
 		var old_base_var_ctx = v.base_variable_ctx
 		v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
-		var va = new AutoVariable(n_id.to_symbol, self)
+		var va = new AutoVariable(n_id.to_symbol, n_id)
 		_variable = va
 		v.variable_ctx.add(va)
 
@@ -1647,7 +1647,7 @@ redef class AClosureDef
 		v.variable_ctx = v.variable_ctx.sub(self)
 		variables = new Array[AutoVariable]
 		for i in [0..n_ids.length[ do
-			var va = new AutoVariable(n_ids[i].to_symbol, self)
+			var va = new AutoVariable(n_ids[i].to_symbol, n_ids[i])
 			variables.add(va)
 			va.stype = sig[i]
 			v.variable_ctx.add(va)
