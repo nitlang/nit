@@ -335,6 +335,15 @@ end
 ###############################################################################
 
 redef class MMLocalClass
+	# IRoutine for the initialization of the default attributes (called by IInitAttributes)
+	var _init_var_iroutine: nullable IRoutine = null
+	# IRoutine to validate the instance after initialization (called by ICheckInstance)
+	var _checknew_iroutine: nullable IRoutine = null
+	# IRoutines to call to create a new valid instance (memory allocated, object initialized and validated)
+	# These iroutines will call: IAllocateInstance, IInitAttributes, some init function and ICheckInstance
+	# These routines will be called by INew
+	var _new_instance_iroutine: HashMap[MMMethod, IRoutine] = new HashMap[MMMethod, IRoutine]
+
 	# Declaration and macros related to the class table
 	fun declare_tables_to_c(v: GlobalCompilerVisitor)
 	do
@@ -420,6 +429,8 @@ redef class MMLocalClass
 					end
 				end
 
+				_init_var_iroutine = iroutine
+
 				var cname = "INIT_ATTRIBUTES__{name}"
 				var args = iroutine.compile_signature_to_c(v, cname, "init attributes of {name}", null, null)
 				var ctx_old = v.ctx
@@ -458,6 +469,9 @@ redef class MMLocalClass
 						icb.add_attr_check(p, iself)
 					end
 				end
+
+				_checknew_iroutine = iroutine
+
 				var cname = "CHECKNEW_{name}"
 				var args = iroutine.compile_signature_to_c(v, cname, "check new {name}", null, null)
 				var ctx_old = v.ctx
@@ -494,6 +508,8 @@ redef class MMLocalClass
 				icb.stmt(new IInitAttributes(get_type, iself))
 				icb.stmt(new IStaticCall(p, iargs))
 				icb.stmt(new ICheckInstance(get_type, iself))
+
+				_new_instance_iroutine[p] = iroutine
 
 				var cname = "NEW_{self}_{p.global.intro.cname}"
 				var new_args = iroutine.compile_signature_to_c(v, cname, "new {self} {p.full_name}", null, null)
