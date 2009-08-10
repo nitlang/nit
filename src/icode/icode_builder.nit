@@ -235,16 +235,16 @@ redef class MMSignature
 	end
 
 	# Create an empty IClosureDef that match the signature
-	fun generate_empty_iclosuredef: IClosureDef
+	fun generate_empty_iclosuredef(icb: ICodeBuilder): IClosureDef
 	do
 		var args = new Array[IRegister]
 		for i in [0..arity[ do
-			args.add(new IRegister(self[i]))
+			args.add(icb.new_register(self[i]))
 		end
 		var res: nullable IRegister = null
 		var rtype = return_type
 		if rtype != null then
-			res = new IRegister(rtype)
+			res = icb.new_register(rtype)
 		end
 		var iroutine = new IClosureDef(args, res)
 		var clos: nullable Array[IClosureDecl] = null

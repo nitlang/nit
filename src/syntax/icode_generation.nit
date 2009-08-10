@@ -340,7 +340,7 @@ redef class AClosureDecl
 	redef fun accept_icode_generation(vv)
 	do
 		var v = vv.icode_ctx
-		var iclos = variable.closure.signature.generate_empty_iclosuredef
+		var iclos = variable.closure.signature.generate_empty_iclosuredef(v)
 		var old_seq = v.seq
 		v.seq = iclos.body
 		escapable.continue_seq = iclos.body
