@@ -3,7 +3,7 @@ true
 true
 true
 true
-Reciever is null in base_primitive_null_alt1::A::init (alt/base_primitive_null_alt1.nit:34)
+Reciever is null (alt/base_primitive_null_alt1.nit:34)
 ,---- Stack trace -- - -  -
 | base_primitive_null_alt1::A::init (alt/base_primitive_null_alt1.nit:24)
 | new A base_primitive_null_alt1::A::init (alt/base_primitive_null_alt1.nit:24)

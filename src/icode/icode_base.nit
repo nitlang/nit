@@ -192,14 +192,11 @@ special ICode0
 	# The reason the abort occured
 	# tests.first is the format
 	readable var _texts: Array[String]
-	# The local property that has the abort (if any)
-	readable var _property_location: nullable MMLocalProperty
 	# The module that has the abort
 	readable var _module_location: MMModule
-	init(t: Array[String], pl: nullable MMLocalProperty, ml: MMModule)
+	init(t: Array[String], ml: MMModule)
 	do
 		_texts = t
-		_property_location = pl
 		_module_location = ml
 	end
 end

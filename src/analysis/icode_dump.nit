@@ -254,12 +254,7 @@ end
 redef class IAbort
 	redef fun dump_intern(icd)
 	do
-		var pl = property_location
-		if pl != null then
-			return "ABORT (\"{texts.join("\", \"")}\") in {pl.full_name}"
-		else
-			return "ABORT (\"{texts.join("\", \"")}\")"
-		end
+		return "ABORT (\"{texts.join("\", \"")}\")"
 	end
 end
 

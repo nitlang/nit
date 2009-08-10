@@ -1,6 +1,6 @@
 10
 20
-Uninitialized attribute _a3 in base_attr_nullable_int_alt5::Bar::(base_attr_nullable_int_alt5::Foo::run) (alt/base_attr_nullable_int_alt5.nit:60)
+Uninitialized attribute _a3 (alt/base_attr_nullable_int_alt5.nit:60)
 ,---- Stack trace -- - -  -
 | base_attr_nullable_int_alt5::Bar::(base_attr_nullable_int_alt5::Foo::run) (alt/base_attr_nullable_int_alt5.nit:56)
 | base_attr_nullable_int_alt5::Bar::init (alt/base_attr_nullable_int_alt5.nit:63)

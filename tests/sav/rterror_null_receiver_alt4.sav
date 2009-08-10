@@ -1,6 +1,6 @@
 true
 false
-Reciever is null in rterror_null_receiver_alt4::Sys::(kernel::Sys::main) (alt/rterror_null_receiver_alt4.nit:29)
+Reciever is null (alt/rterror_null_receiver_alt4.nit:29)
 ,---- Stack trace -- - -  -
 | rterror_null_receiver_alt4::Sys::(kernel::Sys::main) (alt/rterror_null_receiver_alt4.nit:23)
 `------------------- - -  -

@@ -1,4 +1,4 @@
-Uninitialized attribute _a1 in base_attr_nullable_alt1::Foo::run (alt/base_attr_nullable_alt1.nit:38)
+Uninitialized attribute _a1 (alt/base_attr_nullable_alt1.nit:38)
 ,---- Stack trace -- - -  -
 | base_attr_nullable_alt1::Foo::run (alt/base_attr_nullable_alt1.nit:36)
 | base_attr_nullable_alt1::Foo::init (alt/base_attr_nullable_alt1.nit:48)

@@ -1,4 +1,4 @@
-Assert failed in base_isa_cast_self_alt6::A::work (alt/base_isa_cast_self_alt6.nit:44)
+Assert failed (alt/base_isa_cast_self_alt6.nit:44)
 ,---- Stack trace -- - -  -
 | base_isa_cast_self_alt6::A::work (alt/base_isa_cast_self_alt6.nit:22)
 | base_isa_cast_self_alt6::Sys::(kernel::Sys::main) (alt/base_isa_cast_self_alt6.nit:61)

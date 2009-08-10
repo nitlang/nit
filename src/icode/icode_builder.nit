@@ -94,7 +94,7 @@ class ICodeBuilder
 	# Add a localized IAbort
 	fun add_abort(s: String...)
 	do
-		stmt(new IAbort(s, method, module))
+		stmt(new IAbort(s, module))
 	end
 
 	# Add an assigment to the iroutine return value

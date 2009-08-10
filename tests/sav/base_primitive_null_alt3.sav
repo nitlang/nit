@@ -13,7 +13,7 @@ true
 true
 true
 true
-Reciever is null in base_primitive_null_alt3::A::init (alt/base_primitive_null_alt3.nit:52)
+Reciever is null (alt/base_primitive_null_alt3.nit:52)
 ,---- Stack trace -- - -  -
 | base_primitive_null_alt3::A::init (alt/base_primitive_null_alt3.nit:24)
 | new A base_primitive_null_alt3::A::init (alt/base_primitive_null_alt3.nit:24)

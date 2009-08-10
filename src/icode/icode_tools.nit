@@ -216,7 +216,7 @@ end
 redef class IAbort
 	redef fun inner_dup_with(d)
 	do
-		return new IAbort(texts, property_location, module_location)
+		return new IAbort(texts, module_location)
 	end
 end
 

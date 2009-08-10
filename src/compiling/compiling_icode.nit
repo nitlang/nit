@@ -574,16 +574,11 @@ redef class IAbort
 		v.add_instr(s.to_s)
 
 		var ll = location
-		var pl = property_location
-		s = new Buffer.from("fprintf(stderr, \"")
-		if pl != null then s.append(" in %s")
-		s.append(" (%s")
+		s = new Buffer.from("fprintf(stderr, \" (%s")
 		if ll != null then
 			s.append(":%d")
 		end
-		s.append(")\\n\", ")
-		if pl != null then s.append("LOCATE_{pl.cname}, ")
-		s.append("LOCATE_{module_location.name}")
+		s.append(")\\n\", LOCATE_{module_location.name}")
 		if ll != null then
 			s.append(", {ll.line_start}")
 		end
