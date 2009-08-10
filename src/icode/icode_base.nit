@@ -51,6 +51,9 @@ class IRoutine
 	# The closure declared
 	readable writable var _closure_decls: nullable Sequence[IClosureDecl] = null
 
+	# The local variables (excluding params and result)
+	readable var _registers: Set[IRegister] = new ArraySet[IRegister]
+
 	# The result of the routine
 	readable var _result: nullable IRegister
 

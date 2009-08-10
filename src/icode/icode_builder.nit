@@ -184,7 +184,9 @@ class ICodeBuilder
 	# Get a new register
 	fun new_register(s: MMType): IRegister
 	do
-		return new IRegister(s)
+		var r = new IRegister(s)
+		iroutine.registers.add(r)
+		return r
 	end
 
 	# The module where classes and types are extracted

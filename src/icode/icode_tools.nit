@@ -97,37 +97,48 @@ redef class ICodeBuilder
 	do
 		var d = new ICodeDupContext
 		assert args.length == routine.params.length
+
+		# Fill register duplicate association
+		var dico = d._registers
+		var res = routine.result
+		if res != null then
+			var res2 = new_register(res.stype)
+			dico[res] = res2
+			res = res2
+		end
+		for reg in routine.registers do
+			assert not dico.has_key(reg)
+			dico[reg] = new_register(reg.stype)
+		end
 		for i in [0..args.length[ do
 			# FIXME The following assumes that params are readonly.
 			# The alternative is safe but add one move :/
-			d._registers[routine.params[i]] = args[i]
-			#seq.icodes.add(new IMove(d.dup_ireg(routine.params[i]), args[i]))
+			dico[routine.params[i]] = args[i]
+			#seq.icodes.add(new IMove(dico[routine.params[i]]), args[i]))
 		end
+
+		# Process inlining
 		seq.icodes.add(routine.body.dup_with(d))
-		var r = routine.result
-		if r != null then r = d.dup_ireg(r)
-		return r
+		return res
 	end
 end
 
 # This class stores reference to allow correct duplication of icodes
 private class ICodeDupContext
-	# Duplicate one register
-	# Subsequent invocation will return the same register
+	# Return the correct register
+	# * a duplicate of the local register 'r' of the inlined iroutine
+	# * 'r' else (it is a register of the caller iroutine)
 	fun dup_ireg(r: IRegister): IRegister
 	do
 		var rs = _registers
 		if rs.has_key(r) then
 			return rs[r]
 		else
-			var r2 = new IRegister(r.stype)
-			rs[r] = r2
-			return r2
+			return r
 		end
 	end
 
-	# Duplicate a bunch of registers
-	# Subsequent invocation will return the same registers
+	# Return a correct bunch of registers
 	fun dup_iregs(regs: Sequence[IRegister]): Sequence[IRegister]
 	do
 		var a = new Array[IRegister].with_capacity(regs.length)
