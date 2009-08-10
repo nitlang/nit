@@ -58,7 +58,7 @@ redef class ICall
 end
 
 redef class IRoutine
-	fun inline_methods
+	fun inline_methods(m: MMModule)
 	do
 		var v = new InlineMethodVisitor
 		v.visit_iroutine(self)

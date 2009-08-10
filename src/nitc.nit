@@ -110,7 +110,7 @@ special AbstractCompiler
 					var icd = new ICodeDumper
 					routine.dump(icd)
 					print "**** OPTIMIZE {p.full_name} ****"
-					routine.optimize
+					routine.optimize(mod)
 					icd = new ICodeDumper
 					routine.dump(icd)
 				end

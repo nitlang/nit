@@ -24,9 +24,9 @@ import inline_methods
 
 redef class IRoutine
 	# Perfom all optimizations
-	fun optimize
+	fun optimize(m: MMModule)
 	do
-		inline_methods
+		inline_methods(m)
 		allocate_iregister_slots
 	end
 end
