@@ -881,7 +881,7 @@ redef class MMLocalClass
 						var ir = p.iroutine
 						if ir == null then continue
 						# FIXME: Not compatible with sep compilation
-						var e = ir.inline_in_seq(icb.seq, iselfa).as(not null)
+						var e = icb.inline_routine(ir, iselfa).as(not null)
 						icb.stmt(new IAttrWrite(p, iself, e))
 					end
 				end

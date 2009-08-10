@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Tools to manipulate intermediace nit code representation
-import icode_base
+import icode_builder
 
 # A simple visitor to visit icode structures
 class ICodeVisitor
@@ -91,21 +91,20 @@ class ICodeVisitor
 	end
 end
 
-redef class IRoutine
-	# Inline an iroutine in an icode sequence
-	fun inline_in_seq(seq: ISeq, args: Sequence[IRegister]): nullable IRegister
+redef class ICodeBuilder
+	# Inline an iroutine in the current icode sequence
+	fun inline_routine(routine: IRoutine, args: Sequence[IRegister]): nullable IRegister
 	do
 		var d = new ICodeDupContext
-		if args.length != params.length then print "{args.length} != {params.length}"
-		assert args.length == params.length
+		assert args.length == routine.params.length
 		for i in [0..args.length[ do
 			# FIXME The following assumes that params are readonly.
 			# The alternative is safe but add one move :/
-			d._registers[params[i]] = args[i]
-			#seq.icodes.add(new IMove(d.dup_ireg(params[i]), args[i]))
+			d._registers[routine.params[i]] = args[i]
+			#seq.icodes.add(new IMove(d.dup_ireg(routine.params[i]), args[i]))
 		end
-		seq.icodes.add(body.dup_with(d))
-		var r = result
+		seq.icodes.add(routine.body.dup_with(d))
+		var r = routine.result
 		if r != null then r = d.dup_ireg(r)
 		return r
 	end
