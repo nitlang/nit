@@ -23,6 +23,14 @@ private import compiling_global
 private import compiling_icode
 
 redef class Program
+	# Generate icode for allocation/construction/validation of classes
+	fun generate_classes_init_to_icode
+	do
+		for c in module.local_classes do
+			c.generate_allocation_iroutines(self)
+		end
+	end
+
 	# Compile the program
 	# Generate all sep files (_sep.[ch]), the main file (_table.c) and the build file (_build.sh)
 	# Then execute the build.sh

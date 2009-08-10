@@ -363,6 +363,81 @@ redef class MMLocalClass
 		end
 	end
 
+	# Generation of allocation function of this class
+	fun generate_allocation_iroutines(prog: Program)
+	do
+		var cc = prog.compiled_classes[self.global]
+
+		var pi = primitive_info
+		if pi == null then
+			do
+				# Generate INIT_ATTRIBUTES routine
+				var iself = new IRegister(get_type)
+				var iselfa = [iself]
+				var iroutine = new IRoutine(iselfa, null)
+				var icb = new ICodeBuilder(module, iroutine)
+
+				for g in global_properties do
+					var p = self[g]
+					var t = p.signature.return_type
+					if p isa MMAttribute and t != null then
+						var ir = p.iroutine
+						if ir == null then continue
+						# FIXME: Not compatible with sep compilation
+						var e = icb.inline_routine(ir, iselfa, null).as(not null)
+						icb.stmt(new IAttrWrite(p, iself, e))
+					end
+				end
+
+				_init_var_iroutine = iroutine
+			end
+			do
+				# Compile CHECKNAME
+				var iself = new IRegister(get_type)
+				var iselfa = [iself]
+				var iroutine = new IRoutine(iselfa, null)
+				var icb = new ICodeBuilder(module, iroutine)
+				for g in global_properties do
+					var p = self[g]
+					var t = p.signature.return_type
+					if p isa MMAttribute and t != null and not t.is_nullable then
+						icb.add_attr_check(p, iself)
+					end
+				end
+
+				_checknew_iroutine = iroutine
+			end
+
+			var init_table_size = cshe.greaters.length + 1
+
+			for g in global_properties do
+				var p = self[g]
+				# FIXME skip invisible constructors
+				if not p.global.is_init_for(self) then continue
+				assert p isa MMMethod
+
+				var iself = new IRegister(get_type)
+				var iparams = new Array[IRegister]
+				for i in [0..p.signature.arity[ do iparams.add(new IRegister(p.signature[i]))
+				var iroutine = new IRoutine(iparams, iself)
+				iroutine.location = p.iroutine.location
+				var icb = new ICodeBuilder(module, iroutine)
+
+				var inew = new IAllocateInstance(get_type)
+				inew.result = iself
+				icb.stmt(inew)
+				var iargs = [iself]
+				iargs.add_all(iparams)
+
+				icb.stmt(new IInitAttributes(get_type, iself))
+				icb.stmt(new IStaticCall(p, iargs))
+				icb.stmt(new ICheckInstance(get_type, iself))
+
+				_new_instance_iroutine[p] = iroutine
+			end
+		end
+	end
+
 	# Compilation of table and new (or box)
 	fun compile_tables_to_c(v: GlobalCompilerVisitor)
 	do
@@ -412,30 +487,11 @@ redef class MMLocalClass
 		else if pi == null then
 			do
 				# Generate INIT_ATTRIBUTES routine
-				var iself = new IRegister(get_type)
-				var iselfa = [iself]
-				var iroutine = new IRoutine(iselfa, null)
-				var icb = new ICodeBuilder(module, iroutine)
-
-				for g in global_properties do
-					var p = self[g]
-					var t = p.signature.return_type
-					if p isa MMAttribute and t != null then
-						var ir = p.iroutine
-						if ir == null then continue
-						# FIXME: Not compatible with sep compilation
-						var e = icb.inline_routine(ir, iselfa, null).as(not null)
-						icb.stmt(new IAttrWrite(p, iself, e))
-					end
-				end
-
-				_init_var_iroutine = iroutine
-
 				var cname = "INIT_ATTRIBUTES__{name}"
-				var args = iroutine.compile_signature_to_c(v, cname, "init attributes of {name}", null, null)
+				var args = _init_var_iroutine.compile_signature_to_c(v, cname, "init var of {name}", null, null)
 				var ctx_old = v.ctx
 				v.ctx = new CContext
-				iroutine.compile_to_c(v, cname, args)
+				_init_var_iroutine.compile_to_c(v, cname, args)
 				ctx_old.append(v.ctx)
 				v.ctx = ctx_old
 				v.unindent
@@ -458,25 +514,11 @@ redef class MMLocalClass
 			end
 			do
 				# Compile CHECKNAME
-				var iself = new IRegister(get_type)
-				var iselfa = [iself]
-				var iroutine = new IRoutine(iselfa, null)
-				var icb = new ICodeBuilder(module, iroutine)
-				for g in global_properties do
-					var p = self[g]
-					var t = p.signature.return_type
-					if p isa MMAttribute and t != null and not t.is_nullable then
-						icb.add_attr_check(p, iself)
-					end
-				end
-
-				_checknew_iroutine = iroutine
-
 				var cname = "CHECKNEW_{name}"
-				var args = iroutine.compile_signature_to_c(v, cname, "check new {name}", null, null)
+				var args = _checknew_iroutine.compile_signature_to_c(v, cname, "check new {name}", null, null)
 				var ctx_old = v.ctx
 				v.ctx = new CContext
-				iroutine.compile_to_c(v, cname, args)
+				_checknew_iroutine.compile_to_c(v, cname, args)
 				ctx_old.append(v.ctx)
 				v.ctx = ctx_old
 				v.unindent
@@ -492,31 +534,12 @@ redef class MMLocalClass
 				if not p.global.is_init_for(self) then continue
 				assert p isa MMMethod
 
-				var iself = new IRegister(get_type)
-				var iparams = new Array[IRegister]
-				for i in [0..p.signature.arity[ do iparams.add(new IRegister(p.signature[i]))
-				var iroutine = new IRoutine(iparams, iself)
-				iroutine.location = p.iroutine.location
-				var icb = new ICodeBuilder(module, iroutine)
-
-				var inew = new IAllocateInstance(get_type)
-				inew.result = iself
-				icb.stmt(inew)
-				var iargs = [iself]
-				iargs.add_all(iparams)
-
-				icb.stmt(new IInitAttributes(get_type, iself))
-				icb.stmt(new IStaticCall(p, iargs))
-				icb.stmt(new ICheckInstance(get_type, iself))
-
-				_new_instance_iroutine[p] = iroutine
-
 				var cname = "NEW_{self}_{p.global.intro.cname}"
-				var new_args = iroutine.compile_signature_to_c(v, cname, "new {self} {p.full_name}", null, null)
+				var new_args = _new_instance_iroutine[p].compile_signature_to_c(v, cname, "new {self} {p.full_name}", null, null)
 				var ctx_old = v.ctx
 				v.ctx = new CContext
 				v.add_instr(init_table_decl)
-				var e = iroutine.compile_to_c(v, cname, new_args).as(not null)
+				var e = _new_instance_iroutine[p].compile_to_c(v, cname, new_args).as(not null)
 				v.add_instr("return {e};")
 				ctx_old.append(v.ctx)
 				v.ctx = ctx_old

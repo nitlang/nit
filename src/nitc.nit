@@ -127,6 +127,7 @@ special AbstractCompiler
 		for mod in mods do
 			var p = new Program(mod)
 			p.do_table_computation(self)
+			p.generate_classes_init_to_icode
 			p.compile_prog_to_c(self)
 		end
 	end
