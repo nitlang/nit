@@ -93,10 +93,14 @@ end
 
 redef class ICodeBuilder
 	# Inline an iroutine in the current icode sequence
-	fun inline_routine(routine: IRoutine, args: Sequence[IRegister]): nullable IRegister
+	fun inline_routine(routine: IRoutine, args: Sequence[IRegister], closdefs: nullable Sequence[nullable IClosureDef]): nullable IRegister
 	do
 		var d = new ICodeDupContext(self)
 		assert args.length == routine.params.length
+		var closdecls = routine.closure_decls
+		var cdefsa = if closdefs != null then closdefs.length else 0
+		var cdeclsa = if closdecls != null then closdecls.length else 0
+		assert cdefsa <= cdeclsa
 
 		# Fill register duplicate association
 		var dico = d._registers
@@ -115,6 +119,17 @@ redef class ICodeBuilder
 			# The alternative is safe but add one move :/
 			dico[routine.params[i]] = args[i]
 			#seq.icodes.add(new IMove(dico[routine.params[i]]), args[i]))
+		end
+
+		# Fill closure association
+		if closdecls != null then
+			var cdico = d._closures
+			for i in [0..cdefsa[ do
+				cdico[closdecls[i]] = closdefs[i]
+			end
+			for i in [cdefsa..cdeclsa[ do
+				cdico[closdecls[i]] = null
+			end
 		end
 
 		# Process inlining
@@ -155,6 +170,9 @@ private class ICodeDupContext
 	# The assocation between old_ireg and new_ireg
 	# Used by dup_ireg
 	var _registers: Map[IRegister, IRegister] = new HashMap[IRegister, IRegister]
+
+	# The association between a closure_decl and its closure_def (if any)
+	var _closures: Map[IClosureDecl, nullable IClosureDef] = new ArrayMap[IClosureDecl, nullable IClosureDef]
 
 	# The current code builder
 	var _icb: ICodeBuilder
@@ -267,16 +285,20 @@ redef class INew
 end
 
 redef class IClosCall
-	redef fun inner_dup_with(d)
+	redef fun dup_with(d)
 	do
-		var c2 = new IClosCall(closure_decl, d.dup_iregs(exprs))
-		var bs = break_seq
-		if bs != null then
-			var bs2 = new ISeq
-			c2.break_seq = bs2
-			bs.dup_seq_to(d, bs2)
+		var closdef = d._closures[closure_decl]
+		if closdef == null then
+			# Default is already guarded and inlined
+			return
 		end
-		return c2
+		# Break sequence cannot be inlined :/
+		assert break_seq == null
+		var res = d._icb.inline_routine(closdef, d.dup_iregs(exprs), null)
+		if result != null then
+			assert res != null
+			d._icb.stmt(new IMove(d.dup_ireg(result.as(not null)), res))
+		end
 	end
 end
 
@@ -350,6 +372,13 @@ end
 redef class IHasClos
 	redef fun inner_dup_with(d)
 	do
-		return new IHasClos(closure_decl)
+		var closdef = d._closures[closure_decl]
+		var res: IRegister
+		if closdef != null then
+			res = d._icb.lit_true_reg
+		else
+			res = d._icb.lit_false_reg
+		end
+		return new IMove(d.dup_ireg(result.as(not null)), res)
 	end
 end

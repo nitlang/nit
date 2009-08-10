@@ -1450,7 +1450,7 @@ redef class AClosureCallExpr
 				v.add_assignment(r, r2)
 			end
 			v.seq = iif.else_seq
-			var r3 = v.inline_routine(closdecl_default, args)
+			var r3 = v.inline_routine(closdecl_default, args, null)
 			if r != null then
 				assert r3 != null
 				v.add_assignment(r, r3)

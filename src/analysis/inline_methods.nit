@@ -35,7 +35,7 @@ special ICodeVisitor
 				var old_seq = icb.seq
 				icb.seq = seq
 				current_icode.insert_before(seq)
-				var e = icb.inline_routine(ir, ic.exprs)
+				var e = icb.inline_routine(ir, ic.exprs, ic.closure_defs)
 				var r = ic.result
 				if r != null then
 					assert e != null
