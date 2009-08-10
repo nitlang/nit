@@ -196,16 +196,12 @@ class ICodeBuilder
 	# The current sequence of icodes
 	readable writable var _seq: ISeq
 
-	# The method associated to the iroutine (if any)
-	readable var _method: nullable MMMethod
-
-	init(module: MMModule, r: IRoutine, m: nullable MMMethod)
+	init(module: MMModule, r: IRoutine)
 	do
 		_module = module
 		_current_location = r.location
 		_iroutine = r
 		_seq = r.body
-		_method = m
 	end
 
 	# New ICodes are set to this location

@@ -869,7 +869,7 @@ redef class MMLocalClass
 				var iself = new IRegister(get_type)
 				var iselfa = [iself]
 				var iroutine = new IRoutine(new Array[IRegister], iself)
-				var icb = new ICodeBuilder(module, iroutine, null)
+				var icb = new ICodeBuilder(module, iroutine)
 				var obj = new INative("OBJ2VAL(obj)", null)
 				obj.result = iself
 				icb.stmt(obj)
@@ -906,7 +906,7 @@ redef class MMLocalClass
 				var iself = new IRegister(get_type)
 				var iselfa = [iself]
 				var iroutine = new IRoutine(iselfa, null)
-				var icb = new ICodeBuilder(module, iroutine, null)
+				var icb = new ICodeBuilder(module, iroutine)
 				for g in global_properties do
 					var p = self[g]
 					var t = p.signature.return_type
@@ -939,7 +939,7 @@ redef class MMLocalClass
 				for i in [0..p.signature.arity[ do iparams.add(new IRegister(p.signature[i]))
 				var iroutine = new IRoutine(iparams, iself)
 				iroutine.location = p.iroutine.location
-				var icb = new ICodeBuilder(module, iroutine, p)
+				var icb = new ICodeBuilder(module, iroutine)
 
 				var inew = new INative("NEW_{name}()", null)
 				inew.result = iself

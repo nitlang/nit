@@ -79,12 +79,16 @@ special ICodeBuilder
 	# Register where a functionnal nit return must store its value
 	readable writable var _return_value: nullable IRegister
 
+	# The method associated to the iroutine (if any)
+	readable var _method: nullable MMMethod
+
 	init(visitor: AbsSyntaxVisitor, r: IRoutine, m: nullable MMMethod)
 	do
-		super(visitor.module, r, m)
+		super(visitor.module, r)
 		_visitor = visitor
 		_return_seq = r.body
 		_return_value = r.result
+		_method = m
 	end
 
 	# Insert implicit super init calls
