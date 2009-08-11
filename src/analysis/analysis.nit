@@ -31,10 +31,14 @@ import inline_methods
 import instantiated_type_analysis
 import reachable_method_analysis
 
+# Global Analysis implementation
+import cha_analysis
+
 # Global Optimizations
 import dead_method_removal
 
 redef class ToolContext
+	readable writable var _global_callgraph: String = "cha"
 	readable writable var _no_dead_method_removal: Bool = false
 end
 
@@ -42,6 +46,12 @@ redef class Program
 	# This method will analyse the program and store results (in global compilation only)
 	fun do_global_analysis do
 		assert tc.global
+
+		if tc.global_callgraph == "cha" then
+			var cha = new ChaBuilder(self)
+			cha.work
+			rma = cha.context
+		end
 
 		# Ensure we have all analysis created
 		if rma == null then rma = new DefaultReachableMethodAnalysis
