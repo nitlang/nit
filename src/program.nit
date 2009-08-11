@@ -25,6 +25,28 @@ class Program
 	# This module is the 'main' module, the one where we find the 'main' method
 	readable var _module: MMModule
 
+	# This method is the entry point of this program
+	# There might be no entry point (if in fact we are compiling a library)
+	readable var _main_method: nullable MMMethod = null
+
+	# This is the class that contains the main method.
+	# Would be null if there is no main method
+	readable var _main_class: nullable MMLocalClass = null
+
+	fun compute_main_method do
+		# Check for the 'Sys' class
+		var sysname = once "Sys".to_symbol
+		if not module.has_global_class_named(sysname) then return
+		var sys = module.class_by_name(sysname)
+
+		# Check for 'Sys::main' method
+		var entryname = once "main".to_symbol
+		if not sys.has_global_property_by_name(entryname) then return
+
+		_main_method = sys.select_method(entryname)
+		_main_class = sys
+	end
+
 	init(m: MMModule) do
 		_module = m
 	end

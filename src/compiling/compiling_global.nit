@@ -61,20 +61,12 @@ redef class Program
 		v.indent
 		v.add_instr("prepare_signals();")
 		v.add_instr("glob_argc = argc; glob_argv = argv;")
-		var sysname = once "Sys".to_symbol
-		if not module.has_global_class_named(sysname) then
+		if v.program.main_method == null then
 			print("No main")
 		else
-			var sys = module.class_by_name(sysname)
-			var name = once "main".to_symbol
-			if not sys.has_global_property_by_name(name) then
-				print("No main")
-			else
-				var mainm = sys.select_method(name)
-				v.add_instr("G_sys = NEW_Sys();")
-				v.add_instr("register_static_object(&G_sys);")
-				v.add_instr("{mainm.cname}(G_sys);")
-			end
+			v.add_instr("G_sys = NEW_Sys();")
+			v.add_instr("register_static_object(&G_sys);")
+			v.add_instr("{v.program.main_method.cname}(G_sys);")
 		end
 		v.add_instr("return 0;")
 		v.unindent
