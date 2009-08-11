@@ -33,17 +33,23 @@ special ICodeVisitor
 	# Second pass is used to assign an effective slot to iregsiters
 	var _pass: Int = 0
 
+	# Update locality information of r according to the current iroutine
+	fun mark_locality(r: IRegister)
+	do
+		if r._is_local and r._local_iroutine != _current_ir then
+			if r._local_iroutine == null then
+				r._local_iroutine = _current_ir
+			else
+				r._is_local = false
+			end
+		end
+	end
+
 	redef fun visit_iregister_read(ic: ICode, r: IRegister)
 	do
 		var pass = _pass
 		if pass == 0 then
-			if r._is_local and r._local_iroutine != _current_ir then
-				if r._local_iroutine == null then
-					r._local_iroutine = _current_ir
-				else
-					r._is_local = false
-				end
-			end
+			mark_locality(r)
 			_lasts[r] = ic
 			r._slot_index = null
 		else if pass == 1 and _lasts.has_key(r) and _lasts[r] == ic then
@@ -55,14 +61,7 @@ special ICodeVisitor
 	do
 		var pass = _pass
 		if pass == 0 then
-			# Process locality
-			if r._is_local and r._local_iroutine != _current_ir then
-				if r._local_iroutine == null then
-					r._local_iroutine = _current_ir
-				else
-					r._is_local = false
-				end
-			end
+			mark_locality(r)
 			r._slot_index = null
 			# The first write make it live
 			if not _firsts.has_key(r) then _firsts[r] = ic
@@ -143,10 +142,12 @@ special ICodeVisitor
 			_current_ir = ir
 			for r in ir.params do
 				_firsts[r] = self
+				mark_locality(r)
 			end
 			super
 			if res != null then
 				_lasts[res] = self
+				mark_locality(res)
 			end
 			_current_ir = old_ir
 		else
