@@ -31,6 +31,7 @@ special AbstractCompiler
 	readable var _opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no_cc")
 	readable var _opt_global: OptionBool = new OptionBool("Use global compilation", "--global")
 	readable var _opt_global_no_STF_opt: OptionBool = new OptionBool("Do not use SFT optimization", "--no-global-SFT-optimization")
+	readable var _opt_global_no_DMR_opt: OptionBool = new OptionBool("Do not use dead method removal optimization", "--no-global-DMR-optimization")
 	readable var _opt_clibdir: OptionString = new OptionString("NIT C library directory", "--clibdir")
 	readable var _opt_bindir: OptionString = new OptionString("NIT tools directory", "--bindir")
 	readable var _opt_compdir: OptionString = new OptionString("Intermediate compilation directory", "--compdir")
@@ -40,7 +41,7 @@ special AbstractCompiler
 	init
 	do
 		super("nitc")
-		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix, opt_dump, opt_global_no_STF_opt)
+		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix, opt_dump, opt_global_no_STF_opt, opt_global_no_DMR_opt)
 	end
 
 	redef fun process_options
@@ -53,6 +54,7 @@ special AbstractCompiler
 		if ext != null then ext_prefix = ext else ext_prefix = ""
 		global = opt_global.value
 		use_SFT_optimization = not opt_global_no_STF_opt.value
+		no_dead_method_removal = opt_global_no_DMR_opt.value
 		compdir = opt_compdir.value
 		if compdir == null then
 			var dir = once ("NIT_COMPDIR".to_symbol).environ

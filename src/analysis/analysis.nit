@@ -31,6 +31,13 @@ import inline_methods
 import instantiated_type_analysis
 import reachable_method_analysis
 
+# Global Optimizations
+import dead_method_removal
+
+redef class ToolContext
+	readable writable var _no_dead_method_removal: Bool = false
+end
+
 redef class Program
 	# This method will analyse the program and store results (in global compilation only)
 	fun do_global_analysis do
@@ -43,6 +50,7 @@ redef class Program
 	# This method will optimize the program (in global compilation only)
 	fun do_global_optimizations do
 		assert tc.global
+		if not tc.no_dead_method_removal then optimize_dead_methods
 	end
 end
 
