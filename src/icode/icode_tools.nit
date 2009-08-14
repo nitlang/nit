@@ -95,7 +95,7 @@ redef class ICodeBuilder
 	# Inline an iroutine in the current icode sequence
 	fun inline_routine(routine: IRoutine, args: Sequence[IRegister]): nullable IRegister
 	do
-		var d = new ICodeDupContext
+		var d = new ICodeDupContext(self)
 		assert args.length == routine.params.length
 
 		# Fill register duplicate association
@@ -118,7 +118,7 @@ redef class ICodeBuilder
 		end
 
 		# Process inlining
-		seq.icodes.add(routine.body.dup_with(d))
+		routine.body.dup_with(d)
 		return res
 	end
 end
@@ -155,20 +155,28 @@ private class ICodeDupContext
 	# The assocation between old_ireg and new_ireg
 	# Used by dup_ireg
 	var _registers: Map[IRegister, IRegister] = new HashMap[IRegister, IRegister]
+
+	# The current code builder
+	var _icb: ICodeBuilder
+
+	init(icb: ICodeBuilder)
+	do
+		_icb = icb
+	end
 end
 
 redef class ICode
-	# Duplicate the current icode (generic part)
-	private fun dup_with(d: ICodeDupContext): ICode
+	# Duplicate the current icode in the icode builder of the ICodeDupContext
+	private fun dup_with(d: ICodeDupContext)
 	do
 		var c = inner_dup_with(d)
 		var r = result
 		if r != null then c.result = d.dup_ireg(r)
 		c.location = location
-		return c
+		d._icb.seq.icodes.add(c)
 	end
 
-	# Duplicate the current icode (specific part)
+	# Simle partial duplication of the current icode
 	private fun inner_dup_with(d: ICodeDupContext): ICode is abstract
 end
 
@@ -184,10 +192,13 @@ redef class ISeq
 	# Note: dest must be empty and not modified afted duplication or IEscapes may be wrongly duplicated
 	private fun dup_seq_to(d: ICodeDupContext, dest: ISeq)
 	do
+		var old_seq = d._icb.seq
+		d._icb.seq = dest
 		d._seqs[self] = dest
 		for c in icodes do
-			dest.icodes.add(c.dup_with(d))
+			c.dup_with(d)
 		end
+		d._icb.seq = old_seq
 	end
 end
 
