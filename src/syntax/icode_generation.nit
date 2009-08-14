@@ -779,49 +779,30 @@ redef class AForExpr
 	do
 		var expr_type = n_expr.stype
 
-		# Get iterator
-		var meth_iterator = v.visitor.get_method(expr_type, once "iterator".to_symbol)
+		# Get iterate
+		var meth_iterate = v.visitor.get_method(expr_type, once "iterate".to_symbol)
 
-		var iter_type = meth_iterator.signature_for(expr_type).return_type.as(not null)
-		var ireg_iter = v.expr(new ICall(meth_iterator, [v.generate_expr(n_expr)]), iter_type)
+		# Build closure
+		var iclos = meth_iterate.signature.closures.first.signature.generate_empty_iclosuredef(v)
+		var old_seq = v.seq
 
-		# Enter loop
-		var seq_old = v.seq
-		var iloop = new ILoop
-		v.stmt(iloop)
-		escapable.break_seq = iloop
-		v.seq = iloop
+		var seq = new ISeq
+		v.stmt(seq)
+		v.seq = seq
+		escapable.break_seq = seq
+		escapable.break_value = null
 
-		# Condition evaluation
-		var meth_is_ok = v.visitor.get_method(iter_type, once ("is_ok".to_symbol))
-		var ireg_isok = v.expr(new ICall(meth_is_ok, [ireg_iter]), v.visitor.type_bool)
-		var iif = new IIf(ireg_isok)
-
-		# Process insite the loop (condition is true)
-		v.stmt(iif)
-		v.seq = iif.then_seq
-		escapable.continue_seq = iif.then_seq
-
-		# Automatic variable assignment
-		var meth_item = v.visitor.get_method(iter_type, once ("item".to_symbol))
-		var va_stype = variable.stype.as(not null)
-		var ireg_item = v.expr(new ICall(meth_item, [ireg_iter]), va_stype)
-		var ireg_va = v.variable(variable)
-		v.add_assignment(ireg_va, ireg_item)
-
-		# Body evaluation
+		v.seq = iclos.body
+		escapable.continue_seq = iclos.body
+		escapable.continue_value = null
+		v.stmt(new IMove(v.variable(variable), iclos.params.first))
 		v.generate_stmt(n_block)
 
-		# Exit contition (condition is false)
-		v.seq = iif.else_seq
-		v.add_escape(iloop)
+		# Call closure
+		v.seq = seq
+		v.add_call(meth_iterate, [v.generate_expr(n_expr)], [iclos])
 
-		# Next step
-		var meth_next = v.visitor.get_method(iter_type, once ("next".to_symbol))
-		v.seq = iloop
-		v.stmt(new ICall(meth_next, [ireg_iter]))
-
-		v.seq = seq_old
+		v.seq = old_seq
 		return null
 	end
 end
