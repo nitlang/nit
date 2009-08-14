@@ -41,6 +41,8 @@ redef class MMModule
 		var files = new Array[String]
 		var includes = new ArraySet[String]
 		files.add("$CLIBDIR/nit_main.c")
+		files.add("$CLIBDIR/gc.c")
+		files.add("$CLIBDIR/gc_static_objects_list.c")
 		tc.info("Generating C code",1)
 		for m in mhe.greaters_and_self do
 			files.add("{tc.compdir}/{m.name}._sep.c")

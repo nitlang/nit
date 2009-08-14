@@ -14,9 +14,10 @@
 #include "nit_common.h"
 #include <signal.h>
 #include <stdarg.h>
+#include "gc.h"
 
 bigint object_id_counter = 1000000;
-enum gc_option { large, boehm } gc_option;
+enum gc_option { large, boehm, nitgc } gc_option;
 
 #ifdef WITH_LIBGC
 #define GC_DEBUG
@@ -25,11 +26,18 @@ enum gc_option { large, boehm } gc_option;
 
 void *raw_alloc(size_t s0)
 {
-	return alloc(s0);
+	switch (gc_option) {
+	case nitgc: return malloc(s0); break;
+	default: return alloc(s0);
+	}
 }
 
 void register_static_object(val_t *o)
 {
+	switch (gc_option) {
+	case nitgc: GC_add_static_object(o); break;
+	default: break;
+	}
 	return;
 }
 
@@ -55,6 +63,7 @@ void * alloc(size_t s0)
 #ifdef WITH_LIBGC
 	case boehm: return GC_MALLOC(s0);
 #endif
+	case nitgc: return Nit_gc_malloc(s0);
 	case large:
 	default: return large_alloc(s0);
 	}
@@ -85,6 +94,8 @@ void initialize_gc_option(void) {
 #else
 		fprintf(stderr, "Compiled without Boehm GC support. Using default.\n");
 #endif
+		} else if (strcmp(opt, "nitgc")==0) {
+			gc_option = nitgc;
 		} else if (strcmp(opt, "large")==0) {
 			gc_option = large;
 		} else {
@@ -97,6 +108,7 @@ void initialize_gc_option(void) {
 #ifdef WITH_LIBGC
 		case boehm: GC_INIT(); break;
 #endif
+		case nitgc: Nit_gc_init(); break;
 		default: break; /* Nothing */
 	}
 }
