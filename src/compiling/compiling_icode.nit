@@ -264,9 +264,10 @@ redef class IRoutine
 		if location != null then
 			ll = location.line_start
 		end
-		v.add_decl("struct trace_t trace = \{NULL, NULL, {ll}, LOCATE_{v.basecname}\};")
+		v.add_decl("struct trace_t trace = \{NULL, NULL, {ll}, LOCATE_{v.basecname}, {std_slots_nb}\};")
 		v.add_instr("trace.prev = tracehead; tracehead = &trace;")
 		v.add_instr("trace.file = LOCATE_{v.visitor.module.name};")
+		v.add_instr("trace.REG_pointer = (val_t **)&REG;")
 
 		# Add local variables
 		if std_slots_nb == 0 then

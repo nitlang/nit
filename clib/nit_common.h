@@ -131,6 +131,8 @@ struct trace_t {
 	const char *file; /* source filename */
 	int line; /* line number */
 	const char *meth; /* method name */
+	int REG_size;
+	val_t **REG_pointer;
 };
 extern struct trace_t *tracehead;
 typedef enum {true = (1==1),false = (0==1)} bool;
