@@ -272,7 +272,11 @@ redef class IRoutine
 		if std_slots_nb == 0 then
 			v.add_decl("val_t *REG = NULL;")
 		else
-			v.add_decl("val_t REG[{std_slots_nb}];")
+			var init_vals = new Buffer
+			init_vals.append "val_t REG[{std_slots_nb}] = \{ NIT_NULL"
+			for i in [1..std_slots_nb[ do init_vals.append(", NIT_NULL")
+			init_vals.append " \};"
+			v.add_decl(init_vals.to_s)
 		end
 		for i in [0..tag_slots_nb[ do
 			v.add_decl("val_t REGB{i};")
