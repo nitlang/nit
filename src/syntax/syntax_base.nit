@@ -374,8 +374,7 @@ special Visitor
 	fun get_method(recv: MMType, name: Symbol): MMMethod
 	do
 		if not recv.local_class.has_global_property_by_name(name) then
-			error(current_node, "Fatal Error: {recv} must have a property named {name}.")
-			exit(1)
+			fatal_error(current_node, "Fatal Error: {recv} must have a property named {name}.")
 		end
 		return recv.local_class.select_method(name)
 	end
