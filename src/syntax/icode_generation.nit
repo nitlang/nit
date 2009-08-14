@@ -544,16 +544,16 @@ redef class AInternMethPropdef
 			end
 		else if c == once "NativeArray".to_symbol then
 			if n == once "object_id".to_symbol then
-				s = "TAG_Int(UNBOX_NativeArray(@@@))"
+				s = "TAG_Int(((Nit_NativeArray)@@@)->object_id)"
 			else if n == once "[]".to_symbol then
-				s = "UNBOX_NativeArray(@@@)[UNTAG_Int(@@@)]"
+				s = "((Nit_NativeArray)@@@)->val[UNTAG_Int(@@@)]"
 			else if n == once "[]=".to_symbol then
-				s = "UNBOX_NativeArray(@@@)[UNTAG_Int(@@@)]=@@@;"
+				s = "((Nit_NativeArray)@@@)->val[UNTAG_Int(@@@)]=@@@"
 			else if n == once "copy_to".to_symbol then
 				var t = p[0]
 				p[0] = p[1]
 				p[1] = t
-				s = "(void)memcpy(UNBOX_NativeArray(@@@), UNBOX_NativeArray(@@@), UNTAG_Int(@@@)*sizeof(val_t));"
+				s = "(void)memcpy(((Nit_NativeArray )@@@)->val, ((Nit_NativeArray)@@@)->val, UNTAG_Int(@@@)*sizeof(val_t))"
 			end
 		else if c == once "NativeString".to_symbol then
 			if n == once "object_id".to_symbol then
@@ -583,7 +583,7 @@ redef class AInternMethPropdef
 			s = "exit(UNTAG_Int(@@@));"
 		else if n == once "calloc_array".to_symbol then
 			p[0] = p[1]
-			s = "BOX_NativeArray((val_t*)malloc((UNTAG_Int(@@@) * sizeof(val_t))))"
+			s = "NEW_NativeArray(UNTAG_Int(@@@), sizeof(val_t))"
 		else if n == once "calloc_string".to_symbol then
 			p[0] = p[1]
 			s = "BOX_NativeString((char*)malloc((UNTAG_Int(@@@) * sizeof(char))))"

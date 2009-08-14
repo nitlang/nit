@@ -33,6 +33,7 @@ typedef bigint cid_t;					/* class identifier */
 typedef bigint val_t;	/* value (everything is a val_t) */
 typedef union obj_tu {union classtable_elt_tu * vft; bigint object_id; val_t objectSize;} *obj_t; /* standard object */
 typedef union classtable_elt_tu { bigint i; fun_t f; cid_t cid;} classtable_elt_t;	/* classtable element */
+typedef struct Nit_NativeArray {const classtable_elt_t * vft; bigint object_id; bigint size; val_t val[1];} * Nit_NativeArray;
 
 typedef classtable_elt_t * classtable_t;			/* classtable */
 
@@ -86,6 +87,7 @@ extern bigint object_id_counter;
 
 #define ISOBJ(x) (TAG((x)) == OBJTAG)
 #define VAL2OBJ(x) ((obj_t)(x))
+#define VAL2ARRAY(x) ((Nit_NativeArray)(x))
 #define OBJ2VAL(o) ((val_t)(o))
 #define VAL2VFT(x) (ISOBJ(x) ? VAL2OBJ(x)->vft : TAG2VFT[TAG(x)])
 /*#define VAL2CID(x) (ISOBJ(x) ? (VAL2OBJ(x)->vft->cid) : (-TAG(x)))*/
@@ -97,6 +99,7 @@ extern bigint object_id_counter;
 /* Equal comparaison */
 /* O = Non nil object ; N = Object or nil ; P = Primitive */
 #define OBJ_IS_BOX(x) ((VAL2OBJ(x)->vft->i) < 0)
+#define OBJ_IS_ARRAY(x) ((VAL2ARRAY(x)->vft[1].i) == -1)
 #define IS_BOX(x) (ISOBJ(x) && OBJ_IS_BOX(x))
 #define IS_EQUAL_BOX(x, y) (ISOBJ(y) && (VAL2OBJ(x)[2].vft==VAL2OBJ(y)[2].vft) && (VAL2OBJ(x)->vft==VAL2OBJ(y)->vft))
 #define IS_EQUAL_OO(x, y) ((x)==(y) || (IS_BOX(x) && IS_EQUAL_BOX((x), (y))))
