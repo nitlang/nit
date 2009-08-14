@@ -177,6 +177,7 @@ redef class MMModule
 		var itab = new Array[TableElt]
 
 		ctab.add(new TableEltClassSelfId)
+		ctab.add(new TableEltClassObjectSize)
 		itab.add(new TableEltVftPointer)
 		itab.add(new TableEltObjectId)
 
@@ -767,6 +768,28 @@ special TableElt
 	do
 		var ga = v.global_analysis
 		return "{v.global_analysis.compiled_classes[c.global].id} /* {ga.color(self)}: Identity */"
+	end
+end
+
+
+# The element that represent the Object Size
+class TableEltClassObjectSize
+special TableElt
+	redef fun is_related_to(c) do return true
+	redef fun compile_to_c(v, c)
+	do
+        var nb = 0
+        var ga = v.global_analysis
+		if c.name == "NativeArray".to_symbol then
+			nb = -1
+		else
+			var cc = ga.compiled_classes[c.global]
+			var itab = cc.instance_table
+			for e in itab do
+				nb += 1
+			end
+		end
+		return "{nb} /* {ga.color(self)}: Object size (-1 if a NativeArray)*/"
 	end
 end
 
