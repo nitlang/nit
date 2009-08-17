@@ -25,6 +25,7 @@ Important files and directory:
 	bin/nitdoc	The Nit autodoc
 	BUGS		Known big usability bugs
 	c_src/		C code of nitc (needed to bootstrap)
+	clib/		C code needed by nitc to compile programs
 	Changelog	List of change between versions
 	doc/		Documentation
 	examples/	Program examples written in Nit

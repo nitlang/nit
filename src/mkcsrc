@@ -49,7 +49,7 @@ sed -n '/^ *.nit_compile/{s!\\$!!;p}' .nit_compile3/nitc._build.sh | while read 
 	cp $file c_src
 	[ -r ${file%.c}.h ] && cp ${file%.c}.h c_src
 done
-sed "s|.nit_compile${p}|.|g;s|/\[a-z\]+/../|/|g;s|nitc_${p}|nitc|" .nit_compile${p}/nitc._build.sh > c_src/nitc._build.sh 
+sed -e "s|.nit_compile${p}|.|g;s|/\[a-z\]+/../|/|g;s|nitc_${p}|nitc|" -e 's/^CLIBDIR=.*/CLIBDIR="clib"/' .nit_compile${p}/nitc._build.sh > c_src/nitc._build.sh
 chmod +x c_src/nitc._build.sh
-cp ../c_src/Makefile ../c_src/README c_src
+cp -r ../c_src/Makefile ../c_src/README ../clib c_src
 
