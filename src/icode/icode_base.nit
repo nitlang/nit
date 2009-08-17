@@ -246,6 +246,12 @@ special IAbsCall
 	end
 end
 
+# A static call to a specific method
+class IStaticCall
+special IAbsCall
+	init(p: MMMethod, a: Sequence[IRegister]) do super
+end
+
 # A closure call
 # exprs are the arguments
 class IClosCall

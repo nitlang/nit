@@ -998,9 +998,9 @@ redef class MMLocalClass
 				icb.stmt(inew)
 				var iargs = [iself]
 				iargs.add_all(iparams)
-				icb.stmt(new INative("{p.cname}(@@@{", @@@"*iparams.length}, init_table)", iargs))
-				icb.stmt(new INative("CHECKNEW_{name}(@@@)", [iself]))
 
+				icb.stmt(new IStaticCall(p, iargs))
+				icb.stmt(new INative("CHECKNEW_{name}(@@@)", [iself]))
 				var cname = "NEW_{self}_{p.global.intro.cname}"
 				var new_args = iroutine.compile_signature_to_c(v, cname, "new {self} {p.full_name}", null, null)
 				var ctx_old = v.ctx

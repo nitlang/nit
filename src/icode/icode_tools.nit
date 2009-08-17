@@ -298,6 +298,12 @@ redef class INew
 	end
 end
 
+redef class IStaticCall
+	redef fun inner_dup_with(d)
+	do
+		return new IStaticCall(property, d.dup_iregs(exprs))
+	end
+end
 redef class IClosCall
 	redef fun dup_with(d)
 	do

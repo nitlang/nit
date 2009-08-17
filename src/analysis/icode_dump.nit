@@ -265,6 +265,13 @@ redef class ICall
 	end
 end
 
+redef class IStaticCall
+	redef fun dump_intern(icd)
+	do
+		return "STATIC_CALL {property.full_name}({icd.register_all(exprs)})"
+	end
+end
+
 redef class IClosCall
 	redef fun dump_intern(icd)
 	do

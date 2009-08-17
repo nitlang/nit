@@ -558,6 +558,15 @@ redef class INew
 	end
 end
 
+redef class IStaticCall
+	redef fun compile_call_to_c(v, args)
+	do
+		var prop = property
+		if prop.global.is_init then args.add("init_table")
+		return "{property.cname}({args.join(", ")})"
+	end
+end
+
 redef class INative
 	redef fun inner_compile_to_c(v)
 	do
