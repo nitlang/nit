@@ -116,7 +116,11 @@ extern bigint object_id_counter;
 
 #define VAL_ISA(e, c, i) (VAL2VFT((e))[(c)].cid == (cid_t)(i))
 
-void * alloc(size_t);
+/* GC and memory management */
+void *alloc(size_t); /* allocate memory to store an object with an object header */
+void *raw_alloc(size_t); /* allocate raw memory to store a raw stram of byte */
+void register_static_object(val_t*); /* mark that something is a global or once object */
+
 extern val_t G_args;
 extern val_t G_stdin;
 extern val_t G_stdout;

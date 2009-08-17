@@ -586,7 +586,7 @@ redef class AInternMethPropdef
 			s = "NEW_NativeArray(UNTAG_Int(@@@), sizeof(val_t))"
 		else if n == once "calloc_string".to_symbol then
 			p[0] = p[1]
-			s = "BOX_NativeString((char*)malloc((UNTAG_Int(@@@) * sizeof(char))))"
+			s = "BOX_NativeString((char*)raw_alloc((UNTAG_Int(@@@) * sizeof(char))))"
 		end
 		if s == null then
 			v.visitor.error(self, "Fatal error: unknown intern method {method.full_name}.")

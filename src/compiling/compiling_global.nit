@@ -463,6 +463,7 @@ redef class MMModule
 			else
 				var mainm = sys.select_method(name)
 				v.add_instr("G_sys = NEW_Sys();")
+				v.add_instr("register_static_object(&G_sys);")
 				v.add_instr("{mainm.cname}(G_sys);")
 			end
 		end

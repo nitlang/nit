@@ -701,6 +701,7 @@ redef class IOnce
 		body.compile_to_c(v)
 		var e = v.register(result.as(not null))
 		v.add_instr("once_value_{i} = {e};")
+		v.add_instr("register_static_object(&once_value_{i});")
 		if res.stype.is_nullable then v.add_instr("once_bool_{i} = true;")
 		v.unindent
 		v.add_instr("} else {e} = once_value_{i};")

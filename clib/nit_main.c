@@ -23,6 +23,16 @@ enum gc_option { large, boehm } gc_option;
 #include <gc/gc.h>
 #endif
 
+void *raw_alloc(size_t s0)
+{
+	return alloc(s0);
+}
+
+void register_static_object(val_t *o)
+{
+	return;
+}
+
 void *large_alloc(size_t s0)
 {
 	static char * alloc_pos = NULL;
