@@ -18,14 +18,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#ifdef WITH_LIBGC
-#include <gc/gc.h>
-#define malloc(x) GC_MALLOC((x))
-#define calloc(x,y) GC_MALLOC((x)*(y))
-#endif
-
-
-
 /* *** Types *** */
 typedef signed long int bigint;	/* standard int value, must be larger that any poiner */
 typedef bigint (*fun_t) (bigint);					/* generic function pointer */
