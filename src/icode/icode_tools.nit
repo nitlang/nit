@@ -92,9 +92,22 @@ class ICodeVisitor
 end
 
 redef class ICodeBuilder
+	# IRoutine currently inlining
+	# Used to avoid recursive inlining
+	var _current_inlining: Array[IRoutine] = new Array[IRoutine]
+
+	# Return false if routine can be saflely inlined
+	fun is_currently_inlining_routine(routine: IRoutine): Bool
+	do
+		return routine == iroutine or _current_inlining.has(routine)
+	end
+
 	# Inline an iroutine in the current icode sequence
+	# Require not is_currently_inlining
 	fun inline_routine(routine: IRoutine, args: Sequence[IRegister], closdefs: nullable Sequence[nullable IClosureDef]): nullable IRegister
 	do
+		assert not is_currently_inlining_routine(routine)
+		_current_inlining.add(routine)
 		var d = new ICodeDupContext(self)
 		assert args.length == routine.params.length
 		var closdecls = routine.closure_decls
@@ -134,6 +147,7 @@ redef class ICodeBuilder
 
 		# Process inlining
 		routine.body.dup_with(d)
+		_current_inlining.pop
 		return res
 	end
 end

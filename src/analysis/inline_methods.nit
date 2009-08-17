@@ -24,26 +24,35 @@ special ICodeVisitor
 	var _pass: Int = 0
 	var _icb: ICodeBuilder
 
+	var _current_inlining: Array[IRoutine]
+
 	redef fun visit_icode(ic)
 	do
 		if ic isa ICall then
 			var m = ic.property
-			if m.iroutine != null and ic.is_inlinable then
-				var icb = _icb
-				var ir = m.iroutine.as(not null)
-				var seq = new ISeq
-				var old_seq = icb.seq
-				icb.seq = seq
-				current_icode.insert_before(seq)
-				var e = icb.inline_routine(ir, ic.exprs, ic.closure_defs)
-				var r = ic.result
-				if r != null then
-					assert e != null
-					current_icode.insert_before(new IMove(r, e))
+			var ir = m.iroutine
+			if ir != null and ic.is_inlinable then
+				if _current_inlining.has(ir) then
+					# We cannot inline ir
+					# FIXME: what we want is a static call
+				else
+					var icb = _icb
+					_current_inlining.push(ir)
+					var seq = new ISeq
+					var old_seq = icb.seq
+					icb.seq = seq
+					current_icode.insert_before(seq)
+					var e = icb.inline_routine(ir, ic.exprs, ic.closure_defs)
+					var r = ic.result
+					if r != null then
+						assert e != null
+						current_icode.insert_before(new IMove(r, e))
+					end
+					current_icode.delete
+					icb.seq = old_seq
+					visit_icode(seq)
+					_current_inlining.pop
 				end
-				current_icode.delete
-				icb.seq = old_seq
-				visit_icode(seq)
 			end
 		end
 		super
@@ -51,6 +60,7 @@ special ICodeVisitor
 
 	init(m: MMModule, r: IRoutine)
 	do
+		_current_inlining = [r]
 		_icb = new ICodeBuilder(m, r)
 	end
 end
