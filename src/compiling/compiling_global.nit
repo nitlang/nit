@@ -178,6 +178,7 @@ redef class MMModule
 
 		ctab.add(new TableEltClassSelfId)
 		itab.add(new TableEltVftPointer)
+		itab.add(new TableEltObjectId)
 
 		var pclassid = -1
 		var classid = 3
@@ -769,6 +770,17 @@ special TableElt
 	end
 end
 
+# The element that represent the object id
+class TableEltObjectId
+special TableElt
+	redef fun is_related_to(c) do return true
+	redef fun compile_to_c(v, c)
+	do
+		var ga = v.global_analysis
+		return "/* {ga.color(self)}: Object_id */"
+	end
+end
+
 # The element that
 class TableEltVftPointer
 special TableElt
@@ -824,7 +836,7 @@ redef class MMLocalClass
 		else if not pi.tagged then
 			var t = pi.cname
 			var tbox = "struct TBOX_{name}"
-			v.add_decl("{tbox} \{ const classtable_elt_t * vft; {t} val;};")
+			v.add_decl("{tbox} \{ const classtable_elt_t * vft; bigint object_id; {t} val;};")
 			v.add_decl("val_t BOX_{name}({t} val);")
 			v.add_decl("#define UNBOX_{name}(x) ((({tbox} *)(VAL2OBJ(x)))->val)")
 		end
@@ -893,6 +905,8 @@ redef class MMLocalClass
 				v.add_decl("obj_t obj;")
 				v.add_instr("obj = alloc(sizeof(val_t) * {itab.length});")
 				v.add_instr("obj->vft = (classtable_elt_t*)VFT_{name};")
+				v.add_instr("obj[1].object_id = object_id_counter;")
+				v.add_instr("object_id_counter = object_id_counter + 1;")
 				var r = iroutine.compile_to_c(v, cname, args).as(not null)
 				v.add_instr("return {r};")
 				ctx_old.append(v.ctx)
@@ -969,6 +983,8 @@ redef class MMLocalClass
 			v.add_instr("{tbox} *box = ({tbox}*)alloc(sizeof({tbox}));")
 			v.add_instr("box->vft = VFT_{name};")
 			v.add_instr("box->val = val;")
+			v.add_instr("box->object_id = object_id_counter;")
+			v.add_instr("object_id_counter = object_id_counter + 1;")
 			v.add_instr("return OBJ2VAL(box);")
 			v.unindent
 			v.add_instr("}")

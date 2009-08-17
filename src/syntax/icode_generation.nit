@@ -573,7 +573,7 @@ redef class AInternMethPropdef
 				s = "(void)memcpy(UNBOX_NativeString(@@@)+UNTAG_Int(@@@), UNBOX_NativeString(@@@)+UNTAG_Int(@@@), UNTAG_Int(@@@));"
 			end
 		else if n == once "object_id".to_symbol then
-			s = "TAG_Int((bigint)@@@)"
+			s = "TAG_Int((bigint)((obj_t)@@@)[1].object_id)"
 		else if n == once "sys".to_symbol then
 			s = "(G_sys)"
 		else if n == once "is_same_type".to_symbol then

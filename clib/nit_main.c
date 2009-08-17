@@ -14,6 +14,7 @@
 #include "nit_common.h"
 #include <signal.h>
 #include <stdarg.h>
+bigint object_id_counter = 1000000;
 
 #ifdef WITH_LIBGC
 #define GC_DEBUG

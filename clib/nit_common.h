@@ -31,10 +31,12 @@ typedef signed long int bigint;	/* standard int value, must be larger that any p
 typedef bigint (*fun_t) (bigint);					/* generic function pointer */
 typedef bigint cid_t;					/* class identifier */
 typedef bigint val_t;	/* value (everything is a val_t) */
-typedef union obj_tu {union classtable_elt_tu * vft; val_t attr;} *obj_t; /* standard object */
+typedef union obj_tu {union classtable_elt_tu * vft; bigint object_id; val_t objectSize;} *obj_t; /* standard object */
 typedef union classtable_elt_tu { bigint i; fun_t f; cid_t cid;} classtable_elt_t;	/* classtable element */
 
 typedef classtable_elt_t * classtable_t;			/* classtable */
+
+extern bigint object_id_counter;
 
 /*****************************************************************************
  * Types macros (primitive and less primitives) ******************************
@@ -96,7 +98,7 @@ typedef classtable_elt_t * classtable_t;			/* classtable */
 /* O = Non nil object ; N = Object or nil ; P = Primitive */
 #define OBJ_IS_BOX(x) ((VAL2OBJ(x)->vft->i) < 0)
 #define IS_BOX(x) (ISOBJ(x) && OBJ_IS_BOX(x))
-#define IS_EQUAL_BOX(x, y) (ISOBJ(y) && (VAL2OBJ(x)[1].vft==VAL2OBJ(y)[1].vft) && (VAL2OBJ(x)->vft==VAL2OBJ(y)->vft))
+#define IS_EQUAL_BOX(x, y) (ISOBJ(y) && (VAL2OBJ(x)[2].vft==VAL2OBJ(y)[2].vft) && (VAL2OBJ(x)->vft==VAL2OBJ(y)->vft))
 #define IS_EQUAL_OO(x, y) ((x)==(y) || (IS_BOX(x) && IS_EQUAL_BOX((x), (y))))
 #define IS_EQUAL_ON(x, y) ((x)==(y) || (IS_BOX(x) && !ISNULL(y) && IS_EQUAL_BOX((x), (y))))
 #define IS_EQUAL_NN(x, y) ((x)==(y) || (!ISNULL(x) && IS_BOX(x) && !ISNULL(y) && IS_EQUAL_BOX((x), (y))))
