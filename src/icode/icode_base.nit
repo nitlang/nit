@@ -235,6 +235,11 @@ end
 
 # An instantiation
 # no reciever, all exprs are arguments
+# Will call in order:
+# - IAllocateInstance
+# - IInitAttributes
+# - IStaticCall -> target Initializer
+# - ICheckInstance
 class INew
 special IAbsCall
 	# The type to instantiate
@@ -246,10 +251,47 @@ special IAbsCall
 	end
 end
 
+# An allocation of a new object
+# No receivers, returns a new object of type 't'
+# Will allocate memory and ensure dynamic type and object identity
+class IAllocateInstance
+special ICode0
+	# The type to allocate
+	readable var _stype: MMType
+	init(t: MMType)
+	do
+		_stype = t
+	end
+end
+
 # A static call to a specific method
 class IStaticCall
 special IAbsCall
 	init(p: MMMethod, a: Sequence[IRegister]) do super
+end
+
+# A validation of a newly constructed instance
+class ICheckInstance
+special ICode1
+	# The type to allocate
+	readable var _stype: MMType
+	init(t: MMType, e: IRegister)
+	do
+		super(e)
+		_stype = t
+	end
+end
+
+# Initialisation of default attributes of a new instance
+class IInitAttributes
+special ICode1
+	# The type to initialize
+	readable var _stype: MMType
+	init(t: MMType, e: IRegister)
+	do
+		super(e)
+		_stype = t
+	end
 end
 
 # A closure call

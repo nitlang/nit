@@ -916,13 +916,11 @@ redef class MMLocalClass
 			v.add_instr("}")
 		else if pi == null then
 			do
+				# Generate INIT_ATTRIBUTES routine
 				var iself = new IRegister(get_type)
 				var iselfa = [iself]
-				var iroutine = new IRoutine(new Array[IRegister], iself)
+				var iroutine = new IRoutine(iselfa, null)
 				var icb = new ICodeBuilder(module, iroutine)
-				var obj = new INative("OBJ2VAL(obj)", null)
-				obj.result = iself
-				icb.stmt(obj)
 
 				for g in global_properties do
 					var p = self[g]
@@ -936,23 +934,31 @@ redef class MMLocalClass
 					end
 				end
 
-				var cname = "NEW_{name}"
-				var args = iroutine.compile_signature_to_c(v, cname, "new {name}", null, null)
+				var cname = "INIT_ATTRIBUTES__{name}"
+				var args = iroutine.compile_signature_to_c(v, cname, "init attributes of {name}", null, null)
 				var ctx_old = v.ctx
 				v.ctx = new CContext
-				v.add_decl("obj_t obj;")
-				v.add_instr("obj = alloc(sizeof(val_t) * {itab.length});")
-				v.add_instr("obj->vft = (classtable_elt_t*)VFT_{name};")
-				v.add_instr("obj[1].object_id = object_id_counter;")
-				v.add_instr("object_id_counter = object_id_counter + 1;")
-				var r = iroutine.compile_to_c(v, cname, args).as(not null)
-				v.add_instr("return {r};")
+				iroutine.compile_to_c(v, cname, args)
 				ctx_old.append(v.ctx)
 				v.ctx = ctx_old
 				v.unindent
 				v.add_instr("}")
 			end
-
+			do
+				# Generate NEW routine
+				v.add_decl("val_t NEW_{name}(void);")
+				v.add_instr("val_t NEW_{name}(void)")
+				v.add_instr("\{")
+				v.indent
+				v.add_instr("obj_t obj;")
+				v.add_instr("obj = alloc(sizeof(val_t) * {itab.length});")
+				v.add_instr("obj->vft = (classtable_elt_t*)VFT_{name};")
+				v.add_instr("obj[1].object_id = object_id_counter;")
+				v.add_instr("object_id_counter = object_id_counter + 1;")
+				v.add_instr("return OBJ2VAL(obj);")
+				v.unindent
+				v.add_instr("}")
+			end
 			do
 				# Compile CHECKNAME
 				var iself = new IRegister(get_type)
@@ -993,14 +999,16 @@ redef class MMLocalClass
 				iroutine.location = p.iroutine.location
 				var icb = new ICodeBuilder(module, iroutine)
 
-				var inew = new INative("NEW_{name}()", null)
+				var inew = new IAllocateInstance(get_type)
 				inew.result = iself
 				icb.stmt(inew)
 				var iargs = [iself]
 				iargs.add_all(iparams)
 
+				icb.stmt(new IInitAttributes(get_type, iself))
 				icb.stmt(new IStaticCall(p, iargs))
-				icb.stmt(new INative("CHECKNEW_{name}(@@@)", [iself]))
+				icb.stmt(new ICheckInstance(get_type, iself))
+
 				var cname = "NEW_{self}_{p.global.intro.cname}"
 				var new_args = iroutine.compile_signature_to_c(v, cname, "new {self} {p.full_name}", null, null)
 				var ctx_old = v.ctx

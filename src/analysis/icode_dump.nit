@@ -265,10 +265,31 @@ redef class ICall
 	end
 end
 
+redef class IAllocateInstance
+	redef fun dump_intern(icd)
+	do
+		return "ALLOCATE NEW_{stype}"
+	end
+end
+
 redef class IStaticCall
 	redef fun dump_intern(icd)
 	do
 		return "STATIC_CALL {property.full_name}({icd.register_all(exprs)})"
+	end
+end
+
+redef class ICheckInstance
+	redef fun dump_intern(icd)
+	do
+		return "CHECK_INSTANCE CHECKNEW_{stype}({icd.register(expr)})"
+	end
+end
+
+redef class IInitAttributes
+	redef fun dump_intern(icd)
+	do
+		return "INIT_ATTRIBUTES INIT_ATTRIBUTES_{stype}({icd.register(expr)})"
 	end
 end
 

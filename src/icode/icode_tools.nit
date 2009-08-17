@@ -298,12 +298,34 @@ redef class INew
 	end
 end
 
+redef class IAllocateInstance
+	redef fun inner_dup_with(d)
+	do
+		return new IAllocateInstance(stype)
+	end
+end
+
 redef class IStaticCall
 	redef fun inner_dup_with(d)
 	do
 		return new IStaticCall(property, d.dup_iregs(exprs))
 	end
 end
+
+redef class ICheckInstance
+	redef fun inner_dup_with(d)
+	do
+		return new ICheckInstance(stype, d.dup_ireg(expr))
+	end
+end
+
+redef class IInitAttributes
+	redef fun inner_dup_with(d)
+	do
+		return new IInitAttributes(stype, d.dup_ireg(expr))
+	end
+end
+
 redef class IClosCall
 	redef fun dup_with(d)
 	do

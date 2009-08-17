@@ -558,6 +558,27 @@ redef class INew
 	end
 end
 
+redef class IAllocateInstance
+	redef fun inner_compile_to_c(v)
+	do
+		return "NEW_{stype.local_class.name}()"
+	end
+end
+
+redef class ICheckInstance
+	redef fun inner_compile_to_c(v)
+	do
+		return "CHECKNEW_{stype.local_class.name}({v.register(expr)})"
+	end
+end
+
+redef class IInitAttributes
+	redef fun inner_compile_to_c(v)
+	do
+		return "INIT_ATTRIBUTES__{stype.local_class.name}({v.register(expr)})"
+	end
+end
+
 redef class IStaticCall
 	redef fun compile_call_to_c(v, args)
 	do
