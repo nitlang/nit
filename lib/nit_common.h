@@ -15,25 +15,25 @@
 
 /* *** Types *** */
 typedef signed long int bigint;	/* standard int value, must be larger that any poiner */
-typedef bigint (*fun_t) (bigint);	     				/* generic function pointer */
+typedef bigint (*fun_t) (bigint);					/* generic function pointer */
 typedef bigint cid_t;					/* class identifier */
 typedef bigint val_t;	/* value (everything is a val_t) */
 typedef union obj_tu {union classtable_elt_tu * vft; val_t attr;} *obj_t; /* standard object */
 typedef union classtable_elt_tu { bigint i; fun_t f; cid_t cid;} classtable_elt_t;	/* classtable element */
 
-typedef classtable_elt_t * classtable_t;    	 		/* classtable */
+typedef classtable_elt_t * classtable_t;			/* classtable */
 
 /*****************************************************************************
  * Types macros (primitive and less primitives) ******************************
  *****************************************************************************
  *
  * ** types are: **
- * 
+ *
  * OBJ	(obj_t)	: standard object representation (including boxes + NIL)
  * Int	(int)	: integers
  * Char	(car)	: characters
  * Bool	(int)	: booleans (true or false)
- * 
+ *
  * X	(x_t)	: generic representatio of the previous four types
  *
  * ** macros are: **
@@ -43,14 +43,14 @@ typedef classtable_elt_t * classtable_t;    	 		/* classtable */
  * val_t X2VAL(x_t x)		: convert a type to a val_t
  * int XTAG			: numeric identifier of a type
  * int TAG(val_t v)		: return the XTAG (ie TAG(Char2VAL('e')) == CharTag)
- * 
+ *
  * classtable_t VAL2VFT(val_t v): the virtual function table of a value
  *
  * val_t NIT_NULL		: the instance of the None class
  *****************************************************************************/
 
 #define TAG(x) ((int)(x) & 3)
-#ifndef IntTAG 
+#ifndef IntTAG
 #	define IntTAG 1
 #endif
 #define TAG_Int(x) ((val_t)(((x)<<2)|IntTAG))
@@ -68,7 +68,7 @@ typedef classtable_elt_t * classtable_t;    	 		/* classtable */
 #ifndef OBJTAG
 #	define OBJTAG 0
 #endif
-	
+
 #define ISOBJ(x) (TAG((x)) == OBJTAG)
 #define VAL2OBJ(x) ((obj_t)(x))
 #define OBJ2VAL(o) ((val_t)(o))
