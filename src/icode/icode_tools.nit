@@ -170,6 +170,10 @@ redef class ICode
 	private fun dup_with(d: ICodeDupContext)
 	do
 		var c = inner_dup_with(d)
+		if self isa ICodeN then
+			assert c isa ICodeN
+			c.closure_defs = closure_defs
+		end
 		var r = result
 		if r != null then c.result = d.dup_ireg(r)
 		c.location = location
