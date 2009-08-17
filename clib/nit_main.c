@@ -14,22 +14,16 @@
 #include "nit_common.h"
 #include <signal.h>
 #include <stdarg.h>
+
 bigint object_id_counter = 1000000;
+enum gc_option { large, boehm } gc_option;
 
 #ifdef WITH_LIBGC
 #define GC_DEBUG
 #include <gc/gc.h>
-int nolibgc = 0;
-void *simple_alloc(size_t s0);
-void *alloc(size_t s0)
-{
-	if (!nolibgc) { return GC_MALLOC(s0); }
-	else return simple_alloc(s0);
-}
-#define alloc simple_alloc
 #endif
 
-void * alloc(size_t s0)
+void *large_alloc(size_t s0)
 {
 	static char * alloc_pos = NULL;
 	static size_t alloc_size = 0;
@@ -45,6 +39,17 @@ void * alloc(size_t s0)
 	return res;
 }
 
+void * alloc(size_t s0)
+{
+	switch (gc_option) {
+#ifdef WITH_LIBGC
+	case boehm: return GC_MALLOC(s0);
+#endif
+	case large:
+	default: return large_alloc(s0);
+	}
+}
+
 int glob_argc;
 char **glob_argv;
 val_t G_sys;
@@ -53,13 +58,41 @@ void exithandler(int s) {
 	fprintf(stderr, "Recieved signal %d\n", s);
 	nit_exit(1);
 }
-void prepare_signals(void) {
-#if WITH_LIBGC
-	nolibgc = (getenv("NIT_NOLIBGC") != NULL);
-	if (!nolibgc) {
-		GC_INIT();
-	}
+void initialize_gc_option(void) {
+	/* GC default */
+#ifdef WITH_LIBGC
+	gc_option = boehm;
+#else
+	gc_option = large;
 #endif
+
+	/* Process GC runtime selection */
+	if (getenv("NIT_GC_OPTION") != NULL) {
+		char *opt=getenv("NIT_GC_OPTION");
+		if (strcmp(opt, "boehm")==0) {
+#ifdef WITH_LIBGC
+			gc_option = boehm;
+#else
+		fprintf(stderr, "Compiled without Boehm GC support. Using default.\n");
+#endif
+		} else if (strcmp(opt, "large")==0) {
+			gc_option = large;
+		} else {
+			fprintf(stderr, "Invalid GC option in NIT_GC_OPTION environment variable. Using default.\n");
+		}
+	}
+
+	/* Initialize GC (if needed) */
+	switch(gc_option) {
+#ifdef WITH_LIBGC
+		case boehm: GC_INIT(); break;
+#endif
+		default: break; /* Nothing */
+	}
+}
+void prepare_signals(void) {
+	initialize_gc_option();
+
 	signal(SIGINT,exithandler);
 	signal(SIGABRT,exithandler);
 	signal(SIGSEGV,exithandler);
