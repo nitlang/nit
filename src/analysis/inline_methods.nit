@@ -78,7 +78,7 @@ redef class ICall
 		var mn = m.name
 		var cn = m.local_class.name
 		return (m.is_intern and cn != once ("Object".to_symbol)) or
-			(cn == (once ("Array".to_symbol)) and (mn == (once ("length".to_symbol)) or mn == (once ("[]".to_symbol)))) or
+			(cn == (once ("Array".to_symbol)) and (mn == (once ("length".to_symbol)) or mn == (once ("[]".to_symbol)) or mn == (once ("iterate".to_symbol)))) or
 			(cn == (once ("AbstractArrayRead".to_symbol)) and (mn == (once ("length".to_symbol)) or mn == (once ("[]".to_symbol)))) or
 			(m.global.intro.local_class.name == (once ("Inline__".to_symbol)))
 	end
