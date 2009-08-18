@@ -113,7 +113,7 @@ void GC_collect(void) {
 	val_t *pointer;
 	int i;
 	int j;
-	struct trace_t *frame = tracehead;
+	struct stack_frame_t *frame = stack_frame_head;
 	GC_static_object *staticObject = staticObjects.top;
 	val_t object;
 	heap *tempPointer;

@@ -123,13 +123,13 @@ void prepare_signals(void) {
 	signal(SIGTERM,exithandler);
 	signal(SIGBUS, exithandler);
 }
-struct trace_t *tracehead = NULL;
+struct stack_frame_t *stack_frame_head = NULL;
 void nit_exit(int i) {
 	fprintf(stderr, ",---- Stack trace -- - -  -\n");
-	while(tracehead != NULL) {
-		fprintf(stderr, "| %s (%s:%d)\n", tracehead->meth, tracehead->file, tracehead->line);
-		if (tracehead == tracehead->prev) break;
-		tracehead = tracehead->prev;
+	while(stack_frame_head != NULL) {
+		fprintf(stderr, "| %s (%s:%d)\n", stack_frame_head->meth, stack_frame_head->file, stack_frame_head->line);
+		if (stack_frame_head == stack_frame_head->prev) break;
+		stack_frame_head = stack_frame_head->prev;
 	}
 	fprintf(stderr, "`------------------- - -  -\n");
 	exit(i);

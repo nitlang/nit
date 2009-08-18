@@ -122,15 +122,18 @@ extern val_t G_sys;
 extern int glob_argc;
 extern char ** glob_argv;
 
-struct trace_t {
-	struct trace_t *prev; /* previous stack frame */
-	const char *file; /* source filename */
-	int line; /* line number */
-	const char *meth; /* method name */
-	int REG_size;
-	val_t **REG_pointer;
+/* Stack frames */
+struct stack_frame_t {
+	struct stack_frame_t *prev; /* previous stack frame */
+	const char *file; /* source filename (.nit) */
+	int line; /* line number (in the source) */
+	const char *meth; /* human function name (usually the method name) */
+	int REG_size; /* number of local variables */
+	val_t **REG_pointer; /* array of local variables */
 };
-extern struct trace_t *tracehead;
+extern struct stack_frame_t *stack_frame_head;
+
+
 typedef enum {true = (1==1),false = (0==1)} bool;
 
 void nit_exit(int);

@@ -259,15 +259,15 @@ redef class IRoutine
 	# Compile the body of the routine, return the result value is any
 	fun compile_inside_to_c(v: I2CCompilerVisitor, args: Array[String]): nullable String
 	do
-		# Add the trace
+		# Create and push the stack frame
 		var ll = 0
 		if location != null then
 			ll = location.line_start
 		end
-		v.add_decl("struct trace_t trace = \{NULL, NULL, {ll}, LOCATE_{v.basecname}, {std_slots_nb}\};")
-		v.add_instr("trace.prev = tracehead; tracehead = &trace;")
-		v.add_instr("trace.file = LOCATE_{v.visitor.module.name};")
-		v.add_instr("trace.REG_pointer = (val_t **)&REG;")
+		v.add_decl("struct stack_frame_t frame = \{NULL, NULL, {ll}, LOCATE_{v.basecname}, {std_slots_nb}\};")
+		v.add_instr("frame.prev = stack_frame_head; stack_frame_head = &frame;")
+		v.add_instr("frame.file = LOCATE_{v.visitor.module.name};")
+		v.add_instr("frame.REG_pointer = (val_t **)&REG;")
 
 		# Add local variables
 		if std_slots_nb == 0 then
@@ -319,7 +319,7 @@ redef class IRoutine
 		# Compile body
 		body.compile_to_c(v)
 
-		v.add_instr("tracehead = trace.prev;")
+		v.add_instr("stack_frame_head = frame.prev;")
 		v.return_label = old_rl
 		var r = result
 		if r != null then
