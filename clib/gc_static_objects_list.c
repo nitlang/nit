@@ -13,14 +13,15 @@
 
 #include "gc_static_objects_list.h"
 
-void GC_List_Init (GC_List * list){
+void GC_List_Init(GC_List *list) {
 	list->top = NULL;
 	list->size = 0;
 }
 
-int GC_List_Push (GC_List * list, val_t *pointer){
+int GC_List_Push(GC_List *list, val_t *pointer) {
 	GC_static_object *newElement;
-	if ((newElement = (GC_static_object *) malloc (sizeof (GC_static_object))) == NULL)
+	newElement = (GC_static_object*)malloc(sizeof(GC_static_object));
+	if (newElement == NULL)
 		return -1;
 
 	newElement->pointer = pointer;

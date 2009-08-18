@@ -20,16 +20,16 @@
 #include "nit_common.h"
 
 typedef struct GC_static_object {
-	val_t * pointer;
+	val_t *pointer;
 	struct GC_static_object *next;
-}GC_static_object;
+} GC_static_object;
 
-typedef struct GC_List{
+typedef struct GC_List {
 	GC_static_object *top;
 	int size;
-}GC_List;
+} GC_List;
 
-void GC_List_Init (GC_List *list);
-int GC_List_Push (GC_List *list, val_t *pointer);
+void GC_List_Init(GC_List *list);
+int GC_List_Push(GC_List *list, val_t *pointer);
 
 #endif

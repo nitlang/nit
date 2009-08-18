@@ -12,9 +12,13 @@
  */
 
 #include "gc.h"
-#include <assert.h>
+#ifdef DEBUG
+#	include <assert.h>
+#else
+#	define assert(x) while(0)
+#endif
 
-void Nit_gc_init(){
+void Nit_gc_init(void) {
 	heapActive = malloc(sizeof(heap));
 	heapInactive = malloc(sizeof(heap));
 
@@ -35,7 +39,7 @@ void Nit_gc_init(){
 	GC_List_Init(&staticObjects);
 }
 
-val_t GC_evacuation(obj_t object){
+val_t GC_evacuation(obj_t object) {
 	bigint size;
 	bigint objectSize;
 	val_t newAdress;
@@ -43,24 +47,24 @@ val_t GC_evacuation(obj_t object){
 	BOX_struct box;
 
 	assert(ISOBJ(object) && !ISNULL(object));
-	if ( GET_MARKBIT(object) != (bigint)0) {
+	if (GET_MARKBIT(object) != (bigint)0) {
 		newAdress = REMOVE_MARKBIT((bigint)((object)->vft));
-	}else{
+	} else {
 		newAdress = (val_t)evacuationPointer;
 		if (OBJ_IS_ARRAY(object)) {
-			array = (Nit_NativeArray ) object;
+			array = (Nit_NativeArray)object;
 			size = sizeof(struct Nit_NativeArray) + ((array->size - 1) * sizeof(val_t));
-			memcpy((void *)evacuationPointer, (array), size);
+			memcpy(evacuationPointer, (array), size);
 			(array)->vft = (classtable_elt_t*)evacuationPointer;
-		}else if(IS_BOX(object)){
+		} else if (IS_BOX(object)) {
 			box = (BOX_struct)object;
 			size = sizeof(struct TBOX_struct);
-			memcpy((void *)evacuationPointer, object, size);
+			memcpy(evacuationPointer, object, size);
 			box->vft = (classtable_elt_t*)evacuationPointer;
-		}else{
+		} else {
 			objectSize = (bigint)((object)[0].vft[1].i);
 			size = (objectSize) * sizeof(val_t);
-			memcpy((void *)evacuationPointer, object, size);
+			memcpy(evacuationPointer, object, size);
 			(object)[0].vft = (classtable_elt_t*)evacuationPointer;
 		}
 		SET_MARKBIT(object);
@@ -70,18 +74,17 @@ val_t GC_evacuation(obj_t object){
 	return newAdress;
 }
 
-void GC_scavenging(){
+void GC_scavenging(void) {
 	obj_t object = (obj_t)scavengingPointer;
-	obj_t * object2 = (obj_t *)&scavengingPointer;
 	int size;
 	int i;
 	obj_t referencedObject;
 	bigint objectSize;
-	Nit_NativeArray * array;
+	Nit_NativeArray *array;
 
-	if ( IS_BOX(object)) {
+	if (IS_BOX(object)) {
 		size = sizeof(struct TBOX_struct);
-	}else{
+	} else {
 		array = (Nit_NativeArray*)&scavengingPointer;
 		if (OBJ_IS_ARRAY((obj_t)*array)) {
 			size = sizeof(struct Nit_NativeArray) + (((*array)->size - 1) * sizeof(val_t));
@@ -91,7 +94,7 @@ void GC_scavenging(){
 					(*array)->val[i] = (bigint)GC_evacuation(referencedObject);
 				}
 			}
-		}else{
+		} else {
 			objectSize = (bigint)((object)->vft[1].i);
 			size = (objectSize) * sizeof(val_t);
 			for (i = 2; i < objectSize; i++) {
@@ -105,21 +108,21 @@ void GC_scavenging(){
 	scavengingPointer += size;
 }
 
-void GC_collect(){
-	val_t ** pointers;
-	val_t * pointer;
+void GC_collect(void) {
+	val_t **pointers;
+	val_t *pointer;
 	int i;
 	int j;
-	struct trace_t * frame = tracehead;
-	GC_static_object * staticObject = staticObjects.top;
+	struct trace_t *frame = tracehead;
+	GC_static_object *staticObject = staticObjects.top;
 	val_t object;
-	heap * tempPointer;
+	heap *tempPointer;
 
 	evacuationPointer = heapInactive->heapPointer;
 	scavengingPointer = heapInactive->heapPointer;
 	for (i = 0; i < staticObjects.size; i++) {
 		object = *(val_t*)(staticObject->pointer);
-		if(!ISNULL(object) && ISOBJ(object)){
+		if (!ISNULL(object) && ISOBJ(object)) {
 			*(staticObject->pointer) = (val_t)GC_evacuation((obj_t)object);
 		}
 		staticObject = staticObject->next;
@@ -128,19 +131,19 @@ void GC_collect(){
 		pointers = frame->REG_pointer;
 		for (j = 0; j < frame->REG_size; j++) {
 			object = (val_t)(pointers[j]);
-			if(!ISNULL(object) && ISOBJ(object)){
+			if (!ISNULL(object) && ISOBJ(object)) {
 				pointers[j] = (val_t*)GC_evacuation((obj_t)object);
 			}
 		}
 		if (frame == frame->prev) break;
 		frame = frame->prev;
 	}
-	while ( evacuationPointer != scavengingPointer) {
+	while (evacuationPointer != scavengingPointer) {
 		GC_scavenging();
 	}
 
 	/* pour tests seulement, pas necessaire */
-	memset((void *)heapActive->heapPointer, 0, heapActive->size);
+	memset(heapActive->heapPointer, 0, heapActive->size);
 	allocationPointer = evacuationPointer;
 
 	/* inverse le tas actif et le tas inactif */
@@ -148,31 +151,31 @@ void GC_collect(){
 	heapActive = heapInactive;
 	heapInactive = tempPointer;
 
-	heapActiveUsedSize = (int)allocationPointer - (int)heapActive->heapPointer;
+	heapActiveUsedSize = allocationPointer - heapActive->heapPointer;
 }
 
-void GC_set_heap_size(size_t newHeapSize){
+void GC_set_heap_size(size_t newHeapSize) {
 	free(heapInactive->heapPointer);
 	heapInactive->heapPointer = malloc(newHeapSize);
-	if(heapInactive->heapPointer == NULL) {
+	if (heapInactive->heapPointer == NULL) {
 		exit(1);
 	}
 	heapInactive->size = newHeapSize;
 	memset(heapInactive->heapPointer, 0, newHeapSize);
 }
 
-void GC_detect_memory_needs( size_t size ) {
-	if ( size > (heapActive->size - heapActiveUsedSize))   {
+void GC_detect_memory_needs(size_t size) {
+	if (size > (heapActive->size - heapActiveUsedSize)) {
 		GC_collect();
-		if (heapActive->size - heapActiveUsedSize > heapActive->size / 2 && heapActive->size * 3 / 4 > HEAP_ACTIVE_SIZE_MIN){
+		if (heapActive->size - heapActiveUsedSize > heapActive->size / 2 && heapActive->size * 3 / 4 > HEAP_ACTIVE_SIZE_MIN) {
 			GC_set_heap_size(heapActive->size * 3 / 4);
 			GC_collect();
 			GC_set_heap_size(heapActive->size);
 		}
 	}
-	if ( size > (heapActive->size - heapActiveUsedSize))   {
+	if (size > (heapActive->size - heapActiveUsedSize)) {
 		int try_size = heapInactive->size * 2;
-		while (size > (try_size - heapActiveUsedSize)){
+		while (size > (try_size - heapActiveUsedSize)) {
 			try_size *= 2;
 		}
 		GC_set_heap_size(try_size);
@@ -181,7 +184,7 @@ void GC_detect_memory_needs( size_t size ) {
 	}
 }
 
-void *Nit_gc_malloc( size_t size ) {
+void *Nit_gc_malloc(size_t size) {
 	char *result;
 
 	GC_detect_memory_needs(size);
@@ -193,7 +196,7 @@ void *Nit_gc_malloc( size_t size ) {
 	return result;
 }
 
-void GC_add_static_object(val_t * pointer){
+void GC_add_static_object(val_t *pointer) {
 	GC_List_Push(&staticObjects, pointer);
 }
 

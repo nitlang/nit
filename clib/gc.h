@@ -21,25 +21,25 @@
 #include "gc_static_objects_list.h"
 
 /* Markbit manipulations */
-#define GET_MARKBIT(x) (((val_t)(x[0].vft)) & 1)
+#define GET_MARKBIT(x) (((val_t)((x)[0].vft)) & 1)
 #define SET_MARKBIT(x) ((x)->vft = (void*)(((bigint)((x)->vft)) | 1))
-#define REMOVE_MARKBIT(x) (x ^ 1)
+#define REMOVE_MARKBIT(x) ((x) ^ 1)
 
 #define HEAP_ACTIVE_SIZE_MIN 3000
 
 typedef struct heap {
 	char *heapPointer;
 	unsigned long size;
-}heap;
+} heap;
 
 typedef struct TBOX_struct {
-	const classtable_elt_t * vft;
-	char * val;
+	const classtable_elt_t *vft;
+	char *val;
 	bigint object_id;
-} * BOX_struct;
+} *BOX_struct;
 
-heap* heapActive;
-heap* heapInactive;
+heap *heapActive;
+heap *heapInactive;
 char *allocationPointer;
 char *evacuationPointer;
 char *scavengingPointer;
@@ -48,14 +48,14 @@ unsigned long heapActiveUsedSize;
 
 GC_List staticObjects;
 
-void Nit_gc_init();
+void Nit_gc_init(void);
 
 val_t GC_evacuation(obj_t object);
 
-void GC_scavenging();
+void GC_scavenging(void);
 
-void* Nit_gc_malloc( size_t size );
+void* Nit_gc_malloc(size_t size);
 
-void GC_add_static_object(val_t * pointer);
+void GC_add_static_object(val_t *pointer);
 
 #endif
