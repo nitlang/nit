@@ -122,14 +122,15 @@ extern val_t G_sys;
 extern int glob_argc;
 extern char ** glob_argv;
 
-/* Stack frames */
+/* Stack frames.
+ * Are used to store local variables (REGS) of function and provide information for stack dump */
 struct stack_frame_t {
 	struct stack_frame_t *prev; /* previous stack frame */
 	const char *file; /* source filename (.nit) */
 	int line; /* line number (in the source) */
 	const char *meth; /* human function name (usually the method name) */
 	int REG_size; /* number of local variables */
-	val_t **REG_pointer; /* array of local variables */
+	val_t REG[1]; /* local variables (flexible array) */
 };
 extern struct stack_frame_t *stack_frame_head;
 

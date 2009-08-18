@@ -54,7 +54,7 @@ class I2CCompilerVisitor
 					if not strs.has_key(i) then strs[i] = "closctx->variable[{i}]"
 				else
 					strs = once new HashMap[Int, String]
-					if not strs.has_key(i) then strs[i] = "REG[{i}]"
+					if not strs.has_key(i) then strs[i] = "fra.me.REG[{i}]"
 				end
 				s = strs[i]
 				ids[e] = s
@@ -264,20 +264,21 @@ redef class IRoutine
 		if location != null then
 			ll = location.line_start
 		end
-		v.add_decl("struct stack_frame_t frame = \{NULL, NULL, {ll}, LOCATE_{v.basecname}, {std_slots_nb}\};")
-		v.add_instr("frame.prev = stack_frame_head; stack_frame_head = &frame;")
-		v.add_instr("frame.file = LOCATE_{v.visitor.module.name};")
-		v.add_instr("frame.REG_pointer = (val_t **)&REG;")
-
-		# Add local variables
-		if std_slots_nb == 0 then
-			v.add_decl("val_t *REG = NULL;")
+		# Encapsulate the frame ('me') in a larger structure ('fra') that has enough space to store the local variables (REG)
+		if std_slots_nb > 1 then
+			v.add_decl("struct \{struct stack_frame_t me; val_t MORE_REG[{std_slots_nb-1}];\} fra;")
 		else
-			var init_vals = new Buffer
-			init_vals.append "val_t REG[{std_slots_nb}] = \{ NIT_NULL"
-			for i in [1..std_slots_nb[ do init_vals.append(", NIT_NULL")
-			init_vals.append " \};"
-			v.add_decl(init_vals.to_s)
+			v.add_decl("struct \{struct stack_frame_t me;\} fra;")
+		end
+		v.add_instr("fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;")
+		v.add_instr("fra.me.file = LOCATE_{v.visitor.module.name};")
+		v.add_instr("fra.me.line = {ll};")
+		v.add_instr("fra.me.meth = LOCATE_{v.basecname};")
+		v.add_instr("fra.me.REG_size = {std_slots_nb};")
+
+		# Declare/initialize local variables
+		for i in [0..std_slots_nb[ do
+			v.add_instr("fra.me.REG[{i}] = NIT_NULL;")
 		end
 		for i in [0..tag_slots_nb[ do
 			v.add_decl("val_t REGB{i};")
@@ -319,7 +320,7 @@ redef class IRoutine
 		# Compile body
 		body.compile_to_c(v)
 
-		v.add_instr("stack_frame_head = frame.prev;")
+		v.add_instr("stack_frame_head = fra.me.prev;")
 		v.return_label = old_rl
 		var r = result
 		if r != null then
@@ -795,7 +796,7 @@ redef class IClosureDef
 			v.add_instr("{closcnv}.variable = closctx->variable;")
 			v.add_instr("{closcnv}.closurevariable = closctx->closurevariable;")
 		else
-			v.add_instr("{closcnv}.variable = REG;")
+			v.add_instr("{closcnv}.variable = fra.me.REG;")
 			v.add_instr("{closcnv}.closurevariable = CREG;")
 		end
 

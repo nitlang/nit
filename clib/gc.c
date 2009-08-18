@@ -109,7 +109,6 @@ void GC_scavenging(void) {
 }
 
 void GC_collect(void) {
-	val_t **pointers;
 	val_t *pointer;
 	int i;
 	int j;
@@ -123,16 +122,15 @@ void GC_collect(void) {
 	for (i = 0; i < staticObjects.size; i++) {
 		object = *(val_t*)(staticObject->pointer);
 		if (!ISNULL(object) && ISOBJ(object)) {
-			*(staticObject->pointer) = (val_t)GC_evacuation((obj_t)object);
+			*(staticObject->pointer) = GC_evacuation((obj_t)object);
 		}
 		staticObject = staticObject->next;
 	}
 	while (frame != NULL) {
-		pointers = frame->REG_pointer;
 		for (j = 0; j < frame->REG_size; j++) {
-			object = (val_t)(pointers[j]);
+			object = frame->REG[j];
 			if (!ISNULL(object) && ISOBJ(object)) {
-				pointers[j] = (val_t*)GC_evacuation((obj_t)object);
+				frame->REG[j] = GC_evacuation((obj_t)object);
 			}
 		}
 		if (frame == frame->prev) break;
