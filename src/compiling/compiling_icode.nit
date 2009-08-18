@@ -51,7 +51,7 @@ class I2CCompilerVisitor
 					if not strs.has_key(i) then strs[i] = "REGB{i}"
 				else if closure and not e.is_local then
 					strs = once new HashMap[Int, String]
-					if not strs.has_key(i) then strs[i] = "closctx->variable[{i}]"
+					if not strs.has_key(i) then strs[i] = "closctx->REG[{i}]"
 				else
 					strs = once new HashMap[Int, String]
 					if not strs.has_key(i) then strs[i] = "fra.me.REG[{i}]"
@@ -134,7 +134,7 @@ class I2CCompilerVisitor
 		else
 			assert closure
 			var ind = register_escape_label(seq)
-			add_instr("closctx->has_broke = (val_t*){ind};")
+			add_instr("closctx->has_broke = {ind};")
 			add_instr("goto {lab(return_label.as(not null))};")
 		end
 	end
@@ -224,19 +224,20 @@ redef class IRoutine
 			cparams.add("val_t p{i}")
 		end
 		if closure_decls != null then
+			cparams.add("struct stack_frame_t *closctx_param")
 			for i in [0..closure_decls.length[ do
 				var closcn = "CLOS_{cname}_{i}"
 				var cs = closure_decls[i].closure.signature
 				var subparams = new Array[String] # Parameters of the closure
-				subparams.add("struct WBT_ *")
+				subparams.add("struct stack_frame_t *")
 				for j in [0..cs.arity[ do
 					subparams.add("val_t")
 				end
 				var rr = "void"
 				if cs.return_type != null then rr = "val_t"
 				v.add_decl("typedef {rr} (*{closcn})({subparams.join(", ")});")
-				cargs.add("wd{i}")
-				cparams.add("struct WBT_ *wd{i}")
+				cargs.add("clos_fun{i}")
+				cparams.add("fun_t clos_fun{i}")
 			end
 		end
 		if after_params != null then cparams.add(after_params)
@@ -274,6 +275,7 @@ redef class IRoutine
 		v.add_instr("fra.me.file = LOCATE_{v.visitor.module.name};")
 		v.add_instr("fra.me.line = {ll};")
 		v.add_instr("fra.me.meth = LOCATE_{v.basecname};")
+		v.add_instr("fra.me.has_broke = 0;")
 		v.add_instr("fra.me.REG_size = {std_slots_nb};")
 
 		# Declare/initialize local variables
@@ -285,9 +287,9 @@ redef class IRoutine
 		end
 		var iclosdecls = closure_decls
 		if iclosdecls != null then
-			v.add_decl("struct WBT_ *CREG[{iclosdecls.length}];")
-		else
-			v.add_decl("struct WBT_ **CREG = NULL;")
+			v.add_decl("fun_t CREG[{iclosdecls.length}];")
+			v.add_instr("fra.me.closure_ctx = closctx_param;")
+			v.add_instr("fra.me.closure_funs = CREG;")
 		end
 		var k = 0
 		for r in params do
@@ -301,7 +303,7 @@ redef class IRoutine
 				v.closures[iclosdecl] = i
 				var cs = iclosdecl.closure.signature # Closure signature
 				var subparams = new Array[String] # Parameters of the closure
-				subparams.add("struct WBT_ *")
+				subparams.add("struct stack_frame_t *")
 				for j in [0..cs.arity[ do
 					var p = "val_t"
 					subparams.add(p)
@@ -441,26 +443,38 @@ redef class IAbsCall
 		# Compile closure definitions
 		var old_el = v.escaped_labels
 		var closdefs = closure_defs
-		var closcns: nullable Array[String] = null
+		var closctx: nullable String = null # The closure context of closdefs
 		if closdefs != null then
+			# Get the closure context
+			if v.closure then
+				closctx = "closctx"
+			else
+				closctx = "(&(fra.me))"
+			end
+
+			# First aditionnal arguments is the closure context
+			args.add(closctx)
+
+			# We are in a new escape boundary
 			v.escaped_labels = new HashMap[ISeq, Int]
-			closcns = new Array[String]
+
+			# Compile each closures and add each sub-function as an other additionnal parameter
 			for cd in closdefs do
 				if cd != null then
 					var cn = cd.compile_closure(v)
 					args.add(cn)
-					closcns.add(cn)
 				else
 					args.add("NULL")
 				end
 			end
 		end
 
+		# Compile the real call
 		var s = compile_call_to_c(v, args)
 		var r: nullable String = s
 
 		# Intercept escapes
-		if closcns != null then
+		if closctx != null then
 			var els = v.escaped_labels
 			v.escaped_labels = old_el
 			# Is there possible escapes?
@@ -473,15 +487,8 @@ redef class IAbsCall
 					r = null
 					v.add_instr(s + ";")
 				end
-				# What is the escape index (if any?)
-				# It's computed as the union of has_broke
-				var switcha = new Array[String]
-				for cn in closcns do
-					switcha.add("((int)({cn}->has_broke))")
-				end
-				var switch = switcha.join(" | ")
 				# What are the expected escape indexes
-				v.add_instr("switch ({switch}) \{")
+				v.add_instr("switch ({closctx}->has_broke) \{")
 				v.indent
 				# No escape occured, continue as usual
 				v.add_instr("case 0: break;")
@@ -492,7 +499,8 @@ redef class IAbsCall
 					var seq = iels.key
 					if lls.has(seq) then
 						# Local escape occured
-						v.add_instr("case {iels.item}: goto {v.lab(seq)};")
+						# Clear the has_broke information and go to the target
+						v.add_instr("case {iels.item}: {closctx}->has_broke = 0; goto {v.lab(seq)};")
 					else
 						# Forward escape occured: register the escape label
 						assert v.closure
@@ -501,9 +509,11 @@ redef class IAbsCall
 					end
 					iels.next
 				end
-				# Forward escape occured, just pass to the next one
+				# If forward escape occured, just pass to the next one
 				if forward_escape then
-					v.add_instr("default: closctx->has_broke = (val_t*)({switch}); goto {v.lab(v.return_label.as(not null))};")
+					# Do not need to copy 'has_broke' value since it is shared by the next one.
+					# So just exit the C function.
+					v.add_instr("default: goto {v.lab(v.return_label.as(not null))};")
 				end
 				v.unindent
 				v.add_instr("\}")
@@ -715,18 +725,21 @@ redef class IClosCall
 	do
 		v.add_location(location)
 		var ivar: String
+		var args: Array[String]
 		if v.closure then
-			ivar = "closctx->closurevariable[{v.closures[closure_decl]}]"
+			ivar = "closctx->closure_funs[{v.closures[closure_decl]}]"
+			args = ["closctx->closure_ctx"]
 		else
 			ivar = "CREG[{v.closures[closure_decl]}]"
+			args = ["closctx_param"]
 		end
-		var args = [ivar]
 		args.append(v.registers(exprs))
 
-		var s = "(({v.clostypes[closure_decl]})({ivar}->fun))({args.join(", ")})"
+		var s = "(({v.clostypes[closure_decl]})({ivar}))({args.join(", ")})"
 		store_result(v, s)
 
-		v.add_instr("if ({ivar}->has_broke) \{")
+		# Intercept escape
+		v.add_instr("if ({args.first}->has_broke) \{")
 		v.indent
 		var bs = break_seq
 		if bs != null then
@@ -745,7 +758,7 @@ redef class IHasClos
 	do
 		var ivar: String
 		if v.closure then
-			ivar = "closctx->closurevariable[{v.closures[closure_decl]}]"
+			ivar = "closctx->closure_funs[{v.closures[closure_decl]}]"
 		else
 			ivar = "CREG[{v.closures[closure_decl]}]"
 		end
@@ -753,54 +766,46 @@ redef class IHasClos
 	end
 end
 
-
 redef class IClosureDef
+	# Compile the closure as a separate C function in the visitor out_contexts.
+	# Return a fun_t pointer to the function.
 	fun compile_closure(v: I2CCompilerVisitor): String
 	do
+		var cv = v.visitor
+
+		# We are now in a closure
 		var cfc_old = v.closure
 		v.closure = true
+
+		# We are now in a escape boundary
 		var lls_old = v.local_labels
 		v.local_labels = new HashSet[ISeq]
 
-		var cv = v.visitor
+		# We are now in a new C context
 		var ctx_old = cv.ctx
 		cv.ctx = new CContext
 		cv.out_contexts.add(cv.ctx)
 
+		# Generate the C function
 		var cname = "OC_{v.basecname}_{v.new_number}"
-		var args = compile_signature_to_c(v.visitor, cname, null, "struct WBT_ *closctx", null)
+		var args = compile_signature_to_c(v.visitor, cname, null, "struct stack_frame_t *closctx", null)
 		var ctx_old2 = cv.ctx
 		cv.ctx = new CContext
-
 		var s = compile_inside_to_c(v, args)
 		if s == null then
 			v.add_instr("return;")
 		else
 			v.add_instr("return {s};")
 		end
-
 		ctx_old2.append(cv.ctx)
 		cv.ctx = ctx_old2
 		v.unindent
 		v.add_instr("}")
+
+		# Restore things
 		cv.ctx = ctx_old
-
 		v.closure = cfc_old
-
-		# Build closure
-		var closcnv = "wbclos{v.new_number}"
-		v.add_decl("struct WBT_ {closcnv};")
-		v.add_instr("{closcnv}.fun = (fun_t){cname};")
-		v.add_instr("{closcnv}.has_broke = NULL;")
-		if cfc_old then
-			v.add_instr("{closcnv}.variable = closctx->variable;")
-			v.add_instr("{closcnv}.closurevariable = closctx->closurevariable;")
-		else
-			v.add_instr("{closcnv}.variable = fra.me.REG;")
-			v.add_instr("{closcnv}.closurevariable = CREG;")
-		end
-
 		v.local_labels = lls_old
-		return "(&{closcnv})"
+		return "((fun_t){cname})"
 	end
 end

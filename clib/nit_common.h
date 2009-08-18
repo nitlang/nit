@@ -123,12 +123,19 @@ extern int glob_argc;
 extern char ** glob_argv;
 
 /* Stack frames.
- * Are used to store local variables (REGS) of function and provide information for stack dump */
+ * Are used to:
+ * - store local variables (REGS) of functions
+ * - store context for closure
+ * - provide information for stack dump
+ */
 struct stack_frame_t {
 	struct stack_frame_t *prev; /* previous stack frame */
 	const char *file; /* source filename (.nit) */
 	int line; /* line number (in the source) */
 	const char *meth; /* human function name (usually the method name) */
+	struct stack_frame_t *closure_ctx; /* closure context (for functions that have closure parameters) */
+	fun_t *closure_funs; /* closure functions (for functions that have closure parameters) */
+	int has_broke; /* has an escape occured? 0 if false, label_idx (>0) if true */
 	int REG_size; /* number of local variables */
 	val_t REG[1]; /* local variables (flexible array) */
 };
@@ -146,8 +153,4 @@ void nit_exit(int);
 void prepare_signals(void);
 extern classtable_t TAG2VFT[4];
 
-/* This structure is used to store closure.
- * Specific closure use a specific fun parameter.
- */
-struct WBT_ {fun_t fun; val_t *has_broke; val_t broke_value; val_t *variable; struct WBT_ **closurevariable;};
 #endif
