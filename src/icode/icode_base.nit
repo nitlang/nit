@@ -236,7 +236,7 @@ end
 # An instantiation
 # no reciever, all exprs are arguments
 class INew
-special ICall
+special IAbsCall
 	# The type to instantiate
 	readable var _stype: MMType
 	init(t: MMType, p: MMMethod, a: Sequence[IRegister])
