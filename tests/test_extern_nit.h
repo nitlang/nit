@@ -1,3 +1,3 @@
-int foo(int);
-int bar(int, int);
-int baz(int, int);
+long int foo(long int);
+long int bar(long int, long int);
+long int baz(long int, long int);
