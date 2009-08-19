@@ -404,7 +404,9 @@ for~withelse {-> expr}
 	;
 
 assert~withelse {-> expr}
-	= kwassert assertid? expr_final~withelse {-> New expr.assert(kwassert, assertid.id, expr_final~withelse.expr)};
+	= {else} kwassert assertid? expr_final_withelse kwelse stmtso~withelse {-> New expr.assert(kwassert, assertid.id, expr_final_withelse.expr, stmtso~withelse.expr)}
+!withelse| {noelse} kwassert assertid? expr_final {-> New expr.assert(kwassert, assertid.id, expr_final.expr, Null)}
+	;
 assertid {-> id}
 	= id column {-> id};
 
@@ -636,7 +638,7 @@ expr	= {block} expr*
 	| {while} kwwhile expr kwdo [block]:expr? label?
 	| {loop} kwloop [block]:expr? label?
 	| {for} kwfor id expr kwdo [block]:expr? label?
-	| {assert} kwassert id? expr 
+	| {assert} kwassert id? expr [else]:expr?
 	| {once} kwonce expr 
 	| {send} expr 
 	| {binop} expr [expr2]:expr 

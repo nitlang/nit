@@ -1,0 +1,15 @@
+true
+1
+
+true
+1
+2
+
+false
+1
+2
+Assert failed (alt/base_assert2_alt4.nit:43)
+,---- Stack trace -- - -  -
+| base_assert2_alt4::Object::test2 (alt/base_assert2_alt4.nit:41)
+| base_assert2_alt4::Sys::(kernel::Sys::main) (alt/base_assert2_alt4.nit:55)
+`------------------- - -  -

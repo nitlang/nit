@@ -5418,13 +5418,21 @@ redef class AAssertExpr
         _n_expr = n
 	n.parent = self
     end
+    redef fun n_else=(n)
+    do
+        _n_else = n
+        if n != null then
+	    n.parent = self
+        end
+    end
 
     private init empty_init do end
 
     init init_aassertexpr (
             n_kwassert: nullable TKwassert,
             n_id: nullable TId,
-            n_expr: nullable AExpr
+            n_expr: nullable AExpr,
+            n_else: nullable AExpr
     )
     do
         empty_init
@@ -5436,6 +5444,10 @@ redef class AAssertExpr
 	end
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
+        _n_else = n_else
+	if n_else != null then
+		n_else.parent = self
+	end
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5470,6 +5482,16 @@ redef class AAssertExpr
             end
             return
 	end
+        if _n_else == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExpr
+                _n_else = new_child
+	    else
+		_n_else = null
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -5479,6 +5501,9 @@ redef class AAssertExpr
             v.enter_visit(_n_id.as(not null))
         end
         v.enter_visit(_n_expr)
+        if _n_else != null then
+            v.enter_visit(_n_else.as(not null))
+        end
     end
 
     redef fun visit_all_reverse(v: Visitor)
@@ -5488,6 +5513,9 @@ redef class AAssertExpr
             v.enter_visit(_n_id.as(not null))
         end
         v.enter_visit(_n_expr)
+        if _n_else != null then
+            v.enter_visit(_n_else.as(not null))
+        end
     end
 end
 redef class AOnceExpr

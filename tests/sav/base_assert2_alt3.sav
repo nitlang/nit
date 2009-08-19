@@ -1,0 +1,7 @@
+false
+1
+Assert failed (alt/base_assert2_alt3.nit:30)
+,---- Stack trace -- - -  -
+| base_assert2_alt3::Object::test1 (alt/base_assert2_alt3.nit:28)
+| base_assert2_alt3::Sys::(kernel::Sys::main) (alt/base_assert2_alt3.nit:54)
+`------------------- - -  -

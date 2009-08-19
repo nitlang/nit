@@ -619,9 +619,21 @@ redef class AForExpr
 end
 
 redef class AAssertExpr
-	redef fun after_typing(v)
+	redef fun accept_typing(v)
 	do
+		# Process condition
+		v.enter_visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
+
+		# Process optional 'else' part
+		if n_else != null then
+			var old_var_ctx = v.variable_ctx
+			v.use_if_false_variable_ctx(n_expr)
+			v.enter_visit(n_else)
+			v.variable_ctx = old_var_ctx
+		end
+
+		# Prepare outside
 		v.use_if_true_variable_ctx(n_expr)
 		_is_typed = true
 	end

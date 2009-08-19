@@ -825,6 +825,7 @@ redef class AAssertExpr
 		v.stmt(iif)
 		var seq_old = v.seq
 		v.seq = iif.else_seq
+		v.generate_stmt(n_else)
 		var id = n_id
 		if id == null then
 			v.add_abort("Assert failed")

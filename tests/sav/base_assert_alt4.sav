@@ -1,0 +1,6 @@
+0
+Assert failed (alt/base_assert_alt4.nit:27)
+,---- Stack trace -- - -  -
+| base_assert_alt4::Object::foo (alt/base_assert_alt4.nit:19)
+| base_assert_alt4::Sys::(kernel::Sys::main) (alt/base_assert_alt4.nit:32)
+`------------------- - -  -

@@ -1,0 +1,5 @@
+Assert 'id'  failed (alt/base_assert_alt3.nit:25)
+,---- Stack trace -- - -  -
+| base_assert_alt3::Object::foo (alt/base_assert_alt3.nit:19)
+| base_assert_alt3::Sys::(kernel::Sys::main) (alt/base_assert_alt3.nit:32)
+`------------------- - -  -

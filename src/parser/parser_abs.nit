@@ -675,6 +675,7 @@ special AExpr
     readable writable var _n_kwassert: TKwassert
     readable writable var _n_id: nullable TId = null
     readable writable var _n_expr: AExpr
+    readable writable var _n_else: nullable AExpr = null
 end
 class AOnceExpr
 special AExpr
