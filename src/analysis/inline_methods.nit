@@ -34,7 +34,13 @@ special ICodeVisitor
 			if ir != null and ic.is_inlinable then
 				if _current_inlining.has(ir) then
 					# We cannot inline ir
-					# FIXME: what we want is a static call
+					# So, at least transform the call to a static one
+					current_icode.delete
+					var icall = new IStaticCall(ic.property, ic.exprs)
+					icall.closure_defs = ic.closure_defs
+					icall.result = ic.result
+					current_icode.insert_before(icall)
+					current_icode.delete
 				else
 					var icb = _icb
 					_current_inlining.push(ir)
