@@ -1,6 +1,7 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2009 Jean Privat <jean@pryen.org>
+# Copyright 2009 Jean-Sebastien Gelinas <calestar@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,10 +18,33 @@
 # Intermediate code analysis and optimizations
 package analysis
 
+# Global imports
 import icode
 import icode_dump
+import program
+
+# Local Analysis/Optimization
 import allocate_iregister_slots
 import inline_methods
+
+# Global Analysis types
+import instantiated_type_analysis
+import reachable_method_analysis
+
+redef class Program
+	# This method will analyse the program and store results (in global compilation only)
+	fun do_global_analysis do
+		assert tc.global
+
+		# Ensure we have all analysis created
+		if rma == null then rma = new DefaultReachableMethodAnalysis
+		if ita == null then ita = new DefaultInstantiatedTypeAnalysis
+	end
+	# This method will optimize the program (in global compilation only)
+	fun do_global_optimizations do
+		assert tc.global
+	end
+end
 
 redef class IRoutine
 	# Perfom all optimizations

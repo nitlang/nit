@@ -130,6 +130,10 @@ special AbstractCompiler
 			var p = new Program(mod, self)
 			p.compute_main_method
 			p.generate_allocation_iroutines
+			if global then
+				p.do_global_analysis
+				p.do_global_optimizations
+			end
 			p.do_table_computation
 			p.compile_prog_to_c
 		end
