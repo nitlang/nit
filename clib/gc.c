@@ -56,7 +56,7 @@ val_t GC_evacuation(obj_t object) {
 			size = sizeof(struct Nit_NativeArray) + ((array->size - 1) * sizeof(val_t));
 			memcpy(evacuationPointer, (array), size);
 			(array)->vft = (classtable_elt_t*)evacuationPointer;
-		} else if (IS_BOX(object)) {
+		} else if (IS_BOX((val_t)object)) {
 			box = (BOX_struct)object;
 			size = sizeof(struct TBOX_struct);
 			memcpy(evacuationPointer, object, size);
@@ -82,7 +82,7 @@ void GC_scavenging(void) {
 	bigint objectSize;
 	Nit_NativeArray *array;
 
-	if (IS_BOX(object)) {
+	if (IS_BOX((val_t)object)) {
 		size = sizeof(struct TBOX_struct);
 	} else {
 		array = (Nit_NativeArray*)&scavengingPointer;
@@ -90,7 +90,7 @@ void GC_scavenging(void) {
 			size = sizeof(struct Nit_NativeArray) + (((*array)->size - 1) * sizeof(val_t));
 			for (i = 0; i < (*array)->size; i++) {
 				referencedObject = (obj_t)((*array)->val[i]);
-				if (!ISNULL(referencedObject) && ISOBJ(referencedObject)) {
+				if (!ISNULL(referencedObject) && ISOBJ((val_t)referencedObject)) {
 					(*array)->val[i] = (bigint)GC_evacuation(referencedObject);
 				}
 			}
@@ -99,7 +99,7 @@ void GC_scavenging(void) {
 			size = (objectSize) * sizeof(val_t);
 			for (i = 2; i < objectSize; i++) {
 				referencedObject = (obj_t)(object[i].objectSize);
-				if (!ISNULL(referencedObject) && ISOBJ(referencedObject)) {
+				if (!ISNULL(referencedObject) && ISOBJ((val_t)referencedObject)) {
 					((object)[i].objectSize) = (bigint)GC_evacuation(referencedObject);
 				}
 			}
