@@ -598,7 +598,6 @@ void exec___NativeProcess___kill(val_t  self, val_t  param0) {
   struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
-  exec_NativeProcess_NativeProcess_kill_1(UNBOX_NativeProcess( self), UNTAG_Int( param0));
   tracehead = trace.prev;
   return;
 }

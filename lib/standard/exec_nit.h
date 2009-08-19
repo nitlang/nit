@@ -34,7 +34,6 @@ struct se_exec_data {
 
 #define exec_NativeProcess_NativeProcess_id_0(self) (((se_exec_data_t*)self)->id)
 #define exec_NativeProcess_NativeProcess_status_0(self) (((se_exec_data_t*)self)->status)
-#define exec_NativeProcess_NativeProcess_kill_1(self, p0) do{kill(((se_exec_data_t*)(self))->id, (p0));}while(0)
 
 #define exec_NativeProcess_NativeProcess_in_fd_0(self) (((se_exec_data_t*)self)->in_fd)
 #define exec_NativeProcess_NativeProcess_out_fd_0(self) (((se_exec_data_t*)self)->out_fd)

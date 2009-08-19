@@ -40,12 +40,6 @@ class Process
 		return _data.status
 	end
 
-	# send a signal to the process
-	fun kill(signal: Int) do _data.kill(signal)
-
-	# send the TERM (15) signal
-	fun term do kill(15)
-
 	# launch a command with some arguments
 	init(command: String, arguments: String...)
 	do
@@ -173,7 +167,6 @@ special Pointer
 	fun is_finished: Bool is extern "exec_NativeProcess_NativeProcess_is_finished_0"
 	fun status: Int is extern "exec_NativeProcess_NativeProcess_status_0"
 	fun wait is extern "exec_NativeProcess_NativeProcess_wait_0"
-	fun kill(s: Int) is extern "exec_NativeProcess_NativeProcess_kill_1"
 
 	fun in_fd: Int is extern "exec_NativeProcess_NativeProcess_in_fd_0"
 	fun out_fd: Int is extern "exec_NativeProcess_NativeProcess_out_fd_0"
