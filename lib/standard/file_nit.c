@@ -29,20 +29,20 @@ int string_NativeString_NativeString_file_exists_0(char *f){
 	return hdl != NULL;
 }
 
-static int to_nit_file_stat(struct stat* st){
+void *to_nit_file_stat(struct stat* st){
 	struct stat* stat_element;
 	stat_element = malloc(sizeof(struct stat));
-	return (int)memcpy(stat_element, st, sizeof(struct stat));
+	return memcpy(stat_element, st, sizeof(struct stat));
 }
 
-int string_NativeString_NativeString_file_stat_0(char *f){
+void *string_NativeString_NativeString_file_stat_0(char *f){
 	struct stat buff;
 	if(stat(f, &buff) != -1)
 		return to_nit_file_stat(&buff);
 	return 0;
 }
 
-int file_NativeFile_NativeFile_file_stat_0(FILE *f){
+void *file_NativeFile_NativeFile_file_stat_0(FILE *f){
 	struct stat buff;
 	if(fstat(fileno(f), &buff) != -1)
 		return to_nit_file_stat(&buff);
