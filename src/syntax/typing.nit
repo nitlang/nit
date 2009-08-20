@@ -659,11 +659,11 @@ redef class AVarAssignExpr
 	redef fun after_typing(v)
 	do
 		v.variable_ctx.mark_is_set(variable)
-		var t = v.variable_ctx.stype(variable)
 
 		# Check the base type
 		var btype = v.base_variable_ctx.stype(variable)
-		if not v.check_conform_expr(n_value, btype) then return
+		if not v.check_expr(n_value) then return
+		if btype != null and not v.check_conform_expr(n_value, btype) then return
 
 		# Always cast
 		v.variable_ctx.stype(variable) = n_value.stype
@@ -710,7 +710,8 @@ redef class AVarReassignExpr
 
 		# Check the base type
 		var btype = v.base_variable_ctx.stype(variable)
-		if not v.check_conform(n_value, t2, btype) then return
+		if not v.check_expr(n_value) then return
+		if btype != null and not v.check_conform(n_value, t2, btype) then return
 
 		# Always cast
 		v.variable_ctx.stype(variable) = t2
