@@ -33,12 +33,13 @@ import reachable_method_analysis
 
 # Global Analysis implementation
 import cha_analysis
+import rta_analysis
 
 # Global Optimizations
 import dead_method_removal
 
 redef class ToolContext
-	readable writable var _global_callgraph: String = "cha"
+	readable writable var _global_callgraph: String = "rta"
 	readable writable var _no_dead_method_removal: Bool = false
 end
 
@@ -51,6 +52,11 @@ redef class Program
 			var cha = new ChaBuilder(self)
 			cha.work
 			rma = cha.context
+		else if tc.global_callgraph == "rta" then
+			var rta = new RtaBuilder(self)
+			rta.work
+			rma = rta.context
+			ita = rta.context
 		end
 
 		# Ensure we have all analysis created
