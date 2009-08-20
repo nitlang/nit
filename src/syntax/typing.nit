@@ -136,6 +136,9 @@ special AbsSyntaxVisitor
 	end
 end
 
+redef class VarVariable
+	redef readable var _is_typed: Bool = false
+end
 
 ###############################################################################
 
@@ -353,18 +356,20 @@ redef class AVardeclExpr
 		var va = new VarVariable(n_id.to_symbol, n_id)
 		_variable = va
 		v.variable_ctx.add(va)
-		if n_expr != null then v.variable_ctx.mark_is_set(va)
+		var ne = n_expr
+		if ne != null then v.variable_ctx.mark_is_set(va)
 
 		if n_type != null then
 			if not n_type.is_typed then return
 			va.stype = n_type.stype
-			if n_expr != null then
-				v.check_conform_expr(n_expr.as(not null), va.stype)
+			if ne != null then
+				v.check_conform_expr(ne, va.stype)
 			end
-		else
-			if not v.check_expr(n_expr.as(not null)) then return
+		else if ne != null then
+			if not v.check_expr(ne) then return
 			va.stype = n_expr.stype
 		end
+		va._is_typed = true
 		_is_typed = true
 	end
 end

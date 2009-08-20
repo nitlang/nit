@@ -229,7 +229,12 @@ abstract class Variable
 	# Declaration AST node
 	readable var _decl: nullable ANode
 
-	# Static type
+	# Is the variable correcly declared
+	# Return false if typed was not yet computed or
+	# if an error occured during the typing computation
+	fun is_typed: Bool do return _stype != null
+
+	# The declaration static type of the variable
 	readable writable var _stype: nullable MMType
 
 	redef fun to_s do return _name.to_s
