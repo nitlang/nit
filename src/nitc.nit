@@ -128,7 +128,7 @@ special AbstractCompiler
 			var p = new Program(mod)
 			p.compute_main_method
 			p.do_table_computation(self)
-			p.generate_classes_init_to_icode
+			p.generate_allocation_iroutines
 			p.compile_prog_to_c(self)
 		end
 	end
