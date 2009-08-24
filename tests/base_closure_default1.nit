@@ -24,6 +24,8 @@ class A
 			#alt3# abort
 			#alt4# continue
 			#alt5# continue 20
+			#alt6# break
+			#alt7# break 1
 			20.output
 		end
 	do

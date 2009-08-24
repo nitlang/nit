@@ -274,7 +274,10 @@ redef class AClosureDecl
 		v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
 
-		var escapable = new EscapableClosure(self, variable.closure, null)
+		var blist: nullable Array[AExpr] = null
+		var t = v.local_property.signature.return_type
+		if t != null then blist = new Array[AExpr]
+		var escapable = new EscapableClosure(self, variable.closure, blist)
 		_escapable = escapable
 		v.escapable_ctx.push(escapable, null)
 
@@ -288,6 +291,9 @@ redef class AClosureDecl
 					v.error(self, "Control error: Reached end of break block (an 'abort' was expected).")
 				end
 			end
+		end
+		if blist != null then for x in blist do
+			v.check_conform_expr(x, t)
 		end
 
 		old_var_ctx.merge(v.variable_ctx)

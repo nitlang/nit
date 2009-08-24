@@ -23,6 +23,8 @@ class A
 			#alt2# return 1
 			#alt3# abort
 			#alt4# continue
+			#alt5# break
+			#alt6# break 1
 			continue 20 #!alt5#
 		end
 	do

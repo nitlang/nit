@@ -347,6 +347,8 @@ redef class AClosureDecl
 		v.seq = iclos.body
 		escapable.continue_seq = iclos.body
 		escapable.continue_value = iclos.result
+		escapable.break_seq = v.return_seq
+		escapable.break_value = v.return_value
 		n_signature.fill_iroutine_parameters(v, variable.closure.signature, iclos.params, null)
 
 		if n_expr != null then

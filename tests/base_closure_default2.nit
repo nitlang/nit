@@ -24,6 +24,8 @@ class A
 			#alt3# abort
 			#alt4# continue
 			#alt5# continue 20
+			#alt7# break
+			#alt8# break 1
 			(i * 10).output
 		end
 	do

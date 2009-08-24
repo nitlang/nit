@@ -23,6 +23,8 @@ class A
 			#alt2# return -1
 			#alt3# abort
 			#alt4# continue
+			#alt6# break
+			#alt7# break 1
 			continue (i * 10) #!alt5#
 		end
 	do
