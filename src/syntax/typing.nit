@@ -287,8 +287,8 @@ redef class AClosureDecl
 			if v.variable_ctx.unreash == false then
 				if variable.closure.signature.return_type != null then
 					v.error(self, "Control error: Reached end of block (a 'continue' with a value was expected).")
-				else if variable.closure.is_break then
-					v.error(self, "Control error: Reached end of break block (an 'abort' was expected).")
+				else if variable.closure.is_break and escapable.break_list != null then
+					v.error(self, "Control error: Reached end of break block (a 'break' with a value was expected).")
 				end
 			end
 		end
@@ -1683,8 +1683,8 @@ redef class AClosureDef
 		if v.variable_ctx.unreash == false then
 			if closure.signature.return_type != null then
 				v.error(self, "Control error: Reached end of block (a 'continue' with a value was expected).")
-			else if closure.is_break then
-				v.error(self, "Control error: Reached end of break block (a 'break' was expected).")
+			else if closure.is_break and esc.break_list != null then
+				v.error(self, "Control error: Reached end of break block (a 'break' with a value was expected).")
 			end
 		end
 		v.variable_ctx = old_var_ctx

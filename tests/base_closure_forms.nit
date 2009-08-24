@@ -215,7 +215,6 @@ do
 	!error(e) do
 		'E'.output
 		e.output
-		break
 	end
 	if f_escape != null then
 		'O'.output

@@ -354,6 +354,11 @@ redef class AClosureDecl
 		if n_expr != null then
 			v.generate_stmt(n_expr)
 			v.iroutine.closure_decls[position].default = iclos
+
+			# Add a final break in case of break block witout value
+			if variable.closure.is_break and v.return_value == null then
+				v.stmt(new IEscape(v.return_seq.as(not null)))
+			end
 		end
 		v.seq = old_seq
 	end
@@ -1399,6 +1404,11 @@ redef class AClosureDef
 		end
 
 		v.generate_stmt(n_expr)
+
+		# Add a final break in case of break block witout value
+		if closure.is_break and escapable.break_value == null then
+			v.stmt(new IEscape(escapable.break_seq.as(not null)))
+		end
 
 		v.seq = seq_old
 		_iclosure_def = iclos
