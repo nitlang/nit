@@ -42,6 +42,17 @@ interface Collection[E]
 	# Get a new iterator on the collection.
 	fun iterator: Iterator[E] is abstract
 
+	# Iterate over each element of the collection
+	fun iterate
+		!each(e: E)
+	do
+		var i = iterator
+		while i.is_ok do
+			each(i.item)
+			i.next
+		end
+	end
+
 	# Is there no item in the collection ?
 	fun is_empty: Bool is abstract 
 

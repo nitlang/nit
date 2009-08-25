@@ -185,6 +185,16 @@ special HashCollection[K, HashMapNode[K, V], V]
 
 	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
 
+	redef fun iterate
+		!each(e: V)
+	do
+		var c = _first_item
+		while c != null do
+			each(c.second)
+			c = c._next_item
+		end
+	end
+
 	redef fun first
 	do
 		assert _length > 0

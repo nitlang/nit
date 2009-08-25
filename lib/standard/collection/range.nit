@@ -42,6 +42,17 @@ special Collection[E]
 
 	redef fun iterator do return new IteratorRange[E](self)
 
+	redef fun iterate
+		!each(e: E)
+	do
+		var c = _first
+		var l = _last
+		while c <= l do
+			each(c)
+			c = c.succ
+		end
+	end
+
 	redef fun length
 	do
 		var nb = _first.distance(_after)

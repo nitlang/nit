@@ -228,6 +228,18 @@ end
 class Array[E]
 special AbstractArray[E]
 special ArrayCapable[E]
+	redef fun iterate
+		!each(e: E)
+	do
+		var i = 0
+		var l = _length
+		var items = _items
+		while i < length do
+			each(items[i])
+			i += 1
+		end
+	end
+
 	redef fun [](index)
 	do
 		assert index: index >= 0 and index < _length
