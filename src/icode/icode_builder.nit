@@ -159,6 +159,12 @@ class ICodeBuilder
 		end
 	end
 
+	# Add an escape to a given sequence
+	fun add_escape(seq: ISeq)
+	do
+		stmt(new IEscape(seq))
+	end
+
 	# Return a literal "null" value
 	fun lit_null_reg: IRegister
 	do

@@ -357,7 +357,7 @@ redef class AClosureDecl
 
 			# Add a final break in case of break block witout value
 			if variable.closure.is_break and v.return_value == null then
-				v.stmt(new IEscape(v.return_seq.as(not null)))
+				v.add_escape(v.return_seq.as(not null))
 			end
 		end
 		v.seq = old_seq
@@ -663,7 +663,7 @@ redef class AReturnExpr
 		if ne != null then
 			v.add_assignment(v.return_value.as(not null), v.generate_expr(ne))
 		end
-		v.stmt(new IEscape(v.return_seq.as(not null)))
+		v.add_escape(v.return_seq.as(not null))
 		return null
 	end
 end
@@ -675,7 +675,7 @@ redef class ABreakExpr
 		if ne != null then
 			v.add_assignment(escapable.break_value.as(not null), v.generate_expr(ne))
 		end
-		v.stmt(new IEscape(escapable.break_seq.as(not null)))
+		v.add_escape(escapable.break_seq.as(not null))
 		return null
 	end
 end
@@ -687,7 +687,7 @@ redef class AContinueExpr
 		if ne != null then
 			v.add_assignment(escapable.continue_value.as(not null), v.generate_expr(ne))
 		end
-		v.stmt(new IEscape(escapable.continue_seq.as(not null)))
+		v.add_escape(escapable.continue_seq.as(not null))
 		return null
 	end
 end
@@ -744,7 +744,7 @@ redef class AWhileExpr
 
 		# Process escape (condition is false)
 		v.seq = iif.else_seq
-		v.stmt(new IEscape(iloop))
+		v.add_escape(iloop)
 
 		v.seq = seq_old
 		return null
@@ -814,7 +814,7 @@ redef class AForExpr
 
 		# Exit contition (condition is false)
 		v.seq = iif.else_seq
-		v.stmt(new IEscape(iloop))
+		v.add_escape(iloop)
 
 		# Next step
 		var meth_next = v.visitor.get_method(iter_type, once ("next".to_symbol))
@@ -1407,7 +1407,7 @@ redef class AClosureDef
 
 		# Add a final break in case of break block witout value
 		if closure.is_break and escapable.break_value == null then
-			v.stmt(new IEscape(escapable.break_seq.as(not null)))
+			v.add_escape(escapable.break_seq.as(not null))
 		end
 
 		v.seq = seq_old
