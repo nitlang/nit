@@ -1,4 +1,27 @@
+version 0.2.1-git
+ * Local variable moving static type
+ * Nullable types
+ * New 'assert...else', 'isset', 'loop', 'label' syntax constructions
+ * (Re)Rename 'meth' to 'fun' and 'attr' to 'var'
+ * New closure syntax
+ * Syntax coloration for vim, gtksourceview and GNU source-highlight
+ * nitc/nitdoc --verbose option
+ * Intermediate code representation
+ * Native GC (not enabled by defaultNative GC (not enabled by default))
+
+version 0.2.1
+ * Readonly Strings and new class 'Buffer'
+
+ -- Wed, 10 Jun 2009 10:04:55 -0400
+
+version 0.2
+ * Automatic constructors
+ * Closures
+ * Last Mercurial changeset, now we uses Git
+
+ -- Fri, 06 Feb 2009 11:00:12 -0500
+
 version 0.1
- * First release under the NIT name.
+ * First release under the Nit name.
 
  -- Wed, 09 Jul 2008 15:24:55 -0400
