@@ -35,6 +35,12 @@ redef class IRoutine
 		if r != null then
 			icd.write "Result: {icd.register(r)}"
 		end
+		if std_slots_nb > 0 then
+			icd.write "StdSlots: {std_slots_nb}"
+		end
+		if tag_slots_nb > 0 then
+			icd.write "TagSlots: {tag_slots_nb}"
+		end
 		var closdecls = closure_decls
 		if closdecls != null then
 			for c in closdecls do
@@ -77,7 +83,14 @@ class ICodeDumper
 				return s
 			else
 				_last_value += 1
-				var s = "REG{i}(r{_last_value})"
+				var s: String
+				if e.in_tag_slots then
+					s = "BREG{i}(r{_last_value})"
+				else if e.is_local then
+					s = "LREG{i}(r{_last_value})"
+				else
+					s = "REG{i}(r{_last_value})"
+				end
 				_ids[e] = s
 				return s
 			end
