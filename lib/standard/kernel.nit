@@ -312,6 +312,28 @@ special Discrete
 			return (self + ('a'.ascii - 10)).ascii
 		end
 	end
+
+	# Executre 'each' for each integer in [self..last]
+	fun enumerate_to(last: Int)
+		!each(i: Int)
+	do
+		var cur = self
+		while cur <= last do
+			each(cur)
+			cur += 1
+		end
+	end
+
+	# Executre 'each' for each integer in [self..after[
+	fun enumerate_before(after: Int)
+		!each(i: Int)
+	do
+		var cur = self
+		while cur < after do
+			each(cur)
+			cur += 1
+		end
+	end
 end
 
 # Native characters.
