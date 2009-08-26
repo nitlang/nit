@@ -149,11 +149,11 @@ redef class Program
 		end
 
 		tc.info("Merging all tables",2)
-		do_global_analysis(tc)
+		do_global_table_analysis(tc)
 	end
 
 	# Do the complete global analysis
-	private fun do_global_analysis(cctx: ToolContext)
+	private fun do_global_table_analysis(cctx: ToolContext)
 	do
 		#print "Do the complete global analysis"
 		var smallest_classes = new Array[MMLocalClass]
