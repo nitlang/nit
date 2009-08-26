@@ -265,10 +265,17 @@ redef class ICall
 	end
 end
 
-redef class IAllocateInstance
+redef class INew
 	redef fun dump_intern(icd)
 	do
-		return "ALLOCATE NEW_{stype}"
+		return "NEW {stype}.{property.full_name}({icd.register_all(exprs)})"
+	end
+end
+
+redef class ISuper
+	redef fun dump_intern(icd)
+	do
+		return "SUPER {property.full_name}({icd.register_all(exprs)})"
 	end
 end
 
@@ -276,6 +283,13 @@ redef class IStaticCall
 	redef fun dump_intern(icd)
 	do
 		return "STATIC_CALL {property.full_name}({icd.register_all(exprs)})"
+	end
+end
+
+redef class IAllocateInstance
+	redef fun dump_intern(icd)
+	do
+		return "ALLOCATE NEW_{stype}"
 	end
 end
 
