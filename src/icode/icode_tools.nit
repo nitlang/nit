@@ -175,7 +175,7 @@ private class ICodeDupContext
 	end
 
 	# Return a correct bunch of registers
-	fun dup_iregs(regs: Sequence[IRegister]): Sequence[IRegister]
+	fun dup_iregs(regs: Sequence[IRegister]): Array[IRegister]
 	do
 		var a = new Array[IRegister].with_capacity(regs.length)
 		for r in regs do
@@ -224,7 +224,23 @@ redef class ICode
 		var c = inner_dup_with(d)
 		if self isa ICodeN then
 			assert c isa ICodeN
-			c.closure_defs = closure_defs
+			var cdecl = closure_defs
+			if cdecl != null then
+				# Duplicate the colsure definitions
+				var cdecl2 = new Array[nullable IClosureDef].with_capacity(cdecl.length)
+				for cd in cdecl do
+					if cd == null then
+						cdecl2.add(null)
+					else
+						var r = cd.result
+						if r != null then r = d.dup_ireg(r)
+						var cd2 = new IClosureDef(d.dup_iregs(cd.params), r)
+						cdecl2.add(cd2)
+						cd.body.dup_seq_to(d, cd2.body)
+					end
+				end
+				c.closure_defs = cdecl2
+			end
 		end
 		var r = result
 		if r != null then c.result = d.dup_ireg(r)
