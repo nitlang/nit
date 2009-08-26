@@ -139,6 +139,9 @@ class I2CCompilerVisitor
 		end
 	end
 
+	# Association between IEscapeMarks and visited ISeq
+	readable var _marks_to_seq: Map[IEscapeMark, ISeq] = new HashMap[IEscapeMark, ISeq]
+
 	# Are we in a closure ?
 	readable writable var _closure: Bool = false
 
@@ -382,6 +385,8 @@ redef class ISeq
 	redef fun inner_compile_to_c(v)
 	do
 		v.local_labels.add(self)
+		var mark = iescape_mark
+		if mark != null then v.marks_to_seq[mark] = self
 		for ic in icodes do
 			ic.compile_to_c(v)
 		end
@@ -414,6 +419,8 @@ redef class ILoop
 	redef fun inner_compile_to_c(v)
 	do
 		v.local_labels.add(self)
+		var mark = iescape_mark
+		if mark != null then v.marks_to_seq[mark] = self
 		v.add_instr("while(1) \{")
 		v.indent
 		for ic in icodes do
@@ -429,7 +436,7 @@ end
 redef class IEscape
 	redef fun inner_compile_to_c(v)
 	do
-		v.add_goto(seq)
+		v.add_goto(v.marks_to_seq[iescape_mark])
 		return null
 	end
 end

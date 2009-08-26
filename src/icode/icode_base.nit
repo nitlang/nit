@@ -32,6 +32,10 @@ class IRegister
 	end
 end
 
+# A mark used to associate IEscapes to ISeqs
+class IEscapeMark
+end
+
 # A Closure declaration
 class IClosureDecl
 	# The associated closure definition
@@ -56,6 +60,9 @@ class IRoutine
 
 	# The result of the routine
 	readable var _result: nullable IRegister
+
+	# The local escapes marks of the routine
+	readable var _escape_marks: Set[IEscapeMark] = new ArraySet[IEscapeMark]
 
 	# The sequence of icode
 	readable var _body: ISeq = new ISeq
@@ -159,6 +166,10 @@ class ISeq
 special ICode0
 	# The sequence of icode
 	readable var _icodes: List[ICode] = new List[ICode]
+
+	# The associated iescape_mark (if any)
+	readable writable var _iescape_mark: nullable IEscapeMark
+
 	init do end
 end
 
@@ -184,9 +195,9 @@ end
 class IEscape
 special ICode0
 	# The seqeuence to escape
-	# The control flow continues at the next icode after the sequence
-	readable var _seq: ISeq
-	init(seq: ISeq) do _seq = seq
+	# The control flow continues at the next icode after the associated sequence
+	readable var _iescape_mark: IEscapeMark
+	init(mark: IEscapeMark) do _iescape_mark = mark
 end
 
 # An abort statement

@@ -127,7 +127,7 @@ class ICodeDumper
 	var _last_label: Int = 0
 	# Return the name of e
 	# If e is unknown, a new name is gived
-	fun lab(e: ISeq): String
+	fun lab(e: IEscapeMark): String
 	do
 		if _ids.has_key(e) then
 			return _ids[e]
@@ -154,7 +154,7 @@ class ICodeDumper
 	end
 
 	# Is the label e known? (because we goto to it)
-	fun has_lab(e: ISeq): Bool
+	fun has_lab(e: IEscapeMark): Bool
 	do
 		return _ids.has_key(e)
 	end
@@ -224,7 +224,8 @@ redef class ISeq
 		for ic in icodes do
 			ic.dump(icd)
 		end
-		if icd.has_lab(self) then icd.write("{icd.lab(self)}:")
+		var mark = iescape_mark
+		if mark != null and icd.has_lab(mark) then icd.write("{icd.lab(mark)}:")
 	end
 end
 
@@ -253,14 +254,15 @@ redef class ILoop
 		end
 		icd.unindent
 		icd.write "}"
-		if icd.has_lab(self) then icd.write("{icd.lab(self)}:")
+		var mark = iescape_mark
+		if mark != null and icd.has_lab(mark) then icd.write("{icd.lab(mark)}:")
 	end
 end
 
 redef class IEscape
 	redef fun dump_intern(icd)
 	do
-		return "ESCAPE {icd.lab(seq)}"
+		return "ESCAPE {icd.lab(iescape_mark)}"
 	end
 end
 

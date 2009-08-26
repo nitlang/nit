@@ -160,9 +160,16 @@ class ICodeBuilder
 	end
 
 	# Add an escape to a given sequence
+	# Create a new IEscapeMark if required
 	fun add_escape(seq: ISeq)
 	do
-		stmt(new IEscape(seq))
+		var mark = seq.iescape_mark
+		if mark == null then
+			mark = new IEscapeMark
+			iroutine.escape_marks.add(mark)
+			seq.iescape_mark = mark
+		end
+		stmt(new IEscape(mark))
 	end
 
 	# Return a literal "null" value

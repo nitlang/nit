@@ -134,6 +134,13 @@ redef class ICodeBuilder
 			#seq.icodes.add(new IMove(dico[routine.params[i]]), args[i]))
 		end
 
+		# Fill escape mark association
+		for m in routine.escape_marks do
+			var m2 = new IEscapeMark
+			iroutine.escape_marks.add(m2)
+			d._marks[m] = m2
+		end
+
 		# Fill closure association
 		if closdecls != null then
 			var cdico = d._closures
@@ -177,13 +184,26 @@ private class ICodeDupContext
 		return a
 	end
 
-	# The associoation between old_seq and new_seq
-	# Directly used by the IEscape
-	var _seqs: Map[ISeq, ISeq] = new HashMap[ISeq, ISeq]
-
 	# The assocation between old_ireg and new_ireg
 	# Used by dup_ireg
 	var _registers: Map[IRegister, IRegister] = new HashMap[IRegister, IRegister]
+
+	# Return the correct escape mark
+	# * a duplicate of the local escape mark 'm' of the inlined iroutine
+	# * 'r' else (it is a escape mark of the caller iroutine)
+	fun dup_mark(m: IEscapeMark): IEscapeMark
+	do
+		var ms = _marks
+		if ms.has_key(m) then
+			return ms[m]
+		else
+			return m
+		end
+	end
+
+	# The associoation between old_seq and new_seq
+	# Used by dup_mark
+	var _marks: Map[IEscapeMark, IEscapeMark] = new HashMap[IEscapeMark, IEscapeMark]
 
 	# The association between a closure_decl and its closure_def (if any)
 	var _closures: Map[IClosureDecl, nullable IClosureDef] = new ArrayMap[IClosureDecl, nullable IClosureDef]
@@ -230,11 +250,15 @@ redef class ISeq
 	do
 		var old_seq = d._icb.seq
 		d._icb.seq = dest
-		d._seqs[self] = dest
 		for c in icodes do
 			c.dup_with(d)
 		end
 		d._icb.seq = old_seq
+		assert dest.iescape_mark == null
+		var mark = iescape_mark
+		if mark != null then
+			dest.iescape_mark = d.dup_mark(mark)
+		end
 	end
 end
 
@@ -260,13 +284,10 @@ end
 redef class IEscape
 	redef fun inner_dup_with(d)
 	do
-		if d._seqs.has_key(seq) then
-			# Jump to a duplicated sequence
-			return new IEscape(d._seqs[seq])
-		else
-			# Jump to an englobing unduplicated sequence
-			return new IEscape(seq)
-		end
+		# Get the associated mark (duplicated of not)
+		var mark = d.dup_mark(iescape_mark)
+		# Jump to the mark
+		return new IEscape(mark)
 	end
 end
 
