@@ -777,13 +777,34 @@ end
 redef class AForExpr
 	redef fun generate_icode(v)
 	do
-		var expr_type = n_expr.stype
+		var ne = n_expr
+		var expr_type = ne.stype
+		var tint = v.visitor.type_int
+		var meth # The method that call the closure
+		var args # The arguments of meth
 
-		# Get iterate
-		var meth_iterate = v.visitor.get_method(expr_type, once "iterate".to_symbol)
+		if ne isa ARangeExpr and expr_type == v.visitor.type_range(tint) then
+			# Shortcut. No Range[Int] object allocated.
+			# 'for x in [y..z] do' become 'y.enumerate_to(z) !each(x) do'
+			# 'for x in [y..z[ do' become 'y.enumerate_before(z) !each(x) do'
+			# And both methods may be inlined
+			args = [v.generate_expr(ne.n_expr), v.generate_expr(ne.n_expr2)]
+			if ne isa ACrangeExpr then
+				meth = v.visitor.get_method(tint, once "enumerate_to".to_symbol)
+			else
+				assert ne isa AOrangeExpr
+				meth = v.visitor.get_method(tint, once "enumerate_before".to_symbol)
+			end
+		else
+			# Standard way.
+			# 'for x in e do' become 'e.iterate !each(x) do'
+			# Some iterate methods may be inlined (eg. the Array one)
+			meth = v.visitor.get_method(expr_type, once "iterate".to_symbol)
+			args = [v.generate_expr(n_expr)]
+		end
 
 		# Build closure
-		var iclos = meth_iterate.signature.closures.first.signature.generate_empty_iclosuredef(v)
+		var iclos = meth.signature.closures.first.signature.generate_empty_iclosuredef(v)
 		var old_seq = v.seq
 
 		var seq = new ISeq
@@ -800,7 +821,7 @@ redef class AForExpr
 
 		# Call closure
 		v.seq = seq
-		v.add_call(meth_iterate, [v.generate_expr(n_expr)], [iclos])
+		v.add_call(meth, args, [iclos])
 
 		v.seq = old_seq
 		return null
