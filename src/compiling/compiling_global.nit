@@ -20,20 +20,9 @@ package compiling_global
 import table_computation
 private import compiling_icode
 
-class GlobalCompilerVisitor
-special CompilerVisitor
-	# The global analysis result
-	readable var _program: Program
-	init(m: MMModule, tc: ToolContext, prog: Program)
-	do
-		super(m, tc)
-		_program = prog
-	end
-end
-
 redef class Program
 	# Compile module and class tables
-	fun compile_tables_to_c(v: GlobalCompilerVisitor)
+	fun compile_tables_to_c(v: CompilerVisitor)
 	do
 		for m in module.mhe.greaters_and_self do
 			m.compile_local_table_to_c(v)
@@ -55,7 +44,7 @@ redef class Program
 	end
 
 	# Compile main part (for _table.c)
-	fun compile_main_part(v: GlobalCompilerVisitor)
+	fun compile_main_part(v: CompilerVisitor)
 	do
 		v.add_instr("int main(int argc, char **argv) \{")
 		v.indent
@@ -76,7 +65,7 @@ end
 
 redef class MMModule
 	# Declare class table (for _sep.h)
-	fun declare_class_tables_to_c(v: GlobalCompilerVisitor)
+	fun declare_class_tables_to_c(v: CompilerVisitor)
 	do
 		for c in local_classes do
 			if c.global.module == self then
@@ -86,16 +75,16 @@ redef class MMModule
 	end
 
 	# Compile sep files
-	fun compile_mod_to_c(v: GlobalCompilerVisitor)
+	fun compile_mod_to_c(v: CompilerVisitor)
 	do
 		v.add_decl("extern const char *LOCATE_{name};")
-		if not v.tc.global then
+		if not v.program.tc.global then
 			v.add_decl("extern const int SFT_{name}[];")
 		end
 		var i = 0
 		for e in local_table do
 			var value: String
-			if v.tc.global then
+			if v.program.tc.global then
 				value = "{e.value(v.program)}"
 			else
 				value = "SFT_{name}[{i}]"
@@ -123,11 +112,11 @@ redef class MMModule
 	end
 
 	# Compile module file for the current module
-	fun compile_local_table_to_c(v: GlobalCompilerVisitor)
+	fun compile_local_table_to_c(v: CompilerVisitor)
 	do
 		v.add_instr("const char *LOCATE_{name} = \"{location.file}\";")
 
-		if v.tc.global or local_table.is_empty then
+		if v.program.tc.global or local_table.is_empty then
 			return
 		end
 
@@ -145,12 +134,12 @@ end
 
 redef class AbsTableElt
 	# Compile the macro needed to use the element and other related elements
-	fun compile_macros(v: GlobalCompilerVisitor, value: String) is abstract
+	fun compile_macros(v: CompilerVisitor, value: String) is abstract
 end
 
 redef class TableElt
 	# Return the value of the element for a given class
-	fun compile_to_c(v: GlobalCompilerVisitor, c: MMLocalClass): String is abstract
+	fun compile_to_c(v: CompilerVisitor, c: MMLocalClass): String is abstract
 end
 
 redef class ModuleTableElt
@@ -328,7 +317,7 @@ end
 
 redef class MMLocalClass
 	# Declaration and macros related to the class table
-	fun declare_tables_to_c(v: GlobalCompilerVisitor)
+	fun declare_tables_to_c(v: CompilerVisitor)
 	do
 		v.add_decl("")
 		var pi = primitive_info
@@ -347,7 +336,7 @@ redef class MMLocalClass
 	end
 
 	# Compilation of table and new (or box)
-	fun compile_tables_to_c(v: GlobalCompilerVisitor)
+	fun compile_tables_to_c(v: CompilerVisitor)
 	do
 		var cc = v.program.compiled_classes[self.global]
 		var ctab = cc.class_table

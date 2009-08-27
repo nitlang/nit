@@ -125,11 +125,11 @@ special AbstractCompiler
 			dump_intermediate_code(mods)
 		end
 		for mod in mods do
-			var p = new Program(mod)
+			var p = new Program(mod, self)
 			p.compute_main_method
-			p.do_table_computation(self)
+			p.do_table_computation
 			p.generate_allocation_iroutines
-			p.compile_prog_to_c(self)
+			p.compile_prog_to_c
 		end
 	end
 end

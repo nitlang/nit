@@ -20,6 +20,7 @@ package compiling_base
 import mmloader
 private import utils
 import primitive_info
+import program
 
 redef class ToolContext
 	readable writable var _global: Bool = false
@@ -113,14 +114,14 @@ class CompilerVisitor
 	# The current indent lever
 	readable writable var _indent_level: Int = 0
 
-	# The ToolContext info
-	readable var _tc: ToolContext
+	# The program we are compiling
+	readable var _program: Program
 
 	# Create a new CompilerVisitor based on a module
-	init(module: MMModule, tc: ToolContext)
+	init(module: MMModule, p: Program)
 	do
 		_module = module
-		_tc = tc
+		_program = p
 	end
 end
 

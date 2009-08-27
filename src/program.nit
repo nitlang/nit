@@ -20,10 +20,15 @@ package program
 import metamodel
 import icode
 import primitive_info
+import mmloader
 
 # Instances of this class represent a program/library that will
 # be analyzed/compiled by nitc
 class Program
+	# This is the ToolContext associated with this Program
+	# It contains (amongts other things) the command line options
+	readable var _tc: ToolContext
+
 	# This module is the 'main' module, the one where we find the 'main' method
 	readable var _module: MMModule
 
@@ -122,8 +127,9 @@ class Program
 		end
 	end
 
-	init(m: MMModule) do
+	init(m: MMModule, toolcontext: ToolContext) do
 		_module = m
+		_tc = toolcontext
 	end
 end
 

@@ -93,7 +93,7 @@ redef class MMConcreteClass
 	readable var _instance_layout: Array[TableElt] = new Array[TableElt]
 
 	# Build the local layout of the class and feed the module table
-	private fun build_layout_in(tc: ToolContext, module_table: Array[ModuleTableElt])
+	private fun build_layout_in(module_table: Array[ModuleTableElt])
 	do
 		var clt = _class_layout
 		var ilt = _instance_layout
@@ -140,20 +140,20 @@ redef class Program
 	# Associate global classes to compiled classes
 	readable var _compiled_classes: HashMap[MMGlobalClass, CompiledClass] = new HashMap[MMGlobalClass, CompiledClass]
 
-	fun do_table_computation(tc: ToolContext)
+	fun do_table_computation
 	do
 		tc.info("Building tables",1)
 		for m in module.mhe.greaters_and_self do
 			tc.info("Building tables for module: {m.name}",2)
-			m.local_analysis(tc)
+			m.local_analysis
 		end
 
 		tc.info("Merging all tables",2)
-		do_global_table_analysis(tc)
+		do_global_table_analysis
 	end
 
 	# Do the complete global analysis
-	private fun do_global_table_analysis(cctx: ToolContext)
+	private fun do_global_table_analysis
 	do
 		#print "Do the complete global analysis"
 		var smallest_classes = new Array[MMLocalClass]
@@ -402,11 +402,11 @@ redef class MMModule
 	readable var _local_table: Array[ModuleTableElt] = new Array[ModuleTableElt]
 
 	# Builds the local tables and local classes layouts
-	private fun local_analysis(tc: ToolContext)
+	private fun local_analysis
 	do
 		for c in local_classes do
 			if c isa MMConcreteClass then
-				c.build_layout_in(tc, _local_table)
+				c.build_layout_in(_local_table)
 			end
 		end
 	end
