@@ -25,14 +25,14 @@ bin/nitc: c_src/nitc src/parser/parser.nit
 	mkdir .nit_compile 2> /dev/null || true
 	cp c_src/*.o c_src/*.cksum .nit_compile
 	src/git-gen-version.sh
-	c_src/nitc ${NITCOPT} --clibdir c_src/clib -o bin/nitc -O src/nitc.nit
+	c_src/nitc ${NITCOPT} --clibdir c_src/clib -o bin/nitc -O -v src/nitc.nit
 
 bin/nitdoc: bin/nitc
 	@echo '***************************************************************'
 	@echo '* Compile nitdoc from NIT source files                        *'
 	@echo '***************************************************************'
 	src/git-gen-version.sh
-	bin/nitc ${NITCOPT} -o bin/nitdoc -O src/nitdoc.nit
+	bin/nitc ${NITCOPT} -o bin/nitdoc -O -v src/nitdoc.nit
 
 doc/stdlib/index.html: bin/nitdoc
 	@echo '***************************************************************'

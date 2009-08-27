@@ -16,7 +16,7 @@
 # limitations under the License.
 
 NITC="../c_src/nitc"
-NITCOPTS= #"-I parser -I metamodel -I syntax -I compiling -I tmp"
+NITCOPTS="-v -W"
 CSRC=$( (cd ../c_src; pwd) )
 
 name=`basename $0`
