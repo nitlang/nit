@@ -22,6 +22,10 @@ import icode
 import primitive_info
 import mmloader
 
+redef class ToolContext
+	readable writable var _global: Bool = false
+end
+
 # Instances of this class represent a program/library that will
 # be analyzed/compiled by nitc
 class Program

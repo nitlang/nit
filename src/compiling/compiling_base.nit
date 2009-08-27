@@ -23,7 +23,6 @@ import primitive_info
 import program
 
 redef class ToolContext
-	readable writable var _global: Bool = false
 	readable writable var _compdir: nullable String = null
 	readable writable var _clibdir: nullable String = null
 	readable writable var _bindir: nullable String = null
