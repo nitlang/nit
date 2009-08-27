@@ -78,13 +78,13 @@ redef class MMModule
 	fun compile_mod_to_c(v: CompilerVisitor)
 	do
 		v.add_decl("extern const char *LOCATE_{name};")
-		if not v.program.tc.global then
+		if not v.program.tc.use_SFT_optimization then
 			v.add_decl("extern const int SFT_{name}[];")
 		end
 		var i = 0
 		for e in local_table do
 			var value: String
-			if v.program.tc.global then
+			if v.program.tc.use_SFT_optimization then
 				value = "{e.value(v.program)}"
 			else
 				value = "SFT_{name}[{i}]"
@@ -116,7 +116,7 @@ redef class MMModule
 	do
 		v.add_instr("const char *LOCATE_{name} = \"{location.file}\";")
 
-		if v.program.tc.global or local_table.is_empty then
+		if v.program.tc.use_SFT_optimization or local_table.is_empty then
 			return
 		end
 

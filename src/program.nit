@@ -24,6 +24,11 @@ import mmloader
 
 redef class ToolContext
 	readable writable var _global: Bool = false
+	writable var _use_SFT_optimization: Bool = true
+
+	# We can say that we are using SFT optimization *only* when we are
+	# doing global compilation and we enabled the command line option
+	fun use_SFT_optimization: Bool do return global and _use_SFT_optimization
 end
 
 # Instances of this class represent a program/library that will
