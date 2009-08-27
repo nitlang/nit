@@ -7,10 +7,10 @@ extern const char *LOCATE_utils;
 extern const int SFT_utils[];
 #define CALL_utils___Object___cmangle(recv) ((utils___Object___cmangle_t)CALL((recv), (SFT_utils[0] + 0)))
 #define CALL_utils___Object___cmangle_table(recv) ((utils___Object___cmangle_table_t)CALL((recv), (SFT_utils[0] + 1)))
-typedef val_t (* utils___Object___cmangle_t)(val_t  self, val_t  param0);
-val_t utils___Object___cmangle(val_t  self, val_t  param0);
 #define LOCATE_utils___Object___cmangle "utils::Object::cmangle"
-typedef val_t (* utils___Object___cmangle_table_t)(val_t  self);
-val_t utils___Object___cmangle_table(val_t  self);
+val_t utils___Object___cmangle(val_t p0, val_t p1);
+typedef val_t (*utils___Object___cmangle_t)(val_t p0, val_t p1);
 #define LOCATE_utils___Object___cmangle_table "utils::Object::cmangle_table"
+val_t utils___Object___cmangle_table(val_t p0);
+typedef val_t (*utils___Object___cmangle_table_t)(val_t p0);
 #endif

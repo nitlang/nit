@@ -2,7 +2,7 @@
 #ifndef syntax_sep
 #define syntax_sep
 #include "mmbuilder._sep.h"
-#include "typing._sep.h"
+#include "icode_generation._sep.h"
 #include <nit_common.h>
 
 extern const classtable_elt_t VFT_SrcModuleLoader[];
@@ -14,24 +14,34 @@ extern const int SFT_syntax[];
 #define CALL_syntax___SrcModuleLoader___init(recv) ((syntax___SrcModuleLoader___init_t)CALL((recv), (SFT_syntax[2] + 1)))
 #define CALL_syntax___MMSrcModule___process_supermodules(recv) ((syntax___MMSrcModule___process_supermodules_t)CALL((recv), (SFT_syntax[3] + 0)))
 #define CALL_syntax___MMSrcModule___process_syntax(recv) ((syntax___MMSrcModule___process_syntax_t)CALL((recv), (SFT_syntax[3] + 1)))
-typedef val_t (* syntax___SrcModuleLoader___file_type_t)(val_t  self);
-val_t syntax___SrcModuleLoader___file_type(val_t  self);
+#define ATTR_syntax___ToolContext____keep_ast(recv) ATTR(recv, (SFT_syntax[4] + 0))
+#define CALL_syntax___ToolContext___keep_ast(recv) ((syntax___ToolContext___keep_ast_t)CALL((recv), (SFT_syntax[5] + 0)))
+#define CALL_syntax___ToolContext___keep_ast__eq(recv) ((syntax___ToolContext___keep_ast__eq_t)CALL((recv), (SFT_syntax[5] + 1)))
 #define LOCATE_syntax___SrcModuleLoader___file_type "syntax::SrcModuleLoader::(mmloader::ModuleLoader::file_type)"
-typedef val_t (* syntax___SrcModuleLoader___parse_file_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4);
-val_t syntax___SrcModuleLoader___parse_file(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4);
+val_t syntax___SrcModuleLoader___file_type(val_t p0);
+typedef val_t (*syntax___SrcModuleLoader___file_type_t)(val_t p0);
 #define LOCATE_syntax___SrcModuleLoader___parse_file "syntax::SrcModuleLoader::(mmloader::ModuleLoader::parse_file)"
-typedef void (* syntax___SrcModuleLoader___process_metamodel_t)(val_t  self, val_t  param0, val_t  param1);
-void syntax___SrcModuleLoader___process_metamodel(val_t  self, val_t  param0, val_t  param1);
+val_t syntax___SrcModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+typedef val_t (*syntax___SrcModuleLoader___parse_file_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 #define LOCATE_syntax___SrcModuleLoader___process_metamodel "syntax::SrcModuleLoader::(mmloader::ModuleLoader::process_metamodel)"
-typedef void (* syntax___SrcModuleLoader___init_t)(val_t  self, int* init_table);
-void syntax___SrcModuleLoader___init(val_t  self, int* init_table);
+void syntax___SrcModuleLoader___process_metamodel(val_t p0, val_t p1, val_t p2);
+typedef void (*syntax___SrcModuleLoader___process_metamodel_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_syntax___SrcModuleLoader___init "syntax::SrcModuleLoader::init"
+void syntax___SrcModuleLoader___init(val_t p0, int* init_table);
+typedef void (*syntax___SrcModuleLoader___init_t)(val_t p0, int* init_table);
 val_t NEW_SrcModuleLoader_syntax___SrcModuleLoader___init();
 val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-typedef void (* syntax___MMSrcModule___process_supermodules_t)(val_t  self, val_t  param0);
-void syntax___MMSrcModule___process_supermodules(val_t  self, val_t  param0);
 #define LOCATE_syntax___MMSrcModule___process_supermodules "syntax::MMSrcModule::process_supermodules"
-typedef void (* syntax___MMSrcModule___process_syntax_t)(val_t  self, val_t  param0);
-void syntax___MMSrcModule___process_syntax(val_t  self, val_t  param0);
+void syntax___MMSrcModule___process_supermodules(val_t p0, val_t p1);
+typedef void (*syntax___MMSrcModule___process_supermodules_t)(val_t p0, val_t p1);
 #define LOCATE_syntax___MMSrcModule___process_syntax "syntax::MMSrcModule::process_syntax"
+void syntax___MMSrcModule___process_syntax(val_t p0, val_t p1);
+typedef void (*syntax___MMSrcModule___process_syntax_t)(val_t p0, val_t p1);
+val_t NEW_ToolContext_mmloader___ToolContext___init();
+#define LOCATE_syntax___ToolContext___keep_ast "syntax::ToolContext::keep_ast"
+val_t syntax___ToolContext___keep_ast(val_t p0);
+typedef val_t (*syntax___ToolContext___keep_ast_t)(val_t p0);
+#define LOCATE_syntax___ToolContext___keep_ast__eq "syntax::ToolContext::keep_ast="
+void syntax___ToolContext___keep_ast__eq(val_t p0, val_t p1);
+typedef void (*syntax___ToolContext___keep_ast__eq_t)(val_t p0, val_t p1);
 #endif

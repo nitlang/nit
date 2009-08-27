@@ -26,9 +26,9 @@ extern const classtable_elt_t VFT_Map[];
 
 extern const classtable_elt_t VFT_MapIterator[];
 
-extern const classtable_elt_t VFT_IndexedCollectionRead[];
+extern const classtable_elt_t VFT_SequenceRead[];
 
-extern const classtable_elt_t VFT_IndexedCollection[];
+extern const classtable_elt_t VFT_Sequence[];
 
 extern const classtable_elt_t VFT_IndexedIterator[];
 
@@ -100,21 +100,21 @@ extern const int SFT_abstract_collection[];
 #define COLOR_MapIterator (SFT_abstract_collection[33])
 #define INIT_TABLE_POS_MapIterator (SFT_abstract_collection[34] + 0)
 #define CALL_abstract_collection___MapIterator___key(recv) ((abstract_collection___MapIterator___key_t)CALL((recv), (SFT_abstract_collection[34] + 1)))
-#define ID_IndexedCollectionRead (SFT_abstract_collection[35])
-#define COLOR_IndexedCollectionRead (SFT_abstract_collection[36])
-#define INIT_TABLE_POS_IndexedCollectionRead (SFT_abstract_collection[37] + 0)
-#define CALL_abstract_collection___IndexedCollectionRead___last(recv) ((abstract_collection___IndexedCollectionRead___last_t)CALL((recv), (SFT_abstract_collection[37] + 1)))
-#define CALL_abstract_collection___IndexedCollectionRead___index_of(recv) ((abstract_collection___IndexedCollectionRead___index_of_t)CALL((recv), (SFT_abstract_collection[37] + 2)))
-#define ID_IndexedCollection (SFT_abstract_collection[38])
-#define COLOR_IndexedCollection (SFT_abstract_collection[39])
-#define INIT_TABLE_POS_IndexedCollection (SFT_abstract_collection[40] + 0)
-#define CALL_abstract_collection___IndexedCollection___first__eq(recv) ((abstract_collection___IndexedCollection___first__eq_t)CALL((recv), (SFT_abstract_collection[40] + 1)))
-#define CALL_abstract_collection___IndexedCollection___last__eq(recv) ((abstract_collection___IndexedCollection___last__eq_t)CALL((recv), (SFT_abstract_collection[40] + 2)))
-#define CALL_abstract_collection___IndexedCollection___push(recv) ((abstract_collection___IndexedCollection___push_t)CALL((recv), (SFT_abstract_collection[40] + 3)))
-#define CALL_abstract_collection___IndexedCollection___append(recv) ((abstract_collection___IndexedCollection___append_t)CALL((recv), (SFT_abstract_collection[40] + 4)))
-#define CALL_abstract_collection___IndexedCollection___pop(recv) ((abstract_collection___IndexedCollection___pop_t)CALL((recv), (SFT_abstract_collection[40] + 5)))
-#define CALL_abstract_collection___IndexedCollection___unshift(recv) ((abstract_collection___IndexedCollection___unshift_t)CALL((recv), (SFT_abstract_collection[40] + 6)))
-#define CALL_abstract_collection___IndexedCollection___shift(recv) ((abstract_collection___IndexedCollection___shift_t)CALL((recv), (SFT_abstract_collection[40] + 7)))
+#define ID_SequenceRead (SFT_abstract_collection[35])
+#define COLOR_SequenceRead (SFT_abstract_collection[36])
+#define INIT_TABLE_POS_SequenceRead (SFT_abstract_collection[37] + 0)
+#define CALL_abstract_collection___SequenceRead___last(recv) ((abstract_collection___SequenceRead___last_t)CALL((recv), (SFT_abstract_collection[37] + 1)))
+#define CALL_abstract_collection___SequenceRead___index_of(recv) ((abstract_collection___SequenceRead___index_of_t)CALL((recv), (SFT_abstract_collection[37] + 2)))
+#define ID_Sequence (SFT_abstract_collection[38])
+#define COLOR_Sequence (SFT_abstract_collection[39])
+#define INIT_TABLE_POS_Sequence (SFT_abstract_collection[40] + 0)
+#define CALL_abstract_collection___Sequence___first__eq(recv) ((abstract_collection___Sequence___first__eq_t)CALL((recv), (SFT_abstract_collection[40] + 1)))
+#define CALL_abstract_collection___Sequence___last__eq(recv) ((abstract_collection___Sequence___last__eq_t)CALL((recv), (SFT_abstract_collection[40] + 2)))
+#define CALL_abstract_collection___Sequence___push(recv) ((abstract_collection___Sequence___push_t)CALL((recv), (SFT_abstract_collection[40] + 3)))
+#define CALL_abstract_collection___Sequence___append(recv) ((abstract_collection___Sequence___append_t)CALL((recv), (SFT_abstract_collection[40] + 4)))
+#define CALL_abstract_collection___Sequence___pop(recv) ((abstract_collection___Sequence___pop_t)CALL((recv), (SFT_abstract_collection[40] + 5)))
+#define CALL_abstract_collection___Sequence___unshift(recv) ((abstract_collection___Sequence___unshift_t)CALL((recv), (SFT_abstract_collection[40] + 6)))
+#define CALL_abstract_collection___Sequence___shift(recv) ((abstract_collection___Sequence___shift_t)CALL((recv), (SFT_abstract_collection[40] + 7)))
 #define ID_IndexedIterator (SFT_abstract_collection[41])
 #define COLOR_IndexedIterator (SFT_abstract_collection[42])
 #define INIT_TABLE_POS_IndexedIterator (SFT_abstract_collection[43] + 0)
@@ -138,224 +138,224 @@ extern const int SFT_abstract_collection[];
 #define CALL_abstract_collection___Couple___second(recv) ((abstract_collection___Couple___second_t)CALL((recv), (SFT_abstract_collection[54] + 3)))
 #define CALL_abstract_collection___Couple___second__eq(recv) ((abstract_collection___Couple___second__eq_t)CALL((recv), (SFT_abstract_collection[54] + 4)))
 #define CALL_abstract_collection___Couple___init(recv) ((abstract_collection___Couple___init_t)CALL((recv), (SFT_abstract_collection[54] + 5)))
-typedef val_t (* abstract_collection___Collection___iterator_t)(val_t  self);
-val_t abstract_collection___Collection___iterator(val_t  self);
 #define LOCATE_abstract_collection___Collection___iterator "abstract_collection::Collection::iterator"
-typedef val_t (* abstract_collection___Collection___is_empty_t)(val_t  self);
-val_t abstract_collection___Collection___is_empty(val_t  self);
+val_t abstract_collection___Collection___iterator(val_t p0);
+typedef val_t (*abstract_collection___Collection___iterator_t)(val_t p0);
 #define LOCATE_abstract_collection___Collection___is_empty "abstract_collection::Collection::is_empty"
-typedef val_t (* abstract_collection___Collection___length_t)(val_t  self);
-val_t abstract_collection___Collection___length(val_t  self);
+val_t abstract_collection___Collection___is_empty(val_t p0);
+typedef val_t (*abstract_collection___Collection___is_empty_t)(val_t p0);
 #define LOCATE_abstract_collection___Collection___length "abstract_collection::Collection::length"
-typedef val_t (* abstract_collection___Collection___has_t)(val_t  self, val_t  param0);
-val_t abstract_collection___Collection___has(val_t  self, val_t  param0);
+val_t abstract_collection___Collection___length(val_t p0);
+typedef val_t (*abstract_collection___Collection___length_t)(val_t p0);
 #define LOCATE_abstract_collection___Collection___has "abstract_collection::Collection::has"
-typedef val_t (* abstract_collection___Collection___has_only_t)(val_t  self, val_t  param0);
-val_t abstract_collection___Collection___has_only(val_t  self, val_t  param0);
+val_t abstract_collection___Collection___has(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___Collection___has_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Collection___has_only "abstract_collection::Collection::has_only"
-typedef val_t (* abstract_collection___Collection___count_t)(val_t  self, val_t  param0);
-val_t abstract_collection___Collection___count(val_t  self, val_t  param0);
+val_t abstract_collection___Collection___has_only(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___Collection___has_only_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Collection___count "abstract_collection::Collection::count"
-typedef val_t (* abstract_collection___Collection___first_t)(val_t  self);
-val_t abstract_collection___Collection___first(val_t  self);
+val_t abstract_collection___Collection___count(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___Collection___count_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Collection___first "abstract_collection::Collection::first"
-typedef val_t (* abstract_collection___NaiveCollection___is_empty_t)(val_t  self);
-val_t abstract_collection___NaiveCollection___is_empty(val_t  self);
+val_t abstract_collection___Collection___first(val_t p0);
+typedef val_t (*abstract_collection___Collection___first_t)(val_t p0);
 #define LOCATE_abstract_collection___NaiveCollection___is_empty "abstract_collection::NaiveCollection::(abstract_collection::Collection::is_empty)"
-typedef val_t (* abstract_collection___NaiveCollection___length_t)(val_t  self);
-val_t abstract_collection___NaiveCollection___length(val_t  self);
+val_t abstract_collection___NaiveCollection___is_empty(val_t p0);
+typedef val_t (*abstract_collection___NaiveCollection___is_empty_t)(val_t p0);
 #define LOCATE_abstract_collection___NaiveCollection___length "abstract_collection::NaiveCollection::(abstract_collection::Collection::length)"
-typedef val_t (* abstract_collection___NaiveCollection___has_t)(val_t  self, val_t  param0);
-val_t abstract_collection___NaiveCollection___has(val_t  self, val_t  param0);
+val_t abstract_collection___NaiveCollection___length(val_t p0);
+typedef val_t (*abstract_collection___NaiveCollection___length_t)(val_t p0);
 #define LOCATE_abstract_collection___NaiveCollection___has "abstract_collection::NaiveCollection::(abstract_collection::Collection::has)"
-typedef val_t (* abstract_collection___NaiveCollection___has_only_t)(val_t  self, val_t  param0);
-val_t abstract_collection___NaiveCollection___has_only(val_t  self, val_t  param0);
+val_t abstract_collection___NaiveCollection___has(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___NaiveCollection___has_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___NaiveCollection___has_only "abstract_collection::NaiveCollection::(abstract_collection::Collection::has_only)"
-typedef val_t (* abstract_collection___NaiveCollection___count_t)(val_t  self, val_t  param0);
-val_t abstract_collection___NaiveCollection___count(val_t  self, val_t  param0);
+val_t abstract_collection___NaiveCollection___has_only(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___NaiveCollection___has_only_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___NaiveCollection___count "abstract_collection::NaiveCollection::(abstract_collection::Collection::count)"
-typedef val_t (* abstract_collection___NaiveCollection___first_t)(val_t  self);
-val_t abstract_collection___NaiveCollection___first(val_t  self);
+val_t abstract_collection___NaiveCollection___count(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___NaiveCollection___count_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___NaiveCollection___first "abstract_collection::NaiveCollection::(abstract_collection::Collection::first)"
-typedef val_t (* abstract_collection___Iterator___item_t)(val_t  self);
-val_t abstract_collection___Iterator___item(val_t  self);
+val_t abstract_collection___NaiveCollection___first(val_t p0);
+typedef val_t (*abstract_collection___NaiveCollection___first_t)(val_t p0);
 #define LOCATE_abstract_collection___Iterator___item "abstract_collection::Iterator::item"
-typedef void (* abstract_collection___Iterator___next_t)(val_t  self);
-void abstract_collection___Iterator___next(val_t  self);
+val_t abstract_collection___Iterator___item(val_t p0);
+typedef val_t (*abstract_collection___Iterator___item_t)(val_t p0);
 #define LOCATE_abstract_collection___Iterator___next "abstract_collection::Iterator::next"
-typedef val_t (* abstract_collection___Iterator___is_ok_t)(val_t  self);
-val_t abstract_collection___Iterator___is_ok(val_t  self);
+void abstract_collection___Iterator___next(val_t p0);
+typedef void (*abstract_collection___Iterator___next_t)(val_t p0);
 #define LOCATE_abstract_collection___Iterator___is_ok "abstract_collection::Iterator::is_ok"
-typedef val_t (* abstract_collection___Container___iterator_t)(val_t  self);
-val_t abstract_collection___Container___iterator(val_t  self);
+val_t abstract_collection___Iterator___is_ok(val_t p0);
+typedef val_t (*abstract_collection___Iterator___is_ok_t)(val_t p0);
 #define LOCATE_abstract_collection___Container___iterator "abstract_collection::Container::(abstract_collection::Collection::iterator)"
-typedef val_t (* abstract_collection___Container___is_empty_t)(val_t  self);
-val_t abstract_collection___Container___is_empty(val_t  self);
+val_t abstract_collection___Container___iterator(val_t p0);
+typedef val_t (*abstract_collection___Container___iterator_t)(val_t p0);
 #define LOCATE_abstract_collection___Container___is_empty "abstract_collection::Container::(abstract_collection::Collection::is_empty)"
-typedef val_t (* abstract_collection___Container___length_t)(val_t  self);
-val_t abstract_collection___Container___length(val_t  self);
+val_t abstract_collection___Container___is_empty(val_t p0);
+typedef val_t (*abstract_collection___Container___is_empty_t)(val_t p0);
 #define LOCATE_abstract_collection___Container___length "abstract_collection::Container::(abstract_collection::Collection::length)"
-typedef val_t (* abstract_collection___Container___has_t)(val_t  self, val_t  param0);
-val_t abstract_collection___Container___has(val_t  self, val_t  param0);
+val_t abstract_collection___Container___length(val_t p0);
+typedef val_t (*abstract_collection___Container___length_t)(val_t p0);
 #define LOCATE_abstract_collection___Container___has "abstract_collection::Container::(abstract_collection::Collection::has)"
-typedef val_t (* abstract_collection___Container___has_only_t)(val_t  self, val_t  param0);
-val_t abstract_collection___Container___has_only(val_t  self, val_t  param0);
+val_t abstract_collection___Container___has(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___Container___has_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Container___has_only "abstract_collection::Container::(abstract_collection::Collection::has_only)"
-typedef val_t (* abstract_collection___Container___count_t)(val_t  self, val_t  param0);
-val_t abstract_collection___Container___count(val_t  self, val_t  param0);
+val_t abstract_collection___Container___has_only(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___Container___has_only_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Container___count "abstract_collection::Container::(abstract_collection::Collection::count)"
-typedef val_t (* abstract_collection___Container___first_t)(val_t  self);
-val_t abstract_collection___Container___first(val_t  self);
+val_t abstract_collection___Container___count(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___Container___count_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Container___first "abstract_collection::Container::(abstract_collection::Collection::first)"
-typedef void (* abstract_collection___Container___init_t)(val_t  self, val_t  param0, int* init_table);
-void abstract_collection___Container___init(val_t  self, val_t  param0, int* init_table);
+val_t abstract_collection___Container___first(val_t p0);
+typedef val_t (*abstract_collection___Container___first_t)(val_t p0);
 #define LOCATE_abstract_collection___Container___init "abstract_collection::Container::init"
+void abstract_collection___Container___init(val_t p0, val_t p1, int* init_table);
+typedef void (*abstract_collection___Container___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_Container_abstract_collection___Container___init(val_t p0);
-typedef val_t (* abstract_collection___Container___item_t)(val_t  self);
-val_t abstract_collection___Container___item(val_t  self);
 #define LOCATE_abstract_collection___Container___item "abstract_collection::Container::item"
-typedef void (* abstract_collection___Container___item__eq_t)(val_t  self, val_t  param0);
-void abstract_collection___Container___item__eq(val_t  self, val_t  param0);
+val_t abstract_collection___Container___item(val_t p0);
+typedef val_t (*abstract_collection___Container___item_t)(val_t p0);
 #define LOCATE_abstract_collection___Container___item__eq "abstract_collection::Container::item="
-typedef val_t (* abstract_collection___ContainerIterator___item_t)(val_t  self);
-val_t abstract_collection___ContainerIterator___item(val_t  self);
+void abstract_collection___Container___item__eq(val_t p0, val_t p1);
+typedef void (*abstract_collection___Container___item__eq_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___ContainerIterator___item "abstract_collection::ContainerIterator::(abstract_collection::Iterator::item)"
-typedef void (* abstract_collection___ContainerIterator___next_t)(val_t  self);
-void abstract_collection___ContainerIterator___next(val_t  self);
+val_t abstract_collection___ContainerIterator___item(val_t p0);
+typedef val_t (*abstract_collection___ContainerIterator___item_t)(val_t p0);
 #define LOCATE_abstract_collection___ContainerIterator___next "abstract_collection::ContainerIterator::(abstract_collection::Iterator::next)"
-typedef val_t (* abstract_collection___ContainerIterator___is_ok_t)(val_t  self);
-val_t abstract_collection___ContainerIterator___is_ok(val_t  self);
+void abstract_collection___ContainerIterator___next(val_t p0);
+typedef void (*abstract_collection___ContainerIterator___next_t)(val_t p0);
 #define LOCATE_abstract_collection___ContainerIterator___is_ok "abstract_collection::ContainerIterator::(abstract_collection::Iterator::is_ok)"
-typedef void (* abstract_collection___ContainerIterator___init_t)(val_t  self, val_t  param0, int* init_table);
-void abstract_collection___ContainerIterator___init(val_t  self, val_t  param0, int* init_table);
+val_t abstract_collection___ContainerIterator___is_ok(val_t p0);
+typedef val_t (*abstract_collection___ContainerIterator___is_ok_t)(val_t p0);
 #define LOCATE_abstract_collection___ContainerIterator___init "abstract_collection::ContainerIterator::init"
+void abstract_collection___ContainerIterator___init(val_t p0, val_t p1, int* init_table);
+typedef void (*abstract_collection___ContainerIterator___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_ContainerIterator_abstract_collection___ContainerIterator___init(val_t p0);
-typedef void (* abstract_collection___RemovableCollection___clear_t)(val_t  self);
-void abstract_collection___RemovableCollection___clear(val_t  self);
 #define LOCATE_abstract_collection___RemovableCollection___clear "abstract_collection::RemovableCollection::clear"
-typedef void (* abstract_collection___RemovableCollection___remove_t)(val_t  self, val_t  param0);
-void abstract_collection___RemovableCollection___remove(val_t  self, val_t  param0);
+void abstract_collection___RemovableCollection___clear(val_t p0);
+typedef void (*abstract_collection___RemovableCollection___clear_t)(val_t p0);
 #define LOCATE_abstract_collection___RemovableCollection___remove "abstract_collection::RemovableCollection::remove"
-typedef void (* abstract_collection___RemovableCollection___remove_all_t)(val_t  self, val_t  param0);
-void abstract_collection___RemovableCollection___remove_all(val_t  self, val_t  param0);
+void abstract_collection___RemovableCollection___remove(val_t p0, val_t p1);
+typedef void (*abstract_collection___RemovableCollection___remove_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___RemovableCollection___remove_all "abstract_collection::RemovableCollection::remove_all"
-typedef void (* abstract_collection___SimpleCollection___add_t)(val_t  self, val_t  param0);
-void abstract_collection___SimpleCollection___add(val_t  self, val_t  param0);
+void abstract_collection___RemovableCollection___remove_all(val_t p0, val_t p1);
+typedef void (*abstract_collection___RemovableCollection___remove_all_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___SimpleCollection___add "abstract_collection::SimpleCollection::add"
-typedef void (* abstract_collection___SimpleCollection___add_all_t)(val_t  self, val_t  param0);
-void abstract_collection___SimpleCollection___add_all(val_t  self, val_t  param0);
+void abstract_collection___SimpleCollection___add(val_t p0, val_t p1);
+typedef void (*abstract_collection___SimpleCollection___add_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___SimpleCollection___add_all "abstract_collection::SimpleCollection::add_all"
-typedef val_t (* abstract_collection___Set___has_only_t)(val_t  self, val_t  param0);
-val_t abstract_collection___Set___has_only(val_t  self, val_t  param0);
+void abstract_collection___SimpleCollection___add_all(val_t p0, val_t p1);
+typedef void (*abstract_collection___SimpleCollection___add_all_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Set___has_only "abstract_collection::Set::(abstract_collection::Collection::has_only)"
-typedef val_t (* abstract_collection___Set___count_t)(val_t  self, val_t  param0);
-val_t abstract_collection___Set___count(val_t  self, val_t  param0);
+val_t abstract_collection___Set___has_only(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___Set___has_only_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Set___count "abstract_collection::Set::(abstract_collection::Collection::count)"
-typedef void (* abstract_collection___Set___remove_all_t)(val_t  self, val_t  param0);
-void abstract_collection___Set___remove_all(val_t  self, val_t  param0);
+val_t abstract_collection___Set___count(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___Set___count_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Set___remove_all "abstract_collection::Set::(abstract_collection::RemovableCollection::remove_all)"
-typedef val_t (* abstract_collection___MapRead___iterator_t)(val_t  self);
-val_t abstract_collection___MapRead___iterator(val_t  self);
+void abstract_collection___Set___remove_all(val_t p0, val_t p1);
+typedef void (*abstract_collection___Set___remove_all_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___MapRead___iterator "abstract_collection::MapRead::(abstract_collection::Collection::iterator)"
-typedef val_t (* abstract_collection___MapRead_____bra_t)(val_t  self, val_t  param0);
-val_t abstract_collection___MapRead_____bra(val_t  self, val_t  param0);
+val_t abstract_collection___MapRead___iterator(val_t p0);
+typedef val_t (*abstract_collection___MapRead___iterator_t)(val_t p0);
 #define LOCATE_abstract_collection___MapRead_____bra "abstract_collection::MapRead::[]"
-typedef val_t (* abstract_collection___MapRead___has_key_t)(val_t  self, val_t  param0);
-val_t abstract_collection___MapRead___has_key(val_t  self, val_t  param0);
+val_t abstract_collection___MapRead_____bra(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___MapRead_____bra_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___MapRead___has_key "abstract_collection::MapRead::has_key"
-typedef void (* abstract_collection___Map_____braeq_t)(val_t  self, val_t  param0, val_t  param1);
-void abstract_collection___Map_____braeq(val_t  self, val_t  param0, val_t  param1);
+val_t abstract_collection___MapRead___has_key(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___MapRead___has_key_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Map_____braeq "abstract_collection::Map::[]="
-typedef void (* abstract_collection___Map___remove_at_t)(val_t  self, val_t  param0);
-void abstract_collection___Map___remove_at(val_t  self, val_t  param0);
+void abstract_collection___Map_____braeq(val_t p0, val_t p1, val_t p2);
+typedef void (*abstract_collection___Map_____braeq_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_abstract_collection___Map___remove_at "abstract_collection::Map::remove_at"
-typedef void (* abstract_collection___Map___recover_with_t)(val_t  self, val_t  param0);
-void abstract_collection___Map___recover_with(val_t  self, val_t  param0);
+void abstract_collection___Map___remove_at(val_t p0, val_t p1);
+typedef void (*abstract_collection___Map___remove_at_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Map___recover_with "abstract_collection::Map::recover_with"
-typedef val_t (* abstract_collection___MapIterator___key_t)(val_t  self);
-val_t abstract_collection___MapIterator___key(val_t  self);
+void abstract_collection___Map___recover_with(val_t p0, val_t p1);
+typedef void (*abstract_collection___Map___recover_with_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___MapIterator___key "abstract_collection::MapIterator::key"
-typedef val_t (* abstract_collection___IndexedCollectionRead___iterator_t)(val_t  self);
-val_t abstract_collection___IndexedCollectionRead___iterator(val_t  self);
-#define LOCATE_abstract_collection___IndexedCollectionRead___iterator "abstract_collection::IndexedCollectionRead::(abstract_collection::Collection::iterator)"
-typedef val_t (* abstract_collection___IndexedCollectionRead___first_t)(val_t  self);
-val_t abstract_collection___IndexedCollectionRead___first(val_t  self);
-#define LOCATE_abstract_collection___IndexedCollectionRead___first "abstract_collection::IndexedCollectionRead::(abstract_collection::Collection::first)"
-typedef val_t (* abstract_collection___IndexedCollectionRead___last_t)(val_t  self);
-val_t abstract_collection___IndexedCollectionRead___last(val_t  self);
-#define LOCATE_abstract_collection___IndexedCollectionRead___last "abstract_collection::IndexedCollectionRead::last"
-typedef val_t (* abstract_collection___IndexedCollectionRead___index_of_t)(val_t  self, val_t  param0);
-val_t abstract_collection___IndexedCollectionRead___index_of(val_t  self, val_t  param0);
-#define LOCATE_abstract_collection___IndexedCollectionRead___index_of "abstract_collection::IndexedCollectionRead::index_of"
-typedef void (* abstract_collection___IndexedCollection___add_t)(val_t  self, val_t  param0);
-void abstract_collection___IndexedCollection___add(val_t  self, val_t  param0);
-#define LOCATE_abstract_collection___IndexedCollection___add "abstract_collection::IndexedCollection::(abstract_collection::SimpleCollection::add)"
-typedef void (* abstract_collection___IndexedCollection___first__eq_t)(val_t  self, val_t  param0);
-void abstract_collection___IndexedCollection___first__eq(val_t  self, val_t  param0);
-#define LOCATE_abstract_collection___IndexedCollection___first__eq "abstract_collection::IndexedCollection::first="
-typedef void (* abstract_collection___IndexedCollection___last__eq_t)(val_t  self, val_t  param0);
-void abstract_collection___IndexedCollection___last__eq(val_t  self, val_t  param0);
-#define LOCATE_abstract_collection___IndexedCollection___last__eq "abstract_collection::IndexedCollection::last="
-typedef void (* abstract_collection___IndexedCollection___push_t)(val_t  self, val_t  param0);
-void abstract_collection___IndexedCollection___push(val_t  self, val_t  param0);
-#define LOCATE_abstract_collection___IndexedCollection___push "abstract_collection::IndexedCollection::push"
-typedef void (* abstract_collection___IndexedCollection___append_t)(val_t  self, val_t  param0);
-void abstract_collection___IndexedCollection___append(val_t  self, val_t  param0);
-#define LOCATE_abstract_collection___IndexedCollection___append "abstract_collection::IndexedCollection::append"
-typedef val_t (* abstract_collection___IndexedCollection___pop_t)(val_t  self);
-val_t abstract_collection___IndexedCollection___pop(val_t  self);
-#define LOCATE_abstract_collection___IndexedCollection___pop "abstract_collection::IndexedCollection::pop"
-typedef void (* abstract_collection___IndexedCollection___unshift_t)(val_t  self, val_t  param0);
-void abstract_collection___IndexedCollection___unshift(val_t  self, val_t  param0);
-#define LOCATE_abstract_collection___IndexedCollection___unshift "abstract_collection::IndexedCollection::unshift"
-typedef val_t (* abstract_collection___IndexedCollection___shift_t)(val_t  self);
-val_t abstract_collection___IndexedCollection___shift(val_t  self);
-#define LOCATE_abstract_collection___IndexedCollection___shift "abstract_collection::IndexedCollection::shift"
-typedef val_t (* abstract_collection___IndexedIterator___key_t)(val_t  self);
-val_t abstract_collection___IndexedIterator___key(val_t  self);
+val_t abstract_collection___MapIterator___key(val_t p0);
+typedef val_t (*abstract_collection___MapIterator___key_t)(val_t p0);
+#define LOCATE_abstract_collection___SequenceRead___iterator "abstract_collection::SequenceRead::(abstract_collection::Collection::iterator)"
+val_t abstract_collection___SequenceRead___iterator(val_t p0);
+typedef val_t (*abstract_collection___SequenceRead___iterator_t)(val_t p0);
+#define LOCATE_abstract_collection___SequenceRead___first "abstract_collection::SequenceRead::(abstract_collection::Collection::first)"
+val_t abstract_collection___SequenceRead___first(val_t p0);
+typedef val_t (*abstract_collection___SequenceRead___first_t)(val_t p0);
+#define LOCATE_abstract_collection___SequenceRead___last "abstract_collection::SequenceRead::last"
+val_t abstract_collection___SequenceRead___last(val_t p0);
+typedef val_t (*abstract_collection___SequenceRead___last_t)(val_t p0);
+#define LOCATE_abstract_collection___SequenceRead___index_of "abstract_collection::SequenceRead::index_of"
+val_t abstract_collection___SequenceRead___index_of(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___SequenceRead___index_of_t)(val_t p0, val_t p1);
+#define LOCATE_abstract_collection___Sequence___add "abstract_collection::Sequence::(abstract_collection::SimpleCollection::add)"
+void abstract_collection___Sequence___add(val_t p0, val_t p1);
+typedef void (*abstract_collection___Sequence___add_t)(val_t p0, val_t p1);
+#define LOCATE_abstract_collection___Sequence___first__eq "abstract_collection::Sequence::first="
+void abstract_collection___Sequence___first__eq(val_t p0, val_t p1);
+typedef void (*abstract_collection___Sequence___first__eq_t)(val_t p0, val_t p1);
+#define LOCATE_abstract_collection___Sequence___last__eq "abstract_collection::Sequence::last="
+void abstract_collection___Sequence___last__eq(val_t p0, val_t p1);
+typedef void (*abstract_collection___Sequence___last__eq_t)(val_t p0, val_t p1);
+#define LOCATE_abstract_collection___Sequence___push "abstract_collection::Sequence::push"
+void abstract_collection___Sequence___push(val_t p0, val_t p1);
+typedef void (*abstract_collection___Sequence___push_t)(val_t p0, val_t p1);
+#define LOCATE_abstract_collection___Sequence___append "abstract_collection::Sequence::append"
+void abstract_collection___Sequence___append(val_t p0, val_t p1);
+typedef void (*abstract_collection___Sequence___append_t)(val_t p0, val_t p1);
+#define LOCATE_abstract_collection___Sequence___pop "abstract_collection::Sequence::pop"
+val_t abstract_collection___Sequence___pop(val_t p0);
+typedef val_t (*abstract_collection___Sequence___pop_t)(val_t p0);
+#define LOCATE_abstract_collection___Sequence___unshift "abstract_collection::Sequence::unshift"
+void abstract_collection___Sequence___unshift(val_t p0, val_t p1);
+typedef void (*abstract_collection___Sequence___unshift_t)(val_t p0, val_t p1);
+#define LOCATE_abstract_collection___Sequence___shift "abstract_collection::Sequence::shift"
+val_t abstract_collection___Sequence___shift(val_t p0);
+typedef val_t (*abstract_collection___Sequence___shift_t)(val_t p0);
 #define LOCATE_abstract_collection___IndexedIterator___key "abstract_collection::IndexedIterator::(abstract_collection::MapIterator::key)"
-typedef val_t (* abstract_collection___IndexedIterator___index_t)(val_t  self);
-val_t abstract_collection___IndexedIterator___index(val_t  self);
+val_t abstract_collection___IndexedIterator___key(val_t p0);
+typedef val_t (*abstract_collection___IndexedIterator___key_t)(val_t p0);
 #define LOCATE_abstract_collection___IndexedIterator___index "abstract_collection::IndexedIterator::index"
-typedef val_t (* abstract_collection___CoupleMap_____bra_t)(val_t  self, val_t  param0);
-val_t abstract_collection___CoupleMap_____bra(val_t  self, val_t  param0);
+val_t abstract_collection___IndexedIterator___index(val_t p0);
+typedef val_t (*abstract_collection___IndexedIterator___index_t)(val_t p0);
 #define LOCATE_abstract_collection___CoupleMap_____bra "abstract_collection::CoupleMap::(abstract_collection::MapRead::[])"
-typedef val_t (* abstract_collection___CoupleMap___has_key_t)(val_t  self, val_t  param0);
-val_t abstract_collection___CoupleMap___has_key(val_t  self, val_t  param0);
+val_t abstract_collection___CoupleMap_____bra(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___CoupleMap_____bra_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___CoupleMap___has_key "abstract_collection::CoupleMap::(abstract_collection::MapRead::has_key)"
-typedef val_t (* abstract_collection___CoupleMap___couple_at_t)(val_t  self, val_t  param0);
-val_t abstract_collection___CoupleMap___couple_at(val_t  self, val_t  param0);
+val_t abstract_collection___CoupleMap___has_key(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___CoupleMap___has_key_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___CoupleMap___couple_at "abstract_collection::CoupleMap::couple_at"
-typedef val_t (* abstract_collection___CoupleMapIterator___item_t)(val_t  self);
-val_t abstract_collection___CoupleMapIterator___item(val_t  self);
+val_t abstract_collection___CoupleMap___couple_at(val_t p0, val_t p1);
+typedef val_t (*abstract_collection___CoupleMap___couple_at_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___CoupleMapIterator___item "abstract_collection::CoupleMapIterator::(abstract_collection::Iterator::item)"
-typedef void (* abstract_collection___CoupleMapIterator___next_t)(val_t  self);
-void abstract_collection___CoupleMapIterator___next(val_t  self);
+val_t abstract_collection___CoupleMapIterator___item(val_t p0);
+typedef val_t (*abstract_collection___CoupleMapIterator___item_t)(val_t p0);
 #define LOCATE_abstract_collection___CoupleMapIterator___next "abstract_collection::CoupleMapIterator::(abstract_collection::Iterator::next)"
-typedef val_t (* abstract_collection___CoupleMapIterator___is_ok_t)(val_t  self);
-val_t abstract_collection___CoupleMapIterator___is_ok(val_t  self);
+void abstract_collection___CoupleMapIterator___next(val_t p0);
+typedef void (*abstract_collection___CoupleMapIterator___next_t)(val_t p0);
 #define LOCATE_abstract_collection___CoupleMapIterator___is_ok "abstract_collection::CoupleMapIterator::(abstract_collection::Iterator::is_ok)"
-typedef val_t (* abstract_collection___CoupleMapIterator___key_t)(val_t  self);
-val_t abstract_collection___CoupleMapIterator___key(val_t  self);
+val_t abstract_collection___CoupleMapIterator___is_ok(val_t p0);
+typedef val_t (*abstract_collection___CoupleMapIterator___is_ok_t)(val_t p0);
 #define LOCATE_abstract_collection___CoupleMapIterator___key "abstract_collection::CoupleMapIterator::(abstract_collection::MapIterator::key)"
-typedef void (* abstract_collection___CoupleMapIterator___init_t)(val_t  self, val_t  param0, int* init_table);
-void abstract_collection___CoupleMapIterator___init(val_t  self, val_t  param0, int* init_table);
+val_t abstract_collection___CoupleMapIterator___key(val_t p0);
+typedef val_t (*abstract_collection___CoupleMapIterator___key_t)(val_t p0);
 #define LOCATE_abstract_collection___CoupleMapIterator___init "abstract_collection::CoupleMapIterator::init"
+void abstract_collection___CoupleMapIterator___init(val_t p0, val_t p1, int* init_table);
+typedef void (*abstract_collection___CoupleMapIterator___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_CoupleMapIterator_abstract_collection___CoupleMapIterator___init(val_t p0);
-typedef val_t (* abstract_collection___Couple___first_t)(val_t  self);
-val_t abstract_collection___Couple___first(val_t  self);
 #define LOCATE_abstract_collection___Couple___first "abstract_collection::Couple::first"
-typedef void (* abstract_collection___Couple___first__eq_t)(val_t  self, val_t  param0);
-void abstract_collection___Couple___first__eq(val_t  self, val_t  param0);
+val_t abstract_collection___Couple___first(val_t p0);
+typedef val_t (*abstract_collection___Couple___first_t)(val_t p0);
 #define LOCATE_abstract_collection___Couple___first__eq "abstract_collection::Couple::first="
-typedef val_t (* abstract_collection___Couple___second_t)(val_t  self);
-val_t abstract_collection___Couple___second(val_t  self);
+void abstract_collection___Couple___first__eq(val_t p0, val_t p1);
+typedef void (*abstract_collection___Couple___first__eq_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Couple___second "abstract_collection::Couple::second"
-typedef void (* abstract_collection___Couple___second__eq_t)(val_t  self, val_t  param0);
-void abstract_collection___Couple___second__eq(val_t  self, val_t  param0);
+val_t abstract_collection___Couple___second(val_t p0);
+typedef val_t (*abstract_collection___Couple___second_t)(val_t p0);
 #define LOCATE_abstract_collection___Couple___second__eq "abstract_collection::Couple::second="
-typedef void (* abstract_collection___Couple___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void abstract_collection___Couple___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void abstract_collection___Couple___second__eq(val_t p0, val_t p1);
+typedef void (*abstract_collection___Couple___second__eq_t)(val_t p0, val_t p1);
 #define LOCATE_abstract_collection___Couple___init "abstract_collection::Couple::init"
+void abstract_collection___Couple___init(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*abstract_collection___Couple___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_Couple_abstract_collection___Couple___init(val_t p0, val_t p1);
 #endif

@@ -8,15 +8,9 @@ extern const classtable_elt_t VFT_Lexer[];
 extern const char *LOCATE_lexer;
 extern const int SFT_lexer[];
 #define ATTR_lexer___Token____text(recv) ATTR(recv, (SFT_lexer[0] + 0))
-#define ATTR_lexer___Token____filename(recv) ATTR(recv, (SFT_lexer[0] + 1))
-#define ATTR_lexer___Token____line(recv) ATTR(recv, (SFT_lexer[0] + 2))
-#define ATTR_lexer___Token____pos(recv) ATTR(recv, (SFT_lexer[0] + 3))
 #define CALL_lexer___Token___text(recv) ((lexer___Token___text_t)CALL((recv), (SFT_lexer[1] + 0)))
 #define CALL_lexer___Token___text__eq(recv) ((lexer___Token___text__eq_t)CALL((recv), (SFT_lexer[1] + 1)))
-#define CALL_lexer___Token___filename(recv) ((lexer___Token___filename_t)CALL((recv), (SFT_lexer[1] + 2)))
-#define CALL_lexer___Token___line(recv) ((lexer___Token___line_t)CALL((recv), (SFT_lexer[1] + 3)))
-#define CALL_lexer___Token___pos(recv) ((lexer___Token___pos_t)CALL((recv), (SFT_lexer[1] + 4)))
-#define CALL_lexer___Token___parser_index(recv) ((lexer___Token___parser_index_t)CALL((recv), (SFT_lexer[1] + 5)))
+#define CALL_lexer___Token___parser_index(recv) ((lexer___Token___parser_index_t)CALL((recv), (SFT_lexer[1] + 2)))
 #define CALL_lexer___TEol___init_tk(recv) ((lexer___TEol___init_tk_t)CALL((recv), (SFT_lexer[2] + 0)))
 #define CALL_lexer___TComment___init_tk(recv) ((lexer___TComment___init_tk_t)CALL((recv), (SFT_lexer[3] + 0)))
 #define CALL_lexer___TKwpackage___init_tk(recv) ((lexer___TKwpackage___init_tk_t)CALL((recv), (SFT_lexer[4] + 0)))
@@ -29,23 +23,23 @@ extern const int SFT_lexer[];
 #define CALL_lexer___TKwend___init_tk(recv) ((lexer___TKwend___init_tk_t)CALL((recv), (SFT_lexer[11] + 0)))
 #define CALL_lexer___TKwmeth___init_tk(recv) ((lexer___TKwmeth___init_tk_t)CALL((recv), (SFT_lexer[12] + 0)))
 #define CALL_lexer___TKwtype___init_tk(recv) ((lexer___TKwtype___init_tk_t)CALL((recv), (SFT_lexer[13] + 0)))
-#define CALL_lexer___TKwattr___init_tk(recv) ((lexer___TKwattr___init_tk_t)CALL((recv), (SFT_lexer[14] + 0)))
-#define CALL_lexer___TKwinit___init_tk(recv) ((lexer___TKwinit___init_tk_t)CALL((recv), (SFT_lexer[15] + 0)))
-#define CALL_lexer___TKwredef___init_tk(recv) ((lexer___TKwredef___init_tk_t)CALL((recv), (SFT_lexer[16] + 0)))
-#define CALL_lexer___TKwis___init_tk(recv) ((lexer___TKwis___init_tk_t)CALL((recv), (SFT_lexer[17] + 0)))
-#define CALL_lexer___TKwdo___init_tk(recv) ((lexer___TKwdo___init_tk_t)CALL((recv), (SFT_lexer[18] + 0)))
-#define CALL_lexer___TKwreadable___init_tk(recv) ((lexer___TKwreadable___init_tk_t)CALL((recv), (SFT_lexer[19] + 0)))
-#define CALL_lexer___TKwwritable___init_tk(recv) ((lexer___TKwwritable___init_tk_t)CALL((recv), (SFT_lexer[20] + 0)))
-#define CALL_lexer___TKwvar___init_tk(recv) ((lexer___TKwvar___init_tk_t)CALL((recv), (SFT_lexer[21] + 0)))
-#define CALL_lexer___TKwintern___init_tk(recv) ((lexer___TKwintern___init_tk_t)CALL((recv), (SFT_lexer[22] + 0)))
-#define CALL_lexer___TKwextern___init_tk(recv) ((lexer___TKwextern___init_tk_t)CALL((recv), (SFT_lexer[23] + 0)))
-#define CALL_lexer___TKwprotected___init_tk(recv) ((lexer___TKwprotected___init_tk_t)CALL((recv), (SFT_lexer[24] + 0)))
-#define CALL_lexer___TKwprivate___init_tk(recv) ((lexer___TKwprivate___init_tk_t)CALL((recv), (SFT_lexer[25] + 0)))
-#define CALL_lexer___TKwintrude___init_tk(recv) ((lexer___TKwintrude___init_tk_t)CALL((recv), (SFT_lexer[26] + 0)))
-#define CALL_lexer___TKwif___init_tk(recv) ((lexer___TKwif___init_tk_t)CALL((recv), (SFT_lexer[27] + 0)))
-#define CALL_lexer___TKwthen___init_tk(recv) ((lexer___TKwthen___init_tk_t)CALL((recv), (SFT_lexer[28] + 0)))
-#define CALL_lexer___TKwelse___init_tk(recv) ((lexer___TKwelse___init_tk_t)CALL((recv), (SFT_lexer[29] + 0)))
-#define CALL_lexer___TKwwhile___init_tk(recv) ((lexer___TKwwhile___init_tk_t)CALL((recv), (SFT_lexer[30] + 0)))
+#define CALL_lexer___TKwinit___init_tk(recv) ((lexer___TKwinit___init_tk_t)CALL((recv), (SFT_lexer[14] + 0)))
+#define CALL_lexer___TKwredef___init_tk(recv) ((lexer___TKwredef___init_tk_t)CALL((recv), (SFT_lexer[15] + 0)))
+#define CALL_lexer___TKwis___init_tk(recv) ((lexer___TKwis___init_tk_t)CALL((recv), (SFT_lexer[16] + 0)))
+#define CALL_lexer___TKwdo___init_tk(recv) ((lexer___TKwdo___init_tk_t)CALL((recv), (SFT_lexer[17] + 0)))
+#define CALL_lexer___TKwreadable___init_tk(recv) ((lexer___TKwreadable___init_tk_t)CALL((recv), (SFT_lexer[18] + 0)))
+#define CALL_lexer___TKwwritable___init_tk(recv) ((lexer___TKwwritable___init_tk_t)CALL((recv), (SFT_lexer[19] + 0)))
+#define CALL_lexer___TKwvar___init_tk(recv) ((lexer___TKwvar___init_tk_t)CALL((recv), (SFT_lexer[20] + 0)))
+#define CALL_lexer___TKwintern___init_tk(recv) ((lexer___TKwintern___init_tk_t)CALL((recv), (SFT_lexer[21] + 0)))
+#define CALL_lexer___TKwextern___init_tk(recv) ((lexer___TKwextern___init_tk_t)CALL((recv), (SFT_lexer[22] + 0)))
+#define CALL_lexer___TKwprotected___init_tk(recv) ((lexer___TKwprotected___init_tk_t)CALL((recv), (SFT_lexer[23] + 0)))
+#define CALL_lexer___TKwprivate___init_tk(recv) ((lexer___TKwprivate___init_tk_t)CALL((recv), (SFT_lexer[24] + 0)))
+#define CALL_lexer___TKwintrude___init_tk(recv) ((lexer___TKwintrude___init_tk_t)CALL((recv), (SFT_lexer[25] + 0)))
+#define CALL_lexer___TKwif___init_tk(recv) ((lexer___TKwif___init_tk_t)CALL((recv), (SFT_lexer[26] + 0)))
+#define CALL_lexer___TKwthen___init_tk(recv) ((lexer___TKwthen___init_tk_t)CALL((recv), (SFT_lexer[27] + 0)))
+#define CALL_lexer___TKwelse___init_tk(recv) ((lexer___TKwelse___init_tk_t)CALL((recv), (SFT_lexer[28] + 0)))
+#define CALL_lexer___TKwwhile___init_tk(recv) ((lexer___TKwwhile___init_tk_t)CALL((recv), (SFT_lexer[29] + 0)))
+#define CALL_lexer___TKwloop___init_tk(recv) ((lexer___TKwloop___init_tk_t)CALL((recv), (SFT_lexer[30] + 0)))
 #define CALL_lexer___TKwfor___init_tk(recv) ((lexer___TKwfor___init_tk_t)CALL((recv), (SFT_lexer[31] + 0)))
 #define CALL_lexer___TKwin___init_tk(recv) ((lexer___TKwin___init_tk_t)CALL((recv), (SFT_lexer[32] + 0)))
 #define CALL_lexer___TKwand___init_tk(recv) ((lexer___TKwand___init_tk_t)CALL((recv), (SFT_lexer[33] + 0)))
@@ -65,9 +59,9 @@ extern const int SFT_lexer[];
 #define CALL_lexer___TKwfalse___init_tk(recv) ((lexer___TKwfalse___init_tk_t)CALL((recv), (SFT_lexer[47] + 0)))
 #define CALL_lexer___TKwnull___init_tk(recv) ((lexer___TKwnull___init_tk_t)CALL((recv), (SFT_lexer[48] + 0)))
 #define CALL_lexer___TKwas___init_tk(recv) ((lexer___TKwas___init_tk_t)CALL((recv), (SFT_lexer[49] + 0)))
-#define CALL_lexer___TKwwith___init_tk(recv) ((lexer___TKwwith___init_tk_t)CALL((recv), (SFT_lexer[50] + 0)))
-#define CALL_lexer___TKwnullable___init_tk(recv) ((lexer___TKwnullable___init_tk_t)CALL((recv), (SFT_lexer[51] + 0)))
-#define CALL_lexer___TKwisset___init_tk(recv) ((lexer___TKwisset___init_tk_t)CALL((recv), (SFT_lexer[52] + 0)))
+#define CALL_lexer___TKwnullable___init_tk(recv) ((lexer___TKwnullable___init_tk_t)CALL((recv), (SFT_lexer[50] + 0)))
+#define CALL_lexer___TKwisset___init_tk(recv) ((lexer___TKwisset___init_tk_t)CALL((recv), (SFT_lexer[51] + 0)))
+#define CALL_lexer___TKwlabel___init_tk(recv) ((lexer___TKwlabel___init_tk_t)CALL((recv), (SFT_lexer[52] + 0)))
 #define CALL_lexer___TOpar___init_tk(recv) ((lexer___TOpar___init_tk_t)CALL((recv), (SFT_lexer[53] + 0)))
 #define CALL_lexer___TCpar___init_tk(recv) ((lexer___TCpar___init_tk_t)CALL((recv), (SFT_lexer[54] + 0)))
 #define CALL_lexer___TObra___init_tk(recv) ((lexer___TObra___init_tk_t)CALL((recv), (SFT_lexer[55] + 0)))
@@ -93,809 +87,809 @@ extern const int SFT_lexer[];
 #define CALL_lexer___TGt___init_tk(recv) ((lexer___TGt___init_tk_t)CALL((recv), (SFT_lexer[75] + 0)))
 #define CALL_lexer___TGe___init_tk(recv) ((lexer___TGe___init_tk_t)CALL((recv), (SFT_lexer[76] + 0)))
 #define CALL_lexer___TStarship___init_tk(recv) ((lexer___TStarship___init_tk_t)CALL((recv), (SFT_lexer[77] + 0)))
-#define CALL_lexer___TClassid___init_tk(recv) ((lexer___TClassid___init_tk_t)CALL((recv), (SFT_lexer[78] + 0)))
-#define CALL_lexer___TId___init_tk(recv) ((lexer___TId___init_tk_t)CALL((recv), (SFT_lexer[79] + 0)))
-#define CALL_lexer___TAttrid___init_tk(recv) ((lexer___TAttrid___init_tk_t)CALL((recv), (SFT_lexer[80] + 0)))
-#define CALL_lexer___TNumber___init_tk(recv) ((lexer___TNumber___init_tk_t)CALL((recv), (SFT_lexer[81] + 0)))
-#define CALL_lexer___TFloat___init_tk(recv) ((lexer___TFloat___init_tk_t)CALL((recv), (SFT_lexer[82] + 0)))
-#define CALL_lexer___TChar___init_tk(recv) ((lexer___TChar___init_tk_t)CALL((recv), (SFT_lexer[83] + 0)))
-#define CALL_lexer___TString___init_tk(recv) ((lexer___TString___init_tk_t)CALL((recv), (SFT_lexer[84] + 0)))
-#define CALL_lexer___TStartString___init_tk(recv) ((lexer___TStartString___init_tk_t)CALL((recv), (SFT_lexer[85] + 0)))
-#define CALL_lexer___TMidString___init_tk(recv) ((lexer___TMidString___init_tk_t)CALL((recv), (SFT_lexer[86] + 0)))
-#define CALL_lexer___TEndString___init_tk(recv) ((lexer___TEndString___init_tk_t)CALL((recv), (SFT_lexer[87] + 0)))
-#define CALL_lexer___EOF___init(recv) ((lexer___EOF___init_t)CALL((recv), (SFT_lexer[88] + 0)))
-#define ATTR_lexer___PError____message(recv) ATTR(recv, (SFT_lexer[89] + 0))
-#define CALL_lexer___PError___message(recv) ((lexer___PError___message_t)CALL((recv), (SFT_lexer[90] + 0)))
-#define CALL_lexer___PError___message__eq(recv) ((lexer___PError___message__eq_t)CALL((recv), (SFT_lexer[90] + 1)))
-#define CALL_lexer___PError___init_error(recv) ((lexer___PError___init_error_t)CALL((recv), (SFT_lexer[90] + 2)))
-#define ID_Lexer (SFT_lexer[91])
-#define COLOR_Lexer (SFT_lexer[92])
-#define ATTR_lexer___Lexer____token(recv) ATTR(recv, (SFT_lexer[93] + 0))
-#define ATTR_lexer___Lexer____state(recv) ATTR(recv, (SFT_lexer[93] + 1))
-#define ATTR_lexer___Lexer____filename(recv) ATTR(recv, (SFT_lexer[93] + 2))
-#define ATTR_lexer___Lexer____stream(recv) ATTR(recv, (SFT_lexer[93] + 3))
-#define ATTR_lexer___Lexer____stream_buf(recv) ATTR(recv, (SFT_lexer[93] + 4))
-#define ATTR_lexer___Lexer____stream_pos(recv) ATTR(recv, (SFT_lexer[93] + 5))
-#define ATTR_lexer___Lexer____line(recv) ATTR(recv, (SFT_lexer[93] + 6))
-#define ATTR_lexer___Lexer____pos(recv) ATTR(recv, (SFT_lexer[93] + 7))
-#define ATTR_lexer___Lexer____cr(recv) ATTR(recv, (SFT_lexer[93] + 8))
-#define ATTR_lexer___Lexer____eof(recv) ATTR(recv, (SFT_lexer[93] + 9))
-#define ATTR_lexer___Lexer____text(recv) ATTR(recv, (SFT_lexer[93] + 10))
-#define ATTR_lexer___Lexer____goto_table(recv) ATTR(recv, (SFT_lexer[93] + 11))
-#define ATTR_lexer___Lexer____accept_table(recv) ATTR(recv, (SFT_lexer[93] + 12))
-#define INIT_TABLE_POS_Lexer (SFT_lexer[94] + 0)
-#define CALL_lexer___Lexer___filename(recv) ((lexer___Lexer___filename_t)CALL((recv), (SFT_lexer[94] + 1)))
-#define CALL_lexer___Lexer___state_initial(recv) ((lexer___Lexer___state_initial_t)CALL((recv), (SFT_lexer[94] + 2)))
-#define CALL_lexer___Lexer___init(recv) ((lexer___Lexer___init_t)CALL((recv), (SFT_lexer[94] + 3)))
-#define CALL_lexer___Lexer___peek(recv) ((lexer___Lexer___peek_t)CALL((recv), (SFT_lexer[94] + 4)))
-#define CALL_lexer___Lexer___next(recv) ((lexer___Lexer___next_t)CALL((recv), (SFT_lexer[94] + 5)))
-#define CALL_lexer___Lexer___get_token(recv) ((lexer___Lexer___get_token_t)CALL((recv), (SFT_lexer[94] + 6)))
-#define CALL_lexer___Lexer___get_char(recv) ((lexer___Lexer___get_char_t)CALL((recv), (SFT_lexer[94] + 7)))
-#define CALL_lexer___Lexer___push_back(recv) ((lexer___Lexer___push_back_t)CALL((recv), (SFT_lexer[94] + 8)))
-#define CALL_lexer___Lexer___build_goto_table(recv) ((lexer___Lexer___build_goto_table_t)CALL((recv), (SFT_lexer[94] + 9)))
-#define CALL_lexer___Lexer___nil_array(recv) ((lexer___Lexer___nil_array_t)CALL((recv), (SFT_lexer[94] + 10)))
-#define CALL_lexer___Lexer___build_accept_table(recv) ((lexer___Lexer___build_accept_table_t)CALL((recv), (SFT_lexer[94] + 11)))
-typedef val_t (* lexer___Token___to_s_t)(val_t  self);
-val_t lexer___Token___to_s(val_t  self);
+#define CALL_lexer___TBang___init_tk(recv) ((lexer___TBang___init_tk_t)CALL((recv), (SFT_lexer[78] + 0)))
+#define CALL_lexer___TClassid___init_tk(recv) ((lexer___TClassid___init_tk_t)CALL((recv), (SFT_lexer[79] + 0)))
+#define CALL_lexer___TId___init_tk(recv) ((lexer___TId___init_tk_t)CALL((recv), (SFT_lexer[80] + 0)))
+#define CALL_lexer___TAttrid___init_tk(recv) ((lexer___TAttrid___init_tk_t)CALL((recv), (SFT_lexer[81] + 0)))
+#define CALL_lexer___TNumber___init_tk(recv) ((lexer___TNumber___init_tk_t)CALL((recv), (SFT_lexer[82] + 0)))
+#define CALL_lexer___TFloat___init_tk(recv) ((lexer___TFloat___init_tk_t)CALL((recv), (SFT_lexer[83] + 0)))
+#define CALL_lexer___TChar___init_tk(recv) ((lexer___TChar___init_tk_t)CALL((recv), (SFT_lexer[84] + 0)))
+#define CALL_lexer___TString___init_tk(recv) ((lexer___TString___init_tk_t)CALL((recv), (SFT_lexer[85] + 0)))
+#define CALL_lexer___TStartString___init_tk(recv) ((lexer___TStartString___init_tk_t)CALL((recv), (SFT_lexer[86] + 0)))
+#define CALL_lexer___TMidString___init_tk(recv) ((lexer___TMidString___init_tk_t)CALL((recv), (SFT_lexer[87] + 0)))
+#define CALL_lexer___TEndString___init_tk(recv) ((lexer___TEndString___init_tk_t)CALL((recv), (SFT_lexer[88] + 0)))
+#define CALL_lexer___EOF___init(recv) ((lexer___EOF___init_t)CALL((recv), (SFT_lexer[89] + 0)))
+#define ATTR_lexer___AError____message(recv) ATTR(recv, (SFT_lexer[90] + 0))
+#define CALL_lexer___AError___message(recv) ((lexer___AError___message_t)CALL((recv), (SFT_lexer[91] + 0)))
+#define CALL_lexer___AError___message__eq(recv) ((lexer___AError___message__eq_t)CALL((recv), (SFT_lexer[91] + 1)))
+#define CALL_lexer___AError___init_error(recv) ((lexer___AError___init_error_t)CALL((recv), (SFT_lexer[91] + 2)))
+#define ID_Lexer (SFT_lexer[92])
+#define COLOR_Lexer (SFT_lexer[93])
+#define ATTR_lexer___Lexer____token(recv) ATTR(recv, (SFT_lexer[94] + 0))
+#define ATTR_lexer___Lexer____state(recv) ATTR(recv, (SFT_lexer[94] + 1))
+#define ATTR_lexer___Lexer____filename(recv) ATTR(recv, (SFT_lexer[94] + 2))
+#define ATTR_lexer___Lexer____stream(recv) ATTR(recv, (SFT_lexer[94] + 3))
+#define ATTR_lexer___Lexer____stream_buf(recv) ATTR(recv, (SFT_lexer[94] + 4))
+#define ATTR_lexer___Lexer____stream_pos(recv) ATTR(recv, (SFT_lexer[94] + 5))
+#define ATTR_lexer___Lexer____line(recv) ATTR(recv, (SFT_lexer[94] + 6))
+#define ATTR_lexer___Lexer____pos(recv) ATTR(recv, (SFT_lexer[94] + 7))
+#define ATTR_lexer___Lexer____cr(recv) ATTR(recv, (SFT_lexer[94] + 8))
+#define ATTR_lexer___Lexer____eof(recv) ATTR(recv, (SFT_lexer[94] + 9))
+#define ATTR_lexer___Lexer____text(recv) ATTR(recv, (SFT_lexer[94] + 10))
+#define ATTR_lexer___Lexer____goto_table(recv) ATTR(recv, (SFT_lexer[94] + 11))
+#define ATTR_lexer___Lexer____accept_table(recv) ATTR(recv, (SFT_lexer[94] + 12))
+#define INIT_TABLE_POS_Lexer (SFT_lexer[95] + 0)
+#define CALL_lexer___Lexer___filename(recv) ((lexer___Lexer___filename_t)CALL((recv), (SFT_lexer[95] + 1)))
+#define CALL_lexer___Lexer___state_initial(recv) ((lexer___Lexer___state_initial_t)CALL((recv), (SFT_lexer[95] + 2)))
+#define CALL_lexer___Lexer___init(recv) ((lexer___Lexer___init_t)CALL((recv), (SFT_lexer[95] + 3)))
+#define CALL_lexer___Lexer___peek(recv) ((lexer___Lexer___peek_t)CALL((recv), (SFT_lexer[95] + 4)))
+#define CALL_lexer___Lexer___next(recv) ((lexer___Lexer___next_t)CALL((recv), (SFT_lexer[95] + 5)))
+#define CALL_lexer___Lexer___get_token(recv) ((lexer___Lexer___get_token_t)CALL((recv), (SFT_lexer[95] + 6)))
+#define CALL_lexer___Lexer___get_char(recv) ((lexer___Lexer___get_char_t)CALL((recv), (SFT_lexer[95] + 7)))
+#define CALL_lexer___Lexer___push_back(recv) ((lexer___Lexer___push_back_t)CALL((recv), (SFT_lexer[95] + 8)))
+#define CALL_lexer___Lexer___build_goto_table(recv) ((lexer___Lexer___build_goto_table_t)CALL((recv), (SFT_lexer[95] + 9)))
+#define CALL_lexer___Lexer___nil_array(recv) ((lexer___Lexer___nil_array_t)CALL((recv), (SFT_lexer[95] + 10)))
+#define CALL_lexer___Lexer___build_accept_table(recv) ((lexer___Lexer___build_accept_table_t)CALL((recv), (SFT_lexer[95] + 11)))
 #define LOCATE_lexer___Token___to_s "lexer::Token::(string::Object::to_s)"
-val_t NEW_Token_parser_nodes___PNode___init();
-typedef val_t (* lexer___Token___text_t)(val_t  self);
-val_t lexer___Token___text(val_t  self);
+val_t lexer___Token___to_s(val_t p0);
+typedef val_t (*lexer___Token___to_s_t)(val_t p0);
+val_t NEW_Token_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___Token___text "lexer::Token::text"
-typedef void (* lexer___Token___text__eq_t)(val_t  self, val_t  param0);
-void lexer___Token___text__eq(val_t  self, val_t  param0);
+val_t lexer___Token___text(val_t p0);
+typedef val_t (*lexer___Token___text_t)(val_t p0);
 #define LOCATE_lexer___Token___text__eq "lexer::Token::text="
-typedef val_t (* lexer___Token___filename_t)(val_t  self);
-val_t lexer___Token___filename(val_t  self);
-#define LOCATE_lexer___Token___filename "lexer::Token::filename"
-typedef val_t (* lexer___Token___line_t)(val_t  self);
-val_t lexer___Token___line(val_t  self);
-#define LOCATE_lexer___Token___line "lexer::Token::line"
-typedef val_t (* lexer___Token___pos_t)(val_t  self);
-val_t lexer___Token___pos(val_t  self);
-#define LOCATE_lexer___Token___pos "lexer::Token::pos"
-typedef val_t (* lexer___Token___parser_index_t)(val_t  self);
-val_t lexer___Token___parser_index(val_t  self);
+void lexer___Token___text__eq(val_t p0, val_t p1);
+typedef void (*lexer___Token___text__eq_t)(val_t p0, val_t p1);
 #define LOCATE_lexer___Token___parser_index "lexer::Token::parser_index"
-val_t NEW_TEol_parser_nodes___PNode___init();
-typedef val_t (* lexer___TEol___parser_index_t)(val_t  self);
-val_t lexer___TEol___parser_index(val_t  self);
+val_t lexer___Token___parser_index(val_t p0);
+typedef val_t (*lexer___Token___parser_index_t)(val_t p0);
+val_t NEW_TEol_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TEol___parser_index "lexer::TEol::(lexer::Token::parser_index)"
-typedef void (* lexer___TEol___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TEol___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TEol___parser_index(val_t p0);
+typedef val_t (*lexer___TEol___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TEol___init_tk "lexer::TEol::init_tk"
-val_t NEW_TEol_lexer___TEol___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TComment_parser_nodes___PNode___init();
-typedef val_t (* lexer___TComment___parser_index_t)(val_t  self);
-val_t lexer___TComment___parser_index(val_t  self);
+void lexer___TEol___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TEol___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TEol_lexer___TEol___init_tk(val_t p0, val_t p1);
+val_t NEW_TComment_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TComment___parser_index "lexer::TComment::(lexer::Token::parser_index)"
-typedef void (* lexer___TComment___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TComment___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TComment___parser_index(val_t p0);
+typedef val_t (*lexer___TComment___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TComment___init_tk "lexer::TComment::init_tk"
-val_t NEW_TComment_lexer___TComment___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TKwpackage_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwpackage___parser_index_t)(val_t  self);
-val_t lexer___TKwpackage___parser_index(val_t  self);
+void lexer___TComment___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TComment___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TComment_lexer___TComment___init_tk(val_t p0, val_t p1);
+val_t NEW_TKwpackage_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwpackage___parser_index "lexer::TKwpackage::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwpackage___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwpackage___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwpackage___parser_index(val_t p0);
+typedef val_t (*lexer___TKwpackage___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwpackage___init_tk "lexer::TKwpackage::init_tk"
-val_t NEW_TKwpackage_lexer___TKwpackage___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwimport_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwimport___parser_index_t)(val_t  self);
-val_t lexer___TKwimport___parser_index(val_t  self);
+void lexer___TKwpackage___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwpackage___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwpackage_lexer___TKwpackage___init_tk(val_t p0);
+val_t NEW_TKwimport_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwimport___parser_index "lexer::TKwimport::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwimport___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwimport___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwimport___parser_index(val_t p0);
+typedef val_t (*lexer___TKwimport___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwimport___init_tk "lexer::TKwimport::init_tk"
-val_t NEW_TKwimport_lexer___TKwimport___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwclass_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwclass___parser_index_t)(val_t  self);
-val_t lexer___TKwclass___parser_index(val_t  self);
+void lexer___TKwimport___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwimport___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwimport_lexer___TKwimport___init_tk(val_t p0);
+val_t NEW_TKwclass_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwclass___parser_index "lexer::TKwclass::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwclass___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwclass___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwclass___parser_index(val_t p0);
+typedef val_t (*lexer___TKwclass___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwclass___init_tk "lexer::TKwclass::init_tk"
-val_t NEW_TKwclass_lexer___TKwclass___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwabstract_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwabstract___parser_index_t)(val_t  self);
-val_t lexer___TKwabstract___parser_index(val_t  self);
+void lexer___TKwclass___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwclass___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwclass_lexer___TKwclass___init_tk(val_t p0);
+val_t NEW_TKwabstract_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwabstract___parser_index "lexer::TKwabstract::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwabstract___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwabstract___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwabstract___parser_index(val_t p0);
+typedef val_t (*lexer___TKwabstract___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwabstract___init_tk "lexer::TKwabstract::init_tk"
-val_t NEW_TKwabstract_lexer___TKwabstract___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwinterface_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwinterface___parser_index_t)(val_t  self);
-val_t lexer___TKwinterface___parser_index(val_t  self);
+void lexer___TKwabstract___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwabstract___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwabstract_lexer___TKwabstract___init_tk(val_t p0);
+val_t NEW_TKwinterface_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwinterface___parser_index "lexer::TKwinterface::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwinterface___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwinterface___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwinterface___parser_index(val_t p0);
+typedef val_t (*lexer___TKwinterface___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwinterface___init_tk "lexer::TKwinterface::init_tk"
-val_t NEW_TKwinterface_lexer___TKwinterface___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwuniversal_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwuniversal___parser_index_t)(val_t  self);
-val_t lexer___TKwuniversal___parser_index(val_t  self);
+void lexer___TKwinterface___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwinterface___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwinterface_lexer___TKwinterface___init_tk(val_t p0);
+val_t NEW_TKwuniversal_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwuniversal___parser_index "lexer::TKwuniversal::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwuniversal___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwuniversal___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwuniversal___parser_index(val_t p0);
+typedef val_t (*lexer___TKwuniversal___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwuniversal___init_tk "lexer::TKwuniversal::init_tk"
-val_t NEW_TKwuniversal_lexer___TKwuniversal___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwspecial_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwspecial___parser_index_t)(val_t  self);
-val_t lexer___TKwspecial___parser_index(val_t  self);
+void lexer___TKwuniversal___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwuniversal___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwuniversal_lexer___TKwuniversal___init_tk(val_t p0);
+val_t NEW_TKwspecial_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwspecial___parser_index "lexer::TKwspecial::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwspecial___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwspecial___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwspecial___parser_index(val_t p0);
+typedef val_t (*lexer___TKwspecial___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwspecial___init_tk "lexer::TKwspecial::init_tk"
-val_t NEW_TKwspecial_lexer___TKwspecial___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwend_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwend___parser_index_t)(val_t  self);
-val_t lexer___TKwend___parser_index(val_t  self);
+void lexer___TKwspecial___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwspecial___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwspecial_lexer___TKwspecial___init_tk(val_t p0);
+val_t NEW_TKwend_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwend___parser_index "lexer::TKwend::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwend___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwend___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwend___parser_index(val_t p0);
+typedef val_t (*lexer___TKwend___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwend___init_tk "lexer::TKwend::init_tk"
-val_t NEW_TKwend_lexer___TKwend___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwmeth_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwmeth___parser_index_t)(val_t  self);
-val_t lexer___TKwmeth___parser_index(val_t  self);
+void lexer___TKwend___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwend___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwend_lexer___TKwend___init_tk(val_t p0);
+val_t NEW_TKwmeth_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwmeth___parser_index "lexer::TKwmeth::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwmeth___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TKwmeth___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TKwmeth___parser_index(val_t p0);
+typedef val_t (*lexer___TKwmeth___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwmeth___init_tk "lexer::TKwmeth::init_tk"
-val_t NEW_TKwmeth_lexer___TKwmeth___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TKwtype_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwtype___parser_index_t)(val_t  self);
-val_t lexer___TKwtype___parser_index(val_t  self);
+void lexer___TKwmeth___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwmeth___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwmeth_lexer___TKwmeth___init_tk(val_t p0);
+val_t NEW_TKwtype_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwtype___parser_index "lexer::TKwtype::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwtype___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwtype___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwtype___parser_index(val_t p0);
+typedef val_t (*lexer___TKwtype___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwtype___init_tk "lexer::TKwtype::init_tk"
-val_t NEW_TKwtype_lexer___TKwtype___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwattr_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwattr___parser_index_t)(val_t  self);
-val_t lexer___TKwattr___parser_index(val_t  self);
-#define LOCATE_lexer___TKwattr___parser_index "lexer::TKwattr::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwattr___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwattr___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-#define LOCATE_lexer___TKwattr___init_tk "lexer::TKwattr::init_tk"
-val_t NEW_TKwattr_lexer___TKwattr___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwinit_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwinit___parser_index_t)(val_t  self);
-val_t lexer___TKwinit___parser_index(val_t  self);
+void lexer___TKwtype___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwtype___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwtype_lexer___TKwtype___init_tk(val_t p0);
+val_t NEW_TKwinit_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwinit___parser_index "lexer::TKwinit::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwinit___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwinit___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwinit___parser_index(val_t p0);
+typedef val_t (*lexer___TKwinit___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwinit___init_tk "lexer::TKwinit::init_tk"
-val_t NEW_TKwinit_lexer___TKwinit___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwredef_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwredef___parser_index_t)(val_t  self);
-val_t lexer___TKwredef___parser_index(val_t  self);
+void lexer___TKwinit___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwinit___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwinit_lexer___TKwinit___init_tk(val_t p0);
+val_t NEW_TKwredef_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwredef___parser_index "lexer::TKwredef::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwredef___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwredef___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwredef___parser_index(val_t p0);
+typedef val_t (*lexer___TKwredef___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwredef___init_tk "lexer::TKwredef::init_tk"
-val_t NEW_TKwredef_lexer___TKwredef___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwis_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwis___parser_index_t)(val_t  self);
-val_t lexer___TKwis___parser_index(val_t  self);
+void lexer___TKwredef___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwredef___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwredef_lexer___TKwredef___init_tk(val_t p0);
+val_t NEW_TKwis_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwis___parser_index "lexer::TKwis::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwis___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwis___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwis___parser_index(val_t p0);
+typedef val_t (*lexer___TKwis___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwis___init_tk "lexer::TKwis::init_tk"
-val_t NEW_TKwis_lexer___TKwis___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwdo_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwdo___parser_index_t)(val_t  self);
-val_t lexer___TKwdo___parser_index(val_t  self);
+void lexer___TKwis___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwis___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwis_lexer___TKwis___init_tk(val_t p0);
+val_t NEW_TKwdo_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwdo___parser_index "lexer::TKwdo::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwdo___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwdo___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwdo___parser_index(val_t p0);
+typedef val_t (*lexer___TKwdo___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwdo___init_tk "lexer::TKwdo::init_tk"
-val_t NEW_TKwdo_lexer___TKwdo___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwreadable_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwreadable___parser_index_t)(val_t  self);
-val_t lexer___TKwreadable___parser_index(val_t  self);
+void lexer___TKwdo___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwdo___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwdo_lexer___TKwdo___init_tk(val_t p0);
+val_t NEW_TKwreadable_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwreadable___parser_index "lexer::TKwreadable::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwreadable___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwreadable___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwreadable___parser_index(val_t p0);
+typedef val_t (*lexer___TKwreadable___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwreadable___init_tk "lexer::TKwreadable::init_tk"
-val_t NEW_TKwreadable_lexer___TKwreadable___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwwritable_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwwritable___parser_index_t)(val_t  self);
-val_t lexer___TKwwritable___parser_index(val_t  self);
+void lexer___TKwreadable___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwreadable___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwreadable_lexer___TKwreadable___init_tk(val_t p0);
+val_t NEW_TKwwritable_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwwritable___parser_index "lexer::TKwwritable::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwwritable___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwwritable___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwwritable___parser_index(val_t p0);
+typedef val_t (*lexer___TKwwritable___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwwritable___init_tk "lexer::TKwwritable::init_tk"
-val_t NEW_TKwwritable_lexer___TKwwritable___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwvar_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwvar___parser_index_t)(val_t  self);
-val_t lexer___TKwvar___parser_index(val_t  self);
+void lexer___TKwwritable___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwwritable___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwwritable_lexer___TKwwritable___init_tk(val_t p0);
+val_t NEW_TKwvar_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwvar___parser_index "lexer::TKwvar::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwvar___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwvar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwvar___parser_index(val_t p0);
+typedef val_t (*lexer___TKwvar___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwvar___init_tk "lexer::TKwvar::init_tk"
-val_t NEW_TKwvar_lexer___TKwvar___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwintern_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwintern___parser_index_t)(val_t  self);
-val_t lexer___TKwintern___parser_index(val_t  self);
+void lexer___TKwvar___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwvar___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwvar_lexer___TKwvar___init_tk(val_t p0);
+val_t NEW_TKwintern_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwintern___parser_index "lexer::TKwintern::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwintern___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwintern___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwintern___parser_index(val_t p0);
+typedef val_t (*lexer___TKwintern___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwintern___init_tk "lexer::TKwintern::init_tk"
-val_t NEW_TKwintern_lexer___TKwintern___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwextern_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwextern___parser_index_t)(val_t  self);
-val_t lexer___TKwextern___parser_index(val_t  self);
+void lexer___TKwintern___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwintern___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwintern_lexer___TKwintern___init_tk(val_t p0);
+val_t NEW_TKwextern_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwextern___parser_index "lexer::TKwextern::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwextern___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwextern___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwextern___parser_index(val_t p0);
+typedef val_t (*lexer___TKwextern___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwextern___init_tk "lexer::TKwextern::init_tk"
-val_t NEW_TKwextern_lexer___TKwextern___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwprotected_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwprotected___parser_index_t)(val_t  self);
-val_t lexer___TKwprotected___parser_index(val_t  self);
+void lexer___TKwextern___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwextern___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwextern_lexer___TKwextern___init_tk(val_t p0);
+val_t NEW_TKwprotected_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwprotected___parser_index "lexer::TKwprotected::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwprotected___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwprotected___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwprotected___parser_index(val_t p0);
+typedef val_t (*lexer___TKwprotected___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwprotected___init_tk "lexer::TKwprotected::init_tk"
-val_t NEW_TKwprotected_lexer___TKwprotected___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwprivate_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwprivate___parser_index_t)(val_t  self);
-val_t lexer___TKwprivate___parser_index(val_t  self);
+void lexer___TKwprotected___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwprotected___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwprotected_lexer___TKwprotected___init_tk(val_t p0);
+val_t NEW_TKwprivate_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwprivate___parser_index "lexer::TKwprivate::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwprivate___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwprivate___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwprivate___parser_index(val_t p0);
+typedef val_t (*lexer___TKwprivate___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwprivate___init_tk "lexer::TKwprivate::init_tk"
-val_t NEW_TKwprivate_lexer___TKwprivate___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwintrude_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwintrude___parser_index_t)(val_t  self);
-val_t lexer___TKwintrude___parser_index(val_t  self);
+void lexer___TKwprivate___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwprivate___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwprivate_lexer___TKwprivate___init_tk(val_t p0);
+val_t NEW_TKwintrude_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwintrude___parser_index "lexer::TKwintrude::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwintrude___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwintrude___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwintrude___parser_index(val_t p0);
+typedef val_t (*lexer___TKwintrude___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwintrude___init_tk "lexer::TKwintrude::init_tk"
-val_t NEW_TKwintrude_lexer___TKwintrude___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwif_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwif___parser_index_t)(val_t  self);
-val_t lexer___TKwif___parser_index(val_t  self);
+void lexer___TKwintrude___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwintrude___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwintrude_lexer___TKwintrude___init_tk(val_t p0);
+val_t NEW_TKwif_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwif___parser_index "lexer::TKwif::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwif___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwif___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwif___parser_index(val_t p0);
+typedef val_t (*lexer___TKwif___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwif___init_tk "lexer::TKwif::init_tk"
-val_t NEW_TKwif_lexer___TKwif___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwthen_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwthen___parser_index_t)(val_t  self);
-val_t lexer___TKwthen___parser_index(val_t  self);
+void lexer___TKwif___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwif___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwif_lexer___TKwif___init_tk(val_t p0);
+val_t NEW_TKwthen_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwthen___parser_index "lexer::TKwthen::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwthen___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwthen___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwthen___parser_index(val_t p0);
+typedef val_t (*lexer___TKwthen___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwthen___init_tk "lexer::TKwthen::init_tk"
-val_t NEW_TKwthen_lexer___TKwthen___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwelse_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwelse___parser_index_t)(val_t  self);
-val_t lexer___TKwelse___parser_index(val_t  self);
+void lexer___TKwthen___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwthen___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwthen_lexer___TKwthen___init_tk(val_t p0);
+val_t NEW_TKwelse_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwelse___parser_index "lexer::TKwelse::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwelse___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwelse___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwelse___parser_index(val_t p0);
+typedef val_t (*lexer___TKwelse___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwelse___init_tk "lexer::TKwelse::init_tk"
-val_t NEW_TKwelse_lexer___TKwelse___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwwhile_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwwhile___parser_index_t)(val_t  self);
-val_t lexer___TKwwhile___parser_index(val_t  self);
+void lexer___TKwelse___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwelse___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwelse_lexer___TKwelse___init_tk(val_t p0);
+val_t NEW_TKwwhile_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwwhile___parser_index "lexer::TKwwhile::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwwhile___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwwhile___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwwhile___parser_index(val_t p0);
+typedef val_t (*lexer___TKwwhile___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwwhile___init_tk "lexer::TKwwhile::init_tk"
-val_t NEW_TKwwhile_lexer___TKwwhile___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwfor_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwfor___parser_index_t)(val_t  self);
-val_t lexer___TKwfor___parser_index(val_t  self);
+void lexer___TKwwhile___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwwhile___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwwhile_lexer___TKwwhile___init_tk(val_t p0);
+val_t NEW_TKwloop_parser_nodes___ANode___init(val_t p0);
+#define LOCATE_lexer___TKwloop___parser_index "lexer::TKwloop::(lexer::Token::parser_index)"
+val_t lexer___TKwloop___parser_index(val_t p0);
+typedef val_t (*lexer___TKwloop___parser_index_t)(val_t p0);
+#define LOCATE_lexer___TKwloop___init_tk "lexer::TKwloop::init_tk"
+void lexer___TKwloop___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwloop___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwloop_lexer___TKwloop___init_tk(val_t p0);
+val_t NEW_TKwfor_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwfor___parser_index "lexer::TKwfor::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwfor___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwfor___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwfor___parser_index(val_t p0);
+typedef val_t (*lexer___TKwfor___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwfor___init_tk "lexer::TKwfor::init_tk"
-val_t NEW_TKwfor_lexer___TKwfor___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwin_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwin___parser_index_t)(val_t  self);
-val_t lexer___TKwin___parser_index(val_t  self);
+void lexer___TKwfor___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwfor___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwfor_lexer___TKwfor___init_tk(val_t p0);
+val_t NEW_TKwin_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwin___parser_index "lexer::TKwin::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwin___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwin___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwin___parser_index(val_t p0);
+typedef val_t (*lexer___TKwin___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwin___init_tk "lexer::TKwin::init_tk"
-val_t NEW_TKwin_lexer___TKwin___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwand_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwand___parser_index_t)(val_t  self);
-val_t lexer___TKwand___parser_index(val_t  self);
+void lexer___TKwin___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwin___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwin_lexer___TKwin___init_tk(val_t p0);
+val_t NEW_TKwand_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwand___parser_index "lexer::TKwand::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwand___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwand___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwand___parser_index(val_t p0);
+typedef val_t (*lexer___TKwand___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwand___init_tk "lexer::TKwand::init_tk"
-val_t NEW_TKwand_lexer___TKwand___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwor_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwor___parser_index_t)(val_t  self);
-val_t lexer___TKwor___parser_index(val_t  self);
+void lexer___TKwand___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwand___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwand_lexer___TKwand___init_tk(val_t p0);
+val_t NEW_TKwor_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwor___parser_index "lexer::TKwor::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwor___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwor___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwor___parser_index(val_t p0);
+typedef val_t (*lexer___TKwor___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwor___init_tk "lexer::TKwor::init_tk"
-val_t NEW_TKwor_lexer___TKwor___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwnot_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwnot___parser_index_t)(val_t  self);
-val_t lexer___TKwnot___parser_index(val_t  self);
+void lexer___TKwor___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwor___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwor_lexer___TKwor___init_tk(val_t p0);
+val_t NEW_TKwnot_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwnot___parser_index "lexer::TKwnot::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwnot___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwnot___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwnot___parser_index(val_t p0);
+typedef val_t (*lexer___TKwnot___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwnot___init_tk "lexer::TKwnot::init_tk"
-val_t NEW_TKwnot_lexer___TKwnot___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwreturn_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwreturn___parser_index_t)(val_t  self);
-val_t lexer___TKwreturn___parser_index(val_t  self);
+void lexer___TKwnot___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwnot___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwnot_lexer___TKwnot___init_tk(val_t p0);
+val_t NEW_TKwreturn_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwreturn___parser_index "lexer::TKwreturn::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwreturn___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwreturn___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwreturn___parser_index(val_t p0);
+typedef val_t (*lexer___TKwreturn___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwreturn___init_tk "lexer::TKwreturn::init_tk"
-val_t NEW_TKwreturn_lexer___TKwreturn___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwcontinue_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwcontinue___parser_index_t)(val_t  self);
-val_t lexer___TKwcontinue___parser_index(val_t  self);
+void lexer___TKwreturn___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwreturn___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwreturn_lexer___TKwreturn___init_tk(val_t p0);
+val_t NEW_TKwcontinue_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwcontinue___parser_index "lexer::TKwcontinue::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwcontinue___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwcontinue___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwcontinue___parser_index(val_t p0);
+typedef val_t (*lexer___TKwcontinue___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwcontinue___init_tk "lexer::TKwcontinue::init_tk"
-val_t NEW_TKwcontinue_lexer___TKwcontinue___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwbreak_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwbreak___parser_index_t)(val_t  self);
-val_t lexer___TKwbreak___parser_index(val_t  self);
+void lexer___TKwcontinue___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwcontinue___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwcontinue_lexer___TKwcontinue___init_tk(val_t p0);
+val_t NEW_TKwbreak_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwbreak___parser_index "lexer::TKwbreak::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwbreak___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwbreak___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwbreak___parser_index(val_t p0);
+typedef val_t (*lexer___TKwbreak___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwbreak___init_tk "lexer::TKwbreak::init_tk"
-val_t NEW_TKwbreak_lexer___TKwbreak___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwabort_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwabort___parser_index_t)(val_t  self);
-val_t lexer___TKwabort___parser_index(val_t  self);
+void lexer___TKwbreak___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwbreak___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwbreak_lexer___TKwbreak___init_tk(val_t p0);
+val_t NEW_TKwabort_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwabort___parser_index "lexer::TKwabort::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwabort___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwabort___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwabort___parser_index(val_t p0);
+typedef val_t (*lexer___TKwabort___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwabort___init_tk "lexer::TKwabort::init_tk"
-val_t NEW_TKwabort_lexer___TKwabort___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwassert_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwassert___parser_index_t)(val_t  self);
-val_t lexer___TKwassert___parser_index(val_t  self);
+void lexer___TKwabort___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwabort___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwabort_lexer___TKwabort___init_tk(val_t p0);
+val_t NEW_TKwassert_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwassert___parser_index "lexer::TKwassert::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwassert___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwassert___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwassert___parser_index(val_t p0);
+typedef val_t (*lexer___TKwassert___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwassert___init_tk "lexer::TKwassert::init_tk"
-val_t NEW_TKwassert_lexer___TKwassert___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwnew_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwnew___parser_index_t)(val_t  self);
-val_t lexer___TKwnew___parser_index(val_t  self);
+void lexer___TKwassert___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwassert___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwassert_lexer___TKwassert___init_tk(val_t p0);
+val_t NEW_TKwnew_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwnew___parser_index "lexer::TKwnew::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwnew___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwnew___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwnew___parser_index(val_t p0);
+typedef val_t (*lexer___TKwnew___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwnew___init_tk "lexer::TKwnew::init_tk"
-val_t NEW_TKwnew_lexer___TKwnew___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwisa_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwisa___parser_index_t)(val_t  self);
-val_t lexer___TKwisa___parser_index(val_t  self);
+void lexer___TKwnew___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwnew___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwnew_lexer___TKwnew___init_tk(val_t p0);
+val_t NEW_TKwisa_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwisa___parser_index "lexer::TKwisa::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwisa___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwisa___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwisa___parser_index(val_t p0);
+typedef val_t (*lexer___TKwisa___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwisa___init_tk "lexer::TKwisa::init_tk"
-val_t NEW_TKwisa_lexer___TKwisa___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwonce_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwonce___parser_index_t)(val_t  self);
-val_t lexer___TKwonce___parser_index(val_t  self);
+void lexer___TKwisa___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwisa___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwisa_lexer___TKwisa___init_tk(val_t p0);
+val_t NEW_TKwonce_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwonce___parser_index "lexer::TKwonce::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwonce___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwonce___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwonce___parser_index(val_t p0);
+typedef val_t (*lexer___TKwonce___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwonce___init_tk "lexer::TKwonce::init_tk"
-val_t NEW_TKwonce_lexer___TKwonce___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwsuper_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwsuper___parser_index_t)(val_t  self);
-val_t lexer___TKwsuper___parser_index(val_t  self);
+void lexer___TKwonce___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwonce___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwonce_lexer___TKwonce___init_tk(val_t p0);
+val_t NEW_TKwsuper_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwsuper___parser_index "lexer::TKwsuper::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwsuper___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwsuper___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwsuper___parser_index(val_t p0);
+typedef val_t (*lexer___TKwsuper___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwsuper___init_tk "lexer::TKwsuper::init_tk"
-val_t NEW_TKwsuper_lexer___TKwsuper___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwself_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwself___parser_index_t)(val_t  self);
-val_t lexer___TKwself___parser_index(val_t  self);
+void lexer___TKwsuper___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwsuper___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwsuper_lexer___TKwsuper___init_tk(val_t p0);
+val_t NEW_TKwself_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwself___parser_index "lexer::TKwself::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwself___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwself___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwself___parser_index(val_t p0);
+typedef val_t (*lexer___TKwself___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwself___init_tk "lexer::TKwself::init_tk"
-val_t NEW_TKwself_lexer___TKwself___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwtrue_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwtrue___parser_index_t)(val_t  self);
-val_t lexer___TKwtrue___parser_index(val_t  self);
+void lexer___TKwself___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwself___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwself_lexer___TKwself___init_tk(val_t p0);
+val_t NEW_TKwtrue_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwtrue___parser_index "lexer::TKwtrue::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwtrue___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwtrue___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwtrue___parser_index(val_t p0);
+typedef val_t (*lexer___TKwtrue___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwtrue___init_tk "lexer::TKwtrue::init_tk"
-val_t NEW_TKwtrue_lexer___TKwtrue___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwfalse_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwfalse___parser_index_t)(val_t  self);
-val_t lexer___TKwfalse___parser_index(val_t  self);
+void lexer___TKwtrue___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwtrue___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwtrue_lexer___TKwtrue___init_tk(val_t p0);
+val_t NEW_TKwfalse_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwfalse___parser_index "lexer::TKwfalse::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwfalse___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwfalse___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwfalse___parser_index(val_t p0);
+typedef val_t (*lexer___TKwfalse___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwfalse___init_tk "lexer::TKwfalse::init_tk"
-val_t NEW_TKwfalse_lexer___TKwfalse___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwnull_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwnull___parser_index_t)(val_t  self);
-val_t lexer___TKwnull___parser_index(val_t  self);
+void lexer___TKwfalse___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwfalse___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwfalse_lexer___TKwfalse___init_tk(val_t p0);
+val_t NEW_TKwnull_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwnull___parser_index "lexer::TKwnull::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwnull___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwnull___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwnull___parser_index(val_t p0);
+typedef val_t (*lexer___TKwnull___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwnull___init_tk "lexer::TKwnull::init_tk"
-val_t NEW_TKwnull_lexer___TKwnull___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwas_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwas___parser_index_t)(val_t  self);
-val_t lexer___TKwas___parser_index(val_t  self);
+void lexer___TKwnull___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwnull___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwnull_lexer___TKwnull___init_tk(val_t p0);
+val_t NEW_TKwas_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwas___parser_index "lexer::TKwas::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwas___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwas___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwas___parser_index(val_t p0);
+typedef val_t (*lexer___TKwas___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwas___init_tk "lexer::TKwas::init_tk"
-val_t NEW_TKwas_lexer___TKwas___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwwith_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwwith___parser_index_t)(val_t  self);
-val_t lexer___TKwwith___parser_index(val_t  self);
-#define LOCATE_lexer___TKwwith___parser_index "lexer::TKwwith::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwwith___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwwith___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-#define LOCATE_lexer___TKwwith___init_tk "lexer::TKwwith::init_tk"
-val_t NEW_TKwwith_lexer___TKwwith___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwnullable_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwnullable___parser_index_t)(val_t  self);
-val_t lexer___TKwnullable___parser_index(val_t  self);
+void lexer___TKwas___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwas___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwas_lexer___TKwas___init_tk(val_t p0);
+val_t NEW_TKwnullable_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwnullable___parser_index "lexer::TKwnullable::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwnullable___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwnullable___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwnullable___parser_index(val_t p0);
+typedef val_t (*lexer___TKwnullable___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwnullable___init_tk "lexer::TKwnullable::init_tk"
-val_t NEW_TKwnullable_lexer___TKwnullable___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TKwisset_parser_nodes___PNode___init();
-typedef val_t (* lexer___TKwisset___parser_index_t)(val_t  self);
-val_t lexer___TKwisset___parser_index(val_t  self);
+void lexer___TKwnullable___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwnullable___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwnullable_lexer___TKwnullable___init_tk(val_t p0);
+val_t NEW_TKwisset_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TKwisset___parser_index "lexer::TKwisset::(lexer::Token::parser_index)"
-typedef void (* lexer___TKwisset___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TKwisset___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TKwisset___parser_index(val_t p0);
+typedef val_t (*lexer___TKwisset___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TKwisset___init_tk "lexer::TKwisset::init_tk"
-val_t NEW_TKwisset_lexer___TKwisset___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TOpar_parser_nodes___PNode___init();
-typedef val_t (* lexer___TOpar___parser_index_t)(val_t  self);
-val_t lexer___TOpar___parser_index(val_t  self);
+void lexer___TKwisset___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwisset___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwisset_lexer___TKwisset___init_tk(val_t p0);
+val_t NEW_TKwlabel_parser_nodes___ANode___init(val_t p0);
+#define LOCATE_lexer___TKwlabel___parser_index "lexer::TKwlabel::(lexer::Token::parser_index)"
+val_t lexer___TKwlabel___parser_index(val_t p0);
+typedef val_t (*lexer___TKwlabel___parser_index_t)(val_t p0);
+#define LOCATE_lexer___TKwlabel___init_tk "lexer::TKwlabel::init_tk"
+void lexer___TKwlabel___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TKwlabel___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TKwlabel_lexer___TKwlabel___init_tk(val_t p0);
+val_t NEW_TOpar_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TOpar___parser_index "lexer::TOpar::(lexer::Token::parser_index)"
-typedef void (* lexer___TOpar___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TOpar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TOpar___parser_index(val_t p0);
+typedef val_t (*lexer___TOpar___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TOpar___init_tk "lexer::TOpar::init_tk"
-val_t NEW_TOpar_lexer___TOpar___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TCpar_parser_nodes___PNode___init();
-typedef val_t (* lexer___TCpar___parser_index_t)(val_t  self);
-val_t lexer___TCpar___parser_index(val_t  self);
+void lexer___TOpar___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TOpar___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TOpar_lexer___TOpar___init_tk(val_t p0);
+val_t NEW_TCpar_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TCpar___parser_index "lexer::TCpar::(lexer::Token::parser_index)"
-typedef void (* lexer___TCpar___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TCpar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TCpar___parser_index(val_t p0);
+typedef val_t (*lexer___TCpar___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TCpar___init_tk "lexer::TCpar::init_tk"
-val_t NEW_TCpar_lexer___TCpar___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TObra_parser_nodes___PNode___init();
-typedef val_t (* lexer___TObra___parser_index_t)(val_t  self);
-val_t lexer___TObra___parser_index(val_t  self);
+void lexer___TCpar___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TCpar___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TCpar_lexer___TCpar___init_tk(val_t p0);
+val_t NEW_TObra_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TObra___parser_index "lexer::TObra::(lexer::Token::parser_index)"
-typedef void (* lexer___TObra___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TObra___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TObra___parser_index(val_t p0);
+typedef val_t (*lexer___TObra___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TObra___init_tk "lexer::TObra::init_tk"
-val_t NEW_TObra_lexer___TObra___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TCbra_parser_nodes___PNode___init();
-typedef val_t (* lexer___TCbra___parser_index_t)(val_t  self);
-val_t lexer___TCbra___parser_index(val_t  self);
+void lexer___TObra___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TObra___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TObra_lexer___TObra___init_tk(val_t p0);
+val_t NEW_TCbra_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TCbra___parser_index "lexer::TCbra::(lexer::Token::parser_index)"
-typedef void (* lexer___TCbra___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TCbra___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TCbra___parser_index(val_t p0);
+typedef val_t (*lexer___TCbra___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TCbra___init_tk "lexer::TCbra::init_tk"
-val_t NEW_TCbra_lexer___TCbra___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TComma_parser_nodes___PNode___init();
-typedef val_t (* lexer___TComma___parser_index_t)(val_t  self);
-val_t lexer___TComma___parser_index(val_t  self);
+void lexer___TCbra___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TCbra___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TCbra_lexer___TCbra___init_tk(val_t p0);
+val_t NEW_TComma_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TComma___parser_index "lexer::TComma::(lexer::Token::parser_index)"
-typedef void (* lexer___TComma___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TComma___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TComma___parser_index(val_t p0);
+typedef val_t (*lexer___TComma___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TComma___init_tk "lexer::TComma::init_tk"
-val_t NEW_TComma_lexer___TComma___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TColumn_parser_nodes___PNode___init();
-typedef val_t (* lexer___TColumn___parser_index_t)(val_t  self);
-val_t lexer___TColumn___parser_index(val_t  self);
+void lexer___TComma___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TComma___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TComma_lexer___TComma___init_tk(val_t p0);
+val_t NEW_TColumn_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TColumn___parser_index "lexer::TColumn::(lexer::Token::parser_index)"
-typedef void (* lexer___TColumn___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TColumn___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TColumn___parser_index(val_t p0);
+typedef val_t (*lexer___TColumn___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TColumn___init_tk "lexer::TColumn::init_tk"
-val_t NEW_TColumn_lexer___TColumn___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TQuad_parser_nodes___PNode___init();
-typedef val_t (* lexer___TQuad___parser_index_t)(val_t  self);
-val_t lexer___TQuad___parser_index(val_t  self);
+void lexer___TColumn___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TColumn___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TColumn_lexer___TColumn___init_tk(val_t p0);
+val_t NEW_TQuad_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TQuad___parser_index "lexer::TQuad::(lexer::Token::parser_index)"
-typedef void (* lexer___TQuad___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TQuad___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TQuad___parser_index(val_t p0);
+typedef val_t (*lexer___TQuad___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TQuad___init_tk "lexer::TQuad::init_tk"
-val_t NEW_TQuad_lexer___TQuad___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TAssign_parser_nodes___PNode___init();
-typedef val_t (* lexer___TAssign___parser_index_t)(val_t  self);
-val_t lexer___TAssign___parser_index(val_t  self);
+void lexer___TQuad___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TQuad___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TQuad_lexer___TQuad___init_tk(val_t p0);
+val_t NEW_TAssign_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TAssign___parser_index "lexer::TAssign::(lexer::Token::parser_index)"
-typedef void (* lexer___TAssign___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TAssign___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TAssign___parser_index(val_t p0);
+typedef val_t (*lexer___TAssign___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TAssign___init_tk "lexer::TAssign::init_tk"
-val_t NEW_TAssign_lexer___TAssign___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TPluseq_parser_nodes___PNode___init();
-typedef val_t (* lexer___TPluseq___parser_index_t)(val_t  self);
-val_t lexer___TPluseq___parser_index(val_t  self);
+void lexer___TAssign___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TAssign___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TAssign_lexer___TAssign___init_tk(val_t p0);
+val_t NEW_TPluseq_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TPluseq___parser_index "lexer::TPluseq::(lexer::Token::parser_index)"
-typedef void (* lexer___TPluseq___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TPluseq___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TPluseq___parser_index(val_t p0);
+typedef val_t (*lexer___TPluseq___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TPluseq___init_tk "lexer::TPluseq::init_tk"
-val_t NEW_TPluseq_lexer___TPluseq___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TMinuseq_parser_nodes___PNode___init();
-typedef val_t (* lexer___TMinuseq___parser_index_t)(val_t  self);
-val_t lexer___TMinuseq___parser_index(val_t  self);
+void lexer___TPluseq___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TPluseq___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TPluseq_lexer___TPluseq___init_tk(val_t p0);
+val_t NEW_TMinuseq_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TMinuseq___parser_index "lexer::TMinuseq::(lexer::Token::parser_index)"
-typedef void (* lexer___TMinuseq___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TMinuseq___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TMinuseq___parser_index(val_t p0);
+typedef val_t (*lexer___TMinuseq___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TMinuseq___init_tk "lexer::TMinuseq::init_tk"
-val_t NEW_TMinuseq_lexer___TMinuseq___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TDotdotdot_parser_nodes___PNode___init();
-typedef val_t (* lexer___TDotdotdot___parser_index_t)(val_t  self);
-val_t lexer___TDotdotdot___parser_index(val_t  self);
+void lexer___TMinuseq___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TMinuseq___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TMinuseq_lexer___TMinuseq___init_tk(val_t p0);
+val_t NEW_TDotdotdot_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TDotdotdot___parser_index "lexer::TDotdotdot::(lexer::Token::parser_index)"
-typedef void (* lexer___TDotdotdot___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TDotdotdot___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TDotdotdot___parser_index(val_t p0);
+typedef val_t (*lexer___TDotdotdot___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TDotdotdot___init_tk "lexer::TDotdotdot::init_tk"
-val_t NEW_TDotdotdot_lexer___TDotdotdot___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TDotdot_parser_nodes___PNode___init();
-typedef val_t (* lexer___TDotdot___parser_index_t)(val_t  self);
-val_t lexer___TDotdot___parser_index(val_t  self);
+void lexer___TDotdotdot___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TDotdotdot___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TDotdotdot_lexer___TDotdotdot___init_tk(val_t p0);
+val_t NEW_TDotdot_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TDotdot___parser_index "lexer::TDotdot::(lexer::Token::parser_index)"
-typedef void (* lexer___TDotdot___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TDotdot___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TDotdot___parser_index(val_t p0);
+typedef val_t (*lexer___TDotdot___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TDotdot___init_tk "lexer::TDotdot::init_tk"
-val_t NEW_TDotdot_lexer___TDotdot___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TDot_parser_nodes___PNode___init();
-typedef val_t (* lexer___TDot___parser_index_t)(val_t  self);
-val_t lexer___TDot___parser_index(val_t  self);
+void lexer___TDotdot___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TDotdot___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TDotdot_lexer___TDotdot___init_tk(val_t p0);
+val_t NEW_TDot_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TDot___parser_index "lexer::TDot::(lexer::Token::parser_index)"
-typedef void (* lexer___TDot___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TDot___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TDot___parser_index(val_t p0);
+typedef val_t (*lexer___TDot___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TDot___init_tk "lexer::TDot::init_tk"
-val_t NEW_TDot_lexer___TDot___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TPlus_parser_nodes___PNode___init();
-typedef val_t (* lexer___TPlus___parser_index_t)(val_t  self);
-val_t lexer___TPlus___parser_index(val_t  self);
+void lexer___TDot___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TDot___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TDot_lexer___TDot___init_tk(val_t p0);
+val_t NEW_TPlus_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TPlus___parser_index "lexer::TPlus::(lexer::Token::parser_index)"
-typedef void (* lexer___TPlus___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TPlus___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TPlus___parser_index(val_t p0);
+typedef val_t (*lexer___TPlus___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TPlus___init_tk "lexer::TPlus::init_tk"
-val_t NEW_TPlus_lexer___TPlus___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TMinus_parser_nodes___PNode___init();
-typedef val_t (* lexer___TMinus___parser_index_t)(val_t  self);
-val_t lexer___TMinus___parser_index(val_t  self);
+void lexer___TPlus___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TPlus___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TPlus_lexer___TPlus___init_tk(val_t p0);
+val_t NEW_TMinus_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TMinus___parser_index "lexer::TMinus::(lexer::Token::parser_index)"
-typedef void (* lexer___TMinus___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TMinus___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TMinus___parser_index(val_t p0);
+typedef val_t (*lexer___TMinus___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TMinus___init_tk "lexer::TMinus::init_tk"
-val_t NEW_TMinus_lexer___TMinus___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TStar_parser_nodes___PNode___init();
-typedef val_t (* lexer___TStar___parser_index_t)(val_t  self);
-val_t lexer___TStar___parser_index(val_t  self);
+void lexer___TMinus___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TMinus___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TMinus_lexer___TMinus___init_tk(val_t p0);
+val_t NEW_TStar_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TStar___parser_index "lexer::TStar::(lexer::Token::parser_index)"
-typedef void (* lexer___TStar___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TStar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TStar___parser_index(val_t p0);
+typedef val_t (*lexer___TStar___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TStar___init_tk "lexer::TStar::init_tk"
-val_t NEW_TStar_lexer___TStar___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TSlash_parser_nodes___PNode___init();
-typedef val_t (* lexer___TSlash___parser_index_t)(val_t  self);
-val_t lexer___TSlash___parser_index(val_t  self);
+void lexer___TStar___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TStar___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TStar_lexer___TStar___init_tk(val_t p0);
+val_t NEW_TSlash_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TSlash___parser_index "lexer::TSlash::(lexer::Token::parser_index)"
-typedef void (* lexer___TSlash___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TSlash___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TSlash___parser_index(val_t p0);
+typedef val_t (*lexer___TSlash___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TSlash___init_tk "lexer::TSlash::init_tk"
-val_t NEW_TSlash_lexer___TSlash___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TPercent_parser_nodes___PNode___init();
-typedef val_t (* lexer___TPercent___parser_index_t)(val_t  self);
-val_t lexer___TPercent___parser_index(val_t  self);
+void lexer___TSlash___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TSlash___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TSlash_lexer___TSlash___init_tk(val_t p0);
+val_t NEW_TPercent_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TPercent___parser_index "lexer::TPercent::(lexer::Token::parser_index)"
-typedef void (* lexer___TPercent___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TPercent___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TPercent___parser_index(val_t p0);
+typedef val_t (*lexer___TPercent___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TPercent___init_tk "lexer::TPercent::init_tk"
-val_t NEW_TPercent_lexer___TPercent___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TEq_parser_nodes___PNode___init();
-typedef val_t (* lexer___TEq___parser_index_t)(val_t  self);
-val_t lexer___TEq___parser_index(val_t  self);
+void lexer___TPercent___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TPercent___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TPercent_lexer___TPercent___init_tk(val_t p0);
+val_t NEW_TEq_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TEq___parser_index "lexer::TEq::(lexer::Token::parser_index)"
-typedef void (* lexer___TEq___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TEq___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TEq___parser_index(val_t p0);
+typedef val_t (*lexer___TEq___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TEq___init_tk "lexer::TEq::init_tk"
-val_t NEW_TEq_lexer___TEq___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TNe_parser_nodes___PNode___init();
-typedef val_t (* lexer___TNe___parser_index_t)(val_t  self);
-val_t lexer___TNe___parser_index(val_t  self);
+void lexer___TEq___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TEq___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TEq_lexer___TEq___init_tk(val_t p0);
+val_t NEW_TNe_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TNe___parser_index "lexer::TNe::(lexer::Token::parser_index)"
-typedef void (* lexer___TNe___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TNe___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TNe___parser_index(val_t p0);
+typedef val_t (*lexer___TNe___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TNe___init_tk "lexer::TNe::init_tk"
-val_t NEW_TNe_lexer___TNe___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TLt_parser_nodes___PNode___init();
-typedef val_t (* lexer___TLt___parser_index_t)(val_t  self);
-val_t lexer___TLt___parser_index(val_t  self);
+void lexer___TNe___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TNe___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TNe_lexer___TNe___init_tk(val_t p0);
+val_t NEW_TLt_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TLt___parser_index "lexer::TLt::(lexer::Token::parser_index)"
-typedef void (* lexer___TLt___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TLt___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TLt___parser_index(val_t p0);
+typedef val_t (*lexer___TLt___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TLt___init_tk "lexer::TLt::init_tk"
-val_t NEW_TLt_lexer___TLt___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TLe_parser_nodes___PNode___init();
-typedef val_t (* lexer___TLe___parser_index_t)(val_t  self);
-val_t lexer___TLe___parser_index(val_t  self);
+void lexer___TLt___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TLt___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TLt_lexer___TLt___init_tk(val_t p0);
+val_t NEW_TLe_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TLe___parser_index "lexer::TLe::(lexer::Token::parser_index)"
-typedef void (* lexer___TLe___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TLe___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TLe___parser_index(val_t p0);
+typedef val_t (*lexer___TLe___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TLe___init_tk "lexer::TLe::init_tk"
-val_t NEW_TLe_lexer___TLe___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TGt_parser_nodes___PNode___init();
-typedef val_t (* lexer___TGt___parser_index_t)(val_t  self);
-val_t lexer___TGt___parser_index(val_t  self);
+void lexer___TLe___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TLe___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TLe_lexer___TLe___init_tk(val_t p0);
+val_t NEW_TGt_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TGt___parser_index "lexer::TGt::(lexer::Token::parser_index)"
-typedef void (* lexer___TGt___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TGt___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TGt___parser_index(val_t p0);
+typedef val_t (*lexer___TGt___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TGt___init_tk "lexer::TGt::init_tk"
-val_t NEW_TGt_lexer___TGt___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TGe_parser_nodes___PNode___init();
-typedef val_t (* lexer___TGe___parser_index_t)(val_t  self);
-val_t lexer___TGe___parser_index(val_t  self);
+void lexer___TGt___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TGt___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TGt_lexer___TGt___init_tk(val_t p0);
+val_t NEW_TGe_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TGe___parser_index "lexer::TGe::(lexer::Token::parser_index)"
-typedef void (* lexer___TGe___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TGe___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TGe___parser_index(val_t p0);
+typedef val_t (*lexer___TGe___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TGe___init_tk "lexer::TGe::init_tk"
-val_t NEW_TGe_lexer___TGe___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TStarship_parser_nodes___PNode___init();
-typedef val_t (* lexer___TStarship___parser_index_t)(val_t  self);
-val_t lexer___TStarship___parser_index(val_t  self);
+void lexer___TGe___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TGe___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TGe_lexer___TGe___init_tk(val_t p0);
+val_t NEW_TStarship_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TStarship___parser_index "lexer::TStarship::(lexer::Token::parser_index)"
-typedef void (* lexer___TStarship___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___TStarship___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___TStarship___parser_index(val_t p0);
+typedef val_t (*lexer___TStarship___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TStarship___init_tk "lexer::TStarship::init_tk"
-val_t NEW_TStarship_lexer___TStarship___init_tk(val_t p0, val_t p1, val_t p2);
-val_t NEW_TClassid_parser_nodes___PNode___init();
-typedef val_t (* lexer___TClassid___parser_index_t)(val_t  self);
-val_t lexer___TClassid___parser_index(val_t  self);
+void lexer___TStarship___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TStarship___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TStarship_lexer___TStarship___init_tk(val_t p0);
+val_t NEW_TBang_parser_nodes___ANode___init(val_t p0);
+#define LOCATE_lexer___TBang___parser_index "lexer::TBang::(lexer::Token::parser_index)"
+val_t lexer___TBang___parser_index(val_t p0);
+typedef val_t (*lexer___TBang___parser_index_t)(val_t p0);
+#define LOCATE_lexer___TBang___init_tk "lexer::TBang::init_tk"
+void lexer___TBang___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___TBang___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TBang_lexer___TBang___init_tk(val_t p0);
+val_t NEW_TClassid_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TClassid___parser_index "lexer::TClassid::(lexer::Token::parser_index)"
-typedef void (* lexer___TClassid___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TClassid___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TClassid___parser_index(val_t p0);
+typedef val_t (*lexer___TClassid___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TClassid___init_tk "lexer::TClassid::init_tk"
-val_t NEW_TClassid_lexer___TClassid___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TId_parser_nodes___PNode___init();
-typedef val_t (* lexer___TId___parser_index_t)(val_t  self);
-val_t lexer___TId___parser_index(val_t  self);
+void lexer___TClassid___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TClassid___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TClassid_lexer___TClassid___init_tk(val_t p0, val_t p1);
+val_t NEW_TId_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TId___parser_index "lexer::TId::(lexer::Token::parser_index)"
-typedef void (* lexer___TId___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TId___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TId___parser_index(val_t p0);
+typedef val_t (*lexer___TId___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TId___init_tk "lexer::TId::init_tk"
-val_t NEW_TId_lexer___TId___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TAttrid_parser_nodes___PNode___init();
-typedef val_t (* lexer___TAttrid___parser_index_t)(val_t  self);
-val_t lexer___TAttrid___parser_index(val_t  self);
+void lexer___TId___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TId___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TId_lexer___TId___init_tk(val_t p0, val_t p1);
+val_t NEW_TAttrid_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TAttrid___parser_index "lexer::TAttrid::(lexer::Token::parser_index)"
-typedef void (* lexer___TAttrid___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TAttrid___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TAttrid___parser_index(val_t p0);
+typedef val_t (*lexer___TAttrid___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TAttrid___init_tk "lexer::TAttrid::init_tk"
-val_t NEW_TAttrid_lexer___TAttrid___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TNumber_parser_nodes___PNode___init();
-typedef val_t (* lexer___TNumber___parser_index_t)(val_t  self);
-val_t lexer___TNumber___parser_index(val_t  self);
+void lexer___TAttrid___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TAttrid___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TAttrid_lexer___TAttrid___init_tk(val_t p0, val_t p1);
+val_t NEW_TNumber_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TNumber___parser_index "lexer::TNumber::(lexer::Token::parser_index)"
-typedef void (* lexer___TNumber___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TNumber___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TNumber___parser_index(val_t p0);
+typedef val_t (*lexer___TNumber___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TNumber___init_tk "lexer::TNumber::init_tk"
-val_t NEW_TNumber_lexer___TNumber___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TFloat_parser_nodes___PNode___init();
-typedef val_t (* lexer___TFloat___parser_index_t)(val_t  self);
-val_t lexer___TFloat___parser_index(val_t  self);
+void lexer___TNumber___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TNumber___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TNumber_lexer___TNumber___init_tk(val_t p0, val_t p1);
+val_t NEW_TFloat_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TFloat___parser_index "lexer::TFloat::(lexer::Token::parser_index)"
-typedef void (* lexer___TFloat___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TFloat___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TFloat___parser_index(val_t p0);
+typedef val_t (*lexer___TFloat___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TFloat___init_tk "lexer::TFloat::init_tk"
-val_t NEW_TFloat_lexer___TFloat___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TChar_parser_nodes___PNode___init();
-typedef val_t (* lexer___TChar___parser_index_t)(val_t  self);
-val_t lexer___TChar___parser_index(val_t  self);
+void lexer___TFloat___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TFloat___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TFloat_lexer___TFloat___init_tk(val_t p0, val_t p1);
+val_t NEW_TChar_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TChar___parser_index "lexer::TChar::(lexer::Token::parser_index)"
-typedef void (* lexer___TChar___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TChar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TChar___parser_index(val_t p0);
+typedef val_t (*lexer___TChar___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TChar___init_tk "lexer::TChar::init_tk"
-val_t NEW_TChar_lexer___TChar___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TString_parser_nodes___PNode___init();
-typedef val_t (* lexer___TString___parser_index_t)(val_t  self);
-val_t lexer___TString___parser_index(val_t  self);
+void lexer___TChar___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TChar___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TChar_lexer___TChar___init_tk(val_t p0, val_t p1);
+val_t NEW_TString_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TString___parser_index "lexer::TString::(lexer::Token::parser_index)"
-typedef void (* lexer___TString___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TString___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TString___parser_index(val_t p0);
+typedef val_t (*lexer___TString___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TString___init_tk "lexer::TString::init_tk"
-val_t NEW_TString_lexer___TString___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TStartString_parser_nodes___PNode___init();
-typedef val_t (* lexer___TStartString___parser_index_t)(val_t  self);
-val_t lexer___TStartString___parser_index(val_t  self);
+void lexer___TString___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TString___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TString_lexer___TString___init_tk(val_t p0, val_t p1);
+val_t NEW_TStartString_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TStartString___parser_index "lexer::TStartString::(lexer::Token::parser_index)"
-typedef void (* lexer___TStartString___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TStartString___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TStartString___parser_index(val_t p0);
+typedef val_t (*lexer___TStartString___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TStartString___init_tk "lexer::TStartString::init_tk"
-val_t NEW_TStartString_lexer___TStartString___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TMidString_parser_nodes___PNode___init();
-typedef val_t (* lexer___TMidString___parser_index_t)(val_t  self);
-val_t lexer___TMidString___parser_index(val_t  self);
+void lexer___TStartString___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TStartString___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TStartString_lexer___TStartString___init_tk(val_t p0, val_t p1);
+val_t NEW_TMidString_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TMidString___parser_index "lexer::TMidString::(lexer::Token::parser_index)"
-typedef void (* lexer___TMidString___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TMidString___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TMidString___parser_index(val_t p0);
+typedef val_t (*lexer___TMidString___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TMidString___init_tk "lexer::TMidString::init_tk"
-val_t NEW_TMidString_lexer___TMidString___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_TEndString_parser_nodes___PNode___init();
-typedef val_t (* lexer___TEndString___parser_index_t)(val_t  self);
-val_t lexer___TEndString___parser_index(val_t  self);
+void lexer___TMidString___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TMidString___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TMidString_lexer___TMidString___init_tk(val_t p0, val_t p1);
+val_t NEW_TEndString_parser_nodes___ANode___init(val_t p0);
 #define LOCATE_lexer___TEndString___parser_index "lexer::TEndString::(lexer::Token::parser_index)"
-typedef void (* lexer___TEndString___init_tk_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___TEndString___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+val_t lexer___TEndString___parser_index(val_t p0);
+typedef val_t (*lexer___TEndString___parser_index_t)(val_t p0);
 #define LOCATE_lexer___TEndString___init_tk "lexer::TEndString::init_tk"
-val_t NEW_TEndString_lexer___TEndString___init_tk(val_t p0, val_t p1, val_t p2, val_t p3);
+void lexer___TEndString___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TEndString___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TEndString_lexer___TEndString___init_tk(val_t p0, val_t p1);
 val_t NEW_EOF_parser_nodes___EOF___noinit();
-typedef val_t (* lexer___EOF___parser_index_t)(val_t  self);
-val_t lexer___EOF___parser_index(val_t  self);
 #define LOCATE_lexer___EOF___parser_index "lexer::EOF::(lexer::Token::parser_index)"
-typedef void (* lexer___EOF___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void lexer___EOF___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t lexer___EOF___parser_index(val_t p0);
+typedef val_t (*lexer___EOF___parser_index_t)(val_t p0);
 #define LOCATE_lexer___EOF___init "lexer::EOF::init"
-val_t NEW_EOF_lexer___EOF___init(val_t p0, val_t p1, val_t p2);
-val_t NEW_PError_parser_nodes___PError___noinit();
-typedef val_t (* lexer___PError___message_t)(val_t  self);
-val_t lexer___PError___message(val_t  self);
-#define LOCATE_lexer___PError___message "lexer::PError::message"
-typedef void (* lexer___PError___message__eq_t)(val_t  self, val_t  param0);
-void lexer___PError___message__eq(val_t  self, val_t  param0);
-#define LOCATE_lexer___PError___message__eq "lexer::PError::message="
-typedef void (* lexer___PError___init_error_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void lexer___PError___init_error(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-#define LOCATE_lexer___PError___init_error "lexer::PError::init_error"
-val_t NEW_PError_lexer___PError___init_error(val_t p0, val_t p1, val_t p2, val_t p3);
-typedef val_t (* lexer___Lexer___filename_t)(val_t  self);
-val_t lexer___Lexer___filename(val_t  self);
+void lexer___EOF___init(val_t p0, val_t p1, int* init_table);
+typedef void (*lexer___EOF___init_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_EOF_lexer___EOF___init(val_t p0);
+val_t NEW_AError_parser_nodes___AError___noinit();
+#define LOCATE_lexer___AError___message "lexer::AError::message"
+val_t lexer___AError___message(val_t p0);
+typedef val_t (*lexer___AError___message_t)(val_t p0);
+#define LOCATE_lexer___AError___message__eq "lexer::AError::message="
+void lexer___AError___message__eq(val_t p0, val_t p1);
+typedef void (*lexer___AError___message__eq_t)(val_t p0, val_t p1);
+#define LOCATE_lexer___AError___init_error "lexer::AError::init_error"
+void lexer___AError___init_error(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___AError___init_error_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_AError_lexer___AError___init_error(val_t p0, val_t p1);
 #define LOCATE_lexer___Lexer___filename "lexer::Lexer::filename"
-typedef val_t (* lexer___Lexer___state_initial_t)(val_t  self);
-val_t lexer___Lexer___state_initial(val_t  self);
+val_t lexer___Lexer___filename(val_t p0);
+typedef val_t (*lexer___Lexer___filename_t)(val_t p0);
 #define LOCATE_lexer___Lexer___state_initial "lexer::Lexer::state_initial"
-typedef void (* lexer___Lexer___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void lexer___Lexer___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+val_t lexer___Lexer___state_initial(val_t p0);
+typedef val_t (*lexer___Lexer___state_initial_t)(val_t p0);
 #define LOCATE_lexer___Lexer___init "lexer::Lexer::init"
+void lexer___Lexer___init(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___Lexer___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_Lexer_lexer___Lexer___init(val_t p0, val_t p1);
-typedef val_t (* lexer___Lexer___peek_t)(val_t  self);
-val_t lexer___Lexer___peek(val_t  self);
 #define LOCATE_lexer___Lexer___peek "lexer::Lexer::peek"
-typedef val_t (* lexer___Lexer___next_t)(val_t  self);
-val_t lexer___Lexer___next(val_t  self);
+val_t lexer___Lexer___peek(val_t p0);
+typedef val_t (*lexer___Lexer___peek_t)(val_t p0);
 #define LOCATE_lexer___Lexer___next "lexer::Lexer::next"
-typedef val_t (* lexer___Lexer___get_token_t)(val_t  self);
-val_t lexer___Lexer___get_token(val_t  self);
+val_t lexer___Lexer___next(val_t p0);
+typedef val_t (*lexer___Lexer___next_t)(val_t p0);
 #define LOCATE_lexer___Lexer___get_token "lexer::Lexer::get_token"
-typedef val_t (* lexer___Lexer___get_char_t)(val_t  self);
-val_t lexer___Lexer___get_char(val_t  self);
+val_t lexer___Lexer___get_token(val_t p0);
+typedef val_t (*lexer___Lexer___get_token_t)(val_t p0);
 #define LOCATE_lexer___Lexer___get_char "lexer::Lexer::get_char"
-typedef void (* lexer___Lexer___push_back_t)(val_t  self, val_t  param0);
-void lexer___Lexer___push_back(val_t  self, val_t  param0);
+val_t lexer___Lexer___get_char(val_t p0);
+typedef val_t (*lexer___Lexer___get_char_t)(val_t p0);
 #define LOCATE_lexer___Lexer___push_back "lexer::Lexer::push_back"
-typedef void (* lexer___Lexer___build_goto_table_t)(val_t  self);
-void lexer___Lexer___build_goto_table(val_t  self);
+void lexer___Lexer___push_back(val_t p0, val_t p1);
+typedef void (*lexer___Lexer___push_back_t)(val_t p0, val_t p1);
 #define LOCATE_lexer___Lexer___build_goto_table "lexer::Lexer::build_goto_table"
-typedef val_t (* lexer___Lexer___nil_array_t)(val_t  self);
-val_t lexer___Lexer___nil_array(val_t  self);
+void lexer___Lexer___build_goto_table(val_t p0);
+typedef void (*lexer___Lexer___build_goto_table_t)(val_t p0);
 #define LOCATE_lexer___Lexer___nil_array "lexer::Lexer::nil_array"
-typedef void (* lexer___Lexer___build_accept_table_t)(val_t  self);
-void lexer___Lexer___build_accept_table(val_t  self);
+val_t lexer___Lexer___nil_array(val_t p0);
+typedef val_t (*lexer___Lexer___nil_array_t)(val_t p0);
 #define LOCATE_lexer___Lexer___build_accept_table "lexer::Lexer::build_accept_table"
+void lexer___Lexer___build_accept_table(val_t p0);
+typedef void (*lexer___Lexer___build_accept_table_t)(val_t p0);
 #endif

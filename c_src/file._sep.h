@@ -19,12 +19,12 @@ extern const classtable_elt_t VFT_Stdout[];
 extern const classtable_elt_t VFT_Stderr[];
 
 extern const classtable_elt_t VFT_FileStat[];
-struct TBOX_FileStat { const classtable_elt_t * vft; void * val;};
+struct TBOX_FileStat { const classtable_elt_t * vft; bigint object_id; void * val;};
 val_t BOX_FileStat(void * val);
 #define UNBOX_FileStat(x) (((struct TBOX_FileStat *)(VAL2OBJ(x)))->val)
 
 extern const classtable_elt_t VFT_NativeFile[];
-struct TBOX_NativeFile { const classtable_elt_t * vft; void * val;};
+struct TBOX_NativeFile { const classtable_elt_t * vft; bigint object_id; void * val;};
 val_t BOX_NativeFile(void * val);
 #define UNBOX_NativeFile(x) (((struct TBOX_NativeFile *)(VAL2OBJ(x)))->val)
 
@@ -108,173 +108,173 @@ extern const int SFT_file[];
 #define CALL_file___NativeFileCapable___native_stdin(recv) ((file___NativeFileCapable___native_stdin_t)CALL((recv), (SFT_file[32] + 3)))
 #define CALL_file___NativeFileCapable___native_stdout(recv) ((file___NativeFileCapable___native_stdout_t)CALL((recv), (SFT_file[32] + 4)))
 #define CALL_file___NativeFileCapable___native_stderr(recv) ((file___NativeFileCapable___native_stderr_t)CALL((recv), (SFT_file[32] + 5)))
-typedef void (* file___Object___printn_t)(val_t  self, val_t  param0);
-void file___Object___printn(val_t  self, val_t  param0);
 #define LOCATE_file___Object___printn "file::Object::printn"
-typedef void (* file___Object___print_t)(val_t  self, val_t  param0);
-void file___Object___print(val_t  self, val_t  param0);
+void file___Object___printn(val_t p0, val_t p1);
+typedef void (*file___Object___printn_t)(val_t p0, val_t p1);
 #define LOCATE_file___Object___print "file::Object::print"
-typedef val_t (* file___Object___getc_t)(val_t  self);
-val_t file___Object___getc(val_t  self);
+void file___Object___print(val_t p0, val_t p1);
+typedef void (*file___Object___print_t)(val_t p0, val_t p1);
 #define LOCATE_file___Object___getc "file::Object::getc"
-typedef val_t (* file___Object___gets_t)(val_t  self);
-val_t file___Object___gets(val_t  self);
+val_t file___Object___getc(val_t p0);
+typedef val_t (*file___Object___getc_t)(val_t p0);
 #define LOCATE_file___Object___gets "file::Object::gets"
-typedef val_t (* file___Object___stdin_t)(val_t  self);
-val_t file___Object___stdin(val_t  self);
+val_t file___Object___gets(val_t p0);
+typedef val_t (*file___Object___gets_t)(val_t p0);
 #define LOCATE_file___Object___stdin "file::Object::stdin"
-typedef val_t (* file___Object___stdout_t)(val_t  self);
-val_t file___Object___stdout(val_t  self);
+val_t file___Object___stdin(val_t p0);
+typedef val_t (*file___Object___stdin_t)(val_t p0);
 #define LOCATE_file___Object___stdout "file::Object::stdout"
-typedef val_t (* file___Object___stderr_t)(val_t  self);
-val_t file___Object___stderr(val_t  self);
+val_t file___Object___stdout(val_t p0);
+typedef val_t (*file___Object___stdout_t)(val_t p0);
 #define LOCATE_file___Object___stderr "file::Object::stderr"
+val_t file___Object___stderr(val_t p0);
+typedef val_t (*file___Object___stderr_t)(val_t p0);
 val_t NEW_FStream_stream___IOS___init();
-typedef val_t (* file___FStream___path_t)(val_t  self);
-val_t file___FStream___path(val_t  self);
 #define LOCATE_file___FStream___path "file::FStream::path"
-typedef val_t (* file___FStream___file_stat_t)(val_t  self);
-val_t file___FStream___file_stat(val_t  self);
+val_t file___FStream___path(val_t p0);
+typedef val_t (*file___FStream___path_t)(val_t p0);
 #define LOCATE_file___FStream___file_stat "file::FStream::file_stat"
-typedef void (* file___IFStream___close_t)(val_t  self);
-void file___IFStream___close(val_t  self);
+val_t file___FStream___file_stat(val_t p0);
+typedef val_t (*file___FStream___file_stat_t)(val_t p0);
 #define LOCATE_file___IFStream___close "file::IFStream::(stream::IOS::close)"
-typedef void (* file___IFStream___fill_buffer_t)(val_t  self);
-void file___IFStream___fill_buffer(val_t  self);
+void file___IFStream___close(val_t p0);
+typedef void (*file___IFStream___close_t)(val_t p0);
 #define LOCATE_file___IFStream___fill_buffer "file::IFStream::(stream::BufferedIStream::fill_buffer)"
-typedef val_t (* file___IFStream___end_reached_t)(val_t  self);
-val_t file___IFStream___end_reached(val_t  self);
+void file___IFStream___fill_buffer(val_t p0);
+typedef void (*file___IFStream___fill_buffer_t)(val_t p0);
 #define LOCATE_file___IFStream___end_reached "file::IFStream::(stream::BufferedIStream::end_reached)"
-typedef void (* file___IFStream___reopen_t)(val_t  self);
-void file___IFStream___reopen(val_t  self);
+val_t file___IFStream___end_reached(val_t p0);
+typedef val_t (*file___IFStream___end_reached_t)(val_t p0);
 #define LOCATE_file___IFStream___reopen "file::IFStream::reopen"
-typedef void (* file___IFStream___open_t)(val_t  self, val_t  param0, int* init_table);
-void file___IFStream___open(val_t  self, val_t  param0, int* init_table);
+void file___IFStream___reopen(val_t p0);
+typedef void (*file___IFStream___reopen_t)(val_t p0);
 #define LOCATE_file___IFStream___open "file::IFStream::open"
+void file___IFStream___open(val_t p0, val_t p1, int* init_table);
+typedef void (*file___IFStream___open_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_IFStream_file___IFStream___open(val_t p0);
-typedef void (* file___IFStream___init_t)(val_t  self, int* init_table);
-void file___IFStream___init(val_t  self, int* init_table);
 #define LOCATE_file___IFStream___init "file::IFStream::init"
+void file___IFStream___init(val_t p0, int* init_table);
+typedef void (*file___IFStream___init_t)(val_t p0, int* init_table);
 val_t NEW_IFStream_file___IFStream___init();
-typedef void (* file___IFStream___without_file_t)(val_t  self, int* init_table);
-void file___IFStream___without_file(val_t  self, int* init_table);
 #define LOCATE_file___IFStream___without_file "file::IFStream::without_file"
+void file___IFStream___without_file(val_t p0, int* init_table);
+typedef void (*file___IFStream___without_file_t)(val_t p0, int* init_table);
 val_t NEW_IFStream_file___IFStream___without_file();
-typedef void (* file___OFStream___close_t)(val_t  self);
-void file___OFStream___close(val_t  self);
 #define LOCATE_file___OFStream___close "file::OFStream::(stream::IOS::close)"
-typedef void (* file___OFStream___write_t)(val_t  self, val_t  param0);
-void file___OFStream___write(val_t  self, val_t  param0);
+void file___OFStream___close(val_t p0);
+typedef void (*file___OFStream___close_t)(val_t p0);
 #define LOCATE_file___OFStream___write "file::OFStream::(stream::OStream::write)"
-typedef val_t (* file___OFStream___is_writable_t)(val_t  self);
-val_t file___OFStream___is_writable(val_t  self);
+void file___OFStream___write(val_t p0, val_t p1);
+typedef void (*file___OFStream___write_t)(val_t p0, val_t p1);
 #define LOCATE_file___OFStream___is_writable "file::OFStream::(stream::OStream::is_writable)"
-typedef void (* file___OFStream___write_native_t)(val_t  self, val_t  param0, val_t  param1);
-void file___OFStream___write_native(val_t  self, val_t  param0, val_t  param1);
+val_t file___OFStream___is_writable(val_t p0);
+typedef val_t (*file___OFStream___is_writable_t)(val_t p0);
 #define LOCATE_file___OFStream___write_native "file::OFStream::write_native"
-typedef void (* file___OFStream___open_t)(val_t  self, val_t  param0, int* init_table);
-void file___OFStream___open(val_t  self, val_t  param0, int* init_table);
+void file___OFStream___write_native(val_t p0, val_t p1, val_t p2);
+typedef void (*file___OFStream___write_native_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_file___OFStream___open "file::OFStream::open"
+void file___OFStream___open(val_t p0, val_t p1, int* init_table);
+typedef void (*file___OFStream___open_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_OFStream_file___OFStream___open(val_t p0);
-typedef void (* file___OFStream___init_t)(val_t  self, int* init_table);
-void file___OFStream___init(val_t  self, int* init_table);
 #define LOCATE_file___OFStream___init "file::OFStream::init"
+void file___OFStream___init(val_t p0, int* init_table);
+typedef void (*file___OFStream___init_t)(val_t p0, int* init_table);
 val_t NEW_OFStream_file___OFStream___init();
-typedef void (* file___OFStream___without_file_t)(val_t  self, int* init_table);
-void file___OFStream___without_file(val_t  self, int* init_table);
 #define LOCATE_file___OFStream___without_file "file::OFStream::without_file"
+void file___OFStream___without_file(val_t p0, int* init_table);
+typedef void (*file___OFStream___without_file_t)(val_t p0, int* init_table);
 val_t NEW_OFStream_file___OFStream___without_file();
-typedef void (* file___Stdin___init_t)(val_t  self, int* init_table);
-void file___Stdin___init(val_t  self, int* init_table);
 #define LOCATE_file___Stdin___init "file::Stdin::init"
+void file___Stdin___init(val_t p0, int* init_table);
+typedef void (*file___Stdin___init_t)(val_t p0, int* init_table);
 val_t NEW_Stdin_file___Stdin___init();
-typedef void (* file___Stdout___init_t)(val_t  self, int* init_table);
-void file___Stdout___init(val_t  self, int* init_table);
 #define LOCATE_file___Stdout___init "file::Stdout::init"
+void file___Stdout___init(val_t p0, int* init_table);
+typedef void (*file___Stdout___init_t)(val_t p0, int* init_table);
 val_t NEW_Stdout_file___Stdout___init();
-typedef void (* file___Stderr___init_t)(val_t  self, int* init_table);
-void file___Stderr___init(val_t  self, int* init_table);
 #define LOCATE_file___Stderr___init "file::Stderr::init"
+void file___Stderr___init(val_t p0, int* init_table);
+typedef void (*file___Stderr___init_t)(val_t p0, int* init_table);
 val_t NEW_Stderr_file___Stderr___init();
 val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
 val_t NEW_String_string___String___from_cstring(val_t p0);
-typedef val_t (* file___String___file_exists_t)(val_t  self);
-val_t file___String___file_exists(val_t  self);
 #define LOCATE_file___String___file_exists "file::String::file_exists"
-typedef val_t (* file___String___file_stat_t)(val_t  self);
-val_t file___String___file_stat(val_t  self);
+val_t file___String___file_exists(val_t p0);
+typedef val_t (*file___String___file_exists_t)(val_t p0);
 #define LOCATE_file___String___file_stat "file::String::file_stat"
-typedef val_t (* file___String___file_delete_t)(val_t  self);
-val_t file___String___file_delete(val_t  self);
+val_t file___String___file_stat(val_t p0);
+typedef val_t (*file___String___file_stat_t)(val_t p0);
 #define LOCATE_file___String___file_delete "file::String::file_delete"
-typedef val_t (* file___String___strip_extension_t)(val_t  self, val_t  param0);
-val_t file___String___strip_extension(val_t  self, val_t  param0);
+val_t file___String___file_delete(val_t p0);
+typedef val_t (*file___String___file_delete_t)(val_t p0);
 #define LOCATE_file___String___strip_extension "file::String::strip_extension"
-typedef val_t (* file___String___basename_t)(val_t  self, val_t  param0);
-val_t file___String___basename(val_t  self, val_t  param0);
+val_t file___String___strip_extension(val_t p0, val_t p1);
+typedef val_t (*file___String___strip_extension_t)(val_t p0, val_t p1);
 #define LOCATE_file___String___basename "file::String::basename"
-typedef val_t (* file___String___dirname_t)(val_t  self);
-val_t file___String___dirname(val_t  self);
+val_t file___String___basename(val_t p0, val_t p1);
+typedef val_t (*file___String___basename_t)(val_t p0, val_t p1);
 #define LOCATE_file___String___dirname "file::String::dirname"
-typedef val_t (* file___String___file_path_t)(val_t  self);
-val_t file___String___file_path(val_t  self);
+val_t file___String___dirname(val_t p0);
+typedef val_t (*file___String___dirname_t)(val_t p0);
 #define LOCATE_file___String___file_path "file::String::file_path"
-typedef void (* file___String___mkdir_t)(val_t  self);
-void file___String___mkdir(val_t  self);
+val_t file___String___file_path(val_t p0);
+typedef val_t (*file___String___file_path_t)(val_t p0);
 #define LOCATE_file___String___mkdir "file::String::mkdir"
+void file___String___mkdir(val_t p0);
+typedef void (*file___String___mkdir_t)(val_t p0);
 val_t NEW_NativeString_string___NativeString___init();
-typedef val_t (* file___NativeString___file_exists_t)(val_t  self);
-val_t file___NativeString___file_exists(val_t  self);
 #define LOCATE_file___NativeString___file_exists "file::NativeString::file_exists"
-typedef val_t (* file___NativeString___file_stat_t)(val_t  self);
-val_t file___NativeString___file_stat(val_t  self);
+val_t file___NativeString___file_exists(val_t p0);
+typedef val_t (*file___NativeString___file_exists_t)(val_t p0);
 #define LOCATE_file___NativeString___file_stat "file::NativeString::file_stat"
-typedef val_t (* file___NativeString___file_mkdir_t)(val_t  self);
-val_t file___NativeString___file_mkdir(val_t  self);
+val_t file___NativeString___file_stat(val_t p0);
+typedef val_t (*file___NativeString___file_stat_t)(val_t p0);
 #define LOCATE_file___NativeString___file_mkdir "file::NativeString::file_mkdir"
-typedef val_t (* file___NativeString___file_delete_t)(val_t  self);
-val_t file___NativeString___file_delete(val_t  self);
+val_t file___NativeString___file_mkdir(val_t p0);
+typedef val_t (*file___NativeString___file_mkdir_t)(val_t p0);
 #define LOCATE_file___NativeString___file_delete "file::NativeString::file_delete"
-typedef val_t (* file___FileStat___mode_t)(val_t  self);
-val_t file___FileStat___mode(val_t  self);
+val_t file___NativeString___file_delete(val_t p0);
+typedef val_t (*file___NativeString___file_delete_t)(val_t p0);
 #define LOCATE_file___FileStat___mode "file::FileStat::mode"
-typedef val_t (* file___FileStat___atime_t)(val_t  self);
-val_t file___FileStat___atime(val_t  self);
+val_t file___FileStat___mode(val_t p0);
+typedef val_t (*file___FileStat___mode_t)(val_t p0);
 #define LOCATE_file___FileStat___atime "file::FileStat::atime"
-typedef val_t (* file___FileStat___ctime_t)(val_t  self);
-val_t file___FileStat___ctime(val_t  self);
+val_t file___FileStat___atime(val_t p0);
+typedef val_t (*file___FileStat___atime_t)(val_t p0);
 #define LOCATE_file___FileStat___ctime "file::FileStat::ctime"
-typedef val_t (* file___FileStat___mtime_t)(val_t  self);
-val_t file___FileStat___mtime(val_t  self);
+val_t file___FileStat___ctime(val_t p0);
+typedef val_t (*file___FileStat___ctime_t)(val_t p0);
 #define LOCATE_file___FileStat___mtime "file::FileStat::mtime"
-typedef val_t (* file___FileStat___size_t)(val_t  self);
-val_t file___FileStat___size(val_t  self);
+val_t file___FileStat___mtime(val_t p0);
+typedef val_t (*file___FileStat___mtime_t)(val_t p0);
 #define LOCATE_file___FileStat___size "file::FileStat::size"
-typedef val_t (* file___NativeFile___io_read_t)(val_t  self, val_t  param0, val_t  param1);
-val_t file___NativeFile___io_read(val_t  self, val_t  param0, val_t  param1);
+val_t file___FileStat___size(val_t p0);
+typedef val_t (*file___FileStat___size_t)(val_t p0);
 #define LOCATE_file___NativeFile___io_read "file::NativeFile::io_read"
-typedef val_t (* file___NativeFile___io_write_t)(val_t  self, val_t  param0, val_t  param1);
-val_t file___NativeFile___io_write(val_t  self, val_t  param0, val_t  param1);
+val_t file___NativeFile___io_read(val_t p0, val_t p1, val_t p2);
+typedef val_t (*file___NativeFile___io_read_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_file___NativeFile___io_write "file::NativeFile::io_write"
-typedef val_t (* file___NativeFile___io_close_t)(val_t  self);
-val_t file___NativeFile___io_close(val_t  self);
+val_t file___NativeFile___io_write(val_t p0, val_t p1, val_t p2);
+typedef val_t (*file___NativeFile___io_write_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_file___NativeFile___io_close "file::NativeFile::io_close"
-typedef val_t (* file___NativeFile___file_stat_t)(val_t  self);
-val_t file___NativeFile___file_stat(val_t  self);
+val_t file___NativeFile___io_close(val_t p0);
+typedef val_t (*file___NativeFile___io_close_t)(val_t p0);
 #define LOCATE_file___NativeFile___file_stat "file::NativeFile::file_stat"
-typedef val_t (* file___NativeFileCapable___io_open_read_t)(val_t  self, val_t  param0);
-val_t file___NativeFileCapable___io_open_read(val_t  self, val_t  param0);
+val_t file___NativeFile___file_stat(val_t p0);
+typedef val_t (*file___NativeFile___file_stat_t)(val_t p0);
 #define LOCATE_file___NativeFileCapable___io_open_read "file::NativeFileCapable::io_open_read"
-typedef val_t (* file___NativeFileCapable___io_open_write_t)(val_t  self, val_t  param0);
-val_t file___NativeFileCapable___io_open_write(val_t  self, val_t  param0);
+val_t file___NativeFileCapable___io_open_read(val_t p0, val_t p1);
+typedef val_t (*file___NativeFileCapable___io_open_read_t)(val_t p0, val_t p1);
 #define LOCATE_file___NativeFileCapable___io_open_write "file::NativeFileCapable::io_open_write"
-typedef val_t (* file___NativeFileCapable___native_stdin_t)(val_t  self);
-val_t file___NativeFileCapable___native_stdin(val_t  self);
+val_t file___NativeFileCapable___io_open_write(val_t p0, val_t p1);
+typedef val_t (*file___NativeFileCapable___io_open_write_t)(val_t p0, val_t p1);
 #define LOCATE_file___NativeFileCapable___native_stdin "file::NativeFileCapable::native_stdin"
-typedef val_t (* file___NativeFileCapable___native_stdout_t)(val_t  self);
-val_t file___NativeFileCapable___native_stdout(val_t  self);
+val_t file___NativeFileCapable___native_stdin(val_t p0);
+typedef val_t (*file___NativeFileCapable___native_stdin_t)(val_t p0);
 #define LOCATE_file___NativeFileCapable___native_stdout "file::NativeFileCapable::native_stdout"
-typedef val_t (* file___NativeFileCapable___native_stderr_t)(val_t  self);
-val_t file___NativeFileCapable___native_stderr(val_t  self);
+val_t file___NativeFileCapable___native_stdout(val_t p0);
+typedef val_t (*file___NativeFileCapable___native_stdout_t)(val_t p0);
 #define LOCATE_file___NativeFileCapable___native_stderr "file::NativeFileCapable::native_stderr"
+val_t file___NativeFileCapable___native_stderr(val_t p0);
+typedef val_t (*file___NativeFileCapable___native_stderr_t)(val_t p0);
 #endif

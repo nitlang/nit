@@ -58,114 +58,114 @@ extern const int SFT_partial_order[];
 #define CALL_partial_order___PartialOrderElement_____geq(recv) ((partial_order___PartialOrderElement_____geq_t)CALL((recv), (SFT_partial_order[7] + 14)))
 #define CALL_partial_order___PartialOrderElement___register_direct_smallers(recv) ((partial_order___PartialOrderElement___register_direct_smallers_t)CALL((recv), (SFT_partial_order[7] + 15)))
 #define CALL_partial_order___PartialOrderElement___init(recv) ((partial_order___PartialOrderElement___init_t)CALL((recv), (SFT_partial_order[7] + 16)))
-typedef val_t (* partial_order___PartialOrder___iterator_t)(val_t  self);
-val_t partial_order___PartialOrder___iterator(val_t  self);
 #define LOCATE_partial_order___PartialOrder___iterator "partial_order::PartialOrder::(abstract_collection::Collection::iterator)"
-typedef val_t (* partial_order___PartialOrder___is_empty_t)(val_t  self);
-val_t partial_order___PartialOrder___is_empty(val_t  self);
+val_t partial_order___PartialOrder___iterator(val_t p0);
+typedef val_t (*partial_order___PartialOrder___iterator_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrder___is_empty "partial_order::PartialOrder::(abstract_collection::Collection::is_empty)"
-typedef val_t (* partial_order___PartialOrder___length_t)(val_t  self);
-val_t partial_order___PartialOrder___length(val_t  self);
+val_t partial_order___PartialOrder___is_empty(val_t p0);
+typedef val_t (*partial_order___PartialOrder___is_empty_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrder___length "partial_order::PartialOrder::(abstract_collection::Collection::length)"
-typedef val_t (* partial_order___PartialOrder___has_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrder___has(val_t  self, val_t  param0);
+val_t partial_order___PartialOrder___length(val_t p0);
+typedef val_t (*partial_order___PartialOrder___length_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrder___has "partial_order::PartialOrder::(abstract_collection::Collection::has)"
-typedef val_t (* partial_order___PartialOrder___has_only_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrder___has_only(val_t  self, val_t  param0);
+val_t partial_order___PartialOrder___has(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrder___has_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrder___has_only "partial_order::PartialOrder::(abstract_collection::Collection::has_only)"
-typedef val_t (* partial_order___PartialOrder___count_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrder___count(val_t  self, val_t  param0);
+val_t partial_order___PartialOrder___has_only(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrder___has_only_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrder___count "partial_order::PartialOrder::(abstract_collection::Collection::count)"
-typedef val_t (* partial_order___PartialOrder___first_t)(val_t  self);
-val_t partial_order___PartialOrder___first(val_t  self);
+val_t partial_order___PartialOrder___count(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrder___count_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrder___first "partial_order::PartialOrder::(abstract_collection::Collection::first)"
-typedef val_t (* partial_order___PartialOrder___roots_t)(val_t  self);
-val_t partial_order___PartialOrder___roots(val_t  self);
+val_t partial_order___PartialOrder___first(val_t p0);
+typedef val_t (*partial_order___PartialOrder___first_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrder___roots "partial_order::PartialOrder::roots"
-typedef val_t (* partial_order___PartialOrder_____bra_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrder_____bra(val_t  self, val_t  param0);
+val_t partial_order___PartialOrder___roots(val_t p0);
+typedef val_t (*partial_order___PartialOrder___roots_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrder_____bra "partial_order::PartialOrder::[]"
-typedef val_t (* partial_order___PartialOrder___to_dot_t)(val_t  self);
-val_t partial_order___PartialOrder___to_dot(val_t  self);
+val_t partial_order___PartialOrder_____bra(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrder_____bra_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrder___to_dot "partial_order::PartialOrder::to_dot"
-typedef val_t (* partial_order___PartialOrder___to_dot_header_t)(val_t  self);
-val_t partial_order___PartialOrder___to_dot_header(val_t  self);
+val_t partial_order___PartialOrder___to_dot(val_t p0);
+typedef val_t (*partial_order___PartialOrder___to_dot_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrder___to_dot_header "partial_order::PartialOrder::to_dot_header"
-typedef val_t (* partial_order___PartialOrder___to_dot_node_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrder___to_dot_node(val_t  self, val_t  param0);
+val_t partial_order___PartialOrder___to_dot_header(val_t p0);
+typedef val_t (*partial_order___PartialOrder___to_dot_header_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrder___to_dot_node "partial_order::PartialOrder::to_dot_node"
-typedef val_t (* partial_order___PartialOrder___to_dot_edge_t)(val_t  self, val_t  param0, val_t  param1);
-val_t partial_order___PartialOrder___to_dot_edge(val_t  self, val_t  param0, val_t  param1);
+val_t partial_order___PartialOrder___to_dot_node(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrder___to_dot_node_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrder___to_dot_edge "partial_order::PartialOrder::to_dot_edge"
-typedef val_t (* partial_order___PartialOrder___select_smallests_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrder___select_smallests(val_t  self, val_t  param0);
+val_t partial_order___PartialOrder___to_dot_edge(val_t p0, val_t p1, val_t p2);
+typedef val_t (*partial_order___PartialOrder___to_dot_edge_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_partial_order___PartialOrder___select_smallests "partial_order::PartialOrder::select_smallests"
-typedef val_t (* partial_order___PartialOrder___add_t)(val_t  self, val_t  param0, val_t  param1);
-val_t partial_order___PartialOrder___add(val_t  self, val_t  param0, val_t  param1);
+val_t partial_order___PartialOrder___select_smallests(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrder___select_smallests_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrder___add "partial_order::PartialOrder::add"
-typedef val_t (* partial_order___PartialOrder___has_all_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrder___has_all(val_t  self, val_t  param0);
+val_t partial_order___PartialOrder___add(val_t p0, val_t p1, val_t p2);
+typedef val_t (*partial_order___PartialOrder___add_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_partial_order___PartialOrder___has_all "partial_order::PartialOrder::has_all"
-typedef val_t (* partial_order___PartialOrder___new_poe_t)(val_t  self, val_t  param0, val_t  param1);
-val_t partial_order___PartialOrder___new_poe(val_t  self, val_t  param0, val_t  param1);
+val_t partial_order___PartialOrder___has_all(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrder___has_all_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrder___new_poe "partial_order::PartialOrder::new_poe"
-typedef val_t (* partial_order___PartialOrder___add_to_smallests_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
-val_t partial_order___PartialOrder___add_to_smallests(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+val_t partial_order___PartialOrder___new_poe(val_t p0, val_t p1, val_t p2);
+typedef val_t (*partial_order___PartialOrder___new_poe_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_partial_order___PartialOrder___add_to_smallests "partial_order::PartialOrder::add_to_smallests"
-typedef void (* partial_order___PartialOrder___compute_smallers_for_t)(val_t  self, val_t  param0, val_t  param1);
-void partial_order___PartialOrder___compute_smallers_for(val_t  self, val_t  param0, val_t  param1);
+val_t partial_order___PartialOrder___add_to_smallests(val_t p0, val_t p1, val_t p2, val_t p3);
+typedef val_t (*partial_order___PartialOrder___add_to_smallests_t)(val_t p0, val_t p1, val_t p2, val_t p3);
 #define LOCATE_partial_order___PartialOrder___compute_smallers_for "partial_order::PartialOrder::compute_smallers_for"
-typedef void (* partial_order___PartialOrder___init_t)(val_t  self, int* init_table);
-void partial_order___PartialOrder___init(val_t  self, int* init_table);
+void partial_order___PartialOrder___compute_smallers_for(val_t p0, val_t p1, val_t p2);
+typedef void (*partial_order___PartialOrder___compute_smallers_for_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_partial_order___PartialOrder___init "partial_order::PartialOrder::init"
+void partial_order___PartialOrder___init(val_t p0, int* init_table);
+typedef void (*partial_order___PartialOrder___init_t)(val_t p0, int* init_table);
 val_t NEW_PartialOrder_partial_order___PartialOrder___init();
-typedef val_t (* partial_order___PartialOrderElement___order_t)(val_t  self);
-val_t partial_order___PartialOrderElement___order(val_t  self);
 #define LOCATE_partial_order___PartialOrderElement___order "partial_order::PartialOrderElement::order"
-typedef val_t (* partial_order___PartialOrderElement___value_t)(val_t  self);
-val_t partial_order___PartialOrderElement___value(val_t  self);
+val_t partial_order___PartialOrderElement___order(val_t p0);
+typedef val_t (*partial_order___PartialOrderElement___order_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrderElement___value "partial_order::PartialOrderElement::value"
-typedef val_t (* partial_order___PartialOrderElement___rank_t)(val_t  self);
-val_t partial_order___PartialOrderElement___rank(val_t  self);
+val_t partial_order___PartialOrderElement___value(val_t p0);
+typedef val_t (*partial_order___PartialOrderElement___value_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrderElement___rank "partial_order::PartialOrderElement::rank"
-typedef val_t (* partial_order___PartialOrderElement___direct_greaters_t)(val_t  self);
-val_t partial_order___PartialOrderElement___direct_greaters(val_t  self);
+val_t partial_order___PartialOrderElement___rank(val_t p0);
+typedef val_t (*partial_order___PartialOrderElement___rank_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrderElement___direct_greaters "partial_order::PartialOrderElement::direct_greaters"
-typedef val_t (* partial_order___PartialOrderElement___direct_smallers_t)(val_t  self);
-val_t partial_order___PartialOrderElement___direct_smallers(val_t  self);
+val_t partial_order___PartialOrderElement___direct_greaters(val_t p0);
+typedef val_t (*partial_order___PartialOrderElement___direct_greaters_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrderElement___direct_smallers "partial_order::PartialOrderElement::direct_smallers"
-typedef val_t (* partial_order___PartialOrderElement___greaters_t)(val_t  self);
-val_t partial_order___PartialOrderElement___greaters(val_t  self);
+val_t partial_order___PartialOrderElement___direct_smallers(val_t p0);
+typedef val_t (*partial_order___PartialOrderElement___direct_smallers_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrderElement___greaters "partial_order::PartialOrderElement::greaters"
-typedef val_t (* partial_order___PartialOrderElement___greaters_and_self_t)(val_t  self);
-val_t partial_order___PartialOrderElement___greaters_and_self(val_t  self);
+val_t partial_order___PartialOrderElement___greaters(val_t p0);
+typedef val_t (*partial_order___PartialOrderElement___greaters_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrderElement___greaters_and_self "partial_order::PartialOrderElement::greaters_and_self"
-typedef val_t (* partial_order___PartialOrderElement___smallers_t)(val_t  self);
-val_t partial_order___PartialOrderElement___smallers(val_t  self);
+val_t partial_order___PartialOrderElement___greaters_and_self(val_t p0);
+typedef val_t (*partial_order___PartialOrderElement___greaters_and_self_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrderElement___smallers "partial_order::PartialOrderElement::smallers"
-typedef val_t (* partial_order___PartialOrderElement___linear_extension_t)(val_t  self);
-val_t partial_order___PartialOrderElement___linear_extension(val_t  self);
+val_t partial_order___PartialOrderElement___smallers(val_t p0);
+typedef val_t (*partial_order___PartialOrderElement___smallers_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrderElement___linear_extension "partial_order::PartialOrderElement::linear_extension"
-typedef val_t (* partial_order___PartialOrderElement___reverse_linear_extension_t)(val_t  self);
-val_t partial_order___PartialOrderElement___reverse_linear_extension(val_t  self);
+val_t partial_order___PartialOrderElement___linear_extension(val_t p0);
+typedef val_t (*partial_order___PartialOrderElement___linear_extension_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrderElement___reverse_linear_extension "partial_order::PartialOrderElement::reverse_linear_extension"
-typedef val_t (* partial_order___PartialOrderElement_____l_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrderElement_____l(val_t  self, val_t  param0);
+val_t partial_order___PartialOrderElement___reverse_linear_extension(val_t p0);
+typedef val_t (*partial_order___PartialOrderElement___reverse_linear_extension_t)(val_t p0);
 #define LOCATE_partial_order___PartialOrderElement_____l "partial_order::PartialOrderElement::<"
-typedef val_t (* partial_order___PartialOrderElement_____leq_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrderElement_____leq(val_t  self, val_t  param0);
+val_t partial_order___PartialOrderElement_____l(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrderElement_____l_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrderElement_____leq "partial_order::PartialOrderElement::<="
-typedef val_t (* partial_order___PartialOrderElement_____g_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrderElement_____g(val_t  self, val_t  param0);
+val_t partial_order___PartialOrderElement_____leq(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrderElement_____leq_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrderElement_____g "partial_order::PartialOrderElement::>"
-typedef val_t (* partial_order___PartialOrderElement_____geq_t)(val_t  self, val_t  param0);
-val_t partial_order___PartialOrderElement_____geq(val_t  self, val_t  param0);
+val_t partial_order___PartialOrderElement_____g(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrderElement_____g_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrderElement_____geq "partial_order::PartialOrderElement::>="
-typedef void (* partial_order___PartialOrderElement___register_direct_smallers_t)(val_t  self, val_t  param0);
-void partial_order___PartialOrderElement___register_direct_smallers(val_t  self, val_t  param0);
+val_t partial_order___PartialOrderElement_____geq(val_t p0, val_t p1);
+typedef val_t (*partial_order___PartialOrderElement_____geq_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrderElement___register_direct_smallers "partial_order::PartialOrderElement::register_direct_smallers"
-typedef void (* partial_order___PartialOrderElement___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void partial_order___PartialOrderElement___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void partial_order___PartialOrderElement___register_direct_smallers(val_t p0, val_t p1);
+typedef void (*partial_order___PartialOrderElement___register_direct_smallers_t)(val_t p0, val_t p1);
 #define LOCATE_partial_order___PartialOrderElement___init "partial_order::PartialOrderElement::init"
+void partial_order___PartialOrderElement___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*partial_order___PartialOrderElement___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_PartialOrderElement_partial_order___PartialOrderElement___init(val_t p0, val_t p1, val_t p2);
 #endif

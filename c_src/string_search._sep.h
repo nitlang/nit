@@ -47,93 +47,93 @@ extern const int SFT_string_search[];
 #define CALL_string_search___String___search_all(recv) ((string_search___String___search_all_t)CALL((recv), (SFT_string_search[11] + 2)))
 #define CALL_string_search___String___split_with(recv) ((string_search___String___split_with_t)CALL((recv), (SFT_string_search[11] + 3)))
 #define CALL_string_search___String___split(recv) ((string_search___String___split_t)CALL((recv), (SFT_string_search[11] + 4)))
-typedef val_t (* string_search___Pattern___search_index_in_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string_search___Pattern___search_index_in(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_string_search___Pattern___search_index_in "string_search::Pattern::search_index_in"
-typedef val_t (* string_search___Pattern___search_in_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string_search___Pattern___search_in(val_t  self, val_t  param0, val_t  param1);
+val_t string_search___Pattern___search_index_in(val_t p0, val_t p1, val_t p2);
+typedef val_t (*string_search___Pattern___search_index_in_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_string_search___Pattern___search_in "string_search::Pattern::search_in"
-typedef val_t (* string_search___Pattern___search_all_in_t)(val_t  self, val_t  param0);
-val_t string_search___Pattern___search_all_in(val_t  self, val_t  param0);
+val_t string_search___Pattern___search_in(val_t p0, val_t p1, val_t p2);
+typedef val_t (*string_search___Pattern___search_in_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_string_search___Pattern___search_all_in "string_search::Pattern::search_all_in"
-typedef val_t (* string_search___Pattern___split_in_t)(val_t  self, val_t  param0);
-val_t string_search___Pattern___split_in(val_t  self, val_t  param0);
+val_t string_search___Pattern___search_all_in(val_t p0, val_t p1);
+typedef val_t (*string_search___Pattern___search_all_in_t)(val_t p0, val_t p1);
 #define LOCATE_string_search___Pattern___split_in "string_search::Pattern::split_in"
-typedef void (* string_search___Pattern___init_t)(val_t  self, int* init_table);
-void string_search___Pattern___init(val_t  self, int* init_table);
+val_t string_search___Pattern___split_in(val_t p0, val_t p1);
+typedef val_t (*string_search___Pattern___split_in_t)(val_t p0, val_t p1);
 #define LOCATE_string_search___Pattern___init "string_search::Pattern::init"
+void string_search___Pattern___init(val_t p0, int* init_table);
+typedef void (*string_search___Pattern___init_t)(val_t p0, int* init_table);
 val_t NEW_Pattern_string_search___Pattern___init();
-typedef val_t (* string_search___BM_Pattern___to_s_t)(val_t  self);
-val_t string_search___BM_Pattern___to_s(val_t  self);
 #define LOCATE_string_search___BM_Pattern___to_s "string_search::BM_Pattern::(string::Object::to_s)"
-typedef val_t (* string_search___BM_Pattern___search_index_in_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string_search___BM_Pattern___search_index_in(val_t  self, val_t  param0, val_t  param1);
+val_t string_search___BM_Pattern___to_s(val_t p0);
+typedef val_t (*string_search___BM_Pattern___to_s_t)(val_t p0);
 #define LOCATE_string_search___BM_Pattern___search_index_in "string_search::BM_Pattern::(string_search::Pattern::search_index_in)"
-typedef val_t (* string_search___BM_Pattern___search_in_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string_search___BM_Pattern___search_in(val_t  self, val_t  param0, val_t  param1);
+val_t string_search___BM_Pattern___search_index_in(val_t p0, val_t p1, val_t p2);
+typedef val_t (*string_search___BM_Pattern___search_index_in_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_string_search___BM_Pattern___search_in "string_search::BM_Pattern::(string_search::Pattern::search_in)"
-typedef void (* string_search___BM_Pattern___init_t)(val_t  self, val_t  param0, int* init_table);
-void string_search___BM_Pattern___init(val_t  self, val_t  param0, int* init_table);
+val_t string_search___BM_Pattern___search_in(val_t p0, val_t p1, val_t p2);
+typedef val_t (*string_search___BM_Pattern___search_in_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_string_search___BM_Pattern___init "string_search::BM_Pattern::init"
+void string_search___BM_Pattern___init(val_t p0, val_t p1, int* init_table);
+typedef void (*string_search___BM_Pattern___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_BM_Pattern_string_search___BM_Pattern___init(val_t p0);
-typedef val_t (* string_search___BM_Pattern___bc_t)(val_t  self, val_t  param0);
-val_t string_search___BM_Pattern___bc(val_t  self, val_t  param0);
 #define LOCATE_string_search___BM_Pattern___bc "string_search::BM_Pattern::bc"
-typedef void (* string_search___BM_Pattern___compute_bc_t)(val_t  self);
-void string_search___BM_Pattern___compute_bc(val_t  self);
+val_t string_search___BM_Pattern___bc(val_t p0, val_t p1);
+typedef val_t (*string_search___BM_Pattern___bc_t)(val_t p0, val_t p1);
 #define LOCATE_string_search___BM_Pattern___compute_bc "string_search::BM_Pattern::compute_bc"
-typedef val_t (* string_search___BM_Pattern___suffixes_t)(val_t  self);
-val_t string_search___BM_Pattern___suffixes(val_t  self);
+void string_search___BM_Pattern___compute_bc(val_t p0);
+typedef void (*string_search___BM_Pattern___compute_bc_t)(val_t p0);
 #define LOCATE_string_search___BM_Pattern___suffixes "string_search::BM_Pattern::suffixes"
-typedef void (* string_search___BM_Pattern___compute_gs_t)(val_t  self);
-void string_search___BM_Pattern___compute_gs(val_t  self);
+val_t string_search___BM_Pattern___suffixes(val_t p0);
+typedef val_t (*string_search___BM_Pattern___suffixes_t)(val_t p0);
 #define LOCATE_string_search___BM_Pattern___compute_gs "string_search::BM_Pattern::compute_gs"
-typedef val_t (* string_search___Match___to_s_t)(val_t  self);
-val_t string_search___Match___to_s(val_t  self);
+void string_search___BM_Pattern___compute_gs(val_t p0);
+typedef void (*string_search___BM_Pattern___compute_gs_t)(val_t p0);
 #define LOCATE_string_search___Match___to_s "string_search::Match::(string::Object::to_s)"
-typedef val_t (* string_search___Match___string_t)(val_t  self);
-val_t string_search___Match___string(val_t  self);
+val_t string_search___Match___to_s(val_t p0);
+typedef val_t (*string_search___Match___to_s_t)(val_t p0);
 #define LOCATE_string_search___Match___string "string_search::Match::string"
-typedef val_t (* string_search___Match___from_t)(val_t  self);
-val_t string_search___Match___from(val_t  self);
+val_t string_search___Match___string(val_t p0);
+typedef val_t (*string_search___Match___string_t)(val_t p0);
 #define LOCATE_string_search___Match___from "string_search::Match::from"
-typedef val_t (* string_search___Match___length_t)(val_t  self);
-val_t string_search___Match___length(val_t  self);
+val_t string_search___Match___from(val_t p0);
+typedef val_t (*string_search___Match___from_t)(val_t p0);
 #define LOCATE_string_search___Match___length "string_search::Match::length"
-typedef val_t (* string_search___Match___after_t)(val_t  self);
-val_t string_search___Match___after(val_t  self);
+val_t string_search___Match___length(val_t p0);
+typedef val_t (*string_search___Match___length_t)(val_t p0);
 #define LOCATE_string_search___Match___after "string_search::Match::after"
-typedef void (* string_search___Match___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void string_search___Match___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t string_search___Match___after(val_t p0);
+typedef val_t (*string_search___Match___after_t)(val_t p0);
 #define LOCATE_string_search___Match___init "string_search::Match::init"
+void string_search___Match___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*string_search___Match___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_Match_string_search___Match___init(val_t p0, val_t p1, val_t p2);
-typedef val_t (* string_search___Char___search_index_in_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string_search___Char___search_index_in(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_string_search___Char___search_index_in "string_search::Char::(string_search::Pattern::search_index_in)"
-typedef val_t (* string_search___Char___search_in_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string_search___Char___search_in(val_t  self, val_t  param0, val_t  param1);
+val_t string_search___Char___search_index_in(val_t p0, val_t p1, val_t p2);
+typedef val_t (*string_search___Char___search_index_in_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_string_search___Char___search_in "string_search::Char::(string_search::Pattern::search_in)"
+val_t string_search___Char___search_in(val_t p0, val_t p1, val_t p2);
+typedef val_t (*string_search___Char___search_in_t)(val_t p0, val_t p1, val_t p2);
 val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
 val_t NEW_String_string___String___from_cstring(val_t p0);
-typedef val_t (* string_search___String___search_index_in_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string_search___String___search_index_in(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_string_search___String___search_index_in "string_search::String::(string_search::Pattern::search_index_in)"
-typedef val_t (* string_search___String___search_in_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string_search___String___search_in(val_t  self, val_t  param0, val_t  param1);
+val_t string_search___String___search_index_in(val_t p0, val_t p1, val_t p2);
+typedef val_t (*string_search___String___search_index_in_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_string_search___String___search_in "string_search::String::(string_search::Pattern::search_in)"
-typedef val_t (* string_search___String___search_t)(val_t  self, val_t  param0);
-val_t string_search___String___search(val_t  self, val_t  param0);
+val_t string_search___String___search_in(val_t p0, val_t p1, val_t p2);
+typedef val_t (*string_search___String___search_in_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_string_search___String___search "string_search::String::search"
-typedef val_t (* string_search___String___search_from_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string_search___String___search_from(val_t  self, val_t  param0, val_t  param1);
+val_t string_search___String___search(val_t p0, val_t p1);
+typedef val_t (*string_search___String___search_t)(val_t p0, val_t p1);
 #define LOCATE_string_search___String___search_from "string_search::String::search_from"
-typedef val_t (* string_search___String___search_all_t)(val_t  self, val_t  param0);
-val_t string_search___String___search_all(val_t  self, val_t  param0);
+val_t string_search___String___search_from(val_t p0, val_t p1, val_t p2);
+typedef val_t (*string_search___String___search_from_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_string_search___String___search_all "string_search::String::search_all"
-typedef val_t (* string_search___String___split_with_t)(val_t  self, val_t  param0);
-val_t string_search___String___split_with(val_t  self, val_t  param0);
+val_t string_search___String___search_all(val_t p0, val_t p1);
+typedef val_t (*string_search___String___search_all_t)(val_t p0, val_t p1);
 #define LOCATE_string_search___String___split_with "string_search::String::split_with"
-typedef val_t (* string_search___String___split_t)(val_t  self);
-val_t string_search___String___split(val_t  self);
+val_t string_search___String___split_with(val_t p0, val_t p1);
+typedef val_t (*string_search___String___split_with_t)(val_t p0, val_t p1);
 #define LOCATE_string_search___String___split "string_search::String::split"
+val_t string_search___String___split(val_t p0);
+typedef val_t (*string_search___String___split_t)(val_t p0);
 #endif

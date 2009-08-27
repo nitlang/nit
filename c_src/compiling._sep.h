@@ -5,17 +5,22 @@
 #include <nit_common.h>
 extern const char *LOCATE_compiling;
 extern const int SFT_compiling[];
-#define CALL_compiling___MMSrcModule___compile_prog_to_c(recv) ((compiling___MMSrcModule___compile_prog_to_c_t)CALL((recv), (SFT_compiling[0] + 0)))
-#define CALL_compiling___MMSrcModule___compile_main(recv) ((compiling___MMSrcModule___compile_main_t)CALL((recv), (SFT_compiling[0] + 1)))
-#define CALL_compiling___MMSrcModule___compile_separate_module(recv) ((compiling___MMSrcModule___compile_separate_module_t)CALL((recv), (SFT_compiling[0] + 2)))
-val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-typedef void (* compiling___MMSrcModule___compile_prog_to_c_t)(val_t  self, val_t  param0);
-void compiling___MMSrcModule___compile_prog_to_c(val_t  self, val_t  param0);
-#define LOCATE_compiling___MMSrcModule___compile_prog_to_c "compiling::MMSrcModule::compile_prog_to_c"
-typedef void (* compiling___MMSrcModule___compile_main_t)(val_t  self, val_t  param0, val_t  param1);
-void compiling___MMSrcModule___compile_main(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_compiling___MMSrcModule___compile_main "compiling::MMSrcModule::compile_main"
-typedef void (* compiling___MMSrcModule___compile_separate_module_t)(val_t  self, val_t  param0, val_t  param1);
-void compiling___MMSrcModule___compile_separate_module(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_compiling___MMSrcModule___compile_separate_module "compiling::MMSrcModule::compile_separate_module"
+#define CALL_compiling___Program___generate_classes_init_to_icode(recv) ((compiling___Program___generate_classes_init_to_icode_t)CALL((recv), (SFT_compiling[0] + 0)))
+#define CALL_compiling___Program___compile_prog_to_c(recv) ((compiling___Program___compile_prog_to_c_t)CALL((recv), (SFT_compiling[0] + 1)))
+#define CALL_compiling___Program___compile_main(recv) ((compiling___Program___compile_main_t)CALL((recv), (SFT_compiling[0] + 2)))
+#define CALL_compiling___MMModule___compile_separate_module(recv) ((compiling___MMModule___compile_separate_module_t)CALL((recv), (SFT_compiling[1] + 0)))
+val_t NEW_Program_program___Program___init(val_t p0);
+#define LOCATE_compiling___Program___generate_classes_init_to_icode "compiling::Program::generate_classes_init_to_icode"
+void compiling___Program___generate_classes_init_to_icode(val_t p0);
+typedef void (*compiling___Program___generate_classes_init_to_icode_t)(val_t p0);
+#define LOCATE_compiling___Program___compile_prog_to_c "compiling::Program::compile_prog_to_c"
+void compiling___Program___compile_prog_to_c(val_t p0, val_t p1);
+typedef void (*compiling___Program___compile_prog_to_c_t)(val_t p0, val_t p1);
+#define LOCATE_compiling___Program___compile_main "compiling::Program::compile_main"
+void compiling___Program___compile_main(val_t p0, val_t p1);
+typedef void (*compiling___Program___compile_main_t)(val_t p0, val_t p1);
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
+#define LOCATE_compiling___MMModule___compile_separate_module "compiling::MMModule::compile_separate_module"
+void compiling___MMModule___compile_separate_module(val_t p0, val_t p1, val_t p2);
+typedef void (*compiling___MMModule___compile_separate_module_t)(val_t p0, val_t p1, val_t p2);
 #endif

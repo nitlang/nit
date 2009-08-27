@@ -18,23 +18,18 @@
 #include <stdio.h>
 #include <string.h>
 
-#ifdef WITH_LIBGC
-#include <gc/gc.h>
-#define malloc(x) GC_MALLOC((x))
-#define calloc(x,y) GC_MALLOC((x)*(y))
-#endif
-
-
-
 /* *** Types *** */
 typedef signed long int bigint;	/* standard int value, must be larger that any poiner */
 typedef bigint (*fun_t) (bigint);					/* generic function pointer */
 typedef bigint cid_t;					/* class identifier */
 typedef bigint val_t;	/* value (everything is a val_t) */
-typedef union obj_tu {union classtable_elt_tu * vft; val_t attr;} *obj_t; /* standard object */
+typedef union obj_tu {union classtable_elt_tu * vft; bigint object_id; val_t objectSize;} *obj_t; /* standard object */
 typedef union classtable_elt_tu { bigint i; fun_t f; cid_t cid;} classtable_elt_t;	/* classtable element */
+typedef struct Nit_NativeArray {const classtable_elt_t * vft; bigint object_id; bigint size; val_t val[1];} * Nit_NativeArray;
 
 typedef classtable_elt_t * classtable_t;			/* classtable */
+
+extern bigint object_id_counter;
 
 /*****************************************************************************
  * Types macros (primitive and less primitives) ******************************
@@ -84,6 +79,7 @@ typedef classtable_elt_t * classtable_t;			/* classtable */
 
 #define ISOBJ(x) (TAG((x)) == OBJTAG)
 #define VAL2OBJ(x) ((obj_t)(x))
+#define VAL2ARRAY(x) ((Nit_NativeArray)(x))
 #define OBJ2VAL(o) ((val_t)(o))
 #define VAL2VFT(x) (ISOBJ(x) ? VAL2OBJ(x)->vft : TAG2VFT[TAG(x)])
 /*#define VAL2CID(x) (ISOBJ(x) ? (VAL2OBJ(x)->vft->cid) : (-TAG(x)))*/
@@ -95,8 +91,9 @@ typedef classtable_elt_t * classtable_t;			/* classtable */
 /* Equal comparaison */
 /* O = Non nil object ; N = Object or nil ; P = Primitive */
 #define OBJ_IS_BOX(x) ((VAL2OBJ(x)->vft->i) < 0)
+#define OBJ_IS_ARRAY(x) ((VAL2ARRAY(x)->vft[1].i) == -1)
 #define IS_BOX(x) (ISOBJ(x) && OBJ_IS_BOX(x))
-#define IS_EQUAL_BOX(x, y) (ISOBJ(y) && (VAL2OBJ(x)[1].vft==VAL2OBJ(y)[1].vft) && (VAL2OBJ(x)->vft==VAL2OBJ(y)->vft))
+#define IS_EQUAL_BOX(x, y) (ISOBJ(y) && (VAL2OBJ(x)[2].vft==VAL2OBJ(y)[2].vft) && (VAL2OBJ(x)->vft==VAL2OBJ(y)->vft))
 #define IS_EQUAL_OO(x, y) ((x)==(y) || (IS_BOX(x) && IS_EQUAL_BOX((x), (y))))
 #define IS_EQUAL_ON(x, y) ((x)==(y) || (IS_BOX(x) && !ISNULL(y) && IS_EQUAL_BOX((x), (y))))
 #define IS_EQUAL_NN(x, y) ((x)==(y) || (!ISNULL(x) && IS_BOX(x) && !ISNULL(y) && IS_EQUAL_BOX((x), (y))))
@@ -111,7 +108,11 @@ typedef classtable_elt_t * classtable_t;			/* classtable */
 
 #define VAL_ISA(e, c, i) (VAL2VFT((e))[(c)].cid == (cid_t)(i))
 
-void * alloc(size_t);
+/* GC and memory management */
+void *alloc(size_t); /* allocate memory to store an object with an object header */
+void *raw_alloc(size_t); /* allocate raw memory to store a raw stram of byte */
+void register_static_object(val_t*); /* mark that something is a global or once object */
+
 extern val_t G_args;
 extern val_t G_stdin;
 extern val_t G_stdout;
@@ -121,13 +122,26 @@ extern val_t G_sys;
 extern int glob_argc;
 extern char ** glob_argv;
 
-struct trace_t {
-	struct trace_t *prev; /* previous stack frame */
-	const char *file; /* source filename */
-	int line; /* line number */
-	const char *meth; /* method name */
+/* Stack frames.
+ * Are used to:
+ * - store local variables (REGS) of functions
+ * - store context for closure
+ * - provide information for stack dump
+ */
+struct stack_frame_t {
+	struct stack_frame_t *prev; /* previous stack frame */
+	const char *file; /* source filename (.nit) */
+	int line; /* line number (in the source) */
+	const char *meth; /* human function name (usually the method name) */
+	struct stack_frame_t *closure_ctx; /* closure context (for functions that have closure parameters) */
+	fun_t *closure_funs; /* closure functions (for functions that have closure parameters) */
+	int has_broke; /* has an escape occured? 0 if false, label_idx (>0) if true */
+	int REG_size; /* number of local variables */
+	val_t REG[1]; /* local variables (flexible array) */
 };
-extern struct trace_t *tracehead;
+extern struct stack_frame_t *stack_frame_head;
+
+
 typedef enum {true = (1==1),false = (0==1)} bool;
 
 void nit_exit(int);
@@ -139,8 +153,4 @@ void nit_exit(int);
 void prepare_signals(void);
 extern classtable_t TAG2VFT[4];
 
-/* This structure is used to store closure.
- * Specific closure use a specific fun parameter.
- */
-struct WBT_ {fun_t fun; val_t *has_broke; val_t broke_value; val_t *variable; struct WBT_ **closurevariable;};
 #endif

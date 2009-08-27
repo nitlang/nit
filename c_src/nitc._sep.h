@@ -18,6 +18,7 @@ extern const int SFT_nitc[];
 #define ATTR_nitc___NitCompiler____opt_bindir(recv) ATTR(recv, (SFT_nitc[2] + 5))
 #define ATTR_nitc___NitCompiler____opt_compdir(recv) ATTR(recv, (SFT_nitc[2] + 6))
 #define ATTR_nitc___NitCompiler____opt_extension_prefix(recv) ATTR(recv, (SFT_nitc[2] + 7))
+#define ATTR_nitc___NitCompiler____opt_dump(recv) ATTR(recv, (SFT_nitc[2] + 8))
 #define INIT_TABLE_POS_NitCompiler (SFT_nitc[3] + 0)
 #define CALL_nitc___NitCompiler___opt_output(recv) ((nitc___NitCompiler___opt_output_t)CALL((recv), (SFT_nitc[3] + 1)))
 #define CALL_nitc___NitCompiler___opt_boost(recv) ((nitc___NitCompiler___opt_boost_t)CALL((recv), (SFT_nitc[3] + 2)))
@@ -27,44 +28,52 @@ extern const int SFT_nitc[];
 #define CALL_nitc___NitCompiler___opt_bindir(recv) ((nitc___NitCompiler___opt_bindir_t)CALL((recv), (SFT_nitc[3] + 6)))
 #define CALL_nitc___NitCompiler___opt_compdir(recv) ((nitc___NitCompiler___opt_compdir_t)CALL((recv), (SFT_nitc[3] + 7)))
 #define CALL_nitc___NitCompiler___opt_extension_prefix(recv) ((nitc___NitCompiler___opt_extension_prefix_t)CALL((recv), (SFT_nitc[3] + 8)))
-#define CALL_nitc___NitCompiler___init(recv) ((nitc___NitCompiler___init_t)CALL((recv), (SFT_nitc[3] + 9)))
-#define CALL_SUPER_nitc___NitCompiler___process_options(recv) ((nitc___NitCompiler___process_options_t)CALL((recv), (SFT_nitc[3] + 10)))
-typedef void (* nitc___NitCompiler___process_options_t)(val_t  self);
-void nitc___NitCompiler___process_options(val_t  self);
+#define CALL_nitc___NitCompiler___opt_dump(recv) ((nitc___NitCompiler___opt_dump_t)CALL((recv), (SFT_nitc[3] + 9)))
+#define CALL_nitc___NitCompiler___init(recv) ((nitc___NitCompiler___init_t)CALL((recv), (SFT_nitc[3] + 10)))
+#define CALL_SUPER_nitc___NitCompiler___process_options(recv) ((nitc___NitCompiler___process_options_t)CALL((recv), (SFT_nitc[3] + 11)))
+#define CALL_nitc___NitCompiler___dump_intermediate_code(recv) ((nitc___NitCompiler___dump_intermediate_code_t)CALL((recv), (SFT_nitc[3] + 12)))
 #define LOCATE_nitc___NitCompiler___process_options "nitc::NitCompiler::(mmloader::ToolContext::process_options)"
-typedef void (* nitc___NitCompiler___perform_work_t)(val_t  self, val_t  param0);
-void nitc___NitCompiler___perform_work(val_t  self, val_t  param0);
+void nitc___NitCompiler___process_options(val_t p0);
+typedef void (*nitc___NitCompiler___process_options_t)(val_t p0);
 #define LOCATE_nitc___NitCompiler___perform_work "nitc::NitCompiler::(abstracttool::AbstractCompiler::perform_work)"
-typedef val_t (* nitc___NitCompiler___opt_output_t)(val_t  self);
-val_t nitc___NitCompiler___opt_output(val_t  self);
+void nitc___NitCompiler___perform_work(val_t p0, val_t p1);
+typedef void (*nitc___NitCompiler___perform_work_t)(val_t p0, val_t p1);
 #define LOCATE_nitc___NitCompiler___opt_output "nitc::NitCompiler::opt_output"
-typedef val_t (* nitc___NitCompiler___opt_boost_t)(val_t  self);
-val_t nitc___NitCompiler___opt_boost(val_t  self);
+val_t nitc___NitCompiler___opt_output(val_t p0);
+typedef val_t (*nitc___NitCompiler___opt_output_t)(val_t p0);
 #define LOCATE_nitc___NitCompiler___opt_boost "nitc::NitCompiler::opt_boost"
-typedef val_t (* nitc___NitCompiler___opt_no_cc_t)(val_t  self);
-val_t nitc___NitCompiler___opt_no_cc(val_t  self);
+val_t nitc___NitCompiler___opt_boost(val_t p0);
+typedef val_t (*nitc___NitCompiler___opt_boost_t)(val_t p0);
 #define LOCATE_nitc___NitCompiler___opt_no_cc "nitc::NitCompiler::opt_no_cc"
-typedef val_t (* nitc___NitCompiler___opt_global_t)(val_t  self);
-val_t nitc___NitCompiler___opt_global(val_t  self);
+val_t nitc___NitCompiler___opt_no_cc(val_t p0);
+typedef val_t (*nitc___NitCompiler___opt_no_cc_t)(val_t p0);
 #define LOCATE_nitc___NitCompiler___opt_global "nitc::NitCompiler::opt_global"
-typedef val_t (* nitc___NitCompiler___opt_clibdir_t)(val_t  self);
-val_t nitc___NitCompiler___opt_clibdir(val_t  self);
+val_t nitc___NitCompiler___opt_global(val_t p0);
+typedef val_t (*nitc___NitCompiler___opt_global_t)(val_t p0);
 #define LOCATE_nitc___NitCompiler___opt_clibdir "nitc::NitCompiler::opt_clibdir"
-typedef val_t (* nitc___NitCompiler___opt_bindir_t)(val_t  self);
-val_t nitc___NitCompiler___opt_bindir(val_t  self);
+val_t nitc___NitCompiler___opt_clibdir(val_t p0);
+typedef val_t (*nitc___NitCompiler___opt_clibdir_t)(val_t p0);
 #define LOCATE_nitc___NitCompiler___opt_bindir "nitc::NitCompiler::opt_bindir"
-typedef val_t (* nitc___NitCompiler___opt_compdir_t)(val_t  self);
-val_t nitc___NitCompiler___opt_compdir(val_t  self);
+val_t nitc___NitCompiler___opt_bindir(val_t p0);
+typedef val_t (*nitc___NitCompiler___opt_bindir_t)(val_t p0);
 #define LOCATE_nitc___NitCompiler___opt_compdir "nitc::NitCompiler::opt_compdir"
-typedef val_t (* nitc___NitCompiler___opt_extension_prefix_t)(val_t  self);
-val_t nitc___NitCompiler___opt_extension_prefix(val_t  self);
+val_t nitc___NitCompiler___opt_compdir(val_t p0);
+typedef val_t (*nitc___NitCompiler___opt_compdir_t)(val_t p0);
 #define LOCATE_nitc___NitCompiler___opt_extension_prefix "nitc::NitCompiler::opt_extension_prefix"
-typedef void (* nitc___NitCompiler___init_t)(val_t  self, int* init_table);
-void nitc___NitCompiler___init(val_t  self, int* init_table);
+val_t nitc___NitCompiler___opt_extension_prefix(val_t p0);
+typedef val_t (*nitc___NitCompiler___opt_extension_prefix_t)(val_t p0);
+#define LOCATE_nitc___NitCompiler___opt_dump "nitc::NitCompiler::opt_dump"
+val_t nitc___NitCompiler___opt_dump(val_t p0);
+typedef val_t (*nitc___NitCompiler___opt_dump_t)(val_t p0);
 #define LOCATE_nitc___NitCompiler___init "nitc::NitCompiler::init"
+void nitc___NitCompiler___init(val_t p0, int* init_table);
+typedef void (*nitc___NitCompiler___init_t)(val_t p0, int* init_table);
 val_t NEW_NitCompiler_nitc___NitCompiler___init();
-typedef void (* nitc___Sys___main_t)(val_t  self);
-void nitc___Sys___main(val_t  self);
+#define LOCATE_nitc___NitCompiler___dump_intermediate_code "nitc::NitCompiler::dump_intermediate_code"
+void nitc___NitCompiler___dump_intermediate_code(val_t p0, val_t p1);
+typedef void (*nitc___NitCompiler___dump_intermediate_code_t)(val_t p0, val_t p1);
 #define LOCATE_nitc___Sys___main "nitc::Sys::(kernel::Sys::main)"
+void nitc___Sys___main(val_t p0);
+typedef void (*nitc___Sys___main_t)(val_t p0);
 val_t NEW_Sys_kernel___Sys___init();
 #endif

@@ -8,6 +8,8 @@ extern const classtable_elt_t VFT_EscapableContext[];
 
 extern const classtable_elt_t VFT_EscapableBlock[];
 
+extern const classtable_elt_t VFT_BreakOnlyEscapableBlock[];
+
 extern const classtable_elt_t VFT_EscapableClosure[];
 
 extern const classtable_elt_t VFT_AEscapeExpr[];
@@ -16,108 +18,125 @@ extern const int SFT_escape[];
 #define ID_EscapableContext (SFT_escape[0])
 #define COLOR_EscapableContext (SFT_escape[1])
 #define ATTR_escape___EscapableContext____stack(recv) ATTR(recv, (SFT_escape[2] + 0))
-#define ATTR_escape___EscapableContext____visitor(recv) ATTR(recv, (SFT_escape[2] + 1))
+#define ATTR_escape___EscapableContext____labels(recv) ATTR(recv, (SFT_escape[2] + 1))
+#define ATTR_escape___EscapableContext____visitor(recv) ATTR(recv, (SFT_escape[2] + 2))
 #define INIT_TABLE_POS_EscapableContext (SFT_escape[3] + 0)
 #define CALL_escape___EscapableContext___push(recv) ((escape___EscapableContext___push_t)CALL((recv), (SFT_escape[3] + 1)))
-#define CALL_escape___EscapableContext___is_empty(recv) ((escape___EscapableContext___is_empty_t)CALL((recv), (SFT_escape[3] + 2)))
-#define CALL_escape___EscapableContext___head(recv) ((escape___EscapableContext___head_t)CALL((recv), (SFT_escape[3] + 3)))
+#define CALL_escape___EscapableContext___head(recv) ((escape___EscapableContext___head_t)CALL((recv), (SFT_escape[3] + 2)))
+#define CALL_escape___EscapableContext___get_by_label(recv) ((escape___EscapableContext___get_by_label_t)CALL((recv), (SFT_escape[3] + 3)))
 #define CALL_escape___EscapableContext___pop(recv) ((escape___EscapableContext___pop_t)CALL((recv), (SFT_escape[3] + 4)))
 #define CALL_escape___EscapableContext___visitor(recv) ((escape___EscapableContext___visitor_t)CALL((recv), (SFT_escape[3] + 5)))
 #define CALL_escape___EscapableContext___init(recv) ((escape___EscapableContext___init_t)CALL((recv), (SFT_escape[3] + 6)))
 #define ID_EscapableBlock (SFT_escape[4])
 #define COLOR_EscapableBlock (SFT_escape[5])
 #define ATTR_escape___EscapableBlock____node(recv) ATTR(recv, (SFT_escape[6] + 0))
+#define ATTR_escape___EscapableBlock____lab(recv) ATTR(recv, (SFT_escape[6] + 1))
 #define INIT_TABLE_POS_EscapableBlock (SFT_escape[7] + 0)
 #define CALL_escape___EscapableBlock___node(recv) ((escape___EscapableBlock___node_t)CALL((recv), (SFT_escape[7] + 1)))
-#define CALL_escape___EscapableBlock___is_break_block(recv) ((escape___EscapableBlock___is_break_block_t)CALL((recv), (SFT_escape[7] + 2)))
-#define CALL_escape___EscapableBlock___break_list(recv) ((escape___EscapableBlock___break_list_t)CALL((recv), (SFT_escape[7] + 3)))
-#define CALL_escape___EscapableBlock___continue_stype(recv) ((escape___EscapableBlock___continue_stype_t)CALL((recv), (SFT_escape[7] + 4)))
-#define CALL_escape___EscapableBlock___init(recv) ((escape___EscapableBlock___init_t)CALL((recv), (SFT_escape[7] + 5)))
-#define ID_EscapableClosure (SFT_escape[8])
-#define COLOR_EscapableClosure (SFT_escape[9])
-#define ATTR_escape___EscapableClosure____closure(recv) ATTR(recv, (SFT_escape[10] + 0))
-#define ATTR_escape___EscapableClosure____break_list(recv) ATTR(recv, (SFT_escape[10] + 1))
-#define INIT_TABLE_POS_EscapableClosure (SFT_escape[11] + 0)
-#define CALL_escape___EscapableClosure___closure(recv) ((escape___EscapableClosure___closure_t)CALL((recv), (SFT_escape[11] + 1)))
-#define CALL_escape___EscapableClosure___init(recv) ((escape___EscapableClosure___init_t)CALL((recv), (SFT_escape[11] + 2)))
-#define ID_AEscapeExpr (SFT_escape[12])
-#define COLOR_AEscapeExpr (SFT_escape[13])
-#define ATTR_escape___AEscapeExpr____escapable_block(recv) ATTR(recv, (SFT_escape[14] + 0))
-#define INIT_TABLE_POS_AEscapeExpr (SFT_escape[15] + 0)
-#define CALL_escape___AEscapeExpr___escapable_block(recv) ((escape___AEscapeExpr___escapable_block_t)CALL((recv), (SFT_escape[15] + 1)))
-#define CALL_escape___AEscapeExpr___kwname(recv) ((escape___AEscapeExpr___kwname_t)CALL((recv), (SFT_escape[15] + 2)))
-#define CALL_escape___AEscapeExpr___compute_escapable_block(recv) ((escape___AEscapeExpr___compute_escapable_block_t)CALL((recv), (SFT_escape[15] + 3)))
-typedef void (* escape___EscapableContext___push_t)(val_t  self, val_t  param0);
-void escape___EscapableContext___push(val_t  self, val_t  param0);
+#define CALL_escape___EscapableBlock___lab(recv) ((escape___EscapableBlock___lab_t)CALL((recv), (SFT_escape[7] + 2)))
+#define CALL_escape___EscapableBlock___is_break_block(recv) ((escape___EscapableBlock___is_break_block_t)CALL((recv), (SFT_escape[7] + 3)))
+#define CALL_escape___EscapableBlock___break_list(recv) ((escape___EscapableBlock___break_list_t)CALL((recv), (SFT_escape[7] + 4)))
+#define CALL_escape___EscapableBlock___continue_stype(recv) ((escape___EscapableBlock___continue_stype_t)CALL((recv), (SFT_escape[7] + 5)))
+#define CALL_escape___EscapableBlock___init(recv) ((escape___EscapableBlock___init_t)CALL((recv), (SFT_escape[7] + 6)))
+#define ID_BreakOnlyEscapableBlock (SFT_escape[8])
+#define COLOR_BreakOnlyEscapableBlock (SFT_escape[9])
+#define INIT_TABLE_POS_BreakOnlyEscapableBlock (SFT_escape[10] + 0)
+#define CALL_escape___BreakOnlyEscapableBlock___init(recv) ((escape___BreakOnlyEscapableBlock___init_t)CALL((recv), (SFT_escape[10] + 1)))
+#define ID_EscapableClosure (SFT_escape[11])
+#define COLOR_EscapableClosure (SFT_escape[12])
+#define ATTR_escape___EscapableClosure____closure(recv) ATTR(recv, (SFT_escape[13] + 0))
+#define ATTR_escape___EscapableClosure____break_list(recv) ATTR(recv, (SFT_escape[13] + 1))
+#define INIT_TABLE_POS_EscapableClosure (SFT_escape[14] + 0)
+#define CALL_escape___EscapableClosure___closure(recv) ((escape___EscapableClosure___closure_t)CALL((recv), (SFT_escape[14] + 1)))
+#define CALL_escape___EscapableClosure___init(recv) ((escape___EscapableClosure___init_t)CALL((recv), (SFT_escape[14] + 2)))
+#define ID_AEscapeExpr (SFT_escape[15])
+#define COLOR_AEscapeExpr (SFT_escape[16])
+#define ATTR_escape___AEscapeExpr____escapable(recv) ATTR(recv, (SFT_escape[17] + 0))
+#define INIT_TABLE_POS_AEscapeExpr (SFT_escape[18] + 0)
+#define CALL_escape___AEscapeExpr___escapable(recv) ((escape___AEscapeExpr___escapable_t)CALL((recv), (SFT_escape[18] + 1)))
+#define CALL_escape___AEscapeExpr___kwname(recv) ((escape___AEscapeExpr___kwname_t)CALL((recv), (SFT_escape[18] + 2)))
+#define CALL_escape___AEscapeExpr___compute_escapable_block(recv) ((escape___AEscapeExpr___compute_escapable_block_t)CALL((recv), (SFT_escape[18] + 3)))
 #define LOCATE_escape___EscapableContext___push "escape::EscapableContext::push"
-typedef val_t (* escape___EscapableContext___is_empty_t)(val_t  self);
-val_t escape___EscapableContext___is_empty(val_t  self);
-#define LOCATE_escape___EscapableContext___is_empty "escape::EscapableContext::is_empty"
-typedef val_t (* escape___EscapableContext___head_t)(val_t  self);
-val_t escape___EscapableContext___head(val_t  self);
+void escape___EscapableContext___push(val_t p0, val_t p1, val_t p2);
+typedef void (*escape___EscapableContext___push_t)(val_t p0, val_t p1, val_t p2);
 #define LOCATE_escape___EscapableContext___head "escape::EscapableContext::head"
-typedef void (* escape___EscapableContext___pop_t)(val_t  self);
-void escape___EscapableContext___pop(val_t  self);
+val_t escape___EscapableContext___head(val_t p0);
+typedef val_t (*escape___EscapableContext___head_t)(val_t p0);
+#define LOCATE_escape___EscapableContext___get_by_label "escape::EscapableContext::get_by_label"
+val_t escape___EscapableContext___get_by_label(val_t p0, val_t p1);
+typedef val_t (*escape___EscapableContext___get_by_label_t)(val_t p0, val_t p1);
 #define LOCATE_escape___EscapableContext___pop "escape::EscapableContext::pop"
-typedef val_t (* escape___EscapableContext___visitor_t)(val_t  self);
-val_t escape___EscapableContext___visitor(val_t  self);
+void escape___EscapableContext___pop(val_t p0);
+typedef void (*escape___EscapableContext___pop_t)(val_t p0);
 #define LOCATE_escape___EscapableContext___visitor "escape::EscapableContext::visitor"
-typedef void (* escape___EscapableContext___init_t)(val_t  self, val_t  param0, int* init_table);
-void escape___EscapableContext___init(val_t  self, val_t  param0, int* init_table);
+val_t escape___EscapableContext___visitor(val_t p0);
+typedef val_t (*escape___EscapableContext___visitor_t)(val_t p0);
 #define LOCATE_escape___EscapableContext___init "escape::EscapableContext::init"
+void escape___EscapableContext___init(val_t p0, val_t p1, int* init_table);
+typedef void (*escape___EscapableContext___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_EscapableContext_escape___EscapableContext___init(val_t p0);
-typedef val_t (* escape___EscapableBlock___node_t)(val_t  self);
-val_t escape___EscapableBlock___node(val_t  self);
 #define LOCATE_escape___EscapableBlock___node "escape::EscapableBlock::node"
-typedef val_t (* escape___EscapableBlock___is_break_block_t)(val_t  self);
-val_t escape___EscapableBlock___is_break_block(val_t  self);
+val_t escape___EscapableBlock___node(val_t p0);
+typedef val_t (*escape___EscapableBlock___node_t)(val_t p0);
+#define LOCATE_escape___EscapableBlock___lab "escape::EscapableBlock::lab"
+val_t escape___EscapableBlock___lab(val_t p0);
+typedef val_t (*escape___EscapableBlock___lab_t)(val_t p0);
 #define LOCATE_escape___EscapableBlock___is_break_block "escape::EscapableBlock::is_break_block"
-typedef val_t (* escape___EscapableBlock___break_list_t)(val_t  self);
-val_t escape___EscapableBlock___break_list(val_t  self);
+val_t escape___EscapableBlock___is_break_block(val_t p0);
+typedef val_t (*escape___EscapableBlock___is_break_block_t)(val_t p0);
 #define LOCATE_escape___EscapableBlock___break_list "escape::EscapableBlock::break_list"
-typedef val_t (* escape___EscapableBlock___continue_stype_t)(val_t  self);
-val_t escape___EscapableBlock___continue_stype(val_t  self);
+val_t escape___EscapableBlock___break_list(val_t p0);
+typedef val_t (*escape___EscapableBlock___break_list_t)(val_t p0);
 #define LOCATE_escape___EscapableBlock___continue_stype "escape::EscapableBlock::continue_stype"
-typedef void (* escape___EscapableBlock___init_t)(val_t  self, val_t  param0, int* init_table);
-void escape___EscapableBlock___init(val_t  self, val_t  param0, int* init_table);
+val_t escape___EscapableBlock___continue_stype(val_t p0);
+typedef val_t (*escape___EscapableBlock___continue_stype_t)(val_t p0);
 #define LOCATE_escape___EscapableBlock___init "escape::EscapableBlock::init"
+void escape___EscapableBlock___init(val_t p0, val_t p1, int* init_table);
+typedef void (*escape___EscapableBlock___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_EscapableBlock_escape___EscapableBlock___init(val_t p0);
-typedef val_t (* escape___EscapableClosure___is_break_block_t)(val_t  self);
-val_t escape___EscapableClosure___is_break_block(val_t  self);
+#define LOCATE_escape___BreakOnlyEscapableBlock___is_break_block "escape::BreakOnlyEscapableBlock::(escape::EscapableBlock::is_break_block)"
+val_t escape___BreakOnlyEscapableBlock___is_break_block(val_t p0);
+typedef val_t (*escape___BreakOnlyEscapableBlock___is_break_block_t)(val_t p0);
+#define LOCATE_escape___BreakOnlyEscapableBlock___init "escape::BreakOnlyEscapableBlock::init"
+void escape___BreakOnlyEscapableBlock___init(val_t p0, val_t p1, int* init_table);
+typedef void (*escape___BreakOnlyEscapableBlock___init_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_BreakOnlyEscapableBlock_escape___BreakOnlyEscapableBlock___init(val_t p0);
 #define LOCATE_escape___EscapableClosure___is_break_block "escape::EscapableClosure::(escape::EscapableBlock::is_break_block)"
-typedef val_t (* escape___EscapableClosure___break_list_t)(val_t  self);
-val_t escape___EscapableClosure___break_list(val_t  self);
+val_t escape___EscapableClosure___is_break_block(val_t p0);
+typedef val_t (*escape___EscapableClosure___is_break_block_t)(val_t p0);
 #define LOCATE_escape___EscapableClosure___break_list "escape::EscapableClosure::(escape::EscapableBlock::break_list)"
-typedef val_t (* escape___EscapableClosure___continue_stype_t)(val_t  self);
-val_t escape___EscapableClosure___continue_stype(val_t  self);
+val_t escape___EscapableClosure___break_list(val_t p0);
+typedef val_t (*escape___EscapableClosure___break_list_t)(val_t p0);
 #define LOCATE_escape___EscapableClosure___continue_stype "escape::EscapableClosure::(escape::EscapableBlock::continue_stype)"
-typedef val_t (* escape___EscapableClosure___closure_t)(val_t  self);
-val_t escape___EscapableClosure___closure(val_t  self);
+val_t escape___EscapableClosure___continue_stype(val_t p0);
+typedef val_t (*escape___EscapableClosure___continue_stype_t)(val_t p0);
 #define LOCATE_escape___EscapableClosure___closure "escape::EscapableClosure::closure"
-typedef void (* escape___EscapableClosure___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void escape___EscapableClosure___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t escape___EscapableClosure___closure(val_t p0);
+typedef val_t (*escape___EscapableClosure___closure_t)(val_t p0);
 #define LOCATE_escape___EscapableClosure___init "escape::EscapableClosure::init"
+void escape___EscapableClosure___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*escape___EscapableClosure___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_EscapableClosure_escape___EscapableClosure___init(val_t p0, val_t p1, val_t p2);
-val_t NEW_AEscapeExpr_parser_nodes___PNode___init();
-typedef val_t (* escape___AEscapeExpr___escapable_block_t)(val_t  self);
-val_t escape___AEscapeExpr___escapable_block(val_t  self);
-#define LOCATE_escape___AEscapeExpr___escapable_block "escape::AEscapeExpr::escapable_block"
-typedef val_t (* escape___AEscapeExpr___kwname_t)(val_t  self);
-val_t escape___AEscapeExpr___kwname(val_t  self);
+val_t NEW_AEscapeExpr_parser_nodes___ANode___init(val_t p0);
+#define LOCATE_escape___AEscapeExpr___escapable "escape::AEscapeExpr::escapable"
+val_t escape___AEscapeExpr___escapable(val_t p0);
+typedef val_t (*escape___AEscapeExpr___escapable_t)(val_t p0);
 #define LOCATE_escape___AEscapeExpr___kwname "escape::AEscapeExpr::kwname"
-typedef val_t (* escape___AEscapeExpr___compute_escapable_block_t)(val_t  self, val_t  param0);
-val_t escape___AEscapeExpr___compute_escapable_block(val_t  self, val_t  param0);
+val_t escape___AEscapeExpr___kwname(val_t p0);
+typedef val_t (*escape___AEscapeExpr___kwname_t)(val_t p0);
 #define LOCATE_escape___AEscapeExpr___compute_escapable_block "escape::AEscapeExpr::compute_escapable_block"
-val_t NEW_AContinueExpr_parser_nodes___PNode___init();
+val_t escape___AEscapeExpr___compute_escapable_block(val_t p0, val_t p1);
+typedef val_t (*escape___AEscapeExpr___compute_escapable_block_t)(val_t p0, val_t p1);
+val_t NEW_AContinueExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AContinueExpr_parser_prod___AContinueExpr___empty_init();
-val_t NEW_AContinueExpr_parser_prod___AContinueExpr___init_acontinueexpr(val_t p0, val_t p1);
-typedef val_t (* escape___AContinueExpr___kwname_t)(val_t  self);
-val_t escape___AContinueExpr___kwname(val_t  self);
+val_t NEW_AContinueExpr_parser_prod___AContinueExpr___init_acontinueexpr(val_t p0, val_t p1, val_t p2);
 #define LOCATE_escape___AContinueExpr___kwname "escape::AContinueExpr::(escape::AEscapeExpr::kwname)"
-val_t NEW_ABreakExpr_parser_nodes___PNode___init();
+val_t escape___AContinueExpr___kwname(val_t p0);
+typedef val_t (*escape___AContinueExpr___kwname_t)(val_t p0);
+val_t NEW_ABreakExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ABreakExpr_parser_prod___ABreakExpr___empty_init();
-val_t NEW_ABreakExpr_parser_prod___ABreakExpr___init_abreakexpr(val_t p0, val_t p1);
-typedef val_t (* escape___ABreakExpr___kwname_t)(val_t  self);
-val_t escape___ABreakExpr___kwname(val_t  self);
+val_t NEW_ABreakExpr_parser_prod___ABreakExpr___init_abreakexpr(val_t p0, val_t p1, val_t p2);
 #define LOCATE_escape___ABreakExpr___kwname "escape::ABreakExpr::(escape::AEscapeExpr::kwname)"
+val_t escape___ABreakExpr___kwname(val_t p0);
+typedef val_t (*escape___ABreakExpr___kwname_t)(val_t p0);
 #endif
