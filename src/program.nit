@@ -44,6 +44,10 @@ class Program
 	# Would be null if there is no main method
 	readable var _main_class: nullable MMLocalClass = null
 
+	# When we are using global compilation, we generate _glob files instead
+	# of _sep files so that we do not corrupt separate compilation
+	fun get_file_ending: String do return if tc.global then "_glob" else "_sep"
+
 	fun compute_main_method do
 		# Check for the 'Sys' class
 		var sysname = once "Sys".to_symbol

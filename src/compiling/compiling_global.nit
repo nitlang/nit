@@ -64,7 +64,7 @@ redef class Program
 end
 
 redef class MMModule
-	# Declare class table (for _sep.h)
+	# Declare class table (for _sep.h or _glob.h)
 	fun declare_class_tables_to_c(v: CompilerVisitor)
 	do
 		for c in local_classes do
