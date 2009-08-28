@@ -101,6 +101,13 @@ void initialize_gc_option(void) {
 			gc_option = nitgc;
 		} else if (strcmp(opt, "large")==0) {
 			gc_option = large;
+		} else if (strcmp(opt, "help")==0) {
+			fprintf(stderr, "NIT_GC_OPTION accepts 'nitgc'"
+#ifdef WITH_LIBGC
+					", 'boehm'"
+#endif
+					", 'large'. Default is '%s'.\n", def);
+			exit(1);
 		} else {
 			fprintf(stderr, "Invalid GC option in NIT_GC_OPTION environment variable. Using default '%s'.\n", def);
 		}
