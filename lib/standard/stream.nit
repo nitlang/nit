@@ -64,7 +64,7 @@ special IOS
 	# Read a string until the end of the line and append it to `s'.
 	fun append_line_to(s: Buffer)
 	do
-		while true do
+		loop
 			var x = read_char
 			if x == -1 then
 				if eof then return
@@ -147,7 +147,7 @@ special IStream
 
 	redef fun append_line_to(s)
 	do
-		while true do
+		loop
 			# First phase: look for a '\n'
 			var i = _buffer_pos
 			while i < _buffer.length and _buffer[i] != '\n' do i += 1

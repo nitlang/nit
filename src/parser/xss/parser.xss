@@ -112,7 +112,7 @@ special ParserTable
 		push(0, null)
 
 		var lexer = _lexer
-		while true do
+		loop
 			var token = lexer.peek
 			if token isa PError then
 				return new Start(null, token)

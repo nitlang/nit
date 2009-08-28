@@ -47,7 +47,7 @@ special ArrayCapable[nullable N]
 
 		# Look for the key in the array
 		var cur = base
-		while true do
+		loop
 			var c = arr[cur]
 			if c == null or c.key == k then # REAL equals
 				_last_accessed_index = cur
@@ -106,7 +106,7 @@ special ArrayCapable[nullable N]
 		_array[i] = null
 		_length -= 1
 		# Now replaces things before if needed
-		while true do
+		loop
 			i -= 1
 			if i < 0 then
 				i = _capacity - 1

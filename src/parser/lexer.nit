@@ -1260,7 +1260,7 @@ class Lexer
 		var text = _text
 		text.clear
 
-		while true do
+		loop
 			var c = get_char
 
 			if c != -1 then
@@ -1285,8 +1285,7 @@ class Lexer
 
 				text.add(c.ascii)
 
-				var first_loop = true # aka until
-				while dfa_state < -1 or first_loop do
+				loop
 					var old_state = dfa_state
 					if dfa_state < -1 then
 						old_state = -2 - dfa_state
@@ -1310,11 +1309,11 @@ class Lexer
 								low = middle + 1
 							else
 								dfa_state = tmp2[2]
-								low = high + 1 # aka break
+								break
 							end
 						end
 					end
-					first_loop = false # aka until
+					if dfa_state > -2 then break
 				end
 
 				_cr = cr
