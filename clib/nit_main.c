@@ -82,7 +82,7 @@ void initialize_gc_option(void) {
 #ifdef WITH_LIBGC
 	gc_option = boehm;
 #else
-	gc_option = large;
+	gc_option = nitgc;
 #endif
 
 	/* Process GC runtime selection */
