@@ -79,10 +79,13 @@ void exithandler(int s) {
 }
 void initialize_gc_option(void) {
 	/* GC default */
+	char *def;
 #ifdef WITH_LIBGC
 	gc_option = boehm;
+	def = "boehm";
 #else
 	gc_option = nitgc;
+	def = "nitgc";
 #endif
 
 	/* Process GC runtime selection */
@@ -92,14 +95,14 @@ void initialize_gc_option(void) {
 #ifdef WITH_LIBGC
 			gc_option = boehm;
 #else
-		fprintf(stderr, "Compiled without Boehm GC support. Using default.\n");
+		fprintf(stderr, "Compiled without Boehm GC support. Using default '%s'.\n", def);
 #endif
 		} else if (strcmp(opt, "nitgc")==0) {
 			gc_option = nitgc;
 		} else if (strcmp(opt, "large")==0) {
 			gc_option = large;
 		} else {
-			fprintf(stderr, "Invalid GC option in NIT_GC_OPTION environment variable. Using default.\n");
+			fprintf(stderr, "Invalid GC option in NIT_GC_OPTION environment variable. Using default '%s'.\n", def);
 		}
 	}
 
