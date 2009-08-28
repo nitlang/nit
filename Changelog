@@ -1,4 +1,4 @@
-version 0.2.1-git
+version 0.3
  * Local variable moving static type
  * Nullable types
  * New 'assert...else', 'isset', 'loop', 'label' syntax constructions
@@ -7,7 +7,10 @@ version 0.2.1-git
  * Syntax coloration for vim, gtksourceview and GNU source-highlight
  * nitc/nitdoc --verbose option
  * Intermediate code representation
- * Native GC (not enabled by defaultNative GC (not enabled by default))
+ * Native Nit GC
+ * 'for x in coll' is a closure call
+
+ -- Sat, 29 Aug 2009 10:04:25 -0400
 
 version 0.2.1
  * Readonly Strings and new class 'Buffer'
