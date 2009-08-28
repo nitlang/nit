@@ -540,6 +540,10 @@ redef class AWhileExpr
 		v.enter_visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
 
+		if n_expr isa ATrueExpr then
+			v.warning(self, "Warning: use 'loop' instead of 'while true do'.")
+		end
+
 		# Prepare inside context (assert cond)
 		v.use_if_true_variable_ctx(n_expr)
 
