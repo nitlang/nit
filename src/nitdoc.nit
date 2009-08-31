@@ -453,7 +453,7 @@ special MMEntity
 	redef fun prototype_body(dctx)
 	do
 		var res = new Buffer
-		res.append(signature.to_html(dctx))
+		res.append(signature.to_html(dctx, true))
 		var s = self
 		if s isa MMMethod then
 			if s.is_abstract then
@@ -1102,7 +1102,7 @@ end
 
 redef class MMSignature
 	# Htlm transcription of the signature (with nested links)
-	fun to_html(dctx: DocContext): String
+	fun to_html(dctx: DocContext, with_closure: Bool): String
 	do
 		var res = new Buffer
 		if arity > 0 then
@@ -1117,6 +1117,16 @@ redef class MMSignature
 		if return_type != null then
 			res.append(": ")
 			res.append(return_type.html_link(dctx))
+		end
+		if with_closure then
+			for c in closures do
+				res.append(" ")
+				if c.is_optional then res.append("[")
+				if c.is_break then res.append("break ")
+				res.append("!{c.name}")
+				res.append(c.signature.to_html(dctx, false))
+				if c.is_optional then res.append("]")
+			end
 		end
 		return res.to_s
 	end
