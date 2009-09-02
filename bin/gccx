@@ -90,9 +90,15 @@ for i in "$@"; do
 	j=`basename "$i" .c`
 	transformed=`echo "$i" | sed "
 		/\.nit_compile\/.*_sep\.c/s/\.nit_compile\/\(.*\)\._sep\.c/Module \1/
+		/\.nit_compile\/.*_glob\.c/s/\.nit_compile\/\(.*\)\._glob\.c/Module \1/
+		/\.nit_compile[1-9]\/.*_sep\.c/s/\.nit_compile[1-9]\/\(.*\)\._sep\.c/Module \1/
+		/\.nit_compile[1-9]\/.*_glob\.c/s/\.nit_compile[1-9]\/\(.*\)\._glob\.c/Module \1/
 		/\/nit_main\.c/s/.*\/nit_main\.c/Main/
 		/\.nit_compile\/.*\._tables\.c/s/.*/Tables/
+		/\.nit_compile[1-9]\/.*\._tables\.c/s/.*/Tables/
 		/\/\/.*_nit\.c/s/.*\/\/\(.*\)_nit.c/Native \1/
+		s/.*\/gc.c/Garbage Collector/
+		s/.*\/gc_static_objects_list.c/Garbage Collector object list/
 	"`
 
 	found="false"
