@@ -151,6 +151,8 @@ special OptionParameter
 		return id
 	end
 
+	fun value_name: String = _enum[value]
+
 	redef fun pretty_default
 	do
 		if default_value != null then
