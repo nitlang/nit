@@ -335,6 +335,58 @@ special ArrayCapable[E]
 
 	# The size of `_items'.
 	var _capacity: Int = 0
+
+	# Sort the array using the !cmp function.
+	fun sort
+		!cmp(e1,e2: E): Int
+	do
+		sub_sort(0, length-1) !cmp(x,y) = cmp(x, y)
+	end
+
+	# Sort `array' between `from' and `to' indices
+	private fun sub_sort(from: Int, to: Int)
+		!cmp(e1,e2: E): Int
+	do
+		if from >= to then
+			return
+		else if from + 7 < to then
+			var pivot = self[from]
+			var i = from
+			var j = to
+			while j > i do
+				while i <= to and cmp(self[i], pivot) <= 0 do i += 1
+				while j > i and cmp(self[j], pivot) >= 0 do j -= 1
+				if j > i then
+					var t = self[i]
+					self[i] = self[j]
+					self[j] = t
+				end
+			end
+			self[from] = self[i-1]
+			self[i-1] = pivot
+			sub_sort(from, i-2) !cmp(x,y) = cmp(x, y)
+			sub_sort(i, to) !cmp(x,y) = cmp(x, y)
+		else
+			var i = from
+			while i < to do
+				var min = i
+				var min_v = self[i]
+				var j = i
+				while j <= to do
+					if cmp(min_v, self[j]) > 0 then
+						min = j
+						min_v = self[j]
+					end
+					j += 1
+				end
+				if min != i then
+					self[min] = self[i]
+					self[i] = min_v
+				end
+				i += 1
+			end
+		end
+	end
 end
 
 # An `Iterator' on `AbstractArray'
