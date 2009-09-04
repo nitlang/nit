@@ -476,8 +476,9 @@ expr_atom~nopar~nobra {-> expr}
 	| {call} recv~nopar~nobra id args {-> New expr.call(recv~nopar~nobra.expr, id, [args.expr], [])}
 	| {super} qualified? kwsuper args {-> New expr.super(qualified, kwsuper, [args.expr])}
 	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, [args.expr])}
-!nobra!nopar	| {bra} expr_atom braargs {-> New expr.bra(expr_atom.expr, [braargs.expr], [])}
+!nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, [braargs.expr], [])}
 	| {new} kwnew no type~nobra dot [n2]:no id args {-> New expr.new(kwnew, type~nobra.type, id, [args.expr])}
+// FIXME: Why are these 3 !nopar mandatory?
 !nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra {-> New expr.crange(expr, expr2.expr)}
 !nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra  {-> New expr.orange(expr, expr2.expr)}
 !nobra!nopar	| {array} braargs {-> New expr.array([braargs.expr])}

@@ -1347,7 +1347,8 @@ special ParserTable
 			new ReduceAction1190,
 			new ReduceAction1191,
 			new ReduceAction1192,
-			new ReduceAction1193
+			new ReduceAction1193,
+			new ReduceAction1194
 		)
 	end
 end
@@ -41538,6 +41539,36 @@ special ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var listnode5 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode3 = nodearraylist2
+					assert listnode3 isa Array[Object]
+#					if listnode3 != null then
+						if listnode4.is_empty then
+							listnode4 = listnode3
+						else
+							listnode4.append(listnode3)
+						end
+#					end
+					var pexprnode1: nullable ABraExpr = new ABraExpr.init_abraexpr(
+						pexprnode2,
+						listnode4,
+						listnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(113), node_list)
+	end
+init do end
+end
+private class ReduceAction1095
+special ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -41572,7 +41603,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1095
+private class ReduceAction1096
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41588,7 +41619,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1096
+private class ReduceAction1097
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41604,7 +41635,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1097
+private class ReduceAction1098
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41620,7 +41651,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1098
+private class ReduceAction1099
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41636,7 +41667,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1099
+private class ReduceAction1100
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41652,7 +41683,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1100
+private class ReduceAction1101
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41668,7 +41699,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1101
+private class ReduceAction1102
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41684,7 +41715,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1102
+private class ReduceAction1103
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41700,7 +41731,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1103
+private class ReduceAction1104
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41713,7 +41744,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1104
+private class ReduceAction1105
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41744,7 +41775,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1105
+private class ReduceAction1106
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41780,7 +41811,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1106
+private class ReduceAction1107
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41793,7 +41824,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1107
+private class ReduceAction1108
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41839,7 +41870,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1108
+private class ReduceAction1109
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41882,7 +41913,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1109
+private class ReduceAction1110
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41895,7 +41926,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1110
+private class ReduceAction1111
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41936,7 +41967,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1111
+private class ReduceAction1112
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41949,7 +41980,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1112
+private class ReduceAction1113
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41971,7 +42002,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1113
+private class ReduceAction1114
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -41993,7 +42024,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1114
+private class ReduceAction1115
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42006,7 +42037,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1115
+private class ReduceAction1116
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42027,7 +42058,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1116
+private class ReduceAction1117
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42040,7 +42071,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1117
+private class ReduceAction1118
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42062,7 +42093,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1118
+private class ReduceAction1119
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42084,7 +42115,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1119
+private class ReduceAction1120
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42106,7 +42137,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1120
+private class ReduceAction1121
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42128,7 +42159,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1121
+private class ReduceAction1122
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42150,7 +42181,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1122
+private class ReduceAction1123
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42172,7 +42203,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1123
+private class ReduceAction1124
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42194,7 +42225,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1124
+private class ReduceAction1125
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42216,7 +42247,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1125
+private class ReduceAction1126
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42238,7 +42269,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1126
+private class ReduceAction1127
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42251,7 +42282,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1127
+private class ReduceAction1128
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42273,7 +42304,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1128
+private class ReduceAction1129
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42295,7 +42326,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1129
+private class ReduceAction1130
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42308,7 +42339,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1130
+private class ReduceAction1131
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42330,7 +42361,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1131
+private class ReduceAction1132
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42352,7 +42383,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1132
+private class ReduceAction1133
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42374,7 +42405,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1133
+private class ReduceAction1134
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42387,7 +42418,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1134
+private class ReduceAction1135
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42408,7 +42439,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1135
+private class ReduceAction1136
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42429,7 +42460,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1136
+private class ReduceAction1137
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42442,7 +42473,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1137
+private class ReduceAction1138
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42476,7 +42507,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1138
+private class ReduceAction1139
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42500,7 +42531,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1139
+private class ReduceAction1140
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42520,7 +42551,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1140
+private class ReduceAction1141
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42554,7 +42585,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1141
+private class ReduceAction1142
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42583,7 +42614,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1142
+private class ReduceAction1143
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42615,7 +42646,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1143
+private class ReduceAction1144
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42647,7 +42678,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1144
+private class ReduceAction1145
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42686,7 +42717,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1145
+private class ReduceAction1146
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42702,7 +42733,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1146
+private class ReduceAction1147
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42718,7 +42749,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1147
+private class ReduceAction1148
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42734,7 +42765,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1148
+private class ReduceAction1149
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42750,7 +42781,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1149
+private class ReduceAction1150
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42766,7 +42797,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1150
+private class ReduceAction1151
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42782,7 +42813,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1151
+private class ReduceAction1152
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42798,7 +42829,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1152
+private class ReduceAction1153
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42814,7 +42845,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1153
+private class ReduceAction1154
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42827,7 +42858,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1154
+private class ReduceAction1155
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42858,7 +42889,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1155
+private class ReduceAction1156
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42894,7 +42925,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1156
+private class ReduceAction1157
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42909,7 +42940,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1157
+private class ReduceAction1158
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42921,7 +42952,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1158
+private class ReduceAction1159
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42934,7 +42965,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1159
+private class ReduceAction1160
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -42961,49 +42992,6 @@ special ReduceAction
 						end
 #					end
 					var listnode6 = nodearraylist6
-					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
-					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
-						pexprnode2,
-						tidnode3,
-						listnode5,
-						listnode7
-					)
-					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
-	end
-init do end
-end
-private class ReduceAction1160
-special ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var listnode5 = new Array[Object]
-					var listnode7 = new Array[Object]
-					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
-					var tidnode3 = nodearraylist1
-					assert tidnode3 isa nullable TId
-					var listnode4 = nodearraylist2
-					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
-					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
 #					if listnode6 != null then
 						if listnode7.is_empty then
@@ -43028,6 +43016,49 @@ special ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
+					assert listnode4 isa Array[Object]
+#					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+#					end
+					var listnode6 = nodearraylist3
+					assert listnode6 isa Array[Object]
+#					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(125), node_list)
+	end
+init do end
+end
+private class ReduceAction1162
+special ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
@@ -43036,7 +43067,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1162
+private class ReduceAction1163
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43082,7 +43113,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1163
+private class ReduceAction1164
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43125,7 +43156,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1164
+private class ReduceAction1165
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43142,7 +43173,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1165
+private class ReduceAction1166
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43169,7 +43200,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1166
+private class ReduceAction1167
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43186,7 +43217,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1167
+private class ReduceAction1168
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43213,7 +43244,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1168
+private class ReduceAction1169
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43230,7 +43261,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1169
+private class ReduceAction1170
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43257,7 +43288,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1170
+private class ReduceAction1171
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43274,7 +43305,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1171
+private class ReduceAction1172
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43301,7 +43332,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1172
+private class ReduceAction1173
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43318,7 +43349,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1173
+private class ReduceAction1174
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43345,7 +43376,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1174
+private class ReduceAction1175
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43362,7 +43393,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1175
+private class ReduceAction1176
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43389,7 +43420,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1176
+private class ReduceAction1177
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43406,7 +43437,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1177
+private class ReduceAction1178
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43433,7 +43464,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1178
+private class ReduceAction1179
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43450,7 +43481,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1179
+private class ReduceAction1180
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43477,7 +43508,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1180
+private class ReduceAction1181
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43494,7 +43525,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1181
+private class ReduceAction1182
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43521,7 +43552,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1182
+private class ReduceAction1183
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43542,7 +43573,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1183
+private class ReduceAction1184
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43573,7 +43604,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1184
+private class ReduceAction1185
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43590,7 +43621,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1185
+private class ReduceAction1186
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43617,7 +43648,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1186
+private class ReduceAction1187
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43634,7 +43665,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1187
+private class ReduceAction1188
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43661,7 +43692,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1188
+private class ReduceAction1189
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43678,7 +43709,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1189
+private class ReduceAction1190
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43705,7 +43736,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1190
+private class ReduceAction1191
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43722,7 +43753,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1191
+private class ReduceAction1192
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43749,7 +43780,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1192
+private class ReduceAction1193
 special ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -43766,7 +43797,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction1193
+private class ReduceAction1194
 special ReduceAction
 	redef fun action(p: Parser)
 	do
