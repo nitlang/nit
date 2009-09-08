@@ -129,8 +129,8 @@ special AbstractCompiler
 		for mod in mods do
 			var p = new Program(mod, self)
 			p.compute_main_method
-			p.do_table_computation
 			p.generate_allocation_iroutines
+			p.do_table_computation
 			p.compile_prog_to_c
 		end
 	end
