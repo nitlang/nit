@@ -325,7 +325,7 @@ end
 # Local classes are classes defined, refined or imported in a module
 class MMLocalClass
 	# The name of the local class
-        readable var _name: Symbol
+	readable var _name: Symbol
 
 	# Arity of the local class (if generic)
 	# FIXME: How to move this into the generic module in a sane way?
@@ -505,6 +505,28 @@ class MMLocalClass
 	redef fun to_s
 	do
 		return _name.to_s
+	end
+
+	# Comparaison in a total order that superset the class refinement and the class specialisation relations
+	fun total_order_compare(b: MMLocalClass): Int
+	do
+		var a = self
+		if a == b then
+			return 0
+		else if a.module.mhe < b.module then
+			return 1
+		else if b.module.mhe < a.module then
+			return -1
+		end
+		var ar = a.cshe.rank
+		var br = b.cshe.rank
+		if ar > br then
+			return 1
+		else if br > ar then
+			return -1
+		else
+			return b.name.to_s <=> a.name.to_s
+		end
 	end
 end
 

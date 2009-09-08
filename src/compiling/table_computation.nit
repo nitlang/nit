@@ -568,30 +568,6 @@ end
 # The total order superset the class refinement and the class specialisation relations
 class ClassSorter
 special AbstractSorter[MMLocalClass]
-	redef fun compare(a, b) do return a.compare(b)
+	redef fun compare(a, b) do return a.total_order_compare(b)
 	init do end
-end
-
-redef class MMLocalClass
-	# Comparaison in a total order that superset the class refinement and the class specialisation relations
-	fun compare(b: MMLocalClass): Int
-	do
-		var a = self
-		if a == b then
-			return 0
-		else if a.module.mhe < b.module then
-			return 1
-		else if b.module.mhe < a.module then
-			return -1
-		end
-		var ar = a.cshe.rank
-		var br = b.cshe.rank
-		if ar > br then
-			return 1
-		else if br > ar then
-			return -1
-		else
-			return b.name.to_s <=> a.name.to_s
-		end
-	end
 end
