@@ -155,7 +155,6 @@ redef class Program
 	# Do the complete global analysis
 	private fun do_global_table_analysis
 	do
-		#print "Do the complete global analysis"
 		var smallest_classes = new Array[MMLocalClass]
 		var global_properties = new HashSet[MMGlobalProperty]
 		var ctab = new Array[TableElt]
@@ -175,7 +174,7 @@ redef class Program
 			c.compute_super_classes
 			classes.add(c)
 		end
-		(new ClassSorter).sort(classes)
+		classes.sort !cmp(x,y) = x.total_order_compare(y)
 
 		for c in classes do
 			# Finish processing the class (if invisible)
@@ -560,14 +559,4 @@ end
 class TableEltVftPointer
 special TableElt
 	redef fun is_related_to(c) do return true
-end
-
-###############################################################################
-
-# Used to sort local class in a deterministic total order
-# The total order superset the class refinement and the class specialisation relations
-class ClassSorter
-special AbstractSorter[MMLocalClass]
-	redef fun compare(a, b) do return a.total_order_compare(b)
-	init do end
 end
