@@ -170,17 +170,10 @@ redef class Program
 
 		# We have to work on ALL the classes of the module
 		var classes = new Array[MMLocalClass]
-		for c in module.local_classes do
-			c.compute_super_classes
-			classes.add(c)
-		end
+		for c in module.local_classes do classes.add(c)
 		classes.sort !cmp(x,y) = x.total_order_compare(y)
 
 		for c in classes do
-			# Finish processing the class (if invisible)
-			c.compute_ancestors
-			c.inherit_global_properties
-
 			# Associate a CompiledClass to the class
 			var cc = new CompiledClass(c)
 			compiled_classes[c.global] = cc

@@ -53,6 +53,21 @@ class Program
 	# of _sep files so that we do not corrupt separate compilation
 	fun get_file_ending: String do return if tc.global then "_glob" else "_sep"
 
+	# This method will ensure that all the metamodel is computed before we
+	# start using all the classes
+	private fun finish_processing_classes do
+		var classes = new Array[MMLocalClass]
+		for c in module.local_classes do
+			c.compute_super_classes
+			classes.add(c)
+		end
+
+		for c in classes do
+			c.compute_ancestors
+			c.inherit_global_properties
+		end
+	end
+
 	fun compute_main_method do
 		# Check for the 'Sys' class
 		var sysname = once "Sys".to_symbol
@@ -143,6 +158,7 @@ class Program
 	init(m: MMModule, toolcontext: ToolContext) do
 		_module = m
 		_tc = toolcontext
+		finish_processing_classes
 	end
 end
 
