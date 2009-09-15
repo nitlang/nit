@@ -366,18 +366,30 @@ end
 redef class IClosCall
 	redef fun dup_with(d)
 	do
-		var closdef = d._closures[closure_decl]
-		if closdef == null then
-			# Default is already guarded and inlined
-			return
+		if d._closures.has_key(closure_decl) then
+			# The icloscall need to be replaced with an inlined closdef
+			var closdef = d._closures[closure_decl]
+			if closdef == null then
+				# Default is already guarded and inlined
+				return
+			end
+			# Break sequence cannot be inlined :/
+			assert break_seq == null
+			# Inline the closdef
+			var res = d._icb.inline_routine(closdef, d.dup_iregs(exprs), null)
+			if result != null then
+				assert res != null
+				d._icb.stmt(new IMove(d.dup_ireg(result.as(not null)), res))
+			end
+		else
+			# Standard icloscall duplication
+			super
 		end
-		# Break sequence cannot be inlined :/
-		assert break_seq == null
-		var res = d._icb.inline_routine(closdef, d.dup_iregs(exprs), null)
-		if result != null then
-			assert res != null
-			d._icb.stmt(new IMove(d.dup_ireg(result.as(not null)), res))
-		end
+	end
+
+	redef fun inner_dup_with(d)
+	do
+		return new IClosCall(closure_decl, exprs)
 	end
 end
 
@@ -451,13 +463,18 @@ end
 redef class IHasClos
 	redef fun inner_dup_with(d)
 	do
-		var closdef = d._closures[closure_decl]
-		var res: IRegister
-		if closdef != null then
-			res = d._icb.lit_true_reg
+		if d._closures.has_key(closure_decl) then
+			# closdef will be inlined
+			var closdef = d._closures[closure_decl]
+			var res: IRegister
+			if closdef != null then
+				res = d._icb.lit_true_reg
+			else
+				res = d._icb.lit_false_reg
+			end
+			return new IMove(d.dup_ireg(result.as(not null)), res)
 		else
-			res = d._icb.lit_false_reg
+			return new IHasClos(closure_decl)
 		end
-		return new IMove(d.dup_ireg(result.as(not null)), res)
 	end
 end
