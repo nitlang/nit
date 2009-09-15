@@ -342,13 +342,17 @@ special MMEntity
 	redef fun prototype_head(dctx) do return "module "
 
 	var _known_owner_of_cache: Map[MMModule, MMModule] = new HashMap[MMModule, MMModule]
+
+	# Return the owner of `module` from the point of view of `self`
 	fun known_owner_of(module: MMModule): MMModule
-	do 
+	do
 		if _known_owner_of_cache.has_key(module) then return _known_owner_of_cache[module]
 		var res = module
-		if mhe < module and visibility_for(module) != 0 then 
+		# is module is publicly imported by self?
+		if mhe < module and visibility_for(module) != 0 then
 			res = known_owner_of_intern(module, self, false)
 		else
+			# Return the canonnical owner of module from the point of view of self
 			res = module.owner(self)
 		end
 		_known_owner_of_cache[module] = res
@@ -368,6 +372,7 @@ special MMEntity
 		return res
 	end
 
+	# ???
 	private fun known_owner_of_intern(module: MMModule, from: MMModule, as_owner: Bool): MMModule
 	do
 		if module == self then return self
@@ -377,7 +382,8 @@ special MMEntity
 			if not m.mhe <= module then continue
 			candidates.add(m.known_owner_of_intern(module, from, true))
 		end
-		assert not candidates.is_empty
+		# FIXME: I do not know what this does
+		if candidates.is_empty then return module.owner(from)
 		var max = candidates.first
 		for m in candidates do
 			if max.mhe < m then max = m
