@@ -208,6 +208,16 @@ class Program
 		end
 	end
 
+	# This function will call the attached block for each live local classes
+	# in this program
+	fun with_each_live_local_classes
+		!action(m: MMLocalClass)
+	do
+		for c in module.local_classes do
+			action(c)
+		end
+	end
+
 	init(m: MMModule, toolcontext: ToolContext) do
 		_module = m
 		_tc = toolcontext
