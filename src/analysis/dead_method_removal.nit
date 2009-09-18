@@ -23,37 +23,9 @@ redef class Program
 	# Calling this method will change all iroutines that are dead
 	# and put an abort in them
 	fun optimize_dead_methods do
-		for m in module.mhe.greaters_and_self do
-			for c in m.local_classes do
-
-				# Process methods and attributes initialization
-				for p in c.local_local_properties do
-					var iroutine: nullable IRoutine = null
-
-					if p isa MMAttribute then
-						iroutine = p.iroutine
-					else if p isa MMMethod then
-						iroutine = p.iroutine
-					end
-					if iroutine == null then continue
-	
-					if not rma.is_iroutine_reachable(iroutine) then
-						iroutine.set_not_reachable(m)
-					end
-				end
-
-				# Process class-specific iroutines
-				if c.init_var_iroutine != null and not rma.is_iroutine_reachable(c.init_var_iroutine) then
-					c.init_var_iroutine.set_not_reachable(m)
-				end
-				if c.checknew_iroutine != null and not rma.is_iroutine_reachable(c.checknew_iroutine) then
-					c.checknew_iroutine.set_not_reachable(m)
-				end
-				for i in c.new_instance_iroutine do
-					if not rma.is_iroutine_reachable(i) then
-						i.set_not_reachable(m)
-					end
-				end
+		with_each_iroutines !action(i,m) do
+			if not rma.is_iroutine_reachable(i) then
+				i.set_not_reachable(m)
 			end
 		end
 	end
