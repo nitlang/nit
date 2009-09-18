@@ -68,6 +68,12 @@ redef class Program
 		assert tc.global
 		if not tc.no_dead_method_removal then optimize_dead_methods
 	end
+
+	# This method will create log files storing analysis information
+	fun dump_global_analysis_information(directory_name: String) do
+		dump_reachable_methods(directory_name, tc.global_callgraph)
+		dump_unreachable_methods(directory_name, tc.global_callgraph)
+	end
 end
 
 redef class IRoutine

@@ -23,6 +23,28 @@ import program
 redef class Program
 	# This attribute is the ReachableMethodAnalysis results 
 	readable writable var _rma: nullable ReachableMethodAnalysis = null
+
+	# This method will create a file and output all reachable method names in it
+	fun dump_reachable_methods(directory_name: String, algo: String) do
+		var f = new OFStream.open("{directory_name}/{module.name}.reachable_methods.{algo}.log")
+		with_each_methods !action(m) do
+			if rma.is_method_reachable(m) then
+				f.write("{m.full_name}\n")
+			end
+		end
+		f.close
+	end
+
+	# This method will create a file and output all unreachable method names in it
+	fun dump_unreachable_methods(directory_name: String, algo: String) do
+		var f = new OFStream.open("{directory_name}/{module.name}.unreachable_methods.{algo}.log")
+		with_each_methods !action(m) do
+			if not rma.is_method_reachable(m) then
+				f.write("{m.full_name}\n")
+			end
+		end
+		f.close
+	end
 end
 
 # Subclasses of this class would represent an analysis that produces

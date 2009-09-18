@@ -137,6 +137,9 @@ special AbstractCompiler
 			if global then
 				p.do_global_analysis
 				p.do_global_optimizations
+				if opt_log.value then
+					p.dump_global_analysis_information(log_directory)
+				end
 			end
 			p.do_table_computation
 			p.compile_prog_to_c
