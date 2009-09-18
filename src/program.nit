@@ -155,6 +155,42 @@ class Program
 		end
 	end
 
+	# This function will call the attached block for each IRoutines
+	# in this program
+	fun with_each_iroutines
+		!action(i: IRoutine, m: MMModule)
+	do
+		for m in module.mhe.greaters_and_self do
+			for c in m.local_classes do
+				var iroutine: nullable IRoutine = null
+
+				# Process methods and attributes initialization
+				for p in c.local_local_properties do
+					if p isa MMAttribute then
+						iroutine = p.iroutine
+					else if p isa MMMethod then
+						iroutine = p.iroutine
+					end
+					if iroutine == null then continue
+					action(iroutine, m)
+				end
+
+				# Process class-specific iroutines
+				iroutine = c.init_var_iroutine
+				if iroutine != null then
+					action(iroutine, m)
+				end
+				iroutine = c.checknew_iroutine
+				if iroutine != null then
+					action(iroutine, m)
+				end
+				for i in c.new_instance_iroutine do
+					action(i, m)
+				end
+			end
+		end
+	end
+
 	init(m: MMModule, toolcontext: ToolContext) do
 		_module = m
 		_tc = toolcontext
