@@ -191,6 +191,23 @@ class Program
 		end
 	end
 
+	# This function will call the attached block for each MMMethods
+	# in this program
+	fun with_each_methods
+		!action(m: MMMethod)
+	do
+		for m in module.mhe.greaters_and_self do
+			for c in m.local_classes do
+				# Process methods and attributes initialization
+				for p in c.local_local_properties do
+					if p isa MMMethod then
+						action(p)
+					end
+				end
+			end
+		end
+	end
+
 	init(m: MMModule, toolcontext: ToolContext) do
 		_module = m
 		_tc = toolcontext
