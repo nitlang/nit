@@ -23,6 +23,27 @@ redef class Program
 	# This attribute is the InstantiatedTypeAnalysis results
 	readable writable var _ita: nullable InstantiatedTypeAnalysis = null
 
+	# This method will create a file and output the name of all types that are instantiated in it
+	fun dump_instantiated_types(directory_name: String) do
+		var f = new OFStream.open("{directory_name}/{module.name}.instantiated_types.log")
+		with_each_live_local_classes !action(c) do
+			f.write("{c}\n")
+		end
+		f.close
+	end
+
+	# This method will create a file and output the names of all types that are not instantiated in it
+	fun dump_not_instantiated_types(directory_name: String) do
+		var f = new OFStream.open("{directory_name}/{module.name}.not_instantiated_types.log")
+		# Must overwrite 'with_each_local_classes' since we are looking at non-instantiated classes
+		for c in module.local_classes do
+			if not ita.is_class_instantiated(c) then
+				f.write("{c}\n")
+			end
+		end
+		f.close
+	end
+
 	# We know which are really live, use that information !
 	redef fun with_each_live_local_classes
 		!action(m: MMLocalClass)

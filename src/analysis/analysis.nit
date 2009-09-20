@@ -73,6 +73,8 @@ redef class Program
 	fun dump_global_analysis_information(directory_name: String) do
 		dump_reachable_methods(directory_name, tc.global_callgraph)
 		dump_unreachable_methods(directory_name, tc.global_callgraph)
+		dump_instantiated_types(directory_name)
+		dump_not_instantiated_types(directory_name)
 	end
 end
 
