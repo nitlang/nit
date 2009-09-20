@@ -55,6 +55,9 @@ special MMContext
 	# Number of warnings
 	readable var _warning_count: Int = 0
 
+	# Directory where to generate log files
+	readable var _log_directory: String = "logs"
+
 	# Messages
 	var _messages: Array[Message] = new Array[Message]
 	var _message_sorter: ComparableSorter[Message] = new ComparableSorter[Message]
@@ -123,9 +126,12 @@ special MMContext
 	# Option --path
 	readable var _opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
 
-	# Option --lop
+	# Option --log
 	readable var _opt_log: OptionBool = new OptionBool("Generate various log files", "--log")
-	
+
+	# Option --log-dir
+	readable var _opt_log_dir: OptionString = new OptionString("Directory where to generate log files", "--log-dir")
+
 	# Option --only-metamodel
 	readable var _opt_only_metamodel: OptionBool = new OptionBool("Stop after meta-model processing", "--only-metamodel")
 
@@ -147,7 +153,7 @@ special MMContext
 	init
 	do
 		super
-		option_context.add_option(opt_warn, opt_path, opt_log, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
+		option_context.add_option(opt_warn, opt_path, opt_log, opt_log_dir, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
 	end
 
 	# Parse and process the options given on the command line
@@ -175,6 +181,12 @@ special MMContext
 
 		var libname = "{sys.program_name.dirname}/../lib"
 		if libname.file_exists then paths.add(libname)
+
+		if opt_log_dir.value != null then _log_directory = opt_log_dir.value.as(not null)
+		if _opt_log.value then
+			# Make sure the output directory exists
+			log_directory.mkdir
+		end
 	end
 
 	# Load and process a module in a directory (or a parent directory).

@@ -79,27 +79,26 @@ special ToolContext
 	fun dump_context_info
 	do
 		for mod in module_hierarchy do
-			mod.dump_module_info
+			mod.dump_module_info(log_directory)
 		end	
 		var tab = new Array[MMModule]
 		tab.add_all(module_hierarchy)
 		var name = module_hierarchy.select_smallests(tab).join("-")
 
-		var f = new OFStream.open("{name}.full_class_hierarchy.new.dot")
+		var f = new OFStream.open("{log_directory}/{name}.full_class_hierarchy.new.dot")
 			f.write(class_hierarchy.to_dot)
 		f.close
 
-		f = new OFStream.open("{name}.module_hierarchy.new.dot")
+		f = new OFStream.open("{log_directory}/{name}.module_hierarchy.new.dot")
 			f.write(module_hierarchy.to_dot)
 		f.close
 	end
 end
 
 redef class MMModule
-	fun dump_module_info
+	fun dump_module_info(directory: String)
 	do
-		var p = location.file.file_path
-		var fname = "{p}/{name}"
+		var fname = "{directory}/{name}"
 		var f = new OFStream.open("{fname}.class_hierarchy.new.dot")
 		f.write(class_specialization_hierarchy.to_dot)
 		f.close

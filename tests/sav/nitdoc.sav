@@ -2,6 +2,7 @@ usage: nitdoc [options] file...
   -W, --warn         Show warnings
   -I, --path         Set include path for loaders (may be used more than once)
   --log              Generate various log files
+  --log-dir          Directory where to generate log files
   --only-parse       Only proceed to parse step of loaders
   --only-metamodel   Stop after meta-model processing
   -h, -?, --help     Show Help (This screen)
