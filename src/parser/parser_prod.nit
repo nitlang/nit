@@ -29,15 +29,10 @@ redef class ANode
 	# Visit all nodes in order.
 	# Thus, call "v.visit(e)" for each node e
 	fun visit_all(v: Visitor) is abstract
-
-	# Visit all nodes in reverse order.
-	# Thus, call "v.visit(e)" for each node e starting from the last child
-	fun visit_all_reverse(v: Visitor) is abstract
 end
 
 redef class Token
 	redef fun visit_all(v: Visitor) do end
-	redef fun visit_all_reverse(v: Visitor) do end
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode) do end
 end
 
@@ -72,14 +67,6 @@ class Visitor
 end
 
 redef class AModule
-    redef fun n_packagedecl=(n)
-    do
-        _n_packagedecl = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_amodule (
@@ -155,47 +142,8 @@ redef class AModule
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_packagedecl != null then
-            v.enter_visit(_n_packagedecl.as(not null))
-        end
-	do
-	    var i = _n_imports.length
-            while i >= 0 do
-                v.enter_visit(_n_imports[i])
-		i = i - 1
-	    end
-	end
-	do
-	    var i = _n_classdefs.length
-            while i >= 0 do
-                v.enter_visit(_n_classdefs[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class APackagedecl
-    redef fun n_doc=(n)
-    do
-        _n_doc = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwpackage=(n)
-    do
-        _n_kwpackage = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_apackagedecl (
@@ -257,33 +205,8 @@ redef class APackagedecl
         v.enter_visit(_n_kwpackage)
         v.enter_visit(_n_id)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_doc != null then
-            v.enter_visit(_n_doc.as(not null))
-        end
-        v.enter_visit(_n_kwpackage)
-        v.enter_visit(_n_id)
-    end
 end
 redef class AStdImport
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_kwimport=(n)
-    do
-        _n_kwimport = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_astdimport (
@@ -341,31 +264,8 @@ redef class AStdImport
         v.enter_visit(_n_kwimport)
         v.enter_visit(_n_id)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_kwimport)
-        v.enter_visit(_n_id)
-    end
 end
 redef class ANoImport
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_kwimport=(n)
-    do
-        _n_kwimport = n
-	n.parent = self
-    end
-    redef fun n_kwend=(n)
-    do
-        _n_kwend = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_anoimport (
@@ -423,16 +323,8 @@ redef class ANoImport
         v.enter_visit(_n_kwimport)
         v.enter_visit(_n_kwend)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_kwimport)
-        v.enter_visit(_n_kwend)
-    end
 end
 redef class APublicVisibility
-
     private init empty_init do end
 
     init init_apublicvisibility
@@ -447,18 +339,8 @@ redef class APublicVisibility
     redef fun visit_all(v: Visitor)
     do
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-    end
 end
 redef class APrivateVisibility
-    redef fun n_kwprivate=(n)
-    do
-        _n_kwprivate = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aprivatevisibility (
@@ -488,19 +370,8 @@ redef class APrivateVisibility
     do
         v.enter_visit(_n_kwprivate)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwprivate)
-    end
 end
 redef class AProtectedVisibility
-    redef fun n_kwprotected=(n)
-    do
-        _n_kwprotected = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aprotectedvisibility (
@@ -530,19 +401,8 @@ redef class AProtectedVisibility
     do
         v.enter_visit(_n_kwprotected)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwprotected)
-    end
 end
 redef class AIntrudeVisibility
-    redef fun n_kwintrude=(n)
-    do
-        _n_kwintrude = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aintrudevisibility (
@@ -572,45 +432,8 @@ redef class AIntrudeVisibility
     do
         v.enter_visit(_n_kwintrude)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwintrude)
-    end
 end
 redef class AStdClassdef
-    redef fun n_doc=(n)
-    do
-        _n_doc = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_classkind=(n)
-    do
-        _n_classkind = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_astdclassdef (
@@ -771,45 +594,8 @@ redef class AStdClassdef
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_doc != null then
-            v.enter_visit(_n_doc.as(not null))
-        end
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_classkind)
-        if _n_id != null then
-            v.enter_visit(_n_id.as(not null))
-        end
-	do
-	    var i = _n_formaldefs.length
-            while i >= 0 do
-                v.enter_visit(_n_formaldefs[i])
-		i = i - 1
-	    end
-	end
-	do
-	    var i = _n_superclasses.length
-            while i >= 0 do
-                v.enter_visit(_n_superclasses[i])
-		i = i - 1
-	    end
-	end
-	do
-	    var i = _n_propdefs.length
-            while i >= 0 do
-                v.enter_visit(_n_propdefs[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class ATopClassdef
-
     private init empty_init do end
 
     init init_atopclassdef (
@@ -846,20 +632,8 @@ redef class ATopClassdef
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-	do
-	    var i = _n_propdefs.length
-            while i >= 0 do
-                v.enter_visit(_n_propdefs[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class AMainClassdef
-
     private init empty_init do end
 
     init init_amainclassdef (
@@ -896,25 +670,8 @@ redef class AMainClassdef
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-	do
-	    var i = _n_propdefs.length
-            while i >= 0 do
-                v.enter_visit(_n_propdefs[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class AConcreteClasskind
-    redef fun n_kwclass=(n)
-    do
-        _n_kwclass = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aconcreteclasskind (
@@ -944,24 +701,8 @@ redef class AConcreteClasskind
     do
         v.enter_visit(_n_kwclass)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwclass)
-    end
 end
 redef class AAbstractClasskind
-    redef fun n_kwabstract=(n)
-    do
-        _n_kwabstract = n
-	n.parent = self
-    end
-    redef fun n_kwclass=(n)
-    do
-        _n_kwclass = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aabstractclasskind (
@@ -1005,20 +746,8 @@ redef class AAbstractClasskind
         v.enter_visit(_n_kwabstract)
         v.enter_visit(_n_kwclass)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwabstract)
-        v.enter_visit(_n_kwclass)
-    end
 end
 redef class AInterfaceClasskind
-    redef fun n_kwinterface=(n)
-    do
-        _n_kwinterface = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_ainterfaceclasskind (
@@ -1048,19 +777,8 @@ redef class AInterfaceClasskind
     do
         v.enter_visit(_n_kwinterface)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwinterface)
-    end
 end
 redef class AUniversalClasskind
-    redef fun n_kwuniversal=(n)
-    do
-        _n_kwuniversal = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_auniversalclasskind (
@@ -1090,26 +808,8 @@ redef class AUniversalClasskind
     do
         v.enter_visit(_n_kwuniversal)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwuniversal)
-    end
 end
 redef class AFormaldef
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_type=(n)
-    do
-        _n_type = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aformaldef (
@@ -1157,27 +857,8 @@ redef class AFormaldef
             v.enter_visit(_n_type.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-        if _n_type != null then
-            v.enter_visit(_n_type.as(not null))
-        end
-    end
 end
 redef class ASuperclass
-    redef fun n_kwspecial=(n)
-    do
-        _n_kwspecial = n
-	n.parent = self
-    end
-    redef fun n_type=(n)
-    do
-        _n_type = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_asuperclass (
@@ -1221,72 +902,8 @@ redef class ASuperclass
         v.enter_visit(_n_kwspecial)
         v.enter_visit(_n_type)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwspecial)
-        v.enter_visit(_n_type)
-    end
 end
 redef class AAttrPropdef
-    redef fun n_doc=(n)
-    do
-        _n_doc = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_readable=(n)
-    do
-        _n_readable = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_writable=(n)
-    do
-        _n_writable = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_kwvar=(n)
-    do
-        _n_kwvar = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_type=(n)
-    do
-        _n_type = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aattrpropdef (
@@ -1452,63 +1069,8 @@ redef class AAttrPropdef
             v.enter_visit(_n_expr.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_doc != null then
-            v.enter_visit(_n_doc.as(not null))
-        end
-        if _n_readable != null then
-            v.enter_visit(_n_readable.as(not null))
-        end
-        if _n_writable != null then
-            v.enter_visit(_n_writable.as(not null))
-        end
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_kwvar)
-        v.enter_visit(_n_id)
-        if _n_type != null then
-            v.enter_visit(_n_type.as(not null))
-        end
-        if _n_expr != null then
-            v.enter_visit(_n_expr.as(not null))
-        end
-    end
 end
 redef class AMethPropdef
-    redef fun n_doc=(n)
-    do
-        _n_doc = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_methid=(n)
-    do
-        _n_methid = n
-	n.parent = self
-    end
-    redef fun n_signature=(n)
-    do
-        _n_signature = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_amethpropdef (
@@ -1602,56 +1164,8 @@ redef class AMethPropdef
         v.enter_visit(_n_methid)
         v.enter_visit(_n_signature)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_doc != null then
-            v.enter_visit(_n_doc.as(not null))
-        end
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_methid)
-        v.enter_visit(_n_signature)
-    end
 end
 redef class ADeferredMethPropdef
-    redef fun n_doc=(n)
-    do
-        _n_doc = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_kwmeth=(n)
-    do
-        _n_kwmeth = n
-	n.parent = self
-    end
-    redef fun n_methid=(n)
-    do
-        _n_methid = n
-	n.parent = self
-    end
-    redef fun n_signature=(n)
-    do
-        _n_signature = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_adeferredmethpropdef (
@@ -1759,57 +1273,8 @@ redef class ADeferredMethPropdef
         v.enter_visit(_n_methid)
         v.enter_visit(_n_signature)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_doc != null then
-            v.enter_visit(_n_doc.as(not null))
-        end
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_kwmeth)
-        v.enter_visit(_n_methid)
-        v.enter_visit(_n_signature)
-    end
 end
 redef class AInternMethPropdef
-    redef fun n_doc=(n)
-    do
-        _n_doc = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_kwmeth=(n)
-    do
-        _n_kwmeth = n
-	n.parent = self
-    end
-    redef fun n_methid=(n)
-    do
-        _n_methid = n
-	n.parent = self
-    end
-    redef fun n_signature=(n)
-    do
-        _n_signature = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_ainternmethpropdef (
@@ -1917,64 +1382,8 @@ redef class AInternMethPropdef
         v.enter_visit(_n_methid)
         v.enter_visit(_n_signature)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_doc != null then
-            v.enter_visit(_n_doc.as(not null))
-        end
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_kwmeth)
-        v.enter_visit(_n_methid)
-        v.enter_visit(_n_signature)
-    end
 end
 redef class AExternMethPropdef
-    redef fun n_doc=(n)
-    do
-        _n_doc = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_kwmeth=(n)
-    do
-        _n_kwmeth = n
-	n.parent = self
-    end
-    redef fun n_methid=(n)
-    do
-        _n_methid = n
-	n.parent = self
-    end
-    redef fun n_signature=(n)
-    do
-        _n_signature = n
-	n.parent = self
-    end
-    redef fun n_extern=(n)
-    do
-        _n_extern = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aexternmethpropdef (
@@ -2100,67 +1509,8 @@ redef class AExternMethPropdef
             v.enter_visit(_n_extern.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_doc != null then
-            v.enter_visit(_n_doc.as(not null))
-        end
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_kwmeth)
-        v.enter_visit(_n_methid)
-        v.enter_visit(_n_signature)
-        if _n_extern != null then
-            v.enter_visit(_n_extern.as(not null))
-        end
-    end
 end
 redef class AConcreteMethPropdef
-    redef fun n_doc=(n)
-    do
-        _n_doc = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_kwmeth=(n)
-    do
-        _n_kwmeth = n
-	n.parent = self
-    end
-    redef fun n_methid=(n)
-    do
-        _n_methid = n
-	n.parent = self
-    end
-    redef fun n_signature=(n)
-    do
-        _n_signature = n
-	n.parent = self
-    end
-    redef fun n_block=(n)
-    do
-        _n_block = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aconcretemethpropdef (
@@ -2286,69 +1636,8 @@ redef class AConcreteMethPropdef
             v.enter_visit(_n_block.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_doc != null then
-            v.enter_visit(_n_doc.as(not null))
-        end
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_kwmeth)
-        v.enter_visit(_n_methid)
-        v.enter_visit(_n_signature)
-        if _n_block != null then
-            v.enter_visit(_n_block.as(not null))
-        end
-    end
 end
 redef class AConcreteInitPropdef
-    redef fun n_doc=(n)
-    do
-        _n_doc = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_kwinit=(n)
-    do
-        _n_kwinit = n
-	n.parent = self
-    end
-    redef fun n_methid=(n)
-    do
-        _n_methid = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_signature=(n)
-    do
-        _n_signature = n
-	n.parent = self
-    end
-    redef fun n_block=(n)
-    do
-        _n_block = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aconcreteinitpropdef (
@@ -2478,42 +1767,8 @@ redef class AConcreteInitPropdef
             v.enter_visit(_n_block.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_doc != null then
-            v.enter_visit(_n_doc.as(not null))
-        end
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_kwinit)
-        if _n_methid != null then
-            v.enter_visit(_n_methid.as(not null))
-        end
-        v.enter_visit(_n_signature)
-        if _n_block != null then
-            v.enter_visit(_n_block.as(not null))
-        end
-    end
 end
 redef class AMainMethPropdef
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_block=(n)
-    do
-        _n_block = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_amainmethpropdef (
@@ -2565,53 +1820,8 @@ redef class AMainMethPropdef
             v.enter_visit(_n_block.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        if _n_block != null then
-            v.enter_visit(_n_block.as(not null))
-        end
-    end
 end
 redef class ATypePropdef
-    redef fun n_doc=(n)
-    do
-        _n_doc = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_visibility=(n)
-    do
-        _n_visibility = n
-	n.parent = self
-    end
-    redef fun n_kwtype=(n)
-    do
-        _n_kwtype = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_type=(n)
-    do
-        _n_type = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_atypepropdef (
@@ -2719,35 +1929,8 @@ redef class ATypePropdef
         v.enter_visit(_n_id)
         v.enter_visit(_n_type)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_doc != null then
-            v.enter_visit(_n_doc.as(not null))
-        end
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_visibility)
-        v.enter_visit(_n_kwtype)
-        v.enter_visit(_n_id)
-        v.enter_visit(_n_type)
-    end
 end
 redef class AReadAble
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwreadable=(n)
-    do
-        _n_kwreadable = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_areadable (
@@ -2795,29 +1978,8 @@ redef class AReadAble
         end
         v.enter_visit(_n_kwreadable)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_kwreadable)
-    end
 end
 redef class AWriteAble
-    redef fun n_kwredef=(n)
-    do
-        _n_kwredef = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwwritable=(n)
-    do
-        _n_kwwritable = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_awriteable (
@@ -2865,22 +2027,8 @@ redef class AWriteAble
         end
         v.enter_visit(_n_kwwritable)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_kwredef != null then
-            v.enter_visit(_n_kwredef.as(not null))
-        end
-        v.enter_visit(_n_kwwritable)
-    end
 end
 redef class AIdMethid
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aidmethid (
@@ -2910,19 +2058,8 @@ redef class AIdMethid
     do
         v.enter_visit(_n_id)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-    end
 end
 redef class APlusMethid
-    redef fun n_plus=(n)
-    do
-        _n_plus = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aplusmethid (
@@ -2952,19 +2089,8 @@ redef class APlusMethid
     do
         v.enter_visit(_n_plus)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_plus)
-    end
 end
 redef class AMinusMethid
-    redef fun n_minus=(n)
-    do
-        _n_minus = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aminusmethid (
@@ -2994,19 +2120,8 @@ redef class AMinusMethid
     do
         v.enter_visit(_n_minus)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_minus)
-    end
 end
 redef class AStarMethid
-    redef fun n_star=(n)
-    do
-        _n_star = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_astarmethid (
@@ -3036,19 +2151,8 @@ redef class AStarMethid
     do
         v.enter_visit(_n_star)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_star)
-    end
 end
 redef class ASlashMethid
-    redef fun n_slash=(n)
-    do
-        _n_slash = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aslashmethid (
@@ -3078,19 +2182,8 @@ redef class ASlashMethid
     do
         v.enter_visit(_n_slash)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_slash)
-    end
 end
 redef class APercentMethid
-    redef fun n_percent=(n)
-    do
-        _n_percent = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_apercentmethid (
@@ -3120,19 +2213,8 @@ redef class APercentMethid
     do
         v.enter_visit(_n_percent)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_percent)
-    end
 end
 redef class AEqMethid
-    redef fun n_eq=(n)
-    do
-        _n_eq = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aeqmethid (
@@ -3162,19 +2244,8 @@ redef class AEqMethid
     do
         v.enter_visit(_n_eq)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_eq)
-    end
 end
 redef class ANeMethid
-    redef fun n_ne=(n)
-    do
-        _n_ne = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_anemethid (
@@ -3204,19 +2275,8 @@ redef class ANeMethid
     do
         v.enter_visit(_n_ne)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_ne)
-    end
 end
 redef class ALeMethid
-    redef fun n_le=(n)
-    do
-        _n_le = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_alemethid (
@@ -3246,19 +2306,8 @@ redef class ALeMethid
     do
         v.enter_visit(_n_le)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_le)
-    end
 end
 redef class AGeMethid
-    redef fun n_ge=(n)
-    do
-        _n_ge = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_agemethid (
@@ -3288,19 +2337,8 @@ redef class AGeMethid
     do
         v.enter_visit(_n_ge)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_ge)
-    end
 end
 redef class ALtMethid
-    redef fun n_lt=(n)
-    do
-        _n_lt = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_altmethid (
@@ -3330,19 +2368,8 @@ redef class ALtMethid
     do
         v.enter_visit(_n_lt)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_lt)
-    end
 end
 redef class AGtMethid
-    redef fun n_gt=(n)
-    do
-        _n_gt = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_agtmethid (
@@ -3372,24 +2399,8 @@ redef class AGtMethid
     do
         v.enter_visit(_n_gt)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_gt)
-    end
 end
 redef class ABraMethid
-    redef fun n_obra=(n)
-    do
-        _n_obra = n
-	n.parent = self
-    end
-    redef fun n_cbra=(n)
-    do
-        _n_cbra = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_abramethid (
@@ -3433,20 +2444,8 @@ redef class ABraMethid
         v.enter_visit(_n_obra)
         v.enter_visit(_n_cbra)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_obra)
-        v.enter_visit(_n_cbra)
-    end
 end
 redef class AStarshipMethid
-    redef fun n_starship=(n)
-    do
-        _n_starship = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_astarshipmethid (
@@ -3476,24 +2475,8 @@ redef class AStarshipMethid
     do
         v.enter_visit(_n_starship)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_starship)
-    end
 end
 redef class AAssignMethid
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_assign=(n)
-    do
-        _n_assign = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aassignmethid (
@@ -3537,30 +2520,8 @@ redef class AAssignMethid
         v.enter_visit(_n_id)
         v.enter_visit(_n_assign)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-        v.enter_visit(_n_assign)
-    end
 end
 redef class ABraassignMethid
-    redef fun n_obra=(n)
-    do
-        _n_obra = n
-	n.parent = self
-    end
-    redef fun n_cbra=(n)
-    do
-        _n_cbra = n
-	n.parent = self
-    end
-    redef fun n_assign=(n)
-    do
-        _n_assign = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_abraassignmethid (
@@ -3618,23 +2579,8 @@ redef class ABraassignMethid
         v.enter_visit(_n_cbra)
         v.enter_visit(_n_assign)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_obra)
-        v.enter_visit(_n_cbra)
-        v.enter_visit(_n_assign)
-    end
 end
 redef class ASignature
-    redef fun n_type=(n)
-    do
-        _n_type = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_asignature (
@@ -3710,49 +2656,8 @@ redef class ASignature
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-	do
-	    var i = _n_params.length
-            while i >= 0 do
-                v.enter_visit(_n_params[i])
-		i = i - 1
-	    end
-	end
-        if _n_type != null then
-            v.enter_visit(_n_type.as(not null))
-        end
-	do
-	    var i = _n_closure_decls.length
-            while i >= 0 do
-                v.enter_visit(_n_closure_decls[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class AParam
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_type=(n)
-    do
-        _n_type = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_dotdotdot=(n)
-    do
-        _n_dotdotdot = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aparam (
@@ -3818,49 +2723,8 @@ redef class AParam
             v.enter_visit(_n_dotdotdot.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-        if _n_type != null then
-            v.enter_visit(_n_type.as(not null))
-        end
-        if _n_dotdotdot != null then
-            v.enter_visit(_n_dotdotdot.as(not null))
-        end
-    end
 end
 redef class AClosureDecl
-    redef fun n_kwbreak=(n)
-    do
-        _n_kwbreak = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_bang=(n)
-    do
-        _n_bang = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_signature=(n)
-    do
-        _n_signature = n
-	n.parent = self
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aclosuredecl (
@@ -3954,34 +2818,8 @@ redef class AClosureDecl
             v.enter_visit(_n_expr.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_kwbreak != null then
-            v.enter_visit(_n_kwbreak.as(not null))
-        end
-        v.enter_visit(_n_bang)
-        v.enter_visit(_n_id)
-        v.enter_visit(_n_signature)
-        if _n_expr != null then
-            v.enter_visit(_n_expr.as(not null))
-        end
-    end
 end
 redef class AType
-    redef fun n_kwnullable=(n)
-    do
-        _n_kwnullable = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_atype (
@@ -4050,34 +2888,8 @@ redef class AType
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_kwnullable != null then
-            v.enter_visit(_n_kwnullable.as(not null))
-        end
-        v.enter_visit(_n_id)
-	do
-	    var i = _n_types.length
-            while i >= 0 do
-                v.enter_visit(_n_types[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class ALabel
-    redef fun n_kwlabel=(n)
-    do
-        _n_kwlabel = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_alabel (
@@ -4121,15 +2933,8 @@ redef class ALabel
         v.enter_visit(_n_kwlabel)
         v.enter_visit(_n_id)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwlabel)
-        v.enter_visit(_n_id)
-    end
 end
 redef class ABlockExpr
-
     private init empty_init do end
 
     init init_ablockexpr (
@@ -4166,51 +2971,8 @@ redef class ABlockExpr
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-	do
-	    var i = _n_expr.length
-            while i >= 0 do
-                v.enter_visit(_n_expr[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class AVardeclExpr
-    redef fun n_kwvar=(n)
-    do
-        _n_kwvar = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_type=(n)
-    do
-        _n_type = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_assign=(n)
-    do
-        _n_assign = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_avardeclexpr (
@@ -4308,38 +3070,8 @@ redef class AVardeclExpr
             v.enter_visit(_n_expr.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwvar)
-        v.enter_visit(_n_id)
-        if _n_type != null then
-            v.enter_visit(_n_type.as(not null))
-        end
-        if _n_assign != null then
-            v.enter_visit(_n_assign.as(not null))
-        end
-        if _n_expr != null then
-            v.enter_visit(_n_expr.as(not null))
-        end
-    end
 end
 redef class AReturnExpr
-    redef fun n_kwreturn=(n)
-    do
-        _n_kwreturn = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_areturnexpr (
@@ -4391,38 +3123,8 @@ redef class AReturnExpr
             v.enter_visit(_n_expr.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_kwreturn != null then
-            v.enter_visit(_n_kwreturn.as(not null))
-        end
-        if _n_expr != null then
-            v.enter_visit(_n_expr.as(not null))
-        end
-    end
 end
 redef class ABreakExpr
-    redef fun n_kwbreak=(n)
-    do
-        _n_kwbreak = n
-	n.parent = self
-    end
-    redef fun n_label=(n)
-    do
-        _n_label = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_abreakexpr (
@@ -4488,25 +3190,8 @@ redef class ABreakExpr
             v.enter_visit(_n_expr.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwbreak)
-        if _n_label != null then
-            v.enter_visit(_n_label.as(not null))
-        end
-        if _n_expr != null then
-            v.enter_visit(_n_expr.as(not null))
-        end
-    end
 end
 redef class AAbortExpr
-    redef fun n_kwabort=(n)
-    do
-        _n_kwabort = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aabortexpr (
@@ -4536,35 +3221,8 @@ redef class AAbortExpr
     do
         v.enter_visit(_n_kwabort)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwabort)
-    end
 end
 redef class AContinueExpr
-    redef fun n_kwcontinue=(n)
-    do
-        _n_kwcontinue = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_label=(n)
-    do
-        _n_label = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_acontinueexpr (
@@ -4634,41 +3292,8 @@ redef class AContinueExpr
             v.enter_visit(_n_expr.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_kwcontinue != null then
-            v.enter_visit(_n_kwcontinue.as(not null))
-        end
-        if _n_label != null then
-            v.enter_visit(_n_label.as(not null))
-        end
-        if _n_expr != null then
-            v.enter_visit(_n_expr.as(not null))
-        end
-    end
 end
 redef class ADoExpr
-    redef fun n_kwdo=(n)
-    do
-        _n_kwdo = n
-	n.parent = self
-    end
-    redef fun n_block=(n)
-    do
-        _n_block = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_label=(n)
-    do
-        _n_label = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_adoexpr (
@@ -4734,44 +3359,8 @@ redef class ADoExpr
             v.enter_visit(_n_label.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwdo)
-        if _n_block != null then
-            v.enter_visit(_n_block.as(not null))
-        end
-        if _n_label != null then
-            v.enter_visit(_n_label.as(not null))
-        end
-    end
 end
 redef class AIfExpr
-    redef fun n_kwif=(n)
-    do
-        _n_kwif = n
-	n.parent = self
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_then=(n)
-    do
-        _n_then = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_else=(n)
-    do
-        _n_else = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aifexpr (
@@ -4851,51 +3440,8 @@ redef class AIfExpr
             v.enter_visit(_n_else.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwif)
-        v.enter_visit(_n_expr)
-        if _n_then != null then
-            v.enter_visit(_n_then.as(not null))
-        end
-        if _n_else != null then
-            v.enter_visit(_n_else.as(not null))
-        end
-    end
 end
 redef class AIfexprExpr
-    redef fun n_kwif=(n)
-    do
-        _n_kwif = n
-	n.parent = self
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_kwthen=(n)
-    do
-        _n_kwthen = n
-	n.parent = self
-    end
-    redef fun n_then=(n)
-    do
-        _n_then = n
-	n.parent = self
-    end
-    redef fun n_kwelse=(n)
-    do
-        _n_kwelse = n
-	n.parent = self
-    end
-    redef fun n_else=(n)
-    do
-        _n_else = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aifexprexpr (
@@ -4995,48 +3541,8 @@ redef class AIfexprExpr
         v.enter_visit(_n_kwelse)
         v.enter_visit(_n_else)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwif)
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_kwthen)
-        v.enter_visit(_n_then)
-        v.enter_visit(_n_kwelse)
-        v.enter_visit(_n_else)
-    end
 end
 redef class AWhileExpr
-    redef fun n_kwwhile=(n)
-    do
-        _n_kwwhile = n
-	n.parent = self
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_kwdo=(n)
-    do
-        _n_kwdo = n
-	n.parent = self
-    end
-    redef fun n_block=(n)
-    do
-        _n_block = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_label=(n)
-    do
-        _n_label = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_awhileexpr (
@@ -5130,41 +3636,8 @@ redef class AWhileExpr
             v.enter_visit(_n_label.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwwhile)
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_kwdo)
-        if _n_block != null then
-            v.enter_visit(_n_block.as(not null))
-        end
-        if _n_label != null then
-            v.enter_visit(_n_label.as(not null))
-        end
-    end
 end
 redef class ALoopExpr
-    redef fun n_kwloop=(n)
-    do
-        _n_kwloop = n
-	n.parent = self
-    end
-    redef fun n_block=(n)
-    do
-        _n_block = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_label=(n)
-    do
-        _n_label = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aloopexpr (
@@ -5230,54 +3703,8 @@ redef class ALoopExpr
             v.enter_visit(_n_label.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwloop)
-        if _n_block != null then
-            v.enter_visit(_n_block.as(not null))
-        end
-        if _n_label != null then
-            v.enter_visit(_n_label.as(not null))
-        end
-    end
 end
 redef class AForExpr
-    redef fun n_kwfor=(n)
-    do
-        _n_kwfor = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_kwdo=(n)
-    do
-        _n_kwdo = n
-	n.parent = self
-    end
-    redef fun n_block=(n)
-    do
-        _n_block = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_label=(n)
-    do
-        _n_label = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aforexpr (
@@ -5385,47 +3812,8 @@ redef class AForExpr
             v.enter_visit(_n_label.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwfor)
-        v.enter_visit(_n_id)
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_kwdo)
-        if _n_block != null then
-            v.enter_visit(_n_block.as(not null))
-        end
-        if _n_label != null then
-            v.enter_visit(_n_label.as(not null))
-        end
-    end
 end
 redef class AAssertExpr
-    redef fun n_kwassert=(n)
-    do
-        _n_kwassert = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_else=(n)
-    do
-        _n_else = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aassertexpr (
@@ -5505,31 +3893,8 @@ redef class AAssertExpr
             v.enter_visit(_n_else.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwassert)
-        if _n_id != null then
-            v.enter_visit(_n_id.as(not null))
-        end
-        v.enter_visit(_n_expr)
-        if _n_else != null then
-            v.enter_visit(_n_else.as(not null))
-        end
-    end
 end
 redef class AOnceExpr
-    redef fun n_kwonce=(n)
-    do
-        _n_kwonce = n
-	n.parent = self
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aonceexpr (
@@ -5573,20 +3938,8 @@ redef class AOnceExpr
         v.enter_visit(_n_kwonce)
         v.enter_visit(_n_expr)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwonce)
-        v.enter_visit(_n_expr)
-    end
 end
 redef class ASendExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_asendexpr (
@@ -5616,24 +3969,8 @@ redef class ASendExpr
     do
         v.enter_visit(_n_expr)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-    end
 end
 redef class ABinopExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_abinopexpr (
@@ -5677,25 +4014,8 @@ redef class ABinopExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AOrExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aorexpr (
@@ -5739,25 +4059,8 @@ redef class AOrExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AAndExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aandexpr (
@@ -5801,25 +4104,8 @@ redef class AAndExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class ANotExpr
-    redef fun n_kwnot=(n)
-    do
-        _n_kwnot = n
-	n.parent = self
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_anotexpr (
@@ -5863,25 +4149,8 @@ redef class ANotExpr
         v.enter_visit(_n_kwnot)
         v.enter_visit(_n_expr)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwnot)
-        v.enter_visit(_n_expr)
-    end
 end
 redef class AEqExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aeqexpr (
@@ -5925,25 +4194,8 @@ redef class AEqExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AEeExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aeeexpr (
@@ -5987,25 +4239,8 @@ redef class AEeExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class ANeExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aneexpr (
@@ -6049,25 +4284,8 @@ redef class ANeExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class ALtExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_altexpr (
@@ -6111,25 +4329,8 @@ redef class ALtExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class ALeExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aleexpr (
@@ -6173,25 +4374,8 @@ redef class ALeExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AGtExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_agtexpr (
@@ -6235,25 +4419,8 @@ redef class AGtExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AGeExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_ageexpr (
@@ -6297,25 +4464,8 @@ redef class AGeExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AIsaExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_type=(n)
-    do
-        _n_type = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aisaexpr (
@@ -6359,25 +4509,8 @@ redef class AIsaExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_type)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_type)
-    end
 end
 redef class APlusExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aplusexpr (
@@ -6421,25 +4554,8 @@ redef class APlusExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AMinusExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aminusexpr (
@@ -6483,25 +4599,8 @@ redef class AMinusExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AStarshipExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_astarshipexpr (
@@ -6545,25 +4644,8 @@ redef class AStarshipExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AStarExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_astarexpr (
@@ -6607,25 +4689,8 @@ redef class AStarExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class ASlashExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aslashexpr (
@@ -6669,25 +4734,8 @@ redef class ASlashExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class APercentExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_apercentexpr (
@@ -6731,25 +4779,8 @@ redef class APercentExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AUminusExpr
-    redef fun n_minus=(n)
-    do
-        _n_minus = n
-	n.parent = self
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_auminusexpr (
@@ -6793,32 +4824,8 @@ redef class AUminusExpr
         v.enter_visit(_n_minus)
         v.enter_visit(_n_expr)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_minus)
-        v.enter_visit(_n_expr)
-    end
 end
 redef class ANewExpr
-    redef fun n_kwnew=(n)
-    do
-        _n_kwnew = n
-	n.parent = self
-    end
-    redef fun n_type=(n)
-    do
-        _n_type = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_anewexpr (
@@ -6901,35 +4908,8 @@ redef class ANewExpr
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwnew)
-        v.enter_visit(_n_type)
-        if _n_id != null then
-            v.enter_visit(_n_id.as(not null))
-        end
-	do
-	    var i = _n_args.length
-            while i >= 0 do
-                v.enter_visit(_n_args[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class AAttrExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aattrexpr (
@@ -6973,35 +4953,8 @@ redef class AAttrExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_id)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_id)
-    end
 end
 redef class AAttrAssignExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_assign=(n)
-    do
-        _n_assign = n
-	n.parent = self
-    end
-    redef fun n_value=(n)
-    do
-        _n_value = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aattrassignexpr (
@@ -7073,37 +5026,8 @@ redef class AAttrAssignExpr
         v.enter_visit(_n_assign)
         v.enter_visit(_n_value)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_id)
-        v.enter_visit(_n_assign)
-        v.enter_visit(_n_value)
-    end
 end
 redef class AAttrReassignExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_assign_op=(n)
-    do
-        _n_assign_op = n
-	n.parent = self
-    end
-    redef fun n_value=(n)
-    do
-        _n_value = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aattrreassignexpr (
@@ -7175,27 +5099,8 @@ redef class AAttrReassignExpr
         v.enter_visit(_n_assign_op)
         v.enter_visit(_n_value)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_id)
-        v.enter_visit(_n_assign_op)
-        v.enter_visit(_n_value)
-    end
 end
 redef class ACallExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_acallexpr (
@@ -7281,49 +5186,8 @@ redef class ACallExpr
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_id)
-	do
-	    var i = _n_args.length
-            while i >= 0 do
-                v.enter_visit(_n_args[i])
-		i = i - 1
-	    end
-	end
-	do
-	    var i = _n_closure_defs.length
-            while i >= 0 do
-                v.enter_visit(_n_closure_defs[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class ACallAssignExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_assign=(n)
-    do
-        _n_assign = n
-	n.parent = self
-    end
-    redef fun n_value=(n)
-    do
-        _n_value = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_acallassignexpr (
@@ -7416,44 +5280,8 @@ redef class ACallAssignExpr
         v.enter_visit(_n_assign)
         v.enter_visit(_n_value)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_id)
-	do
-	    var i = _n_args.length
-            while i >= 0 do
-                v.enter_visit(_n_args[i])
-		i = i - 1
-	    end
-	end
-        v.enter_visit(_n_assign)
-        v.enter_visit(_n_value)
-    end
 end
 redef class ACallReassignExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_assign_op=(n)
-    do
-        _n_assign_op = n
-	n.parent = self
-    end
-    redef fun n_value=(n)
-    do
-        _n_value = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_acallreassignexpr (
@@ -7546,36 +5374,8 @@ redef class ACallReassignExpr
         v.enter_visit(_n_assign_op)
         v.enter_visit(_n_value)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_id)
-	do
-	    var i = _n_args.length
-            while i >= 0 do
-                v.enter_visit(_n_args[i])
-		i = i - 1
-	    end
-	end
-        v.enter_visit(_n_assign_op)
-        v.enter_visit(_n_value)
-    end
 end
 redef class ASuperExpr
-    redef fun n_qualified=(n)
-    do
-        _n_qualified = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_kwsuper=(n)
-    do
-        _n_kwsuper = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_asuperexpr (
@@ -7644,34 +5444,8 @@ redef class ASuperExpr
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        if _n_qualified != null then
-            v.enter_visit(_n_qualified.as(not null))
-        end
-        v.enter_visit(_n_kwsuper)
-	do
-	    var i = _n_args.length
-            while i >= 0 do
-                v.enter_visit(_n_args[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class AInitExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_kwinit=(n)
-    do
-        _n_kwinit = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_ainitexpr (
@@ -7736,27 +5510,8 @@ redef class AInitExpr
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_kwinit)
-	do
-	    var i = _n_args.length
-            while i >= 0 do
-                v.enter_visit(_n_args[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class ABraExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_abraexpr (
@@ -7828,43 +5583,8 @@ redef class ABraExpr
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-	do
-	    var i = _n_args.length
-            while i >= 0 do
-                v.enter_visit(_n_args[i])
-		i = i - 1
-	    end
-	end
-	do
-	    var i = _n_closure_defs.length
-            while i >= 0 do
-                v.enter_visit(_n_closure_defs[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class ABraAssignExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_assign=(n)
-    do
-        _n_assign = n
-	n.parent = self
-    end
-    redef fun n_value=(n)
-    do
-        _n_value = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_abraassignexpr (
@@ -7943,38 +5663,8 @@ redef class ABraAssignExpr
         v.enter_visit(_n_assign)
         v.enter_visit(_n_value)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-	do
-	    var i = _n_args.length
-            while i >= 0 do
-                v.enter_visit(_n_args[i])
-		i = i - 1
-	    end
-	end
-        v.enter_visit(_n_assign)
-        v.enter_visit(_n_value)
-    end
 end
 redef class ABraReassignExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_assign_op=(n)
-    do
-        _n_assign_op = n
-	n.parent = self
-    end
-    redef fun n_value=(n)
-    do
-        _n_value = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_abrareassignexpr (
@@ -8053,28 +5743,8 @@ redef class ABraReassignExpr
         v.enter_visit(_n_assign_op)
         v.enter_visit(_n_value)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-	do
-	    var i = _n_args.length
-            while i >= 0 do
-                v.enter_visit(_n_args[i])
-		i = i - 1
-	    end
-	end
-        v.enter_visit(_n_assign_op)
-        v.enter_visit(_n_value)
-    end
 end
 redef class AClosureCallExpr
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aclosurecallexpr (
@@ -8146,33 +5816,8 @@ redef class AClosureCallExpr
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-	do
-	    var i = _n_args.length
-            while i >= 0 do
-                v.enter_visit(_n_args[i])
-		i = i - 1
-	    end
-	end
-	do
-	    var i = _n_closure_defs.length
-            while i >= 0 do
-                v.enter_visit(_n_closure_defs[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class AVarExpr
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_avarexpr (
@@ -8202,29 +5847,8 @@ redef class AVarExpr
     do
         v.enter_visit(_n_id)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-    end
 end
 redef class AVarAssignExpr
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_assign=(n)
-    do
-        _n_assign = n
-	n.parent = self
-    end
-    redef fun n_value=(n)
-    do
-        _n_value = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_avarassignexpr (
@@ -8282,31 +5906,8 @@ redef class AVarAssignExpr
         v.enter_visit(_n_assign)
         v.enter_visit(_n_value)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-        v.enter_visit(_n_assign)
-        v.enter_visit(_n_value)
-    end
 end
 redef class AVarReassignExpr
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_assign_op=(n)
-    do
-        _n_assign_op = n
-	n.parent = self
-    end
-    redef fun n_value=(n)
-    do
-        _n_value = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_avarreassignexpr (
@@ -8364,26 +5965,8 @@ redef class AVarReassignExpr
         v.enter_visit(_n_assign_op)
         v.enter_visit(_n_value)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-        v.enter_visit(_n_assign_op)
-        v.enter_visit(_n_value)
-    end
 end
 redef class ARangeExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_arangeexpr (
@@ -8427,25 +6010,8 @@ redef class ARangeExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class ACrangeExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_acrangeexpr (
@@ -8489,25 +6055,8 @@ redef class ACrangeExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AOrangeExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_expr2=(n)
-    do
-        _n_expr2 = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aorangeexpr (
@@ -8551,15 +6100,8 @@ redef class AOrangeExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
 end
 redef class AArrayExpr
-
     private init empty_init do end
 
     init init_aarrayexpr (
@@ -8596,25 +6138,8 @@ redef class AArrayExpr
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-	do
-	    var i = _n_exprs.length
-            while i >= 0 do
-                v.enter_visit(_n_exprs[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class ASelfExpr
-    redef fun n_kwself=(n)
-    do
-        _n_kwself = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aselfexpr (
@@ -8644,14 +6169,8 @@ redef class ASelfExpr
     do
         v.enter_visit(_n_kwself)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwself)
-    end
 end
 redef class AImplicitSelfExpr
-
     private init empty_init do end
 
     init init_aimplicitselfexpr
@@ -8666,18 +6185,8 @@ redef class AImplicitSelfExpr
     redef fun visit_all(v: Visitor)
     do
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-    end
 end
 redef class ATrueExpr
-    redef fun n_kwtrue=(n)
-    do
-        _n_kwtrue = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_atrueexpr (
@@ -8707,19 +6216,8 @@ redef class ATrueExpr
     do
         v.enter_visit(_n_kwtrue)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwtrue)
-    end
 end
 redef class AFalseExpr
-    redef fun n_kwfalse=(n)
-    do
-        _n_kwfalse = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_afalseexpr (
@@ -8749,19 +6247,8 @@ redef class AFalseExpr
     do
         v.enter_visit(_n_kwfalse)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwfalse)
-    end
 end
 redef class ANullExpr
-    redef fun n_kwnull=(n)
-    do
-        _n_kwnull = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_anullexpr (
@@ -8791,19 +6278,8 @@ redef class ANullExpr
     do
         v.enter_visit(_n_kwnull)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwnull)
-    end
 end
 redef class AIntExpr
-    redef fun n_number=(n)
-    do
-        _n_number = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aintexpr (
@@ -8833,19 +6309,8 @@ redef class AIntExpr
     do
         v.enter_visit(_n_number)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_number)
-    end
 end
 redef class AFloatExpr
-    redef fun n_float=(n)
-    do
-        _n_float = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_afloatexpr (
@@ -8875,19 +6340,8 @@ redef class AFloatExpr
     do
         v.enter_visit(_n_float)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_float)
-    end
 end
 redef class ACharExpr
-    redef fun n_char=(n)
-    do
-        _n_char = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_acharexpr (
@@ -8917,19 +6371,8 @@ redef class ACharExpr
     do
         v.enter_visit(_n_char)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_char)
-    end
 end
 redef class AStringExpr
-    redef fun n_string=(n)
-    do
-        _n_string = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_astringexpr (
@@ -8959,19 +6402,8 @@ redef class AStringExpr
     do
         v.enter_visit(_n_string)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_string)
-    end
 end
 redef class AStartStringExpr
-    redef fun n_string=(n)
-    do
-        _n_string = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_astartstringexpr (
@@ -9001,19 +6433,8 @@ redef class AStartStringExpr
     do
         v.enter_visit(_n_string)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_string)
-    end
 end
 redef class AMidStringExpr
-    redef fun n_string=(n)
-    do
-        _n_string = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_amidstringexpr (
@@ -9043,19 +6464,8 @@ redef class AMidStringExpr
     do
         v.enter_visit(_n_string)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_string)
-    end
 end
 redef class AEndStringExpr
-    redef fun n_string=(n)
-    do
-        _n_string = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aendstringexpr (
@@ -9085,14 +6495,8 @@ redef class AEndStringExpr
     do
         v.enter_visit(_n_string)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_string)
-    end
 end
 redef class ASuperstringExpr
-
     private init empty_init do end
 
     init init_asuperstringexpr (
@@ -9129,25 +6533,8 @@ redef class ASuperstringExpr
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-	do
-	    var i = _n_exprs.length
-            while i >= 0 do
-                v.enter_visit(_n_exprs[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 redef class AParExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aparexpr (
@@ -9177,29 +6564,8 @@ redef class AParExpr
     do
         v.enter_visit(_n_expr)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-    end
 end
 redef class AAsCastExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_kwas=(n)
-    do
-        _n_kwas = n
-	n.parent = self
-    end
-    redef fun n_type=(n)
-    do
-        _n_type = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aascastexpr (
@@ -9257,36 +6623,8 @@ redef class AAsCastExpr
         v.enter_visit(_n_kwas)
         v.enter_visit(_n_type)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_kwas)
-        v.enter_visit(_n_type)
-    end
 end
 redef class AAsNotnullExpr
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_kwas=(n)
-    do
-        _n_kwas = n
-	n.parent = self
-    end
-    redef fun n_kwnot=(n)
-    do
-        _n_kwnot = n
-	n.parent = self
-    end
-    redef fun n_kwnull=(n)
-    do
-        _n_kwnull = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aasnotnullexpr (
@@ -9358,32 +6696,8 @@ redef class AAsNotnullExpr
         v.enter_visit(_n_kwnot)
         v.enter_visit(_n_kwnull)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_kwas)
-        v.enter_visit(_n_kwnot)
-        v.enter_visit(_n_kwnull)
-    end
 end
 redef class AIssetAttrExpr
-    redef fun n_kwisset=(n)
-    do
-        _n_kwisset = n
-	n.parent = self
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aissetattrexpr (
@@ -9441,21 +6755,8 @@ redef class AIssetAttrExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_id)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwisset)
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_id)
-    end
 end
 redef class APlusAssignOp
-    redef fun n_pluseq=(n)
-    do
-        _n_pluseq = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aplusassignop (
@@ -9485,19 +6786,8 @@ redef class APlusAssignOp
     do
         v.enter_visit(_n_pluseq)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_pluseq)
-    end
 end
 redef class AMinusAssignOp
-    redef fun n_minuseq=(n)
-    do
-        _n_minuseq = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_aminusassignop (
@@ -9527,45 +6817,8 @@ redef class AMinusAssignOp
     do
         v.enter_visit(_n_minuseq)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_minuseq)
-    end
 end
 redef class AClosureDef
-    redef fun n_bang=(n)
-    do
-        _n_bang = n
-	n.parent = self
-    end
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-    redef fun n_kwdo=(n)
-    do
-        _n_kwdo = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_expr=(n)
-    do
-        _n_expr = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef fun n_label=(n)
-    do
-        _n_label = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aclosuredef (
@@ -9684,36 +6937,8 @@ redef class AClosureDef
             v.enter_visit(_n_label.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_bang)
-        v.enter_visit(_n_id)
-	do
-	    var i = _n_ids.length
-            while i >= 0 do
-                v.enter_visit(_n_ids[i])
-		i = i - 1
-	    end
-	end
-        if _n_kwdo != null then
-            v.enter_visit(_n_kwdo.as(not null))
-        end
-        if _n_expr != null then
-            v.enter_visit(_n_expr.as(not null))
-        end
-        if _n_label != null then
-            v.enter_visit(_n_label.as(not null))
-        end
-    end
 end
 redef class ASimpleClosureId
-    redef fun n_id=(n)
-    do
-        _n_id = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_asimpleclosureid (
@@ -9743,19 +6968,8 @@ redef class ASimpleClosureId
     do
         v.enter_visit(_n_id)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-    end
 end
 redef class ABreakClosureId
-    redef fun n_kwbreak=(n)
-    do
-        _n_kwbreak = n
-	n.parent = self
-    end
-
     private init empty_init do end
 
     init init_abreakclosureid (
@@ -9785,21 +6999,8 @@ redef class ABreakClosureId
     do
         v.enter_visit(_n_kwbreak)
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-        v.enter_visit(_n_kwbreak)
-    end
 end
 redef class AQualified
-    redef fun n_classid=(n)
-    do
-        _n_classid = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
     private init empty_init do end
 
     init init_aqualified (
@@ -9854,23 +7055,8 @@ redef class AQualified
             v.enter_visit(_n_classid.as(not null))
         end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-	do
-	    var i = _n_id.length
-            while i >= 0 do
-                v.enter_visit(_n_id[i])
-		i = i - 1
-	    end
-	end
-        if _n_classid != null then
-            v.enter_visit(_n_classid.as(not null))
-        end
-    end
 end
 redef class ADoc
-
     private init empty_init do end
 
     init init_adoc (
@@ -9907,17 +7093,6 @@ redef class ADoc
                 v.enter_visit(n)
 	    end
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-	do
-	    var i = _n_comment.length
-            while i >= 0 do
-                v.enter_visit(_n_comment[i])
-		i = i - 1
-	    end
-	end
-    end
 end
 
 redef class Start
@@ -9949,13 +7124,5 @@ redef class Start
             v.enter_visit(_n_base.as(not null))
         end
 	v.enter_visit(_n_eof)
-    end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-	v.enter_visit(_n_eof)
-        if _n_base != null then
-            v.enter_visit(_n_base.as(not null))
-        end
     end
 end

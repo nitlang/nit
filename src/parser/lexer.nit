@@ -5,7 +5,7 @@ package lexer
 intrude import parser_nodes
 
 redef class Token
-    readable writable var _text: String
+    readable var _text: String
 
     fun parser_index: Int is abstract
 
@@ -1160,7 +1160,7 @@ redef class EOF
 end
 
 redef class AError
-    readable writable var _message: String
+    readable var _message: String
 
     init init_error(message: String, loc: Location)
     do

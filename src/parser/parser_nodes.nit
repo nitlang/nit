@@ -311,28 +311,28 @@ end
 
 class AModule
 special Prod
-    readable writable var _n_packagedecl: nullable APackagedecl = null
-    readable writable var _n_imports: List[AImport] = new List[AImport]
-    readable writable var _n_classdefs: List[AClassdef] = new List[AClassdef]
+    readable var _n_packagedecl: nullable APackagedecl = null
+    readable var _n_imports: List[AImport] = new List[AImport]
+    readable var _n_classdefs: List[AClassdef] = new List[AClassdef]
 end
 class APackagedecl
 special Prod
-    readable writable var _n_doc: nullable ADoc = null
-    readable writable var _n_kwpackage: TKwpackage
-    readable writable var _n_id: TId
+    readable var _n_doc: nullable ADoc = null
+    readable var _n_kwpackage: TKwpackage
+    readable var _n_id: TId
 end
 class AImport special Prod end
 class AStdImport
 special AImport
-    readable writable var _n_visibility: AVisibility
-    readable writable var _n_kwimport: TKwimport
-    readable writable var _n_id: TId
+    readable var _n_visibility: AVisibility
+    readable var _n_kwimport: TKwimport
+    readable var _n_id: TId
 end
 class ANoImport
 special AImport
-    readable writable var _n_visibility: AVisibility
-    readable writable var _n_kwimport: TKwimport
-    readable writable var _n_kwend: TKwend
+    readable var _n_visibility: AVisibility
+    readable var _n_kwimport: TKwimport
+    readable var _n_kwend: TKwend
 end
 class AVisibility special Prod end
 class APublicVisibility
@@ -340,367 +340,367 @@ special AVisibility
 end
 class APrivateVisibility
 special AVisibility
-    readable writable var _n_kwprivate: TKwprivate
+    readable var _n_kwprivate: TKwprivate
 end
 class AProtectedVisibility
 special AVisibility
-    readable writable var _n_kwprotected: TKwprotected
+    readable var _n_kwprotected: TKwprotected
 end
 class AIntrudeVisibility
 special AVisibility
-    readable writable var _n_kwintrude: TKwintrude
+    readable var _n_kwintrude: TKwintrude
 end
 class AClassdef special Prod end
 class AStdClassdef
 special AClassdef
-    readable writable var _n_doc: nullable ADoc = null
-    readable writable var _n_kwredef: nullable TKwredef = null
-    readable writable var _n_visibility: AVisibility
-    readable writable var _n_classkind: AClasskind
-    readable writable var _n_id: nullable TClassid = null
-    readable writable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
-    readable writable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
-    readable writable var _n_propdefs: List[APropdef] = new List[APropdef]
+    readable var _n_doc: nullable ADoc = null
+    readable var _n_kwredef: nullable TKwredef = null
+    readable var _n_visibility: AVisibility
+    readable var _n_classkind: AClasskind
+    readable var _n_id: nullable TClassid = null
+    readable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
+    readable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
+    readable var _n_propdefs: List[APropdef] = new List[APropdef]
 end
 class ATopClassdef
 special AClassdef
-    readable writable var _n_propdefs: List[APropdef] = new List[APropdef]
+    readable var _n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AMainClassdef
 special AClassdef
-    readable writable var _n_propdefs: List[APropdef] = new List[APropdef]
+    readable var _n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AClasskind special Prod end
 class AConcreteClasskind
 special AClasskind
-    readable writable var _n_kwclass: TKwclass
+    readable var _n_kwclass: TKwclass
 end
 class AAbstractClasskind
 special AClasskind
-    readable writable var _n_kwabstract: TKwabstract
-    readable writable var _n_kwclass: TKwclass
+    readable var _n_kwabstract: TKwabstract
+    readable var _n_kwclass: TKwclass
 end
 class AInterfaceClasskind
 special AClasskind
-    readable writable var _n_kwinterface: TKwinterface
+    readable var _n_kwinterface: TKwinterface
 end
 class AUniversalClasskind
 special AClasskind
-    readable writable var _n_kwuniversal: TKwuniversal
+    readable var _n_kwuniversal: TKwuniversal
 end
 class AFormaldef
 special Prod
-    readable writable var _n_id: TClassid
-    readable writable var _n_type: nullable AType = null
+    readable var _n_id: TClassid
+    readable var _n_type: nullable AType = null
 end
 class ASuperclass
 special Prod
-    readable writable var _n_kwspecial: TKwspecial
-    readable writable var _n_type: AType
+    readable var _n_kwspecial: TKwspecial
+    readable var _n_type: AType
 end
 class APropdef special Prod
-    readable writable var _n_doc: nullable ADoc = null
+    readable var _n_doc: nullable ADoc = null
 end
 class AAttrPropdef
 special APropdef
-    readable writable var _n_kwredef: nullable TKwredef = null
-    readable writable var _n_visibility: AVisibility
-    readable writable var _n_kwvar: TKwvar
-    readable writable var _n_id: TAttrid
-    readable writable var _n_type: nullable AType = null
-    readable writable var _n_readable: nullable AAble = null
-    readable writable var _n_writable: nullable AAble = null
-    readable writable var _n_expr: nullable AExpr = null
+    readable var _n_kwredef: nullable TKwredef = null
+    readable var _n_visibility: AVisibility
+    readable var _n_kwvar: TKwvar
+    readable var _n_id: TAttrid
+    readable var _n_type: nullable AType = null
+    readable var _n_readable: nullable AAble = null
+    readable var _n_writable: nullable AAble = null
+    readable var _n_expr: nullable AExpr = null
 end
 class AMethPropdef
 special APropdef
-    readable writable var _n_kwredef: nullable TKwredef = null
-    readable writable var _n_visibility: nullable AVisibility
-    readable writable var _n_methid: nullable AMethid = null
-    readable writable var _n_signature: nullable ASignature
+    readable var _n_kwredef: nullable TKwredef = null
+    readable var _n_visibility: nullable AVisibility
+    readable var _n_methid: nullable AMethid = null
+    readable var _n_signature: nullable ASignature
 end
 class ADeferredMethPropdef
 special AMethPropdef
-    readable writable var _n_kwmeth: TKwmeth
+    readable var _n_kwmeth: TKwmeth
 end
 class AInternMethPropdef
 special AMethPropdef
-    readable writable var _n_kwmeth: TKwmeth
+    readable var _n_kwmeth: TKwmeth
 end
 class AExternMethPropdef
 special AMethPropdef
-    readable writable var _n_kwmeth: TKwmeth
-    readable writable var _n_extern: nullable TString = null
+    readable var _n_kwmeth: TKwmeth
+    readable var _n_extern: nullable TString = null
 end
 class AConcreteMethPropdef
 special AMethPropdef
-    readable writable var _n_kwmeth: nullable TKwmeth
-    readable writable var _n_block: nullable AExpr = null
+    readable var _n_kwmeth: nullable TKwmeth
+    readable var _n_block: nullable AExpr = null
 end
 class AConcreteInitPropdef
 special AConcreteMethPropdef
-    readable writable var _n_kwinit: TKwinit
+    readable var _n_kwinit: TKwinit
 end
 class AMainMethPropdef
 special AConcreteMethPropdef
 end
 class ATypePropdef
 special APropdef
-    readable writable var _n_kwredef: nullable TKwredef = null
-    readable writable var _n_visibility: AVisibility
-    readable writable var _n_kwtype: TKwtype
-    readable writable var _n_id: TClassid
-    readable writable var _n_type: AType
+    readable var _n_kwredef: nullable TKwredef = null
+    readable var _n_visibility: AVisibility
+    readable var _n_kwtype: TKwtype
+    readable var _n_id: TClassid
+    readable var _n_type: AType
 end
 class AAble special Prod
-    readable writable var _n_kwredef: nullable TKwredef = null
+    readable var _n_kwredef: nullable TKwredef = null
 end
 class AReadAble
 special AAble
-    readable writable var _n_kwreadable: TKwreadable
+    readable var _n_kwreadable: TKwreadable
 end
 class AWriteAble
 special AAble
-    readable writable var _n_kwwritable: TKwwritable
+    readable var _n_kwwritable: TKwwritable
 end
 class AMethid special Prod end
 class AIdMethid
 special AMethid
-    readable writable var _n_id: TId
+    readable var _n_id: TId
 end
 class APlusMethid
 special AMethid
-    readable writable var _n_plus: TPlus
+    readable var _n_plus: TPlus
 end
 class AMinusMethid
 special AMethid
-    readable writable var _n_minus: TMinus
+    readable var _n_minus: TMinus
 end
 class AStarMethid
 special AMethid
-    readable writable var _n_star: TStar
+    readable var _n_star: TStar
 end
 class ASlashMethid
 special AMethid
-    readable writable var _n_slash: TSlash
+    readable var _n_slash: TSlash
 end
 class APercentMethid
 special AMethid
-    readable writable var _n_percent: TPercent
+    readable var _n_percent: TPercent
 end
 class AEqMethid
 special AMethid
-    readable writable var _n_eq: TEq
+    readable var _n_eq: TEq
 end
 class ANeMethid
 special AMethid
-    readable writable var _n_ne: TNe
+    readable var _n_ne: TNe
 end
 class ALeMethid
 special AMethid
-    readable writable var _n_le: TLe
+    readable var _n_le: TLe
 end
 class AGeMethid
 special AMethid
-    readable writable var _n_ge: TGe
+    readable var _n_ge: TGe
 end
 class ALtMethid
 special AMethid
-    readable writable var _n_lt: TLt
+    readable var _n_lt: TLt
 end
 class AGtMethid
 special AMethid
-    readable writable var _n_gt: TGt
+    readable var _n_gt: TGt
 end
 class ABraMethid
 special AMethid
-    readable writable var _n_obra: TObra
-    readable writable var _n_cbra: TCbra
+    readable var _n_obra: TObra
+    readable var _n_cbra: TCbra
 end
 class AStarshipMethid
 special AMethid
-    readable writable var _n_starship: TStarship
+    readable var _n_starship: TStarship
 end
 class AAssignMethid
 special AMethid
-    readable writable var _n_id: TId
-    readable writable var _n_assign: TAssign
+    readable var _n_id: TId
+    readable var _n_assign: TAssign
 end
 class ABraassignMethid
 special AMethid
-    readable writable var _n_obra: TObra
-    readable writable var _n_cbra: TCbra
-    readable writable var _n_assign: TAssign
+    readable var _n_obra: TObra
+    readable var _n_cbra: TCbra
+    readable var _n_assign: TAssign
 end
 class ASignature
 special Prod
-    readable writable var _n_params: List[AParam] = new List[AParam]
-    readable writable var _n_type: nullable AType = null
-    readable writable var _n_closure_decls: List[AClosureDecl] = new List[AClosureDecl]
+    readable var _n_params: List[AParam] = new List[AParam]
+    readable var _n_type: nullable AType = null
+    readable var _n_closure_decls: List[AClosureDecl] = new List[AClosureDecl]
 end
 class AParam
 special Prod
-    readable writable var _n_id: TId
-    readable writable var _n_type: nullable AType = null
-    readable writable var _n_dotdotdot: nullable TDotdotdot = null
+    readable var _n_id: TId
+    readable var _n_type: nullable AType = null
+    readable var _n_dotdotdot: nullable TDotdotdot = null
 end
 class AClosureDecl
 special Prod
-    readable writable var _n_kwbreak: nullable TKwbreak = null
-    readable writable var _n_bang: TBang
-    readable writable var _n_id: TId
-    readable writable var _n_signature: ASignature
-    readable writable var _n_expr: nullable AExpr = null
+    readable var _n_kwbreak: nullable TKwbreak = null
+    readable var _n_bang: TBang
+    readable var _n_id: TId
+    readable var _n_signature: ASignature
+    readable var _n_expr: nullable AExpr = null
 end
 class AType
 special Prod
-    readable writable var _n_kwnullable: nullable TKwnullable = null
-    readable writable var _n_id: TClassid
-    readable writable var _n_types: List[AType] = new List[AType]
+    readable var _n_kwnullable: nullable TKwnullable = null
+    readable var _n_id: TClassid
+    readable var _n_types: List[AType] = new List[AType]
 end
 class ALabel
 special Prod
-    readable writable var _n_kwlabel: TKwlabel
-    readable writable var _n_id: TId
+    readable var _n_kwlabel: TKwlabel
+    readable var _n_id: TId
 end
 class AExpr special Prod end
 class ABlockExpr
 special AExpr
-    readable writable var _n_expr: List[AExpr] = new List[AExpr]
+    readable var _n_expr: List[AExpr] = new List[AExpr]
 end
 class AVardeclExpr
 special AExpr
-    readable writable var _n_kwvar: TKwvar
-    readable writable var _n_id: TId
-    readable writable var _n_type: nullable AType = null
-    readable writable var _n_assign: nullable TAssign = null
-    readable writable var _n_expr: nullable AExpr = null
+    readable var _n_kwvar: TKwvar
+    readable var _n_id: TId
+    readable var _n_type: nullable AType = null
+    readable var _n_assign: nullable TAssign = null
+    readable var _n_expr: nullable AExpr = null
 end
 class AReturnExpr
 special AExpr
-    readable writable var _n_kwreturn: nullable TKwreturn = null
-    readable writable var _n_expr: nullable AExpr = null
+    readable var _n_kwreturn: nullable TKwreturn = null
+    readable var _n_expr: nullable AExpr = null
 end
 class ALabelable
 special Prod
-    readable writable var _n_label: nullable ALabel = null
+    readable var _n_label: nullable ALabel = null
 end
 class ABreakExpr
 special AExpr
 special ALabelable
-    readable writable var _n_kwbreak: TKwbreak
-    readable writable var _n_expr: nullable AExpr = null
+    readable var _n_kwbreak: TKwbreak
+    readable var _n_expr: nullable AExpr = null
 end
 class AAbortExpr
 special AExpr
-    readable writable var _n_kwabort: TKwabort
+    readable var _n_kwabort: TKwabort
 end
 class AContinueExpr
 special AExpr
 special ALabelable
-    readable writable var _n_kwcontinue: nullable TKwcontinue = null
-    readable writable var _n_expr: nullable AExpr = null
+    readable var _n_kwcontinue: nullable TKwcontinue = null
+    readable var _n_expr: nullable AExpr = null
 end
 class ADoExpr
 special AExpr
 special ALabelable
-    readable writable var _n_kwdo: TKwdo
-    readable writable var _n_block: nullable AExpr = null
+    readable var _n_kwdo: TKwdo
+    readable var _n_block: nullable AExpr = null
 end
 class AIfExpr
 special AExpr
-    readable writable var _n_kwif: TKwif
-    readable writable var _n_expr: AExpr
-    readable writable var _n_then: nullable AExpr = null
-    readable writable var _n_else: nullable AExpr = null
+    readable var _n_kwif: TKwif
+    readable var _n_expr: AExpr
+    readable var _n_then: nullable AExpr = null
+    readable var _n_else: nullable AExpr = null
 end
 class AIfexprExpr
 special AExpr
-    readable writable var _n_kwif: TKwif
-    readable writable var _n_expr: AExpr
-    readable writable var _n_kwthen: TKwthen
-    readable writable var _n_then: AExpr
-    readable writable var _n_kwelse: TKwelse
-    readable writable var _n_else: AExpr
+    readable var _n_kwif: TKwif
+    readable var _n_expr: AExpr
+    readable var _n_kwthen: TKwthen
+    readable var _n_then: AExpr
+    readable var _n_kwelse: TKwelse
+    readable var _n_else: AExpr
 end
 class AWhileExpr
 special AExpr
 special ALabelable
-    readable writable var _n_kwwhile:  TKwwhile
-    readable writable var _n_expr: AExpr
-    readable writable var _n_kwdo: TKwdo
-    readable writable var _n_block: nullable AExpr = null
+    readable var _n_kwwhile:  TKwwhile
+    readable var _n_expr: AExpr
+    readable var _n_kwdo: TKwdo
+    readable var _n_block: nullable AExpr = null
 end
 class ALoopExpr
 special AExpr
 special ALabelable
-    readable writable var _n_kwloop: TKwloop
-    readable writable var _n_block: nullable AExpr = null
+    readable var _n_kwloop: TKwloop
+    readable var _n_block: nullable AExpr = null
 end
 class AForExpr
 special AExpr
 special ALabelable
-    readable writable var _n_kwfor: TKwfor
-    readable writable var _n_id: TId
-    readable writable var _n_expr: AExpr
-    readable writable var _n_kwdo: TKwdo
-    readable writable var _n_block: nullable AExpr = null
+    readable var _n_kwfor: TKwfor
+    readable var _n_id: TId
+    readable var _n_expr: AExpr
+    readable var _n_kwdo: TKwdo
+    readable var _n_block: nullable AExpr = null
 end
 class AAssertExpr
 special AExpr
-    readable writable var _n_kwassert: TKwassert
-    readable writable var _n_id: nullable TId = null
-    readable writable var _n_expr: AExpr
-    readable writable var _n_else: nullable AExpr = null
+    readable var _n_kwassert: TKwassert
+    readable var _n_id: nullable TId = null
+    readable var _n_expr: AExpr
+    readable var _n_else: nullable AExpr = null
 end
 class AAssignFormExpr
 special AExpr
-    readable writable var _n_assign: TAssign
-    readable writable var _n_value: AExpr
+    readable var _n_assign: TAssign
+    readable var _n_value: AExpr
 end
 class AReassignFormExpr
 special AExpr
-    readable writable var _n_assign_op: AAssignOp
-    readable writable var _n_value: AExpr
+    readable var _n_assign_op: AAssignOp
+    readable var _n_value: AExpr
 end
 class AOnceExpr
 special AProxyExpr
-    readable writable var _n_kwonce: TKwonce
+    readable var _n_kwonce: TKwonce
 end
 class ASendExpr
 special AExpr
-    readable writable var _n_expr: AExpr
-    readable writable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
+    readable var _n_expr: AExpr
+    readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
 end
 class ABinopExpr
 special ASendExpr
-    readable writable var _n_expr2: AExpr
+    readable var _n_expr2: AExpr
 end
 class ABoolExpr
 special AExpr
 end
 class AOrExpr
 special ABoolExpr
-    readable writable var _n_expr: AExpr
-    readable writable var _n_expr2: AExpr
+    readable var _n_expr: AExpr
+    readable var _n_expr2: AExpr
 end
 class AAndExpr
 special ABoolExpr
-    readable writable var _n_expr: AExpr
-    readable writable var _n_expr2: AExpr
+    readable var _n_expr: AExpr
+    readable var _n_expr2: AExpr
 end
 class ANotExpr
 special ABoolExpr
-    readable writable var _n_kwnot: TKwnot
-    readable writable var _n_expr: AExpr
+    readable var _n_kwnot: TKwnot
+    readable var _n_expr: AExpr
 end
 class AEqExpr
 special ABinopExpr
 end
 class AEeExpr
 special ABoolExpr
-    readable writable var _n_expr: AExpr
-    readable writable var _n_expr2: AExpr
+    readable var _n_expr: AExpr
+    readable var _n_expr2: AExpr
 end
 class ANeExpr
 special ABinopExpr
@@ -719,8 +719,8 @@ special ABinopExpr
 end
 class AIsaExpr
 special ABoolExpr
-    readable writable var _n_expr: AExpr
-    readable writable var _n_type: AType
+    readable var _n_expr: AExpr
+    readable var _n_type: AType
 end
 class APlusExpr
 special ABinopExpr
@@ -742,19 +742,19 @@ special ABinopExpr
 end
 class AUminusExpr
 special ASendExpr
-    readable writable var _n_minus: TMinus
+    readable var _n_minus: TMinus
 end
 class ANewExpr
 special AExpr
-    readable writable var _n_kwnew: TKwnew
-    readable writable var _n_type: AType
-    readable writable var _n_id: nullable TId = null
-    readable writable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_kwnew: TKwnew
+    readable var _n_type: AType
+    readable var _n_id: nullable TId = null
+    readable var _n_args: List[AExpr] = new List[AExpr]
 end
 class AAttrFormExpr
 special AExpr
-    readable writable var _n_expr: AExpr
-    readable writable var _n_id: TAttrid
+    readable var _n_expr: AExpr
+    readable var _n_id: TAttrid
 end
 class AAttrExpr
 special AAttrFormExpr
@@ -765,8 +765,8 @@ special AAssignFormExpr
 end
 class ACallFormExpr
 special ASendExpr
-    readable writable var _n_id: TId
-    readable writable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_id: TId
+    readable var _n_args: List[AExpr] = new List[AExpr]
 end
 class AAttrReassignExpr
 special AExpr
@@ -787,18 +787,18 @@ special AReassignFormExpr
 end
 class ASuperExpr
 special AExpr
-    readable writable var _n_qualified: nullable AQualified = null
-    readable writable var _n_kwsuper: TKwsuper
-    readable writable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_qualified: nullable AQualified = null
+    readable var _n_kwsuper: TKwsuper
+    readable var _n_args: List[AExpr] = new List[AExpr]
 end
 class AInitExpr
 special ASendExpr
-    readable writable var _n_kwinit: TKwinit
-    readable writable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_kwinit: TKwinit
+    readable var _n_args: List[AExpr] = new List[AExpr]
 end
 class ABraFormExpr
 special ASendExpr
-    readable writable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: List[AExpr] = new List[AExpr]
 end
 class ABraExpr
 special ABraFormExpr
@@ -809,7 +809,7 @@ special AAssignFormExpr
 end
 class AVarFormExpr
 special AExpr
-    readable writable var _n_id: TId
+    readable var _n_id: TId
 end
 class ABraReassignExpr
 special ABraFormExpr
@@ -817,9 +817,9 @@ special AReassignFormExpr
 end
 class AClosureCallExpr
 special AExpr
-    readable writable var _n_id: TId
-    readable writable var _n_args: List[AExpr] = new List[AExpr]
-    readable writable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
+    readable var _n_id: TId
+    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
 end
 class AVarExpr
 special AVarFormExpr
@@ -834,8 +834,8 @@ special AReassignFormExpr
 end
 class ARangeExpr
 special AExpr
-    readable writable var _n_expr: AExpr
-    readable writable var _n_expr2: AExpr
+    readable var _n_expr: AExpr
+    readable var _n_expr2: AExpr
 end
 class ACrangeExpr
 special ARangeExpr
@@ -845,126 +845,126 @@ special ARangeExpr
 end
 class AArrayExpr
 special AExpr
-    readable writable var _n_exprs: List[AExpr] = new List[AExpr]
+    readable var _n_exprs: List[AExpr] = new List[AExpr]
 end
 class ASelfExpr
 special AExpr
-    readable writable var _n_kwself: nullable TKwself
+    readable var _n_kwself: nullable TKwself
 end
 class AImplicitSelfExpr
 special ASelfExpr
 end
 class ATrueExpr
 special ABoolExpr
-    readable writable var _n_kwtrue: TKwtrue
+    readable var _n_kwtrue: TKwtrue
 end
 class AFalseExpr
 special ABoolExpr
-    readable writable var _n_kwfalse: TKwfalse
+    readable var _n_kwfalse: TKwfalse
 end
 class ANullExpr
 special AExpr
-    readable writable var _n_kwnull: TKwnull
+    readable var _n_kwnull: TKwnull
 end
 class AIntExpr
 special AExpr
-    readable writable var _n_number: TNumber
+    readable var _n_number: TNumber
 end
 class AFloatExpr
 special AExpr
-    readable writable var _n_float: TFloat
+    readable var _n_float: TFloat
 end
 class ACharExpr
 special AExpr
-    readable writable var _n_char: TChar
+    readable var _n_char: TChar
 end
 class AStringFormExpr
 special AExpr
 end
 class AStringExpr
 special AStringFormExpr
-    readable writable var _n_string: TString
+    readable var _n_string: TString
 end
 class AStartStringExpr
 special AStringFormExpr
-    readable writable var _n_string: TStartString
+    readable var _n_string: TStartString
 end
 class AMidStringExpr
 special AStringFormExpr
-    readable writable var _n_string: TMidString
+    readable var _n_string: TMidString
 end
 class AEndStringExpr
 special AStringFormExpr
-    readable writable var _n_string: TEndString
+    readable var _n_string: TEndString
 end
 class ASuperstringExpr
 special AExpr
-    readable writable var _n_exprs: List[AExpr] = new List[AExpr]
+    readable var _n_exprs: List[AExpr] = new List[AExpr]
 end
 class AParExpr
 special AProxyExpr
 end
 class AProxyExpr
 special AExpr
-    readable writable var _n_expr: AExpr
+    readable var _n_expr: AExpr
 end
 class AAsCastExpr
 special AExpr
-    readable writable var _n_expr: AExpr
-    readable writable var _n_kwas: TKwas
-    readable writable var _n_type: AType
+    readable var _n_expr: AExpr
+    readable var _n_kwas: TKwas
+    readable var _n_type: AType
 end
 class AAsNotnullExpr
 special AExpr
-    readable writable var _n_expr: AExpr
-    readable writable var _n_kwas: TKwas
-    readable writable var _n_kwnot: TKwnot
-    readable writable var _n_kwnull: TKwnull
+    readable var _n_expr: AExpr
+    readable var _n_kwas: TKwas
+    readable var _n_kwnot: TKwnot
+    readable var _n_kwnull: TKwnull
 end
 class AIssetAttrExpr
 special AAttrFormExpr
-    readable writable var _n_kwisset: TKwisset
+    readable var _n_kwisset: TKwisset
 end
 class AAssignOp special Prod end
 class APlusAssignOp
 special AAssignOp
-    readable writable var _n_pluseq: TPluseq
+    readable var _n_pluseq: TPluseq
 end
 class AMinusAssignOp
 special AAssignOp
-    readable writable var _n_minuseq: TMinuseq
+    readable var _n_minuseq: TMinuseq
 end
 class AClosureDef
 special ALabelable
-    readable writable var _n_bang: TBang
-    readable writable var _n_id: AClosureId
-    readable writable var _n_ids: List[TId] = new List[TId]
-    readable writable var _n_kwdo: nullable TKwdo = null
-    readable writable var _n_expr: nullable AExpr = null
+    readable var _n_bang: TBang
+    readable var _n_id: AClosureId
+    readable var _n_ids: List[TId] = new List[TId]
+    readable var _n_kwdo: nullable TKwdo = null
+    readable var _n_expr: nullable AExpr = null
 end
 class AClosureId
 special Prod
 end
 class ASimpleClosureId
 special AClosureId
-    readable writable var _n_id: TId
+    readable var _n_id: TId
 end
 class ABreakClosureId
 special AClosureId
-    readable writable var _n_kwbreak: TKwbreak
+    readable var _n_kwbreak: TKwbreak
 end
 class AQualified
 special Prod
-    readable writable var _n_id: List[TId] = new List[TId]
-    readable writable var _n_classid: nullable TClassid = null
+    readable var _n_id: List[TId] = new List[TId]
+    readable var _n_classid: nullable TClassid = null
 end
 class ADoc
 special Prod
-    readable writable var _n_comment: List[TComment] = new List[TComment]
+    readable var _n_comment: List[TComment] = new List[TComment]
 end
 
 class Start
 special Prod
-    readable writable var _n_base: nullable AModule
-    readable writable var _n_eof: EOF
+    readable var _n_base: nullable AModule
+    readable var _n_eof: EOF
 end

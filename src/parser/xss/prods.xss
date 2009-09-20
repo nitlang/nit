@@ -27,12 +27,12 @@ class @ename
 special ${../@ename}
 $ foreach {elem}
 $   if @is_list
-    readable writable var _n_@name: List[@etype] = new List[@etype]
+    readable var _n_@name: List[@etype] = new List[@etype]
 $   else
 $   if @modifier
-    readable writable var _n_@name: nullable @etype = null
+    readable var _n_@name: nullable @etype = null
 $   else
-    readable writable var _n_@name: @etype
+    readable var _n_@name: @etype
 $   end
 $   end
 $ end
@@ -41,8 +41,8 @@ $ end
 
 class Start
 special Prod
-    readable writable var _n_base: nullable $baseprod
-    readable writable var _n_eof: EOF
+    readable var _n_base: nullable $baseprod
+    readable var _n_eof: EOF
 end
 $ end template
 
@@ -50,23 +50,6 @@ $ template make_prods()
 $ set baseprod = {//prod/@ename}
 $ foreach {//alt}
 redef class @ename
-$ foreach {elem}
-$   if @is_list
-$   else
-    redef fun n_@name=(n)
-    do
-        _n_@name = n
-$   if @modifier
-        if n != null then
-	    n.parent = self
-        end
-$   else
-	n.parent = self
-$   end
-    end
-$   end
-$ end
-
     private init empty_init do end
 
 $ if {count(elem)!=0}
@@ -158,29 +141,6 @@ $       end
 $     end
 $   end foreach
     end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-$   foreach {elem}
-$     if @is_list
-	do
-	    var i = _n_@{name}.length
-            while i >= 0 do
-                v.enter_visit(_n_@{name}[i])
-		i = i - 1
-	    end
-	end
-$     else
-$       if @modifier
-        if _n_@{name} != null then
-            v.enter_visit(_n_@{name}.as(not null))
-        end
-$       else
-        v.enter_visit(_n_@{name})
-$       end
-$     end
-$   end foreach
-    end
 end
 $ end foreach
 
@@ -213,14 +173,6 @@ redef class Start
             v.enter_visit(_n_base.as(not null))
         end
 	v.enter_visit(_n_eof)
-    end
-
-    redef fun visit_all_reverse(v: Visitor)
-    do
-	v.enter_visit(_n_eof)
-        if _n_base != null then
-            v.enter_visit(_n_base.as(not null))
-        end
     end
 end
 $ end template

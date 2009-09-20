@@ -62,15 +62,10 @@ redef class PNode
 	# Visit all nodes in order.
 	# Thus, call "v.visit(e)" for each node e
 	fun visit_all(v: Visitor) is abstract
-
-	# Visit all nodes in reverse order.
-	# Thus, call "v.visit(e)" for each node e starting from the last child
-	fun visit_all_reverse(v: Visitor) is abstract
 end
 
 redef class Token
 	redef fun visit_all(v: Visitor) do end
-	redef fun visit_all_reverse(v: Visitor) do end
 	redef fun replace_child(old_child: PNode, new_child: nullable PNode) do end
 end
 
