@@ -22,6 +22,15 @@ import program
 redef class Program
 	# This attribute is the InstantiatedTypeAnalysis results
 	readable writable var _ita: nullable InstantiatedTypeAnalysis = null
+
+	# We know which are really live, use that information !
+	redef fun with_each_live_local_classes
+		!action(m: MMLocalClass)
+	do
+		for c in module.local_classes do
+			if ita == null or ita.as(not null).is_class_instantiated(c) then action(c)
+		end
+	end
 end
 
 # Subclasses of this class would represent an analysis that produces
