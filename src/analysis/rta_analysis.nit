@@ -161,7 +161,15 @@ class RtaBuilder
 
 	# Build the context associated with this builder
 	fun work do
-		if program.main_method == null then return
+		if program.main_method == null then
+			# Add primitive type (so that compiling works)
+			for t in ["Int","Char","Bool"] do
+				if program.module.has_global_class_named(t.to_symbol) then
+					add_instantiated_class(program.module.class_by_name(t.to_symbol))
+				end
+			end
+			return
+		end
 
 		add_instantiated_class(program.main_class.as(not null))
 		add_reachable_iroutine(program.main_method.as(not null).iroutine)
