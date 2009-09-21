@@ -28,9 +28,10 @@ redef class Program
 			m.compile_local_table_to_c(v)
 		end
 
-		for c in module.local_classes do
+		with_each_live_local_classes !action(c) do
 			c.compile_tables_to_c(v)
 		end
+
 		var s = new Buffer.from("classtable_t TAG2VFT[4] = \{NULL")
 		for t in ["Int","Char","Bool"] do
 			if module.has_global_class_named(t.to_symbol) then
