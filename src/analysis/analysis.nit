@@ -31,6 +31,7 @@ import inline_methods
 import instantiated_type_analysis
 import reachable_method_analysis
 import reachable_as_init
+import reachable_from_init_method_analysis
 
 # Global Analysis implementation
 import cha_analysis
@@ -70,7 +71,10 @@ redef class Program
 		var rai_builder = new ReachableAsInitBuilder(self)
 		rai_builder.work
 		rai = rai_builder.context
+
+		rfima = new DefaultReachableFromInitMethodAnalysis
 	end
+
 	# This method will optimize the program (in global compilation only)
 	# Those are done before analysis
 	fun do_global_pre_analysis_optimizations do
