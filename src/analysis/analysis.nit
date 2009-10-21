@@ -102,6 +102,7 @@ redef class Program
 
 	fun dump_global_optimizations_information(directory_name: String) do
 		dump_out_of_init_information(directory_name)
+		dump_dead_method_optimization(directory_name)
 	end
 
 	# This method will create log files storing analysis information

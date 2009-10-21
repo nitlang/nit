@@ -20,14 +20,30 @@ package dead_method_removal
 import reachable_method_analysis
 
 redef class Program
+	readable var _nb_removed_iroutines: Int = 0
+	readable var _nb_not_removed_iroutines: Int = 0
+
 	# Calling this method will change all iroutines that are dead
 	# and put an abort in them
 	fun optimize_dead_methods do
 		with_each_iroutines !action(i,m) do
 			if not rma.is_iroutine_reachable(i) then
 				i.set_not_reachable(m)
+				_nb_removed_iroutines = nb_removed_iroutines + 1
+			else
+				_nb_not_removed_iroutines = nb_not_removed_iroutines + 1
 			end
 		end
+	end
+
+	# This method will create a file and output informations about this optimization
+	fun dump_dead_method_optimization(directory_name: String) do
+		var f = new OFStream.open("{directory_name}/{module.name}.dmr_opt.log")
+
+		f.write("Nb. dead iroutines removed: {nb_removed_iroutines}\n")
+		f.write("Nb. live iroutines: {nb_not_removed_iroutines}\n")
+
+		f.close
 	end
 end
 
