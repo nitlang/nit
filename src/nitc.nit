@@ -33,6 +33,7 @@ special AbstractCompiler
 	readable var _opt_global_no_STF_opt: OptionBool = new OptionBool("Do not use SFT optimization", "--no-global-SFT-optimization")
 	readable var _opt_global_no_DMR_opt: OptionBool = new OptionBool("Do not use dead method removal optimization", "--no-global-DMR-optimization")
 	readable var _opt_global_no_inline_get_set: OptionBool = new OptionBool("Do not automatically inline getters/setters", "--no-global-get-set-inlining")
+	readable var _opt_global_no_out_of_init_get_test_opt: OptionBool = new OptionBool("Do not remove get tests outside object initialization", "--no-global-OOIT-optimization")
 	readable var _opt_global_no_RFIMA: OptionBool = new OptionBool("Do not use a specialized algorithm to find reachable methods from initializers", "--no-global-RFIM-analysis")
 	readable var _opt_global_callgraph: OptionEnum = new OptionEnum(["none", "cha", "rta"], "The algorithm to use to build the callgraph", 2, "--global-callgraph")
 	readable var _opt_clibdir: OptionString = new OptionString("NIT C library directory", "--clibdir")
@@ -44,7 +45,7 @@ special AbstractCompiler
 	init
 	do
 		super("nitc")
-		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix, opt_dump, opt_global_no_STF_opt, opt_global_no_DMR_opt, opt_global_callgraph, opt_global_no_inline_get_set, opt_global_no_RFIMA)
+		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix, opt_dump, opt_global_no_STF_opt, opt_global_no_DMR_opt, opt_global_callgraph, opt_global_no_inline_get_set, opt_global_no_RFIMA, opt_global_no_out_of_init_get_test_opt)
 	end
 
 	redef fun process_options
@@ -60,6 +61,7 @@ special AbstractCompiler
 		no_dead_method_removal = opt_global_no_DMR_opt.value
 		no_inline_get_set = opt_global_no_inline_get_set.value
 		no_callgraph_from_init = opt_global_no_RFIMA.value
+		no_out_of_init_get_test_removal = opt_global_no_out_of_init_get_test_opt.value
 		global_callgraph = opt_global_callgraph.value_name
 		compdir = opt_compdir.value
 		if compdir == null then

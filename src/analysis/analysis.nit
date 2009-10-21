@@ -42,12 +42,14 @@ import reachable_from_init_method_analysis_impl
 # Global Optimizations
 import dead_method_removal
 import inline_get_and_set
+import remove_out_of_init_get_test
 
 redef class ToolContext
 	readable writable var _global_callgraph: String = "rta"
 	readable writable var _no_dead_method_removal: Bool = false
 	readable writable var _no_inline_get_set: Bool = false
 	readable writable var _no_callgraph_from_init: Bool = false
+	readable writable var _no_out_of_init_get_test_removal: Bool = false
 end
 
 redef class Program
@@ -95,6 +97,7 @@ redef class Program
 	fun do_global_post_analysis_optimizations do
 		assert tc.global
 		if not tc.no_dead_method_removal then optimize_dead_methods
+		if not tc.no_out_of_init_get_test_removal then optimize_out_of_init_getters
 	end
 
 	# This method will create log files storing analysis information
