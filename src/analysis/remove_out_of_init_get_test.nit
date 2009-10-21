@@ -21,6 +21,8 @@ package remove_out_of_init_get_test
 import reachable_from_init_method_analysis
 
 redef class Program
+	readable var _nb_optimized_isset: Int = 0
+
 	# Calling this method will remove all 'isset' that were generated automaticaly
 	# before a attribute read if this attribute read is done in a method that
 	# cannot be reached by a initializer
@@ -29,13 +31,47 @@ redef class Program
 			if not rfima.is_iroutine_reachable_from_init(i) then
 				var remover = new GetterTestRemover
 				remover.visit_iroutine(i)
+				_nb_optimized_isset = nb_optimized_isset + remover.nb_optimized_isset
 			end
 		end
+	end
+
+	# This method will create a file and output informations about this optimization
+	fun dump_out_of_init_information(directory_name: String) do
+		var f = new OFStream.open("{directory_name}/{module.name}.out_of_init_opt.log")
+		var nb_not_optimized = 0
+
+		with_each_iroutines !action(i,m) do
+			var counter = new IssetCounter
+			counter.visit_iroutine(i)
+			nb_not_optimized = nb_not_optimized + counter.nb_isset
+		end
+
+		f.write("Nb. optimized isset: {nb_optimized_isset}\n")
+		f.write("Nb. not optimized: {nb_not_optimized}\n")
+
+		f.close
+	end
+end
+
+class IssetCounter
+special ICodeVisitor
+	readable var _nb_isset: Int = 0
+
+	redef fun visit_icode(ic)
+	do
+		if ic isa IAttrIsset then
+			_nb_isset = nb_isset + 1
+		end
+
+		super
 	end
 end
 
 class GetterTestRemover
 special ICodeVisitor
+	readable var _nb_optimized_isset: Int = 0
+
 	redef fun visit_icode(ic)
 	do
 		# Replace 'x = isset(y)' by 'x = true'
@@ -47,6 +83,7 @@ special ICodeVisitor
 			e.result = result
 			current_icode.insert_before(e)
 			current_icode.delete
+			_nb_optimized_isset = nb_optimized_isset + 1
 		end
 
 		super
