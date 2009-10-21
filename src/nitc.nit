@@ -145,6 +145,7 @@ special AbstractCompiler
 				p.do_global_analysis
 				p.do_global_post_analysis_optimizations
 				if opt_log.value then
+					p.dump_global_optimizations_information(log_directory)
 					p.dump_global_analysis_information(log_directory)
 				end
 			end

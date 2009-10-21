@@ -100,6 +100,9 @@ redef class Program
 		if not tc.no_out_of_init_get_test_removal then optimize_out_of_init_getters
 	end
 
+	fun dump_global_optimizations_information(directory_name: String) do
+	end
+
 	# This method will create log files storing analysis information
 	fun dump_global_analysis_information(directory_name: String) do
 		dump_reachable_methods(directory_name, tc.global_callgraph)
