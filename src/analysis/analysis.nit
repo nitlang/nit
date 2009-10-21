@@ -96,6 +96,8 @@ redef class Program
 		dump_instantiated_types(directory_name)
 		dump_not_instantiated_types(directory_name)
 		dump_reachable_as_init_methods(directory_name)
+		dump_reachable_methods_from_init(directory_name)
+		dump_unreachable_methods_from_init(directory_name)
 	end
 end
 
