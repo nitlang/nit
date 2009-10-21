@@ -37,6 +37,7 @@ import reachable_from_init_method_analysis
 import cha_analysis
 import rta_analysis
 import reachable_as_init_impl
+import reachable_from_init_method_analysis_impl
 
 # Global Optimizations
 import dead_method_removal
@@ -46,6 +47,7 @@ redef class ToolContext
 	readable writable var _global_callgraph: String = "rta"
 	readable writable var _no_dead_method_removal: Bool = false
 	readable writable var _no_inline_get_set: Bool = false
+	readable writable var _no_callgraph_from_init: Bool = false
 end
 
 redef class Program
@@ -72,7 +74,13 @@ redef class Program
 		rai_builder.work
 		rai = rai_builder.context
 
-		rfima = new DefaultReachableFromInitMethodAnalysis
+		if not tc.no_callgraph_from_init then
+			var b = new RFIMABuilder(self)
+			b.work
+			rfima = b.context
+		end
+
+		if rfima == null then rfima = new DefaultReachableFromInitMethodAnalysis
 	end
 
 	# This method will optimize the program (in global compilation only)
