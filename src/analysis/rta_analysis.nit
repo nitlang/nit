@@ -62,6 +62,7 @@ class RtaBuilder
 		if context.is_class_instantiated(m_cls) then return true
 
 		for cls in m_cls.cshe.smallers do
+			if not cls[m.global] == m then continue
 			if context.is_class_instantiated(cls) then return true
 		end
 		return false
