@@ -35,6 +35,7 @@ import reachable_as_init
 # Global Analysis implementation
 import cha_analysis
 import rta_analysis
+import reachable_as_init_impl
 
 # Global Optimizations
 import dead_method_removal
@@ -63,6 +64,10 @@ redef class Program
 		# Ensure we have all analysis created
 		if rma == null then rma = new DefaultReachableMethodAnalysis
 		if ita == null then ita = new DefaultInstantiatedTypeAnalysis
+
+		var rai_builder = new ReachableAsInitBuilder(self)
+		rai_builder.work
+		rai = rai_builder.context
 	end
 	# This method will optimize the program (in global compilation only)
 	fun do_global_optimizations do
