@@ -23,6 +23,22 @@ import program
 redef class Program
 	# This attribute is the ReachableAsInitAnalysis results
 	readable writable var _rai: nullable ReachableAsInitAnalysis = null
+
+	# This method will create a file and output all inits reachable as init in it
+	fun dump_reachable_as_init_methods(directory_name: String) do
+		var f = new OFStream.open("{directory_name}/{module.name}.reachable_methods_as_init.log")
+		with_each_live_local_classes !action(c) do
+			for g in c.global_properties do
+				var p = c[g]
+				if not p.global.is_init_for(c) then continue
+				assert p isa MMMethod
+				if rai.is_method_reachable_as_init(p, c) then
+					f.write("{p.full_name}\n")
+				end
+			end
+		end
+		f.close
+	end
 end
 
 # Subclasses of this class would represent an analysis that produces

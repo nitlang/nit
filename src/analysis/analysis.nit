@@ -81,6 +81,7 @@ redef class Program
 		dump_unreachable_methods(directory_name, tc.global_callgraph)
 		dump_instantiated_types(directory_name)
 		dump_not_instantiated_types(directory_name)
+		dump_reachable_as_init_methods(directory_name)
 	end
 end
 
