@@ -30,6 +30,7 @@ import inline_methods
 # Global Analysis types
 import instantiated_type_analysis
 import reachable_method_analysis
+import reachable_as_init
 
 # Global Analysis implementation
 import cha_analysis
