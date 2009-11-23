@@ -135,8 +135,9 @@ special AbstractCompiler
 			p.compute_main_method
 			p.generate_allocation_iroutines
 			if global then
+				p.do_global_pre_analysis_optimizations
 				p.do_global_analysis
-				p.do_global_optimizations
+				p.do_global_post_analysis_optimizations
 				if opt_log.value then
 					p.dump_global_analysis_information(log_directory)
 				end

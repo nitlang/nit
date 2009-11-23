@@ -70,7 +70,14 @@ redef class Program
 		rai = rai_builder.context
 	end
 	# This method will optimize the program (in global compilation only)
-	fun do_global_optimizations do
+	# Those are done before analysis
+	fun do_global_pre_analysis_optimizations do
+		assert tc.global
+	end
+
+	# This method will optimize the program (in global compilation only)
+	# Those are done after analysis
+	fun do_global_post_analysis_optimizations do
 		assert tc.global
 		if not tc.no_dead_method_removal then optimize_dead_methods
 	end
