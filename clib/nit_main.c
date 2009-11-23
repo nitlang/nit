@@ -135,12 +135,15 @@ void prepare_signals(void) {
 }
 struct stack_frame_t *stack_frame_head = NULL;
 void nit_exit(int i) {
-	fprintf(stderr, ",---- Stack trace -- - -  -\n");
-	while(stack_frame_head != NULL) {
-		fprintf(stderr, "| %s (%s:%d)\n", stack_frame_head->meth, stack_frame_head->file, stack_frame_head->line);
-		if (stack_frame_head == stack_frame_head->prev) break;
-		stack_frame_head = stack_frame_head->prev;
+	char *opt=getenv("NIT_NO_STACK");
+	if (opt == NULL || strcmp(opt, "0")==0) {
+		fprintf(stderr, ",---- Stack trace -- - -  -\n");
+		while(stack_frame_head != NULL) {
+			fprintf(stderr, "| %s (%s:%d)\n", stack_frame_head->meth, stack_frame_head->file, stack_frame_head->line);
+			if (stack_frame_head == stack_frame_head->prev) break;
+			stack_frame_head = stack_frame_head->prev;
+		}
+		fprintf(stderr, "`------------------- - -  -\n");
 	}
-	fprintf(stderr, "`------------------- - -  -\n");
 	exit(i);
 }
