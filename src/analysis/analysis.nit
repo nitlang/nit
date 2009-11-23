@@ -39,10 +39,12 @@ import reachable_as_init_impl
 
 # Global Optimizations
 import dead_method_removal
+import inline_get_and_set
 
 redef class ToolContext
 	readable writable var _global_callgraph: String = "rta"
 	readable writable var _no_dead_method_removal: Bool = false
+	readable writable var _no_inline_get_set: Bool = false
 end
 
 redef class Program
@@ -73,6 +75,7 @@ redef class Program
 	# Those are done before analysis
 	fun do_global_pre_analysis_optimizations do
 		assert tc.global
+		if not tc.no_inline_get_set then inline_get_set
 	end
 
 	# This method will optimize the program (in global compilation only)
