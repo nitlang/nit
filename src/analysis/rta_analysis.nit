@@ -135,12 +135,22 @@ class RtaBuilder
 
 	# Need to hard-code some automaticaly instanciated types !
 	private fun force_some_type_analysis do
-		var forced_types = ["Object", "Bool", "Float", "Int", "String", "NativeString", "Range", "Array", "ArrayIterator"]
+		var forced_types = ["Object", "Bool", "Float", "Int", "String", "NativeString", "Range", "Array", "ArrayIterator", "Inline__"]
 
 		for some_type in forced_types do
 			if not program.module.has_global_class_named(some_type.to_symbol) then continue
 			var cls_type = program.module.class_by_name(some_type.to_symbol)
 			add_instantiated_class(cls_type)
+		end
+
+		if program.module.has_global_class_named("Inline__".to_symbol) then
+			var ptr_class = program.module.class_by_name("Inline__".to_symbol)
+			# Assume that all classes that are subclasses of Inline__
+			# can be inlined without notice ...
+			# and are always counted as instantiated
+			for ptr_sub_class in ptr_class.cshe.smallers do
+				add_instantiated_class(ptr_sub_class)
+			end
 		end
 
 		if program.module.has_global_class_named("Pointer".to_symbol) then
