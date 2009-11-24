@@ -5,7 +5,3 @@
 0
 1
 Aborted (alt/base_closure_default1_alt3.nit:24)
-,---- Stack trace -- - -  -
-| base_closure_default1_alt3::A::foo (alt/base_closure_default1_alt3.nit:20)
-| base_closure_default1_alt3::Sys::(kernel::Sys::main) (alt/base_closure_default1_alt3.nit:38)
-`------------------- - -  -

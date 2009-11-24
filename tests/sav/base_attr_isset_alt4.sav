@@ -8,8 +8,3 @@ false
 true
 false
 Uninitialized attribute _a2 (alt/base_attr_isset_alt4.nit)
-,---- Stack trace -- - -  -
-| check new Baz (alt/base_attr_isset_alt4.nit:0)
-| new Baz base_attr_isset_alt4::Foo::init (alt/base_attr_isset_alt4.nit:53)
-| base_attr_isset_alt4::Sys::main (alt/base_attr_isset_alt4.nit:99)
-`------------------- - -  -

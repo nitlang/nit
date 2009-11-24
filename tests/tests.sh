@@ -182,12 +182,12 @@ for ii in "$@"; do
 			args=""
 			if [ "x$verbose" = "xtrue" ]; then
 				echo ""
-				echo "./$ff.bin" $args
+				echo "NIT_NO_STACK=1 ./$ff.bin" $args
 			fi
 			if [ -f "$f.inputs" ]; then
-				"./$ff.bin" $args < "$f.inputs" > "$ff.res" 2>"$ff.err"
+				NIT_NO_STACK=1 "./$ff.bin" $args < "$f.inputs" > "$ff.res" 2>"$ff.err"
 			else
-				"./$ff.bin" $args > "$ff.res" 2>"$ff.err"
+				NIT_NO_STACK=1 "./$ff.bin" $args > "$ff.res" 2>"$ff.err"
 			fi
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.res"
@@ -212,13 +212,13 @@ for ii in "$@"; do
 					fff=$ff"_args"$cptr
 					if [ "x$verbose" = "xtrue" ]; then
 						echo ""
-						echo "./$ff.bin" $args
+						echo "NIT_NO_STACK=1 ./$ff.bin" $args
 					fi
 					echo -n "==> args #"$cptr " "
 					if [ -f "$f.inputs" ]; then
-						"./$ff.bin" $args < "$f.inputs" > "$fff.res" 2>"$fff.err"
+						NIT_NO_STACK=1 "./$ff.bin" $args < "$f.inputs" > "$fff.res" 2>"$fff.err"
 					else
-						sh -c "./$ff.bin  ''$args > $fff.res 2>$fff.err"
+						sh -c "NIT_NO_STACK=1 ./$ff.bin  ''$args > $fff.res 2>$fff.err"
 					fi
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"

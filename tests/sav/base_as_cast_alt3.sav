@@ -2,6 +2,3 @@
 0
 0
 Cast failed (alt/base_as_cast_alt3.nit:47)
-,---- Stack trace -- - -  -
-| base_as_cast_alt3::Sys::(kernel::Sys::main) (alt/base_as_cast_alt3.nit:39)
-`------------------- - -  -

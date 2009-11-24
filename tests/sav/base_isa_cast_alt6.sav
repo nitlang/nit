@@ -1,4 +1,1 @@
 Assert failed (alt/base_isa_cast_alt6.nit:58)
-,---- Stack trace -- - -  -
-| base_isa_cast_alt6::Sys::(kernel::Sys::main) (alt/base_isa_cast_alt6.nit:35)
-`------------------- - -  -

@@ -1,6 +1,3 @@
 true
 false
 Reciever is null (alt/rterror_null_receiver_alt3.nit:28)
-,---- Stack trace -- - -  -
-| rterror_null_receiver_alt3::Sys::(kernel::Sys::main) (alt/rterror_null_receiver_alt3.nit:23)
-`------------------- - -  -

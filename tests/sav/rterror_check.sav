@@ -1,4 +1,1 @@
 Assert 'fail'  failed (./rterror_check.nit:20)
-,---- Stack trace -- - -  -
-| rterror_check::Sys::(kernel::Sys::main) (./rterror_check.nit:18)
-`------------------- - -  -

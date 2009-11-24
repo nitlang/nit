@@ -1,5 +1,1 @@
 Aborted (alt/base_assert_alt5.nit:28)
-,---- Stack trace -- - -  -
-| base_assert_alt5::Object::foo (alt/base_assert_alt5.nit:19)
-| base_assert_alt5::Sys::(kernel::Sys::main) (alt/base_assert_alt5.nit:32)
-`------------------- - -  -
