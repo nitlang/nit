@@ -23,7 +23,20 @@ private import compiling_global
 private import compiling_icode
 
 redef class Program
-	# Compile the program
+	# The type of code generation to use
+	readable writable var _output_format: String = "none"
+
+	# Compile the program depending on the output format
+	fun compile_prog
+	do
+		if output_format == "none" then
+			# Nothing to do
+		else if output_format == "C" then
+			compile_prog_to_c
+		end
+	end
+
+	# Compile the program to C
 	# Generate all files (_sep.[ch] or _glob.[ch]), the main file (_table.c) and the build file (_build.sh)
 	# Then execute the build.sh
 	fun compile_prog_to_c

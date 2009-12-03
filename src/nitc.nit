@@ -41,11 +41,12 @@ special AbstractCompiler
 	readable var _opt_compdir: OptionString = new OptionString("Intermediate compilation directory", "--compdir")
 	readable var _opt_extension_prefix: OptionString = new OptionString("Append prefix to file extension", "-p", "--extension-prefix")
 	readable var _opt_dump: OptionBool = new OptionBool("Dump intermediate code", "--dump")
+	readable var _opt_output_format: OptionEnum = new OptionEnum(["none", "C"], "The type of code we want to be generated", 1, "--output-format")
 
 	init
 	do
 		super("nitc")
-		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix, opt_dump, opt_global_no_STF_opt, opt_global_no_DMR_opt, opt_global_callgraph, opt_global_no_inline_get_set, opt_global_no_RFIMA, opt_global_no_out_of_init_get_test_opt)
+		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix, opt_dump, opt_global_no_STF_opt, opt_global_no_DMR_opt, opt_global_callgraph, opt_global_no_inline_get_set, opt_global_no_RFIMA, opt_global_no_out_of_init_get_test_opt, opt_output_format)
 	end
 
 	redef fun process_options
@@ -138,6 +139,7 @@ special AbstractCompiler
 		end
 		for mod in mods do
 			var p = new Program(mod, self)
+			p.output_format = opt_output_format.value_name
 			p.compute_main_method
 			p.generate_allocation_iroutines
 			if global then
@@ -150,7 +152,7 @@ special AbstractCompiler
 				end
 			end
 			p.do_table_computation
-			p.compile_prog_to_c
+			p.compile_prog
 		end
 	end
 end
