@@ -65,8 +65,15 @@ redef class IClosureDecl
 end
 
 class ICodeDumper
+	readable var _dump_locations: Bool
+	readable var _dump_line_numbers: Bool
 	var _ids: HashMap[Object, String] = new HashMap[Object, String]
 	var _last_value: Int = 0
+
+	init(dump_locations: Bool, dump_line_numbers: Bool) do
+		_dump_locations = dump_locations
+		_dump_line_numbers = dump_line_numbers
+	end
 
 	# Return the name of e
 	# If e is unknown, a new name is gived
@@ -168,7 +175,7 @@ class ICodeDumper
 		print s
 	end
 
-	var _indent_level: Int = 0
+	readable var _indent_level: Int = 0
 
 	# Indent the next writes
 	fun indent do _indent_level += 1
@@ -182,15 +189,19 @@ redef class ICode
 	fun dump(icd: ICodeDumper)
 	do
 		var result = result
-		var s = ""
-		var l = location
-		if l != null then
-			s = "        ... {l}"
+		var s_loc = ""
+		var s_line = ""
+		var loc = location
+		if loc != null and icd.dump_locations then
+			s_loc = "        ... {loc}"
+		end
+		if icd.dump_line_numbers then
+			s_line = "{icd.line(self)}: "
 		end
 		if result == null then
-			icd.write "{icd.line(self)}: {dump_intern(icd)}{s}"
+			icd.write "{s_line}{dump_intern(icd)}{s_loc}"
 		else
-			icd.write "{icd.line(self)}: {icd.register(result)} := {dump_intern(icd)}{s}"
+			icd.write "{s_line}{icd.register(result)} := {dump_intern(icd)}{s_loc}"
 		end
 	end
 

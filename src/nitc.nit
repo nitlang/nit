@@ -121,11 +121,11 @@ special AbstractCompiler
 					end
 					if routine == null then continue
 					print "**** Property {p.full_name} ****"
-					var icd = new ICodeDumper
+					var icd = new ICodeDumper(true, true)
 					routine.dump(icd)
 					print "**** OPTIMIZE {p.full_name} ****"
 					routine.optimize(mod)
-					icd = new ICodeDumper
+					icd = new ICodeDumper(true, true)
 					routine.dump(icd)
 				end
 			end
