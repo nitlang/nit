@@ -41,7 +41,7 @@ special AbstractCompiler
 	readable var _opt_compdir: OptionString = new OptionString("Intermediate compilation directory", "--compdir")
 	readable var _opt_extension_prefix: OptionString = new OptionString("Append prefix to file extension", "-p", "--extension-prefix")
 	readable var _opt_dump: OptionBool = new OptionBool("Dump intermediate code", "--dump")
-	readable var _opt_output_format: OptionEnum = new OptionEnum(["none", "C"], "The type of code we want to be generated", 1, "--output-format")
+	readable var _opt_output_format: OptionEnum = new OptionEnum(["none", "C", "icode"], "The type of code we want to be generated", 1, "--output-format")
 
 	init
 	do

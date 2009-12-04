@@ -336,11 +336,9 @@ redef class IRoutine
 	end
 
 	# Full compilation of the routine
-	# Including optimization and other stuff.
 	# cv must be in the correct function
 	fun compile_to_c(cv: CompilerVisitor, cname: String, args: Array[String]): nullable String
 	do
-		optimize(cv.module)
 		var v = new I2CCompilerVisitor(cv, self, cname)
 		return compile_inside_to_c(v, args)
 	end

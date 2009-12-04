@@ -19,6 +19,7 @@ package compiling
 
 import table_computation
 import compiling_base
+import icode_generator
 private import compiling_global
 private import compiling_icode
 
@@ -31,8 +32,15 @@ redef class Program
 	do
 		if output_format == "none" then
 			# Nothing to do
-		else if output_format == "C" then
-			compile_prog_to_c
+		else
+			# Optimize all iroutines
+			with_each_iroutines !action(i, m) do i.optimize(m)
+
+			if output_format == "C" then
+				compile_prog_to_c
+			else if output_format == "icode" then
+				generate_icode_files
+			end
 		end
 	end
 
