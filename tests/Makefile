@@ -8,6 +8,9 @@ some:
 global:
 	./tests.sh -o --global *.nit ../examples/*.nit ../src/nitdoc.nit
 
+icode:
+	./tests_icode.sh icode*.nit
+
 failed:
 	@[ ! -s errlist ] && echo 'No failed tests to execute' ; true
 	@[ -s errlist ] && ./tests.sh `cat errlist | sort -u` ; true
