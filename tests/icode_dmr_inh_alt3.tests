@@ -1,0 +1,4 @@
+A,icode_dmr_inh_alt3::B::foo,has,CALL file::Object::print
+A,icode_dmr_inh_alt3::B::foo,no,ABORT
+B,icode_dmr_inh_alt3::B::foo,has,CALL file::Object::print
+B,icode_dmr_inh_alt3::B::foo,no,ABORT

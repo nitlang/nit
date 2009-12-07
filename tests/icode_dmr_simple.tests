@@ -1,0 +1,4 @@
+A,icode_dmr_simple::A::foo,has,CALL file::Object::print
+A,icode_dmr_simple::A::bar,no,CALL file::Object::print
+A,icode_dmr_simple::A::foo,no,ABORT
+A,icode_dmr_simple::A::bar,has,ABORT

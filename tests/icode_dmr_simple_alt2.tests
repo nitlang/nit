@@ -1,0 +1,4 @@
+A,icode_dmr_simple_alt2::A::foo,has,CALL file::Object::print
+A,icode_dmr_simple_alt2::A::bar,has,CALL file::Object::print
+A,icode_dmr_simple_alt2::A::foo,no,ABORT
+A,icode_dmr_simple_alt2::A::bar,no,ABORT
