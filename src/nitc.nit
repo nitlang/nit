@@ -28,7 +28,7 @@ class NitCompiler
 special AbstractCompiler
 	readable var _opt_output: OptionString = new OptionString("Output file", "-o", "--output")
 	readable var _opt_boost: OptionBool = new OptionBool("Optimize compilation", "-O", "--boost")
-	readable var _opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no_cc")
+	readable var _opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
 	readable var _opt_global: OptionBool = new OptionBool("Use global compilation", "--global")
 	readable var _opt_global_no_STF_opt: OptionBool = new OptionBool("Do not use SFT optimization", "--no-global-SFT-optimization")
 	readable var _opt_global_no_DMR_opt: OptionBool = new OptionBool("Do not use dead method removal optimization", "--no-global-DMR-optimization")
