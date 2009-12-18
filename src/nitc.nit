@@ -29,6 +29,10 @@ special AbstractCompiler
 	readable var _opt_output: OptionString = new OptionString("Output file", "-o", "--output")
 	readable var _opt_boost: OptionBool = new OptionBool("Optimize compilation", "-O", "--boost")
 	readable var _opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
+	readable var _opt_cc_no_link: OptionBool = new OptionBool("Do not invoke C linker", "--cc-no-link")
+	readable var _opt_cc_lib_paths: OptionArray = new OptionArray("Path to libraries for C compiler", "--cc-lib-path")
+	readable var _opt_cc_libs: OptionArray = new OptionArray("Name of library to use for C compiler", "--cc-lib-name")
+	readable var _opt_cc_include_paths: OptionArray = new OptionArray("Path to .h files for C compiler", "--cc-header-path")
 	readable var _opt_global: OptionBool = new OptionBool("Use global compilation", "--global")
 	readable var _opt_global_no_STF_opt: OptionBool = new OptionBool("Do not use SFT optimization", "--no-global-SFT-optimization")
 	readable var _opt_global_no_DMR_opt: OptionBool = new OptionBool("Do not use dead method removal optimization", "--no-global-DMR-optimization")
@@ -45,7 +49,7 @@ special AbstractCompiler
 	init
 	do
 		super("nitc")
-		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix, opt_global_no_STF_opt, opt_global_no_DMR_opt, opt_global_callgraph, opt_global_no_inline_get_set, opt_global_no_RFIMA, opt_global_no_out_of_init_get_test_opt, opt_output_format)
+		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_cc_no_link, opt_cc_libs, opt_cc_lib_paths, opt_cc_include_paths, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix, opt_global_no_STF_opt, opt_global_no_DMR_opt, opt_global_callgraph, opt_global_no_inline_get_set, opt_global_no_RFIMA, opt_global_no_out_of_init_get_test_opt, opt_output_format)
 	end
 
 	redef fun process_options
@@ -54,6 +58,10 @@ special AbstractCompiler
 		output_file = opt_output.value
 		boost = opt_boost.value
 		no_cc = opt_no_cc.value
+		cc_link = not opt_cc_no_link.value
+		cc_lib_paths = opt_cc_lib_paths.value
+		cc_libs = opt_cc_libs.value
+		cc_include_paths = opt_cc_include_paths.value
 		var ext = opt_extension_prefix.value
 		if ext != null then ext_prefix = ext else ext_prefix = ""
 		global = opt_global.value

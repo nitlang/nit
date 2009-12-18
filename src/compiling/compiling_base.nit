@@ -29,6 +29,10 @@ redef class ToolContext
 	readable writable var _output_file: nullable String = null
 	readable writable var _boost: Bool = false
 	readable writable var _no_cc: Bool = false
+	readable writable var _cc_link: Bool = false
+	readable writable var _cc_libs: Array[String] = new Array[String]
+	readable writable var _cc_lib_paths: Array[String] = new Array[String]
+	readable writable var _cc_include_paths: Array[String] = new Array[String]
 	readable writable var _ext_prefix: String = ""
 end
 
