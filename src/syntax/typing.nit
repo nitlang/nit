@@ -695,6 +695,10 @@ redef class AReassignFormExpr
 			return null
 		end
 		var name = n_assign_op.method_name
+		if type_lvalue isa MMTypeNone then
+			v.error(self, "Error: Method '{name}' call on 'null'.")
+			return null
+		end
 		var lc = type_lvalue.local_class
 		if not lc.has_global_property_by_name(name) then
 			v.error(self, "Error: Method '{name}' doesn't exists in {type_lvalue}.")
@@ -1042,6 +1046,10 @@ redef class AAttrFormExpr
 		if not v.check_expr(n_expr) then return
 		var type_recv = n_expr.stype
 		var name = n_id.to_symbol
+		if type_recv isa MMTypeNone then
+			v.error(self, "Error: Attribute '{name}' access on 'null'.")
+			return
+		end
 		var lc = type_recv.local_class
 		if not lc.has_global_property_by_name(name) then
 			v.error(self, "Error: Attribute {name} doesn't exists in {type_recv}.")
@@ -1234,16 +1242,20 @@ redef class AAbsSendExpr
 
 	private fun get_property(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, name: Symbol): nullable MMMethod
 	do
+		if type_recv isa MMTypeNone then
+			v.error(self, "Error: Method '{name}' call on 'null'.")
+			return null
+		end
 		var lc = type_recv.local_class
 		var prop: nullable MMMethod = null
 		if lc.has_global_property_by_name(name) then prop = lc.select_method(name)
 		if prop == null and v.local_property.global.is_init then
-			var props = type_recv.local_class.super_methods_named(name)
+			var props = lc.super_methods_named(name)
 			if props.length > 1 then
 				v.error(self, "Error: Ambigous method name '{name}' for {props.join(", ")}. Use explicit designation.")
 				return null
 			else if props.length == 1 then 
-				var p = type_recv.local_class[props.first.global]
+				var p = lc[props.first.global]
 				assert p isa MMMethod
 				prop = p
 			end
@@ -1436,7 +1448,11 @@ redef class AEqExpr
 		end
 
 		if n_expr.stype isa MMTypeNone then
-			try_to_isa(v, n_expr2)
+			if n_expr2.stype isa MMTypeNone then
+				v.warning(self, "Warning: comparaison between 2 null values.")
+			else
+				try_to_isa(v, n_expr2)
+			end
 		else if n_expr2.stype isa MMTypeNone then
 			try_to_isa(v, n_expr)
 		end
@@ -1462,7 +1478,11 @@ redef class ANeExpr
 		end
 
 		if n_expr.stype isa MMTypeNone then
-			try_to_isa(v, n_expr2)
+			if n_expr2.stype isa MMTypeNone then
+				v.warning(self, "Warning: comparaison between 2 null values.")
+			else
+				try_to_isa(v, n_expr2)
+			end
 		else if n_expr2.stype isa MMTypeNone then
 			try_to_isa(v, n_expr)
 		end
@@ -1715,6 +1735,9 @@ special AExpr
 			v.warning(self, "Warning: Expression is already a {ttype}.")
 		else if etype < ttype then
 			v.warning(self, "Warning: Expression is already a {ttype} since it is a {etype}.")
+		else if etype isa MMTypeNone then
+			# ttype is not nullable because of prevous test
+			v.warning(self, "Warning: Expression is null therefore cannot be a {ttype}.")
 		else if etype.is_nullable and etype.as_notnull == ttype then
 			if ttype isa MMTypeFormal and ttype.bound.is_nullable then
 				# No warning in this case since with

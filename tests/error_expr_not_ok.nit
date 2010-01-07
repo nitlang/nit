@@ -35,7 +35,7 @@ fun trash(x: A) do end
 #alt4#var fail: Object = 5
 #alt5#var fail: Object = 5
 #alt5#fail = fail2(5)
-
+#alt6#var fail = null
 var ok = 5
 ok.fail
 var nok: Int = fail
