@@ -58,9 +58,7 @@ special ICodeBuilder
 		if _variables.has_key(v) then
 			return _variables[v]
 		else
-			var t = v.stype
-			if t == null then t = visitor.type_object.as_nullable
-			var reg = new_register(t)
+			var reg = new_register(v.stype.as(not null))
 			_variables[v] = reg
 			return reg
 		end

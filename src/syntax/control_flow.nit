@@ -53,8 +53,6 @@ abstract class VariableContext
 	do
 		if v.must_be_set and not is_set(v) then
 			_visitor.error(n, "Error: variable '{v}' is possibly unset.")
-		else if v.is_typed and stype(v) == null then
-			_visitor.error(n, "Error: variable '{v}' is untyped.")
 		end
 	end
 

@@ -136,9 +136,6 @@ special AbsSyntaxVisitor
 	end
 end
 
-redef class VarVariable
-	redef readable var _is_typed: Bool = false
-end
 
 ###############################################################################
 
@@ -373,9 +370,10 @@ redef class AVardeclExpr
 			end
 		else if ne != null then
 			if not v.check_expr(ne) then return
-			va.stype = n_expr.stype
+			va.stype = ne.stype
+		else
+			va.stype = v.type_object.as_nullable
 		end
-		va._is_typed = true
 		_is_typed = true
 	end
 end
