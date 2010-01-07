@@ -22,7 +22,7 @@ all: parser.nit
 .nit.sablecc3: nit.sablecc3xx
 	./prescc.sh $< $@
 
-# Note that parser_nodes is automatically synced with the grammar
+# Note that parser_nodes is no more automatically synced with the grammar
 parser.nit: .nit.sablecc3 xss/*.xss
 	${SABLECC} -c .nit.sablecc3.dump -t xss/main.xss -p usermodule parser_nodes .nit.sablecc3
 	LANG=C sed -i -e 's/\([ \[]\)P\([A-Z]\)/\1A\2/g' parser.nit parser_abs.nit parser_prod.nit parser_tables.nit lexer.nit
