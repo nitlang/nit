@@ -164,16 +164,45 @@ abstract class VariableContext
 			var s2 = ctx2.stype(v)
 			if s1 == s and s2 == s then
 				# NOP
-			else if s1 == s2 then
-				stype(v) = s1
-			else if s2 == null or s1 < s2 then
-				stype(v) = s2
-			else if s1 == null or s2 < s1 then
-				stype(v) = s1
+			else if s1 == null or s2 == null then
+				stype(v) = null
 			else
-				stype(v) = basectx.stype(v)
+				var sm = merge_types(s1, s2)
+				if sm == null then
+					stype(v) = basectx.stype(v)
+				else
+					stype(v) = sm
+				end
 			end
 		end
+	end
+
+	# Combine and get the most specific comon supertype
+	# return null if no comon supertype is found
+	private fun merge_types(t1, t2: MMType): nullable MMType
+	do
+		if t1 == t2 then return t1
+		if t1 isa MMTypeNone then return t2.as_nullable
+		if t2 isa MMTypeNone then return t1.as_nullable
+		var is_nullable = false
+		if t1.is_nullable then
+			is_nullable = true
+			t1 = t1.as_notnull
+		end
+		if t2.is_nullable then
+			is_nullable = true
+			t2 = t2.as_notnull
+		end
+		var t: MMType
+		if t1 < t2 then
+			t = t2
+		else if t2 < t1 then
+			t = t1
+		else
+			return null
+		end
+		if is_nullable then t = t.as_nullable
+		return t
 	end
 
 	redef fun to_s
