@@ -151,8 +151,10 @@ abstract class VariableContext
 	do
 		if ctx1.unreash then
 			merge(ctx2)
+			return
 		else if ctx2.unreash then
 			merge(ctx1)
+			return
 		end
 		for v in _all_variables do
 			if not is_set(v) and ctx1.is_set(v) and ctx2.is_set(v) then
