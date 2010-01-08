@@ -554,7 +554,7 @@ redef class MMSrcModule
 		dctx.add("<h1>Module {self}</h1>\n<dl>")
 		var s = ""
 		var d: nullable MMDirectory = directory
-		while d == null do
+		while d != null do
 			if d.owner != null and (d.owner != self or dctx.inside_mode or dctx.intrude_mode) then
 				s = "{d.owner.html_link(dctx)}::{s}"
 			end
