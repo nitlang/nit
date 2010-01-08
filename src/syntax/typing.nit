@@ -778,14 +778,23 @@ redef class AIfexprExpr
 		v.use_if_true_variable_ctx(n_expr)
 
 		# Process 'then'
+		v.variable_ctx = v.variable_ctx.sub(n_then)
 		v.enter_visit(n_then)
+
+		# Remember what appened in the 'then'
+		var then_var_ctx = v.variable_ctx
 
 		# Prepare 'else' context
 		v.variable_ctx = old_var_ctx
 		v.use_if_false_variable_ctx(n_expr)
 
 		# Process 'else'
+		v.variable_ctx = v.variable_ctx.sub(n_else)
 		v.enter_visit(n_else)
+
+		# Merge 'then' and 'else' contexts
+		old_var_ctx.merge2(then_var_ctx, v.variable_ctx, v.base_variable_ctx)
+		v.variable_ctx = old_var_ctx
 
 		var stype = v.check_conform_multiexpr(null, [n_then, n_else])
 		if stype == null then return
