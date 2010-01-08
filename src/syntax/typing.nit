@@ -1463,6 +1463,7 @@ redef class AEqExpr
 		var variable = n.its_variable
 		if variable != null then
 			_if_false_variable_ctx = v.variable_ctx.sub_with(self, variable, n.stype.as_notnull)
+			_if_true_variable_ctx = v.variable_ctx.sub_with(self, variable, v.type_none)
 		end
 	end
 end
@@ -1493,6 +1494,7 @@ redef class ANeExpr
 		var variable = n.its_variable
 		if variable != null then
 			_if_true_variable_ctx = v.variable_ctx.sub_with(self, variable, n.stype.as_notnull)
+			_if_false_variable_ctx = v.variable_ctx.sub_with(self, variable, v.type_none)
 		end
 	end
 end

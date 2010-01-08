@@ -1,0 +1,1 @@
+alt/base_var_null_alt9.nit:42,2--9: Error: Method 'output' call on 'null'.
