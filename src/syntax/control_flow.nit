@@ -177,6 +177,69 @@ abstract class VariableContext
 		end
 	end
 
+	# Combine informations of ctx to the current flow context informations as an alternative
+	# Require that all contexts are reachable at the end
+	fun combine_merge(ctxs: Array[VariableContext], basectx: VariableContext)
+	do
+		for v in _all_variables do
+			do
+				if not is_set(v) then
+					for ctx in ctxs do
+						if not ctx.is_set(v) then break label set
+					end
+					mark_is_set(v)
+				end
+			end label set
+
+			var candidate: nullable MMType = null
+			var is_nullable = false
+			var same_candidate: nullable MMType = ctxs.first.stype(v)
+			for ctx in ctxs do
+				var t = ctx.stype(v)
+				if t == null then
+					stype(v) = null
+					continue label each_variable
+				end
+				if t != same_candidate then
+					same_candidate = null
+				end
+				if t isa MMTypeNone then
+					is_nullable = true
+					continue
+				end
+				if t isa MMNullableType then
+					is_nullable = true
+					t = t.as_notnull
+				end
+				if candidate == null or candidate < t then
+					candidate = t
+				end
+			end
+			if same_candidate != null then
+				stype(v) = same_candidate
+			end
+			if is_nullable then
+				if candidate == null then
+					candidate = _visitor.type_none
+				else
+					candidate = candidate.as_nullable
+				end
+			end
+			if candidate == null then
+				stype(v) = basectx.stype(v)
+			else
+				for ctx in ctxs do
+					var t = ctx.stype(v)
+					if not t < candidate then
+						stype(v) = basectx.stype(v)
+						continue label each_variable
+					end
+				end
+			end
+			stype(v) = candidate
+		end label each_variable
+	end
+
 	# Combine and get the most specific comon supertype
 	# return null if no comon supertype is found
 	private fun merge_types(t1, t2: MMType): nullable MMType

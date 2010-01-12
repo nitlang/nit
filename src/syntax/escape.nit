@@ -18,6 +18,7 @@
 package escape
 
 import syntax_base
+import control_flow
 
 # Stack escapable blocks
 class EscapableContext
@@ -112,6 +113,9 @@ class EscapableBlock
 
 	# The static type required by the continue statement (if any)
 	fun continue_stype: nullable MMType do return null
+
+	# Alternatives variable contexts for breaks
+	readable var _break_variable_contexts: Array[VariableContext] = new Array[VariableContext]
 
 	init(node: ANode)
 	do

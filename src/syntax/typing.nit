@@ -442,9 +442,12 @@ end
 redef class ABreakExpr
 	redef fun after_typing(v)
 	do
+		var unreash = v.variable_ctx.unreash
 		v.variable_ctx.unreash = true
 		var esc = compute_escapable_block(v.escapable_ctx)
 		if esc == null then return
+
+		if not unreash then esc.break_variable_contexts.add(v.variable_ctx)
 
 		var bl = esc.break_list
 		if n_expr == null and bl != null then
@@ -552,6 +555,12 @@ redef class AWhileExpr
 		end
 
 		v.variable_ctx = old_var_ctx
+
+		# Compute outside context (assert !cond + all breaks)
+		v.use_if_false_variable_ctx(n_expr)
+		escapable.break_variable_contexts.add(v.variable_ctx)
+		old_var_ctx.combine_merge(escapable.break_variable_contexts, v.base_variable_ctx)
+
 		v.base_variable_ctx = old_base_var_ctx
 		v.escapable_ctx.pop
 		_is_typed = true
@@ -576,6 +585,11 @@ redef class ALoopExpr
 		if n_block != null then
 			v.variable_ctx = v.variable_ctx.sub(n_block.as(not null))
 			v.enter_visit(n_block)
+		end
+
+		# Compute outside context (assert all breaks)
+		if not escapable.break_variable_contexts.is_empty then
+			old_var_ctx.combine_merge(escapable.break_variable_contexts, v.base_variable_ctx)
 		end
 
 		v.variable_ctx = old_var_ctx
