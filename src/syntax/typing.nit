@@ -1461,7 +1461,7 @@ redef class AEqExpr
 	private fun try_to_isa(v: TypingVisitor, n: AExpr)
 	do
 		var variable = n.its_variable
-		if variable != null then
+		if variable != null and n.stype isa MMNullableType then
 			_if_false_variable_ctx = v.variable_ctx.sub_with(self, variable, n.stype.as_notnull)
 			_if_true_variable_ctx = v.variable_ctx.sub_with(self, variable, v.type_none)
 		end
@@ -1492,7 +1492,7 @@ redef class ANeExpr
 	private fun try_to_isa(v: TypingVisitor, n: AExpr)
 	do
 		var variable = n.its_variable
-		if variable != null then
+		if variable != null and n.stype isa MMNullableType then
 			_if_true_variable_ctx = v.variable_ctx.sub_with(self, variable, n.stype.as_notnull)
 			_if_false_variable_ctx = v.variable_ctx.sub_with(self, variable, v.type_none)
 		end
