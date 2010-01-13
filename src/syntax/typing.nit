@@ -385,11 +385,12 @@ redef class ABlockExpr
 		v.variable_ctx = v.variable_ctx.sub(self)
 
 		for e in n_expr do
-			if v.variable_ctx.unreash and not v.variable_ctx.already_unreash then
+			if not v.variable_ctx.unreash then
+				v.enter_visit(e)
+			else if not v.variable_ctx.already_unreash then
 				v.variable_ctx.already_unreash = true
-				v.warning(e, "Warning: unreachable statement.")
+				v.error(e, "Error: unreachable statement.")
 			end
-			v.enter_visit(e)
 		end
 
 		old_var_ctx.merge(v.variable_ctx)

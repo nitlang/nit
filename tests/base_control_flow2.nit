@@ -53,3 +53,16 @@ while true do
 	break
 	#alt5#a
 end
+
+loop
+	a
+	break
+	#alt6#a
+end
+
+if false then
+	loop
+		a
+	end
+	#alt7#a
+end
