@@ -1,1 +1,1 @@
-alt/base_closure_break_default2_alt4.nit:25,5--12: Error: cannot 'continue', only 'break'.
+alt/base_closure_break_default2_alt4.nit:26,5--12: Error: cannot 'continue', only 'break'.

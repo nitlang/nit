@@ -27,11 +27,14 @@ class A
 	end
 end
 
+fun maybe: Bool do return true
+
 fun work: Int
 do
 	var a = new A
 	var i = a.foo !bar do
 		2.output
+		if maybe then
 		#alt1#break
 		#alt2#break 'x'
 		#alt3#break 100
@@ -40,6 +43,7 @@ do
 		#alt6#return 200
 		#alt7#continue
 		#alt8#continue 'x'
+		end
 		continue 5 #!alt9#
 	end
 	4.output

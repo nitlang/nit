@@ -32,6 +32,8 @@ class A
 	end
 end
 
+fun maybe: Bool do return true
+
 fun start
 do
 	var a = new A
@@ -40,9 +42,11 @@ do
 		2.output
 		a.foo(3) !bar do
 			4.output
+			if maybe then
 			#alt1#break
 			#alt2#continue
 			#alt3#return
+			end
 			5.output
 		end
 		6.output

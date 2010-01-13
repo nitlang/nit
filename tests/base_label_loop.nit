@@ -16,6 +16,8 @@
 
 import kernel
 
+fun maybe: Bool do return true
+
 1.output
 var exit=false
 loop
@@ -27,12 +29,14 @@ loop
 		loop
 			break
 		end label l3
+		if maybe then
 		#alt1#break label l2
 		#alt2#break label l3
 		#alt3#break label l4
 		#alt4#break
 		#alt5#continue label l1
-		break label l1
+		end
+		if maybe then break label l1
 		4.output
 	end label l2#!alt6#
 	#alt6#end label l1

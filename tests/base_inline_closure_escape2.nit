@@ -32,15 +32,19 @@ class Inline__
 	end
 end
 
+fun maybe: Bool do return true
+
 var a = new Inline__
 var x = a.foo1 !f do
 	do
 		var y = a.foo2 !f do
+			if maybe then
 			#alt1#break label l1 20
 			#alt2#break label l2 50
 			#alt3#break label l3
 			#alt4#continue label l1 10
 			#alt5#continue label l2 40
+			end
 			continue 1
 		end label l1
 		y.output

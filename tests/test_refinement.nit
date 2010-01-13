@@ -27,7 +27,7 @@ redef class Int
 	    else
 		return (self-1).fact(r*self)
 	    end
-	    return 1
+
 	end
 
     fun fact2: Int

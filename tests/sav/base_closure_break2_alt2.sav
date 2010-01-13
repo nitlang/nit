@@ -1,1 +1,1 @@
-alt/base_closure_break2_alt2.nit:26,3--7: Error: arity missmatch; prototype is 'bar'.
+alt/base_closure_break2_alt2.nit:26,17--21: Error: arity missmatch; prototype is 'bar'.

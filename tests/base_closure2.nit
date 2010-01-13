@@ -29,18 +29,22 @@ class A
 	end
 end
 
+fun maybe: Bool do return true
+
 fun work
 do
 	var a = new A
 	a.foo !bar x do #!alt11#
 	#alt11#a.foo !bar do
 		x.output
+		if maybe then
 		#alt4#break
 		#alt5#break 'x'
 		#alt6#continue
 		#alt7#continue 'x'
 		#alt8#return
 		#alt9#return 'x'
+		end
 		(x+1).output
 	end
 	#alt10# a.foo

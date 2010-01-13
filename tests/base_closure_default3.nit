@@ -19,12 +19,14 @@ import kernel
 class A
 	fun foo
 		!bar: Int do
+			if maybe then
 			#alt1# return
 			#alt2# return 1
 			#alt3# abort
 			#alt4# continue
-			#alt5# break
 			#alt6# break 1
+			end
+			#alt5# break
 			continue 20 #!alt5#
 		end
 	do
@@ -33,6 +35,8 @@ class A
 		3.output
 	end
 end
+
+fun maybe: Bool do return true
 
 var a = new A
 0.output

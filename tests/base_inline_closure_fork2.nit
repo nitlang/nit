@@ -30,6 +30,8 @@ class B
 	redef fun output do _b.output
 end
 
+fun maybe: Bool do return true
+
 var a = new Inline__
 a.foo !f do
 	var x = new B(1)
@@ -39,10 +41,12 @@ a.foo !f do
 		y.output
 		x = new B(3)
 		y = 4
+		if maybe then
 		#alt1#break label l1
 		#alt2#break label l2
 		#alt3#continue label l1
 		#alt4#continue label l2
+		end
 	end label l1
 	x.output
 	y.output

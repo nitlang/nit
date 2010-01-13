@@ -40,6 +40,8 @@ special U
 special V
 end
 
+fun maybe: Bool do return true
+
 var a = new A
 
 var t: T = new T
@@ -55,13 +57,22 @@ y = a.foo !bar do break u
 y = a.foo !bar do break v
 y = a.foo !bar do break w
 y = a.foo !bar do
+	if maybe then
 	break t
+	else if maybe then
 	break u
+	else if maybe then
 	break v
+	else if maybe then
 	break w
+	end
 end
 y = a.foo !bar do
+	if maybe then
 	break u
+	else if maybe then
 	break v
+	else if maybe then
 	break w
+	end
 end

@@ -22,12 +22,14 @@ class A
 		#alt12#break !bar: Int
 	do
 		1.output
-		bar #!alt1#
-		#alt2#bar(2)
-		#alt3#var x = bar
+		if maybe then bar #!alt1#
+		#alt2#if maybe then bar(2)
+		#alt3#if maybe then var x = bar
 		return 4
 	end
 end
+
+fun maybe: Bool do return true
 
 fun work
 do
@@ -35,12 +37,14 @@ do
 	var r = a.foo !bar do #!alt11#
 		#alt11#var r = a.foo !bar x do
 		2.output
+		if maybe then
 		#alt4#break 4
 		#alt5#break 'x'
 		#alt6#continue
 		#alt7#continue 'x'
 		#alt8#return
 		#alt9#return 'x'
+		end
 		3.output
 		break 4 #!alt13#
 	end

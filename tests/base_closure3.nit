@@ -27,6 +27,8 @@ class A
 	end
 end
 
+fun maybe: Bool do return true
+
 var a = new A
 0.output
 a.foo(1,8) !bar x, y, b do #!alt2#
@@ -34,12 +36,14 @@ a.foo(1,8) !bar x, y, b do #!alt2#
 	x.output
 	b.foo(x+1, y-1) !bar z, t, c do
 		z.output
+		if maybe then
 		#alt4#break
 		#alt5#break 'x'
 		#alt6#continue
 		#alt7#continue 'x'
 		#alt8#return
 		#alt9#return 'x'
+		end
 		t.output
 	end
 	y.output

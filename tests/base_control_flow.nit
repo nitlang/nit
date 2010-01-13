@@ -20,7 +20,7 @@ fun a: Int
 do
 	a
 	return 0
-	a
+	#alt2#a
 end
 
 fun b: Int
@@ -51,5 +51,5 @@ do
 	else
 		return 0
 	end
-	a
+	#alt3#a
 end

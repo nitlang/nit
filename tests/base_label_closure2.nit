@@ -23,6 +23,8 @@ do
 	return i * 10
 end
 
+fun maybe: Bool do return true
+
 1.output
 var i = foo !bar do
 	2.output
@@ -31,13 +33,16 @@ var i = foo !bar do
 		foo !bar do
 			continue 0
 		end label l3
+		if maybe then
 		#alt1#break label l2 10
 		#alt2#break label l3 10
 		#alt3#break label l4 10
 		#alt4#break 10
 		#alt5#continue label l1 10
-		break label l1 10
+		end
+		if maybe then break label l1 10
 		4.output
+		break 4
 	end label l2#!alt6#
 	#alt6#end label l1
 	j.output

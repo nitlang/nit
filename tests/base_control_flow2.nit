@@ -21,13 +21,13 @@ fun a do end
 while true do
 	a
 	break
-	a
+	#alt1#a
 end
 
 while false do
 	a
 	continue
-	a
+	#alt2#a
 end
 
 while false do
@@ -39,7 +39,7 @@ end
 while true do
 	a
 	if false then continue else break
-	a
+	#alt3#a
 end
 
 while true do
@@ -47,9 +47,9 @@ while true do
 	while true do
 		a
 		break
-		a
+		#alt4#a
 	end
 	a
 	break
-	a
+	#alt5#a
 end

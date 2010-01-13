@@ -16,6 +16,8 @@
 
 import abstract_collection
 
+fun maybe: Bool do return true
+
 var a = new Container[Int](1)
 1.output
 for i in a do
@@ -23,12 +25,14 @@ for i in a do
 	for j in a do
 		3.output
 		for k in a do end label l3
+		if maybe then
 		#alt1#break label l2
 		#alt2#break label l3
 		#alt3#break label l4
 		#alt4#break
 		#alt5#continue label l1
-		break label l1
+		end
+		if maybe then break label l1
 		4.output
 	end label l2#!alt6#
 	#alt6#end label l1
