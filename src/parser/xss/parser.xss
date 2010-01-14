@@ -158,8 +158,9 @@ special ParserTable
 				var node = new Start(null, node2)
 				return node
 			end
+			if false then break # FIXME remove once unreach loop exits are in c_src
 		end
-		abort
+		abort # FIXME remove once unreach loop exits are in c_src
 	end
 
 	var _reduce_table: Array[ReduceAction]

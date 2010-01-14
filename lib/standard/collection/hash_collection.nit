@@ -57,8 +57,9 @@ special ArrayCapable[nullable N]
 			cur -= 1
 			if cur < 0 then cur = _capacity - 1
 			assert no_loop: cur != base
+			if false then break # FIXME remove once unreach loop exits are in c_src
 		end
-		abort
+		abort #FIXME remove once unreach loop exits are in c_src
 	end
 
 	# Add a new node (should be free)
