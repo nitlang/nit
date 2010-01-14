@@ -38,6 +38,7 @@ loop
 		end
 		if maybe then break label l1
 		4.output
+		if maybe then break
 	end label l2#!alt6#
 	#alt6#end label l1
 	5.output

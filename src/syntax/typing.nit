@@ -589,7 +589,9 @@ redef class ALoopExpr
 		end
 
 		# Compute outside context (assert all breaks)
-		if not escapable.break_variable_contexts.is_empty then
+		if escapable.break_variable_contexts.is_empty then
+			old_var_ctx.unreash = true
+		else
 			old_var_ctx.combine_merge(escapable.break_variable_contexts, v.base_variable_ctx)
 		end
 
