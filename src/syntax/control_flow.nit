@@ -60,18 +60,7 @@ abstract class VariableContext
 	# May be different from the declaration static type
 	fun stype(v: Variable): nullable MMType
 	do
-		if _stypes.has_key(v) then
-			return _stypes[v]
-		else
-			return v.stype
-		end
-	end
-
-	# Set effective static type of a given variable
-	# May be different from the declaration static type
-	fun stype=(v: Variable, t: nullable MMType)
-	do
-		_stypes[v] = t
+		return v.stype
 	end
 
 	# Variables by name (in the current context only)
@@ -80,21 +69,50 @@ abstract class VariableContext
 	# All variables in all contextes
 	var _all_variables: Set[Variable]
 
-	# Updated static type of variables
-	var _stypes: Map[Variable, nullable MMType] = new HashMap[Variable, nullable MMType]
-
 	# Build a new VariableContext
-	fun sub(node: ANode): SubVariableContext
+	fun sub(node: ANode): VariableContext
 	do
 		return new SubVariableContext.with_prev(self, node)
 	end
 
 	# Build a nested VariableContext with new variable information
-	fun sub_with(node: ANode, v: Variable, t: MMType): SubVariableContext
+	fun sub_with(node: ANode, v: Variable, t: MMType): VariableContext
 	do
-		var ctx = sub(node)
-		ctx.stype(v) = t
-		return ctx
+		return new CastVariableContext(self, node, v, t)
+	end
+
+	# Merge various alternative contexts
+	# Note that self can belong to alternatives
+	fun merge(node: ANode, alternatives: Array[VariableContext], base: VariableContext): VariableContext
+	do
+		return new MergeVariableContext(self, node, alternatives, base)
+	end
+
+	# Merge only context that are reachable
+	# Used for if/then/else merges
+	# Base is self
+	fun merge_reash(node: ANode, alt1, alt2: VariableContext, base: VariableContext): VariableContext
+	do
+		if alt1.unreash then
+			if alt2.unreash then
+				unreash = true
+				return self
+			else
+				var t = alt2
+				alt2 = alt1
+				alt1 = t
+			end
+		end
+
+		if alt2.unreash or alt1 == alt2 then
+			if alt1 == self then
+				return self
+			else
+				return merge(node, [alt1], base)
+			end
+		else
+			return merge(node, [alt1, alt2], base)
+		end
 	end
 
 	# The visitor of the context (used to display error)
@@ -126,148 +144,6 @@ abstract class VariableContext
 		return _set_variables.has(v)
 	end
 
-	# Merge back one flow context information
-	fun merge(ctx: VariableContext)
-	do
-		if ctx.unreash then
-			unreash = true
-			if ctx.already_unreash then already_unreash = true
-			return
-		end
-		for v in _all_variables do
-			if not is_set(v) and ctx.is_set(v) then
-				mark_is_set(v)
-			end
-			var s = stype(v)
-			var s1 = ctx.stype(v)
-			if s1 != s then stype(v) = s1
-		end
-	end
-
-	# Merge back two alternative flow context informations
-	fun merge2(ctx1, ctx2, basectx: VariableContext)
-	do
-		if ctx1.unreash then
-			merge(ctx2)
-			return
-		else if ctx2.unreash then
-			merge(ctx1)
-			return
-		end
-		for v in _all_variables do
-			if not is_set(v) and ctx1.is_set(v) and ctx2.is_set(v) then
-				mark_is_set(v)
-			end
-
-			var s = stype(v)
-			var s1 = ctx1.stype(v)
-			var s2 = ctx2.stype(v)
-			if s1 == s and s2 == s then
-				# NOP
-			else if s1 == null or s2 == null then
-				stype(v) = null
-			else
-				var sm = merge_types(s1, s2)
-				if sm == null then
-					stype(v) = basectx.stype(v)
-				else
-					stype(v) = sm
-				end
-			end
-		end
-	end
-
-	# Combine informations of ctx to the current flow context informations as an alternative
-	# Require that all contexts are reachable at the end
-	fun combine_merge(ctxs: Array[VariableContext], basectx: VariableContext)
-	do
-		for v in _all_variables do
-			do
-				if not is_set(v) then
-					for ctx in ctxs do
-						if not ctx.is_set(v) then break label set
-					end
-					mark_is_set(v)
-				end
-			end label set
-
-			var candidate: nullable MMType = null
-			var is_nullable = false
-			var same_candidate: nullable MMType = ctxs.first.stype(v)
-			for ctx in ctxs do
-				var t = ctx.stype(v)
-				if t == null then
-					stype(v) = null
-					continue label each_variable
-				end
-				if t != same_candidate then
-					same_candidate = null
-				end
-				if t isa MMTypeNone then
-					is_nullable = true
-					continue
-				end
-				if t isa MMNullableType then
-					is_nullable = true
-					t = t.as_notnull
-				end
-				if candidate == null or candidate < t then
-					candidate = t
-				end
-			end
-			if same_candidate != null then
-				stype(v) = same_candidate
-			end
-			if is_nullable then
-				if candidate == null then
-					candidate = _visitor.type_none
-				else
-					candidate = candidate.as_nullable
-				end
-			end
-			if candidate == null then
-				stype(v) = basectx.stype(v)
-			else
-				for ctx in ctxs do
-					var t = ctx.stype(v)
-					if not t < candidate then
-						stype(v) = basectx.stype(v)
-						continue label each_variable
-					end
-				end
-			end
-			stype(v) = candidate
-		end label each_variable
-	end
-
-	# Combine and get the most specific comon supertype
-	# return null if no comon supertype is found
-	private fun merge_types(t1, t2: MMType): nullable MMType
-	do
-		if t1 == t2 then return t1
-		if t1 isa MMTypeNone then return t2.as_nullable
-		if t2 isa MMTypeNone then return t1.as_nullable
-		var is_nullable = false
-		if t1.is_nullable then
-			is_nullable = true
-			t1 = t1.as_notnull
-		end
-		if t2.is_nullable then
-			is_nullable = true
-			t2 = t2.as_notnull
-		end
-		var t: MMType
-		if t1 < t2 then
-			t = t2
-		else if t2 < t1 then
-			t = t1
-		else
-			return null
-		end
-		if is_nullable then t = t.as_nullable
-		return t
-	end
-
 	redef fun to_s
 	do
 		var s = new Buffer
@@ -279,8 +155,11 @@ abstract class VariableContext
 		end
 		return s.to_s
 	end
+
+	private fun is_in(ctx: VariableContext): Bool = self == ctx
 end
 
+# Root of a variable context hierarchy
 class RootVariableContext
 special VariableContext
 	init(visitor: AbsSyntaxVisitor, node: ANode)
@@ -290,9 +169,16 @@ special VariableContext
 	end
 end
 
+# Contexts that can see local variables of a prevous context
+# Local variables added to this context are not shared with the previous context
 class SubVariableContext
 special VariableContext
 	readable var _prev: VariableContext
+
+	redef fun is_in(ctx)
+	do
+		return ctx == self or _prev.is_in(ctx)
+	end
 
 	redef fun [](s)
 	do
@@ -303,13 +189,14 @@ special VariableContext
 		end
 	end
 
+	redef fun is_set(v)
+	do
+		return _set_variables.has(v) or _prev.is_set(v)
+	end
+
 	redef fun stype(v)
 	do
-		if _stypes.has_key(v) then
-			return _stypes[v]
-		else
-			return prev.stype(v)
-		end
+		return prev.stype(v)
 	end
 
 	init with_prev(p: VariableContext, node: ANode)
@@ -318,12 +205,129 @@ special VariableContext
 		_prev = p
 		_all_variables = p._all_variables
 	end
+end
+
+# A variable context where a variable got a type evolution
+class CastVariableContext
+special SubVariableContext
+	# The casted variable
+	var _variable: Variable
+
+	# The new static type of the variable
+	var _stype: nullable MMType
+
+	redef fun stype(v)
+	do
+		if v == _variable then
+			return _stype
+		else
+			return prev.stype(v)
+		end
+	end
+
+	init(p: VariableContext, node: ANode, v: Variable, s: nullable MMType)
+	do
+		with_prev(p, node)
+		_variable = v
+		_stype = s
+	end
+end
+
+# Context that follows a previous context but where
+# Variable current static type and variable is_set depends on the combinaison of other contexts
+class MergeVariableContext
+special SubVariableContext
+	var _base: VariableContext
+	var _alts: Array[VariableContext]
+
+	# Updated static type of variables
+	var _stypes: Map[Variable, nullable MMType] = new HashMap[Variable, nullable MMType]
+
+	init(prev: VariableContext, node: ANode, alts: Array[VariableContext], base: VariableContext)
+	do
+		assert prev.is_in(base) else print "{node.location}: Error: prev {prev.node.location} is not in base {base.node.location}"
+		for a in alts do assert a.is_in(prev) else print "{node.location}: Error: alternative {a.node.location} is not in prev {prev.node.location}"
+		with_prev(prev, node)
+		_alts = alts
+		_base = base
+	end
+
+	redef fun stype(v)
+	do
+		if _stypes.has_key(v) then
+			return _stypes[v]
+		else
+			var s = merge_stype(v)
+			_stypes[v] = s
+			return s
+		end
+	end
+
+	private fun merge_stype(v: Variable): nullable MMType
+	do
+		var candidate: nullable MMType = null
+		var is_nullable = false
+		var same_candidate: nullable MMType = _alts.first.stype(v)
+		for ctx in _alts do
+			var t = ctx.stype(v)
+			if t == null then
+				return null
+			end
+			if t != same_candidate then
+				same_candidate = null
+			end
+			if t isa MMTypeNone then
+				is_nullable = true
+				continue
+			end
+			if t isa MMNullableType then
+				is_nullable = true
+				t = t.as_notnull
+			end
+			if candidate == null or candidate < t then
+				candidate = t
+			end
+		end
+		if same_candidate != null then
+			return same_candidate
+		end
+		if is_nullable then
+			if candidate == null then
+				return _visitor.type_none
+			else
+				candidate = candidate.as_nullable
+			end
+		end
+		if candidate == null then
+			return _base.stype(v)
+		else
+			for ctx in _alts do
+				var t = ctx.stype(v)
+				if not t < candidate then
+					return _base.stype(v)
+				end
+			end
+		end
+		return candidate
+	end
 
 	redef fun is_set(v)
 	do
-		return _set_variables.has(v) or _prev.is_set(v)
+		if _set_variables.has(v) then
+			return true
+		else
+			for ctx in _alts do
+				if not ctx.is_set(v) then
+					print "{node.location}: is_set({v}) ? false : because not set in {ctx.node.location}"
+					return false
+				end
+			end
+			_set_variables.add(v)
+			return true
+		end
 	end
 end
+
 
 redef class Variable
 	# Is the variable must be set before being used ?

@@ -293,7 +293,6 @@ redef class AClosureDecl
 			v.check_conform_expr(x, t)
 		end
 
-		old_var_ctx.merge(v.variable_ctx)
 		v.variable_ctx = old_var_ctx
 		v.base_variable_ctx = old_base_var_ctx
 		v.escapable_ctx.pop
@@ -393,8 +392,7 @@ redef class ABlockExpr
 			end
 		end
 
-		old_var_ctx.merge(v.variable_ctx)
-		v.variable_ctx = old_var_ctx
+		v.variable_ctx = old_var_ctx.merge_reash(self, v.variable_ctx, v.variable_ctx, v.base_variable_ctx)
 		_is_typed = true
 	end
 end
@@ -518,8 +516,7 @@ redef class AIfExpr
 		end
 
 		# Merge 'then' and 'else' contexts
-		old_var_ctx.merge2(then_var_ctx, v.variable_ctx, v.base_variable_ctx)
-		v.variable_ctx = old_var_ctx
+		v.variable_ctx = old_var_ctx.merge_reash(self, then_var_ctx, v.variable_ctx, v.base_variable_ctx)
 		_is_typed = true
 	end
 end
@@ -536,7 +533,6 @@ redef class AWhileExpr
 		var old_var_ctx = v.variable_ctx
 		var old_base_var_ctx = v.base_variable_ctx
 		v.base_variable_ctx = v.variable_ctx
-		v.variable_ctx = v.variable_ctx.sub(self)
 
 		# Process condition
 		v.enter_visit(n_expr)
@@ -555,12 +551,11 @@ redef class AWhileExpr
 			v.enter_visit(n_block)
 		end
 
-		v.variable_ctx = old_var_ctx
-
 		# Compute outside context (assert !cond + all breaks)
+		v.variable_ctx = old_var_ctx
 		v.use_if_false_variable_ctx(n_expr)
 		escapable.break_variable_contexts.add(v.variable_ctx)
-		old_var_ctx.combine_merge(escapable.break_variable_contexts, v.base_variable_ctx)
+		v.variable_ctx = old_var_ctx.merge(self, escapable.break_variable_contexts, v.base_variable_ctx)
 
 		v.base_variable_ctx = old_base_var_ctx
 		v.escapable_ctx.pop
@@ -580,7 +575,6 @@ redef class ALoopExpr
 		var old_var_ctx = v.variable_ctx
 		var old_base_var_ctx = v.base_variable_ctx
 		v.base_variable_ctx = v.variable_ctx
-		v.variable_ctx = v.variable_ctx.sub(self)
 
 		# Process inside
 		if n_block != null then
@@ -591,11 +585,11 @@ redef class ALoopExpr
 		# Compute outside context (assert all breaks)
 		if escapable.break_variable_contexts.is_empty then
 			old_var_ctx.unreash = true
+			v.variable_ctx = old_var_ctx
 		else
-			old_var_ctx.combine_merge(escapable.break_variable_contexts, v.base_variable_ctx)
+			v.variable_ctx = old_var_ctx.merge(self, escapable.break_variable_contexts, v.base_variable_ctx)
 		end
 
-		v.variable_ctx = old_var_ctx
 		v.base_variable_ctx = old_base_var_ctx
 		v.escapable_ctx.pop
 		_is_typed = true
@@ -626,7 +620,12 @@ redef class AForExpr
 		# Process collection
 		v.enter_visit(n_expr)
 
-		if not v.check_conform_expr(n_expr, v.type_collection) then return
+		if not v.check_conform_expr(n_expr, v.type_collection) then
+			v.variable_ctx = old_var_ctx
+			v.base_variable_ctx = old_base_var_ctx
+			v.escapable_ctx.pop
+			return
+		end
 		var expr_type = n_expr.stype
 
 		# Get iterator
@@ -696,7 +695,7 @@ redef class AVarAssignExpr
 		if btype != null and not v.check_conform_expr(n_value, btype) then return
 
 		# Always cast
-		v.variable_ctx.stype(variable) = n_value.stype
+		v.variable_ctx = v.variable_ctx.sub_with(self, variable, n_value.stype)
 
 		_is_typed = true
 	end
@@ -748,7 +747,7 @@ redef class AVarReassignExpr
 		if btype != null and not v.check_conform(n_value, t2, btype) then return
 
 		# Always cast
-		v.variable_ctx.stype(variable) = t2
+		v.variable_ctx = v.variable_ctx.sub_with(self, variable, t2)
 
 		_is_typed = true
 	end
@@ -812,8 +811,7 @@ redef class AIfexprExpr
 		v.enter_visit(n_else)
 
 		# Merge 'then' and 'else' contexts
-		old_var_ctx.merge2(then_var_ctx, v.variable_ctx, v.base_variable_ctx)
-		v.variable_ctx = old_var_ctx
+		v.variable_ctx = old_var_ctx.merge_reash(self, then_var_ctx, v.variable_ctx, v.base_variable_ctx)
 
 		var stype = v.check_conform_multiexpr(null, [n_then, n_else])
 		if stype == null then return
