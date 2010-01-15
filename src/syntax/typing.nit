@@ -1269,8 +1269,13 @@ redef class AAbsSendExpr
 	private fun get_property(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, name: Symbol): nullable MMMethod
 	do
 		if type_recv isa MMTypeNone then
-			v.error(self, "Error: Method '{name}' call on 'null'.")
-			return null
+			if name == (once "==".to_symbol) or name == (once "!=".to_symbol) then
+				# Special case on != and == that are allowed for 'null'
+				type_recv = v.type_object.as_nullable
+			else
+				v.error(self, "Error: Method '{name}' call on 'null'.")
+				return null
+			end
 		end
 		var lc = type_recv.local_class
 		var prop: nullable MMMethod = null

@@ -44,12 +44,12 @@ alt/error_expr_not_ok_alt6.nit:78,16--19: Type error: expected Bool, got null
 alt/error_expr_not_ok_alt6.nit:78,7--19: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:79,11--14: Type error: expected Bool, got null
 alt/error_expr_not_ok_alt6.nit:79,7--14: Type error: expected A, got Bool
-alt/error_expr_not_ok_alt6.nit:80,7--15: Error: Method '==' call on 'null'.
+alt/error_expr_not_ok_alt6.nit:80,7--15: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:81,7--15: Type error: expected A, got Bool
-alt/error_expr_not_ok_alt6.nit:82,7--18: Error: Method '==' call on 'null'.
-alt/error_expr_not_ok_alt6.nit:83,7--15: Error: Method '!=' call on 'null'.
+alt/error_expr_not_ok_alt6.nit:82,7--18: Type error: expected A, got Bool
+alt/error_expr_not_ok_alt6.nit:83,7--15: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:84,7--15: Type error: expected A, got Bool
-alt/error_expr_not_ok_alt6.nit:85,7--18: Error: Method '!=' call on 'null'.
+alt/error_expr_not_ok_alt6.nit:85,7--18: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:86,7--15: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:87,7--15: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:88,7--18: Type error: expected A, got Bool
