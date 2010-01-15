@@ -478,8 +478,19 @@ redef class ADoExpr
 		var escapable = new BreakOnlyEscapableBlock(self)
 		_escapable = escapable
 		v.escapable_ctx.push(escapable, n_label)
+		var old_var_ctx = v.variable_ctx
 
 		super
+
+		# Add the end of the block as an exit context
+		if not v.variable_ctx.unreash then
+			escapable.break_variable_contexts.add(v.variable_ctx)
+		end
+
+		# Merge all exit contexts
+		if not escapable.break_variable_contexts.is_empty then
+			v.variable_ctx = old_var_ctx.merge(self, escapable.break_variable_contexts, v.base_variable_ctx)
+		end
 
 		v.escapable_ctx.pop
 		_is_typed = true

@@ -50,3 +50,16 @@ loop
 end
 eat_na(a)
 eat_a(a)
+
+a = get_a
+do
+	eat_na(a)
+	if rand and a != null then
+		eat_a(a)
+		break label doblock
+	end
+	abort #!alt4#
+end label doblock
+eat_na(a)
+eat_a(a)
+
