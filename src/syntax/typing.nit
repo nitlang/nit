@@ -380,9 +380,6 @@ end
 redef class ABlockExpr
 	redef fun accept_typing(v)
 	do
-		var old_var_ctx = v.variable_ctx
-		v.variable_ctx = v.variable_ctx.sub(self)
-
 		for e in n_expr do
 			if not v.variable_ctx.unreash then
 				v.enter_visit(e)
@@ -392,7 +389,6 @@ redef class ABlockExpr
 			end
 		end
 
-		v.variable_ctx = old_var_ctx.merge_reash(self, v.variable_ctx, v.variable_ctx, v.base_variable_ctx)
 		_is_typed = true
 	end
 end
@@ -480,6 +476,7 @@ redef class ADoExpr
 		v.escapable_ctx.push(escapable, n_label)
 		var old_var_ctx = v.variable_ctx
 
+		v.variable_ctx = old_var_ctx.sub(self)
 		super
 
 		# Add the end of the block as an exit context
