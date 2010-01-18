@@ -437,12 +437,11 @@ end
 redef class ABreakExpr
 	redef fun after_typing(v)
 	do
-		var unreash = v.variable_ctx.unreash
 		v.variable_ctx.unreash = true
 		var esc = compute_escapable_block(v.escapable_ctx)
 		if esc == null then return
 
-		if not unreash then esc.break_variable_contexts.add(v.variable_ctx)
+		esc.break_variable_contexts.add(v.variable_ctx)
 
 		var bl = esc.break_list
 		if n_expr == null and bl != null then
