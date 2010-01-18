@@ -477,8 +477,9 @@ special Visitor
 				node = n
 			end
 		end
+		assert stype != null
 		for n in nodes do
-			if not n.stype < stype.as(not null) then
+			if not n.stype < stype then
 				if node == null then
 					error(n, "Type error: no most general type. Got {n.stype} and {stype}.")
 				else

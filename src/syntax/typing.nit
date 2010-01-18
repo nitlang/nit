@@ -118,14 +118,14 @@ special AbsSyntaxVisitor
 		else if candidates.length > 0 then
 			var a = new Array[String]
 			for p in candidates do
-				a.add("{p.full_name}{p.signature}")
+				a.add("{p.full_name}{p.signature.as(not null)}")
 			end
 			v.error(n, "Error: Conflicting default constructor to call for {c}: {a.join(", ")}.")
 			return null
 		else if false_candidates.length > 0 then
 			var a = new Array[String]
 			for p in false_candidates do
-				a.add("{p.full_name}{p.signature}")
+				a.add("{p.full_name}{p.signature.as(not null)}")
 			end
 			v.error(n, "Error: there is no available compatible constrctor in {c}. Discarded candidates are {a.join(", ")}.")
 			return null
@@ -1338,12 +1338,11 @@ redef class ASuperInitCall
 		else if cla == prev_class then
 			v.error(self, "Error: Only one super constructor invocation of class {cla} is allowed.")
 		else
-			var last_is_found = prev_class == null
 			for c in order do
 				if c == prev_class then
-					last_is_found = true
+					prev_class = null
 				else if c == cla then
-					if not last_is_found then
+					if prev_class != null then
 						v.error(self, "Error: Constructor of {c} must be invoked before constructor of {prev_class}")
 					end
 					esic.add(property)

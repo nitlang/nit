@@ -1034,8 +1034,8 @@ redef class AStringFormExpr
 		var ionce = new IOnce
 		var reg = v.expr(ionce, stype)
 		v.seq = ionce.body
-		var ns = v.expr(new INative("BOX_NativeString(\"{_cstring}\")", null), v.visitor.type_nativestring)
-		var ni = v.expr(new INative("TAG_Int({_cstring_length})", null), v.visitor.type_int)
+		var ns = v.expr(new INative("BOX_NativeString(\"{_cstring.as(not null)}\")", null), v.visitor.type_nativestring)
+		var ni = v.expr(new INative("TAG_Int({_cstring_length.as(not null)})", null), v.visitor.type_int)
 		var prop = v.visitor.get_method(stype, once "with_native".to_symbol)
 		var e = v.expr(new INew(stype, prop, [ns, ni]), stype)
 		v.add_assignment(reg, e)

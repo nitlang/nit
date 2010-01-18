@@ -187,6 +187,7 @@ special AbstractCompiler
 		add("<a href=\"overview.html\"><b>Overview</b></a>&nbsp; <a href=\"index-1.html\"><b>Index</b></a>&nbsp; <a href=\"index.html\" target=\"_top\"><b>With Frames</b></a>\n")
 		add("</td></tr></table>")
 		add("Visibility: ")
+		var module = module
 		if (not inside_mode and not intrude_mode) or module == null then
 			add("<b>Public</b>&nbsp; ")
 		else

@@ -38,10 +38,11 @@ special Comparable
 	end
 
 	redef fun to_s: String do
-		if location == null then
+		var l = location
+		if l == null then
 			return text
 		else
-			return "{location}: {text}"
+			return "{l}: {text}"
 		end
 	end
 end

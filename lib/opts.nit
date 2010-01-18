@@ -69,9 +69,8 @@ class Option
 
 	fun pretty_default: String
 	do
-		if default_value != null then
-			return " ({default_value})"
-		end
+		var dv = default_value
+		if dv != null then return " ({dv})"
 		return ""
 	end
 

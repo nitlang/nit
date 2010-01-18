@@ -960,7 +960,7 @@ redef class AAttrPropdef
 			var t0 = n_type.get_stype(v)
 			if t0 != null then t = t0 else return
 		else
-			v.error(self, "Not yet implemented: Attribute definition {_prop.local_class}::{_prop} requires an explicit type.")
+			v.error(self, "Not yet implemented: Attribute definition {prop.local_class}::{prop} requires an explicit type.")
 			return
 		end
 

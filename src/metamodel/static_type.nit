@@ -144,9 +144,8 @@ class MMSignature
 			end
 			s.append("({a.join(",")})")
 		end
-		if _return_type != null then
-			s.append(": {_return_type}")
-		end
+		var rt = _return_type
+		if rt != null then s.append(": {rt}")
 		return s.to_s
 	end
 
