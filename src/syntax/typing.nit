@@ -946,8 +946,10 @@ redef class ASuperstringExpr
 	var _atype: nullable MMType
 	redef fun after_typing(v)
 	do
+		var otype = v.type_object
 		var stype = v.type_string
 		_stype = stype
+		for e in n_exprs do v.check_conform_expr(e, otype)
 		var atype = v.type_array(stype)
 		_atype = atype
 		_is_typed = true

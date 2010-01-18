@@ -117,6 +117,7 @@ alt/error_expr_not_ok_alt6.nit:144,8--11: Type error: expected Discrete, got nul
 alt/error_expr_not_ok_alt6.nit:145,8--14: Type error: expected A, got Array[nullable Int]
 alt/error_expr_not_ok_alt6.nit:146,8--14: Type error: expected A, got Array[nullable Int]
 alt/error_expr_not_ok_alt6.nit:147,8--17: Type error: expected A, got Array[null]
+alt/error_expr_not_ok_alt6.nit:149,14--17: Type error: expected Object, got null
 alt/error_expr_not_ok_alt6.nit:149,7--24: Type error: expected A, got String
 alt/error_expr_not_ok_alt6.nit:150,7--17: Type error: expected A, got Int
 alt/error_expr_not_ok_alt6.nit:151,7--10: Type error: 'as(not null)' on 'null' value.
