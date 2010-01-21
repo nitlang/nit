@@ -47,6 +47,8 @@ special ICodeVisitor
 
 	redef fun visit_iregister_read(ic: ICode, r: IRegister)
 	do
+		# Note: the algo considers that a read implies that a write occured before:
+		#       it is why there is no _first assigment nor register call
 		var pass = _pass
 		if pass == 0 then
 			mark_locality(r)
@@ -77,37 +79,43 @@ special ICodeVisitor
 	end
 
 
-	# The current loop/closure.
+	# The current loop/closure identifier.
 	# Iregister from outside a loop/closure cannot die inside the loop/closure
 	# So, the only register that can die in loops/closure are those born inside the loop/closure
-	var _current_live: List[IRegister] = new List[IRegister]
+	var _current_rank: Int = 0
 
-	var _deferred: List[IRegister] = new List[IRegister]
+	# The number of the last loop/closure created
+	var _max_rank: Int = 0
 
-	# Free the deferred that can be freed
-	# "Can" because of neested loops/closures
-	# new_def will be cleared and used as the new _deferred attribute
-	fun deferred_free(new_def: List[IRegister])
+	# List of iregisters whose free is delayed because of a loop/closure
+	# They will be freed at the end of each loop/closure if possible
+	var _deferred_list: List[IRegister] = new List[IRegister]
+
+	# Free the deferred registers (from _deferred_list) that can be freed
+	# Registers that cannot be freed remain in the list
+	fun deferred_free
 	do
-		var old_def = _deferred
-		if not old_def.is_empty then
-			new_def.clear
-			_deferred = new_def
-			for r in old_def do
+		var def = _deferred_list.iterator
+		var cur = _current_rank
+		while def.is_ok do
+			var r = def.item
+			if r._born_rank >= cur then
 				free(r)
+				def.delete
 			end
+			def.next
 		end
 	end
 
 	redef fun visit_icode(ic)
 	do
 		if _pass == 1 and ic isa ILoop then
-			var old_live = _current_live
-			var new_live = new List[IRegister]
-			_current_live = new_live
+			var old_rank = _current_rank
+			_max_rank += 1
+			_current_rank = _max_rank
 			super
-			_current_live = old_live
-			deferred_free(new_live)
+			_current_rank = old_rank
+			deferred_free
 		else
 			super
 		end
@@ -116,12 +124,12 @@ special ICodeVisitor
 	redef fun visit_closure_defs(closdefs)
 	do
 		if _pass == 1 then
-			var old_live = _current_live
-			var new_live = new List[IRegister]
-			_current_live = new_live
+			var old_rank = _current_rank
+			_max_rank += 1
+			_current_rank = _max_rank
 			super
-			_current_live = old_live
-			deferred_free(new_live)
+			_current_rank = old_rank
+			deferred_free
 		else
 			super
 		end
@@ -181,8 +189,7 @@ special ICodeVisitor
 	do
 		if r._last == null then return
 		assert r._slot_index == null
-		_current_live.add(r)
-		r._born = _current_live
+		r._born_rank = _current_rank
 		if not r._is_local then
 			_global_slots.register(r)
 		else if r.stype.is_tagged then
@@ -194,12 +201,13 @@ special ICodeVisitor
 	end
 
 	# Release a register, thus its slot can be reused
+	# If the register is not freable (born in a enclosing loop/closure), then the freeing is deferred
 	fun free(r: IRegister)
 	do
 		var i = r._slot_index
 		if i == null then return
-		if r._born != _current_live then
-			_deferred.add(r)
+		if r._born_rank < _current_rank then
+			_deferred_list.add(r)
 		else if r._last != null then
 			if r._in_tag_slots then
 				_tag_slots.free(r)
@@ -219,6 +227,7 @@ special ICodeVisitor
 		visit_iroutine(ir)
 		_pass = 1
 		visit_iroutine(ir)
+		assert _deferred_list.is_empty
 	end
 
 	init(ir: IRoutine)
@@ -283,9 +292,6 @@ redef class IRegister
 	# Is the register stored in the tag slot group?
 	readable writable var _in_tag_slots: Bool = false
 
-	# Tag to be sure that info in the object are computed by the same analysis
-	var _analysis_mark: nullable IRegisterSlotAllocationVisitor = null
-
 	# What is the first occurences of the iregister
 	# So that a slot is not needed before
 	var _first: nullable Object = null
@@ -295,7 +301,8 @@ redef class IRegister
 	# ("may" because of loops/closure)
 	var _last: nullable Object = null
 
-	# In which loop/closure the iregister is born
+	# Rank of the loop/closure where the iregister is born
 	# So it can die immediatly if this is the current loop/closure
-	var _born: nullable Object = null
+	# 0 means top-level
+	var _born_rank: Int = 0
 end
