@@ -24,15 +24,14 @@ special ICodeVisitor
 	var _pass: Int = 0
 	var _icb: ICodeBuilder
 
-	var _current_inlining: Array[IRoutine]
-
 	redef fun visit_icode(ic)
 	do
 		if ic isa ICall then
 			var m = ic.property
 			var ir = m.iroutine
 			if ir != null and ic.is_inlinable then
-				if _current_inlining.has(ir) then
+				var icb = _icb
+				if icb.iroutine == ir then
 					# We cannot inline ir
 					# So, at least transform the call to a static one
 					current_icode.delete
@@ -42,8 +41,6 @@ special ICodeVisitor
 					current_icode.insert_before(icall)
 					current_icode.delete
 				else
-					var icb = _icb
-					_current_inlining.push(ir)
 					var seq = new ISeq
 					var old_seq = icb.seq
 					icb.seq = seq
@@ -57,7 +54,6 @@ special ICodeVisitor
 					current_icode.delete
 					icb.seq = old_seq
 					visit_icode(seq)
-					_current_inlining.pop
 				end
 			end
 		end
@@ -66,7 +62,6 @@ special ICodeVisitor
 
 	init(m: MMModule, r: IRoutine)
 	do
-		_current_inlining = [r]
 		_icb = new ICodeBuilder(m, r)
 	end
 end

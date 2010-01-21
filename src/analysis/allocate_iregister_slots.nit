@@ -50,9 +50,9 @@ special ICodeVisitor
 		var pass = _pass
 		if pass == 0 then
 			mark_locality(r)
-			_lasts[r] = ic
+			r._last = ic
 			r._slot_index = null
-		else if pass == 1 and _lasts.has_key(r) and _lasts[r] == ic then
+		else if pass == 1 and r._last == ic then
 			free(r)
 		end
 	end
@@ -64,33 +64,30 @@ special ICodeVisitor
 			mark_locality(r)
 			r._slot_index = null
 			# The first write make it live
-			if not _firsts.has_key(r) then _firsts[r] = ic
-			# A read iregistre is stile live on a write
-			if _lasts.has_key(r) then _lasts[r] = ic
+			if r._first == null then r._first = ic
+			# A read iregistre is still live on a write
+			if r._last != null then r._last = ic
 		else if pass == 1 then
-			if _firsts[r] == ic then
+			if r._first == ic then
 				register(r)
-			else if _lasts.has_key(r) and _lasts[r] == ic then
+			else if r._last == ic then
 				free(r)
 			end
 		end
 	end
 
+
+	# The current loop/closure.
 	# Iregister from outside a loop/closure cannot die inside the loop/closure
 	# So, the only register that can die in loops/closure are those born inside the loop/closure
+	var _current_live: List[IRegister] = new List[IRegister]
 
-	# Registers born in the current loop/closure
-	# So they can die immediatly if needed
-	var _live: HashSet[IRegister] = new HashSet[IRegister]
-
-	# Registers born outsde the current loop/closure that wanted to die
-	# Thez will be effectively freed at the end of the loop/closure
-	var _deferred: HashSet[IRegister] = new HashSet[IRegister]
+	var _deferred: List[IRegister] = new List[IRegister]
 
 	# Free the deferred that can be freed
 	# "Can" because of neested loops/closures
 	# new_def will be cleared and used as the new _deferred attribute
-	fun deferred_free(new_def: HashSet[IRegister])
+	fun deferred_free(new_def: List[IRegister])
 	do
 		var old_def = _deferred
 		if not old_def.is_empty then
@@ -105,11 +102,11 @@ special ICodeVisitor
 	redef fun visit_icode(ic)
 	do
 		if _pass == 1 and ic isa ILoop then
-			var old_live = _live
-			var new_live = new HashSet[IRegister]
-			_live = new_live
+			var old_live = _current_live
+			var new_live = new List[IRegister]
+			_current_live = new_live
 			super
-			_live = old_live
+			_current_live = old_live
 			deferred_free(new_live)
 		else
 			super
@@ -119,11 +116,11 @@ special ICodeVisitor
 	redef fun visit_closure_defs(closdefs)
 	do
 		if _pass == 1 then
-			var old_live = _live
-			var new_live = new HashSet[IRegister]
-			_live = new_live
+			var old_live = _current_live
+			var new_live = new List[IRegister]
+			_current_live = new_live
 			super
-			_live = old_live
+			_current_live = old_live
 			deferred_free(new_live)
 		else
 			super
@@ -141,12 +138,12 @@ special ICodeVisitor
 			var old_ir = _current_ir
 			_current_ir = ir
 			for r in ir.params do
-				_firsts[r] = self
+				r._first = self
 				mark_locality(r)
 			end
 			super
 			if res != null then
-				_lasts[res] = self
+				res._last = self
 				mark_locality(res)
 			end
 			_current_ir = old_ir
@@ -182,9 +179,10 @@ special ICodeVisitor
 	# Assign a slot to a register according to its locality and its type
 	fun register(r: IRegister)
 	do
-		if not _lasts.has_key(r) then return
+		if r._last == null then return
 		assert r._slot_index == null
-		_live.add(r)
+		_current_live.add(r)
+		r._born = _current_live
 		if not r._is_local then
 			_global_slots.register(r)
 		else if r.stype.is_tagged then
@@ -200,9 +198,9 @@ special ICodeVisitor
 	do
 		var i = r._slot_index
 		if i == null then return
-		if not _live.has(r) then
+		if r._born != _current_live then
 			_deferred.add(r)
-		else if _lasts.has_key(r) then
+		else if r._last != null then
 			if r._in_tag_slots then
 				_tag_slots.free(r)
 			else if r._is_local then
@@ -210,18 +208,9 @@ special ICodeVisitor
 			else
 				_global_slots.free(r)
 			end
-			_lasts.remove_at(r) # Free a register only once
+			r._last = null # Free a register only once
 		end
 	end
-
-	# What is the first occurences of iregisters
-	# So that a slot is not needed before
-	var _firsts: HashMap[IRegister, Object] = new HashMap[IRegister, Object]
-
-	# What is the last occurences of iregisters
-	# So that a slot may be no more needed after
-	# ("may" because of loops/closure)
-	var _lasts: HashMap[IRegister, Object] = new HashMap[IRegister, Object]
 
 	# Run the slot allocation
 	fun iroutine_slot_allocation
@@ -293,4 +282,20 @@ redef class IRegister
 
 	# Is the register stored in the tag slot group?
 	readable writable var _in_tag_slots: Bool = false
+
+	# Tag to be sure that info in the object are computed by the same analysis
+	var _analysis_mark: nullable IRegisterSlotAllocationVisitor = null
+
+	# What is the first occurences of the iregister
+	# So that a slot is not needed before
+	var _first: nullable Object = null
+
+	# What is the last occurences of the iregister
+	# So that a slot may be no more needed after
+	# ("may" because of loops/closure)
+	var _last: nullable Object = null
+
+	# In which loop/closure the iregister is born
+	# So it can die immediatly if this is the current loop/closure
+	var _born: nullable Object = null
 end
