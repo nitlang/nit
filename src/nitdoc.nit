@@ -813,7 +813,6 @@ special MMEntity
 				if not c2 isa MMConcreteClass then continue
 				c2.compute_super_classes
 				c2.compute_ancestors
-				c2.inherit_global_properties
 			end
 			for c2 in c.cshe.direct_smallers do
 				if c2.global.intro == c2 then

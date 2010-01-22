@@ -93,9 +93,6 @@ redef class MMSrcModule
 		# Property inhritance and introduction
 		var mmbv2 = new PropertyBuilderVisitor(tc, self)
 		for c in classes do
-			# Inherit global properties
-			c.inherit_global_properties
-
 			# Global property introduction and redefinition 
 			c.accept_class_visitor(mmbv2)
 

@@ -64,7 +64,6 @@ class Program
 
 		for c in classes do
 			c.compute_ancestors
-			c.inherit_global_properties
 		end
 	end
 

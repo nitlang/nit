@@ -109,7 +109,7 @@ redef class MMLocalClass
 	var _are_global_properties_inherited: Bool = false
 
 	# Inherit global properties for a class
-	fun inherit_global_properties
+	private fun inherit_global_properties
 	do
 		if _are_global_properties_inherited then return
 		_are_global_properties_inherited = true
@@ -132,6 +132,63 @@ redef class MMLocalClass
 				make_visible_an_inherited_global_property(glob)
 			end
 		end
+	end
+
+	redef fun global_properties
+	do
+		if _are_global_properties_inherited then return _global_properties
+		assert computed_super_classes
+		inherit_global_properties
+		return _global_properties
+	end
+
+	redef fun has_global_property(g)
+	do
+		# has_global_property can be called during the construction of the class
+		# hierarchy to check that a type "X" is not a formal type.
+		if not computed_super_classes then return false
+
+		var set = _global_properties
+		if set.has(g) then return true
+		for c in che.direct_greaters do
+			if c.has_global_property(g) then
+				set.add(g)
+				return true
+			end
+		end
+		return false
+	end
+
+	redef fun has_global_property_by_name(n)
+	do
+		# has_global_property can be called during the construction of the class
+		# hierarchy to check that a type "X" is not a formal type.
+		if not computed_super_classes then return false
+
+		# Ensure that super-classes are constructed
+		compute_super_classes
+
+		if _properties_by_name.has_key(n) then
+			return _properties_by_name[n].length == 1
+		end
+		var set = _global_properties
+		var nset
+		if _properties_by_name.has_key(n) then
+			nset = _properties_by_name[n]
+		else
+			nset = new Array[MMGlobalProperty]
+			_properties_by_name[n] = nset
+		end
+		for c in che.direct_greaters do
+			if c.has_global_property_by_name(n) then
+				var g = c.get_property_by_name(n)
+				if not set.has(g) then set.add(g)
+				if g.is_init and g.intro.local_class.global != global then continue
+				if nset.has(g) then continue
+				nset.add(g)
+			end
+		end
+		return nset.length == 1
 	end
 
 	# Make the name of a global property meaningful in the class
