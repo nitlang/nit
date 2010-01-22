@@ -114,14 +114,6 @@ redef class MMSrcModule
 			c.accept_properties_visitor(mmbv3)
 		end
 
-		# Check inherited local properties
-		for c in classes do
-			for g in c.global_properties do
-				if visibility_for(g.intro.module) < g.visibility_level then continue
-				var p = c[g]
-			end
-		end
-
 		tc.check_errors
 	end
 
