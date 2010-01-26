@@ -1,7 +1,1 @@
-0
-1
-2
-0
-1
-1
-0
+alt/base_closure_break_default2_alt2.nit:24,5--12: Error: 'return' invalid in default closure definitions. Use 'continue' or 'break'.

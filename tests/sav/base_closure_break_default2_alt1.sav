@@ -1,1 +1,1 @@
-alt/base_closure_break_default2_alt1.nit:23,5--10: Error: Return without value in a function.
+alt/base_closure_break_default2_alt1.nit:23,5--10: Error: 'return' invalid in default closure definitions. Use 'continue' or 'break'.

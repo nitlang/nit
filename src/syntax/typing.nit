@@ -81,6 +81,9 @@ special AbsSyntaxVisitor
 		if ctx != null then variable_ctx = ctx
 	end
 
+	# Are we inside a default closure definition ?
+	readable writable var _is_default_closure_definition: Bool = false
+
 	# Number of nested once
 	readable writable var _once_count: Int = 0
 
@@ -278,7 +281,11 @@ redef class AClosureDecl
 		_escapable = escapable
 		v.escapable_ctx.push(escapable, null)
 
+		v.is_default_closure_definition = true
+
 		super
+
+		v.is_default_closure_definition = false
 
 		if n_expr != null then
 			if v.variable_ctx.unreash == false then
@@ -398,6 +405,12 @@ redef class AReturnExpr
 	do
 		v.variable_ctx.unreash = true
 		var t = v.local_property.signature.return_type
+
+		if v.is_default_closure_definition then
+			v.error(self, "Error: 'return' invalid in default closure definitions. Use 'continue' or 'break'.")
+			return
+		end
+
 		var e = n_expr
 		if e == null and t != null then
 			v.error(self, "Error: Return without value in a function.")
