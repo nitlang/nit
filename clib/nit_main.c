@@ -17,7 +17,7 @@
 #include "gc.h"
 
 bigint object_id_counter = 1000000;
-enum gc_option { large, boehm, nitgc } gc_option;
+enum gc_option { large, gc_opt_malloc, boehm, nitgc } gc_option;
 
 #ifdef WITH_LIBGC
 #define GC_DEBUG
@@ -27,7 +27,8 @@ enum gc_option { large, boehm, nitgc } gc_option;
 void *raw_alloc(size_t s0)
 {
 	switch (gc_option) {
-	case nitgc: return malloc(s0); break;
+	case nitgc: return malloc(s0);
+	case gc_opt_malloc: return malloc(s0);
 	default: return alloc(s0);
 	}
 }
@@ -64,6 +65,7 @@ void * alloc(size_t s0)
 	case boehm: return GC_MALLOC(s0);
 #endif
 	case nitgc: return Nit_gc_malloc(s0);
+	case gc_opt_malloc: return calloc(1, s0);
 	case large:
 	default: return large_alloc(s0);
 	}
@@ -99,6 +101,8 @@ void initialize_gc_option(void) {
 #endif
 		} else if (strcmp(opt, "nitgc")==0) {
 			gc_option = nitgc;
+		} else if (strcmp(opt, "malloc")==0) {
+			gc_option = gc_opt_malloc;
 		} else if (strcmp(opt, "large")==0) {
 			gc_option = large;
 		} else if (strcmp(opt, "help")==0) {
@@ -106,7 +110,7 @@ void initialize_gc_option(void) {
 #ifdef WITH_LIBGC
 					", 'boehm'"
 #endif
-					", 'large'. Default is '%s'.\n", def);
+					", 'large', 'malloc'. Default is '%s'.\n", def);
 			exit(1);
 		} else {
 			fprintf(stderr, "Invalid GC option in NIT_GC_OPTION environment variable. Using default '%s'.\n", def);
