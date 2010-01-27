@@ -17,29 +17,65 @@
 #else
 #	define assert(x) while(0)
 #endif
+#include <unistd.h>
+#include "gc_static_objects_list.h"
+
+/** The current active heap.
+ * During GC collect, it is the destination (i.e. the next active heap). */
+char *gc_heap_pointer;
+
+/** The inactive heap.
+ * During GC collect, is is the source (i.e. the previous active heap). */
+char *gc_old_heap_pointer;
+
+/** The size (total capacity) of the active heap. */
+size_t gc_heap_size;
+
+/** The total size of currently allocated objects. */
+size_t gc_used_size;
+
+/** Typedef used by boxing val. FIXME: Do someting better! */
+typedef struct TBOX_struct {
+	const classtable_elt_t *vft;
+	char *val;
+	bigint object_id;
+} *BOX_struct;
+
+/** First free position in the active heap. */
+char *gc_allocation_pointer;
+
+/** Position of objects copied but not yet visited (during GC collect). */
+char *gc_scavenging_pointer;
+
+/** List of global objects. */
+GC_List staticObjects;
+
+/** Size of a memory page. Used to grow or shrink the GC heap. */
+unsigned long page_size;
+
+/* Markbit manipulations */
+#define GET_MARKBIT(x) (((val_t)((x)[0].vft)) & 1)
+#define SET_MARKBIT(x) ((x)->vft = (void*)(((bigint)((x)->vft)) | 1))
+#define REMOVE_MARKBIT(x) ((x) ^ 1)
 
 void Nit_gc_init(void) {
-	heapActive = malloc(sizeof(heap));
-	heapInactive = malloc(sizeof(heap));
+	page_size = sysconf(_SC_PAGESIZE);
 
-	heapActive->heapPointer = malloc(HEAP_ACTIVE_SIZE_MIN);
-	heapInactive->heapPointer = malloc(HEAP_ACTIVE_SIZE_MIN);
+	gc_heap_pointer = calloc(1, page_size);
+	if (gc_heap_pointer==NULL) exit(1);
+	gc_heap_size = page_size;
+	gc_used_size = 0;
 
-	if (heapActive->heapPointer==NULL) exit(1);
-	if (heapInactive->heapPointer==NULL) exit(1);
+	gc_allocation_pointer = gc_heap_pointer;
 
-	heapActive->size = HEAP_ACTIVE_SIZE_MIN;
-	heapInactive->size = HEAP_ACTIVE_SIZE_MIN;
-
-	allocationPointer = heapActive->heapPointer;
-
-	evacuationPointer = heapInactive->heapPointer;
-	scavengingPointer = evacuationPointer;
+	gc_old_heap_pointer = NULL;
+	gc_scavenging_pointer = NULL;
 
 	GC_List_Init(&staticObjects);
 }
 
-val_t GC_evacuation(obj_t object) {
+/** Copy object to the new heap if needed then return the address of the copy. */
+static val_t GC_evacuation(obj_t object) {
 	bigint size;
 	bigint objectSize;
 	val_t newAdress;
@@ -48,77 +84,75 @@ val_t GC_evacuation(obj_t object) {
 
 	assert(ISOBJ(object) && !ISNULL(object));
 	if (GET_MARKBIT(object) != (bigint)0) {
+		/* Object already evacuated. So forward it. */
 		newAdress = REMOVE_MARKBIT((bigint)((object)->vft));
 	} else {
-		newAdress = (val_t)evacuationPointer;
+		newAdress = (val_t)gc_allocation_pointer;
 		if (OBJ_IS_ARRAY(object)) {
 			array = (Nit_NativeArray)object;
 			size = sizeof(struct Nit_NativeArray) + ((array->size - 1) * sizeof(val_t));
-			memcpy(evacuationPointer, (array), size);
-			(array)->vft = (classtable_elt_t*)evacuationPointer;
-		} else if (IS_BOX((val_t)object)) {
+		} else if (OBJ_IS_BOX(object)) {
 			box = (BOX_struct)object;
 			size = sizeof(struct TBOX_struct);
-			memcpy(evacuationPointer, object, size);
-			box->vft = (classtable_elt_t*)evacuationPointer;
 		} else {
 			objectSize = (bigint)((object)[0].vft[1].i);
 			size = (objectSize) * sizeof(val_t);
-			memcpy(evacuationPointer, object, size);
-			(object)[0].vft = (classtable_elt_t*)evacuationPointer;
 		}
+		memcpy(gc_allocation_pointer, object, size);
+		(object)[0].vft = (classtable_elt_t*)gc_allocation_pointer;
 		SET_MARKBIT(object);
-		evacuationPointer += size;
+		gc_allocation_pointer += size;
 	}
 
 	return newAdress;
 }
 
-void GC_scavenging(void) {
-	obj_t object = (obj_t)scavengingPointer;
+/** Process the next evacuated object to copy/update its fields. */
+static void GC_scavenging(void) {
+	obj_t object;
 	int size;
 	int i;
-	obj_t referencedObject;
-	bigint objectSize;
-	Nit_NativeArray *array;
+	val_t referencedObject;
 
-	if (IS_BOX((val_t)object)) {
+	object = (obj_t)gc_scavenging_pointer;
+	if (OBJ_IS_BOX(object)) {
 		size = sizeof(struct TBOX_struct);
-	} else {
-		array = (Nit_NativeArray*)&scavengingPointer;
-		if (OBJ_IS_ARRAY((obj_t)*array)) {
-			size = sizeof(struct Nit_NativeArray) + (((*array)->size - 1) * sizeof(val_t));
-			for (i = 0; i < (*array)->size; i++) {
-				referencedObject = (obj_t)((*array)->val[i]);
-				if (!ISNULL(referencedObject) && ISOBJ((val_t)referencedObject)) {
-					(*array)->val[i] = (bigint)GC_evacuation(referencedObject);
-				}
+	} else if (OBJ_IS_ARRAY(object)) {
+		Nit_NativeArray array = (Nit_NativeArray)gc_scavenging_pointer;
+		size = sizeof(struct Nit_NativeArray) + ((array->size - 1) * sizeof(val_t));
+		for (i = 0; i < array->size; i++) {
+			referencedObject = array->val[i];
+			if (!ISNULL(referencedObject) && ISOBJ(referencedObject)) {
+				array->val[i] = GC_evacuation((obj_t)referencedObject);
 			}
-		} else {
-			objectSize = (bigint)((object)->vft[1].i);
-			size = (objectSize) * sizeof(val_t);
-			for (i = 2; i < objectSize; i++) {
-				referencedObject = (obj_t)(object[i].objectSize);
-				if (!ISNULL(referencedObject) && ISOBJ((val_t)referencedObject)) {
-					((object)[i].objectSize) = (bigint)GC_evacuation(referencedObject);
-				}
+		}
+	} else {
+		bigint objectSize = (bigint)((object)->vft[1].i);
+		size = (objectSize) * sizeof(val_t);
+		for (i = 2; i < objectSize; i++) {
+			referencedObject = object[i].objectSize;
+			if (!ISNULL(referencedObject) && ISOBJ(referencedObject)) {
+				object[i].objectSize = GC_evacuation((obj_t)referencedObject);
 			}
 		}
 	}
-	scavengingPointer += size;
+
+	gc_scavenging_pointer += size;
 }
 
-void GC_collect(void) {
+/** Collect live objects in the old head and copy them to the active heap. */
+static void GC_collect(void) {
 	val_t *pointer;
 	int i;
 	int j;
 	struct stack_frame_t *frame = stack_frame_head;
 	GC_static_object *staticObject = staticObjects.top;
 	val_t object;
-	heap *tempPointer;
 
-	evacuationPointer = heapInactive->heapPointer;
-	scavengingPointer = heapInactive->heapPointer;
+	gc_allocation_pointer = gc_heap_pointer;
+	gc_scavenging_pointer = gc_heap_pointer;
+
+	/* Process global objects (registered by GC_add_static_object) */
 	for (i = 0; i < staticObjects.size; i++) {
 		object = *(val_t*)(staticObject->pointer);
 		if (!ISNULL(object) && ISOBJ(object)) {
@@ -126,6 +160,8 @@ void GC_collect(void) {
 		}
 		staticObject = staticObject->next;
 	}
+
+	/* Process function frames (local variables) */
 	while (frame != NULL) {
 		for (j = 0; j < frame->REG_size; j++) {
 			object = frame->REG[j];
@@ -136,60 +172,67 @@ void GC_collect(void) {
 		if (frame == frame->prev) break;
 		frame = frame->prev;
 	}
-	while (evacuationPointer != scavengingPointer) {
+	while (gc_allocation_pointer != gc_scavenging_pointer) {
 		GC_scavenging();
 	}
 
-	/* pour tests seulement, pas necessaire */
-	memset(heapActive->heapPointer, 0, heapActive->size);
-	allocationPointer = evacuationPointer;
+	gc_scavenging_pointer = NULL;
 
-	/* inverse le tas actif et le tas inactif */
-	tempPointer = heapActive;
-	heapActive = heapInactive;
-	heapInactive = tempPointer;
-
-	heapActiveUsedSize = allocationPointer - heapActive->heapPointer;
+	gc_used_size = gc_allocation_pointer - gc_heap_pointer;
 }
 
-void GC_set_heap_size(size_t newHeapSize) {
-	free(heapInactive->heapPointer);
-	heapInactive->heapPointer = malloc(newHeapSize);
-	if (heapInactive->heapPointer == NULL) {
+/** Allocate a new active heap. */
+static void GC_prepare_heap_size(size_t size) {
+	assert(gc_old_heap_pointer == NULL);
+	gc_old_heap_pointer = gc_heap_pointer;
+
+	gc_heap_pointer = calloc(1, size);
+	if (gc_heap_pointer == NULL) {
 		exit(1);
 	}
-	heapInactive->size = newHeapSize;
-	memset(heapInactive->heapPointer, 0, newHeapSize);
+	gc_heap_size = size;
 }
 
-void GC_detect_memory_needs(size_t size) {
-	if (size > (heapActive->size - heapActiveUsedSize)) {
-		GC_collect();
-		if (heapActive->size - heapActiveUsedSize > heapActive->size / 2 && heapActive->size * 3 / 4 > HEAP_ACTIVE_SIZE_MIN) {
-			GC_set_heap_size(heapActive->size * 3 / 4);
-			GC_collect();
-			GC_set_heap_size(heapActive->size);
-		}
+void Nit_gc_print_usage(void) {
+	printf("GC: Size %d usage %d (%.2f%%)\n", gc_heap_size, gc_used_size, 100.0*gc_used_size/gc_heap_size);
+}
+
+/** Enlarge the heap and collect dead objects. Can also shrink the heap.
+ * Size is the aditionnal number of bytes required. */
+static void GC_enlarge_and_collect(size_t size) {
+	size_t try_size;
+
+	/* Heap grows exponentially. */
+	try_size = gc_heap_size;
+	while (size > (try_size - gc_used_size)) {
+		try_size = try_size * 1.5;
 	}
-	if (size > (heapActive->size - heapActiveUsedSize)) {
-		int try_size = heapInactive->size * 2;
-		while (size > (try_size - heapActiveUsedSize)) {
-			try_size *= 2;
-		}
-		GC_set_heap_size(try_size);
-		GC_collect();
-		GC_set_heap_size(heapActive->size);
-	}
+
+	/* Build a new heap. */
+	GC_prepare_heap_size(try_size);
+
+	/* Collect. */
+	GC_collect();
+
+	/* Free the old heap. */
+	free(gc_old_heap_pointer);
+	gc_old_heap_pointer = NULL;
+
+	/* Shrink heap. */
+	while (gc_heap_size > 2*page_size && 3*(gc_used_size+size) < gc_heap_size)
+		gc_heap_size = gc_heap_size / 1.5;
+	/*Nit_gc_print_usage();*/
 }
 
 void *Nit_gc_malloc(size_t size) {
 	char *result;
 
-	GC_detect_memory_needs(size);
+	if (size > (gc_heap_size - gc_used_size))
+		GC_enlarge_and_collect(size);
 
-	result = allocationPointer;
-	heapActiveUsedSize += size;
-	allocationPointer += size;
+	result = gc_allocation_pointer;
+	gc_allocation_pointer += size;
+	gc_used_size += size;
 
 	return result;
 }
