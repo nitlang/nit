@@ -94,7 +94,7 @@ class I2CCompilerVisitor
 	end
 
 	# The rank (number) of each closure
-	readable var _closures: HashMap[IClosureDecl, Int] = new HashMap[IClosureDecl, Int]
+	readable var _closures: HashMap[IClosureDecl, String] = new HashMap[IClosureDecl, String]
 
 	# The functionnal type of each closure
 	readable var _clostypes: HashMap[IClosureDecl, String] = new HashMap[IClosureDecl, String]
@@ -159,11 +159,13 @@ class I2CCompilerVisitor
 		visitor.add_decl(s)
 	end
 
-	fun add_instr(s: String)
+	# Prepare a new instuction (indent, comment)
+	# Caller must ensure to add a new line to finish its instr
+	fun new_instr: Writer
 	do
+		var w = visitor.writer
 		var l = _next_location
 		if l != null then
-			var w = visitor.writer
 			visitor.add_indent(w)
 			w.add("/* ")
 			w.add(l.file)
@@ -172,7 +174,13 @@ class I2CCompilerVisitor
 			w.add(" */\n")
 			_next_location = null
 		end
-		visitor.add_instr(s)
+		visitor.add_indent(w)
+		return w
+	end
+
+	fun add_instr(s: String)
+	do
+		new_instr.add(s).add("\n")
 	end
 
 	fun indent
@@ -309,7 +317,7 @@ redef class IRoutine
 			for i in [0..iclosdecls.length[ do
 				var iclosdecl = iclosdecls[i]
 				v.add_instr("CREG[{i}] = {args[params.length+i]};")
-				v.closures[iclosdecl] = i
+				v.closures[iclosdecl] = i.to_s
 				var cs = iclosdecl.closure.signature # Closure signature
 				var subparams = new Array[String] # Parameters of the closure
 				subparams.add("struct stack_frame_t *")
@@ -352,11 +360,7 @@ end
 
 redef class ICode
 	# Full compilation of the icode
-	fun compile_to_c(v: I2CCompilerVisitor)
-	do
-		v.add_location(location)
-		store_result(v, inner_compile_to_c(v))
-	end
+	fun compile_to_c(v: I2CCompilerVisitor) is abstract
 
 	# Is a result really needed
 	private fun need_result: Bool
@@ -366,28 +370,46 @@ redef class ICode
 	end
 
 	# Store s in the result value of self
-	private fun store_result(v: I2CCompilerVisitor, s: nullable String)
+	private fun store_result(v: I2CCompilerVisitor, w: nullable Writer)
 	do
 		var r = result
 		if r != null and r.slot_index != null then
-			assert s != null
-			v.add_assignment(v.register(r), s)
-		else if s != null and not is_pure then
+			assert w != null
+			var w2 = v.new_instr
+			w2.add(v.register(r))
+			w2.add(" = ")
+			w2.append(w)
+			w2.add(";\n")
+		else if w != null and not is_pure then
 			# ICode with side effects must be evaluated
 			# even if the result is not wanted
-			v.add_instr(s + ";")
+			var w2 = v.new_instr
+			w2.append(w)
+			w2.add(";\n")
 		end
 	end
 
-	# Compilation of without the result assigment
-	# Return the right value is case of expression
-	# Return the full expression (witout ;) in case of statement
-	private fun inner_compile_to_c(v: I2CCompilerVisitor): nullable String is abstract
+	# Prepare a writer if the expression icode need to be compiled
+	# * Result assigment is automatic if needed
+	private fun new_result(v: I2CCompilerVisitor): Writer
+	do
+		assert need_result or not is_pure
+		var w2 = v.new_instr
+		var r = result
+		if r != null and r.slot_index != null then
+			w2.add(v.register(r))
+			w2.add(" = ")
+		end
+		var w = w2.sub
+		w2.add(";\n")
+		return w
+	end
 end
 
 redef class ISeq
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
+		v.add_location(location)
 		v.local_labels.add(self)
 		var mark = iescape_mark
 		if mark != null then v.marks_to_seq[mark] = self
@@ -395,33 +417,36 @@ redef class ISeq
 			ic.compile_to_c(v)
 		end
 		v.add_label(self)
-		return null
 	end
 end
 
 redef class IIf
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		v.add_instr("if (UNTAG_Bool({v.register(expr)})) \{")
+		v.add_location(location)
+		var w = v.new_instr
+		w.add("if (UNTAG_Bool(")
+		w.add(v.register(expr))
+		w.add(")) \{\n")
 		if not then_seq.icodes.is_empty then
 			v.indent
-			then_seq.inner_compile_to_c(v)
+			then_seq.compile_to_c(v)
 			v.unindent
 		end
 		if not else_seq.icodes.is_empty then
-			v.add_instr("} else \{")
+			v.add_instr("\} else \{")
 			v.indent
-			else_seq.inner_compile_to_c(v)
+			else_seq.compile_to_c(v)
 			v.unindent
 		end
-		v.add_instr("}")
-		return null
+		v.add_instr("\}")
 	end
 end
 
 redef class ILoop
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
+		v.add_location(location)
 		v.local_labels.add(self)
 		var mark = iescape_mark
 		if mark != null then v.marks_to_seq[mark] = self
@@ -431,17 +456,16 @@ redef class ILoop
 			ic.compile_to_c(v)
 		end
 		v.unindent
-		v.add_instr("}")
+		v.add_instr("\}")
 		v.add_label(self)
-		return null
 	end
 end
 
 redef class IEscape
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
+		v.add_location(location)
 		v.add_goto(v.marks_to_seq[iescape_mark])
-		return null
 	end
 end
 
@@ -481,8 +505,8 @@ redef class IAbsCall
 		end
 
 		# Compile the real call
-		var s = compile_call_to_c(v, args)
-		var r: nullable String = s
+		var call = compile_call_to_c(v, args)
+		var res: nullable Writer = call
 
 		# Intercept escapes
 		if closctx != null then
@@ -491,15 +515,21 @@ redef class IAbsCall
 			# Is there possible escapes?
 			if not els.is_empty then
 				# Call in a tmp variable to avoid 'break' overwrite
+				var w = v.new_instr
 				if need_result then
-					r = "tmp"
-					v.add_assignment(r, s)
+					w.add("tmp")
+					w.add(" = ")
+					w.append(call)
+					w.add(";\n")
+					res = new Writer
+					res.add("tmp")
 				else
-					r = null
-					v.add_instr(s + ";")
+					res = null
+					w.append(call)
+					w.add(";\n")
 				end
 				# What are the expected escape indexes
-				v.add_instr("switch ({closctx}->has_broke) \{")
+				v.new_instr.add("switch (").add(closctx).add("->has_broke) \{\n")
 				v.indent
 				# No escape occured, continue as usual
 				v.add_instr("case 0: break;")
@@ -511,7 +541,7 @@ redef class IAbsCall
 					if lls.has(seq) then
 						# Local escape occured
 						# Clear the has_broke information and go to the target
-						v.add_instr("case {iels.item}: {closctx}->has_broke = 0; goto {v.lab(seq)};")
+						v.new_instr.add("case ").add(iels.item.to_s).add(": ").add(closctx).add("->has_broke = 0; goto ").add(v.lab(seq)).add(";\n")
 					else
 						# Forward escape occured: register the escape label
 						assert v.closure
@@ -524,32 +554,42 @@ redef class IAbsCall
 				if forward_escape then
 					# Do not need to copy 'has_broke' value since it is shared by the next one.
 					# So just exit the C function.
-					v.add_instr("default: goto {v.lab(v.return_label.as(not null))};")
+					v.new_instr.add("default: goto ").add(v.lab(v.return_label.as(not null))).add(";\n")
 				end
 				v.unindent
 				v.add_instr("\}")
 			end
 		end
 
-		store_result(v, r)
+		if res != null then
+			var w = new_result(v)
+			w.append(res)
+		end
 	end
 
-	redef fun inner_compile_to_c(v) do abort
-
 	# The single invocation witout fancy stuffs
-	private fun compile_call_to_c(v: I2CCompilerVisitor, args: Array[String]): String is abstract
+	private fun compile_call_to_c(v: I2CCompilerVisitor, args: Array[String]): Writer is abstract
 end
 
 redef class ICall
 	redef fun compile_call_to_c(v, args)
 	do
+		var w = new Writer
 		var prop = property
 		if prop.global.is_init then args.add("init_table")
 		if prop.name == (once ("add".to_symbol)) and prop.local_class.name == (once ("Array".to_symbol)) then
-			return "{prop.cname}({args.join(", ")})"
+			w.add(prop.cname)
+			w.add("(")
 		else
-			return "{prop.global.meth_call}({args[0]})({args.join(", ")})"
+			w.add(prop.global.meth_call)
+			w.add("(")
+			w.add(args.first)
+			w.add(")(")
 		end
+		var first = true
+		w.add_all(args, ", ")
+		w.add(")")
+		return w
 	end
 end
 
@@ -558,35 +598,66 @@ redef class ISuper
 	do
 		var prop = property
 		if prop.global.is_init then args.add("init_table")
-		return "{prop.super_meth_call}({args[0]})({args.join(", ")})"
+		var w = new Writer
+		w.add(prop.super_meth_call)
+		w.add("(")
+		w.add(args.first)
+		w.add(")(")
+		w.add_all(args, ", ")
+		w.add(")")
+		return w
 	end
 end
 
 redef class INew
 	redef fun compile_call_to_c(v, args)
 	do
-		return "NEW_{stype.local_class}_{property.global.intro.cname}({args.join(", ")})"
+		var w = new Writer
+		w.add("NEW_")
+		w.add(stype.local_class.to_s)
+		w.add("_")
+		w.add(property.global.intro.cname)
+		w.add("(")
+		w.add_all(args, ", ")
+		w.add(")")
+		return w
 	end
 end
 
 redef class IAllocateInstance
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		return "NEW_{stype.local_class.name}()"
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("NEW_")
+		w.add(stype.local_class.name.to_s)
+		w.add("()")
 	end
 end
 
 redef class ICheckInstance
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		return "CHECKNEW_{stype.local_class.name}({v.register(expr)})"
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("CHECKNEW_")
+		w.add(stype.local_class.name.to_s)
+		w.add("(")
+		w.add(v.register(expr))
+		w.add(")")
 	end
 end
 
 redef class IInitAttributes
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		return "INIT_ATTRIBUTES__{stype.local_class.name}({v.register(expr)})"
+		v.add_location(location)
+		var w = v.new_instr
+		w.add("INIT_ATTRIBUTES__")
+		w.add(stype.local_class.name.to_s)
+		w.add("(")
+		w.add(v.register(expr))
+		w.add(");\n")
 	end
 end
 
@@ -595,150 +666,230 @@ redef class IStaticCall
 	do
 		var prop = property
 		if prop.global.is_init then args.add("init_table")
-		return "{property.cname}({args.join(", ")})"
+		var w = new Writer
+		w.add(property.cname)
+		w.add("(")
+		w.add_all(args, ", ")
+		w.add(")")
+		return w
 	end
 end
 
 redef class INative
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
+		v.add_location(location)
+		var w = new_result(v)
 		if exprs.is_empty then
-			return code
+			w.add(code)
 		else
-			var res = new Buffer
 			var i = 0
 			var c = code.split_with("@@@")
 			for s in c do
-				res.append(s)
+				w.add(s)
 				if i < exprs.length and i < c.length-1 then
-					res.append(v.register(exprs[i]))
+					w.add(v.register(exprs[i]))
 				end
 				i += 1
 			end
-			return res.to_s
 		end
 	end
 end
 
 redef class IAbort
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		var s = new Buffer.from("fprintf(stderr")
+		v.add_location(location)
+		var w = v.new_instr
+		w.add("fprintf(stderr")
 		for t in texts do
-			s.append(", \"{t}\"")
+			w.add(", \"")
+			w.add(t)
+			w.add("\"")
 		end
-		s.append(");")
-		v.add_instr(s.to_s)
+		w.add(");\n")
 
 		var ll = location
-		s = new Buffer.from("fprintf(stderr, \" (%s")
+		w = v.new_instr
+		w.add("fprintf(stderr, \" (%s")
 		if ll != null then
-			s.append(":%d")
+			w.add(":%d")
 		end
-		s.append(")\\n\", LOCATE_{module_location.name}")
+		w.add(")\\n\", LOCATE_")
+		w.add(module_location.name.to_s)
 		if ll != null then
-			s.append(", {ll.line_start}")
+			w.add(", ")
+			w.add(ll.line_start.to_s)
 		end
-		s.append(");")
-		v.add_instr(s.to_s)
+		w.add(");\n")
 
 		v.add_instr("nit_exit(1);")
-		return null
 	end
 end
 
 redef class IMove
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		return v.register(expr)
+		if not need_result then return
+		var e = v.register(expr)
+		var r = v.register(result.as(not null))
+		if e == r then return
+		v.add_location(location)
+		var w = v.new_instr
+		w.add(r)
+		w.add(" = ")
+		w.add(e)
+		w.add(";\n")
 	end
 end
 
 redef class IAttrRead
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		return "{property.global.attr_access}({v.register(expr)})"
+		if not need_result then return
+		v.add_location(location)
+		var w = new_result(v)
+		w.add(property.global.attr_access)
+		w.add("(")
+		w.add(v.register(expr))
+		w.add(")")
 	end
 end
 
 redef class IAttrIsset
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		return "TAG_Bool({property.global.attr_access}({v.register(expr)})!=NIT_NULL)"
+		if not need_result then return
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("TAG_Bool(")
+		w.add(property.global.attr_access)
+		w.add("(")
+		w.add(v.register(expr))
+		w.add(")!=NIT_NULL)")
 	end
 end
 
 redef class IAttrWrite
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		v.add_instr("{property.global.attr_access}({v.register(expr1)}) = {v.register(expr2)};")
-		return null
+		v.add_location(location)
+		var w = v.new_instr
+		w.add(property.global.attr_access)
+		w.add("(")
+		w.add(v.register(expr1))
+		w.add(") = ")
+		w.add(v.register(expr2))
+		w.add(";\n")
 	end
 end
 
 redef class ITypeCheck
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
+		if not need_result then return
 		# FIXME handle formaltypes
+		v.add_location(location)
 		var g = stype.local_class.global
 		var recv = v.register(expr)
-		var s = ""
+		var w = new_result(v)
+		w.add("TAG_Bool(")
 		if expr.stype.is_nullable then
 			if stype.is_nullable then
-				s = "({recv}==NIT_NULL) || "
+				w.add("(")
+				w.add(recv)
+				w.add("==NIT_NULL) || ")
 			else if stype.as_nullable == expr.stype then
-				return "TAG_Bool({recv}!=NIT_NULL)"
+				w.add(recv)
+				w.add("!=NIT_NULL)")
+				return
 			else
-				s = "({recv}!=NIT_NULL) && "
+				w.add("(")
+				w.add(recv)
+				w.add("!=NIT_NULL) && ")
 			end
 		end
-		return "TAG_Bool({s}VAL_ISA({recv}, {g.color_id}, {g.id_id})) /*cast {stype}*/"
+		w.add("VAL_ISA(")
+		w.add(recv)
+		w.add(", ")
+		w.add(g.color_id)
+		w.add(", ")
+		w.add(g.id_id)
+		w.add(")) /*cast ")
+		w.add(stype.to_s)
+		w.add("*/")
 	end
 end
 
 redef class IIs
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
+		if not need_result then return
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("TAG_Bool(")
 		var t1 = expr1.stype
 		var t2 = expr2.stype
 		if t1 isa MMTypeNone then
 			if t2 isa MMTypeNone then
-				return "TAG_Bool(1)"
+				w.add("1)")
+				return
 			else if t2.is_nullable then
-				return "TAG_Bool({v.register(expr2)}==NIT_NULL)"
+				w.add(v.register(expr2))
+				w.add("==NIT_NULL)")
+				return
 			else
-				return "TAG_Bool(0)"
+				w.add("0)")
+				return
 			end
 		else if t1.is_nullable then
 			if t2 isa MMTypeNone then
-				return "TAG_Bool({v.register(expr1)}==NIT_NULL)"
+				w.add(v.register(expr1))
+				w.add("==NIT_NULL)")
+				return
 			else if t2.is_nullable then
-				return "TAG_Bool(IS_EQUAL_NN({v.register(expr1)},{v.register(expr2)}))"
+				w.add("IS_EQUAL_NN(")
 			else
-				return "TAG_Bool(IS_EQUAL_ON({v.register(expr2)},{v.register(expr1)}))"
+				w.add("IS_EQUAL_ON(")
+				w.add(v.register(expr2))
+				w.add(",")
+				w.add(v.register(expr1))
+				w.add("))")
+				return
 			end
 		else
 			if t2 isa MMTypeNone then
-				return "TAG_Bool(0)"
+				w.add("0)")
+				return
 			else if t2.is_nullable then
-				return "TAG_Bool(IS_EQUAL_ON({v.register(expr1)},{v.register(expr2)}))"
+				w.add("IS_EQUAL_ON(")
 			else
-				return "TAG_Bool(IS_EQUAL_OO({v.register(expr1)},{v.register(expr2)}))"
+				w.add("IS_EQUAL_OO(")
 			end
 		end
+		w.add(v.register(expr1))
+		w.add(",")
+		w.add(v.register(expr2))
+		w.add("))")
 	end
 end
 
 redef class INot
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		return "TAG_Bool(!UNTAG_Bool({v.register(expr)}))"
+		if not need_result then return
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("TAG_Bool(!UNTAG_Bool(")
+		w.add(v.register(expr))
+		w.add("))")
 	end
 end
 
 redef class IOnce
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
+		v.add_location(location)
 		var i = v.new_number
 		var res = result.as(not null)
 		if res.stype.is_nullable then
@@ -751,13 +902,14 @@ redef class IOnce
 		end
 		v.indent
 		body.compile_to_c(v)
-		var e = v.register(result.as(not null))
+		var e = v.register(res)
 		v.add_instr("once_value_{i} = {e};")
 		v.add_instr("register_static_object(&once_value_{i});")
 		if res.stype.is_nullable then v.add_instr("once_bool_{i} = true;")
 		v.unindent
-		v.add_instr("} else {e} = once_value_{i};")
-		return e
+		v.add_instr("\} else {e} = once_value_{i};")
+		var w = new_result(v)
+		w.add(e)
 	end
 end
 
@@ -777,7 +929,9 @@ redef class IClosCall
 		args.append(v.registers(exprs))
 
 		var s = "(({v.clostypes[closure_decl]})({ivar}))({args.join(", ")})"
-		store_result(v, s)
+		var w = new Writer
+		w.add(s)
+		store_result(v, w)
 
 		# Intercept escape
 		v.add_instr("if ({args.first}->has_broke) \{")
@@ -790,20 +944,25 @@ redef class IClosCall
 		v.unindent
 		v.add_instr("\}")
 	end
-
-	redef fun inner_compile_to_c(v) do abort
 end
 
 redef class IHasClos
-	redef fun inner_compile_to_c(v)
+	redef fun compile_to_c(v)
 	do
-		var ivar: String
+		if not need_result then return
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("TAG_Bool(")
 		if v.closure then
-			ivar = "closctx->closure_funs[{v.closures[closure_decl]}]"
+			w.add("closctx->closure_funs[")
+			w.add(v.closures[closure_decl])
+			w.add("]")
 		else
-			ivar = "CREG[{v.closures[closure_decl]}]"
+			w.add("CREG[")
+			w.add(v.closures[closure_decl])
+			w.add("]")
 		end
-		return "TAG_Bool({ivar} != NULL)"
+		w.add(" != NULL)")
 	end
 end
 
@@ -840,7 +999,7 @@ redef class IClosureDef
 			v.add_instr("return {s};")
 		end
 		v.unindent
-		v.add_instr("}")
+		v.add_instr("\}")
 
 		# Restore things
 		cv.writer = writer_old
