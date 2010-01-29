@@ -21,6 +21,7 @@ import mmloader
 private import utils
 import primitive_info
 import program
+import compiling_writer
 
 redef class ToolContext
 	readable writable var _compdir: nullable String = null
@@ -41,42 +42,48 @@ end
 # Note also that this class is unefficient and poorly designed thus requires love.
 class CompilerVisitor
 	# Add a line in the current declaration block
-	fun add_decl(s: String...)
+	fun add_decl(s: String)
 	do
-		add_line_to(_ctx.decls, s)
+		add_line_to(_decl_writer, s)
 	end
 
 	# Add a line in the current instr block
-	fun add_instr(s: String...)
+	fun add_instr(s: String)
 	do
-		add_line_to(_ctx.instrs, s)
+		add_line_to(_writer, s)
 	end
 
-	fun add_line_to(a: Array[String], s: Array[String])
+
+	fun add_indent(w: Writer)
 	do
 		if _indent_level >= 8 then
-			a.add("\t\t")
+			w.add("\t\t")
 		else
 			for i in [0.._indent_level[ do
-				a.add("  ")
+				w.add("  ")
 			end
 		end
-		for i in s do
-			a.add(i)
-		end
-		a.add("\n")
+	end
+
+	fun add_line_to(w: Writer, s: String)
+	do
+		add_indent(w)
+		w.add(s)
+		w.add("\n")
 	end
 
 	# Add a assignment between a variable and an expression
 	fun add_assignment(v: String, s: String)
 	do
 		if v != s then
-			add_instr(v, " = ", s, ";")
+			var w = _writer
+			add_indent(w)
+			w.add(v)
+			w.add(" = ")
+			w.add(s)
+			w.add(";\n")
 		end
 	end
-
-	# C outputs written outside the current C function.
-	readable writable var _out_contexts: Array[CContext] = new Array[CContext]
 
 	# Return a unique new number for the instance
 	fun new_number: Int
@@ -99,20 +106,23 @@ class CompilerVisitor
 		if _indent_level < 0 then _indent_level = 0
 	end
 
-	# Return a big string containing all decl and instr
-	redef fun to_s
-	do
-		var out = new Array[String]
-		out.append(_ctx.decls)
-		out.append(_ctx.instrs)
-		return out.to_s
-	end
-
 	# The processed module
 	readable var _module: MMModule
 
-	# Where instr and decl are stored
-	readable writable var _ctx: CContext = new CContext
+	# Where header decl are stored (public stuff)
+	readable writable var _header_writer: Writer
+
+	# Where current instr are stored (current function declaration)
+	readable writable var _writer: Writer
+
+	# Where current decl are stored (current function instructions)
+	readable writable var _decl_writer: Writer
+
+	# Where body instr are stored (C functions body)
+	readable writable var _top_writer: Writer
+
+	# Where body decl are stored (private C function proptypes and typedefs)
+	readable writable var _top_decl_writer: Writer
 
 	# The current indent lever
 	readable writable var _indent_level: Int = 0
@@ -125,28 +135,15 @@ class CompilerVisitor
 	do
 		_module = module
 		_program = p
-	end
-end
 
-# Where instr and decl are stored for a module
-# Note that this class is as badly designed as CompilerVisitor
-class CContext
-	readable var _decls: Array[String] = new Array[String] 
-	readable var _instrs: Array[String] = new Array[String]
-
-	fun append(c: CContext)
-	do
-		_instrs.append(c.decls)
-		_instrs.append(c.instrs)
+		var w = new Writer
+		_header_writer = w
+		_decl_writer = w
+		w = new Writer
+		_writer = w
+		_top_writer = w
+		_top_decl_writer = w.sub
 	end
-	
-	fun merge(c: CContext)
-	do
-		_decls.append(c.decls)
-		_instrs.append(c.instrs)
-	end
-
-	init do end
 end
 
 redef class MMGlobalProperty

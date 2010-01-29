@@ -163,7 +163,13 @@ class I2CCompilerVisitor
 	do
 		var l = _next_location
 		if l != null then
-			visitor.add_instr("/* ", l.file, ":", l.line_start.to_s, " */")
+			var w = visitor.writer
+			visitor.add_indent(w)
+			w.add("/* ")
+			w.add(l.file)
+			w.add(":")
+			w.add(l.line_start.to_s)
+			w.add(" */\n")
 			_next_location = null
 		end
 		visitor.add_instr(s)
@@ -252,10 +258,10 @@ redef class IRoutine
 		else
 			p = cparams.join(", ")
 		end
-		if human_name != null then v.add_decl("#define LOCATE_", cname, " \"", human_name, "\"")
-		v.add_decl(r, " ", cname, "(", p, ");")
-		v.add_decl("typedef ", r, " (*", cname, "_t)(", p, ");")
-		v.add_instr(r, " ", cname, "(", p, ")\{")
+		if human_name != null then v.add_decl("#define LOCATE_{cname} \"{human_name}\"")
+		v.add_decl("{r} {cname}({p});")
+		v.add_decl("typedef {r} (*{cname}_t)({p});")
+		v.add_instr("{r} {cname}({p})\{")
 		v.indent
 		return cargs
 	end
@@ -817,28 +823,28 @@ redef class IClosureDef
 		v.local_labels = new HashSet[ISeq]
 
 		# We are now in a new C context
-		var ctx_old = cv.ctx
-		cv.ctx = new CContext
-		cv.out_contexts.add(cv.ctx)
+		var decl_writer_old = cv.decl_writer
+		var writer_old = cv.writer
+		cv.writer = cv.top_writer.sub
+		cv.decl_writer = cv.header_writer.sub
 
 		# Generate the C function
 		var cname = "OC_{v.basecname}_{v.new_number}"
 		var args = compile_signature_to_c(v.visitor, cname, null, "struct stack_frame_t *closctx", null)
-		var ctx_old2 = cv.ctx
-		cv.ctx = new CContext
+		cv.decl_writer = cv.writer.sub
+
 		var s = compile_inside_to_c(v, args)
 		if s == null then
 			v.add_instr("return;")
 		else
 			v.add_instr("return {s};")
 		end
-		ctx_old2.append(cv.ctx)
-		cv.ctx = ctx_old2
 		v.unindent
 		v.add_instr("}")
 
 		# Restore things
-		cv.ctx = ctx_old
+		cv.writer = writer_old
+		cv.decl_writer = decl_writer_old
 		v.closure = cfc_old
 		v.local_labels = lls_old
 		return "((fun_t){cname})"

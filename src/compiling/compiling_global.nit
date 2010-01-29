@@ -387,11 +387,10 @@ redef class MMLocalClass
 				# Generate INIT_ATTRIBUTES routine
 				var cname = "INIT_ATTRIBUTES__{name}"
 				var args = init_var_iroutine.compile_signature_to_c(v, cname, "init var of {name}", null, null)
-				var ctx_old = v.ctx
-				v.ctx = new CContext
+				var decl_writer_old = v.decl_writer
+				v.decl_writer = v.writer.sub
 				init_var_iroutine.compile_to_c(v, cname, args)
-				ctx_old.append(v.ctx)
-				v.ctx = ctx_old
+				v.decl_writer = decl_writer_old
 				v.unindent
 				v.add_instr("}")
 			end
@@ -414,11 +413,10 @@ redef class MMLocalClass
 				# Compile CHECKNAME
 				var cname = "CHECKNEW_{name}"
 				var args = checknew_iroutine.compile_signature_to_c(v, cname, "check new {name}", null, null)
-				var ctx_old = v.ctx
-				v.ctx = new CContext
+				var decl_writer_old = v.decl_writer
+				v.decl_writer = v.writer.sub
 				checknew_iroutine.compile_to_c(v, cname, args)
-				ctx_old.append(v.ctx)
-				v.ctx = ctx_old
+				v.decl_writer = decl_writer_old
 				v.unindent
 				v.add_instr("}")
 			end
@@ -434,13 +432,12 @@ redef class MMLocalClass
 
 				var cname = "NEW_{self}_{p.global.intro.cname}"
 				var new_args = new_instance_iroutine[p].compile_signature_to_c(v, cname, "new {self} {p.full_name}", null, null)
-				var ctx_old = v.ctx
-				v.ctx = new CContext
+				var decl_writer_old = v.decl_writer
+				v.decl_writer = v.writer.sub
 				v.add_instr(init_table_decl)
 				var e = new_instance_iroutine[p].compile_to_c(v, cname, new_args).as(not null)
 				v.add_instr("return {e};")
-				ctx_old.append(v.ctx)
-				v.ctx = ctx_old
+				v.decl_writer = decl_writer_old
 				v.unindent
 				v.add_instr("}")
 			end
@@ -470,10 +467,10 @@ redef class MMMethod
 		var more_params: nullable String = null
 		if global.is_init then more_params = "int* init_table"
 		var args = ir.compile_signature_to_c(v, cname, full_name, null, more_params)
-		var ctx_old = v.ctx
-		v.ctx = new CContext
-
-		v.out_contexts.clear
+		var writer_old = v.writer
+		v.writer = v.writer.sub
+		var decl_writer_old = v.decl_writer
+		v.decl_writer = v.writer.sub
 
 		var itpos: nullable String = null
 		if global.is_init then
@@ -490,15 +487,13 @@ redef class MMMethod
 		if s == null then
 			v.add_instr("return;")
 		else
-			v.add_instr("return ", s, ";")
+			v.add_instr("return {s};")
 		end
-
-		ctx_old.append(v.ctx)
-		v.ctx = ctx_old
 		v.unindent
 		v.add_instr("}")
 
-		for ctx in v.out_contexts do v.ctx.merge(ctx)
+		v.writer = writer_old
+		v.decl_writer = decl_writer_old
 	end
 end
 
