@@ -49,10 +49,6 @@ class Program
 	# Would be null if there is no main method
 	readable var _main_class: nullable MMLocalClass = null
 
-	# When we are using global compilation, we generate _glob files instead
-	# of _sep files so that we do not corrupt separate compilation
-	fun get_file_ending: String do return if tc.global then "_glob" else "_sep"
-
 	# This method will ensure that all the metamodel is computed before we
 	# start using all the classes
 	private fun finish_processing_classes do
