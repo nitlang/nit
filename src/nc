@@ -19,24 +19,33 @@ NITC="../c_src/nitc"
 NITCOPTS="-v -W"
 CSRC=$( (cd ../c_src; pwd) )
 
+trap_action() {
+	test -n $sub_command && kill $sub_command
+	test -e $pipe && rm -f $pipe
+	exit 1
+}
+
 name=`basename $0`
 case $name in
 	nc) opts="--clibdir ../c_src/clib";;
 	nc2) opts="-p 2"; NITC="./nitc";;
 	nc3) opts="-p 3"; NITC="./nitc_2";;
 	nc4) opts="-p 4"; NITC="./nitc_3";;
+	nc5) opts="-p 5"; NITC="./nitc_4";;
 	*) echo "unknown mode $name"; exit 1;;
 esac
 
 ./git-gen-version.sh "$name"
 
+trap trap_action INT TERM
 echo ${NITC} ${NITCOPTS} ${opts} "$@"
-k=$(mktemp nc.stderr.XXXXX)
-rm "$k"
-trap "rm -f $k; exit 1" INT TERM
-mkfifo "$k"
-./showerr.sh <"$k" &
-${NITC} ${NITCOPTS} ${opts} "$@" 2>"$k"
+pipe=$(mktemp nc.stderr.XXXXX)
+rm "$pipe"
+mkfifo "$pipe"
+./showerr.sh <"$pipe" &
+sub_command=$!
+${NITC} ${NITCOPTS} ${opts} "$@" 2>"$pipe"
 err=$?
-rm "$k"
+rm "$pipe"
+wait
 exit $err
