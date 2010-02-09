@@ -323,11 +323,7 @@ redef class MMLocalClass
 		v.add_decl("")
 		var pi = primitive_info
 		v.add_decl("extern const classtable_elt_t VFT_{name}[];")
-		if name == "NativeArray".to_symbol then
-			v.add_decl("val_t NEW_NativeArray(size_t length, size_t size);")
-		else if pi == null then
-			# v.add_decl("val_t NEW_{name}(void);")
-		else if not pi.tagged then
+		if pi != null and not pi.tagged then
 			var t = pi.cname
 			var tbox = "struct TBOX_{name}"
 			v.add_decl("{tbox} \{ const classtable_elt_t * vft; bigint object_id; {t} val;};")

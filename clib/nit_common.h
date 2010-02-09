@@ -152,5 +152,5 @@ void nit_exit(int);
 
 void prepare_signals(void);
 extern classtable_t TAG2VFT[4];
-
+val_t NEW_NativeArray(size_t length, size_t size);
 #endif
