@@ -78,8 +78,7 @@ special ICodeVisitor
 		if ic isa IAttrIsset then
 			var result = ic.result
 			assert result != null
-			var e =  new INative("TAG_Bool(true)", null)
-			e.is_pure = true
+			var e =  new IBoolValue(true)
 			e.result = result
 			current_icode.insert_before(e)
 			current_icode.delete

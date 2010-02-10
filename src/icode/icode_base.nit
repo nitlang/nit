@@ -340,6 +340,61 @@ special ICodeN
 	redef readable writable var _is_pure: Bool = false
 end
 
+# A literal Int value
+class IIntValue
+special ICode0
+	# The value
+	readable var _value: String
+
+	init(v: String) do _value = v
+
+	redef fun is_pure do return true
+end
+
+# A literal Bool value
+class IBoolValue
+special ICode0
+	# The value
+	readable var _value: Bool
+
+	init(v: Bool) do _value = v
+
+	redef fun is_pure do return true
+end
+
+# A literal NativeString value
+class IStringValue
+special ICode0
+	# The value
+	readable var _value: String
+
+	init(v: String) do _value = v
+
+	redef fun is_pure do return true
+end
+
+# A literal Float value
+class IFloatValue
+special ICode0
+	# The value
+	readable var _value: String
+
+	init(v: String) do _value = v
+
+	redef fun is_pure do return true
+end
+
+# A literal Char value
+class ICharValue
+special ICode0
+	# The value
+	readable var _value: String
+
+	init(v: String) do _value = v
+
+	redef fun is_pure do return true
+end
+
 # A register assigment
 # expr is the assigned value
 # result is the register assigned

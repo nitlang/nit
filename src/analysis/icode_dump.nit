@@ -379,6 +379,41 @@ redef class INative
 	end
 end
 
+redef class IIntValue
+	redef fun dump_intern(icd)
+	do
+		return "INTVALUE {value}"
+	end
+end
+
+redef class IBoolValue
+	redef fun dump_intern(icd)
+	do
+		return "BOOLVALUE {value}"
+	end
+end
+
+redef class IStringValue
+	redef fun dump_intern(icd)
+	do
+		return "STRINGVALUE {value}"
+	end
+end
+
+redef class ICharValue
+	redef fun dump_intern(icd)
+	do
+		return "CHARVALUE {value}"
+	end
+end
+
+redef class IFloatValue
+	redef fun dump_intern(icd)
+	do
+		return "FLOATVALUE {value}"
+	end
+end
+
 redef class IMove
 	redef fun dump_intern(icd)
 	do

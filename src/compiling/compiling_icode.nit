@@ -696,6 +696,53 @@ redef class INative
 	end
 end
 
+redef class IIntValue
+	redef fun compile_to_c(v)
+	do
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("TAG_Int(").add(value.to_s).add(")")
+	end
+end
+
+redef class IBoolValue
+	redef fun compile_to_c(v)
+	do
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("TAG_Bool(")
+		if value then w.add("true") else w.add("false")
+		w.add(")")
+	end
+end
+
+redef class ICharValue
+	redef fun compile_to_c(v)
+	do
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("TAG_Char(").add(value).add(")")
+	end
+end
+
+redef class IFloatValue
+	redef fun compile_to_c(v)
+	do
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("BOX_Float(").add(value).add(")")
+	end
+end
+
+redef class IStringValue
+	redef fun compile_to_c(v)
+	do
+		v.add_location(location)
+		var w = new_result(v)
+		w.add("BOX_NativeString(\"").add(value).add("\")")
+	end
+end
+
 redef class IAbort
 	redef fun compile_to_c(v)
 	do

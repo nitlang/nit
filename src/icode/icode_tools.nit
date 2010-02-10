@@ -390,6 +390,41 @@ redef class INative
 	end
 end
 
+redef class IIntValue
+	redef fun inner_dup_with(d)
+	do
+		return new IIntValue(value)
+	end
+end
+
+redef class IBoolValue
+	redef fun inner_dup_with(d)
+	do
+		return new IBoolValue(value)
+	end
+end
+
+redef class IStringValue
+	redef fun inner_dup_with(d)
+	do
+		return new IStringValue(value)
+	end
+end
+
+redef class IFloatValue
+	redef fun inner_dup_with(d)
+	do
+		return new IFloatValue(value)
+	end
+end
+
+redef class ICharValue
+	redef fun inner_dup_with(d)
+	do
+		return new ICharValue(value)
+	end
+end
+
 redef class IMove
 	redef fun inner_dup_with(d)
 	do

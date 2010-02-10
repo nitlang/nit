@@ -39,7 +39,7 @@ special ICodeBuilder
 	fun add_new_array(stype: MMType, length: Int): IRegister
 	do
 		var prop = visitor.get_method(stype, once "with_capacity".to_symbol)
-		var ni = expr(new INative("TAG_Int({length})", null), visitor.type_int)
+		var ni = expr(new IIntValue(length.to_s), visitor.type_int)
 		return expr(new INew(stype, prop, [ni]), stype)
 	end
 
@@ -1008,21 +1008,21 @@ end
 redef class AIntExpr
 	redef fun generate_icode(v)
 	do
-		return v.expr(new INative("TAG_Int({n_number.text})", null), stype)
+		return v.expr(new IIntValue(n_number.text), stype)
 	end
 end
 
 redef class AFloatExpr
 	redef fun generate_icode(v)
 	do
-		return v.expr(new INative("BOX_Float({n_float.text})", null), stype)
+		return v.expr(new IFloatValue(n_float.text), stype)
 	end
 end
 
 redef class ACharExpr
 	redef fun generate_icode(v)
 	do
-		return v.expr(new INative("TAG_Char({n_char.text})", null), stype)
+		return v.expr(new ICharValue(n_char.text), stype)
 	end
 end
 
@@ -1034,8 +1034,8 @@ redef class AStringFormExpr
 		var ionce = new IOnce
 		var reg = v.expr(ionce, stype)
 		v.seq = ionce.body
-		var ns = v.expr(new INative("BOX_NativeString(\"{_cstring.as(not null)}\")", null), v.visitor.type_nativestring)
-		var ni = v.expr(new INative("TAG_Int({_cstring_length.as(not null)})", null), v.visitor.type_int)
+		var ns = v.expr(new IStringValue(_cstring.as(not null)), v.visitor.type_nativestring)
+		var ni = v.expr(new IIntValue(_cstring_length.to_s), v.visitor.type_int)
 		var prop = v.visitor.get_method(stype, once "with_native".to_symbol)
 		var e = v.expr(new INew(stype, prop, [ns, ni]), stype)
 		v.add_assignment(reg, e)
