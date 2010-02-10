@@ -679,19 +679,210 @@ redef class INative
 	redef fun compile_to_c(v)
 	do
 		v.add_location(location)
-		var w = new_result(v)
-		if exprs.is_empty then
-			w.add(code)
+		if method.is_intern then
+			compile_intern_method_to_c(v)
 		else
-			var i = 0
-			var c = code.split_with("@@@")
-			for s in c do
-				w.add(s)
-				if i < exprs.length and i < c.length-1 then
-					w.add(v.register(exprs[i]))
-				end
-				i += 1
+			compile_extern_method_to_c(v)
+		end
+	end
+
+	fun compile_extern_method_to_c(v: I2CCompilerVisitor)
+	do
+		var ename = method.extern_name.as(not null)#"{method.module.name}_{method.local_class.name}_{method.local_class.name}_{method.name}_{method.signature.arity}"
+		var sig = method.signature
+		assert exprs.length == sig.arity + 1
+
+		var regs = v.registers(exprs)
+
+		var args = new Array[String]
+		args.add(sig.recv.unboxtype(regs[0]))
+		for i in [0..sig.arity[ do
+			args.add(sig[i].unboxtype(regs[i+1]))
+		end
+		var s = "{ename}({args.join(", ")})"
+
+		if need_result then s = sig.return_type.boxtype(s)
+		var w = new_result(v)
+		w.add(s)
+	end
+
+	fun compile_intern_method_to_c(v: I2CCompilerVisitor)
+	do
+		var sig = method.signature
+		assert exprs.length == sig.arity + 1
+		var c = method.local_class.name
+		var n = method.name
+		var regs = v.registers(exprs)
+		var s: nullable String = null
+		if c == once "Int".to_symbol then
+			if n == once "object_id".to_symbol then
+				s = regs[0]
+			else if n == once "unary -".to_symbol then
+				s = "TAG_Int(-UNTAG_Int({regs[0]}))"
+			else if n == once "output".to_symbol then
+				s = "printf(\"%ld\\n\", UNTAG_Int({regs[0]}));"
+			else if n == once "ascii".to_symbol then
+				s = "TAG_Char(UNTAG_Int({regs[0]}))"
+			else if n == once "succ".to_symbol then
+				s = "TAG_Int(UNTAG_Int({regs[0]})+1)"
+			else if n == once "prec".to_symbol then
+				s = "TAG_Int(UNTAG_Int({regs[0]})-1)"
+			else if n == once "to_f".to_symbol then
+				s = "BOX_Float((float)UNTAG_Int({regs[0]}))"
+			else if n == once "+".to_symbol then
+				s = "TAG_Int(UNTAG_Int({regs[0]})+UNTAG_Int({regs[1]}))"
+			else if n == once "-".to_symbol then
+				s = "TAG_Int(UNTAG_Int({regs[0]})-UNTAG_Int({regs[1]}))"
+			else if n == once "*".to_symbol then
+				s = "TAG_Int(UNTAG_Int({regs[0]})*UNTAG_Int({regs[1]}))"
+			else if n == once "/".to_symbol then
+				s = "TAG_Int(UNTAG_Int({regs[0]})/UNTAG_Int({regs[1]}))"
+			else if n == once "%".to_symbol then
+				s = "TAG_Int(UNTAG_Int({regs[0]})%UNTAG_Int({regs[1]}))"
+			else if n == once "<".to_symbol then
+				s = "TAG_Bool(UNTAG_Int({regs[0]})<UNTAG_Int({regs[1]}))"
+			else if n == once ">".to_symbol then
+				s = "TAG_Bool(UNTAG_Int({regs[0]})>UNTAG_Int({regs[1]}))"
+			else if n == once "<=".to_symbol then
+				s = "TAG_Bool(UNTAG_Int({regs[0]})<=UNTAG_Int({regs[1]}))"
+			else if n == once ">=".to_symbol then
+				s = "TAG_Bool(UNTAG_Int({regs[0]})>=UNTAG_Int({regs[1]}))"
+			else if n == once "lshift".to_symbol then
+				s = "TAG_Int(UNTAG_Int({regs[0]})<<UNTAG_Int({regs[1]}))"
+			else if n == once "rshift".to_symbol then
+				s = "TAG_Int(UNTAG_Int({regs[0]})>>UNTAG_Int({regs[1]}))"
+			else if n == once "==".to_symbol then
+				s = "TAG_Bool(({regs[0]})==({regs[1]}))"
+			else if n == once "!=".to_symbol then
+				s = "TAG_Bool(({regs[0]})!=({regs[1]}))"
 			end
+		else if c == once "Float".to_symbol then
+			if n == once "object_id".to_symbol then
+				s = "TAG_Int((bigint)UNBOX_Float({regs[0]}))"
+			else if n == once "unary -".to_symbol then
+				s = "BOX_Float(-UNBOX_Float({regs[0]}))"
+			else if n == once "output".to_symbol then
+				s = "printf(\"%f\\n\", UNBOX_Float({regs[0]}));"
+			else if n == once "to_i".to_symbol then
+				s = "TAG_Int((bigint)UNBOX_Float({regs[0]}))"
+			else if n == once "+".to_symbol then
+				s = "BOX_Float(UNBOX_Float({regs[0]})+UNBOX_Float({regs[1]}))"
+			else if n == once "-".to_symbol then
+				s = "BOX_Float(UNBOX_Float({regs[0]})-UNBOX_Float({regs[1]}))"
+			else if n == once "*".to_symbol then
+				s = "BOX_Float(UNBOX_Float({regs[0]})*UNBOX_Float({regs[1]}))"
+			else if n == once "/".to_symbol then
+				s = "BOX_Float(UNBOX_Float({regs[0]})/UNBOX_Float({regs[1]}))"
+			else if n == once "<".to_symbol then
+				s = "TAG_Bool(UNBOX_Float({regs[0]})<UNBOX_Float({regs[1]}))"
+			else if n == once ">".to_symbol then
+				s = "TAG_Bool(UNBOX_Float({regs[0]})>UNBOX_Float({regs[1]}))"
+			else if n == once "<=".to_symbol then
+				s = "TAG_Bool(UNBOX_Float({regs[0]})<=UNBOX_Float({regs[1]}))"
+			else if n == once ">=".to_symbol then
+				s = "TAG_Bool(UNBOX_Float({regs[0]})>=UNBOX_Float({regs[1]}))"
+			end
+		else if c == once "Char".to_symbol then
+			if n == once "object_id".to_symbol then
+				s = "TAG_Int(UNTAG_Char({regs[0]}))"
+			else if n == once "unary -".to_symbol then
+				s = "TAG_Char(-UNTAG_Char({regs[0]}))"
+			else if n == once "output".to_symbol then
+				s = "printf(\"%c\", (unsigned char)UNTAG_Char({regs[0]}));"
+			else if n == once "ascii".to_symbol then
+				s = "TAG_Int((unsigned char)UNTAG_Char({regs[0]}))"
+			else if n == once "succ".to_symbol then
+				s = "TAG_Char(UNTAG_Char({regs[0]})+1)"
+			else if n == once "prec".to_symbol then
+				s = "TAG_Char(UNTAG_Char({regs[0]})-1)"
+			else if n == once "to_i".to_symbol then
+				s = "TAG_Int(UNTAG_Char({regs[0]})-'0')"
+			else if n == once "+".to_symbol then
+				s = "TAG_Char(UNTAG_Char({regs[0]})+UNTAG_Char({regs[1]}))"
+			else if n == once "-".to_symbol then
+				s = "TAG_Char(UNTAG_Char({regs[0]})-UNTAG_Char({regs[1]}))"
+			else if n == once "*".to_symbol then
+				s = "TAG_Char(UNTAG_Char({regs[0]})*UNTAG_Char({regs[1]}))"
+			else if n == once "/".to_symbol then
+				s = "TAG_Char(UNTAG_Char({regs[0]})/UNTAG_Char({regs[1]}))"
+			else if n == once "%".to_symbol then
+				s = "TAG_Char(UNTAG_Char({regs[0]})%UNTAG_Char({regs[1]}))"
+			else if n == once "<".to_symbol then
+				s = "TAG_Bool(UNTAG_Char({regs[0]})<UNTAG_Char({regs[1]}))"
+			else if n == once ">".to_symbol then
+				s = "TAG_Bool(UNTAG_Char({regs[0]})>UNTAG_Char({regs[1]}))"
+			else if n == once "<=".to_symbol then
+				s = "TAG_Bool(UNTAG_Char({regs[0]})<=UNTAG_Char({regs[1]}))"
+			else if n == once ">=".to_symbol then
+				s = "TAG_Bool(UNTAG_Char({regs[0]})>=UNTAG_Char({regs[1]}))"
+			else if n == once "==".to_symbol then
+				s = "TAG_Bool(({regs[0]})==({regs[1]}))"
+			else if n == once "!=".to_symbol then
+				s = "TAG_Bool(({regs[0]})!=({regs[1]}))"
+			end
+		else if c == once "Bool".to_symbol then
+			if n == once "object_id".to_symbol then
+				s = "TAG_Int(UNTAG_Bool({regs[0]}))"
+			else if n == once "unary -".to_symbol then
+				s = "TAG_Bool(-UNTAG_Bool({regs[0]}))"
+			else if n == once "output".to_symbol then
+				s = "(void)printf(UNTAG_Bool({regs[0]})?\"true\\n\":\"false\\n\");"
+			else if n == once "ascii".to_symbol then
+				s = "TAG_Bool(UNTAG_Bool({regs[0]}))"
+			else if n == once "to_i".to_symbol then
+				s = "TAG_Int(UNTAG_Bool({regs[0]}))"
+			else if n == once "==".to_symbol then
+				s = "TAG_Bool(({regs[0]})==({regs[1]}))"
+			else if n == once "!=".to_symbol then
+				s = "TAG_Bool(({regs[0]})!=({regs[1]}))"
+			end
+		else if c == once "NativeArray".to_symbol then
+			if n == once "object_id".to_symbol then
+				s = "TAG_Int(((Nit_NativeArray){regs[0]})->object_id)"
+			else if n == once "[]".to_symbol then
+				s = "((Nit_NativeArray){regs[0]})->val[UNTAG_Int({regs[1]})]"
+			else if n == once "[]=".to_symbol then
+				s = "((Nit_NativeArray){regs[0]})->val[UNTAG_Int({regs[1]})]={regs[2]}"
+			else if n == once "copy_to".to_symbol then
+				s = "(void)memcpy(((Nit_NativeArray ){regs[1]})->val, ((Nit_NativeArray){regs[0]})->val, UNTAG_Int({regs[2]})*sizeof(val_t))"
+			end
+		else if c == once "NativeString".to_symbol then
+			if n == once "object_id".to_symbol then
+				s = "TAG_Int(UNBOX_NativeString({regs[0]}))"
+			else if n == once "atoi".to_symbol then
+				s = "TAG_Int(atoi(UNBOX_NativeString({regs[0]})))"
+			else if n == once "[]".to_symbol then
+				s = "TAG_Char(UNBOX_NativeString({regs[0]})[UNTAG_Int({regs[1]})])"
+			else if n == once "[]=".to_symbol then
+				s = "UNBOX_NativeString({regs[0]})[UNTAG_Int({regs[1]})]=UNTAG_Char({regs[2]});"
+			else if n == once "copy_to".to_symbol then
+				s = "(void)memcpy(UNBOX_NativeString({regs[1]})+UNTAG_Int({regs[4]}), UNBOX_NativeString({regs[0]})+UNTAG_Int({regs[3]}), UNTAG_Int({regs[2]}));"
+			end
+		else if n == once "object_id".to_symbol then
+			s = "TAG_Int((bigint)((obj_t){regs[0]})[1].object_id)"
+		else if n == once "sys".to_symbol then
+			s = "(G_sys)"
+		else if n == once "is_same_type".to_symbol then
+			s = "TAG_Bool((VAL2VFT({regs[0]})==VAL2VFT({regs[1]})))"
+		else if n == once "exit".to_symbol then
+			s = "exit(UNTAG_Int({regs[1]}));"
+		else if n == once "calloc_array".to_symbol then
+			s = "NEW_NativeArray(UNTAG_Int({regs[1]}), sizeof(val_t))"
+		else if n == once "calloc_string".to_symbol then
+			s = "BOX_NativeString((char*)raw_alloc((UNTAG_Int({regs[1]}) * sizeof(char))))"
+		end
+		if s == null then
+			var ll = location
+			if ll != null then v.add_instr("fprintf(stderr, \"{ll.to_s}: \");")
+			v.add_instr("fprintf(stderr, \"Fatal error: unknown intern method {method.full_name}.\\n\");")
+			v.add_instr("nit_exit(1);")
+			s = "NIT_NULL"
+		end
+		if result == null then
+			v.new_instr.add(s).add(";\n")
+		else if need_result then
+			var w = new_result(v)
+			w.add(s)
 		end
 	end
 end

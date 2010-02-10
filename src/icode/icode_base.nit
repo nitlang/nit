@@ -322,19 +322,18 @@ special ICodeN
 	end
 end
 
-# A native C code
-# Mainly used to implements things that do not have a specific ICode yet
+# A native inlined call
+# Native are associated to local properties to distinguish them
 # expr are the arguments
 class INative
 special ICodeN
-	# The native C code
-	# Special character sequence '@@@' will be substitued in order with the arguments
-	readable var _code: String
+	# The associated local property
+	readable var _method: MMMethod
 
-	init(c: String, e: nullable Sequence[IRegister])
+	init(m: MMMethod, e: nullable Sequence[IRegister])
 	do
 		super(e)
-		_code = c
+		_method = m
 	end
 
 	redef readable writable var _is_pure: Bool = false

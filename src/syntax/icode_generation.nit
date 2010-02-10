@@ -397,21 +397,11 @@ redef class AExternMethPropdef
 	redef fun fill_iroutine(v, method)
 	do
 		var params = v.iroutine.params
-		var ename = method.extern_name.as(not null)
-		var sig = method.signature
-		assert params.length == sig.arity + 1
-		var args = new Array[String]
-		args.add(sig.recv.unboxtype("@@@"))
-		for i in [0..sig.arity[ do
-			args.add(sig[i].unboxtype("@@@"))
-		end
-		var s = "{ename}({args.join(", ")})"
-		var rtype = sig.return_type
+		var rtype = method.signature.return_type
 		if rtype != null then
-			s = rtype.boxtype(s)
-			v.add_return_value(v.expr(new INative(s, params), rtype))
+			v.add_return_value(v.expr(new INative(method, params), rtype))
 		else
-			v.stmt(new INative(s, params))
+			v.stmt(new INative(method, params))
 		end
 	end
 end
@@ -419,187 +409,12 @@ end
 redef class AInternMethPropdef
 	redef fun fill_iroutine(v, method)
 	do
-		var p = v.iroutine.params.to_a
-		var c = method.local_class.name
-		var n = method.name
-		var s: nullable String = null
-		if c == once "Int".to_symbol then
-			if n == once "object_id".to_symbol then
-				s = "@@@"
-			else if n == once "unary -".to_symbol then
-				s = "TAG_Int(-UNTAG_Int(@@@))"
-			else if n == once "output".to_symbol then
-				s = "printf(\"%ld\\n\", UNTAG_Int(@@@));"
-			else if n == once "ascii".to_symbol then
-				s = "TAG_Char(UNTAG_Int(@@@))"
-			else if n == once "succ".to_symbol then
-				s = "TAG_Int(UNTAG_Int(@@@)+1)"
-			else if n == once "prec".to_symbol then
-				s = "TAG_Int(UNTAG_Int(@@@)-1)"
-			else if n == once "to_f".to_symbol then
-				s = "BOX_Float((float)UNTAG_Int(@@@))"
-			else if n == once "+".to_symbol then
-				s = "TAG_Int(UNTAG_Int(@@@)+UNTAG_Int(@@@))"
-			else if n == once "-".to_symbol then
-				s = "TAG_Int(UNTAG_Int(@@@)-UNTAG_Int(@@@))"
-			else if n == once "*".to_symbol then
-				s = "TAG_Int(UNTAG_Int(@@@)*UNTAG_Int(@@@))"
-			else if n == once "/".to_symbol then
-				s = "TAG_Int(UNTAG_Int(@@@)/UNTAG_Int(@@@))"
-			else if n == once "%".to_symbol then
-				s = "TAG_Int(UNTAG_Int(@@@)%UNTAG_Int(@@@))"
-			else if n == once "<".to_symbol then
-				s = "TAG_Bool(UNTAG_Int(@@@)<UNTAG_Int(@@@))"
-			else if n == once ">".to_symbol then
-				s = "TAG_Bool(UNTAG_Int(@@@)>UNTAG_Int(@@@))"
-			else if n == once "<=".to_symbol then
-				s = "TAG_Bool(UNTAG_Int(@@@)<=UNTAG_Int(@@@))"
-			else if n == once ">=".to_symbol then
-				s = "TAG_Bool(UNTAG_Int(@@@)>=UNTAG_Int(@@@))"
-			else if n == once "lshift".to_symbol then
-				s = "TAG_Int(UNTAG_Int(@@@)<<UNTAG_Int(@@@))"
-			else if n == once "rshift".to_symbol then
-				s = "TAG_Int(UNTAG_Int(@@@)>>UNTAG_Int(@@@))"
-			else if n == once "==".to_symbol then
-				s = "TAG_Bool((@@@)==(@@@))"
-			else if n == once "!=".to_symbol then
-				s = "TAG_Bool((@@@)!=(@@@))"
-			end
-		else if c == once "Float".to_symbol then
-			if n == once "object_id".to_symbol then
-				s = "TAG_Int((bigint)UNBOX_Float(@@@))"
-			else if n == once "unary -".to_symbol then
-				s = "BOX_Float(-UNBOX_Float(@@@))"
-			else if n == once "output".to_symbol then
-				s = "printf(\"%f\\n\", UNBOX_Float(@@@));"
-			else if n == once "to_i".to_symbol then
-				s = "TAG_Int((bigint)UNBOX_Float(@@@))"
-			else if n == once "+".to_symbol then
-				s = "BOX_Float(UNBOX_Float(@@@)+UNBOX_Float(@@@))"
-			else if n == once "-".to_symbol then
-				s = "BOX_Float(UNBOX_Float(@@@)-UNBOX_Float(@@@))"
-			else if n == once "*".to_symbol then
-				s = "BOX_Float(UNBOX_Float(@@@)*UNBOX_Float(@@@))"
-			else if n == once "/".to_symbol then
-				s = "BOX_Float(UNBOX_Float(@@@)/UNBOX_Float(@@@))"
-			else if n == once "<".to_symbol then
-				s = "TAG_Bool(UNBOX_Float(@@@)<UNBOX_Float(@@@))"
-			else if n == once ">".to_symbol then
-				s = "TAG_Bool(UNBOX_Float(@@@)>UNBOX_Float(@@@))"
-			else if n == once "<=".to_symbol then
-				s = "TAG_Bool(UNBOX_Float(@@@)<=UNBOX_Float(@@@))"
-			else if n == once ">=".to_symbol then
-				s = "TAG_Bool(UNBOX_Float(@@@)>=UNBOX_Float(@@@))"
-			end
-		else if c == once "Char".to_symbol then
-			if n == once "object_id".to_symbol then
-				s = "TAG_Int(UNTAG_Char(@@@))"
-			else if n == once "unary -".to_symbol then
-				s = "TAG_Char(-UNTAG_Char(@@@))"
-			else if n == once "output".to_symbol then
-				s = "printf(\"%c\", (unsigned char)UNTAG_Char(@@@));"
-			else if n == once "ascii".to_symbol then
-				s = "TAG_Int((unsigned char)UNTAG_Char(@@@))"
-			else if n == once "succ".to_symbol then
-				s = "TAG_Char(UNTAG_Char(@@@)+1)"
-			else if n == once "prec".to_symbol then
-				s = "TAG_Char(UNTAG_Char(@@@)-1)"
-			else if n == once "to_i".to_symbol then
-				s = "TAG_Int(UNTAG_Char(@@@)-'0')"
-			else if n == once "+".to_symbol then
-				s = "TAG_Char(UNTAG_Char(@@@)+UNTAG_Char(@@@))"
-			else if n == once "-".to_symbol then
-				s = "TAG_Char(UNTAG_Char(@@@)-UNTAG_Char(@@@))"
-			else if n == once "*".to_symbol then
-				s = "TAG_Char(UNTAG_Char(@@@)*UNTAG_Char(@@@))"
-			else if n == once "/".to_symbol then
-				s = "TAG_Char(UNTAG_Char(@@@)/UNTAG_Char(@@@))"
-			else if n == once "%".to_symbol then
-				s = "TAG_Char(UNTAG_Char(@@@)%UNTAG_Char(@@@))"
-			else if n == once "<".to_symbol then
-				s = "TAG_Bool(UNTAG_Char(@@@)<UNTAG_Char(@@@))"
-			else if n == once ">".to_symbol then
-				s = "TAG_Bool(UNTAG_Char(@@@)>UNTAG_Char(@@@))"
-			else if n == once "<=".to_symbol then
-				s = "TAG_Bool(UNTAG_Char(@@@)<=UNTAG_Char(@@@))"
-			else if n == once ">=".to_symbol then
-				s = "TAG_Bool(UNTAG_Char(@@@)>=UNTAG_Char(@@@))"
-			else if n == once "==".to_symbol then
-				s = "TAG_Bool((@@@)==(@@@))"
-			else if n == once "!=".to_symbol then
-				s = "TAG_Bool((@@@)!=(@@@))"
-			end
-		else if c == once "Bool".to_symbol then
-			if n == once "object_id".to_symbol then
-				s = "TAG_Int(UNTAG_Bool(@@@))"
-			else if n == once "unary -".to_symbol then
-				s = "TAG_Bool(-UNTAG_Bool(@@@))"
-			else if n == once "output".to_symbol then
-				s = "(void)printf(UNTAG_Bool(@@@)?\"true\\n\":\"false\\n\");"
-			else if n == once "ascii".to_symbol then
-				s = "TAG_Bool(UNTAG_Bool(@@@))"
-			else if n == once "to_i".to_symbol then
-				s = "TAG_Int(UNTAG_Bool(@@@))"
-			else if n == once "==".to_symbol then
-				s = "TAG_Bool((@@@)==(@@@))"
-			else if n == once "!=".to_symbol then
-				s = "TAG_Bool((@@@)!=(@@@))"
-			end
-		else if c == once "NativeArray".to_symbol then
-			if n == once "object_id".to_symbol then
-				s = "TAG_Int(((Nit_NativeArray)@@@)->object_id)"
-			else if n == once "[]".to_symbol then
-				s = "((Nit_NativeArray)@@@)->val[UNTAG_Int(@@@)]"
-			else if n == once "[]=".to_symbol then
-				s = "((Nit_NativeArray)@@@)->val[UNTAG_Int(@@@)]=@@@"
-			else if n == once "copy_to".to_symbol then
-				var t = p[0]
-				p[0] = p[1]
-				p[1] = t
-				s = "(void)memcpy(((Nit_NativeArray )@@@)->val, ((Nit_NativeArray)@@@)->val, UNTAG_Int(@@@)*sizeof(val_t))"
-			end
-		else if c == once "NativeString".to_symbol then
-			if n == once "object_id".to_symbol then
-				s = "TAG_Int(UNBOX_NativeString(@@@))"
-			else if n == once "atoi".to_symbol then
-				s = "TAG_Int(atoi(UNBOX_NativeString(@@@)))"
-			else if n == once "[]".to_symbol then
-				s = "TAG_Char(UNBOX_NativeString(@@@)[UNTAG_Int(@@@)])"
-			else if n == once "[]=".to_symbol then
-				s = "UNBOX_NativeString(@@@)[UNTAG_Int(@@@)]=UNTAG_Char(@@@);"
-			else if n == once "copy_to".to_symbol then
-				var t = p[0]
-				p[0] = p[1]
-				p[1] = p[4]
-				p[4] = p[2]
-				p[2] = t
-				s = "(void)memcpy(UNBOX_NativeString(@@@)+UNTAG_Int(@@@), UNBOX_NativeString(@@@)+UNTAG_Int(@@@), UNTAG_Int(@@@));"
-			end
-		else if n == once "object_id".to_symbol then
-			s = "TAG_Int((bigint)((obj_t)@@@)[1].object_id)"
-		else if n == once "sys".to_symbol then
-			s = "(G_sys)"
-		else if n == once "is_same_type".to_symbol then
-			s = "TAG_Bool((VAL2VFT(@@@)==VAL2VFT(@@@)))"
-		else if n == once "exit".to_symbol then
-			p[0] = p[1]
-			s = "exit(UNTAG_Int(@@@));"
-		else if n == once "calloc_array".to_symbol then
-			p[0] = p[1]
-			s = "NEW_NativeArray(UNTAG_Int(@@@), sizeof(val_t))"
-		else if n == once "calloc_string".to_symbol then
-			p[0] = p[1]
-			s = "BOX_NativeString((char*)raw_alloc((UNTAG_Int(@@@) * sizeof(char))))"
-		end
-		if s == null then
-			v.visitor.error(self, "Fatal error: unknown intern method {method.full_name}.")
-			s = "NIT_NULL"
-		end
+		var params = v.iroutine.params
 		var rtype = method.signature.return_type
 		if rtype != null then
-			v.add_return_value(v.expr(new INative(s, p), rtype))
+			v.add_return_value(v.expr(new INative(method, params), rtype))
 		else
-			v.stmt(new INative(s, p))
+			v.stmt(new INative(method, params))
 		end
 	end
 end

@@ -384,7 +384,7 @@ end
 redef class INative
 	redef fun inner_dup_with(d)
 	do
-		var c2 = new INative(code, d.dup_iregs(exprs))
+		var c2 = new INative(method, d.dup_iregs(exprs))
 		c2.is_pure = is_pure
 		return c2
 	end

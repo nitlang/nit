@@ -371,11 +371,7 @@ end
 redef class INative
 	redef fun dump_intern(icd)
 	do
-		if exprs.is_empty then
-			return "NATIVE \"{code}\""
-		else
-			return "NATIVE \"{code}\"({icd.register_all(exprs)})"
-		end
+		return "NATIVE \"{method.full_name}\"({icd.register_all(exprs)})"
 	end
 end
 
