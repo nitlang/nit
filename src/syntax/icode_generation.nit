@@ -397,11 +397,7 @@ redef class AExternMethPropdef
 	redef fun fill_iroutine(v, method)
 	do
 		var params = v.iroutine.params
-		var ename = "{method.module.name}_{method.local_class.name}_{method.local_class.name}_{method.name}_{method.signature.arity}"
-		if n_extern != null then
-			ename = n_extern.text
-			ename = ename.substring(1, ename.length-2)
-		end
+		var ename = method.extern_name.as(not null)
 		var sig = method.signature
 		assert params.length == sig.arity + 1
 		var args = new Array[String]

@@ -1050,6 +1050,21 @@ redef class AMainMethPropdef
 	end
 end
 
+redef class AExternMethPropdef
+	redef fun accept_property_verifier(v)
+	do
+		super # Compute signature
+		var ename: String
+		if n_extern != null then
+			ename = n_extern.text
+			ename = ename.substring(1, ename.length-2)
+		else
+			ename = "{method.module.name}_{method.local_class.name}_{method.local_class.name}_{method.name}_{method.signature.arity}"
+		end
+		method.extern_name = ename
+	end
+end
+
 redef class ATypePropdef
 	redef fun prop do return _prop.as(not null)
 	var _prop: nullable MMSrcTypeProperty

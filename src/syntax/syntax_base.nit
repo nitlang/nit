@@ -148,6 +148,7 @@ class MMSrcMethod
 special MMMethod
 	redef fun is_intern do return false
 	redef fun is_abstract do return false
+	redef fun extern_name do return null
 end
 
 # Concrete NIT source method for an automatic accesor
@@ -185,6 +186,7 @@ special MMSrcMethod
 	redef readable var _is_init: Bool
 	redef readable var _is_intern: Bool
 	redef readable var _is_abstract: Bool
+	redef readable writable var _extern_name: nullable String # Will be computed during MMBuilder
 	redef fun node: nullable AMethPropdef do return module.nodes(self).as(nullable AMethPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: nullable AMethPropdef)
 	do
@@ -193,6 +195,7 @@ special MMSrcMethod
 		_is_init = node isa AConcreteInitPropdef
 		_is_intern = node isa AInternMethPropdef
 		_is_abstract = node isa ADeferredMethPropdef
+		_extern_name = null
 	end
 end
 

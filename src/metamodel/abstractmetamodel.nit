@@ -661,6 +661,9 @@ special MMLocalProperty
 
 	# Is the method abstract
 	fun is_abstract: Bool is abstract
+
+	# Is the method extern, if yes what is the extern_name
+	fun extern_name: nullable String is abstract
 end
 
 # Concrete local classes
