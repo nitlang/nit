@@ -47,6 +47,7 @@ syn match NITClosure "!\h\w*"
 " Fallback highlight keywords
 syn match NITNull "\<\(null\)\>"
 syn match NITControl "\<\(init\|end\|not null\|not\|var\|do\|then\|else\|loop\)\>"
+syn match NITKeyword "\<\(super\)\>"
 " Unmatchning error
 syn match Error "\<end\>"
 
@@ -57,6 +58,7 @@ syn region NITFunctionDecl matchgroup=NITDefine start="\<fun\>\s*" matchgroup=NO
 syn region NITTypeDecl matchgroup=NITDefine start="\<type\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 syn region NITAttrDecl matchgroup=NITDefine start="\<var\>\s*\ze_" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 syn region NITInitDecl matchgroup=NITDefine start="\<init\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
+syn match NITDefine "\<\(super\)\ze\s\+[A-Z]" contained containedin=NITClassBlock
 
 syn region NITStmtBlock matchgroup=NITControl start="\<\(do\|then\|else\|loop\)\>\ze\s*\(#\|$\)" matchgroup=NITControl end="^\s*\<\(end\|\zeelse\|\ze!\)\>" contains=ALLBUT,NITTypeDecl,NITAttrDecl,NITInitDecl
 syn region NITStmtBlock matchgroup=NITControl start="\<\(do\|then\|else\|loop\)\>" matchgroup=NITControl end="\<end\>" oneline
@@ -71,7 +73,7 @@ syn match  NITSharpBang	"\%^#!.*"
 syn match  NITComment	"#.*" contains=NITTodo
 
 " Keywords
-syn keyword NITKeyword	 is abstract intern extern super new
+syn keyword NITKeyword	 is abstract intern extern new
 syn keyword NITDefine	 private public protected intrude readable writable redef
 syn keyword NITControl   if while for assert and or in as isa once break continue return abort
 syn keyword NITClass     nullable

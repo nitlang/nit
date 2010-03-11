@@ -398,7 +398,8 @@ special AFormaldef
 end
 class ASuperclass
 special ASuperclass
-    readable var _n_kwspecial: TKwspecial
+    readable var _n_kwspecial: nullable TKwspecial = null
+    readable var _n_kwsuper: nullable TKwsuper = null
     readable var _n_type: AType
 end
 class AAttrPropdef

@@ -199,7 +199,9 @@ formaldef
 	= classid typing? {-> New formaldef(classid, typing.type)};
 
 special {-> superclass}
-	= no kwspecial [n2]:no type {-> New superclass(kwspecial, type)};
+	= {special} no kwspecial [n2]:no type {-> New superclass(kwspecial, Null, type)}
+	| {super} no kwsuper [n2]:no type {-> New superclass(Null, kwsuper, type)}
+	;
 
 propdefs~toplevel {-> propdef*}
 	= propdef~toplevel n1 propdefs_tail~toplevel* {-> [propdef~toplevel.propdef, propdefs_tail~toplevel.propdef]}
@@ -595,7 +597,7 @@ classkind
 	| {universal} kwuniversal
 	;
 formaldef = [id]:classid type?;
-superclass = kwspecial type;
+superclass = kwspecial? kwsuper? type;
 
 
 propdef = {attr} doc? [readable]:able? [writable]:able? kwredef? visibility kwvar [id]:attrid type? expr?
