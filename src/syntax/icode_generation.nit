@@ -776,6 +776,36 @@ redef class ANotExpr
 	end
 end
 
+redef class AOrElseExpr
+	redef fun generate_icode(v)
+	do
+		# Compute left operand
+		var e = v.generate_expr(n_expr)
+
+		# Prepare result
+		var reg = v.new_register(stype)
+
+		# Compare left and null
+		var n = v.lit_null_reg
+		var c = v.expr(new IIs(e, n), v.module.type_bool)
+		var iif = new IIf(c)
+		v.stmt(iif)
+		var old_seq = v.seq
+
+		# if equal, result = right opr
+		v.seq = iif.then_seq
+		v.add_assignment(reg, v.generate_expr(n_expr2))
+
+		# else, result = left operand
+		v.seq = iif.else_seq
+		v.add_assignment(reg, e)
+
+		v.seq = old_seq
+
+		return reg
+	end
+end
+
 redef class AIsaExpr
 	redef fun generate_icode(v)
 	do

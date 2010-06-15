@@ -922,6 +922,45 @@ redef class ANotExpr
 	end
 end
 
+redef class AOrElseExpr
+	redef fun after_typing(v)
+	do
+		var old_var_ctx = v.variable_ctx
+
+		# Process left operand
+		v.enter_visit(n_expr)
+		v.check_expr(n_expr)
+
+		# Consider the type of the left operand
+		var t = n_expr.stype
+		if not t.is_nullable then
+			v.warning(n_expr, "Warning: left operant of a 'or else' is not a nullable type.")
+		else
+			t = t.as_notnull
+		end
+
+		# Prepare the else context : ie the first expression is null
+		var variable = n_expr.its_variable
+		if variable != null then
+			v.variable_ctx.sub_with(self, variable, v.type_none)
+		end
+
+		# Process right operand
+		v.enter_visit(n_expr2)
+		v.check_expr(n_expr)
+
+		# Restore the context
+		v.variable_ctx = old_var_ctx
+
+		# Merge the types
+		var stype = v.check_conform_multiexpr(t, [n_expr2])
+		if stype == null then return
+
+		_stype = stype
+		_is_typed = true
+	end
+end
+
 redef class AIntExpr
 	redef fun after_typing(v)
 	do

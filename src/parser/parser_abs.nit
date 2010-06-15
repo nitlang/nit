@@ -702,6 +702,11 @@ special AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
+class AOrElseExpr
+special AExpr
+    readable var _n_expr: AExpr
+    readable var _n_expr2: AExpr
+end
 class ANotExpr
 special AExpr
     readable var _n_kwnot: TKwnot

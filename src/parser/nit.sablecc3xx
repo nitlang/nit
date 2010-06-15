@@ -428,6 +428,7 @@ expr_and~nopar~nobra {-> expr}
 	= expr_not~nopar~nobra {-> expr_not~nopar~nobra.expr}
 	| {or} expr_and~nopar~nobra kwor no expr_not~nopar~nobra {-> New expr.or(expr_and~nopar~nobra.expr, expr_not~nopar~nobra.expr)}
 	| {and} expr_and~nopar~nobra kwand no expr_not~nopar~nobra {-> New expr.and(expr_and~nopar~nobra.expr, expr_not~nopar~nobra.expr)}
+	| {or_else} expr_and~nopar~nobra kwor kwelse no expr_not~nopar~nobra {-> New expr.or_else(expr_and~nopar~nobra.expr, expr_not~nopar~nobra.expr)}
 	;
 
 expr_not~nopar~nobra {-> expr}
@@ -647,6 +648,7 @@ expr	= {block} expr*
 	| {binop} expr [expr2]:expr 
 	| {or} expr [expr2]:expr 
 	| {and} expr [expr2]:expr 
+	| {or_else} expr [expr2]:expr
 	| {not} kwnot expr 
 	| {eq} expr [expr2]:expr 
 	| {ee} expr [expr2]:expr 
