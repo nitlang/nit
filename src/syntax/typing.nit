@@ -477,19 +477,27 @@ redef class AAbortExpr
 	end
 end
 
-redef class ADoExpr
+# An abstract control structure with feature escapable block
+class AAbsControl
+special AExpr
 	# The corresponding escapable block
 	readable var _escapable: nullable EscapableBlock
 
-	redef fun accept_typing(v)
+	# Enter and process a control structure
+	private fun process_control(v: TypingVisitor, escapable: EscapableBlock, n_label: nullable ALabel, is_loop: Bool)
 	do
-		var escapable = new BreakOnlyEscapableBlock(self)
+		# Register the escapable block
 		_escapable = escapable
 		v.escapable_ctx.push(escapable, n_label)
-		var old_var_ctx = v.variable_ctx
 
+		# Save an prepae the variable contextes
+		var old_var_ctx = v.variable_ctx
+		var old_base_var_ctx = v.base_variable_ctx
+		if is_loop then v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = old_var_ctx.sub(self)
-		super
+
+		# Do the main processing
+		process_control_inside(v)
 
 		# Add the end of the block as an exit context
 		if not v.variable_ctx.unreash then
@@ -497,12 +505,32 @@ redef class ADoExpr
 		end
 
 		# Merge all exit contexts
-		if not escapable.break_variable_contexts.is_empty then
+		if escapable.break_variable_contexts.is_empty then
+			old_var_ctx.unreash = true
+			v.variable_ctx = old_var_ctx
+		else
 			v.variable_ctx = old_var_ctx.merge(self, escapable.break_variable_contexts, v.base_variable_ctx)
 		end
 
+		if is_loop then v.base_variable_ctx = old_base_var_ctx
 		v.escapable_ctx.pop
 		_is_typed = true
+	end
+
+	# What to do inside the control block?
+	private fun process_control_inside(v: TypingVisitor) is abstract
+end
+
+redef class ADoExpr
+special AAbsControl
+	redef fun accept_typing(v)
+	do
+		process_control(v, new BreakOnlyEscapableBlock(self), n_label, false)
+	end
+
+	redef fun process_control_inside(v)
+	do
+		v.enter_visit(n_block)
 	end
 end
 
@@ -542,17 +570,15 @@ redef class AIfExpr
 end
 
 redef class AWhileExpr
-	# The corresponding escapable block
-	readable var _escapable: nullable EscapableBlock
-
+special AAbsControl
 	redef fun accept_typing(v)
 	do
-		var escapable = new EscapableBlock(self)
-		_escapable = escapable
-		v.escapable_ctx.push(escapable, n_label)
+		process_control(v, new EscapableBlock(self), n_label, true)
+	end
+
+	redef fun process_control_inside(v)
+	do
 		var old_var_ctx = v.variable_ctx
-		var old_base_var_ctx = v.base_variable_ctx
-		v.base_variable_ctx = v.variable_ctx
 
 		# Process condition
 		v.enter_visit(n_expr)
@@ -575,64 +601,44 @@ redef class AWhileExpr
 		v.variable_ctx = old_var_ctx
 		v.use_if_false_variable_ctx(n_expr)
 		escapable.break_variable_contexts.add(v.variable_ctx)
-		v.variable_ctx = old_var_ctx.merge(self, escapable.break_variable_contexts, v.base_variable_ctx)
-
-		v.base_variable_ctx = old_base_var_ctx
-		v.escapable_ctx.pop
-		_is_typed = true
 	end
 end
 
 redef class ALoopExpr
-	# The corresponding escapable block
-	readable var _escapable: nullable EscapableBlock
-
+special AAbsControl
 	redef fun accept_typing(v)
 	do
-		var escapable = new EscapableBlock(self)
-		_escapable = escapable
-		v.escapable_ctx.push(escapable, n_label)
-		var old_var_ctx = v.variable_ctx
-		var old_base_var_ctx = v.base_variable_ctx
-		v.base_variable_ctx = v.variable_ctx
+		process_control(v, new EscapableBlock(self), n_label, true)
+	end
 
+	redef fun process_control_inside(v)
+	do
 		# Process inside
 		if n_block != null then
 			v.variable_ctx = v.variable_ctx.sub(n_block.as(not null))
 			v.enter_visit(n_block)
 		end
 
-		# Compute outside context (assert all breaks)
-		if escapable.break_variable_contexts.is_empty then
-			old_var_ctx.unreash = true
-			v.variable_ctx = old_var_ctx
-		else
-			v.variable_ctx = old_var_ctx.merge(self, escapable.break_variable_contexts, v.base_variable_ctx)
-		end
-
-		v.base_variable_ctx = old_base_var_ctx
-		v.escapable_ctx.pop
-		_is_typed = true
+		# Never automatically reach after the loop
+		v.variable_ctx.unreash = true
 	end
 end
 
 redef class AForExpr
+special AAbsControl
 	var _variable: nullable AutoVariable
 	redef fun variable do return _variable.as(not null)
 
-	# The corresponding escapable block
-	readable var _escapable: nullable EscapableBlock
-
 	redef fun accept_typing(v)
 	do
-		var escapable = new EscapableBlock(self)
-		_escapable = escapable
-		v.escapable_ctx.push(escapable, n_label)
+		process_control(v, new EscapableBlock(self), n_label, true)
+	end
 
+	redef fun process_control_inside(v)
+	do
 		var old_var_ctx = v.variable_ctx
-		var old_base_var_ctx = v.base_variable_ctx
-		v.base_variable_ctx = v.variable_ctx
-		v.variable_ctx = v.variable_ctx.sub(self)
+
+		# Create the automatic variable
 		var va = new AutoVariable(n_id.to_symbol, n_id)
 		_variable = va
 		v.variable_ctx.add(va)
@@ -640,12 +646,7 @@ redef class AForExpr
 		# Process collection
 		v.enter_visit(n_expr)
 
-		if not v.check_conform_expr(n_expr, v.type_collection) then
-			v.variable_ctx = old_var_ctx
-			v.base_variable_ctx = old_base_var_ctx
-			v.escapable_ctx.pop
-			return
-		end
+		if not v.check_conform_expr(n_expr, v.type_collection) then return
 		var expr_type = n_expr.stype
 
 		# Get iterator
@@ -656,14 +657,14 @@ redef class AForExpr
 		if not n_expr.is_self then va_stype = va_stype.not_for_self
 		va.stype = va_stype
 
-		# Body evaluation
-		if n_block != null then v.enter_visit(n_block)
+		# Process inside
+		if n_block != null then
+			v.variable_ctx = v.variable_ctx.sub(n_block.as(not null))
+			v.enter_visit(n_block)
+		end
 
-		# pop context
+		# end == begin of the loop
 		v.variable_ctx = old_var_ctx
-		v.base_variable_ctx = old_base_var_ctx
-		v.escapable_ctx.pop
-		_is_typed = true
 	end
 end
 
