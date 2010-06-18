@@ -15,24 +15,68 @@
 # limitations under the License.
 
 # Manage nested escapable blocks (while, for and closure) and escape statements (break and continue)
-package escape
+package scope
 
 import syntax_base
-import control_flow
+import flow
 
-# Stack escapable blocks
-class EscapableContext
-	# Stack of blocks
-	var _stack: Array[EscapableBlock] = new Array[EscapableBlock]
+# All-in-one context for scoped things.
+# It features:
+# * variable and labels visibility
+# * control for 'break' and 'continue'
+# This class manage itself the entree and the exit of scopes:
+# * use push or push_escapable to enter in a new scope block
+# * use pop to remove the last scope block (do not foget do pop!)
+# Warning: ScopeContext are created empty: you must perform a first push to register variables
+class ScopeContext
+	# Stack of scope blocks
+	var _stack: Array[ScopeBlock] = new Array[ScopeBlock]
+
+	# Known variables
+	# (all variables, even out of scope ones)
+	# Used for debuging
+	var _variables: Array[Variable] = new Array[Variable]
 
 	# Known labels
 	# (all labels, even out of scopes ones)
 	# Used to find duplicates
 	var _labels: Array[ALabel] = new Array[ALabel]
 
-	# Push a new escapable block
-	# Display error message if tere is a problem with the label
-	fun push(block: EscapableBlock, n_label: nullable ALabel)
+	# Return the variable associated with a name
+	fun [](n: Symbol): nullable Variable
+	do
+		var i = _stack.length - 1
+		while i >= 0 do
+			var b = _stack[i]
+			var va = b.get_variable(n)
+			if va != null then return va
+			i -= 1
+		end
+		return null
+	end
+
+	# Register a variable with its name in the current scope
+	# Display an error if name conflict
+	fun add_variable(v: Variable)
+	do
+		var old_var = self[v.name]
+		if old_var != null then
+			_visitor.error(v.decl, "Error: '{v}' already defined at {old_var.decl.location.relative_to(v.decl.location)}.")
+		end
+		_stack.last.add_variable(v)
+		_variables.add(v)
+	end
+
+	# Push a simple unlabeled variable scope block
+	fun push(node: ANode)
+	do
+		var block = new ScopeBlock(node)
+		_stack.push(block)
+	end
+
+	# Push a specific escapable block
+	# Display error message if there is a problem with the label
+	fun push_escapable(block: EscapableBlock, n_label: nullable ALabel)
 	do
 		_stack.push(block)
 		if n_label != null then
@@ -54,7 +98,7 @@ class EscapableContext
 		var i = _stack.length - 1
 		while i >= 0 do
 			var h = _stack[i]
-			if not (h isa BreakOnlyEscapableBlock) then return h
+			if h isa EscapableBlock and not (h isa BreakOnlyEscapableBlock) then return h
 			i -= 1
 		end
 		return null
@@ -65,11 +109,10 @@ class EscapableContext
 	fun get_by_label(nl: ALabel): nullable EscapableBlock
 	do
 		var i = _stack.length - 1
-		var block: nullable EscapableBlock = null
 		var lab = nl.n_id.to_symbol
 		while i >= 0 do
 			var b = _stack[i]
-			if b.lab == lab then return b
+			if b isa EscapableBlock and b.lab == lab then return b
 			i -= 1
 		end
 		visitor.error(nl, "Syntax error: invalid label {lab}.")
@@ -91,14 +134,47 @@ end
 
 ###############################################################################
 
-# A escapable block correspond to a block statement where break and/or continue can by used
-# 'for' and 'while' use this class
-# 'do' uses the BreakOnlyEscapableBlock subclass
-# closures uses the EscapableClosure subclass
-class EscapableBlock
+# A single scope block. Thez are stacked in a ScopeContext
+# This block is used only to store local variables
+class ScopeBlock
 	# The syntax node of the block
 	readable var _node: ANode
 
+	# List of local variables of the block
+	# Lazily constructed since many blocks does not have local variables
+	var _dico: nullable HashMap[Symbol, Variable] = null
+
+	private fun add_variable(v: Variable)
+	do
+		var dico = _dico
+		if dico == null then
+			dico = new HashMap[Symbol, Variable]
+			_dico = dico
+		end
+		dico[v.name] = v
+	end
+
+	private fun get_variable(n: Symbol): nullable Variable
+	do
+		var dico = _dico
+		if dico == null then return null
+		if not dico.has_key(n) then return null
+		return dico[n]
+	end
+
+	init(node: ANode)
+	do
+		_node = node
+	end
+end
+
+# A escapable block correspond to a scope block where break and/or continue can by used.
+# EscapableBlocks can also be labeled.
+# 'for' and 'while' use this class
+# labeled 'do' uses the BreakOnlyEscapableBlock subclass
+# closures uses the EscapableClosure subclass
+class EscapableBlock
+special ScopeBlock
 	# The label of the block (if any)
 	# Set by the push in EscapableContext
 	readable var _lab: nullable Symbol
@@ -119,7 +195,7 @@ class EscapableBlock
 
 	init(node: ANode)
 	do
-		_node = node
+		super(node)
 	end
 end
 
@@ -162,7 +238,7 @@ special ALabelable
 	fun kwname: String is abstract
 
 	# Compute, set and return the associated escapable block
-	fun compute_escapable_block(lctx: EscapableContext): nullable EscapableBlock
+	fun compute_escapable_block(lctx: ScopeContext): nullable EscapableBlock
 	do
 		var block: nullable EscapableBlock
 		var nl = n_label

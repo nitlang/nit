@@ -15,92 +15,9 @@
 # limitations under the License.
 
 # Analysis control flow and variable visibility in property bodies, statements and expressions
-package control_flow
+package flow
 
 import syntax_base
-
-# Associate symbols to variable
-# Can be nested
-abstract class ScopeContext
-	# Look for the variable from its name
-	# Return null if nothing found
-	fun [](s: Symbol): nullable Variable
-	do
-		if _dico.has_key(s) then
-			return _dico[s]
-		else
-			return null
-		end
-	end
-
-	# Register a new variable with its name
-	fun add(v: Variable)
-	do
-		var old_var = self[v.name]
-		if old_var != null then
-			_visitor.error(v.decl, "Error: '{v}' already defined at {old_var.decl.location.relative_to(v.decl.location)}.")
-		end
-		_dico[v.name] = v
-		_all_variables.add(v)
-	end
-
-	# Build a new ScopeContext
-	fun sub(node: ANode): ScopeContext
-	do
-		return new SubScopeContext.with_prev(self, node)
-	end
-
-	# Variables by name (in the current context only)
-	var _dico: Map[Symbol, Variable] = new HashMap[Symbol, Variable]
-
-	# All variables in all contextes
-	var _all_variables: Set[Variable]
-
-	# The visitor of the context (used to display error)
-	var _visitor: AbsSyntaxVisitor
-
-	# The syntax node that introduced the context
-	readable var _node: ANode
-
-	init(visitor: AbsSyntaxVisitor, node: ANode)
-	do
-		_visitor = visitor
-		_node = node
-	end
-end
-
-# Root of a variable scope context hierarchy
-class RootScopeContext
-special ScopeContext
-	init(visitor: AbsSyntaxVisitor, node: ANode)
-	do
-		super(visitor, node)
-		_all_variables = new HashSet[Variable]
-	end
-end
-
-# Contexts that can see local variables of a prevous context
-# Local variables added to this context are not shared with the previous context
-class SubScopeContext
-special ScopeContext
-	readable var _prev: ScopeContext
-
-	redef fun [](s)
-	do
-		if _dico.has_key(s) then
-			return _dico[s]
-		else
-			return prev[s]
-		end
-	end
-
-	init with_prev(p: ScopeContext, node: ANode)
-	do
-		init(p._visitor, node)
-		_prev = p
-		_all_variables = p._all_variables
-	end
-end
 
 #################################################################
 

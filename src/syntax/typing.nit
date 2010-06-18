@@ -18,8 +18,8 @@
 package typing
 
 import syntax_base
-import escape
-import control_flow
+import flow
+import scope
 
 redef class MMSrcModule
 	# Walk trough the module and type statments and expressions
@@ -43,9 +43,8 @@ special AbsSyntaxVisitor
 		if n != null then n.accept_typing(self)
 	end
 
-	# Current knowledge about variables names and types
-	fun scope_ctx: ScopeContext do return _scope_ctx.as(not null)
-	writable var _scope_ctx: nullable ScopeContext
+	# Current knowledge about scoped things (variable, labels, etc.)
+	readable var _scope_ctx: ScopeContext = new ScopeContext(self)
 
 	# Current knowledge about control flow
 	fun flow_ctx: FlowContext do return _flow_ctx.as(not null)
@@ -68,18 +67,14 @@ special AbsSyntaxVisitor
 	fun enter_visit_block(node: nullable AExpr)
 	do
 		if node == null then return
-		var old_scope_ctx = scope_ctx
-		scope_ctx = scope_ctx.sub(node)
+		scope_ctx.push(node)
 		enter_visit(node)
-		scope_ctx = old_scope_ctx
+		scope_ctx.pop
 	end
 
 	# Non-bypassable knowledge about variables names and types
 	fun base_flow_ctx: FlowContext do return _base_flow_ctx.as(not null)
 	writable var _base_flow_ctx: nullable FlowContext
-
-	# Current knowledge about escapable blocks
-	readable writable var _escapable_ctx: EscapableContext = new EscapableContext(self)
 
 	# The current reciever
 	fun self_var: ParamVariable do return _self_var.as(not null)
@@ -101,7 +96,7 @@ special AbsSyntaxVisitor
 		if ctx != null then flow_ctx = ctx
 	end
 
-	# Make the if_false_scope_ctx of the expression effective
+	# Make the if_false_flow_ctx of the expression effective
 	private fun use_if_false_flow_ctx(e: AExpr)
 	do
 		var ctx = e.if_false_flow_ctx
@@ -181,7 +176,6 @@ end
 redef class AClassdef
 	redef fun accept_typing(v)
 	do
-		v.scope_ctx = new RootScopeContext(v, self)
 		v.self_var = new ParamVariable("self".to_symbol, self)
 		v.self_var.stype = local_class.get_type
 		super
@@ -199,15 +193,13 @@ redef class AAttrPropdef
 		v.flow_ctx = new RootFlowContext(v, self)
 		v.base_flow_ctx = v.flow_ctx
 
-		var old_scope_ctx = v.scope_ctx
-		v.scope_ctx = old_scope_ctx.sub(self)
-
+		v.scope_ctx.push(self)
 		_self_var = v.self_var
 		super
 		if n_expr != null then
 			v.check_conform_expr(n_expr.as(not null), prop.signature.return_type.as(not null))
 		end
-		v.scope_ctx = old_scope_ctx
+		v.scope_ctx.pop
 	end
 end
 
@@ -217,11 +209,10 @@ redef class AMethPropdef
 		v.flow_ctx = new RootFlowContext(v, self)
 		v.base_flow_ctx = v.flow_ctx
 
-		var old_scope_ctx = v.scope_ctx
-		v.scope_ctx = old_scope_ctx.sub(self)
+		v.scope_ctx.push(self)
 		_self_var = v.self_var
 		super
-		v.scope_ctx = old_scope_ctx
+		v.scope_ctx.pop
 	end
 end
 
@@ -289,7 +280,7 @@ end
 redef class AParam
 	redef fun after_typing(v)
 	do
-		v.scope_ctx.add(variable)
+		v.scope_ctx.add_variable(variable)
 	end
 end
 
@@ -300,20 +291,18 @@ redef class AClosureDecl
 	redef fun accept_typing(v)
 	do
 		# Register the closure for ClosureCallExpr
-		v.scope_ctx.add(variable)
+		v.scope_ctx.add_variable(variable)
 
-		var old_scope_ctx = v.scope_ctx
 		var old_flow_ctx = v.flow_ctx
 		var old_base_flow_ctx = v.base_flow_ctx
 		v.base_flow_ctx = v.flow_ctx
-		v.scope_ctx = v.scope_ctx.sub(self)
 
 		var blist: nullable Array[AExpr] = null
 		var t = v.local_property.signature.return_type
 		if t != null then blist = new Array[AExpr]
 		var escapable = new EscapableClosure(self, variable.closure, blist)
 		_escapable = escapable
-		v.escapable_ctx.push(escapable, null)
+		v.scope_ctx.push_escapable(escapable, null)
 
 		v.is_default_closure_definition = true
 
@@ -334,10 +323,9 @@ redef class AClosureDecl
 			v.check_conform_expr(x, t)
 		end
 
-		v.scope_ctx = old_scope_ctx
 		v.flow_ctx = old_flow_ctx
 		v.base_flow_ctx = old_base_flow_ctx
-		v.escapable_ctx.pop
+		v.scope_ctx.pop
 	end
 end
 
@@ -399,7 +387,7 @@ redef class AVardeclExpr
 	do
 		var va = new VarVariable(n_id.to_symbol, n_id)
 		_variable = va
-		v.scope_ctx.add(va)
+		v.scope_ctx.add_variable(va)
 		var ne = n_expr
 		if ne != null then v.mark_is_set(va)
 
@@ -462,7 +450,7 @@ redef class AContinueExpr
 	redef fun after_typing(v)
 	do
 		v.mark_unreash(self)
-		var esc = compute_escapable_block(v.escapable_ctx)
+		var esc = compute_escapable_block(v.scope_ctx)
 		if esc == null then return
 
 		if esc.is_break_block then
@@ -487,7 +475,7 @@ redef class ABreakExpr
 	do
 		var old_flow_ctx = v.flow_ctx
 		v.mark_unreash(self)
-		var esc = compute_escapable_block(v.escapable_ctx)
+		var esc = compute_escapable_block(v.scope_ctx)
 		if esc == null then return
 
 		esc.break_flow_contexts.add(old_flow_ctx)
@@ -524,7 +512,7 @@ special AExpr
 	do
 		# Register the escapable block
 		_escapable = escapable
-		v.escapable_ctx.push(escapable, n_label)
+		v.scope_ctx.push_escapable(escapable, n_label)
 
 		# Save an prepare the contextes
 		var old_flow_ctx = v.flow_ctx
@@ -548,7 +536,7 @@ special AExpr
 		end
 
 		if is_loop then v.base_flow_ctx = old_base_flow_ctx
-		v.escapable_ctx.pop
+		v.scope_ctx.pop
 		_is_typed = true
 	end
 
@@ -659,14 +647,13 @@ special AAbsControl
 
 	redef fun process_control_inside(v)
 	do
-		var old_scope_ctx = v.scope_ctx
-		v.scope_ctx = v.scope_ctx.sub(self)
+		v.scope_ctx.push(self)
 		var old_flow_ctx = v.flow_ctx
 
 		# Create the automatic variable
 		var va = new AutoVariable(n_id.to_symbol, n_id)
 		_variable = va
-		v.scope_ctx.add(va)
+		v.scope_ctx.add_variable(va)
 
 		# Process collection
 		v.enter_visit(n_expr)
@@ -687,7 +674,7 @@ special AAbsControl
 
 		# end == begin of the loop
 		v.flow_ctx = old_flow_ctx
-		v.scope_ctx = old_scope_ctx
+		v.scope_ctx.pop
 	end
 end
 
@@ -1297,9 +1284,9 @@ redef class AAbsAbsSendExpr
 					var csi = psig.closure_named(cni)
 					if csi != null then
 						var esc = new EscapableClosure(cdi, csi, break_list)
-						v.escapable_ctx.push(esc, n_label)
+						v.scope_ctx.push_escapable(esc, n_label)
 						cdi.accept_typing2(v, esc)
-						v.escapable_ctx.pop
+						v.scope_ctx.pop
 					else if cs.length == 1 then
 						v.error(cdi.n_id, "Error: no closure named '!{cni}' in {name}; only closure is !{cs.first.name}.")
 					else
@@ -1800,17 +1787,16 @@ redef class AClosureDef
 
 		_closure = esc.closure
 
-		var old_scope_ctx = v.scope_ctx
+		v.scope_ctx.push(self)
 		var old_flow_ctx = v.flow_ctx
 		var old_base_flow_ctx = v.base_flow_ctx
 		v.base_flow_ctx = v.flow_ctx
-		v.scope_ctx = v.scope_ctx.sub(self)
 		variables = new Array[AutoVariable]
 		for i in [0..n_ids.length[ do
 			var va = new AutoVariable(n_ids[i].to_symbol, n_ids[i])
 			variables.add(va)
 			va.stype = sig[i]
-			v.scope_ctx.add(va)
+			v.scope_ctx.add_variable(va)
 		end
 
 		_accept_typing2 = true
@@ -1823,9 +1809,9 @@ redef class AClosureDef
 				v.error(self, "Control error: Reached end of break block (a 'break' with a value was expected).")
 			end
 		end
-		v.scope_ctx = old_scope_ctx
 		v.flow_ctx = old_flow_ctx
 		v.base_flow_ctx = old_base_flow_ctx
+		v.scope_ctx.pop
 	end
 end
 
