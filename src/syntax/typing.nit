@@ -55,6 +55,14 @@ special AbsSyntaxVisitor
 		variable_ctx = ctx
 	end
 
+	# Enter in an expression as inside a new local variable scope
+	fun enter_visit_block(node: nullable AExpr)
+	do
+		if node == null then return
+		variable_ctx = variable_ctx.sub(node)
+		enter_visit(node)
+	end
+
 	# Non-bypassable knowledge about variables names and types
 	fun base_variable_ctx: VariableContext do return _base_variable_ctx.as(not null)
 	writable var _base_variable_ctx: nullable VariableContext
@@ -553,10 +561,7 @@ redef class AIfExpr
 		v.use_if_true_variable_ctx(n_expr)
 
 		# Process the 'then'
-		if n_then != null then
-			v.variable_ctx = v.variable_ctx.sub(n_then.as(not null))
-			v.enter_visit(n_then)
-		end
+		v.enter_visit_block(n_then)
 
 		# Remember what appened in the 'then'
 		var then_var_ctx = v.variable_ctx
@@ -566,10 +571,7 @@ redef class AIfExpr
 		v.use_if_false_variable_ctx(n_expr)
 
 		# Process the 'else'
-		if n_else != null then
-			v.variable_ctx = v.variable_ctx.sub(n_else.as(not null))
-			v.enter_visit(n_else)
-		end
+		v.enter_visit_block(n_else)
 
 		# Merge 'then' and 'else' contexts
 		v.variable_ctx = old_var_ctx.merge_reash(self, then_var_ctx, v.variable_ctx, v.base_variable_ctx)
@@ -600,10 +602,7 @@ special AAbsControl
 		v.use_if_true_variable_ctx(n_expr)
 
 		# Process inside
-		if n_block != null then
-			v.variable_ctx = v.variable_ctx.sub(n_block.as(not null))
-			v.enter_visit(n_block)
-		end
+		v.enter_visit_block(n_block)
 
 		# Compute outside context (assert !cond + all breaks)
 		v.variable_ctx = old_var_ctx
@@ -622,10 +621,7 @@ special AAbsControl
 	redef fun process_control_inside(v)
 	do
 		# Process inside
-		if n_block != null then
-			v.variable_ctx = v.variable_ctx.sub(n_block.as(not null))
-			v.enter_visit(n_block)
-		end
+		v.enter_visit_block(n_block)
 
 		# Never automatically reach after the loop
 		v.mark_unreash(self)
@@ -666,10 +662,7 @@ special AAbsControl
 		va.stype = va_stype
 
 		# Process inside
-		if n_block != null then
-			v.variable_ctx = v.variable_ctx.sub(n_block.as(not null))
-			v.enter_visit(n_block)
-		end
+		v.enter_visit_block(n_block)
 
 		# end == begin of the loop
 		v.variable_ctx = old_var_ctx
@@ -825,8 +818,7 @@ redef class AIfexprExpr
 		v.use_if_true_variable_ctx(n_expr)
 
 		# Process 'then'
-		v.variable_ctx = v.variable_ctx.sub(n_then)
-		v.enter_visit(n_then)
+		v.enter_visit_block(n_then)
 
 		# Remember what appened in the 'then'
 		var then_var_ctx = v.variable_ctx
@@ -836,8 +828,7 @@ redef class AIfexprExpr
 		v.use_if_false_variable_ctx(n_expr)
 
 		# Process 'else'
-		v.variable_ctx = v.variable_ctx.sub(n_else)
-		v.enter_visit(n_else)
+		v.enter_visit_block(n_else)
 
 		# Merge 'then' and 'else' contexts
 		v.variable_ctx = old_var_ctx.merge_reash(self, then_var_ctx, v.variable_ctx, v.base_variable_ctx)
