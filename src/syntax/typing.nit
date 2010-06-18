@@ -47,6 +47,14 @@ special AbsSyntaxVisitor
 	fun variable_ctx: VariableContext do return _variable_ctx.as(not null)
 	writable var _variable_ctx: nullable VariableContext
 
+	# Mark the flow context as unreashable
+	fun mark_unreash(n: ANode)
+	do
+		var ctx = variable_ctx.sub(n)
+		ctx.unreash = true
+		variable_ctx = ctx
+	end
+
 	# Non-bypassable knowledge about variables names and types
 	fun base_variable_ctx: VariableContext do return _base_variable_ctx.as(not null)
 	writable var _base_variable_ctx: nullable VariableContext
@@ -403,7 +411,7 @@ end
 redef class AReturnExpr
 	redef fun after_typing(v)
 	do
-		v.variable_ctx.unreash = true
+		v.mark_unreash(self)
 		var t = v.local_property.signature.return_type
 
 		if v.is_default_closure_definition then
@@ -426,7 +434,7 @@ end
 redef class AContinueExpr
 	redef fun after_typing(v)
 	do
-		v.variable_ctx.unreash = true
+		v.mark_unreash(self)
 		var esc = compute_escapable_block(v.escapable_ctx)
 		if esc == null then return
 
@@ -450,7 +458,7 @@ end
 redef class ABreakExpr
 	redef fun after_typing(v)
 	do
-		v.variable_ctx.unreash = true
+		v.mark_unreash(self)
 		var esc = compute_escapable_block(v.escapable_ctx)
 		if esc == null then return
 
@@ -472,7 +480,7 @@ end
 redef class AAbortExpr
 	redef fun after_typing(v)
 	do
-		v.variable_ctx.unreash = true
+		v.mark_unreash(self)
 		_is_typed = true
 	end
 end
@@ -506,8 +514,8 @@ special AExpr
 
 		# Merge all exit contexts
 		if escapable.break_variable_contexts.is_empty then
-			old_var_ctx.unreash = true
 			v.variable_ctx = old_var_ctx
+			v.mark_unreash(self)
 		else
 			v.variable_ctx = old_var_ctx.merge(self, escapable.break_variable_contexts, v.base_variable_ctx)
 		end
@@ -620,7 +628,7 @@ special AAbsControl
 		end
 
 		# Never automatically reach after the loop
-		v.variable_ctx.unreash = true
+		v.mark_unreash(self)
 	end
 end
 
@@ -1730,7 +1738,7 @@ redef class AClosureCallExpr
 	redef fun after_typing(v)
 	do
 		var va = variable
-		if va.closure.is_break then v.variable_ctx.unreash = true
+		if va.closure.is_break then v.mark_unreash(self)
 		var sig = va.closure.signature
 		var s = process_signature(v, sig, n_id.to_symbol, compute_raw_arguments)
 		if not n_closure_defs.is_empty then
