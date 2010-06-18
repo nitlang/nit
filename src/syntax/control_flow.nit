@@ -19,9 +19,9 @@ package control_flow
 
 import syntax_base
 
-# Associate symbols to variable and variables to type
+# Associate symbols to variable
 # Can be nested
-abstract class VariableContext
+abstract class ScopeContext
 	# Look for the variable from its name
 	# Return null if nothing found
 	fun [](s: Symbol): nullable Variable
@@ -44,11 +44,77 @@ abstract class VariableContext
 		_all_variables.add(v)
 	end
 
-	fun mark_is_set(v: Variable)
+	# Build a new ScopeContext
+	fun sub(node: ANode): ScopeContext
 	do
-		_set_variables.add(v)
+		return new SubScopeContext.with_prev(self, node)
 	end
 
+	# Variables by name (in the current context only)
+	var _dico: Map[Symbol, Variable] = new HashMap[Symbol, Variable]
+
+	# All variables in all contextes
+	var _all_variables: Set[Variable]
+
+	# The visitor of the context (used to display error)
+	var _visitor: AbsSyntaxVisitor
+
+	# The syntax node that introduced the context
+	readable var _node: ANode
+
+	init(visitor: AbsSyntaxVisitor, node: ANode)
+	do
+		_visitor = visitor
+		_node = node
+	end
+end
+
+# Root of a variable scope context hierarchy
+class RootScopeContext
+special ScopeContext
+	init(visitor: AbsSyntaxVisitor, node: ANode)
+	do
+		super(visitor, node)
+		_all_variables = new HashSet[Variable]
+	end
+end
+
+# Contexts that can see local variables of a prevous context
+# Local variables added to this context are not shared with the previous context
+class SubScopeContext
+special ScopeContext
+	readable var _prev: ScopeContext
+
+	redef fun [](s)
+	do
+		if _dico.has_key(s) then
+			return _dico[s]
+		else
+			return prev[s]
+		end
+	end
+
+	init with_prev(p: ScopeContext, node: ANode)
+	do
+		init(p._visitor, node)
+		_prev = p
+		_all_variables = p._all_variables
+	end
+end
+
+#################################################################
+
+# All-in-one context for flow control.
+# It features:
+# * reachability
+# * set/unset variable
+# * adaptive type of variable
+# FlowContextes are imutables, new contexts are created:
+# * as an empty root context
+# * as the adaptation of a existing context (see methods sub_*)
+# * as the merge of existing contexts
+abstract class FlowContext
+	# Display an error localised on `n' if the variable `v' is not set
 	fun check_is_set(n: ANode, v: Variable)
 	do
 		if v.must_be_set and not is_set(v) then
@@ -63,40 +129,46 @@ abstract class VariableContext
 		return v.stype
 	end
 
-	# Variables by name (in the current context only)
-	var _dico: Map[Symbol, Variable]
-
-	# All variables in all contextes
-	var _all_variables: Set[Variable]
-
-	# Build a new VariableContext
-	fun sub(node: ANode): VariableContext
+	# Return a context where the variable is marked as set
+	fun sub_setvariable(v: Variable): FlowContext
 	do
-		return new SubVariableContext.with_prev(self, node)
+		var ctx = new SubFlowContext.with_prev(self, node)
+		ctx._set_variables.add(v)
+		return ctx
 	end
 
-	# Build a nested VariableContext with new variable information
-	fun sub_with(node: ANode, v: Variable, t: MMType): VariableContext
+	# Return a context where unreash == true
+	fun sub_unreash(node: ANode): FlowContext
 	do
-		return new CastVariableContext(self, node, v, t)
+		var ctx = new SubFlowContext.with_prev(self, node)
+		ctx._unreash = true
+		return ctx
 	end
 
-	# Merge various alternative contexts
+	# Return a context where v is casted as t
+	fun sub_with(node: ANode, v: Variable, t: MMType): FlowContext
+	do
+		return new CastFlowContext(self, node, v, t)
+	end
+
+	# Merge various alternative contexts (all must be reashable)
 	# Note that self can belong to alternatives
-	fun merge(node: ANode, alternatives: Array[VariableContext], base: VariableContext): VariableContext
+	# Base is self
+	fun merge(node: ANode, alternatives: Array[FlowContext]): FlowContext
 	do
-		return new MergeVariableContext(self, node, alternatives, base)
+		for a in alternatives do assert not a.unreash
+		if alternatives.length == 1 then return alternatives.first
+		return new MergeFlowContext(self, node, alternatives)
 	end
 
 	# Merge only context that are reachable
 	# Used for if/then/else merges
 	# Base is self
-	fun merge_reash(node: ANode, alt1, alt2: VariableContext, base: VariableContext): VariableContext
+	fun merge_reash(node: ANode, alt1, alt2: FlowContext): FlowContext
 	do
 		if alt1.unreash then
 			if alt2.unreash then
-				unreash = true
-				return self
+				return self.sub_unreash(node)
 			else
 				var t = alt2
 				alt2 = alt1
@@ -105,13 +177,14 @@ abstract class VariableContext
 		end
 
 		if alt2.unreash or alt1 == alt2 then
-			if alt1 == self then
-				return self
-			else
-				return merge(node, [alt1], base)
-			end
+			return alt1
+			#if alt1 == self then
+			#	return self
+			#else
+			#	return merge(node, [alt1])
+			#end
 		else
-			return merge(node, [alt1, alt2], base)
+			return merge(node, [alt1, alt2])
 		end
 	end
 
@@ -125,11 +198,10 @@ abstract class VariableContext
 	do
 		_visitor = visitor
 		_node = node
-		_dico = new HashMap[Symbol, Variable]
 	end
 
 	# Is a control flow break met? (return, break, continue)
-	readable writable var _unreash: Bool = false
+	readable var _unreash: Bool = false
 
 	# Is a control flow already broken?
 	# Used to avoid repeating the same error message
@@ -143,51 +215,21 @@ abstract class VariableContext
 	do
 		return _set_variables.has(v)
 	end
-
-	redef fun to_s
-	do
-		var s = new Buffer
-		s.append(node.location.to_s)
-		for v in _all_variables do
-			var t = stype(v)
-			if t == null then continue
-			s.append(" {v}:{t}")
-		end
-		return s.to_s
-	end
-
-	private fun is_in(ctx: VariableContext): Bool = self == ctx
 end
 
 # Root of a variable context hierarchy
-class RootVariableContext
-special VariableContext
+class RootFlowContext
+special FlowContext
 	init(visitor: AbsSyntaxVisitor, node: ANode)
 	do
 		super(visitor, node)
-		_all_variables = new HashSet[Variable]
 	end
 end
 
-# Contexts that can see local variables of a prevous context
-# Local variables added to this context are not shared with the previous context
-class SubVariableContext
-special VariableContext
-	readable var _prev: VariableContext
-
-	redef fun is_in(ctx)
-	do
-		return ctx == self or _prev.is_in(ctx)
-	end
-
-	redef fun [](s)
-	do
-		if _dico.has_key(s) then
-			return _dico[s]
-		else
-			return prev[s]
-		end
-	end
+# Contexts that are an evolution of a single previous context
+class SubFlowContext
+special FlowContext
+	readable var _prev: FlowContext
 
 	redef fun is_set(v)
 	do
@@ -199,17 +241,16 @@ special VariableContext
 		return prev.stype(v)
 	end
 
-	init with_prev(p: VariableContext, node: ANode)
+	init with_prev(p: FlowContext, node: ANode)
 	do
 		init(p._visitor, node)
 		_prev = p
-		_all_variables = p._all_variables
 	end
 end
 
-# A variable context where a variable got a type evolution
-class CastVariableContext
-special SubVariableContext
+# A variable context where a variable got a type adptation
+class CastFlowContext
+special SubFlowContext
 	# The casted variable
 	var _variable: Variable
 
@@ -225,7 +266,7 @@ special SubVariableContext
 		end
 	end
 
-	init(p: VariableContext, node: ANode, v: Variable, s: nullable MMType)
+	init(p: FlowContext, node: ANode, v: Variable, s: nullable MMType)
 	do
 		with_prev(p, node)
 		_variable = v
@@ -233,21 +274,19 @@ special SubVariableContext
 	end
 end
 
-# Context that follows a previous context but where
-# Variable current static type and variable is_set depends on the combinaison of other contexts
-class MergeVariableContext
-special SubVariableContext
-	var _base: VariableContext
-	var _alts: Array[VariableContext]
+# Context that resulting from the combinaisons of other contexts.
+# Most of the merge computation are done lasily.
+class MergeFlowContext
+special FlowContext
+	var _base: FlowContext
+	var _alts: Array[FlowContext]
 
 	# Updated static type of variables
 	var _stypes: Map[Variable, nullable MMType] = new HashMap[Variable, nullable MMType]
 
-	init(prev: VariableContext, node: ANode, alts: Array[VariableContext], base: VariableContext)
+	init(base: FlowContext, node: ANode, alts: Array[FlowContext])
 	do
-		assert prev.is_in(base) else print "{node.location}: Error: prev {prev.node.location} is not in base {base.node.location}"
-		for a in alts do assert a.is_in(prev) else print "{node.location}: Error: alternative {a.node.location} is not in prev {prev.node.location}"
-		with_prev(prev, node)
+		super(base._visitor, node)
 		_alts = alts
 		_base = base
 	end
@@ -318,7 +357,6 @@ special SubVariableContext
 		else
 			for ctx in _alts do
 				if not ctx.is_set(v) then
-					print "{node.location}: is_set({v}) ? false : because not set in {ctx.node.location}"
 					return false
 				end
 			end

@@ -44,28 +44,39 @@ special AbsSyntaxVisitor
 	end
 
 	# Current knowledge about variables names and types
-	fun variable_ctx: VariableContext do return _variable_ctx.as(not null)
-	writable var _variable_ctx: nullable VariableContext
+	fun scope_ctx: ScopeContext do return _scope_ctx.as(not null)
+	writable var _scope_ctx: nullable ScopeContext
+
+	# Current knowledge about control flow
+	fun flow_ctx: FlowContext do return _flow_ctx.as(not null)
+	writable var _flow_ctx: nullable FlowContext
+
+	# Mark a local variable as set
+	fun mark_is_set(va: Variable)
+	do
+		if flow_ctx.is_set(va) then return
+		flow_ctx = flow_ctx.sub_setvariable(va)
+	end
 
 	# Mark the flow context as unreashable
 	fun mark_unreash(n: ANode)
 	do
-		var ctx = variable_ctx.sub(n)
-		ctx.unreash = true
-		variable_ctx = ctx
+		flow_ctx = flow_ctx.sub_unreash(n)
 	end
 
 	# Enter in an expression as inside a new local variable scope
 	fun enter_visit_block(node: nullable AExpr)
 	do
 		if node == null then return
-		variable_ctx = variable_ctx.sub(node)
+		var old_scope_ctx = scope_ctx
+		scope_ctx = scope_ctx.sub(node)
 		enter_visit(node)
+		scope_ctx = old_scope_ctx
 	end
 
 	# Non-bypassable knowledge about variables names and types
-	fun base_variable_ctx: VariableContext do return _base_variable_ctx.as(not null)
-	writable var _base_variable_ctx: nullable VariableContext
+	fun base_flow_ctx: FlowContext do return _base_flow_ctx.as(not null)
+	writable var _base_flow_ctx: nullable FlowContext
 
 	# Current knowledge about escapable blocks
 	readable writable var _escapable_ctx: EscapableContext = new EscapableContext(self)
@@ -83,18 +94,18 @@ special AbsSyntaxVisitor
 	# Is a other constructor of the same class invoked
 	readable writable var _explicit_other_init_call: Bool = false
 
-	# Make the if_true_variable_ctx of the expression effective
-	private fun use_if_true_variable_ctx(e: AExpr)
+	# Make the if_true_flow_ctx of the expression effective
+	private fun use_if_true_flow_ctx(e: AExpr)
 	do
-		var ctx = e.if_true_variable_ctx
-		if ctx != null then variable_ctx = ctx
+		var ctx = e.if_true_flow_ctx
+		if ctx != null then flow_ctx = ctx
 	end
 
-	# Make the if_false_variable_ctx of the expression effective
-	private fun use_if_false_variable_ctx(e: AExpr)
+	# Make the if_false_scope_ctx of the expression effective
+	private fun use_if_false_flow_ctx(e: AExpr)
 	do
-		var ctx = e.if_false_variable_ctx
-		if ctx != null then variable_ctx = ctx
+		var ctx = e.if_false_flow_ctx
+		if ctx != null then flow_ctx = ctx
 	end
 
 	# Are we inside a default closure definition ?
@@ -170,8 +181,7 @@ end
 redef class AClassdef
 	redef fun accept_typing(v)
 	do
-		v.variable_ctx = new RootVariableContext(v, self)
-		v.base_variable_ctx = v.variable_ctx
+		v.scope_ctx = new RootScopeContext(v, self)
 		v.self_var = new ParamVariable("self".to_symbol, self)
 		v.self_var.stype = local_class.get_type
 		super
@@ -186,25 +196,32 @@ end
 redef class AAttrPropdef
 	redef fun accept_typing(v)
 	do
-		var old_var_ctx = v.variable_ctx
-		v.variable_ctx = old_var_ctx.sub(self)
+		v.flow_ctx = new RootFlowContext(v, self)
+		v.base_flow_ctx = v.flow_ctx
+
+		var old_scope_ctx = v.scope_ctx
+		v.scope_ctx = old_scope_ctx.sub(self)
+
 		_self_var = v.self_var
 		super
 		if n_expr != null then
 			v.check_conform_expr(n_expr.as(not null), prop.signature.return_type.as(not null))
 		end
-		v.variable_ctx = old_var_ctx
+		v.scope_ctx = old_scope_ctx
 	end
 end
 
 redef class AMethPropdef
 	redef fun accept_typing(v)
 	do
-		var old_var_ctx = v.variable_ctx
-		v.variable_ctx = old_var_ctx.sub(self)
+		v.flow_ctx = new RootFlowContext(v, self)
+		v.base_flow_ctx = v.flow_ctx
+
+		var old_scope_ctx = v.scope_ctx
+		v.scope_ctx = old_scope_ctx.sub(self)
 		_self_var = v.self_var
 		super
-		v.variable_ctx = old_var_ctx
+		v.scope_ctx = old_scope_ctx
 	end
 end
 
@@ -212,7 +229,7 @@ redef class AConcreteMethPropdef
 	redef fun after_typing(v)
 	do
 		super
-		if v.variable_ctx.unreash == false and method.signature.return_type != null then
+		if not v.flow_ctx.unreash and method.signature.return_type != null then
 			v.error(self, "Control error: Reached end of function (a 'return' with a value was expected).")
 		end
 	end
@@ -272,7 +289,7 @@ end
 redef class AParam
 	redef fun after_typing(v)
 	do
-		v.variable_ctx.add(variable)
+		v.scope_ctx.add(variable)
 	end
 end
 
@@ -283,12 +300,13 @@ redef class AClosureDecl
 	redef fun accept_typing(v)
 	do
 		# Register the closure for ClosureCallExpr
-		v.variable_ctx.add(variable)
+		v.scope_ctx.add(variable)
 
-		var old_var_ctx = v.variable_ctx
-		var old_base_var_ctx = v.base_variable_ctx
-		v.base_variable_ctx = v.variable_ctx
-		v.variable_ctx = v.variable_ctx.sub(self)
+		var old_scope_ctx = v.scope_ctx
+		var old_flow_ctx = v.flow_ctx
+		var old_base_flow_ctx = v.base_flow_ctx
+		v.base_flow_ctx = v.flow_ctx
+		v.scope_ctx = v.scope_ctx.sub(self)
 
 		var blist: nullable Array[AExpr] = null
 		var t = v.local_property.signature.return_type
@@ -304,7 +322,7 @@ redef class AClosureDecl
 		v.is_default_closure_definition = false
 
 		if n_expr != null then
-			if v.variable_ctx.unreash == false then
+			if v.flow_ctx.unreash == false then
 				if variable.closure.signature.return_type != null then
 					v.error(self, "Control error: Reached end of block (a 'continue' with a value was expected).")
 				else if variable.closure.is_break and escapable.break_list != null then
@@ -316,8 +334,9 @@ redef class AClosureDecl
 			v.check_conform_expr(x, t)
 		end
 
-		v.variable_ctx = old_var_ctx
-		v.base_variable_ctx = old_base_var_ctx
+		v.scope_ctx = old_scope_ctx
+		v.flow_ctx = old_flow_ctx
+		v.base_flow_ctx = old_base_flow_ctx
 		v.escapable_ctx.pop
 	end
 end
@@ -365,11 +384,11 @@ redef class AExpr
 	# The variable accessed is any
 	fun its_variable: nullable Variable do return null
 
-	# The variable type information if current boolean expression is true
-	readable private var _if_true_variable_ctx: nullable VariableContext
+	# The control flow information if current boolean expression is true
+	readable private var _if_true_flow_ctx: nullable FlowContext
 
-	# The variable type information if current boolean expression is false
-	readable private var _if_false_variable_ctx: nullable VariableContext
+	# The control flow information if current boolean expression is false
+	readable private var _if_false_flow_ctx: nullable FlowContext
 end
 
 redef class AVardeclExpr
@@ -380,9 +399,9 @@ redef class AVardeclExpr
 	do
 		var va = new VarVariable(n_id.to_symbol, n_id)
 		_variable = va
-		v.variable_ctx.add(va)
+		v.scope_ctx.add(va)
 		var ne = n_expr
-		if ne != null then v.variable_ctx.mark_is_set(va)
+		if ne != null then v.mark_is_set(va)
 
 		if n_type != null then
 			if not n_type.is_typed then return
@@ -404,10 +423,10 @@ redef class ABlockExpr
 	redef fun accept_typing(v)
 	do
 		for e in n_expr do
-			if not v.variable_ctx.unreash then
+			if not v.flow_ctx.unreash then
 				v.enter_visit(e)
-			else if not v.variable_ctx.already_unreash then
-				v.variable_ctx.already_unreash = true
+			else if not v.flow_ctx.already_unreash then
+				v.flow_ctx.already_unreash = true
 				v.error(e, "Error: unreachable statement.")
 			end
 		end
@@ -466,11 +485,12 @@ end
 redef class ABreakExpr
 	redef fun after_typing(v)
 	do
+		var old_flow_ctx = v.flow_ctx
 		v.mark_unreash(self)
 		var esc = compute_escapable_block(v.escapable_ctx)
 		if esc == null then return
 
-		esc.break_variable_contexts.add(v.variable_ctx)
+		esc.break_flow_contexts.add(old_flow_ctx)
 
 		var bl = esc.break_list
 		if n_expr == null and bl != null then
@@ -506,29 +526,28 @@ special AExpr
 		_escapable = escapable
 		v.escapable_ctx.push(escapable, n_label)
 
-		# Save an prepae the variable contextes
-		var old_var_ctx = v.variable_ctx
-		var old_base_var_ctx = v.base_variable_ctx
-		if is_loop then v.base_variable_ctx = v.variable_ctx
-		v.variable_ctx = old_var_ctx.sub(self)
+		# Save an prepare the contextes
+		var old_flow_ctx = v.flow_ctx
+		var old_base_flow_ctx = v.base_flow_ctx
+		if is_loop then v.base_flow_ctx = v.flow_ctx
 
 		# Do the main processing
 		process_control_inside(v)
 
 		# Add the end of the block as an exit context
-		if not v.variable_ctx.unreash then
-			escapable.break_variable_contexts.add(v.variable_ctx)
+		if not v.flow_ctx.unreash then
+			escapable.break_flow_contexts.add(v.flow_ctx)
 		end
 
 		# Merge all exit contexts
-		if escapable.break_variable_contexts.is_empty then
-			v.variable_ctx = old_var_ctx
+		if escapable.break_flow_contexts.is_empty then
+			v.flow_ctx = old_flow_ctx
 			v.mark_unreash(self)
 		else
-			v.variable_ctx = old_var_ctx.merge(self, escapable.break_variable_contexts, v.base_variable_ctx)
+			v.flow_ctx = old_base_flow_ctx.merge(self, escapable.break_flow_contexts)
 		end
 
-		if is_loop then v.base_variable_ctx = old_base_var_ctx
+		if is_loop then v.base_flow_ctx = old_base_flow_ctx
 		v.escapable_ctx.pop
 		_is_typed = true
 	end
@@ -546,35 +565,35 @@ special AAbsControl
 
 	redef fun process_control_inside(v)
 	do
-		v.enter_visit(n_block)
+		v.enter_visit_block(n_block)
 	end
 end
 
 redef class AIfExpr
 	redef fun accept_typing(v)
 	do
-		var old_var_ctx = v.variable_ctx
 		v.enter_visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
 
 		# Prepare 'then' context
-		v.use_if_true_variable_ctx(n_expr)
+		var old_flow_ctx = v.flow_ctx
+		v.use_if_true_flow_ctx(n_expr)
 
 		# Process the 'then'
 		v.enter_visit_block(n_then)
 
 		# Remember what appened in the 'then'
-		var then_var_ctx = v.variable_ctx
+		var then_flow_ctx = v.flow_ctx
 
 		# Prepare 'else' context
-		v.variable_ctx = old_var_ctx
-		v.use_if_false_variable_ctx(n_expr)
+		v.flow_ctx = old_flow_ctx
+		v.use_if_false_flow_ctx(n_expr)
 
 		# Process the 'else'
 		v.enter_visit_block(n_else)
 
 		# Merge 'then' and 'else' contexts
-		v.variable_ctx = old_var_ctx.merge_reash(self, then_var_ctx, v.variable_ctx, v.base_variable_ctx)
+		v.flow_ctx = v.base_flow_ctx.merge_reash(self, then_flow_ctx, v.flow_ctx)
 		_is_typed = true
 	end
 end
@@ -588,7 +607,7 @@ special AAbsControl
 
 	redef fun process_control_inside(v)
 	do
-		var old_var_ctx = v.variable_ctx
+		var old_flow_ctx = v.flow_ctx
 
 		# Process condition
 		v.enter_visit(n_expr)
@@ -599,15 +618,15 @@ special AAbsControl
 		end
 
 		# Prepare inside context (assert cond)
-		v.use_if_true_variable_ctx(n_expr)
+		v.use_if_true_flow_ctx(n_expr)
 
 		# Process inside
 		v.enter_visit_block(n_block)
 
 		# Compute outside context (assert !cond + all breaks)
-		v.variable_ctx = old_var_ctx
-		v.use_if_false_variable_ctx(n_expr)
-		escapable.break_variable_contexts.add(v.variable_ctx)
+		v.flow_ctx = old_flow_ctx
+		v.use_if_false_flow_ctx(n_expr)
+		escapable.break_flow_contexts.add(v.flow_ctx)
 	end
 end
 
@@ -640,12 +659,14 @@ special AAbsControl
 
 	redef fun process_control_inside(v)
 	do
-		var old_var_ctx = v.variable_ctx
+		var old_scope_ctx = v.scope_ctx
+		v.scope_ctx = v.scope_ctx.sub(self)
+		var old_flow_ctx = v.flow_ctx
 
 		# Create the automatic variable
 		var va = new AutoVariable(n_id.to_symbol, n_id)
 		_variable = va
-		v.variable_ctx.add(va)
+		v.scope_ctx.add(va)
 
 		# Process collection
 		v.enter_visit(n_expr)
@@ -665,7 +686,8 @@ special AAbsControl
 		v.enter_visit_block(n_block)
 
 		# end == begin of the loop
-		v.variable_ctx = old_var_ctx
+		v.flow_ctx = old_flow_ctx
+		v.scope_ctx = old_scope_ctx
 	end
 end
 
@@ -678,14 +700,14 @@ redef class AAssertExpr
 
 		# Process optional 'else' part
 		if n_else != null then
-			var old_var_ctx = v.variable_ctx
-			v.use_if_false_variable_ctx(n_expr)
+			var old_flow_ctx = v.flow_ctx
+			v.use_if_false_flow_ctx(n_expr)
 			v.enter_visit(n_else)
-			v.variable_ctx = old_var_ctx
+			v.flow_ctx = old_flow_ctx
 		end
 
 		# Prepare outside
-		v.use_if_true_variable_ctx(n_expr)
+		v.use_if_true_flow_ctx(n_expr)
 		_is_typed = true
 	end
 end
@@ -700,8 +722,8 @@ redef class AVarExpr
 
 	redef fun after_typing(v)
 	do
-		v.variable_ctx.check_is_set(self, variable)
-		_stype = v.variable_ctx.stype(variable)
+		v.flow_ctx.check_is_set(self, variable)
+		_stype = v.flow_ctx.stype(variable)
 		_is_typed = _stype != null
 	end
 end
@@ -709,15 +731,15 @@ end
 redef class AVarAssignExpr
 	redef fun after_typing(v)
 	do
-		v.variable_ctx.mark_is_set(variable)
+		v.mark_is_set(variable)
 
 		# Check the base type
-		var btype = v.base_variable_ctx.stype(variable)
+		var btype = v.base_flow_ctx.stype(variable)
 		if not v.check_expr(n_value) then return
 		if btype != null and not v.check_conform_expr(n_value, btype) then return
 
 		# Always cast
-		v.variable_ctx = v.variable_ctx.sub_with(self, variable, n_value.stype)
+		v.flow_ctx = v.flow_ctx.sub_with(self, variable, n_value.stype)
 
 		_is_typed = true
 	end
@@ -757,19 +779,19 @@ end
 redef class AVarReassignExpr
 	redef fun after_typing(v)
 	do
-		v.variable_ctx.check_is_set(self, variable)
-		v.variable_ctx.mark_is_set(variable)
-		var t = v.variable_ctx.stype(variable)
+		v.flow_ctx.check_is_set(self, variable)
+		v.mark_is_set(variable)
+		var t = v.flow_ctx.stype(variable)
 		var t2 = do_rvalue_typing(v, t)
 		if t2 == null then return
 
 		# Check the base type
-		var btype = v.base_variable_ctx.stype(variable)
+		var btype = v.base_flow_ctx.stype(variable)
 		if not v.check_expr(n_value) then return
 		if btype != null and not v.check_conform(n_value, t2, btype) then return
 
 		# Always cast
-		v.variable_ctx = v.variable_ctx.sub_with(self, variable, t2)
+		v.flow_ctx = v.flow_ctx.sub_with(self, variable, t2)
 
 		_is_typed = true
 	end
@@ -794,7 +816,7 @@ redef class ASelfExpr
 	redef fun after_typing(v)
 	do
 		_variable = v.self_var
-		_stype = v.variable_ctx.stype(variable)
+		_stype = v.flow_ctx.stype(variable)
 		_is_typed = true
 	end
 
@@ -808,30 +830,30 @@ end
 redef class AIfexprExpr
 	redef fun accept_typing(v)
 	do
-		var old_var_ctx = v.variable_ctx
+		var old_flow_ctx = v.flow_ctx
 
 		# Process condition
 		v.enter_visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
 
 		# Prepare 'then' context
-		v.use_if_true_variable_ctx(n_expr)
+		v.use_if_true_flow_ctx(n_expr)
 
 		# Process 'then'
 		v.enter_visit_block(n_then)
 
 		# Remember what appened in the 'then'
-		var then_var_ctx = v.variable_ctx
+		var then_flow_ctx = v.flow_ctx
 
 		# Prepare 'else' context
-		v.variable_ctx = old_var_ctx
-		v.use_if_false_variable_ctx(n_expr)
+		v.flow_ctx = old_flow_ctx
+		v.use_if_false_flow_ctx(n_expr)
 
 		# Process 'else'
 		v.enter_visit_block(n_else)
 
 		# Merge 'then' and 'else' contexts
-		v.variable_ctx = old_var_ctx.merge_reash(self, then_var_ctx, v.variable_ctx, v.base_variable_ctx)
+		v.flow_ctx = v.base_flow_ctx.merge_reash(self, then_flow_ctx, v.flow_ctx)
 
 		var stype = v.check_conform_multiexpr(null, [n_then, n_else])
 		if stype == null then return
@@ -852,7 +874,7 @@ end
 redef class AOrExpr
 	redef fun accept_typing(v)
 	do
-		var old_var_ctx = v.variable_ctx
+		var old_flow_ctx = v.flow_ctx
 		var stype = v.type_bool
 		_stype = stype
 
@@ -860,17 +882,17 @@ redef class AOrExpr
 		v.enter_visit(n_expr)
 
 		# Prepare right operand context
-		v.use_if_false_variable_ctx(n_expr)
+		v.use_if_false_flow_ctx(n_expr)
 
 		# Process right operand
 		v.enter_visit(n_expr2)
-		if n_expr2.if_false_variable_ctx != null then
-			_if_false_variable_ctx = n_expr2.if_false_variable_ctx
+		if n_expr2.if_false_flow_ctx != null then
+			_if_false_flow_ctx = n_expr2.if_false_flow_ctx
 		else
-			_if_false_variable_ctx = v.variable_ctx
+			_if_false_flow_ctx = v.flow_ctx
 		end
 
-		v.variable_ctx = old_var_ctx
+		v.flow_ctx = old_flow_ctx
 
 		v.check_conform_expr(n_expr, stype)
 		v.check_conform_expr(n_expr2, stype)
@@ -882,24 +904,24 @@ end
 redef class AAndExpr
 	redef fun accept_typing(v)
 	do
-		var old_var_ctx = v.variable_ctx
+		var old_flow_ctx = v.flow_ctx
 		var stype = v.type_bool
 
 		# Process left operand
 		v.enter_visit(n_expr)
 
 		# Prepare right operand context
-		v.use_if_true_variable_ctx(n_expr)
+		v.use_if_true_flow_ctx(n_expr)
 
 		# Process right operand
 		v.enter_visit(n_expr2)
-		if n_expr2.if_true_variable_ctx != null then
-			_if_true_variable_ctx = n_expr2.if_true_variable_ctx
+		if n_expr2.if_true_flow_ctx != null then
+			_if_true_flow_ctx = n_expr2.if_true_flow_ctx
 		else
-			_if_true_variable_ctx = v.variable_ctx
+			_if_true_flow_ctx = v.flow_ctx
 		end
 
-		v.variable_ctx = old_var_ctx
+		v.flow_ctx = old_flow_ctx
 
 		v.check_conform_expr(n_expr, stype)
 		v.check_conform_expr(n_expr2, stype)
@@ -914,8 +936,8 @@ redef class ANotExpr
 		v.check_conform_expr(n_expr, v.type_bool)
 
 		# Invert if_true/if_false information
-		_if_false_variable_ctx = n_expr._if_true_variable_ctx
-		_if_true_variable_ctx = n_expr._if_false_variable_ctx
+		_if_false_flow_ctx = n_expr._if_true_flow_ctx
+		_if_true_flow_ctx = n_expr._if_false_flow_ctx
 
 		_stype = v.type_bool
 		_is_typed = true
@@ -925,7 +947,7 @@ end
 redef class AOrElseExpr
 	redef fun after_typing(v)
 	do
-		var old_var_ctx = v.variable_ctx
+		var old_flow_ctx = v.flow_ctx
 
 		# Process left operand
 		v.enter_visit(n_expr)
@@ -942,7 +964,7 @@ redef class AOrElseExpr
 		# Prepare the else context : ie the first expression is null
 		var variable = n_expr.its_variable
 		if variable != null then
-			v.variable_ctx.sub_with(self, variable, v.type_none)
+			v.flow_ctx.sub_with(self, variable, v.type_none)
 		end
 
 		# Process right operand
@@ -950,7 +972,7 @@ redef class AOrElseExpr
 		v.check_expr(n_expr)
 
 		# Restore the context
-		v.variable_ctx = old_var_ctx
+		v.flow_ctx = old_flow_ctx
 
 		# Merge the types
 		var stype = v.check_conform_multiexpr(t, [n_expr2])
@@ -1542,8 +1564,8 @@ redef class AEqExpr
 	do
 		var variable = n.its_variable
 		if variable != null and n.stype isa MMNullableType then
-			_if_false_variable_ctx = v.variable_ctx.sub_with(self, variable, n.stype.as_notnull)
-			_if_true_variable_ctx = v.variable_ctx.sub_with(self, variable, v.type_none)
+			_if_false_flow_ctx = v.flow_ctx.sub_with(self, variable, n.stype.as_notnull)
+			_if_true_flow_ctx = v.flow_ctx.sub_with(self, variable, v.type_none)
 		end
 	end
 end
@@ -1573,8 +1595,8 @@ redef class ANeExpr
 	do
 		var variable = n.its_variable
 		if variable != null and n.stype isa MMNullableType then
-			_if_true_variable_ctx = v.variable_ctx.sub_with(self, variable, n.stype.as_notnull)
-			_if_false_variable_ctx = v.variable_ctx.sub_with(self, variable, v.type_none)
+			_if_true_flow_ctx = v.flow_ctx.sub_with(self, variable, n.stype.as_notnull)
+			_if_false_flow_ctx = v.flow_ctx.sub_with(self, variable, v.type_none)
 		end
 	end
 end
@@ -1619,7 +1641,7 @@ redef class ACallFormExpr
 	do
 		if n_expr.is_implicit_self then
 			var name = n_id.to_symbol
-			var variable = v.variable_ctx[name]
+			var variable = v.scope_ctx[name]
 			if variable != null then
 				var n: AExpr
 				if variable isa ClosureVariable then
@@ -1778,30 +1800,32 @@ redef class AClosureDef
 
 		_closure = esc.closure
 
-		var old_var_ctx = v.variable_ctx
-		var old_base_var_ctx = v.base_variable_ctx
-		v.base_variable_ctx = v.variable_ctx
-		v.variable_ctx = v.variable_ctx.sub(self)
+		var old_scope_ctx = v.scope_ctx
+		var old_flow_ctx = v.flow_ctx
+		var old_base_flow_ctx = v.base_flow_ctx
+		v.base_flow_ctx = v.flow_ctx
+		v.scope_ctx = v.scope_ctx.sub(self)
 		variables = new Array[AutoVariable]
 		for i in [0..n_ids.length[ do
 			var va = new AutoVariable(n_ids[i].to_symbol, n_ids[i])
 			variables.add(va)
 			va.stype = sig[i]
-			v.variable_ctx.add(va)
+			v.scope_ctx.add(va)
 		end
 
 		_accept_typing2 = true
 		accept_typing(v)
 
-		if v.variable_ctx.unreash == false then
+		if v.flow_ctx.unreash == false then
 			if closure.signature.return_type != null then
 				v.error(self, "Control error: Reached end of block (a 'continue' with a value was expected).")
 			else if closure.is_break and esc.break_list != null then
 				v.error(self, "Control error: Reached end of break block (a 'break' with a value was expected).")
 			end
 		end
-		v.variable_ctx = old_var_ctx
-		v.base_variable_ctx = old_base_var_ctx
+		v.scope_ctx = old_scope_ctx
+		v.flow_ctx = old_flow_ctx
+		v.base_flow_ctx = old_base_flow_ctx
 	end
 end
 
@@ -1844,7 +1868,7 @@ special ATypeCheckExpr
 		if not n_type.is_typed then return
 		var variable = n_expr.its_variable
 		if variable != null then
-			_if_true_variable_ctx = v.variable_ctx.sub_with(self, variable, n_type.stype)
+			_if_true_flow_ctx = v.flow_ctx.sub_with(self, variable, n_type.stype)
 		end
 		_stype = v.type_bool
 		_is_typed = true
