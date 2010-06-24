@@ -426,35 +426,30 @@ redef class AModule
 	fun import_super_modules(tc: ToolContext, mod: MMSrcModule)
 	do
 		# Import super-modules
-		var module_names_to_import = new Array[Symbol]
-		var module_visibility = new HashMap[Symbol, Int]
+		var supers = new Array[MMModule]
 		var no_import: nullable AImport = null
 		for i in n_imports do
 			var n = i.module_name
 			if n != null then
-				module_names_to_import.add(n)
-				module_visibility[n] = i.visibility_level
+				var m = tc.get_module(n, mod)
+				supers.add(m)
+				mod.add_super_module(m, i.visibility_level)
 			else
 				no_import = i
 			end
 		end
 		if no_import != null then
-			if not module_names_to_import.is_empty then
+			if not supers.is_empty then
 				tc.error(no_import.location, "Error: Top modules cannot import other modules.")
 			end
-		else if module_names_to_import.is_empty then
+		else if supers.is_empty then
 			var stdname = once "standard".to_symbol
-			module_names_to_import.add(stdname)
-			module_visibility[stdname] = 1
+			var m = tc.get_module(stdname, mod)
+			supers.add(m)
+			mod.add_super_module(m, 1)
 		end
 
-		mod.import_supers_modules(module_names_to_import)
-
-		for mname in module_names_to_import do
-			var level = module_visibility[mname]
-			var m = tc.get_module(mname, mod)
-			mod.add_super_module(m, level)
-		end
+		tc.add_module(mod, supers)
 	end
 end
 
