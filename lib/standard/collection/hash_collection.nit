@@ -49,7 +49,7 @@ special ArrayCapable[nullable N]
 		var cur = base
 		loop
 			var c = arr[cur]
-			if c == null or c.key == k then # REAL equals
+			if c == null or c._key == k then # REAL equals
 				_last_accessed_index = cur
 				_last_accessed_key = k
 				return cur
@@ -69,10 +69,10 @@ special ArrayCapable[nullable N]
 		if _first_item == null then
 			_first_item = node
 		else
-			_last_item.next_item = node
+			_last_item._next_item = node
 		end
-		node.prev_item = _last_item
-		node.next_item = null
+		node._prev_item = _last_item
+		node._next_item = null
 		_last_item = node
 		# Then store it in the array
 		assert _array[index] == null
@@ -91,15 +91,15 @@ special ArrayCapable[nullable N]
 		var node = _array[i]
 		assert has_couple: node != null
 		# Remove the item in the list
-		var prev = node.prev_item
-		var next = node.next_item
+		var prev = node._prev_item
+		var next = node._next_item
 		if prev != null then
-			prev.next_item = next
+			prev._next_item = next
 		else
 			_first_item = next
 		end
 		if next != null then
-			next.prev_item = prev
+			next._prev_item = prev
 		else
 			_last_item = prev
 		end
@@ -116,7 +116,7 @@ special ArrayCapable[nullable N]
 			if n == null then
 				return
 			end
-			var i2 = index_at(n.key)
+			var i2 = index_at(n._key)
 			if i != i2 then
 				_array[i] = null
 				assert _array[i2] == null
@@ -164,25 +164,41 @@ special ArrayCapable[nullable N]
 		# Reput items in the array
 		var node = _first_item
 		while node != null do
-			var ind = index_at(node.key)
+			var ind = index_at(node._key)
 			assert new_array[ind] == null
 			new_array[ind] = node
-			node = node.next_item
+			node = node._next_item
 		end
 		_last_accessed_key = null
 	end
 end
 
 private class HashNode[K]
-	fun key: K is abstract
+	var _key: K
 	type N: HashNode[K]
 	readable writable var _next_item: nullable N = null
 	readable writable var _prev_item: nullable N = null
+	init(k: K)
+	do
+		_key = k
+	end
 end
 
 class HashMap[K, V]
-special CoupleMap[K, V]
+special Map[K, V]
 special HashCollection[K, HashMapNode[K, V], V]
+
+	redef fun [](key)
+	do
+		var c = couple_at(key)
+		if c == null then
+			abort
+		else
+			return c._value
+		end
+	end
+
+	redef fun has_key(key) do return couple_at(key) != null
 
 	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
 
@@ -191,7 +207,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 	do
 		var c = _first_item
 		while c != null do
-			each(c.second)
+			each(c._value)
 			c = c._next_item
 		end
 	end
@@ -199,7 +215,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 	redef fun first
 	do
 		assert _length > 0
-		return _first_item.second
+		return _first_item._value
 	end
 
 	redef fun is_empty do return _length == 0
@@ -210,7 +226,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 		var i = 0
 		while i < _capacity do
 			var c = _array[i]
-			if c != null and c.second == item then nb += 1
+			if c != null and c._value == item then nb += 1
 			i += 1
 		end
 		return nb
@@ -221,7 +237,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 		var i = 0
 		while i < _capacity do
 			var c = _array[i]
-			if c != null and c.second == item then return true
+			if c != null and c._value == item then return true
 			i += 1
 		end
 		return false
@@ -232,7 +248,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 		var i = 0
 		while i < _capacity do
 			var c = _array[i]
-			if c != null and c.second != item then return false
+			if c != null and c._value != item then return false
 			i += 1
 		end
 		return true
@@ -244,8 +260,8 @@ special HashCollection[K, HashMapNode[K, V], V]
 		var i = index_at(key)
 		var c = _array[i]
 		if c != null then
-			c.first = key
-			c.second = v
+			c._key = key
+			c._value = v
 		else
 			store(i, new HashMapNode[K, V](key, v))
 		end
@@ -256,7 +272,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 		var i = 0
 		while i < _capacity do
 			var c = _array[i]
-			if c != null and c.second == item then
+			if c != null and c._value == item then
 				remove_index(i)
 				return
 			end
@@ -268,7 +284,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 
 	redef fun clear do raz
 
-	redef fun couple_at(key) do return _array[index_at(key)]
+	fun couple_at(key: K): nullable HashMapNode[K, V] do return _array[index_at(key)]
 
 	init
 	do
@@ -279,15 +295,14 @@ special HashCollection[K, HashMapNode[K, V], V]
 end
 
 class HashMapNode[K, V]
-special Couple[K, V]
 special HashNode[K]
-	redef fun key do return first
 	redef type N: HashMapNode[K, V]
+	var _value: V
 
 	init(k: K, v: V)
 	do
-		first = k
-		second = v
+		super(k)
+		_value = v
 	end
 end
 
@@ -298,7 +313,7 @@ special MapIterator[K, V]
 	redef fun item
 	do
 		assert is_ok
-		return _node.second
+		return _node._value
 	end
 
 	#redef fun item=(value)
@@ -310,13 +325,13 @@ special MapIterator[K, V]
 	redef fun key
 	do
 		assert is_ok
-		return _node.first
+		return _node._key
 	end
 
 	redef fun next
 	do
 		assert is_ok
-		_node = _node.next_item
+		_node = _node._next_item
 	end
 
 	# The map to iterate on
@@ -341,7 +356,7 @@ special HashCollection[E, HashSetNode[E], E]
 	redef fun first
 	do
 		assert _length > 0
-		return _first_item.key
+		return _first_item._key
 	end
 
 	redef fun has(item)
@@ -354,7 +369,7 @@ special HashCollection[E, HashSetNode[E], E]
 		var i = index_at(item)
 		var c = _array[i]
 		if c != null then
-			c.key = item
+			c._key = item
 		else
 			store(i,new HashSetNode[E](item))
 		end
@@ -378,8 +393,6 @@ class HashSetNode[E]
 special HashNode[E]
 	redef type N: HashSetNode[E]
 
-	redef readable writable var _key: E
-
 	init(e: E)
 	do
 		_key = e
@@ -393,13 +406,13 @@ special Iterator[E]
 	redef fun item
 	do
 		assert is_ok
-		return _node.key
+		return _node._key
 	end
 
 	redef fun next
 	do
 		assert is_ok
-		_node = _node.next_item
+		_node = _node._next_item
 	end
 
 	# The set to iterate on
@@ -411,7 +424,7 @@ special Iterator[E]
 	init(set: HashSet[E])
 	do
 		_set = set
-		_node = set.first_item
+		_node = set._first_item
 	end
 end
 
