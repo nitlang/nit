@@ -91,6 +91,7 @@ class Program
 					var icb = new ICodeBuilder(module, iroutine)
 
 					for g in c.global_properties do
+						if not g.intro isa MMAttribute then continue
 						var p = c[g]
 						var t = p.signature.return_type
 						if p isa MMAttribute and t != null then
@@ -111,6 +112,7 @@ class Program
 					var iroutine = new IRoutine(iselfa, null)
 					var icb = new ICodeBuilder(module, iroutine)
 					for g in c.global_properties do
+						if not g.intro isa MMAttribute then continue
 						var p = c[g]
 						var t = p.signature.return_type
 						if p isa MMAttribute and t != null and not t.is_nullable then
@@ -122,9 +124,9 @@ class Program
 				end
 
 				for g in c.global_properties do
-					var p = c[g]
 					# FIXME skip invisible constructors
-					if not p.global.is_init_for(c) then continue
+					if not g.is_init_for(c) then continue
+					var p = c[g]
 					assert p isa MMMethod
 
 					var iself = new IRegister(c.get_type)
