@@ -54,7 +54,6 @@ class MMContext
 	fun add_local_class(c: MMLocalClass, sup: Array[MMLocalClass])
 	do
 		var csup = new Array[MMLocalClass]
-		var csups = new Array[String]
 		for s in sup do
 			if s isa MMConcreteClass then
 				csup.add(s)
@@ -128,10 +127,10 @@ class MMModule
 	readable var _mhe: nullable PartialOrderElement[MMModule]
 
 	# All global classes of the module (defined and imported)
-	readable var _global_classes: Array[MMGlobalClass] = new Array[MMGlobalClass]
+	readable var _global_classes: Set[MMGlobalClass] = new HashSet[MMGlobalClass]
 
 	# All local classes of the module (defined and imported)
-	readable var _local_classes: Array[MMLocalClass] = new Array[MMLocalClass]
+	readable var _local_classes: Set[MMLocalClass] = new HashSet[MMLocalClass]
 
 	# Class specialization hierarchy of the module.
 	readable var _class_specialization_hierarchy: PartialOrder[MMLocalClass] = new PartialOrder[MMLocalClass]

@@ -27,102 +27,112 @@ special ArrayCapable[nullable N]
 	readable var _first_item: nullable N = null # First added item (used to visit items in nice order)
 	var _last_item: nullable N = null # Last added item (same)
 
-	# The last index accessed
-	var _last_accessed_index: Int = -1
-
-	# The last key accessed
+	# The last key accessed (used for cache)
 	var _last_accessed_key: nullable K = null
 
-	# Return the index of the k element
+	# The last node accessed (used for cache)
+	var _last_accessed_node: nullable N = null
+
+	# Return the index of the key k
 	fun index_at(k: K): Int
 	do
-		var arr = _array
-
-		# Fisrt step: look in the last indexed elt
-		if k == _last_accessed_key then return _last_accessed_index
-
-		# Compute the base position of the key
-		var base = k.hash % _capacity
-		if base < 0 then base = - base
-
-		# Look for the key in the array
-		var cur = base
-		loop
-			var c = arr[cur]
-			if c == null or c.key == k then # REAL equals
-				_last_accessed_index = cur
-				_last_accessed_key = k
-				return cur
-			end
-			cur -= 1
-			if cur < 0 then cur = _capacity - 1
-			assert no_loop: cur != base
-			if false then break # FIXME remove once unreach loop exits are in c_src
-		end
-		abort #FIXME remove once unreach loop exits are in c_src
+		var i = k.hash % _capacity
+		if i < 0 then i = - i
+		return i
 	end
 
-	# Add a new node (should be free)
+	# Return the node assosiated with the key
+	fun node_at(k: K): nullable N
+	do
+		# cache: `is' is used instead of `==' because it is a faster filter (even if not exact)
+		if k is _last_accessed_key then return _last_accessed_node
+
+		var res = node_at_idx(index_at(k), k)
+		_last_accessed_key = k
+		_last_accessed_node = res
+		return res
+	end
+
+	# Return the node assosiated with the key (but with the index already known)
+	fun node_at_idx(i: Int, k: K): nullable N
+	do
+		var c = _array[i]
+		while c != null do
+			var ck = c._key
+			if ck is k or ck == k then # prefilter with `is' because the compiler is not smart enought yet
+				break
+			end
+			c = c._next_in_bucklet
+		end
+		return c
+	end
+
+	# Add a new node at a given index
 	fun store(index: Int, node: N)
 	do
 		# Store the item in the list
 		if _first_item == null then
 			_first_item = node
 		else
-			_last_item.next_item = node
+			_last_item._next_item = node
 		end
-		node.prev_item = _last_item
-		node.next_item = null
+		node._prev_item = _last_item
+		node._next_item = null
 		_last_item = node
+
 		# Then store it in the array
-		assert _array[index] == null
+		var next = _array[index]
 		_array[index] = node
+		node._next_in_bucklet = next
+		if next != null then next._prev_in_bucklet = node
+
+		_last_accessed_key = node._key
+		_last_accessed_node = node
+
+		# Enlarge if needed
 		var l = _length
 		_length = l + 1
-		l = (l + 5) * 150 / 100
+		l = (l + 5) * 3 / 2
 		if l >= _capacity then
 			enlarge(l * 2)
 		end
 	end
 
-	fun remove_index(i: Int)
+	# Remove the node assosiated with the key
+	fun remove_node(k: K)
 	do
-		assert correct_index: i >= 0 and i < _capacity
-		var node = _array[i]
-		assert has_couple: node != null
+		var i = index_at(k)
+		var node = node_at_idx(i, k)
+		if node == null then return
+
 		# Remove the item in the list
-		var prev = node.prev_item
-		var next = node.next_item
+		var prev = node._prev_item
+		var next = node._next_item
 		if prev != null then
-			prev.next_item = next
+			prev._next_item = next
 		else
 			_first_item = next
 		end
 		if next != null then
-			next.prev_item = prev
+			next._prev_item = prev
 		else
 			_last_item = prev
 		end
+
 		# Remove the item in the array
-		_array[i] = null
 		_length -= 1
-		# Now replaces things before if needed
-		loop
-			i -= 1
-			if i < 0 then
-				i = _capacity - 1
-			end
-			var n = _array[i]
-			if n == null then
-				return
-			end
-			var i2 = index_at(n.key)
-			if i != i2 then
-				_array[i] = null
-				assert _array[i2] == null
-				_array[i2] = n
-			end
+		prev = node._prev_in_bucklet
+		next = node._next_in_bucklet
+		if prev != null then
+			prev._next_in_bucklet = next
+		else
+			_array[i] = next
 		end
+		if next != null then
+			next._prev_in_bucklet = prev
+		end
+
+		_last_accessed_key = null
 	end
 
 	fun raz
@@ -142,7 +152,6 @@ special ArrayCapable[nullable N]
 	do
 		var old_cap = _capacity
 		# get a new capacity
-		# cap = cap * 130 / 100 + 5 + 1000 # /
 		if cap < _length + 1 then cap = _length + 1
 		if cap <= _capacity then return
 		_capacity = cap
@@ -164,25 +173,45 @@ special ArrayCapable[nullable N]
 		# Reput items in the array
 		var node = _first_item
 		while node != null do
-			var ind = index_at(node.key)
-			assert new_array[ind] == null
-			new_array[ind] = node
-			node = node.next_item
+			var index = index_at(node._key)
+			# Then store it in the array
+			var next = new_array[index]
+			new_array[index] = node
+			node._next_in_bucklet = next
+			if next != null then next._prev_in_bucklet = node
+			node = node._next_item
 		end
-		_last_accessed_key = null
 	end
 end
 
 private class HashNode[K]
-	fun key: K is abstract
+	var _key: K
 	type N: HashNode[K]
 	readable writable var _next_item: nullable N = null
 	readable writable var _prev_item: nullable N = null
+	var _prev_in_bucklet: nullable N = null
+	var _next_in_bucklet: nullable N = null
+	init(k: K)
+	do
+		_key = k
+	end
 end
 
 class HashMap[K, V]
-special CoupleMap[K, V]
+special Map[K, V]
 special HashCollection[K, HashMapNode[K, V], V]
+
+	redef fun [](key)
+	do
+		var c = node_at(key)
+		if c == null then
+			abort
+		else
+			return c._value
+		end
+	end
+
+	redef fun has_key(key) do return node_at(key) != null
 
 	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
 
@@ -191,7 +220,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 	do
 		var c = _first_item
 		while c != null do
-			each(c.second)
+			each(c._value)
 			c = c._next_item
 		end
 	end
@@ -199,7 +228,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 	redef fun first
 	do
 		assert _length > 0
-		return _first_item.second
+		return _first_item._value
 	end
 
 	redef fun is_empty do return _length == 0
@@ -207,33 +236,30 @@ special HashCollection[K, HashMapNode[K, V], V]
 	redef fun count(item)
 	do
 		var nb = 0
-		var i = 0
-		while i < _capacity do
-			var c = _array[i]
-			if c != null and c.second == item then nb += 1
-			i += 1
+		var c = _first_item
+		while c != null do
+			if c._value == item then nb += 1
+			c = c._next_item
 		end
 		return nb
 	end
 
 	redef fun has(item)
 	do
-		var i = 0
-		while i < _capacity do
-			var c = _array[i]
-			if c != null and c.second == item then return true
-			i += 1
+		var c = _first_item
+		while c != null do
+			if c._value == item then return true
+			c = c._next_item
 		end
 		return false
 	end
 
 	redef fun has_only(item)
 	do
-		var i = 0
-		while i < _capacity do
-			var c = _array[i]
-			if c != null and c.second != item then return false
-			i += 1
+		var c = _first_item
+		while c != null do
+			if c._value != item then return false
+			c = c._next_item
 		end
 		return true
 	end
@@ -242,10 +268,10 @@ special HashCollection[K, HashMapNode[K, V], V]
 	do
 		assert key != null
 		var i = index_at(key)
-		var c = _array[i]
+		var c = node_at_idx(i, key)
 		if c != null then
-			c.first = key
-			c.second = v
+			c._key = key
+			c._value = v
 		else
 			store(i, new HashMapNode[K, V](key, v))
 		end
@@ -253,22 +279,19 @@ special HashCollection[K, HashMapNode[K, V], V]
 
 	redef fun remove(item)
 	do
-		var i = 0
-		while i < _capacity do
-			var c = _array[i]
-			if c != null and c.second == item then
-				remove_index(i)
+		var c = _first_item
+		while c != null do
+			if c._value == item then
+				remove_node(c._key)
 				return
 			end
-			i += 1
+			c = c._next_item
 		end
 	end
 
-	redef fun remove_at(key) do remove_index(index_at(key))
+	redef fun remove_at(key) do remove_node(key)
 
 	redef fun clear do raz
-
-	redef fun couple_at(key) do return _array[index_at(key)]
 
 	init
 	do
@@ -279,15 +302,14 @@ special HashCollection[K, HashMapNode[K, V], V]
 end
 
 class HashMapNode[K, V]
-special Couple[K, V]
 special HashNode[K]
-	redef fun key do return first
 	redef type N: HashMapNode[K, V]
+	var _value: V
 
 	init(k: K, v: V)
 	do
-		first = k
-		second = v
+		super(k)
+		_value = v
 	end
 end
 
@@ -298,7 +320,7 @@ special MapIterator[K, V]
 	redef fun item
 	do
 		assert is_ok
-		return _node.second
+		return _node._value
 	end
 
 	#redef fun item=(value)
@@ -310,13 +332,13 @@ special MapIterator[K, V]
 	redef fun key
 	do
 		assert is_ok
-		return _node.first
+		return _node._key
 	end
 
 	redef fun next
 	do
 		assert is_ok
-		_node = _node.next_item
+		_node = _node._next_item
 	end
 
 	# The map to iterate on
@@ -341,26 +363,26 @@ special HashCollection[E, HashSetNode[E], E]
 	redef fun first
 	do
 		assert _length > 0
-		return _first_item.key
+		return _first_item._key
 	end
 
 	redef fun has(item)
 	do
-		return _array[index_at(item)] != null
+		return node_at(item) != null
 	end
 
 	redef fun add(item)
 	do
 		var i = index_at(item)
-		var c = _array[i]
+		var c = node_at_idx(i, item)
 		if c != null then
-			c.key = item
+			c._key = item
 		else
 			store(i,new HashSetNode[E](item))
 		end
 	end
 
-	redef fun remove(item) do remove_index(index_at(item))
+	redef fun remove(item) do remove_node(item)
 
 	redef fun clear do raz
 
@@ -378,8 +400,6 @@ class HashSetNode[E]
 special HashNode[E]
 	redef type N: HashSetNode[E]
 
-	redef readable writable var _key: E
-
 	init(e: E)
 	do
 		_key = e
@@ -393,13 +413,13 @@ special Iterator[E]
 	redef fun item
 	do
 		assert is_ok
-		return _node.key
+		return _node._key
 	end
 
 	redef fun next
 	do
 		assert is_ok
-		_node = _node.next_item
+		_node = _node._next_item
 	end
 
 	# The set to iterate on
@@ -411,7 +431,7 @@ special Iterator[E]
 	init(set: HashSet[E])
 	do
 		_set = set
-		_node = set.first_item
+		_node = set._first_item
 	end
 end
 
