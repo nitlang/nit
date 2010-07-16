@@ -56,13 +56,13 @@ class IRoutine
 	readable writable var _closure_decls: nullable Sequence[IClosureDecl] = null
 
 	# The local variables (excluding params and result)
-	readable var _registers: Set[IRegister] = new ArraySet[IRegister]
+	readable var _registers: Set[IRegister] = new HashSet[IRegister]
 
 	# The result of the routine
 	readable var _result: nullable IRegister
 
 	# The local escapes marks of the routine
-	readable var _escape_marks: Set[IEscapeMark] = new ArraySet[IEscapeMark]
+	readable var _escape_marks: Set[IEscapeMark] = new HashSet[IEscapeMark]
 
 	# The sequence of icode
 	readable var _body: ISeq = new ISeq
