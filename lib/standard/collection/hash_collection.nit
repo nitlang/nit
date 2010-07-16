@@ -27,55 +27,47 @@ special ArrayCapable[nullable N]
 	readable var _first_item: nullable N = null # First added item (used to visit items in nice order)
 	var _last_item: nullable N = null # Last added item (same)
 
-	# The last index accessed
-	var _last_accessed_index: Int = -1
-
-	# The last key accessed
+	# The last key accessed (used for cache)
 	var _last_accessed_key: nullable K = null
 
-	# Return the index of the k element
+	# The last node accessed (used for cache)
+	var _last_accessed_node: nullable N = null
+
+	# Return the index of the key k
 	fun index_at(k: K): Int
 	do
-		var arr = _array
-
-		# Fisrt step: look in the last indexed elt
-		if k == _last_accessed_key then return _last_accessed_index
-
-		# Compute the base position of the key
-		var base = k.hash % _capacity
-		if base < 0 then base = - base
-
-		# Look for the key in the array
-		var cur = base
-		loop
-			var c = arr[cur]
-			if c == null or c._key == k then # REAL equals
-				_last_accessed_index = cur
-				_last_accessed_key = k
-				return cur
-			end
-			cur -= 1
-			if cur < 0 then cur = _capacity - 1
-			assert no_loop: cur != base
-			if false then break # FIXME remove once unreach loop exits are in c_src
-		end
-		abort #FIXME remove once unreach loop exits are in c_src
+		var i = k.hash % _capacity
+		if i < 0 then i = - i
+		return i
 	end
 
 	# Return the node assosiated with the key
 	fun node_at(k: K): nullable N
 	do
+		# cache: `is' is used instead of `==' because it is a faster filter (even if not exact)
+		if k is _last_accessed_key then return _last_accessed_node
+
 		var res = node_at_idx(index_at(k), k)
+		_last_accessed_key = k
+		_last_accessed_node = res
 		return res
 	end
 
 	# Return the node assosiated with the key (but with the index already known)
 	fun node_at_idx(i: Int, k: K): nullable N
 	do
-		return _array[i]
+		var c = _array[i]
+		while c != null do
+			var ck = c._key
+			if ck is k or ck == k then # prefilter with `is' because the compiler is not smart enought yet
+				break
+			end
+			c = c._next_in_bucklet
+		end
+		return c
 	end
 
-	# Add a new node (should be free)
+	# Add a new node at a given index
 	fun store(index: Int, node: N)
 	do
 		# Store the item in the list
@@ -87,12 +79,20 @@ special ArrayCapable[nullable N]
 		node._prev_item = _last_item
 		node._next_item = null
 		_last_item = node
+
 		# Then store it in the array
-		assert _array[index] == null
+		var next = _array[index]
 		_array[index] = node
+		node._next_in_bucklet = next
+		if next != null then next._prev_in_bucklet = node
+
+		_last_accessed_key = node._key
+		_last_accessed_node = node
+
+		# Enlarge if needed
 		var l = _length
 		_length = l + 1
-		l = (l + 5) * 150 / 100
+		l = (l + 5) * 3 / 2
 		if l >= _capacity then
 			enlarge(l * 2)
 		end
@@ -102,8 +102,9 @@ special ArrayCapable[nullable N]
 	fun remove_node(k: K)
 	do
 		var i = index_at(k)
-		var node = _array[i]
+		var node = node_at_idx(i, k)
 		if node == null then return
+
 		# Remove the item in the list
 		var prev = node._prev_item
 		var next = node._next_item
@@ -117,26 +118,21 @@ special ArrayCapable[nullable N]
 		else
 			_last_item = prev
 		end
+
 		# Remove the item in the array
-		_array[i] = null
 		_length -= 1
-		# Now replaces things before if needed
-		loop
-			i -= 1
-			if i < 0 then
-				i = _capacity - 1
-			end
-			var n = _array[i]
-			if n == null then
-				return
-			end
-			var i2 = index_at(n._key)
-			if i != i2 then
-				_array[i] = null
-				assert _array[i2] == null
-				_array[i2] = n
-			end
+		prev = node._prev_in_bucklet
+		next = node._next_in_bucklet
+		if prev != null then
+			prev._next_in_bucklet = next
+		else
+			_array[i] = next
 		end
+		if next != null then
+			next._prev_in_bucklet = prev
+		end
+
+		_last_accessed_key = null
 	end
 
 	fun raz
@@ -177,12 +173,14 @@ special ArrayCapable[nullable N]
 		# Reput items in the array
 		var node = _first_item
 		while node != null do
-			var ind = index_at(node._key)
-			assert new_array[ind] == null
-			new_array[ind] = node
+			var index = index_at(node._key)
+			# Then store it in the array
+			var next = new_array[index]
+			new_array[index] = node
+			node._next_in_bucklet = next
+			if next != null then next._prev_in_bucklet = node
 			node = node._next_item
 		end
-		_last_accessed_key = null
 	end
 end
 
@@ -191,6 +189,8 @@ private class HashNode[K]
 	type N: HashNode[K]
 	readable writable var _next_item: nullable N = null
 	readable writable var _prev_item: nullable N = null
+	var _prev_in_bucklet: nullable N = null
+	var _next_in_bucklet: nullable N = null
 	init(k: K)
 	do
 		_key = k
