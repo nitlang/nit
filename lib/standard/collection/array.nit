@@ -522,7 +522,7 @@ special CoupleMap[K, E]
 	# O(1)
 	redef fun length do return _items.length
 
-	redef fun first do return _items.first.first
+	redef fun first do return _items.first.second
 
 	# O(n)
 	redef fun count(item)
