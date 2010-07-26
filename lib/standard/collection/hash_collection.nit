@@ -184,7 +184,7 @@ special ArrayCapable[nullable N]
 	end
 end
 
-private class HashNode[K]
+private class HashNode[K: Object]
 	var _key: K
 	type N: HashNode[K]
 	readable writable var _next_item: nullable N = null
@@ -197,7 +197,7 @@ private class HashNode[K]
 	end
 end
 
-class HashMap[K, V]
+class HashMap[K: Object, V]
 special Map[K, V]
 special HashCollection[K, HashMapNode[K, V], V]
 
@@ -266,7 +266,6 @@ special HashCollection[K, HashMapNode[K, V], V]
 
 	redef fun []=(key, v)
 	do
-		assert key != null
 		var i = index_at(key)
 		var c = node_at_idx(i, key)
 		if c != null then
@@ -301,7 +300,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 	end
 end
 
-class HashMapNode[K, V]
+class HashMapNode[K: Object, V]
 special HashNode[K]
 	redef type N: HashMapNode[K, V]
 	var _value: V
@@ -313,7 +312,7 @@ special HashNode[K]
 	end
 end
 
-class HashMapIterator[K, V]
+class HashMapIterator[K: Object, V]
 special MapIterator[K, V]
 	redef fun is_ok do return _node != null
 
@@ -354,7 +353,7 @@ special MapIterator[K, V]
 	end
 end
 
-class HashSet[E]
+class HashSet[E: Object]
 special Set[E]
 special HashCollection[E, HashSetNode[E], E]
 
@@ -396,7 +395,7 @@ special HashCollection[E, HashSetNode[E], E]
 	end
 end
 
-class HashSetNode[E]
+class HashSetNode[E: Object]
 special HashNode[E]
 	redef type N: HashSetNode[E]
 
@@ -406,7 +405,7 @@ special HashNode[E]
 	end
 end
 
-class HashSetIterator[E]
+class HashSetIterator[E: Object]
 special Iterator[E]
 	redef fun is_ok do return _node != null
 

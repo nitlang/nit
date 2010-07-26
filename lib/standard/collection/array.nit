@@ -413,7 +413,7 @@ end
 # Others collections ##########################################################
 
 # A set implemented with an Array.
-class ArraySet[E]
+class ArraySet[E: Object]
 special Set[E]
 	# The stored elements.
 	var _array: Array[E]
@@ -461,7 +461,7 @@ special Set[E]
 end
 
 # Iterators on sets implemented with arrays.
-class ArraySetIterator[E]
+class ArraySetIterator[E: Object]
 special Iterator[E]
 
 	redef fun is_ok do return _iter.is_ok
@@ -477,7 +477,7 @@ end
 
 
 # Associative arrays implemented with an array of (key, value) pairs.
-class ArrayMap[K, E]
+class ArrayMap[K: Object, E]
 special CoupleMap[K, E]
 
 	# O(n)

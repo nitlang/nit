@@ -209,7 +209,7 @@ end
 #    ...
 #    s.add(a)
 #    s.has(b) # --> true
-interface Set[E]
+interface Set[E: Object]
 special SimpleCollection[E]
 
 	redef fun has_only(item)
@@ -238,7 +238,7 @@ special SimpleCollection[E]
 	redef fun remove_all(item) do remove(item)
 end
 
-interface MapRead[K, E]
+interface MapRead[K: Object, E]
 special Collection[E]
 	# Get the item at `key'.
 	fun [](key: K): E is abstract
@@ -261,7 +261,7 @@ end
 #     map[u2]            # -> v2
 #     map.has_key(u1)    # -> true
 #     map.has_key(u3)    # -> false
-interface Map[K, E]
+interface Map[K: Object, E]
 special RemovableCollection[E]
 special MapRead[K, E]
 	# Set the`item' at `key'.
@@ -283,7 +283,7 @@ special MapRead[K, E]
 end
 
 # Iterators for Map.
-interface MapIterator[K, E]
+interface MapIterator[K: Object, E]
 special Iterator[E]
 	# The key of the current item.
 	fun key: K is abstract
@@ -382,7 +382,7 @@ special MapIterator[Int, E]
 end
 
 # Associatives arrays that internally uses couples to represent each (key, value) pairs.
-interface CoupleMap[K, E]
+interface CoupleMap[K: Object, E]
 special Map[K, E]
 	# Return the couple of the corresponding key
 	# Return null if the key is no associated element
@@ -404,7 +404,7 @@ end
 # Iterator on CoupleMap
 #
 # Actually is is a wrapper around an iterator of the internal array of the map.
-class CoupleMapIterator[K, E]
+class CoupleMapIterator[K: Object, E]
 special MapIterator[K, E]
 	redef fun item do return _iter.item.second
 	

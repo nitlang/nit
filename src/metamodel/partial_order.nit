@@ -19,7 +19,7 @@ package partial_order
 
 # Handles partial ordered sets (ie hierarchies)
 # Thez are built by adding new element at the bottom of the hierarchy
-class PartialOrder[E]
+class PartialOrder[E: Object]
 special Collection[E]
 	# Elements
 	var _elements: Map[E, PartialOrderElement[E]]
@@ -186,7 +186,7 @@ special Collection[E]
 	end
 end
 
-class PartialOrderElement[E]
+class PartialOrderElement[E: Object]
 	# The partial order where belong self
 	readable var _order: PartialOrder[E] 
 
