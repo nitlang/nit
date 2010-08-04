@@ -35,6 +35,7 @@ Usage: $e [options] modulename [options for module execution]
 -R          Force full recompilation
 -O          Compile with optimizations
 -i          Use the intel compiler instead of gcc
+-ll         Use the clang compiler (llvm) instead of gcc
 -I path     Add a include directory
 -o name     Call name the executable
 -d          Create temporary files in a specific directory
@@ -73,6 +74,7 @@ while [ $stop = false ]; do
 		-R) recompile=true; shift;;
 		-O) OPTS="$OPTS -O2" ext="_savo"; shift;;
 		-i) CC="/opt/intel/cc/10.1.015/bin/icc -O2" ext="_savi"; shift;;
+		-ll) CC="clang --ansi --pedantic -O3"; ext="_savll"; shift;;
 		-I) OPTS="$OPTS -I $2"; shift; shift;;
 		-o) out="$2"; shift; shift;;
 		-d) dir="$2/"; shift; shift;;
