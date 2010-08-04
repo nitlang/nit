@@ -170,18 +170,20 @@ import
 	;
 
 implicit_top_class {-> classdef}
-	= propdefs_toplevel {-> New classdef.top([propdefs_toplevel.propdef])};
+	= propdefs_toplevel+ {-> New classdef.top([propdefs_toplevel.propdef])};
 
 implicit_main_class {-> classdef?}
 	= implicit_main_meth {-> New classdef.main([implicit_main_meth.propdef])}
 	| {null} n {-> Null}
 	;
 implicit_main_meth {-> propdef}
-	= [doc]:no stmts no {-> New propdef.main_meth(Null, stmts.expr)};
+	= [doc]:no stmts {-> New propdef.main_meth(Null, stmts.expr)}
+	| {n} [doc]:no stmtsn {-> New propdef.main_meth(Null, stmtsn.expr)}
+	;
 
 /* CLASSES *******************************************************************/
 classdef
-	= [doc]:no redef visibility classkind no classid formaldefs? [specials]:special* propdefs? [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], [specials.superclass], [propdefs.propdef])};
+	= [doc]:no redef visibility classkind no classid formaldefs? [specials]:special* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], [specials.superclass], [propdefs.propdef])};
 redef {-> kwredef?}
 	= kwredef? {-> kwredef};
 classkind
@@ -203,30 +205,25 @@ special {-> superclass}
 	| {super} no kwsuper [n2]:no type {-> New superclass(Null, kwsuper, type)}
 	;
 
-propdefs~toplevel {-> propdef*}
-	= propdef~toplevel n1 propdefs_tail~toplevel* {-> [propdef~toplevel.propdef, propdefs_tail~toplevel.propdef]}
-	;
-propdefs_tail~toplevel {-> propdef}
+propdefs~toplevel {-> propdef}
 	= propdef~toplevel n1 {-> propdef~toplevel.propdef}
 	;
 propdef~toplevel {-> propdef}
 	= {meth} [doc]:no redef visibility kwmeth methid signature kwdo stmtso kwend? {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, stmtso.expr)}
-	| {assign_return} [doc]:no redef visibility kwmeth methid_noassign signature_withret assign no assign_return {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid_noassign.methid, signature_withret.signature, assign_return.expr)}
+	| {assign_return} [doc]:no redef visibility kwmeth methid signature_withret assign no assign_return {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature_withret.signature, assign_return.expr)}
 !toplevel| {deferred} [doc]:no redef visibility kwmeth methid signature kwis kwabstract {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
 !toplevel| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
 	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string? {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, string)}
-!toplevel| {var} [doc]:no readable writable redef visibility kwvar attrid typing? {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, typing.type, Null)}
-!toplevel| {var2} [doc]:no readable writable redef visibility kwvar attrid typing? assign [n2]:no expr {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, typing.type, expr)}
+!toplevel| {var} [doc]:no readable? writable? redef visibility kwvar attrid typing? {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, typing.type, Null)}
+!toplevel| {var2} [doc]:no readable? writable? redef visibility kwvar attrid typing? assign [n2]:no expr {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, typing.type, expr)}
 !toplevel| {init} [doc]:no redef visibility kwinit methid? signature kwdo stmtso kwend? {-> New propdef.concrete_init(doc.doc, redef.kwredef, visibility, kwinit, methid, signature, stmtso.expr)}
 !toplevel| {type} [doc]:no redef visibility kwtype classid typing {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, classid, typing.type)}
 	;
-readable {-> able?}
+readable {-> able}
 	= redef kwreadable {-> New able.read(redef.kwredef, kwreadable)}
-	| {empty} {-> Null}
 	;
-writable {-> able?}
+writable {-> able}
 	= redef kwwritable {-> New able.write(redef.kwredef, kwwritable)}
-	| {empty} {-> Null}
 	;
 
 visibility
@@ -236,7 +233,7 @@ visibility
 	| {intrude} kwintrude no {-> New visibility.intrude(kwintrude)}
 	;
 
-methid~noassign {-> methid}
+methid {-> methid}
 	= {id} id {-> New methid.id(id)}
 	| {plus} plus {-> New methid.plus(plus)}
 	| {minus} minus {-> New methid.minus(minus)}
@@ -251,8 +248,8 @@ methid~noassign {-> methid}
 	| {gt} gt {-> New methid.gt(gt)}
 	| {bra} obra cbra {-> New methid.bra(obra, cbra)}
 	| {starship} starship {-> New methid.starship(starship)}
-!noassign	| {assign} id assign {-> New methid.assign(id, assign)}
-!noassign	| {braassign} obra cbra assign {-> New methid.braassign(obra, cbra, assign)}
+	| {assign} id assign {-> New methid.assign(id, assign)}
+	| {braassign} obra cbra assign {-> New methid.braassign(obra, cbra, assign)}
 	;
 
 signature~withret {-> signature}
@@ -303,13 +300,15 @@ typing {-> type}
 
 /* STATMENTS *****************************************************************/
 stmtso~withelse~withend {-> expr?}
-	= {block} n stmts [n2]:n kwend {-> stmts.expr}
+	= {block} n stmtsn kwend {-> stmtsn.expr}
 	| {emptyblock} n kwend {-> New expr.block([])}
 	| {emptyoneline} kwend {-> New expr.block([])}
 !withend| {oneline} stmt~withelse {-> stmt~withelse.expr}
 	;
 stmts {-> expr}
 	= stmt stmts_tail* {-> New expr.block([stmt.expr, stmts_tail.expr])};
+stmtsn {-> expr}
+	= stmt stmts_tail* n {-> New expr.block([stmt.expr, stmts_tail.expr])};
 stmts_tail {-> expr}
 	= n stmt {-> stmt.expr};
 stmt~withelse {-> expr}
@@ -338,13 +337,13 @@ closure_defs~withelse {-> closure_def*}
 	;
 
 closure_def_last~withelse {-> closure_def}
-	= bang [id]:closure_id idlist? kwdo stmtso~withelse_withend label? {-> New closure_def(bang, id, [idlist.id], kwdo, stmtso~withelse_withend.expr, label)}
-	| {noend} bang [id]:closure_id idlist? kwdo stmt~withelse {-> New closure_def(bang, id, [idlist.id], kwdo, stmt~withelse.expr, Null)}
+	= bang [id]:closure_id idlist? kwdo stmtso_withend label {-> New closure_def(bang, id, [idlist.id], kwdo, stmtso_withend.expr, label)}
+	| {nolabel} bang [id]:closure_id idlist? kwdo stmtso~withelse {-> New closure_def(bang, id, [idlist.id], kwdo, stmtso~withelse.expr, Null)}
 	| {assign} bang [id]:closure_id idlist? assign no assign_continue~withelse {-> New closure_def(bang, id, [idlist.id], Null, assign_continue~withelse.expr, Null)}
 	;
 
 closure_def {-> closure_def}
-	= bang [id]:closure_id idlist? kwdo n stmts [n2]:n {-> New closure_def(bang, id, [idlist.id], kwdo, stmts.expr, Null)}
+	= bang [id]:closure_id idlist? kwdo n stmtsn {-> New closure_def(bang, id, [idlist.id], kwdo, stmtsn.expr, Null)}
 	| {empty} bang [id]:closure_id idlist? kwdo n {-> New closure_def(bang, id, [idlist.id], kwdo, Null, Null)}
 	;
 closure_id
@@ -375,14 +374,14 @@ assign_op
 	;
 
 do~withelse {-> expr}
-	= kwdo stmtso~withelse_withend label? {-> New expr.do(kwdo, stmtso~withelse_withend.expr, label)}
-	| {noend} kwdo stmt~withelse {-> New expr.do(kwdo, stmt~withelse.expr, Null)}
+	= kwdo stmtso_withend label {-> New expr.do(kwdo, stmtso_withend.expr, label)}
+	| {nolabel} kwdo stmtso~withelse {-> New expr.do(kwdo, stmtso~withelse.expr, Null)}
 	;
 
 if~withelse {-> expr}
 	= {onelineelse} kwif no expr [n2]:no kwthen stmt_withelse kwelse stmtso~withelse {-> New expr.if(kwif, expr, stmt_withelse.expr, stmtso~withelse.expr)}
 !withelse	| {oneline} kwif no expr [n2]:no kwthen stmt {-> New expr.if(kwif, expr, stmt.expr, Null)}
-!withelse	| {block} kwif no expr [n2]:no kwthen [n3]:n stmts [n4]:n elsepartblock {-> New expr.if(kwif, expr, stmts.expr, elsepartblock.expr)}
+!withelse	| {block} kwif no expr [n2]:no kwthen [n3]:n stmtsn elsepartblock {-> New expr.if(kwif, expr, stmtsn.expr, elsepartblock.expr)}
 !withelse	| {emptyblock} kwif no expr [n2]:no kwthen [n3]:n? elsepartblock {-> New expr.if(kwif, expr, Null, elsepartblock.expr)}
 	;
 elsepartblock {-> expr?}
@@ -391,18 +390,18 @@ elsepartblock {-> expr?}
 	;
 
 loop~withelse {-> expr}
-	= kwloop stmtso~withelse_withend label? {-> New expr.loop(kwloop, stmtso~withelse_withend.expr, label)}
-	| {noend} kwloop stmt~withelse {-> New expr.loop(kwloop, stmt~withelse.expr, Null)}
+	= kwloop stmtso_withend label {-> New expr.loop(kwloop, stmtso_withend.expr, label)}
+	| {nolabel} kwloop stmtso~withelse {-> New expr.loop(kwloop, stmtso~withelse.expr, Null)}
 	;
 
 while~withelse {-> expr}
-	= kwwhile no expr [n2]:no kwdo stmtso~withelse_withend label? {-> New expr.while(kwwhile, expr, kwdo, stmtso~withelse_withend.expr, label)}
-	| {noend} kwwhile no expr [n2]:no kwdo stmt~withelse {-> New expr.while(kwwhile, expr, kwdo, stmt~withelse.expr, Null)}
+	= kwwhile no expr [n2]:no kwdo stmtso_withend label {-> New expr.while(kwwhile, expr, kwdo, stmtso_withend.expr, label)}
+	| {nolabel} kwwhile no expr [n2]:no kwdo stmtso~withelse {-> New expr.while(kwwhile, expr, kwdo, stmtso~withelse.expr, Null)}
 	;
 
 for~withelse {-> expr}
-	= kwfor no id [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso~withelse_withend label? {-> New expr.for(kwfor, id, expr, kwdo, stmtso~withelse_withend.expr, label)}
-	| {noend} kwfor no id [n2]:no kwin [n3]:no expr [n4]:no kwdo stmt~withelse {-> New expr.for(kwfor, id, expr, kwdo, stmt~withelse.expr, Null)}
+	= kwfor no id [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso_withend label {-> New expr.for(kwfor, id, expr, kwdo, stmtso_withend.expr, label)}
+	| {nolabel} kwfor no id [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso~withelse {-> New expr.for(kwfor, id, expr, kwdo, stmtso~withelse.expr, Null)}
 	;
 
 assert~withelse {-> expr}
