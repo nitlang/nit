@@ -456,8 +456,8 @@ end
 redef class AModuledecl
 	redef fun accept_class_builder(v)
 	do
-		if n_id.to_symbol != v.mmmodule.name then
-			v.error(n_id, "Error: Module name missmatch between {v.mmmodule.name} and {n_id.to_symbol}")
+		if n_name.n_id.to_symbol != v.mmmodule.name then
+			v.error(n_name.n_id, "Error: Module name missmatch between {v.mmmodule.name} and {n_name.n_id.to_symbol}")
 		end
 	end
 end
@@ -472,7 +472,7 @@ end
 redef class AStdImport
 	redef fun module_name
 	do
-		return n_id.to_symbol
+		return n_name.n_id.to_symbol
 	end
 	redef fun visibility_level
 	do

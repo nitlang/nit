@@ -150,7 +150,7 @@ redef class AModuledecl
     init init_amoduledecl (
             n_doc: nullable ADoc,
             n_kwmodule: nullable TKwmodule,
-            n_id: nullable TId
+            n_name: nullable AModuleName
     )
     do
         empty_init
@@ -160,8 +160,8 @@ redef class AModuledecl
 	end
         _n_kwmodule = n_kwmodule.as(not null)
 	n_kwmodule.parent = self
-        _n_id = n_id.as(not null)
-	n_id.parent = self
+        _n_name = n_name.as(not null)
+	n_name.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -186,11 +186,11 @@ redef class AModuledecl
             end
             return
 	end
-        if _n_id == old_child then
+        if _n_name == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa TId
-                _n_id = new_child
+		assert new_child isa AModuleName
+                _n_name = new_child
 	    else
 		abort
             end
@@ -204,7 +204,7 @@ redef class AModuledecl
             v.enter_visit(_n_doc.as(not null))
         end
         v.enter_visit(_n_kwmodule)
-        v.enter_visit(_n_id)
+        v.enter_visit(_n_name)
     end
 end
 redef class AStdImport
@@ -213,7 +213,7 @@ redef class AStdImport
     init init_astdimport (
             n_visibility: nullable AVisibility,
             n_kwimport: nullable TKwimport,
-            n_id: nullable TId
+            n_name: nullable AModuleName
     )
     do
         empty_init
@@ -221,8 +221,8 @@ redef class AStdImport
 	n_visibility.parent = self
         _n_kwimport = n_kwimport.as(not null)
 	n_kwimport.parent = self
-        _n_id = n_id.as(not null)
-	n_id.parent = self
+        _n_name = n_name.as(not null)
+	n_name.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -247,11 +247,11 @@ redef class AStdImport
             end
             return
 	end
-        if _n_id == old_child then
+        if _n_name == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa TId
-                _n_id = new_child
+		assert new_child isa AModuleName
+                _n_name = new_child
 	    else
 		abort
             end
@@ -263,7 +263,7 @@ redef class AStdImport
     do
         v.enter_visit(_n_visibility)
         v.enter_visit(_n_kwimport)
-        v.enter_visit(_n_id)
+        v.enter_visit(_n_name)
     end
 end
 redef class ANoImport
@@ -7265,6 +7265,76 @@ redef class ABreakClosureId
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwbreak)
+    end
+end
+redef class AModuleName
+    private init empty_init do end
+
+    init init_amodulename (
+            n_quad: nullable TQuad,
+            n_path: Collection[Object], # Should be Collection[TId]
+            n_id: nullable TId
+    )
+    do
+        empty_init
+        _n_quad = n_quad
+	if n_quad != null then
+		n_quad.parent = self
+	end
+	for n in n_path do
+		assert n isa TId
+		_n_path.add(n)
+		n.parent = self
+	end
+        _n_id = n_id.as(not null)
+	n_id.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_quad == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TQuad
+                _n_quad = new_child
+	    else
+		_n_quad = null
+            end
+            return
+	end
+        for i in [0.._n_path.length[ do
+            if _n_path[i] == old_child then
+                if new_child != null then
+		    assert new_child isa TId
+                    _n_path[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_path.remove_at(i)
+                end
+                return
+            end
+        end
+        if _n_id == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TId
+                _n_id = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        if _n_quad != null then
+            v.enter_visit(_n_quad.as(not null))
+        end
+            for n in _n_path do
+                v.enter_visit(n)
+	    end
+        v.enter_visit(_n_id)
     end
 end
 redef class AQualified

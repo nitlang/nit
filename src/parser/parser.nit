@@ -534,325 +534,329 @@ class Parser
 			new ReduceAction381(73),
 			new ReduceAction382(73),
 			new ReduceAction383(73),
-			new ReduceAction384(74),
-			new ReduceAction385(75),
-			new ReduceAction386(76),
-			new ReduceAction386(76),
-			new ReduceAction388(77),
-			new ReduceAction389(77),
-			new ReduceAction36(77),
-			new ReduceAction391(78),
+			new ReduceAction384(73),
+			new ReduceAction385(74),
+			new ReduceAction386(74),
+			new ReduceAction387(74),
+			new ReduceAction388(75),
+			new ReduceAction389(76),
+			new ReduceAction390(77),
+			new ReduceAction390(77),
 			new ReduceAction392(78),
-			new ReduceAction393(79),
-			new ReduceAction394(79),
-			new ReduceAction386(79),
-			new ReduceAction66(80),
-			new ReduceAction67(81),
-			new ReduceAction68(81),
-			new ReduceAction69(81),
-			new ReduceAction70(81),
-			new ReduceAction71(81),
-			new ReduceAction72(81),
-			new ReduceAction77(81),
-			new ReduceAction78(81),
-			new ReduceAction79(81),
-			new ReduceAction80(81),
-			new ReduceAction167(82),
-			new ReduceAction168(82),
-			new ReduceAction169(82),
-			new ReduceAction170(82),
-			new ReduceAction194(83),
-			new ReduceAction195(83),
-			new ReduceAction205(84),
-			new ReduceAction232(84),
-			new ReduceAction233(84),
+			new ReduceAction393(78),
+			new ReduceAction36(78),
+			new ReduceAction395(79),
+			new ReduceAction396(79),
+			new ReduceAction397(80),
+			new ReduceAction398(80),
+			new ReduceAction390(80),
+			new ReduceAction66(81),
+			new ReduceAction67(82),
+			new ReduceAction68(82),
+			new ReduceAction69(82),
+			new ReduceAction70(82),
+			new ReduceAction71(82),
+			new ReduceAction72(82),
+			new ReduceAction77(82),
+			new ReduceAction78(82),
+			new ReduceAction79(82),
+			new ReduceAction80(82),
+			new ReduceAction167(83),
+			new ReduceAction168(83),
+			new ReduceAction169(83),
+			new ReduceAction170(83),
+			new ReduceAction194(84),
+			new ReduceAction195(84),
 			new ReduceAction205(85),
-			new ReduceAction302(85),
+			new ReduceAction232(85),
+			new ReduceAction233(85),
 			new ReduceAction205(86),
-			new ReduceAction304(86),
-			new ReduceAction305(86),
-			new ReduceAction306(86),
+			new ReduceAction302(86),
 			new ReduceAction205(87),
-			new ReduceAction308(87),
+			new ReduceAction304(87),
+			new ReduceAction305(87),
+			new ReduceAction306(87),
 			new ReduceAction205(88),
-			new ReduceAction310(88),
-			new ReduceAction311(88),
-			new ReduceAction312(88),
-			new ReduceAction313(88),
-			new ReduceAction314(88),
-			new ReduceAction315(88),
-			new ReduceAction316(88),
-			new ReduceAction317(88),
-			new ReduceAction318(88),
-			new ReduceAction319(88),
-			new ReduceAction320(88),
+			new ReduceAction308(88),
 			new ReduceAction205(89),
-			new ReduceAction322(89),
-			new ReduceAction323(89),
+			new ReduceAction310(89),
+			new ReduceAction311(89),
+			new ReduceAction312(89),
+			new ReduceAction313(89),
+			new ReduceAction314(89),
+			new ReduceAction315(89),
+			new ReduceAction316(89),
+			new ReduceAction317(89),
+			new ReduceAction318(89),
+			new ReduceAction319(89),
+			new ReduceAction320(89),
 			new ReduceAction205(90),
-			new ReduceAction325(90),
-			new ReduceAction326(90),
-			new ReduceAction327(90),
+			new ReduceAction322(90),
+			new ReduceAction323(90),
 			new ReduceAction205(91),
-			new ReduceAction329(91),
-			new ReduceAction330(91),
+			new ReduceAction325(91),
+			new ReduceAction326(91),
+			new ReduceAction327(91),
 			new ReduceAction205(92),
-			new ReduceAction332(92),
-			new ReduceAction333(92),
-			new ReduceAction334(92),
-			new ReduceAction335(93),
-			new ReduceAction336(93),
-			new ReduceAction230(93),
-			new ReduceAction231(93),
-			new ReduceAction234(93),
-			new ReduceAction235(93),
-			new ReduceAction236(93),
-			new ReduceAction237(93),
-			new ReduceAction344(93),
-			new ReduceAction348(93),
-			new ReduceAction349(93),
-			new ReduceAction350(93),
-			new ReduceAction351(93),
-			new ReduceAction352(93),
-			new ReduceAction353(93),
-			new ReduceAction354(93),
-			new ReduceAction355(93),
+			new ReduceAction329(92),
+			new ReduceAction330(92),
 			new ReduceAction205(93),
-			new ReduceAction202(93),
-			new ReduceAction358(93),
-			new ReduceAction359(93),
-			new ReduceAction202(94),
-			new ReduceAction203(94),
-			new ReduceAction204(94),
+			new ReduceAction332(93),
+			new ReduceAction333(93),
+			new ReduceAction334(93),
+			new ReduceAction335(94),
+			new ReduceAction336(94),
+			new ReduceAction230(94),
+			new ReduceAction231(94),
+			new ReduceAction234(94),
+			new ReduceAction235(94),
+			new ReduceAction236(94),
+			new ReduceAction237(94),
+			new ReduceAction344(94),
+			new ReduceAction348(94),
+			new ReduceAction349(94),
+			new ReduceAction350(94),
+			new ReduceAction351(94),
+			new ReduceAction352(94),
+			new ReduceAction353(94),
+			new ReduceAction354(94),
+			new ReduceAction355(94),
 			new ReduceAction205(94),
+			new ReduceAction202(94),
+			new ReduceAction358(94),
+			new ReduceAction359(94),
+			new ReduceAction202(95),
+			new ReduceAction203(95),
+			new ReduceAction204(95),
 			new ReduceAction205(95),
-			new ReduceAction205(95),
-			new ReduceAction213(95),
-			new ReduceAction214(95),
-			new ReduceAction215(95),
-			new ReduceAction216(95),
-			new ReduceAction217(95),
-			new ReduceAction218(95),
-			new ReduceAction219(95),
-			new ReduceAction220(95),
-			new ReduceAction221(95),
-			new ReduceAction222(95),
-			new ReduceAction223(95),
-			new ReduceAction205(95),
-			new ReduceAction205(95),
-			new ReduceAction205(95),
-			new ReduceAction205(95),
-			new ReduceAction205(95),
-			new ReduceAction205(95),
-			new ReduceAction230(95),
-			new ReduceAction231(95),
-			new ReduceAction232(95),
-			new ReduceAction233(95),
-			new ReduceAction234(95),
-			new ReduceAction235(95),
-			new ReduceAction236(95),
-			new ReduceAction237(95),
-			new ReduceAction239(96),
-			new ReduceAction240(96),
-			new ReduceAction241(97),
-			new ReduceAction242(97),
-			new ReduceAction243(97),
-			new ReduceAction244(97),
-			new ReduceAction245(97),
-			new ReduceAction246(97),
-			new ReduceAction247(97),
-			new ReduceAction248(97),
-			new ReduceAction249(97),
-			new ReduceAction258(98),
-			new ReduceAction259(99),
-			new ReduceAction260(99),
-			new ReduceAction261(99),
-			new ReduceAction262(99),
-			new ReduceAction263(100),
-			new ReduceAction264(100),
-			new ReduceAction265(100),
-			new ReduceAction266(100),
-			new ReduceAction267(100),
-			new ReduceAction268(100),
-			new ReduceAction269(100),
-			new ReduceAction270(100),
-			new ReduceAction271(100),
-			new ReduceAction272(100),
-			new ReduceAction275(101),
-			new ReduceAction276(101),
-			new ReduceAction277(102),
-			new ReduceAction284(103),
-			new ReduceAction285(103),
-			new ReduceAction286(104),
-			new ReduceAction287(104),
-			new ReduceAction288(105),
-			new ReduceAction289(105),
-			new ReduceAction290(105),
-			new ReduceAction291(105),
-			new ReduceAction292(106),
-			new ReduceAction293(106),
-			new ReduceAction205(107),
-			new ReduceAction232(107),
-			new ReduceAction233(107),
-			new ReduceAction300(107),
+			new ReduceAction205(96),
+			new ReduceAction205(96),
+			new ReduceAction213(96),
+			new ReduceAction214(96),
+			new ReduceAction215(96),
+			new ReduceAction216(96),
+			new ReduceAction217(96),
+			new ReduceAction218(96),
+			new ReduceAction219(96),
+			new ReduceAction220(96),
+			new ReduceAction221(96),
+			new ReduceAction222(96),
+			new ReduceAction223(96),
+			new ReduceAction205(96),
+			new ReduceAction205(96),
+			new ReduceAction205(96),
+			new ReduceAction205(96),
+			new ReduceAction205(96),
+			new ReduceAction205(96),
+			new ReduceAction230(96),
+			new ReduceAction231(96),
+			new ReduceAction232(96),
+			new ReduceAction233(96),
+			new ReduceAction234(96),
+			new ReduceAction235(96),
+			new ReduceAction236(96),
+			new ReduceAction237(96),
+			new ReduceAction239(97),
+			new ReduceAction240(97),
+			new ReduceAction241(98),
+			new ReduceAction242(98),
+			new ReduceAction243(98),
+			new ReduceAction244(98),
+			new ReduceAction245(98),
+			new ReduceAction246(98),
+			new ReduceAction247(98),
+			new ReduceAction248(98),
+			new ReduceAction249(98),
+			new ReduceAction258(99),
+			new ReduceAction259(100),
+			new ReduceAction260(100),
+			new ReduceAction261(100),
+			new ReduceAction262(100),
+			new ReduceAction263(101),
+			new ReduceAction264(101),
+			new ReduceAction265(101),
+			new ReduceAction266(101),
+			new ReduceAction267(101),
+			new ReduceAction268(101),
+			new ReduceAction269(101),
+			new ReduceAction270(101),
+			new ReduceAction271(101),
+			new ReduceAction272(101),
+			new ReduceAction275(102),
+			new ReduceAction276(102),
+			new ReduceAction277(103),
+			new ReduceAction284(104),
+			new ReduceAction285(104),
+			new ReduceAction286(105),
+			new ReduceAction287(105),
+			new ReduceAction288(106),
+			new ReduceAction289(106),
+			new ReduceAction290(106),
+			new ReduceAction291(106),
+			new ReduceAction292(107),
+			new ReduceAction293(107),
 			new ReduceAction205(108),
 			new ReduceAction232(108),
 			new ReduceAction233(108),
-			new ReduceAction202(109),
-			new ReduceAction203(109),
-			new ReduceAction204(109),
+			new ReduceAction300(108),
+			new ReduceAction205(109),
+			new ReduceAction232(109),
+			new ReduceAction233(109),
 			new ReduceAction202(110),
 			new ReduceAction203(110),
 			new ReduceAction204(110),
-			new ReduceAction205(111),
-			new ReduceAction232(111),
-			new ReduceAction233(111),
+			new ReduceAction202(111),
+			new ReduceAction203(111),
+			new ReduceAction204(111),
 			new ReduceAction205(112),
-			new ReduceAction302(112),
+			new ReduceAction232(112),
+			new ReduceAction233(112),
 			new ReduceAction205(113),
-			new ReduceAction304(113),
-			new ReduceAction305(113),
-			new ReduceAction306(113),
+			new ReduceAction302(113),
 			new ReduceAction205(114),
-			new ReduceAction308(114),
+			new ReduceAction304(114),
+			new ReduceAction305(114),
+			new ReduceAction306(114),
 			new ReduceAction205(115),
-			new ReduceAction310(115),
-			new ReduceAction311(115),
-			new ReduceAction312(115),
-			new ReduceAction313(115),
-			new ReduceAction314(115),
-			new ReduceAction315(115),
-			new ReduceAction316(115),
-			new ReduceAction317(115),
-			new ReduceAction318(115),
-			new ReduceAction319(115),
-			new ReduceAction320(115),
+			new ReduceAction308(115),
 			new ReduceAction205(116),
-			new ReduceAction322(116),
-			new ReduceAction323(116),
+			new ReduceAction310(116),
+			new ReduceAction311(116),
+			new ReduceAction312(116),
+			new ReduceAction313(116),
+			new ReduceAction314(116),
+			new ReduceAction315(116),
+			new ReduceAction316(116),
+			new ReduceAction317(116),
+			new ReduceAction318(116),
+			new ReduceAction319(116),
+			new ReduceAction320(116),
 			new ReduceAction205(117),
-			new ReduceAction325(117),
-			new ReduceAction326(117),
-			new ReduceAction327(117),
+			new ReduceAction322(117),
+			new ReduceAction323(117),
 			new ReduceAction205(118),
-			new ReduceAction329(118),
-			new ReduceAction330(118),
+			new ReduceAction325(118),
+			new ReduceAction326(118),
+			new ReduceAction327(118),
 			new ReduceAction205(119),
-			new ReduceAction332(119),
-			new ReduceAction333(119),
-			new ReduceAction334(119),
-			new ReduceAction335(120),
-			new ReduceAction336(120),
-			new ReduceAction230(120),
-			new ReduceAction231(120),
-			new ReduceAction234(120),
-			new ReduceAction235(120),
-			new ReduceAction236(120),
-			new ReduceAction237(120),
-			new ReduceAction343(120),
-			new ReduceAction344(120),
-			new ReduceAction348(120),
-			new ReduceAction349(120),
-			new ReduceAction350(120),
-			new ReduceAction351(120),
-			new ReduceAction352(120),
-			new ReduceAction353(120),
-			new ReduceAction354(120),
-			new ReduceAction355(120),
+			new ReduceAction329(119),
+			new ReduceAction330(119),
 			new ReduceAction205(120),
-			new ReduceAction358(120),
-			new ReduceAction359(120),
+			new ReduceAction332(120),
+			new ReduceAction333(120),
+			new ReduceAction334(120),
+			new ReduceAction335(121),
+			new ReduceAction336(121),
+			new ReduceAction230(121),
+			new ReduceAction231(121),
+			new ReduceAction234(121),
+			new ReduceAction235(121),
+			new ReduceAction236(121),
+			new ReduceAction237(121),
+			new ReduceAction343(121),
+			new ReduceAction344(121),
+			new ReduceAction348(121),
+			new ReduceAction349(121),
+			new ReduceAction350(121),
+			new ReduceAction351(121),
+			new ReduceAction352(121),
+			new ReduceAction353(121),
+			new ReduceAction354(121),
+			new ReduceAction355(121),
 			new ReduceAction205(121),
-			new ReduceAction232(121),
-			new ReduceAction233(121),
+			new ReduceAction358(121),
+			new ReduceAction359(121),
 			new ReduceAction205(122),
-			new ReduceAction302(122),
+			new ReduceAction232(122),
+			new ReduceAction233(122),
 			new ReduceAction205(123),
-			new ReduceAction304(123),
-			new ReduceAction305(123),
-			new ReduceAction306(123),
+			new ReduceAction302(123),
 			new ReduceAction205(124),
-			new ReduceAction308(124),
+			new ReduceAction304(124),
+			new ReduceAction305(124),
+			new ReduceAction306(124),
 			new ReduceAction205(125),
-			new ReduceAction310(125),
-			new ReduceAction311(125),
-			new ReduceAction312(125),
-			new ReduceAction313(125),
-			new ReduceAction314(125),
-			new ReduceAction315(125),
-			new ReduceAction316(125),
-			new ReduceAction317(125),
-			new ReduceAction318(125),
-			new ReduceAction319(125),
-			new ReduceAction320(125),
+			new ReduceAction308(125),
 			new ReduceAction205(126),
-			new ReduceAction322(126),
-			new ReduceAction323(126),
+			new ReduceAction310(126),
+			new ReduceAction311(126),
+			new ReduceAction312(126),
+			new ReduceAction313(126),
+			new ReduceAction314(126),
+			new ReduceAction315(126),
+			new ReduceAction316(126),
+			new ReduceAction317(126),
+			new ReduceAction318(126),
+			new ReduceAction319(126),
+			new ReduceAction320(126),
 			new ReduceAction205(127),
-			new ReduceAction325(127),
-			new ReduceAction326(127),
-			new ReduceAction327(127),
+			new ReduceAction322(127),
+			new ReduceAction323(127),
 			new ReduceAction205(128),
-			new ReduceAction329(128),
-			new ReduceAction330(128),
+			new ReduceAction325(128),
+			new ReduceAction326(128),
+			new ReduceAction327(128),
 			new ReduceAction205(129),
-			new ReduceAction332(129),
-			new ReduceAction647(129),
-			new ReduceAction648(130),
-			new ReduceAction649(130),
-			new ReduceAction234(130),
-			new ReduceAction235(130),
-			new ReduceAction652(130),
-			new ReduceAction344(130),
-			new ReduceAction348(130),
-			new ReduceAction349(130),
-			new ReduceAction350(130),
-			new ReduceAction351(130),
-			new ReduceAction352(130),
-			new ReduceAction353(130),
-			new ReduceAction354(130),
-			new ReduceAction355(130),
+			new ReduceAction329(129),
+			new ReduceAction330(129),
 			new ReduceAction205(130),
-			new ReduceAction358(130),
-			new ReduceAction359(130),
-			new ReduceAction665(131),
-			new ReduceAction666(131),
-			new ReduceAction205(132),
-			new ReduceAction232(132),
-			new ReduceAction233(132),
+			new ReduceAction332(130),
+			new ReduceAction651(130),
+			new ReduceAction652(131),
+			new ReduceAction653(131),
+			new ReduceAction234(131),
+			new ReduceAction235(131),
+			new ReduceAction656(131),
+			new ReduceAction344(131),
+			new ReduceAction348(131),
+			new ReduceAction349(131),
+			new ReduceAction350(131),
+			new ReduceAction351(131),
+			new ReduceAction352(131),
+			new ReduceAction353(131),
+			new ReduceAction354(131),
+			new ReduceAction355(131),
+			new ReduceAction205(131),
+			new ReduceAction358(131),
+			new ReduceAction359(131),
+			new ReduceAction669(132),
+			new ReduceAction670(132),
 			new ReduceAction205(133),
 			new ReduceAction232(133),
 			new ReduceAction233(133),
-			new ReduceAction673(134),
-			new ReduceAction674(134),
-			new ReduceAction675(135),
-			new ReduceAction676(135),
-			new ReduceAction677(136),
-			new ReduceAction678(136),
-			new ReduceAction679(137),
-			new ReduceAction680(137),
-			new ReduceAction677(138),
-			new ReduceAction678(138),
-			new ReduceAction683(139),
-			new ReduceAction684(139),
-			new ReduceAction685(140),
-			new ReduceAction686(140),
-			new ReduceAction687(141),
-			new ReduceAction688(141),
-			new ReduceAction198(142),
-			new ReduceAction690(142),
-			new ReduceAction373(143),
-			new ReduceAction692(143),
-			new ReduceAction693(144),
-			new ReduceAction694(144),
-			new ReduceAction373(145),
-			new ReduceAction692(145),
-			new ReduceAction379(146),
-			new ReduceAction698(146),
-			new ReduceAction699(147),
-			new ReduceAction700(147),
-			new ReduceAction701(148),
-			new ReduceAction702(148)
+			new ReduceAction205(134),
+			new ReduceAction232(134),
+			new ReduceAction233(134),
+			new ReduceAction677(135),
+			new ReduceAction678(135),
+			new ReduceAction679(136),
+			new ReduceAction680(136),
+			new ReduceAction681(137),
+			new ReduceAction682(137),
+			new ReduceAction683(138),
+			new ReduceAction684(138),
+			new ReduceAction681(139),
+			new ReduceAction682(139),
+			new ReduceAction687(140),
+			new ReduceAction688(140),
+			new ReduceAction689(141),
+			new ReduceAction690(141),
+			new ReduceAction691(142),
+			new ReduceAction692(142),
+			new ReduceAction198(143),
+			new ReduceAction694(143),
+			new ReduceAction373(144),
+			new ReduceAction696(144),
+			new ReduceAction697(145),
+			new ReduceAction698(145),
+			new ReduceAction373(146),
+			new ReduceAction696(146),
+			new ReduceAction379(147),
+			new ReduceAction702(147),
+			new ReduceAction703(148),
+			new ReduceAction704(148),
+			new ReduceAction705(149),
+			new ReduceAction706(149)
 		)
 	end
 end
@@ -2003,12 +2007,12 @@ private class ReduceAction32
 					assert pdocnode2 isa nullable ADoc
 					var tkwmodulenode3 = nodearraylist2
 					assert tkwmodulenode3 isa nullable TKwmodule
-					var tidnode4 = nodearraylist4
-					assert tidnode4 isa nullable TId
+					var pmodulenamenode4 = nodearraylist4
+					assert pmodulenamenode4 isa nullable AModuleName
 					var pmoduledeclnode1: nullable AModuledecl = new AModuledecl.init_amoduledecl(
 						pdocnode2,
 						tkwmodulenode3,
-						tidnode4
+						pmodulenamenode4
 					)
 					node_list = pmoduledeclnode1
 					p.push(p.go_to(_goto), node_list)
@@ -2031,12 +2035,12 @@ private class ReduceAction33
 					assert pvisibilitynode2 isa nullable AVisibility
 					var tkwimportnode3 = nodearraylist3
 					assert tkwimportnode3 isa nullable TKwimport
-					var tidnode4 = nodearraylist5
-					assert tidnode4 isa nullable TId
+					var pmodulenamenode4 = nodearraylist5
+					assert pmodulenamenode4 isa nullable AModuleName
 					var pimportnode1: nullable AStdImport = new AStdImport.init_astdimport(
 						pvisibilitynode2,
 						tkwimportnode3,
-						tidnode4
+						pmodulenamenode4
 					)
 					node_list = pimportnode1
 					p.push(p.go_to(_goto), node_list)
@@ -11094,6 +11098,102 @@ private class ReduceAction381
 	do
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var tidnode4 = nodearraylist1
+					assert tidnode4 isa nullable TId
+					var pmodulenamenode1: nullable AModuleName = new AModuleName.init_amodulename(
+						null,
+						listnode3,
+						tidnode4
+					)
+					node_list = pmodulenamenode1
+					p.push(p.go_to(_goto), node_list)
+	end
+	var _goto: Int
+	init(g: Int) do _goto = g
+end
+private class ReduceAction382
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var listnode3 = nodearraylist1
+					assert listnode3 isa Array[Object]
+					listnode4 = concat(listnode4, listnode3)
+					var tidnode5 = nodearraylist2
+					assert tidnode5 isa nullable TId
+					var pmodulenamenode1: nullable AModuleName = new AModuleName.init_amodulename(
+						null,
+						listnode4,
+						tidnode5
+					)
+					node_list = pmodulenamenode1
+					p.push(p.go_to(_goto), node_list)
+	end
+	var _goto: Int
+	init(g: Int) do _goto = g
+end
+private class ReduceAction383
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var tquadnode2 = nodearraylist1
+					assert tquadnode2 isa nullable TQuad
+					var tidnode4 = nodearraylist3
+					assert tidnode4 isa nullable TId
+					var pmodulenamenode1: nullable AModuleName = new AModuleName.init_amodulename(
+						tquadnode2,
+						listnode3,
+						tidnode4
+					)
+					node_list = pmodulenamenode1
+					p.push(p.go_to(_goto), node_list)
+	end
+	var _goto: Int
+	init(g: Int) do _goto = g
+end
+private class ReduceAction384
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var tquadnode2 = nodearraylist1
+					assert tquadnode2 isa nullable TQuad
+					var listnode3 = nodearraylist3
+					assert listnode3 isa Array[Object]
+					listnode4 = concat(listnode4, listnode3)
+					var tidnode5 = nodearraylist4
+					assert tidnode5 isa nullable TId
+					var pmodulenamenode1: nullable AModuleName = new AModuleName.init_amodulename(
+						tquadnode2,
+						listnode4,
+						tidnode5
+					)
+					node_list = pmodulenamenode1
+					p.push(p.go_to(_goto), node_list)
+	end
+	var _goto: Int
+	init(g: Int) do _goto = g
+end
+private class ReduceAction385
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var tclassidnode3 = nodearraylist1
 					assert tclassidnode3 isa nullable TClassid
@@ -11107,7 +11207,7 @@ private class ReduceAction381
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction382
+private class ReduceAction386
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11130,7 +11230,7 @@ private class ReduceAction382
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction383
+private class ReduceAction387
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11150,7 +11250,7 @@ private class ReduceAction383
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction384
+private class ReduceAction388
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11165,7 +11265,7 @@ private class ReduceAction384
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction385
+private class ReduceAction389
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11180,7 +11280,7 @@ private class ReduceAction385
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction386
+private class ReduceAction390
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11191,7 +11291,7 @@ private class ReduceAction386
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction388
+private class ReduceAction392
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11210,7 +11310,7 @@ private class ReduceAction388
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction389
+private class ReduceAction393
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11230,7 +11330,7 @@ private class ReduceAction389
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction391
+private class ReduceAction395
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11241,7 +11341,7 @@ private class ReduceAction391
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction392
+private class ReduceAction396
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11254,7 +11354,7 @@ private class ReduceAction392
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction393
+private class ReduceAction397
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11266,7 +11366,7 @@ private class ReduceAction393
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction394
+private class ReduceAction398
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11279,7 +11379,7 @@ private class ReduceAction394
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction647
+private class ReduceAction651
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11304,7 +11404,7 @@ private class ReduceAction647
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction648
+private class ReduceAction652
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11325,7 +11425,7 @@ private class ReduceAction648
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction649
+private class ReduceAction653
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11354,7 +11454,7 @@ private class ReduceAction649
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction652
+private class ReduceAction656
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11381,7 +11481,7 @@ private class ReduceAction652
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction665
+private class ReduceAction669
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11396,7 +11496,7 @@ private class ReduceAction665
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction666
+private class ReduceAction670
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11409,7 +11509,7 @@ private class ReduceAction666
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction673
+private class ReduceAction677
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11426,7 +11526,7 @@ private class ReduceAction673
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction674
+private class ReduceAction678
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11447,7 +11547,7 @@ private class ReduceAction674
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction675
+private class ReduceAction679
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11464,7 +11564,7 @@ private class ReduceAction675
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction676
+private class ReduceAction680
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11485,7 +11585,7 @@ private class ReduceAction676
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction677
+private class ReduceAction681
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11502,7 +11602,7 @@ private class ReduceAction677
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction678
+private class ReduceAction682
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11523,7 +11623,7 @@ private class ReduceAction678
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction679
+private class ReduceAction683
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11540,7 +11640,7 @@ private class ReduceAction679
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction680
+private class ReduceAction684
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11561,7 +11661,7 @@ private class ReduceAction680
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction683
+private class ReduceAction687
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11578,7 +11678,7 @@ private class ReduceAction683
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction684
+private class ReduceAction688
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11599,7 +11699,7 @@ private class ReduceAction684
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction685
+private class ReduceAction689
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11616,7 +11716,7 @@ private class ReduceAction685
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction686
+private class ReduceAction690
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11637,7 +11737,7 @@ private class ReduceAction686
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction687
+private class ReduceAction691
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11654,7 +11754,7 @@ private class ReduceAction687
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction688
+private class ReduceAction692
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11675,7 +11775,7 @@ private class ReduceAction688
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction690
+private class ReduceAction694
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11696,7 +11796,7 @@ private class ReduceAction690
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction692
+private class ReduceAction696
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11717,7 +11817,7 @@ private class ReduceAction692
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction693
+private class ReduceAction697
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11733,7 +11833,7 @@ private class ReduceAction693
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction694
+private class ReduceAction698
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11753,7 +11853,7 @@ private class ReduceAction694
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction698
+private class ReduceAction702
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11774,7 +11874,7 @@ private class ReduceAction698
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction699
+private class ReduceAction703
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11791,7 +11891,7 @@ private class ReduceAction699
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction700
+private class ReduceAction704
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11812,7 +11912,7 @@ private class ReduceAction700
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction701
+private class ReduceAction705
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11829,7 +11929,7 @@ private class ReduceAction701
 	var _goto: Int
 	init(g: Int) do _goto = g
 end
-private class ReduceAction702
+private class ReduceAction706
 	super ReduceAction
 	redef fun action(p: Parser)
 	do

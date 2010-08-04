@@ -325,14 +325,14 @@ class AModuledecl
 	super Prod
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwmodule: TKwmodule
-    readable var _n_id: TId
+    readable var _n_name: AModuleName
 end
 class AImport super Prod end
 class AStdImport
 	super AImport
     readable var _n_visibility: AVisibility
     readable var _n_kwimport: TKwimport
-    readable var _n_id: TId
+    readable var _n_name: AModuleName
 end
 class ANoImport
 	super AImport
@@ -981,8 +981,15 @@ class ABreakClosureId
 	super AClosureId
     readable var _n_kwbreak: TKwbreak
 end
+class AModuleName
+special Prod
+    readable var _n_quad: nullable TQuad = null
+    readable var _n_path: List[TId] = new List[TId]
+    readable var _n_id: TId
+end
 class AQualified
 	super Prod
+    readable var _n_quad: nullable TQuad = null
     readable var _n_id: List[TId] = new List[TId]
     readable var _n_classid: nullable TClassid = null
 end
