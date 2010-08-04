@@ -25,12 +25,14 @@ out="a.out"  # Default output binary filename
 dir="" # Default tmp dir
 nolibgc="true" # Disable boehm libgc?
 CKSUM="cksum" # Tool that perfors checksum. cksum seems to be very portable
+recompile="false"
 
 usage()
 {
 	e=`basename "$0"`
 	cat<<END
 Usage: $e [options] modulename [options for module execution]
+-R          Force full recompilation
 -O          Compile with optimizations
 -i          Use the intel compiler instead of gcc
 -I path     Add a include directory
@@ -68,6 +70,7 @@ verbose=false
 vverbose=false
 while [ $stop = false ]; do
 	case $1 in 
+		-R) recompile=true; shift;;
 		-O) OPTS="$OPTS -O2" ext="_savo"; shift;;
 		-i) CC="/opt/intel/cc/10.1.015/bin/icc -O2" ext="_savi"; shift;;
 		-I) OPTS="$OPTS -I $2"; shift; shift;;
@@ -107,7 +110,7 @@ for i in "$@"; do
 	for e in $ext; do
 		o="$dir$j.$e.o"
 		cksumfile="$dir$j.$e.cksum"
-		if [ -f "$cksumfile" -a -f "$o" ]; then
+		if [ -f "$cksumfile" -a -f "$o" -a "x$recompile" != "xtrue" ]; then
 			cksumtry=`cat $cksumfile`
 			if [ "x$cksum" = "x$cksumtry" ]; then
 				if [ $vverbose = true  ] ; then
