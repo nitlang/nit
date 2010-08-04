@@ -155,671 +155,671 @@ special ParserTable
 	private fun build_reduce_table
 	do
 		_reduce_table = new Array[ReduceAction].with_items(
-			new ReduceAction0,
-			new ReduceAction1,
-			new ReduceAction2,
-			new ReduceAction3,
-			new ReduceAction4,
-			new ReduceAction5,
-			new ReduceAction6,
-			new ReduceAction7,
-			new ReduceAction8,
-			new ReduceAction9,
-			new ReduceAction10,
-			new ReduceAction11,
-			new ReduceAction12,
-			new ReduceAction13,
-			new ReduceAction14,
-			new ReduceAction15,
-			new ReduceAction16,
-			new ReduceAction17,
-			new ReduceAction18,
-			new ReduceAction19,
-			new ReduceAction20,
-			new ReduceAction21,
-			new ReduceAction22,
-			new ReduceAction23,
-			new ReduceAction24,
-			new ReduceAction25,
-			new ReduceAction26,
-			new ReduceAction27,
-			new ReduceAction28,
-			new ReduceAction29,
-			new ReduceAction30,
-			new ReduceAction31,
-			new ReduceAction32,
-			new ReduceAction33,
-			new ReduceAction34,
-			new ReduceAction35,
-			new ReduceAction36,
-			new ReduceAction37,
-			new ReduceAction38,
-			new ReduceAction39,
-			new ReduceAction40,
-			new ReduceAction41,
-			new ReduceAction42,
-			new ReduceAction43,
-			new ReduceAction44,
-			new ReduceAction45,
-			new ReduceAction46,
-			new ReduceAction47,
-			new ReduceAction48,
-			new ReduceAction49,
-			new ReduceAction50,
-			new ReduceAction51,
-			new ReduceAction52,
-			new ReduceAction53,
-			new ReduceAction54,
-			new ReduceAction55,
-			new ReduceAction56,
-			new ReduceAction57,
-			new ReduceAction58,
-			new ReduceAction59,
-			new ReduceAction60,
-			new ReduceAction61,
-			new ReduceAction62,
-			new ReduceAction63,
-			new ReduceAction64,
-			new ReduceAction65,
-			new ReduceAction66,
-			new ReduceAction67,
-			new ReduceAction68,
-			new ReduceAction69,
-			new ReduceAction70,
-			new ReduceAction71,
-			new ReduceAction72,
-			new ReduceAction73,
-			new ReduceAction74,
-			new ReduceAction75,
-			new ReduceAction76,
-			new ReduceAction77,
-			new ReduceAction78,
-			new ReduceAction79,
-			new ReduceAction80,
-			new ReduceAction81,
-			new ReduceAction82,
-			new ReduceAction83,
-			new ReduceAction84,
-			new ReduceAction85,
-			new ReduceAction86,
-			new ReduceAction87,
-			new ReduceAction88,
-			new ReduceAction89,
-			new ReduceAction90,
-			new ReduceAction91,
-			new ReduceAction92,
-			new ReduceAction93,
-			new ReduceAction94,
-			new ReduceAction95,
-			new ReduceAction96,
-			new ReduceAction97,
-			new ReduceAction98,
-			new ReduceAction99,
-			new ReduceAction100,
-			new ReduceAction101,
-			new ReduceAction102,
-			new ReduceAction103,
-			new ReduceAction104,
-			new ReduceAction105,
-			new ReduceAction106,
-			new ReduceAction107,
-			new ReduceAction108,
-			new ReduceAction109,
-			new ReduceAction110,
-			new ReduceAction111,
-			new ReduceAction112,
-			new ReduceAction113,
-			new ReduceAction114,
-			new ReduceAction115,
-			new ReduceAction116,
-			new ReduceAction117,
-			new ReduceAction118,
-			new ReduceAction119,
-			new ReduceAction120,
-			new ReduceAction121,
-			new ReduceAction122,
-			new ReduceAction123,
-			new ReduceAction124,
-			new ReduceAction125,
-			new ReduceAction126,
-			new ReduceAction127,
-			new ReduceAction128,
-			new ReduceAction129,
-			new ReduceAction130,
-			new ReduceAction131,
-			new ReduceAction132,
-			new ReduceAction133,
-			new ReduceAction134,
-			new ReduceAction135,
-			new ReduceAction136,
-			new ReduceAction137,
-			new ReduceAction138,
-			new ReduceAction139,
-			new ReduceAction140,
-			new ReduceAction141,
-			new ReduceAction142,
-			new ReduceAction143,
-			new ReduceAction144,
-			new ReduceAction145,
-			new ReduceAction146,
-			new ReduceAction147,
-			new ReduceAction148,
-			new ReduceAction149,
-			new ReduceAction150,
-			new ReduceAction151,
-			new ReduceAction152,
-			new ReduceAction153,
-			new ReduceAction154,
-			new ReduceAction155,
-			new ReduceAction156,
-			new ReduceAction157,
-			new ReduceAction158,
-			new ReduceAction159,
-			new ReduceAction160,
-			new ReduceAction161,
-			new ReduceAction162,
-			new ReduceAction163,
-			new ReduceAction164,
-			new ReduceAction165,
-			new ReduceAction166,
-			new ReduceAction167,
-			new ReduceAction168,
-			new ReduceAction169,
-			new ReduceAction170,
-			new ReduceAction171,
-			new ReduceAction172,
-			new ReduceAction173,
-			new ReduceAction174,
-			new ReduceAction175,
-			new ReduceAction176,
-			new ReduceAction177,
-			new ReduceAction178,
-			new ReduceAction179,
-			new ReduceAction180,
-			new ReduceAction181,
-			new ReduceAction182,
-			new ReduceAction183,
-			new ReduceAction184,
-			new ReduceAction185,
-			new ReduceAction186,
-			new ReduceAction187,
-			new ReduceAction188,
-			new ReduceAction189,
-			new ReduceAction190,
-			new ReduceAction191,
-			new ReduceAction192,
-			new ReduceAction193,
-			new ReduceAction194,
-			new ReduceAction195,
-			new ReduceAction196,
-			new ReduceAction197,
-			new ReduceAction198,
-			new ReduceAction199,
-			new ReduceAction200,
-			new ReduceAction201,
-			new ReduceAction202,
-			new ReduceAction203,
-			new ReduceAction204,
-			new ReduceAction205,
-			new ReduceAction206,
-			new ReduceAction207,
-			new ReduceAction208,
-			new ReduceAction209,
-			new ReduceAction210,
-			new ReduceAction211,
-			new ReduceAction212,
-			new ReduceAction213,
-			new ReduceAction214,
-			new ReduceAction215,
-			new ReduceAction216,
-			new ReduceAction217,
-			new ReduceAction218,
-			new ReduceAction219,
-			new ReduceAction220,
-			new ReduceAction221,
-			new ReduceAction222,
-			new ReduceAction223,
-			new ReduceAction224,
-			new ReduceAction225,
-			new ReduceAction226,
-			new ReduceAction227,
-			new ReduceAction228,
-			new ReduceAction229,
-			new ReduceAction230,
-			new ReduceAction231,
-			new ReduceAction232,
-			new ReduceAction233,
-			new ReduceAction234,
-			new ReduceAction235,
-			new ReduceAction236,
-			new ReduceAction237,
-			new ReduceAction238,
-			new ReduceAction239,
-			new ReduceAction240,
-			new ReduceAction241,
-			new ReduceAction242,
-			new ReduceAction243,
-			new ReduceAction244,
-			new ReduceAction245,
-			new ReduceAction246,
-			new ReduceAction247,
-			new ReduceAction248,
-			new ReduceAction249,
-			new ReduceAction250,
-			new ReduceAction251,
-			new ReduceAction252,
-			new ReduceAction253,
-			new ReduceAction254,
-			new ReduceAction255,
-			new ReduceAction256,
-			new ReduceAction257,
-			new ReduceAction258,
-			new ReduceAction259,
-			new ReduceAction260,
-			new ReduceAction261,
-			new ReduceAction262,
-			new ReduceAction263,
-			new ReduceAction264,
-			new ReduceAction265,
-			new ReduceAction266,
-			new ReduceAction267,
-			new ReduceAction268,
-			new ReduceAction269,
-			new ReduceAction270,
-			new ReduceAction271,
-			new ReduceAction272,
-			new ReduceAction273,
-			new ReduceAction274,
-			new ReduceAction275,
-			new ReduceAction276,
-			new ReduceAction277,
-			new ReduceAction278,
-			new ReduceAction279,
-			new ReduceAction280,
-			new ReduceAction281,
-			new ReduceAction282,
-			new ReduceAction283,
-			new ReduceAction284,
-			new ReduceAction285,
-			new ReduceAction286,
-			new ReduceAction287,
-			new ReduceAction288,
-			new ReduceAction289,
-			new ReduceAction290,
-			new ReduceAction291,
-			new ReduceAction292,
-			new ReduceAction293,
-			new ReduceAction294,
-			new ReduceAction295,
-			new ReduceAction296,
-			new ReduceAction297,
-			new ReduceAction298,
-			new ReduceAction299,
-			new ReduceAction300,
-			new ReduceAction301,
-			new ReduceAction302,
-			new ReduceAction303,
-			new ReduceAction304,
-			new ReduceAction305,
-			new ReduceAction306,
-			new ReduceAction307,
-			new ReduceAction308,
-			new ReduceAction309,
-			new ReduceAction310,
-			new ReduceAction311,
-			new ReduceAction312,
-			new ReduceAction313,
-			new ReduceAction314,
-			new ReduceAction315,
-			new ReduceAction316,
-			new ReduceAction317,
-			new ReduceAction318,
-			new ReduceAction319,
-			new ReduceAction320,
-			new ReduceAction321,
-			new ReduceAction322,
-			new ReduceAction323,
-			new ReduceAction324,
-			new ReduceAction325,
-			new ReduceAction326,
-			new ReduceAction327,
-			new ReduceAction328,
-			new ReduceAction329,
-			new ReduceAction330,
-			new ReduceAction331,
-			new ReduceAction332,
-			new ReduceAction333,
-			new ReduceAction334,
-			new ReduceAction335,
-			new ReduceAction336,
-			new ReduceAction337,
-			new ReduceAction338,
-			new ReduceAction339,
-			new ReduceAction340,
-			new ReduceAction341,
-			new ReduceAction342,
-			new ReduceAction343,
-			new ReduceAction344,
-			new ReduceAction345,
-			new ReduceAction346,
-			new ReduceAction347,
-			new ReduceAction348,
-			new ReduceAction349,
-			new ReduceAction350,
-			new ReduceAction351,
-			new ReduceAction352,
-			new ReduceAction353,
-			new ReduceAction354,
-			new ReduceAction355,
-			new ReduceAction356,
-			new ReduceAction357,
-			new ReduceAction358,
-			new ReduceAction359,
-			new ReduceAction360,
-			new ReduceAction361,
-			new ReduceAction362,
-			new ReduceAction363,
-			new ReduceAction364,
-			new ReduceAction365,
-			new ReduceAction366,
-			new ReduceAction367,
-			new ReduceAction368,
-			new ReduceAction369,
-			new ReduceAction370,
-			new ReduceAction371,
-			new ReduceAction372,
-			new ReduceAction373,
-			new ReduceAction374,
-			new ReduceAction375,
-			new ReduceAction376,
-			new ReduceAction377,
-			new ReduceAction378,
-			new ReduceAction379,
-			new ReduceAction380,
-			new ReduceAction381,
-			new ReduceAction382,
-			new ReduceAction383,
-			new ReduceAction384,
-			new ReduceAction385,
-			new ReduceAction386,
-			new ReduceAction387,
-			new ReduceAction388,
-			new ReduceAction389,
-			new ReduceAction390,
-			new ReduceAction391,
-			new ReduceAction392,
-			new ReduceAction393,
-			new ReduceAction394,
-			new ReduceAction395,
-			new ReduceAction396,
-			new ReduceAction397,
-			new ReduceAction398,
-			new ReduceAction399,
-			new ReduceAction400,
-			new ReduceAction401,
-			new ReduceAction402,
-			new ReduceAction403,
-			new ReduceAction404,
-			new ReduceAction405,
-			new ReduceAction406,
-			new ReduceAction407,
-			new ReduceAction408,
-			new ReduceAction409,
-			new ReduceAction410,
-			new ReduceAction411,
-			new ReduceAction412,
-			new ReduceAction413,
-			new ReduceAction414,
-			new ReduceAction415,
-			new ReduceAction416,
-			new ReduceAction417,
-			new ReduceAction418,
-			new ReduceAction419,
-			new ReduceAction420,
-			new ReduceAction421,
-			new ReduceAction422,
-			new ReduceAction423,
-			new ReduceAction424,
-			new ReduceAction425,
-			new ReduceAction426,
-			new ReduceAction427,
-			new ReduceAction428,
-			new ReduceAction429,
-			new ReduceAction430,
-			new ReduceAction431,
-			new ReduceAction432,
-			new ReduceAction433,
-			new ReduceAction434,
-			new ReduceAction435,
-			new ReduceAction436,
-			new ReduceAction437,
-			new ReduceAction438,
-			new ReduceAction439,
-			new ReduceAction440,
-			new ReduceAction441,
-			new ReduceAction442,
-			new ReduceAction443,
-			new ReduceAction444,
-			new ReduceAction445,
-			new ReduceAction446,
-			new ReduceAction447,
-			new ReduceAction448,
-			new ReduceAction449,
-			new ReduceAction450,
-			new ReduceAction451,
-			new ReduceAction452,
-			new ReduceAction453,
-			new ReduceAction454,
-			new ReduceAction455,
-			new ReduceAction456,
-			new ReduceAction457,
-			new ReduceAction458,
-			new ReduceAction459,
-			new ReduceAction460,
-			new ReduceAction461,
-			new ReduceAction462,
-			new ReduceAction463,
-			new ReduceAction464,
-			new ReduceAction465,
-			new ReduceAction466,
-			new ReduceAction467,
-			new ReduceAction468,
-			new ReduceAction469,
-			new ReduceAction470,
-			new ReduceAction471,
-			new ReduceAction472,
-			new ReduceAction473,
-			new ReduceAction474,
-			new ReduceAction475,
-			new ReduceAction476,
-			new ReduceAction477,
-			new ReduceAction478,
-			new ReduceAction479,
-			new ReduceAction480,
-			new ReduceAction481,
-			new ReduceAction482,
-			new ReduceAction483,
-			new ReduceAction484,
-			new ReduceAction485,
-			new ReduceAction486,
-			new ReduceAction487,
-			new ReduceAction488,
-			new ReduceAction489,
-			new ReduceAction490,
-			new ReduceAction491,
-			new ReduceAction492,
-			new ReduceAction493,
-			new ReduceAction494,
-			new ReduceAction495,
-			new ReduceAction496,
-			new ReduceAction497,
-			new ReduceAction498,
-			new ReduceAction499,
-			new ReduceAction500,
-			new ReduceAction501,
-			new ReduceAction502,
-			new ReduceAction503,
-			new ReduceAction504,
-			new ReduceAction505,
-			new ReduceAction506,
-			new ReduceAction507,
-			new ReduceAction508,
-			new ReduceAction509,
-			new ReduceAction510,
-			new ReduceAction511,
-			new ReduceAction512,
-			new ReduceAction513,
-			new ReduceAction514,
-			new ReduceAction515,
-			new ReduceAction516,
-			new ReduceAction517,
-			new ReduceAction518,
-			new ReduceAction519,
-			new ReduceAction520,
-			new ReduceAction521,
-			new ReduceAction522,
-			new ReduceAction523,
-			new ReduceAction524,
-			new ReduceAction525,
-			new ReduceAction526,
-			new ReduceAction527,
-			new ReduceAction528,
-			new ReduceAction529,
-			new ReduceAction530,
-			new ReduceAction531,
-			new ReduceAction532,
-			new ReduceAction533,
-			new ReduceAction534,
-			new ReduceAction535,
-			new ReduceAction536,
-			new ReduceAction537,
-			new ReduceAction538,
-			new ReduceAction539,
-			new ReduceAction540,
-			new ReduceAction541,
-			new ReduceAction542,
-			new ReduceAction543,
-			new ReduceAction544,
-			new ReduceAction545,
-			new ReduceAction546,
-			new ReduceAction547,
-			new ReduceAction548,
-			new ReduceAction549,
-			new ReduceAction550,
-			new ReduceAction551,
-			new ReduceAction552,
-			new ReduceAction553,
-			new ReduceAction554,
-			new ReduceAction555,
-			new ReduceAction556,
-			new ReduceAction557,
-			new ReduceAction558,
-			new ReduceAction559,
-			new ReduceAction560,
-			new ReduceAction561,
-			new ReduceAction562,
-			new ReduceAction563,
-			new ReduceAction564,
-			new ReduceAction565,
-			new ReduceAction566,
-			new ReduceAction567,
-			new ReduceAction568,
-			new ReduceAction569,
-			new ReduceAction570,
-			new ReduceAction571,
-			new ReduceAction572,
-			new ReduceAction573,
-			new ReduceAction574,
-			new ReduceAction575,
-			new ReduceAction576,
-			new ReduceAction577,
-			new ReduceAction578,
-			new ReduceAction579,
-			new ReduceAction580,
-			new ReduceAction581,
-			new ReduceAction582,
-			new ReduceAction583,
-			new ReduceAction584,
-			new ReduceAction585,
-			new ReduceAction586,
-			new ReduceAction587,
-			new ReduceAction588,
-			new ReduceAction589,
-			new ReduceAction590,
-			new ReduceAction591,
-			new ReduceAction592,
-			new ReduceAction593,
-			new ReduceAction594,
-			new ReduceAction595,
-			new ReduceAction596,
-			new ReduceAction597,
-			new ReduceAction598,
-			new ReduceAction599,
-			new ReduceAction600,
-			new ReduceAction601,
-			new ReduceAction602,
-			new ReduceAction603,
-			new ReduceAction604,
-			new ReduceAction605,
-			new ReduceAction606,
-			new ReduceAction607,
-			new ReduceAction608,
-			new ReduceAction609,
-			new ReduceAction610,
-			new ReduceAction611,
-			new ReduceAction612,
-			new ReduceAction613,
-			new ReduceAction614,
-			new ReduceAction615,
-			new ReduceAction616,
-			new ReduceAction617,
-			new ReduceAction618,
-			new ReduceAction619,
-			new ReduceAction620,
-			new ReduceAction621,
-			new ReduceAction622,
-			new ReduceAction623,
-			new ReduceAction624,
-			new ReduceAction625,
-			new ReduceAction626,
-			new ReduceAction627,
-			new ReduceAction628,
-			new ReduceAction629,
-			new ReduceAction630,
-			new ReduceAction631,
-			new ReduceAction632,
-			new ReduceAction633,
-			new ReduceAction634,
-			new ReduceAction635,
-			new ReduceAction636,
-			new ReduceAction637,
-			new ReduceAction638,
-			new ReduceAction639,
-			new ReduceAction640,
-			new ReduceAction641,
-			new ReduceAction642,
-			new ReduceAction643,
-			new ReduceAction644,
-			new ReduceAction645,
-			new ReduceAction646,
-			new ReduceAction647,
-			new ReduceAction648,
-			new ReduceAction649,
-			new ReduceAction650,
-			new ReduceAction651,
-			new ReduceAction652,
-			new ReduceAction653,
-			new ReduceAction654,
-			new ReduceAction655,
-			new ReduceAction656,
-			new ReduceAction657,
-			new ReduceAction658,
-			new ReduceAction659,
-			new ReduceAction660,
-			new ReduceAction661,
-			new ReduceAction662,
-			new ReduceAction663,
-			new ReduceAction664
+			new ReduceAction0(0),
+			new ReduceAction1(0),
+			new ReduceAction2(0),
+			new ReduceAction3(0),
+			new ReduceAction4(0),
+			new ReduceAction5(0),
+			new ReduceAction6(0),
+			new ReduceAction7(0),
+			new ReduceAction8(0),
+			new ReduceAction9(0),
+			new ReduceAction10(0),
+			new ReduceAction11(0),
+			new ReduceAction12(0),
+			new ReduceAction13(0),
+			new ReduceAction14(0),
+			new ReduceAction15(0),
+			new ReduceAction16(0),
+			new ReduceAction17(0),
+			new ReduceAction18(0),
+			new ReduceAction19(0),
+			new ReduceAction20(0),
+			new ReduceAction21(0),
+			new ReduceAction22(0),
+			new ReduceAction23(0),
+			new ReduceAction24(0),
+			new ReduceAction25(0),
+			new ReduceAction26(0),
+			new ReduceAction27(0),
+			new ReduceAction28(0),
+			new ReduceAction29(0),
+			new ReduceAction30(0),
+			new ReduceAction31(0),
+			new ReduceAction32(1),
+			new ReduceAction33(2),
+			new ReduceAction34(2),
+			new ReduceAction35(3),
+			new ReduceAction36(3),
+			new ReduceAction37(4),
+			new ReduceAction38(4),
+			new ReduceAction39(5),
+			new ReduceAction40(5),
+			new ReduceAction41(5),
+			new ReduceAction42(5),
+			new ReduceAction43(5),
+			new ReduceAction44(5),
+			new ReduceAction45(5),
+			new ReduceAction46(5),
+			new ReduceAction47(5),
+			new ReduceAction48(5),
+			new ReduceAction49(5),
+			new ReduceAction50(5),
+			new ReduceAction51(5),
+			new ReduceAction52(5),
+			new ReduceAction53(5),
+			new ReduceAction54(5),
+			new ReduceAction55(6),
+			new ReduceAction56(6),
+			new ReduceAction57(6),
+			new ReduceAction58(6),
+			new ReduceAction59(7),
+			new ReduceAction60(7),
+			new ReduceAction61(8),
+			new ReduceAction62(9),
+			new ReduceAction63(9),
+			new ReduceAction64(10),
+			new ReduceAction65(10),
+			new ReduceAction66(11),
+			new ReduceAction67(12),
+			new ReduceAction68(12),
+			new ReduceAction69(12),
+			new ReduceAction70(12),
+			new ReduceAction71(12),
+			new ReduceAction72(12),
+			new ReduceAction73(12),
+			new ReduceAction74(12),
+			new ReduceAction75(12),
+			new ReduceAction76(12),
+			new ReduceAction77(12),
+			new ReduceAction78(12),
+			new ReduceAction79(12),
+			new ReduceAction80(12),
+			new ReduceAction81(12),
+			new ReduceAction82(12),
+			new ReduceAction83(12),
+			new ReduceAction84(12),
+			new ReduceAction85(12),
+			new ReduceAction86(12),
+			new ReduceAction87(12),
+			new ReduceAction88(12),
+			new ReduceAction89(12),
+			new ReduceAction90(12),
+			new ReduceAction91(12),
+			new ReduceAction92(12),
+			new ReduceAction93(12),
+			new ReduceAction94(12),
+			new ReduceAction95(12),
+			new ReduceAction96(12),
+			new ReduceAction97(12),
+			new ReduceAction98(12),
+			new ReduceAction99(12),
+			new ReduceAction100(12),
+			new ReduceAction101(12),
+			new ReduceAction102(12),
+			new ReduceAction103(12),
+			new ReduceAction104(12),
+			new ReduceAction105(12),
+			new ReduceAction106(12),
+			new ReduceAction107(12),
+			new ReduceAction108(12),
+			new ReduceAction109(12),
+			new ReduceAction110(12),
+			new ReduceAction111(12),
+			new ReduceAction112(12),
+			new ReduceAction113(12),
+			new ReduceAction114(12),
+			new ReduceAction115(12),
+			new ReduceAction116(12),
+			new ReduceAction117(12),
+			new ReduceAction118(12),
+			new ReduceAction119(12),
+			new ReduceAction120(12),
+			new ReduceAction121(12),
+			new ReduceAction122(12),
+			new ReduceAction123(13),
+			new ReduceAction124(13),
+			new ReduceAction125(14),
+			new ReduceAction126(14),
+			new ReduceAction127(15),
+			new ReduceAction128(15),
+			new ReduceAction129(15),
+			new ReduceAction130(15),
+			new ReduceAction131(16),
+			new ReduceAction132(16),
+			new ReduceAction133(16),
+			new ReduceAction134(16),
+			new ReduceAction135(16),
+			new ReduceAction136(16),
+			new ReduceAction137(16),
+			new ReduceAction138(16),
+			new ReduceAction139(16),
+			new ReduceAction140(16),
+			new ReduceAction141(16),
+			new ReduceAction142(16),
+			new ReduceAction143(16),
+			new ReduceAction144(16),
+			new ReduceAction145(16),
+			new ReduceAction146(16),
+			new ReduceAction147(17),
+			new ReduceAction148(17),
+			new ReduceAction149(17),
+			new ReduceAction150(17),
+			new ReduceAction151(17),
+			new ReduceAction152(17),
+			new ReduceAction153(17),
+			new ReduceAction154(17),
+			new ReduceAction155(18),
+			new ReduceAction156(18),
+			new ReduceAction157(18),
+			new ReduceAction158(18),
+			new ReduceAction159(19),
+			new ReduceAction160(19),
+			new ReduceAction161(19),
+			new ReduceAction162(20),
+			new ReduceAction163(21),
+			new ReduceAction164(21),
+			new ReduceAction165(21),
+			new ReduceAction166(22),
+			new ReduceAction167(23),
+			new ReduceAction168(23),
+			new ReduceAction169(23),
+			new ReduceAction170(23),
+			new ReduceAction171(23),
+			new ReduceAction172(23),
+			new ReduceAction173(24),
+			new ReduceAction174(25),
+			new ReduceAction175(25),
+			new ReduceAction176(25),
+			new ReduceAction177(25),
+			new ReduceAction178(26),
+			new ReduceAction179(26),
+			new ReduceAction180(27),
+			new ReduceAction181(28),
+			new ReduceAction182(29),
+			new ReduceAction183(29),
+			new ReduceAction184(29),
+			new ReduceAction185(29),
+			new ReduceAction186(30),
+			new ReduceAction187(30),
+			new ReduceAction188(31),
+			new ReduceAction189(31),
+			new ReduceAction190(32),
+			new ReduceAction191(33),
+			new ReduceAction192(33),
+			new ReduceAction193(33),
+			new ReduceAction194(33),
+			new ReduceAction195(33),
+			new ReduceAction196(33),
+			new ReduceAction197(33),
+			new ReduceAction198(33),
+			new ReduceAction199(33),
+			new ReduceAction200(33),
+			new ReduceAction201(33),
+			new ReduceAction202(33),
+			new ReduceAction203(33),
+			new ReduceAction204(33),
+			new ReduceAction205(33),
+			new ReduceAction206(33),
+			new ReduceAction207(33),
+			new ReduceAction208(33),
+			new ReduceAction209(33),
+			new ReduceAction210(33),
+			new ReduceAction211(33),
+			new ReduceAction212(33),
+			new ReduceAction213(33),
+			new ReduceAction214(33),
+			new ReduceAction215(33),
+			new ReduceAction216(33),
+			new ReduceAction217(33),
+			new ReduceAction218(34),
+			new ReduceAction219(35),
+			new ReduceAction220(35),
+			new ReduceAction221(36),
+			new ReduceAction222(36),
+			new ReduceAction223(36),
+			new ReduceAction224(36),
+			new ReduceAction225(36),
+			new ReduceAction226(36),
+			new ReduceAction227(37),
+			new ReduceAction228(37),
+			new ReduceAction229(37),
+			new ReduceAction230(37),
+			new ReduceAction231(38),
+			new ReduceAction232(38),
+			new ReduceAction233(39),
+			new ReduceAction234(40),
+			new ReduceAction235(40),
+			new ReduceAction236(40),
+			new ReduceAction237(40),
+			new ReduceAction238(41),
+			new ReduceAction239(41),
+			new ReduceAction240(41),
+			new ReduceAction241(41),
+			new ReduceAction242(41),
+			new ReduceAction243(41),
+			new ReduceAction244(41),
+			new ReduceAction245(41),
+			new ReduceAction246(41),
+			new ReduceAction247(41),
+			new ReduceAction248(42),
+			new ReduceAction249(42),
+			new ReduceAction250(43),
+			new ReduceAction251(43),
+			new ReduceAction252(44),
+			new ReduceAction253(44),
+			new ReduceAction254(44),
+			new ReduceAction255(44),
+			new ReduceAction256(44),
+			new ReduceAction257(45),
+			new ReduceAction258(45),
+			new ReduceAction259(46),
+			new ReduceAction260(46),
+			new ReduceAction261(47),
+			new ReduceAction262(47),
+			new ReduceAction263(48),
+			new ReduceAction264(48),
+			new ReduceAction265(49),
+			new ReduceAction266(49),
+			new ReduceAction267(49),
+			new ReduceAction268(49),
+			new ReduceAction269(50),
+			new ReduceAction270(51),
+			new ReduceAction271(51),
+			new ReduceAction272(51),
+			new ReduceAction273(51),
+			new ReduceAction274(52),
+			new ReduceAction275(52),
+			new ReduceAction276(53),
+			new ReduceAction277(53),
+			new ReduceAction278(53),
+			new ReduceAction279(53),
+			new ReduceAction280(54),
+			new ReduceAction281(54),
+			new ReduceAction282(55),
+			new ReduceAction283(55),
+			new ReduceAction284(55),
+			new ReduceAction285(55),
+			new ReduceAction286(55),
+			new ReduceAction287(55),
+			new ReduceAction288(55),
+			new ReduceAction289(55),
+			new ReduceAction290(55),
+			new ReduceAction291(55),
+			new ReduceAction292(56),
+			new ReduceAction293(56),
+			new ReduceAction294(56),
+			new ReduceAction295(57),
+			new ReduceAction296(57),
+			new ReduceAction297(57),
+			new ReduceAction298(57),
+			new ReduceAction299(58),
+			new ReduceAction300(58),
+			new ReduceAction301(58),
+			new ReduceAction302(59),
+			new ReduceAction303(59),
+			new ReduceAction304(59),
+			new ReduceAction305(59),
+			new ReduceAction306(60),
+			new ReduceAction307(60),
+			new ReduceAction308(60),
+			new ReduceAction309(60),
+			new ReduceAction310(60),
+			new ReduceAction311(60),
+			new ReduceAction312(60),
+			new ReduceAction313(60),
+			new ReduceAction314(60),
+			new ReduceAction315(60),
+			new ReduceAction316(60),
+			new ReduceAction317(60),
+			new ReduceAction318(60),
+			new ReduceAction319(60),
+			new ReduceAction320(60),
+			new ReduceAction321(60),
+			new ReduceAction322(60),
+			new ReduceAction323(60),
+			new ReduceAction324(60),
+			new ReduceAction325(60),
+			new ReduceAction326(60),
+			new ReduceAction327(60),
+			new ReduceAction328(60),
+			new ReduceAction329(60),
+			new ReduceAction330(60),
+			new ReduceAction331(61),
+			new ReduceAction332(61),
+			new ReduceAction333(62),
+			new ReduceAction334(63),
+			new ReduceAction335(64),
+			new ReduceAction336(65),
+			new ReduceAction337(66),
+			new ReduceAction338(67),
+			new ReduceAction339(67),
+			new ReduceAction340(67),
+			new ReduceAction341(67),
+			new ReduceAction342(68),
+			new ReduceAction343(68),
+			new ReduceAction344(68),
+			new ReduceAction345(68),
+			new ReduceAction346(68),
+			new ReduceAction347(69),
+			new ReduceAction348(69),
+			new ReduceAction349(70),
+			new ReduceAction350(71),
+			new ReduceAction351(71),
+			new ReduceAction352(72),
+			new ReduceAction353(72),
+			new ReduceAction354(73),
+			new ReduceAction355(73),
+			new ReduceAction356(73),
+			new ReduceAction357(74),
+			new ReduceAction358(75),
+			new ReduceAction359(76),
+			new ReduceAction360(76),
+			new ReduceAction361(77),
+			new ReduceAction362(77),
+			new ReduceAction363(77),
+			new ReduceAction364(78),
+			new ReduceAction365(78),
+			new ReduceAction366(79),
+			new ReduceAction367(79),
+			new ReduceAction368(79),
+			new ReduceAction369(80),
+			new ReduceAction370(81),
+			new ReduceAction371(81),
+			new ReduceAction372(81),
+			new ReduceAction373(81),
+			new ReduceAction374(81),
+			new ReduceAction375(81),
+			new ReduceAction376(81),
+			new ReduceAction377(81),
+			new ReduceAction378(81),
+			new ReduceAction379(81),
+			new ReduceAction380(82),
+			new ReduceAction381(82),
+			new ReduceAction382(82),
+			new ReduceAction383(82),
+			new ReduceAction384(83),
+			new ReduceAction385(83),
+			new ReduceAction386(84),
+			new ReduceAction387(84),
+			new ReduceAction388(84),
+			new ReduceAction389(85),
+			new ReduceAction390(85),
+			new ReduceAction391(86),
+			new ReduceAction392(86),
+			new ReduceAction393(86),
+			new ReduceAction394(86),
+			new ReduceAction395(87),
+			new ReduceAction396(87),
+			new ReduceAction397(88),
+			new ReduceAction398(88),
+			new ReduceAction399(88),
+			new ReduceAction400(88),
+			new ReduceAction401(88),
+			new ReduceAction402(88),
+			new ReduceAction403(88),
+			new ReduceAction404(88),
+			new ReduceAction405(88),
+			new ReduceAction406(88),
+			new ReduceAction407(89),
+			new ReduceAction408(89),
+			new ReduceAction409(89),
+			new ReduceAction410(90),
+			new ReduceAction411(90),
+			new ReduceAction412(90),
+			new ReduceAction413(90),
+			new ReduceAction414(91),
+			new ReduceAction415(91),
+			new ReduceAction416(91),
+			new ReduceAction417(92),
+			new ReduceAction418(92),
+			new ReduceAction419(92),
+			new ReduceAction420(92),
+			new ReduceAction421(93),
+			new ReduceAction422(93),
+			new ReduceAction423(93),
+			new ReduceAction424(93),
+			new ReduceAction425(93),
+			new ReduceAction426(93),
+			new ReduceAction427(93),
+			new ReduceAction428(93),
+			new ReduceAction429(93),
+			new ReduceAction430(93),
+			new ReduceAction431(93),
+			new ReduceAction432(93),
+			new ReduceAction433(93),
+			new ReduceAction434(93),
+			new ReduceAction435(93),
+			new ReduceAction436(93),
+			new ReduceAction437(93),
+			new ReduceAction438(93),
+			new ReduceAction439(93),
+			new ReduceAction440(93),
+			new ReduceAction441(93),
+			new ReduceAction442(94),
+			new ReduceAction443(94),
+			new ReduceAction444(94),
+			new ReduceAction445(94),
+			new ReduceAction446(95),
+			new ReduceAction447(95),
+			new ReduceAction448(95),
+			new ReduceAction449(95),
+			new ReduceAction450(95),
+			new ReduceAction451(95),
+			new ReduceAction452(95),
+			new ReduceAction453(95),
+			new ReduceAction454(95),
+			new ReduceAction455(95),
+			new ReduceAction456(95),
+			new ReduceAction457(95),
+			new ReduceAction458(95),
+			new ReduceAction459(95),
+			new ReduceAction460(95),
+			new ReduceAction461(95),
+			new ReduceAction462(95),
+			new ReduceAction463(95),
+			new ReduceAction464(95),
+			new ReduceAction465(95),
+			new ReduceAction466(95),
+			new ReduceAction467(95),
+			new ReduceAction468(95),
+			new ReduceAction469(95),
+			new ReduceAction470(95),
+			new ReduceAction471(95),
+			new ReduceAction472(95),
+			new ReduceAction473(96),
+			new ReduceAction474(96),
+			new ReduceAction475(97),
+			new ReduceAction476(97),
+			new ReduceAction477(97),
+			new ReduceAction478(97),
+			new ReduceAction479(97),
+			new ReduceAction480(97),
+			new ReduceAction481(98),
+			new ReduceAction482(99),
+			new ReduceAction483(99),
+			new ReduceAction484(99),
+			new ReduceAction485(99),
+			new ReduceAction486(100),
+			new ReduceAction487(100),
+			new ReduceAction488(100),
+			new ReduceAction489(100),
+			new ReduceAction490(100),
+			new ReduceAction491(100),
+			new ReduceAction492(100),
+			new ReduceAction493(100),
+			new ReduceAction494(100),
+			new ReduceAction495(100),
+			new ReduceAction496(101),
+			new ReduceAction497(101),
+			new ReduceAction498(102),
+			new ReduceAction499(103),
+			new ReduceAction500(103),
+			new ReduceAction501(104),
+			new ReduceAction502(104),
+			new ReduceAction503(105),
+			new ReduceAction504(105),
+			new ReduceAction505(106),
+			new ReduceAction506(106),
+			new ReduceAction507(107),
+			new ReduceAction508(107),
+			new ReduceAction509(107),
+			new ReduceAction510(107),
+			new ReduceAction511(108),
+			new ReduceAction512(108),
+			new ReduceAction513(108),
+			new ReduceAction514(109),
+			new ReduceAction515(109),
+			new ReduceAction516(109),
+			new ReduceAction517(110),
+			new ReduceAction518(110),
+			new ReduceAction519(110),
+			new ReduceAction520(111),
+			new ReduceAction521(111),
+			new ReduceAction522(111),
+			new ReduceAction523(112),
+			new ReduceAction524(112),
+			new ReduceAction525(113),
+			new ReduceAction526(113),
+			new ReduceAction527(113),
+			new ReduceAction528(113),
+			new ReduceAction529(114),
+			new ReduceAction530(114),
+			new ReduceAction531(115),
+			new ReduceAction532(115),
+			new ReduceAction533(115),
+			new ReduceAction534(115),
+			new ReduceAction535(115),
+			new ReduceAction536(115),
+			new ReduceAction537(115),
+			new ReduceAction538(115),
+			new ReduceAction539(115),
+			new ReduceAction540(115),
+			new ReduceAction541(116),
+			new ReduceAction542(116),
+			new ReduceAction543(116),
+			new ReduceAction544(117),
+			new ReduceAction545(117),
+			new ReduceAction546(117),
+			new ReduceAction547(117),
+			new ReduceAction548(118),
+			new ReduceAction549(118),
+			new ReduceAction550(118),
+			new ReduceAction551(119),
+			new ReduceAction552(119),
+			new ReduceAction553(119),
+			new ReduceAction554(119),
+			new ReduceAction555(120),
+			new ReduceAction556(120),
+			new ReduceAction557(120),
+			new ReduceAction558(120),
+			new ReduceAction559(120),
+			new ReduceAction560(120),
+			new ReduceAction561(120),
+			new ReduceAction562(120),
+			new ReduceAction563(120),
+			new ReduceAction564(120),
+			new ReduceAction565(120),
+			new ReduceAction566(120),
+			new ReduceAction567(120),
+			new ReduceAction568(120),
+			new ReduceAction569(120),
+			new ReduceAction570(120),
+			new ReduceAction571(120),
+			new ReduceAction572(120),
+			new ReduceAction573(120),
+			new ReduceAction574(120),
+			new ReduceAction575(120),
+			new ReduceAction576(121),
+			new ReduceAction577(121),
+			new ReduceAction578(121),
+			new ReduceAction579(122),
+			new ReduceAction580(122),
+			new ReduceAction581(123),
+			new ReduceAction582(123),
+			new ReduceAction583(123),
+			new ReduceAction584(123),
+			new ReduceAction585(124),
+			new ReduceAction586(124),
+			new ReduceAction587(125),
+			new ReduceAction588(125),
+			new ReduceAction589(125),
+			new ReduceAction590(125),
+			new ReduceAction591(125),
+			new ReduceAction592(125),
+			new ReduceAction593(125),
+			new ReduceAction594(125),
+			new ReduceAction595(125),
+			new ReduceAction596(125),
+			new ReduceAction597(126),
+			new ReduceAction598(126),
+			new ReduceAction599(126),
+			new ReduceAction600(127),
+			new ReduceAction601(127),
+			new ReduceAction602(127),
+			new ReduceAction603(127),
+			new ReduceAction604(128),
+			new ReduceAction605(128),
+			new ReduceAction606(128),
+			new ReduceAction607(129),
+			new ReduceAction608(129),
+			new ReduceAction609(129),
+			new ReduceAction610(130),
+			new ReduceAction611(130),
+			new ReduceAction612(130),
+			new ReduceAction613(130),
+			new ReduceAction614(130),
+			new ReduceAction615(130),
+			new ReduceAction616(130),
+			new ReduceAction617(130),
+			new ReduceAction618(130),
+			new ReduceAction619(130),
+			new ReduceAction620(130),
+			new ReduceAction621(130),
+			new ReduceAction622(130),
+			new ReduceAction623(130),
+			new ReduceAction624(130),
+			new ReduceAction625(130),
+			new ReduceAction626(130),
+			new ReduceAction627(131),
+			new ReduceAction628(131),
+			new ReduceAction629(132),
+			new ReduceAction630(132),
+			new ReduceAction631(132),
+			new ReduceAction632(133),
+			new ReduceAction633(133),
+			new ReduceAction634(133),
+			new ReduceAction635(134),
+			new ReduceAction636(134),
+			new ReduceAction637(135),
+			new ReduceAction638(135),
+			new ReduceAction639(136),
+			new ReduceAction640(136),
+			new ReduceAction641(137),
+			new ReduceAction642(137),
+			new ReduceAction643(138),
+			new ReduceAction644(138),
+			new ReduceAction645(139),
+			new ReduceAction646(139),
+			new ReduceAction647(140),
+			new ReduceAction648(140),
+			new ReduceAction649(141),
+			new ReduceAction650(141),
+			new ReduceAction651(142),
+			new ReduceAction652(142),
+			new ReduceAction653(143),
+			new ReduceAction654(143),
+			new ReduceAction655(144),
+			new ReduceAction656(144),
+			new ReduceAction657(145),
+			new ReduceAction658(145),
+			new ReduceAction659(146),
+			new ReduceAction660(146),
+			new ReduceAction661(147),
+			new ReduceAction662(147),
+			new ReduceAction663(148),
+			new ReduceAction664(148)
 		)
 	end
 end
@@ -945,9 +945,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction1
 special ReduceAction
@@ -965,9 +966,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction2
 special ReduceAction
@@ -986,9 +988,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction3
 special ReduceAction
@@ -1010,9 +1013,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction4
 special ReduceAction
@@ -1031,9 +1035,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction5
 special ReduceAction
@@ -1055,9 +1060,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction6
 special ReduceAction
@@ -1080,9 +1086,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction7
 special ReduceAction
@@ -1108,9 +1115,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction8
 special ReduceAction
@@ -1136,9 +1144,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction9
 special ReduceAction
@@ -1167,9 +1176,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction10
 special ReduceAction
@@ -1199,9 +1209,10 @@ special ReduceAction
 						listnode8
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction11
 special ReduceAction
@@ -1234,9 +1245,10 @@ special ReduceAction
 						listnode8
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction12
 special ReduceAction
@@ -1266,9 +1278,10 @@ special ReduceAction
 						listnode8
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction13
 special ReduceAction
@@ -1301,9 +1314,10 @@ special ReduceAction
 						listnode8
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction14
 special ReduceAction
@@ -1337,9 +1351,10 @@ special ReduceAction
 						listnode9
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction15
 special ReduceAction
@@ -1376,9 +1391,10 @@ special ReduceAction
 						listnode9
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction16
 special ReduceAction
@@ -1399,9 +1415,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction17
 special ReduceAction
@@ -1425,9 +1442,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction18
 special ReduceAction
@@ -1452,9 +1470,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction19
 special ReduceAction
@@ -1482,9 +1501,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction20
 special ReduceAction
@@ -1509,9 +1529,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction21
 special ReduceAction
@@ -1539,9 +1560,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction22
 special ReduceAction
@@ -1570,9 +1592,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction23
 special ReduceAction
@@ -1604,9 +1627,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction24
 special ReduceAction
@@ -1638,9 +1662,10 @@ special ReduceAction
 						listnode8
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction25
 special ReduceAction
@@ -1675,9 +1700,10 @@ special ReduceAction
 						listnode8
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction26
 special ReduceAction
@@ -1713,9 +1739,10 @@ special ReduceAction
 						listnode9
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction27
 special ReduceAction
@@ -1754,9 +1781,10 @@ special ReduceAction
 						listnode9
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction28
 special ReduceAction
@@ -1792,9 +1820,10 @@ special ReduceAction
 						listnode9
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction29
 special ReduceAction
@@ -1833,9 +1862,10 @@ special ReduceAction
 						listnode9
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction30
 special ReduceAction
@@ -1875,9 +1905,10 @@ special ReduceAction
 						listnode10
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction31
 special ReduceAction
@@ -1920,9 +1951,10 @@ special ReduceAction
 						listnode10
 					)
 					node_list = pmodulenode1
-					p.push(p.go_to(0), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction32
 special ReduceAction
@@ -1946,9 +1978,10 @@ special ReduceAction
 						tidnode4
 					)
 					node_list = ppackagedeclnode1
-					p.push(p.go_to(1), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction33
 special ReduceAction
@@ -1973,9 +2006,10 @@ special ReduceAction
 						tidnode4
 					)
 					node_list = pimportnode1
-					p.push(p.go_to(2), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction34
 special ReduceAction
@@ -2000,9 +2034,10 @@ special ReduceAction
 						tkwendnode4
 					)
 					node_list = pimportnode1
-					p.push(p.go_to(2), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction35
 special ReduceAction
@@ -2020,9 +2055,10 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(3), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction36
 special ReduceAction
@@ -2031,9 +2067,10 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					node_list = null
-					p.push(p.go_to(3), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction37
 special ReduceAction
@@ -2049,9 +2086,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(4), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction38
 special ReduceAction
@@ -2067,9 +2105,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(4), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction39
 special ReduceAction
@@ -2105,9 +2144,10 @@ special ReduceAction
 						listnode9
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction40
 special ReduceAction
@@ -2146,9 +2186,10 @@ special ReduceAction
 						listnode9
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction41
 special ReduceAction
@@ -2188,9 +2229,10 @@ special ReduceAction
 						listnode10
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction42
 special ReduceAction
@@ -2233,9 +2275,10 @@ special ReduceAction
 						listnode10
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction43
 special ReduceAction
@@ -2275,9 +2318,10 @@ special ReduceAction
 						listnode10
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction44
 special ReduceAction
@@ -2320,9 +2364,10 @@ special ReduceAction
 						listnode10
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction45
 special ReduceAction
@@ -2366,9 +2411,10 @@ special ReduceAction
 						listnode11
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction46
 special ReduceAction
@@ -2415,9 +2461,10 @@ special ReduceAction
 						listnode11
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction47
 special ReduceAction
@@ -2457,9 +2504,10 @@ special ReduceAction
 						listnode10
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction48
 special ReduceAction
@@ -2502,9 +2550,10 @@ special ReduceAction
 						listnode10
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction49
 special ReduceAction
@@ -2548,9 +2597,10 @@ special ReduceAction
 						listnode11
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction50
 special ReduceAction
@@ -2597,9 +2647,10 @@ special ReduceAction
 						listnode11
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction51
 special ReduceAction
@@ -2643,9 +2694,10 @@ special ReduceAction
 						listnode11
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction52
 special ReduceAction
@@ -2692,9 +2744,10 @@ special ReduceAction
 						listnode11
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction53
 special ReduceAction
@@ -2742,9 +2795,10 @@ special ReduceAction
 						listnode12
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction54
 special ReduceAction
@@ -2795,9 +2849,10 @@ special ReduceAction
 						listnode12
 					)
 					node_list = pclassdefnode1
-					p.push(p.go_to(5), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction55
 special ReduceAction
@@ -2811,9 +2866,10 @@ special ReduceAction
 						tkwclassnode2
 					)
 					node_list = pclasskindnode1
-					p.push(p.go_to(6), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction56
 special ReduceAction
@@ -2831,9 +2887,10 @@ special ReduceAction
 						tkwclassnode3
 					)
 					node_list = pclasskindnode1
-					p.push(p.go_to(6), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction57
 special ReduceAction
@@ -2847,9 +2904,10 @@ special ReduceAction
 						tkwinterfacenode2
 					)
 					node_list = pclasskindnode1
-					p.push(p.go_to(6), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction58
 special ReduceAction
@@ -2863,9 +2921,10 @@ special ReduceAction
 						tkwuniversalnode2
 					)
 					node_list = pclasskindnode1
-					p.push(p.go_to(6), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction59
 special ReduceAction
@@ -2884,9 +2943,10 @@ special ReduceAction
 						listnode2.add(pformaldefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(7), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction60
 special ReduceAction
@@ -2909,9 +2969,10 @@ special ReduceAction
 					end
 					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
-					p.push(p.go_to(7), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction61
 special ReduceAction
@@ -2924,9 +2985,10 @@ special ReduceAction
 					var pformaldefnode1 = nodearraylist3
 					assert pformaldefnode1 isa nullable AFormaldef
 					node_list = pformaldefnode1
-					p.push(p.go_to(8), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction62
 special ReduceAction
@@ -2941,9 +3003,10 @@ special ReduceAction
 						null
 					)
 					node_list = pformaldefnode1
-					p.push(p.go_to(9), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction63
 special ReduceAction
@@ -2961,9 +3024,10 @@ special ReduceAction
 						ptypenode3
 					)
 					node_list = pformaldefnode1
-					p.push(p.go_to(9), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction64
 special ReduceAction
@@ -2984,9 +3048,10 @@ special ReduceAction
 						ptypenode4
 					)
 					node_list = psuperclassnode1
-					p.push(p.go_to(10), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction65
 special ReduceAction
@@ -3007,9 +3072,10 @@ special ReduceAction
 						ptypenode4
 					)
 					node_list = psuperclassnode1
-					p.push(p.go_to(10), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction66
 special ReduceAction
@@ -3021,9 +3087,10 @@ special ReduceAction
 					var ppropdefnode1 = nodearraylist1
 					assert ppropdefnode1 isa nullable APropdef
 					node_list = ppropdefnode1
-					p.push(p.go_to(11), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction67
 special ReduceAction
@@ -3059,9 +3126,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction68
 special ReduceAction
@@ -3100,9 +3168,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction69
 special ReduceAction
@@ -3139,9 +3208,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction70
 special ReduceAction
@@ -3181,9 +3251,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction71
 special ReduceAction
@@ -3220,9 +3291,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction72
 special ReduceAction
@@ -3262,9 +3334,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction73
 special ReduceAction
@@ -3297,9 +3370,10 @@ special ReduceAction
 						psignaturenode7
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction74
 special ReduceAction
@@ -3335,9 +3409,10 @@ special ReduceAction
 						psignaturenode7
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction75
 special ReduceAction
@@ -3370,9 +3445,10 @@ special ReduceAction
 						psignaturenode7
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction76
 special ReduceAction
@@ -3408,9 +3484,10 @@ special ReduceAction
 						psignaturenode7
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction77
 special ReduceAction
@@ -3444,9 +3521,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction78
 special ReduceAction
@@ -3483,9 +3561,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction79
 special ReduceAction
@@ -3522,9 +3601,10 @@ special ReduceAction
 						tstringnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction80
 special ReduceAction
@@ -3564,9 +3644,10 @@ special ReduceAction
 						tstringnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction81
 special ReduceAction
@@ -3597,9 +3678,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction82
 special ReduceAction
@@ -3633,9 +3715,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction83
 special ReduceAction
@@ -3669,9 +3752,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction84
 special ReduceAction
@@ -3708,9 +3792,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction85
 special ReduceAction
@@ -3744,9 +3829,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction86
 special ReduceAction
@@ -3783,9 +3869,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction87
 special ReduceAction
@@ -3822,9 +3909,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction88
 special ReduceAction
@@ -3864,9 +3952,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction89
 special ReduceAction
@@ -3900,9 +3989,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction90
 special ReduceAction
@@ -3939,9 +4029,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction91
 special ReduceAction
@@ -3978,9 +4069,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction92
 special ReduceAction
@@ -4020,9 +4112,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction93
 special ReduceAction
@@ -4059,9 +4152,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction94
 special ReduceAction
@@ -4101,9 +4195,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction95
 special ReduceAction
@@ -4143,9 +4238,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction96
 special ReduceAction
@@ -4188,9 +4284,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction97
 special ReduceAction
@@ -4226,9 +4323,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction98
 special ReduceAction
@@ -4267,9 +4365,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction99
 special ReduceAction
@@ -4308,9 +4407,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction100
 special ReduceAction
@@ -4352,9 +4452,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction101
 special ReduceAction
@@ -4393,9 +4494,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction102
 special ReduceAction
@@ -4437,9 +4539,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction103
 special ReduceAction
@@ -4481,9 +4584,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction104
 special ReduceAction
@@ -4528,9 +4632,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction105
 special ReduceAction
@@ -4569,9 +4674,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction106
 special ReduceAction
@@ -4613,9 +4719,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction107
 special ReduceAction
@@ -4657,9 +4764,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction108
 special ReduceAction
@@ -4704,9 +4812,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction109
 special ReduceAction
@@ -4748,9 +4857,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction110
 special ReduceAction
@@ -4795,9 +4905,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction111
 special ReduceAction
@@ -4842,9 +4953,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction112
 special ReduceAction
@@ -4892,9 +5004,10 @@ special ReduceAction
 						pexprnode10
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction113
 special ReduceAction
@@ -4927,9 +5040,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction114
 special ReduceAction
@@ -4965,9 +5079,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction115
 special ReduceAction
@@ -5003,9 +5118,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction116
 special ReduceAction
@@ -5044,9 +5160,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction117
 special ReduceAction
@@ -5080,9 +5197,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction118
 special ReduceAction
@@ -5119,9 +5237,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction119
 special ReduceAction
@@ -5158,9 +5277,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction120
 special ReduceAction
@@ -5200,9 +5320,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction121
 special ReduceAction
@@ -5233,9 +5354,10 @@ special ReduceAction
 						ptypenode7
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction122
 special ReduceAction
@@ -5269,9 +5391,10 @@ special ReduceAction
 						ptypenode7
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction123
 special ReduceAction
@@ -5286,9 +5409,10 @@ special ReduceAction
 						tkwreadablenode3
 					)
 					node_list = pablenode1
-					p.push(p.go_to(13), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction124
 special ReduceAction
@@ -5306,9 +5430,10 @@ special ReduceAction
 						tkwreadablenode3
 					)
 					node_list = pablenode1
-					p.push(p.go_to(13), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction125
 special ReduceAction
@@ -5323,9 +5448,10 @@ special ReduceAction
 						tkwwritablenode3
 					)
 					node_list = pablenode1
-					p.push(p.go_to(14), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction126
 special ReduceAction
@@ -5343,9 +5469,10 @@ special ReduceAction
 						tkwwritablenode3
 					)
 					node_list = pablenode1
-					p.push(p.go_to(14), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction127
 special ReduceAction
@@ -5355,9 +5482,10 @@ special ReduceAction
 					var pvisibilitynode1: nullable APublicVisibility = new APublicVisibility.init_apublicvisibility(
 					)
 					node_list = pvisibilitynode1
-					p.push(p.go_to(15), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction128
 special ReduceAction
@@ -5372,9 +5500,10 @@ special ReduceAction
 						tkwprivatenode2
 					)
 					node_list = pvisibilitynode1
-					p.push(p.go_to(15), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction129
 special ReduceAction
@@ -5389,9 +5518,10 @@ special ReduceAction
 						tkwprotectednode2
 					)
 					node_list = pvisibilitynode1
-					p.push(p.go_to(15), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction130
 special ReduceAction
@@ -5406,9 +5536,10 @@ special ReduceAction
 						tkwintrudenode2
 					)
 					node_list = pvisibilitynode1
-					p.push(p.go_to(15), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction131
 special ReduceAction
@@ -5422,9 +5553,10 @@ special ReduceAction
 						tidnode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction132
 special ReduceAction
@@ -5438,9 +5570,10 @@ special ReduceAction
 						tplusnode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction133
 special ReduceAction
@@ -5454,9 +5587,10 @@ special ReduceAction
 						tminusnode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction134
 special ReduceAction
@@ -5470,9 +5604,10 @@ special ReduceAction
 						tstarnode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction135
 special ReduceAction
@@ -5486,9 +5621,10 @@ special ReduceAction
 						tslashnode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction136
 special ReduceAction
@@ -5502,9 +5638,10 @@ special ReduceAction
 						tpercentnode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction137
 special ReduceAction
@@ -5518,9 +5655,10 @@ special ReduceAction
 						teqnode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction138
 special ReduceAction
@@ -5534,9 +5672,10 @@ special ReduceAction
 						tnenode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction139
 special ReduceAction
@@ -5550,9 +5689,10 @@ special ReduceAction
 						tlenode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction140
 special ReduceAction
@@ -5566,9 +5706,10 @@ special ReduceAction
 						tgenode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction141
 special ReduceAction
@@ -5582,9 +5723,10 @@ special ReduceAction
 						tltnode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction142
 special ReduceAction
@@ -5598,9 +5740,10 @@ special ReduceAction
 						tgtnode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction143
 special ReduceAction
@@ -5618,9 +5761,10 @@ special ReduceAction
 						tcbranode3
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction144
 special ReduceAction
@@ -5634,9 +5778,10 @@ special ReduceAction
 						tstarshipnode2
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction145
 special ReduceAction
@@ -5654,9 +5799,10 @@ special ReduceAction
 						tassignnode3
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction146
 special ReduceAction
@@ -5678,9 +5824,10 @@ special ReduceAction
 						tassignnode4
 					)
 					node_list = pmethidnode1
-					p.push(p.go_to(16), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction147
 special ReduceAction
@@ -5702,9 +5849,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(17), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction148
 special ReduceAction
@@ -5730,9 +5878,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(17), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction149
 special ReduceAction
@@ -5751,9 +5900,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(17), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction150
 special ReduceAction
@@ -5776,9 +5926,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(17), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction151
 special ReduceAction
@@ -5797,9 +5948,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(17), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction152
 special ReduceAction
@@ -5822,9 +5974,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(17), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction153
 special ReduceAction
@@ -5840,9 +5993,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(17), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction154
 special ReduceAction
@@ -5862,9 +6016,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(17), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction155
 special ReduceAction
@@ -5879,9 +6034,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(18), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction156
 special ReduceAction
@@ -5900,9 +6056,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(18), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction157
 special ReduceAction
@@ -5920,9 +6077,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(18), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction158
 special ReduceAction
@@ -5944,9 +6102,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(18), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction159
 special ReduceAction
@@ -5965,9 +6124,10 @@ special ReduceAction
 						listnode2.add(pparamnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(19), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction160
 special ReduceAction
@@ -5990,9 +6150,10 @@ special ReduceAction
 					end
 					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
-					p.push(p.go_to(19), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction161
 special ReduceAction
@@ -6004,9 +6165,10 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(19), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction162
 special ReduceAction
@@ -6019,9 +6181,10 @@ special ReduceAction
 					var pparamnode1 = nodearraylist3
 					assert pparamnode1 isa nullable AParam
 					node_list = pparamnode1
-					p.push(p.go_to(20), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction163
 special ReduceAction
@@ -6037,9 +6200,10 @@ special ReduceAction
 						null
 					)
 					node_list = pparamnode1
-					p.push(p.go_to(21), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction164
 special ReduceAction
@@ -6058,9 +6222,10 @@ special ReduceAction
 						null
 					)
 					node_list = pparamnode1
-					p.push(p.go_to(21), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction165
 special ReduceAction
@@ -6082,9 +6247,10 @@ special ReduceAction
 						tdotdotdotnode4
 					)
 					node_list = pparamnode1
-					p.push(p.go_to(21), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction166
 special ReduceAction
@@ -6098,9 +6264,10 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					listnode2 = concat(listnode2, listnode1)
 					node_list = listnode2
-					p.push(p.go_to(22), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction167
 special ReduceAction
@@ -6125,9 +6292,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredeclnode1
-					p.push(p.go_to(23), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction168
 special ReduceAction
@@ -6155,9 +6323,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredeclnode1
-					p.push(p.go_to(23), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction169
 special ReduceAction
@@ -6186,9 +6355,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pclosuredeclnode1
-					p.push(p.go_to(23), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction170
 special ReduceAction
@@ -6220,9 +6390,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pclosuredeclnode1
-					p.push(p.go_to(23), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction171
 special ReduceAction
@@ -6252,9 +6423,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pclosuredeclnode1
-					p.push(p.go_to(23), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction172
 special ReduceAction
@@ -6287,9 +6459,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pclosuredeclnode1
-					p.push(p.go_to(23), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction173
 special ReduceAction
@@ -6304,9 +6477,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(24), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction174
 special ReduceAction
@@ -6323,9 +6497,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(25), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction175
 special ReduceAction
@@ -6345,9 +6520,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(25), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction176
 special ReduceAction
@@ -6372,9 +6548,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(25), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction177
 special ReduceAction
@@ -6402,9 +6579,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(25), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction178
 special ReduceAction
@@ -6419,9 +6597,10 @@ special ReduceAction
 						listnode2.add(ptypenode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(26), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction179
 special ReduceAction
@@ -6440,9 +6619,10 @@ special ReduceAction
 					end
 					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
-					p.push(p.go_to(26), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction180
 special ReduceAction
@@ -6455,9 +6635,10 @@ special ReduceAction
 					var ptypenode1 = nodearraylist3
 					assert ptypenode1 isa nullable AType
 					node_list = ptypenode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction181
 special ReduceAction
@@ -6470,9 +6651,10 @@ special ReduceAction
 					var ptypenode1 = nodearraylist3
 					assert ptypenode1 isa nullable AType
 					node_list = ptypenode1
-					p.push(p.go_to(28), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction182
 special ReduceAction
@@ -6485,9 +6667,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction183
 special ReduceAction
@@ -6501,9 +6684,10 @@ special ReduceAction
 						listnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction184
 special ReduceAction
@@ -6516,9 +6700,10 @@ special ReduceAction
 						listnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction185
 special ReduceAction
@@ -6529,9 +6714,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction186
 special ReduceAction
@@ -6549,9 +6735,10 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(30), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction187
 special ReduceAction
@@ -6573,9 +6760,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(30), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction188
 special ReduceAction
@@ -6594,9 +6782,10 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(31), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction189
 special ReduceAction
@@ -6619,9 +6808,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(31), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction190
 special ReduceAction
@@ -6633,9 +6823,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(32), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction191
 special ReduceAction
@@ -6646,9 +6837,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction192
 special ReduceAction
@@ -6659,9 +6851,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction193
 special ReduceAction
@@ -6676,9 +6869,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction194
 special ReduceAction
@@ -6696,9 +6890,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction195
 special ReduceAction
@@ -6714,9 +6909,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction196
 special ReduceAction
@@ -6735,9 +6931,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction197
 special ReduceAction
@@ -6756,9 +6953,10 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction198
 special ReduceAction
@@ -6780,9 +6978,10 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction199
 special ReduceAction
@@ -6796,9 +6995,10 @@ special ReduceAction
 						tkwabortnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction200
 special ReduceAction
@@ -6814,9 +7014,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction201
 special ReduceAction
@@ -6835,9 +7036,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction202
 special ReduceAction
@@ -6856,9 +7058,10 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction203
 special ReduceAction
@@ -6880,9 +7083,10 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction204
 special ReduceAction
@@ -6893,9 +7097,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction205
 special ReduceAction
@@ -6906,9 +7111,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction206
 special ReduceAction
@@ -6919,9 +7125,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction207
 special ReduceAction
@@ -6932,9 +7139,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction208
 special ReduceAction
@@ -6945,9 +7153,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction209
 special ReduceAction
@@ -6958,9 +7167,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction210
 special ReduceAction
@@ -6988,9 +7198,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction211
 special ReduceAction
@@ -7015,9 +7226,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction212
 special ReduceAction
@@ -7049,9 +7261,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction213
 special ReduceAction
@@ -7080,9 +7293,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction214
 special ReduceAction
@@ -7103,9 +7317,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction215
 special ReduceAction
@@ -7129,9 +7344,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction216
 special ReduceAction
@@ -7157,9 +7373,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction217
 special ReduceAction
@@ -7182,9 +7399,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction218
 special ReduceAction
@@ -7202,9 +7420,10 @@ special ReduceAction
 						tidnode3
 					)
 					node_list = plabelnode1
-					p.push(p.go_to(34), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction219
 special ReduceAction
@@ -7219,9 +7438,10 @@ special ReduceAction
 						listnode2.add(pclosuredefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(35), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction220
 special ReduceAction
@@ -7240,9 +7460,10 @@ special ReduceAction
 					end
 					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
-					p.push(p.go_to(35), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction221
 special ReduceAction
@@ -7274,9 +7495,10 @@ special ReduceAction
 						plabelnode7
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(36), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction222
 special ReduceAction
@@ -7312,9 +7534,10 @@ special ReduceAction
 						plabelnode8
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(36), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction223
 special ReduceAction
@@ -7343,9 +7566,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(36), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction224
 special ReduceAction
@@ -7378,9 +7602,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(36), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction225
 special ReduceAction
@@ -7408,9 +7633,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(36), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction226
 special ReduceAction
@@ -7442,9 +7668,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(36), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction227
 special ReduceAction
@@ -7474,9 +7701,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(37), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction228
 special ReduceAction
@@ -7510,9 +7738,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(37), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction229
 special ReduceAction
@@ -7539,9 +7768,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(37), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction230
 special ReduceAction
@@ -7572,9 +7802,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(37), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction231
 special ReduceAction
@@ -7588,9 +7819,10 @@ special ReduceAction
 						tidnode2
 					)
 					node_list = pclosureidnode1
-					p.push(p.go_to(38), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction232
 special ReduceAction
@@ -7604,9 +7836,10 @@ special ReduceAction
 						tkwbreaknode2
 					)
 					node_list = pclosureidnode1
-					p.push(p.go_to(38), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction233
 special ReduceAction
@@ -7622,9 +7855,10 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(39), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction234
 special ReduceAction
@@ -7645,9 +7879,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(40), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction235
 special ReduceAction
@@ -7671,9 +7906,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(40), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction236
 special ReduceAction
@@ -7701,9 +7937,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(40), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction237
 special ReduceAction
@@ -7734,9 +7971,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(40), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction238
 special ReduceAction
@@ -7764,9 +8002,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction239
 special ReduceAction
@@ -7791,9 +8030,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction240
 special ReduceAction
@@ -7827,9 +8067,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction241
 special ReduceAction
@@ -7860,9 +8101,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction242
 special ReduceAction
@@ -7890,9 +8132,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction243
 special ReduceAction
@@ -7920,9 +8163,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction244
 special ReduceAction
@@ -7947,9 +8191,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction245
 special ReduceAction
@@ -7983,9 +8228,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction246
 special ReduceAction
@@ -8016,9 +8262,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction247
 special ReduceAction
@@ -8046,9 +8293,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction248
 special ReduceAction
@@ -8062,9 +8310,10 @@ special ReduceAction
 						tpluseqnode2
 					)
 					node_list = passignopnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction249
 special ReduceAction
@@ -8078,9 +8327,10 @@ special ReduceAction
 						tminuseqnode2
 					)
 					node_list = passignopnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction250
 special ReduceAction
@@ -8102,9 +8352,10 @@ special ReduceAction
 						plabelnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(43), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction251
 special ReduceAction
@@ -8123,9 +8374,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(43), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction252
 special ReduceAction
@@ -8155,9 +8407,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(44), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction253
 special ReduceAction
@@ -8183,9 +8436,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(44), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction254
 special ReduceAction
@@ -8215,9 +8469,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(44), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction255
 special ReduceAction
@@ -8243,9 +8498,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(44), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction256
 special ReduceAction
@@ -8272,9 +8528,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(44), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction257
 special ReduceAction
@@ -8286,9 +8543,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(45), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction258
 special ReduceAction
@@ -8297,9 +8555,10 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					node_list = null
-					p.push(p.go_to(45), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction259
 special ReduceAction
@@ -8321,9 +8580,10 @@ special ReduceAction
 						plabelnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(46), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction260
 special ReduceAction
@@ -8342,9 +8602,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(46), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction261
 special ReduceAction
@@ -8376,9 +8637,10 @@ special ReduceAction
 						plabelnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction262
 special ReduceAction
@@ -8407,9 +8669,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction263
 special ReduceAction
@@ -8448,9 +8711,10 @@ special ReduceAction
 						plabelnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(48), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction264
 special ReduceAction
@@ -8486,9 +8750,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(48), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction265
 special ReduceAction
@@ -8512,9 +8777,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(49), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction266
 special ReduceAction
@@ -8541,9 +8807,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(49), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction267
 special ReduceAction
@@ -8563,9 +8830,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(49), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction268
 special ReduceAction
@@ -8588,9 +8856,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(49), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction269
 special ReduceAction
@@ -8602,9 +8871,10 @@ special ReduceAction
 					var tidnode1 = nodearraylist1
 					assert tidnode1 isa nullable TId
 					node_list = tidnode1
-					p.push(p.go_to(50), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction270
 special ReduceAction
@@ -8615,9 +8885,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(51), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction271
 special ReduceAction
@@ -8649,9 +8920,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(51), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction272
 special ReduceAction
@@ -8680,9 +8952,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(51), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction273
 special ReduceAction
@@ -8708,9 +8981,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(51), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction274
 special ReduceAction
@@ -8721,9 +8995,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(52), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction275
 special ReduceAction
@@ -8762,9 +9037,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(52), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction276
 special ReduceAction
@@ -8775,9 +9051,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(53), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction277
 special ReduceAction
@@ -8797,9 +9074,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(53), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction278
 special ReduceAction
@@ -8819,9 +9097,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(53), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction279
 special ReduceAction
@@ -8842,9 +9121,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(53), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction280
 special ReduceAction
@@ -8855,9 +9135,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(54), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction281
 special ReduceAction
@@ -8876,9 +9157,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(54), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction282
 special ReduceAction
@@ -8889,9 +9171,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction283
 special ReduceAction
@@ -8911,9 +9194,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction284
 special ReduceAction
@@ -8933,9 +9217,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction285
 special ReduceAction
@@ -8955,9 +9240,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction286
 special ReduceAction
@@ -8977,9 +9263,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction287
 special ReduceAction
@@ -8999,9 +9286,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction288
 special ReduceAction
@@ -9021,9 +9309,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction289
 special ReduceAction
@@ -9043,9 +9332,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction290
 special ReduceAction
@@ -9065,9 +9355,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction291
 special ReduceAction
@@ -9087,9 +9378,10 @@ special ReduceAction
 						ptypenode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction292
 special ReduceAction
@@ -9100,9 +9392,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(56), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction293
 special ReduceAction
@@ -9122,9 +9415,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(56), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction294
 special ReduceAction
@@ -9144,9 +9438,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(56), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction295
 special ReduceAction
@@ -9157,9 +9452,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(57), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction296
 special ReduceAction
@@ -9179,9 +9475,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(57), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction297
 special ReduceAction
@@ -9201,9 +9498,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(57), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction298
 special ReduceAction
@@ -9223,9 +9521,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(57), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction299
 special ReduceAction
@@ -9236,9 +9535,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(58), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction300
 special ReduceAction
@@ -9257,9 +9557,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(58), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction301
 special ReduceAction
@@ -9278,9 +9579,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(58), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction302
 special ReduceAction
@@ -9291,9 +9593,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(59), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction303
 special ReduceAction
@@ -9319,9 +9622,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(59), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction304
 special ReduceAction
@@ -9345,9 +9649,10 @@ special ReduceAction
 						tattridnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(59), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction305
 special ReduceAction
@@ -9368,9 +9673,10 @@ special ReduceAction
 						tattridnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(59), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction306
 special ReduceAction
@@ -9390,9 +9696,10 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction307
 special ReduceAction
@@ -9409,9 +9716,10 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction308
 special ReduceAction
@@ -9439,9 +9747,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction309
 special ReduceAction
@@ -9466,9 +9775,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction310
 special ReduceAction
@@ -9489,9 +9799,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction311
 special ReduceAction
@@ -9515,9 +9826,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction312
 special ReduceAction
@@ -9543,9 +9855,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction313
 special ReduceAction
@@ -9568,9 +9881,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction314
 special ReduceAction
@@ -9592,9 +9906,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction315
 special ReduceAction
@@ -9625,9 +9940,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction316
 special ReduceAction
@@ -9652,9 +9968,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction317
 special ReduceAction
@@ -9679,9 +9996,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction318
 special ReduceAction
@@ -9697,9 +10015,10 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction319
 special ReduceAction
@@ -9713,9 +10032,10 @@ special ReduceAction
 						tkwselfnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction320
 special ReduceAction
@@ -9729,9 +10049,10 @@ special ReduceAction
 						tkwtruenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction321
 special ReduceAction
@@ -9745,9 +10066,10 @@ special ReduceAction
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction322
 special ReduceAction
@@ -9761,9 +10083,10 @@ special ReduceAction
 						tkwnullnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction323
 special ReduceAction
@@ -9777,9 +10100,10 @@ special ReduceAction
 						tnumbernode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction324
 special ReduceAction
@@ -9793,9 +10117,10 @@ special ReduceAction
 						tfloatnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction325
 special ReduceAction
@@ -9809,9 +10134,10 @@ special ReduceAction
 						tcharnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction326
 special ReduceAction
@@ -9825,9 +10151,10 @@ special ReduceAction
 						tstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction327
 special ReduceAction
@@ -9838,9 +10165,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction328
 special ReduceAction
@@ -9853,9 +10181,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction329
 special ReduceAction
@@ -9884,9 +10213,10 @@ special ReduceAction
 						ptypenode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction330
 special ReduceAction
@@ -9920,9 +10250,10 @@ special ReduceAction
 						tkwnullnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction331
 special ReduceAction
@@ -9944,9 +10275,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(61), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction332
 special ReduceAction
@@ -9972,9 +10304,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(61), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction333
 special ReduceAction
@@ -9997,9 +10330,10 @@ special ReduceAction
 						listnode3.add(pexprnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(62), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction334
 special ReduceAction
@@ -10013,9 +10347,10 @@ special ReduceAction
 						tstartstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(63), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction335
 special ReduceAction
@@ -10038,9 +10373,10 @@ special ReduceAction
 						listnode3.add(pexprnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(64), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction336
 special ReduceAction
@@ -10054,9 +10390,10 @@ special ReduceAction
 						tmidstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(65), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction337
 special ReduceAction
@@ -10070,9 +10407,10 @@ special ReduceAction
 						tendstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(66), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction338
 special ReduceAction
@@ -10091,9 +10429,10 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(67), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction339
 special ReduceAction
@@ -10116,9 +10455,10 @@ special ReduceAction
 					end
 					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
-					p.push(p.go_to(67), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction340
 special ReduceAction
@@ -10130,9 +10470,10 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(67), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction341
 special ReduceAction
@@ -10141,9 +10482,10 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(67), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction342
 special ReduceAction
@@ -10162,9 +10504,10 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(68), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction343
 special ReduceAction
@@ -10187,9 +10530,10 @@ special ReduceAction
 					end
 					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
-					p.push(p.go_to(68), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction344
 special ReduceAction
@@ -10204,9 +10548,10 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(68), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction345
 special ReduceAction
@@ -10218,9 +10563,10 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(68), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction346
 special ReduceAction
@@ -10229,9 +10575,10 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(68), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction347
 special ReduceAction
@@ -10250,9 +10597,10 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction348
 special ReduceAction
@@ -10275,9 +10623,10 @@ special ReduceAction
 					end
 					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction349
 special ReduceAction
@@ -10291,9 +10640,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist3
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(70), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction350
 special ReduceAction
@@ -10308,9 +10658,10 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					listnode2 = concat(listnode2, listnode1)
 					node_list = listnode2
-					p.push(p.go_to(71), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction351
 special ReduceAction
@@ -10323,9 +10674,10 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					listnode2 = concat(listnode2, listnode1)
 					node_list = listnode2
-					p.push(p.go_to(71), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction352
 special ReduceAction
@@ -10340,9 +10692,10 @@ special ReduceAction
 						listnode2.add(tidnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(72), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction353
 special ReduceAction
@@ -10364,9 +10717,10 @@ special ReduceAction
 						listnode3.add(tidnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(72), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction354
 special ReduceAction
@@ -10382,9 +10736,10 @@ special ReduceAction
 						tclassidnode3
 					)
 					node_list = pqualifiednode1
-					p.push(p.go_to(73), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction355
 special ReduceAction
@@ -10404,9 +10759,10 @@ special ReduceAction
 						tclassidnode4
 					)
 					node_list = pqualifiednode1
-					p.push(p.go_to(73), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction356
 special ReduceAction
@@ -10423,9 +10779,10 @@ special ReduceAction
 						null
 					)
 					node_list = pqualifiednode1
-					p.push(p.go_to(73), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction357
 special ReduceAction
@@ -10438,9 +10795,10 @@ special ReduceAction
 					var tidnode1 = nodearraylist1
 					assert tidnode1 isa nullable TId
 					node_list = tidnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction358
 special ReduceAction
@@ -10453,9 +10811,10 @@ special ReduceAction
 					var tclassidnode1 = nodearraylist1
 					assert tclassidnode1 isa nullable TClassid
 					node_list = tclassidnode1
-					p.push(p.go_to(75), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction359
 special ReduceAction
@@ -10463,9 +10822,10 @@ special ReduceAction
 	do
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction360
 special ReduceAction
@@ -10473,9 +10833,10 @@ special ReduceAction
 	do
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction361
 special ReduceAction
@@ -10491,9 +10852,10 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pdocnode1
-					p.push(p.go_to(77), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction362
 special ReduceAction
@@ -10510,9 +10872,10 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pdocnode1
-					p.push(p.go_to(77), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction363
 special ReduceAction
@@ -10521,9 +10884,10 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					node_list = null
-					p.push(p.go_to(77), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction364
 special ReduceAction
@@ -10531,9 +10895,10 @@ special ReduceAction
 	do
 					var node_list: nullable Object = null
 					node_list = null
-					p.push(p.go_to(78), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction365
 special ReduceAction
@@ -10544,9 +10909,10 @@ special ReduceAction
 					var pdocnode1 = nodearraylist1
 					assert pdocnode1 isa nullable ADoc
 					node_list = pdocnode1
-					p.push(p.go_to(78), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction366
 special ReduceAction
@@ -10555,9 +10921,10 @@ special ReduceAction
 					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					p.push(p.go_to(79), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction367
 special ReduceAction
@@ -10567,9 +10934,10 @@ special ReduceAction
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					p.push(p.go_to(79), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction368
 special ReduceAction
@@ -10577,9 +10945,10 @@ special ReduceAction
 	do
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					p.push(p.go_to(79), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction369
 special ReduceAction
@@ -10591,9 +10960,10 @@ special ReduceAction
 					var ppropdefnode1 = nodearraylist1
 					assert ppropdefnode1 isa nullable APropdef
 					node_list = ppropdefnode1
-					p.push(p.go_to(80), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction370
 special ReduceAction
@@ -10629,9 +10999,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction371
 special ReduceAction
@@ -10670,9 +11041,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction372
 special ReduceAction
@@ -10709,9 +11081,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction373
 special ReduceAction
@@ -10751,9 +11124,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction374
 special ReduceAction
@@ -10790,9 +11164,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction375
 special ReduceAction
@@ -10832,9 +11207,10 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction376
 special ReduceAction
@@ -10868,9 +11244,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction377
 special ReduceAction
@@ -10907,9 +11284,10 @@ special ReduceAction
 						null
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction378
 special ReduceAction
@@ -10946,9 +11324,10 @@ special ReduceAction
 						tstringnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction379
 special ReduceAction
@@ -10988,9 +11367,10 @@ special ReduceAction
 						tstringnode8
 					)
 					node_list = ppropdefnode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction380
 special ReduceAction
@@ -11012,9 +11392,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(82), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction381
 special ReduceAction
@@ -11040,9 +11421,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(82), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction382
 special ReduceAction
@@ -11061,9 +11443,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(82), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction383
 special ReduceAction
@@ -11086,9 +11469,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = psignaturenode1
-					p.push(p.go_to(82), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction384
 special ReduceAction
@@ -11105,9 +11489,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(83), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction385
 special ReduceAction
@@ -11127,9 +11512,10 @@ special ReduceAction
 						listnode4
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(83), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction386
 special ReduceAction
@@ -11140,9 +11526,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction387
 special ReduceAction
@@ -11174,9 +11561,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction388
 special ReduceAction
@@ -11205,9 +11593,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction389
 special ReduceAction
@@ -11218,9 +11607,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction390
 special ReduceAction
@@ -11259,9 +11649,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction391
 special ReduceAction
@@ -11272,9 +11663,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(86), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction392
 special ReduceAction
@@ -11294,9 +11686,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(86), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction393
 special ReduceAction
@@ -11316,9 +11709,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(86), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction394
 special ReduceAction
@@ -11339,9 +11733,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(86), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction395
 special ReduceAction
@@ -11352,9 +11747,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(87), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction396
 special ReduceAction
@@ -11373,9 +11769,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(87), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction397
 special ReduceAction
@@ -11386,9 +11783,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction398
 special ReduceAction
@@ -11408,9 +11806,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction399
 special ReduceAction
@@ -11430,9 +11829,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction400
 special ReduceAction
@@ -11452,9 +11852,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction401
 special ReduceAction
@@ -11474,9 +11875,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction402
 special ReduceAction
@@ -11496,9 +11898,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction403
 special ReduceAction
@@ -11518,9 +11921,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction404
 special ReduceAction
@@ -11540,9 +11944,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction405
 special ReduceAction
@@ -11562,9 +11967,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction406
 special ReduceAction
@@ -11584,9 +11990,10 @@ special ReduceAction
 						ptypenode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction407
 special ReduceAction
@@ -11597,9 +12004,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(89), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction408
 special ReduceAction
@@ -11619,9 +12027,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(89), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction409
 special ReduceAction
@@ -11641,9 +12050,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(89), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction410
 special ReduceAction
@@ -11654,9 +12064,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction411
 special ReduceAction
@@ -11676,9 +12087,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction412
 special ReduceAction
@@ -11698,9 +12110,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction413
 special ReduceAction
@@ -11720,9 +12133,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction414
 special ReduceAction
@@ -11733,9 +12147,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(91), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction415
 special ReduceAction
@@ -11754,9 +12169,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(91), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction416
 special ReduceAction
@@ -11775,9 +12191,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(91), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction417
 special ReduceAction
@@ -11788,9 +12205,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(92), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction418
 special ReduceAction
@@ -11816,9 +12234,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(92), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction419
 special ReduceAction
@@ -11842,9 +12261,10 @@ special ReduceAction
 						tattridnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(92), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction420
 special ReduceAction
@@ -11865,9 +12285,10 @@ special ReduceAction
 						tattridnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(92), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction421
 special ReduceAction
@@ -11887,9 +12308,10 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction422
 special ReduceAction
@@ -11906,9 +12328,10 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction423
 special ReduceAction
@@ -11936,9 +12359,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction424
 special ReduceAction
@@ -11963,9 +12387,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction425
 special ReduceAction
@@ -11986,9 +12411,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction426
 special ReduceAction
@@ -12012,9 +12438,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction427
 special ReduceAction
@@ -12040,9 +12467,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction428
 special ReduceAction
@@ -12065,9 +12493,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction429
 special ReduceAction
@@ -12098,9 +12527,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction430
 special ReduceAction
@@ -12114,9 +12544,10 @@ special ReduceAction
 						tkwselfnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction431
 special ReduceAction
@@ -12130,9 +12561,10 @@ special ReduceAction
 						tkwtruenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction432
 special ReduceAction
@@ -12146,9 +12578,10 @@ special ReduceAction
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction433
 special ReduceAction
@@ -12162,9 +12595,10 @@ special ReduceAction
 						tkwnullnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction434
 special ReduceAction
@@ -12178,9 +12612,10 @@ special ReduceAction
 						tnumbernode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction435
 special ReduceAction
@@ -12194,9 +12629,10 @@ special ReduceAction
 						tfloatnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction436
 special ReduceAction
@@ -12210,9 +12646,10 @@ special ReduceAction
 						tcharnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction437
 special ReduceAction
@@ -12226,9 +12663,10 @@ special ReduceAction
 						tstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction438
 special ReduceAction
@@ -12239,9 +12677,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction439
 special ReduceAction
@@ -12254,9 +12693,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction440
 special ReduceAction
@@ -12285,9 +12725,10 @@ special ReduceAction
 						ptypenode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction441
 special ReduceAction
@@ -12321,9 +12762,10 @@ special ReduceAction
 						tkwnullnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction442
 special ReduceAction
@@ -12336,9 +12778,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(94), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction443
 special ReduceAction
@@ -12352,9 +12795,10 @@ special ReduceAction
 						listnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(94), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction444
 special ReduceAction
@@ -12367,9 +12811,10 @@ special ReduceAction
 						listnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(94), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction445
 special ReduceAction
@@ -12380,9 +12825,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(94), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction446
 special ReduceAction
@@ -12393,9 +12839,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction447
 special ReduceAction
@@ -12406,9 +12853,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction448
 special ReduceAction
@@ -12423,9 +12871,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction449
 special ReduceAction
@@ -12443,9 +12892,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction450
 special ReduceAction
@@ -12461,9 +12911,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction451
 special ReduceAction
@@ -12482,9 +12933,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction452
 special ReduceAction
@@ -12503,9 +12955,10 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction453
 special ReduceAction
@@ -12527,9 +12980,10 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction454
 special ReduceAction
@@ -12543,9 +12997,10 @@ special ReduceAction
 						tkwabortnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction455
 special ReduceAction
@@ -12561,9 +13016,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction456
 special ReduceAction
@@ -12582,9 +13038,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction457
 special ReduceAction
@@ -12603,9 +13060,10 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction458
 special ReduceAction
@@ -12627,9 +13085,10 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction459
 special ReduceAction
@@ -12640,9 +13099,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction460
 special ReduceAction
@@ -12653,9 +13113,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction461
 special ReduceAction
@@ -12666,9 +13127,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction462
 special ReduceAction
@@ -12679,9 +13141,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction463
 special ReduceAction
@@ -12692,9 +13155,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction464
 special ReduceAction
@@ -12705,9 +13169,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction465
 special ReduceAction
@@ -12735,9 +13200,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction466
 special ReduceAction
@@ -12762,9 +13228,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction467
 special ReduceAction
@@ -12796,9 +13263,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction468
 special ReduceAction
@@ -12827,9 +13295,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction469
 special ReduceAction
@@ -12850,9 +13319,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction470
 special ReduceAction
@@ -12876,9 +13346,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction471
 special ReduceAction
@@ -12904,9 +13375,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction472
 special ReduceAction
@@ -12929,9 +13401,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction473
 special ReduceAction
@@ -12946,9 +13419,10 @@ special ReduceAction
 						listnode2.add(pclosuredefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(96), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction474
 special ReduceAction
@@ -12967,9 +13441,10 @@ special ReduceAction
 					end
 					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
-					p.push(p.go_to(96), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction475
 special ReduceAction
@@ -13001,9 +13476,10 @@ special ReduceAction
 						plabelnode7
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(97), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction476
 special ReduceAction
@@ -13039,9 +13515,10 @@ special ReduceAction
 						plabelnode8
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(97), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction477
 special ReduceAction
@@ -13070,9 +13547,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(97), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction478
 special ReduceAction
@@ -13105,9 +13583,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(97), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction479
 special ReduceAction
@@ -13135,9 +13614,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(97), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction480
 special ReduceAction
@@ -13169,9 +13649,10 @@ special ReduceAction
 						null
 					)
 					node_list = pclosuredefnode1
-					p.push(p.go_to(97), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction481
 special ReduceAction
@@ -13187,9 +13668,10 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(98), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction482
 special ReduceAction
@@ -13210,9 +13692,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(99), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction483
 special ReduceAction
@@ -13236,9 +13719,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(99), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction484
 special ReduceAction
@@ -13266,9 +13750,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(99), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction485
 special ReduceAction
@@ -13299,9 +13784,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(99), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction486
 special ReduceAction
@@ -13329,9 +13815,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction487
 special ReduceAction
@@ -13356,9 +13843,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction488
 special ReduceAction
@@ -13392,9 +13880,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction489
 special ReduceAction
@@ -13425,9 +13914,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction490
 special ReduceAction
@@ -13455,9 +13945,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction491
 special ReduceAction
@@ -13485,9 +13976,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction492
 special ReduceAction
@@ -13512,9 +14004,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction493
 special ReduceAction
@@ -13548,9 +14041,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction494
 special ReduceAction
@@ -13581,9 +14075,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction495
 special ReduceAction
@@ -13611,9 +14106,10 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction496
 special ReduceAction
@@ -13635,9 +14131,10 @@ special ReduceAction
 						plabelnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(101), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction497
 special ReduceAction
@@ -13656,9 +14153,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(101), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction498
 special ReduceAction
@@ -13688,9 +14186,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(102), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction499
 special ReduceAction
@@ -13712,9 +14211,10 @@ special ReduceAction
 						plabelnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(103), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction500
 special ReduceAction
@@ -13733,9 +14233,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(103), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction501
 special ReduceAction
@@ -13767,9 +14268,10 @@ special ReduceAction
 						plabelnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(104), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction502
 special ReduceAction
@@ -13798,9 +14300,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(104), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction503
 special ReduceAction
@@ -13839,9 +14342,10 @@ special ReduceAction
 						plabelnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(105), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction504
 special ReduceAction
@@ -13877,9 +14381,10 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(105), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction505
 special ReduceAction
@@ -13903,9 +14408,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(106), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction506
 special ReduceAction
@@ -13932,9 +14438,10 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(106), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction507
 special ReduceAction
@@ -13945,9 +14452,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(107), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction508
 special ReduceAction
@@ -13979,9 +14487,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(107), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction509
 special ReduceAction
@@ -14010,9 +14519,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(107), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction510
 special ReduceAction
@@ -14038,9 +14548,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(107), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction511
 special ReduceAction
@@ -14051,9 +14562,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(108), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction512
 special ReduceAction
@@ -14085,9 +14597,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(108), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction513
 special ReduceAction
@@ -14116,9 +14629,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(108), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction514
 special ReduceAction
@@ -14131,9 +14645,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(109), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction515
 special ReduceAction
@@ -14147,9 +14662,10 @@ special ReduceAction
 						listnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(109), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction516
 special ReduceAction
@@ -14162,9 +14678,10 @@ special ReduceAction
 						listnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(109), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction517
 special ReduceAction
@@ -14177,9 +14694,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(110), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction518
 special ReduceAction
@@ -14193,9 +14711,10 @@ special ReduceAction
 						listnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(110), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction519
 special ReduceAction
@@ -14208,9 +14727,10 @@ special ReduceAction
 						listnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(110), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction520
 special ReduceAction
@@ -14221,9 +14741,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(111), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction521
 special ReduceAction
@@ -14255,9 +14776,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(111), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction522
 special ReduceAction
@@ -14286,9 +14808,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(111), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction523
 special ReduceAction
@@ -14299,9 +14822,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(112), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction524
 special ReduceAction
@@ -14340,9 +14864,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(112), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction525
 special ReduceAction
@@ -14353,9 +14878,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(113), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction526
 special ReduceAction
@@ -14375,9 +14901,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(113), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction527
 special ReduceAction
@@ -14397,9 +14924,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(113), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction528
 special ReduceAction
@@ -14420,9 +14948,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(113), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction529
 special ReduceAction
@@ -14433,9 +14962,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(114), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction530
 special ReduceAction
@@ -14454,9 +14984,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(114), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction531
 special ReduceAction
@@ -14467,9 +14998,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction532
 special ReduceAction
@@ -14489,9 +15021,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction533
 special ReduceAction
@@ -14511,9 +15044,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction534
 special ReduceAction
@@ -14533,9 +15067,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction535
 special ReduceAction
@@ -14555,9 +15090,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction536
 special ReduceAction
@@ -14577,9 +15113,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction537
 special ReduceAction
@@ -14599,9 +15136,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction538
 special ReduceAction
@@ -14621,9 +15159,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction539
 special ReduceAction
@@ -14643,9 +15182,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction540
 special ReduceAction
@@ -14665,9 +15205,10 @@ special ReduceAction
 						ptypenode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction541
 special ReduceAction
@@ -14678,9 +15219,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(116), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction542
 special ReduceAction
@@ -14700,9 +15242,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(116), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction543
 special ReduceAction
@@ -14722,9 +15265,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(116), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction544
 special ReduceAction
@@ -14735,9 +15279,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(117), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction545
 special ReduceAction
@@ -14757,9 +15302,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(117), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction546
 special ReduceAction
@@ -14779,9 +15325,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(117), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction547
 special ReduceAction
@@ -14801,9 +15348,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(117), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction548
 special ReduceAction
@@ -14814,9 +15362,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(118), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction549
 special ReduceAction
@@ -14835,9 +15384,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(118), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction550
 special ReduceAction
@@ -14856,9 +15406,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(118), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction551
 special ReduceAction
@@ -14869,9 +15420,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(119), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction552
 special ReduceAction
@@ -14897,9 +15449,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(119), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction553
 special ReduceAction
@@ -14923,9 +15476,10 @@ special ReduceAction
 						tattridnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(119), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction554
 special ReduceAction
@@ -14946,9 +15500,10 @@ special ReduceAction
 						tattridnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(119), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction555
 special ReduceAction
@@ -14968,9 +15523,10 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction556
 special ReduceAction
@@ -14987,9 +15543,10 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction557
 special ReduceAction
@@ -15017,9 +15574,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction558
 special ReduceAction
@@ -15044,9 +15602,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction559
 special ReduceAction
@@ -15067,9 +15626,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction560
 special ReduceAction
@@ -15093,9 +15653,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction561
 special ReduceAction
@@ -15121,9 +15682,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction562
 special ReduceAction
@@ -15146,9 +15708,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction563
 special ReduceAction
@@ -15170,9 +15733,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction564
 special ReduceAction
@@ -15203,9 +15767,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction565
 special ReduceAction
@@ -15219,9 +15784,10 @@ special ReduceAction
 						tkwselfnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction566
 special ReduceAction
@@ -15235,9 +15801,10 @@ special ReduceAction
 						tkwtruenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction567
 special ReduceAction
@@ -15251,9 +15818,10 @@ special ReduceAction
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction568
 special ReduceAction
@@ -15267,9 +15835,10 @@ special ReduceAction
 						tkwnullnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction569
 special ReduceAction
@@ -15283,9 +15852,10 @@ special ReduceAction
 						tnumbernode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction570
 special ReduceAction
@@ -15299,9 +15869,10 @@ special ReduceAction
 						tfloatnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction571
 special ReduceAction
@@ -15315,9 +15886,10 @@ special ReduceAction
 						tcharnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction572
 special ReduceAction
@@ -15331,9 +15903,10 @@ special ReduceAction
 						tstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction573
 special ReduceAction
@@ -15344,9 +15917,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction574
 special ReduceAction
@@ -15375,9 +15949,10 @@ special ReduceAction
 						ptypenode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction575
 special ReduceAction
@@ -15411,9 +15986,10 @@ special ReduceAction
 						tkwnullnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(120), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction576
 special ReduceAction
@@ -15424,9 +16000,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(121), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction577
 special ReduceAction
@@ -15458,9 +16035,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(121), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction578
 special ReduceAction
@@ -15489,9 +16067,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(121), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction579
 special ReduceAction
@@ -15502,9 +16081,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(122), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction580
 special ReduceAction
@@ -15543,9 +16123,10 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(122), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction581
 special ReduceAction
@@ -15556,9 +16137,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(123), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction582
 special ReduceAction
@@ -15578,9 +16160,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(123), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction583
 special ReduceAction
@@ -15600,9 +16183,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(123), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction584
 special ReduceAction
@@ -15623,9 +16207,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(123), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction585
 special ReduceAction
@@ -15636,9 +16221,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(124), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction586
 special ReduceAction
@@ -15657,9 +16243,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(124), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction587
 special ReduceAction
@@ -15670,9 +16257,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction588
 special ReduceAction
@@ -15692,9 +16280,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction589
 special ReduceAction
@@ -15714,9 +16303,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction590
 special ReduceAction
@@ -15736,9 +16326,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction591
 special ReduceAction
@@ -15758,9 +16349,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction592
 special ReduceAction
@@ -15780,9 +16372,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction593
 special ReduceAction
@@ -15802,9 +16395,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction594
 special ReduceAction
@@ -15824,9 +16418,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction595
 special ReduceAction
@@ -15846,9 +16441,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction596
 special ReduceAction
@@ -15868,9 +16464,10 @@ special ReduceAction
 						ptypenode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(125), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction597
 special ReduceAction
@@ -15881,9 +16478,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(126), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction598
 special ReduceAction
@@ -15903,9 +16501,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(126), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction599
 special ReduceAction
@@ -15925,9 +16524,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(126), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction600
 special ReduceAction
@@ -15938,9 +16538,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(127), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction601
 special ReduceAction
@@ -15960,9 +16561,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(127), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction602
 special ReduceAction
@@ -15982,9 +16584,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(127), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction603
 special ReduceAction
@@ -16004,9 +16607,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(127), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction604
 special ReduceAction
@@ -16017,9 +16621,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(128), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction605
 special ReduceAction
@@ -16038,9 +16643,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(128), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction606
 special ReduceAction
@@ -16059,9 +16665,10 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(128), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction607
 special ReduceAction
@@ -16072,9 +16679,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(129), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction608
 special ReduceAction
@@ -16100,9 +16708,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(129), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction609
 special ReduceAction
@@ -16124,9 +16733,10 @@ special ReduceAction
 						tattridnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(129), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction610
 special ReduceAction
@@ -16144,9 +16754,10 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction611
 special ReduceAction
@@ -16172,9 +16783,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction612
 special ReduceAction
@@ -16195,9 +16807,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction613
 special ReduceAction
@@ -16221,9 +16834,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction614
 special ReduceAction
@@ -16247,9 +16861,10 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction615
 special ReduceAction
@@ -16280,9 +16895,10 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction616
 special ReduceAction
@@ -16296,9 +16912,10 @@ special ReduceAction
 						tkwselfnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction617
 special ReduceAction
@@ -16312,9 +16929,10 @@ special ReduceAction
 						tkwtruenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction618
 special ReduceAction
@@ -16328,9 +16946,10 @@ special ReduceAction
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction619
 special ReduceAction
@@ -16344,9 +16963,10 @@ special ReduceAction
 						tkwnullnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction620
 special ReduceAction
@@ -16360,9 +16980,10 @@ special ReduceAction
 						tnumbernode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction621
 special ReduceAction
@@ -16376,9 +16997,10 @@ special ReduceAction
 						tfloatnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction622
 special ReduceAction
@@ -16392,9 +17014,10 @@ special ReduceAction
 						tcharnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction623
 special ReduceAction
@@ -16408,9 +17031,10 @@ special ReduceAction
 						tstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction624
 special ReduceAction
@@ -16421,9 +17045,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction625
 special ReduceAction
@@ -16452,9 +17077,10 @@ special ReduceAction
 						ptypenode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction626
 special ReduceAction
@@ -16488,9 +17114,10 @@ special ReduceAction
 						tkwnullnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(130), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction627
 special ReduceAction
@@ -16503,9 +17130,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(131), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction628
 special ReduceAction
@@ -16515,9 +17143,10 @@ special ReduceAction
 					var pexprnode1: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(131), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction629
 special ReduceAction
@@ -16528,9 +17157,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(132), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction630
 special ReduceAction
@@ -16562,9 +17192,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(132), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction631
 special ReduceAction
@@ -16593,9 +17224,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(132), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction632
 special ReduceAction
@@ -16606,9 +17238,10 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa nullable AExpr
 					node_list = pexprnode1
-					p.push(p.go_to(133), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction633
 special ReduceAction
@@ -16640,9 +17273,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(133), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction634
 special ReduceAction
@@ -16671,9 +17305,10 @@ special ReduceAction
 						listnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(133), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction635
 special ReduceAction
@@ -16688,9 +17323,10 @@ special ReduceAction
 						listnode2.add(pimportnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(134), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction636
 special ReduceAction
@@ -16709,9 +17345,10 @@ special ReduceAction
 						listnode3.add(pimportnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(134), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction637
 special ReduceAction
@@ -16726,9 +17363,10 @@ special ReduceAction
 						listnode2.add(pclassdefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(135), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction638
 special ReduceAction
@@ -16747,9 +17385,10 @@ special ReduceAction
 						listnode3.add(pclassdefnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(135), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction639
 special ReduceAction
@@ -16764,9 +17403,10 @@ special ReduceAction
 						listnode2.add(ppropdefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(136), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction640
 special ReduceAction
@@ -16785,9 +17425,10 @@ special ReduceAction
 						listnode3.add(ppropdefnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(136), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction641
 special ReduceAction
@@ -16802,9 +17443,10 @@ special ReduceAction
 						listnode2.add(psuperclassnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(137), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction642
 special ReduceAction
@@ -16823,9 +17465,10 @@ special ReduceAction
 						listnode3.add(psuperclassnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(137), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction643
 special ReduceAction
@@ -16840,9 +17483,10 @@ special ReduceAction
 						listnode2.add(ppropdefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(138), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction644
 special ReduceAction
@@ -16861,9 +17505,10 @@ special ReduceAction
 						listnode3.add(ppropdefnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(138), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction645
 special ReduceAction
@@ -16878,9 +17523,10 @@ special ReduceAction
 						listnode2.add(pformaldefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(139), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction646
 special ReduceAction
@@ -16899,9 +17545,10 @@ special ReduceAction
 						listnode3.add(pformaldefnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(139), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction647
 special ReduceAction
@@ -16916,9 +17563,10 @@ special ReduceAction
 						listnode2.add(pparamnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(140), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction648
 special ReduceAction
@@ -16937,9 +17585,10 @@ special ReduceAction
 						listnode3.add(pparamnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(140), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction649
 special ReduceAction
@@ -16954,9 +17603,10 @@ special ReduceAction
 						listnode2.add(pclosuredeclnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(141), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction650
 special ReduceAction
@@ -16975,9 +17625,10 @@ special ReduceAction
 						listnode3.add(pclosuredeclnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(141), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction651
 special ReduceAction
@@ -16992,9 +17643,10 @@ special ReduceAction
 						listnode2.add(ptypenode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(142), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction652
 special ReduceAction
@@ -17013,9 +17665,10 @@ special ReduceAction
 						listnode3.add(ptypenode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(142), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction653
 special ReduceAction
@@ -17030,9 +17683,10 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(143), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction654
 special ReduceAction
@@ -17051,9 +17705,10 @@ special ReduceAction
 						listnode3.add(pexprnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(143), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction655
 special ReduceAction
@@ -17066,9 +17721,10 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					listnode2 = concat(listnode2, listnode1)
 					node_list = listnode2
-					p.push(p.go_to(144), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction656
 special ReduceAction
@@ -17085,9 +17741,10 @@ special ReduceAction
 					listnode3 = concat(listnode3, listnode1)
 					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
-					p.push(p.go_to(144), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction657
 special ReduceAction
@@ -17102,9 +17759,10 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(145), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction658
 special ReduceAction
@@ -17123,9 +17781,10 @@ special ReduceAction
 						listnode3.add(pexprnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(145), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction659
 special ReduceAction
@@ -17140,9 +17799,10 @@ special ReduceAction
 						listnode2.add(tidnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(146), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction660
 special ReduceAction
@@ -17161,9 +17821,10 @@ special ReduceAction
 						listnode3.add(tidnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(146), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction661
 special ReduceAction
@@ -17178,9 +17839,10 @@ special ReduceAction
 						listnode2.add(tcommentnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(147), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction662
 special ReduceAction
@@ -17199,9 +17861,10 @@ special ReduceAction
 						listnode3.add(tcommentnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(147), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction663
 special ReduceAction
@@ -17216,9 +17879,10 @@ special ReduceAction
 						listnode2.add(teolnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(148), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 private class ReduceAction664
 special ReduceAction
@@ -17237,7 +17901,8 @@ special ReduceAction
 						listnode3.add(teolnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(148), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end

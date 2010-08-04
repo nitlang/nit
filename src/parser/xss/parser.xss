@@ -168,7 +168,7 @@ special ParserTable
 	do
 		_reduce_table = new Array[ReduceAction].with_items(
 $ foreach {rules/rule}
-			new ReduceAction@index[-sep ','-]
+			new ReduceAction@index(@leftside)[-sep ','-]
 $ end foreach
 		)
 	end
@@ -335,9 +335,10 @@ $     when {@cmd='RETURNLIST'}
 $     end
 $   end choose
 $   end foreach
-					p.push(p.go_to(@leftside), node_list)
+					p.push(p.go_to(_goto), node_list)
 	end
-init do end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 $ end foreach
 $ end template
