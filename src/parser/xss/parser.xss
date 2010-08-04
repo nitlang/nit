@@ -274,6 +274,12 @@ end
 # Each reduca action has its own class, this one is the root of the hierarchy.
 private abstract class ReduceAction
 	fun action(p: Parser) is abstract
+	fun concat(l1, l2 : Array[Object]): Array[Object]
+	do
+		if l1.is_empty then return l2
+		l1.append(l2)
+		return l1
+	end
 end
 
 $ foreach {rules/rule}
@@ -301,13 +307,7 @@ $     when {@cmd='ADDNODE'}
 					end
 $     end
 $     when {@cmd='ADDLIST'}
-#					if ${translate(@fromlist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} != null then
-						if ${translate(@tolist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}.is_empty then
-							${translate(@tolist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = ${translate(@fromlist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
-						else
-							${translate(@tolist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}.append(${translate(@fromlist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")})
-						end
-#					end
+					${translate(@tolist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = concat(${translate(@tolist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}, ${translate(@fromlist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")})
 $     end
 $     when {@cmd='MAKELIST'}
 					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = new Array[Object]

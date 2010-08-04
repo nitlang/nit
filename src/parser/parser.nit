@@ -924,6 +924,12 @@ end
 # Each reduca action has its own class, this one is the root of the hierarchy.
 private abstract class ReduceAction
 	fun action(p: Parser) is abstract
+	fun concat(l1, l2 : Array[Object]): Array[Object]
+	do
+		if l1.is_empty then return l2
+		l1.append(l2)
+		return l1
+	end
 end
 
 private class ReduceAction0
@@ -973,13 +979,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
@@ -1003,13 +1003,7 @@ special ReduceAction
 					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
@@ -1030,13 +1024,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode4 = nodearraylist1
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
@@ -1060,13 +1048,7 @@ special ReduceAction
 					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
@@ -1088,22 +1070,10 @@ special ReduceAction
 					var listnode6 = new Array[Object]
 					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
@@ -1128,22 +1098,10 @@ special ReduceAction
 					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
@@ -1165,13 +1123,7 @@ special ReduceAction
 					var listnode6 = new Array[Object]
 					var listnode5 = nodearraylist1
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode6
 					)
@@ -1202,13 +1154,7 @@ special ReduceAction
 					var listnode6 = new Array[Object]
 					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode6
 					)
@@ -1236,23 +1182,11 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode7 = new Array[Object]
 					var listnode6 = nodearraylist2
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
@@ -1283,23 +1217,11 @@ special ReduceAction
 					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode7 = new Array[Object]
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
@@ -1330,23 +1252,11 @@ special ReduceAction
 					var listnode7 = new Array[Object]
 					var listnode6 = nodearraylist2
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
-#					if listnode4 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode4
-						else
-							listnode8.append(listnode4)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode4)
 					if pclassdefnode5 != null then
 						listnode8.add(pclassdefnode5)
 					end
@@ -1377,23 +1287,11 @@ special ReduceAction
 					var listnode7 = new Array[Object]
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
-#					if listnode4 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode4
-						else
-							listnode8.append(listnode4)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode4)
 					if pclassdefnode5 != null then
 						listnode8.add(pclassdefnode5)
 					end
@@ -1419,35 +1317,17 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var listnode7 = nodearraylist3
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
-#					if listnode5 != null then
-						if listnode9.is_empty then
-							listnode9 = listnode5
-						else
-							listnode9.append(listnode5)
-						end
-#					end
+					listnode9 = concat(listnode9, listnode5)
 					if pclassdefnode6 != null then
 						listnode9.add(pclassdefnode6)
 					end
@@ -1476,35 +1356,17 @@ special ReduceAction
 					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var listnode7 = nodearraylist4
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
-#					if listnode5 != null then
-						if listnode9.is_empty then
-							listnode9 = listnode5
-						else
-							listnode9.append(listnode5)
-						end
-#					end
+					listnode9 = concat(listnode9, listnode5)
 					if pclassdefnode6 != null then
 						listnode9.add(pclassdefnode6)
 					end
@@ -1578,13 +1440,7 @@ special ReduceAction
 					var listnode6 = new Array[Object]
 					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var pclassdefnode5 = nodearraylist2
 					assert pclassdefnode5 isa nullable AClassdef
 					if pclassdefnode5 != null then
@@ -1614,13 +1470,7 @@ special ReduceAction
 					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var pclassdefnode5 = nodearraylist3
 					assert pclassdefnode5 isa nullable AClassdef
 					if pclassdefnode5 != null then
@@ -1649,13 +1499,7 @@ special ReduceAction
 					assert listnode4 isa Array[Object]
 					var pclassdefnode5 = nodearraylist2
 					assert pclassdefnode5 isa nullable AClassdef
-#					if listnode4 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode4
-						else
-							listnode6.append(listnode4)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode4)
 					if pclassdefnode5 != null then
 						listnode6.add(pclassdefnode5)
 					end
@@ -1685,13 +1529,7 @@ special ReduceAction
 					assert listnode4 isa Array[Object]
 					var pclassdefnode5 = nodearraylist3
 					assert pclassdefnode5 isa nullable AClassdef
-#					if listnode4 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode4
-						else
-							listnode6.append(listnode4)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode4)
 					if pclassdefnode5 != null then
 						listnode6.add(pclassdefnode5)
 					end
@@ -1717,24 +1555,12 @@ special ReduceAction
 					var listnode7 = new Array[Object]
 					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
 					var pclassdefnode6 = nodearraylist3
 					assert pclassdefnode6 isa nullable AClassdef
-#					if listnode5 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode5
-						else
-							listnode7.append(listnode5)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode5)
 					if pclassdefnode6 != null then
 						listnode7.add(pclassdefnode6)
 					end
@@ -1763,24 +1589,12 @@ special ReduceAction
 					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					var pclassdefnode6 = nodearraylist4
 					assert pclassdefnode6 isa nullable AClassdef
-#					if listnode5 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode5
-						else
-							listnode7.append(listnode5)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode5)
 					if pclassdefnode6 != null then
 						listnode7.add(pclassdefnode6)
 					end
@@ -1806,13 +1620,7 @@ special ReduceAction
 					var listnode6 = new Array[Object]
 					var listnode5 = nodearraylist1
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode6
 					)
@@ -1849,13 +1657,7 @@ special ReduceAction
 					var listnode6 = new Array[Object]
 					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode6
 					)
@@ -1889,23 +1691,11 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode7 = new Array[Object]
 					var listnode6 = nodearraylist2
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
@@ -1942,23 +1732,11 @@ special ReduceAction
 					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode7 = new Array[Object]
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
@@ -1995,25 +1773,13 @@ special ReduceAction
 					var listnode7 = new Array[Object]
 					var listnode6 = nodearraylist2
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist3
 					assert pclassdefnode8 isa nullable AClassdef
-#					if listnode4 != null then
-						if listnode9.is_empty then
-							listnode9 = listnode4
-						else
-							listnode9.append(listnode4)
-						end
-#					end
+					listnode9 = concat(listnode9, listnode4)
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
@@ -2048,25 +1814,13 @@ special ReduceAction
 					var listnode7 = new Array[Object]
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist4
 					assert pclassdefnode8 isa nullable AClassdef
-#					if listnode4 != null then
-						if listnode9.is_empty then
-							listnode9 = listnode4
-						else
-							listnode9.append(listnode4)
-						end
-#					end
+					listnode9 = concat(listnode9, listnode4)
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
@@ -2096,37 +1850,19 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var listnode7 = nodearraylist3
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist4
 					assert pclassdefnode9 isa nullable AClassdef
-#					if listnode5 != null then
-						if listnode10.is_empty then
-							listnode10 = listnode5
-						else
-							listnode10.append(listnode5)
-						end
-#					end
+					listnode10 = concat(listnode10, listnode5)
 					if pclassdefnode6 != null then
 						listnode10.add(pclassdefnode6)
 					end
@@ -2159,37 +1895,19 @@ special ReduceAction
 					assert ppackagedeclnode2 isa nullable APackagedecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var listnode7 = nodearraylist4
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist5
 					assert pclassdefnode9 isa nullable AClassdef
-#					if listnode5 != null then
-						if listnode10.is_empty then
-							listnode10 = listnode5
-						else
-							listnode10.append(listnode5)
-						end
-#					end
+					listnode10 = concat(listnode10, listnode5)
 					if pclassdefnode6 != null then
 						listnode10.add(pclassdefnode6)
 					end
@@ -2458,13 +2176,7 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist6
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
@@ -2509,13 +2221,7 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist7
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -2557,13 +2263,7 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
-#					if listnode8 != null then
-						if listnode9.is_empty then
-							listnode9 = listnode8
-						else
-							listnode9.append(listnode8)
-						end
-#					end
+					listnode9 = concat(listnode9, listnode8)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
@@ -2608,13 +2308,7 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode8 = nodearraylist7
 					assert listnode8 isa Array[Object]
-#					if listnode8 != null then
-						if listnode9.is_empty then
-							listnode9 = listnode8
-						else
-							listnode9.append(listnode8)
-						end
-#					end
+					listnode9 = concat(listnode9, listnode8)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -2657,22 +2351,10 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist6
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var listnode9 = nodearraylist7
 					assert listnode9 isa Array[Object]
-#					if listnode9 != null then
-						if listnode10.is_empty then
-							listnode10 = listnode9
-						else
-							listnode10.append(listnode9)
-						end
-#					end
+					listnode10 = concat(listnode10, listnode9)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
@@ -2718,22 +2400,10 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist7
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var listnode9 = nodearraylist8
 					assert listnode9 isa Array[Object]
-#					if listnode9 != null then
-						if listnode10.is_empty then
-							listnode10 = listnode9
-						else
-							listnode10.append(listnode9)
-						end
-#					end
+					listnode10 = concat(listnode10, listnode9)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -2775,13 +2445,7 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode9 = nodearraylist6
 					assert listnode9 isa Array[Object]
-#					if listnode9 != null then
-						if listnode10.is_empty then
-							listnode10 = listnode9
-						else
-							listnode10.append(listnode9)
-						end
-#					end
+					listnode10 = concat(listnode10, listnode9)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
@@ -2826,13 +2490,7 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode9 = nodearraylist7
 					assert listnode9 isa Array[Object]
-#					if listnode9 != null then
-						if listnode10.is_empty then
-							listnode10 = listnode9
-						else
-							listnode10.append(listnode9)
-						end
-#					end
+					listnode10 = concat(listnode10, listnode9)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -2875,22 +2533,10 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist6
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var listnode10 = nodearraylist7
 					assert listnode10 isa Array[Object]
-#					if listnode10 != null then
-						if listnode11.is_empty then
-							listnode11 = listnode10
-						else
-							listnode11.append(listnode10)
-						end
-#					end
+					listnode11 = concat(listnode11, listnode10)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
@@ -2936,22 +2582,10 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist7
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var listnode10 = nodearraylist8
 					assert listnode10 isa Array[Object]
-#					if listnode10 != null then
-						if listnode11.is_empty then
-							listnode11 = listnode10
-						else
-							listnode11.append(listnode10)
-						end
-#					end
+					listnode11 = concat(listnode11, listnode10)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -2994,22 +2628,10 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
-#					if listnode8 != null then
-						if listnode9.is_empty then
-							listnode9 = listnode8
-						else
-							listnode9.append(listnode8)
-						end
-#					end
+					listnode9 = concat(listnode9, listnode8)
 					var listnode10 = nodearraylist7
 					assert listnode10 isa Array[Object]
-#					if listnode10 != null then
-						if listnode11.is_empty then
-							listnode11 = listnode10
-						else
-							listnode11.append(listnode10)
-						end
-#					end
+					listnode11 = concat(listnode11, listnode10)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
@@ -3055,22 +2677,10 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode8 = nodearraylist7
 					assert listnode8 isa Array[Object]
-#					if listnode8 != null then
-						if listnode9.is_empty then
-							listnode9 = listnode8
-						else
-							listnode9.append(listnode8)
-						end
-#					end
+					listnode9 = concat(listnode9, listnode8)
 					var listnode10 = nodearraylist8
 					assert listnode10 isa Array[Object]
-#					if listnode10 != null then
-						if listnode11.is_empty then
-							listnode11 = listnode10
-						else
-							listnode11.append(listnode10)
-						end
-#					end
+					listnode11 = concat(listnode11, listnode10)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -3114,31 +2724,13 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist6
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var listnode9 = nodearraylist7
 					assert listnode9 isa Array[Object]
-#					if listnode9 != null then
-						if listnode10.is_empty then
-							listnode10 = listnode9
-						else
-							listnode10.append(listnode9)
-						end
-#					end
+					listnode10 = concat(listnode10, listnode9)
 					var listnode11 = nodearraylist8
 					assert listnode11 isa Array[Object]
-#					if listnode11 != null then
-						if listnode12.is_empty then
-							listnode12 = listnode11
-						else
-							listnode12.append(listnode11)
-						end
-#					end
+					listnode12 = concat(listnode12, listnode11)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
@@ -3185,31 +2777,13 @@ special ReduceAction
 					assert tclassidnode6 isa nullable TClassid
 					var listnode7 = nodearraylist7
 					assert listnode7 isa Array[Object]
-#					if listnode7 != null then
-						if listnode8.is_empty then
-							listnode8 = listnode7
-						else
-							listnode8.append(listnode7)
-						end
-#					end
+					listnode8 = concat(listnode8, listnode7)
 					var listnode9 = nodearraylist8
 					assert listnode9 isa Array[Object]
-#					if listnode9 != null then
-						if listnode10.is_empty then
-							listnode10 = listnode9
-						else
-							listnode10.append(listnode9)
-						end
-#					end
+					listnode10 = concat(listnode10, listnode9)
 					var listnode11 = nodearraylist9
 					assert listnode11 isa Array[Object]
-#					if listnode11 != null then
-						if listnode12.is_empty then
-							listnode12 = listnode11
-						else
-							listnode12.append(listnode11)
-						end
-#					end
+					listnode12 = concat(listnode12, listnode11)
 					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -3333,13 +2907,7 @@ special ReduceAction
 					if pformaldefnode1 != null then
 						listnode3.add(pformaldefnode1)
 					end
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
 					p.push(p.go_to(7), node_list)
 	end
@@ -6127,13 +5695,7 @@ special ReduceAction
 					assert ptypenode3 isa nullable AType
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						ptypenode3,
@@ -6156,24 +5718,12 @@ special ReduceAction
 					var listnode6 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var ptypenode4 = nodearraylist2
 					assert ptypenode4 isa nullable AType
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						ptypenode4,
@@ -6217,13 +5767,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var ptypenode4 = nodearraylist2
 					assert ptypenode4 isa nullable AType
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
@@ -6246,13 +5790,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode4 = nodearraylist1
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						null,
@@ -6274,22 +5812,10 @@ special ReduceAction
 					var listnode6 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						null,
@@ -6329,13 +5855,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						null,
@@ -6373,13 +5893,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						null,
@@ -6421,13 +5935,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var ptypenode4 = nodearraylist2
 					assert ptypenode4 isa nullable AType
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
@@ -6480,13 +5988,7 @@ special ReduceAction
 					if pparamnode1 != null then
 						listnode3.add(pparamnode1)
 					end
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
 					p.push(p.go_to(19), node_list)
 	end
@@ -6594,13 +6096,7 @@ special ReduceAction
 					var listnode2 = new Array[Object]
 					var listnode1 = nodearraylist2
 					assert listnode1 isa Array[Object]
-#					if listnode1 != null then
-						if listnode2.is_empty then
-							listnode2 = listnode1
-						else
-							listnode2.append(listnode1)
-						end
-#					end
+					listnode2 = concat(listnode2, listnode1)
 					node_list = listnode2
 					p.push(p.go_to(22), node_list)
 	end
@@ -6869,13 +6365,7 @@ special ReduceAction
 					assert tclassidnode3 isa nullable TClassid
 					var listnode4 = nodearraylist4
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var ptypenode1: nullable AType = new AType.init_atype(
 						null,
 						tclassidnode3,
@@ -6905,13 +6395,7 @@ special ReduceAction
 					assert tclassidnode3 isa nullable TClassid
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var ptypenode1: nullable AType = new AType.init_atype(
 						tkwnullablenode2,
 						tclassidnode3,
@@ -6954,13 +6438,7 @@ special ReduceAction
 					if ptypenode1 != null then
 						listnode3.add(ptypenode1)
 					end
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
 					p.push(p.go_to(26), node_list)
 	end
@@ -7090,13 +6568,7 @@ special ReduceAction
 					if pexprnode2 != null then
 						listnode4.add(pexprnode2)
 					end
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var pexprnode1: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode4
 					)
@@ -7142,13 +6614,7 @@ special ReduceAction
 					if pexprnode2 != null then
 						listnode4.add(pexprnode2)
 					end
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var pexprnode1: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode4
 					)
@@ -7514,13 +6980,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -7547,13 +7007,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -7584,22 +7038,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -7627,22 +7069,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -7666,13 +7096,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
@@ -7698,13 +7122,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
@@ -7732,13 +7150,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -7763,13 +7175,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -7832,13 +7238,7 @@ special ReduceAction
 					if pclosuredefnode1 != null then
 						listnode3.add(pclosuredefnode1)
 					end
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
 					p.push(p.go_to(35), node_list)
 	end
@@ -7896,13 +7296,7 @@ special ReduceAction
 					assert pclosureidnode3 isa nullable AClosureId
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var tkwdonode6 = nodearraylist4
 					assert tkwdonode6 isa nullable TKwdo
 					var pexprnode7 = nodearraylist5
@@ -7970,13 +7364,7 @@ special ReduceAction
 					assert pclosureidnode3 isa nullable AClosureId
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var tkwdonode6 = nodearraylist4
 					assert tkwdonode6 isa nullable TKwdo
 					var pexprnode7 = nodearraylist5
@@ -8042,13 +7430,7 @@ special ReduceAction
 					assert pclosureidnode3 isa nullable AClosureId
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode7 = nodearraylist6
 					assert pexprnode7 isa nullable AExpr
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
@@ -8114,13 +7496,7 @@ special ReduceAction
 					assert pclosureidnode3 isa nullable AClosureId
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var tkwdonode6 = nodearraylist4
 					assert tkwdonode6 isa nullable TKwdo
 					var pexprnode7 = nodearraylist6
@@ -8184,13 +7560,7 @@ special ReduceAction
 					assert pclosureidnode3 isa nullable AClosureId
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var tkwdonode6 = nodearraylist4
 					assert tkwdonode6 isa nullable TKwdo
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
@@ -8444,13 +7814,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var tassignnode6 = nodearraylist6
 					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist7
@@ -8483,13 +7847,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var tassignnode6 = nodearraylist3
 					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist4
@@ -8520,13 +7878,7 @@ special ReduceAction
 					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var tassignnode5 = nodearraylist3
 					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist4
@@ -8618,13 +7970,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var passignopnode6 = nodearraylist6
 					assert passignopnode6 isa nullable AAssignOp
 					var pexprnode7 = nodearraylist7
@@ -8657,13 +8003,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var passignopnode6 = nodearraylist3
 					assert passignopnode6 isa nullable AAssignOp
 					var pexprnode7 = nodearraylist4
@@ -8694,13 +8034,7 @@ special ReduceAction
 					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var passignopnode5 = nodearraylist3
 					assert passignopnode5 isa nullable AAssignOp
 					var pexprnode6 = nodearraylist4
@@ -9304,22 +8638,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -9347,22 +8669,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -9388,22 +8698,10 @@ special ReduceAction
 					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pexprnode1: nullable ABraExpr = new ABraExpr.init_abraexpr(
 						pexprnode2,
 						listnode4,
@@ -10013,13 +9311,7 @@ special ReduceAction
 					assert ptypenode3 isa nullable AType
 					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
@@ -10139,13 +9431,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -10172,13 +9458,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -10202,13 +9482,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
@@ -10234,13 +9508,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
@@ -10268,13 +9536,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -10299,13 +9561,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -10329,13 +9585,7 @@ special ReduceAction
 					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var pexprnode1: nullable ABraExpr = new ABraExpr.init_abraexpr(
 						pexprnode2,
 						listnode4,
@@ -10367,13 +9617,7 @@ special ReduceAction
 					assert tidnode4 isa nullable TId
 					var listnode5 = nodearraylist7
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
@@ -10448,13 +9692,7 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var pexprnode1: nullable AArrayExpr = new AArrayExpr.init_aarrayexpr(
 						listnode3
 					)
@@ -10698,13 +9936,7 @@ special ReduceAction
 					assert listnode2 isa Array[Object]
 					var pexprnode3 = nodearraylist2
 					assert pexprnode3 isa nullable AExpr
-#					if listnode2 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode2
-						else
-							listnode4.append(listnode2)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode2)
 					if pexprnode3 != null then
 						listnode4.add(pexprnode3)
 					end
@@ -10731,20 +9963,8 @@ special ReduceAction
 					assert listnode3 isa Array[Object]
 					var pexprnode4 = nodearraylist3
 					assert pexprnode4 isa nullable AExpr
-#					if listnode2 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode2
-						else
-							listnode5.append(listnode2)
-						end
-#					end
-#					if listnode3 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode3
-						else
-							listnode5.append(listnode3)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode2)
+					listnode5 = concat(listnode5, listnode3)
 					if pexprnode4 != null then
 						listnode5.add(pexprnode4)
 					end
@@ -10894,13 +10114,7 @@ special ReduceAction
 					if pexprnode1 != null then
 						listnode3.add(pexprnode1)
 					end
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
 					p.push(p.go_to(67), node_list)
 	end
@@ -10971,13 +10185,7 @@ special ReduceAction
 					if pexprnode1 != null then
 						listnode3.add(pexprnode1)
 					end
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
 					p.push(p.go_to(68), node_list)
 	end
@@ -11065,13 +10273,7 @@ special ReduceAction
 					if pexprnode1 != null then
 						listnode3.add(pexprnode1)
 					end
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
 					p.push(p.go_to(69), node_list)
 	end
@@ -11104,13 +10306,7 @@ special ReduceAction
 					var listnode2 = new Array[Object]
 					var listnode1 = nodearraylist2
 					assert listnode1 isa Array[Object]
-#					if listnode1 != null then
-						if listnode2.is_empty then
-							listnode2 = listnode1
-						else
-							listnode2.append(listnode1)
-						end
-#					end
+					listnode2 = concat(listnode2, listnode1)
 					node_list = listnode2
 					p.push(p.go_to(71), node_list)
 	end
@@ -11125,13 +10321,7 @@ special ReduceAction
 					var listnode2 = new Array[Object]
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
-#					if listnode1 != null then
-						if listnode2.is_empty then
-							listnode2 = listnode1
-						else
-							listnode2.append(listnode1)
-						end
-#					end
+					listnode2 = concat(listnode2, listnode1)
 					node_list = listnode2
 					p.push(p.go_to(71), node_list)
 	end
@@ -11169,13 +10359,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var tidnode2 = nodearraylist5
 					assert tidnode2 isa nullable TId
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if tidnode2 != null then
 						listnode3.add(tidnode2)
 					end
@@ -11212,13 +10396,7 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var tclassidnode4 = nodearraylist2
 					assert tclassidnode4 isa nullable TClassid
 					var pqualifiednode1: nullable AQualified = new AQualified.init_aqualified(
@@ -11239,13 +10417,7 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var pqualifiednode1: nullable AQualified = new AQualified.init_aqualified(
 						listnode3,
 						null
@@ -11314,13 +10486,7 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var pdocnode1: nullable ADoc = new ADoc.init_adoc(
 						listnode3
 					)
@@ -11339,13 +10505,7 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode2 = nodearraylist2
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var pdocnode1: nullable ADoc = new ADoc.init_adoc(
 						listnode3
 					)
@@ -11845,13 +11005,7 @@ special ReduceAction
 					assert ptypenode3 isa nullable AType
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						ptypenode3,
@@ -11874,24 +11028,12 @@ special ReduceAction
 					var listnode6 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var ptypenode4 = nodearraylist2
 					assert ptypenode4 isa nullable AType
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						ptypenode4,
@@ -11935,13 +11077,7 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					var ptypenode4 = nodearraylist2
 					assert ptypenode4 isa nullable AType
 					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
@@ -12027,22 +11163,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -12070,22 +11194,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -12696,13 +11808,7 @@ special ReduceAction
 					assert ptypenode3 isa nullable AType
 					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
@@ -12822,13 +11928,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -12855,13 +11955,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -12885,13 +11979,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
@@ -12917,13 +12005,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
@@ -12951,13 +12033,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -12982,13 +12058,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -13020,13 +12090,7 @@ special ReduceAction
 					assert tidnode4 isa nullable TId
 					var listnode5 = nodearraylist7
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
@@ -13663,13 +12727,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -13696,13 +12754,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -13733,22 +12785,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -13776,22 +12816,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -13815,13 +12843,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
@@ -13847,13 +12869,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
@@ -13881,13 +12897,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -13912,13 +12922,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -13961,13 +12965,7 @@ special ReduceAction
 					if pclosuredefnode1 != null then
 						listnode3.add(pclosuredefnode1)
 					end
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
 					p.push(p.go_to(96), node_list)
 	end
@@ -14025,13 +13023,7 @@ special ReduceAction
 					assert pclosureidnode3 isa nullable AClosureId
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var tkwdonode6 = nodearraylist4
 					assert tkwdonode6 isa nullable TKwdo
 					var pexprnode7 = nodearraylist5
@@ -14099,13 +13091,7 @@ special ReduceAction
 					assert pclosureidnode3 isa nullable AClosureId
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var tkwdonode6 = nodearraylist4
 					assert tkwdonode6 isa nullable TKwdo
 					var pexprnode7 = nodearraylist5
@@ -14171,13 +13157,7 @@ special ReduceAction
 					assert pclosureidnode3 isa nullable AClosureId
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode7 = nodearraylist6
 					assert pexprnode7 isa nullable AExpr
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
@@ -14399,13 +13379,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var tassignnode6 = nodearraylist6
 					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist7
@@ -14438,13 +13412,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var tassignnode6 = nodearraylist3
 					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist4
@@ -14475,13 +13443,7 @@ special ReduceAction
 					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var tassignnode5 = nodearraylist3
 					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist4
@@ -14573,13 +13535,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var passignopnode6 = nodearraylist6
 					assert passignopnode6 isa nullable AAssignOp
 					var pexprnode7 = nodearraylist7
@@ -14612,13 +13568,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var passignopnode6 = nodearraylist3
 					assert passignopnode6 isa nullable AAssignOp
 					var pexprnode7 = nodearraylist4
@@ -14649,13 +13599,7 @@ special ReduceAction
 					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var passignopnode5 = nodearraylist3
 					assert passignopnode5 isa nullable AAssignOp
 					var pexprnode6 = nodearraylist4
@@ -15024,22 +13968,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -15067,22 +13999,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -15108,22 +14028,10 @@ special ReduceAction
 					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pexprnode1: nullable ABraExpr = new ABraExpr.init_abraexpr(
 						pexprnode2,
 						listnode4,
@@ -15166,22 +14074,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -15209,22 +14105,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -15360,22 +14244,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -15403,22 +14275,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -16029,13 +14889,7 @@ special ReduceAction
 					assert ptypenode3 isa nullable AType
 					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
@@ -16155,13 +15009,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -16188,13 +15036,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -16218,13 +15060,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
@@ -16250,13 +15086,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
@@ -16284,13 +15114,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -16315,13 +15139,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -16345,13 +15163,7 @@ special ReduceAction
 					assert pexprnode2 isa nullable AExpr
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-#					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-#					end
+					listnode4 = concat(listnode4, listnode3)
 					var pexprnode1: nullable ABraExpr = new ABraExpr.init_abraexpr(
 						pexprnode2,
 						listnode4,
@@ -16383,13 +15195,7 @@ special ReduceAction
 					assert tidnode4 isa nullable TId
 					var listnode5 = nodearraylist7
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
@@ -16641,22 +15447,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -16684,22 +15478,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -17310,13 +16092,7 @@ special ReduceAction
 					assert ptypenode3 isa nullable AType
 					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
@@ -17388,13 +16164,7 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -17418,13 +16188,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
@@ -17450,13 +16214,7 @@ special ReduceAction
 					assert tkwsupernode3 isa nullable TKwsuper
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
@@ -17482,13 +16240,7 @@ special ReduceAction
 					assert tkwinitnode3 isa nullable TKwinit
 					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
@@ -17520,13 +16272,7 @@ special ReduceAction
 					assert tidnode4 isa nullable TId
 					var listnode5 = nodearraylist7
 					assert listnode5 isa Array[Object]
-#					if listnode5 != null then
-						if listnode6.is_empty then
-							listnode6 = listnode5
-						else
-							listnode6.append(listnode5)
-						end
-#					end
+					listnode6 = concat(listnode6, listnode5)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
@@ -17805,22 +16551,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -17848,22 +16582,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -17907,22 +16629,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -17950,22 +16660,10 @@ special ReduceAction
 					assert tidnode3 isa nullable TId
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-#					if listnode4 != null then
-						if listnode5.is_empty then
-							listnode5 = listnode4
-						else
-							listnode5.append(listnode4)
-						end
-#					end
+					listnode5 = concat(listnode5, listnode4)
 					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-#					if listnode6 != null then
-						if listnode7.is_empty then
-							listnode7 = listnode6
-						else
-							listnode7.append(listnode6)
-						end
-#					end
+					listnode7 = concat(listnode7, listnode6)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
@@ -18006,13 +16704,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var pimportnode2 = nodearraylist2
 					assert pimportnode2 isa nullable AImport
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if pimportnode2 != null then
 						listnode3.add(pimportnode2)
 					end
@@ -18050,13 +16742,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var pclassdefnode2 = nodearraylist2
 					assert pclassdefnode2 isa nullable AClassdef
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if pclassdefnode2 != null then
 						listnode3.add(pclassdefnode2)
 					end
@@ -18094,13 +16780,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var ppropdefnode2 = nodearraylist2
 					assert ppropdefnode2 isa nullable APropdef
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if ppropdefnode2 != null then
 						listnode3.add(ppropdefnode2)
 					end
@@ -18138,13 +16818,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var psuperclassnode2 = nodearraylist2
 					assert psuperclassnode2 isa nullable ASuperclass
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if psuperclassnode2 != null then
 						listnode3.add(psuperclassnode2)
 					end
@@ -18182,13 +16856,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var ppropdefnode2 = nodearraylist2
 					assert ppropdefnode2 isa nullable APropdef
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if ppropdefnode2 != null then
 						listnode3.add(ppropdefnode2)
 					end
@@ -18226,13 +16894,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var pformaldefnode2 = nodearraylist2
 					assert pformaldefnode2 isa nullable AFormaldef
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if pformaldefnode2 != null then
 						listnode3.add(pformaldefnode2)
 					end
@@ -18270,13 +16932,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var pparamnode2 = nodearraylist2
 					assert pparamnode2 isa nullable AParam
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if pparamnode2 != null then
 						listnode3.add(pparamnode2)
 					end
@@ -18314,13 +16970,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var pclosuredeclnode2 = nodearraylist2
 					assert pclosuredeclnode2 isa nullable AClosureDecl
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if pclosuredeclnode2 != null then
 						listnode3.add(pclosuredeclnode2)
 					end
@@ -18358,13 +17008,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var ptypenode2 = nodearraylist2
 					assert ptypenode2 isa nullable AType
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if ptypenode2 != null then
 						listnode3.add(ptypenode2)
 					end
@@ -18402,13 +17046,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var pexprnode2 = nodearraylist2
 					assert pexprnode2 isa nullable AExpr
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if pexprnode2 != null then
 						listnode3.add(pexprnode2)
 					end
@@ -18426,13 +17064,7 @@ special ReduceAction
 					var listnode2 = new Array[Object]
 					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
-#					if listnode1 != null then
-						if listnode2.is_empty then
-							listnode2 = listnode1
-						else
-							listnode2.append(listnode1)
-						end
-#					end
+					listnode2 = concat(listnode2, listnode1)
 					node_list = listnode2
 					p.push(p.go_to(144), node_list)
 	end
@@ -18450,20 +17082,8 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var listnode2 = nodearraylist2
 					assert listnode2 isa Array[Object]
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
-#					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
+					listnode3 = concat(listnode3, listnode2)
 					node_list = listnode3
 					p.push(p.go_to(144), node_list)
 	end
@@ -18498,13 +17118,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var pexprnode2 = nodearraylist2
 					assert pexprnode2 isa nullable AExpr
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if pexprnode2 != null then
 						listnode3.add(pexprnode2)
 					end
@@ -18542,13 +17156,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var tidnode2 = nodearraylist2
 					assert tidnode2 isa nullable TId
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if tidnode2 != null then
 						listnode3.add(tidnode2)
 					end
@@ -18586,13 +17194,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var tcommentnode2 = nodearraylist2
 					assert tcommentnode2 isa nullable TComment
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if tcommentnode2 != null then
 						listnode3.add(tcommentnode2)
 					end
@@ -18630,13 +17232,7 @@ special ReduceAction
 					assert listnode1 isa Array[Object]
 					var teolnode2 = nodearraylist2
 					assert teolnode2 isa nullable TEol
-#					if listnode1 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode1
-						else
-							listnode3.append(listnode1)
-						end
-#					end
+					listnode3 = concat(listnode3, listnode1)
 					if teolnode2 != null then
 						listnode3.add(teolnode2)
 					end
