@@ -23,8 +23,6 @@ redef class Symbol
 		# FIXME: There is no proper way to handle NULL C string yet. What a pitty.
 		var nulstr = once ("".to_cstring.get_environ)
 		if res != nulstr then
-			"env {self}=".output
-			res.output
 			return new String.from_cstring(res)
 		else
 			return ""
