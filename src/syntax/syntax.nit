@@ -32,6 +32,16 @@ special ModuleLoader
 
 	redef fun parse_file(context, file, filename, name, dir)
 	do
+		var name_is_valid = name.to_s.length > 0 and name.to_s[0].is_lower
+		for char in name.to_s do	if not char.is_digit and not char.is_letter and not char == '_'
+		then
+			name_is_valid = false
+			break
+		end
+		if not name_is_valid then
+			context.error( null, "{filename}: Error package name \"{name}\", must start with a lower case letter and contain only letters, digits and '_'." )
+		end
+
 		var lexer = new Lexer(file, filename)
 		var parser = new Parser(lexer)
 		var node_tree = parser.parse
