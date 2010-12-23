@@ -1,4 +1,6 @@
 
+all: separate global icode
+
 separate:
 	./tests.sh *.nit ../examples/*.nit ../src/nitdoc.nit
 
@@ -10,8 +12,6 @@ global:
 
 icode:
 	./tests_icode.sh icode*.nit
-
-all: separate global icode
 
 failed:
 	@[ ! -s errlist ] && echo 'No failed tests to execute' ; true
