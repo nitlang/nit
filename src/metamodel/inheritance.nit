@@ -129,6 +129,9 @@ redef class MMLocalClass
 					continue
 				end
 
+				# Do not inherit new style attributes
+				if glob.intro.name.to_s[0] == '@' then continue
+
 				make_visible_an_inherited_global_property(glob)
 			end
 		end
@@ -184,6 +187,7 @@ redef class MMLocalClass
 				var g = c.get_property_by_name(n)
 				if not set.has(g) then set.add(g)
 				if g.is_init and g.intro.local_class.global != global then continue
+				if g.intro.name.to_s.first == '@' then continue # inherited new style attibutes are invisible
 				if nset.has(g) then continue
 				nset.add(g)
 			end

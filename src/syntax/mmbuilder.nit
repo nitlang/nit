@@ -921,20 +921,33 @@ redef class AAttrPropdef
 	redef fun accept_property_builder(v)
 	do
 		super
-		var name = n_id.to_symbol
+		var name: Symbol
+		if n_id != null then
+			name = n_id.to_symbol
+		else
+			name = ("@" + n_id2.text).to_symbol
+		end
 		var lc = v.local_class
 		var prop = new MMSrcAttribute(name, lc, self)
 		_prop = prop
 		v.local_class.add_src_local_property(v, prop)
 
-		if n_readable != null then
-			name = n_id.text.substring_from(1).to_symbol
+		if n_readable != null or n_id == null then
+			if n_id != null then
+				name = n_id.text.substring_from(1).to_symbol
+			else
+				name = n_id2.to_symbol
+			end
 			var readmethod = new MMReadImplementationMethod(name, lc, self)
 			_readmethod = readmethod
 			v.local_class.add_src_local_property(v, readmethod)
 		end
-		if n_writable != null then
-			name = (n_id.text.substring_from(1) + "=").to_symbol
+		if n_writable != null or n_id == null then
+			if n_id != null then
+				name = (n_id.text.substring_from(1) + "=").to_symbol
+			else
+				name = (n_id2.text + "=").to_symbol
+			end
 			var writemethod = new MMWriteImplementationMethod(name, lc, self)
 			_writemethod = writemethod
 			v.local_class.add_src_local_property(v, writemethod)
@@ -957,17 +970,21 @@ redef class AAttrPropdef
 		var signature = new MMSignature(new Array[MMType], t, v.local_class.get_type)
 		prop.signature = signature
 		var visibility_level = n_visibility.level
-		process_and_check(v, prop, n_kwredef != null, visibility_level)
-		if n_readable != null then
+		process_and_check(v, prop, n_id != null and n_kwredef != null, visibility_level)
+		if n_readable != null or n_id == null then
 			var m = _readmethod.as(not null)
 			m.signature = signature
-			process_and_check(v, m, n_readable.n_kwredef != null, visibility_level)
+			process_and_check(v, m, (n_readable != null and n_readable.n_kwredef != null) or (n_id == null and n_kwredef != null), visibility_level)
 			n_type.check_visibility(v, m)
 		end
-		if n_writable != null then
+		if n_writable != null or n_id == null then
 			var m = _writemethod.as(not null)
 			m.signature = new MMSignature(new Array[MMType].with_items(t), null, v.local_class.get_type)
-			process_and_check(v, m, n_writable.n_kwredef != null, visibility_level)
+			var vl = visibility_level
+			if n_id == null then
+				if n_writable == null then vl = 3 else vl = n_writable.n_visibility.level # write accessor has a specific visibility
+			end
+			process_and_check(v, m, n_writable != null and n_writable.n_kwredef != null, vl)
 			n_type.check_visibility(v, m)
 		end
 	end
