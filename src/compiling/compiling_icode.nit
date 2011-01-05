@@ -939,29 +939,25 @@ redef class IAbort
 	do
 		v.add_location(location)
 		var w = v.new_instr
-		w.add("fprintf(stderr")
-		for t in texts do
-			w.add(", \"")
-			w.add(t)
+		w.add("nit_abort(\"")
+		w.add(texts[0])
+		if texts.length > 1 then
+			w.add("\", \"")
+			w.add(texts[1])
 			w.add("\"")
+		else
+			w.add("\", NULL")
 		end
-		w.add(");\n")
-
-		var ll = location
-		w = v.new_instr
-		w.add("fprintf(stderr, \" (%s")
-		if ll != null then
-			w.add(":%d")
-		end
-		w.add(")\\n\", LOCATE_")
+		w.add(", LOCATE_")
 		w.add(module_location.name.to_s)
+		var ll = location
 		if ll != null then
 			w.add(", ")
 			w.add(ll.line_start.to_s)
+		else
+			w.add(", 0")
 		end
 		w.add(");\n")
-
-		v.add_instr("nit_exit(1);")
 	end
 end
 

@@ -151,3 +151,11 @@ void nit_exit(int i) {
 	}
 	exit(i);
 }
+
+void nit_abort(const char* s, const char* msg, const char* loc, int line) {
+	fprintf(stderr, s, msg);
+	fprintf(stderr, " (%s", loc);
+	if (line != 0) fprintf(stderr, ":%d", line);
+	fprintf(stderr, ")\n");
+	nit_exit(1);
+}
