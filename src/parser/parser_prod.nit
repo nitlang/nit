@@ -936,6 +936,7 @@ redef class AAttrPropdef
             n_visibility: nullable AVisibility,
             n_kwvar: nullable TKwvar,
             n_id: nullable TAttrid,
+            n_id2: nullable TId,
             n_type: nullable AType,
             n_expr: nullable AExpr
     )
@@ -961,8 +962,14 @@ redef class AAttrPropdef
 	n_visibility.parent = self
         _n_kwvar = n_kwvar.as(not null)
 	n_kwvar.parent = self
-        _n_id = n_id.as(not null)
-	n_id.parent = self
+        _n_id = n_id
+	if n_id != null then
+		n_id.parent = self
+	end
+        _n_id2 = n_id2
+	if n_id2 != null then
+		n_id2.parent = self
+	end
         _n_type = n_type
 	if n_type != null then
 		n_type.parent = self
@@ -1041,7 +1048,17 @@ redef class AAttrPropdef
 		assert new_child isa TAttrid
                 _n_id = new_child
 	    else
-		abort
+		_n_id = null
+            end
+            return
+	end
+        if _n_id2 == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TId
+                _n_id2 = new_child
+	    else
+		_n_id2 = null
             end
             return
 	end
@@ -1083,7 +1100,12 @@ redef class AAttrPropdef
         end
         v.enter_visit(_n_visibility)
         v.enter_visit(_n_kwvar)
-        v.enter_visit(_n_id)
+        if _n_id != null then
+            v.enter_visit(_n_id.as(not null))
+        end
+        if _n_id2 != null then
+            v.enter_visit(_n_id2.as(not null))
+        end
         if _n_type != null then
             v.enter_visit(_n_type.as(not null))
         end
@@ -2006,6 +2028,7 @@ redef class AWriteAble
 
     init init_awriteable (
             n_kwredef: nullable TKwredef,
+            n_visibility: nullable AVisibility,
             n_kwwritable: nullable TKwwritable
     )
     do
@@ -2013,6 +2036,10 @@ redef class AWriteAble
         _n_kwredef = n_kwredef
 	if n_kwredef != null then
 		n_kwredef.parent = self
+	end
+        _n_visibility = n_visibility
+	if n_visibility != null then
+		n_visibility.parent = self
 	end
         _n_kwwritable = n_kwwritable.as(not null)
 	n_kwwritable.parent = self
@@ -2027,6 +2054,16 @@ redef class AWriteAble
                 _n_kwredef = new_child
 	    else
 		_n_kwredef = null
+            end
+            return
+	end
+        if _n_visibility == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AVisibility
+                _n_visibility = new_child
+	    else
+		_n_visibility = null
             end
             return
 	end
@@ -2046,6 +2083,9 @@ redef class AWriteAble
     do
         if _n_kwredef != null then
             v.enter_visit(_n_kwredef.as(not null))
+        end
+        if _n_visibility != null then
+            v.enter_visit(_n_visibility.as(not null))
         end
         v.enter_visit(_n_kwwritable)
     end
