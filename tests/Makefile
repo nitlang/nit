@@ -1,12 +1,12 @@
 
 separate:
-	./tests.sh *.nit ../examples/*.nit ../src/nitdoc.nit
+	./tests.sh *.nit ../examples/*.nit ../src/nitdoc.nit ../src/nitc.nit
 
 some:
 	./tests.sh base_compile.nit base_attr.nit base_gen.nit test_gen_inh.nit bench_fib.nit example_objet.nit
 
 global:
-	./tests.sh -o --global *.nit ../examples/*.nit ../src/nitdoc.nit
+	./tests.sh -o --global *.nit ../examples/*.nit ../src/nitdoc.nit ../src/nitc.nit
 
 icode:
 	./tests_icode.sh icode*.nit
