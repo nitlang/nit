@@ -1333,720 +1333,285 @@ class Lexer
 				end
 			else
 				if accept_state != -1 then
+					var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+					_pos = accept_pos
+					_line = accept_line
+					push_back(accept_length)
 					if accept_token == 0 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
 						return null
 					end
 					if accept_token == 1 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TEol.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TEol.init_tk(token_text, location)
 					end
 					if accept_token == 2 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TComment.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TComment.init_tk(token_text, location)
 					end
 					if accept_token == 3 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwpackage.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwpackage.init_tk(location)
 					end
 					if accept_token == 4 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwimport.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwimport.init_tk(location)
 					end
 					if accept_token == 5 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwclass.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwclass.init_tk(location)
 					end
 					if accept_token == 6 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwabstract.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwabstract.init_tk(location)
 					end
 					if accept_token == 7 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwinterface.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwinterface.init_tk(location)
 					end
 					if accept_token == 8 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwuniversal.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwuniversal.init_tk(location)
 					end
 					if accept_token == 9 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwspecial.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwspecial.init_tk(location)
 					end
 					if accept_token == 10 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwend.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwend.init_tk(location)
 					end
 					if accept_token == 11 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwmeth.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwmeth.init_tk(location)
 					end
 					if accept_token == 12 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwtype.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwtype.init_tk(location)
 					end
 					if accept_token == 13 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwinit.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwinit.init_tk(location)
 					end
 					if accept_token == 14 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwredef.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwredef.init_tk(location)
 					end
 					if accept_token == 15 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwis.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwis.init_tk(location)
 					end
 					if accept_token == 16 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwdo.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwdo.init_tk(location)
 					end
 					if accept_token == 17 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwreadable.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwreadable.init_tk(location)
 					end
 					if accept_token == 18 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwwritable.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwwritable.init_tk(location)
 					end
 					if accept_token == 19 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwvar.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwvar.init_tk(location)
 					end
 					if accept_token == 20 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwintern.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwintern.init_tk(location)
 					end
 					if accept_token == 21 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwextern.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwextern.init_tk(location)
 					end
 					if accept_token == 22 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwprotected.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwprotected.init_tk(location)
 					end
 					if accept_token == 23 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwprivate.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwprivate.init_tk(location)
 					end
 					if accept_token == 24 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwintrude.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwintrude.init_tk(location)
 					end
 					if accept_token == 25 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwif.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwif.init_tk(location)
 					end
 					if accept_token == 26 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwthen.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwthen.init_tk(location)
 					end
 					if accept_token == 27 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwelse.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwelse.init_tk(location)
 					end
 					if accept_token == 28 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwwhile.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwwhile.init_tk(location)
 					end
 					if accept_token == 29 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwloop.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwloop.init_tk(location)
 					end
 					if accept_token == 30 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwfor.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwfor.init_tk(location)
 					end
 					if accept_token == 31 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwin.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwin.init_tk(location)
 					end
 					if accept_token == 32 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwand.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwand.init_tk(location)
 					end
 					if accept_token == 33 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwor.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwor.init_tk(location)
 					end
 					if accept_token == 34 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnot.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwnot.init_tk(location)
 					end
 					if accept_token == 35 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwreturn.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwreturn.init_tk(location)
 					end
 					if accept_token == 36 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwcontinue.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwcontinue.init_tk(location)
 					end
 					if accept_token == 37 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwbreak.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwbreak.init_tk(location)
 					end
 					if accept_token == 38 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwabort.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwabort.init_tk(location)
 					end
 					if accept_token == 39 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwassert.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwassert.init_tk(location)
 					end
 					if accept_token == 40 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnew.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwnew.init_tk(location)
 					end
 					if accept_token == 41 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwisa.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwisa.init_tk(location)
 					end
 					if accept_token == 42 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwonce.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwonce.init_tk(location)
 					end
 					if accept_token == 43 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwsuper.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwsuper.init_tk(location)
 					end
 					if accept_token == 44 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwself.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwself.init_tk(location)
 					end
 					if accept_token == 45 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwtrue.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwtrue.init_tk(location)
 					end
 					if accept_token == 46 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwfalse.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwfalse.init_tk(location)
 					end
 					if accept_token == 47 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnull.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwnull.init_tk(location)
 					end
 					if accept_token == 48 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwas.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwas.init_tk(location)
 					end
 					if accept_token == 49 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnullable.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwnullable.init_tk(location)
 					end
 					if accept_token == 50 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwisset.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwisset.init_tk(location)
 					end
 					if accept_token == 51 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwlabel.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwlabel.init_tk(location)
 					end
 					if accept_token == 52 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TOpar.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TOpar.init_tk(location)
 					end
 					if accept_token == 53 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TCpar.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TCpar.init_tk(location)
 					end
 					if accept_token == 54 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TObra.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TObra.init_tk(location)
 					end
 					if accept_token == 55 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TCbra.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TCbra.init_tk(location)
 					end
 					if accept_token == 56 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TComma.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TComma.init_tk(location)
 					end
 					if accept_token == 57 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TColumn.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TColumn.init_tk(location)
 					end
 					if accept_token == 58 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TQuad.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TQuad.init_tk(location)
 					end
 					if accept_token == 59 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TAssign.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TAssign.init_tk(location)
 					end
 					if accept_token == 60 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TPluseq.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TPluseq.init_tk(location)
 					end
 					if accept_token == 61 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TMinuseq.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TMinuseq.init_tk(location)
 					end
 					if accept_token == 62 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TDotdotdot.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TDotdotdot.init_tk(location)
 					end
 					if accept_token == 63 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TDotdot.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TDotdot.init_tk(location)
 					end
 					if accept_token == 64 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TDot.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TDot.init_tk(location)
 					end
 					if accept_token == 65 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TPlus.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TPlus.init_tk(location)
 					end
 					if accept_token == 66 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TMinus.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TMinus.init_tk(location)
 					end
 					if accept_token == 67 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TStar.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TStar.init_tk(location)
 					end
 					if accept_token == 68 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TSlash.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TSlash.init_tk(location)
 					end
 					if accept_token == 69 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TPercent.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TPercent.init_tk(location)
 					end
 					if accept_token == 70 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TEq.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TEq.init_tk(location)
 					end
 					if accept_token == 71 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TNe.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TNe.init_tk(location)
 					end
 					if accept_token == 72 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TLt.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TLt.init_tk(location)
 					end
 					if accept_token == 73 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TLe.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TLe.init_tk(location)
 					end
 					if accept_token == 74 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TGt.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TGt.init_tk(location)
 					end
 					if accept_token == 75 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TGe.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TGe.init_tk(location)
 					end
 					if accept_token == 76 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TStarship.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TStarship.init_tk(location)
 					end
 					if accept_token == 77 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TBang.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TBang.init_tk(location)
 					end
 					if accept_token == 78 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TClassid.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TClassid.init_tk(token_text, location)
 					end
 					if accept_token == 79 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TId.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TId.init_tk(token_text, location)
 					end
 					if accept_token == 80 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TAttrid.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TAttrid.init_tk(token_text, location)
 					end
 					if accept_token == 81 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TNumber.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TNumber.init_tk(token_text, location)
 					end
 					if accept_token == 82 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TFloat.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TFloat.init_tk(token_text, location)
 					end
 					if accept_token == 83 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TChar.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TChar.init_tk(token_text, location)
 					end
 					if accept_token == 84 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TString.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TString.init_tk(token_text, location)
 					end
 					if accept_token == 85 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TStartString.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TStartString.init_tk(token_text, location)
 					end
 					if accept_token == 86 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TMidString.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TMidString.init_tk(token_text, location)
 					end
 					if accept_token == 87 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TEndString.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TEndString.init_tk(token_text, location)
 					end
 				else
 					var location = new Location(_filename, start_line + 1, start_line + 1, start_pos + 1, start_pos + 1)

@@ -182,20 +182,12 @@ $ end foreach
 				end
 			else
 				if accept_state != -1 then
+					var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+					_pos = accept_pos
+					_line = accept_line
+					push_back(accept_length)
 $ foreach {//token}
 					if accept_token == ${position()-1} then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-$    if {not(@text)}
-$        if {@parser_index}
-						var token_text = text.substring(0, accept_length)
-						var token = new @ename.init_tk(token_text, location)
-$        end
-$    else
-						var token = new @ename.init_tk(location)
-$    end
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
 $    if {count(transition[@from!=@to])!=0}
 						var state_id = _state
 $        foreach transition in {transition[@from!=@to]}
@@ -205,7 +197,12 @@ $        foreach transition in {transition[@from!=@to]}
 $        end
 $    end if
 $    if {@parser_index}
-						return token
+$        if {not(@text)}
+						var token_text = text.substring(0, accept_length)
+						return new @ename.init_tk(token_text, location)
+$        else
+						return new @ename.init_tk(location)
+$        end
 $    else
 						return null
 $    end
