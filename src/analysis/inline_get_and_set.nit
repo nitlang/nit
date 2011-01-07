@@ -23,10 +23,23 @@ import syntax
 import program
 
 redef class Program
+	var _number_getter_setter_inlined : Int = 0
+
+	# This method will create a file and output this optimization's stats in it
+	fun dump_inline_get_set(directory_name: String) do
+		var f = new OFStream.open("{directory_name}/{module.name}.inline_get_set.log")
+
+		f.write ("Number of getters and setters inlined: {_number_getter_setter_inlined}\n")
+
+		f.close
+	end
+
 	fun inline_get_set do
 		with_each_iroutines !action(i, m) do
 			var v = new InlineGetSetVisitor(m, i)
 			v.visit_iroutine(i)
+
+			_number_getter_setter_inlined += v.number_inlined
 		end
 	end
 end
@@ -34,6 +47,7 @@ end
 private class InlineGetSetVisitor
 special ICodeVisitor
 	var _icb: ICodeBuilder
+	readable var _number_inlined: Int = 0
 
 	redef fun visit_icode(ic)
 	do
@@ -55,6 +69,7 @@ special ICodeVisitor
 				end
 				current_icode.delete
 				icb.seq = old_seq
+				_number_inlined += 1
 				visit_icode(seq)
 			end
 		end
