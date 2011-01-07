@@ -194,7 +194,13 @@ static void GC_prepare_heap_size(size_t size) {
 }
 
 void Nit_gc_print_usage(void) {
-	printf("GC: Size %d usage %d (%.2f%%)\n", gc_heap_size, gc_used_size, 100.0*gc_used_size/gc_heap_size);
+#if __STDC_VERSION >= 199901L
+	/* If we are compiling with standard C99 or more recent, we can use %zu. */
+	printf("GC: Size %zu usage %zu (%.2f%%)\n", gc_heap_size, gc_used_size, 100.0*gc_used_size/gc_heap_size);
+#else
+	/* We are not compiling with a standard that allows us to use %zu, let's cast the two unsigned integers into the biggest we can !*/
+	printf("GC: Size %lu usage %lu (%.2f%%)\n", (unsigned long)gc_heap_size, (unsigned long)gc_used_size, 100.0*gc_used_size/gc_heap_size);
+#endif
 }
 
 /** Enlarge the heap and collect dead objects. Can also shrink the heap.
