@@ -30,3 +30,5 @@ tests/*.err
 tests/*.write
 tests/alt
 tests/errlist
+tests/test_nitc_logs
+tests/hello_world
