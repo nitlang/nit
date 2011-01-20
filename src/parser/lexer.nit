@@ -40,7 +40,7 @@ redef class TComment
     end
 end
 
-redef class TKwpackage
+redef class TKwmodule
     redef fun parser_index: Int
     do
 	return 2
@@ -1361,7 +1361,7 @@ class Lexer
 					if accept_token == 3 then
 						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TKwpackage.init_tk(token_text, location)
+						var token = new TKwmodule.init_tk(token_text, location)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line

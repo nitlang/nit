@@ -29,7 +29,7 @@ end
 class TComment
 special Token
 end
-class TKwpackage
+class TKwmodule
 special Token
 end
 class TKwimport
@@ -294,7 +294,7 @@ private init noinit do end
 end
 
 class AModule special Prod end
-class APackagedecl special Prod end
+class AModuledecl special Prod end
 class AImport special Prod end
 class AVisibility special Prod end
 class AClassdef special Prod end
@@ -318,14 +318,14 @@ class ADoc special Prod end
 
 class AModule
 special AModule
-    readable var _n_packagedecl: nullable APackagedecl = null
+    readable var _n_moduledecl: nullable AModuledecl = null
     readable var _n_imports: List[AImport] = new List[AImport]
     readable var _n_classdefs: List[AClassdef] = new List[AClassdef]
 end
-class APackagedecl
-special APackagedecl
+class AModuledecl
+special AModuledecl
     readable var _n_doc: nullable ADoc = null
-    readable var _n_kwpackage: TKwpackage
+    readable var _n_kwmodule: TKwmodule
     readable var _n_id: TId
 end
 class AStdImport

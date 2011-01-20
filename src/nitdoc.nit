@@ -661,10 +661,10 @@ redef class MMSrcModule
 	redef fun doc
 	do
 		var n = node
-		if n.n_packagedecl == null then
+		if n.n_moduledecl == null then
 			return null
 		end
-		var np = n.n_packagedecl
+		var np = n.n_moduledecl
 		var d = np.n_doc
 		if d == null then
 			return null

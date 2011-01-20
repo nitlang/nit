@@ -57,7 +57,7 @@ blank = (' ' | tab)+;
 eol = eol_helper;
 comment = '#' any* eol_helper;
 
-kwpackage = 'package'|'module';
+kwmodule = 'package'|'module';
 kwimport = 'import';
 kwclass = 'class';
 kwabstract = 'abstract';
@@ -159,10 +159,10 @@ Productions
 
 /* MODULES *******************************************************************/
 module
-	= packagedecl? [imports]:import* [classdefs]:classdef* implicit_top_class? implicit_main_class? {-> New module(packagedecl, [imports.import],[classdefs.classdef,implicit_top_class.classdef,implicit_main_class.classdef])};
+	= moduledecl? [imports]:import* [classdefs]:classdef* implicit_top_class? implicit_main_class? {-> New module(moduledecl, [imports.import],[classdefs.classdef,implicit_top_class.classdef,implicit_main_class.classdef])};
 
-packagedecl
-	= [doc]:no kwpackage no id [n2]:n1 {-> New packagedecl(doc.doc, kwpackage, id)};
+moduledecl
+	= [doc]:no kwmodule no id [n2]:n1 {-> New moduledecl(doc.doc, kwmodule, id)};
 
 import
 	= {std} [doc]:no visibility kwimport no id [n2]:n1		{-> New import.std(visibility, kwimport, id)}
@@ -570,10 +570,10 @@ n2
 Abstract Syntax Tree
 /*****************************************************************************/
 
-module	= packagedecl? [imports]:import* [classdefs]:classdef*;
+module	= moduledecl? [imports]:import* [classdefs]:classdef*;
 
-packagedecl
-	= doc? kwpackage id;
+moduledecl
+	= doc? kwmodule id;
 
 import	= {std} visibility kwimport id
 	| {no} visibility kwimport kwend

@@ -458,7 +458,7 @@ redef class AModule
 	end
 end
 
-redef class APackagedecl
+redef class AModuledecl
 	redef fun accept_class_builder(v)
 	do
 		if n_id.to_symbol != v.mmmodule.name then

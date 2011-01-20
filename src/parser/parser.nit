@@ -958,10 +958,10 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode4 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode3,
 						listnode4
 					)
@@ -1002,13 +1002,13 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode5 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 					listnode4 = concat(listnode4, listnode3)
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode4,
 						listnode5
 					)
@@ -1049,13 +1049,13 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					listnode5 = concat(listnode5, listnode4)
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode3,
 						listnode5
 					)
@@ -1101,8 +1101,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 					listnode4 = concat(listnode4, listnode3)
@@ -1110,7 +1110,7 @@ special ReduceAction
 					assert listnode5 isa Array[Object]
 					listnode6 = concat(listnode6, listnode5)
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode4,
 						listnode6
 					)
@@ -1158,8 +1158,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode6 = new Array[Object]
 					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
@@ -1171,7 +1171,7 @@ special ReduceAction
 						listnode7.add(pclassdefnode4)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode3,
 						listnode7
 					)
@@ -1224,8 +1224,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode8 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 					listnode4 = concat(listnode4, listnode3)
@@ -1240,7 +1240,7 @@ special ReduceAction
 						listnode8.add(pclassdefnode5)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode4,
 						listnode8
 					)
@@ -1293,8 +1293,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode8 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var listnode7 = new Array[Object]
@@ -1309,7 +1309,7 @@ special ReduceAction
 						listnode8.add(pclassdefnode5)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode3,
 						listnode8
 					)
@@ -1367,8 +1367,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 					listnode4 = concat(listnode4, listnode3)
@@ -1386,7 +1386,7 @@ special ReduceAction
 						listnode9.add(pclassdefnode6)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode4,
 						listnode9
 					)
@@ -1429,15 +1429,15 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var pclassdefnode4 = nodearraylist2
 					assert pclassdefnode4 isa nullable AClassdef
 					if pclassdefnode4 != null then
 						listnode5.add(pclassdefnode4)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode3,
 						listnode5
 					)
@@ -1485,8 +1485,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 					listnode4 = concat(listnode4, listnode3)
@@ -1496,7 +1496,7 @@ special ReduceAction
 						listnode6.add(pclassdefnode5)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode4,
 						listnode6
 					)
@@ -1544,8 +1544,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var pclassdefnode5 = nodearraylist3
@@ -1555,7 +1555,7 @@ special ReduceAction
 						listnode6.add(pclassdefnode5)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode3,
 						listnode6
 					)
@@ -1608,8 +1608,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 					listnode4 = concat(listnode4, listnode3)
@@ -1622,7 +1622,7 @@ special ReduceAction
 						listnode7.add(pclassdefnode6)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode4,
 						listnode7
 					)
@@ -1677,8 +1677,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode8 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode6 = new Array[Object]
 					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
@@ -1695,7 +1695,7 @@ special ReduceAction
 						listnode8.add(pclassdefnode7)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode3,
 						listnode8
 					)
@@ -1755,8 +1755,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 					listnode4 = concat(listnode4, listnode3)
@@ -1776,7 +1776,7 @@ special ReduceAction
 						listnode9.add(pclassdefnode8)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode4,
 						listnode9
 					)
@@ -1836,8 +1836,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode9 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var listnode7 = new Array[Object]
@@ -1857,7 +1857,7 @@ special ReduceAction
 						listnode9.add(pclassdefnode8)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode3,
 						listnode9
 					)
@@ -1922,8 +1922,8 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode10 = new Array[Object]
-					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa nullable APackagedecl
+					var pmoduledeclnode2 = nodearraylist1
+					assert pmoduledeclnode2 isa nullable AModuledecl
 					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 					listnode4 = concat(listnode4, listnode3)
@@ -1946,7 +1946,7 @@ special ReduceAction
 						listnode10.add(pclassdefnode9)
 					end
 					var pmodulenode1: nullable AModule = new AModule.init_amodule(
-						ppackagedeclnode2,
+						pmoduledeclnode2,
 						listnode4,
 						listnode10
 					)
@@ -1968,16 +1968,16 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
 					assert pdocnode2 isa nullable ADoc
-					var tkwpackagenode3 = nodearraylist2
-					assert tkwpackagenode3 isa nullable TKwpackage
+					var tkwmodulenode3 = nodearraylist2
+					assert tkwmodulenode3 isa nullable TKwmodule
 					var tidnode4 = nodearraylist4
 					assert tidnode4 isa nullable TId
-					var ppackagedeclnode1: nullable APackagedecl = new APackagedecl.init_apackagedecl(
+					var pmoduledeclnode1: nullable AModuledecl = new AModuledecl.init_amoduledecl(
 						pdocnode2,
-						tkwpackagenode3,
+						tkwmodulenode3,
 						tidnode4
 					)
-					node_list = ppackagedeclnode1
+					node_list = pmoduledeclnode1
 					p.push(p.go_to(_goto), node_list)
 	end
 	var _goto: Int
