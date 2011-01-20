@@ -57,7 +57,7 @@ blank = (' ' | tab)+;
 eol = eol_helper;
 comment = '#' any* eol_helper;
 
-kwpackage = 'package';
+kwpackage = 'package'|'module';
 kwimport = 'import';
 kwclass = 'class';
 kwabstract = 'abstract';
