@@ -29,6 +29,7 @@ redef class Program
 		end
 
 		with_each_live_local_classes !action(c) do
+			if c.global.is_abstract or c.global.is_interface then continue
 			c.compile_tables_to_c(v)
 		end
 

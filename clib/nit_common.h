@@ -145,6 +145,7 @@ extern struct stack_frame_t *stack_frame_head;
 typedef enum {true = (1==1),false = (0==1)} bool;
 
 void nit_exit(int);
+void nit_abort(const char*, const char*, const char*, int);
 
 #define CALL(r,c) ((VAL2VFT(r)[c].f))
 #define ATTR(r,c) (*(val_t*)(VAL2OBJ(r)+c))

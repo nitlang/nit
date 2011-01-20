@@ -81,6 +81,7 @@ class Program
 	fun generate_allocation_iroutines
 	do
 		for c in module.local_classes do
+			if c.global.is_abstract or c.global.is_interface then continue
 			var pi = c.primitive_info
 			if pi == null then
 				do
