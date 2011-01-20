@@ -65,8 +65,8 @@ special AbstractCompiler
 		f.close
 	end
 
-	# Currently computed module
-	readable var _module: nullable MMSrcModule
+	# Currently computed mmmodule
+	readable var _mmmodule: nullable MMSrcModule
 
 	# Is the current directory module computed as a simple modude ?
 	readable writable var _inside_mode: Bool = false
@@ -82,7 +82,7 @@ special AbstractCompiler
 	do
 		_entities.add(e)
 		if e isa MMSrcModule then
-			_module = e
+			_mmmodule = e
 		end
 	end
 
@@ -96,7 +96,7 @@ special AbstractCompiler
 	fun extract_other_doc
 	do
 		info("Generating other files",1)
-		_module = null
+		_mmmodule = null
 		inside_mode = false
 		intrude_mode = false
 		clear
@@ -187,23 +187,23 @@ special AbstractCompiler
 		add("<a href=\"overview.html\"><b>Overview</b></a>&nbsp; <a href=\"index-1.html\"><b>Index</b></a>&nbsp; <a href=\"index.html\" target=\"_top\"><b>With Frames</b></a>\n")
 		add("</td></tr></table>")
 		add("Visibility: ")
-		var module = module
-		if (not inside_mode and not intrude_mode) or module == null then
+		var mod = mmmodule
+		if (not inside_mode and not intrude_mode) or mod == null then
 			add("<b>Public</b>&nbsp; ")
 		else
-			add("<a href=\"{module}.html\"><b>Public</b></a>&nbsp; ")
+			add("<a href=\"{mod}.html\"><b>Public</b></a>&nbsp; ")
 		end
-		if inside_mode or module == null then
+		if inside_mode or mod == null then
 			add("<b>Inside</b>&nbsp; ")
-		else if module.directory.owner != module then
+		else if mod.directory.owner != mod then
 			add("<strike><b>Inside</b></strike>&nbsp; ")
 		else
-			add("<a href=\"{module}_.html\"><b>Inside</b></a>&nbsp; ")
+			add("<a href=\"{mod}_.html\"><b>Inside</b></a>&nbsp; ")
 		end
-		if intrude_mode or module == null then
+		if intrude_mode or mod == null then
 			add("<b>Intrude</b>&nbsp; ")
 		else
-			add("<a href=\"{module}__.html\"><b>Intrude</b></a>&nbsp; ")
+			add("<a href=\"{mod}__.html\"><b>Intrude</b></a>&nbsp; ")
 		end
 		add("<br/>")
 	end
@@ -223,11 +223,11 @@ special AbstractCompiler
 	# if inside_mode is set, it could be a different result
 	fun known_owner_of(m: MMModule): MMModule
 	do
-		var module = module
-		if module == null then return m
-		var res = module.known_owner_of(m)
-		if not inside_mode and not intrude_mode and res.directory.owner == module then
-			return module
+		var mod = mmmodule
+		if mod == null then return m
+		var res = mod.known_owner_of(m)
+		if not inside_mode and not intrude_mode and res.directory.owner == mod then
+			return mod
 		else
 			return res
 		end
@@ -333,7 +333,7 @@ end
 redef class MMModule
 special MMEntity
 	redef fun html_link(dctx) do 
-		if dctx.module == self then 
+		if dctx.mmmodule == self then
 			return "{self}"
 		else
 			return "<a href=\"{self}.html\">{self}</a>"
@@ -345,18 +345,18 @@ special MMEntity
 	var _known_owner_of_cache: Map[MMModule, MMModule] = new HashMap[MMModule, MMModule]
 
 	# Return the owner of `module` from the point of view of `self`
-	fun known_owner_of(module: MMModule): MMModule
+	fun known_owner_of(mod: MMModule): MMModule
 	do
-		if _known_owner_of_cache.has_key(module) then return _known_owner_of_cache[module]
-		var res = module
+		if _known_owner_of_cache.has_key(mod) then return _known_owner_of_cache[mod]
+		var res = mod
 		# is module is publicly imported by self?
-		if mhe < module and visibility_for(module) != 0 then
-			res = known_owner_of_intern(module, self, false)
+		if mhe < mod and visibility_for(mod) != 0 then
+			res = known_owner_of_intern(mod, self, false)
 		else
 			# Return the canonnical owner of module from the point of view of self
-			res = module.owner(self)
+			res = mod.owner(self)
 		end
-		_known_owner_of_cache[module] = res
+		_known_owner_of_cache[mod] = res
 		return res
 	end
 
@@ -374,17 +374,17 @@ special MMEntity
 	end
 
 	# ???
-	private fun known_owner_of_intern(module: MMModule, from: MMModule, as_owner: Bool): MMModule
+	private fun known_owner_of_intern(mod: MMModule, from: MMModule, as_owner: Bool): MMModule
 	do
-		if module == self then return self
+		if mod == self then return self
 		var candidates = new Array[MMModule]
 		for m in explicit_imported_modules do
 			if from.visibility_for(m) == 0 then continue
-			if not m.mhe <= module then continue
-			candidates.add(m.known_owner_of_intern(module, from, true))
+			if not m.mhe <= mod then continue
+			candidates.add(m.known_owner_of_intern(mod, from, true))
 		end
 		# FIXME: I do not know what this does
-		if candidates.is_empty then return module.owner(from)
+		if candidates.is_empty then return mod.owner(from)
 		var max = candidates.first
 		for m in candidates do
 			if max.mhe < m then max = m
@@ -408,10 +408,10 @@ special MMEntity
 
 	redef fun html_link(dctx)
 	do
-		var m = module
-		if not need_doc(dctx) then m = global.intro.module
+		var m = mmmodule
+		if not need_doc(dctx) then m = global.intro.mmmodule
 		m = dctx.known_owner_of(m)
-		if m == dctx.module then
+		if m == dctx.mmmodule then
 			return "<a href=\"#{html_anchor}\">{self}</a>"
 		else
 			return "<a href=\"{m}.html#{html_anchor}\">{self}</a>"
@@ -423,12 +423,12 @@ special MMEntity
 
 	redef fun locate(dctx)
 	do
-		return "in {module.html_link(dctx)}::{local_class.html_link(dctx)}"
+		return "in {mmmodule.html_link(dctx)}::{local_class.html_link(dctx)}"
 	end
 
 	fun known_intro_class(dctx: DocContext): MMLocalClass
 	do
-		var mod = dctx.known_owner_of(global.intro.local_class.module)
+		var mod = dctx.known_owner_of(global.intro.local_class.mmmodule)
 		var cla = mod[global.intro.local_class.global]
 		return cla
 	end
@@ -449,9 +449,9 @@ special MMEntity
 		if is_redef then
 			var gp = global.intro
 			if intro_class.global != local_class.global then
-				res.append(" {module[intro_class.global].html_link(dctx)}::")
-			else if intro_class.module != module then
-				res.append(" {intro_class.module.html_link(dctx)}::")
+				res.append(" {mmmodule[intro_class.global].html_link(dctx)}::")
+			else if intro_class.mmmodule != mmmodule then
+				res.append(" {intro_class.mmmodule.html_link(dctx)}::")
 			end
 		end
 		return res.to_s
@@ -476,7 +476,7 @@ special MMEntity
 	do
 		if global.visibility_level >= 3 or self isa MMAttribute then
 			if not dctx.intrude_mode then return false
-			if dctx.module.visibility_for(module) == 0 then return false
+			if dctx.mmmodule.visibility_for(mmmodule) == 0 then return false
 		end
 		if global.intro == self then
 			return true
@@ -702,10 +702,10 @@ special MMEntity
 
 	redef fun html_link(dctx)
 	do
-		var m = module
-		if not need_doc(dctx) then m = global.module
+		var m = mmmodule
+		if not need_doc(dctx) then m = global.mmmodule
 		m = dctx.known_owner_of(m)
-		if m == dctx.module then
+		if m == dctx.mmmodule then
 			return "<a href=\"#{html_anchor}\">{self}</a>"
 		else
 			return "<a href=\"{m}.html#{html_anchor}\">{self}</a>"
@@ -717,7 +717,7 @@ special MMEntity
 	redef fun doc do return global.intro.doc
 
 	redef fun need_doc(dctx) do
-		if module == dctx.module then
+		if mmmodule == dctx.mmmodule then
 			for m in dctx.owned_modules do
 				if m.global_classes.has(global) then
 					var c = m[global]
@@ -728,9 +728,9 @@ special MMEntity
 		return false
 	end
 
-	redef fun locate(dctx) do return "in {module.html_link(dctx)}"
+	redef fun locate(dctx) do return "in {mmmodule.html_link(dctx)}"
 
-	fun known_intro(dctx: DocContext): MMLocalClass do return dctx.known_owner_of(global.intro.module)[global]
+	fun known_intro(dctx: DocContext): MMLocalClass do return dctx.known_owner_of(global.intro.mmmodule)[global]
 
 	redef fun prototype_head(dctx)
 	do
@@ -740,7 +740,7 @@ special MMEntity
 		if is_redef then res.append("redef ")
 		if global.visibility_level == 3 then res.append("private ")
 		res.append("class ")
-		if is_redef then res.append("{ki.module.html_link(dctx)}::")
+		if is_redef then res.append("{ki.mmmodule.html_link(dctx)}::")
 		return res.to_s
 	end
 
@@ -763,26 +763,26 @@ special MMEntity
 	# Extract the doc of a class
 	fun extract_class_doc(dctx: DocContext)
 	do
-		dctx.add("<a name=\"{html_anchor}\"></a><h2>{self}</h2><small>{module.html_link(dctx)}::</small><br/>{prototype_head(dctx)}<b>{self}</b>{prototype_body(dctx)}\n")
+		dctx.add("<a name=\"{html_anchor}\"></a><h2>{self}</h2><small>{mmmodule.html_link(dctx)}::</small><br/>{prototype_head(dctx)}<b>{self}</b>{prototype_body(dctx)}\n")
 		dctx.add("<blockquote>\n")
 		dctx.add("<dl>\n")
 
 		var sup2 = new Array[String]
-		var intro_module = dctx.known_owner_of(global.module)
-		if intro_module != module then
+		var intro_module = dctx.known_owner_of(global.mmmodule)
+		if intro_module != mmmodule then
 			dctx.add("<dt>Refine {self} from: <dd>{intro_module.html_link(dctx)}\n")
 			sup2.clear
 			var mods = new Array[MMModule]
 			for c in crhe.greaters do
 			 	if c.need_doc(dctx) then
-					var km = dctx.known_owner_of(c.module)
-					if km != module and km != intro_module and not mods.has(km) then
+					var km = dctx.known_owner_of(c.mmmodule)
+					if km != mmmodule and km != intro_module and not mods.has(km) then
 						mods.add(km)
 					end
 				end
 			end
 			for c in crhe.linear_extension do
-				if mods.has(c.module) then sup2.add(c.module.html_link(dctx))
+				if mods.has(c.mmmodule) then sup2.add(c.mmmodule.html_link(dctx))
 			end
 			if not sup2.is_empty then dctx.add("<dt>Previous refinements in: <dd>{sup2.join(", ")}\n")
 		end
@@ -809,7 +809,7 @@ special MMEntity
 		sup2.clear
 		for c in crhe.smallers do
 			c.compute_super_classes
-			for c2 in c.module.local_classes do
+			for c2 in c.mmmodule.local_classes do
 				if not c2 isa MMConcreteClass then continue
 				c2.compute_super_classes
 				c2.compute_ancestors
@@ -825,8 +825,8 @@ special MMEntity
 		end
 		sup2.clear
 		for c in crhe.order do
-			if not module.mhe <= c.module and c.need_doc(dctx) then
-				sup2.add(c.module.html_link(dctx))
+			if not mmmodule.mhe <= c.mmmodule and c.need_doc(dctx) then
+				sup2.add(c.mmmodule.html_link(dctx))
 			end
 		end
 		if not sup2.is_empty then
@@ -876,7 +876,7 @@ special MMEntity
 		var new_props = new Array[MMLocalProperty]
 		for g in global_properties do
 			if not accept_prop(g.intro, pass) then continue
-			if module.visibility_for(g.intro.module) < g.visibility_level then continue
+			if mmmodule.visibility_for(g.intro.mmmodule) < g.visibility_level then continue
 			var p = self[g]
 			if p.local_class != self or not p.need_doc(dctx) then
 				var cla = new Array[MMLocalClass]
@@ -912,11 +912,11 @@ special MMEntity
 			var mmap = new HashMap[MMModule, Array[MMLocalProperty]]
 			for c in che.greaters do
 				if c isa MMSrcLocalClass then
-					var km = dctx.known_owner_of(c.module)
+					var km = dctx.known_owner_of(c.mmmodule)
 					var kc = km[c.global]
 					if kc == self then continue
 					var props: Array[MMLocalProperty]
-					if km == module then
+					if km == mmmodule then
 						if cmap.has_key(kc) then
 							props = cmap[kc]
 						else
@@ -954,7 +954,7 @@ special MMEntity
 
 			dctx.open_stage
 			dctx.stage("<tr bgcolor=\"#EEEEFF\"><th colspan=\"2\"><small>Imported {passname}</small></th><tr>\n")
-			for m in module.mhe.linear_extension do
+			for m in mmmodule.mhe.linear_extension do
 				if not mmap.has_key(m) then continue
 				var props = mmap[m]
 				if props.is_empty then continue
@@ -968,9 +968,9 @@ special MMEntity
 
 		var mmap = new HashMap[MMModule, Array[MMLocalProperty]]
 		for c in crhe.order do
-			if module.mhe <= c.module or dctx.owned_modules.has(c.module) or not c isa MMSrcLocalClass then continue
-			var km = dctx.known_owner_of(c.module)
-			if module.mhe <= km then continue
+			if mmmodule.mhe <= c.mmmodule or dctx.owned_modules.has(c.mmmodule) or not c isa MMSrcLocalClass then continue
+			var km = dctx.known_owner_of(c.mmmodule)
+			if mmmodule.mhe <= km then continue
 			var kc = km[c.global]
 			var props: Array[MMLocalProperty]
 			if mmap.has_key(km) then
@@ -991,7 +991,7 @@ special MMEntity
 		dctx.open_stage
 		dctx.stage("<tr bgcolor=\"#EEEEFF\"><th colspan=\"2\"><small>Added {passname} in known modules</small></th><tr>\n")
 		for c in crhe.order do
-			var m = c.module
+			var m = c.mmmodule
 			if not mmap.has_key(m) then continue
 			var props = mmap[m]
 			if props.is_empty then continue
@@ -1018,7 +1018,7 @@ special MMEntity
 
 		dctx.open_stage
 		for p in new_props do
-			dctx.add("<a name=\"{p.html_anchor}\"></a><h3>{p}</h3><p><small>{p.module.html_link(dctx)}::{p.local_class.html_link(dctx)}::</small><br/>{p.prototype_head(dctx)} <b>{p.name}</b>{p.prototype_body(dctx)}</p>\n")
+			dctx.add("<a name=\"{p.html_anchor}\"></a><h3>{p}</h3><p><small>{p.mmmodule.html_link(dctx)}::{p.local_class.html_link(dctx)}::</small><br/>{p.prototype_head(dctx)} <b>{p.name}</b>{p.prototype_body(dctx)}</p>\n")
 			dctx.add("<blockquote>")
 			var doc = p.doc
 			if doc != null then
@@ -1048,7 +1048,7 @@ special MMEntity
 		if not properties.is_empty then
 			var s: String
 			if heir.global == global then
-				s = module.html_link(dctx)
+				s = mmmodule.html_link(dctx)
 			else
 				s = self.html_link(dctx)
 			end
@@ -1092,7 +1092,7 @@ redef class MMSrcLocalClass
 	do
 		if global.visibility_level >= 3 then
 			if not dctx.intrude_mode then return false
-			if dctx.module.visibility_for(module) == 0 then return false
+			if dctx.mmmodule.visibility_for(mmmodule) == 0 then return false
 		end
 		if global.intro == self then
 			return true

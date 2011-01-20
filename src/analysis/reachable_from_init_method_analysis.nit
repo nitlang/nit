@@ -28,7 +28,7 @@ redef class Program
 	# This method will create a file and output the name of all methods reachable
 	# from an init in it
 	fun dump_reachable_methods_from_init(directory_name: String) do
-		var f = new OFStream.open("{directory_name}/{module.name}.reachable_methods_from_init.log")
+		var f = new OFStream.open("{directory_name}/{main_module.name}.reachable_methods_from_init.log")
 		with_each_methods !action(m) do
 			if rfima.is_method_reachable_from_init(m) then
 				f.write("{m.full_name}\n")
@@ -40,7 +40,7 @@ redef class Program
 	# This method will create a file and output the name of all reachable methods that
 	# can not be reached from an init in it
 	fun dump_unreachable_methods_from_init(directory_name: String) do
-		var f = new OFStream.open("{directory_name}/{module.name}.unreachable_methods_from_init.log")
+		var f = new OFStream.open("{directory_name}/{main_module.name}.unreachable_methods_from_init.log")
 		with_each_methods !action(m) do
 			if not rfima.is_method_reachable_from_init(m) and rma.is_method_reachable(m) then
 				f.write("{m.full_name}\n")

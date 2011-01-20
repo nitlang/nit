@@ -109,7 +109,7 @@ special AbsSyntaxVisitor
 	# Number of nested once
 	readable writable var _once_count: Int = 0
 
-	init(tc, module) do super
+	init(tc, mod) do super
 
 	private fun get_default_constructor_for(n: ANode, c: MMLocalClass, prop: MMSrcMethod): nullable MMMethod
 	do
@@ -247,7 +247,7 @@ redef class AConcreteInitPropdef
 			var cur_c: nullable MMLocalClass = null
 			if i < l then
 				cur_m = explicit_super_init_calls[i]
-				cur_c = cur_m.global.intro.local_class.for_module(v.module)
+				cur_c = cur_m.global.intro.local_class.for_module(v.mmmodule)
 			end
 			var j = 0
 			while j < v.local_class.cshe.direct_greaters.length do
@@ -260,7 +260,7 @@ redef class AConcreteInitPropdef
 					i += 1
 					if i < l then
 						cur_m = explicit_super_init_calls[i]
-						cur_c = cur_m.global.intro.local_class.for_module(v.module)
+						cur_c = cur_m.global.intro.local_class.for_module(v.mmmodule)
 					else
 						cur_m = null
 						cur_c = null
@@ -752,7 +752,7 @@ redef class AReassignFormExpr
 			return null
 		end
 		var prop = lc.select_method(name)
-		prop.global.check_visibility(v, self, v.module, false)
+		prop.global.check_visibility(v, self, v.mmmodule, false)
 		var psig = prop.signature_for(type_lvalue)
 		_assign_method = prop
 		if not v.check_conform_expr(n_value, psig[0].not_for_self) then return null
@@ -1100,7 +1100,7 @@ redef class ASuperExpr
 			var stype: nullable MMType = null
 			for prop in precs do
 				assert prop isa MMMethod
-				var t = prop.signature_for(v.self_var.stype.as(not null)).return_type.for_module(v.module).adapt_to(v.local_property.signature.recv)
+				var t = prop.signature_for(v.self_var.stype.as(not null)).return_type.for_module(v.mmmodule).adapt_to(v.local_property.signature.recv)
 				stypes.add(t)
 				if stype == null or stype < t then
 					stype = t
@@ -1141,8 +1141,8 @@ redef class AAttrFormExpr
 			return
 		end
 		var prop = lc.select_attribute(name)
-		if v.module.visibility_for(prop.global.local_class.module) < 3 then
-			v.error(self, "Error: Attribute {name} from {prop.global.local_class.module} is invisible in {v.module}")
+		if v.mmmodule.visibility_for(prop.global.local_class.mmmodule) < 3 then
+			v.error(self, "Error: Attribute {name} from {prop.global.local_class.mmmodule} is invisible in {v.mmmodule}")
 		end
 		_prop = prop
 		var at = prop.signature_for(type_recv).return_type 
@@ -1365,7 +1365,7 @@ redef class AAbsSendExpr
 	# Get the signature for a local property and a receiver
 	private fun get_signature(v: TypingVisitor, type_recv: MMType, prop: MMMethod, recv_is_self: Bool): MMSignature
 	do
-		prop.global.check_visibility(v, self, v.module, recv_is_self)
+		prop.global.check_visibility(v, self, v.mmmodule, recv_is_self)
 		var psig = prop.signature_for(type_recv)
 		if not recv_is_self then psig = psig.not_for_self
 		return psig
@@ -1387,7 +1387,7 @@ redef class ASuperInitCall
 		if parent != v.top_block and self != v.top_block then
 			v.error(self, "Error: Constructor invocation {property} must not be in nested block.")
 		end
-		var cla = v.module[property.global.intro.local_class.global]
+		var cla = v.mmmodule[property.global.intro.local_class.global]
 		var prev_class: nullable MMLocalClass = null
 		var esic = v.explicit_super_init_calls.as(not null)
 		if not esic.is_empty then

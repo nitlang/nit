@@ -26,7 +26,7 @@ redef class Program
 
 	# This method will create a file and output all inits reachable as init in it
 	fun dump_reachable_as_init_methods(directory_name: String) do
-		var f = new OFStream.open("{directory_name}/{module.name}.reachable_methods_as_init.log")
+		var f = new OFStream.open("{directory_name}/{main_module.name}.reachable_methods_as_init.log")
 		with_each_live_local_classes !action(c) do
 			for g in c.global_properties do
 				var p = c[g]

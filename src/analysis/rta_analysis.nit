@@ -57,7 +57,7 @@ class RtaBuilder
 	# Also check every subclasses if they use the same 'version' of the
 	# method
 	fun check_method(m: MMMethod): Bool do
-		var m_cls = m.local_class.for_module(program.module)
+		var m_cls = m.local_class.for_module(program.main_module)
 
 		if context.is_class_instantiated(m_cls) then return true
 
@@ -139,13 +139,13 @@ class RtaBuilder
 		var forced_types = ["Object", "Bool", "Float", "Int", "String", "NativeString", "Range", "Array", "ArrayIterator", "Inline__"]
 
 		for some_type in forced_types do
-			if not program.module.has_global_class_named(some_type.to_symbol) then continue
-			var cls_type = program.module.class_by_name(some_type.to_symbol)
+			if not program.main_module.has_global_class_named(some_type.to_symbol) then continue
+			var cls_type = program.main_module.class_by_name(some_type.to_symbol)
 			add_instantiated_class(cls_type)
 		end
 
-		if program.module.has_global_class_named("Inline__".to_symbol) then
-			var ptr_class = program.module.class_by_name("Inline__".to_symbol)
+		if program.main_module.has_global_class_named("Inline__".to_symbol) then
+			var ptr_class = program.main_module.class_by_name("Inline__".to_symbol)
 			# Assume that all classes that are subclasses of Inline__
 			# can be inlined without notice ...
 			# and are always counted as instantiated
@@ -154,8 +154,8 @@ class RtaBuilder
 			end
 		end
 
-		if program.module.has_global_class_named("Pointer".to_symbol) then
-			var ptr_class = program.module.class_by_name("Pointer".to_symbol)
+		if program.main_module.has_global_class_named("Pointer".to_symbol) then
+			var ptr_class = program.main_module.class_by_name("Pointer".to_symbol)
 			# Assume that all classes that are subclasses of Pointer
 			# can be returned by the native interface
 			# and are always counted as instantiated
@@ -164,9 +164,9 @@ class RtaBuilder
 			end
 		end
 
-		for cls in program.module.global_classes do
+		for cls in program.main_module.global_classes do
 			if not cls.is_universal then continue
-			add_instantiated_class(program.module[cls])
+			add_instantiated_class(program.main_module[cls])
 		end
 	end
 
@@ -175,8 +175,8 @@ class RtaBuilder
 		if program.main_method == null then
 			# Add primitive type (so that compiling works)
 			for t in ["Int","Char","Bool"] do
-				if program.module.has_global_class_named(t.to_symbol) then
-					add_instantiated_class(program.module.class_by_name(t.to_symbol))
+				if program.main_module.has_global_class_named(t.to_symbol) then
+					add_instantiated_class(program.main_module.class_by_name(t.to_symbol))
 				end
 			end
 			return
@@ -206,7 +206,7 @@ special ICodeVisitor
 		else if ic isa INew then
 			# FIXME: take only the last property on the redef. hierarchie
 			var t = ic.stype
-			var cls = t.for_module(builder.program.module).local_class
+			var cls = t.for_module(builder.program.main_module).local_class
 			var m = cls[ic.property.global].as(MMMethod)
 			var r = cls.new_instance_iroutine[m]
 			builder.add_instantiated_class(cls)
@@ -222,12 +222,12 @@ special ICodeVisitor
 			builder.add_reachable_call(ic)
 		else if ic isa ICheckInstance then
 			var t = ic.stype
-			var cls = t.for_module(builder.program.module).local_class
+			var cls = t.for_module(builder.program.main_module).local_class
 			var ir = cls.checknew_iroutine
 			builder.add_reachable_iroutine(ir)
 		else if ic isa IInitAttributes then
 			var t = ic.stype
-			var cls = t.for_module(builder.program.module).local_class
+			var cls = t.for_module(builder.program.main_module).local_class
 			var ir = cls.init_var_iroutine
 			builder.add_reachable_iroutine(ir)
 		end

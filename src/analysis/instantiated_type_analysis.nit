@@ -25,7 +25,7 @@ redef class Program
 
 	# This method will create a file and output the name of all types that are instantiated in it
 	fun dump_instantiated_types(directory_name: String) do
-		var f = new OFStream.open("{directory_name}/{module.name}.instantiated_types.log")
+		var f = new OFStream.open("{directory_name}/{main_module.name}.instantiated_types.log")
 		with_each_live_local_classes !action(c) do
 			f.write("{c}\n")
 		end
@@ -34,9 +34,9 @@ redef class Program
 
 	# This method will create a file and output the names of all types that are not instantiated in it
 	fun dump_not_instantiated_types(directory_name: String) do
-		var f = new OFStream.open("{directory_name}/{module.name}.not_instantiated_types.log")
+		var f = new OFStream.open("{directory_name}/{main_module.name}.not_instantiated_types.log")
 		# Must overwrite 'with_each_local_classes' since we are looking at non-instantiated classes
-		for c in module.local_classes do
+		for c in main_module.local_classes do
 			if not ita.is_class_instantiated(c) then
 				f.write("{c}\n")
 			end
@@ -48,7 +48,7 @@ redef class Program
 	redef fun with_each_live_local_classes
 		!action(m: MMLocalClass)
 	do
-		for c in module.local_classes do
+		for c in main_module.local_classes do
 			if ita == null or ita.as(not null).is_class_instantiated(c) then action(c)
 		end
 	end

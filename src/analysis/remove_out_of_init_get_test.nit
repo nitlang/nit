@@ -38,7 +38,7 @@ redef class Program
 
 	# This method will create a file and output informations about this optimization
 	fun dump_out_of_init_information(directory_name: String) do
-		var f = new OFStream.open("{directory_name}/{module.name}.out_of_init_opt.log")
+		var f = new OFStream.open("{directory_name}/{main_module.name}.out_of_init_opt.log")
 		var nb_not_optimized = 0
 
 		with_each_iroutines !action(i,m) do

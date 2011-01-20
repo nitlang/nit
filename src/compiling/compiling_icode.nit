@@ -289,7 +289,7 @@ redef class IRoutine
 			v.add_decl("struct \{struct stack_frame_t me;\} fra;")
 		end
 		v.add_instr("fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;")
-		v.add_instr("fra.me.file = LOCATE_{v.visitor.module.name};")
+		v.add_instr("fra.me.file = LOCATE_{v.visitor.mmmodule.name};")
 		v.add_instr("fra.me.line = {ll};")
 		v.add_instr("fra.me.meth = LOCATE_{v.basecname};")
 		v.add_instr("fra.me.has_broke = 0;")

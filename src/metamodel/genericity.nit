@@ -71,7 +71,7 @@ redef class MMLocalClass
 			for i in [0..arity[ do
 				var oft = global.intro.get_formal(i)
 				var ft = _formals_types[i] 
-				ft.bound = oft.bound.for_module(module)
+				ft.bound = oft.bound.for_module(mmmodule)
 			end
 		end
 		return _formals_types
@@ -134,7 +134,7 @@ special MMTypeClass
 	redef fun for_module(mod)
 	do
 		var t: MMType = self
-		if module != mod then
+		if mmmodule != mod then
 			var parms = new Array[MMType]
 			for p in _params do
 				parms.add(p.for_module(mod))
@@ -201,12 +201,12 @@ special MMTypeFormal
 	# The position is self in def_class
 	readable var _position: Int 
 
-	redef fun module do return _def_class.module
+	redef fun mmmodule do return _def_class.mmmodule
 
 	redef fun for_module(mod)
 	do
 		var t: MMType = self
-		if module != mod then
+		if mmmodule != mod then
 			t = mod[_def_class.global].get_formal(position)
 		end
 		return t
@@ -225,8 +225,8 @@ special MMTypeFormal
 		r = r.direct_type
 		var old_r = r.upcast_for(def_class)
 		#if not old_r isa MMTypeGeneric then
-		#	print "adapt {self}'{def_class}'{self.module} to {r}'{r.module}"
-		#	print "   old_r = {old_r}'{old_r.module}"
+		#	print "adapt {self}'{def_class}'{self.mmmodule} to {r}'{r.mmmodule}"
+		#	print "   old_r = {old_r}'{old_r.mmmodule}"
 		#end
 		assert old_r isa MMTypeGeneric
 		var reduct = old_r.params[position]

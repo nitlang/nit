@@ -68,11 +68,11 @@ special MMTypeFormal
 		_recv = recv
 	end
 
-	redef fun module do return _recv.module
+	redef fun mmmodule do return _recv.mmmodule
 
 	redef fun for_module(mod)
 	do
-		if mod == module then return self
+		if mod == mmmodule then return self
 		return adapt_to(recv.for_module(mod))
 	end
 

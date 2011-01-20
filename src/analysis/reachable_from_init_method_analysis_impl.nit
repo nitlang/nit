@@ -86,7 +86,7 @@ special ICodeVisitor
 		else if ic isa INew then
 			# FIXME: take only the last property on the redef. hierarchie
 			var t = ic.stype
-			var cls = t.for_module(program.module).local_class
+			var cls = t.for_module(program.main_module).local_class
 			var m = cls[ic.property.global].as(MMMethod)
 			var r = cls.new_instance_iroutine[m]
 			process_call(r)
@@ -112,12 +112,12 @@ special ICodeVisitor
 			end
 		else if ic isa ICheckInstance then
 			var t = ic.stype
-			var cls = t.for_module(program.module).local_class
+			var cls = t.for_module(program.main_module).local_class
 			var ir = cls.checknew_iroutine
 			if ir != null then process_call(ir)
 		else if ic isa IInitAttributes then
 			var t = ic.stype
-			var cls = t.for_module(program.module).local_class
+			var cls = t.for_module(program.main_module).local_class
 			var ir = cls.init_var_iroutine
 			if ir != null then process_call(ir)
 		end

@@ -49,7 +49,7 @@ class ICodeBuilder
 	fun add_null_reciever_check(e: IRegister)
 	do
 		var nul = lit_null_reg
-		var c = expr(new IIs(e, nul), module.type_bool)
+		var c = expr(new IIs(e, nul), mmmodule.type_bool)
 		var iif = new IIf(c)
 		stmt(iif)
 		var old_seq = seq
@@ -61,7 +61,7 @@ class ICodeBuilder
 	# Add a type cast (ITypeCheck + IAbort) in the current icode sequence
 	fun add_type_cast(e: IRegister, stype: MMType)
 	do
-		var c = expr(new ITypeCheck(e, stype), module.type_bool)
+		var c = expr(new ITypeCheck(e, stype), mmmodule.type_bool)
 		var iif = new IIf(c)
 		stmt(iif)
 		var old_seq = seq
@@ -74,7 +74,7 @@ class ICodeBuilder
 	fun add_attr_check(prop: MMAttribute, e: IRegister)
 	do
 		if not prop.signature.return_type.is_nullable then
-			var cond = expr(new IAttrIsset(prop, e), module.type_bool)
+			var cond = expr(new IAttrIsset(prop, e), mmmodule.type_bool)
 			var iif = new IIf(cond)
 			stmt(iif)
 			var seq_old = seq
@@ -94,7 +94,7 @@ class ICodeBuilder
 	# Add a localized IAbort
 	fun add_abort(s: String...)
 	do
-		stmt(new IAbort(s, module))
+		stmt(new IAbort(s, mmmodule))
 	end
 
 	# Add an assigment to the iroutine return value
@@ -114,7 +114,7 @@ class ICodeBuilder
 		if prop.name == ne then
 			var eqp = prop.signature.recv.local_class.select_method(ee)
 			var eqcall = add_call(eqp, args, closcns).as(not null)
-			return expr(new INot(eqcall), module.type_bool)
+			return expr(new INot(eqcall), mmmodule.type_bool)
 		end
 
 		# TODO: Inline x==y as "x is y or (x != null and (== is not the Object one) and x.==(y))"
@@ -123,9 +123,9 @@ class ICodeBuilder
 		icall.closure_defs = closcns
 		if prop.name == ee then
 			# Prepare the result
-			var reg = new_register(module.type_bool)
+			var reg = new_register(mmmodule.type_bool)
 			# "x is y"
-			var cond = expr(new IIs(args[0], args[1]), module.type_bool)
+			var cond = expr(new IIs(args[0], args[1]), mmmodule.type_bool)
 			var iif = new IIf(cond)
 			stmt(iif)
 			var seq_old = seq
@@ -136,7 +136,7 @@ class ICodeBuilder
 			# Do the "x != null" part iff x is nullable
 			if args[0].stype.is_nullable then
 				var nul = lit_null_reg
-				cond = expr(new IIs(args[0], nul), module.type_bool)
+				cond = expr(new IIs(args[0], nul), mmmodule.type_bool)
 				iif = new IIf(cond)
 				stmt(iif)
 				seq = iif.then_seq
@@ -144,7 +144,7 @@ class ICodeBuilder
 				seq = iif.else_seq
 			end
 			# "x.==(y)"
-			add_assignment(reg, expr(icall, module.type_bool))
+			add_assignment(reg, expr(icall, mmmodule.type_bool))
 			seq = seq_old
 			return reg
 		end
@@ -175,21 +175,21 @@ class ICodeBuilder
 	# Return a literal "null" value
 	fun lit_null_reg: IRegister
 	do
-		return new_register(module.type_none)
+		return new_register(mmmodule.type_none)
 	end
 
 	# Return a literal "true" value
 	fun lit_true_reg: IRegister
 	do
 		var e = new IBoolValue(true)
-		return expr(e, module.type_bool)
+		return expr(e, mmmodule.type_bool)
 	end
 
 	# Return a literal "false" value
 	fun lit_false_reg: IRegister
 	do
 		var e = new IBoolValue(false)
-		return expr(e, module.type_bool)
+		return expr(e, mmmodule.type_bool)
 	end
 
 	# Get a new register
@@ -201,7 +201,7 @@ class ICodeBuilder
 	end
 
 	# The module where classes and types are extracted
-	readable var _module: MMModule
+	readable var _mmmodule: MMModule
 
 	# The current iroutine build
 	readable var _iroutine: IRoutine
@@ -209,9 +209,9 @@ class ICodeBuilder
 	# The current sequence of icodes
 	readable writable var _seq: ISeq
 
-	init(module: MMModule, r: IRoutine)
+	init(mod: MMModule, r: IRoutine)
 	do
-		_module = module
+		_mmmodule = mod
 		_current_location = r.location
 		_iroutine = r
 		_seq = r.body

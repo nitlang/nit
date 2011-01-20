@@ -65,7 +65,7 @@ end
 redef class MMGlobalClass
 	# Check that a module can access a class
 	fun check_visibility(v: AbsSyntaxVisitor, n: ANode, cm: MMSrcModule): Bool do
-		var pm = intro.module
+		var pm = intro.mmmodule
 		assert pm isa MMSrcModule
 		var vpm = cm.visibility_for(pm)
 		if vpm == 3 then
@@ -85,7 +85,7 @@ end
 class MMSrcLocalClass
 special MMConcreteClass
 	# The first related AST node (if any)
-	fun node: nullable AClassdef do return module.nodes(self).as(nullable AClassdef)
+	fun node: nullable AClassdef do return mmmodule.nodes(self).as(nullable AClassdef)
 
 	# Concrete NIT source generic formal parameter by name
 	readable var _formal_dict: Map[Symbol, MMTypeFormalParameter] = new HashMap[Symbol, MMTypeFormalParameter]
@@ -104,7 +104,7 @@ end
 redef class MMGlobalProperty
 	# Check that a module can access a property
 	fun check_visibility(v: AbsSyntaxVisitor, n: ANode, cm: MMSrcModule, allows_protected: Bool): Bool do
-		var pm = local_class.module
+		var pm = local_class.mmmodule
 		assert pm isa MMSrcModule
 		var vpm = cm.visibility_for(pm)
 		if vpm == 3 then
@@ -135,11 +135,11 @@ end
 # Concrete NIT source attribute
 class MMSrcAttribute
 special MMAttribute
-	redef fun node: nullable AAttrPropdef do return module.nodes(self).as(nullable AAttrPropdef)
+	redef fun node: nullable AAttrPropdef do return mmmodule.nodes(self).as(nullable AAttrPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
 		super(name, cla)
-		cla.module.nodes(self) = n
+		cla.mmmodule.nodes(self) = n
 	end
 end
 
@@ -154,11 +154,11 @@ end
 # Concrete NIT source method for an automatic accesor
 class MMAttrImplementationMethod
 special MMSrcMethod
-	redef fun node: nullable AAttrPropdef do return module.nodes(self).as(nullable AAttrPropdef)
+	redef fun node: nullable AAttrPropdef do return mmmodule.nodes(self).as(nullable AAttrPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
 		super(name, cla)
-		cla.module.nodes(self) = n
+		cla.mmmodule.nodes(self) = n
 	end
 end
 
@@ -187,11 +187,11 @@ special MMSrcMethod
 	redef readable var _is_intern: Bool
 	redef readable var _is_abstract: Bool
 	redef readable writable var _extern_name: nullable String # Will be computed during MMBuilder
-	redef fun node: nullable AMethPropdef do return module.nodes(self).as(nullable AMethPropdef)
+	redef fun node: nullable AMethPropdef do return mmmodule.nodes(self).as(nullable AMethPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: nullable AMethPropdef)
 	do
 		super(name, cla)
-		cla.module.nodes(self) = n
+		cla.mmmodule.nodes(self) = n
 		_is_init = node isa AConcreteInitPropdef
 		_is_intern = node isa AInternMethPropdef
 		_is_abstract = node isa ADeferredMethPropdef
@@ -290,15 +290,15 @@ class AbsSyntaxVisitor
 special Visitor
 	fun get_type_by_name(clsname: Symbol): MMType
 	do
-		if not _module.has_global_class_named(clsname) then _tc.fatal_error(_module.location, "Missing necessary class: \"{clsname}\"")
-		var cls = _module.class_by_name(clsname)
+		if not _mmmodule.has_global_class_named(clsname) then _tc.fatal_error(_mmmodule.location, "Missing necessary class: \"{clsname}\"")
+		var cls = _mmmodule.class_by_name(clsname)
 		return cls.get_type
 	end
 
 	fun get_instantiated_type_by_name(clsname: Symbol, vtype: Array[MMType]): MMType
 	do
-		if not _module.has_global_class_named(clsname) then _tc.fatal_error(_module.location, "Missing necessary class: \"{clsname}\"")
-		var cls = _module.class_by_name(clsname)
+		if not _mmmodule.has_global_class_named(clsname) then _tc.fatal_error(_mmmodule.location, "Missing necessary class: \"{clsname}\"")
+		var cls = _mmmodule.class_by_name(clsname)
 		return cls.get_instantiate_type(vtype)
 	end
 
@@ -371,7 +371,7 @@ special Visitor
 	# The primitive type of null
 	fun type_none: MMType
 	do
-		return _module.type_none
+		return _mmmodule.type_none
 	end
 
 	fun get_method(recv: MMType, name: Symbol): MMMethod
@@ -383,7 +383,7 @@ special Visitor
 	end
 
 	# The current module
-	readable var _module: MMSrcModule
+	readable var _mmmodule: MMSrcModule
 
 	# The current class
 	fun local_class: MMSrcLocalClass do return _local_class.as(not null)
@@ -494,10 +494,10 @@ special Visitor
 		return stype
 	end
 
-	protected init(tc: ToolContext, module: MMSrcModule)
+	protected init(tc: ToolContext, mmmodule: MMSrcModule)
 	do
 		_tc = tc
-		_module = module
+		_mmmodule = mmmodule
 	end
 end
 
@@ -596,7 +596,7 @@ redef class AType
 	fun get_local_class(v: AbsSyntaxVisitor): nullable MMLocalClass
 	do
 		var name = n_id.to_symbol
-		var mod = v.module
+		var mod = v.mmmodule
 		var cla = v.local_class
 
 		if cla.formal_dict.has_key(name) or cla.has_global_property_by_name(name) then
@@ -626,7 +626,7 @@ redef class AType
 		_stype_cached = true
 
 		var name = n_id.to_symbol
-		var mod = v.module
+		var mod = v.mmmodule
 		var cla = v.local_class
 		var t: nullable MMType
 

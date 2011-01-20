@@ -364,7 +364,7 @@ class ModuleLoader
 	protected fun parse_file(context: ToolContext, file: IFStream, filename: String, module_name: Symbol, dir: MMDirectory): MODULE is abstract
 
 	# Process a parsed module
-	protected fun process_metamodel(context: ToolContext, module: MODULE) is abstract
+	protected fun process_metamodel(context: ToolContext, mod: MODULE) is abstract
 end
 
 redef class MMModule

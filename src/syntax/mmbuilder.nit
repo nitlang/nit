@@ -59,7 +59,7 @@ redef class MMSrcModule
 
 		# Compute specialization relation
 		for c in local_classes do
-			if visibility_for(c.global.intro.module) < c.global.visibility_level then
+			if visibility_for(c.global.intro.mmmodule) < c.global.visibility_level then
 				continue
 			end
 			c.compute_super_classes
@@ -461,8 +461,8 @@ end
 redef class APackagedecl
 	redef fun accept_class_builder(v)
 	do
-		if n_id.to_symbol != v.module.name then
-			v.error(n_id, "Error: Package name missmatch between {v.module.name} and {n_id.to_symbol}")
+		if n_id.to_symbol != v.mmmodule.name then
+			v.error(n_id, "Error: Package name missmatch between {v.mmmodule.name} and {n_id.to_symbol}")
 		end
 	end
 end
@@ -525,7 +525,7 @@ redef class AClassdef
 	redef fun accept_class_builder(v)
 	do
 		var local_class: MMSrcLocalClass
-		var mod = v.module
+		var mod = v.mmmodule
 		var local_classes = mod.src_local_classes
 		if (local_classes.has_key(name)) then
 			local_class = local_classes[name]
@@ -630,7 +630,7 @@ redef class AStdClassdef
 
 		# Redef
 
-		glob.check_visibility(v, self, v.module)
+		glob.check_visibility(v, self, v.mmmodule)
 		if n_kwredef == null then
 			v.error(self, "Redef error: {name} is an imported class. Add the redef keyword to refine it.")
 			return
@@ -691,14 +691,14 @@ redef class AFormaldef
 		var o = c.global.intro
 		if c == o then
 			if n_type == null then
-				_formal.bound = v.module.type_any.as_nullable
+				_formal.bound = v.mmmodule.type_any.as_nullable
 			else
 				var stype = n_type.get_stype(v)
 				if stype == null then return
 				_formal.bound = stype
 			end
 		else
-			var ob = o.get_formal(_formal.position).bound.for_module(v.module)
+			var ob = o.get_formal(_formal.position).bound.for_module(v.mmmodule)
 			if n_type == null then
 				_formal.bound = ob
 			else
@@ -842,7 +842,7 @@ redef class APropdef
 		end
 
 		var s = prop.signature
-		#print "process {prop.local_class.module}::{prop.local_class}::{prop} from global {prop.global.local_property.local_class.module}::{prop.global.local_property.local_class}::{prop.global.local_property}"
+		#print "process {prop.local_class.mmmodule}::{prop.local_class}::{prop} from global {prop.global.local_property.local_class.mmmodule}::{prop.global.local_property.local_class}::{prop.global.local_property}"
 		for i in prop.prhe.direct_greaters do
 			var ip = i.local_class[prop.global]
 			var isig = i.signature.adaptation_to(v.local_class.get_type)
@@ -908,7 +908,7 @@ redef class APropdef
 		if visibility_level != 1 and glob.visibility_level != visibility_level then
 			v.error(self, "Redef error: {prop.local_class}::{prop} redefinition cannot change visibility.")
 		end
-		glob.check_visibility(v, self, v.module, true)
+		glob.check_visibility(v, self, v.mmmodule, true)
 	end
 end
 
@@ -1059,7 +1059,7 @@ redef class AExternMethPropdef
 			ename = n_extern.text
 			ename = ename.substring(1, ename.length-2)
 		else
-			ename = "{method.module.name}_{method.local_class.name}_{method.local_class.name}_{method.name}_{method.signature.arity}"
+			ename = "{method.mmmodule.name}_{method.local_class.name}_{method.local_class.name}_{method.name}_{method.signature.arity}"
 		end
 		method.extern_name = ename
 	end
@@ -1231,7 +1231,7 @@ redef class AClosureDecl
 		end
 
 		# Add the finalizer to the closure signature
-		var finalize_sig = new MMSignature(new Array[MMType], null, v.module.type_any) # FIXME should be no receiver
+		var finalize_sig = new MMSignature(new Array[MMType], null, v.mmmodule.type_any) # FIXME should be no receiver
 		var finalizer_clos = new MMClosure(once ("break".to_symbol), finalize_sig, false, true)
 		sig.closures.add(finalizer_clos)
 

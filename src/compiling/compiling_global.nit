@@ -24,7 +24,7 @@ redef class Program
 	# Compile module and class tables
 	fun compile_tables_to_c(v: CompilerVisitor)
 	do
-		for m in module.mhe.greaters_and_self do
+		for m in main_module.mhe.greaters_and_self do
 			m.compile_local_table_to_c(v)
 		end
 
@@ -34,7 +34,7 @@ redef class Program
 
 		var s = new Buffer.from("classtable_t TAG2VFT[4] = \{NULL")
 		for t in ["Int","Char","Bool"] do
-			if module.has_global_class_named(t.to_symbol) then
+			if main_module.has_global_class_named(t.to_symbol) then
 				s.append(", (const classtable_t)VFT_{t}")
 			else
 				s.append(", NULL")
@@ -69,7 +69,7 @@ redef class MMModule
 	fun declare_class_tables_to_c(v: CompilerVisitor)
 	do
 		for c in local_classes do
-			if c.global.module == self then
+			if c.global.mmmodule == self then
 				c.declare_tables_to_c(v)
 			end
 		end
