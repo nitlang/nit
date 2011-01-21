@@ -116,9 +116,15 @@ redef class MMLocalClass
 	fun dump_properties(file: OStream)
 	do
 		file.write("class {self}\n")
-		for p in global_properties do
-			var lp = self[p]
-			file.write("\t{lp}{lp.signature_for(get_type)}\n")
+		if global.visibility_level == 3 and not self == global.intro then
+			file.write("\tclass not visible in this module\n")
+		else if module.visibility_for(global.module) == 0 then
+			file.write("\tclass is defined later in the hierarchy\n")
+		else
+			for p in global_properties do
+				var lp = self[p]
+				file.write("\t{lp}{lp.signature_for(get_type)}\n")
+			end
 		end
 		file.write("end # {self}\n")
 	end

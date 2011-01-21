@@ -13,9 +13,15 @@ src/parser/.nit.sablecc3
 src/parser/.nit.sablecc3.dump
 src/parser/.parser-nofact.nit
 src/nit_version.nit
+src/callgrind.*
+src/*.log
+src/*.dot
 
 c_src/*.o
 c_src/*.cksum
+
+lib/*.log
+lib/*.dot
 
 tests/*.res
 tests/*.log
@@ -24,3 +30,5 @@ tests/*.err
 tests/*.write
 tests/alt
 tests/errlist
+tests/test_nitc_logs
+tests/hello_world
