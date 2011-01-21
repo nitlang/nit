@@ -20,6 +20,9 @@ src/*.dot
 c_src/*.o
 c_src/*.cksum
 
+lib/*.log
+lib/*.dot
+
 tests/*.res
 tests/*.log
 tests/*.bin
