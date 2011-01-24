@@ -20,6 +20,7 @@ $ template make_lexer()
 # The lexer extract NIT tokens from an input stream.
 # It is better user with the Parser
 class Lexer
+special TablesCapable
 	# Last peeked token
 	var _token: nullable Token
 
@@ -66,8 +67,6 @@ $ end foreach
 		_stream = stream
 		_stream_pos = -1
 		_stream_buf = new Buffer
-		build_goto_table
-		build_accept_table
 	end
 
 	# Give the next token (but do not consume it)
@@ -104,8 +103,6 @@ $ end foreach
 		var accept_pos = -1
 		var accept_line = -1
 
-		var goto_table = _goto_table[_state]
-		var accept = _accept_table[_state]
 		var text = _text
 		text.clear
 
@@ -142,22 +139,20 @@ $ end foreach
 
 					dfa_state = -1
 
-					var tmp0 = goto_table[old_state]
 					var low = 0
-					var high = tmp0.length - 1
+					var high = lexer_goto(old_state, 0) - 1
 
 					if high >= 0 then
-						var tmp1 = tmp0.intern_items
 						while low <= high do
 							var middle = (low + high) / 2
-							var tmp2 = tmp1[middle].intern_items
+							var offset = middle * 3 + 1 # +1 because length is at 0
 
-							if c < tmp2[0] then
+							if c < lexer_goto(old_state, offset) then
 								high = middle - 1
-							else if c > tmp2[1] then
+							else if c > lexer_goto(old_state, offset+1) then
 								low = middle + 1
 							else
-								dfa_state = tmp2[2]
+								dfa_state = lexer_goto(old_state, offset+2)
 								break
 							end
 						end
@@ -173,9 +168,10 @@ $ end foreach
 			end
 
 			if dfa_state >= 0 then
-				if accept[dfa_state] != -1 then
+				var tok = lexer_accept(dfa_state)
+				if tok != -1 then
 					accept_state = dfa_state
-					accept_token = accept[dfa_state]
+					accept_token = tok
 					accept_length = text.length
 					accept_pos = _pos
 					accept_line = _line
@@ -263,45 +259,40 @@ $ end foreach
 			i = i - 1
 		end
 	end
+end
 
-	var _goto_table: Array[Array[Array[Array[Int]]]]
-	private fun build_goto_table
-	do
-		_goto_table = once [
+$ end template
+
+
+
+$ template make_lexer_table()
 $ foreach {lexer_data/goto_table/state}
-			[
 $     foreach {row}
 $         if {count(goto)!=0}
-				[
+static const int lexer_goto_row${position()}[] = {
+	${count(goto)},
 $             foreach {goto}
-					[@low, @high, @state][-sep ','-]
+	@low, @high, @state[-sep ','-]
 $             end foreach
-				][-sep ','-]
-$         else
-				nil_array[-sep ','-]
+};
 $         end
 $     end foreach
-			][-sep ','-]
+static const int lexer_goto_row_null[] = {0};
+const int* const lexer_goto_table[] = {
+$     foreach {row}
+$         if {count(goto)!=0}
+	lexer_goto_row${position()}[-sep ','-]
+$         else
+	lexer_goto_row_null[-sep ','-]
+$         end
+$     end foreach
+};
 $ end foreach
-		]
-	end
 
-	private fun nil_array: Array[Array[Int]]
-	do
-		return once new Array[Array[Int]]
-	end
-
-	var _accept_table: Array[Array[Int]]
-	private fun build_accept_table do
-		_accept_table = once [
 $ foreach {lexer_data/accept_table/state}
-			[
-				[-foreach {i}-]${.}[-sep ','-][-end foreach-]
-
-			][-sep ','-]
+const int lexer_accept_table[] = {
+	[-foreach {i}-]${.}[-sep ','-][-end foreach-]
+};
 $ end foreach
-		]
-	end
-end
 
 $ end template
