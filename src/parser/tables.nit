@@ -17,10 +17,18 @@ package tables
 
 # Interface allowing the acces of the tables used during the parsing.
 interface TablesCapable
-	# The goto value at row i, column j-1
+	# The goto value of the lexer at row i, column j-1
 	# Note that the length of the row r is stored at (r, 0)
 	fun lexer_goto(i, j: Int): Int is extern "lexer_goto"
 
-	# The accept value at i
+	# The accept value of the lexer at i
 	fun lexer_accept(i: Int): Int is extern "lexer_accept"
+
+	# The goto value of the parser at row i, column j-1
+	# Note that the length of the row r is stored at (r, 0)
+	fun parser_goto(i, j: Int): Int is extern "parser_goto"
+
+	# The action value of the parser at row i, column j-1
+	# Note that the length of the row r is stored at (r, 0)
+	fun parser_action(i, j: Int): Int is extern "parser_action"
 end

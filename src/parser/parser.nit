@@ -3,7 +3,6 @@
 package parser
 
 intrude import parser_prod
-intrude import parser_tables
 
 # State of the parser automata as stored in the parser stack.
 private class State
@@ -21,7 +20,7 @@ private class State
 end
 
 class Parser
-special ParserTable
+special TablesCapable
 	# Associated lexer
 	var _lexer: Lexer
 
@@ -37,8 +36,6 @@ special ParserTable
 		_lexer = lexer
 		_stack = new Array[State]
 		_stack_pos = -1
-		build_goto_table
-		build_action_table
 		build_reduce_table
 	end
 
@@ -46,24 +43,24 @@ special ParserTable
 	private fun go_to(index: Int): Int
 	do
 		var state = state
-		var table = _goto_table[index]
 		var low = 1
-		var high = table.length/2 - 1
+		var high = parser_goto(index, 0) - 1
 
 		while low <= high do
 			var middle = (low + high) / 2
-			var subindex = middle * 2
+			var subindex = middle * 2 + 1 # +1 because parser_goto(index, 0) is the length
 
-			if state < table[subindex] then
+			var goal = parser_goto(index, subindex)
+			if state < goal then
 				high = middle - 1
-			else if state > table[subindex] then
+			else if state > goal then
 				low = middle + 1
 			else
-				return table[subindex + 1]
+				return parser_goto(index, subindex+1)
 			end
 		end
 
-		return table[1] # Default value
+		return parser_goto(index, 2) # Default value
 	end
 
 	# Push someting in the state stack
@@ -107,24 +104,24 @@ special ParserTable
 			end
 
 			var index = token.parser_index
-			var table = _action_table[state]
-			var action_type = table[1]
-			var action_value = table[2]
+			var action_type = parser_action(state, 2)
+			var action_value = parser_action(state, 3)
 
 			var low = 1
-			var high = table.length/3 - 1
+			var high = parser_action(state, 0) - 1
 
 			while low <= high do
 				var middle = (low + high) / 2
-				var subindex = middle * 3
+				var subindex = middle * 3 + 1 # +1 because parser_action(state, 0) is the length
 
-				if index < table[subindex] then
+				var goal = parser_action(state, subindex)
+				if index < goal then
 					high = middle - 1
-				else if index > table[subindex] then
+				else if index > goal then
 					low = middle + 1
 				else
-					action_type = table[subindex + 1]
-					action_value = table[subindex + 2]
+					action_type = parser_action(state, subindex+1)
+					action_value = parser_action(state, subindex+2)
 					high = low -1 # break
 				end
 			end

@@ -17,4 +17,10 @@ extern const int lexer_accept_table[];
 #define lexer_goto(o,i,j) (lexer_goto_table[(i)][(j)])
 #define lexer_accept(o,i) (lexer_accept_table[(i)])
 
+extern const int* const parser_action_table[];
+extern const int* const parser_goto_table[];
+
+#define parser_action(o,i,j) (parser_action_table[(i)][(j)])
+#define parser_goto(o,i,j) (parser_goto_table[(i)][(j)])
+
 #endif

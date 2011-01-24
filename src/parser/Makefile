@@ -27,10 +27,10 @@ parser.nit: .nit.sablecc3 xss/*.xss
 	${SABLECC} -c .nit.sablecc3.dump -t xss/main.xss -p usermodule parser_nodes .nit.sablecc3
 	mv -f -- parser.nit .parser-nofact.nit
 	./fact_parser.pl .parser-nofact.nit > parser.nit
-	LANG=C sed -i.orig -e 's/\([ \[]\)P\([A-Z]\)/\1A\2/g' parser.nit parser_abs.nit parser_prod.nit parser_tables.nit lexer.nit
+	LANG=C sed -i.orig -e 's/\([ \[]\)P\([A-Z]\)/\1A\2/g' parser.nit parser_abs.nit parser_prod.nit lexer.nit
 
 clean:
 	rm -f -- .nit.sablecc3 .nit.sablecc3.dump .parser-nofact.nit || true
 
 dist-clean: clean
-	rm -f -- parser.nit parser_abs.nit parser_prod.nit parser_tables.nit lexer.nit || true
+	rm -f -- parser.nit parser_abs.nit parser_prod.nit lexer.nit || true

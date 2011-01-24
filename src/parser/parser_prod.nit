@@ -4,6 +4,7 @@ package parser_prod
 
 import lexer
 intrude import parser_nodes
+private import tables
 
 redef class ANode
 	# Parent of the node in the AST
