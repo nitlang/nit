@@ -72,6 +72,8 @@
       <keyword>redef</keyword>
       <keyword>var</keyword>
       <keyword>package</keyword>
+      <keyword>type</keyword>
+      <keyword>universal</keyword>
     </context>
 
     <context id="module-handlers" style-ref="module-handler">

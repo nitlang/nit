@@ -372,7 +372,7 @@ special Discrete
 
 		if self == '-' then
 			return -1
-		else if self >= '0' and self <= '9' then
+		else if is_digit then
 			return self.ascii - '0'.ascii
 		else
 			return self.to_lower.ascii - ('a'.ascii + 10)
@@ -388,7 +388,7 @@ special Discrete
 	# Char to lower case
 	fun to_lower : Char
 	do
-		if self >= 'A' and self <= 'Z' then
+		if is_upper then
 			return (ascii + ('a'.distance('A'))).ascii
 		else
 			return self
@@ -398,11 +398,31 @@ special Discrete
 	# Char to upper case
 	fun to_upper : Char
 	do
-		if self >= 'a' and self <= 'z' then
+		if is_lower then
 			return (ascii - ('a'.distance('A'))).ascii
 		else
 			return self
 		end
+	end
+	
+	fun is_digit : Bool
+	do
+		return self >= '0' and self <= '9'
+	end
+	
+	fun is_lower : Bool
+	do
+		return self >= 'a' and self <= 'z'
+	end
+	
+	fun is_upper : Bool
+	do
+		return self >= 'A' and self <= 'Z'
+	end
+	
+	fun is_letter : Bool
+	do
+		return is_lower or is_upper
 	end
 end
 
