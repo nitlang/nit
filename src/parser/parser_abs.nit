@@ -410,7 +410,8 @@ special APropdef
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: AVisibility
     readable var _n_kwvar: TKwvar
-    readable var _n_id: TAttrid
+    readable var _n_id: nullable TAttrid = null
+    readable var _n_id2: nullable TId = null
     readable var _n_type: nullable AType = null
     readable var _n_expr: nullable AExpr = null
 end
@@ -492,6 +493,7 @@ end
 class AWriteAble
 special AAble
     readable var _n_kwredef: nullable TKwredef = null
+    readable var _n_visibility: nullable AVisibility = null
     readable var _n_kwwritable: TKwwritable
 end
 class AIdMethid
