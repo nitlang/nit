@@ -8,6 +8,7 @@ Contents:
 	nit.sablecc3xx: Extended sablecc3 grammar (see prescc.sh)
 	prescc.sh: Program to transform an extended sablecc3 to a standard one
 	parser_nodes.nit: token and nodes classes hierarchy used by the parser and the lexer
+	tables.nit, tables_nit.h: Interfaces to access the tables needed by the parser and the lexer
 	test_parser.nit:
 	xss/*.xss: alternate SableCC3 template files for the Nit language
 
@@ -17,7 +18,7 @@ The following are generated but present to avoid the need of sablecc3:
 	lexer.nit: generated lexer
 	parser.nit: generated parser
 	parser_prod.nit: All production with generated visit methods
-	parser_tables.nit: Tables needed py the parser
+	tables_nit.c: The tables needed by the parser and the lexer
 	parser_abs.nit: Raw generated token and nodes classes used to maintain coherence of parser_nodes.nit
 
 

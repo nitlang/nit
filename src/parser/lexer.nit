@@ -3,6 +3,7 @@
 package lexer
 
 intrude import parser_nodes
+private import tables
 
 redef class Token
     readable var _text: String
@@ -1173,6 +1174,7 @@ end
 # The lexer extract NIT tokens from an input stream.
 # It is better user with the Parser
 class Lexer
+special TablesCapable
 	# Last peeked token
 	var _token: nullable Token
 
@@ -1217,8 +1219,6 @@ class Lexer
 		_stream = stream
 		_stream_pos = -1
 		_stream_buf = new Buffer
-		build_goto_table
-		build_accept_table
 	end
 
 	# Give the next token (but do not consume it)
@@ -1255,8 +1255,6 @@ class Lexer
 		var accept_pos = -1
 		var accept_line = -1
 
-		var goto_table = _goto_table[_state]
-		var accept = _accept_table[_state]
 		var text = _text
 		text.clear
 
@@ -1293,22 +1291,20 @@ class Lexer
 
 					dfa_state = -1
 
-					var tmp0 = goto_table[old_state]
 					var low = 0
-					var high = tmp0.length - 1
+					var high = lexer_goto(old_state, 0) - 1
 
 					if high >= 0 then
-						var tmp1 = tmp0.intern_items
 						while low <= high do
 							var middle = (low + high) / 2
-							var tmp2 = tmp1[middle].intern_items
+							var offset = middle * 3 + 1 # +1 because length is at 0
 
-							if c < tmp2[0] then
+							if c < lexer_goto(old_state, offset) then
 								high = middle - 1
-							else if c > tmp2[1] then
+							else if c > lexer_goto(old_state, offset+1) then
 								low = middle + 1
 							else
-								dfa_state = tmp2[2]
+								dfa_state = lexer_goto(old_state, offset+2)
 								break
 							end
 						end
@@ -1324,729 +1320,295 @@ class Lexer
 			end
 
 			if dfa_state >= 0 then
-				if accept[dfa_state] != -1 then
+				var tok = lexer_accept(dfa_state)
+				if tok != -1 then
 					accept_state = dfa_state
-					accept_token = accept[dfa_state]
+					accept_token = tok
 					accept_length = text.length
 					accept_pos = _pos
 					accept_line = _line
 				end
 			else
 				if accept_state != -1 then
+					var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
+					_pos = accept_pos
+					_line = accept_line
+					push_back(accept_length)
 					if accept_token == 0 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
 						return null
 					end
 					if accept_token == 1 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TEol.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TEol.init_tk(token_text, location)
 					end
 					if accept_token == 2 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TComment.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TComment.init_tk(token_text, location)
 					end
 					if accept_token == 3 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwpackage.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwpackage.init_tk(location)
 					end
 					if accept_token == 4 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwimport.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwimport.init_tk(location)
 					end
 					if accept_token == 5 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwclass.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwclass.init_tk(location)
 					end
 					if accept_token == 6 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwabstract.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwabstract.init_tk(location)
 					end
 					if accept_token == 7 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwinterface.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwinterface.init_tk(location)
 					end
 					if accept_token == 8 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwuniversal.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwuniversal.init_tk(location)
 					end
 					if accept_token == 9 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwspecial.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwspecial.init_tk(location)
 					end
 					if accept_token == 10 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwend.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwend.init_tk(location)
 					end
 					if accept_token == 11 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwmeth.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwmeth.init_tk(location)
 					end
 					if accept_token == 12 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwtype.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwtype.init_tk(location)
 					end
 					if accept_token == 13 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwinit.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwinit.init_tk(location)
 					end
 					if accept_token == 14 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwredef.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwredef.init_tk(location)
 					end
 					if accept_token == 15 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwis.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwis.init_tk(location)
 					end
 					if accept_token == 16 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwdo.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwdo.init_tk(location)
 					end
 					if accept_token == 17 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwreadable.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwreadable.init_tk(location)
 					end
 					if accept_token == 18 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwwritable.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwwritable.init_tk(location)
 					end
 					if accept_token == 19 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwvar.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwvar.init_tk(location)
 					end
 					if accept_token == 20 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwintern.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwintern.init_tk(location)
 					end
 					if accept_token == 21 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwextern.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwextern.init_tk(location)
 					end
 					if accept_token == 22 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwprotected.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwprotected.init_tk(location)
 					end
 					if accept_token == 23 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwprivate.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwprivate.init_tk(location)
 					end
 					if accept_token == 24 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwintrude.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwintrude.init_tk(location)
 					end
 					if accept_token == 25 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwif.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwif.init_tk(location)
 					end
 					if accept_token == 26 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwthen.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwthen.init_tk(location)
 					end
 					if accept_token == 27 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwelse.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwelse.init_tk(location)
 					end
 					if accept_token == 28 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwwhile.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwwhile.init_tk(location)
 					end
 					if accept_token == 29 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwloop.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwloop.init_tk(location)
 					end
 					if accept_token == 30 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwfor.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwfor.init_tk(location)
 					end
 					if accept_token == 31 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwin.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwin.init_tk(location)
 					end
 					if accept_token == 32 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwand.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwand.init_tk(location)
 					end
 					if accept_token == 33 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwor.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwor.init_tk(location)
 					end
 					if accept_token == 34 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnot.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwnot.init_tk(location)
 					end
 					if accept_token == 35 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwreturn.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwreturn.init_tk(location)
 					end
 					if accept_token == 36 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwcontinue.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwcontinue.init_tk(location)
 					end
 					if accept_token == 37 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwbreak.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwbreak.init_tk(location)
 					end
 					if accept_token == 38 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwabort.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwabort.init_tk(location)
 					end
 					if accept_token == 39 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwassert.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwassert.init_tk(location)
 					end
 					if accept_token == 40 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnew.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwnew.init_tk(location)
 					end
 					if accept_token == 41 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwisa.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwisa.init_tk(location)
 					end
 					if accept_token == 42 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwonce.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwonce.init_tk(location)
 					end
 					if accept_token == 43 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwsuper.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwsuper.init_tk(location)
 					end
 					if accept_token == 44 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwself.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwself.init_tk(location)
 					end
 					if accept_token == 45 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwtrue.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwtrue.init_tk(location)
 					end
 					if accept_token == 46 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwfalse.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwfalse.init_tk(location)
 					end
 					if accept_token == 47 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnull.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwnull.init_tk(location)
 					end
 					if accept_token == 48 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwas.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwas.init_tk(location)
 					end
 					if accept_token == 49 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwnullable.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwnullable.init_tk(location)
 					end
 					if accept_token == 50 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwisset.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwisset.init_tk(location)
 					end
 					if accept_token == 51 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TKwlabel.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TKwlabel.init_tk(location)
 					end
 					if accept_token == 52 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TOpar.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TOpar.init_tk(location)
 					end
 					if accept_token == 53 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TCpar.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TCpar.init_tk(location)
 					end
 					if accept_token == 54 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TObra.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TObra.init_tk(location)
 					end
 					if accept_token == 55 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TCbra.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TCbra.init_tk(location)
 					end
 					if accept_token == 56 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TComma.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TComma.init_tk(location)
 					end
 					if accept_token == 57 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TColumn.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TColumn.init_tk(location)
 					end
 					if accept_token == 58 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TQuad.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TQuad.init_tk(location)
 					end
 					if accept_token == 59 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TAssign.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TAssign.init_tk(location)
 					end
 					if accept_token == 60 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TPluseq.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TPluseq.init_tk(location)
 					end
 					if accept_token == 61 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TMinuseq.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TMinuseq.init_tk(location)
 					end
 					if accept_token == 62 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TDotdotdot.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TDotdotdot.init_tk(location)
 					end
 					if accept_token == 63 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TDotdot.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TDotdot.init_tk(location)
 					end
 					if accept_token == 64 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TDot.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TDot.init_tk(location)
 					end
 					if accept_token == 65 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TPlus.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TPlus.init_tk(location)
 					end
 					if accept_token == 66 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TMinus.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TMinus.init_tk(location)
 					end
 					if accept_token == 67 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TStar.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TStar.init_tk(location)
 					end
 					if accept_token == 68 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TSlash.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TSlash.init_tk(location)
 					end
 					if accept_token == 69 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TPercent.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TPercent.init_tk(location)
 					end
 					if accept_token == 70 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TEq.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TEq.init_tk(location)
 					end
 					if accept_token == 71 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TNe.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TNe.init_tk(location)
 					end
 					if accept_token == 72 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TLt.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TLt.init_tk(location)
 					end
 					if accept_token == 73 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TLe.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TLe.init_tk(location)
 					end
 					if accept_token == 74 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TGt.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TGt.init_tk(location)
 					end
 					if accept_token == 75 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TGe.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TGe.init_tk(location)
 					end
 					if accept_token == 76 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TStarship.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TStarship.init_tk(location)
 					end
 					if accept_token == 77 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
-						var token = new TBang.init_tk(location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TBang.init_tk(location)
 					end
 					if accept_token == 78 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TClassid.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TClassid.init_tk(token_text, location)
 					end
 					if accept_token == 79 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TId.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TId.init_tk(token_text, location)
 					end
 					if accept_token == 80 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TAttrid.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TAttrid.init_tk(token_text, location)
 					end
 					if accept_token == 81 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TNumber.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TNumber.init_tk(token_text, location)
 					end
 					if accept_token == 82 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TFloat.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TFloat.init_tk(token_text, location)
 					end
 					if accept_token == 83 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TChar.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TChar.init_tk(token_text, location)
 					end
 					if accept_token == 84 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TString.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TString.init_tk(token_text, location)
 					end
 					if accept_token == 85 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TStartString.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TStartString.init_tk(token_text, location)
 					end
 					if accept_token == 86 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TMidString.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TMidString.init_tk(token_text, location)
 					end
 					if accept_token == 87 then
-						var location = new Location(_filename, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 						var token_text = text.substring(0, accept_length)
-						var token = new TEndString.init_tk(token_text, location)
-						push_back(accept_length)
-						_pos = accept_pos
-						_line = accept_line
-						return token
+						return new TEndString.init_tk(token_text, location)
 					end
 				else
 					var location = new Location(_filename, start_line + 1, start_line + 1, start_pos + 1, start_pos + 1)
@@ -2102,1225 +1664,6 @@ class Lexer
 			_stream_buf[_stream_pos] = _text[i]
 			i = i - 1
 		end
-	end
-
-	var _goto_table: Array[Array[Array[Array[Int]]]]
-	private fun build_goto_table
-	do
-		_goto_table = once [
-			[
-				[
-					[9, 9, 1],
-					[10, 10, 2],
-					[13, 13, 3],
-					[32, 32, 4],
-					[33, 33, 5],
-					[34, 34, 6],
-					[35, 35, 7],
-					[37, 37, 8],
-					[39, 39, 9],
-					[40, 40, 10],
-					[41, 41, 11],
-					[42, 42, 12],
-					[43, 43, 13],
-					[44, 44, 14],
-					[45, 45, 15],
-					[46, 46, 16],
-					[47, 47, 17],
-					[48, 57, 18],
-					[58, 58, 19],
-					[60, 60, 20],
-					[61, 61, 21],
-					[62, 62, 22],
-					[65, 90, 23],
-					[91, 91, 24],
-					[93, 93, 25],
-					[95, 95, 26],
-					[97, 97, 27],
-					[98, 98, 28],
-					[99, 99, 29],
-					[100, 100, 30],
-					[101, 101, 31],
-					[102, 102, 32],
-					[103, 104, 33],
-					[105, 105, 34],
-					[106, 107, 33],
-					[108, 108, 35],
-					[109, 109, 33],
-					[110, 110, 36],
-					[111, 111, 37],
-					[112, 112, 38],
-					[113, 113, 33],
-					[114, 114, 39],
-					[115, 115, 40],
-					[116, 116, 41],
-					[117, 117, 42],
-					[118, 118, 43],
-					[119, 119, 44],
-					[120, 122, 33],
-					[125, 125, 45]
-				],
-				[
-					[9, 9, 1],
-					[32, 32, 4]
-				],
-				nil_array,
-				[
-					[10, 10, 46]
-				],
-				[
-					[9, 32, -3]
-				],
-				[
-					[61, 61, 47]
-				],
-				[
-					[0, 9, 48],
-					[11, 12, 48],
-					[14, 33, 48],
-					[34, 34, 49],
-					[35, 91, 48],
-					[92, 92, 50],
-					[93, 122, 48],
-					[123, 123, 51],
-					[124, 255, 48]
-				],
-				[
-					[0, 9, 52],
-					[10, 10, 53],
-					[11, 12, 52],
-					[13, 13, 54],
-					[14, 255, 52]
-				],
-				nil_array,
-				[
-					[0, 9, 55],
-					[11, 12, 55],
-					[14, 38, 55],
-					[39, 39, 56],
-					[40, 255, 55]
-				],
-				nil_array,
-				nil_array,
-				nil_array,
-				[
-					[61, 61, 57]
-				],
-				nil_array,
-				[
-					[61, 61, 58]
-				],
-				[
-					[46, 46, 59],
-					[48, 57, 60]
-				],
-				nil_array,
-				[
-					[46, 46, 61],
-					[48, 57, 18]
-				],
-				[
-					[58, 58, 62]
-				],
-				[
-					[61, 61, 63]
-				],
-				[
-					[61, 61, 64]
-				],
-				[
-					[61, 61, 65]
-				],
-				[
-					[48, 57, 66],
-					[65, 90, 67],
-					[95, 95, 68],
-					[97, 122, 69]
-				],
-				nil_array,
-				nil_array,
-				[
-					[97, 122, 70]
-				],
-				[
-					[48, 57, 71],
-					[65, 90, 72],
-					[95, 95, 73],
-					[97, 97, 74],
-					[98, 98, 75],
-					[99, 109, 74],
-					[110, 110, 76],
-					[111, 114, 74],
-					[115, 115, 77],
-					[116, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 113, 74],
-					[114, 114, 78],
-					[115, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 107, 74],
-					[108, 108, 79],
-					[109, 110, 74],
-					[111, 111, 80],
-					[112, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 110, 74],
-					[111, 111, 81],
-					[112, 122, 74]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 82],
-					[109, 109, 74],
-					[110, 110, 83],
-					[111, 119, 74],
-					[120, 120, 84],
-					[121, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 85],
-					[98, 110, 74],
-					[111, 111, 86],
-					[112, 116, 74],
-					[117, 117, 87],
-					[118, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 101, 74],
-					[102, 102, 88],
-					[103, 108, 74],
-					[109, 109, 89],
-					[110, 110, 90],
-					[111, 114, 74],
-					[115, 115, 91],
-					[116, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 92],
-					[98, 110, 74],
-					[111, 111, 93],
-					[112, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 100, 74],
-					[101, 101, 94],
-					[102, 110, 74],
-					[111, 111, 95],
-					[112, 116, 74],
-					[117, 117, 96],
-					[118, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 109, 74],
-					[110, 110, 97],
-					[111, 113, 74],
-					[114, 114, 98],
-					[115, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 99],
-					[98, 113, 74],
-					[114, 114, 100],
-					[115, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 101],
-					[102, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 102],
-					[102, 111, 74],
-					[112, 112, 103],
-					[113, 116, 74],
-					[117, 117, 104],
-					[118, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 103, 74],
-					[104, 104, 105],
-					[105, 113, 74],
-					[114, 114, 106],
-					[115, 120, 74],
-					[121, 121, 107],
-					[122, 122, 74]
-				],
-				[
-					[48, 109, -39],
-					[110, 110, 108],
-					[111, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 109],
-					[98, 122, 74]
-				],
-				[
-					[48, 103, -43],
-					[104, 104, 110],
-					[105, 113, 74],
-					[114, 114, 111],
-					[115, 122, 74]
-				],
-				[
-					[0, 9, 112],
-					[11, 12, 112],
-					[14, 33, 112],
-					[34, 34, 113],
-					[35, 91, 112],
-					[92, 92, 114],
-					[93, 122, 112],
-					[123, 123, 115],
-					[124, 255, 112]
-				],
-				nil_array,
-				nil_array,
-				[
-					[0, 255, -8]
-				],
-				nil_array,
-				[
-					[0, 9, 116],
-					[11, 12, 116],
-					[14, 255, 116]
-				],
-				nil_array,
-				[
-					[0, 255, -9]
-				],
-				nil_array,
-				[
-					[10, 10, 117]
-				],
-				[
-					[0, 255, -11]
-				],
-				nil_array,
-				nil_array,
-				nil_array,
-				[
-					[46, 46, 118]
-				],
-				[
-					[48, 57, 60]
-				],
-				[
-					[48, 57, 60]
-				],
-				nil_array,
-				[
-					[62, 62, 119]
-				],
-				nil_array,
-				nil_array,
-				[
-					[48, 122, -25]
-				],
-				[
-					[48, 122, -25]
-				],
-				[
-					[48, 122, -25]
-				],
-				[
-					[48, 122, -25]
-				],
-				[
-					[48, 57, 120],
-					[65, 90, 121],
-					[95, 95, 122],
-					[97, 122, 123]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 110, -32],
-					[111, 111, 124],
-					[112, 114, 74],
-					[115, 115, 125],
-					[116, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 99, 74],
-					[100, 100, 126],
-					[101, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 114, 74],
-					[115, 115, 127],
-					[116, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 128],
-					[102, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 129],
-					[98, 122, 74]
-				],
-				[
-					[48, 109, -39],
-					[110, 110, 130],
-					[111, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 114, -79],
-					[115, 115, 131],
-					[116, 122, 74]
-				],
-				[
-					[48, 99, -78],
-					[100, 100, 132],
-					[101, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 115, 74],
-					[116, 116, 133],
-					[117, 122, 74]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 134],
-					[109, 122, 74]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 135],
-					[115, 122, 74]
-				],
-				[
-					[48, 109, -39],
-					[110, 110, 136],
-					[111, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 95, -29],
-					[97, 111, 74],
-					[112, 112, 137],
-					[113, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 104, 74],
-					[105, 105, 138],
-					[106, 115, 74],
-					[116, 116, 139],
-					[117, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 140],
-					[98, 114, 74],
-					[115, 115, 141],
-					[116, 122, 74]
-				],
-				[
-					[48, 97, -29],
-					[98, 98, 142],
-					[99, 122, 74]
-				],
-				[
-					[48, 110, -32],
-					[111, 111, 143],
-					[112, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 118, 74],
-					[119, 119, 144],
-					[120, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 145],
-					[117, 122, 74]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 146],
-					[109, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 98, 74],
-					[99, 99, 147],
-					[100, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 98, -99],
-					[99, 99, 148],
-					[100, 122, 74]
-				],
-				[
-					[48, 104, -92],
-					[105, 105, 149],
-					[106, 110, 74],
-					[111, 111, 150],
-					[112, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 151],
-					[98, 99, 74],
-					[100, 100, 152],
-					[101, 115, 74],
-					[116, 116, 153],
-					[117, 122, 74]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 154],
-					[109, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 155],
-					[102, 122, 74]
-				],
-				[
-					[48, 111, -91],
-					[112, 112, 156],
-					[113, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 157],
-					[102, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 116, 74],
-					[117, 117, 158],
-					[118, 122, 74]
-				],
-				[
-					[48, 111, -91],
-					[112, 112, 159],
-					[113, 122, 74]
-				],
-				[
-					[48, 104, -92],
-					[105, 105, 160],
-					[106, 122, 74]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 161],
-					[115, 122, 74]
-				],
-				[
-					[48, 104, -92],
-					[105, 105, 162],
-					[106, 122, 74]
-				],
-				[
-					[48, 104, -92],
-					[105, 105, 163],
-					[106, 122, 74]
-				],
-				[
-					[0, 255, -47]
-				],
-				nil_array,
-				[
-					[0, 9, 164],
-					[11, 12, 164],
-					[14, 255, 164]
-				],
-				nil_array,
-				[
-					[0, 255, -8]
-				],
-				nil_array,
-				nil_array,
-				nil_array,
-				[
-					[48, 122, -72]
-				],
-				[
-					[48, 122, -72]
-				],
-				[
-					[48, 122, -72]
-				],
-				[
-					[48, 122, -72]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 165],
-					[115, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 166],
-					[117, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 167],
-					[102, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 168],
-					[98, 122, 74]
-				],
-				[
-					[48, 114, -79],
-					[115, 115, 169],
-					[116, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 170],
-					[117, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 171],
-					[102, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 172],
-					[102, 122, 74]
-				],
-				[
-					[48, 114, -79],
-					[115, 115, 173],
-					[116, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 110, -32],
-					[111, 111, 174],
-					[112, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 175],
-					[117, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 176],
-					[102, 113, 74],
-					[114, 114, 177],
-					[115, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 178],
-					[102, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 179],
-					[102, 122, 74]
-				],
-				[
-					[48, 111, -91],
-					[112, 112, 180],
-					[113, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 181],
-					[109, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 182],
-					[102, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 106, 74],
-					[107, 107, 183],
-					[108, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 117, 74],
-					[118, 118, 184],
-					[119, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 185],
-					[117, 122, 74]
-				],
-				[
-					[48, 99, -78],
-					[100, 100, 186],
-					[101, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 187],
-					[102, 122, 74]
-				],
-				[
-					[48, 116, -108],
-					[117, 117, 188],
-					[118, 122, 74]
-				],
-				[
-					[48, 101, -36],
-					[102, 102, 189],
-					[103, 122, 74]
-				],
-				[
-					[48, 98, -99],
-					[99, 99, 190],
-					[100, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 191],
-					[102, 122, 74]
-				],
-				[
-					[48, 109, -39],
-					[110, 110, 192],
-					[111, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 193],
-					[102, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 194],
-					[102, 122, 74]
-				],
-				[
-					[48, 117, -151],
-					[118, 118, 195],
-					[119, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 196],
-					[109, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 197],
-					[117, 122, 74]
-				],
-				[
-					[0, 255, -47]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 198],
-					[117, 122, 74]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 199],
-					[115, 122, 74]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 200],
-					[115, 122, 74]
-				],
-				[
-					[48, 106, -150],
-					[107, 107, 201],
-					[108, 122, 74]
-				],
-				[
-					[48, 114, -79],
-					[115, 115, 202],
-					[116, 122, 74]
-				],
-				[
-					[48, 104, -92],
-					[105, 105, 203],
-					[106, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 204],
-					[115, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 205],
-					[102, 122, 74]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 206],
-					[115, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 207],
-					[115, 122, 74]
-				],
-				[
-					[48, 116, -108],
-					[117, 117, 208],
-					[118, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 209],
-					[117, 122, 74]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 210],
-					[109, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 211],
-					[98, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 212],
-					[98, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 213],
-					[98, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 214],
-					[102, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 215],
-					[98, 122, 74]
-				],
-				[
-					[48, 101, -36],
-					[102, 102, 216],
-					[103, 122, 74]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 217],
-					[115, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 104, -92],
-					[105, 105, 218],
-					[106, 122, 74]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 219],
-					[115, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 220],
-					[102, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 221],
-					[102, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 222],
-					[98, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 223],
-					[98, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 224],
-					[117, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 109, -39],
-					[110, 110, 225],
-					[111, 122, 74]
-				],
-				[
-					[48, 109, -39],
-					[110, 110, 226],
-					[111, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 227],
-					[117, 122, 74]
-				],
-				[
-					[48, 101, -36],
-					[102, 102, 228],
-					[103, 109, 74],
-					[110, 110, 229],
-					[111, 122, 74]
-				],
-				[
-					[48, 99, -78],
-					[100, 100, 230],
-					[101, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 97, -29],
-					[98, 98, 231],
-					[99, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 102, 74],
-					[103, 103, 232],
-					[104, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 233],
-					[117, 122, 74]
-				],
-				[
-					[48, 98, -99],
-					[99, 99, 234],
-					[100, 122, 74]
-				],
-				[
-					[48, 97, -29],
-					[98, 98, 235],
-					[99, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 109, -39],
-					[110, 110, 236],
-					[111, 122, 74]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 237],
-					[98, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 113, -30],
-					[114, 114, 238],
-					[115, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 97, -29],
-					[98, 98, 239],
-					[99, 122, 74]
-				],
-				[
-					[48, 98, -99],
-					[99, 99, 240],
-					[100, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 116, -108],
-					[117, 117, 241],
-					[118, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 242],
-					[98, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 243],
-					[102, 122, 74]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 244],
-					[109, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 245],
-					[102, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 246],
-					[102, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 247],
-					[117, 122, 74]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 248],
-					[109, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 249],
-					[109, 122, 74]
-				],
-				[
-					[48, 114, -79],
-					[115, 115, 250],
-					[116, 122, 74]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 251],
-					[109, 122, 74]
-				],
-				[
-					[48, 115, -86],
-					[116, 116, 252],
-					[117, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 253],
-					[102, 122, 74]
-				],
-				[
-					[48, 98, -99],
-					[99, 99, 254],
-					[100, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 255],
-					[102, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 256],
-					[102, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 257],
-					[102, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 95, -29],
-					[97, 97, 258],
-					[98, 122, 74]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 259],
-					[102, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 100, -38],
-					[101, 101, 260],
-					[102, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 99, -78],
-					[100, 100, 261],
-					[101, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 107, -31],
-					[108, 108, 262],
-					[109, 122, 74]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				],
-				[
-					[48, 122, -35]
-				]
-			]
-		]
-	end
-
-	private fun nil_array: Array[Array[Int]]
-	do
-		return once new Array[Array[Int]]
-	end
-
-	var _accept_table: Array[Array[Int]]
-	private fun build_accept_table do
-		_accept_table = once [
-			[
-				-1,0,1,1,0,77,-1,-1,69,-1,52,53,67,65,56,66,64,68,81,57,72,59,74,78,54,55,-1,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,-1,1,71,-1,84,-1,85,-1,2,2,-1,83,60,61,63,82,-1,58,73,70,75,78,78,78,78,80,79,79,79,79,79,79,48,79,79,79,16,79,79,79,79,79,79,25,79,31,15,79,79,79,79,79,79,33,79,79,79,79,79,79,79,79,79,79,79,79,79,-1,87,-1,86,-1,2,62,76,80,80,80,80,79,79,32,79,79,79,79,79,10,79,79,30,11,79,79,79,41,79,79,79,40,34,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,19,79,79,-1,79,79,79,79,79,79,27,79,79,79,13,79,79,79,79,29,47,42,79,79,79,79,79,79,44,79,79,26,45,12,79,79,79,38,79,79,37,5,79,79,46,79,79,79,50,51,79,79,79,79,79,14,79,79,43,79,28,79,79,39,79,21,4,79,20,79,79,79,79,79,79,35,79,79,79,79,79,79,24,79,3,23,79,79,9,79,79,6,36,79,49,79,17,79,18,7,22,8
-
-			]
-		]
 	end
 end
 

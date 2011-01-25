@@ -577,16 +577,10 @@ redef class ICall
 		var w = new Writer
 		var prop = property
 		if prop.global.is_init then args.add("init_table")
-		if prop.name == (once ("add".to_symbol)) and prop.local_class.name == (once ("Array".to_symbol)) then
-			w.add(prop.cname)
-			w.add("(")
-		else
-			w.add(prop.global.meth_call)
-			w.add("(")
-			w.add(args.first)
-			w.add(")(")
-		end
-		var first = true
+		w.add(prop.global.meth_call)
+		w.add("(")
+		w.add(args.first)
+		w.add(")(")
 		w.add_all(args, ", ")
 		w.add(")")
 		return w
