@@ -2463,6 +2463,68 @@ redef class AGtMethid
         v.enter_visit(_n_gt)
     end
 end
+redef class ALlMethid
+    private init empty_init do end
+
+    init init_allmethid (
+            n_ll: nullable TLl
+    )
+    do
+        empty_init
+        _n_ll = n_ll.as(not null)
+	n_ll.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_ll == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TLl
+                _n_ll = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_ll)
+    end
+end
+redef class AGgMethid
+    private init empty_init do end
+
+    init init_aggmethid (
+            n_gg: nullable TGg
+    )
+    do
+        empty_init
+        _n_gg = n_gg.as(not null)
+	n_gg.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_gg == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TGg
+                _n_gg = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_gg)
+    end
+end
 redef class ABraMethid
     private init empty_init do end
 
@@ -4483,6 +4545,51 @@ redef class ALeExpr
         v.enter_visit(_n_expr2)
     end
 end
+redef class ALlExpr
+    private init empty_init do end
+
+    init init_allexpr (
+            n_expr: nullable AExpr,
+            n_expr2: nullable AExpr
+    )
+    do
+        empty_init
+        _n_expr = n_expr.as(not null)
+	n_expr.parent = self
+        _n_expr2 = n_expr2.as(not null)
+	n_expr2.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_expr == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExpr
+                _n_expr = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_expr2 == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExpr
+                _n_expr2 = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
+    end
+end
 redef class AGtExpr
     private init empty_init do end
 
@@ -4532,6 +4639,51 @@ redef class AGeExpr
     private init empty_init do end
 
     init init_ageexpr (
+            n_expr: nullable AExpr,
+            n_expr2: nullable AExpr
+    )
+    do
+        empty_init
+        _n_expr = n_expr.as(not null)
+	n_expr.parent = self
+        _n_expr2 = n_expr2.as(not null)
+	n_expr2.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_expr == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExpr
+                _n_expr = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_expr2 == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExpr
+                _n_expr2 = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_expr2)
+    end
+end
+redef class AGgExpr
+    private init empty_init do end
+
+    init init_aggexpr (
             n_expr: nullable AExpr,
             n_expr2: nullable AExpr
     )
