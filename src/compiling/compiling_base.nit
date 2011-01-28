@@ -86,9 +86,11 @@ class CProgram
 		var verbose = ""
 		var tc = program.tc
 
-		if tc.verbose_level > 0 then
-			verbose = "-"
-			for i in [1..tc.verbose_level] do verbose = verbose + "v"
+		if tc.verbose_level == 1 then
+			verbose = "-v"
+		else if tc.verbose_level >= 2 then
+			# We catch tc.verbose_level >= 2, since 3+ is not valid with gccx
+			verbose = "-vv"
 		end
 
 		f.write("#!/bin/sh\n")
