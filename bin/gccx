@@ -66,6 +66,11 @@ fi
 return $res
 }
 
+cache=true
+if ccache -V 2>&1 >/dev/null; then
+	cache=ccache
+fi
+
 stop=false
 verbose=false
 vverbose=false
@@ -91,6 +96,10 @@ if [ $nolibgc != true ] && test_libgc; then
 	OPTS="$OPTS -DWITH_LIBGC -lgc"
 fi
 
+if [ $cache = "ccache" ]; then
+	CC="ccache $CC"
+fi
+
 for i in "$@"; do
 	j=`basename "$i" .c`
 	transformed=`echo "$i" | sed "
@@ -107,6 +116,13 @@ for i in "$@"; do
 	"`
 
 	found="false"
+	if [ $cache != true ]; then
+		o="$dir$j.o"
+		if [ $vverbose = true  ] ; then
+			echo "* $CC $OPTS -c $i -o $o" >&2
+		fi
+		$CC $OPTS -c $i -o $o || exit 1
+	else
 	# We remove starting # to be path independent (after preprocess, there are the only # remainings)
 	cksum=`gcc -E $OPTS $i 2> /dev/null | grep -v "^#" | $CKSUM`
 	for e in $ext; do
@@ -137,6 +153,7 @@ for i in "$@"; do
 			exit 1
 		fi
 	fi
+fi
 	objs="$objs $o"
 done
 
