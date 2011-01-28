@@ -143,7 +143,7 @@ redef class Program
 	fun do_table_computation
 	do
 		tc.info("Building tables",1)
-		for m in module.mhe.greaters_and_self do
+		for m in main_module.mhe.greaters_and_self do
 			tc.info("Building tables for module: {m.name}",2)
 			m.local_analysis
 		end
@@ -170,7 +170,7 @@ redef class Program
 
 		# We have to work on ALL the classes of the module
 		var classes = new Array[MMLocalClass]
-		for c in module.local_classes do classes.add(c)
+		for c in main_module.local_classes do classes.add(c)
 		classes.sort !cmp(x,y) = x.total_order_compare(y)
 
 		for c in classes do
@@ -181,7 +181,7 @@ redef class Program
 			# Assign a unique class identifier
 			# (negative are for primitive classes)
 			var gc = c.global
-			var bm = gc.module
+			var bm = gc.mmmodule
 			if c.primitive_info != null then
 				cc.id = pclassid
 				pclassid = pclassid - 4
@@ -480,7 +480,7 @@ special TableElt
 special AbsTableEltClass
 	redef fun is_related_to(c)
 	do
-		var bc = c.module[_local_class.global]
+		var bc = c.mmmodule[_local_class.global]
 		return c.cshe <= bc
 	end
 end

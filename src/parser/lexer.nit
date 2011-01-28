@@ -41,15 +41,15 @@ redef class TComment
     end
 end
 
-redef class TKwpackage
+redef class TKwmodule
     redef fun parser_index: Int
     do
 	return 2
     end
 
-    init init_tk(loc: Location)
+    init init_tk(text: String, loc: Location)
     do
-        _text = once "package"
+        _text = text
 		_location = loc
     end
 end
@@ -1346,7 +1346,8 @@ special TablesCapable
 						return new TComment.init_tk(token_text, location)
 					end
 					if accept_token == 3 then
-						return new TKwpackage.init_tk(location)
+						var token_text = text.substring(0, accept_length)
+						return new TKwmodule.init_tk(token_text, location)
 					end
 					if accept_token == 4 then
 						return new TKwimport.init_tk(location)

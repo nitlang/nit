@@ -118,7 +118,7 @@ redef class MMLocalClass
 		file.write("class {self}\n")
 		if global.visibility_level == 3 and not self == global.intro then
 			file.write("\tclass not visible in this module\n")
-		else if module.visibility_for(global.module) == 0 then
+		else if mmmodule.visibility_for(global.mmmodule) == 0 then
 			file.write("\tclass is defined later in the hierarchy\n")
 		else
 			for p in global_properties do

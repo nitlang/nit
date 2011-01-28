@@ -27,7 +27,7 @@ redef class Program
 
 	# This method will create a file and output this optimization's stats in it
 	fun dump_inline_get_set(directory_name: String) do
-		var f = new OFStream.open("{directory_name}/{module.name}.inline_get_set.log")
+		var f = new OFStream.open("{directory_name}/{main_module.name}.inline_get_set.log")
 
 		f.write ("Number of getters and setters inlined: {_number_getter_setter_inlined}\n")
 

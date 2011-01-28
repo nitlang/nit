@@ -71,15 +71,15 @@ redef class AModule
     private init empty_init do end
 
     init init_amodule (
-            n_packagedecl: nullable APackagedecl,
+            n_moduledecl: nullable AModuledecl,
             n_imports: Collection[Object], # Should be Collection[AImport]
             n_classdefs: Collection[Object] # Should be Collection[AClassdef]
     )
     do
         empty_init
-        _n_packagedecl = n_packagedecl
-	if n_packagedecl != null then
-		n_packagedecl.parent = self
+        _n_moduledecl = n_moduledecl
+	if n_moduledecl != null then
+		n_moduledecl.parent = self
 	end
 	for n in n_imports do
 		assert n isa AImport
@@ -95,13 +95,13 @@ redef class AModule
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
-        if _n_packagedecl == old_child then
+        if _n_moduledecl == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa APackagedecl
-                _n_packagedecl = new_child
+		assert new_child isa AModuledecl
+                _n_moduledecl = new_child
 	    else
-		_n_packagedecl = null
+		_n_moduledecl = null
             end
             return
 	end
@@ -133,8 +133,8 @@ redef class AModule
 
     redef fun visit_all(v: Visitor)
     do
-        if _n_packagedecl != null then
-            v.enter_visit(_n_packagedecl.as(not null))
+        if _n_moduledecl != null then
+            v.enter_visit(_n_moduledecl.as(not null))
         end
             for n in _n_imports do
                 v.enter_visit(n)
@@ -144,12 +144,12 @@ redef class AModule
 	    end
     end
 end
-redef class APackagedecl
+redef class AModuledecl
     private init empty_init do end
 
-    init init_apackagedecl (
+    init init_amoduledecl (
             n_doc: nullable ADoc,
-            n_kwpackage: nullable TKwpackage,
+            n_kwmodule: nullable TKwmodule,
             n_id: nullable TId
     )
     do
@@ -158,8 +158,8 @@ redef class APackagedecl
 	if n_doc != null then
 		n_doc.parent = self
 	end
-        _n_kwpackage = n_kwpackage.as(not null)
-	n_kwpackage.parent = self
+        _n_kwmodule = n_kwmodule.as(not null)
+	n_kwmodule.parent = self
         _n_id = n_id.as(not null)
 	n_id.parent = self
     end
@@ -176,11 +176,11 @@ redef class APackagedecl
             end
             return
 	end
-        if _n_kwpackage == old_child then
+        if _n_kwmodule == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa TKwpackage
-                _n_kwpackage = new_child
+		assert new_child isa TKwmodule
+                _n_kwmodule = new_child
 	    else
 		abort
             end
@@ -203,7 +203,7 @@ redef class APackagedecl
         if _n_doc != null then
             v.enter_visit(_n_doc.as(not null))
         end
-        v.enter_visit(_n_kwpackage)
+        v.enter_visit(_n_kwmodule)
         v.enter_visit(_n_id)
     end
 end

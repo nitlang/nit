@@ -61,7 +61,7 @@ special ICodeVisitor
 		if ic isa INew then
 			# FIXME: take only the last property on the redef. hierarchie
 			var t = ic.stype
-			var cls = t.for_module(builder.program.module).local_class
+			var cls = t.for_module(builder.program.main_module).local_class
 			var m = cls[ic.property.global].as(MMMethod)
 			assert m.global.is_init
 			if not builder.context._methods.has_key(cls) then builder.context._methods[cls] = new List[MMMethod]

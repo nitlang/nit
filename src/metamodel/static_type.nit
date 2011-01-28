@@ -102,7 +102,7 @@ class MMSignature
 		if self == s then
 			return true
 		end
-		assert _recv.module == s.recv.module
+		assert _recv.mmmodule == s.recv.mmmodule
 		var rt = _return_type
 		var srt = s.return_type
 		if arity != s.arity or (rt == null) != (srt == null) then return false
@@ -155,7 +155,7 @@ class MMSignature
 		if _recv == r then
 			return self
 		end
-		var mod = r.module
+		var mod = r.mmmodule
 		var p = new Array[MMType]
 		for i in _params do
 			p.add(i.for_module(mod).adapt_to(r))
@@ -283,7 +283,7 @@ abstract class MMAncestor
 	fun inheriter: MMType do return _inheriter.as(not null)
 
 	fun is_reffinement: Bool do
-		return stype.module != stype.module
+		return stype.mmmodule != stype.mmmodule
 	end
 
 	fun is_specialisation: Bool do
@@ -307,7 +307,7 @@ end
 # Note that static type a related to a specific module
 abstract class MMType
 	# The module where self makes sence
-	fun module: MMModule is abstract
+	fun mmmodule: MMModule is abstract
 
 	# The local class that self direclty or indirectly refers to
 	fun local_class: MMLocalClass is abstract
@@ -387,7 +387,7 @@ special MMType
 	redef fun as_nullable do return self
 	init(t: MMType) do _base_type = t
 
-	redef fun module do return _base_type.module
+	redef fun mmmodule do return _base_type.mmmodule
 
 	redef fun local_class do return _base_type.local_class
 
@@ -430,7 +430,7 @@ end
 class MMTypeClass 
 special MMType
 	redef readable var _local_class: MMLocalClass
-	redef fun module do return _local_class.module end
+	redef fun mmmodule do return _local_class.mmmodule end
 	redef fun <(t) do return t.is_supertype(self)
 
 	redef fun to_s
@@ -463,7 +463,7 @@ special MMTypeClass
 	redef fun for_module(mod)
 	do
 		var t: MMType = self
-		if module != mod then
+		if mmmodule != mod then
 			t = _local_class.for_module(mod).get_type
 		end
 		return t
@@ -480,7 +480,7 @@ end
 # The type of null
 class MMTypeNone
 special MMType
-	redef readable var _module: MMModule
+	redef readable var _mmmodule: MMModule
 	redef fun is_nullable: Bool do return true
 	redef fun <(t) do return t isa MMTypeNone or t isa MMNullableType
 	redef fun to_s do return "null"
@@ -490,7 +490,7 @@ special MMType
 	redef fun as_nullable do return self
 	redef fun as_notnull do abort
 
-	private init(m: MMModule) do _module = m
+	private init(m: MMModule) do _mmmodule = m
 end
 
 redef class MMModule

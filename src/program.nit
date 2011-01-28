@@ -39,7 +39,7 @@ class Program
 	readable var _tc: ToolContext
 
 	# This module is the 'main' module, the one where we find the 'main' method
-	readable var _module: MMModule
+	readable var _main_module: MMModule
 
 	# This method is the entry point of this program
 	# There might be no entry point (if in fact we are compiling a library)
@@ -53,7 +53,7 @@ class Program
 	# start using all the classes
 	private fun finish_processing_classes do
 		var classes = new Array[MMLocalClass]
-		for c in module.local_classes do
+		for c in main_module.local_classes do
 			c.compute_super_classes
 			classes.add(c)
 		end
@@ -66,8 +66,8 @@ class Program
 	fun compute_main_method do
 		# Check for the 'Sys' class
 		var sysname = once "Sys".to_symbol
-		if not module.has_global_class_named(sysname) then return
-		var sys = module.class_by_name(sysname)
+		if not main_module.has_global_class_named(sysname) then return
+		var sys = main_module.class_by_name(sysname)
 
 		# Check for 'Sys::main' method
 		var entryname = once "main".to_symbol
@@ -80,7 +80,7 @@ class Program
 	# Generation of allocation function of this class
 	fun generate_allocation_iroutines
 	do
-		for c in module.local_classes do
+		for c in main_module.local_classes do
 			if c.global.is_abstract or c.global.is_interface then continue
 			var pi = c.primitive_info
 			if pi == null then
@@ -89,7 +89,7 @@ class Program
 					var iself = new IRegister(c.get_type)
 					var iselfa = [iself]
 					var iroutine = new IRoutine(iselfa, null)
-					var icb = new ICodeBuilder(module, iroutine)
+					var icb = new ICodeBuilder(main_module, iroutine)
 
 					for g in c.global_properties do
 						if not g.intro isa MMAttribute then continue
@@ -111,7 +111,7 @@ class Program
 					var iself = new IRegister(c.get_type)
 					var iselfa = [iself]
 					var iroutine = new IRoutine(iselfa, null)
-					var icb = new ICodeBuilder(module, iroutine)
+					var icb = new ICodeBuilder(main_module, iroutine)
 					for g in c.global_properties do
 						if not g.intro isa MMAttribute then continue
 						var p = c[g]
@@ -135,7 +135,7 @@ class Program
 					for i in [0..p.signature.arity[ do iparams.add(new IRegister(p.signature[i]))
 					var iroutine = new IRoutine(iparams, iself)
 					iroutine.location = p.iroutine.location
-					var icb = new ICodeBuilder(module, iroutine)
+					var icb = new ICodeBuilder(main_module, iroutine)
 
 					var inew = new IAllocateInstance(c.get_type)
 					inew.result = iself
@@ -158,7 +158,7 @@ class Program
 	fun with_each_iroutines
 		!action(i: IRoutine, m: MMModule)
 	do
-		for m in module.mhe.greaters_and_self do
+		for m in main_module.mhe.greaters_and_self do
 			for c in m.local_classes do
 				var iroutine: nullable IRoutine = null
 
@@ -194,7 +194,7 @@ class Program
 	fun with_each_methods
 		!action(m: MMMethod)
 	do
-		for m in module.mhe.greaters_and_self do
+		for m in main_module.mhe.greaters_and_self do
 			for c in m.local_classes do
 				# Process methods and attributes initialization
 				for p in c.local_local_properties do
@@ -211,13 +211,13 @@ class Program
 	fun with_each_live_local_classes
 		!action(m: MMLocalClass)
 	do
-		for c in module.local_classes do
+		for c in main_module.local_classes do
 			action(c)
 		end
 	end
 
 	init(m: MMModule, toolcontext: ToolContext) do
-		_module = m
+		_main_module = m
 		_tc = toolcontext
 		finish_processing_classes
 	end

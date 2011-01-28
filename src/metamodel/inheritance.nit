@@ -81,7 +81,7 @@ redef class MMLocalClass
 		var set = new HashSet[MMLocalClass]
 		set.add_all(supers)
 		var u = set.to_a
-		module.set_supers_class(self,u)
+		mmmodule.set_supers_class(self,u)
 		assert _crhe != null
 		assert _cshe != null
 		_computing_super = false
@@ -123,7 +123,7 @@ redef class MMLocalClass
 				set.add(glob) # Add the global property
 
 				# Do not inherit constructors trough specialization
-				#print "{c.module}::{c} -> {module}::{self} for {glob.local_property.local_class.module}::{glob.local_property.local_class}::{glob.local_property} : {glob.is_init}"
+				#print "{c.mmmodule}::{c} -> {mmmodule}::{self} for {glob.local_property.local_class.mmmodule}::{glob.local_property.local_class}::{glob.local_property} : {glob.is_init}"
 				if glob.is_init and glob.intro.local_class.global != global then
 					#print "pass"
 					continue
@@ -237,7 +237,7 @@ redef class MMLocalClass
 		if _ancestors.has_key(c) then
 			return _ancestors[c]
 		end
-		var a = c.for_module(module)
+		var a = c.for_module(mmmodule)
 		assert cshe <= a
 		var ra: MMAncestor
 		if _ancestors.has_key(a) then
@@ -266,7 +266,7 @@ redef class MMLocalClass
 	private fun add_default_any_class(supers: Array[MMLocalClass])
 	do
 		if supers.is_empty and name != once ("Object".to_symbol) then
-			var t_any = module.type_any
+			var t_any = mmmodule.type_any
 			supers.add(t_any.local_class)
 			var default = new MMDefaultAncestor(self, t_any)
 			add_direct_parent(default)
@@ -279,7 +279,7 @@ redef class MMLocalClass
 		assert _crhe != null
 		for ref in _crhe.direct_greaters do
 			for sup in ref.cshe.direct_greaters do
-				var cla = sup.for_module(_module)
+				var cla = sup.for_module(_mmmodule)
 				supers.add(cla)
 			end
 		end
@@ -403,7 +403,7 @@ redef class MMLocalClass
 			# Conflict case (FIXME)
 			if impls2.length != 1 then
 				stderr.write("Fatal error: inherit_local_property error\n")
-				print("------- {module}::{self} {glob.intro.full_name}")
+				print("------- {mmmodule}::{self} {glob.intro.full_name}")
 				for i in impls2 do
 					print("   {i.full_name}")
 				end
@@ -448,8 +448,8 @@ redef class MMAncestor
 		tab.add(self)
 		stype.local_class.compute_ancestors
 		for anc in stype.local_class.ancestors.as(not null) do
-			var aaa = anc.stype.for_module(stype.module)
-			var a = aaa.adapt_to(stype).for_module(inheriter.module)
+			var aaa = anc.stype.for_module(stype.mmmodule)
+			var a = aaa.adapt_to(stype).for_module(inheriter.mmmodule)
 			if a.local_class != inheriter.local_class then
 				var it = tab.iterator
 				var b = true

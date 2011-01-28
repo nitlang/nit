@@ -84,7 +84,7 @@ special ICodeBuilder
 
 	init(visitor: AbsSyntaxVisitor, r: IRoutine, m: nullable MMMethod)
 	do
-		super(visitor.module, r)
+		super(visitor.mmmodule, r)
 		_visitor = visitor
 		_return_seq = r.body
 		_return_value = r.result
@@ -787,7 +787,7 @@ redef class AOrElseExpr
 
 		# Compare left and null
 		var n = v.lit_null_reg
-		var c = v.expr(new IIs(e, n), v.module.type_bool)
+		var c = v.expr(new IIs(e, n), v.mmmodule.type_bool)
 		var iif = new IIf(c)
 		v.stmt(iif)
 		var old_seq = v.seq

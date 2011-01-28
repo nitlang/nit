@@ -38,7 +38,7 @@ redef class Program
 
 	# This method will create a file and output informations about this optimization
 	fun dump_dead_method_optimization(directory_name: String) do
-		var f = new OFStream.open("{directory_name}/{module.name}.dmr_opt.log")
+		var f = new OFStream.open("{directory_name}/{main_module.name}.dmr_opt.log")
 
 		f.write("Nb. dead iroutines removed: {nb_removed_iroutines}\n")
 		f.write("Nb. live iroutines: {nb_not_removed_iroutines}\n")

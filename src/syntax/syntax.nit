@@ -53,15 +53,15 @@ special ModuleLoader
 		var node_module = node_tree.n_base
 		assert node_module != null
 		var module_loc = new Location.with_file(filename)
-		var module = new MMSrcModule(context, node_module, dir, name, module_loc)
-		return module
+		var mod = new MMSrcModule(context, node_module, dir, name, module_loc)
+		return mod
 	end
 
-	redef fun process_metamodel(context, module)
+	redef fun process_metamodel(context, mod)
 	do
-		module.process_supermodules(context)
-		context.info("Syntax analysis for module: {module.name}", 2)
-		module.process_syntax(context)
+		mod.process_supermodules(context)
+		context.info("Syntax analysis for module: {mod.name}", 2)
+		mod.process_syntax(context)
 	end
 
 	init do end

@@ -40,11 +40,11 @@ class MMContext
 	readable var _modules: Array[MMModule] = new Array[MMModule]
 
 	# Register a new module with the modules it depends on
-	fun add_module(module: MMModule, supers: Array[MMModule])
+	fun add_module(mod: MMModule, supers: Array[MMModule])
 	do
-		_module_hierarchy.add(module, _module_hierarchy.select_smallests(supers))
-		_modules.add(module)
-		module._mhe = _module_hierarchy[module]
+		_module_hierarchy.add(mod, _module_hierarchy.select_smallests(supers))
+		_modules.add(mod)
+		mod._mhe = _module_hierarchy[mod]
 	end
 
 	# Register a global class
@@ -88,10 +88,10 @@ class MMDirectory
 	readable var _modules: Map[Symbol, MMModule] = new HashMap[Symbol, MMModule]
 
 	# Register a new module
-	fun add_module(module: MMModule)
+	fun add_module(mod: MMModule)
 	do
-		assert not _modules.has_key(module.name)
-		_modules[module.name] = module
+		assert not _modules.has_key(mod.name)
+		_modules[mod.name] = mod
 	end
 
 	init(name: Symbol, path: String, parent: nullable MMDirectory) do
@@ -271,9 +271,9 @@ class MMGlobalClass
 	end
 
 	# The module that introduces the global class
-	fun module: MMModule
+	fun mmmodule: MMModule
 	do
-		return intro.module
+		return intro.mmmodule
 	end
 
 	redef fun to_s
@@ -286,7 +286,7 @@ class MMGlobalClass
 	do
 		var sup = new Array[MMLocalClass]
 		for s in class_refinement_hierarchy do
-			if c.module.mhe < s.module and s isa MMConcreteClass then
+			if c.mmmodule.mhe < s.mmmodule and s isa MMConcreteClass then
 				sup.add(s)
 			end
 		end
@@ -331,7 +331,7 @@ class MMLocalClass
 	readable var _arity : Int 
 
 	# The module of the local class
-	readable var _module: MMModule
+	readable var _mmmodule: MMModule
 
 	# The global class of the local class
 	fun global: MMGlobalClass do return _global.as(not null)
@@ -364,7 +364,7 @@ class MMLocalClass
 	# Create a new class with a given name and arity
 	protected init(mod: MMModule, name: Symbol, arity: Int)
 	do
-		_module = mod
+		_mmmodule = mod
 		_name = name
 		_arity = arity
 		mod._local_classes.add(self)
@@ -380,8 +380,8 @@ class MMLocalClass
 	fun new_global
 	do
 		var g = new MMGlobalClass(self)
-		_module._global_classes.add(g)
-		_module._global_class_by_name[name] = g
+		_mmmodule._global_classes.add(g)
+		_mmmodule._global_class_by_name[name] = g
 		set_global(g)
 	end
 
@@ -392,7 +392,7 @@ class MMLocalClass
 	do
 		_global = g
 		_global.register_local_class(self)
-		_module.register_global_class(self)
+		_mmmodule.register_global_class(self)
 	end
 
 	# Is there a global propery with a given name
@@ -499,7 +499,7 @@ class MMLocalClass
 	end
 
 	# The current MMContext
-	fun context: MMContext do return module.context
+	fun context: MMContext do return mmmodule.context
 
 	redef fun to_s
 	do
@@ -512,9 +512,9 @@ class MMLocalClass
 		var a = self
 		if a == b then
 			return 0
-		else if a.module.mhe < b.module then
+		else if a.mmmodule.mhe < b.mmmodule then
 			return 1
-		else if b.module.mhe < a.module then
+		else if b.mmmodule.mhe < a.mmmodule then
 			return -1
 		end
 		var ar = a.cshe.rank
@@ -605,17 +605,17 @@ class MMLocalProperty
 	fun prhe: PartialOrderElement[MMLocalProperty] do return _prhe.as(not null)
 
 	# The module of the local property
-	fun module: MMModule do return _local_class.module
+	fun mmmodule: MMModule do return _local_class.mmmodule
 
 	# Full expanded name with all qualifications
 	fun full_name: String
 	do
 		if _global == null then
-			return "{local_class.module}::{local_class}::(?::{name})"
+			return "{local_class.mmmodule}::{local_class}::(?::{name})"
 		else if global.intro == self then
-			return "{local_class.module}::{local_class}::{name}"
+			return "{local_class.mmmodule}::{local_class}::{name}"
 		else
-			return "{local_class.module}::{local_class}::({global.intro.full_name})"
+			return "{local_class.mmmodule}::{local_class}::({global.intro.full_name})"
 		end
 	end
 
