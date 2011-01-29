@@ -12,23 +12,23 @@ extern const int SFT_vararg[];
 #define CALL_SUPER_vararg___MMSignature___adaptation_to(recv) ((vararg___MMSignature___adaptation_to_t)CALL((recv), (SFT_vararg[1] + 3)))
 #define CALL_SUPER_vararg___MMSignature___not_for_self(recv) ((vararg___MMSignature___not_for_self_t)CALL((recv), (SFT_vararg[1] + 4)))
 #define CALL_SUPER_vararg___MMSignature___init(recv) ((vararg___MMSignature___init_t)CALL((recv), (SFT_vararg[1] + 5)))
-#define LOCATE_vararg___MMSignature___adaptation_to "vararg::MMSignature::(static_type::MMSignature::adaptation_to)"
+static const char * const LOCATE_vararg___MMSignature___vararg_rank = "vararg::MMSignature::vararg_rank";
+val_t vararg___MMSignature___vararg_rank(val_t p0);
+typedef val_t (*vararg___MMSignature___vararg_rank_t)(val_t p0);
+static const char * const LOCATE_vararg___MMSignature___vararg_rank__eq = "vararg::MMSignature::vararg_rank=";
+void vararg___MMSignature___vararg_rank__eq(val_t p0, val_t p1);
+typedef void (*vararg___MMSignature___vararg_rank__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_vararg___MMSignature___has_vararg = "vararg::MMSignature::has_vararg";
+val_t vararg___MMSignature___has_vararg(val_t p0);
+typedef val_t (*vararg___MMSignature___has_vararg_t)(val_t p0);
+static const char * const LOCATE_vararg___MMSignature___adaptation_to = "vararg::MMSignature::(static_type::MMSignature::adaptation_to)";
 val_t vararg___MMSignature___adaptation_to(val_t p0, val_t p1);
 typedef val_t (*vararg___MMSignature___adaptation_to_t)(val_t p0, val_t p1);
-#define LOCATE_vararg___MMSignature___not_for_self "vararg::MMSignature::(static_type::MMSignature::not_for_self)"
+static const char * const LOCATE_vararg___MMSignature___not_for_self = "vararg::MMSignature::(static_type::MMSignature::not_for_self)";
 val_t vararg___MMSignature___not_for_self(val_t p0);
 typedef val_t (*vararg___MMSignature___not_for_self_t)(val_t p0);
-#define LOCATE_vararg___MMSignature___init "vararg::MMSignature::(static_type::MMSignature::init)"
+static const char * const LOCATE_vararg___MMSignature___init = "vararg::MMSignature::(static_type::MMSignature::init)";
 void vararg___MMSignature___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*vararg___MMSignature___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMSignature_static_type___MMSignature___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_vararg___MMSignature___vararg_rank "vararg::MMSignature::vararg_rank"
-val_t vararg___MMSignature___vararg_rank(val_t p0);
-typedef val_t (*vararg___MMSignature___vararg_rank_t)(val_t p0);
-#define LOCATE_vararg___MMSignature___vararg_rank__eq "vararg::MMSignature::vararg_rank="
-void vararg___MMSignature___vararg_rank__eq(val_t p0, val_t p1);
-typedef void (*vararg___MMSignature___vararg_rank__eq_t)(val_t p0, val_t p1);
-#define LOCATE_vararg___MMSignature___has_vararg "vararg::MMSignature::has_vararg"
-val_t vararg___MMSignature___has_vararg(val_t p0);
-typedef val_t (*vararg___MMSignature___has_vararg_t)(val_t p0);
 #endif

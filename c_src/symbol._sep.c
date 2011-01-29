@@ -22,18 +22,20 @@ val_t symbol___String___to_symbol(val_t p0){
     once_value_1 = fra.me.REG[1];
     register_static_object(&once_value_1);
   } else fra.me.REG[1] = once_value_1;
-  REGB0 = CALL_abstract_collection___MapRead___has_key(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = fra.me.REG[1];
   /* ./../lib/standard//symbol.nit:24 */
+  REGB0 = CALL_abstract_collection___MapRead___has_key(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
-    fra.me.REG[2] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
     /* ./../lib/standard//symbol.nit:25 */
+    fra.me.REG[2] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
     goto label2;
   } else {
+    /* ./../lib/standard//symbol.nit:27 */
     fra.me.REG[3] = NEW_Symbol_symbol___Symbol___init(fra.me.REG[0]);
     /* ./../lib/standard//symbol.nit:28 */
     CALL_abstract_collection___Map_____braeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
-    fra.me.REG[2] = fra.me.REG[3];
     /* ./../lib/standard//symbol.nit:29 */
+    fra.me.REG[2] = fra.me.REG[3];
     goto label2;
   }
   label2: while(0);
@@ -52,13 +54,11 @@ val_t symbol___Symbol___to_s(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_symbol___Symbol____string(fra.me.REG[0])!=NIT_NULL);
   /* ./../lib/standard//symbol.nit:37 */
+  REGB0 = TAG_Bool(ATTR_symbol___Symbol____string(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_string");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_symbol, 37);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_string", LOCATE_symbol, 37);
   }
   fra.me.REG[0] = ATTR_symbol___Symbol____string(fra.me.REG[0]);
   fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);

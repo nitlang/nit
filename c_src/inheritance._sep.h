@@ -54,98 +54,123 @@ extern const int SFT_inheritance[];
 #define COLOR_MMDefaultAncestor (SFT_inheritance[16])
 #define INIT_TABLE_POS_MMDefaultAncestor (SFT_inheritance[17] + 0)
 #define CALL_inheritance___MMDefaultAncestor___init(recv) ((inheritance___MMDefaultAncestor___init_t)CALL((recv), (SFT_inheritance[17] + 1)))
-val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_inheritance___MMModule___type_any "inheritance::MMModule::type_any"
+static const char * const LOCATE_inheritance___MMModule___type_any = "inheritance::MMModule::type_any";
 val_t inheritance___MMModule___type_any(val_t p0);
 typedef val_t (*inheritance___MMModule___type_any_t)(val_t p0);
-#define LOCATE_inheritance___MMModule___import_global_classes "inheritance::MMModule::import_global_classes"
+static const char * const LOCATE_inheritance___MMModule___import_global_classes = "inheritance::MMModule::import_global_classes";
 void inheritance___MMModule___import_global_classes(val_t p0);
 typedef void (*inheritance___MMModule___import_global_classes_t)(val_t p0);
-#define LOCATE_inheritance___MMModule___import_local_classes "inheritance::MMModule::import_local_classes"
+      void OC_inheritance___MMModule___import_global_classes_1(struct stack_frame_t *closctx, val_t p0);
+      typedef void (*OC_inheritance___MMModule___import_global_classes_1_t)(struct stack_frame_t *closctx, val_t p0);
+static const char * const LOCATE_inheritance___MMModule___import_local_classes = "inheritance::MMModule::import_local_classes";
 void inheritance___MMModule___import_local_classes(val_t p0);
 typedef void (*inheritance___MMModule___import_local_classes_t)(val_t p0);
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_inheritance___MMLocalClass_____bra "inheritance::MMLocalClass::(abstractmetamodel::MMLocalClass::[])"
-val_t inheritance___MMLocalClass_____bra(val_t p0, val_t p1);
-typedef val_t (*inheritance___MMLocalClass_____bra_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalClass___compute_super_classes "inheritance::MMLocalClass::compute_super_classes"
+  typedef void (*CLOS_OC_inheritance___MMModule___import_local_classes_1_0)(struct stack_frame_t *);
+  void OC_inheritance___MMModule___import_local_classes_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_inheritance___MMModule___import_local_classes_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
+static const char * const LOCATE_inheritance___MMLocalClass___compute_super_classes = "inheritance::MMLocalClass::compute_super_classes";
 void inheritance___MMLocalClass___compute_super_classes(val_t p0);
 typedef void (*inheritance___MMLocalClass___compute_super_classes_t)(val_t p0);
-#define LOCATE_inheritance___MMLocalClass___compute_ancestors "inheritance::MMLocalClass::compute_ancestors"
+static const char * const LOCATE_inheritance___MMLocalClass___compute_ancestors = "inheritance::MMLocalClass::compute_ancestors";
 void inheritance___MMLocalClass___compute_ancestors(val_t p0);
 typedef void (*inheritance___MMLocalClass___compute_ancestors_t)(val_t p0);
-#define LOCATE_inheritance___MMLocalClass___inherit_global_properties "inheritance::MMLocalClass::inherit_global_properties"
+  typedef void (*CLOS_OC_inheritance___MMLocalClass___compute_ancestors_2_0)(struct stack_frame_t *);
+  void OC_inheritance___MMLocalClass___compute_ancestors_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_inheritance___MMLocalClass___compute_ancestors_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_inheritance___MMLocalClass___inherit_global_properties = "inheritance::MMLocalClass::inherit_global_properties";
 void inheritance___MMLocalClass___inherit_global_properties(val_t p0);
 typedef void (*inheritance___MMLocalClass___inherit_global_properties_t)(val_t p0);
-#define LOCATE_inheritance___MMLocalClass___make_visible_an_inherited_global_property "inheritance::MMLocalClass::make_visible_an_inherited_global_property"
+      void OC_inheritance___MMLocalClass___inherit_global_properties_2(struct stack_frame_t *closctx, val_t p0);
+      typedef void (*OC_inheritance___MMLocalClass___inherit_global_properties_2_t)(struct stack_frame_t *closctx, val_t p0);
+static const char * const LOCATE_inheritance___MMLocalClass___global_properties = "inheritance::MMLocalClass::(abstractmetamodel::MMLocalClass::global_properties)";
+val_t inheritance___MMLocalClass___global_properties(val_t p0);
+typedef val_t (*inheritance___MMLocalClass___global_properties_t)(val_t p0);
+static const char * const LOCATE_inheritance___MMLocalClass___has_global_property = "inheritance::MMLocalClass::(abstractmetamodel::MMLocalClass::has_global_property)";
+val_t inheritance___MMLocalClass___has_global_property(val_t p0, val_t p1);
+typedef val_t (*inheritance___MMLocalClass___has_global_property_t)(val_t p0, val_t p1);
+static const char * const LOCATE_inheritance___MMLocalClass___has_global_property_by_name = "inheritance::MMLocalClass::(abstractmetamodel::MMLocalClass::has_global_property_by_name)";
+val_t inheritance___MMLocalClass___has_global_property_by_name(val_t p0, val_t p1);
+typedef val_t (*inheritance___MMLocalClass___has_global_property_by_name_t)(val_t p0, val_t p1);
+static const char * const LOCATE_inheritance___MMLocalClass___make_visible_an_inherited_global_property = "inheritance::MMLocalClass::make_visible_an_inherited_global_property";
 void inheritance___MMLocalClass___make_visible_an_inherited_global_property(val_t p0, val_t p1);
 typedef void (*inheritance___MMLocalClass___make_visible_an_inherited_global_property_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalClass___add_direct_parent "inheritance::MMLocalClass::add_direct_parent"
+static const char * const LOCATE_inheritance___MMLocalClass___add_direct_parent = "inheritance::MMLocalClass::add_direct_parent";
 void inheritance___MMLocalClass___add_direct_parent(val_t p0, val_t p1);
 typedef void (*inheritance___MMLocalClass___add_direct_parent_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalClass___computed_super_classes "inheritance::MMLocalClass::computed_super_classes"
+static const char * const LOCATE_inheritance___MMLocalClass___computed_super_classes = "inheritance::MMLocalClass::computed_super_classes";
 val_t inheritance___MMLocalClass___computed_super_classes(val_t p0);
 typedef val_t (*inheritance___MMLocalClass___computed_super_classes_t)(val_t p0);
-#define LOCATE_inheritance___MMLocalClass___computed_ancestors "inheritance::MMLocalClass::computed_ancestors"
+static const char * const LOCATE_inheritance___MMLocalClass___computed_ancestors = "inheritance::MMLocalClass::computed_ancestors";
 val_t inheritance___MMLocalClass___computed_ancestors(val_t p0);
 typedef val_t (*inheritance___MMLocalClass___computed_ancestors_t)(val_t p0);
-#define LOCATE_inheritance___MMLocalClass___ancestor_for "inheritance::MMLocalClass::ancestor_for"
+static const char * const LOCATE_inheritance___MMLocalClass___ancestor_for = "inheritance::MMLocalClass::ancestor_for";
 val_t inheritance___MMLocalClass___ancestor_for(val_t p0, val_t p1);
 typedef val_t (*inheritance___MMLocalClass___ancestor_for_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalClass___add_default_any_class "inheritance::MMLocalClass::add_default_any_class"
+static const char * const LOCATE_inheritance___MMLocalClass_____bra = "inheritance::MMLocalClass::(abstractmetamodel::MMLocalClass::[])";
+val_t inheritance___MMLocalClass_____bra(val_t p0, val_t p1);
+typedef val_t (*inheritance___MMLocalClass_____bra_t)(val_t p0, val_t p1);
+static const char * const LOCATE_inheritance___MMLocalClass___add_default_any_class = "inheritance::MMLocalClass::add_default_any_class";
 void inheritance___MMLocalClass___add_default_any_class(val_t p0, val_t p1);
 typedef void (*inheritance___MMLocalClass___add_default_any_class_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalClass___add_super_classes "inheritance::MMLocalClass::add_super_classes"
+static const char * const LOCATE_inheritance___MMLocalClass___add_super_classes = "inheritance::MMLocalClass::add_super_classes";
 void inheritance___MMLocalClass___add_super_classes(val_t p0, val_t p1);
 typedef void (*inheritance___MMLocalClass___add_super_classes_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalClass___add_explicit_classes "inheritance::MMLocalClass::add_explicit_classes"
+static const char * const LOCATE_inheritance___MMLocalClass___add_explicit_classes = "inheritance::MMLocalClass::add_explicit_classes";
 void inheritance___MMLocalClass___add_explicit_classes(val_t p0, val_t p1);
 typedef void (*inheritance___MMLocalClass___add_explicit_classes_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalClass___compute_super_parents "inheritance::MMLocalClass::compute_super_parents"
+static const char * const LOCATE_inheritance___MMLocalClass___compute_super_parents = "inheritance::MMLocalClass::compute_super_parents";
 void inheritance___MMLocalClass___compute_super_parents(val_t p0, val_t p1);
 typedef void (*inheritance___MMLocalClass___compute_super_parents_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalClass___build_ancestors "inheritance::MMLocalClass::build_ancestors"
+static const char * const LOCATE_inheritance___MMLocalClass___build_ancestors = "inheritance::MMLocalClass::build_ancestors";
 val_t inheritance___MMLocalClass___build_ancestors(val_t p0);
 typedef val_t (*inheritance___MMLocalClass___build_ancestors_t)(val_t p0);
-#define LOCATE_inheritance___MMLocalClass___group_ancestors "inheritance::MMLocalClass::group_ancestors"
+static const char * const LOCATE_inheritance___MMLocalClass___group_ancestors = "inheritance::MMLocalClass::group_ancestors";
 val_t inheritance___MMLocalClass___group_ancestors(val_t p0, val_t p1);
 typedef val_t (*inheritance___MMLocalClass___group_ancestors_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalClass___merge_ancestors "inheritance::MMLocalClass::merge_ancestors"
+static const char * const LOCATE_inheritance___MMLocalClass___merge_ancestors = "inheritance::MMLocalClass::merge_ancestors";
 val_t inheritance___MMLocalClass___merge_ancestors(val_t p0, val_t p1);
 typedef val_t (*inheritance___MMLocalClass___merge_ancestors_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalClass___inherit_local_property "inheritance::MMLocalClass::inherit_local_property"
+  typedef void (*CLOS_OC_inheritance___MMLocalClass___merge_ancestors_1_0)(struct stack_frame_t *);
+  void OC_inheritance___MMLocalClass___merge_ancestors_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_inheritance___MMLocalClass___merge_ancestors_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_inheritance___MMLocalClass___inherit_local_property = "inheritance::MMLocalClass::inherit_local_property";
 val_t inheritance___MMLocalClass___inherit_local_property(val_t p0, val_t p1);
 typedef val_t (*inheritance___MMLocalClass___inherit_local_property_t)(val_t p0, val_t p1);
-val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMLocalProperty___inherit_global "inheritance::MMLocalProperty::inherit_global"
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_inheritance___MMLocalProperty___inherit_global = "inheritance::MMLocalProperty::inherit_global";
 void inheritance___MMLocalProperty___inherit_global(val_t p0, val_t p1);
 typedef void (*inheritance___MMLocalProperty___inherit_global_t)(val_t p0, val_t p1);
-val_t NEW_MMAncestor_static_type___MMAncestor___init();
-#define LOCATE_inheritance___MMAncestor___add_in "inheritance::MMAncestor::add_in"
+val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
+static const char * const LOCATE_inheritance___MMAncestor___add_in = "inheritance::MMAncestor::add_in";
 void inheritance___MMAncestor___add_in(val_t p0, val_t p1);
 typedef void (*inheritance___MMAncestor___add_in_t)(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMImplicitLocalClass___init "inheritance::MMImplicitLocalClass::init"
+  typedef void (*CLOS_OC_inheritance___MMAncestor___add_in_1_0)(struct stack_frame_t *);
+  void OC_inheritance___MMAncestor___add_in_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_inheritance___MMAncestor___add_in_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_MMAncestor_static_type___MMAncestor___init();
+static const char * const LOCATE_inheritance___MMImplicitLocalClass___init = "inheritance::MMImplicitLocalClass::init";
 void inheritance___MMImplicitLocalClass___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*inheritance___MMImplicitLocalClass___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_MMImplicitLocalClass_inheritance___MMImplicitLocalClass___init(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMRefineAncestor___local_class "inheritance::MMRefineAncestor::(static_type::MMAncestor::local_class)"
+static const char * const LOCATE_inheritance___MMRefineAncestor___local_class = "inheritance::MMRefineAncestor::(static_type::MMAncestor::local_class)";
 val_t inheritance___MMRefineAncestor___local_class(val_t p0);
 typedef val_t (*inheritance___MMRefineAncestor___local_class_t)(val_t p0);
-#define LOCATE_inheritance___MMRefineAncestor___init "inheritance::MMRefineAncestor::init"
+static const char * const LOCATE_inheritance___MMRefineAncestor___init = "inheritance::MMRefineAncestor::init";
 void inheritance___MMRefineAncestor___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*inheritance___MMRefineAncestor___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_MMRefineAncestor_inheritance___MMRefineAncestor___init(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMSpecAncestor___local_class "inheritance::MMSpecAncestor::(static_type::MMAncestor::local_class)"
+static const char * const LOCATE_inheritance___MMSpecAncestor___local_class = "inheritance::MMSpecAncestor::(static_type::MMAncestor::local_class)";
 val_t inheritance___MMSpecAncestor___local_class(val_t p0);
 typedef val_t (*inheritance___MMSpecAncestor___local_class_t)(val_t p0);
-#define LOCATE_inheritance___MMSpecAncestor___init "inheritance::MMSpecAncestor::init"
+static const char * const LOCATE_inheritance___MMSpecAncestor___init = "inheritance::MMSpecAncestor::init";
 void inheritance___MMSpecAncestor___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*inheritance___MMSpecAncestor___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_MMSpecAncestor_inheritance___MMSpecAncestor___init(val_t p0, val_t p1);
-#define LOCATE_inheritance___MMDefaultAncestor___local_class "inheritance::MMDefaultAncestor::(static_type::MMAncestor::local_class)"
+static const char * const LOCATE_inheritance___MMDefaultAncestor___local_class = "inheritance::MMDefaultAncestor::(static_type::MMAncestor::local_class)";
 val_t inheritance___MMDefaultAncestor___local_class(val_t p0);
 typedef val_t (*inheritance___MMDefaultAncestor___local_class_t)(val_t p0);
-#define LOCATE_inheritance___MMDefaultAncestor___init "inheritance::MMDefaultAncestor::init"
+static const char * const LOCATE_inheritance___MMDefaultAncestor___init = "inheritance::MMDefaultAncestor::init";
 void inheritance___MMDefaultAncestor___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*inheritance___MMDefaultAncestor___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_MMDefaultAncestor_inheritance___MMDefaultAncestor___init(val_t p0, val_t p1);

@@ -19,28 +19,37 @@ extern const int SFT_abstracttool[];
 #define CALL_abstracttool___AbstractCompiler___dump_context_info(recv) ((abstracttool___AbstractCompiler___dump_context_info_t)CALL((recv), (SFT_abstracttool[3] + 5)))
 #define CALL_abstracttool___MMModule___dump_module_info(recv) ((abstracttool___MMModule___dump_module_info_t)CALL((recv), (SFT_abstracttool[4] + 0)))
 #define CALL_abstracttool___MMLocalClass___dump_properties(recv) ((abstracttool___MMLocalClass___dump_properties_t)CALL((recv), (SFT_abstracttool[5] + 0)))
-#define LOCATE_abstracttool___AbstractCompiler___init "abstracttool::AbstractCompiler::init"
+static const char * const LOCATE_abstracttool___AbstractCompiler___init = "abstracttool::AbstractCompiler::init";
 void abstracttool___AbstractCompiler___init(val_t p0, val_t p1, int* init_table);
 typedef void (*abstracttool___AbstractCompiler___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_AbstractCompiler_abstracttool___AbstractCompiler___init(val_t p0);
-#define LOCATE_abstracttool___AbstractCompiler___tool_name "abstracttool::AbstractCompiler::tool_name"
+static const char * const LOCATE_abstracttool___AbstractCompiler___tool_name = "abstracttool::AbstractCompiler::tool_name";
 val_t abstracttool___AbstractCompiler___tool_name(val_t p0);
 typedef val_t (*abstracttool___AbstractCompiler___tool_name_t)(val_t p0);
-#define LOCATE_abstracttool___AbstractCompiler___exec_cmd_line "abstracttool::AbstractCompiler::exec_cmd_line"
+static const char * const LOCATE_abstracttool___AbstractCompiler___exec_cmd_line = "abstracttool::AbstractCompiler::exec_cmd_line";
 void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0);
 typedef void (*abstracttool___AbstractCompiler___exec_cmd_line_t)(val_t p0);
-#define LOCATE_abstracttool___AbstractCompiler___perform_work "abstracttool::AbstractCompiler::perform_work"
+static const char * const LOCATE_abstracttool___AbstractCompiler___perform_work = "abstracttool::AbstractCompiler::perform_work";
 void abstracttool___AbstractCompiler___perform_work(val_t p0, val_t p1);
 typedef void (*abstracttool___AbstractCompiler___perform_work_t)(val_t p0, val_t p1);
-#define LOCATE_abstracttool___AbstractCompiler___dump_context_info "abstracttool::AbstractCompiler::dump_context_info"
+static const char * const LOCATE_abstracttool___AbstractCompiler___dump_context_info = "abstracttool::AbstractCompiler::dump_context_info";
 void abstracttool___AbstractCompiler___dump_context_info(val_t p0);
 typedef void (*abstracttool___AbstractCompiler___dump_context_info_t)(val_t p0);
+  typedef void (*CLOS_OC_abstracttool___AbstractCompiler___dump_context_info_1_0)(struct stack_frame_t *);
+  void OC_abstracttool___AbstractCompiler___dump_context_info_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_abstracttool___AbstractCompiler___dump_context_info_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_abstracttool___MMModule___dump_module_info = "abstracttool::MMModule::dump_module_info";
+void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1);
+typedef void (*abstracttool___MMModule___dump_module_info_t)(val_t p0, val_t p1);
+  typedef void (*CLOS_OC_abstracttool___MMModule___dump_module_info_8_0)(struct stack_frame_t *);
+  void OC_abstracttool___MMModule___dump_module_info_8(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_abstracttool___MMModule___dump_module_info_8_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_abstracttool___MMModule___dump_module_info "abstracttool::MMModule::dump_module_info"
-void abstracttool___MMModule___dump_module_info(val_t p0);
-typedef void (*abstracttool___MMModule___dump_module_info_t)(val_t p0);
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_abstracttool___MMLocalClass___dump_properties "abstracttool::MMLocalClass::dump_properties"
+static const char * const LOCATE_abstracttool___MMLocalClass___dump_properties = "abstracttool::MMLocalClass::dump_properties";
 void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1);
 typedef void (*abstracttool___MMLocalClass___dump_properties_t)(val_t p0, val_t p1);
+      typedef void (*CLOS_OC_abstracttool___MMLocalClass___dump_properties_5_0)(struct stack_frame_t *);
+      void OC_abstracttool___MMLocalClass___dump_properties_5(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+      typedef void (*OC_abstracttool___MMLocalClass___dump_properties_5_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 #endif

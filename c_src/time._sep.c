@@ -12,8 +12,8 @@ val_t time___Object___get_time(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = TAG_Int(kernel_Any_Any_get_time_0(fra.me.REG[0]));
   /* ./../lib/standard//time.nit:18 */
+  REGB0 = TAG_Int(kernel_Any_Any_get_time_0(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
 }

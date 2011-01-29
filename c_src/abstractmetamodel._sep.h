@@ -108,7 +108,7 @@ extern const int SFT_abstractmetamodel[];
 #define CALL_abstractmetamodel___MMGlobalClass___class_refinement_hierarchy(recv) ((abstractmetamodel___MMGlobalClass___class_refinement_hierarchy_t)CALL((recv), (SFT_abstractmetamodel[15] + 2)))
 #define CALL_abstractmetamodel___MMGlobalClass___init(recv) ((abstractmetamodel___MMGlobalClass___init_t)CALL((recv), (SFT_abstractmetamodel[15] + 3)))
 #define CALL_abstractmetamodel___MMGlobalClass___name(recv) ((abstractmetamodel___MMGlobalClass___name_t)CALL((recv), (SFT_abstractmetamodel[15] + 4)))
-#define CALL_abstractmetamodel___MMGlobalClass___module(recv) ((abstractmetamodel___MMGlobalClass___module_t)CALL((recv), (SFT_abstractmetamodel[15] + 5)))
+#define CALL_abstractmetamodel___MMGlobalClass___mmmodule(recv) ((abstractmetamodel___MMGlobalClass___mmmodule_t)CALL((recv), (SFT_abstractmetamodel[15] + 5)))
 #define CALL_abstractmetamodel___MMGlobalClass___register_local_class(recv) ((abstractmetamodel___MMGlobalClass___register_local_class_t)CALL((recv), (SFT_abstractmetamodel[15] + 6)))
 #define CALL_abstractmetamodel___MMGlobalClass___is_interface(recv) ((abstractmetamodel___MMGlobalClass___is_interface_t)CALL((recv), (SFT_abstractmetamodel[15] + 7)))
 #define CALL_abstractmetamodel___MMGlobalClass___is_interface__eq(recv) ((abstractmetamodel___MMGlobalClass___is_interface__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 8)))
@@ -125,7 +125,7 @@ extern const int SFT_abstractmetamodel[];
 #define COLOR_MMLocalClass (SFT_abstractmetamodel[17])
 #define ATTR_abstractmetamodel___MMLocalClass____name(recv) ATTR(recv, (SFT_abstractmetamodel[18] + 0))
 #define ATTR_abstractmetamodel___MMLocalClass____arity(recv) ATTR(recv, (SFT_abstractmetamodel[18] + 1))
-#define ATTR_abstractmetamodel___MMLocalClass____module(recv) ATTR(recv, (SFT_abstractmetamodel[18] + 2))
+#define ATTR_abstractmetamodel___MMLocalClass____mmmodule(recv) ATTR(recv, (SFT_abstractmetamodel[18] + 2))
 #define ATTR_abstractmetamodel___MMLocalClass____global(recv) ATTR(recv, (SFT_abstractmetamodel[18] + 3))
 #define ATTR_abstractmetamodel___MMLocalClass____crhe(recv) ATTR(recv, (SFT_abstractmetamodel[18] + 4))
 #define ATTR_abstractmetamodel___MMLocalClass____cshe(recv) ATTR(recv, (SFT_abstractmetamodel[18] + 5))
@@ -137,7 +137,7 @@ extern const int SFT_abstractmetamodel[];
 #define INIT_TABLE_POS_MMLocalClass (SFT_abstractmetamodel[19] + 0)
 #define CALL_abstractmetamodel___MMLocalClass___name(recv) ((abstractmetamodel___MMLocalClass___name_t)CALL((recv), (SFT_abstractmetamodel[19] + 1)))
 #define CALL_abstractmetamodel___MMLocalClass___arity(recv) ((abstractmetamodel___MMLocalClass___arity_t)CALL((recv), (SFT_abstractmetamodel[19] + 2)))
-#define CALL_abstractmetamodel___MMLocalClass___module(recv) ((abstractmetamodel___MMLocalClass___module_t)CALL((recv), (SFT_abstractmetamodel[19] + 3)))
+#define CALL_abstractmetamodel___MMLocalClass___mmmodule(recv) ((abstractmetamodel___MMLocalClass___mmmodule_t)CALL((recv), (SFT_abstractmetamodel[19] + 3)))
 #define CALL_abstractmetamodel___MMLocalClass___global(recv) ((abstractmetamodel___MMLocalClass___global_t)CALL((recv), (SFT_abstractmetamodel[19] + 4)))
 #define CALL_abstractmetamodel___MMLocalClass___crhe(recv) ((abstractmetamodel___MMLocalClass___crhe_t)CALL((recv), (SFT_abstractmetamodel[19] + 5)))
 #define CALL_abstractmetamodel___MMLocalClass___cshe(recv) ((abstractmetamodel___MMLocalClass___cshe_t)CALL((recv), (SFT_abstractmetamodel[19] + 6)))
@@ -160,6 +160,7 @@ extern const int SFT_abstractmetamodel[];
 #define CALL_abstractmetamodel___MMLocalClass___has_global_property(recv) ((abstractmetamodel___MMLocalClass___has_global_property_t)CALL((recv), (SFT_abstractmetamodel[19] + 23)))
 #define CALL_abstractmetamodel___MMLocalClass_____bra(recv) ((abstractmetamodel___MMLocalClass_____bra_t)CALL((recv), (SFT_abstractmetamodel[19] + 24)))
 #define CALL_abstractmetamodel___MMLocalClass___context(recv) ((abstractmetamodel___MMLocalClass___context_t)CALL((recv), (SFT_abstractmetamodel[19] + 25)))
+#define CALL_abstractmetamodel___MMLocalClass___total_order_compare(recv) ((abstractmetamodel___MMLocalClass___total_order_compare_t)CALL((recv), (SFT_abstractmetamodel[19] + 26)))
 #define ID_MMGlobalProperty (SFT_abstractmetamodel[20])
 #define COLOR_MMGlobalProperty (SFT_abstractmetamodel[21])
 #define ATTR_abstractmetamodel___MMGlobalProperty____intro(recv) ATTR(recv, (SFT_abstractmetamodel[22] + 0))
@@ -192,7 +193,7 @@ extern const int SFT_abstractmetamodel[];
 #define CALL_abstractmetamodel___MMLocalProperty___global(recv) ((abstractmetamodel___MMLocalProperty___global_t)CALL((recv), (SFT_abstractmetamodel[27] + 3)))
 #define CALL_abstractmetamodel___MMLocalProperty___is_global_set(recv) ((abstractmetamodel___MMLocalProperty___is_global_set_t)CALL((recv), (SFT_abstractmetamodel[27] + 4)))
 #define CALL_abstractmetamodel___MMLocalProperty___prhe(recv) ((abstractmetamodel___MMLocalProperty___prhe_t)CALL((recv), (SFT_abstractmetamodel[27] + 5)))
-#define CALL_abstractmetamodel___MMLocalProperty___module(recv) ((abstractmetamodel___MMLocalProperty___module_t)CALL((recv), (SFT_abstractmetamodel[27] + 6)))
+#define CALL_abstractmetamodel___MMLocalProperty___mmmodule(recv) ((abstractmetamodel___MMLocalProperty___mmmodule_t)CALL((recv), (SFT_abstractmetamodel[27] + 6)))
 #define CALL_abstractmetamodel___MMLocalProperty___full_name(recv) ((abstractmetamodel___MMLocalProperty___full_name_t)CALL((recv), (SFT_abstractmetamodel[27] + 7)))
 #define CALL_abstractmetamodel___MMLocalProperty___set_global(recv) ((abstractmetamodel___MMLocalProperty___set_global_t)CALL((recv), (SFT_abstractmetamodel[27] + 8)))
 #define CALL_abstractmetamodel___MMLocalProperty___new_global(recv) ((abstractmetamodel___MMLocalProperty___new_global_t)CALL((recv), (SFT_abstractmetamodel[27] + 9)))
@@ -207,341 +208,354 @@ extern const int SFT_abstractmetamodel[];
 #define INIT_TABLE_POS_MMMethod (SFT_abstractmetamodel[33] + 0)
 #define CALL_abstractmetamodel___MMMethod___is_intern(recv) ((abstractmetamodel___MMMethod___is_intern_t)CALL((recv), (SFT_abstractmetamodel[33] + 1)))
 #define CALL_abstractmetamodel___MMMethod___is_abstract(recv) ((abstractmetamodel___MMMethod___is_abstract_t)CALL((recv), (SFT_abstractmetamodel[33] + 2)))
+#define CALL_abstractmetamodel___MMMethod___extern_name(recv) ((abstractmetamodel___MMMethod___extern_name_t)CALL((recv), (SFT_abstractmetamodel[33] + 3)))
 #define ID_MMConcreteClass (SFT_abstractmetamodel[34])
 #define COLOR_MMConcreteClass (SFT_abstractmetamodel[35])
 #define INIT_TABLE_POS_MMConcreteClass (SFT_abstractmetamodel[36] + 0)
-#define LOCATE_abstractmetamodel___MMContext___init "abstractmetamodel::MMContext::init"
+static const char * const LOCATE_abstractmetamodel___MMContext___init = "abstractmetamodel::MMContext::init";
 void abstractmetamodel___MMContext___init(val_t p0, int* init_table);
 typedef void (*abstractmetamodel___MMContext___init_t)(val_t p0, int* init_table);
 val_t NEW_MMContext_abstractmetamodel___MMContext___init();
-#define LOCATE_abstractmetamodel___MMContext___module_hierarchy "abstractmetamodel::MMContext::module_hierarchy"
+static const char * const LOCATE_abstractmetamodel___MMContext___module_hierarchy = "abstractmetamodel::MMContext::module_hierarchy";
 val_t abstractmetamodel___MMContext___module_hierarchy(val_t p0);
 typedef val_t (*abstractmetamodel___MMContext___module_hierarchy_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMContext___class_hierarchy "abstractmetamodel::MMContext::class_hierarchy"
+static const char * const LOCATE_abstractmetamodel___MMContext___class_hierarchy = "abstractmetamodel::MMContext::class_hierarchy";
 val_t abstractmetamodel___MMContext___class_hierarchy(val_t p0);
 typedef val_t (*abstractmetamodel___MMContext___class_hierarchy_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMContext___modules "abstractmetamodel::MMContext::modules"
+static const char * const LOCATE_abstractmetamodel___MMContext___modules = "abstractmetamodel::MMContext::modules";
 val_t abstractmetamodel___MMContext___modules(val_t p0);
 typedef val_t (*abstractmetamodel___MMContext___modules_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMContext___add_module "abstractmetamodel::MMContext::add_module"
+static const char * const LOCATE_abstractmetamodel___MMContext___add_module = "abstractmetamodel::MMContext::add_module";
 void abstractmetamodel___MMContext___add_module(val_t p0, val_t p1, val_t p2);
 typedef void (*abstractmetamodel___MMContext___add_module_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_abstractmetamodel___MMContext___add_global_class "abstractmetamodel::MMContext::add_global_class"
+static const char * const LOCATE_abstractmetamodel___MMContext___add_global_class = "abstractmetamodel::MMContext::add_global_class";
 void abstractmetamodel___MMContext___add_global_class(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMContext___add_global_class_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMContext___add_local_class "abstractmetamodel::MMContext::add_local_class"
+static const char * const LOCATE_abstractmetamodel___MMContext___add_local_class = "abstractmetamodel::MMContext::add_local_class";
 void abstractmetamodel___MMContext___add_local_class(val_t p0, val_t p1, val_t p2);
 typedef void (*abstractmetamodel___MMContext___add_local_class_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_abstractmetamodel___MMDirectory___name "abstractmetamodel::MMDirectory::name"
+static const char * const LOCATE_abstractmetamodel___MMDirectory___name = "abstractmetamodel::MMDirectory::name";
 val_t abstractmetamodel___MMDirectory___name(val_t p0);
 typedef val_t (*abstractmetamodel___MMDirectory___name_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMDirectory___path "abstractmetamodel::MMDirectory::path"
+static const char * const LOCATE_abstractmetamodel___MMDirectory___path = "abstractmetamodel::MMDirectory::path";
 val_t abstractmetamodel___MMDirectory___path(val_t p0);
 typedef val_t (*abstractmetamodel___MMDirectory___path_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMDirectory___parent "abstractmetamodel::MMDirectory::parent"
+static const char * const LOCATE_abstractmetamodel___MMDirectory___parent = "abstractmetamodel::MMDirectory::parent";
 val_t abstractmetamodel___MMDirectory___parent(val_t p0);
 typedef val_t (*abstractmetamodel___MMDirectory___parent_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMDirectory___owner "abstractmetamodel::MMDirectory::owner"
+static const char * const LOCATE_abstractmetamodel___MMDirectory___owner = "abstractmetamodel::MMDirectory::owner";
 val_t abstractmetamodel___MMDirectory___owner(val_t p0);
 typedef val_t (*abstractmetamodel___MMDirectory___owner_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMDirectory___owner__eq "abstractmetamodel::MMDirectory::owner="
+static const char * const LOCATE_abstractmetamodel___MMDirectory___owner__eq = "abstractmetamodel::MMDirectory::owner=";
 void abstractmetamodel___MMDirectory___owner__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMDirectory___owner__eq_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMDirectory___modules "abstractmetamodel::MMDirectory::modules"
+static const char * const LOCATE_abstractmetamodel___MMDirectory___modules = "abstractmetamodel::MMDirectory::modules";
 val_t abstractmetamodel___MMDirectory___modules(val_t p0);
 typedef val_t (*abstractmetamodel___MMDirectory___modules_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMDirectory___add_module "abstractmetamodel::MMDirectory::add_module"
+static const char * const LOCATE_abstractmetamodel___MMDirectory___add_module = "abstractmetamodel::MMDirectory::add_module";
 void abstractmetamodel___MMDirectory___add_module(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMDirectory___add_module_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMDirectory___init "abstractmetamodel::MMDirectory::init"
+static const char * const LOCATE_abstractmetamodel___MMDirectory___init = "abstractmetamodel::MMDirectory::init";
 void abstractmetamodel___MMDirectory___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*abstractmetamodel___MMDirectory___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMDirectory_abstractmetamodel___MMDirectory___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_abstractmetamodel___MMDirectory___full_name_for "abstractmetamodel::MMDirectory::full_name_for"
+static const char * const LOCATE_abstractmetamodel___MMDirectory___full_name_for = "abstractmetamodel::MMDirectory::full_name_for";
 val_t abstractmetamodel___MMDirectory___full_name_for(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMDirectory___full_name_for_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMModule___to_s "abstractmetamodel::MMModule::(string::Object::to_s)"
-val_t abstractmetamodel___MMModule___to_s(val_t p0);
-typedef val_t (*abstractmetamodel___MMModule___to_s_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___context "abstractmetamodel::MMModule::context"
+static const char * const LOCATE_abstractmetamodel___MMModule___context = "abstractmetamodel::MMModule::context";
 val_t abstractmetamodel___MMModule___context(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___context_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___name "abstractmetamodel::MMModule::name"
+static const char * const LOCATE_abstractmetamodel___MMModule___name = "abstractmetamodel::MMModule::name";
 val_t abstractmetamodel___MMModule___name(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___name_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___full_name "abstractmetamodel::MMModule::full_name"
+static const char * const LOCATE_abstractmetamodel___MMModule___full_name = "abstractmetamodel::MMModule::full_name";
 val_t abstractmetamodel___MMModule___full_name(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___full_name_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___directory "abstractmetamodel::MMModule::directory"
+static const char * const LOCATE_abstractmetamodel___MMModule___directory = "abstractmetamodel::MMModule::directory";
 val_t abstractmetamodel___MMModule___directory(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___directory_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___location "abstractmetamodel::MMModule::location"
+static const char * const LOCATE_abstractmetamodel___MMModule___location = "abstractmetamodel::MMModule::location";
 val_t abstractmetamodel___MMModule___location(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___location_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___mhe "abstractmetamodel::MMModule::mhe"
+static const char * const LOCATE_abstractmetamodel___MMModule___mhe = "abstractmetamodel::MMModule::mhe";
 val_t abstractmetamodel___MMModule___mhe(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___mhe_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___global_classes "abstractmetamodel::MMModule::global_classes"
+static const char * const LOCATE_abstractmetamodel___MMModule___global_classes = "abstractmetamodel::MMModule::global_classes";
 val_t abstractmetamodel___MMModule___global_classes(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___global_classes_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___local_classes "abstractmetamodel::MMModule::local_classes"
+static const char * const LOCATE_abstractmetamodel___MMModule___local_classes = "abstractmetamodel::MMModule::local_classes";
 val_t abstractmetamodel___MMModule___local_classes(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___local_classes_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___class_specialization_hierarchy "abstractmetamodel::MMModule::class_specialization_hierarchy"
+static const char * const LOCATE_abstractmetamodel___MMModule___class_specialization_hierarchy = "abstractmetamodel::MMModule::class_specialization_hierarchy";
 val_t abstractmetamodel___MMModule___class_specialization_hierarchy(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___class_specialization_hierarchy_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___explicit_imported_modules "abstractmetamodel::MMModule::explicit_imported_modules"
+static const char * const LOCATE_abstractmetamodel___MMModule___explicit_imported_modules = "abstractmetamodel::MMModule::explicit_imported_modules";
 val_t abstractmetamodel___MMModule___explicit_imported_modules(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___explicit_imported_modules_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMModule___init "abstractmetamodel::MMModule::init"
+static const char * const LOCATE_abstractmetamodel___MMModule___init = "abstractmetamodel::MMModule::init";
 void abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 typedef void (*abstractmetamodel___MMModule___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_abstractmetamodel___MMModule___add_super_module "abstractmetamodel::MMModule::add_super_module"
+static const char * const LOCATE_abstractmetamodel___MMModule___add_super_module = "abstractmetamodel::MMModule::add_super_module";
 void abstractmetamodel___MMModule___add_super_module(val_t p0, val_t p1, val_t p2);
 typedef void (*abstractmetamodel___MMModule___add_super_module_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_abstractmetamodel___MMModule___visibility_for "abstractmetamodel::MMModule::visibility_for"
+static const char * const LOCATE_abstractmetamodel___MMModule___visibility_for = "abstractmetamodel::MMModule::visibility_for";
 val_t abstractmetamodel___MMModule___visibility_for(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMModule___visibility_for_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMModule_____bra "abstractmetamodel::MMModule::[]"
+static const char * const LOCATE_abstractmetamodel___MMModule_____bra = "abstractmetamodel::MMModule::[]";
 val_t abstractmetamodel___MMModule_____bra(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMModule_____bra_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMModule___class_by_name "abstractmetamodel::MMModule::class_by_name"
+static const char * const LOCATE_abstractmetamodel___MMModule___class_by_name = "abstractmetamodel::MMModule::class_by_name";
 val_t abstractmetamodel___MMModule___class_by_name(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMModule___class_by_name_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMModule___has_global_class_named "abstractmetamodel::MMModule::has_global_class_named"
+static const char * const LOCATE_abstractmetamodel___MMModule___has_global_class_named = "abstractmetamodel::MMModule::has_global_class_named";
 val_t abstractmetamodel___MMModule___has_global_class_named(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMModule___has_global_class_named_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMModule___global_class_named "abstractmetamodel::MMModule::global_class_named"
+static const char * const LOCATE_abstractmetamodel___MMModule___global_class_named = "abstractmetamodel::MMModule::global_class_named";
 val_t abstractmetamodel___MMModule___global_class_named(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMModule___global_class_named_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMModule___set_supers_class "abstractmetamodel::MMModule::set_supers_class"
+static const char * const LOCATE_abstractmetamodel___MMModule___to_s = "abstractmetamodel::MMModule::(string::Object::to_s)";
+val_t abstractmetamodel___MMModule___to_s(val_t p0);
+typedef val_t (*abstractmetamodel___MMModule___to_s_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMModule___set_supers_class = "abstractmetamodel::MMModule::set_supers_class";
 void abstractmetamodel___MMModule___set_supers_class(val_t p0, val_t p1, val_t p2);
 typedef void (*abstractmetamodel___MMModule___set_supers_class_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_abstractmetamodel___MMModule___register_global_class "abstractmetamodel::MMModule::register_global_class"
+static const char * const LOCATE_abstractmetamodel___MMModule___register_global_class = "abstractmetamodel::MMModule::register_global_class";
 void abstractmetamodel___MMModule___register_global_class(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMModule___register_global_class_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMGlobalClass___to_s "abstractmetamodel::MMGlobalClass::(string::Object::to_s)"
-val_t abstractmetamodel___MMGlobalClass___to_s(val_t p0);
-typedef val_t (*abstractmetamodel___MMGlobalClass___to_s_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___intro "abstractmetamodel::MMGlobalClass::intro"
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___intro = "abstractmetamodel::MMGlobalClass::intro";
 val_t abstractmetamodel___MMGlobalClass___intro(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___intro_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___class_refinement_hierarchy "abstractmetamodel::MMGlobalClass::class_refinement_hierarchy"
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___class_refinement_hierarchy = "abstractmetamodel::MMGlobalClass::class_refinement_hierarchy";
 val_t abstractmetamodel___MMGlobalClass___class_refinement_hierarchy(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___class_refinement_hierarchy_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___init "abstractmetamodel::MMGlobalClass::init"
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___init = "abstractmetamodel::MMGlobalClass::init";
 void abstractmetamodel___MMGlobalClass___init(val_t p0, val_t p1, int* init_table);
 typedef void (*abstractmetamodel___MMGlobalClass___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_MMGlobalClass_abstractmetamodel___MMGlobalClass___init(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___name "abstractmetamodel::MMGlobalClass::name"
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___name = "abstractmetamodel::MMGlobalClass::name";
 val_t abstractmetamodel___MMGlobalClass___name(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___name_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___module "abstractmetamodel::MMGlobalClass::module"
-val_t abstractmetamodel___MMGlobalClass___module(val_t p0);
-typedef val_t (*abstractmetamodel___MMGlobalClass___module_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___register_local_class "abstractmetamodel::MMGlobalClass::register_local_class"
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___mmmodule = "abstractmetamodel::MMGlobalClass::mmmodule";
+val_t abstractmetamodel___MMGlobalClass___mmmodule(val_t p0);
+typedef val_t (*abstractmetamodel___MMGlobalClass___mmmodule_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___to_s = "abstractmetamodel::MMGlobalClass::(string::Object::to_s)";
+val_t abstractmetamodel___MMGlobalClass___to_s(val_t p0);
+typedef val_t (*abstractmetamodel___MMGlobalClass___to_s_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___register_local_class = "abstractmetamodel::MMGlobalClass::register_local_class";
 void abstractmetamodel___MMGlobalClass___register_local_class(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMGlobalClass___register_local_class_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMGlobalClass___is_interface "abstractmetamodel::MMGlobalClass::is_interface"
+  typedef void (*CLOS_OC_abstractmetamodel___MMGlobalClass___register_local_class_1_0)(struct stack_frame_t *);
+  void OC_abstractmetamodel___MMGlobalClass___register_local_class_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_abstractmetamodel___MMGlobalClass___register_local_class_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_interface = "abstractmetamodel::MMGlobalClass::is_interface";
 val_t abstractmetamodel___MMGlobalClass___is_interface(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___is_interface_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___is_interface__eq "abstractmetamodel::MMGlobalClass::is_interface="
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_interface__eq = "abstractmetamodel::MMGlobalClass::is_interface=";
 void abstractmetamodel___MMGlobalClass___is_interface__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMGlobalClass___is_interface__eq_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMGlobalClass___is_abstract "abstractmetamodel::MMGlobalClass::is_abstract"
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_abstract = "abstractmetamodel::MMGlobalClass::is_abstract";
 val_t abstractmetamodel___MMGlobalClass___is_abstract(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___is_abstract_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___is_abstract__eq "abstractmetamodel::MMGlobalClass::is_abstract="
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_abstract__eq = "abstractmetamodel::MMGlobalClass::is_abstract=";
 void abstractmetamodel___MMGlobalClass___is_abstract__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMGlobalClass___is_abstract__eq_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMGlobalClass___is_universal "abstractmetamodel::MMGlobalClass::is_universal"
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_universal = "abstractmetamodel::MMGlobalClass::is_universal";
 val_t abstractmetamodel___MMGlobalClass___is_universal(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___is_universal_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___is_universal__eq "abstractmetamodel::MMGlobalClass::is_universal="
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_universal__eq = "abstractmetamodel::MMGlobalClass::is_universal=";
 void abstractmetamodel___MMGlobalClass___is_universal__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMGlobalClass___is_universal__eq_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMGlobalClass___visibility_level "abstractmetamodel::MMGlobalClass::visibility_level"
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___visibility_level = "abstractmetamodel::MMGlobalClass::visibility_level";
 val_t abstractmetamodel___MMGlobalClass___visibility_level(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___visibility_level_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___visibility_level__eq "abstractmetamodel::MMGlobalClass::visibility_level="
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___visibility_level__eq = "abstractmetamodel::MMGlobalClass::visibility_level=";
 void abstractmetamodel___MMGlobalClass___visibility_level__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMGlobalClass___visibility_level__eq_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMGlobalClass___is_mixin "abstractmetamodel::MMGlobalClass::is_mixin"
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_mixin = "abstractmetamodel::MMGlobalClass::is_mixin";
 val_t abstractmetamodel___MMGlobalClass___is_mixin(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___is_mixin_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___mixin_of "abstractmetamodel::MMGlobalClass::mixin_of"
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___mixin_of = "abstractmetamodel::MMGlobalClass::mixin_of";
 val_t abstractmetamodel___MMGlobalClass___mixin_of(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___mixin_of_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalClass___mixin_of__eq "abstractmetamodel::MMGlobalClass::mixin_of="
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___mixin_of__eq = "abstractmetamodel::MMGlobalClass::mixin_of=";
 void abstractmetamodel___MMGlobalClass___mixin_of__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMGlobalClass___mixin_of__eq_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___to_s "abstractmetamodel::MMLocalClass::(string::Object::to_s)"
-val_t abstractmetamodel___MMLocalClass___to_s(val_t p0);
-typedef val_t (*abstractmetamodel___MMLocalClass___to_s_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___name "abstractmetamodel::MMLocalClass::name"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___name = "abstractmetamodel::MMLocalClass::name";
 val_t abstractmetamodel___MMLocalClass___name(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalClass___name_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___arity "abstractmetamodel::MMLocalClass::arity"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___arity = "abstractmetamodel::MMLocalClass::arity";
 val_t abstractmetamodel___MMLocalClass___arity(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalClass___arity_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___module "abstractmetamodel::MMLocalClass::module"
-val_t abstractmetamodel___MMLocalClass___module(val_t p0);
-typedef val_t (*abstractmetamodel___MMLocalClass___module_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___global "abstractmetamodel::MMLocalClass::global"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___mmmodule = "abstractmetamodel::MMLocalClass::mmmodule";
+val_t abstractmetamodel___MMLocalClass___mmmodule(val_t p0);
+typedef val_t (*abstractmetamodel___MMLocalClass___mmmodule_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___global = "abstractmetamodel::MMLocalClass::global";
 val_t abstractmetamodel___MMLocalClass___global(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalClass___global_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___crhe "abstractmetamodel::MMLocalClass::crhe"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___crhe = "abstractmetamodel::MMLocalClass::crhe";
 val_t abstractmetamodel___MMLocalClass___crhe(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalClass___crhe_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___cshe "abstractmetamodel::MMLocalClass::cshe"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___cshe = "abstractmetamodel::MMLocalClass::cshe";
 val_t abstractmetamodel___MMLocalClass___cshe(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalClass___cshe_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___che "abstractmetamodel::MMLocalClass::che"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___che = "abstractmetamodel::MMLocalClass::che";
 val_t abstractmetamodel___MMLocalClass___che(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalClass___che_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___global_properties "abstractmetamodel::MMLocalClass::global_properties"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___global_properties = "abstractmetamodel::MMLocalClass::global_properties";
 val_t abstractmetamodel___MMLocalClass___global_properties(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalClass___global_properties_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___local_local_properties "abstractmetamodel::MMLocalClass::local_local_properties"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___local_local_properties = "abstractmetamodel::MMLocalClass::local_local_properties";
 val_t abstractmetamodel___MMLocalClass___local_local_properties(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalClass___local_local_properties_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___init "abstractmetamodel::MMLocalClass::init"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___init = "abstractmetamodel::MMLocalClass::init";
 void abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*abstractmetamodel___MMLocalClass___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_abstractmetamodel___MMLocalClass___for_module "abstractmetamodel::MMLocalClass::for_module"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___for_module = "abstractmetamodel::MMLocalClass::for_module";
 val_t abstractmetamodel___MMLocalClass___for_module(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMLocalClass___for_module_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___new_global "abstractmetamodel::MMLocalClass::new_global"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___new_global = "abstractmetamodel::MMLocalClass::new_global";
 void abstractmetamodel___MMLocalClass___new_global(val_t p0);
 typedef void (*abstractmetamodel___MMLocalClass___new_global_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalClass___set_global "abstractmetamodel::MMLocalClass::set_global"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___set_global = "abstractmetamodel::MMLocalClass::set_global";
 void abstractmetamodel___MMLocalClass___set_global(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMLocalClass___set_global_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___has_global_property_by_name "abstractmetamodel::MMLocalClass::has_global_property_by_name"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___has_global_property_by_name = "abstractmetamodel::MMLocalClass::has_global_property_by_name";
 val_t abstractmetamodel___MMLocalClass___has_global_property_by_name(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMLocalClass___has_global_property_by_name_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___get_property_by_name "abstractmetamodel::MMLocalClass::get_property_by_name"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___get_property_by_name = "abstractmetamodel::MMLocalClass::get_property_by_name";
 val_t abstractmetamodel___MMLocalClass___get_property_by_name(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMLocalClass___get_property_by_name_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___attribute "abstractmetamodel::MMLocalClass::attribute"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___attribute = "abstractmetamodel::MMLocalClass::attribute";
 val_t abstractmetamodel___MMLocalClass___attribute(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMLocalClass___attribute_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___method "abstractmetamodel::MMLocalClass::method"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___method = "abstractmetamodel::MMLocalClass::method";
 val_t abstractmetamodel___MMLocalClass___method(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMLocalClass___method_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___select_method "abstractmetamodel::MMLocalClass::select_method"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___select_method = "abstractmetamodel::MMLocalClass::select_method";
 val_t abstractmetamodel___MMLocalClass___select_method(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMLocalClass___select_method_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___select_attribute "abstractmetamodel::MMLocalClass::select_attribute"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___select_attribute = "abstractmetamodel::MMLocalClass::select_attribute";
 val_t abstractmetamodel___MMLocalClass___select_attribute(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMLocalClass___select_attribute_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___super_methods_named "abstractmetamodel::MMLocalClass::super_methods_named"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___super_methods_named = "abstractmetamodel::MMLocalClass::super_methods_named";
 val_t abstractmetamodel___MMLocalClass___super_methods_named(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMLocalClass___super_methods_named_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___register_local_property "abstractmetamodel::MMLocalClass::register_local_property"
+  typedef void (*CLOS_OC_abstractmetamodel___MMLocalClass___super_methods_named_1_0)(struct stack_frame_t *);
+  void OC_abstractmetamodel___MMLocalClass___super_methods_named_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_abstractmetamodel___MMLocalClass___super_methods_named_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___register_local_property = "abstractmetamodel::MMLocalClass::register_local_property";
 void abstractmetamodel___MMLocalClass___register_local_property(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMLocalClass___register_local_property_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___register_global_property "abstractmetamodel::MMLocalClass::register_global_property"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___register_global_property = "abstractmetamodel::MMLocalClass::register_global_property";
 void abstractmetamodel___MMLocalClass___register_global_property(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMLocalClass___register_global_property_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___has_global_property "abstractmetamodel::MMLocalClass::has_global_property"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___has_global_property = "abstractmetamodel::MMLocalClass::has_global_property";
 val_t abstractmetamodel___MMLocalClass___has_global_property(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMLocalClass___has_global_property_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass_____bra "abstractmetamodel::MMLocalClass::[]"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass_____bra = "abstractmetamodel::MMLocalClass::[]";
 val_t abstractmetamodel___MMLocalClass_____bra(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMLocalClass_____bra_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalClass___context "abstractmetamodel::MMLocalClass::context"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___context = "abstractmetamodel::MMLocalClass::context";
 val_t abstractmetamodel___MMLocalClass___context(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalClass___context_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___to_s "abstractmetamodel::MMGlobalProperty::(string::Object::to_s)"
-val_t abstractmetamodel___MMGlobalProperty___to_s(val_t p0);
-typedef val_t (*abstractmetamodel___MMGlobalProperty___to_s_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___intro "abstractmetamodel::MMGlobalProperty::intro"
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___to_s = "abstractmetamodel::MMLocalClass::(string::Object::to_s)";
+val_t abstractmetamodel___MMLocalClass___to_s(val_t p0);
+typedef val_t (*abstractmetamodel___MMLocalClass___to_s_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMLocalClass___total_order_compare = "abstractmetamodel::MMLocalClass::total_order_compare";
+val_t abstractmetamodel___MMLocalClass___total_order_compare(val_t p0, val_t p1);
+typedef val_t (*abstractmetamodel___MMLocalClass___total_order_compare_t)(val_t p0, val_t p1);
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___intro = "abstractmetamodel::MMGlobalProperty::intro";
 val_t abstractmetamodel___MMGlobalProperty___intro(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalProperty___intro_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___local_class "abstractmetamodel::MMGlobalProperty::local_class"
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___local_class = "abstractmetamodel::MMGlobalProperty::local_class";
 val_t abstractmetamodel___MMGlobalProperty___local_class(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalProperty___local_class_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___property_hierarchy "abstractmetamodel::MMGlobalProperty::property_hierarchy"
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___property_hierarchy = "abstractmetamodel::MMGlobalProperty::property_hierarchy";
 val_t abstractmetamodel___MMGlobalProperty___property_hierarchy(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalProperty___property_hierarchy_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___init "abstractmetamodel::MMGlobalProperty::init"
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___init = "abstractmetamodel::MMGlobalProperty::init";
 void abstractmetamodel___MMGlobalProperty___init(val_t p0, val_t p1, int* init_table);
 typedef void (*abstractmetamodel___MMGlobalProperty___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___add_local_property "abstractmetamodel::MMGlobalProperty::add_local_property"
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___to_s = "abstractmetamodel::MMGlobalProperty::(string::Object::to_s)";
+val_t abstractmetamodel___MMGlobalProperty___to_s(val_t p0);
+typedef val_t (*abstractmetamodel___MMGlobalProperty___to_s_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___add_local_property = "abstractmetamodel::MMGlobalProperty::add_local_property";
 void abstractmetamodel___MMGlobalProperty___add_local_property(val_t p0, val_t p1, val_t p2);
 typedef void (*abstractmetamodel___MMGlobalProperty___add_local_property_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___is_attribute "abstractmetamodel::MMGlobalProperty::is_attribute"
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___is_attribute = "abstractmetamodel::MMGlobalProperty::is_attribute";
 val_t abstractmetamodel___MMGlobalProperty___is_attribute(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalProperty___is_attribute_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___is_method "abstractmetamodel::MMGlobalProperty::is_method"
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___is_method = "abstractmetamodel::MMGlobalProperty::is_method";
 val_t abstractmetamodel___MMGlobalProperty___is_method(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalProperty___is_method_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___is_init "abstractmetamodel::MMGlobalProperty::is_init"
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___is_init = "abstractmetamodel::MMGlobalProperty::is_init";
 val_t abstractmetamodel___MMGlobalProperty___is_init(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalProperty___is_init_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___is_init__eq "abstractmetamodel::MMGlobalProperty::is_init="
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___is_init__eq = "abstractmetamodel::MMGlobalProperty::is_init=";
 void abstractmetamodel___MMGlobalProperty___is_init__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMGlobalProperty___is_init__eq_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___is_init_for "abstractmetamodel::MMGlobalProperty::is_init_for"
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___is_init_for = "abstractmetamodel::MMGlobalProperty::is_init_for";
 val_t abstractmetamodel___MMGlobalProperty___is_init_for(val_t p0, val_t p1);
 typedef val_t (*abstractmetamodel___MMGlobalProperty___is_init_for_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level "abstractmetamodel::MMGlobalProperty::visibility_level"
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level = "abstractmetamodel::MMGlobalProperty::visibility_level";
 val_t abstractmetamodel___MMGlobalProperty___visibility_level(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalProperty___visibility_level_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level__eq "abstractmetamodel::MMGlobalProperty::visibility_level="
+static const char * const LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level__eq = "abstractmetamodel::MMGlobalProperty::visibility_level=";
 void abstractmetamodel___MMGlobalProperty___visibility_level__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMGlobalProperty___visibility_level__eq_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalProperty___to_s "abstractmetamodel::MMLocalProperty::(string::Object::to_s)"
-val_t abstractmetamodel___MMLocalProperty___to_s(val_t p0);
-typedef val_t (*abstractmetamodel___MMLocalProperty___to_s_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalProperty___name "abstractmetamodel::MMLocalProperty::name"
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___name = "abstractmetamodel::MMLocalProperty::name";
 val_t abstractmetamodel___MMLocalProperty___name(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalProperty___name_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalProperty___local_class "abstractmetamodel::MMLocalProperty::local_class"
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___local_class = "abstractmetamodel::MMLocalProperty::local_class";
 val_t abstractmetamodel___MMLocalProperty___local_class(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalProperty___local_class_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalProperty___global "abstractmetamodel::MMLocalProperty::global"
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___global = "abstractmetamodel::MMLocalProperty::global";
 val_t abstractmetamodel___MMLocalProperty___global(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalProperty___global_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalProperty___is_global_set "abstractmetamodel::MMLocalProperty::is_global_set"
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___is_global_set = "abstractmetamodel::MMLocalProperty::is_global_set";
 val_t abstractmetamodel___MMLocalProperty___is_global_set(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalProperty___is_global_set_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalProperty___prhe "abstractmetamodel::MMLocalProperty::prhe"
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___prhe = "abstractmetamodel::MMLocalProperty::prhe";
 val_t abstractmetamodel___MMLocalProperty___prhe(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalProperty___prhe_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalProperty___module "abstractmetamodel::MMLocalProperty::module"
-val_t abstractmetamodel___MMLocalProperty___module(val_t p0);
-typedef val_t (*abstractmetamodel___MMLocalProperty___module_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalProperty___full_name "abstractmetamodel::MMLocalProperty::full_name"
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___mmmodule = "abstractmetamodel::MMLocalProperty::mmmodule";
+val_t abstractmetamodel___MMLocalProperty___mmmodule(val_t p0);
+typedef val_t (*abstractmetamodel___MMLocalProperty___mmmodule_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___full_name = "abstractmetamodel::MMLocalProperty::full_name";
 val_t abstractmetamodel___MMLocalProperty___full_name(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalProperty___full_name_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalProperty___set_global "abstractmetamodel::MMLocalProperty::set_global"
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___set_global = "abstractmetamodel::MMLocalProperty::set_global";
 void abstractmetamodel___MMLocalProperty___set_global(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMLocalProperty___set_global_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalProperty___new_global "abstractmetamodel::MMLocalProperty::new_global"
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___new_global = "abstractmetamodel::MMLocalProperty::new_global";
 void abstractmetamodel___MMLocalProperty___new_global(val_t p0);
 typedef void (*abstractmetamodel___MMLocalProperty___new_global_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalProperty___need_super "abstractmetamodel::MMLocalProperty::need_super"
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___to_s = "abstractmetamodel::MMLocalProperty::(string::Object::to_s)";
+val_t abstractmetamodel___MMLocalProperty___to_s(val_t p0);
+typedef val_t (*abstractmetamodel___MMLocalProperty___to_s_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___need_super = "abstractmetamodel::MMLocalProperty::need_super";
 val_t abstractmetamodel___MMLocalProperty___need_super(val_t p0);
 typedef val_t (*abstractmetamodel___MMLocalProperty___need_super_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMLocalProperty___need_super__eq "abstractmetamodel::MMLocalProperty::need_super="
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___need_super__eq = "abstractmetamodel::MMLocalProperty::need_super=";
 void abstractmetamodel___MMLocalProperty___need_super__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMLocalProperty___need_super__eq_t)(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMLocalProperty___init "abstractmetamodel::MMLocalProperty::init"
+static const char * const LOCATE_abstractmetamodel___MMLocalProperty___init = "abstractmetamodel::MMLocalProperty::init";
 void abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*abstractmetamodel___MMLocalProperty___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 val_t NEW_MMAttribute_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-val_t NEW_MMMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-#define LOCATE_abstractmetamodel___MMMethod___is_intern "abstractmetamodel::MMMethod::is_intern"
+static const char * const LOCATE_abstractmetamodel___MMMethod___is_intern = "abstractmetamodel::MMMethod::is_intern";
 val_t abstractmetamodel___MMMethod___is_intern(val_t p0);
 typedef val_t (*abstractmetamodel___MMMethod___is_intern_t)(val_t p0);
-#define LOCATE_abstractmetamodel___MMMethod___is_abstract "abstractmetamodel::MMMethod::is_abstract"
+static const char * const LOCATE_abstractmetamodel___MMMethod___is_abstract = "abstractmetamodel::MMMethod::is_abstract";
 val_t abstractmetamodel___MMMethod___is_abstract(val_t p0);
 typedef val_t (*abstractmetamodel___MMMethod___is_abstract_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMMethod___extern_name = "abstractmetamodel::MMMethod::extern_name";
+val_t abstractmetamodel___MMMethod___extern_name(val_t p0);
+typedef val_t (*abstractmetamodel___MMMethod___extern_name_t)(val_t p0);
+val_t NEW_MMMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 val_t NEW_MMConcreteClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 #endif

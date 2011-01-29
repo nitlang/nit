@@ -10,25 +10,62 @@ val_t abstract_collection___Collection___iterator(val_t p0){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   /* ./../lib/standard//collection//abstract_collection.nit:42 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 42);
-  nit_exit(1);
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 42);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
+}
+void abstract_collection___Collection___iterate(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  fun_t CREG[1];
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_abstract_collection;
+  fra.me.line = 45;
+  fra.me.meth = LOCATE_abstract_collection___Collection___iterate;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.closure_ctx = closctx_param;
+  fra.me.closure_funs = CREG;
+  fra.me.REG[0] = p0;
+  CREG[0] = clos_fun0;
+  /* ./../lib/standard//collection//abstract_collection.nit:49 */
+  fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
+  /* ./../lib/standard//collection//abstract_collection.nit:50 */
+  while(1) {
+    REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
+    if (UNTAG_Bool(REGB0)) {
+      /* ./../lib/standard//collection//abstract_collection.nit:51 */
+      fra.me.REG[1] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
+      ((void (*)(struct stack_frame_t *, val_t))(CREG[0]))(closctx_param, fra.me.REG[1]);
+      if (closctx_param->has_broke) {
+        goto label1;
+      }
+      /* ./../lib/standard//collection//abstract_collection.nit:52 */
+      CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
+    } else {
+      /* ./../lib/standard//collection//abstract_collection.nit:50 */
+      goto label2;
+    }
+  }
+  label2: while(0);
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return;
 }
 val_t abstract_collection___Collection___is_empty(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 45;
+  fra.me.line = 56;
   fra.me.meth = LOCATE_abstract_collection___Collection___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:45 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 45);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:56 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 56);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -37,14 +74,12 @@ val_t abstract_collection___Collection___length(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 48;
+  fra.me.line = 59;
   fra.me.meth = LOCATE_abstract_collection___Collection___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:48 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 48);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:59 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 59);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -53,14 +88,12 @@ val_t abstract_collection___Collection___has(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 51;
+  fra.me.line = 62;
   fra.me.meth = LOCATE_abstract_collection___Collection___has;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:51 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 51);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:62 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 62);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -69,14 +102,12 @@ val_t abstract_collection___Collection___has_only(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 55;
+  fra.me.line = 66;
   fra.me.meth = LOCATE_abstract_collection___Collection___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:55 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 55);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:66 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 66);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -85,14 +116,12 @@ val_t abstract_collection___Collection___count(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 60;
+  fra.me.line = 71;
   fra.me.meth = LOCATE_abstract_collection___Collection___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:60 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 60);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:71 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 71);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -101,14 +130,12 @@ val_t abstract_collection___Collection___first(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 64;
+  fra.me.line = 75;
   fra.me.meth = LOCATE_abstract_collection___Collection___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:64 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 64);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:75 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 75);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -120,21 +147,22 @@ val_t abstract_collection___NaiveCollection___is_empty(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 72;
+  fra.me.line = 83;
   fra.me.meth = LOCATE_abstract_collection___NaiveCollection___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:83 */
   REGB0 = CALL_abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
-  /* ./../lib/standard//collection//abstract_collection.nit:72 */
   if (UNTAG_Bool(REGB2)) {
   } else {
+    /* ./../lib/standard//kernel.nit:207 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
+    /* ./../lib/standard//collection//abstract_collection.nit:83 */
     REGB2 = REGB1;
-  /* ./../lib/standard//collection//abstract_collection.nit:72 */
   }
   goto label1;
   label1: while(0);
@@ -144,153 +172,193 @@ val_t abstract_collection___NaiveCollection___is_empty(val_t p0){
 val_t abstract_collection___NaiveCollection___length(val_t p0){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
-  val_t REGB1;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 74;
+  fra.me.line = 85;
   fra.me.meth = LOCATE_abstract_collection___NaiveCollection___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:87 */
   REGB0 = TAG_Int(0);
-  fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:77 */
-  while(1) {
-    REGB1 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
-    if (UNTAG_Bool(REGB1)) {
-      fra.me.REG[1] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
-      REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB0));
-      REGB0 = REGB1;
-    /* ./../lib/standard//collection//abstract_collection.nit:77 */
-    } else {
-      goto label1;
-    }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
-  }
-  label1: while(0);
-  /* ./../lib/standard//collection//abstract_collection.nit:78 */
+  fra.me.REG[1] = REGB0;
+  CALL_abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_abstract_collection___NaiveCollection___length_1));
+  /* ./../lib/standard//collection//abstract_collection.nit:89 */
+  REGB0 = fra.me.REG[1];
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
+  void OC_abstract_collection___NaiveCollection___length_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
+    struct {struct stack_frame_t me;} fra;
+    val_t REGB0;
+    fun_t CREG[1];
+    val_t tmp;
+    /* ./../lib/standard//collection//abstract_collection.nit:88 */
+    fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+    fra.me.file = LOCATE_abstract_collection;
+    fra.me.line = 0;
+    fra.me.meth = LOCATE_abstract_collection___NaiveCollection___length;
+    fra.me.has_broke = 0;
+    fra.me.REG_size = 1;
+    fra.me.REG[0] = NIT_NULL;
+    fra.me.closure_ctx = closctx_param;
+    fra.me.closure_funs = CREG;
+    fra.me.REG[0] = p0;
+    CREG[0] = clos_fun0;
+    /* ./../lib/standard//kernel.nit:215 */
+    REGB0 = TAG_Int(UNTAG_Int(closctx->REG[1])+UNTAG_Int(closctx->REG[1]));
+    /* ./../lib/standard//collection//abstract_collection.nit:88 */
+    closctx->REG[1] = REGB0;
+    stack_frame_head = fra.me.prev;
+    return;
+  }
 val_t abstract_collection___NaiveCollection___has(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
-  val_t REGB1;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 81;
+  fra.me.line = 92;
   fra.me.meth = LOCATE_abstract_collection___NaiveCollection___has;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:83 */
-  while(1) {
-    REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_abstract_collection___NaiveCollection___has_1));
+  switch ((&(fra.me))->has_broke) {
+    case 0: break;
+    case 1: (&(fra.me))->has_broke = 0; goto label3;
+  }
+  /* ./../lib/standard//collection//abstract_collection.nit:95 */
+  REGB0 = TAG_Bool(false);
+  fra.me.REG[0] = REGB0;
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+  void OC_abstract_collection___NaiveCollection___has_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
+    struct {struct stack_frame_t me;} fra;
+    val_t REGB0;
+    val_t REGB1;
+    fun_t CREG[1];
+    val_t tmp;
+    /* ./../lib/standard//collection//abstract_collection.nit:94 */
+    fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+    fra.me.file = LOCATE_abstract_collection;
+    fra.me.line = 0;
+    fra.me.meth = LOCATE_abstract_collection___NaiveCollection___has;
+    fra.me.has_broke = 0;
+    fra.me.REG_size = 1;
+    fra.me.REG[0] = NIT_NULL;
+    fra.me.closure_ctx = closctx_param;
+    fra.me.closure_funs = CREG;
+    fra.me.REG[0] = p0;
+    CREG[0] = clos_fun0;
+    REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[0],closctx->REG[1]));
     if (UNTAG_Bool(REGB0)) {
-      fra.me.REG[2] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
-      REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
-      if (UNTAG_Bool(REGB0)) {
-      } else {
-        REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        if (UNTAG_Bool(REGB1)) {
-          REGB1 = TAG_Bool(false);
-          REGB0 = REGB1;
-        } else {
-          REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-          REGB0 = REGB1;
-        }
-      }
-      if (UNTAG_Bool(REGB0)) {
-        REGB0 = TAG_Bool(true);
-        goto label1;
-      }
     } else {
+      REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        REGB1 = TAG_Bool(false);
+        REGB0 = REGB1;
+      } else {
+        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], closctx->REG[1]);
+        REGB0 = REGB1;
+      }
+    }
+    if (UNTAG_Bool(REGB0)) {
+      REGB0 = TAG_Bool(true);
+      closctx->REG[0] = REGB0;
+      closctx->has_broke = 1;
       goto label2;
     }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
+    label2: while(0);
+    stack_frame_head = fra.me.prev;
+    return;
   }
-  label2: while(0);
-  REGB1 = TAG_Bool(false);
-  REGB0 = REGB1;
-  /* ./../lib/standard//collection//abstract_collection.nit:84 */
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return REGB0;
-}
 val_t abstract_collection___NaiveCollection___has_only(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
-  val_t REGB1;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 87;
+  fra.me.line = 98;
   fra.me.meth = LOCATE_abstract_collection___NaiveCollection___has_only;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:89 */
-  while(1) {
-    REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_abstract_collection___NaiveCollection___has_only_1));
+  switch ((&(fra.me))->has_broke) {
+    case 0: break;
+    case 1: (&(fra.me))->has_broke = 0; goto label3;
+  }
+  /* ./../lib/standard//collection//abstract_collection.nit:101 */
+  REGB0 = TAG_Bool(true);
+  fra.me.REG[0] = REGB0;
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+  void OC_abstract_collection___NaiveCollection___has_only_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
+    struct {struct stack_frame_t me;} fra;
+    val_t REGB0;
+    val_t REGB1;
+    fun_t CREG[1];
+    val_t tmp;
+    /* ./../lib/standard//collection//abstract_collection.nit:100 */
+    fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+    fra.me.file = LOCATE_abstract_collection;
+    fra.me.line = 0;
+    fra.me.meth = LOCATE_abstract_collection___NaiveCollection___has_only;
+    fra.me.has_broke = 0;
+    fra.me.REG_size = 1;
+    fra.me.REG[0] = NIT_NULL;
+    fra.me.closure_ctx = closctx_param;
+    fra.me.closure_funs = CREG;
+    fra.me.REG[0] = p0;
+    CREG[0] = clos_fun0;
+    REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[0],closctx->REG[1]));
     if (UNTAG_Bool(REGB0)) {
-      fra.me.REG[2] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
-      REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
-      if (UNTAG_Bool(REGB0)) {
-      } else {
-        REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        if (UNTAG_Bool(REGB1)) {
-          REGB1 = TAG_Bool(false);
-          REGB0 = REGB1;
-        } else {
-          REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-          REGB0 = REGB1;
-        }
-      }
-      REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
-      if (UNTAG_Bool(REGB0)) {
-        REGB0 = TAG_Bool(false);
-        goto label1;
-      }
     } else {
+      REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        REGB1 = TAG_Bool(false);
+        REGB0 = REGB1;
+      } else {
+        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], closctx->REG[1]);
+        REGB0 = REGB1;
+      }
+    }
+    REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+    if (UNTAG_Bool(REGB0)) {
+      REGB0 = TAG_Bool(false);
+      closctx->REG[0] = REGB0;
+      closctx->has_broke = 1;
       goto label2;
     }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
+    label2: while(0);
+    stack_frame_head = fra.me.prev;
+    return;
   }
-  label2: while(0);
-  REGB1 = TAG_Bool(true);
-  REGB0 = REGB1;
-  /* ./../lib/standard//collection//abstract_collection.nit:90 */
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return REGB0;
-}
 val_t abstract_collection___NaiveCollection___count(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
-  val_t REGB1;
-  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 93;
+  fra.me.line = 104;
   fra.me.meth = LOCATE_abstract_collection___NaiveCollection___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -299,43 +367,57 @@ val_t abstract_collection___NaiveCollection___count(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:106 */
   REGB0 = TAG_Int(0);
-  fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:96 */
-  while(1) {
-    REGB1 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
-    if (UNTAG_Bool(REGB1)) {
-      fra.me.REG[2] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
-      REGB1 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
-      if (UNTAG_Bool(REGB1)) {
-      } else {
-        REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        if (UNTAG_Bool(REGB2)) {
-          REGB2 = TAG_Bool(false);
-          REGB1 = REGB2;
-        } else {
-          REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-          REGB1 = REGB2;
-        }
-      }
-      if (UNTAG_Bool(REGB1)) {
-        REGB1 = TAG_Int(1);
-        REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-        REGB0 = REGB1;
-      /* ./../lib/standard//collection//abstract_collection.nit:96 */
-      }
-    } else {
-      goto label1;
-    }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
-  }
-  label1: while(0);
-  /* ./../lib/standard//collection//abstract_collection.nit:97 */
+  fra.me.REG[2] = REGB0;
+  CALL_abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_abstract_collection___NaiveCollection___count_1));
+  /* ./../lib/standard//collection//abstract_collection.nit:108 */
+  REGB0 = fra.me.REG[2];
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
+  void OC_abstract_collection___NaiveCollection___count_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
+    struct {struct stack_frame_t me;} fra;
+    val_t REGB0;
+    val_t REGB1;
+    fun_t CREG[1];
+    val_t tmp;
+    /* ./../lib/standard//collection//abstract_collection.nit:107 */
+    fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+    fra.me.file = LOCATE_abstract_collection;
+    fra.me.line = 0;
+    fra.me.meth = LOCATE_abstract_collection___NaiveCollection___count;
+    fra.me.has_broke = 0;
+    fra.me.REG_size = 1;
+    fra.me.REG[0] = NIT_NULL;
+    fra.me.closure_ctx = closctx_param;
+    fra.me.closure_funs = CREG;
+    fra.me.REG[0] = p0;
+    CREG[0] = clos_fun0;
+    REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[0],closctx->REG[1]));
+    if (UNTAG_Bool(REGB0)) {
+    } else {
+      REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        REGB1 = TAG_Bool(false);
+        REGB0 = REGB1;
+      } else {
+        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], closctx->REG[1]);
+        REGB0 = REGB1;
+      }
+    }
+    if (UNTAG_Bool(REGB0)) {
+      REGB0 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:215 */
+      REGB0 = TAG_Int(UNTAG_Int(closctx->REG[2])+UNTAG_Int(REGB0));
+      /* ./../lib/standard//collection//abstract_collection.nit:107 */
+      closctx->REG[2] = REGB0;
+    }
+    stack_frame_head = fra.me.prev;
+    return;
+  }
 val_t abstract_collection___NaiveCollection___first(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
@@ -343,25 +425,25 @@ val_t abstract_collection___NaiveCollection___first(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 100;
+  fra.me.line = 111;
   fra.me.meth = LOCATE_abstract_collection___NaiveCollection___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:113 */
   REGB0 = CALL_abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Int(0);
+  /* ./../lib/standard//kernel.nit:214 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//abstract_collection.nit:102 */
+  /* ./../lib/standard//collection//abstract_collection.nit:113 */
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 102);
-    nit_exit(1);
+    nit_abort("Assert failed", NULL, LOCATE_abstract_collection, 113);
   }
+  /* ./../lib/standard//collection//abstract_collection.nit:114 */
   fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:103 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -372,14 +454,12 @@ val_t abstract_collection___Iterator___item(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 110;
+  fra.me.line = 121;
   fra.me.meth = LOCATE_abstract_collection___Iterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:110 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 110);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:121 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 121);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -388,14 +468,12 @@ void abstract_collection___Iterator___next(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 114;
+  fra.me.line = 125;
   fra.me.meth = LOCATE_abstract_collection___Iterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:114 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 114);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:125 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 125);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -404,30 +482,28 @@ val_t abstract_collection___Iterator___is_ok(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 118;
+  fra.me.line = 129;
   fra.me.meth = LOCATE_abstract_collection___Iterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:118 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 118);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:129 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 129);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
-val_t abstract_collection___Container___iterator(val_t p0){
+val_t abstract_collection___Container___first(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 145;
-  fra.me.meth = LOCATE_abstract_collection___Container___iterator;
+  fra.me.line = 137;
+  fra.me.meth = LOCATE_abstract_collection___Container___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[0] = NEW_ContainerIterator_abstract_collection___ContainerIterator___init(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:145 */
+  /* ./../lib/standard//collection//abstract_collection.nit:137 */
+  fra.me.REG[0] = ATTR_abstract_collection___Container____item(fra.me.REG[0]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -439,14 +515,14 @@ val_t abstract_collection___Container___is_empty(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 128;
+  fra.me.line = 139;
   fra.me.meth = LOCATE_abstract_collection___Container___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:139 */
   REGB0 = TAG_Bool(false);
-  /* ./../lib/standard//collection//abstract_collection.nit:128 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -458,14 +534,14 @@ val_t abstract_collection___Container___length(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 130;
+  fra.me.line = 141;
   fra.me.meth = LOCATE_abstract_collection___Container___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:141 */
   REGB0 = TAG_Int(1);
-  /* ./../lib/standard//collection//abstract_collection.nit:130 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -478,7 +554,7 @@ val_t abstract_collection___Container___has(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 132;
+  fra.me.line = 143;
   fra.me.meth = LOCATE_abstract_collection___Container___has;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -486,9 +562,9 @@ val_t abstract_collection___Container___has(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:143 */
   fra.me.REG[0] = ATTR_abstract_collection___Container____item(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[0],fra.me.REG[1]));
-  /* ./../lib/standard//collection//abstract_collection.nit:132 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
@@ -512,7 +588,7 @@ val_t abstract_collection___Container___has_only(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 134;
+  fra.me.line = 145;
   fra.me.meth = LOCATE_abstract_collection___Container___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -520,9 +596,9 @@ val_t abstract_collection___Container___has_only(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:145 */
   fra.me.REG[0] = ATTR_abstract_collection___Container____item(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[0],fra.me.REG[1]));
-  /* ./../lib/standard//collection//abstract_collection.nit:134 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
@@ -546,7 +622,7 @@ val_t abstract_collection___Container___count(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 136;
+  fra.me.line = 147;
   fra.me.meth = LOCATE_abstract_collection___Container___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -554,9 +630,9 @@ val_t abstract_collection___Container___count(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:149 */
   fra.me.REG[0] = ATTR_abstract_collection___Container____item(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[0],fra.me.REG[1]));
-  /* ./../lib/standard//collection//abstract_collection.nit:138 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
@@ -569,32 +645,32 @@ val_t abstract_collection___Container___count(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
+    /* ./../lib/standard//collection//abstract_collection.nit:150 */
     REGB0 = TAG_Int(1);
-    /* ./../lib/standard//collection//abstract_collection.nit:139 */
     goto label1;
   } else {
+    /* ./../lib/standard//collection//abstract_collection.nit:152 */
     REGB1 = TAG_Int(0);
     REGB0 = REGB1;
-    /* ./../lib/standard//collection//abstract_collection.nit:141 */
     goto label1;
   }
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-val_t abstract_collection___Container___first(val_t p0){
+val_t abstract_collection___Container___iterator(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 126;
-  fra.me.meth = LOCATE_abstract_collection___Container___first;
+  fra.me.line = 156;
+  fra.me.meth = LOCATE_abstract_collection___Container___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[0] = ATTR_abstract_collection___Container____item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:126 */
+  /* ./../lib/standard//collection//abstract_collection.nit:156 */
+  fra.me.REG[0] = NEW_ContainerIterator_abstract_collection___ContainerIterator___init(fra.me.REG[0]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -607,7 +683,7 @@ void abstract_collection___Container___init(val_t p0, val_t p1, int* init_table)
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 147;
+  fra.me.line = 158;
   fra.me.meth = LOCATE_abstract_collection___Container___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -615,7 +691,7 @@ void abstract_collection___Container___init(val_t p0, val_t p1, int* init_table)
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//abstract_collection.nit:148 */
+  /* ./../lib/standard//collection//abstract_collection.nit:159 */
   ATTR_abstract_collection___Container____item(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -626,14 +702,14 @@ val_t abstract_collection___Container___item(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 150;
+  fra.me.line = 161;
   fra.me.meth = LOCATE_abstract_collection___Container___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:161 */
   fra.me.REG[0] = ATTR_abstract_collection___Container____item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:150 */
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -642,7 +718,7 @@ void abstract_collection___Container___item__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 150;
+  fra.me.line = 161;
   fra.me.meth = LOCATE_abstract_collection___Container___item__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -650,7 +726,7 @@ void abstract_collection___Container___item__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//abstract_collection.nit:150 */
+  /* ./../lib/standard//collection//abstract_collection.nit:161 */
   ATTR_abstract_collection___Container____item(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -661,19 +737,17 @@ val_t abstract_collection___ContainerIterator___item(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 157;
+  fra.me.line = 168;
   fra.me.meth = LOCATE_abstract_collection___ContainerIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:168 */
   REGB0 = TAG_Bool(ATTR_abstract_collection___ContainerIterator____container(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//abstract_collection.nit:157 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_container");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 157);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_container", LOCATE_abstract_collection, 168);
   }
   fra.me.REG[0] = ATTR_abstract_collection___ContainerIterator____container(fra.me.REG[0]);
   fra.me.REG[0] = CALL_abstract_collection___Container___item(fra.me.REG[0])(fra.me.REG[0]);
@@ -688,41 +762,17 @@ void abstract_collection___ContainerIterator___next(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 159;
+  fra.me.line = 170;
   fra.me.meth = LOCATE_abstract_collection___ContainerIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:170 */
   REGB0 = TAG_Bool(false);
-  /* ./../lib/standard//collection//abstract_collection.nit:159 */
   ATTR_abstract_collection___ContainerIterator____is_ok(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
-}
-val_t abstract_collection___ContainerIterator___is_ok(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 163;
-  fra.me.meth = LOCATE_abstract_collection___ContainerIterator___is_ok;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_abstract_collection___ContainerIterator____is_ok(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//abstract_collection.nit:163 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_is_ok");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 163);
-    nit_exit(1);
-  }
-  REGB0 = ATTR_abstract_collection___ContainerIterator____is_ok(fra.me.REG[0]);
-  stack_frame_head = fra.me.prev;
-  return REGB0;
 }
 void abstract_collection___ContainerIterator___init(val_t p0, val_t p1, int* init_table){
   int itpos1 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_ContainerIterator].i;
@@ -731,7 +781,7 @@ void abstract_collection___ContainerIterator___init(val_t p0, val_t p1, int* ini
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 161;
+  fra.me.line = 172;
   fra.me.meth = LOCATE_abstract_collection___ContainerIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -739,25 +789,45 @@ void abstract_collection___ContainerIterator___init(val_t p0, val_t p1, int* ini
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//abstract_collection.nit:161 */
+  /* ./../lib/standard//collection//abstract_collection.nit:172 */
   ATTR_abstract_collection___ContainerIterator____container(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
   return;
+}
+val_t abstract_collection___ContainerIterator___is_ok(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_abstract_collection;
+  fra.me.line = 174;
+  fra.me.meth = LOCATE_abstract_collection___ContainerIterator___is_ok;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:174 */
+  REGB0 = TAG_Bool(ATTR_abstract_collection___ContainerIterator____is_ok(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_is_ok", LOCATE_abstract_collection, 174);
+  }
+  REGB0 = ATTR_abstract_collection___ContainerIterator____is_ok(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
 }
 void abstract_collection___RemovableCollection___clear(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 171;
+  fra.me.line = 182;
   fra.me.meth = LOCATE_abstract_collection___RemovableCollection___clear;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:171 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 171);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:182 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 182);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -766,14 +836,12 @@ void abstract_collection___RemovableCollection___remove(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 174;
+  fra.me.line = 185;
   fra.me.meth = LOCATE_abstract_collection___RemovableCollection___remove;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:174 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 174);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:185 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 185);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -783,7 +851,7 @@ void abstract_collection___RemovableCollection___remove_all(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 177;
+  fra.me.line = 188;
   fra.me.meth = LOCATE_abstract_collection___RemovableCollection___remove_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -791,7 +859,7 @@ void abstract_collection___RemovableCollection___remove_all(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//abstract_collection.nit:178 */
+  /* ./../lib/standard//collection//abstract_collection.nit:189 */
   while(1) {
     REGB0 = CALL_abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     if (UNTAG_Bool(REGB0)) {
@@ -809,48 +877,52 @@ void abstract_collection___SimpleCollection___add(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 184;
+  fra.me.line = 195;
   fra.me.meth = LOCATE_abstract_collection___SimpleCollection___add;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:184 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 184);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:195 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 195);
   stack_frame_head = fra.me.prev;
   return;
 }
 void abstract_collection___SimpleCollection___add_all(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
-  val_t REGB0;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 188;
+  fra.me.line = 199;
   fra.me.meth = LOCATE_abstract_collection___SimpleCollection___add_all;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  fra.me.REG[1] = CALL_abstract_collection___Collection___iterator(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./../lib/standard//collection//abstract_collection.nit:189 */
-  while(1) {
-    REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[1])(fra.me.REG[1]);
-    if (UNTAG_Bool(REGB0)) {
-      fra.me.REG[2] = CALL_abstract_collection___Iterator___item(fra.me.REG[1])(fra.me.REG[1]);
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-    } else {
-      goto label1;
-    }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[1])(fra.me.REG[1]);
-  }
-  label1: while(0);
+  CALL_abstract_collection___Collection___iterate(fra.me.REG[1])(fra.me.REG[1], (&(fra.me)), ((fun_t)OC_abstract_collection___SimpleCollection___add_all_1));
   stack_frame_head = fra.me.prev;
   return;
 }
+  void OC_abstract_collection___SimpleCollection___add_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
+    struct {struct stack_frame_t me;} fra;
+    fun_t CREG[1];
+    val_t tmp;
+    /* ./../lib/standard//collection//abstract_collection.nit:200 */
+    fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+    fra.me.file = LOCATE_abstract_collection;
+    fra.me.line = 0;
+    fra.me.meth = LOCATE_abstract_collection___SimpleCollection___add_all;
+    fra.me.has_broke = 0;
+    fra.me.REG_size = 1;
+    fra.me.REG[0] = NIT_NULL;
+    fra.me.closure_ctx = closctx_param;
+    fra.me.closure_funs = CREG;
+    fra.me.REG[0] = p0;
+    CREG[0] = clos_fun0;
+    CALL_abstract_collection___SimpleCollection___add(closctx->REG[0])(closctx->REG[0], fra.me.REG[0]);
+    stack_frame_head = fra.me.prev;
+    return;
+  }
 val_t abstract_collection___Set___has_only(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
@@ -860,7 +932,7 @@ val_t abstract_collection___Set___has_only(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 204;
+  fra.me.line = 215;
   fra.me.meth = LOCATE_abstract_collection___Set___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -868,39 +940,42 @@ val_t abstract_collection___Set___has_only(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:217 */
   REGB0 = CALL_abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
+  /* ./../lib/standard//collection//abstract_collection.nit:218 */
   REGB1 = TAG_Int(1);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
-  /* ./../lib/standard//collection//abstract_collection.nit:207 */
   if (UNTAG_Bool(REGB2)) {
   } else {
+    /* ./../lib/standard//kernel.nit:207 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
+    /* ./../lib/standard//collection//abstract_collection.nit:218 */
     REGB2 = REGB1;
-  /* ./../lib/standard//collection//abstract_collection.nit:207 */
   }
   if (UNTAG_Bool(REGB2)) {
+    /* ./../lib/standard//collection//abstract_collection.nit:219 */
     REGB2 = CALL_abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-    /* ./../lib/standard//collection//abstract_collection.nit:208 */
     goto label1;
   } else {
+    /* ./../lib/standard//collection//abstract_collection.nit:220 */
     REGB1 = TAG_Int(0);
     REGB3 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
-    /* ./../lib/standard//collection//abstract_collection.nit:209 */
     if (UNTAG_Bool(REGB3)) {
     } else {
+      /* ./../lib/standard//kernel.nit:207 */
       REGB1 = TAG_Bool((REGB0)==(REGB1));
+      /* ./../lib/standard//collection//abstract_collection.nit:220 */
       REGB3 = REGB1;
-    /* ./../lib/standard//collection//abstract_collection.nit:209 */
     }
     if (UNTAG_Bool(REGB3)) {
+      /* ./../lib/standard//collection//abstract_collection.nit:221 */
       REGB3 = TAG_Bool(true);
       REGB2 = REGB3;
-      /* ./../lib/standard//collection//abstract_collection.nit:210 */
       goto label1;
     } else {
+      /* ./../lib/standard//collection//abstract_collection.nit:223 */
       REGB3 = TAG_Bool(false);
       REGB2 = REGB3;
-      /* ./../lib/standard//collection//abstract_collection.nit:212 */
       goto label1;
     }
   }
@@ -915,7 +990,7 @@ val_t abstract_collection___Set___count(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 216;
+  fra.me.line = 227;
   fra.me.meth = LOCATE_abstract_collection___Set___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -923,16 +998,16 @@ val_t abstract_collection___Set___count(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:230 */
   REGB0 = CALL_abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./../lib/standard//collection//abstract_collection.nit:219 */
   if (UNTAG_Bool(REGB0)) {
+    /* ./../lib/standard//collection//abstract_collection.nit:231 */
     REGB0 = TAG_Int(1);
-    /* ./../lib/standard//collection//abstract_collection.nit:220 */
     goto label1;
   } else {
+    /* ./../lib/standard//collection//abstract_collection.nit:233 */
     REGB1 = TAG_Int(0);
     REGB0 = REGB1;
-    /* ./../lib/standard//collection//abstract_collection.nit:222 */
     goto label1;
   }
   label1: while(0);
@@ -944,7 +1019,7 @@ void abstract_collection___Set___remove_all(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 226;
+  fra.me.line = 237;
   fra.me.meth = LOCATE_abstract_collection___Set___remove_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -952,40 +1027,22 @@ void abstract_collection___Set___remove_all(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//abstract_collection.nit:227 */
+  /* ./../lib/standard//collection//abstract_collection.nit:238 */
   CALL_abstract_collection___RemovableCollection___remove(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
-}
-val_t abstract_collection___MapRead___iterator(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 238;
-  fra.me.meth = LOCATE_abstract_collection___MapRead___iterator;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:238 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 238);
-  nit_exit(1);
-  stack_frame_head = fra.me.prev;
-  return NIT_NULL;
 }
 val_t abstract_collection___MapRead_____bra(val_t p0, val_t p1){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 232;
+  fra.me.line = 243;
   fra.me.meth = LOCATE_abstract_collection___MapRead_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:232 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 232);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:243 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 243);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -994,14 +1051,26 @@ val_t abstract_collection___MapRead___has_key(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 235;
+  fra.me.line = 246;
   fra.me.meth = LOCATE_abstract_collection___MapRead___has_key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:235 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 235);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:246 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 246);
+  stack_frame_head = fra.me.prev;
+  return NIT_NULL;
+}
+val_t abstract_collection___MapRead___iterator(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_abstract_collection;
+  fra.me.line = 249;
+  fra.me.meth = LOCATE_abstract_collection___MapRead___iterator;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 0;
+  /* ./../lib/standard//collection//abstract_collection.nit:249 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 249);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1010,14 +1079,12 @@ void abstract_collection___Map_____braeq(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 256;
+  fra.me.line = 267;
   fra.me.meth = LOCATE_abstract_collection___Map_____braeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:256 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 256);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:267 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 267);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -1026,14 +1093,12 @@ void abstract_collection___Map___remove_at(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 259;
+  fra.me.line = 270;
   fra.me.meth = LOCATE_abstract_collection___Map___remove_at;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:259 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 259);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:270 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 270);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -1043,7 +1108,7 @@ void abstract_collection___Map___recover_with(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 262;
+  fra.me.line = 273;
   fra.me.meth = LOCATE_abstract_collection___Map___recover_with;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1053,19 +1118,20 @@ void abstract_collection___Map___recover_with(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:277 */
   fra.me.REG[1] = CALL_abstract_collection___Collection___iterator(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./../lib/standard//collection//abstract_collection.nit:267 */
+  /* ./../lib/standard//collection//abstract_collection.nit:278 */
   while(1) {
     REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[1])(fra.me.REG[1]);
     if (UNTAG_Bool(REGB0)) {
+      /* ./../lib/standard//collection//abstract_collection.nit:279 */
       fra.me.REG[2] = CALL_abstract_collection___MapIterator___key(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[3] = CALL_abstract_collection___Iterator___item(fra.me.REG[1])(fra.me.REG[1]);
-      /* ./../lib/standard//collection//abstract_collection.nit:268 */
       CALL_abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2], fra.me.REG[3]);
-      /* ./../lib/standard//collection//abstract_collection.nit:269 */
+      /* ./../lib/standard//collection//abstract_collection.nit:280 */
       CALL_abstract_collection___Iterator___next(fra.me.REG[1])(fra.me.REG[1]);
     } else {
-      /* ./../lib/standard//collection//abstract_collection.nit:267 */
+      /* ./../lib/standard//collection//abstract_collection.nit:278 */
       goto label1;
     }
   }
@@ -1078,30 +1144,12 @@ val_t abstract_collection___MapIterator___key(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 277;
+  fra.me.line = 288;
   fra.me.meth = LOCATE_abstract_collection___MapIterator___key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:277 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 277);
-  nit_exit(1);
-  stack_frame_head = fra.me.prev;
-  return NIT_NULL;
-}
-val_t abstract_collection___SequenceRead___iterator(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 316;
-  fra.me.meth = LOCATE_abstract_collection___SequenceRead___iterator;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:316 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 316);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:288 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 288);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1111,24 +1159,22 @@ val_t abstract_collection___SequenceRead___first(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 288;
+  fra.me.line = 299;
   fra.me.meth = LOCATE_abstract_collection___SequenceRead___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:303 */
   REGB0 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
-  /* ./../lib/standard//collection//abstract_collection.nit:292 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Assert %s  failed", "'not_empty'");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 292);
-    nit_exit(1);
+    nit_abort("Assert %s  failed", "'not_empty'", LOCATE_abstract_collection, 303);
   }
+  /* ./../lib/standard//collection//abstract_collection.nit:304 */
   REGB0 = TAG_Int(0);
   fra.me.REG[0] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[0])(fra.me.REG[0], REGB0);
-  /* ./../lib/standard//collection//abstract_collection.nit:293 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -1141,26 +1187,26 @@ val_t abstract_collection___SequenceRead___last(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 296;
+  fra.me.line = 307;
   fra.me.meth = LOCATE_abstract_collection___SequenceRead___last;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:311 */
   REGB0 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
-  /* ./../lib/standard//collection//abstract_collection.nit:300 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Assert %s  failed", "'not_empty'");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 300);
-    nit_exit(1);
+    nit_abort("Assert %s  failed", "'not_empty'", LOCATE_abstract_collection, 311);
   }
+  /* ./../lib/standard//collection//abstract_collection.nit:312 */
   REGB0 = CALL_abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Int(1);
+  /* ./../lib/standard//kernel.nit:217 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
+  /* ./../lib/standard//collection//abstract_collection.nit:312 */
   fra.me.REG[0] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[0])(fra.me.REG[0], REGB1);
-  /* ./../lib/standard//collection//abstract_collection.nit:301 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -1173,7 +1219,7 @@ val_t abstract_collection___SequenceRead___index_of(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 304;
+  fra.me.line = 315;
   fra.me.meth = LOCATE_abstract_collection___SequenceRead___index_of;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1182,14 +1228,15 @@ val_t abstract_collection___SequenceRead___index_of(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:319 */
   fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:309 */
+  /* ./../lib/standard//collection//abstract_collection.nit:320 */
   while(1) {
     REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
     if (UNTAG_Bool(REGB0)) {
+      /* ./../lib/standard//collection//abstract_collection.nit:321 */
       fra.me.REG[2] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
       REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
-      /* ./../lib/standard//collection//abstract_collection.nit:310 */
       if (UNTAG_Bool(REGB0)) {
       } else {
         REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
@@ -1205,40 +1252,38 @@ val_t abstract_collection___SequenceRead___index_of(val_t p0, val_t p1){
         REGB0 = CALL_abstract_collection___IndexedIterator___index(fra.me.REG[0])(fra.me.REG[0]);
         goto label1;
       }
-      /* ./../lib/standard//collection//abstract_collection.nit:311 */
+      /* ./../lib/standard//collection//abstract_collection.nit:322 */
       CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
     } else {
-      /* ./../lib/standard//collection//abstract_collection.nit:309 */
+      /* ./../lib/standard//collection//abstract_collection.nit:320 */
       goto label2;
     }
   }
   label2: while(0);
+  /* ./../lib/standard//collection//abstract_collection.nit:324 */
   REGB1 = TAG_Int(1);
+  /* ./../lib/standard//kernel.nit:216 */
   REGB1 = TAG_Int(-UNTAG_Int(REGB1));
+  /* ./../lib/standard//collection//abstract_collection.nit:324 */
   REGB0 = REGB1;
-  /* ./../lib/standard//collection//abstract_collection.nit:313 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-void abstract_collection___Sequence___add(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+val_t abstract_collection___SequenceRead___iterator(val_t p0){
+  struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 342;
-  fra.me.meth = LOCATE_abstract_collection___Sequence___add;
+  fra.me.line = 327;
+  fra.me.meth = LOCATE_abstract_collection___SequenceRead___iterator;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//abstract_collection.nit:343 */
-  CALL_abstract_collection___Sequence___push(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  fra.me.REG_size = 0;
+  /* ./../lib/standard//collection//abstract_collection.nit:327 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 327);
   stack_frame_head = fra.me.prev;
-  return;
+  return NIT_NULL;
 }
 void abstract_collection___Sequence___first__eq(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
@@ -1246,7 +1291,7 @@ void abstract_collection___Sequence___first__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 325;
+  fra.me.line = 336;
   fra.me.meth = LOCATE_abstract_collection___Sequence___first__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1254,8 +1299,8 @@ void abstract_collection___Sequence___first__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:339 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//abstract_collection.nit:328 */
   CALL_abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -1267,7 +1312,7 @@ void abstract_collection___Sequence___last__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 330;
+  fra.me.line = 341;
   fra.me.meth = LOCATE_abstract_collection___Sequence___last__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1275,20 +1320,43 @@ void abstract_collection___Sequence___last__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:345 */
   REGB0 = CALL_abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
+  /* ./../lib/standard//collection//abstract_collection.nit:346 */
   REGB1 = TAG_Int(0);
+  /* ./../lib/standard//kernel.nit:214 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//abstract_collection.nit:335 */
+  /* ./../lib/standard//collection//abstract_collection.nit:346 */
   if (UNTAG_Bool(REGB1)) {
+    /* ./../lib/standard//collection//abstract_collection.nit:347 */
     REGB1 = TAG_Int(1);
+    /* ./../lib/standard//kernel.nit:217 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//abstract_collection.nit:336 */
+    /* ./../lib/standard//collection//abstract_collection.nit:347 */
     CALL_abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], REGB1, fra.me.REG[1]);
   } else {
+    /* ./../lib/standard//collection//abstract_collection.nit:349 */
     REGB1 = TAG_Int(0);
-    /* ./../lib/standard//collection//abstract_collection.nit:338 */
     CALL_abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], REGB1, fra.me.REG[1]);
   }
+  stack_frame_head = fra.me.prev;
+  return;
+}
+void abstract_collection___Sequence___add(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_abstract_collection;
+  fra.me.line = 353;
+  fra.me.meth = LOCATE_abstract_collection___Sequence___add;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:354 */
+  CALL_abstract_collection___Sequence___push(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -1297,61 +1365,63 @@ void abstract_collection___Sequence___push(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 345;
+  fra.me.line = 356;
   fra.me.meth = LOCATE_abstract_collection___Sequence___push;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:345 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 345);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:356 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 356);
   stack_frame_head = fra.me.prev;
   return;
 }
 void abstract_collection___Sequence___append(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
-  val_t REGB0;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 348;
+  fra.me.line = 359;
   fra.me.meth = LOCATE_abstract_collection___Sequence___append;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  fra.me.REG[1] = CALL_abstract_collection___Collection___iterator(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./../lib/standard//collection//abstract_collection.nit:349 */
-  while(1) {
-    REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[1])(fra.me.REG[1]);
-    if (UNTAG_Bool(REGB0)) {
-      fra.me.REG[2] = CALL_abstract_collection___Iterator___item(fra.me.REG[1])(fra.me.REG[1]);
-      CALL_abstract_collection___Sequence___push(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-    } else {
-      goto label1;
-    }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[1])(fra.me.REG[1]);
-  }
-  label1: while(0);
+  CALL_abstract_collection___Collection___iterate(fra.me.REG[1])(fra.me.REG[1], (&(fra.me)), ((fun_t)OC_abstract_collection___Sequence___append_1));
   stack_frame_head = fra.me.prev;
   return;
 }
+  void OC_abstract_collection___Sequence___append_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
+    struct {struct stack_frame_t me;} fra;
+    fun_t CREG[1];
+    val_t tmp;
+    /* ./../lib/standard//collection//abstract_collection.nit:360 */
+    fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+    fra.me.file = LOCATE_abstract_collection;
+    fra.me.line = 0;
+    fra.me.meth = LOCATE_abstract_collection___Sequence___append;
+    fra.me.has_broke = 0;
+    fra.me.REG_size = 1;
+    fra.me.REG[0] = NIT_NULL;
+    fra.me.closure_ctx = closctx_param;
+    fra.me.closure_funs = CREG;
+    fra.me.REG[0] = p0;
+    CREG[0] = clos_fun0;
+    CALL_abstract_collection___Sequence___push(closctx->REG[0])(closctx->REG[0], fra.me.REG[0]);
+    stack_frame_head = fra.me.prev;
+    return;
+  }
 val_t abstract_collection___Sequence___pop(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 351;
+  fra.me.line = 362;
   fra.me.meth = LOCATE_abstract_collection___Sequence___pop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:351 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 351);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:362 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 362);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1360,14 +1430,12 @@ void abstract_collection___Sequence___unshift(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 354;
+  fra.me.line = 365;
   fra.me.meth = LOCATE_abstract_collection___Sequence___unshift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:354 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 354);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:365 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 365);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -1376,14 +1444,26 @@ val_t abstract_collection___Sequence___shift(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 357;
+  fra.me.line = 368;
   fra.me.meth = LOCATE_abstract_collection___Sequence___shift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:357 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 357);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:368 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 368);
+  stack_frame_head = fra.me.prev;
+  return NIT_NULL;
+}
+val_t abstract_collection___IndexedIterator___index(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_abstract_collection;
+  fra.me.line = 377;
+  fra.me.meth = LOCATE_abstract_collection___IndexedIterator___index;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 0;
+  /* ./../lib/standard//collection//abstract_collection.nit:377 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 377);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1393,32 +1473,30 @@ val_t abstract_collection___IndexedIterator___key(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 369;
+  fra.me.line = 380;
   fra.me.meth = LOCATE_abstract_collection___IndexedIterator___key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:381 */
   REGB0 = CALL_abstract_collection___IndexedIterator___index(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:370 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-val_t abstract_collection___IndexedIterator___index(val_t p0){
+val_t abstract_collection___CoupleMap___couple_at(val_t p0, val_t p1){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 366;
-  fra.me.meth = LOCATE_abstract_collection___IndexedIterator___index;
+  fra.me.line = 387;
+  fra.me.meth = LOCATE_abstract_collection___CoupleMap___couple_at;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:366 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 366);
-  nit_exit(1);
+  /* ./../lib/standard//collection//abstract_collection.nit:387 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstract_collection, 387);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1429,7 +1507,7 @@ val_t abstract_collection___CoupleMap_____bra(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 380;
+  fra.me.line = 391;
   fra.me.meth = LOCATE_abstract_collection___CoupleMap_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1437,9 +1515,10 @@ val_t abstract_collection___CoupleMap_____bra(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:393 */
   fra.me.REG[1] = CALL_abstract_collection___CoupleMap___couple_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* ./../lib/standard//collection//abstract_collection.nit:394 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./../lib/standard//collection//abstract_collection.nit:383 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -1452,17 +1531,13 @@ val_t abstract_collection___CoupleMap_____bra(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//abstract_collection.nit:384 */
-    fprintf(stderr, "Aborted");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 384);
-    nit_exit(1);
+    /* ./../lib/standard//collection//abstract_collection.nit:395 */
+    nit_abort("Aborted", NULL, LOCATE_abstract_collection, 395);
   } else {
+    /* ./../lib/standard//collection//abstract_collection.nit:397 */
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-    /* ./../lib/standard//collection//abstract_collection.nit:386 */
     if (UNTAG_Bool(REGB0)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 386);
-      nit_exit(1);
+      nit_abort("Reciever is null", NULL, LOCATE_abstract_collection, 397);
     }
     fra.me.REG[1] = CALL_abstract_collection___Couple___second(fra.me.REG[1])(fra.me.REG[1]);
     goto label1;
@@ -1478,7 +1553,7 @@ val_t abstract_collection___CoupleMap___has_key(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 390;
+  fra.me.line = 401;
   fra.me.meth = LOCATE_abstract_collection___CoupleMap___has_key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1486,9 +1561,9 @@ val_t abstract_collection___CoupleMap___has_key(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//abstract_collection.nit:401 */
   fra.me.REG[1] = CALL_abstract_collection___CoupleMap___couple_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./../lib/standard//collection//abstract_collection.nit:390 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -1506,49 +1581,29 @@ val_t abstract_collection___CoupleMap___has_key(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-val_t abstract_collection___CoupleMap___couple_at(val_t p0, val_t p1){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 376;
-  fra.me.meth = LOCATE_abstract_collection___CoupleMap___couple_at;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//abstract_collection.nit:376 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 376);
-  nit_exit(1);
-  stack_frame_head = fra.me.prev;
-  return NIT_NULL;
-}
 val_t abstract_collection___CoupleMapIterator___item(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 398;
+  fra.me.line = 409;
   fra.me.meth = LOCATE_abstract_collection___CoupleMapIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:409 */
   REGB0 = TAG_Bool(ATTR_abstract_collection___CoupleMapIterator____iter(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//abstract_collection.nit:398 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_iter");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 398);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_abstract_collection, 409);
   }
   fra.me.REG[0] = ATTR_abstract_collection___CoupleMapIterator____iter(fra.me.REG[0]);
   fra.me.REG[0] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 398);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_abstract_collection, 409);
   }
   fra.me.REG[0] = CALL_abstract_collection___Couple___second(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1556,30 +1611,35 @@ val_t abstract_collection___CoupleMapIterator___item(val_t p0){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-void abstract_collection___CoupleMapIterator___next(val_t p0){
+val_t abstract_collection___CoupleMapIterator___key(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 406;
-  fra.me.meth = LOCATE_abstract_collection___CoupleMapIterator___next;
+  fra.me.line = 413;
+  fra.me.meth = LOCATE_abstract_collection___CoupleMapIterator___key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:413 */
   REGB0 = TAG_Bool(ATTR_abstract_collection___CoupleMapIterator____iter(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//abstract_collection.nit:408 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_iter");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 408);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_abstract_collection, 413);
   }
   fra.me.REG[0] = ATTR_abstract_collection___CoupleMapIterator____iter(fra.me.REG[0]);
-  CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
+  REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+    nit_abort("Reciever is null", NULL, LOCATE_abstract_collection, 413);
+  }
+  fra.me.REG[0] = CALL_abstract_collection___Couple___first(fra.me.REG[0])(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
   stack_frame_head = fra.me.prev;
-  return;
+  return fra.me.REG[0];
 }
 val_t abstract_collection___CoupleMapIterator___is_ok(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -1587,19 +1647,17 @@ val_t abstract_collection___CoupleMapIterator___is_ok(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 404;
+  fra.me.line = 415;
   fra.me.meth = LOCATE_abstract_collection___CoupleMapIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:415 */
   REGB0 = TAG_Bool(ATTR_abstract_collection___CoupleMapIterator____iter(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//abstract_collection.nit:404 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_iter");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 404);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_abstract_collection, 415);
   }
   fra.me.REG[0] = ATTR_abstract_collection___CoupleMapIterator____iter(fra.me.REG[0]);
   REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
@@ -1608,39 +1666,28 @@ val_t abstract_collection___CoupleMapIterator___is_ok(val_t p0){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-val_t abstract_collection___CoupleMapIterator___key(val_t p0){
+void abstract_collection___CoupleMapIterator___next(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 402;
-  fra.me.meth = LOCATE_abstract_collection___CoupleMapIterator___key;
+  fra.me.line = 417;
+  fra.me.meth = LOCATE_abstract_collection___CoupleMapIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:419 */
   REGB0 = TAG_Bool(ATTR_abstract_collection___CoupleMapIterator____iter(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//abstract_collection.nit:402 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_iter");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 402);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_abstract_collection, 419);
   }
   fra.me.REG[0] = ATTR_abstract_collection___CoupleMapIterator____iter(fra.me.REG[0]);
-  fra.me.REG[0] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 402);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = CALL_abstract_collection___Couple___first(fra.me.REG[0])(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
+  CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return;
 }
 void abstract_collection___CoupleMapIterator___init(val_t p0, val_t p1, int* init_table){
   int itpos2 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_CoupleMapIterator].i;
@@ -1649,7 +1696,7 @@ void abstract_collection___CoupleMapIterator___init(val_t p0, val_t p1, int* ini
   if (init_table[itpos2]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 413;
+  fra.me.line = 424;
   fra.me.meth = LOCATE_abstract_collection___CoupleMapIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1657,7 +1704,7 @@ void abstract_collection___CoupleMapIterator___init(val_t p0, val_t p1, int* ini
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//abstract_collection.nit:413 */
+  /* ./../lib/standard//collection//abstract_collection.nit:424 */
   ATTR_abstract_collection___CoupleMapIterator____iter(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos2] = 1;
@@ -1668,14 +1715,14 @@ val_t abstract_collection___Couple___first(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 421;
+  fra.me.line = 432;
   fra.me.meth = LOCATE_abstract_collection___Couple___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:432 */
   fra.me.REG[0] = ATTR_abstract_collection___Couple____first(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:421 */
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -1684,7 +1731,7 @@ void abstract_collection___Couple___first__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 421;
+  fra.me.line = 432;
   fra.me.meth = LOCATE_abstract_collection___Couple___first__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1692,7 +1739,7 @@ void abstract_collection___Couple___first__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//abstract_collection.nit:421 */
+  /* ./../lib/standard//collection//abstract_collection.nit:432 */
   ATTR_abstract_collection___Couple____first(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1702,14 +1749,14 @@ val_t abstract_collection___Couple___second(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 424;
+  fra.me.line = 435;
   fra.me.meth = LOCATE_abstract_collection___Couple___second;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//abstract_collection.nit:435 */
   fra.me.REG[0] = ATTR_abstract_collection___Couple____second(fra.me.REG[0]);
-  /* ./../lib/standard//collection//abstract_collection.nit:424 */
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -1718,7 +1765,7 @@ void abstract_collection___Couple___second__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 424;
+  fra.me.line = 435;
   fra.me.meth = LOCATE_abstract_collection___Couple___second__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1726,7 +1773,7 @@ void abstract_collection___Couple___second__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//abstract_collection.nit:424 */
+  /* ./../lib/standard//collection//abstract_collection.nit:435 */
   ATTR_abstract_collection___Couple____second(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1738,7 +1785,7 @@ void abstract_collection___Couple___init(val_t p0, val_t p1, val_t p2, int* init
   if (init_table[itpos3]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstract_collection;
-  fra.me.line = 427;
+  fra.me.line = 438;
   fra.me.meth = LOCATE_abstract_collection___Couple___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1748,9 +1795,9 @@ void abstract_collection___Couple___init(val_t p0, val_t p1, val_t p2, int* init
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./../lib/standard//collection//abstract_collection.nit:430 */
+  /* ./../lib/standard//collection//abstract_collection.nit:441 */
   ATTR_abstract_collection___Couple____first(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//abstract_collection.nit:431 */
+  /* ./../lib/standard//collection//abstract_collection.nit:442 */
   ATTR_abstract_collection___Couple____second(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos3] = 1;

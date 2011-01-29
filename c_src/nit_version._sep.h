@@ -6,7 +6,7 @@
 extern const char *LOCATE_nit_version;
 extern const int SFT_nit_version[];
 #define CALL_nit_version___Object___nit_version(recv) ((nit_version___Object___nit_version_t)CALL((recv), (SFT_nit_version[0] + 0)))
-#define LOCATE_nit_version___Object___nit_version "nit_version::Object::nit_version"
+static const char * const LOCATE_nit_version___Object___nit_version = "nit_version::Object::nit_version";
 val_t nit_version___Object___nit_version(val_t p0);
 typedef val_t (*nit_version___Object___nit_version_t)(val_t p0);
 #endif

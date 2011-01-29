@@ -94,8 +94,10 @@ extern const int SFT_syntax_base[];
 #define ATTR_syntax_base___MMMethSrcMethod____is_init(recv) ATTR(recv, (SFT_syntax_base[29] + 0))
 #define ATTR_syntax_base___MMMethSrcMethod____is_intern(recv) ATTR(recv, (SFT_syntax_base[29] + 1))
 #define ATTR_syntax_base___MMMethSrcMethod____is_abstract(recv) ATTR(recv, (SFT_syntax_base[29] + 2))
+#define ATTR_syntax_base___MMMethSrcMethod____extern_name(recv) ATTR(recv, (SFT_syntax_base[29] + 3))
 #define INIT_TABLE_POS_MMMethSrcMethod (SFT_syntax_base[30] + 0)
-#define CALL_syntax_base___MMMethSrcMethod___init(recv) ((syntax_base___MMMethSrcMethod___init_t)CALL((recv), (SFT_syntax_base[30] + 1)))
+#define CALL_syntax_base___MMMethSrcMethod___extern_name__eq(recv) ((syntax_base___MMMethSrcMethod___extern_name__eq_t)CALL((recv), (SFT_syntax_base[30] + 1)))
+#define CALL_syntax_base___MMMethSrcMethod___init(recv) ((syntax_base___MMMethSrcMethod___init_t)CALL((recv), (SFT_syntax_base[30] + 2)))
 #define ID_MMSrcTypeProperty (SFT_syntax_base[31])
 #define COLOR_MMSrcTypeProperty (SFT_syntax_base[32])
 #define INIT_TABLE_POS_MMSrcTypeProperty (SFT_syntax_base[33] + 0)
@@ -117,11 +119,10 @@ extern const int SFT_syntax_base[];
 #define INIT_TABLE_POS_Variable (SFT_syntax_base[41] + 0)
 #define CALL_syntax_base___Variable___name(recv) ((syntax_base___Variable___name_t)CALL((recv), (SFT_syntax_base[41] + 1)))
 #define CALL_syntax_base___Variable___decl(recv) ((syntax_base___Variable___decl_t)CALL((recv), (SFT_syntax_base[41] + 2)))
-#define CALL_syntax_base___Variable___is_typed(recv) ((syntax_base___Variable___is_typed_t)CALL((recv), (SFT_syntax_base[41] + 3)))
-#define CALL_syntax_base___Variable___stype(recv) ((syntax_base___Variable___stype_t)CALL((recv), (SFT_syntax_base[41] + 4)))
-#define CALL_syntax_base___Variable___stype__eq(recv) ((syntax_base___Variable___stype__eq_t)CALL((recv), (SFT_syntax_base[41] + 5)))
-#define CALL_syntax_base___Variable___kind(recv) ((syntax_base___Variable___kind_t)CALL((recv), (SFT_syntax_base[41] + 6)))
-#define CALL_syntax_base___Variable___init(recv) ((syntax_base___Variable___init_t)CALL((recv), (SFT_syntax_base[41] + 7)))
+#define CALL_syntax_base___Variable___stype(recv) ((syntax_base___Variable___stype_t)CALL((recv), (SFT_syntax_base[41] + 3)))
+#define CALL_syntax_base___Variable___stype__eq(recv) ((syntax_base___Variable___stype__eq_t)CALL((recv), (SFT_syntax_base[41] + 4)))
+#define CALL_syntax_base___Variable___kind(recv) ((syntax_base___Variable___kind_t)CALL((recv), (SFT_syntax_base[41] + 5)))
+#define CALL_syntax_base___Variable___init(recv) ((syntax_base___Variable___init_t)CALL((recv), (SFT_syntax_base[41] + 6)))
 #define ID_VarVariable (SFT_syntax_base[42])
 #define COLOR_VarVariable (SFT_syntax_base[43])
 #define INIT_TABLE_POS_VarVariable (SFT_syntax_base[44] + 0)
@@ -142,7 +143,7 @@ extern const int SFT_syntax_base[];
 #define CALL_syntax_base___ClosureVariable___init(recv) ((syntax_base___ClosureVariable___init_t)CALL((recv), (SFT_syntax_base[54] + 2)))
 #define ID_AbsSyntaxVisitor (SFT_syntax_base[55])
 #define COLOR_AbsSyntaxVisitor (SFT_syntax_base[56])
-#define ATTR_syntax_base___AbsSyntaxVisitor____module(recv) ATTR(recv, (SFT_syntax_base[57] + 0))
+#define ATTR_syntax_base___AbsSyntaxVisitor____mmmodule(recv) ATTR(recv, (SFT_syntax_base[57] + 0))
 #define ATTR_syntax_base___AbsSyntaxVisitor____local_class(recv) ATTR(recv, (SFT_syntax_base[57] + 1))
 #define ATTR_syntax_base___AbsSyntaxVisitor____local_property(recv) ATTR(recv, (SFT_syntax_base[57] + 2))
 #define ATTR_syntax_base___AbsSyntaxVisitor____tc(recv) ATTR(recv, (SFT_syntax_base[57] + 3))
@@ -162,7 +163,7 @@ extern const int SFT_syntax_base[];
 #define CALL_syntax_base___AbsSyntaxVisitor___type_range(recv) ((syntax_base___AbsSyntaxVisitor___type_range_t)CALL((recv), (SFT_syntax_base[58] + 13)))
 #define CALL_syntax_base___AbsSyntaxVisitor___type_none(recv) ((syntax_base___AbsSyntaxVisitor___type_none_t)CALL((recv), (SFT_syntax_base[58] + 14)))
 #define CALL_syntax_base___AbsSyntaxVisitor___get_method(recv) ((syntax_base___AbsSyntaxVisitor___get_method_t)CALL((recv), (SFT_syntax_base[58] + 15)))
-#define CALL_syntax_base___AbsSyntaxVisitor___module(recv) ((syntax_base___AbsSyntaxVisitor___module_t)CALL((recv), (SFT_syntax_base[58] + 16)))
+#define CALL_syntax_base___AbsSyntaxVisitor___mmmodule(recv) ((syntax_base___AbsSyntaxVisitor___mmmodule_t)CALL((recv), (SFT_syntax_base[58] + 16)))
 #define CALL_syntax_base___AbsSyntaxVisitor___local_class(recv) ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL((recv), (SFT_syntax_base[58] + 17)))
 #define CALL_syntax_base___AbsSyntaxVisitor___local_class__eq(recv) ((syntax_base___AbsSyntaxVisitor___local_class__eq_t)CALL((recv), (SFT_syntax_base[58] + 18)))
 #define CALL_syntax_base___AbsSyntaxVisitor___local_property(recv) ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL((recv), (SFT_syntax_base[58] + 19)))
@@ -240,478 +241,493 @@ extern const int SFT_syntax_base[];
 #define CALL_syntax_base___AClosureDef___closure(recv) ((syntax_base___AClosureDef___closure_t)CALL((recv), (SFT_syntax_base[98] + 0)))
 #define CALL_syntax_base___AClosureDef___variables(recv) ((syntax_base___AClosureDef___variables_t)CALL((recv), (SFT_syntax_base[98] + 1)))
 #define CALL_syntax_base___AClosureDef___variables__eq(recv) ((syntax_base___AClosureDef___variables__eq_t)CALL((recv), (SFT_syntax_base[98] + 2)))
-#define LOCATE_syntax_base___MMSrcModule___nodes "syntax_base::MMSrcModule::(syntax_base::MMModule::nodes)"
-val_t syntax_base___MMSrcModule___nodes(val_t p0, val_t p1);
-typedef val_t (*syntax_base___MMSrcModule___nodes_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___MMSrcModule___nodes__eq "syntax_base::MMSrcModule::(syntax_base::MMModule::nodes=)"
-void syntax_base___MMSrcModule___nodes__eq(val_t p0, val_t p1, val_t p2);
-typedef void (*syntax_base___MMSrcModule___nodes__eq_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___MMSrcModule___clear_ast "syntax_base::MMSrcModule::clear_ast"
+static const char * const LOCATE_syntax_base___MMSrcModule___clear_ast = "syntax_base::MMSrcModule::clear_ast";
 void syntax_base___MMSrcModule___clear_ast(val_t p0);
 typedef void (*syntax_base___MMSrcModule___clear_ast_t)(val_t p0);
-#define LOCATE_syntax_base___MMSrcModule___node "syntax_base::MMSrcModule::node"
+static const char * const LOCATE_syntax_base___MMSrcModule___node = "syntax_base::MMSrcModule::node";
 val_t syntax_base___MMSrcModule___node(val_t p0);
 typedef val_t (*syntax_base___MMSrcModule___node_t)(val_t p0);
-#define LOCATE_syntax_base___MMSrcModule___src_local_classes "syntax_base::MMSrcModule::src_local_classes"
+static const char * const LOCATE_syntax_base___MMSrcModule___src_local_classes = "syntax_base::MMSrcModule::src_local_classes";
 val_t syntax_base___MMSrcModule___src_local_classes(val_t p0);
 typedef val_t (*syntax_base___MMSrcModule___src_local_classes_t)(val_t p0);
-#define LOCATE_syntax_base___MMSrcModule___init "syntax_base::MMSrcModule::init"
+static const char * const LOCATE_syntax_base___MMSrcModule___init = "syntax_base::MMSrcModule::init";
 void syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
 typedef void (*syntax_base___MMSrcModule___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
 val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_syntax_base___MMModule___nodes "syntax_base::MMModule::nodes"
+static const char * const LOCATE_syntax_base___MMSrcModule___nodes = "syntax_base::MMSrcModule::(syntax_base::MMModule::nodes)";
+val_t syntax_base___MMSrcModule___nodes(val_t p0, val_t p1);
+typedef val_t (*syntax_base___MMSrcModule___nodes_t)(val_t p0, val_t p1);
+static const char * const LOCATE_syntax_base___MMSrcModule___nodes__eq = "syntax_base::MMSrcModule::(syntax_base::MMModule::nodes=)";
+void syntax_base___MMSrcModule___nodes__eq(val_t p0, val_t p1, val_t p2);
+typedef void (*syntax_base___MMSrcModule___nodes__eq_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_syntax_base___MMModule___nodes = "syntax_base::MMModule::nodes";
 val_t syntax_base___MMModule___nodes(val_t p0, val_t p1);
 typedef val_t (*syntax_base___MMModule___nodes_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___MMModule___nodes__eq "syntax_base::MMModule::nodes="
+static const char * const LOCATE_syntax_base___MMModule___nodes__eq = "syntax_base::MMModule::nodes=";
 void syntax_base___MMModule___nodes__eq(val_t p0, val_t p1, val_t p2);
 typedef void (*syntax_base___MMModule___nodes__eq_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_MMGlobalClass_abstractmetamodel___MMGlobalClass___init(val_t p0);
-#define LOCATE_syntax_base___MMGlobalClass___check_visibility "syntax_base::MMGlobalClass::check_visibility"
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
+static const char * const LOCATE_syntax_base___MMGlobalClass___check_visibility = "syntax_base::MMGlobalClass::check_visibility";
 val_t syntax_base___MMGlobalClass___check_visibility(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (*syntax_base___MMGlobalClass___check_visibility_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_syntax_base___MMSrcLocalClass___node "syntax_base::MMSrcLocalClass::node"
+val_t NEW_MMGlobalClass_abstractmetamodel___MMGlobalClass___init(val_t p0);
+static const char * const LOCATE_syntax_base___MMSrcLocalClass___node = "syntax_base::MMSrcLocalClass::node";
 val_t syntax_base___MMSrcLocalClass___node(val_t p0);
 typedef val_t (*syntax_base___MMSrcLocalClass___node_t)(val_t p0);
-#define LOCATE_syntax_base___MMSrcLocalClass___formal_dict "syntax_base::MMSrcLocalClass::formal_dict"
+static const char * const LOCATE_syntax_base___MMSrcLocalClass___formal_dict = "syntax_base::MMSrcLocalClass::formal_dict";
 val_t syntax_base___MMSrcLocalClass___formal_dict(val_t p0);
 typedef val_t (*syntax_base___MMSrcLocalClass___formal_dict_t)(val_t p0);
-#define LOCATE_syntax_base___MMSrcLocalClass___src_local_properties "syntax_base::MMSrcLocalClass::src_local_properties"
+static const char * const LOCATE_syntax_base___MMSrcLocalClass___src_local_properties = "syntax_base::MMSrcLocalClass::src_local_properties";
 val_t syntax_base___MMSrcLocalClass___src_local_properties(val_t p0);
 typedef val_t (*syntax_base___MMSrcLocalClass___src_local_properties_t)(val_t p0);
-#define LOCATE_syntax_base___MMSrcLocalClass___init "syntax_base::MMSrcLocalClass::init"
+static const char * const LOCATE_syntax_base___MMSrcLocalClass___init = "syntax_base::MMSrcLocalClass::init";
 void syntax_base___MMSrcLocalClass___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 typedef void (*syntax_base___MMSrcLocalClass___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 val_t NEW_MMSrcLocalClass_syntax_base___MMSrcLocalClass___init(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(val_t p0);
-#define LOCATE_syntax_base___MMGlobalProperty___check_visibility "syntax_base::MMGlobalProperty::check_visibility"
+static const char * const LOCATE_syntax_base___MMGlobalProperty___check_visibility = "syntax_base::MMGlobalProperty::check_visibility";
 val_t syntax_base___MMGlobalProperty___check_visibility(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef val_t (*syntax_base___MMGlobalProperty___check_visibility_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-#define LOCATE_syntax_base___MMLocalProperty___node "syntax_base::MMLocalProperty::node"
+val_t NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(val_t p0);
+static const char * const LOCATE_syntax_base___MMLocalProperty___node = "syntax_base::MMLocalProperty::node";
 val_t syntax_base___MMLocalProperty___node(val_t p0);
 typedef val_t (*syntax_base___MMLocalProperty___node_t)(val_t p0);
-#define LOCATE_syntax_base___MMLocalProperty___is_init "syntax_base::MMLocalProperty::is_init"
+static const char * const LOCATE_syntax_base___MMLocalProperty___is_init = "syntax_base::MMLocalProperty::is_init";
 val_t syntax_base___MMLocalProperty___is_init(val_t p0);
 typedef val_t (*syntax_base___MMLocalProperty___is_init_t)(val_t p0);
-#define LOCATE_syntax_base___MMSrcAttribute___node "syntax_base::MMSrcAttribute::(syntax_base::MMLocalProperty::node)"
+val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
+static const char * const LOCATE_syntax_base___MMSrcAttribute___node = "syntax_base::MMSrcAttribute::(syntax_base::MMLocalProperty::node)";
 val_t syntax_base___MMSrcAttribute___node(val_t p0);
 typedef val_t (*syntax_base___MMSrcAttribute___node_t)(val_t p0);
-#define LOCATE_syntax_base___MMSrcAttribute___init "syntax_base::MMSrcAttribute::init"
+static const char * const LOCATE_syntax_base___MMSrcAttribute___init = "syntax_base::MMSrcAttribute::init";
 void syntax_base___MMSrcAttribute___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*syntax_base___MMSrcAttribute___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMSrcAttribute_syntax_base___MMSrcAttribute___init(val_t p0, val_t p1, val_t p2);
-val_t NEW_MMSrcMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-#define LOCATE_syntax_base___MMSrcMethod___is_intern "syntax_base::MMSrcMethod::(abstractmetamodel::MMMethod::is_intern)"
+static const char * const LOCATE_syntax_base___MMSrcMethod___is_intern = "syntax_base::MMSrcMethod::(abstractmetamodel::MMMethod::is_intern)";
 val_t syntax_base___MMSrcMethod___is_intern(val_t p0);
 typedef val_t (*syntax_base___MMSrcMethod___is_intern_t)(val_t p0);
-#define LOCATE_syntax_base___MMSrcMethod___is_abstract "syntax_base::MMSrcMethod::(abstractmetamodel::MMMethod::is_abstract)"
+static const char * const LOCATE_syntax_base___MMSrcMethod___is_abstract = "syntax_base::MMSrcMethod::(abstractmetamodel::MMMethod::is_abstract)";
 val_t syntax_base___MMSrcMethod___is_abstract(val_t p0);
 typedef val_t (*syntax_base___MMSrcMethod___is_abstract_t)(val_t p0);
-#define LOCATE_syntax_base___MMAttrImplementationMethod___node "syntax_base::MMAttrImplementationMethod::(syntax_base::MMLocalProperty::node)"
+static const char * const LOCATE_syntax_base___MMSrcMethod___extern_name = "syntax_base::MMSrcMethod::(abstractmetamodel::MMMethod::extern_name)";
+val_t syntax_base___MMSrcMethod___extern_name(val_t p0);
+typedef val_t (*syntax_base___MMSrcMethod___extern_name_t)(val_t p0);
+val_t NEW_MMSrcMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
+static const char * const LOCATE_syntax_base___MMAttrImplementationMethod___node = "syntax_base::MMAttrImplementationMethod::(syntax_base::MMLocalProperty::node)";
 val_t syntax_base___MMAttrImplementationMethod___node(val_t p0);
 typedef val_t (*syntax_base___MMAttrImplementationMethod___node_t)(val_t p0);
-#define LOCATE_syntax_base___MMAttrImplementationMethod___init "syntax_base::MMAttrImplementationMethod::init"
+static const char * const LOCATE_syntax_base___MMAttrImplementationMethod___init = "syntax_base::MMAttrImplementationMethod::init";
 void syntax_base___MMAttrImplementationMethod___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*syntax_base___MMAttrImplementationMethod___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMAttrImplementationMethod_syntax_base___MMAttrImplementationMethod___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___MMReadImplementationMethod___init "syntax_base::MMReadImplementationMethod::init"
+static const char * const LOCATE_syntax_base___MMReadImplementationMethod___init = "syntax_base::MMReadImplementationMethod::init";
 void syntax_base___MMReadImplementationMethod___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*syntax_base___MMReadImplementationMethod___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMReadImplementationMethod_syntax_base___MMReadImplementationMethod___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___MMWriteImplementationMethod___init "syntax_base::MMWriteImplementationMethod::init"
+static const char * const LOCATE_syntax_base___MMWriteImplementationMethod___init = "syntax_base::MMWriteImplementationMethod::init";
 void syntax_base___MMWriteImplementationMethod___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*syntax_base___MMWriteImplementationMethod___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMWriteImplementationMethod_syntax_base___MMWriteImplementationMethod___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___MMMethSrcMethod___is_intern "syntax_base::MMMethSrcMethod::(abstractmetamodel::MMMethod::is_intern)"
-val_t syntax_base___MMMethSrcMethod___is_intern(val_t p0);
-typedef val_t (*syntax_base___MMMethSrcMethod___is_intern_t)(val_t p0);
-#define LOCATE_syntax_base___MMMethSrcMethod___is_abstract "syntax_base::MMMethSrcMethod::(abstractmetamodel::MMMethod::is_abstract)"
-val_t syntax_base___MMMethSrcMethod___is_abstract(val_t p0);
-typedef val_t (*syntax_base___MMMethSrcMethod___is_abstract_t)(val_t p0);
-#define LOCATE_syntax_base___MMMethSrcMethod___node "syntax_base::MMMethSrcMethod::(syntax_base::MMLocalProperty::node)"
-val_t syntax_base___MMMethSrcMethod___node(val_t p0);
-typedef val_t (*syntax_base___MMMethSrcMethod___node_t)(val_t p0);
-#define LOCATE_syntax_base___MMMethSrcMethod___is_init "syntax_base::MMMethSrcMethod::(syntax_base::MMLocalProperty::is_init)"
+static const char * const LOCATE_syntax_base___MMMethSrcMethod___is_init = "syntax_base::MMMethSrcMethod::(syntax_base::MMLocalProperty::is_init)";
 val_t syntax_base___MMMethSrcMethod___is_init(val_t p0);
 typedef val_t (*syntax_base___MMMethSrcMethod___is_init_t)(val_t p0);
-#define LOCATE_syntax_base___MMMethSrcMethod___init "syntax_base::MMMethSrcMethod::init"
+static const char * const LOCATE_syntax_base___MMMethSrcMethod___is_intern = "syntax_base::MMMethSrcMethod::(abstractmetamodel::MMMethod::is_intern)";
+val_t syntax_base___MMMethSrcMethod___is_intern(val_t p0);
+typedef val_t (*syntax_base___MMMethSrcMethod___is_intern_t)(val_t p0);
+static const char * const LOCATE_syntax_base___MMMethSrcMethod___is_abstract = "syntax_base::MMMethSrcMethod::(abstractmetamodel::MMMethod::is_abstract)";
+val_t syntax_base___MMMethSrcMethod___is_abstract(val_t p0);
+typedef val_t (*syntax_base___MMMethSrcMethod___is_abstract_t)(val_t p0);
+static const char * const LOCATE_syntax_base___MMMethSrcMethod___extern_name = "syntax_base::MMMethSrcMethod::(abstractmetamodel::MMMethod::extern_name)";
+val_t syntax_base___MMMethSrcMethod___extern_name(val_t p0);
+typedef val_t (*syntax_base___MMMethSrcMethod___extern_name_t)(val_t p0);
+static const char * const LOCATE_syntax_base___MMMethSrcMethod___extern_name__eq = "syntax_base::MMMethSrcMethod::extern_name=";
+void syntax_base___MMMethSrcMethod___extern_name__eq(val_t p0, val_t p1);
+typedef void (*syntax_base___MMMethSrcMethod___extern_name__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_syntax_base___MMMethSrcMethod___node = "syntax_base::MMMethSrcMethod::(syntax_base::MMLocalProperty::node)";
+val_t syntax_base___MMMethSrcMethod___node(val_t p0);
+typedef val_t (*syntax_base___MMMethSrcMethod___node_t)(val_t p0);
+static const char * const LOCATE_syntax_base___MMMethSrcMethod___init = "syntax_base::MMMethSrcMethod::init";
 void syntax_base___MMMethSrcMethod___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*syntax_base___MMMethSrcMethod___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMMethSrcMethod_syntax_base___MMMethSrcMethod___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___MMSrcTypeProperty___init "syntax_base::MMSrcTypeProperty::init"
+static const char * const LOCATE_syntax_base___MMSrcTypeProperty___init = "syntax_base::MMSrcTypeProperty::init";
 void syntax_base___MMSrcTypeProperty___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*syntax_base___MMSrcTypeProperty___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMSrcTypeProperty_syntax_base___MMSrcTypeProperty___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___MMImplicitInit___is_init "syntax_base::MMImplicitInit::(syntax_base::MMLocalProperty::is_init)"
-val_t syntax_base___MMImplicitInit___is_init(val_t p0);
-typedef val_t (*syntax_base___MMImplicitInit___is_init_t)(val_t p0);
-#define LOCATE_syntax_base___MMImplicitInit___super_init "syntax_base::MMImplicitInit::super_init"
+static const char * const LOCATE_syntax_base___MMImplicitInit___super_init = "syntax_base::MMImplicitInit::super_init";
 val_t syntax_base___MMImplicitInit___super_init(val_t p0);
 typedef val_t (*syntax_base___MMImplicitInit___super_init_t)(val_t p0);
-#define LOCATE_syntax_base___MMImplicitInit___unassigned_attributes "syntax_base::MMImplicitInit::unassigned_attributes"
+static const char * const LOCATE_syntax_base___MMImplicitInit___is_init = "syntax_base::MMImplicitInit::(syntax_base::MMLocalProperty::is_init)";
+val_t syntax_base___MMImplicitInit___is_init(val_t p0);
+typedef val_t (*syntax_base___MMImplicitInit___is_init_t)(val_t p0);
+static const char * const LOCATE_syntax_base___MMImplicitInit___unassigned_attributes = "syntax_base::MMImplicitInit::unassigned_attributes";
 val_t syntax_base___MMImplicitInit___unassigned_attributes(val_t p0);
 typedef val_t (*syntax_base___MMImplicitInit___unassigned_attributes_t)(val_t p0);
-#define LOCATE_syntax_base___MMImplicitInit___super_inits "syntax_base::MMImplicitInit::super_inits"
+static const char * const LOCATE_syntax_base___MMImplicitInit___super_inits = "syntax_base::MMImplicitInit::super_inits";
 val_t syntax_base___MMImplicitInit___super_inits(val_t p0);
 typedef val_t (*syntax_base___MMImplicitInit___super_inits_t)(val_t p0);
-#define LOCATE_syntax_base___MMImplicitInit___init "syntax_base::MMImplicitInit::init"
+static const char * const LOCATE_syntax_base___MMImplicitInit___init = "syntax_base::MMImplicitInit::init";
 void syntax_base___MMImplicitInit___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*syntax_base___MMImplicitInit___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMImplicitInit_syntax_base___MMImplicitInit___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___Variable___to_s "syntax_base::Variable::(string::Object::to_s)"
-val_t syntax_base___Variable___to_s(val_t p0);
-typedef val_t (*syntax_base___Variable___to_s_t)(val_t p0);
-#define LOCATE_syntax_base___Variable___name "syntax_base::Variable::name"
+static const char * const LOCATE_syntax_base___Variable___name = "syntax_base::Variable::name";
 val_t syntax_base___Variable___name(val_t p0);
 typedef val_t (*syntax_base___Variable___name_t)(val_t p0);
-#define LOCATE_syntax_base___Variable___decl "syntax_base::Variable::decl"
+static const char * const LOCATE_syntax_base___Variable___decl = "syntax_base::Variable::decl";
 val_t syntax_base___Variable___decl(val_t p0);
 typedef val_t (*syntax_base___Variable___decl_t)(val_t p0);
-#define LOCATE_syntax_base___Variable___is_typed "syntax_base::Variable::is_typed"
-val_t syntax_base___Variable___is_typed(val_t p0);
-typedef val_t (*syntax_base___Variable___is_typed_t)(val_t p0);
-#define LOCATE_syntax_base___Variable___stype "syntax_base::Variable::stype"
+static const char * const LOCATE_syntax_base___Variable___stype = "syntax_base::Variable::stype";
 val_t syntax_base___Variable___stype(val_t p0);
 typedef val_t (*syntax_base___Variable___stype_t)(val_t p0);
-#define LOCATE_syntax_base___Variable___stype__eq "syntax_base::Variable::stype="
+static const char * const LOCATE_syntax_base___Variable___stype__eq = "syntax_base::Variable::stype=";
 void syntax_base___Variable___stype__eq(val_t p0, val_t p1);
 typedef void (*syntax_base___Variable___stype__eq_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___Variable___kind "syntax_base::Variable::kind"
+static const char * const LOCATE_syntax_base___Variable___to_s = "syntax_base::Variable::(string::Object::to_s)";
+val_t syntax_base___Variable___to_s(val_t p0);
+typedef val_t (*syntax_base___Variable___to_s_t)(val_t p0);
+static const char * const LOCATE_syntax_base___Variable___kind = "syntax_base::Variable::kind";
 val_t syntax_base___Variable___kind(val_t p0);
 typedef val_t (*syntax_base___Variable___kind_t)(val_t p0);
-#define LOCATE_syntax_base___Variable___init "syntax_base::Variable::init"
+static const char * const LOCATE_syntax_base___Variable___init = "syntax_base::Variable::init";
 void syntax_base___Variable___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*syntax_base___Variable___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_Variable_syntax_base___Variable___init(val_t p0, val_t p1);
-#define LOCATE_syntax_base___VarVariable___kind "syntax_base::VarVariable::(syntax_base::Variable::kind)"
+static const char * const LOCATE_syntax_base___VarVariable___kind = "syntax_base::VarVariable::(syntax_base::Variable::kind)";
 val_t syntax_base___VarVariable___kind(val_t p0);
 typedef val_t (*syntax_base___VarVariable___kind_t)(val_t p0);
-#define LOCATE_syntax_base___VarVariable___init "syntax_base::VarVariable::init"
+static const char * const LOCATE_syntax_base___VarVariable___init = "syntax_base::VarVariable::init";
 void syntax_base___VarVariable___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*syntax_base___VarVariable___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_VarVariable_syntax_base___VarVariable___init(val_t p0, val_t p1);
-#define LOCATE_syntax_base___ParamVariable___kind "syntax_base::ParamVariable::(syntax_base::Variable::kind)"
+static const char * const LOCATE_syntax_base___ParamVariable___kind = "syntax_base::ParamVariable::(syntax_base::Variable::kind)";
 val_t syntax_base___ParamVariable___kind(val_t p0);
 typedef val_t (*syntax_base___ParamVariable___kind_t)(val_t p0);
-#define LOCATE_syntax_base___ParamVariable___init "syntax_base::ParamVariable::init"
+static const char * const LOCATE_syntax_base___ParamVariable___init = "syntax_base::ParamVariable::init";
 void syntax_base___ParamVariable___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*syntax_base___ParamVariable___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_ParamVariable_syntax_base___ParamVariable___init(val_t p0, val_t p1);
-#define LOCATE_syntax_base___AutoVariable___kind "syntax_base::AutoVariable::(syntax_base::Variable::kind)"
+static const char * const LOCATE_syntax_base___AutoVariable___kind = "syntax_base::AutoVariable::(syntax_base::Variable::kind)";
 val_t syntax_base___AutoVariable___kind(val_t p0);
 typedef val_t (*syntax_base___AutoVariable___kind_t)(val_t p0);
-#define LOCATE_syntax_base___AutoVariable___init "syntax_base::AutoVariable::init"
+static const char * const LOCATE_syntax_base___AutoVariable___init = "syntax_base::AutoVariable::init";
 void syntax_base___AutoVariable___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*syntax_base___AutoVariable___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_AutoVariable_syntax_base___AutoVariable___init(val_t p0, val_t p1);
-#define LOCATE_syntax_base___ClosureVariable___kind "syntax_base::ClosureVariable::(syntax_base::Variable::kind)"
+static const char * const LOCATE_syntax_base___ClosureVariable___kind = "syntax_base::ClosureVariable::(syntax_base::Variable::kind)";
 val_t syntax_base___ClosureVariable___kind(val_t p0);
 typedef val_t (*syntax_base___ClosureVariable___kind_t)(val_t p0);
-#define LOCATE_syntax_base___ClosureVariable___closure "syntax_base::ClosureVariable::closure"
+static const char * const LOCATE_syntax_base___ClosureVariable___closure = "syntax_base::ClosureVariable::closure";
 val_t syntax_base___ClosureVariable___closure(val_t p0);
 typedef val_t (*syntax_base___ClosureVariable___closure_t)(val_t p0);
-#define LOCATE_syntax_base___ClosureVariable___init "syntax_base::ClosureVariable::init"
+static const char * const LOCATE_syntax_base___ClosureVariable___init = "syntax_base::ClosureVariable::init";
 void syntax_base___ClosureVariable___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*syntax_base___ClosureVariable___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_ClosureVariable_syntax_base___ClosureVariable___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___get_type_by_name "syntax_base::AbsSyntaxVisitor::get_type_by_name"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___get_type_by_name = "syntax_base::AbsSyntaxVisitor::get_type_by_name";
 val_t syntax_base___AbsSyntaxVisitor___get_type_by_name(val_t p0, val_t p1);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___get_type_by_name_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___get_instantiated_type_by_name "syntax_base::AbsSyntaxVisitor::get_instantiated_type_by_name"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___get_instantiated_type_by_name = "syntax_base::AbsSyntaxVisitor::get_instantiated_type_by_name";
 val_t syntax_base___AbsSyntaxVisitor___get_instantiated_type_by_name(val_t p0, val_t p1, val_t p2);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___get_instantiated_type_by_name_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_object "syntax_base::AbsSyntaxVisitor::type_object"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_object = "syntax_base::AbsSyntaxVisitor::type_object";
 val_t syntax_base___AbsSyntaxVisitor___type_object(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_object_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_bool "syntax_base::AbsSyntaxVisitor::type_bool"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_bool = "syntax_base::AbsSyntaxVisitor::type_bool";
 val_t syntax_base___AbsSyntaxVisitor___type_bool(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_bool_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_int "syntax_base::AbsSyntaxVisitor::type_int"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_int = "syntax_base::AbsSyntaxVisitor::type_int";
 val_t syntax_base___AbsSyntaxVisitor___type_int(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_int_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_float "syntax_base::AbsSyntaxVisitor::type_float"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_float = "syntax_base::AbsSyntaxVisitor::type_float";
 val_t syntax_base___AbsSyntaxVisitor___type_float(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_float_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_char "syntax_base::AbsSyntaxVisitor::type_char"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_char = "syntax_base::AbsSyntaxVisitor::type_char";
 val_t syntax_base___AbsSyntaxVisitor___type_char(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_char_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_string "syntax_base::AbsSyntaxVisitor::type_string"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_string = "syntax_base::AbsSyntaxVisitor::type_string";
 val_t syntax_base___AbsSyntaxVisitor___type_string(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_string_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_collection "syntax_base::AbsSyntaxVisitor::type_collection"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_collection = "syntax_base::AbsSyntaxVisitor::type_collection";
 val_t syntax_base___AbsSyntaxVisitor___type_collection(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_collection_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_nativestring "syntax_base::AbsSyntaxVisitor::type_nativestring"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_nativestring = "syntax_base::AbsSyntaxVisitor::type_nativestring";
 val_t syntax_base___AbsSyntaxVisitor___type_nativestring(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_nativestring_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_array "syntax_base::AbsSyntaxVisitor::type_array"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_array = "syntax_base::AbsSyntaxVisitor::type_array";
 val_t syntax_base___AbsSyntaxVisitor___type_array(val_t p0, val_t p1);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_array_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_discrete "syntax_base::AbsSyntaxVisitor::type_discrete"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_discrete = "syntax_base::AbsSyntaxVisitor::type_discrete";
 val_t syntax_base___AbsSyntaxVisitor___type_discrete(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_discrete_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_range "syntax_base::AbsSyntaxVisitor::type_range"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_range = "syntax_base::AbsSyntaxVisitor::type_range";
 val_t syntax_base___AbsSyntaxVisitor___type_range(val_t p0, val_t p1);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_range_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___type_none "syntax_base::AbsSyntaxVisitor::type_none"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___type_none = "syntax_base::AbsSyntaxVisitor::type_none";
 val_t syntax_base___AbsSyntaxVisitor___type_none(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___type_none_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___get_method "syntax_base::AbsSyntaxVisitor::get_method"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___get_method = "syntax_base::AbsSyntaxVisitor::get_method";
 val_t syntax_base___AbsSyntaxVisitor___get_method(val_t p0, val_t p1, val_t p2);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___get_method_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___module "syntax_base::AbsSyntaxVisitor::module"
-val_t syntax_base___AbsSyntaxVisitor___module(val_t p0);
-typedef val_t (*syntax_base___AbsSyntaxVisitor___module_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___local_class "syntax_base::AbsSyntaxVisitor::local_class"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___mmmodule = "syntax_base::AbsSyntaxVisitor::mmmodule";
+val_t syntax_base___AbsSyntaxVisitor___mmmodule(val_t p0);
+typedef val_t (*syntax_base___AbsSyntaxVisitor___mmmodule_t)(val_t p0);
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___local_class = "syntax_base::AbsSyntaxVisitor::local_class";
 val_t syntax_base___AbsSyntaxVisitor___local_class(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___local_class_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___local_class__eq "syntax_base::AbsSyntaxVisitor::local_class="
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___local_class__eq = "syntax_base::AbsSyntaxVisitor::local_class=";
 void syntax_base___AbsSyntaxVisitor___local_class__eq(val_t p0, val_t p1);
 typedef void (*syntax_base___AbsSyntaxVisitor___local_class__eq_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___local_property "syntax_base::AbsSyntaxVisitor::local_property"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___local_property = "syntax_base::AbsSyntaxVisitor::local_property";
 val_t syntax_base___AbsSyntaxVisitor___local_property(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___local_property_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___local_property__eq "syntax_base::AbsSyntaxVisitor::local_property="
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___local_property__eq = "syntax_base::AbsSyntaxVisitor::local_property=";
 void syntax_base___AbsSyntaxVisitor___local_property__eq(val_t p0, val_t p1);
 typedef void (*syntax_base___AbsSyntaxVisitor___local_property__eq_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___tc "syntax_base::AbsSyntaxVisitor::tc"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___tc = "syntax_base::AbsSyntaxVisitor::tc";
 val_t syntax_base___AbsSyntaxVisitor___tc(val_t p0);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___tc_t)(val_t p0);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___error "syntax_base::AbsSyntaxVisitor::error"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___error = "syntax_base::AbsSyntaxVisitor::error";
 void syntax_base___AbsSyntaxVisitor___error(val_t p0, val_t p1, val_t p2);
 typedef void (*syntax_base___AbsSyntaxVisitor___error_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___fatal_error "syntax_base::AbsSyntaxVisitor::fatal_error"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___fatal_error = "syntax_base::AbsSyntaxVisitor::fatal_error";
 void syntax_base___AbsSyntaxVisitor___fatal_error(val_t p0, val_t p1, val_t p2);
 typedef void (*syntax_base___AbsSyntaxVisitor___fatal_error_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___warning "syntax_base::AbsSyntaxVisitor::warning"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___warning = "syntax_base::AbsSyntaxVisitor::warning";
 void syntax_base___AbsSyntaxVisitor___warning(val_t p0, val_t p1, val_t p2);
 typedef void (*syntax_base___AbsSyntaxVisitor___warning_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___check_conform "syntax_base::AbsSyntaxVisitor::check_conform"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___check_conform = "syntax_base::AbsSyntaxVisitor::check_conform";
 val_t syntax_base___AbsSyntaxVisitor___check_conform(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___check_conform_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___check_expr "syntax_base::AbsSyntaxVisitor::check_expr"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___check_expr = "syntax_base::AbsSyntaxVisitor::check_expr";
 val_t syntax_base___AbsSyntaxVisitor___check_expr(val_t p0, val_t p1);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___check_expr_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___check_conform_expr "syntax_base::AbsSyntaxVisitor::check_conform_expr"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___check_conform_expr = "syntax_base::AbsSyntaxVisitor::check_conform_expr";
 val_t syntax_base___AbsSyntaxVisitor___check_conform_expr(val_t p0, val_t p1, val_t p2);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___check_conform_expr_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr "syntax_base::AbsSyntaxVisitor::check_conform_multiexpr"
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr = "syntax_base::AbsSyntaxVisitor::check_conform_multiexpr";
 val_t syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(val_t p0, val_t p1, val_t p2);
 typedef val_t (*syntax_base___AbsSyntaxVisitor___check_conform_multiexpr_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AbsSyntaxVisitor___init "syntax_base::AbsSyntaxVisitor::init"
+  typedef void (*CLOS_OC_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr_1_0)(struct stack_frame_t *);
+  void OC_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*CLOS_OC_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr_4_0)(struct stack_frame_t *);
+  void OC_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr_4(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr_4_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_syntax_base___AbsSyntaxVisitor___init = "syntax_base::AbsSyntaxVisitor::init";
 void syntax_base___AbsSyntaxVisitor___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*syntax_base___AbsSyntaxVisitor___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_AbsSyntaxVisitor_syntax_base___AbsSyntaxVisitor___init(val_t p0, val_t p1);
-val_t NEW_ANode_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_syntax_base___ANode___accept_abs_syntax_visitor "syntax_base::ANode::accept_abs_syntax_visitor"
+static const char * const LOCATE_syntax_base___ANode___accept_abs_syntax_visitor = "syntax_base::ANode::accept_abs_syntax_visitor";
 void syntax_base___ANode___accept_abs_syntax_visitor(val_t p0, val_t p1);
 typedef void (*syntax_base___ANode___accept_abs_syntax_visitor_t)(val_t p0, val_t p1);
-val_t NEW_Token_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_syntax_base___Token___to_symbol "syntax_base::Token::to_symbol"
+val_t NEW_ANode_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___Token___to_symbol = "syntax_base::Token::to_symbol";
 val_t syntax_base___Token___to_symbol(val_t p0);
 typedef val_t (*syntax_base___Token___to_symbol_t)(val_t p0);
-val_t NEW_AClassdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_syntax_base___AClassdef___local_class "syntax_base::AClassdef::local_class"
+val_t NEW_Token_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AClassdef___local_class = "syntax_base::AClassdef::local_class";
 val_t syntax_base___AClassdef___local_class(val_t p0);
 typedef val_t (*syntax_base___AClassdef___local_class_t)(val_t p0);
-#define LOCATE_syntax_base___AClassdef___next_node "syntax_base::AClassdef::next_node"
+static const char * const LOCATE_syntax_base___AClassdef___next_node = "syntax_base::AClassdef::next_node";
 val_t syntax_base___AClassdef___next_node(val_t p0);
 typedef val_t (*syntax_base___AClassdef___next_node_t)(val_t p0);
-#define LOCATE_syntax_base___AClassdef___next_node__eq "syntax_base::AClassdef::next_node="
+static const char * const LOCATE_syntax_base___AClassdef___next_node__eq = "syntax_base::AClassdef::next_node=";
 void syntax_base___AClassdef___next_node__eq(val_t p0, val_t p1);
 typedef void (*syntax_base___AClassdef___next_node__eq_t)(val_t p0, val_t p1);
-val_t NEW_APropdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_syntax_base___APropdef___self_var "syntax_base::APropdef::self_var"
+val_t NEW_AClassdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___APropdef___self_var = "syntax_base::APropdef::self_var";
 val_t syntax_base___APropdef___self_var(val_t p0);
 typedef val_t (*syntax_base___APropdef___self_var_t)(val_t p0);
-val_t NEW_AAttrPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___empty_init();
-val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
-#define LOCATE_syntax_base___AAttrPropdef___prop "syntax_base::AAttrPropdef::prop"
+val_t NEW_APropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AAttrPropdef___prop = "syntax_base::AAttrPropdef::prop";
 val_t syntax_base___AAttrPropdef___prop(val_t p0);
 typedef val_t (*syntax_base___AAttrPropdef___prop_t)(val_t p0);
-#define LOCATE_syntax_base___AAttrPropdef___readmethod "syntax_base::AAttrPropdef::readmethod"
+static const char * const LOCATE_syntax_base___AAttrPropdef___readmethod = "syntax_base::AAttrPropdef::readmethod";
 val_t syntax_base___AAttrPropdef___readmethod(val_t p0);
 typedef val_t (*syntax_base___AAttrPropdef___readmethod_t)(val_t p0);
-#define LOCATE_syntax_base___AAttrPropdef___writemethod "syntax_base::AAttrPropdef::writemethod"
+static const char * const LOCATE_syntax_base___AAttrPropdef___writemethod = "syntax_base::AAttrPropdef::writemethod";
 val_t syntax_base___AAttrPropdef___writemethod(val_t p0);
 typedef val_t (*syntax_base___AAttrPropdef___writemethod_t)(val_t p0);
-val_t NEW_AConcreteInitPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___empty_init();
-val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
-val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___empty_init();
-val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
-#define LOCATE_syntax_base___AConcreteInitPropdef___super_init_calls "syntax_base::AConcreteInitPropdef::super_init_calls"
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___empty_init();
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9);
+val_t NEW_AAttrPropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AConcreteInitPropdef___super_init_calls = "syntax_base::AConcreteInitPropdef::super_init_calls";
 val_t syntax_base___AConcreteInitPropdef___super_init_calls(val_t p0);
 typedef val_t (*syntax_base___AConcreteInitPropdef___super_init_calls_t)(val_t p0);
-#define LOCATE_syntax_base___AConcreteInitPropdef___explicit_super_init_calls "syntax_base::AConcreteInitPropdef::explicit_super_init_calls"
+static const char * const LOCATE_syntax_base___AConcreteInitPropdef___explicit_super_init_calls = "syntax_base::AConcreteInitPropdef::explicit_super_init_calls";
 val_t syntax_base___AConcreteInitPropdef___explicit_super_init_calls(val_t p0);
 typedef val_t (*syntax_base___AConcreteInitPropdef___explicit_super_init_calls_t)(val_t p0);
-val_t NEW_AMethPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AMethPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_syntax_base___AMethPropdef___method "syntax_base::AMethPropdef::method"
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___empty_init();
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___empty_init();
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AConcreteInitPropdef_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+static const char * const LOCATE_syntax_base___AMethPropdef___method = "syntax_base::AMethPropdef::method";
 val_t syntax_base___AMethPropdef___method(val_t p0);
 typedef val_t (*syntax_base___AMethPropdef___method_t)(val_t p0);
-val_t NEW_ATypePropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ATypePropdef_parser_prod___ATypePropdef___empty_init();
-val_t NEW_ATypePropdef_parser_prod___ATypePropdef___init_atypepropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_syntax_base___ATypePropdef___prop "syntax_base::ATypePropdef::prop"
+val_t NEW_AMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AMethPropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___ATypePropdef___prop = "syntax_base::ATypePropdef::prop";
 val_t syntax_base___ATypePropdef___prop(val_t p0);
 typedef val_t (*syntax_base___ATypePropdef___prop_t)(val_t p0);
-val_t NEW_AParam_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AParam_parser_prod___AParam___empty_init();
-val_t NEW_AParam_parser_prod___AParam___init_aparam(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AParam___position "syntax_base::AParam::position"
+val_t NEW_ATypePropdef_parser_prod___ATypePropdef___empty_init();
+val_t NEW_ATypePropdef_parser_prod___ATypePropdef___init_atypepropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_ATypePropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AParam___position = "syntax_base::AParam::position";
 val_t syntax_base___AParam___position(val_t p0);
 typedef val_t (*syntax_base___AParam___position_t)(val_t p0);
-#define LOCATE_syntax_base___AParam___variable "syntax_base::AParam::variable"
+static const char * const LOCATE_syntax_base___AParam___variable = "syntax_base::AParam::variable";
 val_t syntax_base___AParam___variable(val_t p0);
 typedef val_t (*syntax_base___AParam___variable_t)(val_t p0);
-val_t NEW_AClosureDecl_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
-val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_syntax_base___AClosureDecl___position "syntax_base::AClosureDecl::position"
+val_t NEW_AParam_parser_prod___AParam___empty_init();
+val_t NEW_AParam_parser_prod___AParam___init_aparam(val_t p0, val_t p1, val_t p2);
+val_t NEW_AParam_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AClosureDecl___position = "syntax_base::AClosureDecl::position";
 val_t syntax_base___AClosureDecl___position(val_t p0);
 typedef val_t (*syntax_base___AClosureDecl___position_t)(val_t p0);
-#define LOCATE_syntax_base___AClosureDecl___variable "syntax_base::AClosureDecl::variable"
+static const char * const LOCATE_syntax_base___AClosureDecl___variable = "syntax_base::AClosureDecl::variable";
 val_t syntax_base___AClosureDecl___variable(val_t p0);
 typedef val_t (*syntax_base___AClosureDecl___variable_t)(val_t p0);
-val_t NEW_AType_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AType_parser_prod___AType___empty_init();
-val_t NEW_AType_parser_prod___AType___init_atype(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AType___is_typed "syntax_base::AType::is_typed"
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AClosureDecl_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AType___is_typed = "syntax_base::AType::is_typed";
 val_t syntax_base___AType___is_typed(val_t p0);
 typedef val_t (*syntax_base___AType___is_typed_t)(val_t p0);
-#define LOCATE_syntax_base___AType___stype "syntax_base::AType::stype"
+static const char * const LOCATE_syntax_base___AType___stype = "syntax_base::AType::stype";
 val_t syntax_base___AType___stype(val_t p0);
 typedef val_t (*syntax_base___AType___stype_t)(val_t p0);
-#define LOCATE_syntax_base___AType___get_local_class "syntax_base::AType::get_local_class"
+static const char * const LOCATE_syntax_base___AType___get_local_class = "syntax_base::AType::get_local_class";
 val_t syntax_base___AType___get_local_class(val_t p0, val_t p1);
 typedef val_t (*syntax_base___AType___get_local_class_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___AType___get_unchecked_stype "syntax_base::AType::get_unchecked_stype"
+static const char * const LOCATE_syntax_base___AType___get_unchecked_stype = "syntax_base::AType::get_unchecked_stype";
 val_t syntax_base___AType___get_unchecked_stype(val_t p0, val_t p1);
 typedef val_t (*syntax_base___AType___get_unchecked_stype_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___AType___get_stype "syntax_base::AType::get_stype"
+    typedef void (*CLOS_OC_syntax_base___AType___get_unchecked_stype_16_0)(struct stack_frame_t *);
+    void OC_syntax_base___AType___get_unchecked_stype_16(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*OC_syntax_base___AType___get_unchecked_stype_16_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_syntax_base___AType___get_stype = "syntax_base::AType::get_stype";
 val_t syntax_base___AType___get_stype(val_t p0, val_t p1);
 typedef val_t (*syntax_base___AType___get_stype_t)(val_t p0, val_t p1);
-#define LOCATE_syntax_base___AType___check_conform "syntax_base::AType::check_conform"
+static const char * const LOCATE_syntax_base___AType___check_conform = "syntax_base::AType::check_conform";
 void syntax_base___AType___check_conform(val_t p0, val_t p1);
 typedef void (*syntax_base___AType___check_conform_t)(val_t p0, val_t p1);
-val_t NEW_AExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_syntax_base___AExpr___is_typed "syntax_base::AExpr::is_typed"
+val_t NEW_AType_parser_prod___AType___empty_init();
+val_t NEW_AType_parser_prod___AType___init_atype(val_t p0, val_t p1, val_t p2);
+val_t NEW_AType_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AExpr___is_typed = "syntax_base::AExpr::is_typed";
 val_t syntax_base___AExpr___is_typed(val_t p0);
 typedef val_t (*syntax_base___AExpr___is_typed_t)(val_t p0);
-#define LOCATE_syntax_base___AExpr___is_statement "syntax_base::AExpr::is_statement"
+static const char * const LOCATE_syntax_base___AExpr___is_statement = "syntax_base::AExpr::is_statement";
 val_t syntax_base___AExpr___is_statement(val_t p0);
 typedef val_t (*syntax_base___AExpr___is_statement_t)(val_t p0);
-#define LOCATE_syntax_base___AExpr___stype "syntax_base::AExpr::stype"
+static const char * const LOCATE_syntax_base___AExpr___stype = "syntax_base::AExpr::stype";
 val_t syntax_base___AExpr___stype(val_t p0);
 typedef val_t (*syntax_base___AExpr___stype_t)(val_t p0);
-val_t NEW_AAbsAbsSendExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_syntax_base___AAbsAbsSendExpr___prop_signature "syntax_base::AAbsAbsSendExpr::prop_signature"
+val_t NEW_AExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AAbsAbsSendExpr___prop_signature = "syntax_base::AAbsAbsSendExpr::prop_signature";
 val_t syntax_base___AAbsAbsSendExpr___prop_signature(val_t p0);
 typedef val_t (*syntax_base___AAbsAbsSendExpr___prop_signature_t)(val_t p0);
-#define LOCATE_syntax_base___AAbsAbsSendExpr___raw_arguments "syntax_base::AAbsAbsSendExpr::raw_arguments"
+static const char * const LOCATE_syntax_base___AAbsAbsSendExpr___raw_arguments = "syntax_base::AAbsAbsSendExpr::raw_arguments";
 val_t syntax_base___AAbsAbsSendExpr___raw_arguments(val_t p0);
 typedef val_t (*syntax_base___AAbsAbsSendExpr___raw_arguments_t)(val_t p0);
-val_t NEW_AAbsSendExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_syntax_base___AAbsSendExpr___prop "syntax_base::AAbsSendExpr::prop"
+val_t NEW_AAbsAbsSendExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AAbsSendExpr___prop = "syntax_base::AAbsSendExpr::prop";
 val_t syntax_base___AAbsSendExpr___prop(val_t p0);
 typedef val_t (*syntax_base___AAbsSendExpr___prop_t)(val_t p0);
-#define LOCATE_syntax_base___AAbsSendExpr___return_type "syntax_base::AAbsSendExpr::return_type"
+static const char * const LOCATE_syntax_base___AAbsSendExpr___return_type = "syntax_base::AAbsSendExpr::return_type";
 val_t syntax_base___AAbsSendExpr___return_type(val_t p0);
 typedef val_t (*syntax_base___AAbsSendExpr___return_type_t)(val_t p0);
+val_t NEW_AAbsSendExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ASuperInitCall_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASuperExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASuperExpr_parser_prod___ASuperExpr___empty_init();
-val_t NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___ASuperExpr___init_in_superclass "syntax_base::ASuperExpr::init_in_superclass"
+static const char * const LOCATE_syntax_base___ASuperExpr___init_in_superclass = "syntax_base::ASuperExpr::init_in_superclass";
 val_t syntax_base___ASuperExpr___init_in_superclass(val_t p0);
 typedef val_t (*syntax_base___ASuperExpr___init_in_superclass_t)(val_t p0);
-val_t NEW_ANewExpr_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASuperExpr_parser_prod___ASuperExpr___empty_init();
+val_t NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_ASuperExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ANewExpr_parser_prod___ANewExpr___empty_init();
 val_t NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_ASendExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASendExpr_parser_prod___ASendExpr___empty_init();
-val_t NEW_ASendExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
-#define LOCATE_syntax_base___ASendExpr___closure_defs "syntax_base::ASendExpr::closure_defs"
+val_t NEW_ANewExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___ASendExpr___closure_defs = "syntax_base::ASendExpr::closure_defs";
 val_t syntax_base___ASendExpr___closure_defs(val_t p0);
 typedef val_t (*syntax_base___ASendExpr___closure_defs_t)(val_t p0);
-val_t NEW_AReassignFormExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_syntax_base___AReassignFormExpr___assign_method "syntax_base::AReassignFormExpr::assign_method"
+val_t NEW_ASendExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ASendExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ASendExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AReassignFormExpr___assign_method = "syntax_base::AReassignFormExpr::assign_method";
 val_t syntax_base___AReassignFormExpr___assign_method(val_t p0);
 typedef val_t (*syntax_base___AReassignFormExpr___assign_method_t)(val_t p0);
-val_t NEW_ASendReassignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___empty_init();
-val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
-#define LOCATE_syntax_base___ASendReassignExpr___read_prop "syntax_base::ASendReassignExpr::read_prop"
+val_t NEW_AReassignFormExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___ASendReassignExpr___read_prop = "syntax_base::ASendReassignExpr::read_prop";
 val_t syntax_base___ASendReassignExpr___read_prop(val_t p0);
 typedef val_t (*syntax_base___ASendReassignExpr___read_prop_t)(val_t p0);
-val_t NEW_ACallReassignExpr_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ASendReassignExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ACallReassignExpr_parser_prod___ASendExpr___empty_init();
-val_t NEW_ACallReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
 val_t NEW_ACallReassignExpr_parser_prod___ACallReassignExpr___empty_init();
 val_t NEW_ACallReassignExpr_parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_ABraReassignExpr_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACallReassignExpr_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACallReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
 val_t NEW_ABraReassignExpr_parser_prod___ASendExpr___empty_init();
-val_t NEW_ABraReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
 val_t NEW_ABraReassignExpr_parser_prod___ABraReassignExpr___empty_init();
 val_t NEW_ABraReassignExpr_parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_AAttrFormExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_syntax_base___AAttrFormExpr___prop "syntax_base::AAttrFormExpr::prop"
+val_t NEW_ABraReassignExpr_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ABraReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+static const char * const LOCATE_syntax_base___AAttrFormExpr___prop = "syntax_base::AAttrFormExpr::prop";
 val_t syntax_base___AAttrFormExpr___prop(val_t p0);
 typedef val_t (*syntax_base___AAttrFormExpr___prop_t)(val_t p0);
-#define LOCATE_syntax_base___AAttrFormExpr___attr_type "syntax_base::AAttrFormExpr::attr_type"
+static const char * const LOCATE_syntax_base___AAttrFormExpr___attr_type = "syntax_base::AAttrFormExpr::attr_type";
 val_t syntax_base___AAttrFormExpr___attr_type(val_t p0);
 typedef val_t (*syntax_base___AAttrFormExpr___attr_type_t)(val_t p0);
-val_t NEW_ASuperstringExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___empty_init();
-val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t p0);
-#define LOCATE_syntax_base___ASuperstringExpr___atype "syntax_base::ASuperstringExpr::atype"
+val_t NEW_AAttrFormExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___ASuperstringExpr___atype = "syntax_base::ASuperstringExpr::atype";
 val_t syntax_base___ASuperstringExpr___atype(val_t p0);
 typedef val_t (*syntax_base___ASuperstringExpr___atype_t)(val_t p0);
-val_t NEW_AVardeclExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___empty_init();
-val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_syntax_base___AVardeclExpr___variable "syntax_base::AVardeclExpr::variable"
+val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___empty_init();
+val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t p0);
+val_t NEW_ASuperstringExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AVardeclExpr___variable = "syntax_base::AVardeclExpr::variable";
 val_t syntax_base___AVardeclExpr___variable(val_t p0);
 typedef val_t (*syntax_base___AVardeclExpr___variable_t)(val_t p0);
-val_t NEW_AForExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AForExpr_parser_prod___AForExpr___empty_init();
-val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_syntax_base___AForExpr___variable "syntax_base::AForExpr::variable"
+val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___empty_init();
+val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AVardeclExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AForExpr___variable = "syntax_base::AForExpr::variable";
 val_t syntax_base___AForExpr___variable(val_t p0);
 typedef val_t (*syntax_base___AForExpr___variable_t)(val_t p0);
-val_t NEW_ASelfExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASelfExpr_parser_prod___ASelfExpr___empty_init();
-val_t NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
-#define LOCATE_syntax_base___ASelfExpr___variable "syntax_base::ASelfExpr::variable"
+val_t NEW_AForExpr_parser_prod___AForExpr___empty_init();
+val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_AForExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___ASelfExpr___variable = "syntax_base::ASelfExpr::variable";
 val_t syntax_base___ASelfExpr___variable(val_t p0);
 typedef val_t (*syntax_base___ASelfExpr___variable_t)(val_t p0);
-val_t NEW_AVarFormExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_syntax_base___AVarFormExpr___variable "syntax_base::AVarFormExpr::variable"
+val_t NEW_ASelfExpr_parser_prod___ASelfExpr___empty_init();
+val_t NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
+val_t NEW_ASelfExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AVarFormExpr___variable = "syntax_base::AVarFormExpr::variable";
 val_t syntax_base___AVarFormExpr___variable(val_t p0);
 typedef val_t (*syntax_base___AVarFormExpr___variable_t)(val_t p0);
-val_t NEW_AClosureCallExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___empty_init();
-val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax_base___AClosureCallExpr___variable "syntax_base::AClosureCallExpr::variable"
+val_t NEW_AVarFormExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AClosureCallExpr___variable = "syntax_base::AClosureCallExpr::variable";
 val_t syntax_base___AClosureCallExpr___variable(val_t p0);
 typedef val_t (*syntax_base___AClosureCallExpr___variable_t)(val_t p0);
-val_t NEW_AClosureDef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AClosureDef_parser_prod___AClosureDef___empty_init();
-val_t NEW_AClosureDef_parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_syntax_base___AClosureDef___closure "syntax_base::AClosureDef::closure"
+val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___empty_init();
+val_t NEW_AClosureCallExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AClosureDef___closure = "syntax_base::AClosureDef::closure";
 val_t syntax_base___AClosureDef___closure(val_t p0);
 typedef val_t (*syntax_base___AClosureDef___closure_t)(val_t p0);
-#define LOCATE_syntax_base___AClosureDef___variables "syntax_base::AClosureDef::variables"
+static const char * const LOCATE_syntax_base___AClosureDef___variables = "syntax_base::AClosureDef::variables";
 val_t syntax_base___AClosureDef___variables(val_t p0);
 typedef val_t (*syntax_base___AClosureDef___variables_t)(val_t p0);
-#define LOCATE_syntax_base___AClosureDef___variables__eq "syntax_base::AClosureDef::variables="
+static const char * const LOCATE_syntax_base___AClosureDef___variables__eq = "syntax_base::AClosureDef::variables=";
 void syntax_base___AClosureDef___variables__eq(val_t p0, val_t p1);
 typedef void (*syntax_base___AClosureDef___variables__eq_t)(val_t p0, val_t p1);
+val_t NEW_AClosureDef_parser_prod___AClosureDef___empty_init();
+val_t NEW_AClosureDef_parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_AClosureDef_parser_nodes___ANode___init(val_t p0);
 #endif

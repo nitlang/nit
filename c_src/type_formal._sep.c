@@ -17,59 +17,6 @@ val_t type_formal___MMType___direct_type(val_t p0){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-val_t type_formal___MMTypeFormal___to_s(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_type_formal;
-  fra.me.line = 46;
-  fra.me.meth = LOCATE_type_formal___MMTypeFormal___to_s;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_type_formal___MMTypeFormal____name(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//type_formal.nit:46 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_name");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_type_formal, 46);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____name(fra.me.REG[0]);
-  fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-val_t type_formal___MMTypeFormal___local_class(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_type_formal;
-  fra.me.line = 44;
-  fra.me.meth = LOCATE_type_formal___MMTypeFormal___local_class;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____bound(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./metamodel//type_formal.nit:44 */
-  if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_type_formal, 44);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = CALL_static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
 val_t type_formal___MMTypeFormal___is_valid(val_t p0){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
@@ -84,9 +31,9 @@ val_t type_formal___MMTypeFormal___is_valid(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//type_formal.nit:31 */
   fra.me.REG[1] = ATTR_type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./metamodel//type_formal.nit:31 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -103,9 +50,7 @@ val_t type_formal___MMTypeFormal___is_valid(val_t p0){
     fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____bound(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_type_formal, 31);
-      nit_exit(1);
+      nit_abort("Reciever is null", NULL, LOCATE_type_formal, 31);
     }
     REGB0 = CALL_static_type___MMType___is_valid(fra.me.REG[0])(fra.me.REG[0]);
   } else {
@@ -116,6 +61,52 @@ val_t type_formal___MMTypeFormal___is_valid(val_t p0){
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
+}
+val_t type_formal___MMTypeFormal___name(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_type_formal;
+  fra.me.line = 33;
+  fra.me.meth = LOCATE_type_formal___MMTypeFormal___name;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//type_formal.nit:33 */
+  REGB0 = TAG_Bool(ATTR_type_formal___MMTypeFormal____name(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_name", LOCATE_type_formal, 33);
+  }
+  fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____name(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t type_formal___MMTypeFormal___bound(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_type_formal;
+  fra.me.line = 36;
+  fra.me.meth = LOCATE_type_formal___MMTypeFormal___bound;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//type_formal.nit:37 */
+  fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____bound(fra.me.REG[0]);
+  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Cast failed", NULL, LOCATE_type_formal, 37);
+  }
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
 }
 val_t type_formal___MMTypeFormal_____l(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
@@ -132,8 +123,8 @@ val_t type_formal___MMTypeFormal_____l(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[0]));
   /* ./metamodel//type_formal.nit:40 */
+  REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[0]));
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
@@ -165,13 +156,11 @@ val_t type_formal___MMTypeFormal___is_supertype(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//type_formal.nit:41 */
   fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./metamodel//type_formal.nit:41 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_type_formal, 41);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_type_formal, 41);
   }
   REGB0 = CALL_static_type___MMType___is_supertype(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   goto label1;
@@ -191,13 +180,11 @@ val_t type_formal___MMTypeFormal___is_nullable(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//type_formal.nit:42 */
   fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./metamodel//type_formal.nit:42 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_type_formal, 42);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_type_formal, 42);
   }
   REGB0 = CALL_static_type___MMType___is_nullable(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -217,13 +204,11 @@ val_t type_formal___MMTypeFormal___direct_type(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//type_formal.nit:43 */
   fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./metamodel//type_formal.nit:43 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_type_formal, 43);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_type_formal, 43);
   }
   fra.me.REG[0] = CALL_type_formal___MMType___direct_type(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -231,51 +216,50 @@ val_t type_formal___MMTypeFormal___direct_type(val_t p0){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-val_t type_formal___MMTypeFormal___name(val_t p0){
+val_t type_formal___MMTypeFormal___local_class(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_type_formal;
-  fra.me.line = 33;
-  fra.me.meth = LOCATE_type_formal___MMTypeFormal___name;
+  fra.me.line = 44;
+  fra.me.meth = LOCATE_type_formal___MMTypeFormal___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_type_formal___MMTypeFormal____name(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//type_formal.nit:33 */
+  /* ./metamodel//type_formal.nit:44 */
+  fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____bound(fra.me.REG[0]);
+  REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_name");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_type_formal, 33);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_type_formal, 44);
   }
-  fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____name(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-val_t type_formal___MMTypeFormal___bound(val_t p0){
+val_t type_formal___MMTypeFormal___to_s(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_type_formal;
-  fra.me.line = 36;
-  fra.me.meth = LOCATE_type_formal___MMTypeFormal___bound;
+  fra.me.line = 46;
+  fra.me.meth = LOCATE_type_formal___MMTypeFormal___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____bound(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
-  /* ./metamodel//type_formal.nit:37 */
+  /* ./metamodel//type_formal.nit:46 */
+  REGB0 = TAG_Bool(ATTR_type_formal___MMTypeFormal____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Cast failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_type_formal, 37);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_name", LOCATE_type_formal, 46);
   }
+  fra.me.REG[0] = ATTR_type_formal___MMTypeFormal____name(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -299,8 +283,8 @@ void type_formal___MMTypeFormal___init(val_t p0, val_t p1, val_t p2, int* init_t
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  fra.me.REG[3] = fra.me.REG[0];
   /* ./metamodel//type_formal.nit:48 */
+  fra.me.REG[3] = fra.me.REG[0];
   CALL_static_type___MMType___init(fra.me.REG[0])(fra.me.REG[0], init_table);
   /* ./metamodel//type_formal.nit:50 */
   ATTR_type_formal___MMTypeFormal____name(fra.me.REG[3]) = fra.me.REG[1];

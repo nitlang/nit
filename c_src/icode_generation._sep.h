@@ -76,517 +76,547 @@ extern const int SFT_icode_generation[];
 #define CALL_icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in(recv) ((icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in_t)CALL((recv), (SFT_icode_generation[22] + 0)))
 #define ATTR_icode_generation___AClosureDef____iclosure_def(recv) ATTR(recv, (SFT_icode_generation[23] + 0))
 #define CALL_icode_generation___AClosureDef___generate_iclosuredef(recv) ((icode_generation___AClosureDef___generate_iclosuredef_t)CALL((recv), (SFT_icode_generation[24] + 0)))
-#define LOCATE_icode_generation___A2IContext___stmt "icode_generation::A2IContext::(icode_builder::ICodeBuilder::stmt)"
+static const char * const LOCATE_icode_generation___A2IContext___stmt = "icode_generation::A2IContext::(icode_builder::ICodeBuilder::stmt)";
 void icode_generation___A2IContext___stmt(val_t p0, val_t p1);
 typedef void (*icode_generation___A2IContext___stmt_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___A2IContext___add_new_array "icode_generation::A2IContext::add_new_array"
+static const char * const LOCATE_icode_generation___A2IContext___add_new_array = "icode_generation::A2IContext::add_new_array";
 val_t icode_generation___A2IContext___add_new_array(val_t p0, val_t p1, val_t p2);
 typedef val_t (*icode_generation___A2IContext___add_new_array_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___A2IContext___add_call_array_add "icode_generation::A2IContext::add_call_array_add"
+static const char * const LOCATE_icode_generation___A2IContext___add_call_array_add = "icode_generation::A2IContext::add_call_array_add";
 void icode_generation___A2IContext___add_call_array_add(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_generation___A2IContext___add_call_array_add_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___A2IContext___variable "icode_generation::A2IContext::variable"
+static const char * const LOCATE_icode_generation___A2IContext___variable = "icode_generation::A2IContext::variable";
 val_t icode_generation___A2IContext___variable(val_t p0, val_t p1);
 typedef val_t (*icode_generation___A2IContext___variable_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___A2IContext___closurevariables "icode_generation::A2IContext::closurevariables"
+static const char * const LOCATE_icode_generation___A2IContext___closurevariables = "icode_generation::A2IContext::closurevariables";
 val_t icode_generation___A2IContext___closurevariables(val_t p0);
 typedef val_t (*icode_generation___A2IContext___closurevariables_t)(val_t p0);
-#define LOCATE_icode_generation___A2IContext___visitor "icode_generation::A2IContext::visitor"
+static const char * const LOCATE_icode_generation___A2IContext___visitor = "icode_generation::A2IContext::visitor";
 val_t icode_generation___A2IContext___visitor(val_t p0);
 typedef val_t (*icode_generation___A2IContext___visitor_t)(val_t p0);
-#define LOCATE_icode_generation___A2IContext___return_seq "icode_generation::A2IContext::return_seq"
+static const char * const LOCATE_icode_generation___A2IContext___return_seq = "icode_generation::A2IContext::return_seq";
 val_t icode_generation___A2IContext___return_seq(val_t p0);
 typedef val_t (*icode_generation___A2IContext___return_seq_t)(val_t p0);
-#define LOCATE_icode_generation___A2IContext___return_seq__eq "icode_generation::A2IContext::return_seq="
+static const char * const LOCATE_icode_generation___A2IContext___return_seq__eq = "icode_generation::A2IContext::return_seq=";
 void icode_generation___A2IContext___return_seq__eq(val_t p0, val_t p1);
 typedef void (*icode_generation___A2IContext___return_seq__eq_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___A2IContext___return_value "icode_generation::A2IContext::return_value"
+static const char * const LOCATE_icode_generation___A2IContext___return_value = "icode_generation::A2IContext::return_value";
 val_t icode_generation___A2IContext___return_value(val_t p0);
 typedef val_t (*icode_generation___A2IContext___return_value_t)(val_t p0);
-#define LOCATE_icode_generation___A2IContext___return_value__eq "icode_generation::A2IContext::return_value="
+static const char * const LOCATE_icode_generation___A2IContext___return_value__eq = "icode_generation::A2IContext::return_value=";
 void icode_generation___A2IContext___return_value__eq(val_t p0, val_t p1);
 typedef void (*icode_generation___A2IContext___return_value__eq_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___A2IContext___method "icode_generation::A2IContext::method"
+static const char * const LOCATE_icode_generation___A2IContext___method = "icode_generation::A2IContext::method";
 val_t icode_generation___A2IContext___method(val_t p0);
 typedef val_t (*icode_generation___A2IContext___method_t)(val_t p0);
-#define LOCATE_icode_generation___A2IContext___init "icode_generation::A2IContext::init"
+static const char * const LOCATE_icode_generation___A2IContext___init = "icode_generation::A2IContext::init";
 void icode_generation___A2IContext___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*icode_generation___A2IContext___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_A2IContext_icode_generation___A2IContext___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___A2IContext___invoke_super_init_calls_after "icode_generation::A2IContext::invoke_super_init_calls_after"
+static const char * const LOCATE_icode_generation___A2IContext___invoke_super_init_calls_after = "icode_generation::A2IContext::invoke_super_init_calls_after";
 void icode_generation___A2IContext___invoke_super_init_calls_after(val_t p0, val_t p1);
 typedef void (*icode_generation___A2IContext___invoke_super_init_calls_after_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___A2IContext___generate_stmt "icode_generation::A2IContext::generate_stmt"
+        typedef void (*CLOS_OC_icode_generation___A2IContext___invoke_super_init_calls_after_9_0)(struct stack_frame_t *);
+        void OC_icode_generation___A2IContext___invoke_super_init_calls_after_9(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+        typedef void (*OC_icode_generation___A2IContext___invoke_super_init_calls_after_9_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_icode_generation___A2IContext___generate_stmt = "icode_generation::A2IContext::generate_stmt";
 void icode_generation___A2IContext___generate_stmt(val_t p0, val_t p1);
 typedef void (*icode_generation___A2IContext___generate_stmt_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___A2IContext___generate_expr "icode_generation::A2IContext::generate_expr"
+static const char * const LOCATE_icode_generation___A2IContext___generate_expr = "icode_generation::A2IContext::generate_expr";
 val_t icode_generation___A2IContext___generate_expr(val_t p0, val_t p1);
 typedef val_t (*icode_generation___A2IContext___generate_expr_t)(val_t p0, val_t p1);
-val_t NEW_EscapableBlock_escape___EscapableBlock___init(val_t p0);
-#define LOCATE_icode_generation___EscapableBlock___break_seq "icode_generation::EscapableBlock::break_seq"
+static const char * const LOCATE_icode_generation___EscapableBlock___break_seq = "icode_generation::EscapableBlock::break_seq";
 val_t icode_generation___EscapableBlock___break_seq(val_t p0);
 typedef val_t (*icode_generation___EscapableBlock___break_seq_t)(val_t p0);
-#define LOCATE_icode_generation___EscapableBlock___break_seq__eq "icode_generation::EscapableBlock::break_seq="
+static const char * const LOCATE_icode_generation___EscapableBlock___break_seq__eq = "icode_generation::EscapableBlock::break_seq=";
 void icode_generation___EscapableBlock___break_seq__eq(val_t p0, val_t p1);
 typedef void (*icode_generation___EscapableBlock___break_seq__eq_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___EscapableBlock___continue_seq "icode_generation::EscapableBlock::continue_seq"
+static const char * const LOCATE_icode_generation___EscapableBlock___continue_seq = "icode_generation::EscapableBlock::continue_seq";
 val_t icode_generation___EscapableBlock___continue_seq(val_t p0);
 typedef val_t (*icode_generation___EscapableBlock___continue_seq_t)(val_t p0);
-#define LOCATE_icode_generation___EscapableBlock___continue_seq__eq "icode_generation::EscapableBlock::continue_seq="
+static const char * const LOCATE_icode_generation___EscapableBlock___continue_seq__eq = "icode_generation::EscapableBlock::continue_seq=";
 void icode_generation___EscapableBlock___continue_seq__eq(val_t p0, val_t p1);
 typedef void (*icode_generation___EscapableBlock___continue_seq__eq_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___EscapableBlock___break_value "icode_generation::EscapableBlock::break_value"
+static const char * const LOCATE_icode_generation___EscapableBlock___break_value = "icode_generation::EscapableBlock::break_value";
 val_t icode_generation___EscapableBlock___break_value(val_t p0);
 typedef val_t (*icode_generation___EscapableBlock___break_value_t)(val_t p0);
-#define LOCATE_icode_generation___EscapableBlock___break_value__eq "icode_generation::EscapableBlock::break_value="
+static const char * const LOCATE_icode_generation___EscapableBlock___break_value__eq = "icode_generation::EscapableBlock::break_value=";
 void icode_generation___EscapableBlock___break_value__eq(val_t p0, val_t p1);
 typedef void (*icode_generation___EscapableBlock___break_value__eq_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___EscapableBlock___continue_value "icode_generation::EscapableBlock::continue_value"
+static const char * const LOCATE_icode_generation___EscapableBlock___continue_value = "icode_generation::EscapableBlock::continue_value";
 val_t icode_generation___EscapableBlock___continue_value(val_t p0);
 typedef val_t (*icode_generation___EscapableBlock___continue_value_t)(val_t p0);
-#define LOCATE_icode_generation___EscapableBlock___continue_value__eq "icode_generation::EscapableBlock::continue_value="
+static const char * const LOCATE_icode_generation___EscapableBlock___continue_value__eq = "icode_generation::EscapableBlock::continue_value=";
 void icode_generation___EscapableBlock___continue_value__eq(val_t p0, val_t p1);
 typedef void (*icode_generation___EscapableBlock___continue_value__eq_t)(val_t p0, val_t p1);
-val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_icode_generation___MMSrcModule___generate_icode "icode_generation::MMSrcModule::generate_icode"
+val_t NEW_EscapableBlock_scope___EscapableBlock___init(val_t p0);
+static const char * const LOCATE_icode_generation___MMSrcModule___generate_icode = "icode_generation::MMSrcModule::generate_icode";
 void icode_generation___MMSrcModule___generate_icode(val_t p0, val_t p1);
 typedef void (*icode_generation___MMSrcModule___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_MMSrcAttribute_syntax_base___MMSrcAttribute___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___MMSrcAttribute___iroutine "icode_generation::MMSrcAttribute::(icode_base::MMAttribute::iroutine)"
+  typedef void (*CLOS_OC_icode_generation___MMSrcModule___generate_icode_1_0)(struct stack_frame_t *);
+  void OC_icode_generation___MMSrcModule___generate_icode_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_generation___MMSrcModule___generate_icode_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*CLOS_OC_icode_generation___MMSrcModule___generate_icode_2_0)(struct stack_frame_t *);
+    void OC_icode_generation___MMSrcModule___generate_icode_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*OC_icode_generation___MMSrcModule___generate_icode_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+static const char * const LOCATE_icode_generation___MMSrcAttribute___iroutine = "icode_generation::MMSrcAttribute::(icode_base::MMAttribute::iroutine)";
 val_t icode_generation___MMSrcAttribute___iroutine(val_t p0);
 typedef val_t (*icode_generation___MMSrcAttribute___iroutine_t)(val_t p0);
-#define LOCATE_icode_generation___MMSrcAttribute___iroutine__eq "icode_generation::MMSrcAttribute::iroutine="
+static const char * const LOCATE_icode_generation___MMSrcAttribute___iroutine__eq = "icode_generation::MMSrcAttribute::iroutine=";
 void icode_generation___MMSrcAttribute___iroutine__eq(val_t p0, val_t p1);
 typedef void (*icode_generation___MMSrcAttribute___iroutine__eq_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___MMSrcAttribute___generate_iroutine "icode_generation::MMSrcAttribute::generate_iroutine"
+static const char * const LOCATE_icode_generation___MMSrcAttribute___generate_iroutine = "icode_generation::MMSrcAttribute::generate_iroutine";
 void icode_generation___MMSrcAttribute___generate_iroutine(val_t p0, val_t p1);
 typedef void (*icode_generation___MMSrcAttribute___generate_iroutine_t)(val_t p0, val_t p1);
-val_t NEW_MMSrcMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-#define LOCATE_icode_generation___MMSrcMethod___iroutine "icode_generation::MMSrcMethod::(icode_base::MMMethod::iroutine)"
+val_t NEW_MMSrcAttribute_syntax_base___MMSrcAttribute___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_icode_generation___MMSrcMethod___iroutine = "icode_generation::MMSrcMethod::(icode_base::MMMethod::iroutine)";
 val_t icode_generation___MMSrcMethod___iroutine(val_t p0);
 typedef val_t (*icode_generation___MMSrcMethod___iroutine_t)(val_t p0);
-#define LOCATE_icode_generation___MMSrcMethod___iroutine__eq "icode_generation::MMSrcMethod::iroutine="
+static const char * const LOCATE_icode_generation___MMSrcMethod___iroutine__eq = "icode_generation::MMSrcMethod::iroutine=";
 void icode_generation___MMSrcMethod___iroutine__eq(val_t p0, val_t p1);
 typedef void (*icode_generation___MMSrcMethod___iroutine__eq_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___MMSrcMethod___generate_iroutine "icode_generation::MMSrcMethod::generate_iroutine"
+static const char * const LOCATE_icode_generation___MMSrcMethod___generate_iroutine = "icode_generation::MMSrcMethod::generate_iroutine";
 void icode_generation___MMSrcMethod___generate_iroutine(val_t p0, val_t p1);
 typedef void (*icode_generation___MMSrcMethod___generate_iroutine_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___MMSrcMethod___inner_generate_iroutine "icode_generation::MMSrcMethod::inner_generate_iroutine"
+static const char * const LOCATE_icode_generation___MMSrcMethod___inner_generate_iroutine = "icode_generation::MMSrcMethod::inner_generate_iroutine";
 void icode_generation___MMSrcMethod___inner_generate_iroutine(val_t p0, val_t p1);
 typedef void (*icode_generation___MMSrcMethod___inner_generate_iroutine_t)(val_t p0, val_t p1);
-val_t NEW_MMReadImplementationMethod_syntax_base___MMReadImplementationMethod___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___MMReadImplementationMethod___inner_generate_iroutine "icode_generation::MMReadImplementationMethod::(icode_generation::MMSrcMethod::inner_generate_iroutine)"
+val_t NEW_MMSrcMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_generation___MMReadImplementationMethod___inner_generate_iroutine = "icode_generation::MMReadImplementationMethod::(icode_generation::MMSrcMethod::inner_generate_iroutine)";
 void icode_generation___MMReadImplementationMethod___inner_generate_iroutine(val_t p0, val_t p1);
 typedef void (*icode_generation___MMReadImplementationMethod___inner_generate_iroutine_t)(val_t p0, val_t p1);
-val_t NEW_MMWriteImplementationMethod_syntax_base___MMWriteImplementationMethod___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___MMWriteImplementationMethod___inner_generate_iroutine "icode_generation::MMWriteImplementationMethod::(icode_generation::MMSrcMethod::inner_generate_iroutine)"
+val_t NEW_MMReadImplementationMethod_syntax_base___MMReadImplementationMethod___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_icode_generation___MMWriteImplementationMethod___inner_generate_iroutine = "icode_generation::MMWriteImplementationMethod::(icode_generation::MMSrcMethod::inner_generate_iroutine)";
 void icode_generation___MMWriteImplementationMethod___inner_generate_iroutine(val_t p0, val_t p1);
 typedef void (*icode_generation___MMWriteImplementationMethod___inner_generate_iroutine_t)(val_t p0, val_t p1);
-val_t NEW_MMMethSrcMethod_syntax_base___MMMethSrcMethod___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___MMMethSrcMethod___inner_generate_iroutine "icode_generation::MMMethSrcMethod::(icode_generation::MMSrcMethod::inner_generate_iroutine)"
+val_t NEW_MMWriteImplementationMethod_syntax_base___MMWriteImplementationMethod___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_icode_generation___MMMethSrcMethod___inner_generate_iroutine = "icode_generation::MMMethSrcMethod::(icode_generation::MMSrcMethod::inner_generate_iroutine)";
 void icode_generation___MMMethSrcMethod___inner_generate_iroutine(val_t p0, val_t p1);
 typedef void (*icode_generation___MMMethSrcMethod___inner_generate_iroutine_t)(val_t p0, val_t p1);
-val_t NEW_MMImplicitInit_syntax_base___MMImplicitInit___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___MMImplicitInit___inner_generate_iroutine "icode_generation::MMImplicitInit::(icode_generation::MMSrcMethod::inner_generate_iroutine)"
+val_t NEW_MMMethSrcMethod_syntax_base___MMMethSrcMethod___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_icode_generation___MMImplicitInit___inner_generate_iroutine = "icode_generation::MMImplicitInit::(icode_generation::MMSrcMethod::inner_generate_iroutine)";
 void icode_generation___MMImplicitInit___inner_generate_iroutine(val_t p0, val_t p1);
 typedef void (*icode_generation___MMImplicitInit___inner_generate_iroutine_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___A2IVisitor___visit "icode_generation::A2IVisitor::(parser_prod::Visitor::visit)"
-void icode_generation___A2IVisitor___visit(val_t p0, val_t p1);
-typedef void (*icode_generation___A2IVisitor___visit_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___A2IVisitor___icode_ctx__eq "icode_generation::A2IVisitor::icode_ctx="
+val_t NEW_MMImplicitInit_syntax_base___MMImplicitInit___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_icode_generation___A2IVisitor___icode_ctx__eq = "icode_generation::A2IVisitor::icode_ctx=";
 void icode_generation___A2IVisitor___icode_ctx__eq(val_t p0, val_t p1);
 typedef void (*icode_generation___A2IVisitor___icode_ctx__eq_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___A2IVisitor___icode_ctx "icode_generation::A2IVisitor::icode_ctx"
+static const char * const LOCATE_icode_generation___A2IVisitor___icode_ctx = "icode_generation::A2IVisitor::icode_ctx";
 val_t icode_generation___A2IVisitor___icode_ctx(val_t p0);
 typedef val_t (*icode_generation___A2IVisitor___icode_ctx_t)(val_t p0);
-#define LOCATE_icode_generation___A2IVisitor___init "icode_generation::A2IVisitor::init"
+static const char * const LOCATE_icode_generation___A2IVisitor___visit = "icode_generation::A2IVisitor::(parser_prod::Visitor::visit)";
+void icode_generation___A2IVisitor___visit(val_t p0, val_t p1);
+typedef void (*icode_generation___A2IVisitor___visit_t)(val_t p0, val_t p1);
+static const char * const LOCATE_icode_generation___A2IVisitor___init = "icode_generation::A2IVisitor::init";
 void icode_generation___A2IVisitor___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*icode_generation___A2IVisitor___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_A2IVisitor_icode_generation___A2IVisitor___init(val_t p0, val_t p1);
-val_t NEW_ANode_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_icode_generation___ANode___accept_icode_generation "icode_generation::ANode::accept_icode_generation"
+static const char * const LOCATE_icode_generation___ANode___accept_icode_generation = "icode_generation::ANode::accept_icode_generation";
 void icode_generation___ANode___accept_icode_generation(val_t p0, val_t p1);
 typedef void (*icode_generation___ANode___accept_icode_generation_t)(val_t p0, val_t p1);
-val_t NEW_AAttrPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___empty_init();
-val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
-#define LOCATE_icode_generation___AAttrPropdef___accept_icode_generation "icode_generation::AAttrPropdef::(icode_generation::ANode::accept_icode_generation)"
+val_t NEW_ANode_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AAttrPropdef___accept_icode_generation = "icode_generation::AAttrPropdef::(icode_generation::ANode::accept_icode_generation)";
 void icode_generation___AAttrPropdef___accept_icode_generation(val_t p0, val_t p1);
 typedef void (*icode_generation___AAttrPropdef___accept_icode_generation_t)(val_t p0, val_t p1);
-val_t NEW_AMethPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AMethPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_icode_generation___AMethPropdef___accept_icode_generation "icode_generation::AMethPropdef::(icode_generation::ANode::accept_icode_generation)"
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___empty_init();
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9);
+val_t NEW_AAttrPropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AMethPropdef___accept_icode_generation = "icode_generation::AMethPropdef::(icode_generation::ANode::accept_icode_generation)";
 void icode_generation___AMethPropdef___accept_icode_generation(val_t p0, val_t p1);
 typedef void (*icode_generation___AMethPropdef___accept_icode_generation_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AMethPropdef___fill_iroutine "icode_generation::AMethPropdef::fill_iroutine"
+static const char * const LOCATE_icode_generation___AMethPropdef___fill_iroutine = "icode_generation::AMethPropdef::fill_iroutine";
 void icode_generation___AMethPropdef___fill_iroutine(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_generation___AMethPropdef___fill_iroutine_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_ASignature_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASignature_parser_prod___ASignature___empty_init();
-val_t NEW_ASignature_parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___ASignature___fill_iroutine_parameters "icode_generation::ASignature::fill_iroutine_parameters"
+val_t NEW_AMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AMethPropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ASignature___fill_iroutine_parameters = "icode_generation::ASignature::fill_iroutine_parameters";
 void icode_generation___ASignature___fill_iroutine_parameters(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef void (*icode_generation___ASignature___fill_iroutine_parameters_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_AClosureDecl_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
-val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_icode_generation___AClosureDecl___accept_icode_generation "icode_generation::AClosureDecl::(icode_generation::ANode::accept_icode_generation)"
+  typedef void (*CLOS_OC_icode_generation___ASignature___fill_iroutine_parameters_1_0)(struct stack_frame_t *);
+  void OC_icode_generation___ASignature___fill_iroutine_parameters_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_generation___ASignature___fill_iroutine_parameters_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ASignature_parser_prod___ASignature___empty_init();
+val_t NEW_ASignature_parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val_t p2);
+val_t NEW_ASignature_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AClosureDecl___accept_icode_generation = "icode_generation::AClosureDecl::(icode_generation::ANode::accept_icode_generation)";
 void icode_generation___AClosureDecl___accept_icode_generation(val_t p0, val_t p1);
 typedef void (*icode_generation___AClosureDecl___accept_icode_generation_t)(val_t p0, val_t p1);
-val_t NEW_AConcreteMethPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___empty_init();
-val_t NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
-#define LOCATE_icode_generation___AConcreteMethPropdef___fill_iroutine "icode_generation::AConcreteMethPropdef::(icode_generation::AMethPropdef::fill_iroutine)"
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AClosureDecl_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AConcreteMethPropdef___fill_iroutine = "icode_generation::AConcreteMethPropdef::(icode_generation::AMethPropdef::fill_iroutine)";
 void icode_generation___AConcreteMethPropdef___fill_iroutine(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_generation___AConcreteMethPropdef___fill_iroutine_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_ADeferredMethPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ADeferredMethPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_ADeferredMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_ADeferredMethPropdef_parser_prod___ADeferredMethPropdef___empty_init();
-val_t NEW_ADeferredMethPropdef_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_icode_generation___ADeferredMethPropdef___fill_iroutine "icode_generation::ADeferredMethPropdef::(icode_generation::AMethPropdef::fill_iroutine)"
+val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___empty_init();
+val_t NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AConcreteMethPropdef_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+static const char * const LOCATE_icode_generation___ADeferredMethPropdef___fill_iroutine = "icode_generation::ADeferredMethPropdef::(icode_generation::AMethPropdef::fill_iroutine)";
 void icode_generation___ADeferredMethPropdef___fill_iroutine(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_generation___ADeferredMethPropdef___fill_iroutine_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_AExternMethPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___empty_init();
-val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
-#define LOCATE_icode_generation___AExternMethPropdef___fill_iroutine "icode_generation::AExternMethPropdef::(icode_generation::AMethPropdef::fill_iroutine)"
+val_t NEW_ADeferredMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_ADeferredMethPropdef_parser_prod___ADeferredMethPropdef___empty_init();
+val_t NEW_ADeferredMethPropdef_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_ADeferredMethPropdef_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ADeferredMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+static const char * const LOCATE_icode_generation___AExternMethPropdef___fill_iroutine = "icode_generation::AExternMethPropdef::(icode_generation::AMethPropdef::fill_iroutine)";
 void icode_generation___AExternMethPropdef___fill_iroutine(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_generation___AExternMethPropdef___fill_iroutine_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_AInternMethPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AInternMethPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AInternMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_AInternMethPropdef_parser_prod___AInternMethPropdef___empty_init();
-val_t NEW_AInternMethPropdef_parser_prod___AInternMethPropdef___init_ainternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_icode_generation___AInternMethPropdef___fill_iroutine "icode_generation::AInternMethPropdef::(icode_generation::AMethPropdef::fill_iroutine)"
+val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___empty_init();
+val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AExternMethPropdef_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+static const char * const LOCATE_icode_generation___AInternMethPropdef___fill_iroutine = "icode_generation::AInternMethPropdef::(icode_generation::AMethPropdef::fill_iroutine)";
 void icode_generation___AInternMethPropdef___fill_iroutine(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_generation___AInternMethPropdef___fill_iroutine_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_AExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_icode_generation___AExpr___accept_icode_generation "icode_generation::AExpr::(icode_generation::ANode::accept_icode_generation)"
+val_t NEW_AInternMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AInternMethPropdef_parser_prod___AInternMethPropdef___empty_init();
+val_t NEW_AInternMethPropdef_parser_prod___AInternMethPropdef___init_ainternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_AInternMethPropdef_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AInternMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+static const char * const LOCATE_icode_generation___AExpr___accept_icode_generation = "icode_generation::AExpr::(icode_generation::ANode::accept_icode_generation)";
 void icode_generation___AExpr___accept_icode_generation(val_t p0, val_t p1);
 typedef void (*icode_generation___AExpr___accept_icode_generation_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AExpr___generate_icode "icode_generation::AExpr::generate_icode"
+static const char * const LOCATE_icode_generation___AExpr___generate_icode = "icode_generation::AExpr::generate_icode";
 val_t icode_generation___AExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AVardeclExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___empty_init();
-val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_icode_generation___AVardeclExpr___generate_icode "icode_generation::AVardeclExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AVardeclExpr___generate_icode = "icode_generation::AVardeclExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AVardeclExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AVardeclExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ABlockExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ABlockExpr_parser_prod___ABlockExpr___empty_init();
-val_t NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr(val_t p0);
-#define LOCATE_icode_generation___ABlockExpr___generate_icode "icode_generation::ABlockExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___empty_init();
+val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AVardeclExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ABlockExpr___generate_icode = "icode_generation::ABlockExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ABlockExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ABlockExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ADoExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ADoExpr_parser_prod___ADoExpr___empty_init();
-val_t NEW_ADoExpr_parser_prod___ADoExpr___init_adoexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___ADoExpr___generate_icode "icode_generation::ADoExpr::(icode_generation::AExpr::generate_icode)"
+  typedef void (*CLOS_OC_icode_generation___ABlockExpr___generate_icode_1_0)(struct stack_frame_t *);
+  void OC_icode_generation___ABlockExpr___generate_icode_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_generation___ABlockExpr___generate_icode_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ABlockExpr_parser_prod___ABlockExpr___empty_init();
+val_t NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr(val_t p0);
+val_t NEW_ABlockExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ADoExpr___generate_icode = "icode_generation::ADoExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ADoExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ADoExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AReturnExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AReturnExpr_parser_prod___AReturnExpr___empty_init();
-val_t NEW_AReturnExpr_parser_prod___AReturnExpr___init_areturnexpr(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AReturnExpr___generate_icode "icode_generation::AReturnExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ADoExpr_parser_prod___ADoExpr___empty_init();
+val_t NEW_ADoExpr_parser_prod___ADoExpr___init_adoexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_ADoExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AReturnExpr___generate_icode = "icode_generation::AReturnExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AReturnExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AReturnExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ABreakExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ABreakExpr_parser_prod___ABreakExpr___empty_init();
-val_t NEW_ABreakExpr_parser_prod___ABreakExpr___init_abreakexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___ABreakExpr___generate_icode "icode_generation::ABreakExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AReturnExpr_parser_prod___AReturnExpr___empty_init();
+val_t NEW_AReturnExpr_parser_prod___AReturnExpr___init_areturnexpr(val_t p0, val_t p1);
+val_t NEW_AReturnExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ABreakExpr___generate_icode = "icode_generation::ABreakExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ABreakExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ABreakExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AContinueExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AContinueExpr_parser_prod___AContinueExpr___empty_init();
-val_t NEW_AContinueExpr_parser_prod___AContinueExpr___init_acontinueexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___AContinueExpr___generate_icode "icode_generation::AContinueExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ABreakExpr_parser_prod___ABreakExpr___empty_init();
+val_t NEW_ABreakExpr_parser_prod___ABreakExpr___init_abreakexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_ABreakExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AContinueExpr___generate_icode = "icode_generation::AContinueExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AContinueExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AContinueExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AAbortExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AAbortExpr_parser_prod___AAbortExpr___empty_init();
-val_t NEW_AAbortExpr_parser_prod___AAbortExpr___init_aabortexpr(val_t p0);
-#define LOCATE_icode_generation___AAbortExpr___generate_icode "icode_generation::AAbortExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AContinueExpr_parser_prod___AContinueExpr___empty_init();
+val_t NEW_AContinueExpr_parser_prod___AContinueExpr___init_acontinueexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AContinueExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AAbortExpr___generate_icode = "icode_generation::AAbortExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AAbortExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AAbortExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AIfExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AIfExpr_parser_prod___AIfExpr___empty_init();
-val_t NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_icode_generation___AIfExpr___generate_icode "icode_generation::AIfExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AAbortExpr_parser_prod___AAbortExpr___empty_init();
+val_t NEW_AAbortExpr_parser_prod___AAbortExpr___init_aabortexpr(val_t p0);
+val_t NEW_AAbortExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AIfExpr___generate_icode = "icode_generation::AIfExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AIfExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AIfExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AWhileExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AWhileExpr_parser_prod___AWhileExpr___empty_init();
-val_t NEW_AWhileExpr_parser_prod___AWhileExpr___init_awhileexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_icode_generation___AWhileExpr___generate_icode "icode_generation::AWhileExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AIfExpr_parser_prod___AIfExpr___empty_init();
+val_t NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AIfExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AWhileExpr___generate_icode = "icode_generation::AWhileExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AWhileExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AWhileExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ALoopExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ALoopExpr_parser_prod___ALoopExpr___empty_init();
-val_t NEW_ALoopExpr_parser_prod___ALoopExpr___init_aloopexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___ALoopExpr___generate_icode "icode_generation::ALoopExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AWhileExpr_parser_prod___AWhileExpr___empty_init();
+val_t NEW_AWhileExpr_parser_prod___AWhileExpr___init_awhileexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AWhileExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ALoopExpr___generate_icode = "icode_generation::ALoopExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ALoopExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ALoopExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AForExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AForExpr_parser_prod___AForExpr___empty_init();
-val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_icode_generation___AForExpr___generate_icode "icode_generation::AForExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ALoopExpr_parser_prod___ALoopExpr___empty_init();
+val_t NEW_ALoopExpr_parser_prod___ALoopExpr___init_aloopexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_ALoopExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AForExpr___generate_icode = "icode_generation::AForExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AForExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AForExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AAssertExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AAssertExpr_parser_prod___AAssertExpr___empty_init();
-val_t NEW_AAssertExpr_parser_prod___AAssertExpr___init_aassertexpr(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_icode_generation___AAssertExpr___generate_icode "icode_generation::AAssertExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AForExpr_parser_prod___AForExpr___empty_init();
+val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_AForExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AAssertExpr___generate_icode = "icode_generation::AAssertExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AAssertExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AAssertExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AVarExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AVarExpr_parser_prod___AVarExpr___empty_init();
-val_t NEW_AVarExpr_parser_prod___AVarExpr___init_avarexpr(val_t p0);
-#define LOCATE_icode_generation___AVarExpr___generate_icode "icode_generation::AVarExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AAssertExpr_parser_prod___AAssertExpr___empty_init();
+val_t NEW_AAssertExpr_parser_prod___AAssertExpr___init_aassertexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AAssertExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AVarExpr___generate_icode = "icode_generation::AVarExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AVarExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AVarExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AVarAssignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___empty_init();
-val_t NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___init_avarassignexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___AVarAssignExpr___generate_icode "icode_generation::AVarAssignExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AVarExpr_parser_prod___AVarExpr___init_avarexpr(val_t p0);
+val_t NEW_AVarExpr_parser_prod___AVarExpr___empty_init();
+val_t NEW_AVarExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AVarAssignExpr___generate_icode = "icode_generation::AVarAssignExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AVarAssignExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AVarAssignExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AVarReassignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___empty_init();
-val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___init_avarreassignexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___AVarReassignExpr___generate_icode "icode_generation::AVarReassignExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___init_avarassignexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___empty_init();
+val_t NEW_AVarAssignExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AVarReassignExpr___generate_icode = "icode_generation::AVarReassignExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AVarReassignExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AVarReassignExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ASelfExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASelfExpr_parser_prod___ASelfExpr___empty_init();
-val_t NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
-#define LOCATE_icode_generation___ASelfExpr___generate_icode "icode_generation::ASelfExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___init_avarreassignexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___empty_init();
+val_t NEW_AVarReassignExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ASelfExpr___generate_icode = "icode_generation::ASelfExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ASelfExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ASelfExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AIfexprExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AIfexprExpr_parser_prod___AIfexprExpr___empty_init();
-val_t NEW_AIfexprExpr_parser_prod___AIfexprExpr___init_aifexprexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_icode_generation___AIfexprExpr___generate_icode "icode_generation::AIfexprExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ASelfExpr_parser_prod___ASelfExpr___empty_init();
+val_t NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
+val_t NEW_ASelfExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AIfexprExpr___generate_icode = "icode_generation::AIfexprExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AIfexprExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AIfexprExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AEeExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AEeExpr_parser_prod___AEeExpr___empty_init();
-val_t NEW_AEeExpr_parser_prod___AEeExpr___init_aeeexpr(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AEeExpr___generate_icode "icode_generation::AEeExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AIfexprExpr_parser_prod___AIfexprExpr___empty_init();
+val_t NEW_AIfexprExpr_parser_prod___AIfexprExpr___init_aifexprexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_AIfexprExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AEeExpr___generate_icode = "icode_generation::AEeExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AEeExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AEeExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AOrExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AOrExpr_parser_prod___AOrExpr___empty_init();
-val_t NEW_AOrExpr_parser_prod___AOrExpr___init_aorexpr(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AOrExpr___generate_icode "icode_generation::AOrExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AEeExpr_parser_prod___AEeExpr___empty_init();
+val_t NEW_AEeExpr_parser_prod___AEeExpr___init_aeeexpr(val_t p0, val_t p1);
+val_t NEW_AEeExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AOrExpr___generate_icode = "icode_generation::AOrExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AOrExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AOrExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AAndExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AAndExpr_parser_prod___AAndExpr___empty_init();
-val_t NEW_AAndExpr_parser_prod___AAndExpr___init_aandexpr(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AAndExpr___generate_icode "icode_generation::AAndExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AOrExpr_parser_prod___AOrExpr___empty_init();
+val_t NEW_AOrExpr_parser_prod___AOrExpr___init_aorexpr(val_t p0, val_t p1);
+val_t NEW_AOrExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AAndExpr___generate_icode = "icode_generation::AAndExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AAndExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AAndExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ANotExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ANotExpr_parser_prod___ANotExpr___empty_init();
-val_t NEW_ANotExpr_parser_prod___ANotExpr___init_anotexpr(val_t p0, val_t p1);
-#define LOCATE_icode_generation___ANotExpr___generate_icode "icode_generation::ANotExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AAndExpr_parser_prod___AAndExpr___empty_init();
+val_t NEW_AAndExpr_parser_prod___AAndExpr___init_aandexpr(val_t p0, val_t p1);
+val_t NEW_AAndExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ANotExpr___generate_icode = "icode_generation::ANotExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ANotExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ANotExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AIsaExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AIsaExpr_parser_prod___AIsaExpr___empty_init();
-val_t NEW_AIsaExpr_parser_prod___AIsaExpr___init_aisaexpr(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AIsaExpr___generate_icode "icode_generation::AIsaExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ANotExpr_parser_prod___ANotExpr___empty_init();
+val_t NEW_ANotExpr_parser_prod___ANotExpr___init_anotexpr(val_t p0, val_t p1);
+val_t NEW_ANotExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AOrElseExpr___generate_icode = "icode_generation::AOrElseExpr::(icode_generation::AExpr::generate_icode)";
+val_t icode_generation___AOrElseExpr___generate_icode(val_t p0, val_t p1);
+typedef val_t (*icode_generation___AOrElseExpr___generate_icode_t)(val_t p0, val_t p1);
+val_t NEW_AOrElseExpr_parser_prod___AOrElseExpr___empty_init();
+val_t NEW_AOrElseExpr_parser_prod___AOrElseExpr___init_aorelseexpr(val_t p0, val_t p1);
+val_t NEW_AOrElseExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AIsaExpr___generate_icode = "icode_generation::AIsaExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AIsaExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AIsaExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AAsCastExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AAsCastExpr_parser_prod___AAsCastExpr___empty_init();
-val_t NEW_AAsCastExpr_parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___AAsCastExpr___generate_icode "icode_generation::AAsCastExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AIsaExpr_parser_prod___AIsaExpr___empty_init();
+val_t NEW_AIsaExpr_parser_prod___AIsaExpr___init_aisaexpr(val_t p0, val_t p1);
+val_t NEW_AIsaExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AAsCastExpr___generate_icode = "icode_generation::AAsCastExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AAsCastExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AAsCastExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AAsNotnullExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AAsNotnullExpr_parser_prod___AAsNotnullExpr___empty_init();
-val_t NEW_AAsNotnullExpr_parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_icode_generation___AAsNotnullExpr___generate_icode "icode_generation::AAsNotnullExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AAsCastExpr_parser_prod___AAsCastExpr___empty_init();
+val_t NEW_AAsCastExpr_parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AAsCastExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AAsNotnullExpr___generate_icode = "icode_generation::AAsNotnullExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AAsNotnullExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AAsNotnullExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ATrueExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ATrueExpr_parser_prod___ATrueExpr___empty_init();
-val_t NEW_ATrueExpr_parser_prod___ATrueExpr___init_atrueexpr(val_t p0);
-#define LOCATE_icode_generation___ATrueExpr___generate_icode "icode_generation::ATrueExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AAsNotnullExpr_parser_prod___AAsNotnullExpr___empty_init();
+val_t NEW_AAsNotnullExpr_parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AAsNotnullExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ATrueExpr___generate_icode = "icode_generation::ATrueExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ATrueExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ATrueExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AFalseExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AFalseExpr_parser_prod___AFalseExpr___empty_init();
-val_t NEW_AFalseExpr_parser_prod___AFalseExpr___init_afalseexpr(val_t p0);
-#define LOCATE_icode_generation___AFalseExpr___generate_icode "icode_generation::AFalseExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ATrueExpr_parser_prod___ATrueExpr___empty_init();
+val_t NEW_ATrueExpr_parser_prod___ATrueExpr___init_atrueexpr(val_t p0);
+val_t NEW_ATrueExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AFalseExpr___generate_icode = "icode_generation::AFalseExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AFalseExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AFalseExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AIntExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AIntExpr_parser_prod___AIntExpr___empty_init();
-val_t NEW_AIntExpr_parser_prod___AIntExpr___init_aintexpr(val_t p0);
-#define LOCATE_icode_generation___AIntExpr___generate_icode "icode_generation::AIntExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AFalseExpr_parser_prod___AFalseExpr___empty_init();
+val_t NEW_AFalseExpr_parser_prod___AFalseExpr___init_afalseexpr(val_t p0);
+val_t NEW_AFalseExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AIntExpr___generate_icode = "icode_generation::AIntExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AIntExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AIntExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AFloatExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AFloatExpr_parser_prod___AFloatExpr___empty_init();
-val_t NEW_AFloatExpr_parser_prod___AFloatExpr___init_afloatexpr(val_t p0);
-#define LOCATE_icode_generation___AFloatExpr___generate_icode "icode_generation::AFloatExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AIntExpr_parser_prod___AIntExpr___empty_init();
+val_t NEW_AIntExpr_parser_prod___AIntExpr___init_aintexpr(val_t p0);
+val_t NEW_AIntExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AFloatExpr___generate_icode = "icode_generation::AFloatExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AFloatExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AFloatExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ACharExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ACharExpr_parser_prod___ACharExpr___empty_init();
-val_t NEW_ACharExpr_parser_prod___ACharExpr___init_acharexpr(val_t p0);
-#define LOCATE_icode_generation___ACharExpr___generate_icode "icode_generation::ACharExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AFloatExpr_parser_prod___AFloatExpr___empty_init();
+val_t NEW_AFloatExpr_parser_prod___AFloatExpr___init_afloatexpr(val_t p0);
+val_t NEW_AFloatExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ACharExpr___generate_icode = "icode_generation::ACharExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ACharExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ACharExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AStringFormExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_icode_generation___AStringFormExpr___generate_icode "icode_generation::AStringFormExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ACharExpr_parser_prod___ACharExpr___empty_init();
+val_t NEW_ACharExpr_parser_prod___ACharExpr___init_acharexpr(val_t p0);
+val_t NEW_ACharExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AStringFormExpr___generate_icode = "icode_generation::AStringFormExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AStringFormExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AStringFormExpr___generate_icode_t)(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AStringFormExpr___string_text "icode_generation::AStringFormExpr::string_text"
+static const char * const LOCATE_icode_generation___AStringFormExpr___string_text = "icode_generation::AStringFormExpr::string_text";
 val_t icode_generation___AStringFormExpr___string_text(val_t p0);
 typedef val_t (*icode_generation___AStringFormExpr___string_text_t)(val_t p0);
-#define LOCATE_icode_generation___AStringFormExpr___compute_string_infos "icode_generation::AStringFormExpr::compute_string_infos"
+static const char * const LOCATE_icode_generation___AStringFormExpr___compute_string_infos = "icode_generation::AStringFormExpr::compute_string_infos";
 void icode_generation___AStringFormExpr___compute_string_infos(val_t p0);
 typedef void (*icode_generation___AStringFormExpr___compute_string_infos_t)(val_t p0);
-val_t NEW_AStringExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AStringExpr_parser_prod___AStringExpr___empty_init();
-val_t NEW_AStringExpr_parser_prod___AStringExpr___init_astringexpr(val_t p0);
-#define LOCATE_icode_generation___AStringExpr___string_text "icode_generation::AStringExpr::(icode_generation::AStringFormExpr::string_text)"
+val_t NEW_AStringFormExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AStringExpr___string_text = "icode_generation::AStringExpr::(icode_generation::AStringFormExpr::string_text)";
 val_t icode_generation___AStringExpr___string_text(val_t p0);
 typedef val_t (*icode_generation___AStringExpr___string_text_t)(val_t p0);
-val_t NEW_AStartStringExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AStartStringExpr_parser_prod___AStartStringExpr___empty_init();
-val_t NEW_AStartStringExpr_parser_prod___AStartStringExpr___init_astartstringexpr(val_t p0);
-#define LOCATE_icode_generation___AStartStringExpr___string_text "icode_generation::AStartStringExpr::(icode_generation::AStringFormExpr::string_text)"
+val_t NEW_AStringExpr_parser_prod___AStringExpr___empty_init();
+val_t NEW_AStringExpr_parser_prod___AStringExpr___init_astringexpr(val_t p0);
+val_t NEW_AStringExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AStartStringExpr___string_text = "icode_generation::AStartStringExpr::(icode_generation::AStringFormExpr::string_text)";
 val_t icode_generation___AStartStringExpr___string_text(val_t p0);
 typedef val_t (*icode_generation___AStartStringExpr___string_text_t)(val_t p0);
-val_t NEW_AMidStringExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AMidStringExpr_parser_prod___AMidStringExpr___empty_init();
-val_t NEW_AMidStringExpr_parser_prod___AMidStringExpr___init_amidstringexpr(val_t p0);
-#define LOCATE_icode_generation___AMidStringExpr___string_text "icode_generation::AMidStringExpr::(icode_generation::AStringFormExpr::string_text)"
+val_t NEW_AStartStringExpr_parser_prod___AStartStringExpr___empty_init();
+val_t NEW_AStartStringExpr_parser_prod___AStartStringExpr___init_astartstringexpr(val_t p0);
+val_t NEW_AStartStringExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AMidStringExpr___string_text = "icode_generation::AMidStringExpr::(icode_generation::AStringFormExpr::string_text)";
 val_t icode_generation___AMidStringExpr___string_text(val_t p0);
 typedef val_t (*icode_generation___AMidStringExpr___string_text_t)(val_t p0);
-val_t NEW_AEndStringExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AEndStringExpr_parser_prod___AEndStringExpr___empty_init();
-val_t NEW_AEndStringExpr_parser_prod___AEndStringExpr___init_aendstringexpr(val_t p0);
-#define LOCATE_icode_generation___AEndStringExpr___string_text "icode_generation::AEndStringExpr::(icode_generation::AStringFormExpr::string_text)"
+val_t NEW_AMidStringExpr_parser_prod___AMidStringExpr___empty_init();
+val_t NEW_AMidStringExpr_parser_prod___AMidStringExpr___init_amidstringexpr(val_t p0);
+val_t NEW_AMidStringExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AEndStringExpr___string_text = "icode_generation::AEndStringExpr::(icode_generation::AStringFormExpr::string_text)";
 val_t icode_generation___AEndStringExpr___string_text(val_t p0);
 typedef val_t (*icode_generation___AEndStringExpr___string_text_t)(val_t p0);
-val_t NEW_ASuperstringExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___empty_init();
-val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t p0);
-#define LOCATE_icode_generation___ASuperstringExpr___generate_icode "icode_generation::ASuperstringExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AEndStringExpr_parser_prod___AEndStringExpr___empty_init();
+val_t NEW_AEndStringExpr_parser_prod___AEndStringExpr___init_aendstringexpr(val_t p0);
+val_t NEW_AEndStringExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ASuperstringExpr___generate_icode = "icode_generation::ASuperstringExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ASuperstringExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ASuperstringExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ANullExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ANullExpr_parser_prod___ANullExpr___empty_init();
-val_t NEW_ANullExpr_parser_prod___ANullExpr___init_anullexpr(val_t p0);
-#define LOCATE_icode_generation___ANullExpr___generate_icode "icode_generation::ANullExpr::(icode_generation::AExpr::generate_icode)"
+  typedef void (*CLOS_OC_icode_generation___ASuperstringExpr___generate_icode_3_0)(struct stack_frame_t *);
+  void OC_icode_generation___ASuperstringExpr___generate_icode_3(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_generation___ASuperstringExpr___generate_icode_3_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___empty_init();
+val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t p0);
+val_t NEW_ASuperstringExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ANullExpr___generate_icode = "icode_generation::ANullExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ANullExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ANullExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AArrayExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AArrayExpr_parser_prod___AArrayExpr___empty_init();
-val_t NEW_AArrayExpr_parser_prod___AArrayExpr___init_aarrayexpr(val_t p0);
-#define LOCATE_icode_generation___AArrayExpr___generate_icode "icode_generation::AArrayExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ANullExpr_parser_prod___ANullExpr___empty_init();
+val_t NEW_ANullExpr_parser_prod___ANullExpr___init_anullexpr(val_t p0);
+val_t NEW_ANullExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AArrayExpr___generate_icode = "icode_generation::AArrayExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AArrayExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AArrayExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ACrangeExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ACrangeExpr_parser_prod___ARangeExpr___empty_init();
-val_t NEW_ACrangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
-val_t NEW_ACrangeExpr_parser_prod___ACrangeExpr___empty_init();
-val_t NEW_ACrangeExpr_parser_prod___ACrangeExpr___init_acrangeexpr(val_t p0, val_t p1);
-#define LOCATE_icode_generation___ACrangeExpr___generate_icode "icode_generation::ACrangeExpr::(icode_generation::AExpr::generate_icode)"
+  typedef void (*CLOS_OC_icode_generation___AArrayExpr___generate_icode_1_0)(struct stack_frame_t *);
+  void OC_icode_generation___AArrayExpr___generate_icode_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_generation___AArrayExpr___generate_icode_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_AArrayExpr_parser_prod___AArrayExpr___empty_init();
+val_t NEW_AArrayExpr_parser_prod___AArrayExpr___init_aarrayexpr(val_t p0);
+val_t NEW_AArrayExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ACrangeExpr___generate_icode = "icode_generation::ACrangeExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ACrangeExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ACrangeExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AOrangeExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AOrangeExpr_parser_prod___ARangeExpr___empty_init();
-val_t NEW_AOrangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
-val_t NEW_AOrangeExpr_parser_prod___AOrangeExpr___empty_init();
-val_t NEW_AOrangeExpr_parser_prod___AOrangeExpr___init_aorangeexpr(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AOrangeExpr___generate_icode "icode_generation::AOrangeExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ACrangeExpr_parser_prod___ARangeExpr___empty_init();
+val_t NEW_ACrangeExpr_parser_prod___ACrangeExpr___empty_init();
+val_t NEW_ACrangeExpr_parser_prod___ACrangeExpr___init_acrangeexpr(val_t p0, val_t p1);
+val_t NEW_ACrangeExpr_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACrangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
+static const char * const LOCATE_icode_generation___AOrangeExpr___generate_icode = "icode_generation::AOrangeExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AOrangeExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AOrangeExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ASuperExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASuperExpr_parser_prod___ASuperExpr___empty_init();
-val_t NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___ASuperExpr___generate_icode "icode_generation::ASuperExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AOrangeExpr_parser_prod___ARangeExpr___empty_init();
+val_t NEW_AOrangeExpr_parser_prod___AOrangeExpr___empty_init();
+val_t NEW_AOrangeExpr_parser_prod___AOrangeExpr___init_aorangeexpr(val_t p0, val_t p1);
+val_t NEW_AOrangeExpr_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AOrangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
+static const char * const LOCATE_icode_generation___ASuperExpr___generate_icode = "icode_generation::ASuperExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ASuperExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AAttrExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AAttrExpr_parser_prod___AAttrExpr___empty_init();
-val_t NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AAttrExpr___generate_icode "icode_generation::AAttrExpr::(icode_generation::AExpr::generate_icode)"
+    typedef void (*CLOS_OC_icode_generation___ASuperExpr___generate_icode_2_0)(struct stack_frame_t *);
+    void OC_icode_generation___ASuperExpr___generate_icode_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*OC_icode_generation___ASuperExpr___generate_icode_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ASuperExpr_parser_prod___ASuperExpr___empty_init();
+val_t NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_ASuperExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AAttrExpr___generate_icode = "icode_generation::AAttrExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AAttrExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AAttrExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AAttrAssignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AAttrAssignExpr_parser_prod___AAttrAssignExpr___empty_init();
-val_t NEW_AAttrAssignExpr_parser_prod___AAttrAssignExpr___init_aattrassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_icode_generation___AAttrAssignExpr___generate_icode "icode_generation::AAttrAssignExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AAttrExpr_parser_prod___AAttrExpr___empty_init();
+val_t NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr(val_t p0, val_t p1);
+val_t NEW_AAttrExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AAttrAssignExpr___generate_icode = "icode_generation::AAttrAssignExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AAttrAssignExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AAttrAssignExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AAttrReassignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___empty_init();
-val_t NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___init_aattrreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_icode_generation___AAttrReassignExpr___generate_icode "icode_generation::AAttrReassignExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AAttrAssignExpr_parser_prod___AAttrAssignExpr___empty_init();
+val_t NEW_AAttrAssignExpr_parser_prod___AAttrAssignExpr___init_aattrassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AAttrAssignExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AAttrReassignExpr___generate_icode = "icode_generation::AAttrReassignExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AAttrReassignExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AAttrReassignExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AIssetAttrExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AIssetAttrExpr_parser_prod___AIssetAttrExpr___empty_init();
-val_t NEW_AIssetAttrExpr_parser_prod___AIssetAttrExpr___init_aissetattrexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___AIssetAttrExpr___generate_icode "icode_generation::AIssetAttrExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___empty_init();
+val_t NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___init_aattrreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AAttrReassignExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AIssetAttrExpr___generate_icode = "icode_generation::AIssetAttrExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AIssetAttrExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AIssetAttrExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AAbsAbsSendExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in "icode_generation::AAbsAbsSendExpr::generate_icode_for_arguments_in"
+val_t NEW_AIssetAttrExpr_parser_prod___AIssetAttrExpr___empty_init();
+val_t NEW_AIssetAttrExpr_parser_prod___AIssetAttrExpr___init_aissetattrexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AIssetAttrExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in = "icode_generation::AAbsAbsSendExpr::generate_icode_for_arguments_in";
 void icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (*icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_ASendExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASendExpr_parser_prod___ASendExpr___empty_init();
-val_t NEW_ASendExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
-#define LOCATE_icode_generation___ASendExpr___generate_icode "icode_generation::ASendExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AAbsAbsSendExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ASendExpr___generate_icode = "icode_generation::ASendExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ASendExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ASendReassignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___empty_init();
-val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
-#define LOCATE_icode_generation___ASendReassignExpr___generate_icode "icode_generation::ASendReassignExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ASendExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ASendExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ASendExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ASendReassignExpr___generate_icode = "icode_generation::ASendReassignExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ASendReassignExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ASendReassignExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_ANewExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ANewExpr_parser_prod___ANewExpr___empty_init();
-val_t NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_icode_generation___ANewExpr___generate_icode "icode_generation::ANewExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ASendReassignExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___ANewExpr___generate_icode = "icode_generation::ANewExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___ANewExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___ANewExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AProxyExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_icode_generation___AProxyExpr___generate_icode "icode_generation::AProxyExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_ANewExpr_parser_prod___ANewExpr___empty_init();
+val_t NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_ANewExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AProxyExpr___generate_icode = "icode_generation::AProxyExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AProxyExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AProxyExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AOnceExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AOnceExpr_parser_prod___AOnceExpr___empty_init();
-val_t NEW_AOnceExpr_parser_prod___AOnceExpr___init_aonceexpr(val_t p0, val_t p1);
-#define LOCATE_icode_generation___AOnceExpr___generate_icode "icode_generation::AOnceExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AProxyExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AOnceExpr___generate_icode = "icode_generation::AOnceExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AOnceExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AOnceExpr___generate_icode_t)(val_t p0, val_t p1);
-val_t NEW_AClosureDef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AClosureDef_parser_prod___AClosureDef___empty_init();
-val_t NEW_AClosureDef_parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_icode_generation___AClosureDef___generate_iclosuredef "icode_generation::AClosureDef::generate_iclosuredef"
+val_t NEW_AOnceExpr_parser_prod___AOnceExpr___empty_init();
+val_t NEW_AOnceExpr_parser_prod___AOnceExpr___init_aonceexpr(val_t p0, val_t p1);
+val_t NEW_AOnceExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AClosureDef___generate_iclosuredef = "icode_generation::AClosureDef::generate_iclosuredef";
 val_t icode_generation___AClosureDef___generate_iclosuredef(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AClosureDef___generate_iclosuredef_t)(val_t p0, val_t p1);
-val_t NEW_AClosureCallExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___empty_init();
-val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_generation___AClosureCallExpr___generate_icode "icode_generation::AClosureCallExpr::(icode_generation::AExpr::generate_icode)"
+val_t NEW_AClosureDef_parser_prod___AClosureDef___empty_init();
+val_t NEW_AClosureDef_parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_AClosureDef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_icode_generation___AClosureCallExpr___generate_icode = "icode_generation::AClosureCallExpr::(icode_generation::AExpr::generate_icode)";
 val_t icode_generation___AClosureCallExpr___generate_icode(val_t p0, val_t p1);
 typedef val_t (*icode_generation___AClosureCallExpr___generate_icode_t)(val_t p0, val_t p1);
+val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___empty_init();
+val_t NEW_AClosureCallExpr_parser_nodes___ANode___init(val_t p0);
 #endif

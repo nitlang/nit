@@ -11,166 +11,218 @@ extern const int SFT_icode_dump[];
 #define CALL_icode_dump___IClosureDecl___dump(recv) ((icode_dump___IClosureDecl___dump_t)CALL((recv), (SFT_icode_dump[1] + 0)))
 #define ID_ICodeDumper (SFT_icode_dump[2])
 #define COLOR_ICodeDumper (SFT_icode_dump[3])
-#define ATTR_icode_dump___ICodeDumper____ids(recv) ATTR(recv, (SFT_icode_dump[4] + 0))
-#define ATTR_icode_dump___ICodeDumper____last_value(recv) ATTR(recv, (SFT_icode_dump[4] + 1))
-#define ATTR_icode_dump___ICodeDumper____last_clos(recv) ATTR(recv, (SFT_icode_dump[4] + 2))
-#define ATTR_icode_dump___ICodeDumper____last_label(recv) ATTR(recv, (SFT_icode_dump[4] + 3))
-#define ATTR_icode_dump___ICodeDumper____last_line(recv) ATTR(recv, (SFT_icode_dump[4] + 4))
-#define ATTR_icode_dump___ICodeDumper____indent_level(recv) ATTR(recv, (SFT_icode_dump[4] + 5))
+#define ATTR_icode_dump___ICodeDumper____dump_locations(recv) ATTR(recv, (SFT_icode_dump[4] + 0))
+#define ATTR_icode_dump___ICodeDumper____dump_line_numbers(recv) ATTR(recv, (SFT_icode_dump[4] + 1))
+#define ATTR_icode_dump___ICodeDumper____ids(recv) ATTR(recv, (SFT_icode_dump[4] + 2))
+#define ATTR_icode_dump___ICodeDumper____last_value(recv) ATTR(recv, (SFT_icode_dump[4] + 3))
+#define ATTR_icode_dump___ICodeDumper____last_clos(recv) ATTR(recv, (SFT_icode_dump[4] + 4))
+#define ATTR_icode_dump___ICodeDumper____last_label(recv) ATTR(recv, (SFT_icode_dump[4] + 5))
+#define ATTR_icode_dump___ICodeDumper____last_line(recv) ATTR(recv, (SFT_icode_dump[4] + 6))
+#define ATTR_icode_dump___ICodeDumper____indent_level(recv) ATTR(recv, (SFT_icode_dump[4] + 7))
 #define INIT_TABLE_POS_ICodeDumper (SFT_icode_dump[5] + 0)
-#define CALL_icode_dump___ICodeDumper___register(recv) ((icode_dump___ICodeDumper___register_t)CALL((recv), (SFT_icode_dump[5] + 1)))
-#define CALL_icode_dump___ICodeDumper___register_all(recv) ((icode_dump___ICodeDumper___register_all_t)CALL((recv), (SFT_icode_dump[5] + 2)))
-#define CALL_icode_dump___ICodeDumper___closdecl(recv) ((icode_dump___ICodeDumper___closdecl_t)CALL((recv), (SFT_icode_dump[5] + 3)))
-#define CALL_icode_dump___ICodeDumper___lab(recv) ((icode_dump___ICodeDumper___lab_t)CALL((recv), (SFT_icode_dump[5] + 4)))
-#define CALL_icode_dump___ICodeDumper___line(recv) ((icode_dump___ICodeDumper___line_t)CALL((recv), (SFT_icode_dump[5] + 5)))
-#define CALL_icode_dump___ICodeDumper___has_lab(recv) ((icode_dump___ICodeDumper___has_lab_t)CALL((recv), (SFT_icode_dump[5] + 6)))
-#define CALL_icode_dump___ICodeDumper___write(recv) ((icode_dump___ICodeDumper___write_t)CALL((recv), (SFT_icode_dump[5] + 7)))
-#define CALL_icode_dump___ICodeDumper___indent(recv) ((icode_dump___ICodeDumper___indent_t)CALL((recv), (SFT_icode_dump[5] + 8)))
-#define CALL_icode_dump___ICodeDumper___unindent(recv) ((icode_dump___ICodeDumper___unindent_t)CALL((recv), (SFT_icode_dump[5] + 9)))
-#define CALL_icode_dump___ICodeDumper___init(recv) ((icode_dump___ICodeDumper___init_t)CALL((recv), (SFT_icode_dump[5] + 10)))
+#define CALL_icode_dump___ICodeDumper___dump_locations(recv) ((icode_dump___ICodeDumper___dump_locations_t)CALL((recv), (SFT_icode_dump[5] + 1)))
+#define CALL_icode_dump___ICodeDumper___dump_line_numbers(recv) ((icode_dump___ICodeDumper___dump_line_numbers_t)CALL((recv), (SFT_icode_dump[5] + 2)))
+#define CALL_icode_dump___ICodeDumper___init(recv) ((icode_dump___ICodeDumper___init_t)CALL((recv), (SFT_icode_dump[5] + 3)))
+#define CALL_icode_dump___ICodeDumper___register(recv) ((icode_dump___ICodeDumper___register_t)CALL((recv), (SFT_icode_dump[5] + 4)))
+#define CALL_icode_dump___ICodeDumper___register_all(recv) ((icode_dump___ICodeDumper___register_all_t)CALL((recv), (SFT_icode_dump[5] + 5)))
+#define CALL_icode_dump___ICodeDumper___closdecl(recv) ((icode_dump___ICodeDumper___closdecl_t)CALL((recv), (SFT_icode_dump[5] + 6)))
+#define CALL_icode_dump___ICodeDumper___lab(recv) ((icode_dump___ICodeDumper___lab_t)CALL((recv), (SFT_icode_dump[5] + 7)))
+#define CALL_icode_dump___ICodeDumper___line(recv) ((icode_dump___ICodeDumper___line_t)CALL((recv), (SFT_icode_dump[5] + 8)))
+#define CALL_icode_dump___ICodeDumper___has_lab(recv) ((icode_dump___ICodeDumper___has_lab_t)CALL((recv), (SFT_icode_dump[5] + 9)))
+#define CALL_icode_dump___ICodeDumper___write(recv) ((icode_dump___ICodeDumper___write_t)CALL((recv), (SFT_icode_dump[5] + 10)))
+#define CALL_icode_dump___ICodeDumper___indent_level(recv) ((icode_dump___ICodeDumper___indent_level_t)CALL((recv), (SFT_icode_dump[5] + 11)))
+#define CALL_icode_dump___ICodeDumper___indent(recv) ((icode_dump___ICodeDumper___indent_t)CALL((recv), (SFT_icode_dump[5] + 12)))
+#define CALL_icode_dump___ICodeDumper___unindent(recv) ((icode_dump___ICodeDumper___unindent_t)CALL((recv), (SFT_icode_dump[5] + 13)))
 #define CALL_icode_dump___ICode___dump(recv) ((icode_dump___ICode___dump_t)CALL((recv), (SFT_icode_dump[6] + 0)))
 #define CALL_icode_dump___ICode___dump_intern(recv) ((icode_dump___ICode___dump_intern_t)CALL((recv), (SFT_icode_dump[6] + 1)))
 #define CALL_SUPER_icode_dump___ICodeN___dump(recv) ((icode_dump___ICodeN___dump_t)CALL((recv), (SFT_icode_dump[7] + 0)))
-val_t NEW_IRoutine_icode_base___IRoutine___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___IRoutine___dump "icode_dump::IRoutine::dump"
+static const char * const LOCATE_icode_dump___IRoutine___dump = "icode_dump::IRoutine::dump";
 void icode_dump___IRoutine___dump(val_t p0, val_t p1);
 typedef void (*icode_dump___IRoutine___dump_t)(val_t p0, val_t p1);
-val_t NEW_IClosureDecl_icode_base___IClosureDecl___init(val_t p0);
-#define LOCATE_icode_dump___IClosureDecl___dump "icode_dump::IClosureDecl::dump"
+    typedef void (*CLOS_OC_icode_dump___IRoutine___dump_1_0)(struct stack_frame_t *);
+    void OC_icode_dump___IRoutine___dump_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*OC_icode_dump___IRoutine___dump_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*CLOS_OC_icode_dump___IRoutine___dump_11_0)(struct stack_frame_t *);
+    void OC_icode_dump___IRoutine___dump_11(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*OC_icode_dump___IRoutine___dump_11_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_IRoutine_icode_base___IRoutine___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___IClosureDecl___dump = "icode_dump::IClosureDecl::dump";
 void icode_dump___IClosureDecl___dump(val_t p0, val_t p1);
 typedef void (*icode_dump___IClosureDecl___dump_t)(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICodeDumper___register "icode_dump::ICodeDumper::register"
+val_t NEW_IClosureDecl_icode_base___IClosureDecl___init(val_t p0);
+static const char * const LOCATE_icode_dump___ICodeDumper___dump_locations = "icode_dump::ICodeDumper::dump_locations";
+val_t icode_dump___ICodeDumper___dump_locations(val_t p0);
+typedef val_t (*icode_dump___ICodeDumper___dump_locations_t)(val_t p0);
+static const char * const LOCATE_icode_dump___ICodeDumper___dump_line_numbers = "icode_dump::ICodeDumper::dump_line_numbers";
+val_t icode_dump___ICodeDumper___dump_line_numbers(val_t p0);
+typedef val_t (*icode_dump___ICodeDumper___dump_line_numbers_t)(val_t p0);
+static const char * const LOCATE_icode_dump___ICodeDumper___init = "icode_dump::ICodeDumper::init";
+void icode_dump___ICodeDumper___init(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*icode_dump___ICodeDumper___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_ICodeDumper_icode_dump___ICodeDumper___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___ICodeDumper___register = "icode_dump::ICodeDumper::register";
 val_t icode_dump___ICodeDumper___register(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ICodeDumper___register_t)(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICodeDumper___register_all "icode_dump::ICodeDumper::register_all"
+static const char * const LOCATE_icode_dump___ICodeDumper___register_all = "icode_dump::ICodeDumper::register_all";
 val_t icode_dump___ICodeDumper___register_all(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ICodeDumper___register_all_t)(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICodeDumper___closdecl "icode_dump::ICodeDumper::closdecl"
+  typedef void (*CLOS_OC_icode_dump___ICodeDumper___register_all_3_0)(struct stack_frame_t *);
+  void OC_icode_dump___ICodeDumper___register_all_3(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_dump___ICodeDumper___register_all_3_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_icode_dump___ICodeDumper___closdecl = "icode_dump::ICodeDumper::closdecl";
 val_t icode_dump___ICodeDumper___closdecl(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ICodeDumper___closdecl_t)(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICodeDumper___lab "icode_dump::ICodeDumper::lab"
+static const char * const LOCATE_icode_dump___ICodeDumper___lab = "icode_dump::ICodeDumper::lab";
 val_t icode_dump___ICodeDumper___lab(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ICodeDumper___lab_t)(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICodeDumper___line "icode_dump::ICodeDumper::line"
+static const char * const LOCATE_icode_dump___ICodeDumper___line = "icode_dump::ICodeDumper::line";
 val_t icode_dump___ICodeDumper___line(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ICodeDumper___line_t)(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICodeDumper___has_lab "icode_dump::ICodeDumper::has_lab"
+static const char * const LOCATE_icode_dump___ICodeDumper___has_lab = "icode_dump::ICodeDumper::has_lab";
 val_t icode_dump___ICodeDumper___has_lab(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ICodeDumper___has_lab_t)(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICodeDumper___write "icode_dump::ICodeDumper::write"
+static const char * const LOCATE_icode_dump___ICodeDumper___write = "icode_dump::ICodeDumper::write";
 void icode_dump___ICodeDumper___write(val_t p0, val_t p1);
 typedef void (*icode_dump___ICodeDumper___write_t)(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICodeDumper___indent "icode_dump::ICodeDumper::indent"
+static const char * const LOCATE_icode_dump___ICodeDumper___indent_level = "icode_dump::ICodeDumper::indent_level";
+val_t icode_dump___ICodeDumper___indent_level(val_t p0);
+typedef val_t (*icode_dump___ICodeDumper___indent_level_t)(val_t p0);
+static const char * const LOCATE_icode_dump___ICodeDumper___indent = "icode_dump::ICodeDumper::indent";
 void icode_dump___ICodeDumper___indent(val_t p0);
 typedef void (*icode_dump___ICodeDumper___indent_t)(val_t p0);
-#define LOCATE_icode_dump___ICodeDumper___unindent "icode_dump::ICodeDumper::unindent"
+static const char * const LOCATE_icode_dump___ICodeDumper___unindent = "icode_dump::ICodeDumper::unindent";
 void icode_dump___ICodeDumper___unindent(val_t p0);
 typedef void (*icode_dump___ICodeDumper___unindent_t)(val_t p0);
-#define LOCATE_icode_dump___ICodeDumper___init "icode_dump::ICodeDumper::init"
-void icode_dump___ICodeDumper___init(val_t p0, int* init_table);
-typedef void (*icode_dump___ICodeDumper___init_t)(val_t p0, int* init_table);
-val_t NEW_ICodeDumper_icode_dump___ICodeDumper___init();
-val_t NEW_ICode_icode_base___ICode___init();
-#define LOCATE_icode_dump___ICode___dump "icode_dump::ICode::dump"
+static const char * const LOCATE_icode_dump___ICode___dump = "icode_dump::ICode::dump";
 void icode_dump___ICode___dump(val_t p0, val_t p1);
 typedef void (*icode_dump___ICode___dump_t)(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICode___dump_intern "icode_dump::ICode::dump_intern"
+static const char * const LOCATE_icode_dump___ICode___dump_intern = "icode_dump::ICode::dump_intern";
 val_t icode_dump___ICode___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ICode___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_ICodeN_icode_base___ICodeN___init(val_t p0);
-#define LOCATE_icode_dump___ICodeN___dump "icode_dump::ICodeN::(icode_dump::ICode::dump)"
+val_t NEW_ICode_icode_base___ICode___init();
+static const char * const LOCATE_icode_dump___ICodeN___dump = "icode_dump::ICodeN::(icode_dump::ICode::dump)";
 void icode_dump___ICodeN___dump(val_t p0, val_t p1);
 typedef void (*icode_dump___ICodeN___dump_t)(val_t p0, val_t p1);
-val_t NEW_ISeq_icode_base___ISeq___init();
-#define LOCATE_icode_dump___ISeq___dump "icode_dump::ISeq::(icode_dump::ICode::dump)"
+    typedef void (*CLOS_OC_icode_dump___ICodeN___dump_1_0)(struct stack_frame_t *);
+    void OC_icode_dump___ICodeN___dump_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*OC_icode_dump___ICodeN___dump_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ICodeN_icode_base___ICodeN___init(val_t p0);
+static const char * const LOCATE_icode_dump___ISeq___dump = "icode_dump::ISeq::(icode_dump::ICode::dump)";
 void icode_dump___ISeq___dump(val_t p0, val_t p1);
 typedef void (*icode_dump___ISeq___dump_t)(val_t p0, val_t p1);
-val_t NEW_IIf_icode_base___IIf___init(val_t p0);
-#define LOCATE_icode_dump___IIf___dump "icode_dump::IIf::(icode_dump::ICode::dump)"
+  typedef void (*CLOS_OC_icode_dump___ISeq___dump_1_0)(struct stack_frame_t *);
+  void OC_icode_dump___ISeq___dump_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_dump___ISeq___dump_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ISeq_icode_base___ISeq___init();
+static const char * const LOCATE_icode_dump___IIf___dump = "icode_dump::IIf::(icode_dump::ICode::dump)";
 void icode_dump___IIf___dump(val_t p0, val_t p1);
 typedef void (*icode_dump___IIf___dump_t)(val_t p0, val_t p1);
-val_t NEW_ILoop_icode_base___ILoop___init();
-#define LOCATE_icode_dump___ILoop___dump "icode_dump::ILoop::(icode_dump::ICode::dump)"
+val_t NEW_IIf_icode_base___IIf___init(val_t p0);
+static const char * const LOCATE_icode_dump___ILoop___dump = "icode_dump::ILoop::(icode_dump::ICode::dump)";
 void icode_dump___ILoop___dump(val_t p0, val_t p1);
 typedef void (*icode_dump___ILoop___dump_t)(val_t p0, val_t p1);
-val_t NEW_IEscape_icode_base___IEscape___init(val_t p0);
-#define LOCATE_icode_dump___IEscape___dump_intern "icode_dump::IEscape::(icode_dump::ICode::dump_intern)"
+  typedef void (*CLOS_OC_icode_dump___ILoop___dump_2_0)(struct stack_frame_t *);
+  void OC_icode_dump___ILoop___dump_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_dump___ILoop___dump_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ILoop_icode_base___ILoop___init();
+static const char * const LOCATE_icode_dump___IEscape___dump_intern = "icode_dump::IEscape::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IEscape___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IEscape___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IAbort_icode_base___IAbort___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___IAbort___dump_intern "icode_dump::IAbort::(icode_dump::ICode::dump_intern)"
+val_t NEW_IEscape_icode_base___IEscape___init(val_t p0);
+static const char * const LOCATE_icode_dump___IAbort___dump_intern = "icode_dump::IAbort::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IAbort___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IAbort___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_ICall_icode_base___ICall___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICall___dump_intern "icode_dump::ICall::(icode_dump::ICode::dump_intern)"
+val_t NEW_IAbort_icode_base___IAbort___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___ICall___dump_intern = "icode_dump::ICall::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___ICall___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ICall___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_INew_icode_base___INew___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_dump___INew___dump_intern "icode_dump::INew::(icode_dump::ICode::dump_intern)"
+val_t NEW_ICall_icode_base___ICall___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___INew___dump_intern = "icode_dump::INew::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___INew___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___INew___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_ISuper_icode_base___ISuper___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ISuper___dump_intern "icode_dump::ISuper::(icode_dump::ICode::dump_intern)"
+val_t NEW_INew_icode_base___INew___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_icode_dump___ISuper___dump_intern = "icode_dump::ISuper::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___ISuper___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ISuper___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IStaticCall_icode_base___IStaticCall___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___IStaticCall___dump_intern "icode_dump::IStaticCall::(icode_dump::ICode::dump_intern)"
+val_t NEW_ISuper_icode_base___ISuper___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___IStaticCall___dump_intern = "icode_dump::IStaticCall::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IStaticCall___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IStaticCall___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IAllocateInstance_icode_base___IAllocateInstance___init(val_t p0);
-#define LOCATE_icode_dump___IAllocateInstance___dump_intern "icode_dump::IAllocateInstance::(icode_dump::ICode::dump_intern)"
+val_t NEW_IStaticCall_icode_base___IStaticCall___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___IAllocateInstance___dump_intern = "icode_dump::IAllocateInstance::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IAllocateInstance___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IAllocateInstance___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_ICheckInstance_icode_base___ICheckInstance___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ICheckInstance___dump_intern "icode_dump::ICheckInstance::(icode_dump::ICode::dump_intern)"
+val_t NEW_IAllocateInstance_icode_base___IAllocateInstance___init(val_t p0);
+static const char * const LOCATE_icode_dump___ICheckInstance___dump_intern = "icode_dump::ICheckInstance::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___ICheckInstance___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ICheckInstance___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IInitAttributes_icode_base___IInitAttributes___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___IInitAttributes___dump_intern "icode_dump::IInitAttributes::(icode_dump::ICode::dump_intern)"
+val_t NEW_ICheckInstance_icode_base___ICheckInstance___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___IInitAttributes___dump_intern = "icode_dump::IInitAttributes::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IInitAttributes___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IInitAttributes___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IClosCall_icode_base___IClosCall___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___IClosCall___dump_intern "icode_dump::IClosCall::(icode_dump::ICode::dump_intern)"
+val_t NEW_IInitAttributes_icode_base___IInitAttributes___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___IClosCall___dump_intern = "icode_dump::IClosCall::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IClosCall___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IClosCall___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IAttrRead_icode_base___IAttrRead___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___IAttrRead___dump_intern "icode_dump::IAttrRead::(icode_dump::ICode::dump_intern)"
+val_t NEW_IClosCall_icode_base___IClosCall___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___IAttrRead___dump_intern = "icode_dump::IAttrRead::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IAttrRead___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IAttrRead___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IAttrWrite_icode_base___IAttrWrite___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_dump___IAttrWrite___dump_intern "icode_dump::IAttrWrite::(icode_dump::ICode::dump_intern)"
+val_t NEW_IAttrRead_icode_base___IAttrRead___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___IAttrWrite___dump_intern = "icode_dump::IAttrWrite::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IAttrWrite___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IAttrWrite___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IAttrIsset_icode_base___IAttrIsset___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___IAttrIsset___dump_intern "icode_dump::IAttrIsset::(icode_dump::ICode::dump_intern)"
+val_t NEW_IAttrWrite_icode_base___IAttrWrite___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_icode_dump___IAttrIsset___dump_intern = "icode_dump::IAttrIsset::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IAttrIsset___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IAttrIsset___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_ITypeCheck_icode_base___ITypeCheck___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___ITypeCheck___dump_intern "icode_dump::ITypeCheck::(icode_dump::ICode::dump_intern)"
+val_t NEW_IAttrIsset_icode_base___IAttrIsset___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___ITypeCheck___dump_intern = "icode_dump::ITypeCheck::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___ITypeCheck___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___ITypeCheck___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_INative_icode_base___INative___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___INative___dump_intern "icode_dump::INative::(icode_dump::ICode::dump_intern)"
+val_t NEW_ITypeCheck_icode_base___ITypeCheck___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___INative___dump_intern = "icode_dump::INative::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___INative___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___INative___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IMove_icode_base___IMove___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___IMove___dump_intern "icode_dump::IMove::(icode_dump::ICode::dump_intern)"
+val_t NEW_INative_icode_base___INative___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___IIntValue___dump_intern = "icode_dump::IIntValue::(icode_dump::ICode::dump_intern)";
+val_t icode_dump___IIntValue___dump_intern(val_t p0, val_t p1);
+typedef val_t (*icode_dump___IIntValue___dump_intern_t)(val_t p0, val_t p1);
+val_t NEW_IIntValue_icode_base___IIntValue___init(val_t p0);
+static const char * const LOCATE_icode_dump___IBoolValue___dump_intern = "icode_dump::IBoolValue::(icode_dump::ICode::dump_intern)";
+val_t icode_dump___IBoolValue___dump_intern(val_t p0, val_t p1);
+typedef val_t (*icode_dump___IBoolValue___dump_intern_t)(val_t p0, val_t p1);
+val_t NEW_IBoolValue_icode_base___IBoolValue___init(val_t p0);
+static const char * const LOCATE_icode_dump___IStringValue___dump_intern = "icode_dump::IStringValue::(icode_dump::ICode::dump_intern)";
+val_t icode_dump___IStringValue___dump_intern(val_t p0, val_t p1);
+typedef val_t (*icode_dump___IStringValue___dump_intern_t)(val_t p0, val_t p1);
+val_t NEW_IStringValue_icode_base___IStringValue___init(val_t p0);
+static const char * const LOCATE_icode_dump___ICharValue___dump_intern = "icode_dump::ICharValue::(icode_dump::ICode::dump_intern)";
+val_t icode_dump___ICharValue___dump_intern(val_t p0, val_t p1);
+typedef val_t (*icode_dump___ICharValue___dump_intern_t)(val_t p0, val_t p1);
+val_t NEW_ICharValue_icode_base___ICharValue___init(val_t p0);
+static const char * const LOCATE_icode_dump___IFloatValue___dump_intern = "icode_dump::IFloatValue::(icode_dump::ICode::dump_intern)";
+val_t icode_dump___IFloatValue___dump_intern(val_t p0, val_t p1);
+typedef val_t (*icode_dump___IFloatValue___dump_intern_t)(val_t p0, val_t p1);
+val_t NEW_IFloatValue_icode_base___IFloatValue___init(val_t p0);
+static const char * const LOCATE_icode_dump___IMove___dump_intern = "icode_dump::IMove::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IMove___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IMove___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IIs_icode_base___IIs___init(val_t p0, val_t p1);
-#define LOCATE_icode_dump___IIs___dump_intern "icode_dump::IIs::(icode_dump::ICode::dump_intern)"
+val_t NEW_IMove_icode_base___IMove___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___IIs___dump_intern = "icode_dump::IIs::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IIs___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IIs___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_INot_icode_base___INot___init(val_t p0);
-#define LOCATE_icode_dump___INot___dump_intern "icode_dump::INot::(icode_dump::ICode::dump_intern)"
+val_t NEW_IIs_icode_base___IIs___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_dump___INot___dump_intern = "icode_dump::INot::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___INot___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___INot___dump_intern_t)(val_t p0, val_t p1);
-val_t NEW_IOnce_icode_base___IOnce___init();
-#define LOCATE_icode_dump___IOnce___dump "icode_dump::IOnce::(icode_dump::ICode::dump)"
+val_t NEW_INot_icode_base___INot___init(val_t p0);
+static const char * const LOCATE_icode_dump___IOnce___dump = "icode_dump::IOnce::(icode_dump::ICode::dump)";
 void icode_dump___IOnce___dump(val_t p0, val_t p1);
 typedef void (*icode_dump___IOnce___dump_t)(val_t p0, val_t p1);
-val_t NEW_IHasClos_icode_base___IHasClos___init(val_t p0);
-#define LOCATE_icode_dump___IHasClos___dump_intern "icode_dump::IHasClos::(icode_dump::ICode::dump_intern)"
+val_t NEW_IOnce_icode_base___IOnce___init();
+static const char * const LOCATE_icode_dump___IHasClos___dump_intern = "icode_dump::IHasClos::(icode_dump::ICode::dump_intern)";
 val_t icode_dump___IHasClos___dump_intern(val_t p0, val_t p1);
 typedef val_t (*icode_dump___IHasClos___dump_intern_t)(val_t p0, val_t p1);
+val_t NEW_IHasClos_icode_base___IHasClos___init(val_t p0);
 #endif

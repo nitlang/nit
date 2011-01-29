@@ -47,237 +47,278 @@ extern const int SFT_compiling_icode[];
 #define CALL_compiling_icode___I2CCompilerVisitor___return_label(recv) ((compiling_icode___I2CCompilerVisitor___return_label_t)CALL((recv), (SFT_compiling_icode[3] + 19)))
 #define CALL_compiling_icode___I2CCompilerVisitor___return_label__eq(recv) ((compiling_icode___I2CCompilerVisitor___return_label__eq_t)CALL((recv), (SFT_compiling_icode[3] + 20)))
 #define CALL_compiling_icode___I2CCompilerVisitor___add_decl(recv) ((compiling_icode___I2CCompilerVisitor___add_decl_t)CALL((recv), (SFT_compiling_icode[3] + 21)))
-#define CALL_compiling_icode___I2CCompilerVisitor___add_instr(recv) ((compiling_icode___I2CCompilerVisitor___add_instr_t)CALL((recv), (SFT_compiling_icode[3] + 22)))
-#define CALL_compiling_icode___I2CCompilerVisitor___indent(recv) ((compiling_icode___I2CCompilerVisitor___indent_t)CALL((recv), (SFT_compiling_icode[3] + 23)))
-#define CALL_compiling_icode___I2CCompilerVisitor___unindent(recv) ((compiling_icode___I2CCompilerVisitor___unindent_t)CALL((recv), (SFT_compiling_icode[3] + 24)))
-#define CALL_compiling_icode___I2CCompilerVisitor___add_assignment(recv) ((compiling_icode___I2CCompilerVisitor___add_assignment_t)CALL((recv), (SFT_compiling_icode[3] + 25)))
-#define CALL_compiling_icode___I2CCompilerVisitor___add_location(recv) ((compiling_icode___I2CCompilerVisitor___add_location_t)CALL((recv), (SFT_compiling_icode[3] + 26)))
-#define CALL_compiling_icode___I2CCompilerVisitor___basecname(recv) ((compiling_icode___I2CCompilerVisitor___basecname_t)CALL((recv), (SFT_compiling_icode[3] + 27)))
-#define CALL_compiling_icode___I2CCompilerVisitor___init(recv) ((compiling_icode___I2CCompilerVisitor___init_t)CALL((recv), (SFT_compiling_icode[3] + 28)))
+#define CALL_compiling_icode___I2CCompilerVisitor___new_instr(recv) ((compiling_icode___I2CCompilerVisitor___new_instr_t)CALL((recv), (SFT_compiling_icode[3] + 22)))
+#define CALL_compiling_icode___I2CCompilerVisitor___add_instr(recv) ((compiling_icode___I2CCompilerVisitor___add_instr_t)CALL((recv), (SFT_compiling_icode[3] + 23)))
+#define CALL_compiling_icode___I2CCompilerVisitor___indent(recv) ((compiling_icode___I2CCompilerVisitor___indent_t)CALL((recv), (SFT_compiling_icode[3] + 24)))
+#define CALL_compiling_icode___I2CCompilerVisitor___unindent(recv) ((compiling_icode___I2CCompilerVisitor___unindent_t)CALL((recv), (SFT_compiling_icode[3] + 25)))
+#define CALL_compiling_icode___I2CCompilerVisitor___add_assignment(recv) ((compiling_icode___I2CCompilerVisitor___add_assignment_t)CALL((recv), (SFT_compiling_icode[3] + 26)))
+#define CALL_compiling_icode___I2CCompilerVisitor___add_location(recv) ((compiling_icode___I2CCompilerVisitor___add_location_t)CALL((recv), (SFT_compiling_icode[3] + 27)))
+#define CALL_compiling_icode___I2CCompilerVisitor___basecname(recv) ((compiling_icode___I2CCompilerVisitor___basecname_t)CALL((recv), (SFT_compiling_icode[3] + 28)))
+#define CALL_compiling_icode___I2CCompilerVisitor___init(recv) ((compiling_icode___I2CCompilerVisitor___init_t)CALL((recv), (SFT_compiling_icode[3] + 29)))
 #define CALL_compiling_icode___IRoutine___compile_signature_to_c(recv) ((compiling_icode___IRoutine___compile_signature_to_c_t)CALL((recv), (SFT_compiling_icode[4] + 0)))
 #define CALL_compiling_icode___IRoutine___compile_inside_to_c(recv) ((compiling_icode___IRoutine___compile_inside_to_c_t)CALL((recv), (SFT_compiling_icode[4] + 1)))
 #define CALL_compiling_icode___IRoutine___compile_to_c(recv) ((compiling_icode___IRoutine___compile_to_c_t)CALL((recv), (SFT_compiling_icode[4] + 2)))
 #define CALL_compiling_icode___ICode___compile_to_c(recv) ((compiling_icode___ICode___compile_to_c_t)CALL((recv), (SFT_compiling_icode[5] + 0)))
 #define CALL_compiling_icode___ICode___need_result(recv) ((compiling_icode___ICode___need_result_t)CALL((recv), (SFT_compiling_icode[5] + 1)))
 #define CALL_compiling_icode___ICode___store_result(recv) ((compiling_icode___ICode___store_result_t)CALL((recv), (SFT_compiling_icode[5] + 2)))
-#define CALL_compiling_icode___ICode___inner_compile_to_c(recv) ((compiling_icode___ICode___inner_compile_to_c_t)CALL((recv), (SFT_compiling_icode[5] + 3)))
+#define CALL_compiling_icode___ICode___new_result(recv) ((compiling_icode___ICode___new_result_t)CALL((recv), (SFT_compiling_icode[5] + 3)))
 #define CALL_compiling_icode___IAbsCall___compile_call_to_c(recv) ((compiling_icode___IAbsCall___compile_call_to_c_t)CALL((recv), (SFT_compiling_icode[6] + 0)))
-#define CALL_compiling_icode___IClosureDef___compile_closure(recv) ((compiling_icode___IClosureDef___compile_closure_t)CALL((recv), (SFT_compiling_icode[7] + 0)))
-#define LOCATE_compiling_icode___I2CCompilerVisitor___register "compiling_icode::I2CCompilerVisitor::register"
+#define CALL_compiling_icode___INative___compile_extern_method_to_c(recv) ((compiling_icode___INative___compile_extern_method_to_c_t)CALL((recv), (SFT_compiling_icode[7] + 0)))
+#define CALL_compiling_icode___INative___compile_intern_method_to_c(recv) ((compiling_icode___INative___compile_intern_method_to_c_t)CALL((recv), (SFT_compiling_icode[7] + 1)))
+#define CALL_compiling_icode___IClosureDef___compile_closure(recv) ((compiling_icode___IClosureDef___compile_closure_t)CALL((recv), (SFT_compiling_icode[8] + 0)))
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___register = "compiling_icode::I2CCompilerVisitor::register";
 val_t compiling_icode___I2CCompilerVisitor___register(val_t p0, val_t p1);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___register_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___registers "compiling_icode::I2CCompilerVisitor::registers"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___registers = "compiling_icode::I2CCompilerVisitor::registers";
 val_t compiling_icode___I2CCompilerVisitor___registers(val_t p0, val_t p1);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___registers_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___new_number "compiling_icode::I2CCompilerVisitor::new_number"
+  typedef void (*CLOS_OC_compiling_icode___I2CCompilerVisitor___registers_1_0)(struct stack_frame_t *);
+  void OC_compiling_icode___I2CCompilerVisitor___registers_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_compiling_icode___I2CCompilerVisitor___registers_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___new_number = "compiling_icode::I2CCompilerVisitor::new_number";
 val_t compiling_icode___I2CCompilerVisitor___new_number(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___new_number_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___lab "compiling_icode::I2CCompilerVisitor::lab"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___lab = "compiling_icode::I2CCompilerVisitor::lab";
 val_t compiling_icode___I2CCompilerVisitor___lab(val_t p0, val_t p1);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___lab_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___closures "compiling_icode::I2CCompilerVisitor::closures"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___closures = "compiling_icode::I2CCompilerVisitor::closures";
 val_t compiling_icode___I2CCompilerVisitor___closures(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___closures_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___clostypes "compiling_icode::I2CCompilerVisitor::clostypes"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___clostypes = "compiling_icode::I2CCompilerVisitor::clostypes";
 val_t compiling_icode___I2CCompilerVisitor___clostypes(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___clostypes_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___local_labels "compiling_icode::I2CCompilerVisitor::local_labels"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___local_labels = "compiling_icode::I2CCompilerVisitor::local_labels";
 val_t compiling_icode___I2CCompilerVisitor___local_labels(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___local_labels_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___local_labels__eq "compiling_icode::I2CCompilerVisitor::local_labels="
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___local_labels__eq = "compiling_icode::I2CCompilerVisitor::local_labels=";
 void compiling_icode___I2CCompilerVisitor___local_labels__eq(val_t p0, val_t p1);
 typedef void (*compiling_icode___I2CCompilerVisitor___local_labels__eq_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___escaped_labels "compiling_icode::I2CCompilerVisitor::escaped_labels"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___escaped_labels = "compiling_icode::I2CCompilerVisitor::escaped_labels";
 val_t compiling_icode___I2CCompilerVisitor___escaped_labels(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___escaped_labels_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___escaped_labels__eq "compiling_icode::I2CCompilerVisitor::escaped_labels="
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___escaped_labels__eq = "compiling_icode::I2CCompilerVisitor::escaped_labels=";
 void compiling_icode___I2CCompilerVisitor___escaped_labels__eq(val_t p0, val_t p1);
 typedef void (*compiling_icode___I2CCompilerVisitor___escaped_labels__eq_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___register_escape_label "compiling_icode::I2CCompilerVisitor::register_escape_label"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___register_escape_label = "compiling_icode::I2CCompilerVisitor::register_escape_label";
 val_t compiling_icode___I2CCompilerVisitor___register_escape_label(val_t p0, val_t p1);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___register_escape_label_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___add_label "compiling_icode::I2CCompilerVisitor::add_label"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___add_label = "compiling_icode::I2CCompilerVisitor::add_label";
 void compiling_icode___I2CCompilerVisitor___add_label(val_t p0, val_t p1);
 typedef void (*compiling_icode___I2CCompilerVisitor___add_label_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___add_goto "compiling_icode::I2CCompilerVisitor::add_goto"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___add_goto = "compiling_icode::I2CCompilerVisitor::add_goto";
 void compiling_icode___I2CCompilerVisitor___add_goto(val_t p0, val_t p1);
 typedef void (*compiling_icode___I2CCompilerVisitor___add_goto_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___marks_to_seq "compiling_icode::I2CCompilerVisitor::marks_to_seq"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___marks_to_seq = "compiling_icode::I2CCompilerVisitor::marks_to_seq";
 val_t compiling_icode___I2CCompilerVisitor___marks_to_seq(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___marks_to_seq_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___closure "compiling_icode::I2CCompilerVisitor::closure"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___closure = "compiling_icode::I2CCompilerVisitor::closure";
 val_t compiling_icode___I2CCompilerVisitor___closure(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___closure_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___closure__eq "compiling_icode::I2CCompilerVisitor::closure="
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___closure__eq = "compiling_icode::I2CCompilerVisitor::closure=";
 void compiling_icode___I2CCompilerVisitor___closure__eq(val_t p0, val_t p1);
 typedef void (*compiling_icode___I2CCompilerVisitor___closure__eq_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___visitor "compiling_icode::I2CCompilerVisitor::visitor"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___visitor = "compiling_icode::I2CCompilerVisitor::visitor";
 val_t compiling_icode___I2CCompilerVisitor___visitor(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___visitor_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___iroutine "compiling_icode::I2CCompilerVisitor::iroutine"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___iroutine = "compiling_icode::I2CCompilerVisitor::iroutine";
 val_t compiling_icode___I2CCompilerVisitor___iroutine(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___iroutine_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___return_label "compiling_icode::I2CCompilerVisitor::return_label"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___return_label = "compiling_icode::I2CCompilerVisitor::return_label";
 val_t compiling_icode___I2CCompilerVisitor___return_label(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___return_label_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___return_label__eq "compiling_icode::I2CCompilerVisitor::return_label="
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___return_label__eq = "compiling_icode::I2CCompilerVisitor::return_label=";
 void compiling_icode___I2CCompilerVisitor___return_label__eq(val_t p0, val_t p1);
 typedef void (*compiling_icode___I2CCompilerVisitor___return_label__eq_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___add_decl "compiling_icode::I2CCompilerVisitor::add_decl"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___add_decl = "compiling_icode::I2CCompilerVisitor::add_decl";
 void compiling_icode___I2CCompilerVisitor___add_decl(val_t p0, val_t p1);
 typedef void (*compiling_icode___I2CCompilerVisitor___add_decl_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___add_instr "compiling_icode::I2CCompilerVisitor::add_instr"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___new_instr = "compiling_icode::I2CCompilerVisitor::new_instr";
+val_t compiling_icode___I2CCompilerVisitor___new_instr(val_t p0);
+typedef val_t (*compiling_icode___I2CCompilerVisitor___new_instr_t)(val_t p0);
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___add_instr = "compiling_icode::I2CCompilerVisitor::add_instr";
 void compiling_icode___I2CCompilerVisitor___add_instr(val_t p0, val_t p1);
 typedef void (*compiling_icode___I2CCompilerVisitor___add_instr_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___indent "compiling_icode::I2CCompilerVisitor::indent"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___indent = "compiling_icode::I2CCompilerVisitor::indent";
 void compiling_icode___I2CCompilerVisitor___indent(val_t p0);
 typedef void (*compiling_icode___I2CCompilerVisitor___indent_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___unindent "compiling_icode::I2CCompilerVisitor::unindent"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___unindent = "compiling_icode::I2CCompilerVisitor::unindent";
 void compiling_icode___I2CCompilerVisitor___unindent(val_t p0);
 typedef void (*compiling_icode___I2CCompilerVisitor___unindent_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___add_assignment "compiling_icode::I2CCompilerVisitor::add_assignment"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___add_assignment = "compiling_icode::I2CCompilerVisitor::add_assignment";
 void compiling_icode___I2CCompilerVisitor___add_assignment(val_t p0, val_t p1, val_t p2);
 typedef void (*compiling_icode___I2CCompilerVisitor___add_assignment_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___add_location "compiling_icode::I2CCompilerVisitor::add_location"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___add_location = "compiling_icode::I2CCompilerVisitor::add_location";
 void compiling_icode___I2CCompilerVisitor___add_location(val_t p0, val_t p1);
 typedef void (*compiling_icode___I2CCompilerVisitor___add_location_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___basecname "compiling_icode::I2CCompilerVisitor::basecname"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___basecname = "compiling_icode::I2CCompilerVisitor::basecname";
 val_t compiling_icode___I2CCompilerVisitor___basecname(val_t p0);
 typedef val_t (*compiling_icode___I2CCompilerVisitor___basecname_t)(val_t p0);
-#define LOCATE_compiling_icode___I2CCompilerVisitor___init "compiling_icode::I2CCompilerVisitor::init"
+static const char * const LOCATE_compiling_icode___I2CCompilerVisitor___init = "compiling_icode::I2CCompilerVisitor::init";
 void compiling_icode___I2CCompilerVisitor___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*compiling_icode___I2CCompilerVisitor___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_I2CCompilerVisitor_compiling_icode___I2CCompilerVisitor___init(val_t p0, val_t p1, val_t p2);
-val_t NEW_IRoutine_icode_base___IRoutine___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IRoutine___compile_signature_to_c "compiling_icode::IRoutine::compile_signature_to_c"
+static const char * const LOCATE_compiling_icode___IRoutine___compile_signature_to_c = "compiling_icode::IRoutine::compile_signature_to_c";
 val_t compiling_icode___IRoutine___compile_signature_to_c(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 typedef val_t (*compiling_icode___IRoutine___compile_signature_to_c_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_compiling_icode___IRoutine___compile_inside_to_c "compiling_icode::IRoutine::compile_inside_to_c"
+static const char * const LOCATE_compiling_icode___IRoutine___compile_inside_to_c = "compiling_icode::IRoutine::compile_inside_to_c";
 val_t compiling_icode___IRoutine___compile_inside_to_c(val_t p0, val_t p1, val_t p2);
 typedef val_t (*compiling_icode___IRoutine___compile_inside_to_c_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_compiling_icode___IRoutine___compile_to_c "compiling_icode::IRoutine::compile_to_c"
+  typedef void (*CLOS_OC_compiling_icode___IRoutine___compile_inside_to_c_24_0)(struct stack_frame_t *);
+  void OC_compiling_icode___IRoutine___compile_inside_to_c_24(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_compiling_icode___IRoutine___compile_inside_to_c_24_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_compiling_icode___IRoutine___compile_to_c = "compiling_icode::IRoutine::compile_to_c";
 val_t compiling_icode___IRoutine___compile_to_c(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (*compiling_icode___IRoutine___compile_to_c_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_ICode_icode_base___ICode___init();
-#define LOCATE_compiling_icode___ICode___compile_to_c "compiling_icode::ICode::compile_to_c"
+val_t NEW_IRoutine_icode_base___IRoutine___init(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___ICode___compile_to_c = "compiling_icode::ICode::compile_to_c";
 void compiling_icode___ICode___compile_to_c(val_t p0, val_t p1);
 typedef void (*compiling_icode___ICode___compile_to_c_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___ICode___need_result "compiling_icode::ICode::need_result"
+static const char * const LOCATE_compiling_icode___ICode___need_result = "compiling_icode::ICode::need_result";
 val_t compiling_icode___ICode___need_result(val_t p0);
 typedef val_t (*compiling_icode___ICode___need_result_t)(val_t p0);
-#define LOCATE_compiling_icode___ICode___store_result "compiling_icode::ICode::store_result"
+static const char * const LOCATE_compiling_icode___ICode___store_result = "compiling_icode::ICode::store_result";
 void compiling_icode___ICode___store_result(val_t p0, val_t p1, val_t p2);
 typedef void (*compiling_icode___ICode___store_result_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_compiling_icode___ICode___inner_compile_to_c "compiling_icode::ICode::inner_compile_to_c"
-val_t compiling_icode___ICode___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___ICode___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___ICode___new_result = "compiling_icode::ICode::new_result";
+val_t compiling_icode___ICode___new_result(val_t p0, val_t p1);
+typedef val_t (*compiling_icode___ICode___new_result_t)(val_t p0, val_t p1);
+val_t NEW_ICode_icode_base___ICode___init();
+static const char * const LOCATE_compiling_icode___ISeq___compile_to_c = "compiling_icode::ISeq::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___ISeq___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___ISeq___compile_to_c_t)(val_t p0, val_t p1);
+  typedef void (*CLOS_OC_compiling_icode___ISeq___compile_to_c_1_0)(struct stack_frame_t *);
+  void OC_compiling_icode___ISeq___compile_to_c_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_compiling_icode___ISeq___compile_to_c_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_ISeq_icode_base___ISeq___init();
-#define LOCATE_compiling_icode___ISeq___inner_compile_to_c "compiling_icode::ISeq::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___ISeq___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___ISeq___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IIf___compile_to_c = "compiling_icode::IIf::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IIf___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IIf___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IIf_icode_base___IIf___init(val_t p0);
-#define LOCATE_compiling_icode___IIf___inner_compile_to_c "compiling_icode::IIf::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IIf___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IIf___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___ILoop___compile_to_c = "compiling_icode::ILoop::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___ILoop___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___ILoop___compile_to_c_t)(val_t p0, val_t p1);
+  typedef void (*CLOS_OC_compiling_icode___ILoop___compile_to_c_2_0)(struct stack_frame_t *);
+  void OC_compiling_icode___ILoop___compile_to_c_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_compiling_icode___ILoop___compile_to_c_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_ILoop_icode_base___ILoop___init();
-#define LOCATE_compiling_icode___ILoop___inner_compile_to_c "compiling_icode::ILoop::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___ILoop___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___ILoop___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IEscape___compile_to_c = "compiling_icode::IEscape::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IEscape___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IEscape___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IEscape_icode_base___IEscape___init(val_t p0);
-#define LOCATE_compiling_icode___IEscape___inner_compile_to_c "compiling_icode::IEscape::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IEscape___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IEscape___inner_compile_to_c_t)(val_t p0, val_t p1);
-val_t NEW_IAbsCall_icode_base___IAbsCall___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IAbsCall___compile_to_c "compiling_icode::IAbsCall::(compiling_icode::ICode::compile_to_c)"
+static const char * const LOCATE_compiling_icode___IAbsCall___compile_to_c = "compiling_icode::IAbsCall::(compiling_icode::ICode::compile_to_c)";
 void compiling_icode___IAbsCall___compile_to_c(val_t p0, val_t p1);
 typedef void (*compiling_icode___IAbsCall___compile_to_c_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IAbsCall___inner_compile_to_c "compiling_icode::IAbsCall::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IAbsCall___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IAbsCall___inner_compile_to_c_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IAbsCall___compile_call_to_c "compiling_icode::IAbsCall::compile_call_to_c"
+    typedef void (*CLOS_OC_compiling_icode___IAbsCall___compile_to_c_3_0)(struct stack_frame_t *);
+    void OC_compiling_icode___IAbsCall___compile_to_c_3(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*OC_compiling_icode___IAbsCall___compile_to_c_3_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_compiling_icode___IAbsCall___compile_call_to_c = "compiling_icode::IAbsCall::compile_call_to_c";
 val_t compiling_icode___IAbsCall___compile_call_to_c(val_t p0, val_t p1, val_t p2);
 typedef val_t (*compiling_icode___IAbsCall___compile_call_to_c_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_ICall_icode_base___ICall___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___ICall___compile_call_to_c "compiling_icode::ICall::(compiling_icode::IAbsCall::compile_call_to_c)"
+val_t NEW_IAbsCall_icode_base___IAbsCall___init(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___ICall___compile_call_to_c = "compiling_icode::ICall::(compiling_icode::IAbsCall::compile_call_to_c)";
 val_t compiling_icode___ICall___compile_call_to_c(val_t p0, val_t p1, val_t p2);
 typedef val_t (*compiling_icode___ICall___compile_call_to_c_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_ISuper_icode_base___ISuper___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___ISuper___compile_call_to_c "compiling_icode::ISuper::(compiling_icode::IAbsCall::compile_call_to_c)"
+val_t NEW_ICall_icode_base___ICall___init(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___ISuper___compile_call_to_c = "compiling_icode::ISuper::(compiling_icode::IAbsCall::compile_call_to_c)";
 val_t compiling_icode___ISuper___compile_call_to_c(val_t p0, val_t p1, val_t p2);
 typedef val_t (*compiling_icode___ISuper___compile_call_to_c_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_INew_icode_base___INew___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_compiling_icode___INew___compile_call_to_c "compiling_icode::INew::(compiling_icode::IAbsCall::compile_call_to_c)"
+val_t NEW_ISuper_icode_base___ISuper___init(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___INew___compile_call_to_c = "compiling_icode::INew::(compiling_icode::IAbsCall::compile_call_to_c)";
 val_t compiling_icode___INew___compile_call_to_c(val_t p0, val_t p1, val_t p2);
 typedef val_t (*compiling_icode___INew___compile_call_to_c_t)(val_t p0, val_t p1, val_t p2);
+val_t NEW_INew_icode_base___INew___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_compiling_icode___IAllocateInstance___compile_to_c = "compiling_icode::IAllocateInstance::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IAllocateInstance___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IAllocateInstance___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IAllocateInstance_icode_base___IAllocateInstance___init(val_t p0);
-#define LOCATE_compiling_icode___IAllocateInstance___inner_compile_to_c "compiling_icode::IAllocateInstance::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IAllocateInstance___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IAllocateInstance___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___ICheckInstance___compile_to_c = "compiling_icode::ICheckInstance::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___ICheckInstance___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___ICheckInstance___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_ICheckInstance_icode_base___ICheckInstance___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___ICheckInstance___inner_compile_to_c "compiling_icode::ICheckInstance::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___ICheckInstance___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___ICheckInstance___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IInitAttributes___compile_to_c = "compiling_icode::IInitAttributes::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IInitAttributes___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IInitAttributes___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IInitAttributes_icode_base___IInitAttributes___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IInitAttributes___inner_compile_to_c "compiling_icode::IInitAttributes::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IInitAttributes___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IInitAttributes___inner_compile_to_c_t)(val_t p0, val_t p1);
-val_t NEW_IStaticCall_icode_base___IStaticCall___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IStaticCall___compile_call_to_c "compiling_icode::IStaticCall::(compiling_icode::IAbsCall::compile_call_to_c)"
+static const char * const LOCATE_compiling_icode___IStaticCall___compile_call_to_c = "compiling_icode::IStaticCall::(compiling_icode::IAbsCall::compile_call_to_c)";
 val_t compiling_icode___IStaticCall___compile_call_to_c(val_t p0, val_t p1, val_t p2);
 typedef val_t (*compiling_icode___IStaticCall___compile_call_to_c_t)(val_t p0, val_t p1, val_t p2);
+val_t NEW_IStaticCall_icode_base___IStaticCall___init(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___INative___compile_to_c = "compiling_icode::INative::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___INative___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___INative___compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___INative___compile_extern_method_to_c = "compiling_icode::INative::compile_extern_method_to_c";
+void compiling_icode___INative___compile_extern_method_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___INative___compile_extern_method_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___INative___compile_intern_method_to_c = "compiling_icode::INative::compile_intern_method_to_c";
+void compiling_icode___INative___compile_intern_method_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___INative___compile_intern_method_to_c_t)(val_t p0, val_t p1);
 val_t NEW_INative_icode_base___INative___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___INative___inner_compile_to_c "compiling_icode::INative::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___INative___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___INative___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IIntValue___compile_to_c = "compiling_icode::IIntValue::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IIntValue___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IIntValue___compile_to_c_t)(val_t p0, val_t p1);
+val_t NEW_IIntValue_icode_base___IIntValue___init(val_t p0);
+static const char * const LOCATE_compiling_icode___IBoolValue___compile_to_c = "compiling_icode::IBoolValue::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IBoolValue___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IBoolValue___compile_to_c_t)(val_t p0, val_t p1);
+val_t NEW_IBoolValue_icode_base___IBoolValue___init(val_t p0);
+static const char * const LOCATE_compiling_icode___ICharValue___compile_to_c = "compiling_icode::ICharValue::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___ICharValue___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___ICharValue___compile_to_c_t)(val_t p0, val_t p1);
+val_t NEW_ICharValue_icode_base___ICharValue___init(val_t p0);
+static const char * const LOCATE_compiling_icode___IFloatValue___compile_to_c = "compiling_icode::IFloatValue::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IFloatValue___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IFloatValue___compile_to_c_t)(val_t p0, val_t p1);
+val_t NEW_IFloatValue_icode_base___IFloatValue___init(val_t p0);
+static const char * const LOCATE_compiling_icode___IStringValue___compile_to_c = "compiling_icode::IStringValue::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IStringValue___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IStringValue___compile_to_c_t)(val_t p0, val_t p1);
+val_t NEW_IStringValue_icode_base___IStringValue___init(val_t p0);
+static const char * const LOCATE_compiling_icode___IAbort___compile_to_c = "compiling_icode::IAbort::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IAbort___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IAbort___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IAbort_icode_base___IAbort___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IAbort___inner_compile_to_c "compiling_icode::IAbort::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IAbort___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IAbort___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IMove___compile_to_c = "compiling_icode::IMove::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IMove___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IMove___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IMove_icode_base___IMove___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IMove___inner_compile_to_c "compiling_icode::IMove::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IMove___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IMove___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IAttrRead___compile_to_c = "compiling_icode::IAttrRead::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IAttrRead___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IAttrRead___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IAttrRead_icode_base___IAttrRead___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IAttrRead___inner_compile_to_c "compiling_icode::IAttrRead::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IAttrRead___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IAttrRead___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IAttrIsset___compile_to_c = "compiling_icode::IAttrIsset::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IAttrIsset___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IAttrIsset___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IAttrIsset_icode_base___IAttrIsset___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IAttrIsset___inner_compile_to_c "compiling_icode::IAttrIsset::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IAttrIsset___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IAttrIsset___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IAttrWrite___compile_to_c = "compiling_icode::IAttrWrite::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IAttrWrite___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IAttrWrite___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IAttrWrite_icode_base___IAttrWrite___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_compiling_icode___IAttrWrite___inner_compile_to_c "compiling_icode::IAttrWrite::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IAttrWrite___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IAttrWrite___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___ITypeCheck___compile_to_c = "compiling_icode::ITypeCheck::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___ITypeCheck___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___ITypeCheck___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_ITypeCheck_icode_base___ITypeCheck___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___ITypeCheck___inner_compile_to_c "compiling_icode::ITypeCheck::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___ITypeCheck___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___ITypeCheck___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IIs___compile_to_c = "compiling_icode::IIs::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IIs___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IIs___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IIs_icode_base___IIs___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IIs___inner_compile_to_c "compiling_icode::IIs::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IIs___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IIs___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___INot___compile_to_c = "compiling_icode::INot::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___INot___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___INot___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_INot_icode_base___INot___init(val_t p0);
-#define LOCATE_compiling_icode___INot___inner_compile_to_c "compiling_icode::INot::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___INot___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___INot___inner_compile_to_c_t)(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IOnce___compile_to_c = "compiling_icode::IOnce::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IOnce___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IOnce___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IOnce_icode_base___IOnce___init();
-#define LOCATE_compiling_icode___IOnce___inner_compile_to_c "compiling_icode::IOnce::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IOnce___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IOnce___inner_compile_to_c_t)(val_t p0, val_t p1);
-val_t NEW_IClosCall_icode_base___IClosCall___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IClosCall___compile_to_c "compiling_icode::IClosCall::(compiling_icode::ICode::compile_to_c)"
+static const char * const LOCATE_compiling_icode___IClosCall___compile_to_c = "compiling_icode::IClosCall::(compiling_icode::ICode::compile_to_c)";
 void compiling_icode___IClosCall___compile_to_c(val_t p0, val_t p1);
 typedef void (*compiling_icode___IClosCall___compile_to_c_t)(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IClosCall___inner_compile_to_c "compiling_icode::IClosCall::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IClosCall___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IClosCall___inner_compile_to_c_t)(val_t p0, val_t p1);
+val_t NEW_IClosCall_icode_base___IClosCall___init(val_t p0, val_t p1);
+static const char * const LOCATE_compiling_icode___IHasClos___compile_to_c = "compiling_icode::IHasClos::(compiling_icode::ICode::compile_to_c)";
+void compiling_icode___IHasClos___compile_to_c(val_t p0, val_t p1);
+typedef void (*compiling_icode___IHasClos___compile_to_c_t)(val_t p0, val_t p1);
 val_t NEW_IHasClos_icode_base___IHasClos___init(val_t p0);
-#define LOCATE_compiling_icode___IHasClos___inner_compile_to_c "compiling_icode::IHasClos::(compiling_icode::ICode::inner_compile_to_c)"
-val_t compiling_icode___IHasClos___inner_compile_to_c(val_t p0, val_t p1);
-typedef val_t (*compiling_icode___IHasClos___inner_compile_to_c_t)(val_t p0, val_t p1);
-val_t NEW_IClosureDef_icode_base___IClosureDef___init(val_t p0, val_t p1);
-#define LOCATE_compiling_icode___IClosureDef___compile_closure "compiling_icode::IClosureDef::compile_closure"
+static const char * const LOCATE_compiling_icode___IClosureDef___compile_closure = "compiling_icode::IClosureDef::compile_closure";
 val_t compiling_icode___IClosureDef___compile_closure(val_t p0, val_t p1);
 typedef val_t (*compiling_icode___IClosureDef___compile_closure_t)(val_t p0, val_t p1);
+val_t NEW_IClosureDef_icode_base___IClosureDef___init(val_t p0, val_t p1);
 #endif

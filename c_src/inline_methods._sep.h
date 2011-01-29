@@ -11,25 +11,24 @@ extern const int SFT_inline_methods[];
 #define COLOR_InlineMethodVisitor (SFT_inline_methods[1])
 #define ATTR_inline_methods___InlineMethodVisitor____pass(recv) ATTR(recv, (SFT_inline_methods[2] + 0))
 #define ATTR_inline_methods___InlineMethodVisitor____icb(recv) ATTR(recv, (SFT_inline_methods[2] + 1))
-#define ATTR_inline_methods___InlineMethodVisitor____current_inlining(recv) ATTR(recv, (SFT_inline_methods[2] + 2))
 #define INIT_TABLE_POS_InlineMethodVisitor (SFT_inline_methods[3] + 0)
 #define CALL_SUPER_inline_methods___InlineMethodVisitor___visit_icode(recv) ((inline_methods___InlineMethodVisitor___visit_icode_t)CALL((recv), (SFT_inline_methods[3] + 1)))
 #define CALL_inline_methods___InlineMethodVisitor___init(recv) ((inline_methods___InlineMethodVisitor___init_t)CALL((recv), (SFT_inline_methods[3] + 2)))
 #define CALL_inline_methods___ICall___is_inlinable(recv) ((inline_methods___ICall___is_inlinable_t)CALL((recv), (SFT_inline_methods[4] + 0)))
 #define CALL_inline_methods___IRoutine___inline_methods(recv) ((inline_methods___IRoutine___inline_methods_t)CALL((recv), (SFT_inline_methods[5] + 0)))
-#define LOCATE_inline_methods___InlineMethodVisitor___visit_icode "inline_methods::InlineMethodVisitor::(icode_tools::ICodeVisitor::visit_icode)"
+static const char * const LOCATE_inline_methods___InlineMethodVisitor___visit_icode = "inline_methods::InlineMethodVisitor::(icode_tools::ICodeVisitor::visit_icode)";
 void inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val_t p1);
 typedef void (*inline_methods___InlineMethodVisitor___visit_icode_t)(val_t p0, val_t p1);
-#define LOCATE_inline_methods___InlineMethodVisitor___init "inline_methods::InlineMethodVisitor::init"
+static const char * const LOCATE_inline_methods___InlineMethodVisitor___init = "inline_methods::InlineMethodVisitor::init";
 void inline_methods___InlineMethodVisitor___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*inline_methods___InlineMethodVisitor___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_InlineMethodVisitor_inline_methods___InlineMethodVisitor___init(val_t p0, val_t p1);
-val_t NEW_ICall_icode_base___ICall___init(val_t p0, val_t p1);
-#define LOCATE_inline_methods___ICall___is_inlinable "inline_methods::ICall::is_inlinable"
+static const char * const LOCATE_inline_methods___ICall___is_inlinable = "inline_methods::ICall::is_inlinable";
 val_t inline_methods___ICall___is_inlinable(val_t p0);
 typedef val_t (*inline_methods___ICall___is_inlinable_t)(val_t p0);
-val_t NEW_IRoutine_icode_base___IRoutine___init(val_t p0, val_t p1);
-#define LOCATE_inline_methods___IRoutine___inline_methods "inline_methods::IRoutine::inline_methods"
+val_t NEW_ICall_icode_base___ICall___init(val_t p0, val_t p1);
+static const char * const LOCATE_inline_methods___IRoutine___inline_methods = "inline_methods::IRoutine::inline_methods";
 void inline_methods___IRoutine___inline_methods(val_t p0, val_t p1);
 typedef void (*inline_methods___IRoutine___inline_methods_t)(val_t p0, val_t p1);
+val_t NEW_IRoutine_icode_base___IRoutine___init(val_t p0, val_t p1);
 #endif

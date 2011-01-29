@@ -15,16 +15,14 @@ void icode_builder___ICodeBuilder___stmt(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  fra.me.REG[2] = ATTR_icode_builder___ICodeBuilder____current_location(fra.me.REG[0]);
   /* ./icode//icode_builder.nit:28 */
+  fra.me.REG[2] = ATTR_icode_builder___ICodeBuilder____current_location(fra.me.REG[0]);
   CALL_icode_base___ICode___location__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  REGB0 = TAG_Bool(ATTR_icode_builder___ICodeBuilder____seq(fra.me.REG[0])!=NIT_NULL);
   /* ./icode//icode_builder.nit:29 */
+  REGB0 = TAG_Bool(ATTR_icode_builder___ICodeBuilder____seq(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_seq");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 29);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_seq", LOCATE_icode_builder, 29);
   }
   fra.me.REG[0] = ATTR_icode_builder___ICodeBuilder____seq(fra.me.REG[0]);
   fra.me.REG[0] = CALL_icode_base___ISeq___icodes(fra.me.REG[0])(fra.me.REG[0]);
@@ -52,9 +50,9 @@ val_t icode_builder___ICodeBuilder___expr(val_t p0, val_t p1, val_t p2){
   fra.me.REG[2] = p2;
   /* ./icode//icode_builder.nit:35 */
   CALL_icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* ./icode//icode_builder.nit:36 */
   fra.me.REG[3] = CALL_icode_base___ICode___result(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-  /* ./icode//icode_builder.nit:36 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
@@ -68,10 +66,9 @@ val_t icode_builder___ICodeBuilder___expr(val_t p0, val_t p1, val_t p2){
   }
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 36);
-    nit_exit(1);
+    nit_abort("Assert failed", NULL, LOCATE_icode_builder, 36);
   }
+  /* ./icode//icode_builder.nit:37 */
   fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___new_register(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   /* ./icode//icode_builder.nit:38 */
   CALL_icode_base___ICode___result__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
@@ -96,8 +93,8 @@ void icode_builder___ICodeBuilder___add_assignment(val_t p0, val_t p1, val_t p2)
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  fra.me.REG[2] = NEW_IMove_icode_base___IMove___init(fra.me.REG[1], fra.me.REG[2]);
   /* ./icode//icode_builder.nit:45 */
+  fra.me.REG[2] = NEW_IMove_icode_base___IMove___init(fra.me.REG[1], fra.me.REG[2]);
   CALL_icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
   return;
@@ -119,21 +116,25 @@ void icode_builder___ICodeBuilder___add_null_reciever_check(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./icode//icode_builder.nit:51 */
   fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___lit_null_reg(fra.me.REG[0])(fra.me.REG[0]);
+  /* ./icode//icode_builder.nit:52 */
   fra.me.REG[2] = NEW_IIs_icode_base___IIs___init(fra.me.REG[1], fra.me.REG[2]);
-  fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_static_type___MMModule___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2], fra.me.REG[1]);
+  /* ./icode//icode_builder.nit:53 */
   fra.me.REG[1] = NEW_IIf_icode_base___IIf___init(fra.me.REG[1]);
   /* ./icode//icode_builder.nit:54 */
   CALL_icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* ./icode//icode_builder.nit:55 */
   fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___seq(fra.me.REG[0])(fra.me.REG[0]);
-  fra.me.REG[1] = CALL_icode_base___IIf___then_seq(fra.me.REG[1])(fra.me.REG[1]);
   /* ./icode//icode_builder.nit:56 */
+  fra.me.REG[1] = CALL_icode_base___IIf___then_seq(fra.me.REG[1])(fra.me.REG[1]);
   CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* ./icode//icode_builder.nit:57 */
   REGB0 = TAG_Int(0);
   fra.me.REG[1] = NEW_Array_array___Array___with_capacity(REGB0);
-  /* ./icode//icode_builder.nit:57 */
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("Reciever is null");
     REGB0 = TAG_Int(16);
@@ -141,7 +142,8 @@ void icode_builder___ICodeBuilder___add_null_reciever_check(val_t p0, val_t p1){
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
-  array___Array___add(fra.me.REG[1], fra.me.REG[3]);
+  fra.me.REG[3] = fra.me.REG[3];
+  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   CALL_icode_builder___ICodeBuilder___add_abort(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./icode//icode_builder.nit:58 */
   CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
@@ -166,20 +168,23 @@ void icode_builder___ICodeBuilder___add_type_cast(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
+  /* ./icode//icode_builder.nit:64 */
   fra.me.REG[2] = NEW_ITypeCheck_icode_base___ITypeCheck___init(fra.me.REG[1], fra.me.REG[2]);
-  fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_static_type___MMModule___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2], fra.me.REG[1]);
+  /* ./icode//icode_builder.nit:65 */
   fra.me.REG[1] = NEW_IIf_icode_base___IIf___init(fra.me.REG[1]);
   /* ./icode//icode_builder.nit:66 */
   CALL_icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* ./icode//icode_builder.nit:67 */
   fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___seq(fra.me.REG[0])(fra.me.REG[0]);
-  fra.me.REG[1] = CALL_icode_base___IIf___else_seq(fra.me.REG[1])(fra.me.REG[1]);
   /* ./icode//icode_builder.nit:68 */
+  fra.me.REG[1] = CALL_icode_base___IIf___else_seq(fra.me.REG[1])(fra.me.REG[1]);
   CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* ./icode//icode_builder.nit:69 */
   REGB0 = TAG_Int(0);
   fra.me.REG[1] = NEW_Array_array___Array___with_capacity(REGB0);
-  /* ./icode//icode_builder.nit:69 */
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("Cast failed");
     REGB0 = TAG_Int(11);
@@ -187,7 +192,8 @@ void icode_builder___ICodeBuilder___add_type_cast(val_t p0, val_t p1, val_t p2){
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
-  array___Array___add(fra.me.REG[1], fra.me.REG[3]);
+  fra.me.REG[3] = fra.me.REG[3];
+  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   CALL_icode_builder___ICodeBuilder___add_abort(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./icode//icode_builder.nit:70 */
   CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
@@ -213,38 +219,37 @@ void icode_builder___ICodeBuilder___add_attr_check(val_t p0, val_t p1, val_t p2)
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
+  /* ./icode//icode_builder.nit:76 */
   fra.me.REG[3] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-  /* ./icode//icode_builder.nit:76 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 76);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_icode_builder, 76);
   }
   fra.me.REG[3] = CALL_static_type___MMSignature___return_type(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 76);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_icode_builder, 76);
   }
   REGB0 = CALL_static_type___MMType___is_nullable(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
+    /* ./icode//icode_builder.nit:77 */
     fra.me.REG[2] = NEW_IAttrIsset_icode_base___IAttrIsset___init(fra.me.REG[1], fra.me.REG[2]);
-    fra.me.REG[3] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[3] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[3] = CALL_static_type___MMModule___type_bool(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[3] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2], fra.me.REG[3]);
+    /* ./icode//icode_builder.nit:78 */
     fra.me.REG[3] = NEW_IIf_icode_base___IIf___init(fra.me.REG[3]);
     /* ./icode//icode_builder.nit:79 */
     CALL_icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+    /* ./icode//icode_builder.nit:80 */
     fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___seq(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[3] = CALL_icode_base___IIf___else_seq(fra.me.REG[3])(fra.me.REG[3]);
     /* ./icode//icode_builder.nit:81 */
+    fra.me.REG[3] = CALL_icode_base___IIf___else_seq(fra.me.REG[3])(fra.me.REG[3]);
     CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+    /* ./icode//icode_builder.nit:82 */
     REGB0 = TAG_Int(1);
     fra.me.REG[3] = NEW_Array_array___Array___with_capacity(REGB0);
-    /* ./icode//icode_builder.nit:82 */
     if (!once_value_1) {
       fra.me.REG[4] = BOX_NativeString("Uninitialized attribute %s");
       REGB0 = TAG_Int(26);
@@ -252,10 +257,11 @@ void icode_builder___ICodeBuilder___add_attr_check(val_t p0, val_t p1, val_t p2)
       once_value_1 = fra.me.REG[4];
       register_static_object(&once_value_1);
     } else fra.me.REG[4] = once_value_1;
-    array___Array___add(fra.me.REG[3], fra.me.REG[4]);
+    fra.me.REG[4] = fra.me.REG[4];
+    CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
     fra.me.REG[1] = CALL_abstractmetamodel___MMLocalProperty___name(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
-    array___Array___add(fra.me.REG[3], fra.me.REG[1]);
+    CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
     CALL_icode_builder___ICodeBuilder___add_abort(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
     /* ./icode//icode_builder.nit:83 */
     CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
@@ -281,22 +287,18 @@ val_t icode_builder___ICodeBuilder___add_attr_read(val_t p0, val_t p1, val_t p2)
   fra.me.REG[2] = p2;
   /* ./icode//icode_builder.nit:90 */
   CALL_icode_builder___ICodeBuilder___add_attr_check(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
+  /* ./icode//icode_builder.nit:91 */
   fra.me.REG[2] = NEW_IAttrRead_icode_base___IAttrRead___init(fra.me.REG[1], fra.me.REG[2]);
   fra.me.REG[1] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./icode//icode_builder.nit:91 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 91);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_icode_builder, 91);
   }
   fra.me.REG[1] = CALL_static_type___MMSignature___return_type(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool((fra.me.REG[1]!=NIT_NULL) && VAL_ISA(fra.me.REG[1], COLOR_MMType, ID_MMType)) /*cast MMType*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Cast failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 91);
-    nit_exit(1);
+    nit_abort("Cast failed", NULL, LOCATE_icode_builder, 91);
   }
   fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2], fra.me.REG[1]);
   goto label1;
@@ -319,17 +321,15 @@ void icode_builder___ICodeBuilder___add_abort(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_Array, ID_Array)) /*cast Array[String]*/;
   /* ./icode//icode_builder.nit:94 */
+  REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_Array, ID_Array)) /*cast Array[String]*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Cast failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 94);
-    nit_exit(1);
+    nit_abort("Cast failed", NULL, LOCATE_icode_builder, 94);
   }
-  fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
-  fra.me.REG[2] = NEW_IAbort_icode_base___IAbort___init(fra.me.REG[1], fra.me.REG[2]);
   /* ./icode//icode_builder.nit:97 */
+  fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[2] = NEW_IAbort_icode_base___IAbort___init(fra.me.REG[1], fra.me.REG[2]);
   CALL_icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
   return;
@@ -349,15 +349,13 @@ void icode_builder___ICodeBuilder___add_return_value(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./icode//icode_builder.nit:104 */
   fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___iroutine(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_icode_base___IRoutine___result(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool((fra.me.REG[2]!=NIT_NULL) && VAL_ISA(fra.me.REG[2], COLOR_IRegister, ID_IRegister)) /*cast IRegister*/;
-  /* ./icode//icode_builder.nit:104 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Cast failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 104);
-    nit_exit(1);
+    nit_abort("Cast failed", NULL, LOCATE_icode_builder, 104);
   }
   CALL_icode_builder___ICodeBuilder___add_assignment(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
@@ -403,10 +401,12 @@ val_t icode_builder___ICodeBuilder___add_call(val_t p0, val_t p1, val_t p2, val_
       once_value_2 = fra.me.REG[4];
       register_static_object(&once_value_2);
     } else fra.me.REG[4] = once_value_2;
+    fra.me.REG[4] = fra.me.REG[4];
     fra.me.REG[4] = CALL_symbol___String___to_symbol(fra.me.REG[4])(fra.me.REG[4]);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
+  fra.me.REG[4] = fra.me.REG[4];
   /* ./icode//icode_builder.nit:113 */
   if (!once_value_3) {
     if (!once_value_4) {
@@ -416,277 +416,279 @@ val_t icode_builder___ICodeBuilder___add_call(val_t p0, val_t p1, val_t p2, val_
       once_value_4 = fra.me.REG[5];
       register_static_object(&once_value_4);
     } else fra.me.REG[5] = once_value_4;
+    fra.me.REG[5] = fra.me.REG[5];
     fra.me.REG[5] = CALL_symbol___String___to_symbol(fra.me.REG[5])(fra.me.REG[5]);
     once_value_3 = fra.me.REG[5];
     register_static_object(&once_value_3);
   } else fra.me.REG[5] = once_value_3;
+  fra.me.REG[5] = fra.me.REG[5];
+  /* ./icode//icode_builder.nit:114 */
   fra.me.REG[6] = CALL_abstractmetamodel___MMLocalProperty___name(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[6],fra.me.REG[5]));
-  /* ./icode//icode_builder.nit:114 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[5]);
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
+    /* ./icode//icode_builder.nit:115 */
     fra.me.REG[5] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
-    /* ./icode//icode_builder.nit:115 */
     if (UNTAG_Bool(REGB0)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 115);
-      nit_exit(1);
+      nit_abort("Reciever is null", NULL, LOCATE_icode_builder, 115);
     }
     fra.me.REG[5] = CALL_static_type___MMSignature___recv(fra.me.REG[5])(fra.me.REG[5]);
     fra.me.REG[5] = CALL_static_type___MMType___local_class(fra.me.REG[5])(fra.me.REG[5]);
     fra.me.REG[5] = CALL_abstractmetamodel___MMLocalClass___select_method(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
+    /* ./icode//icode_builder.nit:116 */
     fra.me.REG[5] = CALL_icode_builder___ICodeBuilder___add_call(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5], fra.me.REG[2], fra.me.REG[3]);
     REGB0 = TAG_Bool(fra.me.REG[5]!=NIT_NULL);
-    /* ./icode//icode_builder.nit:116 */
     if (UNTAG_Bool(REGB0)) {
     } else {
-      fprintf(stderr, "Cast failed");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 116);
-      nit_exit(1);
+      nit_abort("Cast failed", NULL, LOCATE_icode_builder, 116);
     }
+    /* ./icode//icode_builder.nit:117 */
     fra.me.REG[5] = NEW_INot_icode_base___INot___init(fra.me.REG[5]);
-    fra.me.REG[6] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[6] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[6] = CALL_static_type___MMModule___type_bool(fra.me.REG[6])(fra.me.REG[6]);
     fra.me.REG[6] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5], fra.me.REG[6]);
-    /* ./icode//icode_builder.nit:117 */
     goto label5;
   }
+  /* ./icode//icode_builder.nit:122 */
   fra.me.REG[5] = NEW_ICall_icode_base___ICall___init(fra.me.REG[1], fra.me.REG[2]);
   /* ./icode//icode_builder.nit:123 */
   CALL_icode_base___ICodeN___closure_defs__eq(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3]);
+  /* ./icode//icode_builder.nit:124 */
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalProperty___name(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[4]));
-  /* ./icode//icode_builder.nit:124 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    fra.me.REG[4] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+    /* ./icode//icode_builder.nit:126 */
+    fra.me.REG[4] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[4] = CALL_static_type___MMModule___type_bool(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[4] = CALL_icode_builder___ICodeBuilder___new_register(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
+    /* ./icode//icode_builder.nit:128 */
     REGB0 = TAG_Int(0);
+    /* ./../lib/standard//collection//array.nit:243 */
     fra.me.REG[3] = fra.me.REG[2];
+    /* ./../lib/standard//collection//array.nit:245 */
     REGB1 = TAG_Int(0);
+    /* ./../lib/standard//kernel.nit:213 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:233 */
+    /* ./../lib/standard//collection//array.nit:245 */
     if (UNTAG_Bool(REGB1)) {
       REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
-        fprintf(stderr, "Uninitialized attribute %s", "_length");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-        nit_exit(1);
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 245);
       }
       REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
+      /* ./../lib/standard//kernel.nit:212 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:233 */
     } else {
+      /* ./../lib/standard//collection//array.nit:245 */
       REGB2 = TAG_Bool(false);
       REGB1 = REGB2;
     }
     if (UNTAG_Bool(REGB1)) {
     } else {
-      fprintf(stderr, "Assert %s  failed", "'index'");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-      nit_exit(1);
+      nit_abort("Assert %s  failed", "'index'", LOCATE_array, 245);
     }
+    /* ./../lib/standard//collection//array.nit:246 */
     fra.me.REG[3] = ATTR_array___Array____items(fra.me.REG[3]);
     REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-    /* ./../lib/standard//collection//array.nit:234 */
     if (UNTAG_Bool(REGB1)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_array, 234);
-      nit_exit(1);
+      nit_abort("Reciever is null", NULL, LOCATE_array, 246);
     }
+    /* ./../lib/standard//collection//array.nit:654 */
     fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
-    /* ./../lib/standard//collection//array.nit:234 */
+    /* ./../lib/standard//collection//array.nit:246 */
     goto label6;
     label6: while(0);
+    /* ./icode//icode_builder.nit:128 */
     REGB0 = TAG_Int(1);
+    /* ./../lib/standard//collection//array.nit:243 */
     fra.me.REG[7] = fra.me.REG[2];
+    /* ./../lib/standard//collection//array.nit:245 */
     REGB1 = TAG_Int(0);
+    /* ./../lib/standard//kernel.nit:213 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:233 */
+    /* ./../lib/standard//collection//array.nit:245 */
     if (UNTAG_Bool(REGB1)) {
       REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[7])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
-        fprintf(stderr, "Uninitialized attribute %s", "_length");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-        nit_exit(1);
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 245);
       }
       REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[7]);
+      /* ./../lib/standard//kernel.nit:212 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:233 */
     } else {
+      /* ./../lib/standard//collection//array.nit:245 */
       REGB2 = TAG_Bool(false);
       REGB1 = REGB2;
     }
     if (UNTAG_Bool(REGB1)) {
     } else {
-      fprintf(stderr, "Assert %s  failed", "'index'");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-      nit_exit(1);
+      nit_abort("Assert %s  failed", "'index'", LOCATE_array, 245);
     }
+    /* ./../lib/standard//collection//array.nit:246 */
     fra.me.REG[7] = ATTR_array___Array____items(fra.me.REG[7]);
     REGB1 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
-    /* ./../lib/standard//collection//array.nit:234 */
     if (UNTAG_Bool(REGB1)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_array, 234);
-      nit_exit(1);
+      nit_abort("Reciever is null", NULL, LOCATE_array, 246);
     }
+    /* ./../lib/standard//collection//array.nit:654 */
     fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[7])->val[UNTAG_Int(REGB0)];
-    /* ./../lib/standard//collection//array.nit:234 */
+    /* ./../lib/standard//collection//array.nit:246 */
     goto label7;
     label7: while(0);
+    /* ./icode//icode_builder.nit:128 */
     fra.me.REG[7] = NEW_IIs_icode_base___IIs___init(fra.me.REG[3], fra.me.REG[7]);
-    fra.me.REG[3] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[3] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[3] = CALL_static_type___MMModule___type_bool(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[3] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[7], fra.me.REG[3]);
+    /* ./icode//icode_builder.nit:129 */
     fra.me.REG[7] = NEW_IIf_icode_base___IIf___init(fra.me.REG[3]);
     /* ./icode//icode_builder.nit:130 */
     CALL_icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[7]);
+    /* ./icode//icode_builder.nit:131 */
     fra.me.REG[8] = CALL_icode_builder___ICodeBuilder___seq(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[9] = CALL_icode_base___IIf___then_seq(fra.me.REG[7])(fra.me.REG[7]);
     /* ./icode//icode_builder.nit:132 */
+    fra.me.REG[9] = CALL_icode_base___IIf___then_seq(fra.me.REG[7])(fra.me.REG[7]);
     CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[9]);
     /* ./icode//icode_builder.nit:133 */
     CALL_icode_builder___ICodeBuilder___add_assignment(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4], fra.me.REG[3]);
-    fra.me.REG[9] = CALL_icode_base___IIf___else_seq(fra.me.REG[7])(fra.me.REG[7]);
     /* ./icode//icode_builder.nit:135 */
+    fra.me.REG[9] = CALL_icode_base___IIf___else_seq(fra.me.REG[7])(fra.me.REG[7]);
     CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[9]);
+    /* ./icode//icode_builder.nit:137 */
     REGB0 = TAG_Int(0);
+    /* ./../lib/standard//collection//array.nit:243 */
     fra.me.REG[9] = fra.me.REG[2];
+    /* ./../lib/standard//collection//array.nit:245 */
     REGB1 = TAG_Int(0);
+    /* ./../lib/standard//kernel.nit:213 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:233 */
+    /* ./../lib/standard//collection//array.nit:245 */
     if (UNTAG_Bool(REGB1)) {
       REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[9])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
-        fprintf(stderr, "Uninitialized attribute %s", "_length");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-        nit_exit(1);
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 245);
       }
       REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[9]);
+      /* ./../lib/standard//kernel.nit:212 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:233 */
     } else {
+      /* ./../lib/standard//collection//array.nit:245 */
       REGB2 = TAG_Bool(false);
       REGB1 = REGB2;
     }
     if (UNTAG_Bool(REGB1)) {
     } else {
-      fprintf(stderr, "Assert %s  failed", "'index'");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-      nit_exit(1);
+      nit_abort("Assert %s  failed", "'index'", LOCATE_array, 245);
     }
+    /* ./../lib/standard//collection//array.nit:246 */
     fra.me.REG[9] = ATTR_array___Array____items(fra.me.REG[9]);
     REGB1 = TAG_Bool(fra.me.REG[9]==NIT_NULL);
-    /* ./../lib/standard//collection//array.nit:234 */
     if (UNTAG_Bool(REGB1)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_array, 234);
-      nit_exit(1);
+      nit_abort("Reciever is null", NULL, LOCATE_array, 246);
     }
+    /* ./../lib/standard//collection//array.nit:654 */
     fra.me.REG[9] = ((Nit_NativeArray)fra.me.REG[9])->val[UNTAG_Int(REGB0)];
-    /* ./../lib/standard//collection//array.nit:234 */
+    /* ./../lib/standard//collection//array.nit:246 */
     goto label8;
     label8: while(0);
-    REGB0 = TAG_Bool(fra.me.REG[9]==NIT_NULL);
     /* ./icode//icode_builder.nit:137 */
+    REGB0 = TAG_Bool(fra.me.REG[9]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 137);
-      nit_exit(1);
+      nit_abort("Reciever is null", NULL, LOCATE_icode_builder, 137);
     }
     fra.me.REG[9] = CALL_icode_base___IRegister___stype(fra.me.REG[9])(fra.me.REG[9]);
     REGB0 = CALL_static_type___MMType___is_nullable(fra.me.REG[9])(fra.me.REG[9]);
     if (UNTAG_Bool(REGB0)) {
+      /* ./icode//icode_builder.nit:138 */
       fra.me.REG[9] = CALL_icode_builder___ICodeBuilder___lit_null_reg(fra.me.REG[0])(fra.me.REG[0]);
+      /* ./icode//icode_builder.nit:139 */
       REGB0 = TAG_Int(0);
+      /* ./../lib/standard//collection//array.nit:243 */
       fra.me.REG[10] = fra.me.REG[2];
+      /* ./../lib/standard//collection//array.nit:245 */
       REGB1 = TAG_Int(0);
+      /* ./../lib/standard//kernel.nit:213 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:233 */
+      /* ./../lib/standard//collection//array.nit:245 */
       if (UNTAG_Bool(REGB1)) {
         REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[10])!=NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
         } else {
-          fprintf(stderr, "Uninitialized attribute %s", "_length");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-          nit_exit(1);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 245);
         }
         REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[10]);
+        /* ./../lib/standard//kernel.nit:212 */
         REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:233 */
       } else {
+        /* ./../lib/standard//collection//array.nit:245 */
         REGB2 = TAG_Bool(false);
         REGB1 = REGB2;
       }
       if (UNTAG_Bool(REGB1)) {
       } else {
-        fprintf(stderr, "Assert %s  failed", "'index'");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-        nit_exit(1);
+        nit_abort("Assert %s  failed", "'index'", LOCATE_array, 245);
       }
+      /* ./../lib/standard//collection//array.nit:246 */
       fra.me.REG[10] = ATTR_array___Array____items(fra.me.REG[10]);
       REGB1 = TAG_Bool(fra.me.REG[10]==NIT_NULL);
-      /* ./../lib/standard//collection//array.nit:234 */
       if (UNTAG_Bool(REGB1)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_array, 234);
-        nit_exit(1);
+        nit_abort("Reciever is null", NULL, LOCATE_array, 246);
       }
+      /* ./../lib/standard//collection//array.nit:654 */
       fra.me.REG[10] = ((Nit_NativeArray)fra.me.REG[10])->val[UNTAG_Int(REGB0)];
-      /* ./../lib/standard//collection//array.nit:234 */
+      /* ./../lib/standard//collection//array.nit:246 */
       goto label9;
       label9: while(0);
+      /* ./icode//icode_builder.nit:139 */
       fra.me.REG[9] = NEW_IIs_icode_base___IIs___init(fra.me.REG[10], fra.me.REG[9]);
-      fra.me.REG[10] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+      fra.me.REG[10] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[10] = CALL_static_type___MMModule___type_bool(fra.me.REG[10])(fra.me.REG[10]);
       fra.me.REG[10] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[9], fra.me.REG[10]);
       fra.me.REG[3] = fra.me.REG[10];
+      /* ./icode//icode_builder.nit:140 */
       fra.me.REG[3] = NEW_IIf_icode_base___IIf___init(fra.me.REG[3]);
       fra.me.REG[7] = fra.me.REG[3];
       /* ./icode//icode_builder.nit:141 */
       CALL_icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[7]);
-      fra.me.REG[3] = CALL_icode_base___IIf___then_seq(fra.me.REG[7])(fra.me.REG[7]);
       /* ./icode//icode_builder.nit:142 */
+      fra.me.REG[3] = CALL_icode_base___IIf___then_seq(fra.me.REG[7])(fra.me.REG[7]);
       CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      fra.me.REG[3] = CALL_icode_builder___ICodeBuilder___lit_false_reg(fra.me.REG[0])(fra.me.REG[0]);
       /* ./icode//icode_builder.nit:143 */
+      fra.me.REG[3] = CALL_icode_builder___ICodeBuilder___lit_false_reg(fra.me.REG[0])(fra.me.REG[0]);
       CALL_icode_builder___ICodeBuilder___add_assignment(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4], fra.me.REG[3]);
-      fra.me.REG[7] = CALL_icode_base___IIf___else_seq(fra.me.REG[7])(fra.me.REG[7]);
       /* ./icode//icode_builder.nit:144 */
+      fra.me.REG[7] = CALL_icode_base___IIf___else_seq(fra.me.REG[7])(fra.me.REG[7]);
       CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[7]);
     }
-    fra.me.REG[7] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+    /* ./icode//icode_builder.nit:147 */
+    fra.me.REG[7] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[7] = CALL_static_type___MMModule___type_bool(fra.me.REG[7])(fra.me.REG[7]);
     fra.me.REG[7] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5], fra.me.REG[7]);
-    /* ./icode//icode_builder.nit:147 */
     CALL_icode_builder___ICodeBuilder___add_assignment(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4], fra.me.REG[7]);
     /* ./icode//icode_builder.nit:148 */
     CALL_icode_builder___ICodeBuilder___seq__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[8]);
-    fra.me.REG[6] = fra.me.REG[4];
     /* ./icode//icode_builder.nit:149 */
+    fra.me.REG[6] = fra.me.REG[4];
     goto label5;
   }
+  /* ./icode//icode_builder.nit:152 */
   fra.me.REG[4] = CALL_abstract_collection___Collection___first(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
-  /* ./icode//icode_builder.nit:152 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 152);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_icode_builder, 152);
   }
   fra.me.REG[4] = CALL_icode_base___IRegister___stype(fra.me.REG[4])(fra.me.REG[4]);
   REGB0 = CALL_static_type___MMType___is_nullable(fra.me.REG[4])(fra.me.REG[4]);
@@ -694,17 +696,15 @@ val_t icode_builder___ICodeBuilder___add_call(val_t p0, val_t p1, val_t p2, val_
     fra.me.REG[2] = CALL_abstract_collection___Collection___first(fra.me.REG[2])(fra.me.REG[2]);
     CALL_icode_builder___ICodeBuilder___add_null_reciever_check(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   }
+  /* ./icode//icode_builder.nit:153 */
   fra.me.REG[1] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./icode//icode_builder.nit:153 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 153);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_icode_builder, 153);
   }
   fra.me.REG[1] = CALL_static_type___MMSignature___return_type(fra.me.REG[1])(fra.me.REG[1]);
-  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   /* ./icode//icode_builder.nit:154 */
+  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -718,15 +718,15 @@ val_t icode_builder___ICodeBuilder___add_call(val_t p0, val_t p1, val_t p2, val_
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
+    /* ./icode//icode_builder.nit:155 */
     fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5], fra.me.REG[1]);
     fra.me.REG[6] = fra.me.REG[1];
-    /* ./icode//icode_builder.nit:155 */
     goto label5;
   } else {
     /* ./icode//icode_builder.nit:157 */
     CALL_icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);
-    fra.me.REG[6] = NIT_NULL;
     /* ./icode//icode_builder.nit:158 */
+    fra.me.REG[6] = NIT_NULL;
     goto label5;
   }
   label5: while(0);
@@ -750,9 +750,10 @@ void icode_builder___ICodeBuilder___add_escape(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./icode//icode_builder.nit:166 */
   fra.me.REG[2] = CALL_icode_base___ISeq___iescape_mark(fra.me.REG[1])(fra.me.REG[1]);
-  REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   /* ./icode//icode_builder.nit:167 */
+  REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
@@ -765,17 +766,18 @@ void icode_builder___ICodeBuilder___add_escape(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
+    /* ./icode//icode_builder.nit:168 */
     fra.me.REG[3] = NEW_IEscapeMark_icode_base___IEscapeMark___init();
     fra.me.REG[2] = fra.me.REG[3];
+    /* ./icode//icode_builder.nit:169 */
     fra.me.REG[3] = CALL_icode_builder___ICodeBuilder___iroutine(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[3] = CALL_icode_base___IRoutine___escape_marks(fra.me.REG[3])(fra.me.REG[3]);
-    /* ./icode//icode_builder.nit:169 */
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
     /* ./icode//icode_builder.nit:170 */
     CALL_icode_base___ISeq___iescape_mark__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   }
-  fra.me.REG[2] = NEW_IEscape_icode_base___IEscape___init(fra.me.REG[2]);
   /* ./icode//icode_builder.nit:172 */
+  fra.me.REG[2] = NEW_IEscape_icode_base___IEscape___init(fra.me.REG[2]);
   CALL_icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
   return;
@@ -792,10 +794,10 @@ val_t icode_builder___ICodeBuilder___lit_null_reg(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+  /* ./icode//icode_builder.nit:178 */
+  fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_static_type___MMModule___type_none(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = CALL_icode_builder___ICodeBuilder___new_register(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./icode//icode_builder.nit:178 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -805,7 +807,6 @@ val_t icode_builder___ICodeBuilder___lit_true_reg(val_t p0){
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
-  static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
   fra.me.line = 181;
@@ -817,23 +818,14 @@ val_t icode_builder___ICodeBuilder___lit_true_reg(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_builder.nit:184 */
-  if (!once_value_1) {
-    fra.me.REG[1] = BOX_NativeString("TAG_Bool(true)");
-    REGB0 = TAG_Int(14);
-    fra.me.REG[1] = NEW_String_string___String___with_native(fra.me.REG[1], REGB0);
-    once_value_1 = fra.me.REG[1];
-    register_static_object(&once_value_1);
-  } else fra.me.REG[1] = once_value_1;
-  fra.me.REG[1] = NEW_INative_icode_base___INative___init(fra.me.REG[1], NIT_NULL);
   REGB0 = TAG_Bool(true);
+  fra.me.REG[1] = NEW_IBoolValue_icode_base___IBoolValue___init(REGB0);
   /* ./icode//icode_builder.nit:185 */
-  CALL_icode_base___INative___is_pure__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
-  fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_static_type___MMModule___type_bool(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
-  /* ./icode//icode_builder.nit:186 */
-  goto label2;
-  label2: while(0);
+  goto label1;
+  label1: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[2];
 }
@@ -841,10 +833,9 @@ val_t icode_builder___ICodeBuilder___lit_false_reg(val_t p0){
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
-  static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 189;
+  fra.me.line = 188;
   fra.me.meth = LOCATE_icode_builder___ICodeBuilder___lit_false_reg;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -852,24 +843,15 @@ val_t icode_builder___ICodeBuilder___lit_false_reg(val_t p0){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./icode//icode_builder.nit:191 */
+  REGB0 = TAG_Bool(false);
+  fra.me.REG[1] = NEW_IBoolValue_icode_base___IBoolValue___init(REGB0);
   /* ./icode//icode_builder.nit:192 */
-  if (!once_value_1) {
-    fra.me.REG[1] = BOX_NativeString("TAG_Bool(false)");
-    REGB0 = TAG_Int(15);
-    fra.me.REG[1] = NEW_String_string___String___with_native(fra.me.REG[1], REGB0);
-    once_value_1 = fra.me.REG[1];
-    register_static_object(&once_value_1);
-  } else fra.me.REG[1] = once_value_1;
-  fra.me.REG[1] = NEW_INative_icode_base___INative___init(fra.me.REG[1], NIT_NULL);
-  REGB0 = TAG_Bool(true);
-  /* ./icode//icode_builder.nit:193 */
-  CALL_icode_base___INative___is_pure__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
-  fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___module(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_static_type___MMModule___type_bool(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[2] = CALL_icode_builder___ICodeBuilder___expr(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
-  /* ./icode//icode_builder.nit:194 */
-  goto label2;
-  label2: while(0);
+  goto label1;
+  label1: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[2];
 }
@@ -878,7 +860,7 @@ val_t icode_builder___ICodeBuilder___new_register(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 197;
+  fra.me.line = 195;
   fra.me.meth = LOCATE_icode_builder___ICodeBuilder___new_register;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -886,38 +868,37 @@ val_t icode_builder___ICodeBuilder___new_register(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./icode//icode_builder.nit:198 */
   fra.me.REG[1] = NEW_IRegister_icode_base___IRegister___init(fra.me.REG[1]);
+  /* ./icode//icode_builder.nit:199 */
   fra.me.REG[0] = CALL_icode_builder___ICodeBuilder___iroutine(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_icode_base___IRoutine___registers(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./icode//icode_builder.nit:201 */
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./icode//icode_builder.nit:202 */
+  /* ./icode//icode_builder.nit:200 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
 }
-val_t icode_builder___ICodeBuilder___module(val_t p0){
+val_t icode_builder___ICodeBuilder___mmmodule(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 205;
-  fra.me.meth = LOCATE_icode_builder___ICodeBuilder___module;
+  fra.me.line = 203;
+  fra.me.meth = LOCATE_icode_builder___ICodeBuilder___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_icode_builder___ICodeBuilder____module(fra.me.REG[0])!=NIT_NULL);
-  /* ./icode//icode_builder.nit:205 */
+  /* ./icode//icode_builder.nit:203 */
+  REGB0 = TAG_Bool(ATTR_icode_builder___ICodeBuilder____mmmodule(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_module");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 205);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_mmmodule", LOCATE_icode_builder, 203);
   }
-  fra.me.REG[0] = ATTR_icode_builder___ICodeBuilder____module(fra.me.REG[0]);
+  fra.me.REG[0] = ATTR_icode_builder___ICodeBuilder____mmmodule(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -927,19 +908,17 @@ val_t icode_builder___ICodeBuilder___iroutine(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 208;
+  fra.me.line = 206;
   fra.me.meth = LOCATE_icode_builder___ICodeBuilder___iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./icode//icode_builder.nit:206 */
   REGB0 = TAG_Bool(ATTR_icode_builder___ICodeBuilder____iroutine(fra.me.REG[0])!=NIT_NULL);
-  /* ./icode//icode_builder.nit:208 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_iroutine");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 208);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_iroutine", LOCATE_icode_builder, 206);
   }
   fra.me.REG[0] = ATTR_icode_builder___ICodeBuilder____iroutine(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -951,19 +930,17 @@ val_t icode_builder___ICodeBuilder___seq(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 211;
+  fra.me.line = 209;
   fra.me.meth = LOCATE_icode_builder___ICodeBuilder___seq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./icode//icode_builder.nit:209 */
   REGB0 = TAG_Bool(ATTR_icode_builder___ICodeBuilder____seq(fra.me.REG[0])!=NIT_NULL);
-  /* ./icode//icode_builder.nit:211 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_seq");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 211);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_seq", LOCATE_icode_builder, 209);
   }
   fra.me.REG[0] = ATTR_icode_builder___ICodeBuilder____seq(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -974,7 +951,7 @@ void icode_builder___ICodeBuilder___seq__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 211;
+  fra.me.line = 209;
   fra.me.meth = LOCATE_icode_builder___ICodeBuilder___seq__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -982,7 +959,7 @@ void icode_builder___ICodeBuilder___seq__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./icode//icode_builder.nit:211 */
+  /* ./icode//icode_builder.nit:209 */
   ATTR_icode_builder___ICodeBuilder____seq(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -994,7 +971,7 @@ void icode_builder___ICodeBuilder___init(val_t p0, val_t p1, val_t p2, int* init
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 214;
+  fra.me.line = 212;
   fra.me.meth = LOCATE_icode_builder___ICodeBuilder___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1004,15 +981,15 @@ void icode_builder___ICodeBuilder___init(val_t p0, val_t p1, val_t p2, int* init
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./icode//icode_builder.nit:216 */
-  ATTR_icode_builder___ICodeBuilder____module(fra.me.REG[0]) = fra.me.REG[1];
+  /* ./icode//icode_builder.nit:214 */
+  ATTR_icode_builder___ICodeBuilder____mmmodule(fra.me.REG[0]) = fra.me.REG[1];
+  /* ./icode//icode_builder.nit:215 */
   fra.me.REG[1] = CALL_icode_base___IRoutine___location(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./icode//icode_builder.nit:217 */
   ATTR_icode_builder___ICodeBuilder____current_location(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./icode//icode_builder.nit:218 */
+  /* ./icode//icode_builder.nit:216 */
   ATTR_icode_builder___ICodeBuilder____iroutine(fra.me.REG[0]) = fra.me.REG[2];
+  /* ./icode//icode_builder.nit:217 */
   fra.me.REG[2] = CALL_icode_base___IRoutine___body(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./icode//icode_builder.nit:219 */
   ATTR_icode_builder___ICodeBuilder____seq(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -1023,14 +1000,14 @@ val_t icode_builder___ICodeBuilder___current_location(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 222;
+  fra.me.line = 220;
   fra.me.meth = LOCATE_icode_builder___ICodeBuilder___current_location;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./icode//icode_builder.nit:220 */
   fra.me.REG[0] = ATTR_icode_builder___ICodeBuilder____current_location(fra.me.REG[0]);
-  /* ./icode//icode_builder.nit:222 */
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -1039,7 +1016,7 @@ void icode_builder___ICodeBuilder___current_location__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 222;
+  fra.me.line = 220;
   fra.me.meth = LOCATE_icode_builder___ICodeBuilder___current_location__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1047,109 +1024,153 @@ void icode_builder___ICodeBuilder___current_location__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./icode//icode_builder.nit:222 */
+  /* ./icode//icode_builder.nit:220 */
   ATTR_icode_builder___ICodeBuilder____current_location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
 }
 val_t icode_builder___MMSignature___generate_empty_iroutine(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[4];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 227;
+  fra.me.line = 225;
   fra.me.meth = LOCATE_icode_builder___MMSignature___generate_empty_iroutine;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 4;
+  fra.me.REG_size = 5;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
+  fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./icode//icode_builder.nit:228 */
   fra.me.REG[1] = NEW_Array_array___Array___init();
+  /* ./icode//icode_builder.nit:229 */
   fra.me.REG[2] = CALL_static_type___MMSignature___recv(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = NEW_IRegister_icode_base___IRegister___init(fra.me.REG[2]);
-  /* ./icode//icode_builder.nit:231 */
-  array___Array___add(fra.me.REG[1], fra.me.REG[2]);
+  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  /* ./icode//icode_builder.nit:230 */
   REGB0 = TAG_Int(0);
   REGB1 = CALL_static_type___MMSignature___arity(fra.me.REG[0])(fra.me.REG[0]);
-  fra.me.REG[2] = NEW_Range_range___Range___without_last(REGB0, REGB1);
-  fra.me.REG[2] = CALL_abstract_collection___Collection___iterator(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./icode//icode_builder.nit:232 */
+  /* ./../lib/standard//kernel.nit:332 */
   while(1) {
-    REGB1 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[2])(fra.me.REG[2]);
-    if (UNTAG_Bool(REGB1)) {
-      REGB1 = CALL_abstract_collection___Iterator___item(fra.me.REG[2])(fra.me.REG[2]);
-      fra.me.REG[3] = CALL_static_type___MMSignature_____bra(fra.me.REG[0])(fra.me.REG[0], REGB1);
-      fra.me.REG[3] = NEW_IRegister_icode_base___IRegister___init(fra.me.REG[3]);
-      /* ./icode//icode_builder.nit:233 */
-      array___Array___add(fra.me.REG[1], fra.me.REG[3]);
+    /* ./../lib/standard//kernel.nit:212 */
+    REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
+    /* ./../lib/standard//kernel.nit:332 */
+    if (UNTAG_Bool(REGB2)) {
+      /* ./icode//icode_builder.nit:230 */
+      REGB2 = REGB0;
+      /* ./icode//icode_builder.nit:231 */
+      fra.me.REG[2] = CALL_static_type___MMSignature_____bra(fra.me.REG[0])(fra.me.REG[0], REGB2);
+      fra.me.REG[2] = NEW_IRegister_icode_base___IRegister___init(fra.me.REG[2]);
+      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+      /* ./../lib/standard//kernel.nit:334 */
+      REGB2 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:215 */
+      REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
+      /* ./../lib/standard//kernel.nit:334 */
+      REGB0 = REGB2;
     } else {
-      /* ./icode//icode_builder.nit:232 */
+      /* ./../lib/standard//kernel.nit:332 */
       goto label1;
     }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[2])(fra.me.REG[2]);
   }
   label1: while(0);
+  /* ./icode//icode_builder.nit:233 */
   fra.me.REG[2] = NIT_NULL;
+  /* ./icode//icode_builder.nit:234 */
   fra.me.REG[3] = CALL_static_type___MMSignature___return_type(fra.me.REG[0])(fra.me.REG[0]);
-  REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-  /* ./icode//icode_builder.nit:237 */
-  if (UNTAG_Bool(REGB1)) {
+  /* ./icode//icode_builder.nit:235 */
+  REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
   } else {
-    REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-    if (UNTAG_Bool(REGB0)) {
-      REGB0 = TAG_Bool(false);
-      REGB1 = REGB0;
+    REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+      REGB1 = TAG_Bool(false);
+      REGB0 = REGB1;
     } else {
-      REGB0 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
-      REGB1 = REGB0;
+      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
+      REGB0 = REGB1;
     }
   }
-  REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-  if (UNTAG_Bool(REGB1)) {
+  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+  if (UNTAG_Bool(REGB0)) {
+    /* ./icode//icode_builder.nit:236 */
     fra.me.REG[3] = NEW_IRegister_icode_base___IRegister___init(fra.me.REG[3]);
     fra.me.REG[2] = fra.me.REG[3];
-  /* ./icode//icode_builder.nit:238 */
   }
+  /* ./icode//icode_builder.nit:238 */
   fra.me.REG[2] = NEW_IRoutine_icode_base___IRoutine___init(fra.me.REG[1], fra.me.REG[2]);
+  /* ./icode//icode_builder.nit:239 */
   fra.me.REG[1] = NIT_NULL;
+  /* ./icode//icode_builder.nit:240 */
   fra.me.REG[3] = CALL_static_type___MMSignature___closures(fra.me.REG[0])(fra.me.REG[0]);
-  REGB1 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[3])(fra.me.REG[3]);
-  REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-  /* ./icode//icode_builder.nit:242 */
-  if (UNTAG_Bool(REGB1)) {
+  REGB0 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[3])(fra.me.REG[3]);
+  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+  if (UNTAG_Bool(REGB0)) {
+    /* ./icode//icode_builder.nit:241 */
     fra.me.REG[3] = NEW_Array_array___Array___init();
     fra.me.REG[1] = fra.me.REG[3];
+    /* ./icode//icode_builder.nit:242 */
     fra.me.REG[0] = CALL_static_type___MMSignature___closures(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
-    /* ./icode//icode_builder.nit:244 */
+    /* ./../lib/standard//collection//array.nit:234 */
+    REGB0 = TAG_Int(0);
+    /* ./../lib/standard//collection//array.nit:235 */
+    REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+    } else {
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 235);
+    }
+    REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[0]);
+    /* ./../lib/standard//collection//array.nit:236 */
+    fra.me.REG[3] = ATTR_array___Array____items(fra.me.REG[0]);
+    /* ./../lib/standard//collection//array.nit:237 */
     while(1) {
-      REGB1 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
+      /* ./../lib/standard//collection//array.nit:23 */
+      REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        fra.me.REG[3] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
-        fra.me.REG[3] = NEW_IClosureDecl_icode_base___IClosureDecl___init(fra.me.REG[3]);
-        REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-        /* ./icode//icode_builder.nit:245 */
-        if (UNTAG_Bool(REGB1)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 245);
-          nit_exit(1);
-        }
-        array___Array___add(fra.me.REG[1], fra.me.REG[3]);
       } else {
-        /* ./icode//icode_builder.nit:244 */
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+      }
+      REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[0]);
+      /* ./../lib/standard//kernel.nit:212 */
+      REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
+      /* ./../lib/standard//collection//array.nit:237 */
+      if (UNTAG_Bool(REGB1)) {
+        /* ./../lib/standard//collection//array.nit:238 */
+        REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+        if (UNTAG_Bool(REGB1)) {
+          nit_abort("Reciever is null", NULL, LOCATE_array, 238);
+        }
+        /* ./../lib/standard//collection//array.nit:654 */
+        fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
+        /* ./icode//icode_builder.nit:243 */
+        fra.me.REG[4] = NEW_IClosureDecl_icode_base___IClosureDecl___init(fra.me.REG[4]);
+        REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+        if (UNTAG_Bool(REGB1)) {
+          nit_abort("Reciever is null", NULL, LOCATE_icode_builder, 243);
+        }
+        CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
+        /* ./../lib/standard//collection//array.nit:239 */
+        REGB1 = TAG_Int(1);
+        /* ./../lib/standard//kernel.nit:215 */
+        REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
+        /* ./../lib/standard//collection//array.nit:239 */
+        REGB0 = REGB1;
+      } else {
+        /* ./../lib/standard//collection//array.nit:237 */
         goto label2;
       }
-      CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
     }
     label2: while(0);
-    /* ./icode//icode_builder.nit:247 */
+    /* ./icode//icode_builder.nit:245 */
     CALL_icode_base___IRoutine___closure_decls__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   }
-  /* ./icode//icode_builder.nit:249 */
+  /* ./icode//icode_builder.nit:247 */
   goto label3;
   label3: while(0);
   stack_frame_head = fra.me.prev;
@@ -1159,10 +1180,11 @@ val_t icode_builder___MMSignature___generate_empty_iclosuredef(val_t p0, val_t p
   struct {struct stack_frame_t me; val_t MORE_REG[4];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_icode_builder;
-  fra.me.line = 252;
+  fra.me.line = 250;
   fra.me.meth = LOCATE_icode_builder___MMSignature___generate_empty_iclosuredef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -1173,84 +1195,126 @@ val_t icode_builder___MMSignature___generate_empty_iclosuredef(val_t p0, val_t p
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./icode//icode_builder.nit:253 */
   fra.me.REG[2] = NEW_Array_array___Array___init();
+  /* ./icode//icode_builder.nit:254 */
   REGB0 = TAG_Int(0);
   REGB1 = CALL_static_type___MMSignature___arity(fra.me.REG[0])(fra.me.REG[0]);
-  fra.me.REG[3] = NEW_Range_range___Range___without_last(REGB0, REGB1);
-  fra.me.REG[3] = CALL_abstract_collection___Collection___iterator(fra.me.REG[3])(fra.me.REG[3]);
-  /* ./icode//icode_builder.nit:256 */
+  /* ./../lib/standard//kernel.nit:332 */
   while(1) {
-    REGB1 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[3])(fra.me.REG[3]);
-    if (UNTAG_Bool(REGB1)) {
-      REGB1 = CALL_abstract_collection___Iterator___item(fra.me.REG[3])(fra.me.REG[3]);
-      fra.me.REG[4] = CALL_static_type___MMSignature_____bra(fra.me.REG[0])(fra.me.REG[0], REGB1);
-      fra.me.REG[4] = CALL_icode_builder___ICodeBuilder___new_register(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-      /* ./icode//icode_builder.nit:257 */
-      array___Array___add(fra.me.REG[2], fra.me.REG[4]);
+    /* ./../lib/standard//kernel.nit:212 */
+    REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
+    /* ./../lib/standard//kernel.nit:332 */
+    if (UNTAG_Bool(REGB2)) {
+      /* ./icode//icode_builder.nit:254 */
+      REGB2 = REGB0;
+      /* ./icode//icode_builder.nit:255 */
+      fra.me.REG[3] = CALL_static_type___MMSignature_____bra(fra.me.REG[0])(fra.me.REG[0], REGB2);
+      fra.me.REG[3] = CALL_icode_builder___ICodeBuilder___new_register(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
+      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+      /* ./../lib/standard//kernel.nit:334 */
+      REGB2 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:215 */
+      REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
+      /* ./../lib/standard//kernel.nit:334 */
+      REGB0 = REGB2;
     } else {
-      /* ./icode//icode_builder.nit:256 */
+      /* ./../lib/standard//kernel.nit:332 */
       goto label1;
     }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[3])(fra.me.REG[3]);
   }
   label1: while(0);
+  /* ./icode//icode_builder.nit:257 */
   fra.me.REG[3] = NIT_NULL;
+  /* ./icode//icode_builder.nit:258 */
   fra.me.REG[4] = CALL_static_type___MMSignature___return_type(fra.me.REG[0])(fra.me.REG[0]);
-  REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
-  /* ./icode//icode_builder.nit:261 */
-  if (UNTAG_Bool(REGB1)) {
+  /* ./icode//icode_builder.nit:259 */
+  REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
   } else {
-    REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
-    if (UNTAG_Bool(REGB0)) {
-      REGB0 = TAG_Bool(false);
-      REGB1 = REGB0;
+    REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+      REGB1 = TAG_Bool(false);
+      REGB0 = REGB1;
     } else {
-      REGB0 = CALL_kernel___Object_____eqeq(fra.me.REG[4])(fra.me.REG[4], NIT_NULL);
-      REGB1 = REGB0;
+      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[4])(fra.me.REG[4], NIT_NULL);
+      REGB0 = REGB1;
     }
   }
-  REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-  if (UNTAG_Bool(REGB1)) {
+  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+  if (UNTAG_Bool(REGB0)) {
+    /* ./icode//icode_builder.nit:260 */
     fra.me.REG[4] = CALL_icode_builder___ICodeBuilder___new_register(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
     fra.me.REG[3] = fra.me.REG[4];
-  /* ./icode//icode_builder.nit:262 */
   }
+  /* ./icode//icode_builder.nit:262 */
   fra.me.REG[3] = NEW_IClosureDef_icode_base___IClosureDef___init(fra.me.REG[2], fra.me.REG[3]);
+  /* ./icode//icode_builder.nit:263 */
   fra.me.REG[2] = NIT_NULL;
+  /* ./icode//icode_builder.nit:264 */
   fra.me.REG[4] = CALL_static_type___MMSignature___closures(fra.me.REG[0])(fra.me.REG[0]);
-  REGB1 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[4])(fra.me.REG[4]);
-  REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-  /* ./icode//icode_builder.nit:266 */
-  if (UNTAG_Bool(REGB1)) {
+  REGB0 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[4])(fra.me.REG[4]);
+  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+  if (UNTAG_Bool(REGB0)) {
+    /* ./icode//icode_builder.nit:265 */
     fra.me.REG[4] = NEW_Array_array___Array___init();
     fra.me.REG[2] = fra.me.REG[4];
+    /* ./icode//icode_builder.nit:266 */
     fra.me.REG[0] = CALL_static_type___MMSignature___closures(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
-    /* ./icode//icode_builder.nit:268 */
+    /* ./../lib/standard//collection//array.nit:234 */
+    REGB0 = TAG_Int(0);
+    /* ./../lib/standard//collection//array.nit:235 */
+    REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+    } else {
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 235);
+    }
+    REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[0]);
+    /* ./../lib/standard//collection//array.nit:236 */
+    fra.me.REG[4] = ATTR_array___Array____items(fra.me.REG[0]);
+    /* ./../lib/standard//collection//array.nit:237 */
     while(1) {
-      REGB1 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
+      /* ./../lib/standard//collection//array.nit:23 */
+      REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        fra.me.REG[4] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
-        fra.me.REG[4] = NEW_IClosureDecl_icode_base___IClosureDecl___init(fra.me.REG[4]);
-        REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        /* ./icode//icode_builder.nit:269 */
-        if (UNTAG_Bool(REGB1)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_icode_builder, 269);
-          nit_exit(1);
-        }
-        array___Array___add(fra.me.REG[2], fra.me.REG[4]);
       } else {
-        /* ./icode//icode_builder.nit:268 */
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+      }
+      REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[0]);
+      /* ./../lib/standard//kernel.nit:212 */
+      REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
+      /* ./../lib/standard//collection//array.nit:237 */
+      if (UNTAG_Bool(REGB1)) {
+        /* ./../lib/standard//collection//array.nit:238 */
+        REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
+        if (UNTAG_Bool(REGB1)) {
+          nit_abort("Reciever is null", NULL, LOCATE_array, 238);
+        }
+        /* ./../lib/standard//collection//array.nit:654 */
+        fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
+        /* ./icode//icode_builder.nit:267 */
+        fra.me.REG[1] = NEW_IClosureDecl_icode_base___IClosureDecl___init(fra.me.REG[1]);
+        REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+        if (UNTAG_Bool(REGB1)) {
+          nit_abort("Reciever is null", NULL, LOCATE_icode_builder, 267);
+        }
+        CALL_abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+        /* ./../lib/standard//collection//array.nit:239 */
+        REGB1 = TAG_Int(1);
+        /* ./../lib/standard//kernel.nit:215 */
+        REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
+        /* ./../lib/standard//collection//array.nit:239 */
+        REGB0 = REGB1;
+      } else {
+        /* ./../lib/standard//collection//array.nit:237 */
         goto label2;
       }
-      CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
     }
     label2: while(0);
-    /* ./icode//icode_builder.nit:271 */
+    /* ./icode//icode_builder.nit:269 */
     CALL_icode_base___IRoutine___closure_decls__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
   }
-  /* ./icode//icode_builder.nit:273 */
+  /* ./icode//icode_builder.nit:271 */
   goto label3;
   label3: while(0);
   stack_frame_head = fra.me.prev;

@@ -13,14 +13,13 @@ extern const int SFT_allocate_iregister_slots[];
 #define ID_IRegisterSlotAllocationVisitor (SFT_allocate_iregister_slots[0])
 #define COLOR_IRegisterSlotAllocationVisitor (SFT_allocate_iregister_slots[1])
 #define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____pass(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 0))
-#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____live(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 1))
-#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____deferred(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 2))
-#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 3))
-#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____global_slots(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 4))
-#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____std_slots(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 5))
-#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 6))
-#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____firsts(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 7))
-#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____lasts(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 8))
+#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 1))
+#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 2))
+#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____deferred_list(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 3))
+#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 4))
+#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____global_slots(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 5))
+#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____std_slots(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 6))
+#define ATTR_allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(recv) ATTR(recv, (SFT_allocate_iregister_slots[2] + 7))
 #define INIT_TABLE_POS_IRegisterSlotAllocationVisitor (SFT_allocate_iregister_slots[3] + 0)
 #define CALL_allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality(recv) ((allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality_t)CALL((recv), (SFT_allocate_iregister_slots[3] + 1)))
 #define CALL_allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free(recv) ((allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free_t)CALL((recv), (SFT_allocate_iregister_slots[3] + 2)))
@@ -48,6 +47,9 @@ extern const int SFT_allocate_iregister_slots[];
 #define ATTR_allocate_iregister_slots___IRegister____is_local(recv) ATTR(recv, (SFT_allocate_iregister_slots[10] + 1))
 #define ATTR_allocate_iregister_slots___IRegister____local_iroutine(recv) ATTR(recv, (SFT_allocate_iregister_slots[10] + 2))
 #define ATTR_allocate_iregister_slots___IRegister____in_tag_slots(recv) ATTR(recv, (SFT_allocate_iregister_slots[10] + 3))
+#define ATTR_allocate_iregister_slots___IRegister____first(recv) ATTR(recv, (SFT_allocate_iregister_slots[10] + 4))
+#define ATTR_allocate_iregister_slots___IRegister____last(recv) ATTR(recv, (SFT_allocate_iregister_slots[10] + 5))
+#define ATTR_allocate_iregister_slots___IRegister____born_rank(recv) ATTR(recv, (SFT_allocate_iregister_slots[10] + 6))
 #define CALL_allocate_iregister_slots___IRegister___slot_index(recv) ((allocate_iregister_slots___IRegister___slot_index_t)CALL((recv), (SFT_allocate_iregister_slots[11] + 0)))
 #define CALL_allocate_iregister_slots___IRegister___slot_index__eq(recv) ((allocate_iregister_slots___IRegister___slot_index__eq_t)CALL((recv), (SFT_allocate_iregister_slots[11] + 1)))
 #define CALL_allocate_iregister_slots___IRegister___is_local(recv) ((allocate_iregister_slots___IRegister___is_local_t)CALL((recv), (SFT_allocate_iregister_slots[11] + 2)))
@@ -56,83 +58,89 @@ extern const int SFT_allocate_iregister_slots[];
 #define CALL_allocate_iregister_slots___IRegister___local_iroutine__eq(recv) ((allocate_iregister_slots___IRegister___local_iroutine__eq_t)CALL((recv), (SFT_allocate_iregister_slots[11] + 5)))
 #define CALL_allocate_iregister_slots___IRegister___in_tag_slots(recv) ((allocate_iregister_slots___IRegister___in_tag_slots_t)CALL((recv), (SFT_allocate_iregister_slots[11] + 6)))
 #define CALL_allocate_iregister_slots___IRegister___in_tag_slots__eq(recv) ((allocate_iregister_slots___IRegister___in_tag_slots__eq_t)CALL((recv), (SFT_allocate_iregister_slots[11] + 7)))
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_read "allocate_iregister_slots::IRegisterSlotAllocationVisitor::(icode_tools::ICodeVisitor::visit_iregister_read)"
-void allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_read(val_t p0, val_t p1, val_t p2);
-typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_read_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_write "allocate_iregister_slots::IRegisterSlotAllocationVisitor::(icode_tools::ICodeVisitor::visit_iregister_write)"
-void allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_write(val_t p0, val_t p1, val_t p2);
-typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_write_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_icode "allocate_iregister_slots::IRegisterSlotAllocationVisitor::(icode_tools::ICodeVisitor::visit_icode)"
-void allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_icode(val_t p0, val_t p1);
-typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_icode_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_closure_defs "allocate_iregister_slots::IRegisterSlotAllocationVisitor::(icode_tools::ICodeVisitor::visit_closure_defs)"
-void allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_closure_defs(val_t p0, val_t p1);
-typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_closure_defs_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine "allocate_iregister_slots::IRegisterSlotAllocationVisitor::(icode_tools::ICodeVisitor::visit_iroutine)"
-void allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine(val_t p0, val_t p1);
-typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality "allocate_iregister_slots::IRegisterSlotAllocationVisitor::mark_locality"
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::mark_locality";
 void allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality(val_t p0, val_t p1);
 typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free "allocate_iregister_slots::IRegisterSlotAllocationVisitor::deferred_free"
-void allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free(val_t p0, val_t p1);
-typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___register "allocate_iregister_slots::IRegisterSlotAllocationVisitor::register"
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_read = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::(icode_tools::ICodeVisitor::visit_iregister_read)";
+void allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_read(val_t p0, val_t p1, val_t p2);
+typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_read_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_write = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::(icode_tools::ICodeVisitor::visit_iregister_write)";
+void allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_write(val_t p0, val_t p1, val_t p2);
+typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_write_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::deferred_free";
+void allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free(val_t p0);
+typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free_t)(val_t p0);
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_icode = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::(icode_tools::ICodeVisitor::visit_icode)";
+void allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_icode(val_t p0, val_t p1);
+typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_icode_t)(val_t p0, val_t p1);
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_closure_defs = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::(icode_tools::ICodeVisitor::visit_closure_defs)";
+void allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_closure_defs(val_t p0, val_t p1);
+typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_closure_defs_t)(val_t p0, val_t p1);
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::(icode_tools::ICodeVisitor::visit_iroutine)";
+void allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine(val_t p0, val_t p1);
+typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine_t)(val_t p0, val_t p1);
+    typedef void (*CLOS_OC_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine_1_0)(struct stack_frame_t *);
+    void OC_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*OC_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*CLOS_OC_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine_2_0)(struct stack_frame_t *);
+    void OC_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*OC_allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___register = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::register";
 void allocate_iregister_slots___IRegisterSlotAllocationVisitor___register(val_t p0, val_t p1);
 typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___register_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___free "allocate_iregister_slots::IRegisterSlotAllocationVisitor::free"
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___free = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::free";
 void allocate_iregister_slots___IRegisterSlotAllocationVisitor___free(val_t p0, val_t p1);
 typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___free_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___iroutine_slot_allocation "allocate_iregister_slots::IRegisterSlotAllocationVisitor::iroutine_slot_allocation"
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___iroutine_slot_allocation = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::iroutine_slot_allocation";
 void allocate_iregister_slots___IRegisterSlotAllocationVisitor___iroutine_slot_allocation(val_t p0);
 typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___iroutine_slot_allocation_t)(val_t p0);
-#define LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___init "allocate_iregister_slots::IRegisterSlotAllocationVisitor::init"
+static const char * const LOCATE_allocate_iregister_slots___IRegisterSlotAllocationVisitor___init = "allocate_iregister_slots::IRegisterSlotAllocationVisitor::init";
 void allocate_iregister_slots___IRegisterSlotAllocationVisitor___init(val_t p0, val_t p1, int* init_table);
 typedef void (*allocate_iregister_slots___IRegisterSlotAllocationVisitor___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_IRegisterSlotAllocationVisitor_allocate_iregister_slots___IRegisterSlotAllocationVisitor___init(val_t p0);
-#define LOCATE_allocate_iregister_slots___SlotGroup___register "allocate_iregister_slots::SlotGroup::register"
+static const char * const LOCATE_allocate_iregister_slots___SlotGroup___register = "allocate_iregister_slots::SlotGroup::register";
 void allocate_iregister_slots___SlotGroup___register(val_t p0, val_t p1);
 typedef void (*allocate_iregister_slots___SlotGroup___register_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___SlotGroup___free "allocate_iregister_slots::SlotGroup::free"
+static const char * const LOCATE_allocate_iregister_slots___SlotGroup___free = "allocate_iregister_slots::SlotGroup::free";
 void allocate_iregister_slots___SlotGroup___free(val_t p0, val_t p1);
 typedef void (*allocate_iregister_slots___SlotGroup___free_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___SlotGroup___init "allocate_iregister_slots::SlotGroup::init"
+static const char * const LOCATE_allocate_iregister_slots___SlotGroup___init = "allocate_iregister_slots::SlotGroup::init";
 void allocate_iregister_slots___SlotGroup___init(val_t p0, int* init_table);
 typedef void (*allocate_iregister_slots___SlotGroup___init_t)(val_t p0, int* init_table);
 val_t NEW_SlotGroup_allocate_iregister_slots___SlotGroup___init();
-val_t NEW_IRoutine_icode_base___IRoutine___init(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRoutine___std_slots_nb "allocate_iregister_slots::IRoutine::std_slots_nb"
+static const char * const LOCATE_allocate_iregister_slots___IRoutine___std_slots_nb = "allocate_iregister_slots::IRoutine::std_slots_nb";
 val_t allocate_iregister_slots___IRoutine___std_slots_nb(val_t p0);
 typedef val_t (*allocate_iregister_slots___IRoutine___std_slots_nb_t)(val_t p0);
-#define LOCATE_allocate_iregister_slots___IRoutine___tag_slots_nb "allocate_iregister_slots::IRoutine::tag_slots_nb"
+static const char * const LOCATE_allocate_iregister_slots___IRoutine___tag_slots_nb = "allocate_iregister_slots::IRoutine::tag_slots_nb";
 val_t allocate_iregister_slots___IRoutine___tag_slots_nb(val_t p0);
 typedef val_t (*allocate_iregister_slots___IRoutine___tag_slots_nb_t)(val_t p0);
-#define LOCATE_allocate_iregister_slots___IRoutine___allocate_iregister_slots "allocate_iregister_slots::IRoutine::allocate_iregister_slots"
+static const char * const LOCATE_allocate_iregister_slots___IRoutine___allocate_iregister_slots = "allocate_iregister_slots::IRoutine::allocate_iregister_slots";
 void allocate_iregister_slots___IRoutine___allocate_iregister_slots(val_t p0);
 typedef void (*allocate_iregister_slots___IRoutine___allocate_iregister_slots_t)(val_t p0);
-val_t NEW_IRegister_icode_base___IRegister___init(val_t p0);
-#define LOCATE_allocate_iregister_slots___IRegister___slot_index "allocate_iregister_slots::IRegister::slot_index"
+val_t NEW_IRoutine_icode_base___IRoutine___init(val_t p0, val_t p1);
+static const char * const LOCATE_allocate_iregister_slots___IRegister___slot_index = "allocate_iregister_slots::IRegister::slot_index";
 val_t allocate_iregister_slots___IRegister___slot_index(val_t p0);
 typedef val_t (*allocate_iregister_slots___IRegister___slot_index_t)(val_t p0);
-#define LOCATE_allocate_iregister_slots___IRegister___slot_index__eq "allocate_iregister_slots::IRegister::slot_index="
+static const char * const LOCATE_allocate_iregister_slots___IRegister___slot_index__eq = "allocate_iregister_slots::IRegister::slot_index=";
 void allocate_iregister_slots___IRegister___slot_index__eq(val_t p0, val_t p1);
 typedef void (*allocate_iregister_slots___IRegister___slot_index__eq_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRegister___is_local "allocate_iregister_slots::IRegister::is_local"
+static const char * const LOCATE_allocate_iregister_slots___IRegister___is_local = "allocate_iregister_slots::IRegister::is_local";
 val_t allocate_iregister_slots___IRegister___is_local(val_t p0);
 typedef val_t (*allocate_iregister_slots___IRegister___is_local_t)(val_t p0);
-#define LOCATE_allocate_iregister_slots___IRegister___is_local__eq "allocate_iregister_slots::IRegister::is_local="
+static const char * const LOCATE_allocate_iregister_slots___IRegister___is_local__eq = "allocate_iregister_slots::IRegister::is_local=";
 void allocate_iregister_slots___IRegister___is_local__eq(val_t p0, val_t p1);
 typedef void (*allocate_iregister_slots___IRegister___is_local__eq_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRegister___local_iroutine "allocate_iregister_slots::IRegister::local_iroutine"
+static const char * const LOCATE_allocate_iregister_slots___IRegister___local_iroutine = "allocate_iregister_slots::IRegister::local_iroutine";
 val_t allocate_iregister_slots___IRegister___local_iroutine(val_t p0);
 typedef val_t (*allocate_iregister_slots___IRegister___local_iroutine_t)(val_t p0);
-#define LOCATE_allocate_iregister_slots___IRegister___local_iroutine__eq "allocate_iregister_slots::IRegister::local_iroutine="
+static const char * const LOCATE_allocate_iregister_slots___IRegister___local_iroutine__eq = "allocate_iregister_slots::IRegister::local_iroutine=";
 void allocate_iregister_slots___IRegister___local_iroutine__eq(val_t p0, val_t p1);
 typedef void (*allocate_iregister_slots___IRegister___local_iroutine__eq_t)(val_t p0, val_t p1);
-#define LOCATE_allocate_iregister_slots___IRegister___in_tag_slots "allocate_iregister_slots::IRegister::in_tag_slots"
+static const char * const LOCATE_allocate_iregister_slots___IRegister___in_tag_slots = "allocate_iregister_slots::IRegister::in_tag_slots";
 val_t allocate_iregister_slots___IRegister___in_tag_slots(val_t p0);
 typedef val_t (*allocate_iregister_slots___IRegister___in_tag_slots_t)(val_t p0);
-#define LOCATE_allocate_iregister_slots___IRegister___in_tag_slots__eq "allocate_iregister_slots::IRegister::in_tag_slots="
+static const char * const LOCATE_allocate_iregister_slots___IRegister___in_tag_slots__eq = "allocate_iregister_slots::IRegister::in_tag_slots=";
 void allocate_iregister_slots___IRegister___in_tag_slots__eq(val_t p0, val_t p1);
 typedef void (*allocate_iregister_slots___IRegister___in_tag_slots__eq_t)(val_t p0, val_t p1);
+val_t NEW_IRegister_icode_base___IRegister___init(val_t p0);
 #endif

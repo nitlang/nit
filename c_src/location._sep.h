@@ -24,42 +24,42 @@ extern const int SFT_location[];
 #define CALL_location___Location___with_file(recv) ((location___Location___with_file_t)CALL((recv), (SFT_location[3] + 7)))
 #define CALL_location___Location___located_in(recv) ((location___Location___located_in_t)CALL((recv), (SFT_location[3] + 8)))
 #define CALL_location___Location___relative_to(recv) ((location___Location___relative_to_t)CALL((recv), (SFT_location[3] + 9)))
-#define LOCATE_location___Location_____eqeq "location::Location::(kernel::Object::==)"
-val_t location___Location_____eqeq(val_t p0, val_t p1);
-typedef val_t (*location___Location_____eqeq_t)(val_t p0, val_t p1);
-#define LOCATE_location___Location_____l "location::Location::(kernel::Comparable::<)"
-val_t location___Location_____l(val_t p0, val_t p1);
-typedef val_t (*location___Location_____l_t)(val_t p0, val_t p1);
-#define LOCATE_location___Location___to_s "location::Location::(string::Object::to_s)"
-val_t location___Location___to_s(val_t p0);
-typedef val_t (*location___Location___to_s_t)(val_t p0);
-#define LOCATE_location___Location___file "location::Location::file"
+static const char * const LOCATE_location___Location___file = "location::Location::file";
 val_t location___Location___file(val_t p0);
 typedef val_t (*location___Location___file_t)(val_t p0);
-#define LOCATE_location___Location___line_start "location::Location::line_start"
+static const char * const LOCATE_location___Location___line_start = "location::Location::line_start";
 val_t location___Location___line_start(val_t p0);
 typedef val_t (*location___Location___line_start_t)(val_t p0);
-#define LOCATE_location___Location___line_end "location::Location::line_end"
+static const char * const LOCATE_location___Location___line_end = "location::Location::line_end";
 val_t location___Location___line_end(val_t p0);
 typedef val_t (*location___Location___line_end_t)(val_t p0);
-#define LOCATE_location___Location___column_start "location::Location::column_start"
+static const char * const LOCATE_location___Location___column_start = "location::Location::column_start";
 val_t location___Location___column_start(val_t p0);
 typedef val_t (*location___Location___column_start_t)(val_t p0);
-#define LOCATE_location___Location___column_end "location::Location::column_end"
+static const char * const LOCATE_location___Location___column_end = "location::Location::column_end";
 val_t location___Location___column_end(val_t p0);
 typedef val_t (*location___Location___column_end_t)(val_t p0);
-#define LOCATE_location___Location___init "location::Location::init"
+static const char * const LOCATE_location___Location___init = "location::Location::init";
 void location___Location___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
 typedef void (*location___Location___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
 val_t NEW_Location_location___Location___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_location___Location___with_file "location::Location::with_file"
+static const char * const LOCATE_location___Location___with_file = "location::Location::with_file";
 void location___Location___with_file(val_t p0, val_t p1, int* init_table);
 typedef void (*location___Location___with_file_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_Location_location___Location___with_file(val_t p0);
-#define LOCATE_location___Location___located_in "location::Location::located_in"
+static const char * const LOCATE_location___Location_____eqeq = "location::Location::(kernel::Object::==)";
+val_t location___Location_____eqeq(val_t p0, val_t p1);
+typedef val_t (*location___Location_____eqeq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_location___Location___located_in = "location::Location::located_in";
 val_t location___Location___located_in(val_t p0, val_t p1);
 typedef val_t (*location___Location___located_in_t)(val_t p0, val_t p1);
-#define LOCATE_location___Location___relative_to "location::Location::relative_to"
+static const char * const LOCATE_location___Location___to_s = "location::Location::(string::Object::to_s)";
+val_t location___Location___to_s(val_t p0);
+typedef val_t (*location___Location___to_s_t)(val_t p0);
+static const char * const LOCATE_location___Location___relative_to = "location::Location::relative_to";
 val_t location___Location___relative_to(val_t p0, val_t p1);
 typedef val_t (*location___Location___relative_to_t)(val_t p0, val_t p1);
+static const char * const LOCATE_location___Location_____l = "location::Location::(kernel::Comparable::<)";
+val_t location___Location_____l(val_t p0, val_t p1);
+typedef val_t (*location___Location_____l_t)(val_t p0, val_t p1);
 #endif

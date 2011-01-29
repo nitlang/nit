@@ -72,6 +72,7 @@ extern const int SFT_opts[];
 #define ATTR_opts___OptionEnum____enum(recv) ATTR(recv, (SFT_opts[21] + 0))
 #define INIT_TABLE_POS_OptionEnum (SFT_opts[22] + 0)
 #define CALL_opts___OptionEnum___init(recv) ((opts___OptionEnum___init_t)CALL((recv), (SFT_opts[22] + 1)))
+#define CALL_opts___OptionEnum___value_name(recv) ((opts___OptionEnum___value_name_t)CALL((recv), (SFT_opts[22] + 2)))
 #define ID_OptionInt (SFT_opts[23])
 #define COLOR_OptionInt (SFT_opts[24])
 #define INIT_TABLE_POS_OptionInt (SFT_opts[25] + 0)
@@ -95,137 +96,140 @@ extern const int SFT_opts[];
 #define CALL_opts___OptionContext___add_option(recv) ((opts___OptionContext___add_option_t)CALL((recv), (SFT_opts[33] + 6)))
 #define CALL_opts___OptionContext___init(recv) ((opts___OptionContext___init_t)CALL((recv), (SFT_opts[33] + 7)))
 #define CALL_opts___OptionContext___build(recv) ((opts___OptionContext___build_t)CALL((recv), (SFT_opts[33] + 8)))
-#define LOCATE_opts___Option___to_s "opts::Option::(string::Object::to_s)"
-val_t opts___Option___to_s(val_t p0);
-typedef val_t (*opts___Option___to_s_t)(val_t p0);
-#define LOCATE_opts___Option___names "opts::Option::names"
+static const char * const LOCATE_opts___Option___names = "opts::Option::names";
 val_t opts___Option___names(val_t p0);
 typedef val_t (*opts___Option___names_t)(val_t p0);
-#define LOCATE_opts___Option___helptext "opts::Option::helptext"
+static const char * const LOCATE_opts___Option___helptext = "opts::Option::helptext";
 val_t opts___Option___helptext(val_t p0);
 typedef val_t (*opts___Option___helptext_t)(val_t p0);
-#define LOCATE_opts___Option___mandatory "opts::Option::mandatory"
+static const char * const LOCATE_opts___Option___mandatory = "opts::Option::mandatory";
 val_t opts___Option___mandatory(val_t p0);
 typedef val_t (*opts___Option___mandatory_t)(val_t p0);
-#define LOCATE_opts___Option___mandatory__eq "opts::Option::mandatory="
+static const char * const LOCATE_opts___Option___mandatory__eq = "opts::Option::mandatory=";
 void opts___Option___mandatory__eq(val_t p0, val_t p1);
 typedef void (*opts___Option___mandatory__eq_t)(val_t p0, val_t p1);
-#define LOCATE_opts___Option___value__eq "opts::Option::value="
+static const char * const LOCATE_opts___Option___value__eq = "opts::Option::value=";
 void opts___Option___value__eq(val_t p0, val_t p1);
 typedef void (*opts___Option___value__eq_t)(val_t p0, val_t p1);
-#define LOCATE_opts___Option___value "opts::Option::value"
+static const char * const LOCATE_opts___Option___value = "opts::Option::value";
 val_t opts___Option___value(val_t p0);
 typedef val_t (*opts___Option___value_t)(val_t p0);
-#define LOCATE_opts___Option___default_value "opts::Option::default_value"
+static const char * const LOCATE_opts___Option___default_value = "opts::Option::default_value";
 val_t opts___Option___default_value(val_t p0);
 typedef val_t (*opts___Option___default_value_t)(val_t p0);
-#define LOCATE_opts___Option___default_value__eq "opts::Option::default_value="
+static const char * const LOCATE_opts___Option___default_value__eq = "opts::Option::default_value=";
 void opts___Option___default_value__eq(val_t p0, val_t p1);
 typedef void (*opts___Option___default_value__eq_t)(val_t p0, val_t p1);
-#define LOCATE_opts___Option___init_opt "opts::Option::init_opt"
+static const char * const LOCATE_opts___Option___init_opt = "opts::Option::init_opt";
 void opts___Option___init_opt(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*opts___Option___init_opt_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_Option_opts___Option___init_opt(val_t p0, val_t p1, val_t p2);
-#define LOCATE_opts___Option___add_aliases "opts::Option::add_aliases"
+static const char * const LOCATE_opts___Option___add_aliases = "opts::Option::add_aliases";
 void opts___Option___add_aliases(val_t p0, val_t p1);
 typedef void (*opts___Option___add_aliases_t)(val_t p0, val_t p1);
-#define LOCATE_opts___Option___pretty "opts::Option::pretty"
+static const char * const LOCATE_opts___Option___to_s = "opts::Option::(string::Object::to_s)";
+val_t opts___Option___to_s(val_t p0);
+typedef val_t (*opts___Option___to_s_t)(val_t p0);
+static const char * const LOCATE_opts___Option___pretty = "opts::Option::pretty";
 val_t opts___Option___pretty(val_t p0, val_t p1);
 typedef val_t (*opts___Option___pretty_t)(val_t p0, val_t p1);
-#define LOCATE_opts___Option___pretty_default "opts::Option::pretty_default"
+static const char * const LOCATE_opts___Option___pretty_default = "opts::Option::pretty_default";
 val_t opts___Option___pretty_default(val_t p0);
 typedef val_t (*opts___Option___pretty_default_t)(val_t p0);
-#define LOCATE_opts___Option___read_param "opts::Option::read_param"
+static const char * const LOCATE_opts___Option___read_param = "opts::Option::read_param";
 void opts___Option___read_param(val_t p0, val_t p1);
 typedef void (*opts___Option___read_param_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionText___to_s "opts::OptionText::(string::Object::to_s)"
-val_t opts___OptionText___to_s(val_t p0);
-typedef val_t (*opts___OptionText___to_s_t)(val_t p0);
-#define LOCATE_opts___OptionText___pretty "opts::OptionText::(opts::Option::pretty)"
-val_t opts___OptionText___pretty(val_t p0, val_t p1);
-typedef val_t (*opts___OptionText___pretty_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionText___init "opts::OptionText::init"
+static const char * const LOCATE_opts___OptionText___init = "opts::OptionText::init";
 void opts___OptionText___init(val_t p0, val_t p1, int* init_table);
 typedef void (*opts___OptionText___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_OptionText_opts___OptionText___init(val_t p0);
-#define LOCATE_opts___OptionBool___read_param "opts::OptionBool::(opts::Option::read_param)"
-void opts___OptionBool___read_param(val_t p0, val_t p1);
-typedef void (*opts___OptionBool___read_param_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionBool___init "opts::OptionBool::init"
+static const char * const LOCATE_opts___OptionText___pretty = "opts::OptionText::(opts::Option::pretty)";
+val_t opts___OptionText___pretty(val_t p0, val_t p1);
+typedef val_t (*opts___OptionText___pretty_t)(val_t p0, val_t p1);
+static const char * const LOCATE_opts___OptionText___to_s = "opts::OptionText::(string::Object::to_s)";
+val_t opts___OptionText___to_s(val_t p0);
+typedef val_t (*opts___OptionText___to_s_t)(val_t p0);
+static const char * const LOCATE_opts___OptionBool___init = "opts::OptionBool::init";
 void opts___OptionBool___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*opts___OptionBool___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_OptionBool_opts___OptionBool___init(val_t p0, val_t p1);
-#define LOCATE_opts___OptionCount___read_param "opts::OptionCount::(opts::Option::read_param)"
-void opts___OptionCount___read_param(val_t p0, val_t p1);
-typedef void (*opts___OptionCount___read_param_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionCount___init "opts::OptionCount::init"
+static const char * const LOCATE_opts___OptionBool___read_param = "opts::OptionBool::(opts::Option::read_param)";
+void opts___OptionBool___read_param(val_t p0, val_t p1);
+typedef void (*opts___OptionBool___read_param_t)(val_t p0, val_t p1);
+static const char * const LOCATE_opts___OptionCount___init = "opts::OptionCount::init";
 void opts___OptionCount___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*opts___OptionCount___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_OptionCount_opts___OptionCount___init(val_t p0, val_t p1);
-#define LOCATE_opts___OptionParameter___read_param "opts::OptionParameter::(opts::Option::read_param)"
-void opts___OptionParameter___read_param(val_t p0, val_t p1);
-typedef void (*opts___OptionParameter___read_param_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionParameter___convert "opts::OptionParameter::convert"
+static const char * const LOCATE_opts___OptionCount___read_param = "opts::OptionCount::(opts::Option::read_param)";
+void opts___OptionCount___read_param(val_t p0, val_t p1);
+typedef void (*opts___OptionCount___read_param_t)(val_t p0, val_t p1);
+static const char * const LOCATE_opts___OptionParameter___convert = "opts::OptionParameter::convert";
 val_t opts___OptionParameter___convert(val_t p0, val_t p1);
 typedef val_t (*opts___OptionParameter___convert_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionParameter___init_opt "opts::OptionParameter::init_opt"
+static const char * const LOCATE_opts___OptionParameter___read_param = "opts::OptionParameter::(opts::Option::read_param)";
+void opts___OptionParameter___read_param(val_t p0, val_t p1);
+typedef void (*opts___OptionParameter___read_param_t)(val_t p0, val_t p1);
+static const char * const LOCATE_opts___OptionParameter___init_opt = "opts::OptionParameter::init_opt";
 void opts___OptionParameter___init_opt(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*opts___OptionParameter___init_opt_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_OptionParameter_opts___OptionParameter___init_opt(val_t p0, val_t p1, val_t p2);
-#define LOCATE_opts___OptionString___convert "opts::OptionString::(opts::OptionParameter::convert)"
-val_t opts___OptionString___convert(val_t p0, val_t p1);
-typedef val_t (*opts___OptionString___convert_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionString___init "opts::OptionString::init"
+static const char * const LOCATE_opts___OptionString___init = "opts::OptionString::init";
 void opts___OptionString___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*opts___OptionString___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_OptionString_opts___OptionString___init(val_t p0, val_t p1);
-#define LOCATE_opts___OptionEnum___pretty_default "opts::OptionEnum::(opts::Option::pretty_default)"
-val_t opts___OptionEnum___pretty_default(val_t p0);
-typedef val_t (*opts___OptionEnum___pretty_default_t)(val_t p0);
-#define LOCATE_opts___OptionEnum___convert "opts::OptionEnum::(opts::OptionParameter::convert)"
-val_t opts___OptionEnum___convert(val_t p0, val_t p1);
-typedef val_t (*opts___OptionEnum___convert_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionEnum___init "opts::OptionEnum::init"
+static const char * const LOCATE_opts___OptionString___convert = "opts::OptionString::(opts::OptionParameter::convert)";
+val_t opts___OptionString___convert(val_t p0, val_t p1);
+typedef val_t (*opts___OptionString___convert_t)(val_t p0, val_t p1);
+static const char * const LOCATE_opts___OptionEnum___init = "opts::OptionEnum::init";
 void opts___OptionEnum___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 typedef void (*opts___OptionEnum___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 val_t NEW_OptionEnum_opts___OptionEnum___init(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_opts___OptionInt___convert "opts::OptionInt::(opts::OptionParameter::convert)"
-val_t opts___OptionInt___convert(val_t p0, val_t p1);
-typedef val_t (*opts___OptionInt___convert_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionInt___init "opts::OptionInt::init"
+static const char * const LOCATE_opts___OptionEnum___convert = "opts::OptionEnum::(opts::OptionParameter::convert)";
+val_t opts___OptionEnum___convert(val_t p0, val_t p1);
+typedef val_t (*opts___OptionEnum___convert_t)(val_t p0, val_t p1);
+static const char * const LOCATE_opts___OptionEnum___value_name = "opts::OptionEnum::value_name";
+val_t opts___OptionEnum___value_name(val_t p0);
+typedef val_t (*opts___OptionEnum___value_name_t)(val_t p0);
+static const char * const LOCATE_opts___OptionEnum___pretty_default = "opts::OptionEnum::(opts::Option::pretty_default)";
+val_t opts___OptionEnum___pretty_default(val_t p0);
+typedef val_t (*opts___OptionEnum___pretty_default_t)(val_t p0);
+static const char * const LOCATE_opts___OptionInt___init = "opts::OptionInt::init";
 void opts___OptionInt___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*opts___OptionInt___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_OptionInt_opts___OptionInt___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_opts___OptionArray___convert "opts::OptionArray::(opts::OptionParameter::convert)"
-val_t opts___OptionArray___convert(val_t p0, val_t p1);
-typedef val_t (*opts___OptionArray___convert_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionArray___init "opts::OptionArray::init"
+static const char * const LOCATE_opts___OptionInt___convert = "opts::OptionInt::(opts::OptionParameter::convert)";
+val_t opts___OptionInt___convert(val_t p0, val_t p1);
+typedef val_t (*opts___OptionInt___convert_t)(val_t p0, val_t p1);
+static const char * const LOCATE_opts___OptionArray___init = "opts::OptionArray::init";
 void opts___OptionArray___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*opts___OptionArray___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_OptionArray_opts___OptionArray___init(val_t p0, val_t p1);
-#define LOCATE_opts___OptionContext___options "opts::OptionContext::options"
+static const char * const LOCATE_opts___OptionArray___convert = "opts::OptionArray::(opts::OptionParameter::convert)";
+val_t opts___OptionArray___convert(val_t p0, val_t p1);
+typedef val_t (*opts___OptionArray___convert_t)(val_t p0, val_t p1);
+static const char * const LOCATE_opts___OptionContext___options = "opts::OptionContext::options";
 val_t opts___OptionContext___options(val_t p0);
 typedef val_t (*opts___OptionContext___options_t)(val_t p0);
-#define LOCATE_opts___OptionContext___rest "opts::OptionContext::rest"
+static const char * const LOCATE_opts___OptionContext___rest = "opts::OptionContext::rest";
 val_t opts___OptionContext___rest(val_t p0);
 typedef val_t (*opts___OptionContext___rest_t)(val_t p0);
-#define LOCATE_opts___OptionContext___usage "opts::OptionContext::usage"
+static const char * const LOCATE_opts___OptionContext___usage = "opts::OptionContext::usage";
 void opts___OptionContext___usage(val_t p0);
 typedef void (*opts___OptionContext___usage_t)(val_t p0);
-#define LOCATE_opts___OptionContext___parse "opts::OptionContext::parse"
+static const char * const LOCATE_opts___OptionContext___parse = "opts::OptionContext::parse";
 void opts___OptionContext___parse(val_t p0, val_t p1);
 typedef void (*opts___OptionContext___parse_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionContext___parse_intern "opts::OptionContext::parse_intern"
+static const char * const LOCATE_opts___OptionContext___parse_intern = "opts::OptionContext::parse_intern";
 void opts___OptionContext___parse_intern(val_t p0, val_t p1);
 typedef void (*opts___OptionContext___parse_intern_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionContext___add_option "opts::OptionContext::add_option"
+static const char * const LOCATE_opts___OptionContext___add_option = "opts::OptionContext::add_option";
 void opts___OptionContext___add_option(val_t p0, val_t p1);
 typedef void (*opts___OptionContext___add_option_t)(val_t p0, val_t p1);
-#define LOCATE_opts___OptionContext___init "opts::OptionContext::init"
+static const char * const LOCATE_opts___OptionContext___init = "opts::OptionContext::init";
 void opts___OptionContext___init(val_t p0, int* init_table);
 typedef void (*opts___OptionContext___init_t)(val_t p0, int* init_table);
 val_t NEW_OptionContext_opts___OptionContext___init();
-#define LOCATE_opts___OptionContext___build "opts::OptionContext::build"
+static const char * const LOCATE_opts___OptionContext___build = "opts::OptionContext::build";
 void opts___OptionContext___build(val_t p0);
 typedef void (*opts___OptionContext___build_t)(val_t p0);
 #endif

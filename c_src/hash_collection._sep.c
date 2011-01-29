@@ -12,13 +12,11 @@ val_t hash_collection___HashCollection___length(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   /* ./../lib/standard//collection//hash_collection.nit:25 */
+  REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 25);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_hash_collection, 25);
   }
   REGB0 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -35,24 +33,61 @@ val_t hash_collection___HashCollection___first_item(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[0] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
   /* ./../lib/standard//collection//hash_collection.nit:27 */
+  fra.me.REG[0] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
 val_t hash_collection___HashCollection___index_at(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t REGB1;
-  val_t REGB2;
-  val_t REGB3;
-  val_t REGB4;
-  val_t REGB5;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
   fra.me.line = 36;
   fra.me.meth = LOCATE_hash_collection___HashCollection___index_at;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:39 */
+  REGB0 = CALL_hash___Object___hash(fra.me.REG[1])(fra.me.REG[1]);
+  REGB1 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_capacity", LOCATE_hash_collection, 39);
+  }
+  REGB1 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
+  /* ./../lib/standard//kernel.nit:220 */
+  REGB1 = TAG_Int(UNTAG_Int(REGB0)%UNTAG_Int(REGB1));
+  /* ./../lib/standard//collection//hash_collection.nit:40 */
+  REGB0 = TAG_Int(0);
+  /* ./../lib/standard//kernel.nit:212 */
+  REGB0 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
+  /* ./../lib/standard//collection//hash_collection.nit:40 */
+  if (UNTAG_Bool(REGB0)) {
+    /* ./../lib/standard//kernel.nit:216 */
+    REGB0 = TAG_Int(-UNTAG_Int(REGB1));
+    /* ./../lib/standard//collection//hash_collection.nit:40 */
+    REGB1 = REGB0;
+  }
+  /* ./../lib/standard//collection//hash_collection.nit:41 */
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB1;
+}
+val_t hash_collection___HashCollection___node_at(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 44;
+  fra.me.meth = LOCATE_hash_collection___HashCollection___node_at;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
   fra.me.REG[0] = NIT_NULL;
@@ -61,154 +96,28 @@ val_t hash_collection___HashCollection___index_at(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-  fra.me.REG[3] = ATTR_hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]);
-  REGB0 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[1],fra.me.REG[3]));
-  /* ./../lib/standard//collection//hash_collection.nit:42 */
+  /* ./../lib/standard//collection//hash_collection.nit:48 */
+  fra.me.REG[2] = ATTR_hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]);
+  REGB0 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[1],fra.me.REG[2]));
   if (UNTAG_Bool(REGB0)) {
-  } else {
-    REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-    REGB0 = REGB1;
-  }
-  if (UNTAG_Bool(REGB0)) {
-    REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____last_accessed_index(fra.me.REG[0])!=NIT_NULL);
-    if (UNTAG_Bool(REGB0)) {
-    } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_last_accessed_index");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 42);
-      nit_exit(1);
-    }
-    REGB0 = ATTR_hash_collection___HashCollection____last_accessed_index(fra.me.REG[0]);
+    fra.me.REG[2] = ATTR_hash_collection___HashCollection____last_accessed_node(fra.me.REG[0]);
     goto label1;
   }
-  REGB1 = CALL_hash___Object___hash(fra.me.REG[1])(fra.me.REG[1]);
-  REGB2 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:45 */
-  if (UNTAG_Bool(REGB2)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 45);
-    nit_exit(1);
-  }
-  REGB2 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
-  REGB2 = TAG_Int(UNTAG_Int(REGB1)%UNTAG_Int(REGB2));
-  REGB1 = TAG_Int(0);
-  REGB1 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:46 */
-  if (UNTAG_Bool(REGB1)) {
-    REGB1 = TAG_Int(-UNTAG_Int(REGB2));
-    REGB2 = REGB1;
-  /* ./../lib/standard//collection//hash_collection.nit:46 */
-  }
-  REGB1 = REGB2;
   /* ./../lib/standard//collection//hash_collection.nit:50 */
-  while(1) {
-    REGB3 = TAG_Bool(true);
-    if (UNTAG_Bool(REGB3)) {
-      REGB3 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:51 */
-      if (UNTAG_Bool(REGB3)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 51);
-        nit_exit(1);
-      }
-      fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB1)];
-      REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:52 */
-      if (UNTAG_Bool(REGB3)) {
-      } else {
-        REGB4 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-        if (UNTAG_Bool(REGB4)) {
-          REGB4 = TAG_Bool(false);
-          REGB3 = REGB4;
-        } else {
-          REGB4 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
-          REGB3 = REGB4;
-        }
-      }
-      if (UNTAG_Bool(REGB3)) {
-        REGB3 = TAG_Bool(true);
-      } else {
-        REGB4 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-        if (UNTAG_Bool(REGB4)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 52);
-          nit_exit(1);
-        }
-        fra.me.REG[3] = CALL_hash_collection___HashNode___key(fra.me.REG[3])(fra.me.REG[3]);
-        REGB4 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[1],fra.me.REG[3]));
-        if (UNTAG_Bool(REGB4)) {
-        } else {
-          REGB5 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-          if (UNTAG_Bool(REGB5)) {
-            REGB5 = TAG_Bool(false);
-            REGB4 = REGB5;
-          } else {
-            REGB5 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
-            REGB4 = REGB5;
-          }
-        }
-        REGB3 = REGB4;
-      }
-      if (UNTAG_Bool(REGB3)) {
-        /* ./../lib/standard//collection//hash_collection.nit:53 */
-        ATTR_hash_collection___HashCollection____last_accessed_index(fra.me.REG[0]) = REGB1;
-        /* ./../lib/standard//collection//hash_collection.nit:54 */
-        ATTR_hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = fra.me.REG[1];
-        REGB0 = REGB1;
-        /* ./../lib/standard//collection//hash_collection.nit:55 */
-        goto label1;
-      }
-      REGB3 = TAG_Int(1);
-      REGB3 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB3));
-      REGB1 = REGB3;
-      REGB3 = TAG_Int(0);
-      REGB3 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB3));
-      /* ./../lib/standard//collection//hash_collection.nit:58 */
-      if (UNTAG_Bool(REGB3)) {
-        REGB3 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-        if (UNTAG_Bool(REGB3)) {
-        } else {
-          fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 58);
-          nit_exit(1);
-        }
-        REGB3 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
-        REGB4 = TAG_Int(1);
-        REGB4 = TAG_Int(UNTAG_Int(REGB3)-UNTAG_Int(REGB4));
-        REGB1 = REGB4;
-      /* ./../lib/standard//collection//hash_collection.nit:58 */
-      }
-      REGB4 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB2));
-      /* ./../lib/standard//collection//hash_collection.nit:59 */
-      if (UNTAG_Bool(REGB4)) {
-      } else {
-        REGB3 = TAG_Bool((REGB1)==(REGB2));
-        REGB4 = REGB3;
-      /* ./../lib/standard//collection//hash_collection.nit:59 */
-      }
-      REGB4 = TAG_Bool(!UNTAG_Bool(REGB4));
-      if (UNTAG_Bool(REGB4)) {
-      } else {
-        fprintf(stderr, "Assert %s  failed", "'no_loop'");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 59);
-        nit_exit(1);
-      }
-    } else {
-      /* ./../lib/standard//collection//hash_collection.nit:50 */
-      goto label2;
-    }
-  }
-  label2: while(0);
-  /* ./../lib/standard//collection//hash_collection.nit:61 */
-  fprintf(stderr, "Aborted");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 61);
-  nit_exit(1);
+  REGB0 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  fra.me.REG[3] = CALL_hash_collection___HashCollection___node_at_idx(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
+  /* ./../lib/standard//collection//hash_collection.nit:51 */
+  ATTR_hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = fra.me.REG[1];
+  /* ./../lib/standard//collection//hash_collection.nit:52 */
+  ATTR_hash_collection___HashCollection____last_accessed_node(fra.me.REG[0]) = fra.me.REG[3];
+  /* ./../lib/standard//collection//hash_collection.nit:53 */
+  fra.me.REG[2] = fra.me.REG[3];
+  goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return REGB0;
+  return fra.me.REG[2];
 }
-void hash_collection___HashCollection___store(val_t p0, val_t p1, val_t p2){
+val_t hash_collection___HashCollection___node_at_idx(val_t p0, val_t p1, val_t p2){
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t REGB1;
@@ -216,8 +125,8 @@ void hash_collection___HashCollection___store(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 64;
-  fra.me.meth = LOCATE_hash_collection___HashCollection___store;
+  fra.me.line = 56;
+  fra.me.meth = LOCATE_hash_collection___HashCollection___node_at_idx;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
   fra.me.REG[0] = NIT_NULL;
@@ -226,9 +135,91 @@ void hash_collection___HashCollection___store(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   REGB0 = p1;
   fra.me.REG[1] = p2;
+  /* ./../lib/standard//collection//hash_collection.nit:59 */
+  fra.me.REG[0] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
+  REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+    nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 59);
+  }
+  /* ./../lib/standard//collection//array.nit:654 */
+  fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
+  /* ./../lib/standard//collection//hash_collection.nit:60 */
+  while(1) {
+    REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+    if (UNTAG_Bool(REGB0)) {
+    } else {
+      REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        REGB1 = TAG_Bool(false);
+        REGB0 = REGB1;
+      } else {
+        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
+        REGB0 = REGB1;
+      }
+    }
+    REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+    if (UNTAG_Bool(REGB0)) {
+      /* ./../lib/standard//collection//hash_collection.nit:61 */
+      REGB0 = TAG_Bool(ATTR_hash_collection___HashNode____key(fra.me.REG[0])!=NIT_NULL);
+      if (UNTAG_Bool(REGB0)) {
+      } else {
+        nit_abort("Uninitialized attribute %s", "_key", LOCATE_hash_collection, 61);
+      }
+      fra.me.REG[2] = ATTR_hash_collection___HashNode____key(fra.me.REG[0]);
+      /* ./../lib/standard//collection//hash_collection.nit:62 */
+      REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[1]));
+      if (UNTAG_Bool(REGB0)) {
+        REGB0 = TAG_Bool(true);
+      } else {
+        REGB1 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[1]));
+        if (UNTAG_Bool(REGB1)) {
+        } else {
+          REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+          REGB1 = REGB2;
+        }
+        REGB0 = REGB1;
+      }
+      if (UNTAG_Bool(REGB0)) {
+        /* ./../lib/standard//collection//hash_collection.nit:63 */
+        goto label1;
+      }
+      /* ./../lib/standard//collection//hash_collection.nit:65 */
+      fra.me.REG[2] = ATTR_hash_collection___HashNode____next_in_bucklet(fra.me.REG[0]);
+      fra.me.REG[0] = fra.me.REG[2];
+    } else {
+      /* ./../lib/standard//collection//hash_collection.nit:60 */
+      goto label1;
+    }
+  }
+  label1: while(0);
+  /* ./../lib/standard//collection//hash_collection.nit:67 */
+  goto label2;
+  label2: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+void hash_collection___HashCollection___store(val_t p0, val_t p1, val_t p2){
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t REGB2;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 70;
+  fra.me.meth = LOCATE_hash_collection___HashCollection___store;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 4;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  REGB0 = p1;
+  fra.me.REG[1] = p2;
+  /* ./../lib/standard//collection//hash_collection.nit:74 */
   fra.me.REG[2] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:68 */
   if (UNTAG_Bool(REGB1)) {
   } else {
     REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
@@ -241,157 +232,142 @@ void hash_collection___HashCollection___store(val_t p0, val_t p1, val_t p2){
     }
   }
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//collection//hash_collection.nit:69 */
+    /* ./../lib/standard//collection//hash_collection.nit:75 */
     ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]) = fra.me.REG[1];
   } else {
+    /* ./../lib/standard//collection//hash_collection.nit:77 */
     fra.me.REG[2] = ATTR_hash_collection___HashCollection____last_item(fra.me.REG[0]);
     REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-    /* ./../lib/standard//collection//hash_collection.nit:71 */
     if (UNTAG_Bool(REGB1)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 71);
-      nit_exit(1);
+      nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 77);
     }
-    CALL_hash_collection___HashNode___next_item__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+    ATTR_hash_collection___HashNode____next_item(fra.me.REG[2]) = fra.me.REG[1];
   }
-  fra.me.REG[2] = ATTR_hash_collection___HashCollection____last_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:73 */
-  CALL_hash_collection___HashNode___prev_item__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./../lib/standard//collection//hash_collection.nit:74 */
-  CALL_hash_collection___HashNode___next_item__eq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:75 */
-  ATTR_hash_collection___HashCollection____last_item(fra.me.REG[0]) = fra.me.REG[1];
-  fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-  REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:77 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 77);
-    nit_exit(1);
-  }
-  fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-  REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:77 */
-  if (UNTAG_Bool(REGB1)) {
-  } else {
-    REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-    if (UNTAG_Bool(REGB2)) {
-      REGB2 = TAG_Bool(false);
-      REGB1 = REGB2;
-    } else {
-      REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
-      REGB1 = REGB2;
-    }
-  }
-  if (UNTAG_Bool(REGB1)) {
-  } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 77);
-    nit_exit(1);
-  }
-  fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-  REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:78 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 78);
-    nit_exit(1);
-  }
-  /* ./../lib/standard//collection//array.nit:591 */
-  ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)]=fra.me.REG[1];
-  REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   /* ./../lib/standard//collection//hash_collection.nit:79 */
+  fra.me.REG[2] = ATTR_hash_collection___HashCollection____last_item(fra.me.REG[0]);
+  ATTR_hash_collection___HashNode____prev_item(fra.me.REG[1]) = fra.me.REG[2];
+  /* ./../lib/standard//collection//hash_collection.nit:80 */
+  ATTR_hash_collection___HashNode____next_item(fra.me.REG[1]) = NIT_NULL;
+  /* ./../lib/standard//collection//hash_collection.nit:81 */
+  ATTR_hash_collection___HashCollection____last_item(fra.me.REG[0]) = fra.me.REG[1];
+  /* ./../lib/standard//collection//hash_collection.nit:84 */
+  fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
+  REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+    nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 84);
+  }
+  /* ./../lib/standard//collection//array.nit:654 */
+  fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
+  /* ./../lib/standard//collection//hash_collection.nit:85 */
+  fra.me.REG[3] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
+  REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+    nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 85);
+  }
+  /* ./../lib/standard//collection//array.nit:655 */
+  ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)]=fra.me.REG[1];
+  /* ./../lib/standard//collection//hash_collection.nit:86 */
+  ATTR_hash_collection___HashNode____next_in_bucklet(fra.me.REG[1]) = fra.me.REG[2];
+  /* ./../lib/standard//collection//hash_collection.nit:87 */
+  REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 79);
-    nit_exit(1);
+    REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+      REGB1 = TAG_Bool(false);
+      REGB0 = REGB1;
+    } else {
+      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+      REGB0 = REGB1;
+    }
+  }
+  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+  if (UNTAG_Bool(REGB0)) {
+    ATTR_hash_collection___HashNode____prev_in_bucklet(fra.me.REG[2]) = fra.me.REG[1];
+  }
+  /* ./../lib/standard//collection//hash_collection.nit:89 */
+  REGB0 = TAG_Bool(ATTR_hash_collection___HashNode____key(fra.me.REG[1])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_key", LOCATE_hash_collection, 89);
+  }
+  fra.me.REG[2] = ATTR_hash_collection___HashNode____key(fra.me.REG[1]);
+  ATTR_hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = fra.me.REG[2];
+  /* ./../lib/standard//collection//hash_collection.nit:90 */
+  ATTR_hash_collection___HashCollection____last_accessed_node(fra.me.REG[0]) = fra.me.REG[1];
+  /* ./../lib/standard//collection//hash_collection.nit:93 */
+  REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_hash_collection, 93);
   }
   REGB0 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
+  /* ./../lib/standard//collection//hash_collection.nit:94 */
   REGB1 = TAG_Int(1);
+  /* ./../lib/standard//kernel.nit:215 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:80 */
+  /* ./../lib/standard//collection//hash_collection.nit:94 */
   ATTR_hash_collection___HashCollection____length(fra.me.REG[0]) = REGB1;
+  /* ./../lib/standard//collection//hash_collection.nit:95 */
   REGB1 = TAG_Int(5);
+  /* ./../lib/standard//kernel.nit:215 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-  REGB2 = TAG_Int(150);
+  /* ./../lib/standard//collection//hash_collection.nit:95 */
+  REGB2 = TAG_Int(3);
+  /* ./../lib/standard//kernel.nit:218 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)*UNTAG_Int(REGB2));
-  REGB1 = TAG_Int(100);
+  /* ./../lib/standard//collection//hash_collection.nit:95 */
+  REGB1 = TAG_Int(2);
+  /* ./../lib/standard//kernel.nit:219 */
   REGB1 = TAG_Int(UNTAG_Int(REGB2)/UNTAG_Int(REGB1));
+  /* ./../lib/standard//collection//hash_collection.nit:95 */
   REGB0 = REGB1;
+  /* ./../lib/standard//collection//hash_collection.nit:96 */
   REGB1 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:82 */
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 82);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_capacity", LOCATE_hash_collection, 96);
   }
   REGB1 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
+  /* ./../lib/standard//kernel.nit:213 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:82 */
+  /* ./../lib/standard//collection//hash_collection.nit:96 */
   if (UNTAG_Bool(REGB1)) {
+    /* ./../lib/standard//collection//hash_collection.nit:97 */
     REGB1 = TAG_Int(2);
+    /* ./../lib/standard//kernel.nit:218 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)*UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//hash_collection.nit:83 */
+    /* ./../lib/standard//collection//hash_collection.nit:97 */
     CALL_hash_collection___HashCollection___enlarge(fra.me.REG[0])(fra.me.REG[0], REGB1);
   }
   stack_frame_head = fra.me.prev;
   return;
 }
-void hash_collection___HashCollection___remove_index(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+void hash_collection___HashCollection___remove_node(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[4];} fra;
   val_t REGB0;
   val_t REGB1;
   val_t REGB2;
-  val_t REGB3;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 87;
-  fra.me.meth = LOCATE_hash_collection___HashCollection___remove_index;
+  fra.me.line = 101;
+  fra.me.meth = LOCATE_hash_collection___HashCollection___remove_node;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 5;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
+  fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = p1;
-  REGB1 = TAG_Int(0);
-  REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:89 */
-  if (UNTAG_Bool(REGB1)) {
-    REGB1 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-    if (UNTAG_Bool(REGB1)) {
-    } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 89);
-      nit_exit(1);
-    }
-    REGB1 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
-    REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:89 */
-  } else {
-    REGB2 = TAG_Bool(false);
-    REGB1 = REGB2;
-  }
-  if (UNTAG_Bool(REGB1)) {
-  } else {
-    fprintf(stderr, "Assert %s  failed", "'correct_index'");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 89);
-    nit_exit(1);
-  }
-  fra.me.REG[1] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:104 */
+  REGB0 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* ./../lib/standard//collection//hash_collection.nit:105 */
+  fra.me.REG[1] = CALL_hash_collection___HashCollection___node_at_idx(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
+  /* ./../lib/standard//collection//hash_collection.nit:106 */
   REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:90 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 90);
-    nit_exit(1);
-  }
-  fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)];
-  REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:91 */
   if (UNTAG_Bool(REGB1)) {
   } else {
     REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -403,31 +379,15 @@ void hash_collection___HashCollection___remove_index(val_t p0, val_t p1){
       REGB1 = REGB2;
     }
   }
-  REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-  } else {
-    fprintf(stderr, "Assert %s  failed", "'has_couple'");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 91);
-    nit_exit(1);
+    goto label1;
   }
-  REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:93 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 93);
-    nit_exit(1);
-  }
-  fra.me.REG[2] = CALL_hash_collection___HashNode___prev_item(fra.me.REG[1])(fra.me.REG[1]);
-  REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:94 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 94);
-    nit_exit(1);
-  }
-  fra.me.REG[1] = CALL_hash_collection___HashNode___next_item(fra.me.REG[1])(fra.me.REG[1]);
+  /* ./../lib/standard//collection//hash_collection.nit:109 */
+  fra.me.REG[2] = ATTR_hash_collection___HashNode____prev_item(fra.me.REG[1]);
+  /* ./../lib/standard//collection//hash_collection.nit:110 */
+  fra.me.REG[3] = ATTR_hash_collection___HashNode____next_item(fra.me.REG[1]);
+  /* ./../lib/standard//collection//hash_collection.nit:111 */
   REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:95 */
   if (UNTAG_Bool(REGB1)) {
   } else {
     REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
@@ -441,185 +401,93 @@ void hash_collection___HashCollection___remove_index(val_t p0, val_t p1){
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-    /* ./../lib/standard//collection//hash_collection.nit:96 */
-    if (UNTAG_Bool(REGB1)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 96);
-      nit_exit(1);
-    }
-    CALL_hash_collection___HashNode___next_item__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+    /* ./../lib/standard//collection//hash_collection.nit:112 */
+    ATTR_hash_collection___HashNode____next_item(fra.me.REG[2]) = fra.me.REG[3];
   } else {
-    /* ./../lib/standard//collection//hash_collection.nit:98 */
-    ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]) = fra.me.REG[1];
+    /* ./../lib/standard//collection//hash_collection.nit:114 */
+    ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]) = fra.me.REG[3];
   }
-  REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:100 */
+  /* ./../lib/standard//collection//hash_collection.nit:116 */
+  REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+    REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
       REGB2 = TAG_Bool(false);
       REGB1 = REGB2;
     } else {
-      REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
       REGB1 = REGB2;
     }
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-    /* ./../lib/standard//collection//hash_collection.nit:101 */
-    if (UNTAG_Bool(REGB1)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 101);
-      nit_exit(1);
-    }
-    CALL_hash_collection___HashNode___prev_item__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+    /* ./../lib/standard//collection//hash_collection.nit:117 */
+    ATTR_hash_collection___HashNode____prev_item(fra.me.REG[3]) = fra.me.REG[2];
   } else {
-    /* ./../lib/standard//collection//hash_collection.nit:103 */
+    /* ./../lib/standard//collection//hash_collection.nit:119 */
     ATTR_hash_collection___HashCollection____last_item(fra.me.REG[0]) = fra.me.REG[2];
   }
-  fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-  REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:106 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 106);
-    nit_exit(1);
-  }
-  /* ./../lib/standard//collection//array.nit:591 */
-  ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)]=NIT_NULL;
+  /* ./../lib/standard//collection//hash_collection.nit:123 */
   REGB1 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
   REGB2 = TAG_Int(1);
+  /* ./../lib/standard//kernel.nit:217 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-  /* ./../lib/standard//collection//hash_collection.nit:107 */
+  /* ./../lib/standard//collection//hash_collection.nit:123 */
   ATTR_hash_collection___HashCollection____length(fra.me.REG[0]) = REGB2;
-  /* ./../lib/standard//collection//hash_collection.nit:109 */
-  while(1) {
-    REGB2 = TAG_Bool(true);
-    if (UNTAG_Bool(REGB2)) {
-      REGB2 = TAG_Int(1);
-      REGB2 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB2));
-      REGB0 = REGB2;
-      REGB2 = TAG_Int(0);
-      REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
-      /* ./../lib/standard//collection//hash_collection.nit:111 */
-      if (UNTAG_Bool(REGB2)) {
-        REGB2 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-        /* ./../lib/standard//collection//hash_collection.nit:112 */
-        if (UNTAG_Bool(REGB2)) {
-        } else {
-          fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 112);
-          nit_exit(1);
-        }
-        REGB2 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
-        REGB1 = TAG_Int(1);
-        REGB1 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB1));
-        REGB0 = REGB1;
-      /* ./../lib/standard//collection//hash_collection.nit:112 */
-      }
-      fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:114 */
-      if (UNTAG_Bool(REGB1)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 114);
-        nit_exit(1);
-      }
-      fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:115 */
-      if (UNTAG_Bool(REGB1)) {
-      } else {
-        REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        if (UNTAG_Bool(REGB2)) {
-          REGB2 = TAG_Bool(false);
-          REGB1 = REGB2;
-        } else {
-          REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
-          REGB1 = REGB2;
-        }
-      }
-      if (UNTAG_Bool(REGB1)) {
-        /* ./../lib/standard//collection//hash_collection.nit:116 */
-        goto label1;
-      }
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:118 */
-      if (UNTAG_Bool(REGB1)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 118);
-        nit_exit(1);
-      }
-      fra.me.REG[1] = CALL_hash_collection___HashNode___key(fra.me.REG[2])(fra.me.REG[2]);
-      REGB1 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-      REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
-      /* ./../lib/standard//collection//hash_collection.nit:119 */
-      if (UNTAG_Bool(REGB2)) {
-      } else {
-        REGB3 = TAG_Bool((REGB0)==(REGB1));
-        REGB2 = REGB3;
-      /* ./../lib/standard//collection//hash_collection.nit:119 */
-      }
-      REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
-      if (UNTAG_Bool(REGB2)) {
-        fra.me.REG[1] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-        REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-        /* ./../lib/standard//collection//hash_collection.nit:120 */
-        if (UNTAG_Bool(REGB2)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 120);
-          nit_exit(1);
-        }
-        /* ./../lib/standard//collection//array.nit:591 */
-        ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)]=NIT_NULL;
-        fra.me.REG[1] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-        REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-        /* ./../lib/standard//collection//hash_collection.nit:121 */
-        if (UNTAG_Bool(REGB2)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 121);
-          nit_exit(1);
-        }
-        fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
-        REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-        /* ./../lib/standard//collection//hash_collection.nit:121 */
-        if (UNTAG_Bool(REGB2)) {
-        } else {
-          REGB3 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-          if (UNTAG_Bool(REGB3)) {
-            REGB3 = TAG_Bool(false);
-            REGB2 = REGB3;
-          } else {
-            REGB3 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
-            REGB2 = REGB3;
-          }
-        }
-        if (UNTAG_Bool(REGB2)) {
-        } else {
-          fprintf(stderr, "Assert failed");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 121);
-          nit_exit(1);
-        }
-        fra.me.REG[1] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-        REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-        /* ./../lib/standard//collection//hash_collection.nit:122 */
-        if (UNTAG_Bool(REGB2)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 122);
-          nit_exit(1);
-        }
-        /* ./../lib/standard//collection//array.nit:591 */
-        ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)]=fra.me.REG[2];
-      }
+  /* ./../lib/standard//collection//hash_collection.nit:124 */
+  fra.me.REG[4] = ATTR_hash_collection___HashNode____prev_in_bucklet(fra.me.REG[1]);
+  fra.me.REG[2] = fra.me.REG[4];
+  /* ./../lib/standard//collection//hash_collection.nit:125 */
+  fra.me.REG[1] = ATTR_hash_collection___HashNode____next_in_bucklet(fra.me.REG[1]);
+  fra.me.REG[3] = fra.me.REG[1];
+  /* ./../lib/standard//collection//hash_collection.nit:126 */
+  REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+  if (UNTAG_Bool(REGB2)) {
+  } else {
+    REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+      REGB1 = TAG_Bool(false);
+      REGB2 = REGB1;
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:109 */
-      goto label2;
+      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+      REGB2 = REGB1;
     }
   }
-  label2: while(0);
+  REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
+  if (UNTAG_Bool(REGB2)) {
+    /* ./../lib/standard//collection//hash_collection.nit:127 */
+    ATTR_hash_collection___HashNode____next_in_bucklet(fra.me.REG[2]) = fra.me.REG[3];
+  } else {
+    /* ./../lib/standard//collection//hash_collection.nit:129 */
+    fra.me.REG[1] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
+    REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+    if (UNTAG_Bool(REGB2)) {
+      nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 129);
+    }
+    /* ./../lib/standard//collection//array.nit:655 */
+    ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)]=fra.me.REG[3];
+  }
+  /* ./../lib/standard//collection//hash_collection.nit:131 */
+  REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+    if (UNTAG_Bool(REGB2)) {
+      REGB2 = TAG_Bool(false);
+      REGB0 = REGB2;
+    } else {
+      REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
+      REGB0 = REGB2;
+    }
+  }
+  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+  if (UNTAG_Bool(REGB0)) {
+    /* ./../lib/standard//collection//hash_collection.nit:132 */
+    ATTR_hash_collection___HashNode____prev_in_bucklet(fra.me.REG[3]) = fra.me.REG[2];
+  }
+  /* ./../lib/standard//collection//hash_collection.nit:135 */
+  ATTR_hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = NIT_NULL;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return;
@@ -631,58 +499,58 @@ void hash_collection___HashCollection___raz(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 127;
+  fra.me.line = 138;
   fra.me.meth = LOCATE_hash_collection___HashCollection___raz;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:140 */
   REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:129 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 129);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_capacity", LOCATE_hash_collection, 140);
   }
   REGB0 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
   REGB1 = TAG_Int(1);
+  /* ./../lib/standard//kernel.nit:217 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:130 */
+  /* ./../lib/standard//collection//hash_collection.nit:141 */
   while(1) {
     REGB0 = TAG_Int(0);
+    /* ./../lib/standard//kernel.nit:213 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-    /* ./../lib/standard//collection//hash_collection.nit:130 */
+    /* ./../lib/standard//collection//hash_collection.nit:141 */
     if (UNTAG_Bool(REGB0)) {
+      /* ./../lib/standard//collection//hash_collection.nit:142 */
       fra.me.REG[1] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
       REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:131 */
       if (UNTAG_Bool(REGB0)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 131);
-        nit_exit(1);
+        nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 142);
       }
-      /* ./../lib/standard//collection//array.nit:591 */
+      /* ./../lib/standard//collection//array.nit:655 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)]=NIT_NULL;
+      /* ./../lib/standard//collection//hash_collection.nit:143 */
       REGB0 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:217 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
+      /* ./../lib/standard//collection//hash_collection.nit:143 */
       REGB1 = REGB0;
-    /* ./../lib/standard//collection//hash_collection.nit:132 */
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:130 */
+      /* ./../lib/standard//collection//hash_collection.nit:141 */
       goto label1;
     }
   }
   label1: while(0);
+  /* ./../lib/standard//collection//hash_collection.nit:145 */
   REGB1 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:134 */
   ATTR_hash_collection___HashCollection____length(fra.me.REG[0]) = REGB1;
-  /* ./../lib/standard//collection//hash_collection.nit:135 */
+  /* ./../lib/standard//collection//hash_collection.nit:146 */
   ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]) = NIT_NULL;
-  /* ./../lib/standard//collection//hash_collection.nit:136 */
+  /* ./../lib/standard//collection//hash_collection.nit:147 */
   ATTR_hash_collection___HashCollection____last_item(fra.me.REG[0]) = NIT_NULL;
-  /* ./../lib/standard//collection//hash_collection.nit:137 */
+  /* ./../lib/standard//collection//hash_collection.nit:148 */
   ATTR_hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = NIT_NULL;
   stack_frame_head = fra.me.prev;
   return;
@@ -696,7 +564,7 @@ void hash_collection___HashCollection___enlarge(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 140;
+  fra.me.line = 151;
   fra.me.meth = LOCATE_hash_collection___HashCollection___enlarge;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -706,99 +574,101 @@ void hash_collection___HashCollection___enlarge(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:153 */
   REGB1 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:142 */
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 142);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_capacity", LOCATE_hash_collection, 153);
   }
   REGB1 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
+  /* ./../lib/standard//collection//hash_collection.nit:155 */
   REGB2 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:145 */
   if (UNTAG_Bool(REGB2)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 145);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_hash_collection, 155);
   }
   REGB2 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
   REGB3 = TAG_Int(1);
+  /* ./../lib/standard//kernel.nit:215 */
   REGB3 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB3));
+  /* ./../lib/standard//kernel.nit:212 */
   REGB3 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB3));
-  /* ./../lib/standard//collection//hash_collection.nit:145 */
+  /* ./../lib/standard//collection//hash_collection.nit:155 */
   if (UNTAG_Bool(REGB3)) {
     REGB3 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB3)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_length");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 145);
-      nit_exit(1);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_hash_collection, 155);
     }
     REGB3 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
     REGB2 = TAG_Int(1);
+    /* ./../lib/standard//kernel.nit:215 */
     REGB2 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB2));
+    /* ./../lib/standard//collection//hash_collection.nit:155 */
     REGB0 = REGB2;
-  /* ./../lib/standard//collection//hash_collection.nit:145 */
   }
+  /* ./../lib/standard//collection//hash_collection.nit:156 */
   REGB2 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:146 */
   if (UNTAG_Bool(REGB2)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 146);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_capacity", LOCATE_hash_collection, 156);
   }
   REGB2 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
+  /* ./../lib/standard//kernel.nit:211 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB2));
-  /* ./../lib/standard//collection//hash_collection.nit:146 */
+  /* ./../lib/standard//collection//hash_collection.nit:156 */
   if (UNTAG_Bool(REGB2)) {
     goto label1;
   }
-  /* ./../lib/standard//collection//hash_collection.nit:147 */
+  /* ./../lib/standard//collection//hash_collection.nit:157 */
   ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]) = REGB0;
-  /* ./../lib/standard//collection//hash_collection.nit:148 */
+  /* ./../lib/standard//collection//hash_collection.nit:158 */
   ATTR_hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = NIT_NULL;
+  /* ./../lib/standard//collection//array.nit:648 */
   fra.me.REG[1] = NEW_NativeArray(UNTAG_Int(REGB0), sizeof(val_t));
-  /* ./../lib/standard//collection//hash_collection.nit:152 */
+  /* ./../lib/standard//collection//hash_collection.nit:162 */
   ATTR_hash_collection___HashCollection____array(fra.me.REG[0]) = fra.me.REG[1];
+  /* ./../lib/standard//collection//hash_collection.nit:165 */
   REGB2 = TAG_Int(1);
+  /* ./../lib/standard//kernel.nit:217 */
   REGB2 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB2));
-  /* ./../lib/standard//collection//hash_collection.nit:156 */
+  /* ./../lib/standard//collection//hash_collection.nit:166 */
   while(1) {
     REGB0 = TAG_Int(0);
+    /* ./../lib/standard//kernel.nit:213 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB0));
-    /* ./../lib/standard//collection//hash_collection.nit:156 */
+    /* ./../lib/standard//collection//hash_collection.nit:166 */
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//array.nit:591 */
+      /* ./../lib/standard//collection//array.nit:655 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB2)]=NIT_NULL;
+      /* ./../lib/standard//collection//hash_collection.nit:168 */
       REGB0 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:217 */
       REGB0 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB0));
+      /* ./../lib/standard//collection//hash_collection.nit:168 */
       REGB2 = REGB0;
-    /* ./../lib/standard//collection//hash_collection.nit:158 */
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:156 */
+      /* ./../lib/standard//collection//hash_collection.nit:166 */
       goto label2;
     }
   }
   label2: while(0);
+  /* ./../lib/standard//collection//hash_collection.nit:171 */
   REGB2 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:161 */
   if (UNTAG_Bool(REGB2)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 161);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_capacity", LOCATE_hash_collection, 171);
   }
   REGB2 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
+  /* ./../lib/standard//kernel.nit:211 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB2)<=UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:161 */
+  /* ./../lib/standard//collection//hash_collection.nit:171 */
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
+  /* ./../lib/standard//collection//hash_collection.nit:174 */
   fra.me.REG[2] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:165 */
+  /* ./../lib/standard//collection//hash_collection.nit:175 */
   while(1) {
     REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
@@ -814,54 +684,46 @@ void hash_collection___HashCollection___enlarge(val_t p0, val_t p1){
     }
     REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
     if (UNTAG_Bool(REGB1)) {
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:166 */
+      /* ./../lib/standard//collection//hash_collection.nit:176 */
+      REGB1 = TAG_Bool(ATTR_hash_collection___HashNode____key(fra.me.REG[2])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 166);
-        nit_exit(1);
-      }
-      fra.me.REG[3] = CALL_hash_collection___HashNode___key(fra.me.REG[2])(fra.me.REG[2]);
-      REGB1 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
-      REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:167 */
-      if (UNTAG_Bool(REGB2)) {
       } else {
-        REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-        if (UNTAG_Bool(REGB0)) {
-          REGB0 = TAG_Bool(false);
-          REGB2 = REGB0;
+        nit_abort("Uninitialized attribute %s", "_key", LOCATE_hash_collection, 176);
+      }
+      fra.me.REG[3] = ATTR_hash_collection___HashNode____key(fra.me.REG[2]);
+      REGB1 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      /* ./../lib/standard//collection//array.nit:654 */
+      fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
+      /* ./../lib/standard//collection//array.nit:655 */
+      ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)]=fra.me.REG[2];
+      /* ./../lib/standard//collection//hash_collection.nit:180 */
+      ATTR_hash_collection___HashNode____next_in_bucklet(fra.me.REG[2]) = fra.me.REG[3];
+      /* ./../lib/standard//collection//hash_collection.nit:181 */
+      REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+      } else {
+        REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+        if (UNTAG_Bool(REGB2)) {
+          REGB2 = TAG_Bool(false);
+          REGB1 = REGB2;
         } else {
-          REGB0 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
-          REGB2 = REGB0;
+          REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
+          REGB1 = REGB2;
         }
       }
-      if (UNTAG_Bool(REGB2)) {
-      } else {
-        fprintf(stderr, "Assert failed");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 167);
-        nit_exit(1);
-      }
-      /* ./../lib/standard//collection//array.nit:591 */
-      ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)]=fra.me.REG[2];
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:169 */
+      REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
       if (UNTAG_Bool(REGB1)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 169);
-        nit_exit(1);
+        ATTR_hash_collection___HashNode____prev_in_bucklet(fra.me.REG[3]) = fra.me.REG[2];
       }
-      fra.me.REG[3] = CALL_hash_collection___HashNode___next_item(fra.me.REG[2])(fra.me.REG[2]);
+      /* ./../lib/standard//collection//hash_collection.nit:182 */
+      fra.me.REG[3] = ATTR_hash_collection___HashNode____next_item(fra.me.REG[2]);
       fra.me.REG[2] = fra.me.REG[3];
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:165 */
+      /* ./../lib/standard//collection//hash_collection.nit:175 */
       goto label3;
     }
   }
   label3: while(0);
-  /* ./../lib/standard//collection//hash_collection.nit:171 */
-  ATTR_hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = NIT_NULL;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return;
@@ -881,35 +743,19 @@ void hash_collection___HashCollection___init(val_t p0, int* init_table){
   init_table[itpos0] = 1;
   return;
 }
-val_t hash_collection___HashNode___key(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 176;
-  fra.me.meth = LOCATE_hash_collection___HashNode___key;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 0;
-  /* ./../lib/standard//collection//hash_collection.nit:176 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 176);
-  nit_exit(1);
-  stack_frame_head = fra.me.prev;
-  return NIT_NULL;
-}
 val_t hash_collection___HashNode___next_item(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 178;
+  fra.me.line = 190;
   fra.me.meth = LOCATE_hash_collection___HashNode___next_item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:190 */
   fra.me.REG[0] = ATTR_hash_collection___HashNode____next_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:178 */
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -918,7 +764,7 @@ void hash_collection___HashNode___next_item__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 178;
+  fra.me.line = 190;
   fra.me.meth = LOCATE_hash_collection___HashNode___next_item__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -926,7 +772,7 @@ void hash_collection___HashNode___next_item__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:178 */
+  /* ./../lib/standard//collection//hash_collection.nit:190 */
   ATTR_hash_collection___HashNode____next_item(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -936,14 +782,14 @@ val_t hash_collection___HashNode___prev_item(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 179;
+  fra.me.line = 191;
   fra.me.meth = LOCATE_hash_collection___HashNode___prev_item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:191 */
   fra.me.REG[0] = ATTR_hash_collection___HashNode____prev_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:179 */
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -952,7 +798,7 @@ void hash_collection___HashNode___prev_item__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 179;
+  fra.me.line = 191;
   fra.me.meth = LOCATE_hash_collection___HashNode___prev_item__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -960,39 +806,217 @@ void hash_collection___HashNode___prev_item__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:179 */
+  /* ./../lib/standard//collection//hash_collection.nit:191 */
   ATTR_hash_collection___HashNode____prev_item(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
 }
-void hash_collection___HashNode___init(val_t p0, int* init_table){
+void hash_collection___HashNode___init(val_t p0, val_t p1, int* init_table){
   int itpos1 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_HashNode].i;
-  struct {struct stack_frame_t me;} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 0;
+  fra.me.line = 194;
   fra.me.meth = LOCATE_hash_collection___HashNode___init;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:196 */
+  ATTR_hash_collection___HashNode____key(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
   return;
+}
+val_t hash_collection___HashMap_____bra(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 204;
+  fra.me.meth = LOCATE_hash_collection___HashMap_____bra;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:206 */
+  fra.me.REG[1] = CALL_hash_collection___HashCollection___node_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* ./../lib/standard//collection//hash_collection.nit:207 */
+  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+      REGB1 = TAG_Bool(false);
+      REGB0 = REGB1;
+    } else {
+      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB0 = REGB1;
+    }
+  }
+  if (UNTAG_Bool(REGB0)) {
+    /* ./../lib/standard//collection//hash_collection.nit:208 */
+    nit_abort("Aborted", NULL, LOCATE_hash_collection, 208);
+  } else {
+    /* ./../lib/standard//collection//hash_collection.nit:210 */
+    fra.me.REG[1] = ATTR_hash_collection___HashMapNode____value(fra.me.REG[1]);
+    goto label1;
+  }
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
+val_t hash_collection___HashMap___has_key(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 214;
+  fra.me.meth = LOCATE_hash_collection___HashMap___has_key;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:214 */
+  fra.me.REG[1] = CALL_hash_collection___HashCollection___node_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+      REGB1 = TAG_Bool(false);
+      REGB0 = REGB1;
+    } else {
+      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB0 = REGB1;
+    }
+  }
+  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
 }
 val_t hash_collection___HashMap___iterator(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 186;
+  fra.me.line = 216;
   fra.me.meth = LOCATE_hash_collection___HashMap___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:216 */
   fra.me.REG[0] = NEW_HashMapIterator_hash_collection___HashMapIterator___init(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:186 */
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+void hash_collection___HashMap___iterate(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  fun_t CREG[1];
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 218;
+  fra.me.meth = LOCATE_hash_collection___HashMap___iterate;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.closure_ctx = closctx_param;
+  fra.me.closure_funs = CREG;
+  fra.me.REG[0] = p0;
+  CREG[0] = clos_fun0;
+  /* ./../lib/standard//collection//hash_collection.nit:221 */
+  fra.me.REG[0] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
+  /* ./../lib/standard//collection//hash_collection.nit:222 */
+  while(1) {
+    REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+    if (UNTAG_Bool(REGB0)) {
+    } else {
+      REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        REGB1 = TAG_Bool(false);
+        REGB0 = REGB1;
+      } else {
+        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
+        REGB0 = REGB1;
+      }
+    }
+    REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+    if (UNTAG_Bool(REGB0)) {
+      /* ./../lib/standard//collection//hash_collection.nit:223 */
+      fra.me.REG[1] = ATTR_hash_collection___HashMapNode____value(fra.me.REG[0]);
+      ((void (*)(struct stack_frame_t *, val_t))(CREG[0]))(closctx_param, fra.me.REG[1]);
+      if (closctx_param->has_broke) {
+        goto label1;
+      }
+      /* ./../lib/standard//collection//hash_collection.nit:224 */
+      fra.me.REG[1] = ATTR_hash_collection___HashNode____next_item(fra.me.REG[0]);
+      fra.me.REG[0] = fra.me.REG[1];
+    } else {
+      /* ./../lib/standard//collection//hash_collection.nit:222 */
+      goto label2;
+    }
+  }
+  label2: while(0);
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return;
+}
+val_t hash_collection___HashMap___first(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 228;
+  fra.me.meth = LOCATE_hash_collection___HashMap___first;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:230 */
+  REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_hash_collection, 230);
+  }
+  REGB0 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
+  REGB1 = TAG_Int(0);
+  /* ./../lib/standard//kernel.nit:214 */
+  REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
+  /* ./../lib/standard//collection//hash_collection.nit:230 */
+  if (UNTAG_Bool(REGB1)) {
+  } else {
+    nit_abort("Assert failed", NULL, LOCATE_hash_collection, 230);
+  }
+  /* ./../lib/standard//collection//hash_collection.nit:231 */
+  fra.me.REG[0] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
+  REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+    nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 231);
+  }
+  fra.me.REG[0] = ATTR_hash_collection___HashMapNode____value(fra.me.REG[0]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -1006,245 +1030,42 @@ val_t hash_collection___HashMap___is_empty(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 194;
+  fra.me.line = 234;
   fra.me.meth = LOCATE_hash_collection___HashMap___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:234 */
   REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:194 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 194);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_hash_collection, 234);
   }
   REGB0 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
+    /* ./../lib/standard//kernel.nit:207 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
+    /* ./../lib/standard//collection//hash_collection.nit:234 */
     REGB2 = REGB1;
-  /* ./../lib/standard//collection//hash_collection.nit:194 */
   }
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB2;
 }
-val_t hash_collection___HashMap___has(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
-  val_t REGB0;
-  val_t REGB1;
-  val_t REGB2;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 208;
-  fra.me.meth = LOCATE_hash_collection___HashMap___has;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:211 */
-  while(1) {
-    REGB1 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-    if (UNTAG_Bool(REGB1)) {
-    } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 211);
-      nit_exit(1);
-    }
-    REGB1 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
-    REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//hash_collection.nit:211 */
-    if (UNTAG_Bool(REGB1)) {
-      fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:212 */
-      if (UNTAG_Bool(REGB1)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 212);
-        nit_exit(1);
-      }
-      fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:213 */
-      if (UNTAG_Bool(REGB1)) {
-      } else {
-        REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        if (UNTAG_Bool(REGB2)) {
-          REGB2 = TAG_Bool(false);
-          REGB1 = REGB2;
-        } else {
-          REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
-          REGB1 = REGB2;
-        }
-      }
-      REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-      if (UNTAG_Bool(REGB1)) {
-        REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        if (UNTAG_Bool(REGB1)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 213);
-          nit_exit(1);
-        }
-        fra.me.REG[2] = CALL_abstract_collection___Couple___second(fra.me.REG[2])(fra.me.REG[2]);
-        REGB1 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
-        if (UNTAG_Bool(REGB1)) {
-        } else {
-          REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-          if (UNTAG_Bool(REGB2)) {
-            REGB2 = TAG_Bool(false);
-            REGB1 = REGB2;
-          } else {
-            REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-            REGB1 = REGB2;
-          }
-        }
-      } else {
-        REGB2 = TAG_Bool(false);
-        REGB1 = REGB2;
-      }
-      if (UNTAG_Bool(REGB1)) {
-        REGB1 = TAG_Bool(true);
-        goto label1;
-      }
-      REGB2 = TAG_Int(1);
-      REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      REGB0 = REGB2;
-    /* ./../lib/standard//collection//hash_collection.nit:214 */
-    } else {
-      /* ./../lib/standard//collection//hash_collection.nit:211 */
-      goto label2;
-    }
-  }
-  label2: while(0);
-  REGB0 = TAG_Bool(false);
-  REGB1 = REGB0;
-  /* ./../lib/standard//collection//hash_collection.nit:216 */
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return REGB1;
-}
-val_t hash_collection___HashMap___has_only(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
-  val_t REGB0;
-  val_t REGB1;
-  val_t REGB2;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 219;
-  fra.me.meth = LOCATE_hash_collection___HashMap___has_only;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:222 */
-  while(1) {
-    REGB1 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-    if (UNTAG_Bool(REGB1)) {
-    } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 222);
-      nit_exit(1);
-    }
-    REGB1 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
-    REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//hash_collection.nit:222 */
-    if (UNTAG_Bool(REGB1)) {
-      fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:223 */
-      if (UNTAG_Bool(REGB1)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 223);
-        nit_exit(1);
-      }
-      fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:224 */
-      if (UNTAG_Bool(REGB1)) {
-      } else {
-        REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        if (UNTAG_Bool(REGB2)) {
-          REGB2 = TAG_Bool(false);
-          REGB1 = REGB2;
-        } else {
-          REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
-          REGB1 = REGB2;
-        }
-      }
-      REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-      if (UNTAG_Bool(REGB1)) {
-        REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        if (UNTAG_Bool(REGB1)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 224);
-          nit_exit(1);
-        }
-        fra.me.REG[2] = CALL_abstract_collection___Couple___second(fra.me.REG[2])(fra.me.REG[2]);
-        REGB1 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
-        if (UNTAG_Bool(REGB1)) {
-        } else {
-          REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-          if (UNTAG_Bool(REGB2)) {
-            REGB2 = TAG_Bool(false);
-            REGB1 = REGB2;
-          } else {
-            REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-            REGB1 = REGB2;
-          }
-        }
-        REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-      } else {
-        REGB2 = TAG_Bool(false);
-        REGB1 = REGB2;
-      }
-      if (UNTAG_Bool(REGB1)) {
-        REGB1 = TAG_Bool(false);
-        goto label1;
-      }
-      REGB2 = TAG_Int(1);
-      REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      REGB0 = REGB2;
-    /* ./../lib/standard//collection//hash_collection.nit:225 */
-    } else {
-      /* ./../lib/standard//collection//hash_collection.nit:222 */
-      goto label2;
-    }
-  }
-  label2: while(0);
-  REGB0 = TAG_Bool(true);
-  REGB1 = REGB0;
-  /* ./../lib/standard//collection//hash_collection.nit:227 */
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return REGB1;
-}
 val_t hash_collection___HashMap___count(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t REGB1;
   val_t REGB2;
-  val_t REGB3;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 196;
+  fra.me.line = 236;
   fra.me.meth = LOCATE_hash_collection___HashMap___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1253,193 +1074,29 @@ val_t hash_collection___HashMap___count(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:238 */
   REGB0 = TAG_Int(0);
-  REGB1 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:200 */
-  while(1) {
-    REGB2 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
-    if (UNTAG_Bool(REGB2)) {
-    } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 200);
-      nit_exit(1);
-    }
-    REGB2 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
-    REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-    /* ./../lib/standard//collection//hash_collection.nit:200 */
-    if (UNTAG_Bool(REGB2)) {
-      fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-      REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:201 */
-      if (UNTAG_Bool(REGB2)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 201);
-        nit_exit(1);
-      }
-      fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB1)];
-      REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:202 */
-      if (UNTAG_Bool(REGB2)) {
-      } else {
-        REGB3 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        if (UNTAG_Bool(REGB3)) {
-          REGB3 = TAG_Bool(false);
-          REGB2 = REGB3;
-        } else {
-          REGB3 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
-          REGB2 = REGB3;
-        }
-      }
-      REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
-      if (UNTAG_Bool(REGB2)) {
-        REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-        if (UNTAG_Bool(REGB2)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 202);
-          nit_exit(1);
-        }
-        fra.me.REG[2] = CALL_abstract_collection___Couple___second(fra.me.REG[2])(fra.me.REG[2]);
-        REGB2 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
-        if (UNTAG_Bool(REGB2)) {
-        } else {
-          REGB3 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-          if (UNTAG_Bool(REGB3)) {
-            REGB3 = TAG_Bool(false);
-            REGB2 = REGB3;
-          } else {
-            REGB3 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-            REGB2 = REGB3;
-          }
-        }
-      } else {
-        REGB3 = TAG_Bool(false);
-        REGB2 = REGB3;
-      }
-      if (UNTAG_Bool(REGB2)) {
-        REGB2 = TAG_Int(1);
-        REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-        REGB0 = REGB2;
-      /* ./../lib/standard//collection//hash_collection.nit:202 */
-      }
-      REGB2 = TAG_Int(1);
-      REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-      REGB1 = REGB2;
-    /* ./../lib/standard//collection//hash_collection.nit:203 */
-    } else {
-      /* ./../lib/standard//collection//hash_collection.nit:200 */
-      goto label1;
-    }
-  }
-  label1: while(0);
-  /* ./../lib/standard//collection//hash_collection.nit:205 */
-  goto label2;
-  label2: while(0);
-  stack_frame_head = fra.me.prev;
-  return REGB0;
-}
-val_t hash_collection___HashMap___first(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t REGB1;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 188;
-  fra.me.meth = LOCATE_hash_collection___HashMap___first;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:190 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 190);
-    nit_exit(1);
-  }
-  REGB0 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
-  REGB1 = TAG_Int(0);
-  REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:190 */
-  if (UNTAG_Bool(REGB1)) {
-  } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 190);
-    nit_exit(1);
-  }
+  /* ./../lib/standard//collection//hash_collection.nit:239 */
   fra.me.REG[0] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
-  REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:191 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 191);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = CALL_abstract_collection___Couple___second(fra.me.REG[0])(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-void hash_collection___HashMap___clear(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 258;
-  fra.me.meth = LOCATE_hash_collection___HashMap___clear;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:258 */
-  CALL_hash_collection___HashCollection___raz(fra.me.REG[0])(fra.me.REG[0]);
-  stack_frame_head = fra.me.prev;
-  return;
-}
-void hash_collection___HashMap___remove(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
-  val_t REGB0;
-  val_t REGB1;
-  val_t REGB2;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 243;
-  fra.me.meth = LOCATE_hash_collection___HashMap___remove;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:246 */
+  /* ./../lib/standard//collection//hash_collection.nit:240 */
   while(1) {
-    REGB1 = TAG_Bool(ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
+    REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_capacity");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 246);
-      nit_exit(1);
-    }
-    REGB1 = ATTR_hash_collection___HashCollection____capacity(fra.me.REG[0]);
-    REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//hash_collection.nit:246 */
-    if (UNTAG_Bool(REGB1)) {
-      fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:247 */
-      if (UNTAG_Bool(REGB1)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 247);
-        nit_exit(1);
+      REGB2 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+      if (UNTAG_Bool(REGB2)) {
+        REGB2 = TAG_Bool(false);
+        REGB1 = REGB2;
+      } else {
+        REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
+        REGB1 = REGB2;
       }
-      fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      /* ./../lib/standard//collection//hash_collection.nit:248 */
+    }
+    REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
+    if (UNTAG_Bool(REGB1)) {
+      /* ./../lib/standard//collection//hash_collection.nit:241 */
+      fra.me.REG[2] = ATTR_hash_collection___HashMapNode____value(fra.me.REG[0]);
+      REGB1 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
       if (UNTAG_Bool(REGB1)) {
       } else {
         REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
@@ -1447,54 +1104,170 @@ void hash_collection___HashMap___remove(val_t p0, val_t p1){
           REGB2 = TAG_Bool(false);
           REGB1 = REGB2;
         } else {
-          REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+          REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
           REGB1 = REGB2;
         }
       }
-      REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
       if (UNTAG_Bool(REGB1)) {
+        REGB1 = TAG_Int(1);
+        /* ./../lib/standard//kernel.nit:215 */
+        REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
+        /* ./../lib/standard//collection//hash_collection.nit:241 */
+        REGB0 = REGB1;
+      }
+      /* ./../lib/standard//collection//hash_collection.nit:242 */
+      fra.me.REG[2] = ATTR_hash_collection___HashNode____next_item(fra.me.REG[0]);
+      fra.me.REG[0] = fra.me.REG[2];
+    } else {
+      /* ./../lib/standard//collection//hash_collection.nit:240 */
+      goto label1;
+    }
+  }
+  label1: while(0);
+  /* ./../lib/standard//collection//hash_collection.nit:244 */
+  goto label2;
+  label2: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
+val_t hash_collection___HashMap___has(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 247;
+  fra.me.meth = LOCATE_hash_collection___HashMap___has;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:249 */
+  fra.me.REG[0] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
+  /* ./../lib/standard//collection//hash_collection.nit:250 */
+  while(1) {
+    REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+    if (UNTAG_Bool(REGB0)) {
+    } else {
+      REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        REGB1 = TAG_Bool(false);
+        REGB0 = REGB1;
+      } else {
+        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
+        REGB0 = REGB1;
+      }
+    }
+    REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+    if (UNTAG_Bool(REGB0)) {
+      /* ./../lib/standard//collection//hash_collection.nit:251 */
+      fra.me.REG[2] = ATTR_hash_collection___HashMapNode____value(fra.me.REG[0]);
+      REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
+      if (UNTAG_Bool(REGB0)) {
+      } else {
         REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 248);
-          nit_exit(1);
-        }
-        fra.me.REG[2] = CALL_abstract_collection___Couple___second(fra.me.REG[2])(fra.me.REG[2]);
-        REGB1 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
-        if (UNTAG_Bool(REGB1)) {
+          REGB1 = TAG_Bool(false);
+          REGB0 = REGB1;
         } else {
-          REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-          if (UNTAG_Bool(REGB2)) {
-            REGB2 = TAG_Bool(false);
-            REGB1 = REGB2;
-          } else {
-            REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-            REGB1 = REGB2;
-          }
+          REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+          REGB0 = REGB1;
         }
-      } else {
-        REGB2 = TAG_Bool(false);
-        REGB1 = REGB2;
       }
-      if (UNTAG_Bool(REGB1)) {
-        /* ./../lib/standard//collection//hash_collection.nit:249 */
-        CALL_hash_collection___HashCollection___remove_index(fra.me.REG[0])(fra.me.REG[0], REGB0);
-        /* ./../lib/standard//collection//hash_collection.nit:250 */
+      if (UNTAG_Bool(REGB0)) {
+        REGB0 = TAG_Bool(true);
         goto label1;
       }
-      REGB1 = TAG_Int(1);
-      REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      REGB0 = REGB1;
-    /* ./../lib/standard//collection//hash_collection.nit:252 */
+      /* ./../lib/standard//collection//hash_collection.nit:252 */
+      fra.me.REG[2] = ATTR_hash_collection___HashNode____next_item(fra.me.REG[0]);
+      fra.me.REG[0] = fra.me.REG[2];
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:246 */
+      /* ./../lib/standard//collection//hash_collection.nit:250 */
       goto label2;
     }
   }
   label2: while(0);
+  /* ./../lib/standard//collection//hash_collection.nit:254 */
+  REGB1 = TAG_Bool(false);
+  REGB0 = REGB1;
+  goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return;
+  return REGB0;
+}
+val_t hash_collection___HashMap___has_only(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 257;
+  fra.me.meth = LOCATE_hash_collection___HashMap___has_only;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:259 */
+  fra.me.REG[0] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
+  /* ./../lib/standard//collection//hash_collection.nit:260 */
+  while(1) {
+    REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+    if (UNTAG_Bool(REGB0)) {
+    } else {
+      REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        REGB1 = TAG_Bool(false);
+        REGB0 = REGB1;
+      } else {
+        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
+        REGB0 = REGB1;
+      }
+    }
+    REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+    if (UNTAG_Bool(REGB0)) {
+      /* ./../lib/standard//collection//hash_collection.nit:261 */
+      fra.me.REG[2] = ATTR_hash_collection___HashMapNode____value(fra.me.REG[0]);
+      REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
+      if (UNTAG_Bool(REGB0)) {
+      } else {
+        REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+        if (UNTAG_Bool(REGB1)) {
+          REGB1 = TAG_Bool(false);
+          REGB0 = REGB1;
+        } else {
+          REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+          REGB0 = REGB1;
+        }
+      }
+      REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+      if (UNTAG_Bool(REGB0)) {
+        REGB0 = TAG_Bool(false);
+        goto label1;
+      }
+      /* ./../lib/standard//collection//hash_collection.nit:262 */
+      fra.me.REG[2] = ATTR_hash_collection___HashNode____next_item(fra.me.REG[0]);
+      fra.me.REG[0] = fra.me.REG[2];
+    } else {
+      /* ./../lib/standard//collection//hash_collection.nit:260 */
+      goto label2;
+    }
+  }
+  label2: while(0);
+  /* ./../lib/standard//collection//hash_collection.nit:264 */
+  REGB1 = TAG_Bool(true);
+  REGB0 = REGB1;
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
 }
 void hash_collection___HashMap_____braeq(val_t p0, val_t p1, val_t p2){
   struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
@@ -1504,7 +1277,7 @@ void hash_collection___HashMap_____braeq(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 230;
+  fra.me.line = 267;
   fra.me.meth = LOCATE_hash_collection___HashMap_____braeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1515,38 +1288,12 @@ void hash_collection___HashMap_____braeq(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:232 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-    if (UNTAG_Bool(REGB1)) {
-      REGB1 = TAG_Bool(false);
-      REGB0 = REGB1;
-    } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
-      REGB0 = REGB1;
-    }
-  }
-  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 232);
-    nit_exit(1);
-  }
+  /* ./../lib/standard//collection//hash_collection.nit:269 */
   REGB0 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  fra.me.REG[3] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
+  /* ./../lib/standard//collection//hash_collection.nit:270 */
+  fra.me.REG[3] = CALL_hash_collection___HashCollection___node_at_idx(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
+  /* ./../lib/standard//collection//hash_collection.nit:271 */
   REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:234 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 234);
-    nit_exit(1);
-  }
-  fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
-  REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:235 */
   if (UNTAG_Bool(REGB1)) {
   } else {
     REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
@@ -1560,37 +1307,98 @@ void hash_collection___HashMap_____braeq(val_t p0, val_t p1, val_t p2){
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-    /* ./../lib/standard//collection//hash_collection.nit:236 */
-    if (UNTAG_Bool(REGB1)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 236);
-      nit_exit(1);
-    }
-    CALL_abstract_collection___Couple___first__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
-    REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-    /* ./../lib/standard//collection//hash_collection.nit:237 */
-    if (UNTAG_Bool(REGB1)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 237);
-      nit_exit(1);
-    }
-    CALL_abstract_collection___Couple___second__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
+    /* ./../lib/standard//collection//hash_collection.nit:272 */
+    ATTR_hash_collection___HashNode____key(fra.me.REG[3]) = fra.me.REG[1];
+    /* ./../lib/standard//collection//hash_collection.nit:273 */
+    ATTR_hash_collection___HashMapNode____value(fra.me.REG[3]) = fra.me.REG[2];
   } else {
+    /* ./../lib/standard//collection//hash_collection.nit:275 */
     fra.me.REG[2] = NEW_HashMapNode_hash_collection___HashMapNode___init(fra.me.REG[1], fra.me.REG[2]);
-    /* ./../lib/standard//collection//hash_collection.nit:239 */
     CALL_hash_collection___HashCollection___store(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[2]);
   }
   stack_frame_head = fra.me.prev;
   return;
 }
-void hash_collection___HashMap___remove_at(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+void hash_collection___HashMap___remove(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
+  val_t REGB1;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 256;
+  fra.me.line = 279;
+  fra.me.meth = LOCATE_hash_collection___HashMap___remove;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 4;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:281 */
+  fra.me.REG[2] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
+  /* ./../lib/standard//collection//hash_collection.nit:282 */
+  while(1) {
+    REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+    if (UNTAG_Bool(REGB0)) {
+    } else {
+      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        REGB1 = TAG_Bool(false);
+        REGB0 = REGB1;
+      } else {
+        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+        REGB0 = REGB1;
+      }
+    }
+    REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+    if (UNTAG_Bool(REGB0)) {
+      /* ./../lib/standard//collection//hash_collection.nit:283 */
+      fra.me.REG[3] = ATTR_hash_collection___HashMapNode____value(fra.me.REG[2]);
+      REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[3],fra.me.REG[1]));
+      if (UNTAG_Bool(REGB0)) {
+      } else {
+        REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+        if (UNTAG_Bool(REGB1)) {
+          REGB1 = TAG_Bool(false);
+          REGB0 = REGB1;
+        } else {
+          REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
+          REGB0 = REGB1;
+        }
+      }
+      if (UNTAG_Bool(REGB0)) {
+        /* ./../lib/standard//collection//hash_collection.nit:284 */
+        REGB0 = TAG_Bool(ATTR_hash_collection___HashNode____key(fra.me.REG[2])!=NIT_NULL);
+        if (UNTAG_Bool(REGB0)) {
+        } else {
+          nit_abort("Uninitialized attribute %s", "_key", LOCATE_hash_collection, 284);
+        }
+        fra.me.REG[3] = ATTR_hash_collection___HashNode____key(fra.me.REG[2]);
+        CALL_hash_collection___HashCollection___remove_node(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+        /* ./../lib/standard//collection//hash_collection.nit:285 */
+        goto label1;
+      }
+      /* ./../lib/standard//collection//hash_collection.nit:287 */
+      fra.me.REG[3] = ATTR_hash_collection___HashNode____next_item(fra.me.REG[2]);
+      fra.me.REG[2] = fra.me.REG[3];
+    } else {
+      /* ./../lib/standard//collection//hash_collection.nit:282 */
+      goto label2;
+    }
+  }
+  label2: while(0);
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return;
+}
+void hash_collection___HashMap___remove_at(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 291;
   fra.me.meth = LOCATE_hash_collection___HashMap___remove_at;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1598,43 +1406,26 @@ void hash_collection___HashMap___remove_at(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  REGB0 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:256 */
-  CALL_hash_collection___HashCollection___remove_index(fra.me.REG[0])(fra.me.REG[0], REGB0);
+  /* ./../lib/standard//collection//hash_collection.nit:291 */
+  CALL_hash_collection___HashCollection___remove_node(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
 }
-val_t hash_collection___HashMap___couple_at(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
-  val_t REGB0;
-  val_t REGB1;
+void hash_collection___HashMap___clear(val_t p0){
+  struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 260;
-  fra.me.meth = LOCATE_hash_collection___HashMap___couple_at;
+  fra.me.line = 293;
+  fra.me.meth = LOCATE_hash_collection___HashMap___clear;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-  REGB0 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:260 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 260);
-    nit_exit(1);
-  }
-  fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-  /* ./../lib/standard//collection//hash_collection.nit:260 */
-  goto label1;
-  label1: while(0);
+  /* ./../lib/standard//collection//hash_collection.nit:293 */
+  CALL_hash_collection___HashCollection___raz(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[2];
+  return;
 }
 void hash_collection___HashMap___init(val_t p0, int* init_table){
   int itpos2 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_HashMap].i;
@@ -1644,147 +1435,55 @@ void hash_collection___HashMap___init(val_t p0, int* init_table){
   if (init_table[itpos2]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 262;
+  fra.me.line = 295;
   fra.me.meth = LOCATE_hash_collection___HashMap___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:295 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./../lib/standard//collection//hash_collection.nit:262 */
   CALL_hash_collection___HashCollection___init(fra.me.REG[0])(fra.me.REG[0], init_table);
+  /* ./../lib/standard//collection//hash_collection.nit:297 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:264 */
   ATTR_hash_collection___HashCollection____capacity(fra.me.REG[1]) = REGB0;
+  /* ./../lib/standard//collection//hash_collection.nit:298 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:265 */
   ATTR_hash_collection___HashCollection____length(fra.me.REG[1]) = REGB0;
+  /* ./../lib/standard//collection//hash_collection.nit:299 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:266 */
   CALL_hash_collection___HashCollection___enlarge(fra.me.REG[1])(fra.me.REG[1], REGB0);
   stack_frame_head = fra.me.prev;
   init_table[itpos2] = 1;
   return;
 }
-val_t hash_collection___HashMapNode___key(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 273;
-  fra.me.meth = LOCATE_hash_collection___HashMapNode___key;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[0] = CALL_abstract_collection___Couple___first(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:273 */
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
 void hash_collection___HashMapNode___init(val_t p0, val_t p1, val_t p2, int* init_table){
   int itpos3 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_HashMapNode].i;
-  struct {struct stack_frame_t me; val_t MORE_REG[5];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t tmp;
   if (init_table[itpos3]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 276;
+  fra.me.line = 308;
   fra.me.meth = LOCATE_hash_collection___HashMapNode___init;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 6;
+  fra.me.REG_size = 4;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
-  fra.me.REG[4] = NIT_NULL;
-  fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
+  /* ./../lib/standard//collection//hash_collection.nit:308 */
   fra.me.REG[3] = fra.me.REG[0];
-  fra.me.REG[4] = fra.me.REG[1];
-  fra.me.REG[5] = fra.me.REG[2];
-  /* ./../lib/standard//collection//hash_collection.nit:276 */
-  CALL_abstract_collection___Couple___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], init_table);
-  CALL_hash_collection___HashNode___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./../lib/standard//collection//hash_collection.nit:278 */
-  CALL_abstract_collection___Couple___first__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-  /* ./../lib/standard//collection//hash_collection.nit:279 */
-  CALL_abstract_collection___Couple___second__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[5]);
+  /* ./../lib/standard//collection//hash_collection.nit:310 */
+  CALL_hash_collection___HashNode___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
+  /* ./../lib/standard//collection//hash_collection.nit:311 */
+  ATTR_hash_collection___HashMapNode____value(fra.me.REG[3]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos3] = 1;
-  return;
-}
-val_t hash_collection___HashMapIterator___item(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 287;
-  fra.me.meth = LOCATE_hash_collection___HashMapIterator___item;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:289 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 289);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_hash_collection___HashMapIterator____node(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:290 */
-  if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 290);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = CALL_abstract_collection___Couple___second(fra.me.REG[0])(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-void hash_collection___HashMapIterator___next(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 305;
-  fra.me.meth = LOCATE_hash_collection___HashMapIterator___next;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:307 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 307);
-    nit_exit(1);
-  }
-  fra.me.REG[1] = ATTR_hash_collection___HashMapIterator____node(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:308 */
-  if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 308);
-    nit_exit(1);
-  }
-  fra.me.REG[1] = CALL_hash_collection___HashNode___next_item(fra.me.REG[1])(fra.me.REG[1]);
-  ATTR_hash_collection___HashMapIterator____node(fra.me.REG[0]) = fra.me.REG[1];
-  stack_frame_head = fra.me.prev;
   return;
 }
 val_t hash_collection___HashMapIterator___is_ok(val_t p0){
@@ -1794,15 +1493,15 @@ val_t hash_collection___HashMapIterator___is_ok(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 285;
+  fra.me.line = 317;
   fra.me.meth = LOCATE_hash_collection___HashMapIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:317 */
   fra.me.REG[0] = ATTR_hash_collection___HashMapIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:285 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
@@ -1820,39 +1519,100 @@ val_t hash_collection___HashMapIterator___is_ok(val_t p0){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
+val_t hash_collection___HashMapIterator___item(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 319;
+  fra.me.meth = LOCATE_hash_collection___HashMapIterator___item;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:321 */
+  REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Assert failed", NULL, LOCATE_hash_collection, 321);
+  }
+  /* ./../lib/standard//collection//hash_collection.nit:322 */
+  fra.me.REG[0] = ATTR_hash_collection___HashMapIterator____node(fra.me.REG[0]);
+  REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+    nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 322);
+  }
+  fra.me.REG[0] = ATTR_hash_collection___HashMapNode____value(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
 val_t hash_collection___HashMapIterator___key(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 299;
+  fra.me.line = 331;
   fra.me.meth = LOCATE_hash_collection___HashMapIterator___key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:333 */
   REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:301 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 301);
-    nit_exit(1);
+    nit_abort("Assert failed", NULL, LOCATE_hash_collection, 333);
   }
+  /* ./../lib/standard//collection//hash_collection.nit:334 */
   fra.me.REG[0] = ATTR_hash_collection___HashMapIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:302 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 302);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 334);
   }
-  fra.me.REG[0] = CALL_abstract_collection___Couple___first(fra.me.REG[0])(fra.me.REG[0]);
+  REGB0 = TAG_Bool(ATTR_hash_collection___HashNode____key(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_key", LOCATE_hash_collection, 334);
+  }
+  fra.me.REG[0] = ATTR_hash_collection___HashNode____key(fra.me.REG[0]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
+}
+void hash_collection___HashMapIterator___next(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 337;
+  fra.me.meth = LOCATE_hash_collection___HashMapIterator___next;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:339 */
+  REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Assert failed", NULL, LOCATE_hash_collection, 339);
+  }
+  /* ./../lib/standard//collection//hash_collection.nit:340 */
+  fra.me.REG[1] = ATTR_hash_collection___HashMapIterator____node(fra.me.REG[0]);
+  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+    nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 340);
+  }
+  fra.me.REG[1] = ATTR_hash_collection___HashNode____next_item(fra.me.REG[1]);
+  ATTR_hash_collection___HashMapIterator____node(fra.me.REG[0]) = fra.me.REG[1];
+  stack_frame_head = fra.me.prev;
+  return;
 }
 void hash_collection___HashMapIterator___init(val_t p0, val_t p1, int* init_table){
   int itpos4 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_HashMapIterator].i;
@@ -1861,7 +1621,7 @@ void hash_collection___HashMapIterator___init(val_t p0, val_t p1, int* init_tabl
   if (init_table[itpos4]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 317;
+  fra.me.line = 349;
   fra.me.meth = LOCATE_hash_collection___HashMapIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1869,32 +1629,14 @@ void hash_collection___HashMapIterator___init(val_t p0, val_t p1, int* init_tabl
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:319 */
+  /* ./../lib/standard//collection//hash_collection.nit:351 */
   ATTR_hash_collection___HashMapIterator____map(fra.me.REG[0]) = fra.me.REG[1];
+  /* ./../lib/standard//collection//hash_collection.nit:352 */
   fra.me.REG[1] = CALL_hash_collection___HashCollection___first_item(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:320 */
   ATTR_hash_collection___HashMapIterator____node(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos4] = 1;
   return;
-}
-val_t hash_collection___HashSet___iterator(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 356;
-  fra.me.meth = LOCATE_hash_collection___HashSet___iterator;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[0] = NEW_HashSetIterator_hash_collection___HashSetIterator___init(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:356 */
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
 }
 val_t hash_collection___HashSet___is_empty(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -1904,70 +1646,104 @@ val_t hash_collection___HashSet___is_empty(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 328;
+  fra.me.line = 360;
   fra.me.meth = LOCATE_hash_collection___HashSet___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:360 */
   REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:328 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 328);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_hash_collection, 360);
   }
   REGB0 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
+    /* ./../lib/standard//kernel.nit:207 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
+    /* ./../lib/standard//collection//hash_collection.nit:360 */
     REGB2 = REGB1;
-  /* ./../lib/standard//collection//hash_collection.nit:328 */
   }
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB2;
 }
-val_t hash_collection___HashSet___has(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+val_t hash_collection___HashSet___first(val_t p0){
+  struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t REGB1;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 336;
-  fra.me.meth = LOCATE_hash_collection___HashSet___has;
+  fra.me.line = 362;
+  fra.me.meth = LOCATE_hash_collection___HashSet___first;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
-  REGB0 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:338 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 338);
-    nit_exit(1);
-  }
-  fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-  REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:338 */
+  /* ./../lib/standard//collection//hash_collection.nit:364 */
+  REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_hash_collection, 364);
+  }
+  REGB0 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
+  REGB1 = TAG_Int(0);
+  /* ./../lib/standard//kernel.nit:214 */
+  REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
+  /* ./../lib/standard//collection//hash_collection.nit:364 */
+  if (UNTAG_Bool(REGB1)) {
+  } else {
+    nit_abort("Assert failed", NULL, LOCATE_hash_collection, 364);
+  }
+  /* ./../lib/standard//collection//hash_collection.nit:365 */
+  fra.me.REG[0] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
+  REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+    nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 365);
+  }
+  REGB1 = TAG_Bool(ATTR_hash_collection___HashNode____key(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_key", LOCATE_hash_collection, 365);
+  }
+  fra.me.REG[0] = ATTR_hash_collection___HashNode____key(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t hash_collection___HashSet___has(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 368;
+  fra.me.meth = LOCATE_hash_collection___HashSet___has;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:370 */
+  fra.me.REG[1] = CALL_hash_collection___HashCollection___node_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
       REGB0 = REGB1;
     }
   }
@@ -1977,87 +1753,6 @@ val_t hash_collection___HashSet___has(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-val_t hash_collection___HashSet___first(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t REGB1;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 330;
-  fra.me.meth = LOCATE_hash_collection___HashSet___first;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:332 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 332);
-    nit_exit(1);
-  }
-  REGB0 = ATTR_hash_collection___HashCollection____length(fra.me.REG[0]);
-  REGB1 = TAG_Int(0);
-  REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:332 */
-  if (UNTAG_Bool(REGB1)) {
-  } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 332);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[0]);
-  REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:333 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 333);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = CALL_hash_collection___HashNode___key(fra.me.REG[0])(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-void hash_collection___HashSet___clear(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 354;
-  fra.me.meth = LOCATE_hash_collection___HashSet___clear;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:354 */
-  CALL_hash_collection___HashCollection___raz(fra.me.REG[0])(fra.me.REG[0]);
-  stack_frame_head = fra.me.prev;
-  return;
-}
-void hash_collection___HashSet___remove(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 352;
-  fra.me.meth = LOCATE_hash_collection___HashSet___remove;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  REGB0 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:352 */
-  CALL_hash_collection___HashCollection___remove_index(fra.me.REG[0])(fra.me.REG[0], REGB0);
-  stack_frame_head = fra.me.prev;
-  return;
-}
 void hash_collection___HashSet___add(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
@@ -2066,7 +1761,7 @@ void hash_collection___HashSet___add(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 341;
+  fra.me.line = 373;
   fra.me.meth = LOCATE_hash_collection___HashSet___add;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2075,18 +1770,12 @@ void hash_collection___HashSet___add(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:375 */
   REGB0 = CALL_hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  fra.me.REG[2] = ATTR_hash_collection___HashCollection____array(fra.me.REG[0]);
+  /* ./../lib/standard//collection//hash_collection.nit:376 */
+  fra.me.REG[2] = CALL_hash_collection___HashCollection___node_at_idx(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
+  /* ./../lib/standard//collection//hash_collection.nit:377 */
   REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:344 */
-  if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 344);
-    nit_exit(1);
-  }
-  fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-  REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:345 */
   if (UNTAG_Bool(REGB1)) {
   } else {
     REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
@@ -2100,21 +1789,67 @@ void hash_collection___HashSet___add(val_t p0, val_t p1){
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-    /* ./../lib/standard//collection//hash_collection.nit:346 */
-    if (UNTAG_Bool(REGB1)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 346);
-      nit_exit(1);
-    }
-    CALL_hash_collection___HashSetNode___key__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+    /* ./../lib/standard//collection//hash_collection.nit:378 */
+    ATTR_hash_collection___HashNode____key(fra.me.REG[2]) = fra.me.REG[1];
   } else {
+    /* ./../lib/standard//collection//hash_collection.nit:380 */
     fra.me.REG[1] = NEW_HashSetNode_hash_collection___HashSetNode___init(fra.me.REG[1]);
-    /* ./../lib/standard//collection//hash_collection.nit:348 */
     CALL_hash_collection___HashCollection___store(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
   }
   stack_frame_head = fra.me.prev;
   return;
+}
+void hash_collection___HashSet___remove(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 384;
+  fra.me.meth = LOCATE_hash_collection___HashSet___remove;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:384 */
+  CALL_hash_collection___HashCollection___remove_node(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  stack_frame_head = fra.me.prev;
+  return;
+}
+void hash_collection___HashSet___clear(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 386;
+  fra.me.meth = LOCATE_hash_collection___HashSet___clear;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:386 */
+  CALL_hash_collection___HashCollection___raz(fra.me.REG[0])(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return;
+}
+val_t hash_collection___HashSet___iterator(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 388;
+  fra.me.meth = LOCATE_hash_collection___HashSet___iterator;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:388 */
+  fra.me.REG[0] = NEW_HashSetIterator_hash_collection___HashSetIterator___init(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
 }
 void hash_collection___HashSet___init(val_t p0, int* init_table){
   int itpos5 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_HashSet].i;
@@ -2124,154 +1859,54 @@ void hash_collection___HashSet___init(val_t p0, int* init_table){
   if (init_table[itpos5]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 358;
+  fra.me.line = 390;
   fra.me.meth = LOCATE_hash_collection___HashSet___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:390 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./../lib/standard//collection//hash_collection.nit:358 */
   CALL_hash_collection___HashCollection___init(fra.me.REG[0])(fra.me.REG[0], init_table);
+  /* ./../lib/standard//collection//hash_collection.nit:392 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:360 */
   ATTR_hash_collection___HashCollection____capacity(fra.me.REG[1]) = REGB0;
+  /* ./../lib/standard//collection//hash_collection.nit:393 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:361 */
   ATTR_hash_collection___HashCollection____length(fra.me.REG[1]) = REGB0;
+  /* ./../lib/standard//collection//hash_collection.nit:394 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:362 */
   CALL_hash_collection___HashCollection___enlarge(fra.me.REG[1])(fra.me.REG[1], REGB0);
   stack_frame_head = fra.me.prev;
   init_table[itpos5] = 1;
   return;
 }
-val_t hash_collection___HashSetNode___key(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 370;
-  fra.me.meth = LOCATE_hash_collection___HashSetNode___key;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[0] = ATTR_hash_collection___HashSetNode____key(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:370 */
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-void hash_collection___HashSetNode___key__eq(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 370;
-  fra.me.meth = LOCATE_hash_collection___HashSetNode___key__eq;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:370 */
-  ATTR_hash_collection___HashSetNode____key(fra.me.REG[0]) = fra.me.REG[1];
-  stack_frame_head = fra.me.prev;
-  return;
-}
 void hash_collection___HashSetNode___init(val_t p0, val_t p1, int* init_table){
   int itpos6 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_HashSetNode].i;
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t tmp;
   if (init_table[itpos6]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 372;
+  fra.me.line = 402;
   fra.me.meth = LOCATE_hash_collection___HashSetNode___init;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 4;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./../lib/standard//collection//hash_collection.nit:402 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./../lib/standard//collection//hash_collection.nit:372 */
-  CALL_hash_collection___HashNode___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./../lib/standard//collection//hash_collection.nit:374 */
-  ATTR_hash_collection___HashSetNode____key(fra.me.REG[2]) = fra.me.REG[1];
+  fra.me.REG[3] = fra.me.REG[1];
+  CALL_hash_collection___HashNode___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
+  /* ./../lib/standard//collection//hash_collection.nit:404 */
+  ATTR_hash_collection___HashNode____key(fra.me.REG[2]) = fra.me.REG[3];
   stack_frame_head = fra.me.prev;
   init_table[itpos6] = 1;
-  return;
-}
-val_t hash_collection___HashSetIterator___item(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 382;
-  fra.me.meth = LOCATE_hash_collection___HashSetIterator___item;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:384 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 384);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_hash_collection___HashSetIterator____node(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:385 */
-  if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 385);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = CALL_hash_collection___HashNode___key(fra.me.REG[0])(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-void hash_collection___HashSetIterator___next(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 388;
-  fra.me.meth = LOCATE_hash_collection___HashSetIterator___next;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:390 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 390);
-    nit_exit(1);
-  }
-  fra.me.REG[1] = ATTR_hash_collection___HashSetIterator____node(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:391 */
-  if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_hash_collection, 391);
-    nit_exit(1);
-  }
-  fra.me.REG[1] = CALL_hash_collection___HashNode___next_item(fra.me.REG[1])(fra.me.REG[1]);
-  ATTR_hash_collection___HashSetIterator____node(fra.me.REG[0]) = fra.me.REG[1];
-  stack_frame_head = fra.me.prev;
   return;
 }
 val_t hash_collection___HashSetIterator___is_ok(val_t p0){
@@ -2281,15 +1916,15 @@ val_t hash_collection___HashSetIterator___is_ok(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 380;
+  fra.me.line = 410;
   fra.me.meth = LOCATE_hash_collection___HashSetIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:410 */
   fra.me.REG[0] = ATTR_hash_collection___HashSetIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./../lib/standard//collection//hash_collection.nit:380 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
@@ -2307,6 +1942,71 @@ val_t hash_collection___HashSetIterator___is_ok(val_t p0){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
+val_t hash_collection___HashSetIterator___item(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 412;
+  fra.me.meth = LOCATE_hash_collection___HashSetIterator___item;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:414 */
+  REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Assert failed", NULL, LOCATE_hash_collection, 414);
+  }
+  /* ./../lib/standard//collection//hash_collection.nit:415 */
+  fra.me.REG[0] = ATTR_hash_collection___HashSetIterator____node(fra.me.REG[0]);
+  REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+    nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 415);
+  }
+  REGB0 = TAG_Bool(ATTR_hash_collection___HashNode____key(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_key", LOCATE_hash_collection, 415);
+  }
+  fra.me.REG[0] = ATTR_hash_collection___HashNode____key(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+void hash_collection___HashSetIterator___next(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_hash_collection;
+  fra.me.line = 418;
+  fra.me.meth = LOCATE_hash_collection___HashSetIterator___next;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//hash_collection.nit:420 */
+  REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Assert failed", NULL, LOCATE_hash_collection, 420);
+  }
+  /* ./../lib/standard//collection//hash_collection.nit:421 */
+  fra.me.REG[1] = ATTR_hash_collection___HashSetIterator____node(fra.me.REG[0]);
+  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+    nit_abort("Reciever is null", NULL, LOCATE_hash_collection, 421);
+  }
+  fra.me.REG[1] = ATTR_hash_collection___HashNode____next_item(fra.me.REG[1]);
+  ATTR_hash_collection___HashSetIterator____node(fra.me.REG[0]) = fra.me.REG[1];
+  stack_frame_head = fra.me.prev;
+  return;
+}
 void hash_collection___HashSetIterator___init(val_t p0, val_t p1, int* init_table){
   int itpos7 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_HashSetIterator].i;
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
@@ -2314,7 +2014,7 @@ void hash_collection___HashSetIterator___init(val_t p0, val_t p1, int* init_tabl
   if (init_table[itpos7]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_hash_collection;
-  fra.me.line = 400;
+  fra.me.line = 430;
   fra.me.meth = LOCATE_hash_collection___HashSetIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2322,10 +2022,10 @@ void hash_collection___HashSetIterator___init(val_t p0, val_t p1, int* init_tabl
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:402 */
+  /* ./../lib/standard//collection//hash_collection.nit:432 */
   ATTR_hash_collection___HashSetIterator____set(fra.me.REG[0]) = fra.me.REG[1];
-  fra.me.REG[1] = CALL_hash_collection___HashCollection___first_item(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:403 */
+  /* ./../lib/standard//collection//hash_collection.nit:433 */
+  fra.me.REG[1] = ATTR_hash_collection___HashCollection____first_item(fra.me.REG[1]);
   ATTR_hash_collection___HashSetIterator____node(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos7] = 1;

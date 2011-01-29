@@ -22,29 +22,29 @@ extern const int SFT_sorter[];
 #define COLOR_ComparableSorter (SFT_sorter[4])
 #define INIT_TABLE_POS_ComparableSorter (SFT_sorter[5] + 0)
 #define CALL_sorter___ComparableSorter___init(recv) ((sorter___ComparableSorter___init_t)CALL((recv), (SFT_sorter[5] + 1)))
-#define LOCATE_sorter___AbstractSorter___compare "sorter::AbstractSorter::compare"
+static const char * const LOCATE_sorter___AbstractSorter___compare = "sorter::AbstractSorter::compare";
 val_t sorter___AbstractSorter___compare(val_t p0, val_t p1, val_t p2);
 typedef val_t (*sorter___AbstractSorter___compare_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_sorter___AbstractSorter___sort "sorter::AbstractSorter::sort"
+static const char * const LOCATE_sorter___AbstractSorter___sort = "sorter::AbstractSorter::sort";
 void sorter___AbstractSorter___sort(val_t p0, val_t p1);
 typedef void (*sorter___AbstractSorter___sort_t)(val_t p0, val_t p1);
-#define LOCATE_sorter___AbstractSorter___sub_sort "sorter::AbstractSorter::sub_sort"
+static const char * const LOCATE_sorter___AbstractSorter___sub_sort = "sorter::AbstractSorter::sub_sort";
 void sorter___AbstractSorter___sub_sort(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (*sorter___AbstractSorter___sub_sort_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_sorter___AbstractSorter___quick_sort "sorter::AbstractSorter::quick_sort"
+static const char * const LOCATE_sorter___AbstractSorter___quick_sort = "sorter::AbstractSorter::quick_sort";
 void sorter___AbstractSorter___quick_sort(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (*sorter___AbstractSorter___quick_sort_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_sorter___AbstractSorter___bubble_sort "sorter::AbstractSorter::bubble_sort"
+static const char * const LOCATE_sorter___AbstractSorter___bubble_sort = "sorter::AbstractSorter::bubble_sort";
 void sorter___AbstractSorter___bubble_sort(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (*sorter___AbstractSorter___bubble_sort_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_sorter___AbstractSorter___init "sorter::AbstractSorter::init"
+static const char * const LOCATE_sorter___AbstractSorter___init = "sorter::AbstractSorter::init";
 void sorter___AbstractSorter___init(val_t p0, int* init_table);
 typedef void (*sorter___AbstractSorter___init_t)(val_t p0, int* init_table);
 val_t NEW_AbstractSorter_sorter___AbstractSorter___init();
-#define LOCATE_sorter___ComparableSorter___compare "sorter::ComparableSorter::(sorter::AbstractSorter::compare)"
+static const char * const LOCATE_sorter___ComparableSorter___compare = "sorter::ComparableSorter::(sorter::AbstractSorter::compare)";
 val_t sorter___ComparableSorter___compare(val_t p0, val_t p1, val_t p2);
 typedef val_t (*sorter___ComparableSorter___compare_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_sorter___ComparableSorter___init "sorter::ComparableSorter::init"
+static const char * const LOCATE_sorter___ComparableSorter___init = "sorter::ComparableSorter::init";
 void sorter___ComparableSorter___init(val_t p0, int* init_table);
 typedef void (*sorter___ComparableSorter___init_t)(val_t p0, int* init_table);
 val_t NEW_ComparableSorter_sorter___ComparableSorter___init();

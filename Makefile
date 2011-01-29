@@ -22,8 +22,6 @@ bin/nitc: c_src/nitc src/parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile nitc from NIT source files                          *'
 	@echo '***************************************************************'
-	mkdir .nit_compile 2> /dev/null || true
-	cp c_src/*.o c_src/*.cksum .nit_compile
 	src/git-gen-version.sh
 	c_src/nitc ${NITCOPT} --clibdir c_src/clib -o bin/nitc -O -v src/nitc.nit
 

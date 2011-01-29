@@ -9,7 +9,7 @@ extern const char *LOCATE_icode_builder;
 extern const int SFT_icode_builder[];
 #define ID_ICodeBuilder (SFT_icode_builder[0])
 #define COLOR_ICodeBuilder (SFT_icode_builder[1])
-#define ATTR_icode_builder___ICodeBuilder____module(recv) ATTR(recv, (SFT_icode_builder[2] + 0))
+#define ATTR_icode_builder___ICodeBuilder____mmmodule(recv) ATTR(recv, (SFT_icode_builder[2] + 0))
 #define ATTR_icode_builder___ICodeBuilder____iroutine(recv) ATTR(recv, (SFT_icode_builder[2] + 1))
 #define ATTR_icode_builder___ICodeBuilder____seq(recv) ATTR(recv, (SFT_icode_builder[2] + 2))
 #define ATTR_icode_builder___ICodeBuilder____current_location(recv) ATTR(recv, (SFT_icode_builder[2] + 3))
@@ -29,7 +29,7 @@ extern const int SFT_icode_builder[];
 #define CALL_icode_builder___ICodeBuilder___lit_true_reg(recv) ((icode_builder___ICodeBuilder___lit_true_reg_t)CALL((recv), (SFT_icode_builder[3] + 13)))
 #define CALL_icode_builder___ICodeBuilder___lit_false_reg(recv) ((icode_builder___ICodeBuilder___lit_false_reg_t)CALL((recv), (SFT_icode_builder[3] + 14)))
 #define CALL_icode_builder___ICodeBuilder___new_register(recv) ((icode_builder___ICodeBuilder___new_register_t)CALL((recv), (SFT_icode_builder[3] + 15)))
-#define CALL_icode_builder___ICodeBuilder___module(recv) ((icode_builder___ICodeBuilder___module_t)CALL((recv), (SFT_icode_builder[3] + 16)))
+#define CALL_icode_builder___ICodeBuilder___mmmodule(recv) ((icode_builder___ICodeBuilder___mmmodule_t)CALL((recv), (SFT_icode_builder[3] + 16)))
 #define CALL_icode_builder___ICodeBuilder___iroutine(recv) ((icode_builder___ICodeBuilder___iroutine_t)CALL((recv), (SFT_icode_builder[3] + 17)))
 #define CALL_icode_builder___ICodeBuilder___seq(recv) ((icode_builder___ICodeBuilder___seq_t)CALL((recv), (SFT_icode_builder[3] + 18)))
 #define CALL_icode_builder___ICodeBuilder___seq__eq(recv) ((icode_builder___ICodeBuilder___seq__eq_t)CALL((recv), (SFT_icode_builder[3] + 19)))
@@ -38,78 +38,78 @@ extern const int SFT_icode_builder[];
 #define CALL_icode_builder___ICodeBuilder___current_location__eq(recv) ((icode_builder___ICodeBuilder___current_location__eq_t)CALL((recv), (SFT_icode_builder[3] + 22)))
 #define CALL_icode_builder___MMSignature___generate_empty_iroutine(recv) ((icode_builder___MMSignature___generate_empty_iroutine_t)CALL((recv), (SFT_icode_builder[4] + 0)))
 #define CALL_icode_builder___MMSignature___generate_empty_iclosuredef(recv) ((icode_builder___MMSignature___generate_empty_iclosuredef_t)CALL((recv), (SFT_icode_builder[4] + 1)))
-#define LOCATE_icode_builder___ICodeBuilder___stmt "icode_builder::ICodeBuilder::stmt"
+static const char * const LOCATE_icode_builder___ICodeBuilder___stmt = "icode_builder::ICodeBuilder::stmt";
 void icode_builder___ICodeBuilder___stmt(val_t p0, val_t p1);
 typedef void (*icode_builder___ICodeBuilder___stmt_t)(val_t p0, val_t p1);
-#define LOCATE_icode_builder___ICodeBuilder___expr "icode_builder::ICodeBuilder::expr"
+static const char * const LOCATE_icode_builder___ICodeBuilder___expr = "icode_builder::ICodeBuilder::expr";
 val_t icode_builder___ICodeBuilder___expr(val_t p0, val_t p1, val_t p2);
 typedef val_t (*icode_builder___ICodeBuilder___expr_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_builder___ICodeBuilder___add_assignment "icode_builder::ICodeBuilder::add_assignment"
+static const char * const LOCATE_icode_builder___ICodeBuilder___add_assignment = "icode_builder::ICodeBuilder::add_assignment";
 void icode_builder___ICodeBuilder___add_assignment(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_builder___ICodeBuilder___add_assignment_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_builder___ICodeBuilder___add_null_reciever_check "icode_builder::ICodeBuilder::add_null_reciever_check"
+static const char * const LOCATE_icode_builder___ICodeBuilder___add_null_reciever_check = "icode_builder::ICodeBuilder::add_null_reciever_check";
 void icode_builder___ICodeBuilder___add_null_reciever_check(val_t p0, val_t p1);
 typedef void (*icode_builder___ICodeBuilder___add_null_reciever_check_t)(val_t p0, val_t p1);
-#define LOCATE_icode_builder___ICodeBuilder___add_type_cast "icode_builder::ICodeBuilder::add_type_cast"
+static const char * const LOCATE_icode_builder___ICodeBuilder___add_type_cast = "icode_builder::ICodeBuilder::add_type_cast";
 void icode_builder___ICodeBuilder___add_type_cast(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_builder___ICodeBuilder___add_type_cast_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_builder___ICodeBuilder___add_attr_check "icode_builder::ICodeBuilder::add_attr_check"
+static const char * const LOCATE_icode_builder___ICodeBuilder___add_attr_check = "icode_builder::ICodeBuilder::add_attr_check";
 void icode_builder___ICodeBuilder___add_attr_check(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_builder___ICodeBuilder___add_attr_check_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_builder___ICodeBuilder___add_attr_read "icode_builder::ICodeBuilder::add_attr_read"
+static const char * const LOCATE_icode_builder___ICodeBuilder___add_attr_read = "icode_builder::ICodeBuilder::add_attr_read";
 val_t icode_builder___ICodeBuilder___add_attr_read(val_t p0, val_t p1, val_t p2);
 typedef val_t (*icode_builder___ICodeBuilder___add_attr_read_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_builder___ICodeBuilder___add_abort "icode_builder::ICodeBuilder::add_abort"
+static const char * const LOCATE_icode_builder___ICodeBuilder___add_abort = "icode_builder::ICodeBuilder::add_abort";
 void icode_builder___ICodeBuilder___add_abort(val_t p0, val_t p1);
 typedef void (*icode_builder___ICodeBuilder___add_abort_t)(val_t p0, val_t p1);
-#define LOCATE_icode_builder___ICodeBuilder___add_return_value "icode_builder::ICodeBuilder::add_return_value"
+static const char * const LOCATE_icode_builder___ICodeBuilder___add_return_value = "icode_builder::ICodeBuilder::add_return_value";
 void icode_builder___ICodeBuilder___add_return_value(val_t p0, val_t p1);
 typedef void (*icode_builder___ICodeBuilder___add_return_value_t)(val_t p0, val_t p1);
-#define LOCATE_icode_builder___ICodeBuilder___add_call "icode_builder::ICodeBuilder::add_call"
+static const char * const LOCATE_icode_builder___ICodeBuilder___add_call = "icode_builder::ICodeBuilder::add_call";
 val_t icode_builder___ICodeBuilder___add_call(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (*icode_builder___ICodeBuilder___add_call_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_icode_builder___ICodeBuilder___add_escape "icode_builder::ICodeBuilder::add_escape"
+static const char * const LOCATE_icode_builder___ICodeBuilder___add_escape = "icode_builder::ICodeBuilder::add_escape";
 void icode_builder___ICodeBuilder___add_escape(val_t p0, val_t p1);
 typedef void (*icode_builder___ICodeBuilder___add_escape_t)(val_t p0, val_t p1);
-#define LOCATE_icode_builder___ICodeBuilder___lit_null_reg "icode_builder::ICodeBuilder::lit_null_reg"
+static const char * const LOCATE_icode_builder___ICodeBuilder___lit_null_reg = "icode_builder::ICodeBuilder::lit_null_reg";
 val_t icode_builder___ICodeBuilder___lit_null_reg(val_t p0);
 typedef val_t (*icode_builder___ICodeBuilder___lit_null_reg_t)(val_t p0);
-#define LOCATE_icode_builder___ICodeBuilder___lit_true_reg "icode_builder::ICodeBuilder::lit_true_reg"
+static const char * const LOCATE_icode_builder___ICodeBuilder___lit_true_reg = "icode_builder::ICodeBuilder::lit_true_reg";
 val_t icode_builder___ICodeBuilder___lit_true_reg(val_t p0);
 typedef val_t (*icode_builder___ICodeBuilder___lit_true_reg_t)(val_t p0);
-#define LOCATE_icode_builder___ICodeBuilder___lit_false_reg "icode_builder::ICodeBuilder::lit_false_reg"
+static const char * const LOCATE_icode_builder___ICodeBuilder___lit_false_reg = "icode_builder::ICodeBuilder::lit_false_reg";
 val_t icode_builder___ICodeBuilder___lit_false_reg(val_t p0);
 typedef val_t (*icode_builder___ICodeBuilder___lit_false_reg_t)(val_t p0);
-#define LOCATE_icode_builder___ICodeBuilder___new_register "icode_builder::ICodeBuilder::new_register"
+static const char * const LOCATE_icode_builder___ICodeBuilder___new_register = "icode_builder::ICodeBuilder::new_register";
 val_t icode_builder___ICodeBuilder___new_register(val_t p0, val_t p1);
 typedef val_t (*icode_builder___ICodeBuilder___new_register_t)(val_t p0, val_t p1);
-#define LOCATE_icode_builder___ICodeBuilder___module "icode_builder::ICodeBuilder::module"
-val_t icode_builder___ICodeBuilder___module(val_t p0);
-typedef val_t (*icode_builder___ICodeBuilder___module_t)(val_t p0);
-#define LOCATE_icode_builder___ICodeBuilder___iroutine "icode_builder::ICodeBuilder::iroutine"
+static const char * const LOCATE_icode_builder___ICodeBuilder___mmmodule = "icode_builder::ICodeBuilder::mmmodule";
+val_t icode_builder___ICodeBuilder___mmmodule(val_t p0);
+typedef val_t (*icode_builder___ICodeBuilder___mmmodule_t)(val_t p0);
+static const char * const LOCATE_icode_builder___ICodeBuilder___iroutine = "icode_builder::ICodeBuilder::iroutine";
 val_t icode_builder___ICodeBuilder___iroutine(val_t p0);
 typedef val_t (*icode_builder___ICodeBuilder___iroutine_t)(val_t p0);
-#define LOCATE_icode_builder___ICodeBuilder___seq "icode_builder::ICodeBuilder::seq"
+static const char * const LOCATE_icode_builder___ICodeBuilder___seq = "icode_builder::ICodeBuilder::seq";
 val_t icode_builder___ICodeBuilder___seq(val_t p0);
 typedef val_t (*icode_builder___ICodeBuilder___seq_t)(val_t p0);
-#define LOCATE_icode_builder___ICodeBuilder___seq__eq "icode_builder::ICodeBuilder::seq="
+static const char * const LOCATE_icode_builder___ICodeBuilder___seq__eq = "icode_builder::ICodeBuilder::seq=";
 void icode_builder___ICodeBuilder___seq__eq(val_t p0, val_t p1);
 typedef void (*icode_builder___ICodeBuilder___seq__eq_t)(val_t p0, val_t p1);
-#define LOCATE_icode_builder___ICodeBuilder___init "icode_builder::ICodeBuilder::init"
+static const char * const LOCATE_icode_builder___ICodeBuilder___init = "icode_builder::ICodeBuilder::init";
 void icode_builder___ICodeBuilder___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*icode_builder___ICodeBuilder___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_ICodeBuilder_icode_builder___ICodeBuilder___init(val_t p0, val_t p1);
-#define LOCATE_icode_builder___ICodeBuilder___current_location "icode_builder::ICodeBuilder::current_location"
+static const char * const LOCATE_icode_builder___ICodeBuilder___current_location = "icode_builder::ICodeBuilder::current_location";
 val_t icode_builder___ICodeBuilder___current_location(val_t p0);
 typedef val_t (*icode_builder___ICodeBuilder___current_location_t)(val_t p0);
-#define LOCATE_icode_builder___ICodeBuilder___current_location__eq "icode_builder::ICodeBuilder::current_location="
+static const char * const LOCATE_icode_builder___ICodeBuilder___current_location__eq = "icode_builder::ICodeBuilder::current_location=";
 void icode_builder___ICodeBuilder___current_location__eq(val_t p0, val_t p1);
 typedef void (*icode_builder___ICodeBuilder___current_location__eq_t)(val_t p0, val_t p1);
-val_t NEW_MMSignature_static_type___MMSignature___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_builder___MMSignature___generate_empty_iroutine "icode_builder::MMSignature::generate_empty_iroutine"
+static const char * const LOCATE_icode_builder___MMSignature___generate_empty_iroutine = "icode_builder::MMSignature::generate_empty_iroutine";
 val_t icode_builder___MMSignature___generate_empty_iroutine(val_t p0);
 typedef val_t (*icode_builder___MMSignature___generate_empty_iroutine_t)(val_t p0);
-#define LOCATE_icode_builder___MMSignature___generate_empty_iclosuredef "icode_builder::MMSignature::generate_empty_iclosuredef"
+static const char * const LOCATE_icode_builder___MMSignature___generate_empty_iclosuredef = "icode_builder::MMSignature::generate_empty_iclosuredef";
 val_t icode_builder___MMSignature___generate_empty_iclosuredef(val_t p0, val_t p1);
 typedef val_t (*icode_builder___MMSignature___generate_empty_iclosuredef_t)(val_t p0, val_t p1);
+val_t NEW_MMSignature_static_type___MMSignature___init(val_t p0, val_t p1, val_t p2);
 #endif

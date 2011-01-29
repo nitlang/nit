@@ -17,31 +17,34 @@ extern const int SFT_syntax[];
 #define ATTR_syntax___ToolContext____keep_ast(recv) ATTR(recv, (SFT_syntax[4] + 0))
 #define CALL_syntax___ToolContext___keep_ast(recv) ((syntax___ToolContext___keep_ast_t)CALL((recv), (SFT_syntax[5] + 0)))
 #define CALL_syntax___ToolContext___keep_ast__eq(recv) ((syntax___ToolContext___keep_ast__eq_t)CALL((recv), (SFT_syntax[5] + 1)))
-#define LOCATE_syntax___SrcModuleLoader___file_type "syntax::SrcModuleLoader::(mmloader::ModuleLoader::file_type)"
+static const char * const LOCATE_syntax___SrcModuleLoader___file_type = "syntax::SrcModuleLoader::(mmloader::ModuleLoader::file_type)";
 val_t syntax___SrcModuleLoader___file_type(val_t p0);
 typedef val_t (*syntax___SrcModuleLoader___file_type_t)(val_t p0);
-#define LOCATE_syntax___SrcModuleLoader___parse_file "syntax::SrcModuleLoader::(mmloader::ModuleLoader::parse_file)"
+static const char * const LOCATE_syntax___SrcModuleLoader___parse_file = "syntax::SrcModuleLoader::(mmloader::ModuleLoader::parse_file)";
 val_t syntax___SrcModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 typedef val_t (*syntax___SrcModuleLoader___parse_file_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_syntax___SrcModuleLoader___process_metamodel "syntax::SrcModuleLoader::(mmloader::ModuleLoader::process_metamodel)"
+  typedef void (*CLOS_OC_syntax___SrcModuleLoader___parse_file_1_0)(struct stack_frame_t *);
+  void OC_syntax___SrcModuleLoader___parse_file_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_syntax___SrcModuleLoader___parse_file_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_syntax___SrcModuleLoader___process_metamodel = "syntax::SrcModuleLoader::(mmloader::ModuleLoader::process_metamodel)";
 void syntax___SrcModuleLoader___process_metamodel(val_t p0, val_t p1, val_t p2);
 typedef void (*syntax___SrcModuleLoader___process_metamodel_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_syntax___SrcModuleLoader___init "syntax::SrcModuleLoader::init"
+static const char * const LOCATE_syntax___SrcModuleLoader___init = "syntax::SrcModuleLoader::init";
 void syntax___SrcModuleLoader___init(val_t p0, int* init_table);
 typedef void (*syntax___SrcModuleLoader___init_t)(val_t p0, int* init_table);
 val_t NEW_SrcModuleLoader_syntax___SrcModuleLoader___init();
-val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_syntax___MMSrcModule___process_supermodules "syntax::MMSrcModule::process_supermodules"
+static const char * const LOCATE_syntax___MMSrcModule___process_supermodules = "syntax::MMSrcModule::process_supermodules";
 void syntax___MMSrcModule___process_supermodules(val_t p0, val_t p1);
 typedef void (*syntax___MMSrcModule___process_supermodules_t)(val_t p0, val_t p1);
-#define LOCATE_syntax___MMSrcModule___process_syntax "syntax::MMSrcModule::process_syntax"
+static const char * const LOCATE_syntax___MMSrcModule___process_syntax = "syntax::MMSrcModule::process_syntax";
 void syntax___MMSrcModule___process_syntax(val_t p0, val_t p1);
 typedef void (*syntax___MMSrcModule___process_syntax_t)(val_t p0, val_t p1);
-val_t NEW_ToolContext_mmloader___ToolContext___init();
-#define LOCATE_syntax___ToolContext___keep_ast "syntax::ToolContext::keep_ast"
+val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+static const char * const LOCATE_syntax___ToolContext___keep_ast = "syntax::ToolContext::keep_ast";
 val_t syntax___ToolContext___keep_ast(val_t p0);
 typedef val_t (*syntax___ToolContext___keep_ast_t)(val_t p0);
-#define LOCATE_syntax___ToolContext___keep_ast__eq "syntax::ToolContext::keep_ast="
+static const char * const LOCATE_syntax___ToolContext___keep_ast__eq = "syntax::ToolContext::keep_ast=";
 void syntax___ToolContext___keep_ast__eq(val_t p0, val_t p1);
 typedef void (*syntax___ToolContext___keep_ast__eq_t)(val_t p0, val_t p1);
+val_t NEW_ToolContext_mmloader___ToolContext___init();
 #endif

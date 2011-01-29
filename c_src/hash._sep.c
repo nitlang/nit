@@ -13,8 +13,10 @@ val_t hash___Object___hash(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//hash.nit:24 */
   REGB0 = CALL_kernel___Object___object_id(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Int(8);
+  /* ./../lib/standard//kernel.nit:219 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)/UNTAG_Int(REGB1));
   /* ./../lib/standard//hash.nit:24 */
   goto label1;
@@ -50,6 +52,7 @@ val_t hash___Char___hash(val_t p0){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   REGB0 = p0;
+  /* ./../lib/standard//kernel.nit:382 */
   REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
   /* ./../lib/standard//hash.nit:32 */
   goto label1;
@@ -71,13 +74,13 @@ val_t hash___Bool___hash(val_t p0){
   REGB0 = p0;
   /* ./../lib/standard//hash.nit:38 */
   if (UNTAG_Bool(REGB0)) {
-    REGB0 = TAG_Int(1);
     /* ./../lib/standard//hash.nit:39 */
+    REGB0 = TAG_Int(1);
     goto label1;
   } else {
+    /* ./../lib/standard//hash.nit:41 */
     REGB1 = TAG_Int(0);
     REGB0 = REGB1;
-    /* ./../lib/standard//hash.nit:41 */
     goto label1;
   }
   label1: while(0);

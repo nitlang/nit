@@ -20,165 +20,205 @@ extern const int SFT_icode_tools[];
 #define CALL_icode_tools___ICodeVisitor___visit_closure_defs(recv) ((icode_tools___ICodeVisitor___visit_closure_defs_t)CALL((recv), (SFT_icode_tools[3] + 5)))
 #define CALL_icode_tools___ICodeVisitor___visit_iroutine(recv) ((icode_tools___ICodeVisitor___visit_iroutine_t)CALL((recv), (SFT_icode_tools[3] + 6)))
 #define CALL_icode_tools___ICodeVisitor___init(recv) ((icode_tools___ICodeVisitor___init_t)CALL((recv), (SFT_icode_tools[3] + 7)))
-#define ATTR_icode_tools___ICodeBuilder____current_inlining(recv) ATTR(recv, (SFT_icode_tools[4] + 0))
-#define CALL_icode_tools___ICodeBuilder___is_currently_inlining_routine(recv) ((icode_tools___ICodeBuilder___is_currently_inlining_routine_t)CALL((recv), (SFT_icode_tools[5] + 0)))
-#define CALL_icode_tools___ICodeBuilder___inline_routine(recv) ((icode_tools___ICodeBuilder___inline_routine_t)CALL((recv), (SFT_icode_tools[5] + 1)))
-#define ID_ICodeDupContext (SFT_icode_tools[6])
-#define COLOR_ICodeDupContext (SFT_icode_tools[7])
-#define ATTR_icode_tools___ICodeDupContext____registers(recv) ATTR(recv, (SFT_icode_tools[8] + 0))
-#define ATTR_icode_tools___ICodeDupContext____marks(recv) ATTR(recv, (SFT_icode_tools[8] + 1))
-#define ATTR_icode_tools___ICodeDupContext____closures(recv) ATTR(recv, (SFT_icode_tools[8] + 2))
-#define ATTR_icode_tools___ICodeDupContext____icb(recv) ATTR(recv, (SFT_icode_tools[8] + 3))
-#define INIT_TABLE_POS_ICodeDupContext (SFT_icode_tools[9] + 0)
-#define CALL_icode_tools___ICodeDupContext___dup_ireg(recv) ((icode_tools___ICodeDupContext___dup_ireg_t)CALL((recv), (SFT_icode_tools[9] + 1)))
-#define CALL_icode_tools___ICodeDupContext___dup_iregs(recv) ((icode_tools___ICodeDupContext___dup_iregs_t)CALL((recv), (SFT_icode_tools[9] + 2)))
-#define CALL_icode_tools___ICodeDupContext___dup_mark(recv) ((icode_tools___ICodeDupContext___dup_mark_t)CALL((recv), (SFT_icode_tools[9] + 3)))
-#define CALL_icode_tools___ICodeDupContext___init(recv) ((icode_tools___ICodeDupContext___init_t)CALL((recv), (SFT_icode_tools[9] + 4)))
-#define CALL_icode_tools___ICode___dup_with(recv) ((icode_tools___ICode___dup_with_t)CALL((recv), (SFT_icode_tools[10] + 0)))
-#define CALL_icode_tools___ICode___inner_dup_with(recv) ((icode_tools___ICode___inner_dup_with_t)CALL((recv), (SFT_icode_tools[10] + 1)))
-#define CALL_icode_tools___ISeq___dup_seq_to(recv) ((icode_tools___ISeq___dup_seq_to_t)CALL((recv), (SFT_icode_tools[11] + 0)))
-#define LOCATE_icode_tools___ICodeVisitor___visit_iregister_read "icode_tools::ICodeVisitor::visit_iregister_read"
+#define CALL_icode_tools___ICodeBuilder___inline_routine(recv) ((icode_tools___ICodeBuilder___inline_routine_t)CALL((recv), (SFT_icode_tools[4] + 0)))
+#define ID_ICodeDupContext (SFT_icode_tools[5])
+#define COLOR_ICodeDupContext (SFT_icode_tools[6])
+#define ATTR_icode_tools___ICodeDupContext____registers(recv) ATTR(recv, (SFT_icode_tools[7] + 0))
+#define ATTR_icode_tools___ICodeDupContext____marks(recv) ATTR(recv, (SFT_icode_tools[7] + 1))
+#define ATTR_icode_tools___ICodeDupContext____closures(recv) ATTR(recv, (SFT_icode_tools[7] + 2))
+#define ATTR_icode_tools___ICodeDupContext____icb(recv) ATTR(recv, (SFT_icode_tools[7] + 3))
+#define INIT_TABLE_POS_ICodeDupContext (SFT_icode_tools[8] + 0)
+#define CALL_icode_tools___ICodeDupContext___dup_ireg(recv) ((icode_tools___ICodeDupContext___dup_ireg_t)CALL((recv), (SFT_icode_tools[8] + 1)))
+#define CALL_icode_tools___ICodeDupContext___dup_iregs(recv) ((icode_tools___ICodeDupContext___dup_iregs_t)CALL((recv), (SFT_icode_tools[8] + 2)))
+#define CALL_icode_tools___ICodeDupContext___dup_mark(recv) ((icode_tools___ICodeDupContext___dup_mark_t)CALL((recv), (SFT_icode_tools[8] + 3)))
+#define CALL_icode_tools___ICodeDupContext___init(recv) ((icode_tools___ICodeDupContext___init_t)CALL((recv), (SFT_icode_tools[8] + 4)))
+#define CALL_icode_tools___ICode___dup_with(recv) ((icode_tools___ICode___dup_with_t)CALL((recv), (SFT_icode_tools[9] + 0)))
+#define CALL_icode_tools___ICode___inner_dup_with(recv) ((icode_tools___ICode___inner_dup_with_t)CALL((recv), (SFT_icode_tools[9] + 1)))
+#define CALL_icode_tools___ISeq___dup_seq_to(recv) ((icode_tools___ISeq___dup_seq_to_t)CALL((recv), (SFT_icode_tools[10] + 0)))
+#define CALL_SUPER_icode_tools___IClosCall___dup_with(recv) ((icode_tools___IClosCall___dup_with_t)CALL((recv), (SFT_icode_tools[11] + 0)))
+static const char * const LOCATE_icode_tools___ICodeVisitor___visit_iregister_read = "icode_tools::ICodeVisitor::visit_iregister_read";
 void icode_tools___ICodeVisitor___visit_iregister_read(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_tools___ICodeVisitor___visit_iregister_read_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_tools___ICodeVisitor___visit_iregister_write "icode_tools::ICodeVisitor::visit_iregister_write"
+static const char * const LOCATE_icode_tools___ICodeVisitor___visit_iregister_write = "icode_tools::ICodeVisitor::visit_iregister_write";
 void icode_tools___ICodeVisitor___visit_iregister_write(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_tools___ICodeVisitor___visit_iregister_write_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_tools___ICodeVisitor___current_icode "icode_tools::ICodeVisitor::current_icode"
+static const char * const LOCATE_icode_tools___ICodeVisitor___current_icode = "icode_tools::ICodeVisitor::current_icode";
 val_t icode_tools___ICodeVisitor___current_icode(val_t p0);
 typedef val_t (*icode_tools___ICodeVisitor___current_icode_t)(val_t p0);
-#define LOCATE_icode_tools___ICodeVisitor___visit_icode "icode_tools::ICodeVisitor::visit_icode"
+static const char * const LOCATE_icode_tools___ICodeVisitor___visit_icode = "icode_tools::ICodeVisitor::visit_icode";
 void icode_tools___ICodeVisitor___visit_icode(val_t p0, val_t p1);
 typedef void (*icode_tools___ICodeVisitor___visit_icode_t)(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICodeVisitor___visit_closure_defs "icode_tools::ICodeVisitor::visit_closure_defs"
+              typedef void (*CLOS_OC_icode_tools___ICodeVisitor___visit_icode_3_0)(struct stack_frame_t *);
+              void OC_icode_tools___ICodeVisitor___visit_icode_3(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+              typedef void (*OC_icode_tools___ICodeVisitor___visit_icode_3_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_icode_tools___ICodeVisitor___visit_closure_defs = "icode_tools::ICodeVisitor::visit_closure_defs";
 void icode_tools___ICodeVisitor___visit_closure_defs(val_t p0, val_t p1);
 typedef void (*icode_tools___ICodeVisitor___visit_closure_defs_t)(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICodeVisitor___visit_iroutine "icode_tools::ICodeVisitor::visit_iroutine"
+  typedef void (*CLOS_OC_icode_tools___ICodeVisitor___visit_closure_defs_1_0)(struct stack_frame_t *);
+  void OC_icode_tools___ICodeVisitor___visit_closure_defs_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_tools___ICodeVisitor___visit_closure_defs_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_icode_tools___ICodeVisitor___visit_iroutine = "icode_tools::ICodeVisitor::visit_iroutine";
 void icode_tools___ICodeVisitor___visit_iroutine(val_t p0, val_t p1);
 typedef void (*icode_tools___ICodeVisitor___visit_iroutine_t)(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICodeVisitor___init "icode_tools::ICodeVisitor::init"
+static const char * const LOCATE_icode_tools___ICodeVisitor___init = "icode_tools::ICodeVisitor::init";
 void icode_tools___ICodeVisitor___init(val_t p0, int* init_table);
 typedef void (*icode_tools___ICodeVisitor___init_t)(val_t p0, int* init_table);
 val_t NEW_ICodeVisitor_icode_tools___ICodeVisitor___init();
-val_t NEW_ICodeBuilder_icode_builder___ICodeBuilder___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICodeBuilder___is_currently_inlining_routine "icode_tools::ICodeBuilder::is_currently_inlining_routine"
-val_t icode_tools___ICodeBuilder___is_currently_inlining_routine(val_t p0, val_t p1);
-typedef val_t (*icode_tools___ICodeBuilder___is_currently_inlining_routine_t)(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICodeBuilder___inline_routine "icode_tools::ICodeBuilder::inline_routine"
+static const char * const LOCATE_icode_tools___ICodeBuilder___inline_routine = "icode_tools::ICodeBuilder::inline_routine";
 val_t icode_tools___ICodeBuilder___inline_routine(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (*icode_tools___ICodeBuilder___inline_routine_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_icode_tools___ICodeDupContext___dup_ireg "icode_tools::ICodeDupContext::dup_ireg"
+  typedef void (*CLOS_OC_icode_tools___ICodeBuilder___inline_routine_1_0)(struct stack_frame_t *);
+  void OC_icode_tools___ICodeBuilder___inline_routine_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_tools___ICodeBuilder___inline_routine_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*CLOS_OC_icode_tools___ICodeBuilder___inline_routine_3_0)(struct stack_frame_t *);
+  void OC_icode_tools___ICodeBuilder___inline_routine_3(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_tools___ICodeBuilder___inline_routine_3_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ICodeBuilder_icode_builder___ICodeBuilder___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___ICodeDupContext___dup_ireg = "icode_tools::ICodeDupContext::dup_ireg";
 val_t icode_tools___ICodeDupContext___dup_ireg(val_t p0, val_t p1);
 typedef val_t (*icode_tools___ICodeDupContext___dup_ireg_t)(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICodeDupContext___dup_iregs "icode_tools::ICodeDupContext::dup_iregs"
+static const char * const LOCATE_icode_tools___ICodeDupContext___dup_iregs = "icode_tools::ICodeDupContext::dup_iregs";
 val_t icode_tools___ICodeDupContext___dup_iregs(val_t p0, val_t p1);
 typedef val_t (*icode_tools___ICodeDupContext___dup_iregs_t)(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICodeDupContext___dup_mark "icode_tools::ICodeDupContext::dup_mark"
+  typedef void (*CLOS_OC_icode_tools___ICodeDupContext___dup_iregs_1_0)(struct stack_frame_t *);
+  void OC_icode_tools___ICodeDupContext___dup_iregs_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_tools___ICodeDupContext___dup_iregs_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_icode_tools___ICodeDupContext___dup_mark = "icode_tools::ICodeDupContext::dup_mark";
 val_t icode_tools___ICodeDupContext___dup_mark(val_t p0, val_t p1);
 typedef val_t (*icode_tools___ICodeDupContext___dup_mark_t)(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICodeDupContext___init "icode_tools::ICodeDupContext::init"
+static const char * const LOCATE_icode_tools___ICodeDupContext___init = "icode_tools::ICodeDupContext::init";
 void icode_tools___ICodeDupContext___init(val_t p0, val_t p1, int* init_table);
 typedef void (*icode_tools___ICodeDupContext___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_ICodeDupContext_icode_tools___ICodeDupContext___init(val_t p0);
-val_t NEW_ICode_icode_base___ICode___init();
-#define LOCATE_icode_tools___ICode___dup_with "icode_tools::ICode::dup_with"
+static const char * const LOCATE_icode_tools___ICode___dup_with = "icode_tools::ICode::dup_with";
 void icode_tools___ICode___dup_with(val_t p0, val_t p1);
 typedef void (*icode_tools___ICode___dup_with_t)(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICode___inner_dup_with "icode_tools::ICode::inner_dup_with"
+      typedef void (*CLOS_OC_icode_tools___ICode___dup_with_1_0)(struct stack_frame_t *);
+      void OC_icode_tools___ICode___dup_with_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+      typedef void (*OC_icode_tools___ICode___dup_with_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_icode_tools___ICode___inner_dup_with = "icode_tools::ICode::inner_dup_with";
 val_t icode_tools___ICode___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___ICode___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_ISeq_icode_base___ISeq___init();
-#define LOCATE_icode_tools___ISeq___inner_dup_with "icode_tools::ISeq::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_ICode_icode_base___ICode___init();
+static const char * const LOCATE_icode_tools___ISeq___inner_dup_with = "icode_tools::ISeq::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___ISeq___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___ISeq___inner_dup_with_t)(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ISeq___dup_seq_to "icode_tools::ISeq::dup_seq_to"
+static const char * const LOCATE_icode_tools___ISeq___dup_seq_to = "icode_tools::ISeq::dup_seq_to";
 void icode_tools___ISeq___dup_seq_to(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_tools___ISeq___dup_seq_to_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_ILoop_icode_base___ILoop___init();
-#define LOCATE_icode_tools___ILoop___inner_dup_with "icode_tools::ILoop::(icode_tools::ICode::inner_dup_with)"
+  typedef void (*CLOS_OC_icode_tools___ISeq___dup_seq_to_1_0)(struct stack_frame_t *);
+  void OC_icode_tools___ISeq___dup_seq_to_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_icode_tools___ISeq___dup_seq_to_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ISeq_icode_base___ISeq___init();
+static const char * const LOCATE_icode_tools___ILoop___inner_dup_with = "icode_tools::ILoop::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___ILoop___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___ILoop___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IIf_icode_base___IIf___init(val_t p0);
-#define LOCATE_icode_tools___IIf___inner_dup_with "icode_tools::IIf::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_ILoop_icode_base___ILoop___init();
+static const char * const LOCATE_icode_tools___IIf___inner_dup_with = "icode_tools::IIf::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IIf___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IIf___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IEscape_icode_base___IEscape___init(val_t p0);
-#define LOCATE_icode_tools___IEscape___inner_dup_with "icode_tools::IEscape::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IIf_icode_base___IIf___init(val_t p0);
+static const char * const LOCATE_icode_tools___IEscape___inner_dup_with = "icode_tools::IEscape::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IEscape___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IEscape___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IAbort_icode_base___IAbort___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___IAbort___inner_dup_with "icode_tools::IAbort::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IEscape_icode_base___IEscape___init(val_t p0);
+static const char * const LOCATE_icode_tools___IAbort___inner_dup_with = "icode_tools::IAbort::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IAbort___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IAbort___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_ICall_icode_base___ICall___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICall___inner_dup_with "icode_tools::ICall::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IAbort_icode_base___IAbort___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___ICall___inner_dup_with = "icode_tools::ICall::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___ICall___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___ICall___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_ISuper_icode_base___ISuper___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ISuper___inner_dup_with "icode_tools::ISuper::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_ICall_icode_base___ICall___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___ISuper___inner_dup_with = "icode_tools::ISuper::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___ISuper___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___ISuper___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_INew_icode_base___INew___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_tools___INew___inner_dup_with "icode_tools::INew::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_ISuper_icode_base___ISuper___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___INew___inner_dup_with = "icode_tools::INew::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___INew___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___INew___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IAllocateInstance_icode_base___IAllocateInstance___init(val_t p0);
-#define LOCATE_icode_tools___IAllocateInstance___inner_dup_with "icode_tools::IAllocateInstance::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_INew_icode_base___INew___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_icode_tools___IAllocateInstance___inner_dup_with = "icode_tools::IAllocateInstance::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IAllocateInstance___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IAllocateInstance___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IStaticCall_icode_base___IStaticCall___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___IStaticCall___inner_dup_with "icode_tools::IStaticCall::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IAllocateInstance_icode_base___IAllocateInstance___init(val_t p0);
+static const char * const LOCATE_icode_tools___IStaticCall___inner_dup_with = "icode_tools::IStaticCall::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IStaticCall___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IStaticCall___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_ICheckInstance_icode_base___ICheckInstance___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ICheckInstance___inner_dup_with "icode_tools::ICheckInstance::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IStaticCall_icode_base___IStaticCall___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___ICheckInstance___inner_dup_with = "icode_tools::ICheckInstance::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___ICheckInstance___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___ICheckInstance___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IInitAttributes_icode_base___IInitAttributes___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___IInitAttributes___inner_dup_with "icode_tools::IInitAttributes::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_ICheckInstance_icode_base___ICheckInstance___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___IInitAttributes___inner_dup_with = "icode_tools::IInitAttributes::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IInitAttributes___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IInitAttributes___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IClosCall_icode_base___IClosCall___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___IClosCall___dup_with "icode_tools::IClosCall::(icode_tools::ICode::dup_with)"
+val_t NEW_IInitAttributes_icode_base___IInitAttributes___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___IClosCall___dup_with = "icode_tools::IClosCall::(icode_tools::ICode::dup_with)";
 void icode_tools___IClosCall___dup_with(val_t p0, val_t p1);
 typedef void (*icode_tools___IClosCall___dup_with_t)(val_t p0, val_t p1);
-val_t NEW_INative_icode_base___INative___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___INative___inner_dup_with "icode_tools::INative::(icode_tools::ICode::inner_dup_with)"
+static const char * const LOCATE_icode_tools___IClosCall___inner_dup_with = "icode_tools::IClosCall::(icode_tools::ICode::inner_dup_with)";
+val_t icode_tools___IClosCall___inner_dup_with(val_t p0, val_t p1);
+typedef val_t (*icode_tools___IClosCall___inner_dup_with_t)(val_t p0, val_t p1);
+val_t NEW_IClosCall_icode_base___IClosCall___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___INative___inner_dup_with = "icode_tools::INative::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___INative___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___INative___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IMove_icode_base___IMove___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___IMove___inner_dup_with "icode_tools::IMove::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_INative_icode_base___INative___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___IIntValue___inner_dup_with = "icode_tools::IIntValue::(icode_tools::ICode::inner_dup_with)";
+val_t icode_tools___IIntValue___inner_dup_with(val_t p0, val_t p1);
+typedef val_t (*icode_tools___IIntValue___inner_dup_with_t)(val_t p0, val_t p1);
+val_t NEW_IIntValue_icode_base___IIntValue___init(val_t p0);
+static const char * const LOCATE_icode_tools___IBoolValue___inner_dup_with = "icode_tools::IBoolValue::(icode_tools::ICode::inner_dup_with)";
+val_t icode_tools___IBoolValue___inner_dup_with(val_t p0, val_t p1);
+typedef val_t (*icode_tools___IBoolValue___inner_dup_with_t)(val_t p0, val_t p1);
+val_t NEW_IBoolValue_icode_base___IBoolValue___init(val_t p0);
+static const char * const LOCATE_icode_tools___IStringValue___inner_dup_with = "icode_tools::IStringValue::(icode_tools::ICode::inner_dup_with)";
+val_t icode_tools___IStringValue___inner_dup_with(val_t p0, val_t p1);
+typedef val_t (*icode_tools___IStringValue___inner_dup_with_t)(val_t p0, val_t p1);
+val_t NEW_IStringValue_icode_base___IStringValue___init(val_t p0);
+static const char * const LOCATE_icode_tools___IFloatValue___inner_dup_with = "icode_tools::IFloatValue::(icode_tools::ICode::inner_dup_with)";
+val_t icode_tools___IFloatValue___inner_dup_with(val_t p0, val_t p1);
+typedef val_t (*icode_tools___IFloatValue___inner_dup_with_t)(val_t p0, val_t p1);
+val_t NEW_IFloatValue_icode_base___IFloatValue___init(val_t p0);
+static const char * const LOCATE_icode_tools___ICharValue___inner_dup_with = "icode_tools::ICharValue::(icode_tools::ICode::inner_dup_with)";
+val_t icode_tools___ICharValue___inner_dup_with(val_t p0, val_t p1);
+typedef val_t (*icode_tools___ICharValue___inner_dup_with_t)(val_t p0, val_t p1);
+val_t NEW_ICharValue_icode_base___ICharValue___init(val_t p0);
+static const char * const LOCATE_icode_tools___IMove___inner_dup_with = "icode_tools::IMove::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IMove___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IMove___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IAttrRead_icode_base___IAttrRead___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___IAttrRead___inner_dup_with "icode_tools::IAttrRead::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IMove_icode_base___IMove___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___IAttrRead___inner_dup_with = "icode_tools::IAttrRead::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IAttrRead___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IAttrRead___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IAttrWrite_icode_base___IAttrWrite___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_icode_tools___IAttrWrite___inner_dup_with "icode_tools::IAttrWrite::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IAttrRead_icode_base___IAttrRead___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___IAttrWrite___inner_dup_with = "icode_tools::IAttrWrite::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IAttrWrite___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IAttrWrite___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IAttrIsset_icode_base___IAttrIsset___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___IAttrIsset___inner_dup_with "icode_tools::IAttrIsset::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IAttrWrite_icode_base___IAttrWrite___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_icode_tools___IAttrIsset___inner_dup_with = "icode_tools::IAttrIsset::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IAttrIsset___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IAttrIsset___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_ITypeCheck_icode_base___ITypeCheck___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___ITypeCheck___inner_dup_with "icode_tools::ITypeCheck::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IAttrIsset_icode_base___IAttrIsset___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___ITypeCheck___inner_dup_with = "icode_tools::ITypeCheck::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___ITypeCheck___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___ITypeCheck___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IIs_icode_base___IIs___init(val_t p0, val_t p1);
-#define LOCATE_icode_tools___IIs___inner_dup_with "icode_tools::IIs::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_ITypeCheck_icode_base___ITypeCheck___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___IIs___inner_dup_with = "icode_tools::IIs::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IIs___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IIs___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_INot_icode_base___INot___init(val_t p0);
-#define LOCATE_icode_tools___INot___inner_dup_with "icode_tools::INot::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IIs_icode_base___IIs___init(val_t p0, val_t p1);
+static const char * const LOCATE_icode_tools___INot___inner_dup_with = "icode_tools::INot::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___INot___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___INot___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IOnce_icode_base___IOnce___init();
-#define LOCATE_icode_tools___IOnce___inner_dup_with "icode_tools::IOnce::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_INot_icode_base___INot___init(val_t p0);
+static const char * const LOCATE_icode_tools___IOnce___inner_dup_with = "icode_tools::IOnce::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IOnce___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IOnce___inner_dup_with_t)(val_t p0, val_t p1);
-val_t NEW_IHasClos_icode_base___IHasClos___init(val_t p0);
-#define LOCATE_icode_tools___IHasClos___inner_dup_with "icode_tools::IHasClos::(icode_tools::ICode::inner_dup_with)"
+val_t NEW_IOnce_icode_base___IOnce___init();
+static const char * const LOCATE_icode_tools___IHasClos___inner_dup_with = "icode_tools::IHasClos::(icode_tools::ICode::inner_dup_with)";
 val_t icode_tools___IHasClos___inner_dup_with(val_t p0, val_t p1);
 typedef val_t (*icode_tools___IHasClos___inner_dup_with_t)(val_t p0, val_t p1);
+val_t NEW_IHasClos_icode_base___IHasClos___init(val_t p0);
 #endif

@@ -24,48 +24,52 @@ extern const int SFT_mmloader[];
 #define COLOR_ToolContext (SFT_mmloader[5])
 #define ATTR_mmloader___ToolContext____error_count(recv) ATTR(recv, (SFT_mmloader[6] + 0))
 #define ATTR_mmloader___ToolContext____warning_count(recv) ATTR(recv, (SFT_mmloader[6] + 1))
-#define ATTR_mmloader___ToolContext____messages(recv) ATTR(recv, (SFT_mmloader[6] + 2))
-#define ATTR_mmloader___ToolContext____message_sorter(recv) ATTR(recv, (SFT_mmloader[6] + 3))
-#define ATTR_mmloader___ToolContext____paths(recv) ATTR(recv, (SFT_mmloader[6] + 4))
-#define ATTR_mmloader___ToolContext____loaders(recv) ATTR(recv, (SFT_mmloader[6] + 5))
-#define ATTR_mmloader___ToolContext____option_context(recv) ATTR(recv, (SFT_mmloader[6] + 6))
-#define ATTR_mmloader___ToolContext____opt_warn(recv) ATTR(recv, (SFT_mmloader[6] + 7))
-#define ATTR_mmloader___ToolContext____opt_path(recv) ATTR(recv, (SFT_mmloader[6] + 8))
-#define ATTR_mmloader___ToolContext____opt_log(recv) ATTR(recv, (SFT_mmloader[6] + 9))
-#define ATTR_mmloader___ToolContext____opt_only_metamodel(recv) ATTR(recv, (SFT_mmloader[6] + 10))
-#define ATTR_mmloader___ToolContext____opt_only_parse(recv) ATTR(recv, (SFT_mmloader[6] + 11))
-#define ATTR_mmloader___ToolContext____opt_help(recv) ATTR(recv, (SFT_mmloader[6] + 12))
-#define ATTR_mmloader___ToolContext____opt_version(recv) ATTR(recv, (SFT_mmloader[6] + 13))
-#define ATTR_mmloader___ToolContext____opt_verbose(recv) ATTR(recv, (SFT_mmloader[6] + 14))
-#define ATTR_mmloader___ToolContext____verbose_level(recv) ATTR(recv, (SFT_mmloader[6] + 15))
-#define ATTR_mmloader___ToolContext____processing_modules(recv) ATTR(recv, (SFT_mmloader[6] + 16))
-#define ATTR_mmloader___ToolContext____path_dirs(recv) ATTR(recv, (SFT_mmloader[6] + 17))
+#define ATTR_mmloader___ToolContext____log_directory(recv) ATTR(recv, (SFT_mmloader[6] + 2))
+#define ATTR_mmloader___ToolContext____messages(recv) ATTR(recv, (SFT_mmloader[6] + 3))
+#define ATTR_mmloader___ToolContext____message_sorter(recv) ATTR(recv, (SFT_mmloader[6] + 4))
+#define ATTR_mmloader___ToolContext____paths(recv) ATTR(recv, (SFT_mmloader[6] + 5))
+#define ATTR_mmloader___ToolContext____loaders(recv) ATTR(recv, (SFT_mmloader[6] + 6))
+#define ATTR_mmloader___ToolContext____option_context(recv) ATTR(recv, (SFT_mmloader[6] + 7))
+#define ATTR_mmloader___ToolContext____opt_warn(recv) ATTR(recv, (SFT_mmloader[6] + 8))
+#define ATTR_mmloader___ToolContext____opt_path(recv) ATTR(recv, (SFT_mmloader[6] + 9))
+#define ATTR_mmloader___ToolContext____opt_log(recv) ATTR(recv, (SFT_mmloader[6] + 10))
+#define ATTR_mmloader___ToolContext____opt_log_dir(recv) ATTR(recv, (SFT_mmloader[6] + 11))
+#define ATTR_mmloader___ToolContext____opt_only_metamodel(recv) ATTR(recv, (SFT_mmloader[6] + 12))
+#define ATTR_mmloader___ToolContext____opt_only_parse(recv) ATTR(recv, (SFT_mmloader[6] + 13))
+#define ATTR_mmloader___ToolContext____opt_help(recv) ATTR(recv, (SFT_mmloader[6] + 14))
+#define ATTR_mmloader___ToolContext____opt_version(recv) ATTR(recv, (SFT_mmloader[6] + 15))
+#define ATTR_mmloader___ToolContext____opt_verbose(recv) ATTR(recv, (SFT_mmloader[6] + 16))
+#define ATTR_mmloader___ToolContext____verbose_level(recv) ATTR(recv, (SFT_mmloader[6] + 17))
+#define ATTR_mmloader___ToolContext____processing_modules(recv) ATTR(recv, (SFT_mmloader[6] + 18))
+#define ATTR_mmloader___ToolContext____path_dirs(recv) ATTR(recv, (SFT_mmloader[6] + 19))
 #define INIT_TABLE_POS_ToolContext (SFT_mmloader[7] + 0)
 #define CALL_mmloader___ToolContext___error_count(recv) ((mmloader___ToolContext___error_count_t)CALL((recv), (SFT_mmloader[7] + 1)))
 #define CALL_mmloader___ToolContext___warning_count(recv) ((mmloader___ToolContext___warning_count_t)CALL((recv), (SFT_mmloader[7] + 2)))
-#define CALL_mmloader___ToolContext___check_errors(recv) ((mmloader___ToolContext___check_errors_t)CALL((recv), (SFT_mmloader[7] + 3)))
-#define CALL_mmloader___ToolContext___error(recv) ((mmloader___ToolContext___error_t)CALL((recv), (SFT_mmloader[7] + 4)))
-#define CALL_mmloader___ToolContext___fatal_error(recv) ((mmloader___ToolContext___fatal_error_t)CALL((recv), (SFT_mmloader[7] + 5)))
-#define CALL_mmloader___ToolContext___warning(recv) ((mmloader___ToolContext___warning_t)CALL((recv), (SFT_mmloader[7] + 6)))
-#define CALL_mmloader___ToolContext___info(recv) ((mmloader___ToolContext___info_t)CALL((recv), (SFT_mmloader[7] + 7)))
-#define CALL_mmloader___ToolContext___paths(recv) ((mmloader___ToolContext___paths_t)CALL((recv), (SFT_mmloader[7] + 8)))
-#define CALL_mmloader___ToolContext___option_context(recv) ((mmloader___ToolContext___option_context_t)CALL((recv), (SFT_mmloader[7] + 9)))
-#define CALL_mmloader___ToolContext___opt_warn(recv) ((mmloader___ToolContext___opt_warn_t)CALL((recv), (SFT_mmloader[7] + 10)))
-#define CALL_mmloader___ToolContext___opt_path(recv) ((mmloader___ToolContext___opt_path_t)CALL((recv), (SFT_mmloader[7] + 11)))
-#define CALL_mmloader___ToolContext___opt_log(recv) ((mmloader___ToolContext___opt_log_t)CALL((recv), (SFT_mmloader[7] + 12)))
-#define CALL_mmloader___ToolContext___opt_only_metamodel(recv) ((mmloader___ToolContext___opt_only_metamodel_t)CALL((recv), (SFT_mmloader[7] + 13)))
-#define CALL_mmloader___ToolContext___opt_only_parse(recv) ((mmloader___ToolContext___opt_only_parse_t)CALL((recv), (SFT_mmloader[7] + 14)))
-#define CALL_mmloader___ToolContext___opt_help(recv) ((mmloader___ToolContext___opt_help_t)CALL((recv), (SFT_mmloader[7] + 15)))
-#define CALL_mmloader___ToolContext___opt_version(recv) ((mmloader___ToolContext___opt_version_t)CALL((recv), (SFT_mmloader[7] + 16)))
-#define CALL_mmloader___ToolContext___opt_verbose(recv) ((mmloader___ToolContext___opt_verbose_t)CALL((recv), (SFT_mmloader[7] + 17)))
-#define CALL_mmloader___ToolContext___verbose_level(recv) ((mmloader___ToolContext___verbose_level_t)CALL((recv), (SFT_mmloader[7] + 18)))
-#define CALL_mmloader___ToolContext___init(recv) ((mmloader___ToolContext___init_t)CALL((recv), (SFT_mmloader[7] + 19)))
-#define CALL_mmloader___ToolContext___process_options(recv) ((mmloader___ToolContext___process_options_t)CALL((recv), (SFT_mmloader[7] + 20)))
-#define CALL_mmloader___ToolContext___try_to_load(recv) ((mmloader___ToolContext___try_to_load_t)CALL((recv), (SFT_mmloader[7] + 21)))
-#define CALL_mmloader___ToolContext___get_module_from_filename(recv) ((mmloader___ToolContext___get_module_from_filename_t)CALL((recv), (SFT_mmloader[7] + 22)))
-#define CALL_mmloader___ToolContext___get_module(recv) ((mmloader___ToolContext___get_module_t)CALL((recv), (SFT_mmloader[7] + 23)))
-#define CALL_mmloader___ToolContext___directory_for(recv) ((mmloader___ToolContext___directory_for_t)CALL((recv), (SFT_mmloader[7] + 24)))
-#define CALL_mmloader___ToolContext___register_loader(recv) ((mmloader___ToolContext___register_loader_t)CALL((recv), (SFT_mmloader[7] + 25)))
+#define CALL_mmloader___ToolContext___log_directory(recv) ((mmloader___ToolContext___log_directory_t)CALL((recv), (SFT_mmloader[7] + 3)))
+#define CALL_mmloader___ToolContext___check_errors(recv) ((mmloader___ToolContext___check_errors_t)CALL((recv), (SFT_mmloader[7] + 4)))
+#define CALL_mmloader___ToolContext___error(recv) ((mmloader___ToolContext___error_t)CALL((recv), (SFT_mmloader[7] + 5)))
+#define CALL_mmloader___ToolContext___fatal_error(recv) ((mmloader___ToolContext___fatal_error_t)CALL((recv), (SFT_mmloader[7] + 6)))
+#define CALL_mmloader___ToolContext___warning(recv) ((mmloader___ToolContext___warning_t)CALL((recv), (SFT_mmloader[7] + 7)))
+#define CALL_mmloader___ToolContext___info(recv) ((mmloader___ToolContext___info_t)CALL((recv), (SFT_mmloader[7] + 8)))
+#define CALL_mmloader___ToolContext___paths(recv) ((mmloader___ToolContext___paths_t)CALL((recv), (SFT_mmloader[7] + 9)))
+#define CALL_mmloader___ToolContext___option_context(recv) ((mmloader___ToolContext___option_context_t)CALL((recv), (SFT_mmloader[7] + 10)))
+#define CALL_mmloader___ToolContext___opt_warn(recv) ((mmloader___ToolContext___opt_warn_t)CALL((recv), (SFT_mmloader[7] + 11)))
+#define CALL_mmloader___ToolContext___opt_path(recv) ((mmloader___ToolContext___opt_path_t)CALL((recv), (SFT_mmloader[7] + 12)))
+#define CALL_mmloader___ToolContext___opt_log(recv) ((mmloader___ToolContext___opt_log_t)CALL((recv), (SFT_mmloader[7] + 13)))
+#define CALL_mmloader___ToolContext___opt_log_dir(recv) ((mmloader___ToolContext___opt_log_dir_t)CALL((recv), (SFT_mmloader[7] + 14)))
+#define CALL_mmloader___ToolContext___opt_only_metamodel(recv) ((mmloader___ToolContext___opt_only_metamodel_t)CALL((recv), (SFT_mmloader[7] + 15)))
+#define CALL_mmloader___ToolContext___opt_only_parse(recv) ((mmloader___ToolContext___opt_only_parse_t)CALL((recv), (SFT_mmloader[7] + 16)))
+#define CALL_mmloader___ToolContext___opt_help(recv) ((mmloader___ToolContext___opt_help_t)CALL((recv), (SFT_mmloader[7] + 17)))
+#define CALL_mmloader___ToolContext___opt_version(recv) ((mmloader___ToolContext___opt_version_t)CALL((recv), (SFT_mmloader[7] + 18)))
+#define CALL_mmloader___ToolContext___opt_verbose(recv) ((mmloader___ToolContext___opt_verbose_t)CALL((recv), (SFT_mmloader[7] + 19)))
+#define CALL_mmloader___ToolContext___verbose_level(recv) ((mmloader___ToolContext___verbose_level_t)CALL((recv), (SFT_mmloader[7] + 20)))
+#define CALL_mmloader___ToolContext___init(recv) ((mmloader___ToolContext___init_t)CALL((recv), (SFT_mmloader[7] + 21)))
+#define CALL_mmloader___ToolContext___process_options(recv) ((mmloader___ToolContext___process_options_t)CALL((recv), (SFT_mmloader[7] + 22)))
+#define CALL_mmloader___ToolContext___try_to_load(recv) ((mmloader___ToolContext___try_to_load_t)CALL((recv), (SFT_mmloader[7] + 23)))
+#define CALL_mmloader___ToolContext___get_module_from_filename(recv) ((mmloader___ToolContext___get_module_from_filename_t)CALL((recv), (SFT_mmloader[7] + 24)))
+#define CALL_mmloader___ToolContext___get_module(recv) ((mmloader___ToolContext___get_module_t)CALL((recv), (SFT_mmloader[7] + 25)))
+#define CALL_mmloader___ToolContext___directory_for(recv) ((mmloader___ToolContext___directory_for_t)CALL((recv), (SFT_mmloader[7] + 26)))
+#define CALL_mmloader___ToolContext___register_loader(recv) ((mmloader___ToolContext___register_loader_t)CALL((recv), (SFT_mmloader[7] + 27)))
 #define ID_ModuleLoader (SFT_mmloader[8])
 #define COLOR_ModuleLoader (SFT_mmloader[9])
 #define INIT_TABLE_POS_ModuleLoader (SFT_mmloader[10] + 0)
@@ -78,125 +82,137 @@ extern const int SFT_mmloader[];
 #define CALL_mmloader___ModuleLoader___process_metamodel(recv) ((mmloader___ModuleLoader___process_metamodel_t)CALL((recv), (SFT_mmloader[10] + 7)))
 #define CALL_mmloader___ModuleLoader___init(recv) ((mmloader___ModuleLoader___init_t)CALL((recv), (SFT_mmloader[10] + 8)))
 #define CALL_mmloader___MMModule___import_supers_modules(recv) ((mmloader___MMModule___import_supers_modules_t)CALL((recv), (SFT_mmloader[11] + 0)))
-#define LOCATE_mmloader___Message_____l "mmloader::Message::(kernel::Comparable::<)"
-val_t mmloader___Message_____l(val_t p0, val_t p1);
-typedef val_t (*mmloader___Message_____l_t)(val_t p0, val_t p1);
-#define LOCATE_mmloader___Message___to_s "mmloader::Message::(string::Object::to_s)"
-val_t mmloader___Message___to_s(val_t p0);
-typedef val_t (*mmloader___Message___to_s_t)(val_t p0);
-#define LOCATE_mmloader___Message___location "mmloader::Message::location"
+static const char * const LOCATE_mmloader___Message___location = "mmloader::Message::location";
 val_t mmloader___Message___location(val_t p0);
 typedef val_t (*mmloader___Message___location_t)(val_t p0);
-#define LOCATE_mmloader___Message___text "mmloader::Message::text"
+static const char * const LOCATE_mmloader___Message___text = "mmloader::Message::text";
 val_t mmloader___Message___text(val_t p0);
 typedef val_t (*mmloader___Message___text_t)(val_t p0);
-#define LOCATE_mmloader___Message___init "mmloader::Message::init"
+static const char * const LOCATE_mmloader___Message_____l = "mmloader::Message::(kernel::Comparable::<)";
+val_t mmloader___Message_____l(val_t p0, val_t p1);
+typedef val_t (*mmloader___Message_____l_t)(val_t p0, val_t p1);
+static const char * const LOCATE_mmloader___Message___to_s = "mmloader::Message::(string::Object::to_s)";
+val_t mmloader___Message___to_s(val_t p0);
+typedef val_t (*mmloader___Message___to_s_t)(val_t p0);
+static const char * const LOCATE_mmloader___Message___init = "mmloader::Message::init";
 void mmloader___Message___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*mmloader___Message___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_Message_mmloader___Message___init(val_t p0, val_t p1);
-#define LOCATE_mmloader___ToolContext___error_count "mmloader::ToolContext::error_count"
+static const char * const LOCATE_mmloader___ToolContext___error_count = "mmloader::ToolContext::error_count";
 val_t mmloader___ToolContext___error_count(val_t p0);
 typedef val_t (*mmloader___ToolContext___error_count_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___warning_count "mmloader::ToolContext::warning_count"
+static const char * const LOCATE_mmloader___ToolContext___warning_count = "mmloader::ToolContext::warning_count";
 val_t mmloader___ToolContext___warning_count(val_t p0);
 typedef val_t (*mmloader___ToolContext___warning_count_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___check_errors "mmloader::ToolContext::check_errors"
+static const char * const LOCATE_mmloader___ToolContext___log_directory = "mmloader::ToolContext::log_directory";
+val_t mmloader___ToolContext___log_directory(val_t p0);
+typedef val_t (*mmloader___ToolContext___log_directory_t)(val_t p0);
+static const char * const LOCATE_mmloader___ToolContext___check_errors = "mmloader::ToolContext::check_errors";
 void mmloader___ToolContext___check_errors(val_t p0);
 typedef void (*mmloader___ToolContext___check_errors_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___error "mmloader::ToolContext::error"
+static const char * const LOCATE_mmloader___ToolContext___error = "mmloader::ToolContext::error";
 void mmloader___ToolContext___error(val_t p0, val_t p1, val_t p2);
 typedef void (*mmloader___ToolContext___error_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_mmloader___ToolContext___fatal_error "mmloader::ToolContext::fatal_error"
+static const char * const LOCATE_mmloader___ToolContext___fatal_error = "mmloader::ToolContext::fatal_error";
 void mmloader___ToolContext___fatal_error(val_t p0, val_t p1, val_t p2);
 typedef void (*mmloader___ToolContext___fatal_error_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_mmloader___ToolContext___warning "mmloader::ToolContext::warning"
+static const char * const LOCATE_mmloader___ToolContext___warning = "mmloader::ToolContext::warning";
 void mmloader___ToolContext___warning(val_t p0, val_t p1, val_t p2);
 typedef void (*mmloader___ToolContext___warning_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_mmloader___ToolContext___info "mmloader::ToolContext::info"
+static const char * const LOCATE_mmloader___ToolContext___info = "mmloader::ToolContext::info";
 void mmloader___ToolContext___info(val_t p0, val_t p1, val_t p2);
 typedef void (*mmloader___ToolContext___info_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_mmloader___ToolContext___paths "mmloader::ToolContext::paths"
+static const char * const LOCATE_mmloader___ToolContext___paths = "mmloader::ToolContext::paths";
 val_t mmloader___ToolContext___paths(val_t p0);
 typedef val_t (*mmloader___ToolContext___paths_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___option_context "mmloader::ToolContext::option_context"
+static const char * const LOCATE_mmloader___ToolContext___option_context = "mmloader::ToolContext::option_context";
 val_t mmloader___ToolContext___option_context(val_t p0);
 typedef val_t (*mmloader___ToolContext___option_context_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___opt_warn "mmloader::ToolContext::opt_warn"
+static const char * const LOCATE_mmloader___ToolContext___opt_warn = "mmloader::ToolContext::opt_warn";
 val_t mmloader___ToolContext___opt_warn(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_warn_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___opt_path "mmloader::ToolContext::opt_path"
+static const char * const LOCATE_mmloader___ToolContext___opt_path = "mmloader::ToolContext::opt_path";
 val_t mmloader___ToolContext___opt_path(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_path_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___opt_log "mmloader::ToolContext::opt_log"
+static const char * const LOCATE_mmloader___ToolContext___opt_log = "mmloader::ToolContext::opt_log";
 val_t mmloader___ToolContext___opt_log(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_log_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___opt_only_metamodel "mmloader::ToolContext::opt_only_metamodel"
+static const char * const LOCATE_mmloader___ToolContext___opt_log_dir = "mmloader::ToolContext::opt_log_dir";
+val_t mmloader___ToolContext___opt_log_dir(val_t p0);
+typedef val_t (*mmloader___ToolContext___opt_log_dir_t)(val_t p0);
+static const char * const LOCATE_mmloader___ToolContext___opt_only_metamodel = "mmloader::ToolContext::opt_only_metamodel";
 val_t mmloader___ToolContext___opt_only_metamodel(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_only_metamodel_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___opt_only_parse "mmloader::ToolContext::opt_only_parse"
+static const char * const LOCATE_mmloader___ToolContext___opt_only_parse = "mmloader::ToolContext::opt_only_parse";
 val_t mmloader___ToolContext___opt_only_parse(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_only_parse_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___opt_help "mmloader::ToolContext::opt_help"
+static const char * const LOCATE_mmloader___ToolContext___opt_help = "mmloader::ToolContext::opt_help";
 val_t mmloader___ToolContext___opt_help(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_help_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___opt_version "mmloader::ToolContext::opt_version"
+static const char * const LOCATE_mmloader___ToolContext___opt_version = "mmloader::ToolContext::opt_version";
 val_t mmloader___ToolContext___opt_version(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_version_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___opt_verbose "mmloader::ToolContext::opt_verbose"
+static const char * const LOCATE_mmloader___ToolContext___opt_verbose = "mmloader::ToolContext::opt_verbose";
 val_t mmloader___ToolContext___opt_verbose(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_verbose_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___verbose_level "mmloader::ToolContext::verbose_level"
+static const char * const LOCATE_mmloader___ToolContext___verbose_level = "mmloader::ToolContext::verbose_level";
 val_t mmloader___ToolContext___verbose_level(val_t p0);
 typedef val_t (*mmloader___ToolContext___verbose_level_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___init "mmloader::ToolContext::init"
+static const char * const LOCATE_mmloader___ToolContext___init = "mmloader::ToolContext::init";
 void mmloader___ToolContext___init(val_t p0, int* init_table);
 typedef void (*mmloader___ToolContext___init_t)(val_t p0, int* init_table);
 val_t NEW_ToolContext_mmloader___ToolContext___init();
-#define LOCATE_mmloader___ToolContext___process_options "mmloader::ToolContext::process_options"
+static const char * const LOCATE_mmloader___ToolContext___process_options = "mmloader::ToolContext::process_options";
 void mmloader___ToolContext___process_options(val_t p0);
 typedef void (*mmloader___ToolContext___process_options_t)(val_t p0);
-#define LOCATE_mmloader___ToolContext___try_to_load "mmloader::ToolContext::try_to_load"
+static const char * const LOCATE_mmloader___ToolContext___try_to_load = "mmloader::ToolContext::try_to_load";
 val_t mmloader___ToolContext___try_to_load(val_t p0, val_t p1, val_t p2);
 typedef val_t (*mmloader___ToolContext___try_to_load_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_mmloader___ToolContext___get_module_from_filename "mmloader::ToolContext::get_module_from_filename"
+  typedef void (*CLOS_OC_mmloader___ToolContext___try_to_load_1_0)(struct stack_frame_t *);
+  void OC_mmloader___ToolContext___try_to_load_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_mmloader___ToolContext___try_to_load_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_mmloader___ToolContext___get_module_from_filename = "mmloader::ToolContext::get_module_from_filename";
 val_t mmloader___ToolContext___get_module_from_filename(val_t p0, val_t p1);
 typedef val_t (*mmloader___ToolContext___get_module_from_filename_t)(val_t p0, val_t p1);
-#define LOCATE_mmloader___ToolContext___get_module "mmloader::ToolContext::get_module"
+static const char * const LOCATE_mmloader___ToolContext___get_module = "mmloader::ToolContext::get_module";
 val_t mmloader___ToolContext___get_module(val_t p0, val_t p1, val_t p2);
 typedef val_t (*mmloader___ToolContext___get_module_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_mmloader___ToolContext___directory_for "mmloader::ToolContext::directory_for"
+static const char * const LOCATE_mmloader___ToolContext___directory_for = "mmloader::ToolContext::directory_for";
 val_t mmloader___ToolContext___directory_for(val_t p0, val_t p1);
 typedef val_t (*mmloader___ToolContext___directory_for_t)(val_t p0, val_t p1);
-#define LOCATE_mmloader___ToolContext___register_loader "mmloader::ToolContext::register_loader"
+static const char * const LOCATE_mmloader___ToolContext___register_loader = "mmloader::ToolContext::register_loader";
 void mmloader___ToolContext___register_loader(val_t p0, val_t p1);
 typedef void (*mmloader___ToolContext___register_loader_t)(val_t p0, val_t p1);
-#define LOCATE_mmloader___ModuleLoader___file_type "mmloader::ModuleLoader::file_type"
+static const char * const LOCATE_mmloader___ModuleLoader___file_type = "mmloader::ModuleLoader::file_type";
 val_t mmloader___ModuleLoader___file_type(val_t p0);
 typedef val_t (*mmloader___ModuleLoader___file_type_t)(val_t p0);
-#define LOCATE_mmloader___ModuleLoader___try_to_load_dir "mmloader::ModuleLoader::try_to_load_dir"
+static const char * const LOCATE_mmloader___ModuleLoader___try_to_load_dir = "mmloader::ModuleLoader::try_to_load_dir";
 val_t mmloader___ModuleLoader___try_to_load_dir(val_t p0, val_t p1, val_t p2);
 typedef val_t (*mmloader___ModuleLoader___try_to_load_dir_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_mmloader___ModuleLoader___can_handle "mmloader::ModuleLoader::can_handle"
+static const char * const LOCATE_mmloader___ModuleLoader___can_handle = "mmloader::ModuleLoader::can_handle";
 val_t mmloader___ModuleLoader___can_handle(val_t p0, val_t p1, val_t p2);
 typedef val_t (*mmloader___ModuleLoader___can_handle_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_mmloader___ModuleLoader___load_and_process_module "mmloader::ModuleLoader::load_and_process_module"
+static const char * const LOCATE_mmloader___ModuleLoader___load_and_process_module = "mmloader::ModuleLoader::load_and_process_module";
 val_t mmloader___ModuleLoader___load_and_process_module(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (*mmloader___ModuleLoader___load_and_process_module_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_mmloader___ModuleLoader___load_module "mmloader::ModuleLoader::load_module"
+static const char * const LOCATE_mmloader___ModuleLoader___load_module = "mmloader::ModuleLoader::load_module";
 val_t mmloader___ModuleLoader___load_module(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef val_t (*mmloader___ModuleLoader___load_module_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-#define LOCATE_mmloader___ModuleLoader___parse_file "mmloader::ModuleLoader::parse_file"
+static const char * const LOCATE_mmloader___ModuleLoader___parse_file = "mmloader::ModuleLoader::parse_file";
 val_t mmloader___ModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 typedef val_t (*mmloader___ModuleLoader___parse_file_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-#define LOCATE_mmloader___ModuleLoader___process_metamodel "mmloader::ModuleLoader::process_metamodel"
+static const char * const LOCATE_mmloader___ModuleLoader___process_metamodel = "mmloader::ModuleLoader::process_metamodel";
 void mmloader___ModuleLoader___process_metamodel(val_t p0, val_t p1, val_t p2);
 typedef void (*mmloader___ModuleLoader___process_metamodel_t)(val_t p0, val_t p1, val_t p2);
-#define LOCATE_mmloader___ModuleLoader___init "mmloader::ModuleLoader::init"
+static const char * const LOCATE_mmloader___ModuleLoader___init = "mmloader::ModuleLoader::init";
 void mmloader___ModuleLoader___init(val_t p0, int* init_table);
 typedef void (*mmloader___ModuleLoader___init_t)(val_t p0, int* init_table);
 val_t NEW_ModuleLoader_mmloader___ModuleLoader___init();
-val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_mmloader___MMModule___import_supers_modules "mmloader::MMModule::import_supers_modules"
+static const char * const LOCATE_mmloader___MMModule___import_supers_modules = "mmloader::MMModule::import_supers_modules";
 void mmloader___MMModule___import_supers_modules(val_t p0, val_t p1);
 typedef void (*mmloader___MMModule___import_supers_modules_t)(val_t p0, val_t p1);
+  typedef void (*CLOS_OC_mmloader___MMModule___import_supers_modules_1_0)(struct stack_frame_t *);
+  void OC_mmloader___MMModule___import_supers_modules_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_mmloader___MMModule___import_supers_modules_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
 #endif

@@ -77,105 +77,105 @@ extern const int SFT_stream[];
 #define COLOR_FDIOStream (SFT_stream[29])
 #define INIT_TABLE_POS_FDIOStream (SFT_stream[30] + 0)
 #define CALL_stream___FDIOStream___init(recv) ((stream___FDIOStream___init_t)CALL((recv), (SFT_stream[30] + 1)))
-#define LOCATE_stream___IOS___close "stream::IOS::close"
+static const char * const LOCATE_stream___IOS___close = "stream::IOS::close";
 void stream___IOS___close(val_t p0);
 typedef void (*stream___IOS___close_t)(val_t p0);
-#define LOCATE_stream___IOS___init "stream::IOS::init"
+static const char * const LOCATE_stream___IOS___init = "stream::IOS::init";
 void stream___IOS___init(val_t p0, int* init_table);
 typedef void (*stream___IOS___init_t)(val_t p0, int* init_table);
 val_t NEW_IOS_stream___IOS___init();
-val_t NEW_IStream_stream___IOS___init();
-#define LOCATE_stream___IStream___read_char "stream::IStream::read_char"
+static const char * const LOCATE_stream___IStream___read_char = "stream::IStream::read_char";
 val_t stream___IStream___read_char(val_t p0);
 typedef val_t (*stream___IStream___read_char_t)(val_t p0);
-#define LOCATE_stream___IStream___read "stream::IStream::read"
+static const char * const LOCATE_stream___IStream___read = "stream::IStream::read";
 val_t stream___IStream___read(val_t p0, val_t p1);
 typedef val_t (*stream___IStream___read_t)(val_t p0, val_t p1);
-#define LOCATE_stream___IStream___read_line "stream::IStream::read_line"
+static const char * const LOCATE_stream___IStream___read_line = "stream::IStream::read_line";
 val_t stream___IStream___read_line(val_t p0);
 typedef val_t (*stream___IStream___read_line_t)(val_t p0);
-#define LOCATE_stream___IStream___read_all "stream::IStream::read_all"
+static const char * const LOCATE_stream___IStream___read_all = "stream::IStream::read_all";
 val_t stream___IStream___read_all(val_t p0);
 typedef val_t (*stream___IStream___read_all_t)(val_t p0);
-#define LOCATE_stream___IStream___append_line_to "stream::IStream::append_line_to"
+static const char * const LOCATE_stream___IStream___append_line_to = "stream::IStream::append_line_to";
 void stream___IStream___append_line_to(val_t p0, val_t p1);
 typedef void (*stream___IStream___append_line_to_t)(val_t p0, val_t p1);
-#define LOCATE_stream___IStream___eof "stream::IStream::eof"
+static const char * const LOCATE_stream___IStream___eof = "stream::IStream::eof";
 val_t stream___IStream___eof(val_t p0);
 typedef val_t (*stream___IStream___eof_t)(val_t p0);
-val_t NEW_OStream_stream___IOS___init();
-#define LOCATE_stream___OStream___write "stream::OStream::write"
+val_t NEW_IStream_stream___IOS___init();
+static const char * const LOCATE_stream___OStream___write = "stream::OStream::write";
 void stream___OStream___write(val_t p0, val_t p1);
 typedef void (*stream___OStream___write_t)(val_t p0, val_t p1);
-#define LOCATE_stream___OStream___is_writable "stream::OStream::is_writable"
+static const char * const LOCATE_stream___OStream___is_writable = "stream::OStream::is_writable";
 val_t stream___OStream___is_writable(val_t p0);
 typedef val_t (*stream___OStream___is_writable_t)(val_t p0);
-val_t NEW_BufferedIStream_stream___IOS___init();
-#define LOCATE_stream___BufferedIStream___read_char "stream::BufferedIStream::(stream::IStream::read_char)"
+val_t NEW_OStream_stream___IOS___init();
+static const char * const LOCATE_stream___BufferedIStream___read_char = "stream::BufferedIStream::(stream::IStream::read_char)";
 val_t stream___BufferedIStream___read_char(val_t p0);
 typedef val_t (*stream___BufferedIStream___read_char_t)(val_t p0);
-#define LOCATE_stream___BufferedIStream___read "stream::BufferedIStream::(stream::IStream::read)"
+static const char * const LOCATE_stream___BufferedIStream___read = "stream::BufferedIStream::(stream::IStream::read)";
 val_t stream___BufferedIStream___read(val_t p0, val_t p1);
 typedef val_t (*stream___BufferedIStream___read_t)(val_t p0, val_t p1);
-#define LOCATE_stream___BufferedIStream___read_all "stream::BufferedIStream::(stream::IStream::read_all)"
+static const char * const LOCATE_stream___BufferedIStream___read_all = "stream::BufferedIStream::(stream::IStream::read_all)";
 val_t stream___BufferedIStream___read_all(val_t p0);
 typedef val_t (*stream___BufferedIStream___read_all_t)(val_t p0);
-#define LOCATE_stream___BufferedIStream___append_line_to "stream::BufferedIStream::(stream::IStream::append_line_to)"
+static const char * const LOCATE_stream___BufferedIStream___append_line_to = "stream::BufferedIStream::(stream::IStream::append_line_to)";
 void stream___BufferedIStream___append_line_to(val_t p0, val_t p1);
 typedef void (*stream___BufferedIStream___append_line_to_t)(val_t p0, val_t p1);
-#define LOCATE_stream___BufferedIStream___eof "stream::BufferedIStream::(stream::IStream::eof)"
+static const char * const LOCATE_stream___BufferedIStream___eof = "stream::BufferedIStream::(stream::IStream::eof)";
 val_t stream___BufferedIStream___eof(val_t p0);
 typedef val_t (*stream___BufferedIStream___eof_t)(val_t p0);
-#define LOCATE_stream___BufferedIStream___fill_buffer "stream::BufferedIStream::fill_buffer"
+static const char * const LOCATE_stream___BufferedIStream___fill_buffer = "stream::BufferedIStream::fill_buffer";
 void stream___BufferedIStream___fill_buffer(val_t p0);
 typedef void (*stream___BufferedIStream___fill_buffer_t)(val_t p0);
-#define LOCATE_stream___BufferedIStream___end_reached "stream::BufferedIStream::end_reached"
+static const char * const LOCATE_stream___BufferedIStream___end_reached = "stream::BufferedIStream::end_reached";
 val_t stream___BufferedIStream___end_reached(val_t p0);
 typedef val_t (*stream___BufferedIStream___end_reached_t)(val_t p0);
-#define LOCATE_stream___BufferedIStream___prepare_buffer "stream::BufferedIStream::prepare_buffer"
+static const char * const LOCATE_stream___BufferedIStream___prepare_buffer = "stream::BufferedIStream::prepare_buffer";
 void stream___BufferedIStream___prepare_buffer(val_t p0, val_t p1);
 typedef void (*stream___BufferedIStream___prepare_buffer_t)(val_t p0, val_t p1);
+val_t NEW_BufferedIStream_stream___IOS___init();
 val_t NEW_IOStream_stream___IOS___init();
-#define LOCATE_stream___FDStream___close "stream::FDStream::(stream::IOS::close)"
+static const char * const LOCATE_stream___FDStream___close = "stream::FDStream::(stream::IOS::close)";
 void stream___FDStream___close(val_t p0);
 typedef void (*stream___FDStream___close_t)(val_t p0);
-#define LOCATE_stream___FDStream___native_close "stream::FDStream::native_close"
+static const char * const LOCATE_stream___FDStream___native_close = "stream::FDStream::native_close";
 val_t stream___FDStream___native_close(val_t p0, val_t p1);
 typedef val_t (*stream___FDStream___native_close_t)(val_t p0, val_t p1);
-#define LOCATE_stream___FDStream___native_read_char "stream::FDStream::native_read_char"
+static const char * const LOCATE_stream___FDStream___native_read_char = "stream::FDStream::native_read_char";
 val_t stream___FDStream___native_read_char(val_t p0, val_t p1);
 typedef val_t (*stream___FDStream___native_read_char_t)(val_t p0, val_t p1);
-#define LOCATE_stream___FDStream___native_read "stream::FDStream::native_read"
+static const char * const LOCATE_stream___FDStream___native_read = "stream::FDStream::native_read";
 val_t stream___FDStream___native_read(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (*stream___FDStream___native_read_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_stream___FDStream___native_write "stream::FDStream::native_write"
+static const char * const LOCATE_stream___FDStream___native_write = "stream::FDStream::native_write";
 val_t stream___FDStream___native_write(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (*stream___FDStream___native_write_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_stream___FDStream___init "stream::FDStream::init"
+static const char * const LOCATE_stream___FDStream___init = "stream::FDStream::init";
 void stream___FDStream___init(val_t p0, val_t p1, int* init_table);
 typedef void (*stream___FDStream___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_FDStream_stream___FDStream___init(val_t p0);
-#define LOCATE_stream___FDIStream___read_char "stream::FDIStream::(stream::IStream::read_char)"
-val_t stream___FDIStream___read_char(val_t p0);
-typedef val_t (*stream___FDIStream___read_char_t)(val_t p0);
-#define LOCATE_stream___FDIStream___eof "stream::FDIStream::(stream::IStream::eof)"
+static const char * const LOCATE_stream___FDIStream___eof = "stream::FDIStream::(stream::IStream::eof)";
 val_t stream___FDIStream___eof(val_t p0);
 typedef val_t (*stream___FDIStream___eof_t)(val_t p0);
-#define LOCATE_stream___FDIStream___init "stream::FDIStream::init"
+static const char * const LOCATE_stream___FDIStream___read_char = "stream::FDIStream::(stream::IStream::read_char)";
+val_t stream___FDIStream___read_char(val_t p0);
+typedef val_t (*stream___FDIStream___read_char_t)(val_t p0);
+static const char * const LOCATE_stream___FDIStream___init = "stream::FDIStream::init";
 void stream___FDIStream___init(val_t p0, val_t p1, int* init_table);
 typedef void (*stream___FDIStream___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_FDIStream_stream___FDIStream___init(val_t p0);
-#define LOCATE_stream___FDOStream___write "stream::FDOStream::(stream::OStream::write)"
-void stream___FDOStream___write(val_t p0, val_t p1);
-typedef void (*stream___FDOStream___write_t)(val_t p0, val_t p1);
-#define LOCATE_stream___FDOStream___is_writable "stream::FDOStream::(stream::OStream::is_writable)"
+static const char * const LOCATE_stream___FDOStream___is_writable = "stream::FDOStream::(stream::OStream::is_writable)";
 val_t stream___FDOStream___is_writable(val_t p0);
 typedef val_t (*stream___FDOStream___is_writable_t)(val_t p0);
-#define LOCATE_stream___FDOStream___init "stream::FDOStream::init"
+static const char * const LOCATE_stream___FDOStream___write = "stream::FDOStream::(stream::OStream::write)";
+void stream___FDOStream___write(val_t p0, val_t p1);
+typedef void (*stream___FDOStream___write_t)(val_t p0, val_t p1);
+static const char * const LOCATE_stream___FDOStream___init = "stream::FDOStream::init";
 void stream___FDOStream___init(val_t p0, val_t p1, int* init_table);
 typedef void (*stream___FDOStream___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_FDOStream_stream___FDOStream___init(val_t p0);
-#define LOCATE_stream___FDIOStream___init "stream::FDIOStream::init"
+static const char * const LOCATE_stream___FDIOStream___init = "stream::FDIOStream::init";
 void stream___FDIOStream___init(val_t p0, val_t p1, int* init_table);
 typedef void (*stream___FDIOStream___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_FDIOStream_stream___FDIOStream___init(val_t p0);

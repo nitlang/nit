@@ -82,7 +82,7 @@ extern const int SFT_static_type[];
 #define COLOR_MMType (SFT_static_type[17])
 #define ATTR_static_type___MMType____as_nullable_cache(recv) ATTR(recv, (SFT_static_type[18] + 0))
 #define INIT_TABLE_POS_MMType (SFT_static_type[19] + 0)
-#define CALL_static_type___MMType___module(recv) ((static_type___MMType___module_t)CALL((recv), (SFT_static_type[19] + 1)))
+#define CALL_static_type___MMType___mmmodule(recv) ((static_type___MMType___mmmodule_t)CALL((recv), (SFT_static_type[19] + 1)))
 #define CALL_static_type___MMType___local_class(recv) ((static_type___MMType___local_class_t)CALL((recv), (SFT_static_type[19] + 2)))
 #define CALL_static_type___MMType___is_valid(recv) ((static_type___MMType___is_valid_t)CALL((recv), (SFT_static_type[19] + 3)))
 #define CALL_static_type___MMType_____l(recv) ((static_type___MMType_____l_t)CALL((recv), (SFT_static_type[19] + 4)))
@@ -111,273 +111,273 @@ extern const int SFT_static_type[];
 #define CALL_static_type___MMTypeSimpleClass___init(recv) ((static_type___MMTypeSimpleClass___init_t)CALL((recv), (SFT_static_type[30] + 1)))
 #define ID_MMTypeNone (SFT_static_type[31])
 #define COLOR_MMTypeNone (SFT_static_type[32])
-#define ATTR_static_type___MMTypeNone____module(recv) ATTR(recv, (SFT_static_type[33] + 0))
+#define ATTR_static_type___MMTypeNone____mmmodule(recv) ATTR(recv, (SFT_static_type[33] + 0))
 #define INIT_TABLE_POS_MMTypeNone (SFT_static_type[34] + 0)
 #define CALL_static_type___MMTypeNone___init(recv) ((static_type___MMTypeNone___init_t)CALL((recv), (SFT_static_type[34] + 1)))
 #define ATTR_static_type___MMModule____type_none(recv) ATTR(recv, (SFT_static_type[35] + 0))
 #define CALL_static_type___MMModule___type_none(recv) ((static_type___MMModule___type_none_t)CALL((recv), (SFT_static_type[36] + 0)))
 #define CALL_static_type___MMModule___type_bool(recv) ((static_type___MMModule___type_bool_t)CALL((recv), (SFT_static_type[36] + 1)))
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_static_type___MMLocalClass___get_type "static_type::MMLocalClass::get_type"
+static const char * const LOCATE_static_type___MMLocalClass___get_type = "static_type::MMLocalClass::get_type";
 val_t static_type___MMLocalClass___get_type(val_t p0);
 typedef val_t (*static_type___MMLocalClass___get_type_t)(val_t p0);
-#define LOCATE_static_type___MMLocalClass___add_ancestor "static_type::MMLocalClass::add_ancestor"
+static const char * const LOCATE_static_type___MMLocalClass___add_ancestor = "static_type::MMLocalClass::add_ancestor";
 void static_type___MMLocalClass___add_ancestor(val_t p0, val_t p1);
 typedef void (*static_type___MMLocalClass___add_ancestor_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMLocalClass___ancestors "static_type::MMLocalClass::ancestors"
+static const char * const LOCATE_static_type___MMLocalClass___ancestors = "static_type::MMLocalClass::ancestors";
 val_t static_type___MMLocalClass___ancestors(val_t p0);
 typedef val_t (*static_type___MMLocalClass___ancestors_t)(val_t p0);
-#define LOCATE_static_type___MMLocalClass___ancestor "static_type::MMLocalClass::ancestor"
+static const char * const LOCATE_static_type___MMLocalClass___ancestor = "static_type::MMLocalClass::ancestor";
 val_t static_type___MMLocalClass___ancestor(val_t p0, val_t p1);
 typedef val_t (*static_type___MMLocalClass___ancestor_t)(val_t p0, val_t p1);
-val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-#define LOCATE_static_type___MMLocalProperty___signature "static_type::MMLocalProperty::signature"
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_static_type___MMLocalProperty___signature = "static_type::MMLocalProperty::signature";
 val_t static_type___MMLocalProperty___signature(val_t p0);
 typedef val_t (*static_type___MMLocalProperty___signature_t)(val_t p0);
-#define LOCATE_static_type___MMLocalProperty___signature__eq "static_type::MMLocalProperty::signature="
+static const char * const LOCATE_static_type___MMLocalProperty___signature__eq = "static_type::MMLocalProperty::signature=";
 void static_type___MMLocalProperty___signature__eq(val_t p0, val_t p1);
 typedef void (*static_type___MMLocalProperty___signature__eq_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMLocalProperty___signature_for "static_type::MMLocalProperty::signature_for"
+static const char * const LOCATE_static_type___MMLocalProperty___signature_for = "static_type::MMLocalProperty::signature_for";
 val_t static_type___MMLocalProperty___signature_for(val_t p0, val_t p1);
 typedef val_t (*static_type___MMLocalProperty___signature_for_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMSignature___to_s "static_type::MMSignature::(string::Object::to_s)"
-val_t static_type___MMSignature___to_s(val_t p0);
-typedef val_t (*static_type___MMSignature___to_s_t)(val_t p0);
-#define LOCATE_static_type___MMSignature___recv "static_type::MMSignature::recv"
+val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
+static const char * const LOCATE_static_type___MMSignature___recv = "static_type::MMSignature::recv";
 val_t static_type___MMSignature___recv(val_t p0);
 typedef val_t (*static_type___MMSignature___recv_t)(val_t p0);
-#define LOCATE_static_type___MMSignature___return_type "static_type::MMSignature::return_type"
+static const char * const LOCATE_static_type___MMSignature___return_type = "static_type::MMSignature::return_type";
 val_t static_type___MMSignature___return_type(val_t p0);
 typedef val_t (*static_type___MMSignature___return_type_t)(val_t p0);
-#define LOCATE_static_type___MMSignature___closures "static_type::MMSignature::closures"
+static const char * const LOCATE_static_type___MMSignature___closures = "static_type::MMSignature::closures";
 val_t static_type___MMSignature___closures(val_t p0);
 typedef val_t (*static_type___MMSignature___closures_t)(val_t p0);
-#define LOCATE_static_type___MMSignature___closure_named "static_type::MMSignature::closure_named"
+static const char * const LOCATE_static_type___MMSignature___closure_named = "static_type::MMSignature::closure_named";
 val_t static_type___MMSignature___closure_named(val_t p0, val_t p1);
 typedef val_t (*static_type___MMSignature___closure_named_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMSignature___arity "static_type::MMSignature::arity"
+static const char * const LOCATE_static_type___MMSignature___arity = "static_type::MMSignature::arity";
 val_t static_type___MMSignature___arity(val_t p0);
 typedef val_t (*static_type___MMSignature___arity_t)(val_t p0);
-#define LOCATE_static_type___MMSignature_____l "static_type::MMSignature::<"
+static const char * const LOCATE_static_type___MMSignature_____l = "static_type::MMSignature::<";
 val_t static_type___MMSignature_____l(val_t p0, val_t p1);
 typedef val_t (*static_type___MMSignature_____l_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMSignature_____bra "static_type::MMSignature::[]"
+static const char * const LOCATE_static_type___MMSignature_____bra = "static_type::MMSignature::[]";
 val_t static_type___MMSignature_____bra(val_t p0, val_t p1);
 typedef val_t (*static_type___MMSignature_____bra_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMSignature___adaptation_to "static_type::MMSignature::adaptation_to"
+static const char * const LOCATE_static_type___MMSignature___to_s = "static_type::MMSignature::(string::Object::to_s)";
+val_t static_type___MMSignature___to_s(val_t p0);
+typedef val_t (*static_type___MMSignature___to_s_t)(val_t p0);
+static const char * const LOCATE_static_type___MMSignature___adaptation_to = "static_type::MMSignature::adaptation_to";
 val_t static_type___MMSignature___adaptation_to(val_t p0, val_t p1);
 typedef val_t (*static_type___MMSignature___adaptation_to_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMSignature___not_for_self "static_type::MMSignature::not_for_self"
+static const char * const LOCATE_static_type___MMSignature___not_for_self = "static_type::MMSignature::not_for_self";
 val_t static_type___MMSignature___not_for_self(val_t p0);
 typedef val_t (*static_type___MMSignature___not_for_self_t)(val_t p0);
-#define LOCATE_static_type___MMSignature___init "static_type::MMSignature::init"
+static const char * const LOCATE_static_type___MMSignature___init = "static_type::MMSignature::init";
 void static_type___MMSignature___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*static_type___MMSignature___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_MMSignature_static_type___MMSignature___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_static_type___MMClosure___name "static_type::MMClosure::name"
+static const char * const LOCATE_static_type___MMClosure___name = "static_type::MMClosure::name";
 val_t static_type___MMClosure___name(val_t p0);
 typedef val_t (*static_type___MMClosure___name_t)(val_t p0);
-#define LOCATE_static_type___MMClosure___signature "static_type::MMClosure::signature"
+static const char * const LOCATE_static_type___MMClosure___signature = "static_type::MMClosure::signature";
 val_t static_type___MMClosure___signature(val_t p0);
 typedef val_t (*static_type___MMClosure___signature_t)(val_t p0);
-#define LOCATE_static_type___MMClosure___is_break "static_type::MMClosure::is_break"
+static const char * const LOCATE_static_type___MMClosure___is_break = "static_type::MMClosure::is_break";
 val_t static_type___MMClosure___is_break(val_t p0);
 typedef val_t (*static_type___MMClosure___is_break_t)(val_t p0);
-#define LOCATE_static_type___MMClosure___is_optional "static_type::MMClosure::is_optional"
+static const char * const LOCATE_static_type___MMClosure___is_optional = "static_type::MMClosure::is_optional";
 val_t static_type___MMClosure___is_optional(val_t p0);
 typedef val_t (*static_type___MMClosure___is_optional_t)(val_t p0);
-#define LOCATE_static_type___MMClosure___adaptation_to "static_type::MMClosure::adaptation_to"
+static const char * const LOCATE_static_type___MMClosure___adaptation_to = "static_type::MMClosure::adaptation_to";
 val_t static_type___MMClosure___adaptation_to(val_t p0, val_t p1);
 typedef val_t (*static_type___MMClosure___adaptation_to_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMClosure___init "static_type::MMClosure::init"
+static const char * const LOCATE_static_type___MMClosure___init = "static_type::MMClosure::init";
 void static_type___MMClosure___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 typedef void (*static_type___MMClosure___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 val_t NEW_MMClosure_static_type___MMClosure___init(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_static_type___MMClosure___not_for_self "static_type::MMClosure::not_for_self"
+static const char * const LOCATE_static_type___MMClosure___not_for_self = "static_type::MMClosure::not_for_self";
 val_t static_type___MMClosure___not_for_self(val_t p0);
 typedef val_t (*static_type___MMClosure___not_for_self_t)(val_t p0);
-#define LOCATE_static_type___MMClosure_____l "static_type::MMClosure::<"
+static const char * const LOCATE_static_type___MMClosure_____l = "static_type::MMClosure::<";
 val_t static_type___MMClosure_____l(val_t p0, val_t p1);
 typedef val_t (*static_type___MMClosure_____l_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMAncestor___to_s "static_type::MMAncestor::(string::Object::to_s)"
-val_t static_type___MMAncestor___to_s(val_t p0);
-typedef val_t (*static_type___MMAncestor___to_s_t)(val_t p0);
-#define LOCATE_static_type___MMAncestor___stype__eq "static_type::MMAncestor::stype="
+static const char * const LOCATE_static_type___MMAncestor___stype__eq = "static_type::MMAncestor::stype=";
 void static_type___MMAncestor___stype__eq(val_t p0, val_t p1);
 typedef void (*static_type___MMAncestor___stype__eq_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMAncestor___stype "static_type::MMAncestor::stype"
+static const char * const LOCATE_static_type___MMAncestor___stype = "static_type::MMAncestor::stype";
 val_t static_type___MMAncestor___stype(val_t p0);
 typedef val_t (*static_type___MMAncestor___stype_t)(val_t p0);
-#define LOCATE_static_type___MMAncestor___inheriter__eq "static_type::MMAncestor::inheriter="
+static const char * const LOCATE_static_type___MMAncestor___inheriter__eq = "static_type::MMAncestor::inheriter=";
 void static_type___MMAncestor___inheriter__eq(val_t p0, val_t p1);
 typedef void (*static_type___MMAncestor___inheriter__eq_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMAncestor___inheriter "static_type::MMAncestor::inheriter"
+static const char * const LOCATE_static_type___MMAncestor___inheriter = "static_type::MMAncestor::inheriter";
 val_t static_type___MMAncestor___inheriter(val_t p0);
 typedef val_t (*static_type___MMAncestor___inheriter_t)(val_t p0);
-#define LOCATE_static_type___MMAncestor___is_reffinement "static_type::MMAncestor::is_reffinement"
+static const char * const LOCATE_static_type___MMAncestor___is_reffinement = "static_type::MMAncestor::is_reffinement";
 val_t static_type___MMAncestor___is_reffinement(val_t p0);
 typedef val_t (*static_type___MMAncestor___is_reffinement_t)(val_t p0);
-#define LOCATE_static_type___MMAncestor___is_specialisation "static_type::MMAncestor::is_specialisation"
+static const char * const LOCATE_static_type___MMAncestor___is_specialisation = "static_type::MMAncestor::is_specialisation";
 val_t static_type___MMAncestor___is_specialisation(val_t p0);
 typedef val_t (*static_type___MMAncestor___is_specialisation_t)(val_t p0);
-#define LOCATE_static_type___MMAncestor___local_class "static_type::MMAncestor::local_class"
+static const char * const LOCATE_static_type___MMAncestor___local_class = "static_type::MMAncestor::local_class";
 val_t static_type___MMAncestor___local_class(val_t p0);
 typedef val_t (*static_type___MMAncestor___local_class_t)(val_t p0);
-#define LOCATE_static_type___MMAncestor___init "static_type::MMAncestor::init"
+static const char * const LOCATE_static_type___MMAncestor___to_s = "static_type::MMAncestor::(string::Object::to_s)";
+val_t static_type___MMAncestor___to_s(val_t p0);
+typedef val_t (*static_type___MMAncestor___to_s_t)(val_t p0);
+static const char * const LOCATE_static_type___MMAncestor___init = "static_type::MMAncestor::init";
 void static_type___MMAncestor___init(val_t p0, int* init_table);
 typedef void (*static_type___MMAncestor___init_t)(val_t p0, int* init_table);
 val_t NEW_MMAncestor_static_type___MMAncestor___init();
-#define LOCATE_static_type___MMType___module "static_type::MMType::module"
-val_t static_type___MMType___module(val_t p0);
-typedef val_t (*static_type___MMType___module_t)(val_t p0);
-#define LOCATE_static_type___MMType___local_class "static_type::MMType::local_class"
+static const char * const LOCATE_static_type___MMType___mmmodule = "static_type::MMType::mmmodule";
+val_t static_type___MMType___mmmodule(val_t p0);
+typedef val_t (*static_type___MMType___mmmodule_t)(val_t p0);
+static const char * const LOCATE_static_type___MMType___local_class = "static_type::MMType::local_class";
 val_t static_type___MMType___local_class(val_t p0);
 typedef val_t (*static_type___MMType___local_class_t)(val_t p0);
-#define LOCATE_static_type___MMType___is_valid "static_type::MMType::is_valid"
+static const char * const LOCATE_static_type___MMType___is_valid = "static_type::MMType::is_valid";
 val_t static_type___MMType___is_valid(val_t p0);
 typedef val_t (*static_type___MMType___is_valid_t)(val_t p0);
-#define LOCATE_static_type___MMType_____l "static_type::MMType::<"
+static const char * const LOCATE_static_type___MMType_____l = "static_type::MMType::<";
 val_t static_type___MMType_____l(val_t p0, val_t p1);
 typedef val_t (*static_type___MMType_____l_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMType___is_supertype "static_type::MMType::is_supertype"
+static const char * const LOCATE_static_type___MMType___is_supertype = "static_type::MMType::is_supertype";
 val_t static_type___MMType___is_supertype(val_t p0, val_t p1);
 typedef val_t (*static_type___MMType___is_supertype_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMType___for_module "static_type::MMType::for_module"
+static const char * const LOCATE_static_type___MMType___for_module = "static_type::MMType::for_module";
 val_t static_type___MMType___for_module(val_t p0, val_t p1);
 typedef val_t (*static_type___MMType___for_module_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMType___adapt_to "static_type::MMType::adapt_to"
+static const char * const LOCATE_static_type___MMType___adapt_to = "static_type::MMType::adapt_to";
 val_t static_type___MMType___adapt_to(val_t p0, val_t p1);
 typedef val_t (*static_type___MMType___adapt_to_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMType___upcast_for "static_type::MMType::upcast_for"
+static const char * const LOCATE_static_type___MMType___upcast_for = "static_type::MMType::upcast_for";
 val_t static_type___MMType___upcast_for(val_t p0, val_t p1);
 typedef val_t (*static_type___MMType___upcast_for_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMType___not_for_self "static_type::MMType::not_for_self"
+static const char * const LOCATE_static_type___MMType___not_for_self = "static_type::MMType::not_for_self";
 val_t static_type___MMType___not_for_self(val_t p0);
 typedef val_t (*static_type___MMType___not_for_self_t)(val_t p0);
-#define LOCATE_static_type___MMType___is_nullable "static_type::MMType::is_nullable"
+static const char * const LOCATE_static_type___MMType___is_nullable = "static_type::MMType::is_nullable";
 val_t static_type___MMType___is_nullable(val_t p0);
 typedef val_t (*static_type___MMType___is_nullable_t)(val_t p0);
-#define LOCATE_static_type___MMType___as_nullable "static_type::MMType::as_nullable"
+static const char * const LOCATE_static_type___MMType___as_nullable = "static_type::MMType::as_nullable";
 val_t static_type___MMType___as_nullable(val_t p0);
 typedef val_t (*static_type___MMType___as_nullable_t)(val_t p0);
-#define LOCATE_static_type___MMType___as_notnull "static_type::MMType::as_notnull"
+static const char * const LOCATE_static_type___MMType___as_notnull = "static_type::MMType::as_notnull";
 val_t static_type___MMType___as_notnull(val_t p0);
 typedef val_t (*static_type___MMType___as_notnull_t)(val_t p0);
-#define LOCATE_static_type___MMType___init "static_type::MMType::init"
+static const char * const LOCATE_static_type___MMType___init = "static_type::MMType::init";
 void static_type___MMType___init(val_t p0, int* init_table);
 typedef void (*static_type___MMType___init_t)(val_t p0, int* init_table);
 val_t NEW_MMType_static_type___MMType___init();
-#define LOCATE_static_type___MMNullableType___to_s "static_type::MMNullableType::(string::Object::to_s)"
-val_t static_type___MMNullableType___to_s(val_t p0);
-typedef val_t (*static_type___MMNullableType___to_s_t)(val_t p0);
-#define LOCATE_static_type___MMNullableType___module "static_type::MMNullableType::(static_type::MMType::module)"
-val_t static_type___MMNullableType___module(val_t p0);
-typedef val_t (*static_type___MMNullableType___module_t)(val_t p0);
-#define LOCATE_static_type___MMNullableType___local_class "static_type::MMNullableType::(static_type::MMType::local_class)"
-val_t static_type___MMNullableType___local_class(val_t p0);
-typedef val_t (*static_type___MMNullableType___local_class_t)(val_t p0);
-#define LOCATE_static_type___MMNullableType___is_valid "static_type::MMNullableType::(static_type::MMType::is_valid)"
+static const char * const LOCATE_static_type___MMNullableType___is_valid = "static_type::MMNullableType::(static_type::MMType::is_valid)";
 val_t static_type___MMNullableType___is_valid(val_t p0);
 typedef val_t (*static_type___MMNullableType___is_valid_t)(val_t p0);
-#define LOCATE_static_type___MMNullableType_____l "static_type::MMNullableType::(static_type::MMType::<)"
-val_t static_type___MMNullableType_____l(val_t p0, val_t p1);
-typedef val_t (*static_type___MMNullableType_____l_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMNullableType___is_supertype "static_type::MMNullableType::(static_type::MMType::is_supertype)"
-val_t static_type___MMNullableType___is_supertype(val_t p0, val_t p1);
-typedef val_t (*static_type___MMNullableType___is_supertype_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMNullableType___for_module "static_type::MMNullableType::(static_type::MMType::for_module)"
-val_t static_type___MMNullableType___for_module(val_t p0, val_t p1);
-typedef val_t (*static_type___MMNullableType___for_module_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMNullableType___adapt_to "static_type::MMNullableType::(static_type::MMType::adapt_to)"
-val_t static_type___MMNullableType___adapt_to(val_t p0, val_t p1);
-typedef val_t (*static_type___MMNullableType___adapt_to_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMNullableType___upcast_for "static_type::MMNullableType::(static_type::MMType::upcast_for)"
-val_t static_type___MMNullableType___upcast_for(val_t p0, val_t p1);
-typedef val_t (*static_type___MMNullableType___upcast_for_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMNullableType___not_for_self "static_type::MMNullableType::(static_type::MMType::not_for_self)"
-val_t static_type___MMNullableType___not_for_self(val_t p0);
-typedef val_t (*static_type___MMNullableType___not_for_self_t)(val_t p0);
-#define LOCATE_static_type___MMNullableType___is_nullable "static_type::MMNullableType::(static_type::MMType::is_nullable)"
+static const char * const LOCATE_static_type___MMNullableType___is_nullable = "static_type::MMNullableType::(static_type::MMType::is_nullable)";
 val_t static_type___MMNullableType___is_nullable(val_t p0);
 typedef val_t (*static_type___MMNullableType___is_nullable_t)(val_t p0);
-#define LOCATE_static_type___MMNullableType___as_nullable "static_type::MMNullableType::(static_type::MMType::as_nullable)"
-val_t static_type___MMNullableType___as_nullable(val_t p0);
-typedef val_t (*static_type___MMNullableType___as_nullable_t)(val_t p0);
-#define LOCATE_static_type___MMNullableType___as_notnull "static_type::MMNullableType::(static_type::MMType::as_notnull)"
+static const char * const LOCATE_static_type___MMNullableType___as_notnull = "static_type::MMNullableType::(static_type::MMType::as_notnull)";
 val_t static_type___MMNullableType___as_notnull(val_t p0);
 typedef val_t (*static_type___MMNullableType___as_notnull_t)(val_t p0);
-#define LOCATE_static_type___MMNullableType___init "static_type::MMNullableType::init"
+static const char * const LOCATE_static_type___MMNullableType___as_nullable = "static_type::MMNullableType::(static_type::MMType::as_nullable)";
+val_t static_type___MMNullableType___as_nullable(val_t p0);
+typedef val_t (*static_type___MMNullableType___as_nullable_t)(val_t p0);
+static const char * const LOCATE_static_type___MMNullableType___init = "static_type::MMNullableType::init";
 void static_type___MMNullableType___init(val_t p0, val_t p1, int* init_table);
 typedef void (*static_type___MMNullableType___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_MMNullableType_static_type___MMNullableType___init(val_t p0);
-#define LOCATE_static_type___MMTypeClass___to_s "static_type::MMTypeClass::(string::Object::to_s)"
-val_t static_type___MMTypeClass___to_s(val_t p0);
-typedef val_t (*static_type___MMTypeClass___to_s_t)(val_t p0);
-#define LOCATE_static_type___MMTypeClass___module "static_type::MMTypeClass::(static_type::MMType::module)"
-val_t static_type___MMTypeClass___module(val_t p0);
-typedef val_t (*static_type___MMTypeClass___module_t)(val_t p0);
-#define LOCATE_static_type___MMTypeClass___local_class "static_type::MMTypeClass::(static_type::MMType::local_class)"
+static const char * const LOCATE_static_type___MMNullableType___mmmodule = "static_type::MMNullableType::(static_type::MMType::mmmodule)";
+val_t static_type___MMNullableType___mmmodule(val_t p0);
+typedef val_t (*static_type___MMNullableType___mmmodule_t)(val_t p0);
+static const char * const LOCATE_static_type___MMNullableType___local_class = "static_type::MMNullableType::(static_type::MMType::local_class)";
+val_t static_type___MMNullableType___local_class(val_t p0);
+typedef val_t (*static_type___MMNullableType___local_class_t)(val_t p0);
+static const char * const LOCATE_static_type___MMNullableType_____l = "static_type::MMNullableType::(static_type::MMType::<)";
+val_t static_type___MMNullableType_____l(val_t p0, val_t p1);
+typedef val_t (*static_type___MMNullableType_____l_t)(val_t p0, val_t p1);
+static const char * const LOCATE_static_type___MMNullableType___to_s = "static_type::MMNullableType::(string::Object::to_s)";
+val_t static_type___MMNullableType___to_s(val_t p0);
+typedef val_t (*static_type___MMNullableType___to_s_t)(val_t p0);
+static const char * const LOCATE_static_type___MMNullableType___is_supertype = "static_type::MMNullableType::(static_type::MMType::is_supertype)";
+val_t static_type___MMNullableType___is_supertype(val_t p0, val_t p1);
+typedef val_t (*static_type___MMNullableType___is_supertype_t)(val_t p0, val_t p1);
+static const char * const LOCATE_static_type___MMNullableType___for_module = "static_type::MMNullableType::(static_type::MMType::for_module)";
+val_t static_type___MMNullableType___for_module(val_t p0, val_t p1);
+typedef val_t (*static_type___MMNullableType___for_module_t)(val_t p0, val_t p1);
+static const char * const LOCATE_static_type___MMNullableType___adapt_to = "static_type::MMNullableType::(static_type::MMType::adapt_to)";
+val_t static_type___MMNullableType___adapt_to(val_t p0, val_t p1);
+typedef val_t (*static_type___MMNullableType___adapt_to_t)(val_t p0, val_t p1);
+static const char * const LOCATE_static_type___MMNullableType___upcast_for = "static_type::MMNullableType::(static_type::MMType::upcast_for)";
+val_t static_type___MMNullableType___upcast_for(val_t p0, val_t p1);
+typedef val_t (*static_type___MMNullableType___upcast_for_t)(val_t p0, val_t p1);
+static const char * const LOCATE_static_type___MMNullableType___not_for_self = "static_type::MMNullableType::(static_type::MMType::not_for_self)";
+val_t static_type___MMNullableType___not_for_self(val_t p0);
+typedef val_t (*static_type___MMNullableType___not_for_self_t)(val_t p0);
+static const char * const LOCATE_static_type___MMTypeClass___local_class = "static_type::MMTypeClass::(static_type::MMType::local_class)";
 val_t static_type___MMTypeClass___local_class(val_t p0);
 typedef val_t (*static_type___MMTypeClass___local_class_t)(val_t p0);
-#define LOCATE_static_type___MMTypeClass_____l "static_type::MMTypeClass::(static_type::MMType::<)"
+static const char * const LOCATE_static_type___MMTypeClass___mmmodule = "static_type::MMTypeClass::(static_type::MMType::mmmodule)";
+val_t static_type___MMTypeClass___mmmodule(val_t p0);
+typedef val_t (*static_type___MMTypeClass___mmmodule_t)(val_t p0);
+static const char * const LOCATE_static_type___MMTypeClass_____l = "static_type::MMTypeClass::(static_type::MMType::<)";
 val_t static_type___MMTypeClass_____l(val_t p0, val_t p1);
 typedef val_t (*static_type___MMTypeClass_____l_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMTypeClass___upcast_for "static_type::MMTypeClass::(static_type::MMType::upcast_for)"
+static const char * const LOCATE_static_type___MMTypeClass___to_s = "static_type::MMTypeClass::(string::Object::to_s)";
+val_t static_type___MMTypeClass___to_s(val_t p0);
+typedef val_t (*static_type___MMTypeClass___to_s_t)(val_t p0);
+static const char * const LOCATE_static_type___MMTypeClass___upcast_for = "static_type::MMTypeClass::(static_type::MMType::upcast_for)";
 val_t static_type___MMTypeClass___upcast_for(val_t p0, val_t p1);
 typedef val_t (*static_type___MMTypeClass___upcast_for_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMTypeClass___init "static_type::MMTypeClass::init"
+static const char * const LOCATE_static_type___MMTypeClass___init = "static_type::MMTypeClass::init";
 void static_type___MMTypeClass___init(val_t p0, val_t p1, int* init_table);
 typedef void (*static_type___MMTypeClass___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_MMTypeClass_static_type___MMTypeClass___init(val_t p0);
-#define LOCATE_static_type___MMTypeSimpleClass___is_supertype "static_type::MMTypeSimpleClass::(static_type::MMType::is_supertype)"
+static const char * const LOCATE_static_type___MMTypeSimpleClass___is_supertype = "static_type::MMTypeSimpleClass::(static_type::MMType::is_supertype)";
 val_t static_type___MMTypeSimpleClass___is_supertype(val_t p0, val_t p1);
 typedef val_t (*static_type___MMTypeSimpleClass___is_supertype_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMTypeSimpleClass___for_module "static_type::MMTypeSimpleClass::(static_type::MMType::for_module)"
+static const char * const LOCATE_static_type___MMTypeSimpleClass___for_module = "static_type::MMTypeSimpleClass::(static_type::MMType::for_module)";
 val_t static_type___MMTypeSimpleClass___for_module(val_t p0, val_t p1);
 typedef val_t (*static_type___MMTypeSimpleClass___for_module_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMTypeSimpleClass___adapt_to "static_type::MMTypeSimpleClass::(static_type::MMType::adapt_to)"
+static const char * const LOCATE_static_type___MMTypeSimpleClass___adapt_to = "static_type::MMTypeSimpleClass::(static_type::MMType::adapt_to)";
 val_t static_type___MMTypeSimpleClass___adapt_to(val_t p0, val_t p1);
 typedef val_t (*static_type___MMTypeSimpleClass___adapt_to_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMTypeSimpleClass___init "static_type::MMTypeSimpleClass::init"
+static const char * const LOCATE_static_type___MMTypeSimpleClass___init = "static_type::MMTypeSimpleClass::init";
 void static_type___MMTypeSimpleClass___init(val_t p0, val_t p1, int* init_table);
 typedef void (*static_type___MMTypeSimpleClass___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_MMTypeSimpleClass_static_type___MMTypeSimpleClass___init(val_t p0);
-#define LOCATE_static_type___MMTypeNone___to_s "static_type::MMTypeNone::(string::Object::to_s)"
-val_t static_type___MMTypeNone___to_s(val_t p0);
-typedef val_t (*static_type___MMTypeNone___to_s_t)(val_t p0);
-#define LOCATE_static_type___MMTypeNone___module "static_type::MMTypeNone::(static_type::MMType::module)"
-val_t static_type___MMTypeNone___module(val_t p0);
-typedef val_t (*static_type___MMTypeNone___module_t)(val_t p0);
-#define LOCATE_static_type___MMTypeNone___local_class "static_type::MMTypeNone::(static_type::MMType::local_class)"
-val_t static_type___MMTypeNone___local_class(val_t p0);
-typedef val_t (*static_type___MMTypeNone___local_class_t)(val_t p0);
-#define LOCATE_static_type___MMTypeNone_____l "static_type::MMTypeNone::(static_type::MMType::<)"
-val_t static_type___MMTypeNone_____l(val_t p0, val_t p1);
-typedef val_t (*static_type___MMTypeNone_____l_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMTypeNone___is_supertype "static_type::MMTypeNone::(static_type::MMType::is_supertype)"
-val_t static_type___MMTypeNone___is_supertype(val_t p0, val_t p1);
-typedef val_t (*static_type___MMTypeNone___is_supertype_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMTypeNone___upcast_for "static_type::MMTypeNone::(static_type::MMType::upcast_for)"
-val_t static_type___MMTypeNone___upcast_for(val_t p0, val_t p1);
-typedef val_t (*static_type___MMTypeNone___upcast_for_t)(val_t p0, val_t p1);
-#define LOCATE_static_type___MMTypeNone___is_nullable "static_type::MMTypeNone::(static_type::MMType::is_nullable)"
+static const char * const LOCATE_static_type___MMTypeNone___mmmodule = "static_type::MMTypeNone::(static_type::MMType::mmmodule)";
+val_t static_type___MMTypeNone___mmmodule(val_t p0);
+typedef val_t (*static_type___MMTypeNone___mmmodule_t)(val_t p0);
+static const char * const LOCATE_static_type___MMTypeNone___is_nullable = "static_type::MMTypeNone::(static_type::MMType::is_nullable)";
 val_t static_type___MMTypeNone___is_nullable(val_t p0);
 typedef val_t (*static_type___MMTypeNone___is_nullable_t)(val_t p0);
-#define LOCATE_static_type___MMTypeNone___as_nullable "static_type::MMTypeNone::(static_type::MMType::as_nullable)"
+static const char * const LOCATE_static_type___MMTypeNone_____l = "static_type::MMTypeNone::(static_type::MMType::<)";
+val_t static_type___MMTypeNone_____l(val_t p0, val_t p1);
+typedef val_t (*static_type___MMTypeNone_____l_t)(val_t p0, val_t p1);
+static const char * const LOCATE_static_type___MMTypeNone___to_s = "static_type::MMTypeNone::(string::Object::to_s)";
+val_t static_type___MMTypeNone___to_s(val_t p0);
+typedef val_t (*static_type___MMTypeNone___to_s_t)(val_t p0);
+static const char * const LOCATE_static_type___MMTypeNone___is_supertype = "static_type::MMTypeNone::(static_type::MMType::is_supertype)";
+val_t static_type___MMTypeNone___is_supertype(val_t p0, val_t p1);
+typedef val_t (*static_type___MMTypeNone___is_supertype_t)(val_t p0, val_t p1);
+static const char * const LOCATE_static_type___MMTypeNone___local_class = "static_type::MMTypeNone::(static_type::MMType::local_class)";
+val_t static_type___MMTypeNone___local_class(val_t p0);
+typedef val_t (*static_type___MMTypeNone___local_class_t)(val_t p0);
+static const char * const LOCATE_static_type___MMTypeNone___upcast_for = "static_type::MMTypeNone::(static_type::MMType::upcast_for)";
+val_t static_type___MMTypeNone___upcast_for(val_t p0, val_t p1);
+typedef val_t (*static_type___MMTypeNone___upcast_for_t)(val_t p0, val_t p1);
+static const char * const LOCATE_static_type___MMTypeNone___as_nullable = "static_type::MMTypeNone::(static_type::MMType::as_nullable)";
 val_t static_type___MMTypeNone___as_nullable(val_t p0);
 typedef val_t (*static_type___MMTypeNone___as_nullable_t)(val_t p0);
-#define LOCATE_static_type___MMTypeNone___as_notnull "static_type::MMTypeNone::(static_type::MMType::as_notnull)"
+static const char * const LOCATE_static_type___MMTypeNone___as_notnull = "static_type::MMTypeNone::(static_type::MMType::as_notnull)";
 val_t static_type___MMTypeNone___as_notnull(val_t p0);
 typedef val_t (*static_type___MMTypeNone___as_notnull_t)(val_t p0);
-#define LOCATE_static_type___MMTypeNone___init "static_type::MMTypeNone::init"
+static const char * const LOCATE_static_type___MMTypeNone___init = "static_type::MMTypeNone::init";
 void static_type___MMTypeNone___init(val_t p0, val_t p1, int* init_table);
 typedef void (*static_type___MMTypeNone___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_MMTypeNone_static_type___MMTypeNone___init(val_t p0);
-val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
-#define LOCATE_static_type___MMModule___type_none "static_type::MMModule::type_none"
+static const char * const LOCATE_static_type___MMModule___type_none = "static_type::MMModule::type_none";
 val_t static_type___MMModule___type_none(val_t p0);
 typedef val_t (*static_type___MMModule___type_none_t)(val_t p0);
-#define LOCATE_static_type___MMModule___type_bool "static_type::MMModule::type_bool"
+static const char * const LOCATE_static_type___MMModule___type_bool = "static_type::MMModule::type_bool";
 val_t static_type___MMModule___type_bool(val_t p0);
 typedef val_t (*static_type___MMModule___type_bool_t)(val_t p0);
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
 #endif

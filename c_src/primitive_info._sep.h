@@ -26,40 +26,40 @@ extern const int SFT_primitive_info[];
 #define CALL_primitive_info___MMType___default_cvalue(recv) ((primitive_info___MMType___default_cvalue_t)CALL((recv), (SFT_primitive_info[6] + 2)))
 #define CALL_primitive_info___MMType___boxtype(recv) ((primitive_info___MMType___boxtype_t)CALL((recv), (SFT_primitive_info[6] + 3)))
 #define CALL_primitive_info___MMType___unboxtype(recv) ((primitive_info___MMType___unboxtype_t)CALL((recv), (SFT_primitive_info[6] + 4)))
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
-#define LOCATE_primitive_info___MMLocalClass___primitive_info "primitive_info::MMLocalClass::primitive_info"
+static const char * const LOCATE_primitive_info___MMLocalClass___primitive_info = "primitive_info::MMLocalClass::primitive_info";
 val_t primitive_info___MMLocalClass___primitive_info(val_t p0);
 typedef val_t (*primitive_info___MMLocalClass___primitive_info_t)(val_t p0);
-#define LOCATE_primitive_info___MMLocalClass___primitive_ctypes "primitive_info::MMLocalClass::primitive_ctypes"
+static const char * const LOCATE_primitive_info___MMLocalClass___primitive_ctypes = "primitive_info::MMLocalClass::primitive_ctypes";
 val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0);
 typedef val_t (*primitive_info___MMLocalClass___primitive_ctypes_t)(val_t p0);
-#define LOCATE_primitive_info___PrimitiveInfo___name "primitive_info::PrimitiveInfo::name"
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_primitive_info___PrimitiveInfo___name = "primitive_info::PrimitiveInfo::name";
 val_t primitive_info___PrimitiveInfo___name(val_t p0);
 typedef val_t (*primitive_info___PrimitiveInfo___name_t)(val_t p0);
-#define LOCATE_primitive_info___PrimitiveInfo___tagged "primitive_info::PrimitiveInfo::tagged"
+static const char * const LOCATE_primitive_info___PrimitiveInfo___tagged = "primitive_info::PrimitiveInfo::tagged";
 val_t primitive_info___PrimitiveInfo___tagged(val_t p0);
 typedef val_t (*primitive_info___PrimitiveInfo___tagged_t)(val_t p0);
-#define LOCATE_primitive_info___PrimitiveInfo___cname "primitive_info::PrimitiveInfo::cname"
+static const char * const LOCATE_primitive_info___PrimitiveInfo___cname = "primitive_info::PrimitiveInfo::cname";
 val_t primitive_info___PrimitiveInfo___cname(val_t p0);
 typedef val_t (*primitive_info___PrimitiveInfo___cname_t)(val_t p0);
-#define LOCATE_primitive_info___PrimitiveInfo___init "primitive_info::PrimitiveInfo::init"
+static const char * const LOCATE_primitive_info___PrimitiveInfo___init = "primitive_info::PrimitiveInfo::init";
 void primitive_info___PrimitiveInfo___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*primitive_info___PrimitiveInfo___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 val_t NEW_PrimitiveInfo_primitive_info___PrimitiveInfo___init(val_t p0, val_t p1, val_t p2);
-val_t NEW_MMType_static_type___MMType___init();
-#define LOCATE_primitive_info___MMType___cname "primitive_info::MMType::cname"
+static const char * const LOCATE_primitive_info___MMType___cname = "primitive_info::MMType::cname";
 val_t primitive_info___MMType___cname(val_t p0);
 typedef val_t (*primitive_info___MMType___cname_t)(val_t p0);
-#define LOCATE_primitive_info___MMType___is_tagged "primitive_info::MMType::is_tagged"
+static const char * const LOCATE_primitive_info___MMType___is_tagged = "primitive_info::MMType::is_tagged";
 val_t primitive_info___MMType___is_tagged(val_t p0);
 typedef val_t (*primitive_info___MMType___is_tagged_t)(val_t p0);
-#define LOCATE_primitive_info___MMType___default_cvalue "primitive_info::MMType::default_cvalue"
+static const char * const LOCATE_primitive_info___MMType___default_cvalue = "primitive_info::MMType::default_cvalue";
 val_t primitive_info___MMType___default_cvalue(val_t p0);
 typedef val_t (*primitive_info___MMType___default_cvalue_t)(val_t p0);
-#define LOCATE_primitive_info___MMType___boxtype "primitive_info::MMType::boxtype"
+static const char * const LOCATE_primitive_info___MMType___boxtype = "primitive_info::MMType::boxtype";
 val_t primitive_info___MMType___boxtype(val_t p0, val_t p1);
 typedef val_t (*primitive_info___MMType___boxtype_t)(val_t p0, val_t p1);
-#define LOCATE_primitive_info___MMType___unboxtype "primitive_info::MMType::unboxtype"
+static const char * const LOCATE_primitive_info___MMType___unboxtype = "primitive_info::MMType::unboxtype";
 val_t primitive_info___MMType___unboxtype(val_t p0, val_t p1);
 typedef val_t (*primitive_info___MMType___unboxtype_t)(val_t p0, val_t p1);
+val_t NEW_MMType_static_type___MMType___init();
 #endif

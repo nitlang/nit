@@ -14,7 +14,7 @@ extern const classtable_elt_t VFT_TEol[];
 
 extern const classtable_elt_t VFT_TComment[];
 
-extern const classtable_elt_t VFT_TKwpackage[];
+extern const classtable_elt_t VFT_TKwmodule[];
 
 extern const classtable_elt_t VFT_TKwimport[];
 
@@ -156,9 +156,13 @@ extern const classtable_elt_t VFT_TLt[];
 
 extern const classtable_elt_t VFT_TLe[];
 
+extern const classtable_elt_t VFT_TLl[];
+
 extern const classtable_elt_t VFT_TGt[];
 
 extern const classtable_elt_t VFT_TGe[];
+
+extern const classtable_elt_t VFT_TGg[];
 
 extern const classtable_elt_t VFT_TStarship[];
 
@@ -190,7 +194,7 @@ extern const classtable_elt_t VFT_AError[];
 
 extern const classtable_elt_t VFT_AModule[];
 
-extern const classtable_elt_t VFT_APackagedecl[];
+extern const classtable_elt_t VFT_AModuledecl[];
 
 extern const classtable_elt_t VFT_AImport[];
 
@@ -282,6 +286,10 @@ extern const classtable_elt_t VFT_ALtMethid[];
 
 extern const classtable_elt_t VFT_AGtMethid[];
 
+extern const classtable_elt_t VFT_ALlMethid[];
+
+extern const classtable_elt_t VFT_AGgMethid[];
+
 extern const classtable_elt_t VFT_ABraMethid[];
 
 extern const classtable_elt_t VFT_AStarshipMethid[];
@@ -346,6 +354,8 @@ extern const classtable_elt_t VFT_AOrExpr[];
 
 extern const classtable_elt_t VFT_AAndExpr[];
 
+extern const classtable_elt_t VFT_AOrElseExpr[];
+
 extern const classtable_elt_t VFT_ANotExpr[];
 
 extern const classtable_elt_t VFT_AEqExpr[];
@@ -358,9 +368,13 @@ extern const classtable_elt_t VFT_ALtExpr[];
 
 extern const classtable_elt_t VFT_ALeExpr[];
 
+extern const classtable_elt_t VFT_ALlExpr[];
+
 extern const classtable_elt_t VFT_AGtExpr[];
 
 extern const classtable_elt_t VFT_AGeExpr[];
+
+extern const classtable_elt_t VFT_AGgExpr[];
 
 extern const classtable_elt_t VFT_AIsaExpr[];
 
@@ -504,9 +518,9 @@ extern const int SFT_parser_nodes[];
 #define ID_TComment (SFT_parser_nodes[13])
 #define COLOR_TComment (SFT_parser_nodes[14])
 #define INIT_TABLE_POS_TComment (SFT_parser_nodes[15] + 0)
-#define ID_TKwpackage (SFT_parser_nodes[16])
-#define COLOR_TKwpackage (SFT_parser_nodes[17])
-#define INIT_TABLE_POS_TKwpackage (SFT_parser_nodes[18] + 0)
+#define ID_TKwmodule (SFT_parser_nodes[16])
+#define COLOR_TKwmodule (SFT_parser_nodes[17])
+#define INIT_TABLE_POS_TKwmodule (SFT_parser_nodes[18] + 0)
 #define ID_TKwimport (SFT_parser_nodes[19])
 #define COLOR_TKwimport (SFT_parser_nodes[20])
 #define INIT_TABLE_POS_TKwimport (SFT_parser_nodes[21] + 0)
@@ -717,1157 +731,980 @@ extern const int SFT_parser_nodes[];
 #define ID_TLe (SFT_parser_nodes[226])
 #define COLOR_TLe (SFT_parser_nodes[227])
 #define INIT_TABLE_POS_TLe (SFT_parser_nodes[228] + 0)
-#define ID_TGt (SFT_parser_nodes[229])
-#define COLOR_TGt (SFT_parser_nodes[230])
-#define INIT_TABLE_POS_TGt (SFT_parser_nodes[231] + 0)
-#define ID_TGe (SFT_parser_nodes[232])
-#define COLOR_TGe (SFT_parser_nodes[233])
-#define INIT_TABLE_POS_TGe (SFT_parser_nodes[234] + 0)
-#define ID_TStarship (SFT_parser_nodes[235])
-#define COLOR_TStarship (SFT_parser_nodes[236])
-#define INIT_TABLE_POS_TStarship (SFT_parser_nodes[237] + 0)
-#define ID_TBang (SFT_parser_nodes[238])
-#define COLOR_TBang (SFT_parser_nodes[239])
-#define INIT_TABLE_POS_TBang (SFT_parser_nodes[240] + 0)
-#define ID_TClassid (SFT_parser_nodes[241])
-#define COLOR_TClassid (SFT_parser_nodes[242])
-#define INIT_TABLE_POS_TClassid (SFT_parser_nodes[243] + 0)
-#define ID_TId (SFT_parser_nodes[244])
-#define COLOR_TId (SFT_parser_nodes[245])
-#define INIT_TABLE_POS_TId (SFT_parser_nodes[246] + 0)
-#define ID_TAttrid (SFT_parser_nodes[247])
-#define COLOR_TAttrid (SFT_parser_nodes[248])
-#define INIT_TABLE_POS_TAttrid (SFT_parser_nodes[249] + 0)
-#define ID_TNumber (SFT_parser_nodes[250])
-#define COLOR_TNumber (SFT_parser_nodes[251])
-#define INIT_TABLE_POS_TNumber (SFT_parser_nodes[252] + 0)
-#define ID_TFloat (SFT_parser_nodes[253])
-#define COLOR_TFloat (SFT_parser_nodes[254])
-#define INIT_TABLE_POS_TFloat (SFT_parser_nodes[255] + 0)
-#define ID_TChar (SFT_parser_nodes[256])
-#define COLOR_TChar (SFT_parser_nodes[257])
-#define INIT_TABLE_POS_TChar (SFT_parser_nodes[258] + 0)
-#define ID_TString (SFT_parser_nodes[259])
-#define COLOR_TString (SFT_parser_nodes[260])
-#define INIT_TABLE_POS_TString (SFT_parser_nodes[261] + 0)
-#define ID_TStartString (SFT_parser_nodes[262])
-#define COLOR_TStartString (SFT_parser_nodes[263])
-#define INIT_TABLE_POS_TStartString (SFT_parser_nodes[264] + 0)
-#define ID_TMidString (SFT_parser_nodes[265])
-#define COLOR_TMidString (SFT_parser_nodes[266])
-#define INIT_TABLE_POS_TMidString (SFT_parser_nodes[267] + 0)
-#define ID_TEndString (SFT_parser_nodes[268])
-#define COLOR_TEndString (SFT_parser_nodes[269])
-#define INIT_TABLE_POS_TEndString (SFT_parser_nodes[270] + 0)
-#define ID_EOF (SFT_parser_nodes[271])
-#define COLOR_EOF (SFT_parser_nodes[272])
-#define INIT_TABLE_POS_EOF (SFT_parser_nodes[273] + 0)
-#define CALL_parser_nodes___EOF___noinit(recv) ((parser_nodes___EOF___noinit_t)CALL((recv), (SFT_parser_nodes[273] + 1)))
-#define ID_AError (SFT_parser_nodes[274])
-#define COLOR_AError (SFT_parser_nodes[275])
-#define INIT_TABLE_POS_AError (SFT_parser_nodes[276] + 0)
-#define CALL_parser_nodes___AError___noinit(recv) ((parser_nodes___AError___noinit_t)CALL((recv), (SFT_parser_nodes[276] + 1)))
-#define ID_AModule (SFT_parser_nodes[277])
-#define COLOR_AModule (SFT_parser_nodes[278])
-#define ATTR_parser_nodes___AModule____n_packagedecl(recv) ATTR(recv, (SFT_parser_nodes[279] + 0))
-#define ATTR_parser_nodes___AModule____n_imports(recv) ATTR(recv, (SFT_parser_nodes[279] + 1))
-#define ATTR_parser_nodes___AModule____n_classdefs(recv) ATTR(recv, (SFT_parser_nodes[279] + 2))
-#define INIT_TABLE_POS_AModule (SFT_parser_nodes[280] + 0)
-#define CALL_parser_nodes___AModule___n_packagedecl(recv) ((parser_nodes___AModule___n_packagedecl_t)CALL((recv), (SFT_parser_nodes[280] + 1)))
-#define CALL_parser_nodes___AModule___n_packagedecl__eq(recv) ((parser_nodes___AModule___n_packagedecl__eq_t)CALL((recv), (SFT_parser_nodes[280] + 2)))
-#define CALL_parser_nodes___AModule___n_imports(recv) ((parser_nodes___AModule___n_imports_t)CALL((recv), (SFT_parser_nodes[280] + 3)))
-#define CALL_parser_nodes___AModule___n_imports__eq(recv) ((parser_nodes___AModule___n_imports__eq_t)CALL((recv), (SFT_parser_nodes[280] + 4)))
-#define CALL_parser_nodes___AModule___n_classdefs(recv) ((parser_nodes___AModule___n_classdefs_t)CALL((recv), (SFT_parser_nodes[280] + 5)))
-#define CALL_parser_nodes___AModule___n_classdefs__eq(recv) ((parser_nodes___AModule___n_classdefs__eq_t)CALL((recv), (SFT_parser_nodes[280] + 6)))
-#define ID_APackagedecl (SFT_parser_nodes[281])
-#define COLOR_APackagedecl (SFT_parser_nodes[282])
-#define ATTR_parser_nodes___APackagedecl____n_doc(recv) ATTR(recv, (SFT_parser_nodes[283] + 0))
-#define ATTR_parser_nodes___APackagedecl____n_kwpackage(recv) ATTR(recv, (SFT_parser_nodes[283] + 1))
-#define ATTR_parser_nodes___APackagedecl____n_id(recv) ATTR(recv, (SFT_parser_nodes[283] + 2))
-#define INIT_TABLE_POS_APackagedecl (SFT_parser_nodes[284] + 0)
-#define CALL_parser_nodes___APackagedecl___n_doc(recv) ((parser_nodes___APackagedecl___n_doc_t)CALL((recv), (SFT_parser_nodes[284] + 1)))
-#define CALL_parser_nodes___APackagedecl___n_doc__eq(recv) ((parser_nodes___APackagedecl___n_doc__eq_t)CALL((recv), (SFT_parser_nodes[284] + 2)))
-#define CALL_parser_nodes___APackagedecl___n_kwpackage(recv) ((parser_nodes___APackagedecl___n_kwpackage_t)CALL((recv), (SFT_parser_nodes[284] + 3)))
-#define CALL_parser_nodes___APackagedecl___n_kwpackage__eq(recv) ((parser_nodes___APackagedecl___n_kwpackage__eq_t)CALL((recv), (SFT_parser_nodes[284] + 4)))
-#define CALL_parser_nodes___APackagedecl___n_id(recv) ((parser_nodes___APackagedecl___n_id_t)CALL((recv), (SFT_parser_nodes[284] + 5)))
-#define CALL_parser_nodes___APackagedecl___n_id__eq(recv) ((parser_nodes___APackagedecl___n_id__eq_t)CALL((recv), (SFT_parser_nodes[284] + 6)))
-#define ID_AImport (SFT_parser_nodes[285])
-#define COLOR_AImport (SFT_parser_nodes[286])
-#define INIT_TABLE_POS_AImport (SFT_parser_nodes[287] + 0)
-#define ID_AStdImport (SFT_parser_nodes[288])
-#define COLOR_AStdImport (SFT_parser_nodes[289])
-#define ATTR_parser_nodes___AStdImport____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[290] + 0))
-#define ATTR_parser_nodes___AStdImport____n_kwimport(recv) ATTR(recv, (SFT_parser_nodes[290] + 1))
-#define ATTR_parser_nodes___AStdImport____n_id(recv) ATTR(recv, (SFT_parser_nodes[290] + 2))
-#define INIT_TABLE_POS_AStdImport (SFT_parser_nodes[291] + 0)
-#define CALL_parser_nodes___AStdImport___n_visibility(recv) ((parser_nodes___AStdImport___n_visibility_t)CALL((recv), (SFT_parser_nodes[291] + 1)))
-#define CALL_parser_nodes___AStdImport___n_visibility__eq(recv) ((parser_nodes___AStdImport___n_visibility__eq_t)CALL((recv), (SFT_parser_nodes[291] + 2)))
-#define CALL_parser_nodes___AStdImport___n_kwimport(recv) ((parser_nodes___AStdImport___n_kwimport_t)CALL((recv), (SFT_parser_nodes[291] + 3)))
-#define CALL_parser_nodes___AStdImport___n_kwimport__eq(recv) ((parser_nodes___AStdImport___n_kwimport__eq_t)CALL((recv), (SFT_parser_nodes[291] + 4)))
-#define CALL_parser_nodes___AStdImport___n_id(recv) ((parser_nodes___AStdImport___n_id_t)CALL((recv), (SFT_parser_nodes[291] + 5)))
-#define CALL_parser_nodes___AStdImport___n_id__eq(recv) ((parser_nodes___AStdImport___n_id__eq_t)CALL((recv), (SFT_parser_nodes[291] + 6)))
-#define ID_ANoImport (SFT_parser_nodes[292])
-#define COLOR_ANoImport (SFT_parser_nodes[293])
-#define ATTR_parser_nodes___ANoImport____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[294] + 0))
-#define ATTR_parser_nodes___ANoImport____n_kwimport(recv) ATTR(recv, (SFT_parser_nodes[294] + 1))
-#define ATTR_parser_nodes___ANoImport____n_kwend(recv) ATTR(recv, (SFT_parser_nodes[294] + 2))
-#define INIT_TABLE_POS_ANoImport (SFT_parser_nodes[295] + 0)
-#define CALL_parser_nodes___ANoImport___n_visibility(recv) ((parser_nodes___ANoImport___n_visibility_t)CALL((recv), (SFT_parser_nodes[295] + 1)))
-#define CALL_parser_nodes___ANoImport___n_visibility__eq(recv) ((parser_nodes___ANoImport___n_visibility__eq_t)CALL((recv), (SFT_parser_nodes[295] + 2)))
-#define CALL_parser_nodes___ANoImport___n_kwimport(recv) ((parser_nodes___ANoImport___n_kwimport_t)CALL((recv), (SFT_parser_nodes[295] + 3)))
-#define CALL_parser_nodes___ANoImport___n_kwimport__eq(recv) ((parser_nodes___ANoImport___n_kwimport__eq_t)CALL((recv), (SFT_parser_nodes[295] + 4)))
-#define CALL_parser_nodes___ANoImport___n_kwend(recv) ((parser_nodes___ANoImport___n_kwend_t)CALL((recv), (SFT_parser_nodes[295] + 5)))
-#define CALL_parser_nodes___ANoImport___n_kwend__eq(recv) ((parser_nodes___ANoImport___n_kwend__eq_t)CALL((recv), (SFT_parser_nodes[295] + 6)))
-#define ID_AVisibility (SFT_parser_nodes[296])
-#define COLOR_AVisibility (SFT_parser_nodes[297])
-#define INIT_TABLE_POS_AVisibility (SFT_parser_nodes[298] + 0)
-#define ID_APublicVisibility (SFT_parser_nodes[299])
-#define COLOR_APublicVisibility (SFT_parser_nodes[300])
-#define INIT_TABLE_POS_APublicVisibility (SFT_parser_nodes[301] + 0)
-#define ID_APrivateVisibility (SFT_parser_nodes[302])
-#define COLOR_APrivateVisibility (SFT_parser_nodes[303])
-#define ATTR_parser_nodes___APrivateVisibility____n_kwprivate(recv) ATTR(recv, (SFT_parser_nodes[304] + 0))
-#define INIT_TABLE_POS_APrivateVisibility (SFT_parser_nodes[305] + 0)
-#define CALL_parser_nodes___APrivateVisibility___n_kwprivate(recv) ((parser_nodes___APrivateVisibility___n_kwprivate_t)CALL((recv), (SFT_parser_nodes[305] + 1)))
-#define CALL_parser_nodes___APrivateVisibility___n_kwprivate__eq(recv) ((parser_nodes___APrivateVisibility___n_kwprivate__eq_t)CALL((recv), (SFT_parser_nodes[305] + 2)))
-#define ID_AProtectedVisibility (SFT_parser_nodes[306])
-#define COLOR_AProtectedVisibility (SFT_parser_nodes[307])
-#define ATTR_parser_nodes___AProtectedVisibility____n_kwprotected(recv) ATTR(recv, (SFT_parser_nodes[308] + 0))
-#define INIT_TABLE_POS_AProtectedVisibility (SFT_parser_nodes[309] + 0)
-#define CALL_parser_nodes___AProtectedVisibility___n_kwprotected(recv) ((parser_nodes___AProtectedVisibility___n_kwprotected_t)CALL((recv), (SFT_parser_nodes[309] + 1)))
-#define CALL_parser_nodes___AProtectedVisibility___n_kwprotected__eq(recv) ((parser_nodes___AProtectedVisibility___n_kwprotected__eq_t)CALL((recv), (SFT_parser_nodes[309] + 2)))
-#define ID_AIntrudeVisibility (SFT_parser_nodes[310])
-#define COLOR_AIntrudeVisibility (SFT_parser_nodes[311])
-#define ATTR_parser_nodes___AIntrudeVisibility____n_kwintrude(recv) ATTR(recv, (SFT_parser_nodes[312] + 0))
-#define INIT_TABLE_POS_AIntrudeVisibility (SFT_parser_nodes[313] + 0)
-#define CALL_parser_nodes___AIntrudeVisibility___n_kwintrude(recv) ((parser_nodes___AIntrudeVisibility___n_kwintrude_t)CALL((recv), (SFT_parser_nodes[313] + 1)))
-#define CALL_parser_nodes___AIntrudeVisibility___n_kwintrude__eq(recv) ((parser_nodes___AIntrudeVisibility___n_kwintrude__eq_t)CALL((recv), (SFT_parser_nodes[313] + 2)))
-#define ID_AClassdef (SFT_parser_nodes[314])
-#define COLOR_AClassdef (SFT_parser_nodes[315])
-#define INIT_TABLE_POS_AClassdef (SFT_parser_nodes[316] + 0)
-#define ID_AStdClassdef (SFT_parser_nodes[317])
-#define COLOR_AStdClassdef (SFT_parser_nodes[318])
-#define ATTR_parser_nodes___AStdClassdef____n_doc(recv) ATTR(recv, (SFT_parser_nodes[319] + 0))
-#define ATTR_parser_nodes___AStdClassdef____n_kwredef(recv) ATTR(recv, (SFT_parser_nodes[319] + 1))
-#define ATTR_parser_nodes___AStdClassdef____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[319] + 2))
-#define ATTR_parser_nodes___AStdClassdef____n_classkind(recv) ATTR(recv, (SFT_parser_nodes[319] + 3))
-#define ATTR_parser_nodes___AStdClassdef____n_id(recv) ATTR(recv, (SFT_parser_nodes[319] + 4))
-#define ATTR_parser_nodes___AStdClassdef____n_formaldefs(recv) ATTR(recv, (SFT_parser_nodes[319] + 5))
-#define ATTR_parser_nodes___AStdClassdef____n_superclasses(recv) ATTR(recv, (SFT_parser_nodes[319] + 6))
-#define ATTR_parser_nodes___AStdClassdef____n_propdefs(recv) ATTR(recv, (SFT_parser_nodes[319] + 7))
-#define INIT_TABLE_POS_AStdClassdef (SFT_parser_nodes[320] + 0)
-#define CALL_parser_nodes___AStdClassdef___n_doc(recv) ((parser_nodes___AStdClassdef___n_doc_t)CALL((recv), (SFT_parser_nodes[320] + 1)))
-#define CALL_parser_nodes___AStdClassdef___n_doc__eq(recv) ((parser_nodes___AStdClassdef___n_doc__eq_t)CALL((recv), (SFT_parser_nodes[320] + 2)))
-#define CALL_parser_nodes___AStdClassdef___n_kwredef(recv) ((parser_nodes___AStdClassdef___n_kwredef_t)CALL((recv), (SFT_parser_nodes[320] + 3)))
-#define CALL_parser_nodes___AStdClassdef___n_kwredef__eq(recv) ((parser_nodes___AStdClassdef___n_kwredef__eq_t)CALL((recv), (SFT_parser_nodes[320] + 4)))
-#define CALL_parser_nodes___AStdClassdef___n_visibility(recv) ((parser_nodes___AStdClassdef___n_visibility_t)CALL((recv), (SFT_parser_nodes[320] + 5)))
-#define CALL_parser_nodes___AStdClassdef___n_visibility__eq(recv) ((parser_nodes___AStdClassdef___n_visibility__eq_t)CALL((recv), (SFT_parser_nodes[320] + 6)))
-#define CALL_parser_nodes___AStdClassdef___n_classkind(recv) ((parser_nodes___AStdClassdef___n_classkind_t)CALL((recv), (SFT_parser_nodes[320] + 7)))
-#define CALL_parser_nodes___AStdClassdef___n_classkind__eq(recv) ((parser_nodes___AStdClassdef___n_classkind__eq_t)CALL((recv), (SFT_parser_nodes[320] + 8)))
-#define CALL_parser_nodes___AStdClassdef___n_id(recv) ((parser_nodes___AStdClassdef___n_id_t)CALL((recv), (SFT_parser_nodes[320] + 9)))
-#define CALL_parser_nodes___AStdClassdef___n_id__eq(recv) ((parser_nodes___AStdClassdef___n_id__eq_t)CALL((recv), (SFT_parser_nodes[320] + 10)))
-#define CALL_parser_nodes___AStdClassdef___n_formaldefs(recv) ((parser_nodes___AStdClassdef___n_formaldefs_t)CALL((recv), (SFT_parser_nodes[320] + 11)))
-#define CALL_parser_nodes___AStdClassdef___n_formaldefs__eq(recv) ((parser_nodes___AStdClassdef___n_formaldefs__eq_t)CALL((recv), (SFT_parser_nodes[320] + 12)))
-#define CALL_parser_nodes___AStdClassdef___n_superclasses(recv) ((parser_nodes___AStdClassdef___n_superclasses_t)CALL((recv), (SFT_parser_nodes[320] + 13)))
-#define CALL_parser_nodes___AStdClassdef___n_superclasses__eq(recv) ((parser_nodes___AStdClassdef___n_superclasses__eq_t)CALL((recv), (SFT_parser_nodes[320] + 14)))
-#define CALL_parser_nodes___AStdClassdef___n_propdefs(recv) ((parser_nodes___AStdClassdef___n_propdefs_t)CALL((recv), (SFT_parser_nodes[320] + 15)))
-#define CALL_parser_nodes___AStdClassdef___n_propdefs__eq(recv) ((parser_nodes___AStdClassdef___n_propdefs__eq_t)CALL((recv), (SFT_parser_nodes[320] + 16)))
-#define ID_ATopClassdef (SFT_parser_nodes[321])
-#define COLOR_ATopClassdef (SFT_parser_nodes[322])
-#define ATTR_parser_nodes___ATopClassdef____n_propdefs(recv) ATTR(recv, (SFT_parser_nodes[323] + 0))
-#define INIT_TABLE_POS_ATopClassdef (SFT_parser_nodes[324] + 0)
-#define CALL_parser_nodes___ATopClassdef___n_propdefs(recv) ((parser_nodes___ATopClassdef___n_propdefs_t)CALL((recv), (SFT_parser_nodes[324] + 1)))
-#define CALL_parser_nodes___ATopClassdef___n_propdefs__eq(recv) ((parser_nodes___ATopClassdef___n_propdefs__eq_t)CALL((recv), (SFT_parser_nodes[324] + 2)))
-#define ID_AMainClassdef (SFT_parser_nodes[325])
-#define COLOR_AMainClassdef (SFT_parser_nodes[326])
-#define ATTR_parser_nodes___AMainClassdef____n_propdefs(recv) ATTR(recv, (SFT_parser_nodes[327] + 0))
-#define INIT_TABLE_POS_AMainClassdef (SFT_parser_nodes[328] + 0)
-#define CALL_parser_nodes___AMainClassdef___n_propdefs(recv) ((parser_nodes___AMainClassdef___n_propdefs_t)CALL((recv), (SFT_parser_nodes[328] + 1)))
-#define CALL_parser_nodes___AMainClassdef___n_propdefs__eq(recv) ((parser_nodes___AMainClassdef___n_propdefs__eq_t)CALL((recv), (SFT_parser_nodes[328] + 2)))
-#define ID_AClasskind (SFT_parser_nodes[329])
-#define COLOR_AClasskind (SFT_parser_nodes[330])
-#define INIT_TABLE_POS_AClasskind (SFT_parser_nodes[331] + 0)
-#define ID_AConcreteClasskind (SFT_parser_nodes[332])
-#define COLOR_AConcreteClasskind (SFT_parser_nodes[333])
-#define ATTR_parser_nodes___AConcreteClasskind____n_kwclass(recv) ATTR(recv, (SFT_parser_nodes[334] + 0))
-#define INIT_TABLE_POS_AConcreteClasskind (SFT_parser_nodes[335] + 0)
-#define CALL_parser_nodes___AConcreteClasskind___n_kwclass(recv) ((parser_nodes___AConcreteClasskind___n_kwclass_t)CALL((recv), (SFT_parser_nodes[335] + 1)))
-#define CALL_parser_nodes___AConcreteClasskind___n_kwclass__eq(recv) ((parser_nodes___AConcreteClasskind___n_kwclass__eq_t)CALL((recv), (SFT_parser_nodes[335] + 2)))
-#define ID_AAbstractClasskind (SFT_parser_nodes[336])
-#define COLOR_AAbstractClasskind (SFT_parser_nodes[337])
-#define ATTR_parser_nodes___AAbstractClasskind____n_kwabstract(recv) ATTR(recv, (SFT_parser_nodes[338] + 0))
-#define ATTR_parser_nodes___AAbstractClasskind____n_kwclass(recv) ATTR(recv, (SFT_parser_nodes[338] + 1))
-#define INIT_TABLE_POS_AAbstractClasskind (SFT_parser_nodes[339] + 0)
-#define CALL_parser_nodes___AAbstractClasskind___n_kwabstract(recv) ((parser_nodes___AAbstractClasskind___n_kwabstract_t)CALL((recv), (SFT_parser_nodes[339] + 1)))
-#define CALL_parser_nodes___AAbstractClasskind___n_kwabstract__eq(recv) ((parser_nodes___AAbstractClasskind___n_kwabstract__eq_t)CALL((recv), (SFT_parser_nodes[339] + 2)))
-#define CALL_parser_nodes___AAbstractClasskind___n_kwclass(recv) ((parser_nodes___AAbstractClasskind___n_kwclass_t)CALL((recv), (SFT_parser_nodes[339] + 3)))
-#define CALL_parser_nodes___AAbstractClasskind___n_kwclass__eq(recv) ((parser_nodes___AAbstractClasskind___n_kwclass__eq_t)CALL((recv), (SFT_parser_nodes[339] + 4)))
-#define ID_AInterfaceClasskind (SFT_parser_nodes[340])
-#define COLOR_AInterfaceClasskind (SFT_parser_nodes[341])
-#define ATTR_parser_nodes___AInterfaceClasskind____n_kwinterface(recv) ATTR(recv, (SFT_parser_nodes[342] + 0))
-#define INIT_TABLE_POS_AInterfaceClasskind (SFT_parser_nodes[343] + 0)
-#define CALL_parser_nodes___AInterfaceClasskind___n_kwinterface(recv) ((parser_nodes___AInterfaceClasskind___n_kwinterface_t)CALL((recv), (SFT_parser_nodes[343] + 1)))
-#define CALL_parser_nodes___AInterfaceClasskind___n_kwinterface__eq(recv) ((parser_nodes___AInterfaceClasskind___n_kwinterface__eq_t)CALL((recv), (SFT_parser_nodes[343] + 2)))
-#define ID_AUniversalClasskind (SFT_parser_nodes[344])
-#define COLOR_AUniversalClasskind (SFT_parser_nodes[345])
-#define ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(recv) ATTR(recv, (SFT_parser_nodes[346] + 0))
-#define INIT_TABLE_POS_AUniversalClasskind (SFT_parser_nodes[347] + 0)
-#define CALL_parser_nodes___AUniversalClasskind___n_kwuniversal(recv) ((parser_nodes___AUniversalClasskind___n_kwuniversal_t)CALL((recv), (SFT_parser_nodes[347] + 1)))
-#define CALL_parser_nodes___AUniversalClasskind___n_kwuniversal__eq(recv) ((parser_nodes___AUniversalClasskind___n_kwuniversal__eq_t)CALL((recv), (SFT_parser_nodes[347] + 2)))
-#define ID_AFormaldef (SFT_parser_nodes[348])
-#define COLOR_AFormaldef (SFT_parser_nodes[349])
-#define ATTR_parser_nodes___AFormaldef____n_id(recv) ATTR(recv, (SFT_parser_nodes[350] + 0))
-#define ATTR_parser_nodes___AFormaldef____n_type(recv) ATTR(recv, (SFT_parser_nodes[350] + 1))
-#define INIT_TABLE_POS_AFormaldef (SFT_parser_nodes[351] + 0)
-#define CALL_parser_nodes___AFormaldef___n_id(recv) ((parser_nodes___AFormaldef___n_id_t)CALL((recv), (SFT_parser_nodes[351] + 1)))
-#define CALL_parser_nodes___AFormaldef___n_id__eq(recv) ((parser_nodes___AFormaldef___n_id__eq_t)CALL((recv), (SFT_parser_nodes[351] + 2)))
-#define CALL_parser_nodes___AFormaldef___n_type(recv) ((parser_nodes___AFormaldef___n_type_t)CALL((recv), (SFT_parser_nodes[351] + 3)))
-#define CALL_parser_nodes___AFormaldef___n_type__eq(recv) ((parser_nodes___AFormaldef___n_type__eq_t)CALL((recv), (SFT_parser_nodes[351] + 4)))
-#define ID_ASuperclass (SFT_parser_nodes[352])
-#define COLOR_ASuperclass (SFT_parser_nodes[353])
-#define ATTR_parser_nodes___ASuperclass____n_kwspecial(recv) ATTR(recv, (SFT_parser_nodes[354] + 0))
-#define ATTR_parser_nodes___ASuperclass____n_type(recv) ATTR(recv, (SFT_parser_nodes[354] + 1))
-#define INIT_TABLE_POS_ASuperclass (SFT_parser_nodes[355] + 0)
-#define CALL_parser_nodes___ASuperclass___n_kwspecial(recv) ((parser_nodes___ASuperclass___n_kwspecial_t)CALL((recv), (SFT_parser_nodes[355] + 1)))
-#define CALL_parser_nodes___ASuperclass___n_kwspecial__eq(recv) ((parser_nodes___ASuperclass___n_kwspecial__eq_t)CALL((recv), (SFT_parser_nodes[355] + 2)))
-#define CALL_parser_nodes___ASuperclass___n_type(recv) ((parser_nodes___ASuperclass___n_type_t)CALL((recv), (SFT_parser_nodes[355] + 3)))
-#define CALL_parser_nodes___ASuperclass___n_type__eq(recv) ((parser_nodes___ASuperclass___n_type__eq_t)CALL((recv), (SFT_parser_nodes[355] + 4)))
-#define ID_APropdef (SFT_parser_nodes[356])
-#define COLOR_APropdef (SFT_parser_nodes[357])
-#define ATTR_parser_nodes___APropdef____n_doc(recv) ATTR(recv, (SFT_parser_nodes[358] + 0))
-#define INIT_TABLE_POS_APropdef (SFT_parser_nodes[359] + 0)
-#define CALL_parser_nodes___APropdef___n_doc(recv) ((parser_nodes___APropdef___n_doc_t)CALL((recv), (SFT_parser_nodes[359] + 1)))
-#define CALL_parser_nodes___APropdef___n_doc__eq(recv) ((parser_nodes___APropdef___n_doc__eq_t)CALL((recv), (SFT_parser_nodes[359] + 2)))
-#define ID_AAttrPropdef (SFT_parser_nodes[360])
-#define COLOR_AAttrPropdef (SFT_parser_nodes[361])
-#define ATTR_parser_nodes___AAttrPropdef____n_kwredef(recv) ATTR(recv, (SFT_parser_nodes[362] + 0))
-#define ATTR_parser_nodes___AAttrPropdef____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[362] + 1))
-#define ATTR_parser_nodes___AAttrPropdef____n_kwvar(recv) ATTR(recv, (SFT_parser_nodes[362] + 2))
-#define ATTR_parser_nodes___AAttrPropdef____n_id(recv) ATTR(recv, (SFT_parser_nodes[362] + 3))
-#define ATTR_parser_nodes___AAttrPropdef____n_type(recv) ATTR(recv, (SFT_parser_nodes[362] + 4))
-#define ATTR_parser_nodes___AAttrPropdef____n_readable(recv) ATTR(recv, (SFT_parser_nodes[362] + 5))
-#define ATTR_parser_nodes___AAttrPropdef____n_writable(recv) ATTR(recv, (SFT_parser_nodes[362] + 6))
-#define ATTR_parser_nodes___AAttrPropdef____n_expr(recv) ATTR(recv, (SFT_parser_nodes[362] + 7))
-#define INIT_TABLE_POS_AAttrPropdef (SFT_parser_nodes[363] + 0)
-#define CALL_parser_nodes___AAttrPropdef___n_kwredef(recv) ((parser_nodes___AAttrPropdef___n_kwredef_t)CALL((recv), (SFT_parser_nodes[363] + 1)))
-#define CALL_parser_nodes___AAttrPropdef___n_kwredef__eq(recv) ((parser_nodes___AAttrPropdef___n_kwredef__eq_t)CALL((recv), (SFT_parser_nodes[363] + 2)))
-#define CALL_parser_nodes___AAttrPropdef___n_visibility(recv) ((parser_nodes___AAttrPropdef___n_visibility_t)CALL((recv), (SFT_parser_nodes[363] + 3)))
-#define CALL_parser_nodes___AAttrPropdef___n_visibility__eq(recv) ((parser_nodes___AAttrPropdef___n_visibility__eq_t)CALL((recv), (SFT_parser_nodes[363] + 4)))
-#define CALL_parser_nodes___AAttrPropdef___n_kwvar(recv) ((parser_nodes___AAttrPropdef___n_kwvar_t)CALL((recv), (SFT_parser_nodes[363] + 5)))
-#define CALL_parser_nodes___AAttrPropdef___n_kwvar__eq(recv) ((parser_nodes___AAttrPropdef___n_kwvar__eq_t)CALL((recv), (SFT_parser_nodes[363] + 6)))
-#define CALL_parser_nodes___AAttrPropdef___n_id(recv) ((parser_nodes___AAttrPropdef___n_id_t)CALL((recv), (SFT_parser_nodes[363] + 7)))
-#define CALL_parser_nodes___AAttrPropdef___n_id__eq(recv) ((parser_nodes___AAttrPropdef___n_id__eq_t)CALL((recv), (SFT_parser_nodes[363] + 8)))
-#define CALL_parser_nodes___AAttrPropdef___n_type(recv) ((parser_nodes___AAttrPropdef___n_type_t)CALL((recv), (SFT_parser_nodes[363] + 9)))
-#define CALL_parser_nodes___AAttrPropdef___n_type__eq(recv) ((parser_nodes___AAttrPropdef___n_type__eq_t)CALL((recv), (SFT_parser_nodes[363] + 10)))
-#define CALL_parser_nodes___AAttrPropdef___n_readable(recv) ((parser_nodes___AAttrPropdef___n_readable_t)CALL((recv), (SFT_parser_nodes[363] + 11)))
-#define CALL_parser_nodes___AAttrPropdef___n_readable__eq(recv) ((parser_nodes___AAttrPropdef___n_readable__eq_t)CALL((recv), (SFT_parser_nodes[363] + 12)))
-#define CALL_parser_nodes___AAttrPropdef___n_writable(recv) ((parser_nodes___AAttrPropdef___n_writable_t)CALL((recv), (SFT_parser_nodes[363] + 13)))
-#define CALL_parser_nodes___AAttrPropdef___n_writable__eq(recv) ((parser_nodes___AAttrPropdef___n_writable__eq_t)CALL((recv), (SFT_parser_nodes[363] + 14)))
-#define CALL_parser_nodes___AAttrPropdef___n_expr(recv) ((parser_nodes___AAttrPropdef___n_expr_t)CALL((recv), (SFT_parser_nodes[363] + 15)))
-#define CALL_parser_nodes___AAttrPropdef___n_expr__eq(recv) ((parser_nodes___AAttrPropdef___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[363] + 16)))
-#define ID_AMethPropdef (SFT_parser_nodes[364])
-#define COLOR_AMethPropdef (SFT_parser_nodes[365])
-#define ATTR_parser_nodes___AMethPropdef____n_kwredef(recv) ATTR(recv, (SFT_parser_nodes[366] + 0))
-#define ATTR_parser_nodes___AMethPropdef____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[366] + 1))
-#define ATTR_parser_nodes___AMethPropdef____n_methid(recv) ATTR(recv, (SFT_parser_nodes[366] + 2))
-#define ATTR_parser_nodes___AMethPropdef____n_signature(recv) ATTR(recv, (SFT_parser_nodes[366] + 3))
-#define INIT_TABLE_POS_AMethPropdef (SFT_parser_nodes[367] + 0)
-#define CALL_parser_nodes___AMethPropdef___n_kwredef(recv) ((parser_nodes___AMethPropdef___n_kwredef_t)CALL((recv), (SFT_parser_nodes[367] + 1)))
-#define CALL_parser_nodes___AMethPropdef___n_kwredef__eq(recv) ((parser_nodes___AMethPropdef___n_kwredef__eq_t)CALL((recv), (SFT_parser_nodes[367] + 2)))
-#define CALL_parser_nodes___AMethPropdef___n_visibility(recv) ((parser_nodes___AMethPropdef___n_visibility_t)CALL((recv), (SFT_parser_nodes[367] + 3)))
-#define CALL_parser_nodes___AMethPropdef___n_visibility__eq(recv) ((parser_nodes___AMethPropdef___n_visibility__eq_t)CALL((recv), (SFT_parser_nodes[367] + 4)))
-#define CALL_parser_nodes___AMethPropdef___n_methid(recv) ((parser_nodes___AMethPropdef___n_methid_t)CALL((recv), (SFT_parser_nodes[367] + 5)))
-#define CALL_parser_nodes___AMethPropdef___n_methid__eq(recv) ((parser_nodes___AMethPropdef___n_methid__eq_t)CALL((recv), (SFT_parser_nodes[367] + 6)))
-#define CALL_parser_nodes___AMethPropdef___n_signature(recv) ((parser_nodes___AMethPropdef___n_signature_t)CALL((recv), (SFT_parser_nodes[367] + 7)))
-#define CALL_parser_nodes___AMethPropdef___n_signature__eq(recv) ((parser_nodes___AMethPropdef___n_signature__eq_t)CALL((recv), (SFT_parser_nodes[367] + 8)))
-#define ID_ADeferredMethPropdef (SFT_parser_nodes[368])
-#define COLOR_ADeferredMethPropdef (SFT_parser_nodes[369])
-#define ATTR_parser_nodes___ADeferredMethPropdef____n_kwmeth(recv) ATTR(recv, (SFT_parser_nodes[370] + 0))
-#define INIT_TABLE_POS_ADeferredMethPropdef (SFT_parser_nodes[371] + 0)
-#define CALL_parser_nodes___ADeferredMethPropdef___n_kwmeth(recv) ((parser_nodes___ADeferredMethPropdef___n_kwmeth_t)CALL((recv), (SFT_parser_nodes[371] + 1)))
-#define CALL_parser_nodes___ADeferredMethPropdef___n_kwmeth__eq(recv) ((parser_nodes___ADeferredMethPropdef___n_kwmeth__eq_t)CALL((recv), (SFT_parser_nodes[371] + 2)))
-#define ID_AInternMethPropdef (SFT_parser_nodes[372])
-#define COLOR_AInternMethPropdef (SFT_parser_nodes[373])
-#define ATTR_parser_nodes___AInternMethPropdef____n_kwmeth(recv) ATTR(recv, (SFT_parser_nodes[374] + 0))
-#define INIT_TABLE_POS_AInternMethPropdef (SFT_parser_nodes[375] + 0)
-#define CALL_parser_nodes___AInternMethPropdef___n_kwmeth(recv) ((parser_nodes___AInternMethPropdef___n_kwmeth_t)CALL((recv), (SFT_parser_nodes[375] + 1)))
-#define CALL_parser_nodes___AInternMethPropdef___n_kwmeth__eq(recv) ((parser_nodes___AInternMethPropdef___n_kwmeth__eq_t)CALL((recv), (SFT_parser_nodes[375] + 2)))
-#define ID_AExternMethPropdef (SFT_parser_nodes[376])
-#define COLOR_AExternMethPropdef (SFT_parser_nodes[377])
-#define ATTR_parser_nodes___AExternMethPropdef____n_kwmeth(recv) ATTR(recv, (SFT_parser_nodes[378] + 0))
-#define ATTR_parser_nodes___AExternMethPropdef____n_extern(recv) ATTR(recv, (SFT_parser_nodes[378] + 1))
-#define INIT_TABLE_POS_AExternMethPropdef (SFT_parser_nodes[379] + 0)
-#define CALL_parser_nodes___AExternMethPropdef___n_kwmeth(recv) ((parser_nodes___AExternMethPropdef___n_kwmeth_t)CALL((recv), (SFT_parser_nodes[379] + 1)))
-#define CALL_parser_nodes___AExternMethPropdef___n_kwmeth__eq(recv) ((parser_nodes___AExternMethPropdef___n_kwmeth__eq_t)CALL((recv), (SFT_parser_nodes[379] + 2)))
-#define CALL_parser_nodes___AExternMethPropdef___n_extern(recv) ((parser_nodes___AExternMethPropdef___n_extern_t)CALL((recv), (SFT_parser_nodes[379] + 3)))
-#define CALL_parser_nodes___AExternMethPropdef___n_extern__eq(recv) ((parser_nodes___AExternMethPropdef___n_extern__eq_t)CALL((recv), (SFT_parser_nodes[379] + 4)))
-#define ID_AConcreteMethPropdef (SFT_parser_nodes[380])
-#define COLOR_AConcreteMethPropdef (SFT_parser_nodes[381])
-#define ATTR_parser_nodes___AConcreteMethPropdef____n_kwmeth(recv) ATTR(recv, (SFT_parser_nodes[382] + 0))
-#define ATTR_parser_nodes___AConcreteMethPropdef____n_block(recv) ATTR(recv, (SFT_parser_nodes[382] + 1))
-#define INIT_TABLE_POS_AConcreteMethPropdef (SFT_parser_nodes[383] + 0)
-#define CALL_parser_nodes___AConcreteMethPropdef___n_kwmeth(recv) ((parser_nodes___AConcreteMethPropdef___n_kwmeth_t)CALL((recv), (SFT_parser_nodes[383] + 1)))
-#define CALL_parser_nodes___AConcreteMethPropdef___n_kwmeth__eq(recv) ((parser_nodes___AConcreteMethPropdef___n_kwmeth__eq_t)CALL((recv), (SFT_parser_nodes[383] + 2)))
-#define CALL_parser_nodes___AConcreteMethPropdef___n_block(recv) ((parser_nodes___AConcreteMethPropdef___n_block_t)CALL((recv), (SFT_parser_nodes[383] + 3)))
-#define CALL_parser_nodes___AConcreteMethPropdef___n_block__eq(recv) ((parser_nodes___AConcreteMethPropdef___n_block__eq_t)CALL((recv), (SFT_parser_nodes[383] + 4)))
-#define ID_AConcreteInitPropdef (SFT_parser_nodes[384])
-#define COLOR_AConcreteInitPropdef (SFT_parser_nodes[385])
-#define ATTR_parser_nodes___AConcreteInitPropdef____n_kwinit(recv) ATTR(recv, (SFT_parser_nodes[386] + 0))
-#define INIT_TABLE_POS_AConcreteInitPropdef (SFT_parser_nodes[387] + 0)
-#define CALL_parser_nodes___AConcreteInitPropdef___n_kwinit(recv) ((parser_nodes___AConcreteInitPropdef___n_kwinit_t)CALL((recv), (SFT_parser_nodes[387] + 1)))
-#define CALL_parser_nodes___AConcreteInitPropdef___n_kwinit__eq(recv) ((parser_nodes___AConcreteInitPropdef___n_kwinit__eq_t)CALL((recv), (SFT_parser_nodes[387] + 2)))
-#define ID_AMainMethPropdef (SFT_parser_nodes[388])
-#define COLOR_AMainMethPropdef (SFT_parser_nodes[389])
-#define INIT_TABLE_POS_AMainMethPropdef (SFT_parser_nodes[390] + 0)
-#define ID_ATypePropdef (SFT_parser_nodes[391])
-#define COLOR_ATypePropdef (SFT_parser_nodes[392])
-#define ATTR_parser_nodes___ATypePropdef____n_kwredef(recv) ATTR(recv, (SFT_parser_nodes[393] + 0))
-#define ATTR_parser_nodes___ATypePropdef____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[393] + 1))
-#define ATTR_parser_nodes___ATypePropdef____n_kwtype(recv) ATTR(recv, (SFT_parser_nodes[393] + 2))
-#define ATTR_parser_nodes___ATypePropdef____n_id(recv) ATTR(recv, (SFT_parser_nodes[393] + 3))
-#define ATTR_parser_nodes___ATypePropdef____n_type(recv) ATTR(recv, (SFT_parser_nodes[393] + 4))
-#define INIT_TABLE_POS_ATypePropdef (SFT_parser_nodes[394] + 0)
-#define CALL_parser_nodes___ATypePropdef___n_kwredef(recv) ((parser_nodes___ATypePropdef___n_kwredef_t)CALL((recv), (SFT_parser_nodes[394] + 1)))
-#define CALL_parser_nodes___ATypePropdef___n_kwredef__eq(recv) ((parser_nodes___ATypePropdef___n_kwredef__eq_t)CALL((recv), (SFT_parser_nodes[394] + 2)))
-#define CALL_parser_nodes___ATypePropdef___n_visibility(recv) ((parser_nodes___ATypePropdef___n_visibility_t)CALL((recv), (SFT_parser_nodes[394] + 3)))
-#define CALL_parser_nodes___ATypePropdef___n_visibility__eq(recv) ((parser_nodes___ATypePropdef___n_visibility__eq_t)CALL((recv), (SFT_parser_nodes[394] + 4)))
-#define CALL_parser_nodes___ATypePropdef___n_kwtype(recv) ((parser_nodes___ATypePropdef___n_kwtype_t)CALL((recv), (SFT_parser_nodes[394] + 5)))
-#define CALL_parser_nodes___ATypePropdef___n_kwtype__eq(recv) ((parser_nodes___ATypePropdef___n_kwtype__eq_t)CALL((recv), (SFT_parser_nodes[394] + 6)))
-#define CALL_parser_nodes___ATypePropdef___n_id(recv) ((parser_nodes___ATypePropdef___n_id_t)CALL((recv), (SFT_parser_nodes[394] + 7)))
-#define CALL_parser_nodes___ATypePropdef___n_id__eq(recv) ((parser_nodes___ATypePropdef___n_id__eq_t)CALL((recv), (SFT_parser_nodes[394] + 8)))
-#define CALL_parser_nodes___ATypePropdef___n_type(recv) ((parser_nodes___ATypePropdef___n_type_t)CALL((recv), (SFT_parser_nodes[394] + 9)))
-#define CALL_parser_nodes___ATypePropdef___n_type__eq(recv) ((parser_nodes___ATypePropdef___n_type__eq_t)CALL((recv), (SFT_parser_nodes[394] + 10)))
-#define ID_AAble (SFT_parser_nodes[395])
-#define COLOR_AAble (SFT_parser_nodes[396])
-#define ATTR_parser_nodes___AAble____n_kwredef(recv) ATTR(recv, (SFT_parser_nodes[397] + 0))
-#define INIT_TABLE_POS_AAble (SFT_parser_nodes[398] + 0)
-#define CALL_parser_nodes___AAble___n_kwredef(recv) ((parser_nodes___AAble___n_kwredef_t)CALL((recv), (SFT_parser_nodes[398] + 1)))
-#define CALL_parser_nodes___AAble___n_kwredef__eq(recv) ((parser_nodes___AAble___n_kwredef__eq_t)CALL((recv), (SFT_parser_nodes[398] + 2)))
-#define ID_AReadAble (SFT_parser_nodes[399])
-#define COLOR_AReadAble (SFT_parser_nodes[400])
-#define ATTR_parser_nodes___AReadAble____n_kwreadable(recv) ATTR(recv, (SFT_parser_nodes[401] + 0))
-#define INIT_TABLE_POS_AReadAble (SFT_parser_nodes[402] + 0)
-#define CALL_parser_nodes___AReadAble___n_kwreadable(recv) ((parser_nodes___AReadAble___n_kwreadable_t)CALL((recv), (SFT_parser_nodes[402] + 1)))
-#define CALL_parser_nodes___AReadAble___n_kwreadable__eq(recv) ((parser_nodes___AReadAble___n_kwreadable__eq_t)CALL((recv), (SFT_parser_nodes[402] + 2)))
-#define ID_AWriteAble (SFT_parser_nodes[403])
-#define COLOR_AWriteAble (SFT_parser_nodes[404])
-#define ATTR_parser_nodes___AWriteAble____n_kwwritable(recv) ATTR(recv, (SFT_parser_nodes[405] + 0))
-#define INIT_TABLE_POS_AWriteAble (SFT_parser_nodes[406] + 0)
-#define CALL_parser_nodes___AWriteAble___n_kwwritable(recv) ((parser_nodes___AWriteAble___n_kwwritable_t)CALL((recv), (SFT_parser_nodes[406] + 1)))
-#define CALL_parser_nodes___AWriteAble___n_kwwritable__eq(recv) ((parser_nodes___AWriteAble___n_kwwritable__eq_t)CALL((recv), (SFT_parser_nodes[406] + 2)))
-#define ID_AMethid (SFT_parser_nodes[407])
-#define COLOR_AMethid (SFT_parser_nodes[408])
-#define INIT_TABLE_POS_AMethid (SFT_parser_nodes[409] + 0)
-#define ID_AIdMethid (SFT_parser_nodes[410])
-#define COLOR_AIdMethid (SFT_parser_nodes[411])
-#define ATTR_parser_nodes___AIdMethid____n_id(recv) ATTR(recv, (SFT_parser_nodes[412] + 0))
-#define INIT_TABLE_POS_AIdMethid (SFT_parser_nodes[413] + 0)
-#define CALL_parser_nodes___AIdMethid___n_id(recv) ((parser_nodes___AIdMethid___n_id_t)CALL((recv), (SFT_parser_nodes[413] + 1)))
-#define CALL_parser_nodes___AIdMethid___n_id__eq(recv) ((parser_nodes___AIdMethid___n_id__eq_t)CALL((recv), (SFT_parser_nodes[413] + 2)))
-#define ID_APlusMethid (SFT_parser_nodes[414])
-#define COLOR_APlusMethid (SFT_parser_nodes[415])
-#define ATTR_parser_nodes___APlusMethid____n_plus(recv) ATTR(recv, (SFT_parser_nodes[416] + 0))
-#define INIT_TABLE_POS_APlusMethid (SFT_parser_nodes[417] + 0)
-#define CALL_parser_nodes___APlusMethid___n_plus(recv) ((parser_nodes___APlusMethid___n_plus_t)CALL((recv), (SFT_parser_nodes[417] + 1)))
-#define CALL_parser_nodes___APlusMethid___n_plus__eq(recv) ((parser_nodes___APlusMethid___n_plus__eq_t)CALL((recv), (SFT_parser_nodes[417] + 2)))
-#define ID_AMinusMethid (SFT_parser_nodes[418])
-#define COLOR_AMinusMethid (SFT_parser_nodes[419])
-#define ATTR_parser_nodes___AMinusMethid____n_minus(recv) ATTR(recv, (SFT_parser_nodes[420] + 0))
-#define INIT_TABLE_POS_AMinusMethid (SFT_parser_nodes[421] + 0)
-#define CALL_parser_nodes___AMinusMethid___n_minus(recv) ((parser_nodes___AMinusMethid___n_minus_t)CALL((recv), (SFT_parser_nodes[421] + 1)))
-#define CALL_parser_nodes___AMinusMethid___n_minus__eq(recv) ((parser_nodes___AMinusMethid___n_minus__eq_t)CALL((recv), (SFT_parser_nodes[421] + 2)))
-#define ID_AStarMethid (SFT_parser_nodes[422])
-#define COLOR_AStarMethid (SFT_parser_nodes[423])
-#define ATTR_parser_nodes___AStarMethid____n_star(recv) ATTR(recv, (SFT_parser_nodes[424] + 0))
-#define INIT_TABLE_POS_AStarMethid (SFT_parser_nodes[425] + 0)
-#define CALL_parser_nodes___AStarMethid___n_star(recv) ((parser_nodes___AStarMethid___n_star_t)CALL((recv), (SFT_parser_nodes[425] + 1)))
-#define CALL_parser_nodes___AStarMethid___n_star__eq(recv) ((parser_nodes___AStarMethid___n_star__eq_t)CALL((recv), (SFT_parser_nodes[425] + 2)))
-#define ID_ASlashMethid (SFT_parser_nodes[426])
-#define COLOR_ASlashMethid (SFT_parser_nodes[427])
-#define ATTR_parser_nodes___ASlashMethid____n_slash(recv) ATTR(recv, (SFT_parser_nodes[428] + 0))
-#define INIT_TABLE_POS_ASlashMethid (SFT_parser_nodes[429] + 0)
-#define CALL_parser_nodes___ASlashMethid___n_slash(recv) ((parser_nodes___ASlashMethid___n_slash_t)CALL((recv), (SFT_parser_nodes[429] + 1)))
-#define CALL_parser_nodes___ASlashMethid___n_slash__eq(recv) ((parser_nodes___ASlashMethid___n_slash__eq_t)CALL((recv), (SFT_parser_nodes[429] + 2)))
-#define ID_APercentMethid (SFT_parser_nodes[430])
-#define COLOR_APercentMethid (SFT_parser_nodes[431])
-#define ATTR_parser_nodes___APercentMethid____n_percent(recv) ATTR(recv, (SFT_parser_nodes[432] + 0))
-#define INIT_TABLE_POS_APercentMethid (SFT_parser_nodes[433] + 0)
-#define CALL_parser_nodes___APercentMethid___n_percent(recv) ((parser_nodes___APercentMethid___n_percent_t)CALL((recv), (SFT_parser_nodes[433] + 1)))
-#define CALL_parser_nodes___APercentMethid___n_percent__eq(recv) ((parser_nodes___APercentMethid___n_percent__eq_t)CALL((recv), (SFT_parser_nodes[433] + 2)))
-#define ID_AEqMethid (SFT_parser_nodes[434])
-#define COLOR_AEqMethid (SFT_parser_nodes[435])
-#define ATTR_parser_nodes___AEqMethid____n_eq(recv) ATTR(recv, (SFT_parser_nodes[436] + 0))
-#define INIT_TABLE_POS_AEqMethid (SFT_parser_nodes[437] + 0)
-#define CALL_parser_nodes___AEqMethid___n_eq(recv) ((parser_nodes___AEqMethid___n_eq_t)CALL((recv), (SFT_parser_nodes[437] + 1)))
-#define CALL_parser_nodes___AEqMethid___n_eq__eq(recv) ((parser_nodes___AEqMethid___n_eq__eq_t)CALL((recv), (SFT_parser_nodes[437] + 2)))
-#define ID_ANeMethid (SFT_parser_nodes[438])
-#define COLOR_ANeMethid (SFT_parser_nodes[439])
-#define ATTR_parser_nodes___ANeMethid____n_ne(recv) ATTR(recv, (SFT_parser_nodes[440] + 0))
-#define INIT_TABLE_POS_ANeMethid (SFT_parser_nodes[441] + 0)
-#define CALL_parser_nodes___ANeMethid___n_ne(recv) ((parser_nodes___ANeMethid___n_ne_t)CALL((recv), (SFT_parser_nodes[441] + 1)))
-#define CALL_parser_nodes___ANeMethid___n_ne__eq(recv) ((parser_nodes___ANeMethid___n_ne__eq_t)CALL((recv), (SFT_parser_nodes[441] + 2)))
-#define ID_ALeMethid (SFT_parser_nodes[442])
-#define COLOR_ALeMethid (SFT_parser_nodes[443])
-#define ATTR_parser_nodes___ALeMethid____n_le(recv) ATTR(recv, (SFT_parser_nodes[444] + 0))
-#define INIT_TABLE_POS_ALeMethid (SFT_parser_nodes[445] + 0)
-#define CALL_parser_nodes___ALeMethid___n_le(recv) ((parser_nodes___ALeMethid___n_le_t)CALL((recv), (SFT_parser_nodes[445] + 1)))
-#define CALL_parser_nodes___ALeMethid___n_le__eq(recv) ((parser_nodes___ALeMethid___n_le__eq_t)CALL((recv), (SFT_parser_nodes[445] + 2)))
-#define ID_AGeMethid (SFT_parser_nodes[446])
-#define COLOR_AGeMethid (SFT_parser_nodes[447])
-#define ATTR_parser_nodes___AGeMethid____n_ge(recv) ATTR(recv, (SFT_parser_nodes[448] + 0))
-#define INIT_TABLE_POS_AGeMethid (SFT_parser_nodes[449] + 0)
-#define CALL_parser_nodes___AGeMethid___n_ge(recv) ((parser_nodes___AGeMethid___n_ge_t)CALL((recv), (SFT_parser_nodes[449] + 1)))
-#define CALL_parser_nodes___AGeMethid___n_ge__eq(recv) ((parser_nodes___AGeMethid___n_ge__eq_t)CALL((recv), (SFT_parser_nodes[449] + 2)))
-#define ID_ALtMethid (SFT_parser_nodes[450])
-#define COLOR_ALtMethid (SFT_parser_nodes[451])
-#define ATTR_parser_nodes___ALtMethid____n_lt(recv) ATTR(recv, (SFT_parser_nodes[452] + 0))
-#define INIT_TABLE_POS_ALtMethid (SFT_parser_nodes[453] + 0)
-#define CALL_parser_nodes___ALtMethid___n_lt(recv) ((parser_nodes___ALtMethid___n_lt_t)CALL((recv), (SFT_parser_nodes[453] + 1)))
-#define CALL_parser_nodes___ALtMethid___n_lt__eq(recv) ((parser_nodes___ALtMethid___n_lt__eq_t)CALL((recv), (SFT_parser_nodes[453] + 2)))
-#define ID_AGtMethid (SFT_parser_nodes[454])
-#define COLOR_AGtMethid (SFT_parser_nodes[455])
-#define ATTR_parser_nodes___AGtMethid____n_gt(recv) ATTR(recv, (SFT_parser_nodes[456] + 0))
-#define INIT_TABLE_POS_AGtMethid (SFT_parser_nodes[457] + 0)
-#define CALL_parser_nodes___AGtMethid___n_gt(recv) ((parser_nodes___AGtMethid___n_gt_t)CALL((recv), (SFT_parser_nodes[457] + 1)))
-#define CALL_parser_nodes___AGtMethid___n_gt__eq(recv) ((parser_nodes___AGtMethid___n_gt__eq_t)CALL((recv), (SFT_parser_nodes[457] + 2)))
-#define ID_ABraMethid (SFT_parser_nodes[458])
-#define COLOR_ABraMethid (SFT_parser_nodes[459])
-#define ATTR_parser_nodes___ABraMethid____n_obra(recv) ATTR(recv, (SFT_parser_nodes[460] + 0))
-#define ATTR_parser_nodes___ABraMethid____n_cbra(recv) ATTR(recv, (SFT_parser_nodes[460] + 1))
-#define INIT_TABLE_POS_ABraMethid (SFT_parser_nodes[461] + 0)
-#define CALL_parser_nodes___ABraMethid___n_obra(recv) ((parser_nodes___ABraMethid___n_obra_t)CALL((recv), (SFT_parser_nodes[461] + 1)))
-#define CALL_parser_nodes___ABraMethid___n_obra__eq(recv) ((parser_nodes___ABraMethid___n_obra__eq_t)CALL((recv), (SFT_parser_nodes[461] + 2)))
-#define CALL_parser_nodes___ABraMethid___n_cbra(recv) ((parser_nodes___ABraMethid___n_cbra_t)CALL((recv), (SFT_parser_nodes[461] + 3)))
-#define CALL_parser_nodes___ABraMethid___n_cbra__eq(recv) ((parser_nodes___ABraMethid___n_cbra__eq_t)CALL((recv), (SFT_parser_nodes[461] + 4)))
-#define ID_AStarshipMethid (SFT_parser_nodes[462])
-#define COLOR_AStarshipMethid (SFT_parser_nodes[463])
-#define ATTR_parser_nodes___AStarshipMethid____n_starship(recv) ATTR(recv, (SFT_parser_nodes[464] + 0))
-#define INIT_TABLE_POS_AStarshipMethid (SFT_parser_nodes[465] + 0)
-#define CALL_parser_nodes___AStarshipMethid___n_starship(recv) ((parser_nodes___AStarshipMethid___n_starship_t)CALL((recv), (SFT_parser_nodes[465] + 1)))
-#define CALL_parser_nodes___AStarshipMethid___n_starship__eq(recv) ((parser_nodes___AStarshipMethid___n_starship__eq_t)CALL((recv), (SFT_parser_nodes[465] + 2)))
-#define ID_AAssignMethid (SFT_parser_nodes[466])
-#define COLOR_AAssignMethid (SFT_parser_nodes[467])
-#define ATTR_parser_nodes___AAssignMethid____n_id(recv) ATTR(recv, (SFT_parser_nodes[468] + 0))
-#define ATTR_parser_nodes___AAssignMethid____n_assign(recv) ATTR(recv, (SFT_parser_nodes[468] + 1))
-#define INIT_TABLE_POS_AAssignMethid (SFT_parser_nodes[469] + 0)
-#define CALL_parser_nodes___AAssignMethid___n_id(recv) ((parser_nodes___AAssignMethid___n_id_t)CALL((recv), (SFT_parser_nodes[469] + 1)))
-#define CALL_parser_nodes___AAssignMethid___n_id__eq(recv) ((parser_nodes___AAssignMethid___n_id__eq_t)CALL((recv), (SFT_parser_nodes[469] + 2)))
-#define CALL_parser_nodes___AAssignMethid___n_assign(recv) ((parser_nodes___AAssignMethid___n_assign_t)CALL((recv), (SFT_parser_nodes[469] + 3)))
-#define CALL_parser_nodes___AAssignMethid___n_assign__eq(recv) ((parser_nodes___AAssignMethid___n_assign__eq_t)CALL((recv), (SFT_parser_nodes[469] + 4)))
-#define ID_ABraassignMethid (SFT_parser_nodes[470])
-#define COLOR_ABraassignMethid (SFT_parser_nodes[471])
-#define ATTR_parser_nodes___ABraassignMethid____n_obra(recv) ATTR(recv, (SFT_parser_nodes[472] + 0))
-#define ATTR_parser_nodes___ABraassignMethid____n_cbra(recv) ATTR(recv, (SFT_parser_nodes[472] + 1))
-#define ATTR_parser_nodes___ABraassignMethid____n_assign(recv) ATTR(recv, (SFT_parser_nodes[472] + 2))
-#define INIT_TABLE_POS_ABraassignMethid (SFT_parser_nodes[473] + 0)
-#define CALL_parser_nodes___ABraassignMethid___n_obra(recv) ((parser_nodes___ABraassignMethid___n_obra_t)CALL((recv), (SFT_parser_nodes[473] + 1)))
-#define CALL_parser_nodes___ABraassignMethid___n_obra__eq(recv) ((parser_nodes___ABraassignMethid___n_obra__eq_t)CALL((recv), (SFT_parser_nodes[473] + 2)))
-#define CALL_parser_nodes___ABraassignMethid___n_cbra(recv) ((parser_nodes___ABraassignMethid___n_cbra_t)CALL((recv), (SFT_parser_nodes[473] + 3)))
-#define CALL_parser_nodes___ABraassignMethid___n_cbra__eq(recv) ((parser_nodes___ABraassignMethid___n_cbra__eq_t)CALL((recv), (SFT_parser_nodes[473] + 4)))
-#define CALL_parser_nodes___ABraassignMethid___n_assign(recv) ((parser_nodes___ABraassignMethid___n_assign_t)CALL((recv), (SFT_parser_nodes[473] + 5)))
-#define CALL_parser_nodes___ABraassignMethid___n_assign__eq(recv) ((parser_nodes___ABraassignMethid___n_assign__eq_t)CALL((recv), (SFT_parser_nodes[473] + 6)))
-#define ID_ASignature (SFT_parser_nodes[474])
-#define COLOR_ASignature (SFT_parser_nodes[475])
-#define ATTR_parser_nodes___ASignature____n_params(recv) ATTR(recv, (SFT_parser_nodes[476] + 0))
-#define ATTR_parser_nodes___ASignature____n_type(recv) ATTR(recv, (SFT_parser_nodes[476] + 1))
-#define ATTR_parser_nodes___ASignature____n_closure_decls(recv) ATTR(recv, (SFT_parser_nodes[476] + 2))
-#define INIT_TABLE_POS_ASignature (SFT_parser_nodes[477] + 0)
-#define CALL_parser_nodes___ASignature___n_params(recv) ((parser_nodes___ASignature___n_params_t)CALL((recv), (SFT_parser_nodes[477] + 1)))
-#define CALL_parser_nodes___ASignature___n_params__eq(recv) ((parser_nodes___ASignature___n_params__eq_t)CALL((recv), (SFT_parser_nodes[477] + 2)))
-#define CALL_parser_nodes___ASignature___n_type(recv) ((parser_nodes___ASignature___n_type_t)CALL((recv), (SFT_parser_nodes[477] + 3)))
-#define CALL_parser_nodes___ASignature___n_type__eq(recv) ((parser_nodes___ASignature___n_type__eq_t)CALL((recv), (SFT_parser_nodes[477] + 4)))
-#define CALL_parser_nodes___ASignature___n_closure_decls(recv) ((parser_nodes___ASignature___n_closure_decls_t)CALL((recv), (SFT_parser_nodes[477] + 5)))
-#define CALL_parser_nodes___ASignature___n_closure_decls__eq(recv) ((parser_nodes___ASignature___n_closure_decls__eq_t)CALL((recv), (SFT_parser_nodes[477] + 6)))
-#define ID_AParam (SFT_parser_nodes[478])
-#define COLOR_AParam (SFT_parser_nodes[479])
-#define ATTR_parser_nodes___AParam____n_id(recv) ATTR(recv, (SFT_parser_nodes[480] + 0))
-#define ATTR_parser_nodes___AParam____n_type(recv) ATTR(recv, (SFT_parser_nodes[480] + 1))
-#define ATTR_parser_nodes___AParam____n_dotdotdot(recv) ATTR(recv, (SFT_parser_nodes[480] + 2))
-#define INIT_TABLE_POS_AParam (SFT_parser_nodes[481] + 0)
-#define CALL_parser_nodes___AParam___n_id(recv) ((parser_nodes___AParam___n_id_t)CALL((recv), (SFT_parser_nodes[481] + 1)))
-#define CALL_parser_nodes___AParam___n_id__eq(recv) ((parser_nodes___AParam___n_id__eq_t)CALL((recv), (SFT_parser_nodes[481] + 2)))
-#define CALL_parser_nodes___AParam___n_type(recv) ((parser_nodes___AParam___n_type_t)CALL((recv), (SFT_parser_nodes[481] + 3)))
-#define CALL_parser_nodes___AParam___n_type__eq(recv) ((parser_nodes___AParam___n_type__eq_t)CALL((recv), (SFT_parser_nodes[481] + 4)))
-#define CALL_parser_nodes___AParam___n_dotdotdot(recv) ((parser_nodes___AParam___n_dotdotdot_t)CALL((recv), (SFT_parser_nodes[481] + 5)))
-#define CALL_parser_nodes___AParam___n_dotdotdot__eq(recv) ((parser_nodes___AParam___n_dotdotdot__eq_t)CALL((recv), (SFT_parser_nodes[481] + 6)))
-#define ID_AClosureDecl (SFT_parser_nodes[482])
-#define COLOR_AClosureDecl (SFT_parser_nodes[483])
-#define ATTR_parser_nodes___AClosureDecl____n_kwbreak(recv) ATTR(recv, (SFT_parser_nodes[484] + 0))
-#define ATTR_parser_nodes___AClosureDecl____n_bang(recv) ATTR(recv, (SFT_parser_nodes[484] + 1))
-#define ATTR_parser_nodes___AClosureDecl____n_id(recv) ATTR(recv, (SFT_parser_nodes[484] + 2))
-#define ATTR_parser_nodes___AClosureDecl____n_signature(recv) ATTR(recv, (SFT_parser_nodes[484] + 3))
-#define ATTR_parser_nodes___AClosureDecl____n_expr(recv) ATTR(recv, (SFT_parser_nodes[484] + 4))
-#define INIT_TABLE_POS_AClosureDecl (SFT_parser_nodes[485] + 0)
-#define CALL_parser_nodes___AClosureDecl___n_kwbreak(recv) ((parser_nodes___AClosureDecl___n_kwbreak_t)CALL((recv), (SFT_parser_nodes[485] + 1)))
-#define CALL_parser_nodes___AClosureDecl___n_kwbreak__eq(recv) ((parser_nodes___AClosureDecl___n_kwbreak__eq_t)CALL((recv), (SFT_parser_nodes[485] + 2)))
-#define CALL_parser_nodes___AClosureDecl___n_bang(recv) ((parser_nodes___AClosureDecl___n_bang_t)CALL((recv), (SFT_parser_nodes[485] + 3)))
-#define CALL_parser_nodes___AClosureDecl___n_bang__eq(recv) ((parser_nodes___AClosureDecl___n_bang__eq_t)CALL((recv), (SFT_parser_nodes[485] + 4)))
-#define CALL_parser_nodes___AClosureDecl___n_id(recv) ((parser_nodes___AClosureDecl___n_id_t)CALL((recv), (SFT_parser_nodes[485] + 5)))
-#define CALL_parser_nodes___AClosureDecl___n_id__eq(recv) ((parser_nodes___AClosureDecl___n_id__eq_t)CALL((recv), (SFT_parser_nodes[485] + 6)))
-#define CALL_parser_nodes___AClosureDecl___n_signature(recv) ((parser_nodes___AClosureDecl___n_signature_t)CALL((recv), (SFT_parser_nodes[485] + 7)))
-#define CALL_parser_nodes___AClosureDecl___n_signature__eq(recv) ((parser_nodes___AClosureDecl___n_signature__eq_t)CALL((recv), (SFT_parser_nodes[485] + 8)))
-#define CALL_parser_nodes___AClosureDecl___n_expr(recv) ((parser_nodes___AClosureDecl___n_expr_t)CALL((recv), (SFT_parser_nodes[485] + 9)))
-#define CALL_parser_nodes___AClosureDecl___n_expr__eq(recv) ((parser_nodes___AClosureDecl___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[485] + 10)))
-#define ID_AType (SFT_parser_nodes[486])
-#define COLOR_AType (SFT_parser_nodes[487])
-#define ATTR_parser_nodes___AType____n_kwnullable(recv) ATTR(recv, (SFT_parser_nodes[488] + 0))
-#define ATTR_parser_nodes___AType____n_id(recv) ATTR(recv, (SFT_parser_nodes[488] + 1))
-#define ATTR_parser_nodes___AType____n_types(recv) ATTR(recv, (SFT_parser_nodes[488] + 2))
-#define INIT_TABLE_POS_AType (SFT_parser_nodes[489] + 0)
-#define CALL_parser_nodes___AType___n_kwnullable(recv) ((parser_nodes___AType___n_kwnullable_t)CALL((recv), (SFT_parser_nodes[489] + 1)))
-#define CALL_parser_nodes___AType___n_kwnullable__eq(recv) ((parser_nodes___AType___n_kwnullable__eq_t)CALL((recv), (SFT_parser_nodes[489] + 2)))
-#define CALL_parser_nodes___AType___n_id(recv) ((parser_nodes___AType___n_id_t)CALL((recv), (SFT_parser_nodes[489] + 3)))
-#define CALL_parser_nodes___AType___n_id__eq(recv) ((parser_nodes___AType___n_id__eq_t)CALL((recv), (SFT_parser_nodes[489] + 4)))
-#define CALL_parser_nodes___AType___n_types(recv) ((parser_nodes___AType___n_types_t)CALL((recv), (SFT_parser_nodes[489] + 5)))
-#define CALL_parser_nodes___AType___n_types__eq(recv) ((parser_nodes___AType___n_types__eq_t)CALL((recv), (SFT_parser_nodes[489] + 6)))
-#define ID_ALabel (SFT_parser_nodes[490])
-#define COLOR_ALabel (SFT_parser_nodes[491])
-#define ATTR_parser_nodes___ALabel____n_kwlabel(recv) ATTR(recv, (SFT_parser_nodes[492] + 0))
-#define ATTR_parser_nodes___ALabel____n_id(recv) ATTR(recv, (SFT_parser_nodes[492] + 1))
-#define INIT_TABLE_POS_ALabel (SFT_parser_nodes[493] + 0)
-#define CALL_parser_nodes___ALabel___n_kwlabel(recv) ((parser_nodes___ALabel___n_kwlabel_t)CALL((recv), (SFT_parser_nodes[493] + 1)))
-#define CALL_parser_nodes___ALabel___n_kwlabel__eq(recv) ((parser_nodes___ALabel___n_kwlabel__eq_t)CALL((recv), (SFT_parser_nodes[493] + 2)))
-#define CALL_parser_nodes___ALabel___n_id(recv) ((parser_nodes___ALabel___n_id_t)CALL((recv), (SFT_parser_nodes[493] + 3)))
-#define CALL_parser_nodes___ALabel___n_id__eq(recv) ((parser_nodes___ALabel___n_id__eq_t)CALL((recv), (SFT_parser_nodes[493] + 4)))
-#define ID_AExpr (SFT_parser_nodes[494])
-#define COLOR_AExpr (SFT_parser_nodes[495])
-#define INIT_TABLE_POS_AExpr (SFT_parser_nodes[496] + 0)
-#define ID_ABlockExpr (SFT_parser_nodes[497])
-#define COLOR_ABlockExpr (SFT_parser_nodes[498])
-#define ATTR_parser_nodes___ABlockExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[499] + 0))
-#define INIT_TABLE_POS_ABlockExpr (SFT_parser_nodes[500] + 0)
-#define CALL_parser_nodes___ABlockExpr___n_expr(recv) ((parser_nodes___ABlockExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[500] + 1)))
-#define CALL_parser_nodes___ABlockExpr___n_expr__eq(recv) ((parser_nodes___ABlockExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[500] + 2)))
-#define ID_AVardeclExpr (SFT_parser_nodes[501])
-#define COLOR_AVardeclExpr (SFT_parser_nodes[502])
-#define ATTR_parser_nodes___AVardeclExpr____n_kwvar(recv) ATTR(recv, (SFT_parser_nodes[503] + 0))
-#define ATTR_parser_nodes___AVardeclExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[503] + 1))
-#define ATTR_parser_nodes___AVardeclExpr____n_type(recv) ATTR(recv, (SFT_parser_nodes[503] + 2))
-#define ATTR_parser_nodes___AVardeclExpr____n_assign(recv) ATTR(recv, (SFT_parser_nodes[503] + 3))
-#define ATTR_parser_nodes___AVardeclExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[503] + 4))
-#define INIT_TABLE_POS_AVardeclExpr (SFT_parser_nodes[504] + 0)
-#define CALL_parser_nodes___AVardeclExpr___n_kwvar(recv) ((parser_nodes___AVardeclExpr___n_kwvar_t)CALL((recv), (SFT_parser_nodes[504] + 1)))
-#define CALL_parser_nodes___AVardeclExpr___n_kwvar__eq(recv) ((parser_nodes___AVardeclExpr___n_kwvar__eq_t)CALL((recv), (SFT_parser_nodes[504] + 2)))
-#define CALL_parser_nodes___AVardeclExpr___n_id(recv) ((parser_nodes___AVardeclExpr___n_id_t)CALL((recv), (SFT_parser_nodes[504] + 3)))
-#define CALL_parser_nodes___AVardeclExpr___n_id__eq(recv) ((parser_nodes___AVardeclExpr___n_id__eq_t)CALL((recv), (SFT_parser_nodes[504] + 4)))
-#define CALL_parser_nodes___AVardeclExpr___n_type(recv) ((parser_nodes___AVardeclExpr___n_type_t)CALL((recv), (SFT_parser_nodes[504] + 5)))
-#define CALL_parser_nodes___AVardeclExpr___n_type__eq(recv) ((parser_nodes___AVardeclExpr___n_type__eq_t)CALL((recv), (SFT_parser_nodes[504] + 6)))
-#define CALL_parser_nodes___AVardeclExpr___n_assign(recv) ((parser_nodes___AVardeclExpr___n_assign_t)CALL((recv), (SFT_parser_nodes[504] + 7)))
-#define CALL_parser_nodes___AVardeclExpr___n_assign__eq(recv) ((parser_nodes___AVardeclExpr___n_assign__eq_t)CALL((recv), (SFT_parser_nodes[504] + 8)))
-#define CALL_parser_nodes___AVardeclExpr___n_expr(recv) ((parser_nodes___AVardeclExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[504] + 9)))
-#define CALL_parser_nodes___AVardeclExpr___n_expr__eq(recv) ((parser_nodes___AVardeclExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[504] + 10)))
-#define ID_AReturnExpr (SFT_parser_nodes[505])
-#define COLOR_AReturnExpr (SFT_parser_nodes[506])
-#define ATTR_parser_nodes___AReturnExpr____n_kwreturn(recv) ATTR(recv, (SFT_parser_nodes[507] + 0))
-#define ATTR_parser_nodes___AReturnExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[507] + 1))
-#define INIT_TABLE_POS_AReturnExpr (SFT_parser_nodes[508] + 0)
-#define CALL_parser_nodes___AReturnExpr___n_kwreturn(recv) ((parser_nodes___AReturnExpr___n_kwreturn_t)CALL((recv), (SFT_parser_nodes[508] + 1)))
-#define CALL_parser_nodes___AReturnExpr___n_kwreturn__eq(recv) ((parser_nodes___AReturnExpr___n_kwreturn__eq_t)CALL((recv), (SFT_parser_nodes[508] + 2)))
-#define CALL_parser_nodes___AReturnExpr___n_expr(recv) ((parser_nodes___AReturnExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[508] + 3)))
-#define CALL_parser_nodes___AReturnExpr___n_expr__eq(recv) ((parser_nodes___AReturnExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[508] + 4)))
-#define ID_ALabelable (SFT_parser_nodes[509])
-#define COLOR_ALabelable (SFT_parser_nodes[510])
-#define ATTR_parser_nodes___ALabelable____n_label(recv) ATTR(recv, (SFT_parser_nodes[511] + 0))
-#define INIT_TABLE_POS_ALabelable (SFT_parser_nodes[512] + 0)
-#define CALL_parser_nodes___ALabelable___n_label(recv) ((parser_nodes___ALabelable___n_label_t)CALL((recv), (SFT_parser_nodes[512] + 1)))
-#define CALL_parser_nodes___ALabelable___n_label__eq(recv) ((parser_nodes___ALabelable___n_label__eq_t)CALL((recv), (SFT_parser_nodes[512] + 2)))
-#define ID_ABreakExpr (SFT_parser_nodes[513])
-#define COLOR_ABreakExpr (SFT_parser_nodes[514])
-#define ATTR_parser_nodes___ABreakExpr____n_kwbreak(recv) ATTR(recv, (SFT_parser_nodes[515] + 0))
-#define ATTR_parser_nodes___ABreakExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[515] + 1))
-#define INIT_TABLE_POS_ABreakExpr (SFT_parser_nodes[516] + 0)
-#define CALL_parser_nodes___ABreakExpr___n_kwbreak(recv) ((parser_nodes___ABreakExpr___n_kwbreak_t)CALL((recv), (SFT_parser_nodes[516] + 1)))
-#define CALL_parser_nodes___ABreakExpr___n_kwbreak__eq(recv) ((parser_nodes___ABreakExpr___n_kwbreak__eq_t)CALL((recv), (SFT_parser_nodes[516] + 2)))
-#define CALL_parser_nodes___ABreakExpr___n_expr(recv) ((parser_nodes___ABreakExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[516] + 3)))
-#define CALL_parser_nodes___ABreakExpr___n_expr__eq(recv) ((parser_nodes___ABreakExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[516] + 4)))
-#define ID_AAbortExpr (SFT_parser_nodes[517])
-#define COLOR_AAbortExpr (SFT_parser_nodes[518])
-#define ATTR_parser_nodes___AAbortExpr____n_kwabort(recv) ATTR(recv, (SFT_parser_nodes[519] + 0))
-#define INIT_TABLE_POS_AAbortExpr (SFT_parser_nodes[520] + 0)
-#define CALL_parser_nodes___AAbortExpr___n_kwabort(recv) ((parser_nodes___AAbortExpr___n_kwabort_t)CALL((recv), (SFT_parser_nodes[520] + 1)))
-#define CALL_parser_nodes___AAbortExpr___n_kwabort__eq(recv) ((parser_nodes___AAbortExpr___n_kwabort__eq_t)CALL((recv), (SFT_parser_nodes[520] + 2)))
-#define ID_AContinueExpr (SFT_parser_nodes[521])
-#define COLOR_AContinueExpr (SFT_parser_nodes[522])
-#define ATTR_parser_nodes___AContinueExpr____n_kwcontinue(recv) ATTR(recv, (SFT_parser_nodes[523] + 0))
-#define ATTR_parser_nodes___AContinueExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[523] + 1))
-#define INIT_TABLE_POS_AContinueExpr (SFT_parser_nodes[524] + 0)
-#define CALL_parser_nodes___AContinueExpr___n_kwcontinue(recv) ((parser_nodes___AContinueExpr___n_kwcontinue_t)CALL((recv), (SFT_parser_nodes[524] + 1)))
-#define CALL_parser_nodes___AContinueExpr___n_kwcontinue__eq(recv) ((parser_nodes___AContinueExpr___n_kwcontinue__eq_t)CALL((recv), (SFT_parser_nodes[524] + 2)))
-#define CALL_parser_nodes___AContinueExpr___n_expr(recv) ((parser_nodes___AContinueExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[524] + 3)))
-#define CALL_parser_nodes___AContinueExpr___n_expr__eq(recv) ((parser_nodes___AContinueExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[524] + 4)))
-#define ID_ADoExpr (SFT_parser_nodes[525])
-#define COLOR_ADoExpr (SFT_parser_nodes[526])
-#define ATTR_parser_nodes___ADoExpr____n_kwdo(recv) ATTR(recv, (SFT_parser_nodes[527] + 0))
-#define ATTR_parser_nodes___ADoExpr____n_block(recv) ATTR(recv, (SFT_parser_nodes[527] + 1))
-#define INIT_TABLE_POS_ADoExpr (SFT_parser_nodes[528] + 0)
-#define CALL_parser_nodes___ADoExpr___n_kwdo(recv) ((parser_nodes___ADoExpr___n_kwdo_t)CALL((recv), (SFT_parser_nodes[528] + 1)))
-#define CALL_parser_nodes___ADoExpr___n_kwdo__eq(recv) ((parser_nodes___ADoExpr___n_kwdo__eq_t)CALL((recv), (SFT_parser_nodes[528] + 2)))
-#define CALL_parser_nodes___ADoExpr___n_block(recv) ((parser_nodes___ADoExpr___n_block_t)CALL((recv), (SFT_parser_nodes[528] + 3)))
-#define CALL_parser_nodes___ADoExpr___n_block__eq(recv) ((parser_nodes___ADoExpr___n_block__eq_t)CALL((recv), (SFT_parser_nodes[528] + 4)))
-#define ID_AIfExpr (SFT_parser_nodes[529])
-#define COLOR_AIfExpr (SFT_parser_nodes[530])
-#define ATTR_parser_nodes___AIfExpr____n_kwif(recv) ATTR(recv, (SFT_parser_nodes[531] + 0))
-#define ATTR_parser_nodes___AIfExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[531] + 1))
-#define ATTR_parser_nodes___AIfExpr____n_then(recv) ATTR(recv, (SFT_parser_nodes[531] + 2))
-#define ATTR_parser_nodes___AIfExpr____n_else(recv) ATTR(recv, (SFT_parser_nodes[531] + 3))
-#define INIT_TABLE_POS_AIfExpr (SFT_parser_nodes[532] + 0)
-#define CALL_parser_nodes___AIfExpr___n_kwif(recv) ((parser_nodes___AIfExpr___n_kwif_t)CALL((recv), (SFT_parser_nodes[532] + 1)))
-#define CALL_parser_nodes___AIfExpr___n_kwif__eq(recv) ((parser_nodes___AIfExpr___n_kwif__eq_t)CALL((recv), (SFT_parser_nodes[532] + 2)))
-#define CALL_parser_nodes___AIfExpr___n_expr(recv) ((parser_nodes___AIfExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[532] + 3)))
-#define CALL_parser_nodes___AIfExpr___n_expr__eq(recv) ((parser_nodes___AIfExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[532] + 4)))
-#define CALL_parser_nodes___AIfExpr___n_then(recv) ((parser_nodes___AIfExpr___n_then_t)CALL((recv), (SFT_parser_nodes[532] + 5)))
-#define CALL_parser_nodes___AIfExpr___n_then__eq(recv) ((parser_nodes___AIfExpr___n_then__eq_t)CALL((recv), (SFT_parser_nodes[532] + 6)))
-#define CALL_parser_nodes___AIfExpr___n_else(recv) ((parser_nodes___AIfExpr___n_else_t)CALL((recv), (SFT_parser_nodes[532] + 7)))
-#define CALL_parser_nodes___AIfExpr___n_else__eq(recv) ((parser_nodes___AIfExpr___n_else__eq_t)CALL((recv), (SFT_parser_nodes[532] + 8)))
-#define ID_AIfexprExpr (SFT_parser_nodes[533])
-#define COLOR_AIfexprExpr (SFT_parser_nodes[534])
-#define ATTR_parser_nodes___AIfexprExpr____n_kwif(recv) ATTR(recv, (SFT_parser_nodes[535] + 0))
-#define ATTR_parser_nodes___AIfexprExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[535] + 1))
-#define ATTR_parser_nodes___AIfexprExpr____n_kwthen(recv) ATTR(recv, (SFT_parser_nodes[535] + 2))
-#define ATTR_parser_nodes___AIfexprExpr____n_then(recv) ATTR(recv, (SFT_parser_nodes[535] + 3))
-#define ATTR_parser_nodes___AIfexprExpr____n_kwelse(recv) ATTR(recv, (SFT_parser_nodes[535] + 4))
-#define ATTR_parser_nodes___AIfexprExpr____n_else(recv) ATTR(recv, (SFT_parser_nodes[535] + 5))
-#define INIT_TABLE_POS_AIfexprExpr (SFT_parser_nodes[536] + 0)
-#define CALL_parser_nodes___AIfexprExpr___n_kwif(recv) ((parser_nodes___AIfexprExpr___n_kwif_t)CALL((recv), (SFT_parser_nodes[536] + 1)))
-#define CALL_parser_nodes___AIfexprExpr___n_kwif__eq(recv) ((parser_nodes___AIfexprExpr___n_kwif__eq_t)CALL((recv), (SFT_parser_nodes[536] + 2)))
-#define CALL_parser_nodes___AIfexprExpr___n_expr(recv) ((parser_nodes___AIfexprExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[536] + 3)))
-#define CALL_parser_nodes___AIfexprExpr___n_expr__eq(recv) ((parser_nodes___AIfexprExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[536] + 4)))
-#define CALL_parser_nodes___AIfexprExpr___n_kwthen(recv) ((parser_nodes___AIfexprExpr___n_kwthen_t)CALL((recv), (SFT_parser_nodes[536] + 5)))
-#define CALL_parser_nodes___AIfexprExpr___n_kwthen__eq(recv) ((parser_nodes___AIfexprExpr___n_kwthen__eq_t)CALL((recv), (SFT_parser_nodes[536] + 6)))
-#define CALL_parser_nodes___AIfexprExpr___n_then(recv) ((parser_nodes___AIfexprExpr___n_then_t)CALL((recv), (SFT_parser_nodes[536] + 7)))
-#define CALL_parser_nodes___AIfexprExpr___n_then__eq(recv) ((parser_nodes___AIfexprExpr___n_then__eq_t)CALL((recv), (SFT_parser_nodes[536] + 8)))
-#define CALL_parser_nodes___AIfexprExpr___n_kwelse(recv) ((parser_nodes___AIfexprExpr___n_kwelse_t)CALL((recv), (SFT_parser_nodes[536] + 9)))
-#define CALL_parser_nodes___AIfexprExpr___n_kwelse__eq(recv) ((parser_nodes___AIfexprExpr___n_kwelse__eq_t)CALL((recv), (SFT_parser_nodes[536] + 10)))
-#define CALL_parser_nodes___AIfexprExpr___n_else(recv) ((parser_nodes___AIfexprExpr___n_else_t)CALL((recv), (SFT_parser_nodes[536] + 11)))
-#define CALL_parser_nodes___AIfexprExpr___n_else__eq(recv) ((parser_nodes___AIfexprExpr___n_else__eq_t)CALL((recv), (SFT_parser_nodes[536] + 12)))
-#define ID_AWhileExpr (SFT_parser_nodes[537])
-#define COLOR_AWhileExpr (SFT_parser_nodes[538])
-#define ATTR_parser_nodes___AWhileExpr____n_kwwhile(recv) ATTR(recv, (SFT_parser_nodes[539] + 0))
-#define ATTR_parser_nodes___AWhileExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[539] + 1))
-#define ATTR_parser_nodes___AWhileExpr____n_kwdo(recv) ATTR(recv, (SFT_parser_nodes[539] + 2))
-#define ATTR_parser_nodes___AWhileExpr____n_block(recv) ATTR(recv, (SFT_parser_nodes[539] + 3))
-#define INIT_TABLE_POS_AWhileExpr (SFT_parser_nodes[540] + 0)
-#define CALL_parser_nodes___AWhileExpr___n_kwwhile(recv) ((parser_nodes___AWhileExpr___n_kwwhile_t)CALL((recv), (SFT_parser_nodes[540] + 1)))
-#define CALL_parser_nodes___AWhileExpr___n_kwwhile__eq(recv) ((parser_nodes___AWhileExpr___n_kwwhile__eq_t)CALL((recv), (SFT_parser_nodes[540] + 2)))
-#define CALL_parser_nodes___AWhileExpr___n_expr(recv) ((parser_nodes___AWhileExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[540] + 3)))
-#define CALL_parser_nodes___AWhileExpr___n_expr__eq(recv) ((parser_nodes___AWhileExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[540] + 4)))
-#define CALL_parser_nodes___AWhileExpr___n_kwdo(recv) ((parser_nodes___AWhileExpr___n_kwdo_t)CALL((recv), (SFT_parser_nodes[540] + 5)))
-#define CALL_parser_nodes___AWhileExpr___n_kwdo__eq(recv) ((parser_nodes___AWhileExpr___n_kwdo__eq_t)CALL((recv), (SFT_parser_nodes[540] + 6)))
-#define CALL_parser_nodes___AWhileExpr___n_block(recv) ((parser_nodes___AWhileExpr___n_block_t)CALL((recv), (SFT_parser_nodes[540] + 7)))
-#define CALL_parser_nodes___AWhileExpr___n_block__eq(recv) ((parser_nodes___AWhileExpr___n_block__eq_t)CALL((recv), (SFT_parser_nodes[540] + 8)))
-#define ID_ALoopExpr (SFT_parser_nodes[541])
-#define COLOR_ALoopExpr (SFT_parser_nodes[542])
-#define ATTR_parser_nodes___ALoopExpr____n_kwloop(recv) ATTR(recv, (SFT_parser_nodes[543] + 0))
-#define ATTR_parser_nodes___ALoopExpr____n_block(recv) ATTR(recv, (SFT_parser_nodes[543] + 1))
-#define INIT_TABLE_POS_ALoopExpr (SFT_parser_nodes[544] + 0)
-#define CALL_parser_nodes___ALoopExpr___n_kwloop(recv) ((parser_nodes___ALoopExpr___n_kwloop_t)CALL((recv), (SFT_parser_nodes[544] + 1)))
-#define CALL_parser_nodes___ALoopExpr___n_kwloop__eq(recv) ((parser_nodes___ALoopExpr___n_kwloop__eq_t)CALL((recv), (SFT_parser_nodes[544] + 2)))
-#define CALL_parser_nodes___ALoopExpr___n_block(recv) ((parser_nodes___ALoopExpr___n_block_t)CALL((recv), (SFT_parser_nodes[544] + 3)))
-#define CALL_parser_nodes___ALoopExpr___n_block__eq(recv) ((parser_nodes___ALoopExpr___n_block__eq_t)CALL((recv), (SFT_parser_nodes[544] + 4)))
-#define ID_AForExpr (SFT_parser_nodes[545])
-#define COLOR_AForExpr (SFT_parser_nodes[546])
-#define ATTR_parser_nodes___AForExpr____n_kwfor(recv) ATTR(recv, (SFT_parser_nodes[547] + 0))
-#define ATTR_parser_nodes___AForExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[547] + 1))
-#define ATTR_parser_nodes___AForExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[547] + 2))
-#define ATTR_parser_nodes___AForExpr____n_kwdo(recv) ATTR(recv, (SFT_parser_nodes[547] + 3))
-#define ATTR_parser_nodes___AForExpr____n_block(recv) ATTR(recv, (SFT_parser_nodes[547] + 4))
-#define INIT_TABLE_POS_AForExpr (SFT_parser_nodes[548] + 0)
-#define CALL_parser_nodes___AForExpr___n_kwfor(recv) ((parser_nodes___AForExpr___n_kwfor_t)CALL((recv), (SFT_parser_nodes[548] + 1)))
-#define CALL_parser_nodes___AForExpr___n_kwfor__eq(recv) ((parser_nodes___AForExpr___n_kwfor__eq_t)CALL((recv), (SFT_parser_nodes[548] + 2)))
-#define CALL_parser_nodes___AForExpr___n_id(recv) ((parser_nodes___AForExpr___n_id_t)CALL((recv), (SFT_parser_nodes[548] + 3)))
-#define CALL_parser_nodes___AForExpr___n_id__eq(recv) ((parser_nodes___AForExpr___n_id__eq_t)CALL((recv), (SFT_parser_nodes[548] + 4)))
-#define CALL_parser_nodes___AForExpr___n_expr(recv) ((parser_nodes___AForExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[548] + 5)))
-#define CALL_parser_nodes___AForExpr___n_expr__eq(recv) ((parser_nodes___AForExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[548] + 6)))
-#define CALL_parser_nodes___AForExpr___n_kwdo(recv) ((parser_nodes___AForExpr___n_kwdo_t)CALL((recv), (SFT_parser_nodes[548] + 7)))
-#define CALL_parser_nodes___AForExpr___n_kwdo__eq(recv) ((parser_nodes___AForExpr___n_kwdo__eq_t)CALL((recv), (SFT_parser_nodes[548] + 8)))
-#define CALL_parser_nodes___AForExpr___n_block(recv) ((parser_nodes___AForExpr___n_block_t)CALL((recv), (SFT_parser_nodes[548] + 9)))
-#define CALL_parser_nodes___AForExpr___n_block__eq(recv) ((parser_nodes___AForExpr___n_block__eq_t)CALL((recv), (SFT_parser_nodes[548] + 10)))
-#define ID_AAssertExpr (SFT_parser_nodes[549])
-#define COLOR_AAssertExpr (SFT_parser_nodes[550])
-#define ATTR_parser_nodes___AAssertExpr____n_kwassert(recv) ATTR(recv, (SFT_parser_nodes[551] + 0))
-#define ATTR_parser_nodes___AAssertExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[551] + 1))
-#define ATTR_parser_nodes___AAssertExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[551] + 2))
-#define ATTR_parser_nodes___AAssertExpr____n_else(recv) ATTR(recv, (SFT_parser_nodes[551] + 3))
-#define INIT_TABLE_POS_AAssertExpr (SFT_parser_nodes[552] + 0)
-#define CALL_parser_nodes___AAssertExpr___n_kwassert(recv) ((parser_nodes___AAssertExpr___n_kwassert_t)CALL((recv), (SFT_parser_nodes[552] + 1)))
-#define CALL_parser_nodes___AAssertExpr___n_kwassert__eq(recv) ((parser_nodes___AAssertExpr___n_kwassert__eq_t)CALL((recv), (SFT_parser_nodes[552] + 2)))
-#define CALL_parser_nodes___AAssertExpr___n_id(recv) ((parser_nodes___AAssertExpr___n_id_t)CALL((recv), (SFT_parser_nodes[552] + 3)))
-#define CALL_parser_nodes___AAssertExpr___n_id__eq(recv) ((parser_nodes___AAssertExpr___n_id__eq_t)CALL((recv), (SFT_parser_nodes[552] + 4)))
-#define CALL_parser_nodes___AAssertExpr___n_expr(recv) ((parser_nodes___AAssertExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[552] + 5)))
-#define CALL_parser_nodes___AAssertExpr___n_expr__eq(recv) ((parser_nodes___AAssertExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[552] + 6)))
-#define CALL_parser_nodes___AAssertExpr___n_else(recv) ((parser_nodes___AAssertExpr___n_else_t)CALL((recv), (SFT_parser_nodes[552] + 7)))
-#define CALL_parser_nodes___AAssertExpr___n_else__eq(recv) ((parser_nodes___AAssertExpr___n_else__eq_t)CALL((recv), (SFT_parser_nodes[552] + 8)))
-#define ID_AAssignFormExpr (SFT_parser_nodes[553])
-#define COLOR_AAssignFormExpr (SFT_parser_nodes[554])
-#define ATTR_parser_nodes___AAssignFormExpr____n_assign(recv) ATTR(recv, (SFT_parser_nodes[555] + 0))
-#define ATTR_parser_nodes___AAssignFormExpr____n_value(recv) ATTR(recv, (SFT_parser_nodes[555] + 1))
-#define INIT_TABLE_POS_AAssignFormExpr (SFT_parser_nodes[556] + 0)
-#define CALL_parser_nodes___AAssignFormExpr___n_assign(recv) ((parser_nodes___AAssignFormExpr___n_assign_t)CALL((recv), (SFT_parser_nodes[556] + 1)))
-#define CALL_parser_nodes___AAssignFormExpr___n_assign__eq(recv) ((parser_nodes___AAssignFormExpr___n_assign__eq_t)CALL((recv), (SFT_parser_nodes[556] + 2)))
-#define CALL_parser_nodes___AAssignFormExpr___n_value(recv) ((parser_nodes___AAssignFormExpr___n_value_t)CALL((recv), (SFT_parser_nodes[556] + 3)))
-#define CALL_parser_nodes___AAssignFormExpr___n_value__eq(recv) ((parser_nodes___AAssignFormExpr___n_value__eq_t)CALL((recv), (SFT_parser_nodes[556] + 4)))
-#define ID_AReassignFormExpr (SFT_parser_nodes[557])
-#define COLOR_AReassignFormExpr (SFT_parser_nodes[558])
-#define ATTR_parser_nodes___AReassignFormExpr____n_assign_op(recv) ATTR(recv, (SFT_parser_nodes[559] + 0))
-#define ATTR_parser_nodes___AReassignFormExpr____n_value(recv) ATTR(recv, (SFT_parser_nodes[559] + 1))
-#define INIT_TABLE_POS_AReassignFormExpr (SFT_parser_nodes[560] + 0)
-#define CALL_parser_nodes___AReassignFormExpr___n_assign_op(recv) ((parser_nodes___AReassignFormExpr___n_assign_op_t)CALL((recv), (SFT_parser_nodes[560] + 1)))
-#define CALL_parser_nodes___AReassignFormExpr___n_assign_op__eq(recv) ((parser_nodes___AReassignFormExpr___n_assign_op__eq_t)CALL((recv), (SFT_parser_nodes[560] + 2)))
-#define CALL_parser_nodes___AReassignFormExpr___n_value(recv) ((parser_nodes___AReassignFormExpr___n_value_t)CALL((recv), (SFT_parser_nodes[560] + 3)))
-#define CALL_parser_nodes___AReassignFormExpr___n_value__eq(recv) ((parser_nodes___AReassignFormExpr___n_value__eq_t)CALL((recv), (SFT_parser_nodes[560] + 4)))
-#define ID_AOnceExpr (SFT_parser_nodes[561])
-#define COLOR_AOnceExpr (SFT_parser_nodes[562])
-#define ATTR_parser_nodes___AOnceExpr____n_kwonce(recv) ATTR(recv, (SFT_parser_nodes[563] + 0))
-#define INIT_TABLE_POS_AOnceExpr (SFT_parser_nodes[564] + 0)
-#define CALL_parser_nodes___AOnceExpr___n_kwonce(recv) ((parser_nodes___AOnceExpr___n_kwonce_t)CALL((recv), (SFT_parser_nodes[564] + 1)))
-#define CALL_parser_nodes___AOnceExpr___n_kwonce__eq(recv) ((parser_nodes___AOnceExpr___n_kwonce__eq_t)CALL((recv), (SFT_parser_nodes[564] + 2)))
-#define ID_ASendExpr (SFT_parser_nodes[565])
-#define COLOR_ASendExpr (SFT_parser_nodes[566])
-#define ATTR_parser_nodes___ASendExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[567] + 0))
-#define ATTR_parser_nodes___ASendExpr____n_closure_defs(recv) ATTR(recv, (SFT_parser_nodes[567] + 1))
-#define INIT_TABLE_POS_ASendExpr (SFT_parser_nodes[568] + 0)
-#define CALL_parser_nodes___ASendExpr___n_expr(recv) ((parser_nodes___ASendExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[568] + 1)))
-#define CALL_parser_nodes___ASendExpr___n_expr__eq(recv) ((parser_nodes___ASendExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[568] + 2)))
-#define CALL_parser_nodes___ASendExpr___n_closure_defs(recv) ((parser_nodes___ASendExpr___n_closure_defs_t)CALL((recv), (SFT_parser_nodes[568] + 3)))
-#define CALL_parser_nodes___ASendExpr___n_closure_defs__eq(recv) ((parser_nodes___ASendExpr___n_closure_defs__eq_t)CALL((recv), (SFT_parser_nodes[568] + 4)))
-#define ID_ABinopExpr (SFT_parser_nodes[569])
-#define COLOR_ABinopExpr (SFT_parser_nodes[570])
-#define ATTR_parser_nodes___ABinopExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[571] + 0))
-#define INIT_TABLE_POS_ABinopExpr (SFT_parser_nodes[572] + 0)
-#define CALL_parser_nodes___ABinopExpr___n_expr2(recv) ((parser_nodes___ABinopExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[572] + 1)))
-#define CALL_parser_nodes___ABinopExpr___n_expr2__eq(recv) ((parser_nodes___ABinopExpr___n_expr2__eq_t)CALL((recv), (SFT_parser_nodes[572] + 2)))
-#define ID_ABoolExpr (SFT_parser_nodes[573])
-#define COLOR_ABoolExpr (SFT_parser_nodes[574])
-#define INIT_TABLE_POS_ABoolExpr (SFT_parser_nodes[575] + 0)
-#define ID_AOrExpr (SFT_parser_nodes[576])
-#define COLOR_AOrExpr (SFT_parser_nodes[577])
-#define ATTR_parser_nodes___AOrExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[578] + 0))
-#define ATTR_parser_nodes___AOrExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[578] + 1))
-#define INIT_TABLE_POS_AOrExpr (SFT_parser_nodes[579] + 0)
-#define CALL_parser_nodes___AOrExpr___n_expr(recv) ((parser_nodes___AOrExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[579] + 1)))
-#define CALL_parser_nodes___AOrExpr___n_expr__eq(recv) ((parser_nodes___AOrExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[579] + 2)))
-#define CALL_parser_nodes___AOrExpr___n_expr2(recv) ((parser_nodes___AOrExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[579] + 3)))
-#define CALL_parser_nodes___AOrExpr___n_expr2__eq(recv) ((parser_nodes___AOrExpr___n_expr2__eq_t)CALL((recv), (SFT_parser_nodes[579] + 4)))
-#define ID_AAndExpr (SFT_parser_nodes[580])
-#define COLOR_AAndExpr (SFT_parser_nodes[581])
-#define ATTR_parser_nodes___AAndExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[582] + 0))
-#define ATTR_parser_nodes___AAndExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[582] + 1))
-#define INIT_TABLE_POS_AAndExpr (SFT_parser_nodes[583] + 0)
-#define CALL_parser_nodes___AAndExpr___n_expr(recv) ((parser_nodes___AAndExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[583] + 1)))
-#define CALL_parser_nodes___AAndExpr___n_expr__eq(recv) ((parser_nodes___AAndExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[583] + 2)))
-#define CALL_parser_nodes___AAndExpr___n_expr2(recv) ((parser_nodes___AAndExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[583] + 3)))
-#define CALL_parser_nodes___AAndExpr___n_expr2__eq(recv) ((parser_nodes___AAndExpr___n_expr2__eq_t)CALL((recv), (SFT_parser_nodes[583] + 4)))
-#define ID_ANotExpr (SFT_parser_nodes[584])
-#define COLOR_ANotExpr (SFT_parser_nodes[585])
-#define ATTR_parser_nodes___ANotExpr____n_kwnot(recv) ATTR(recv, (SFT_parser_nodes[586] + 0))
-#define ATTR_parser_nodes___ANotExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[586] + 1))
-#define INIT_TABLE_POS_ANotExpr (SFT_parser_nodes[587] + 0)
-#define CALL_parser_nodes___ANotExpr___n_kwnot(recv) ((parser_nodes___ANotExpr___n_kwnot_t)CALL((recv), (SFT_parser_nodes[587] + 1)))
-#define CALL_parser_nodes___ANotExpr___n_kwnot__eq(recv) ((parser_nodes___ANotExpr___n_kwnot__eq_t)CALL((recv), (SFT_parser_nodes[587] + 2)))
-#define CALL_parser_nodes___ANotExpr___n_expr(recv) ((parser_nodes___ANotExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[587] + 3)))
-#define CALL_parser_nodes___ANotExpr___n_expr__eq(recv) ((parser_nodes___ANotExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[587] + 4)))
-#define ID_AEqExpr (SFT_parser_nodes[588])
-#define COLOR_AEqExpr (SFT_parser_nodes[589])
-#define INIT_TABLE_POS_AEqExpr (SFT_parser_nodes[590] + 0)
-#define ID_AEeExpr (SFT_parser_nodes[591])
-#define COLOR_AEeExpr (SFT_parser_nodes[592])
-#define ATTR_parser_nodes___AEeExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[593] + 0))
-#define ATTR_parser_nodes___AEeExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[593] + 1))
-#define INIT_TABLE_POS_AEeExpr (SFT_parser_nodes[594] + 0)
-#define CALL_parser_nodes___AEeExpr___n_expr(recv) ((parser_nodes___AEeExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[594] + 1)))
-#define CALL_parser_nodes___AEeExpr___n_expr__eq(recv) ((parser_nodes___AEeExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[594] + 2)))
-#define CALL_parser_nodes___AEeExpr___n_expr2(recv) ((parser_nodes___AEeExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[594] + 3)))
-#define CALL_parser_nodes___AEeExpr___n_expr2__eq(recv) ((parser_nodes___AEeExpr___n_expr2__eq_t)CALL((recv), (SFT_parser_nodes[594] + 4)))
-#define ID_ANeExpr (SFT_parser_nodes[595])
-#define COLOR_ANeExpr (SFT_parser_nodes[596])
-#define INIT_TABLE_POS_ANeExpr (SFT_parser_nodes[597] + 0)
-#define ID_ALtExpr (SFT_parser_nodes[598])
-#define COLOR_ALtExpr (SFT_parser_nodes[599])
-#define INIT_TABLE_POS_ALtExpr (SFT_parser_nodes[600] + 0)
-#define ID_ALeExpr (SFT_parser_nodes[601])
-#define COLOR_ALeExpr (SFT_parser_nodes[602])
-#define INIT_TABLE_POS_ALeExpr (SFT_parser_nodes[603] + 0)
-#define ID_AGtExpr (SFT_parser_nodes[604])
-#define COLOR_AGtExpr (SFT_parser_nodes[605])
-#define INIT_TABLE_POS_AGtExpr (SFT_parser_nodes[606] + 0)
-#define ID_AGeExpr (SFT_parser_nodes[607])
-#define COLOR_AGeExpr (SFT_parser_nodes[608])
-#define INIT_TABLE_POS_AGeExpr (SFT_parser_nodes[609] + 0)
-#define ID_AIsaExpr (SFT_parser_nodes[610])
-#define COLOR_AIsaExpr (SFT_parser_nodes[611])
-#define ATTR_parser_nodes___AIsaExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[612] + 0))
-#define ATTR_parser_nodes___AIsaExpr____n_type(recv) ATTR(recv, (SFT_parser_nodes[612] + 1))
-#define INIT_TABLE_POS_AIsaExpr (SFT_parser_nodes[613] + 0)
-#define CALL_parser_nodes___AIsaExpr___n_expr(recv) ((parser_nodes___AIsaExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[613] + 1)))
-#define CALL_parser_nodes___AIsaExpr___n_expr__eq(recv) ((parser_nodes___AIsaExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[613] + 2)))
-#define CALL_parser_nodes___AIsaExpr___n_type(recv) ((parser_nodes___AIsaExpr___n_type_t)CALL((recv), (SFT_parser_nodes[613] + 3)))
-#define CALL_parser_nodes___AIsaExpr___n_type__eq(recv) ((parser_nodes___AIsaExpr___n_type__eq_t)CALL((recv), (SFT_parser_nodes[613] + 4)))
-#define ID_APlusExpr (SFT_parser_nodes[614])
-#define COLOR_APlusExpr (SFT_parser_nodes[615])
-#define INIT_TABLE_POS_APlusExpr (SFT_parser_nodes[616] + 0)
-#define ID_AMinusExpr (SFT_parser_nodes[617])
-#define COLOR_AMinusExpr (SFT_parser_nodes[618])
-#define INIT_TABLE_POS_AMinusExpr (SFT_parser_nodes[619] + 0)
-#define ID_AStarshipExpr (SFT_parser_nodes[620])
-#define COLOR_AStarshipExpr (SFT_parser_nodes[621])
-#define INIT_TABLE_POS_AStarshipExpr (SFT_parser_nodes[622] + 0)
-#define ID_AStarExpr (SFT_parser_nodes[623])
-#define COLOR_AStarExpr (SFT_parser_nodes[624])
-#define INIT_TABLE_POS_AStarExpr (SFT_parser_nodes[625] + 0)
-#define ID_ASlashExpr (SFT_parser_nodes[626])
-#define COLOR_ASlashExpr (SFT_parser_nodes[627])
-#define INIT_TABLE_POS_ASlashExpr (SFT_parser_nodes[628] + 0)
-#define ID_APercentExpr (SFT_parser_nodes[629])
-#define COLOR_APercentExpr (SFT_parser_nodes[630])
-#define INIT_TABLE_POS_APercentExpr (SFT_parser_nodes[631] + 0)
-#define ID_AUminusExpr (SFT_parser_nodes[632])
-#define COLOR_AUminusExpr (SFT_parser_nodes[633])
-#define ATTR_parser_nodes___AUminusExpr____n_minus(recv) ATTR(recv, (SFT_parser_nodes[634] + 0))
-#define INIT_TABLE_POS_AUminusExpr (SFT_parser_nodes[635] + 0)
-#define CALL_parser_nodes___AUminusExpr___n_minus(recv) ((parser_nodes___AUminusExpr___n_minus_t)CALL((recv), (SFT_parser_nodes[635] + 1)))
-#define CALL_parser_nodes___AUminusExpr___n_minus__eq(recv) ((parser_nodes___AUminusExpr___n_minus__eq_t)CALL((recv), (SFT_parser_nodes[635] + 2)))
-#define ID_ANewExpr (SFT_parser_nodes[636])
-#define COLOR_ANewExpr (SFT_parser_nodes[637])
-#define ATTR_parser_nodes___ANewExpr____n_kwnew(recv) ATTR(recv, (SFT_parser_nodes[638] + 0))
-#define ATTR_parser_nodes___ANewExpr____n_type(recv) ATTR(recv, (SFT_parser_nodes[638] + 1))
-#define ATTR_parser_nodes___ANewExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[638] + 2))
-#define ATTR_parser_nodes___ANewExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[638] + 3))
-#define INIT_TABLE_POS_ANewExpr (SFT_parser_nodes[639] + 0)
-#define CALL_parser_nodes___ANewExpr___n_kwnew(recv) ((parser_nodes___ANewExpr___n_kwnew_t)CALL((recv), (SFT_parser_nodes[639] + 1)))
-#define CALL_parser_nodes___ANewExpr___n_kwnew__eq(recv) ((parser_nodes___ANewExpr___n_kwnew__eq_t)CALL((recv), (SFT_parser_nodes[639] + 2)))
-#define CALL_parser_nodes___ANewExpr___n_type(recv) ((parser_nodes___ANewExpr___n_type_t)CALL((recv), (SFT_parser_nodes[639] + 3)))
-#define CALL_parser_nodes___ANewExpr___n_type__eq(recv) ((parser_nodes___ANewExpr___n_type__eq_t)CALL((recv), (SFT_parser_nodes[639] + 4)))
-#define CALL_parser_nodes___ANewExpr___n_id(recv) ((parser_nodes___ANewExpr___n_id_t)CALL((recv), (SFT_parser_nodes[639] + 5)))
-#define CALL_parser_nodes___ANewExpr___n_id__eq(recv) ((parser_nodes___ANewExpr___n_id__eq_t)CALL((recv), (SFT_parser_nodes[639] + 6)))
-#define CALL_parser_nodes___ANewExpr___n_args(recv) ((parser_nodes___ANewExpr___n_args_t)CALL((recv), (SFT_parser_nodes[639] + 7)))
-#define CALL_parser_nodes___ANewExpr___n_args__eq(recv) ((parser_nodes___ANewExpr___n_args__eq_t)CALL((recv), (SFT_parser_nodes[639] + 8)))
-#define ID_AAttrFormExpr (SFT_parser_nodes[640])
-#define COLOR_AAttrFormExpr (SFT_parser_nodes[641])
-#define ATTR_parser_nodes___AAttrFormExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[642] + 0))
-#define ATTR_parser_nodes___AAttrFormExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[642] + 1))
-#define INIT_TABLE_POS_AAttrFormExpr (SFT_parser_nodes[643] + 0)
-#define CALL_parser_nodes___AAttrFormExpr___n_expr(recv) ((parser_nodes___AAttrFormExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[643] + 1)))
-#define CALL_parser_nodes___AAttrFormExpr___n_expr__eq(recv) ((parser_nodes___AAttrFormExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[643] + 2)))
-#define CALL_parser_nodes___AAttrFormExpr___n_id(recv) ((parser_nodes___AAttrFormExpr___n_id_t)CALL((recv), (SFT_parser_nodes[643] + 3)))
-#define CALL_parser_nodes___AAttrFormExpr___n_id__eq(recv) ((parser_nodes___AAttrFormExpr___n_id__eq_t)CALL((recv), (SFT_parser_nodes[643] + 4)))
-#define ID_AAttrExpr (SFT_parser_nodes[644])
-#define COLOR_AAttrExpr (SFT_parser_nodes[645])
-#define INIT_TABLE_POS_AAttrExpr (SFT_parser_nodes[646] + 0)
-#define ID_AAttrAssignExpr (SFT_parser_nodes[647])
-#define COLOR_AAttrAssignExpr (SFT_parser_nodes[648])
-#define INIT_TABLE_POS_AAttrAssignExpr (SFT_parser_nodes[649] + 0)
-#define ID_ACallFormExpr (SFT_parser_nodes[650])
-#define COLOR_ACallFormExpr (SFT_parser_nodes[651])
-#define ATTR_parser_nodes___ACallFormExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[652] + 0))
-#define ATTR_parser_nodes___ACallFormExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[652] + 1))
-#define INIT_TABLE_POS_ACallFormExpr (SFT_parser_nodes[653] + 0)
-#define CALL_parser_nodes___ACallFormExpr___n_id(recv) ((parser_nodes___ACallFormExpr___n_id_t)CALL((recv), (SFT_parser_nodes[653] + 1)))
-#define CALL_parser_nodes___ACallFormExpr___n_id__eq(recv) ((parser_nodes___ACallFormExpr___n_id__eq_t)CALL((recv), (SFT_parser_nodes[653] + 2)))
-#define CALL_parser_nodes___ACallFormExpr___n_args(recv) ((parser_nodes___ACallFormExpr___n_args_t)CALL((recv), (SFT_parser_nodes[653] + 3)))
-#define CALL_parser_nodes___ACallFormExpr___n_args__eq(recv) ((parser_nodes___ACallFormExpr___n_args__eq_t)CALL((recv), (SFT_parser_nodes[653] + 4)))
-#define ID_AAttrReassignExpr (SFT_parser_nodes[654])
-#define COLOR_AAttrReassignExpr (SFT_parser_nodes[655])
-#define INIT_TABLE_POS_AAttrReassignExpr (SFT_parser_nodes[656] + 0)
-#define ID_ACallExpr (SFT_parser_nodes[657])
-#define COLOR_ACallExpr (SFT_parser_nodes[658])
-#define INIT_TABLE_POS_ACallExpr (SFT_parser_nodes[659] + 0)
-#define ID_ACallAssignExpr (SFT_parser_nodes[660])
-#define COLOR_ACallAssignExpr (SFT_parser_nodes[661])
-#define INIT_TABLE_POS_ACallAssignExpr (SFT_parser_nodes[662] + 0)
-#define ID_ACallReassignExpr (SFT_parser_nodes[663])
-#define COLOR_ACallReassignExpr (SFT_parser_nodes[664])
-#define INIT_TABLE_POS_ACallReassignExpr (SFT_parser_nodes[665] + 0)
-#define ID_ASuperExpr (SFT_parser_nodes[666])
-#define COLOR_ASuperExpr (SFT_parser_nodes[667])
-#define ATTR_parser_nodes___ASuperExpr____n_qualified(recv) ATTR(recv, (SFT_parser_nodes[668] + 0))
-#define ATTR_parser_nodes___ASuperExpr____n_kwsuper(recv) ATTR(recv, (SFT_parser_nodes[668] + 1))
-#define ATTR_parser_nodes___ASuperExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[668] + 2))
-#define INIT_TABLE_POS_ASuperExpr (SFT_parser_nodes[669] + 0)
-#define CALL_parser_nodes___ASuperExpr___n_qualified(recv) ((parser_nodes___ASuperExpr___n_qualified_t)CALL((recv), (SFT_parser_nodes[669] + 1)))
-#define CALL_parser_nodes___ASuperExpr___n_qualified__eq(recv) ((parser_nodes___ASuperExpr___n_qualified__eq_t)CALL((recv), (SFT_parser_nodes[669] + 2)))
-#define CALL_parser_nodes___ASuperExpr___n_kwsuper(recv) ((parser_nodes___ASuperExpr___n_kwsuper_t)CALL((recv), (SFT_parser_nodes[669] + 3)))
-#define CALL_parser_nodes___ASuperExpr___n_kwsuper__eq(recv) ((parser_nodes___ASuperExpr___n_kwsuper__eq_t)CALL((recv), (SFT_parser_nodes[669] + 4)))
-#define CALL_parser_nodes___ASuperExpr___n_args(recv) ((parser_nodes___ASuperExpr___n_args_t)CALL((recv), (SFT_parser_nodes[669] + 5)))
-#define CALL_parser_nodes___ASuperExpr___n_args__eq(recv) ((parser_nodes___ASuperExpr___n_args__eq_t)CALL((recv), (SFT_parser_nodes[669] + 6)))
-#define ID_AInitExpr (SFT_parser_nodes[670])
-#define COLOR_AInitExpr (SFT_parser_nodes[671])
-#define ATTR_parser_nodes___AInitExpr____n_kwinit(recv) ATTR(recv, (SFT_parser_nodes[672] + 0))
-#define ATTR_parser_nodes___AInitExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[672] + 1))
-#define INIT_TABLE_POS_AInitExpr (SFT_parser_nodes[673] + 0)
-#define CALL_parser_nodes___AInitExpr___n_kwinit(recv) ((parser_nodes___AInitExpr___n_kwinit_t)CALL((recv), (SFT_parser_nodes[673] + 1)))
-#define CALL_parser_nodes___AInitExpr___n_kwinit__eq(recv) ((parser_nodes___AInitExpr___n_kwinit__eq_t)CALL((recv), (SFT_parser_nodes[673] + 2)))
-#define CALL_parser_nodes___AInitExpr___n_args(recv) ((parser_nodes___AInitExpr___n_args_t)CALL((recv), (SFT_parser_nodes[673] + 3)))
-#define CALL_parser_nodes___AInitExpr___n_args__eq(recv) ((parser_nodes___AInitExpr___n_args__eq_t)CALL((recv), (SFT_parser_nodes[673] + 4)))
-#define ID_ABraFormExpr (SFT_parser_nodes[674])
-#define COLOR_ABraFormExpr (SFT_parser_nodes[675])
-#define ATTR_parser_nodes___ABraFormExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[676] + 0))
-#define INIT_TABLE_POS_ABraFormExpr (SFT_parser_nodes[677] + 0)
-#define CALL_parser_nodes___ABraFormExpr___n_args(recv) ((parser_nodes___ABraFormExpr___n_args_t)CALL((recv), (SFT_parser_nodes[677] + 1)))
-#define CALL_parser_nodes___ABraFormExpr___n_args__eq(recv) ((parser_nodes___ABraFormExpr___n_args__eq_t)CALL((recv), (SFT_parser_nodes[677] + 2)))
-#define ID_ABraExpr (SFT_parser_nodes[678])
-#define COLOR_ABraExpr (SFT_parser_nodes[679])
-#define INIT_TABLE_POS_ABraExpr (SFT_parser_nodes[680] + 0)
-#define ID_ABraAssignExpr (SFT_parser_nodes[681])
-#define COLOR_ABraAssignExpr (SFT_parser_nodes[682])
-#define INIT_TABLE_POS_ABraAssignExpr (SFT_parser_nodes[683] + 0)
-#define ID_AVarFormExpr (SFT_parser_nodes[684])
-#define COLOR_AVarFormExpr (SFT_parser_nodes[685])
-#define ATTR_parser_nodes___AVarFormExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[686] + 0))
-#define INIT_TABLE_POS_AVarFormExpr (SFT_parser_nodes[687] + 0)
-#define CALL_parser_nodes___AVarFormExpr___n_id(recv) ((parser_nodes___AVarFormExpr___n_id_t)CALL((recv), (SFT_parser_nodes[687] + 1)))
-#define CALL_parser_nodes___AVarFormExpr___n_id__eq(recv) ((parser_nodes___AVarFormExpr___n_id__eq_t)CALL((recv), (SFT_parser_nodes[687] + 2)))
-#define ID_ABraReassignExpr (SFT_parser_nodes[688])
-#define COLOR_ABraReassignExpr (SFT_parser_nodes[689])
-#define INIT_TABLE_POS_ABraReassignExpr (SFT_parser_nodes[690] + 0)
-#define ID_AClosureCallExpr (SFT_parser_nodes[691])
-#define COLOR_AClosureCallExpr (SFT_parser_nodes[692])
-#define ATTR_parser_nodes___AClosureCallExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[693] + 0))
-#define ATTR_parser_nodes___AClosureCallExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[693] + 1))
-#define ATTR_parser_nodes___AClosureCallExpr____n_closure_defs(recv) ATTR(recv, (SFT_parser_nodes[693] + 2))
-#define INIT_TABLE_POS_AClosureCallExpr (SFT_parser_nodes[694] + 0)
-#define CALL_parser_nodes___AClosureCallExpr___n_id(recv) ((parser_nodes___AClosureCallExpr___n_id_t)CALL((recv), (SFT_parser_nodes[694] + 1)))
-#define CALL_parser_nodes___AClosureCallExpr___n_id__eq(recv) ((parser_nodes___AClosureCallExpr___n_id__eq_t)CALL((recv), (SFT_parser_nodes[694] + 2)))
-#define CALL_parser_nodes___AClosureCallExpr___n_args(recv) ((parser_nodes___AClosureCallExpr___n_args_t)CALL((recv), (SFT_parser_nodes[694] + 3)))
-#define CALL_parser_nodes___AClosureCallExpr___n_args__eq(recv) ((parser_nodes___AClosureCallExpr___n_args__eq_t)CALL((recv), (SFT_parser_nodes[694] + 4)))
-#define CALL_parser_nodes___AClosureCallExpr___n_closure_defs(recv) ((parser_nodes___AClosureCallExpr___n_closure_defs_t)CALL((recv), (SFT_parser_nodes[694] + 5)))
-#define CALL_parser_nodes___AClosureCallExpr___n_closure_defs__eq(recv) ((parser_nodes___AClosureCallExpr___n_closure_defs__eq_t)CALL((recv), (SFT_parser_nodes[694] + 6)))
-#define ID_AVarExpr (SFT_parser_nodes[695])
-#define COLOR_AVarExpr (SFT_parser_nodes[696])
-#define INIT_TABLE_POS_AVarExpr (SFT_parser_nodes[697] + 0)
-#define ID_AVarAssignExpr (SFT_parser_nodes[698])
-#define COLOR_AVarAssignExpr (SFT_parser_nodes[699])
-#define INIT_TABLE_POS_AVarAssignExpr (SFT_parser_nodes[700] + 0)
-#define ID_AVarReassignExpr (SFT_parser_nodes[701])
-#define COLOR_AVarReassignExpr (SFT_parser_nodes[702])
-#define INIT_TABLE_POS_AVarReassignExpr (SFT_parser_nodes[703] + 0)
-#define ID_ARangeExpr (SFT_parser_nodes[704])
-#define COLOR_ARangeExpr (SFT_parser_nodes[705])
-#define ATTR_parser_nodes___ARangeExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[706] + 0))
-#define ATTR_parser_nodes___ARangeExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[706] + 1))
-#define INIT_TABLE_POS_ARangeExpr (SFT_parser_nodes[707] + 0)
-#define CALL_parser_nodes___ARangeExpr___n_expr(recv) ((parser_nodes___ARangeExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[707] + 1)))
-#define CALL_parser_nodes___ARangeExpr___n_expr__eq(recv) ((parser_nodes___ARangeExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[707] + 2)))
-#define CALL_parser_nodes___ARangeExpr___n_expr2(recv) ((parser_nodes___ARangeExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[707] + 3)))
-#define CALL_parser_nodes___ARangeExpr___n_expr2__eq(recv) ((parser_nodes___ARangeExpr___n_expr2__eq_t)CALL((recv), (SFT_parser_nodes[707] + 4)))
-#define ID_ACrangeExpr (SFT_parser_nodes[708])
-#define COLOR_ACrangeExpr (SFT_parser_nodes[709])
-#define INIT_TABLE_POS_ACrangeExpr (SFT_parser_nodes[710] + 0)
-#define ID_AOrangeExpr (SFT_parser_nodes[711])
-#define COLOR_AOrangeExpr (SFT_parser_nodes[712])
-#define INIT_TABLE_POS_AOrangeExpr (SFT_parser_nodes[713] + 0)
-#define ID_AArrayExpr (SFT_parser_nodes[714])
-#define COLOR_AArrayExpr (SFT_parser_nodes[715])
-#define ATTR_parser_nodes___AArrayExpr____n_exprs(recv) ATTR(recv, (SFT_parser_nodes[716] + 0))
-#define INIT_TABLE_POS_AArrayExpr (SFT_parser_nodes[717] + 0)
-#define CALL_parser_nodes___AArrayExpr___n_exprs(recv) ((parser_nodes___AArrayExpr___n_exprs_t)CALL((recv), (SFT_parser_nodes[717] + 1)))
-#define CALL_parser_nodes___AArrayExpr___n_exprs__eq(recv) ((parser_nodes___AArrayExpr___n_exprs__eq_t)CALL((recv), (SFT_parser_nodes[717] + 2)))
-#define ID_ASelfExpr (SFT_parser_nodes[718])
-#define COLOR_ASelfExpr (SFT_parser_nodes[719])
-#define ATTR_parser_nodes___ASelfExpr____n_kwself(recv) ATTR(recv, (SFT_parser_nodes[720] + 0))
-#define INIT_TABLE_POS_ASelfExpr (SFT_parser_nodes[721] + 0)
-#define CALL_parser_nodes___ASelfExpr___n_kwself(recv) ((parser_nodes___ASelfExpr___n_kwself_t)CALL((recv), (SFT_parser_nodes[721] + 1)))
-#define CALL_parser_nodes___ASelfExpr___n_kwself__eq(recv) ((parser_nodes___ASelfExpr___n_kwself__eq_t)CALL((recv), (SFT_parser_nodes[721] + 2)))
-#define ID_AImplicitSelfExpr (SFT_parser_nodes[722])
-#define COLOR_AImplicitSelfExpr (SFT_parser_nodes[723])
-#define INIT_TABLE_POS_AImplicitSelfExpr (SFT_parser_nodes[724] + 0)
-#define ID_ATrueExpr (SFT_parser_nodes[725])
-#define COLOR_ATrueExpr (SFT_parser_nodes[726])
-#define ATTR_parser_nodes___ATrueExpr____n_kwtrue(recv) ATTR(recv, (SFT_parser_nodes[727] + 0))
-#define INIT_TABLE_POS_ATrueExpr (SFT_parser_nodes[728] + 0)
-#define CALL_parser_nodes___ATrueExpr___n_kwtrue(recv) ((parser_nodes___ATrueExpr___n_kwtrue_t)CALL((recv), (SFT_parser_nodes[728] + 1)))
-#define CALL_parser_nodes___ATrueExpr___n_kwtrue__eq(recv) ((parser_nodes___ATrueExpr___n_kwtrue__eq_t)CALL((recv), (SFT_parser_nodes[728] + 2)))
-#define ID_AFalseExpr (SFT_parser_nodes[729])
-#define COLOR_AFalseExpr (SFT_parser_nodes[730])
-#define ATTR_parser_nodes___AFalseExpr____n_kwfalse(recv) ATTR(recv, (SFT_parser_nodes[731] + 0))
-#define INIT_TABLE_POS_AFalseExpr (SFT_parser_nodes[732] + 0)
-#define CALL_parser_nodes___AFalseExpr___n_kwfalse(recv) ((parser_nodes___AFalseExpr___n_kwfalse_t)CALL((recv), (SFT_parser_nodes[732] + 1)))
-#define CALL_parser_nodes___AFalseExpr___n_kwfalse__eq(recv) ((parser_nodes___AFalseExpr___n_kwfalse__eq_t)CALL((recv), (SFT_parser_nodes[732] + 2)))
-#define ID_ANullExpr (SFT_parser_nodes[733])
-#define COLOR_ANullExpr (SFT_parser_nodes[734])
-#define ATTR_parser_nodes___ANullExpr____n_kwnull(recv) ATTR(recv, (SFT_parser_nodes[735] + 0))
-#define INIT_TABLE_POS_ANullExpr (SFT_parser_nodes[736] + 0)
-#define CALL_parser_nodes___ANullExpr___n_kwnull(recv) ((parser_nodes___ANullExpr___n_kwnull_t)CALL((recv), (SFT_parser_nodes[736] + 1)))
-#define CALL_parser_nodes___ANullExpr___n_kwnull__eq(recv) ((parser_nodes___ANullExpr___n_kwnull__eq_t)CALL((recv), (SFT_parser_nodes[736] + 2)))
-#define ID_AIntExpr (SFT_parser_nodes[737])
-#define COLOR_AIntExpr (SFT_parser_nodes[738])
-#define ATTR_parser_nodes___AIntExpr____n_number(recv) ATTR(recv, (SFT_parser_nodes[739] + 0))
-#define INIT_TABLE_POS_AIntExpr (SFT_parser_nodes[740] + 0)
-#define CALL_parser_nodes___AIntExpr___n_number(recv) ((parser_nodes___AIntExpr___n_number_t)CALL((recv), (SFT_parser_nodes[740] + 1)))
-#define CALL_parser_nodes___AIntExpr___n_number__eq(recv) ((parser_nodes___AIntExpr___n_number__eq_t)CALL((recv), (SFT_parser_nodes[740] + 2)))
-#define ID_AFloatExpr (SFT_parser_nodes[741])
-#define COLOR_AFloatExpr (SFT_parser_nodes[742])
-#define ATTR_parser_nodes___AFloatExpr____n_float(recv) ATTR(recv, (SFT_parser_nodes[743] + 0))
-#define INIT_TABLE_POS_AFloatExpr (SFT_parser_nodes[744] + 0)
-#define CALL_parser_nodes___AFloatExpr___n_float(recv) ((parser_nodes___AFloatExpr___n_float_t)CALL((recv), (SFT_parser_nodes[744] + 1)))
-#define CALL_parser_nodes___AFloatExpr___n_float__eq(recv) ((parser_nodes___AFloatExpr___n_float__eq_t)CALL((recv), (SFT_parser_nodes[744] + 2)))
-#define ID_ACharExpr (SFT_parser_nodes[745])
-#define COLOR_ACharExpr (SFT_parser_nodes[746])
-#define ATTR_parser_nodes___ACharExpr____n_char(recv) ATTR(recv, (SFT_parser_nodes[747] + 0))
-#define INIT_TABLE_POS_ACharExpr (SFT_parser_nodes[748] + 0)
-#define CALL_parser_nodes___ACharExpr___n_char(recv) ((parser_nodes___ACharExpr___n_char_t)CALL((recv), (SFT_parser_nodes[748] + 1)))
-#define CALL_parser_nodes___ACharExpr___n_char__eq(recv) ((parser_nodes___ACharExpr___n_char__eq_t)CALL((recv), (SFT_parser_nodes[748] + 2)))
-#define ID_AStringFormExpr (SFT_parser_nodes[749])
-#define COLOR_AStringFormExpr (SFT_parser_nodes[750])
-#define INIT_TABLE_POS_AStringFormExpr (SFT_parser_nodes[751] + 0)
-#define ID_AStringExpr (SFT_parser_nodes[752])
-#define COLOR_AStringExpr (SFT_parser_nodes[753])
-#define ATTR_parser_nodes___AStringExpr____n_string(recv) ATTR(recv, (SFT_parser_nodes[754] + 0))
-#define INIT_TABLE_POS_AStringExpr (SFT_parser_nodes[755] + 0)
-#define CALL_parser_nodes___AStringExpr___n_string(recv) ((parser_nodes___AStringExpr___n_string_t)CALL((recv), (SFT_parser_nodes[755] + 1)))
-#define CALL_parser_nodes___AStringExpr___n_string__eq(recv) ((parser_nodes___AStringExpr___n_string__eq_t)CALL((recv), (SFT_parser_nodes[755] + 2)))
-#define ID_AStartStringExpr (SFT_parser_nodes[756])
-#define COLOR_AStartStringExpr (SFT_parser_nodes[757])
-#define ATTR_parser_nodes___AStartStringExpr____n_string(recv) ATTR(recv, (SFT_parser_nodes[758] + 0))
-#define INIT_TABLE_POS_AStartStringExpr (SFT_parser_nodes[759] + 0)
-#define CALL_parser_nodes___AStartStringExpr___n_string(recv) ((parser_nodes___AStartStringExpr___n_string_t)CALL((recv), (SFT_parser_nodes[759] + 1)))
-#define CALL_parser_nodes___AStartStringExpr___n_string__eq(recv) ((parser_nodes___AStartStringExpr___n_string__eq_t)CALL((recv), (SFT_parser_nodes[759] + 2)))
-#define ID_AMidStringExpr (SFT_parser_nodes[760])
-#define COLOR_AMidStringExpr (SFT_parser_nodes[761])
-#define ATTR_parser_nodes___AMidStringExpr____n_string(recv) ATTR(recv, (SFT_parser_nodes[762] + 0))
-#define INIT_TABLE_POS_AMidStringExpr (SFT_parser_nodes[763] + 0)
-#define CALL_parser_nodes___AMidStringExpr___n_string(recv) ((parser_nodes___AMidStringExpr___n_string_t)CALL((recv), (SFT_parser_nodes[763] + 1)))
-#define CALL_parser_nodes___AMidStringExpr___n_string__eq(recv) ((parser_nodes___AMidStringExpr___n_string__eq_t)CALL((recv), (SFT_parser_nodes[763] + 2)))
-#define ID_AEndStringExpr (SFT_parser_nodes[764])
-#define COLOR_AEndStringExpr (SFT_parser_nodes[765])
-#define ATTR_parser_nodes___AEndStringExpr____n_string(recv) ATTR(recv, (SFT_parser_nodes[766] + 0))
-#define INIT_TABLE_POS_AEndStringExpr (SFT_parser_nodes[767] + 0)
-#define CALL_parser_nodes___AEndStringExpr___n_string(recv) ((parser_nodes___AEndStringExpr___n_string_t)CALL((recv), (SFT_parser_nodes[767] + 1)))
-#define CALL_parser_nodes___AEndStringExpr___n_string__eq(recv) ((parser_nodes___AEndStringExpr___n_string__eq_t)CALL((recv), (SFT_parser_nodes[767] + 2)))
-#define ID_ASuperstringExpr (SFT_parser_nodes[768])
-#define COLOR_ASuperstringExpr (SFT_parser_nodes[769])
-#define ATTR_parser_nodes___ASuperstringExpr____n_exprs(recv) ATTR(recv, (SFT_parser_nodes[770] + 0))
-#define INIT_TABLE_POS_ASuperstringExpr (SFT_parser_nodes[771] + 0)
-#define CALL_parser_nodes___ASuperstringExpr___n_exprs(recv) ((parser_nodes___ASuperstringExpr___n_exprs_t)CALL((recv), (SFT_parser_nodes[771] + 1)))
-#define CALL_parser_nodes___ASuperstringExpr___n_exprs__eq(recv) ((parser_nodes___ASuperstringExpr___n_exprs__eq_t)CALL((recv), (SFT_parser_nodes[771] + 2)))
-#define ID_AParExpr (SFT_parser_nodes[772])
-#define COLOR_AParExpr (SFT_parser_nodes[773])
-#define INIT_TABLE_POS_AParExpr (SFT_parser_nodes[774] + 0)
-#define ID_AProxyExpr (SFT_parser_nodes[775])
-#define COLOR_AProxyExpr (SFT_parser_nodes[776])
-#define ATTR_parser_nodes___AProxyExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[777] + 0))
-#define INIT_TABLE_POS_AProxyExpr (SFT_parser_nodes[778] + 0)
-#define CALL_parser_nodes___AProxyExpr___n_expr(recv) ((parser_nodes___AProxyExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[778] + 1)))
-#define CALL_parser_nodes___AProxyExpr___n_expr__eq(recv) ((parser_nodes___AProxyExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[778] + 2)))
-#define ID_AAsCastExpr (SFT_parser_nodes[779])
-#define COLOR_AAsCastExpr (SFT_parser_nodes[780])
-#define ATTR_parser_nodes___AAsCastExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[781] + 0))
-#define ATTR_parser_nodes___AAsCastExpr____n_kwas(recv) ATTR(recv, (SFT_parser_nodes[781] + 1))
-#define ATTR_parser_nodes___AAsCastExpr____n_type(recv) ATTR(recv, (SFT_parser_nodes[781] + 2))
-#define INIT_TABLE_POS_AAsCastExpr (SFT_parser_nodes[782] + 0)
-#define CALL_parser_nodes___AAsCastExpr___n_expr(recv) ((parser_nodes___AAsCastExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[782] + 1)))
-#define CALL_parser_nodes___AAsCastExpr___n_expr__eq(recv) ((parser_nodes___AAsCastExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[782] + 2)))
-#define CALL_parser_nodes___AAsCastExpr___n_kwas(recv) ((parser_nodes___AAsCastExpr___n_kwas_t)CALL((recv), (SFT_parser_nodes[782] + 3)))
-#define CALL_parser_nodes___AAsCastExpr___n_kwas__eq(recv) ((parser_nodes___AAsCastExpr___n_kwas__eq_t)CALL((recv), (SFT_parser_nodes[782] + 4)))
-#define CALL_parser_nodes___AAsCastExpr___n_type(recv) ((parser_nodes___AAsCastExpr___n_type_t)CALL((recv), (SFT_parser_nodes[782] + 5)))
-#define CALL_parser_nodes___AAsCastExpr___n_type__eq(recv) ((parser_nodes___AAsCastExpr___n_type__eq_t)CALL((recv), (SFT_parser_nodes[782] + 6)))
-#define ID_AAsNotnullExpr (SFT_parser_nodes[783])
-#define COLOR_AAsNotnullExpr (SFT_parser_nodes[784])
-#define ATTR_parser_nodes___AAsNotnullExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[785] + 0))
-#define ATTR_parser_nodes___AAsNotnullExpr____n_kwas(recv) ATTR(recv, (SFT_parser_nodes[785] + 1))
-#define ATTR_parser_nodes___AAsNotnullExpr____n_kwnot(recv) ATTR(recv, (SFT_parser_nodes[785] + 2))
-#define ATTR_parser_nodes___AAsNotnullExpr____n_kwnull(recv) ATTR(recv, (SFT_parser_nodes[785] + 3))
-#define INIT_TABLE_POS_AAsNotnullExpr (SFT_parser_nodes[786] + 0)
-#define CALL_parser_nodes___AAsNotnullExpr___n_expr(recv) ((parser_nodes___AAsNotnullExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[786] + 1)))
-#define CALL_parser_nodes___AAsNotnullExpr___n_expr__eq(recv) ((parser_nodes___AAsNotnullExpr___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[786] + 2)))
-#define CALL_parser_nodes___AAsNotnullExpr___n_kwas(recv) ((parser_nodes___AAsNotnullExpr___n_kwas_t)CALL((recv), (SFT_parser_nodes[786] + 3)))
-#define CALL_parser_nodes___AAsNotnullExpr___n_kwas__eq(recv) ((parser_nodes___AAsNotnullExpr___n_kwas__eq_t)CALL((recv), (SFT_parser_nodes[786] + 4)))
-#define CALL_parser_nodes___AAsNotnullExpr___n_kwnot(recv) ((parser_nodes___AAsNotnullExpr___n_kwnot_t)CALL((recv), (SFT_parser_nodes[786] + 5)))
-#define CALL_parser_nodes___AAsNotnullExpr___n_kwnot__eq(recv) ((parser_nodes___AAsNotnullExpr___n_kwnot__eq_t)CALL((recv), (SFT_parser_nodes[786] + 6)))
-#define CALL_parser_nodes___AAsNotnullExpr___n_kwnull(recv) ((parser_nodes___AAsNotnullExpr___n_kwnull_t)CALL((recv), (SFT_parser_nodes[786] + 7)))
-#define CALL_parser_nodes___AAsNotnullExpr___n_kwnull__eq(recv) ((parser_nodes___AAsNotnullExpr___n_kwnull__eq_t)CALL((recv), (SFT_parser_nodes[786] + 8)))
-#define ID_AIssetAttrExpr (SFT_parser_nodes[787])
-#define COLOR_AIssetAttrExpr (SFT_parser_nodes[788])
-#define ATTR_parser_nodes___AIssetAttrExpr____n_kwisset(recv) ATTR(recv, (SFT_parser_nodes[789] + 0))
-#define INIT_TABLE_POS_AIssetAttrExpr (SFT_parser_nodes[790] + 0)
-#define CALL_parser_nodes___AIssetAttrExpr___n_kwisset(recv) ((parser_nodes___AIssetAttrExpr___n_kwisset_t)CALL((recv), (SFT_parser_nodes[790] + 1)))
-#define CALL_parser_nodes___AIssetAttrExpr___n_kwisset__eq(recv) ((parser_nodes___AIssetAttrExpr___n_kwisset__eq_t)CALL((recv), (SFT_parser_nodes[790] + 2)))
-#define ID_AAssignOp (SFT_parser_nodes[791])
-#define COLOR_AAssignOp (SFT_parser_nodes[792])
-#define INIT_TABLE_POS_AAssignOp (SFT_parser_nodes[793] + 0)
-#define ID_APlusAssignOp (SFT_parser_nodes[794])
-#define COLOR_APlusAssignOp (SFT_parser_nodes[795])
-#define ATTR_parser_nodes___APlusAssignOp____n_pluseq(recv) ATTR(recv, (SFT_parser_nodes[796] + 0))
-#define INIT_TABLE_POS_APlusAssignOp (SFT_parser_nodes[797] + 0)
-#define CALL_parser_nodes___APlusAssignOp___n_pluseq(recv) ((parser_nodes___APlusAssignOp___n_pluseq_t)CALL((recv), (SFT_parser_nodes[797] + 1)))
-#define CALL_parser_nodes___APlusAssignOp___n_pluseq__eq(recv) ((parser_nodes___APlusAssignOp___n_pluseq__eq_t)CALL((recv), (SFT_parser_nodes[797] + 2)))
-#define ID_AMinusAssignOp (SFT_parser_nodes[798])
-#define COLOR_AMinusAssignOp (SFT_parser_nodes[799])
-#define ATTR_parser_nodes___AMinusAssignOp____n_minuseq(recv) ATTR(recv, (SFT_parser_nodes[800] + 0))
-#define INIT_TABLE_POS_AMinusAssignOp (SFT_parser_nodes[801] + 0)
-#define CALL_parser_nodes___AMinusAssignOp___n_minuseq(recv) ((parser_nodes___AMinusAssignOp___n_minuseq_t)CALL((recv), (SFT_parser_nodes[801] + 1)))
-#define CALL_parser_nodes___AMinusAssignOp___n_minuseq__eq(recv) ((parser_nodes___AMinusAssignOp___n_minuseq__eq_t)CALL((recv), (SFT_parser_nodes[801] + 2)))
-#define ID_AClosureDef (SFT_parser_nodes[802])
-#define COLOR_AClosureDef (SFT_parser_nodes[803])
-#define ATTR_parser_nodes___AClosureDef____n_bang(recv) ATTR(recv, (SFT_parser_nodes[804] + 0))
-#define ATTR_parser_nodes___AClosureDef____n_id(recv) ATTR(recv, (SFT_parser_nodes[804] + 1))
-#define ATTR_parser_nodes___AClosureDef____n_ids(recv) ATTR(recv, (SFT_parser_nodes[804] + 2))
-#define ATTR_parser_nodes___AClosureDef____n_kwdo(recv) ATTR(recv, (SFT_parser_nodes[804] + 3))
-#define ATTR_parser_nodes___AClosureDef____n_expr(recv) ATTR(recv, (SFT_parser_nodes[804] + 4))
-#define INIT_TABLE_POS_AClosureDef (SFT_parser_nodes[805] + 0)
-#define CALL_parser_nodes___AClosureDef___n_bang(recv) ((parser_nodes___AClosureDef___n_bang_t)CALL((recv), (SFT_parser_nodes[805] + 1)))
-#define CALL_parser_nodes___AClosureDef___n_bang__eq(recv) ((parser_nodes___AClosureDef___n_bang__eq_t)CALL((recv), (SFT_parser_nodes[805] + 2)))
-#define CALL_parser_nodes___AClosureDef___n_id(recv) ((parser_nodes___AClosureDef___n_id_t)CALL((recv), (SFT_parser_nodes[805] + 3)))
-#define CALL_parser_nodes___AClosureDef___n_id__eq(recv) ((parser_nodes___AClosureDef___n_id__eq_t)CALL((recv), (SFT_parser_nodes[805] + 4)))
-#define CALL_parser_nodes___AClosureDef___n_ids(recv) ((parser_nodes___AClosureDef___n_ids_t)CALL((recv), (SFT_parser_nodes[805] + 5)))
-#define CALL_parser_nodes___AClosureDef___n_ids__eq(recv) ((parser_nodes___AClosureDef___n_ids__eq_t)CALL((recv), (SFT_parser_nodes[805] + 6)))
-#define CALL_parser_nodes___AClosureDef___n_kwdo(recv) ((parser_nodes___AClosureDef___n_kwdo_t)CALL((recv), (SFT_parser_nodes[805] + 7)))
-#define CALL_parser_nodes___AClosureDef___n_kwdo__eq(recv) ((parser_nodes___AClosureDef___n_kwdo__eq_t)CALL((recv), (SFT_parser_nodes[805] + 8)))
-#define CALL_parser_nodes___AClosureDef___n_expr(recv) ((parser_nodes___AClosureDef___n_expr_t)CALL((recv), (SFT_parser_nodes[805] + 9)))
-#define CALL_parser_nodes___AClosureDef___n_expr__eq(recv) ((parser_nodes___AClosureDef___n_expr__eq_t)CALL((recv), (SFT_parser_nodes[805] + 10)))
-#define ID_AClosureId (SFT_parser_nodes[806])
-#define COLOR_AClosureId (SFT_parser_nodes[807])
-#define INIT_TABLE_POS_AClosureId (SFT_parser_nodes[808] + 0)
-#define ID_ASimpleClosureId (SFT_parser_nodes[809])
-#define COLOR_ASimpleClosureId (SFT_parser_nodes[810])
-#define ATTR_parser_nodes___ASimpleClosureId____n_id(recv) ATTR(recv, (SFT_parser_nodes[811] + 0))
-#define INIT_TABLE_POS_ASimpleClosureId (SFT_parser_nodes[812] + 0)
-#define CALL_parser_nodes___ASimpleClosureId___n_id(recv) ((parser_nodes___ASimpleClosureId___n_id_t)CALL((recv), (SFT_parser_nodes[812] + 1)))
-#define CALL_parser_nodes___ASimpleClosureId___n_id__eq(recv) ((parser_nodes___ASimpleClosureId___n_id__eq_t)CALL((recv), (SFT_parser_nodes[812] + 2)))
-#define ID_ABreakClosureId (SFT_parser_nodes[813])
-#define COLOR_ABreakClosureId (SFT_parser_nodes[814])
-#define ATTR_parser_nodes___ABreakClosureId____n_kwbreak(recv) ATTR(recv, (SFT_parser_nodes[815] + 0))
-#define INIT_TABLE_POS_ABreakClosureId (SFT_parser_nodes[816] + 0)
-#define CALL_parser_nodes___ABreakClosureId___n_kwbreak(recv) ((parser_nodes___ABreakClosureId___n_kwbreak_t)CALL((recv), (SFT_parser_nodes[816] + 1)))
-#define CALL_parser_nodes___ABreakClosureId___n_kwbreak__eq(recv) ((parser_nodes___ABreakClosureId___n_kwbreak__eq_t)CALL((recv), (SFT_parser_nodes[816] + 2)))
-#define ID_AQualified (SFT_parser_nodes[817])
-#define COLOR_AQualified (SFT_parser_nodes[818])
-#define ATTR_parser_nodes___AQualified____n_id(recv) ATTR(recv, (SFT_parser_nodes[819] + 0))
-#define ATTR_parser_nodes___AQualified____n_classid(recv) ATTR(recv, (SFT_parser_nodes[819] + 1))
-#define INIT_TABLE_POS_AQualified (SFT_parser_nodes[820] + 0)
-#define CALL_parser_nodes___AQualified___n_id(recv) ((parser_nodes___AQualified___n_id_t)CALL((recv), (SFT_parser_nodes[820] + 1)))
-#define CALL_parser_nodes___AQualified___n_id__eq(recv) ((parser_nodes___AQualified___n_id__eq_t)CALL((recv), (SFT_parser_nodes[820] + 2)))
-#define CALL_parser_nodes___AQualified___n_classid(recv) ((parser_nodes___AQualified___n_classid_t)CALL((recv), (SFT_parser_nodes[820] + 3)))
-#define CALL_parser_nodes___AQualified___n_classid__eq(recv) ((parser_nodes___AQualified___n_classid__eq_t)CALL((recv), (SFT_parser_nodes[820] + 4)))
-#define ID_ADoc (SFT_parser_nodes[821])
-#define COLOR_ADoc (SFT_parser_nodes[822])
-#define ATTR_parser_nodes___ADoc____n_comment(recv) ATTR(recv, (SFT_parser_nodes[823] + 0))
-#define INIT_TABLE_POS_ADoc (SFT_parser_nodes[824] + 0)
-#define CALL_parser_nodes___ADoc___n_comment(recv) ((parser_nodes___ADoc___n_comment_t)CALL((recv), (SFT_parser_nodes[824] + 1)))
-#define CALL_parser_nodes___ADoc___n_comment__eq(recv) ((parser_nodes___ADoc___n_comment__eq_t)CALL((recv), (SFT_parser_nodes[824] + 2)))
-#define ID_Start (SFT_parser_nodes[825])
-#define COLOR_Start (SFT_parser_nodes[826])
-#define ATTR_parser_nodes___Start____n_base(recv) ATTR(recv, (SFT_parser_nodes[827] + 0))
-#define ATTR_parser_nodes___Start____n_eof(recv) ATTR(recv, (SFT_parser_nodes[827] + 1))
-#define INIT_TABLE_POS_Start (SFT_parser_nodes[828] + 0)
-#define CALL_parser_nodes___Start___n_base(recv) ((parser_nodes___Start___n_base_t)CALL((recv), (SFT_parser_nodes[828] + 1)))
-#define CALL_parser_nodes___Start___n_base__eq(recv) ((parser_nodes___Start___n_base__eq_t)CALL((recv), (SFT_parser_nodes[828] + 2)))
-#define CALL_parser_nodes___Start___n_eof(recv) ((parser_nodes___Start___n_eof_t)CALL((recv), (SFT_parser_nodes[828] + 3)))
-#define CALL_parser_nodes___Start___n_eof__eq(recv) ((parser_nodes___Start___n_eof__eq_t)CALL((recv), (SFT_parser_nodes[828] + 4)))
-#define LOCATE_parser_nodes___ANode___location "parser_nodes::ANode::location"
+#define ID_TLl (SFT_parser_nodes[229])
+#define COLOR_TLl (SFT_parser_nodes[230])
+#define INIT_TABLE_POS_TLl (SFT_parser_nodes[231] + 0)
+#define ID_TGt (SFT_parser_nodes[232])
+#define COLOR_TGt (SFT_parser_nodes[233])
+#define INIT_TABLE_POS_TGt (SFT_parser_nodes[234] + 0)
+#define ID_TGe (SFT_parser_nodes[235])
+#define COLOR_TGe (SFT_parser_nodes[236])
+#define INIT_TABLE_POS_TGe (SFT_parser_nodes[237] + 0)
+#define ID_TGg (SFT_parser_nodes[238])
+#define COLOR_TGg (SFT_parser_nodes[239])
+#define INIT_TABLE_POS_TGg (SFT_parser_nodes[240] + 0)
+#define ID_TStarship (SFT_parser_nodes[241])
+#define COLOR_TStarship (SFT_parser_nodes[242])
+#define INIT_TABLE_POS_TStarship (SFT_parser_nodes[243] + 0)
+#define ID_TBang (SFT_parser_nodes[244])
+#define COLOR_TBang (SFT_parser_nodes[245])
+#define INIT_TABLE_POS_TBang (SFT_parser_nodes[246] + 0)
+#define ID_TClassid (SFT_parser_nodes[247])
+#define COLOR_TClassid (SFT_parser_nodes[248])
+#define INIT_TABLE_POS_TClassid (SFT_parser_nodes[249] + 0)
+#define ID_TId (SFT_parser_nodes[250])
+#define COLOR_TId (SFT_parser_nodes[251])
+#define INIT_TABLE_POS_TId (SFT_parser_nodes[252] + 0)
+#define ID_TAttrid (SFT_parser_nodes[253])
+#define COLOR_TAttrid (SFT_parser_nodes[254])
+#define INIT_TABLE_POS_TAttrid (SFT_parser_nodes[255] + 0)
+#define ID_TNumber (SFT_parser_nodes[256])
+#define COLOR_TNumber (SFT_parser_nodes[257])
+#define INIT_TABLE_POS_TNumber (SFT_parser_nodes[258] + 0)
+#define ID_TFloat (SFT_parser_nodes[259])
+#define COLOR_TFloat (SFT_parser_nodes[260])
+#define INIT_TABLE_POS_TFloat (SFT_parser_nodes[261] + 0)
+#define ID_TChar (SFT_parser_nodes[262])
+#define COLOR_TChar (SFT_parser_nodes[263])
+#define INIT_TABLE_POS_TChar (SFT_parser_nodes[264] + 0)
+#define ID_TString (SFT_parser_nodes[265])
+#define COLOR_TString (SFT_parser_nodes[266])
+#define INIT_TABLE_POS_TString (SFT_parser_nodes[267] + 0)
+#define ID_TStartString (SFT_parser_nodes[268])
+#define COLOR_TStartString (SFT_parser_nodes[269])
+#define INIT_TABLE_POS_TStartString (SFT_parser_nodes[270] + 0)
+#define ID_TMidString (SFT_parser_nodes[271])
+#define COLOR_TMidString (SFT_parser_nodes[272])
+#define INIT_TABLE_POS_TMidString (SFT_parser_nodes[273] + 0)
+#define ID_TEndString (SFT_parser_nodes[274])
+#define COLOR_TEndString (SFT_parser_nodes[275])
+#define INIT_TABLE_POS_TEndString (SFT_parser_nodes[276] + 0)
+#define ID_EOF (SFT_parser_nodes[277])
+#define COLOR_EOF (SFT_parser_nodes[278])
+#define INIT_TABLE_POS_EOF (SFT_parser_nodes[279] + 0)
+#define CALL_parser_nodes___EOF___noinit(recv) ((parser_nodes___EOF___noinit_t)CALL((recv), (SFT_parser_nodes[279] + 1)))
+#define ID_AError (SFT_parser_nodes[280])
+#define COLOR_AError (SFT_parser_nodes[281])
+#define INIT_TABLE_POS_AError (SFT_parser_nodes[282] + 0)
+#define CALL_parser_nodes___AError___noinit(recv) ((parser_nodes___AError___noinit_t)CALL((recv), (SFT_parser_nodes[282] + 1)))
+#define ID_AModule (SFT_parser_nodes[283])
+#define COLOR_AModule (SFT_parser_nodes[284])
+#define ATTR_parser_nodes___AModule____n_moduledecl(recv) ATTR(recv, (SFT_parser_nodes[285] + 0))
+#define ATTR_parser_nodes___AModule____n_imports(recv) ATTR(recv, (SFT_parser_nodes[285] + 1))
+#define ATTR_parser_nodes___AModule____n_classdefs(recv) ATTR(recv, (SFT_parser_nodes[285] + 2))
+#define INIT_TABLE_POS_AModule (SFT_parser_nodes[286] + 0)
+#define CALL_parser_nodes___AModule___n_moduledecl(recv) ((parser_nodes___AModule___n_moduledecl_t)CALL((recv), (SFT_parser_nodes[286] + 1)))
+#define CALL_parser_nodes___AModule___n_imports(recv) ((parser_nodes___AModule___n_imports_t)CALL((recv), (SFT_parser_nodes[286] + 2)))
+#define CALL_parser_nodes___AModule___n_classdefs(recv) ((parser_nodes___AModule___n_classdefs_t)CALL((recv), (SFT_parser_nodes[286] + 3)))
+#define ID_AModuledecl (SFT_parser_nodes[287])
+#define COLOR_AModuledecl (SFT_parser_nodes[288])
+#define ATTR_parser_nodes___AModuledecl____n_doc(recv) ATTR(recv, (SFT_parser_nodes[289] + 0))
+#define ATTR_parser_nodes___AModuledecl____n_kwmodule(recv) ATTR(recv, (SFT_parser_nodes[289] + 1))
+#define ATTR_parser_nodes___AModuledecl____n_id(recv) ATTR(recv, (SFT_parser_nodes[289] + 2))
+#define INIT_TABLE_POS_AModuledecl (SFT_parser_nodes[290] + 0)
+#define CALL_parser_nodes___AModuledecl___n_doc(recv) ((parser_nodes___AModuledecl___n_doc_t)CALL((recv), (SFT_parser_nodes[290] + 1)))
+#define CALL_parser_nodes___AModuledecl___n_kwmodule(recv) ((parser_nodes___AModuledecl___n_kwmodule_t)CALL((recv), (SFT_parser_nodes[290] + 2)))
+#define CALL_parser_nodes___AModuledecl___n_id(recv) ((parser_nodes___AModuledecl___n_id_t)CALL((recv), (SFT_parser_nodes[290] + 3)))
+#define ID_AImport (SFT_parser_nodes[291])
+#define COLOR_AImport (SFT_parser_nodes[292])
+#define INIT_TABLE_POS_AImport (SFT_parser_nodes[293] + 0)
+#define ID_AStdImport (SFT_parser_nodes[294])
+#define COLOR_AStdImport (SFT_parser_nodes[295])
+#define ATTR_parser_nodes___AStdImport____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[296] + 0))
+#define ATTR_parser_nodes___AStdImport____n_kwimport(recv) ATTR(recv, (SFT_parser_nodes[296] + 1))
+#define ATTR_parser_nodes___AStdImport____n_id(recv) ATTR(recv, (SFT_parser_nodes[296] + 2))
+#define INIT_TABLE_POS_AStdImport (SFT_parser_nodes[297] + 0)
+#define CALL_parser_nodes___AStdImport___n_visibility(recv) ((parser_nodes___AStdImport___n_visibility_t)CALL((recv), (SFT_parser_nodes[297] + 1)))
+#define CALL_parser_nodes___AStdImport___n_kwimport(recv) ((parser_nodes___AStdImport___n_kwimport_t)CALL((recv), (SFT_parser_nodes[297] + 2)))
+#define CALL_parser_nodes___AStdImport___n_id(recv) ((parser_nodes___AStdImport___n_id_t)CALL((recv), (SFT_parser_nodes[297] + 3)))
+#define ID_ANoImport (SFT_parser_nodes[298])
+#define COLOR_ANoImport (SFT_parser_nodes[299])
+#define ATTR_parser_nodes___ANoImport____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[300] + 0))
+#define ATTR_parser_nodes___ANoImport____n_kwimport(recv) ATTR(recv, (SFT_parser_nodes[300] + 1))
+#define ATTR_parser_nodes___ANoImport____n_kwend(recv) ATTR(recv, (SFT_parser_nodes[300] + 2))
+#define INIT_TABLE_POS_ANoImport (SFT_parser_nodes[301] + 0)
+#define CALL_parser_nodes___ANoImport___n_visibility(recv) ((parser_nodes___ANoImport___n_visibility_t)CALL((recv), (SFT_parser_nodes[301] + 1)))
+#define CALL_parser_nodes___ANoImport___n_kwimport(recv) ((parser_nodes___ANoImport___n_kwimport_t)CALL((recv), (SFT_parser_nodes[301] + 2)))
+#define CALL_parser_nodes___ANoImport___n_kwend(recv) ((parser_nodes___ANoImport___n_kwend_t)CALL((recv), (SFT_parser_nodes[301] + 3)))
+#define ID_AVisibility (SFT_parser_nodes[302])
+#define COLOR_AVisibility (SFT_parser_nodes[303])
+#define INIT_TABLE_POS_AVisibility (SFT_parser_nodes[304] + 0)
+#define ID_APublicVisibility (SFT_parser_nodes[305])
+#define COLOR_APublicVisibility (SFT_parser_nodes[306])
+#define INIT_TABLE_POS_APublicVisibility (SFT_parser_nodes[307] + 0)
+#define ID_APrivateVisibility (SFT_parser_nodes[308])
+#define COLOR_APrivateVisibility (SFT_parser_nodes[309])
+#define ATTR_parser_nodes___APrivateVisibility____n_kwprivate(recv) ATTR(recv, (SFT_parser_nodes[310] + 0))
+#define INIT_TABLE_POS_APrivateVisibility (SFT_parser_nodes[311] + 0)
+#define CALL_parser_nodes___APrivateVisibility___n_kwprivate(recv) ((parser_nodes___APrivateVisibility___n_kwprivate_t)CALL((recv), (SFT_parser_nodes[311] + 1)))
+#define ID_AProtectedVisibility (SFT_parser_nodes[312])
+#define COLOR_AProtectedVisibility (SFT_parser_nodes[313])
+#define ATTR_parser_nodes___AProtectedVisibility____n_kwprotected(recv) ATTR(recv, (SFT_parser_nodes[314] + 0))
+#define INIT_TABLE_POS_AProtectedVisibility (SFT_parser_nodes[315] + 0)
+#define CALL_parser_nodes___AProtectedVisibility___n_kwprotected(recv) ((parser_nodes___AProtectedVisibility___n_kwprotected_t)CALL((recv), (SFT_parser_nodes[315] + 1)))
+#define ID_AIntrudeVisibility (SFT_parser_nodes[316])
+#define COLOR_AIntrudeVisibility (SFT_parser_nodes[317])
+#define ATTR_parser_nodes___AIntrudeVisibility____n_kwintrude(recv) ATTR(recv, (SFT_parser_nodes[318] + 0))
+#define INIT_TABLE_POS_AIntrudeVisibility (SFT_parser_nodes[319] + 0)
+#define CALL_parser_nodes___AIntrudeVisibility___n_kwintrude(recv) ((parser_nodes___AIntrudeVisibility___n_kwintrude_t)CALL((recv), (SFT_parser_nodes[319] + 1)))
+#define ID_AClassdef (SFT_parser_nodes[320])
+#define COLOR_AClassdef (SFT_parser_nodes[321])
+#define INIT_TABLE_POS_AClassdef (SFT_parser_nodes[322] + 0)
+#define ID_AStdClassdef (SFT_parser_nodes[323])
+#define COLOR_AStdClassdef (SFT_parser_nodes[324])
+#define ATTR_parser_nodes___AStdClassdef____n_doc(recv) ATTR(recv, (SFT_parser_nodes[325] + 0))
+#define ATTR_parser_nodes___AStdClassdef____n_kwredef(recv) ATTR(recv, (SFT_parser_nodes[325] + 1))
+#define ATTR_parser_nodes___AStdClassdef____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[325] + 2))
+#define ATTR_parser_nodes___AStdClassdef____n_classkind(recv) ATTR(recv, (SFT_parser_nodes[325] + 3))
+#define ATTR_parser_nodes___AStdClassdef____n_id(recv) ATTR(recv, (SFT_parser_nodes[325] + 4))
+#define ATTR_parser_nodes___AStdClassdef____n_formaldefs(recv) ATTR(recv, (SFT_parser_nodes[325] + 5))
+#define ATTR_parser_nodes___AStdClassdef____n_superclasses(recv) ATTR(recv, (SFT_parser_nodes[325] + 6))
+#define ATTR_parser_nodes___AStdClassdef____n_propdefs(recv) ATTR(recv, (SFT_parser_nodes[325] + 7))
+#define INIT_TABLE_POS_AStdClassdef (SFT_parser_nodes[326] + 0)
+#define CALL_parser_nodes___AStdClassdef___n_doc(recv) ((parser_nodes___AStdClassdef___n_doc_t)CALL((recv), (SFT_parser_nodes[326] + 1)))
+#define CALL_parser_nodes___AStdClassdef___n_kwredef(recv) ((parser_nodes___AStdClassdef___n_kwredef_t)CALL((recv), (SFT_parser_nodes[326] + 2)))
+#define CALL_parser_nodes___AStdClassdef___n_visibility(recv) ((parser_nodes___AStdClassdef___n_visibility_t)CALL((recv), (SFT_parser_nodes[326] + 3)))
+#define CALL_parser_nodes___AStdClassdef___n_classkind(recv) ((parser_nodes___AStdClassdef___n_classkind_t)CALL((recv), (SFT_parser_nodes[326] + 4)))
+#define CALL_parser_nodes___AStdClassdef___n_id(recv) ((parser_nodes___AStdClassdef___n_id_t)CALL((recv), (SFT_parser_nodes[326] + 5)))
+#define CALL_parser_nodes___AStdClassdef___n_formaldefs(recv) ((parser_nodes___AStdClassdef___n_formaldefs_t)CALL((recv), (SFT_parser_nodes[326] + 6)))
+#define CALL_parser_nodes___AStdClassdef___n_superclasses(recv) ((parser_nodes___AStdClassdef___n_superclasses_t)CALL((recv), (SFT_parser_nodes[326] + 7)))
+#define CALL_parser_nodes___AStdClassdef___n_propdefs(recv) ((parser_nodes___AStdClassdef___n_propdefs_t)CALL((recv), (SFT_parser_nodes[326] + 8)))
+#define ID_ATopClassdef (SFT_parser_nodes[327])
+#define COLOR_ATopClassdef (SFT_parser_nodes[328])
+#define ATTR_parser_nodes___ATopClassdef____n_propdefs(recv) ATTR(recv, (SFT_parser_nodes[329] + 0))
+#define INIT_TABLE_POS_ATopClassdef (SFT_parser_nodes[330] + 0)
+#define CALL_parser_nodes___ATopClassdef___n_propdefs(recv) ((parser_nodes___ATopClassdef___n_propdefs_t)CALL((recv), (SFT_parser_nodes[330] + 1)))
+#define ID_AMainClassdef (SFT_parser_nodes[331])
+#define COLOR_AMainClassdef (SFT_parser_nodes[332])
+#define ATTR_parser_nodes___AMainClassdef____n_propdefs(recv) ATTR(recv, (SFT_parser_nodes[333] + 0))
+#define INIT_TABLE_POS_AMainClassdef (SFT_parser_nodes[334] + 0)
+#define CALL_parser_nodes___AMainClassdef___n_propdefs(recv) ((parser_nodes___AMainClassdef___n_propdefs_t)CALL((recv), (SFT_parser_nodes[334] + 1)))
+#define ID_AClasskind (SFT_parser_nodes[335])
+#define COLOR_AClasskind (SFT_parser_nodes[336])
+#define INIT_TABLE_POS_AClasskind (SFT_parser_nodes[337] + 0)
+#define ID_AConcreteClasskind (SFT_parser_nodes[338])
+#define COLOR_AConcreteClasskind (SFT_parser_nodes[339])
+#define ATTR_parser_nodes___AConcreteClasskind____n_kwclass(recv) ATTR(recv, (SFT_parser_nodes[340] + 0))
+#define INIT_TABLE_POS_AConcreteClasskind (SFT_parser_nodes[341] + 0)
+#define CALL_parser_nodes___AConcreteClasskind___n_kwclass(recv) ((parser_nodes___AConcreteClasskind___n_kwclass_t)CALL((recv), (SFT_parser_nodes[341] + 1)))
+#define ID_AAbstractClasskind (SFT_parser_nodes[342])
+#define COLOR_AAbstractClasskind (SFT_parser_nodes[343])
+#define ATTR_parser_nodes___AAbstractClasskind____n_kwabstract(recv) ATTR(recv, (SFT_parser_nodes[344] + 0))
+#define ATTR_parser_nodes___AAbstractClasskind____n_kwclass(recv) ATTR(recv, (SFT_parser_nodes[344] + 1))
+#define INIT_TABLE_POS_AAbstractClasskind (SFT_parser_nodes[345] + 0)
+#define CALL_parser_nodes___AAbstractClasskind___n_kwabstract(recv) ((parser_nodes___AAbstractClasskind___n_kwabstract_t)CALL((recv), (SFT_parser_nodes[345] + 1)))
+#define CALL_parser_nodes___AAbstractClasskind___n_kwclass(recv) ((parser_nodes___AAbstractClasskind___n_kwclass_t)CALL((recv), (SFT_parser_nodes[345] + 2)))
+#define ID_AInterfaceClasskind (SFT_parser_nodes[346])
+#define COLOR_AInterfaceClasskind (SFT_parser_nodes[347])
+#define ATTR_parser_nodes___AInterfaceClasskind____n_kwinterface(recv) ATTR(recv, (SFT_parser_nodes[348] + 0))
+#define INIT_TABLE_POS_AInterfaceClasskind (SFT_parser_nodes[349] + 0)
+#define CALL_parser_nodes___AInterfaceClasskind___n_kwinterface(recv) ((parser_nodes___AInterfaceClasskind___n_kwinterface_t)CALL((recv), (SFT_parser_nodes[349] + 1)))
+#define ID_AUniversalClasskind (SFT_parser_nodes[350])
+#define COLOR_AUniversalClasskind (SFT_parser_nodes[351])
+#define ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(recv) ATTR(recv, (SFT_parser_nodes[352] + 0))
+#define INIT_TABLE_POS_AUniversalClasskind (SFT_parser_nodes[353] + 0)
+#define CALL_parser_nodes___AUniversalClasskind___n_kwuniversal(recv) ((parser_nodes___AUniversalClasskind___n_kwuniversal_t)CALL((recv), (SFT_parser_nodes[353] + 1)))
+#define ID_AFormaldef (SFT_parser_nodes[354])
+#define COLOR_AFormaldef (SFT_parser_nodes[355])
+#define ATTR_parser_nodes___AFormaldef____n_id(recv) ATTR(recv, (SFT_parser_nodes[356] + 0))
+#define ATTR_parser_nodes___AFormaldef____n_type(recv) ATTR(recv, (SFT_parser_nodes[356] + 1))
+#define INIT_TABLE_POS_AFormaldef (SFT_parser_nodes[357] + 0)
+#define CALL_parser_nodes___AFormaldef___n_id(recv) ((parser_nodes___AFormaldef___n_id_t)CALL((recv), (SFT_parser_nodes[357] + 1)))
+#define CALL_parser_nodes___AFormaldef___n_type(recv) ((parser_nodes___AFormaldef___n_type_t)CALL((recv), (SFT_parser_nodes[357] + 2)))
+#define ID_ASuperclass (SFT_parser_nodes[358])
+#define COLOR_ASuperclass (SFT_parser_nodes[359])
+#define ATTR_parser_nodes___ASuperclass____n_kwspecial(recv) ATTR(recv, (SFT_parser_nodes[360] + 0))
+#define ATTR_parser_nodes___ASuperclass____n_kwsuper(recv) ATTR(recv, (SFT_parser_nodes[360] + 1))
+#define ATTR_parser_nodes___ASuperclass____n_type(recv) ATTR(recv, (SFT_parser_nodes[360] + 2))
+#define INIT_TABLE_POS_ASuperclass (SFT_parser_nodes[361] + 0)
+#define CALL_parser_nodes___ASuperclass___n_kwspecial(recv) ((parser_nodes___ASuperclass___n_kwspecial_t)CALL((recv), (SFT_parser_nodes[361] + 1)))
+#define CALL_parser_nodes___ASuperclass___n_kwsuper(recv) ((parser_nodes___ASuperclass___n_kwsuper_t)CALL((recv), (SFT_parser_nodes[361] + 2)))
+#define CALL_parser_nodes___ASuperclass___n_type(recv) ((parser_nodes___ASuperclass___n_type_t)CALL((recv), (SFT_parser_nodes[361] + 3)))
+#define ID_APropdef (SFT_parser_nodes[362])
+#define COLOR_APropdef (SFT_parser_nodes[363])
+#define ATTR_parser_nodes___APropdef____n_doc(recv) ATTR(recv, (SFT_parser_nodes[364] + 0))
+#define INIT_TABLE_POS_APropdef (SFT_parser_nodes[365] + 0)
+#define CALL_parser_nodes___APropdef___n_doc(recv) ((parser_nodes___APropdef___n_doc_t)CALL((recv), (SFT_parser_nodes[365] + 1)))
+#define ID_AAttrPropdef (SFT_parser_nodes[366])
+#define COLOR_AAttrPropdef (SFT_parser_nodes[367])
+#define ATTR_parser_nodes___AAttrPropdef____n_kwredef(recv) ATTR(recv, (SFT_parser_nodes[368] + 0))
+#define ATTR_parser_nodes___AAttrPropdef____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[368] + 1))
+#define ATTR_parser_nodes___AAttrPropdef____n_kwvar(recv) ATTR(recv, (SFT_parser_nodes[368] + 2))
+#define ATTR_parser_nodes___AAttrPropdef____n_id(recv) ATTR(recv, (SFT_parser_nodes[368] + 3))
+#define ATTR_parser_nodes___AAttrPropdef____n_id2(recv) ATTR(recv, (SFT_parser_nodes[368] + 4))
+#define ATTR_parser_nodes___AAttrPropdef____n_type(recv) ATTR(recv, (SFT_parser_nodes[368] + 5))
+#define ATTR_parser_nodes___AAttrPropdef____n_readable(recv) ATTR(recv, (SFT_parser_nodes[368] + 6))
+#define ATTR_parser_nodes___AAttrPropdef____n_writable(recv) ATTR(recv, (SFT_parser_nodes[368] + 7))
+#define ATTR_parser_nodes___AAttrPropdef____n_expr(recv) ATTR(recv, (SFT_parser_nodes[368] + 8))
+#define INIT_TABLE_POS_AAttrPropdef (SFT_parser_nodes[369] + 0)
+#define CALL_parser_nodes___AAttrPropdef___n_kwredef(recv) ((parser_nodes___AAttrPropdef___n_kwredef_t)CALL((recv), (SFT_parser_nodes[369] + 1)))
+#define CALL_parser_nodes___AAttrPropdef___n_visibility(recv) ((parser_nodes___AAttrPropdef___n_visibility_t)CALL((recv), (SFT_parser_nodes[369] + 2)))
+#define CALL_parser_nodes___AAttrPropdef___n_kwvar(recv) ((parser_nodes___AAttrPropdef___n_kwvar_t)CALL((recv), (SFT_parser_nodes[369] + 3)))
+#define CALL_parser_nodes___AAttrPropdef___n_id(recv) ((parser_nodes___AAttrPropdef___n_id_t)CALL((recv), (SFT_parser_nodes[369] + 4)))
+#define CALL_parser_nodes___AAttrPropdef___n_id2(recv) ((parser_nodes___AAttrPropdef___n_id2_t)CALL((recv), (SFT_parser_nodes[369] + 5)))
+#define CALL_parser_nodes___AAttrPropdef___n_type(recv) ((parser_nodes___AAttrPropdef___n_type_t)CALL((recv), (SFT_parser_nodes[369] + 6)))
+#define CALL_parser_nodes___AAttrPropdef___n_readable(recv) ((parser_nodes___AAttrPropdef___n_readable_t)CALL((recv), (SFT_parser_nodes[369] + 7)))
+#define CALL_parser_nodes___AAttrPropdef___n_writable(recv) ((parser_nodes___AAttrPropdef___n_writable_t)CALL((recv), (SFT_parser_nodes[369] + 8)))
+#define CALL_parser_nodes___AAttrPropdef___n_expr(recv) ((parser_nodes___AAttrPropdef___n_expr_t)CALL((recv), (SFT_parser_nodes[369] + 9)))
+#define ID_AMethPropdef (SFT_parser_nodes[370])
+#define COLOR_AMethPropdef (SFT_parser_nodes[371])
+#define ATTR_parser_nodes___AMethPropdef____n_kwredef(recv) ATTR(recv, (SFT_parser_nodes[372] + 0))
+#define ATTR_parser_nodes___AMethPropdef____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[372] + 1))
+#define ATTR_parser_nodes___AMethPropdef____n_methid(recv) ATTR(recv, (SFT_parser_nodes[372] + 2))
+#define ATTR_parser_nodes___AMethPropdef____n_signature(recv) ATTR(recv, (SFT_parser_nodes[372] + 3))
+#define INIT_TABLE_POS_AMethPropdef (SFT_parser_nodes[373] + 0)
+#define CALL_parser_nodes___AMethPropdef___n_kwredef(recv) ((parser_nodes___AMethPropdef___n_kwredef_t)CALL((recv), (SFT_parser_nodes[373] + 1)))
+#define CALL_parser_nodes___AMethPropdef___n_visibility(recv) ((parser_nodes___AMethPropdef___n_visibility_t)CALL((recv), (SFT_parser_nodes[373] + 2)))
+#define CALL_parser_nodes___AMethPropdef___n_methid(recv) ((parser_nodes___AMethPropdef___n_methid_t)CALL((recv), (SFT_parser_nodes[373] + 3)))
+#define CALL_parser_nodes___AMethPropdef___n_signature(recv) ((parser_nodes___AMethPropdef___n_signature_t)CALL((recv), (SFT_parser_nodes[373] + 4)))
+#define ID_ADeferredMethPropdef (SFT_parser_nodes[374])
+#define COLOR_ADeferredMethPropdef (SFT_parser_nodes[375])
+#define ATTR_parser_nodes___ADeferredMethPropdef____n_kwmeth(recv) ATTR(recv, (SFT_parser_nodes[376] + 0))
+#define INIT_TABLE_POS_ADeferredMethPropdef (SFT_parser_nodes[377] + 0)
+#define CALL_parser_nodes___ADeferredMethPropdef___n_kwmeth(recv) ((parser_nodes___ADeferredMethPropdef___n_kwmeth_t)CALL((recv), (SFT_parser_nodes[377] + 1)))
+#define ID_AInternMethPropdef (SFT_parser_nodes[378])
+#define COLOR_AInternMethPropdef (SFT_parser_nodes[379])
+#define ATTR_parser_nodes___AInternMethPropdef____n_kwmeth(recv) ATTR(recv, (SFT_parser_nodes[380] + 0))
+#define INIT_TABLE_POS_AInternMethPropdef (SFT_parser_nodes[381] + 0)
+#define CALL_parser_nodes___AInternMethPropdef___n_kwmeth(recv) ((parser_nodes___AInternMethPropdef___n_kwmeth_t)CALL((recv), (SFT_parser_nodes[381] + 1)))
+#define ID_AExternMethPropdef (SFT_parser_nodes[382])
+#define COLOR_AExternMethPropdef (SFT_parser_nodes[383])
+#define ATTR_parser_nodes___AExternMethPropdef____n_kwmeth(recv) ATTR(recv, (SFT_parser_nodes[384] + 0))
+#define ATTR_parser_nodes___AExternMethPropdef____n_extern(recv) ATTR(recv, (SFT_parser_nodes[384] + 1))
+#define INIT_TABLE_POS_AExternMethPropdef (SFT_parser_nodes[385] + 0)
+#define CALL_parser_nodes___AExternMethPropdef___n_kwmeth(recv) ((parser_nodes___AExternMethPropdef___n_kwmeth_t)CALL((recv), (SFT_parser_nodes[385] + 1)))
+#define CALL_parser_nodes___AExternMethPropdef___n_extern(recv) ((parser_nodes___AExternMethPropdef___n_extern_t)CALL((recv), (SFT_parser_nodes[385] + 2)))
+#define ID_AConcreteMethPropdef (SFT_parser_nodes[386])
+#define COLOR_AConcreteMethPropdef (SFT_parser_nodes[387])
+#define ATTR_parser_nodes___AConcreteMethPropdef____n_kwmeth(recv) ATTR(recv, (SFT_parser_nodes[388] + 0))
+#define ATTR_parser_nodes___AConcreteMethPropdef____n_block(recv) ATTR(recv, (SFT_parser_nodes[388] + 1))
+#define INIT_TABLE_POS_AConcreteMethPropdef (SFT_parser_nodes[389] + 0)
+#define CALL_parser_nodes___AConcreteMethPropdef___n_kwmeth(recv) ((parser_nodes___AConcreteMethPropdef___n_kwmeth_t)CALL((recv), (SFT_parser_nodes[389] + 1)))
+#define CALL_parser_nodes___AConcreteMethPropdef___n_block(recv) ((parser_nodes___AConcreteMethPropdef___n_block_t)CALL((recv), (SFT_parser_nodes[389] + 2)))
+#define ID_AConcreteInitPropdef (SFT_parser_nodes[390])
+#define COLOR_AConcreteInitPropdef (SFT_parser_nodes[391])
+#define ATTR_parser_nodes___AConcreteInitPropdef____n_kwinit(recv) ATTR(recv, (SFT_parser_nodes[392] + 0))
+#define INIT_TABLE_POS_AConcreteInitPropdef (SFT_parser_nodes[393] + 0)
+#define CALL_parser_nodes___AConcreteInitPropdef___n_kwinit(recv) ((parser_nodes___AConcreteInitPropdef___n_kwinit_t)CALL((recv), (SFT_parser_nodes[393] + 1)))
+#define ID_AMainMethPropdef (SFT_parser_nodes[394])
+#define COLOR_AMainMethPropdef (SFT_parser_nodes[395])
+#define INIT_TABLE_POS_AMainMethPropdef (SFT_parser_nodes[396] + 0)
+#define ID_ATypePropdef (SFT_parser_nodes[397])
+#define COLOR_ATypePropdef (SFT_parser_nodes[398])
+#define ATTR_parser_nodes___ATypePropdef____n_kwredef(recv) ATTR(recv, (SFT_parser_nodes[399] + 0))
+#define ATTR_parser_nodes___ATypePropdef____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[399] + 1))
+#define ATTR_parser_nodes___ATypePropdef____n_kwtype(recv) ATTR(recv, (SFT_parser_nodes[399] + 2))
+#define ATTR_parser_nodes___ATypePropdef____n_id(recv) ATTR(recv, (SFT_parser_nodes[399] + 3))
+#define ATTR_parser_nodes___ATypePropdef____n_type(recv) ATTR(recv, (SFT_parser_nodes[399] + 4))
+#define INIT_TABLE_POS_ATypePropdef (SFT_parser_nodes[400] + 0)
+#define CALL_parser_nodes___ATypePropdef___n_kwredef(recv) ((parser_nodes___ATypePropdef___n_kwredef_t)CALL((recv), (SFT_parser_nodes[400] + 1)))
+#define CALL_parser_nodes___ATypePropdef___n_visibility(recv) ((parser_nodes___ATypePropdef___n_visibility_t)CALL((recv), (SFT_parser_nodes[400] + 2)))
+#define CALL_parser_nodes___ATypePropdef___n_kwtype(recv) ((parser_nodes___ATypePropdef___n_kwtype_t)CALL((recv), (SFT_parser_nodes[400] + 3)))
+#define CALL_parser_nodes___ATypePropdef___n_id(recv) ((parser_nodes___ATypePropdef___n_id_t)CALL((recv), (SFT_parser_nodes[400] + 4)))
+#define CALL_parser_nodes___ATypePropdef___n_type(recv) ((parser_nodes___ATypePropdef___n_type_t)CALL((recv), (SFT_parser_nodes[400] + 5)))
+#define ID_AAble (SFT_parser_nodes[401])
+#define COLOR_AAble (SFT_parser_nodes[402])
+#define ATTR_parser_nodes___AAble____n_visibility(recv) ATTR(recv, (SFT_parser_nodes[403] + 0))
+#define ATTR_parser_nodes___AAble____n_kwredef(recv) ATTR(recv, (SFT_parser_nodes[403] + 1))
+#define INIT_TABLE_POS_AAble (SFT_parser_nodes[404] + 0)
+#define CALL_parser_nodes___AAble___n_visibility(recv) ((parser_nodes___AAble___n_visibility_t)CALL((recv), (SFT_parser_nodes[404] + 1)))
+#define CALL_parser_nodes___AAble___n_kwredef(recv) ((parser_nodes___AAble___n_kwredef_t)CALL((recv), (SFT_parser_nodes[404] + 2)))
+#define ID_AReadAble (SFT_parser_nodes[405])
+#define COLOR_AReadAble (SFT_parser_nodes[406])
+#define ATTR_parser_nodes___AReadAble____n_kwreadable(recv) ATTR(recv, (SFT_parser_nodes[407] + 0))
+#define INIT_TABLE_POS_AReadAble (SFT_parser_nodes[408] + 0)
+#define CALL_parser_nodes___AReadAble___n_kwreadable(recv) ((parser_nodes___AReadAble___n_kwreadable_t)CALL((recv), (SFT_parser_nodes[408] + 1)))
+#define ID_AWriteAble (SFT_parser_nodes[409])
+#define COLOR_AWriteAble (SFT_parser_nodes[410])
+#define ATTR_parser_nodes___AWriteAble____n_kwwritable(recv) ATTR(recv, (SFT_parser_nodes[411] + 0))
+#define INIT_TABLE_POS_AWriteAble (SFT_parser_nodes[412] + 0)
+#define CALL_parser_nodes___AWriteAble___n_kwwritable(recv) ((parser_nodes___AWriteAble___n_kwwritable_t)CALL((recv), (SFT_parser_nodes[412] + 1)))
+#define ID_AMethid (SFT_parser_nodes[413])
+#define COLOR_AMethid (SFT_parser_nodes[414])
+#define INIT_TABLE_POS_AMethid (SFT_parser_nodes[415] + 0)
+#define ID_AIdMethid (SFT_parser_nodes[416])
+#define COLOR_AIdMethid (SFT_parser_nodes[417])
+#define ATTR_parser_nodes___AIdMethid____n_id(recv) ATTR(recv, (SFT_parser_nodes[418] + 0))
+#define INIT_TABLE_POS_AIdMethid (SFT_parser_nodes[419] + 0)
+#define CALL_parser_nodes___AIdMethid___n_id(recv) ((parser_nodes___AIdMethid___n_id_t)CALL((recv), (SFT_parser_nodes[419] + 1)))
+#define ID_APlusMethid (SFT_parser_nodes[420])
+#define COLOR_APlusMethid (SFT_parser_nodes[421])
+#define ATTR_parser_nodes___APlusMethid____n_plus(recv) ATTR(recv, (SFT_parser_nodes[422] + 0))
+#define INIT_TABLE_POS_APlusMethid (SFT_parser_nodes[423] + 0)
+#define CALL_parser_nodes___APlusMethid___n_plus(recv) ((parser_nodes___APlusMethid___n_plus_t)CALL((recv), (SFT_parser_nodes[423] + 1)))
+#define ID_AMinusMethid (SFT_parser_nodes[424])
+#define COLOR_AMinusMethid (SFT_parser_nodes[425])
+#define ATTR_parser_nodes___AMinusMethid____n_minus(recv) ATTR(recv, (SFT_parser_nodes[426] + 0))
+#define INIT_TABLE_POS_AMinusMethid (SFT_parser_nodes[427] + 0)
+#define CALL_parser_nodes___AMinusMethid___n_minus(recv) ((parser_nodes___AMinusMethid___n_minus_t)CALL((recv), (SFT_parser_nodes[427] + 1)))
+#define ID_AStarMethid (SFT_parser_nodes[428])
+#define COLOR_AStarMethid (SFT_parser_nodes[429])
+#define ATTR_parser_nodes___AStarMethid____n_star(recv) ATTR(recv, (SFT_parser_nodes[430] + 0))
+#define INIT_TABLE_POS_AStarMethid (SFT_parser_nodes[431] + 0)
+#define CALL_parser_nodes___AStarMethid___n_star(recv) ((parser_nodes___AStarMethid___n_star_t)CALL((recv), (SFT_parser_nodes[431] + 1)))
+#define ID_ASlashMethid (SFT_parser_nodes[432])
+#define COLOR_ASlashMethid (SFT_parser_nodes[433])
+#define ATTR_parser_nodes___ASlashMethid____n_slash(recv) ATTR(recv, (SFT_parser_nodes[434] + 0))
+#define INIT_TABLE_POS_ASlashMethid (SFT_parser_nodes[435] + 0)
+#define CALL_parser_nodes___ASlashMethid___n_slash(recv) ((parser_nodes___ASlashMethid___n_slash_t)CALL((recv), (SFT_parser_nodes[435] + 1)))
+#define ID_APercentMethid (SFT_parser_nodes[436])
+#define COLOR_APercentMethid (SFT_parser_nodes[437])
+#define ATTR_parser_nodes___APercentMethid____n_percent(recv) ATTR(recv, (SFT_parser_nodes[438] + 0))
+#define INIT_TABLE_POS_APercentMethid (SFT_parser_nodes[439] + 0)
+#define CALL_parser_nodes___APercentMethid___n_percent(recv) ((parser_nodes___APercentMethid___n_percent_t)CALL((recv), (SFT_parser_nodes[439] + 1)))
+#define ID_AEqMethid (SFT_parser_nodes[440])
+#define COLOR_AEqMethid (SFT_parser_nodes[441])
+#define ATTR_parser_nodes___AEqMethid____n_eq(recv) ATTR(recv, (SFT_parser_nodes[442] + 0))
+#define INIT_TABLE_POS_AEqMethid (SFT_parser_nodes[443] + 0)
+#define CALL_parser_nodes___AEqMethid___n_eq(recv) ((parser_nodes___AEqMethid___n_eq_t)CALL((recv), (SFT_parser_nodes[443] + 1)))
+#define ID_ANeMethid (SFT_parser_nodes[444])
+#define COLOR_ANeMethid (SFT_parser_nodes[445])
+#define ATTR_parser_nodes___ANeMethid____n_ne(recv) ATTR(recv, (SFT_parser_nodes[446] + 0))
+#define INIT_TABLE_POS_ANeMethid (SFT_parser_nodes[447] + 0)
+#define CALL_parser_nodes___ANeMethid___n_ne(recv) ((parser_nodes___ANeMethid___n_ne_t)CALL((recv), (SFT_parser_nodes[447] + 1)))
+#define ID_ALeMethid (SFT_parser_nodes[448])
+#define COLOR_ALeMethid (SFT_parser_nodes[449])
+#define ATTR_parser_nodes___ALeMethid____n_le(recv) ATTR(recv, (SFT_parser_nodes[450] + 0))
+#define INIT_TABLE_POS_ALeMethid (SFT_parser_nodes[451] + 0)
+#define CALL_parser_nodes___ALeMethid___n_le(recv) ((parser_nodes___ALeMethid___n_le_t)CALL((recv), (SFT_parser_nodes[451] + 1)))
+#define ID_AGeMethid (SFT_parser_nodes[452])
+#define COLOR_AGeMethid (SFT_parser_nodes[453])
+#define ATTR_parser_nodes___AGeMethid____n_ge(recv) ATTR(recv, (SFT_parser_nodes[454] + 0))
+#define INIT_TABLE_POS_AGeMethid (SFT_parser_nodes[455] + 0)
+#define CALL_parser_nodes___AGeMethid___n_ge(recv) ((parser_nodes___AGeMethid___n_ge_t)CALL((recv), (SFT_parser_nodes[455] + 1)))
+#define ID_ALtMethid (SFT_parser_nodes[456])
+#define COLOR_ALtMethid (SFT_parser_nodes[457])
+#define ATTR_parser_nodes___ALtMethid____n_lt(recv) ATTR(recv, (SFT_parser_nodes[458] + 0))
+#define INIT_TABLE_POS_ALtMethid (SFT_parser_nodes[459] + 0)
+#define CALL_parser_nodes___ALtMethid___n_lt(recv) ((parser_nodes___ALtMethid___n_lt_t)CALL((recv), (SFT_parser_nodes[459] + 1)))
+#define ID_AGtMethid (SFT_parser_nodes[460])
+#define COLOR_AGtMethid (SFT_parser_nodes[461])
+#define ATTR_parser_nodes___AGtMethid____n_gt(recv) ATTR(recv, (SFT_parser_nodes[462] + 0))
+#define INIT_TABLE_POS_AGtMethid (SFT_parser_nodes[463] + 0)
+#define CALL_parser_nodes___AGtMethid___n_gt(recv) ((parser_nodes___AGtMethid___n_gt_t)CALL((recv), (SFT_parser_nodes[463] + 1)))
+#define ID_ALlMethid (SFT_parser_nodes[464])
+#define COLOR_ALlMethid (SFT_parser_nodes[465])
+#define ATTR_parser_nodes___ALlMethid____n_ll(recv) ATTR(recv, (SFT_parser_nodes[466] + 0))
+#define INIT_TABLE_POS_ALlMethid (SFT_parser_nodes[467] + 0)
+#define CALL_parser_nodes___ALlMethid___n_ll(recv) ((parser_nodes___ALlMethid___n_ll_t)CALL((recv), (SFT_parser_nodes[467] + 1)))
+#define CALL_parser_nodes___ALlMethid___n_ll__eq(recv) ((parser_nodes___ALlMethid___n_ll__eq_t)CALL((recv), (SFT_parser_nodes[467] + 2)))
+#define ID_AGgMethid (SFT_parser_nodes[468])
+#define COLOR_AGgMethid (SFT_parser_nodes[469])
+#define ATTR_parser_nodes___AGgMethid____n_gg(recv) ATTR(recv, (SFT_parser_nodes[470] + 0))
+#define INIT_TABLE_POS_AGgMethid (SFT_parser_nodes[471] + 0)
+#define CALL_parser_nodes___AGgMethid___n_gg(recv) ((parser_nodes___AGgMethid___n_gg_t)CALL((recv), (SFT_parser_nodes[471] + 1)))
+#define CALL_parser_nodes___AGgMethid___n_gg__eq(recv) ((parser_nodes___AGgMethid___n_gg__eq_t)CALL((recv), (SFT_parser_nodes[471] + 2)))
+#define ID_ABraMethid (SFT_parser_nodes[472])
+#define COLOR_ABraMethid (SFT_parser_nodes[473])
+#define ATTR_parser_nodes___ABraMethid____n_obra(recv) ATTR(recv, (SFT_parser_nodes[474] + 0))
+#define ATTR_parser_nodes___ABraMethid____n_cbra(recv) ATTR(recv, (SFT_parser_nodes[474] + 1))
+#define INIT_TABLE_POS_ABraMethid (SFT_parser_nodes[475] + 0)
+#define CALL_parser_nodes___ABraMethid___n_obra(recv) ((parser_nodes___ABraMethid___n_obra_t)CALL((recv), (SFT_parser_nodes[475] + 1)))
+#define CALL_parser_nodes___ABraMethid___n_cbra(recv) ((parser_nodes___ABraMethid___n_cbra_t)CALL((recv), (SFT_parser_nodes[475] + 2)))
+#define ID_AStarshipMethid (SFT_parser_nodes[476])
+#define COLOR_AStarshipMethid (SFT_parser_nodes[477])
+#define ATTR_parser_nodes___AStarshipMethid____n_starship(recv) ATTR(recv, (SFT_parser_nodes[478] + 0))
+#define INIT_TABLE_POS_AStarshipMethid (SFT_parser_nodes[479] + 0)
+#define CALL_parser_nodes___AStarshipMethid___n_starship(recv) ((parser_nodes___AStarshipMethid___n_starship_t)CALL((recv), (SFT_parser_nodes[479] + 1)))
+#define ID_AAssignMethid (SFT_parser_nodes[480])
+#define COLOR_AAssignMethid (SFT_parser_nodes[481])
+#define ATTR_parser_nodes___AAssignMethid____n_id(recv) ATTR(recv, (SFT_parser_nodes[482] + 0))
+#define ATTR_parser_nodes___AAssignMethid____n_assign(recv) ATTR(recv, (SFT_parser_nodes[482] + 1))
+#define INIT_TABLE_POS_AAssignMethid (SFT_parser_nodes[483] + 0)
+#define CALL_parser_nodes___AAssignMethid___n_id(recv) ((parser_nodes___AAssignMethid___n_id_t)CALL((recv), (SFT_parser_nodes[483] + 1)))
+#define CALL_parser_nodes___AAssignMethid___n_assign(recv) ((parser_nodes___AAssignMethid___n_assign_t)CALL((recv), (SFT_parser_nodes[483] + 2)))
+#define ID_ABraassignMethid (SFT_parser_nodes[484])
+#define COLOR_ABraassignMethid (SFT_parser_nodes[485])
+#define ATTR_parser_nodes___ABraassignMethid____n_obra(recv) ATTR(recv, (SFT_parser_nodes[486] + 0))
+#define ATTR_parser_nodes___ABraassignMethid____n_cbra(recv) ATTR(recv, (SFT_parser_nodes[486] + 1))
+#define ATTR_parser_nodes___ABraassignMethid____n_assign(recv) ATTR(recv, (SFT_parser_nodes[486] + 2))
+#define INIT_TABLE_POS_ABraassignMethid (SFT_parser_nodes[487] + 0)
+#define CALL_parser_nodes___ABraassignMethid___n_obra(recv) ((parser_nodes___ABraassignMethid___n_obra_t)CALL((recv), (SFT_parser_nodes[487] + 1)))
+#define CALL_parser_nodes___ABraassignMethid___n_cbra(recv) ((parser_nodes___ABraassignMethid___n_cbra_t)CALL((recv), (SFT_parser_nodes[487] + 2)))
+#define CALL_parser_nodes___ABraassignMethid___n_assign(recv) ((parser_nodes___ABraassignMethid___n_assign_t)CALL((recv), (SFT_parser_nodes[487] + 3)))
+#define ID_ASignature (SFT_parser_nodes[488])
+#define COLOR_ASignature (SFT_parser_nodes[489])
+#define ATTR_parser_nodes___ASignature____n_params(recv) ATTR(recv, (SFT_parser_nodes[490] + 0))
+#define ATTR_parser_nodes___ASignature____n_type(recv) ATTR(recv, (SFT_parser_nodes[490] + 1))
+#define ATTR_parser_nodes___ASignature____n_closure_decls(recv) ATTR(recv, (SFT_parser_nodes[490] + 2))
+#define INIT_TABLE_POS_ASignature (SFT_parser_nodes[491] + 0)
+#define CALL_parser_nodes___ASignature___n_params(recv) ((parser_nodes___ASignature___n_params_t)CALL((recv), (SFT_parser_nodes[491] + 1)))
+#define CALL_parser_nodes___ASignature___n_type(recv) ((parser_nodes___ASignature___n_type_t)CALL((recv), (SFT_parser_nodes[491] + 2)))
+#define CALL_parser_nodes___ASignature___n_closure_decls(recv) ((parser_nodes___ASignature___n_closure_decls_t)CALL((recv), (SFT_parser_nodes[491] + 3)))
+#define ID_AParam (SFT_parser_nodes[492])
+#define COLOR_AParam (SFT_parser_nodes[493])
+#define ATTR_parser_nodes___AParam____n_id(recv) ATTR(recv, (SFT_parser_nodes[494] + 0))
+#define ATTR_parser_nodes___AParam____n_type(recv) ATTR(recv, (SFT_parser_nodes[494] + 1))
+#define ATTR_parser_nodes___AParam____n_dotdotdot(recv) ATTR(recv, (SFT_parser_nodes[494] + 2))
+#define INIT_TABLE_POS_AParam (SFT_parser_nodes[495] + 0)
+#define CALL_parser_nodes___AParam___n_id(recv) ((parser_nodes___AParam___n_id_t)CALL((recv), (SFT_parser_nodes[495] + 1)))
+#define CALL_parser_nodes___AParam___n_type(recv) ((parser_nodes___AParam___n_type_t)CALL((recv), (SFT_parser_nodes[495] + 2)))
+#define CALL_parser_nodes___AParam___n_dotdotdot(recv) ((parser_nodes___AParam___n_dotdotdot_t)CALL((recv), (SFT_parser_nodes[495] + 3)))
+#define ID_AClosureDecl (SFT_parser_nodes[496])
+#define COLOR_AClosureDecl (SFT_parser_nodes[497])
+#define ATTR_parser_nodes___AClosureDecl____n_kwbreak(recv) ATTR(recv, (SFT_parser_nodes[498] + 0))
+#define ATTR_parser_nodes___AClosureDecl____n_bang(recv) ATTR(recv, (SFT_parser_nodes[498] + 1))
+#define ATTR_parser_nodes___AClosureDecl____n_id(recv) ATTR(recv, (SFT_parser_nodes[498] + 2))
+#define ATTR_parser_nodes___AClosureDecl____n_signature(recv) ATTR(recv, (SFT_parser_nodes[498] + 3))
+#define ATTR_parser_nodes___AClosureDecl____n_expr(recv) ATTR(recv, (SFT_parser_nodes[498] + 4))
+#define INIT_TABLE_POS_AClosureDecl (SFT_parser_nodes[499] + 0)
+#define CALL_parser_nodes___AClosureDecl___n_kwbreak(recv) ((parser_nodes___AClosureDecl___n_kwbreak_t)CALL((recv), (SFT_parser_nodes[499] + 1)))
+#define CALL_parser_nodes___AClosureDecl___n_bang(recv) ((parser_nodes___AClosureDecl___n_bang_t)CALL((recv), (SFT_parser_nodes[499] + 2)))
+#define CALL_parser_nodes___AClosureDecl___n_id(recv) ((parser_nodes___AClosureDecl___n_id_t)CALL((recv), (SFT_parser_nodes[499] + 3)))
+#define CALL_parser_nodes___AClosureDecl___n_signature(recv) ((parser_nodes___AClosureDecl___n_signature_t)CALL((recv), (SFT_parser_nodes[499] + 4)))
+#define CALL_parser_nodes___AClosureDecl___n_expr(recv) ((parser_nodes___AClosureDecl___n_expr_t)CALL((recv), (SFT_parser_nodes[499] + 5)))
+#define ID_AType (SFT_parser_nodes[500])
+#define COLOR_AType (SFT_parser_nodes[501])
+#define ATTR_parser_nodes___AType____n_kwnullable(recv) ATTR(recv, (SFT_parser_nodes[502] + 0))
+#define ATTR_parser_nodes___AType____n_id(recv) ATTR(recv, (SFT_parser_nodes[502] + 1))
+#define ATTR_parser_nodes___AType____n_types(recv) ATTR(recv, (SFT_parser_nodes[502] + 2))
+#define INIT_TABLE_POS_AType (SFT_parser_nodes[503] + 0)
+#define CALL_parser_nodes___AType___n_kwnullable(recv) ((parser_nodes___AType___n_kwnullable_t)CALL((recv), (SFT_parser_nodes[503] + 1)))
+#define CALL_parser_nodes___AType___n_id(recv) ((parser_nodes___AType___n_id_t)CALL((recv), (SFT_parser_nodes[503] + 2)))
+#define CALL_parser_nodes___AType___n_types(recv) ((parser_nodes___AType___n_types_t)CALL((recv), (SFT_parser_nodes[503] + 3)))
+#define ID_ALabel (SFT_parser_nodes[504])
+#define COLOR_ALabel (SFT_parser_nodes[505])
+#define ATTR_parser_nodes___ALabel____n_kwlabel(recv) ATTR(recv, (SFT_parser_nodes[506] + 0))
+#define ATTR_parser_nodes___ALabel____n_id(recv) ATTR(recv, (SFT_parser_nodes[506] + 1))
+#define INIT_TABLE_POS_ALabel (SFT_parser_nodes[507] + 0)
+#define CALL_parser_nodes___ALabel___n_kwlabel(recv) ((parser_nodes___ALabel___n_kwlabel_t)CALL((recv), (SFT_parser_nodes[507] + 1)))
+#define CALL_parser_nodes___ALabel___n_id(recv) ((parser_nodes___ALabel___n_id_t)CALL((recv), (SFT_parser_nodes[507] + 2)))
+#define ID_AExpr (SFT_parser_nodes[508])
+#define COLOR_AExpr (SFT_parser_nodes[509])
+#define INIT_TABLE_POS_AExpr (SFT_parser_nodes[510] + 0)
+#define ID_ABlockExpr (SFT_parser_nodes[511])
+#define COLOR_ABlockExpr (SFT_parser_nodes[512])
+#define ATTR_parser_nodes___ABlockExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[513] + 0))
+#define INIT_TABLE_POS_ABlockExpr (SFT_parser_nodes[514] + 0)
+#define CALL_parser_nodes___ABlockExpr___n_expr(recv) ((parser_nodes___ABlockExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[514] + 1)))
+#define ID_AVardeclExpr (SFT_parser_nodes[515])
+#define COLOR_AVardeclExpr (SFT_parser_nodes[516])
+#define ATTR_parser_nodes___AVardeclExpr____n_kwvar(recv) ATTR(recv, (SFT_parser_nodes[517] + 0))
+#define ATTR_parser_nodes___AVardeclExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[517] + 1))
+#define ATTR_parser_nodes___AVardeclExpr____n_type(recv) ATTR(recv, (SFT_parser_nodes[517] + 2))
+#define ATTR_parser_nodes___AVardeclExpr____n_assign(recv) ATTR(recv, (SFT_parser_nodes[517] + 3))
+#define ATTR_parser_nodes___AVardeclExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[517] + 4))
+#define INIT_TABLE_POS_AVardeclExpr (SFT_parser_nodes[518] + 0)
+#define CALL_parser_nodes___AVardeclExpr___n_kwvar(recv) ((parser_nodes___AVardeclExpr___n_kwvar_t)CALL((recv), (SFT_parser_nodes[518] + 1)))
+#define CALL_parser_nodes___AVardeclExpr___n_id(recv) ((parser_nodes___AVardeclExpr___n_id_t)CALL((recv), (SFT_parser_nodes[518] + 2)))
+#define CALL_parser_nodes___AVardeclExpr___n_type(recv) ((parser_nodes___AVardeclExpr___n_type_t)CALL((recv), (SFT_parser_nodes[518] + 3)))
+#define CALL_parser_nodes___AVardeclExpr___n_assign(recv) ((parser_nodes___AVardeclExpr___n_assign_t)CALL((recv), (SFT_parser_nodes[518] + 4)))
+#define CALL_parser_nodes___AVardeclExpr___n_expr(recv) ((parser_nodes___AVardeclExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[518] + 5)))
+#define ID_AReturnExpr (SFT_parser_nodes[519])
+#define COLOR_AReturnExpr (SFT_parser_nodes[520])
+#define ATTR_parser_nodes___AReturnExpr____n_kwreturn(recv) ATTR(recv, (SFT_parser_nodes[521] + 0))
+#define ATTR_parser_nodes___AReturnExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[521] + 1))
+#define INIT_TABLE_POS_AReturnExpr (SFT_parser_nodes[522] + 0)
+#define CALL_parser_nodes___AReturnExpr___n_kwreturn(recv) ((parser_nodes___AReturnExpr___n_kwreturn_t)CALL((recv), (SFT_parser_nodes[522] + 1)))
+#define CALL_parser_nodes___AReturnExpr___n_expr(recv) ((parser_nodes___AReturnExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[522] + 2)))
+#define ID_ALabelable (SFT_parser_nodes[523])
+#define COLOR_ALabelable (SFT_parser_nodes[524])
+#define ATTR_parser_nodes___ALabelable____n_label(recv) ATTR(recv, (SFT_parser_nodes[525] + 0))
+#define INIT_TABLE_POS_ALabelable (SFT_parser_nodes[526] + 0)
+#define CALL_parser_nodes___ALabelable___n_label(recv) ((parser_nodes___ALabelable___n_label_t)CALL((recv), (SFT_parser_nodes[526] + 1)))
+#define ID_ABreakExpr (SFT_parser_nodes[527])
+#define COLOR_ABreakExpr (SFT_parser_nodes[528])
+#define ATTR_parser_nodes___ABreakExpr____n_kwbreak(recv) ATTR(recv, (SFT_parser_nodes[529] + 0))
+#define ATTR_parser_nodes___ABreakExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[529] + 1))
+#define INIT_TABLE_POS_ABreakExpr (SFT_parser_nodes[530] + 0)
+#define CALL_parser_nodes___ABreakExpr___n_kwbreak(recv) ((parser_nodes___ABreakExpr___n_kwbreak_t)CALL((recv), (SFT_parser_nodes[530] + 1)))
+#define CALL_parser_nodes___ABreakExpr___n_expr(recv) ((parser_nodes___ABreakExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[530] + 2)))
+#define ID_AAbortExpr (SFT_parser_nodes[531])
+#define COLOR_AAbortExpr (SFT_parser_nodes[532])
+#define ATTR_parser_nodes___AAbortExpr____n_kwabort(recv) ATTR(recv, (SFT_parser_nodes[533] + 0))
+#define INIT_TABLE_POS_AAbortExpr (SFT_parser_nodes[534] + 0)
+#define CALL_parser_nodes___AAbortExpr___n_kwabort(recv) ((parser_nodes___AAbortExpr___n_kwabort_t)CALL((recv), (SFT_parser_nodes[534] + 1)))
+#define ID_AContinueExpr (SFT_parser_nodes[535])
+#define COLOR_AContinueExpr (SFT_parser_nodes[536])
+#define ATTR_parser_nodes___AContinueExpr____n_kwcontinue(recv) ATTR(recv, (SFT_parser_nodes[537] + 0))
+#define ATTR_parser_nodes___AContinueExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[537] + 1))
+#define INIT_TABLE_POS_AContinueExpr (SFT_parser_nodes[538] + 0)
+#define CALL_parser_nodes___AContinueExpr___n_kwcontinue(recv) ((parser_nodes___AContinueExpr___n_kwcontinue_t)CALL((recv), (SFT_parser_nodes[538] + 1)))
+#define CALL_parser_nodes___AContinueExpr___n_expr(recv) ((parser_nodes___AContinueExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[538] + 2)))
+#define ID_ADoExpr (SFT_parser_nodes[539])
+#define COLOR_ADoExpr (SFT_parser_nodes[540])
+#define ATTR_parser_nodes___ADoExpr____n_kwdo(recv) ATTR(recv, (SFT_parser_nodes[541] + 0))
+#define ATTR_parser_nodes___ADoExpr____n_block(recv) ATTR(recv, (SFT_parser_nodes[541] + 1))
+#define INIT_TABLE_POS_ADoExpr (SFT_parser_nodes[542] + 0)
+#define CALL_parser_nodes___ADoExpr___n_kwdo(recv) ((parser_nodes___ADoExpr___n_kwdo_t)CALL((recv), (SFT_parser_nodes[542] + 1)))
+#define CALL_parser_nodes___ADoExpr___n_block(recv) ((parser_nodes___ADoExpr___n_block_t)CALL((recv), (SFT_parser_nodes[542] + 2)))
+#define ID_AIfExpr (SFT_parser_nodes[543])
+#define COLOR_AIfExpr (SFT_parser_nodes[544])
+#define ATTR_parser_nodes___AIfExpr____n_kwif(recv) ATTR(recv, (SFT_parser_nodes[545] + 0))
+#define ATTR_parser_nodes___AIfExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[545] + 1))
+#define ATTR_parser_nodes___AIfExpr____n_then(recv) ATTR(recv, (SFT_parser_nodes[545] + 2))
+#define ATTR_parser_nodes___AIfExpr____n_else(recv) ATTR(recv, (SFT_parser_nodes[545] + 3))
+#define INIT_TABLE_POS_AIfExpr (SFT_parser_nodes[546] + 0)
+#define CALL_parser_nodes___AIfExpr___n_kwif(recv) ((parser_nodes___AIfExpr___n_kwif_t)CALL((recv), (SFT_parser_nodes[546] + 1)))
+#define CALL_parser_nodes___AIfExpr___n_expr(recv) ((parser_nodes___AIfExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[546] + 2)))
+#define CALL_parser_nodes___AIfExpr___n_then(recv) ((parser_nodes___AIfExpr___n_then_t)CALL((recv), (SFT_parser_nodes[546] + 3)))
+#define CALL_parser_nodes___AIfExpr___n_else(recv) ((parser_nodes___AIfExpr___n_else_t)CALL((recv), (SFT_parser_nodes[546] + 4)))
+#define ID_AIfexprExpr (SFT_parser_nodes[547])
+#define COLOR_AIfexprExpr (SFT_parser_nodes[548])
+#define ATTR_parser_nodes___AIfexprExpr____n_kwif(recv) ATTR(recv, (SFT_parser_nodes[549] + 0))
+#define ATTR_parser_nodes___AIfexprExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[549] + 1))
+#define ATTR_parser_nodes___AIfexprExpr____n_kwthen(recv) ATTR(recv, (SFT_parser_nodes[549] + 2))
+#define ATTR_parser_nodes___AIfexprExpr____n_then(recv) ATTR(recv, (SFT_parser_nodes[549] + 3))
+#define ATTR_parser_nodes___AIfexprExpr____n_kwelse(recv) ATTR(recv, (SFT_parser_nodes[549] + 4))
+#define ATTR_parser_nodes___AIfexprExpr____n_else(recv) ATTR(recv, (SFT_parser_nodes[549] + 5))
+#define INIT_TABLE_POS_AIfexprExpr (SFT_parser_nodes[550] + 0)
+#define CALL_parser_nodes___AIfexprExpr___n_kwif(recv) ((parser_nodes___AIfexprExpr___n_kwif_t)CALL((recv), (SFT_parser_nodes[550] + 1)))
+#define CALL_parser_nodes___AIfexprExpr___n_expr(recv) ((parser_nodes___AIfexprExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[550] + 2)))
+#define CALL_parser_nodes___AIfexprExpr___n_kwthen(recv) ((parser_nodes___AIfexprExpr___n_kwthen_t)CALL((recv), (SFT_parser_nodes[550] + 3)))
+#define CALL_parser_nodes___AIfexprExpr___n_then(recv) ((parser_nodes___AIfexprExpr___n_then_t)CALL((recv), (SFT_parser_nodes[550] + 4)))
+#define CALL_parser_nodes___AIfexprExpr___n_kwelse(recv) ((parser_nodes___AIfexprExpr___n_kwelse_t)CALL((recv), (SFT_parser_nodes[550] + 5)))
+#define CALL_parser_nodes___AIfexprExpr___n_else(recv) ((parser_nodes___AIfexprExpr___n_else_t)CALL((recv), (SFT_parser_nodes[550] + 6)))
+#define ID_AWhileExpr (SFT_parser_nodes[551])
+#define COLOR_AWhileExpr (SFT_parser_nodes[552])
+#define ATTR_parser_nodes___AWhileExpr____n_kwwhile(recv) ATTR(recv, (SFT_parser_nodes[553] + 0))
+#define ATTR_parser_nodes___AWhileExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[553] + 1))
+#define ATTR_parser_nodes___AWhileExpr____n_kwdo(recv) ATTR(recv, (SFT_parser_nodes[553] + 2))
+#define ATTR_parser_nodes___AWhileExpr____n_block(recv) ATTR(recv, (SFT_parser_nodes[553] + 3))
+#define INIT_TABLE_POS_AWhileExpr (SFT_parser_nodes[554] + 0)
+#define CALL_parser_nodes___AWhileExpr___n_kwwhile(recv) ((parser_nodes___AWhileExpr___n_kwwhile_t)CALL((recv), (SFT_parser_nodes[554] + 1)))
+#define CALL_parser_nodes___AWhileExpr___n_expr(recv) ((parser_nodes___AWhileExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[554] + 2)))
+#define CALL_parser_nodes___AWhileExpr___n_kwdo(recv) ((parser_nodes___AWhileExpr___n_kwdo_t)CALL((recv), (SFT_parser_nodes[554] + 3)))
+#define CALL_parser_nodes___AWhileExpr___n_block(recv) ((parser_nodes___AWhileExpr___n_block_t)CALL((recv), (SFT_parser_nodes[554] + 4)))
+#define ID_ALoopExpr (SFT_parser_nodes[555])
+#define COLOR_ALoopExpr (SFT_parser_nodes[556])
+#define ATTR_parser_nodes___ALoopExpr____n_kwloop(recv) ATTR(recv, (SFT_parser_nodes[557] + 0))
+#define ATTR_parser_nodes___ALoopExpr____n_block(recv) ATTR(recv, (SFT_parser_nodes[557] + 1))
+#define INIT_TABLE_POS_ALoopExpr (SFT_parser_nodes[558] + 0)
+#define CALL_parser_nodes___ALoopExpr___n_kwloop(recv) ((parser_nodes___ALoopExpr___n_kwloop_t)CALL((recv), (SFT_parser_nodes[558] + 1)))
+#define CALL_parser_nodes___ALoopExpr___n_block(recv) ((parser_nodes___ALoopExpr___n_block_t)CALL((recv), (SFT_parser_nodes[558] + 2)))
+#define ID_AForExpr (SFT_parser_nodes[559])
+#define COLOR_AForExpr (SFT_parser_nodes[560])
+#define ATTR_parser_nodes___AForExpr____n_kwfor(recv) ATTR(recv, (SFT_parser_nodes[561] + 0))
+#define ATTR_parser_nodes___AForExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[561] + 1))
+#define ATTR_parser_nodes___AForExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[561] + 2))
+#define ATTR_parser_nodes___AForExpr____n_kwdo(recv) ATTR(recv, (SFT_parser_nodes[561] + 3))
+#define ATTR_parser_nodes___AForExpr____n_block(recv) ATTR(recv, (SFT_parser_nodes[561] + 4))
+#define INIT_TABLE_POS_AForExpr (SFT_parser_nodes[562] + 0)
+#define CALL_parser_nodes___AForExpr___n_kwfor(recv) ((parser_nodes___AForExpr___n_kwfor_t)CALL((recv), (SFT_parser_nodes[562] + 1)))
+#define CALL_parser_nodes___AForExpr___n_id(recv) ((parser_nodes___AForExpr___n_id_t)CALL((recv), (SFT_parser_nodes[562] + 2)))
+#define CALL_parser_nodes___AForExpr___n_expr(recv) ((parser_nodes___AForExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[562] + 3)))
+#define CALL_parser_nodes___AForExpr___n_kwdo(recv) ((parser_nodes___AForExpr___n_kwdo_t)CALL((recv), (SFT_parser_nodes[562] + 4)))
+#define CALL_parser_nodes___AForExpr___n_block(recv) ((parser_nodes___AForExpr___n_block_t)CALL((recv), (SFT_parser_nodes[562] + 5)))
+#define ID_AAssertExpr (SFT_parser_nodes[563])
+#define COLOR_AAssertExpr (SFT_parser_nodes[564])
+#define ATTR_parser_nodes___AAssertExpr____n_kwassert(recv) ATTR(recv, (SFT_parser_nodes[565] + 0))
+#define ATTR_parser_nodes___AAssertExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[565] + 1))
+#define ATTR_parser_nodes___AAssertExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[565] + 2))
+#define ATTR_parser_nodes___AAssertExpr____n_else(recv) ATTR(recv, (SFT_parser_nodes[565] + 3))
+#define INIT_TABLE_POS_AAssertExpr (SFT_parser_nodes[566] + 0)
+#define CALL_parser_nodes___AAssertExpr___n_kwassert(recv) ((parser_nodes___AAssertExpr___n_kwassert_t)CALL((recv), (SFT_parser_nodes[566] + 1)))
+#define CALL_parser_nodes___AAssertExpr___n_id(recv) ((parser_nodes___AAssertExpr___n_id_t)CALL((recv), (SFT_parser_nodes[566] + 2)))
+#define CALL_parser_nodes___AAssertExpr___n_expr(recv) ((parser_nodes___AAssertExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[566] + 3)))
+#define CALL_parser_nodes___AAssertExpr___n_else(recv) ((parser_nodes___AAssertExpr___n_else_t)CALL((recv), (SFT_parser_nodes[566] + 4)))
+#define ID_AAssignFormExpr (SFT_parser_nodes[567])
+#define COLOR_AAssignFormExpr (SFT_parser_nodes[568])
+#define ATTR_parser_nodes___AAssignFormExpr____n_assign(recv) ATTR(recv, (SFT_parser_nodes[569] + 0))
+#define ATTR_parser_nodes___AAssignFormExpr____n_value(recv) ATTR(recv, (SFT_parser_nodes[569] + 1))
+#define INIT_TABLE_POS_AAssignFormExpr (SFT_parser_nodes[570] + 0)
+#define CALL_parser_nodes___AAssignFormExpr___n_assign(recv) ((parser_nodes___AAssignFormExpr___n_assign_t)CALL((recv), (SFT_parser_nodes[570] + 1)))
+#define CALL_parser_nodes___AAssignFormExpr___n_value(recv) ((parser_nodes___AAssignFormExpr___n_value_t)CALL((recv), (SFT_parser_nodes[570] + 2)))
+#define ID_AReassignFormExpr (SFT_parser_nodes[571])
+#define COLOR_AReassignFormExpr (SFT_parser_nodes[572])
+#define ATTR_parser_nodes___AReassignFormExpr____n_assign_op(recv) ATTR(recv, (SFT_parser_nodes[573] + 0))
+#define ATTR_parser_nodes___AReassignFormExpr____n_value(recv) ATTR(recv, (SFT_parser_nodes[573] + 1))
+#define INIT_TABLE_POS_AReassignFormExpr (SFT_parser_nodes[574] + 0)
+#define CALL_parser_nodes___AReassignFormExpr___n_assign_op(recv) ((parser_nodes___AReassignFormExpr___n_assign_op_t)CALL((recv), (SFT_parser_nodes[574] + 1)))
+#define CALL_parser_nodes___AReassignFormExpr___n_value(recv) ((parser_nodes___AReassignFormExpr___n_value_t)CALL((recv), (SFT_parser_nodes[574] + 2)))
+#define ID_AOnceExpr (SFT_parser_nodes[575])
+#define COLOR_AOnceExpr (SFT_parser_nodes[576])
+#define ATTR_parser_nodes___AOnceExpr____n_kwonce(recv) ATTR(recv, (SFT_parser_nodes[577] + 0))
+#define INIT_TABLE_POS_AOnceExpr (SFT_parser_nodes[578] + 0)
+#define CALL_parser_nodes___AOnceExpr___n_kwonce(recv) ((parser_nodes___AOnceExpr___n_kwonce_t)CALL((recv), (SFT_parser_nodes[578] + 1)))
+#define ID_ASendExpr (SFT_parser_nodes[579])
+#define COLOR_ASendExpr (SFT_parser_nodes[580])
+#define ATTR_parser_nodes___ASendExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[581] + 0))
+#define ATTR_parser_nodes___ASendExpr____n_closure_defs(recv) ATTR(recv, (SFT_parser_nodes[581] + 1))
+#define INIT_TABLE_POS_ASendExpr (SFT_parser_nodes[582] + 0)
+#define CALL_parser_nodes___ASendExpr___n_expr(recv) ((parser_nodes___ASendExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[582] + 1)))
+#define CALL_parser_nodes___ASendExpr___n_closure_defs(recv) ((parser_nodes___ASendExpr___n_closure_defs_t)CALL((recv), (SFT_parser_nodes[582] + 2)))
+#define ID_ABinopExpr (SFT_parser_nodes[583])
+#define COLOR_ABinopExpr (SFT_parser_nodes[584])
+#define ATTR_parser_nodes___ABinopExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[585] + 0))
+#define INIT_TABLE_POS_ABinopExpr (SFT_parser_nodes[586] + 0)
+#define CALL_parser_nodes___ABinopExpr___n_expr2(recv) ((parser_nodes___ABinopExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[586] + 1)))
+#define ID_ABoolExpr (SFT_parser_nodes[587])
+#define COLOR_ABoolExpr (SFT_parser_nodes[588])
+#define INIT_TABLE_POS_ABoolExpr (SFT_parser_nodes[589] + 0)
+#define ID_AOrExpr (SFT_parser_nodes[590])
+#define COLOR_AOrExpr (SFT_parser_nodes[591])
+#define ATTR_parser_nodes___AOrExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[592] + 0))
+#define ATTR_parser_nodes___AOrExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[592] + 1))
+#define INIT_TABLE_POS_AOrExpr (SFT_parser_nodes[593] + 0)
+#define CALL_parser_nodes___AOrExpr___n_expr(recv) ((parser_nodes___AOrExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[593] + 1)))
+#define CALL_parser_nodes___AOrExpr___n_expr2(recv) ((parser_nodes___AOrExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[593] + 2)))
+#define ID_AAndExpr (SFT_parser_nodes[594])
+#define COLOR_AAndExpr (SFT_parser_nodes[595])
+#define ATTR_parser_nodes___AAndExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[596] + 0))
+#define ATTR_parser_nodes___AAndExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[596] + 1))
+#define INIT_TABLE_POS_AAndExpr (SFT_parser_nodes[597] + 0)
+#define CALL_parser_nodes___AAndExpr___n_expr(recv) ((parser_nodes___AAndExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[597] + 1)))
+#define CALL_parser_nodes___AAndExpr___n_expr2(recv) ((parser_nodes___AAndExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[597] + 2)))
+#define ID_AOrElseExpr (SFT_parser_nodes[598])
+#define COLOR_AOrElseExpr (SFT_parser_nodes[599])
+#define ATTR_parser_nodes___AOrElseExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[600] + 0))
+#define ATTR_parser_nodes___AOrElseExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[600] + 1))
+#define INIT_TABLE_POS_AOrElseExpr (SFT_parser_nodes[601] + 0)
+#define CALL_parser_nodes___AOrElseExpr___n_expr(recv) ((parser_nodes___AOrElseExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[601] + 1)))
+#define CALL_parser_nodes___AOrElseExpr___n_expr2(recv) ((parser_nodes___AOrElseExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[601] + 2)))
+#define ID_ANotExpr (SFT_parser_nodes[602])
+#define COLOR_ANotExpr (SFT_parser_nodes[603])
+#define ATTR_parser_nodes___ANotExpr____n_kwnot(recv) ATTR(recv, (SFT_parser_nodes[604] + 0))
+#define ATTR_parser_nodes___ANotExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[604] + 1))
+#define INIT_TABLE_POS_ANotExpr (SFT_parser_nodes[605] + 0)
+#define CALL_parser_nodes___ANotExpr___n_kwnot(recv) ((parser_nodes___ANotExpr___n_kwnot_t)CALL((recv), (SFT_parser_nodes[605] + 1)))
+#define CALL_parser_nodes___ANotExpr___n_expr(recv) ((parser_nodes___ANotExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[605] + 2)))
+#define ID_AEqExpr (SFT_parser_nodes[606])
+#define COLOR_AEqExpr (SFT_parser_nodes[607])
+#define INIT_TABLE_POS_AEqExpr (SFT_parser_nodes[608] + 0)
+#define ID_AEeExpr (SFT_parser_nodes[609])
+#define COLOR_AEeExpr (SFT_parser_nodes[610])
+#define ATTR_parser_nodes___AEeExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[611] + 0))
+#define ATTR_parser_nodes___AEeExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[611] + 1))
+#define INIT_TABLE_POS_AEeExpr (SFT_parser_nodes[612] + 0)
+#define CALL_parser_nodes___AEeExpr___n_expr(recv) ((parser_nodes___AEeExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[612] + 1)))
+#define CALL_parser_nodes___AEeExpr___n_expr2(recv) ((parser_nodes___AEeExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[612] + 2)))
+#define ID_ANeExpr (SFT_parser_nodes[613])
+#define COLOR_ANeExpr (SFT_parser_nodes[614])
+#define INIT_TABLE_POS_ANeExpr (SFT_parser_nodes[615] + 0)
+#define ID_ALtExpr (SFT_parser_nodes[616])
+#define COLOR_ALtExpr (SFT_parser_nodes[617])
+#define INIT_TABLE_POS_ALtExpr (SFT_parser_nodes[618] + 0)
+#define ID_ALeExpr (SFT_parser_nodes[619])
+#define COLOR_ALeExpr (SFT_parser_nodes[620])
+#define INIT_TABLE_POS_ALeExpr (SFT_parser_nodes[621] + 0)
+#define ID_ALlExpr (SFT_parser_nodes[622])
+#define COLOR_ALlExpr (SFT_parser_nodes[623])
+#define INIT_TABLE_POS_ALlExpr (SFT_parser_nodes[624] + 0)
+#define ID_AGtExpr (SFT_parser_nodes[625])
+#define COLOR_AGtExpr (SFT_parser_nodes[626])
+#define INIT_TABLE_POS_AGtExpr (SFT_parser_nodes[627] + 0)
+#define ID_AGeExpr (SFT_parser_nodes[628])
+#define COLOR_AGeExpr (SFT_parser_nodes[629])
+#define INIT_TABLE_POS_AGeExpr (SFT_parser_nodes[630] + 0)
+#define ID_AGgExpr (SFT_parser_nodes[631])
+#define COLOR_AGgExpr (SFT_parser_nodes[632])
+#define INIT_TABLE_POS_AGgExpr (SFT_parser_nodes[633] + 0)
+#define ID_AIsaExpr (SFT_parser_nodes[634])
+#define COLOR_AIsaExpr (SFT_parser_nodes[635])
+#define ATTR_parser_nodes___AIsaExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[636] + 0))
+#define ATTR_parser_nodes___AIsaExpr____n_type(recv) ATTR(recv, (SFT_parser_nodes[636] + 1))
+#define INIT_TABLE_POS_AIsaExpr (SFT_parser_nodes[637] + 0)
+#define CALL_parser_nodes___AIsaExpr___n_expr(recv) ((parser_nodes___AIsaExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[637] + 1)))
+#define CALL_parser_nodes___AIsaExpr___n_type(recv) ((parser_nodes___AIsaExpr___n_type_t)CALL((recv), (SFT_parser_nodes[637] + 2)))
+#define ID_APlusExpr (SFT_parser_nodes[638])
+#define COLOR_APlusExpr (SFT_parser_nodes[639])
+#define INIT_TABLE_POS_APlusExpr (SFT_parser_nodes[640] + 0)
+#define ID_AMinusExpr (SFT_parser_nodes[641])
+#define COLOR_AMinusExpr (SFT_parser_nodes[642])
+#define INIT_TABLE_POS_AMinusExpr (SFT_parser_nodes[643] + 0)
+#define ID_AStarshipExpr (SFT_parser_nodes[644])
+#define COLOR_AStarshipExpr (SFT_parser_nodes[645])
+#define INIT_TABLE_POS_AStarshipExpr (SFT_parser_nodes[646] + 0)
+#define ID_AStarExpr (SFT_parser_nodes[647])
+#define COLOR_AStarExpr (SFT_parser_nodes[648])
+#define INIT_TABLE_POS_AStarExpr (SFT_parser_nodes[649] + 0)
+#define ID_ASlashExpr (SFT_parser_nodes[650])
+#define COLOR_ASlashExpr (SFT_parser_nodes[651])
+#define INIT_TABLE_POS_ASlashExpr (SFT_parser_nodes[652] + 0)
+#define ID_APercentExpr (SFT_parser_nodes[653])
+#define COLOR_APercentExpr (SFT_parser_nodes[654])
+#define INIT_TABLE_POS_APercentExpr (SFT_parser_nodes[655] + 0)
+#define ID_AUminusExpr (SFT_parser_nodes[656])
+#define COLOR_AUminusExpr (SFT_parser_nodes[657])
+#define ATTR_parser_nodes___AUminusExpr____n_minus(recv) ATTR(recv, (SFT_parser_nodes[658] + 0))
+#define INIT_TABLE_POS_AUminusExpr (SFT_parser_nodes[659] + 0)
+#define CALL_parser_nodes___AUminusExpr___n_minus(recv) ((parser_nodes___AUminusExpr___n_minus_t)CALL((recv), (SFT_parser_nodes[659] + 1)))
+#define ID_ANewExpr (SFT_parser_nodes[660])
+#define COLOR_ANewExpr (SFT_parser_nodes[661])
+#define ATTR_parser_nodes___ANewExpr____n_kwnew(recv) ATTR(recv, (SFT_parser_nodes[662] + 0))
+#define ATTR_parser_nodes___ANewExpr____n_type(recv) ATTR(recv, (SFT_parser_nodes[662] + 1))
+#define ATTR_parser_nodes___ANewExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[662] + 2))
+#define ATTR_parser_nodes___ANewExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[662] + 3))
+#define INIT_TABLE_POS_ANewExpr (SFT_parser_nodes[663] + 0)
+#define CALL_parser_nodes___ANewExpr___n_kwnew(recv) ((parser_nodes___ANewExpr___n_kwnew_t)CALL((recv), (SFT_parser_nodes[663] + 1)))
+#define CALL_parser_nodes___ANewExpr___n_type(recv) ((parser_nodes___ANewExpr___n_type_t)CALL((recv), (SFT_parser_nodes[663] + 2)))
+#define CALL_parser_nodes___ANewExpr___n_id(recv) ((parser_nodes___ANewExpr___n_id_t)CALL((recv), (SFT_parser_nodes[663] + 3)))
+#define CALL_parser_nodes___ANewExpr___n_args(recv) ((parser_nodes___ANewExpr___n_args_t)CALL((recv), (SFT_parser_nodes[663] + 4)))
+#define ID_AAttrFormExpr (SFT_parser_nodes[664])
+#define COLOR_AAttrFormExpr (SFT_parser_nodes[665])
+#define ATTR_parser_nodes___AAttrFormExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[666] + 0))
+#define ATTR_parser_nodes___AAttrFormExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[666] + 1))
+#define INIT_TABLE_POS_AAttrFormExpr (SFT_parser_nodes[667] + 0)
+#define CALL_parser_nodes___AAttrFormExpr___n_expr(recv) ((parser_nodes___AAttrFormExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[667] + 1)))
+#define CALL_parser_nodes___AAttrFormExpr___n_id(recv) ((parser_nodes___AAttrFormExpr___n_id_t)CALL((recv), (SFT_parser_nodes[667] + 2)))
+#define ID_AAttrExpr (SFT_parser_nodes[668])
+#define COLOR_AAttrExpr (SFT_parser_nodes[669])
+#define INIT_TABLE_POS_AAttrExpr (SFT_parser_nodes[670] + 0)
+#define ID_AAttrAssignExpr (SFT_parser_nodes[671])
+#define COLOR_AAttrAssignExpr (SFT_parser_nodes[672])
+#define INIT_TABLE_POS_AAttrAssignExpr (SFT_parser_nodes[673] + 0)
+#define ID_ACallFormExpr (SFT_parser_nodes[674])
+#define COLOR_ACallFormExpr (SFT_parser_nodes[675])
+#define ATTR_parser_nodes___ACallFormExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[676] + 0))
+#define ATTR_parser_nodes___ACallFormExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[676] + 1))
+#define INIT_TABLE_POS_ACallFormExpr (SFT_parser_nodes[677] + 0)
+#define CALL_parser_nodes___ACallFormExpr___n_id(recv) ((parser_nodes___ACallFormExpr___n_id_t)CALL((recv), (SFT_parser_nodes[677] + 1)))
+#define CALL_parser_nodes___ACallFormExpr___n_args(recv) ((parser_nodes___ACallFormExpr___n_args_t)CALL((recv), (SFT_parser_nodes[677] + 2)))
+#define ID_AAttrReassignExpr (SFT_parser_nodes[678])
+#define COLOR_AAttrReassignExpr (SFT_parser_nodes[679])
+#define INIT_TABLE_POS_AAttrReassignExpr (SFT_parser_nodes[680] + 0)
+#define ID_ACallExpr (SFT_parser_nodes[681])
+#define COLOR_ACallExpr (SFT_parser_nodes[682])
+#define INIT_TABLE_POS_ACallExpr (SFT_parser_nodes[683] + 0)
+#define ID_ACallAssignExpr (SFT_parser_nodes[684])
+#define COLOR_ACallAssignExpr (SFT_parser_nodes[685])
+#define INIT_TABLE_POS_ACallAssignExpr (SFT_parser_nodes[686] + 0)
+#define ID_ACallReassignExpr (SFT_parser_nodes[687])
+#define COLOR_ACallReassignExpr (SFT_parser_nodes[688])
+#define INIT_TABLE_POS_ACallReassignExpr (SFT_parser_nodes[689] + 0)
+#define ID_ASuperExpr (SFT_parser_nodes[690])
+#define COLOR_ASuperExpr (SFT_parser_nodes[691])
+#define ATTR_parser_nodes___ASuperExpr____n_qualified(recv) ATTR(recv, (SFT_parser_nodes[692] + 0))
+#define ATTR_parser_nodes___ASuperExpr____n_kwsuper(recv) ATTR(recv, (SFT_parser_nodes[692] + 1))
+#define ATTR_parser_nodes___ASuperExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[692] + 2))
+#define INIT_TABLE_POS_ASuperExpr (SFT_parser_nodes[693] + 0)
+#define CALL_parser_nodes___ASuperExpr___n_qualified(recv) ((parser_nodes___ASuperExpr___n_qualified_t)CALL((recv), (SFT_parser_nodes[693] + 1)))
+#define CALL_parser_nodes___ASuperExpr___n_kwsuper(recv) ((parser_nodes___ASuperExpr___n_kwsuper_t)CALL((recv), (SFT_parser_nodes[693] + 2)))
+#define CALL_parser_nodes___ASuperExpr___n_args(recv) ((parser_nodes___ASuperExpr___n_args_t)CALL((recv), (SFT_parser_nodes[693] + 3)))
+#define ID_AInitExpr (SFT_parser_nodes[694])
+#define COLOR_AInitExpr (SFT_parser_nodes[695])
+#define ATTR_parser_nodes___AInitExpr____n_kwinit(recv) ATTR(recv, (SFT_parser_nodes[696] + 0))
+#define ATTR_parser_nodes___AInitExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[696] + 1))
+#define INIT_TABLE_POS_AInitExpr (SFT_parser_nodes[697] + 0)
+#define CALL_parser_nodes___AInitExpr___n_kwinit(recv) ((parser_nodes___AInitExpr___n_kwinit_t)CALL((recv), (SFT_parser_nodes[697] + 1)))
+#define CALL_parser_nodes___AInitExpr___n_args(recv) ((parser_nodes___AInitExpr___n_args_t)CALL((recv), (SFT_parser_nodes[697] + 2)))
+#define ID_ABraFormExpr (SFT_parser_nodes[698])
+#define COLOR_ABraFormExpr (SFT_parser_nodes[699])
+#define ATTR_parser_nodes___ABraFormExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[700] + 0))
+#define INIT_TABLE_POS_ABraFormExpr (SFT_parser_nodes[701] + 0)
+#define CALL_parser_nodes___ABraFormExpr___n_args(recv) ((parser_nodes___ABraFormExpr___n_args_t)CALL((recv), (SFT_parser_nodes[701] + 1)))
+#define ID_ABraExpr (SFT_parser_nodes[702])
+#define COLOR_ABraExpr (SFT_parser_nodes[703])
+#define INIT_TABLE_POS_ABraExpr (SFT_parser_nodes[704] + 0)
+#define ID_ABraAssignExpr (SFT_parser_nodes[705])
+#define COLOR_ABraAssignExpr (SFT_parser_nodes[706])
+#define INIT_TABLE_POS_ABraAssignExpr (SFT_parser_nodes[707] + 0)
+#define ID_AVarFormExpr (SFT_parser_nodes[708])
+#define COLOR_AVarFormExpr (SFT_parser_nodes[709])
+#define ATTR_parser_nodes___AVarFormExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[710] + 0))
+#define INIT_TABLE_POS_AVarFormExpr (SFT_parser_nodes[711] + 0)
+#define CALL_parser_nodes___AVarFormExpr___n_id(recv) ((parser_nodes___AVarFormExpr___n_id_t)CALL((recv), (SFT_parser_nodes[711] + 1)))
+#define ID_ABraReassignExpr (SFT_parser_nodes[712])
+#define COLOR_ABraReassignExpr (SFT_parser_nodes[713])
+#define INIT_TABLE_POS_ABraReassignExpr (SFT_parser_nodes[714] + 0)
+#define ID_AClosureCallExpr (SFT_parser_nodes[715])
+#define COLOR_AClosureCallExpr (SFT_parser_nodes[716])
+#define ATTR_parser_nodes___AClosureCallExpr____n_id(recv) ATTR(recv, (SFT_parser_nodes[717] + 0))
+#define ATTR_parser_nodes___AClosureCallExpr____n_args(recv) ATTR(recv, (SFT_parser_nodes[717] + 1))
+#define ATTR_parser_nodes___AClosureCallExpr____n_closure_defs(recv) ATTR(recv, (SFT_parser_nodes[717] + 2))
+#define INIT_TABLE_POS_AClosureCallExpr (SFT_parser_nodes[718] + 0)
+#define CALL_parser_nodes___AClosureCallExpr___n_id(recv) ((parser_nodes___AClosureCallExpr___n_id_t)CALL((recv), (SFT_parser_nodes[718] + 1)))
+#define CALL_parser_nodes___AClosureCallExpr___n_args(recv) ((parser_nodes___AClosureCallExpr___n_args_t)CALL((recv), (SFT_parser_nodes[718] + 2)))
+#define CALL_parser_nodes___AClosureCallExpr___n_closure_defs(recv) ((parser_nodes___AClosureCallExpr___n_closure_defs_t)CALL((recv), (SFT_parser_nodes[718] + 3)))
+#define ID_AVarExpr (SFT_parser_nodes[719])
+#define COLOR_AVarExpr (SFT_parser_nodes[720])
+#define INIT_TABLE_POS_AVarExpr (SFT_parser_nodes[721] + 0)
+#define ID_AVarAssignExpr (SFT_parser_nodes[722])
+#define COLOR_AVarAssignExpr (SFT_parser_nodes[723])
+#define INIT_TABLE_POS_AVarAssignExpr (SFT_parser_nodes[724] + 0)
+#define ID_AVarReassignExpr (SFT_parser_nodes[725])
+#define COLOR_AVarReassignExpr (SFT_parser_nodes[726])
+#define INIT_TABLE_POS_AVarReassignExpr (SFT_parser_nodes[727] + 0)
+#define ID_ARangeExpr (SFT_parser_nodes[728])
+#define COLOR_ARangeExpr (SFT_parser_nodes[729])
+#define ATTR_parser_nodes___ARangeExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[730] + 0))
+#define ATTR_parser_nodes___ARangeExpr____n_expr2(recv) ATTR(recv, (SFT_parser_nodes[730] + 1))
+#define INIT_TABLE_POS_ARangeExpr (SFT_parser_nodes[731] + 0)
+#define CALL_parser_nodes___ARangeExpr___n_expr(recv) ((parser_nodes___ARangeExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[731] + 1)))
+#define CALL_parser_nodes___ARangeExpr___n_expr2(recv) ((parser_nodes___ARangeExpr___n_expr2_t)CALL((recv), (SFT_parser_nodes[731] + 2)))
+#define ID_ACrangeExpr (SFT_parser_nodes[732])
+#define COLOR_ACrangeExpr (SFT_parser_nodes[733])
+#define INIT_TABLE_POS_ACrangeExpr (SFT_parser_nodes[734] + 0)
+#define ID_AOrangeExpr (SFT_parser_nodes[735])
+#define COLOR_AOrangeExpr (SFT_parser_nodes[736])
+#define INIT_TABLE_POS_AOrangeExpr (SFT_parser_nodes[737] + 0)
+#define ID_AArrayExpr (SFT_parser_nodes[738])
+#define COLOR_AArrayExpr (SFT_parser_nodes[739])
+#define ATTR_parser_nodes___AArrayExpr____n_exprs(recv) ATTR(recv, (SFT_parser_nodes[740] + 0))
+#define INIT_TABLE_POS_AArrayExpr (SFT_parser_nodes[741] + 0)
+#define CALL_parser_nodes___AArrayExpr___n_exprs(recv) ((parser_nodes___AArrayExpr___n_exprs_t)CALL((recv), (SFT_parser_nodes[741] + 1)))
+#define ID_ASelfExpr (SFT_parser_nodes[742])
+#define COLOR_ASelfExpr (SFT_parser_nodes[743])
+#define ATTR_parser_nodes___ASelfExpr____n_kwself(recv) ATTR(recv, (SFT_parser_nodes[744] + 0))
+#define INIT_TABLE_POS_ASelfExpr (SFT_parser_nodes[745] + 0)
+#define CALL_parser_nodes___ASelfExpr___n_kwself(recv) ((parser_nodes___ASelfExpr___n_kwself_t)CALL((recv), (SFT_parser_nodes[745] + 1)))
+#define ID_AImplicitSelfExpr (SFT_parser_nodes[746])
+#define COLOR_AImplicitSelfExpr (SFT_parser_nodes[747])
+#define INIT_TABLE_POS_AImplicitSelfExpr (SFT_parser_nodes[748] + 0)
+#define ID_ATrueExpr (SFT_parser_nodes[749])
+#define COLOR_ATrueExpr (SFT_parser_nodes[750])
+#define ATTR_parser_nodes___ATrueExpr____n_kwtrue(recv) ATTR(recv, (SFT_parser_nodes[751] + 0))
+#define INIT_TABLE_POS_ATrueExpr (SFT_parser_nodes[752] + 0)
+#define CALL_parser_nodes___ATrueExpr___n_kwtrue(recv) ((parser_nodes___ATrueExpr___n_kwtrue_t)CALL((recv), (SFT_parser_nodes[752] + 1)))
+#define ID_AFalseExpr (SFT_parser_nodes[753])
+#define COLOR_AFalseExpr (SFT_parser_nodes[754])
+#define ATTR_parser_nodes___AFalseExpr____n_kwfalse(recv) ATTR(recv, (SFT_parser_nodes[755] + 0))
+#define INIT_TABLE_POS_AFalseExpr (SFT_parser_nodes[756] + 0)
+#define CALL_parser_nodes___AFalseExpr___n_kwfalse(recv) ((parser_nodes___AFalseExpr___n_kwfalse_t)CALL((recv), (SFT_parser_nodes[756] + 1)))
+#define ID_ANullExpr (SFT_parser_nodes[757])
+#define COLOR_ANullExpr (SFT_parser_nodes[758])
+#define ATTR_parser_nodes___ANullExpr____n_kwnull(recv) ATTR(recv, (SFT_parser_nodes[759] + 0))
+#define INIT_TABLE_POS_ANullExpr (SFT_parser_nodes[760] + 0)
+#define CALL_parser_nodes___ANullExpr___n_kwnull(recv) ((parser_nodes___ANullExpr___n_kwnull_t)CALL((recv), (SFT_parser_nodes[760] + 1)))
+#define ID_AIntExpr (SFT_parser_nodes[761])
+#define COLOR_AIntExpr (SFT_parser_nodes[762])
+#define ATTR_parser_nodes___AIntExpr____n_number(recv) ATTR(recv, (SFT_parser_nodes[763] + 0))
+#define INIT_TABLE_POS_AIntExpr (SFT_parser_nodes[764] + 0)
+#define CALL_parser_nodes___AIntExpr___n_number(recv) ((parser_nodes___AIntExpr___n_number_t)CALL((recv), (SFT_parser_nodes[764] + 1)))
+#define ID_AFloatExpr (SFT_parser_nodes[765])
+#define COLOR_AFloatExpr (SFT_parser_nodes[766])
+#define ATTR_parser_nodes___AFloatExpr____n_float(recv) ATTR(recv, (SFT_parser_nodes[767] + 0))
+#define INIT_TABLE_POS_AFloatExpr (SFT_parser_nodes[768] + 0)
+#define CALL_parser_nodes___AFloatExpr___n_float(recv) ((parser_nodes___AFloatExpr___n_float_t)CALL((recv), (SFT_parser_nodes[768] + 1)))
+#define ID_ACharExpr (SFT_parser_nodes[769])
+#define COLOR_ACharExpr (SFT_parser_nodes[770])
+#define ATTR_parser_nodes___ACharExpr____n_char(recv) ATTR(recv, (SFT_parser_nodes[771] + 0))
+#define INIT_TABLE_POS_ACharExpr (SFT_parser_nodes[772] + 0)
+#define CALL_parser_nodes___ACharExpr___n_char(recv) ((parser_nodes___ACharExpr___n_char_t)CALL((recv), (SFT_parser_nodes[772] + 1)))
+#define ID_AStringFormExpr (SFT_parser_nodes[773])
+#define COLOR_AStringFormExpr (SFT_parser_nodes[774])
+#define INIT_TABLE_POS_AStringFormExpr (SFT_parser_nodes[775] + 0)
+#define ID_AStringExpr (SFT_parser_nodes[776])
+#define COLOR_AStringExpr (SFT_parser_nodes[777])
+#define ATTR_parser_nodes___AStringExpr____n_string(recv) ATTR(recv, (SFT_parser_nodes[778] + 0))
+#define INIT_TABLE_POS_AStringExpr (SFT_parser_nodes[779] + 0)
+#define CALL_parser_nodes___AStringExpr___n_string(recv) ((parser_nodes___AStringExpr___n_string_t)CALL((recv), (SFT_parser_nodes[779] + 1)))
+#define ID_AStartStringExpr (SFT_parser_nodes[780])
+#define COLOR_AStartStringExpr (SFT_parser_nodes[781])
+#define ATTR_parser_nodes___AStartStringExpr____n_string(recv) ATTR(recv, (SFT_parser_nodes[782] + 0))
+#define INIT_TABLE_POS_AStartStringExpr (SFT_parser_nodes[783] + 0)
+#define CALL_parser_nodes___AStartStringExpr___n_string(recv) ((parser_nodes___AStartStringExpr___n_string_t)CALL((recv), (SFT_parser_nodes[783] + 1)))
+#define ID_AMidStringExpr (SFT_parser_nodes[784])
+#define COLOR_AMidStringExpr (SFT_parser_nodes[785])
+#define ATTR_parser_nodes___AMidStringExpr____n_string(recv) ATTR(recv, (SFT_parser_nodes[786] + 0))
+#define INIT_TABLE_POS_AMidStringExpr (SFT_parser_nodes[787] + 0)
+#define CALL_parser_nodes___AMidStringExpr___n_string(recv) ((parser_nodes___AMidStringExpr___n_string_t)CALL((recv), (SFT_parser_nodes[787] + 1)))
+#define ID_AEndStringExpr (SFT_parser_nodes[788])
+#define COLOR_AEndStringExpr (SFT_parser_nodes[789])
+#define ATTR_parser_nodes___AEndStringExpr____n_string(recv) ATTR(recv, (SFT_parser_nodes[790] + 0))
+#define INIT_TABLE_POS_AEndStringExpr (SFT_parser_nodes[791] + 0)
+#define CALL_parser_nodes___AEndStringExpr___n_string(recv) ((parser_nodes___AEndStringExpr___n_string_t)CALL((recv), (SFT_parser_nodes[791] + 1)))
+#define ID_ASuperstringExpr (SFT_parser_nodes[792])
+#define COLOR_ASuperstringExpr (SFT_parser_nodes[793])
+#define ATTR_parser_nodes___ASuperstringExpr____n_exprs(recv) ATTR(recv, (SFT_parser_nodes[794] + 0))
+#define INIT_TABLE_POS_ASuperstringExpr (SFT_parser_nodes[795] + 0)
+#define CALL_parser_nodes___ASuperstringExpr___n_exprs(recv) ((parser_nodes___ASuperstringExpr___n_exprs_t)CALL((recv), (SFT_parser_nodes[795] + 1)))
+#define ID_AParExpr (SFT_parser_nodes[796])
+#define COLOR_AParExpr (SFT_parser_nodes[797])
+#define INIT_TABLE_POS_AParExpr (SFT_parser_nodes[798] + 0)
+#define ID_AProxyExpr (SFT_parser_nodes[799])
+#define COLOR_AProxyExpr (SFT_parser_nodes[800])
+#define ATTR_parser_nodes___AProxyExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[801] + 0))
+#define INIT_TABLE_POS_AProxyExpr (SFT_parser_nodes[802] + 0)
+#define CALL_parser_nodes___AProxyExpr___n_expr(recv) ((parser_nodes___AProxyExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[802] + 1)))
+#define ID_AAsCastExpr (SFT_parser_nodes[803])
+#define COLOR_AAsCastExpr (SFT_parser_nodes[804])
+#define ATTR_parser_nodes___AAsCastExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[805] + 0))
+#define ATTR_parser_nodes___AAsCastExpr____n_kwas(recv) ATTR(recv, (SFT_parser_nodes[805] + 1))
+#define ATTR_parser_nodes___AAsCastExpr____n_type(recv) ATTR(recv, (SFT_parser_nodes[805] + 2))
+#define INIT_TABLE_POS_AAsCastExpr (SFT_parser_nodes[806] + 0)
+#define CALL_parser_nodes___AAsCastExpr___n_expr(recv) ((parser_nodes___AAsCastExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[806] + 1)))
+#define CALL_parser_nodes___AAsCastExpr___n_kwas(recv) ((parser_nodes___AAsCastExpr___n_kwas_t)CALL((recv), (SFT_parser_nodes[806] + 2)))
+#define CALL_parser_nodes___AAsCastExpr___n_type(recv) ((parser_nodes___AAsCastExpr___n_type_t)CALL((recv), (SFT_parser_nodes[806] + 3)))
+#define ID_AAsNotnullExpr (SFT_parser_nodes[807])
+#define COLOR_AAsNotnullExpr (SFT_parser_nodes[808])
+#define ATTR_parser_nodes___AAsNotnullExpr____n_expr(recv) ATTR(recv, (SFT_parser_nodes[809] + 0))
+#define ATTR_parser_nodes___AAsNotnullExpr____n_kwas(recv) ATTR(recv, (SFT_parser_nodes[809] + 1))
+#define ATTR_parser_nodes___AAsNotnullExpr____n_kwnot(recv) ATTR(recv, (SFT_parser_nodes[809] + 2))
+#define ATTR_parser_nodes___AAsNotnullExpr____n_kwnull(recv) ATTR(recv, (SFT_parser_nodes[809] + 3))
+#define INIT_TABLE_POS_AAsNotnullExpr (SFT_parser_nodes[810] + 0)
+#define CALL_parser_nodes___AAsNotnullExpr___n_expr(recv) ((parser_nodes___AAsNotnullExpr___n_expr_t)CALL((recv), (SFT_parser_nodes[810] + 1)))
+#define CALL_parser_nodes___AAsNotnullExpr___n_kwas(recv) ((parser_nodes___AAsNotnullExpr___n_kwas_t)CALL((recv), (SFT_parser_nodes[810] + 2)))
+#define CALL_parser_nodes___AAsNotnullExpr___n_kwnot(recv) ((parser_nodes___AAsNotnullExpr___n_kwnot_t)CALL((recv), (SFT_parser_nodes[810] + 3)))
+#define CALL_parser_nodes___AAsNotnullExpr___n_kwnull(recv) ((parser_nodes___AAsNotnullExpr___n_kwnull_t)CALL((recv), (SFT_parser_nodes[810] + 4)))
+#define ID_AIssetAttrExpr (SFT_parser_nodes[811])
+#define COLOR_AIssetAttrExpr (SFT_parser_nodes[812])
+#define ATTR_parser_nodes___AIssetAttrExpr____n_kwisset(recv) ATTR(recv, (SFT_parser_nodes[813] + 0))
+#define INIT_TABLE_POS_AIssetAttrExpr (SFT_parser_nodes[814] + 0)
+#define CALL_parser_nodes___AIssetAttrExpr___n_kwisset(recv) ((parser_nodes___AIssetAttrExpr___n_kwisset_t)CALL((recv), (SFT_parser_nodes[814] + 1)))
+#define ID_AAssignOp (SFT_parser_nodes[815])
+#define COLOR_AAssignOp (SFT_parser_nodes[816])
+#define INIT_TABLE_POS_AAssignOp (SFT_parser_nodes[817] + 0)
+#define ID_APlusAssignOp (SFT_parser_nodes[818])
+#define COLOR_APlusAssignOp (SFT_parser_nodes[819])
+#define ATTR_parser_nodes___APlusAssignOp____n_pluseq(recv) ATTR(recv, (SFT_parser_nodes[820] + 0))
+#define INIT_TABLE_POS_APlusAssignOp (SFT_parser_nodes[821] + 0)
+#define CALL_parser_nodes___APlusAssignOp___n_pluseq(recv) ((parser_nodes___APlusAssignOp___n_pluseq_t)CALL((recv), (SFT_parser_nodes[821] + 1)))
+#define ID_AMinusAssignOp (SFT_parser_nodes[822])
+#define COLOR_AMinusAssignOp (SFT_parser_nodes[823])
+#define ATTR_parser_nodes___AMinusAssignOp____n_minuseq(recv) ATTR(recv, (SFT_parser_nodes[824] + 0))
+#define INIT_TABLE_POS_AMinusAssignOp (SFT_parser_nodes[825] + 0)
+#define CALL_parser_nodes___AMinusAssignOp___n_minuseq(recv) ((parser_nodes___AMinusAssignOp___n_minuseq_t)CALL((recv), (SFT_parser_nodes[825] + 1)))
+#define ID_AClosureDef (SFT_parser_nodes[826])
+#define COLOR_AClosureDef (SFT_parser_nodes[827])
+#define ATTR_parser_nodes___AClosureDef____n_bang(recv) ATTR(recv, (SFT_parser_nodes[828] + 0))
+#define ATTR_parser_nodes___AClosureDef____n_id(recv) ATTR(recv, (SFT_parser_nodes[828] + 1))
+#define ATTR_parser_nodes___AClosureDef____n_ids(recv) ATTR(recv, (SFT_parser_nodes[828] + 2))
+#define ATTR_parser_nodes___AClosureDef____n_kwdo(recv) ATTR(recv, (SFT_parser_nodes[828] + 3))
+#define ATTR_parser_nodes___AClosureDef____n_expr(recv) ATTR(recv, (SFT_parser_nodes[828] + 4))
+#define INIT_TABLE_POS_AClosureDef (SFT_parser_nodes[829] + 0)
+#define CALL_parser_nodes___AClosureDef___n_bang(recv) ((parser_nodes___AClosureDef___n_bang_t)CALL((recv), (SFT_parser_nodes[829] + 1)))
+#define CALL_parser_nodes___AClosureDef___n_id(recv) ((parser_nodes___AClosureDef___n_id_t)CALL((recv), (SFT_parser_nodes[829] + 2)))
+#define CALL_parser_nodes___AClosureDef___n_ids(recv) ((parser_nodes___AClosureDef___n_ids_t)CALL((recv), (SFT_parser_nodes[829] + 3)))
+#define CALL_parser_nodes___AClosureDef___n_kwdo(recv) ((parser_nodes___AClosureDef___n_kwdo_t)CALL((recv), (SFT_parser_nodes[829] + 4)))
+#define CALL_parser_nodes___AClosureDef___n_expr(recv) ((parser_nodes___AClosureDef___n_expr_t)CALL((recv), (SFT_parser_nodes[829] + 5)))
+#define ID_AClosureId (SFT_parser_nodes[830])
+#define COLOR_AClosureId (SFT_parser_nodes[831])
+#define INIT_TABLE_POS_AClosureId (SFT_parser_nodes[832] + 0)
+#define ID_ASimpleClosureId (SFT_parser_nodes[833])
+#define COLOR_ASimpleClosureId (SFT_parser_nodes[834])
+#define ATTR_parser_nodes___ASimpleClosureId____n_id(recv) ATTR(recv, (SFT_parser_nodes[835] + 0))
+#define INIT_TABLE_POS_ASimpleClosureId (SFT_parser_nodes[836] + 0)
+#define CALL_parser_nodes___ASimpleClosureId___n_id(recv) ((parser_nodes___ASimpleClosureId___n_id_t)CALL((recv), (SFT_parser_nodes[836] + 1)))
+#define ID_ABreakClosureId (SFT_parser_nodes[837])
+#define COLOR_ABreakClosureId (SFT_parser_nodes[838])
+#define ATTR_parser_nodes___ABreakClosureId____n_kwbreak(recv) ATTR(recv, (SFT_parser_nodes[839] + 0))
+#define INIT_TABLE_POS_ABreakClosureId (SFT_parser_nodes[840] + 0)
+#define CALL_parser_nodes___ABreakClosureId___n_kwbreak(recv) ((parser_nodes___ABreakClosureId___n_kwbreak_t)CALL((recv), (SFT_parser_nodes[840] + 1)))
+#define ID_AQualified (SFT_parser_nodes[841])
+#define COLOR_AQualified (SFT_parser_nodes[842])
+#define ATTR_parser_nodes___AQualified____n_id(recv) ATTR(recv, (SFT_parser_nodes[843] + 0))
+#define ATTR_parser_nodes___AQualified____n_classid(recv) ATTR(recv, (SFT_parser_nodes[843] + 1))
+#define INIT_TABLE_POS_AQualified (SFT_parser_nodes[844] + 0)
+#define CALL_parser_nodes___AQualified___n_id(recv) ((parser_nodes___AQualified___n_id_t)CALL((recv), (SFT_parser_nodes[844] + 1)))
+#define CALL_parser_nodes___AQualified___n_classid(recv) ((parser_nodes___AQualified___n_classid_t)CALL((recv), (SFT_parser_nodes[844] + 2)))
+#define ID_ADoc (SFT_parser_nodes[845])
+#define COLOR_ADoc (SFT_parser_nodes[846])
+#define ATTR_parser_nodes___ADoc____n_comment(recv) ATTR(recv, (SFT_parser_nodes[847] + 0))
+#define INIT_TABLE_POS_ADoc (SFT_parser_nodes[848] + 0)
+#define CALL_parser_nodes___ADoc___n_comment(recv) ((parser_nodes___ADoc___n_comment_t)CALL((recv), (SFT_parser_nodes[848] + 1)))
+#define ID_Start (SFT_parser_nodes[849])
+#define COLOR_Start (SFT_parser_nodes[850])
+#define ATTR_parser_nodes___Start____n_base(recv) ATTR(recv, (SFT_parser_nodes[851] + 0))
+#define ATTR_parser_nodes___Start____n_eof(recv) ATTR(recv, (SFT_parser_nodes[851] + 1))
+#define INIT_TABLE_POS_Start (SFT_parser_nodes[852] + 0)
+#define CALL_parser_nodes___Start___n_base(recv) ((parser_nodes___Start___n_base_t)CALL((recv), (SFT_parser_nodes[852] + 1)))
+#define CALL_parser_nodes___Start___n_eof(recv) ((parser_nodes___Start___n_eof_t)CALL((recv), (SFT_parser_nodes[852] + 2)))
+static const char * const LOCATE_parser_nodes___ANode___location = "parser_nodes::ANode::location";
 val_t parser_nodes___ANode___location(val_t p0);
 typedef val_t (*parser_nodes___ANode___location_t)(val_t p0);
-#define LOCATE_parser_nodes___ANode___init "parser_nodes::ANode::init"
+static const char * const LOCATE_parser_nodes___ANode___init = "parser_nodes::ANode::init";
 void parser_nodes___ANode___init(val_t p0, val_t p1, int* init_table);
 typedef void (*parser_nodes___ANode___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_ANode_parser_nodes___ANode___init(val_t p0);
 val_t NEW_Token_parser_nodes___ANode___init(val_t p0);
-val_t NEW_Prod_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___Prod___location__eq "parser_nodes::Prod::location="
+static const char * const LOCATE_parser_nodes___Prod___location__eq = "parser_nodes::Prod::location=";
 void parser_nodes___Prod___location__eq(val_t p0, val_t p1);
 typedef void (*parser_nodes___Prod___location__eq_t)(val_t p0, val_t p1);
+val_t NEW_Prod_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TEol_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TComment_parser_nodes___ANode___init(val_t p0);
-val_t NEW_TKwpackage_parser_nodes___ANode___init(val_t p0);
+val_t NEW_TKwmodule_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TKwimport_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TKwclass_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TKwabstract_parser_nodes___ANode___init(val_t p0);
@@ -1938,8 +1775,10 @@ val_t NEW_TEq_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TNe_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TLt_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TLe_parser_nodes___ANode___init(val_t p0);
+val_t NEW_TLl_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TGt_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TGe_parser_nodes___ANode___init(val_t p0);
+val_t NEW_TGg_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TStarship_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TBang_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TClassid_parser_nodes___ANode___init(val_t p0);
@@ -1952,1444 +1791,834 @@ val_t NEW_TString_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TStartString_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TMidString_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TEndString_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___EOF___noinit "parser_nodes::EOF::noinit"
+static const char * const LOCATE_parser_nodes___EOF___noinit = "parser_nodes::EOF::noinit";
 void parser_nodes___EOF___noinit(val_t p0, int* init_table);
 typedef void (*parser_nodes___EOF___noinit_t)(val_t p0, int* init_table);
 val_t NEW_EOF_parser_nodes___EOF___noinit();
-#define LOCATE_parser_nodes___AError___noinit "parser_nodes::AError::noinit"
+static const char * const LOCATE_parser_nodes___AError___noinit = "parser_nodes::AError::noinit";
 void parser_nodes___AError___noinit(val_t p0, int* init_table);
 typedef void (*parser_nodes___AError___noinit_t)(val_t p0, int* init_table);
 val_t NEW_AError_parser_nodes___AError___noinit();
-val_t NEW_AModule_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AModule___n_packagedecl "parser_nodes::AModule::n_packagedecl"
-val_t parser_nodes___AModule___n_packagedecl(val_t p0);
-typedef val_t (*parser_nodes___AModule___n_packagedecl_t)(val_t p0);
-#define LOCATE_parser_nodes___AModule___n_packagedecl__eq "parser_nodes::AModule::n_packagedecl="
-void parser_nodes___AModule___n_packagedecl__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AModule___n_packagedecl__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AModule___n_imports "parser_nodes::AModule::n_imports"
+static const char * const LOCATE_parser_nodes___AModule___n_moduledecl = "parser_nodes::AModule::n_moduledecl";
+val_t parser_nodes___AModule___n_moduledecl(val_t p0);
+typedef val_t (*parser_nodes___AModule___n_moduledecl_t)(val_t p0);
+static const char * const LOCATE_parser_nodes___AModule___n_imports = "parser_nodes::AModule::n_imports";
 val_t parser_nodes___AModule___n_imports(val_t p0);
 typedef val_t (*parser_nodes___AModule___n_imports_t)(val_t p0);
-#define LOCATE_parser_nodes___AModule___n_imports__eq "parser_nodes::AModule::n_imports="
-void parser_nodes___AModule___n_imports__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AModule___n_imports__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AModule___n_classdefs "parser_nodes::AModule::n_classdefs"
+static const char * const LOCATE_parser_nodes___AModule___n_classdefs = "parser_nodes::AModule::n_classdefs";
 val_t parser_nodes___AModule___n_classdefs(val_t p0);
 typedef val_t (*parser_nodes___AModule___n_classdefs_t)(val_t p0);
-#define LOCATE_parser_nodes___AModule___n_classdefs__eq "parser_nodes::AModule::n_classdefs="
-void parser_nodes___AModule___n_classdefs__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AModule___n_classdefs__eq_t)(val_t p0, val_t p1);
-val_t NEW_APackagedecl_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___APackagedecl___n_doc "parser_nodes::APackagedecl::n_doc"
-val_t parser_nodes___APackagedecl___n_doc(val_t p0);
-typedef val_t (*parser_nodes___APackagedecl___n_doc_t)(val_t p0);
-#define LOCATE_parser_nodes___APackagedecl___n_doc__eq "parser_nodes::APackagedecl::n_doc="
-void parser_nodes___APackagedecl___n_doc__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___APackagedecl___n_doc__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___APackagedecl___n_kwpackage "parser_nodes::APackagedecl::n_kwpackage"
-val_t parser_nodes___APackagedecl___n_kwpackage(val_t p0);
-typedef val_t (*parser_nodes___APackagedecl___n_kwpackage_t)(val_t p0);
-#define LOCATE_parser_nodes___APackagedecl___n_kwpackage__eq "parser_nodes::APackagedecl::n_kwpackage="
-void parser_nodes___APackagedecl___n_kwpackage__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___APackagedecl___n_kwpackage__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___APackagedecl___n_id "parser_nodes::APackagedecl::n_id"
-val_t parser_nodes___APackagedecl___n_id(val_t p0);
-typedef val_t (*parser_nodes___APackagedecl___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___APackagedecl___n_id__eq "parser_nodes::APackagedecl::n_id="
-void parser_nodes___APackagedecl___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___APackagedecl___n_id__eq_t)(val_t p0, val_t p1);
+val_t NEW_AModule_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AModuledecl___n_doc = "parser_nodes::AModuledecl::n_doc";
+val_t parser_nodes___AModuledecl___n_doc(val_t p0);
+typedef val_t (*parser_nodes___AModuledecl___n_doc_t)(val_t p0);
+static const char * const LOCATE_parser_nodes___AModuledecl___n_kwmodule = "parser_nodes::AModuledecl::n_kwmodule";
+val_t parser_nodes___AModuledecl___n_kwmodule(val_t p0);
+typedef val_t (*parser_nodes___AModuledecl___n_kwmodule_t)(val_t p0);
+static const char * const LOCATE_parser_nodes___AModuledecl___n_id = "parser_nodes::AModuledecl::n_id";
+val_t parser_nodes___AModuledecl___n_id(val_t p0);
+typedef val_t (*parser_nodes___AModuledecl___n_id_t)(val_t p0);
+val_t NEW_AModuledecl_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AImport_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AStdImport_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AStdImport___n_visibility "parser_nodes::AStdImport::n_visibility"
+static const char * const LOCATE_parser_nodes___AStdImport___n_visibility = "parser_nodes::AStdImport::n_visibility";
 val_t parser_nodes___AStdImport___n_visibility(val_t p0);
 typedef val_t (*parser_nodes___AStdImport___n_visibility_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdImport___n_visibility__eq "parser_nodes::AStdImport::n_visibility="
-void parser_nodes___AStdImport___n_visibility__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdImport___n_visibility__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AStdImport___n_kwimport "parser_nodes::AStdImport::n_kwimport"
+static const char * const LOCATE_parser_nodes___AStdImport___n_kwimport = "parser_nodes::AStdImport::n_kwimport";
 val_t parser_nodes___AStdImport___n_kwimport(val_t p0);
 typedef val_t (*parser_nodes___AStdImport___n_kwimport_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdImport___n_kwimport__eq "parser_nodes::AStdImport::n_kwimport="
-void parser_nodes___AStdImport___n_kwimport__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdImport___n_kwimport__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AStdImport___n_id "parser_nodes::AStdImport::n_id"
+static const char * const LOCATE_parser_nodes___AStdImport___n_id = "parser_nodes::AStdImport::n_id";
 val_t parser_nodes___AStdImport___n_id(val_t p0);
 typedef val_t (*parser_nodes___AStdImport___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdImport___n_id__eq "parser_nodes::AStdImport::n_id="
-void parser_nodes___AStdImport___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdImport___n_id__eq_t)(val_t p0, val_t p1);
-val_t NEW_ANoImport_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ANoImport___n_visibility "parser_nodes::ANoImport::n_visibility"
+val_t NEW_AStdImport_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ANoImport___n_visibility = "parser_nodes::ANoImport::n_visibility";
 val_t parser_nodes___ANoImport___n_visibility(val_t p0);
 typedef val_t (*parser_nodes___ANoImport___n_visibility_t)(val_t p0);
-#define LOCATE_parser_nodes___ANoImport___n_visibility__eq "parser_nodes::ANoImport::n_visibility="
-void parser_nodes___ANoImport___n_visibility__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANoImport___n_visibility__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ANoImport___n_kwimport "parser_nodes::ANoImport::n_kwimport"
+static const char * const LOCATE_parser_nodes___ANoImport___n_kwimport = "parser_nodes::ANoImport::n_kwimport";
 val_t parser_nodes___ANoImport___n_kwimport(val_t p0);
 typedef val_t (*parser_nodes___ANoImport___n_kwimport_t)(val_t p0);
-#define LOCATE_parser_nodes___ANoImport___n_kwimport__eq "parser_nodes::ANoImport::n_kwimport="
-void parser_nodes___ANoImport___n_kwimport__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANoImport___n_kwimport__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ANoImport___n_kwend "parser_nodes::ANoImport::n_kwend"
+static const char * const LOCATE_parser_nodes___ANoImport___n_kwend = "parser_nodes::ANoImport::n_kwend";
 val_t parser_nodes___ANoImport___n_kwend(val_t p0);
 typedef val_t (*parser_nodes___ANoImport___n_kwend_t)(val_t p0);
-#define LOCATE_parser_nodes___ANoImport___n_kwend__eq "parser_nodes::ANoImport::n_kwend="
-void parser_nodes___ANoImport___n_kwend__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANoImport___n_kwend__eq_t)(val_t p0, val_t p1);
+val_t NEW_ANoImport_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AVisibility_parser_nodes___ANode___init(val_t p0);
 val_t NEW_APublicVisibility_parser_nodes___ANode___init(val_t p0);
-val_t NEW_APrivateVisibility_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___APrivateVisibility___n_kwprivate "parser_nodes::APrivateVisibility::n_kwprivate"
+static const char * const LOCATE_parser_nodes___APrivateVisibility___n_kwprivate = "parser_nodes::APrivateVisibility::n_kwprivate";
 val_t parser_nodes___APrivateVisibility___n_kwprivate(val_t p0);
 typedef val_t (*parser_nodes___APrivateVisibility___n_kwprivate_t)(val_t p0);
-#define LOCATE_parser_nodes___APrivateVisibility___n_kwprivate__eq "parser_nodes::APrivateVisibility::n_kwprivate="
-void parser_nodes___APrivateVisibility___n_kwprivate__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___APrivateVisibility___n_kwprivate__eq_t)(val_t p0, val_t p1);
-val_t NEW_AProtectedVisibility_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AProtectedVisibility___n_kwprotected "parser_nodes::AProtectedVisibility::n_kwprotected"
+val_t NEW_APrivateVisibility_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AProtectedVisibility___n_kwprotected = "parser_nodes::AProtectedVisibility::n_kwprotected";
 val_t parser_nodes___AProtectedVisibility___n_kwprotected(val_t p0);
 typedef val_t (*parser_nodes___AProtectedVisibility___n_kwprotected_t)(val_t p0);
-#define LOCATE_parser_nodes___AProtectedVisibility___n_kwprotected__eq "parser_nodes::AProtectedVisibility::n_kwprotected="
-void parser_nodes___AProtectedVisibility___n_kwprotected__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AProtectedVisibility___n_kwprotected__eq_t)(val_t p0, val_t p1);
-val_t NEW_AIntrudeVisibility_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AIntrudeVisibility___n_kwintrude "parser_nodes::AIntrudeVisibility::n_kwintrude"
+val_t NEW_AProtectedVisibility_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AIntrudeVisibility___n_kwintrude = "parser_nodes::AIntrudeVisibility::n_kwintrude";
 val_t parser_nodes___AIntrudeVisibility___n_kwintrude(val_t p0);
 typedef val_t (*parser_nodes___AIntrudeVisibility___n_kwintrude_t)(val_t p0);
-#define LOCATE_parser_nodes___AIntrudeVisibility___n_kwintrude__eq "parser_nodes::AIntrudeVisibility::n_kwintrude="
-void parser_nodes___AIntrudeVisibility___n_kwintrude__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIntrudeVisibility___n_kwintrude__eq_t)(val_t p0, val_t p1);
+val_t NEW_AIntrudeVisibility_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AClassdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AStdClassdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AStdClassdef___n_doc "parser_nodes::AStdClassdef::n_doc"
+static const char * const LOCATE_parser_nodes___AStdClassdef___n_doc = "parser_nodes::AStdClassdef::n_doc";
 val_t parser_nodes___AStdClassdef___n_doc(val_t p0);
 typedef val_t (*parser_nodes___AStdClassdef___n_doc_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdClassdef___n_doc__eq "parser_nodes::AStdClassdef::n_doc="
-void parser_nodes___AStdClassdef___n_doc__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdClassdef___n_doc__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AStdClassdef___n_kwredef "parser_nodes::AStdClassdef::n_kwredef"
+static const char * const LOCATE_parser_nodes___AStdClassdef___n_kwredef = "parser_nodes::AStdClassdef::n_kwredef";
 val_t parser_nodes___AStdClassdef___n_kwredef(val_t p0);
 typedef val_t (*parser_nodes___AStdClassdef___n_kwredef_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdClassdef___n_kwredef__eq "parser_nodes::AStdClassdef::n_kwredef="
-void parser_nodes___AStdClassdef___n_kwredef__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdClassdef___n_kwredef__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AStdClassdef___n_visibility "parser_nodes::AStdClassdef::n_visibility"
+static const char * const LOCATE_parser_nodes___AStdClassdef___n_visibility = "parser_nodes::AStdClassdef::n_visibility";
 val_t parser_nodes___AStdClassdef___n_visibility(val_t p0);
 typedef val_t (*parser_nodes___AStdClassdef___n_visibility_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdClassdef___n_visibility__eq "parser_nodes::AStdClassdef::n_visibility="
-void parser_nodes___AStdClassdef___n_visibility__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdClassdef___n_visibility__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AStdClassdef___n_classkind "parser_nodes::AStdClassdef::n_classkind"
+static const char * const LOCATE_parser_nodes___AStdClassdef___n_classkind = "parser_nodes::AStdClassdef::n_classkind";
 val_t parser_nodes___AStdClassdef___n_classkind(val_t p0);
 typedef val_t (*parser_nodes___AStdClassdef___n_classkind_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdClassdef___n_classkind__eq "parser_nodes::AStdClassdef::n_classkind="
-void parser_nodes___AStdClassdef___n_classkind__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdClassdef___n_classkind__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AStdClassdef___n_id "parser_nodes::AStdClassdef::n_id"
+static const char * const LOCATE_parser_nodes___AStdClassdef___n_id = "parser_nodes::AStdClassdef::n_id";
 val_t parser_nodes___AStdClassdef___n_id(val_t p0);
 typedef val_t (*parser_nodes___AStdClassdef___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdClassdef___n_id__eq "parser_nodes::AStdClassdef::n_id="
-void parser_nodes___AStdClassdef___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdClassdef___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AStdClassdef___n_formaldefs "parser_nodes::AStdClassdef::n_formaldefs"
+static const char * const LOCATE_parser_nodes___AStdClassdef___n_formaldefs = "parser_nodes::AStdClassdef::n_formaldefs";
 val_t parser_nodes___AStdClassdef___n_formaldefs(val_t p0);
 typedef val_t (*parser_nodes___AStdClassdef___n_formaldefs_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdClassdef___n_formaldefs__eq "parser_nodes::AStdClassdef::n_formaldefs="
-void parser_nodes___AStdClassdef___n_formaldefs__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdClassdef___n_formaldefs__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AStdClassdef___n_superclasses "parser_nodes::AStdClassdef::n_superclasses"
+static const char * const LOCATE_parser_nodes___AStdClassdef___n_superclasses = "parser_nodes::AStdClassdef::n_superclasses";
 val_t parser_nodes___AStdClassdef___n_superclasses(val_t p0);
 typedef val_t (*parser_nodes___AStdClassdef___n_superclasses_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdClassdef___n_superclasses__eq "parser_nodes::AStdClassdef::n_superclasses="
-void parser_nodes___AStdClassdef___n_superclasses__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdClassdef___n_superclasses__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AStdClassdef___n_propdefs "parser_nodes::AStdClassdef::n_propdefs"
+static const char * const LOCATE_parser_nodes___AStdClassdef___n_propdefs = "parser_nodes::AStdClassdef::n_propdefs";
 val_t parser_nodes___AStdClassdef___n_propdefs(val_t p0);
 typedef val_t (*parser_nodes___AStdClassdef___n_propdefs_t)(val_t p0);
-#define LOCATE_parser_nodes___AStdClassdef___n_propdefs__eq "parser_nodes::AStdClassdef::n_propdefs="
-void parser_nodes___AStdClassdef___n_propdefs__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStdClassdef___n_propdefs__eq_t)(val_t p0, val_t p1);
-val_t NEW_ATopClassdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ATopClassdef___n_propdefs "parser_nodes::ATopClassdef::n_propdefs"
+val_t NEW_AStdClassdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ATopClassdef___n_propdefs = "parser_nodes::ATopClassdef::n_propdefs";
 val_t parser_nodes___ATopClassdef___n_propdefs(val_t p0);
 typedef val_t (*parser_nodes___ATopClassdef___n_propdefs_t)(val_t p0);
-#define LOCATE_parser_nodes___ATopClassdef___n_propdefs__eq "parser_nodes::ATopClassdef::n_propdefs="
-void parser_nodes___ATopClassdef___n_propdefs__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ATopClassdef___n_propdefs__eq_t)(val_t p0, val_t p1);
-val_t NEW_AMainClassdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AMainClassdef___n_propdefs "parser_nodes::AMainClassdef::n_propdefs"
+val_t NEW_ATopClassdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AMainClassdef___n_propdefs = "parser_nodes::AMainClassdef::n_propdefs";
 val_t parser_nodes___AMainClassdef___n_propdefs(val_t p0);
 typedef val_t (*parser_nodes___AMainClassdef___n_propdefs_t)(val_t p0);
-#define LOCATE_parser_nodes___AMainClassdef___n_propdefs__eq "parser_nodes::AMainClassdef::n_propdefs="
-void parser_nodes___AMainClassdef___n_propdefs__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AMainClassdef___n_propdefs__eq_t)(val_t p0, val_t p1);
+val_t NEW_AMainClassdef_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AClasskind_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AConcreteClasskind_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AConcreteClasskind___n_kwclass "parser_nodes::AConcreteClasskind::n_kwclass"
+static const char * const LOCATE_parser_nodes___AConcreteClasskind___n_kwclass = "parser_nodes::AConcreteClasskind::n_kwclass";
 val_t parser_nodes___AConcreteClasskind___n_kwclass(val_t p0);
 typedef val_t (*parser_nodes___AConcreteClasskind___n_kwclass_t)(val_t p0);
-#define LOCATE_parser_nodes___AConcreteClasskind___n_kwclass__eq "parser_nodes::AConcreteClasskind::n_kwclass="
-void parser_nodes___AConcreteClasskind___n_kwclass__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AConcreteClasskind___n_kwclass__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAbstractClasskind_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAbstractClasskind___n_kwabstract "parser_nodes::AAbstractClasskind::n_kwabstract"
+val_t NEW_AConcreteClasskind_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAbstractClasskind___n_kwabstract = "parser_nodes::AAbstractClasskind::n_kwabstract";
 val_t parser_nodes___AAbstractClasskind___n_kwabstract(val_t p0);
 typedef val_t (*parser_nodes___AAbstractClasskind___n_kwabstract_t)(val_t p0);
-#define LOCATE_parser_nodes___AAbstractClasskind___n_kwabstract__eq "parser_nodes::AAbstractClasskind::n_kwabstract="
-void parser_nodes___AAbstractClasskind___n_kwabstract__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAbstractClasskind___n_kwabstract__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAbstractClasskind___n_kwclass "parser_nodes::AAbstractClasskind::n_kwclass"
+static const char * const LOCATE_parser_nodes___AAbstractClasskind___n_kwclass = "parser_nodes::AAbstractClasskind::n_kwclass";
 val_t parser_nodes___AAbstractClasskind___n_kwclass(val_t p0);
 typedef val_t (*parser_nodes___AAbstractClasskind___n_kwclass_t)(val_t p0);
-#define LOCATE_parser_nodes___AAbstractClasskind___n_kwclass__eq "parser_nodes::AAbstractClasskind::n_kwclass="
-void parser_nodes___AAbstractClasskind___n_kwclass__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAbstractClasskind___n_kwclass__eq_t)(val_t p0, val_t p1);
-val_t NEW_AInterfaceClasskind_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AInterfaceClasskind___n_kwinterface "parser_nodes::AInterfaceClasskind::n_kwinterface"
+val_t NEW_AAbstractClasskind_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AInterfaceClasskind___n_kwinterface = "parser_nodes::AInterfaceClasskind::n_kwinterface";
 val_t parser_nodes___AInterfaceClasskind___n_kwinterface(val_t p0);
 typedef val_t (*parser_nodes___AInterfaceClasskind___n_kwinterface_t)(val_t p0);
-#define LOCATE_parser_nodes___AInterfaceClasskind___n_kwinterface__eq "parser_nodes::AInterfaceClasskind::n_kwinterface="
-void parser_nodes___AInterfaceClasskind___n_kwinterface__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AInterfaceClasskind___n_kwinterface__eq_t)(val_t p0, val_t p1);
-val_t NEW_AUniversalClasskind_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AUniversalClasskind___n_kwuniversal "parser_nodes::AUniversalClasskind::n_kwuniversal"
+val_t NEW_AInterfaceClasskind_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AUniversalClasskind___n_kwuniversal = "parser_nodes::AUniversalClasskind::n_kwuniversal";
 val_t parser_nodes___AUniversalClasskind___n_kwuniversal(val_t p0);
 typedef val_t (*parser_nodes___AUniversalClasskind___n_kwuniversal_t)(val_t p0);
-#define LOCATE_parser_nodes___AUniversalClasskind___n_kwuniversal__eq "parser_nodes::AUniversalClasskind::n_kwuniversal="
-void parser_nodes___AUniversalClasskind___n_kwuniversal__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AUniversalClasskind___n_kwuniversal__eq_t)(val_t p0, val_t p1);
-val_t NEW_AFormaldef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AFormaldef___n_id "parser_nodes::AFormaldef::n_id"
+val_t NEW_AUniversalClasskind_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AFormaldef___n_id = "parser_nodes::AFormaldef::n_id";
 val_t parser_nodes___AFormaldef___n_id(val_t p0);
 typedef val_t (*parser_nodes___AFormaldef___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AFormaldef___n_id__eq "parser_nodes::AFormaldef::n_id="
-void parser_nodes___AFormaldef___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AFormaldef___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AFormaldef___n_type "parser_nodes::AFormaldef::n_type"
+static const char * const LOCATE_parser_nodes___AFormaldef___n_type = "parser_nodes::AFormaldef::n_type";
 val_t parser_nodes___AFormaldef___n_type(val_t p0);
 typedef val_t (*parser_nodes___AFormaldef___n_type_t)(val_t p0);
-#define LOCATE_parser_nodes___AFormaldef___n_type__eq "parser_nodes::AFormaldef::n_type="
-void parser_nodes___AFormaldef___n_type__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AFormaldef___n_type__eq_t)(val_t p0, val_t p1);
-val_t NEW_ASuperclass_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ASuperclass___n_kwspecial "parser_nodes::ASuperclass::n_kwspecial"
+val_t NEW_AFormaldef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ASuperclass___n_kwspecial = "parser_nodes::ASuperclass::n_kwspecial";
 val_t parser_nodes___ASuperclass___n_kwspecial(val_t p0);
 typedef val_t (*parser_nodes___ASuperclass___n_kwspecial_t)(val_t p0);
-#define LOCATE_parser_nodes___ASuperclass___n_kwspecial__eq "parser_nodes::ASuperclass::n_kwspecial="
-void parser_nodes___ASuperclass___n_kwspecial__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASuperclass___n_kwspecial__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ASuperclass___n_type "parser_nodes::ASuperclass::n_type"
+static const char * const LOCATE_parser_nodes___ASuperclass___n_kwsuper = "parser_nodes::ASuperclass::n_kwsuper";
+val_t parser_nodes___ASuperclass___n_kwsuper(val_t p0);
+typedef val_t (*parser_nodes___ASuperclass___n_kwsuper_t)(val_t p0);
+static const char * const LOCATE_parser_nodes___ASuperclass___n_type = "parser_nodes::ASuperclass::n_type";
 val_t parser_nodes___ASuperclass___n_type(val_t p0);
 typedef val_t (*parser_nodes___ASuperclass___n_type_t)(val_t p0);
-#define LOCATE_parser_nodes___ASuperclass___n_type__eq "parser_nodes::ASuperclass::n_type="
-void parser_nodes___ASuperclass___n_type__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASuperclass___n_type__eq_t)(val_t p0, val_t p1);
-val_t NEW_APropdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___APropdef___n_doc "parser_nodes::APropdef::n_doc"
+val_t NEW_ASuperclass_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___APropdef___n_doc = "parser_nodes::APropdef::n_doc";
 val_t parser_nodes___APropdef___n_doc(val_t p0);
 typedef val_t (*parser_nodes___APropdef___n_doc_t)(val_t p0);
-#define LOCATE_parser_nodes___APropdef___n_doc__eq "parser_nodes::APropdef::n_doc="
-void parser_nodes___APropdef___n_doc__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___APropdef___n_doc__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAttrPropdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAttrPropdef___n_kwredef "parser_nodes::AAttrPropdef::n_kwredef"
+val_t NEW_APropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAttrPropdef___n_kwredef = "parser_nodes::AAttrPropdef::n_kwredef";
 val_t parser_nodes___AAttrPropdef___n_kwredef(val_t p0);
 typedef val_t (*parser_nodes___AAttrPropdef___n_kwredef_t)(val_t p0);
-#define LOCATE_parser_nodes___AAttrPropdef___n_kwredef__eq "parser_nodes::AAttrPropdef::n_kwredef="
-void parser_nodes___AAttrPropdef___n_kwredef__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAttrPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAttrPropdef___n_visibility "parser_nodes::AAttrPropdef::n_visibility"
+static const char * const LOCATE_parser_nodes___AAttrPropdef___n_visibility = "parser_nodes::AAttrPropdef::n_visibility";
 val_t parser_nodes___AAttrPropdef___n_visibility(val_t p0);
 typedef val_t (*parser_nodes___AAttrPropdef___n_visibility_t)(val_t p0);
-#define LOCATE_parser_nodes___AAttrPropdef___n_visibility__eq "parser_nodes::AAttrPropdef::n_visibility="
-void parser_nodes___AAttrPropdef___n_visibility__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAttrPropdef___n_visibility__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAttrPropdef___n_kwvar "parser_nodes::AAttrPropdef::n_kwvar"
+static const char * const LOCATE_parser_nodes___AAttrPropdef___n_kwvar = "parser_nodes::AAttrPropdef::n_kwvar";
 val_t parser_nodes___AAttrPropdef___n_kwvar(val_t p0);
 typedef val_t (*parser_nodes___AAttrPropdef___n_kwvar_t)(val_t p0);
-#define LOCATE_parser_nodes___AAttrPropdef___n_kwvar__eq "parser_nodes::AAttrPropdef::n_kwvar="
-void parser_nodes___AAttrPropdef___n_kwvar__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAttrPropdef___n_kwvar__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAttrPropdef___n_id "parser_nodes::AAttrPropdef::n_id"
+static const char * const LOCATE_parser_nodes___AAttrPropdef___n_id = "parser_nodes::AAttrPropdef::n_id";
 val_t parser_nodes___AAttrPropdef___n_id(val_t p0);
 typedef val_t (*parser_nodes___AAttrPropdef___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AAttrPropdef___n_id__eq "parser_nodes::AAttrPropdef::n_id="
-void parser_nodes___AAttrPropdef___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAttrPropdef___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAttrPropdef___n_type "parser_nodes::AAttrPropdef::n_type"
+static const char * const LOCATE_parser_nodes___AAttrPropdef___n_id2 = "parser_nodes::AAttrPropdef::n_id2";
+val_t parser_nodes___AAttrPropdef___n_id2(val_t p0);
+typedef val_t (*parser_nodes___AAttrPropdef___n_id2_t)(val_t p0);
+static const char * const LOCATE_parser_nodes___AAttrPropdef___n_type = "parser_nodes::AAttrPropdef::n_type";
 val_t parser_nodes___AAttrPropdef___n_type(val_t p0);
 typedef val_t (*parser_nodes___AAttrPropdef___n_type_t)(val_t p0);
-#define LOCATE_parser_nodes___AAttrPropdef___n_type__eq "parser_nodes::AAttrPropdef::n_type="
-void parser_nodes___AAttrPropdef___n_type__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAttrPropdef___n_type__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAttrPropdef___n_readable "parser_nodes::AAttrPropdef::n_readable"
+static const char * const LOCATE_parser_nodes___AAttrPropdef___n_readable = "parser_nodes::AAttrPropdef::n_readable";
 val_t parser_nodes___AAttrPropdef___n_readable(val_t p0);
 typedef val_t (*parser_nodes___AAttrPropdef___n_readable_t)(val_t p0);
-#define LOCATE_parser_nodes___AAttrPropdef___n_readable__eq "parser_nodes::AAttrPropdef::n_readable="
-void parser_nodes___AAttrPropdef___n_readable__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAttrPropdef___n_readable__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAttrPropdef___n_writable "parser_nodes::AAttrPropdef::n_writable"
+static const char * const LOCATE_parser_nodes___AAttrPropdef___n_writable = "parser_nodes::AAttrPropdef::n_writable";
 val_t parser_nodes___AAttrPropdef___n_writable(val_t p0);
 typedef val_t (*parser_nodes___AAttrPropdef___n_writable_t)(val_t p0);
-#define LOCATE_parser_nodes___AAttrPropdef___n_writable__eq "parser_nodes::AAttrPropdef::n_writable="
-void parser_nodes___AAttrPropdef___n_writable__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAttrPropdef___n_writable__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAttrPropdef___n_expr "parser_nodes::AAttrPropdef::n_expr"
+static const char * const LOCATE_parser_nodes___AAttrPropdef___n_expr = "parser_nodes::AAttrPropdef::n_expr";
 val_t parser_nodes___AAttrPropdef___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AAttrPropdef___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AAttrPropdef___n_expr__eq "parser_nodes::AAttrPropdef::n_expr="
-void parser_nodes___AAttrPropdef___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAttrPropdef___n_expr__eq_t)(val_t p0, val_t p1);
-val_t NEW_AMethPropdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AMethPropdef___n_kwredef "parser_nodes::AMethPropdef::n_kwredef"
+val_t NEW_AAttrPropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AMethPropdef___n_kwredef = "parser_nodes::AMethPropdef::n_kwredef";
 val_t parser_nodes___AMethPropdef___n_kwredef(val_t p0);
 typedef val_t (*parser_nodes___AMethPropdef___n_kwredef_t)(val_t p0);
-#define LOCATE_parser_nodes___AMethPropdef___n_kwredef__eq "parser_nodes::AMethPropdef::n_kwredef="
-void parser_nodes___AMethPropdef___n_kwredef__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AMethPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AMethPropdef___n_visibility "parser_nodes::AMethPropdef::n_visibility"
+static const char * const LOCATE_parser_nodes___AMethPropdef___n_visibility = "parser_nodes::AMethPropdef::n_visibility";
 val_t parser_nodes___AMethPropdef___n_visibility(val_t p0);
 typedef val_t (*parser_nodes___AMethPropdef___n_visibility_t)(val_t p0);
-#define LOCATE_parser_nodes___AMethPropdef___n_visibility__eq "parser_nodes::AMethPropdef::n_visibility="
-void parser_nodes___AMethPropdef___n_visibility__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AMethPropdef___n_visibility__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AMethPropdef___n_methid "parser_nodes::AMethPropdef::n_methid"
+static const char * const LOCATE_parser_nodes___AMethPropdef___n_methid = "parser_nodes::AMethPropdef::n_methid";
 val_t parser_nodes___AMethPropdef___n_methid(val_t p0);
 typedef val_t (*parser_nodes___AMethPropdef___n_methid_t)(val_t p0);
-#define LOCATE_parser_nodes___AMethPropdef___n_methid__eq "parser_nodes::AMethPropdef::n_methid="
-void parser_nodes___AMethPropdef___n_methid__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AMethPropdef___n_methid__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AMethPropdef___n_signature "parser_nodes::AMethPropdef::n_signature"
+static const char * const LOCATE_parser_nodes___AMethPropdef___n_signature = "parser_nodes::AMethPropdef::n_signature";
 val_t parser_nodes___AMethPropdef___n_signature(val_t p0);
 typedef val_t (*parser_nodes___AMethPropdef___n_signature_t)(val_t p0);
-#define LOCATE_parser_nodes___AMethPropdef___n_signature__eq "parser_nodes::AMethPropdef::n_signature="
-void parser_nodes___AMethPropdef___n_signature__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AMethPropdef___n_signature__eq_t)(val_t p0, val_t p1);
-val_t NEW_ADeferredMethPropdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ADeferredMethPropdef___n_kwmeth "parser_nodes::ADeferredMethPropdef::n_kwmeth"
+val_t NEW_AMethPropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ADeferredMethPropdef___n_kwmeth = "parser_nodes::ADeferredMethPropdef::n_kwmeth";
 val_t parser_nodes___ADeferredMethPropdef___n_kwmeth(val_t p0);
 typedef val_t (*parser_nodes___ADeferredMethPropdef___n_kwmeth_t)(val_t p0);
-#define LOCATE_parser_nodes___ADeferredMethPropdef___n_kwmeth__eq "parser_nodes::ADeferredMethPropdef::n_kwmeth="
-void parser_nodes___ADeferredMethPropdef___n_kwmeth__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ADeferredMethPropdef___n_kwmeth__eq_t)(val_t p0, val_t p1);
-val_t NEW_AInternMethPropdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AInternMethPropdef___n_kwmeth "parser_nodes::AInternMethPropdef::n_kwmeth"
+val_t NEW_ADeferredMethPropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AInternMethPropdef___n_kwmeth = "parser_nodes::AInternMethPropdef::n_kwmeth";
 val_t parser_nodes___AInternMethPropdef___n_kwmeth(val_t p0);
 typedef val_t (*parser_nodes___AInternMethPropdef___n_kwmeth_t)(val_t p0);
-#define LOCATE_parser_nodes___AInternMethPropdef___n_kwmeth__eq "parser_nodes::AInternMethPropdef::n_kwmeth="
-void parser_nodes___AInternMethPropdef___n_kwmeth__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AInternMethPropdef___n_kwmeth__eq_t)(val_t p0, val_t p1);
-val_t NEW_AExternMethPropdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AExternMethPropdef___n_kwmeth "parser_nodes::AExternMethPropdef::n_kwmeth"
+val_t NEW_AInternMethPropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AExternMethPropdef___n_kwmeth = "parser_nodes::AExternMethPropdef::n_kwmeth";
 val_t parser_nodes___AExternMethPropdef___n_kwmeth(val_t p0);
 typedef val_t (*parser_nodes___AExternMethPropdef___n_kwmeth_t)(val_t p0);
-#define LOCATE_parser_nodes___AExternMethPropdef___n_kwmeth__eq "parser_nodes::AExternMethPropdef::n_kwmeth="
-void parser_nodes___AExternMethPropdef___n_kwmeth__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AExternMethPropdef___n_kwmeth__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AExternMethPropdef___n_extern "parser_nodes::AExternMethPropdef::n_extern"
+static const char * const LOCATE_parser_nodes___AExternMethPropdef___n_extern = "parser_nodes::AExternMethPropdef::n_extern";
 val_t parser_nodes___AExternMethPropdef___n_extern(val_t p0);
 typedef val_t (*parser_nodes___AExternMethPropdef___n_extern_t)(val_t p0);
-#define LOCATE_parser_nodes___AExternMethPropdef___n_extern__eq "parser_nodes::AExternMethPropdef::n_extern="
-void parser_nodes___AExternMethPropdef___n_extern__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AExternMethPropdef___n_extern__eq_t)(val_t p0, val_t p1);
-val_t NEW_AConcreteMethPropdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AConcreteMethPropdef___n_kwmeth "parser_nodes::AConcreteMethPropdef::n_kwmeth"
+val_t NEW_AExternMethPropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AConcreteMethPropdef___n_kwmeth = "parser_nodes::AConcreteMethPropdef::n_kwmeth";
 val_t parser_nodes___AConcreteMethPropdef___n_kwmeth(val_t p0);
 typedef val_t (*parser_nodes___AConcreteMethPropdef___n_kwmeth_t)(val_t p0);
-#define LOCATE_parser_nodes___AConcreteMethPropdef___n_kwmeth__eq "parser_nodes::AConcreteMethPropdef::n_kwmeth="
-void parser_nodes___AConcreteMethPropdef___n_kwmeth__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AConcreteMethPropdef___n_kwmeth__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AConcreteMethPropdef___n_block "parser_nodes::AConcreteMethPropdef::n_block"
+static const char * const LOCATE_parser_nodes___AConcreteMethPropdef___n_block = "parser_nodes::AConcreteMethPropdef::n_block";
 val_t parser_nodes___AConcreteMethPropdef___n_block(val_t p0);
 typedef val_t (*parser_nodes___AConcreteMethPropdef___n_block_t)(val_t p0);
-#define LOCATE_parser_nodes___AConcreteMethPropdef___n_block__eq "parser_nodes::AConcreteMethPropdef::n_block="
-void parser_nodes___AConcreteMethPropdef___n_block__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AConcreteMethPropdef___n_block__eq_t)(val_t p0, val_t p1);
-val_t NEW_AConcreteInitPropdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AConcreteInitPropdef___n_kwinit "parser_nodes::AConcreteInitPropdef::n_kwinit"
+val_t NEW_AConcreteMethPropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AConcreteInitPropdef___n_kwinit = "parser_nodes::AConcreteInitPropdef::n_kwinit";
 val_t parser_nodes___AConcreteInitPropdef___n_kwinit(val_t p0);
 typedef val_t (*parser_nodes___AConcreteInitPropdef___n_kwinit_t)(val_t p0);
-#define LOCATE_parser_nodes___AConcreteInitPropdef___n_kwinit__eq "parser_nodes::AConcreteInitPropdef::n_kwinit="
-void parser_nodes___AConcreteInitPropdef___n_kwinit__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AConcreteInitPropdef___n_kwinit__eq_t)(val_t p0, val_t p1);
+val_t NEW_AConcreteInitPropdef_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AMainMethPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ATypePropdef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ATypePropdef___n_kwredef "parser_nodes::ATypePropdef::n_kwredef"
+static const char * const LOCATE_parser_nodes___ATypePropdef___n_kwredef = "parser_nodes::ATypePropdef::n_kwredef";
 val_t parser_nodes___ATypePropdef___n_kwredef(val_t p0);
 typedef val_t (*parser_nodes___ATypePropdef___n_kwredef_t)(val_t p0);
-#define LOCATE_parser_nodes___ATypePropdef___n_kwredef__eq "parser_nodes::ATypePropdef::n_kwredef="
-void parser_nodes___ATypePropdef___n_kwredef__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ATypePropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ATypePropdef___n_visibility "parser_nodes::ATypePropdef::n_visibility"
+static const char * const LOCATE_parser_nodes___ATypePropdef___n_visibility = "parser_nodes::ATypePropdef::n_visibility";
 val_t parser_nodes___ATypePropdef___n_visibility(val_t p0);
 typedef val_t (*parser_nodes___ATypePropdef___n_visibility_t)(val_t p0);
-#define LOCATE_parser_nodes___ATypePropdef___n_visibility__eq "parser_nodes::ATypePropdef::n_visibility="
-void parser_nodes___ATypePropdef___n_visibility__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ATypePropdef___n_visibility__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ATypePropdef___n_kwtype "parser_nodes::ATypePropdef::n_kwtype"
+static const char * const LOCATE_parser_nodes___ATypePropdef___n_kwtype = "parser_nodes::ATypePropdef::n_kwtype";
 val_t parser_nodes___ATypePropdef___n_kwtype(val_t p0);
 typedef val_t (*parser_nodes___ATypePropdef___n_kwtype_t)(val_t p0);
-#define LOCATE_parser_nodes___ATypePropdef___n_kwtype__eq "parser_nodes::ATypePropdef::n_kwtype="
-void parser_nodes___ATypePropdef___n_kwtype__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ATypePropdef___n_kwtype__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ATypePropdef___n_id "parser_nodes::ATypePropdef::n_id"
+static const char * const LOCATE_parser_nodes___ATypePropdef___n_id = "parser_nodes::ATypePropdef::n_id";
 val_t parser_nodes___ATypePropdef___n_id(val_t p0);
 typedef val_t (*parser_nodes___ATypePropdef___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___ATypePropdef___n_id__eq "parser_nodes::ATypePropdef::n_id="
-void parser_nodes___ATypePropdef___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ATypePropdef___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ATypePropdef___n_type "parser_nodes::ATypePropdef::n_type"
+static const char * const LOCATE_parser_nodes___ATypePropdef___n_type = "parser_nodes::ATypePropdef::n_type";
 val_t parser_nodes___ATypePropdef___n_type(val_t p0);
 typedef val_t (*parser_nodes___ATypePropdef___n_type_t)(val_t p0);
-#define LOCATE_parser_nodes___ATypePropdef___n_type__eq "parser_nodes::ATypePropdef::n_type="
-void parser_nodes___ATypePropdef___n_type__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ATypePropdef___n_type__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAble_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAble___n_kwredef "parser_nodes::AAble::n_kwredef"
+val_t NEW_ATypePropdef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAble___n_visibility = "parser_nodes::AAble::n_visibility";
+val_t parser_nodes___AAble___n_visibility(val_t p0);
+typedef val_t (*parser_nodes___AAble___n_visibility_t)(val_t p0);
+static const char * const LOCATE_parser_nodes___AAble___n_kwredef = "parser_nodes::AAble::n_kwredef";
 val_t parser_nodes___AAble___n_kwredef(val_t p0);
 typedef val_t (*parser_nodes___AAble___n_kwredef_t)(val_t p0);
-#define LOCATE_parser_nodes___AAble___n_kwredef__eq "parser_nodes::AAble::n_kwredef="
-void parser_nodes___AAble___n_kwredef__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAble___n_kwredef__eq_t)(val_t p0, val_t p1);
-val_t NEW_AReadAble_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AReadAble___n_kwreadable "parser_nodes::AReadAble::n_kwreadable"
+val_t NEW_AAble_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AReadAble___n_kwreadable = "parser_nodes::AReadAble::n_kwreadable";
 val_t parser_nodes___AReadAble___n_kwreadable(val_t p0);
 typedef val_t (*parser_nodes___AReadAble___n_kwreadable_t)(val_t p0);
-#define LOCATE_parser_nodes___AReadAble___n_kwreadable__eq "parser_nodes::AReadAble::n_kwreadable="
-void parser_nodes___AReadAble___n_kwreadable__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AReadAble___n_kwreadable__eq_t)(val_t p0, val_t p1);
-val_t NEW_AWriteAble_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AWriteAble___n_kwwritable "parser_nodes::AWriteAble::n_kwwritable"
+val_t NEW_AReadAble_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AWriteAble___n_kwwritable = "parser_nodes::AWriteAble::n_kwwritable";
 val_t parser_nodes___AWriteAble___n_kwwritable(val_t p0);
 typedef val_t (*parser_nodes___AWriteAble___n_kwwritable_t)(val_t p0);
-#define LOCATE_parser_nodes___AWriteAble___n_kwwritable__eq "parser_nodes::AWriteAble::n_kwwritable="
-void parser_nodes___AWriteAble___n_kwwritable__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AWriteAble___n_kwwritable__eq_t)(val_t p0, val_t p1);
+val_t NEW_AWriteAble_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AMethid_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AIdMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AIdMethid___n_id "parser_nodes::AIdMethid::n_id"
+static const char * const LOCATE_parser_nodes___AIdMethid___n_id = "parser_nodes::AIdMethid::n_id";
 val_t parser_nodes___AIdMethid___n_id(val_t p0);
 typedef val_t (*parser_nodes___AIdMethid___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AIdMethid___n_id__eq "parser_nodes::AIdMethid::n_id="
-void parser_nodes___AIdMethid___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIdMethid___n_id__eq_t)(val_t p0, val_t p1);
-val_t NEW_APlusMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___APlusMethid___n_plus "parser_nodes::APlusMethid::n_plus"
+val_t NEW_AIdMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___APlusMethid___n_plus = "parser_nodes::APlusMethid::n_plus";
 val_t parser_nodes___APlusMethid___n_plus(val_t p0);
 typedef val_t (*parser_nodes___APlusMethid___n_plus_t)(val_t p0);
-#define LOCATE_parser_nodes___APlusMethid___n_plus__eq "parser_nodes::APlusMethid::n_plus="
-void parser_nodes___APlusMethid___n_plus__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___APlusMethid___n_plus__eq_t)(val_t p0, val_t p1);
-val_t NEW_AMinusMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AMinusMethid___n_minus "parser_nodes::AMinusMethid::n_minus"
+val_t NEW_APlusMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AMinusMethid___n_minus = "parser_nodes::AMinusMethid::n_minus";
 val_t parser_nodes___AMinusMethid___n_minus(val_t p0);
 typedef val_t (*parser_nodes___AMinusMethid___n_minus_t)(val_t p0);
-#define LOCATE_parser_nodes___AMinusMethid___n_minus__eq "parser_nodes::AMinusMethid::n_minus="
-void parser_nodes___AMinusMethid___n_minus__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AMinusMethid___n_minus__eq_t)(val_t p0, val_t p1);
-val_t NEW_AStarMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AStarMethid___n_star "parser_nodes::AStarMethid::n_star"
+val_t NEW_AMinusMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AStarMethid___n_star = "parser_nodes::AStarMethid::n_star";
 val_t parser_nodes___AStarMethid___n_star(val_t p0);
 typedef val_t (*parser_nodes___AStarMethid___n_star_t)(val_t p0);
-#define LOCATE_parser_nodes___AStarMethid___n_star__eq "parser_nodes::AStarMethid::n_star="
-void parser_nodes___AStarMethid___n_star__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStarMethid___n_star__eq_t)(val_t p0, val_t p1);
-val_t NEW_ASlashMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ASlashMethid___n_slash "parser_nodes::ASlashMethid::n_slash"
+val_t NEW_AStarMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ASlashMethid___n_slash = "parser_nodes::ASlashMethid::n_slash";
 val_t parser_nodes___ASlashMethid___n_slash(val_t p0);
 typedef val_t (*parser_nodes___ASlashMethid___n_slash_t)(val_t p0);
-#define LOCATE_parser_nodes___ASlashMethid___n_slash__eq "parser_nodes::ASlashMethid::n_slash="
-void parser_nodes___ASlashMethid___n_slash__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASlashMethid___n_slash__eq_t)(val_t p0, val_t p1);
-val_t NEW_APercentMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___APercentMethid___n_percent "parser_nodes::APercentMethid::n_percent"
+val_t NEW_ASlashMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___APercentMethid___n_percent = "parser_nodes::APercentMethid::n_percent";
 val_t parser_nodes___APercentMethid___n_percent(val_t p0);
 typedef val_t (*parser_nodes___APercentMethid___n_percent_t)(val_t p0);
-#define LOCATE_parser_nodes___APercentMethid___n_percent__eq "parser_nodes::APercentMethid::n_percent="
-void parser_nodes___APercentMethid___n_percent__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___APercentMethid___n_percent__eq_t)(val_t p0, val_t p1);
-val_t NEW_AEqMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AEqMethid___n_eq "parser_nodes::AEqMethid::n_eq"
+val_t NEW_APercentMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AEqMethid___n_eq = "parser_nodes::AEqMethid::n_eq";
 val_t parser_nodes___AEqMethid___n_eq(val_t p0);
 typedef val_t (*parser_nodes___AEqMethid___n_eq_t)(val_t p0);
-#define LOCATE_parser_nodes___AEqMethid___n_eq__eq "parser_nodes::AEqMethid::n_eq="
-void parser_nodes___AEqMethid___n_eq__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AEqMethid___n_eq__eq_t)(val_t p0, val_t p1);
-val_t NEW_ANeMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ANeMethid___n_ne "parser_nodes::ANeMethid::n_ne"
+val_t NEW_AEqMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ANeMethid___n_ne = "parser_nodes::ANeMethid::n_ne";
 val_t parser_nodes___ANeMethid___n_ne(val_t p0);
 typedef val_t (*parser_nodes___ANeMethid___n_ne_t)(val_t p0);
-#define LOCATE_parser_nodes___ANeMethid___n_ne__eq "parser_nodes::ANeMethid::n_ne="
-void parser_nodes___ANeMethid___n_ne__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANeMethid___n_ne__eq_t)(val_t p0, val_t p1);
-val_t NEW_ALeMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ALeMethid___n_le "parser_nodes::ALeMethid::n_le"
+val_t NEW_ANeMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ALeMethid___n_le = "parser_nodes::ALeMethid::n_le";
 val_t parser_nodes___ALeMethid___n_le(val_t p0);
 typedef val_t (*parser_nodes___ALeMethid___n_le_t)(val_t p0);
-#define LOCATE_parser_nodes___ALeMethid___n_le__eq "parser_nodes::ALeMethid::n_le="
-void parser_nodes___ALeMethid___n_le__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ALeMethid___n_le__eq_t)(val_t p0, val_t p1);
-val_t NEW_AGeMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AGeMethid___n_ge "parser_nodes::AGeMethid::n_ge"
+val_t NEW_ALeMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AGeMethid___n_ge = "parser_nodes::AGeMethid::n_ge";
 val_t parser_nodes___AGeMethid___n_ge(val_t p0);
 typedef val_t (*parser_nodes___AGeMethid___n_ge_t)(val_t p0);
-#define LOCATE_parser_nodes___AGeMethid___n_ge__eq "parser_nodes::AGeMethid::n_ge="
-void parser_nodes___AGeMethid___n_ge__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AGeMethid___n_ge__eq_t)(val_t p0, val_t p1);
-val_t NEW_ALtMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ALtMethid___n_lt "parser_nodes::ALtMethid::n_lt"
+val_t NEW_AGeMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ALtMethid___n_lt = "parser_nodes::ALtMethid::n_lt";
 val_t parser_nodes___ALtMethid___n_lt(val_t p0);
 typedef val_t (*parser_nodes___ALtMethid___n_lt_t)(val_t p0);
-#define LOCATE_parser_nodes___ALtMethid___n_lt__eq "parser_nodes::ALtMethid::n_lt="
-void parser_nodes___ALtMethid___n_lt__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ALtMethid___n_lt__eq_t)(val_t p0, val_t p1);
-val_t NEW_AGtMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AGtMethid___n_gt "parser_nodes::AGtMethid::n_gt"
+val_t NEW_ALtMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AGtMethid___n_gt = "parser_nodes::AGtMethid::n_gt";
 val_t parser_nodes___AGtMethid___n_gt(val_t p0);
 typedef val_t (*parser_nodes___AGtMethid___n_gt_t)(val_t p0);
-#define LOCATE_parser_nodes___AGtMethid___n_gt__eq "parser_nodes::AGtMethid::n_gt="
-void parser_nodes___AGtMethid___n_gt__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AGtMethid___n_gt__eq_t)(val_t p0, val_t p1);
-val_t NEW_ABraMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ABraMethid___n_obra "parser_nodes::ABraMethid::n_obra"
+val_t NEW_AGtMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ALlMethid___n_ll = "parser_nodes::ALlMethid::n_ll";
+val_t parser_nodes___ALlMethid___n_ll(val_t p0);
+typedef val_t (*parser_nodes___ALlMethid___n_ll_t)(val_t p0);
+static const char * const LOCATE_parser_nodes___ALlMethid___n_ll__eq = "parser_nodes::ALlMethid::n_ll=";
+void parser_nodes___ALlMethid___n_ll__eq(val_t p0, val_t p1);
+typedef void (*parser_nodes___ALlMethid___n_ll__eq_t)(val_t p0, val_t p1);
+val_t NEW_ALlMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AGgMethid___n_gg = "parser_nodes::AGgMethid::n_gg";
+val_t parser_nodes___AGgMethid___n_gg(val_t p0);
+typedef val_t (*parser_nodes___AGgMethid___n_gg_t)(val_t p0);
+static const char * const LOCATE_parser_nodes___AGgMethid___n_gg__eq = "parser_nodes::AGgMethid::n_gg=";
+void parser_nodes___AGgMethid___n_gg__eq(val_t p0, val_t p1);
+typedef void (*parser_nodes___AGgMethid___n_gg__eq_t)(val_t p0, val_t p1);
+val_t NEW_AGgMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ABraMethid___n_obra = "parser_nodes::ABraMethid::n_obra";
 val_t parser_nodes___ABraMethid___n_obra(val_t p0);
 typedef val_t (*parser_nodes___ABraMethid___n_obra_t)(val_t p0);
-#define LOCATE_parser_nodes___ABraMethid___n_obra__eq "parser_nodes::ABraMethid::n_obra="
-void parser_nodes___ABraMethid___n_obra__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABraMethid___n_obra__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ABraMethid___n_cbra "parser_nodes::ABraMethid::n_cbra"
+static const char * const LOCATE_parser_nodes___ABraMethid___n_cbra = "parser_nodes::ABraMethid::n_cbra";
 val_t parser_nodes___ABraMethid___n_cbra(val_t p0);
 typedef val_t (*parser_nodes___ABraMethid___n_cbra_t)(val_t p0);
-#define LOCATE_parser_nodes___ABraMethid___n_cbra__eq "parser_nodes::ABraMethid::n_cbra="
-void parser_nodes___ABraMethid___n_cbra__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABraMethid___n_cbra__eq_t)(val_t p0, val_t p1);
-val_t NEW_AStarshipMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AStarshipMethid___n_starship "parser_nodes::AStarshipMethid::n_starship"
+val_t NEW_ABraMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AStarshipMethid___n_starship = "parser_nodes::AStarshipMethid::n_starship";
 val_t parser_nodes___AStarshipMethid___n_starship(val_t p0);
 typedef val_t (*parser_nodes___AStarshipMethid___n_starship_t)(val_t p0);
-#define LOCATE_parser_nodes___AStarshipMethid___n_starship__eq "parser_nodes::AStarshipMethid::n_starship="
-void parser_nodes___AStarshipMethid___n_starship__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStarshipMethid___n_starship__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAssignMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAssignMethid___n_id "parser_nodes::AAssignMethid::n_id"
+val_t NEW_AStarshipMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAssignMethid___n_id = "parser_nodes::AAssignMethid::n_id";
 val_t parser_nodes___AAssignMethid___n_id(val_t p0);
 typedef val_t (*parser_nodes___AAssignMethid___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AAssignMethid___n_id__eq "parser_nodes::AAssignMethid::n_id="
-void parser_nodes___AAssignMethid___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAssignMethid___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAssignMethid___n_assign "parser_nodes::AAssignMethid::n_assign"
+static const char * const LOCATE_parser_nodes___AAssignMethid___n_assign = "parser_nodes::AAssignMethid::n_assign";
 val_t parser_nodes___AAssignMethid___n_assign(val_t p0);
 typedef val_t (*parser_nodes___AAssignMethid___n_assign_t)(val_t p0);
-#define LOCATE_parser_nodes___AAssignMethid___n_assign__eq "parser_nodes::AAssignMethid::n_assign="
-void parser_nodes___AAssignMethid___n_assign__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAssignMethid___n_assign__eq_t)(val_t p0, val_t p1);
-val_t NEW_ABraassignMethid_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ABraassignMethid___n_obra "parser_nodes::ABraassignMethid::n_obra"
+val_t NEW_AAssignMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ABraassignMethid___n_obra = "parser_nodes::ABraassignMethid::n_obra";
 val_t parser_nodes___ABraassignMethid___n_obra(val_t p0);
 typedef val_t (*parser_nodes___ABraassignMethid___n_obra_t)(val_t p0);
-#define LOCATE_parser_nodes___ABraassignMethid___n_obra__eq "parser_nodes::ABraassignMethid::n_obra="
-void parser_nodes___ABraassignMethid___n_obra__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABraassignMethid___n_obra__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ABraassignMethid___n_cbra "parser_nodes::ABraassignMethid::n_cbra"
+static const char * const LOCATE_parser_nodes___ABraassignMethid___n_cbra = "parser_nodes::ABraassignMethid::n_cbra";
 val_t parser_nodes___ABraassignMethid___n_cbra(val_t p0);
 typedef val_t (*parser_nodes___ABraassignMethid___n_cbra_t)(val_t p0);
-#define LOCATE_parser_nodes___ABraassignMethid___n_cbra__eq "parser_nodes::ABraassignMethid::n_cbra="
-void parser_nodes___ABraassignMethid___n_cbra__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABraassignMethid___n_cbra__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ABraassignMethid___n_assign "parser_nodes::ABraassignMethid::n_assign"
+static const char * const LOCATE_parser_nodes___ABraassignMethid___n_assign = "parser_nodes::ABraassignMethid::n_assign";
 val_t parser_nodes___ABraassignMethid___n_assign(val_t p0);
 typedef val_t (*parser_nodes___ABraassignMethid___n_assign_t)(val_t p0);
-#define LOCATE_parser_nodes___ABraassignMethid___n_assign__eq "parser_nodes::ABraassignMethid::n_assign="
-void parser_nodes___ABraassignMethid___n_assign__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABraassignMethid___n_assign__eq_t)(val_t p0, val_t p1);
-val_t NEW_ASignature_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ASignature___n_params "parser_nodes::ASignature::n_params"
+val_t NEW_ABraassignMethid_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ASignature___n_params = "parser_nodes::ASignature::n_params";
 val_t parser_nodes___ASignature___n_params(val_t p0);
 typedef val_t (*parser_nodes___ASignature___n_params_t)(val_t p0);
-#define LOCATE_parser_nodes___ASignature___n_params__eq "parser_nodes::ASignature::n_params="
-void parser_nodes___ASignature___n_params__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASignature___n_params__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ASignature___n_type "parser_nodes::ASignature::n_type"
+static const char * const LOCATE_parser_nodes___ASignature___n_type = "parser_nodes::ASignature::n_type";
 val_t parser_nodes___ASignature___n_type(val_t p0);
 typedef val_t (*parser_nodes___ASignature___n_type_t)(val_t p0);
-#define LOCATE_parser_nodes___ASignature___n_type__eq "parser_nodes::ASignature::n_type="
-void parser_nodes___ASignature___n_type__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASignature___n_type__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ASignature___n_closure_decls "parser_nodes::ASignature::n_closure_decls"
+static const char * const LOCATE_parser_nodes___ASignature___n_closure_decls = "parser_nodes::ASignature::n_closure_decls";
 val_t parser_nodes___ASignature___n_closure_decls(val_t p0);
 typedef val_t (*parser_nodes___ASignature___n_closure_decls_t)(val_t p0);
-#define LOCATE_parser_nodes___ASignature___n_closure_decls__eq "parser_nodes::ASignature::n_closure_decls="
-void parser_nodes___ASignature___n_closure_decls__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASignature___n_closure_decls__eq_t)(val_t p0, val_t p1);
-val_t NEW_AParam_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AParam___n_id "parser_nodes::AParam::n_id"
+val_t NEW_ASignature_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AParam___n_id = "parser_nodes::AParam::n_id";
 val_t parser_nodes___AParam___n_id(val_t p0);
 typedef val_t (*parser_nodes___AParam___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AParam___n_id__eq "parser_nodes::AParam::n_id="
-void parser_nodes___AParam___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AParam___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AParam___n_type "parser_nodes::AParam::n_type"
+static const char * const LOCATE_parser_nodes___AParam___n_type = "parser_nodes::AParam::n_type";
 val_t parser_nodes___AParam___n_type(val_t p0);
 typedef val_t (*parser_nodes___AParam___n_type_t)(val_t p0);
-#define LOCATE_parser_nodes___AParam___n_type__eq "parser_nodes::AParam::n_type="
-void parser_nodes___AParam___n_type__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AParam___n_type__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AParam___n_dotdotdot "parser_nodes::AParam::n_dotdotdot"
+static const char * const LOCATE_parser_nodes___AParam___n_dotdotdot = "parser_nodes::AParam::n_dotdotdot";
 val_t parser_nodes___AParam___n_dotdotdot(val_t p0);
 typedef val_t (*parser_nodes___AParam___n_dotdotdot_t)(val_t p0);
-#define LOCATE_parser_nodes___AParam___n_dotdotdot__eq "parser_nodes::AParam::n_dotdotdot="
-void parser_nodes___AParam___n_dotdotdot__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AParam___n_dotdotdot__eq_t)(val_t p0, val_t p1);
-val_t NEW_AClosureDecl_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AClosureDecl___n_kwbreak "parser_nodes::AClosureDecl::n_kwbreak"
+val_t NEW_AParam_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AClosureDecl___n_kwbreak = "parser_nodes::AClosureDecl::n_kwbreak";
 val_t parser_nodes___AClosureDecl___n_kwbreak(val_t p0);
 typedef val_t (*parser_nodes___AClosureDecl___n_kwbreak_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureDecl___n_kwbreak__eq "parser_nodes::AClosureDecl::n_kwbreak="
-void parser_nodes___AClosureDecl___n_kwbreak__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureDecl___n_kwbreak__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AClosureDecl___n_bang "parser_nodes::AClosureDecl::n_bang"
+static const char * const LOCATE_parser_nodes___AClosureDecl___n_bang = "parser_nodes::AClosureDecl::n_bang";
 val_t parser_nodes___AClosureDecl___n_bang(val_t p0);
 typedef val_t (*parser_nodes___AClosureDecl___n_bang_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureDecl___n_bang__eq "parser_nodes::AClosureDecl::n_bang="
-void parser_nodes___AClosureDecl___n_bang__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureDecl___n_bang__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AClosureDecl___n_id "parser_nodes::AClosureDecl::n_id"
+static const char * const LOCATE_parser_nodes___AClosureDecl___n_id = "parser_nodes::AClosureDecl::n_id";
 val_t parser_nodes___AClosureDecl___n_id(val_t p0);
 typedef val_t (*parser_nodes___AClosureDecl___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureDecl___n_id__eq "parser_nodes::AClosureDecl::n_id="
-void parser_nodes___AClosureDecl___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureDecl___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AClosureDecl___n_signature "parser_nodes::AClosureDecl::n_signature"
+static const char * const LOCATE_parser_nodes___AClosureDecl___n_signature = "parser_nodes::AClosureDecl::n_signature";
 val_t parser_nodes___AClosureDecl___n_signature(val_t p0);
 typedef val_t (*parser_nodes___AClosureDecl___n_signature_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureDecl___n_signature__eq "parser_nodes::AClosureDecl::n_signature="
-void parser_nodes___AClosureDecl___n_signature__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureDecl___n_signature__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AClosureDecl___n_expr "parser_nodes::AClosureDecl::n_expr"
+static const char * const LOCATE_parser_nodes___AClosureDecl___n_expr = "parser_nodes::AClosureDecl::n_expr";
 val_t parser_nodes___AClosureDecl___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AClosureDecl___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureDecl___n_expr__eq "parser_nodes::AClosureDecl::n_expr="
-void parser_nodes___AClosureDecl___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureDecl___n_expr__eq_t)(val_t p0, val_t p1);
-val_t NEW_AType_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AType___n_kwnullable "parser_nodes::AType::n_kwnullable"
+val_t NEW_AClosureDecl_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AType___n_kwnullable = "parser_nodes::AType::n_kwnullable";
 val_t parser_nodes___AType___n_kwnullable(val_t p0);
 typedef val_t (*parser_nodes___AType___n_kwnullable_t)(val_t p0);
-#define LOCATE_parser_nodes___AType___n_kwnullable__eq "parser_nodes::AType::n_kwnullable="
-void parser_nodes___AType___n_kwnullable__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AType___n_kwnullable__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AType___n_id "parser_nodes::AType::n_id"
+static const char * const LOCATE_parser_nodes___AType___n_id = "parser_nodes::AType::n_id";
 val_t parser_nodes___AType___n_id(val_t p0);
 typedef val_t (*parser_nodes___AType___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AType___n_id__eq "parser_nodes::AType::n_id="
-void parser_nodes___AType___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AType___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AType___n_types "parser_nodes::AType::n_types"
+static const char * const LOCATE_parser_nodes___AType___n_types = "parser_nodes::AType::n_types";
 val_t parser_nodes___AType___n_types(val_t p0);
 typedef val_t (*parser_nodes___AType___n_types_t)(val_t p0);
-#define LOCATE_parser_nodes___AType___n_types__eq "parser_nodes::AType::n_types="
-void parser_nodes___AType___n_types__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AType___n_types__eq_t)(val_t p0, val_t p1);
-val_t NEW_ALabel_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ALabel___n_kwlabel "parser_nodes::ALabel::n_kwlabel"
+val_t NEW_AType_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ALabel___n_kwlabel = "parser_nodes::ALabel::n_kwlabel";
 val_t parser_nodes___ALabel___n_kwlabel(val_t p0);
 typedef val_t (*parser_nodes___ALabel___n_kwlabel_t)(val_t p0);
-#define LOCATE_parser_nodes___ALabel___n_kwlabel__eq "parser_nodes::ALabel::n_kwlabel="
-void parser_nodes___ALabel___n_kwlabel__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ALabel___n_kwlabel__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ALabel___n_id "parser_nodes::ALabel::n_id"
+static const char * const LOCATE_parser_nodes___ALabel___n_id = "parser_nodes::ALabel::n_id";
 val_t parser_nodes___ALabel___n_id(val_t p0);
 typedef val_t (*parser_nodes___ALabel___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___ALabel___n_id__eq "parser_nodes::ALabel::n_id="
-void parser_nodes___ALabel___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ALabel___n_id__eq_t)(val_t p0, val_t p1);
+val_t NEW_ALabel_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ABlockExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ABlockExpr___n_expr "parser_nodes::ABlockExpr::n_expr"
+static const char * const LOCATE_parser_nodes___ABlockExpr___n_expr = "parser_nodes::ABlockExpr::n_expr";
 val_t parser_nodes___ABlockExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___ABlockExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___ABlockExpr___n_expr__eq "parser_nodes::ABlockExpr::n_expr="
-void parser_nodes___ABlockExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABlockExpr___n_expr__eq_t)(val_t p0, val_t p1);
-val_t NEW_AVardeclExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AVardeclExpr___n_kwvar "parser_nodes::AVardeclExpr::n_kwvar"
+val_t NEW_ABlockExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AVardeclExpr___n_kwvar = "parser_nodes::AVardeclExpr::n_kwvar";
 val_t parser_nodes___AVardeclExpr___n_kwvar(val_t p0);
 typedef val_t (*parser_nodes___AVardeclExpr___n_kwvar_t)(val_t p0);
-#define LOCATE_parser_nodes___AVardeclExpr___n_kwvar__eq "parser_nodes::AVardeclExpr::n_kwvar="
-void parser_nodes___AVardeclExpr___n_kwvar__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AVardeclExpr___n_kwvar__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AVardeclExpr___n_id "parser_nodes::AVardeclExpr::n_id"
+static const char * const LOCATE_parser_nodes___AVardeclExpr___n_id = "parser_nodes::AVardeclExpr::n_id";
 val_t parser_nodes___AVardeclExpr___n_id(val_t p0);
 typedef val_t (*parser_nodes___AVardeclExpr___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AVardeclExpr___n_id__eq "parser_nodes::AVardeclExpr::n_id="
-void parser_nodes___AVardeclExpr___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AVardeclExpr___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AVardeclExpr___n_type "parser_nodes::AVardeclExpr::n_type"
+static const char * const LOCATE_parser_nodes___AVardeclExpr___n_type = "parser_nodes::AVardeclExpr::n_type";
 val_t parser_nodes___AVardeclExpr___n_type(val_t p0);
 typedef val_t (*parser_nodes___AVardeclExpr___n_type_t)(val_t p0);
-#define LOCATE_parser_nodes___AVardeclExpr___n_type__eq "parser_nodes::AVardeclExpr::n_type="
-void parser_nodes___AVardeclExpr___n_type__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AVardeclExpr___n_type__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AVardeclExpr___n_assign "parser_nodes::AVardeclExpr::n_assign"
+static const char * const LOCATE_parser_nodes___AVardeclExpr___n_assign = "parser_nodes::AVardeclExpr::n_assign";
 val_t parser_nodes___AVardeclExpr___n_assign(val_t p0);
 typedef val_t (*parser_nodes___AVardeclExpr___n_assign_t)(val_t p0);
-#define LOCATE_parser_nodes___AVardeclExpr___n_assign__eq "parser_nodes::AVardeclExpr::n_assign="
-void parser_nodes___AVardeclExpr___n_assign__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AVardeclExpr___n_assign__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AVardeclExpr___n_expr "parser_nodes::AVardeclExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AVardeclExpr___n_expr = "parser_nodes::AVardeclExpr::n_expr";
 val_t parser_nodes___AVardeclExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AVardeclExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AVardeclExpr___n_expr__eq "parser_nodes::AVardeclExpr::n_expr="
-void parser_nodes___AVardeclExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AVardeclExpr___n_expr__eq_t)(val_t p0, val_t p1);
-val_t NEW_AReturnExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AReturnExpr___n_kwreturn "parser_nodes::AReturnExpr::n_kwreturn"
+val_t NEW_AVardeclExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AReturnExpr___n_kwreturn = "parser_nodes::AReturnExpr::n_kwreturn";
 val_t parser_nodes___AReturnExpr___n_kwreturn(val_t p0);
 typedef val_t (*parser_nodes___AReturnExpr___n_kwreturn_t)(val_t p0);
-#define LOCATE_parser_nodes___AReturnExpr___n_kwreturn__eq "parser_nodes::AReturnExpr::n_kwreturn="
-void parser_nodes___AReturnExpr___n_kwreturn__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AReturnExpr___n_kwreturn__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AReturnExpr___n_expr "parser_nodes::AReturnExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AReturnExpr___n_expr = "parser_nodes::AReturnExpr::n_expr";
 val_t parser_nodes___AReturnExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AReturnExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AReturnExpr___n_expr__eq "parser_nodes::AReturnExpr::n_expr="
-void parser_nodes___AReturnExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AReturnExpr___n_expr__eq_t)(val_t p0, val_t p1);
-val_t NEW_ALabelable_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ALabelable___n_label "parser_nodes::ALabelable::n_label"
+val_t NEW_AReturnExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ALabelable___n_label = "parser_nodes::ALabelable::n_label";
 val_t parser_nodes___ALabelable___n_label(val_t p0);
 typedef val_t (*parser_nodes___ALabelable___n_label_t)(val_t p0);
-#define LOCATE_parser_nodes___ALabelable___n_label__eq "parser_nodes::ALabelable::n_label="
-void parser_nodes___ALabelable___n_label__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ALabelable___n_label__eq_t)(val_t p0, val_t p1);
-val_t NEW_ABreakExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ABreakExpr___n_kwbreak "parser_nodes::ABreakExpr::n_kwbreak"
+val_t NEW_ALabelable_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ABreakExpr___n_kwbreak = "parser_nodes::ABreakExpr::n_kwbreak";
 val_t parser_nodes___ABreakExpr___n_kwbreak(val_t p0);
 typedef val_t (*parser_nodes___ABreakExpr___n_kwbreak_t)(val_t p0);
-#define LOCATE_parser_nodes___ABreakExpr___n_kwbreak__eq "parser_nodes::ABreakExpr::n_kwbreak="
-void parser_nodes___ABreakExpr___n_kwbreak__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABreakExpr___n_kwbreak__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ABreakExpr___n_expr "parser_nodes::ABreakExpr::n_expr"
+static const char * const LOCATE_parser_nodes___ABreakExpr___n_expr = "parser_nodes::ABreakExpr::n_expr";
 val_t parser_nodes___ABreakExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___ABreakExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___ABreakExpr___n_expr__eq "parser_nodes::ABreakExpr::n_expr="
-void parser_nodes___ABreakExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABreakExpr___n_expr__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAbortExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAbortExpr___n_kwabort "parser_nodes::AAbortExpr::n_kwabort"
+val_t NEW_ABreakExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAbortExpr___n_kwabort = "parser_nodes::AAbortExpr::n_kwabort";
 val_t parser_nodes___AAbortExpr___n_kwabort(val_t p0);
 typedef val_t (*parser_nodes___AAbortExpr___n_kwabort_t)(val_t p0);
-#define LOCATE_parser_nodes___AAbortExpr___n_kwabort__eq "parser_nodes::AAbortExpr::n_kwabort="
-void parser_nodes___AAbortExpr___n_kwabort__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAbortExpr___n_kwabort__eq_t)(val_t p0, val_t p1);
-val_t NEW_AContinueExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AContinueExpr___n_kwcontinue "parser_nodes::AContinueExpr::n_kwcontinue"
+val_t NEW_AAbortExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AContinueExpr___n_kwcontinue = "parser_nodes::AContinueExpr::n_kwcontinue";
 val_t parser_nodes___AContinueExpr___n_kwcontinue(val_t p0);
 typedef val_t (*parser_nodes___AContinueExpr___n_kwcontinue_t)(val_t p0);
-#define LOCATE_parser_nodes___AContinueExpr___n_kwcontinue__eq "parser_nodes::AContinueExpr::n_kwcontinue="
-void parser_nodes___AContinueExpr___n_kwcontinue__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AContinueExpr___n_kwcontinue__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AContinueExpr___n_expr "parser_nodes::AContinueExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AContinueExpr___n_expr = "parser_nodes::AContinueExpr::n_expr";
 val_t parser_nodes___AContinueExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AContinueExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AContinueExpr___n_expr__eq "parser_nodes::AContinueExpr::n_expr="
-void parser_nodes___AContinueExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AContinueExpr___n_expr__eq_t)(val_t p0, val_t p1);
-val_t NEW_ADoExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ADoExpr___n_kwdo "parser_nodes::ADoExpr::n_kwdo"
+val_t NEW_AContinueExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ADoExpr___n_kwdo = "parser_nodes::ADoExpr::n_kwdo";
 val_t parser_nodes___ADoExpr___n_kwdo(val_t p0);
 typedef val_t (*parser_nodes___ADoExpr___n_kwdo_t)(val_t p0);
-#define LOCATE_parser_nodes___ADoExpr___n_kwdo__eq "parser_nodes::ADoExpr::n_kwdo="
-void parser_nodes___ADoExpr___n_kwdo__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ADoExpr___n_kwdo__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ADoExpr___n_block "parser_nodes::ADoExpr::n_block"
+static const char * const LOCATE_parser_nodes___ADoExpr___n_block = "parser_nodes::ADoExpr::n_block";
 val_t parser_nodes___ADoExpr___n_block(val_t p0);
 typedef val_t (*parser_nodes___ADoExpr___n_block_t)(val_t p0);
-#define LOCATE_parser_nodes___ADoExpr___n_block__eq "parser_nodes::ADoExpr::n_block="
-void parser_nodes___ADoExpr___n_block__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ADoExpr___n_block__eq_t)(val_t p0, val_t p1);
-val_t NEW_AIfExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AIfExpr___n_kwif "parser_nodes::AIfExpr::n_kwif"
+val_t NEW_ADoExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AIfExpr___n_kwif = "parser_nodes::AIfExpr::n_kwif";
 val_t parser_nodes___AIfExpr___n_kwif(val_t p0);
 typedef val_t (*parser_nodes___AIfExpr___n_kwif_t)(val_t p0);
-#define LOCATE_parser_nodes___AIfExpr___n_kwif__eq "parser_nodes::AIfExpr::n_kwif="
-void parser_nodes___AIfExpr___n_kwif__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIfExpr___n_kwif__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AIfExpr___n_expr "parser_nodes::AIfExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AIfExpr___n_expr = "parser_nodes::AIfExpr::n_expr";
 val_t parser_nodes___AIfExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AIfExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AIfExpr___n_expr__eq "parser_nodes::AIfExpr::n_expr="
-void parser_nodes___AIfExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIfExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AIfExpr___n_then "parser_nodes::AIfExpr::n_then"
+static const char * const LOCATE_parser_nodes___AIfExpr___n_then = "parser_nodes::AIfExpr::n_then";
 val_t parser_nodes___AIfExpr___n_then(val_t p0);
 typedef val_t (*parser_nodes___AIfExpr___n_then_t)(val_t p0);
-#define LOCATE_parser_nodes___AIfExpr___n_then__eq "parser_nodes::AIfExpr::n_then="
-void parser_nodes___AIfExpr___n_then__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIfExpr___n_then__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AIfExpr___n_else "parser_nodes::AIfExpr::n_else"
+static const char * const LOCATE_parser_nodes___AIfExpr___n_else = "parser_nodes::AIfExpr::n_else";
 val_t parser_nodes___AIfExpr___n_else(val_t p0);
 typedef val_t (*parser_nodes___AIfExpr___n_else_t)(val_t p0);
-#define LOCATE_parser_nodes___AIfExpr___n_else__eq "parser_nodes::AIfExpr::n_else="
-void parser_nodes___AIfExpr___n_else__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIfExpr___n_else__eq_t)(val_t p0, val_t p1);
-val_t NEW_AIfexprExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AIfexprExpr___n_kwif "parser_nodes::AIfexprExpr::n_kwif"
+val_t NEW_AIfExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AIfexprExpr___n_kwif = "parser_nodes::AIfexprExpr::n_kwif";
 val_t parser_nodes___AIfexprExpr___n_kwif(val_t p0);
 typedef val_t (*parser_nodes___AIfexprExpr___n_kwif_t)(val_t p0);
-#define LOCATE_parser_nodes___AIfexprExpr___n_kwif__eq "parser_nodes::AIfexprExpr::n_kwif="
-void parser_nodes___AIfexprExpr___n_kwif__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIfexprExpr___n_kwif__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AIfexprExpr___n_expr "parser_nodes::AIfexprExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AIfexprExpr___n_expr = "parser_nodes::AIfexprExpr::n_expr";
 val_t parser_nodes___AIfexprExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AIfexprExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AIfexprExpr___n_expr__eq "parser_nodes::AIfexprExpr::n_expr="
-void parser_nodes___AIfexprExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIfexprExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AIfexprExpr___n_kwthen "parser_nodes::AIfexprExpr::n_kwthen"
+static const char * const LOCATE_parser_nodes___AIfexprExpr___n_kwthen = "parser_nodes::AIfexprExpr::n_kwthen";
 val_t parser_nodes___AIfexprExpr___n_kwthen(val_t p0);
 typedef val_t (*parser_nodes___AIfexprExpr___n_kwthen_t)(val_t p0);
-#define LOCATE_parser_nodes___AIfexprExpr___n_kwthen__eq "parser_nodes::AIfexprExpr::n_kwthen="
-void parser_nodes___AIfexprExpr___n_kwthen__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIfexprExpr___n_kwthen__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AIfexprExpr___n_then "parser_nodes::AIfexprExpr::n_then"
+static const char * const LOCATE_parser_nodes___AIfexprExpr___n_then = "parser_nodes::AIfexprExpr::n_then";
 val_t parser_nodes___AIfexprExpr___n_then(val_t p0);
 typedef val_t (*parser_nodes___AIfexprExpr___n_then_t)(val_t p0);
-#define LOCATE_parser_nodes___AIfexprExpr___n_then__eq "parser_nodes::AIfexprExpr::n_then="
-void parser_nodes___AIfexprExpr___n_then__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIfexprExpr___n_then__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AIfexprExpr___n_kwelse "parser_nodes::AIfexprExpr::n_kwelse"
+static const char * const LOCATE_parser_nodes___AIfexprExpr___n_kwelse = "parser_nodes::AIfexprExpr::n_kwelse";
 val_t parser_nodes___AIfexprExpr___n_kwelse(val_t p0);
 typedef val_t (*parser_nodes___AIfexprExpr___n_kwelse_t)(val_t p0);
-#define LOCATE_parser_nodes___AIfexprExpr___n_kwelse__eq "parser_nodes::AIfexprExpr::n_kwelse="
-void parser_nodes___AIfexprExpr___n_kwelse__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIfexprExpr___n_kwelse__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AIfexprExpr___n_else "parser_nodes::AIfexprExpr::n_else"
+static const char * const LOCATE_parser_nodes___AIfexprExpr___n_else = "parser_nodes::AIfexprExpr::n_else";
 val_t parser_nodes___AIfexprExpr___n_else(val_t p0);
 typedef val_t (*parser_nodes___AIfexprExpr___n_else_t)(val_t p0);
-#define LOCATE_parser_nodes___AIfexprExpr___n_else__eq "parser_nodes::AIfexprExpr::n_else="
-void parser_nodes___AIfexprExpr___n_else__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIfexprExpr___n_else__eq_t)(val_t p0, val_t p1);
-val_t NEW_AWhileExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AWhileExpr___n_kwwhile "parser_nodes::AWhileExpr::n_kwwhile"
+val_t NEW_AIfexprExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AWhileExpr___n_kwwhile = "parser_nodes::AWhileExpr::n_kwwhile";
 val_t parser_nodes___AWhileExpr___n_kwwhile(val_t p0);
 typedef val_t (*parser_nodes___AWhileExpr___n_kwwhile_t)(val_t p0);
-#define LOCATE_parser_nodes___AWhileExpr___n_kwwhile__eq "parser_nodes::AWhileExpr::n_kwwhile="
-void parser_nodes___AWhileExpr___n_kwwhile__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AWhileExpr___n_kwwhile__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AWhileExpr___n_expr "parser_nodes::AWhileExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AWhileExpr___n_expr = "parser_nodes::AWhileExpr::n_expr";
 val_t parser_nodes___AWhileExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AWhileExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AWhileExpr___n_expr__eq "parser_nodes::AWhileExpr::n_expr="
-void parser_nodes___AWhileExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AWhileExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AWhileExpr___n_kwdo "parser_nodes::AWhileExpr::n_kwdo"
+static const char * const LOCATE_parser_nodes___AWhileExpr___n_kwdo = "parser_nodes::AWhileExpr::n_kwdo";
 val_t parser_nodes___AWhileExpr___n_kwdo(val_t p0);
 typedef val_t (*parser_nodes___AWhileExpr___n_kwdo_t)(val_t p0);
-#define LOCATE_parser_nodes___AWhileExpr___n_kwdo__eq "parser_nodes::AWhileExpr::n_kwdo="
-void parser_nodes___AWhileExpr___n_kwdo__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AWhileExpr___n_kwdo__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AWhileExpr___n_block "parser_nodes::AWhileExpr::n_block"
+static const char * const LOCATE_parser_nodes___AWhileExpr___n_block = "parser_nodes::AWhileExpr::n_block";
 val_t parser_nodes___AWhileExpr___n_block(val_t p0);
 typedef val_t (*parser_nodes___AWhileExpr___n_block_t)(val_t p0);
-#define LOCATE_parser_nodes___AWhileExpr___n_block__eq "parser_nodes::AWhileExpr::n_block="
-void parser_nodes___AWhileExpr___n_block__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AWhileExpr___n_block__eq_t)(val_t p0, val_t p1);
-val_t NEW_ALoopExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ALoopExpr___n_kwloop "parser_nodes::ALoopExpr::n_kwloop"
+val_t NEW_AWhileExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ALoopExpr___n_kwloop = "parser_nodes::ALoopExpr::n_kwloop";
 val_t parser_nodes___ALoopExpr___n_kwloop(val_t p0);
 typedef val_t (*parser_nodes___ALoopExpr___n_kwloop_t)(val_t p0);
-#define LOCATE_parser_nodes___ALoopExpr___n_kwloop__eq "parser_nodes::ALoopExpr::n_kwloop="
-void parser_nodes___ALoopExpr___n_kwloop__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ALoopExpr___n_kwloop__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ALoopExpr___n_block "parser_nodes::ALoopExpr::n_block"
+static const char * const LOCATE_parser_nodes___ALoopExpr___n_block = "parser_nodes::ALoopExpr::n_block";
 val_t parser_nodes___ALoopExpr___n_block(val_t p0);
 typedef val_t (*parser_nodes___ALoopExpr___n_block_t)(val_t p0);
-#define LOCATE_parser_nodes___ALoopExpr___n_block__eq "parser_nodes::ALoopExpr::n_block="
-void parser_nodes___ALoopExpr___n_block__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ALoopExpr___n_block__eq_t)(val_t p0, val_t p1);
-val_t NEW_AForExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AForExpr___n_kwfor "parser_nodes::AForExpr::n_kwfor"
+val_t NEW_ALoopExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AForExpr___n_kwfor = "parser_nodes::AForExpr::n_kwfor";
 val_t parser_nodes___AForExpr___n_kwfor(val_t p0);
 typedef val_t (*parser_nodes___AForExpr___n_kwfor_t)(val_t p0);
-#define LOCATE_parser_nodes___AForExpr___n_kwfor__eq "parser_nodes::AForExpr::n_kwfor="
-void parser_nodes___AForExpr___n_kwfor__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AForExpr___n_kwfor__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AForExpr___n_id "parser_nodes::AForExpr::n_id"
+static const char * const LOCATE_parser_nodes___AForExpr___n_id = "parser_nodes::AForExpr::n_id";
 val_t parser_nodes___AForExpr___n_id(val_t p0);
 typedef val_t (*parser_nodes___AForExpr___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AForExpr___n_id__eq "parser_nodes::AForExpr::n_id="
-void parser_nodes___AForExpr___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AForExpr___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AForExpr___n_expr "parser_nodes::AForExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AForExpr___n_expr = "parser_nodes::AForExpr::n_expr";
 val_t parser_nodes___AForExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AForExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AForExpr___n_expr__eq "parser_nodes::AForExpr::n_expr="
-void parser_nodes___AForExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AForExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AForExpr___n_kwdo "parser_nodes::AForExpr::n_kwdo"
+static const char * const LOCATE_parser_nodes___AForExpr___n_kwdo = "parser_nodes::AForExpr::n_kwdo";
 val_t parser_nodes___AForExpr___n_kwdo(val_t p0);
 typedef val_t (*parser_nodes___AForExpr___n_kwdo_t)(val_t p0);
-#define LOCATE_parser_nodes___AForExpr___n_kwdo__eq "parser_nodes::AForExpr::n_kwdo="
-void parser_nodes___AForExpr___n_kwdo__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AForExpr___n_kwdo__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AForExpr___n_block "parser_nodes::AForExpr::n_block"
+static const char * const LOCATE_parser_nodes___AForExpr___n_block = "parser_nodes::AForExpr::n_block";
 val_t parser_nodes___AForExpr___n_block(val_t p0);
 typedef val_t (*parser_nodes___AForExpr___n_block_t)(val_t p0);
-#define LOCATE_parser_nodes___AForExpr___n_block__eq "parser_nodes::AForExpr::n_block="
-void parser_nodes___AForExpr___n_block__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AForExpr___n_block__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAssertExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAssertExpr___n_kwassert "parser_nodes::AAssertExpr::n_kwassert"
+val_t NEW_AForExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAssertExpr___n_kwassert = "parser_nodes::AAssertExpr::n_kwassert";
 val_t parser_nodes___AAssertExpr___n_kwassert(val_t p0);
 typedef val_t (*parser_nodes___AAssertExpr___n_kwassert_t)(val_t p0);
-#define LOCATE_parser_nodes___AAssertExpr___n_kwassert__eq "parser_nodes::AAssertExpr::n_kwassert="
-void parser_nodes___AAssertExpr___n_kwassert__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAssertExpr___n_kwassert__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAssertExpr___n_id "parser_nodes::AAssertExpr::n_id"
+static const char * const LOCATE_parser_nodes___AAssertExpr___n_id = "parser_nodes::AAssertExpr::n_id";
 val_t parser_nodes___AAssertExpr___n_id(val_t p0);
 typedef val_t (*parser_nodes___AAssertExpr___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AAssertExpr___n_id__eq "parser_nodes::AAssertExpr::n_id="
-void parser_nodes___AAssertExpr___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAssertExpr___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAssertExpr___n_expr "parser_nodes::AAssertExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AAssertExpr___n_expr = "parser_nodes::AAssertExpr::n_expr";
 val_t parser_nodes___AAssertExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AAssertExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AAssertExpr___n_expr__eq "parser_nodes::AAssertExpr::n_expr="
-void parser_nodes___AAssertExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAssertExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAssertExpr___n_else "parser_nodes::AAssertExpr::n_else"
+static const char * const LOCATE_parser_nodes___AAssertExpr___n_else = "parser_nodes::AAssertExpr::n_else";
 val_t parser_nodes___AAssertExpr___n_else(val_t p0);
 typedef val_t (*parser_nodes___AAssertExpr___n_else_t)(val_t p0);
-#define LOCATE_parser_nodes___AAssertExpr___n_else__eq "parser_nodes::AAssertExpr::n_else="
-void parser_nodes___AAssertExpr___n_else__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAssertExpr___n_else__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAssignFormExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAssignFormExpr___n_assign "parser_nodes::AAssignFormExpr::n_assign"
+val_t NEW_AAssertExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAssignFormExpr___n_assign = "parser_nodes::AAssignFormExpr::n_assign";
 val_t parser_nodes___AAssignFormExpr___n_assign(val_t p0);
 typedef val_t (*parser_nodes___AAssignFormExpr___n_assign_t)(val_t p0);
-#define LOCATE_parser_nodes___AAssignFormExpr___n_assign__eq "parser_nodes::AAssignFormExpr::n_assign="
-void parser_nodes___AAssignFormExpr___n_assign__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAssignFormExpr___n_assign__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAssignFormExpr___n_value "parser_nodes::AAssignFormExpr::n_value"
+static const char * const LOCATE_parser_nodes___AAssignFormExpr___n_value = "parser_nodes::AAssignFormExpr::n_value";
 val_t parser_nodes___AAssignFormExpr___n_value(val_t p0);
 typedef val_t (*parser_nodes___AAssignFormExpr___n_value_t)(val_t p0);
-#define LOCATE_parser_nodes___AAssignFormExpr___n_value__eq "parser_nodes::AAssignFormExpr::n_value="
-void parser_nodes___AAssignFormExpr___n_value__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAssignFormExpr___n_value__eq_t)(val_t p0, val_t p1);
-val_t NEW_AReassignFormExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AReassignFormExpr___n_assign_op "parser_nodes::AReassignFormExpr::n_assign_op"
+val_t NEW_AAssignFormExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AReassignFormExpr___n_assign_op = "parser_nodes::AReassignFormExpr::n_assign_op";
 val_t parser_nodes___AReassignFormExpr___n_assign_op(val_t p0);
 typedef val_t (*parser_nodes___AReassignFormExpr___n_assign_op_t)(val_t p0);
-#define LOCATE_parser_nodes___AReassignFormExpr___n_assign_op__eq "parser_nodes::AReassignFormExpr::n_assign_op="
-void parser_nodes___AReassignFormExpr___n_assign_op__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AReassignFormExpr___n_assign_op__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AReassignFormExpr___n_value "parser_nodes::AReassignFormExpr::n_value"
+static const char * const LOCATE_parser_nodes___AReassignFormExpr___n_value = "parser_nodes::AReassignFormExpr::n_value";
 val_t parser_nodes___AReassignFormExpr___n_value(val_t p0);
 typedef val_t (*parser_nodes___AReassignFormExpr___n_value_t)(val_t p0);
-#define LOCATE_parser_nodes___AReassignFormExpr___n_value__eq "parser_nodes::AReassignFormExpr::n_value="
-void parser_nodes___AReassignFormExpr___n_value__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AReassignFormExpr___n_value__eq_t)(val_t p0, val_t p1);
-val_t NEW_AOnceExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AOnceExpr___n_kwonce "parser_nodes::AOnceExpr::n_kwonce"
+val_t NEW_AReassignFormExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AOnceExpr___n_kwonce = "parser_nodes::AOnceExpr::n_kwonce";
 val_t parser_nodes___AOnceExpr___n_kwonce(val_t p0);
 typedef val_t (*parser_nodes___AOnceExpr___n_kwonce_t)(val_t p0);
-#define LOCATE_parser_nodes___AOnceExpr___n_kwonce__eq "parser_nodes::AOnceExpr::n_kwonce="
-void parser_nodes___AOnceExpr___n_kwonce__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AOnceExpr___n_kwonce__eq_t)(val_t p0, val_t p1);
-val_t NEW_ASendExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ASendExpr___n_expr "parser_nodes::ASendExpr::n_expr"
+val_t NEW_AOnceExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ASendExpr___n_expr = "parser_nodes::ASendExpr::n_expr";
 val_t parser_nodes___ASendExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___ASendExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___ASendExpr___n_expr__eq "parser_nodes::ASendExpr::n_expr="
-void parser_nodes___ASendExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASendExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ASendExpr___n_closure_defs "parser_nodes::ASendExpr::n_closure_defs"
+static const char * const LOCATE_parser_nodes___ASendExpr___n_closure_defs = "parser_nodes::ASendExpr::n_closure_defs";
 val_t parser_nodes___ASendExpr___n_closure_defs(val_t p0);
 typedef val_t (*parser_nodes___ASendExpr___n_closure_defs_t)(val_t p0);
-#define LOCATE_parser_nodes___ASendExpr___n_closure_defs__eq "parser_nodes::ASendExpr::n_closure_defs="
-void parser_nodes___ASendExpr___n_closure_defs__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASendExpr___n_closure_defs__eq_t)(val_t p0, val_t p1);
-val_t NEW_ABinopExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ABinopExpr___n_expr2 "parser_nodes::ABinopExpr::n_expr2"
+val_t NEW_ASendExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ABinopExpr___n_expr2 = "parser_nodes::ABinopExpr::n_expr2";
 val_t parser_nodes___ABinopExpr___n_expr2(val_t p0);
 typedef val_t (*parser_nodes___ABinopExpr___n_expr2_t)(val_t p0);
-#define LOCATE_parser_nodes___ABinopExpr___n_expr2__eq "parser_nodes::ABinopExpr::n_expr2="
-void parser_nodes___ABinopExpr___n_expr2__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABinopExpr___n_expr2__eq_t)(val_t p0, val_t p1);
+val_t NEW_ABinopExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ABoolExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AOrExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AOrExpr___n_expr "parser_nodes::AOrExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AOrExpr___n_expr = "parser_nodes::AOrExpr::n_expr";
 val_t parser_nodes___AOrExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AOrExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AOrExpr___n_expr__eq "parser_nodes::AOrExpr::n_expr="
-void parser_nodes___AOrExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AOrExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AOrExpr___n_expr2 "parser_nodes::AOrExpr::n_expr2"
+static const char * const LOCATE_parser_nodes___AOrExpr___n_expr2 = "parser_nodes::AOrExpr::n_expr2";
 val_t parser_nodes___AOrExpr___n_expr2(val_t p0);
 typedef val_t (*parser_nodes___AOrExpr___n_expr2_t)(val_t p0);
-#define LOCATE_parser_nodes___AOrExpr___n_expr2__eq "parser_nodes::AOrExpr::n_expr2="
-void parser_nodes___AOrExpr___n_expr2__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AOrExpr___n_expr2__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAndExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAndExpr___n_expr "parser_nodes::AAndExpr::n_expr"
+val_t NEW_AOrExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAndExpr___n_expr = "parser_nodes::AAndExpr::n_expr";
 val_t parser_nodes___AAndExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AAndExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AAndExpr___n_expr__eq "parser_nodes::AAndExpr::n_expr="
-void parser_nodes___AAndExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAndExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAndExpr___n_expr2 "parser_nodes::AAndExpr::n_expr2"
+static const char * const LOCATE_parser_nodes___AAndExpr___n_expr2 = "parser_nodes::AAndExpr::n_expr2";
 val_t parser_nodes___AAndExpr___n_expr2(val_t p0);
 typedef val_t (*parser_nodes___AAndExpr___n_expr2_t)(val_t p0);
-#define LOCATE_parser_nodes___AAndExpr___n_expr2__eq "parser_nodes::AAndExpr::n_expr2="
-void parser_nodes___AAndExpr___n_expr2__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAndExpr___n_expr2__eq_t)(val_t p0, val_t p1);
-val_t NEW_ANotExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ANotExpr___n_kwnot "parser_nodes::ANotExpr::n_kwnot"
+val_t NEW_AAndExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AOrElseExpr___n_expr = "parser_nodes::AOrElseExpr::n_expr";
+val_t parser_nodes___AOrElseExpr___n_expr(val_t p0);
+typedef val_t (*parser_nodes___AOrElseExpr___n_expr_t)(val_t p0);
+static const char * const LOCATE_parser_nodes___AOrElseExpr___n_expr2 = "parser_nodes::AOrElseExpr::n_expr2";
+val_t parser_nodes___AOrElseExpr___n_expr2(val_t p0);
+typedef val_t (*parser_nodes___AOrElseExpr___n_expr2_t)(val_t p0);
+val_t NEW_AOrElseExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ANotExpr___n_kwnot = "parser_nodes::ANotExpr::n_kwnot";
 val_t parser_nodes___ANotExpr___n_kwnot(val_t p0);
 typedef val_t (*parser_nodes___ANotExpr___n_kwnot_t)(val_t p0);
-#define LOCATE_parser_nodes___ANotExpr___n_kwnot__eq "parser_nodes::ANotExpr::n_kwnot="
-void parser_nodes___ANotExpr___n_kwnot__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANotExpr___n_kwnot__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ANotExpr___n_expr "parser_nodes::ANotExpr::n_expr"
+static const char * const LOCATE_parser_nodes___ANotExpr___n_expr = "parser_nodes::ANotExpr::n_expr";
 val_t parser_nodes___ANotExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___ANotExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___ANotExpr___n_expr__eq "parser_nodes::ANotExpr::n_expr="
-void parser_nodes___ANotExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANotExpr___n_expr__eq_t)(val_t p0, val_t p1);
+val_t NEW_ANotExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AEqExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AEeExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AEeExpr___n_expr "parser_nodes::AEeExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AEeExpr___n_expr = "parser_nodes::AEeExpr::n_expr";
 val_t parser_nodes___AEeExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AEeExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AEeExpr___n_expr__eq "parser_nodes::AEeExpr::n_expr="
-void parser_nodes___AEeExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AEeExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AEeExpr___n_expr2 "parser_nodes::AEeExpr::n_expr2"
+static const char * const LOCATE_parser_nodes___AEeExpr___n_expr2 = "parser_nodes::AEeExpr::n_expr2";
 val_t parser_nodes___AEeExpr___n_expr2(val_t p0);
 typedef val_t (*parser_nodes___AEeExpr___n_expr2_t)(val_t p0);
-#define LOCATE_parser_nodes___AEeExpr___n_expr2__eq "parser_nodes::AEeExpr::n_expr2="
-void parser_nodes___AEeExpr___n_expr2__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AEeExpr___n_expr2__eq_t)(val_t p0, val_t p1);
+val_t NEW_AEeExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ANeExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ALtExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ALeExpr_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALlExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AGtExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AGeExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AIsaExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AIsaExpr___n_expr "parser_nodes::AIsaExpr::n_expr"
+val_t NEW_AGgExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AIsaExpr___n_expr = "parser_nodes::AIsaExpr::n_expr";
 val_t parser_nodes___AIsaExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AIsaExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AIsaExpr___n_expr__eq "parser_nodes::AIsaExpr::n_expr="
-void parser_nodes___AIsaExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIsaExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AIsaExpr___n_type "parser_nodes::AIsaExpr::n_type"
+static const char * const LOCATE_parser_nodes___AIsaExpr___n_type = "parser_nodes::AIsaExpr::n_type";
 val_t parser_nodes___AIsaExpr___n_type(val_t p0);
 typedef val_t (*parser_nodes___AIsaExpr___n_type_t)(val_t p0);
-#define LOCATE_parser_nodes___AIsaExpr___n_type__eq "parser_nodes::AIsaExpr::n_type="
-void parser_nodes___AIsaExpr___n_type__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIsaExpr___n_type__eq_t)(val_t p0, val_t p1);
+val_t NEW_AIsaExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_APlusExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AMinusExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AStarshipExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AStarExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ASlashExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_APercentExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AUminusExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AUminusExpr___n_minus "parser_nodes::AUminusExpr::n_minus"
+static const char * const LOCATE_parser_nodes___AUminusExpr___n_minus = "parser_nodes::AUminusExpr::n_minus";
 val_t parser_nodes___AUminusExpr___n_minus(val_t p0);
 typedef val_t (*parser_nodes___AUminusExpr___n_minus_t)(val_t p0);
-#define LOCATE_parser_nodes___AUminusExpr___n_minus__eq "parser_nodes::AUminusExpr::n_minus="
-void parser_nodes___AUminusExpr___n_minus__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AUminusExpr___n_minus__eq_t)(val_t p0, val_t p1);
-val_t NEW_ANewExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ANewExpr___n_kwnew "parser_nodes::ANewExpr::n_kwnew"
+val_t NEW_AUminusExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ANewExpr___n_kwnew = "parser_nodes::ANewExpr::n_kwnew";
 val_t parser_nodes___ANewExpr___n_kwnew(val_t p0);
 typedef val_t (*parser_nodes___ANewExpr___n_kwnew_t)(val_t p0);
-#define LOCATE_parser_nodes___ANewExpr___n_kwnew__eq "parser_nodes::ANewExpr::n_kwnew="
-void parser_nodes___ANewExpr___n_kwnew__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANewExpr___n_kwnew__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ANewExpr___n_type "parser_nodes::ANewExpr::n_type"
+static const char * const LOCATE_parser_nodes___ANewExpr___n_type = "parser_nodes::ANewExpr::n_type";
 val_t parser_nodes___ANewExpr___n_type(val_t p0);
 typedef val_t (*parser_nodes___ANewExpr___n_type_t)(val_t p0);
-#define LOCATE_parser_nodes___ANewExpr___n_type__eq "parser_nodes::ANewExpr::n_type="
-void parser_nodes___ANewExpr___n_type__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANewExpr___n_type__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ANewExpr___n_id "parser_nodes::ANewExpr::n_id"
+static const char * const LOCATE_parser_nodes___ANewExpr___n_id = "parser_nodes::ANewExpr::n_id";
 val_t parser_nodes___ANewExpr___n_id(val_t p0);
 typedef val_t (*parser_nodes___ANewExpr___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___ANewExpr___n_id__eq "parser_nodes::ANewExpr::n_id="
-void parser_nodes___ANewExpr___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANewExpr___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ANewExpr___n_args "parser_nodes::ANewExpr::n_args"
+static const char * const LOCATE_parser_nodes___ANewExpr___n_args = "parser_nodes::ANewExpr::n_args";
 val_t parser_nodes___ANewExpr___n_args(val_t p0);
 typedef val_t (*parser_nodes___ANewExpr___n_args_t)(val_t p0);
-#define LOCATE_parser_nodes___ANewExpr___n_args__eq "parser_nodes::ANewExpr::n_args="
-void parser_nodes___ANewExpr___n_args__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANewExpr___n_args__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAttrFormExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAttrFormExpr___n_expr "parser_nodes::AAttrFormExpr::n_expr"
+val_t NEW_ANewExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAttrFormExpr___n_expr = "parser_nodes::AAttrFormExpr::n_expr";
 val_t parser_nodes___AAttrFormExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AAttrFormExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AAttrFormExpr___n_expr__eq "parser_nodes::AAttrFormExpr::n_expr="
-void parser_nodes___AAttrFormExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAttrFormExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAttrFormExpr___n_id "parser_nodes::AAttrFormExpr::n_id"
+static const char * const LOCATE_parser_nodes___AAttrFormExpr___n_id = "parser_nodes::AAttrFormExpr::n_id";
 val_t parser_nodes___AAttrFormExpr___n_id(val_t p0);
 typedef val_t (*parser_nodes___AAttrFormExpr___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AAttrFormExpr___n_id__eq "parser_nodes::AAttrFormExpr::n_id="
-void parser_nodes___AAttrFormExpr___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAttrFormExpr___n_id__eq_t)(val_t p0, val_t p1);
+val_t NEW_AAttrFormExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AAttrExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AAttrAssignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ACallFormExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ACallFormExpr___n_id "parser_nodes::ACallFormExpr::n_id"
+static const char * const LOCATE_parser_nodes___ACallFormExpr___n_id = "parser_nodes::ACallFormExpr::n_id";
 val_t parser_nodes___ACallFormExpr___n_id(val_t p0);
 typedef val_t (*parser_nodes___ACallFormExpr___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___ACallFormExpr___n_id__eq "parser_nodes::ACallFormExpr::n_id="
-void parser_nodes___ACallFormExpr___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ACallFormExpr___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ACallFormExpr___n_args "parser_nodes::ACallFormExpr::n_args"
+static const char * const LOCATE_parser_nodes___ACallFormExpr___n_args = "parser_nodes::ACallFormExpr::n_args";
 val_t parser_nodes___ACallFormExpr___n_args(val_t p0);
 typedef val_t (*parser_nodes___ACallFormExpr___n_args_t)(val_t p0);
-#define LOCATE_parser_nodes___ACallFormExpr___n_args__eq "parser_nodes::ACallFormExpr::n_args="
-void parser_nodes___ACallFormExpr___n_args__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ACallFormExpr___n_args__eq_t)(val_t p0, val_t p1);
+val_t NEW_ACallFormExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AAttrReassignExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ACallExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ACallAssignExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ACallReassignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASuperExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ASuperExpr___n_qualified "parser_nodes::ASuperExpr::n_qualified"
+static const char * const LOCATE_parser_nodes___ASuperExpr___n_qualified = "parser_nodes::ASuperExpr::n_qualified";
 val_t parser_nodes___ASuperExpr___n_qualified(val_t p0);
 typedef val_t (*parser_nodes___ASuperExpr___n_qualified_t)(val_t p0);
-#define LOCATE_parser_nodes___ASuperExpr___n_qualified__eq "parser_nodes::ASuperExpr::n_qualified="
-void parser_nodes___ASuperExpr___n_qualified__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASuperExpr___n_qualified__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ASuperExpr___n_kwsuper "parser_nodes::ASuperExpr::n_kwsuper"
+static const char * const LOCATE_parser_nodes___ASuperExpr___n_kwsuper = "parser_nodes::ASuperExpr::n_kwsuper";
 val_t parser_nodes___ASuperExpr___n_kwsuper(val_t p0);
 typedef val_t (*parser_nodes___ASuperExpr___n_kwsuper_t)(val_t p0);
-#define LOCATE_parser_nodes___ASuperExpr___n_kwsuper__eq "parser_nodes::ASuperExpr::n_kwsuper="
-void parser_nodes___ASuperExpr___n_kwsuper__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASuperExpr___n_kwsuper__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ASuperExpr___n_args "parser_nodes::ASuperExpr::n_args"
+static const char * const LOCATE_parser_nodes___ASuperExpr___n_args = "parser_nodes::ASuperExpr::n_args";
 val_t parser_nodes___ASuperExpr___n_args(val_t p0);
 typedef val_t (*parser_nodes___ASuperExpr___n_args_t)(val_t p0);
-#define LOCATE_parser_nodes___ASuperExpr___n_args__eq "parser_nodes::ASuperExpr::n_args="
-void parser_nodes___ASuperExpr___n_args__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASuperExpr___n_args__eq_t)(val_t p0, val_t p1);
-val_t NEW_AInitExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AInitExpr___n_kwinit "parser_nodes::AInitExpr::n_kwinit"
+val_t NEW_ASuperExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AInitExpr___n_kwinit = "parser_nodes::AInitExpr::n_kwinit";
 val_t parser_nodes___AInitExpr___n_kwinit(val_t p0);
 typedef val_t (*parser_nodes___AInitExpr___n_kwinit_t)(val_t p0);
-#define LOCATE_parser_nodes___AInitExpr___n_kwinit__eq "parser_nodes::AInitExpr::n_kwinit="
-void parser_nodes___AInitExpr___n_kwinit__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AInitExpr___n_kwinit__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AInitExpr___n_args "parser_nodes::AInitExpr::n_args"
+static const char * const LOCATE_parser_nodes___AInitExpr___n_args = "parser_nodes::AInitExpr::n_args";
 val_t parser_nodes___AInitExpr___n_args(val_t p0);
 typedef val_t (*parser_nodes___AInitExpr___n_args_t)(val_t p0);
-#define LOCATE_parser_nodes___AInitExpr___n_args__eq "parser_nodes::AInitExpr::n_args="
-void parser_nodes___AInitExpr___n_args__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AInitExpr___n_args__eq_t)(val_t p0, val_t p1);
-val_t NEW_ABraFormExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ABraFormExpr___n_args "parser_nodes::ABraFormExpr::n_args"
+val_t NEW_AInitExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ABraFormExpr___n_args = "parser_nodes::ABraFormExpr::n_args";
 val_t parser_nodes___ABraFormExpr___n_args(val_t p0);
 typedef val_t (*parser_nodes___ABraFormExpr___n_args_t)(val_t p0);
-#define LOCATE_parser_nodes___ABraFormExpr___n_args__eq "parser_nodes::ABraFormExpr::n_args="
-void parser_nodes___ABraFormExpr___n_args__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABraFormExpr___n_args__eq_t)(val_t p0, val_t p1);
+val_t NEW_ABraFormExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ABraExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ABraAssignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AVarFormExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AVarFormExpr___n_id "parser_nodes::AVarFormExpr::n_id"
+static const char * const LOCATE_parser_nodes___AVarFormExpr___n_id = "parser_nodes::AVarFormExpr::n_id";
 val_t parser_nodes___AVarFormExpr___n_id(val_t p0);
 typedef val_t (*parser_nodes___AVarFormExpr___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AVarFormExpr___n_id__eq "parser_nodes::AVarFormExpr::n_id="
-void parser_nodes___AVarFormExpr___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AVarFormExpr___n_id__eq_t)(val_t p0, val_t p1);
+val_t NEW_AVarFormExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ABraReassignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AClosureCallExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AClosureCallExpr___n_id "parser_nodes::AClosureCallExpr::n_id"
+static const char * const LOCATE_parser_nodes___AClosureCallExpr___n_id = "parser_nodes::AClosureCallExpr::n_id";
 val_t parser_nodes___AClosureCallExpr___n_id(val_t p0);
 typedef val_t (*parser_nodes___AClosureCallExpr___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureCallExpr___n_id__eq "parser_nodes::AClosureCallExpr::n_id="
-void parser_nodes___AClosureCallExpr___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureCallExpr___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AClosureCallExpr___n_args "parser_nodes::AClosureCallExpr::n_args"
+static const char * const LOCATE_parser_nodes___AClosureCallExpr___n_args = "parser_nodes::AClosureCallExpr::n_args";
 val_t parser_nodes___AClosureCallExpr___n_args(val_t p0);
 typedef val_t (*parser_nodes___AClosureCallExpr___n_args_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureCallExpr___n_args__eq "parser_nodes::AClosureCallExpr::n_args="
-void parser_nodes___AClosureCallExpr___n_args__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureCallExpr___n_args__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AClosureCallExpr___n_closure_defs "parser_nodes::AClosureCallExpr::n_closure_defs"
+static const char * const LOCATE_parser_nodes___AClosureCallExpr___n_closure_defs = "parser_nodes::AClosureCallExpr::n_closure_defs";
 val_t parser_nodes___AClosureCallExpr___n_closure_defs(val_t p0);
 typedef val_t (*parser_nodes___AClosureCallExpr___n_closure_defs_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureCallExpr___n_closure_defs__eq "parser_nodes::AClosureCallExpr::n_closure_defs="
-void parser_nodes___AClosureCallExpr___n_closure_defs__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureCallExpr___n_closure_defs__eq_t)(val_t p0, val_t p1);
+val_t NEW_AClosureCallExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AVarExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AVarAssignExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AVarReassignExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ARangeExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ARangeExpr___n_expr "parser_nodes::ARangeExpr::n_expr"
+static const char * const LOCATE_parser_nodes___ARangeExpr___n_expr = "parser_nodes::ARangeExpr::n_expr";
 val_t parser_nodes___ARangeExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___ARangeExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___ARangeExpr___n_expr__eq "parser_nodes::ARangeExpr::n_expr="
-void parser_nodes___ARangeExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ARangeExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___ARangeExpr___n_expr2 "parser_nodes::ARangeExpr::n_expr2"
+static const char * const LOCATE_parser_nodes___ARangeExpr___n_expr2 = "parser_nodes::ARangeExpr::n_expr2";
 val_t parser_nodes___ARangeExpr___n_expr2(val_t p0);
 typedef val_t (*parser_nodes___ARangeExpr___n_expr2_t)(val_t p0);
-#define LOCATE_parser_nodes___ARangeExpr___n_expr2__eq "parser_nodes::ARangeExpr::n_expr2="
-void parser_nodes___ARangeExpr___n_expr2__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ARangeExpr___n_expr2__eq_t)(val_t p0, val_t p1);
+val_t NEW_ARangeExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_ACrangeExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AOrangeExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AArrayExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AArrayExpr___n_exprs "parser_nodes::AArrayExpr::n_exprs"
+static const char * const LOCATE_parser_nodes___AArrayExpr___n_exprs = "parser_nodes::AArrayExpr::n_exprs";
 val_t parser_nodes___AArrayExpr___n_exprs(val_t p0);
 typedef val_t (*parser_nodes___AArrayExpr___n_exprs_t)(val_t p0);
-#define LOCATE_parser_nodes___AArrayExpr___n_exprs__eq "parser_nodes::AArrayExpr::n_exprs="
-void parser_nodes___AArrayExpr___n_exprs__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AArrayExpr___n_exprs__eq_t)(val_t p0, val_t p1);
-val_t NEW_ASelfExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ASelfExpr___n_kwself "parser_nodes::ASelfExpr::n_kwself"
+val_t NEW_AArrayExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ASelfExpr___n_kwself = "parser_nodes::ASelfExpr::n_kwself";
 val_t parser_nodes___ASelfExpr___n_kwself(val_t p0);
 typedef val_t (*parser_nodes___ASelfExpr___n_kwself_t)(val_t p0);
-#define LOCATE_parser_nodes___ASelfExpr___n_kwself__eq "parser_nodes::ASelfExpr::n_kwself="
-void parser_nodes___ASelfExpr___n_kwself__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASelfExpr___n_kwself__eq_t)(val_t p0, val_t p1);
+val_t NEW_ASelfExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AImplicitSelfExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ATrueExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ATrueExpr___n_kwtrue "parser_nodes::ATrueExpr::n_kwtrue"
+static const char * const LOCATE_parser_nodes___ATrueExpr___n_kwtrue = "parser_nodes::ATrueExpr::n_kwtrue";
 val_t parser_nodes___ATrueExpr___n_kwtrue(val_t p0);
 typedef val_t (*parser_nodes___ATrueExpr___n_kwtrue_t)(val_t p0);
-#define LOCATE_parser_nodes___ATrueExpr___n_kwtrue__eq "parser_nodes::ATrueExpr::n_kwtrue="
-void parser_nodes___ATrueExpr___n_kwtrue__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ATrueExpr___n_kwtrue__eq_t)(val_t p0, val_t p1);
-val_t NEW_AFalseExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AFalseExpr___n_kwfalse "parser_nodes::AFalseExpr::n_kwfalse"
+val_t NEW_ATrueExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AFalseExpr___n_kwfalse = "parser_nodes::AFalseExpr::n_kwfalse";
 val_t parser_nodes___AFalseExpr___n_kwfalse(val_t p0);
 typedef val_t (*parser_nodes___AFalseExpr___n_kwfalse_t)(val_t p0);
-#define LOCATE_parser_nodes___AFalseExpr___n_kwfalse__eq "parser_nodes::AFalseExpr::n_kwfalse="
-void parser_nodes___AFalseExpr___n_kwfalse__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AFalseExpr___n_kwfalse__eq_t)(val_t p0, val_t p1);
-val_t NEW_ANullExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ANullExpr___n_kwnull "parser_nodes::ANullExpr::n_kwnull"
+val_t NEW_AFalseExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ANullExpr___n_kwnull = "parser_nodes::ANullExpr::n_kwnull";
 val_t parser_nodes___ANullExpr___n_kwnull(val_t p0);
 typedef val_t (*parser_nodes___ANullExpr___n_kwnull_t)(val_t p0);
-#define LOCATE_parser_nodes___ANullExpr___n_kwnull__eq "parser_nodes::ANullExpr::n_kwnull="
-void parser_nodes___ANullExpr___n_kwnull__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ANullExpr___n_kwnull__eq_t)(val_t p0, val_t p1);
-val_t NEW_AIntExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AIntExpr___n_number "parser_nodes::AIntExpr::n_number"
+val_t NEW_ANullExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AIntExpr___n_number = "parser_nodes::AIntExpr::n_number";
 val_t parser_nodes___AIntExpr___n_number(val_t p0);
 typedef val_t (*parser_nodes___AIntExpr___n_number_t)(val_t p0);
-#define LOCATE_parser_nodes___AIntExpr___n_number__eq "parser_nodes::AIntExpr::n_number="
-void parser_nodes___AIntExpr___n_number__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIntExpr___n_number__eq_t)(val_t p0, val_t p1);
-val_t NEW_AFloatExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AFloatExpr___n_float "parser_nodes::AFloatExpr::n_float"
+val_t NEW_AIntExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AFloatExpr___n_float = "parser_nodes::AFloatExpr::n_float";
 val_t parser_nodes___AFloatExpr___n_float(val_t p0);
 typedef val_t (*parser_nodes___AFloatExpr___n_float_t)(val_t p0);
-#define LOCATE_parser_nodes___AFloatExpr___n_float__eq "parser_nodes::AFloatExpr::n_float="
-void parser_nodes___AFloatExpr___n_float__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AFloatExpr___n_float__eq_t)(val_t p0, val_t p1);
-val_t NEW_ACharExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ACharExpr___n_char "parser_nodes::ACharExpr::n_char"
+val_t NEW_AFloatExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ACharExpr___n_char = "parser_nodes::ACharExpr::n_char";
 val_t parser_nodes___ACharExpr___n_char(val_t p0);
 typedef val_t (*parser_nodes___ACharExpr___n_char_t)(val_t p0);
-#define LOCATE_parser_nodes___ACharExpr___n_char__eq "parser_nodes::ACharExpr::n_char="
-void parser_nodes___ACharExpr___n_char__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ACharExpr___n_char__eq_t)(val_t p0, val_t p1);
+val_t NEW_ACharExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AStringFormExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AStringExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AStringExpr___n_string "parser_nodes::AStringExpr::n_string"
+static const char * const LOCATE_parser_nodes___AStringExpr___n_string = "parser_nodes::AStringExpr::n_string";
 val_t parser_nodes___AStringExpr___n_string(val_t p0);
 typedef val_t (*parser_nodes___AStringExpr___n_string_t)(val_t p0);
-#define LOCATE_parser_nodes___AStringExpr___n_string__eq "parser_nodes::AStringExpr::n_string="
-void parser_nodes___AStringExpr___n_string__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStringExpr___n_string__eq_t)(val_t p0, val_t p1);
-val_t NEW_AStartStringExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AStartStringExpr___n_string "parser_nodes::AStartStringExpr::n_string"
+val_t NEW_AStringExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AStartStringExpr___n_string = "parser_nodes::AStartStringExpr::n_string";
 val_t parser_nodes___AStartStringExpr___n_string(val_t p0);
 typedef val_t (*parser_nodes___AStartStringExpr___n_string_t)(val_t p0);
-#define LOCATE_parser_nodes___AStartStringExpr___n_string__eq "parser_nodes::AStartStringExpr::n_string="
-void parser_nodes___AStartStringExpr___n_string__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AStartStringExpr___n_string__eq_t)(val_t p0, val_t p1);
-val_t NEW_AMidStringExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AMidStringExpr___n_string "parser_nodes::AMidStringExpr::n_string"
+val_t NEW_AStartStringExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AMidStringExpr___n_string = "parser_nodes::AMidStringExpr::n_string";
 val_t parser_nodes___AMidStringExpr___n_string(val_t p0);
 typedef val_t (*parser_nodes___AMidStringExpr___n_string_t)(val_t p0);
-#define LOCATE_parser_nodes___AMidStringExpr___n_string__eq "parser_nodes::AMidStringExpr::n_string="
-void parser_nodes___AMidStringExpr___n_string__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AMidStringExpr___n_string__eq_t)(val_t p0, val_t p1);
-val_t NEW_AEndStringExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AEndStringExpr___n_string "parser_nodes::AEndStringExpr::n_string"
+val_t NEW_AMidStringExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AEndStringExpr___n_string = "parser_nodes::AEndStringExpr::n_string";
 val_t parser_nodes___AEndStringExpr___n_string(val_t p0);
 typedef val_t (*parser_nodes___AEndStringExpr___n_string_t)(val_t p0);
-#define LOCATE_parser_nodes___AEndStringExpr___n_string__eq "parser_nodes::AEndStringExpr::n_string="
-void parser_nodes___AEndStringExpr___n_string__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AEndStringExpr___n_string__eq_t)(val_t p0, val_t p1);
-val_t NEW_ASuperstringExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ASuperstringExpr___n_exprs "parser_nodes::ASuperstringExpr::n_exprs"
+val_t NEW_AEndStringExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ASuperstringExpr___n_exprs = "parser_nodes::ASuperstringExpr::n_exprs";
 val_t parser_nodes___ASuperstringExpr___n_exprs(val_t p0);
 typedef val_t (*parser_nodes___ASuperstringExpr___n_exprs_t)(val_t p0);
-#define LOCATE_parser_nodes___ASuperstringExpr___n_exprs__eq "parser_nodes::ASuperstringExpr::n_exprs="
-void parser_nodes___ASuperstringExpr___n_exprs__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASuperstringExpr___n_exprs__eq_t)(val_t p0, val_t p1);
+val_t NEW_ASuperstringExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AParExpr_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AProxyExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AProxyExpr___n_expr "parser_nodes::AProxyExpr::n_expr"
+static const char * const LOCATE_parser_nodes___AProxyExpr___n_expr = "parser_nodes::AProxyExpr::n_expr";
 val_t parser_nodes___AProxyExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AProxyExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AProxyExpr___n_expr__eq "parser_nodes::AProxyExpr::n_expr="
-void parser_nodes___AProxyExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AProxyExpr___n_expr__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAsCastExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAsCastExpr___n_expr "parser_nodes::AAsCastExpr::n_expr"
+val_t NEW_AProxyExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAsCastExpr___n_expr = "parser_nodes::AAsCastExpr::n_expr";
 val_t parser_nodes___AAsCastExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AAsCastExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AAsCastExpr___n_expr__eq "parser_nodes::AAsCastExpr::n_expr="
-void parser_nodes___AAsCastExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAsCastExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAsCastExpr___n_kwas "parser_nodes::AAsCastExpr::n_kwas"
+static const char * const LOCATE_parser_nodes___AAsCastExpr___n_kwas = "parser_nodes::AAsCastExpr::n_kwas";
 val_t parser_nodes___AAsCastExpr___n_kwas(val_t p0);
 typedef val_t (*parser_nodes___AAsCastExpr___n_kwas_t)(val_t p0);
-#define LOCATE_parser_nodes___AAsCastExpr___n_kwas__eq "parser_nodes::AAsCastExpr::n_kwas="
-void parser_nodes___AAsCastExpr___n_kwas__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAsCastExpr___n_kwas__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAsCastExpr___n_type "parser_nodes::AAsCastExpr::n_type"
+static const char * const LOCATE_parser_nodes___AAsCastExpr___n_type = "parser_nodes::AAsCastExpr::n_type";
 val_t parser_nodes___AAsCastExpr___n_type(val_t p0);
 typedef val_t (*parser_nodes___AAsCastExpr___n_type_t)(val_t p0);
-#define LOCATE_parser_nodes___AAsCastExpr___n_type__eq "parser_nodes::AAsCastExpr::n_type="
-void parser_nodes___AAsCastExpr___n_type__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAsCastExpr___n_type__eq_t)(val_t p0, val_t p1);
-val_t NEW_AAsNotnullExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AAsNotnullExpr___n_expr "parser_nodes::AAsNotnullExpr::n_expr"
+val_t NEW_AAsCastExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AAsNotnullExpr___n_expr = "parser_nodes::AAsNotnullExpr::n_expr";
 val_t parser_nodes___AAsNotnullExpr___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AAsNotnullExpr___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AAsNotnullExpr___n_expr__eq "parser_nodes::AAsNotnullExpr::n_expr="
-void parser_nodes___AAsNotnullExpr___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAsNotnullExpr___n_expr__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAsNotnullExpr___n_kwas "parser_nodes::AAsNotnullExpr::n_kwas"
+static const char * const LOCATE_parser_nodes___AAsNotnullExpr___n_kwas = "parser_nodes::AAsNotnullExpr::n_kwas";
 val_t parser_nodes___AAsNotnullExpr___n_kwas(val_t p0);
 typedef val_t (*parser_nodes___AAsNotnullExpr___n_kwas_t)(val_t p0);
-#define LOCATE_parser_nodes___AAsNotnullExpr___n_kwas__eq "parser_nodes::AAsNotnullExpr::n_kwas="
-void parser_nodes___AAsNotnullExpr___n_kwas__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAsNotnullExpr___n_kwas__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAsNotnullExpr___n_kwnot "parser_nodes::AAsNotnullExpr::n_kwnot"
+static const char * const LOCATE_parser_nodes___AAsNotnullExpr___n_kwnot = "parser_nodes::AAsNotnullExpr::n_kwnot";
 val_t parser_nodes___AAsNotnullExpr___n_kwnot(val_t p0);
 typedef val_t (*parser_nodes___AAsNotnullExpr___n_kwnot_t)(val_t p0);
-#define LOCATE_parser_nodes___AAsNotnullExpr___n_kwnot__eq "parser_nodes::AAsNotnullExpr::n_kwnot="
-void parser_nodes___AAsNotnullExpr___n_kwnot__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAsNotnullExpr___n_kwnot__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AAsNotnullExpr___n_kwnull "parser_nodes::AAsNotnullExpr::n_kwnull"
+static const char * const LOCATE_parser_nodes___AAsNotnullExpr___n_kwnull = "parser_nodes::AAsNotnullExpr::n_kwnull";
 val_t parser_nodes___AAsNotnullExpr___n_kwnull(val_t p0);
 typedef val_t (*parser_nodes___AAsNotnullExpr___n_kwnull_t)(val_t p0);
-#define LOCATE_parser_nodes___AAsNotnullExpr___n_kwnull__eq "parser_nodes::AAsNotnullExpr::n_kwnull="
-void parser_nodes___AAsNotnullExpr___n_kwnull__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AAsNotnullExpr___n_kwnull__eq_t)(val_t p0, val_t p1);
-val_t NEW_AIssetAttrExpr_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AIssetAttrExpr___n_kwisset "parser_nodes::AIssetAttrExpr::n_kwisset"
+val_t NEW_AAsNotnullExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AIssetAttrExpr___n_kwisset = "parser_nodes::AIssetAttrExpr::n_kwisset";
 val_t parser_nodes___AIssetAttrExpr___n_kwisset(val_t p0);
 typedef val_t (*parser_nodes___AIssetAttrExpr___n_kwisset_t)(val_t p0);
-#define LOCATE_parser_nodes___AIssetAttrExpr___n_kwisset__eq "parser_nodes::AIssetAttrExpr::n_kwisset="
-void parser_nodes___AIssetAttrExpr___n_kwisset__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AIssetAttrExpr___n_kwisset__eq_t)(val_t p0, val_t p1);
+val_t NEW_AIssetAttrExpr_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AAssignOp_parser_nodes___ANode___init(val_t p0);
-val_t NEW_APlusAssignOp_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___APlusAssignOp___n_pluseq "parser_nodes::APlusAssignOp::n_pluseq"
+static const char * const LOCATE_parser_nodes___APlusAssignOp___n_pluseq = "parser_nodes::APlusAssignOp::n_pluseq";
 val_t parser_nodes___APlusAssignOp___n_pluseq(val_t p0);
 typedef val_t (*parser_nodes___APlusAssignOp___n_pluseq_t)(val_t p0);
-#define LOCATE_parser_nodes___APlusAssignOp___n_pluseq__eq "parser_nodes::APlusAssignOp::n_pluseq="
-void parser_nodes___APlusAssignOp___n_pluseq__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___APlusAssignOp___n_pluseq__eq_t)(val_t p0, val_t p1);
-val_t NEW_AMinusAssignOp_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AMinusAssignOp___n_minuseq "parser_nodes::AMinusAssignOp::n_minuseq"
+val_t NEW_APlusAssignOp_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AMinusAssignOp___n_minuseq = "parser_nodes::AMinusAssignOp::n_minuseq";
 val_t parser_nodes___AMinusAssignOp___n_minuseq(val_t p0);
 typedef val_t (*parser_nodes___AMinusAssignOp___n_minuseq_t)(val_t p0);
-#define LOCATE_parser_nodes___AMinusAssignOp___n_minuseq__eq "parser_nodes::AMinusAssignOp::n_minuseq="
-void parser_nodes___AMinusAssignOp___n_minuseq__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AMinusAssignOp___n_minuseq__eq_t)(val_t p0, val_t p1);
-val_t NEW_AClosureDef_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AClosureDef___n_bang "parser_nodes::AClosureDef::n_bang"
+val_t NEW_AMinusAssignOp_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AClosureDef___n_bang = "parser_nodes::AClosureDef::n_bang";
 val_t parser_nodes___AClosureDef___n_bang(val_t p0);
 typedef val_t (*parser_nodes___AClosureDef___n_bang_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureDef___n_bang__eq "parser_nodes::AClosureDef::n_bang="
-void parser_nodes___AClosureDef___n_bang__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureDef___n_bang__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AClosureDef___n_id "parser_nodes::AClosureDef::n_id"
+static const char * const LOCATE_parser_nodes___AClosureDef___n_id = "parser_nodes::AClosureDef::n_id";
 val_t parser_nodes___AClosureDef___n_id(val_t p0);
 typedef val_t (*parser_nodes___AClosureDef___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureDef___n_id__eq "parser_nodes::AClosureDef::n_id="
-void parser_nodes___AClosureDef___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureDef___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AClosureDef___n_ids "parser_nodes::AClosureDef::n_ids"
+static const char * const LOCATE_parser_nodes___AClosureDef___n_ids = "parser_nodes::AClosureDef::n_ids";
 val_t parser_nodes___AClosureDef___n_ids(val_t p0);
 typedef val_t (*parser_nodes___AClosureDef___n_ids_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureDef___n_ids__eq "parser_nodes::AClosureDef::n_ids="
-void parser_nodes___AClosureDef___n_ids__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureDef___n_ids__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AClosureDef___n_kwdo "parser_nodes::AClosureDef::n_kwdo"
+static const char * const LOCATE_parser_nodes___AClosureDef___n_kwdo = "parser_nodes::AClosureDef::n_kwdo";
 val_t parser_nodes___AClosureDef___n_kwdo(val_t p0);
 typedef val_t (*parser_nodes___AClosureDef___n_kwdo_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureDef___n_kwdo__eq "parser_nodes::AClosureDef::n_kwdo="
-void parser_nodes___AClosureDef___n_kwdo__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureDef___n_kwdo__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AClosureDef___n_expr "parser_nodes::AClosureDef::n_expr"
+static const char * const LOCATE_parser_nodes___AClosureDef___n_expr = "parser_nodes::AClosureDef::n_expr";
 val_t parser_nodes___AClosureDef___n_expr(val_t p0);
 typedef val_t (*parser_nodes___AClosureDef___n_expr_t)(val_t p0);
-#define LOCATE_parser_nodes___AClosureDef___n_expr__eq "parser_nodes::AClosureDef::n_expr="
-void parser_nodes___AClosureDef___n_expr__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AClosureDef___n_expr__eq_t)(val_t p0, val_t p1);
+val_t NEW_AClosureDef_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AClosureId_parser_nodes___ANode___init(val_t p0);
-val_t NEW_ASimpleClosureId_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ASimpleClosureId___n_id "parser_nodes::ASimpleClosureId::n_id"
+static const char * const LOCATE_parser_nodes___ASimpleClosureId___n_id = "parser_nodes::ASimpleClosureId::n_id";
 val_t parser_nodes___ASimpleClosureId___n_id(val_t p0);
 typedef val_t (*parser_nodes___ASimpleClosureId___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___ASimpleClosureId___n_id__eq "parser_nodes::ASimpleClosureId::n_id="
-void parser_nodes___ASimpleClosureId___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ASimpleClosureId___n_id__eq_t)(val_t p0, val_t p1);
-val_t NEW_ABreakClosureId_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ABreakClosureId___n_kwbreak "parser_nodes::ABreakClosureId::n_kwbreak"
+val_t NEW_ASimpleClosureId_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ABreakClosureId___n_kwbreak = "parser_nodes::ABreakClosureId::n_kwbreak";
 val_t parser_nodes___ABreakClosureId___n_kwbreak(val_t p0);
 typedef val_t (*parser_nodes___ABreakClosureId___n_kwbreak_t)(val_t p0);
-#define LOCATE_parser_nodes___ABreakClosureId___n_kwbreak__eq "parser_nodes::ABreakClosureId::n_kwbreak="
-void parser_nodes___ABreakClosureId___n_kwbreak__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ABreakClosureId___n_kwbreak__eq_t)(val_t p0, val_t p1);
-val_t NEW_AQualified_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___AQualified___n_id "parser_nodes::AQualified::n_id"
+val_t NEW_ABreakClosureId_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AQualified___n_id = "parser_nodes::AQualified::n_id";
 val_t parser_nodes___AQualified___n_id(val_t p0);
 typedef val_t (*parser_nodes___AQualified___n_id_t)(val_t p0);
-#define LOCATE_parser_nodes___AQualified___n_id__eq "parser_nodes::AQualified::n_id="
-void parser_nodes___AQualified___n_id__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AQualified___n_id__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___AQualified___n_classid "parser_nodes::AQualified::n_classid"
+static const char * const LOCATE_parser_nodes___AQualified___n_classid = "parser_nodes::AQualified::n_classid";
 val_t parser_nodes___AQualified___n_classid(val_t p0);
 typedef val_t (*parser_nodes___AQualified___n_classid_t)(val_t p0);
-#define LOCATE_parser_nodes___AQualified___n_classid__eq "parser_nodes::AQualified::n_classid="
-void parser_nodes___AQualified___n_classid__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___AQualified___n_classid__eq_t)(val_t p0, val_t p1);
-val_t NEW_ADoc_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___ADoc___n_comment "parser_nodes::ADoc::n_comment"
+val_t NEW_AQualified_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___ADoc___n_comment = "parser_nodes::ADoc::n_comment";
 val_t parser_nodes___ADoc___n_comment(val_t p0);
 typedef val_t (*parser_nodes___ADoc___n_comment_t)(val_t p0);
-#define LOCATE_parser_nodes___ADoc___n_comment__eq "parser_nodes::ADoc::n_comment="
-void parser_nodes___ADoc___n_comment__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___ADoc___n_comment__eq_t)(val_t p0, val_t p1);
-val_t NEW_Start_parser_nodes___ANode___init(val_t p0);
-#define LOCATE_parser_nodes___Start___n_base "parser_nodes::Start::n_base"
+val_t NEW_ADoc_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___Start___n_base = "parser_nodes::Start::n_base";
 val_t parser_nodes___Start___n_base(val_t p0);
 typedef val_t (*parser_nodes___Start___n_base_t)(val_t p0);
-#define LOCATE_parser_nodes___Start___n_base__eq "parser_nodes::Start::n_base="
-void parser_nodes___Start___n_base__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___Start___n_base__eq_t)(val_t p0, val_t p1);
-#define LOCATE_parser_nodes___Start___n_eof "parser_nodes::Start::n_eof"
+static const char * const LOCATE_parser_nodes___Start___n_eof = "parser_nodes::Start::n_eof";
 val_t parser_nodes___Start___n_eof(val_t p0);
 typedef val_t (*parser_nodes___Start___n_eof_t)(val_t p0);
-#define LOCATE_parser_nodes___Start___n_eof__eq "parser_nodes::Start::n_eof="
-void parser_nodes___Start___n_eof__eq(val_t p0, val_t p1);
-typedef void (*parser_nodes___Start___n_eof__eq_t)(val_t p0, val_t p1);
+val_t NEW_Start_parser_nodes___ANode___init(val_t p0);
 #endif

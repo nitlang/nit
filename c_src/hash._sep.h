@@ -6,16 +6,16 @@
 extern const char *LOCATE_hash;
 extern const int SFT_hash[];
 #define CALL_hash___Object___hash(recv) ((hash___Object___hash_t)CALL((recv), (SFT_hash[0] + 0)))
-#define LOCATE_hash___Object___hash "hash::Object::hash"
+static const char * const LOCATE_hash___Object___hash = "hash::Object::hash";
 val_t hash___Object___hash(val_t p0);
 typedef val_t (*hash___Object___hash_t)(val_t p0);
-#define LOCATE_hash___Int___hash "hash::Int::(hash::Object::hash)"
+static const char * const LOCATE_hash___Int___hash = "hash::Int::(hash::Object::hash)";
 val_t hash___Int___hash(val_t p0);
 typedef val_t (*hash___Int___hash_t)(val_t p0);
-#define LOCATE_hash___Char___hash "hash::Char::(hash::Object::hash)"
+static const char * const LOCATE_hash___Char___hash = "hash::Char::(hash::Object::hash)";
 val_t hash___Char___hash(val_t p0);
 typedef val_t (*hash___Char___hash_t)(val_t p0);
-#define LOCATE_hash___Bool___hash "hash::Bool::(hash::Object::hash)"
+static const char * const LOCATE_hash___Bool___hash = "hash::Bool::(hash::Object::hash)";
 val_t hash___Bool___hash(val_t p0);
 typedef val_t (*hash___Bool___hash_t)(val_t p0);
 #endif

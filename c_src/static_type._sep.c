@@ -14,9 +14,9 @@ val_t static_type___MMLocalClass___get_type(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:30 */
   fra.me.REG[1] = ATTR_static_type___MMLocalClass____base_type_cache(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./metamodel//static_type.nit:30 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -32,14 +32,12 @@ val_t static_type___MMLocalClass___get_type(val_t p0){
     fra.me.REG[1] = NEW_MMTypeSimpleClass_static_type___MMTypeSimpleClass___init(fra.me.REG[0]);
     ATTR_static_type___MMLocalClass____base_type_cache(fra.me.REG[0]) = fra.me.REG[1];
   }
+  /* ./metamodel//static_type.nit:31 */
   fra.me.REG[0] = ATTR_static_type___MMLocalClass____base_type_cache(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
-  /* ./metamodel//static_type.nit:31 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Cast failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 31);
-    nit_exit(1);
+    nit_abort("Cast failed", NULL, LOCATE_static_type, 31);
   }
   goto label1;
   label1: while(0);
@@ -63,26 +61,22 @@ void static_type___MMLocalClass___add_ancestor(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:37 */
   fra.me.REG[2] = ATTR_static_type___MMLocalClass____ancestors(fra.me.REG[0]);
   fra.me.REG[3] = CALL_static_type___MMAncestor___local_class(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-  /* ./metamodel//static_type.nit:37 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 37);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_static_type, 37);
   }
   REGB0 = CALL_abstract_collection___MapRead___has_key(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 37);
-    nit_exit(1);
+    nit_abort("Assert failed", NULL, LOCATE_static_type, 37);
   }
+  /* ./metamodel//static_type.nit:38 */
   fra.me.REG[3] = CALL_static_type___MMAncestor___local_class(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[0]));
-  /* ./metamodel//static_type.nit:38 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[0]);
@@ -91,18 +85,14 @@ void static_type___MMLocalClass___add_ancestor(val_t p0, val_t p1){
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 38);
-    nit_exit(1);
+    nit_abort("Assert failed", NULL, LOCATE_static_type, 38);
   }
+  /* ./metamodel//static_type.nit:39 */
   fra.me.REG[0] = ATTR_static_type___MMLocalClass____ancestors(fra.me.REG[0]);
   fra.me.REG[3] = CALL_static_type___MMAncestor___local_class(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./metamodel//static_type.nit:39 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 39);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_static_type, 39);
   }
   CALL_abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
@@ -119,8 +109,8 @@ val_t static_type___MMLocalClass___ancestors(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[0] = ATTR_static_type___MMLocalClass____ancestors(fra.me.REG[0]);
   /* ./metamodel//static_type.nit:42 */
+  fra.me.REG[0] = ATTR_static_type___MMLocalClass____ancestors(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -138,20 +128,16 @@ val_t static_type___MMLocalClass___ancestor(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:48 */
   fra.me.REG[0] = ATTR_static_type___MMLocalClass____ancestors(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./metamodel//static_type.nit:48 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 48);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_static_type, 48);
   }
   fra.me.REG[1] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 48);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_static_type, 48);
   }
   fra.me.REG[1] = CALL_static_type___MMAncestor___stype(fra.me.REG[1])(fra.me.REG[1]);
   goto label1;
@@ -170,8 +156,8 @@ val_t static_type___MMLocalProperty___signature(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[0] = ATTR_static_type___MMLocalProperty____signature(fra.me.REG[0]);
   /* ./metamodel//static_type.nit:53 */
+  fra.me.REG[0] = ATTR_static_type___MMLocalProperty____signature(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -210,10 +196,10 @@ val_t static_type___MMLocalProperty___signature_for(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:60 */
   fra.me.REG[2] = CALL_abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[2]));
-  /* ./metamodel//static_type.nit:60 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
@@ -224,19 +210,15 @@ val_t static_type___MMLocalProperty___signature_for(val_t p0, val_t p1){
     REGB0 = TAG_Bool(fra.me.REG[2]!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      fprintf(stderr, "Cast failed");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 60);
-      nit_exit(1);
+      nit_abort("Cast failed", NULL, LOCATE_static_type, 60);
     }
     goto label1;
   }
-  REGB0 = TAG_Bool(ATTR_static_type___MMLocalProperty____signatures_cache(fra.me.REG[0])!=NIT_NULL);
   /* ./metamodel//static_type.nit:62 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMLocalProperty____signatures_cache(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_signatures_cache");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 62);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_signatures_cache", LOCATE_static_type, 62);
   }
   fra.me.REG[3] = ATTR_static_type___MMLocalProperty____signatures_cache(fra.me.REG[0]);
   REGB0 = CALL_abstract_collection___MapRead___has_key(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
@@ -244,265 +226,34 @@ val_t static_type___MMLocalProperty___signature_for(val_t p0, val_t p1){
     REGB0 = TAG_Bool(ATTR_static_type___MMLocalProperty____signatures_cache(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_signatures_cache");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 62);
-      nit_exit(1);
+      nit_abort("Uninitialized attribute %s", "_signatures_cache", LOCATE_static_type, 62);
     }
     fra.me.REG[3] = ATTR_static_type___MMLocalProperty____signatures_cache(fra.me.REG[0]);
     fra.me.REG[3] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
     fra.me.REG[2] = fra.me.REG[3];
     goto label1;
   }
+  /* ./metamodel//static_type.nit:64 */
   fra.me.REG[3] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-  /* ./metamodel//static_type.nit:64 */
   if (UNTAG_Bool(REGB0)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 64);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_static_type, 64);
   }
   fra.me.REG[3] = CALL_static_type___MMSignature___adaptation_to(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
-  REGB0 = TAG_Bool(ATTR_static_type___MMLocalProperty____signatures_cache(fra.me.REG[0])!=NIT_NULL);
   /* ./metamodel//static_type.nit:65 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMLocalProperty____signatures_cache(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_signatures_cache");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 65);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_signatures_cache", LOCATE_static_type, 65);
   }
   fra.me.REG[0] = ATTR_static_type___MMLocalProperty____signatures_cache(fra.me.REG[0]);
   CALL_abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[3]);
-  fra.me.REG[2] = fra.me.REG[3];
   /* ./metamodel//static_type.nit:66 */
+  fra.me.REG[2] = fra.me.REG[3];
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[2];
-}
-val_t static_type___MMSignature___to_s(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[4];} fra;
-  val_t REGB0;
-  val_t REGB1;
-  val_t REGB2;
-  val_t tmp;
-    static val_t once_value_3; /* Once value */
-    static val_t once_value_4; /* Once value */
-    static val_t once_value_5; /* Once value */
-    static val_t once_value_6; /* Once value */
-    static val_t once_value_7; /* Once value */
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 133;
-  fra.me.meth = LOCATE_static_type___MMSignature___to_s;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 5;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
-  fra.me.REG[3] = NIT_NULL;
-  fra.me.REG[4] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[1] = NEW_Buffer_string___Buffer___init();
-  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:136 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_params");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 136);
-    nit_exit(1);
-  }
-  fra.me.REG[2] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
-  REGB0 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
-  /* ./../lib/standard//collection//array.nit:23 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_array, 23);
-    nit_exit(1);
-  }
-  REGB0 = ATTR_array___AbstractArrayRead____length(fra.me.REG[2]);
-  REGB1 = TAG_Int(0);
-  REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-  /* ./metamodel//static_type.nit:136 */
-  if (UNTAG_Bool(REGB1)) {
-    REGB1 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
-    /* ./metamodel//static_type.nit:138 */
-    if (UNTAG_Bool(REGB1)) {
-    } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_params");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 138);
-      nit_exit(1);
-    }
-    fra.me.REG[2] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
-    REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
-    /* ./../lib/standard//collection//array.nit:23 */
-    if (UNTAG_Bool(REGB1)) {
-    } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_length");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_array, 23);
-      nit_exit(1);
-    }
-    REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[2]);
-    fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB1);
-    REGB1 = TAG_Int(0);
-    REGB0 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
-    /* ./metamodel//static_type.nit:139 */
-    if (UNTAG_Bool(REGB0)) {
-    } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_params");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 139);
-      nit_exit(1);
-    }
-    fra.me.REG[3] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
-    REGB0 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
-    /* ./../lib/standard//collection//array.nit:23 */
-    if (UNTAG_Bool(REGB0)) {
-    } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_length");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_array, 23);
-      nit_exit(1);
-    }
-    REGB0 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
-    fra.me.REG[3] = NEW_Range_range___Range___without_last(REGB1, REGB0);
-    fra.me.REG[3] = CALL_abstract_collection___Collection___iterator(fra.me.REG[3])(fra.me.REG[3]);
-    /* ./metamodel//static_type.nit:139 */
-    while(1) {
-      REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[3])(fra.me.REG[3]);
-      if (UNTAG_Bool(REGB0)) {
-        REGB0 = CALL_abstract_collection___Iterator___item(fra.me.REG[3])(fra.me.REG[3]);
-        REGB1 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
-        /* ./metamodel//static_type.nit:141 */
-        if (UNTAG_Bool(REGB1)) {
-        } else {
-          fprintf(stderr, "Uninitialized attribute %s", "_params");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 141);
-          nit_exit(1);
-        }
-        fra.me.REG[4] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
-        REGB1 = TAG_Int(0);
-        REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-        /* ./../lib/standard//collection//array.nit:233 */
-        if (UNTAG_Bool(REGB1)) {
-          REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
-          if (UNTAG_Bool(REGB1)) {
-          } else {
-            fprintf(stderr, "Uninitialized attribute %s", "_length");
-            fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-            nit_exit(1);
-          }
-          REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[4]);
-          REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-        /* ./../lib/standard//collection//array.nit:233 */
-        } else {
-          REGB2 = TAG_Bool(false);
-          REGB1 = REGB2;
-        }
-        if (UNTAG_Bool(REGB1)) {
-        } else {
-          fprintf(stderr, "Assert %s  failed", "'index'");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-          nit_exit(1);
-        }
-        fra.me.REG[4] = ATTR_array___Array____items(fra.me.REG[4]);
-        REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
-        /* ./../lib/standard//collection//array.nit:234 */
-        if (UNTAG_Bool(REGB1)) {
-          fprintf(stderr, "Reciever is null");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_array, 234);
-          nit_exit(1);
-        }
-        fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
-        /* ./../lib/standard//collection//array.nit:234 */
-        goto label1;
-        label1: while(0);
-        fra.me.REG[4] = CALL_string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
-        /* ./metamodel//static_type.nit:143 */
-        array___Array___add(fra.me.REG[2], fra.me.REG[4]);
-      } else {
-        /* ./metamodel//static_type.nit:139 */
-        goto label2;
-      }
-      CALL_abstract_collection___Iterator___next(fra.me.REG[3])(fra.me.REG[3]);
-    }
-    label2: while(0);
-    REGB0 = TAG_Int(3);
-    fra.me.REG[3] = NEW_Array_array___Array___with_capacity(REGB0);
-    /* ./metamodel//static_type.nit:145 */
-    if (!once_value_3) {
-      fra.me.REG[4] = BOX_NativeString("(");
-      REGB0 = TAG_Int(1);
-      fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB0);
-      once_value_3 = fra.me.REG[4];
-      register_static_object(&once_value_3);
-    } else fra.me.REG[4] = once_value_3;
-    array___Array___add(fra.me.REG[3], fra.me.REG[4]);
-    if (!once_value_4) {
-      fra.me.REG[4] = BOX_NativeString(",");
-      REGB0 = TAG_Int(1);
-      fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB0);
-      once_value_4 = fra.me.REG[4];
-      register_static_object(&once_value_4);
-    } else fra.me.REG[4] = once_value_4;
-    fra.me.REG[4] = CALL_string___Collection___join(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
-    array___Array___add(fra.me.REG[3], fra.me.REG[4]);
-    if (!once_value_5) {
-      fra.me.REG[4] = BOX_NativeString(")");
-      REGB0 = TAG_Int(1);
-      fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB0);
-      once_value_5 = fra.me.REG[4];
-      register_static_object(&once_value_5);
-    } else fra.me.REG[4] = once_value_5;
-    array___Array___add(fra.me.REG[3], fra.me.REG[4]);
-    fra.me.REG[3] = CALL_string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
-    CALL_abstract_collection___Sequence___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  }
-  fra.me.REG[3] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-  /* ./metamodel//static_type.nit:147 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-    if (UNTAG_Bool(REGB1)) {
-      REGB1 = TAG_Bool(false);
-      REGB0 = REGB1;
-    } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
-      REGB0 = REGB1;
-    }
-  }
-  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
-  if (UNTAG_Bool(REGB0)) {
-    REGB0 = TAG_Int(3);
-    fra.me.REG[3] = NEW_Array_array___Array___with_capacity(REGB0);
-    /* ./metamodel//static_type.nit:148 */
-    if (!once_value_6) {
-      fra.me.REG[4] = BOX_NativeString(": ");
-      REGB0 = TAG_Int(2);
-      fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB0);
-      once_value_6 = fra.me.REG[4];
-      register_static_object(&once_value_6);
-    } else fra.me.REG[4] = once_value_6;
-    array___Array___add(fra.me.REG[3], fra.me.REG[4]);
-    fra.me.REG[0] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
-    fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
-    array___Array___add(fra.me.REG[3], fra.me.REG[0]);
-    if (!once_value_7) {
-      fra.me.REG[0] = BOX_NativeString("");
-      REGB0 = TAG_Int(0);
-      fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB0);
-      once_value_7 = fra.me.REG[0];
-      register_static_object(&once_value_7);
-    } else fra.me.REG[0] = once_value_7;
-    array___Array___add(fra.me.REG[3], fra.me.REG[0]);
-    fra.me.REG[3] = CALL_string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
-    CALL_abstract_collection___Sequence___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  }
-  fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./metamodel//static_type.nit:150 */
-  goto label8;
-  label8: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[1];
 }
 val_t static_type___MMSignature___recv(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -516,13 +267,11 @@ val_t static_type___MMSignature___recv(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____recv(fra.me.REG[0])!=NIT_NULL);
   /* ./metamodel//static_type.nit:72 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____recv(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_recv");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 72);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_recv", LOCATE_static_type, 72);
   }
   fra.me.REG[0] = ATTR_static_type___MMSignature____recv(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -539,8 +288,8 @@ val_t static_type___MMSignature___return_type(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[0] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
   /* ./metamodel//static_type.nit:78 */
+  fra.me.REG[0] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -556,73 +305,102 @@ val_t static_type___MMSignature___closures(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____closures(fra.me.REG[0])!=NIT_NULL);
   /* ./metamodel//static_type.nit:81 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____closures(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_closures");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 81);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_closures", LOCATE_static_type, 81);
   }
   fra.me.REG[0] = ATTR_static_type___MMSignature____closures(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
 val_t static_type___MMSignature___closure_named(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[4];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
   fra.me.line = 84;
   fra.me.meth = LOCATE_static_type___MMSignature___closure_named;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 4;
+  fra.me.REG_size = 5;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
+  fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____closures(fra.me.REG[0])!=NIT_NULL);
   /* ./metamodel//static_type.nit:87 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____closures(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_closures");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 87);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_closures", LOCATE_static_type, 87);
   }
   fra.me.REG[0] = ATTR_static_type___MMSignature____closures(fra.me.REG[0]);
-  fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:234 */
+  REGB0 = TAG_Int(0);
+  /* ./../lib/standard//collection//array.nit:235 */
+  REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 235);
+  }
+  REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:236 */
+  fra.me.REG[2] = ATTR_array___Array____items(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:237 */
   while(1) {
-    REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
-    if (UNTAG_Bool(REGB0)) {
-      fra.me.REG[2] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
-      fra.me.REG[3] = CALL_static_type___MMClosure___name(fra.me.REG[2])(fra.me.REG[2]);
-      REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[1]));
-      /* ./metamodel//static_type.nit:88 */
-      if (UNTAG_Bool(REGB0)) {
-      } else {
-        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
-        REGB0 = REGB1;
+    /* ./../lib/standard//collection//array.nit:23 */
+    REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+    } else {
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+    }
+    REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[0]);
+    /* ./../lib/standard//kernel.nit:212 */
+    REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
+    /* ./../lib/standard//collection//array.nit:237 */
+    if (UNTAG_Bool(REGB1)) {
+      /* ./../lib/standard//collection//array.nit:238 */
+      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        nit_abort("Reciever is null", NULL, LOCATE_array, 238);
       }
-      if (UNTAG_Bool(REGB0)) {
+      /* ./../lib/standard//collection//array.nit:654 */
+      fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
+      /* ./metamodel//static_type.nit:88 */
+      fra.me.REG[4] = CALL_static_type___MMClosure___name(fra.me.REG[3])(fra.me.REG[3]);
+      REGB1 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[4],fra.me.REG[1]));
+      if (UNTAG_Bool(REGB1)) {
+      } else {
+        REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
+        REGB1 = REGB2;
+      }
+      if (UNTAG_Bool(REGB1)) {
         goto label1;
       }
+      /* ./../lib/standard//collection//array.nit:239 */
+      REGB1 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:215 */
+      REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
+      /* ./../lib/standard//collection//array.nit:239 */
+      REGB0 = REGB1;
     } else {
-      /* ./metamodel//static_type.nit:87 */
+      /* ./../lib/standard//collection//array.nit:237 */
       goto label2;
     }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
   }
   label2: while(0);
-  fra.me.REG[2] = NIT_NULL;
   /* ./metamodel//static_type.nit:90 */
+  fra.me.REG[3] = NIT_NULL;
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[2];
+  return fra.me.REG[3];
 }
 val_t static_type___MMSignature___arity(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -636,22 +414,18 @@ val_t static_type___MMSignature___arity(val_t p0){
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
   /* ./metamodel//static_type.nit:96 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_params");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 96);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_params", LOCATE_static_type, 96);
   }
   fra.me.REG[0] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
-  REGB0 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
   /* ./../lib/standard//collection//array.nit:23 */
+  REGB0 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_array, 23);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
   }
   REGB0 = ATTR_array___AbstractArrayRead____length(fra.me.REG[0]);
   /* ./metamodel//static_type.nit:96 */
@@ -661,50 +435,49 @@ val_t static_type___MMSignature___arity(val_t p0){
   return REGB0;
 }
 val_t static_type___MMSignature_____l(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[4];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
   val_t REGB1;
   val_t REGB2;
   val_t REGB3;
   val_t REGB4;
+  val_t REGB5;
+  val_t REGB6;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
   fra.me.line = 99;
   fra.me.meth = LOCATE_static_type___MMSignature_____l;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 5;
+  fra.me.REG_size = 4;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
-  fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[0],fra.me.REG[1]));
   /* ./metamodel//static_type.nit:102 */
+  REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[0],fra.me.REG[1]));
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    REGB0 = TAG_Bool(true);
     /* ./metamodel//static_type.nit:103 */
+    REGB0 = TAG_Bool(true);
     goto label1;
   }
-  REGB1 = TAG_Bool(ATTR_static_type___MMSignature____recv(fra.me.REG[0])!=NIT_NULL);
   /* ./metamodel//static_type.nit:105 */
+  REGB1 = TAG_Bool(ATTR_static_type___MMSignature____recv(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_recv");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 105);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_recv", LOCATE_static_type, 105);
   }
   fra.me.REG[2] = ATTR_static_type___MMSignature____recv(fra.me.REG[0]);
-  fra.me.REG[2] = CALL_static_type___MMType___module(fra.me.REG[2])(fra.me.REG[2]);
+  fra.me.REG[2] = CALL_static_type___MMType___mmmodule(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = CALL_static_type___MMSignature___recv(fra.me.REG[1])(fra.me.REG[1]);
-  fra.me.REG[3] = CALL_static_type___MMType___module(fra.me.REG[3])(fra.me.REG[3]);
+  fra.me.REG[3] = CALL_static_type___MMType___mmmodule(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[3]));
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -713,21 +486,22 @@ val_t static_type___MMSignature_____l(val_t p0, val_t p1){
   }
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 105);
-    nit_exit(1);
+    nit_abort("Assert failed", NULL, LOCATE_static_type, 105);
   }
+  /* ./metamodel//static_type.nit:106 */
   fra.me.REG[3] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
+  /* ./metamodel//static_type.nit:107 */
   fra.me.REG[2] = CALL_static_type___MMSignature___return_type(fra.me.REG[1])(fra.me.REG[1]);
+  /* ./metamodel//static_type.nit:108 */
   REGB1 = CALL_static_type___MMSignature___arity(fra.me.REG[0])(fra.me.REG[0]);
   REGB2 = CALL_static_type___MMSignature___arity(fra.me.REG[1])(fra.me.REG[1]);
   REGB3 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB2));
-  /* ./metamodel//static_type.nit:108 */
   if (UNTAG_Bool(REGB3)) {
   } else {
+    /* ./../lib/standard//kernel.nit:207 */
     REGB2 = TAG_Bool((REGB1)==(REGB2));
+    /* ./metamodel//static_type.nit:108 */
     REGB3 = REGB2;
-  /* ./metamodel//static_type.nit:108 */
   }
   REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
   if (UNTAG_Bool(REGB3)) {
@@ -760,9 +534,10 @@ val_t static_type___MMSignature_____l(val_t p0, val_t p1){
     REGB4 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB1));
     if (UNTAG_Bool(REGB4)) {
     } else {
+      /* ./../lib/standard//kernel.nit:175 */
       REGB1 = TAG_Bool((REGB2)==(REGB1));
+      /* ./metamodel//static_type.nit:108 */
       REGB4 = REGB1;
-    /* ./metamodel//static_type.nit:108 */
     }
     REGB4 = TAG_Bool(!UNTAG_Bool(REGB4));
     REGB3 = REGB4;
@@ -772,8 +547,8 @@ val_t static_type___MMSignature_____l(val_t p0, val_t p1){
     REGB0 = REGB3;
     goto label1;
   }
-  REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   /* ./metamodel//static_type.nit:109 */
+  REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB3)) {
   } else {
     REGB4 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
@@ -790,15 +565,11 @@ val_t static_type___MMSignature_____l(val_t p0, val_t p1){
     REGB3 = TAG_Bool(fra.me.REG[2]!=NIT_NULL);
     if (UNTAG_Bool(REGB3)) {
     } else {
-      fprintf(stderr, "Cast failed");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 109);
-      nit_exit(1);
+      nit_abort("Cast failed", NULL, LOCATE_static_type, 109);
     }
     REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB3)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 109);
-      nit_exit(1);
+      nit_abort("Reciever is null", NULL, LOCATE_static_type, 109);
     }
     REGB3 = CALL_static_type___MMType_____l(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
     REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
@@ -807,65 +578,71 @@ val_t static_type___MMSignature_____l(val_t p0, val_t p1){
     REGB3 = REGB4;
   }
   if (UNTAG_Bool(REGB3)) {
+    /* ./metamodel//static_type.nit:110 */
     REGB3 = TAG_Bool(false);
     REGB0 = REGB3;
-    /* ./metamodel//static_type.nit:110 */
     goto label1;
   }
+  /* ./metamodel//static_type.nit:113 */
   REGB3 = TAG_Int(0);
   REGB4 = CALL_static_type___MMSignature___arity(fra.me.REG[0])(fra.me.REG[0]);
-  fra.me.REG[2] = NEW_Range_range___Range___without_last(REGB3, REGB4);
-  fra.me.REG[2] = CALL_abstract_collection___Collection___iterator(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./metamodel//static_type.nit:113 */
+  /* ./../lib/standard//kernel.nit:332 */
   while(1) {
-    REGB4 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[2])(fra.me.REG[2]);
-    if (UNTAG_Bool(REGB4)) {
-      REGB4 = CALL_abstract_collection___Iterator___item(fra.me.REG[2])(fra.me.REG[2]);
-      fra.me.REG[3] = CALL_static_type___MMSignature_____bra(fra.me.REG[1])(fra.me.REG[1], REGB4);
-      fra.me.REG[4] = CALL_static_type___MMSignature_____bra(fra.me.REG[0])(fra.me.REG[0], REGB4);
-      REGB4 = CALL_static_type___MMType_____l(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-      REGB4 = TAG_Bool(!UNTAG_Bool(REGB4));
+    /* ./../lib/standard//kernel.nit:212 */
+    REGB1 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB4));
+    /* ./../lib/standard//kernel.nit:332 */
+    if (UNTAG_Bool(REGB1)) {
+      /* ./metamodel//static_type.nit:113 */
+      REGB1 = REGB3;
       /* ./metamodel//static_type.nit:114 */
-      if (UNTAG_Bool(REGB4)) {
-        REGB4 = TAG_Bool(false);
-        REGB0 = REGB4;
+      fra.me.REG[2] = CALL_static_type___MMSignature_____bra(fra.me.REG[1])(fra.me.REG[1], REGB1);
+      fra.me.REG[3] = CALL_static_type___MMSignature_____bra(fra.me.REG[0])(fra.me.REG[0], REGB1);
+      REGB1 = CALL_static_type___MMType_____l(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+      REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
+      if (UNTAG_Bool(REGB1)) {
         /* ./metamodel//static_type.nit:115 */
+        REGB1 = TAG_Bool(false);
+        REGB0 = REGB1;
         goto label1;
       }
+      /* ./../lib/standard//kernel.nit:334 */
+      REGB1 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:215 */
+      REGB1 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB1));
+      /* ./../lib/standard//kernel.nit:334 */
+      REGB3 = REGB1;
     } else {
-      /* ./metamodel//static_type.nit:113 */
+      /* ./../lib/standard//kernel.nit:332 */
       goto label2;
     }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[2])(fra.me.REG[2]);
   }
   label2: while(0);
-  fra.me.REG[2] = CALL_static_type___MMSignature___closures(fra.me.REG[0])(fra.me.REG[0]);
-  REGB4 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
+  /* ./metamodel//static_type.nit:119 */
+  fra.me.REG[3] = CALL_static_type___MMSignature___closures(fra.me.REG[0])(fra.me.REG[0]);
   /* ./../lib/standard//collection//array.nit:23 */
-  if (UNTAG_Bool(REGB4)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_array, 23);
-    nit_exit(1);
-  }
-  REGB4 = ATTR_array___AbstractArrayRead____length(fra.me.REG[2]);
-  fra.me.REG[2] = CALL_static_type___MMSignature___closures(fra.me.REG[1])(fra.me.REG[1]);
-  REGB3 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
-  /* ./../lib/standard//collection//array.nit:23 */
+  REGB3 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
   if (UNTAG_Bool(REGB3)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_array, 23);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
   }
-  REGB3 = ATTR_array___AbstractArrayRead____length(fra.me.REG[2]);
-  REGB1 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB3));
+  REGB3 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
   /* ./metamodel//static_type.nit:119 */
+  fra.me.REG[3] = CALL_static_type___MMSignature___closures(fra.me.REG[1])(fra.me.REG[1]);
+  /* ./../lib/standard//collection//array.nit:23 */
+  REGB4 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
+  if (UNTAG_Bool(REGB4)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+  }
+  REGB4 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
+  /* ./metamodel//static_type.nit:119 */
+  REGB1 = TAG_Bool(IS_EQUAL_OO(REGB3,REGB4));
   if (UNTAG_Bool(REGB1)) {
   } else {
-    REGB3 = TAG_Bool((REGB4)==(REGB3));
-    REGB1 = REGB3;
-  /* ./metamodel//static_type.nit:119 */
+    /* ./../lib/standard//kernel.nit:207 */
+    REGB4 = TAG_Bool((REGB3)==(REGB4));
+    /* ./metamodel//static_type.nit:119 */
+    REGB1 = REGB4;
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
@@ -873,123 +650,125 @@ val_t static_type___MMSignature_____l(val_t p0, val_t p1){
     REGB0 = REGB1;
     goto label1;
   }
-  REGB1 = TAG_Int(0);
-  fra.me.REG[2] = CALL_static_type___MMSignature___closures(fra.me.REG[0])(fra.me.REG[0]);
-  REGB3 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
-  /* ./../lib/standard//collection//array.nit:23 */
-  if (UNTAG_Bool(REGB3)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_array, 23);
-    nit_exit(1);
-  }
-  REGB3 = ATTR_array___AbstractArrayRead____length(fra.me.REG[2]);
-  fra.me.REG[2] = NEW_Range_range___Range___without_last(REGB1, REGB3);
-  fra.me.REG[2] = CALL_abstract_collection___Collection___iterator(fra.me.REG[2])(fra.me.REG[2]);
   /* ./metamodel//static_type.nit:120 */
+  REGB1 = TAG_Int(0);
+  fra.me.REG[3] = CALL_static_type___MMSignature___closures(fra.me.REG[0])(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:23 */
+  REGB4 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
+  if (UNTAG_Bool(REGB4)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+  }
+  REGB4 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
+  /* ./../lib/standard//kernel.nit:332 */
   while(1) {
-    REGB3 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[2])(fra.me.REG[2]);
+    /* ./../lib/standard//kernel.nit:212 */
+    REGB3 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB4));
+    /* ./../lib/standard//kernel.nit:332 */
     if (UNTAG_Bool(REGB3)) {
-      REGB3 = CALL_abstract_collection___Iterator___item(fra.me.REG[2])(fra.me.REG[2]);
-      fra.me.REG[4] = CALL_static_type___MMSignature___closures(fra.me.REG[1])(fra.me.REG[1]);
-      REGB1 = REGB3;
-      REGB4 = TAG_Int(0);
-      REGB4 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB4));
-      /* ./../lib/standard//collection//array.nit:233 */
-      if (UNTAG_Bool(REGB4)) {
-        REGB4 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
-        if (UNTAG_Bool(REGB4)) {
+      /* ./metamodel//static_type.nit:120 */
+      REGB3 = REGB1;
+      /* ./metamodel//static_type.nit:121 */
+      fra.me.REG[3] = CALL_static_type___MMSignature___closures(fra.me.REG[1])(fra.me.REG[1]);
+      /* ./../lib/standard//collection//array.nit:243 */
+      REGB2 = REGB3;
+      /* ./../lib/standard//collection//array.nit:245 */
+      REGB5 = TAG_Int(0);
+      /* ./../lib/standard//kernel.nit:213 */
+      REGB5 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB5));
+      /* ./../lib/standard//collection//array.nit:245 */
+      if (UNTAG_Bool(REGB5)) {
+        REGB5 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
+        if (UNTAG_Bool(REGB5)) {
         } else {
-          fprintf(stderr, "Uninitialized attribute %s", "_length");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-          nit_exit(1);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 245);
         }
-        REGB4 = ATTR_array___AbstractArrayRead____length(fra.me.REG[4]);
-        REGB4 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB4));
-      /* ./../lib/standard//collection//array.nit:233 */
+        REGB5 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
+        /* ./../lib/standard//kernel.nit:212 */
+        REGB5 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB5));
       } else {
-        REGB2 = TAG_Bool(false);
-        REGB4 = REGB2;
+        /* ./../lib/standard//collection//array.nit:245 */
+        REGB6 = TAG_Bool(false);
+        REGB5 = REGB6;
       }
-      if (UNTAG_Bool(REGB4)) {
+      if (UNTAG_Bool(REGB5)) {
       } else {
-        fprintf(stderr, "Assert %s  failed", "'index'");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-        nit_exit(1);
+        nit_abort("Assert %s  failed", "'index'", LOCATE_array, 245);
       }
-      fra.me.REG[4] = ATTR_array___Array____items(fra.me.REG[4]);
-      REGB4 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
-      /* ./../lib/standard//collection//array.nit:234 */
-      if (UNTAG_Bool(REGB4)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_array, 234);
-        nit_exit(1);
+      /* ./../lib/standard//collection//array.nit:246 */
+      fra.me.REG[3] = ATTR_array___Array____items(fra.me.REG[3]);
+      REGB5 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+      if (UNTAG_Bool(REGB5)) {
+        nit_abort("Reciever is null", NULL, LOCATE_array, 246);
       }
-      fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB1)];
-      /* ./../lib/standard//collection//array.nit:234 */
+      /* ./../lib/standard//collection//array.nit:654 */
+      fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB2)];
+      /* ./../lib/standard//collection//array.nit:246 */
       goto label3;
       label3: while(0);
-      fra.me.REG[3] = CALL_static_type___MMSignature___closures(fra.me.REG[0])(fra.me.REG[0]);
-      REGB1 = TAG_Int(0);
-      REGB1 = TAG_Bool(UNTAG_Int(REGB3)>=UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:233 */
-      if (UNTAG_Bool(REGB1)) {
-        REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
-        if (UNTAG_Bool(REGB1)) {
+      /* ./metamodel//static_type.nit:121 */
+      fra.me.REG[2] = CALL_static_type___MMSignature___closures(fra.me.REG[0])(fra.me.REG[0]);
+      /* ./../lib/standard//collection//array.nit:245 */
+      REGB2 = TAG_Int(0);
+      /* ./../lib/standard//kernel.nit:213 */
+      REGB2 = TAG_Bool(UNTAG_Int(REGB3)>=UNTAG_Int(REGB2));
+      /* ./../lib/standard//collection//array.nit:245 */
+      if (UNTAG_Bool(REGB2)) {
+        REGB2 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
+        if (UNTAG_Bool(REGB2)) {
         } else {
-          fprintf(stderr, "Uninitialized attribute %s", "_length");
-          fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-          nit_exit(1);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 245);
         }
-        REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
-        REGB1 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:233 */
+        REGB2 = ATTR_array___AbstractArrayRead____length(fra.me.REG[2]);
+        /* ./../lib/standard//kernel.nit:212 */
+        REGB2 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB2));
       } else {
-        REGB4 = TAG_Bool(false);
-        REGB1 = REGB4;
+        /* ./../lib/standard//collection//array.nit:245 */
+        REGB5 = TAG_Bool(false);
+        REGB2 = REGB5;
       }
-      if (UNTAG_Bool(REGB1)) {
+      if (UNTAG_Bool(REGB2)) {
       } else {
-        fprintf(stderr, "Assert %s  failed", "'index'");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-        nit_exit(1);
+        nit_abort("Assert %s  failed", "'index'", LOCATE_array, 245);
       }
-      fra.me.REG[3] = ATTR_array___Array____items(fra.me.REG[3]);
-      REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-      /* ./../lib/standard//collection//array.nit:234 */
-      if (UNTAG_Bool(REGB1)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_array, 234);
-        nit_exit(1);
+      /* ./../lib/standard//collection//array.nit:246 */
+      fra.me.REG[2] = ATTR_array___Array____items(fra.me.REG[2]);
+      REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+      if (UNTAG_Bool(REGB2)) {
+        nit_abort("Reciever is null", NULL, LOCATE_array, 246);
       }
-      fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB3)];
-      /* ./../lib/standard//collection//array.nit:234 */
+      /* ./../lib/standard//collection//array.nit:654 */
+      fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB3)];
+      /* ./../lib/standard//collection//array.nit:246 */
       goto label4;
       label4: while(0);
-      REGB3 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       /* ./metamodel//static_type.nit:121 */
+      REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
-        fprintf(stderr, "Reciever is null");
-        fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 121);
-        nit_exit(1);
+        nit_abort("Reciever is null", NULL, LOCATE_static_type, 121);
       }
-      REGB3 = CALL_static_type___MMClosure_____l(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
+      REGB3 = CALL_static_type___MMClosure_____l(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
       REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
       if (UNTAG_Bool(REGB3)) {
         REGB3 = TAG_Bool(false);
         REGB0 = REGB3;
         goto label1;
       }
+      /* ./../lib/standard//kernel.nit:334 */
+      REGB3 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:215 */
+      REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
+      /* ./../lib/standard//kernel.nit:334 */
+      REGB1 = REGB3;
     } else {
-      /* ./metamodel//static_type.nit:120 */
+      /* ./../lib/standard//kernel.nit:332 */
       goto label5;
     }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[2])(fra.me.REG[2]);
   }
   label5: while(0);
-  REGB3 = TAG_Bool(true);
-  REGB0 = REGB3;
   /* ./metamodel//static_type.nit:123 */
+  REGB1 = TAG_Bool(true);
+  REGB0 = REGB1;
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -1011,75 +790,66 @@ val_t static_type___MMSignature_____bra(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  REGB1 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
   /* ./metamodel//static_type.nit:129 */
+  REGB1 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_params");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 129);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_params", LOCATE_static_type, 129);
   }
   fra.me.REG[1] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
-  REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   /* ./../lib/standard//collection//array.nit:23 */
+  REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_length");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_array, 23);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
   }
   REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[1]);
+  /* ./../lib/standard//kernel.nit:214 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB0));
   /* ./metamodel//static_type.nit:129 */
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Assert failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 129);
-    nit_exit(1);
+    nit_abort("Assert failed", NULL, LOCATE_static_type, 129);
   }
-  REGB1 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
   /* ./metamodel//static_type.nit:130 */
+  REGB1 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_params");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 130);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_params", LOCATE_static_type, 130);
   }
   fra.me.REG[0] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:245 */
   REGB1 = TAG_Int(0);
+  /* ./../lib/standard//kernel.nit:213 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//array.nit:233 */
+  /* ./../lib/standard//collection//array.nit:245 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_length");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-      nit_exit(1);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 245);
     }
     REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[0]);
+    /* ./../lib/standard//kernel.nit:212 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//array.nit:233 */
   } else {
+    /* ./../lib/standard//collection//array.nit:245 */
     REGB2 = TAG_Bool(false);
     REGB1 = REGB2;
   }
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Assert %s  failed", "'index'");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_array, 233);
-    nit_exit(1);
+    nit_abort("Assert %s  failed", "'index'", LOCATE_array, 245);
   }
+  /* ./../lib/standard//collection//array.nit:246 */
   fra.me.REG[0] = ATTR_array___Array____items(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  /* ./../lib/standard//collection//array.nit:234 */
   if (UNTAG_Bool(REGB1)) {
-    fprintf(stderr, "Reciever is null");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_array, 234);
-    nit_exit(1);
+    nit_abort("Reciever is null", NULL, LOCATE_array, 246);
   }
+  /* ./../lib/standard//collection//array.nit:654 */
   fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
-  /* ./../lib/standard//collection//array.nit:234 */
+  /* ./../lib/standard//collection//array.nit:246 */
   goto label1;
   label1: while(0);
   /* ./metamodel//static_type.nit:130 */
@@ -1088,143 +858,240 @@ val_t static_type___MMSignature_____bra(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-val_t static_type___MMSignature___adaptation_to(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[6];} fra;
+val_t static_type___MMSignature___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[4];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
+  val_t REGB3;
+  val_t REGB4;
   val_t tmp;
+    static val_t once_value_3; /* Once value */
+    static val_t once_value_4; /* Once value */
+    static val_t once_value_5; /* Once value */
+    static val_t once_value_6; /* Once value */
+    static val_t once_value_7; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 153;
-  fra.me.meth = LOCATE_static_type___MMSignature___adaptation_to;
+  fra.me.line = 133;
+  fra.me.meth = LOCATE_static_type___MMSignature___to_s;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 7;
+  fra.me.REG_size = 5;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[4] = NIT_NULL;
-  fra.me.REG[5] = NIT_NULL;
-  fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____recv(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:156 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_recv");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 156);
-    nit_exit(1);
-  }
-  fra.me.REG[2] = ATTR_static_type___MMSignature____recv(fra.me.REG[0]);
-  REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[1]));
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-    REGB0 = REGB1;
-  }
-  if (UNTAG_Bool(REGB0)) {
-    fra.me.REG[2] = fra.me.REG[0];
-    /* ./metamodel//static_type.nit:157 */
-    goto label1;
-  }
-  fra.me.REG[3] = CALL_static_type___MMType___module(fra.me.REG[1])(fra.me.REG[1]);
-  fra.me.REG[4] = NEW_Array_array___Array___init();
+  /* ./metamodel//static_type.nit:135 */
+  fra.me.REG[1] = NEW_Buffer_string___Buffer___init();
+  /* ./metamodel//static_type.nit:136 */
   REGB0 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:161 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_params");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 161);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_params", LOCATE_static_type, 136);
   }
-  fra.me.REG[5] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
-  fra.me.REG[5] = CALL_abstract_collection___Collection___iterator(fra.me.REG[5])(fra.me.REG[5]);
-  while(1) {
-    REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[5])(fra.me.REG[5]);
-    if (UNTAG_Bool(REGB0)) {
-      fra.me.REG[6] = CALL_abstract_collection___Iterator___item(fra.me.REG[5])(fra.me.REG[5]);
-      fra.me.REG[6] = CALL_static_type___MMType___for_module(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[3]);
-      fra.me.REG[6] = CALL_static_type___MMType___adapt_to(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[1]);
-      /* ./metamodel//static_type.nit:162 */
-      array___Array___add(fra.me.REG[4], fra.me.REG[6]);
-    } else {
-      /* ./metamodel//static_type.nit:161 */
-      goto label2;
-    }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[5])(fra.me.REG[5]);
-  }
-  label2: while(0);
-  fra.me.REG[5] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
-  /* ./metamodel//static_type.nit:165 */
+  fra.me.REG[2] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:23 */
+  REGB0 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+  }
+  REGB0 = ATTR_array___AbstractArrayRead____length(fra.me.REG[2]);
+  /* ./metamodel//static_type.nit:136 */
+  REGB1 = TAG_Int(0);
+  /* ./../lib/standard//kernel.nit:214 */
+  REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
+  /* ./metamodel//static_type.nit:136 */
+  if (UNTAG_Bool(REGB1)) {
+    /* ./metamodel//static_type.nit:138 */
+    REGB1 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
-      REGB1 = TAG_Bool(false);
-      REGB0 = REGB1;
     } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[5])(fra.me.REG[5], NIT_NULL);
-      REGB0 = REGB1;
+      nit_abort("Uninitialized attribute %s", "_params", LOCATE_static_type, 138);
     }
-  }
-  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
-  if (UNTAG_Bool(REGB0)) {
-    REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
-    /* ./metamodel//static_type.nit:166 */
+    fra.me.REG[2] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
+    /* ./../lib/standard//collection//array.nit:23 */
+    REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+    } else {
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+    }
+    REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[2]);
+    /* ./metamodel//static_type.nit:138 */
+    fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB1);
+    /* ./metamodel//static_type.nit:139 */
+    REGB1 = TAG_Int(0);
+    REGB0 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 166);
-      nit_exit(1);
+    } else {
+      nit_abort("Uninitialized attribute %s", "_params", LOCATE_static_type, 139);
     }
-    fra.me.REG[3] = CALL_static_type___MMType___for_module(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3]);
-    fra.me.REG[3] = CALL_static_type___MMType___adapt_to(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
-    fra.me.REG[5] = fra.me.REG[3];
+    fra.me.REG[3] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
+    /* ./../lib/standard//collection//array.nit:23 */
+    REGB0 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
+    if (UNTAG_Bool(REGB0)) {
+    } else {
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+    }
+    REGB0 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
+    /* ./../lib/standard//kernel.nit:332 */
+    while(1) {
+      /* ./../lib/standard//kernel.nit:212 */
+      REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
+      /* ./../lib/standard//kernel.nit:332 */
+      if (UNTAG_Bool(REGB2)) {
+        /* ./metamodel//static_type.nit:139 */
+        REGB2 = REGB1;
+        /* ./metamodel//static_type.nit:141 */
+        REGB3 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
+        if (UNTAG_Bool(REGB3)) {
+        } else {
+          nit_abort("Uninitialized attribute %s", "_params", LOCATE_static_type, 141);
+        }
+        fra.me.REG[3] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
+        /* ./../lib/standard//collection//array.nit:245 */
+        REGB3 = TAG_Int(0);
+        /* ./../lib/standard//kernel.nit:213 */
+        REGB3 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB3));
+        /* ./../lib/standard//collection//array.nit:245 */
+        if (UNTAG_Bool(REGB3)) {
+          REGB3 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
+          if (UNTAG_Bool(REGB3)) {
+          } else {
+            nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 245);
+          }
+          REGB3 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
+          /* ./../lib/standard//kernel.nit:212 */
+          REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB3));
+        } else {
+          /* ./../lib/standard//collection//array.nit:245 */
+          REGB4 = TAG_Bool(false);
+          REGB3 = REGB4;
+        }
+        if (UNTAG_Bool(REGB3)) {
+        } else {
+          nit_abort("Assert %s  failed", "'index'", LOCATE_array, 245);
+        }
+        /* ./../lib/standard//collection//array.nit:246 */
+        fra.me.REG[3] = ATTR_array___Array____items(fra.me.REG[3]);
+        REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+        if (UNTAG_Bool(REGB3)) {
+          nit_abort("Reciever is null", NULL, LOCATE_array, 246);
+        }
+        /* ./../lib/standard//collection//array.nit:654 */
+        fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB2)];
+        /* ./../lib/standard//collection//array.nit:246 */
+        goto label1;
+        label1: while(0);
+        /* ./metamodel//static_type.nit:143 */
+        fra.me.REG[3] = CALL_string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
+        CALL_abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+        /* ./../lib/standard//kernel.nit:334 */
+        REGB2 = TAG_Int(1);
+        /* ./../lib/standard//kernel.nit:215 */
+        REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
+        /* ./../lib/standard//kernel.nit:334 */
+        REGB1 = REGB2;
+      } else {
+        /* ./../lib/standard//kernel.nit:332 */
+        goto label2;
+      }
+    }
+    label2: while(0);
+    /* ./metamodel//static_type.nit:145 */
+    REGB1 = TAG_Int(3);
+    fra.me.REG[3] = NEW_Array_array___Array___with_capacity(REGB1);
+    if (!once_value_3) {
+      fra.me.REG[4] = BOX_NativeString("(");
+      REGB1 = TAG_Int(1);
+      fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB1);
+      once_value_3 = fra.me.REG[4];
+      register_static_object(&once_value_3);
+    } else fra.me.REG[4] = once_value_3;
+    fra.me.REG[4] = fra.me.REG[4];
+    CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
+    if (!once_value_4) {
+      fra.me.REG[4] = BOX_NativeString(",");
+      REGB1 = TAG_Int(1);
+      fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB1);
+      once_value_4 = fra.me.REG[4];
+      register_static_object(&once_value_4);
+    } else fra.me.REG[4] = once_value_4;
+    fra.me.REG[4] = fra.me.REG[4];
+    fra.me.REG[4] = CALL_string___Collection___join(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
+    CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
+    if (!once_value_5) {
+      fra.me.REG[4] = BOX_NativeString(")");
+      REGB1 = TAG_Int(1);
+      fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB1);
+      once_value_5 = fra.me.REG[4];
+      register_static_object(&once_value_5);
+    } else fra.me.REG[4] = once_value_5;
+    fra.me.REG[4] = fra.me.REG[4];
+    CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
+    fra.me.REG[3] = CALL_string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
+    CALL_abstract_collection___Sequence___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   }
-  fra.me.REG[5] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[4], fra.me.REG[5], fra.me.REG[1]);
-  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____closures(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:169 */
-  if (UNTAG_Bool(REGB0)) {
+  /* ./metamodel//static_type.nit:147 */
+  fra.me.REG[0] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
+  /* ./metamodel//static_type.nit:148 */
+  REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_closures");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 169);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_static_type___MMSignature____closures(fra.me.REG[0]);
-  fra.me.REG[0] = CALL_abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
-  while(1) {
-    REGB0 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
+    REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      fra.me.REG[4] = CALL_abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
-      fra.me.REG[3] = CALL_static_type___MMSignature___closures(fra.me.REG[5])(fra.me.REG[5]);
-      fra.me.REG[4] = CALL_static_type___MMClosure___adaptation_to(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
-      /* ./metamodel//static_type.nit:170 */
-      array___Array___add(fra.me.REG[3], fra.me.REG[4]);
+      REGB0 = TAG_Bool(false);
+      REGB1 = REGB0;
     } else {
-      /* ./metamodel//static_type.nit:169 */
-      goto label3;
+      REGB0 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
+      REGB1 = REGB0;
     }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
   }
-  label3: while(0);
-  fra.me.REG[2] = fra.me.REG[5];
-  /* ./metamodel//static_type.nit:172 */
-  goto label1;
-  label1: while(0);
+  REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
+  if (UNTAG_Bool(REGB1)) {
+    REGB1 = TAG_Int(3);
+    fra.me.REG[3] = NEW_Array_array___Array___with_capacity(REGB1);
+    if (!once_value_6) {
+      fra.me.REG[4] = BOX_NativeString(": ");
+      REGB1 = TAG_Int(2);
+      fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB1);
+      once_value_6 = fra.me.REG[4];
+      register_static_object(&once_value_6);
+    } else fra.me.REG[4] = once_value_6;
+    fra.me.REG[4] = fra.me.REG[4];
+    CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
+    fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
+    CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[0]);
+    if (!once_value_7) {
+      fra.me.REG[0] = BOX_NativeString("");
+      REGB1 = TAG_Int(0);
+      fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB1);
+      once_value_7 = fra.me.REG[0];
+      register_static_object(&once_value_7);
+    } else fra.me.REG[0] = once_value_7;
+    fra.me.REG[0] = fra.me.REG[0];
+    CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[0]);
+    fra.me.REG[3] = CALL_string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
+    CALL_abstract_collection___Sequence___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
+  }
+  /* ./metamodel//static_type.nit:149 */
+  fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label8;
+  label8: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[2];
+  return fra.me.REG[1];
 }
-val_t static_type___MMSignature___not_for_self(val_t p0){
+val_t static_type___MMSignature___adaptation_to(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[7];} fra;
   val_t REGB0;
   val_t REGB1;
-  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 177;
-  fra.me.meth = LOCATE_static_type___MMSignature___not_for_self;
+  fra.me.line = 152;
+  fra.me.meth = LOCATE_static_type___MMSignature___adaptation_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
   fra.me.REG[0] = NIT_NULL;
@@ -1236,9 +1103,198 @@ val_t static_type___MMSignature___not_for_self(val_t p0){
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[7] = NIT_NULL;
   fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:155 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____recv(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_recv", LOCATE_static_type, 155);
+  }
+  fra.me.REG[2] = ATTR_static_type___MMSignature____recv(fra.me.REG[0]);
+  REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[1]));
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+    REGB0 = REGB1;
+  }
+  if (UNTAG_Bool(REGB0)) {
+    /* ./metamodel//static_type.nit:156 */
+    fra.me.REG[2] = fra.me.REG[0];
+    goto label1;
+  }
+  /* ./metamodel//static_type.nit:158 */
+  fra.me.REG[3] = CALL_static_type___MMType___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
+  /* ./metamodel//static_type.nit:159 */
+  fra.me.REG[4] = NEW_Array_array___Array___init();
+  /* ./metamodel//static_type.nit:160 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_params", LOCATE_static_type, 160);
+  }
+  fra.me.REG[5] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:234 */
+  REGB0 = TAG_Int(0);
+  /* ./../lib/standard//collection//array.nit:235 */
+  REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 235);
+  }
+  REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[5]);
+  /* ./../lib/standard//collection//array.nit:236 */
+  fra.me.REG[6] = ATTR_array___Array____items(fra.me.REG[5]);
+  /* ./../lib/standard//collection//array.nit:237 */
+  while(1) {
+    /* ./../lib/standard//collection//array.nit:23 */
+    REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+    } else {
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+    }
+    REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[5]);
+    /* ./../lib/standard//kernel.nit:212 */
+    REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
+    /* ./../lib/standard//collection//array.nit:237 */
+    if (UNTAG_Bool(REGB1)) {
+      /* ./../lib/standard//collection//array.nit:238 */
+      REGB1 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        nit_abort("Reciever is null", NULL, LOCATE_array, 238);
+      }
+      /* ./../lib/standard//collection//array.nit:654 */
+      fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB0)];
+      /* ./metamodel//static_type.nit:161 */
+      fra.me.REG[7] = CALL_static_type___MMType___for_module(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[3]);
+      fra.me.REG[7] = CALL_static_type___MMType___adapt_to(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[1]);
+      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[7]);
+      /* ./../lib/standard//collection//array.nit:239 */
+      REGB1 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:215 */
+      REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
+      /* ./../lib/standard//collection//array.nit:239 */
+      REGB0 = REGB1;
+    } else {
+      /* ./../lib/standard//collection//array.nit:237 */
+      goto label2;
+    }
+  }
+  label2: while(0);
+  /* ./metamodel//static_type.nit:163 */
+  fra.me.REG[6] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
+  /* ./metamodel//static_type.nit:164 */
+  REGB0 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    REGB1 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+      REGB1 = TAG_Bool(false);
+      REGB0 = REGB1;
+    } else {
+      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[6])(fra.me.REG[6], NIT_NULL);
+      REGB0 = REGB1;
+    }
+  }
+  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+  if (UNTAG_Bool(REGB0)) {
+    /* ./metamodel//static_type.nit:165 */
+    REGB0 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
+    if (UNTAG_Bool(REGB0)) {
+      nit_abort("Reciever is null", NULL, LOCATE_static_type, 165);
+    }
+    fra.me.REG[3] = CALL_static_type___MMType___for_module(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[3]);
+    fra.me.REG[3] = CALL_static_type___MMType___adapt_to(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
+    fra.me.REG[6] = fra.me.REG[3];
+  }
+  /* ./metamodel//static_type.nit:167 */
+  fra.me.REG[6] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[4], fra.me.REG[6], fra.me.REG[1]);
+  /* ./metamodel//static_type.nit:168 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMSignature____closures(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_closures", LOCATE_static_type, 168);
+  }
+  fra.me.REG[0] = ATTR_static_type___MMSignature____closures(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:234 */
+  REGB0 = TAG_Int(0);
+  /* ./../lib/standard//collection//array.nit:235 */
+  REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 235);
+  }
+  REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:236 */
+  fra.me.REG[4] = ATTR_array___Array____items(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:237 */
+  while(1) {
+    /* ./../lib/standard//collection//array.nit:23 */
+    REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+    } else {
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+    }
+    REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[0]);
+    /* ./../lib/standard//kernel.nit:212 */
+    REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
+    /* ./../lib/standard//collection//array.nit:237 */
+    if (UNTAG_Bool(REGB1)) {
+      /* ./../lib/standard//collection//array.nit:238 */
+      REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        nit_abort("Reciever is null", NULL, LOCATE_array, 238);
+      }
+      /* ./../lib/standard//collection//array.nit:654 */
+      fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
+      /* ./metamodel//static_type.nit:169 */
+      fra.me.REG[5] = CALL_static_type___MMSignature___closures(fra.me.REG[6])(fra.me.REG[6]);
+      fra.me.REG[3] = CALL_static_type___MMClosure___adaptation_to(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
+      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3]);
+      /* ./../lib/standard//collection//array.nit:239 */
+      REGB1 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:215 */
+      REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
+      /* ./../lib/standard//collection//array.nit:239 */
+      REGB0 = REGB1;
+    } else {
+      /* ./../lib/standard//collection//array.nit:237 */
+      goto label3;
+    }
+  }
+  label3: while(0);
+  /* ./metamodel//static_type.nit:171 */
+  fra.me.REG[2] = fra.me.REG[6];
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[2];
+}
+val_t static_type___MMSignature___not_for_self(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[8];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t REGB2;
+  val_t REGB3;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 176;
+  fra.me.meth = LOCATE_static_type___MMSignature___not_for_self;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 9;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
+  fra.me.REG[4] = NIT_NULL;
+  fra.me.REG[5] = NIT_NULL;
+  fra.me.REG[6] = NIT_NULL;
+  fra.me.REG[7] = NIT_NULL;
+  fra.me.REG[8] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:180 */
   fra.me.REG[1] = ATTR_static_type___MMSignature____not_for_self_cache(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./metamodel//static_type.nit:181 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -1256,86 +1312,115 @@ val_t static_type___MMSignature___not_for_self(val_t p0){
     REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      fprintf(stderr, "Cast failed");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 181);
-      nit_exit(1);
+      nit_abort("Cast failed", NULL, LOCATE_static_type, 180);
     }
     goto label1;
   }
+  /* ./metamodel//static_type.nit:182 */
   REGB0 = TAG_Bool(false);
+  /* ./metamodel//static_type.nit:183 */
   fra.me.REG[2] = NEW_Array_array___Array___init();
+  /* ./metamodel//static_type.nit:184 */
   REGB1 = TAG_Bool(ATTR_static_type___MMSignature____params(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:185 */
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_params");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 185);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_params", LOCATE_static_type, 184);
   }
   fra.me.REG[3] = ATTR_static_type___MMSignature____params(fra.me.REG[0]);
-  fra.me.REG[3] = CALL_abstract_collection___Collection___iterator(fra.me.REG[3])(fra.me.REG[3]);
+  /* ./../lib/standard//collection//array.nit:234 */
+  REGB1 = TAG_Int(0);
+  /* ./../lib/standard//collection//array.nit:235 */
+  REGB2 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
+  if (UNTAG_Bool(REGB2)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 235);
+  }
+  REGB2 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
+  /* ./../lib/standard//collection//array.nit:236 */
+  fra.me.REG[4] = ATTR_array___Array____items(fra.me.REG[3]);
+  /* ./../lib/standard//collection//array.nit:237 */
   while(1) {
-    REGB1 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[3])(fra.me.REG[3]);
-    if (UNTAG_Bool(REGB1)) {
-      fra.me.REG[4] = CALL_abstract_collection___Iterator___item(fra.me.REG[3])(fra.me.REG[3]);
-      fra.me.REG[5] = CALL_static_type___MMType___not_for_self(fra.me.REG[4])(fra.me.REG[4]);
-      REGB1 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[4],fra.me.REG[5]));
-      /* ./metamodel//static_type.nit:187 */
-      if (UNTAG_Bool(REGB1)) {
-      } else {
-        REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
-        REGB1 = REGB2;
-      }
-      REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-      if (UNTAG_Bool(REGB1)) {
-        REGB1 = TAG_Bool(true);
-        REGB0 = REGB1;
-      }
-      /* ./metamodel//static_type.nit:188 */
-      array___Array___add(fra.me.REG[2], fra.me.REG[5]);
+    /* ./../lib/standard//collection//array.nit:23 */
+    REGB2 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
+    if (UNTAG_Bool(REGB2)) {
     } else {
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+    }
+    REGB2 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
+    /* ./../lib/standard//kernel.nit:212 */
+    REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
+    /* ./../lib/standard//collection//array.nit:237 */
+    if (UNTAG_Bool(REGB2)) {
+      /* ./../lib/standard//collection//array.nit:238 */
+      REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
+      if (UNTAG_Bool(REGB2)) {
+        nit_abort("Reciever is null", NULL, LOCATE_array, 238);
+      }
+      /* ./../lib/standard//collection//array.nit:654 */
+      fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB1)];
       /* ./metamodel//static_type.nit:185 */
+      fra.me.REG[6] = CALL_static_type___MMType___not_for_self(fra.me.REG[5])(fra.me.REG[5]);
+      /* ./metamodel//static_type.nit:186 */
+      REGB2 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[5],fra.me.REG[6]));
+      if (UNTAG_Bool(REGB2)) {
+      } else {
+        REGB3 = CALL_kernel___Object_____eqeq(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
+        REGB2 = REGB3;
+      }
+      REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
+      if (UNTAG_Bool(REGB2)) {
+        REGB2 = TAG_Bool(true);
+        REGB0 = REGB2;
+      }
+      /* ./metamodel//static_type.nit:187 */
+      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[6]);
+      /* ./../lib/standard//collection//array.nit:239 */
+      REGB2 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:215 */
+      REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
+      /* ./../lib/standard//collection//array.nit:239 */
+      REGB1 = REGB2;
+    } else {
+      /* ./../lib/standard//collection//array.nit:237 */
       goto label2;
     }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[3])(fra.me.REG[3]);
   }
   label2: while(0);
-  fra.me.REG[3] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
-  REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-  /* ./metamodel//static_type.nit:192 */
+  /* ./metamodel//static_type.nit:190 */
+  fra.me.REG[4] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
+  /* ./metamodel//static_type.nit:191 */
+  REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+    REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
       REGB2 = TAG_Bool(false);
       REGB1 = REGB2;
     } else {
-      REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
+      REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[4])(fra.me.REG[4], NIT_NULL);
       REGB1 = REGB2;
     }
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-    /* ./metamodel//static_type.nit:193 */
+    /* ./metamodel//static_type.nit:192 */
+    REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
-      fprintf(stderr, "Reciever is null");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 193);
-      nit_exit(1);
+      nit_abort("Reciever is null", NULL, LOCATE_static_type, 192);
     }
-    fra.me.REG[5] = CALL_static_type___MMType___not_for_self(fra.me.REG[3])(fra.me.REG[3]);
-    fra.me.REG[3] = fra.me.REG[5];
-    fra.me.REG[5] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
-    REGB1 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[3],fra.me.REG[5]));
-    /* ./metamodel//static_type.nit:194 */
+    fra.me.REG[3] = CALL_static_type___MMType___not_for_self(fra.me.REG[4])(fra.me.REG[4]);
+    fra.me.REG[4] = fra.me.REG[3];
+    /* ./metamodel//static_type.nit:193 */
+    fra.me.REG[3] = ATTR_static_type___MMSignature____return_type(fra.me.REG[0]);
+    REGB1 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[4],fra.me.REG[3]));
     if (UNTAG_Bool(REGB1)) {
     } else {
-      REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+      REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
         REGB2 = TAG_Bool(false);
         REGB1 = REGB2;
       } else {
-        REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[5]);
+        REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
         REGB1 = REGB2;
       }
     }
@@ -1345,66 +1430,95 @@ val_t static_type___MMSignature___not_for_self(val_t p0){
       REGB0 = REGB1;
     }
   }
-  fra.me.REG[5] = NEW_Array_array___Array___init();
+  /* ./metamodel//static_type.nit:196 */
+  fra.me.REG[3] = NEW_Array_array___Array___init();
+  /* ./metamodel//static_type.nit:197 */
   REGB1 = TAG_Bool(ATTR_static_type___MMSignature____closures(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:198 */
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_closures");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 198);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_closures", LOCATE_static_type, 197);
   }
-  fra.me.REG[4] = ATTR_static_type___MMSignature____closures(fra.me.REG[0]);
-  fra.me.REG[4] = CALL_abstract_collection___Collection___iterator(fra.me.REG[4])(fra.me.REG[4]);
+  fra.me.REG[6] = ATTR_static_type___MMSignature____closures(fra.me.REG[0]);
+  /* ./../lib/standard//collection//array.nit:234 */
+  REGB1 = TAG_Int(0);
+  /* ./../lib/standard//collection//array.nit:235 */
+  REGB2 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[6])!=NIT_NULL);
+  if (UNTAG_Bool(REGB2)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 235);
+  }
+  REGB2 = ATTR_array___AbstractArrayRead____length(fra.me.REG[6]);
+  /* ./../lib/standard//collection//array.nit:236 */
+  fra.me.REG[5] = ATTR_array___Array____items(fra.me.REG[6]);
+  /* ./../lib/standard//collection//array.nit:237 */
   while(1) {
-    REGB1 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[4])(fra.me.REG[4]);
-    if (UNTAG_Bool(REGB1)) {
-      fra.me.REG[6] = CALL_abstract_collection___Iterator___item(fra.me.REG[4])(fra.me.REG[4]);
-      fra.me.REG[7] = CALL_static_type___MMClosure___not_for_self(fra.me.REG[6])(fra.me.REG[6]);
-      REGB1 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[7],fra.me.REG[6]));
-      /* ./metamodel//static_type.nit:200 */
-      if (UNTAG_Bool(REGB1)) {
-      } else {
-        REGB2 = CALL_kernel___Object_____eqeq(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[6]);
-        REGB1 = REGB2;
-      }
-      REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-      if (UNTAG_Bool(REGB1)) {
-        REGB1 = TAG_Bool(true);
-        REGB0 = REGB1;
-      }
-      /* ./metamodel//static_type.nit:201 */
-      array___Array___add(fra.me.REG[5], fra.me.REG[7]);
+    /* ./../lib/standard//collection//array.nit:23 */
+    REGB2 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[6])!=NIT_NULL);
+    if (UNTAG_Bool(REGB2)) {
     } else {
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+    }
+    REGB2 = ATTR_array___AbstractArrayRead____length(fra.me.REG[6]);
+    /* ./../lib/standard//kernel.nit:212 */
+    REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
+    /* ./../lib/standard//collection//array.nit:237 */
+    if (UNTAG_Bool(REGB2)) {
+      /* ./../lib/standard//collection//array.nit:238 */
+      REGB2 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
+      if (UNTAG_Bool(REGB2)) {
+        nit_abort("Reciever is null", NULL, LOCATE_array, 238);
+      }
+      /* ./../lib/standard//collection//array.nit:654 */
+      fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB1)];
       /* ./metamodel//static_type.nit:198 */
+      fra.me.REG[8] = CALL_static_type___MMClosure___not_for_self(fra.me.REG[7])(fra.me.REG[7]);
+      /* ./metamodel//static_type.nit:199 */
+      REGB2 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[8],fra.me.REG[7]));
+      if (UNTAG_Bool(REGB2)) {
+      } else {
+        REGB3 = CALL_kernel___Object_____eqeq(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[7]);
+        REGB2 = REGB3;
+      }
+      REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
+      if (UNTAG_Bool(REGB2)) {
+        REGB2 = TAG_Bool(true);
+        REGB0 = REGB2;
+      }
+      /* ./metamodel//static_type.nit:200 */
+      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[8]);
+      /* ./../lib/standard//collection//array.nit:239 */
+      REGB2 = TAG_Int(1);
+      /* ./../lib/standard//kernel.nit:215 */
+      REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
+      /* ./../lib/standard//collection//array.nit:239 */
+      REGB1 = REGB2;
+    } else {
+      /* ./../lib/standard//collection//array.nit:237 */
       goto label3;
     }
-    CALL_abstract_collection___Iterator___next(fra.me.REG[4])(fra.me.REG[4]);
   }
   label3: while(0);
-  /* ./metamodel//static_type.nit:205 */
+  /* ./metamodel//static_type.nit:204 */
   if (UNTAG_Bool(REGB0)) {
+    /* ./metamodel//static_type.nit:205 */
     REGB0 = TAG_Bool(ATTR_static_type___MMSignature____recv(fra.me.REG[0])!=NIT_NULL);
-    /* ./metamodel//static_type.nit:206 */
     if (UNTAG_Bool(REGB0)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_recv");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 206);
-      nit_exit(1);
+      nit_abort("Uninitialized attribute %s", "_recv", LOCATE_static_type, 205);
     }
-    fra.me.REG[4] = ATTR_static_type___MMSignature____recv(fra.me.REG[0]);
-    fra.me.REG[4] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[2], fra.me.REG[3], fra.me.REG[4]);
-    fra.me.REG[3] = CALL_static_type___MMSignature___closures(fra.me.REG[4])(fra.me.REG[4]);
-    /* ./metamodel//static_type.nit:207 */
-    CALL_abstract_collection___SimpleCollection___add_all(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[5]);
+    fra.me.REG[5] = ATTR_static_type___MMSignature____recv(fra.me.REG[0]);
+    fra.me.REG[5] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[2], fra.me.REG[4], fra.me.REG[5]);
+    /* ./metamodel//static_type.nit:206 */
+    fra.me.REG[4] = CALL_static_type___MMSignature___closures(fra.me.REG[5])(fra.me.REG[5]);
+    CALL_abstract_collection___SimpleCollection___add_all(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
   } else {
-    fra.me.REG[4] = fra.me.REG[0];
-  /* ./metamodel//static_type.nit:209 */
+    /* ./metamodel//static_type.nit:208 */
+    fra.me.REG[5] = fra.me.REG[0];
   }
+  /* ./metamodel//static_type.nit:211 */
+  ATTR_static_type___MMSignature____not_for_self_cache(fra.me.REG[0]) = fra.me.REG[5];
   /* ./metamodel//static_type.nit:212 */
-  ATTR_static_type___MMSignature____not_for_self_cache(fra.me.REG[0]) = fra.me.REG[4];
-  fra.me.REG[1] = fra.me.REG[4];
-  /* ./metamodel//static_type.nit:213 */
+  fra.me.REG[1] = fra.me.REG[5];
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -1417,7 +1531,7 @@ void static_type___MMSignature___init(val_t p0, val_t p1, val_t p2, val_t p3, in
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 216;
+  fra.me.line = 215;
   fra.me.meth = LOCATE_static_type___MMSignature___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1429,11 +1543,11 @@ void static_type___MMSignature___init(val_t p0, val_t p1, val_t p2, val_t p3, in
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
-  /* ./metamodel//static_type.nit:218 */
+  /* ./metamodel//static_type.nit:217 */
   ATTR_static_type___MMSignature____params(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//static_type.nit:219 */
+  /* ./metamodel//static_type.nit:218 */
   ATTR_static_type___MMSignature____return_type(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./metamodel//static_type.nit:220 */
+  /* ./metamodel//static_type.nit:219 */
   ATTR_static_type___MMSignature____recv(fra.me.REG[0]) = fra.me.REG[3];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -1445,19 +1559,17 @@ val_t static_type___MMClosure___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 226;
+  fra.me.line = 225;
   fra.me.meth = LOCATE_static_type___MMClosure___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:225 */
   REGB0 = TAG_Bool(ATTR_static_type___MMClosure____name(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:226 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_name");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 226);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_name", LOCATE_static_type, 225);
   }
   fra.me.REG[0] = ATTR_static_type___MMClosure____name(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1469,19 +1581,17 @@ val_t static_type___MMClosure___signature(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 229;
+  fra.me.line = 228;
   fra.me.meth = LOCATE_static_type___MMClosure___signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:228 */
   REGB0 = TAG_Bool(ATTR_static_type___MMClosure____signature(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:229 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_signature");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 229);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_signature", LOCATE_static_type, 228);
   }
   fra.me.REG[0] = ATTR_static_type___MMClosure____signature(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1493,19 +1603,17 @@ val_t static_type___MMClosure___is_break(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 232;
+  fra.me.line = 231;
   fra.me.meth = LOCATE_static_type___MMClosure___is_break;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:231 */
   REGB0 = TAG_Bool(ATTR_static_type___MMClosure____is_break(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:232 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_is_break");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 232);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_is_break", LOCATE_static_type, 231);
   }
   REGB0 = ATTR_static_type___MMClosure____is_break(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1517,19 +1625,17 @@ val_t static_type___MMClosure___is_optional(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 236;
+  fra.me.line = 235;
   fra.me.meth = LOCATE_static_type___MMClosure___is_optional;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:235 */
   REGB0 = TAG_Bool(ATTR_static_type___MMClosure____is_optional(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:236 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_is_optional");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 236);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_is_optional", LOCATE_static_type, 235);
   }
   REGB0 = ATTR_static_type___MMClosure____is_optional(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1542,7 +1648,7 @@ val_t static_type___MMClosure___adaptation_to(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 240;
+  fra.me.line = 239;
   fra.me.meth = LOCATE_static_type___MMClosure___adaptation_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1552,38 +1658,30 @@ val_t static_type___MMClosure___adaptation_to(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:242 */
   REGB0 = TAG_Bool(ATTR_static_type___MMClosure____name(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:243 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_name");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 243);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_name", LOCATE_static_type, 242);
   }
   fra.me.REG[2] = ATTR_static_type___MMClosure____name(fra.me.REG[0]);
   REGB0 = TAG_Bool(ATTR_static_type___MMClosure____signature(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_signature");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 243);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_signature", LOCATE_static_type, 242);
   }
   fra.me.REG[3] = ATTR_static_type___MMClosure____signature(fra.me.REG[0]);
   fra.me.REG[1] = CALL_static_type___MMSignature___adaptation_to(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
   REGB0 = TAG_Bool(ATTR_static_type___MMClosure____is_break(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_is_break");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 243);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_is_break", LOCATE_static_type, 242);
   }
   REGB0 = ATTR_static_type___MMClosure____is_break(fra.me.REG[0]);
   REGB1 = TAG_Bool(ATTR_static_type___MMClosure____is_optional(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_is_optional");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 243);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_is_optional", LOCATE_static_type, 242);
   }
   REGB1 = ATTR_static_type___MMClosure____is_optional(fra.me.REG[0]);
   fra.me.REG[1] = NEW_MMClosure_static_type___MMClosure___init(fra.me.REG[2], fra.me.REG[1], REGB0, REGB1);
@@ -1601,7 +1699,7 @@ void static_type___MMClosure___init(val_t p0, val_t p1, val_t p2, val_t p3, val_
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 246;
+  fra.me.line = 245;
   fra.me.meth = LOCATE_static_type___MMClosure___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1613,13 +1711,13 @@ void static_type___MMClosure___init(val_t p0, val_t p1, val_t p2, val_t p3, val_
   fra.me.REG[2] = p2;
   REGB0 = p3;
   REGB1 = p4;
-  /* ./metamodel//static_type.nit:248 */
+  /* ./metamodel//static_type.nit:247 */
   ATTR_static_type___MMClosure____name(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//static_type.nit:249 */
+  /* ./metamodel//static_type.nit:248 */
   ATTR_static_type___MMClosure____signature(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./metamodel//static_type.nit:250 */
+  /* ./metamodel//static_type.nit:249 */
   ATTR_static_type___MMClosure____is_break(fra.me.REG[0]) = REGB0;
-  /* ./metamodel//static_type.nit:251 */
+  /* ./metamodel//static_type.nit:250 */
   ATTR_static_type___MMClosure____is_optional(fra.me.REG[0]) = REGB1;
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
@@ -1632,7 +1730,7 @@ val_t static_type___MMClosure___not_for_self(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 254;
+  fra.me.line = 253;
   fra.me.meth = LOCATE_static_type___MMClosure___not_for_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1640,23 +1738,19 @@ val_t static_type___MMClosure___not_for_self(val_t p0){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:255 */
   REGB0 = TAG_Bool(ATTR_static_type___MMClosure____signature(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:256 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_signature");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 256);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_signature", LOCATE_static_type, 255);
   }
   fra.me.REG[1] = ATTR_static_type___MMClosure____signature(fra.me.REG[0]);
   fra.me.REG[1] = CALL_static_type___MMSignature___not_for_self(fra.me.REG[1])(fra.me.REG[1]);
+  /* ./metamodel//static_type.nit:256 */
   REGB0 = TAG_Bool(ATTR_static_type___MMClosure____signature(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:257 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_signature");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 257);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_signature", LOCATE_static_type, 256);
   }
   fra.me.REG[2] = ATTR_static_type___MMClosure____signature(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[2]));
@@ -1667,36 +1761,30 @@ val_t static_type___MMClosure___not_for_self(val_t p0){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
+    /* ./metamodel//static_type.nit:257 */
     REGB0 = TAG_Bool(ATTR_static_type___MMClosure____name(fra.me.REG[0])!=NIT_NULL);
-    /* ./metamodel//static_type.nit:258 */
     if (UNTAG_Bool(REGB0)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_name");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 258);
-      nit_exit(1);
+      nit_abort("Uninitialized attribute %s", "_name", LOCATE_static_type, 257);
     }
     fra.me.REG[2] = ATTR_static_type___MMClosure____name(fra.me.REG[0]);
     REGB0 = TAG_Bool(ATTR_static_type___MMClosure____is_break(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_is_break");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 258);
-      nit_exit(1);
+      nit_abort("Uninitialized attribute %s", "_is_break", LOCATE_static_type, 257);
     }
     REGB0 = ATTR_static_type___MMClosure____is_break(fra.me.REG[0]);
     REGB1 = TAG_Bool(ATTR_static_type___MMClosure____is_optional(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_is_optional");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 258);
-      nit_exit(1);
+      nit_abort("Uninitialized attribute %s", "_is_optional", LOCATE_static_type, 257);
     }
     REGB1 = ATTR_static_type___MMClosure____is_optional(fra.me.REG[0]);
     fra.me.REG[1] = NEW_MMClosure_static_type___MMClosure___init(fra.me.REG[2], fra.me.REG[1], REGB0, REGB1);
     goto label1;
   } else {
+    /* ./metamodel//static_type.nit:259 */
     fra.me.REG[1] = fra.me.REG[0];
-    /* ./metamodel//static_type.nit:260 */
     goto label1;
   }
   label1: while(0);
@@ -1711,7 +1799,7 @@ val_t static_type___MMClosure_____l(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 264;
+  fra.me.line = 263;
   fra.me.meth = LOCATE_static_type___MMClosure_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1719,8 +1807,8 @@ val_t static_type___MMClosure_____l(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:265 */
   REGB0 = CALL_static_type___MMClosure___is_optional(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./metamodel//static_type.nit:266 */
   if (UNTAG_Bool(REGB0)) {
     REGB0 = CALL_static_type___MMClosure___is_optional(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
@@ -1732,9 +1820,9 @@ val_t static_type___MMClosure_____l(val_t p0, val_t p1){
     REGB0 = TAG_Bool(false);
     goto label1;
   }
+  /* ./metamodel//static_type.nit:266 */
   REGB1 = CALL_static_type___MMClosure___is_break(fra.me.REG[1])(fra.me.REG[1]);
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-  /* ./metamodel//static_type.nit:267 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = CALL_static_type___MMClosure___is_break(fra.me.REG[0])(fra.me.REG[0]);
   } else {
@@ -1746,66 +1834,22 @@ val_t static_type___MMClosure_____l(val_t p0, val_t p1){
     REGB0 = REGB1;
     goto label1;
   }
+  /* ./metamodel//static_type.nit:267 */
   fra.me.REG[1] = CALL_static_type___MMClosure___signature(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_static_type___MMClosure___signature(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = CALL_static_type___MMSignature_____l(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   REGB0 = REGB1;
-  /* ./metamodel//static_type.nit:268 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
-}
-val_t static_type___MMAncestor___to_s(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-  val_t REGB0;
-  val_t REGB1;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 297;
-  fra.me.meth = LOCATE_static_type___MMAncestor___to_s;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[1] = ATTR_static_type___MMAncestor____stype(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./metamodel//static_type.nit:299 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-    if (UNTAG_Bool(REGB1)) {
-      REGB1 = TAG_Bool(false);
-      REGB0 = REGB1;
-    } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
-      REGB0 = REGB1;
-    }
-  }
-  if (UNTAG_Bool(REGB0)) {
-    fra.me.REG[1] = CALL_static_type___MMAncestor___local_class(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
-    /* ./metamodel//static_type.nit:300 */
-    goto label1;
-  } else {
-    fra.me.REG[0] = CALL_static_type___MMAncestor___stype(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[1] = fra.me.REG[0];
-    /* ./metamodel//static_type.nit:302 */
-    goto label1;
-  }
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[1];
 }
 void static_type___MMAncestor___stype__eq(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 274;
+  fra.me.line = 273;
   fra.me.meth = LOCATE_static_type___MMAncestor___stype__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1813,7 +1857,7 @@ void static_type___MMAncestor___stype__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//static_type.nit:274 */
+  /* ./metamodel//static_type.nit:273 */
   ATTR_static_type___MMAncestor____stype(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1824,20 +1868,18 @@ val_t static_type___MMAncestor___stype(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 277;
+  fra.me.line = 276;
   fra.me.meth = LOCATE_static_type___MMAncestor___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:277 */
   fra.me.REG[0] = ATTR_static_type___MMAncestor____stype(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
-  /* ./metamodel//static_type.nit:278 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Cast failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 278);
-    nit_exit(1);
+    nit_abort("Cast failed", NULL, LOCATE_static_type, 277);
   }
   goto label1;
   label1: while(0);
@@ -1849,7 +1891,7 @@ void static_type___MMAncestor___inheriter__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 280;
+  fra.me.line = 279;
   fra.me.meth = LOCATE_static_type___MMAncestor___inheriter__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1857,7 +1899,7 @@ void static_type___MMAncestor___inheriter__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//static_type.nit:280 */
+  /* ./metamodel//static_type.nit:279 */
   ATTR_static_type___MMAncestor____inheriter(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1868,20 +1910,18 @@ val_t static_type___MMAncestor___inheriter(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 283;
+  fra.me.line = 282;
   fra.me.meth = LOCATE_static_type___MMAncestor___inheriter;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:283 */
   fra.me.REG[0] = ATTR_static_type___MMAncestor____inheriter(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
-  /* ./metamodel//static_type.nit:284 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Cast failed");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 284);
-    nit_exit(1);
+    nit_abort("Cast failed", NULL, LOCATE_static_type, 283);
   }
   goto label1;
   label1: while(0);
@@ -1895,19 +1935,19 @@ val_t static_type___MMAncestor___is_reffinement(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 286;
+  fra.me.line = 285;
   fra.me.meth = LOCATE_static_type___MMAncestor___is_reffinement;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:286 */
   fra.me.REG[1] = CALL_static_type___MMAncestor___stype(fra.me.REG[0])(fra.me.REG[0]);
-  fra.me.REG[1] = CALL_static_type___MMType___module(fra.me.REG[1])(fra.me.REG[1]);
+  fra.me.REG[1] = CALL_static_type___MMType___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_static_type___MMAncestor___stype(fra.me.REG[0])(fra.me.REG[0]);
-  fra.me.REG[0] = CALL_static_type___MMType___module(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_static_type___MMType___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[0]));
-  /* ./metamodel//static_type.nit:287 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
@@ -1926,13 +1966,14 @@ val_t static_type___MMAncestor___is_specialisation(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 290;
+  fra.me.line = 289;
   fra.me.meth = LOCATE_static_type___MMAncestor___is_specialisation;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:290 */
   fra.me.REG[1] = CALL_static_type___MMAncestor___stype(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_static_type___MMType___local_class(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[1])(fra.me.REG[1]);
@@ -1940,7 +1981,6 @@ val_t static_type___MMAncestor___is_specialisation(val_t p0){
   fra.me.REG[0] = CALL_static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[0]));
-  /* ./metamodel//static_type.nit:291 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
@@ -1957,16 +1997,58 @@ val_t static_type___MMAncestor___local_class(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 294;
+  fra.me.line = 293;
   fra.me.meth = LOCATE_static_type___MMAncestor___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//static_type.nit:294 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 294);
-  nit_exit(1);
+  /* ./metamodel//static_type.nit:293 */
+  nit_abort("Deferred method called", NULL, LOCATE_static_type, 293);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
+}
+val_t static_type___MMAncestor___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 296;
+  fra.me.meth = LOCATE_static_type___MMAncestor___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:298 */
+  fra.me.REG[1] = ATTR_static_type___MMAncestor____stype(fra.me.REG[0]);
+  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+      REGB1 = TAG_Bool(false);
+      REGB0 = REGB1;
+    } else {
+      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB0 = REGB1;
+    }
+  }
+  if (UNTAG_Bool(REGB0)) {
+    /* ./metamodel//static_type.nit:299 */
+    fra.me.REG[1] = CALL_static_type___MMAncestor___local_class(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+    goto label1;
+  } else {
+    /* ./metamodel//static_type.nit:301 */
+    fra.me.REG[0] = CALL_static_type___MMAncestor___stype(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[1] = fra.me.REG[0];
+    goto label1;
+  }
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
 }
 void static_type___MMAncestor___init(val_t p0, int* init_table){
   int itpos2 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_MMAncestor].i;
@@ -1983,19 +2065,17 @@ void static_type___MMAncestor___init(val_t p0, int* init_table){
   init_table[itpos2] = 1;
   return;
 }
-val_t static_type___MMType___module(val_t p0){
+val_t static_type___MMType___mmmodule(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 310;
-  fra.me.meth = LOCATE_static_type___MMType___module;
+  fra.me.line = 309;
+  fra.me.meth = LOCATE_static_type___MMType___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//static_type.nit:310 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 310);
-  nit_exit(1);
+  /* ./metamodel//static_type.nit:309 */
+  nit_abort("Deferred method called", NULL, LOCATE_static_type, 309);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2004,14 +2084,12 @@ val_t static_type___MMType___local_class(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 313;
+  fra.me.line = 312;
   fra.me.meth = LOCATE_static_type___MMType___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//static_type.nit:313 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 313);
-  nit_exit(1);
+  /* ./metamodel//static_type.nit:312 */
+  nit_abort("Deferred method called", NULL, LOCATE_static_type, 312);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2021,14 +2099,14 @@ val_t static_type___MMType___is_valid(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 316;
+  fra.me.line = 315;
   fra.me.meth = LOCATE_static_type___MMType___is_valid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:317 */
   REGB0 = TAG_Bool(true);
-  /* ./metamodel//static_type.nit:318 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2039,14 +2117,12 @@ val_t static_type___MMType_____l(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 320;
+  fra.me.line = 319;
   fra.me.meth = LOCATE_static_type___MMType_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//static_type.nit:320 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 320);
-  nit_exit(1);
+  /* ./metamodel//static_type.nit:319 */
+  nit_abort("Deferred method called", NULL, LOCATE_static_type, 319);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2055,14 +2131,12 @@ val_t static_type___MMType___is_supertype(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 323;
+  fra.me.line = 322;
   fra.me.meth = LOCATE_static_type___MMType___is_supertype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//static_type.nit:323 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 323);
-  nit_exit(1);
+  /* ./metamodel//static_type.nit:322 */
+  nit_abort("Deferred method called", NULL, LOCATE_static_type, 322);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2071,14 +2145,12 @@ val_t static_type___MMType___for_module(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 328;
+  fra.me.line = 327;
   fra.me.meth = LOCATE_static_type___MMType___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//static_type.nit:328 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 328);
-  nit_exit(1);
+  /* ./metamodel//static_type.nit:327 */
+  nit_abort("Deferred method called", NULL, LOCATE_static_type, 327);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2087,14 +2159,12 @@ val_t static_type___MMType___adapt_to(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 331;
+  fra.me.line = 330;
   fra.me.meth = LOCATE_static_type___MMType___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//static_type.nit:331 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 331);
-  nit_exit(1);
+  /* ./metamodel//static_type.nit:330 */
+  nit_abort("Deferred method called", NULL, LOCATE_static_type, 330);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2103,14 +2173,12 @@ val_t static_type___MMType___upcast_for(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 335;
+  fra.me.line = 334;
   fra.me.meth = LOCATE_static_type___MMType___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//static_type.nit:335 */
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 335);
-  nit_exit(1);
+  /* ./metamodel//static_type.nit:334 */
+  nit_abort("Deferred method called", NULL, LOCATE_static_type, 334);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2119,13 +2187,13 @@ val_t static_type___MMType___not_for_self(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 357;
+  fra.me.line = 356;
   fra.me.meth = LOCATE_static_type___MMType___not_for_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//static_type.nit:359 */
+  /* ./metamodel//static_type.nit:358 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2137,14 +2205,14 @@ val_t static_type___MMType___is_nullable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 364;
+  fra.me.line = 363;
   fra.me.meth = LOCATE_static_type___MMType___is_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:364 */
   REGB0 = TAG_Bool(false);
-  /* ./metamodel//static_type.nit:365 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2157,7 +2225,7 @@ val_t static_type___MMType___as_nullable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 367;
+  fra.me.line = 366;
   fra.me.meth = LOCATE_static_type___MMType___as_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2165,9 +2233,10 @@ val_t static_type___MMType___as_nullable(val_t p0){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:369 */
   fra.me.REG[1] = ATTR_static_type___MMType____as_nullable_cache(fra.me.REG[0]);
+  /* ./metamodel//static_type.nit:370 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  /* ./metamodel//static_type.nit:371 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -2183,11 +2252,12 @@ val_t static_type___MMType___as_nullable(val_t p0){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
+  /* ./metamodel//static_type.nit:371 */
   fra.me.REG[2] = NEW_MMNullableType_static_type___MMNullableType___init(fra.me.REG[0]);
-  /* ./metamodel//static_type.nit:373 */
+  /* ./metamodel//static_type.nit:372 */
   ATTR_static_type___MMType____as_nullable_cache(fra.me.REG[0]) = fra.me.REG[2];
+  /* ./metamodel//static_type.nit:373 */
   fra.me.REG[1] = fra.me.REG[2];
-  /* ./metamodel//static_type.nit:374 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2198,13 +2268,13 @@ val_t static_type___MMType___as_notnull(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 377;
+  fra.me.line = 376;
   fra.me.meth = LOCATE_static_type___MMType___as_notnull;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//static_type.nit:379 */
+  /* ./metamodel//static_type.nit:378 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2225,79 +2295,135 @@ void static_type___MMType___init(val_t p0, int* init_table){
   init_table[itpos3] = 1;
   return;
 }
-val_t static_type___MMNullableType___to_s(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+val_t static_type___MMNullableType___is_valid(val_t p0){
+  struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
-  static val_t once_value_1; /* Once value */
-  static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 400;
-  fra.me.meth = LOCATE_static_type___MMNullableType___to_s;
+  fra.me.line = 384;
+  fra.me.meth = LOCATE_static_type___MMNullableType___is_valid;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:384 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 384);
+  }
+  fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
+  REGB0 = CALL_static_type___MMType___is_valid(fra.me.REG[0])(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
+val_t static_type___MMNullableType___is_nullable(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 385;
+  fra.me.meth = LOCATE_static_type___MMNullableType___is_nullable;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:385 */
+  REGB0 = TAG_Bool(true);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
+val_t static_type___MMNullableType___as_notnull(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 386;
+  fra.me.meth = LOCATE_static_type___MMNullableType___as_notnull;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:386 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 386);
+  }
+  fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t static_type___MMNullableType___as_nullable(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 387;
+  fra.me.meth = LOCATE_static_type___MMNullableType___as_nullable;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:387 */
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+void static_type___MMNullableType___init(val_t p0, val_t p1, int* init_table){
+  int itpos4 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_MMNullableType].i;
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t tmp;
+  if (init_table[itpos4]) return;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 388;
+  fra.me.meth = LOCATE_static_type___MMNullableType___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = TAG_Int(3);
-  fra.me.REG[1] = NEW_Array_array___Array___with_capacity(REGB0);
-  /* ./metamodel//static_type.nit:402 */
-  if (!once_value_1) {
-    fra.me.REG[2] = BOX_NativeString("nullable ");
-    REGB0 = TAG_Int(9);
-    fra.me.REG[2] = NEW_String_string___String___with_native(fra.me.REG[2], REGB0);
-    once_value_1 = fra.me.REG[2];
-    register_static_object(&once_value_1);
-  } else fra.me.REG[2] = once_value_1;
-  array___Array___add(fra.me.REG[1], fra.me.REG[2]);
-  REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 402);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
-  fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
-  array___Array___add(fra.me.REG[1], fra.me.REG[0]);
-  if (!once_value_2) {
-    fra.me.REG[0] = BOX_NativeString("");
-    REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB0);
-    once_value_2 = fra.me.REG[0];
-    register_static_object(&once_value_2);
-  } else fra.me.REG[0] = once_value_2;
-  array___Array___add(fra.me.REG[1], fra.me.REG[0]);
-  fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
-  goto label3;
-  label3: while(0);
+  fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:388 */
+  fra.me.REG[2] = fra.me.REG[0];
+  CALL_static_type___MMType___init(fra.me.REG[0])(fra.me.REG[0], init_table);
+  ATTR_static_type___MMNullableType____base_type(fra.me.REG[2]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[1];
+  init_table[itpos4] = 1;
+  return;
 }
-val_t static_type___MMNullableType___module(val_t p0){
+val_t static_type___MMNullableType___mmmodule(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 391;
-  fra.me.meth = LOCATE_static_type___MMNullableType___module;
+  fra.me.line = 390;
+  fra.me.meth = LOCATE_static_type___MMNullableType___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:390 */
   REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:391 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 391);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 390);
   }
   fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
-  fra.me.REG[0] = CALL_static_type___MMType___module(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_static_type___MMType___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2309,19 +2435,17 @@ val_t static_type___MMNullableType___local_class(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 393;
+  fra.me.line = 392;
   fra.me.meth = LOCATE_static_type___MMNullableType___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:392 */
   REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:393 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 393);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 392);
   }
   fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
   fra.me.REG[0] = CALL_static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
@@ -2330,33 +2454,6 @@ val_t static_type___MMNullableType___local_class(val_t p0){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-val_t static_type___MMNullableType___is_valid(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 385;
-  fra.me.meth = LOCATE_static_type___MMNullableType___is_valid;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:385 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 385);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
-  REGB0 = CALL_static_type___MMType___is_valid(fra.me.REG[0])(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return REGB0;
-}
 val_t static_type___MMNullableType_____l(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
@@ -2364,7 +2461,7 @@ val_t static_type___MMNullableType_____l(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 395;
+  fra.me.line = 394;
   fra.me.meth = LOCATE_static_type___MMNullableType_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2372,15 +2469,13 @@ val_t static_type___MMNullableType_____l(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:396 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_MMNullableType, ID_MMNullableType)) /*cast MMNullableType*/;
-  /* ./metamodel//static_type.nit:397 */
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 397);
-      nit_exit(1);
+      nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 396);
     }
     fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
     fra.me.REG[1] = CALL_static_type___MMType___as_notnull(fra.me.REG[1])(fra.me.REG[1]);
@@ -2394,13 +2489,64 @@ val_t static_type___MMNullableType_____l(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
+val_t static_type___MMNullableType___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 399;
+  fra.me.meth = LOCATE_static_type___MMNullableType___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:401 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("nullable ");
+    REGB0 = TAG_Int(9);
+    fra.me.REG[2] = NEW_String_string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 401);
+  }
+  fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("");
+    REGB0 = TAG_Int(0);
+    fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
 val_t static_type___MMNullableType___is_supertype(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 405;
+  fra.me.line = 404;
   fra.me.meth = LOCATE_static_type___MMNullableType___is_supertype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2408,13 +2554,11 @@ val_t static_type___MMNullableType___is_supertype(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:406 */
   REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:407 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 407);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 406);
   }
   fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
   REGB0 = CALL_static_type___MMType___is_supertype(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
@@ -2429,7 +2573,7 @@ val_t static_type___MMNullableType___for_module(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 410;
+  fra.me.line = 409;
   fra.me.meth = LOCATE_static_type___MMNullableType___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2437,13 +2581,11 @@ val_t static_type___MMNullableType___for_module(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:411 */
   REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:412 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 412);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 411);
   }
   fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
   fra.me.REG[1] = CALL_static_type___MMType___for_module(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
@@ -2459,7 +2601,7 @@ val_t static_type___MMNullableType___adapt_to(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 415;
+  fra.me.line = 414;
   fra.me.meth = LOCATE_static_type___MMNullableType___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2467,13 +2609,11 @@ val_t static_type___MMNullableType___adapt_to(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:416 */
   REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:417 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 417);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 416);
   }
   fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
   fra.me.REG[1] = CALL_static_type___MMType___adapt_to(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
@@ -2489,7 +2629,7 @@ val_t static_type___MMNullableType___upcast_for(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 420;
+  fra.me.line = 419;
   fra.me.meth = LOCATE_static_type___MMNullableType___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2497,13 +2637,11 @@ val_t static_type___MMNullableType___upcast_for(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:421 */
   REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:422 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 422);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 421);
   }
   fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
   fra.me.REG[1] = CALL_static_type___MMType___upcast_for(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
@@ -2518,163 +2656,21 @@ val_t static_type___MMNullableType___not_for_self(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 425;
+  fra.me.line = 424;
   fra.me.meth = LOCATE_static_type___MMNullableType___not_for_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:426 */
   REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:427 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 427);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_static_type, 426);
   }
   fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
   fra.me.REG[0] = CALL_static_type___MMType___not_for_self(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_static_type___MMType___as_nullable(fra.me.REG[0])(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-val_t static_type___MMNullableType___is_nullable(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 386;
-  fra.me.meth = LOCATE_static_type___MMNullableType___is_nullable;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(true);
-  /* ./metamodel//static_type.nit:386 */
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return REGB0;
-}
-val_t static_type___MMNullableType___as_nullable(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 388;
-  fra.me.meth = LOCATE_static_type___MMNullableType___as_nullable;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./metamodel//static_type.nit:388 */
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-val_t static_type___MMNullableType___as_notnull(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 387;
-  fra.me.meth = LOCATE_static_type___MMNullableType___as_notnull;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:387 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_base_type");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 387);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_static_type___MMNullableType____base_type(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-void static_type___MMNullableType___init(val_t p0, val_t p1, int* init_table){
-  int itpos4 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_MMNullableType].i;
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
-  val_t tmp;
-  if (init_table[itpos4]) return;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 389;
-  fra.me.meth = LOCATE_static_type___MMNullableType___init;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  fra.me.REG[2] = fra.me.REG[0];
-  /* ./metamodel//static_type.nit:389 */
-  CALL_static_type___MMType___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  ATTR_static_type___MMNullableType____base_type(fra.me.REG[2]) = fra.me.REG[1];
-  stack_frame_head = fra.me.prev;
-  init_table[itpos4] = 1;
-  return;
-}
-val_t static_type___MMTypeClass___to_s(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 437;
-  fra.me.meth = LOCATE_static_type___MMTypeClass___to_s;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:439 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_local_class");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 439);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0]);
-  fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-val_t static_type___MMTypeClass___module(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 434;
-  fra.me.meth = LOCATE_static_type___MMTypeClass___module;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:434 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_local_class");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 434);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0]);
-  fra.me.REG[0] = CALL_abstractmetamodel___MMLocalClass___module(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2686,21 +2682,44 @@ val_t static_type___MMTypeClass___local_class(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 433;
+  fra.me.line = 432;
   fra.me.meth = LOCATE_static_type___MMTypeClass___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:432 */
   REGB0 = TAG_Bool(ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:433 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_local_class");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 433);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_static_type, 432);
   }
   fra.me.REG[0] = ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t static_type___MMTypeClass___mmmodule(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 433;
+  fra.me.meth = LOCATE_static_type___MMTypeClass___mmmodule;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:433 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_static_type, 433);
+  }
+  fra.me.REG[0] = ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -2710,7 +2729,7 @@ val_t static_type___MMTypeClass_____l(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 435;
+  fra.me.line = 434;
   fra.me.meth = LOCATE_static_type___MMTypeClass_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2718,12 +2737,37 @@ val_t static_type___MMTypeClass_____l(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:434 */
   REGB0 = CALL_static_type___MMType___is_supertype(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./metamodel//static_type.nit:435 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
+}
+val_t static_type___MMTypeClass___to_s(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 436;
+  fra.me.meth = LOCATE_static_type___MMTypeClass___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:438 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_static_type, 438);
+  }
+  fra.me.REG[0] = ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
 }
 val_t static_type___MMTypeClass___upcast_for(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
@@ -2732,7 +2776,7 @@ val_t static_type___MMTypeClass___upcast_for(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 442;
+  fra.me.line = 441;
   fra.me.meth = LOCATE_static_type___MMTypeClass___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -2742,14 +2786,13 @@ val_t static_type___MMTypeClass___upcast_for(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:443 */
   fra.me.REG[2] = fra.me.REG[0];
+  /* ./metamodel//static_type.nit:444 */
   REGB0 = TAG_Bool(ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:445 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_local_class");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 445);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_static_type, 444);
   }
   fra.me.REG[3] = ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[1]));
@@ -2760,19 +2803,17 @@ val_t static_type___MMTypeClass___upcast_for(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
+    /* ./metamodel//static_type.nit:445 */
     REGB0 = TAG_Bool(ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0])!=NIT_NULL);
-    /* ./metamodel//static_type.nit:446 */
     if (UNTAG_Bool(REGB0)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_local_class");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 446);
-      nit_exit(1);
+      nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_static_type, 445);
     }
     fra.me.REG[0] = ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0]);
     fra.me.REG[1] = CALL_static_type___MMLocalClass___ancestor(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     fra.me.REG[2] = fra.me.REG[1];
   }
-  /* ./metamodel//static_type.nit:448 */
+  /* ./metamodel//static_type.nit:447 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2785,7 +2826,7 @@ void static_type___MMTypeClass___init(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos5]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 451;
+  fra.me.line = 450;
   fra.me.meth = LOCATE_static_type___MMTypeClass___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2794,10 +2835,10 @@ void static_type___MMTypeClass___init(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:450 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./metamodel//static_type.nit:451 */
   CALL_static_type___MMType___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./metamodel//static_type.nit:453 */
+  /* ./metamodel//static_type.nit:452 */
   ATTR_static_type___MMTypeClass____local_class(fra.me.REG[2]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos5] = 1;
@@ -2809,7 +2850,7 @@ val_t static_type___MMTypeSimpleClass___is_supertype(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 459;
+  fra.me.line = 458;
   fra.me.meth = LOCATE_static_type___MMTypeSimpleClass___is_supertype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2817,15 +2858,13 @@ val_t static_type___MMTypeSimpleClass___is_supertype(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:460 */
   fra.me.REG[1] = CALL_static_type___MMType___local_class(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = CALL_abstractmetamodel___MMLocalClass___cshe(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:461 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_local_class");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 461);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_static_type, 460);
   }
   fra.me.REG[0] = ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0]);
   REGB0 = CALL_partial_order___PartialOrderElement_____leq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
@@ -2841,7 +2880,7 @@ val_t static_type___MMTypeSimpleClass___for_module(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 464;
+  fra.me.line = 463;
   fra.me.meth = LOCATE_static_type___MMTypeSimpleClass___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -2851,10 +2890,11 @@ val_t static_type___MMTypeSimpleClass___for_module(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:465 */
   fra.me.REG[2] = fra.me.REG[0];
-  fra.me.REG[3] = CALL_static_type___MMType___module(fra.me.REG[0])(fra.me.REG[0]);
+  /* ./metamodel//static_type.nit:466 */
+  fra.me.REG[3] = CALL_static_type___MMType___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[1]));
-  /* ./metamodel//static_type.nit:467 */
   if (UNTAG_Bool(REGB0)) {
   } else {
     REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
@@ -2862,20 +2902,18 @@ val_t static_type___MMTypeSimpleClass___for_module(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
+    /* ./metamodel//static_type.nit:467 */
     REGB0 = TAG_Bool(ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0])!=NIT_NULL);
-    /* ./metamodel//static_type.nit:468 */
     if (UNTAG_Bool(REGB0)) {
     } else {
-      fprintf(stderr, "Uninitialized attribute %s", "_local_class");
-      fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 468);
-      nit_exit(1);
+      nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_static_type, 467);
     }
     fra.me.REG[0] = ATTR_static_type___MMTypeClass____local_class(fra.me.REG[0]);
     fra.me.REG[1] = CALL_abstractmetamodel___MMLocalClass___for_module(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     fra.me.REG[1] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[2] = fra.me.REG[1];
   }
-  /* ./metamodel//static_type.nit:470 */
+  /* ./metamodel//static_type.nit:469 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2886,7 +2924,7 @@ val_t static_type___MMTypeSimpleClass___adapt_to(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 473;
+  fra.me.line = 472;
   fra.me.meth = LOCATE_static_type___MMTypeSimpleClass___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2894,7 +2932,7 @@ val_t static_type___MMTypeSimpleClass___adapt_to(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//static_type.nit:473 */
+  /* ./metamodel//static_type.nit:472 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2907,7 +2945,7 @@ void static_type___MMTypeSimpleClass___init(val_t p0, val_t p1, int* init_table)
   if (init_table[itpos6]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 475;
+  fra.me.line = 474;
   fra.me.meth = LOCATE_static_type___MMTypeSimpleClass___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2915,79 +2953,52 @@ void static_type___MMTypeSimpleClass___init(val_t p0, val_t p1, int* init_table)
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//static_type.nit:477 */
+  /* ./metamodel//static_type.nit:476 */
   CALL_static_type___MMTypeClass___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
   stack_frame_head = fra.me.prev;
   init_table[itpos6] = 1;
   return;
 }
-val_t static_type___MMTypeNone___to_s(val_t p0){
+val_t static_type___MMTypeNone___mmmodule(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
-  static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 487;
-  fra.me.meth = LOCATE_static_type___MMTypeNone___to_s;
+  fra.me.line = 483;
+  fra.me.meth = LOCATE_static_type___MMTypeNone___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//static_type.nit:487 */
-  if (!once_value_1) {
-    fra.me.REG[0] = BOX_NativeString("null");
-    REGB0 = TAG_Int(4);
-    fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB0);
-    once_value_1 = fra.me.REG[0];
-    register_static_object(&once_value_1);
-  } else fra.me.REG[0] = once_value_1;
-  goto label2;
-  label2: while(0);
+  /* ./metamodel//static_type.nit:483 */
+  REGB0 = TAG_Bool(ATTR_static_type___MMTypeNone____mmmodule(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_mmmodule", LOCATE_static_type, 483);
+  }
+  fra.me.REG[0] = ATTR_static_type___MMTypeNone____mmmodule(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-val_t static_type___MMTypeNone___module(val_t p0){
+val_t static_type___MMTypeNone___is_nullable(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
   fra.me.line = 484;
-  fra.me.meth = LOCATE_static_type___MMTypeNone___module;
+  fra.me.meth = LOCATE_static_type___MMTypeNone___is_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(ATTR_static_type___MMTypeNone____module(fra.me.REG[0])!=NIT_NULL);
   /* ./metamodel//static_type.nit:484 */
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_module");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 484);
-    nit_exit(1);
-  }
-  fra.me.REG[0] = ATTR_static_type___MMTypeNone____module(fra.me.REG[0]);
+  REGB0 = TAG_Bool(true);
+  goto label1;
+  label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-val_t static_type___MMTypeNone___local_class(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 489;
-  fra.me.meth = LOCATE_static_type___MMTypeNone___local_class;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./metamodel//static_type.nit:489 */
-  fprintf(stderr, "Aborted");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 489);
-  nit_exit(1);
-  stack_frame_head = fra.me.prev;
-  return NIT_NULL;
+  return REGB0;
 }
 val_t static_type___MMTypeNone_____l(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
@@ -2996,7 +3007,7 @@ val_t static_type___MMTypeNone_____l(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 486;
+  fra.me.line = 485;
   fra.me.meth = LOCATE_static_type___MMTypeNone_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -3004,8 +3015,8 @@ val_t static_type___MMTypeNone_____l(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:485 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_MMTypeNone, ID_MMTypeNone)) /*cast MMTypeNone*/;
-  /* ./metamodel//static_type.nit:486 */
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(true);
   } else {
@@ -3017,13 +3028,40 @@ val_t static_type___MMTypeNone_____l(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
+val_t static_type___MMTypeNone___to_s(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 486;
+  fra.me.meth = LOCATE_static_type___MMTypeNone___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:486 */
+  if (!once_value_1) {
+    fra.me.REG[0] = BOX_NativeString("null");
+    REGB0 = TAG_Int(4);
+    fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_1 = fra.me.REG[0];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[0] = once_value_1;
+  fra.me.REG[0] = fra.me.REG[0];
+  goto label2;
+  label2: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
 val_t static_type___MMTypeNone___is_supertype(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 488;
+  fra.me.line = 487;
   fra.me.meth = LOCATE_static_type___MMTypeNone___is_supertype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -3031,19 +3069,35 @@ val_t static_type___MMTypeNone___is_supertype(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:487 */
   REGB0 = TAG_Bool(false);
-  /* ./metamodel//static_type.nit:488 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
+}
+val_t static_type___MMTypeNone___local_class(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_static_type;
+  fra.me.line = 488;
+  fra.me.meth = LOCATE_static_type___MMTypeNone___local_class;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:488 */
+  nit_abort("Aborted", NULL, LOCATE_static_type, 488);
+  stack_frame_head = fra.me.prev;
+  return NIT_NULL;
 }
 val_t static_type___MMTypeNone___upcast_for(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 490;
+  fra.me.line = 489;
   fra.me.meth = LOCATE_static_type___MMTypeNone___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -3051,44 +3105,23 @@ val_t static_type___MMTypeNone___upcast_for(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//static_type.nit:490 */
-  fprintf(stderr, "Aborted");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 490);
-  nit_exit(1);
+  /* ./metamodel//static_type.nit:489 */
+  nit_abort("Aborted", NULL, LOCATE_static_type, 489);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
-}
-val_t static_type___MMTypeNone___is_nullable(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_static_type;
-  fra.me.line = 485;
-  fra.me.meth = LOCATE_static_type___MMTypeNone___is_nullable;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = TAG_Bool(true);
-  /* ./metamodel//static_type.nit:485 */
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return REGB0;
 }
 val_t static_type___MMTypeNone___as_nullable(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 491;
+  fra.me.line = 490;
   fra.me.meth = LOCATE_static_type___MMTypeNone___as_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//static_type.nit:491 */
+  /* ./metamodel//static_type.nit:490 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -3099,16 +3132,14 @@ val_t static_type___MMTypeNone___as_notnull(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 492;
+  fra.me.line = 491;
   fra.me.meth = LOCATE_static_type___MMTypeNone___as_notnull;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//static_type.nit:492 */
-  fprintf(stderr, "Aborted");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 492);
-  nit_exit(1);
+  /* ./metamodel//static_type.nit:491 */
+  nit_abort("Aborted", NULL, LOCATE_static_type, 491);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -3119,7 +3150,7 @@ void static_type___MMTypeNone___init(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos7]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 494;
+  fra.me.line = 493;
   fra.me.meth = LOCATE_static_type___MMTypeNone___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3128,10 +3159,10 @@ void static_type___MMTypeNone___init(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:493 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./metamodel//static_type.nit:494 */
   CALL_static_type___MMType___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  ATTR_static_type___MMTypeNone____module(fra.me.REG[2]) = fra.me.REG[1];
+  ATTR_static_type___MMTypeNone____mmmodule(fra.me.REG[2]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos7] = 1;
   return;
@@ -3142,19 +3173,17 @@ val_t static_type___MMModule___type_none(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 498;
+  fra.me.line = 497;
   fra.me.meth = LOCATE_static_type___MMModule___type_none;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//static_type.nit:497 */
   REGB0 = TAG_Bool(ATTR_static_type___MMModule____type_none(fra.me.REG[0])!=NIT_NULL);
-  /* ./metamodel//static_type.nit:498 */
   if (UNTAG_Bool(REGB0)) {
   } else {
-    fprintf(stderr, "Uninitialized attribute %s", "_type_none");
-    fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 498);
-    nit_exit(1);
+    nit_abort("Uninitialized attribute %s", "_type_none", LOCATE_static_type, 497);
   }
   fra.me.REG[0] = ATTR_static_type___MMModule____type_none(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3168,14 +3197,14 @@ val_t static_type___MMModule___type_bool(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_static_type;
-  fra.me.line = 501;
+  fra.me.line = 500;
   fra.me.meth = LOCATE_static_type___MMModule___type_bool;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//static_type.nit:504 */
+  /* ./metamodel//static_type.nit:503 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[1] = BOX_NativeString("Bool");
@@ -3184,10 +3213,12 @@ val_t static_type___MMModule___type_bool(val_t p0){
       once_value_2 = fra.me.REG[1];
       register_static_object(&once_value_2);
     } else fra.me.REG[1] = once_value_2;
+    fra.me.REG[1] = fra.me.REG[1];
     fra.me.REG[1] = CALL_symbol___String___to_symbol(fra.me.REG[1])(fra.me.REG[1]);
     once_value_1 = fra.me.REG[1];
     register_static_object(&once_value_1);
   } else fra.me.REG[1] = once_value_1;
+  fra.me.REG[1] = fra.me.REG[1];
   fra.me.REG[1] = CALL_abstractmetamodel___MMModule___class_by_name(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   fra.me.REG[1] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[1])(fra.me.REG[1]);
   goto label3;

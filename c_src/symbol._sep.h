@@ -13,15 +13,15 @@ extern const int SFT_symbol[];
 #define ATTR_symbol___Symbol____string(recv) ATTR(recv, (SFT_symbol[3] + 0))
 #define INIT_TABLE_POS_Symbol (SFT_symbol[4] + 0)
 #define CALL_symbol___Symbol___init(recv) ((symbol___Symbol___init_t)CALL((recv), (SFT_symbol[4] + 1)))
-val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
-val_t NEW_String_string___String___from_cstring(val_t p0);
-#define LOCATE_symbol___String___to_symbol "symbol::String::to_symbol"
+static const char * const LOCATE_symbol___String___to_symbol = "symbol::String::to_symbol";
 val_t symbol___String___to_symbol(val_t p0);
 typedef val_t (*symbol___String___to_symbol_t)(val_t p0);
-#define LOCATE_symbol___Symbol___to_s "symbol::Symbol::(string::Object::to_s)"
+val_t NEW_String_string___String___from_cstring(val_t p0);
+val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
+static const char * const LOCATE_symbol___Symbol___to_s = "symbol::Symbol::(string::Object::to_s)";
 val_t symbol___Symbol___to_s(val_t p0);
 typedef val_t (*symbol___Symbol___to_s_t)(val_t p0);
-#define LOCATE_symbol___Symbol___init "symbol::Symbol::init"
+static const char * const LOCATE_symbol___Symbol___init = "symbol::Symbol::init";
 void symbol___Symbol___init(val_t p0, val_t p1, int* init_table);
 typedef void (*symbol___Symbol___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_Symbol_symbol___Symbol___init(val_t p0);
