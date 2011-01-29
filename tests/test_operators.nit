@@ -76,6 +76,16 @@ class A
 	   13.output
 	   return 0
    end
+   fun <<(a: A): A
+   do
+	   14.output
+	   return a
+   end
+   fun >>(a: A): A
+   do
+	   15.output
+	   return a
+   end
 
    init do end
 end
@@ -84,6 +94,6 @@ var a = new A
 var a2 = new A
 var b : Bool
 var i: Int
-a = a + -a - a * a / a % a 
+a = a + -a - a * a / a % a >> a << a
 b = a == a2 and a < a and a > a and a <= a and a >= a
 i = a <=> a
