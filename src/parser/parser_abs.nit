@@ -242,10 +242,16 @@ end
 class TLe
 special Token
 end
+class TLl
+special Token
+end
 class TGt
 special Token
 end
 class TGe
+special Token
+end
+class TGg
 special Token
 end
 class TStarship
@@ -544,6 +550,14 @@ class AGtMethid
 special AMethid
     readable var _n_gt: TGt
 end
+class ALlMethid
+special AMethid
+    readable var _n_ll: TLl
+end
+class AGgMethid
+special AMethid
+    readable var _n_gg: TGg
+end
 class ABraMethid
 special AMethid
     readable var _n_obra: TObra
@@ -739,12 +753,22 @@ special AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
+class ALlExpr
+special AExpr
+    readable var _n_expr: AExpr
+    readable var _n_expr2: AExpr
+end
 class AGtExpr
 special AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
 class AGeExpr
+special AExpr
+    readable var _n_expr: AExpr
+    readable var _n_expr2: AExpr
+end
+class AGgExpr
 special AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr

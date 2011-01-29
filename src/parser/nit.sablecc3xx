@@ -129,8 +129,10 @@ eq = '==';
 ne = '!=';
 lt = '<';
 le = '<=';
+ll = '<<';
 gt = '>';
 ge = '>=';
+gg = '>>';
 starship = '<=>';
 bang='!';
 
@@ -251,6 +253,8 @@ methid {-> methid}
 	| {ge} ge {-> New methid.ge(ge)}
 	| {lt} lt {-> New methid.lt(lt)}
 	| {gt} gt {-> New methid.gt(gt)}
+	| {ll} ll {-> New methid.ll(ll)}
+	| {gg} gg {-> New methid.gg(gg)}
 	| {bra} obra cbra {-> New methid.bra(obra, cbra)}
 	| {starship} starship {-> New methid.starship(starship)}
 	| {assign} id assign {-> New methid.assign(id, assign)}
@@ -447,8 +451,10 @@ expr_eq~nopar~nobra {-> expr}
 	| {ne} expr_add~nopar~nobra ne no [expr2]:expr_add~nopar~nobra {-> New expr.ne(expr_add~nopar~nobra.expr, expr2.expr)}
 	| {lt} expr_add~nopar~nobra lt no [expr2]:expr_add~nopar~nobra {-> New expr.lt(expr_add~nopar~nobra.expr, expr2.expr)}
 	| {le} expr_add~nopar~nobra le no [expr2]:expr_add~nopar~nobra {-> New expr.le(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {ll} expr_eq~nopar~nobra ll no [expr2]:expr_add~nopar~nobra {-> New expr.ll(expr_eq~nopar~nobra.expr, expr2.expr)}
 	| {gt} expr_add~nopar~nobra gt no [expr2]:expr_add~nopar~nobra {-> New expr.gt(expr_add~nopar~nobra.expr, expr2.expr)}
 	| {ge} expr_add~nopar~nobra ge no [expr2]:expr_add~nopar~nobra {-> New expr.ge(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {gg} expr_eq~nopar~nobra gg no [expr2]:expr_add~nopar~nobra {-> New expr.gg(expr_eq~nopar~nobra.expr, expr2.expr)}
 	| {starship} expr_add~nopar~nobra starship no [expr2]:expr_add~nopar~nobra {-> New expr.starship(expr_add~nopar~nobra.expr, expr2.expr)}
 	| {isa} expr_add~nopar~nobra kwisa no type~nobra {-> New expr.isa(expr_add~nopar~nobra.expr, type~nobra.type)}
 	;
@@ -620,11 +626,11 @@ able	= {read} kwredef? kwreadable
 	| {write} kwredef? visibility? kwwritable
 	;
 
-methid = {id} id | {plus} plus | {minus} minus | {star} star | {slash} slash | {percent} percent | {eq} eq | {ne} ne | {le} le | {ge} ge | {lt} lt | {gt} gt | {bra} obra cbra | {starship} starship | {assign} id assign | {braassign} obra cbra assign;
+methid = {id} id | {plus} plus | {minus} minus | {star} star | {slash} slash | {percent} percent | {eq} eq | {ne} ne | {le} le | {ge} ge | {lt} lt | {gt} gt |  {ll} ll | {gg} gg | {bra} obra cbra | {starship} starship | {assign} id assign | {braassign} obra cbra assign;
 
 signature = [params]:param* type? [closure_decls]:closure_decl*;
 
-param	= id type? dotdotdot? 
+param	= id type? dotdotdot?
 	;
 
 closure_decl = kwbreak? bang id signature expr?
@@ -659,8 +665,10 @@ expr	= {block} expr*
 	| {ne} expr [expr2]:expr 
 	| {lt} expr [expr2]:expr 
 	| {le} expr [expr2]:expr 
+	| {ll} expr [expr2]:expr
 	| {gt} expr [expr2]:expr 
 	| {ge} expr [expr2]:expr 
+	| {gg} expr [expr2]:expr
 	| {isa} expr type 
 	| {plus} expr [expr2]:expr 
 	| {minus} expr [expr2]:expr 

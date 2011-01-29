@@ -1593,11 +1593,17 @@ end
 redef class ALeExpr
 	redef fun name do return once "<=".to_symbol
 end
+redef class ALlExpr
+	redef fun name do return once "<<".to_symbol
+end
 redef class AGtExpr
 	redef fun name do return once ">".to_symbol
 end
 redef class AGeExpr
 	redef fun name do return once ">=".to_symbol
+end
+redef class AGgExpr
+	redef fun name do return once ">>".to_symbol
 end
 redef class APlusExpr
 	redef fun name do return once "+".to_symbol
