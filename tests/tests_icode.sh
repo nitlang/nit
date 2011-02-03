@@ -45,12 +45,14 @@ fi
 ok=""
 nok=""
 
+# Process each files given as arguments
 for ii in "$@"; do
 	if [ ! -f $ii ]; then
 		echo "File '$ii' does not exist."
 		continue
 	fi
 
+	# Prepare the includes
 	tmp=${ii/../AA}
 	if [ "x$tmp" = "x$ii" ]; then
 		oincludes="-I . -I ../lib/standard -I ../lib/standard/collection"
@@ -58,6 +60,7 @@ for ii in "$@"; do
 		oincludes=""
 	fi
 
+	# Process each alternatives in the current file
 	for alt in "" `sed -n 's/.*#!*\(alt[0-9]*\)#.*/\1/p' "$ii" | sort -u`; do
 		f=`basename "$ii" .nit`
 		d=`dirname "$ii"`
@@ -85,11 +88,13 @@ for ii in "$@"; do
 		$NITC $OPT --global --output-format icode "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
 		ERR=$?
 		if [ "$ERR" != 0 ]; then
+			# Could not compile
 			echo "! [======= fail: Compilation error =======]"
 			nok="$nok $ff"
 		else
 			TEST_FILE=$d/$ff.tests
 			if [ ! -f $TEST_FILE ]; then
+				# Could not find the .tests file associated with this test
 				echo ". [======= fail: Cannot open test file =======]"
 				nok="$nok $ff"
 				continue
@@ -97,6 +102,19 @@ for ii in "$@"; do
 			echo "."
 
 			# Execute tests
+			# Each lines in the .tests file describe a test to execute on the generated
+			# ICode. The file has 4 parameters:
+			# - The class
+			# - The method
+			# - The type of test
+			# - Arguments for the test
+			# We use the class to open the right icode file.
+			# We use a special method named "no-file" to ensure that the class file does not exist.
+			# If the method is different from "no-file" then we search in said method for the expression given
+			# with the _arguments_ field. This expression will be evaluated as a awk regexp.
+			# We have two types of tests : 
+			# - has : the given argument must be found for the test to be successful
+			# - no :  the given argument must NOT be found for the test to be successful
 			cptr=0
 			while IFS=, read CLASS METHOD TYPE ATTR
 			do
@@ -105,12 +123,15 @@ for ii in "$@"; do
 				echo -n '==> Test #'$cptr' ...... '
 
 				if [ -f $ICODE_FILE ]; then
+					# Check if the file should exist
 					if [ "x$METHOD" = "xno-file" ]; then
-						# this is normal
+						# this is not normal, the file should not exist
 						echo "Failed"
 						nok="$nok $ff#$cptr"
 						continue
 					fi
+
+					# Use awk to get the method in the file and search in it for the argument
 					awk '
 					BEGIN{
 						process=0
