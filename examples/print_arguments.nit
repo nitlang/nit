@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # How to print arguments of the command line.
-package print_arguments
+module print_arguments
 
 for a in args do
 	print a
