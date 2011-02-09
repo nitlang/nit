@@ -135,27 +135,27 @@ end
 class OptionEnum
 special OptionParameter
 	redef type VALUE: Int
-	var _enum: Array[String]
+	var _values: Array[String]
 
-	init(enum: Array[String], help: String, default: Int, names: String...)
+	init(values: Array[String], help: String, default: Int, names: String...)
 	do
-		assert enum.length > 0
-		_enum = enum.to_a
-		init_opt("{help} <{enum.join(", ")}>", default, names)
+		assert values.length > 0
+		_values = values.to_a
+		init_opt("{help} <{values.join(", ")}>", default, names)
 	end
 
 	redef fun convert(str)
 	do
-		var id = _enum.index_of(str)
+		var id = _values.index_of(str)
 		return id
 	end
 
-	fun value_name: String = _enum[value]
+	fun value_name: String = _values[value]
 
 	redef fun pretty_default
 	do
 		if default_value != null then
-			return " ({_enum[default_value.as(not null)]})"
+			return " ({_values[default_value.as(not null)]})"
 		else
 			return ""
 		end
