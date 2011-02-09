@@ -30,7 +30,6 @@ redef class MMLocalClass
 
 	# Return the primitive information of the class.
 	# Return null if the class is not primitive
-	# FIXME: Only here since there is no universal type yet
 	fun primitive_info: nullable PrimitiveInfo
 	do
 		if _primitive_info_b == true then return _primitive_info_cache

@@ -299,8 +299,8 @@ class MMGlobalClass
 	# Is the global class an abstract class?
 	readable writable var _is_abstract: Bool = false
 
-	# Is the global class a universal class?
-	readable writable var _is_universal: Bool = false
+	# Is the global class a enum class?
+	readable writable var _is_enum: Bool = false
 
 	# Visibility of the global class
 	# 1 -> public
