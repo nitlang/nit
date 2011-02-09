@@ -462,7 +462,7 @@ redef class AModuledecl
 	redef fun accept_class_builder(v)
 	do
 		if n_id.to_symbol != v.mmmodule.name then
-			v.error(n_id, "Error: Package name missmatch between {v.mmmodule.name} and {n_id.to_symbol}")
+			v.error(n_id, "Error: Module name missmatch between {v.mmmodule.name} and {n_id.to_symbol}")
 		end
 	end
 end

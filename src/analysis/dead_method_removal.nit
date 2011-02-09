@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This package introduces an algorithm to remove the body of dead methods
+# This module introduces an algorithm to remove the body of dead methods
 package dead_method_removal
 
 import reachable_method_analysis

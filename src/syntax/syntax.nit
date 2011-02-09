@@ -39,7 +39,7 @@ special ModuleLoader
 			break
 		end
 		if not name_is_valid then
-			context.error( null, "{filename}: Error package name \"{name}\", must start with a lower case letter and contain only letters, digits and '_'." )
+			context.error( null, "{filename}: Error module name \"{name}\", must start with a lower case letter and contain only letters, digits and '_'." )
 		end
 
 		var lexer = new Lexer(file, filename)

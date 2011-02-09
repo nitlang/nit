@@ -106,7 +106,7 @@ class MMDirectory
 	end
 end
 
-# A module is a NIT package
+# A module is a Nit file
 class MMModule
 	# Global context
 	readable var _context: MMContext 

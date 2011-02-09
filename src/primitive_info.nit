@@ -17,7 +17,7 @@
 # Common things for NIT compilation and C generation
 package primitive_info
 
-#FIXME Split this package into 2: one in metamodel and one in compiling
+#FIXME Split this module into 2: one in metamodel and one in compiling
 
 import metamodel
 

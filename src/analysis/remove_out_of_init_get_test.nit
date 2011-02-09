@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This package introduces an optimization that removes 'get' tests when
+# This module introduces an optimization that removes 'get' tests when
 # not reachable from an initializer
 package remove_out_of_init_get_test
 

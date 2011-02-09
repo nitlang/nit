@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Package containing all bases for instantiated type analysis
+# Module containing all bases for instantiated type analysis
 package instantiated_type_analysis
 
 import program
