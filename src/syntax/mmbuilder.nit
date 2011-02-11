@@ -576,7 +576,7 @@ end
 redef class AInterfaceClasskind
 	redef fun is_interface do return true
 end
-redef class AUniversalClasskind
+redef class AEnumClasskind
 	redef fun is_universal do return true
 end
 redef class AAbstractClasskind

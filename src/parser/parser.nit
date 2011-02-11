@@ -2921,10 +2921,10 @@ special ReduceAction
 	do
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					var tkwuniversalnode2 = nodearraylist1
-					assert tkwuniversalnode2 isa nullable TKwuniversal
-					var pclasskindnode1: nullable AUniversalClasskind = new AUniversalClasskind.init_auniversalclasskind(
-						tkwuniversalnode2
+					var tkwenumnode2 = nodearraylist1
+					assert tkwenumnode2 isa nullable TKwenum
+					var pclasskindnode1: nullable AEnumClasskind = new AEnumClasskind.init_aenumclasskind(
+						tkwenumnode2
 					)
 					node_list = pclasskindnode1
 					p.push(p.go_to(_goto), node_list)

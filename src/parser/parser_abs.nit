@@ -44,7 +44,7 @@ end
 class TKwinterface
 special Token
 end
-class TKwuniversal
+class TKwenum
 special Token
 end
 class TKwspecial
@@ -393,9 +393,9 @@ class AInterfaceClasskind
 special AClasskind
     readable var _n_kwinterface: TKwinterface
 end
-class AUniversalClasskind
+class AEnumClasskind
 special AClasskind
-    readable var _n_kwuniversal: TKwuniversal
+    readable var _n_kwenum: TKwenum
 end
 class AFormaldef
 special AFormaldef
