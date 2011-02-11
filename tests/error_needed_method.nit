@@ -22,7 +22,7 @@ end
 interface Discrete
 end
 
-universal Int
+enum Int
 special Discrete
 end
 
@@ -32,7 +32,7 @@ end
 class String
 end
 
-universal NativeString
+enum NativeString
 end
 
 class Array[E]

@@ -19,7 +19,7 @@ import end
 interface Object
 end
 
-universal Int
+enum Int
 	fun output is intern
 	fun +(o: Int): Int is intern
 end
