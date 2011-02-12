@@ -1264,7 +1264,7 @@ special TablesCapable
 			result = get_token
 		end
 		_token = null
-		return result.as(not null)
+		return result
 	end
 
 	# Get a token, or null if it is discarded
