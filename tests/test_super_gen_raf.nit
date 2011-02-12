@@ -17,7 +17,7 @@
 import test_super_gen
 
 class C[H: Int]
-special A[H, Int]
+	super A[H, Int]
 	redef fun foo(a: H, b: Int): H
 	do
 		return super

@@ -21,7 +21,7 @@ interface Elt
 end
 
 class A
-special Elt
+	super Elt
 	var _a: Int
 	redef fun val1: Int do return _a
 
@@ -29,7 +29,7 @@ special Elt
 end
 
 class Elt2
-special Elt
+	super Elt
 	var _b: Int
 	redef fun val1: Int do return _b/2
 	redef fun val2: Int do return _b
@@ -37,12 +37,12 @@ special Elt
 end
 
 class B
-special Elt2
+	super Elt2
 	init(i: Int) do initelt2(i)
 end
 
 class C
-special Elt
+	super Elt
 	var _c: Int
 	var _d: Int
 	redef fun val1: Int do return _c end
@@ -55,8 +55,8 @@ special Elt
 end
 
 class D
-special A
-special Elt2
+	super A
+	super Elt2
 	redef fun val1: Int do return _a end
 	redef fun val2: Int do return _b end
 
@@ -67,14 +67,14 @@ special Elt2
 end
 
 class E
-special Elt2
+	super Elt2
 	redef fun val1: Int do return 5 end
 
 	init(i: Int) do initelt2(i)
 end
 
 class EltSorter
-special AbstractSorter[Elt]
+	super AbstractSorter[Elt]
 	redef fun compare(a: Elt, b: Elt): Int
 	do
 		if _is_val1 then

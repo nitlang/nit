@@ -17,6 +17,6 @@
 import base_gen_f
 
 class G3
-special G1
-special G2
+	super G1
+	super G2
 end

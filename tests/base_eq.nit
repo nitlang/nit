@@ -26,7 +26,7 @@ class A
 end
 
 class B
-special A
+	super A
 	redef fun ==(a: nullable Object): Bool
 	do
 		if not a isa B then

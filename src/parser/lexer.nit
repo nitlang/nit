@@ -1200,7 +1200,7 @@ end
 # The lexer extract NIT tokens from an input stream.
 # It is better user with the Parser
 class Lexer
-special TablesCapable
+	super TablesCapable
 	# Last peeked token
 	var _token: nullable Token
 

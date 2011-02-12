@@ -20,7 +20,7 @@ class O
 end
 
 class A
-special O
+	super O
 	init do end
 end
 
@@ -28,8 +28,8 @@ class U
 end
 
 class B
-special A
-special U
+	super A
+	super U
 	init do end
 end
 

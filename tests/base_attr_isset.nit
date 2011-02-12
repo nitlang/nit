@@ -63,7 +63,7 @@ class Foo
 end
 
 class Bar
-special Foo
+	super Foo
 	var _a3: Integer#!alt1# #!alt2#
 	#alt1#var _a3: Integer = new Integer(9000)
 	#alt2#var _a3: nullable Integer
@@ -94,7 +94,7 @@ special Foo
 end
 
 class Baz
-special Foo
+	super Foo
 end
 
 #alt4# var b2 = new Baz

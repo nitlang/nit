@@ -5,7 +5,7 @@ class B
 end
 
 class A
-special B
+	super B
 	redef fun foo do
 		print "afoo"
 	end

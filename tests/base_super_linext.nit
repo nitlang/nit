@@ -29,7 +29,7 @@ class A
 end
 
 class B
-special A
+	super A
 	redef fun foo
 	do
 		'B'.output
@@ -46,7 +46,7 @@ special A
 end
 
 class C
-special A
+	super A
 	redef fun foo
 	do
 		'C'.output
@@ -63,8 +63,8 @@ special A
 end
 
 class D
-special B
-special C
+	super B
+	super C
 	redef fun foo
 	do
 		'D'.output

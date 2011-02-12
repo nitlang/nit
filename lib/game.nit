@@ -124,7 +124,7 @@ end
 # A sprite is a drawable element.
 # It is represented by a main pixel (x,y) and an image (image)
 class Sprite
-special Rectangle
+	super Rectangle
 
 	# Absolute X coordinate of the main pixel in the screen
 	readable writable var _x: Int

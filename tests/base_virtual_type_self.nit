@@ -28,7 +28,7 @@ class A[E]
 end
 
 class B
-#alt3#special A[Int]
+	#alt3#super A[Int]
 	type U: Int
 
 	fun test

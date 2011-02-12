@@ -89,7 +89,7 @@ end
 # This class uses the operator <=> to sort arrays.
 # You can also use the `sort' method of the `Array' class.
 class ComparableSorter[E: Comparable]
-special AbstractSorter[E]
+	super AbstractSorter[E]
 	# Return a <=> b
 	redef fun compare(a, b) do return a <=> b
 

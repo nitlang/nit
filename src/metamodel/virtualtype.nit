@@ -27,7 +27,7 @@ end
 
 # Virtual type properties
 class MMTypeProperty
-special MMLocalProperty
+	super MMLocalProperty
 	# The virtual static type associated
 	fun stype_for(recv: MMType): nullable MMVirtualType
 	do
@@ -54,7 +54,7 @@ special MMLocalProperty
 end
 
 class MMVirtualType
-special MMTypeFormal
+	super MMTypeFormal
 	# The property associed
 	readable var _property: MMTypeProperty
 

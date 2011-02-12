@@ -30,7 +30,7 @@ class O
 end
 
 class A
-special O
+	super O
    redef fun foo
    do
       printn(11)
@@ -45,7 +45,7 @@ special O
 end
 
 class B
-special A
+	super A
    redef fun foo
    do
       printn(12)

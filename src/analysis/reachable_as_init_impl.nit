@@ -41,7 +41,7 @@ end
 # Visitor will add only initializers in the _methods list.
 # If the checked method is in this list, it is reachable as init !
 class ReachableAsInitAnalysisImpl
-special ReachableAsInitAnalysis
+	super ReachableAsInitAnalysis
 	var _methods: HashMap[MMLocalClass, List[MMMethod]] = new HashMap[MMLocalClass, List[MMMethod]]
 
 	redef fun is_method_reachable_as_init(method: MMMethod, c: MMLocalClass): Bool do
@@ -53,7 +53,7 @@ special ReachableAsInitAnalysis
 end
 
 class RAIVisitor
-special ICodeVisitor
+	super ICodeVisitor
 	readable var _builder: ReachableAsInitBuilder
 
 	redef fun visit_icode(ic)

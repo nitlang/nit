@@ -20,12 +20,12 @@ class A
 end
 
 class B
-special A
+	super A
 	redef fun q(x: A): B do return self end
 end
 
 class C
-special B
+	super B
 	fun r(x: B) do end
 	fun s: B do return self end
 	var _a: B

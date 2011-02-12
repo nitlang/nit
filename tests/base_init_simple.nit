@@ -7,7 +7,7 @@ class A
 end
 
 class B
-special A
+	super A
 	#alt1#redef init do '1'.output
 	init do '1'.output #!alt1#
 	#alt1#redef init init2 do '2'.output

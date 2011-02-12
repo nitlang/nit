@@ -17,7 +17,7 @@
 import base_virtual_type2
 
 class C
-special A
+	super A
 	redef type E: U
 	init do end
 end

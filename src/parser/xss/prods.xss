@@ -19,12 +19,12 @@ $ template make_abs_prods()
 $ set baseprod = {//prod/@ename}
 
 $ foreach {//prod}
-class @ename special Prod end
+class @ename super Prod end
 $ end
 
 $ foreach {//alt}
 class @ename
-special ${../@ename}
+	super ${../@ename}
 $ foreach {elem}
 $   if @is_list
     readable var _n_@name: List[@etype] = new List[@etype]
@@ -40,7 +40,7 @@ end
 $ end
 
 class Start
-special Prod
+	super Prod
     readable var _n_base: nullable $baseprod
     readable var _n_eof: EOF
 end

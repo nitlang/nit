@@ -26,6 +26,6 @@ class B
 	fun toto do end
 end
 class C
-special A
-special B
+	super A
+	super B
 end

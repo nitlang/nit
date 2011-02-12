@@ -19,16 +19,16 @@ $ template make_abs_tokens()
 $ foreach {//token}
 $ if {@parser_index}    
 class @ename
-special Token
+	super Token
 end
 $ end
 $ end
 class EOF
-special Token
+	super Token
 private init noinit do end
 end
 class PError
-special EOF
+	super EOF
 private init noinit do end
 end
 $ end template

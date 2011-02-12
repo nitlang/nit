@@ -52,14 +52,14 @@ end
 
 # All information and results of the global analysis.
 class TableInformation
-special ColorContext
+	super ColorContext
 	# FIXME: do something better.
 	readable writable var _max_class_table_length: Int = 0
 end
 
 # A compiled class is a class in a program
 class CompiledClass
-special ColorContext
+	super ColorContext
 	# The corresponding local class in the main module of the prgram
 	readable var _local_class: MMLocalClass
 
@@ -413,7 +413,7 @@ end
 # An element of a class or an instance table
 # Such an elements represent method function pointers, attribute values, etc.
 abstract class TableElt
-special AbsTableElt
+	super AbsTableElt
 	# Is the element conflict to class `c' (used for coloring)
 	fun is_related_to(c: MMLocalClass): Bool is abstract
 
@@ -427,18 +427,18 @@ end
 # An element of a module table
 # Such an elements represent colors or identifiers
 abstract class ModuleTableElt
-special AbsTableElt
+	super AbsTableElt
 end
 
 # An element of a module table that represents a group of TableElt defined in the same local class
 class ModuleTableEltGroup
-special ModuleTableElt
+	super ModuleTableElt
 	readable var _elements: Array[TableElt] = new Array[TableElt]
 end
 
 # An element that represents a class property
 abstract class TableEltProp
-special TableElt
+	super TableElt
 	readable var _property: MMLocalProperty
 
 	init(p: MMLocalProperty)
@@ -449,22 +449,22 @@ end
 
 # An element that represents a function pointer to a global method
 class TableEltMeth
-special TableEltProp
+	super TableEltProp
 end
 
 # An element that represents a function pointer to the super method of a local method
 class TableEltSuper
-special TableEltProp
+	super TableEltProp
 end
 
 # An element that represents the value stored for a global attribute
 class TableEltAttr
-special TableEltProp
+	super TableEltProp
 end
 
 # An element representing a class information
 class AbsTableEltClass
-special AbsTableElt
+	super AbsTableElt
 	# The local class where the information comes from
 	readable var _local_class: MMLocalClass
 
@@ -476,8 +476,8 @@ end
 
 # An element of a class table representing a class information
 class TableEltClass
-special TableElt
-special AbsTableEltClass
+	super TableElt
+	super AbsTableEltClass
 	redef fun is_related_to(c)
 	do
 		var bc = c.mmmodule[_local_class.global]
@@ -487,13 +487,13 @@ end
 
 # An element representing the id of a class in a module table
 class TableEltClassId
-special ModuleTableElt
-special AbsTableEltClass
+	super ModuleTableElt
+	super AbsTableEltClass
 end
 
 # An element representing the constructor marker position in a class table
 class TableEltClassInitTable
-special TableEltClass
+	super TableEltClass
 end
 
 # An element used for a cast
@@ -501,13 +501,13 @@ end
 # At the TableElt offset, there is the id of the super-class
 # At the ModuleTableElt offset, there is the TableElt offset (ie. the color of the super-class).
 class TableEltClassColor
-special TableEltClass
-special ModuleTableElt
+	super TableEltClass
+	super ModuleTableElt
 end
 
 # A Group of elements introduced in the same global-class that are colored together
 class TableEltComposite
-special TableElt
+	super TableElt
 	var _table: Array[TableElt]
 	var _cc: CompiledClass
 	var _offsets: HashMap[MMLocalClass, Int]
@@ -532,24 +532,24 @@ end
 
 # The element that represent the class id
 class TableEltClassSelfId
-special TableElt
+	super TableElt
 	redef fun is_related_to(c) do return true
 end
 
 # The element that represent the Object Size
 class TableEltClassObjectSize
-special TableElt
+	super TableElt
 	redef fun is_related_to(c) do return true
 end
 
 # The element that represent the object id
 class TableEltObjectId
-special TableElt
+	super TableElt
 	redef fun is_related_to(c) do return true
 end
 
 # The element that
 class TableEltVftPointer
-special TableElt
+	super TableElt
 	redef fun is_related_to(c) do return true
 end

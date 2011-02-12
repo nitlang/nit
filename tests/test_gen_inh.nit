@@ -17,7 +17,7 @@
 import kernel
 
 class Gen1[E, F]
-special Object
+	super Object
    readable writable var _e: E
    var _f_: F
    fun f: F do return _f_ end 
@@ -27,12 +27,12 @@ special Object
 end
 
 class Gen2[G: Int]
-special Gen1[G, Char]
+	super Gen1[G, Char]
    init(e:G) do super(e)
 end
 
 class Gen3[H: Int]
-special Gen1[H, Char]
+	super Gen1[H, Char]
    redef readable redef writable redef var _e: H
    redef var _f_: Char = 'N'
    redef fun f: Char do return _f_ end 

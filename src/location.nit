@@ -17,7 +17,7 @@
 package location
 
 class Location
-special Comparable
+	super Comparable
 	redef type OTHER: Location
 
 	readable var _file: String

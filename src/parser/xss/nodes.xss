@@ -27,12 +27,12 @@ end
 
 # Ancestor of all tokens
 abstract class Token
-special PNode
+	super PNode
 end
 
 # Ancestor of all productions
 abstract class Prod
-special PNode
+	super PNode
 	fun location=(loc: Location) do _location = loc
 end
 $ end template

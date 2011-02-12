@@ -18,7 +18,7 @@
 import game
 
 class Playing
-special SDL_EventListener
+	super SDL_EventListener
 	redef fun on_mouse_button(evt: SDL_MouseButtonEvent)
 	do
 		if evt.is_pressed then
@@ -240,7 +240,7 @@ redef class Sprite
 end
 
 class MovingSprite
-special Sprite
+	super Sprite
 	var _rx: Float # Real X axis (sub-pixel)
 	var _ry: Float # Real Y axix (sub-pixel)
 	readable var _vx: Float # X velocity (speed)
@@ -259,7 +259,7 @@ special Sprite
 end
 
 class Player
-special MovingSprite
+	super MovingSprite
 
 	fun update_one_step(mx: Int, my: Int)
 	do
@@ -361,7 +361,7 @@ special MovingSprite
 end
 
 class Box
-special Sprite
+	super Sprite
 	var _images: Array[SDL_Surface]
 	var _image_number: Int
 	var _image_delay: Int
@@ -411,7 +411,7 @@ special Sprite
 end
 
 class Particle
-special MovingSprite
+	super MovingSprite
 	fun update_one_step: Bool
 	do
 		_ttl = _ttl - 1

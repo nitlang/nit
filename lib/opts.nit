@@ -79,7 +79,7 @@ class Option
 end
 
 class OptionText
-special Option
+	super Option
 	init(text: String) do init_opt(text, null, null)
 
 	redef fun pretty(off) do return to_s
@@ -88,7 +88,7 @@ special Option
 end
 
 class OptionBool
-special Option
+	super Option
 	redef type VALUE: Bool
 
 	init(help: String, names: String...) do init_opt(help, false, names)
@@ -97,7 +97,7 @@ special Option
 end
 
 class OptionCount
-special Option
+	super Option
 	redef type VALUE: Int
 
 	init(help: String, names: String...) do init_opt(help, 0, names)
@@ -107,7 +107,7 @@ end
 
 # Option with one mandatory parameter
 class OptionParameter
-special Option
+	super Option
 	protected fun convert(str: String): VALUE is abstract
 
 	redef fun read_param(it)
@@ -124,7 +124,7 @@ special Option
 end
 
 class OptionString
-special OptionParameter
+	super OptionParameter
 	redef type VALUE: nullable String
 
 	init(help: String, names: String...) do init_opt(help, null, names)
@@ -133,7 +133,7 @@ special OptionParameter
 end
 
 class OptionEnum
-special OptionParameter
+	super OptionParameter
 	redef type VALUE: Int
 	var _values: Array[String]
 
@@ -163,7 +163,7 @@ special OptionParameter
 end
 
 class OptionInt
-special OptionParameter
+	super OptionParameter
 	redef type VALUE: Int
 
 	init(help: String, default: Int, names: String...) do init_opt(help, default, names)
@@ -172,7 +172,7 @@ special OptionParameter
 end
 
 class OptionArray
-special OptionParameter
+	super OptionParameter
 	redef type VALUE: Array[String]
 
 	init(help: String, names: String...)

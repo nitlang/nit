@@ -23,7 +23,7 @@ class A
 end
 
 class B
-special A
+	super A
 	init do end
 end
 
@@ -33,7 +33,7 @@ class T
 end
 
 class U
-special T
+	super T
 	redef fun foo do 1.output
 	init do end
 end

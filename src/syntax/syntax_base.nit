@@ -22,7 +22,7 @@ import mmloader
 
 # Concrete NIT source module
 class MMSrcModule
-special MMModule
+	super MMModule
 	# A source module can locate AST nodes of related MM entities
 	# Once a source module AST is no more needed, _nodes is set to null
 	# See ToolContext::keep_ast property in syntax.nit for details
@@ -83,7 +83,7 @@ end
 
 # Concrete NIT source local classes
 class MMSrcLocalClass
-special MMConcreteClass
+	super MMConcreteClass
 	# The first related AST node (if any)
 	fun node: nullable AClassdef do return mmmodule.nodes(self).as(nullable AClassdef)
 
@@ -134,7 +134,7 @@ end
 
 # Concrete NIT source attribute
 class MMSrcAttribute
-special MMAttribute
+	super MMAttribute
 	redef fun node: nullable AAttrPropdef do return mmmodule.nodes(self).as(nullable AAttrPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
@@ -145,7 +145,7 @@ end
 
 # Concrete NIT source method
 class MMSrcMethod
-special MMMethod
+	super MMMethod
 	redef fun is_intern do return false
 	redef fun is_abstract do return false
 	redef fun extern_name do return null
@@ -153,7 +153,7 @@ end
 
 # Concrete NIT source method for an automatic accesor
 class MMAttrImplementationMethod
-special MMSrcMethod
+	super MMSrcMethod
 	redef fun node: nullable AAttrPropdef do return mmmodule.nodes(self).as(nullable AAttrPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
@@ -164,7 +164,7 @@ end
 
 # Concrete NIT source method for an automatic read accesor
 class MMReadImplementationMethod
-special MMAttrImplementationMethod
+	super MMAttrImplementationMethod
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
 		super(name, cla, n)
@@ -173,7 +173,7 @@ end
 
 # Concrete NIT source method for an automatic write accesor
 class MMWriteImplementationMethod
-special MMAttrImplementationMethod
+	super MMAttrImplementationMethod
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
 		super(name, cla, n)
@@ -182,7 +182,7 @@ end
 
 # Concrete NIT source method for an explicit method
 class MMMethSrcMethod
-special MMSrcMethod
+	super MMSrcMethod
 	redef readable var _is_init: Bool
 	redef readable var _is_intern: Bool
 	redef readable var _is_abstract: Bool
@@ -201,8 +201,8 @@ end
 
 # Concrete NIT source virtual type
 class MMSrcTypeProperty
-special MMLocalProperty
-special MMTypeProperty
+	super MMLocalProperty
+	super MMTypeProperty
 	init(name: Symbol, cla: MMLocalClass, n: ATypePropdef)
 	do
 		super(name, cla)
@@ -211,7 +211,7 @@ end
 
 # Concrete NIT implicit constructor
 class MMImplicitInit
-special MMMethSrcMethod
+	super MMMethSrcMethod
 	fun super_init: nullable MMLocalProperty is abstract
 	redef fun is_init do return true
 	readable var _unassigned_attributes: Array[MMSrcAttribute]
@@ -248,21 +248,21 @@ end
 
 # Variable declared with 'var'
 class VarVariable
-special Variable
+	super Variable
 	redef fun kind do return once "variable"
 	init(n: Symbol, d: ANode) do super
 end
 
 # Parameter of method (declared in signature)
 class ParamVariable
-special Variable
+	super Variable
 	redef fun kind do return once "parameter"
 	init(n: Symbol, d: nullable ANode) do super
 end
 
 # Automatic variable (like in the 'for' statement)
 class AutoVariable
-special Variable
+	super Variable
 	redef fun kind do return once "automatic variable"
 	init(n: Symbol, d: ANode) do super
 end
@@ -270,7 +270,7 @@ end
 # False variable corresponding to closures declared in signatures
 # Lives in the same namespace than variables
 class ClosureVariable
-special Variable
+	super Variable
 	redef fun kind do return once "closure"
 
 	# The signature of the closure
@@ -287,7 +287,7 @@ end
 
 # Visitor used during the syntax analysis
 class AbsSyntaxVisitor
-special Visitor
+	super Visitor
 	fun get_type_by_name(clsname: Symbol): MMType
 	do
 		if not _mmmodule.has_global_class_named(clsname) then _tc.fatal_error(_mmmodule.location, "Missing necessary class: \"{clsname}\"")
@@ -737,7 +737,7 @@ redef class AExpr
 end
 
 class AAbsAbsSendExpr
-special AExpr
+	super AExpr
 	# The signature of the called property (require is_typed)
 	fun prop_signature: MMSignature is abstract
 
@@ -746,7 +746,7 @@ special AExpr
 end
 
 class AAbsSendExpr
-special AAbsAbsSendExpr
+	super AAbsAbsSendExpr
 	# The invoked method (require is_typed)
 	fun prop: MMMethod is abstract
 
@@ -755,20 +755,20 @@ special AAbsAbsSendExpr
 end
 
 class ASuperInitCall
-special AAbsSendExpr
+	super AAbsSendExpr
 end
 
 redef class ASuperExpr
-special ASuperInitCall
+	super ASuperInitCall
 	fun init_in_superclass: nullable MMMethod is abstract
 end
 
 redef class ANewExpr
-special AAbsSendExpr
+	super AAbsSendExpr
 end
 
 redef class ASendExpr
-special ASuperInitCall
+	super ASuperInitCall
 	# Closure definitions
 	fun closure_defs: nullable Array[AClosureDef] is abstract
 end
@@ -779,19 +779,19 @@ redef class AReassignFormExpr
 end
 
 class ASendReassignExpr
-special ASendExpr
-special AReassignFormExpr
+	super ASendExpr
+	super AReassignFormExpr
 	# The invoked method used to read (require is_typed)
 	# prop is the method used to write
 	fun read_prop: MMMethod is abstract
 end
 
 redef class ACallReassignExpr
-special ASendReassignExpr
+	super ASendReassignExpr
 end
 
 redef class ABraReassignExpr
-special ASendReassignExpr
+	super ASendReassignExpr
 end
 
 redef class AAttrFormExpr
@@ -828,7 +828,7 @@ redef class AVarFormExpr
 end
 
 redef class AClosureCallExpr
-special AAbsAbsSendExpr
+	super AAbsAbsSendExpr
 	# Associated closure variable
 	fun variable: ClosureVariable is abstract
 end

@@ -39,7 +39,7 @@ class A
 end
 
 class B
-special A
+	super A
     redef fun foo: B 
     do 
 	    return new B 
@@ -61,7 +61,7 @@ special A
 end
 
 redef class Int
-special B
+	super B
     redef fun foo: Int 
     do 
 	    return 8 

@@ -20,7 +20,7 @@ class A
 	init do end
 end
 class B
-special A
+	super A
 	fun foo(i: Int) do i.output
 	fun bar: Bool do return true
 	init do end

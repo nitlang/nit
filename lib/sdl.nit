@@ -14,7 +14,7 @@
 package sdl
 
 universal SDL_Surface
-special Pointer
+	super Pointer
 	fun width: Int is extern "sdl_surface_width"
 	fun height: Int is extern "sdl_surface_height"
 	
@@ -37,12 +37,12 @@ special Pointer
 end
 
 universal SDL_Screen
-special SDL_Surface
+	super SDL_Surface
 	fun flip is extern "SDL_Flip"
 end
 	
 universal SDL_Event
-special Pointer
+	super Pointer
 	fun is_keyboard: Bool is extern "sdl_evt_is_keyboard"
 	fun as_keyboard: SDL_KeyboardEvent is extern "sdl_evt_as_keyboard"
 	fun is_mouse_button: Bool is extern "sdl_evt_is_mouse_button"
@@ -54,24 +54,24 @@ special Pointer
 end
 
 universal SDL_ButtonEvent
-special SDL_Event
+	super SDL_Event
 	fun is_pressed: Bool is abstract
 end
 
 universal SDL_MouseEvent
-special SDL_Event
+	super SDL_Event
 	fun x: Int is abstract
 	fun y: Int is abstract
 end
 
 universal SDL_KeyboardEvent
-special SDL_ButtonEvent
+	super SDL_ButtonEvent
 	redef fun is_pressed: Bool is extern "sdl_keyboard_evt_state"
 end
 
 universal SDL_MouseButtonEvent
-special SDL_ButtonEvent
-special SDL_MouseEvent
+	super SDL_ButtonEvent
+	super SDL_MouseEvent
 	redef fun is_pressed: Bool is extern "sdl_mouse_button_evt_state"
 	redef fun x: Int is extern "sdl_mouse_button_evt_x"
 	redef fun y: Int is extern "sdl_mouse_button_evt_y"
@@ -79,7 +79,7 @@ special SDL_MouseEvent
 end
 
 universal SDL_MouseMotionEvent
-special SDL_MouseEvent
+	super SDL_MouseEvent
 	redef fun x: Int is extern "sdl_mouse_evt_x"
 	redef fun y: Int is extern "sdl_mouse_evt_y"
 	fun xrel: Int is extern "sdl_mouse_evt_xrel"

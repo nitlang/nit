@@ -23,7 +23,7 @@ interface Inline__
 end
 
 class A
-special Inline__
+	super Inline__
 	redef fun bar do return 20
 	redef fun baz do bar.output
 end

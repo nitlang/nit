@@ -23,7 +23,7 @@ class A
 end
 
 class B
-special A
+	super A
 	init do end
 end
 

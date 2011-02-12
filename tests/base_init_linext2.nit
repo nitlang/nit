@@ -37,7 +37,7 @@ class A
 end
 
 class B
-special A
+	super A
 	init initb do
 		'B'.output
 		'1'.output
@@ -63,7 +63,7 @@ special A
 end
 
 class C
-special A
+	super A
 	init do
 		'C'.output
 		'1'.output
@@ -94,8 +94,8 @@ special A
 end
 
 class D
-special B
-special C
+	super B
+	super C
 	init initd do
 #alt1#		super
 		'D'.output

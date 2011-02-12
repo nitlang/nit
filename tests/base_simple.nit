@@ -40,7 +40,7 @@ class A
 end
 
 class B
-special A
+	super A
 	redef fun bar(i: Int)
 	do
 		i.output

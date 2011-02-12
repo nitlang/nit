@@ -21,7 +21,7 @@ class A
 end
 
 class B
-special A
+	super A
 	fun foo(i: Int) do i.output
 	init do end
 end

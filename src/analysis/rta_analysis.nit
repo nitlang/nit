@@ -23,8 +23,8 @@ import icode
 import program
 
 class RtaContext
-special ReachableMethodAnalysis
-special InstantiatedTypeAnalysis
+	super ReachableMethodAnalysis
+	super InstantiatedTypeAnalysis
 	init do end
 	readable var _instanciated_classes: HashSet[MMLocalClass] = new HashSet[MMLocalClass]
 
@@ -195,7 +195,7 @@ class RtaBuilder
 end
 
 class RtaVisitor
-special ICodeVisitor
+	super ICodeVisitor
 	readable var _builder: RtaBuilder
 
 	redef fun visit_icode(ic)

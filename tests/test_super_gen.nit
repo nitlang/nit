@@ -25,7 +25,7 @@ class A[E: Object, F: Object]
 end
 
 class B[G: Int]
-special A[Bool,G]
+	super A[Bool,G]
 	redef fun foo(b: Bool, g: G): G
 	do
 		1.output

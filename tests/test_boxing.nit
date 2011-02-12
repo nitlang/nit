@@ -27,7 +27,8 @@ class Gene[T]
 	init do end
 
 end
-class GeneBool special Gene[Bool]
+class GeneBool
+	super Gene[Bool]
 	fun a=(b: Bool)
 	do
 		_a_ = b

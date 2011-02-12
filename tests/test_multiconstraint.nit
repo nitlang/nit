@@ -26,7 +26,7 @@ class A
 end
 
 class B
-special A
+	super A
    redef  fun foo
    do
       21.output
@@ -40,7 +40,7 @@ special A
 end
 
 class C
-special B
+	super B
    redef fun foo
    do
       31.output

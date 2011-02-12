@@ -34,7 +34,7 @@ end
 
 # A class to dump ICode to a file
 class FileICodeDumper
-special ICodeDumper
+	super ICodeDumper
 	var _file: OFStream
 
 	init(f: OFStream) do

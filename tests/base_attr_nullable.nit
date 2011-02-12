@@ -57,7 +57,7 @@ class Foo
 end
 
 class Bar
-special Foo
+	super Foo
 	var _a3: Integer
 	redef fun run
 	do

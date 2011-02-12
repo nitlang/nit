@@ -17,7 +17,7 @@ import abstract_collection
 
 # Double linked lists.
 class List[E]
-special Sequence[E]
+	super Sequence[E]
 # Access
 	redef fun [](index) do return get_node(index).item
 
@@ -242,7 +242,7 @@ end
 
 # This is the iterator class of List
 class ListIterator[E]
-special IndexedIterator[E]
+	super IndexedIterator[E]
 	redef fun item do return _node.item
 
 	fun item=(e: E) do _node.item = e
@@ -287,7 +287,7 @@ end
 
 # Linked nodes that constitute a linked list.
 private class ListNode[E]
-special Container[E]
+	super Container[E]
 	init(i: E)
 	do 
 		item = i

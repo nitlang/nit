@@ -19,7 +19,7 @@ import abstract_collection
 
 # One dimention array of objects.
 class AbstractArrayRead[E]
-special SequenceRead[E]
+	super SequenceRead[E]
 	# The current length
 	redef readable var _length: Int = 0
 
@@ -142,8 +142,8 @@ end
 
 # Resizeable one dimention array of objects.
 class AbstractArray[E]
-special AbstractArrayRead[E]
-special Sequence[E]
+	super AbstractArrayRead[E]
+	super Sequence[E]
 	fun enlarge(cap: Int) is abstract
 
 	redef fun push(item) do add(item)
@@ -226,8 +226,8 @@ end
 #     a.push(32)
 #     a.push(8)
 class Array[E]
-special AbstractArray[E]
-special ArrayCapable[E]
+	super AbstractArray[E]
+	super ArrayCapable[E]
 	redef fun iterate
 		!each(e: E)
 	do
@@ -391,7 +391,7 @@ end
 
 # An `Iterator' on `AbstractArray'
 class ArrayIterator[E]
-special IndexedIterator[E]
+	super IndexedIterator[E]
 	redef fun item do return _array[_index]
 
 	# redef fun item=(e) do _array[_index] = e
@@ -414,7 +414,7 @@ end
 
 # A set implemented with an Array.
 class ArraySet[E: Object]
-special Set[E]
+	super Set[E]
 	# The stored elements.
 	var _array: Array[E]
 
@@ -462,7 +462,7 @@ end
 
 # Iterators on sets implemented with arrays.
 class ArraySetIterator[E: Object]
-special Iterator[E]
+	super Iterator[E]
 
 	redef fun is_ok do return _iter.is_ok
 
@@ -478,7 +478,7 @@ end
 
 # Associative arrays implemented with an array of (key, value) pairs.
 class ArrayMap[K: Object, E]
-special CoupleMap[K, E]
+	super CoupleMap[K, E]
 
 	# O(n)
 	redef fun [](key)

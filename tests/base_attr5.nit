@@ -30,7 +30,7 @@ class A
 end
 
 class B
-special A
+	super A
 	#alt1#var foo: Int = 10
 	#alt2#redef var foo: Int = 10
 	#alt3#var foo: Int writable = 10

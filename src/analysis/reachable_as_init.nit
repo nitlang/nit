@@ -51,7 +51,7 @@ end
 
 # Default behavior is to say that all initializers are called as init
 class DefaultReachableAsInitAnalysis
-special ReachableAsInitAnalysis
+	super ReachableAsInitAnalysis
 	redef fun is_method_reachable_as_init(method: MMMethod, c: MMLocalClass): Bool do
 		if method.global.is_init and method.global.is_init_for(c) then return true
 		return false

@@ -136,7 +136,7 @@ end
 
 # Root of a variable context hierarchy
 class RootFlowContext
-special FlowContext
+	super FlowContext
 	init(visitor: AbsSyntaxVisitor, node: ANode)
 	do
 		super(visitor, node)
@@ -145,7 +145,7 @@ end
 
 # Contexts that are an evolution of a single previous context
 class SubFlowContext
-special FlowContext
+	super FlowContext
 	readable var _prev: FlowContext
 
 	redef fun is_set(v)
@@ -167,7 +167,7 @@ end
 
 # A variable context where a variable got a type adptation
 class CastFlowContext
-special SubFlowContext
+	super SubFlowContext
 	# The casted variable
 	var _variable: Variable
 
@@ -194,7 +194,7 @@ end
 # Context that resulting from the combinaisons of other contexts.
 # Most of the merge computation are done lasily.
 class MergeFlowContext
-special FlowContext
+	super FlowContext
 	var _base: FlowContext
 	var _alts: Array[FlowContext]
 

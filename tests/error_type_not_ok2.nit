@@ -18,6 +18,6 @@
 #alt1#end
 
 class B
-special Array[Fail]
+	super Array[Fail]
 end
 

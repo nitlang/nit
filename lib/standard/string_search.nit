@@ -63,7 +63,7 @@ end
 # Communications of the Association for Computing Machinery, 20(10), 1977, pp. 762-772.)
 # see also http://www.cs.utexas.edu/users/moore/best-ideas/string-searching/index.html
 class BM_Pattern
-special Pattern 
+	super Pattern
 	redef fun to_s do return _motif
 
 	# boyer-moore search gives the position of the first occurence of a pattern starting at position `from'
@@ -230,7 +230,7 @@ class Match
 end
 
 redef class Char
-special Pattern
+	super Pattern
 	redef fun search_index_in(s, from)
 	do
 		var stop = s.length
@@ -253,7 +253,7 @@ special Pattern
 end
 
 redef class String
-special Pattern
+	super Pattern
 	redef fun search_index_in(s, from)
 	do
 		assert from >= 0

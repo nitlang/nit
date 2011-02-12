@@ -35,7 +35,7 @@ interface Inline__
 end
 
 class A
-special Inline__
+	super Inline__
 end
 
 var a: A = new A

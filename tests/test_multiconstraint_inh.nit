@@ -24,7 +24,7 @@ class I[F]
 end
 
 class J
-special I[A]
+	super I[A]
    fun bar do 2.output end
 
 	init do end
@@ -35,7 +35,7 @@ class G[E]
 end
 
 class H[F]
-special G[A]
+	super G[A]
    redef fun baz(e: J) do e.bar end
 
    init do end

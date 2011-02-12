@@ -50,8 +50,8 @@ end
 
 # File Abstract Stream
 class FStream
-special IOS
-special NativeFileCapable
+	super IOS
+	super NativeFileCapable
 	# The path of the file.
 	readable var _path: nullable String = null
 
@@ -64,8 +64,8 @@ end
 
 # File input stream
 class IFStream
-special FStream
-special BufferedIStream
+	super FStream
+	super BufferedIStream
 	# Misc
 
 	fun reopen
@@ -113,8 +113,8 @@ end
 
 # File output stream
 class OFStream
-special FStream
-special OStream
+	super FStream
+	super OStream
 	
 	# Write a string.
 	redef fun write(s)
@@ -161,7 +161,7 @@ end
 ###############################################################################
 
 class Stdin
-special IFStream
+	super IFStream
 	private init do
 		_file = native_stdin
 		_path = "/dev/stdin"
@@ -170,7 +170,7 @@ special IFStream
 end
 
 class Stdout
-special OFStream
+	super OFStream
 	private init do
 		_file = native_stdout
 		_path = "/dev/stdout"
@@ -179,7 +179,7 @@ special OFStream
 end
 
 class Stderr
-special OFStream
+	super OFStream
 	private init do
 		_file = native_stderr
 		_path = "/dev/stderr"
@@ -262,7 +262,7 @@ redef class NativeString
 end
 
 universal FileStat
-special Pointer
+	super Pointer
 # This class is system dependent ... must reify the vfs
 	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
 	fun atime: Int is extern "file_FileStat_FileStat_atime_0"
@@ -273,7 +273,7 @@ end
 
 # Instance of this class are standard FILE * pointers
 private universal NativeFile
-special Pointer
+	super Pointer
 	fun io_read(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_read_2"
 	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"

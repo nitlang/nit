@@ -25,7 +25,7 @@ private import syntax
 
 # The main class of the nitcompiler program
 class NitCompiler
-special AbstractCompiler
+	super AbstractCompiler
 	readable var _opt_output: OptionString = new OptionString("Output file", "-o", "--output")
 	readable var _opt_boost: OptionBool = new OptionBool("Optimize compilation", "-O", "--boost")
 	readable var _opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")

@@ -20,7 +20,7 @@ package test_parser
 import parser
 
 class PrintTreeVisitor
-special Visitor
+	super Visitor
 	var _rank: Int
 	redef fun visit(n: nullable ANode)
 	do

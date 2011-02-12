@@ -19,6 +19,6 @@ fun toto: Int do return 1 end
 end
 
 class B
-special A
+	super A
 redef fun toto: Char do return 'a' end
 end

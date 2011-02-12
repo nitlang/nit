@@ -11,8 +11,8 @@
 # another product.
 
 class DummyArray
-special Set[Int]
-special ArrayCapable[Int]
+	super Set[Int]
+	super ArrayCapable[Int]
 	var _capacity: Int 
 	redef readable var _length: Int 
 	var _keys: NativeArray[Int]
@@ -85,7 +85,7 @@ special ArrayCapable[Int]
 end
 
 class DummyIterator
-special Iterator[Int]
+	super Iterator[Int]
 	var _array: DummyArray
 	var _pos: Int
 

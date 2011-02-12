@@ -35,7 +35,7 @@ interface Inline__
 end
 
 class A
-special Inline__
+	super Inline__
 end
 
 fun test1

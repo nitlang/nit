@@ -33,7 +33,7 @@ private class State
 end
 
 class Parser
-special TablesCapable
+	super TablesCapable
 	# Associated lexer
 	var _lexer: Lexer
 
@@ -185,7 +185,7 @@ end
 # Find location of production nodes
 # Uses existing token locations to infer location of productions.
 private class ComputeProdLocationVisitor
-special Visitor
+	super Visitor
 	# Currenlty visited productions that need a first token
 	var _need_first_prods: Array[Prod] = new Array[Prod]
 
@@ -282,7 +282,7 @@ end
 
 $ foreach {rules/rule}
 private class ReduceAction@index
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null

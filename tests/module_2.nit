@@ -34,7 +34,7 @@ end
 # B is class 4
 
 class C # class 5
-special B
+	super B
    redef fun all25
    do
 	   print(250)

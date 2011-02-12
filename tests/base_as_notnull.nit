@@ -23,7 +23,7 @@ class A
 end
 
 class B
-special A
+	super A
 end
 
 fun outa(a: A) do a.output

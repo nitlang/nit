@@ -16,7 +16,7 @@
 
 
 class BackIntSorter
-special AbstractSorter[Int]
+	super AbstractSorter[Int]
 	redef fun compare(a: Int, b: Int): Int
 	do
 		return b <=> a
@@ -26,7 +26,7 @@ special AbstractSorter[Int]
 end
 
 class DecimalSorter
-special AbstractSorter[Int]
+	super AbstractSorter[Int]
 	redef fun compare(a: Int, b: Int): Int
 	do
 		return (a%10) <=> (b%10)

@@ -26,7 +26,7 @@ class A
 end
 
 class B
-special A
+	super A
 	redef type T: B
 	redef type U: Int
 	redef fun foo(a: T) do a.out
@@ -38,7 +38,7 @@ special A
 end
 
 redef class Int
-special B
+	super B
 	redef type T: Int
 	redef fun foo(a: T) do a.out
 	redef fun bar(b: U) do b.out

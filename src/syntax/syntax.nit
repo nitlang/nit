@@ -25,7 +25,7 @@ import icode_generation
 
 # Loader of nit source files
 class SrcModuleLoader
-special ModuleLoader
+	super ModuleLoader
 	redef type MODULE: MMSrcModule
 
 	redef fun file_type do return "nit"

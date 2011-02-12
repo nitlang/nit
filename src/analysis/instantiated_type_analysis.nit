@@ -63,7 +63,7 @@ end
 
 # Default behavior is to say that all types are instantiated
 class DefaultInstantiatedTypeAnalysis
-special InstantiatedTypeAnalysis
+	super InstantiatedTypeAnalysis
 	redef fun is_class_instantiated(local_class: MMLocalClass): Bool do return true
 
 	init do end

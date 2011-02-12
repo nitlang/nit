@@ -21,7 +21,7 @@ class A
 end
 
 class B
-special A
+	super A
 	fun unreasheable
 	do
 		var a: A
@@ -32,7 +32,7 @@ special A
 end
 
 class C
-special A
+	super A
 	init do end
 end
 

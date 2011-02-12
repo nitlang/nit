@@ -24,7 +24,7 @@ private import primitive_info
 
 # An AST2ICode context stores the currently built icode informations
 class A2IContext
-special ICodeBuilder
+	super ICodeBuilder
 	redef fun stmt(s: ICode)
 	do
 		if _current_node != null then
@@ -279,7 +279,7 @@ redef class MMImplicitInit
 end
 
 class A2IVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	writable var _icode_ctx: nullable A2IContext
 	fun icode_ctx: A2IContext do return _icode_ctx.as(not null)
 	redef fun visit(n) do n.accept_icode_generation(self)

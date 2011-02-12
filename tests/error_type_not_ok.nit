@@ -18,6 +18,6 @@
 #alt1#end
 
 class A
-special Fail
+	super Fail
 end
 

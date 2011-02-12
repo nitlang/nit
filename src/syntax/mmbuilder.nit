@@ -23,7 +23,7 @@ import syntax_base
 
 # Class specialization hierarchy sorter
 private class CSHSorter
-special AbstractSorter[MMLocalClass]
+	super AbstractSorter[MMLocalClass]
 	redef fun compare(a, b)
 	do
 		return a.cshe.rank <=> b.cshe.rank
@@ -311,7 +311,7 @@ end
 
 # Concrete NIT class specialization relation
 class MMSrcAncestor
-special MMAncestor
+	super MMAncestor
 	redef readable var _local_class: MMLocalClass
 
 	init(c: MMLocalClass)
@@ -326,7 +326,7 @@ end
 # * Build the classes and attach them to global classes
 # * Collect generic formal parameters.
 private class ClassBuilderVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	# Current class arity
 	readable writable var _local_class_arity: Int = 0
 
@@ -340,7 +340,7 @@ end
 # Another pass visitor for syntax analysis.
 # * Build ancertors (with only class informations not the type one)
 private class ClassSpecializationBuilderVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	redef fun visit(n) do n.accept_class_specialization_builder(self)
 	init(tc, m) do super
 end
@@ -348,7 +348,7 @@ end
 # Another pass visitor for syntax analysis.
 # * Compute types in ancestors
 private class ClassAncestorBuilder
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	redef fun visit(n) do n.accept_class_ancestor_builder(self)
 	init(tc, m) do super
 end
@@ -356,7 +356,7 @@ end
 # Another pass visitor for syntax analysis.
 # * Checks classes in regard to superclasses
 private class ClassVerifierVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	redef fun visit(n) do n.accept_class_verifier(self)
 	init(tc, m) do super
 end
@@ -367,7 +367,7 @@ end
 # * Build local properties and attache them to global properties
 # * Attach bound to formal types
 private class PropertyBuilderVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	redef fun visit(n) do n.accept_property_builder(self)
 	init(tc, m) do super
 end
@@ -375,7 +375,7 @@ end
 # Another pass pass visitor for syntax analysis.
 # * Check property conformance
 private class PropertyVerifierVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 
 	# The signature currently build
 	readable writable var _signature_builder: SignatureBuilder
@@ -1114,7 +1114,7 @@ end
 
 # Visitor used to build a full method name from multiple tokens
 private class MethidAccumulator
-special Visitor
+	super Visitor
 	readable var _name: Buffer = new Buffer
 	redef fun visit(n)
 	do

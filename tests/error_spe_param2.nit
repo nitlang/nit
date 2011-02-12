@@ -20,6 +20,6 @@ fun toto(i: Int) do end
 end
 
 class B
-special A
+	super A
 redef fun toto(c: Char) do end
 end

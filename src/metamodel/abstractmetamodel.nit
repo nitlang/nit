@@ -649,12 +649,12 @@ end
 
 # Attribute local properties
 class MMAttribute
-special MMLocalProperty
+	super MMLocalProperty
 end
 
 # Method local properties
 class MMMethod
-special MMLocalProperty
+	super MMLocalProperty
 	# Is the method defined with intern
 	fun is_intern: Bool is abstract
 
@@ -667,6 +667,6 @@ end
 
 # Concrete local classes
 class MMConcreteClass
-special MMLocalClass
+	super MMLocalClass
 end
 

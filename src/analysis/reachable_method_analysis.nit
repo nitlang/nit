@@ -57,7 +57,7 @@ end
 
 # Default behavior is to say that all methods/iroutines are reachable
 class DefaultReachableMethodAnalysis
-special ReachableMethodAnalysis
+	super ReachableMethodAnalysis
 	redef fun is_iroutine_reachable(ir: nullable IRoutine): Bool do return true
 	redef fun is_method_reachable(method: MMMethod): Bool do return true
 
