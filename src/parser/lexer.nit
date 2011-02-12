@@ -1654,9 +1654,7 @@ special TablesCapable
 					end
 				end
 			end
-			if false then break # FIXME remove once unreach loop exits are in c_src
 		end
-		return null # FIXME remove once unreach loop exits are in c_src
 	end
 
 	# Read the next character.

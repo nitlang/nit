@@ -122,7 +122,7 @@ special TablesCapable
 				else
 					action_type = parser_action(state, subindex+1)
 					action_value = parser_action(state, subindex+2)
-					high = low -1 # break
+					break
 				end
 			end
 
@@ -143,9 +143,7 @@ special TablesCapable
 				var node = new Start(null, node2)
 				return node
 			end
-			if false then break # FIXME remove once unreach loop exits are in c_src
 		end
-		abort # FIXME remove once unreach loop exits are in c_src
 	end
 
 	var _reduce_table: Array[ReduceAction]
