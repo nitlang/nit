@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Package containing all bases for the reachable from init method analysis
+# Module containing all bases for the reachable from init method analysis
 package reachable_from_init_method_analysis
 
 import icode
@@ -61,7 +61,7 @@ end
 # Default behavior is to say that all methods/iroutines are reachable
 # from at least one init
 class DefaultReachableFromInitMethodAnalysis
-special ReachableFromInitMethodAnalysis
+	super ReachableFromInitMethodAnalysis
 	redef fun is_iroutine_reachable_from_init(ir: nullable IRoutine): Bool do return true
 	redef fun is_method_reachable_from_init(method: MMMethod): Bool do return true
 

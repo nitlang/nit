@@ -105,7 +105,7 @@ redef class MMTypeSimpleClass
 end
 
 class MMTypeGeneric
-special MMTypeClass
+	super MMTypeClass
 	# Formal arguments
 	readable var _params: Array[MMType] 
 
@@ -194,7 +194,7 @@ special MMTypeClass
 end
 
 class MMTypeFormalParameter
-special MMTypeFormal
+	super MMTypeFormal
 	# The class where self is defined
 	readable var _def_class: MMLocalClass 
 

@@ -22,7 +22,7 @@ class A
 end
 
 class B
-special A
+	super A
 	redef fun foo: Int do return super + 10
 	redef fun bar=(i: Int)
 	do

@@ -20,11 +20,11 @@ interface Object
 	fun output is abstract
 end
 
-universal Int
+enum Int
 	redef fun output is intern
 end
 
-universal Bool
+enum Bool
 	redef fun output is intern
 end
 

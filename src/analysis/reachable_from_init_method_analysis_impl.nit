@@ -49,7 +49,7 @@ class RFIMABuilder
 end
 
 class RFIMAContext
-special ReachableFromInitMethodAnalysis
+	super ReachableFromInitMethodAnalysis
 	readable var _reachable_from_init_iroutines: HashSet[IRoutine] = new HashSet[IRoutine]
 
 	redef fun is_iroutine_reachable_from_init(ir: nullable IRoutine): Bool do
@@ -62,7 +62,7 @@ special ReachableFromInitMethodAnalysis
 end
 
 class RFIMAVisitor
-special ICodeVisitor
+	super ICodeVisitor
 	readable var _context: RFIMAContext
 	readable var _program: Program
 

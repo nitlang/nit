@@ -79,7 +79,7 @@ end
 # Naive implementation of collections method
 # You only have to define iterator!
 interface NaiveCollection[E]
-special Collection[E]
+	super Collection[E]
 	redef fun is_empty do return length == 0
 
 	redef fun length
@@ -132,7 +132,7 @@ end
 
 # A collection that contains only one item.
 class Container[E]
-special Collection[E]
+	super Collection[E]
 
 	redef fun first do return _item
 
@@ -164,7 +164,7 @@ end
 
 # This iterator is quite stupid since it is used for only one item.
 class ContainerIterator[E]
-special Iterator[E]
+	super Iterator[E]
 	redef fun item do return _container.item
 
 	redef fun next do _is_ok = false
@@ -178,7 +178,7 @@ end
 
 # Items can be removed from this collection
 interface RemovableCollection[E]
-special Collection[E]
+	super Collection[E]
 	# Remove all items
 	fun clear is abstract
 
@@ -191,7 +191,7 @@ end
 
 # Items can be added to these collections.
 interface SimpleCollection[E]
-special RemovableCollection[E]
+	super RemovableCollection[E]
 	# Add an item in a collection.
 	# Ensure col.has(item)
 	fun add(item: E) is abstract
@@ -210,7 +210,7 @@ end
 #    s.add(a)
 #    s.has(b) # --> true
 interface Set[E: Object]
-special SimpleCollection[E]
+	super SimpleCollection[E]
 
 	redef fun has_only(item)
 	do
@@ -239,7 +239,7 @@ special SimpleCollection[E]
 end
 
 interface MapRead[K: Object, E]
-special Collection[E]
+	super Collection[E]
 	# Get the item at `key'.
 	fun [](key: K): E is abstract
 
@@ -262,8 +262,8 @@ end
 #     map.has_key(u1)    # -> true
 #     map.has_key(u3)    # -> false
 interface Map[K: Object, E]
-special RemovableCollection[E]
-special MapRead[K, E]
+	super RemovableCollection[E]
+	super MapRead[K, E]
 	# Set the`item' at `key'.
 	fun []=(key: K, item: E) is abstract
 
@@ -284,7 +284,7 @@ end
 
 # Iterators for Map.
 interface MapIterator[K: Object, E]
-special Iterator[E]
+	super Iterator[E]
 	# The key of the current item.
 	fun key: K is abstract
 
@@ -295,7 +295,7 @@ end
 # Indexed collection are ordoned collections.
 # The first item is 0. The last is `length'-1.
 interface SequenceRead[E]
-special MapRead[Int, E]
+	super MapRead[Int, E]
 	# Get the first item.
 	# Is equivalent with `self'[0].
 	redef fun first
@@ -330,9 +330,9 @@ end
 # Indexed collection are ordoned collections.
 # The first item is 0. The last is `length'-1.
 interface Sequence[E]
-special SequenceRead[E]
-special Map[Int, E]
-special SimpleCollection[E]
+	super SequenceRead[E]
+	super Map[Int, E]
+	super SimpleCollection[E]
 	# Set the first item.
 	# Is equivalent with `self'[0] = `item'.
 	fun first=(item: E)
@@ -373,7 +373,7 @@ end
 
 # Iterators on indexed collections.
 interface IndexedIterator[E]
-special MapIterator[Int, E]
+	super MapIterator[Int, E]
 	# The index of the current item.
 	fun index: Int is abstract
 
@@ -383,7 +383,7 @@ end
 
 # Associatives arrays that internally uses couples to represent each (key, value) pairs.
 interface CoupleMap[K: Object, E]
-special Map[K, E]
+	super Map[K, E]
 	# Return the couple of the corresponding key
 	# Return null if the key is no associated element
 	protected fun couple_at(key: K): nullable Couple[K, E] is abstract
@@ -405,7 +405,7 @@ end
 #
 # Actually is is a wrapper around an iterator of the internal array of the map.
 class CoupleMapIterator[K: Object, E]
-special MapIterator[K, E]
+	super MapIterator[K, E]
 	redef fun item do return _iter.item.second
 	
 	#redef fun item=(e) do _iter.item.second = e

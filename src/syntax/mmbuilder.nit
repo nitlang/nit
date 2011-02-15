@@ -23,7 +23,7 @@ import syntax_base
 
 # Class specialization hierarchy sorter
 private class CSHSorter
-special AbstractSorter[MMLocalClass]
+	super AbstractSorter[MMLocalClass]
 	redef fun compare(a, b)
 	do
 		return a.cshe.rank <=> b.cshe.rank
@@ -97,7 +97,7 @@ redef class MMSrcModule
 			c.accept_class_visitor(mmbv2)
 
 			# Default and inherited constructor if needed
-			if c isa MMSrcLocalClass and c.global.intro == c and not c.global.is_universal and not c.global.is_interface then
+			if c isa MMSrcLocalClass and c.global.intro == c and not c.global.is_enum and not c.global.is_interface then
 				c.process_default_constructors(mmbv2)
 			end
 
@@ -183,7 +183,7 @@ redef class MMSrcLocalClass
 		var super_inits = new ArraySet[MMLocalProperty]
 		var super_constructors = new ArraySet[MMGlobalProperty]
 		for sc in che.direct_greaters do
-			if sc.global.is_universal or sc.global.is_interface then continue
+			if sc.global.is_enum or sc.global.is_interface then continue
 			for gp in sc.global_properties do
 				if not gp.is_init then continue
 				super_constructors.add(gp)
@@ -311,7 +311,7 @@ end
 
 # Concrete NIT class specialization relation
 class MMSrcAncestor
-special MMAncestor
+	super MMAncestor
 	redef readable var _local_class: MMLocalClass
 
 	init(c: MMLocalClass)
@@ -326,7 +326,7 @@ end
 # * Build the classes and attach them to global classes
 # * Collect generic formal parameters.
 private class ClassBuilderVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	# Current class arity
 	readable writable var _local_class_arity: Int = 0
 
@@ -340,7 +340,7 @@ end
 # Another pass visitor for syntax analysis.
 # * Build ancertors (with only class informations not the type one)
 private class ClassSpecializationBuilderVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	redef fun visit(n) do n.accept_class_specialization_builder(self)
 	init(tc, m) do super
 end
@@ -348,7 +348,7 @@ end
 # Another pass visitor for syntax analysis.
 # * Compute types in ancestors
 private class ClassAncestorBuilder
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	redef fun visit(n) do n.accept_class_ancestor_builder(self)
 	init(tc, m) do super
 end
@@ -356,7 +356,7 @@ end
 # Another pass visitor for syntax analysis.
 # * Checks classes in regard to superclasses
 private class ClassVerifierVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	redef fun visit(n) do n.accept_class_verifier(self)
 	init(tc, m) do super
 end
@@ -367,7 +367,7 @@ end
 # * Build local properties and attache them to global properties
 # * Attach bound to formal types
 private class PropertyBuilderVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	redef fun visit(n) do n.accept_property_builder(self)
 	init(tc, m) do super
 end
@@ -375,7 +375,7 @@ end
 # Another pass pass visitor for syntax analysis.
 # * Check property conformance
 private class PropertyVerifierVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 
 	# The signature currently build
 	readable writable var _signature_builder: SignatureBuilder
@@ -462,7 +462,7 @@ redef class AModuledecl
 	redef fun accept_class_builder(v)
 	do
 		if n_id.to_symbol != v.mmmodule.name then
-			v.error(n_id, "Error: Package name missmatch between {v.mmmodule.name} and {n_id.to_symbol}")
+			v.error(n_id, "Error: Module name missmatch between {v.mmmodule.name} and {n_id.to_symbol}")
 		end
 	end
 end
@@ -569,15 +569,15 @@ end
 
 redef class AClasskind
 	fun is_interface: Bool do return false
-	fun is_universal: Bool do return false
+	fun is_enum: Bool do return false
 	fun is_abstract: Bool do return false
 end
 
 redef class AInterfaceClasskind
 	redef fun is_interface do return true
 end
-redef class AUniversalClasskind
-	redef fun is_universal do return true
+redef class AEnumClasskind
+	redef fun is_enum do return true
 end
 redef class AAbstractClasskind
 	redef fun is_abstract do return true
@@ -601,7 +601,7 @@ redef class AStdClassdef
 			glob.visibility_level = visibility_level
 			glob.is_interface = n_classkind.is_interface
 			glob.is_abstract = n_classkind.is_abstract
-			glob.is_universal = n_classkind.is_universal
+			glob.is_enum = n_classkind.is_enum
 			if n_kwredef != null then
 				v.error(self, "Redef error: No class {name} is imported. Remove the redef keyword to define a new class.")
 			end
@@ -609,18 +609,18 @@ redef class AStdClassdef
 			for c in _local_class.cshe.direct_greaters do
 				var cg = c.global
 				if glob.is_interface then
-					if cg.is_universal then
-						v.error(self, "Special error: Interface {name} try to specialise universal class {c.name}.")
+					if cg.is_enum then
+						v.error(self, "Special error: Interface {name} try to specialise enum class {c.name}.")
 					else if not cg.is_interface then
 						v.error(self, "Special error: Interface {name} try to specialise class {c.name}.")
 					end
-				else if glob.is_universal then
-					if not cg.is_interface and not cg.is_universal then
-						v.error(self, "Special error: Universal class {name} try to specialise class {c.name}.")
+				else if glob.is_enum then
+					if not cg.is_interface and not cg.is_enum then
+						v.error(self, "Special error: Enum class {name} try to specialise class {c.name}.")
 					end
 				else
-					if cg.is_universal then
-						v.error(self, "Special error: Class {name} try to specialise universal class {c.name}.")
+					if cg.is_enum then
+						v.error(self, "Special error: Class {name} try to specialise enum class {c.name}.")
 					end
 				end
 
@@ -643,7 +643,7 @@ redef class AStdClassdef
 		if 
 			not glob.is_interface and n_classkind.is_interface or
 			not glob.is_abstract and n_classkind.is_abstract or
-			not glob.is_universal and n_classkind.is_universal
+			not glob.is_enum and n_classkind.is_enum
 		then
 			v.error(self, "Redef error: cannot change kind of class {name}.")
 		end
@@ -772,14 +772,14 @@ redef class APropdef
 		if glob.is_attribute then
 			if gbc.is_interface then
 				v.error(self, "Error: Attempt to define attribute {prop} in the interface {prop.local_class}.")
-			else if gbc.is_universal then
-				v.error(self, "Error: Attempt to define attribute {prop} in the universal class {prop.local_class}.")
+			else if gbc.is_enum then
+				v.error(self, "Error: Attempt to define attribute {prop} in the enum class {prop.local_class}.")
 			end
 		else if glob.is_init then
 			if gbc.is_interface then
 				v.error(self, "Error: Attempt to define a constructor {prop} in the class {prop.local_class}.")
-			else if gbc.is_universal then
-				v.error(self, "Error: Attempt to define a constructor {prop} in the universal {prop.local_class}.")
+			else if gbc.is_enum then
+				v.error(self, "Error: Attempt to define a constructor {prop} in the enum {prop.local_class}.")
 			end
 		end
 		if prop.signature == null then
@@ -1114,7 +1114,7 @@ end
 
 # Visitor used to build a full method name from multiple tokens
 private class MethidAccumulator
-special Visitor
+	super Visitor
 	readable var _name: Buffer = new Buffer
 	redef fun visit(n)
 	do

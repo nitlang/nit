@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Package containing all bases for the reachable from init method analysis
+# Module containing all bases for the reachable from init method analysis
 package reachable_as_init
 
 import icode
@@ -51,7 +51,7 @@ end
 
 # Default behavior is to say that all initializers are called as init
 class DefaultReachableAsInitAnalysis
-special ReachableAsInitAnalysis
+	super ReachableAsInitAnalysis
 	redef fun is_method_reachable_as_init(method: MMMethod, c: MMLocalClass): Bool do
 		if method.global.is_init and method.global.is_init_for(c) then return true
 		return false

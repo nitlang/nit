@@ -52,7 +52,7 @@ class A
 end
 
 class B
-special A
+	super A
 	redef fun val: Int
 	do
 		return 1
@@ -64,7 +64,7 @@ special A
 end
 
 class C
-special A
+	super A
 	redef fun val: Int
 	do
 		return 2
@@ -76,7 +76,7 @@ special A
 end
 
 class D
-special A
+	super A
 	redef fun val: Int
 	do
 		return 3

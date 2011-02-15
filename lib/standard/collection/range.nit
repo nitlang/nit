@@ -17,7 +17,7 @@ import abstract_collection
 
 # Range of discrete objects. 
 class Range[E: Discrete]
-special Collection[E]
+	super Collection[E]
 
 	redef readable var _first: E
 
@@ -86,7 +86,7 @@ end
 
 class IteratorRange[E: Discrete]
 	# Iterator on ranges.
-special Iterator[E]
+	super Iterator[E]
 	var _range: Range[E]	
 	redef readable var _item: E
 

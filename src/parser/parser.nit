@@ -20,7 +20,7 @@ private class State
 end
 
 class Parser
-special TablesCapable
+	super TablesCapable
 	# Associated lexer
 	var _lexer: Lexer
 
@@ -860,7 +860,7 @@ end
 # Find location of production nodes
 # Uses existing token locations to infer location of productions.
 private class ComputeProdLocationVisitor
-special Visitor
+	super Visitor
 	# Currenlty visited productions that need a first token
 	var _need_first_prods: Array[Prod] = new Array[Prod]
 
@@ -956,7 +956,7 @@ private abstract class ReduceAction
 end
 
 private class ReduceAction0
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -974,7 +974,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction1
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -995,7 +995,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction2
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1017,7 +1017,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction3
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1042,7 +1042,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction4
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1064,7 +1064,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction5
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1089,7 +1089,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction6
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1115,7 +1115,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction7
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1144,7 +1144,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction8
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1173,7 +1173,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction9
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1205,7 +1205,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction10
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1238,7 +1238,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction11
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1274,7 +1274,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction12
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1307,7 +1307,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction13
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1343,7 +1343,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction14
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1380,7 +1380,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction15
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1420,7 +1420,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction16
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1444,7 +1444,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction17
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1471,7 +1471,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction18
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1499,7 +1499,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction19
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1530,7 +1530,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction20
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1558,7 +1558,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction21
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1589,7 +1589,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction22
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1621,7 +1621,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction23
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1656,7 +1656,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction24
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1691,7 +1691,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction25
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1729,7 +1729,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction26
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1768,7 +1768,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction27
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1810,7 +1810,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction28
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1849,7 +1849,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction29
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1891,7 +1891,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction30
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1934,7 +1934,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction31
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -1980,7 +1980,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction32
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2007,7 +2007,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction33
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2035,7 +2035,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction34
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2063,7 +2063,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction35
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2084,7 +2084,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction36
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2096,7 +2096,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction37
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2115,7 +2115,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction39
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2154,7 +2154,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction40
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2196,7 +2196,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction41
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2239,7 +2239,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction42
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2285,7 +2285,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction43
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2328,7 +2328,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction44
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2374,7 +2374,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction45
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2421,7 +2421,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction46
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2471,7 +2471,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction47
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2514,7 +2514,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction48
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2560,7 +2560,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction49
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2607,7 +2607,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction50
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2657,7 +2657,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction51
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2704,7 +2704,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction52
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2754,7 +2754,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction53
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2805,7 +2805,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction54
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2859,7 +2859,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction55
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2876,7 +2876,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction56
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2897,7 +2897,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction57
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2914,15 +2914,15 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction58
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					var tkwuniversalnode2 = nodearraylist1
-					assert tkwuniversalnode2 isa nullable TKwuniversal
-					var pclasskindnode1: nullable AUniversalClasskind = new AUniversalClasskind.init_auniversalclasskind(
-						tkwuniversalnode2
+					var tkwenumnode2 = nodearraylist1
+					assert tkwenumnode2 isa nullable TKwenum
+					var pclasskindnode1: nullable AEnumClasskind = new AEnumClasskind.init_aenumclasskind(
+						tkwenumnode2
 					)
 					node_list = pclasskindnode1
 					p.push(p.go_to(_goto), node_list)
@@ -2931,7 +2931,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction59
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2952,7 +2952,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction60
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2977,7 +2977,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction61
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -2992,7 +2992,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction62
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3010,7 +3010,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction63
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3031,7 +3031,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction64
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3055,7 +3055,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction65
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3079,7 +3079,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction66
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3093,7 +3093,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction67
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3132,7 +3132,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction68
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3174,7 +3174,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction69
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3214,7 +3214,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction70
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3257,7 +3257,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction71
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3297,7 +3297,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction72
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3340,7 +3340,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction73
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3376,7 +3376,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction74
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3415,7 +3415,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction75
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3451,7 +3451,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction76
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3490,7 +3490,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction77
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3527,7 +3527,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction78
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3567,7 +3567,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction79
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3607,7 +3607,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction80
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3650,7 +3650,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction81
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3685,7 +3685,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction82
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3723,7 +3723,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction83
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3761,7 +3761,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction84
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3802,7 +3802,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction85
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3840,7 +3840,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction86
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3881,7 +3881,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction87
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3922,7 +3922,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction88
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -3966,7 +3966,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction89
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4004,7 +4004,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction90
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4045,7 +4045,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction91
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4086,7 +4086,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction92
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4130,7 +4130,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction93
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4171,7 +4171,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction94
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4215,7 +4215,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction95
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4259,7 +4259,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction96
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4306,7 +4306,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction97
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4346,7 +4346,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction98
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4389,7 +4389,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction99
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4432,7 +4432,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction100
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4478,7 +4478,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction101
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4521,7 +4521,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction102
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4567,7 +4567,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction103
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4613,7 +4613,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction104
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4662,7 +4662,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction105
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4705,7 +4705,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction106
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4751,7 +4751,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction107
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4797,7 +4797,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction108
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4846,7 +4846,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction109
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4892,7 +4892,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction110
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4941,7 +4941,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction111
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -4990,7 +4990,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction112
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5042,7 +5042,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction113
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5077,7 +5077,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction114
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5115,7 +5115,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction115
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5153,7 +5153,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction116
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5194,7 +5194,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction117
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5232,7 +5232,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction118
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5273,7 +5273,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction119
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5314,7 +5314,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction120
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5358,7 +5358,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction121
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5398,7 +5398,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction122
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5441,7 +5441,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction123
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5484,7 +5484,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction124
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5530,7 +5530,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction125
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5573,7 +5573,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction126
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5619,7 +5619,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction127
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5665,7 +5665,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction128
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5714,7 +5714,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction129
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5750,7 +5750,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction130
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5789,7 +5789,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction131
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5828,7 +5828,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction132
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5870,7 +5870,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction133
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5907,7 +5907,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction134
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5947,7 +5947,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction135
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -5987,7 +5987,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction136
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6030,7 +6030,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction137
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6064,7 +6064,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction138
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6101,7 +6101,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction139
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6119,7 +6119,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction140
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6140,7 +6140,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction141
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6159,7 +6159,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction142
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6181,7 +6181,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction143
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6203,7 +6203,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction144
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6228,7 +6228,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction145
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6241,7 +6241,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction146
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6259,7 +6259,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction147
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6277,7 +6277,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction148
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6295,7 +6295,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction149
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6312,7 +6312,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction150
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6329,7 +6329,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction151
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6346,7 +6346,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction152
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6363,7 +6363,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction153
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6380,7 +6380,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction154
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6397,7 +6397,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction155
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6414,7 +6414,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction156
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6431,7 +6431,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction157
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6448,7 +6448,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction158
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6465,7 +6465,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction159
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6482,7 +6482,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction160
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6499,7 +6499,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction161
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6516,7 +6516,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction162
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6533,7 +6533,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction163
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6554,7 +6554,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction164
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6571,7 +6571,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction165
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6592,7 +6592,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction166
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6617,7 +6617,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction167
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6642,7 +6642,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction168
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6671,7 +6671,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction169
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6693,7 +6693,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction170
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6719,7 +6719,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction171
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6741,7 +6741,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction172
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6767,7 +6767,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction173
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6786,7 +6786,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction174
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6809,7 +6809,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction175
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6827,7 +6827,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction176
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6849,7 +6849,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction177
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6870,7 +6870,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction178
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6895,7 +6895,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction179
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6916,7 +6916,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction180
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6941,7 +6941,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction181
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6956,7 +6956,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction182
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6971,7 +6971,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction183
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -6990,7 +6990,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction184
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7012,7 +7012,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction185
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7037,7 +7037,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction186
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7054,7 +7054,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction187
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7082,7 +7082,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction188
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7113,7 +7113,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction189
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7145,7 +7145,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction190
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7180,7 +7180,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction191
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7213,7 +7213,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction192
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7249,7 +7249,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction193
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7267,7 +7267,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction194
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7287,7 +7287,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction195
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7310,7 +7310,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction196
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7338,7 +7338,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction197
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7369,7 +7369,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction198
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7386,7 +7386,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction199
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7407,7 +7407,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction200
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7422,7 +7422,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction202
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7437,7 +7437,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction203
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7454,7 +7454,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction204
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7470,7 +7470,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction205
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7483,7 +7483,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction206
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7504,7 +7504,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction207
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7529,7 +7529,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction208
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7551,7 +7551,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction209
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7577,7 +7577,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction210
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7591,7 +7591,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction213
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7609,7 +7609,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction214
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7630,7 +7630,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction215
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7649,7 +7649,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction216
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7671,7 +7671,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction217
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7693,7 +7693,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction218
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7718,7 +7718,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction219
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7735,7 +7735,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction220
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7754,7 +7754,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction221
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7776,7 +7776,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction222
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7798,7 +7798,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction223
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7823,7 +7823,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction230
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7854,7 +7854,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction231
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7882,7 +7882,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction232
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7917,7 +7917,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction233
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7949,7 +7949,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction234
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -7973,7 +7973,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction235
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8000,7 +8000,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction236
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8029,7 +8029,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction237
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8055,7 +8055,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction238
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8076,7 +8076,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction239
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8093,7 +8093,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction240
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8114,7 +8114,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction241
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8149,7 +8149,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction242
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8188,7 +8188,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction243
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8220,7 +8220,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction244
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8256,7 +8256,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction245
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8287,7 +8287,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction246
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8322,7 +8322,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction247
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8355,7 +8355,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction248
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8392,7 +8392,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction249
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8422,7 +8422,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction250
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8456,7 +8456,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction251
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8473,7 +8473,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction252
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8490,7 +8490,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction253
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8509,7 +8509,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction254
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8533,7 +8533,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction255
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8560,7 +8560,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction256
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8591,7 +8591,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction257
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8625,7 +8625,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction258
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8656,7 +8656,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction259
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8684,7 +8684,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction260
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8721,7 +8721,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction261
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8755,7 +8755,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction262
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8786,7 +8786,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction263
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8817,7 +8817,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction264
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8845,7 +8845,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction265
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8882,7 +8882,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction266
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8916,7 +8916,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction267
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8947,7 +8947,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction268
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8964,7 +8964,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction269
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -8981,7 +8981,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction270
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9006,7 +9006,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction271
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9028,7 +9028,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction272
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9061,7 +9061,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction273
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9090,7 +9090,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction274
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9123,7 +9123,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction275
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9152,7 +9152,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction276
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9182,7 +9182,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction279
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9207,7 +9207,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction280
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9229,7 +9229,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction281
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9264,7 +9264,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction282
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9296,7 +9296,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction283
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9338,7 +9338,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction284
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9377,7 +9377,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction285
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9404,7 +9404,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction286
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9434,7 +9434,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction287
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9457,7 +9457,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction288
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9483,7 +9483,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction289
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9497,7 +9497,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction293
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9526,7 +9526,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction295
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9568,7 +9568,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction297
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9591,7 +9591,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction298
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9614,7 +9614,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction299
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9638,7 +9638,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction301
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9660,7 +9660,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction303
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9683,7 +9683,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction304
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9706,7 +9706,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction305
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9729,7 +9729,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction306
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9752,7 +9752,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction307
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9775,7 +9775,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction308
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9798,7 +9798,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction309
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9821,7 +9821,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction310
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9844,7 +9844,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction311
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9867,7 +9867,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction312
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9890,7 +9890,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction313
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9913,7 +9913,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction315
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9936,7 +9936,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction316
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9959,7 +9959,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction318
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -9982,7 +9982,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction319
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10005,7 +10005,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction320
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10028,7 +10028,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction322
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10050,7 +10050,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction323
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10072,7 +10072,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction325
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10101,7 +10101,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction326
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10128,7 +10128,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction327
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10152,7 +10152,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction328
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10175,7 +10175,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction329
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10195,7 +10195,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction336
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10220,7 +10220,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction337
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10254,7 +10254,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction338
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10282,7 +10282,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction339
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10310,7 +10310,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction340
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10329,7 +10329,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction341
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10346,7 +10346,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction342
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10363,7 +10363,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction343
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10380,7 +10380,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction344
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10397,7 +10397,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction345
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10414,7 +10414,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction346
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10431,7 +10431,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction347
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10448,7 +10448,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction348
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10465,7 +10465,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction351
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10497,7 +10497,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction352
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10534,7 +10534,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction353
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10559,7 +10559,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction354
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10588,7 +10588,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction355
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10612,7 +10612,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction356
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10629,7 +10629,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction358
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10646,7 +10646,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction359
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10663,7 +10663,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction360
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10684,7 +10684,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction361
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10709,7 +10709,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction363
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10721,7 +10721,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction366
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10738,7 +10738,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction371
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10754,7 +10754,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction372
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10772,7 +10772,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction373
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10788,7 +10788,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction374
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10805,7 +10805,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction375
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10829,7 +10829,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction376
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10848,7 +10848,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction377
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10871,7 +10871,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction378
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10891,7 +10891,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction379
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10906,7 +10906,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction380
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10921,7 +10921,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction381
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10932,7 +10932,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction383
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10951,7 +10951,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction384
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10971,7 +10971,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction386
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10982,7 +10982,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction387
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -10995,7 +10995,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction388
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11007,7 +11007,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction389
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11020,7 +11020,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction637
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11045,7 +11045,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction638
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11066,7 +11066,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction639
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11095,7 +11095,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction642
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11122,7 +11122,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction655
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11137,7 +11137,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction656
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11150,7 +11150,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction663
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11167,7 +11167,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction664
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11188,7 +11188,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction665
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11205,7 +11205,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction666
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11226,7 +11226,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction667
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11243,7 +11243,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction668
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11264,7 +11264,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction669
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11281,7 +11281,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction670
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11302,7 +11302,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction673
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11319,7 +11319,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction674
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11340,7 +11340,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction675
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11357,7 +11357,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction676
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11378,7 +11378,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction677
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11395,7 +11395,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction678
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11416,7 +11416,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction680
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11437,7 +11437,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction682
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11458,7 +11458,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction684
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11478,7 +11478,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction688
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11499,7 +11499,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction689
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11516,7 +11516,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction690
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11537,7 +11537,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction691
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
@@ -11554,7 +11554,7 @@ special ReduceAction
 	init(g: Int) do _goto = g
 end
 private class ReduceAction692
-special ReduceAction
+	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null

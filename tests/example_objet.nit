@@ -305,7 +305,7 @@ private
 end
 
 class RayonNormal
-special Rayon
+	super Rayon
 
 	init(r: String)
 	do
@@ -317,7 +317,7 @@ end
 class RayonFroid
 # Les super-classes sont déclarés avec le mot clé "special".
 # Implicitement, c'est "Object", la classe de tous les objets.
-special Rayon
+	super Rayon
 
 # Tant qu'on parle d'implicite, en l'absence de bloc de propriétés,
 # celles-ci sont déclarées en tant que "public"

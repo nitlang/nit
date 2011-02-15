@@ -118,7 +118,7 @@ end
 
 # A writer node that contains a full writer
 private class WriterCoreNode
-special WriterNode
+	super WriterNode
 	var _writer: Writer
 
 	redef fun internal_write_to_stream(s) do _writer.write_to_stream(s)
@@ -128,7 +128,7 @@ end
 
 # A simple writer node that contains only strings
 private class WriterStrings
-special WriterNode
+	super WriterNode
 	# The first string
 	var _string: String
 

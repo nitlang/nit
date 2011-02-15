@@ -29,7 +29,7 @@ private
 end
 
 class OneBottle
-special Bottle
+	super Bottle
 	redef fun sing
 	do
 		sing_start
@@ -45,7 +45,7 @@ special Bottle
 end
 
 class TwoBottles
-special Bottle
+	super Bottle
 	redef fun sing
 	do
 		sing_start
@@ -61,7 +61,7 @@ special Bottle
 end
 
 class Bottles
-special Bottle
+	super Bottle
 
 	redef fun sing
 	do

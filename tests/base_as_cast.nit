@@ -21,7 +21,7 @@ class O
 end
 
 class A
-special O
+	super O
 	init do end
 end
 
@@ -30,8 +30,8 @@ class U
 end
 
 class B
-special A
-special U
+	super A
+	super U
 	redef fun output do 2.output
 	init do end
 end

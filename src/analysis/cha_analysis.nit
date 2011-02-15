@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This package implements Class Hierarchy Analysis (CHA)
+# This module implements Class Hierarchy Analysis (CHA)
 package cha_analysis
 
 import reachable_method_analysis
@@ -22,7 +22,7 @@ import icode
 import program
 
 class ChaContext
-special ReachableMethodAnalysis
+	super ReachableMethodAnalysis
 	readable var _reachable_iroutines: HashSet[IRoutine] = new HashSet[IRoutine]
 
 	redef fun is_iroutine_reachable(ir: nullable IRoutine): Bool do
@@ -88,7 +88,7 @@ class ChaBuilder
 end
 
 class ChaVisitor
-special ICodeVisitor
+	super ICodeVisitor
 	readable var _builder: ChaBuilder
 
 	redef fun visit_icode(ic)

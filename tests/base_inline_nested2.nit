@@ -36,7 +36,7 @@ interface Inline__
 end
 
 class A
-special Inline__
+	super Inline__
 	redef fun foo(i: Int)
 	do
 		'A'.output

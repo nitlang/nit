@@ -14,7 +14,7 @@ class A
 end
 
 class M
-special A
+	super A
 	redef fun foo
 	do
 		'm'.output
@@ -23,7 +23,7 @@ special A
 end
 
 class B
-special A
+	super A
 	init cb
 	do
 		'B'.output
@@ -40,7 +40,7 @@ special A
 end
 
 class N
-special A
+	super A
 	redef fun foo
 	do
 		'n'.output
@@ -49,8 +49,8 @@ special A
 end
 
 class O
-special M
-special B
+	super M
+	super B
 	redef fun foo
 	do
 		'o'.output
@@ -59,8 +59,8 @@ special B
 end
 
 class P
-special B
-special N
+	super B
+	super N
 	redef fun foo
 	do
 		'p'.output
@@ -69,18 +69,19 @@ special N
 end
 
 class Q
-#alt0#special M
-#alt0#special B
-#alt0#special N
+	#alt0#super M
+	#alt0#super B
+	#alt0#super N
 
-#alt1#special O
-#alt1#special N
+	#alt1#super O
+	#alt1#super N
 
-#alt2#special M
-#alt2#special P
+	#alt2#super M
+	#alt2#super P
 	
-#alt3#special O
-#alt3#special P
+	#alt3#super O
+	#alt3#super P
+
 	redef fun foo
 	do
 		'q'.output

@@ -27,7 +27,7 @@ private import primitive_info
 #  * register aliasing
 #  * IMove optimization
 class IRegisterSlotAllocationVisitor
-special ICodeVisitor
+	super ICodeVisitor
 	# The visitor works in two pass:
 	# First pass is used to detect first and last iregisters occurences and slot groups
 	# Second pass is used to assign an effective slot to iregsiters

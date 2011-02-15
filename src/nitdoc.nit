@@ -24,7 +24,7 @@ import abstracttool
 
 # Store knowledge and facilities to generate files
 class DocContext
-special AbstractCompiler
+	super AbstractCompiler
 	# Destination directory
 	readable writable var _dir: String = "."
 
@@ -278,7 +278,7 @@ end
 
 # Efficiently sort object with their to_s method
 class AlphaSorter[E: Object]
-special AbstractSorter[E]
+	super AbstractSorter[E]
 	redef fun compare(a, b)
 	do
 		var sa: String
@@ -331,7 +331,7 @@ class MMEntity
 end
 
 redef class MMModule
-special MMEntity
+	super MMEntity
 	redef fun html_link(dctx) do 
 		if dctx.mmmodule == self then
 			return "{self}"
@@ -399,7 +399,7 @@ special MMEntity
 end
 
 redef class MMLocalProperty
-special MMEntity
+	super MMEntity
 	# Anchor of the property description in the module html file
 	fun html_anchor: String
 	do
@@ -696,7 +696,7 @@ redef class ADoc
 end
 
 redef class MMLocalClass
-special MMEntity
+	super MMEntity
 	# Anchor of the class description in the module html file
 	fun html_anchor: String do return "CLASS_{self}"
 

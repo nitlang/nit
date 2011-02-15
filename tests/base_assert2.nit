@@ -21,7 +21,7 @@ class A
 end
 
 class B
-special A
+	super A
 	fun bar do 2.output
 end
 

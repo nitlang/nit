@@ -40,7 +40,7 @@ class Foo
 end
 
 class Bar
-special Foo
+	super Foo
 	readable writable var _a3: Int 
 	redef fun run
 	do

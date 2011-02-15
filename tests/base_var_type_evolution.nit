@@ -21,12 +21,12 @@ class A
 end
 
 class B
-special A
+	super A
 	fun b do 'B'.output
 end
 
 class C
-special A
+	super A
 	fun c do 'C'.output
 end
 

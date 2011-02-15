@@ -47,13 +47,13 @@ class A
 end
 
 class B
-special A
+	super A
 	fun foo do 0.output
 	init do end
 end
 
 class C
-special B
+	super B
 	fun bar do 1.output
 	init do end
 end

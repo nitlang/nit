@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This package introduces an optimization that removes 'get' tests when
+# This module introduces an optimization that removes 'get' tests when
 # not reachable from an initializer
 package remove_out_of_init_get_test
 
@@ -55,7 +55,7 @@ redef class Program
 end
 
 class IssetCounter
-special ICodeVisitor
+	super ICodeVisitor
 	readable var _nb_isset: Int = 0
 
 	redef fun visit_icode(ic)
@@ -69,7 +69,7 @@ special ICodeVisitor
 end
 
 class GetterTestRemover
-special ICodeVisitor
+	super ICodeVisitor
 	readable var _nb_optimized_isset: Int = 0
 
 	redef fun visit_icode(ic)

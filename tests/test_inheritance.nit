@@ -24,7 +24,7 @@ class A
 end
 
 class B
-special A
+	super A
 	redef fun g do print(2) end
 	redef fun i do print(2) end
 
@@ -32,7 +32,7 @@ special A
 end
 
 class C
-special A
+	super A
 	redef fun h do print(3) end
 	redef fun i do print(3) end
 
@@ -40,8 +40,8 @@ special A
 end
 
 class D
-special B
-special C
+	super B
+	super C
 	redef fun i do print(4) end
 
 	init do end

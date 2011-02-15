@@ -22,14 +22,14 @@ class A
 	fun toto do end
 end
 class B
-special A
+	super A
 	redef fun toto do end
 end
 class C
-special A
+	super A
 	redef fun toto do end
 end
 class D
-special B
-special C
+	super B
+	super C
 end

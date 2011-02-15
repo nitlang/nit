@@ -779,25 +779,25 @@ redef class AInterfaceClasskind
         v.enter_visit(_n_kwinterface)
     end
 end
-redef class AUniversalClasskind
+redef class AEnumClasskind
     private init empty_init do end
 
-    init init_auniversalclasskind (
-            n_kwuniversal: nullable TKwuniversal
+    init init_aenumclasskind (
+            n_kwenum: nullable TKwenum
     )
     do
         empty_init
-        _n_kwuniversal = n_kwuniversal.as(not null)
-	n_kwuniversal.parent = self
+        _n_kwenum = n_kwenum.as(not null)
+	n_kwenum.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
-        if _n_kwuniversal == old_child then
+        if _n_kwenum == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa TKwuniversal
-                _n_kwuniversal = new_child
+		assert new_child isa TKwenum
+                _n_kwenum = new_child
 	    else
 		abort
             end
@@ -807,7 +807,7 @@ redef class AUniversalClasskind
 
     redef fun visit_all(v: Visitor)
     do
-        v.enter_visit(_n_kwuniversal)
+        v.enter_visit(_n_kwenum)
     end
 end
 redef class AFormaldef

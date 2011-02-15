@@ -23,7 +23,7 @@ end
 
 # Abstract input streams
 class IStream
-special IOS
+	super IOS
 	# Read a character. Return its ASCII value, -1 on EOF or timeout
 	fun read_char: Int is abstract
 
@@ -82,7 +82,7 @@ end
 
 # Abstract output stream
 class OStream
-special IOS
+	super IOS
 	# write a string
 	fun write(s: String) is abstract
 
@@ -92,7 +92,7 @@ end
 
 # Input streams with a buffer
 class BufferedIStream
-special IStream
+	super IStream
 	redef fun read_char
 	do
 		assert not eof
@@ -204,14 +204,14 @@ special IStream
 end
 
 class IOStream
-special IStream
-special OStream
+	super IStream
+	super OStream
 end
 
 ##############################################################"
 
 class FDStream
-special IOS
+	super IOS
 	# File description
 	var _fd: Int
 
@@ -226,8 +226,8 @@ special IOS
 end
 
 class FDIStream
-special FDStream
-special IStream
+	super FDStream
+	super IStream
 	redef readable var _eof: Bool = false
 	
 	redef fun read_char
@@ -241,8 +241,8 @@ special IStream
 end
 
 class FDOStream
-special FDStream
-special OStream
+	super FDStream
+	super OStream
 	redef readable var _is_writable: Bool
 
 	redef fun write(s)
@@ -258,9 +258,9 @@ special OStream
 end
 
 class FDIOStream
-special FDIStream
-special FDOStream
-special IOStream
+	super FDIStream
+	super FDOStream
+	super IOStream
 	init(fd: Int)
 	do
 		_fd = fd

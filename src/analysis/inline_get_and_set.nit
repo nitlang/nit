@@ -45,7 +45,7 @@ redef class Program
 end
 
 private class InlineGetSetVisitor
-special ICodeVisitor
+	super ICodeVisitor
 	var _icb: ICodeBuilder
 	readable var _number_inlined: Int = 0
 

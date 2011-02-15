@@ -379,7 +379,7 @@ abstract class MMType
 end
 
 class MMNullableType
-special MMType
+	super MMType
 	var _base_type: MMType
 	redef fun is_valid do return _base_type.is_valid
 	redef fun is_nullable: Bool do return true
@@ -428,7 +428,7 @@ special MMType
 end
 
 class MMTypeClass 
-special MMType
+	super MMType
 	redef readable var _local_class: MMLocalClass
 	redef fun mmmodule do return _local_class.mmmodule end
 	redef fun <(t) do return t.is_supertype(self)
@@ -454,7 +454,7 @@ special MMType
 end
 
 class MMTypeSimpleClass
-special MMTypeClass
+	super MMTypeClass
 	redef fun is_supertype(t)
 	do
 		return  t.local_class.cshe <= _local_class
@@ -479,7 +479,7 @@ end
 
 # The type of null
 class MMTypeNone
-special MMType
+	super MMType
 	redef readable var _mmmodule: MMModule
 	redef fun is_nullable: Bool do return true
 	redef fun <(t) do return t isa MMTypeNone or t isa MMNullableType

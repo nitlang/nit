@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # A simple exemple of refinement where a method is added to the integer class.
-package fibonacci
+module fibonacci
 
 redef class Int
 	# Calculate the self-th element of the fibonacci sequence.

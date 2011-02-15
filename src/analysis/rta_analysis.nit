@@ -23,8 +23,8 @@ import icode
 import program
 
 class RtaContext
-special ReachableMethodAnalysis
-special InstantiatedTypeAnalysis
+	super ReachableMethodAnalysis
+	super InstantiatedTypeAnalysis
 	init do end
 	readable var _instanciated_classes: HashSet[MMLocalClass] = new HashSet[MMLocalClass]
 
@@ -165,7 +165,7 @@ class RtaBuilder
 		end
 
 		for cls in program.main_module.global_classes do
-			if not cls.is_universal then continue
+			if not cls.is_enum then continue
 			add_instantiated_class(program.main_module[cls])
 		end
 	end
@@ -195,7 +195,7 @@ class RtaBuilder
 end
 
 class RtaVisitor
-special ICodeVisitor
+	super ICodeVisitor
 	readable var _builder: RtaBuilder
 
 	redef fun visit_icode(ic)

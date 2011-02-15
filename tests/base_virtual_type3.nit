@@ -18,7 +18,7 @@ import base_virtual_type2
 import array
 
 class C
-special A
+	super A
 	readable writable var _tab: nullable Array[E]
 	init do end
 end

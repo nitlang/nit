@@ -106,15 +106,15 @@ redef class TKwinterface
     end
 end
 
-redef class TKwuniversal
+redef class TKwenum
     redef fun parser_index: Int
     do
 	return 7
     end
 
-    init init_tk(loc: Location)
+    init init_tk(text: String, loc: Location)
     do
-        _text = once "universal"
+        _text = text
 		_location = loc
     end
 end
@@ -1200,7 +1200,7 @@ end
 # The lexer extract NIT tokens from an input stream.
 # It is better user with the Parser
 class Lexer
-special TablesCapable
+	super TablesCapable
 	# Last peeked token
 	var _token: nullable Token
 
@@ -1388,7 +1388,8 @@ special TablesCapable
 						return new TKwinterface.init_tk(location)
 					end
 					if accept_token == 8 then
-						return new TKwuniversal.init_tk(location)
+						var token_text = text.substring(0, accept_length)
+						return new TKwenum.init_tk(token_text, location)
 					end
 					if accept_token == 9 then
 						return new TKwspecial.init_tk(location)

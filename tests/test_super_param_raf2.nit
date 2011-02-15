@@ -17,7 +17,7 @@
 import test_super_param_raf
 
 class C
-special B
+	super B
 	redef fun foo(a: Int): Int
 	do
 		return super * 2

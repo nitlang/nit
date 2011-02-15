@@ -18,13 +18,13 @@ class Object
 end
 
 class A
-special B
+	super B
 end
 
 class B
-special C
+	super C
 end
 
 class C
-special A
+	super A
 end

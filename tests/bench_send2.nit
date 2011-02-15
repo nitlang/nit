@@ -22,32 +22,32 @@ class A
 	init do end
 end
 class B
-special A
+	super A
 	redef fun foo do end
 	init do end
 
 end
 class C
-special A
+	super A
 	init do end
 
 end
 class D
-special B
-special C
+	super B
+	super C
 	init do end
 
 end
 class E
-special B
-special C
+	super B
+	super C
 	redef fun foo do end
 	init do end
 
 end
 class F
-special D
-special E
+	super D
+	super E
 	redef fun foo do end
 	init do end
 

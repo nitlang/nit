@@ -119,7 +119,7 @@ end
 
 # Discrete total orders.
 interface Discrete
-special Comparable
+	super Comparable
 
 	redef type OTHER: Discrete
 
@@ -200,7 +200,7 @@ end
 # Native integer numbers.
 # Correspond to C int.
 universal Int
-special Discrete
+	super Discrete
 	redef type OTHER: Int
 
 	redef fun object_id is intern
@@ -340,7 +340,7 @@ end
 # Characters are denoted with simple quote.
 # eg. 'a' or '\n'.
 universal Char
-special Discrete
+	super Discrete
 	redef type OTHER: Char
 
 	redef fun object_id is intern

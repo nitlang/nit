@@ -174,7 +174,7 @@ end
 # labeled 'do' uses the BreakOnlyEscapableBlock subclass
 # closures uses the EscapableClosure subclass
 class EscapableBlock
-special ScopeBlock
+	super ScopeBlock
 	# The label of the block (if any)
 	# Set by the push in EscapableContext
 	readable var _lab: nullable Symbol
@@ -201,7 +201,7 @@ end
 
 # specific EscapableBlock where only labelled break can be used
 class BreakOnlyEscapableBlock
-special EscapableBlock
+	super EscapableBlock
 	redef fun is_break_block: Bool do return true
 
 	init(node: ANode) do super
@@ -209,7 +209,7 @@ end
 
 # specific EscapableBlock for closures
 class EscapableClosure
-special EscapableBlock
+	super EscapableBlock
 	# The associated closure
 	readable var _closure: MMClosure
 
@@ -230,7 +230,7 @@ end
 ###############################################################################
 
 class AEscapeExpr
-special ALabelable
+	super ALabelable
 	# The associated escapable block
 	readable var _escapable: nullable EscapableBlock
 
@@ -256,12 +256,12 @@ special ALabelable
 end
 
 redef class AContinueExpr
-special AEscapeExpr
+	super AEscapeExpr
 	redef fun kwname do return "continue"
 end
 
 redef class ABreakExpr
-special AEscapeExpr
+	super AEscapeExpr
 	redef fun kwname do return "break"
 end
 

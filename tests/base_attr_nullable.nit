@@ -19,7 +19,7 @@ import end
 interface Object
 end
 
-universal Int
+enum Int
 	fun output is intern
 	fun +(o: Int): Int is intern
 end
@@ -57,7 +57,7 @@ class Foo
 end
 
 class Bar
-special Foo
+	super Foo
 	var _a3: Integer
 	redef fun run
 	do

@@ -15,7 +15,7 @@
 import base_attr2
 
 class B
-special A
+	super A
 	fun foo_b(a: A)
 	do
 		a1.output

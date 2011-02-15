@@ -20,14 +20,14 @@ class T
 end
 
 class U
-special T
+	super T
 end
 
 class A[E: T]
 end
 
 class B
-special A[T]
+	super A[T]
 end
 
 #class A[F: U]

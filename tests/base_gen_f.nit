@@ -25,7 +25,7 @@ class G[E: G[E]]
 end
 
 class G1
-special G[G1]
+	super G[G1]
 	redef fun foo
 	do
 		1.output
@@ -35,7 +35,7 @@ special G[G1]
 end
 
 class G2
-special G[G2]
+	super G[G2]
 	redef fun foo
 	do
 		2.output

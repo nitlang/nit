@@ -18,6 +18,6 @@ class A
 	var _a: Int
 end
 class B
-special A
+	super A
 	redef var _a: Object
 end

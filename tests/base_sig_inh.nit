@@ -26,7 +26,7 @@ class A
 end
 
 class B
-special A
+	super A
 	redef fun f0 do 0.output
 	redef fun f1(a: Int, b: Int) do (a+b).output
 	redef fun f2(a,b) do (a+b).output

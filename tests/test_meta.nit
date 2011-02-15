@@ -39,7 +39,7 @@ class A
 end
 
 class B
-special A
+	super A
    redef fun foo
       do
           printn("B")
@@ -47,7 +47,7 @@ special A
 end
 
 class C
-special A
+	super A
    fun foo2
       do
           printn("C")
@@ -55,8 +55,8 @@ special A
 end
 
 class D
-special B
-special C
+	super B
+	super C
    redef fun foo
       do
           printn("D")

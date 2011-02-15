@@ -22,7 +22,7 @@ import hash
 ###############################################################################
 
 abstract class AbstractString
-special AbstractArrayRead[Char]
+	super AbstractArrayRead[Char]
 	readable private var _items: NativeString
 
 	redef fun [](index) do return _items[index]
@@ -160,8 +160,8 @@ end
 
 
 class String
-special Comparable
-special AbstractString
+	super Comparable
+	super AbstractString
 	redef type OTHER: String
 
 	# Create a new string from a given char *.
@@ -265,10 +265,10 @@ end
 
 # Strings are arrays of characters.
 class Buffer
-special AbstractString
-special Comparable
-special StringCapable
-special AbstractArray[Char]
+	super AbstractString
+	super Comparable
+	super StringCapable
+	super AbstractArray[Char]
 
 	redef type OTHER: String
 

@@ -17,7 +17,7 @@
 import base_closure2
 
 class B
-special A
+	super A
 	redef fun foo
 		!bar(i: Int) #!alt13# #!alt14# #!alt15#
 		#alt13# !bar

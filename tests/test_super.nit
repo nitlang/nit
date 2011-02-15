@@ -24,7 +24,7 @@ class A
 end
 
 class B
-special A
+	super A
 	redef fun foo
 	do
 		1.output

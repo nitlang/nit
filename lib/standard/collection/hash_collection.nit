@@ -18,8 +18,8 @@ import hash
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
 private class HashCollection[K: Object, N: HashNode[K], E]
-special Collection[E]
-special ArrayCapable[nullable N]
+	super Collection[E]
+	super ArrayCapable[nullable N]
 	var _array: nullable NativeArray[nullable N] = null # Used to store items
 	var _capacity: Int = 0 # Size of _array
 	redef readable var _length: Int = 0 # Number of items in the map
@@ -198,8 +198,8 @@ private class HashNode[K: Object]
 end
 
 class HashMap[K: Object, V]
-special Map[K, V]
-special HashCollection[K, HashMapNode[K, V], V]
+	super Map[K, V]
+	super HashCollection[K, HashMapNode[K, V], V]
 
 	redef fun [](key)
 	do
@@ -301,7 +301,7 @@ special HashCollection[K, HashMapNode[K, V], V]
 end
 
 class HashMapNode[K: Object, V]
-special HashNode[K]
+	super HashNode[K]
 	redef type N: HashMapNode[K, V]
 	var _value: V
 
@@ -313,7 +313,7 @@ special HashNode[K]
 end
 
 class HashMapIterator[K: Object, V]
-special MapIterator[K, V]
+	super MapIterator[K, V]
 	redef fun is_ok do return _node != null
 
 	redef fun item
@@ -354,8 +354,8 @@ special MapIterator[K, V]
 end
 
 class HashSet[E: Object]
-special Set[E]
-special HashCollection[E, HashSetNode[E], E]
+	super Set[E]
+	super HashCollection[E, HashSetNode[E], E]
 
 	redef fun is_empty do return _length == 0
 
@@ -396,7 +396,7 @@ special HashCollection[E, HashSetNode[E], E]
 end
 
 class HashSetNode[E: Object]
-special HashNode[E]
+	super HashNode[E]
 	redef type N: HashSetNode[E]
 
 	init(e: E)
@@ -406,7 +406,7 @@ special HashNode[E]
 end
 
 class HashSetIterator[E: Object]
-special Iterator[E]
+	super Iterator[E]
 	redef fun is_ok do return _node != null
 
 	redef fun item

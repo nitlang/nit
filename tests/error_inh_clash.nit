@@ -15,6 +15,6 @@
 # limitations under the License.
 
 class A
-special Array[Int]
-special Array[Char]
+	super Array[Int]
+	super Array[Char]
 end

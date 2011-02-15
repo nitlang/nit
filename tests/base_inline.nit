@@ -22,13 +22,13 @@ interface Inline__
 end
 
 class A
-special Inline__
+	super Inline__
 	redef fun bar do return 20
 	fun baz do 3.output
 end
 
 class B
-special A
+	super A
 	redef fun foo do 100.output
 	redef fun bar do return 200
 	redef fun baz do 300.output

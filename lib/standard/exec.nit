@@ -74,8 +74,8 @@ end
 
 # stdout of the processus is readable
 class IProcess
-special Process
-special IStream
+	super Process
+	super IStream
 	var _in: FDIStream
 	
 	redef fun close do _in.close
@@ -99,8 +99,8 @@ end
 
 # stdin of the processus is writable
 class OProcess
-special Process
-special OStream
+	super Process
+	super OStream
 	var _out: OStream
 
 	redef fun close do _out.close
@@ -124,9 +124,9 @@ end
 
 # stdin and stdout are both accessible
 class IOProcess
-special IProcess
-special OProcess
-special IOStream
+	super IProcess
+	super OProcess
+	super IOStream
 
 	redef fun close
 	do
@@ -162,7 +162,7 @@ redef class NativeString
 end
 
 private universal NativeProcess
-special Pointer
+	super Pointer
 	fun id: Int is extern "exec_NativeProcess_NativeProcess_id_0"
 	fun is_finished: Bool is extern "exec_NativeProcess_NativeProcess_is_finished_0"
 	fun status: Int is extern "exec_NativeProcess_NativeProcess_status_0"

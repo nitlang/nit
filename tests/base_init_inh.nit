@@ -23,7 +23,7 @@ class A
 end
 
 class B
-special A
+	super A
 	init(s: Char) do
 		'B'.output
 		'['.output
@@ -34,7 +34,7 @@ special A
 end
 
 class C
-special B
+	super B
 	init(s) do
 		'C'.output
 		'['.output
@@ -44,7 +44,7 @@ special B
 end
 
 class D
-special C
+	super C
 	init(s) do super
 end
 

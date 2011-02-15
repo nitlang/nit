@@ -17,7 +17,7 @@
 # Common things for NIT compilation and C generation
 package primitive_info
 
-#FIXME Split this package into 2: one in metamodel and one in compiling
+#FIXME Split this module into 2: one in metamodel and one in compiling
 
 import metamodel
 
@@ -30,7 +30,6 @@ redef class MMLocalClass
 
 	# Return the primitive information of the class.
 	# Return null if the class is not primitive
-	# FIXME: Only here since there is no universal type yet
 	fun primitive_info: nullable PrimitiveInfo
 	do
 		if _primitive_info_b == true then return _primitive_info_cache

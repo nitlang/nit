@@ -28,16 +28,16 @@ class T
 end
 
 class U
-special T
+	super T
 end
 
 class V
-special T
+	super T
 end
 
 class W
-special U
-special V
+	super U
+	super V
 end
 
 fun maybe: Bool do return true

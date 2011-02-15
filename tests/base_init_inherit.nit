@@ -20,7 +20,7 @@ class A
 end
 
 class B
-special A
+	super A
 	init cb
 	do
 		'B'.output
@@ -37,7 +37,7 @@ special A
 end
 
 class C
-special B
+	super B
 	init cc
 	do
 		'C'.output
@@ -54,7 +54,7 @@ special B
 end
 
 class M
-special A
+	super A
 	redef fun foo
 	do
 		'm'.output
@@ -63,8 +63,8 @@ special A
 end
 
 class N
-special B
-special M
+	super B
+	super M
 	redef fun foo
 	do
 		'n'.output
@@ -73,8 +73,8 @@ special M
 end
 
 class O
-special N
-special C
+	super N
+	super C
 	init co
 	do
 		'O'.output

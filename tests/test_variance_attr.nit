@@ -24,7 +24,7 @@ class A
 end
 
 class B
-special A
+	super A
     redef var _foo: nullable Int
     redef var _bar: nullable B
     redef fun output do 'B'.output end

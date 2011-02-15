@@ -106,7 +106,7 @@ class MMDirectory
 	end
 end
 
-# A module is a NIT package
+# A module is a Nit file
 class MMModule
 	# Global context
 	readable var _context: MMContext 
@@ -299,8 +299,8 @@ class MMGlobalClass
 	# Is the global class an abstract class?
 	readable writable var _is_abstract: Bool = false
 
-	# Is the global class a universal class?
-	readable writable var _is_universal: Bool = false
+	# Is the global class a enum class?
+	readable writable var _is_enum: Bool = false
 
 	# Visibility of the global class
 	# 1 -> public
@@ -649,12 +649,12 @@ end
 
 # Attribute local properties
 class MMAttribute
-special MMLocalProperty
+	super MMLocalProperty
 end
 
 # Method local properties
 class MMMethod
-special MMLocalProperty
+	super MMLocalProperty
 	# Is the method defined with intern
 	fun is_intern: Bool is abstract
 
@@ -667,6 +667,6 @@ end
 
 # Concrete local classes
 class MMConcreteClass
-special MMLocalClass
+	super MMLocalClass
 end
 

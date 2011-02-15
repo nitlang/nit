@@ -20,7 +20,7 @@ class A
 end
 
 class B
-special A
+	super A
 end
 
 fun rand: Bool do return true

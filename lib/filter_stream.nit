@@ -12,7 +12,7 @@
 # another product.
 
 class FilterIStream
-special IStream
+	super IStream
 	# Filter readed elements
 	readable var _stream: nullable IStream
 
@@ -29,7 +29,7 @@ special IStream
 end
 
 class FilterOStream
-special OStream
+	super OStream
 	# Filter outputed elements
 	readable var _stream: nullable OStream
 
@@ -47,7 +47,7 @@ special OStream
 end
 
 class StreamCat
-special FilterIStream
+	super FilterIStream
 	var _streams: Iterator[IStream]
 
 	redef fun eof: Bool
@@ -98,7 +98,7 @@ special FilterIStream
 end
 
 class StreamDemux
-special FilterOStream
+	super FilterOStream
 	var _streams: Array[OStream]
 
 	redef fun is_writable: Bool

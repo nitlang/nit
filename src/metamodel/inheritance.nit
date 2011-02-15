@@ -469,7 +469,7 @@ end
 
 # A local class that is a pure importation of an other local class
 class MMImplicitLocalClass
-special MMLocalClass
+	super MMLocalClass
 	init(mod: MMModule, g: MMGlobalClass)
 	do
 		var cla = g.intro
@@ -479,7 +479,7 @@ special MMLocalClass
 end
 
 class MMRefineAncestor
-special MMAncestor
+	super MMAncestor
 	redef readable var _local_class: MMLocalClass
 
 	init(b: MMLocalClass, a: MMLocalClass)
@@ -492,7 +492,7 @@ end
 
 
 class MMSpecAncestor
-special MMAncestor
+	super MMAncestor
 	redef fun local_class do return stype.local_class
 
 	init(inheriter: MMType, stype: MMType)
@@ -503,7 +503,7 @@ special MMAncestor
 end
 
 class MMDefaultAncestor
-special MMAncestor
+	super MMAncestor
 	redef fun local_class do return stype.local_class
 
 	init(b: MMLocalClass, anc: MMType)

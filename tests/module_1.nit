@@ -40,7 +40,7 @@ class A # class 1
 end
 
 class B # class 2
-special A
+	super A
    redef fun a12 
    do
 	   print(12)

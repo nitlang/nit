@@ -22,14 +22,14 @@ class A
 end
 
 class B
-special A
+	super A
 	redef var foo: Int = 20
 	var bar: Int redef writable = 30
 	redef var baz: Int redef writable = 40
 end
 
 class C
-special B
+	super B
 	redef fun foo: Int do return 100
 	redef fun bar=(i: Int) do i.output
 	redef fun baz: Int do return 400

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Package containing all bases for the reachable method analysis
+# Module containing all bases for the reachable method analysis
 package reachable_method_analysis
 
 import icode
@@ -57,7 +57,7 @@ end
 
 # Default behavior is to say that all methods/iroutines are reachable
 class DefaultReachableMethodAnalysis
-special ReachableMethodAnalysis
+	super ReachableMethodAnalysis
 	redef fun is_iroutine_reachable(ir: nullable IRoutine): Bool do return true
 	redef fun is_method_reachable(method: MMMethod): Bool do return true
 

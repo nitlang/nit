@@ -23,7 +23,7 @@ class Node
 end
 
 class WakeUpNode
-special Node
+	super Node
 	fun wake_up is abstract
 	# Wake up the node
 	fun wake_up_in(d: Int)
@@ -35,7 +35,7 @@ special Node
 end
 
 class NodeSource
-special Node
+	super Node
 	var _nexts: nullable ArraySet[NodeSink] = null
 	fun attach(n: NodeSink)
 	# Add the sink `n' the the connected nodes
@@ -70,7 +70,7 @@ special Node
 end
 
 class NodeSink
-special Node
+	super Node
 	fun recieve(n: NodeSource) is abstract
 	# the `n' has emeted a signal
 end
@@ -131,8 +131,8 @@ end
 #
 
 class BeepSource
-special NodeSource
-special WakeUpNode
+	super NodeSource
+	super WakeUpNode
 	redef fun wake_up
 	do
 		send
@@ -153,7 +153,7 @@ special WakeUpNode
 end
 
 class CountSink
-special NodeSink
+	super NodeSink
 	readable var _count: Int = 0
 	redef fun recieve(n: NodeSource)
 	do
@@ -162,7 +162,7 @@ special NodeSink
 end
 
 class SimpleCountSink
-special CountSink
+	super CountSink
 
 	init(name: String)
 	do
@@ -171,8 +171,8 @@ special CountSink
 end
 
 class NodeAlternate
-special NodeSink
-special NodeSource
+	super NodeSink
+	super NodeSource
 	var _last: nullable NodeSource
 	redef fun recieve(n: NodeSource)
 	do
@@ -189,8 +189,8 @@ special NodeSource
 end
 
 class NodeEat
-special CountSink
-special NodeSource
+	super CountSink
+	super NodeSource
 	var _limit: Int
 	redef fun recieve(n: NodeSource)
 	do
@@ -211,9 +211,9 @@ special NodeSource
 end
 
 class NodeDelay
-special NodeSource
-special NodeSink
-special WakeUpNode
+	super NodeSource
+	super NodeSink
+	super WakeUpNode
 	var _delay: Int
 	redef fun recieve(n: NodeSource)
 	do

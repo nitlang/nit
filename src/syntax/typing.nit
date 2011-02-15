@@ -37,7 +37,7 @@ end
 # * Resolve call and attribute access
 # * Check type conformance
 private class TypingVisitor
-special AbsSyntaxVisitor
+	super AbsSyntaxVisitor
 	redef fun visit(n)
 	do
 		if n != null then n.accept_typing(self)
@@ -252,7 +252,7 @@ redef class AConcreteInitPropdef
 			var j = 0
 			while j < v.local_class.cshe.direct_greaters.length do
 				var c = v.local_class.cshe.direct_greaters[j]
-				if c.global.is_interface or c.global.is_universal or c.global.is_mixin then
+				if c.global.is_interface or c.global.is_enum or c.global.is_mixin then
 					j += 1
 				else if cur_c != null and (c.cshe <= cur_c or cur_c.global.is_mixin) then
 					if c == cur_c then j += 1
@@ -503,7 +503,7 @@ end
 
 # An abstract control structure with feature escapable block
 class AAbsControl
-special AExpr
+	super AExpr
 	# The corresponding escapable block
 	readable var _escapable: nullable EscapableBlock
 
@@ -545,7 +545,7 @@ special AExpr
 end
 
 redef class ADoExpr
-special AAbsControl
+	super AAbsControl
 	redef fun accept_typing(v)
 	do
 		process_control(v, new BreakOnlyEscapableBlock(self), n_label, false)
@@ -587,7 +587,7 @@ redef class AIfExpr
 end
 
 redef class AWhileExpr
-special AAbsControl
+	super AAbsControl
 	redef fun accept_typing(v)
 	do
 		process_control(v, new EscapableBlock(self), n_label, true)
@@ -619,7 +619,7 @@ special AAbsControl
 end
 
 redef class ALoopExpr
-special AAbsControl
+	super AAbsControl
 	redef fun accept_typing(v)
 	do
 		process_control(v, new EscapableBlock(self), n_label, true)
@@ -636,7 +636,7 @@ special AAbsControl
 end
 
 redef class AForExpr
-special AAbsControl
+	super AAbsControl
 	var _variable: nullable AutoVariable
 	redef fun variable do return _variable.as(not null)
 
@@ -1822,7 +1822,7 @@ redef class AClosureDef
 end
 
 class ATypeCheckExpr
-special AExpr
+	super AExpr
 	private fun check_expr_cast(v: TypingVisitor, n_expr: AExpr, n_type: AType)
 	do
 		if not v.check_expr(n_expr) then return
@@ -1853,7 +1853,7 @@ special AExpr
 end
 
 redef class AIsaExpr
-special ATypeCheckExpr
+	super ATypeCheckExpr
 	redef fun after_typing(v)
 	do
 		check_expr_cast(v, n_expr, n_type)
@@ -1868,7 +1868,7 @@ special ATypeCheckExpr
 end
 
 redef class AAsCastExpr
-special ATypeCheckExpr
+	super ATypeCheckExpr
 	redef fun after_typing(v)
 	do
 		check_expr_cast(v, n_expr, n_type)

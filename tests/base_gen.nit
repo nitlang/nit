@@ -33,7 +33,7 @@ class Int
 end
 
 class B
-special A
+	super A
 	redef fun i_to_s(i: Int)
 	do
 		(i+1).output

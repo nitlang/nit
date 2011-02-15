@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This package is used to load a metamodel 
+# This module is used to load a metamodel
 package mmloader
 
 import metamodel
@@ -24,7 +24,7 @@ import opts
 import location
 
 class Message
-special Comparable
+	super Comparable
 	redef type OTHER: Message
 
 	readable var _location: nullable Location
@@ -49,7 +49,7 @@ end
 
 # Global context for tools
 class ToolContext
-special MMContext
+	super MMContext
 	# Number of errors
 	readable var _error_count: Int = 0
 

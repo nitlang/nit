@@ -24,7 +24,7 @@ import syntax
 import nit_version
 
 class AbstractCompiler
-special ToolContext
+	super ToolContext
 
 	init(tool_name: String)
 	do

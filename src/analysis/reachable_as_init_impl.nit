@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This package introduces an analysis that flags all initializers called as new A.x
+# This module introduces an analysis that flags all initializers called as new A.x
 package reachable_as_init_impl
 
 import reachable_method_analysis
@@ -41,7 +41,7 @@ end
 # Visitor will add only initializers in the _methods list.
 # If the checked method is in this list, it is reachable as init !
 class ReachableAsInitAnalysisImpl
-special ReachableAsInitAnalysis
+	super ReachableAsInitAnalysis
 	var _methods: HashMap[MMLocalClass, List[MMMethod]] = new HashMap[MMLocalClass, List[MMMethod]]
 
 	redef fun is_method_reachable_as_init(method: MMMethod, c: MMLocalClass): Bool do
@@ -53,7 +53,7 @@ special ReachableAsInitAnalysis
 end
 
 class RAIVisitor
-special ICodeVisitor
+	super ICodeVisitor
 	readable var _builder: ReachableAsInitBuilder
 
 	redef fun visit_icode(ic)

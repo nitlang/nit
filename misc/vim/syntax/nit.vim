@@ -52,8 +52,8 @@ syn match NITKeyword "\<\(super\)\>"
 syn match Error "\<end\>"
 
 " Declarations, definitions and blocks
-syn region NITPackageDecl matchgroup=NITDefine start="\<\(import\|package\)\>\s*" matchgroup=NONE end="\ze\(\s\|:\|(\|$\)"  oneline
-syn region NITClassBlock matchgroup=NITDefine start="\<\(class\|universal\|interface\)\>" matchgroup=NITDefine end="\<end\>" contains=ALL fold
+syn region NITModuleDecl matchgroup=NITDefine start="\<\(import\|module\|package\)\>\s*" matchgroup=NONE end="\ze\(\s\|:\|(\|$\)"  oneline
+syn region NITClassBlock matchgroup=NITDefine start="\<\(class\|enum\|universal\|interface\)\>" matchgroup=NITDefine end="\<end\>" contains=ALL fold
 syn region NITFunctionDecl matchgroup=NITDefine start="\<fun\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline
 syn region NITTypeDecl matchgroup=NITDefine start="\<type\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 syn region NITAttrDecl matchgroup=NITDefine start="\<var\>\s*\ze_" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
@@ -84,7 +84,7 @@ syn keyword NITSelf      self
 
 " Define the default highlighting.
 hi def link NITDefine			Define
-hi def link NITPackageDecl		Identifier
+hi def link NITModuleDecl		Identifier
 hi def link NITFunctionDecl		Function
 hi def link NITTypeDecl			Function
 hi def link NITAttrDecl			Function

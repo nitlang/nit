@@ -20,7 +20,7 @@ package inline_methods
 import icode
 
 private class InlineMethodVisitor
-special ICodeVisitor
+	super ICodeVisitor
 	var _pass: Int = 0
 	var _icb: ICodeBuilder
 

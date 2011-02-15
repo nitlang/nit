@@ -28,7 +28,7 @@ class Toto[E]
 end
 
 class TestNative
-special ArrayCapable[Int]
+	super ArrayCapable[Int]
 
 init
 do

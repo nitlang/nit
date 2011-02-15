@@ -27,7 +27,7 @@ end
 
 # Formal types are named indirect types
 class MMTypeFormal
-special MMType
+	super MMType
 	redef fun is_valid do return _bound != null and _bound.is_valid
 
 	# The name of the type

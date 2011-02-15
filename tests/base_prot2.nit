@@ -17,7 +17,7 @@
 private import base_prot
 
 class A2
-special A
+	super A
 	fun o
 	do
 		pub

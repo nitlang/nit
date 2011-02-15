@@ -22,8 +22,8 @@ end
 interface Discrete
 end
 
-universal Int
-special Discrete
+enum Int
+	super Discrete
 end
 
 interface Collection[E]
@@ -32,15 +32,15 @@ end
 class String
 end
 
-universal NativeString
+enum NativeString
 end
 
 class Array[E]
-special Collection[E]
+	super Collection[E]
 end
 
 class Range[E]
-special Collection[E]
+	super Collection[E]
 end
 
 #alt1#var a = [1, 2]

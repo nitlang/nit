@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Package containing all bases for instantiated type analysis
+# Module containing all bases for instantiated type analysis
 package instantiated_type_analysis
 
 import program
@@ -63,7 +63,7 @@ end
 
 # Default behavior is to say that all types are instantiated
 class DefaultInstantiatedTypeAnalysis
-special InstantiatedTypeAnalysis
+	super InstantiatedTypeAnalysis
 	redef fun is_class_instantiated(local_class: MMLocalClass): Bool do return true
 
 	init do end

@@ -79,7 +79,7 @@ end
 
 # A closure definition in a iroutine body
 class IClosureDef
-special IRoutine
+	super IRoutine
 	init(p: Array[IRegister], r: nullable IRegister)
 	do
 		super(p, r)
@@ -105,13 +105,13 @@ end
 
 # An icode that uses no registers (no args)
 abstract class ICode0
-special ICode
+	super ICode
 	redef fun arity do return 0
 end
 
 # An icode that uses a single register (1 arg)
 abstract class ICode1
-special ICode
+	super ICode
 	redef fun arity do return 1
 
 	# The single argument
@@ -122,7 +122,7 @@ end
 
 # An icode that uses two single registers (2 args)
 abstract class ICode2
-special ICode
+	super ICode
 	redef fun arity do return 2
 
 	# The first argument
@@ -140,7 +140,7 @@ end
 
 # An icode that uses a variable number of registers (n args) and a variable number of closure definitions
 abstract class ICodeN
-special ICode
+	super ICode
 	redef fun arity do return _exprs.length
 
 	# All arguments
@@ -163,7 +163,7 @@ end
 
 # A linear sequence of ICode
 class ISeq
-special ICode0
+	super ICode0
 	# The sequence of icode
 	readable var _icodes: List[ICode] = new List[ICode]
 
@@ -176,14 +176,14 @@ end
 # An infinite loop of ICode
 # Use IEscape to exit
 class ILoop
-special ISeq
+	super ISeq
 	init do end
 end
 
 # A Condidianal if-then-else statement
 # expr is the condition
 class IIf
-special ICode1
+	super ICode1
 	# The 'then' sequence of icode
 	readable var _then_seq: ISeq = new ISeq
 	# The 'else' sequence of icode
@@ -193,7 +193,7 @@ end
 
 # Escape to to end of a parent sequence
 class IEscape
-special ICode0
+	super ICode0
 	# The seqeuence to escape
 	# The control flow continues at the next icode after the associated sequence
 	readable var _iescape_mark: IEscapeMark
@@ -202,7 +202,7 @@ end
 
 # An abort statement
 class IAbort
-special ICode0
+	super ICode0
 	# The reason the abort occured
 	# tests.first is the format
 	readable var _texts: Array[String]
@@ -219,7 +219,7 @@ end
 
 # The root of all method invocations
 abstract class IAbsCall
-special ICodeN
+	super ICodeN
 	# The called method
 	readable var _property: MMMethod
 
@@ -233,14 +233,14 @@ end
 # A simple procedure or function call
 # exprs.first is the reciever, other are arguments
 class ICall
-special IAbsCall
+	super IAbsCall
 	init(p, e) do super
 end
 
 # A super method call
 # exprs.first is the reciever, other are arguments
 class ISuper
-special IAbsCall
+	super IAbsCall
 	init(p, e) do super
 end
 
@@ -252,7 +252,7 @@ end
 # - IStaticCall -> target Initializer
 # - ICheckInstance
 class INew
-special IAbsCall
+	super IAbsCall
 	# The type to instantiate
 	readable var _stype: MMType
 	init(t: MMType, p: MMMethod, a: Sequence[IRegister])
@@ -266,7 +266,7 @@ end
 # No receivers, returns a new object of type 't'
 # Will allocate memory and ensure dynamic type and object identity
 class IAllocateInstance
-special ICode0
+	super ICode0
 	# The type to allocate
 	readable var _stype: MMType
 	init(t: MMType)
@@ -277,13 +277,13 @@ end
 
 # A static call to a specific method
 class IStaticCall
-special IAbsCall
+	super IAbsCall
 	init(p: MMMethod, a: Sequence[IRegister]) do super
 end
 
 # A validation of a newly constructed instance
 class ICheckInstance
-special ICode1
+	super ICode1
 	# The type to allocate
 	readable var _stype: MMType
 	init(t: MMType, e: IRegister)
@@ -295,7 +295,7 @@ end
 
 # Initialisation of default attributes of a new instance
 class IInitAttributes
-special ICode1
+	super ICode1
 	# The type to initialize
 	readable var _stype: MMType
 	init(t: MMType, e: IRegister)
@@ -308,7 +308,7 @@ end
 # A closure call
 # exprs are the arguments
 class IClosCall
-special ICodeN
+	super ICodeN
 	# The called closure
 	readable var _closure_decl: IClosureDecl
 
@@ -326,7 +326,7 @@ end
 # Native are associated to local properties to distinguish them
 # expr are the arguments
 class INative
-special ICodeN
+	super ICodeN
 	# The associated local property
 	readable var _method: MMMethod
 
@@ -341,7 +341,7 @@ end
 
 # A literal Int value
 class IIntValue
-special ICode0
+	super ICode0
 	# The value
 	readable var _value: String
 
@@ -352,7 +352,7 @@ end
 
 # A literal Bool value
 class IBoolValue
-special ICode0
+	super ICode0
 	# The value
 	readable var _value: Bool
 
@@ -363,7 +363,7 @@ end
 
 # A literal NativeString value
 class IStringValue
-special ICode0
+	super ICode0
 	# The value
 	readable var _value: String
 
@@ -374,7 +374,7 @@ end
 
 # A literal Float value
 class IFloatValue
-special ICode0
+	super ICode0
 	# The value
 	readable var _value: String
 
@@ -385,7 +385,7 @@ end
 
 # A literal Char value
 class ICharValue
-special ICode0
+	super ICode0
 	# The value
 	readable var _value: String
 
@@ -398,7 +398,7 @@ end
 # expr is the assigned value
 # result is the register assigned
 class IMove
-special ICode1
+	super ICode1
 	init(r: IRegister, e: IRegister)
 	do
 		super(e)
@@ -411,7 +411,7 @@ end
 # An attribute read access
 # expr is the reciever
 class IAttrRead
-special ICode1
+	super ICode1
 	# The accessed attribute
 	readable var _property: MMAttribute
 
@@ -427,7 +427,7 @@ end
 # An attribute assignment
 # expr1 is the receiver, expr2 is the assigned value
 class IAttrWrite
-special ICode2
+	super ICode2
 	# The accessed attribute
 	readable var _property: MMAttribute
 
@@ -442,7 +442,7 @@ end
 # An attribute is_set check
 # expr is the reciever
 class IAttrIsset
-special ICode1
+	super ICode1
 	# The accessed attribute
 	readable var _property: MMAttribute
 
@@ -458,7 +458,7 @@ end
 # A type check
 # expr is the expression checked
 class ITypeCheck
-special ICode1
+	super ICode1
 	# The static type checkes to
 	readable var _stype: MMType
 
@@ -474,7 +474,7 @@ end
 # The 'is' operator
 # expr1 and expr2 are both operands
 class IIs
-special ICode2
+	super ICode2
 	init(e1, e2: IRegister)
 	do
 		super
@@ -486,7 +486,7 @@ end
 # The unary 'not' operation
 # expr is the operand
 class INot
-special ICode1
+	super ICode1
 	init(e: IRegister)
 	do
 		super
@@ -498,14 +498,14 @@ end
 # Evaluate body once them return the same value again and again
 # if result is not null, then it must also be assigned in the body
 class IOnce
-special ICode0
+	super ICode0
 	readable var _body: ISeq = new ISeq
 	init do end
 end
 
 # Is a closure given as a parameter?
 class IHasClos
-special ICode0
+	super ICode0
 	# The called closure
 	readable var _closure_decl: IClosureDecl
 
