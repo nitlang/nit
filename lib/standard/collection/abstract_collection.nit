@@ -85,7 +85,7 @@ special Collection[E]
 	redef fun length
 	do
 		var nb = 0
-		for i in self do nb += nb
+		for i in self do nb += 1 
 		return nb
 	end
 
