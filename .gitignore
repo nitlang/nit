@@ -10,6 +10,7 @@ doc/stdlib
 *.aux
 *.log
 *.out
+*.toc
 
 src/nitc
 src/nitc_?
