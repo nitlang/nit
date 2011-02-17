@@ -23,6 +23,7 @@
 \usepackage{microtype}
 \usepackage{xcolor}
 \usepackage{comment}
+\usepackage{../nit_version}
 
 \newcommand\thedoctitle{A Concise Reference of the Nit Language}
 \title{\thedoctitle}
@@ -47,9 +48,9 @@
 \lhead{}
 \chead{}
 \rhead{}
-\lfoot{\it\today}
-\cfoot{\it\thedoctitle}
-\rfoot{\it\thepage}
+\lfoot{\small\it\today}
+\cfoot{\small\it\thedoctitle~---~\nitversion}
+\rfoot{\small\it\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 \setlength\footskip{15pt}
