@@ -1,0 +1,8 @@
+* hello_world.nit: the standard "hello word" program.
+* print_arguments.nit: just repeat the arguments of the program.
+* fibonacci.nit: refine Int, the class of all integers, to add a Fibonacci function.
+* procedural_array.nit: simple use of arrays without defining new classes.
+* clock.nit: a simple class to track time on a wall clock.
+* clock_more.nit: refine clock to add comparability between clocks.
+* circular_list.nit: simple use of generic classes and nullable types to implement a double-linked circular list.
+
