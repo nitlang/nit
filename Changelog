@@ -1,5 +1,16 @@
-version 0.3.1-git
- * Devel version
+version 0.4
+ * New style attributes
+ * Documentation
+ * 'package' -> 'module'; 'special' -> 'super'; 'universal' -> 'enum'
+ * New 'or else' syntax
+ * Speed improvements
+ * Use of ccache
+ * Global nullable optimizations
+ * Better adaptive typing
+ * Unreachable statements are errors
+ * Rewriting of the CG
+
+ -- Fri, 18 Feb 2011 16:15:17 -0500
 
 version 0.3
  * Local variable moving static type
