@@ -19,11 +19,11 @@ val_t primitive_info___MMLocalClass___primitive_info(val_t p0){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./primitive_info.nit:36 */
+  /* ./primitive_info.nit:35 */
   REGB0 = TAG_Bool(ATTR_primitive_info___MMLocalClass____primitive_info_b(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_primitive_info_b", LOCATE_primitive_info, 36);
+    nit_abort("Uninitialized attribute %s", "_primitive_info_b", LOCATE_primitive_info, 35);
   }
   REGB0 = ATTR_primitive_info___MMLocalClass____primitive_info_b(fra.me.REG[0]);
   REGB1 = TAG_Bool(true);
@@ -32,79 +32,79 @@ val_t primitive_info___MMLocalClass___primitive_info(val_t p0){
   } else {
     /* ./../lib/standard//kernel.nit:175 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./primitive_info.nit:36 */
+    /* ./primitive_info.nit:35 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
     fra.me.REG[1] = ATTR_primitive_info___MMLocalClass____primitive_info_cache(fra.me.REG[0]);
     goto label1;
   }
-  /* ./primitive_info.nit:38 */
+  /* ./primitive_info.nit:37 */
   if (!once_value_2) {
     fra.me.REG[2] = CALL_primitive_info___MMLocalClass___primitive_ctypes(fra.me.REG[0])(fra.me.REG[0]);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
   fra.me.REG[2] = fra.me.REG[2];
-  /* ./primitive_info.nit:39 */
+  /* ./primitive_info.nit:38 */
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalClass___name(fra.me.REG[0])(fra.me.REG[0]);
   REGB2 = CALL_abstract_collection___MapRead___has_key(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   if (UNTAG_Bool(REGB2)) {
-    /* ./primitive_info.nit:40 */
+    /* ./primitive_info.nit:39 */
     fra.me.REG[3] = CALL_abstractmetamodel___MMLocalClass___name(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[3] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     ATTR_primitive_info___MMLocalClass____primitive_info_cache(fra.me.REG[0]) = fra.me.REG[3];
-    /* ./primitive_info.nit:41 */
+    /* ./primitive_info.nit:40 */
     REGB2 = TAG_Bool(true);
     ATTR_primitive_info___MMLocalClass____primitive_info_b(fra.me.REG[0]) = REGB2;
-    /* ./primitive_info.nit:42 */
+    /* ./primitive_info.nit:41 */
     fra.me.REG[3] = ATTR_primitive_info___MMLocalClass____primitive_info_cache(fra.me.REG[0]);
     fra.me.REG[1] = fra.me.REG[3];
     goto label1;
   }
-  /* ./primitive_info.nit:44 */
+  /* ./primitive_info.nit:43 */
   fra.me.REG[2] = CALL_abstract_collection___Collection___iterator(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./primitive_info.nit:45 */
+  /* ./primitive_info.nit:44 */
   while(1) {
     REGB2 = CALL_abstract_collection___Iterator___is_ok(fra.me.REG[2])(fra.me.REG[2]);
     if (UNTAG_Bool(REGB2)) {
-      /* ./primitive_info.nit:46 */
+      /* ./primitive_info.nit:45 */
       fra.me.REG[3] = CALL_abstract_collection___MapIterator___key(fra.me.REG[2])(fra.me.REG[2]);
-      /* ./primitive_info.nit:47 */
+      /* ./primitive_info.nit:46 */
       fra.me.REG[4] = CALL_abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
       REGB2 = CALL_abstractmetamodel___MMModule___has_global_class_named(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
       if (UNTAG_Bool(REGB2)) {
-        /* ./primitive_info.nit:48 */
+        /* ./primitive_info.nit:47 */
         fra.me.REG[4] = CALL_abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
         fra.me.REG[3] = CALL_abstractmetamodel___MMModule___class_by_name(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
-        /* ./primitive_info.nit:49 */
+        /* ./primitive_info.nit:48 */
         fra.me.REG[4] = CALL_abstractmetamodel___MMLocalClass___cshe(fra.me.REG[0])(fra.me.REG[0]);
         REGB2 = CALL_partial_order___PartialOrderElement_____l(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
         if (UNTAG_Bool(REGB2)) {
-          /* ./primitive_info.nit:50 */
+          /* ./primitive_info.nit:49 */
           fra.me.REG[3] = CALL_abstract_collection___Iterator___item(fra.me.REG[2])(fra.me.REG[2]);
           ATTR_primitive_info___MMLocalClass____primitive_info_cache(fra.me.REG[0]) = fra.me.REG[3];
-          /* ./primitive_info.nit:51 */
+          /* ./primitive_info.nit:50 */
           REGB2 = TAG_Bool(true);
           ATTR_primitive_info___MMLocalClass____primitive_info_b(fra.me.REG[0]) = REGB2;
-          /* ./primitive_info.nit:52 */
+          /* ./primitive_info.nit:51 */
           fra.me.REG[3] = ATTR_primitive_info___MMLocalClass____primitive_info_cache(fra.me.REG[0]);
           fra.me.REG[1] = fra.me.REG[3];
           goto label1;
         }
       }
-      /* ./primitive_info.nit:55 */
+      /* ./primitive_info.nit:54 */
       CALL_abstract_collection___Iterator___next(fra.me.REG[2])(fra.me.REG[2]);
     } else {
-      /* ./primitive_info.nit:45 */
+      /* ./primitive_info.nit:44 */
       goto label3;
     }
   }
   label3: while(0);
-  /* ./primitive_info.nit:57 */
+  /* ./primitive_info.nit:56 */
   REGB2 = TAG_Bool(true);
   ATTR_primitive_info___MMLocalClass____primitive_info_b(fra.me.REG[0]) = REGB2;
-  /* ./primitive_info.nit:58 */
+  /* ./primitive_info.nit:57 */
   fra.me.REG[1] = NIT_NULL;
   goto label1;
   label1: while(0);
@@ -134,7 +134,7 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
   static val_t once_value_12; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_primitive_info;
-  fra.me.line = 61;
+  fra.me.line = 60;
   fra.me.meth = LOCATE_primitive_info___MMLocalClass___primitive_ctypes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -146,9 +146,9 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./primitive_info.nit:64 */
+  /* ./primitive_info.nit:63 */
   fra.me.REG[0] = NEW_HashMap_hash_collection___HashMap___init();
-  /* ./primitive_info.nit:65 */
+  /* ./primitive_info.nit:64 */
   REGB0 = TAG_Int(6);
   fra.me.REG[1] = NEW_Array_array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -205,7 +205,7 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
   } else fra.me.REG[2] = once_value_6;
   fra.me.REG[2] = fra.me.REG[2];
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./primitive_info.nit:66 */
+  /* ./primitive_info.nit:65 */
   REGB0 = TAG_Int(6);
   fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB0);
   REGB0 = TAG_Bool(true);
@@ -220,7 +220,7 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], REGB0);
   REGB0 = TAG_Bool(false);
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], REGB0);
-  /* ./primitive_info.nit:67 */
+  /* ./primitive_info.nit:66 */
   REGB0 = TAG_Int(6);
   fra.me.REG[3] = NEW_Array_array___Array___with_capacity(REGB0);
   if (!once_value_7) {
@@ -277,7 +277,7 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
   } else fra.me.REG[4] = once_value_12;
   fra.me.REG[4] = fra.me.REG[4];
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-  /* ./primitive_info.nit:68 */
+  /* ./primitive_info.nit:67 */
   REGB0 = TAG_Int(0);
   /* ./../lib/standard//collection//array.nit:23 */
   REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -292,7 +292,7 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
     /* ./../lib/standard//kernel.nit:332 */
     if (UNTAG_Bool(REGB2)) {
-      /* ./primitive_info.nit:68 */
+      /* ./primitive_info.nit:67 */
       REGB2 = REGB0;
       /* ./../lib/standard//collection//array.nit:243 */
       fra.me.REG[4] = fra.me.REG[1];
@@ -331,10 +331,10 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
       /* ./../lib/standard//collection//array.nit:246 */
       goto label13;
       label13: while(0);
-      /* ./primitive_info.nit:69 */
+      /* ./primitive_info.nit:68 */
       REGB3 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
-        nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 69);
+        nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 68);
       }
       fra.me.REG[4] = CALL_symbol___String___to_symbol(fra.me.REG[4])(fra.me.REG[4]);
       /* ./../lib/standard//collection//array.nit:243 */
@@ -410,9 +410,9 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
       /* ./../lib/standard//collection//array.nit:246 */
       goto label15;
       label15: while(0);
-      /* ./primitive_info.nit:70 */
+      /* ./primitive_info.nit:69 */
       fra.me.REG[6] = NEW_PrimitiveInfo_primitive_info___PrimitiveInfo___init(fra.me.REG[4], fra.me.REG[5], fra.me.REG[6]);
-      /* ./primitive_info.nit:71 */
+      /* ./primitive_info.nit:70 */
       CALL_abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4], fra.me.REG[6]);
       /* ./../lib/standard//kernel.nit:334 */
       REGB2 = TAG_Int(1);
@@ -426,7 +426,7 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
     }
   }
   label16: while(0);
-  /* ./primitive_info.nit:73 */
+  /* ./primitive_info.nit:72 */
   goto label17;
   label17: while(0);
   stack_frame_head = fra.me.prev;
@@ -438,17 +438,17 @@ val_t primitive_info___PrimitiveInfo___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_primitive_info;
-  fra.me.line = 79;
+  fra.me.line = 78;
   fra.me.meth = LOCATE_primitive_info___PrimitiveInfo___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./primitive_info.nit:79 */
+  /* ./primitive_info.nit:78 */
   REGB0 = TAG_Bool(ATTR_primitive_info___PrimitiveInfo____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_name", LOCATE_primitive_info, 79);
+    nit_abort("Uninitialized attribute %s", "_name", LOCATE_primitive_info, 78);
   }
   fra.me.REG[0] = ATTR_primitive_info___PrimitiveInfo____name(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -460,17 +460,17 @@ val_t primitive_info___PrimitiveInfo___tagged(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_primitive_info;
-  fra.me.line = 82;
+  fra.me.line = 81;
   fra.me.meth = LOCATE_primitive_info___PrimitiveInfo___tagged;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./primitive_info.nit:82 */
+  /* ./primitive_info.nit:81 */
   REGB0 = TAG_Bool(ATTR_primitive_info___PrimitiveInfo____tagged(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_tagged", LOCATE_primitive_info, 82);
+    nit_abort("Uninitialized attribute %s", "_tagged", LOCATE_primitive_info, 81);
   }
   REGB0 = ATTR_primitive_info___PrimitiveInfo____tagged(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -482,17 +482,17 @@ val_t primitive_info___PrimitiveInfo___cname(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_primitive_info;
-  fra.me.line = 85;
+  fra.me.line = 84;
   fra.me.meth = LOCATE_primitive_info___PrimitiveInfo___cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./primitive_info.nit:85 */
+  /* ./primitive_info.nit:84 */
   REGB0 = TAG_Bool(ATTR_primitive_info___PrimitiveInfo____cname(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_cname", LOCATE_primitive_info, 85);
+    nit_abort("Uninitialized attribute %s", "_cname", LOCATE_primitive_info, 84);
   }
   fra.me.REG[0] = ATTR_primitive_info___PrimitiveInfo____cname(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -506,7 +506,7 @@ void primitive_info___PrimitiveInfo___init(val_t p0, val_t p1, val_t p2, val_t p
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_primitive_info;
-  fra.me.line = 88;
+  fra.me.line = 87;
   fra.me.meth = LOCATE_primitive_info___PrimitiveInfo___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -517,11 +517,11 @@ void primitive_info___PrimitiveInfo___init(val_t p0, val_t p1, val_t p2, val_t p
   fra.me.REG[1] = p1;
   REGB0 = p2;
   fra.me.REG[2] = p3;
-  /* ./primitive_info.nit:90 */
+  /* ./primitive_info.nit:89 */
   ATTR_primitive_info___PrimitiveInfo____name(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./primitive_info.nit:91 */
+  /* ./primitive_info.nit:90 */
   ATTR_primitive_info___PrimitiveInfo____tagged(fra.me.REG[0]) = REGB0;
-  /* ./primitive_info.nit:92 */
+  /* ./primitive_info.nit:91 */
   ATTR_primitive_info___PrimitiveInfo____cname(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -535,17 +535,17 @@ val_t primitive_info___MMType___cname(val_t p0){
     static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_primitive_info;
-  fra.me.line = 97;
+  fra.me.line = 96;
   fra.me.meth = LOCATE_primitive_info___MMType___cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./primitive_info.nit:100 */
+  /* ./primitive_info.nit:99 */
   fra.me.REG[0] = CALL_static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_primitive_info___MMLocalClass___primitive_info(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./primitive_info.nit:101 */
+  /* ./primitive_info.nit:100 */
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -559,7 +559,7 @@ val_t primitive_info___MMType___cname(val_t p0){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./primitive_info.nit:102 */
+    /* ./primitive_info.nit:101 */
     if (!once_value_1) {
       fra.me.REG[1] = BOX_NativeString("val_t");
       REGB0 = TAG_Int(5);
@@ -570,10 +570,10 @@ val_t primitive_info___MMType___cname(val_t p0){
     fra.me.REG[1] = fra.me.REG[1];
     goto label2;
   } else {
-    /* ./primitive_info.nit:104 */
+    /* ./primitive_info.nit:103 */
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 104);
+      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 103);
     }
     fra.me.REG[0] = CALL_primitive_info___PrimitiveInfo___cname(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[1] = fra.me.REG[0];
@@ -591,22 +591,22 @@ val_t primitive_info___MMType___is_tagged(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_primitive_info;
-  fra.me.line = 108;
+  fra.me.line = 107;
   fra.me.meth = LOCATE_primitive_info___MMType___is_tagged;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./primitive_info.nit:111 */
+  /* ./primitive_info.nit:110 */
   REGB0 = CALL_static_type___MMType___is_nullable(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(false);
     goto label1;
   }
-  /* ./primitive_info.nit:112 */
+  /* ./primitive_info.nit:111 */
   fra.me.REG[0] = CALL_static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_primitive_info___MMLocalClass___primitive_info(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./primitive_info.nit:113 */
+  /* ./primitive_info.nit:112 */
   REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -623,7 +623,7 @@ val_t primitive_info___MMType___is_tagged(val_t p0){
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
-      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 113);
+      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 112);
     }
     REGB1 = CALL_primitive_info___PrimitiveInfo___tagged(fra.me.REG[0])(fra.me.REG[0]);
   } else {
@@ -647,7 +647,7 @@ val_t primitive_info___MMType___default_cvalue(val_t p0){
     static val_t once_value_5; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_primitive_info;
-  fra.me.line = 116;
+  fra.me.line = 115;
   fra.me.meth = LOCATE_primitive_info___MMType___default_cvalue;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -656,10 +656,10 @@ val_t primitive_info___MMType___default_cvalue(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./primitive_info.nit:120 */
+  /* ./primitive_info.nit:119 */
   fra.me.REG[1] = CALL_static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_primitive_info___MMLocalClass___primitive_info(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./primitive_info.nit:121 */
+  /* ./primitive_info.nit:120 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -676,7 +676,7 @@ val_t primitive_info___MMType___default_cvalue(val_t p0){
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 121);
+      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 120);
     }
     REGB0 = CALL_primitive_info___PrimitiveInfo___tagged(fra.me.REG[1])(fra.me.REG[1]);
   } else {
@@ -684,7 +684,7 @@ val_t primitive_info___MMType___default_cvalue(val_t p0){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./primitive_info.nit:122 */
+    /* ./primitive_info.nit:121 */
     REGB0 = TAG_Int(5);
     fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -711,7 +711,7 @@ val_t primitive_info___MMType___default_cvalue(val_t p0){
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 122);
+      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 121);
     }
     fra.me.REG[1] = CALL_primitive_info___PrimitiveInfo___cname(fra.me.REG[1])(fra.me.REG[1]);
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
@@ -727,7 +727,7 @@ val_t primitive_info___MMType___default_cvalue(val_t p0){
     fra.me.REG[2] = CALL_string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
     goto label4;
   } else {
-    /* ./primitive_info.nit:124 */
+    /* ./primitive_info.nit:123 */
     if (!once_value_5) {
       fra.me.REG[1] = BOX_NativeString("NIT_NULL");
       REGB0 = TAG_Int(8);
@@ -756,7 +756,7 @@ val_t primitive_info___MMType___boxtype(val_t p0, val_t p1){
       static val_t once_value_7; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_primitive_info;
-  fra.me.line = 128;
+  fra.me.line = 127;
   fra.me.meth = LOCATE_primitive_info___MMType___boxtype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -767,10 +767,10 @@ val_t primitive_info___MMType___boxtype(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./primitive_info.nit:132 */
+  /* ./primitive_info.nit:131 */
   fra.me.REG[2] = CALL_static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_primitive_info___MMLocalClass___primitive_info(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./primitive_info.nit:133 */
+  /* ./primitive_info.nit:132 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -784,18 +784,18 @@ val_t primitive_info___MMType___boxtype(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./primitive_info.nit:134 */
+    /* ./primitive_info.nit:133 */
     fra.me.REG[3] = fra.me.REG[1];
     goto label1;
   } else {
-    /* ./primitive_info.nit:135 */
+    /* ./primitive_info.nit:134 */
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 135);
+      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 134);
     }
     REGB0 = CALL_primitive_info___PrimitiveInfo___tagged(fra.me.REG[2])(fra.me.REG[2]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./primitive_info.nit:136 */
+      /* ./primitive_info.nit:135 */
       REGB0 = TAG_Int(5);
       fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB0);
       if (!once_value_2) {
@@ -834,7 +834,7 @@ val_t primitive_info___MMType___boxtype(val_t p0, val_t p1){
       fra.me.REG[3] = fra.me.REG[2];
       goto label1;
     } else {
-      /* ./primitive_info.nit:138 */
+      /* ./primitive_info.nit:137 */
       REGB0 = TAG_Int(5);
       fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB0);
       if (!once_value_5) {
@@ -891,7 +891,7 @@ val_t primitive_info___MMType___unboxtype(val_t p0, val_t p1){
       static val_t once_value_7; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_primitive_info;
-  fra.me.line = 142;
+  fra.me.line = 141;
   fra.me.meth = LOCATE_primitive_info___MMType___unboxtype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -902,10 +902,10 @@ val_t primitive_info___MMType___unboxtype(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./primitive_info.nit:146 */
+  /* ./primitive_info.nit:145 */
   fra.me.REG[2] = CALL_static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_primitive_info___MMLocalClass___primitive_info(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./primitive_info.nit:147 */
+  /* ./primitive_info.nit:146 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -919,18 +919,18 @@ val_t primitive_info___MMType___unboxtype(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./primitive_info.nit:148 */
+    /* ./primitive_info.nit:147 */
     fra.me.REG[3] = fra.me.REG[1];
     goto label1;
   } else {
-    /* ./primitive_info.nit:149 */
+    /* ./primitive_info.nit:148 */
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 149);
+      nit_abort("Reciever is null", NULL, LOCATE_primitive_info, 148);
     }
     REGB0 = CALL_primitive_info___PrimitiveInfo___tagged(fra.me.REG[2])(fra.me.REG[2]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./primitive_info.nit:150 */
+      /* ./primitive_info.nit:149 */
       REGB0 = TAG_Int(5);
       fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB0);
       if (!once_value_2) {
@@ -969,7 +969,7 @@ val_t primitive_info___MMType___unboxtype(val_t p0, val_t p1){
       fra.me.REG[3] = fra.me.REG[2];
       goto label1;
     } else {
-      /* ./primitive_info.nit:152 */
+      /* ./primitive_info.nit:151 */
       REGB0 = TAG_Int(5);
       fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB0);
       if (!once_value_5) {

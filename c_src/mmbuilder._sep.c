@@ -275,7 +275,7 @@ void mmbuilder___MMSrcModule___do_mmbuilder(val_t p0, val_t p1){
       }
       if (UNTAG_Bool(REGB1)) {
         fra.me.REG[7] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[6])(fra.me.REG[6]);
-        REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_universal(fra.me.REG[7])(fra.me.REG[7]);
+        REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[7])(fra.me.REG[7]);
         REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
       } else {
         REGB2 = TAG_Bool(false);
@@ -716,7 +716,7 @@ void mmbuilder___MMSrcLocalClass___process_default_constructors(val_t p0, val_t 
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
       /* ./syntax//mmbuilder.nit:186 */
       fra.me.REG[7] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[6])(fra.me.REG[6]);
-      REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_universal(fra.me.REG[7])(fra.me.REG[7]);
+      REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[7])(fra.me.REG[7]);
       if (UNTAG_Bool(REGB1)) {
         REGB1 = TAG_Bool(true);
       } else {
@@ -2579,8 +2579,8 @@ void mmbuilder___AModuledecl___accept_class_builder(val_t p0, val_t p1){
     REGB0 = TAG_Int(5);
     fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB0);
     if (!once_value_1) {
-      fra.me.REG[4] = BOX_NativeString("Error: Package name missmatch between ");
-      REGB0 = TAG_Int(38);
+      fra.me.REG[4] = BOX_NativeString("Error: Module name missmatch between ");
+      REGB0 = TAG_Int(37);
       fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB0);
       once_value_1 = fra.me.REG[4];
       register_static_object(&once_value_1);
@@ -3085,14 +3085,14 @@ val_t mmbuilder___AClasskind___is_interface(val_t p0){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-val_t mmbuilder___AClasskind___is_universal(val_t p0){
+val_t mmbuilder___AClasskind___is_enum(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
   fra.me.line = 572;
-  fra.me.meth = LOCATE_mmbuilder___AClasskind___is_universal;
+  fra.me.meth = LOCATE_mmbuilder___AClasskind___is_enum;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
@@ -3142,14 +3142,14 @@ val_t mmbuilder___AInterfaceClasskind___is_interface(val_t p0){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-val_t mmbuilder___AUniversalClasskind___is_universal(val_t p0){
+val_t mmbuilder___AEnumClasskind___is_enum(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
   fra.me.line = 580;
-  fra.me.meth = LOCATE_mmbuilder___AUniversalClasskind___is_universal;
+  fra.me.meth = LOCATE_mmbuilder___AEnumClasskind___is_enum;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
@@ -3303,8 +3303,8 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
     CALL_abstractmetamodel___MMGlobalClass___is_abstract__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
     /* ./syntax//mmbuilder.nit:604 */
     fra.me.REG[4] = CALL_parser_nodes___AStdClassdef___n_classkind(fra.me.REG[2])(fra.me.REG[2]);
-    REGB0 = CALL_mmbuilder___AClasskind___is_universal(fra.me.REG[4])(fra.me.REG[4]);
-    CALL_abstractmetamodel___MMGlobalClass___is_universal__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
+    REGB0 = CALL_mmbuilder___AClasskind___is_enum(fra.me.REG[4])(fra.me.REG[4]);
+    CALL_abstractmetamodel___MMGlobalClass___is_enum__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
     /* ./syntax//mmbuilder.nit:605 */
     fra.me.REG[4] = CALL_parser_nodes___AStdClassdef___n_kwredef(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
@@ -3393,7 +3393,7 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
         REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_interface(fra.me.REG[1])(fra.me.REG[1]);
         if (UNTAG_Bool(REGB1)) {
           /* ./syntax//mmbuilder.nit:612 */
-          REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_universal(fra.me.REG[6])(fra.me.REG[6]);
+          REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[6])(fra.me.REG[6]);
           if (UNTAG_Bool(REGB1)) {
             /* ./syntax//mmbuilder.nit:613 */
             REGB1 = TAG_Int(5);
@@ -3411,8 +3411,8 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
             fra.me.REG[8] = CALL_string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
             CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
             if (!once_value_4) {
-              fra.me.REG[8] = BOX_NativeString(" try to specialise universal class ");
-              REGB1 = TAG_Int(35);
+              fra.me.REG[8] = BOX_NativeString(" try to specialise enum class ");
+              REGB1 = TAG_Int(30);
               fra.me.REG[8] = NEW_String_string___String___with_native(fra.me.REG[8], REGB1);
               once_value_4 = fra.me.REG[8];
               register_static_object(&once_value_4);
@@ -3480,13 +3480,13 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
           }
         } else {
           /* ./syntax//mmbuilder.nit:617 */
-          REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_universal(fra.me.REG[1])(fra.me.REG[1]);
+          REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[1])(fra.me.REG[1]);
           if (UNTAG_Bool(REGB1)) {
             /* ./syntax//mmbuilder.nit:618 */
             REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_interface(fra.me.REG[6])(fra.me.REG[6]);
             REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
             if (UNTAG_Bool(REGB1)) {
-              REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_universal(fra.me.REG[6])(fra.me.REG[6]);
+              REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[6])(fra.me.REG[6]);
               REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
             } else {
               REGB2 = TAG_Bool(false);
@@ -3497,8 +3497,8 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
               REGB1 = TAG_Int(5);
               fra.me.REG[7] = NEW_Array_array___Array___with_capacity(REGB1);
               if (!once_value_9) {
-		fra.me.REG[8] = BOX_NativeString("Special error: Universal class ");
-		REGB1 = TAG_Int(31);
+		fra.me.REG[8] = BOX_NativeString("Special error: Enum class ");
+		REGB1 = TAG_Int(26);
 		fra.me.REG[8] = NEW_String_string___String___with_native(fra.me.REG[8], REGB1);
 		once_value_9 = fra.me.REG[8];
 		register_static_object(&once_value_9);
@@ -3534,7 +3534,7 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
             }
           } else {
             /* ./syntax//mmbuilder.nit:622 */
-            REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_universal(fra.me.REG[6])(fra.me.REG[6]);
+            REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[6])(fra.me.REG[6]);
             if (UNTAG_Bool(REGB1)) {
               /* ./syntax//mmbuilder.nit:623 */
               REGB1 = TAG_Int(5);
@@ -3552,8 +3552,8 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
               fra.me.REG[7] = CALL_string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
               CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
               if (!once_value_13) {
-		fra.me.REG[7] = BOX_NativeString(" try to specialise universal class ");
-		REGB1 = TAG_Int(35);
+		fra.me.REG[7] = BOX_NativeString(" try to specialise enum class ");
+		REGB1 = TAG_Int(30);
 		fra.me.REG[7] = NEW_String_string___String___with_native(fra.me.REG[7], REGB1);
 		once_value_13 = fra.me.REG[7];
 		register_static_object(&once_value_13);
@@ -3735,7 +3735,7 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
     REGB2 = TAG_Bool(true);
   } else {
     /* ./syntax//mmbuilder.nit:646 */
-    REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_universal(fra.me.REG[1])(fra.me.REG[1]);
+    REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[1])(fra.me.REG[1]);
     REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
     /* ./syntax//mmbuilder.nit:644 */
     REGB2 = REGB1;
@@ -3743,7 +3743,7 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB2)) {
     /* ./syntax//mmbuilder.nit:646 */
     fra.me.REG[1] = CALL_parser_nodes___AStdClassdef___n_classkind(fra.me.REG[2])(fra.me.REG[2]);
-    REGB2 = CALL_mmbuilder___AClasskind___is_universal(fra.me.REG[1])(fra.me.REG[1]);
+    REGB2 = CALL_mmbuilder___AClasskind___is_enum(fra.me.REG[1])(fra.me.REG[1]);
   } else {
     /* ./syntax//mmbuilder.nit:644 */
     REGB1 = TAG_Bool(false);
@@ -4484,7 +4484,7 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
       CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
     } else {
       /* ./syntax//mmbuilder.nit:775 */
-      REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_universal(fra.me.REG[4])(fra.me.REG[4]);
+      REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[4])(fra.me.REG[4]);
       if (UNTAG_Bool(REGB0)) {
         /* ./syntax//mmbuilder.nit:776 */
         REGB0 = TAG_Int(5);
@@ -4501,8 +4501,8 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
         fra.me.REG[6] = CALL_string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
         CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
         if (!once_value_8) {
-          fra.me.REG[6] = BOX_NativeString(" in the universal class ");
-          REGB0 = TAG_Int(24);
+          fra.me.REG[6] = BOX_NativeString(" in the enum class ");
+          REGB0 = TAG_Int(19);
           fra.me.REG[6] = NEW_String_string___String___with_native(fra.me.REG[6], REGB0);
           once_value_8 = fra.me.REG[6];
           register_static_object(&once_value_8);
@@ -4571,7 +4571,7 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
         CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
       } else {
         /* ./syntax//mmbuilder.nit:781 */
-        REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_universal(fra.me.REG[4])(fra.me.REG[4]);
+        REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[4])(fra.me.REG[4]);
         if (UNTAG_Bool(REGB0)) {
           /* ./syntax//mmbuilder.nit:782 */
           REGB0 = TAG_Int(5);
@@ -4588,8 +4588,8 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
           fra.me.REG[5] = CALL_string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
           CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
           if (!once_value_14) {
-            fra.me.REG[5] = BOX_NativeString(" in the universal ");
-            REGB0 = TAG_Int(18);
+            fra.me.REG[5] = BOX_NativeString(" in the enum ");
+            REGB0 = TAG_Int(13);
             fra.me.REG[5] = NEW_String_string___String___with_native(fra.me.REG[5], REGB0);
             once_value_14 = fra.me.REG[5];
             register_static_object(&once_value_14);

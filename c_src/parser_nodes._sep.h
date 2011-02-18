@@ -24,7 +24,7 @@ extern const classtable_elt_t VFT_TKwabstract[];
 
 extern const classtable_elt_t VFT_TKwinterface[];
 
-extern const classtable_elt_t VFT_TKwuniversal[];
+extern const classtable_elt_t VFT_TKwenum[];
 
 extern const classtable_elt_t VFT_TKwspecial[];
 
@@ -228,7 +228,7 @@ extern const classtable_elt_t VFT_AAbstractClasskind[];
 
 extern const classtable_elt_t VFT_AInterfaceClasskind[];
 
-extern const classtable_elt_t VFT_AUniversalClasskind[];
+extern const classtable_elt_t VFT_AEnumClasskind[];
 
 extern const classtable_elt_t VFT_AFormaldef[];
 
@@ -533,9 +533,9 @@ extern const int SFT_parser_nodes[];
 #define ID_TKwinterface (SFT_parser_nodes[28])
 #define COLOR_TKwinterface (SFT_parser_nodes[29])
 #define INIT_TABLE_POS_TKwinterface (SFT_parser_nodes[30] + 0)
-#define ID_TKwuniversal (SFT_parser_nodes[31])
-#define COLOR_TKwuniversal (SFT_parser_nodes[32])
-#define INIT_TABLE_POS_TKwuniversal (SFT_parser_nodes[33] + 0)
+#define ID_TKwenum (SFT_parser_nodes[31])
+#define COLOR_TKwenum (SFT_parser_nodes[32])
+#define INIT_TABLE_POS_TKwenum (SFT_parser_nodes[33] + 0)
 #define ID_TKwspecial (SFT_parser_nodes[34])
 #define COLOR_TKwspecial (SFT_parser_nodes[35])
 #define INIT_TABLE_POS_TKwspecial (SFT_parser_nodes[36] + 0)
@@ -899,11 +899,11 @@ extern const int SFT_parser_nodes[];
 #define ATTR_parser_nodes___AInterfaceClasskind____n_kwinterface(recv) ATTR(recv, (SFT_parser_nodes[348] + 0))
 #define INIT_TABLE_POS_AInterfaceClasskind (SFT_parser_nodes[349] + 0)
 #define CALL_parser_nodes___AInterfaceClasskind___n_kwinterface(recv) ((parser_nodes___AInterfaceClasskind___n_kwinterface_t)CALL((recv), (SFT_parser_nodes[349] + 1)))
-#define ID_AUniversalClasskind (SFT_parser_nodes[350])
-#define COLOR_AUniversalClasskind (SFT_parser_nodes[351])
-#define ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(recv) ATTR(recv, (SFT_parser_nodes[352] + 0))
-#define INIT_TABLE_POS_AUniversalClasskind (SFT_parser_nodes[353] + 0)
-#define CALL_parser_nodes___AUniversalClasskind___n_kwuniversal(recv) ((parser_nodes___AUniversalClasskind___n_kwuniversal_t)CALL((recv), (SFT_parser_nodes[353] + 1)))
+#define ID_AEnumClasskind (SFT_parser_nodes[350])
+#define COLOR_AEnumClasskind (SFT_parser_nodes[351])
+#define ATTR_parser_nodes___AEnumClasskind____n_kwenum(recv) ATTR(recv, (SFT_parser_nodes[352] + 0))
+#define INIT_TABLE_POS_AEnumClasskind (SFT_parser_nodes[353] + 0)
+#define CALL_parser_nodes___AEnumClasskind___n_kwenum(recv) ((parser_nodes___AEnumClasskind___n_kwenum_t)CALL((recv), (SFT_parser_nodes[353] + 1)))
 #define ID_AFormaldef (SFT_parser_nodes[354])
 #define COLOR_AFormaldef (SFT_parser_nodes[355])
 #define ATTR_parser_nodes___AFormaldef____n_id(recv) ATTR(recv, (SFT_parser_nodes[356] + 0))
@@ -1709,7 +1709,7 @@ val_t NEW_TKwimport_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TKwclass_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TKwabstract_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TKwinterface_parser_nodes___ANode___init(val_t p0);
-val_t NEW_TKwuniversal_parser_nodes___ANode___init(val_t p0);
+val_t NEW_TKwenum_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TKwspecial_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TKwend_parser_nodes___ANode___init(val_t p0);
 val_t NEW_TKwmeth_parser_nodes___ANode___init(val_t p0);
@@ -1904,10 +1904,10 @@ static const char * const LOCATE_parser_nodes___AInterfaceClasskind___n_kwinterf
 val_t parser_nodes___AInterfaceClasskind___n_kwinterface(val_t p0);
 typedef val_t (*parser_nodes___AInterfaceClasskind___n_kwinterface_t)(val_t p0);
 val_t NEW_AInterfaceClasskind_parser_nodes___ANode___init(val_t p0);
-static const char * const LOCATE_parser_nodes___AUniversalClasskind___n_kwuniversal = "parser_nodes::AUniversalClasskind::n_kwuniversal";
-val_t parser_nodes___AUniversalClasskind___n_kwuniversal(val_t p0);
-typedef val_t (*parser_nodes___AUniversalClasskind___n_kwuniversal_t)(val_t p0);
-val_t NEW_AUniversalClasskind_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_nodes___AEnumClasskind___n_kwenum = "parser_nodes::AEnumClasskind::n_kwenum";
+val_t parser_nodes___AEnumClasskind___n_kwenum(val_t p0);
+typedef val_t (*parser_nodes___AEnumClasskind___n_kwenum_t)(val_t p0);
+val_t NEW_AEnumClasskind_parser_nodes___ANode___init(val_t p0);
 static const char * const LOCATE_parser_nodes___AFormaldef___n_id = "parser_nodes::AFormaldef::n_id";
 val_t parser_nodes___AFormaldef___n_id(val_t p0);
 typedef val_t (*parser_nodes___AFormaldef___n_id_t)(val_t p0);

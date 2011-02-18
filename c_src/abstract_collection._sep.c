@@ -210,8 +210,9 @@ val_t abstract_collection___NaiveCollection___length(val_t p0){
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
+    REGB0 = TAG_Int(1);
     /* ./../lib/standard//kernel.nit:215 */
-    REGB0 = TAG_Int(UNTAG_Int(closctx->REG[1])+UNTAG_Int(closctx->REG[1]));
+    REGB0 = TAG_Int(UNTAG_Int(closctx->REG[1])+UNTAG_Int(REGB0));
     /* ./../lib/standard//collection//abstract_collection.nit:88 */
     closctx->REG[1] = REGB0;
     stack_frame_head = fra.me.prev;

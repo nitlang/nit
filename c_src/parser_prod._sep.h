@@ -51,8 +51,8 @@ extern const int SFT_parser_prod[];
 #define CALL_parser_prod___AAbstractClasskind___init_aabstractclasskind(recv) ((parser_prod___AAbstractClasskind___init_aabstractclasskind_t)CALL((recv), (SFT_parser_prod[19] + 1)))
 #define CALL_parser_prod___AInterfaceClasskind___empty_init(recv) ((parser_prod___AInterfaceClasskind___empty_init_t)CALL((recv), (SFT_parser_prod[20] + 0)))
 #define CALL_parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(recv) ((parser_prod___AInterfaceClasskind___init_ainterfaceclasskind_t)CALL((recv), (SFT_parser_prod[20] + 1)))
-#define CALL_parser_prod___AUniversalClasskind___empty_init(recv) ((parser_prod___AUniversalClasskind___empty_init_t)CALL((recv), (SFT_parser_prod[21] + 0)))
-#define CALL_parser_prod___AUniversalClasskind___init_auniversalclasskind(recv) ((parser_prod___AUniversalClasskind___init_auniversalclasskind_t)CALL((recv), (SFT_parser_prod[21] + 1)))
+#define CALL_parser_prod___AEnumClasskind___empty_init(recv) ((parser_prod___AEnumClasskind___empty_init_t)CALL((recv), (SFT_parser_prod[21] + 0)))
+#define CALL_parser_prod___AEnumClasskind___init_aenumclasskind(recv) ((parser_prod___AEnumClasskind___init_aenumclasskind_t)CALL((recv), (SFT_parser_prod[21] + 1)))
 #define CALL_parser_prod___AFormaldef___empty_init(recv) ((parser_prod___AFormaldef___empty_init_t)CALL((recv), (SFT_parser_prod[22] + 0)))
 #define CALL_parser_prod___AFormaldef___init_aformaldef(recv) ((parser_prod___AFormaldef___init_aformaldef_t)CALL((recv), (SFT_parser_prod[22] + 1)))
 #define CALL_parser_prod___ASuperclass___empty_init(recv) ((parser_prod___ASuperclass___empty_init_t)CALL((recv), (SFT_parser_prod[23] + 0)))
@@ -583,21 +583,21 @@ static const char * const LOCATE_parser_prod___AInterfaceClasskind___visit_all =
 void parser_prod___AInterfaceClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser_prod___AInterfaceClasskind___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AInterfaceClasskind_parser_nodes___ANode___init(val_t p0);
-static const char * const LOCATE_parser_prod___AUniversalClasskind___empty_init = "parser_prod::AUniversalClasskind::empty_init";
-void parser_prod___AUniversalClasskind___empty_init(val_t p0, int* init_table);
-typedef void (*parser_prod___AUniversalClasskind___empty_init_t)(val_t p0, int* init_table);
-val_t NEW_AUniversalClasskind_parser_prod___AUniversalClasskind___empty_init();
-static const char * const LOCATE_parser_prod___AUniversalClasskind___init_auniversalclasskind = "parser_prod::AUniversalClasskind::init_auniversalclasskind";
-void parser_prod___AUniversalClasskind___init_auniversalclasskind(val_t p0, val_t p1, int* init_table);
-typedef void (*parser_prod___AUniversalClasskind___init_auniversalclasskind_t)(val_t p0, val_t p1, int* init_table);
-val_t NEW_AUniversalClasskind_parser_prod___AUniversalClasskind___init_auniversalclasskind(val_t p0);
-static const char * const LOCATE_parser_prod___AUniversalClasskind___replace_child = "parser_prod::AUniversalClasskind::(parser_prod::ANode::replace_child)";
-void parser_prod___AUniversalClasskind___replace_child(val_t p0, val_t p1, val_t p2);
-typedef void (*parser_prod___AUniversalClasskind___replace_child_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_parser_prod___AUniversalClasskind___visit_all = "parser_prod::AUniversalClasskind::(parser_prod::ANode::visit_all)";
-void parser_prod___AUniversalClasskind___visit_all(val_t p0, val_t p1);
-typedef void (*parser_prod___AUniversalClasskind___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AUniversalClasskind_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_prod___AEnumClasskind___empty_init = "parser_prod::AEnumClasskind::empty_init";
+void parser_prod___AEnumClasskind___empty_init(val_t p0, int* init_table);
+typedef void (*parser_prod___AEnumClasskind___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_AEnumClasskind_parser_prod___AEnumClasskind___empty_init();
+static const char * const LOCATE_parser_prod___AEnumClasskind___init_aenumclasskind = "parser_prod::AEnumClasskind::init_aenumclasskind";
+void parser_prod___AEnumClasskind___init_aenumclasskind(val_t p0, val_t p1, int* init_table);
+typedef void (*parser_prod___AEnumClasskind___init_aenumclasskind_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_AEnumClasskind_parser_prod___AEnumClasskind___init_aenumclasskind(val_t p0);
+static const char * const LOCATE_parser_prod___AEnumClasskind___replace_child = "parser_prod::AEnumClasskind::(parser_prod::ANode::replace_child)";
+void parser_prod___AEnumClasskind___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser_prod___AEnumClasskind___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___AEnumClasskind___visit_all = "parser_prod::AEnumClasskind::(parser_prod::ANode::visit_all)";
+void parser_prod___AEnumClasskind___visit_all(val_t p0, val_t p1);
+typedef void (*parser_prod___AEnumClasskind___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_AEnumClasskind_parser_nodes___ANode___init(val_t p0);
 static const char * const LOCATE_parser_prod___AFormaldef___empty_init = "parser_prod::AFormaldef::empty_init";
 void parser_prod___AFormaldef___empty_init(val_t p0, int* init_table);
 typedef void (*parser_prod___AFormaldef___empty_init_t)(val_t p0, int* init_table);

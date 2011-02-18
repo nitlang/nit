@@ -18,7 +18,7 @@ extern const int SFT_lexer[];
 #define CALL_lexer___TKwclass___init_tk(recv) ((lexer___TKwclass___init_tk_t)CALL((recv), (SFT_lexer[6] + 0)))
 #define CALL_lexer___TKwabstract___init_tk(recv) ((lexer___TKwabstract___init_tk_t)CALL((recv), (SFT_lexer[7] + 0)))
 #define CALL_lexer___TKwinterface___init_tk(recv) ((lexer___TKwinterface___init_tk_t)CALL((recv), (SFT_lexer[8] + 0)))
-#define CALL_lexer___TKwuniversal___init_tk(recv) ((lexer___TKwuniversal___init_tk_t)CALL((recv), (SFT_lexer[9] + 0)))
+#define CALL_lexer___TKwenum___init_tk(recv) ((lexer___TKwenum___init_tk_t)CALL((recv), (SFT_lexer[9] + 0)))
 #define CALL_lexer___TKwspecial___init_tk(recv) ((lexer___TKwspecial___init_tk_t)CALL((recv), (SFT_lexer[10] + 0)))
 #define CALL_lexer___TKwend___init_tk(recv) ((lexer___TKwend___init_tk_t)CALL((recv), (SFT_lexer[11] + 0)))
 #define CALL_lexer___TKwmeth___init_tk(recv) ((lexer___TKwmeth___init_tk_t)CALL((recv), (SFT_lexer[12] + 0)))
@@ -192,14 +192,14 @@ void lexer___TKwinterface___init_tk(val_t p0, val_t p1, int* init_table);
 typedef void (*lexer___TKwinterface___init_tk_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_TKwinterface_lexer___TKwinterface___init_tk(val_t p0);
 val_t NEW_TKwinterface_parser_nodes___ANode___init(val_t p0);
-static const char * const LOCATE_lexer___TKwuniversal___parser_index = "lexer::TKwuniversal::(lexer::Token::parser_index)";
-val_t lexer___TKwuniversal___parser_index(val_t p0);
-typedef val_t (*lexer___TKwuniversal___parser_index_t)(val_t p0);
-static const char * const LOCATE_lexer___TKwuniversal___init_tk = "lexer::TKwuniversal::init_tk";
-void lexer___TKwuniversal___init_tk(val_t p0, val_t p1, int* init_table);
-typedef void (*lexer___TKwuniversal___init_tk_t)(val_t p0, val_t p1, int* init_table);
-val_t NEW_TKwuniversal_lexer___TKwuniversal___init_tk(val_t p0);
-val_t NEW_TKwuniversal_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_lexer___TKwenum___parser_index = "lexer::TKwenum::(lexer::Token::parser_index)";
+val_t lexer___TKwenum___parser_index(val_t p0);
+typedef val_t (*lexer___TKwenum___parser_index_t)(val_t p0);
+static const char * const LOCATE_lexer___TKwenum___init_tk = "lexer::TKwenum::init_tk";
+void lexer___TKwenum___init_tk(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*lexer___TKwenum___init_tk_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_TKwenum_lexer___TKwenum___init_tk(val_t p0, val_t p1);
+val_t NEW_TKwenum_parser_nodes___ANode___init(val_t p0);
 static const char * const LOCATE_lexer___TKwspecial___parser_index = "lexer::TKwspecial::(lexer::Token::parser_index)";
 val_t lexer___TKwspecial___parser_index(val_t p0);
 typedef val_t (*lexer___TKwspecial___parser_index_t)(val_t p0);

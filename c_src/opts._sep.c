@@ -786,7 +786,7 @@ void opts___OptionEnum___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, 
   }
   /* ./../lib/opts.nit:143 */
   fra.me.REG[4] = CALL_array___Collection___to_a(fra.me.REG[1])(fra.me.REG[1]);
-  ATTR_opts___OptionEnum____enum(fra.me.REG[0]) = fra.me.REG[4];
+  ATTR_opts___OptionEnum____values(fra.me.REG[0]) = fra.me.REG[4];
   /* ./../lib/opts.nit:144 */
   REGB2 = TAG_Int(5);
   fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB2);
@@ -849,12 +849,12 @@ val_t opts___OptionEnum___convert(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   /* ./../lib/opts.nit:149 */
-  REGB0 = TAG_Bool(ATTR_opts___OptionEnum____enum(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_opts___OptionEnum____values(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_enum", LOCATE_opts, 149);
+    nit_abort("Uninitialized attribute %s", "_values", LOCATE_opts, 149);
   }
-  fra.me.REG[0] = ATTR_opts___OptionEnum____enum(fra.me.REG[0]);
+  fra.me.REG[0] = ATTR_opts___OptionEnum____values(fra.me.REG[0]);
   REGB0 = CALL_abstract_collection___SequenceRead___index_of(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./../lib/opts.nit:150 */
   goto label1;
@@ -878,12 +878,12 @@ val_t opts___OptionEnum___value_name(val_t p0){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/opts.nit:153 */
-  REGB0 = TAG_Bool(ATTR_opts___OptionEnum____enum(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_opts___OptionEnum____values(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_enum", LOCATE_opts, 153);
+    nit_abort("Uninitialized attribute %s", "_values", LOCATE_opts, 153);
   }
-  fra.me.REG[1] = ATTR_opts___OptionEnum____enum(fra.me.REG[0]);
+  fra.me.REG[1] = ATTR_opts___OptionEnum____values(fra.me.REG[0]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
   /* ./../lib/standard//collection//array.nit:243 */
   REGB0 = fra.me.REG[0];
@@ -976,12 +976,12 @@ val_t opts___OptionEnum___pretty_default(val_t p0){
     } else fra.me.REG[2] = once_value_1;
     fra.me.REG[2] = fra.me.REG[2];
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-    REGB0 = TAG_Bool(ATTR_opts___OptionEnum____enum(fra.me.REG[0])!=NIT_NULL);
+    REGB0 = TAG_Bool(ATTR_opts___OptionEnum____values(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_enum", LOCATE_opts, 158);
+      nit_abort("Uninitialized attribute %s", "_values", LOCATE_opts, 158);
     }
-    fra.me.REG[2] = ATTR_opts___OptionEnum____enum(fra.me.REG[0]);
+    fra.me.REG[2] = ATTR_opts___OptionEnum____values(fra.me.REG[0]);
     fra.me.REG[0] = CALL_opts___Option___default_value(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool((fra.me.REG[0]!=NIT_NULL) && VAL_ISA(fra.me.REG[0], COLOR_Int, ID_Int)) /*cast VALUE*/;
     if (UNTAG_Bool(REGB0)) {

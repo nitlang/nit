@@ -33,7 +33,7 @@ CLIBDIR="clib"
   ./stream_nit.c\
   ./stream._sep.c\
   ./string_search._sep.c\
-  .//exec_nit.c\
+  ./exec_nit.c\
   ./exec._sep.c\
   ./math._sep.c\
   ./tables_nit.c\

@@ -454,14 +454,14 @@ void lexer___TKwinterface___init_tk(val_t p0, val_t p1, int* init_table){
   init_table[itpos6] = 1;
   return;
 }
-val_t lexer___TKwuniversal___parser_index(val_t p0){
+val_t lexer___TKwenum___parser_index(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_lexer;
   fra.me.line = 110;
-  fra.me.meth = LOCATE_lexer___TKwuniversal___parser_index;
+  fra.me.meth = LOCATE_lexer___TKwenum___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
@@ -473,18 +473,15 @@ val_t lexer___TKwuniversal___parser_index(val_t p0){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-void lexer___TKwuniversal___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos7 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_TKwuniversal].i;
+void lexer___TKwenum___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
+  int itpos7 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_TKwenum].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
-  val_t REGB0;
   val_t tmp;
-  static val_t once_value_1; /* Once value */
-    static val_t once_value_2; /* Once value */
   if (init_table[itpos7]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_lexer;
   fra.me.line = 115;
-  fra.me.meth = LOCATE_lexer___TKwuniversal___init_tk;
+  fra.me.meth = LOCATE_lexer___TKwenum___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
   fra.me.REG[0] = NIT_NULL;
@@ -492,23 +489,11 @@ void lexer___TKwuniversal___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  fra.me.REG[2] = p2;
   /* ./parser//lexer.nit:117 */
-  if (!once_value_1) {
-    if (!once_value_2) {
-      fra.me.REG[2] = BOX_NativeString("universal");
-      REGB0 = TAG_Int(9);
-      fra.me.REG[2] = NEW_String_string___String___with_native(fra.me.REG[2], REGB0);
-      once_value_2 = fra.me.REG[2];
-      register_static_object(&once_value_2);
-    } else fra.me.REG[2] = once_value_2;
-    fra.me.REG[2] = fra.me.REG[2];
-    once_value_1 = fra.me.REG[2];
-    register_static_object(&once_value_1);
-  } else fra.me.REG[2] = once_value_1;
-  fra.me.REG[2] = fra.me.REG[2];
-  ATTR_lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
+  ATTR_lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
   /* ./parser//lexer.nit:118 */
-  ATTR_parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
+  ATTR_parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos7] = 1;
   return;
@@ -5416,11 +5401,6 @@ val_t lexer___Lexer___next(val_t p0){
   /* ./parser//lexer.nit:1266 */
   ATTR_lexer___Lexer____token(fra.me.REG[0]) = NIT_NULL;
   /* ./parser//lexer.nit:1267 */
-  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Cast failed", NULL, LOCATE_lexer, 1267);
-  }
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
@@ -5992,1360 +5972,1363 @@ val_t lexer___Lexer___get_token(val_t p0){
         }
         if (UNTAG_Bool(REGB11)) {
           /* ./parser//lexer.nit:1391 */
-          fra.me.REG[4] = NEW_TKwuniversal_lexer___TKwuniversal___init_tk(fra.me.REG[2]);
+          REGB11 = TAG_Int(0);
+          fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB11, REGB5);
+          /* ./parser//lexer.nit:1392 */
+          fra.me.REG[4] = NEW_TKwenum_lexer___TKwenum___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1393 */
+        /* ./parser//lexer.nit:1394 */
         REGB11 = TAG_Int(9);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1393 */
+          /* ./parser//lexer.nit:1394 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1394 */
+          /* ./parser//lexer.nit:1395 */
           fra.me.REG[4] = NEW_TKwspecial_lexer___TKwspecial___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1396 */
+        /* ./parser//lexer.nit:1397 */
         REGB9 = TAG_Int(10);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1396 */
+          /* ./parser//lexer.nit:1397 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1397 */
+          /* ./parser//lexer.nit:1398 */
           fra.me.REG[4] = NEW_TKwend_lexer___TKwend___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1399 */
+        /* ./parser//lexer.nit:1400 */
         REGB11 = TAG_Int(11);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1399 */
+          /* ./parser//lexer.nit:1400 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1400 */
+          /* ./parser//lexer.nit:1401 */
           fra.me.REG[4] = NEW_TKwmeth_lexer___TKwmeth___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1402 */
+        /* ./parser//lexer.nit:1403 */
         REGB9 = TAG_Int(12);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1402 */
+          /* ./parser//lexer.nit:1403 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1403 */
+          /* ./parser//lexer.nit:1404 */
           fra.me.REG[4] = NEW_TKwtype_lexer___TKwtype___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1405 */
+        /* ./parser//lexer.nit:1406 */
         REGB11 = TAG_Int(13);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1405 */
+          /* ./parser//lexer.nit:1406 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1406 */
+          /* ./parser//lexer.nit:1407 */
           fra.me.REG[4] = NEW_TKwinit_lexer___TKwinit___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1408 */
+        /* ./parser//lexer.nit:1409 */
         REGB9 = TAG_Int(14);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1408 */
+          /* ./parser//lexer.nit:1409 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1409 */
+          /* ./parser//lexer.nit:1410 */
           fra.me.REG[4] = NEW_TKwredef_lexer___TKwredef___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1411 */
+        /* ./parser//lexer.nit:1412 */
         REGB11 = TAG_Int(15);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1411 */
+          /* ./parser//lexer.nit:1412 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1412 */
+          /* ./parser//lexer.nit:1413 */
           fra.me.REG[4] = NEW_TKwis_lexer___TKwis___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1414 */
+        /* ./parser//lexer.nit:1415 */
         REGB9 = TAG_Int(16);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1414 */
+          /* ./parser//lexer.nit:1415 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1415 */
+          /* ./parser//lexer.nit:1416 */
           fra.me.REG[4] = NEW_TKwdo_lexer___TKwdo___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1417 */
+        /* ./parser//lexer.nit:1418 */
         REGB11 = TAG_Int(17);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1417 */
+          /* ./parser//lexer.nit:1418 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1418 */
+          /* ./parser//lexer.nit:1419 */
           fra.me.REG[4] = NEW_TKwreadable_lexer___TKwreadable___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1420 */
+        /* ./parser//lexer.nit:1421 */
         REGB9 = TAG_Int(18);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1420 */
+          /* ./parser//lexer.nit:1421 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1421 */
+          /* ./parser//lexer.nit:1422 */
           fra.me.REG[4] = NEW_TKwwritable_lexer___TKwwritable___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1423 */
+        /* ./parser//lexer.nit:1424 */
         REGB11 = TAG_Int(19);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1423 */
+          /* ./parser//lexer.nit:1424 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1424 */
+          /* ./parser//lexer.nit:1425 */
           fra.me.REG[4] = NEW_TKwvar_lexer___TKwvar___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1426 */
+        /* ./parser//lexer.nit:1427 */
         REGB9 = TAG_Int(20);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1426 */
+          /* ./parser//lexer.nit:1427 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1427 */
+          /* ./parser//lexer.nit:1428 */
           fra.me.REG[4] = NEW_TKwintern_lexer___TKwintern___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1429 */
+        /* ./parser//lexer.nit:1430 */
         REGB11 = TAG_Int(21);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1429 */
+          /* ./parser//lexer.nit:1430 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1430 */
+          /* ./parser//lexer.nit:1431 */
           fra.me.REG[4] = NEW_TKwextern_lexer___TKwextern___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1432 */
+        /* ./parser//lexer.nit:1433 */
         REGB9 = TAG_Int(22);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1432 */
+          /* ./parser//lexer.nit:1433 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1433 */
+          /* ./parser//lexer.nit:1434 */
           fra.me.REG[4] = NEW_TKwprotected_lexer___TKwprotected___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1435 */
+        /* ./parser//lexer.nit:1436 */
         REGB11 = TAG_Int(23);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1435 */
+          /* ./parser//lexer.nit:1436 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1436 */
+          /* ./parser//lexer.nit:1437 */
           fra.me.REG[4] = NEW_TKwprivate_lexer___TKwprivate___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1438 */
+        /* ./parser//lexer.nit:1439 */
         REGB9 = TAG_Int(24);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1438 */
+          /* ./parser//lexer.nit:1439 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1439 */
+          /* ./parser//lexer.nit:1440 */
           fra.me.REG[4] = NEW_TKwintrude_lexer___TKwintrude___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1441 */
+        /* ./parser//lexer.nit:1442 */
         REGB11 = TAG_Int(25);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1441 */
+          /* ./parser//lexer.nit:1442 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1442 */
+          /* ./parser//lexer.nit:1443 */
           fra.me.REG[4] = NEW_TKwif_lexer___TKwif___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1444 */
+        /* ./parser//lexer.nit:1445 */
         REGB9 = TAG_Int(26);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1444 */
+          /* ./parser//lexer.nit:1445 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1445 */
+          /* ./parser//lexer.nit:1446 */
           fra.me.REG[4] = NEW_TKwthen_lexer___TKwthen___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1447 */
+        /* ./parser//lexer.nit:1448 */
         REGB11 = TAG_Int(27);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1447 */
+          /* ./parser//lexer.nit:1448 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1448 */
+          /* ./parser//lexer.nit:1449 */
           fra.me.REG[4] = NEW_TKwelse_lexer___TKwelse___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1450 */
+        /* ./parser//lexer.nit:1451 */
         REGB9 = TAG_Int(28);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1450 */
+          /* ./parser//lexer.nit:1451 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1451 */
+          /* ./parser//lexer.nit:1452 */
           fra.me.REG[4] = NEW_TKwwhile_lexer___TKwwhile___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1453 */
+        /* ./parser//lexer.nit:1454 */
         REGB11 = TAG_Int(29);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1453 */
+          /* ./parser//lexer.nit:1454 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1454 */
+          /* ./parser//lexer.nit:1455 */
           fra.me.REG[4] = NEW_TKwloop_lexer___TKwloop___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1456 */
+        /* ./parser//lexer.nit:1457 */
         REGB9 = TAG_Int(30);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1456 */
+          /* ./parser//lexer.nit:1457 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1457 */
+          /* ./parser//lexer.nit:1458 */
           fra.me.REG[4] = NEW_TKwfor_lexer___TKwfor___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1459 */
+        /* ./parser//lexer.nit:1460 */
         REGB11 = TAG_Int(31);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1459 */
+          /* ./parser//lexer.nit:1460 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1460 */
+          /* ./parser//lexer.nit:1461 */
           fra.me.REG[4] = NEW_TKwin_lexer___TKwin___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1462 */
+        /* ./parser//lexer.nit:1463 */
         REGB9 = TAG_Int(32);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1462 */
+          /* ./parser//lexer.nit:1463 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1463 */
+          /* ./parser//lexer.nit:1464 */
           fra.me.REG[4] = NEW_TKwand_lexer___TKwand___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1465 */
+        /* ./parser//lexer.nit:1466 */
         REGB11 = TAG_Int(33);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1465 */
+          /* ./parser//lexer.nit:1466 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1466 */
+          /* ./parser//lexer.nit:1467 */
           fra.me.REG[4] = NEW_TKwor_lexer___TKwor___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1468 */
+        /* ./parser//lexer.nit:1469 */
         REGB9 = TAG_Int(34);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1468 */
+          /* ./parser//lexer.nit:1469 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1469 */
+          /* ./parser//lexer.nit:1470 */
           fra.me.REG[4] = NEW_TKwnot_lexer___TKwnot___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1471 */
+        /* ./parser//lexer.nit:1472 */
         REGB11 = TAG_Int(35);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1471 */
+          /* ./parser//lexer.nit:1472 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1472 */
+          /* ./parser//lexer.nit:1473 */
           fra.me.REG[4] = NEW_TKwreturn_lexer___TKwreturn___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1474 */
+        /* ./parser//lexer.nit:1475 */
         REGB9 = TAG_Int(36);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1474 */
+          /* ./parser//lexer.nit:1475 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1475 */
+          /* ./parser//lexer.nit:1476 */
           fra.me.REG[4] = NEW_TKwcontinue_lexer___TKwcontinue___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1477 */
+        /* ./parser//lexer.nit:1478 */
         REGB11 = TAG_Int(37);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1477 */
+          /* ./parser//lexer.nit:1478 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1478 */
+          /* ./parser//lexer.nit:1479 */
           fra.me.REG[4] = NEW_TKwbreak_lexer___TKwbreak___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1480 */
+        /* ./parser//lexer.nit:1481 */
         REGB9 = TAG_Int(38);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1480 */
+          /* ./parser//lexer.nit:1481 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1481 */
+          /* ./parser//lexer.nit:1482 */
           fra.me.REG[4] = NEW_TKwabort_lexer___TKwabort___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1483 */
+        /* ./parser//lexer.nit:1484 */
         REGB11 = TAG_Int(39);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1483 */
+          /* ./parser//lexer.nit:1484 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1484 */
+          /* ./parser//lexer.nit:1485 */
           fra.me.REG[4] = NEW_TKwassert_lexer___TKwassert___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1486 */
+        /* ./parser//lexer.nit:1487 */
         REGB9 = TAG_Int(40);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1486 */
+          /* ./parser//lexer.nit:1487 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1487 */
+          /* ./parser//lexer.nit:1488 */
           fra.me.REG[4] = NEW_TKwnew_lexer___TKwnew___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1489 */
+        /* ./parser//lexer.nit:1490 */
         REGB11 = TAG_Int(41);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1489 */
+          /* ./parser//lexer.nit:1490 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1490 */
+          /* ./parser//lexer.nit:1491 */
           fra.me.REG[4] = NEW_TKwisa_lexer___TKwisa___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1492 */
+        /* ./parser//lexer.nit:1493 */
         REGB9 = TAG_Int(42);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1492 */
+          /* ./parser//lexer.nit:1493 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1493 */
+          /* ./parser//lexer.nit:1494 */
           fra.me.REG[4] = NEW_TKwonce_lexer___TKwonce___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1495 */
+        /* ./parser//lexer.nit:1496 */
         REGB11 = TAG_Int(43);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1495 */
+          /* ./parser//lexer.nit:1496 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1496 */
+          /* ./parser//lexer.nit:1497 */
           fra.me.REG[4] = NEW_TKwsuper_lexer___TKwsuper___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1498 */
+        /* ./parser//lexer.nit:1499 */
         REGB9 = TAG_Int(44);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1498 */
+          /* ./parser//lexer.nit:1499 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1499 */
+          /* ./parser//lexer.nit:1500 */
           fra.me.REG[4] = NEW_TKwself_lexer___TKwself___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1501 */
+        /* ./parser//lexer.nit:1502 */
         REGB11 = TAG_Int(45);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1501 */
+          /* ./parser//lexer.nit:1502 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1502 */
+          /* ./parser//lexer.nit:1503 */
           fra.me.REG[4] = NEW_TKwtrue_lexer___TKwtrue___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1504 */
+        /* ./parser//lexer.nit:1505 */
         REGB9 = TAG_Int(46);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1504 */
+          /* ./parser//lexer.nit:1505 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1505 */
+          /* ./parser//lexer.nit:1506 */
           fra.me.REG[4] = NEW_TKwfalse_lexer___TKwfalse___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1507 */
+        /* ./parser//lexer.nit:1508 */
         REGB11 = TAG_Int(47);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1507 */
+          /* ./parser//lexer.nit:1508 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1508 */
+          /* ./parser//lexer.nit:1509 */
           fra.me.REG[4] = NEW_TKwnull_lexer___TKwnull___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1510 */
+        /* ./parser//lexer.nit:1511 */
         REGB9 = TAG_Int(48);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1510 */
+          /* ./parser//lexer.nit:1511 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1511 */
+          /* ./parser//lexer.nit:1512 */
           fra.me.REG[4] = NEW_TKwas_lexer___TKwas___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1513 */
+        /* ./parser//lexer.nit:1514 */
         REGB11 = TAG_Int(49);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1513 */
+          /* ./parser//lexer.nit:1514 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1514 */
+          /* ./parser//lexer.nit:1515 */
           fra.me.REG[4] = NEW_TKwnullable_lexer___TKwnullable___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1516 */
+        /* ./parser//lexer.nit:1517 */
         REGB9 = TAG_Int(50);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1516 */
+          /* ./parser//lexer.nit:1517 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1517 */
+          /* ./parser//lexer.nit:1518 */
           fra.me.REG[4] = NEW_TKwisset_lexer___TKwisset___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1519 */
+        /* ./parser//lexer.nit:1520 */
         REGB11 = TAG_Int(51);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1519 */
+          /* ./parser//lexer.nit:1520 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1520 */
+          /* ./parser//lexer.nit:1521 */
           fra.me.REG[4] = NEW_TKwlabel_lexer___TKwlabel___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1522 */
+        /* ./parser//lexer.nit:1523 */
         REGB9 = TAG_Int(52);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1522 */
+          /* ./parser//lexer.nit:1523 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1523 */
+          /* ./parser//lexer.nit:1524 */
           fra.me.REG[4] = NEW_TOpar_lexer___TOpar___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1525 */
+        /* ./parser//lexer.nit:1526 */
         REGB11 = TAG_Int(53);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1525 */
+          /* ./parser//lexer.nit:1526 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1526 */
+          /* ./parser//lexer.nit:1527 */
           fra.me.REG[4] = NEW_TCpar_lexer___TCpar___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1528 */
+        /* ./parser//lexer.nit:1529 */
         REGB9 = TAG_Int(54);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1528 */
+          /* ./parser//lexer.nit:1529 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1529 */
+          /* ./parser//lexer.nit:1530 */
           fra.me.REG[4] = NEW_TObra_lexer___TObra___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1531 */
+        /* ./parser//lexer.nit:1532 */
         REGB11 = TAG_Int(55);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1531 */
+          /* ./parser//lexer.nit:1532 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1532 */
+          /* ./parser//lexer.nit:1533 */
           fra.me.REG[4] = NEW_TCbra_lexer___TCbra___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1534 */
+        /* ./parser//lexer.nit:1535 */
         REGB9 = TAG_Int(56);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1534 */
+          /* ./parser//lexer.nit:1535 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1535 */
+          /* ./parser//lexer.nit:1536 */
           fra.me.REG[4] = NEW_TComma_lexer___TComma___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1537 */
+        /* ./parser//lexer.nit:1538 */
         REGB11 = TAG_Int(57);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1537 */
+          /* ./parser//lexer.nit:1538 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1538 */
+          /* ./parser//lexer.nit:1539 */
           fra.me.REG[4] = NEW_TColumn_lexer___TColumn___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1540 */
+        /* ./parser//lexer.nit:1541 */
         REGB9 = TAG_Int(58);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1540 */
+          /* ./parser//lexer.nit:1541 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1541 */
+          /* ./parser//lexer.nit:1542 */
           fra.me.REG[4] = NEW_TQuad_lexer___TQuad___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1543 */
+        /* ./parser//lexer.nit:1544 */
         REGB11 = TAG_Int(59);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1543 */
+          /* ./parser//lexer.nit:1544 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1544 */
+          /* ./parser//lexer.nit:1545 */
           fra.me.REG[4] = NEW_TAssign_lexer___TAssign___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1546 */
+        /* ./parser//lexer.nit:1547 */
         REGB9 = TAG_Int(60);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1546 */
+          /* ./parser//lexer.nit:1547 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1547 */
+          /* ./parser//lexer.nit:1548 */
           fra.me.REG[4] = NEW_TPluseq_lexer___TPluseq___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1549 */
+        /* ./parser//lexer.nit:1550 */
         REGB11 = TAG_Int(61);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1549 */
+          /* ./parser//lexer.nit:1550 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1550 */
+          /* ./parser//lexer.nit:1551 */
           fra.me.REG[4] = NEW_TMinuseq_lexer___TMinuseq___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1552 */
+        /* ./parser//lexer.nit:1553 */
         REGB9 = TAG_Int(62);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1552 */
+          /* ./parser//lexer.nit:1553 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1553 */
+          /* ./parser//lexer.nit:1554 */
           fra.me.REG[4] = NEW_TDotdotdot_lexer___TDotdotdot___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1555 */
+        /* ./parser//lexer.nit:1556 */
         REGB11 = TAG_Int(63);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1555 */
+          /* ./parser//lexer.nit:1556 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1556 */
+          /* ./parser//lexer.nit:1557 */
           fra.me.REG[4] = NEW_TDotdot_lexer___TDotdot___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1558 */
+        /* ./parser//lexer.nit:1559 */
         REGB9 = TAG_Int(64);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1558 */
+          /* ./parser//lexer.nit:1559 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1559 */
+          /* ./parser//lexer.nit:1560 */
           fra.me.REG[4] = NEW_TDot_lexer___TDot___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1561 */
+        /* ./parser//lexer.nit:1562 */
         REGB11 = TAG_Int(65);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1561 */
+          /* ./parser//lexer.nit:1562 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1562 */
+          /* ./parser//lexer.nit:1563 */
           fra.me.REG[4] = NEW_TPlus_lexer___TPlus___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1564 */
+        /* ./parser//lexer.nit:1565 */
         REGB9 = TAG_Int(66);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1564 */
+          /* ./parser//lexer.nit:1565 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1565 */
+          /* ./parser//lexer.nit:1566 */
           fra.me.REG[4] = NEW_TMinus_lexer___TMinus___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1567 */
+        /* ./parser//lexer.nit:1568 */
         REGB11 = TAG_Int(67);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1567 */
+          /* ./parser//lexer.nit:1568 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1568 */
+          /* ./parser//lexer.nit:1569 */
           fra.me.REG[4] = NEW_TStar_lexer___TStar___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1570 */
+        /* ./parser//lexer.nit:1571 */
         REGB9 = TAG_Int(68);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1570 */
+          /* ./parser//lexer.nit:1571 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1571 */
+          /* ./parser//lexer.nit:1572 */
           fra.me.REG[4] = NEW_TSlash_lexer___TSlash___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1573 */
+        /* ./parser//lexer.nit:1574 */
         REGB11 = TAG_Int(69);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1573 */
+          /* ./parser//lexer.nit:1574 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1574 */
+          /* ./parser//lexer.nit:1575 */
           fra.me.REG[4] = NEW_TPercent_lexer___TPercent___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1576 */
+        /* ./parser//lexer.nit:1577 */
         REGB9 = TAG_Int(70);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1576 */
+          /* ./parser//lexer.nit:1577 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1577 */
+          /* ./parser//lexer.nit:1578 */
           fra.me.REG[4] = NEW_TEq_lexer___TEq___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1579 */
+        /* ./parser//lexer.nit:1580 */
         REGB11 = TAG_Int(71);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1579 */
+          /* ./parser//lexer.nit:1580 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1580 */
+          /* ./parser//lexer.nit:1581 */
           fra.me.REG[4] = NEW_TNe_lexer___TNe___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1582 */
+        /* ./parser//lexer.nit:1583 */
         REGB9 = TAG_Int(72);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1582 */
+          /* ./parser//lexer.nit:1583 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1583 */
+          /* ./parser//lexer.nit:1584 */
           fra.me.REG[4] = NEW_TLt_lexer___TLt___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1585 */
+        /* ./parser//lexer.nit:1586 */
         REGB11 = TAG_Int(73);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1585 */
+          /* ./parser//lexer.nit:1586 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1586 */
+          /* ./parser//lexer.nit:1587 */
           fra.me.REG[4] = NEW_TLe_lexer___TLe___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1588 */
+        /* ./parser//lexer.nit:1589 */
         REGB9 = TAG_Int(74);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1588 */
+          /* ./parser//lexer.nit:1589 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1589 */
+          /* ./parser//lexer.nit:1590 */
           fra.me.REG[4] = NEW_TLl_lexer___TLl___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1591 */
+        /* ./parser//lexer.nit:1592 */
         REGB11 = TAG_Int(75);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1591 */
+          /* ./parser//lexer.nit:1592 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1592 */
+          /* ./parser//lexer.nit:1593 */
           fra.me.REG[4] = NEW_TGt_lexer___TGt___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1594 */
+        /* ./parser//lexer.nit:1595 */
         REGB9 = TAG_Int(76);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1594 */
+          /* ./parser//lexer.nit:1595 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1595 */
+          /* ./parser//lexer.nit:1596 */
           fra.me.REG[4] = NEW_TGe_lexer___TGe___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1597 */
+        /* ./parser//lexer.nit:1598 */
         REGB11 = TAG_Int(77);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1597 */
+          /* ./parser//lexer.nit:1598 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1598 */
+          /* ./parser//lexer.nit:1599 */
           fra.me.REG[4] = NEW_TGg_lexer___TGg___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1600 */
+        /* ./parser//lexer.nit:1601 */
         REGB9 = TAG_Int(78);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1600 */
+          /* ./parser//lexer.nit:1601 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1601 */
+          /* ./parser//lexer.nit:1602 */
           fra.me.REG[4] = NEW_TStarship_lexer___TStarship___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1603 */
+        /* ./parser//lexer.nit:1604 */
         REGB11 = TAG_Int(79);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1603 */
+          /* ./parser//lexer.nit:1604 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1604 */
+          /* ./parser//lexer.nit:1605 */
           fra.me.REG[4] = NEW_TBang_lexer___TBang___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1606 */
+        /* ./parser//lexer.nit:1607 */
         REGB9 = TAG_Int(80);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1606 */
+          /* ./parser//lexer.nit:1607 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1607 */
+          /* ./parser//lexer.nit:1608 */
           REGB11 = TAG_Int(0);
           fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB11, REGB5);
-          /* ./parser//lexer.nit:1608 */
+          /* ./parser//lexer.nit:1609 */
           fra.me.REG[4] = NEW_TClassid_lexer___TClassid___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1610 */
+        /* ./parser//lexer.nit:1611 */
         REGB11 = TAG_Int(81);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1610 */
+          /* ./parser//lexer.nit:1611 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1611 */
+          /* ./parser//lexer.nit:1612 */
           REGB9 = TAG_Int(0);
           fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB9, REGB5);
-          /* ./parser//lexer.nit:1612 */
+          /* ./parser//lexer.nit:1613 */
           fra.me.REG[4] = NEW_TId_lexer___TId___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1614 */
+        /* ./parser//lexer.nit:1615 */
         REGB9 = TAG_Int(82);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1614 */
+          /* ./parser//lexer.nit:1615 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1615 */
+          /* ./parser//lexer.nit:1616 */
           REGB11 = TAG_Int(0);
           fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB11, REGB5);
-          /* ./parser//lexer.nit:1616 */
+          /* ./parser//lexer.nit:1617 */
           fra.me.REG[4] = NEW_TAttrid_lexer___TAttrid___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1618 */
+        /* ./parser//lexer.nit:1619 */
         REGB11 = TAG_Int(83);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1618 */
+          /* ./parser//lexer.nit:1619 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1619 */
+          /* ./parser//lexer.nit:1620 */
           REGB9 = TAG_Int(0);
           fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB9, REGB5);
-          /* ./parser//lexer.nit:1620 */
+          /* ./parser//lexer.nit:1621 */
           fra.me.REG[4] = NEW_TNumber_lexer___TNumber___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1622 */
+        /* ./parser//lexer.nit:1623 */
         REGB9 = TAG_Int(84);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1622 */
+          /* ./parser//lexer.nit:1623 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1623 */
+          /* ./parser//lexer.nit:1624 */
           REGB11 = TAG_Int(0);
           fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB11, REGB5);
-          /* ./parser//lexer.nit:1624 */
+          /* ./parser//lexer.nit:1625 */
           fra.me.REG[4] = NEW_TFloat_lexer___TFloat___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1626 */
+        /* ./parser//lexer.nit:1627 */
         REGB11 = TAG_Int(85);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1626 */
+          /* ./parser//lexer.nit:1627 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1627 */
+          /* ./parser//lexer.nit:1628 */
           REGB9 = TAG_Int(0);
           fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB9, REGB5);
-          /* ./parser//lexer.nit:1628 */
+          /* ./parser//lexer.nit:1629 */
           fra.me.REG[4] = NEW_TChar_lexer___TChar___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1630 */
+        /* ./parser//lexer.nit:1631 */
         REGB9 = TAG_Int(86);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1630 */
+          /* ./parser//lexer.nit:1631 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1631 */
+          /* ./parser//lexer.nit:1632 */
           REGB11 = TAG_Int(0);
           fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB11, REGB5);
-          /* ./parser//lexer.nit:1632 */
+          /* ./parser//lexer.nit:1633 */
           fra.me.REG[4] = NEW_TString_lexer___TString___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1634 */
+        /* ./parser//lexer.nit:1635 */
         REGB11 = TAG_Int(87);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1634 */
+          /* ./parser//lexer.nit:1635 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1635 */
+          /* ./parser//lexer.nit:1636 */
           REGB9 = TAG_Int(0);
           fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB9, REGB5);
-          /* ./parser//lexer.nit:1636 */
+          /* ./parser//lexer.nit:1637 */
           fra.me.REG[4] = NEW_TStartString_lexer___TStartString___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1638 */
+        /* ./parser//lexer.nit:1639 */
         REGB9 = TAG_Int(88);
         REGB11 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB9));
         if (UNTAG_Bool(REGB11)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB9 = TAG_Bool((REGB4)==(REGB9));
-          /* ./parser//lexer.nit:1638 */
+          /* ./parser//lexer.nit:1639 */
           REGB11 = REGB9;
         }
         if (UNTAG_Bool(REGB11)) {
-          /* ./parser//lexer.nit:1639 */
+          /* ./parser//lexer.nit:1640 */
           REGB11 = TAG_Int(0);
           fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB11, REGB5);
-          /* ./parser//lexer.nit:1640 */
+          /* ./parser//lexer.nit:1641 */
           fra.me.REG[4] = NEW_TMidString_lexer___TMidString___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1642 */
+        /* ./parser//lexer.nit:1643 */
         REGB11 = TAG_Int(89);
         REGB9 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB11));
         if (UNTAG_Bool(REGB9)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB11 = TAG_Bool((REGB4)==(REGB11));
-          /* ./parser//lexer.nit:1642 */
+          /* ./parser//lexer.nit:1643 */
           REGB9 = REGB11;
         }
         if (UNTAG_Bool(REGB9)) {
-          /* ./parser//lexer.nit:1643 */
+          /* ./parser//lexer.nit:1644 */
           REGB9 = TAG_Int(0);
           fra.me.REG[4] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB9, REGB5);
-          /* ./parser//lexer.nit:1644 */
+          /* ./parser//lexer.nit:1645 */
           fra.me.REG[2] = NEW_TEndString_lexer___TEndString___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[2];
           goto label3;
         }
       } else {
-        /* ./parser//lexer.nit:1647 */
+        /* ./parser//lexer.nit:1648 */
         REGB9 = TAG_Bool(ATTR_lexer___Lexer____filename(fra.me.REG[0])!=NIT_NULL);
         if (UNTAG_Bool(REGB9)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_filename", LOCATE_lexer, 1647);
+          nit_abort("Uninitialized attribute %s", "_filename", LOCATE_lexer, 1648);
         }
         fra.me.REG[2] = ATTR_lexer___Lexer____filename(fra.me.REG[0]);
         REGB9 = TAG_Int(1);
         /* ./../lib/standard//kernel.nit:215 */
         REGB9 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB9));
-        /* ./parser//lexer.nit:1647 */
+        /* ./parser//lexer.nit:1648 */
         REGB11 = TAG_Int(1);
         /* ./../lib/standard//kernel.nit:215 */
         REGB11 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB11));
-        /* ./parser//lexer.nit:1647 */
+        /* ./parser//lexer.nit:1648 */
         REGB10 = TAG_Int(1);
         /* ./../lib/standard//kernel.nit:215 */
         REGB10 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB10));
-        /* ./parser//lexer.nit:1647 */
+        /* ./parser//lexer.nit:1648 */
         REGB8 = TAG_Int(1);
         /* ./../lib/standard//kernel.nit:215 */
         REGB8 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB8));
-        /* ./parser//lexer.nit:1647 */
+        /* ./parser//lexer.nit:1648 */
         fra.me.REG[2] = NEW_Location_location___Location___init(fra.me.REG[2], REGB9, REGB11, REGB10, REGB8);
         /* ./../lib/standard//collection//array.nit:23 */
         REGB8 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -7354,13 +7337,13 @@ val_t lexer___Lexer___get_token(val_t p0){
           nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
         }
         REGB8 = ATTR_array___AbstractArrayRead____length(fra.me.REG[1]);
-        /* ./parser//lexer.nit:1648 */
+        /* ./parser//lexer.nit:1649 */
         REGB10 = TAG_Int(0);
         /* ./../lib/standard//kernel.nit:214 */
         REGB10 = TAG_Bool(UNTAG_Int(REGB8)>UNTAG_Int(REGB10));
-        /* ./parser//lexer.nit:1648 */
+        /* ./parser//lexer.nit:1649 */
         if (UNTAG_Bool(REGB10)) {
-          /* ./parser//lexer.nit:1649 */
+          /* ./parser//lexer.nit:1650 */
           REGB10 = TAG_Int(3);
           fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB10);
           if (!once_value_4) {
@@ -7385,28 +7368,19 @@ val_t lexer___Lexer___get_token(val_t p0){
           CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
           fra.me.REG[4] = CALL_string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
           fra.me.REG[4] = NEW_AError_lexer___AError___init_error(fra.me.REG[4], fra.me.REG[2]);
-          /* ./parser//lexer.nit:1650 */
+          /* ./parser//lexer.nit:1651 */
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         } else {
-          /* ./parser//lexer.nit:1652 */
-          fra.me.REG[2] = NEW_EOF_lexer___EOF___init(fra.me.REG[2]);
           /* ./parser//lexer.nit:1653 */
+          fra.me.REG[2] = NEW_EOF_lexer___EOF___init(fra.me.REG[2]);
+          /* ./parser//lexer.nit:1654 */
           fra.me.REG[3] = fra.me.REG[2];
           goto label3;
         }
       }
     }
-    /* ./parser//lexer.nit:1657 */
-    REGB10 = TAG_Bool(false);
-    if (UNTAG_Bool(REGB10)) {
-      goto label6;
-    }
   }
-  label6: while(0);
-  /* ./parser//lexer.nit:1659 */
-  fra.me.REG[3] = NIT_NULL;
-  goto label3;
   label3: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[3];
@@ -7420,93 +7394,93 @@ val_t lexer___Lexer___get_char(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_lexer;
-  fra.me.line = 1662;
+  fra.me.line = 1661;
   fra.me.meth = LOCATE_lexer___Lexer___get_char;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1666 */
+  /* ./parser//lexer.nit:1665 */
   REGB0 = TAG_Bool(ATTR_lexer___Lexer____eof(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_eof", LOCATE_lexer, 1666);
+    nit_abort("Uninitialized attribute %s", "_eof", LOCATE_lexer, 1665);
   }
   REGB0 = ATTR_lexer___Lexer____eof(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./parser//lexer.nit:1667 */
+    /* ./parser//lexer.nit:1666 */
     REGB0 = TAG_Int(1);
     /* ./../lib/standard//kernel.nit:216 */
     REGB0 = TAG_Int(-UNTAG_Int(REGB0));
-    /* ./parser//lexer.nit:1667 */
+    /* ./parser//lexer.nit:1666 */
     goto label1;
   }
-  /* ./parser//lexer.nit:1672 */
+  /* ./parser//lexer.nit:1671 */
   REGB1 = TAG_Bool(ATTR_lexer___Lexer____stream_pos(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_stream_pos", LOCATE_lexer, 1672);
+    nit_abort("Uninitialized attribute %s", "_stream_pos", LOCATE_lexer, 1671);
   }
   REGB1 = ATTR_lexer___Lexer____stream_pos(fra.me.REG[0]);
-  /* ./parser//lexer.nit:1673 */
+  /* ./parser//lexer.nit:1672 */
   REGB2 = TAG_Int(0);
   /* ./../lib/standard//kernel.nit:213 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB2));
-  /* ./parser//lexer.nit:1673 */
+  /* ./parser//lexer.nit:1672 */
   if (UNTAG_Bool(REGB2)) {
-    /* ./parser//lexer.nit:1674 */
+    /* ./parser//lexer.nit:1673 */
     REGB2 = TAG_Bool(ATTR_lexer___Lexer____stream_buf(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_stream_buf", LOCATE_lexer, 1674);
+      nit_abort("Uninitialized attribute %s", "_stream_buf", LOCATE_lexer, 1673);
     }
     fra.me.REG[1] = ATTR_lexer___Lexer____stream_buf(fra.me.REG[0]);
     REGB2 = TAG_Bool(ATTR_lexer___Lexer____stream_pos(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_stream_pos", LOCATE_lexer, 1674);
+      nit_abort("Uninitialized attribute %s", "_stream_pos", LOCATE_lexer, 1673);
     }
     REGB2 = ATTR_lexer___Lexer____stream_pos(fra.me.REG[0]);
     REGB2 = CALL_abstract_collection___MapRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB2);
-    /* ./parser//lexer.nit:1675 */
+    /* ./parser//lexer.nit:1674 */
     REGB3 = TAG_Int(1);
     /* ./../lib/standard//kernel.nit:217 */
     REGB3 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB3));
-    /* ./parser//lexer.nit:1675 */
+    /* ./parser//lexer.nit:1674 */
     ATTR_lexer___Lexer____stream_pos(fra.me.REG[0]) = REGB3;
     /* ./../lib/standard//kernel.nit:382 */
     REGB2 = TAG_Int((unsigned char)UNTAG_Char(REGB2));
   } else {
-    /* ./parser//lexer.nit:1678 */
+    /* ./parser//lexer.nit:1677 */
     REGB3 = TAG_Bool(ATTR_lexer___Lexer____stream(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB3)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_stream", LOCATE_lexer, 1678);
+      nit_abort("Uninitialized attribute %s", "_stream", LOCATE_lexer, 1677);
     }
     fra.me.REG[1] = ATTR_lexer___Lexer____stream(fra.me.REG[0]);
     REGB3 = CALL_stream___IStream___read_char(fra.me.REG[1])(fra.me.REG[1]);
     REGB2 = REGB3;
   }
-  /* ./parser//lexer.nit:1681 */
+  /* ./parser//lexer.nit:1680 */
   REGB3 = TAG_Int(1);
   /* ./../lib/standard//kernel.nit:216 */
   REGB3 = TAG_Int(-UNTAG_Int(REGB3));
-  /* ./parser//lexer.nit:1681 */
+  /* ./parser//lexer.nit:1680 */
   REGB1 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB3));
   if (UNTAG_Bool(REGB1)) {
   } else {
     /* ./../lib/standard//kernel.nit:207 */
     REGB3 = TAG_Bool((REGB2)==(REGB3));
-    /* ./parser//lexer.nit:1681 */
+    /* ./parser//lexer.nit:1680 */
     REGB1 = REGB3;
   }
   if (UNTAG_Bool(REGB1)) {
-    /* ./parser//lexer.nit:1682 */
+    /* ./parser//lexer.nit:1681 */
     REGB1 = TAG_Bool(true);
     ATTR_lexer___Lexer____eof(fra.me.REG[0]) = REGB1;
   }
-  /* ./parser//lexer.nit:1685 */
+  /* ./parser//lexer.nit:1684 */
   REGB0 = REGB2;
   goto label1;
   label1: while(0);
@@ -7522,7 +7496,7 @@ void lexer___Lexer___push_back(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_lexer;
-  fra.me.line = 1688;
+  fra.me.line = 1687;
   fra.me.meth = LOCATE_lexer___Lexer___push_back;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -7531,11 +7505,11 @@ void lexer___Lexer___push_back(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./parser//lexer.nit:1692 */
+  /* ./parser//lexer.nit:1691 */
   REGB1 = TAG_Bool(ATTR_lexer___Lexer____text(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_text", LOCATE_lexer, 1692);
+    nit_abort("Uninitialized attribute %s", "_text", LOCATE_lexer, 1691);
   }
   fra.me.REG[1] = ATTR_lexer___Lexer____text(fra.me.REG[0]);
   /* ./../lib/standard//collection//array.nit:23 */
@@ -7545,60 +7519,60 @@ void lexer___Lexer___push_back(val_t p0, val_t p1){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
   }
   REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ./parser//lexer.nit:1693 */
+  /* ./parser//lexer.nit:1692 */
   REGB2 = TAG_Int(1);
   /* ./../lib/standard//kernel.nit:217 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-  /* ./parser//lexer.nit:1694 */
+  /* ./parser//lexer.nit:1693 */
   while(1) {
     /* ./../lib/standard//kernel.nit:213 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB0));
-    /* ./parser//lexer.nit:1694 */
+    /* ./parser//lexer.nit:1693 */
     if (UNTAG_Bool(REGB1)) {
-      /* ./parser//lexer.nit:1695 */
+      /* ./parser//lexer.nit:1694 */
       REGB1 = TAG_Bool(false);
       ATTR_lexer___Lexer____eof(fra.me.REG[0]) = REGB1;
-      /* ./parser//lexer.nit:1696 */
+      /* ./parser//lexer.nit:1695 */
       REGB1 = TAG_Bool(ATTR_lexer___Lexer____stream_pos(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_stream_pos", LOCATE_lexer, 1696);
+        nit_abort("Uninitialized attribute %s", "_stream_pos", LOCATE_lexer, 1695);
       }
       REGB1 = ATTR_lexer___Lexer____stream_pos(fra.me.REG[0]);
       REGB3 = TAG_Int(1);
       /* ./../lib/standard//kernel.nit:215 */
       REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
-      /* ./parser//lexer.nit:1696 */
+      /* ./parser//lexer.nit:1695 */
       ATTR_lexer___Lexer____stream_pos(fra.me.REG[0]) = REGB3;
-      /* ./parser//lexer.nit:1697 */
+      /* ./parser//lexer.nit:1696 */
       REGB3 = TAG_Bool(ATTR_lexer___Lexer____stream_buf(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_stream_buf", LOCATE_lexer, 1697);
+        nit_abort("Uninitialized attribute %s", "_stream_buf", LOCATE_lexer, 1696);
       }
       fra.me.REG[1] = ATTR_lexer___Lexer____stream_buf(fra.me.REG[0]);
       REGB3 = TAG_Bool(ATTR_lexer___Lexer____stream_pos(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_stream_pos", LOCATE_lexer, 1697);
+        nit_abort("Uninitialized attribute %s", "_stream_pos", LOCATE_lexer, 1696);
       }
       REGB3 = ATTR_lexer___Lexer____stream_pos(fra.me.REG[0]);
       REGB1 = TAG_Bool(ATTR_lexer___Lexer____text(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_text", LOCATE_lexer, 1697);
+        nit_abort("Uninitialized attribute %s", "_text", LOCATE_lexer, 1696);
       }
       fra.me.REG[2] = ATTR_lexer___Lexer____text(fra.me.REG[0]);
       REGB1 = CALL_abstract_collection___MapRead_____bra(fra.me.REG[2])(fra.me.REG[2], REGB2);
       CALL_abstract_collection___Map_____braeq(fra.me.REG[1])(fra.me.REG[1], REGB3, REGB1);
-      /* ./parser//lexer.nit:1698 */
+      /* ./parser//lexer.nit:1697 */
       REGB1 = TAG_Int(1);
       /* ./../lib/standard//kernel.nit:217 */
       REGB1 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB1));
-      /* ./parser//lexer.nit:1698 */
+      /* ./parser//lexer.nit:1697 */
       REGB2 = REGB1;
     } else {
-      /* ./parser//lexer.nit:1694 */
+      /* ./parser//lexer.nit:1693 */
       goto label1;
     }
   }

@@ -69,7 +69,7 @@ extern const int SFT_opts[];
 #define CALL_opts___OptionString___init(recv) ((opts___OptionString___init_t)CALL((recv), (SFT_opts[18] + 1)))
 #define ID_OptionEnum (SFT_opts[19])
 #define COLOR_OptionEnum (SFT_opts[20])
-#define ATTR_opts___OptionEnum____enum(recv) ATTR(recv, (SFT_opts[21] + 0))
+#define ATTR_opts___OptionEnum____values(recv) ATTR(recv, (SFT_opts[21] + 0))
 #define INIT_TABLE_POS_OptionEnum (SFT_opts[22] + 0)
 #define CALL_opts___OptionEnum___init(recv) ((opts___OptionEnum___init_t)CALL((recv), (SFT_opts[22] + 1)))
 #define CALL_opts___OptionEnum___value_name(recv) ((opts___OptionEnum___value_name_t)CALL((recv), (SFT_opts[22] + 2)))

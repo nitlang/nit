@@ -4253,15 +4253,15 @@ void parser_prod___AInterfaceClasskind___visit_all(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return;
 }
-void parser_prod___AUniversalClasskind___empty_init(val_t p0, int* init_table){
-  int itpos29 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_AUniversalClasskind].i;
+void parser_prod___AEnumClasskind___empty_init(val_t p0, int* init_table){
+  int itpos29 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_AEnumClasskind].i;
   struct {struct stack_frame_t me;} fra;
   val_t tmp;
   if (init_table[itpos29]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser_prod;
   fra.me.line = 783;
-  fra.me.meth = LOCATE_parser_prod___AUniversalClasskind___empty_init;
+  fra.me.meth = LOCATE_parser_prod___AEnumClasskind___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
@@ -4270,8 +4270,8 @@ void parser_prod___AUniversalClasskind___empty_init(val_t p0, int* init_table){
   init_table[itpos29] = 1;
   return;
 }
-void parser_prod___AUniversalClasskind___init_auniversalclasskind(val_t p0, val_t p1, int* init_table){
-  int itpos30 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_AUniversalClasskind].i;
+void parser_prod___AEnumClasskind___init_aenumclasskind(val_t p0, val_t p1, int* init_table){
+  int itpos30 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_AEnumClasskind].i;
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
@@ -4279,7 +4279,7 @@ void parser_prod___AUniversalClasskind___init_auniversalclasskind(val_t p0, val_
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser_prod;
   fra.me.line = 785;
-  fra.me.meth = LOCATE_parser_prod___AUniversalClasskind___init_auniversalclasskind;
+  fra.me.meth = LOCATE_parser_prod___AEnumClasskind___init_aenumclasskind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
@@ -4287,14 +4287,14 @@ void parser_prod___AUniversalClasskind___init_auniversalclasskind(val_t p0, val_
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   /* ./parser//parser_prod.nit:789 */
-  CALL_parser_prod___AUniversalClasskind___empty_init(fra.me.REG[0])(fra.me.REG[0], init_table);
+  CALL_parser_prod___AEnumClasskind___empty_init(fra.me.REG[0])(fra.me.REG[0], init_table);
   /* ./parser//parser_prod.nit:790 */
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_parser_prod, 790);
   }
-  ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(fra.me.REG[0]) = fra.me.REG[1];
+  ATTR_parser_nodes___AEnumClasskind____n_kwenum(fra.me.REG[0]) = fra.me.REG[1];
   /* ./parser//parser_prod.nit:791 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -4305,7 +4305,7 @@ void parser_prod___AUniversalClasskind___init_auniversalclasskind(val_t p0, val_
   init_table[itpos30] = 1;
   return;
 }
-void parser_prod___AUniversalClasskind___replace_child(val_t p0, val_t p1, val_t p2){
+void parser_prod___AEnumClasskind___replace_child(val_t p0, val_t p1, val_t p2){
   struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
   val_t REGB1;
@@ -4313,7 +4313,7 @@ void parser_prod___AUniversalClasskind___replace_child(val_t p0, val_t p1, val_t
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser_prod;
   fra.me.line = 794;
-  fra.me.meth = LOCATE_parser_prod___AUniversalClasskind___replace_child;
+  fra.me.meth = LOCATE_parser_prod___AEnumClasskind___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
   fra.me.REG[0] = NIT_NULL;
@@ -4324,12 +4324,12 @@ void parser_prod___AUniversalClasskind___replace_child(val_t p0, val_t p1, val_t
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   /* ./parser//parser_prod.nit:796 */
-  REGB0 = TAG_Bool(ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_parser_nodes___AEnumClasskind____n_kwenum(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwuniversal", LOCATE_parser_prod, 796);
+    nit_abort("Uninitialized attribute %s", "_n_kwenum", LOCATE_parser_prod, 796);
   }
-  fra.me.REG[3] = ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(fra.me.REG[0]);
+  fra.me.REG[3] = ATTR_parser_nodes___AEnumClasskind____n_kwenum(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[1]));
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -4359,13 +4359,13 @@ void parser_prod___AUniversalClasskind___replace_child(val_t p0, val_t p1, val_t
       }
       CALL_parser_prod___ANode___parent__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
       /* ./parser//parser_prod.nit:799 */
-      REGB0 = TAG_Bool((fra.me.REG[2]!=NIT_NULL) && VAL_ISA(fra.me.REG[2], COLOR_TKwuniversal, ID_TKwuniversal)) /*cast TKwuniversal*/;
+      REGB0 = TAG_Bool((fra.me.REG[2]!=NIT_NULL) && VAL_ISA(fra.me.REG[2], COLOR_TKwenum, ID_TKwenum)) /*cast TKwenum*/;
       if (UNTAG_Bool(REGB0)) {
       } else {
         nit_abort("Assert failed", NULL, LOCATE_parser_prod, 799);
       }
       /* ./parser//parser_prod.nit:800 */
-      ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(fra.me.REG[0]) = fra.me.REG[2];
+      ATTR_parser_nodes___AEnumClasskind____n_kwenum(fra.me.REG[0]) = fra.me.REG[2];
     } else {
       /* ./parser//parser_prod.nit:802 */
       nit_abort("Aborted", NULL, LOCATE_parser_prod, 802);
@@ -4377,14 +4377,14 @@ void parser_prod___AUniversalClasskind___replace_child(val_t p0, val_t p1, val_t
   stack_frame_head = fra.me.prev;
   return;
 }
-void parser_prod___AUniversalClasskind___visit_all(val_t p0, val_t p1){
+void parser_prod___AEnumClasskind___visit_all(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser_prod;
   fra.me.line = 808;
-  fra.me.meth = LOCATE_parser_prod___AUniversalClasskind___visit_all;
+  fra.me.meth = LOCATE_parser_prod___AEnumClasskind___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
@@ -4392,12 +4392,12 @@ void parser_prod___AUniversalClasskind___visit_all(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   /* ./parser//parser_prod.nit:810 */
-  REGB0 = TAG_Bool(ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_parser_nodes___AEnumClasskind____n_kwenum(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwuniversal", LOCATE_parser_prod, 810);
+    nit_abort("Uninitialized attribute %s", "_n_kwenum", LOCATE_parser_prod, 810);
   }
-  fra.me.REG[0] = ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(fra.me.REG[0]);
+  fra.me.REG[0] = ATTR_parser_nodes___AEnumClasskind____n_kwenum(fra.me.REG[0]);
   CALL_parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;

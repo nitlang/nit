@@ -706,25 +706,25 @@ val_t parser_nodes___AInterfaceClasskind___n_kwinterface(val_t p0){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-val_t parser_nodes___AUniversalClasskind___n_kwuniversal(val_t p0){
+val_t parser_nodes___AEnumClasskind___n_kwenum(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser_nodes;
   fra.me.line = 395;
-  fra.me.meth = LOCATE_parser_nodes___AUniversalClasskind___n_kwuniversal;
+  fra.me.meth = LOCATE_parser_nodes___AEnumClasskind___n_kwenum;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser_nodes.nit:395 */
-  REGB0 = TAG_Bool(ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_parser_nodes___AEnumClasskind____n_kwenum(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwuniversal", LOCATE_parser_nodes, 395);
+    nit_abort("Uninitialized attribute %s", "_n_kwenum", LOCATE_parser_nodes, 395);
   }
-  fra.me.REG[0] = ATTR_parser_nodes___AUniversalClasskind____n_kwuniversal(fra.me.REG[0]);
+  fra.me.REG[0] = ATTR_parser_nodes___AEnumClasskind____n_kwenum(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }

@@ -103,8 +103,8 @@ val_t syntax___SrcModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t 
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[6]);
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
     if (!once_value_5) {
-      fra.me.REG[6] = BOX_NativeString(": Error package name \"");
-      REGB1 = TAG_Int(22);
+      fra.me.REG[6] = BOX_NativeString(": Error module name \"");
+      REGB1 = TAG_Int(21);
       fra.me.REG[6] = NEW_String_string___String___with_native(fra.me.REG[6], REGB1);
       once_value_5 = fra.me.REG[6];
       register_static_object(&once_value_5);

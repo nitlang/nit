@@ -950,7 +950,7 @@ void rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
     /* ./analysis//rta_analysis.nit:168 */
-    REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_universal(fra.me.REG[0])(fra.me.REG[0]);
+    REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
       goto label20;

@@ -100,7 +100,7 @@ extern const int SFT_abstractmetamodel[];
 #define ATTR_abstractmetamodel___MMGlobalClass____class_refinement_hierarchy(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 1))
 #define ATTR_abstractmetamodel___MMGlobalClass____is_interface(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 2))
 #define ATTR_abstractmetamodel___MMGlobalClass____is_abstract(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 3))
-#define ATTR_abstractmetamodel___MMGlobalClass____is_universal(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 4))
+#define ATTR_abstractmetamodel___MMGlobalClass____is_enum(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 4))
 #define ATTR_abstractmetamodel___MMGlobalClass____visibility_level(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 5))
 #define ATTR_abstractmetamodel___MMGlobalClass____mixin_of(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 6))
 #define INIT_TABLE_POS_MMGlobalClass (SFT_abstractmetamodel[15] + 0)
@@ -114,8 +114,8 @@ extern const int SFT_abstractmetamodel[];
 #define CALL_abstractmetamodel___MMGlobalClass___is_interface__eq(recv) ((abstractmetamodel___MMGlobalClass___is_interface__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 8)))
 #define CALL_abstractmetamodel___MMGlobalClass___is_abstract(recv) ((abstractmetamodel___MMGlobalClass___is_abstract_t)CALL((recv), (SFT_abstractmetamodel[15] + 9)))
 #define CALL_abstractmetamodel___MMGlobalClass___is_abstract__eq(recv) ((abstractmetamodel___MMGlobalClass___is_abstract__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 10)))
-#define CALL_abstractmetamodel___MMGlobalClass___is_universal(recv) ((abstractmetamodel___MMGlobalClass___is_universal_t)CALL((recv), (SFT_abstractmetamodel[15] + 11)))
-#define CALL_abstractmetamodel___MMGlobalClass___is_universal__eq(recv) ((abstractmetamodel___MMGlobalClass___is_universal__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 12)))
+#define CALL_abstractmetamodel___MMGlobalClass___is_enum(recv) ((abstractmetamodel___MMGlobalClass___is_enum_t)CALL((recv), (SFT_abstractmetamodel[15] + 11)))
+#define CALL_abstractmetamodel___MMGlobalClass___is_enum__eq(recv) ((abstractmetamodel___MMGlobalClass___is_enum__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 12)))
 #define CALL_abstractmetamodel___MMGlobalClass___visibility_level(recv) ((abstractmetamodel___MMGlobalClass___visibility_level_t)CALL((recv), (SFT_abstractmetamodel[15] + 13)))
 #define CALL_abstractmetamodel___MMGlobalClass___visibility_level__eq(recv) ((abstractmetamodel___MMGlobalClass___visibility_level__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 14)))
 #define CALL_abstractmetamodel___MMGlobalClass___is_mixin(recv) ((abstractmetamodel___MMGlobalClass___is_mixin_t)CALL((recv), (SFT_abstractmetamodel[15] + 15)))
@@ -360,12 +360,12 @@ typedef val_t (*abstractmetamodel___MMGlobalClass___is_abstract_t)(val_t p0);
 static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_abstract__eq = "abstractmetamodel::MMGlobalClass::is_abstract=";
 void abstractmetamodel___MMGlobalClass___is_abstract__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMGlobalClass___is_abstract__eq_t)(val_t p0, val_t p1);
-static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_universal = "abstractmetamodel::MMGlobalClass::is_universal";
-val_t abstractmetamodel___MMGlobalClass___is_universal(val_t p0);
-typedef val_t (*abstractmetamodel___MMGlobalClass___is_universal_t)(val_t p0);
-static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_universal__eq = "abstractmetamodel::MMGlobalClass::is_universal=";
-void abstractmetamodel___MMGlobalClass___is_universal__eq(val_t p0, val_t p1);
-typedef void (*abstractmetamodel___MMGlobalClass___is_universal__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_enum = "abstractmetamodel::MMGlobalClass::is_enum";
+val_t abstractmetamodel___MMGlobalClass___is_enum(val_t p0);
+typedef val_t (*abstractmetamodel___MMGlobalClass___is_enum_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_enum__eq = "abstractmetamodel::MMGlobalClass::is_enum=";
+void abstractmetamodel___MMGlobalClass___is_enum__eq(val_t p0, val_t p1);
+typedef void (*abstractmetamodel___MMGlobalClass___is_enum__eq_t)(val_t p0, val_t p1);
 static const char * const LOCATE_abstractmetamodel___MMGlobalClass___visibility_level = "abstractmetamodel::MMGlobalClass::visibility_level";
 val_t abstractmetamodel___MMGlobalClass___visibility_level(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___visibility_level_t)(val_t p0);

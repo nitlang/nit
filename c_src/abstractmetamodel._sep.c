@@ -1539,43 +1539,43 @@ void abstractmetamodel___MMGlobalClass___is_abstract__eq(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return;
 }
-val_t abstractmetamodel___MMGlobalClass___is_universal(val_t p0){
+val_t abstractmetamodel___MMGlobalClass___is_enum(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
   fra.me.line = 302;
-  fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___is_universal;
+  fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___is_enum;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//abstractmetamodel.nit:302 */
-  REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalClass____is_universal(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalClass____is_enum(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_is_universal", LOCATE_abstractmetamodel, 302);
+    nit_abort("Uninitialized attribute %s", "_is_enum", LOCATE_abstractmetamodel, 302);
   }
-  REGB0 = ATTR_abstractmetamodel___MMGlobalClass____is_universal(fra.me.REG[0]);
+  REGB0 = ATTR_abstractmetamodel___MMGlobalClass____is_enum(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-void abstractmetamodel___MMGlobalClass___is_universal__eq(val_t p0, val_t p1){
+void abstractmetamodel___MMGlobalClass___is_enum__eq(val_t p0, val_t p1){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
   fra.me.line = 302;
-  fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___is_universal__eq;
+  fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___is_enum__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
   /* ./metamodel//abstractmetamodel.nit:302 */
-  ATTR_abstractmetamodel___MMGlobalClass____is_universal(fra.me.REG[0]) = REGB0;
+  ATTR_abstractmetamodel___MMGlobalClass____is_enum(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
 }
