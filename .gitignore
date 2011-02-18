@@ -11,6 +11,7 @@ doc/stdlib
 *.log
 *.out
 *.toc
+doc/nit_version.sty
 
 src/nitc
 src/nitc_?
