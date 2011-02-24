@@ -148,7 +148,7 @@ print "i={i}; i+1={i+1}" # outputs "i=5; i+1=6"
 
 All objects have a @to_s@ method that converts the object to a String.
 @print@ is a top-level method\goto{toplevel} that takes any number of arguments\goto{vararg} and prints to the standard output.
-@print@ always add a newline, an other top-level method, @printn@ does not add the newline.
+@print@ always add a newline, another top-level method, @printn@, does not add the newline.
 
 \begin{lst}
 var x: String
@@ -193,7 +193,7 @@ b.add(20)
 print b[0] # outputs "10"
 print b.length # outputs "6"
 b[1] = 30
-print a.join(", ") # outputs "10, 30, 2, 3, 4, 20"
+print b.join(", ") # outputs "10, 30, 2, 3, 4, 20"
 \end{lst}
 
 Note that the type of literal arrays is deduced using the static type combination rule\goto{combination}.
@@ -248,10 +248,10 @@ Nit heavily refers to the control flow in its specification:
 \item Adaptive typing\goto{adaptive typing}.
 \end{itemize}
 
-Some structure alters the control flow but are not described in this section: @and@, @or@, @not@\goto{Bool}, @or else@\goto{or else} and @return@\goto{return}.
+Some structures alter the control flow but are not described in this section: @and@, @or@, @not@\goto{Bool}, @or else@\goto{or else} and @return@\goto{return}.
 
 Note that the control flow is determined only from the position, the order and the nesting of the control structures.
-The real value of the expressions used has no effect.
+The real value of the expressions used has no effect on the control flow analyses.
 \begin{multicols}{2}
 \begin{lst}
 if true then
@@ -326,7 +326,7 @@ for x in [1, 4, 6] do
 end
 \end{lst}
 
-In fact, @for@ is a syntax sugar for a closure\goto{closure}.
+In fact, @for@ is syntactic sugar for a closure\goto{closure}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{loop}\label{loop}
@@ -366,8 +366,8 @@ end
 Unlabeled @break@ exits the current @for@, @while@, @loop@, or closure\goto{closure}.
 Unlabeled @continue@ skips the current @for@, @while@, @loop@, or closure.
 
-@label@ can be precised with @break@ or @continue@ to designate a specific control structure (not necessary the current one). 
-The corresponding @label@ must be set after the @end@ keyword of the designated control structure.
+@label@ can be used with @break@ or @continue@ to act on a specific control structure (not necessary the current one). 
+The corresponding @label@ must be defined after the @end@ keyword of the designated control structure.
 
 \begin{lst}
 for i in [0..width[ do
@@ -491,7 +491,7 @@ var t: Object = 5 # Upper bound is Object
 t = "Hello" # OK
 \end{lst}
 
-The adaptive typing flow is straightforward, therefore loops (@for@\goto{for}, @while@\goto{for}, @loop@\goto{for}) and closures\goto{closure} have a special requirement: on enter, the upper bound is set to the current static type; on exit, the upper bound is reset to its previous value.
+The adaptive typing flow is straightforward, therefore loops (@for@\goto{for}, @while@\goto{for}, @loop@\goto{for}) and closures\goto{closure} have a special requirement: on entry, the upper bound is set to the current static type; on exit, the upper bound is reset to its previous value.
 
 \begin{lst}
 var x: Object = ...
@@ -503,7 +503,7 @@ while x > 0 do
 	x -= 1 # OK
 	x = "Hello" # Compile error: expected Int
 end
-# static type is Int, bound released to Object
+# static type is Int, bound reset to Object
 x = "Hello" # OK
 \end{lst}
 
@@ -536,7 +536,7 @@ for i in a do
 end
 \end{lst}
 
-A funnier example:
+An interesting example:
 \begin{lst}
 var max = 0
 for i in whatever do
@@ -546,7 +546,7 @@ for i in whatever do
 end
 \end{lst}
 
-Note that a type adaptation occurs only in an @isa@ if the target type is more specific that the current type.
+Note that type adaptation occurs only in an @isa@ if the target type is more specific that the current type.
 \begin{lst}
 var a: Collection[Int] = ...
 if a isa Comparable then
@@ -561,8 +561,8 @@ end
 \subsection{Nullable Types}\label{null}\label{nullable}\label{or else}\label{not null}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-@null@ is a literal value that requires an explicit type acceptance.
-However, thanks to adaptive typing, it can be mainly automatic.
+@null@ is a literal value that is only accepted by some specific static types.
+However, thanks to adaptive typing, the static type management can be mainly automatic.
 
 @nullable@ annotates types that can accept @null@ or an expression of a compatible nullable static type.
 
@@ -573,11 +573,11 @@ x = 1 # OK
 y = 1 # OK
 x = null # OK
 y = null # Compile error
-x = y # Compile error
-y = x # OK
+x = y # OK
+y = x # Compile error
 \end{lst}
 
-Adaptive typing works very well with nullable types.
+Adaptive typing works well with nullable types.
 
 \begin{lst}
 var x
@@ -589,7 +589,7 @@ end
 # The static type of x is nullable Int
 \end{lst}
 
-Moreover, alike the @isa@ keyword, the @==@ and @!=@ operators can adapt the static type of a variable when compared to @null@.
+Moreover, like the @isa@ keyword, the @==@ and @!=@ operators can adapt the static type of a variable when compared to @null@.
 
 \begin{lst}
 var x: nullable Int = whatever
@@ -600,7 +600,7 @@ end
 # The static type of x is nullable Int
 \end{lst}
 
-And a last example:
+And another example:
 \begin{lst}
 var x: nullable Int = whatever
 loop
@@ -626,7 +626,7 @@ Note that nullable types require a special management for attributes and constru
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 @as@ casts an expression to a type.
-It is either cast successfully or there is an @abort@\goto{abort}.
+The expression is either casted successfully or there is an @abort@\goto{abort}.
 
 \begin{lst}
 var x: Object = 5 # static type of x is Object
@@ -634,7 +634,7 @@ print x.as(Int) * 10 # outputs 50
 print x.as(String) # aborts: cast failed
 \end{lst}
 
-Note that @as@ does not change the objects nor does perform conversion.
+Note that @as@ does not change the object nor does perform conversion.
 \begin{lst}
 var x: Object = 5 # static type of x is Object
 print x.as(Int) + 10 # outputs "15"
@@ -696,8 +696,8 @@ var a2 = [1, "1"] # Compile error:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-@module@ declares the name of modules.
-While optional it is recommended to use it, at least to put a documentation\goto{comment}.
+@module@ declares the name of a module.
+While optional it is recommended to use it, at least for documentation purpose\goto{comment}.
 The basename of the source file must match the name declared with @module@.
 The extension of the source file must be @nit@.
 
@@ -723,23 +723,23 @@ By importing a module, the importer module can see and use classes and propertie
 \item @import@ indicates a public importation.
 Importers of a given module will also import its publicly imported modules.
 %Modules that import the current module will implicitly also import the other module.
-An analogy will be using @#include@ in a header file (@.h@) in C/C++.
+An analogy is using @#include@ in a header file (@.h@) in C/C++.
 \item @private import@ indicates a private importation.
 Importers of a given module will not automatically import its privately imported modules.
-An analogy will be using @#include@ in a body file (@.c@) in C/C++.
+An analogy is using @#include@ in a body file (@.c@) in C/C++.
 %Modules that import the current module will not see the classes and properties imported.
 %However, while the classes and properties imported are invisible, the information that the module import an other one is still public and required to compile and run the program.
 \item @intrude import@ indicates an intrusive importation.
 @intrude@ @import@ bypasses the @private@ visibility and gives to the importer module a full access on the imported module.
 Such an import may only be considered when modules are strongly bounded and developed together.
-The closest, but insufficient, analogy will be something like including a body file in a body file in C/C++.
+The closest, but insufficient, analogy is something like including a body file in a body file in C/C++.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Visibility}\label{visibility}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-By default, all classes\goto{class}, methods\goto{fun}, constructors\goto{init} and virtual types\goto{type} are public whitch means freely usable by any importer module.
+By default, all classes\goto{class}, methods\goto{fun}, constructors\goto{init} and virtual types\goto{type} are public which means freely usable by any importer module.
 Once something is public it belongs to the API of the module and should not be changed.
 
 @private@ indicates classes and methods that do not belong to the API.
@@ -819,12 +819,12 @@ In order to guarantee the coherence in the visibility, the following rules apply
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-@interface@, @abstract class@, @class@ and @enum@ are the four kinds of classes. All these classes can be in multiple inheritance, can define new methods and redefine inherited method (yes, even interfaces). Here is the difference:
+@interface@, @abstract class@, @class@ and @enum@ are the four kinds of classes. All these classes can be in multiple inheritance, can define new methods and redefine inherited method (yes, even interfaces). Here are the differences:
 \begin{itemize}
 \item interfaces can only specialize other interfaces, cannot have attributes, cannot have constructors, cannot be instantiated.
 \item abstract classes cannot specialize enums, can have attributes, must have constructors, cannot be instantiated.
-\item concrete classes (ie. @class@) cannot specialize enums, can have attributes, must have constructors, can be instantiated.
-\item enums (eg. @Int@ or @Bool@) can only specialize interfaces, cannot have attributes, cannot have constructors, have proper instances but they are not instantiated by the programmer---it means no @new Int@. Note that at this point there is no user-defined enums.
+\item concrete classes (i.e. @class@) cannot specialize enums, can have attributes, must have constructors, can be instantiated.
+\item enums (e.g. @Int@ or @Bool@) can only specialize interfaces, cannot have attributes, cannot have constructors, have proper instances but they are not instantiated by the programmer---it means no @new Int@. Note that at this point there is no user-defined enums.
 \end{itemize}
 
 All kinds of classes must have a name, can have some superclasses and can have some definitions of properties.
@@ -860,7 +860,7 @@ Refining a class means:
 \end{itemize}
 
 Note that the kind\goto{class} or the visibility\goto{visibility} of a class cannot be changed by a refinement.
-Therefore, it is authorized to just write @redef class X@ whatever is the kind or the visibility of @X@.
+Therefore, it is allowed to just write @redef class X@ whatever is the kind or the visibility of @X@.
 
 In programs, the real instantiated classes are always the combination of all their refinements.
 %This is quite powerful and permit a programing style only found in some dynamically typed languages or aspect-oriented languages.
@@ -911,7 +911,7 @@ They can be assigned and are subject to adaptive typing.
 @self@, the current receiver, is a special parameter.
 It is not assignable but is subject to adaptive typing.
 
-@return@ exits the method and return to the caller.
+@return@ exits the method and returns to the caller.
 In a function, the return value must be provided with a return in all control flow paths\goto{control flow}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -922,7 +922,7 @@ Calling a method is usually done with the dotted notation @x.foo(y, z)@.
 The dotted notation can be chained.
 
 A method call with no argument does not need parentheses.
-Moreover, even with arguments the parentheses are not required in the principal method of a statement.
+Moreover, even with arguments, the parentheses are not required in the principal method of a statement.
 \begin{lst}
 var a = [1]
 a.add 5 # no () for add
@@ -1096,7 +1096,7 @@ a.bar(b) += c # equiv. a.bar(b) = a.bar(b) + c
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 A method can accept a variable number of arguments using ellipsis (@...@).
-The definition use @x: Foo...@ where x is the name of the parameter and @Foo@ a type.
+The definition use @x: Foo...@ where @x@ is the name of the parameter and @Foo@ a type.
 Inside the body, the static type of @x@ is @Array[Foo]@.
 The caller can use 0, 1, or more arguments for the parameter @x@.
 Only one ellipsis is allowed in a signature.
@@ -1114,15 +1114,14 @@ foo(1, 2) # outputs "1;;2"
 \subsection{Top-level Methods and Main Body}\label{toplevel}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Some function, like @print@ are usable everywhere simply without using a specific receiver.
+Some functions, like @print@, are usable everywhere simply without using a specific receiver.
 Such methods are just defined outside any classes.
-In fact these methods are implicitly defined in the Object interface, therefore inherited by all classes, therefore usable everywhere.
+In fact, these methods are implicitly defined in the @Object@ interface, therefore inherited by all classes, therefore usable everywhere.
 However, this principle may change in a future version.
 
 In a module, the main body is a bunch of statements at the end of a file.
-The main body of the main module is the entry point of a program.
-In fact the main method of a program is implicitly defined as the redefinition of the method @main@ of the @Sys@ class.
-The start of the program is in fact the implicit statement @(Sys.new).main@.
+The main body of the main module is the program entry point.
+In fact, the main method of a program is implicitly defined as the redefinition of the method @main@ of the @Sys@ class; and the start of the program is the implicit statement @(Sys.new).main@.
 Note that because it is a redefinition, the main part can use @super@\goto{super} to call the ``previous'' main part in the imported modules.
 If there is no main part in a module, it is inherited from imported modules.
 
@@ -1151,8 +1150,7 @@ print sum(4, 5)
 The body of @intern@ methods is provided by the compiler itself for performance or bootstrap reasons.
 For the same reasons, some intern methods, like @+@ in @Int@\goto{Int} are not redefinable.
 
-The body of @extern@ methods is provided by libraries written in C.
-Especially the system libraries required for input/output.
+The body of @extern@ methods is provided by libraries written in C; for instance, the system libraries required for input/output.
 Extern methods are always redefinable.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1180,7 +1178,7 @@ end
 \end{lst}
 
 Note that from an API point of view, there is no way to distinguish the read access of an attribute with a normal method neither to distinguish a write access of an attribute with a setter.
-Therefore, the read access of an attribute is caller a getter while the write access is called a setter.
+Therefore, the read access of an attribute is called a getter while the write access is called a setter.
 \begin{lst}
 var x = foo.bar # Is bar an attribute or a method?
 foo.bar = y # Is bar an attribute or a setter?
@@ -1191,9 +1189,9 @@ foo.bar = y # Is bar an attribute or a setter?
 \subsection{Visibility of Attributes}\label{attribute visibility}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-By default, the getter is public and the setter is private.
-The visibility of the getter can be precised with the @private@ or @protected@ keywords.
-The visibility of the setter can be specified with an additional @writable@ keyword.
+By default, a getter is public and a setter is private.
+The visibility of getters can be precised with the @private@ or @protected@ keywords.
+The visibility of setters can be specified with an additional @writable@ keyword.
 
 \begin{lst}
 class Foo
@@ -1236,7 +1234,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 @init@ declares constructors in concrete and in abstract classes.
-The role of the constructors is to basically initialize the attributes of the class.
+The role of constructors is basically to initialize the attributes of the class.
 Constructors can have: a visibility (by default it is public), a name (by default, constructors are anonymous) and parameters.
 They cannot have a return value.
 
@@ -1258,9 +1256,9 @@ var x = new Foo(4) # invoke init
 var y = new Foo.herp # invoke herp
 var z = new Foo.derp(1, 2) # invoke derp
 \end{lst}
-Note that syntactically, @new Bar@ means ``instantiate Bar with the anonymous constructor'', and @new Bar.foo@ means ``instantiate Bar with the constructor named foo'', but @(new Bar).foo@ means ``instantiate Bar with the anonymous constructor then call the method foo on the result''.
+Note that syntactically, @new Bar@ means ``instantiate @Bar@ with the anonymous constructor'', and @new Bar.foo@ means ``instantiate @Bar@ with the constructor named @foo@'', but @(new Bar).foo@ means ``instantiate @Bar@ with the anonymous constructor then call the method @foo@ on the result''.
 
-Constructor can also be called by other constructors in order to factorize or delegate parts of the construction process.
+Constructors can also be called by other constructors in order to factorize or delegate parts of the construction process.
 In other constructors, @init@ denotes the anonymous constructor.
 \begin{lst}
 class Foo
@@ -1315,7 +1313,7 @@ var f = new Foo
 \subsection{Free and Inherited Constructors}\label{init inheritance}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-When there is no constructor defined in a concrete class or in an abstract class that specialize only interfaces (@Object@ is always a superclass), a free anonymous constructor is implicitly declared.
+When there is no constructor defined in a concrete class or in an abstract class that specializes only interfaces (@Object@ is always a superclass), a free anonymous constructor is implicitly declared.
 This free constructor gathers all attributes without a initial value and assign them in order.
 If all attributes have an initial value (or if there is no attributes), the free constructor has no parameters.
 
@@ -1329,7 +1327,7 @@ end
 var f = new Foo(5, "five") # OK
 \end{lst}
 
-When there is no constructors defined in a concrete class or in an abstract class, and that this class has only one direct superclass that is a concrete class or an abstract class, and that all attributes defined in this class have an initial value, then all constructors of the superclass are inherited.
+When there is no constructors defined in a concrete class or in an abstract class, and this class has only one direct superclass that is a concrete class or an abstract class, and all attributes defined in this class have an initial value, then all constructors of the superclass are inherited.
 
 \begin{lst}
 class Bar
@@ -1390,7 +1388,7 @@ For example, @Pair[Int]@ is a subtype of @Pair[Object]@.
 
 @type@ declares a virtual types in a class.
 A bound type is mandatory.
-Virtual types can then be used as a regular type in the class and its subclasses.
+Virtual types can then be used as regular types in the class and its subclasses.
 Subclasses can also redefine it with a more specific bound type.
 One can see a virtual type as an internal formal generic parameter or as a redefinable \textit{typedef}.
 
@@ -1415,7 +1413,7 @@ print b.derp + 1 # outputs 6
 
 Closures are pieces of code that are passed to methods as additional arguments.
 Closures are defined and used with the @!@ character.
-The following example shows the use of the @sort@ method of arrays (defined in the Nit standard library).
+The following example shows the use of the @sort@ method for arrays (defined in the Nit standard library).
 
 \begin{lst}
 var a = [4, 2, 9, 6]
@@ -1425,10 +1423,10 @@ a.sort !cmp(x, y) = y <=> x
 print a.join(", ") # outputs "9, 6, 4, 2"
 \end{lst}
 
-@!cmp@ indicates the closure parameter of the function sort.
-The documentation of the method @sort@ says that @!cmp@ is used by @sort@ to know how to compare two elements.
+@!cmp@ indicates the closure parameter of the @sort@ method.
+The documentation of the @sort@ method says that @!cmp@ is used to compare two elements.
 Thus, @sort@ provides to @!cmp@ two elements and expects a Boolean result. %saying if the first element provided should be sorted before the second element provided.
-Therefore, when invoking @sort@, the programmer gets two automatic variables (one associated to each element) and is expected to return a Boolean.
+%Therefore, when invoking @sort@, the programmer gets two automatic variables (one associated to each element) and is expected to return a Boolean.
 
 Closures can also be used to perform work.
 In the following example, @file_open@ is used to open a file for reading.
@@ -1445,11 +1443,14 @@ file_open(fname) !work(f) do
 end
 \end{lst}
 
+Note that a method can have multiple closures.
+Syntactically, a closure is ended by the start of another closure or by the @end@ keyword that terminates the list of the closures.
+In the one-liner version, there is no @end@ but only one closure can be used.
 
 Closures can access visible variables.
 In the following example, the @iterate@ procedure asks for an @!each@ closure that is executed on each element of a @Collection@.
 In fact, the @for@ control structure is a call of the @iterate@ method.
-The two following examples are strictly equivalent.
+The following two examples are thus strictly equivalent.
 
 \begin{multicols}{2}
 \begin{lst}
@@ -1478,9 +1479,8 @@ print sum # outputs "15"
 @break@ and @continue@ are extended to closures.
 
 @continue@ exits the closure.
-If the closure expects a return value, @continue@ is also used to return the correct value.
-As with method definition, closure allows one-liners.
-Moreover, the @do continue value@ syntax can be replaced by @= value@ as in the first @sort@ example.
+If the closure expects a return value, @continue@ can also be used to return the correct value.
+As with method definition, the @do continue value@ syntax can be replaced by @= value@ as in the first @sort@ example.
 
 
 @break@ exits completely the called method.
@@ -1495,7 +1495,7 @@ The return type of the whole expression is the combination\goto{combination} of 
 Closure parameters are declared with their signature between the prototype and the @do@ of the method.
 Closure invocations in the body of the method simply use the closure name (without the @!@) like a standard call.
 More than one closure parameter can be declared.
-Each one has to be declared on a separate line.
+Each has to be declared on a separate line.
 %At the method invocations, the closure name is used to associate each closure definition with each closure parameter.
 The order of the closure definitions does not matter.
 
@@ -1546,7 +1546,7 @@ end
 \subsection{Default Closures}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A default closure can be given along with the closure parameter declaration in method.
+A default closure can be given along with the closure parameter declaration in a method.
 If there is no default closure, then the corresponding closure argument is mandatory.
 Otherwise, if there is a default closure, the corresponding closure argument is optional.
 
@@ -1600,7 +1600,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 To conclude the explanation about closures, the last example shows the bracket operator\goto{operator} (@[]@) of the @Map@ interface.
-A map, like @HashMap@ is used to implement a dictionary that associates some objects (keys) to some other objects (items).
+A map, like @HashMap@, is used to implement a dictionary that associates some objects (keys) to some other objects (items).
 The operator returns the item associated to key.
 The operator has a @!def@ closure that is executed when the key is not found.
 @!def@ is expected to return the item associated with the new key so it can be stored in the hashmap then returned.
@@ -1627,14 +1627,14 @@ var x5 = map[7] # aborts since '7' was not associated
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The specification of Nit is not yet finished.
-The major following features need at least to be implemented and documented:
+The specification of Nit is not yet completed.
+At least the major following features need to be implemented and documented:
 \begin{itemize}
-\item User-defined @enum@ with full specialization.
-\item Union an intersection types.
+\item User-defined @enum@.
+\item Union and intersection types.
 \item A usable native interface to bind Nit with system libraries and other languages.
 \end{itemize}
-Moreover, a language also need a complete and stable standard library.
+Moreover, the language also needs a complete and stable standard library.
 
 Some other topics also need a deeper analysis : exceptions, threads, parallelism, contracts, etc.
 
