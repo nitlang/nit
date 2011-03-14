@@ -1127,8 +1127,7 @@ private class MethidAccumulator
 end
 
 redef class AMethid
-	# Method name
-	readable var _name: nullable Symbol 
+	redef readable var _name: nullable Symbol
 
 	redef fun accept_property_builder(v)
 	do

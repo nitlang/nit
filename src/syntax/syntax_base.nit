@@ -840,3 +840,8 @@ redef class AClosureDef
 	# Automatic variables
 	readable writable var _variables: nullable Array[AutoVariable]
 end
+
+redef class AMethid
+	# Name of method
+	fun name: nullable Symbol is abstract
+end
