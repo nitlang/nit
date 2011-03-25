@@ -845,7 +845,9 @@ redef class APropdef
 		#print "process {prop.local_class.mmmodule}::{prop.local_class}::{prop} from global {prop.global.local_property.local_class.mmmodule}::{prop.global.local_property.local_class}::{prop.global.local_property}"
 		for i in prop.prhe.direct_greaters do
 			var ip = i.local_class[prop.global]
-			var isig = i.signature.adaptation_to(v.local_class.get_type)
+			var isig = i.signature
+			if isig == null then break # previous signature is invalid
+			isig = isig.adaptation_to(v.local_class.get_type)
 
 			if s == null then
 				#print "{prop.full_name} inherits signature from {ip.full_name}"
