@@ -83,6 +83,7 @@ class ToolContext
 	do
 		_messages.add(new Message(l,s))
 		_error_count = _error_count + 1
+		if opt_stop_on_first_error.value then check_errors
 	end
 
 	# Add an error, show errors and quit
@@ -102,6 +103,7 @@ class ToolContext
 		else
 			_error_count = _error_count + 1
 		end
+		if opt_stop_on_first_error.value then check_errors
 	end
 
 	# Display an info
@@ -148,13 +150,16 @@ class ToolContext
 	# Option --verbose
 	readable var _opt_verbose: OptionCount = new OptionCount("Verbose", "-v", "--verbose")
 
+	# Option --stop-on-first-error
+	readable var _opt_stop_on_first_error: OptionBool = new OptionBool("Stop on first error", "--stop-on-first-error")
+
 	# Verbose level
 	readable var _verbose_level: Int = 0
 
 	init
 	do
 		super
-		option_context.add_option(opt_warn, opt_path, opt_log, opt_log_dir, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
+		option_context.add_option(opt_warn, opt_stop_on_first_error, opt_path, opt_log, opt_log_dir, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
 	end
 
 	# Parse and process the options given on the command line
