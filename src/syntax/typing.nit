@@ -637,8 +637,8 @@ end
 
 redef class AForExpr
 	super AAbsControl
-	var _variable: nullable AutoVariable
-	redef fun variable do return _variable.as(not null)
+	var _variables: nullable Array[AutoVariable]
+	redef fun variables do return _variables.as(not null)
 
 	redef fun accept_typing(v)
 	do
@@ -650,24 +650,7 @@ redef class AForExpr
 		v.scope_ctx.push(self)
 		var old_flow_ctx = v.flow_ctx
 
-		# Create the automatic variable
-		var va = new AutoVariable(n_id.to_symbol, n_id)
-		_variable = va
-		v.scope_ctx.add_variable(va)
-
-		# Process collection
-		v.enter_visit(n_expr)
-
-		if not v.check_conform_expr(n_expr, v.type_collection) then return
-		var expr_type = n_expr.stype
-
-		# Get iterator
-		var meth_iterator = v.get_method(expr_type, once "iterator".to_symbol)
-		var iter_type = meth_iterator.signature_for(expr_type).return_type.as(not null)
-		var meth_item = v.get_method(iter_type, once ("item".to_symbol))
-		var va_stype = meth_item.signature_for(iter_type).return_type.as(not null)
-		if not n_expr.is_self then va_stype = va_stype.not_for_self
-		va.stype = va_stype
+		do_typing(v)
 
 		# Process inside
 		v.enter_visit_block(n_block)
@@ -675,6 +658,64 @@ redef class AForExpr
 		# end == begin of the loop
 		v.flow_ctx = old_flow_ctx
 		v.scope_ctx.pop
+	end
+
+	private fun do_typing(v: TypingVisitor)
+	do
+		# Create the automatic variables
+		var vas = new Array[AutoVariable]
+		for n_id in n_ids do
+			var va = new AutoVariable(n_id.to_symbol, n_id)
+			v.scope_ctx.add_variable(va)
+			vas.add(va)
+		end
+		_variables = vas
+
+		# Process reciever
+		v.enter_visit(n_expr)
+		if not v.check_expr(n_expr) then return
+		var expr_type = n_expr.stype
+
+		if expr_type.is_nullable then
+			v.error(n_expr, "Type error: 'for' on a nullable expression.")
+			return
+		end
+
+		# Get iterate
+		var iterate_name = once "iterate".to_symbol
+		if not expr_type.local_class.has_global_property_by_name(iterate_name) then
+			v.error(n_expr, "Type error: Expected a type with an 'iterate' method. Found {expr_type}.")
+			return
+		end
+		var prop = expr_type.local_class.select_method(iterate_name)
+		prop.global.check_visibility(v, self, v.mmmodule, n_expr.is_self)
+		var psig = prop.signature_for(expr_type)
+		if not n_expr.is_self then psig = psig.not_for_self
+		if psig.arity != 0 then
+			v.error(self, "Error: 'iterate' incompatible with 'for': require no arguments.")
+			return
+		else if psig.closures.length != 1 then
+			v.error(self, "Error: 'iterate' incompatible with 'for': require one closure.")
+			return
+		end
+		psig = psig.closures.first.signature
+		if psig.return_type != null then
+			v.error(self, "Error: 'iterate' incompatible with 'for': require one procedural closure.")
+			return
+		end
+		if vas.length != psig.arity then
+			if psig.arity == 1 then
+				v.error(self, "Error: Expected {psig.arity} variable {psig}, found {vas.length}.")
+			else
+				v.error(self, "Error: Expected {psig.arity} variables {psig}, found {vas.length}.")
+			end
+			return
+		end
+
+		# Type the automatic variables
+		for i in [0..vas.length[ do
+			vas[i].stype = psig[i]
+		end
 	end
 end
 

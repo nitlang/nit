@@ -24,7 +24,8 @@ alt/error_expr_not_ok_alt6.nit:63,7--30: Type error: expected A, got nullable In
 alt/error_expr_not_ok_alt6.nit:64,7--33: Type error: expected A, got null
 alt/error_expr_not_ok_alt6.nit:66,7--10: Type error: expected Bool, got null
 alt/error_expr_not_ok_alt6.nit:66,21: Type error: expected A, got Int
-alt/error_expr_not_ok_alt6.nit:69,10--13: Type error: expected Collection[nullable Object], got null
+alt/error_expr_not_ok_alt6.nit:69,10--13: Type error: 'for' on a nullable expression.
+alt/error_expr_not_ok_alt6.nit:69,24: Type error: expected A, got Int
 alt/error_expr_not_ok_alt6.nit:71,8--11: Type error: expected Bool, got null
 alt/error_expr_not_ok_alt6.nit:72,7--15: Type error: expected A, got null
 alt/error_expr_not_ok_alt6.nit:73,7--10: Type error: expected Bool, got null

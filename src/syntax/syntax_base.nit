@@ -814,7 +814,7 @@ end
 
 redef class AForExpr
 	# Associated automatic local variable
-	fun variable: AutoVariable is abstract
+	fun variables: Array[AutoVariable] is abstract
 end
 
 redef class ASelfExpr

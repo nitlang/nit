@@ -3834,7 +3834,7 @@ redef class AForExpr
 
     init init_aforexpr (
             n_kwfor: nullable TKwfor,
-            n_id: nullable TId,
+            n_ids: Collection[Object], # Should be Collection[TId]
             n_expr: nullable AExpr,
             n_kwdo: nullable TKwdo,
             n_block: nullable AExpr,
@@ -3844,8 +3844,11 @@ redef class AForExpr
         empty_init
         _n_kwfor = n_kwfor.as(not null)
 	n_kwfor.parent = self
-        _n_id = n_id.as(not null)
-	n_id.parent = self
+	for n in n_ids do
+		assert n isa TId
+		_n_ids.add(n)
+		n.parent = self
+	end
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
         _n_kwdo = n_kwdo.as(not null)
@@ -3872,16 +3875,18 @@ redef class AForExpr
             end
             return
 	end
-        if _n_id == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TId
-                _n_id = new_child
-	    else
-		abort
+        for i in [0.._n_ids.length[ do
+            if _n_ids[i] == old_child then
+                if new_child != null then
+		    assert new_child isa TId
+                    _n_ids[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_ids.remove_at(i)
+                end
+                return
             end
-            return
-	end
+        end
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -3927,7 +3932,9 @@ redef class AForExpr
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwfor)
-        v.enter_visit(_n_id)
+            for n in _n_ids do
+                v.enter_visit(n)
+	    end
         v.enter_visit(_n_expr)
         v.enter_visit(_n_kwdo)
         if _n_block != null then
