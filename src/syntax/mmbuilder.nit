@@ -529,6 +529,7 @@ redef class AClassdef
 		var local_classes = mod.src_local_classes
 		if (local_classes.has_key(name)) then
 			local_class = local_classes[name]
+			_local_class = local_class
 			if self isa AStdClassdef then
 				# If we are not a special implicit class then rant
 				v.error(self, "Error: A class {name} is already defined at line {local_class.node.location.line_start}.")
@@ -540,15 +541,16 @@ redef class AClassdef
 			n.next_node = self
 		else
 			local_class = new MMSrcLocalClass(mod, name, self, arity)
+			_local_class = local_class
 			local_classes[name] = local_class
 			if not mod.has_global_class_named(name) then
-				local_class.new_global
+				build_class_introduction(v)
 			else
-				local_class.set_global(mod.global_class_named(name))
+				var glob = mod.global_class_named(name)
+				build_class_refinement(v, glob)
 			end
 
 		end
-		_local_class = local_class
 		v.local_class_arity = 0
 		v.formals = local_class.formal_dict
 
@@ -557,6 +559,70 @@ redef class AClassdef
 		#####
 
 		v.formals = null
+	end
+
+	fun build_class_introduction(v: AbsSyntaxVisitor)
+	do
+		local_class.new_global
+		var glob = local_class.global
+
+		glob.visibility_level = visibility_level
+		if self isa AStdClassdef then
+			if n_kwredef != null then
+				v.error(self, "Redef error: No class {name} is imported. Remove the redef keyword to define a new class.")
+				return
+			end
+			glob.is_interface = n_classkind.is_interface
+			glob.is_abstract = n_classkind.is_abstract
+			glob.is_enum = n_classkind.is_enum
+		end
+	end
+
+	fun build_class_refinement(v: AbsSyntaxVisitor, glob: MMGlobalClass)
+	do
+		local_class.set_global(glob)
+
+		glob.check_visibility(v, self, v.mmmodule)
+		if self isa AStdClassdef and n_kwredef == null then
+			v.error(self, "Redef error: {name} is an imported class. Add the redef keyword to refine it.")
+			return
+		end
+
+		if glob.intro.arity != _local_class.arity then
+			v.error(self, "Redef error: Formal parameter arity missmatch; got {_local_class.arity}, expected {glob.intro.arity}.")
+		end
+
+		if self isa AStdClassdef and (not glob.is_interface and n_classkind.is_interface or
+			not glob.is_abstract and n_classkind.is_abstract or
+			not glob.is_enum and n_classkind.is_enum)
+		then
+			v.error(self, "Redef error: cannot change kind of class {name}.")
+		end
+	end
+
+	redef fun accept_class_verifier(v)
+	do
+		super
+		var glob = _local_class.global
+		for c in _local_class.cshe.direct_greaters do
+			var cg = c.global
+			if glob.is_interface then
+				if cg.is_enum then
+					v.error(self, "Special error: Interface {name} try to specialise enum class {c.name}.")
+				else if not cg.is_interface then
+					v.error(self, "Special error: Interface {name} try to specialise class {c.name}.")
+				end
+			else if glob.is_enum then
+				if not cg.is_interface and not cg.is_enum then
+					v.error(self, "Special error: Enum class {name} try to specialise class {c.name}.")
+				end
+			else
+				if cg.is_enum then
+					v.error(self, "Special error: Class {name} try to specialise enum class {c.name}.")
+				end
+			end
+
+		end
 	end
 
 	redef fun accept_abs_syntax_visitor(v)
@@ -591,62 +657,6 @@ redef class AStdClassdef
 	redef fun arity
 	do
 		return n_formaldefs.length
-	end
-	redef fun accept_class_verifier(v)
-	do
-		super
-		var glob = _local_class.global
-		if glob.intro == _local_class then
-			# Intro
-			glob.visibility_level = visibility_level
-			glob.is_interface = n_classkind.is_interface
-			glob.is_abstract = n_classkind.is_abstract
-			glob.is_enum = n_classkind.is_enum
-			if n_kwredef != null then
-				v.error(self, "Redef error: No class {name} is imported. Remove the redef keyword to define a new class.")
-			end
-
-			for c in _local_class.cshe.direct_greaters do
-				var cg = c.global
-				if glob.is_interface then
-					if cg.is_enum then
-						v.error(self, "Special error: Interface {name} try to specialise enum class {c.name}.")
-					else if not cg.is_interface then
-						v.error(self, "Special error: Interface {name} try to specialise class {c.name}.")
-					end
-				else if glob.is_enum then
-					if not cg.is_interface and not cg.is_enum then
-						v.error(self, "Special error: Enum class {name} try to specialise class {c.name}.")
-					end
-				else
-					if cg.is_enum then
-						v.error(self, "Special error: Class {name} try to specialise enum class {c.name}.")
-					end
-				end
-
-			end
-			return
-		end
-
-		# Redef
-
-		glob.check_visibility(v, self, v.mmmodule)
-		if n_kwredef == null then
-			v.error(self, "Redef error: {name} is an imported class. Add the redef keyword to refine it.")
-			return
-		end
-
-		if glob.intro.arity != _local_class.arity then
-			v.error(self, "Redef error: Formal parameter arity missmatch; got {_local_class.arity}, expected {glob.intro.arity}.")
-		end
-
-		if 
-			not glob.is_interface and n_classkind.is_interface or
-			not glob.is_abstract and n_classkind.is_abstract or
-			not glob.is_enum and n_classkind.is_enum
-		then
-			v.error(self, "Redef error: cannot change kind of class {name}.")
-		end
 	end
 
 	redef fun visibility_level

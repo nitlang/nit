@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2005-2008 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,16 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import kernel
+import array
 
-class A
-	super B
+#alt1#redef class Array
+#alt2#redef class Array[E: Float]
+#alt3#redef class Array[E: Float, E: Int]
+#alt4#class Array
+#alt5#class Array[E: Float]
+#alt6#class Array[E: Float, E: Int]
 end
 
-class B
-	super C
-end
-
-class C
-	super A
-end
+var c: Array = 5
+c.output
