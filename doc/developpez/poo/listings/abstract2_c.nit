@@ -3,7 +3,7 @@ class MaClasse
 end
 
 class MonAutreClasse
-special MaClasse
+	super MaClasse
 	redef fun methode(i: Int): Int 
 	do
 		return i

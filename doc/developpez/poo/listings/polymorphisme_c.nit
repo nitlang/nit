@@ -28,8 +28,16 @@ class Cercle
 		rayon = r
 	end
 
-   	redef fun aire: Float 
+	redef fun aire: Float 
 	do
 		return  pi * rayon * rayon
 	end
 end
+
+var forme: Forme
+
+forme = new Carre(10.0)
+print forme.aire # Affiche "100"
+
+forme = new Cercle(10.0)
+print forme.aire # Affiche "314.15"
