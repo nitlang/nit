@@ -1,4 +1,4 @@
-\part{Syntaxe et éléments de bases de Nit}
+\part{Syntaxe et éléments de base de Nit}
 
 \chapter{Syntaxe}
 
@@ -25,7 +25,7 @@ Chaque objet, classe, module ou variable est associé à un nom : l'\textbf{identi
 
 Attention : Le compilateur lèvera une exception si une variable commence par une majuscule.
 
-Un identificateur ne peut pas appartenir à la liste des mots clés réservé du langage Nit :
+Un identificateur ne peut pas appartenir à la liste des mots clés réservés du langage Nit :
 \begin{multicols}{4}
   \begin{itemize}
       \item |abort|
@@ -87,7 +87,7 @@ Quelques règles pour l'écriture d'un programme en Nit :
 \begin{itemize}
     \item On préfèrera utiliser la notation basée sur le soulignement pour les variables. Par exemple : |ma_variable| ;
     \item Les types, comme les noms des classes seront écrits en \og CamelCase \fg. Par exemple : |MaClasse| ;
-    \item L'indentation est faite avec le caractère de tabulation et est afficher comme 8 espaces ;
+    \item L'indentation est faite avec le caractère de tabulation et est affichée comme 8 espaces ;
     \item Les opérateurs sont entourés d'espaces. Par exemple : |4 + 5| ou |x = 5| ;
     \item Les spécificateurs de type (|:|) et les virgules (|,|) ont un espace après mais pas avant. Par exemple : |var x: X| ou |[1, 2, 3]| ;
     \item Les parenthèses (|()|) et les crochets (|[]|) ne prennent pas d'espaces ;
@@ -102,7 +102,7 @@ Il peuvent s'utiliser seulement sur une ligne ou alors en fin de ligne comme le 
 
 A l'heure actuelle, Nit ne supporte pas les commentaires multi-lignes.
 
-\chapter{Éléments de bases de Nit}
+\chapter{Éléments de base de Nit}
 
 \section{Déclaration et utilisation des variables}
 
@@ -133,7 +133,7 @@ Exemple d'utilisation du mot clé |new| :
 Vous remarquerez qu'en Nit, il n'est pas nécessaire d'utiliser les parenthèses si le constructeur ne prend pas de paramètres.
 
 \section{Type nullable}
-Pour éviter les exceptions |nullPointerException| qui peuvent être très fréquentes sur d'autres langages, Nit impose au développeur de préciser si une variable a le droit de prendre la valeur |null|.
+Pour éviter les exceptions |nullPointerException| qui peuvent être fréquentes sur d'autres langages, Nit impose au développeur de préciser si une variable a le droit de prendre la valeur |null|.
 
 Pour préciser qu'une variable peut prendre la valeur |null|, il faut utiliser le mot clé |nullable|.
 
@@ -207,7 +207,7 @@ L'usage des parenthèses permet de modifier cet ordre de priorité.
 	
 \section{Structures de contrôles}
 
-Comme les autres langages de développement, Nit propose un ensemble d'instruction qui permettent d'organiser et de structurer les traitements. L'usage de ces instructions est similaire à celui rencontré à leur équivalent dans d'autres langages.
+Comme les autres langages de développement, Nit propose un ensemble d'instructions qui permettent d'organiser et de structurer les traitements. L'usage de ces instructions est similaire à celui rencontré à leur équivalent dans d'autres langages.
 
 \subsection{Boucles}
 \subsubsection{While}
@@ -235,7 +235,7 @@ Le |for| peut lui aussi s'écrire sur une ligne :
 \lstinputlisting[language=Nit, linerange=18]{./syntaxe/listings/for_c.nit}
 
 \subsubsection{Loop}
-Les boucles infinies sont souvent utilisés accompagnées de l'instruction |break|. Elles sont utiles pour implémenter les boucles de type \og jusqu'à \fg |untill| ou pour simuler le |exit when| de Ada.
+Les boucles infinies sont souvent utilisés accompagnées de l'instruction |break|. Elles sont utiles pour implémenter les boucles de type \og jusqu'à \fg \textit{untill} ou pour simuler le \textit{exit when} de Ada.
 
 \lstinputlisting[language=Nit]{./syntaxe/listings/loop_c.nit}
 
@@ -253,7 +253,7 @@ Exemple :
 On peut aussi utiliser des clauses |else if| pour chaîner plusieurs tests :
 \lstinputlisting[language=Nit, linerange=9-17]{./syntaxe/listings/if_c.nit}
 
-Attention : Si on utilise un |else| ou un |else if|, l'instruction ne peut pas être écrit \og OnLiner \fg.
+Attention : Si on utilise un |else| ou un |else if|, l'instruction ne peut pas être écrit \textit{On Liner}.
 
 \subsection{Débranchements}
 |continue| permet de passer immédiatement à l'itération suivante dans une boucle |for|, |while| ou |loop| :
@@ -271,7 +271,7 @@ On peut aussi utiliser les labels de la même manière avec l'instruction |continu
 L'instruction |abort| permet d'arrêter le programme en lançant une erreur fatale.
 
 \subsection{Assertions}
-L'instruction |assert| vérifie si une expression booléenne est vrai, sinon elle arrêtera le programme comme |abort|. Elle peut être combinée à une close |else| pour exécuter du code avant d'arrêter le programme :
+L'instruction |assert| vérifie si une expression booléenne est vrai, sinon elle arrêtera le programme comme |abort|. Elle peut être combinée à une clause |else| pour exécuter du code avant d'arrêter le programme :
 \lstinputlisting[language=Nit]{./syntaxe/listings/assert_c.nit}
 
 Comme on peut le voir dans l'exemple précédent, une étiquette peut être précisée pour être affichée dans le message d'erreur.
@@ -294,14 +294,14 @@ Ce même opérateur permet de récupérer les valeurs du tableau :
 
 Attention, en Nit, la première case du tableau est la case 0 !
 
+\subsection{Parcours d'un tableau}
+On peut parcourir les tableaux grâce à une boucle |for| :
+\lstinputlisting[language=Nit, linerange=3-5, firstnumber=last]{./syntaxe/listings/array2_c.nit}
+
 \subsection{Initialisation explicite d'un tableau}
 Il existe une manière plus rapide de créer les tableaux en initialisant explicitement le tableau avec les valeurs qu'il doit contenir.
 
 \lstinputlisting[language=Nit, linerange=1]{./syntaxe/listings/array2_c.nit}
-
-\subsection{Parcours d'un tableau}
-On peut parcourir les tableaux grâce à une boucle |for| :
-\lstinputlisting[language=Nit, linerange=3-5, firstnumber=last]{./syntaxe/listings/array2_c.nit}
 
 %\section{Intervalles}
 %TODO vérifier et faire
@@ -311,27 +311,27 @@ On peut parcourir les tableaux grâce à une boucle |for| :
 
 
 \section{Conversions de types}
-En Nit, il n'existe pas de mot clé de transtypage. Les conversions de types se font par des méthodes. La bibliothèque standard fournit une série de classe qui contiennent des méthodes de manipulation et de conversion de types.
+En Nit, il n'existe pas de mot clé de transtypage. Les conversions de types se font par des méthodes. La bibliothèque standard fournit une série de classes qui contiennent des méthodes de manipulation et de conversion de types.
 
 \begin{tabularx}{\linewidth}{|c|X|}
 	\hline
 	\textbf{Classe} & \textbf{Rôle} \\
 	\hline
-	Char & pour les caractères \\
+	\textit{Char} & pour les caractères \\
 	\hline
-	String & pour les chaînes de caractères \\
+	\textit{String} & pour les chaînes de caractères \\
 	\hline
-	Int & pour les entiers \\
+	\textit{Int} & pour les entiers \\
 	\hline
-	Float & pour les nombres à virgule flottante \\
+	\textit{Float} & pour les nombres à virgule flottante \\
 	\hline
 \end{tabularx}
 
-Par exemple la classe Int propose les méthodes suivantes :
+Par exemple la classe \textit{Int} propose les méthodes suivantes :
 \begin{description}
-	\item[Int.to\_c:Char] Retourne le caractère correspondant.
-	\item[Int.to\_f:Float] Retourne l'entier sous forme de |Float|.
-	\item[Int.to\_s:String] Retourne l'entier sous forme de |String|.
+	\item[Int.to\_c: Char] Retourne le caractère correspondant.
+	\item[Int.to\_f: Float] Retourne l'entier sous forme de |Float|.
+	\item[Int.to\_s: String] Retourne l'entier sous forme de |String|.
 \end{description}
 
 \section{Manipulation de chaînes de caractères}
@@ -357,7 +357,7 @@ Attention, Nit ne supporte que l'encodage UTF-8 !
 
 \subsection{Caractères spéciaux}
 
-Dans un chaîne de caractères, plusieurs caractères particuliers doivent être échappés grâce au caractère |\| pour être utilisés. 
+Dans une chaîne de caractères, plusieurs caractères particuliers doivent être échappés grâce au caractère |\| pour être utilisés. 
 
 Le tableau ci-dessous recense les principaux caractères à échapper :
 
@@ -396,7 +396,7 @@ Pour concaténer un autre type avec un string, il faut faire appel à la méthode |
 Par exemple avec un Int :
 \lstinputlisting[language=Nit, linerange=7-7]{./syntaxe/listings/string_c.nit}
 
-Une notation allégée permet de concaténer une variable ou une expression avec une chaine de caractère :
+Une notation particulière permet d'inclure une variable ou une expression dans une chaine de caractères :
 \lstinputlisting[language=Nit, linerange=9-10]{./syntaxe/listings/string_c.nit}
 
 La notation allégée appelle implicitement la méthode |to_s| sur les types autres que |String| :
@@ -406,11 +406,11 @@ La notation allégée sera préférée puisqu'elle est plus lisible mais aussi bien p
 
 \subsection{Comparaison de chaînes de caractères}
 
-En Nit il est possible de comparer deux chaînes de caractères directement grâce à l'opérateur |==|. Contrairement à Java par exemple, Nit va comparer la valeur des objets String est non pas les objets en eux-mêmes.
+En Nit il est possible de comparer deux chaînes de caractères directement grâce à l'opérateur |==|. Contrairement à Java par exemple, Nit va comparer la valeur des objets String est non pas les références vers les objets.
 \lstinputlisting[language=Nit]{./syntaxe/listings/string2_c.nit}
 
 \subsection{Autres opérations sur les chaînes de caractères}
-Les méthodes |to_upper| et |to_lower| permettent respectivement d'obtenir une chaîne tout en majuscule ou tout en minuscule.
+Les méthodes |to_upper| et |to_lower| permettent respectivement d'obtenir une chaîne toute en majuscule ou toute en minuscule.
 
 La méthodes |length| permet d'obtenir la taille de la chaîne.
 
@@ -427,7 +427,7 @@ Nit est le premier langage à introduire la notion de \textbf{typage adaptatif}. 
 Par exemple :
 \lstinputlisting[language=Nit]{./syntaxe/listings/typage_c.nit}
 
-Les instructions de contrôle de flot vont eux aussi agir sur le typage de la variable :
+Les instructions de contrôle de flot vont elles aussi agir sur le typage de la variable :
 \lstinputlisting[language=Nit]{./syntaxe/listings/typage2_c.nit}
 
 Le typage adaptatif fonctionne aussi avec les types nullables :

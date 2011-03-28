@@ -6,7 +6,7 @@ abstract class ClasseAbstraite
 end
 
 class ClasseComplete
-special ClasseAbstraite
+	super ClasseAbstraite
 end
 
 var o = new ClasseComplete

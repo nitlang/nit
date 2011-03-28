@@ -2,17 +2,17 @@
 \chapter{Concept de classe}
 L'idée de base de la programmation orientée objet est de rassembler dans une même entité les données et les traitements qui s'y appliquent. Dans cette partie, nous allons voir comment Nit permet de développer en objet.
 
-Une classe est le support de l'encapsulation : c'est un ensemble de données et de fonction regroupées dans une même entité. Une classe est une description abstraite d'un objet. Les fonctions qui opèrent sur les données sont appelées des méthodes. Les données en elles-mêmes sont appelées des attributs. Les attributs et les méthodes représentent les propriétés de la classe. Instancier une classe consiste à créer un objet sur son modèle.
+Une classe est le support de l'encapsulation : c'est un ensemble de données et de fonction regroupées dans une même entité. Une classe est une description abstraite d'un ensemble d'objet ayant des propriétés communes. Les fonctions qui opèrent sur les données sont appelées des méthodes. Les données en elles-mêmes sont appelées des attributs. Les attributs et les méthodes représentent les propriétés de la classe.
 
 Rappelons qu'en Nit absolument TOUT est objet.
 
 Pour accéder à une classe il faut en déclarer une instance ou objet.
 
-Une classe se compose en deux parties : un en-tête et un corps. Le corps peut être divisé en deux sections : la déclaration de ses propriétés (attributs et la définition des méthodes. Les méthodes et les données sont pourvues d'attributs de visibilité qui gère leur accessibilité par les composants hors de la classe.
+Une classe se compose de deux parties : un en-tête et un corps. Le corps peut être divisé en deux sections : la déclaration de ses propriétés (attributs) et la définition des méthodes. Les méthodes et les données sont pourvues d'attributs de visibilité qui gèrent leur accessibilité par les composants hors de la classe.
 
 Une classe comporte donc sa déclaration, des attributs et la définition de ses méthodes.
 
-En Nit, toutes les classes héritent forcément de la classe |Object|. Cette relation d'héritage est implicite, c'est à dire qu'il n'y a pas besoin de la déclarer.
+En Nit, toutes les classes héritent forcément de la classe |Object|. Cette relation d'héritage est implicite, c'est à dire qu'il n'est pas nécessaire de la déclarer.
 
 \section{Syntaxe et déclaration d'une classe}
 La syntaxe de déclaration d'un classe est la suivante :
@@ -33,7 +33,7 @@ Le mot clé |super| permet de spécifier une ou des superclasses éventuelles : ce 
 L'ordre des méthodes dans une classe n'a pas d'importance. Si dans une classe, on rencontre d'abord la méthode A puis la méthode B, B peut être appelée sans problème dans A.
 
 \chapter{Objets}
-La classe est la description d'un objet. Un objet est une instance d'une classe. Pour chaque instance d'une classe, le code est le même, seules les données (valeurs des attributs) sont différentes à chaque objet.
+La classe est la description d'un objet. Un objet est une instance d'une classe. Pour chaque instance d'une classe, le code est le même, seules les données (valeurs des attributs) sont différentes pour chaque objet.
 
 \section{Instancier une classe : créer un objet}
 L'opérateur |new| se charge de créer une nouvelle instance d'une classe et de l'associer à une variable.
@@ -44,7 +44,7 @@ Exemple :
 Cela n'est pas obligatoire grâce au typage adaptatif (voir chapitre~\ref{typage-adaptatif} \nameref{typage-adaptatif}) mais on peut aussi préciser le type sur la variable qui va recevoir l'instance :
 \lstinputlisting[language=Nit]{./poo/listings/new2_s.nit}
 
-En Nit, toutes les classes sont instanciées par allocation dynamique à part les types universels (voir chapitre~\ref{universal} \nameref{universal}). Dans l'exemple précédent, la variable |instance| contient une référence sur la classe instanciée (contient l'adresse de l'objet qu'elle désigne : attention toutefois, il n'est pas possible de manipuler ou d'effectuer des opérations directement sur cette adresse comme en C).
+En Nit, toutes les classes sont instanciées par allocation dynamique à part les types universels (voir chapitre~\ref{universal} \nameref{universal}). Dans l'exemple précédent, la variable |instance| contient une référence sur un objet de la classe instanciée (contient l'adresse de l'objet qu'elle désigne : attention toutefois, il n'est pas possible de manipuler ou d'effectuer des opérations directement sur cette adresse comme en C).
 
 \lstinputlisting[language=Nit]{./poo/listings/new3_s.nit}
 
@@ -61,30 +61,32 @@ La durée de vie d'un objet passe par trois étapes :
 \end{description}
 
 \section{Références et comparaison d'objets}
-Les variables de  type objet que l'on déclare ne contiennent pas un objet mais une référence vers cet objet. Lorsque l'on écrit |instance1 = instance2|, on copie la référence |instance1| dans |instance2| : |instance1| et |instance2| pointent sur le même objet. Par défaut, l'opérateur |==| permet de comparer ces références. Deux objets avec des propriétés identiques sont deux objets distincts.
+Les variables de  type objet que l'on déclare ne contiennent pas un objet mais une référence vers cet objet. Lorsque l'on écrit |instance1 = instance2|, on copie la référence |instance1| dans |instance2| : |instance1| et |instance2| pointent sur le même objet. Par défaut, l'opérateur |==| est celui de la classe |Object| et permet de comparer ces références. Deux objets avec des propriétés identiques sont deux objets distincts.
 
 \lstinputlisting[language=Nit]{./poo/listings/comparaison1_s.nit}
 Si on souhaite comparer deux objets en se basant sur la valeur de leurs attributs, il est possible de redéfinir l'opérateur |==| dans leur classe (voir section~\ref{redef-operateur} \nameref{redef-operateur}).
 
-Par exemple, l'opérateur |==| a été redéfinit pour la classe String il est donc possible de comparer deux String en se basant sur leurs valeurs :
+Par exemple, l'opérateur |==| a été redéfini pour la classe String il est donc possible de comparer deux String en se basant sur leurs valeurs :
 \lstinputlisting[language=Nit, linerange=1-5]{./poo/listings/comparaison2_c.nit}
 
-Il est possible de comparer le type de deux objets, c'est à dire de vérifier si deux objets sont de la même classe ou non. Pour cela nous allons utiliser la méthode |is_same_type(o:Object)|. Cette méthode est introduite dans la classe |Object|, comme toutes les classes en héritent implicitement, elle est disponible dans toutes les classes.
+Il est possible de comparer le type de deux objets, c'est à dire de vérifier si deux objets sont de la même classe ou non. Pour cela il faut utiliser la méthode |is_same_type(o:Object)|. Cette méthode est introduite dans la classe |Object|, comme toutes les classes en héritent implicitement, elle est disponible dans toutes les classes.
 
 \lstinputlisting[language=Nit, linerange=8-9, firstnumber=last]{./poo/listings/comparaison2_c.nit}
 
 Pour vérifier que deux variables sont en fait des références vers le même objet, il est possible d'utiliser le mot-clé |is| :
-\lstinputlisting[language=Nit, linerange=6, firstnumber=last]{./poo/listings/comparaison2_c.nit}
+\lstinputlisting[language=Nit, linerange=6-6, firstnumber=last]{./poo/listings/comparaison2_c.nit}
 
-\section{Objet null}
-En Nit, il existe une particularité pour l'objet |null|. Contrairement à Java il ne peut pas être utilisé à la place de n'importe où. En effet, Nit propose un mécanisme permettant de limiter statiquement les erreurs fréquentes de type |nullPointerException|.
+\section{Types nullable}
+En Nit, il existe une particularité pour la valeur |null|. Contrairement à Java il ne peut pas être utilisé n'importe où. En effet, Nit propose un mécanisme permettant de limiter statiquement les erreurs fréquentes de type |nullPointerException|.
 
 Pour qu'une variable puisse prendre la valeur |null|, elle doit avoir été déclarée explicitement avec le type |nullable| :
 \lstinputlisting[language=Nit]{./poo/listings/nullable1_c.nit}
 Dans l'exemple précédent, si on omet de préciser le type comme |nullable|, le compilateur Nit lèvera une erreur au moment de la compilation.
 
+La valeur |null| peut donc être utilisée avec n'importe quel type \textit{nullable} mais aucun message ne peut être envoyé à |null|.
+
 \chapter{Modificateurs d'accès}
-Les modificateurs d'accès assurent le contrôle des conditions d'héritage, d'accès aux éléments et de modification de données par les autres classes. Ils s'appliquent aussi bien aux classes, qu'aux méthodes et attributs.
+Les modificateurs d'accès assurent le contrôle des conditions d'héritage, d'accès aux éléments et de modification de données par les autres classes. Ils s'appliquent aussi bien aux classes qu'aux méthodes et attributs.
 
 \section{Visibilité des entités}
 De nombreux langages orientés objet introduisent des attributs de visibilité pour réglementer l'accès aux classes et aux objets, aux méthodes et aux données.
@@ -93,8 +95,8 @@ Il existe 2 modificateurs qui peuvent être utilisés pour définir les attributs d
 
 %TODO reformuler
 \begin{description}
-    \item[Par défaut : public] Il n'existe pas de mot clé pour définir ce niveau, qui est le niveau par défaut lorsqu'aucun modificateur n'est précisé. Un attribut ou une méthode déclaré public est visible par tous les autres objets. Dans la philosophie orientée objet aucun attribut ne devrait être déclaré public : il est préférable d'écrire des méthodes pour le consulter et le modifier.
-    \item[protected] Si un attribut ou une méthode est déclarée |protected|, seules les méthodes de ses sous classes pourront y accéder.
+    \item[Par défaut : public] Il n'existe pas de mot clé pour définir ce niveau, qui est le niveau par défaut lorsqu'aucun modificateur n'est précisé. Un attribut ou une méthode public est visible par tous les autres objets. Dans la philosophie orientée objet, aucun attribut ne devrait être déclaré public : il est préférable d'écrire des méthodes pour le consulter et le modifier.
+    \item[protected] Si un attribut ou une méthode est déclaré |protected|, seules les méthodes des sous classes pourront y accéder.
     \item[private] C'est le niveau de protection le plus fort. Les composants ne sont visibles qu'à l'intérieur du fichier où est définie la classe.
 \end{description}
 
@@ -123,14 +125,14 @@ La syntaxe de la déclaration d'une méthode est :
 \section{Types retournés}
 Le type retourné correspond au type de l'objet qui est renvoyé par la méthode. Si la méthode ne retourne rien, alors on ne précise pas le type retourné.
 
-La valeur de retour de la méthode doit être transmise par l'instruction |return|. Elle indique la valeur que prend la méthode et termine celle ci : toutes les instructions qui suivent |return| ne seront pas exécutées. Si des instructions sont placées après le mot clé |return|, une erreur |unreachable statement| sera levée lors de la compilation.
+La valeur de retour de la méthode doit être transmise par l'instruction |return|. Elle indique la valeur que prend la méthode et termine celle ci : les instructions qui suivent |return| à l'intérieur du même bloc ne seront pas exécutées. Si des instructions sont placées après le mot clé |return|, une erreur |unreachable statement| sera levée lors de la compilation.
 
 \lstinputlisting[language=Nit]{./poo/listings/methode1_c.nit}
 
 Il est possible d'inclure une instruction |return| dans une méthode sensée ne rien retourner : cela permet de quitter la méthode.
 
 \section{Passage de paramètres}
-Les paramètres des méthodes sont déclarés entre parenthèses et séparés par des virgules. Le type et le nombre de paramètres déclarés doivent correspondre au type et au nombre de paramètres transmis. Si un méthode n'accepte pas de paramètres, il suffit de ne pas indiquer de parenthèses :
+Les paramètres des méthodes sont déclarés entre parenthèses et séparés par des virgules. Le type et le nombre de paramètres déclarés doivent correspondre au type et au nombre de paramètres transmis. Si une méthode n'accepte pas de paramètres, il suffit de ne pas indiquer de parenthèses :
 \lstinputlisting[language=Nit]{./poo/listings/methode2_c.nit}
 
 Si plusieurs paramètres ont le même type, il est possible de le factoriser :
@@ -138,7 +140,7 @@ Si plusieurs paramètres ont le même type, il est possible de le factoriser :
 
 Il n'est pas possible d'indiquer des valeurs par défaut dans les paramètres. 
 
-Lorsqu'un objet est passé comme paramètre à une méthode, cette dernière reçoit une référence qui désigne son emplacement mémoire d'origine et qui est une copie de la variable. Il est possible de modifier l'objet grâce à ces méthodes mais il n'est pas possible de remplacer la référence contenue dans la variable passée en paramètre : ce changement n'aura lieu que localement à la méthode.
+Lorsqu'un objet est passé comme paramètre à une méthode, cette dernière reçoit une référence qui désigne son emplacement mémoire d'origine. Il est possible de modifier l'objet grâce à ces méthodes mais il n'est pas possible de remplacer la référence contenue dans la variable passée en paramètre : ce changement n'aura lieu que localement à la méthode.
 
 \section{Envoi de message}
 Un message est émis lorsqu'on demande à un objet d'exécuter l'une de ses méthodes.
@@ -152,17 +154,17 @@ Quand l'appel de méthode se fait en dehors d'une expression et qu'elle n'accepte
 \lstinputlisting[language=Nit]{./poo/listings/methode8_c.nit}
 
 \section{Nombre variable de paramètres}
-Il est possible d'indiquer qu'une méthode peut recevoir un nombre variable de paramètre grâce à l'opérateur |...|. Le paramètre sera alors considéré comme un tableau du type spécifié. L'envoi de message pourra alors contenir aucun, un ou plusieurs arguments pour le paramètre ainsi déclaré.
+Il est possible d'indiquer qu'une méthode peut recevoir un nombre variable de paramètre grâce à l'opérateur |...|. Le paramètre sera alors considéré comme un tableau du type spécifié. L'envoi de message pourra alors contenir zéro, un ou plusieurs arguments pour le paramètre ainsi déclaré.
 
 \lstinputlisting[language=Nit]{./poo/listings/methode9_c.nit}
 
-Seulement un seul paramètre variable est autorisé dans une signature.
+Un seul paramètre variable est autorisé dans une signature.
 
 \section{Enchaînement de références}
 Il est possible d'enchaîner les envois de messages aux retours des méthodes :
 \lstinputlisting[language=Nit]{./poo/listings/methode5_c.nit}
 
-Ici on appelle la méthode to\_upper de l'objet retourné par la méthode substring de l'objet "abcd".
+Ici on appelle la méthode \textit{to\_upper} de l'objet retourné par la méthode \textit{substring} de l'objet \textit{"abcd"}.
 
 \section{Mot-clé self}
 
@@ -230,7 +232,7 @@ Pour les getters, c'est la visibilité de l'attribut qui va déterminer la visibil
 Voici un exemple d'utilisation des getters automatiques :
 \lstinputlisting[language=Nit]{./poo/listings/accesseurs2_c.nit}
 
-Pour les setters, ils sont toujours générés comme étant |private|. Pour changer cette visibilité, il est nécessaire de préciser l'attribut comme |writable| en lui rajoutant la visibilité souhaitée :
+Pour les setters, ils sont toujours générer comme étant |private|. Pour changer cette visibilité, il est nécessaire de préciser l'attribut comme |writable| en lui rajoutant la visibilité souhaitée :
 \begin{description}
     \item[writable] Le setter automatique sera généré avec la visibilité public.
     \item[protected writable] Le setter automatique sera généré avec la visibilité |protected|.
@@ -241,12 +243,12 @@ Voici un exemple d'utilisation des setters automatiques :
 \lstinputlisting[language=Nit]{./poo/listings/accesseurs3_c.nit}
 
 \section{Redéfinition d'attributs}
-Les accesseurs automatiques sont des considérés comme des méthodes normales, ils peuvent donc être hérités et redéfinis. De plus les accesseurs automatiques peuvent être utilisés pour redéfinir des accesseurs manuels. |redef var| permet de préciser une redéfinition du getter alors que |redef writable| permet de redéfinir le setter :
+Les accesseurs automatiques sont considérés comme des méthodes normales, ils peuvent donc être hérités et redéfinis. De plus les accesseurs automatiques peuvent être utilisés pour redéfinir des accesseurs manuels. |redef var| permet de préciser une redéfinition du getter alors que |redef writable| permet de redéfinir le setter :
 \lstinputlisting[language=Nit]{./poo/listings/accesseurs4_c.nit}
 
 \section{Opérateur isset}
 
-Pour vérifier si un opérateur a été initialisée, on peut utiliser l'opérateur |isset| :
+Pour vérifier si un attribut a été initialisé, on peut utiliser l'opérateur |isset| :
 \lstinputlisting[language=Nit,]{./poo/listings/isset_c.nit}
 
 \chapter{Constructeurs}
@@ -318,7 +320,7 @@ Si l'on veut conserver pour une propriété une protection semblable à celle assur
 
 \section{Redéfinition de méthodes}
 \label{redef}
-La redéfinition d'une méthode héritée doit impérativement conserver la déclaration de la méthode parent (type et nombre de paramètres et la valeur de retour doivent être identiques). Si la signature de la méthode change, ce n'est plus une redéfinition mais une surcharge (et rappelez-vous : ce n'est pas autorisé en Nit !).
+La redéfinition d'une méthode héritée doit impérativement conserver la déclaration de la méthode parent (type et nombre de paramètres et la valeur de retour doivent être identiques). Si la signature de la méthode change, ce n'est plus une redéfinition mais une surcharge... et rappelez-vous : ce n'est pas autorisé en Nit.
 
 Pour redéfinir une méthode, il suffit d'utiliser le mot-clé |redef| :
 \lstinputlisting[language=Nit]{./poo/listings/redef1_c.nit}
@@ -334,18 +336,18 @@ Lors de la redéfinition d'une méthode avec le mot-clé |redef|, il n'est pas néce
 %\lstinputlisting[language=Nit]{./poo/listings/redef5_c.nit}
 
 \section{Polymorphisme}
-Le polymorphisme est la capacité, pour un même message de correspondre à plusieurs formes de traitements selon l'objet auquel ce message est adressé. La gestion du polymorphisme est assurée dynamiquement à l'exécution.
+Le polymorphisme est la capacité, pour un même message, de correspondre à plusieurs formes de traitements selon l'objet auquel ce message est adressé. La gestion du polymorphisme est assurée dynamiquement à l'exécution.
 
 L'idée est de partir d'un type et de le modifier. Par exemple, on peut créer une classe de base, puis faire des classes dérivées :
-\lstinputlisting[language=Nit]{./poo/listings/polymorphisme_c.nit}
+\lstinputlisting[language=Nit, linerange=1-35]{./poo/listings/polymorphisme_c.nit}
 
 On peut ensuite traiter les objets de la même manière quelques soit leur type dynamique :
-\lstinputlisting[language=Nit, linerange=39-43, firstnumber=last]{./poo/listings/polymorphisme_c.nit}
+\lstinputlisting[language=Nit, linerange=37-43, firstnumber=last]{./poo/listings/polymorphisme_c.nit}
 
 L'héritage définit un sous-typage implicite de la classe fille vers la classe mère : on peut affecter à une référence d'une classe n'importe quel objet d'une de ses sous classes.
 
 \section{Coercition}
-La coercition (conversion de type) peut être utilisé dans le cadre d'un cast standard grâce au mot-clé |as| :
+La coercition (conversion de type) peut être utilisée dans le cadre d'un cast standard grâce au mot-clé |as| :
 \lstinputlisting[language=Nit]{./poo/listings/coercition1_c.nit}
 
 L'inconvénient de cette méthode est que si l'objet n'avait pas été dynamiquement typé en tant que Vache, une erreur d'exécution serait survenue lors du cast puisque celui-ci aurait échoué.
@@ -391,7 +393,7 @@ Int et Bool sont deux exemples de types universels.
 \chapter{Généricité et types virtuels}
 
 \section{Généricité}
-Le principe de la généricité est de factoriser les méthodes pouvant s'appliquer à n'importe quelle variable quelque soit sont type en évitant les problèmes de coercition.
+Le principe de la généricité est de factoriser les méthodes pouvant s'appliquer à n'importe quelle variable quel que soit son type en évitant les problèmes de coercition.
 
 \subsection{Généricité simple}
 Prenons un exemple de classe non générique :
@@ -400,7 +402,7 @@ Prenons un exemple de classe non générique :
 Si nous souhaitons pouvoir utiliser cette classe avec d'autres objets que des |String|, il serait possible de se baser sur le type le plus haut dans la hiérarchie Nit, c'est à dire |Object| :
 \lstinputlisting[language=Nit, linerange=1-3]{./poo/listings/gen2_c.nit}
 
-Voyons maintenant ce qu'il se passe quand nous utilisons cette classe avec des |Int| :
+Voyons maintenant ce qui se passe quand nous utilisons cette classe avec des |Int| :
 \lstinputlisting[language=Nit, linerange=5-7, firstnumber=last]{./poo/listings/gen2_c.nit}
 
 Vous remarquerez qu'il est nécessaire d'utiliser un cast pour utiliser le retour du |getter| de l'attribut |valeur| puisque celui-ci est de type |Object|. Ce n'est pas pratique et potentiellement dangereux pour la stabilité du programme puisque le risque d'erreur d'exécution sur un cast qui a échoué augmente.
@@ -412,7 +414,7 @@ Voici le code de la classe déclarée comme générique :
 
 Dans cette classe, le T n'est pas encore défini, cela se fera à l'instanciation. Par contre, une fois instancié avec un type, l'objet ne pourra travailler qu'avec le type de données spécifié à l'instanciation.
 
-La déclaration d'une classe générique se fait en utilisant précisant le type joker (représenté par n'importe quel mot) entre crochet |[T]|. Il suffit ensuite d'implémenter les méthodes comme nous le ferions habituellement mais en remplaçant les types par le joker que nous avons défini dans la déclaration de la classe.
+La déclaration d'une classe générique se fait en précisant le type joker (représenté par n'importe quel mot) entre crochet |[T]|. Il suffit ensuite d'implémenter les méthodes comme nous le ferions habituellement mais en remplaçant les types par le joker que nous avons défini dans la déclaration de la classe.
 
 Voyons comment utiliser notre classe générique avec des entiers :
 \lstinputlisting[language=Nit, linerange=5-6, firstnumber=last]{./poo/listings/gen3_c.nit}
@@ -441,7 +443,7 @@ Nit supporte aussi la généricité multiple comme le montre l'exemple suivant :
 \lstinputlisting[language=Nit]{./poo/listings/gen5_c.nit}
 
 \section{Types virtuels}
-Les types virtuels permettent définir au sein d'une classe un champ qui va contenir un type plutôt d'un objet. Ce champ peut ensuite être utilisé pour typer les paramètres et les types de retour des méthodes. Sa valeur sera exploitée à la compilation pour définir quel est le type à utiliser.
+Les types virtuels permettent définir au sein d'une classe un champ qui va contenir un type plutôt d'un objet. Ce champ peut ensuite être utilisé pour typer les paramètres et les types de retour des méthodes. Sa valeur sera exploitée à la compilation pour définir le type à utiliser.
 
 Exemple d'utilisation d'un type virtuel :
 \lstinputlisting[language=Nit]{./poo/listings/type1_c.nit}
@@ -488,7 +490,7 @@ Si le nom du module diffère du nom du fichier, le compilateur ne sera pas capabl
 Pour l'instant il n'est pas possible d'importer des modules se trouvant dans un autre répertoire que celui où se trouvent les fichiers sources.
 
 \subsection{Import privé}
-Si on utilise le mot-clé |private| devant le |import|, le module sera importé dans le module courant comme privé. C'est à dire que tous les modules qui importeront le module courant ne verrons pas les classes et les propriétés importées.
+Si on utilise le mot-clé |private| devant le |import|, le module sera importé dans le module courant comme privé. C'est à dire que les modules qui importeront le module courant ne verrons pas les classes et les propriétés importées.
 
 \subsection{Import intrusif}
 L'utilisation du mot-clé |intrude| avant l'import d'un module permet d'importer le module en mode intrusif, c'est à dire d'ignorer toutes les restrictions liées à la visibilité. Ainsi les méthodes déclarées |private| seront considérées comme publiques.
