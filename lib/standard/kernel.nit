@@ -337,6 +337,16 @@ universal Int
 			cur += 1
 		end
 	end
+
+	fun abs : Int
+	do
+	    if self >= 0
+	    then
+	        return self
+	    else
+	        return -1 * self
+	    end
+	end
 end
 
 # Native characters.
