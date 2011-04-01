@@ -336,8 +336,8 @@ abstract class MMType
 	# 'c' Must be a super-class of self
 	# Example:
 	#   class A[E]
-	#   class B[F] special A[F]
-	#   class C[G] special B[String]
+	#   class B[F] super A[F]
+	#   class C[G] super B[String]
 	#   class D special C[Float]
 	# 'A[Int]'.upcast_for('A') -> 'A[Int]'
 	# 'A[Int]'.upcast_for('B') -> abort

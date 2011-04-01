@@ -85,6 +85,11 @@ class MMVirtualType
 	do
 		return property.stype_for(recv).as(not null)
 	end
+
+        redef fun upcast_for(c)
+        do
+                return bound.upcast_for(c)
+        end
 end
 
 redef class MMLocalClass

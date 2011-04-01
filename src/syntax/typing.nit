@@ -152,10 +152,10 @@ private class TypingVisitor
 			for p in false_candidates do
 				a.add("{p.full_name}{p.signature.as(not null)}")
 			end
-			v.error(n, "Error: there is no available compatible constrctor in {c}. Discarded candidates are {a.join(", ")}.")
+			v.error(n, "Error: there is no available compatible constructor in {c}. Discarded candidates are {a.join(", ")}.")
 			return null
 		else
-			v.error(n, "Error: there is no available compatible constrctor in {c}.")
+			v.error(n, "Error: there is no available compatible constructor in {c}.")
 			return null
 		end
 	end
@@ -658,13 +658,13 @@ redef class AForExpr
 		# Process collection
 		v.enter_visit(n_expr)
 
-		if not v.check_conform_expr(n_expr, v.type_collection) then return
+		if not v.check_conform_expr(n_expr, v.type_iterable) then return
 		var expr_type = n_expr.stype
 
 		# Get iterator
 		var meth_iterator = v.get_method(expr_type, once "iterator".to_symbol)
 		var iter_type = meth_iterator.signature_for(expr_type).return_type.as(not null)
-		var meth_item = v.get_method(iter_type, once ("item".to_symbol))
+		var meth_item = v.get_method(iter_type, once ("current".to_symbol))
 		var va_stype = meth_item.signature_for(iter_type).return_type.as(not null)
 		if not n_expr.is_self then va_stype = va_stype.not_for_self
 		va.stype = va_stype
