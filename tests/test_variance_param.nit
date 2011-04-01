@@ -19,7 +19,7 @@ class A
 	type U: B
 	fun foo(a: T) do a.out
 	fun bar(b: U) do b.out
-	fun baz(i: Int) do i.out
+	fun baz(i: C) do i.out
 	fun out do 'A'.output
 
 	init do end
@@ -28,37 +28,37 @@ end
 class B
 	super A
 	redef type T: B
-	redef type U: Int
+	redef type U: C
 	redef fun foo(a: T) do a.out
 	redef fun bar(b: U) do b.out
-	redef fun baz(i: Int) do i.out
+	redef fun baz(i: C) do i.out
 	redef fun out do 'B'.output
 
 	init do end
 end
 
-redef class Int
+class C
 	super B
-	redef type T: Int
+	redef type T: C
 	redef fun foo(a: T) do a.out
 	redef fun bar(b: U) do b.out
-	redef fun output is intern
+	redef fun output do i.output
 	redef fun out
 	do
 		var i: Object = self
-		if i isa Int then
+		if i isa C then
 			i.output
 		else
 			'X'.output
 		end
 	end
-
+	var i: Int
+	init (i:Int) do self.i = i
 end
-
 var a = new A
 var b = new B
 var ab: A = b
-var i = 5
+var i = new C(5)
 var ai: A = i
 var bi: B = i
 

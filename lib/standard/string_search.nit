@@ -17,7 +17,7 @@ package string_search
 import string
 
 # Patterns are string motifs.
-class Pattern
+interface Pattern
 	# Search `self' into `s' from a certain position.
 	# Return the position of the first character of the matching section.
 	# Return -1 if not found.

@@ -625,7 +625,9 @@ redef class AForExpr
 		v.seq = iclos.body
 		escapable.continue_seq = iclos.body
 		escapable.continue_value = null
-		v.stmt(new IMove(v.variable(variable), iclos.params.first))
+		for i in [0..variables.length[ do
+			v.stmt(new IMove(v.variable(variables[i]), iclos.params[i]))
+		end
 		v.generate_stmt(n_block)
 
 		# Call closure

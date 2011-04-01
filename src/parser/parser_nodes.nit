@@ -658,7 +658,7 @@ class AForExpr
 	super AExpr
 	super ALabelable
     readable var _n_kwfor: TKwfor
-    readable var _n_id: TId
+    readable var _n_ids: List[TId] = new List[TId]
     readable var _n_expr: AExpr
     readable var _n_kwdo: TKwdo
     readable var _n_block: nullable AExpr = null

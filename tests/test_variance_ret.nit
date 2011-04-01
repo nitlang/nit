@@ -25,9 +25,9 @@ class A
 	    return new B 
     end
     
-    fun baz: Int 
+    fun baz: C
     do 
-	    return 5 
+	    return new C(5)
     end
     
     redef fun output 
@@ -44,13 +44,13 @@ class B
     do 
 	    return new B 
     end
-    redef fun bar: Int 
+    redef fun bar: C
     do 
-	    return 6 
+	    return new C(6)
     end
-    redef fun baz: Int 
+    redef fun baz: C 
     do 
-	    return 7 
+	    return new C(7)
     end
     redef fun output 
     do 
@@ -59,24 +59,24 @@ class B
 
     init do end
 end
-
-redef class Int
+class C
 	super B
-    redef fun foo: Int 
+    redef fun foo: C
     do 
-	    return 8 
+	    return new C(8) 
     end
-    redef fun bar: Int 
+    redef fun bar: C 
     do
-	    return 9
+	    return new C(9)
     end
-    redef fun output is intern
+    redef fun output do i.output
+    var i: Int
+    init (i: Int) do self.i = i
 end
-
 var a = new A
 var b = new B
 var ab: A = b
-var i = 5
+var i = new C(5)
 var ai: A = i
 var bi: B = i
 
