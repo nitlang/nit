@@ -17,12 +17,476 @@ package string
 intrude import collection # FIXME should be collection::array
 import hash
 
+#FIXME Remove StringCollection, StringArray and StringIterator
+
+# This abstract class implements its others methods with an iterator.
+# Subclasses may redefine them with an efficient implementation.
+class StringCollection[E]
+	super Collection[E]
+	# Get a new iterator on the collection.
+	redef fun iterator: StringIterator[E] do return new StringIterator[E](self)
+
+	# Iterate over each element of the collection
+	redef fun iterate
+		!each(e: E)
+	do
+		var i = iterator
+		while i.is_ok do
+			each(i.item)
+			i.next
+		end
+	end
+
+	# Add each item of `coll`.
+	fun add_all(coll: StringCollection[E]) do for i in coll do add(i)
+
+	# Get the item at `key'.
+	fun [](key: Int): E is abstract
+
+	# Add each item of `coll` after the last.
+	fun append(coll: StringCollection[E]) do for i in coll do push(i)
+
+	# Get the first item.
+	# Is equivalent with `self'[0].
+	fun first: E
+	do
+		assert not_empty: not is_empty
+		return self[0]
+	end
+	
+	# Get the last item.
+	# Is equivalent with `self'[`length'-1].
+	fun last: E
+	do
+		assert not_empty: not is_empty
+		return self[length-1]
+	end
+
+	# Set the`item' at `key'.
+	fun []=(key: Int, item: E) is abstract
+
+	# Set the first item.
+	# Is equivalent with `self'[0] = `item'.
+	fun first=(item: E)
+	do self[0] = item end
+
+	# Set the last item.
+	# Is equivalent with `self'[length-1] = `item'.
+	fun last=(item: E) 
+	do 
+		var l = length
+		if l > 0 then
+			self[l-1] = item
+		else
+			self[0] = item
+		end
+	end
+
+	# Add each (key,value) of `map' into `self'.
+	# If a same key exists in `map' and `self', then the value in self is discarded.
+	fun recover_with(map: StringCollection[E])
+	do
+		var i = map.iterator
+		while i.is_ok do
+			self[i.key] = i.item
+			i.next
+		end
+	end
+
+	# The current length
+	redef readable var _length: Int = 0
+
+	redef fun is_empty do return _length == 0
+
+	redef fun has(item)
+	do
+		var i = 0
+		var l = length
+		while i < l do
+			if self[i] == item then return true
+			i += 1
+		end
+		return false
+	end
+
+	redef fun has_only(item)
+	do
+		var i = 0
+		var l = length
+		while i < l do
+			if self[i] != item then return false
+			i += 1
+		end
+		return true
+	end
+
+	redef fun count(item)
+	do
+		var res = 0
+		var i = 0
+		var l = length
+		while i < l do
+			if self[i] == item then res += 1
+			i += 1
+		end
+		return res
+	end
+
+	fun reversed: StringArray[E]
+	do
+		var cmp = _length
+		var result = new StringArray[E].with_capacity(cmp)
+		while cmp > 0 do
+			cmp -= 1
+			result.add(self[cmp])
+		end
+		return result
+	end
+
+	protected fun copy_to(start: Int, len: Int, dest: StringCollection[E], new_start: Int)
+	do
+		# TODO native one
+		var i = len
+		while i > 0 do
+			i -= 1
+			dest[new_start+i] = self[start+i]
+		end
+	end
+
+	redef fun output
+	do
+		var i = 0
+		var l = length
+		while i < l do
+			var e = self[i]
+			if e != null then e.output
+			i += 1
+		end
+	end
+
+	# Two arrays are equals if they have the same items in the same order.
+	redef fun ==(o)
+	do
+		if not o isa StringCollection[E] or o is null then return false
+		var l = length
+		if o.length != l then return false
+		var i = 0
+		while i < l do
+			if self[i] != o[i] then return false
+			i += 1
+		end
+		return true
+	end
+
+	fun has_key(index: Int): Bool do return index >= 0 and index < length
+
+	fun index_of(item: E): Int do return index_of_from(item, 0)
+	
+	fun last_index_of(item: E): Int do return last_index_of_from(item, length-1)
+
+	fun index_of_from(item: E, pos: Int): Int
+	do
+		var i = pos
+		var len = length
+		while i < len do
+			if self[i] == item then
+				return i
+			end
+			i += 1
+		end
+		return -1
+	end
+
+	fun last_index_of_from(item: E, pos: Int): Int
+	do
+		var i = pos
+		while i >= 0 do
+			if self[i] == item then
+				return i
+			else
+				i -= 1
+			end
+		end
+		return -1
+	end
+
+	fun enlarge(cap: Int) is abstract
+
+	fun push(item: E) do add(item)
+
+	fun pop: E
+	do
+		assert not_empty: not is_empty
+		var r = last
+		_length -= 1
+		return r
+	end
+
+	fun shift: E
+	do
+		assert not_empty: not is_empty
+		var r = first
+		var i = 1
+		var l = length
+		while i < l do
+			self[i-1] = self[i]
+			i += 1
+		end
+		_length = l - 1
+		return r
+	end
+
+	fun unshift(item: E)
+	do
+		var i = length - 1
+		while i > 0 do
+			self[i+1] = self[i]
+			i -= 1
+		end
+		self[0] = item
+	end
+
+	fun insert(item: E, pos: Int)
+	do
+		enlarge(length + 1)
+		copy_to(pos, length-pos, self, pos + 1)
+		self[pos] = item
+	end
+
+	redef fun add(item: E) do self[length] = item
+
+	redef fun clear do _length = 0
+
+	redef fun remove_first(item: E) do remove_at(index_of(item))
+
+	redef fun remove(item: E)
+	do
+		var i = index_of(item)
+		while i >= 0 do
+			remove_at(i)
+			i = index_of_from(item, i)
+		end
+	end
+
+	fun remove_at(i: Int)
+	do
+		var l = length
+		if i >= 0 and i < l then
+			var j = i + 1
+			while j < l do
+				self[j-1] = self[j]
+				j += 1
+			end
+			_length = l - 1
+		end
+	end
+	
+end
+
+# Resizeable one dimention array of objects.
+#
+# Arrays have a literal representation.
+#     a = [12, 32, 8]
+# is equivalent with:
+#     a = new Array[Int]
+#     a.push(12)
+#     a.push(32)
+#     a.push(8)
+class StringArray[E]
+	super StringCollection[E]
+	redef fun iterate
+		!each(e: E)
+	do
+		var i = 0
+		var l = _length
+		var items = _items
+		while i < length do
+			each(items[i])
+			i += 1
+		end
+	end
+
+	# Get a new array of `size' elements.
+	protected fun calloc_array(size: Int): NativeArray[E] is intern
+
+	redef fun [](index)
+	do
+		assert index: index >= 0 and index < _length
+		return _items[index]
+	end
+
+	redef fun []=(index, item)
+	do
+		assert index: index >= 0 and index < _length + 1
+		if _capacity <= index then
+			enlarge(index + 1)
+		end
+		if _length <= index then
+			_length = index + 1
+		end
+		_items[index] = item
+	end
+
+	redef fun add(item)
+	do
+		var l = _length
+		if _capacity <= l then
+			enlarge(l + 1)
+		end
+		_length = l + 1
+		_items[l] = item
+	end
+
+	redef fun enlarge(cap)
+	do
+		var c = _capacity
+		if cap <= c then return
+		while c <= cap do c = c * 2 + 2
+		var a = calloc_array(c)
+		if _capacity > 0 then _items.copy_to(a, _length)
+		_items = a
+		_capacity = c
+	end
+
+	# Create an empty array.
+	init
+	do
+		_capacity = 0
+		_length = 0
+	end
+
+	# Create an empty array with a given capacity.
+	init with_capacity(cap: Int)
+	do
+		assert positive: cap >= 0
+		_items = calloc_array(cap)
+		_capacity = cap
+		_length = 0
+	end
+
+	# Create an array of `count' elements
+	init filled_with(value: E, count: Int)
+	do
+		assert positive: count >= 0
+		_items = calloc_array(count)
+		_capacity = count
+		_length = count
+		var i = 0
+		while i < count do
+			self[i] = value
+			i += 1
+		end
+	end
+
+	# Create a array filled with a given native array.
+	init with_native(nat: NativeArray[E], size: Int)
+	do
+		assert positive: size >= 0
+		_items = nat
+		_capacity = size
+		_length = size
+	end
+
+	# The internal storage.
+	var _items: nullable NativeArray[E] = null
+
+	# Do not use this method
+	# FIXME: Remove it once modules can intrude non local modules
+	fun intern_items: NativeArray[E] do return _items.as(not null)
+
+	# The size of `_items'.
+	var _capacity: Int = 0
+
+	# Sort the array using the !cmp function.
+	fun sort
+		!cmp(e1,e2: E): Int
+	do
+		sub_sort(0, length-1) !cmp(x,y) = cmp(x, y)
+	end
+
+	# Sort `array' between `from' and `to' indices
+	private fun sub_sort(from: Int, to: Int)
+		!cmp(e1,e2: E): Int
+	do
+		if from >= to then
+			return
+		else if from + 7 < to then
+			var pivot = self[from]
+			var i = from
+			var j = to
+			while j > i do
+				while i <= to and cmp(self[i], pivot) <= 0 do i += 1
+				while j > i and cmp(self[j], pivot) >= 0 do j -= 1
+				if j > i then
+					var t = self[i]
+					self[i] = self[j]
+					self[j] = t
+				end
+			end
+			self[from] = self[i-1]
+			self[i-1] = pivot
+			sub_sort(from, i-2) !cmp(x,y) = cmp(x, y)
+			sub_sort(i, to) !cmp(x,y) = cmp(x, y)
+		else
+			var i = from
+			while i < to do
+				var min = i
+				var min_v = self[i]
+				var j = i
+				while j <= to do
+					if cmp(min_v, self[j]) > 0 then
+						min = j
+						min_v = self[j]
+					end
+					j += 1
+				end
+				if min != i then
+					self[min] = self[i]
+					self[i] = min_v
+				end
+				i += 1
+			end
+		end
+	end
+end
+
+# Instances of the Iterator class generates a series of elements, one at a time.
+# They are mainly used with collections.
+class StringIterator[E]
+	super CollectionIterator[E]
+	
+	readable var _index: Int = 0
+
+	# A synonym of index.
+	fun key: Int do return index
+
+	fun item: E do return _array[_index]
+
+	redef fun current do return item
+
+	# redef fun item=(e) do _array[_index] = e
+
+	fun is_ok: Bool do return _index < _array.length
+
+	redef fun has_next do return is_ok
+
+	redef fun next do _index += 1
+
+	init(a: StringCollection[E])
+	do
+		_array = a
+		_index = 0
+	end
+	
+	var _array: StringCollection[E]
+end
+
 ###############################################################################
 # String                                                                      #
 ###############################################################################
 
 abstract class AbstractString
-	super AbstractArrayRead[Char]
+	super StringCollection[Char]
 	readable private var _items: NativeString
 
 	redef fun [](index) do return _items[index]
@@ -268,7 +732,7 @@ class Buffer
 	super AbstractString
 	super Comparable
 	super StringCapable
-	super AbstractArray[Char]
+	super StringCollection[Char]
 
 	redef type OTHER: String
 
@@ -414,7 +878,7 @@ redef class Object
 		return "<{object_id.to_hex}"
 	end
 
-	protected fun args: Sequence[String]
+	protected fun args: StringCollection[String]
 	do
 		return sys.args
 	end
@@ -518,14 +982,14 @@ redef class Collection[E]
 
 		# Concat first item
 		var i = iterator
-		var e = i.item
+		var e = i.current
 		if e != null then s.append(e.to_s)
 		
 		# Concat other items
 		i.next
-		while i.is_ok do
+		while i.has_next do
 			s.append(sep)
-			e = i.item
+			e = i.current
 			if e != null then s.append(e.to_s)
 			i.next
 		end
@@ -551,7 +1015,7 @@ end
 
 redef class Map[K,V]
 	# Concatenate couple of 'key value' separate by 'couple_sep' and separate each couple with `sep'. 
-	fun map_join(sep: String, couple_sep: String): String
+	fun join(sep: String, couple_sep: String): String
 	do
 		if is_empty then return ""
 		
@@ -559,16 +1023,16 @@ redef class Map[K,V]
 
 		# Concat first item
 		var i = iterator
-		var k = i.key
-		var e = i.item
+		var k = i.current_key
+		var e = i.current
 		if e != null then s.append("{k}{couple_sep}{e}")
 		
 		# Concat other items
 		i.next
-		while i.is_ok do
+		while i.has_next do
 			s.append(sep)
-			k = i.key
-			e = i.item
+			k = i.current_key
+			e = i.current
 			if e != null then s.append("{k}{couple_sep}{e}")
 			i.next
 		end
@@ -602,9 +1066,9 @@ class StringCapable
 end
 
 redef class Sys
-	var _args_cache: nullable Sequence[String]
+	var _args_cache: nullable StringCollection[String]
 
-	redef fun args: Sequence[String]
+	redef fun args: StringCollection[String]
 	do
 		if _args_cache == null then init_args
 		return _args_cache.as(not null)
@@ -620,7 +1084,7 @@ redef class Sys
 	private fun init_args
 	do
 		var argc = native_argc
-		var args = new Array[String].with_capacity(0)
+		var args = new StringArray[String].with_capacity(0)
 		var i = 1
 		while i < argc do
 			args[i-1] = new String.from_cstring(native_argv(i))
