@@ -212,6 +212,13 @@ class AbstractArray[E]
 			_length = l - 1
 		end
 	end
+
+	fun swap_at( a : Int, b : Int )
+	do
+	    var e = self[a]
+	    self[a] = b
+	    self[b] = e
+	end
 end
 
 # Resizeable one dimention array of objects.
