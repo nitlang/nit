@@ -10,435 +10,478 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module define several abtract collection classes.
-package abstract_collection
+module abstract_collection
 
 import kernel
 
-# The root of the collection hierarchy.
+# Iterable is the root of all iterable class on a single element.
+# Iterable of a couple of element may specializee MapIterator
 #
 # Instances of this class offers an iterator method.
-#
-# Colections instances can use the "for" structure:
-#	  var x: Collection[U]
-#         ...
-#         for u in x do
-#             # u is a U
-#             ...
-#         end
-# that is equivalent with
-#         var x: Collection[U]
-#         ...
-#         var i = x.iterator
-#         while i.is_ok do
-#             var u = i.item # u is a U
-#             ...
-#             i.next
-#         end
-#
-# This abstract class implements its others methods with an iterator.
-# Subclasses may redefine them with an efficient implementation.
-interface Collection[E]
-	# Get a new iterator on the collection.
+# 
+# Iterable instances can use the "for" structure:
+#         var x: Iterable[U]
+#                  ...
+#                  for u in x do
+#                          #  u is a U
+#                          ...
+#                  end
+#  that is equivalent with
+#                  var x: Iterable[U]
+#                  ...
+#                  var i = x.iterator
+#                  while i.has_next do
+#                          var u = i.current #  u is a U
+#                          ...
+#                          i.next
+#                  end
+# 
+# Iterable can be iterated on all elements of the class using en closure thanks to an iterator.
+interface Iterable[E]
+
+	# Get a new iterator of the class
 	fun iterator: Iterator[E] is abstract
 
-	# Iterate over each element of the collection
-	fun iterate
-		!each(e: E)
+	# Iterate over each element of the collection using a closure thanks to iterator
+	fun iterate 
+	        !each(e: E)
 	do
 		var i = iterator
-		while i.is_ok do
-			each(i.item)
+		while i.has_next do
+			each(i.current)
 			i.next
 		end
 	end
 
-	# Is there no item in the collection ?
-	fun is_empty: Bool is abstract 
-
-	# Number of items in the collection.
-	fun length: Int is abstract
-
-	# Is `item' in the collection ?
-	# Comparaisons are done with ==
-	fun has(item: E): Bool is abstract
-
-	# Is the collection contain only `item' ?
-	# Comparaisons are done with ==
-	# Return true if the collection is empty.
-	fun has_only(item: E): Bool is abstract
-
-	# How many occurences of `item' are in the collection ?
-	# Comparaisons are done with ==
-	fun count(item: E): Int is abstract
-
-	# Return one the item of the collection
-	fun first: E is abstract
-end
-
-# Naive implementation of collections method
-# You only have to define iterator!
-interface NaiveCollection[E]
-	super Collection[E]
-	redef fun is_empty do return length == 0
-
-	redef fun length
-	do
-		var nb = 0
-		for i in self do nb += 1 
-		return nb
-	end
-
-	redef fun has(item)
-	do
-		for i in self do if i == item then return true
-		return false
-	end
-
-	redef fun has_only(item)
-	do
-		for i in self do if i != item then return false
-		return true
-	end
-
-	redef fun count(item)
-	do
-		var nb = 0
-		for i in self do if i == item then nb += 1
-		return nb
-	end
-
-	redef fun first
-	do
-		assert length > 0
-		return iterator.item
-	end
 end
 
 # Instances of the Iterator class generates a series of elements, one at a time.
 # They are mainly used with collections.
 interface Iterator[E]
-	# The current item.
-	# Require `is_ok'.
-	fun item: E is abstract
+        
+        # Is there a next item ?
+        fun has_next: Bool is abstract
 
-	# Jump to the next item.
-	# Require `is_ok'.
-	fun next is abstract
+        # Jump to the next item
+        # Require has_next
+        fun next is abstract
 
-	# Is there a current item ?
-	fun is_ok: Bool is abstract
-end
+        # The current item
+        # Require has_next
+        fun current: E is abstract
 
-# A collection that contains only one item.
-class Container[E]
-	super Collection[E]
+        # Restart from begin
+        fun rewind is abstract
 
-	redef fun first do return _item
+end    
 
-	redef fun is_empty do return false
+abstract class ReadOnlyIterator[E]
+        super Iterator[E]
+end    
+        
+# ReadOnly iterator provide a Proxy to CollectionIterator hidding modification methods
+class ReadOnlyIteratorProxy[E]
+        super ReadOnlyIterator[E]
 
-	redef fun length do return 1
+        type N: E
 
-	redef fun has(an_item) do return _item == an_item
+        protected var iterator: Iterator[N]
 
-	redef fun has_only(an_item) do return _item == an_item
+        init(iterator: Iterator[N]) 
+        do
+                self.iterator = iterator
+        end
 
-	redef fun count(an_item)
-	do
-		if _item == an_item then
-			return 1
-		else
-			return 0
-		end
-	end
+        redef fun has_next do return iterator.has_next
 
-	redef fun iterator do return new ContainerIterator[E](self)
-
-	# Create a new instance with a given initial value.
-	init(e: E) do _item = e
-
-	# The stored item
-	readable writable var _item: E
-end
-
-# This iterator is quite stupid since it is used for only one item.
-class ContainerIterator[E]
-	super Iterator[E]
-	redef fun item do return _container.item
-
-	redef fun next do _is_ok = false
-
-	init(c: Container[E]) do _container = c
-
-	redef readable var _is_ok: Bool = true
-
-	var _container: Container[E]
-end
-
-# Items can be removed from this collection
-interface RemovableCollection[E]
-	super Collection[E]
-	# Remove all items
-	fun clear is abstract
-
-	# Remove an occucence of `item'
-	fun remove(item: E) is abstract
-
-	# Remove all occurences of `item'
-	fun remove_all(item: E) do while has(item) do remove(item)
-end
-
-# Items can be added to these collections.
-interface SimpleCollection[E]
-	super RemovableCollection[E]
-	# Add an item in a collection.
-	# Ensure col.has(item)
-	fun add(item: E) is abstract
-
-	# Add each item of `coll`.
-	fun add_all(coll: Collection[E]) do for i in coll do add(i)
-end
-
-# Abstract sets.
-#
-# Set contains contains only one element with the same value (according to =).
-#    var s : Set[E]
-#    var a = "Hello"
-#    var b = "Hello"
-#    ...
-#    s.add(a)
-#    s.has(b) # --> true
-interface Set[E: Object]
-	super SimpleCollection[E]
-
-	redef fun has_only(item)
-	do
-		var l = length
-		if l == 1 then
-			return has(item)
-		else if l == 0 then
-			return true
-		else
-			return false
-		end
-	end
-
-	# Only 0 or 1
-	redef fun count(item)
-	do
-		if has(item) then
-			return 1
-		else
-			return 0
-		end
-	end
-
-	# Synonym of remove since there is only one item
-	redef fun remove_all(item) do remove(item)
-end
-
-interface MapRead[K: Object, E]
-	super Collection[E]
-	# Get the item at `key'.
-	fun [](key: K): E is abstract
-
-	# Is there an item at `key'.
-	fun has_key(key: K): Bool is abstract
-
-	redef fun iterator: MapIterator[K, E] is abstract
-end
-
-# Maps are associative collections: `key' -> `item'.
-#
-# The main operator over maps is [].
-#
-#     var map: Map[U, V]
-#     ...
-#     map[u1] = v1      # Associate 'v1' to 'u1'
-#     map[u2] = v2      # Associate 'v2' to 'u2'
-#     map[u1]            # -> v1
-#     map[u2]            # -> v2
-#     map.has_key(u1)    # -> true
-#     map.has_key(u3)    # -> false
-interface Map[K: Object, E]
-	super RemovableCollection[E]
-	super MapRead[K, E]
-	# Set the`item' at `key'.
-	fun []=(key: K, item: E) is abstract
-
-	# Remove the item at `key'
-	fun remove_at(key: K) is abstract
-
-	# Add each (key,value) of `map' into `self'.
-	# If a same key exists in `map' and `self', then the value in self is discarded.
-	fun recover_with(map: Map[K, E])
-	do
-		var i = map.iterator
-		while i.is_ok do
-			self[i.key] = i.item
-			i.next
-		end
-	end
-end
-
-# Iterators for Map.
-interface MapIterator[K: Object, E]
-	super Iterator[E]
-	# The key of the current item.
-	fun key: K is abstract
-
-	# Set a new `item' at `key'.
-	#fun item=(item: E) is abstract
-end
-
-# Indexed collection are ordoned collections.
-# The first item is 0. The last is `length'-1.
-interface SequenceRead[E]
-	super MapRead[Int, E]
-	# Get the first item.
-	# Is equivalent with `self'[0].
-	redef fun first
-	do
-		assert not_empty: not is_empty
-		return self[0]
-	end
-	
-	# Get the last item.
-	# Is equivalent with `self'[`length'-1].
-	fun last: E
-	do
-		assert not_empty: not is_empty
-		return self[length-1]
-	end
-
-	# Return the index of the first occurence of `item'.
-	# Return -1 if `item' is not found
-	fun index_of(item: E): Int
-	do
-		var i = iterator
-		while i.is_ok do
-			if i.item == item then return i.index
-			i.next
-		end
-		return -1
-	end
-
-	redef fun iterator: IndexedIterator[E] is abstract
-end
-
-# Indexed collection are ordoned collections.
-# The first item is 0. The last is `length'-1.
-interface Sequence[E]
-	super SequenceRead[E]
-	super Map[Int, E]
-	super SimpleCollection[E]
-	# Set the first item.
-	# Is equivalent with `self'[0] = `item'.
-	fun first=(item: E)
-	do self[0] = item end
-
-	# Set the last item.
-	# Is equivalent with `self'[length-1] = `item'.
-	fun last=(item: E) 
+        redef fun next
 	do 
-		var l = length
-		if l > 0 then
-			self[l-1] = item
-		else
-			self[0] = item
-		end
+		assert has_next: has_next		
+		iterator.next
 	end
 
-	# A synonym of `push'
-	redef fun add(e) do push(e)
+        redef fun current do return iterator.current
 
-	# Add an item after the last.
-	fun push(e: E) is abstract
+        redef fun rewind do iterator.rewind
 
-	# Add each item of `coll` after the last.
-	fun append(coll: Collection[E]) do for i in coll do push(i)
+end
 
-	# Remove the last item.
+# Traversable provides common methods (with naive implentation based on iterator)
+# To make your own collection class you have only to implement Iterator
+# You can redefine other methods with a more efficient implementation
+interface Traversable[E]
+	super Iterable[E]
+
+        # Number of item in the collection
+        fun length: Int
+        do
+                var nb = 0
+                for i in self do nb += 1
+                return nb
+        end
+
+        # Is there no item in the collection ?
+        fun is_empty: Bool do return length == 0
+
+        # Return an element from the collection
+        # Element returned depends on the collection implementation
+        # NOTE AT : undefined
+        fun get: E 
+        do 
+                for i in self do return i
+                abort
+        end
+
+        # Is 'item' in the collection ?
+        # Comparisons are done using ==
+        fun has(item: E): Bool
+        do
+                for i in self do if i == item then return true
+                return false
+        end
+
+        # Is the collection contains all 'items' ?
+        # Comparisons are done using ==
+        fun has_all(items: Iterable[E]): Bool
+        do
+                for i in items do if not has(i) then return false
+                return true
+        end
+
+        # Is the collection contains all 'items' and only 'items'
+        # Comparisons are done using ==
+        fun has_only(items: Iterable[E]): Bool
+        do
+		var size = 0
+		for i in items do
+			size += 1
+		end
+				
+		if size != length then return false
+		if not has_all(items) then return false
+		return true
+        end
+
+        # How many occurences of 'items' are in the collection ?
+        fun count(item: E): Int
+        do
+                var nb = 0
+                for i in self do if i == item then nb+=1
+                return nb
+        end
+
+end
+
+# ReadOnlyCollection, unmodifiable collections
+abstract class ReadOnlyCollection[E]
+        super Traversable[E]
+end
+
+# ReadOnlyCollectionProxy provides a proxy to Collection hidding modification methods
+class ReadOnlyCollectionProxy[E]
+        super ReadOnlyCollection[E]
+
+        type C: Collection[E]
+
+        protected var collection: C
+
+        # Initialize the proxy with the encapsulated class
+        init(collection: C)
+        do
+                self.collection = collection
+        end
+
+        redef fun length do return collection.length
+
+        redef fun is_empty do return collection.is_empty
+
+        redef fun get do return collection.get
+
+        redef fun has(item) do return collection.has(item)
+        
+        redef fun has_all(items) do return collection.has_all(items)
+
+        redef fun has_only(items) do return collection.has_only(items)
+
+        redef fun iterator: ReadOnlyIterator[E] do return new ReadOnlyIteratorProxy[E](collection.iterator)
+end
+
+# Collection is mutable
+# To implement your own Collection you have to redefine add and remove methods
+interface Collection[E]
+        super Traversable[E]
+
+        # Add 'item' to the collection
+        fun add(item: E) is abstract
+
+        # Add all 'items' to collection
+        fun add_all(items: Iterable[E]) do for i in items do add(i)
+
+        # Clear the collection
+        fun clear do remove_all(self)
+
+        # Return and remove an item from the collection
+        fun pick(): E
+        do
+                var item = get
+                remove(item)
+                return item
+        end
+
+        # Remove the first occurence of 'item' from the collection
+        fun remove_first(item: E) is abstract
+
+        # Remove all occurences of 'item' from the collection
+        fun remove(item: E) do while has(item) do remove_first(item)
+                
+        # Remove all first occurences of 'items' from the collection
+        fun remove_all_first(items: Iterable[E]) do for i in items do remove_first(i)
+
+        # Remove all occurences of 'items' from the collection
+        fun remove_all(items: Iterable[E]) do for i in items do remove(i)
+
+        # Return a read only proxy of the collection
+        fun to_read_only: ReadOnlyCollection[E] do return new ReadOnlyCollectionProxy[E](self)
+
+	# Get a new iterator of the class
+	redef fun iterator: CollectionIterator[E] is abstract
+
+end
+
+# Iterator for Collection
+# Allow modification of the Collection
+class CollectionIterator[E]
+        super Iterator[E]
+
+        # Delete the current item
+        fun delete() is abstract
+
+        # Replace the current 'item'
+	fun current=(item: E) is abstract
+end
+
+# Interface for implementing Bag
+interface Bag[E]
+        super Collection[E]
+end
+
+# Interface for implementing Set
+interface Set[E]
+        super Bag[E]
+end
+
+# Sequences are indexed collections
+interface Sequence[E]
+        super Collection[E]
+
+        # Get element at specified index
+        fun [](index: Int): E is abstract
+
+        # Set element at specified index
+        # If an item exists at index it will be overwritted by the new item
+        fun[]=(index: Int, item: E) is abstract
+
+        # Append 'item' to sequence
+        fun append(item: E) is abstract
+
+        # Appen all 'items' to sequence
+        fun append_all(items: Iterable[E]) do
+                for item in items do
+                        append(item)
+                end
+        end
+        
+        # Prepend 'item' to sequence
+        # Following items will be shifted to left
+        fun prepend(itm: E) is abstract
+
+        # Prepend all 'items' to sequence
+        fun prepend_all(items: Iterable[E]) do
+                for item in items do
+                        prepend(item)
+                end
+        end
+
+        # Get the first element of sequence
+        fun first: E
+        do
+                assert not_empty: not is_empty
+                return self[0]
+        end
+
+        # Set the first 'item' of sequence
+        fun first=(item: E) do self[0] = item end
+
+        # Get the last element of sequence
+        fun last: E
+        do 
+                assert not_empty: not is_empty
+                return self[length-1]
+        end
+
+        # Set the last 'item' of sequence
+        fun last=(item: E)
+        do
+                var l = length
+
+                if l > 0 then
+                        self[l-1] = item
+                else
+                        first = item
+                end
+        end
+
+        # Get index of the first occurence of 'item'
+        # Return -1 if 'item' not found
+        fun index_of(item: E): Int
+        do
+                var index = 0
+                var i = iterator
+                while i.has_next do
+                        if i.current == item then return index
+                        index += 1
+                        i.next
+                end
+                return -1
+        end
+
+        # Get index of the last occurence of 'item'
+        # Return -1 if 'item' not found
+        fun last_index_of(item: E): Int
+        do
+                var index = 0
+                var last = -1
+                var i = iterator
+                while i.has_next do
+                        if i.current == item then last = index
+                        index += 1
+                        i.next
+                end
+                return last
+        end
+
+        # Get the first index of 'item' from 'pos'
+        # Return -1 if 'item' not found
+        fun index_of_from(item: E, pos: Int): Int
+        do
+                var i = pos
+                var len = length
+                while i < len do
+                        if self[i] == item then
+                                return i
+                        end
+                        i += 1
+                end
+                return -1
+        end
+
+        # Get the last index of 'item' from 'pos'
+        # Return -1 if 'item' not found
+        fun last_index_of_from(item: E, pos: Int): Int
+        do
+                var i = pos
+                while i >= 0 do
+                        if self[i] == item then
+                                return i
+                        else          
+                                i -= 1
+                        end
+                end
+                return -1
+        end
+
+        # Return and remove the first element of the sequence
+        fun pick_first: E
+        do
+                var first = self.first
+                remove(first)
+                return first
+        end
+
+        # Return and remove the last element of the sequence
+        fun pick_last: E
+        do
+                var last = self.last
+                remove(last)
+                return last
+        end
+
+        # Insert 'item' at 'index' position and shift following elements to right
+        fun insert_at(index: Int, item: E) is abstract
+
+        # Remove the element at 'index'
+        fun remove_at(index: Int) is abstract
+
+        # Sort the Sequence using the !cmp closure
+        fun sort 
+                !cmp(e1, e2: E): Int
+        is abstract
+
+	# Get a new initerator of the class
+	redef fun iterator: SequenceIterator[E] is abstract
+
+	# Return an iterator that iterate 'from' index to end
+        fun iterator_from(from: Int): SequenceIterator[E] is abstract
+
+	# Return an iterator that iterate 'from' index 'to' index
+	fun iterator_within(from: Int, to: Int): SequenceIterator[E] is abstract
+end
+
+# Sequence iterator
+class SequenceIterator[E]
+	super CollectionIterator[E]
+
+	# Delete the next item
+	fun delete_after() is abstract
+
+	# Delete the previous item
+	fun delete_before() is abstract
+
+	# Insert 'item' after the current
+	fun insert_after(item: E) is abstract
+
+	# Inster 'item' before the current
+	fun insert_before(item: E) is abstract
+
+	# Return the current index
+	fun index: Int is abstract
+end        
+
+# Stack interface
+interface Stack[E]
+
+	# Get 'item' on the top of the Stack
 	fun pop: E is abstract
 
-	# Add an item before the last.
-	fun unshift(e: E) is abstract
+	# Push 'item' on the top of the Stack
+	fun push(item: E) is abstract
 
-	# Remove the first item.
-	# The second item become the first.
-	fun shift: E is abstract
+	# See the the item on the top of the Stack but without removing him
+	fun peek: E is abstract
 
+	# Check if Stack is empty
+	fun is_empty: Bool do return length == 0
+
+	# Get the length of the Stack
+	fun length: Int is abstract
 end
 
-# Iterators on indexed collections.
-interface IndexedIterator[E]
-	super MapIterator[Int, E]
-	# The index of the current item.
-	fun index: Int is abstract
+# Queue interface
+interface Queue[E]
 
-	# A synonym of index.
-	redef fun key do return index
+	# Dequeue the first enqueued item
+	fun dequeue(): E is abstract
+
+	# Enqueue 'item'
+	fun enqueue(item: E) is abstract
+
+	# See the the item on the top of the Queue but without removing him
+	fun peek(): E is abstract
+
+	# Check if Queue is empty
+	fun is_empty: Bool do return length == 0
+
+	# Get the length of the Queue
+	fun length: Int is abstract
 end
 
-# Associatives arrays that internally uses couples to represent each (key, value) pairs.
-interface CoupleMap[K: Object, E]
-	super Map[K, E]
-	# Return the couple of the corresponding key
-	# Return null if the key is no associated element
-	protected fun couple_at(key: K): nullable Couple[K, E] is abstract
-
-	redef fun [](key)
-	do
-		var c = couple_at(key)
-		if c == null then
-			abort
-		else
-			return c.second
-		end
-	end
-
-	redef fun has_key(key) do return couple_at(key) != null
-end
-
-# Iterator on CoupleMap
-#
-# Actually is is a wrapper around an iterator of the internal array of the map.
-class CoupleMapIterator[K: Object, E]
-	super MapIterator[K, E]
-	redef fun item do return _iter.item.second
-	
-	#redef fun item=(e) do _iter.item.second = e
-
-	redef fun key do return _iter.item.first
-
-	redef fun is_ok do return _iter.is_ok
-
-	redef fun next
-	do 
-		_iter.next
-	end
-
-	var _iter: Iterator[Couple[K,E]]
-
-	init(i: Iterator[Couple[K,E]]) do _iter = i
-end
-
-# Some tools ###################################################################
-
-# Two objects in a simple structure.
-class Couple[F, S]
-
-	# The first element of the couple.
-	readable writable var _first: F
-
-	# The second element of the couple.
-	readable writable var _second: S
-
-	# Create a new instance with a first and a second object.
-	init(f: F, s: S)
-	do
-		_first = f
-		_second = s
-	end
-end

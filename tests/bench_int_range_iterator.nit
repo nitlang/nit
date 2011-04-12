@@ -20,16 +20,16 @@ if not args.is_empty then nb = args.first.to_i
 var cpt = 0
 var r = [0..nb[
 var i1 = r.iterator
-while i1.is_ok do
-	var ii1 = i1.item
+while i1.has_next do
+	var ii1 = i1.current
 
 	var i2 = r.iterator
-	while i2.is_ok do
-		var ii2 = i2.item
+	while i2.has_next do
+		var ii2 = i2.current
 
 		var i3 = r.iterator
-		while i3.is_ok do
-			var ii3 = i3.item
+		while i3.has_next do
+			var ii3 = i3.current
 
 			if ii1 == ii2 and ii2 == ii3 then cpt += 1
 

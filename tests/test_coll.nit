@@ -19,7 +19,8 @@ fun test_coll(c: Sequence[Object], e: Object...)
 	print("c: {c.to_s.is_empty}")
 	print("empty: {c.is_empty}")
 	print("length: {c.length == 0}")
-	var e0 = e.pop
+	var e0 = e.last
+	e.remove(e0)
 	print("count: {c.count(e0)==0}")
 	c.add(e0)
 	print("add...")

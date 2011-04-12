@@ -163,7 +163,7 @@ redef class MMSrcLocalClass
 			n = n.next_node
 		end
 
-		for p in src_local_properties do
+		for p in src_local_properties.values do
 			p.accept_property_visitor(v)
 		end
 	end
@@ -197,7 +197,7 @@ redef class MMSrcLocalClass
 
 		# Collect unassigned attributes
 		var unassigned_attributes = new Array[MMSrcAttribute]
-		for a in src_local_properties do
+		for a in src_local_properties.values do
 			if a isa MMSrcAttribute then
 				var n = a.node
 				if n.n_expr == null then unassigned_attributes.add(a)

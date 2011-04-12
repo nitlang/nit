@@ -28,7 +28,7 @@ class Toto[E]
 end
 
 class TestNative
-	super ArrayCapable[Int]
+	super Array[Int]
 
 init
 do
@@ -67,9 +67,9 @@ do
 	print(a[0])
 	print(a)
 	var i = a.iterator
-	while i.is_ok do
+	while i.has_next do
 		print(i.index)
-		print(i.item)
+		print(i.current)
 		i.next
 	end
 end

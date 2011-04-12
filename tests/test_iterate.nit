@@ -14,19 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-fun test_iterator(c: Collection[Int])
+fun test_iterator(c: Iterable[Int])
 do
 	var idx = 0
 	var it = c.iterator
-	while it.is_ok do
-		var i = it.item
+	while it.has_next do
+		var i = it.current
 		print "  {idx}->{i}"
 		it.next
 		idx += 1
 	end
 end
 
-fun test_iterate(c: Collection[Int])
+fun test_iterate(c: Iterable[Int])
 do
 	var idx = 0
 	c.iterate !each i do
@@ -35,7 +35,7 @@ do
 	end
 end
 
-fun test_for(c: Collection[Int])
+fun test_for(c: Iterable[Int])
 do
 	var idx = 0
 	for i in c do
@@ -44,7 +44,7 @@ do
 	end
 end
 
-fun test_coll(c: Collection[Int], s: String)
+fun test_coll(c: Iterable[Int], s: String)
 do
 	print("{s}: iterator")
 	test_iterator(c)
@@ -55,7 +55,7 @@ do
 	print("")
 end
 
-fun init_seq(c: SimpleCollection[Int]): SimpleCollection[Int]
+fun init_seq(c: Collection[Int]): Collection[Int]
 do
 	for i in [0..5[ do
 		c.add(i)
@@ -77,6 +77,6 @@ test_coll(init_seq(new ArraySet[Int]), "ArraySet")
 test_coll(init_seq(new HashSet[Int]), "HashSet")
 test_coll([0..5[, "ORange")
 test_coll([0..4], "CRange")
-test_coll(init_map(new ArrayMap[Int, Int]), "ArrayMap")
-test_coll(init_map(new HashMap[Int, Int]), "HashMap")
+test_coll(init_map(new ArrayMap[Int, Int]).values, "ArrayMap")
+test_coll(init_map(new HashMap[Int, Int]).values, "HashMap")
 

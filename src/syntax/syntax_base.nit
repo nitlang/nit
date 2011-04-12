@@ -338,10 +338,10 @@ class AbsSyntaxVisitor
 		return get_type_by_name(once ("String".to_symbol))
 	end
 
-	# The primitive type Collection[nullable Object]
-	fun type_collection: MMType
+	# The primitive type Iterable[nullable Object]
+	fun type_iterable: MMType
 	do
-		return get_instantiated_type_by_name(once ("Collection".to_symbol), [type_object.as_nullable])
+		return get_instantiated_type_by_name(once ("Iterable".to_symbol), [type_object.as_nullable])
 	end
 
 	# The primitive type NativeString

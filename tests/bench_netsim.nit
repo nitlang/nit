@@ -14,6 +14,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+class Couple[F, S]
+
+	# The first element of the couple.
+	readable writable var _first: F
+
+	# The second element of the couple.
+	readable writable var _second: S
+
+	# Create a new instance with a first and a second object.
+	init(f: F, s: S)
+	do
+		_first = f
+		_second = s
+	end
+end
+
 class Node
 	redef fun to_s: String
 	do

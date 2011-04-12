@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import abstract_collection
+import array
 
 fun maybe: Bool do return true
 
-var a = new Container[Int](1)
+var a = new Array[Int]
+a.add(1)
 1.output
 for i in a do
 	2.output

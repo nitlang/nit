@@ -15,16 +15,16 @@
 # limitations under the License.
 
 fun foo(n: Int): List[Int]
-    do
+do
 	var a: List[Int]
 	if n > 0 then
-	    a = foo(n - 1)
-	    a = foo(n - 1)
-	    a.push(n)
+		a = foo(n - 1)
+		a = foo(n - 1)
+		a.add(n)
 	else
-	    a = new List[Int]
+		a = new List[Int]
 	end
 	return a
-    end
+end
 
 print(foo(23))

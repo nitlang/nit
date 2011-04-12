@@ -118,7 +118,7 @@ end
 
 var array = new Array[Elt].with_capacity(n)
 for i in [0..n[ do
-	array.push(generator)
+	array.add(generator)
 end
 
 var sorter = new EltSorter

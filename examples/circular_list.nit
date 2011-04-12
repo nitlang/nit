@@ -20,10 +20,6 @@ module circular_list
 class CircularList[E]
 	# Like standard Array or LinkedList, CircularList is a Sequence.
 	super Sequence[E]
-
-	# NaiveCollection contains working (but inefficient) implementation of
-	# the methods of Collection.
-	super NaiveCollection[E]
 	
 	# The first node of the list if any
 	# The special case of an empty list is handled by a null node
@@ -33,7 +29,7 @@ class CircularList[E]
 
 	redef fun first do return self.node.item
 
-	redef fun push(e)
+	redef fun add(e)
 	do
 		var new_node = new CLNode[E](e)
 		var n = self.node
@@ -50,7 +46,7 @@ class CircularList[E]
 		end
 	end
 
-	redef fun pop
+	redef fun pick_last
 	do
 		var n = self.node
 		assert n != null
@@ -67,18 +63,19 @@ class CircularList[E]
 		return prev.item
 	end
 
-	redef fun unshift(e)
+	redef fun prepend(e)
 	do
 		# Circularity has benefits.
-		push(e)
+		add(e)
 		self.node = self.node.prev
 	end
 
-	redef fun shift
+	redef fun pick_first
 	do
 		# Circularity has benefits.
+		var node = self.node
 		self.node = self.node.next
-		return self.pop
+		return pick_last
 	end
 
 	# Move the first at the last position, the second at the first, etc.
@@ -97,7 +94,7 @@ class CircularList[E]
 			# count 'step'
 			for i in [1..step[ do self.rotate
 			# kill
-			var x = self.shift
+			var x = self.pick_first
 			res.add(x)
 		end
 		self.node = res.node
@@ -122,9 +119,9 @@ end
 
 # An iterator of a CircularList.
 private class CircularListIterator[E]
-	super IndexedIterator[E]
+	super SequenceIterator[E]
 
-	redef var key: Int
+	var key: Int
 
 	# The current node pointed.
 	# Is null if the list is empty.
@@ -133,7 +130,7 @@ private class CircularListIterator[E]
 	# The list iterated.
 	var list: CircularList[E]
 
-	redef fun is_ok
+	redef fun has_next
 	do
 		# Empty lists are not OK.
 		# Pointing again the first node is not OK.
@@ -146,7 +143,7 @@ private class CircularListIterator[E]
 		self.key += 1
 	end
 
-	redef fun item do return self.node.item
+	redef fun current do return self.node.item
 
 	init(list: CircularList[E])
 	do
@@ -161,10 +158,10 @@ i.add_all([1, 2, 3, 4, 5, 6, 7])
 print i.first
 print i.join(":")
 
-i.push(8)
-print i.shift
-print i.pop
-i.unshift(0)
+i.add(8)
+print i.pick_first
+print i.pick_last
+i.prepend(0)
 print i.join(":")
 
 i.josephus(3)

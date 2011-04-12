@@ -27,7 +27,7 @@ class ICodeVisitor
 
 	# The current icode iterator.
 	# Can be used to insert_before, used to change the item or deleted
-	readable var _current_icode: nullable ListIterator[ICode] = null
+	readable var _current_icode: nullable SequenceIterator[ICode] = null
 
 	# Called when a icode is visited
 	# Automatically visits iregisters and sub-icodes
@@ -37,9 +37,9 @@ class ICodeVisitor
 		if ic isa ISeq then
 			var old_icode = _current_icode
 			var cur = ic.icodes.iterator
-			while cur.is_ok do
+			while cur.has_next do
 				_current_icode = cur
-				var ic2 = cur.item
+				var ic2 = cur.current
 				visit_icode(ic2)
 				cur.next
 			end

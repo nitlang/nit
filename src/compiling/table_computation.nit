@@ -121,13 +121,13 @@ redef class MMConcreteClass
 
 		if not ilt.is_empty then
 			var teg = new ModuleTableEltGroup
-			teg.elements.append(ilt)
+			teg.elements.append_all(ilt)
 			module_table.add(teg)
 		end
 
 		if not clt.is_empty then
 			var teg = new ModuleTableEltGroup
-			teg.elements.append(clt)
+			teg.elements.append_all(clt)
 			module_table.add(teg)
 		end
 	end
@@ -517,7 +517,7 @@ class TableEltComposite
 	fun add(c: MMLocalClass, tab: Array[TableElt])
 	do
 		_offsets[c] = _table.length
-		_table.append(tab)
+		_table.append_all(tab)
 	end
 
 	redef fun item(i) do return _table[i]

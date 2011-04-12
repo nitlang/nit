@@ -129,7 +129,7 @@ class DocContext
 						# It's a directory module
 						add("{indent}<a href=\"{m}.html\" target=\"mainFrame\">{m}</a><br/>\n")
 						curdir = md
-						dirstack.push(curdir)
+						dirstack.add(curdir)
 						indent = "&nbsp " * dirstack.length
 						redo = true
 						break # restart to preserve alphabetic order
@@ -144,7 +144,7 @@ class DocContext
 					end
 				end
 				if not redo then
-					dirstack.pop
+					dirstack.pick_last
 					if not dirstack.is_empty then
 						curdir = dirstack[dirstack.length-1]
 						indent = "&nbsp " * dirstack.length
@@ -1097,7 +1097,7 @@ redef class MMSrcLocalClass
 		if global.intro == self then
 			return true
 		end
-		for p in src_local_properties do
+		for p in src_local_properties.values do
 			if p.need_doc(dctx) then
 				return true
 			end

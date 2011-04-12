@@ -1,1 +1,1 @@
-./error_for_coll.nit:17,10: Type error: expected Collection[nullable Object], got Int
+./error_for_coll.nit:17,10: Type error: expected Iterable[nullable Object], got Int

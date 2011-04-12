@@ -536,12 +536,12 @@ redef class IAbsCall
 				var lls = v.local_labels
 				var iels = els.iterator
 				var forward_escape = false
-				while iels.is_ok do
-					var seq = iels.key
+				while iels.has_next do
+					var seq = iels.current_key
 					if lls.has(seq) then
 						# Local escape occured
 						# Clear the has_broke information and go to the target
-						v.new_instr.add("case ").add(iels.item.to_s).add(": ").add(closctx).add("->has_broke = 0; goto ").add(v.lab(seq)).add(";\n")
+						v.new_instr.add("case ").add(iels.current.to_s).add(": ").add(closctx).add("->has_broke = 0; goto ").add(v.lab(seq)).add(";\n")
 					else
 						# Forward escape occured: register the escape label
 						assert v.closure
@@ -1154,7 +1154,7 @@ redef class IClosCall
 			ivar = "CREG[{v.closures[closure_decl]}]"
 			args = ["closctx_param"]
 		end
-		args.append(v.registers(exprs))
+		args.append_all(v.registers(exprs))
 
 		var s = "(({v.clostypes[closure_decl]})({ivar}))({args.join(", ")})"
 		var w = new Writer

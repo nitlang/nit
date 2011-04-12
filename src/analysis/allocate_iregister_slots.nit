@@ -97,8 +97,8 @@ class IRegisterSlotAllocationVisitor
 	do
 		var def = _deferred_list.iterator
 		var cur = _current_rank
-		while def.is_ok do
-			var r = def.item
+		while def.has_next do
+			var r = def.current
 			if r._born_rank >= cur then
 				free(r)
 				def.delete
@@ -252,14 +252,14 @@ class SlotGroup
 			r._slot_index = _next_index
 			_next_index += 1
 		else
-			r._slot_index = _free.pop
+			r._slot_index = _free.pick_last
 		end
 	end
 
 	# Reuse the slot of the register
 	fun free(r: IRegister)
 	do
-		_free.push(r._slot_index.as(not null))
+		_free.add(r._slot_index.as(not null))
 	end
 end
 

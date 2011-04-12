@@ -188,7 +188,7 @@ class RtaBuilder
 
 		while not iroutine_to_search.is_empty do
 			var v = new RtaVisitor(self)
-			var iroutine = iroutine_to_search.pop
+			var iroutine = iroutine_to_search.pick_last
 			v.visit_icode(iroutine.body)
 		end
 	end

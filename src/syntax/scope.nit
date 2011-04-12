@@ -71,14 +71,14 @@ class ScopeContext
 	fun push(node: ANode)
 	do
 		var block = new ScopeBlock(node)
-		_stack.push(block)
+		_stack.add(block)
 	end
 
 	# Push a specific escapable block
 	# Display error message if there is a problem with the label
 	fun push_escapable(block: EscapableBlock, n_label: nullable ALabel)
 	do
-		_stack.push(block)
+		_stack.add(block)
 		if n_label != null then
 			var lab = n_label.n_id.to_symbol
 			for nl in _labels do
@@ -122,7 +122,7 @@ class ScopeContext
 	# Remove the last block (the last stacked)
 	fun pop
 	do
-		var n = _stack.pop
+		_stack.pick_last
 	end
 
 	readable var _visitor: AbsSyntaxVisitor

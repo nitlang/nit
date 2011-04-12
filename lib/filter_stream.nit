@@ -65,8 +65,8 @@ class StreamCat
 
 	redef fun stream: nullable IStream
 	do
-		if _stream == null and _streams.is_ok then
-			stream = _streams.item
+		if _stream == null and _streams.has_next then
+			stream = _streams.current
 			assert _stream != null
 			_streams.next
 		end

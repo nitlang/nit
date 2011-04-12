@@ -42,7 +42,7 @@ class MMContext
 	# Register a new module with the modules it depends on
 	fun add_module(mod: MMModule, supers: Array[MMModule])
 	do
-		_module_hierarchy.add(mod, _module_hierarchy.select_smallests(supers))
+		_module_hierarchy.add_element(mod, _module_hierarchy.select_smallests(supers))
 		_modules.add(mod)
 		mod._mhe = _module_hierarchy[mod]
 	end
@@ -64,7 +64,7 @@ class MMContext
 				end
 			end
 		end
-		var che = _class_hierarchy.add(c, csup)
+		var che = _class_hierarchy.add_element(c, csup)
 		c._che = che
 	end
 end
@@ -236,7 +236,7 @@ class MMModule
 	fun set_supers_class(c: MMLocalClass, supers: Array[MMLocalClass])
 	do
 		var tab = _class_specialization_hierarchy.select_smallests(supers)
-		c._cshe = _class_specialization_hierarchy.add(c,tab)
+		c._cshe = _class_specialization_hierarchy.add_element(c,tab)
 		var tab_all = c.crhe.direct_greaters.to_a
 		tab_all.add_all(tab)
 		context.add_local_class(c,tab_all)
@@ -290,7 +290,7 @@ class MMGlobalClass
 				sup.add(s)
 			end
 		end
-		c._crhe = _class_refinement_hierarchy.add(c, sup)
+		c._crhe = _class_refinement_hierarchy.add_element(c, sup)
 	end
 
 	# Is the global class an interface?
@@ -557,7 +557,7 @@ class MMGlobalProperty
 	# Register a new local property
 	fun add_local_property(i: MMLocalProperty, sup: Array[MMLocalProperty])
 	do
-		i._prhe = _property_hierarchy.add(i,sup)
+		i._prhe = _property_hierarchy.add_element(i,sup)
 	end
 
 	# Is the global property an attribute ?

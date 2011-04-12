@@ -83,6 +83,7 @@ class ToolContext
 	do
 		_messages.add(new Message(l,s))
 		_error_count = _error_count + 1
+		if opt_stop_on_first_error.value then check_errors
 	end
 
 	# Add an error, show errors and quit
@@ -102,6 +103,7 @@ class ToolContext
 		else
 			_error_count = _error_count + 1
 		end
+		if opt_stop_on_first_warning.value then check_errors
 	end
 
 	# Display an info
@@ -151,10 +153,16 @@ class ToolContext
 	# Verbose level
 	readable var _verbose_level: Int = 0
 
+	# Option --stop-on-first-error
+	readable var _opt_stop_on_first_error: OptionBool = new OptionBool("Stop on the first error", "--stop-on-first-error")
+
+	# Option --stop-on-first-warning
+	readable var _opt_stop_on_first_warning: OptionBool = new OptionBool("Stop on the first warning", "--stop-on-first-warning")
+
 	init
 	do
 		super
-		option_context.add_option(opt_warn, opt_path, opt_log, opt_log_dir, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
+		option_context.add_option(opt_warn, opt_stop_on_first_error, opt_stop_on_first_warning, opt_path, opt_log, opt_log_dir, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
 	end
 
 	# Parse and process the options given on the command line
@@ -167,11 +175,11 @@ class ToolContext
 		_verbose_level = opt_verbose.value
 
 		# Setup the paths value
-		paths.append(opt_path.value)
+		paths.append_all(opt_path.value)
 
 		var path_env = once ("NIT_PATH".to_symbol).environ
 		if not path_env.is_empty then 
-			paths.append(path_env.split_with(':'))
+			paths.append_all(path_env.split_with(':'))
 		end
 
 		path_env = once ("NIT_DIR".to_symbol).environ
@@ -196,7 +204,7 @@ class ToolContext
 	private fun try_to_load(module_name: Symbol, dir: MMDirectory): nullable MMModule
 	do
 		# Look in the module directory
-		for m in dir.modules do
+		for m in dir.modules.values do
 			if m.name == module_name then return m
 		end
 

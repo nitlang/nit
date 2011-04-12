@@ -1,0 +1,115 @@
+--Tests on IterableMap[Int,Int]
+Test []=: true
+Test iterator: 1:100 2:200 3:300 4:400 5:500 6:600 7:700 8:800 9:900 10:1000 
+Test iterate with closure: 1:100 2:200 3:300 4:400 5:500 6:600 7:700 8:800 9:900 10:1000 
+--Tests on TraversableMap[Int,Int]
+Test length: 10
+Test is_empty: false
+Test has_key: 
+true
+true
+true
+true
+true
+true
+true
+true
+true
+true
+false
+Test has_value: 
+true
+true
+true
+true
+true
+true
+true
+true
+true
+true
+false
+Test has_all_keys: 
+true
+false
+Test has_all_values: 
+true
+false
+Test has_only_keys: 
+true
+false
+Test has_only_values: 
+true
+false
+Test count: 
+0
+1
+Test []: 1:100 2:200 3:300 4:400 5:500 6:600 7:700 8:800 9:900 10:1000 
+--Tests on ReadOnlyMap[Int,Int]
+Test length: 10
+Test is_empty: false
+Test has_key: 
+true
+true
+true
+true
+true
+true
+true
+true
+true
+true
+false
+Test has_value: 
+true
+true
+true
+true
+true
+true
+true
+true
+true
+true
+false
+Test has_all_keys: 
+true
+false
+Test has_all_values: 
+true
+false
+Test has_only_keys: 
+true
+false
+Test has_only_values: 
+true
+false
+Test count: 
+0
+1
+Test []: 1:100 2:200 3:300 4:400 5:500 6:600 7:700 8:800 9:900 10:1000 
+--Tests on Map[Int,Int]
+Test []=: true
+Test clear: true
+Test []=: true
+Test remove_value: 
+true
+false
+Test remove_first_value: 
+true
+true
+true
+false
+Test remove_at: 
+true
+false
+Test remove_all_keys: 
+true
+false
+true
+Test clear: true
+Test []=: true
+Test remove_all_values: 
+true
+false
+true

@@ -31,8 +31,8 @@ class A
    fun blop(a: Int, b: Int...)
       do
          var i = b.iterator
-         while i.is_ok do
-            printn(a+i.item)
+         while i.has_next do
+            printn(a+i.current)
             i.next
          end
       end

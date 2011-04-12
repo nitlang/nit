@@ -36,11 +36,9 @@ class PartialOrder[E: Object]
 	
 	redef fun length do return _elements.length
 
-	redef fun first do return _elements_list.first
+        fun first: E do return _elements_list.first
 
 	redef fun has(e) do return _elements.has_key(e)
-
-	redef fun has_only(e) do return _elements.length == 1 and _elements.first == e
 
 	redef fun count(e)
 	do
@@ -66,7 +64,7 @@ class PartialOrder[E: Object]
 	do
 		var s = new Buffer
 		s.append(to_dot_header)
-		for e in _elements do
+		for e in _elements.values do
 			s.append(to_dot_node(e.value))
 			for d in e.direct_greaters do
 				s.append(to_dot_edge(e.value, d))
@@ -116,7 +114,7 @@ class PartialOrder[E: Object]
 	end
 
 	# Add a new element inferior of some others
-	fun add(e: E, supers: nullable Collection[E]): PartialOrderElement[E]
+	fun add_element(e: E, supers: nullable Collection[E]): PartialOrderElement[E]
 	do
 		assert not has(e)
 		assert supers == null or has_all(supers)
@@ -128,17 +126,6 @@ class PartialOrder[E: Object]
 			_roots.add(e)
 		end
 		return poe
-	end
-
-	# Are all these elements in the order
-	fun has_all(e: Collection[E]): Bool
-	do
-		for i in e do
-			if not has(i) then
-				return false
-			end
-		end
-		return true
 	end
 
 	# factory for partial order elements
@@ -171,7 +158,7 @@ class PartialOrder[E: Object]
 	protected fun compute_smallers_for(poe: PartialOrderElement[E], set: Set[E])
 	do
 		var e = poe.value
-		for s in _elements do
+		for s in _elements.values do
 			if s < e then
 				set.add(s.value)
 			end
@@ -254,7 +241,7 @@ class PartialOrderElement[E: Object]
 				for e in res do
 					if not sl.has(e) then res2.add(e)
 				end
-				res2.append(sl)
+				res2.append_all(sl)
 
 				var tmp = res
 				res = res2

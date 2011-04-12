@@ -16,33 +16,33 @@
 
 do
     var l = new List[Int]
-    l.push(1)
-    printn(l.shift)
-    l.push(2)
-    l.push(3)
-    printn(l.shift)
-    printn(l.shift)
-    l.push(4)
-    printn(l.shift)
+    l.add(1)
+    printn(l.pick_first)
+    l.add(2)
+    l.add(3)
+    printn(l.pick_first)
+    printn(l.pick_first)
+    l.add(4)
+    printn(l.pick_first)
 
     l = new List[Int].from([1,2,3,4])
 
     var i = l.iterator
-    while i.is_ok do
-	printn(i.item)
+    while i.has_next do
+	printn(i.current)
 	i.next
     end
 
-    l.unshift(0)
-    l.unshift(-1)
-    printn(l.shift)
+    l.prepend(0)
+    l.prepend(-1)
+    printn(l.pick_first)
     printn(l.first)
     printn(l.last)
-    printn(l.shift)
-    printn(l.pop)
-    printn(l.shift)
-    printn(l.pop)
-    printn(l.shift)
+    printn(l.pick_first)
+    printn(l.pick_last)
+    printn(l.pick_first)
+    printn(l.pick_last)
+    printn(l.pick_first)
 end
 
 print("\npart2")
@@ -52,9 +52,9 @@ do
     print(l)
     print(l.has(3))
     print(not l.has(9))
-    print(l.has_key(3))
-    print(not l.has_key(-3))
-    print(not l.has_key(30))
+    print(l.has(3))
+    print(not l.has(-3))
+    print(not l.has(30))
     print(l[1] == 2)
     print(l.first == 1)
     print(l.last == 6)

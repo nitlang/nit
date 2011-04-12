@@ -1,0 +1,4 @@
+--Tests on StackList[Int]
+Test push method: true
+Test pop method: true
+Test peek method: true

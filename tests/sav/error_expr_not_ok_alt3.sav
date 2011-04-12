@@ -15,7 +15,7 @@ alt/error_expr_not_ok_alt3.nit:63,7--30: Type error: expected A, got Int
 alt/error_expr_not_ok_alt3.nit:64,7--33: Type error: expected A, got Int
 alt/error_expr_not_ok_alt3.nit:66,7--10: Type error: expected Bool, got Int
 alt/error_expr_not_ok_alt3.nit:66,21: Type error: expected A, got Int
-alt/error_expr_not_ok_alt3.nit:69,10--13: Type error: expected Collection[nullable Object], got Int
+alt/error_expr_not_ok_alt3.nit:69,10--13: Type error: expected Iterable[nullable Object], got Int
 alt/error_expr_not_ok_alt3.nit:71,8--11: Type error: expected Bool, got Int
 alt/error_expr_not_ok_alt3.nit:72,7--15: Type error: expected A, got Int
 alt/error_expr_not_ok_alt3.nit:73,7--10: Type error: expected Bool, got Int

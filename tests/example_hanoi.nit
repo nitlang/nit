@@ -33,14 +33,14 @@ class Tower
 	fun push(i: Int)
 	# Put an discus of diameter `i'.
 	do
-		_t.push(i)
+		_t.add(i)
 	end
 
 	fun pop: Int
 	# Remove the last discus and get its diameter.
 	do
 		assert not_empty: not _t.is_empty
-		return _t.pop
+		return _t.pick_last
 	end
 
 	redef fun to_s: String

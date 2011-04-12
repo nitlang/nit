@@ -1,5 +1,7 @@
 usage: nitc [options] file...
   -W, --warn                      Show warnings
+  --stop-on-first-error           Stop on the first error
+  --stop-on-first-warning         Stop on the first warning
   -I, --path                      Set include path for loaders (may be used more than once)
   --log                           Generate various log files
   --log-dir                       Directory where to generate log files

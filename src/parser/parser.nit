@@ -73,7 +73,7 @@ class Parser
 			state.state = numstate
 			state.nodes = list_node
 		else
-			_stack.push(new State(numstate, list_node))
+			_stack.add(new State(numstate, list_node))
 		end
 	end
 
@@ -950,7 +950,7 @@ private abstract class ReduceAction
 	fun concat(l1, l2 : Array[Object]): Array[Object]
 	do
 		if l1.is_empty then return l2
-		l1.append(l2)
+		l1.append_all(l2)
 		return l1
 	end
 end

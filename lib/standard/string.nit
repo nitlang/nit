@@ -38,7 +38,11 @@ class StringCollection[E]
 	end
 
 	# Add each item of `coll`.
+<<<<<<< HEAD
+	redef fun add_all(coll) do for i in coll do add(i)
+=======
 	fun add_all(coll: StringCollection[E]) do for i in coll do add(i)
+>>>>>>> 4ebfe0343fee1cb27bc05cb0ced52d36d9c5393c
 
 	# Get the item at `key'.
 	fun [](key: Int): E is abstract

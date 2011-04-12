@@ -41,12 +41,12 @@ redef class MMLocalClass
 			return _primitive_info_cache
 		end
 		var i = ctypes.iterator
-		while i.is_ok do
-			var n = i.key
+		while i.has_next do
+			var n = i.current_key
 			if mmmodule.has_global_class_named(n) then
 				var c = mmmodule.class_by_name(n)
 				if cshe < c then
-					_primitive_info_cache = i.item
+					_primitive_info_cache = i.current
 					_primitive_info_b = true
 					return _primitive_info_cache
 				end

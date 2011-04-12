@@ -115,10 +115,10 @@ private
 			# Les itérateurs permettent de traverser les collections
 			i = _rayons.iterator # "iterator" retourne un nouvel itérateur 
 			# La forme des boucles est "while do end"	
-			while i.is_ok do	# on pointe un élément valide ?	
+			while i.has_next do	# on pointe un élément valide ?	
 				# "item" retourne l'élément pointé par
 				# un iterateur
-				s.append(i.item.to_s)
+				s.append(i.current.to_s)
 				i.next	# passe à l'élément suivant
 			end
 			s.add('\n')	# "add" ajoute un caractère à la fin.
@@ -230,8 +230,8 @@ private
 	fun cherche_produit(n: String): nullable Produit
 	do
 		var i = _stock.iterator
-		while i.is_ok do
-			var p = i.item
+		while i.has_next do
+			var p = i.current
 			# "=" est l'opérateur égalité de valeur.
 			if p.nom == n then
 				return p

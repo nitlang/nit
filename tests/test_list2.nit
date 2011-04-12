@@ -19,17 +19,17 @@ l.add_all([1, 2, 3, 4, 5, 6])
 print l.join(", ")
 do
 	var it = l.iterator
-	while it.is_ok do
-		it.item += 10
+	while it.has_next do
+		it.current += 10
 		it.next
 	end
 end
 print l.join(", ")
 do
 	var it = l.iterator
-	while it.is_ok do
-		it.insert_before(it.item-10)
-		it.insert_before(it.item+10)
+	while it.has_next do
+		it.insert_before(it.current-10)
+		it.insert_before(it.current+10)
 		it.delete
 		it.next
 	end

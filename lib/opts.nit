@@ -112,8 +112,8 @@ class OptionParameter
 
 	redef fun read_param(it)
 	do
-		if it.is_ok then
-			value = convert(it.item)
+		if it.has_next then
+			value = convert(it.current)
 			it.next
 		else
 			# TODO: What to do?
@@ -224,8 +224,8 @@ class OptionContext
 		build
 		var rest = _rest
 		
-		while parseargs and it.is_ok do
-			var str = it.item
+		while parseargs and it.has_next do
+			var str = it.current
 			if str == "--" then
 				it.next
 				rest.add_all(it.to_a)
@@ -236,7 +236,7 @@ class OptionContext
 					it.next
 					opt.read_param(it)
 				else
-					rest.add(it.item)
+					rest.add(it.current)
 					it.next
 				end
 			end

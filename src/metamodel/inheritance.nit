@@ -96,9 +96,9 @@ redef class MMLocalClass
 		var ancestors = group_ancestors(build_ancestors)
 		_ancestors = new HashMap[MMLocalClass, MMAncestor]
 
-		for set in ancestors do
+		for set in ancestors.values do
 			if set.length == 1 then
-				add_ancestor(set.first)
+				add_ancestor(set.get)
 			else
 				var ma = merge_ancestors(set)
 				add_ancestor(merge_ancestors(set))
@@ -349,14 +349,14 @@ redef class MMLocalClass
 		for t in set do
 			var it = set.iterator
 			var search = true
-			while it.is_ok and search do
+			while it.has_next and search do
 				
-				var a = t == it.item
-				a = marks.has(it.item)
-				a = it.item.stype < t.stype
+				var a = t == it.current
+				a = marks.has(it.current)
+				a = it.current.stype < t.stype
 				
-				if not(t == it.item or marks.has(it.item)) and
-					(it.item.stype < t.stype) then
+				if not(t == it.current or marks.has(it.current)) and
+					(it.current.stype < t.stype) then
 						marks.add(t)
 						search = false
 				end
@@ -447,14 +447,14 @@ redef class MMAncestor
 	do
 		tab.add(self)
 		stype.local_class.compute_ancestors
-		for anc in stype.local_class.ancestors.as(not null) do
+		for anc in stype.local_class.ancestors.values do
 			var aaa = anc.stype.for_module(stype.mmmodule)
 			var a = aaa.adapt_to(stype).for_module(inheriter.mmmodule)
 			if a.local_class != inheriter.local_class then
 				var it = tab.iterator
 				var b = true
-				while it.is_ok and b do
-					b = not ( it.item.inheriter == inheriter and it.item.stype == a)
+				while it.has_next and b do
+					b = not ( it.current.inheriter == inheriter and it.current.stype == a)
 					it.next
 				end
 				if b then

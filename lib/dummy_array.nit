@@ -11,8 +11,8 @@
 # another product.
 
 class DummyArray
-	super Set[Int]
 	super ArrayCapable[Int]
+	super Set[Int]
 	var _capacity: Int 
 	redef readable var _length: Int 
 	var _keys: NativeArray[Int]
@@ -20,6 +20,7 @@ class DummyArray
 
 	redef fun add(value: Int)
 	do
+		if has(value) then return
 		assert full: _length < (_capacity-1)
 		var l = _length
 		_values[l] = value
@@ -50,7 +51,7 @@ class DummyArray
 		return false
 	end
 
-	redef fun first: Int
+	fun first: Int
 	do
 		assert _length > 0
 		return _values[0]
@@ -66,10 +67,7 @@ class DummyArray
 		_length = 0
 	end
 
-	redef fun iterator: DummyIterator
-	do
-		return new DummyIterator(self)
-	end
+	redef fun iterator do return new DummyIterator(self)
 
 	private fun value_at(pos: Int): Int
 	do
@@ -85,17 +83,17 @@ class DummyArray
 end
 
 class DummyIterator
-	super Iterator[Int]
+	super CollectionIterator[Int]
 	var _array: DummyArray
 	var _pos: Int
 
-	redef fun item: Int
+	redef fun current: Int
 	do
-		assert is_ok
+		assert has_next
 		return _array.value_at(_pos)
 	end
 
-	redef fun is_ok: Bool
+	redef fun has_next: Bool
 	do
 		return _pos < _array.length
 	end

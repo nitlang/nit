@@ -1,0 +1,37 @@
+--Tests on Iterable[Int]
+Test iterate with for..in: 12345678910
+Test iterator: 12345678910
+Test iterate with closure: 12345678910
+Test is_a method on Iterable: true
+1,2,3,4,5,6,7,8,9,10
+Test is_a method on Iterator: true
+1,2,3,4,5,6,7,8,9,10
+--Tests on Iterator[Int]
+Test type of iterator: true
+Test iterator: 12345678910
+Test iterator after rewind: 12345678910
+--Tests on Traversable[Int]
+Test length: 10
+Test is_empty: false
+Test get: 1
+Test has: 
+true
+true
+true
+true
+true
+true
+true
+true
+true
+true
+false
+Test has_all: 
+true
+false
+Test has_only: 
+true
+false
+Test count: 
+0
+1

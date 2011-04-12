@@ -20,9 +20,6 @@ true
 true
 true
 true
-true
-true
-true
 * add some:
 true
 true
@@ -34,7 +31,7 @@ true
 true
 true
 true
-bleu, rouge, rose, jaune, orange, noir, gris, gris, blanc
+blue:bleu, red:rouge, pink:rose, yellow:jaune, orange:orange, black:noir, gray:gris, grey:gris, white:blanc
 * remove:
 true
 true
@@ -43,5 +40,5 @@ true
 true
 true
 true
-noir, rouge, blanc, jaune, orange
+red:rouge, yellow:jaune, orange:orange, black:noir, white:blanc
 true
