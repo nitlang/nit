@@ -47,6 +47,8 @@ interface Object
 		'>'.output
 	end
 
+	# Display self class name on stdout (debug only)
+	fun output_class_name is intern
 
 	protected fun exit(exit_value: Int) is intern # Quit the program
 	protected fun sys: Sys is intern # The global sys object

@@ -224,6 +224,16 @@ class MMImplicitInit
 	end
 end
 
+# Implicit class_name method
+class MMImplicitClassName
+	super MMMethSrcMethod
+	init(cla: MMLocalClass)
+	do
+		super(once "output_class_name".to_symbol, cla, null)
+		_is_intern = true
+	end
+end
+
 # Local variables
 abstract class Variable
 	# Name of the variable

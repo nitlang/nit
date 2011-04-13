@@ -102,9 +102,13 @@ redef class MMSrcModule
 			end
 
 			# Note that inherited unredefined property are processed on demand latter
+			# Class_name local introduction
+			if c isa MMSrcLocalClass and c.global.intro == c then
+				c.process_class_name(mmbv2)
+			end
 		end
 		tc.check_errors
-
+		
 		# Property signature analysis and inheritance conformance
 		var mmbv3 = new PropertyVerifierVisitor(tc, self)
 		for c in classes do
@@ -244,6 +248,16 @@ redef class MMSrcLocalClass
 		end
 	end
 
+	# Introduce class_name local property
+	private fun process_class_name(v: PropertyBuilderVisitor)
+	do
+		
+		if not src_local_properties.has_key(once "output_class_name".to_symbol) then
+			var p = new MMImplicitClassName(self)
+			add_src_local_property(v, p)
+		end
+	end
+
 	# Add a source property
 	# Register it to the class and attach it to global property
 	private fun add_src_local_property(v: PropertyBuilderVisitor, prop: MMLocalProperty)
@@ -305,6 +319,13 @@ redef class MMImplicitInit
 			params.add(sig.return_type.as(not null))
 		end
 		signature = new MMSignature(params, null, local_class.get_type)
+	end
+end
+
+redef class MMImplicitClassName
+	redef fun accept_property_visitor(v)
+	do
+		signature = new MMSignature(new Array[MMType], null, local_class.get_type)
 	end
 end
 

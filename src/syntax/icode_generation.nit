@@ -278,6 +278,12 @@ redef class MMImplicitInit
 	end
 end
 
+redef class MMImplicitClassName
+	redef fun inner_generate_iroutine(v) do 
+		v.stmt(new INative(self, [v.iroutine.params.first]))
+	end
+end
+
 class A2IVisitor
 	super AbsSyntaxVisitor
 	writable var _icode_ctx: nullable A2IContext
