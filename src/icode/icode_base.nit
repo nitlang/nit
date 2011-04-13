@@ -332,6 +332,7 @@ class INative
 
 	init(m: MMMethod, e: nullable Sequence[IRegister])
 	do
+		assert e.length == m.signature.arity + 1		
 		super(e)
 		_method = m
 	end

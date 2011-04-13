@@ -36,10 +36,10 @@ interface Object
 
 	# Have `self' and `other' different values?
 	##
-	# != is equivament with "not =".
+	# != is equivament with "not ="
 	fun !=(other: nullable Object): Bool do return not (self == other)
 
-	# Display self on stdout (debug only).
+	# Display self on stdout (debug only)
 	fun output
 	do
 		'<'.output
@@ -47,7 +47,8 @@ interface Object
 		'>'.output
 	end
 
-	protected fun exit(exit_value: Int) is intern # Quit the program.
+
+	protected fun exit(exit_value: Int) is intern # Quit the program
 	protected fun sys: Sys is intern # The global sys object
 end
 
