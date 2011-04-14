@@ -1,3 +1,3 @@
-class XMLDocument special Graph end
+class XMLDocument super Graph end
 
-class XMLNode special Node end
+class XMLNode super Node end
