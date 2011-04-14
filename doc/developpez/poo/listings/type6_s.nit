@@ -12,12 +12,12 @@ end
 class Node end
 
 class XMLDocument 
-	special Graph 
+	super Graph 
 
 	redef type NODE: XMLNode
 end
 
-class XMLNode special Node end
+class XMLNode super Node end
 
 var doc = new XMLDocument
 
