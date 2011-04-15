@@ -152,10 +152,10 @@ private class TypingVisitor
 			for p in false_candidates do
 				a.add("{p.full_name}{p.signature.as(not null)}")
 			end
-			v.error(n, "Error: there is no available compatible constrctor in {c}. Discarded candidates are {a.join(", ")}.")
+			v.error(n, "Error: there is no available compatible constructor in {c}. Discarded candidates are {a.join(", ")}.")
 			return null
 		else
-			v.error(n, "Error: there is no available compatible constrctor in {c}.")
+			v.error(n, "Error: there is no available compatible constructor in {c}.")
 			return null
 		end
 	end
