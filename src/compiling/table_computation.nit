@@ -162,6 +162,7 @@ redef class Program
 
 		ctab.add(new TableEltClassSelfId)
 		ctab.add(new TableEltClassObjectSize)
+		ctab.add(new TableEltClassSelfName)
 		itab.add(new TableEltVftPointer)
 		itab.add(new TableEltObjectId)
 
@@ -532,6 +533,12 @@ end
 
 # The element that represent the class id
 class TableEltClassSelfId
+	super TableElt
+	redef fun is_related_to(c) do return true
+end
+
+# The element that represent the class name
+class TableEltClassSelfName
 	super TableElt
 	redef fun is_related_to(c) do return true
 end

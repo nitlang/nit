@@ -398,20 +398,25 @@ redef class Object
 	# User redeable representation of `self'.
 	fun to_s: String do return inspect
 
+	# The class name of the object in NativeString format.
+	private fun native_class_name: NativeString is intern
+
+	# The class name of the object.
+	# FIXME: real type information is not available at runtime. Therefore, for instance, an instance of List[Bool] has just "List" for classname
+	fun class_name: String do return new String.from_cstring(native_class_name)
+
 	# Developper readable representation of `self'.
 	# Usualy, it uses the form "<CLASSNAME:#OBJECTID bla bla bla>"
 	fun inspect: String
 	do
-		var r = inspect_head
-		# r.add('>')
-		return r
+		return "<{inspect_head}>"
 	end
 
-	# Return "<CLASSNAME:#OBJECTID".
-	# This fuction is mainly used with the redefinition of the inspect(0) method
+	# Return "CLASSNAME:#OBJECTID".
+	# This fuction is mainly used with the redefinition of the inspect method
 	protected fun inspect_head: String
 	do
-		return "<{object_id.to_hex}"
+		return "{class_name}:#{object_id.to_hex}"
 	end
 
 	protected fun args: Sequence[String]
