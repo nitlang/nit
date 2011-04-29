@@ -42,7 +42,8 @@ class SrcModuleLoader
 			context.error( null, "{filename}: Error module name \"{name}\", must start with a lower case letter and contain only letters, digits and '_'." )
 		end
 
-		var lexer = new Lexer(file, filename)
+		var source = new SourceFile(filename, file)
+		var lexer = new Lexer(source)
 		var parser = new Parser(lexer)
 		var node_tree = parser.parse
 		if node_tree.n_base == null then
@@ -52,7 +53,7 @@ class SrcModuleLoader
 		end
 		var node_module = node_tree.n_base
 		assert node_module != null
-		var module_loc = new Location.with_file(filename)
+		var module_loc = new Location.with_file(source)
 		var mod = new MMSrcModule(context, node_module, dir, name, module_loc)
 		return mod
 	end

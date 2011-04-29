@@ -168,7 +168,7 @@ class I2CCompilerVisitor
 		if l != null then
 			visitor.add_indent(w)
 			w.add("/* ")
-			w.add(l.file)
+			w.add(l.file.filename)
 			w.add(":")
 			w.add(l.line_start.to_s)
 			w.add(" */\n")

@@ -97,7 +97,7 @@ redef class MMModule
 		var v = new CompilerVisitor(self, cprogram)
 		v.add_decl("#include <nit_common.h>")
 
-		var native_name = location.file.strip_extension(".nit")
+		var native_name = location.file.filename.strip_extension(".nit")
 		var native_header = native_name + "_nit.h"
 		if native_header.file_exists then
 			v.add_decl("#include <{native_header.basename("")}>")
