@@ -892,11 +892,22 @@ redef class APropdef
 
 			if s.arity != isig.arity then
 				v.error(self, "Redef error: {prop.local_class}::{prop} redefines {ip.local_class}::{ip} with {isig.arity} parameter(s).")
-			else
-				for j in [0..s.arity[ do
-					if s[j] != isig[j] then
-						v.error(self, "Redef error: Expected {isig[j]} (as in {ip.local_class}::{ip}), got {s[j]} in {prop.local_class}::{prop}.")
+			else if s.arity > 0 then
+				if self isa AMethPropdef then
+					# A standard method
+					for j in [0..s.arity[ do
+						if s[j] != isig[j] then
+							v.error(n_signature.n_params[j], "Redef error: Expected {isig[j]}, as in {ip.local_class}::{ip}.")
+						end
 					end
+				else if self isa AAttrPropdef then
+					# A write accessor
+					if s[0] != isig[0] then
+						v.error(n_type, "Redef error: Expected {isig[0]}, as in the parameter of {ip.local_class}::{ip}.")
+					end
+
+				else
+					abort #
 				end
 			end
 
@@ -907,13 +918,21 @@ redef class APropdef
 			else if srt != null and isrt == null then
 				v.error(self, "Redef error: The function {prop.local_class}::{prop} redefines the procedure {ip.local_class}::{ip}.")
 			else if srt != null and isrt != null and not srt < isrt then
-				v.error(self, "Redef error: Expected {isrt} (as in {ip.local_class}::{ip}), got {srt} in {prop.local_class}::{prop}.")
+				var n: nullable ANode = null
+				if self isa AMethPropdef then
+					n = self.n_signature.n_type
+				else if self isa AAttrPropdef then
+					n = self.n_type
+				else if self isa ATypePropdef then
+					n = self.n_type
+				end
+				v.error(n, "Redef error: Expected {isrt}, as in {ip.local_class}::{ip}.")
 			else if not s < isig and nberr == v.tc.error_count then
 				# Systematic fallback for conformance check
 				v.error(self, "Redef error: Incompatible redefinition of {ip.local_class}::{ip} with {prop.local_class}::{prop}")
 			else if srt != null and isrt != null and srt != isrt and prop isa MMAttribute then
 				# FIXME: To remove
-				v.warning(self, "Redef warning: Expected {isrt} (as in {ip.local_class}::{ip}), got {srt} in {prop.local_class}::{prop}.")
+				v.warning(self, "Redef warning: Expected {isrt}, as in {ip.local_class}::{ip}.")
 			end
 		end
 

@@ -1,1 +1,1 @@
-./error_spe_attr.nit:22,2--21: Redef error: Expected Int (as in A::_a), got Object in B::_a.
+./error_spe_attr.nit:22,16--21: Redef error: Expected Int, as in A::_a.
