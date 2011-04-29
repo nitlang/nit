@@ -864,7 +864,14 @@ redef class INative
 			s = "NEW_NativeArray(UNTAG_Int({regs[1]}), sizeof(val_t))"
 		else if n == once "calloc_string".to_symbol then
 			s = "BOX_NativeString((char*)raw_alloc((UNTAG_Int({regs[1]}) * sizeof(char))))"
+		# Add output_class_name native implementation
+		else if n == once "output_class_name".to_symbol then
+			s = "printf(\"%s\\n\", VAL2VFT({regs[0]})[2].cname);"
+		# Add class_name implementation
+		else if n == once "native_class_name".to_symbol then
+			s = "BOX_NativeString(VAL2VFT({regs[0]})[2].cname);"
 		end
+
 		if s == null then
 			var ll = location
 			if ll != null then v.add_instr("fprintf(stderr, \"{ll.to_s}: \");")

@@ -22,9 +22,10 @@
 typedef signed long int bigint;	/* standard int value, must be larger that any poiner */
 typedef bigint (*fun_t) (bigint);					/* generic function pointer */
 typedef bigint cid_t;					/* class identifier */
+typedef char* cname_t;					/* class name */
 typedef bigint val_t;	/* value (everything is a val_t) */
 typedef union obj_tu {union classtable_elt_tu * vft; bigint object_id; val_t objectSize;} *obj_t; /* standard object */
-typedef union classtable_elt_tu { bigint i; fun_t f; cid_t cid;} classtable_elt_t;	/* classtable element */
+typedef union classtable_elt_tu { bigint i; fun_t f; cid_t cid; cname_t cname;} classtable_elt_t;	/* classtable element */
 typedef struct Nit_NativeArray {const classtable_elt_t * vft; bigint object_id; bigint size; val_t val[1];} * Nit_NativeArray;
 
 typedef classtable_elt_t * classtable_t;			/* classtable */
