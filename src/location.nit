@@ -30,7 +30,11 @@ class SourceFile
 	do
 		self.filename = filename
 		string = stream.read_all
+		line_starts[0] = 0
 	end
+
+	# Position of each line start
+	var line_starts: Array[Int] = new Array[Int]
 end
 
 # A location inside a source file

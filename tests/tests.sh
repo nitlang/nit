@@ -187,9 +187,9 @@ for ii in "$@"; do
 		# Compile
 		if [ "x$verbose" = "xtrue" ]; then
 			echo ""
-			echo $NITC $OPT -o "$ff.bin" "$i" "$includes"
+			echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
 		fi
-		$NITC $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+		$NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
 		ERR=$?
 		if [ "x$verbose" = "xtrue" ]; then
 			cat "$ff.compile.log"

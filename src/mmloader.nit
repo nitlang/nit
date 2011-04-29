@@ -37,12 +37,57 @@ class Message
 		return location.as(not null) < other.location.as(not null)
 	end
 
-	redef fun to_s: String do
+	redef fun to_s: String
+	do
 		var l = location
 		if l == null then
 			return text
 		else
 			return "{l}: {text}"
+		end
+	end
+
+	fun to_color_string: String
+	do
+		var esc = 27.ascii
+		var red = "{esc}[0;31m"
+		var bred = "{esc}[1;31m"
+		var green = "{esc}[0;32m"
+		var yellow = "{esc}[0;33m"
+		var def = "{esc}[0m"
+
+		var l = location
+		if l == null then
+			return text
+		else if l.file == null then
+			return "{yellow}{l}{def}: {text}"
+		else
+			var i = location.line_start
+			var line_start = l.file.line_starts[i-1]
+			var line_end = line_start
+			var string = l.file.string
+			while line_end+1 < string.length and string[line_end+1] != '\n' and string[line_end+1] != '\r' do
+				line_end += 1
+			end
+			print "{i-1}: {line_start} && {line_end}"
+			var lstart = string.substring(line_start, location.column_start - 1)
+			var cend
+			if i != location.line_end then
+				cend = line_end - line_start + 1
+			else
+				cend = location.column_end
+			end
+			var lmid = string.substring(line_start + location.column_start - 1, cend - location.column_start + 1)
+			var lend = string.substring(line_start + cend, line_end - line_start - cend + 1)
+			var indent = new Buffer
+			for j in [line_start..line_start+location.column_start-1[ do
+				if string[j] == '\t' then
+					indent.add '\t'
+				else
+					indent.add ' '
+				end
+			end
+			return "{yellow}{l}{def}: {text}\n\t{lstart}{bred}{lmid}{def}{lend}\n\t{indent}^"
 		end
 	end
 end
@@ -69,7 +114,11 @@ class ToolContext
 			_message_sorter.sort(_messages)
 
 			for m in _messages do
-				stderr.write("{m}\n")
+				if opt_no_color.value then
+					stderr.write("{m}\n")
+				else
+					stderr.write("{m.to_color_string}\n")
+				end
 			end
 
 			_messages.clear
@@ -153,13 +202,16 @@ class ToolContext
 	# Option --stop-on-first-error
 	readable var _opt_stop_on_first_error: OptionBool = new OptionBool("Stop on first error", "--stop-on-first-error")
 
+	# Option --no-color
+	readable var _opt_no_color: OptionBool = new OptionBool("Do not use color to display errors and warnings", "--no-color")
+
 	# Verbose level
 	readable var _verbose_level: Int = 0
 
 	init
 	do
 		super
-		option_context.add_option(opt_warn, opt_stop_on_first_error, opt_path, opt_log, opt_log_dir, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
+		option_context.add_option(opt_warn, opt_stop_on_first_error, opt_no_color, opt_path, opt_log, opt_log_dir, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
 	end
 
 	# Parse and process the options given on the command line

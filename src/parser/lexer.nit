@@ -1282,14 +1282,17 @@ class Lexer
 				if c == 10 then
 					if cr then
 						cr = false
+					        _file.line_starts[line] = sp
 					else
 						line = line + 1
 						pos = 0
+					        _file.line_starts[line] = sp
 					end
 				else if c == 13 then
 					line = line + 1
 					pos = 0
 					cr = true
+					_file.line_starts[line] = sp
 				else
 					pos = pos + 1
 					cr = false
