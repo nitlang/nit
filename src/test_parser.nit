@@ -25,7 +25,11 @@ class PrintTreeVisitor
 	redef fun visit(n: nullable ANode)
 	do
 		if n == null then return
-		printn("  " * _rank, n.to_s, " ... ", n.location, "\n")
+		if n isa Token then
+			printn("  " * _rank, n.to_s, " ... ", n.location, "\n")
+		else
+			printn("  " * _rank, n.location, "\n")
+		end
 		_rank = _rank + 1
 		n.visit_all(self)
 		_rank = _rank - 1
@@ -68,7 +72,7 @@ if args.is_empty or need_help then
 else
 	for a in args do
 		var f = new IFStream.open(a)
-		var lexer = new Lexer(f, a)
+		var lexer = new Lexer(new SourceFile(a, f))
 		if only_lexer then
 			var token = lexer.next
 			while not token isa EOF do

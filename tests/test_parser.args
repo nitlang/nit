@@ -1,0 +1,2 @@
+../src/syntax/typing.nit
+-l ../src/syntax/typing.nit
