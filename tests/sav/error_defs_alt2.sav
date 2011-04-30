@@ -1,1 +1,1 @@
-alt/error_defs_alt2.nit:26,2--39: Error: A property foo is already defined in class A.
+alt/error_defs_alt2.nit:26,6--8: Error: A property foo is already defined in class A.

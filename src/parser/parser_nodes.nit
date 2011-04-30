@@ -27,6 +27,8 @@ abstract class ANode
 	# Location is set during AST building. Once built, location cannon be null
 	# However, manual instanciated nodes may need mode care
 	fun location: Location do return _location.as(not null)
+	# The location of the important part of the node (identifier or whatever)
+	fun hot_location: Location do return location
 end
 
 # Ancestor of all tokens
@@ -326,6 +328,7 @@ class AModuledecl
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwmodule: TKwmodule
     readable var _n_id: TId
+    redef fun hot_location do return n_id.location
 end
 class AImport super Prod end
 class AStdImport
@@ -367,6 +370,7 @@ class AStdClassdef
     readable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
     readable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
     readable var _n_propdefs: List[APropdef] = new List[APropdef]
+    redef fun hot_location do return n_id.location
 end
 class ATopClassdef
 	super AClassdef
@@ -419,6 +423,10 @@ class AAttrPropdef
     readable var _n_readable: nullable AAble = null
     readable var _n_writable: nullable AAble = null
     readable var _n_expr: nullable AExpr = null
+    redef fun hot_location
+    do
+	    if n_id != null then return n_id.location else return n_id2.location
+    end
 end
 class AMethPropdef
 	super APropdef
@@ -426,6 +434,14 @@ class AMethPropdef
     readable var _n_visibility: nullable AVisibility
     readable var _n_methid: nullable AMethid = null
     readable var _n_signature: nullable ASignature
+    redef fun hot_location
+    do
+	    if n_methid != null then
+		    return n_methid.location
+	    else
+		    return location
+	    end
+    end
 end
 class ADeferredMethPropdef
 	super AMethPropdef
@@ -448,6 +464,7 @@ end
 class AConcreteInitPropdef
 	super AConcreteMethPropdef
     readable var _n_kwinit: TKwinit
+    redef fun hot_location do return n_kwinit.location
 end
 class AMainMethPropdef
 	super AConcreteMethPropdef

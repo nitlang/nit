@@ -1,2 +1,2 @@
-./test_multiconstraint.nit:64,1--67,11: Error: A class G is already defined at line 56.
-./test_multiconstraint.nit:70,1--74,11: Error: A class G is already defined at line 56.
+./test_multiconstraint.nit:64,7: Error: A class G is already defined at line 56.
+./test_multiconstraint.nit:70,7: Error: A class G is already defined at line 56.

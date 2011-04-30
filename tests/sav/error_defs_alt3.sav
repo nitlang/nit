@@ -1,1 +1,1 @@
-alt/error_defs_alt3.nit:26,1--27,32: Redef error: A::bar is an inherited property. To redefine it, add the redef keyword.
+alt/error_defs_alt3.nit:27,6--8: Redef error: A::bar is an inherited property. To redefine it, add the redef keyword.

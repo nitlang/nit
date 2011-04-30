@@ -1,1 +1,1 @@
-alt/base_init_linext2_alt2.nit:99,2--112,12: Error: there is no available compatible constrctor in B. Discarded candidates are base_init_linext2_alt2::B::initb, base_init_linext2_alt2::B::init_par, base_init_linext2_alt2::B::init_par2(Char).
+alt/base_init_linext2_alt2.nit:99,2--5: Error: there is no available compatible constrctor in B. Discarded candidates are base_init_linext2_alt2::B::initb, base_init_linext2_alt2::B::init_par, base_init_linext2_alt2::B::init_par2(Char).
