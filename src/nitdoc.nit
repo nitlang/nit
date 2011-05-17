@@ -80,9 +80,11 @@ class DocContext
 	# Register an entity (for the index)
 	fun register(e: MMEntity)
 	do
-		_entities.add(e)
-		if e isa MMSrcModule then
-			_mmmodule = e
+		if not _entities.has(e) then
+			_entities.add(e)
+			if e isa MMSrcModule then
+				_mmmodule = e
+			end
 		end
 	end
 
