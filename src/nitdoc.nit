@@ -637,6 +637,36 @@ redef class MMSrcModule
 			end
 		end
 
+		if not new_classes.is_empty then
+			dctx.add("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
+			dctx.add("<tr bgcolor=\"#FF6347\"><th colspan=\"2\"><big>Main Summary of {self}</big></th><tr>\n")
+			for c in new_classes do
+				if c.global.intro == c then
+					var add = false
+					if c.cshe.greaters.is_empty then
+						add = true
+					else
+						for p in c.cshe.direct_greaters do
+							if not p.global.intro == p then
+								add = true
+							end
+						end
+					end
+
+					if add then
+						dctx.add("<tr><td width=\"20%\" align=\"right\"><u>Introduce</u> {c.prototype_head(dctx)}</td><td><b>{c.html_link(dctx)}</b>{c.prototype_body(dctx)}<br/>{c.short_doc}</td><tr>\n")
+					end
+				else
+					for p in c.local_local_properties do
+						if p.global.is_method and p.global.intro == p then
+							dctx.add("<tr><td width=\"20%\" align=\"right\"><u>Refine</u> <b>{c.html_link(dctx)}</b> <u>Introduce</u> {p.prototype_head(dctx)}</td><td><b>{p.html_link(dctx)}</b>{p.prototype_body(dctx)}<br/>&nbsp;&nbsp;&nbsp;&nbsp;{p.short_doc}</td></tr>\n")
+						end
+					end
+				end
+			end
+			dctx.add("</table><br/>\n")
+		end
+
 		if not new_classes.is_empty then 
 			dctx.sort(new_classes)
 			dctx.add("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
