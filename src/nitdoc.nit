@@ -169,6 +169,16 @@ class DocContext
 
 		clear
 		add_header("Overview")
+
+		var f = new OFStream.open("{_dir}/all_.module_hierarchy.dot")
+			f.write(module_hierarchy.to_dot)
+		f.close
+
+		sys.system("dot -Tpng {_dir}/all_.module_hierarchy.dot -o {_dir}/all_.module_hierarchy.png")
+
+		add("<input type=\"button\" value=\"View/Hide module hierarchy\" Onclick=\"show_hide('module_hierarchy');\" />")
+		add("<center><img id=\"module_hierarchy\" src=\"all_.module_hierarchy.png\" alt=\"module hierarchy\" style=\"display:none\" border=\"1\" /></center><br />\n")
+
 		add("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
 		add("<tr bgcolor=\"#CCCCFF\"><th colspan=\"2\"><big>Overview of all Modules</big></th><tr>\n")
 		for m in modules do
@@ -184,7 +194,7 @@ class DocContext
 
 	fun add_header(title: String)
 	do
-		add("<html><head><title>{title}</title></head>\n<body>\n")
+		add("<html><head><title>{title}</title><script type=\"text/JavaScript\">function show_hide(id)\{if (document.getElementById(id).style.display==\"none\")\{document.getElementById(id).style.display=\"block\";\}else \{document.getElementById(id).style.display=\"none\";\}\}</script></head>\n<body>\n")
 		add("<table border=\"0\" width=\"100%\" cellpadding=\"1\" cellspacing=\"0\"><tr><td bgcolor=\"#eeeeff\">\n")
 		add("<a href=\"overview.html\"><b>Overview</b></a>&nbsp; <a href=\"index-1.html\"><b>Index</b></a>&nbsp; <a href=\"index.html\" target=\"_top\"><b>With Frames</b></a>\n")
 		add("</td></tr></table>")
