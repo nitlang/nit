@@ -276,6 +276,8 @@ private abstract class ReduceAction
 		l1.append(l2)
 		return l1
 	end
+	var _goto: Int
+	init(g: Int) do _goto = g
 end
 
 $ foreach {rules/rule}
@@ -333,8 +335,6 @@ $   end choose
 $   end foreach
 					p.push(p.go_to(_goto), node_list)
 	end
-	var _goto: Int
-	init(g: Int) do _goto = g
 end
 $ end foreach
 $ end template
