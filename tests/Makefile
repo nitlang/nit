@@ -2,13 +2,13 @@
 all: separate global icode
 
 separate:
-	./tests.sh *.nit ../examples/*.nit ../lib/*.nit ../src/nitdoc.nit ../src/nitc.nit
+	./tests.sh *.nit ../examples/*.nit ../lib/*.nit ../src/nitdoc.nit ../src/nitc.nit ../src/test_parser.nit
 
 some:
 	./tests.sh base_compile.nit base_attr.nit base_gen.nit test_gen_inh.nit bench_fib.nit example_objet.nit
 
 global:
-	./tests.sh -o --global *.nit ../examples/*.nit ../lib/*.nit ../src/nitdoc.nit ../src/nitc.nit
+	./tests.sh -o --global *.nit ../examples/*.nit ../lib/*.nit ../src/nitdoc.nit ../src/nitc.nit ../src/test_parser.nit
 
 icode:
 	./tests_icode.sh icode*.nit

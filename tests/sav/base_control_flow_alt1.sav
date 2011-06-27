@@ -1,2 +1,2 @@
-alt/base_control_flow_alt1.nit:26,1--30,2: Control error: Reached end of function (a 'return' with a value was expected).
-alt/base_control_flow_alt1.nit:33,1--41,2: Control error: Reached end of function (a 'return' with a value was expected).
+alt/base_control_flow_alt1.nit:26,5: Control error: Reached end of function (a 'return' with a value was expected).
+alt/base_control_flow_alt1.nit:33,5: Control error: Reached end of function (a 'return' with a value was expected).

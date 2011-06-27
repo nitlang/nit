@@ -1,2 +1,2 @@
-alt/error_defs_alt5.nit:28,1--30,35: Redef error: A::baz redefines Object::baz with 0 parameter(s).
-alt/error_defs_alt5.nit:28,1--30,35: Redef error: The procedure A::baz redefines the function Object::baz.
+alt/error_defs_alt5.nit:30,12--14: Redef error: A::baz redefines Object::baz with 0 parameter(s).
+alt/error_defs_alt5.nit:30,12--14: Redef error: The procedure A::baz redefines the function Object::baz.

@@ -1,1 +1,1 @@
-./error_ref_ret.nit:20,2--29: Redef error: Expected B (as in C::s), got Int in C::s.
+./error_ref_ret.nit:20,15--17: Redef error: Expected B, as in C::s.

@@ -116,7 +116,7 @@ redef class MMModule
 	# Compile module file for the current module
 	fun compile_local_table_to_c(v: CompilerVisitor)
 	do
-		v.add_instr("const char *LOCATE_{name} = \"{location.file}\";")
+		v.add_instr("const char *LOCATE_{name} = \"{location.file.filename}\";")
 
 		if v.program.tc.use_SFT_optimization or local_table.is_empty then
 			return

@@ -393,19 +393,19 @@ class AbsSyntaxVisitor
 	# Display an error for a given syntax node
 	fun error(n: nullable ANode, s: String)
 	do
-		_tc.error(if n == null then null else n.location, s)
+		_tc.error(if n == null then null else n.hot_location, s)
 	end
 
 	# Add an error, show errors and quit
 	fun fatal_error(n: nullable ANode, s: String)
 	do
-		_tc.fatal_error(if n == null then null else n.location, s)
+		_tc.fatal_error(if n == null then null else n.hot_location, s)
 	end
 
 	# Display a warning for a given syntax node
 	fun warning(n: nullable ANode, s: String)
 	do
-		_tc.warning(if n == null then null else n.location, s)
+		_tc.warning(if n == null then null else n.hot_location, s)
 	end
 
 	# Check conformity and display error
