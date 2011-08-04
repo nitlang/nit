@@ -6,6 +6,7 @@ test_extern
 test_ni_
 test_ffi_
 test_gtk
+test_json
 calculator
 nitc
 nitdoc
