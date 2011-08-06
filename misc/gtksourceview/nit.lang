@@ -49,6 +49,7 @@
     <style id="special-variable"     _name="Special Variable"      map-to="def:identifier"/>
     <style id="predefined-variable"  _name="Predefined Variable"   map-to="def:identifier"/>
     <style id="variable"             _name="Variable"              map-to="def:identifier"/>
+    <style id="extern-code"          _name="Extern code"           map-to="def:comment"/>
   </styles>
 
   <definitions>
@@ -57,13 +58,12 @@
       <match>\\((0-7){3}|(x[a-fA-F0-9]{2})|(c\S)|([CM]-\S)|(M-C-\S)|.)</match>
     </context>
 
-    <context id="multiline-comment" style-ref="comment">
-      <start>^=begin</start>
-      <end>^=end</end>
-      <include>
-        <context ref="escape"/>
-        <context ref="def:in-comment"/>
-      </include>
+    <context id="extern-code" style-ref="extern-code">
+        <start>`\{</start>
+        <end>`\}</end>
+        <include>
+            <context ref="def:in-comment"/>
+        </include>
     </context>
 
     <context id="definitions" style-ref="keyword">
@@ -189,23 +189,12 @@
       </include>
     </context>
 
-    <context id="backtick-quoted-string" style-ref="string">
-      <start>`</start>
-      <end>`</end>
-      <include>
-        <context ref="escape"/>
-        <context ref="def:line-continue"/>
-        <context ref="complex-interpolation"/>
-      </include>
-    </context>
-
     <context id="nit">
       <include>
         <context ref="def:shebang"/>
         <context ref="def:shell-like-comment"/>
         <context ref="double-quoted-string"/>
         <context ref="single-quoted-string"/>
-        <context ref="backtick-quoted-string"/>
         <context ref="definitions"/>
         <context ref="module-handlers"/>
         <context ref="keywords"/>
@@ -216,6 +205,7 @@
         <context ref="boolean"/>
         <context ref="float"/>
         <context ref="decimal"/>
+        <context ref="extern-code"/>
       </include>
     </context>
 
