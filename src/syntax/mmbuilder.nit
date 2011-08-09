@@ -1165,7 +1165,7 @@ redef class AMainMethPropdef
 	end
 end
 
-redef class AExternMethPropdef
+redef class AExternPropdef
 	redef fun accept_property_verifier(v)
 	do
 		super # Compute signature

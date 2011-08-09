@@ -682,7 +682,8 @@ redef class INative
 
 	fun compile_extern_method_to_c(v: I2CCompilerVisitor)
 	do
-		var ename = method.extern_name.as(not null)#"{method.module.name}_{method.local_class.name}_{method.local_class.name}_{method.name}_{method.signature.arity}"
+		var ename = method.extern_name.as(not null)
+
 		var sig = method.signature
 		assert exprs.length == sig.arity + 1
 

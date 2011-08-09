@@ -669,7 +669,10 @@ class MMMethod
 	# Is the method abstract
 	fun is_abstract: Bool is abstract
 
-	# Is the method extern, if yes what is the extern_name
+	# Is the method extern
+	fun is_extern: Bool is abstract
+
+	# extern name when specified explicitly in nit code
 	fun extern_name: nullable String is abstract
 
 	# properties explicitly exported to native code
