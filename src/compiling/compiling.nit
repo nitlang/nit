@@ -90,7 +90,7 @@ end
 
 redef class MMModule
 	# Compile the sep or glob files (of the current module only)
-	private fun compile_separate_module(cprogram: CProgram)
+	fun compile_separate_module(cprogram: CProgram)
 	do
 		var tc = cprogram.program.tc
 		tc.info("Generating C code for module: {full_name}",2)
