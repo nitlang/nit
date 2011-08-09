@@ -28,6 +28,13 @@ redef class MMModule
 		return c_name.get_type
 	end
 
+	# Root of then extern class hierarchy
+	fun type_any_extern : MMType
+	do
+		var c_name = class_by_name(once ("Pointer".to_symbol))
+		return c_name.get_type
+	end
+
 	# Import global classes from supermodules
 	fun import_global_classes
 	do
@@ -263,13 +270,34 @@ redef class MMLocalClass
 	end
 
 	# Add default super class in direct parent and in super classes if this is not the Object class
+	# Default super class is Pointer for extern types
 	private fun add_default_any_class(supers: Array[MMLocalClass])
 	do
-		if supers.is_empty and name != once ("Object".to_symbol) then
-			var t_any = mmmodule.type_any
-			supers.add(t_any.local_class)
-			var default = new MMDefaultAncestor(self, t_any)
-			add_direct_parent(default)
+		if name != once ("Object".to_symbol) then
+			var has_no_top = false
+			if supers.is_empty then
+				has_no_top = true
+			else if global.is_extern then
+				has_no_top = true
+				for s in supers do
+					if s.global.is_extern then
+						has_no_top = false
+						break
+					end
+				end
+			end
+
+			if has_no_top then
+				var top_type
+				if name != once ("Pointer".to_symbol) and global.is_extern then
+					top_type = mmmodule.type_any_extern
+				else
+					top_type = mmmodule.type_any
+				end
+				supers.add(top_type.local_class)
+				var default = new MMDefaultAncestor(self, top_type)
+				add_direct_parent(default)
+			end
 		end
 	end
 	

@@ -14,8 +14,9 @@ extern const classtable_elt_t VFT_MMDefaultAncestor[];
 extern const char *LOCATE_inheritance;
 extern const int SFT_inheritance[];
 #define CALL_inheritance___MMModule___type_any(recv) ((inheritance___MMModule___type_any_t)CALL((recv), (SFT_inheritance[0] + 0)))
-#define CALL_inheritance___MMModule___import_global_classes(recv) ((inheritance___MMModule___import_global_classes_t)CALL((recv), (SFT_inheritance[0] + 1)))
-#define CALL_inheritance___MMModule___import_local_classes(recv) ((inheritance___MMModule___import_local_classes_t)CALL((recv), (SFT_inheritance[0] + 2)))
+#define CALL_inheritance___MMModule___type_any_extern(recv) ((inheritance___MMModule___type_any_extern_t)CALL((recv), (SFT_inheritance[0] + 1)))
+#define CALL_inheritance___MMModule___import_global_classes(recv) ((inheritance___MMModule___import_global_classes_t)CALL((recv), (SFT_inheritance[0] + 2)))
+#define CALL_inheritance___MMModule___import_local_classes(recv) ((inheritance___MMModule___import_local_classes_t)CALL((recv), (SFT_inheritance[0] + 3)))
 #define ATTR_inheritance___MMLocalClass____direct_parents(recv) ATTR(recv, (SFT_inheritance[1] + 0))
 #define ATTR_inheritance___MMLocalClass____computing_super(recv) ATTR(recv, (SFT_inheritance[1] + 1))
 #define ATTR_inheritance___MMLocalClass____are_global_properties_inherited(recv) ATTR(recv, (SFT_inheritance[1] + 2))
@@ -57,6 +58,9 @@ extern const int SFT_inheritance[];
 static const char * const LOCATE_inheritance___MMModule___type_any = "inheritance::MMModule::type_any";
 val_t inheritance___MMModule___type_any(val_t p0);
 typedef val_t (*inheritance___MMModule___type_any_t)(val_t p0);
+static const char * const LOCATE_inheritance___MMModule___type_any_extern = "inheritance::MMModule::type_any_extern";
+val_t inheritance___MMModule___type_any_extern(val_t p0);
+typedef val_t (*inheritance___MMModule___type_any_extern_t)(val_t p0);
 static const char * const LOCATE_inheritance___MMModule___import_global_classes = "inheritance::MMModule::import_global_classes";
 void inheritance___MMModule___import_global_classes(val_t p0);
 typedef void (*inheritance___MMModule___import_global_classes_t)(val_t p0);

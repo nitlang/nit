@@ -924,8 +924,8 @@ val_t typing___TypingVisitor___get_default_constructor_for(val_t p0, val_t p1, v
         REGB2 = TAG_Int(5);
         fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB2);
         if (!once_value_18) {
-          fra.me.REG[5] = BOX_NativeString("Error: there is no available compatible constrctor in ");
-          REGB2 = TAG_Int(54);
+          fra.me.REG[5] = BOX_NativeString("Error: there is no available compatible constructor in ");
+          REGB2 = TAG_Int(55);
           fra.me.REG[5] = NEW_String_string___String___with_native(fra.me.REG[5], REGB2);
           once_value_18 = fra.me.REG[5];
           register_static_object(&once_value_18);
@@ -972,8 +972,8 @@ val_t typing___TypingVisitor___get_default_constructor_for(val_t p0, val_t p1, v
         REGB2 = TAG_Int(3);
         fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB2);
         if (!once_value_22) {
-          fra.me.REG[5] = BOX_NativeString("Error: there is no available compatible constrctor in ");
-          REGB2 = TAG_Int(54);
+          fra.me.REG[5] = BOX_NativeString("Error: there is no available compatible constructor in ");
+          REGB2 = TAG_Int(55);
           fra.me.REG[5] = NEW_String_string___String___with_native(fra.me.REG[5], REGB2);
           once_value_22 = fra.me.REG[5];
           register_static_object(&once_value_22);
@@ -6579,8 +6579,8 @@ val_t typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, val_t p2,
     REGB3 = TAG_Int(5);
     fra.me.REG[5] = NEW_Array_array___Array___with_capacity(REGB3);
     if (!once_value_1) {
-      fra.me.REG[6] = BOX_NativeString("Error: arity missmatch; prototype is '");
-      REGB3 = TAG_Int(38);
+      fra.me.REG[6] = BOX_NativeString("Error: arity mismatch; prototype is '");
+      REGB3 = TAG_Int(37);
       fra.me.REG[6] = NEW_String_string___String___with_native(fra.me.REG[6], REGB3);
       once_value_1 = fra.me.REG[6];
       register_static_object(&once_value_1);
