@@ -187,6 +187,7 @@ class MMMethSrcMethod
 	redef readable var _is_intern: Bool
 	redef readable var _is_abstract: Bool
 	redef readable writable var _extern_name: nullable String # Will be computed during MMBuilder
+	redef readable var _explicit_imports : Set[MMExplicitImport] = new HashSet[MMExplicitImport]
 	redef fun node: nullable AMethPropdef do return mmmodule.nodes(self).as(nullable AMethPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: nullable AMethPropdef)
 	do

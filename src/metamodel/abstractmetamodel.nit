@@ -655,6 +655,11 @@ class MMAttribute
 	super MMLocalProperty
 end
 
+class MMExplicitImport
+	var local_class : MMLocalClass
+	var method : MMMethod
+end
+
 # Method local properties
 class MMMethod
 	super MMLocalProperty
@@ -666,6 +671,9 @@ class MMMethod
 
 	# Is the method extern, if yes what is the extern_name
 	fun extern_name: nullable String is abstract
+
+	# properties explicitly exported to native code
+	fun explicit_imports : Set[ MMExplicitImport ] is abstract
 end
 
 # Concrete local classes

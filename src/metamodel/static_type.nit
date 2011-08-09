@@ -246,6 +246,17 @@ class MMSignature
 	end
 end
 
+
+redef class MMExplicitImport
+	var signature : MMSignature
+
+	redef init( local_class : MMLocalClass, meth : MMMethod )
+	do
+		super
+		signature = meth.signature.adaptation_to( local_class.get_type )
+	end
+end
+
 # A closure in a signature
 class MMClosure
 	# The name of the closure (without the !)

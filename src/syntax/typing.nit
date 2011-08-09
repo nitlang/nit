@@ -1159,6 +1159,81 @@ redef class ASuperExpr
 	end
 end
 
+redef class AExternCall
+	fun target_class_name : nullable Symbol do return null
+	fun target_method_name : Symbol is abstract
+
+	redef fun after_typing(v)
+	do
+		var target_class_name = self.target_class_name
+		var target_method_name = self.target_method_name
+
+		var target_class : MMLocalClass
+		var target_method : MMMethod
+
+		# find class
+		# self.target_class_name can be redef'd by sub-classes
+		if target_class_name == null then
+			target_class = v.local_property.local_class
+		else
+			if v.local_property.mmmodule.has_global_class_named( target_class_name ) then
+				var global_class = v.local_property.mmmodule.global_class_named( target_class_name )
+				target_class = v.local_property.mmmodule[ global_class ]
+			else
+				v.error( self, "Error: class {target_class_name.to_s}, not found." )
+				return
+			end
+		end
+
+		if target_class.has_global_property_by_name( target_method_name ) then
+			var global_property = target_class.get_property_by_name( target_method_name )
+
+			var target_property = target_class[global_property]
+
+			if target_property isa MMMethod then
+				target_method = target_property
+			else
+				v.error( self, "Error: property {target_method_name.to_s} is not a method." )
+				return
+			end
+		else
+			v.error( self, "Error: property {target_method_name.to_s} not found in target class." )
+			return
+		end
+
+		var explicit_import = new MMExplicitImport( target_class, target_method )
+		v.local_property.as(MMSrcMethod).explicit_imports.add( explicit_import )
+	end
+end
+
+redef class ALocalPropExternCall
+	redef fun target_class_name do return null
+	redef fun target_method_name do return n_methid.name.as(not null)
+end
+
+redef class ASuperExternCall
+	redef fun after_typing(v)
+	do
+		var precs: Array[MMLocalProperty] = v.local_property.prhe.direct_greaters
+		if not precs.is_empty then
+			v.local_property.need_super = true
+		else
+			v.error(self, "Error: No super method to call for {v.local_property}.")
+			return
+		end
+	end
+end
+
+redef class AFullPropExternCall
+	redef fun target_class_name do return n_classid.to_symbol
+	redef fun target_method_name do return n_methid.name.as(not null)
+end
+
+redef class AInitPropExternCall
+	redef fun target_class_name do return n_classid.to_symbol
+	redef fun target_method_name do return "init".to_symbol
+end
+
 redef class AAttrFormExpr
 	redef fun prop do return _prop.as(not null)
 	var _prop: nullable MMAttribute
