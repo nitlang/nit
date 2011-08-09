@@ -67,13 +67,24 @@ redef class MMLocalProperty
 	end
 end
 
+class MMParam
+	readable var _mmtype: MMType
+	readable var _name: Symbol
+
+	init ( t  : MMType, n : Symbol )
+	do
+	    _mmtype = t
+	    _name = n
+	end
+end
+
 # Signature for local properties
 class MMSignature
 	# The type of the reveiver
 	readable var _recv: MMType
 
 	# The parameter types
-	var _params: Array[MMType]
+	readable var _params: Array[MMParam]
 
 	# The return type
 	readable var _return_type: nullable MMType
@@ -127,7 +138,7 @@ class MMSignature
 	fun [](i: Int): MMType
 	do
 		assert _params.length > i
-		return _params[i]
+		return _params[i].mmtype
 	end
 
 	redef fun to_s
@@ -156,9 +167,17 @@ class MMSignature
 			return self
 		end
 		var mod = r.mmmodule
-		var p = new Array[MMType]
+		var p = new Array[MMParam]
 		for i in _params do
-			p.add(i.for_module(mod).adapt_to(r))
+			var new_type = i.mmtype.for_module(mod).adapt_to(r)
+			var new_param
+			if new_type == i.mmtype then
+				new_param = i
+			else
+				new_param = new MMParam( new_type, i.name )
+			end
+
+			p.add( new_param )
 		end
 		var rv = _return_type
 		if rv != null then
@@ -180,11 +199,18 @@ class MMSignature
 		if _not_for_self_cache != null then return _not_for_self_cache.as(not null)
 
 		var need_for_self = false
-		var p = new Array[MMType]
+		var p = new Array[MMParam]
 		for i in _params do
-			var i2 = i.not_for_self
-			if i != i2 then need_for_self = true
-			p.add(i2)
+			var new_type = i.mmtype.not_for_self
+			var new_param
+			if i.mmtype == new_type then
+				new_param = i
+			else
+				need_for_self = true
+				new_param = new MMParam( new_type, i.name )
+			end
+
+			p.add( new_param )
 		end
 
 		var rv = _return_type
@@ -212,7 +238,7 @@ class MMSignature
 		return res
 	end
 
-	init(params: Array[MMType], return_type: nullable MMType, r: MMType)
+	init(params: Array[MMParam], return_type: nullable MMType, r: MMType)
 	do
 		_params = params
 		_return_type = return_type
@@ -304,7 +330,7 @@ abstract class MMAncestor
 end
 
 # A static type
-# Note that static type a related to a specific module
+# Note that static type is related to a specific module
 abstract class MMType
 	# The module where self makes sence
 	fun mmmodule: MMModule is abstract
