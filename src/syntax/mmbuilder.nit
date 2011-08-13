@@ -657,17 +657,25 @@ redef class AStdClassdef
 	do
 		return n_formaldefs.length
 	end
+	redef fun accept_class_specialization_builder(v)
+	do
+		super
+
+		var glob = local_class.global
+		if glob.intro == local_class then
+			glob.is_interface = n_classkind.is_interface
+			glob.is_abstract = n_classkind.is_abstract
+			glob.is_enum = n_classkind.is_enum
+			glob.is_extern = n_classkind.is_extern
+			glob.visibility_level = visibility_level
+		end
+	end
 	redef fun accept_class_verifier(v)
 	do
 		super
 		var glob = _local_class.global
 		if glob.intro == _local_class then
 			# Intro
-			glob.visibility_level = visibility_level
-			glob.is_interface = n_classkind.is_interface
-			glob.is_abstract = n_classkind.is_abstract
-			glob.is_enum = n_classkind.is_enum
-			glob.is_extern = n_classkind.is_extern
 			if n_kwredef != null then
 				v.error(self, "Redef error: No class {name} is imported. Remove the redef keyword to define a new class.")
 			end
