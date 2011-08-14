@@ -1234,6 +1234,48 @@ redef class AInitPropExternCall
 	redef fun target_method_name do return "init".to_symbol
 end
 
+redef class ACastExternCall
+	fun from_type : MMType is abstract
+	fun to_type : MMType is abstract
+
+	redef fun after_typing(v)
+	do
+		if from_type == to_type
+		then
+			v.error( self, "Attepting to cast from and to the same type." )
+		end
+
+		var cast = new MMImportedCast( from_type, to_type )
+		var m = v.local_property
+		assert m isa MMMethod
+		m.explicit_casts.add( cast )
+	end
+end
+
+redef class ACastAsExternCall
+	redef fun from_type do return n_from_type.stype
+	redef fun to_type do return n_to_type.stype
+end
+
+redef class AAsNullableExternCall
+	redef fun from_type do return n_type.stype
+	redef fun to_type do return n_type.stype.as_nullable
+end
+
+redef class AAsNotNullableExternCall
+	redef fun from_type
+	do
+		var t = n_type.stype
+		if t.is_nullable
+		then
+			return t
+		else
+			return t.as_nullable
+		end
+	end
+	redef fun to_type do return n_type.stype.as_notnull
+end
+
 redef class AAttrFormExpr
 	redef fun prop do return _prop.as(not null)
 	var _prop: nullable MMAttribute
