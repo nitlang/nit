@@ -671,6 +671,9 @@ redef class AStdClassdef
 			if n_kwredef != null then
 				v.error(self, "Redef error: No class {name} is imported. Remove the redef keyword to define a new class.")
 			end
+			if glob.is_extern then
+				glob.mmmodule.is_extern_hybrid = true
+			end
 
 			for c in _local_class.cshe.direct_greaters do
 				var cg = c.global

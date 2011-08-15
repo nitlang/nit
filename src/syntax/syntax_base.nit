@@ -201,6 +201,10 @@ class MMMethSrcMethod
 		_is_extern = node isa AExternPropdef
 		_is_abstract = node isa ADeferredMethPropdef
 		_extern_name = null
+
+		if is_extern then
+			mmmodule.is_extern_hybrid = true
+		end
 	end
 end
 

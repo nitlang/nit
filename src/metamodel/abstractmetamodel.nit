@@ -153,6 +153,11 @@ class MMModule
 	# Dictionary of global classes
 	var _global_class_by_name: Map[Symbol, MMGlobalClass] = new HashMap[Symbol, MMGlobalClass]
 
+	# Is a hybrid module partially implemented in extern code
+	# It is if it contains a new extern class or an
+	# extern class declaration
+	var is_extern_hybrid : Bool writable = false
+
 	protected init(name: Symbol, dir: MMDirectory, context: MMContext, loc: Location)
 	do
 		_name = name
