@@ -283,6 +283,14 @@ void mmbuilder___MMSrcModule___do_mmbuilder(val_t p0, val_t p1){
       }
       if (UNTAG_Bool(REGB1)) {
         fra.me.REG[7] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[6])(fra.me.REG[6]);
+        REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_extern(fra.me.REG[7])(fra.me.REG[7]);
+        REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
+      } else {
+        REGB2 = TAG_Bool(false);
+        REGB1 = REGB2;
+      }
+      if (UNTAG_Bool(REGB1)) {
+        fra.me.REG[7] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[6])(fra.me.REG[6]);
         REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_interface(fra.me.REG[7])(fra.me.REG[7]);
         REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
       } else {
@@ -717,6 +725,14 @@ void mmbuilder___MMSrcLocalClass___process_default_constructors(val_t p0, val_t 
       /* ./syntax//mmbuilder.nit:186 */
       fra.me.REG[7] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[6])(fra.me.REG[6]);
       REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[7])(fra.me.REG[7]);
+      if (UNTAG_Bool(REGB1)) {
+        fra.me.REG[7] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[6])(fra.me.REG[6]);
+        REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_extern(fra.me.REG[7])(fra.me.REG[7]);
+        REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
+      } else {
+        REGB2 = TAG_Bool(false);
+        REGB1 = REGB2;
+      }
       if (UNTAG_Bool(REGB1)) {
         REGB1 = TAG_Bool(true);
       } else {
@@ -3176,19 +3192,38 @@ val_t mmbuilder___AClasskind___is_abstract(val_t p0){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
+val_t mmbuilder___AClasskind___is_extern(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_mmbuilder;
+  fra.me.line = 574;
+  fra.me.meth = LOCATE_mmbuilder___AClasskind___is_extern;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./syntax//mmbuilder.nit:574 */
+  REGB0 = TAG_Bool(false);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
 val_t mmbuilder___AInterfaceClasskind___is_interface(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 577;
+  fra.me.line = 578;
   fra.me.meth = LOCATE_mmbuilder___AInterfaceClasskind___is_interface;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:577 */
+  /* ./syntax//mmbuilder.nit:578 */
   REGB0 = TAG_Bool(true);
   goto label1;
   label1: while(0);
@@ -3201,13 +3236,32 @@ val_t mmbuilder___AEnumClasskind___is_enum(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 580;
+  fra.me.line = 581;
   fra.me.meth = LOCATE_mmbuilder___AEnumClasskind___is_enum;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:580 */
+  /* ./syntax//mmbuilder.nit:581 */
+  REGB0 = TAG_Bool(true);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
+val_t mmbuilder___AExternClasskind___is_extern(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_mmbuilder;
+  fra.me.line = 584;
+  fra.me.meth = LOCATE_mmbuilder___AExternClasskind___is_extern;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./syntax//mmbuilder.nit:584 */
   REGB0 = TAG_Bool(true);
   goto label1;
   label1: while(0);
@@ -3220,13 +3274,13 @@ val_t mmbuilder___AAbstractClasskind___is_abstract(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 583;
+  fra.me.line = 587;
   fra.me.meth = LOCATE_mmbuilder___AAbstractClasskind___is_abstract;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:583 */
+  /* ./syntax//mmbuilder.nit:587 */
   REGB0 = TAG_Bool(true);
   goto label1;
   label1: while(0);
@@ -3239,17 +3293,17 @@ val_t mmbuilder___AStdClassdef___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 587;
+  fra.me.line = 591;
   fra.me.meth = LOCATE_mmbuilder___AStdClassdef___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:589 */
+  /* ./syntax//mmbuilder.nit:593 */
   fra.me.REG[0] = CALL_parser_nodes___AStdClassdef___n_id(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 589);
+    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 593);
   }
   fra.me.REG[0] = CALL_syntax_base___Token___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -3263,13 +3317,13 @@ val_t mmbuilder___AStdClassdef___arity(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 591;
+  fra.me.line = 595;
   fra.me.meth = LOCATE_mmbuilder___AStdClassdef___arity;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:593 */
+  /* ./syntax//mmbuilder.nit:597 */
   fra.me.REG[0] = CALL_parser_nodes___AStdClassdef___n_formaldefs(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -3294,19 +3348,25 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
               static val_t once_value_9; /* Once value */
               static val_t once_value_10; /* Once value */
               static val_t once_value_11; /* Once value */
-              static val_t once_value_12; /* Once value */
-              static val_t once_value_13; /* Once value */
-              static val_t once_value_14; /* Once value */
-    static val_t once_value_17; /* Once value */
-    static val_t once_value_18; /* Once value */
-    static val_t once_value_19; /* Once value */
-    static val_t once_value_20; /* Once value */
-    static val_t once_value_21; /* Once value */
-    static val_t once_value_22; /* Once value */
+		static val_t once_value_12; /* Once value */
+		static val_t once_value_13; /* Once value */
+		static val_t once_value_14; /* Once value */
+		static val_t once_value_15; /* Once value */
+		static val_t once_value_16; /* Once value */
+		static val_t once_value_17; /* Once value */
+		static val_t once_value_18; /* Once value */
+		static val_t once_value_19; /* Once value */
+		static val_t once_value_20; /* Once value */
     static val_t once_value_23; /* Once value */
+    static val_t once_value_24; /* Once value */
+    static val_t once_value_25; /* Once value */
+    static val_t once_value_26; /* Once value */
+    static val_t once_value_27; /* Once value */
+    static val_t once_value_28; /* Once value */
+    static val_t once_value_29; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 595;
+  fra.me.line = 599;
   fra.me.meth = LOCATE_mmbuilder___AStdClassdef___accept_class_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
@@ -3321,19 +3381,19 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
   fra.me.REG[8] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:595 */
+  /* ./syntax//mmbuilder.nit:599 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:597 */
+  /* ./syntax//mmbuilder.nit:601 */
   CALL_SUPER_mmbuilder___AStdClassdef___accept_class_verifier(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:598 */
+  /* ./syntax//mmbuilder.nit:602 */
   fra.me.REG[1] = ATTR_mmbuilder___AClassdef____local_class(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 598);
+    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 602);
   }
   fra.me.REG[1] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:599 */
+  /* ./syntax//mmbuilder.nit:603 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMGlobalClass___intro(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[4] = ATTR_mmbuilder___AClassdef____local_class(fra.me.REG[2]);
   REGB0 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[0],fra.me.REG[4]));
@@ -3343,22 +3403,26 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:601 */
+    /* ./syntax//mmbuilder.nit:605 */
     REGB0 = CALL_mmbuilder___AClassdef___visibility_level(fra.me.REG[2])(fra.me.REG[2]);
     CALL_abstractmetamodel___MMGlobalClass___visibility_level__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
-    /* ./syntax//mmbuilder.nit:602 */
+    /* ./syntax//mmbuilder.nit:606 */
     fra.me.REG[4] = CALL_parser_nodes___AStdClassdef___n_classkind(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = CALL_mmbuilder___AClasskind___is_interface(fra.me.REG[4])(fra.me.REG[4]);
     CALL_abstractmetamodel___MMGlobalClass___is_interface__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
-    /* ./syntax//mmbuilder.nit:603 */
+    /* ./syntax//mmbuilder.nit:607 */
     fra.me.REG[4] = CALL_parser_nodes___AStdClassdef___n_classkind(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = CALL_mmbuilder___AClasskind___is_abstract(fra.me.REG[4])(fra.me.REG[4]);
     CALL_abstractmetamodel___MMGlobalClass___is_abstract__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
-    /* ./syntax//mmbuilder.nit:604 */
+    /* ./syntax//mmbuilder.nit:608 */
     fra.me.REG[4] = CALL_parser_nodes___AStdClassdef___n_classkind(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = CALL_mmbuilder___AClasskind___is_enum(fra.me.REG[4])(fra.me.REG[4]);
     CALL_abstractmetamodel___MMGlobalClass___is_enum__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
-    /* ./syntax//mmbuilder.nit:605 */
+    /* ./syntax//mmbuilder.nit:609 */
+    fra.me.REG[4] = CALL_parser_nodes___AStdClassdef___n_classkind(fra.me.REG[2])(fra.me.REG[2]);
+    REGB0 = CALL_mmbuilder___AClasskind___is_extern(fra.me.REG[4])(fra.me.REG[4]);
+    CALL_abstractmetamodel___MMGlobalClass___is_extern__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
+    /* ./syntax//mmbuilder.nit:610 */
     fra.me.REG[4] = CALL_parser_nodes___AStdClassdef___n_kwredef(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -3374,7 +3438,7 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:606 */
+      /* ./syntax//mmbuilder.nit:611 */
       REGB0 = TAG_Int(3);
       fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB0);
       if (!once_value_1) {
@@ -3401,11 +3465,11 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
       fra.me.REG[4] = CALL_string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
       CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[4]);
     }
-    /* ./syntax//mmbuilder.nit:609 */
+    /* ./syntax//mmbuilder.nit:614 */
     fra.me.REG[4] = ATTR_mmbuilder___AClassdef____local_class(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 609);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 614);
     }
     fra.me.REG[4] = CALL_abstractmetamodel___MMLocalClass___cshe(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[4] = CALL_partial_order___PartialOrderElement___direct_greaters(fra.me.REG[4])(fra.me.REG[4]);
@@ -3440,15 +3504,15 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
         }
         /* ./../lib/standard//collection//array.nit:654 */
         fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
-        /* ./syntax//mmbuilder.nit:610 */
+        /* ./syntax//mmbuilder.nit:615 */
         fra.me.REG[6] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[5])(fra.me.REG[5]);
-        /* ./syntax//mmbuilder.nit:611 */
+        /* ./syntax//mmbuilder.nit:616 */
         REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_interface(fra.me.REG[1])(fra.me.REG[1]);
         if (UNTAG_Bool(REGB1)) {
-          /* ./syntax//mmbuilder.nit:612 */
+          /* ./syntax//mmbuilder.nit:617 */
           REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[6])(fra.me.REG[6]);
           if (UNTAG_Bool(REGB1)) {
-            /* ./syntax//mmbuilder.nit:613 */
+            /* ./syntax//mmbuilder.nit:618 */
             REGB1 = TAG_Int(5);
             fra.me.REG[7] = NEW_Array_array___Array___with_capacity(REGB1);
             if (!once_value_3) {
@@ -3487,11 +3551,11 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
             fra.me.REG[7] = CALL_string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
             CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[7]);
           } else {
-            /* ./syntax//mmbuilder.nit:614 */
+            /* ./syntax//mmbuilder.nit:619 */
             REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_interface(fra.me.REG[6])(fra.me.REG[6]);
             REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
             if (UNTAG_Bool(REGB1)) {
-              /* ./syntax//mmbuilder.nit:615 */
+              /* ./syntax//mmbuilder.nit:620 */
               REGB1 = TAG_Int(5);
               fra.me.REG[7] = NEW_Array_array___Array___with_capacity(REGB1);
               if (!once_value_6) {
@@ -3532,10 +3596,10 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
             }
           }
         } else {
-          /* ./syntax//mmbuilder.nit:617 */
+          /* ./syntax//mmbuilder.nit:622 */
           REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[1])(fra.me.REG[1]);
           if (UNTAG_Bool(REGB1)) {
-            /* ./syntax//mmbuilder.nit:618 */
+            /* ./syntax//mmbuilder.nit:623 */
             REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_interface(fra.me.REG[6])(fra.me.REG[6]);
             REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
             if (UNTAG_Bool(REGB1)) {
@@ -3546,7 +3610,7 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
               REGB1 = REGB2;
             }
             if (UNTAG_Bool(REGB1)) {
-              /* ./syntax//mmbuilder.nit:619 */
+              /* ./syntax//mmbuilder.nit:624 */
               REGB1 = TAG_Int(5);
               fra.me.REG[7] = NEW_Array_array___Array___with_capacity(REGB1);
               if (!once_value_9) {
@@ -3586,47 +3650,145 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
               CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[7]);
             }
           } else {
-            /* ./syntax//mmbuilder.nit:622 */
-            REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[6])(fra.me.REG[6]);
+            /* ./syntax//mmbuilder.nit:626 */
+            REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_extern(fra.me.REG[1])(fra.me.REG[1]);
             if (UNTAG_Bool(REGB1)) {
-              /* ./syntax//mmbuilder.nit:623 */
-              REGB1 = TAG_Int(5);
-              fra.me.REG[6] = NEW_Array_array___Array___with_capacity(REGB1);
-              if (!once_value_12) {
+              /* ./syntax//mmbuilder.nit:627 */
+              REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_interface(fra.me.REG[6])(fra.me.REG[6]);
+              REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
+              if (UNTAG_Bool(REGB1)) {
+		REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_extern(fra.me.REG[6])(fra.me.REG[6]);
+		REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
+              } else {
+		REGB2 = TAG_Bool(false);
+		REGB1 = REGB2;
+              }
+              if (UNTAG_Bool(REGB1)) {
+		/* ./syntax//mmbuilder.nit:628 */
+		REGB1 = TAG_Int(5);
+		fra.me.REG[7] = NEW_Array_array___Array___with_capacity(REGB1);
+		if (!once_value_12) {
+		fra.me.REG[8] = BOX_NativeString("Special error: Extern class ");
+		REGB1 = TAG_Int(28);
+		fra.me.REG[8] = NEW_String_string___String___with_native(fra.me.REG[8], REGB1);
+		once_value_12 = fra.me.REG[8];
+		register_static_object(&once_value_12);
+		} else fra.me.REG[8] = once_value_12;
+		fra.me.REG[8] = fra.me.REG[8];
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
+		fra.me.REG[8] = CALL_mmbuilder___AClassdef___name(fra.me.REG[2])(fra.me.REG[2]);
+		fra.me.REG[8] = CALL_string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
+		if (!once_value_13) {
+		fra.me.REG[8] = BOX_NativeString(" try to specialise class ");
+		REGB1 = TAG_Int(25);
+		fra.me.REG[8] = NEW_String_string___String___with_native(fra.me.REG[8], REGB1);
+		once_value_13 = fra.me.REG[8];
+		register_static_object(&once_value_13);
+		} else fra.me.REG[8] = once_value_13;
+		fra.me.REG[8] = fra.me.REG[8];
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
+		fra.me.REG[8] = CALL_abstractmetamodel___MMLocalClass___name(fra.me.REG[5])(fra.me.REG[5]);
+		fra.me.REG[8] = CALL_string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
+		if (!once_value_14) {
+		fra.me.REG[8] = BOX_NativeString(".");
+		REGB1 = TAG_Int(1);
+		fra.me.REG[8] = NEW_String_string___String___with_native(fra.me.REG[8], REGB1);
+		once_value_14 = fra.me.REG[8];
+		register_static_object(&once_value_14);
+		} else fra.me.REG[8] = once_value_14;
+		fra.me.REG[8] = fra.me.REG[8];
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
+		fra.me.REG[7] = CALL_string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
+		CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[7]);
+              }
+            } else {
+              /* ./syntax//mmbuilder.nit:631 */
+              REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[6])(fra.me.REG[6]);
+              if (UNTAG_Bool(REGB1)) {
+		/* ./syntax//mmbuilder.nit:632 */
+		REGB1 = TAG_Int(5);
+		fra.me.REG[7] = NEW_Array_array___Array___with_capacity(REGB1);
+		if (!once_value_15) {
+		fra.me.REG[8] = BOX_NativeString("Special error: Class ");
+		REGB1 = TAG_Int(21);
+		fra.me.REG[8] = NEW_String_string___String___with_native(fra.me.REG[8], REGB1);
+		once_value_15 = fra.me.REG[8];
+		register_static_object(&once_value_15);
+		} else fra.me.REG[8] = once_value_15;
+		fra.me.REG[8] = fra.me.REG[8];
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
+		fra.me.REG[8] = CALL_mmbuilder___AClassdef___name(fra.me.REG[2])(fra.me.REG[2]);
+		fra.me.REG[8] = CALL_string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
+		if (!once_value_16) {
+		fra.me.REG[8] = BOX_NativeString(" try to specialise enum class ");
+		REGB1 = TAG_Int(30);
+		fra.me.REG[8] = NEW_String_string___String___with_native(fra.me.REG[8], REGB1);
+		once_value_16 = fra.me.REG[8];
+		register_static_object(&once_value_16);
+		} else fra.me.REG[8] = once_value_16;
+		fra.me.REG[8] = fra.me.REG[8];
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
+		fra.me.REG[8] = CALL_abstractmetamodel___MMLocalClass___name(fra.me.REG[5])(fra.me.REG[5]);
+		fra.me.REG[8] = CALL_string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
+		if (!once_value_17) {
+		fra.me.REG[8] = BOX_NativeString(".");
+		REGB1 = TAG_Int(1);
+		fra.me.REG[8] = NEW_String_string___String___with_native(fra.me.REG[8], REGB1);
+		once_value_17 = fra.me.REG[8];
+		register_static_object(&once_value_17);
+		} else fra.me.REG[8] = once_value_17;
+		fra.me.REG[8] = fra.me.REG[8];
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
+		fra.me.REG[7] = CALL_string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
+		CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[7]);
+              } else {
+		/* ./syntax//mmbuilder.nit:633 */
+		REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_extern(fra.me.REG[6])(fra.me.REG[6]);
+		if (UNTAG_Bool(REGB1)) {
+		/* ./syntax//mmbuilder.nit:634 */
+		REGB1 = TAG_Int(5);
+		fra.me.REG[6] = NEW_Array_array___Array___with_capacity(REGB1);
+		if (!once_value_18) {
 		fra.me.REG[7] = BOX_NativeString("Special error: Class ");
 		REGB1 = TAG_Int(21);
 		fra.me.REG[7] = NEW_String_string___String___with_native(fra.me.REG[7], REGB1);
-		once_value_12 = fra.me.REG[7];
-		register_static_object(&once_value_12);
-              } else fra.me.REG[7] = once_value_12;
-              fra.me.REG[7] = fra.me.REG[7];
-              CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
-              fra.me.REG[7] = CALL_mmbuilder___AClassdef___name(fra.me.REG[2])(fra.me.REG[2]);
-              fra.me.REG[7] = CALL_string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
-              CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
-              if (!once_value_13) {
-		fra.me.REG[7] = BOX_NativeString(" try to specialise enum class ");
-		REGB1 = TAG_Int(30);
+		once_value_18 = fra.me.REG[7];
+		register_static_object(&once_value_18);
+		} else fra.me.REG[7] = once_value_18;
+		fra.me.REG[7] = fra.me.REG[7];
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
+		fra.me.REG[7] = CALL_mmbuilder___AClassdef___name(fra.me.REG[2])(fra.me.REG[2]);
+		fra.me.REG[7] = CALL_string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
+		if (!once_value_19) {
+		fra.me.REG[7] = BOX_NativeString(" try to specialise extern class ");
+		REGB1 = TAG_Int(32);
 		fra.me.REG[7] = NEW_String_string___String___with_native(fra.me.REG[7], REGB1);
-		once_value_13 = fra.me.REG[7];
-		register_static_object(&once_value_13);
-              } else fra.me.REG[7] = once_value_13;
-              fra.me.REG[7] = fra.me.REG[7];
-              CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
-              fra.me.REG[5] = CALL_abstractmetamodel___MMLocalClass___name(fra.me.REG[5])(fra.me.REG[5]);
-              fra.me.REG[5] = CALL_string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
-              CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[5]);
-              if (!once_value_14) {
+		once_value_19 = fra.me.REG[7];
+		register_static_object(&once_value_19);
+		} else fra.me.REG[7] = once_value_19;
+		fra.me.REG[7] = fra.me.REG[7];
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
+		fra.me.REG[5] = CALL_abstractmetamodel___MMLocalClass___name(fra.me.REG[5])(fra.me.REG[5]);
+		fra.me.REG[5] = CALL_string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[5]);
+		if (!once_value_20) {
 		fra.me.REG[5] = BOX_NativeString(".");
 		REGB1 = TAG_Int(1);
 		fra.me.REG[5] = NEW_String_string___String___with_native(fra.me.REG[5], REGB1);
-		once_value_14 = fra.me.REG[5];
-		register_static_object(&once_value_14);
-              } else fra.me.REG[5] = once_value_14;
-              fra.me.REG[5] = fra.me.REG[5];
-              CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[5]);
-              fra.me.REG[6] = CALL_string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
-              CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[6]);
+		once_value_20 = fra.me.REG[5];
+		register_static_object(&once_value_20);
+		} else fra.me.REG[5] = once_value_20;
+		fra.me.REG[5] = fra.me.REG[5];
+		CALL_abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[5]);
+		fra.me.REG[6] = CALL_string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
+		CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[6]);
+		}
+              }
             }
           }
         }
@@ -3638,17 +3800,17 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
         REGB0 = REGB1;
       } else {
         /* ./../lib/standard//collection//array.nit:237 */
-        goto label15;
+        goto label21;
       }
     }
-    label15: while(0);
-    /* ./syntax//mmbuilder.nit:628 */
-    goto label16;
+    label21: while(0);
+    /* ./syntax//mmbuilder.nit:639 */
+    goto label22;
   }
-  /* ./syntax//mmbuilder.nit:633 */
+  /* ./syntax//mmbuilder.nit:644 */
   fra.me.REG[0] = CALL_syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[3])(fra.me.REG[3]);
   CALL_syntax_base___MMGlobalClass___check_visibility(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[2], fra.me.REG[0]);
-  /* ./syntax//mmbuilder.nit:634 */
+  /* ./syntax//mmbuilder.nit:645 */
   fra.me.REG[0] = CALL_parser_nodes___AStdClassdef___n_kwredef(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -3663,42 +3825,42 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:635 */
+    /* ./syntax//mmbuilder.nit:646 */
     REGB0 = TAG_Int(3);
     fra.me.REG[0] = NEW_Array_array___Array___with_capacity(REGB0);
-    if (!once_value_17) {
+    if (!once_value_23) {
       fra.me.REG[4] = BOX_NativeString("Redef error: ");
       REGB0 = TAG_Int(13);
       fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB0);
-      once_value_17 = fra.me.REG[4];
-      register_static_object(&once_value_17);
-    } else fra.me.REG[4] = once_value_17;
+      once_value_23 = fra.me.REG[4];
+      register_static_object(&once_value_23);
+    } else fra.me.REG[4] = once_value_23;
     fra.me.REG[4] = fra.me.REG[4];
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
     fra.me.REG[4] = CALL_mmbuilder___AClassdef___name(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[4] = CALL_string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
-    if (!once_value_18) {
+    if (!once_value_24) {
       fra.me.REG[4] = BOX_NativeString(" is an imported class. Add the redef keyword to refine it.");
       REGB0 = TAG_Int(58);
       fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB0);
-      once_value_18 = fra.me.REG[4];
-      register_static_object(&once_value_18);
-    } else fra.me.REG[4] = once_value_18;
+      once_value_24 = fra.me.REG[4];
+      register_static_object(&once_value_24);
+    } else fra.me.REG[4] = once_value_24;
     fra.me.REG[4] = fra.me.REG[4];
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
     fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
     CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[0]);
-    /* ./syntax//mmbuilder.nit:636 */
-    goto label16;
+    /* ./syntax//mmbuilder.nit:647 */
+    goto label22;
   }
-  /* ./syntax//mmbuilder.nit:639 */
+  /* ./syntax//mmbuilder.nit:650 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMGlobalClass___intro(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = CALL_abstractmetamodel___MMLocalClass___arity(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = ATTR_mmbuilder___AClassdef____local_class(fra.me.REG[2]);
   REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 639);
+    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 650);
   }
   REGB1 = CALL_abstractmetamodel___MMLocalClass___arity(fra.me.REG[0])(fra.me.REG[0]);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
@@ -3706,57 +3868,57 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
   } else {
     /* ./../lib/standard//kernel.nit:207 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./syntax//mmbuilder.nit:639 */
+    /* ./syntax//mmbuilder.nit:650 */
     REGB2 = REGB1;
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
-    /* ./syntax//mmbuilder.nit:640 */
+    /* ./syntax//mmbuilder.nit:651 */
     REGB2 = TAG_Int(5);
     fra.me.REG[0] = NEW_Array_array___Array___with_capacity(REGB2);
-    if (!once_value_19) {
+    if (!once_value_25) {
       fra.me.REG[4] = BOX_NativeString("Redef error: Formal parameter arity missmatch; got ");
       REGB2 = TAG_Int(51);
       fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB2);
-      once_value_19 = fra.me.REG[4];
-      register_static_object(&once_value_19);
-    } else fra.me.REG[4] = once_value_19;
+      once_value_25 = fra.me.REG[4];
+      register_static_object(&once_value_25);
+    } else fra.me.REG[4] = once_value_25;
     fra.me.REG[4] = fra.me.REG[4];
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
     fra.me.REG[4] = ATTR_mmbuilder___AClassdef____local_class(fra.me.REG[2]);
     REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 640);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 651);
     }
     REGB2 = CALL_abstractmetamodel___MMLocalClass___arity(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[4] = CALL_string___Object___to_s(REGB2)(REGB2);
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
-    if (!once_value_20) {
+    if (!once_value_26) {
       fra.me.REG[4] = BOX_NativeString(", expected ");
       REGB2 = TAG_Int(11);
       fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB2);
-      once_value_20 = fra.me.REG[4];
-      register_static_object(&once_value_20);
-    } else fra.me.REG[4] = once_value_20;
+      once_value_26 = fra.me.REG[4];
+      register_static_object(&once_value_26);
+    } else fra.me.REG[4] = once_value_26;
     fra.me.REG[4] = fra.me.REG[4];
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
     fra.me.REG[4] = CALL_abstractmetamodel___MMGlobalClass___intro(fra.me.REG[1])(fra.me.REG[1]);
     REGB2 = CALL_abstractmetamodel___MMLocalClass___arity(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[4] = CALL_string___Object___to_s(REGB2)(REGB2);
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
-    if (!once_value_21) {
+    if (!once_value_27) {
       fra.me.REG[4] = BOX_NativeString(".");
       REGB2 = TAG_Int(1);
       fra.me.REG[4] = NEW_String_string___String___with_native(fra.me.REG[4], REGB2);
-      once_value_21 = fra.me.REG[4];
-      register_static_object(&once_value_21);
-    } else fra.me.REG[4] = once_value_21;
+      once_value_27 = fra.me.REG[4];
+      register_static_object(&once_value_27);
+    } else fra.me.REG[4] = once_value_27;
     fra.me.REG[4] = fra.me.REG[4];
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
     fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
     CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[0]);
   }
-  /* ./syntax//mmbuilder.nit:644 */
+  /* ./syntax//mmbuilder.nit:655 */
   REGB2 = CALL_abstractmetamodel___MMGlobalClass___is_interface(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
@@ -3769,69 +3931,87 @@ void mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB2)) {
     REGB2 = TAG_Bool(true);
   } else {
-    /* ./syntax//mmbuilder.nit:645 */
+    /* ./syntax//mmbuilder.nit:656 */
     REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_abstract(fra.me.REG[1])(fra.me.REG[1]);
     REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-    /* ./syntax//mmbuilder.nit:644 */
+    /* ./syntax//mmbuilder.nit:655 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./syntax//mmbuilder.nit:645 */
+    /* ./syntax//mmbuilder.nit:656 */
     fra.me.REG[0] = CALL_parser_nodes___AStdClassdef___n_classkind(fra.me.REG[2])(fra.me.REG[2]);
     REGB2 = CALL_mmbuilder___AClasskind___is_abstract(fra.me.REG[0])(fra.me.REG[0]);
   } else {
-    /* ./syntax//mmbuilder.nit:644 */
+    /* ./syntax//mmbuilder.nit:655 */
     REGB1 = TAG_Bool(false);
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
     REGB2 = TAG_Bool(true);
   } else {
-    /* ./syntax//mmbuilder.nit:646 */
+    /* ./syntax//mmbuilder.nit:657 */
     REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[1])(fra.me.REG[1]);
     REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
-    /* ./syntax//mmbuilder.nit:644 */
+    /* ./syntax//mmbuilder.nit:655 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./syntax//mmbuilder.nit:646 */
-    fra.me.REG[1] = CALL_parser_nodes___AStdClassdef___n_classkind(fra.me.REG[2])(fra.me.REG[2]);
-    REGB2 = CALL_mmbuilder___AClasskind___is_enum(fra.me.REG[1])(fra.me.REG[1]);
+    /* ./syntax//mmbuilder.nit:657 */
+    fra.me.REG[0] = CALL_parser_nodes___AStdClassdef___n_classkind(fra.me.REG[2])(fra.me.REG[2]);
+    REGB2 = CALL_mmbuilder___AClasskind___is_enum(fra.me.REG[0])(fra.me.REG[0]);
   } else {
-    /* ./syntax//mmbuilder.nit:644 */
+    /* ./syntax//mmbuilder.nit:655 */
     REGB1 = TAG_Bool(false);
     REGB2 = REGB1;
   }
-  /* ./syntax//mmbuilder.nit:643 */
   if (UNTAG_Bool(REGB2)) {
-    /* ./syntax//mmbuilder.nit:648 */
+    REGB2 = TAG_Bool(true);
+  } else {
+    /* ./syntax//mmbuilder.nit:658 */
+    REGB1 = CALL_abstractmetamodel___MMGlobalClass___is_extern(fra.me.REG[1])(fra.me.REG[1]);
+    REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
+    /* ./syntax//mmbuilder.nit:655 */
+    REGB2 = REGB1;
+  }
+  if (UNTAG_Bool(REGB2)) {
+    /* ./syntax//mmbuilder.nit:658 */
+    fra.me.REG[1] = CALL_parser_nodes___AStdClassdef___n_classkind(fra.me.REG[2])(fra.me.REG[2]);
+    REGB2 = CALL_mmbuilder___AClasskind___is_extern(fra.me.REG[1])(fra.me.REG[1]);
+  } else {
+    /* ./syntax//mmbuilder.nit:655 */
+    REGB1 = TAG_Bool(false);
+    REGB2 = REGB1;
+  }
+  /* ./syntax//mmbuilder.nit:654 */
+  if (UNTAG_Bool(REGB2)) {
+    /* ./syntax//mmbuilder.nit:660 */
     REGB2 = TAG_Int(3);
     fra.me.REG[1] = NEW_Array_array___Array___with_capacity(REGB2);
-    if (!once_value_22) {
+    if (!once_value_28) {
       fra.me.REG[0] = BOX_NativeString("Redef error: cannot change kind of class ");
       REGB2 = TAG_Int(41);
       fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB2);
-      once_value_22 = fra.me.REG[0];
-      register_static_object(&once_value_22);
-    } else fra.me.REG[0] = once_value_22;
+      once_value_28 = fra.me.REG[0];
+      register_static_object(&once_value_28);
+    } else fra.me.REG[0] = once_value_28;
     fra.me.REG[0] = fra.me.REG[0];
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
     fra.me.REG[0] = CALL_mmbuilder___AClassdef___name(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-    if (!once_value_23) {
+    if (!once_value_29) {
       fra.me.REG[0] = BOX_NativeString(".");
       REGB2 = TAG_Int(1);
       fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB2);
-      once_value_23 = fra.me.REG[0];
-      register_static_object(&once_value_23);
-    } else fra.me.REG[0] = once_value_23;
+      once_value_29 = fra.me.REG[0];
+      register_static_object(&once_value_29);
+    } else fra.me.REG[0] = once_value_29;
     fra.me.REG[0] = fra.me.REG[0];
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
     fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
     CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[1]);
   }
-  label16: while(0);
+  label22: while(0);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -3841,13 +4021,13 @@ val_t mmbuilder___AStdClassdef___visibility_level(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 652;
+  fra.me.line = 664;
   fra.me.meth = LOCATE_mmbuilder___AStdClassdef___visibility_level;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:654 */
+  /* ./syntax//mmbuilder.nit:666 */
   fra.me.REG[0] = CALL_parser_nodes___AStdClassdef___n_visibility(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_mmbuilder___AVisibility___level(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -3863,13 +4043,13 @@ val_t mmbuilder___AMainClassdef___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 659;
+  fra.me.line = 671;
   fra.me.meth = LOCATE_mmbuilder___AMainClassdef___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:661 */
+  /* ./syntax//mmbuilder.nit:673 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("Sys");
@@ -3897,13 +4077,13 @@ val_t mmbuilder___ATopClassdef___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 666;
+  fra.me.line = 678;
   fra.me.meth = LOCATE_mmbuilder___ATopClassdef___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:668 */
+  /* ./syntax//mmbuilder.nit:680 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("Object");
@@ -3930,7 +4110,7 @@ void mmbuilder___AFormaldef___accept_class_builder(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 676;
+  fra.me.line = 688;
   fra.me.meth = LOCATE_mmbuilder___AFormaldef___accept_class_builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -3942,36 +4122,36 @@ void mmbuilder___AFormaldef___accept_class_builder(val_t p0, val_t p1){
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:676 */
+  /* ./syntax//mmbuilder.nit:688 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:678 */
+  /* ./syntax//mmbuilder.nit:690 */
   fra.me.REG[4] = CALL_parser_nodes___AFormaldef___n_id(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = CALL_syntax_base___Token___to_symbol(fra.me.REG[4])(fra.me.REG[4]);
-  /* ./syntax//mmbuilder.nit:679 */
+  /* ./syntax//mmbuilder.nit:691 */
   REGB0 = CALL_mmbuilder___ClassBuilderVisitor___local_class_arity(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[5] = NEW_MMTypeFormalParameter_genericity___MMTypeFormalParameter___init(fra.me.REG[4], REGB0, fra.me.REG[5]);
-  /* ./syntax//mmbuilder.nit:680 */
+  /* ./syntax//mmbuilder.nit:692 */
   ATTR_mmbuilder___AFormaldef____formal(fra.me.REG[2]) = fra.me.REG[5];
-  /* ./syntax//mmbuilder.nit:681 */
+  /* ./syntax//mmbuilder.nit:693 */
   REGB0 = CALL_mmbuilder___ClassBuilderVisitor___local_class_arity(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Int(1);
   /* ./../lib/standard//kernel.nit:215 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-  /* ./syntax//mmbuilder.nit:681 */
+  /* ./syntax//mmbuilder.nit:693 */
   CALL_mmbuilder___ClassBuilderVisitor___local_class_arity__eq(fra.me.REG[3])(fra.me.REG[3], REGB1);
-  /* ./syntax//mmbuilder.nit:682 */
+  /* ./syntax//mmbuilder.nit:694 */
   fra.me.REG[2] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   CALL_genericity___MMLocalClass___register_formal(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[5]);
-  /* ./syntax//mmbuilder.nit:683 */
+  /* ./syntax//mmbuilder.nit:695 */
   fra.me.REG[3] = CALL_mmbuilder___ClassBuilderVisitor___formals(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 683);
+    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 695);
   }
   CALL_abstract_collection___Map_____braeq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4], fra.me.REG[5]);
-  /* ./syntax//mmbuilder.nit:684 */
+  /* ./syntax//mmbuilder.nit:696 */
   CALL_SUPER_mmbuilder___AFormaldef___accept_class_builder(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -3987,7 +4167,7 @@ void mmbuilder___AFormaldef___accept_class_verifier(val_t p0, val_t p1){
         static val_t once_value_5; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 687;
+  fra.me.line = 699;
   fra.me.meth = LOCATE_mmbuilder___AFormaldef___accept_class_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -3999,17 +4179,17 @@ void mmbuilder___AFormaldef___accept_class_verifier(val_t p0, val_t p1){
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:687 */
+  /* ./syntax//mmbuilder.nit:699 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:689 */
+  /* ./syntax//mmbuilder.nit:701 */
   CALL_SUPER_mmbuilder___AFormaldef___accept_class_verifier(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:690 */
+  /* ./syntax//mmbuilder.nit:702 */
   fra.me.REG[1] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
-  /* ./syntax//mmbuilder.nit:691 */
+  /* ./syntax//mmbuilder.nit:703 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_abstractmetamodel___MMGlobalClass___intro(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./syntax//mmbuilder.nit:692 */
+  /* ./syntax//mmbuilder.nit:704 */
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[0]));
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -4017,7 +4197,7 @@ void mmbuilder___AFormaldef___accept_class_verifier(val_t p0, val_t p1){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:693 */
+    /* ./syntax//mmbuilder.nit:705 */
     fra.me.REG[4] = CALL_parser_nodes___AFormaldef___n_type(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -4032,25 +4212,25 @@ void mmbuilder___AFormaldef___accept_class_verifier(val_t p0, val_t p1){
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:694 */
+      /* ./syntax//mmbuilder.nit:706 */
       fra.me.REG[4] = ATTR_mmbuilder___AFormaldef____formal(fra.me.REG[2]);
       fra.me.REG[5] = CALL_syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[3])(fra.me.REG[3]);
       fra.me.REG[5] = CALL_inheritance___MMModule___type_any(fra.me.REG[5])(fra.me.REG[5]);
       fra.me.REG[5] = CALL_static_type___MMType___as_nullable(fra.me.REG[5])(fra.me.REG[5]);
       REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 694);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 706);
       }
       CALL_genericity___MMTypeFormalParameter___bound__eq(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
     } else {
-      /* ./syntax//mmbuilder.nit:696 */
+      /* ./syntax//mmbuilder.nit:708 */
       fra.me.REG[5] = CALL_parser_nodes___AFormaldef___n_type(fra.me.REG[2])(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 696);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 708);
       }
       fra.me.REG[5] = CALL_syntax_base___AType___get_stype(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3]);
-      /* ./syntax//mmbuilder.nit:697 */
+      /* ./syntax//mmbuilder.nit:709 */
       REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -4066,27 +4246,27 @@ void mmbuilder___AFormaldef___accept_class_verifier(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB0)) {
         goto label1;
       }
-      /* ./syntax//mmbuilder.nit:698 */
+      /* ./syntax//mmbuilder.nit:710 */
       fra.me.REG[4] = ATTR_mmbuilder___AFormaldef____formal(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 698);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 710);
       }
       CALL_genericity___MMTypeFormalParameter___bound__eq(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
     }
   } else {
-    /* ./syntax//mmbuilder.nit:701 */
+    /* ./syntax//mmbuilder.nit:713 */
     fra.me.REG[5] = ATTR_mmbuilder___AFormaldef____formal(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 701);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 713);
     }
     REGB0 = CALL_genericity___MMTypeFormalParameter___position(fra.me.REG[5])(fra.me.REG[5]);
     fra.me.REG[0] = CALL_genericity___MMLocalClass___get_formal(fra.me.REG[0])(fra.me.REG[0], REGB0);
     fra.me.REG[0] = CALL_type_formal___MMTypeFormal___bound(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[5] = CALL_syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[5] = CALL_static_type___MMType___for_module(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);
-    /* ./syntax//mmbuilder.nit:702 */
+    /* ./syntax//mmbuilder.nit:714 */
     fra.me.REG[0] = CALL_parser_nodes___AFormaldef___n_type(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -4101,22 +4281,22 @@ void mmbuilder___AFormaldef___accept_class_verifier(val_t p0, val_t p1){
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:703 */
+      /* ./syntax//mmbuilder.nit:715 */
       fra.me.REG[0] = ATTR_mmbuilder___AFormaldef____formal(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 703);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 715);
       }
       CALL_genericity___MMTypeFormalParameter___bound__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);
     } else {
-      /* ./syntax//mmbuilder.nit:705 */
+      /* ./syntax//mmbuilder.nit:717 */
       fra.me.REG[0] = CALL_parser_nodes___AFormaldef___n_type(fra.me.REG[2])(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 705);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 717);
       }
       fra.me.REG[0] = CALL_syntax_base___AType___get_stype(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      /* ./syntax//mmbuilder.nit:706 */
+      /* ./syntax//mmbuilder.nit:718 */
       REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -4132,18 +4312,18 @@ void mmbuilder___AFormaldef___accept_class_verifier(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB0)) {
         goto label1;
       }
-      /* ./syntax//mmbuilder.nit:707 */
+      /* ./syntax//mmbuilder.nit:719 */
       fra.me.REG[4] = ATTR_mmbuilder___AFormaldef____formal(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 707);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 719);
       }
       CALL_genericity___MMTypeFormalParameter___bound__eq(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[0]);
-      /* ./syntax//mmbuilder.nit:708 */
+      /* ./syntax//mmbuilder.nit:720 */
       fra.me.REG[0] = ATTR_mmbuilder___AFormaldef____formal(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 708);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 720);
       }
       fra.me.REG[0] = CALL_type_formal___MMTypeFormal___bound(fra.me.REG[0])(fra.me.REG[0]);
       REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[0],fra.me.REG[5]));
@@ -4154,7 +4334,7 @@ void mmbuilder___AFormaldef___accept_class_verifier(val_t p0, val_t p1){
       }
       REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
       if (UNTAG_Bool(REGB0)) {
-        /* ./syntax//mmbuilder.nit:709 */
+        /* ./syntax//mmbuilder.nit:721 */
         REGB0 = TAG_Int(7);
         fra.me.REG[0] = NEW_Array_array___Array___with_capacity(REGB0);
         if (!once_value_2) {
@@ -4180,7 +4360,7 @@ void mmbuilder___AFormaldef___accept_class_verifier(val_t p0, val_t p1){
         fra.me.REG[1] = ATTR_mmbuilder___AFormaldef____formal(fra.me.REG[2]);
         REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
-          nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 709);
+          nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 721);
         }
         fra.me.REG[1] = CALL_type_formal___MMTypeFormal___bound(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
@@ -4219,13 +4399,13 @@ val_t mmbuilder___ASuperclass___ancestor(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 717;
+  fra.me.line = 729;
   fra.me.meth = LOCATE_mmbuilder___ASuperclass___ancestor;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:717 */
+  /* ./syntax//mmbuilder.nit:729 */
   fra.me.REG[0] = ATTR_mmbuilder___ASuperclass____ancestor(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -4237,7 +4417,7 @@ void mmbuilder___ASuperclass___accept_class_specialization_builder(val_t p0, val
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 719;
+  fra.me.line = 731;
   fra.me.meth = LOCATE_mmbuilder___ASuperclass___accept_class_specialization_builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -4247,15 +4427,15 @@ void mmbuilder___ASuperclass___accept_class_specialization_builder(val_t p0, val
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:719 */
+  /* ./syntax//mmbuilder.nit:731 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:721 */
+  /* ./syntax//mmbuilder.nit:733 */
   CALL_SUPER_mmbuilder___ASuperclass___accept_class_specialization_builder(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:722 */
+  /* ./syntax//mmbuilder.nit:734 */
   fra.me.REG[1] = CALL_parser_nodes___ASuperclass___n_type(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[1] = CALL_syntax_base___AType___get_local_class(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* ./syntax//mmbuilder.nit:723 */
+  /* ./syntax//mmbuilder.nit:735 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -4271,11 +4451,11 @@ void mmbuilder___ASuperclass___accept_class_specialization_builder(val_t p0, val
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* ./syntax//mmbuilder.nit:724 */
+  /* ./syntax//mmbuilder.nit:736 */
   fra.me.REG[1] = NEW_MMSrcAncestor_mmbuilder___MMSrcAncestor___init(fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:725 */
+  /* ./syntax//mmbuilder.nit:737 */
   ATTR_mmbuilder___ASuperclass____ancestor(fra.me.REG[2]) = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:726 */
+  /* ./syntax//mmbuilder.nit:738 */
   fra.me.REG[3] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   CALL_inheritance___MMLocalClass___add_direct_parent(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
   label1: while(0);
@@ -4288,7 +4468,7 @@ void mmbuilder___ASuperclass___accept_class_ancestor_builder(val_t p0, val_t p1)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 729;
+  fra.me.line = 741;
   fra.me.meth = LOCATE_mmbuilder___ASuperclass___accept_class_ancestor_builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -4298,27 +4478,27 @@ void mmbuilder___ASuperclass___accept_class_ancestor_builder(val_t p0, val_t p1)
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:729 */
+  /* ./syntax//mmbuilder.nit:741 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:731 */
+  /* ./syntax//mmbuilder.nit:743 */
   CALL_SUPER_mmbuilder___ASuperclass___accept_class_ancestor_builder(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:732 */
+  /* ./syntax//mmbuilder.nit:744 */
   fra.me.REG[1] = ATTR_mmbuilder___ASuperclass____ancestor(fra.me.REG[2]);
   fra.me.REG[0] = CALL_parser_nodes___ASuperclass___n_type(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[0] = CALL_syntax_base___AType___get_unchecked_stype(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 732);
+    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 744);
   }
   CALL_static_type___MMAncestor___stype__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./syntax//mmbuilder.nit:733 */
+  /* ./syntax//mmbuilder.nit:745 */
   fra.me.REG[2] = ATTR_mmbuilder___ASuperclass____ancestor(fra.me.REG[2]);
   fra.me.REG[3] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[3] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 733);
+    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 745);
   }
   CALL_static_type___MMAncestor___inheriter__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   stack_frame_head = fra.me.prev;
@@ -4329,7 +4509,7 @@ void mmbuilder___ASuperclass___accept_class_verifier(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 736;
+  fra.me.line = 748;
   fra.me.meth = LOCATE_mmbuilder___ASuperclass___accept_class_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -4339,12 +4519,12 @@ void mmbuilder___ASuperclass___accept_class_verifier(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:736 */
+  /* ./syntax//mmbuilder.nit:748 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:738 */
+  /* ./syntax//mmbuilder.nit:750 */
   CALL_SUPER_mmbuilder___ASuperclass___accept_class_verifier(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:739 */
+  /* ./syntax//mmbuilder.nit:751 */
   fra.me.REG[2] = CALL_parser_nodes___ASuperclass___n_type(fra.me.REG[2])(fra.me.REG[2]);
   CALL_syntax_base___AType___check_conform(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   stack_frame_head = fra.me.prev;
@@ -4359,7 +4539,7 @@ void mmbuilder___APropdef___process_and_check(val_t p0, val_t p1, val_t p2, val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 744;
+  fra.me.line = 756;
   fra.me.meth = LOCATE_mmbuilder___APropdef___process_and_check;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -4372,7 +4552,7 @@ void mmbuilder___APropdef___process_and_check(val_t p0, val_t p1, val_t p2, val_
   fra.me.REG[2] = p2;
   REGB0 = p3;
   REGB1 = p4;
-  /* ./syntax//mmbuilder.nit:752 */
+  /* ./syntax//mmbuilder.nit:764 */
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalProperty___global(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = CALL_abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[3])(fra.me.REG[3]);
   REGB2 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[2]));
@@ -4382,10 +4562,10 @@ void mmbuilder___APropdef___process_and_check(val_t p0, val_t p1, val_t p2, val_
     REGB2 = REGB3;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./syntax//mmbuilder.nit:753 */
+    /* ./syntax//mmbuilder.nit:765 */
     CALL_mmbuilder___APropdef___do_and_check_intro(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], REGB0, REGB1);
   } else {
-    /* ./syntax//mmbuilder.nit:755 */
+    /* ./syntax//mmbuilder.nit:767 */
     CALL_mmbuilder___APropdef___do_and_check_redef(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], REGB0, REGB1);
   }
   stack_frame_head = fra.me.prev;
@@ -4407,16 +4587,19 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
         static val_t once_value_7; /* Once value */
         static val_t once_value_8; /* Once value */
         static val_t once_value_9; /* Once value */
-        static val_t once_value_10; /* Once value */
-        static val_t once_value_11; /* Once value */
-        static val_t once_value_12; /* Once value */
-          static val_t once_value_13; /* Once value */
-          static val_t once_value_14; /* Once value */
-          static val_t once_value_15; /* Once value */
-        static val_t once_value_16; /* Once value */
+          static val_t once_value_10; /* Once value */
+          static val_t once_value_11; /* Once value */
+          static val_t once_value_12; /* Once value */
+        static val_t once_value_13; /* Once value */
+        static val_t once_value_14; /* Once value */
+        static val_t once_value_15; /* Once value */
+          static val_t once_value_16; /* Once value */
+          static val_t once_value_17; /* Once value */
+          static val_t once_value_18; /* Once value */
+        static val_t once_value_19; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 759;
+  fra.me.line = 771;
   fra.me.meth = LOCATE_mmbuilder___APropdef___do_and_check_intro;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -4432,29 +4615,29 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
   fra.me.REG[2] = p2;
   REGB0 = p3;
   REGB1 = p4;
-  /* ./syntax//mmbuilder.nit:762 */
+  /* ./syntax//mmbuilder.nit:774 */
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalProperty___global(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:763 */
+  /* ./syntax//mmbuilder.nit:775 */
   fra.me.REG[4] = CALL_abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[4])(fra.me.REG[4]);
-  /* ./syntax//mmbuilder.nit:764 */
+  /* ./syntax//mmbuilder.nit:776 */
   fra.me.REG[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[5] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[5])(fra.me.REG[5]);
   REGB2 = CALL_abstractmetamodel___MMGlobalClass___visibility_level(fra.me.REG[5])(fra.me.REG[5]);
   REGB3 = TAG_Int(3);
   /* ./../lib/standard//kernel.nit:213 */
   REGB3 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB3));
-  /* ./syntax//mmbuilder.nit:764 */
+  /* ./syntax//mmbuilder.nit:776 */
   if (UNTAG_Bool(REGB3)) {
-    /* ./syntax//mmbuilder.nit:766 */
+    /* ./syntax//mmbuilder.nit:778 */
     REGB3 = TAG_Int(3);
     REGB1 = REGB3;
   }
-  /* ./syntax//mmbuilder.nit:768 */
+  /* ./syntax//mmbuilder.nit:780 */
   CALL_abstractmetamodel___MMGlobalProperty___visibility_level__eq(fra.me.REG[3])(fra.me.REG[3], REGB1);
-  /* ./syntax//mmbuilder.nit:769 */
+  /* ./syntax//mmbuilder.nit:781 */
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:770 */
+    /* ./syntax//mmbuilder.nit:782 */
     REGB0 = TAG_Int(5);
     fra.me.REG[5] = NEW_Array_array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -4492,13 +4675,13 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
     fra.me.REG[5] = CALL_string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
     CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
   }
-  /* ./syntax//mmbuilder.nit:772 */
+  /* ./syntax//mmbuilder.nit:784 */
   REGB0 = CALL_abstractmetamodel___MMGlobalProperty___is_attribute(fra.me.REG[3])(fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:773 */
+    /* ./syntax//mmbuilder.nit:785 */
     REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_interface(fra.me.REG[4])(fra.me.REG[4]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:774 */
+      /* ./syntax//mmbuilder.nit:786 */
       REGB0 = TAG_Int(5);
       fra.me.REG[5] = NEW_Array_array___Array___with_capacity(REGB0);
       if (!once_value_4) {
@@ -4536,10 +4719,10 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
       fra.me.REG[5] = CALL_string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
       CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
     } else {
-      /* ./syntax//mmbuilder.nit:775 */
+      /* ./syntax//mmbuilder.nit:787 */
       REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[4])(fra.me.REG[4]);
       if (UNTAG_Bool(REGB0)) {
-        /* ./syntax//mmbuilder.nit:776 */
+        /* ./syntax//mmbuilder.nit:788 */
         REGB0 = TAG_Int(5);
         fra.me.REG[5] = NEW_Array_array___Array___with_capacity(REGB0);
         if (!once_value_7) {
@@ -4576,89 +4759,131 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
         CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
         fra.me.REG[5] = CALL_string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
         CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
+      } else {
+        /* ./syntax//mmbuilder.nit:789 */
+        REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_extern(fra.me.REG[4])(fra.me.REG[4]);
+        if (UNTAG_Bool(REGB0)) {
+          /* ./syntax//mmbuilder.nit:790 */
+          REGB0 = TAG_Int(5);
+          fra.me.REG[5] = NEW_Array_array___Array___with_capacity(REGB0);
+          if (!once_value_10) {
+            fra.me.REG[6] = BOX_NativeString("Error: Attempt to define attribute ");
+            REGB0 = TAG_Int(35);
+            fra.me.REG[6] = NEW_String_string___String___with_native(fra.me.REG[6], REGB0);
+            once_value_10 = fra.me.REG[6];
+            register_static_object(&once_value_10);
+          } else fra.me.REG[6] = once_value_10;
+          fra.me.REG[6] = fra.me.REG[6];
+          CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
+          fra.me.REG[6] = CALL_string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
+          CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
+          if (!once_value_11) {
+            fra.me.REG[6] = BOX_NativeString(" in the extern class ");
+            REGB0 = TAG_Int(21);
+            fra.me.REG[6] = NEW_String_string___String___with_native(fra.me.REG[6], REGB0);
+            once_value_11 = fra.me.REG[6];
+            register_static_object(&once_value_11);
+          } else fra.me.REG[6] = once_value_11;
+          fra.me.REG[6] = fra.me.REG[6];
+          CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
+          fra.me.REG[6] = CALL_abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[2])(fra.me.REG[2]);
+          fra.me.REG[6] = CALL_string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
+          CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
+          if (!once_value_12) {
+            fra.me.REG[6] = BOX_NativeString(".");
+            REGB0 = TAG_Int(1);
+            fra.me.REG[6] = NEW_String_string___String___with_native(fra.me.REG[6], REGB0);
+            once_value_12 = fra.me.REG[6];
+            register_static_object(&once_value_12);
+          } else fra.me.REG[6] = once_value_12;
+          fra.me.REG[6] = fra.me.REG[6];
+          CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
+          fra.me.REG[5] = CALL_string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
+          CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
+        }
       }
     }
   } else {
-    /* ./syntax//mmbuilder.nit:778 */
+    /* ./syntax//mmbuilder.nit:792 */
     REGB0 = CALL_abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[3])(fra.me.REG[3]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:779 */
+      /* ./syntax//mmbuilder.nit:793 */
       REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_interface(fra.me.REG[4])(fra.me.REG[4]);
       if (UNTAG_Bool(REGB0)) {
-        /* ./syntax//mmbuilder.nit:780 */
+        /* ./syntax//mmbuilder.nit:794 */
         REGB0 = TAG_Int(5);
         fra.me.REG[5] = NEW_Array_array___Array___with_capacity(REGB0);
-        if (!once_value_10) {
+        if (!once_value_13) {
           fra.me.REG[6] = BOX_NativeString("Error: Attempt to define a constructor ");
           REGB0 = TAG_Int(39);
           fra.me.REG[6] = NEW_String_string___String___with_native(fra.me.REG[6], REGB0);
-          once_value_10 = fra.me.REG[6];
-          register_static_object(&once_value_10);
-        } else fra.me.REG[6] = once_value_10;
+          once_value_13 = fra.me.REG[6];
+          register_static_object(&once_value_13);
+        } else fra.me.REG[6] = once_value_13;
         fra.me.REG[6] = fra.me.REG[6];
         CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
         fra.me.REG[6] = CALL_string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
         CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
-        if (!once_value_11) {
+        if (!once_value_14) {
           fra.me.REG[6] = BOX_NativeString(" in the class ");
           REGB0 = TAG_Int(14);
           fra.me.REG[6] = NEW_String_string___String___with_native(fra.me.REG[6], REGB0);
-          once_value_11 = fra.me.REG[6];
-          register_static_object(&once_value_11);
-        } else fra.me.REG[6] = once_value_11;
+          once_value_14 = fra.me.REG[6];
+          register_static_object(&once_value_14);
+        } else fra.me.REG[6] = once_value_14;
         fra.me.REG[6] = fra.me.REG[6];
         CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
         fra.me.REG[6] = CALL_abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[2])(fra.me.REG[2]);
         fra.me.REG[6] = CALL_string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
         CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
-        if (!once_value_12) {
+        if (!once_value_15) {
           fra.me.REG[6] = BOX_NativeString(".");
           REGB0 = TAG_Int(1);
           fra.me.REG[6] = NEW_String_string___String___with_native(fra.me.REG[6], REGB0);
-          once_value_12 = fra.me.REG[6];
-          register_static_object(&once_value_12);
-        } else fra.me.REG[6] = once_value_12;
+          once_value_15 = fra.me.REG[6];
+          register_static_object(&once_value_15);
+        } else fra.me.REG[6] = once_value_15;
         fra.me.REG[6] = fra.me.REG[6];
         CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
         fra.me.REG[5] = CALL_string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
         CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
       } else {
-        /* ./syntax//mmbuilder.nit:781 */
+        /* ./syntax//mmbuilder.nit:795 */
         REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[4])(fra.me.REG[4]);
         if (UNTAG_Bool(REGB0)) {
-          /* ./syntax//mmbuilder.nit:782 */
+          /* ./syntax//mmbuilder.nit:796 */
           REGB0 = TAG_Int(5);
           fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB0);
-          if (!once_value_13) {
+          if (!once_value_16) {
             fra.me.REG[5] = BOX_NativeString("Error: Attempt to define a constructor ");
             REGB0 = TAG_Int(39);
             fra.me.REG[5] = NEW_String_string___String___with_native(fra.me.REG[5], REGB0);
-            once_value_13 = fra.me.REG[5];
-            register_static_object(&once_value_13);
-          } else fra.me.REG[5] = once_value_13;
+            once_value_16 = fra.me.REG[5];
+            register_static_object(&once_value_16);
+          } else fra.me.REG[5] = once_value_16;
           fra.me.REG[5] = fra.me.REG[5];
           CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
           fra.me.REG[5] = CALL_string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
           CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
-          if (!once_value_14) {
+          if (!once_value_17) {
             fra.me.REG[5] = BOX_NativeString(" in the enum ");
             REGB0 = TAG_Int(13);
             fra.me.REG[5] = NEW_String_string___String___with_native(fra.me.REG[5], REGB0);
-            once_value_14 = fra.me.REG[5];
-            register_static_object(&once_value_14);
-          } else fra.me.REG[5] = once_value_14;
+            once_value_17 = fra.me.REG[5];
+            register_static_object(&once_value_17);
+          } else fra.me.REG[5] = once_value_17;
           fra.me.REG[5] = fra.me.REG[5];
           CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
           fra.me.REG[5] = CALL_abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[2])(fra.me.REG[2]);
           fra.me.REG[5] = CALL_string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
           CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
-          if (!once_value_15) {
+          if (!once_value_18) {
             fra.me.REG[5] = BOX_NativeString(".");
             REGB0 = TAG_Int(1);
             fra.me.REG[5] = NEW_String_string___String___with_native(fra.me.REG[5], REGB0);
-            once_value_15 = fra.me.REG[5];
-            register_static_object(&once_value_15);
-          } else fra.me.REG[5] = once_value_15;
+            once_value_18 = fra.me.REG[5];
+            register_static_object(&once_value_18);
+          } else fra.me.REG[5] = once_value_18;
           fra.me.REG[5] = fra.me.REG[5];
           CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
           fra.me.REG[4] = CALL_string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
@@ -4667,7 +4892,7 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
       }
     }
   }
-  /* ./syntax//mmbuilder.nit:785 */
+  /* ./syntax//mmbuilder.nit:801 */
   fra.me.REG[4] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -4682,17 +4907,17 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:786 */
+    /* ./syntax//mmbuilder.nit:802 */
     REGB0 = CALL_abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[3])(fra.me.REG[3]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:787 */
+      /* ./syntax//mmbuilder.nit:803 */
       fra.me.REG[3] = CALL_abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[2])(fra.me.REG[2]);
       fra.me.REG[4] = CALL_abstractmetamodel___MMLocalProperty___name(fra.me.REG[2])(fra.me.REG[2]);
       fra.me.REG[4] = CALL_abstractmetamodel___MMLocalClass___super_methods_named(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-      /* ./syntax//mmbuilder.nit:788 */
+      /* ./syntax//mmbuilder.nit:804 */
       CALL_mmbuilder___APropdef___inherit_signature(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[4]);
     }
-    /* ./syntax//mmbuilder.nit:790 */
+    /* ./syntax//mmbuilder.nit:806 */
     fra.me.REG[4] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -4716,33 +4941,33 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
     }
     if (UNTAG_Bool(REGB0)) {
     } else {
-      /* ./syntax//mmbuilder.nit:792 */
+      /* ./syntax//mmbuilder.nit:808 */
       fra.me.REG[4] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[4] = CALL_mmbuilder___SignatureBuilder___untyped_params(fra.me.REG[4])(fra.me.REG[4]);
       REGB0 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[4])(fra.me.REG[4]);
       REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
       if (UNTAG_Bool(REGB0)) {
-        /* ./syntax//mmbuilder.nit:793 */
+        /* ./syntax//mmbuilder.nit:809 */
         fra.me.REG[4] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[4] = CALL_mmbuilder___SignatureBuilder___untyped_params(fra.me.REG[4])(fra.me.REG[4]);
         fra.me.REG[4] = CALL_abstract_collection___Collection___first(fra.me.REG[4])(fra.me.REG[4]);
-        if (!once_value_16) {
+        if (!once_value_19) {
           fra.me.REG[0] = BOX_NativeString("Error: Untyped parameter.");
           REGB0 = TAG_Int(25);
           fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB0);
-          once_value_16 = fra.me.REG[0];
-          register_static_object(&once_value_16);
-        } else fra.me.REG[0] = once_value_16;
+          once_value_19 = fra.me.REG[0];
+          register_static_object(&once_value_19);
+        } else fra.me.REG[0] = once_value_19;
         fra.me.REG[0] = fra.me.REG[0];
         CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], fra.me.REG[0]);
       } else {
-        /* ./syntax//mmbuilder.nit:795 */
+        /* ./syntax//mmbuilder.nit:811 */
         fra.me.REG[0] = NEW_Array_array___Array___init();
         fra.me.REG[4] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[4] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[4])(fra.me.REG[4]);
         fra.me.REG[4] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[0], NIT_NULL, fra.me.REG[4]);
         CALL_static_type___MMLocalProperty___signature__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
-        /* ./syntax//mmbuilder.nit:796 */
+        /* ./syntax//mmbuilder.nit:812 */
         fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[1] = CALL_mmbuilder___SignatureBuilder___closure_decls(fra.me.REG[1])(fra.me.REG[1]);
         /* ./../lib/standard//collection//array.nit:234 */
@@ -4776,11 +5001,11 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
             }
             /* ./../lib/standard//collection//array.nit:654 */
             fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
-            /* ./syntax//mmbuilder.nit:797 */
+            /* ./syntax//mmbuilder.nit:813 */
             fra.me.REG[3] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[2])(fra.me.REG[2]);
             REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
             if (UNTAG_Bool(REGB1)) {
-              nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 797);
+              nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 813);
             }
             fra.me.REG[3] = CALL_static_type___MMSignature___closures(fra.me.REG[3])(fra.me.REG[3]);
             fra.me.REG[0] = CALL_syntax_base___AClosureDecl___variable(fra.me.REG[0])(fra.me.REG[0]);
@@ -4794,10 +5019,10 @@ void mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_t p2, val
             REGB0 = REGB1;
           } else {
             /* ./../lib/standard//collection//array.nit:237 */
-            goto label17;
+            goto label20;
           }
         }
-        label17: while(0);
+        label20: while(0);
       }
     }
   }
@@ -4814,7 +5039,7 @@ void mmbuilder___APropdef___inherit_signature(val_t p0, val_t p1, val_t p2, val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 803;
+  fra.me.line = 819;
   fra.me.meth = LOCATE_mmbuilder___APropdef___inherit_signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
@@ -4833,7 +5058,7 @@ void mmbuilder___APropdef___inherit_signature(val_t p0, val_t p1, val_t p2, val_
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
-  /* ./syntax//mmbuilder.nit:805 */
+  /* ./syntax//mmbuilder.nit:821 */
   fra.me.REG[0] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[2])(fra.me.REG[2]);
   /* ./../lib/standard//collection//array.nit:234 */
   REGB0 = TAG_Int(0);
@@ -4866,16 +5091,16 @@ void mmbuilder___APropdef___inherit_signature(val_t p0, val_t p1, val_t p2, val_
       }
       /* ./../lib/standard//collection//array.nit:654 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
-      /* ./syntax//mmbuilder.nit:807 */
+      /* ./syntax//mmbuilder.nit:823 */
       fra.me.REG[5] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[5])(fra.me.REG[5]);
       fra.me.REG[6] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[6] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[6])(fra.me.REG[6]);
       REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 807);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 823);
       }
       fra.me.REG[6] = CALL_static_type___MMSignature___adaptation_to(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
-      /* ./syntax//mmbuilder.nit:809 */
+      /* ./syntax//mmbuilder.nit:825 */
       REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -4889,7 +5114,7 @@ void mmbuilder___APropdef___inherit_signature(val_t p0, val_t p1, val_t p2, val_
         }
       }
       if (UNTAG_Bool(REGB1)) {
-        /* ./syntax//mmbuilder.nit:810 */
+        /* ./syntax//mmbuilder.nit:826 */
         fra.me.REG[5] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[5] = CALL_mmbuilder___SignatureBuilder___params(fra.me.REG[5])(fra.me.REG[5]);
         /* ./../lib/standard//collection//array.nit:23 */
@@ -4899,22 +5124,22 @@ void mmbuilder___APropdef___inherit_signature(val_t p0, val_t p1, val_t p2, val_
           nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
         }
         REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[5]);
-        /* ./syntax//mmbuilder.nit:810 */
+        /* ./syntax//mmbuilder.nit:826 */
         REGB2 = CALL_static_type___MMSignature___arity(fra.me.REG[6])(fra.me.REG[6]);
         REGB3 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB2));
         if (UNTAG_Bool(REGB3)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB2 = TAG_Bool((REGB1)==(REGB2));
-          /* ./syntax//mmbuilder.nit:810 */
+          /* ./syntax//mmbuilder.nit:826 */
           REGB3 = REGB2;
         }
         REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
         if (UNTAG_Bool(REGB3)) {
-          /* ./syntax//mmbuilder.nit:811 */
+          /* ./syntax//mmbuilder.nit:827 */
           goto label1;
         }
-        /* ./syntax//mmbuilder.nit:813 */
+        /* ./syntax//mmbuilder.nit:829 */
         fra.me.REG[5] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[5] = CALL_mmbuilder___SignatureBuilder___params(fra.me.REG[5])(fra.me.REG[5]);
         /* ./../lib/standard//collection//array.nit:234 */
@@ -4948,12 +5173,12 @@ void mmbuilder___APropdef___inherit_signature(val_t p0, val_t p1, val_t p2, val_
             }
             /* ./../lib/standard//collection//array.nit:654 */
             fra.me.REG[8] = ((Nit_NativeArray)fra.me.REG[7])->val[UNTAG_Int(REGB3)];
-            /* ./syntax//mmbuilder.nit:814 */
+            /* ./syntax//mmbuilder.nit:830 */
             REGB2 = CALL_syntax_base___AParam___position(fra.me.REG[8])(fra.me.REG[8]);
             fra.me.REG[9] = CALL_static_type___MMSignature_____bra(fra.me.REG[6])(fra.me.REG[6], REGB2);
-            /* ./syntax//mmbuilder.nit:815 */
+            /* ./syntax//mmbuilder.nit:831 */
             CALL_mmbuilder___AParam___stype__eq(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[9]);
-            /* ./syntax//mmbuilder.nit:816 */
+            /* ./syntax//mmbuilder.nit:832 */
             REGB2 = CALL_syntax_base___AParam___position(fra.me.REG[8])(fra.me.REG[8]);
             REGB1 = CALL_vararg___MMSignature___vararg_rank(fra.me.REG[6])(fra.me.REG[6]);
             REGB4 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB1));
@@ -4961,15 +5186,15 @@ void mmbuilder___APropdef___inherit_signature(val_t p0, val_t p1, val_t p2, val_
             } else {
               /* ./../lib/standard//kernel.nit:207 */
               REGB1 = TAG_Bool((REGB2)==(REGB1));
-              /* ./syntax//mmbuilder.nit:816 */
+              /* ./syntax//mmbuilder.nit:832 */
               REGB4 = REGB1;
             }
             if (UNTAG_Bool(REGB4)) {
-              /* ./syntax//mmbuilder.nit:817 */
+              /* ./syntax//mmbuilder.nit:833 */
               fra.me.REG[10] = CALL_syntax_base___AbsSyntaxVisitor___type_array(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[9]);
               fra.me.REG[9] = fra.me.REG[10];
             }
-            /* ./syntax//mmbuilder.nit:819 */
+            /* ./syntax//mmbuilder.nit:835 */
             fra.me.REG[8] = CALL_syntax_base___AParam___variable(fra.me.REG[8])(fra.me.REG[8]);
             CALL_syntax_base___Variable___stype__eq(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[9]);
             /* ./../lib/standard//collection//array.nit:239 */
@@ -4984,9 +5209,9 @@ void mmbuilder___APropdef___inherit_signature(val_t p0, val_t p1, val_t p2, val_
           }
         }
         label2: while(0);
-        /* ./syntax//mmbuilder.nit:822 */
+        /* ./syntax//mmbuilder.nit:838 */
         fra.me.REG[0] = fra.me.REG[6];
-        /* ./syntax//mmbuilder.nit:823 */
+        /* ./syntax//mmbuilder.nit:839 */
         CALL_static_type___MMLocalProperty___signature__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
       }
       /* ./../lib/standard//collection//array.nit:239 */
@@ -5084,7 +5309,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
     static val_t once_value_70; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 828;
+  fra.me.line = 844;
   fra.me.meth = LOCATE_mmbuilder___APropdef___do_and_check_redef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 14;
@@ -5107,14 +5332,14 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
   fra.me.REG[2] = p2;
   REGB0 = p3;
   REGB1 = p4;
-  /* ./syntax//mmbuilder.nit:831 */
+  /* ./syntax//mmbuilder.nit:847 */
   REGB2 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
-  /* ./syntax//mmbuilder.nit:832 */
+  /* ./syntax//mmbuilder.nit:848 */
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalProperty___global(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:834 */
+  /* ./syntax//mmbuilder.nit:850 */
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:835 */
+    /* ./syntax//mmbuilder.nit:851 */
     REGB0 = TAG_Int(5);
     fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -5151,10 +5376,10 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
     fra.me.REG[4] = CALL_string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
     CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
-    /* ./syntax//mmbuilder.nit:836 */
+    /* ./syntax//mmbuilder.nit:852 */
     goto label4;
   }
-  /* ./syntax//mmbuilder.nit:838 */
+  /* ./syntax//mmbuilder.nit:854 */
   REGB0 = CALL_abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[3])(fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB2));
@@ -5163,7 +5388,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
     REGB0 = REGB3;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:839 */
+    /* ./syntax//mmbuilder.nit:855 */
     REGB0 = TAG_Int(5);
     fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB0);
     if (!once_value_5) {
@@ -5201,7 +5426,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
     fra.me.REG[4] = CALL_string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
     CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
   } else {
-    /* ./syntax//mmbuilder.nit:840 */
+    /* ./syntax//mmbuilder.nit:856 */
     REGB0 = CALL_abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[3])(fra.me.REG[3]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
@@ -5210,7 +5435,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
       REGB2 = REGB0;
     }
     if (UNTAG_Bool(REGB2)) {
-      /* ./syntax//mmbuilder.nit:841 */
+      /* ./syntax//mmbuilder.nit:857 */
       REGB2 = TAG_Int(5);
       fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB2);
       if (!once_value_8) {
@@ -5249,9 +5474,9 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
       CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
     }
   }
-  /* ./syntax//mmbuilder.nit:844 */
+  /* ./syntax//mmbuilder.nit:860 */
   fra.me.REG[4] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:846 */
+  /* ./syntax//mmbuilder.nit:862 */
   fra.me.REG[5] = CALL_abstractmetamodel___MMLocalProperty___prhe(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[5] = CALL_partial_order___PartialOrderElement___direct_greaters(fra.me.REG[5])(fra.me.REG[5]);
   /* ./../lib/standard//collection//array.nit:234 */
@@ -5285,20 +5510,20 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
       }
       /* ./../lib/standard//collection//array.nit:654 */
       fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB2)];
-      /* ./syntax//mmbuilder.nit:847 */
+      /* ./syntax//mmbuilder.nit:863 */
       fra.me.REG[8] = CALL_abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[7])(fra.me.REG[7]);
       fra.me.REG[9] = CALL_abstractmetamodel___MMLocalProperty___global(fra.me.REG[2])(fra.me.REG[2]);
       fra.me.REG[9] = CALL_abstractmetamodel___MMLocalClass_____bra(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[9]);
-      /* ./syntax//mmbuilder.nit:848 */
+      /* ./syntax//mmbuilder.nit:864 */
       fra.me.REG[7] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[7])(fra.me.REG[7]);
       fra.me.REG[8] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[8] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[8])(fra.me.REG[8]);
       REGB0 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 848);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 864);
       }
       fra.me.REG[8] = CALL_static_type___MMSignature___adaptation_to(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
-      /* ./syntax//mmbuilder.nit:850 */
+      /* ./syntax//mmbuilder.nit:866 */
       REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -5312,7 +5537,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
         }
       }
       if (UNTAG_Bool(REGB0)) {
-        /* ./syntax//mmbuilder.nit:852 */
+        /* ./syntax//mmbuilder.nit:868 */
         fra.me.REG[7] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[7] = CALL_mmbuilder___SignatureBuilder___params(fra.me.REG[7])(fra.me.REG[7]);
         /* ./../lib/standard//collection//array.nit:23 */
@@ -5322,19 +5547,19 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
           nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
         }
         REGB0 = ATTR_array___AbstractArrayRead____length(fra.me.REG[7]);
-        /* ./syntax//mmbuilder.nit:852 */
+        /* ./syntax//mmbuilder.nit:868 */
         REGB3 = CALL_static_type___MMSignature___arity(fra.me.REG[8])(fra.me.REG[8]);
         REGB4 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB3));
         if (UNTAG_Bool(REGB4)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB3 = TAG_Bool((REGB0)==(REGB3));
-          /* ./syntax//mmbuilder.nit:852 */
+          /* ./syntax//mmbuilder.nit:868 */
           REGB4 = REGB3;
         }
         REGB4 = TAG_Bool(!UNTAG_Bool(REGB4));
         if (UNTAG_Bool(REGB4)) {
-          /* ./syntax//mmbuilder.nit:853 */
+          /* ./syntax//mmbuilder.nit:869 */
           REGB4 = TAG_Int(11);
           fra.me.REG[7] = NEW_Array_array___Array___with_capacity(REGB4);
           if (!once_value_11) {
@@ -5406,10 +5631,10 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
           CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[10]);
           fra.me.REG[7] = CALL_string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
           CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[7]);
-          /* ./syntax//mmbuilder.nit:854 */
+          /* ./syntax//mmbuilder.nit:870 */
           goto label4;
         }
-        /* ./syntax//mmbuilder.nit:856 */
+        /* ./syntax//mmbuilder.nit:872 */
         fra.me.REG[7] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[7] = CALL_mmbuilder___SignatureBuilder___closure_decls(fra.me.REG[7])(fra.me.REG[7]);
         /* ./../lib/standard//collection//array.nit:23 */
@@ -5419,7 +5644,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
           nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
         }
         REGB4 = ATTR_array___AbstractArrayRead____length(fra.me.REG[7]);
-        /* ./syntax//mmbuilder.nit:856 */
+        /* ./syntax//mmbuilder.nit:872 */
         fra.me.REG[7] = CALL_static_type___MMSignature___closures(fra.me.REG[8])(fra.me.REG[8]);
         /* ./../lib/standard//collection//array.nit:23 */
         REGB3 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[7])!=NIT_NULL);
@@ -5428,18 +5653,18 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
           nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
         }
         REGB3 = ATTR_array___AbstractArrayRead____length(fra.me.REG[7]);
-        /* ./syntax//mmbuilder.nit:856 */
+        /* ./syntax//mmbuilder.nit:872 */
         REGB0 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB3));
         if (UNTAG_Bool(REGB0)) {
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB3 = TAG_Bool((REGB4)==(REGB3));
-          /* ./syntax//mmbuilder.nit:856 */
+          /* ./syntax//mmbuilder.nit:872 */
           REGB0 = REGB3;
         }
         REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
         if (UNTAG_Bool(REGB0)) {
-          /* ./syntax//mmbuilder.nit:857 */
+          /* ./syntax//mmbuilder.nit:873 */
           REGB0 = TAG_Int(11);
           fra.me.REG[7] = NEW_Array_array___Array___with_capacity(REGB0);
           if (!once_value_17) {
@@ -5511,10 +5736,10 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
           CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[10]);
           fra.me.REG[7] = CALL_string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
           CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[7]);
-          /* ./syntax//mmbuilder.nit:858 */
+          /* ./syntax//mmbuilder.nit:874 */
           goto label4;
         }
-        /* ./syntax//mmbuilder.nit:860 */
+        /* ./syntax//mmbuilder.nit:876 */
         fra.me.REG[7] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[7] = CALL_mmbuilder___SignatureBuilder___params(fra.me.REG[7])(fra.me.REG[7]);
         /* ./../lib/standard//collection//array.nit:234 */
@@ -5548,12 +5773,12 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
             }
             /* ./../lib/standard//collection//array.nit:654 */
             fra.me.REG[11] = ((Nit_NativeArray)fra.me.REG[10])->val[UNTAG_Int(REGB0)];
-            /* ./syntax//mmbuilder.nit:861 */
+            /* ./syntax//mmbuilder.nit:877 */
             REGB3 = CALL_syntax_base___AParam___position(fra.me.REG[11])(fra.me.REG[11]);
             fra.me.REG[12] = CALL_static_type___MMSignature_____bra(fra.me.REG[8])(fra.me.REG[8], REGB3);
-            /* ./syntax//mmbuilder.nit:862 */
+            /* ./syntax//mmbuilder.nit:878 */
             CALL_mmbuilder___AParam___stype__eq(fra.me.REG[11])(fra.me.REG[11], fra.me.REG[12]);
-            /* ./syntax//mmbuilder.nit:863 */
+            /* ./syntax//mmbuilder.nit:879 */
             REGB3 = CALL_syntax_base___AParam___position(fra.me.REG[11])(fra.me.REG[11]);
             REGB4 = CALL_vararg___MMSignature___vararg_rank(fra.me.REG[8])(fra.me.REG[8]);
             REGB5 = TAG_Bool(IS_EQUAL_OO(REGB3,REGB4));
@@ -5561,15 +5786,15 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
             } else {
               /* ./../lib/standard//kernel.nit:207 */
               REGB4 = TAG_Bool((REGB3)==(REGB4));
-              /* ./syntax//mmbuilder.nit:863 */
+              /* ./syntax//mmbuilder.nit:879 */
               REGB5 = REGB4;
             }
             if (UNTAG_Bool(REGB5)) {
-              /* ./syntax//mmbuilder.nit:864 */
+              /* ./syntax//mmbuilder.nit:880 */
               fra.me.REG[13] = CALL_syntax_base___AbsSyntaxVisitor___type_array(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[12]);
               fra.me.REG[12] = fra.me.REG[13];
             }
-            /* ./syntax//mmbuilder.nit:866 */
+            /* ./syntax//mmbuilder.nit:882 */
             fra.me.REG[11] = CALL_syntax_base___AParam___variable(fra.me.REG[11])(fra.me.REG[11]);
             CALL_syntax_base___Variable___stype__eq(fra.me.REG[11])(fra.me.REG[11], fra.me.REG[12]);
             /* ./../lib/standard//collection//array.nit:239 */
@@ -5584,18 +5809,18 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
           }
         }
         label23: while(0);
-        /* ./syntax//mmbuilder.nit:868 */
+        /* ./syntax//mmbuilder.nit:884 */
         fra.me.REG[4] = fra.me.REG[8];
-        /* ./syntax//mmbuilder.nit:869 */
+        /* ./syntax//mmbuilder.nit:885 */
         CALL_static_type___MMLocalProperty___signature__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
       }
-      /* ./syntax//mmbuilder.nit:873 */
+      /* ./syntax//mmbuilder.nit:889 */
       fra.me.REG[10] = CALL_syntax_base___AbsSyntaxVisitor___tc(fra.me.REG[1])(fra.me.REG[1]);
       REGB0 = CALL_mmloader___ToolContext___error_count(fra.me.REG[10])(fra.me.REG[10]);
-      /* ./syntax//mmbuilder.nit:881 */
+      /* ./syntax//mmbuilder.nit:897 */
       REGB5 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB5)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 881);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 897);
       }
       REGB5 = CALL_static_type___MMSignature___arity(fra.me.REG[4])(fra.me.REG[4]);
       REGB4 = CALL_static_type___MMSignature___arity(fra.me.REG[8])(fra.me.REG[8]);
@@ -5604,12 +5829,12 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
       } else {
         /* ./../lib/standard//kernel.nit:207 */
         REGB4 = TAG_Bool((REGB5)==(REGB4));
-        /* ./syntax//mmbuilder.nit:881 */
+        /* ./syntax//mmbuilder.nit:897 */
         REGB3 = REGB4;
       }
       REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
       if (UNTAG_Bool(REGB3)) {
-        /* ./syntax//mmbuilder.nit:882 */
+        /* ./syntax//mmbuilder.nit:898 */
         REGB3 = TAG_Int(11);
         fra.me.REG[10] = NEW_Array_array___Array___with_capacity(REGB3);
         if (!once_value_24) {
@@ -5682,11 +5907,11 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
         fra.me.REG[10] = CALL_string___Object___to_s(fra.me.REG[10])(fra.me.REG[10]);
         CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[10]);
       } else {
-        /* ./syntax//mmbuilder.nit:884 */
+        /* ./syntax//mmbuilder.nit:900 */
         REGB3 = TAG_Int(0);
         REGB4 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB4)) {
-          nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 884);
+          nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 900);
         }
         REGB4 = CALL_static_type___MMSignature___arity(fra.me.REG[4])(fra.me.REG[4]);
         /* ./../lib/standard//kernel.nit:332 */
@@ -5695,12 +5920,12 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
           REGB5 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB4));
           /* ./../lib/standard//kernel.nit:332 */
           if (UNTAG_Bool(REGB5)) {
-            /* ./syntax//mmbuilder.nit:884 */
+            /* ./syntax//mmbuilder.nit:900 */
             REGB5 = REGB3;
-            /* ./syntax//mmbuilder.nit:885 */
+            /* ./syntax//mmbuilder.nit:901 */
             REGB6 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
             if (UNTAG_Bool(REGB6)) {
-              nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 885);
+              nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 901);
             }
             fra.me.REG[10] = CALL_static_type___MMSignature_____bra(fra.me.REG[4])(fra.me.REG[4], REGB5);
             fra.me.REG[7] = CALL_static_type___MMSignature_____bra(fra.me.REG[8])(fra.me.REG[8], REGB5);
@@ -5712,7 +5937,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
             }
             REGB6 = TAG_Bool(!UNTAG_Bool(REGB6));
             if (UNTAG_Bool(REGB6)) {
-              /* ./syntax//mmbuilder.nit:886 */
+              /* ./syntax//mmbuilder.nit:902 */
               REGB6 = TAG_Int(13);
               fra.me.REG[7] = NEW_Array_array___Array___with_capacity(REGB6);
               if (!once_value_30) {
@@ -5761,7 +5986,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
               CALL_abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[10]);
               REGB6 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
               if (UNTAG_Bool(REGB6)) {
-		nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 886);
+		nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 902);
               }
               fra.me.REG[10] = CALL_static_type___MMSignature_____bra(fra.me.REG[4])(fra.me.REG[4], REGB5);
               fra.me.REG[10] = CALL_string___Object___to_s(fra.me.REG[10])(fra.me.REG[10]);
@@ -5814,15 +6039,15 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
         }
         label37: while(0);
       }
-      /* ./syntax//mmbuilder.nit:891 */
+      /* ./syntax//mmbuilder.nit:907 */
       REGB3 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 891);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 907);
       }
       fra.me.REG[7] = CALL_static_type___MMSignature___return_type(fra.me.REG[4])(fra.me.REG[4]);
-      /* ./syntax//mmbuilder.nit:892 */
+      /* ./syntax//mmbuilder.nit:908 */
       fra.me.REG[10] = CALL_static_type___MMSignature___return_type(fra.me.REG[8])(fra.me.REG[8]);
-      /* ./syntax//mmbuilder.nit:893 */
+      /* ./syntax//mmbuilder.nit:909 */
       REGB3 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
       } else {
@@ -5854,7 +6079,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
         REGB3 = REGB4;
       }
       if (UNTAG_Bool(REGB3)) {
-        /* ./syntax//mmbuilder.nit:894 */
+        /* ./syntax//mmbuilder.nit:910 */
         REGB3 = TAG_Int(9);
         fra.me.REG[12] = NEW_Array_array___Array___with_capacity(REGB3);
         if (!once_value_38) {
@@ -5915,7 +6140,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
         fra.me.REG[12] = CALL_string___Object___to_s(fra.me.REG[12])(fra.me.REG[12]);
         CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[12]);
       } else {
-        /* ./syntax//mmbuilder.nit:895 */
+        /* ./syntax//mmbuilder.nit:911 */
         REGB3 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
         if (UNTAG_Bool(REGB3)) {
         } else {
@@ -5947,7 +6172,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
           REGB3 = REGB4;
         }
         if (UNTAG_Bool(REGB3)) {
-          /* ./syntax//mmbuilder.nit:896 */
+          /* ./syntax//mmbuilder.nit:912 */
           REGB3 = TAG_Int(9);
           fra.me.REG[12] = NEW_Array_array___Array___with_capacity(REGB3);
           if (!once_value_43) {
@@ -6008,7 +6233,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
           fra.me.REG[12] = CALL_string___Object___to_s(fra.me.REG[12])(fra.me.REG[12]);
           CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[12]);
         } else {
-          /* ./syntax//mmbuilder.nit:897 */
+          /* ./syntax//mmbuilder.nit:913 */
           REGB3 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
           if (UNTAG_Bool(REGB3)) {
           } else {
@@ -6043,7 +6268,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
           if (UNTAG_Bool(REGB3)) {
             REGB3 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
             if (UNTAG_Bool(REGB3)) {
-              nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 897);
+              nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 913);
             }
             REGB3 = CALL_static_type___MMType_____l(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[10]);
             REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
@@ -6052,7 +6277,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
             REGB3 = REGB4;
           }
           if (UNTAG_Bool(REGB3)) {
-            /* ./syntax//mmbuilder.nit:898 */
+            /* ./syntax//mmbuilder.nit:914 */
             REGB3 = TAG_Int(13);
             fra.me.REG[12] = NEW_Array_array___Array___with_capacity(REGB3);
             if (!once_value_48) {
@@ -6135,10 +6360,10 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
             fra.me.REG[12] = CALL_string___Object___to_s(fra.me.REG[12])(fra.me.REG[12]);
             CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[12]);
           } else {
-            /* ./syntax//mmbuilder.nit:899 */
+            /* ./syntax//mmbuilder.nit:915 */
             REGB3 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
             if (UNTAG_Bool(REGB3)) {
-              nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 899);
+              nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 915);
             }
             REGB3 = CALL_static_type___MMSignature_____l(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[8]);
             REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
@@ -6150,7 +6375,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
               } else {
 		/* ./../lib/standard//kernel.nit:207 */
 		REGB3 = TAG_Bool((REGB0)==(REGB3));
-		/* ./syntax//mmbuilder.nit:899 */
+		/* ./syntax//mmbuilder.nit:915 */
 		REGB4 = REGB3;
               }
             } else {
@@ -6158,7 +6383,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
               REGB4 = REGB3;
             }
             if (UNTAG_Bool(REGB4)) {
-              /* ./syntax//mmbuilder.nit:901 */
+              /* ./syntax//mmbuilder.nit:917 */
               REGB4 = TAG_Int(9);
               fra.me.REG[8] = NEW_Array_array___Array___with_capacity(REGB4);
               if (!once_value_55) {
@@ -6219,7 +6444,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
               fra.me.REG[8] = CALL_string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
               CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[8]);
             } else {
-              /* ./syntax//mmbuilder.nit:902 */
+              /* ./syntax//mmbuilder.nit:918 */
               REGB4 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
               if (UNTAG_Bool(REGB4)) {
               } else {
@@ -6276,7 +6501,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
 		REGB4 = REGB3;
               }
               if (UNTAG_Bool(REGB4)) {
-		/* ./syntax//mmbuilder.nit:904 */
+		/* ./syntax//mmbuilder.nit:920 */
 		REGB4 = TAG_Int(13);
 		fra.me.REG[8] = NEW_Array_array___Array___with_capacity(REGB4);
 		if (!once_value_60) {
@@ -6375,14 +6600,14 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
     }
   }
   label67: while(0);
-  /* ./syntax//mmbuilder.nit:908 */
+  /* ./syntax//mmbuilder.nit:924 */
   REGB2 = TAG_Int(1);
   REGB4 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB2));
   if (UNTAG_Bool(REGB4)) {
   } else {
     /* ./../lib/standard//kernel.nit:207 */
     REGB2 = TAG_Bool((REGB1)==(REGB2));
-    /* ./syntax//mmbuilder.nit:908 */
+    /* ./syntax//mmbuilder.nit:924 */
     REGB4 = REGB2;
   }
   REGB4 = TAG_Bool(!UNTAG_Bool(REGB4));
@@ -6393,7 +6618,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
     } else {
       /* ./../lib/standard//kernel.nit:207 */
       REGB1 = TAG_Bool((REGB4)==(REGB1));
-      /* ./syntax//mmbuilder.nit:908 */
+      /* ./syntax//mmbuilder.nit:924 */
       REGB2 = REGB1;
     }
     REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
@@ -6402,7 +6627,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./syntax//mmbuilder.nit:909 */
+    /* ./syntax//mmbuilder.nit:925 */
     REGB2 = TAG_Int(5);
     fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB2);
     if (!once_value_68) {
@@ -6440,7 +6665,7 @@ void mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_t p2, val
     fra.me.REG[4] = CALL_string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
     CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
   }
-  /* ./syntax//mmbuilder.nit:911 */
+  /* ./syntax//mmbuilder.nit:927 */
   fra.me.REG[4] = CALL_syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = TAG_Bool(true);
   CALL_syntax_base___MMGlobalProperty___check_visibility(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1], fra.me.REG[0], fra.me.REG[4], REGB2);
@@ -6453,13 +6678,13 @@ val_t mmbuilder___AAttrPropdef___readmethod(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 916;
+  fra.me.line = 932;
   fra.me.meth = LOCATE_mmbuilder___AAttrPropdef___readmethod;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:916 */
+  /* ./syntax//mmbuilder.nit:932 */
   fra.me.REG[0] = ATTR_mmbuilder___AAttrPropdef____readmethod(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -6469,13 +6694,13 @@ val_t mmbuilder___AAttrPropdef___writemethod(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 917;
+  fra.me.line = 933;
   fra.me.meth = LOCATE_mmbuilder___AAttrPropdef___writemethod;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:917 */
+  /* ./syntax//mmbuilder.nit:933 */
   fra.me.REG[0] = ATTR_mmbuilder___AAttrPropdef____writemethod(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -6486,18 +6711,18 @@ val_t mmbuilder___AAttrPropdef___prop(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 919;
+  fra.me.line = 935;
   fra.me.meth = LOCATE_mmbuilder___AAttrPropdef___prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:919 */
+  /* ./syntax//mmbuilder.nit:935 */
   fra.me.REG[0] = ATTR_mmbuilder___AAttrPropdef____prop(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 919);
+    nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 935);
   }
   goto label1;
   label1: while(0);
@@ -6515,7 +6740,7 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
       static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 921;
+  fra.me.line = 937;
   fra.me.meth = LOCATE_mmbuilder___AAttrPropdef___accept_property_builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -6527,12 +6752,12 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:921 */
+  /* ./syntax//mmbuilder.nit:937 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:923 */
+  /* ./syntax//mmbuilder.nit:939 */
   CALL_SUPER_mmbuilder___AAttrPropdef___accept_property_builder(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:925 */
+  /* ./syntax//mmbuilder.nit:941 */
   fra.me.REG[1] = CALL_parser_nodes___AAttrPropdef___n_id(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -6548,15 +6773,15 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:926 */
+    /* ./syntax//mmbuilder.nit:942 */
     fra.me.REG[1] = CALL_parser_nodes___AAttrPropdef___n_id(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 926);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 942);
     }
     fra.me.REG[1] = CALL_syntax_base___Token___to_symbol(fra.me.REG[1])(fra.me.REG[1]);
   } else {
-    /* ./syntax//mmbuilder.nit:928 */
+    /* ./syntax//mmbuilder.nit:944 */
     if (!once_value_1) {
       fra.me.REG[0] = BOX_NativeString("@");
       REGB0 = TAG_Int(1);
@@ -6568,23 +6793,23 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
     fra.me.REG[4] = CALL_parser_nodes___AAttrPropdef___n_id2(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 928);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 944);
     }
     fra.me.REG[4] = CALL_lexer___Token___text(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[4] = CALL_string___String_____plus(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
     fra.me.REG[4] = CALL_symbol___String___to_symbol(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[1] = fra.me.REG[4];
   }
-  /* ./syntax//mmbuilder.nit:930 */
+  /* ./syntax//mmbuilder.nit:946 */
   fra.me.REG[4] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
-  /* ./syntax//mmbuilder.nit:931 */
+  /* ./syntax//mmbuilder.nit:947 */
   fra.me.REG[0] = NEW_MMSrcAttribute_syntax_base___MMSrcAttribute___init(fra.me.REG[1], fra.me.REG[4], fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:932 */
+  /* ./syntax//mmbuilder.nit:948 */
   ATTR_mmbuilder___AAttrPropdef____prop(fra.me.REG[2]) = fra.me.REG[0];
-  /* ./syntax//mmbuilder.nit:933 */
+  /* ./syntax//mmbuilder.nit:949 */
   fra.me.REG[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3], fra.me.REG[0]);
-  /* ./syntax//mmbuilder.nit:935 */
+  /* ./syntax//mmbuilder.nit:951 */
   fra.me.REG[0] = CALL_parser_nodes___AAttrPropdef___n_readable(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -6618,7 +6843,7 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:936 */
+    /* ./syntax//mmbuilder.nit:952 */
     fra.me.REG[0] = CALL_parser_nodes___AAttrPropdef___n_id(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -6634,11 +6859,11 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:937 */
+      /* ./syntax//mmbuilder.nit:953 */
       fra.me.REG[0] = CALL_parser_nodes___AAttrPropdef___n_id(fra.me.REG[2])(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 937);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 953);
       }
       fra.me.REG[0] = CALL_lexer___Token___text(fra.me.REG[0])(fra.me.REG[0]);
       REGB0 = TAG_Int(1);
@@ -6646,24 +6871,24 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
       fra.me.REG[0] = CALL_symbol___String___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[1] = fra.me.REG[0];
     } else {
-      /* ./syntax//mmbuilder.nit:939 */
+      /* ./syntax//mmbuilder.nit:955 */
       fra.me.REG[0] = CALL_parser_nodes___AAttrPropdef___n_id2(fra.me.REG[2])(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 939);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 955);
       }
       fra.me.REG[0] = CALL_syntax_base___Token___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[1] = fra.me.REG[0];
     }
-    /* ./syntax//mmbuilder.nit:941 */
+    /* ./syntax//mmbuilder.nit:957 */
     fra.me.REG[0] = NEW_MMReadImplementationMethod_syntax_base___MMReadImplementationMethod___init(fra.me.REG[1], fra.me.REG[4], fra.me.REG[2]);
-    /* ./syntax//mmbuilder.nit:942 */
+    /* ./syntax//mmbuilder.nit:958 */
     ATTR_mmbuilder___AAttrPropdef____readmethod(fra.me.REG[2]) = fra.me.REG[0];
-    /* ./syntax//mmbuilder.nit:943 */
+    /* ./syntax//mmbuilder.nit:959 */
     fra.me.REG[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
     CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3], fra.me.REG[0]);
   }
-  /* ./syntax//mmbuilder.nit:945 */
+  /* ./syntax//mmbuilder.nit:961 */
   fra.me.REG[0] = CALL_parser_nodes___AAttrPropdef___n_writable(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -6697,7 +6922,7 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:946 */
+    /* ./syntax//mmbuilder.nit:962 */
     fra.me.REG[0] = CALL_parser_nodes___AAttrPropdef___n_id(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -6713,11 +6938,11 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:947 */
+      /* ./syntax//mmbuilder.nit:963 */
       fra.me.REG[0] = CALL_parser_nodes___AAttrPropdef___n_id(fra.me.REG[2])(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 947);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 963);
       }
       fra.me.REG[0] = CALL_lexer___Token___text(fra.me.REG[0])(fra.me.REG[0]);
       REGB0 = TAG_Int(1);
@@ -6734,11 +6959,11 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
       fra.me.REG[5] = CALL_symbol___String___to_symbol(fra.me.REG[5])(fra.me.REG[5]);
       fra.me.REG[1] = fra.me.REG[5];
     } else {
-      /* ./syntax//mmbuilder.nit:949 */
+      /* ./syntax//mmbuilder.nit:965 */
       fra.me.REG[5] = CALL_parser_nodes___AAttrPropdef___n_id2(fra.me.REG[2])(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 949);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 965);
       }
       fra.me.REG[5] = CALL_lexer___Token___text(fra.me.REG[5])(fra.me.REG[5]);
       if (!once_value_3) {
@@ -6753,11 +6978,11 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t p0, val_t p1){
       fra.me.REG[0] = CALL_symbol___String___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[1] = fra.me.REG[0];
     }
-    /* ./syntax//mmbuilder.nit:951 */
+    /* ./syntax//mmbuilder.nit:967 */
     fra.me.REG[4] = NEW_MMWriteImplementationMethod_syntax_base___MMWriteImplementationMethod___init(fra.me.REG[1], fra.me.REG[4], fra.me.REG[2]);
-    /* ./syntax//mmbuilder.nit:952 */
+    /* ./syntax//mmbuilder.nit:968 */
     ATTR_mmbuilder___AAttrPropdef____writemethod(fra.me.REG[2]) = fra.me.REG[4];
-    /* ./syntax//mmbuilder.nit:953 */
+    /* ./syntax//mmbuilder.nit:969 */
     fra.me.REG[2] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
     CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[4]);
   }
@@ -6778,7 +7003,7 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
       static val_t once_value_6; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 957;
+  fra.me.line = 973;
   fra.me.meth = LOCATE_mmbuilder___AAttrPropdef___accept_property_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -6790,12 +7015,12 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:957 */
+  /* ./syntax//mmbuilder.nit:973 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:959 */
+  /* ./syntax//mmbuilder.nit:975 */
   CALL_SUPER_mmbuilder___AAttrPropdef___accept_property_verifier(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:961 */
+  /* ./syntax//mmbuilder.nit:977 */
   fra.me.REG[1] = CALL_parser_nodes___AAttrPropdef___n_type(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -6811,14 +7036,14 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:962 */
+    /* ./syntax//mmbuilder.nit:978 */
     fra.me.REG[1] = CALL_parser_nodes___AAttrPropdef___n_type(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 962);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 978);
     }
     fra.me.REG[1] = CALL_syntax_base___AType___get_stype(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-    /* ./syntax//mmbuilder.nit:963 */
+    /* ./syntax//mmbuilder.nit:979 */
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -6837,7 +7062,7 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
       goto label1;
     }
   } else {
-    /* ./syntax//mmbuilder.nit:965 */
+    /* ./syntax//mmbuilder.nit:981 */
     REGB0 = TAG_Int(5);
     fra.me.REG[0] = NEW_Array_array___Array___with_capacity(REGB0);
     if (!once_value_2) {
@@ -6876,22 +7101,22 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
     fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
     CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[0]);
-    /* ./syntax//mmbuilder.nit:966 */
+    /* ./syntax//mmbuilder.nit:982 */
     goto label1;
   }
-  /* ./syntax//mmbuilder.nit:969 */
+  /* ./syntax//mmbuilder.nit:985 */
   fra.me.REG[0] = CALL_syntax_base___AAttrPropdef___prop(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:970 */
+  /* ./syntax//mmbuilder.nit:986 */
   fra.me.REG[4] = NEW_Array_array___Array___init();
   fra.me.REG[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[5] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[5])(fra.me.REG[5]);
   fra.me.REG[5] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[4], fra.me.REG[1], fra.me.REG[5]);
-  /* ./syntax//mmbuilder.nit:971 */
+  /* ./syntax//mmbuilder.nit:987 */
   CALL_static_type___MMLocalProperty___signature__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);
-  /* ./syntax//mmbuilder.nit:972 */
+  /* ./syntax//mmbuilder.nit:988 */
   fra.me.REG[4] = CALL_parser_nodes___AAttrPropdef___n_visibility(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_mmbuilder___AVisibility___level(fra.me.REG[4])(fra.me.REG[4]);
-  /* ./syntax//mmbuilder.nit:973 */
+  /* ./syntax//mmbuilder.nit:989 */
   fra.me.REG[4] = CALL_parser_nodes___AAttrPropdef___n_id(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -6926,7 +7151,7 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
     REGB1 = REGB2;
   }
   CALL_mmbuilder___APropdef___process_and_check(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[0], REGB1, REGB0);
-  /* ./syntax//mmbuilder.nit:974 */
+  /* ./syntax//mmbuilder.nit:990 */
   fra.me.REG[0] = CALL_parser_nodes___AAttrPropdef___n_readable(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -6960,16 +7185,16 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
     REGB1 = REGB2;
   }
   if (UNTAG_Bool(REGB1)) {
-    /* ./syntax//mmbuilder.nit:975 */
+    /* ./syntax//mmbuilder.nit:991 */
     fra.me.REG[0] = ATTR_mmbuilder___AAttrPropdef____readmethod(fra.me.REG[2]);
     REGB1 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 975);
+      nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 991);
     }
-    /* ./syntax//mmbuilder.nit:976 */
+    /* ./syntax//mmbuilder.nit:992 */
     CALL_static_type___MMLocalProperty___signature__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);
-    /* ./syntax//mmbuilder.nit:977 */
+    /* ./syntax//mmbuilder.nit:993 */
     fra.me.REG[5] = CALL_parser_nodes___AAttrPropdef___n_readable(fra.me.REG[2])(fra.me.REG[2]);
     REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
@@ -6988,7 +7213,7 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
       fra.me.REG[5] = CALL_parser_nodes___AAttrPropdef___n_readable(fra.me.REG[2])(fra.me.REG[2]);
       REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 977);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 993);
       }
       fra.me.REG[5] = CALL_parser_nodes___AAble___n_kwredef(fra.me.REG[5])(fra.me.REG[5]);
       REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
@@ -7046,15 +7271,15 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
       REGB1 = REGB2;
     }
     CALL_mmbuilder___APropdef___process_and_check(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[0], REGB1, REGB0);
-    /* ./syntax//mmbuilder.nit:978 */
+    /* ./syntax//mmbuilder.nit:994 */
     fra.me.REG[5] = CALL_parser_nodes___AAttrPropdef___n_type(fra.me.REG[2])(fra.me.REG[2]);
     REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 978);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 994);
     }
     CALL_mmbuilder___AType___check_visibility(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3], fra.me.REG[0]);
   }
-  /* ./syntax//mmbuilder.nit:980 */
+  /* ./syntax//mmbuilder.nit:996 */
   fra.me.REG[0] = CALL_parser_nodes___AAttrPropdef___n_writable(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -7088,14 +7313,14 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
     REGB1 = REGB2;
   }
   if (UNTAG_Bool(REGB1)) {
-    /* ./syntax//mmbuilder.nit:981 */
+    /* ./syntax//mmbuilder.nit:997 */
     fra.me.REG[0] = ATTR_mmbuilder___AAttrPropdef____writemethod(fra.me.REG[2]);
     REGB1 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 981);
+      nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 997);
     }
-    /* ./syntax//mmbuilder.nit:982 */
+    /* ./syntax//mmbuilder.nit:998 */
     REGB1 = TAG_Int(0);
     fra.me.REG[5] = NEW_Array_array___Array___with_capacity(REGB1);
     if (!once_value_5) {
@@ -7119,7 +7344,7 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
     fra.me.REG[4] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[4] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[5], NIT_NULL, fra.me.REG[4]);
     CALL_static_type___MMLocalProperty___signature__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
-    /* ./syntax//mmbuilder.nit:984 */
+    /* ./syntax//mmbuilder.nit:1000 */
     fra.me.REG[4] = CALL_parser_nodes___AAttrPropdef___n_id(fra.me.REG[2])(fra.me.REG[2]);
     REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
@@ -7134,7 +7359,7 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
       }
     }
     if (UNTAG_Bool(REGB1)) {
-      /* ./syntax//mmbuilder.nit:985 */
+      /* ./syntax//mmbuilder.nit:1001 */
       fra.me.REG[4] = CALL_parser_nodes___AAttrPropdef___n_writable(fra.me.REG[2])(fra.me.REG[2]);
       REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
@@ -7155,18 +7380,18 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
         fra.me.REG[4] = CALL_parser_nodes___AAttrPropdef___n_writable(fra.me.REG[2])(fra.me.REG[2]);
         REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 985);
+          nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1001);
         }
         fra.me.REG[4] = CALL_parser_nodes___AAble___n_visibility(fra.me.REG[4])(fra.me.REG[4]);
         REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 985);
+          nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1001);
         }
         REGB1 = CALL_mmbuilder___AVisibility___level(fra.me.REG[4])(fra.me.REG[4]);
         REGB0 = REGB1;
       }
     }
-    /* ./syntax//mmbuilder.nit:987 */
+    /* ./syntax//mmbuilder.nit:1003 */
     fra.me.REG[4] = CALL_parser_nodes___AAttrPropdef___n_writable(fra.me.REG[2])(fra.me.REG[2]);
     REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
@@ -7185,7 +7410,7 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
       fra.me.REG[4] = CALL_parser_nodes___AAttrPropdef___n_writable(fra.me.REG[2])(fra.me.REG[2]);
       REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 987);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1003);
       }
       fra.me.REG[4] = CALL_parser_nodes___AAble___n_kwredef(fra.me.REG[4])(fra.me.REG[4]);
       REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
@@ -7206,11 +7431,11 @@ void mmbuilder___AAttrPropdef___accept_property_verifier(val_t p0, val_t p1){
       REGB1 = REGB2;
     }
     CALL_mmbuilder___APropdef___process_and_check(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[0], REGB1, REGB0);
-    /* ./syntax//mmbuilder.nit:988 */
+    /* ./syntax//mmbuilder.nit:1004 */
     fra.me.REG[2] = CALL_parser_nodes___AAttrPropdef___n_type(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 988);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1004);
     }
     CALL_mmbuilder___AType___check_visibility(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[0]);
   }
@@ -7223,7 +7448,7 @@ void mmbuilder___AAttrPropdef___accept_abs_syntax_visitor(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 992;
+  fra.me.line = 1008;
   fra.me.meth = LOCATE_mmbuilder___AAttrPropdef___accept_abs_syntax_visitor;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -7233,15 +7458,15 @@ void mmbuilder___AAttrPropdef___accept_abs_syntax_visitor(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:992 */
+  /* ./syntax//mmbuilder.nit:1008 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:994 */
+  /* ./syntax//mmbuilder.nit:1010 */
   fra.me.REG[2] = ATTR_mmbuilder___AAttrPropdef____prop(fra.me.REG[2]);
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:995 */
+  /* ./syntax//mmbuilder.nit:1011 */
   CALL_SUPER_mmbuilder___AAttrPropdef___accept_abs_syntax_visitor(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:996 */
+  /* ./syntax//mmbuilder.nit:1012 */
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
   stack_frame_head = fra.me.prev;
   return;
@@ -7251,13 +7476,13 @@ val_t mmbuilder___AMethPropdef___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1001;
+  fra.me.line = 1017;
   fra.me.meth = LOCATE_mmbuilder___AMethPropdef___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1001 */
+  /* ./syntax//mmbuilder.nit:1017 */
   fra.me.REG[0] = ATTR_mmbuilder___AMethPropdef____name(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -7268,18 +7493,18 @@ val_t mmbuilder___AMethPropdef___method(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1005;
+  fra.me.line = 1021;
   fra.me.meth = LOCATE_mmbuilder___AMethPropdef___method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1005 */
+  /* ./syntax//mmbuilder.nit:1021 */
   fra.me.REG[0] = ATTR_mmbuilder___AMethPropdef____method(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1005);
+    nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1021);
   }
   goto label1;
   label1: while(0);
@@ -7302,7 +7527,7 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t p0, val_t p1){
           static val_t once_value_8; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1007;
+  fra.me.line = 1023;
   fra.me.meth = LOCATE_mmbuilder___AMethPropdef___accept_property_builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -7313,12 +7538,12 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1007 */
+  /* ./syntax//mmbuilder.nit:1023 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:1009 */
+  /* ./syntax//mmbuilder.nit:1025 */
   CALL_SUPER_mmbuilder___AMethPropdef___accept_property_builder(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1011 */
+  /* ./syntax//mmbuilder.nit:1027 */
   fra.me.REG[1] = CALL_parser_nodes___AMethPropdef___n_methid(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -7333,10 +7558,10 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:1012 */
+    /* ./syntax//mmbuilder.nit:1028 */
     REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[2], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:1013 */
+      /* ./syntax//mmbuilder.nit:1029 */
       if (!once_value_1) {
         if (!once_value_2) {
           fra.me.REG[1] = BOX_NativeString("init");
@@ -7352,7 +7577,7 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t p0, val_t p1){
       } else fra.me.REG[1] = once_value_1;
       fra.me.REG[1] = fra.me.REG[1];
     } else {
-      /* ./syntax//mmbuilder.nit:1015 */
+      /* ./syntax//mmbuilder.nit:1031 */
       if (!once_value_3) {
         if (!once_value_4) {
           fra.me.REG[0] = BOX_NativeString("main");
@@ -7370,24 +7595,24 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t p0, val_t p1){
       fra.me.REG[1] = fra.me.REG[0];
     }
   } else {
-    /* ./syntax//mmbuilder.nit:1018 */
+    /* ./syntax//mmbuilder.nit:1034 */
     fra.me.REG[0] = CALL_parser_nodes___AMethPropdef___n_methid(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1018);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1034);
     }
     fra.me.REG[0] = CALL_syntax_base___AMethid___name(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1018);
+      nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1034);
     }
     fra.me.REG[1] = fra.me.REG[0];
-    /* ./syntax//mmbuilder.nit:1020 */
+    /* ./syntax//mmbuilder.nit:1036 */
     fra.me.REG[0] = CALL_parser_nodes___AMethPropdef___n_methid(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1020);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1036);
     }
     fra.me.REG[0] = CALL_syntax_base___AMethid___name(fra.me.REG[0])(fra.me.REG[0]);
     if (!once_value_5) {
@@ -7417,9 +7642,9 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t p0, val_t p1){
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:1021 */
+      /* ./syntax//mmbuilder.nit:1037 */
       fra.me.REG[4] = CALL_parser_nodes___AMethPropdef___n_signature(fra.me.REG[2])(fra.me.REG[2]);
-      /* ./syntax//mmbuilder.nit:1022 */
+      /* ./syntax//mmbuilder.nit:1038 */
       REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -7436,7 +7661,7 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB0)) {
         REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
-          nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1022);
+          nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1038);
         }
         fra.me.REG[4] = CALL_parser_nodes___ASignature___n_params(fra.me.REG[4])(fra.me.REG[4]);
         REGB0 = CALL_abstract_collection___Collection___length(fra.me.REG[4])(fra.me.REG[4]);
@@ -7446,7 +7671,7 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t p0, val_t p1){
         } else {
           /* ./../lib/standard//kernel.nit:207 */
           REGB1 = TAG_Bool((REGB0)==(REGB1));
-          /* ./syntax//mmbuilder.nit:1022 */
+          /* ./syntax//mmbuilder.nit:1038 */
           REGB2 = REGB1;
         }
       } else {
@@ -7454,7 +7679,7 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t p0, val_t p1){
         REGB2 = REGB1;
       }
       if (UNTAG_Bool(REGB2)) {
-        /* ./syntax//mmbuilder.nit:1023 */
+        /* ./syntax//mmbuilder.nit:1039 */
         if (!once_value_7) {
           if (!once_value_8) {
             fra.me.REG[4] = BOX_NativeString("unary -");
@@ -7473,14 +7698,14 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t p0, val_t p1){
       }
     }
   }
-  /* ./syntax//mmbuilder.nit:1027 */
+  /* ./syntax//mmbuilder.nit:1043 */
   ATTR_mmbuilder___AMethPropdef____name(fra.me.REG[2]) = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:1028 */
+  /* ./syntax//mmbuilder.nit:1044 */
   fra.me.REG[4] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[4] = NEW_MMMethSrcMethod_syntax_base___MMMethSrcMethod___init(fra.me.REG[1], fra.me.REG[4], fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:1029 */
+  /* ./syntax//mmbuilder.nit:1045 */
   ATTR_mmbuilder___AMethPropdef____method(fra.me.REG[2]) = fra.me.REG[4];
-  /* ./syntax//mmbuilder.nit:1030 */
+  /* ./syntax//mmbuilder.nit:1046 */
   fra.me.REG[2] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[4]);
   stack_frame_head = fra.me.prev;
@@ -7494,7 +7719,7 @@ void mmbuilder___AMethPropdef___accept_property_verifier(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1033;
+  fra.me.line = 1049;
   fra.me.meth = LOCATE_mmbuilder___AMethPropdef___accept_property_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -7505,21 +7730,21 @@ void mmbuilder___AMethPropdef___accept_property_verifier(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1033 */
+  /* ./syntax//mmbuilder.nit:1049 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:1035 */
+  /* ./syntax//mmbuilder.nit:1051 */
   fra.me.REG[4] = NEW_SignatureBuilder_mmbuilder___SignatureBuilder___init();
   CALL_mmbuilder___PropertyVerifierVisitor___signature_builder__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-  /* ./syntax//mmbuilder.nit:1036 */
+  /* ./syntax//mmbuilder.nit:1052 */
   CALL_SUPER_mmbuilder___AMethPropdef___accept_property_verifier(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1038 */
+  /* ./syntax//mmbuilder.nit:1054 */
   fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = CALL_mmbuilder___SignatureBuilder___has_error_occured(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* ./syntax//mmbuilder.nit:1040 */
+  /* ./syntax//mmbuilder.nit:1056 */
   fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[1] = CALL_mmbuilder___SignatureBuilder___signature(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -7536,20 +7761,20 @@ void mmbuilder___AMethPropdef___accept_property_verifier(val_t p0, val_t p1){
   }
   if (UNTAG_Bool(REGB0)) {
   } else {
-    /* ./syntax//mmbuilder.nit:1043 */
+    /* ./syntax//mmbuilder.nit:1059 */
     fra.me.REG[1] = CALL_syntax_base___AMethPropdef___method(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[0] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[0] = CALL_mmbuilder___SignatureBuilder___signature(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1043);
+      nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1059);
     }
     CALL_static_type___MMLocalProperty___signature__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   }
-  /* ./syntax//mmbuilder.nit:1045 */
+  /* ./syntax//mmbuilder.nit:1061 */
   REGB0 = TAG_Int(1);
-  /* ./syntax//mmbuilder.nit:1046 */
+  /* ./syntax//mmbuilder.nit:1062 */
   fra.me.REG[0] = CALL_parser_nodes___AMethPropdef___n_visibility(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -7568,28 +7793,28 @@ void mmbuilder___AMethPropdef___accept_property_verifier(val_t p0, val_t p1){
     fra.me.REG[0] = CALL_parser_nodes___AMethPropdef___n_visibility(fra.me.REG[2])(fra.me.REG[2]);
     REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1046);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1062);
     }
     REGB1 = CALL_mmbuilder___AVisibility___level(fra.me.REG[0])(fra.me.REG[0]);
     REGB2 = TAG_Int(1);
     /* ./../lib/standard//kernel.nit:214 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
   } else {
-    /* ./syntax//mmbuilder.nit:1046 */
+    /* ./syntax//mmbuilder.nit:1062 */
     REGB1 = TAG_Bool(false);
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./syntax//mmbuilder.nit:1047 */
+    /* ./syntax//mmbuilder.nit:1063 */
     fra.me.REG[0] = CALL_parser_nodes___AMethPropdef___n_visibility(fra.me.REG[2])(fra.me.REG[2]);
     REGB2 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1047);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1063);
     }
     REGB2 = CALL_mmbuilder___AVisibility___level(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = REGB2;
   }
-  /* ./syntax//mmbuilder.nit:1049 */
+  /* ./syntax//mmbuilder.nit:1065 */
   fra.me.REG[0] = CALL_syntax_base___AMethPropdef___method(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[1] = CALL_parser_nodes___AMethPropdef___n_kwredef(fra.me.REG[2])(fra.me.REG[2]);
   REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -7606,7 +7831,7 @@ void mmbuilder___AMethPropdef___accept_property_verifier(val_t p0, val_t p1){
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   CALL_mmbuilder___APropdef___process_and_check(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[0], REGB2, REGB0);
-  /* ./syntax//mmbuilder.nit:1050 */
+  /* ./syntax//mmbuilder.nit:1066 */
   fra.me.REG[0] = CALL_parser_nodes___AMethPropdef___n_signature(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -7626,7 +7851,7 @@ void mmbuilder___AMethPropdef___accept_property_verifier(val_t p0, val_t p1){
     fra.me.REG[2] = CALL_syntax_base___AMethPropdef___method(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1050);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1066);
     }
     CALL_mmbuilder___ASignature___check_visibility(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3], fra.me.REG[2]);
   }
@@ -7639,7 +7864,7 @@ void mmbuilder___AMethPropdef___accept_abs_syntax_visitor(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1053;
+  fra.me.line = 1069;
   fra.me.meth = LOCATE_mmbuilder___AMethPropdef___accept_abs_syntax_visitor;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -7649,15 +7874,15 @@ void mmbuilder___AMethPropdef___accept_abs_syntax_visitor(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1053 */
+  /* ./syntax//mmbuilder.nit:1069 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:1055 */
+  /* ./syntax//mmbuilder.nit:1071 */
   fra.me.REG[2] = ATTR_mmbuilder___AMethPropdef____method(fra.me.REG[2]);
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:1056 */
+  /* ./syntax//mmbuilder.nit:1072 */
   CALL_SUPER_mmbuilder___AMethPropdef___accept_abs_syntax_visitor(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1057 */
+  /* ./syntax//mmbuilder.nit:1073 */
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
   stack_frame_head = fra.me.prev;
   return;
@@ -7669,7 +7894,7 @@ void mmbuilder___AMainMethPropdef___process_and_check(val_t p0, val_t p1, val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1062;
+  fra.me.line = 1078;
   fra.me.meth = LOCATE_mmbuilder___AMainMethPropdef___process_and_check;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -7681,10 +7906,10 @@ void mmbuilder___AMainMethPropdef___process_and_check(val_t p0, val_t p1, val_t 
   fra.me.REG[2] = p2;
   REGB0 = p3;
   REGB1 = p4;
-  /* ./syntax//mmbuilder.nit:1064 */
+  /* ./syntax//mmbuilder.nit:1080 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalProperty___global(fra.me.REG[2])(fra.me.REG[2]);
   CALL_abstractmetamodel___MMGlobalProperty___visibility_level__eq(fra.me.REG[0])(fra.me.REG[0], REGB1);
-  /* ./syntax//mmbuilder.nit:1065 */
+  /* ./syntax//mmbuilder.nit:1081 */
   fra.me.REG[0] = NEW_Array_array___Array___init();
   fra.me.REG[1] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[1])(fra.me.REG[1]);
@@ -7707,7 +7932,7 @@ void mmbuilder___AExternMethPropdef___accept_property_verifier(val_t p0, val_t p
     static val_t once_value_6; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1071;
+  fra.me.line = 1087;
   fra.me.meth = LOCATE_mmbuilder___AExternMethPropdef___accept_property_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -7717,11 +7942,11 @@ void mmbuilder___AExternMethPropdef___accept_property_verifier(val_t p0, val_t p
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1071 */
+  /* ./syntax//mmbuilder.nit:1087 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./syntax//mmbuilder.nit:1073 */
+  /* ./syntax//mmbuilder.nit:1089 */
   CALL_SUPER_mmbuilder___AExternMethPropdef___accept_property_verifier(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1075 */
+  /* ./syntax//mmbuilder.nit:1091 */
   fra.me.REG[1] = CALL_parser_nodes___AExternPropdef___n_extern(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -7737,14 +7962,14 @@ void mmbuilder___AExternMethPropdef___accept_property_verifier(val_t p0, val_t p
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:1076 */
+    /* ./syntax//mmbuilder.nit:1092 */
     fra.me.REG[1] = CALL_parser_nodes___AExternPropdef___n_extern(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1076);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1092);
     }
     fra.me.REG[1] = CALL_lexer___Token___text(fra.me.REG[1])(fra.me.REG[1]);
-    /* ./syntax//mmbuilder.nit:1077 */
+    /* ./syntax//mmbuilder.nit:1093 */
     REGB0 = TAG_Int(1);
     /* ./../lib/standard//collection//array.nit:23 */
     REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -7753,15 +7978,15 @@ void mmbuilder___AExternMethPropdef___accept_property_verifier(val_t p0, val_t p
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
     }
     REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[1]);
-    /* ./syntax//mmbuilder.nit:1077 */
+    /* ./syntax//mmbuilder.nit:1093 */
     REGB2 = TAG_Int(2);
     /* ./../lib/standard//kernel.nit:217 */
     REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-    /* ./syntax//mmbuilder.nit:1077 */
+    /* ./syntax//mmbuilder.nit:1093 */
     fra.me.REG[0] = CALL_string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB0, REGB2);
     fra.me.REG[1] = fra.me.REG[0];
   } else {
-    /* ./syntax//mmbuilder.nit:1079 */
+    /* ./syntax//mmbuilder.nit:1095 */
     REGB2 = TAG_Int(11);
     fra.me.REG[0] = NEW_Array_array___Array___with_capacity(REGB2);
     if (!once_value_1) {
@@ -7832,7 +8057,7 @@ void mmbuilder___AExternMethPropdef___accept_property_verifier(val_t p0, val_t p
     fra.me.REG[3] = CALL_static_type___MMLocalProperty___signature(fra.me.REG[3])(fra.me.REG[3]);
     REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1079);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1095);
     }
     REGB2 = CALL_static_type___MMSignature___arity(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[3] = CALL_string___Object___to_s(REGB2)(REGB2);
@@ -7849,7 +8074,7 @@ void mmbuilder___AExternMethPropdef___accept_property_verifier(val_t p0, val_t p
     fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[1] = fra.me.REG[0];
   }
-  /* ./syntax//mmbuilder.nit:1081 */
+  /* ./syntax//mmbuilder.nit:1097 */
   fra.me.REG[2] = CALL_syntax_base___AMethPropdef___method(fra.me.REG[2])(fra.me.REG[2]);
   CALL_syntax_base___MMMethSrcMethod___extern_name__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
@@ -7861,18 +8086,18 @@ val_t mmbuilder___ATypePropdef___prop(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1086;
+  fra.me.line = 1102;
   fra.me.meth = LOCATE_mmbuilder___ATypePropdef___prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1086 */
+  /* ./syntax//mmbuilder.nit:1102 */
   fra.me.REG[0] = ATTR_mmbuilder___ATypePropdef____prop(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1086);
+    nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1102);
   }
   goto label1;
   label1: while(0);
@@ -7884,7 +8109,7 @@ void mmbuilder___ATypePropdef___accept_property_builder(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1089;
+  fra.me.line = 1105;
   fra.me.meth = LOCATE_mmbuilder___ATypePropdef___accept_property_builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -7894,20 +8119,20 @@ void mmbuilder___ATypePropdef___accept_property_builder(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1089 */
+  /* ./syntax//mmbuilder.nit:1105 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:1091 */
+  /* ./syntax//mmbuilder.nit:1107 */
   CALL_SUPER_mmbuilder___ATypePropdef___accept_property_builder(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1092 */
+  /* ./syntax//mmbuilder.nit:1108 */
   fra.me.REG[1] = CALL_parser_nodes___ATypePropdef___n_id(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[1] = CALL_syntax_base___Token___to_symbol(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1093 */
+  /* ./syntax//mmbuilder.nit:1109 */
   fra.me.REG[0] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[0] = NEW_MMSrcTypeProperty_syntax_base___MMSrcTypeProperty___init(fra.me.REG[1], fra.me.REG[0], fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:1094 */
+  /* ./syntax//mmbuilder.nit:1110 */
   ATTR_mmbuilder___ATypePropdef____prop(fra.me.REG[2]) = fra.me.REG[0];
-  /* ./syntax//mmbuilder.nit:1095 */
+  /* ./syntax//mmbuilder.nit:1111 */
   fra.me.REG[2] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -7921,7 +8146,7 @@ void mmbuilder___ATypePropdef___accept_property_verifier(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1098;
+  fra.me.line = 1114;
   fra.me.meth = LOCATE_mmbuilder___ATypePropdef___accept_property_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -7932,25 +8157,25 @@ void mmbuilder___ATypePropdef___accept_property_verifier(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1098 */
+  /* ./syntax//mmbuilder.nit:1114 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:1100 */
+  /* ./syntax//mmbuilder.nit:1116 */
   CALL_SUPER_mmbuilder___ATypePropdef___accept_property_verifier(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1101 */
+  /* ./syntax//mmbuilder.nit:1117 */
   fra.me.REG[1] = NEW_Array_array___Array___init();
   fra.me.REG[0] = CALL_parser_nodes___ATypePropdef___n_type(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[0] = CALL_syntax_base___AType___get_stype(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[4] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[4] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[4] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
-  /* ./syntax//mmbuilder.nit:1102 */
+  /* ./syntax//mmbuilder.nit:1118 */
   fra.me.REG[0] = CALL_syntax_base___ATypePropdef___prop(fra.me.REG[2])(fra.me.REG[2]);
   CALL_static_type___MMLocalProperty___signature__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
-  /* ./syntax//mmbuilder.nit:1103 */
+  /* ./syntax//mmbuilder.nit:1119 */
   fra.me.REG[4] = CALL_parser_nodes___ATypePropdef___n_visibility(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_mmbuilder___AVisibility___level(fra.me.REG[4])(fra.me.REG[4]);
-  /* ./syntax//mmbuilder.nit:1104 */
+  /* ./syntax//mmbuilder.nit:1120 */
   fra.me.REG[4] = CALL_syntax_base___ATypePropdef___prop(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[0] = CALL_parser_nodes___ATypePropdef___n_kwredef(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
@@ -7975,7 +8200,7 @@ void mmbuilder___ATypePropdef___accept_abs_syntax_visitor(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1107;
+  fra.me.line = 1123;
   fra.me.meth = LOCATE_mmbuilder___ATypePropdef___accept_abs_syntax_visitor;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -7985,15 +8210,15 @@ void mmbuilder___ATypePropdef___accept_abs_syntax_visitor(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1107 */
+  /* ./syntax//mmbuilder.nit:1123 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:1109 */
+  /* ./syntax//mmbuilder.nit:1125 */
   fra.me.REG[2] = ATTR_mmbuilder___ATypePropdef____prop(fra.me.REG[2]);
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:1110 */
+  /* ./syntax//mmbuilder.nit:1126 */
   CALL_SUPER_mmbuilder___ATypePropdef___accept_abs_syntax_visitor(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1111 */
+  /* ./syntax//mmbuilder.nit:1127 */
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq(fra.me.REG[3])(fra.me.REG[3], NIT_NULL);
   stack_frame_head = fra.me.prev;
   return;
@@ -8004,17 +8229,17 @@ val_t mmbuilder___MethidAccumulator___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1118;
+  fra.me.line = 1134;
   fra.me.meth = LOCATE_mmbuilder___MethidAccumulator___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1118 */
+  /* ./syntax//mmbuilder.nit:1134 */
   REGB0 = TAG_Bool(ATTR_mmbuilder___MethidAccumulator____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_name", LOCATE_mmbuilder, 1118);
+    nit_abort("Uninitialized attribute %s", "_name", LOCATE_mmbuilder, 1134);
   }
   fra.me.REG[0] = ATTR_mmbuilder___MethidAccumulator____name(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -8026,7 +8251,7 @@ void mmbuilder___MethidAccumulator___visit(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1119;
+  fra.me.line = 1135;
   fra.me.meth = LOCATE_mmbuilder___MethidAccumulator___visit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -8036,27 +8261,27 @@ void mmbuilder___MethidAccumulator___visit(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1121 */
+  /* ./syntax//mmbuilder.nit:1137 */
   REGB0 = TAG_Bool((fra.me.REG[1]!=NIT_NULL) && VAL_ISA(fra.me.REG[1], COLOR_Token, ID_Token)) /*cast Token*/;
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:1122 */
+    /* ./syntax//mmbuilder.nit:1138 */
     REGB0 = TAG_Bool(ATTR_mmbuilder___MethidAccumulator____name(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_name", LOCATE_mmbuilder, 1122);
+      nit_abort("Uninitialized attribute %s", "_name", LOCATE_mmbuilder, 1138);
     }
     fra.me.REG[2] = ATTR_mmbuilder___MethidAccumulator____name(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1122);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1138);
     }
     fra.me.REG[3] = CALL_lexer___Token___text(fra.me.REG[1])(fra.me.REG[1]);
     CALL_abstract_collection___Sequence___append(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   } else {
-    /* ./syntax//mmbuilder.nit:1124 */
+    /* ./syntax//mmbuilder.nit:1140 */
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1124);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1140);
     }
     CALL_parser_prod___ANode___visit_all(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   }
@@ -8068,13 +8293,13 @@ val_t mmbuilder___AMethid___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1130;
+  fra.me.line = 1146;
   fra.me.meth = LOCATE_mmbuilder___AMethid___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1130 */
+  /* ./syntax//mmbuilder.nit:1146 */
   fra.me.REG[0] = ATTR_mmbuilder___AMethid____name(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -8084,7 +8309,7 @@ void mmbuilder___AMethid___accept_property_builder(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1133;
+  fra.me.line = 1149;
   fra.me.meth = LOCATE_mmbuilder___AMethid___accept_property_builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -8094,18 +8319,18 @@ void mmbuilder___AMethid___accept_property_builder(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1133 */
+  /* ./syntax//mmbuilder.nit:1149 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./syntax//mmbuilder.nit:1135 */
+  /* ./syntax//mmbuilder.nit:1151 */
   fra.me.REG[3] = NEW_MethidAccumulator_parser_prod___Visitor___init();
-  /* ./syntax//mmbuilder.nit:1136 */
+  /* ./syntax//mmbuilder.nit:1152 */
   CALL_parser_prod___Visitor___enter_visit(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:1137 */
+  /* ./syntax//mmbuilder.nit:1153 */
   fra.me.REG[3] = CALL_mmbuilder___MethidAccumulator___name(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[3] = CALL_string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[3] = CALL_symbol___String___to_symbol(fra.me.REG[3])(fra.me.REG[3]);
   ATTR_mmbuilder___AMethid____name(fra.me.REG[2]) = fra.me.REG[3];
-  /* ./syntax//mmbuilder.nit:1138 */
+  /* ./syntax//mmbuilder.nit:1154 */
   CALL_SUPER_mmbuilder___AMethid___accept_property_builder(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -8119,7 +8344,7 @@ void mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t p1){
         static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1143;
+  fra.me.line = 1159;
   fra.me.meth = LOCATE_mmbuilder___ASignature___accept_property_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -8132,25 +8357,25 @@ void mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t p1){
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1143 */
+  /* ./syntax//mmbuilder.nit:1159 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:1145 */
+  /* ./syntax//mmbuilder.nit:1161 */
   CALL_SUPER_mmbuilder___ASignature___accept_property_verifier(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1146 */
+  /* ./syntax//mmbuilder.nit:1162 */
   fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = CALL_mmbuilder___SignatureBuilder___has_error_occured(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:1147 */
+    /* ./syntax//mmbuilder.nit:1163 */
     goto label1;
   } else {
-    /* ./syntax//mmbuilder.nit:1148 */
+    /* ./syntax//mmbuilder.nit:1164 */
     fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[1] = CALL_mmbuilder___SignatureBuilder___untyped_params(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:1149 */
+      /* ./syntax//mmbuilder.nit:1165 */
       fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
       fra.me.REG[1] = CALL_mmbuilder___SignatureBuilder___untyped_params(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[1] = CALL_abstract_collection___Collection___first(fra.me.REG[1])(fra.me.REG[1]);
@@ -8190,7 +8415,7 @@ void mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t p1){
         REGB0 = REGB1;
       }
       if (UNTAG_Bool(REGB0)) {
-        /* ./syntax//mmbuilder.nit:1150 */
+        /* ./syntax//mmbuilder.nit:1166 */
         fra.me.REG[0] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
         fra.me.REG[0] = CALL_mmbuilder___SignatureBuilder___untyped_params(fra.me.REG[0])(fra.me.REG[0]);
         fra.me.REG[0] = CALL_abstract_collection___Collection___first(fra.me.REG[0])(fra.me.REG[0]);
@@ -8203,11 +8428,11 @@ void mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t p1){
         } else fra.me.REG[1] = once_value_2;
         fra.me.REG[1] = fra.me.REG[1];
         CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[0], fra.me.REG[1]);
-        /* ./syntax//mmbuilder.nit:1151 */
+        /* ./syntax//mmbuilder.nit:1167 */
         goto label1;
       }
     } else {
-      /* ./syntax//mmbuilder.nit:1153 */
+      /* ./syntax//mmbuilder.nit:1169 */
       fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
       fra.me.REG[1] = CALL_mmbuilder___SignatureBuilder___params(fra.me.REG[1])(fra.me.REG[1]);
       REGB0 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[1])(fra.me.REG[1]);
@@ -8232,9 +8457,9 @@ void mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t p1){
         REGB0 = REGB1;
       }
       if (UNTAG_Bool(REGB0)) {
-        /* ./syntax//mmbuilder.nit:1154 */
+        /* ./syntax//mmbuilder.nit:1170 */
         fra.me.REG[1] = NEW_Array_array___Array___init();
-        /* ./syntax//mmbuilder.nit:1155 */
+        /* ./syntax//mmbuilder.nit:1171 */
         fra.me.REG[0] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
         fra.me.REG[0] = CALL_mmbuilder___SignatureBuilder___params(fra.me.REG[0])(fra.me.REG[0]);
         /* ./../lib/standard//collection//array.nit:234 */
@@ -8268,12 +8493,12 @@ void mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t p1){
             }
             /* ./../lib/standard//collection//array.nit:654 */
             fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
-            /* ./syntax//mmbuilder.nit:1156 */
+            /* ./syntax//mmbuilder.nit:1172 */
             fra.me.REG[6] = CALL_mmbuilder___AParam___stype(fra.me.REG[5])(fra.me.REG[5]);
             REGB1 = TAG_Bool(fra.me.REG[6]!=NIT_NULL);
             if (UNTAG_Bool(REGB1)) {
             } else {
-              nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1156);
+              nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1172);
             }
             fra.me.REG[5] = CALL_parser_nodes___AParam___n_id(fra.me.REG[5])(fra.me.REG[5]);
             fra.me.REG[5] = CALL_syntax_base___Token___to_symbol(fra.me.REG[5])(fra.me.REG[5]);
@@ -8291,9 +8516,9 @@ void mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t p1){
           }
         }
         label3: while(0);
-        /* ./syntax//mmbuilder.nit:1158 */
+        /* ./syntax//mmbuilder.nit:1174 */
         fra.me.REG[4] = NIT_NULL;
-        /* ./syntax//mmbuilder.nit:1159 */
+        /* ./syntax//mmbuilder.nit:1175 */
         fra.me.REG[0] = CALL_parser_nodes___ASignature___n_type(fra.me.REG[2])(fra.me.REG[2]);
         REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
@@ -8309,15 +8534,15 @@ void mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t p1){
         }
         REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
         if (UNTAG_Bool(REGB0)) {
-          /* ./syntax//mmbuilder.nit:1160 */
+          /* ./syntax//mmbuilder.nit:1176 */
           fra.me.REG[2] = CALL_parser_nodes___ASignature___n_type(fra.me.REG[2])(fra.me.REG[2]);
           REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
           if (UNTAG_Bool(REGB0)) {
-            nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1160);
+            nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1176);
           }
           fra.me.REG[2] = CALL_syntax_base___AType___get_stype(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
           fra.me.REG[4] = fra.me.REG[2];
-          /* ./syntax//mmbuilder.nit:1161 */
+          /* ./syntax//mmbuilder.nit:1177 */
           REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
           if (UNTAG_Bool(REGB0)) {
           } else {
@@ -8331,40 +8556,40 @@ void mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t p1){
             }
           }
           if (UNTAG_Bool(REGB0)) {
-            /* ./syntax//mmbuilder.nit:1162 */
+            /* ./syntax//mmbuilder.nit:1178 */
             fra.me.REG[2] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
             REGB0 = TAG_Bool(true);
             CALL_mmbuilder___SignatureBuilder___has_error_occured__eq(fra.me.REG[2])(fra.me.REG[2], REGB0);
-            /* ./syntax//mmbuilder.nit:1163 */
+            /* ./syntax//mmbuilder.nit:1179 */
             goto label1;
           }
         }
-        /* ./syntax//mmbuilder.nit:1166 */
+        /* ./syntax//mmbuilder.nit:1182 */
         fra.me.REG[2] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
         fra.me.REG[0] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
         fra.me.REG[0] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[0])(fra.me.REG[0]);
         fra.me.REG[0] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[1], fra.me.REG[4], fra.me.REG[0]);
         CALL_mmbuilder___SignatureBuilder___signature__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
-        /* ./syntax//mmbuilder.nit:1167 */
+        /* ./syntax//mmbuilder.nit:1183 */
         fra.me.REG[0] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
         REGB0 = CALL_mmbuilder___SignatureBuilder___vararg_rank(fra.me.REG[0])(fra.me.REG[0]);
         REGB1 = TAG_Int(0);
         /* ./../lib/standard//kernel.nit:213 */
         REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-        /* ./syntax//mmbuilder.nit:1167 */
+        /* ./syntax//mmbuilder.nit:1183 */
         if (UNTAG_Bool(REGB1)) {
-          /* ./syntax//mmbuilder.nit:1168 */
+          /* ./syntax//mmbuilder.nit:1184 */
           fra.me.REG[0] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
           fra.me.REG[0] = CALL_mmbuilder___SignatureBuilder___signature(fra.me.REG[0])(fra.me.REG[0]);
           fra.me.REG[2] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
           REGB1 = CALL_mmbuilder___SignatureBuilder___vararg_rank(fra.me.REG[2])(fra.me.REG[2]);
           REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
           if (UNTAG_Bool(REGB0)) {
-            nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1168);
+            nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1184);
           }
           CALL_vararg___MMSignature___vararg_rank__eq(fra.me.REG[0])(fra.me.REG[0], REGB1);
         }
-        /* ./syntax//mmbuilder.nit:1170 */
+        /* ./syntax//mmbuilder.nit:1186 */
         fra.me.REG[0] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
         fra.me.REG[0] = CALL_mmbuilder___SignatureBuilder___closure_decls(fra.me.REG[0])(fra.me.REG[0]);
         /* ./../lib/standard//collection//array.nit:234 */
@@ -8398,12 +8623,12 @@ void mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t p1){
             }
             /* ./../lib/standard//collection//array.nit:654 */
             fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB1)];
-            /* ./syntax//mmbuilder.nit:1171 */
+            /* ./syntax//mmbuilder.nit:1187 */
             fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
             fra.me.REG[1] = CALL_mmbuilder___SignatureBuilder___signature(fra.me.REG[1])(fra.me.REG[1]);
             REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
             if (UNTAG_Bool(REGB0)) {
-              nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1171);
+              nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1187);
             }
             fra.me.REG[1] = CALL_static_type___MMSignature___closures(fra.me.REG[1])(fra.me.REG[1]);
             fra.me.REG[4] = CALL_syntax_base___AClosureDecl___variable(fra.me.REG[4])(fra.me.REG[4]);
@@ -8435,7 +8660,7 @@ void mmbuilder___ASignature___check_visibility(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1176;
+  fra.me.line = 1192;
   fra.me.meth = LOCATE_mmbuilder___ASignature___check_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -8446,20 +8671,20 @@ void mmbuilder___ASignature___check_visibility(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./syntax//mmbuilder.nit:1179 */
+  /* ./syntax//mmbuilder.nit:1195 */
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalProperty___global(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_abstractmetamodel___MMGlobalProperty___visibility_level(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Int(3);
   /* ./../lib/standard//kernel.nit:213 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ./syntax//mmbuilder.nit:1179 */
+  /* ./syntax//mmbuilder.nit:1195 */
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* ./syntax//mmbuilder.nit:1180 */
+  /* ./syntax//mmbuilder.nit:1196 */
   fra.me.REG[3] = CALL_parser_nodes___ASignature___n_params(fra.me.REG[0])(fra.me.REG[0]);
   CALL_abstract_collection___Collection___iterate(fra.me.REG[3])(fra.me.REG[3], (&(fra.me)), ((fun_t)OC_mmbuilder___ASignature___check_visibility_2));
-  /* ./syntax//mmbuilder.nit:1183 */
+  /* ./syntax//mmbuilder.nit:1199 */
   fra.me.REG[3] = CALL_parser_nodes___ASignature___n_type(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -8478,7 +8703,7 @@ void mmbuilder___ASignature___check_visibility(val_t p0, val_t p1, val_t p2){
     fra.me.REG[0] = CALL_parser_nodes___ASignature___n_type(fra.me.REG[0])(fra.me.REG[0]);
     REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1183);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1199);
     }
     CALL_mmbuilder___AType___check_visibility(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
   }
@@ -8504,7 +8729,7 @@ void mmbuilder___ASignature___check_visibility(val_t p0, val_t p1, val_t p2){
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* ./syntax//mmbuilder.nit:1181 */
+    /* ./syntax//mmbuilder.nit:1197 */
     fra.me.REG[1] = CALL_parser_nodes___AParam___n_type(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -8523,7 +8748,7 @@ void mmbuilder___ASignature___check_visibility(val_t p0, val_t p1, val_t p2){
       fra.me.REG[0] = CALL_parser_nodes___AParam___n_type(fra.me.REG[0])(fra.me.REG[0]);
       REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1181);
+        nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1197);
       }
       CALL_mmbuilder___AType___check_visibility(fra.me.REG[0])(fra.me.REG[0], closctx->REG[1], closctx->REG[2]);
     }
@@ -8536,17 +8761,17 @@ val_t mmbuilder___AParam___position(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1188;
+  fra.me.line = 1204;
   fra.me.meth = LOCATE_mmbuilder___AParam___position;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1188 */
+  /* ./syntax//mmbuilder.nit:1204 */
   REGB0 = TAG_Bool(ATTR_mmbuilder___AParam____position(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_position", LOCATE_mmbuilder, 1188);
+    nit_abort("Uninitialized attribute %s", "_position", LOCATE_mmbuilder, 1204);
   }
   REGB0 = ATTR_mmbuilder___AParam____position(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -8558,18 +8783,18 @@ val_t mmbuilder___AParam___variable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1190;
+  fra.me.line = 1206;
   fra.me.meth = LOCATE_mmbuilder___AParam___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1190 */
+  /* ./syntax//mmbuilder.nit:1206 */
   fra.me.REG[0] = ATTR_mmbuilder___AParam____variable(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1190);
+    nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1206);
   }
   goto label1;
   label1: while(0);
@@ -8581,13 +8806,13 @@ val_t mmbuilder___AParam___stype(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1193;
+  fra.me.line = 1209;
   fra.me.meth = LOCATE_mmbuilder___AParam___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1193 */
+  /* ./syntax//mmbuilder.nit:1209 */
   fra.me.REG[0] = ATTR_mmbuilder___AParam____stype(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -8597,7 +8822,7 @@ void mmbuilder___AParam___stype__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1193;
+  fra.me.line = 1209;
   fra.me.meth = LOCATE_mmbuilder___AParam___stype__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -8605,7 +8830,7 @@ void mmbuilder___AParam___stype__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1193 */
+  /* ./syntax//mmbuilder.nit:1209 */
   ATTR_mmbuilder___AParam____stype(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -8620,7 +8845,7 @@ void mmbuilder___AParam___accept_property_verifier(val_t p0, val_t p1){
             static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1196;
+  fra.me.line = 1212;
   fra.me.meth = LOCATE_mmbuilder___AParam___accept_property_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -8633,12 +8858,12 @@ void mmbuilder___AParam___accept_property_verifier(val_t p0, val_t p1){
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1196 */
+  /* ./syntax//mmbuilder.nit:1212 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:1198 */
+  /* ./syntax//mmbuilder.nit:1214 */
   CALL_SUPER_mmbuilder___AParam___accept_property_verifier(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1199 */
+  /* ./syntax//mmbuilder.nit:1215 */
   fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[1] = CALL_mmbuilder___SignatureBuilder___params(fra.me.REG[1])(fra.me.REG[1]);
   /* ./../lib/standard//collection//array.nit:23 */
@@ -8648,23 +8873,23 @@ void mmbuilder___AParam___accept_property_verifier(val_t p0, val_t p1){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
   }
   REGB0 = ATTR_array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1199 */
+  /* ./syntax//mmbuilder.nit:1215 */
   ATTR_mmbuilder___AParam____position(fra.me.REG[2]) = REGB0;
-  /* ./syntax//mmbuilder.nit:1200 */
+  /* ./syntax//mmbuilder.nit:1216 */
   fra.me.REG[1] = CALL_parser_nodes___AParam___n_id(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[1] = CALL_syntax_base___Token___to_symbol(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_parser_nodes___AParam___n_id(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[0] = NEW_ParamVariable_syntax_base___ParamVariable___init(fra.me.REG[1], fra.me.REG[0]);
   ATTR_mmbuilder___AParam____variable(fra.me.REG[2]) = fra.me.REG[0];
-  /* ./syntax//mmbuilder.nit:1201 */
+  /* ./syntax//mmbuilder.nit:1217 */
   fra.me.REG[0] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[0] = CALL_mmbuilder___SignatureBuilder___params(fra.me.REG[0])(fra.me.REG[0]);
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:1202 */
+  /* ./syntax//mmbuilder.nit:1218 */
   fra.me.REG[0] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[0] = CALL_mmbuilder___SignatureBuilder___untyped_params(fra.me.REG[0])(fra.me.REG[0]);
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:1203 */
+  /* ./syntax//mmbuilder.nit:1219 */
   fra.me.REG[0] = CALL_parser_nodes___AParam___n_type(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -8680,14 +8905,14 @@ void mmbuilder___AParam___accept_property_verifier(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:1204 */
+    /* ./syntax//mmbuilder.nit:1220 */
     fra.me.REG[0] = CALL_parser_nodes___AParam___n_type(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1204);
+      nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1220);
     }
     fra.me.REG[0] = CALL_syntax_base___AType___get_stype(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-    /* ./syntax//mmbuilder.nit:1205 */
+    /* ./syntax//mmbuilder.nit:1221 */
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -8701,14 +8926,14 @@ void mmbuilder___AParam___accept_property_verifier(val_t p0, val_t p1){
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//mmbuilder.nit:1206 */
+      /* ./syntax//mmbuilder.nit:1222 */
       fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
       REGB0 = TAG_Bool(true);
       CALL_mmbuilder___SignatureBuilder___has_error_occured__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
-      /* ./syntax//mmbuilder.nit:1207 */
+      /* ./syntax//mmbuilder.nit:1223 */
       goto label1;
     }
-    /* ./syntax//mmbuilder.nit:1209 */
+    /* ./syntax//mmbuilder.nit:1225 */
     fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[1] = CALL_mmbuilder___SignatureBuilder___untyped_params(fra.me.REG[1])(fra.me.REG[1]);
     /* ./../lib/standard//collection//array.nit:234 */
@@ -8742,33 +8967,33 @@ void mmbuilder___AParam___accept_property_verifier(val_t p0, val_t p1){
         }
         /* ./../lib/standard//collection//array.nit:654 */
         fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
-        /* ./syntax//mmbuilder.nit:1210 */
+        /* ./syntax//mmbuilder.nit:1226 */
         CALL_mmbuilder___AParam___stype__eq(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[0]);
-        /* ./syntax//mmbuilder.nit:1211 */
+        /* ./syntax//mmbuilder.nit:1227 */
         REGB1 = CALL_mmbuilder___AParam___is_vararg(fra.me.REG[2])(fra.me.REG[2]);
         if (UNTAG_Bool(REGB1)) {
-          /* ./syntax//mmbuilder.nit:1212 */
+          /* ./syntax//mmbuilder.nit:1228 */
           fra.me.REG[6] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
           REGB1 = CALL_mmbuilder___SignatureBuilder___vararg_rank(fra.me.REG[6])(fra.me.REG[6]);
           REGB2 = TAG_Int(1);
           /* ./../lib/standard//kernel.nit:216 */
           REGB2 = TAG_Int(-UNTAG_Int(REGB2));
-          /* ./syntax//mmbuilder.nit:1212 */
+          /* ./syntax//mmbuilder.nit:1228 */
           REGB3 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB2));
           if (UNTAG_Bool(REGB3)) {
           } else {
             /* ./../lib/standard//kernel.nit:207 */
             REGB2 = TAG_Bool((REGB1)==(REGB2));
-            /* ./syntax//mmbuilder.nit:1212 */
+            /* ./syntax//mmbuilder.nit:1228 */
             REGB3 = REGB2;
           }
           if (UNTAG_Bool(REGB3)) {
-            /* ./syntax//mmbuilder.nit:1213 */
+            /* ./syntax//mmbuilder.nit:1229 */
             fra.me.REG[6] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
             REGB3 = CALL_syntax_base___AParam___position(fra.me.REG[5])(fra.me.REG[5]);
             CALL_mmbuilder___SignatureBuilder___vararg_rank__eq(fra.me.REG[6])(fra.me.REG[6], REGB3);
           } else {
-            /* ./syntax//mmbuilder.nit:1215 */
+            /* ./syntax//mmbuilder.nit:1231 */
             if (!once_value_2) {
               fra.me.REG[6] = BOX_NativeString("Error: A vararg parameter is already defined.");
               REGB3 = TAG_Int(45);
@@ -8779,11 +9004,11 @@ void mmbuilder___AParam___accept_property_verifier(val_t p0, val_t p1){
             fra.me.REG[6] = fra.me.REG[6];
             CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[6]);
           }
-          /* ./syntax//mmbuilder.nit:1217 */
+          /* ./syntax//mmbuilder.nit:1233 */
           fra.me.REG[6] = CALL_syntax_base___AbsSyntaxVisitor___type_array(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[0]);
           fra.me.REG[0] = fra.me.REG[6];
         }
-        /* ./syntax//mmbuilder.nit:1219 */
+        /* ./syntax//mmbuilder.nit:1235 */
         fra.me.REG[5] = CALL_syntax_base___AParam___variable(fra.me.REG[5])(fra.me.REG[5]);
         CALL_syntax_base___Variable___stype__eq(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[0]);
         /* ./../lib/standard//collection//array.nit:239 */
@@ -8798,7 +9023,7 @@ void mmbuilder___AParam___accept_property_verifier(val_t p0, val_t p1){
       }
     }
     label3: while(0);
-    /* ./syntax//mmbuilder.nit:1221 */
+    /* ./syntax//mmbuilder.nit:1237 */
     fra.me.REG[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[3] = CALL_mmbuilder___SignatureBuilder___untyped_params(fra.me.REG[3])(fra.me.REG[3]);
     CALL_abstract_collection___RemovableCollection___clear(fra.me.REG[3])(fra.me.REG[3]);
@@ -8814,13 +9039,13 @@ val_t mmbuilder___AParam___is_vararg(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1225;
+  fra.me.line = 1241;
   fra.me.meth = LOCATE_mmbuilder___AParam___is_vararg;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1225 */
+  /* ./syntax//mmbuilder.nit:1241 */
   fra.me.REG[0] = CALL_parser_nodes___AParam___n_dotdotdot(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -8846,17 +9071,17 @@ val_t mmbuilder___AClosureDecl___position(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1229;
+  fra.me.line = 1245;
   fra.me.meth = LOCATE_mmbuilder___AClosureDecl___position;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1229 */
+  /* ./syntax//mmbuilder.nit:1245 */
   REGB0 = TAG_Bool(ATTR_mmbuilder___AClosureDecl____position(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_position", LOCATE_mmbuilder, 1229);
+    nit_abort("Uninitialized attribute %s", "_position", LOCATE_mmbuilder, 1245);
   }
   REGB0 = ATTR_mmbuilder___AClosureDecl____position(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -8868,18 +9093,18 @@ val_t mmbuilder___AClosureDecl___variable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1231;
+  fra.me.line = 1247;
   fra.me.meth = LOCATE_mmbuilder___AClosureDecl___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//mmbuilder.nit:1231 */
+  /* ./syntax//mmbuilder.nit:1247 */
   fra.me.REG[0] = ATTR_mmbuilder___AClosureDecl____variable(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1231);
+    nit_abort("Cast failed", NULL, LOCATE_mmbuilder, 1247);
   }
   goto label1;
   label1: while(0);
@@ -8900,7 +9125,7 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
         static val_t once_value_7; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1234;
+  fra.me.line = 1250;
   fra.me.meth = LOCATE_mmbuilder___AClosureDecl___accept_property_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
@@ -8917,27 +9142,27 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
   fra.me.REG[10] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//mmbuilder.nit:1234 */
+  /* ./syntax//mmbuilder.nit:1250 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./syntax//mmbuilder.nit:1236 */
+  /* ./syntax//mmbuilder.nit:1252 */
   fra.me.REG[4] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
-  /* ./syntax//mmbuilder.nit:1237 */
+  /* ./syntax//mmbuilder.nit:1253 */
   fra.me.REG[5] = NEW_SignatureBuilder_mmbuilder___SignatureBuilder___init();
   CALL_mmbuilder___PropertyVerifierVisitor___signature_builder__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[5]);
-  /* ./syntax//mmbuilder.nit:1238 */
+  /* ./syntax//mmbuilder.nit:1254 */
   CALL_SUPER_mmbuilder___AClosureDecl___accept_property_verifier(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1239 */
+  /* ./syntax//mmbuilder.nit:1255 */
   fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = CALL_mmbuilder___SignatureBuilder___has_error_occured(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:1240 */
+    /* ./syntax//mmbuilder.nit:1256 */
     goto label1;
   }
-  /* ./syntax//mmbuilder.nit:1242 */
+  /* ./syntax//mmbuilder.nit:1258 */
   fra.me.REG[1] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[1] = CALL_mmbuilder___SignatureBuilder___signature(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1243 */
+  /* ./syntax//mmbuilder.nit:1259 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -8951,17 +9176,17 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:1244 */
+    /* ./syntax//mmbuilder.nit:1260 */
     fra.me.REG[0] = NEW_Array_array___Array___init();
     fra.me.REG[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[5] = CALL_static_type___MMLocalClass___get_type(fra.me.REG[5])(fra.me.REG[5]);
     fra.me.REG[5] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[0], NIT_NULL, fra.me.REG[5]);
     fra.me.REG[1] = fra.me.REG[5];
   }
-  /* ./syntax//mmbuilder.nit:1246 */
+  /* ./syntax//mmbuilder.nit:1262 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1246);
+    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1262);
   }
   fra.me.REG[5] = CALL_static_type___MMSignature___return_type(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
@@ -8997,7 +9222,7 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:1247 */
+    /* ./syntax//mmbuilder.nit:1263 */
     if (!once_value_2) {
       fra.me.REG[5] = BOX_NativeString("Syntax Error: A break block cannot have a return value.");
       REGB0 = TAG_Int(55);
@@ -9008,12 +9233,12 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
     fra.me.REG[5] = fra.me.REG[5];
     CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[5]);
   }
-  /* ./syntax//mmbuilder.nit:1251 */
+  /* ./syntax//mmbuilder.nit:1267 */
   fra.me.REG[5] = NEW_Array_array___Array___init();
   fra.me.REG[0] = CALL_syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[0] = CALL_inheritance___MMModule___type_any(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = NEW_MMSignature_static_type___MMSignature___init(fra.me.REG[5], NIT_NULL, fra.me.REG[0]);
-  /* ./syntax//mmbuilder.nit:1252 */
+  /* ./syntax//mmbuilder.nit:1268 */
   if (!once_value_3) {
     if (!once_value_4) {
       fra.me.REG[5] = BOX_NativeString("break");
@@ -9031,17 +9256,17 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
   REGB0 = TAG_Bool(false);
   REGB1 = TAG_Bool(true);
   fra.me.REG[0] = NEW_MMClosure_static_type___MMClosure___init(fra.me.REG[5], fra.me.REG[0], REGB0, REGB1);
-  /* ./syntax//mmbuilder.nit:1253 */
+  /* ./syntax//mmbuilder.nit:1269 */
   REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1253);
+    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1269);
   }
   fra.me.REG[5] = CALL_static_type___MMSignature___closures(fra.me.REG[1])(fra.me.REG[1]);
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[0]);
-  /* ./syntax//mmbuilder.nit:1255 */
+  /* ./syntax//mmbuilder.nit:1271 */
   fra.me.REG[0] = CALL_parser_nodes___AClosureDecl___n_id(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[0] = CALL_syntax_base___Token___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./syntax//mmbuilder.nit:1256 */
+  /* ./syntax//mmbuilder.nit:1272 */
   fra.me.REG[5] = CALL_parser_nodes___AClosureDecl___n_kwbreak(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -9071,7 +9296,7 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   fra.me.REG[1] = NEW_MMClosure_static_type___MMClosure___init(fra.me.REG[0], fra.me.REG[1], REGB1, REGB0);
-  /* ./syntax//mmbuilder.nit:1257 */
+  /* ./syntax//mmbuilder.nit:1273 */
   fra.me.REG[5] = CALL_mmbuilder___SignatureBuilder___closure_decls(fra.me.REG[4])(fra.me.REG[4]);
   /* ./../lib/standard//collection//array.nit:234 */
   REGB0 = TAG_Int(0);
@@ -9104,7 +9329,7 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
       }
       /* ./../lib/standard//collection//array.nit:654 */
       fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB0)];
-      /* ./syntax//mmbuilder.nit:1258 */
+      /* ./syntax//mmbuilder.nit:1274 */
       fra.me.REG[8] = CALL_parser_nodes___AClosureDecl___n_id(fra.me.REG[7])(fra.me.REG[7]);
       fra.me.REG[8] = CALL_syntax_base___Token___to_symbol(fra.me.REG[8])(fra.me.REG[8]);
       REGB1 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[8],fra.me.REG[0]));
@@ -9114,7 +9339,7 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
         REGB1 = REGB2;
       }
       if (UNTAG_Bool(REGB1)) {
-        /* ./syntax//mmbuilder.nit:1259 */
+        /* ./syntax//mmbuilder.nit:1275 */
         fra.me.REG[8] = CALL_parser_nodes___AClosureDecl___n_id(fra.me.REG[2])(fra.me.REG[2]);
         REGB1 = TAG_Int(5);
         fra.me.REG[9] = NEW_Array_array___Array___with_capacity(REGB1);
@@ -9155,7 +9380,7 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
         CALL_abstract_collection___SimpleCollection___add(fra.me.REG[9])(fra.me.REG[9], fra.me.REG[10]);
         fra.me.REG[9] = CALL_string___Object___to_s(fra.me.REG[9])(fra.me.REG[9]);
         CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[8], fra.me.REG[9]);
-        /* ./syntax//mmbuilder.nit:1260 */
+        /* ./syntax//mmbuilder.nit:1276 */
         goto label1;
       }
       /* ./../lib/standard//collection//array.nit:239 */
@@ -9170,9 +9395,9 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
     }
   }
   label8: while(0);
-  /* ./syntax//mmbuilder.nit:1263 */
+  /* ./syntax//mmbuilder.nit:1279 */
   CALL_mmbuilder___PropertyVerifierVisitor___signature_builder__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-  /* ./syntax//mmbuilder.nit:1264 */
+  /* ./syntax//mmbuilder.nit:1280 */
   fra.me.REG[3] = CALL_mmbuilder___SignatureBuilder___closure_decls(fra.me.REG[4])(fra.me.REG[4]);
   /* ./../lib/standard//collection//array.nit:23 */
   REGB0 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
@@ -9181,12 +9406,12 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_t p1){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
   }
   REGB0 = ATTR_array___AbstractArrayRead____length(fra.me.REG[3]);
-  /* ./syntax//mmbuilder.nit:1264 */
+  /* ./syntax//mmbuilder.nit:1280 */
   ATTR_mmbuilder___AClosureDecl____position(fra.me.REG[2]) = REGB0;
-  /* ./syntax//mmbuilder.nit:1265 */
+  /* ./syntax//mmbuilder.nit:1281 */
   fra.me.REG[4] = CALL_mmbuilder___SignatureBuilder___closure_decls(fra.me.REG[4])(fra.me.REG[4]);
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[2]);
-  /* ./syntax//mmbuilder.nit:1266 */
+  /* ./syntax//mmbuilder.nit:1282 */
   fra.me.REG[4] = CALL_parser_nodes___AClosureDecl___n_id(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = CALL_syntax_base___Token___to_symbol(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[3] = CALL_parser_nodes___AClosureDecl___n_id(fra.me.REG[2])(fra.me.REG[2]);
@@ -9206,7 +9431,7 @@ void mmbuilder___AType___check_visibility(val_t p0, val_t p1, val_t p2){
     static val_t once_value_4; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1271;
+  fra.me.line = 1287;
   fra.me.meth = LOCATE_mmbuilder___AType___check_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -9219,19 +9444,19 @@ void mmbuilder___AType___check_visibility(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./syntax//mmbuilder.nit:1274 */
+  /* ./syntax//mmbuilder.nit:1290 */
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalProperty___global(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_abstractmetamodel___MMGlobalProperty___visibility_level(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Int(3);
   /* ./../lib/standard//kernel.nit:213 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ./syntax//mmbuilder.nit:1274 */
+  /* ./syntax//mmbuilder.nit:1290 */
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* ./syntax//mmbuilder.nit:1275 */
+  /* ./syntax//mmbuilder.nit:1291 */
   fra.me.REG[3] = CALL_syntax_base___AType___get_stype(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./syntax//mmbuilder.nit:1276 */
+  /* ./syntax//mmbuilder.nit:1292 */
   REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -9247,21 +9472,21 @@ void mmbuilder___AType___check_visibility(val_t p0, val_t p1, val_t p2){
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* ./syntax//mmbuilder.nit:1277 */
+  /* ./syntax//mmbuilder.nit:1293 */
   REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1277);
+    nit_abort("Reciever is null", NULL, LOCATE_mmbuilder, 1293);
   }
   fra.me.REG[3] = CALL_static_type___MMType___local_class(fra.me.REG[3])(fra.me.REG[3]);
-  /* ./syntax//mmbuilder.nit:1278 */
+  /* ./syntax//mmbuilder.nit:1294 */
   fra.me.REG[4] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = CALL_abstractmetamodel___MMGlobalClass___visibility_level(fra.me.REG[4])(fra.me.REG[4]);
   REGB0 = TAG_Int(3);
   /* ./../lib/standard//kernel.nit:213 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-  /* ./syntax//mmbuilder.nit:1278 */
+  /* ./syntax//mmbuilder.nit:1294 */
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//mmbuilder.nit:1279 */
+    /* ./syntax//mmbuilder.nit:1295 */
     REGB0 = TAG_Int(5);
     fra.me.REG[4] = NEW_Array_array___Array___with_capacity(REGB0);
     if (!once_value_2) {
@@ -9298,7 +9523,7 @@ void mmbuilder___AType___check_visibility(val_t p0, val_t p1, val_t p2){
     fra.me.REG[4] = CALL_string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
     CALL_syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
   }
-  /* ./syntax//mmbuilder.nit:1281 */
+  /* ./syntax//mmbuilder.nit:1297 */
   fra.me.REG[0] = CALL_parser_nodes___AType___n_types(fra.me.REG[0])(fra.me.REG[0]);
   CALL_abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_mmbuilder___AType___check_visibility_5));
   label1: while(0);
@@ -9320,7 +9545,7 @@ void mmbuilder___AType___check_visibility(val_t p0, val_t p1, val_t p2){
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* ./syntax//mmbuilder.nit:1282 */
+    /* ./syntax//mmbuilder.nit:1298 */
     CALL_mmbuilder___AType___check_visibility(fra.me.REG[0])(fra.me.REG[0], closctx->REG[1], closctx->REG[2]);
     stack_frame_head = fra.me.prev;
     return;
@@ -9330,7 +9555,7 @@ void mmbuilder___AExpr___accept_class_builder(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1288;
+  fra.me.line = 1304;
   fra.me.meth = LOCATE_mmbuilder___AExpr___accept_class_builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -9346,7 +9571,7 @@ void mmbuilder___AExpr___accept_property_builder(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1289;
+  fra.me.line = 1305;
   fra.me.meth = LOCATE_mmbuilder___AExpr___accept_property_builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -9362,7 +9587,7 @@ void mmbuilder___AExpr___accept_property_verifier(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_mmbuilder;
-  fra.me.line = 1290;
+  fra.me.line = 1306;
   fra.me.meth = LOCATE_mmbuilder___AExpr___accept_property_verifier;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;

@@ -97,7 +97,7 @@ redef class MMSrcModule
 			c.accept_class_visitor(mmbv2)
 
 			# Default and inherited constructor if needed
-			if c isa MMSrcLocalClass and c.global.intro == c and not c.global.is_enum and not c.global.is_interface then
+			if c isa MMSrcLocalClass and c.global.intro == c and not c.global.is_enum and not c.global.is_extern and not c.global.is_interface then
 				c.process_default_constructors(mmbv2)
 			end
 
@@ -183,7 +183,7 @@ redef class MMSrcLocalClass
 		var super_inits = new ArraySet[MMLocalProperty]
 		var super_constructors = new ArraySet[MMGlobalProperty]
 		for sc in che.direct_greaters do
-			if sc.global.is_enum or sc.global.is_interface then continue
+			if sc.global.is_enum and not sc.global.is_extern or sc.global.is_interface then continue
 			for gp in sc.global_properties do
 				if not gp.is_init then continue
 				super_constructors.add(gp)
@@ -632,6 +632,7 @@ redef class AClasskind
 	fun is_interface: Bool do return false
 	fun is_enum: Bool do return false
 	fun is_abstract: Bool do return false
+	fun is_extern : Bool do return false
 end
 
 redef class AInterfaceClasskind
@@ -639,6 +640,9 @@ redef class AInterfaceClasskind
 end
 redef class AEnumClasskind
 	redef fun is_enum do return true
+end
+redef class AExternClasskind
+	redef fun is_extern do return true
 end
 redef class AAbstractClasskind
 	redef fun is_abstract do return true
@@ -663,6 +667,7 @@ redef class AStdClassdef
 			glob.is_interface = n_classkind.is_interface
 			glob.is_abstract = n_classkind.is_abstract
 			glob.is_enum = n_classkind.is_enum
+			glob.is_extern = n_classkind.is_extern
 			if n_kwredef != null then
 				v.error(self, "Redef error: No class {name} is imported. Remove the redef keyword to define a new class.")
 			end
@@ -679,9 +684,15 @@ redef class AStdClassdef
 					if not cg.is_interface and not cg.is_enum then
 						v.error(self, "Special error: Enum class {name} try to specialise class {c.name}.")
 					end
+				else if glob.is_extern then
+					if not cg.is_interface and not cg.is_extern then
+						v.error(self, "Special error: Extern class {name} try to specialise class {c.name}.")
+					end
 				else
 					if cg.is_enum then
 						v.error(self, "Special error: Class {name} try to specialise enum class {c.name}.")
+					else if cg.is_extern then
+						v.error(self, "Special error: Class {name} try to specialise extern class {c.name}.")
 					end
 				end
 
@@ -704,7 +715,8 @@ redef class AStdClassdef
 		if 
 			not glob.is_interface and n_classkind.is_interface or
 			not glob.is_abstract and n_classkind.is_abstract or
-			not glob.is_enum and n_classkind.is_enum
+			not glob.is_enum and n_classkind.is_enum or
+			not glob.is_extern and n_classkind.is_extern
 		then
 			v.error(self, "Redef error: cannot change kind of class {name}.")
 		end
@@ -835,6 +847,8 @@ redef class APropdef
 				v.error(self, "Error: Attempt to define attribute {prop} in the interface {prop.local_class}.")
 			else if gbc.is_enum then
 				v.error(self, "Error: Attempt to define attribute {prop} in the enum class {prop.local_class}.")
+			else if gbc.is_extern then
+				v.error(self, "Error: Attempt to define attribute {prop} in the extern class {prop.local_class}.")
 			end
 		else if glob.is_init then
 			if gbc.is_interface then
@@ -842,6 +856,8 @@ redef class APropdef
 			else if gbc.is_enum then
 				v.error(self, "Error: Attempt to define a constructor {prop} in the enum {prop.local_class}.")
 			end
+
+			# ok in extern
 		end
 		if prop.signature == null then
 			if glob.is_init then

@@ -252,7 +252,7 @@ redef class AConcreteInitPropdef
 			var j = 0
 			while j < v.local_class.cshe.direct_greaters.length do
 				var c = v.local_class.cshe.direct_greaters[j]
-				if c.global.is_interface or c.global.is_enum or c.global.is_mixin then
+				if c.global.is_interface or c.global.is_enum or c.global.is_extern or c.global.is_mixin then
 					j += 1
 				else if cur_c != null and (c.cshe <= cur_c or cur_c.global.is_mixin) then
 					if c == cur_c then j += 1

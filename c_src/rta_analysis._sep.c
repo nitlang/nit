@@ -935,6 +935,7 @@ void rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   void OC_rta_analysis___RtaBuilder___force_some_type_analysis_19(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
     struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
     val_t REGB0;
+    val_t REGB1;
     fun_t CREG[1];
     val_t tmp;
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -952,6 +953,13 @@ void rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
     /* ./analysis//rta_analysis.nit:168 */
     REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_enum(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+    if (UNTAG_Bool(REGB0)) {
+      REGB0 = CALL_abstractmetamodel___MMGlobalClass___is_extern(fra.me.REG[0])(fra.me.REG[0]);
+      REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+    } else {
+      REGB1 = TAG_Bool(false);
+      REGB0 = REGB1;
+    }
     if (UNTAG_Bool(REGB0)) {
       goto label20;
     }

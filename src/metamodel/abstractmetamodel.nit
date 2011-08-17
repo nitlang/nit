@@ -302,6 +302,9 @@ class MMGlobalClass
 	# Is the global class a enum class?
 	readable writable var _is_enum: Bool = false
 
+	# Is the global class an extern class?
+	readable writable var _is_extern: Bool = false
+
 	# Visibility of the global class
 	# 1 -> public
 	# 3 -> private

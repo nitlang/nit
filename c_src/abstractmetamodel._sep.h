@@ -101,8 +101,9 @@ extern const int SFT_abstractmetamodel[];
 #define ATTR_abstractmetamodel___MMGlobalClass____is_interface(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 2))
 #define ATTR_abstractmetamodel___MMGlobalClass____is_abstract(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 3))
 #define ATTR_abstractmetamodel___MMGlobalClass____is_enum(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 4))
-#define ATTR_abstractmetamodel___MMGlobalClass____visibility_level(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 5))
-#define ATTR_abstractmetamodel___MMGlobalClass____mixin_of(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 6))
+#define ATTR_abstractmetamodel___MMGlobalClass____is_extern(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 5))
+#define ATTR_abstractmetamodel___MMGlobalClass____visibility_level(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 6))
+#define ATTR_abstractmetamodel___MMGlobalClass____mixin_of(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 7))
 #define INIT_TABLE_POS_MMGlobalClass (SFT_abstractmetamodel[15] + 0)
 #define CALL_abstractmetamodel___MMGlobalClass___intro(recv) ((abstractmetamodel___MMGlobalClass___intro_t)CALL((recv), (SFT_abstractmetamodel[15] + 1)))
 #define CALL_abstractmetamodel___MMGlobalClass___class_refinement_hierarchy(recv) ((abstractmetamodel___MMGlobalClass___class_refinement_hierarchy_t)CALL((recv), (SFT_abstractmetamodel[15] + 2)))
@@ -116,11 +117,13 @@ extern const int SFT_abstractmetamodel[];
 #define CALL_abstractmetamodel___MMGlobalClass___is_abstract__eq(recv) ((abstractmetamodel___MMGlobalClass___is_abstract__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 10)))
 #define CALL_abstractmetamodel___MMGlobalClass___is_enum(recv) ((abstractmetamodel___MMGlobalClass___is_enum_t)CALL((recv), (SFT_abstractmetamodel[15] + 11)))
 #define CALL_abstractmetamodel___MMGlobalClass___is_enum__eq(recv) ((abstractmetamodel___MMGlobalClass___is_enum__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 12)))
-#define CALL_abstractmetamodel___MMGlobalClass___visibility_level(recv) ((abstractmetamodel___MMGlobalClass___visibility_level_t)CALL((recv), (SFT_abstractmetamodel[15] + 13)))
-#define CALL_abstractmetamodel___MMGlobalClass___visibility_level__eq(recv) ((abstractmetamodel___MMGlobalClass___visibility_level__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 14)))
-#define CALL_abstractmetamodel___MMGlobalClass___is_mixin(recv) ((abstractmetamodel___MMGlobalClass___is_mixin_t)CALL((recv), (SFT_abstractmetamodel[15] + 15)))
-#define CALL_abstractmetamodel___MMGlobalClass___mixin_of(recv) ((abstractmetamodel___MMGlobalClass___mixin_of_t)CALL((recv), (SFT_abstractmetamodel[15] + 16)))
-#define CALL_abstractmetamodel___MMGlobalClass___mixin_of__eq(recv) ((abstractmetamodel___MMGlobalClass___mixin_of__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 17)))
+#define CALL_abstractmetamodel___MMGlobalClass___is_extern(recv) ((abstractmetamodel___MMGlobalClass___is_extern_t)CALL((recv), (SFT_abstractmetamodel[15] + 13)))
+#define CALL_abstractmetamodel___MMGlobalClass___is_extern__eq(recv) ((abstractmetamodel___MMGlobalClass___is_extern__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 14)))
+#define CALL_abstractmetamodel___MMGlobalClass___visibility_level(recv) ((abstractmetamodel___MMGlobalClass___visibility_level_t)CALL((recv), (SFT_abstractmetamodel[15] + 15)))
+#define CALL_abstractmetamodel___MMGlobalClass___visibility_level__eq(recv) ((abstractmetamodel___MMGlobalClass___visibility_level__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 16)))
+#define CALL_abstractmetamodel___MMGlobalClass___is_mixin(recv) ((abstractmetamodel___MMGlobalClass___is_mixin_t)CALL((recv), (SFT_abstractmetamodel[15] + 17)))
+#define CALL_abstractmetamodel___MMGlobalClass___mixin_of(recv) ((abstractmetamodel___MMGlobalClass___mixin_of_t)CALL((recv), (SFT_abstractmetamodel[15] + 18)))
+#define CALL_abstractmetamodel___MMGlobalClass___mixin_of__eq(recv) ((abstractmetamodel___MMGlobalClass___mixin_of__eq_t)CALL((recv), (SFT_abstractmetamodel[15] + 19)))
 #define ID_MMLocalClass (SFT_abstractmetamodel[16])
 #define COLOR_MMLocalClass (SFT_abstractmetamodel[17])
 #define ATTR_abstractmetamodel___MMLocalClass____name(recv) ATTR(recv, (SFT_abstractmetamodel[18] + 0))
@@ -366,6 +369,12 @@ typedef val_t (*abstractmetamodel___MMGlobalClass___is_enum_t)(val_t p0);
 static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_enum__eq = "abstractmetamodel::MMGlobalClass::is_enum=";
 void abstractmetamodel___MMGlobalClass___is_enum__eq(val_t p0, val_t p1);
 typedef void (*abstractmetamodel___MMGlobalClass___is_enum__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_extern = "abstractmetamodel::MMGlobalClass::is_extern";
+val_t abstractmetamodel___MMGlobalClass___is_extern(val_t p0);
+typedef val_t (*abstractmetamodel___MMGlobalClass___is_extern_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMGlobalClass___is_extern__eq = "abstractmetamodel::MMGlobalClass::is_extern=";
+void abstractmetamodel___MMGlobalClass___is_extern__eq(val_t p0, val_t p1);
+typedef void (*abstractmetamodel___MMGlobalClass___is_extern__eq_t)(val_t p0, val_t p1);
 static const char * const LOCATE_abstractmetamodel___MMGlobalClass___visibility_level = "abstractmetamodel::MMGlobalClass::visibility_level";
 val_t abstractmetamodel___MMGlobalClass___visibility_level(val_t p0);
 typedef val_t (*abstractmetamodel___MMGlobalClass___visibility_level_t)(val_t p0);

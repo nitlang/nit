@@ -116,6 +116,7 @@ extern const int SFT_mmbuilder[];
 #define CALL_mmbuilder___AClasskind___is_interface(recv) ((mmbuilder___AClasskind___is_interface_t)CALL((recv), (SFT_mmbuilder[42] + 0)))
 #define CALL_mmbuilder___AClasskind___is_enum(recv) ((mmbuilder___AClasskind___is_enum_t)CALL((recv), (SFT_mmbuilder[42] + 1)))
 #define CALL_mmbuilder___AClasskind___is_abstract(recv) ((mmbuilder___AClasskind___is_abstract_t)CALL((recv), (SFT_mmbuilder[42] + 2)))
+#define CALL_mmbuilder___AClasskind___is_extern(recv) ((mmbuilder___AClasskind___is_extern_t)CALL((recv), (SFT_mmbuilder[42] + 3)))
 #define CALL_SUPER_mmbuilder___AStdClassdef___accept_class_verifier(recv) ((mmbuilder___AStdClassdef___accept_class_verifier_t)CALL((recv), (SFT_mmbuilder[43] + 0)))
 #define ATTR_mmbuilder___AFormaldef____formal(recv) ATTR(recv, (SFT_mmbuilder[44] + 0))
 #define CALL_SUPER_mmbuilder___AFormaldef___accept_class_builder(recv) ((mmbuilder___AFormaldef___accept_class_builder_t)CALL((recv), (SFT_mmbuilder[45] + 0)))
@@ -450,6 +451,9 @@ typedef val_t (*mmbuilder___AClasskind___is_enum_t)(val_t p0);
 static const char * const LOCATE_mmbuilder___AClasskind___is_abstract = "mmbuilder::AClasskind::is_abstract";
 val_t mmbuilder___AClasskind___is_abstract(val_t p0);
 typedef val_t (*mmbuilder___AClasskind___is_abstract_t)(val_t p0);
+static const char * const LOCATE_mmbuilder___AClasskind___is_extern = "mmbuilder::AClasskind::is_extern";
+val_t mmbuilder___AClasskind___is_extern(val_t p0);
+typedef val_t (*mmbuilder___AClasskind___is_extern_t)(val_t p0);
 val_t NEW_AClasskind_parser_nodes___ANode___init(val_t p0);
 static const char * const LOCATE_mmbuilder___AInterfaceClasskind___is_interface = "mmbuilder::AInterfaceClasskind::(mmbuilder::AClasskind::is_interface)";
 val_t mmbuilder___AInterfaceClasskind___is_interface(val_t p0);
@@ -463,6 +467,12 @@ typedef val_t (*mmbuilder___AEnumClasskind___is_enum_t)(val_t p0);
 val_t NEW_AEnumClasskind_parser_prod___AEnumClasskind___empty_init();
 val_t NEW_AEnumClasskind_parser_prod___AEnumClasskind___init_aenumclasskind(val_t p0);
 val_t NEW_AEnumClasskind_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_mmbuilder___AExternClasskind___is_extern = "mmbuilder::AExternClasskind::(mmbuilder::AClasskind::is_extern)";
+val_t mmbuilder___AExternClasskind___is_extern(val_t p0);
+typedef val_t (*mmbuilder___AExternClasskind___is_extern_t)(val_t p0);
+val_t NEW_AExternClasskind_parser_prod___AExternClasskind___empty_init();
+val_t NEW_AExternClasskind_parser_prod___AExternClasskind___init_aexternclasskind(val_t p0);
+val_t NEW_AExternClasskind_parser_nodes___ANode___init(val_t p0);
 static const char * const LOCATE_mmbuilder___AAbstractClasskind___is_abstract = "mmbuilder::AAbstractClasskind::(mmbuilder::AClasskind::is_abstract)";
 val_t mmbuilder___AAbstractClasskind___is_abstract(val_t p0);
 typedef val_t (*mmbuilder___AAbstractClasskind___is_abstract_t)(val_t p0);

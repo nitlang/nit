@@ -397,6 +397,10 @@ class AEnumClasskind
 	super AClasskind
     readable var _n_kwenum: TKwenum
 end
+class AExternClasskind
+       super AClasskind
+    readable var _n_kwextern: TKwextern
+end
 class AFormaldef
 	super Prod
     readable var _n_id: TClassid

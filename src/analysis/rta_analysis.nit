@@ -165,7 +165,7 @@ class RtaBuilder
 		end
 
 		for cls in program.main_module.global_classes do
-			if not cls.is_enum then continue
+			if not cls.is_enum and not cls.is_extern then continue
 			add_instantiated_class(program.main_module[cls])
 		end
 	end

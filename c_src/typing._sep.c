@@ -1663,6 +1663,13 @@ void typing___AConcreteInitPropdef___after_typing(val_t p0, val_t p1){
           REGB3 = TAG_Bool(true);
         } else {
           fra.me.REG[4] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[5])(fra.me.REG[5]);
+          REGB4 = CALL_abstractmetamodel___MMGlobalClass___is_extern(fra.me.REG[4])(fra.me.REG[4]);
+          REGB3 = REGB4;
+        }
+        if (UNTAG_Bool(REGB3)) {
+          REGB3 = TAG_Bool(true);
+        } else {
+          fra.me.REG[4] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[5])(fra.me.REG[5]);
           REGB4 = CALL_abstractmetamodel___MMGlobalClass___is_mixin(fra.me.REG[4])(fra.me.REG[4]);
           REGB3 = REGB4;
         }

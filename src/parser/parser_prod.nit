@@ -810,6 +810,37 @@ redef class AEnumClasskind
         v.enter_visit(_n_kwenum)
     end
 end
+redef class AExternClasskind
+    private init empty_init do end
+
+    init init_aexternclasskind (
+            n_kwextern: nullable TKwextern
+    )
+    do
+        empty_init
+        _n_kwextern = n_kwextern.as(not null)
+	n_kwextern.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_kwextern == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwextern
+                _n_kwextern = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_kwextern)
+    end
+end
 redef class AFormaldef
     private init empty_init do end
 

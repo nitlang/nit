@@ -1579,23 +1579,63 @@ void abstractmetamodel___MMGlobalClass___is_enum__eq(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return;
 }
-val_t abstractmetamodel___MMGlobalClass___visibility_level(val_t p0){
+val_t abstractmetamodel___MMGlobalClass___is_extern(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
   fra.me.line = 305;
-  fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___visibility_level;
+  fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___is_extern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//abstractmetamodel.nit:305 */
+  REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalClass____is_extern(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_is_extern", LOCATE_abstractmetamodel, 305);
+  }
+  REGB0 = ATTR_abstractmetamodel___MMGlobalClass____is_extern(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
+void abstractmetamodel___MMGlobalClass___is_extern__eq(val_t p0, val_t p1){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_abstractmetamodel;
+  fra.me.line = 305;
+  fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___is_extern__eq;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  REGB0 = p1;
+  /* ./metamodel//abstractmetamodel.nit:305 */
+  ATTR_abstractmetamodel___MMGlobalClass____is_extern(fra.me.REG[0]) = REGB0;
+  stack_frame_head = fra.me.prev;
+  return;
+}
+val_t abstractmetamodel___MMGlobalClass___visibility_level(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_abstractmetamodel;
+  fra.me.line = 308;
+  fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___visibility_level;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./metamodel//abstractmetamodel.nit:308 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalClass____visibility_level(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_visibility_level", LOCATE_abstractmetamodel, 305);
+    nit_abort("Uninitialized attribute %s", "_visibility_level", LOCATE_abstractmetamodel, 308);
   }
   REGB0 = ATTR_abstractmetamodel___MMGlobalClass____visibility_level(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1607,14 +1647,14 @@ void abstractmetamodel___MMGlobalClass___visibility_level__eq(val_t p0, val_t p1
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 305;
+  fra.me.line = 308;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___visibility_level__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:305 */
+  /* ./metamodel//abstractmetamodel.nit:308 */
   ATTR_abstractmetamodel___MMGlobalClass____visibility_level(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -1626,18 +1666,18 @@ val_t abstractmetamodel___MMGlobalClass___is_mixin(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 310;
+  fra.me.line = 313;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___is_mixin;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:314 */
+  /* ./metamodel//abstractmetamodel.nit:317 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalClass____mixin_of(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_mixin_of", LOCATE_abstractmetamodel, 314);
+    nit_abort("Uninitialized attribute %s", "_mixin_of", LOCATE_abstractmetamodel, 317);
   }
   fra.me.REG[1] = ATTR_abstractmetamodel___MMGlobalClass____mixin_of(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[0]));
@@ -1658,17 +1698,17 @@ val_t abstractmetamodel___MMGlobalClass___mixin_of(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 317;
+  fra.me.line = 320;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___mixin_of;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:317 */
+  /* ./metamodel//abstractmetamodel.nit:320 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalClass____mixin_of(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_mixin_of", LOCATE_abstractmetamodel, 317);
+    nit_abort("Uninitialized attribute %s", "_mixin_of", LOCATE_abstractmetamodel, 320);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMGlobalClass____mixin_of(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1679,7 +1719,7 @@ void abstractmetamodel___MMGlobalClass___mixin_of__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 317;
+  fra.me.line = 320;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalClass___mixin_of__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1687,7 +1727,7 @@ void abstractmetamodel___MMGlobalClass___mixin_of__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:317 */
+  /* ./metamodel//abstractmetamodel.nit:320 */
   ATTR_abstractmetamodel___MMGlobalClass____mixin_of(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1698,17 +1738,17 @@ val_t abstractmetamodel___MMLocalClass___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 326;
+  fra.me.line = 329;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:326 */
+  /* ./metamodel//abstractmetamodel.nit:329 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_name", LOCATE_abstractmetamodel, 326);
+    nit_abort("Uninitialized attribute %s", "_name", LOCATE_abstractmetamodel, 329);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____name(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1720,17 +1760,17 @@ val_t abstractmetamodel___MMLocalClass___arity(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 329;
+  fra.me.line = 332;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___arity;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:329 */
+  /* ./metamodel//abstractmetamodel.nit:332 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____arity(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_arity", LOCATE_abstractmetamodel, 329);
+    nit_abort("Uninitialized attribute %s", "_arity", LOCATE_abstractmetamodel, 332);
   }
   REGB0 = ATTR_abstractmetamodel___MMLocalClass____arity(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1742,17 +1782,17 @@ val_t abstractmetamodel___MMLocalClass___mmmodule(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 333;
+  fra.me.line = 336;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:333 */
+  /* ./metamodel//abstractmetamodel.nit:336 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_mmmodule", LOCATE_abstractmetamodel, 333);
+    nit_abort("Uninitialized attribute %s", "_mmmodule", LOCATE_abstractmetamodel, 336);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1764,18 +1804,18 @@ val_t abstractmetamodel___MMLocalClass___global(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 336;
+  fra.me.line = 339;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___global;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:337 */
+  /* ./metamodel//abstractmetamodel.nit:340 */
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____global(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 337);
+    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 340);
   }
   goto label1;
   label1: while(0);
@@ -1788,18 +1828,18 @@ val_t abstractmetamodel___MMLocalClass___crhe(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 340;
+  fra.me.line = 343;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___crhe;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:341 */
+  /* ./metamodel//abstractmetamodel.nit:344 */
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____crhe(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 341);
+    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 344);
   }
   goto label1;
   label1: while(0);
@@ -1812,18 +1852,18 @@ val_t abstractmetamodel___MMLocalClass___cshe(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 344;
+  fra.me.line = 347;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___cshe;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:345 */
+  /* ./metamodel//abstractmetamodel.nit:348 */
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____cshe(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 345);
+    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 348);
   }
   goto label1;
   label1: while(0);
@@ -1836,18 +1876,18 @@ val_t abstractmetamodel___MMLocalClass___che(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 348;
+  fra.me.line = 351;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___che;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:349 */
+  /* ./metamodel//abstractmetamodel.nit:352 */
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____che(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 349);
+    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 352);
   }
   goto label1;
   label1: while(0);
@@ -1860,17 +1900,17 @@ val_t abstractmetamodel___MMLocalClass___global_properties(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 355;
+  fra.me.line = 358;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___global_properties;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:355 */
+  /* ./metamodel//abstractmetamodel.nit:358 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____global_properties(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_global_properties", LOCATE_abstractmetamodel, 355);
+    nit_abort("Uninitialized attribute %s", "_global_properties", LOCATE_abstractmetamodel, 358);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____global_properties(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1882,17 +1922,17 @@ val_t abstractmetamodel___MMLocalClass___local_local_properties(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 358;
+  fra.me.line = 361;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___local_local_properties;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:358 */
+  /* ./metamodel//abstractmetamodel.nit:361 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____local_local_properties(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_local_local_properties", LOCATE_abstractmetamodel, 358);
+    nit_abort("Uninitialized attribute %s", "_local_local_properties", LOCATE_abstractmetamodel, 361);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____local_local_properties(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1906,7 +1946,7 @@ void abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2, val_t
   if (init_table[itpos4]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 364;
+  fra.me.line = 367;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1917,17 +1957,17 @@ void abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2, val_t
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   REGB0 = p3;
-  /* ./metamodel//abstractmetamodel.nit:367 */
-  ATTR_abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:368 */
-  ATTR_abstractmetamodel___MMLocalClass____name(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./metamodel//abstractmetamodel.nit:369 */
-  ATTR_abstractmetamodel___MMLocalClass____arity(fra.me.REG[0]) = REGB0;
   /* ./metamodel//abstractmetamodel.nit:370 */
+  ATTR_abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0]) = fra.me.REG[1];
+  /* ./metamodel//abstractmetamodel.nit:371 */
+  ATTR_abstractmetamodel___MMLocalClass____name(fra.me.REG[0]) = fra.me.REG[2];
+  /* ./metamodel//abstractmetamodel.nit:372 */
+  ATTR_abstractmetamodel___MMLocalClass____arity(fra.me.REG[0]) = REGB0;
+  /* ./metamodel//abstractmetamodel.nit:373 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMModule____local_classes(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_local_classes", LOCATE_abstractmetamodel, 370);
+    nit_abort("Uninitialized attribute %s", "_local_classes", LOCATE_abstractmetamodel, 373);
   }
   fra.me.REG[1] = ATTR_abstractmetamodel___MMModule____local_classes(fra.me.REG[1]);
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
@@ -1940,7 +1980,7 @@ val_t abstractmetamodel___MMLocalClass___for_module(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 373;
+  fra.me.line = 376;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1948,7 +1988,7 @@ val_t abstractmetamodel___MMLocalClass___for_module(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:376 */
+  /* ./metamodel//abstractmetamodel.nit:379 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalClass___global(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_abstractmetamodel___MMModule_____bra(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   goto label1;
@@ -1962,7 +2002,7 @@ void abstractmetamodel___MMLocalClass___new_global(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 379;
+  fra.me.line = 382;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___new_global;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1971,38 +2011,38 @@ void abstractmetamodel___MMLocalClass___new_global(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:382 */
+  /* ./metamodel//abstractmetamodel.nit:385 */
   fra.me.REG[1] = NEW_MMGlobalClass_abstractmetamodel___MMGlobalClass___init(fra.me.REG[0]);
-  /* ./metamodel//abstractmetamodel.nit:383 */
+  /* ./metamodel//abstractmetamodel.nit:386 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_mmmodule", LOCATE_abstractmetamodel, 383);
+    nit_abort("Uninitialized attribute %s", "_mmmodule", LOCATE_abstractmetamodel, 386);
   }
   fra.me.REG[2] = ATTR_abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0]);
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMModule____global_classes(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_global_classes", LOCATE_abstractmetamodel, 383);
+    nit_abort("Uninitialized attribute %s", "_global_classes", LOCATE_abstractmetamodel, 386);
   }
   fra.me.REG[2] = ATTR_abstractmetamodel___MMModule____global_classes(fra.me.REG[2]);
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:384 */
+  /* ./metamodel//abstractmetamodel.nit:387 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_mmmodule", LOCATE_abstractmetamodel, 384);
+    nit_abort("Uninitialized attribute %s", "_mmmodule", LOCATE_abstractmetamodel, 387);
   }
   fra.me.REG[2] = ATTR_abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0]);
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMModule____global_class_by_name(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_global_class_by_name", LOCATE_abstractmetamodel, 384);
+    nit_abort("Uninitialized attribute %s", "_global_class_by_name", LOCATE_abstractmetamodel, 387);
   }
   fra.me.REG[2] = ATTR_abstractmetamodel___MMModule____global_class_by_name(fra.me.REG[2]);
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalClass___name(fra.me.REG[0])(fra.me.REG[0]);
   CALL_abstract_collection___Map_____braeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:385 */
+  /* ./metamodel//abstractmetamodel.nit:388 */
   CALL_abstractmetamodel___MMLocalClass___set_global(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -2013,7 +2053,7 @@ void abstractmetamodel___MMLocalClass___set_global(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 388;
+  fra.me.line = 391;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___set_global;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2021,20 +2061,20 @@ void abstractmetamodel___MMLocalClass___set_global(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:393 */
+  /* ./metamodel//abstractmetamodel.nit:396 */
   ATTR_abstractmetamodel___MMLocalClass____global(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:394 */
+  /* ./metamodel//abstractmetamodel.nit:397 */
   fra.me.REG[1] = ATTR_abstractmetamodel___MMLocalClass____global(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 394);
+    nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 397);
   }
   CALL_abstractmetamodel___MMGlobalClass___register_local_class(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./metamodel//abstractmetamodel.nit:395 */
+  /* ./metamodel//abstractmetamodel.nit:398 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_mmmodule", LOCATE_abstractmetamodel, 395);
+    nit_abort("Uninitialized attribute %s", "_mmmodule", LOCATE_abstractmetamodel, 398);
   }
   fra.me.REG[1] = ATTR_abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0]);
   CALL_abstractmetamodel___MMModule___register_global_class(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
@@ -2049,7 +2089,7 @@ val_t abstractmetamodel___MMLocalClass___has_global_property_by_name(val_t p0, v
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 398;
+  fra.me.line = 401;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___has_global_property_by_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2058,11 +2098,11 @@ val_t abstractmetamodel___MMLocalClass___has_global_property_by_name(val_t p0, v
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:402 */
+  /* ./metamodel//abstractmetamodel.nit:405 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 402);
+    nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 405);
   }
   fra.me.REG[2] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0]);
   REGB0 = CALL_abstract_collection___MapRead___has_key(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
@@ -2070,13 +2110,13 @@ val_t abstractmetamodel___MMLocalClass___has_global_property_by_name(val_t p0, v
     REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 402);
+      nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 405);
     }
     fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0]);
     fra.me.REG[1] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 402);
+      nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 405);
     }
     /* ./../lib/standard//collection//array.nit:23 */
     REGB0 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -2085,14 +2125,14 @@ val_t abstractmetamodel___MMLocalClass___has_global_property_by_name(val_t p0, v
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
     }
     REGB0 = ATTR_array___AbstractArrayRead____length(fra.me.REG[1]);
-    /* ./metamodel//abstractmetamodel.nit:402 */
+    /* ./metamodel//abstractmetamodel.nit:405 */
     REGB1 = TAG_Int(1);
     REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
     if (UNTAG_Bool(REGB2)) {
     } else {
       /* ./../lib/standard//kernel.nit:207 */
       REGB1 = TAG_Bool((REGB0)==(REGB1));
-      /* ./metamodel//abstractmetamodel.nit:402 */
+      /* ./metamodel//abstractmetamodel.nit:405 */
       REGB2 = REGB1;
     }
   } else {
@@ -2110,7 +2150,7 @@ val_t abstractmetamodel___MMLocalClass___get_property_by_name(val_t p0, val_t p1
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 405;
+  fra.me.line = 408;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___get_property_by_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2118,21 +2158,21 @@ val_t abstractmetamodel___MMLocalClass___get_property_by_name(val_t p0, val_t p1
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:409 */
+  /* ./metamodel//abstractmetamodel.nit:412 */
   REGB0 = CALL_abstractmetamodel___MMLocalClass___has_global_property_by_name(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Aborted", NULL, LOCATE_abstractmetamodel, 409);
+    nit_abort("Aborted", NULL, LOCATE_abstractmetamodel, 412);
   }
-  /* ./metamodel//abstractmetamodel.nit:410 */
+  /* ./metamodel//abstractmetamodel.nit:413 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 410);
+    nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 413);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0]);
   fra.me.REG[1] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:411 */
+  /* ./metamodel//abstractmetamodel.nit:414 */
   fra.me.REG[1] = CALL_abstract_collection___Collection___first(fra.me.REG[1])(fra.me.REG[1]);
   goto label1;
   label1: while(0);
@@ -2144,7 +2184,7 @@ val_t abstractmetamodel___MMLocalClass___attribute(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 414;
+  fra.me.line = 417;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___attribute;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2152,7 +2192,7 @@ val_t abstractmetamodel___MMLocalClass___attribute(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:418 */
+  /* ./metamodel//abstractmetamodel.nit:421 */
   fra.me.REG[1] = CALL_abstractmetamodel___MMLocalClass___get_property_by_name(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   goto label1;
   label1: while(0);
@@ -2165,7 +2205,7 @@ val_t abstractmetamodel___MMLocalClass___method(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 421;
+  fra.me.line = 424;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2173,17 +2213,17 @@ val_t abstractmetamodel___MMLocalClass___method(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:425 */
+  /* ./metamodel//abstractmetamodel.nit:428 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 425);
+    nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 428);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0]);
   fra.me.REG[1] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 425);
+    nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 428);
   }
   fra.me.REG[1] = CALL_abstract_collection___Collection___first(fra.me.REG[1])(fra.me.REG[1]);
   goto label1;
@@ -2197,7 +2237,7 @@ val_t abstractmetamodel___MMLocalClass___select_method(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 428;
+  fra.me.line = 431;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___select_method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2205,17 +2245,17 @@ val_t abstractmetamodel___MMLocalClass___select_method(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:432 */
+  /* ./metamodel//abstractmetamodel.nit:435 */
   fra.me.REG[1] = CALL_abstractmetamodel___MMLocalClass___method(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:433 */
+  /* ./metamodel//abstractmetamodel.nit:436 */
   fra.me.REG[1] = CALL_abstractmetamodel___MMLocalClass_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:434 */
+  /* ./metamodel//abstractmetamodel.nit:437 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_abstractmetamodel, 434);
+    nit_abort("Assert failed", NULL, LOCATE_abstractmetamodel, 437);
   }
-  /* ./metamodel//abstractmetamodel.nit:435 */
+  /* ./metamodel//abstractmetamodel.nit:438 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2227,7 +2267,7 @@ val_t abstractmetamodel___MMLocalClass___select_attribute(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 438;
+  fra.me.line = 441;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___select_attribute;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2235,17 +2275,17 @@ val_t abstractmetamodel___MMLocalClass___select_attribute(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:442 */
+  /* ./metamodel//abstractmetamodel.nit:445 */
   fra.me.REG[1] = CALL_abstractmetamodel___MMLocalClass___attribute(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:443 */
+  /* ./metamodel//abstractmetamodel.nit:446 */
   fra.me.REG[1] = CALL_abstractmetamodel___MMLocalClass_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:444 */
+  /* ./metamodel//abstractmetamodel.nit:447 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_MMAttribute, ID_MMAttribute)) /*cast MMAttribute*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_abstractmetamodel, 444);
+    nit_abort("Assert failed", NULL, LOCATE_abstractmetamodel, 447);
   }
-  /* ./metamodel//abstractmetamodel.nit:445 */
+  /* ./metamodel//abstractmetamodel.nit:448 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2258,7 +2298,7 @@ val_t abstractmetamodel___MMLocalClass___super_methods_named(val_t p0, val_t p1)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 448;
+  fra.me.line = 451;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___super_methods_named;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -2270,18 +2310,18 @@ val_t abstractmetamodel___MMLocalClass___super_methods_named(val_t p0, val_t p1)
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:452 */
+  /* ./metamodel//abstractmetamodel.nit:455 */
   fra.me.REG[2] = NEW_Array_array___Array___init();
-  /* ./metamodel//abstractmetamodel.nit:453 */
+  /* ./metamodel//abstractmetamodel.nit:456 */
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalClass___cshe(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_partial_order___PartialOrderElement___greaters(fra.me.REG[3])(fra.me.REG[3]);
   CALL_abstract_collection___Collection___iterate(fra.me.REG[3])(fra.me.REG[3], (&(fra.me)), ((fun_t)OC_abstractmetamodel___MMLocalClass___super_methods_named_1));
-  /* ./metamodel//abstractmetamodel.nit:456 */
+  /* ./metamodel//abstractmetamodel.nit:459 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalClass___cshe(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_partial_order___PartialOrderElement___order(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_partial_order___PartialOrder___select_smallests(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./metamodel//abstractmetamodel.nit:457 */
+  /* ./metamodel//abstractmetamodel.nit:460 */
   fra.me.REG[0] = NEW_Array_array___Array___init();
   /* ./../lib/standard//collection//array.nit:234 */
   REGB0 = TAG_Int(0);
@@ -2314,9 +2354,9 @@ val_t abstractmetamodel___MMLocalClass___super_methods_named(val_t p0, val_t p1)
       }
       /* ./../lib/standard//collection//array.nit:654 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
-      /* ./metamodel//abstractmetamodel.nit:459 */
+      /* ./metamodel//abstractmetamodel.nit:462 */
       fra.me.REG[5] = CALL_abstractmetamodel___MMLocalClass___method(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
-      /* ./metamodel//abstractmetamodel.nit:461 */
+      /* ./metamodel//abstractmetamodel.nit:464 */
       fra.me.REG[5] = CALL_abstractmetamodel___MMLocalClass_____bra(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
       CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);
       /* ./../lib/standard//collection//array.nit:239 */
@@ -2331,7 +2371,7 @@ val_t abstractmetamodel___MMLocalClass___super_methods_named(val_t p0, val_t p1)
     }
   }
   label2: while(0);
-  /* ./metamodel//abstractmetamodel.nit:463 */
+  /* ./metamodel//abstractmetamodel.nit:466 */
   goto label3;
   label3: while(0);
   stack_frame_head = fra.me.prev;
@@ -2353,7 +2393,7 @@ val_t abstractmetamodel___MMLocalClass___super_methods_named(val_t p0, val_t p1)
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* ./metamodel//abstractmetamodel.nit:454 */
+    /* ./metamodel//abstractmetamodel.nit:457 */
     REGB0 = CALL_abstractmetamodel___MMLocalClass___has_global_property_by_name(fra.me.REG[0])(fra.me.REG[0], closctx->REG[1]);
     if (UNTAG_Bool(REGB0)) {
       CALL_abstract_collection___SimpleCollection___add(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
@@ -2368,7 +2408,7 @@ void abstractmetamodel___MMLocalClass___register_local_property(val_t p0, val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 466;
+  fra.me.line = 469;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___register_local_property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -2378,16 +2418,16 @@ void abstractmetamodel___MMLocalClass___register_local_property(val_t p0, val_t 
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:469 */
+  /* ./metamodel//abstractmetamodel.nit:472 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_local_property_by_global", LOCATE_abstractmetamodel, 469);
+    nit_abort("Uninitialized attribute %s", "_local_property_by_global", LOCATE_abstractmetamodel, 472);
   }
   fra.me.REG[2] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(fra.me.REG[0]);
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalProperty___global(fra.me.REG[1])(fra.me.REG[1]);
   CALL_abstract_collection___Map_____braeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:470 */
+  /* ./metamodel//abstractmetamodel.nit:473 */
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[0]));
   if (UNTAG_Bool(REGB0)) {
@@ -2396,11 +2436,11 @@ void abstractmetamodel___MMLocalClass___register_local_property(val_t p0, val_t 
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./metamodel//abstractmetamodel.nit:471 */
+    /* ./metamodel//abstractmetamodel.nit:474 */
     REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____local_local_properties(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_local_local_properties", LOCATE_abstractmetamodel, 471);
+      nit_abort("Uninitialized attribute %s", "_local_local_properties", LOCATE_abstractmetamodel, 474);
     }
     fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____local_local_properties(fra.me.REG[0]);
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
@@ -2414,7 +2454,7 @@ void abstractmetamodel___MMLocalClass___register_global_property(val_t p0, val_t
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 475;
+  fra.me.line = 478;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___register_global_property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -2426,38 +2466,38 @@ void abstractmetamodel___MMLocalClass___register_global_property(val_t p0, val_t
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:478 */
+  /* ./metamodel//abstractmetamodel.nit:481 */
   fra.me.REG[2] = CALL_abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:479 */
+  /* ./metamodel//abstractmetamodel.nit:482 */
   fra.me.REG[3] = CALL_abstractmetamodel___MMLocalProperty___name(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./metamodel//abstractmetamodel.nit:480 */
+  /* ./metamodel//abstractmetamodel.nit:483 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 480);
+    nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 483);
   }
   fra.me.REG[4] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0]);
   REGB0 = CALL_abstract_collection___MapRead___has_key(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./metamodel//abstractmetamodel.nit:481 */
+    /* ./metamodel//abstractmetamodel.nit:484 */
     REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 481);
+      nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 484);
     }
     fra.me.REG[4] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0]);
     fra.me.REG[4] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
     REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 481);
+      nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 484);
     }
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
   } else {
-    /* ./metamodel//abstractmetamodel.nit:483 */
+    /* ./metamodel//abstractmetamodel.nit:486 */
     REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 483);
+      nit_abort("Uninitialized attribute %s", "_properties_by_name", LOCATE_abstractmetamodel, 486);
     }
     fra.me.REG[4] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0]);
     REGB0 = TAG_Int(1);
@@ -2465,15 +2505,15 @@ void abstractmetamodel___MMLocalClass___register_global_property(val_t p0, val_t
     CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1]);
     CALL_abstract_collection___Map_____braeq(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3], fra.me.REG[5]);
   }
-  /* ./metamodel//abstractmetamodel.nit:485 */
+  /* ./metamodel//abstractmetamodel.nit:488 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____global_properties(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_global_properties", LOCATE_abstractmetamodel, 485);
+    nit_abort("Uninitialized attribute %s", "_global_properties", LOCATE_abstractmetamodel, 488);
   }
   fra.me.REG[5] = ATTR_abstractmetamodel___MMLocalClass____global_properties(fra.me.REG[0]);
   CALL_abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:486 */
+  /* ./metamodel//abstractmetamodel.nit:489 */
   CALL_abstractmetamodel___MMLocalClass___register_local_property(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
   return;
@@ -2484,7 +2524,7 @@ val_t abstractmetamodel___MMLocalClass___has_global_property(val_t p0, val_t p1)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 489;
+  fra.me.line = 492;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___has_global_property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2492,11 +2532,11 @@ val_t abstractmetamodel___MMLocalClass___has_global_property(val_t p0, val_t p1)
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:492 */
+  /* ./metamodel//abstractmetamodel.nit:495 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____global_properties(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_global_properties", LOCATE_abstractmetamodel, 492);
+    nit_abort("Uninitialized attribute %s", "_global_properties", LOCATE_abstractmetamodel, 495);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____global_properties(fra.me.REG[0]);
   REGB0 = CALL_abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
@@ -2511,7 +2551,7 @@ val_t abstractmetamodel___MMLocalClass_____bra(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 495;
+  fra.me.line = 498;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2519,11 +2559,11 @@ val_t abstractmetamodel___MMLocalClass_____bra(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:498 */
+  /* ./metamodel//abstractmetamodel.nit:501 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_local_property_by_global", LOCATE_abstractmetamodel, 498);
+    nit_abort("Uninitialized attribute %s", "_local_property_by_global", LOCATE_abstractmetamodel, 501);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(fra.me.REG[0]);
   fra.me.REG[1] = CALL_abstract_collection___MapRead_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
@@ -2537,13 +2577,13 @@ val_t abstractmetamodel___MMLocalClass___context(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 501;
+  fra.me.line = 504;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___context;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:502 */
+  /* ./metamodel//abstractmetamodel.nit:505 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_abstractmetamodel___MMModule___context(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -2557,17 +2597,17 @@ val_t abstractmetamodel___MMLocalClass___to_s(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 504;
+  fra.me.line = 507;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:506 */
+  /* ./metamodel//abstractmetamodel.nit:509 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalClass____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_name", LOCATE_abstractmetamodel, 506);
+    nit_abort("Uninitialized attribute %s", "_name", LOCATE_abstractmetamodel, 509);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalClass____name(fra.me.REG[0]);
   fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
@@ -2585,7 +2625,7 @@ val_t abstractmetamodel___MMLocalClass___total_order_compare(val_t p0, val_t p1)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 509;
+  fra.me.line = 512;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalClass___total_order_compare;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -2595,7 +2635,7 @@ val_t abstractmetamodel___MMLocalClass___total_order_compare(val_t p0, val_t p1)
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:513 */
+  /* ./metamodel//abstractmetamodel.nit:516 */
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[0],fra.me.REG[1]));
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2603,73 +2643,73 @@ val_t abstractmetamodel___MMLocalClass___total_order_compare(val_t p0, val_t p1)
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./metamodel//abstractmetamodel.nit:514 */
+    /* ./metamodel//abstractmetamodel.nit:517 */
     REGB0 = TAG_Int(0);
     goto label1;
   } else {
-    /* ./metamodel//abstractmetamodel.nit:515 */
+    /* ./metamodel//abstractmetamodel.nit:518 */
     fra.me.REG[2] = CALL_abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[2] = CALL_abstractmetamodel___MMModule___mhe(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[3] = CALL_abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
     REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
-      nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 515);
+      nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 518);
     }
     REGB1 = CALL_partial_order___PartialOrderElement_____l(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     if (UNTAG_Bool(REGB1)) {
-      /* ./metamodel//abstractmetamodel.nit:516 */
+      /* ./metamodel//abstractmetamodel.nit:519 */
       REGB1 = TAG_Int(1);
       REGB0 = REGB1;
       goto label1;
     } else {
-      /* ./metamodel//abstractmetamodel.nit:517 */
+      /* ./metamodel//abstractmetamodel.nit:520 */
       fra.me.REG[3] = CALL_abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[3] = CALL_abstractmetamodel___MMModule___mhe(fra.me.REG[3])(fra.me.REG[3]);
       fra.me.REG[2] = CALL_abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
       REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 517);
+        nit_abort("Reciever is null", NULL, LOCATE_abstractmetamodel, 520);
       }
       REGB1 = CALL_partial_order___PartialOrderElement_____l(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
       if (UNTAG_Bool(REGB1)) {
-        /* ./metamodel//abstractmetamodel.nit:518 */
+        /* ./metamodel//abstractmetamodel.nit:521 */
         REGB1 = TAG_Int(1);
         /* ./../lib/standard//kernel.nit:216 */
         REGB1 = TAG_Int(-UNTAG_Int(REGB1));
-        /* ./metamodel//abstractmetamodel.nit:518 */
+        /* ./metamodel//abstractmetamodel.nit:521 */
         REGB0 = REGB1;
         goto label1;
       }
     }
   }
-  /* ./metamodel//abstractmetamodel.nit:520 */
+  /* ./metamodel//abstractmetamodel.nit:523 */
   fra.me.REG[2] = CALL_abstractmetamodel___MMLocalClass___cshe(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = CALL_partial_order___PartialOrderElement___rank(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./metamodel//abstractmetamodel.nit:521 */
+  /* ./metamodel//abstractmetamodel.nit:524 */
   fra.me.REG[2] = CALL_abstractmetamodel___MMLocalClass___cshe(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = CALL_partial_order___PartialOrderElement___rank(fra.me.REG[2])(fra.me.REG[2]);
   /* ./../lib/standard//kernel.nit:214 */
   REGB3 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
-  /* ./metamodel//abstractmetamodel.nit:522 */
+  /* ./metamodel//abstractmetamodel.nit:525 */
   if (UNTAG_Bool(REGB3)) {
-    /* ./metamodel//abstractmetamodel.nit:523 */
+    /* ./metamodel//abstractmetamodel.nit:526 */
     REGB3 = TAG_Int(1);
     REGB0 = REGB3;
     goto label1;
   } else {
     /* ./../lib/standard//kernel.nit:214 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB2)>UNTAG_Int(REGB1));
-    /* ./metamodel//abstractmetamodel.nit:524 */
+    /* ./metamodel//abstractmetamodel.nit:527 */
     if (UNTAG_Bool(REGB1)) {
-      /* ./metamodel//abstractmetamodel.nit:525 */
+      /* ./metamodel//abstractmetamodel.nit:528 */
       REGB1 = TAG_Int(1);
       /* ./../lib/standard//kernel.nit:216 */
       REGB1 = TAG_Int(-UNTAG_Int(REGB1));
-      /* ./metamodel//abstractmetamodel.nit:525 */
+      /* ./metamodel//abstractmetamodel.nit:528 */
       REGB0 = REGB1;
       goto label1;
     } else {
-      /* ./metamodel//abstractmetamodel.nit:527 */
+      /* ./metamodel//abstractmetamodel.nit:530 */
       fra.me.REG[1] = CALL_abstractmetamodel___MMLocalClass___name(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[0] = CALL_abstractmetamodel___MMLocalClass___name(fra.me.REG[0])(fra.me.REG[0]);
@@ -2689,17 +2729,17 @@ val_t abstractmetamodel___MMGlobalProperty___intro(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 536;
+  fra.me.line = 539;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___intro;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:536 */
+  /* ./metamodel//abstractmetamodel.nit:539 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalProperty____intro(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_intro", LOCATE_abstractmetamodel, 536);
+    nit_abort("Uninitialized attribute %s", "_intro", LOCATE_abstractmetamodel, 539);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMGlobalProperty____intro(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2710,13 +2750,13 @@ val_t abstractmetamodel___MMGlobalProperty___local_class(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 539;
+  fra.me.line = 542;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:542 */
+  /* ./metamodel//abstractmetamodel.nit:545 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -2730,17 +2770,17 @@ val_t abstractmetamodel___MMGlobalProperty___property_hierarchy(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 545;
+  fra.me.line = 548;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___property_hierarchy;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:545 */
+  /* ./metamodel//abstractmetamodel.nit:548 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalProperty____property_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_property_hierarchy", LOCATE_abstractmetamodel, 545);
+    nit_abort("Uninitialized attribute %s", "_property_hierarchy", LOCATE_abstractmetamodel, 548);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMGlobalProperty____property_hierarchy(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2753,7 +2793,7 @@ void abstractmetamodel___MMGlobalProperty___init(val_t p0, val_t p1, int* init_t
   if (init_table[itpos5]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 548;
+  fra.me.line = 551;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2762,9 +2802,9 @@ void abstractmetamodel___MMGlobalProperty___init(val_t p0, val_t p1, int* init_t
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:551 */
+  /* ./metamodel//abstractmetamodel.nit:554 */
   ATTR_abstractmetamodel___MMGlobalProperty____intro(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:552 */
+  /* ./metamodel//abstractmetamodel.nit:555 */
   fra.me.REG[2] = NEW_Array_array___Array___init();
   CALL_abstractmetamodel___MMGlobalProperty___add_local_property(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
@@ -2776,13 +2816,13 @@ val_t abstractmetamodel___MMGlobalProperty___to_s(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 555;
+  fra.me.line = 558;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:555 */
+  /* ./metamodel//abstractmetamodel.nit:558 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalProperty___full_name(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -2796,7 +2836,7 @@ void abstractmetamodel___MMGlobalProperty___add_local_property(val_t p0, val_t p
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 557;
+  fra.me.line = 560;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___add_local_property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2806,11 +2846,11 @@ void abstractmetamodel___MMGlobalProperty___add_local_property(val_t p0, val_t p
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./metamodel//abstractmetamodel.nit:560 */
+  /* ./metamodel//abstractmetamodel.nit:563 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalProperty____property_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_property_hierarchy", LOCATE_abstractmetamodel, 560);
+    nit_abort("Uninitialized attribute %s", "_property_hierarchy", LOCATE_abstractmetamodel, 563);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMGlobalProperty____property_hierarchy(fra.me.REG[0]);
   fra.me.REG[2] = CALL_partial_order___PartialOrder___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
@@ -2824,13 +2864,13 @@ val_t abstractmetamodel___MMGlobalProperty___is_attribute(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 563;
+  fra.me.line = 566;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___is_attribute;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:564 */
+  /* ./metamodel//abstractmetamodel.nit:567 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_MMAttribute, ID_MMAttribute)) /*cast MMAttribute*/;
   goto label1;
@@ -2844,13 +2884,13 @@ val_t abstractmetamodel___MMGlobalProperty___is_method(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 566;
+  fra.me.line = 569;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___is_method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:567 */
+  /* ./metamodel//abstractmetamodel.nit:570 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
   goto label1;
@@ -2864,17 +2904,17 @@ val_t abstractmetamodel___MMGlobalProperty___is_init(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 569;
+  fra.me.line = 572;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___is_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:569 */
+  /* ./metamodel//abstractmetamodel.nit:572 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalProperty____is_init(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_is_init", LOCATE_abstractmetamodel, 569);
+    nit_abort("Uninitialized attribute %s", "_is_init", LOCATE_abstractmetamodel, 572);
   }
   REGB0 = ATTR_abstractmetamodel___MMGlobalProperty____is_init(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2886,14 +2926,14 @@ void abstractmetamodel___MMGlobalProperty___is_init__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 569;
+  fra.me.line = 572;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___is_init__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:569 */
+  /* ./metamodel//abstractmetamodel.nit:572 */
   ATTR_abstractmetamodel___MMGlobalProperty____is_init(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -2906,7 +2946,7 @@ val_t abstractmetamodel___MMGlobalProperty___is_init_for(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 572;
+  fra.me.line = 575;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___is_init_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2915,17 +2955,17 @@ val_t abstractmetamodel___MMGlobalProperty___is_init_for(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:575 */
+  /* ./metamodel//abstractmetamodel.nit:578 */
   REGB0 = CALL_abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(false);
     goto label1;
   }
-  /* ./metamodel//abstractmetamodel.nit:576 */
+  /* ./metamodel//abstractmetamodel.nit:579 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./metamodel//abstractmetamodel.nit:577 */
+  /* ./metamodel//abstractmetamodel.nit:580 */
   fra.me.REG[2] = CALL_abstractmetamodel___MMLocalClass___che(fra.me.REG[1])(fra.me.REG[1]);
   REGB1 = CALL_partial_order___PartialOrderElement_____leq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
   if (UNTAG_Bool(REGB1)) {
@@ -2943,7 +2983,7 @@ val_t abstractmetamodel___MMGlobalProperty___is_init_for(val_t p0, val_t p1){
     REGB2 = TAG_Bool(false);
     REGB1 = REGB2;
   }
-  /* ./metamodel//abstractmetamodel.nit:578 */
+  /* ./metamodel//abstractmetamodel.nit:581 */
   REGB0 = REGB1;
   goto label1;
   label1: while(0);
@@ -2956,17 +2996,17 @@ val_t abstractmetamodel___MMGlobalProperty___visibility_level(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 581;
+  fra.me.line = 584;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:581 */
+  /* ./metamodel//abstractmetamodel.nit:584 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMGlobalProperty____visibility_level(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_visibility_level", LOCATE_abstractmetamodel, 581);
+    nit_abort("Uninitialized attribute %s", "_visibility_level", LOCATE_abstractmetamodel, 584);
   }
   REGB0 = ATTR_abstractmetamodel___MMGlobalProperty____visibility_level(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2978,14 +3018,14 @@ void abstractmetamodel___MMGlobalProperty___visibility_level__eq(val_t p0, val_t
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 581;
+  fra.me.line = 584;
   fra.me.meth = LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:581 */
+  /* ./metamodel//abstractmetamodel.nit:584 */
   ATTR_abstractmetamodel___MMGlobalProperty____visibility_level(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -2996,17 +3036,17 @@ val_t abstractmetamodel___MMLocalProperty___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 590;
+  fra.me.line = 593;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:590 */
+  /* ./metamodel//abstractmetamodel.nit:593 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalProperty____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_name", LOCATE_abstractmetamodel, 590);
+    nit_abort("Uninitialized attribute %s", "_name", LOCATE_abstractmetamodel, 593);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalProperty____name(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3018,17 +3058,17 @@ val_t abstractmetamodel___MMLocalProperty___local_class(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 593;
+  fra.me.line = 596;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:593 */
+  /* ./metamodel//abstractmetamodel.nit:596 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_abstractmetamodel, 593);
+    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_abstractmetamodel, 596);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3040,18 +3080,18 @@ val_t abstractmetamodel___MMLocalProperty___global(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 599;
+  fra.me.line = 602;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___global;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:599 */
+  /* ./metamodel//abstractmetamodel.nit:602 */
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 599);
+    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 602);
   }
   goto label1;
   label1: while(0);
@@ -3065,13 +3105,13 @@ val_t abstractmetamodel___MMLocalProperty___is_global_set(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 600;
+  fra.me.line = 603;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___is_global_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:600 */
+  /* ./metamodel//abstractmetamodel.nit:603 */
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -3097,18 +3137,18 @@ val_t abstractmetamodel___MMLocalProperty___prhe(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 605;
+  fra.me.line = 608;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___prhe;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:605 */
+  /* ./metamodel//abstractmetamodel.nit:608 */
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalProperty____prhe(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 605);
+    nit_abort("Cast failed", NULL, LOCATE_abstractmetamodel, 608);
   }
   goto label1;
   label1: while(0);
@@ -3121,17 +3161,17 @@ val_t abstractmetamodel___MMLocalProperty___mmmodule(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 607;
+  fra.me.line = 610;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:608 */
+  /* ./metamodel//abstractmetamodel.nit:611 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_abstractmetamodel, 608);
+    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_abstractmetamodel, 611);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0]);
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
@@ -3159,7 +3199,7 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t p0){
       static val_t once_value_13; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 610;
+  fra.me.line = 613;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___full_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -3168,7 +3208,7 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:613 */
+  /* ./metamodel//abstractmetamodel.nit:616 */
   fra.me.REG[1] = ATTR_abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -3183,7 +3223,7 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t p0){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./metamodel//abstractmetamodel.nit:614 */
+    /* ./metamodel//abstractmetamodel.nit:617 */
     REGB0 = TAG_Int(7);
     fra.me.REG[1] = NEW_Array_array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -3235,7 +3275,7 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t p0){
     fra.me.REG[1] = CALL_string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
     goto label5;
   } else {
-    /* ./metamodel//abstractmetamodel.nit:615 */
+    /* ./metamodel//abstractmetamodel.nit:618 */
     fra.me.REG[2] = CALL_abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[2] = CALL_abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[0]));
@@ -3245,7 +3285,7 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t p0){
       REGB0 = REGB1;
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./metamodel//abstractmetamodel.nit:616 */
+      /* ./metamodel//abstractmetamodel.nit:619 */
       REGB0 = TAG_Int(7);
       fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB0);
       if (!once_value_6) {
@@ -3298,7 +3338,7 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t p0){
       fra.me.REG[1] = fra.me.REG[2];
       goto label5;
     } else {
-      /* ./metamodel//abstractmetamodel.nit:618 */
+      /* ./metamodel//abstractmetamodel.nit:621 */
       REGB0 = TAG_Int(7);
       fra.me.REG[2] = NEW_Array_array___Array___with_capacity(REGB0);
       if (!once_value_10) {
@@ -3363,7 +3403,7 @@ void abstractmetamodel___MMLocalProperty___set_global(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 622;
+  fra.me.line = 625;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___set_global;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -3371,13 +3411,13 @@ void abstractmetamodel___MMLocalProperty___set_global(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:625 */
+  /* ./metamodel//abstractmetamodel.nit:628 */
   ATTR_abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:626 */
+  /* ./metamodel//abstractmetamodel.nit:629 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_abstractmetamodel, 626);
+    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_abstractmetamodel, 629);
   }
   fra.me.REG[1] = ATTR_abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0]);
   CALL_abstractmetamodel___MMLocalClass___register_local_property(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
@@ -3391,14 +3431,14 @@ void abstractmetamodel___MMLocalProperty___new_global(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 629;
+  fra.me.line = 632;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___new_global;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:632 */
+  /* ./metamodel//abstractmetamodel.nit:635 */
   fra.me.REG[1] = ATTR_abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -3414,17 +3454,17 @@ void abstractmetamodel___MMLocalProperty___new_global(val_t p0){
   }
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_abstractmetamodel, 632);
+    nit_abort("Assert failed", NULL, LOCATE_abstractmetamodel, 635);
   }
-  /* ./metamodel//abstractmetamodel.nit:633 */
+  /* ./metamodel//abstractmetamodel.nit:636 */
   fra.me.REG[1] = NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(fra.me.REG[0]);
-  /* ./metamodel//abstractmetamodel.nit:634 */
+  /* ./metamodel//abstractmetamodel.nit:637 */
   ATTR_abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:635 */
+  /* ./metamodel//abstractmetamodel.nit:638 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_abstractmetamodel, 635);
+    nit_abort("Uninitialized attribute %s", "_local_class", LOCATE_abstractmetamodel, 638);
   }
   fra.me.REG[0] = ATTR_abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0]);
   CALL_abstractmetamodel___MMLocalClass___register_global_property(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
@@ -3436,13 +3476,13 @@ val_t abstractmetamodel___MMLocalProperty___to_s(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 638;
+  fra.me.line = 641;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:638 */
+  /* ./metamodel//abstractmetamodel.nit:641 */
   fra.me.REG[0] = CALL_abstractmetamodel___MMLocalProperty___name(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -3456,17 +3496,17 @@ val_t abstractmetamodel___MMLocalProperty___need_super(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 640;
+  fra.me.line = 643;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___need_super;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:640 */
+  /* ./metamodel//abstractmetamodel.nit:643 */
   REGB0 = TAG_Bool(ATTR_abstractmetamodel___MMLocalProperty____need_super(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_need_super", LOCATE_abstractmetamodel, 640);
+    nit_abort("Uninitialized attribute %s", "_need_super", LOCATE_abstractmetamodel, 643);
   }
   REGB0 = ATTR_abstractmetamodel___MMLocalProperty____need_super(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3478,14 +3518,14 @@ void abstractmetamodel___MMLocalProperty___need_super__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 640;
+  fra.me.line = 643;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___need_super__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:640 */
+  /* ./metamodel//abstractmetamodel.nit:643 */
   ATTR_abstractmetamodel___MMLocalProperty____need_super(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -3497,7 +3537,7 @@ void abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1, val_t p2, in
   if (init_table[itpos6]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 643;
+  fra.me.line = 646;
   fra.me.meth = LOCATE_abstractmetamodel___MMLocalProperty___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3507,9 +3547,9 @@ void abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1, val_t p2, in
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./metamodel//abstractmetamodel.nit:645 */
+  /* ./metamodel//abstractmetamodel.nit:648 */
   ATTR_abstractmetamodel___MMLocalProperty____name(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:646 */
+  /* ./metamodel//abstractmetamodel.nit:649 */
   ATTR_abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos6] = 1;
@@ -3520,12 +3560,12 @@ val_t abstractmetamodel___MMMethod___is_intern(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 658;
+  fra.me.line = 661;
   fra.me.meth = LOCATE_abstractmetamodel___MMMethod___is_intern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//abstractmetamodel.nit:658 */
-  nit_abort("Deferred method called", NULL, LOCATE_abstractmetamodel, 658);
+  /* ./metamodel//abstractmetamodel.nit:661 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstractmetamodel, 661);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -3534,12 +3574,12 @@ val_t abstractmetamodel___MMMethod___is_abstract(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 661;
+  fra.me.line = 664;
   fra.me.meth = LOCATE_abstractmetamodel___MMMethod___is_abstract;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//abstractmetamodel.nit:661 */
-  nit_abort("Deferred method called", NULL, LOCATE_abstractmetamodel, 661);
+  /* ./metamodel//abstractmetamodel.nit:664 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstractmetamodel, 664);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -3548,12 +3588,12 @@ val_t abstractmetamodel___MMMethod___extern_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_abstractmetamodel;
-  fra.me.line = 664;
+  fra.me.line = 667;
   fra.me.meth = LOCATE_abstractmetamodel___MMMethod___extern_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
-  /* ./metamodel//abstractmetamodel.nit:664 */
-  nit_abort("Deferred method called", NULL, LOCATE_abstractmetamodel, 664);
+  /* ./metamodel//abstractmetamodel.nit:667 */
+  nit_abort("Deferred method called", NULL, LOCATE_abstractmetamodel, 667);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
