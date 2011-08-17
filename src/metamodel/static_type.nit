@@ -76,6 +76,8 @@ class MMParam
 	    _mmtype = t
 	    _name = n
 	end
+
+	redef fun to_s do return "{name}: {mmtype}"
 end
 
 # Signature for local properties
@@ -148,12 +150,10 @@ class MMSignature
 			var tmp: String
 			var a = new Array[String].with_capacity(_params.length)
 			for i in [0.._params.length[ do
-				#var pn = _params_name[i]
 				var p = _params[i]
-				#a.add("{pn}: {p}")
 				a.add(p.to_s)
 			end
-			s.append("({a.join(",")})")
+			s.append("({a.join(", ")})")
 		end
 		var rt = _return_type
 		if rt != null then s.append(": {rt}")
