@@ -13,7 +13,7 @@
 # Binding to the SDL multomedia library
 package sdl
 
-universal SDL_Surface
+extern SDL_Surface
 	super Pointer
 	fun width: Int is extern "sdl_surface_width"
 	fun height: Int is extern "sdl_surface_height"
@@ -36,13 +36,12 @@ universal SDL_Surface
 	fun free is extern "SDL_FreeSurface"
 end
 
-universal SDL_Screen
+extern SDL_Screen
 	super SDL_Surface
 	fun flip is extern "SDL_Flip"
 end
 	
-universal SDL_Event
-	super Pointer
+extern SDL_Event
 	fun is_keyboard: Bool is extern "sdl_evt_is_keyboard"
 	fun as_keyboard: SDL_KeyboardEvent is extern "sdl_evt_as_keyboard"
 	fun is_mouse_button: Bool is extern "sdl_evt_is_mouse_button"
@@ -53,23 +52,23 @@ universal SDL_Event
 	fun is_quit: Bool is extern "sdl_evt_is_quit"
 end
 
-universal SDL_ButtonEvent
+extern SDL_ButtonEvent
 	super SDL_Event
 	fun is_pressed: Bool is abstract
 end
 
-universal SDL_MouseEvent
+extern SDL_MouseEvent
 	super SDL_Event
 	fun x: Int is abstract
 	fun y: Int is abstract
 end
 
-universal SDL_KeyboardEvent
+extern SDL_KeyboardEvent
 	super SDL_ButtonEvent
 	redef fun is_pressed: Bool is extern "sdl_keyboard_evt_state"
 end
 
-universal SDL_MouseButtonEvent
+extern SDL_MouseButtonEvent
 	super SDL_ButtonEvent
 	super SDL_MouseEvent
 	redef fun is_pressed: Bool is extern "sdl_mouse_button_evt_state"
@@ -78,7 +77,7 @@ universal SDL_MouseButtonEvent
 	fun button: Int is extern "sdl_mouse_button_evt_button"
 end
 
-universal SDL_MouseMotionEvent
+extern SDL_MouseMotionEvent
 	super SDL_MouseEvent
 	redef fun x: Int is extern "sdl_mouse_evt_x"
 	redef fun y: Int is extern "sdl_mouse_evt_y"

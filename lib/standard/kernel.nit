@@ -430,5 +430,5 @@ universal Char
 end
 
 # Pointer classes are used to manipulate extern C structures.
-universal Pointer
+extern Pointer
 end

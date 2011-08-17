@@ -261,7 +261,7 @@ redef class NativeString
 	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
 end
 
-universal FileStat
+extern FileStat
 	super Pointer
 # This class is system dependent ... must reify the vfs
 	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
@@ -272,7 +272,7 @@ universal FileStat
 end
 
 # Instance of this class are standard FILE * pointers
-private universal NativeFile
+private extern NativeFile
 	super Pointer
 	fun io_read(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_read_2"
 	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
