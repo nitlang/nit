@@ -1438,7 +1438,8 @@ redef class AExternMethPropdef
             n_kwmeth: nullable TKwmeth,
             n_methid: nullable AMethid,
             n_signature: nullable ASignature,
-            n_extern: nullable TString
+            n_extern: nullable TString,
+            n_extern_calls: nullable AExternCalls
     )
     do
         empty_init
@@ -1461,6 +1462,10 @@ redef class AExternMethPropdef
         _n_extern = n_extern
 	if n_extern != null then
 		n_extern.parent = self
+	end
+        _n_extern_calls = n_extern_calls
+	if n_extern_calls != null then
+		n_extern_calls.parent = self
 	end
     end
 
@@ -1536,6 +1541,16 @@ redef class AExternMethPropdef
             end
             return
 	end
+        if _n_extern_calls == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExternCalls
+                _n_extern_calls = new_child
+	    else
+		_n_extern_calls = null
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -1552,6 +1567,9 @@ redef class AExternMethPropdef
         v.enter_visit(_n_signature)
         if _n_extern != null then
             v.enter_visit(_n_extern.as(not null))
+        end
+        if _n_extern_calls != null then
+            v.enter_visit(_n_extern_calls.as(not null))
         end
     end
 end
@@ -7335,6 +7353,421 @@ redef class AModuleName
                 v.enter_visit(n)
 	    end
         v.enter_visit(_n_id)
+    end
+end
+redef class AExternCalls
+    private init empty_init do end
+
+    init init_aexterncalls (
+            n_kwimport: nullable TKwimport,
+            n_extern_calls: Collection[Object] # Should be Collection[AExternCall]
+    )
+    do
+        empty_init
+        _n_kwimport = n_kwimport.as(not null)
+	n_kwimport.parent = self
+	for n in n_extern_calls do
+		assert n isa AExternCall
+		_n_extern_calls.add(n)
+		n.parent = self
+	end
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_kwimport == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwimport
+                _n_kwimport = new_child
+	    else
+		abort
+            end
+            return
+	end
+        for i in [0.._n_extern_calls.length[ do
+            if _n_extern_calls[i] == old_child then
+                if new_child != null then
+		    assert new_child isa AExternCall
+                    _n_extern_calls[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_extern_calls.remove_at(i)
+                end
+                return
+            end
+        end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_kwimport)
+            for n in _n_extern_calls do
+                v.enter_visit(n)
+	    end
+    end
+end
+redef class AExternCall
+    private init empty_init do end
+
+    init init_aexterncall
+    do
+        empty_init
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+    end
+end
+redef class ASuperExternCall
+    private init empty_init do end
+
+    init init_asuperexterncall (
+            n_kwsuper: nullable TKwsuper
+    )
+    do
+        empty_init
+        _n_kwsuper = n_kwsuper.as(not null)
+	n_kwsuper.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_kwsuper == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwsuper
+                _n_kwsuper = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_kwsuper)
+    end
+end
+redef class ALocalPropExternCall
+    private init empty_init do end
+
+    init init_alocalpropexterncall (
+            n_methid: nullable AMethid
+    )
+    do
+        empty_init
+        _n_methid = n_methid.as(not null)
+	n_methid.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_methid == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AMethid
+                _n_methid = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_methid)
+    end
+end
+redef class AFullPropExternCall
+    private init empty_init do end
+
+    init init_afullpropexterncall (
+            n_classid: nullable TClassid,
+            n_quad: nullable TQuad,
+            n_methid: nullable AMethid
+    )
+    do
+        empty_init
+        _n_classid = n_classid.as(not null)
+	n_classid.parent = self
+        _n_quad = n_quad
+	if n_quad != null then
+		n_quad.parent = self
+	end
+        _n_methid = n_methid.as(not null)
+	n_methid.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_classid == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TClassid
+                _n_classid = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_quad == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TQuad
+                _n_quad = new_child
+	    else
+		_n_quad = null
+            end
+            return
+	end
+        if _n_methid == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AMethid
+                _n_methid = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_classid)
+        if _n_quad != null then
+            v.enter_visit(_n_quad.as(not null))
+        end
+        v.enter_visit(_n_methid)
+    end
+end
+redef class AInitPropExternCall
+    private init empty_init do end
+
+    init init_ainitpropexterncall (
+            n_classid: nullable TClassid
+    )
+    do
+        empty_init
+        _n_classid = n_classid.as(not null)
+	n_classid.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_classid == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TClassid
+                _n_classid = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_classid)
+    end
+end
+redef class ACastAsExternCall
+    private init empty_init do end
+
+    init init_acastasexterncall (
+            n_from_type: nullable AType,
+            n_kwas: nullable TKwas,
+            n_to_type: nullable AType
+    )
+    do
+        empty_init
+        _n_from_type = n_from_type.as(not null)
+	n_from_type.parent = self
+        _n_kwas = n_kwas.as(not null)
+	n_kwas.parent = self
+        _n_to_type = n_to_type.as(not null)
+	n_to_type.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_from_type == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AType
+                _n_from_type = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_kwas == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwas
+                _n_kwas = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_to_type == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AType
+                _n_to_type = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_from_type)
+        v.enter_visit(_n_kwas)
+        v.enter_visit(_n_to_type)
+    end
+end
+redef class AAsNullableExternCall
+    private init empty_init do end
+
+    init init_aasnullableexterncall (
+            n_type: nullable AType,
+            n_kwas: nullable TKwas,
+            n_kwnullable: nullable TKwnullable
+    )
+    do
+        empty_init
+        _n_type = n_type.as(not null)
+	n_type.parent = self
+        _n_kwas = n_kwas.as(not null)
+	n_kwas.parent = self
+        _n_kwnullable = n_kwnullable.as(not null)
+	n_kwnullable.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_type == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AType
+                _n_type = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_kwas == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwas
+                _n_kwas = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_kwnullable == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwnullable
+                _n_kwnullable = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_type)
+        v.enter_visit(_n_kwas)
+        v.enter_visit(_n_kwnullable)
+    end
+end
+redef class AAsNotNullableExternCall
+    private init empty_init do end
+
+    init init_aasnotnullableexterncall (
+            n_type: nullable AType,
+            n_kwas: nullable TKwas,
+            n_kwnot: nullable TKwnot,
+            n_kwnullable: nullable TKwnullable
+    )
+    do
+        empty_init
+        _n_type = n_type.as(not null)
+	n_type.parent = self
+        _n_kwas = n_kwas.as(not null)
+	n_kwas.parent = self
+        _n_kwnot = n_kwnot.as(not null)
+	n_kwnot.parent = self
+        _n_kwnullable = n_kwnullable.as(not null)
+	n_kwnullable.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_type == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AType
+                _n_type = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_kwas == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwas
+                _n_kwas = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_kwnot == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwnot
+                _n_kwnot = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_kwnullable == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwnullable
+                _n_kwnullable = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_type)
+        v.enter_visit(_n_kwas)
+        v.enter_visit(_n_kwnot)
+        v.enter_visit(_n_kwnullable)
     end
 end
 redef class AQualified

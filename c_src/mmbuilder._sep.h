@@ -152,8 +152,7 @@ extern const int SFT_mmbuilder[];
 #define INIT_TABLE_POS_MethidAccumulator (SFT_mmbuilder[59] + 0)
 #define CALL_mmbuilder___MethidAccumulator___name(recv) ((mmbuilder___MethidAccumulator___name_t)CALL((recv), (SFT_mmbuilder[59] + 1)))
 #define ATTR_mmbuilder___AMethid____name(recv) ATTR(recv, (SFT_mmbuilder[60] + 0))
-#define CALL_mmbuilder___AMethid___name(recv) ((mmbuilder___AMethid___name_t)CALL((recv), (SFT_mmbuilder[61] + 0)))
-#define CALL_SUPER_mmbuilder___AMethid___accept_property_builder(recv) ((mmbuilder___AMethid___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[61] + 1)))
+#define CALL_SUPER_mmbuilder___AMethid___accept_property_builder(recv) ((mmbuilder___AMethid___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[61] + 0)))
 #define CALL_SUPER_mmbuilder___ASignature___accept_property_verifier(recv) ((mmbuilder___ASignature___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[62] + 0)))
 #define CALL_mmbuilder___ASignature___check_visibility(recv) ((mmbuilder___ASignature___check_visibility_t)CALL((recv), (SFT_mmbuilder[62] + 1)))
 #define ATTR_mmbuilder___AParam____position(recv) ATTR(recv, (SFT_mmbuilder[63] + 0))
@@ -588,7 +587,7 @@ void mmbuilder___AExternMethPropdef___accept_property_verifier(val_t p0, val_t p
 typedef void (*mmbuilder___AExternMethPropdef___accept_property_verifier_t)(val_t p0, val_t p1);
 val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___empty_init();
 val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___empty_init();
-val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7);
 val_t NEW_AExternMethPropdef_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 static const char * const LOCATE_mmbuilder___ATypePropdef___prop = "mmbuilder::ATypePropdef::(syntax_base::ATypePropdef::prop)";
@@ -613,7 +612,7 @@ static const char * const LOCATE_mmbuilder___MethidAccumulator___visit = "mmbuil
 void mmbuilder___MethidAccumulator___visit(val_t p0, val_t p1);
 typedef void (*mmbuilder___MethidAccumulator___visit_t)(val_t p0, val_t p1);
 val_t NEW_MethidAccumulator_parser_prod___Visitor___init();
-static const char * const LOCATE_mmbuilder___AMethid___name = "mmbuilder::AMethid::name";
+static const char * const LOCATE_mmbuilder___AMethid___name = "mmbuilder::AMethid::(syntax_base::AMethid::name)";
 val_t mmbuilder___AMethid___name(val_t p0);
 typedef val_t (*mmbuilder___AMethid___name_t)(val_t p0);
 static const char * const LOCATE_mmbuilder___AMethid___accept_property_builder = "mmbuilder::AMethid::(mmbuilder::ANode::accept_property_builder)";

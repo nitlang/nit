@@ -267,7 +267,7 @@ void icode_generation___AExternMethPropdef___fill_iroutine(val_t p0, val_t p1, v
 typedef void (*icode_generation___AExternMethPropdef___fill_iroutine_t)(val_t p0, val_t p1, val_t p2);
 val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___empty_init();
 val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___empty_init();
-val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7);
 val_t NEW_AExternMethPropdef_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 static const char * const LOCATE_icode_generation___AInternMethPropdef___fill_iroutine = "icode_generation::AInternMethPropdef::(icode_generation::AMethPropdef::fill_iroutine)";

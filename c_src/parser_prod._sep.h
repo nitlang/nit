@@ -283,11 +283,29 @@ extern const int SFT_parser_prod[];
 #define CALL_parser_prod___ASimpleClosureId___init_asimpleclosureid(recv) ((parser_prod___ASimpleClosureId___init_asimpleclosureid_t)CALL((recv), (SFT_parser_prod[135] + 1)))
 #define CALL_parser_prod___ABreakClosureId___empty_init(recv) ((parser_prod___ABreakClosureId___empty_init_t)CALL((recv), (SFT_parser_prod[136] + 0)))
 #define CALL_parser_prod___ABreakClosureId___init_abreakclosureid(recv) ((parser_prod___ABreakClosureId___init_abreakclosureid_t)CALL((recv), (SFT_parser_prod[136] + 1)))
-#define CALL_parser_prod___AQualified___empty_init(recv) ((parser_prod___AQualified___empty_init_t)CALL((recv), (SFT_parser_prod[137] + 0)))
-#define CALL_parser_prod___AQualified___init_aqualified(recv) ((parser_prod___AQualified___init_aqualified_t)CALL((recv), (SFT_parser_prod[137] + 1)))
-#define CALL_parser_prod___ADoc___empty_init(recv) ((parser_prod___ADoc___empty_init_t)CALL((recv), (SFT_parser_prod[138] + 0)))
-#define CALL_parser_prod___ADoc___init_adoc(recv) ((parser_prod___ADoc___init_adoc_t)CALL((recv), (SFT_parser_prod[138] + 1)))
-#define CALL_parser_prod___Start___init(recv) ((parser_prod___Start___init_t)CALL((recv), (SFT_parser_prod[139] + 0)))
+#define CALL_parser_prod___AExternCalls___empty_init(recv) ((parser_prod___AExternCalls___empty_init_t)CALL((recv), (SFT_parser_prod[137] + 0)))
+#define CALL_parser_prod___AExternCalls___init_aexterncalls(recv) ((parser_prod___AExternCalls___init_aexterncalls_t)CALL((recv), (SFT_parser_prod[137] + 1)))
+#define CALL_parser_prod___AExternCall___empty_init(recv) ((parser_prod___AExternCall___empty_init_t)CALL((recv), (SFT_parser_prod[138] + 0)))
+#define CALL_parser_prod___AExternCall___init_aexterncall(recv) ((parser_prod___AExternCall___init_aexterncall_t)CALL((recv), (SFT_parser_prod[138] + 1)))
+#define CALL_parser_prod___ASuperExternCall___empty_init(recv) ((parser_prod___ASuperExternCall___empty_init_t)CALL((recv), (SFT_parser_prod[139] + 0)))
+#define CALL_parser_prod___ASuperExternCall___init_asuperexterncall(recv) ((parser_prod___ASuperExternCall___init_asuperexterncall_t)CALL((recv), (SFT_parser_prod[139] + 1)))
+#define CALL_parser_prod___ALocalPropExternCall___empty_init(recv) ((parser_prod___ALocalPropExternCall___empty_init_t)CALL((recv), (SFT_parser_prod[140] + 0)))
+#define CALL_parser_prod___ALocalPropExternCall___init_alocalpropexterncall(recv) ((parser_prod___ALocalPropExternCall___init_alocalpropexterncall_t)CALL((recv), (SFT_parser_prod[140] + 1)))
+#define CALL_parser_prod___AFullPropExternCall___empty_init(recv) ((parser_prod___AFullPropExternCall___empty_init_t)CALL((recv), (SFT_parser_prod[141] + 0)))
+#define CALL_parser_prod___AFullPropExternCall___init_afullpropexterncall(recv) ((parser_prod___AFullPropExternCall___init_afullpropexterncall_t)CALL((recv), (SFT_parser_prod[141] + 1)))
+#define CALL_parser_prod___AInitPropExternCall___empty_init(recv) ((parser_prod___AInitPropExternCall___empty_init_t)CALL((recv), (SFT_parser_prod[142] + 0)))
+#define CALL_parser_prod___AInitPropExternCall___init_ainitpropexterncall(recv) ((parser_prod___AInitPropExternCall___init_ainitpropexterncall_t)CALL((recv), (SFT_parser_prod[142] + 1)))
+#define CALL_parser_prod___ACastAsExternCall___empty_init(recv) ((parser_prod___ACastAsExternCall___empty_init_t)CALL((recv), (SFT_parser_prod[143] + 0)))
+#define CALL_parser_prod___ACastAsExternCall___init_acastasexterncall(recv) ((parser_prod___ACastAsExternCall___init_acastasexterncall_t)CALL((recv), (SFT_parser_prod[143] + 1)))
+#define CALL_parser_prod___AAsNullableExternCall___empty_init(recv) ((parser_prod___AAsNullableExternCall___empty_init_t)CALL((recv), (SFT_parser_prod[144] + 0)))
+#define CALL_parser_prod___AAsNullableExternCall___init_aasnullableexterncall(recv) ((parser_prod___AAsNullableExternCall___init_aasnullableexterncall_t)CALL((recv), (SFT_parser_prod[144] + 1)))
+#define CALL_parser_prod___AAsNotNullableExternCall___empty_init(recv) ((parser_prod___AAsNotNullableExternCall___empty_init_t)CALL((recv), (SFT_parser_prod[145] + 0)))
+#define CALL_parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall(recv) ((parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall_t)CALL((recv), (SFT_parser_prod[145] + 1)))
+#define CALL_parser_prod___AQualified___empty_init(recv) ((parser_prod___AQualified___empty_init_t)CALL((recv), (SFT_parser_prod[146] + 0)))
+#define CALL_parser_prod___AQualified___init_aqualified(recv) ((parser_prod___AQualified___init_aqualified_t)CALL((recv), (SFT_parser_prod[146] + 1)))
+#define CALL_parser_prod___ADoc___empty_init(recv) ((parser_prod___ADoc___empty_init_t)CALL((recv), (SFT_parser_prod[147] + 0)))
+#define CALL_parser_prod___ADoc___init_adoc(recv) ((parser_prod___ADoc___init_adoc_t)CALL((recv), (SFT_parser_prod[147] + 1)))
+#define CALL_parser_prod___Start___init(recv) ((parser_prod___Start___init_t)CALL((recv), (SFT_parser_prod[148] + 0)))
 static const char * const LOCATE_parser_prod___ANode___parent = "parser_prod::ANode::parent";
 val_t parser_prod___ANode___parent(val_t p0);
 typedef val_t (*parser_prod___ANode___parent_t)(val_t p0);
@@ -698,9 +716,9 @@ void parser_prod___AExternMethPropdef___empty_init(val_t p0, int* init_table);
 typedef void (*parser_prod___AExternMethPropdef___empty_init_t)(val_t p0, int* init_table);
 val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___empty_init();
 static const char * const LOCATE_parser_prod___AExternMethPropdef___init_aexternmethpropdef = "parser_prod::AExternMethPropdef::init_aexternmethpropdef";
-void parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, int* init_table);
-typedef void (*parser_prod___AExternMethPropdef___init_aexternmethpropdef_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, int* init_table);
-val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+void parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, int* init_table);
+typedef void (*parser_prod___AExternMethPropdef___init_aexternmethpropdef_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, int* init_table);
+val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7);
 static const char * const LOCATE_parser_prod___AExternMethPropdef___replace_child = "parser_prod::AExternMethPropdef::(parser_prod::ANode::replace_child)";
 void parser_prod___AExternMethPropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser_prod___AExternMethPropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
@@ -2539,6 +2557,161 @@ static const char * const LOCATE_parser_prod___ABreakClosureId___visit_all = "pa
 void parser_prod___ABreakClosureId___visit_all(val_t p0, val_t p1);
 typedef void (*parser_prod___ABreakClosureId___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ABreakClosureId_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_prod___AExternCalls___empty_init = "parser_prod::AExternCalls::empty_init";
+void parser_prod___AExternCalls___empty_init(val_t p0, int* init_table);
+typedef void (*parser_prod___AExternCalls___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_AExternCalls_parser_prod___AExternCalls___empty_init();
+static const char * const LOCATE_parser_prod___AExternCalls___init_aexterncalls = "parser_prod::AExternCalls::init_aexterncalls";
+void parser_prod___AExternCalls___init_aexterncalls(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*parser_prod___AExternCalls___init_aexterncalls_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+  typedef void (*CLOS_OC_parser_prod___AExternCalls___init_aexterncalls_1_0)(struct stack_frame_t *);
+  void OC_parser_prod___AExternCalls___init_aexterncalls_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_parser_prod___AExternCalls___init_aexterncalls_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_AExternCalls_parser_prod___AExternCalls___init_aexterncalls(val_t p0, val_t p1);
+static const char * const LOCATE_parser_prod___AExternCalls___replace_child = "parser_prod::AExternCalls::(parser_prod::ANode::replace_child)";
+void parser_prod___AExternCalls___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser_prod___AExternCalls___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___AExternCalls___visit_all = "parser_prod::AExternCalls::(parser_prod::ANode::visit_all)";
+void parser_prod___AExternCalls___visit_all(val_t p0, val_t p1);
+typedef void (*parser_prod___AExternCalls___visit_all_t)(val_t p0, val_t p1);
+  typedef void (*CLOS_OC_parser_prod___AExternCalls___visit_all_1_0)(struct stack_frame_t *);
+  void OC_parser_prod___AExternCalls___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_parser_prod___AExternCalls___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_AExternCalls_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_parser_prod___AExternCall___empty_init = "parser_prod::AExternCall::empty_init";
+void parser_prod___AExternCall___empty_init(val_t p0, int* init_table);
+typedef void (*parser_prod___AExternCall___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_AExternCall_parser_prod___AExternCall___empty_init();
+static const char * const LOCATE_parser_prod___AExternCall___init_aexterncall = "parser_prod::AExternCall::init_aexterncall";
+void parser_prod___AExternCall___init_aexterncall(val_t p0, int* init_table);
+typedef void (*parser_prod___AExternCall___init_aexterncall_t)(val_t p0, int* init_table);
+val_t NEW_AExternCall_parser_prod___AExternCall___init_aexterncall();
+static const char * const LOCATE_parser_prod___AExternCall___replace_child = "parser_prod::AExternCall::(parser_prod::ANode::replace_child)";
+void parser_prod___AExternCall___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser_prod___AExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___AExternCall___visit_all = "parser_prod::AExternCall::(parser_prod::ANode::visit_all)";
+void parser_prod___AExternCall___visit_all(val_t p0, val_t p1);
+typedef void (*parser_prod___AExternCall___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_AExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASuperExternCall_parser_prod___AExternCall___empty_init();
+static const char * const LOCATE_parser_prod___ASuperExternCall___empty_init = "parser_prod::ASuperExternCall::empty_init";
+void parser_prod___ASuperExternCall___empty_init(val_t p0, int* init_table);
+typedef void (*parser_prod___ASuperExternCall___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_ASuperExternCall_parser_prod___ASuperExternCall___empty_init();
+static const char * const LOCATE_parser_prod___ASuperExternCall___init_asuperexterncall = "parser_prod::ASuperExternCall::init_asuperexterncall";
+void parser_prod___ASuperExternCall___init_asuperexterncall(val_t p0, val_t p1, int* init_table);
+typedef void (*parser_prod___ASuperExternCall___init_asuperexterncall_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_ASuperExternCall_parser_prod___ASuperExternCall___init_asuperexterncall(val_t p0);
+static const char * const LOCATE_parser_prod___ASuperExternCall___replace_child = "parser_prod::ASuperExternCall::(parser_prod::ANode::replace_child)";
+void parser_prod___ASuperExternCall___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser_prod___ASuperExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___ASuperExternCall___visit_all = "parser_prod::ASuperExternCall::(parser_prod::ANode::visit_all)";
+void parser_prod___ASuperExternCall___visit_all(val_t p0, val_t p1);
+typedef void (*parser_prod___ASuperExternCall___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_ASuperExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASuperExternCall_parser_prod___AExternCall___init_aexterncall();
+val_t NEW_ALocalPropExternCall_parser_prod___AExternCall___empty_init();
+static const char * const LOCATE_parser_prod___ALocalPropExternCall___empty_init = "parser_prod::ALocalPropExternCall::empty_init";
+void parser_prod___ALocalPropExternCall___empty_init(val_t p0, int* init_table);
+typedef void (*parser_prod___ALocalPropExternCall___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_ALocalPropExternCall_parser_prod___ALocalPropExternCall___empty_init();
+static const char * const LOCATE_parser_prod___ALocalPropExternCall___init_alocalpropexterncall = "parser_prod::ALocalPropExternCall::init_alocalpropexterncall";
+void parser_prod___ALocalPropExternCall___init_alocalpropexterncall(val_t p0, val_t p1, int* init_table);
+typedef void (*parser_prod___ALocalPropExternCall___init_alocalpropexterncall_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_ALocalPropExternCall_parser_prod___ALocalPropExternCall___init_alocalpropexterncall(val_t p0);
+static const char * const LOCATE_parser_prod___ALocalPropExternCall___replace_child = "parser_prod::ALocalPropExternCall::(parser_prod::ANode::replace_child)";
+void parser_prod___ALocalPropExternCall___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser_prod___ALocalPropExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___ALocalPropExternCall___visit_all = "parser_prod::ALocalPropExternCall::(parser_prod::ANode::visit_all)";
+void parser_prod___ALocalPropExternCall___visit_all(val_t p0, val_t p1);
+typedef void (*parser_prod___ALocalPropExternCall___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_ALocalPropExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALocalPropExternCall_parser_prod___AExternCall___init_aexterncall();
+val_t NEW_AFullPropExternCall_parser_prod___AExternCall___empty_init();
+static const char * const LOCATE_parser_prod___AFullPropExternCall___empty_init = "parser_prod::AFullPropExternCall::empty_init";
+void parser_prod___AFullPropExternCall___empty_init(val_t p0, int* init_table);
+typedef void (*parser_prod___AFullPropExternCall___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_AFullPropExternCall_parser_prod___AFullPropExternCall___empty_init();
+static const char * const LOCATE_parser_prod___AFullPropExternCall___init_afullpropexterncall = "parser_prod::AFullPropExternCall::init_afullpropexterncall";
+void parser_prod___AFullPropExternCall___init_afullpropexterncall(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*parser_prod___AFullPropExternCall___init_afullpropexterncall_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+val_t NEW_AFullPropExternCall_parser_prod___AFullPropExternCall___init_afullpropexterncall(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___AFullPropExternCall___replace_child = "parser_prod::AFullPropExternCall::(parser_prod::ANode::replace_child)";
+void parser_prod___AFullPropExternCall___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser_prod___AFullPropExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___AFullPropExternCall___visit_all = "parser_prod::AFullPropExternCall::(parser_prod::ANode::visit_all)";
+void parser_prod___AFullPropExternCall___visit_all(val_t p0, val_t p1);
+typedef void (*parser_prod___AFullPropExternCall___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_AFullPropExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AFullPropExternCall_parser_prod___AExternCall___init_aexterncall();
+val_t NEW_AInitPropExternCall_parser_prod___AExternCall___empty_init();
+static const char * const LOCATE_parser_prod___AInitPropExternCall___empty_init = "parser_prod::AInitPropExternCall::empty_init";
+void parser_prod___AInitPropExternCall___empty_init(val_t p0, int* init_table);
+typedef void (*parser_prod___AInitPropExternCall___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_AInitPropExternCall_parser_prod___AInitPropExternCall___empty_init();
+static const char * const LOCATE_parser_prod___AInitPropExternCall___init_ainitpropexterncall = "parser_prod::AInitPropExternCall::init_ainitpropexterncall";
+void parser_prod___AInitPropExternCall___init_ainitpropexterncall(val_t p0, val_t p1, int* init_table);
+typedef void (*parser_prod___AInitPropExternCall___init_ainitpropexterncall_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_AInitPropExternCall_parser_prod___AInitPropExternCall___init_ainitpropexterncall(val_t p0);
+static const char * const LOCATE_parser_prod___AInitPropExternCall___replace_child = "parser_prod::AInitPropExternCall::(parser_prod::ANode::replace_child)";
+void parser_prod___AInitPropExternCall___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser_prod___AInitPropExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___AInitPropExternCall___visit_all = "parser_prod::AInitPropExternCall::(parser_prod::ANode::visit_all)";
+void parser_prod___AInitPropExternCall___visit_all(val_t p0, val_t p1);
+typedef void (*parser_prod___AInitPropExternCall___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_AInitPropExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AInitPropExternCall_parser_prod___AExternCall___init_aexterncall();
+val_t NEW_ACastAsExternCall_parser_prod___AExternCall___empty_init();
+static const char * const LOCATE_parser_prod___ACastAsExternCall___empty_init = "parser_prod::ACastAsExternCall::empty_init";
+void parser_prod___ACastAsExternCall___empty_init(val_t p0, int* init_table);
+typedef void (*parser_prod___ACastAsExternCall___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_ACastAsExternCall_parser_prod___ACastAsExternCall___empty_init();
+static const char * const LOCATE_parser_prod___ACastAsExternCall___init_acastasexterncall = "parser_prod::ACastAsExternCall::init_acastasexterncall";
+void parser_prod___ACastAsExternCall___init_acastasexterncall(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*parser_prod___ACastAsExternCall___init_acastasexterncall_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+val_t NEW_ACastAsExternCall_parser_prod___ACastAsExternCall___init_acastasexterncall(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___ACastAsExternCall___replace_child = "parser_prod::ACastAsExternCall::(parser_prod::ANode::replace_child)";
+void parser_prod___ACastAsExternCall___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser_prod___ACastAsExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___ACastAsExternCall___visit_all = "parser_prod::ACastAsExternCall::(parser_prod::ANode::visit_all)";
+void parser_prod___ACastAsExternCall___visit_all(val_t p0, val_t p1);
+typedef void (*parser_prod___ACastAsExternCall___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_ACastAsExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACastAsExternCall_parser_prod___AExternCall___init_aexterncall();
+val_t NEW_AAsNullableExternCall_parser_prod___AExternCall___empty_init();
+static const char * const LOCATE_parser_prod___AAsNullableExternCall___empty_init = "parser_prod::AAsNullableExternCall::empty_init";
+void parser_prod___AAsNullableExternCall___empty_init(val_t p0, int* init_table);
+typedef void (*parser_prod___AAsNullableExternCall___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_AAsNullableExternCall_parser_prod___AAsNullableExternCall___empty_init();
+static const char * const LOCATE_parser_prod___AAsNullableExternCall___init_aasnullableexterncall = "parser_prod::AAsNullableExternCall::init_aasnullableexterncall";
+void parser_prod___AAsNullableExternCall___init_aasnullableexterncall(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*parser_prod___AAsNullableExternCall___init_aasnullableexterncall_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+val_t NEW_AAsNullableExternCall_parser_prod___AAsNullableExternCall___init_aasnullableexterncall(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___AAsNullableExternCall___replace_child = "parser_prod::AAsNullableExternCall::(parser_prod::ANode::replace_child)";
+void parser_prod___AAsNullableExternCall___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser_prod___AAsNullableExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___AAsNullableExternCall___visit_all = "parser_prod::AAsNullableExternCall::(parser_prod::ANode::visit_all)";
+void parser_prod___AAsNullableExternCall___visit_all(val_t p0, val_t p1);
+typedef void (*parser_prod___AAsNullableExternCall___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_AAsNullableExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAsNullableExternCall_parser_prod___AExternCall___init_aexterncall();
+val_t NEW_AAsNotNullableExternCall_parser_prod___AExternCall___empty_init();
+static const char * const LOCATE_parser_prod___AAsNotNullableExternCall___empty_init = "parser_prod::AAsNotNullableExternCall::empty_init";
+void parser_prod___AAsNotNullableExternCall___empty_init(val_t p0, int* init_table);
+typedef void (*parser_prod___AAsNotNullableExternCall___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_AAsNotNullableExternCall_parser_prod___AAsNotNullableExternCall___empty_init();
+static const char * const LOCATE_parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall = "parser_prod::AAsNotNullableExternCall::init_aasnotnullableexterncall";
+void parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
+typedef void (*parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
+val_t NEW_AAsNotNullableExternCall_parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall(val_t p0, val_t p1, val_t p2, val_t p3);
+static const char * const LOCATE_parser_prod___AAsNotNullableExternCall___replace_child = "parser_prod::AAsNotNullableExternCall::(parser_prod::ANode::replace_child)";
+void parser_prod___AAsNotNullableExternCall___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser_prod___AAsNotNullableExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser_prod___AAsNotNullableExternCall___visit_all = "parser_prod::AAsNotNullableExternCall::(parser_prod::ANode::visit_all)";
+void parser_prod___AAsNotNullableExternCall___visit_all(val_t p0, val_t p1);
+typedef void (*parser_prod___AAsNotNullableExternCall___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_AAsNotNullableExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAsNotNullableExternCall_parser_prod___AExternCall___init_aexterncall();
 static const char * const LOCATE_parser_prod___AQualified___empty_init = "parser_prod::AQualified::empty_init";
 void parser_prod___AQualified___empty_init(val_t p0, int* init_table);
 typedef void (*parser_prod___AQualified___empty_init_t)(val_t p0, int* init_table);

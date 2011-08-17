@@ -450,10 +450,15 @@ class AInternMethPropdef
 	super AMethPropdef
     readable var _n_kwmeth: TKwmeth
 end
+class AExternPropdef
+	super AMethPropdef
+    readable var _n_extern: nullable TString = null
+    readable var _n_extern_calls: nullable AExternCalls = null
+end
 class AExternMethPropdef
 	super AMethPropdef
+	super AExternPropdef
     readable var _n_kwmeth: TKwmeth
-    readable var _n_extern: nullable TString = null
 end
 class AConcreteMethPropdef
 	super AMethPropdef
@@ -467,6 +472,57 @@ class AConcreteInitPropdef
 end
 class AMainMethPropdef
 	super AConcreteMethPropdef
+end
+class AExternCalls
+	super Prod
+    readable var _n_kwimport: TKwimport
+    readable var _n_extern_calls: List[AExternCall] = new List[AExternCall]
+end
+class AExternCall
+	super Prod
+end
+class APropExternCall
+special AExternCall
+end
+class ALocalPropExternCall
+special APropExternCall
+    readable var _n_methid: AMethid
+end
+class AFullPropExternCall
+special APropExternCall
+    readable var _n_classid: TClassid
+    readable var _n_quad: nullable TQuad = null
+    readable var _n_methid: AMethid
+end
+class AInitPropExternCall
+special APropExternCall
+    readable var _n_classid: TClassid
+end
+class ASuperExternCall
+special AExternCall
+    readable var _n_kwsuper: TKwsuper
+end
+class ACastExternCall
+special AExternCall
+end
+class ACastAsExternCall
+special ACastExternCall
+    readable var _n_from_type: AType
+    readable var _n_kwas: TKwas
+    readable var _n_to_type: AType
+end
+class AAsNullableExternCall
+special ACastExternCall
+    readable var _n_type: AType
+    readable var _n_kwas: TKwas
+    readable var _n_kwnullable: TKwnullable
+end
+class AAsNotNullableExternCall
+special ACastExternCall
+    readable var _n_type: AType
+    readable var _n_kwas: TKwas
+    readable var _n_kwnot: TKwnot
+    readable var _n_kwnullable: TKwnullable
 end
 class ATypePropdef
 	super APropdef

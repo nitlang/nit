@@ -241,6 +241,7 @@ extern const int SFT_syntax_base[];
 #define CALL_syntax_base___AClosureDef___closure(recv) ((syntax_base___AClosureDef___closure_t)CALL((recv), (SFT_syntax_base[98] + 0)))
 #define CALL_syntax_base___AClosureDef___variables(recv) ((syntax_base___AClosureDef___variables_t)CALL((recv), (SFT_syntax_base[98] + 1)))
 #define CALL_syntax_base___AClosureDef___variables__eq(recv) ((syntax_base___AClosureDef___variables__eq_t)CALL((recv), (SFT_syntax_base[98] + 2)))
+#define CALL_syntax_base___AMethid___name(recv) ((syntax_base___AMethid___name_t)CALL((recv), (SFT_syntax_base[99] + 0)))
 static const char * const LOCATE_syntax_base___MMSrcModule___clear_ast = "syntax_base::MMSrcModule::clear_ast";
 void syntax_base___MMSrcModule___clear_ast(val_t p0);
 typedef void (*syntax_base___MMSrcModule___clear_ast_t)(val_t p0);
@@ -730,4 +731,8 @@ typedef void (*syntax_base___AClosureDef___variables__eq_t)(val_t p0, val_t p1);
 val_t NEW_AClosureDef_parser_prod___AClosureDef___empty_init();
 val_t NEW_AClosureDef_parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 val_t NEW_AClosureDef_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_syntax_base___AMethid___name = "syntax_base::AMethid::name";
+val_t syntax_base___AMethid___name(val_t p0);
+typedef val_t (*syntax_base___AMethid___name_t)(val_t p0);
+val_t NEW_AMethid_parser_nodes___ANode___init(val_t p0);
 #endif

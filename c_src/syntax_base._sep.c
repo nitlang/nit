@@ -4697,3 +4697,17 @@ void syntax_base___AClosureDef___variables__eq(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return;
 }
+val_t syntax_base___AMethid___name(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_syntax_base;
+  fra.me.line = 845;
+  fra.me.meth = LOCATE_syntax_base___AMethid___name;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 0;
+  /* ./syntax//syntax_base.nit:845 */
+  nit_abort("Deferred method called", NULL, LOCATE_syntax_base, 845);
+  stack_frame_head = fra.me.prev;
+  return NIT_NULL;
+}
