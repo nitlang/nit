@@ -462,7 +462,7 @@ redef class AModuledecl
 	redef fun accept_class_builder(v)
 	do
 		if n_id.to_symbol != v.mmmodule.name then
-			v.error(n_id, "Error: Module name missmatch between {v.mmmodule.name} and {n_id.to_symbol}")
+			v.error(n_id, "Error: Module name mismatch between {v.mmmodule.name} and {n_id.to_symbol}")
 		end
 	end
 end
@@ -637,7 +637,7 @@ redef class AStdClassdef
 		end
 
 		if glob.intro.arity != _local_class.arity then
-			v.error(self, "Redef error: Formal parameter arity missmatch; got {_local_class.arity}, expected {glob.intro.arity}.")
+			v.error(self, "Redef error: Formal parameter arity mismatch; got {_local_class.arity}, expected {glob.intro.arity}.")
 		end
 
 		if 

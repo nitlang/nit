@@ -152,10 +152,10 @@ private class TypingVisitor
 			for p in false_candidates do
 				a.add("{p.full_name}{p.signature.as(not null)}")
 			end
-			v.error(n, "Error: there is no available compatible constrctor in {c}. Discarded candidates are {a.join(", ")}.")
+			v.error(n, "Error: there is no available compatible constructor in {c}. Discarded candidates are {a.join(", ")}.")
 			return null
 		else
-			v.error(n, "Error: there is no available compatible constrctor in {c}.")
+			v.error(n, "Error: there is no available compatible constructor in {c}.")
 			return null
 		end
 	end
@@ -1231,7 +1231,7 @@ redef class AAbsAbsSendExpr
 		var raw_arity: Int
 		if raw_args == null then raw_arity = 0 else raw_arity = raw_args.length
 		if par_arity > raw_arity or (par_arity != raw_arity and par_vararg == -1) then
-			v.error(self, "Error: arity missmatch; prototype is '{name}{psig}'.")
+			v.error(self, "Error: arity mismatch; prototype is '{name}{psig}'.")
 			return false
 		end
 		var arg_idx = 0

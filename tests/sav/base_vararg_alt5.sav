@@ -1,1 +1,1 @@
-alt/base_vararg_alt5.nit:59,1--7: Error: arity missmatch; prototype is 'baz(Char,Char)'.
+alt/base_vararg_alt5.nit:59,1--7: Error: arity mismatch; prototype is 'baz(Char,Char)'.

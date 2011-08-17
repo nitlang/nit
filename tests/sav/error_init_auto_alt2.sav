@@ -1,4 +1,4 @@
-alt/error_init_auto_alt2.nit:33,5--9: Error: arity missmatch; prototype is 'init(Int,Int)'.
-alt/error_init_auto_alt2.nit:34,5--11: Error: arity missmatch; prototype is 'init(Int,Int)'.
-alt/error_init_auto_alt2.nit:36,5--17: Error: arity missmatch; prototype is 'init(Int,Int)'.
+alt/error_init_auto_alt2.nit:33,5--9: Error: arity mismatch; prototype is 'init(Int,Int)'.
+alt/error_init_auto_alt2.nit:34,5--11: Error: arity mismatch; prototype is 'init(Int,Int)'.
+alt/error_init_auto_alt2.nit:36,5--17: Error: arity mismatch; prototype is 'init(Int,Int)'.
 alt/error_init_auto_alt2.nit:37,5--15: Error: Method 'foo' doesn't exists in A.

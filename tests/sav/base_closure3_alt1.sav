@@ -1,1 +1,1 @@
-alt/base_closure3_alt1.nit:25,3--14: Error: arity missmatch; prototype is 'bar(Int,Int,A)'.
+alt/base_closure3_alt1.nit:25,3--14: Error: arity mismatch; prototype is 'bar(Int,Int,A)'.
