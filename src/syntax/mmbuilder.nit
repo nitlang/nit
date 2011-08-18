@@ -1174,9 +1174,16 @@ redef class AExternPropdef
 			ename = n_extern.text
 			ename = ename.substring(1, ename.length-2)
 		else
-			ename = "{method.mmmodule.name}_{method.local_class.name}_{method.local_class.name}_{method.name}_{method.signature.arity}"
+			ename = method.default_extern_name
 		end
 		method.extern_name = ename
+	end
+end
+
+redef class MMMethod
+	fun default_extern_name : String
+	do
+		return "{mmmodule.name}_{local_class.name}_{local_class.name}_{name}_{signature.arity}"
 	end
 end
 
