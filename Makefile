@@ -16,7 +16,7 @@
 
 NITCOPT=
 
-all: bin/nitc bin/nitdoc doc/stdlib/index.html
+all: bin/nitc bin/nitdoc doc/stdlib/index.html bin/nits
 
 bin/nitc: c_src/nitc src/parser/parser.nit
 	@echo '***************************************************************'
@@ -31,6 +31,12 @@ bin/nitdoc: bin/nitc
 	@echo '***************************************************************'
 	src/git-gen-version.sh
 	bin/nitc ${NITCOPT} -o bin/nitdoc -O -v src/nitdoc.nit
+
+bin/nits: bin/nitc
+	@echo '***************************************************************'
+	@echo '* Compile nits from NIT source files                        *'
+	@echo '***************************************************************'
+	bin/nitc ${NITCOPT} -o bin/nits -O -v src/nits.nit
 
 doc/stdlib/index.html: bin/nitdoc
 	@echo '***************************************************************'
