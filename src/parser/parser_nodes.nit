@@ -469,10 +469,20 @@ class AConcreteMethPropdef
     readable var _n_kwmeth: nullable TKwmeth
     readable var _n_block: nullable AExpr = null
 end
+class AInitPropdef
+end
 class AConcreteInitPropdef
 	super AConcreteMethPropdef
+	super AInitPropdef
+    init do end
     readable var _n_kwinit: TKwinit
     redef fun hot_location do return n_kwinit.location
+end
+class AExternInitPropdef
+	super AExternPropdef
+	super AInitPropdef
+    init do end
+    readable var _n_kwnew: TKwnew
 end
 class AMainMethPropdef
 	super AConcreteMethPropdef

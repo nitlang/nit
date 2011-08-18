@@ -1862,6 +1862,155 @@ redef class AConcreteInitPropdef
         end
     end
 end
+redef class AExternInitPropdef
+    private init empty_init do end
+
+    init init_aexterninitpropdef (
+            n_doc: nullable ADoc,
+            n_kwredef: nullable TKwredef,
+            n_visibility: nullable AVisibility,
+            n_kwnew: nullable TKwnew,
+            n_methid: nullable AMethid,
+            n_signature: nullable ASignature,
+            n_extern: nullable TString,
+            n_extern_calls: nullable AExternCalls
+    )
+    do
+        empty_init
+        _n_doc = n_doc
+	if n_doc != null then
+		n_doc.parent = self
+	end
+        _n_kwredef = n_kwredef
+	if n_kwredef != null then
+		n_kwredef.parent = self
+	end
+        _n_visibility = n_visibility.as(not null)
+	n_visibility.parent = self
+        _n_kwnew = n_kwnew.as(not null)
+	n_kwnew.parent = self
+        _n_methid = n_methid
+	if n_methid != null then
+		n_methid.parent = self
+	end
+        _n_signature = n_signature.as(not null)
+	n_signature.parent = self
+        _n_extern = n_extern
+	if n_extern != null then
+		n_extern.parent = self
+	end
+        _n_extern_calls = n_extern_calls
+	if n_extern_calls != null then
+		n_extern_calls.parent = self
+	end
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_doc == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa ADoc
+                _n_doc = new_child
+	    else
+		_n_doc = null
+            end
+            return
+	end
+        if _n_kwredef == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwredef
+                _n_kwredef = new_child
+	    else
+		_n_kwredef = null
+            end
+            return
+	end
+        if _n_visibility == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AVisibility
+                _n_visibility = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_kwnew == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwnew
+                _n_kwnew = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_methid == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AMethid
+                _n_methid = new_child
+	    else
+		_n_methid = null
+            end
+            return
+	end
+        if _n_signature == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa ASignature
+                _n_signature = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_extern == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TString
+                _n_extern = new_child
+	    else
+		_n_extern = null
+            end
+            return
+	end
+        if _n_extern_calls == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExternCalls
+                _n_extern_calls = new_child
+	    else
+		_n_extern_calls = null
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        if _n_doc != null then
+            v.enter_visit(_n_doc.as(not null))
+        end
+        if _n_kwredef != null then
+            v.enter_visit(_n_kwredef.as(not null))
+        end
+        v.enter_visit(_n_visibility)
+        v.enter_visit(_n_kwnew)
+        if _n_methid != null then
+            v.enter_visit(_n_methid.as(not null))
+        end
+        v.enter_visit(_n_signature)
+        if _n_extern != null then
+            v.enter_visit(_n_extern.as(not null))
+        end
+        if _n_extern_calls != null then
+            v.enter_visit(_n_extern_calls.as(not null))
+        end
+    end
+end
 redef class AMainMethPropdef
     private init empty_init do end
 

@@ -277,6 +277,18 @@ redef class AConcreteInitPropdef
 	end
 end
 
+redef class AExternInitPropdef
+	redef fun accept_typing(v)
+	do
+		v.explicit_other_init_call = false
+		super
+	end
+	redef fun after_typing(v)
+	do
+		super
+	end
+end
+
 redef class AParam
 	redef fun after_typing(v)
 	do

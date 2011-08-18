@@ -223,6 +223,7 @@ propdef~toplevel {-> propdef}
 !toplevel| {var4} [doc]:no redef visibility kwvar id typing? writable2? assign [n2]:no expr {-> New propdef.attr(doc.doc, Null, writable2.able, redef.kwredef, visibility, kwvar, Null, id, typing.type, expr)}
 !toplevel| {init} [doc]:no redef visibility kwinit methid? signature kwdo stmtso kwend? {-> New propdef.concrete_init(doc.doc, redef.kwredef, visibility, kwinit, methid, signature, stmtso.expr)}
 !toplevel| {type} [doc]:no redef visibility kwtype classid typing {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, classid, typing.type)}
+!toplevel| {extern_init} [doc]:no redef visibility kwnew methid? signature kwis kwextern string? extern_calls? {-> New propdef.extern_init(doc.doc, redef.kwredef, visibility, kwnew, methid, signature, string, extern_calls)}
 	;
 readable {-> able}
 	= redef kwreadable {-> New able.read(redef.kwredef, kwreadable)}
@@ -644,9 +645,10 @@ propdef = {attr} doc? [readable]:able? [writable]:able? kwredef? visibility kwva
 	| {deferred_meth} doc? kwredef? visibility kwmeth methid signature 
 	| {intern_meth} doc? kwredef? visibility kwmeth methid signature 
 	| {extern_meth} doc? kwredef? visibility kwmeth methid signature [extern]:string? extern_calls?
-	| {concrete_meth} doc? kwredef? visibility kwmeth methid signature [block]:expr? 
-	| {concrete_init} doc? kwredef? visibility kwinit methid? signature [block]:expr? 
-	| {main_meth} kwredef? [block]:expr? 
+	| {concrete_meth} doc? kwredef? visibility kwmeth methid signature [block]:expr?
+	| {concrete_init} doc? kwredef? visibility kwinit methid? signature [block]:expr?
+	| {extern_init} doc? kwredef? visibility kwnew methid? signature [extern]:string? extern_calls?
+	| {main_meth} kwredef? [block]:expr?
 	| {type} doc? kwredef? visibility kwtype [id]:classid type
 	;
 

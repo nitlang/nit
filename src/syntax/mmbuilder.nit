@@ -905,7 +905,7 @@ redef class APropdef
 	# The part of process_and_check when prop is a redefinition
 	private fun do_and_check_redef(v: PropertyVerifierVisitor, prop: MMLocalProperty, has_redef: Bool, visibility_level: Int)
 	do
-		var is_init = self isa AConcreteInitPropdef
+		var is_init = self isa AInitPropdef
 		var glob = prop.global
 
 		if not has_redef then
@@ -1107,7 +1107,7 @@ redef class AMethPropdef
 		super
 		var name: Symbol
 		if n_methid == null then
-			if self isa AConcreteInitPropdef then
+			if self isa AInitPropdef then
 				name = once "init".to_symbol
 			else
 				name = once "main".to_symbol

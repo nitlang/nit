@@ -196,7 +196,7 @@ class MMMethSrcMethod
 	do
 		super(name, cla)
 		cla.mmmodule.nodes(self) = n
-		_is_init = node isa AConcreteInitPropdef
+		_is_init = node isa AInitPropdef
 		_is_intern = node isa AInternMethPropdef
 		_is_extern = node isa AExternPropdef
 		_is_abstract = node isa ADeferredMethPropdef

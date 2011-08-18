@@ -485,6 +485,17 @@ class AConcreteInitPropdef
     readable var _n_signature: ASignature
     readable var _n_block: nullable AExpr = null
 end
+class AExternInitPropdef
+	super APropdef
+    readable var _n_doc: nullable ADoc = null
+    readable var _n_kwredef: nullable TKwredef = null
+    readable var _n_visibility: AVisibility
+    readable var _n_kwnew: TKwnew
+    readable var _n_methid: nullable AMethid = null
+    readable var _n_signature: ASignature
+    readable var _n_extern: nullable TString = null
+    readable var _n_extern_calls: nullable AExternCalls = null
+end
 class AMainMethPropdef
 	super APropdef
     readable var _n_kwredef: nullable TKwredef = null

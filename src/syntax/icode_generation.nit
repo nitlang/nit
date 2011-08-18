@@ -386,6 +386,19 @@ redef class AConcreteMethPropdef
 	end
 end
 
+redef class AExternInitPropdef
+	redef fun fill_iroutine(v, method)
+	do
+		var params = v.iroutine.params
+		var sig = method.signature
+		assert params.length == sig.arity + 1
+		var rtype = sig.recv # sig.return_type
+		if rtype != null then
+			v.add_assignment(new IRegister(rtype), v.expr(new INative(method, params), rtype))
+		end
+	end
+end
+
 redef class ADeferredMethPropdef
 	redef fun fill_iroutine(v, method)
 	do
