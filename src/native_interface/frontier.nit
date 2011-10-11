@@ -31,7 +31,7 @@ redef class MMSrcModule
 
 		# guard
 		v.header_top.add( "#include <nit_common.h>\n" )
-		v.header_top.add( "#include \"{name}._sep.h\"\n" )
+		v.header_top.add( "#include \"{v.cprogram.module_header_name(self)}\"\n" )
 
 		var guard_name = "{name.to_s.to_upper}_NITNI_H"
 		v.header_top.add( "#ifndef {guard_name}\n" )
@@ -281,7 +281,7 @@ class FrontierVisitor
 
 	var mmmodule : MMModule
 
-	init ( mmmodule : MMModule ) do self.mmmodule = mmmodule
+	var cprogram : CProgram
 
 	fun compile_cached
 	do

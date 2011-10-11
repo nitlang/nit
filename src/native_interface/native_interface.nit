@@ -24,7 +24,7 @@ redef class MMSrcModule
 	redef fun compile_separate_module(cprogram: CProgram)
 	do
 		if is_extern_hybrid then
-			var visitor = new FrontierVisitor( self )
+			var visitor = new FrontierVisitor( self, cprogram )
 			compile_frontier( visitor )
 
 			visitor.compile_cached
