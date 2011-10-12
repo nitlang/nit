@@ -97,7 +97,7 @@ class Writer
 	# Return true if the string writer is frozen
 	readable var _is_frozen: Bool = false
 
-	# Disable funter writer modification: nor add or append are allowed
+	# Disable further writer modification: nor add or append are allowed
 	fun freeze
 	do
 		if is_frozen then return

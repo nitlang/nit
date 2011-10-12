@@ -292,17 +292,17 @@ redef class MMImplicitInit
 		end
 		_super_init = base
 
-		var params = new Array[MMType]
+		var params = new Array[MMParam]
 		if base != null then
 			var sig = base.signature
 			for i in [0..sig.arity[ do
-				params.add(sig[i])
+				params.add(sig.params[i])
 			end
 		end
 		for a in unassigned_attributes do
 			var sig = a.signature
 			if sig == null then return # Broken attribute definition
-			params.add(sig.return_type.as(not null))
+			params.add( new MMParam( sig.return_type.as(not null), once "recv".to_symbol))
 		end
 		signature = new MMSignature(params, null, local_class.get_type)
 	end
@@ -462,7 +462,7 @@ redef class AModuledecl
 	redef fun accept_class_builder(v)
 	do
 		if n_id.to_symbol != v.mmmodule.name then
-			v.error(n_id, "Error: Module name missmatch between {v.mmmodule.name} and {n_id.to_symbol}")
+			v.error(n_id, "Error: Module name mismatch between {v.mmmodule.name} and {n_id.to_symbol}")
 		end
 	end
 end
@@ -658,6 +658,62 @@ redef class AStdClassdef
 	do
 		return n_formaldefs.length
 	end
+	redef fun accept_class_verifier(v)
+	do
+		super
+		var glob = _local_class.global
+		if glob.intro == _local_class then
+			# Intro
+			glob.visibility_level = visibility_level
+			glob.is_interface = n_classkind.is_interface
+			glob.is_abstract = n_classkind.is_abstract
+			glob.is_enum = n_classkind.is_enum
+			if n_kwredef != null then
+				v.error(self, "Redef error: No class {name} is imported. Remove the redef keyword to define a new class.")
+			end
+
+			for c in _local_class.cshe.direct_greaters do
+				var cg = c.global
+				if glob.is_interface then
+					if cg.is_enum then
+						v.error(self, "Special error: Interface {name} try to specialise enum class {c.name}.")
+					else if not cg.is_interface then
+						v.error(self, "Special error: Interface {name} try to specialise class {c.name}.")
+					end
+				else if glob.is_enum then
+					if not cg.is_interface and not cg.is_enum then
+						v.error(self, "Special error: Enum class {name} try to specialise class {c.name}.")
+					end
+				else
+					if cg.is_enum then
+						v.error(self, "Special error: Class {name} try to specialise enum class {c.name}.")
+					end
+				end
+
+			end
+			return
+		end
+
+		# Redef
+
+		glob.check_visibility(v, self, v.mmmodule)
+		if n_kwredef == null then
+			v.error(self, "Redef error: {name} is an imported class. Add the redef keyword to refine it.")
+			return
+		end
+
+		if glob.intro.arity != _local_class.arity then
+			v.error(self, "Redef error: Formal parameter arity mismatch; got {_local_class.arity}, expected {glob.intro.arity}.")
+		end
+
+		if 
+			not glob.is_interface and n_classkind.is_interface or
+			not glob.is_abstract and n_classkind.is_abstract or
+			not glob.is_enum and n_classkind.is_enum
+		then
+			v.error(self, "Redef error: cannot change kind of class {name}.")
+		end
+	end
 
 	redef fun visibility_level
 	do
@@ -802,7 +858,7 @@ redef class APropdef
 			else if not v.signature_builder.untyped_params.is_empty then
 				v.error(v.signature_builder.untyped_params.first, "Error: Untyped parameter.")
 			else
-				prop.signature = new MMSignature(new Array[MMType], null, v.local_class.get_type)
+				prop.signature = new MMSignature(new Array[MMParam], null, v.local_class.get_type)
 				for clos in v.signature_builder.closure_decls do
 					prop.signature.closures.add(clos.variable.closure)
 				end
@@ -998,7 +1054,7 @@ redef class AAttrPropdef
 		end
 
 		var prop = prop
-		var signature = new MMSignature(new Array[MMType], t, v.local_class.get_type)
+		var signature = new MMSignature(new Array[MMParam], t, v.local_class.get_type)
 		prop.signature = signature
 		var visibility_level = n_visibility.level
 		process_and_check(v, prop, n_id != null and n_kwredef != null, visibility_level)
@@ -1010,7 +1066,7 @@ redef class AAttrPropdef
 		end
 		if n_writable != null or n_id == null then
 			var m = _writemethod.as(not null)
-			m.signature = new MMSignature(new Array[MMType].with_items(t), null, v.local_class.get_type)
+			m.signature = new MMSignature(new Array[MMParam].with_items(new MMParam(t, once "value".to_symbol)), null, v.local_class.get_type)
 			var vl = visibility_level
 			if n_id == null then
 				if n_writable == null then vl = 3 else vl = n_writable.n_visibility.level # write accessor has a specific visibility
@@ -1093,7 +1149,7 @@ redef class AMainMethPropdef
 	redef fun process_and_check(v, prop, has_redef, visibility_level)
 	do
 		prop.global.visibility_level = visibility_level
-		prop.signature = new MMSignature(new Array[MMType], null, v.local_class.get_type)
+		prop.signature = new MMSignature(new Array[MMParam], null, v.local_class.get_type)
 		# Disable all checks for main
 	end
 end
@@ -1129,7 +1185,7 @@ redef class ATypePropdef
 	redef fun accept_property_verifier(v)
 	do
 		super
-		var signature = new MMSignature(new Array[MMType], n_type.get_stype(v), v.local_class.get_type)
+		var signature = new MMSignature(new Array[MMParam], n_type.get_stype(v), v.local_class.get_type)
 		prop.signature = signature
 		var visibility_level = n_visibility.level
 		process_and_check(v, prop, n_kwredef != null, visibility_level)
@@ -1158,8 +1214,7 @@ private class MethidAccumulator
 end
 
 redef class AMethid
-	# Method name
-	readable var _name: nullable Symbol 
+	redef readable var _name: nullable Symbol
 
 	redef fun accept_property_builder(v)
 	do
@@ -1182,9 +1237,9 @@ redef class ASignature
 				return
 			end
 		else if not v.signature_builder.params.is_empty or n_type != null then
-			var pars = new Array[MMType]
+			var pars = new Array[MMParam]
 			for p in v.signature_builder.params do
-				pars.add(p.stype.as(not null))
+				pars.add( new MMParam( p.stype.as(not null),  p.n_id.to_symbol ) )
 			end
 			var ret: nullable MMType = null
 			if n_type != null then
@@ -1272,14 +1327,14 @@ redef class AClosureDecl
 		end
 		var sig = v.signature_builder.signature
 		if sig == null then
-			sig = new MMSignature(new Array[MMType], null, v.local_class.get_type)
+			sig = new MMSignature(new Array[MMParam], null, v.local_class.get_type)
 		end
 		if sig.return_type != null and n_kwbreak != null then
 			v.error(self, "Syntax Error: A break block cannot have a return value.")
 		end
 
 		# Add the finalizer to the closure signature
-		var finalize_sig = new MMSignature(new Array[MMType], null, v.mmmodule.type_any) # FIXME should be no receiver
+		var finalize_sig = new MMSignature(new Array[MMParam], null, v.mmmodule.type_any) # FIXME should be no receiver
 		var finalizer_clos = new MMClosure(once ("break".to_symbol), finalize_sig, false, true)
 		sig.closures.add(finalizer_clos)
 

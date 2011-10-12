@@ -1272,7 +1272,7 @@ redef class AAbsAbsSendExpr
 		var raw_arity: Int
 		if raw_args == null then raw_arity = 0 else raw_arity = raw_args.length
 		if par_arity > raw_arity or (par_arity != raw_arity and par_vararg == -1) then
-			v.error(self, "Error: arity missmatch; prototype is '{name}{psig}'.")
+			v.error(self, "Error: arity mismatch; prototype is '{name}{psig}'.")
 			return false
 		end
 		var arg_idx = 0
