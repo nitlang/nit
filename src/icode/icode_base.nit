@@ -332,7 +332,10 @@ class INative
 
 	init(m: MMMethod, e: nullable Sequence[IRegister])
 	do
-		super(e)
+                # Checks that arguments contains at least one IRegister element
+                assert e.length == m.signature.arity + 1
+		
+                super(e)
 		_method = m
 	end
 
