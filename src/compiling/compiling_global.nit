@@ -281,6 +281,14 @@ redef class TableEltClassSelfId
 	end
 end
 
+redef class TableEltClassSelfName
+	redef fun compile_to_c(v, c)
+	do
+		var prog = v.program
+		return "\"{c.global.name}\" /* {prog.table_information.color(self)}: Class Name */"
+	end
+end
+
 redef class TableEltClassObjectSize
 	redef fun compile_to_c(v, c)
 	do
