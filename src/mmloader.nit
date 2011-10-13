@@ -423,18 +423,3 @@ class ModuleLoader
 	# Process a parsed module
 	protected fun process_metamodel(context: ToolContext, mod: MODULE) is abstract
 end
-
-redef class MMModule
-	# Recurcivelty process an import modules
-	fun import_supers_modules(names: Collection[Symbol])
-	do
-		var c = context
-		assert c isa ToolContext
-		var supers = new Array[MMModule]
-		for n in names do
-			var m = c.get_module(n, self)
-			supers.add(m)
-		end
-		c.add_module(self,supers)
-	end
-end

@@ -164,11 +164,11 @@ module
 	= moduledecl? [imports]:import* [classdefs]:classdef* implicit_top_class? implicit_main_class? {-> New module(moduledecl, [imports.import],[classdefs.classdef,implicit_top_class.classdef,implicit_main_class.classdef])};
 
 moduledecl
-	= [doc]:no kwmodule no id [n2]:n1 {-> New moduledecl(doc.doc, kwmodule, id)};
+	= [doc]:no kwmodule no module_name [n2]:n1 {-> New moduledecl(doc.doc, kwmodule, module_name)};
 
 import
-	= {std} [doc]:no visibility kwimport no id [n2]:n1		{-> New import.std(visibility, kwimport, id)}
-	| {no} [doc]:no visibility kwimport no kwend [n2]:n1	{-> New import.no(visibility, kwimport, kwend)}
+	= {std} [doc]:no visibility kwimport no module_name [n2]:n1 {-> New import.std(visibility, kwimport, module_name)}
+	| {no} [doc]:no visibility kwimport no kwend [n2]:n1 {-> New import.no(visibility, kwimport, kwend)}
 	;
 
 implicit_top_class {-> classdef}
@@ -553,6 +553,11 @@ idlist_nopar {-> id*}
 	| {more} idlist_nopar no comma [n2]:no id {-> [idlist_nopar.id, id]}
 	;
 
+module_name {-> module_name}
+	= {mod} modquad* id {-> New module_name(Null, [modquad.id], id)}
+	| {root} quad no modquad* id {-> New module_name(quad, [modquad.id], id)}
+	;
+
 qualified 
 	= {cla} modquad* classquad {-> New qualified([modquad.id], classquad.classid)}
 	| {mod} modquad+ {-> New qualified([modquad.id], Null)}
@@ -584,9 +589,9 @@ Abstract Syntax Tree
 module	= moduledecl? [imports]:import* [classdefs]:classdef*;
 
 moduledecl
-	= doc? kwmodule id;
+	= doc? kwmodule [name]:module_name;
 
-import	= {std} visibility kwimport id
+import	= {std} visibility kwimport [name]:module_name
 	| {no} visibility kwimport kwend
 	;
 
@@ -727,6 +732,8 @@ closure_id
 	= {simple} id
 	| {break} kwbreak
 	;
+
+module_name = quad? [path]:id* id;
 
 qualified = id* classid? ;
 
