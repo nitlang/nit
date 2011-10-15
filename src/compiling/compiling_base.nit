@@ -106,7 +106,7 @@ class CProgram
 		end
 		if tc.boost then f.write(" -O")
 		if not tc.cc_link then f.write(" -x \"-c\"")
-		for l in tc.cc_libs do f.write(" -x \"-l {l}\"")
+		for l in tc.cc_libs do f.write(" -l {l}")
 		for lp in tc.cc_lib_paths do f.write(" -x \"-L {lp}\"")
 		for ip in tc.cc_include_paths do f.write(" -x \"-I {ip}\"")
 		f.write(" \"$@\" \\\n  {files.join("\\\n  ")}\n")
