@@ -641,18 +641,13 @@ redef class MMSrcModule
 			dctx.add("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
 			dctx.add("<tr bgcolor=\"#FF6347\"><th colspan=\"2\"><big>Main Summary of {self}</big></th><tr>\n")
 			for c in new_classes do
-				if c.global.intro == c then
-					var add = false
-					if c.cshe.greaters.is_empty then
-						add = true
-					else
-						for p in c.cshe.direct_greaters do
-							if not p.global.intro == p then
-								add = true
-							end
+				if c.global.intro == c or owned_modules.has(c.global.intro.mmmodule) then
+					var add = true
+					for p in c.cshe.direct_greaters do
+						if p.global.intro.mmmodule == self or owned_modules.has(p.global.intro.mmmodule) then
+							add = false
 						end
 					end
-
 					if add then
 						dctx.add("<tr><td width=\"20%\" align=\"right\"><u>Introduce</u> {c.prototype_head(dctx)}</td><td><b>{c.html_link(dctx)}</b>{c.prototype_body(dctx)}<br/>{c.short_doc}</td><tr>\n")
 					end
