@@ -69,7 +69,6 @@ class Message
 			while line_end+1 < string.length and string[line_end+1] != '\n' and string[line_end+1] != '\r' do
 				line_end += 1
 			end
-			print "{i-1}: {line_start} && {line_end}"
 			var lstart = string.substring(line_start, location.column_start - 1)
 			var cend
 			if i != location.line_end then
