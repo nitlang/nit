@@ -82,7 +82,7 @@ redef class MMType
 			not is_nullable then # int, float, point/void* ...
 			return "{nit_name} = {boxtype(native_name)}"
 		else
-			return "{nit_name} = {"{native_name}.v"}"
+			return "{nit_name} = {native_name}.v"
 		end
 	end
 end
