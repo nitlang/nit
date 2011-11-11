@@ -34,6 +34,7 @@ redef class Float
 	fun exp: Float is extern "kernel_Float_Float_exp_0"
 	
 	fun rand: Float is extern "kernel_Float_Float_rand_0"
+	fun hypot_with( b : Float ) : Float is extern "hypotf"
 end
 
 redef class Collection[ E ]
