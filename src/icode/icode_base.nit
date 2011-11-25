@@ -456,15 +456,16 @@ class IAttrIsset
 end
 
 # A type check
-# expr is the expression checked
+# expr1 is the type reciever (self)
+# expr2 is the expression checked
 class ITypeCheck
-	super ICode1
+	super ICode2
 	# The static type checkes to
 	readable var _stype: MMType
 
-	init(e: IRegister, t: MMType)
+	init(e1, e2: IRegister, t: MMType)
 	do
-		super(e)
+		super(e1, e2)
 		_stype = t
 	end
 

@@ -61,7 +61,7 @@ class ICodeBuilder
 	# Add a type cast (ITypeCheck + IAbort) in the current icode sequence
 	fun add_type_cast(e: IRegister, stype: MMType)
 	do
-		var c = expr(new ITypeCheck(e, stype), mmmodule.type_bool)
+		var c = expr(new ITypeCheck(iroutine.params.first, e, stype), mmmodule.type_bool)
 		var iif = new IIf(c)
 		stmt(iif)
 		var old_seq = seq

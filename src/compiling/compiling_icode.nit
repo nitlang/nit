@@ -1019,15 +1019,15 @@ redef class ITypeCheck
 		# FIXME handle formaltypes
 		v.add_location(location)
 		var g = stype.local_class.global
-		var recv = v.register(expr)
+		var recv = v.register(expr2)
 		var w = new_result(v)
 		w.add("TAG_Bool(")
-		if expr.stype.is_nullable then
+		if expr2.stype.is_nullable then
 			if stype.is_nullable then
 				w.add("(")
 				w.add(recv)
 				w.add("==NIT_NULL) || ")
-			else if stype.as_nullable == expr.stype then
+			else if stype.as_nullable == expr2.stype then
 				w.add(recv)
 				w.add("!=NIT_NULL)")
 				return
