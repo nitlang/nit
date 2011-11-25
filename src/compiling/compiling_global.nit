@@ -203,6 +203,39 @@ redef class TableEltSuper
 	end
 end
 
+redef class TableEltVTClassColor
+	redef fun compile_macros(v, value)
+	do
+		var pg = property.global
+		v.add_decl("#define {pg.vt_class_color}(recv) (VAL2VFT(recv)[{value}].i)")
+	end
+
+	redef fun compile_to_c(v, c)
+	do
+		var prog = v.program
+		var p = c[property.global]
+		var g = p.signature_for(c.get_type).return_type.local_class.global
+		var col = g.intro.as(MMConcreteClass).class_color_pos
+		return "{prog.table_information.color(col)} /* {prog.table_information.color(self)}: VT {c}::{p} : color of {g} */"
+	end
+end
+
+redef class TableEltVTClassId
+	redef fun compile_macros(v, value)
+	do
+		var pg = property.global
+		v.add_decl("#define {pg.vt_class_id}(recv) (VAL2VFT(recv)[{value}].i)")
+	end
+
+	redef fun compile_to_c(v, c)
+	do
+		var prog = v.program
+		var p = c[property.global]
+		var g = p.signature_for(c.get_type).return_type.local_class.global
+		return "{prog.compiled_classes[g].id} /* {prog.table_information.color(self)}: VT {c}::{p} : id of {g} */"
+	end
+end
+
 redef class TableEltAttr
 	redef fun compile_macros(v, value)
 	do
@@ -217,6 +250,7 @@ redef class TableEltAttr
 		return "/* {prog.table_information.color(self)}: Attribute {c}::{p} */"
 	end
 end
+
 
 redef class AbsTableEltClass
 	# The C macro name refering the value

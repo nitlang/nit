@@ -112,6 +112,9 @@ redef class MMConcreteClass
 					ilt.add(new TableEltAttr(p))
 				else if p isa MMMethod then
 					clt.add(new TableEltMeth(p))
+				else if p isa MMTypeProperty then
+					clt.add(new TableEltVTClassId(p))
+					clt.add(new TableEltVTClassColor(p))
 				end
 			end
 			if p isa MMMethod and p.need_super then
@@ -449,6 +452,16 @@ end
 
 # An element that represents a function pointer to a global method
 class TableEltMeth
+	super TableEltProp
+end
+
+# An element that represents a class color value for a virtual type
+class TableEltVTClassColor
+	super TableEltProp
+end
+
+# An element that represents a class id value for a virtual type
+class TableEltVTClassId
 	super TableEltProp
 end
 

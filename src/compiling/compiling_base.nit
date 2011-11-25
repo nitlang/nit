@@ -246,6 +246,18 @@ redef class MMGlobalProperty
 	do
 		return "ATTR_{intro.cname}"
 	end
+
+	# C symbol refering a virtual type class color
+	fun vt_class_color: String
+	do
+		return "VTCOLOR_{intro.cname}"
+	end
+
+	# C symbol refering a virtual type class id
+	fun vt_class_id: String
+	do
+		return "VTID_{intro.cname}"
+	end
 end
 
 redef class MMGlobalClass
