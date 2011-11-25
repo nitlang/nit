@@ -23,14 +23,14 @@ bin/nitc: c_src/nitc src/parser/parser.nit
 	@echo '* Compile nitc from NIT source files                          *'
 	@echo '***************************************************************'
 	src/git-gen-version.sh
-	c_src/nitc ${NITCOPT} --clibdir c_src/clib -o bin/nitc -O -v src/nitc.nit
+	cd src; ../c_src/nitc ${NITCOPT} --clibdir ../c_src/clib -o ../bin/nitc -O -v nitc.nit
 
 bin/nitdoc: bin/nitc
 	@echo '***************************************************************'
 	@echo '* Compile nitdoc from NIT source files                        *'
 	@echo '***************************************************************'
 	src/git-gen-version.sh
-	bin/nitc ${NITCOPT} -o bin/nitdoc -O -v src/nitdoc.nit
+	cd src; ../bin/nitc ${NITCOPT} -o ../bin/nitdoc -O -v nitdoc.nit
 
 doc/stdlib/index.html: bin/nitdoc
 	@echo '***************************************************************'
