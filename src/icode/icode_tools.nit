@@ -456,7 +456,7 @@ end
 redef class ITypeCheck
 	redef fun inner_dup_with(d)
 	do
-		return new ITypeCheck(d.dup_ireg(expr), stype)
+		return new ITypeCheck(d.dup_ireg(expr1), d.dup_ireg(expr2), stype)
 	end
 end
 

@@ -364,7 +364,7 @@ end
 redef class ITypeCheck
 	redef fun dump_intern(icd)
 	do
-		return "CHECKTYPE {icd.register(expr)} isa {stype}"
+		return "CHECKTYPE {icd.register(expr2)} isa {stype}"
 	end
 end
 

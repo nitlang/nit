@@ -1023,18 +1023,16 @@ redef class ITypeCheck
 	redef fun compile_to_c(v)
 	do
 		if not need_result then return
-		# FIXME handle formaltypes
 		v.add_location(location)
-		var g = stype.local_class.global
-		var recv = v.register(expr)
+		var recv = v.register(expr2)
 		var w = new_result(v)
 		w.add("TAG_Bool(")
-		if expr.stype.is_nullable then
+		if expr2.stype.is_nullable then
 			if stype.is_nullable then
 				w.add("(")
 				w.add(recv)
 				w.add("==NIT_NULL) || ")
-			else if stype.as_nullable == expr.stype then
+			else if stype.as_nullable == expr2.stype then
 				w.add(recv)
 				w.add("!=NIT_NULL)")
 				return
@@ -1044,15 +1042,38 @@ redef class ITypeCheck
 				w.add("!=NIT_NULL) && ")
 			end
 		end
-		w.add("VAL_ISA(")
-		w.add(recv)
-		w.add(", ")
-		w.add(g.color_id)
-		w.add(", ")
-		w.add(g.id_id)
-		w.add(")) /*cast ")
-		w.add(stype.to_s)
-		w.add("*/")
+		# FIXME handle formaltypes
+		var t = stype
+		if t isa MMVirtualType then
+			var slf = v.register(expr1)
+			var g = t.property.global
+			w.add("VAL_ISA(")
+			w.add(recv)
+			w.add(", ")
+			w.add(g.vt_class_color)
+			w.add("(")
+			w.add(slf)
+			w.add(")")
+			w.add(", ")
+			w.add(g.vt_class_id)
+			w.add("(")
+			w.add(slf)
+			w.add(")")
+			w.add(")) /*cast ")
+			w.add(t.to_s)
+			w.add("*/")
+		else
+			var g = t.local_class.global
+			w.add("VAL_ISA(")
+			w.add(recv)
+			w.add(", ")
+			w.add(g.color_id)
+			w.add(", ")
+			w.add(g.id_id)
+			w.add(")) /*cast ")
+			w.add(t.to_s)
+			w.add("*/")
+		end
 	end
 end
 

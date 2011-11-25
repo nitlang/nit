@@ -82,6 +82,9 @@ class A2IContext
 	# The method associated to the iroutine (if any)
 	readable var _method: nullable MMMethod
 
+	# The register of self (if any)
+	var selfreg: nullable IRegister writable
+
 	init(visitor: AbsSyntaxVisitor, r: IRoutine, m: nullable MMMethod)
 	do
 		super(visitor.mmmodule, r)
@@ -368,6 +371,7 @@ redef class AConcreteMethPropdef
 		var params = v.iroutine.params.to_a
 		var selfreg = v.variable(self_var)
 		v.stmt(new IMove(selfreg, params[0]))
+		v.selfreg = selfreg
 		params.shift
 
 		var orig_meth: MMLocalProperty = method.global.intro
@@ -383,6 +387,7 @@ redef class AConcreteMethPropdef
 		if n_block != null then
 			v.generate_stmt(n_block)
 		end
+		v.selfreg = null
 	end
 end
 
@@ -812,7 +817,7 @@ redef class AIsaExpr
 	redef fun generate_icode(v)
 	do
 		var e = v.generate_expr(n_expr)
-		return v.expr(new ITypeCheck(e, n_type.stype), stype)
+		return v.expr(new ITypeCheck(v.selfreg.as(not null), e, n_type.stype), stype)
 	end
 end
 
