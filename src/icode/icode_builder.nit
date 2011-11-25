@@ -244,6 +244,14 @@ redef class MMSignature
 			end
 			iroutine.closure_decls = clos
 		end
+		# Add automatic test for virtual types
+		var icb = new ICodeBuilder(recv.mmmodule, iroutine)
+		for i in [0..arity[ do
+			var t = self[i]
+			if t isa MMVirtualType then
+				icb.add_type_cast(args[i+1], t)
+			end
+		end
 		return iroutine
 	end
 
@@ -268,6 +276,7 @@ redef class MMSignature
 			end
 			iroutine.closure_decls = clos
 		end
+		# TODO: add automatic test for virtual types?
 		return iroutine
 	end
 end
