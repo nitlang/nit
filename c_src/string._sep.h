@@ -3,7 +3,7 @@
 #define string_sep
 #include "collection._sep.h"
 #include <nit_common.h>
-#include <string_nit.h>
+#include "string._nitni.h"
 
 extern const classtable_elt_t VFT_AbstractString[];
 

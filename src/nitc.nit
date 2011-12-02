@@ -22,6 +22,7 @@ import analysis
 import program
 private import compiling
 private import syntax
+import native_interface
 
 # The main class of the nitcompiler program
 class NitCompiler

@@ -1275,7 +1275,7 @@ val_t file___NativeString___file_exists(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:258 */
-  REGB0 = TAG_Bool(string_NativeString_NativeString_file_exists_0(UNBOX_NativeString(fra.me.REG[0])));
+  REGB0 = NativeString_file_exists___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1291,7 +1291,7 @@ val_t file___NativeString___file_stat(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:259 */
-  fra.me.REG[0] = BOX_FileStat(string_NativeString_NativeString_file_stat_0(UNBOX_NativeString(fra.me.REG[0])));
+  fra.me.REG[0] = NativeString_file_stat___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -1308,7 +1308,7 @@ val_t file___NativeString___file_mkdir(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:260 */
-  REGB0 = TAG_Bool(string_NativeString_NativeString_file_mkdir_0(UNBOX_NativeString(fra.me.REG[0])));
+  REGB0 = NativeString_file_mkdir___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1325,7 +1325,7 @@ val_t file___NativeString___file_delete(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:261 */
-  REGB0 = TAG_Bool(string_NativeString_NativeString_file_delete_0(UNBOX_NativeString(fra.me.REG[0])));
+  REGB0 = NativeString_file_delete___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1342,7 +1342,7 @@ val_t file___FileStat___mode(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:266 */
-  REGB0 = TAG_Int(file_FileStat_FileStat_mode_0(UNBOX_FileStat(fra.me.REG[0])));
+  REGB0 = FileStat_mode___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1359,7 +1359,7 @@ val_t file___FileStat___atime(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:268 */
-  REGB0 = TAG_Int(file_FileStat_FileStat_atime_0(UNBOX_FileStat(fra.me.REG[0])));
+  REGB0 = FileStat_atime___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1376,7 +1376,7 @@ val_t file___FileStat___ctime(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:269 */
-  REGB0 = TAG_Int(file_FileStat_FileStat_ctime_0(UNBOX_FileStat(fra.me.REG[0])));
+  REGB0 = FileStat_ctime___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1393,7 +1393,7 @@ val_t file___FileStat___mtime(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:270 */
-  REGB0 = TAG_Int(file_FileStat_FileStat_mtime_0(UNBOX_FileStat(fra.me.REG[0])));
+  REGB0 = FileStat_mtime___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1410,7 +1410,7 @@ val_t file___FileStat___size(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:271 */
-  REGB0 = TAG_Int(file_FileStat_FileStat_size_0(UNBOX_FileStat(fra.me.REG[0])));
+  REGB0 = FileStat_size___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1430,7 +1430,7 @@ val_t file___NativeFile___io_read(val_t p0, val_t p1, val_t p2){
   fra.me.REG[1] = p1;
   REGB0 = p2;
   /* ./../lib/standard//file.nit:277 */
-  REGB0 = TAG_Int(file_NativeFile_NativeFile_io_read_2(UNBOX_NativeFile(fra.me.REG[0]), UNBOX_NativeString(fra.me.REG[1]), UNTAG_Int(REGB0)));
+  REGB0 = NativeFile_io_read___out(fra.me.REG[0], fra.me.REG[1], REGB0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1450,7 +1450,7 @@ val_t file___NativeFile___io_write(val_t p0, val_t p1, val_t p2){
   fra.me.REG[1] = p1;
   REGB0 = p2;
   /* ./../lib/standard//file.nit:278 */
-  REGB0 = TAG_Int(file_NativeFile_NativeFile_io_write_2(UNBOX_NativeFile(fra.me.REG[0]), UNBOX_NativeString(fra.me.REG[1]), UNTAG_Int(REGB0)));
+  REGB0 = NativeFile_io_write___out(fra.me.REG[0], fra.me.REG[1], REGB0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1467,7 +1467,7 @@ val_t file___NativeFile___io_close(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:279 */
-  REGB0 = TAG_Int(file_NativeFile_NativeFile_io_close_0(UNBOX_NativeFile(fra.me.REG[0])));
+  REGB0 = NativeFile_io_close___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -1483,7 +1483,7 @@ val_t file___NativeFile___file_stat(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:280 */
-  fra.me.REG[0] = BOX_FileStat(file_NativeFile_NativeFile_file_stat_0(UNBOX_NativeFile(fra.me.REG[0])));
+  fra.me.REG[0] = NativeFile_file_stat___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -1501,7 +1501,7 @@ val_t file___NativeFileCapable___io_open_read(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   /* ./../lib/standard//file.nit:284 */
-  fra.me.REG[1] = BOX_NativeFile(file_NativeFileCapable_NativeFileCapable_io_open_read_1(fra.me.REG[0], UNBOX_NativeString(fra.me.REG[1])));
+  fra.me.REG[1] = NativeFileCapable_io_open_read___out(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
 }
@@ -1519,7 +1519,7 @@ val_t file___NativeFileCapable___io_open_write(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   /* ./../lib/standard//file.nit:285 */
-  fra.me.REG[1] = BOX_NativeFile(file_NativeFileCapable_NativeFileCapable_io_open_write_1(fra.me.REG[0], UNBOX_NativeString(fra.me.REG[1])));
+  fra.me.REG[1] = NativeFileCapable_io_open_write___out(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
 }
@@ -1535,7 +1535,7 @@ val_t file___NativeFileCapable___native_stdin(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:286 */
-  fra.me.REG[0] = BOX_NativeFile(file_NativeFileCapable_NativeFileCapable_native_stdin_0(fra.me.REG[0]));
+  fra.me.REG[0] = NativeFileCapable_native_stdin___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -1551,7 +1551,7 @@ val_t file___NativeFileCapable___native_stdout(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:287 */
-  fra.me.REG[0] = BOX_NativeFile(file_NativeFileCapable_NativeFileCapable_native_stdout_0(fra.me.REG[0]));
+  fra.me.REG[0] = NativeFileCapable_native_stdout___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -1567,7 +1567,7 @@ val_t file___NativeFileCapable___native_stderr(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:288 */
-  fra.me.REG[0] = BOX_NativeFile(file_NativeFileCapable_NativeFileCapable_native_stderr_0(fra.me.REG[0]));
+  fra.me.REG[0] = NativeFileCapable_native_stderr___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }

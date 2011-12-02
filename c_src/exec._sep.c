@@ -314,7 +314,7 @@ val_t exec___Process___basic_exec_execute(val_t p0, val_t p1, val_t p2, val_t p3
   REGB0 = p3;
   REGB1 = p4;
   /* ./../lib/standard//exec.nit:72 */
-  fra.me.REG[2] = BOX_NativeProcess(exec_Process_Process_basic_exec_execute_4(fra.me.REG[0], UNBOX_NativeString(fra.me.REG[1]), UNBOX_NativeString(fra.me.REG[2]), UNTAG_Int(REGB0), UNTAG_Int(REGB1)));
+  fra.me.REG[2] = Process_basic_exec_execute___out(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], REGB0, REGB1);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[2];
 }
@@ -788,7 +788,7 @@ val_t exec___NativeString___system(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:161 */
-  REGB0 = TAG_Int(string_NativeString_NativeString_system_0(UNBOX_NativeString(fra.me.REG[0])));
+  REGB0 = NativeString_system___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -805,7 +805,7 @@ val_t exec___NativeProcess___id(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:166 */
-  REGB0 = TAG_Int(exec_NativeProcess_NativeProcess_id_0(UNBOX_NativeProcess(fra.me.REG[0])));
+  REGB0 = NativeProcess_id___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -822,7 +822,7 @@ val_t exec___NativeProcess___is_finished(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:167 */
-  REGB0 = TAG_Bool(exec_NativeProcess_NativeProcess_is_finished_0(UNBOX_NativeProcess(fra.me.REG[0])));
+  REGB0 = NativeProcess_is_finished___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -839,7 +839,7 @@ val_t exec___NativeProcess___status(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:168 */
-  REGB0 = TAG_Int(exec_NativeProcess_NativeProcess_status_0(UNBOX_NativeProcess(fra.me.REG[0])));
+  REGB0 = NativeProcess_status___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -855,7 +855,7 @@ void exec___NativeProcess___wait(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:169 */
-  exec_NativeProcess_NativeProcess_wait_0(UNBOX_NativeProcess(fra.me.REG[0]));
+  NativeProcess_wait___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -872,7 +872,7 @@ val_t exec___NativeProcess___in_fd(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:171 */
-  REGB0 = TAG_Int(exec_NativeProcess_NativeProcess_in_fd_0(UNBOX_NativeProcess(fra.me.REG[0])));
+  REGB0 = NativeProcess_in_fd___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -889,7 +889,7 @@ val_t exec___NativeProcess___out_fd(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:172 */
-  REGB0 = TAG_Int(exec_NativeProcess_NativeProcess_out_fd_0(UNBOX_NativeProcess(fra.me.REG[0])));
+  REGB0 = NativeProcess_out_fd___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -906,7 +906,7 @@ val_t exec___NativeProcess___err_fd(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:173 */
-  REGB0 = TAG_Int(exec_NativeProcess_NativeProcess_err_fd_0(UNBOX_NativeProcess(fra.me.REG[0])));
+  REGB0 = NativeProcess_err_fd___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }

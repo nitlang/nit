@@ -1186,7 +1186,62 @@ end
 redef class MMMethod
 	fun default_extern_name : String
 	do
-		return "{mmmodule.name}_{local_class.name}_{local_class.name}_{name}_{signature.arity}"
+		return "{friendly_extern_name(local_class)}___impl"
+	end
+
+	# Friendly name for this method. Is mainly the class name followed by the
+	# function name. It is prefixed with "new" for a constructor.
+	fun friendly_extern_name( local_class : MMLocalClass ) : String
+	do
+		if not is_init then
+			var native_fun_name : String
+			var method_name = name.to_s
+			if method_name == "+" then
+				native_fun_name = "_plus" # add
+			else if method_name == "-" then
+				native_fun_name = "_minus" # sub
+			else if method_name == "*" then
+				native_fun_name = "_star" # multi
+			else if method_name == "/" then
+				native_fun_name = "_slash" # div
+			else if method_name == "%" then
+				native_fun_name = "_percent" # mod
+			else if method_name == "[]" then
+				native_fun_name = "_index" # brackets
+			else if method_name == "[]=" then
+				native_fun_name = "_index_assign" # brackets
+			else if method_name == "==" then
+				native_fun_name = "_equal" # eq
+			else if method_name == "<" then
+				native_fun_name = "_less" # lt
+			else if method_name == ">" then
+				native_fun_name = "_greater" # gt
+			else if method_name == "<=" then
+				native_fun_name = "_less_or_equal" # greater_or_equal
+			else if method_name == ">=" then
+				native_fun_name = "_ge" # smaller_or_equal
+			else if method_name == "!=" then
+				native_fun_name = "_not_equal" # bang
+			else if method_name == ">>" then
+				native_fun_name = "_right"
+			else if method_name == "<<" then
+				native_fun_name = "_left"
+			else if method_name == "<=>" then
+				native_fun_name = "_starship"
+			else if method_name[ method_name.length-1 ] == '=' then
+				native_fun_name = "{method_name.substring(0,method_name.length-1)}__assign"
+			else
+				native_fun_name = method_name
+			end
+
+			return "{local_class.name}_{native_fun_name}"
+		else
+			if name == once "init".to_symbol then
+				return "new_{local_class.name}"
+			else
+				return "new_{local_class.name}_{name}"
+			end
+		end
 	end
 end
 

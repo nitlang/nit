@@ -2,7 +2,7 @@
 #ifndef nitc_sep
 #define nitc_sep
 #include "abstracttool._sep.h"
-#include "compiling._sep.h"
+#include "native_interface._sep.h"
 #include <nit_common.h>
 
 extern const classtable_elt_t VFT_NitCompiler[];

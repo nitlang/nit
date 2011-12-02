@@ -945,7 +945,7 @@ val_t stream___FDStream___native_close(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   REGB0 = p1;
   /* ./../lib/standard//stream.nit:220 */
-  REGB0 = TAG_Int(stream_FDStream_FDStream_native_close_1(fra.me.REG[0], UNTAG_Int(REGB0)));
+  REGB0 = FDStream_native_close___out(fra.me.REG[0], REGB0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -963,7 +963,7 @@ val_t stream___FDStream___native_read_char(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   REGB0 = p1;
   /* ./../lib/standard//stream.nit:221 */
-  REGB0 = TAG_Int(stream_FDStream_FDStream_native_read_char_1(fra.me.REG[0], UNTAG_Int(REGB0)));
+  REGB0 = FDStream_native_read_char___out(fra.me.REG[0], REGB0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -985,7 +985,7 @@ val_t stream___FDStream___native_read(val_t p0, val_t p1, val_t p2, val_t p3){
   fra.me.REG[1] = p2;
   REGB1 = p3;
   /* ./../lib/standard//stream.nit:222 */
-  REGB1 = TAG_Int(stream_FDStream_FDStream_native_read_3(fra.me.REG[0], UNTAG_Int(REGB0), UNBOX_NativeString(fra.me.REG[1]), UNTAG_Int(REGB1)));
+  REGB1 = FDStream_native_read___out(fra.me.REG[0], REGB0, fra.me.REG[1], REGB1);
   stack_frame_head = fra.me.prev;
   return REGB1;
 }
@@ -1007,7 +1007,7 @@ val_t stream___FDStream___native_write(val_t p0, val_t p1, val_t p2, val_t p3){
   fra.me.REG[1] = p2;
   REGB1 = p3;
   /* ./../lib/standard//stream.nit:223 */
-  REGB1 = TAG_Int(stream_FDStream_FDStream_native_write_3(fra.me.REG[0], UNTAG_Int(REGB0), UNBOX_NativeString(fra.me.REG[1]), UNTAG_Int(REGB1)));
+  REGB1 = FDStream_native_write___out(fra.me.REG[0], REGB0, fra.me.REG[1], REGB1);
   stack_frame_head = fra.me.prev;
   return REGB1;
 }

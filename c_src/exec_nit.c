@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-se_exec_data_t* exec_Process_Process_basic_exec_execute_4(int c, char *prog, char *args, int len, int pipeflag) {
+se_exec_data_t* exec_Process_Process_basic_exec_execute_4(Process s, char *prog, char *args, int len, int pipeflag) {
 	se_exec_data_t* result = NULL;
 	int id;
 	int in_fd[2];

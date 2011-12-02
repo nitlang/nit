@@ -784,6 +784,12 @@ val_t primitive_info___MMType___boxtype(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
+    REGB0 = TAG_Bool(true);
+  } else {
+    REGB1 = CALL_static_type___MMType___is_nullable(fra.me.REG[0])(fra.me.REG[0]);
+    REGB0 = REGB1;
+  }
+  if (UNTAG_Bool(REGB0)) {
     /* ./primitive_info.nit:133 */
     fra.me.REG[3] = fra.me.REG[1];
     goto label1;
@@ -917,6 +923,12 @@ val_t primitive_info___MMType___unboxtype(val_t p0, val_t p1){
       REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
       REGB0 = REGB1;
     }
+  }
+  if (UNTAG_Bool(REGB0)) {
+    REGB0 = TAG_Bool(true);
+  } else {
+    REGB1 = CALL_static_type___MMType___is_nullable(fra.me.REG[0])(fra.me.REG[0]);
+    REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
     /* ./primitive_info.nit:147 */

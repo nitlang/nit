@@ -16,7 +16,7 @@ val_t tables___TablesCapable___lexer_goto(val_t p0, val_t p1, val_t p2){
   REGB0 = p1;
   REGB1 = p2;
   /* ./parser//tables.nit:20 */
-  REGB1 = TAG_Int(lexer_goto(fra.me.REG[0], UNTAG_Int(REGB0), UNTAG_Int(REGB1)));
+  REGB1 = TablesCapable_lexer_goto___out(fra.me.REG[0], REGB0, REGB1);
   stack_frame_head = fra.me.prev;
   return REGB1;
 }
@@ -34,7 +34,7 @@ val_t tables___TablesCapable___lexer_accept(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   REGB0 = p1;
   /* ./parser//tables.nit:24 */
-  REGB0 = TAG_Int(lexer_accept(fra.me.REG[0], UNTAG_Int(REGB0)));
+  REGB0 = TablesCapable_lexer_accept___out(fra.me.REG[0], REGB0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -54,7 +54,7 @@ val_t tables___TablesCapable___parser_goto(val_t p0, val_t p1, val_t p2){
   REGB0 = p1;
   REGB1 = p2;
   /* ./parser//tables.nit:27 */
-  REGB1 = TAG_Int(parser_goto(fra.me.REG[0], UNTAG_Int(REGB0), UNTAG_Int(REGB1)));
+  REGB1 = TablesCapable_parser_goto___out(fra.me.REG[0], REGB0, REGB1);
   stack_frame_head = fra.me.prev;
   return REGB1;
 }
@@ -74,7 +74,7 @@ val_t tables___TablesCapable___parser_action(val_t p0, val_t p1, val_t p2){
   REGB0 = p1;
   REGB1 = p2;
   /* ./parser//tables.nit:31 */
-  REGB1 = TAG_Int(parser_action(fra.me.REG[0], UNTAG_Int(REGB0), UNTAG_Int(REGB1)));
+  REGB1 = TablesCapable_parser_action___out(fra.me.REG[0], REGB0, REGB1);
   stack_frame_head = fra.me.prev;
   return REGB1;
 }

@@ -57,72 +57,78 @@ extern const int SFT_typing[];
 #define CALL_SUPER_typing___AConcreteMethPropdef___after_typing(recv) ((typing___AConcreteMethPropdef___after_typing_t)CALL((recv), (SFT_typing[10] + 0)))
 #define CALL_SUPER_typing___AConcreteInitPropdef___accept_typing(recv) ((typing___AConcreteInitPropdef___accept_typing_t)CALL((recv), (SFT_typing[11] + 0)))
 #define CALL_SUPER_typing___AConcreteInitPropdef___after_typing(recv) ((typing___AConcreteInitPropdef___after_typing_t)CALL((recv), (SFT_typing[11] + 1)))
-#define ATTR_typing___AClosureDecl____escapable(recv) ATTR(recv, (SFT_typing[12] + 0))
-#define CALL_typing___AClosureDecl___escapable(recv) ((typing___AClosureDecl___escapable_t)CALL((recv), (SFT_typing[13] + 0)))
-#define CALL_SUPER_typing___AClosureDecl___accept_typing(recv) ((typing___AClosureDecl___accept_typing_t)CALL((recv), (SFT_typing[13] + 1)))
-#define ATTR_typing___AType____stype(recv) ATTR(recv, (SFT_typing[14] + 0))
-#define ATTR_typing___AExpr____is_typed(recv) ATTR(recv, (SFT_typing[15] + 0))
-#define ATTR_typing___AExpr____stype(recv) ATTR(recv, (SFT_typing[15] + 1))
-#define ATTR_typing___AExpr____if_true_flow_ctx(recv) ATTR(recv, (SFT_typing[15] + 2))
-#define ATTR_typing___AExpr____if_false_flow_ctx(recv) ATTR(recv, (SFT_typing[15] + 3))
-#define CALL_typing___AExpr___is_implicit_self(recv) ((typing___AExpr___is_implicit_self_t)CALL((recv), (SFT_typing[16] + 0)))
-#define CALL_typing___AExpr___is_self(recv) ((typing___AExpr___is_self_t)CALL((recv), (SFT_typing[16] + 1)))
-#define CALL_typing___AExpr___its_variable(recv) ((typing___AExpr___its_variable_t)CALL((recv), (SFT_typing[16] + 2)))
-#define CALL_typing___AExpr___if_true_flow_ctx(recv) ((typing___AExpr___if_true_flow_ctx_t)CALL((recv), (SFT_typing[16] + 3)))
-#define CALL_typing___AExpr___if_false_flow_ctx(recv) ((typing___AExpr___if_false_flow_ctx_t)CALL((recv), (SFT_typing[16] + 4)))
-#define ATTR_typing___AVardeclExpr____variable(recv) ATTR(recv, (SFT_typing[17] + 0))
-#define ID_AAbsControl (SFT_typing[18])
-#define COLOR_AAbsControl (SFT_typing[19])
-#define ATTR_typing___AAbsControl____escapable(recv) ATTR(recv, (SFT_typing[20] + 0))
-#define INIT_TABLE_POS_AAbsControl (SFT_typing[21] + 0)
-#define CALL_typing___AAbsControl___escapable(recv) ((typing___AAbsControl___escapable_t)CALL((recv), (SFT_typing[21] + 1)))
-#define CALL_typing___AAbsControl___process_control(recv) ((typing___AAbsControl___process_control_t)CALL((recv), (SFT_typing[21] + 2)))
-#define CALL_typing___AAbsControl___process_control_inside(recv) ((typing___AAbsControl___process_control_inside_t)CALL((recv), (SFT_typing[21] + 3)))
-#define ATTR_typing___AForExpr____variable(recv) ATTR(recv, (SFT_typing[22] + 0))
-#define ATTR_typing___AVarFormExpr____variable(recv) ATTR(recv, (SFT_typing[23] + 0))
-#define ATTR_typing___AReassignFormExpr____assign_method(recv) ATTR(recv, (SFT_typing[24] + 0))
-#define CALL_typing___AReassignFormExpr___do_rvalue_typing(recv) ((typing___AReassignFormExpr___do_rvalue_typing_t)CALL((recv), (SFT_typing[25] + 0)))
-#define CALL_typing___AAssignOp___method_name(recv) ((typing___AAssignOp___method_name_t)CALL((recv), (SFT_typing[26] + 0)))
-#define ATTR_typing___ASelfExpr____variable(recv) ATTR(recv, (SFT_typing[27] + 0))
-#define ATTR_typing___ASuperstringExpr____atype(recv) ATTR(recv, (SFT_typing[28] + 0))
-#define CALL_typing___AArrayExpr___do_typing(recv) ((typing___AArrayExpr___do_typing_t)CALL((recv), (SFT_typing[29] + 0)))
-#define ATTR_typing___ASuperExpr____init_in_superclass(recv) ATTR(recv, (SFT_typing[30] + 0))
-#define ATTR_typing___AAttrFormExpr____prop(recv) ATTR(recv, (SFT_typing[31] + 0))
-#define ATTR_typing___AAttrFormExpr____attr_type(recv) ATTR(recv, (SFT_typing[31] + 1))
-#define CALL_typing___AAttrFormExpr___do_typing(recv) ((typing___AAttrFormExpr___do_typing_t)CALL((recv), (SFT_typing[32] + 0)))
-#define ATTR_typing___AAbsAbsSendExpr____prop_signature(recv) ATTR(recv, (SFT_typing[33] + 0))
-#define ATTR_typing___AAbsAbsSendExpr____raw_arguments_cache(recv) ATTR(recv, (SFT_typing[33] + 1))
-#define CALL_typing___AAbsAbsSendExpr___compute_raw_arguments(recv) ((typing___AAbsAbsSendExpr___compute_raw_arguments_t)CALL((recv), (SFT_typing[34] + 0)))
-#define CALL_typing___AAbsAbsSendExpr___process_signature(recv) ((typing___AAbsAbsSendExpr___process_signature_t)CALL((recv), (SFT_typing[34] + 1)))
-#define CALL_typing___AAbsAbsSendExpr___process_closures(recv) ((typing___AAbsAbsSendExpr___process_closures_t)CALL((recv), (SFT_typing[34] + 2)))
-#define ATTR_typing___AAbsSendExpr____prop(recv) ATTR(recv, (SFT_typing[35] + 0))
-#define ATTR_typing___AAbsSendExpr____return_type(recv) ATTR(recv, (SFT_typing[35] + 1))
-#define CALL_typing___AAbsSendExpr___do_typing(recv) ((typing___AAbsSendExpr___do_typing_t)CALL((recv), (SFT_typing[36] + 0)))
-#define CALL_typing___AAbsSendExpr___get_property(recv) ((typing___AAbsSendExpr___get_property_t)CALL((recv), (SFT_typing[36] + 1)))
-#define CALL_typing___AAbsSendExpr___get_signature(recv) ((typing___AAbsSendExpr___get_signature_t)CALL((recv), (SFT_typing[36] + 2)))
-#define CALL_typing___ASuperInitCall___register_super_init_call(recv) ((typing___ASuperInitCall___register_super_init_call_t)CALL((recv), (SFT_typing[37] + 0)))
-#define CALL_typing___ASendExpr___name(recv) ((typing___ASendExpr___name_t)CALL((recv), (SFT_typing[38] + 0)))
-#define CALL_typing___ASendExpr___do_all_typing(recv) ((typing___ASendExpr___do_all_typing_t)CALL((recv), (SFT_typing[38] + 1)))
-#define ATTR_typing___ASendReassignExpr____read_prop(recv) ATTR(recv, (SFT_typing[39] + 0))
-#define CALL_SUPER_typing___AEqExpr___after_typing(recv) ((typing___AEqExpr___after_typing_t)CALL((recv), (SFT_typing[40] + 0)))
-#define CALL_typing___AEqExpr___try_to_isa(recv) ((typing___AEqExpr___try_to_isa_t)CALL((recv), (SFT_typing[40] + 1)))
-#define CALL_SUPER_typing___ANeExpr___after_typing(recv) ((typing___ANeExpr___after_typing_t)CALL((recv), (SFT_typing[41] + 0)))
-#define CALL_typing___ANeExpr___try_to_isa(recv) ((typing___ANeExpr___try_to_isa_t)CALL((recv), (SFT_typing[41] + 1)))
-#define CALL_SUPER_typing___ACallFormExpr___after_typing(recv) ((typing___ACallFormExpr___after_typing_t)CALL((recv), (SFT_typing[42] + 0)))
-#define CALL_typing___ACallFormExpr___variable_create(recv) ((typing___ACallFormExpr___variable_create_t)CALL((recv), (SFT_typing[42] + 1)))
-#define ATTR_typing___AClosureCallExpr____variable(recv) ATTR(recv, (SFT_typing[43] + 0))
-#define CALL_typing___AClosureId___to_symbol(recv) ((typing___AClosureId___to_symbol_t)CALL((recv), (SFT_typing[44] + 0)))
-#define ATTR_typing___AClosureDef____closure(recv) ATTR(recv, (SFT_typing[45] + 0))
-#define ATTR_typing___AClosureDef____escapable(recv) ATTR(recv, (SFT_typing[45] + 1))
-#define ATTR_typing___AClosureDef____accept_typing2(recv) ATTR(recv, (SFT_typing[45] + 2))
-#define CALL_typing___AClosureDef___escapable(recv) ((typing___AClosureDef___escapable_t)CALL((recv), (SFT_typing[46] + 0)))
-#define CALL_SUPER_typing___AClosureDef___accept_typing(recv) ((typing___AClosureDef___accept_typing_t)CALL((recv), (SFT_typing[46] + 1)))
-#define CALL_typing___AClosureDef___accept_typing2(recv) ((typing___AClosureDef___accept_typing2_t)CALL((recv), (SFT_typing[46] + 2)))
-#define ID_ATypeCheckExpr (SFT_typing[47])
-#define COLOR_ATypeCheckExpr (SFT_typing[48])
-#define INIT_TABLE_POS_ATypeCheckExpr (SFT_typing[49] + 0)
-#define CALL_typing___ATypeCheckExpr___check_expr_cast(recv) ((typing___ATypeCheckExpr___check_expr_cast_t)CALL((recv), (SFT_typing[49] + 1)))
-#define CALL_SUPER_typing___AOnceExpr___accept_typing(recv) ((typing___AOnceExpr___accept_typing_t)CALL((recv), (SFT_typing[50] + 0)))
+#define CALL_SUPER_typing___AExternInitPropdef___accept_typing(recv) ((typing___AExternInitPropdef___accept_typing_t)CALL((recv), (SFT_typing[12] + 0)))
+#define CALL_SUPER_typing___AExternInitPropdef___after_typing(recv) ((typing___AExternInitPropdef___after_typing_t)CALL((recv), (SFT_typing[12] + 1)))
+#define ATTR_typing___AClosureDecl____escapable(recv) ATTR(recv, (SFT_typing[13] + 0))
+#define CALL_typing___AClosureDecl___escapable(recv) ((typing___AClosureDecl___escapable_t)CALL((recv), (SFT_typing[14] + 0)))
+#define CALL_SUPER_typing___AClosureDecl___accept_typing(recv) ((typing___AClosureDecl___accept_typing_t)CALL((recv), (SFT_typing[14] + 1)))
+#define ATTR_typing___AType____stype(recv) ATTR(recv, (SFT_typing[15] + 0))
+#define ATTR_typing___AExpr____is_typed(recv) ATTR(recv, (SFT_typing[16] + 0))
+#define ATTR_typing___AExpr____stype(recv) ATTR(recv, (SFT_typing[16] + 1))
+#define ATTR_typing___AExpr____if_true_flow_ctx(recv) ATTR(recv, (SFT_typing[16] + 2))
+#define ATTR_typing___AExpr____if_false_flow_ctx(recv) ATTR(recv, (SFT_typing[16] + 3))
+#define CALL_typing___AExpr___is_implicit_self(recv) ((typing___AExpr___is_implicit_self_t)CALL((recv), (SFT_typing[17] + 0)))
+#define CALL_typing___AExpr___is_self(recv) ((typing___AExpr___is_self_t)CALL((recv), (SFT_typing[17] + 1)))
+#define CALL_typing___AExpr___its_variable(recv) ((typing___AExpr___its_variable_t)CALL((recv), (SFT_typing[17] + 2)))
+#define CALL_typing___AExpr___if_true_flow_ctx(recv) ((typing___AExpr___if_true_flow_ctx_t)CALL((recv), (SFT_typing[17] + 3)))
+#define CALL_typing___AExpr___if_false_flow_ctx(recv) ((typing___AExpr___if_false_flow_ctx_t)CALL((recv), (SFT_typing[17] + 4)))
+#define ATTR_typing___AVardeclExpr____variable(recv) ATTR(recv, (SFT_typing[18] + 0))
+#define ID_AAbsControl (SFT_typing[19])
+#define COLOR_AAbsControl (SFT_typing[20])
+#define ATTR_typing___AAbsControl____escapable(recv) ATTR(recv, (SFT_typing[21] + 0))
+#define INIT_TABLE_POS_AAbsControl (SFT_typing[22] + 0)
+#define CALL_typing___AAbsControl___escapable(recv) ((typing___AAbsControl___escapable_t)CALL((recv), (SFT_typing[22] + 1)))
+#define CALL_typing___AAbsControl___process_control(recv) ((typing___AAbsControl___process_control_t)CALL((recv), (SFT_typing[22] + 2)))
+#define CALL_typing___AAbsControl___process_control_inside(recv) ((typing___AAbsControl___process_control_inside_t)CALL((recv), (SFT_typing[22] + 3)))
+#define ATTR_typing___AForExpr____variable(recv) ATTR(recv, (SFT_typing[23] + 0))
+#define ATTR_typing___AVarFormExpr____variable(recv) ATTR(recv, (SFT_typing[24] + 0))
+#define ATTR_typing___AReassignFormExpr____assign_method(recv) ATTR(recv, (SFT_typing[25] + 0))
+#define CALL_typing___AReassignFormExpr___do_rvalue_typing(recv) ((typing___AReassignFormExpr___do_rvalue_typing_t)CALL((recv), (SFT_typing[26] + 0)))
+#define CALL_typing___AAssignOp___method_name(recv) ((typing___AAssignOp___method_name_t)CALL((recv), (SFT_typing[27] + 0)))
+#define ATTR_typing___ASelfExpr____variable(recv) ATTR(recv, (SFT_typing[28] + 0))
+#define ATTR_typing___ASuperstringExpr____atype(recv) ATTR(recv, (SFT_typing[29] + 0))
+#define CALL_typing___AArrayExpr___do_typing(recv) ((typing___AArrayExpr___do_typing_t)CALL((recv), (SFT_typing[30] + 0)))
+#define ATTR_typing___ASuperExpr____init_in_superclass(recv) ATTR(recv, (SFT_typing[31] + 0))
+#define CALL_typing___AExternCall___target_class_name(recv) ((typing___AExternCall___target_class_name_t)CALL((recv), (SFT_typing[32] + 0)))
+#define CALL_typing___AExternCall___target_method_name(recv) ((typing___AExternCall___target_method_name_t)CALL((recv), (SFT_typing[32] + 1)))
+#define CALL_typing___ACastExternCall___from_type(recv) ((typing___ACastExternCall___from_type_t)CALL((recv), (SFT_typing[33] + 0)))
+#define CALL_typing___ACastExternCall___to_type(recv) ((typing___ACastExternCall___to_type_t)CALL((recv), (SFT_typing[33] + 1)))
+#define ATTR_typing___AAttrFormExpr____prop(recv) ATTR(recv, (SFT_typing[34] + 0))
+#define ATTR_typing___AAttrFormExpr____attr_type(recv) ATTR(recv, (SFT_typing[34] + 1))
+#define CALL_typing___AAttrFormExpr___do_typing(recv) ((typing___AAttrFormExpr___do_typing_t)CALL((recv), (SFT_typing[35] + 0)))
+#define ATTR_typing___AAbsAbsSendExpr____prop_signature(recv) ATTR(recv, (SFT_typing[36] + 0))
+#define ATTR_typing___AAbsAbsSendExpr____raw_arguments_cache(recv) ATTR(recv, (SFT_typing[36] + 1))
+#define CALL_typing___AAbsAbsSendExpr___compute_raw_arguments(recv) ((typing___AAbsAbsSendExpr___compute_raw_arguments_t)CALL((recv), (SFT_typing[37] + 0)))
+#define CALL_typing___AAbsAbsSendExpr___process_signature(recv) ((typing___AAbsAbsSendExpr___process_signature_t)CALL((recv), (SFT_typing[37] + 1)))
+#define CALL_typing___AAbsAbsSendExpr___process_closures(recv) ((typing___AAbsAbsSendExpr___process_closures_t)CALL((recv), (SFT_typing[37] + 2)))
+#define ATTR_typing___AAbsSendExpr____prop(recv) ATTR(recv, (SFT_typing[38] + 0))
+#define ATTR_typing___AAbsSendExpr____return_type(recv) ATTR(recv, (SFT_typing[38] + 1))
+#define CALL_typing___AAbsSendExpr___do_typing(recv) ((typing___AAbsSendExpr___do_typing_t)CALL((recv), (SFT_typing[39] + 0)))
+#define CALL_typing___AAbsSendExpr___get_property(recv) ((typing___AAbsSendExpr___get_property_t)CALL((recv), (SFT_typing[39] + 1)))
+#define CALL_typing___AAbsSendExpr___get_signature(recv) ((typing___AAbsSendExpr___get_signature_t)CALL((recv), (SFT_typing[39] + 2)))
+#define CALL_typing___ASuperInitCall___register_super_init_call(recv) ((typing___ASuperInitCall___register_super_init_call_t)CALL((recv), (SFT_typing[40] + 0)))
+#define CALL_typing___ASendExpr___name(recv) ((typing___ASendExpr___name_t)CALL((recv), (SFT_typing[41] + 0)))
+#define CALL_typing___ASendExpr___do_all_typing(recv) ((typing___ASendExpr___do_all_typing_t)CALL((recv), (SFT_typing[41] + 1)))
+#define ATTR_typing___ASendReassignExpr____read_prop(recv) ATTR(recv, (SFT_typing[42] + 0))
+#define CALL_SUPER_typing___AEqExpr___after_typing(recv) ((typing___AEqExpr___after_typing_t)CALL((recv), (SFT_typing[43] + 0)))
+#define CALL_typing___AEqExpr___try_to_isa(recv) ((typing___AEqExpr___try_to_isa_t)CALL((recv), (SFT_typing[43] + 1)))
+#define CALL_SUPER_typing___ANeExpr___after_typing(recv) ((typing___ANeExpr___after_typing_t)CALL((recv), (SFT_typing[44] + 0)))
+#define CALL_typing___ANeExpr___try_to_isa(recv) ((typing___ANeExpr___try_to_isa_t)CALL((recv), (SFT_typing[44] + 1)))
+#define CALL_SUPER_typing___ACallFormExpr___after_typing(recv) ((typing___ACallFormExpr___after_typing_t)CALL((recv), (SFT_typing[45] + 0)))
+#define CALL_typing___ACallFormExpr___variable_create(recv) ((typing___ACallFormExpr___variable_create_t)CALL((recv), (SFT_typing[45] + 1)))
+#define ATTR_typing___AClosureCallExpr____variable(recv) ATTR(recv, (SFT_typing[46] + 0))
+#define CALL_typing___AClosureId___to_symbol(recv) ((typing___AClosureId___to_symbol_t)CALL((recv), (SFT_typing[47] + 0)))
+#define ATTR_typing___AClosureDef____closure(recv) ATTR(recv, (SFT_typing[48] + 0))
+#define ATTR_typing___AClosureDef____escapable(recv) ATTR(recv, (SFT_typing[48] + 1))
+#define ATTR_typing___AClosureDef____accept_typing2(recv) ATTR(recv, (SFT_typing[48] + 2))
+#define CALL_typing___AClosureDef___escapable(recv) ((typing___AClosureDef___escapable_t)CALL((recv), (SFT_typing[49] + 0)))
+#define CALL_SUPER_typing___AClosureDef___accept_typing(recv) ((typing___AClosureDef___accept_typing_t)CALL((recv), (SFT_typing[49] + 1)))
+#define CALL_typing___AClosureDef___accept_typing2(recv) ((typing___AClosureDef___accept_typing2_t)CALL((recv), (SFT_typing[49] + 2)))
+#define ID_ATypeCheckExpr (SFT_typing[50])
+#define COLOR_ATypeCheckExpr (SFT_typing[51])
+#define INIT_TABLE_POS_ATypeCheckExpr (SFT_typing[52] + 0)
+#define CALL_typing___ATypeCheckExpr___check_expr_cast(recv) ((typing___ATypeCheckExpr___check_expr_cast_t)CALL((recv), (SFT_typing[52] + 1)))
+#define CALL_SUPER_typing___AOnceExpr___accept_typing(recv) ((typing___AOnceExpr___accept_typing_t)CALL((recv), (SFT_typing[53] + 0)))
 static const char * const LOCATE_typing___MMSrcModule___do_typing = "typing::MMSrcModule::do_typing";
 void typing___MMSrcModule___do_typing(val_t p0, val_t p1);
 typedef void (*typing___MMSrcModule___do_typing_t)(val_t p0, val_t p1);
@@ -247,13 +253,18 @@ typedef void (*typing___AConcreteInitPropdef___accept_typing_t)(val_t p0, val_t 
 static const char * const LOCATE_typing___AConcreteInitPropdef___after_typing = "typing::AConcreteInitPropdef::(typing::ANode::after_typing)";
 void typing___AConcreteInitPropdef___after_typing(val_t p0, val_t p1);
 typedef void (*typing___AConcreteInitPropdef___after_typing_t)(val_t p0, val_t p1);
-val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___empty_init();
 val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___empty_init();
 val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
-val_t NEW_AConcreteInitPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
-val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AConcreteInitPropdef_parser_nodes___AConcreteInitPropdef___init();
+static const char * const LOCATE_typing___AExternInitPropdef___accept_typing = "typing::AExternInitPropdef::(typing::ANode::accept_typing)";
+void typing___AExternInitPropdef___accept_typing(val_t p0, val_t p1);
+typedef void (*typing___AExternInitPropdef___accept_typing_t)(val_t p0, val_t p1);
+static const char * const LOCATE_typing___AExternInitPropdef___after_typing = "typing::AExternInitPropdef::(typing::ANode::after_typing)";
+void typing___AExternInitPropdef___after_typing(val_t p0, val_t p1);
+typedef void (*typing___AExternInitPropdef___after_typing_t)(val_t p0, val_t p1);
+val_t NEW_AExternInitPropdef_parser_prod___AExternInitPropdef___empty_init();
+val_t NEW_AExternInitPropdef_parser_prod___AExternInitPropdef___init_aexterninitpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7);
+val_t NEW_AExternInitPropdef_parser_nodes___AExternInitPropdef___init();
 static const char * const LOCATE_typing___AParam___after_typing = "typing::AParam::(typing::ANode::after_typing)";
 void typing___AParam___after_typing(val_t p0, val_t p1);
 typedef void (*typing___AParam___after_typing_t)(val_t p0, val_t p1);
@@ -584,6 +595,104 @@ typedef void (*typing___ASuperExpr___after_typing_t)(val_t p0, val_t p1);
 val_t NEW_ASuperExpr_parser_prod___ASuperExpr___empty_init();
 val_t NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2);
 val_t NEW_ASuperExpr_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_typing___AExternCall___target_class_name = "typing::AExternCall::target_class_name";
+val_t typing___AExternCall___target_class_name(val_t p0);
+typedef val_t (*typing___AExternCall___target_class_name_t)(val_t p0);
+static const char * const LOCATE_typing___AExternCall___target_method_name = "typing::AExternCall::target_method_name";
+val_t typing___AExternCall___target_method_name(val_t p0);
+typedef val_t (*typing___AExternCall___target_method_name_t)(val_t p0);
+static const char * const LOCATE_typing___AExternCall___after_typing = "typing::AExternCall::(typing::ANode::after_typing)";
+void typing___AExternCall___after_typing(val_t p0, val_t p1);
+typedef void (*typing___AExternCall___after_typing_t)(val_t p0, val_t p1);
+val_t NEW_AExternCall_parser_prod___AExternCall___empty_init();
+val_t NEW_AExternCall_parser_prod___AExternCall___init_aexterncall();
+val_t NEW_AExternCall_parser_nodes___ANode___init(val_t p0);
+static const char * const LOCATE_typing___ALocalPropExternCall___target_class_name = "typing::ALocalPropExternCall::(typing::AExternCall::target_class_name)";
+val_t typing___ALocalPropExternCall___target_class_name(val_t p0);
+typedef val_t (*typing___ALocalPropExternCall___target_class_name_t)(val_t p0);
+static const char * const LOCATE_typing___ALocalPropExternCall___target_method_name = "typing::ALocalPropExternCall::(typing::AExternCall::target_method_name)";
+val_t typing___ALocalPropExternCall___target_method_name(val_t p0);
+typedef val_t (*typing___ALocalPropExternCall___target_method_name_t)(val_t p0);
+val_t NEW_ALocalPropExternCall_parser_prod___AExternCall___empty_init();
+val_t NEW_ALocalPropExternCall_parser_prod___ALocalPropExternCall___empty_init();
+val_t NEW_ALocalPropExternCall_parser_prod___ALocalPropExternCall___init_alocalpropexterncall(val_t p0);
+val_t NEW_ALocalPropExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALocalPropExternCall_parser_prod___AExternCall___init_aexterncall();
+static const char * const LOCATE_typing___ASuperExternCall___after_typing = "typing::ASuperExternCall::(typing::ANode::after_typing)";
+void typing___ASuperExternCall___after_typing(val_t p0, val_t p1);
+typedef void (*typing___ASuperExternCall___after_typing_t)(val_t p0, val_t p1);
+val_t NEW_ASuperExternCall_parser_prod___AExternCall___empty_init();
+val_t NEW_ASuperExternCall_parser_prod___ASuperExternCall___empty_init();
+val_t NEW_ASuperExternCall_parser_prod___ASuperExternCall___init_asuperexterncall(val_t p0);
+val_t NEW_ASuperExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASuperExternCall_parser_prod___AExternCall___init_aexterncall();
+static const char * const LOCATE_typing___AFullPropExternCall___target_class_name = "typing::AFullPropExternCall::(typing::AExternCall::target_class_name)";
+val_t typing___AFullPropExternCall___target_class_name(val_t p0);
+typedef val_t (*typing___AFullPropExternCall___target_class_name_t)(val_t p0);
+static const char * const LOCATE_typing___AFullPropExternCall___target_method_name = "typing::AFullPropExternCall::(typing::AExternCall::target_method_name)";
+val_t typing___AFullPropExternCall___target_method_name(val_t p0);
+typedef val_t (*typing___AFullPropExternCall___target_method_name_t)(val_t p0);
+val_t NEW_AFullPropExternCall_parser_prod___AExternCall___empty_init();
+val_t NEW_AFullPropExternCall_parser_prod___AFullPropExternCall___empty_init();
+val_t NEW_AFullPropExternCall_parser_prod___AFullPropExternCall___init_afullpropexterncall(val_t p0, val_t p1, val_t p2);
+val_t NEW_AFullPropExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AFullPropExternCall_parser_prod___AExternCall___init_aexterncall();
+static const char * const LOCATE_typing___AInitPropExternCall___target_class_name = "typing::AInitPropExternCall::(typing::AExternCall::target_class_name)";
+val_t typing___AInitPropExternCall___target_class_name(val_t p0);
+typedef val_t (*typing___AInitPropExternCall___target_class_name_t)(val_t p0);
+static const char * const LOCATE_typing___AInitPropExternCall___target_method_name = "typing::AInitPropExternCall::(typing::AExternCall::target_method_name)";
+val_t typing___AInitPropExternCall___target_method_name(val_t p0);
+typedef val_t (*typing___AInitPropExternCall___target_method_name_t)(val_t p0);
+val_t NEW_AInitPropExternCall_parser_prod___AExternCall___empty_init();
+val_t NEW_AInitPropExternCall_parser_prod___AInitPropExternCall___empty_init();
+val_t NEW_AInitPropExternCall_parser_prod___AInitPropExternCall___init_ainitpropexterncall(val_t p0);
+val_t NEW_AInitPropExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AInitPropExternCall_parser_prod___AExternCall___init_aexterncall();
+static const char * const LOCATE_typing___ACastExternCall___from_type = "typing::ACastExternCall::from_type";
+val_t typing___ACastExternCall___from_type(val_t p0);
+typedef val_t (*typing___ACastExternCall___from_type_t)(val_t p0);
+static const char * const LOCATE_typing___ACastExternCall___to_type = "typing::ACastExternCall::to_type";
+val_t typing___ACastExternCall___to_type(val_t p0);
+typedef val_t (*typing___ACastExternCall___to_type_t)(val_t p0);
+static const char * const LOCATE_typing___ACastExternCall___after_typing = "typing::ACastExternCall::(typing::ANode::after_typing)";
+void typing___ACastExternCall___after_typing(val_t p0, val_t p1);
+typedef void (*typing___ACastExternCall___after_typing_t)(val_t p0, val_t p1);
+val_t NEW_ACastExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACastExternCall_parser_prod___AExternCall___empty_init();
+val_t NEW_ACastExternCall_parser_prod___AExternCall___init_aexterncall();
+static const char * const LOCATE_typing___ACastAsExternCall___from_type = "typing::ACastAsExternCall::(typing::ACastExternCall::from_type)";
+val_t typing___ACastAsExternCall___from_type(val_t p0);
+typedef val_t (*typing___ACastAsExternCall___from_type_t)(val_t p0);
+static const char * const LOCATE_typing___ACastAsExternCall___to_type = "typing::ACastAsExternCall::(typing::ACastExternCall::to_type)";
+val_t typing___ACastAsExternCall___to_type(val_t p0);
+typedef val_t (*typing___ACastAsExternCall___to_type_t)(val_t p0);
+val_t NEW_ACastAsExternCall_parser_prod___AExternCall___empty_init();
+val_t NEW_ACastAsExternCall_parser_prod___ACastAsExternCall___empty_init();
+val_t NEW_ACastAsExternCall_parser_prod___ACastAsExternCall___init_acastasexterncall(val_t p0, val_t p1, val_t p2);
+val_t NEW_ACastAsExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACastAsExternCall_parser_prod___AExternCall___init_aexterncall();
+static const char * const LOCATE_typing___AAsNullableExternCall___from_type = "typing::AAsNullableExternCall::(typing::ACastExternCall::from_type)";
+val_t typing___AAsNullableExternCall___from_type(val_t p0);
+typedef val_t (*typing___AAsNullableExternCall___from_type_t)(val_t p0);
+static const char * const LOCATE_typing___AAsNullableExternCall___to_type = "typing::AAsNullableExternCall::(typing::ACastExternCall::to_type)";
+val_t typing___AAsNullableExternCall___to_type(val_t p0);
+typedef val_t (*typing___AAsNullableExternCall___to_type_t)(val_t p0);
+val_t NEW_AAsNullableExternCall_parser_prod___AExternCall___empty_init();
+val_t NEW_AAsNullableExternCall_parser_prod___AAsNullableExternCall___empty_init();
+val_t NEW_AAsNullableExternCall_parser_prod___AAsNullableExternCall___init_aasnullableexterncall(val_t p0, val_t p1, val_t p2);
+val_t NEW_AAsNullableExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAsNullableExternCall_parser_prod___AExternCall___init_aexterncall();
+static const char * const LOCATE_typing___AAsNotNullableExternCall___from_type = "typing::AAsNotNullableExternCall::(typing::ACastExternCall::from_type)";
+val_t typing___AAsNotNullableExternCall___from_type(val_t p0);
+typedef val_t (*typing___AAsNotNullableExternCall___from_type_t)(val_t p0);
+static const char * const LOCATE_typing___AAsNotNullableExternCall___to_type = "typing::AAsNotNullableExternCall::(typing::ACastExternCall::to_type)";
+val_t typing___AAsNotNullableExternCall___to_type(val_t p0);
+typedef val_t (*typing___AAsNotNullableExternCall___to_type_t)(val_t p0);
+val_t NEW_AAsNotNullableExternCall_parser_prod___AExternCall___empty_init();
+val_t NEW_AAsNotNullableExternCall_parser_prod___AAsNotNullableExternCall___empty_init();
+val_t NEW_AAsNotNullableExternCall_parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AAsNotNullableExternCall_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAsNotNullableExternCall_parser_prod___AExternCall___init_aexterncall();
 static const char * const LOCATE_typing___AAttrFormExpr___prop = "typing::AAttrFormExpr::(syntax_base::AAttrFormExpr::prop)";
 val_t typing___AAttrFormExpr___prop(val_t p0);
 typedef val_t (*typing___AAttrFormExpr___prop_t)(val_t p0);

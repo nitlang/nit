@@ -15,27 +15,36 @@ CLIBDIR="clib"
   ./parser_nodes._sep.c\
   ./location._sep.c\
   ./standard._sep.c\
+  ./environ._nitni.c\
   ./environ._sep.c\
   ./symbol._sep.c\
+  ./string._nitni.c\
   ./string._sep.c\
   ./collection._sep.c\
   ./range._sep.c\
   ./abstract_collection._sep.c\
+  ./kernel._nitni.c\
   ./kernel._sep.c\
   ./list._sep.c\
   ./sorter._sep.c\
   ./array._sep.c\
   ./hash_collection._sep.c\
   ./hash._sep.c\
+  ./time._nitni.c\
   ./time._sep.c\
+  ./file._nitni.c\
   ./file_nit.c\
   ./file._sep.c\
+  ./stream._nitni.c\
   ./stream_nit.c\
   ./stream._sep.c\
   ./string_search._sep.c\
+  ./exec._nitni.c\
   ./exec_nit.c\
   ./exec._sep.c\
+  ./math._nitni.c\
   ./math._sep.c\
+  ./tables._nitni.c\
   ./tables_nit.c\
   ./tables._sep.c\
   ./mmloader._sep.c\
@@ -59,6 +68,9 @@ CLIBDIR="clib"
   ./flow._sep.c\
   ./primitive_info._sep.c\
   ./nit_version._sep.c\
+  ./native_interface._sep.c\
+  ./frontier._sep.c\
+  ./ni_tools._sep.c\
   ./compiling._sep.c\
   ./icode_generator._sep.c\
   ./compiling_base._sep.c\
@@ -83,5 +95,6 @@ CLIBDIR="clib"
   ./compiling_global._sep.c\
   ./table_computation._sep.c\
   ./compiling_icode._sep.c\
+  ./ni_metamodel._sep.c\
   ./nitc._sep.c\
   ./nitc._tables.c

@@ -254,6 +254,12 @@ val_t NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___empty_init()
 val_t NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
 val_t NEW_AConcreteMethPropdef_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+static const char * const LOCATE_icode_generation___AExternInitPropdef___fill_iroutine = "icode_generation::AExternInitPropdef::(icode_generation::AMethPropdef::fill_iroutine)";
+void icode_generation___AExternInitPropdef___fill_iroutine(val_t p0, val_t p1, val_t p2);
+typedef void (*icode_generation___AExternInitPropdef___fill_iroutine_t)(val_t p0, val_t p1, val_t p2);
+val_t NEW_AExternInitPropdef_parser_prod___AExternInitPropdef___empty_init();
+val_t NEW_AExternInitPropdef_parser_prod___AExternInitPropdef___init_aexterninitpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7);
+val_t NEW_AExternInitPropdef_parser_nodes___AExternInitPropdef___init();
 static const char * const LOCATE_icode_generation___ADeferredMethPropdef___fill_iroutine = "icode_generation::ADeferredMethPropdef::(icode_generation::AMethPropdef::fill_iroutine)";
 void icode_generation___ADeferredMethPropdef___fill_iroutine(val_t p0, val_t p1, val_t p2);
 typedef void (*icode_generation___ADeferredMethPropdef___fill_iroutine_t)(val_t p0, val_t p1, val_t p2);

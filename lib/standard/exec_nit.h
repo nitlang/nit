@@ -20,6 +20,8 @@
 #include <sys/wait.h>
 #include <signal.h>
 
+#include <exec._nitni.h>
+
 typedef struct se_exec_data se_exec_data_t;
 struct se_exec_data {
 	pid_t id;
@@ -41,6 +43,6 @@ struct se_exec_data {
 
 int exec_NativeProcess_NativeProcess_is_finished_0(void*);
 void exec_NativeProcess_NativeProcess_wait_0(void*);
-se_exec_data_t* exec_Process_Process_basic_exec_execute_4(int, char *, char *, int, int);
+se_exec_data_t* exec_Process_Process_basic_exec_execute_4(Process, char *, char *, int, int);
 
 #endif

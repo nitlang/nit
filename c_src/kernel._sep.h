@@ -2,6 +2,7 @@
 #ifndef kernel_sep
 #define kernel_sep
 #include <nit_common.h>
+#include "kernel._nitni.h"
 
 extern const classtable_elt_t VFT_Object[];
 

@@ -129,7 +129,7 @@ redef class MMType
 	fun boxtype(s: String): String
 	do
 		var pi = local_class.primitive_info
-		if pi == null then
+		if pi == null or is_nullable then
 			return s
 		else if pi.tagged then
 			return "TAG_{local_class.name}({s})"
@@ -143,7 +143,7 @@ redef class MMType
 	fun unboxtype(s: String): String
 	do
 		var pi = local_class.primitive_info
-		if pi == null then
+		if pi == null or is_nullable then
 			return s
 		else if pi.tagged then
 			return "UNTAG_{local_class.name}({s})"

@@ -3,7 +3,7 @@
 #define stream_sep
 #include "string._sep.h"
 #include <nit_common.h>
-#include <stream_nit.h>
+#include "stream._nitni.h"
 
 extern const classtable_elt_t VFT_IOS[];
 

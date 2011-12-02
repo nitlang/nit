@@ -93,8 +93,11 @@ extern const int SFT_syntax_base[];
 #define COLOR_MMMethSrcMethod (SFT_syntax_base[28])
 #define ATTR_syntax_base___MMMethSrcMethod____is_init(recv) ATTR(recv, (SFT_syntax_base[29] + 0))
 #define ATTR_syntax_base___MMMethSrcMethod____is_intern(recv) ATTR(recv, (SFT_syntax_base[29] + 1))
-#define ATTR_syntax_base___MMMethSrcMethod____is_abstract(recv) ATTR(recv, (SFT_syntax_base[29] + 2))
-#define ATTR_syntax_base___MMMethSrcMethod____extern_name(recv) ATTR(recv, (SFT_syntax_base[29] + 3))
+#define ATTR_syntax_base___MMMethSrcMethod____is_extern(recv) ATTR(recv, (SFT_syntax_base[29] + 2))
+#define ATTR_syntax_base___MMMethSrcMethod____is_abstract(recv) ATTR(recv, (SFT_syntax_base[29] + 3))
+#define ATTR_syntax_base___MMMethSrcMethod____extern_name(recv) ATTR(recv, (SFT_syntax_base[29] + 4))
+#define ATTR_syntax_base___MMMethSrcMethod____explicit_casts(recv) ATTR(recv, (SFT_syntax_base[29] + 5))
+#define ATTR_syntax_base___MMMethSrcMethod____explicit_imports(recv) ATTR(recv, (SFT_syntax_base[29] + 6))
 #define INIT_TABLE_POS_MMMethSrcMethod (SFT_syntax_base[30] + 0)
 #define CALL_syntax_base___MMMethSrcMethod___extern_name__eq(recv) ((syntax_base___MMMethSrcMethod___extern_name__eq_t)CALL((recv), (SFT_syntax_base[30] + 1)))
 #define CALL_syntax_base___MMMethSrcMethod___init(recv) ((syntax_base___MMMethSrcMethod___init_t)CALL((recv), (SFT_syntax_base[30] + 2)))
@@ -306,6 +309,9 @@ val_t NEW_MMSrcAttribute_syntax_base___MMSrcAttribute___init(val_t p0, val_t p1,
 static const char * const LOCATE_syntax_base___MMSrcMethod___is_intern = "syntax_base::MMSrcMethod::(abstractmetamodel::MMMethod::is_intern)";
 val_t syntax_base___MMSrcMethod___is_intern(val_t p0);
 typedef val_t (*syntax_base___MMSrcMethod___is_intern_t)(val_t p0);
+static const char * const LOCATE_syntax_base___MMSrcMethod___is_extern = "syntax_base::MMSrcMethod::(abstractmetamodel::MMMethod::is_extern)";
+val_t syntax_base___MMSrcMethod___is_extern(val_t p0);
+typedef val_t (*syntax_base___MMSrcMethod___is_extern_t)(val_t p0);
 static const char * const LOCATE_syntax_base___MMSrcMethod___is_abstract = "syntax_base::MMSrcMethod::(abstractmetamodel::MMMethod::is_abstract)";
 val_t syntax_base___MMSrcMethod___is_abstract(val_t p0);
 typedef val_t (*syntax_base___MMSrcMethod___is_abstract_t)(val_t p0);
@@ -334,6 +340,9 @@ typedef val_t (*syntax_base___MMMethSrcMethod___is_init_t)(val_t p0);
 static const char * const LOCATE_syntax_base___MMMethSrcMethod___is_intern = "syntax_base::MMMethSrcMethod::(abstractmetamodel::MMMethod::is_intern)";
 val_t syntax_base___MMMethSrcMethod___is_intern(val_t p0);
 typedef val_t (*syntax_base___MMMethSrcMethod___is_intern_t)(val_t p0);
+static const char * const LOCATE_syntax_base___MMMethSrcMethod___is_extern = "syntax_base::MMMethSrcMethod::(abstractmetamodel::MMMethod::is_extern)";
+val_t syntax_base___MMMethSrcMethod___is_extern(val_t p0);
+typedef val_t (*syntax_base___MMMethSrcMethod___is_extern_t)(val_t p0);
 static const char * const LOCATE_syntax_base___MMMethSrcMethod___is_abstract = "syntax_base::MMMethSrcMethod::(abstractmetamodel::MMMethod::is_abstract)";
 val_t syntax_base___MMMethSrcMethod___is_abstract(val_t p0);
 typedef val_t (*syntax_base___MMMethSrcMethod___is_abstract_t)(val_t p0);
@@ -343,6 +352,12 @@ typedef val_t (*syntax_base___MMMethSrcMethod___extern_name_t)(val_t p0);
 static const char * const LOCATE_syntax_base___MMMethSrcMethod___extern_name__eq = "syntax_base::MMMethSrcMethod::extern_name=";
 void syntax_base___MMMethSrcMethod___extern_name__eq(val_t p0, val_t p1);
 typedef void (*syntax_base___MMMethSrcMethod___extern_name__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_syntax_base___MMMethSrcMethod___explicit_casts = "syntax_base::MMMethSrcMethod::(static_type::MMMethod::explicit_casts)";
+val_t syntax_base___MMMethSrcMethod___explicit_casts(val_t p0);
+typedef val_t (*syntax_base___MMMethSrcMethod___explicit_casts_t)(val_t p0);
+static const char * const LOCATE_syntax_base___MMMethSrcMethod___explicit_imports = "syntax_base::MMMethSrcMethod::(abstractmetamodel::MMMethod::explicit_imports)";
+val_t syntax_base___MMMethSrcMethod___explicit_imports(val_t p0);
+typedef val_t (*syntax_base___MMMethSrcMethod___explicit_imports_t)(val_t p0);
 static const char * const LOCATE_syntax_base___MMMethSrcMethod___node = "syntax_base::MMMethSrcMethod::(syntax_base::MMLocalProperty::node)";
 val_t syntax_base___MMMethSrcMethod___node(val_t p0);
 typedef val_t (*syntax_base___MMMethSrcMethod___node_t)(val_t p0);
@@ -557,13 +572,9 @@ typedef val_t (*syntax_base___AConcreteInitPropdef___super_init_calls_t)(val_t p
 static const char * const LOCATE_syntax_base___AConcreteInitPropdef___explicit_super_init_calls = "syntax_base::AConcreteInitPropdef::explicit_super_init_calls";
 val_t syntax_base___AConcreteInitPropdef___explicit_super_init_calls(val_t p0);
 typedef val_t (*syntax_base___AConcreteInitPropdef___explicit_super_init_calls_t)(val_t p0);
-val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___empty_init();
 val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___empty_init();
 val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
-val_t NEW_AConcreteInitPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
-val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AConcreteInitPropdef_parser_nodes___AConcreteInitPropdef___init();
 static const char * const LOCATE_syntax_base___AMethPropdef___method = "syntax_base::AMethPropdef::method";
 val_t syntax_base___AMethPropdef___method(val_t p0);
 typedef val_t (*syntax_base___AMethPropdef___method_t)(val_t p0);

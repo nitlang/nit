@@ -1,3 +1,5 @@
-long int foo(long int);
-long int bar(long int, long int);
-long int baz(long int, long int);
+#include <test_extern._nitni.h>
+
+long int foo(Object);
+long int bar(Object, long int);
+Object baz(Object, Object);

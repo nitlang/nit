@@ -21,6 +21,8 @@ extern const classtable_elt_t VFT_MMLocalProperty[];
 
 extern const classtable_elt_t VFT_MMAttribute[];
 
+extern const classtable_elt_t VFT_MMExplicitImport[];
+
 extern const classtable_elt_t VFT_MMMethod[];
 
 extern const classtable_elt_t VFT_MMConcreteClass[];
@@ -74,6 +76,7 @@ extern const int SFT_abstractmetamodel[];
 #define ATTR_abstractmetamodel___MMModule____explicit_imported_modules(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 12))
 #define ATTR_abstractmetamodel___MMModule____local_class_by_global(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 13))
 #define ATTR_abstractmetamodel___MMModule____global_class_by_name(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 14))
+#define ATTR_abstractmetamodel___MMModule_____atis_extern_hybrid(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 15))
 #define INIT_TABLE_POS_MMModule (SFT_abstractmetamodel[11] + 0)
 #define CALL_abstractmetamodel___MMModule___context(recv) ((abstractmetamodel___MMModule___context_t)CALL((recv), (SFT_abstractmetamodel[11] + 1)))
 #define CALL_abstractmetamodel___MMModule___name(recv) ((abstractmetamodel___MMModule___name_t)CALL((recv), (SFT_abstractmetamodel[11] + 2)))
@@ -85,15 +88,17 @@ extern const int SFT_abstractmetamodel[];
 #define CALL_abstractmetamodel___MMModule___local_classes(recv) ((abstractmetamodel___MMModule___local_classes_t)CALL((recv), (SFT_abstractmetamodel[11] + 8)))
 #define CALL_abstractmetamodel___MMModule___class_specialization_hierarchy(recv) ((abstractmetamodel___MMModule___class_specialization_hierarchy_t)CALL((recv), (SFT_abstractmetamodel[11] + 9)))
 #define CALL_abstractmetamodel___MMModule___explicit_imported_modules(recv) ((abstractmetamodel___MMModule___explicit_imported_modules_t)CALL((recv), (SFT_abstractmetamodel[11] + 10)))
-#define CALL_abstractmetamodel___MMModule___init(recv) ((abstractmetamodel___MMModule___init_t)CALL((recv), (SFT_abstractmetamodel[11] + 11)))
-#define CALL_abstractmetamodel___MMModule___add_super_module(recv) ((abstractmetamodel___MMModule___add_super_module_t)CALL((recv), (SFT_abstractmetamodel[11] + 12)))
-#define CALL_abstractmetamodel___MMModule___visibility_for(recv) ((abstractmetamodel___MMModule___visibility_for_t)CALL((recv), (SFT_abstractmetamodel[11] + 13)))
-#define CALL_abstractmetamodel___MMModule_____bra(recv) ((abstractmetamodel___MMModule_____bra_t)CALL((recv), (SFT_abstractmetamodel[11] + 14)))
-#define CALL_abstractmetamodel___MMModule___class_by_name(recv) ((abstractmetamodel___MMModule___class_by_name_t)CALL((recv), (SFT_abstractmetamodel[11] + 15)))
-#define CALL_abstractmetamodel___MMModule___has_global_class_named(recv) ((abstractmetamodel___MMModule___has_global_class_named_t)CALL((recv), (SFT_abstractmetamodel[11] + 16)))
-#define CALL_abstractmetamodel___MMModule___global_class_named(recv) ((abstractmetamodel___MMModule___global_class_named_t)CALL((recv), (SFT_abstractmetamodel[11] + 17)))
-#define CALL_abstractmetamodel___MMModule___set_supers_class(recv) ((abstractmetamodel___MMModule___set_supers_class_t)CALL((recv), (SFT_abstractmetamodel[11] + 18)))
-#define CALL_abstractmetamodel___MMModule___register_global_class(recv) ((abstractmetamodel___MMModule___register_global_class_t)CALL((recv), (SFT_abstractmetamodel[11] + 19)))
+#define CALL_abstractmetamodel___MMModule___is_extern_hybrid(recv) ((abstractmetamodel___MMModule___is_extern_hybrid_t)CALL((recv), (SFT_abstractmetamodel[11] + 11)))
+#define CALL_abstractmetamodel___MMModule___is_extern_hybrid__eq(recv) ((abstractmetamodel___MMModule___is_extern_hybrid__eq_t)CALL((recv), (SFT_abstractmetamodel[11] + 12)))
+#define CALL_abstractmetamodel___MMModule___init(recv) ((abstractmetamodel___MMModule___init_t)CALL((recv), (SFT_abstractmetamodel[11] + 13)))
+#define CALL_abstractmetamodel___MMModule___add_super_module(recv) ((abstractmetamodel___MMModule___add_super_module_t)CALL((recv), (SFT_abstractmetamodel[11] + 14)))
+#define CALL_abstractmetamodel___MMModule___visibility_for(recv) ((abstractmetamodel___MMModule___visibility_for_t)CALL((recv), (SFT_abstractmetamodel[11] + 15)))
+#define CALL_abstractmetamodel___MMModule_____bra(recv) ((abstractmetamodel___MMModule_____bra_t)CALL((recv), (SFT_abstractmetamodel[11] + 16)))
+#define CALL_abstractmetamodel___MMModule___class_by_name(recv) ((abstractmetamodel___MMModule___class_by_name_t)CALL((recv), (SFT_abstractmetamodel[11] + 17)))
+#define CALL_abstractmetamodel___MMModule___has_global_class_named(recv) ((abstractmetamodel___MMModule___has_global_class_named_t)CALL((recv), (SFT_abstractmetamodel[11] + 18)))
+#define CALL_abstractmetamodel___MMModule___global_class_named(recv) ((abstractmetamodel___MMModule___global_class_named_t)CALL((recv), (SFT_abstractmetamodel[11] + 19)))
+#define CALL_abstractmetamodel___MMModule___set_supers_class(recv) ((abstractmetamodel___MMModule___set_supers_class_t)CALL((recv), (SFT_abstractmetamodel[11] + 20)))
+#define CALL_abstractmetamodel___MMModule___register_global_class(recv) ((abstractmetamodel___MMModule___register_global_class_t)CALL((recv), (SFT_abstractmetamodel[11] + 21)))
 #define ID_MMGlobalClass (SFT_abstractmetamodel[12])
 #define COLOR_MMGlobalClass (SFT_abstractmetamodel[13])
 #define ATTR_abstractmetamodel___MMGlobalClass____intro(recv) ATTR(recv, (SFT_abstractmetamodel[14] + 0))
@@ -206,15 +211,27 @@ extern const int SFT_abstractmetamodel[];
 #define ID_MMAttribute (SFT_abstractmetamodel[28])
 #define COLOR_MMAttribute (SFT_abstractmetamodel[29])
 #define INIT_TABLE_POS_MMAttribute (SFT_abstractmetamodel[30] + 0)
-#define ID_MMMethod (SFT_abstractmetamodel[31])
-#define COLOR_MMMethod (SFT_abstractmetamodel[32])
-#define INIT_TABLE_POS_MMMethod (SFT_abstractmetamodel[33] + 0)
-#define CALL_abstractmetamodel___MMMethod___is_intern(recv) ((abstractmetamodel___MMMethod___is_intern_t)CALL((recv), (SFT_abstractmetamodel[33] + 1)))
-#define CALL_abstractmetamodel___MMMethod___is_abstract(recv) ((abstractmetamodel___MMMethod___is_abstract_t)CALL((recv), (SFT_abstractmetamodel[33] + 2)))
-#define CALL_abstractmetamodel___MMMethod___extern_name(recv) ((abstractmetamodel___MMMethod___extern_name_t)CALL((recv), (SFT_abstractmetamodel[33] + 3)))
-#define ID_MMConcreteClass (SFT_abstractmetamodel[34])
-#define COLOR_MMConcreteClass (SFT_abstractmetamodel[35])
-#define INIT_TABLE_POS_MMConcreteClass (SFT_abstractmetamodel[36] + 0)
+#define ID_MMExplicitImport (SFT_abstractmetamodel[31])
+#define COLOR_MMExplicitImport (SFT_abstractmetamodel[32])
+#define ATTR_abstractmetamodel___MMExplicitImport_____atlocal_class(recv) ATTR(recv, (SFT_abstractmetamodel[33] + 0))
+#define ATTR_abstractmetamodel___MMExplicitImport_____atmethod(recv) ATTR(recv, (SFT_abstractmetamodel[33] + 1))
+#define INIT_TABLE_POS_MMExplicitImport (SFT_abstractmetamodel[34] + 0)
+#define CALL_abstractmetamodel___MMExplicitImport___local_class(recv) ((abstractmetamodel___MMExplicitImport___local_class_t)CALL((recv), (SFT_abstractmetamodel[34] + 1)))
+#define CALL_abstractmetamodel___MMExplicitImport___local_class__eq(recv) ((abstractmetamodel___MMExplicitImport___local_class__eq_t)CALL((recv), (SFT_abstractmetamodel[34] + 2)))
+#define CALL_abstractmetamodel___MMExplicitImport___method(recv) ((abstractmetamodel___MMExplicitImport___method_t)CALL((recv), (SFT_abstractmetamodel[34] + 3)))
+#define CALL_abstractmetamodel___MMExplicitImport___method__eq(recv) ((abstractmetamodel___MMExplicitImport___method__eq_t)CALL((recv), (SFT_abstractmetamodel[34] + 4)))
+#define CALL_abstractmetamodel___MMExplicitImport___init(recv) ((abstractmetamodel___MMExplicitImport___init_t)CALL((recv), (SFT_abstractmetamodel[34] + 5)))
+#define ID_MMMethod (SFT_abstractmetamodel[35])
+#define COLOR_MMMethod (SFT_abstractmetamodel[36])
+#define INIT_TABLE_POS_MMMethod (SFT_abstractmetamodel[37] + 0)
+#define CALL_abstractmetamodel___MMMethod___is_intern(recv) ((abstractmetamodel___MMMethod___is_intern_t)CALL((recv), (SFT_abstractmetamodel[37] + 1)))
+#define CALL_abstractmetamodel___MMMethod___is_abstract(recv) ((abstractmetamodel___MMMethod___is_abstract_t)CALL((recv), (SFT_abstractmetamodel[37] + 2)))
+#define CALL_abstractmetamodel___MMMethod___is_extern(recv) ((abstractmetamodel___MMMethod___is_extern_t)CALL((recv), (SFT_abstractmetamodel[37] + 3)))
+#define CALL_abstractmetamodel___MMMethod___extern_name(recv) ((abstractmetamodel___MMMethod___extern_name_t)CALL((recv), (SFT_abstractmetamodel[37] + 4)))
+#define CALL_abstractmetamodel___MMMethod___explicit_imports(recv) ((abstractmetamodel___MMMethod___explicit_imports_t)CALL((recv), (SFT_abstractmetamodel[37] + 5)))
+#define ID_MMConcreteClass (SFT_abstractmetamodel[38])
+#define COLOR_MMConcreteClass (SFT_abstractmetamodel[39])
+#define INIT_TABLE_POS_MMConcreteClass (SFT_abstractmetamodel[40] + 0)
 static const char * const LOCATE_abstractmetamodel___MMContext___init = "abstractmetamodel::MMContext::init";
 void abstractmetamodel___MMContext___init(val_t p0, int* init_table);
 typedef void (*abstractmetamodel___MMContext___init_t)(val_t p0, int* init_table);
@@ -295,6 +312,12 @@ typedef val_t (*abstractmetamodel___MMModule___class_specialization_hierarchy_t)
 static const char * const LOCATE_abstractmetamodel___MMModule___explicit_imported_modules = "abstractmetamodel::MMModule::explicit_imported_modules";
 val_t abstractmetamodel___MMModule___explicit_imported_modules(val_t p0);
 typedef val_t (*abstractmetamodel___MMModule___explicit_imported_modules_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMModule___is_extern_hybrid = "abstractmetamodel::MMModule::is_extern_hybrid";
+val_t abstractmetamodel___MMModule___is_extern_hybrid(val_t p0);
+typedef val_t (*abstractmetamodel___MMModule___is_extern_hybrid_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMModule___is_extern_hybrid__eq = "abstractmetamodel::MMModule::is_extern_hybrid=";
+void abstractmetamodel___MMModule___is_extern_hybrid__eq(val_t p0, val_t p1);
+typedef void (*abstractmetamodel___MMModule___is_extern_hybrid__eq_t)(val_t p0, val_t p1);
 static const char * const LOCATE_abstractmetamodel___MMModule___init = "abstractmetamodel::MMModule::init";
 void abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 typedef void (*abstractmetamodel___MMModule___init_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
@@ -556,15 +579,37 @@ void abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1, val_t p2, in
 typedef void (*abstractmetamodel___MMLocalProperty___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 val_t NEW_MMAttribute_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
+static const char * const LOCATE_abstractmetamodel___MMExplicitImport___local_class = "abstractmetamodel::MMExplicitImport::local_class";
+val_t abstractmetamodel___MMExplicitImport___local_class(val_t p0);
+typedef val_t (*abstractmetamodel___MMExplicitImport___local_class_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMExplicitImport___local_class__eq = "abstractmetamodel::MMExplicitImport::local_class=";
+void abstractmetamodel___MMExplicitImport___local_class__eq(val_t p0, val_t p1);
+typedef void (*abstractmetamodel___MMExplicitImport___local_class__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_abstractmetamodel___MMExplicitImport___method = "abstractmetamodel::MMExplicitImport::method";
+val_t abstractmetamodel___MMExplicitImport___method(val_t p0);
+typedef val_t (*abstractmetamodel___MMExplicitImport___method_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMExplicitImport___method__eq = "abstractmetamodel::MMExplicitImport::method=";
+void abstractmetamodel___MMExplicitImport___method__eq(val_t p0, val_t p1);
+typedef void (*abstractmetamodel___MMExplicitImport___method__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_abstractmetamodel___MMExplicitImport___init = "abstractmetamodel::MMExplicitImport::init";
+void abstractmetamodel___MMExplicitImport___init(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*abstractmetamodel___MMExplicitImport___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_MMExplicitImport_abstractmetamodel___MMExplicitImport___init(val_t p0, val_t p1);
 static const char * const LOCATE_abstractmetamodel___MMMethod___is_intern = "abstractmetamodel::MMMethod::is_intern";
 val_t abstractmetamodel___MMMethod___is_intern(val_t p0);
 typedef val_t (*abstractmetamodel___MMMethod___is_intern_t)(val_t p0);
 static const char * const LOCATE_abstractmetamodel___MMMethod___is_abstract = "abstractmetamodel::MMMethod::is_abstract";
 val_t abstractmetamodel___MMMethod___is_abstract(val_t p0);
 typedef val_t (*abstractmetamodel___MMMethod___is_abstract_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMMethod___is_extern = "abstractmetamodel::MMMethod::is_extern";
+val_t abstractmetamodel___MMMethod___is_extern(val_t p0);
+typedef val_t (*abstractmetamodel___MMMethod___is_extern_t)(val_t p0);
 static const char * const LOCATE_abstractmetamodel___MMMethod___extern_name = "abstractmetamodel::MMMethod::extern_name";
 val_t abstractmetamodel___MMMethod___extern_name(val_t p0);
 typedef val_t (*abstractmetamodel___MMMethod___extern_name_t)(val_t p0);
+static const char * const LOCATE_abstractmetamodel___MMMethod___explicit_imports = "abstractmetamodel::MMMethod::explicit_imports";
+val_t abstractmetamodel___MMMethod___explicit_imports(val_t p0);
+typedef val_t (*abstractmetamodel___MMMethod___explicit_imports_t)(val_t p0);
 val_t NEW_MMMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 val_t NEW_MMConcreteClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 #endif

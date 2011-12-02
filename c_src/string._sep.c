@@ -3327,7 +3327,7 @@ val_t string___Sys___native_argc(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:632 */
-  REGB0 = TAG_Int(kernel_Sys_Sys_native_argc_0(fra.me.REG[0]));
+  REGB0 = Sys_native_argc___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -3345,7 +3345,7 @@ val_t string___Sys___native_argv(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   REGB0 = p1;
   /* ./../lib/standard//string.nit:634 */
-  fra.me.REG[0] = BOX_NativeString(kernel_Sys_Sys_native_argv_1(fra.me.REG[0], UNTAG_Int(REGB0)));
+  fra.me.REG[0] = Sys_native_argv___out(fra.me.REG[0], REGB0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }

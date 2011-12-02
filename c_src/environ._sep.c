@@ -78,7 +78,7 @@ val_t environ___NativeString___get_environ(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//environ.nit:34 */
-  fra.me.REG[0] = BOX_NativeString(string_NativeString_NativeString_get_environ_0(UNBOX_NativeString(fra.me.REG[0])));
+  fra.me.REG[0] = NativeString_get_environ___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }

@@ -3,7 +3,7 @@
 #define time_sep
 #include "kernel._sep.h"
 #include <nit_common.h>
-#include <time_nit.h>
+#include "time._nitni.h"
 extern const char *LOCATE_time;
 extern const int SFT_time[];
 #define CALL_time___Object___get_time(recv) ((time___Object___get_time_t)CALL((recv), (SFT_time[0] + 0)))

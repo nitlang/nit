@@ -142,31 +142,33 @@ extern const int SFT_mmbuilder[];
 #define CALL_SUPER_mmbuilder___AMethPropdef___accept_property_builder(recv) ((mmbuilder___AMethPropdef___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[52] + 1)))
 #define CALL_SUPER_mmbuilder___AMethPropdef___accept_property_verifier(recv) ((mmbuilder___AMethPropdef___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[52] + 2)))
 #define CALL_SUPER_mmbuilder___AMethPropdef___accept_abs_syntax_visitor(recv) ((mmbuilder___AMethPropdef___accept_abs_syntax_visitor_t)CALL((recv), (SFT_mmbuilder[52] + 3)))
-#define CALL_SUPER_mmbuilder___AExternMethPropdef___accept_property_verifier(recv) ((mmbuilder___AExternMethPropdef___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[53] + 0)))
-#define ATTR_mmbuilder___ATypePropdef____prop(recv) ATTR(recv, (SFT_mmbuilder[54] + 0))
-#define CALL_SUPER_mmbuilder___ATypePropdef___accept_property_builder(recv) ((mmbuilder___ATypePropdef___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[55] + 0)))
-#define CALL_SUPER_mmbuilder___ATypePropdef___accept_property_verifier(recv) ((mmbuilder___ATypePropdef___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[55] + 1)))
-#define CALL_SUPER_mmbuilder___ATypePropdef___accept_abs_syntax_visitor(recv) ((mmbuilder___ATypePropdef___accept_abs_syntax_visitor_t)CALL((recv), (SFT_mmbuilder[55] + 2)))
-#define ID_MethidAccumulator (SFT_mmbuilder[56])
-#define COLOR_MethidAccumulator (SFT_mmbuilder[57])
-#define ATTR_mmbuilder___MethidAccumulator____name(recv) ATTR(recv, (SFT_mmbuilder[58] + 0))
-#define INIT_TABLE_POS_MethidAccumulator (SFT_mmbuilder[59] + 0)
-#define CALL_mmbuilder___MethidAccumulator___name(recv) ((mmbuilder___MethidAccumulator___name_t)CALL((recv), (SFT_mmbuilder[59] + 1)))
-#define ATTR_mmbuilder___AMethid____name(recv) ATTR(recv, (SFT_mmbuilder[60] + 0))
-#define CALL_SUPER_mmbuilder___AMethid___accept_property_builder(recv) ((mmbuilder___AMethid___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[61] + 0)))
-#define CALL_SUPER_mmbuilder___ASignature___accept_property_verifier(recv) ((mmbuilder___ASignature___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[62] + 0)))
-#define CALL_mmbuilder___ASignature___check_visibility(recv) ((mmbuilder___ASignature___check_visibility_t)CALL((recv), (SFT_mmbuilder[62] + 1)))
-#define ATTR_mmbuilder___AParam____position(recv) ATTR(recv, (SFT_mmbuilder[63] + 0))
-#define ATTR_mmbuilder___AParam____variable(recv) ATTR(recv, (SFT_mmbuilder[63] + 1))
-#define ATTR_mmbuilder___AParam____stype(recv) ATTR(recv, (SFT_mmbuilder[63] + 2))
-#define CALL_mmbuilder___AParam___stype(recv) ((mmbuilder___AParam___stype_t)CALL((recv), (SFT_mmbuilder[64] + 0)))
-#define CALL_mmbuilder___AParam___stype__eq(recv) ((mmbuilder___AParam___stype__eq_t)CALL((recv), (SFT_mmbuilder[64] + 1)))
-#define CALL_SUPER_mmbuilder___AParam___accept_property_verifier(recv) ((mmbuilder___AParam___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[64] + 2)))
-#define CALL_mmbuilder___AParam___is_vararg(recv) ((mmbuilder___AParam___is_vararg_t)CALL((recv), (SFT_mmbuilder[64] + 3)))
-#define ATTR_mmbuilder___AClosureDecl____position(recv) ATTR(recv, (SFT_mmbuilder[65] + 0))
-#define ATTR_mmbuilder___AClosureDecl____variable(recv) ATTR(recv, (SFT_mmbuilder[65] + 1))
-#define CALL_SUPER_mmbuilder___AClosureDecl___accept_property_verifier(recv) ((mmbuilder___AClosureDecl___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[66] + 0)))
-#define CALL_mmbuilder___AType___check_visibility(recv) ((mmbuilder___AType___check_visibility_t)CALL((recv), (SFT_mmbuilder[67] + 0)))
+#define CALL_SUPER_mmbuilder___AExternPropdef___accept_property_verifier(recv) ((mmbuilder___AExternPropdef___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[53] + 0)))
+#define CALL_mmbuilder___MMMethod___default_extern_name(recv) ((mmbuilder___MMMethod___default_extern_name_t)CALL((recv), (SFT_mmbuilder[54] + 0)))
+#define CALL_mmbuilder___MMMethod___friendly_extern_name(recv) ((mmbuilder___MMMethod___friendly_extern_name_t)CALL((recv), (SFT_mmbuilder[54] + 1)))
+#define ATTR_mmbuilder___ATypePropdef____prop(recv) ATTR(recv, (SFT_mmbuilder[55] + 0))
+#define CALL_SUPER_mmbuilder___ATypePropdef___accept_property_builder(recv) ((mmbuilder___ATypePropdef___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[56] + 0)))
+#define CALL_SUPER_mmbuilder___ATypePropdef___accept_property_verifier(recv) ((mmbuilder___ATypePropdef___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[56] + 1)))
+#define CALL_SUPER_mmbuilder___ATypePropdef___accept_abs_syntax_visitor(recv) ((mmbuilder___ATypePropdef___accept_abs_syntax_visitor_t)CALL((recv), (SFT_mmbuilder[56] + 2)))
+#define ID_MethidAccumulator (SFT_mmbuilder[57])
+#define COLOR_MethidAccumulator (SFT_mmbuilder[58])
+#define ATTR_mmbuilder___MethidAccumulator____name(recv) ATTR(recv, (SFT_mmbuilder[59] + 0))
+#define INIT_TABLE_POS_MethidAccumulator (SFT_mmbuilder[60] + 0)
+#define CALL_mmbuilder___MethidAccumulator___name(recv) ((mmbuilder___MethidAccumulator___name_t)CALL((recv), (SFT_mmbuilder[60] + 1)))
+#define ATTR_mmbuilder___AMethid____name(recv) ATTR(recv, (SFT_mmbuilder[61] + 0))
+#define CALL_SUPER_mmbuilder___AMethid___accept_property_builder(recv) ((mmbuilder___AMethid___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[62] + 0)))
+#define CALL_SUPER_mmbuilder___ASignature___accept_property_verifier(recv) ((mmbuilder___ASignature___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[63] + 0)))
+#define CALL_mmbuilder___ASignature___check_visibility(recv) ((mmbuilder___ASignature___check_visibility_t)CALL((recv), (SFT_mmbuilder[63] + 1)))
+#define ATTR_mmbuilder___AParam____position(recv) ATTR(recv, (SFT_mmbuilder[64] + 0))
+#define ATTR_mmbuilder___AParam____variable(recv) ATTR(recv, (SFT_mmbuilder[64] + 1))
+#define ATTR_mmbuilder___AParam____stype(recv) ATTR(recv, (SFT_mmbuilder[64] + 2))
+#define CALL_mmbuilder___AParam___stype(recv) ((mmbuilder___AParam___stype_t)CALL((recv), (SFT_mmbuilder[65] + 0)))
+#define CALL_mmbuilder___AParam___stype__eq(recv) ((mmbuilder___AParam___stype__eq_t)CALL((recv), (SFT_mmbuilder[65] + 1)))
+#define CALL_SUPER_mmbuilder___AParam___accept_property_verifier(recv) ((mmbuilder___AParam___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[65] + 2)))
+#define CALL_mmbuilder___AParam___is_vararg(recv) ((mmbuilder___AParam___is_vararg_t)CALL((recv), (SFT_mmbuilder[65] + 3)))
+#define ATTR_mmbuilder___AClosureDecl____position(recv) ATTR(recv, (SFT_mmbuilder[66] + 0))
+#define ATTR_mmbuilder___AClosureDecl____variable(recv) ATTR(recv, (SFT_mmbuilder[66] + 1))
+#define CALL_SUPER_mmbuilder___AClosureDecl___accept_property_verifier(recv) ((mmbuilder___AClosureDecl___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[67] + 0)))
+#define CALL_mmbuilder___AType___check_visibility(recv) ((mmbuilder___AType___check_visibility_t)CALL((recv), (SFT_mmbuilder[68] + 0)))
 static const char * const LOCATE_mmbuilder___CSHSorter___compare = "mmbuilder::CSHSorter::(sorter::AbstractSorter::compare)";
 val_t mmbuilder___CSHSorter___compare(val_t p0, val_t p1, val_t p2);
 typedef val_t (*mmbuilder___CSHSorter___compare_t)(val_t p0, val_t p1, val_t p2);
@@ -592,14 +594,19 @@ val_t NEW_AMainMethPropdef_parser_nodes___ANode___init(val_t p0);
 val_t NEW_AMainMethPropdef_parser_prod___AMethPropdef___empty_init();
 val_t NEW_AMainMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
 val_t NEW_AMainMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-static const char * const LOCATE_mmbuilder___AExternMethPropdef___accept_property_verifier = "mmbuilder::AExternMethPropdef::(mmbuilder::ANode::accept_property_verifier)";
-void mmbuilder___AExternMethPropdef___accept_property_verifier(val_t p0, val_t p1);
-typedef void (*mmbuilder___AExternMethPropdef___accept_property_verifier_t)(val_t p0, val_t p1);
-val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___empty_init();
-val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7);
-val_t NEW_AExternMethPropdef_parser_nodes___ANode___init(val_t p0);
-val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+static const char * const LOCATE_mmbuilder___AExternPropdef___accept_property_verifier = "mmbuilder::AExternPropdef::(mmbuilder::ANode::accept_property_verifier)";
+void mmbuilder___AExternPropdef___accept_property_verifier(val_t p0, val_t p1);
+typedef void (*mmbuilder___AExternPropdef___accept_property_verifier_t)(val_t p0, val_t p1);
+val_t NEW_AExternPropdef_parser_nodes___ANode___init(val_t p0);
+val_t NEW_AExternPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AExternPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+static const char * const LOCATE_mmbuilder___MMMethod___default_extern_name = "mmbuilder::MMMethod::default_extern_name";
+val_t mmbuilder___MMMethod___default_extern_name(val_t p0);
+typedef val_t (*mmbuilder___MMMethod___default_extern_name_t)(val_t p0);
+static const char * const LOCATE_mmbuilder___MMMethod___friendly_extern_name = "mmbuilder::MMMethod::friendly_extern_name";
+val_t mmbuilder___MMMethod___friendly_extern_name(val_t p0, val_t p1);
+typedef val_t (*mmbuilder___MMMethod___friendly_extern_name_t)(val_t p0, val_t p1);
+val_t NEW_MMMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 static const char * const LOCATE_mmbuilder___ATypePropdef___prop = "mmbuilder::ATypePropdef::(syntax_base::ATypePropdef::prop)";
 val_t mmbuilder___ATypePropdef___prop(val_t p0);
 typedef val_t (*mmbuilder___ATypePropdef___prop_t)(val_t p0);

@@ -3,7 +3,7 @@
 #define tables_sep
 #include "standard._sep.h"
 #include <nit_common.h>
-#include <tables_nit.h>
+#include "tables._nitni.h"
 
 extern const classtable_elt_t VFT_TablesCapable[];
 extern const char *LOCATE_tables;
