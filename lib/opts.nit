@@ -11,6 +11,9 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
+# Manage options on the command line
+module opts
+
 # Super class of all option's class
 class Option
 	# Names for the option (including long and short ones)

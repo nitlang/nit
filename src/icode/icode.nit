@@ -15,6 +15,7 @@
 # limitations under the License.
 
 # Nit intermediate code representation
+module icode
 import icode_base
 import icode_tools
 import icode_builder

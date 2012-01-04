@@ -10,6 +10,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
+# Manage time and dates
 package time
 
 import kernel

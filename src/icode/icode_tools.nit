@@ -15,6 +15,7 @@
 # limitations under the License.
 
 # Tools to manipulate intermediace nit code representation
+module icode_tools
 import icode_builder
 
 # A simple visitor to visit icode structures
