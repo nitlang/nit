@@ -19,7 +19,7 @@
 
 OPTS="-g" # option for compiler call
 objs="" # List of .o files
-CC="gcc --ansi --pedantic -Wall -Wextra -Wformat-security -Wcast-align -Wno-uninitialized -Wno-unused-variable -Wno-unused-label -Wno-unused-parameter -Wno-missing-field-initializers -Wno-array-bounds -Wno-unused-but-set-variable" # Default compiler call
+CC="cc" # Default compiler call
 ext="_savo _sav" # Default flavor to reuse
 out="a.out"  # Default output binary filename
 dir="" # Default tmp dir

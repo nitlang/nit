@@ -289,7 +289,7 @@ redef class IRoutine
 			v.add_decl("struct \{struct stack_frame_t me;\} fra;")
 		end
 		v.add_instr("fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;")
-		v.add_instr("fra.me.file = LOCATE_{v.visitor.mmmodule.name};")
+		v.add_instr("fra.me.file = LOCATE_{v.visitor.mmmodule.cname};")
 		v.add_instr("fra.me.line = {ll};")
 		v.add_instr("fra.me.meth = LOCATE_{v.basecname};")
 		v.add_instr("fra.me.has_broke = 0;")
@@ -624,7 +624,7 @@ redef class IAllocateInstance
 		v.add_location(location)
 		var w = new_result(v)
 		w.add("NEW_")
-		w.add(stype.local_class.name.to_s)
+		w.add(stype.local_class.cname)
 		w.add("()")
 	end
 end
@@ -635,7 +635,7 @@ redef class ICheckInstance
 		v.add_location(location)
 		var w = new_result(v)
 		w.add("CHECKNEW_")
-		w.add(stype.local_class.name.to_s)
+		w.add(stype.local_class.cname)
 		w.add("(")
 		w.add(v.register(expr))
 		w.add(")")
@@ -648,7 +648,7 @@ redef class IInitAttributes
 		v.add_location(location)
 		var w = v.new_instr
 		w.add("INIT_ATTRIBUTES__")
-		w.add(stype.local_class.name.to_s)
+		w.add(stype.local_class.cname)
 		w.add("(")
 		w.add(v.register(expr))
 		w.add(");\n")
@@ -864,7 +864,14 @@ redef class INative
 			s = "NEW_NativeArray(UNTAG_Int({regs[1]}), sizeof(val_t))"
 		else if n == once "calloc_string".to_symbol then
 			s = "BOX_NativeString((char*)raw_alloc((UNTAG_Int({regs[1]}) * sizeof(char))))"
+		# Add output_class_name native implementation
+		else if n == once "output_class_name".to_symbol then
+			s = "printf(\"%s\\n\", VAL2VFT({regs[0]})[2].cname);"
+		# Add class_name implementation
+		else if n == once "native_class_name".to_symbol then
+			s = "BOX_NativeString(VAL2VFT({regs[0]})[2].cname);"
 		end
+
 		if s == null then
 			var ll = location
 			if ll != null then v.add_instr("fprintf(stderr, \"{ll.to_s}: \");")
@@ -943,7 +950,7 @@ redef class IAbort
 			w.add("\", NULL")
 		end
 		w.add(", LOCATE_")
-		w.add(module_location.name.to_s)
+		w.add(module_location.cname)
 		var ll = location
 		if ll != null then
 			w.add(", ")

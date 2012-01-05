@@ -5,19 +5,23 @@
         '# Analysis property bodies, statements and expressions
 ' ... ../src/syntax/typing.nit:17,1--18,0
       'package' ... ../src/syntax/typing.nit:18,1--7
-      'typing' ... ../src/syntax/typing.nit:18,9--14
+      ../src/syntax/typing.nit:18,9--14
+        'typing' ... ../src/syntax/typing.nit:18,9--14
     ../src/syntax/typing.nit:20,1--18
-      ../src/syntax/typing.nit:20,1
+      ../src/syntax/typing.nit:20,8
       'import' ... ../src/syntax/typing.nit:20,1--6
-      'syntax_base' ... ../src/syntax/typing.nit:20,8--18
+      ../src/syntax/typing.nit:20,8--18
+        'syntax_base' ... ../src/syntax/typing.nit:20,8--18
     ../src/syntax/typing.nit:21,1--11
-      ../src/syntax/typing.nit:21,1
+      ../src/syntax/typing.nit:21,8
       'import' ... ../src/syntax/typing.nit:21,1--6
-      'flow' ... ../src/syntax/typing.nit:21,8--11
+      ../src/syntax/typing.nit:21,8--11
+        'flow' ... ../src/syntax/typing.nit:21,8--11
     ../src/syntax/typing.nit:22,1--12
-      ../src/syntax/typing.nit:22,1
+      ../src/syntax/typing.nit:22,8
       'import' ... ../src/syntax/typing.nit:22,1--6
-      'scope' ... ../src/syntax/typing.nit:22,8--12
+      ../src/syntax/typing.nit:22,8--12
+        'scope' ... ../src/syntax/typing.nit:22,8--12
     ../src/syntax/typing.nit:24,1--30,21
       'redef' ... ../src/syntax/typing.nit:24,1--5
       ../src/syntax/typing.nit:24,7
@@ -7504,26 +7508,26 @@
                     ../src/syntax/typing.nit:1274,74
                       '1' ... ../src/syntax/typing.nit:1274,74
             ../src/syntax/typing.nit:1275,4--1276,15
-              ../src/syntax/typing.nit:1275,4--71
+              ../src/syntax/typing.nit:1275,4--70
                 ../src/syntax/typing.nit:1275,4
                   ../src/syntax/typing.nit:1275,4
                   'v' ... ../src/syntax/typing.nit:1275,4
                 'error' ... ../src/syntax/typing.nit:1275,6--10
                 ../src/syntax/typing.nit:1275,12--15
                   'self' ... ../src/syntax/typing.nit:1275,12--15
-                ../src/syntax/typing.nit:1275,18--71
-                  ../src/syntax/typing.nit:1275,18--57
-                    '"Error: arity missmatch; prototype is '{' ... ../src/syntax/typing.nit:1275,18--57
-                  ../src/syntax/typing.nit:1275,58--61
-                    ../src/syntax/typing.nit:1275,58
-                    'name' ... ../src/syntax/typing.nit:1275,58--61
-                  ../src/syntax/typing.nit:1275,62--63
-                    '}{' ... ../src/syntax/typing.nit:1275,62--63
-                  ../src/syntax/typing.nit:1275,64--67
-                    ../src/syntax/typing.nit:1275,64
-                    'psig' ... ../src/syntax/typing.nit:1275,64--67
-                  ../src/syntax/typing.nit:1275,68--71
-                    '}'."' ... ../src/syntax/typing.nit:1275,68--71
+                ../src/syntax/typing.nit:1275,18--70
+                  ../src/syntax/typing.nit:1275,18--56
+                    '"Error: arity mismatch; prototype is '{' ... ../src/syntax/typing.nit:1275,18--56
+                  ../src/syntax/typing.nit:1275,57--60
+                    ../src/syntax/typing.nit:1275,57
+                    'name' ... ../src/syntax/typing.nit:1275,57--60
+                  ../src/syntax/typing.nit:1275,61--62
+                    '}{' ... ../src/syntax/typing.nit:1275,61--62
+                  ../src/syntax/typing.nit:1275,63--66
+                    ../src/syntax/typing.nit:1275,63
+                    'psig' ... ../src/syntax/typing.nit:1275,63--66
+                  ../src/syntax/typing.nit:1275,67--70
+                    '}'."' ... ../src/syntax/typing.nit:1275,67--70
               ../src/syntax/typing.nit:1276,4--15
                 'return' ... ../src/syntax/typing.nit:1276,4--9
                 ../src/syntax/typing.nit:1276,11--15

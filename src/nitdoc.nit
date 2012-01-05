@@ -80,9 +80,11 @@ class DocContext
 	# Register an entity (for the index)
 	fun register(e: MMEntity)
 	do
-		_entities.add(e)
-		if e isa MMSrcModule then
-			_mmmodule = e
+		if not _entities.has(e) then
+			_entities.add(e)
+			if e isa MMSrcModule then
+				_mmmodule = e
+			end
 		end
 	end
 
@@ -167,6 +169,16 @@ class DocContext
 
 		clear
 		add_header("Overview")
+
+		var f = new OFStream.open("{_dir}/all_.module_hierarchy.dot")
+			f.write(module_hierarchy.to_dot)
+		f.close
+
+		sys.system("dot -Tpng {_dir}/all_.module_hierarchy.dot -o {_dir}/all_.module_hierarchy.png")
+
+		add("<input type=\"button\" value=\"View/Hide module hierarchy\" Onclick=\"show_hide('module_hierarchy');\" />")
+		add("<center><img id=\"module_hierarchy\" src=\"all_.module_hierarchy.png\" alt=\"module hierarchy\" style=\"display:none\" border=\"1\" /></center><br />\n")
+
 		add("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
 		add("<tr bgcolor=\"#CCCCFF\"><th colspan=\"2\"><big>Overview of all Modules</big></th><tr>\n")
 		for m in modules do
@@ -182,7 +194,7 @@ class DocContext
 
 	fun add_header(title: String)
 	do
-		add("<html><head><title>{title}</title></head>\n<body>\n")
+		add("<html><head><title>{title}</title><script type=\"text/JavaScript\">function show_hide(id)\{if (document.getElementById(id).style.display==\"none\")\{document.getElementById(id).style.display=\"block\";\}else \{document.getElementById(id).style.display=\"none\";\}\}</script></head>\n<body>\n")
 		add("<table border=\"0\" width=\"100%\" cellpadding=\"1\" cellspacing=\"0\"><tr><td bgcolor=\"#eeeeff\">\n")
 		add("<a href=\"overview.html\"><b>Overview</b></a>&nbsp; <a href=\"index-1.html\"><b>Index</b></a>&nbsp; <a href=\"index.html\" target=\"_top\"><b>With Frames</b></a>\n")
 		add("</td></tr></table>")
@@ -623,6 +635,31 @@ redef class MMSrcModule
 					end
 				end
 			end
+		end
+
+		if not new_classes.is_empty then
+			dctx.add("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
+			dctx.add("<tr bgcolor=\"#FF6347\"><th colspan=\"2\"><big>Main Summary of {self}</big></th><tr>\n")
+			for c in new_classes do
+				if c.global.intro == c or owned_modules.has(c.global.intro.mmmodule) then
+					var add = true
+					for p in c.cshe.direct_greaters do
+						if p.global.intro.mmmodule == self or owned_modules.has(p.global.intro.mmmodule) then
+							add = false
+						end
+					end
+					if add then
+						dctx.add("<tr><td width=\"20%\" align=\"right\"><u>Introduce</u> {c.prototype_head(dctx)}</td><td><b>{c.html_link(dctx)}</b>{c.prototype_body(dctx)}<br/>{c.short_doc}</td><tr>\n")
+					end
+				else
+					for p in c.local_local_properties do
+						if p.global.is_method and p.global.intro == p then
+							dctx.add("<tr><td width=\"20%\" align=\"right\"><u>Refine</u> <b>{c.html_link(dctx)}</b> <u>Introduce</u> {p.prototype_head(dctx)}</td><td><b>{p.html_link(dctx)}</b>{p.prototype_body(dctx)}<br/>&nbsp;&nbsp;&nbsp;&nbsp;{p.short_doc}</td></tr>\n")
+						end
+					end
+				end
+			end
+			dctx.add("</table><br/>\n")
 		end
 
 		if not new_classes.is_empty then 

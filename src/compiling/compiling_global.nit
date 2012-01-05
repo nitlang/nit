@@ -36,7 +36,8 @@ redef class Program
 		var s = new Buffer.from("classtable_t TAG2VFT[4] = \{NULL")
 		for t in ["Int","Char","Bool"] do
 			if main_module.has_global_class_named(t.to_symbol) then
-				s.append(", (const classtable_t)VFT_{t}")
+				var c = main_module.class_by_name(t.to_symbol)
+				s.append(", (const classtable_t)VFT_{c.cname}")
 			else
 				s.append(", NULL")
 			end
@@ -55,7 +56,8 @@ redef class Program
 		if v.program.main_method == null then
 			print("No main")
 		else
-			v.add_instr("G_sys = NEW_Sys();")
+			var c = v.program.main_class
+			v.add_instr("G_sys = NEW_{c.cname}();")
 			v.add_instr("register_static_object(&G_sys);")
 			v.add_instr("{v.program.main_method.cname}(G_sys);")
 		end
@@ -79,9 +81,9 @@ redef class MMModule
 	# Compile sep files
 	fun compile_mod_to_c(v: CompilerVisitor)
 	do
-		v.add_decl("extern const char *LOCATE_{name};")
+		v.add_decl("extern const char *LOCATE_{cname};")
 		if not v.program.tc.use_SFT_optimization then
-			v.add_decl("extern const int SFT_{name}[];")
+			v.add_decl("extern const int SFT_{cname}[];")
 		end
 		var i = 0
 		for e in local_table do
@@ -89,7 +91,7 @@ redef class MMModule
 			if v.program.tc.use_SFT_optimization then
 				value = "{e.value(v.program)}"
 			else
-				value = "SFT_{name}[{i}]"
+				value = "SFT_{cname}[{i}]"
 				i = i + 1
 			end
 			e.compile_macros(v, value)
@@ -116,13 +118,13 @@ redef class MMModule
 	# Compile module file for the current module
 	fun compile_local_table_to_c(v: CompilerVisitor)
 	do
-		v.add_instr("const char *LOCATE_{name} = \"{location.file.filename}\";")
+		v.add_instr("const char *LOCATE_{cname} = \"{location.file.filename}\";")
 
 		if v.program.tc.use_SFT_optimization or local_table.is_empty then
 			return
 		end
 
-		v.add_instr("const int SFT_{name}[{local_table.length}] = \{")
+		v.add_instr("const int SFT_{cname}[{local_table.length}] = \{")
 		v.indent
 		for e in local_table do
 			v.add_instr(e.value(v.program) + ",")
@@ -281,6 +283,14 @@ redef class TableEltClassSelfId
 	end
 end
 
+redef class TableEltClassSelfName
+	redef fun compile_to_c(v, c)
+	do
+		var prog = v.program
+		return "\"{c.global.name}\" /* {prog.table_information.color(self)}: Class Name */"
+	end
+end
+
 redef class TableEltClassObjectSize
 	redef fun compile_to_c(v, c)
 	do
@@ -323,7 +333,7 @@ redef class MMLocalClass
 	do
 		v.add_decl("")
 		var pi = primitive_info
-		v.add_decl("extern const classtable_elt_t VFT_{name}[];")
+		v.add_decl("extern const classtable_elt_t VFT_{cname}[];")
 		if pi != null and not pi.tagged then
 			var t = pi.cname
 			var tbox = "struct TBOX_{name}"
@@ -343,7 +353,7 @@ redef class MMLocalClass
 			clen = v.program.table_information.max_class_table_length
 		end
 
-		v.add_instr("const classtable_elt_t VFT_{name}[{clen}] = \{")
+		v.add_instr("const classtable_elt_t VFT_{cname}[{clen}] = \{")
 		v.indent
 		for e in ctab do
 			if e == null then
@@ -372,7 +382,7 @@ redef class MMLocalClass
 			v.indent
 			v.add_instr("Nit_NativeArray array;")
 			v.add_instr("array = (Nit_NativeArray)alloc(sizeof(struct Nit_NativeArray) + ((length - 1) * size));")
-			v.add_instr("array->vft = (classtable_elt_t*)VFT_{name};")
+			v.add_instr("array->vft = (classtable_elt_t*)VFT_{cname};")
 			v.add_instr("array->object_id = object_id_counter;")
 			v.add_instr("object_id_counter = object_id_counter + 1;")
 			v.add_instr("array->size = length;")
@@ -382,7 +392,7 @@ redef class MMLocalClass
 		else if pi == null then
 			do
 				# Generate INIT_ATTRIBUTES routine
-				var cname = "INIT_ATTRIBUTES__{name}"
+				var cname = "INIT_ATTRIBUTES__{cname}"
 				var args = init_var_iroutine.compile_signature_to_c(v, cname, "init var of {name}", null, null)
 				var decl_writer_old = v.decl_writer
 				v.decl_writer = v.writer.sub
@@ -393,13 +403,13 @@ redef class MMLocalClass
 			end
 			do
 				# Generate NEW routine
-				v.add_decl("val_t NEW_{name}(void);")
-				v.add_instr("val_t NEW_{name}(void)")
+				v.add_decl("val_t NEW_{cname}(void);")
+				v.add_instr("val_t NEW_{cname}(void)")
 				v.add_instr("\{")
 				v.indent
 				v.add_instr("obj_t obj;")
 				v.add_instr("obj = alloc(sizeof(val_t) * {itab.length});")
-				v.add_instr("obj->vft = (classtable_elt_t*)VFT_{name};")
+				v.add_instr("obj->vft = (classtable_elt_t*)VFT_{cname};")
 				v.add_instr("obj[1].object_id = object_id_counter;")
 				v.add_instr("object_id_counter = object_id_counter + 1;")
 				v.add_instr("return OBJ2VAL(obj);")
@@ -408,7 +418,7 @@ redef class MMLocalClass
 			end
 			do
 				# Compile CHECKNAME
-				var cname = "CHECKNEW_{name}"
+				var cname = "CHECKNEW_{cname}"
 				var args = checknew_iroutine.compile_signature_to_c(v, cname, "check new {name}", null, null)
 				var decl_writer_old = v.decl_writer
 				v.decl_writer = v.writer.sub
@@ -444,7 +454,7 @@ redef class MMLocalClass
 			v.add_instr("val_t BOX_{name}({t} val) \{")
 			v.indent
 			v.add_instr("{tbox} *box = ({tbox}*)alloc(sizeof({tbox}));")
-			v.add_instr("box->vft = VFT_{name};")
+			v.add_instr("box->vft = VFT_{cname};")
 			v.add_instr("box->val = val;")
 			v.add_instr("box->object_id = object_id_counter;")
 			v.add_instr("object_id_counter = object_id_counter + 1;")
