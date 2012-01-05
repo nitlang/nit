@@ -11,6 +11,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
+# Acces of the environement variables of the process
 import symbol
 
 # TODO prevoir une structure pour recup tout un environ, le modifier et le passer a process
