@@ -302,7 +302,11 @@ redef class MMImplicitInit
 		for a in unassigned_attributes do
 			var sig = a.signature
 			if sig == null then return # Broken attribute definition
-			params.add( new MMParam( sig.return_type.as(not null), once "recv".to_symbol))
+			var name = a.name
+			if name.to_s.first == '_' or name.to_s.first == '@' then
+				name = a.to_s.substring_from(1).to_symbol
+			end
+			params.add(new MMParam(sig.return_type.as(not null), name))
 		end
 		signature = new MMSignature(params, null, local_class.get_type)
 	end
