@@ -71,7 +71,7 @@ redef class MMGlobalClass
 		if vpm == 3 then
 			return true
 		else if vpm == 0 then
-			v.error(n, "Visibility error: Class {self} comes from the hidden module {cm}.") # TODO: should not occur
+			v.error(n, "Visibility error: Class {self} comes from the hidden module {pm}.") # TODO: should not occur
 			return false
 		else if visibility_level >= 3 then
 			v.error(n, "Visibility error: Class {self} is private.")
@@ -111,7 +111,7 @@ redef class MMGlobalProperty
 			return true
 		else if vpm == 0 then
 			# TODO: should not occurs 
-			v.error(n, "Visibility error: Property {self} comes from the hidden module {cm}.")
+			v.error(n, "Visibility error: Property {self} comes from the hidden module {pm}.")
 			return false
 		else if visibility_level >= 3 then
 			v.error(n, "Visibility error: Property {self} is private.")
