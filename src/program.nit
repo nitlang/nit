@@ -19,7 +19,7 @@ package program
 
 import metamodel
 import icode
-import primitive_info
+private import primitive_info
 import mmloader
 
 redef class ToolContext

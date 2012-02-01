@@ -19,7 +19,7 @@ package compiling_base
 
 import mmloader
 private import utils
-import primitive_info
+private import primitive_info
 import program
 import compiling_writer
 

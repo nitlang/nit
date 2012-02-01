@@ -20,8 +20,8 @@ package nitc
 import abstracttool
 import analysis
 import program
-private import compiling
-private import syntax
+import compiling
+import syntax
 
 # The main class of the nitcompiler program
 class NitCompiler

@@ -19,7 +19,7 @@
 package inline_get_and_set
 
 import icode
-import syntax
+private import syntax
 import program
 
 redef class Program

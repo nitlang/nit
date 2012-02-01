@@ -21,7 +21,7 @@ package abstracttool
 
 import mmloader
 import syntax
-import nit_version
+private import nit_version
 
 class AbstractCompiler
 	super ToolContext

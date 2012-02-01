@@ -19,6 +19,7 @@ package compiling_icode
 
 import icode
 private import analysis
+import primitive_info
 import compiling_base
 
 # Compiler context from ICode to C

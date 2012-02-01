@@ -19,9 +19,10 @@ package compiling
 
 import table_computation
 import compiling_base
-import icode_generator
+private import icode_generator
 private import compiling_global
 private import compiling_icode
+private import analysis
 
 redef class Program
 	# The type of code generation to use

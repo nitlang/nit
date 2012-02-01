@@ -26,7 +26,7 @@ private import primitive_info
 #  * flow control
 #  * register aliasing
 #  * IMove optimization
-class IRegisterSlotAllocationVisitor
+private class IRegisterSlotAllocationVisitor
 	super ICodeVisitor
 	# The visitor works in two pass:
 	# First pass is used to detect first and last iregisters occurences and slot groups
@@ -238,7 +238,7 @@ class IRegisterSlotAllocationVisitor
 end
 
 # Group or equivalent slots shared by registers
-class SlotGroup
+private class SlotGroup
 	# The free slots in the group
 	var _free: List[Int] = new List[Int]
 
