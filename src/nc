@@ -39,7 +39,7 @@ esac
 
 trap trap_action INT TERM
 echo ${NITC} ${NITCOPTS} ${opts} "$@"
-pipe=$`mktemp nc.stderr.XXXXX`
+pipe=`mktemp nc.stderr.XXXXX`
 rm "$pipe" 2>/dev/null
 mkfifo "$pipe"
 ./showerr.sh <"$pipe" &
