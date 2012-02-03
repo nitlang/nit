@@ -26,7 +26,7 @@ import abstracttool
 class DocContext
 	super AbstractCompiler
 	# Destination directory
-	readable writable var _dir: String = "."
+	readable writable var _dir: String = "doc"
 
 	# Content of a generated file
 	var _stage_context: StageContext = new StageContext(null)
@@ -65,159 +65,10 @@ class DocContext
 		f.close
 	end
 
-	# Currently computed mmmodule
-	readable var _mmmodule: nullable MMSrcModule
-
-	# Is the current directory module computed as a simple modude ?
-	readable writable var _inside_mode: Bool = false
-
-	# Is the current module computed as a intruded one ?
-	readable writable var _intrude_mode: Bool = false
-
-	# Compued introducing entities (for the index)
-	var _entities: Array[MMEntity] = new Array[MMEntity]
-
-	# Register an entity (for the index)
-	fun register(e: MMEntity)
-	do
-		if not _entities.has(e) then
-			_entities.add(e)
-			if e isa MMSrcModule then
-				_mmmodule = e
-			end
-		end
-	end
-
 	# Start a new file
 	fun clear
 	do
 		_stage_context = new StageContext(null)
-	end
-
-	# Generate common files (frames, index, overview)
-	fun extract_other_doc
-	do
-		info("Generating other files",1)
-		_mmmodule = null
-		inside_mode = false
-		intrude_mode = false
-		clear
-		add("<html><body>\n")
-		add("<a href=\"overview.html\" target=\"mainFrame\">Overview</a><br/>\n")
-		add("<a href=\"index-1.html\" target=\"mainFrame\">Index</a><br/>\n")
-		var modules = modules.to_a
-		sort(modules)
-
-		var rootdirs = new Array[MMDirectory]
-		for m in modules do
-			var md = m.directory
-			if md.parent == null and not rootdirs.has(md) then
-				rootdirs.add(md)
-			end
-		end
-
-		var done = new Array[MMModule]
-		for root in rootdirs do
-			var dirstack = [root]
-			var curdir = root
-			add("{root.name}<br/>\n")
-			var indent = "&nbsp; "
-			while not dirstack.is_empty do
-				var redo = false
-				for m in modules do
-					if done.has(m) then continue
-					var md = m.directory
-					if md.owner == m and md.parent == curdir then
-						# It's a directory module
-						add("{indent}<a href=\"{m}.html\" target=\"mainFrame\">{m}</a><br/>\n")
-						curdir = md
-						dirstack.push(curdir)
-						indent = "&nbsp " * dirstack.length
-						redo = true
-						break # restart to preserve alphabetic order
-					else if md == curdir then
-						if md.owner == m then
-							add("{indent}<a href=\"{m}_.html\" target=\"mainFrame\">{m}</a><br/>\n")
-						else
-							add("{indent}<a href=\"{m}.html\" target=\"mainFrame\">{m}</a><br/>\n")
-						end
-						done.add(m)
-						redo = true
-					end
-				end
-				if not redo then
-					dirstack.pop
-					if not dirstack.is_empty then
-						curdir = dirstack[dirstack.length-1]
-						indent = "&nbsp " * dirstack.length
-					end
-				end
-			end
-		end
-		add("</body></html>\n")
-		write_to("{dir}/menu-frame.html")
-
-		clear
-		add_header("Index")
-		add("<dl>\n")
-		sort(_entities)
-		for e in _entities do
-			add("<dt><b>{e.html_link(self)}</b> - {e.prototype_head(self)} <b>{e}</b>{e.prototype_body(self)} {e.locate(self)}<dd>{e.short_doc}\n")
-		end
-		add("</dl></body></html>\n")
-		write_to("{dir}/index-1.html")
-
-		clear
-		add_header("Overview")
-
-		var f = new OFStream.open("{_dir}/all_.module_hierarchy.dot")
-			f.write(module_hierarchy.to_dot)
-		f.close
-
-		sys.system("dot -Tpng {_dir}/all_.module_hierarchy.dot -o {_dir}/all_.module_hierarchy.png")
-
-		add("<input type=\"button\" value=\"View/Hide module hierarchy\" Onclick=\"show_hide('module_hierarchy');\" />")
-		add("<center><img id=\"module_hierarchy\" src=\"all_.module_hierarchy.png\" alt=\"module hierarchy\" style=\"display:none\" border=\"1\" /></center><br />\n")
-
-		add("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
-		add("<tr bgcolor=\"#CCCCFF\"><th colspan=\"2\"><big>Overview of all Modules</big></th><tr>\n")
-		for m in modules do
-			add("<tr><td width=\"20%\" align=\"right\">{m.html_link(self)}</td><td>{m.short_doc}</td><tr>\n")
-		end
-		add("</table></body></html>\n")
-		write_to("{dir}/overview.html")
-
-		clear
-		add("<html>\n<frameset cols=\"20%,80%\">\n<frame src=\"menu-frame.html\" name=\"menuFrame\" title=\"Menu\">\n<frame src=\"overview.html\" name=\"mainFrame\" title=\"Main\" scrolling=\"yes\">\n</frameset></html>\n")
-		write_to("{dir}/index.html")
-	end
-
-	fun add_header(title: String)
-	do
-		add("<html><head><title>{title}</title><script type=\"text/JavaScript\">function show_hide(id)\{if (document.getElementById(id).style.display==\"none\")\{document.getElementById(id).style.display=\"block\";\}else \{document.getElementById(id).style.display=\"none\";\}\}</script></head>\n<body>\n")
-		add("<table border=\"0\" width=\"100%\" cellpadding=\"1\" cellspacing=\"0\"><tr><td bgcolor=\"#eeeeff\">\n")
-		add("<a href=\"overview.html\"><b>Overview</b></a>&nbsp; <a href=\"index-1.html\"><b>Index</b></a>&nbsp; <a href=\"index.html\" target=\"_top\"><b>With Frames</b></a>\n")
-		add("</td></tr></table>")
-		add("Visibility: ")
-		var mod = mmmodule
-		if (not inside_mode and not intrude_mode) or mod == null then
-			add("<b>Public</b>&nbsp; ")
-		else
-			add("<a href=\"{mod}.html\"><b>Public</b></a>&nbsp; ")
-		end
-		if inside_mode or mod == null then
-			add("<b>Inside</b>&nbsp; ")
-		else if mod.directory.owner != mod then
-			add("<strike><b>Inside</b></strike>&nbsp; ")
-		else
-			add("<a href=\"{mod}_.html\"><b>Inside</b></a>&nbsp; ")
-		end
-		if intrude_mode or mod == null then
-			add("<b>Intrude</b>&nbsp; ")
-		else
-			add("<a href=\"{mod}__.html\"><b>Intrude</b></a>&nbsp; ")
-		end
-		add("<br/>")
 	end
 
 	# Sorter of entities in alphabetical order
@@ -229,40 +80,197 @@ class DocContext
 		_sorter.sort(array)
 	end
 
-	readable writable var _owned_modules: Array[MMModule] = new Array[MMModule]
+	readable var _opt_dir: OptionString = new OptionString("Directory where doc is generated", "-d", "--dir")
+	readable var _opt_source: OptionString = new OptionString("What link for source (%f for filename, %l for first line, %L for last line)", "--source")
+	readable var _opt_public: OptionBool = new OptionBool("Generate only the public API", "--public")
 
-	# Return the known_owner for current module
-	# if inside_mode is set, it could be a different result
-	fun known_owner_of(m: MMModule): MMModule
+	fun public_only: Bool
 	do
-		var mod = mmmodule
-		if mod == null then return m
-		var res = mod.known_owner_of(m)
-		if not inside_mode and not intrude_mode and res.directory.owner == mod then
-			return mod
-		else
-			return res
-		end
+		if self._opt_public.value == true then return true
+		return false
 	end
 
-	readable var _opt_dir: OptionString = new OptionString("Directory where doc is generated", "-d", "--dir")
+	# The current processed filename
+	var filename: String
+
+	# The main virtual module
+	var mainmod: nullable MMVirtualModule
 
 	redef fun perform_work(mods)
 	do
+		mainmod = new MMVirtualModule(self, mods)
+
 		dir.mkdir
 
+		# Compute the set of direct owned nested modules
+		var owns = new HashMap[MMModule, Array[MMModule]]
 		for mod in modules do
-			assert mod isa MMSrcModule
-			mod.extract_module_doc(self)
+			owns[mod] = new Array[MMModule]# [mod]
 		end
-		self.extract_other_doc
+		for mod in modules do
+			if mod == mainmod then continue
+			var d = mod.directory
+			loop
+				var o = d.owner
+				if o != null and o != mod then
+					owns[o].add(mod)
+				end
+				var dp = d.parent
+				if dp == null or dp == d then break
+				d = dp
+			end
+		end
+
+		# Builds the various module hierarchies
+		var mnh = new PartialOrder[MMModule] # nested module hierarchy
+		var tmh = new PartialOrder[MMModule] # top module import hierrchy
+		var ms = mainmod.mhe.linear_extension.reversed
+		for m in ms do
+			if ms == mainmod then continue
+			m.mnhe_ = mnh.add(m, owns[m])
+			var pub = new Array[MMModule]
+			for m2 in m.mhe.greaters do
+				if m2.toplevel_owner != m2 and m2.toplevel_owner != m.toplevel_owner then continue
+				if m.mnhe <= m2 then continue
+				if m.visibility_for(m2) <= 0 then
+					# nothing
+				else if m.visibility_for(m2) == 1 then
+				else
+					pub.add(m2)
+				end
+			end
+			m.tmhe_ = tmh.add(m, pub)
+		end
+
+		var head = "<script type=\"text/javascript\" src=\"http://moz-concept.com/nitdoc/scripts/jquery-1.7.1.min.js\"></script>\n" + 
+			"<script type=\"text/javascript\" src=\"http://moz-concept.com/nitdoc/scripts/js-facilities.js\"></script>\n" +
+			"<link rel=\"stylesheet\" href=\"http://moz-concept.com/nitdoc/styles/main.css\" type=\"text/css\"  media=\"screen\">"
+
+		var action_bar = "<header><nav class='main'><ul><li><a href='.'>Overview</a></li><li><a href='full-index.html'>Full Index</a></li></ul></nav></header>\n"
+
+		# generate the index
+		self.filename = "index.html"
+		clear
+		add("<html><head>{head}</head><body>\n")
+		add(action_bar)
+		add("<div class=\"page\">")
+		add("<div class=\"content fullpage\">")
+		add("<h1>Modules</h1>\n<article class='overview'><ul>")
+		var modss = mainmod.mhe.greaters_and_self.to_a
+		sort(modss)
+		for mod in modss do
+			if not mod.is_toplevel then continue
+			if not mod.require_doc(self) then continue
+			assert mod isa MMSrcModule
+			add("<li>{mod.html_link(self)} {mod.short_doc}</li>")
+
+		end
+		add("</ul>")
+
+		var op = new Buffer
+		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
+		for mod in modss do
+			if not mod.is_toplevel then continue
+			if not mod.require_doc(self) then continue
+			op.append("\"{mod.name}\"[URL=\"{mod.html_name}.html\"];\n")
+			for mod2 in mod.tmhe.direct_greaters do
+				if not modss.has(mod2) then continue
+				op.append("\"{mod.name}\"->\"{mod2.name}\";\n")
+			end
+		end
+		op.append("\}\n")
+		self.gen_dot(op.to_s, "dep")
+		add("</article></div>")
+		add("<div class='clear'></div>")
+		add("</div>")
+		add("</body></html>\n")
+		write_to("{dir}/index.html")
+
+		# Generate page for modules
+		for mod in modules do
+			if mod == mainmod then continue
+			assert mod isa MMSrcModule
+			if not mod.require_doc(self) then continue
+			self.filename = mod.html_name
+			clear
+			add("<html><head>{head}<title>Module {mod.name}</title></head><body>\n")
+			add(action_bar)
+			add("<div class=\"page\">")
+			mod.file_page_doc(self)
+			add("</div>")
+			add("</body></html>\n")
+			write_to("{dir}/{mod.html_name}.html")
+		end
+
+		# Generate pages for global classes
+		for c in mainmod.local_classes do
+			if not c.require_doc(self) then continue
+			self.filename = c.html_name
+			clear
+			add("<html><head>{head}<title>Class {c.name}</title></head><body>\n")
+			add(action_bar)
+			add("<div class=\"page\">")
+			c.file_page_doc(self)
+			add("</div>")
+			add("</body></html>\n")
+			write_to("{dir}/{c.html_name}.html")
+		end
+
+		self.filename = "fullindex"
+		clear
+		add("<html><head>{head}</head><body>\n")
+		add(action_bar)
+		add("<div class=\"page\">")
+		add("<div class=\"content fullpage\">")
+		mainmod.file_index_page_doc(self)
+		add("</div>")
+		add("</div>")
+		add("</body></html>\n")
+		write_to("{dir}/full-index.html")
+	end
+
+
+	# Add a (source) link fo a given location
+	fun show_source(l: Location)
+	do
+		var s = opt_source.value
+		if s == null then
+			add("in #{l.file.filename}")
+		else
+			# THIS IS JUST UGLY ! (but there is no replace yet)
+			var x = s.split_with("%f")
+			s = x.join(l.file.filename)
+			x = s.split_with("%l")
+			s = x.join(l.line_start.to_s)
+			x = s.split_with("%L")
+			s = x.join(l.line_end.to_s)
+			add(" (<a href=\"{s}\">show code</a>)")
+		end
+	end
+
+	# Generate a clicable graphiz image using a dot content.
+	# `name' refer to the filename (without extension) and the id name of the map.
+	# `name' must also match the name of the graph in the dot content (eg. digraph NAME {...)
+	fun gen_dot(dot: String,  name: String)
+	do
+		var f = new OFStream.open("{self.dir}/{name}.dot")
+		f.write(dot)
+		f.close
+		sys.system("\{ test -f {self.dir}/{name}.png && test -f {self.dir}/{name}.s.dot && diff {self.dir}/{name}.dot {self.dir}/{name}.s.dot >/dev/null 2>&1 ; \} || \{ cp {self.dir}/{name}.dot {self.dir}/{name}.s.dot && dot -Tpng -o{self.dir}/{name}.png -Tcmapx -o{self.dir}/{name}.map {self.dir}/{name}.s.dot ; \}")
+		self.add("<div><img src=\"{name}.png\" usemap=\"#{name}\" style=\"margin:auto\"/></div>")
+		var fmap = new IFStream.open("{self.dir}/{name}.map")
+		self.add(fmap.read_all)
+		fmap.close
 	end
 
 	init
 	do
 		keep_ast = true
 		super("nitdoc")
+		filename = "-unset-"
+		option_context.add_option(opt_public)
 		option_context.add_option(opt_dir)
+		option_context.add_option(opt_source)
 	end
 
 	redef fun process_options
@@ -271,6 +279,40 @@ class DocContext
 		var d = opt_dir.value
 		if d != null then dir = d
 	end
+
+	redef fun handle_property_conflict(lc, impls)
+	do
+		# THIS IS SO UGLY! See MMVirtualModule
+		if lc.mmmodule == self.mainmod then 
+			return # We just accept, so one in impls is arbitrary inherited
+		end
+		super
+	end
+end
+
+# A virtual module is used to work as an implicit main module that combine unrelated modules
+# Since conflict may arrise in a virtual module (the main method for instance) conflicts are disabled
+class MMVirtualModule
+	super MMModule
+	init(ctx: MMContext, mods: Array[MMModule])
+	do
+		# We need to compute the whole metamodel since there is no mmbuilder to do it
+		super(" main".to_symbol, mods.first.directory, ctx, new Location(null,0,0,0,0))
+		ctx.add_module(self, mods)
+		for m in mods do
+			self.add_super_module(m, 1)
+		end
+		self.import_global_classes
+		self.import_local_classes
+		for c in self.local_classes do
+			c.compute_super_classes
+		end
+		for c in self.local_classes do
+			c.compute_ancestors
+		end
+
+	end
+	redef fun require_doc(dctx) do return false
 end
 
 # Conditionnal part of the text content of a DocContext
@@ -322,92 +364,363 @@ class MMEntity
 	# Return a link to
 	fun html_link(dctx: DocContext): String is abstract
 
-	# Is the entity should appear in the generaed doc
-	fun need_doc(dctx: DocContext): Bool is abstract
-
 	# Return a one liner description
 	fun short_doc: String do return "&nbsp;"
 
 	# The doc node from the AST
 	# Return null is none
 	fun doc: nullable ADoc do return null
-
-	# Human redable location of the entity (module/class/property)
-	fun locate(dctx: DocContext): String do return ""
-
-	# Part of the prototype before the name (kind, modifiers, qualifier)
-	fun prototype_head(dctx: DocContext): String is abstract
-
-	# Part of the property after the name (signature, modifiers)
-	fun prototype_body(dctx: DocContext): String do return ""
 end
 
 redef class MMModule
 	super MMEntity
 	redef fun html_link(dctx) do 
-		if dctx.mmmodule == self then
-			return "{self}"
-		else
-			return "<a href=\"{self}.html\">{self}</a>"
-		end
+		return "<a href=\"{html_name}.html\">{self}</a>"
 	end
-	redef fun need_doc(dctx) do return true
-	redef fun prototype_head(dctx) do return "module "
 
-	var _known_owner_of_cache: Map[MMModule, MMModule] = new HashMap[MMModule, MMModule]
-
-	# Return the owner of `module` from the point of view of `self`
-	fun known_owner_of(mod: MMModule): MMModule
+	fun require_doc(dctx: DocContext): Bool
 	do
-		if _known_owner_of_cache.has_key(mod) then return _known_owner_of_cache[mod]
-		var res = mod
-		# is module is publicly imported by self?
-		if mhe < mod and visibility_for(mod) != 0 then
-			res = known_owner_of_intern(mod, self, false)
-		else
-			# Return the canonnical owner of module from the point of view of self
-			res = mod.owner(self)
-		end
-		_known_owner_of_cache[mod] = res
-		return res
+		if dctx.public_only and not is_toplevel then return false
+		return true
 	end
 
-	# Return the most general module that own self
-	fun owner(from: MMModule): MMModule
+	# Return true if the module is a top-level owner or a top-level module
+	fun is_toplevel: Bool
 	do
-		var res = self
-		var d: nullable MMDirectory = directory
-		while d != null and d != from.directory do
-			var o = d.owner
-			if o != null and o.mhe <= res then res = o
-			d = d.parent
-		end
-		return res
+		var pd = directory.parent
+		return pd == null or (pd.owner == null and directory.owner == self)
 	end
 
-	# ???
-	private fun known_owner_of_intern(mod: MMModule, from: MMModule, as_owner: Bool): MMModule
+	# Element in the module nesting tree
+	fun mnhe: PartialOrderElement[MMModule] do return mnhe_.as(not null)
+	var mnhe_: nullable PartialOrderElement[MMModule] = null
+
+	# Element in the top level module importation hierarchy
+	fun tmhe: PartialOrderElement[MMModule] do return tmhe_.as(not null)
+	var tmhe_: nullable PartialOrderElement[MMModule] = null
+
+	fun toplevel_owner: MMModule
 	do
-		if mod == self then return self
-		var candidates = new Array[MMModule]
-		for m in explicit_imported_modules do
-			if from.visibility_for(m) == 0 then continue
-			if not m.mhe <= mod then continue
-			candidates.add(m.known_owner_of_intern(mod, from, true))
-		end
-		# FIXME: I do not know what this does
-		if candidates.is_empty then return mod.owner(from)
-		var max = candidates.first
-		for m in candidates do
-			if max.mhe < m then max = m
-		end
-		if as_owner and max.directory.owner == self then
-			return self
-		else
-			return max
+		var m = self
+		loop
+			var ds = m.mnhe.direct_smallers
+			if ds.length == 0 then return m
+			if ds.length == 1 then m = ds.first else abort
 		end
 	end
 
+	fun html_name: String
+	do
+		return "{name}"
+	end
+
+	fun direct_owner: nullable MMModule
+	do
+		var d = directory
+		while d.owner == self do d = d.parent.as(not null)
+		return d.owner
+	end
+
+	# Fill the body for the page associated to the module 
+	fun file_page_doc(dctx: DocContext)
+	do
+		dctx.add("<div class=\"menu\">\n")
+
+		var mods = new Array[MMModule]
+		mods = self.mhe.greaters.to_a
+		dctx.sort(mods)
+
+		dctx.open_stage
+		dctx.stage("<nav>\n")
+		dctx.stage("<h3>Module Hierarchy</h3>\n")
+		dctx.stage("<h4>All dependencies</h4>\n")
+		dctx.stage("<ul>\n")
+		for mod in mods do
+			if not mod.require_doc(dctx) then continue
+			if self.mnhe <= mod then continue # do not want nested stuff
+			if mod.direct_owner != null and not mod.direct_owner.mnhe <= self then continue # not in the right nesting
+			dctx.add("<li>{mod.html_link(dctx)}</li>")
+		end
+		dctx.stage("</ul>\n")
+
+		mods = self.mhe.smallers.to_a
+		dctx.sort(mods)
+		dctx.stage("<h4>All clients</h4>\n")
+		dctx.stage("<ul>\n")
+		for mod in mods do
+			if not mod.require_doc(dctx) then continue
+			if self.mnhe <= mod then continue # do not want nested stuff
+			if mod.direct_owner != null and not mod.direct_owner.mnhe <= self then continue # not in the right nesting
+			dctx.add("<li>{mod.html_link(dctx)}</li>")
+		end
+		dctx.stage("</ul>\n")
+		dctx.stage("</nav>\n")
+		dctx.close_stage
+
+		if not dctx.public_only then
+			mods = self.mnhe.direct_greaters.to_a
+			dctx.sort(mods)
+			dctx.open_stage
+			dctx.stage("<nav>\n")
+			dctx.stage("<h3>Nested Modules</h3><ul>\n")
+			for mod in mods do
+				if not mod.require_doc(dctx) then continue
+				dctx.add("<li>{mod.html_link(dctx)}</li>")
+			end
+			dctx.stage("</ul></nav>\n")
+			dctx.close_stage
+		end
+
+		dctx.add("</div>") # metadata
+
+		dctx.add("<div class=\"content\">\n")
+		dctx.add("<h1>{name}</h1>\n")
+		dctx.add("<div class='subtitle'>module ")
+		for m in mnhe.smallers do
+			dctx.add("{m.html_link(dctx)}::")
+		end
+		dctx.add("{self.name}</div>\n")
+
+		dctx.add("<section class='description'>\n")
+
+		var doc = doc
+		if doc != null then
+			dctx.add("<div id=\"description\">\n")
+			dctx.add("<pre>{doc.to_html}</pre>\n")
+			dctx.add("</div>\n")
+		end
+
+		var op = new Buffer
+		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
+		var ms = new Array[nullable MMModule]
+		do
+			var m0: nullable MMModule = self
+			while m0 != null do
+				m0 = m0.direct_owner
+				ms.add(m0)
+			end
+		end
+		var cla = new HashSet[MMModule]
+		cla.add(self)
+		for m0 in self.mhe.greaters do
+			if not m0.require_doc(dctx) then continue
+			if self.visibility_for(m0) <= 1 then continue # private or hidden
+			if self.mnhe <= m0 then continue # do not want nested stuff
+			if m0.direct_owner != null and not m0.direct_owner.mnhe <= self then continue # not in the right nesting
+			cla.add(m0)
+		end
+		for m0 in self.mhe.smallers do
+			if not m0.require_doc(dctx) then continue
+			if m0.visibility_for(self) <= 1 then continue # private or hidden
+			if m0.direct_owner != null and not m0.direct_owner.mnhe <= self then continue # not in the right nesting
+			cla.add(m0)
+		end
+		for m0 in self.mnhe.smallers do
+			cla.add(m0)
+		end
+		ms = ms.reversed
+		for m0 in ms do
+			if m0 != null then
+				op.append("subgraph \"cluster_{m0.name}\"\{\n")
+			end
+			for c in cla do
+				if c.direct_owner != m0 then continue
+				if c == self then
+					op.append("\"{c.name}\"[shape=box,margin=0.03];\n")
+				else
+					op.append("\"{c.name}\"[URL=\"{c.html_name}.html\"];\n")
+				end
+			end
+			if m0 != null then
+				op.append("\"{m0.name}\"[URL=\"{m0.html_name}.html\"];\n")
+				for c in m0.mhe.direct_greaters do
+					if not cla.has(c) then continue
+					op.append("\"{m0.name}\"->\"{c.name}\";\n")
+				end
+			end
+		end
+		for m0 in ms do
+			# Close the nesting subgraph
+			if m0 != null then
+				op.append("\}\n")
+			end
+		end
+		for c in cla do
+			for c2 in c.tmhe.direct_greaters do
+				if not cla.has(c2) then continue
+				op.append("\"{c.name}\"->\"{c2.name}\";\n")
+			end
+		end
+		op.append("\}\n")
+		dctx.gen_dot(op.to_s, name.to_s)
+		dctx.add("</section>")
+
+		var clas = new Array[MMLocalClass]
+		var props = new HashMap[MMGlobalProperty, Array[MMLocalProperty]]
+		var gprops = new Array[MMLocalProperty]
+		do
+			var m = self
+			for g in m.global_classes do
+				var lc = m[g]
+				if not lc.require_doc(dctx) then continue
+				var im = g.intro.mmmodule
+				if self.visibility_for(im) <= 1 then continue # private import or invisible import
+				var keep = false
+				for lc2 in lc.crhe.greaters_and_self do
+					if not lc2 isa MMSrcLocalClass then continue
+					if not self.mnhe <= lc2.mmmodule then continue # not introduced/redefined here/stolen
+					keep = true
+				end
+				if not keep then continue
+				clas.add(self[g])
+				for gp in lc.global_properties do
+					if self.visibility_for(gp.intro.local_class.mmmodule) <= 1 then continue # private import or invisible import
+					var lp = lc[gp]
+					var mp = lp.local_class.mmmodule
+					if not self.mnhe <= mp then continue # not introduced/redefined here/stolen
+					lp = self[g][gp]
+					if not lp.require_doc(dctx) then continue
+					if props.has_key(lp.global) then
+						if not props[lp.global].has(lp) then
+							props[lp.global].add(lp)
+						end
+					else
+						props[lp.global] = [lp]
+						gprops.add(lp.global.intro)
+					end
+				end
+			end
+		end
+		dctx.add("<section class=\"module\">\n")
+		dctx.open_stage
+		dctx.stage("<article class=\"classes filterable\">\n")
+		dctx.stage("<h2>Classes</h2>\n")
+		dctx.sort(clas)
+		dctx.stage("<ul>\n")
+		for lc in clas do
+			if self.mnhe <= lc.global.intro.mmmodule then
+				dctx.add("<li class='intro'><span title='introduced in this module'>I</span>&nbsp;")
+			else
+				dctx.add("<li class='redef'><span title='refined in this module'>R</span>&nbsp;")
+			end
+			dctx.add("{lc.html_link(dctx)}</li>\n")
+		end
+		dctx.stage("</ul></article>\n")
+		dctx.close_stage
+
+		dctx.open_stage
+		dctx.stage("<article class=\"properties filterable\">\n")
+		dctx.stage("<h2>Properties</h2>\n")
+		dctx.sort(gprops)
+		dctx.stage("<ul>\n")
+		for lgp in gprops do
+			var gp = lgp.global
+			var lps = props[gp]
+
+			if gp.intro isa MMAttribute then continue
+			
+			var lpi = self[gp.intro.local_class.global][gp]
+		
+			if lps.has(lpi) then
+				dctx.add("<li class='intro'><span title='introduction in an other module'>I</span>&nbsp;<a href=\"{lpi.local_class.html_name}.html#{lpi.html_anchor}\">{lpi}&nbsp;({lpi.local_class})</a></li>\n")
+				lps.remove(lpi)
+			else
+				dctx.add("<li class='intro'><span title='introduction in this module'>I</span>&nbsp;{lpi}")
+				dctx.add("&nbsp;({lpi.local_class})</li>\n")
+			end
+			if lps.length >= 1 then
+				dctx.sort(lps)
+				for lp in lps do
+					dctx.add("<li class='redef'><span title='redefinition'>R</span>&nbsp;<a href=\"{lp.local_class.html_name}.html#{lp.html_anchor}\">{lp}&nbsp;({lp.local_class})</a></li>")
+				end
+			end
+		end
+		dctx.stage("</ul></article>\n")
+		dctx.close_stage
+
+
+		dctx.add("</div>\n")
+		dctx.add("</div>\n")
+	end
+
+	# Fill the body for the page associated to the full index
+	fun file_index_page_doc(dctx: DocContext)
+	do
+
+		dctx.add("<h1>Full Index</h1>\n")
+
+		var clas = new Array[MMLocalClass]
+		var props = new HashMap[MMGlobalProperty, Array[MMLocalProperty]]
+		var gprops = new Array[MMLocalProperty]
+		var mods = new Array[MMModule]
+		for m in mhe.greaters_and_self do
+			if not m.require_doc(dctx) then continue
+			mods.add(m)
+		end
+		for g in global_classes do
+			var lc = self[g]
+			if not lc.require_doc(dctx) then continue
+			clas.add(lc)
+			for gp in lc.global_properties do
+				var lp = lc[gp]
+				if not lp.require_doc(dctx) then continue
+				if props.has_key(lp.global) then
+					if not props[lp.global].has(lp) then
+						props[lp.global].add(lp)
+					end
+				else
+					props[lp.global] = [lp]
+					gprops.add(lp.global.intro)
+				end
+			end
+		end
+		dctx.open_stage
+		dctx.stage("<article class=\"modules filterable\">\n")
+		dctx.stage("<h2>Modules</h2>\n")
+		dctx.sort(mods)
+		dctx.stage("<ul>\n")
+		for m in mods do
+			dctx.add("<li>{m.html_link(dctx)}</li>")
+		end
+		dctx.stage("</ul></article>\n")
+		dctx.close_stage
+
+		dctx.open_stage
+		dctx.stage("<article class=\"classes filterable\">\n")
+		dctx.stage("<h2>Classes</h2>\n")
+		dctx.sort(clas)
+		dctx.stage("<ul>\n")
+		for lc in clas do
+			dctx.add("<li>{lc.html_link(dctx)}</li>")
+		end
+		dctx.stage("</ul></article>\n")
+		dctx.close_stage
+
+		dctx.open_stage
+		dctx.stage("<article class=\"properties filterable\">\n")
+		dctx.stage("<h2>Properties</h2>\n")
+		dctx.sort(gprops)
+		dctx.stage("<ul>\n")
+		for lgp in gprops do
+			var gp = lgp.global
+			var lps = props[gp]
+
+			if gp.intro isa MMAttribute then continue
+
+			var lpi = self[gp.intro.local_class.global][gp]
+			
+			lps.remove(lpi)
+				dctx.add("<li class='intro'><span title='introduction'>I</span>&nbsp;<a href=\"{lpi.local_class.html_name}.html#{lpi.html_anchor}\">{lpi}&nbsp;({lpi.local_class})</a></li>\n")
+			if lps.length >= 1 then
+				dctx.sort(lps)
+				for lp in lps do
+					dctx.add("<li class='redef'><span title='redefinition'>R</span>&nbsp;<a href=\"{lp.local_class.html_name}.html#{lp.html_anchor}\">{lp}&nbsp;({lp.local_class})</a></li>\n")
+				end
+			end
+		end
+		dctx.stage("</ul></article>\n")
+		dctx.close_stage
+	end
 end
 
 redef class MMLocalProperty
@@ -420,81 +733,18 @@ redef class MMLocalProperty
 
 	redef fun html_link(dctx)
 	do
-		var m = mmmodule
-		if not need_doc(dctx) then m = global.intro.mmmodule
-		m = dctx.known_owner_of(m)
-		if m == dctx.mmmodule then
-			return "<a href=\"#{html_anchor}\">{self}</a>"
-		else
-			return "<a href=\"{m}.html#{html_anchor}\">{self}</a>"
-		end
+		if not require_doc(dctx) then print "not required {self}"
+		return "<a href=\"{local_class.html_name}.html#{html_anchor}\">{self}</a>"
 	end
-	
+
+	fun html_link_special(dctx: DocContext, lc: MMLocalClass): String
+	do
+		if not require_doc(dctx) then print "not required {self}"
+		return "<a href=\"{lc.html_name}.html#{html_anchor}\">{self}</a>"
+	end
+
 	# Kind of property (fun, attr, etc.)
 	fun kind: String is abstract
-
-	redef fun locate(dctx)
-	do
-		return "in {mmmodule.html_link(dctx)}::{local_class.html_link(dctx)}"
-	end
-
-	fun known_intro_class(dctx: DocContext): MMLocalClass
-	do
-		var mod = dctx.known_owner_of(global.intro.local_class.mmmodule)
-		var cla = mod[global.intro.local_class.global]
-		return cla
-	end
-
-	redef fun prototype_head(dctx)
-	do
-		var res = new Buffer
-		var intro_class = known_intro_class(dctx)
-		var is_redef = local_class != intro_class
-
-		if is_redef then res.append("redef ")
-		if global.visibility_level == 2 then
-			res.append("protected ")
-		else if global.visibility_level == 3 then
-			res.append("private ")
-		end
-		res.append(kind)
-		if is_redef then
-			var gp = global.intro
-			if intro_class.global != local_class.global then
-				res.append(" {mmmodule[intro_class.global].html_link(dctx)}::")
-			else if intro_class.mmmodule != mmmodule then
-				res.append(" {intro_class.mmmodule.html_link(dctx)}::")
-			end
-		end
-		return res.to_s
-	end
-
-	redef fun prototype_body(dctx)
-	do
-		var res = new Buffer
-		res.append(signature.to_html(dctx, true))
-		var s = self
-		if s isa MMMethod then
-			if s.is_abstract then
-				res.append(" is abstract")
-			else if s.is_intern then
-				res.append(" is intern")
-			end
-		end
-		return res.to_s
-	end
-
-	redef fun need_doc(dctx)
-	do
-		if global.visibility_level >= 3 or self isa MMAttribute then
-			if not dctx.intrude_mode then return false
-			if dctx.mmmodule.visibility_for(mmmodule) == 0 then return false
-		end
-		if global.intro == self then
-			return true
-		end
-		return doc != null
-	end
 
 	redef fun short_doc
 	do
@@ -524,6 +774,177 @@ redef class MMLocalProperty
 			return d
 		end
 	end
+
+	# The most specific module in the nesting hierarchy that exports the intro of self
+	fun intro_module: MMModule
+	do
+		var m = global.intro.mmmodule
+		var mo = m.direct_owner
+		while mo != null and mo.visibility_for(m) >= 2 do 
+			m = mo
+			mo = m.direct_owner
+		end
+		return m
+	end
+
+	# Is the intro of self exported by the top-level module ?
+	fun is_toplevel: Bool
+	do
+		var m = intro_module
+		return m == m.toplevel_owner
+	end
+
+	# Return true if the global class must be documented according to the visibility configured
+	fun require_doc(dctx: DocContext): Bool
+	do
+		if global.visibility_level == 3 then return false # Private
+		if dctx.public_only then
+			var m = intro_module
+			if m != m.toplevel_owner then return false # Unexported
+		end
+		return true
+	end
+
+	# Document the global property in the global class lc
+	fun full_documentation(dctx: DocContext, lc: MMLocalClass)
+	do
+		var visibility: String
+		if global.visibility_level == 1 then
+			visibility = "public"
+		else if global.visibility_level == 2 then
+			visibility = "protected"
+		else if global.visibility_level == 3 then
+			visibility = "private"
+		else 
+			abort
+		end
+
+		var intro_class = global.intro.local_class
+		var is_redef = local_class.global != intro_class.global or local_class.mmmodule.toplevel_owner != intro_class.mmmodule.toplevel_owner
+
+		dctx.add("<article id=\"{html_anchor}\" class=\"{kind} {visibility} {if is_redef then "redef" else ""}\">\n")
+		dctx.add("<h3 class=\"signature\">{name}{signature.to_html(dctx, true)}</h3>\n")
+		dctx.add("<div class=\"info\">\n")
+		#dctx.add("<p>LP: {self.mmmodule.html_link(dctx)}::{self.local_class.html_link(dctx)}::{self.html_link(dctx)}</p>")
+
+		if is_redef then
+			dctx.add("redef ")
+		end
+		if not is_toplevel then
+			dctx.add("(unexported) ")
+		end
+		if global.visibility_level == 2 then
+			dctx.add("protected ")
+		else if global.visibility_level == 3 then
+			dctx.add("private ")
+		end
+		dctx.add(kind)
+		dctx.add(" {intro_class.mmmodule.toplevel_owner.name}")
+		if intro_class.global == lc.global then
+			dctx.add("::{lc.name}")
+		else
+			dctx.add("::{mmmodule[intro_class.global].html_link(dctx)}")
+		end
+		if is_redef then
+			dctx.add("::{mmmodule[intro_class.global][global].html_link(dctx)}")
+		else
+			dctx.add("::{name}")
+		end
+		dctx.add("</div>")
+
+		dctx.add("<div class=\"description\">")
+
+		# Collect all refinement of the global property in the same global property
+		var lps = new Array[MMLocalProperty]
+		for l in prhe.greaters_and_self do
+			lps.add(l)
+		end
+
+		var introdoc = false
+		if global.intro.doc != null then
+			for lp in lps do
+				if lp.doc == null then introdoc = true
+			end
+		end
+		if introdoc then
+			dctx.add("<pre>{global.intro.doc.to_html}</pre>")
+		end
+
+		var tlmods = new Array[MMModule]
+		for lp in lps do
+			var bm = lp.mmmodule.toplevel_owner
+			var lcm = lc.global.intro.mmmodule
+			if lcm.mhe < lp.mmmodule then bm = lcm.toplevel_owner
+			if not tlmods.has(bm) then tlmods.add(bm)
+		end
+
+		for tm in tlmods do
+			# Document the top level property for the current top level module
+			var tlp
+			if tm.global_classes.has(lc.global) then
+				tlp = tm[lc.global][self.global]
+				assert lps.has(tlp)
+			else if tm.global_classes.has(self.local_class.global) then
+				# Self is the inherited property. Process it
+				tlp = tm[self.local_class.global][self.global]
+				assert lps.has(tlp)
+			else
+				# We skip this module since the props defined by the module is  
+				continue
+			end
+
+			var tlcm = lc.global.intro.mmmodule.toplevel_owner
+			if not tlcm.mhe <= tm then
+				dctx.add("<h4>In module {tm.html_link(dctx)} :</h4>")
+			end
+
+			#dctx.add("<p>TLP: {tm} x {lc} : {tlp.full_name}</p>")
+
+			var doc = tlp.doc
+			if doc != null and (not introdoc or global.intro.doc != doc) then
+				dctx.add("<pre>{doc.to_html}</pre>")
+			end
+			dctx.add("<p>")
+			if tlp.local_class.global != lc.global then
+				dctx.add("inherited from {tlp.local_class.html_link(dctx)} ")
+			end
+			if tm != tlp.mmmodule then
+				dctx.add("defined by the module {tlp.mmmodule.html_link(dctx)} ")
+			end
+			var n = tlp.node
+			if n != null then
+				var l = n.location
+				dctx.show_source(l)
+			end
+			
+			dctx.open_stage
+			dctx.stage(". previously defined by:")
+			for lp in lps do
+				var tl = lp.mmmodule.toplevel_owner
+				if tl != tm then continue
+				if lp == tlp then continue
+				dctx.add(" {lp.mmmodule.html_link(dctx)}")
+				if lp.local_class.global != lc.global then
+					dctx.add(" for {lp.local_class.html_link(dctx)}")
+				end
+
+				n = lp.node
+				if n != null then
+					var l = n.location
+					dctx.show_source(l)
+				end
+
+				#var doc = lp.doc
+				#if doc != null and (not introdoc or global.intro.doc != doc) then
+				#	dctx.add("<pre>{doc.to_html}</pre>")
+				#end
+			end
+			dctx.close_stage
+			dctx.add("</p>")
+		end
+		dctx.add("</div>")
+		dctx.add("</article>")
+	end
 end
 redef class MMMethod
 	redef fun kind do return if global.is_init then "init" else "fun"
@@ -536,155 +957,6 @@ redef class MMTypeProperty
 end
 
 redef class MMSrcModule
-	# Extract and generate html file for the module
-	fun extract_module_doc(dctx: DocContext)
-	do
-		dctx.info("Generating HTML for module {name}",1)
-		dctx.register(self)
-
-		dctx.clear
-		extract_module_doc_inside(dctx)
-		dctx.write_to("{dctx.dir}/{name}.html")
-		
-		dctx.intrude_mode = true
-		dctx.clear
-		extract_module_doc_inside(dctx)
-		dctx.write_to("{dctx.dir}/{name}__.html")
-		dctx.intrude_mode = false
-
-		if directory.owner == self then
-			dctx.inside_mode = true
-			dctx.clear
-			extract_module_doc_inside(dctx)
-			dctx.write_to("{dctx.dir}/{name}_.html")
-			dctx.inside_mode = false
-		end
-	end
-
-	fun extract_module_doc_inside(dctx: DocContext)
-	do
-		dctx.add_header("Module {self}")
-		dctx.add("<h1>Module {self}</h1>\n<dl>")
-		var s = ""
-		var d: nullable MMDirectory = directory
-		while d != null do
-			if d.owner != null and (d.owner != self or dctx.inside_mode or dctx.intrude_mode) then
-				s = "{d.owner.html_link(dctx)}::{s}"
-			end
-			d = d.parent
-		end
-		dctx.add("{s}<br/>{prototype_head(dctx)}<b>{self}</b>{prototype_body(dctx)}<br/>\n")
-
-		var strs = new Array[String]
-		var intrude_modules = new Array[MMModule]
-		var public_modules = new Array[MMModule]
-		var private_modules = new Array[MMModule]
-		var owned_modules = dctx.owned_modules
-		owned_modules.clear
-		for m in mhe.greaters do
-			var v = visibility_for(m) 
-			if not dctx.inside_mode and not dctx.intrude_mode and m.directory.owner == self then 
-				if v >= 2 then owned_modules.add(m)
-				continue
-			end
-			if v == 3 then
-				intrude_modules.add(m)
-			else if v == 2 then
-				public_modules.add(m)
-			else if v == 1 then
-				private_modules.add(m)
-			end
-		end
-		if not intrude_modules.is_empty then
-			var mods = mhe.order.select_smallests(intrude_modules)
-			for i in mods do strs.add(i.html_link(dctx))
-			dctx.add("<dt>Intruded modules: <dd>{strs.join(", ")}\n")
-		end
-		if not public_modules.is_empty then
-			strs.clear
-			var mods = mhe.order.select_smallests(public_modules)
-			for i in mods do strs.add(i.html_link(dctx))
-			dctx.add("<dt>Imported modules: <dd>{strs.join(", ")}\n")
-		end
-		if not private_modules.is_empty then
-			strs.clear
-			var mods = mhe.order.select_smallests(private_modules)
-			for i in mods do strs.add(i.html_link(dctx))
-			dctx.add("<dt>Privatly imported modules: <dd>{strs.join(", ")}\n")
-		end
-		dctx.add("</dl>\n")
-
-		var doc = doc
-		if doc != null then dctx.add("<pre>{doc.to_html}</pre>\n")
-
-		var new_classes = new Array[MMLocalClass]
-		for c in local_classes do
-			if c.need_doc(dctx) then
-				new_classes.add(c)
-				if c.global.intro == c then
-					dctx.register(c)
-				end
-			else
-				for m in owned_modules do
-					if m.global_classes.has(c.global) then
-						var mc = m[c.global]
-						if mc.need_doc(dctx) then
-							new_classes.add(c)
-							break
-						end
-					end
-				end
-			end
-		end
-
-		if not new_classes.is_empty then
-			dctx.add("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
-			dctx.add("<tr bgcolor=\"#FF6347\"><th colspan=\"2\"><big>Main Summary of {self}</big></th><tr>\n")
-			for c in new_classes do
-				if c.global.intro == c or owned_modules.has(c.global.intro.mmmodule) then
-					var add = true
-					for p in c.cshe.direct_greaters do
-						if p.global.intro.mmmodule == self or owned_modules.has(p.global.intro.mmmodule) then
-							add = false
-						end
-					end
-					if add then
-						dctx.add("<tr><td width=\"20%\" align=\"right\"><u>Introduce</u> {c.prototype_head(dctx)}</td><td><b>{c.html_link(dctx)}</b>{c.prototype_body(dctx)}<br/>{c.short_doc}</td><tr>\n")
-					end
-				else
-					for p in c.local_local_properties do
-						if p.global.is_method and p.global.intro == p then
-							dctx.add("<tr><td width=\"20%\" align=\"right\"><u>Refine</u> <b>{c.html_link(dctx)}</b> <u>Introduce</u> {p.prototype_head(dctx)}</td><td><b>{p.html_link(dctx)}</b>{p.prototype_body(dctx)}<br/>&nbsp;&nbsp;&nbsp;&nbsp;{p.short_doc}</td></tr>\n")
-						end
-					end
-				end
-			end
-			dctx.add("</table><br/>\n")
-		end
-
-		if not new_classes.is_empty then 
-			dctx.sort(new_classes)
-			dctx.add("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
-			dctx.add("<tr bgcolor=\"#CCCCFF\"><th colspan=\"2\"><big>Class Summary of {self}</big></th><tr>\n")
-			for c in new_classes do
-				dctx.add("<tr><td width=\"20%\" align=\"right\">{c.prototype_head(dctx)}</td><td><b>{c.html_link(dctx)}</b>{c.prototype_body(dctx)}<br/>{c.short_doc}</td><tr>\n")
-			end
-			dctx.add("</table><br/>\n")
-		end
-
-		if not new_classes.is_empty then 
-			dctx.add("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
-			dctx.add("<tr bgcolor=\"#CCCCFF\"><th><big>Class Detail of {self}</big></th><tr>\n")
-			dctx.add("</table>\n")
-
-			for c in new_classes do
-				c.extract_class_doc(dctx)
-			end
-		end
-
-		dctx.add("</body></html>\n")
-	end
-
 	redef fun short_doc
 	do
 		var d = doc
@@ -734,363 +1006,310 @@ end
 
 redef class MMLocalClass
 	super MMEntity
+
 	# Anchor of the class description in the module html file
 	fun html_anchor: String do return "CLASS_{self}"
 
+	fun html_name: String do return "{self}"
+
 	redef fun html_link(dctx)
 	do
-		var m = mmmodule
-		if not need_doc(dctx) then m = global.mmmodule
-		m = dctx.known_owner_of(m)
-		if m == dctx.mmmodule then
-			return "<a href=\"#{html_anchor}\">{self}</a>"
-		else
-			return "<a href=\"{m}.html#{html_anchor}\">{self}</a>"
-		end
+		if not require_doc(dctx) then print "{dctx.filename}: not required {self}"
+		return "<a href=\"{html_name}.html\">{self}</a>"
 	end
 
 	redef fun short_doc do return global.intro.short_doc
 
 	redef fun doc do return global.intro.doc
 
-	redef fun need_doc(dctx) do
-		if mmmodule == dctx.mmmodule then
-			for m in dctx.owned_modules do
-				if m.global_classes.has(global) then
-					var c = m[global]
-					if c.need_doc(dctx) then return true
-				end
-			end
+	fun kind: String
+	do
+		if global.is_interface then
+			return "interface"
+		else if global.is_abstract then
+			return "abstract class"
+		else if global.is_enum then
+			return "enum"
+		else
+			return "class"
 		end
-		return false
 	end
 
-	redef fun locate(dctx) do return "in {mmmodule.html_link(dctx)}"
-
-	fun known_intro(dctx: DocContext): MMLocalClass do return dctx.known_owner_of(global.intro.mmmodule)[global]
-
-	redef fun prototype_head(dctx)
+	# The most specific module in the nesting hierarchy that exports the intro of self
+	fun intro_module: MMModule
 	do
-		var res = new Buffer
-		var ki = known_intro(dctx)
-		var is_redef = ki != self
-		if is_redef then res.append("redef ")
-		if global.visibility_level == 3 then res.append("private ")
-		res.append("class ")
-		if is_redef then res.append("{ki.mmmodule.html_link(dctx)}::")
-		return res.to_s
+		var m = global.intro.mmmodule
+		var mo = m.direct_owner
+		while mo != null and mo.visibility_for(m) >= 2 do 
+			m = mo
+			mo = m.direct_owner
+		end
+		return m
 	end
 
-	redef fun prototype_body(dctx)
+	fun menu_link(dctx: DocContext, p: MMLocalProperty)
 	do
-		var res = new Buffer
-		if arity > 0 then
-			res.append("[")
-			for i in [0..arity[ do
-				var t = get_formal(i)
-				res.append(t.name.to_s)
-				res.append(": ")
-				res.append(t.bound.html_link(dctx))
+		if p.local_class.global != self.global then
+			if p.global.intro.local_class.name == "Object".to_symbol then return
+			if p.global.is_init or p isa MMTypeProperty then
+				dctx.add("<li class='inherit'><span title='Inherited'>H</span>&nbsp;{p.html_link_special(dctx, self)}</li>\n")
+			else
+				dctx.add("<li class='inherit'><span title='Inherited'>H</span>&nbsp;{p.html_link(dctx)}</li>\n")
 			end
-			res.append("]")
+		else if p.global.intro.local_class.global == self.global then
+			dctx.add("<li class='intro'><span title='Introduced'>I</span>&nbsp;{p.html_link_special(dctx, self)}</li>\n")
+		else
+			dctx.add("<li class='redef'><span title='Redefined'>R</span>&nbsp;{p.html_link_special(dctx, self)}</li>\n")
 		end
-		return res.to_s
 	end
 
-	# Extract the doc of a class
-	fun extract_class_doc(dctx: DocContext)
+	# Return true if the global class must be documented according to the visibility configured
+	fun require_doc(dctx: DocContext): Bool
 	do
-		dctx.add("<a name=\"{html_anchor}\"></a><h2>{self}</h2><small>{mmmodule.html_link(dctx)}::</small><br/>{prototype_head(dctx)}<b>{self}</b>{prototype_body(dctx)}\n")
-		dctx.add("<blockquote>\n")
-		dctx.add("<dl>\n")
+		if global.visibility_level == 3 then return false # Private
+		if dctx.public_only then
+			var m = intro_module
+			if m != m.toplevel_owner then return false # Unexported
+		end
+		return true
+	end
 
-		var sup2 = new Array[String]
-		var intro_module = dctx.known_owner_of(global.mmmodule)
-		if intro_module != mmmodule then
-			dctx.add("<dt>Refine {self} from: <dd>{intro_module.html_link(dctx)}\n")
-			sup2.clear
-			var mods = new Array[MMModule]
-			for c in crhe.greaters do
-			 	if c.need_doc(dctx) then
-					var km = dctx.known_owner_of(c.mmmodule)
-					if km != mmmodule and km != intro_module and not mods.has(km) then
-						mods.add(km)
-					end
-				end
-			end
-			for c in crhe.linear_extension do
-				if mods.has(c.mmmodule) then sup2.add(c.mmmodule.html_link(dctx))
-			end
-			if not sup2.is_empty then dctx.add("<dt>Previous refinements in: <dd>{sup2.join(", ")}\n")
-		end
-		if not cshe.greaters.is_empty then
-			sup2.clear
-			var clas = new Array[MMLocalClass]
-			for c in cshe.direct_greaters do
-				sup2.add(c.html_link(dctx))
-			end
-			dctx.add("<dt>Direct superclasses: <dd>{sup2.join(", ")}\n")
-			sup2.clear
-			for c in cshe.linear_extension do
-				if c != self then sup2.add(c.html_link(dctx))
-			end
-			dctx.add("<dt>All superclasses: <dd>{sup2.join(", ")}\n")
-		end
-		if not cshe.direct_smallers.is_empty then
-			sup2.clear
-			for c in cshe.direct_smallers do
-				sup2.add(c.html_link(dctx))
-			end
-			dctx.add("<dt>Direct subclasses: <dd>{sup2.join(", ")}\n")
-		end
-		sup2.clear
-		for c in crhe.smallers do
-			c.compute_super_classes
-			for c2 in c.mmmodule.local_classes do
-				if not c2 isa MMConcreteClass then continue
-				c2.compute_super_classes
-				c2.compute_ancestors
-			end
-			for c2 in c.cshe.direct_smallers do
-				if c2.global.intro == c2 then
-					sup2.add("{c2.html_link(dctx)}")
-				end
-			end
-		end
-		if not sup2.is_empty then
-			dctx.add("<dt>Other direct subclasses in known modules: <dd>{sup2.join(", ")}\n")
-		end
-		sup2.clear
-		for c in crhe.order do
-			if not mmmodule.mhe <= c.mmmodule and c.need_doc(dctx) then
-				sup2.add(c.mmmodule.html_link(dctx))
-			end
-		end
-		if not sup2.is_empty then
-			dctx.add("<dt>Refinements in known modules: <dd>{sup2.join(", ")}\n")
-		end
-		dctx.add("</dl>\n")
+	# Fill the body for the page associated to the global class
+	fun file_page_doc(dctx: DocContext)
+	do
+		dctx.add("<div class=\"menu\">\n")
 
+		var props = new Array[MMLocalProperty]
+		var inh = new HashMap[MMLocalClass, Array[MMLocalProperty]]
+		var inhs = new Array[MMLocalClass]
+		for g in global_properties do
+			var p = self[g]
+			if not p.require_doc(dctx) then continue
+			if p.local_class.global == global or g.is_init_for(self) or p isa MMTypeProperty then
+				props.add(p)
+			else
+				var lc = mmmodule[p.local_class.global]
+				if inh.has_key(lc) then
+					inh[lc].add(p)
+				else
+					inh[lc] = [p]
+					inhs.add(lc)
+				end
+				props.add(p)
+			end
+		end
+		dctx.sort(props)
+
+		dctx.add("<nav class=\"properties filterable\">\n")
+		dctx.add("<h3>Properties</h3>\n")
+		dctx.open_stage
+		dctx.stage("<h4>Virtual Types</h4>\n<ul>\n")
+		for p in props do
+			if p isa MMTypeProperty then
+				menu_link(dctx, p)
+			end
+		end
+		dctx.stage("</ul>\n")
+		dctx.close_stage
+		dctx.open_stage
+		dctx.stage("<h4>Constructors</h4>\n<ul>\n")
+		for p in props do
+			if p.global.is_init_for(self) then
+				menu_link(dctx, p)
+			end
+		end
+		dctx.stage("</ul>\n")
+		dctx.close_stage
+		dctx.open_stage
+		dctx.stage("<h4>Methods</h4>\n<ul>\n")
+		for p in props do
+			if not p.global.is_init and p isa MMMethod then
+				menu_link(dctx, p)
+			end
+		end
+		dctx.stage("</ul>\n")
+		dctx.close_stage
+		dctx.add("</nav>\n")
+
+		dctx.add("<nav class=\"inheritance filterable\">\n")
+		dctx.add("<h3>Inheritance</h3>\n")
+		dctx.add("<h4>Superclasses</h3>\n<ul>\n")
+		for lc in cshe.linear_extension do
+			if lc == self then continue
+			if not lc.require_doc(dctx) then continue
+			dctx.add("<li>{lc.html_link(dctx)}</li>\n")
+		end
+		dctx.add("</ul>\n")
+		if cshe.smallers.length == 0 then 
+			dctx.add("<h4>No Known Subclasses</h4>\n")
+		else if cshe.smallers.length <= 100 then 
+			dctx.add("<h4>Subclasses</h4>\n")
+			dctx.add("<ul>\n")
+			for lc in cshe.smallers do
+				if not lc.require_doc(dctx) then continue
+				dctx.add("<li>{lc.html_link(dctx)}</li>\n")
+			end
+			dctx.add("</ul>\n")
+		else if cshe.direct_smallers.length <= 100 then 
+			dctx.add("<h4>Direct Subclasses Only</h4>\n<ul>\n")
+			for lc in cshe.direct_smallers do
+				if not lc.require_doc(dctx) then continue
+				dctx.add("<li>{lc.html_link(dctx)}</li>\n")
+			end
+			dctx.add("</ul>\n")
+		else
+			dctx.add("<h4>Too much Subclasses to list</h4>\n")
+		end
+		dctx.add("</nav>\n")
+
+		dctx.add("</div>\n")
+
+
+		dctx.add("<div class=\"content\">\n")
+		dctx.add("<h1>{name}</h1>\n")
+		dctx.add("<div class='subtitle'>")
+		if global.visibility_level == 2 then
+			abort
+		else if global.visibility_level == 3 then
+			dctx.add("private ")
+		else if self.global.intro.mmmodule.toplevel_owner.visibility_for(self.global.intro.mmmodule) <= 1 then
+			dctx.add("(unexported) ")
+		end
+		dctx.add("{kind} {global.intro.mmmodule.toplevel_owner.html_link(dctx)}::{name}</div>")
+
+		dctx.add("<section class=\"description\">\n")
 		var doc = doc
 		if doc != null then
 			dctx.add("<pre>{doc.to_html}</pre>\n")
 		end
 
-		var details = new Array[Array[MMLocalProperty]]
-		for i in [0..4[ do details.add(property_summary(dctx, i))
-		for i in [0..4[ do property_detail(dctx, i, details[i])
-
-		dctx.add("</blockquote><hr/>\n")
-	end
-
-	fun pass_name(pass: Int): String
-	do
-		var names = once ["Virtual Types", "Consructors", "Methods", "Attributes"]
-		return names[pass]
-	end
-	
-	fun accept_prop(p: MMLocalProperty, pass: Int): Bool
-	do
-		if pass == 0 then
-			return p isa MMTypeProperty
-		else if pass == 1 then
-			return p.global.is_init
-		else if pass == 2 then
-			return p isa MMMethod and not p.global.is_init
-		else if pass == 3 then
-			return p isa MMAttribute
+		var cla = new HashSet[MMLocalClass]
+		var sm = new HashSet[MMLocalClass]
+		var sm2 = new HashSet[MMLocalClass]
+		sm.add(self)
+		while cla.length + sm.length < 10 and sm.length > 0 do
+			cla.add_all(sm)
+			sm2.clear
+			for x in sm do
+				sm2.add_all(x.cshe.direct_smallers)
+			end
+			var t = sm
+			sm = sm2
+			sm2 = t
 		end
-		abort
-	end
+		cla.add_all(cshe.greaters_and_self)
 
-	fun property_summary(dctx: DocContext, pass: Int): Array[MMLocalProperty]
-	do
-		var passname = pass_name(pass)
-		dctx.open_stage
-		dctx.stage("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
-		dctx.stage("<tr bgcolor=\"#CCCCFF\"><th colspan=\"2\">{passname} Summary of {self}</th></tr>\n")
-
-		var new_props = new Array[MMLocalProperty]
-		for g in global_properties do
-			if not accept_prop(g.intro, pass) then continue
-			if mmmodule.visibility_for(g.intro.mmmodule) < g.visibility_level then continue
-			var p = self[g]
-			if p.local_class != self or not p.need_doc(dctx) then
-				var cla = new Array[MMLocalClass]
-				for m in dctx.owned_modules do
-					if not m.global_classes.has(global) then continue
-					var c = m[global]
-					if not c isa MMConcreteClass then continue
-					if not c.has_global_property(g) then continue
-					var p2 = c[g]
-					if p2.local_class != c or not p2.need_doc(dctx) then continue
-					cla.add(c)
-				end
-				if cla.is_empty then continue
-				cla = crhe.order.select_smallests(cla)
-			end
-
-			new_props.add(p)
-			if p.global.intro == p then
-				dctx.register(p)
-			end
-		end
-		dctx.sort(new_props)
-		for p in new_props do
-			dctx.add("<tr><td width=\"20%\" align=\"right\">{p.prototype_head(dctx)}</td><td><b>{p.html_link(dctx)}</b>{p.prototype_body(dctx)}<br/>&nbsp;&nbsp;&nbsp;&nbsp;{p.short_doc}</td></tr>\n")
-		end
-		dctx.stage("</table><br/>\n")
-
-		dctx.open_stage
-		dctx.stage("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
-		if pass != 1 then
-			# skip pass 1 because constructors are not inherited
-			var cmap = new HashMap[MMLocalClass, Array[MMLocalProperty]]
-			var mmap = new HashMap[MMModule, Array[MMLocalProperty]]
-			for c in che.greaters do
-				if c isa MMSrcLocalClass then
-					var km = dctx.known_owner_of(c.mmmodule)
-					var kc = km[c.global]
-					if kc == self then continue
-					var props: Array[MMLocalProperty]
-					if km == mmmodule then
-						if cmap.has_key(kc) then
-							props = cmap[kc]
-						else
-							props = new Array[MMLocalProperty]
-							cmap[kc] = props
-						end
-					else
-						if mmap.has_key(km) then
-							props = mmap[km]
-						else
-							props = new Array[MMLocalProperty]
-							mmap[km] = props
-						end
-					end
-					for g in c.global_properties do
-						var p = c[g]
-						if p.local_class == c and p.need_doc(dctx) and accept_prop(p, pass) then
-							props.add(kc[g])
-						end
-					end
-				end
-			end
-			dctx.open_stage
-			dctx.stage("<tr bgcolor=\"#EEEEFF\"><th colspan=\"2\"><small>Inherited {passname}</small></th><tr>\n")
-			for c in cshe.linear_extension do
-				if not cmap.has_key(c) then continue
-				var props = cmap[c]
-				if props.is_empty then continue
-				dctx.sort(props)
-				var properties = new Array[String]
-				for p in props do properties.add(p.html_link(dctx))
-				dctx.add("<tr><td width=\"20%\"><small>from {c.html_link(dctx)}</small></td><td><small>{properties.join(", ")}</small></td><tr>\n")
-			end
-			dctx.close_stage
-
-			dctx.open_stage
-			dctx.stage("<tr bgcolor=\"#EEEEFF\"><th colspan=\"2\"><small>Imported {passname}</small></th><tr>\n")
-			for m in mmmodule.mhe.linear_extension do
-				if not mmap.has_key(m) then continue
-				var props = mmap[m]
-				if props.is_empty then continue
-				dctx.sort(props)
-				var properties = new Array[String]
-				for p in props do properties.add(p.html_link(dctx))
-				dctx.add("<tr><td width=\"20%\"><small>from {m.html_link(dctx)}</small></td><td><small>{properties.join(", ")}</small></td><tr>\n")
-			end
-			dctx.close_stage
-		end
-
-		var mmap = new HashMap[MMModule, Array[MMLocalProperty]]
-		for c in crhe.order do
-			if mmmodule.mhe <= c.mmmodule or dctx.owned_modules.has(c.mmmodule) or not c isa MMSrcLocalClass then continue
-			var km = dctx.known_owner_of(c.mmmodule)
-			if mmmodule.mhe <= km then continue
-			var kc = km[c.global]
-			var props: Array[MMLocalProperty]
-			if mmap.has_key(km) then
-				props = mmap[km]
+		var op = new Buffer
+		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
+		for c in cla do
+			if c == self then
+				op.append("\"{c.name}\"[shape=box,margin=0.03];\n")
 			else
-				props = new Array[MMLocalProperty]
-				mmap[km] = props
+				op.append("\"{c.name}\"[URL=\"{c.html_name}.html\"];\n")
 			end
-			for g in c.global_properties do
-				var p = c[g]
-				if p.local_class == c and p.need_doc(dctx) and accept_prop(p, pass) then
-					var kp = kc[g]
-					if not props.has(kp) then props.add(kp)
+			for c2 in c.cshe.direct_greaters do
+				if not cla.has(c2) then continue
+				op.append("\"{c.name}\"->\"{c2.name}\";\n")
+			end
+			if not c.cshe.direct_smallers.is_empty then
+				var others = true
+				for c2 in c.cshe.direct_smallers do
+					if cla.has(c2) then others = false
+				end
+				if others then
+					op.append("\"{c.name}...\"[label=\"\"];\n")
+					op.append("\"{c.name}...\"->\"{c.name}\"[style=dotted];\n")
 				end
 			end
-			# c.properties_inherited_from(dctx, self, pass)
 		end
-		dctx.open_stage
-		dctx.stage("<tr bgcolor=\"#EEEEFF\"><th colspan=\"2\"><small>Added {passname} in known modules</small></th><tr>\n")
-		for c in crhe.order do
-			var m = c.mmmodule
-			if not mmap.has_key(m) then continue
-			var props = mmap[m]
-			if props.is_empty then continue
-			dctx.sort(props)
-			var properties = new Array[String]
-			for p in props do properties.add(p.html_link(dctx))
-			dctx.add("<tr><td width=\"20%\"><small>in {m.html_link(dctx)}</small></td><td><small>{properties.join(", ")}</small></td><tr>\n")
+		op.append("\}\n")
+		dctx.gen_dot(op.to_s, name.to_s)
+
+
+		var mods = new Array[MMModule]
+		mods.add(global.intro.mmmodule.toplevel_owner)
+		for lc in crhe.greaters do
+			if not lc isa MMSrcLocalClass then continue
+			var m = lc.mmmodule.toplevel_owner
+			if not mods.has(m) then mods.add(m)
 		end
-		dctx.close_stage
-		dctx.stage("</table><br/><br/>\n")
-		dctx.close_stage
-
-		dctx.close_stage
-		return new_props
-	end
-
-	fun property_detail(dctx: DocContext, pass: Int, new_props: Array[MMLocalProperty])
-	do
-		var passname = pass_name(pass)
-		dctx.open_stage
-		dctx.stage("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
-		dctx.stage("<tr bgcolor=\"#CCCCFF\"><th>{passname} Detail of {self}</th><tr>\n")
-		dctx.stage("</table>\n")
-
-		dctx.open_stage
-		for p in new_props do
-			dctx.add("<a name=\"{p.html_anchor}\"></a><h3>{p}</h3><p><small>{p.mmmodule.html_link(dctx)}::{p.local_class.html_link(dctx)}::</small><br/>{p.prototype_head(dctx)} <b>{p.name}</b>{p.prototype_body(dctx)}</p>\n")
-			dctx.add("<blockquote>")
-			var doc = p.doc
-			if doc != null then
-				dctx.add("<pre>{doc.to_html}</pre>\n")
-			end
-			dctx.stage("</blockquote>\n")
-			dctx.close_stage
-
-			dctx.open_stage
-			dctx.stage("<hr/>\n")
-		end
-		dctx.close_stage
-
-		dctx.close_stage
-	end
-
-	# Add rows for properties inheriterd to some heirs
-	fun properties_inherited_from(dctx: DocContext, heir: MMLocalClass, pass: Int)
-	do
-		var properties = new Array[String]
-		for g in global_properties do
-			var p = self[g]
-			if p.local_class == self and p.need_doc(dctx) and accept_prop(p, pass) then
-				properties.add(p.html_link(dctx))
-			end
-		end
-		if not properties.is_empty then
-			var s: String
-			if heir.global == global then
-				s = mmmodule.html_link(dctx)
+		dctx.sort(mods)
+		for m in mods do
+			if m == global.intro.mmmodule.toplevel_owner then
+				dctx.add("<p>Introduced by {m.html_link(dctx)}")
 			else
-				s = self.html_link(dctx)
+				dctx.add("<p>Refined by {m.html_link(dctx)}")
 			end
-			dctx.add("<tr><td width=\"20%\"><small>in {s}</small></td><td><small>{properties.join(", ")}</small></td><tr>\n")
+			dctx.open_stage
+			dctx.stage(". Definition in:")
+			for lc in crhe.greaters do
+				if lc.mmmodule.toplevel_owner != m then continue
+				dctx.add(" {lc.mmmodule.html_link(dctx)}")
+				assert lc isa MMSrcLocalClass
+				var n = lc.node
+				if n != null then
+					dctx.show_source(n.location)
+				end
+			end
+			dctx.close_stage
+			dctx.add("</p>\n")
 		end
+		dctx.add("</ul>\n")
+		
+		dctx.add("</section>\n")
+
+		dctx.open_stage
+		dctx.stage("<section class=\"types\">\n")
+		dctx.stage("<h2>Formal and Virtual Types</h2>\n")
+		for i in [0..arity[ do
+			var f = get_formal(i)
+			f.full_documentation(dctx, self)
+		end
+		for p in props do
+			if not p isa MMTypeProperty then continue
+			p.full_documentation(dctx, self)
+		end
+		dctx.stage("</section>\n")
+		dctx.close_stage
+
+		dctx.open_stage
+		dctx.stage("<section class=\"constructors\">\n")
+		dctx.stage("<h2 class=\"section-header\">Constructors</h2>\n")
+		for p in props do
+			if not p.global.is_init_for(self) then continue
+			p.full_documentation(dctx, self)
+		end
+		dctx.stage("</section>\n")
+		dctx.close_stage
+
+		dctx.open_stage
+		dctx.stage("<section class=\"methods\">\n")
+		dctx.stage("<h2 class=\"section-header\">Methods</h2>\n")
+		for p in props do
+			if p.global.is_init then continue
+			if p.local_class.global != self.global then continue
+			if not p isa MMMethod then continue
+			p.full_documentation(dctx, self)
+		end
+		if not inhs.is_empty then
+			dctx.open_stage
+			dctx.stage("<h3>Inherited Methods</h4>\n")
+			for lc in inhs do
+				dctx.open_stage
+				dctx.stage("<p>Defined in {lc.html_link(dctx)}:")
+				for p in inh[lc] do
+					if p.global.is_init then continue
+					if not p isa MMMethod then continue
+					dctx.add(" {p.html_link(dctx)}")
+				end
+				dctx.stage("</p>")
+				dctx.close_stage
+			end
+			dctx.close_stage
+		end
+		dctx.add("</section>\n")
+		dctx.close_stage
+		dctx.add("</div> <!-- end class {name} -->\n")
 	end
 end
 
@@ -1124,23 +1343,6 @@ redef class MMSrcLocalClass
 			return d
 		end
 	end
-
-	redef fun need_doc(dctx)
-	do
-		if global.visibility_level >= 3 then
-			if not dctx.intrude_mode then return false
-			if dctx.mmmodule.visibility_for(mmmodule) == 0 then return false
-		end
-		if global.intro == self then
-			return true
-		end
-		for p in src_local_properties do
-			if p.need_doc(dctx) then
-				return true
-			end
-		end
-		return super
-	end
 end
 
 redef class MMSignature
@@ -1150,9 +1352,13 @@ redef class MMSignature
 		var res = new Buffer
 		if arity > 0 then
 			res.append("(")
+			res.append(self.params[0].name.to_s)
+			res.append(": ")
 			res.append(self[0].html_link(dctx))
 			for i in [1..arity[ do
 				res.append(", ")
+				res.append(self.params[i].name.to_s)
+				res.append(": ")
 				res.append(self[i].html_link(dctx))
 			end
 			res.append(")")
@@ -1198,6 +1404,34 @@ redef class MMTypeGeneric
 		res.append("]")
 		return res.to_s
 	end
+end
+
+redef class MMTypeFormalParameter
+	fun html_anchor: String
+	do
+		return "FT_{local_class}_{cmangle(name)}"
+	end
+	redef fun html_link(dctx)
+	do
+		return "<a href=\"#{html_anchor}\">{name}</a>"
+	end
+	fun full_documentation(dctx: DocContext, lc: MMLocalClass)
+	do
+		dctx.add("<article id=\"{html_anchor}\">\n")
+		dctx.add("<h3 class=\"signature\">{name}: {bound.html_link(dctx)}</h3>\n")
+		dctx.add("<div class=\"info\">")
+		dctx.add("formal generic type")
+		dctx.add("</div>")
+		dctx.add("</article>")
+	end
+end
+
+redef class MMNullableType
+	redef fun html_link(dctx) do return "nullable " + as_notnull.html_link(dctx)
+end
+
+redef class MMVirtualType
+	redef fun html_link(dctx) do return property.html_link(dctx)
 end
 
 var c = new DocContext

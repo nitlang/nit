@@ -10,4 +10,6 @@ usage: nitdoc [options] file...
   -h, -?, --help          Show Help (This screen)
   --version               Show version and exit
   -v, --verbose           Verbose
+  --public                Generate only the public API
   -d, --dir               Directory where doc is generated
+  --source                What link for source (%f for filename, %l for first line, %L for last line)
