@@ -21,6 +21,23 @@ package mmbuilder
 
 import syntax_base
 
+redef class ToolContext
+	redef fun handle_property_conflict(lc, impls)
+	do
+		var location: nullable Location = null
+		if lc isa MMSrcLocalClass then
+			var node = lc.node
+			if node != null then node.location
+		end
+		#if location == null then location = lc.mmmodule.location
+		var clas = new Array[MMLocalClass]
+		for i in impls do
+			clas.add(i.local_class)
+		end
+		self.fatal_error(location, "Property inheritance conflict in class {lc} for `{impls.first.name}': conflicting properties are defined in {clas.join(", ")}")
+	end
+end
+
 # Class specialization hierarchy sorter
 private class CSHSorter
 	super AbstractSorter[MMLocalClass]
