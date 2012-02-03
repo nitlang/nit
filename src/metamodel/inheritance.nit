@@ -20,6 +20,23 @@ package inheritance
 
 intrude import static_type
 
+redef class MMContext
+	# Method to redefine to handle the property conflicts
+	# FIXME: This is just a bad workaround because of a bad design
+	fun handle_property_conflict(lc: MMLocalClass, impls2: Array[MMLocalProperty])
+	do
+		var glob = impls2.first.global
+		stderr.write("Fatal error: inherit_local_property error\n")
+		print("------- {lc.mmmodule}::{lc} {glob.intro.full_name}")
+		for i in impls2 do
+			print("   {i.full_name}")
+		end
+		print("------- {glob.property_hierarchy.first}")
+		print("------- {glob.property_hierarchy.to_dot}")
+		exit(1)
+	end
+end
+
 redef class MMModule
 	# The root of the class hierarchy
 	fun type_any: MMType
@@ -402,14 +419,7 @@ redef class MMLocalClass
 			var impls2 = ghier.select_smallests(impls)
 			# Conflict case (FIXME)
 			if impls2.length != 1 then
-				stderr.write("Fatal error: inherit_local_property error\n")
-				print("------- {mmmodule}::{self} {glob.intro.full_name}")
-				for i in impls2 do
-					print("   {i.full_name}")
-				end
-				print("------- {glob.property_hierarchy.first}")
-				print("------- {glob.property_hierarchy.to_dot}")
-				exit(1)
+				self.mmmodule.context.handle_property_conflict(self, impls2)
 			end
 			impl = impls2.first
 		end
