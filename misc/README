@@ -1,0 +1,4 @@
+* gtksourceview (gedit and other GTK editors)
+  To install in your home, just link (or copy) the language definition file in ~/.local/share/gtksourceview-2.0/language-specs
+
+

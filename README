@@ -30,6 +30,7 @@ Important files and directory:
 	doc/		Documentation
 	examples/	Program examples written in Nit
 	LICENCE		License of the software
+	misc/		Some additional file for commons text editors and tools
 	tests/		Non-regression test-suite
 	lib/		Nit standard library
 	Makefile	Bootstrap the Nit tools
