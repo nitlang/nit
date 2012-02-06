@@ -158,6 +158,6 @@ fi
 done
 
 if [ $vverbose = true  ] ; then
-	echo "* $CC $OPTS -lm $objs -o $out" >&2
+	echo "* $CC $OPTS $objs -lm -o $out" >&2
 fi
-$CC $OPTS -lm $objs -o "$out"
+$CC $OPTS $objs -lm -o "$out"
