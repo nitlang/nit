@@ -142,16 +142,18 @@ class DocContext
 			m.tmhe_ = tmh.add(m, pub)
 		end
 
-		var head = "<script type=\"text/javascript\" src=\"http://moz-concept.com/nitdoc/scripts/jquery-1.7.1.min.js\"></script>\n" + 
+		var head = "<meta charset=\"utf-8\">" +
+			"<script type=\"text/javascript\" src=\"http://moz-concept.com/nitdoc/scripts/jquery-1.7.1.min.js\"></script>\n" + 
 			"<script type=\"text/javascript\" src=\"http://moz-concept.com/nitdoc/scripts/js-facilities.js\"></script>\n" +
-			"<link rel=\"stylesheet\" href=\"http://moz-concept.com/nitdoc/styles/main.css\" type=\"text/css\"  media=\"screen\">"
+			"<link rel=\"stylesheet\" href=\"http://moz-concept.com/nitdoc/styles/main.css\" type=\"text/css\"  media=\"screen\" />"
 
-		var action_bar = "<header><nav class='main'><ul><li><a href='.'>Overview</a></li><li><a href='full-index.html'>Full Index</a></li></ul></nav></header>\n"
+		var action_bar = "<header><nav class='main'><ul><li class=\"current\">Overview</li><li><a href='full-index.html'>Full Index</a></li></ul></nav></header>\n"
 
 		# generate the index
 		self.filename = "index.html"
 		clear
-		add("<html><head>{head}</head><body>\n")
+		add("<!DOCTYPE html>")
+		add("<html><head>{head}<title>Index</title></head><body>\n")
 		add(action_bar)
 		add("<div class=\"page\">")
 		add("<div class=\"content fullpage\">")
@@ -179,7 +181,7 @@ class DocContext
 			end
 		end
 		op.append("\}\n")
-		self.gen_dot(op.to_s, "dep")
+		self.gen_dot(op.to_s, "dep", "Modules hierarchy")
 		add("</article></div>")
 		add("<div class='clear'></div>")
 		add("</div>")
@@ -192,7 +194,9 @@ class DocContext
 			assert mod isa MMSrcModule
 			if not mod.require_doc(self) then continue
 			self.filename = mod.html_name
+			action_bar = "<header><nav class='main'><ul><li><a href='./'>Overview</a></li><li class=\"current\">{mod.name}</li><li><a href='full-index.html'>Full Index</a></li></ul></nav></header>\n"
 			clear
+			add("<!DOCTYPE html>")
 			add("<html><head>{head}<title>Module {mod.name}</title></head><body>\n")
 			add(action_bar)
 			add("<div class=\"page\">")
@@ -206,7 +210,9 @@ class DocContext
 		for c in mainmod.local_classes do
 			if not c.require_doc(self) then continue
 			self.filename = c.html_name
+			action_bar = "<header><nav class='main'><ul><li><a href='./'>Overview</a></li><li>{c.global.intro.mmmodule.toplevel_owner.html_link(self)}</li><li class=\"current\">{c.name}</li><li><a href='full-index.html'>Full Index</a></li></ul></nav></header>\n"
 			clear
+			add("<!DOCTYPE html>")
 			add("<html><head>{head}<title>Class {c.name}</title></head><body>\n")
 			add(action_bar)
 			add("<div class=\"page\">")
@@ -217,8 +223,10 @@ class DocContext
 		end
 
 		self.filename = "fullindex"
+		action_bar = "<header><nav class='main'><ul><li><a href='./'>Overview</a></li><li class=\"current\">Full Index</li></ul></nav></header>\n"
 		clear
-		add("<html><head>{head}</head><body>\n")
+		add("<!DOCTYPE html>")
+		add("<html><head>{head}<title>Full Index</title></head><body>\n")
 		add(action_bar)
 		add("<div class=\"page\">")
 		add("<div class=\"content fullpage\">")
@@ -251,13 +259,13 @@ class DocContext
 	# Generate a clicable graphiz image using a dot content.
 	# `name' refer to the filename (without extension) and the id name of the map.
 	# `name' must also match the name of the graph in the dot content (eg. digraph NAME {...)
-	fun gen_dot(dot: String,  name: String)
+	fun gen_dot(dot: String,  name: String, alt: String)
 	do
 		var f = new OFStream.open("{self.dir}/{name}.dot")
 		f.write(dot)
 		f.close
 		sys.system("\{ test -f {self.dir}/{name}.png && test -f {self.dir}/{name}.s.dot && diff {self.dir}/{name}.dot {self.dir}/{name}.s.dot >/dev/null 2>&1 ; \} || \{ cp {self.dir}/{name}.dot {self.dir}/{name}.s.dot && dot -Tpng -o{self.dir}/{name}.png -Tcmapx -o{self.dir}/{name}.map {self.dir}/{name}.s.dot ; \}")
-		self.add("<div><img src=\"{name}.png\" usemap=\"#{name}\" style=\"margin:auto\"/></div>")
+		self.add("<article class=\"graph\"><img src=\"{name}.png\" usemap=\"#{name}\" style=\"margin:auto\" alt=\"{alt}\"/></article>")
 		var fmap = new IFStream.open("{self.dir}/{name}.map")
 		self.add(fmap.read_all)
 		fmap.close
@@ -552,7 +560,7 @@ redef class MMModule
 			end
 		end
 		op.append("\}\n")
-		dctx.gen_dot(op.to_s, name.to_s)
+		dctx.gen_dot(op.to_s, name.to_s, "Dependency graph for module {name}")
 		dctx.add("</section>")
 
 		var clas = new Array[MMLocalClass]
@@ -637,9 +645,7 @@ redef class MMModule
 		end
 		dctx.stage("</ul></article>\n")
 		dctx.close_stage
-
-
-		dctx.add("</div>\n")
+		dctx.add("</section>\n")
 		dctx.add("</div>\n")
 	end
 
@@ -956,6 +962,42 @@ redef class MMTypeProperty
 	redef fun kind do return "type"
 end
 
+redef class Symbol
+	# Replace < and > with html entities
+	redef fun to_s
+	do
+		var ret = super.to_s
+
+		if(ret.has('<')) then
+			var parts = ret.split_with("<")
+			ret = ""
+
+			for i in [0..parts.length[ do
+				ret += parts[i]
+
+				if(i < parts.length - 1) then
+					ret += "&lt;"
+				end
+			end
+		end
+
+		if(ret.has('>')) then
+			var parts = ret.split_with(">")
+			ret = ""
+
+			for i in [0..parts.length[ do
+				ret += parts[i]
+
+				if(i < parts.length - 1) then
+					ret += "&gt;"
+				end
+			end
+		end
+		
+		return ret
+	end
+end
+
 redef class MMSrcModule
 	redef fun short_doc
 	do
@@ -1133,7 +1175,7 @@ redef class MMLocalClass
 
 		dctx.add("<nav class=\"inheritance filterable\">\n")
 		dctx.add("<h3>Inheritance</h3>\n")
-		dctx.add("<h4>Superclasses</h3>\n<ul>\n")
+		dctx.add("<h4>Superclasses</h4>\n<ul>\n")
 		for lc in cshe.linear_extension do
 			if lc == self then continue
 			if not lc.require_doc(dctx) then continue
@@ -1223,7 +1265,7 @@ redef class MMLocalClass
 			end
 		end
 		op.append("\}\n")
-		dctx.gen_dot(op.to_s, name.to_s)
+		dctx.gen_dot(op.to_s, name.to_s, "Inheritance graph for class {name}")
 
 
 		var mods = new Array[MMModule]
@@ -1254,8 +1296,6 @@ redef class MMLocalClass
 			dctx.close_stage
 			dctx.add("</p>\n")
 		end
-		dctx.add("</ul>\n")
-		
 		dctx.add("</section>\n")
 
 		dctx.open_stage
@@ -1293,7 +1333,7 @@ redef class MMLocalClass
 		end
 		if not inhs.is_empty then
 			dctx.open_stage
-			dctx.stage("<h3>Inherited Methods</h4>\n")
+			dctx.stage("<h3>Inherited Methods</h3>\n")
 			for lc in inhs do
 				dctx.open_stage
 				dctx.stage("<p>Defined in {lc.html_link(dctx)}:")
