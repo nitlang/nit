@@ -299,6 +299,23 @@ class DocContext
 end
 
 redef class String
+	# Replace all occurence of pattern ith string
+	fun replace(p: Pattern, string: String): String
+	do
+		return self.split_with(p).join(string)
+	end
+
+	# Escape the following characters < > & and " with their html counterpart
+	fun html_escape: String
+	do
+		var ret = self
+		if ret.has('&') then ret = ret.replace('&', "&amp;")
+		if ret.has('<') then ret = ret.replace('<', "&lt;")
+		if ret.has('>') then ret = ret.replace('>', "&gt;")
+		if ret.has('"') then ret = ret.replace('"', "&quot;")
+		return ret
+	end
+
 	# Remove "/./", "//" and "bla/../"
 	fun simplify_path: String
 	do
@@ -1073,13 +1090,13 @@ redef class ADoc
 		for c in n_comment do
 			res.append(c.text.substring_from(1))
 		end
-		return res.to_s
+		return res.to_s.html_escape
 	end
 
 	# Oneliner transcription of the doc
 	fun short: String
 	do
-		return n_comment.first.text.substring_from(1)
+		return n_comment.first.text.substring_from(1).html_escape
 	end
 end
 
