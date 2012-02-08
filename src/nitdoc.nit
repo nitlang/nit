@@ -83,11 +83,18 @@ class DocContext
 	readable var _opt_dir: OptionString = new OptionString("Directory where doc is generated", "-d", "--dir")
 	readable var _opt_source: OptionString = new OptionString("What link for source (%f for filename, %l for first line, %L for last line)", "--source")
 	readable var _opt_public: OptionBool = new OptionBool("Generate only the public API", "--public")
+	readable var _opt_private: OptionBool = new OptionBool("Generate the private API", "--private")
 	readable var _opt_nodot: OptionBool = new OptionBool("Do not generate graphes with graphviz", "--no-dot")
 
 	fun public_only: Bool
 	do
 		if self._opt_public.value == true then return true
+		return false
+	end
+
+	fun with_private: Bool
+	do
+		if self._opt_private.value == true then return true
 		return false
 	end
 
@@ -279,6 +286,7 @@ class DocContext
 		super("nitdoc")
 		filename = "-unset-"
 		option_context.add_option(opt_public)
+		option_context.add_option(opt_private)
 		option_context.add_option(opt_dir)
 		option_context.add_option(opt_source)
 		option_context.add_option(opt_nodot)
@@ -629,6 +637,7 @@ redef class MMModule
 				end
 				if not keep then continue
 				clas.add(self[g])
+				lc.compute_super_classes
 				for gp in lc.global_properties do
 					if self.visibility_for(gp.intro.local_class.mmmodule) <= 1 then continue # private import or invisible import
 					var lp = lc[gp]
@@ -871,10 +880,10 @@ redef class MMLocalProperty
 		return m == m.toplevel_owner
 	end
 
-	# Return true if the global class must be documented according to the visibility configured
+	# Return true if the global property must be documented according to the visibility configured
 	fun require_doc(dctx: DocContext): Bool
 	do
-		if global.visibility_level == 3 then return false # Private
+		if global.visibility_level == 3 and not dctx.with_private then return false # Private
 		if dctx.public_only then
 			var m = intro_module
 			if m != m.toplevel_owner then return false # Unexported
@@ -1143,7 +1152,7 @@ redef class MMLocalClass
 	# Return true if the global class must be documented according to the visibility configured
 	fun require_doc(dctx: DocContext): Bool
 	do
-		if global.visibility_level == 3 then return false # Private
+		if global.visibility_level == 3 and not dctx.with_private then return false # Private
 		if dctx.public_only then
 			var m = intro_module
 			if m != m.toplevel_owner then return false # Unexported
