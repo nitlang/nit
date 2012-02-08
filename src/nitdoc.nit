@@ -83,6 +83,7 @@ class DocContext
 	readable var _opt_dir: OptionString = new OptionString("Directory where doc is generated", "-d", "--dir")
 	readable var _opt_source: OptionString = new OptionString("What link for source (%f for filename, %l for first line, %L for last line)", "--source")
 	readable var _opt_public: OptionBool = new OptionBool("Generate only the public API", "--public")
+	readable var _opt_nodot: OptionBool = new OptionBool("Do not generate graphes with graphviz", "--no-dot")
 
 	fun public_only: Bool
 	do
@@ -261,6 +262,7 @@ class DocContext
 	# `name' must also match the name of the graph in the dot content (eg. digraph NAME {...)
 	fun gen_dot(dot: String,  name: String, alt: String)
 	do
+		if opt_nodot.value then return
 		var f = new OFStream.open("{self.dir}/{name}.dot")
 		f.write(dot)
 		f.close
@@ -279,6 +281,7 @@ class DocContext
 		option_context.add_option(opt_public)
 		option_context.add_option(opt_dir)
 		option_context.add_option(opt_source)
+		option_context.add_option(opt_nodot)
 	end
 
 	redef fun process_options
@@ -286,6 +289,15 @@ class DocContext
 		super
 		var d = opt_dir.value
 		if d != null then dir = d
+
+		if not opt_nodot.value then
+			# Test if dot is runable
+			var res = sys.system("sh -c dot </dev/null >/dev/null 2>&1")
+			if res != 0 then
+				stderr.write "--no-dot implied since `dot' is not available. Try to install graphviz.\n"
+				opt_nodot.value = true
+			end
+		end
 	end
 
 	redef fun handle_property_conflict(lc, impls)
