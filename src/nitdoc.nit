@@ -666,16 +666,16 @@ redef class MMModule
 			var lpi = self[gp.intro.local_class.global][gp]
 		
 			if lps.has(lpi) then
-				dctx.add("<li class='intro'><span title='introduction in an other module'>I</span>&nbsp;{lpi.html_open_link(dctx)}{lpi}&nbsp;({lpi.local_class})</a></li>\n")
+				dctx.add("<li class='intro'><span title='introduction in an other module'>I</span>&nbsp;{lpi.html_open_link(dctx)}{lpi.html_name}&nbsp;({lpi.local_class})</a></li>\n")
 				lps.remove(lpi)
 			else
-				dctx.add("<li class='intro'><span title='introduction in this module'>I</span>&nbsp;{lpi}")
+				dctx.add("<li class='intro'><span title='introduction in this module'>I</span>&nbsp;{lpi.html_name}")
 				dctx.add("&nbsp;({lpi.local_class})</li>\n")
 			end
 			if lps.length >= 1 then
 				dctx.sort(lps)
 				for lp in lps do
-					dctx.add("<li class='redef'><span title='redefinition'>R</span>&nbsp;{lp.html_open_link(dctx)}{lp}&nbsp;({lp.local_class})</a></li>")
+					dctx.add("<li class='redef'><span title='redefinition'>R</span>&nbsp;{lp.html_open_link(dctx)}{lp.html_name}&nbsp;({lp.local_class})</a></li>")
 				end
 			end
 		end
@@ -752,11 +752,11 @@ redef class MMModule
 			var lpi = self[gp.intro.local_class.global][gp]
 			
 			lps.remove(lpi)
-				dctx.add("<li class='intro'><span title='introduction'>I</span>&nbsp;{lpi.html_open_link(dctx)}{lpi}&nbsp;({lpi.local_class})</a></li>\n")
+				dctx.add("<li class='intro'><span title='introduction'>I</span>&nbsp;{lpi.html_open_link(dctx)}{lpi.html_name}&nbsp;({lpi.local_class})</a></li>\n")
 			if lps.length >= 1 then
 				dctx.sort(lps)
 				for lp in lps do
-					dctx.add("<li class='redef'><span title='redefinition'>R</span>&nbsp;{lp.html_open_link(dctx)}{lp}&nbsp;({lp.local_class})</a></li>\n")
+					dctx.add("<li class='redef'><span title='redefinition'>R</span>&nbsp;{lp.html_open_link(dctx)}{lp.html_name}&nbsp;({lp.local_class})</a></li>\n")
 				end
 			end
 		end
@@ -776,31 +776,36 @@ redef class MMLocalProperty
 	fun html_open_link(dctx: DocContext): String
 	do
 		if not require_doc(dctx) then print "not required {self}"
-		var title = "{name}{signature.to_s}"
+		var title = "{html_name}{signature.to_s}"
 		if short_doc != "&nbsp;" then
 			title += " #{short_doc}"
 		end
 		return "<a href=\"{local_class.html_name}.html#{html_anchor}\" title=\"{title}\">"
 	end
 
+	fun html_name: String
+	do
+		return self.name.to_s.html_escape
+	end
+
 	redef fun html_link(dctx)
 	do
 		if not require_doc(dctx) then print "not required {self}"
-		var title = "{name}{signature.to_s}"
+		var title = "{html_name}{signature.to_s}"
 		if short_doc != "&nbsp;" then
 			title += " #{short_doc}"
 		end
-		return "<a href=\"{local_class.html_name}.html#{html_anchor}\" title=\"{title}\">{self}</a>"
+		return "<a href=\"{local_class.html_name}.html#{html_anchor}\" title=\"{title}\">{html_name}</a>"
 	end
 
 	fun html_link_special(dctx: DocContext, lc: MMLocalClass): String
 	do
 		if not require_doc(dctx) then print "not required {self}"
-		var title = "{name}{signature_for(lc.get_type)}"
+		var title = "{html_name}{signature_for(lc.get_type)}"
 		if short_doc != "&nbsp;" then
 			title += " #{short_doc}"
 		end
-		return "<a href=\"{lc.html_name}.html#{html_anchor}\" title=\"{title}\">{self}</a>"
+		return "<a href=\"{lc.html_name}.html#{html_anchor}\" title=\"{title}\">{html_name}</a>"
 	end
 
 	# Kind of property (fun, attr, etc.)
@@ -883,7 +888,7 @@ redef class MMLocalProperty
 		var is_redef = local_class.global != intro_class.global or local_class.mmmodule.toplevel_owner != intro_class.mmmodule.toplevel_owner
 
 		dctx.add("<article id=\"{html_anchor}\" class=\"{kind} {visibility} {if is_redef then "redef" else ""}\">\n")
-		dctx.add("<h3 class=\"signature\">{name}{signature.to_html(dctx, true)}</h3>\n")
+		dctx.add("<h3 class=\"signature\">{html_name}{signature.to_html(dctx, true)}</h3>\n")
 		dctx.add("<div class=\"info\">\n")
 		#dctx.add("<p>LP: {self.mmmodule.html_link(dctx)}::{self.local_class.html_link(dctx)}::{self.html_link(dctx)}</p>")
 
@@ -908,7 +913,7 @@ redef class MMLocalProperty
 		if is_redef then
 			dctx.add("::{mmmodule[intro_class.global][global].html_link(dctx)}")
 		else
-			dctx.add("::{name}")
+			dctx.add("::{html_name}")
 		end
 		dctx.add("</div>")
 
@@ -1014,42 +1019,6 @@ redef class MMAttribute
 end
 redef class MMTypeProperty
 	redef fun kind do return "type"
-end
-
-redef class Symbol
-	# Replace < and > with html entities
-	redef fun to_s
-	do
-		var ret = super.to_s
-
-		if(ret.has('<')) then
-			var parts = ret.split_with("<")
-			ret = ""
-
-			for i in [0..parts.length[ do
-				ret += parts[i]
-
-				if(i < parts.length - 1) then
-					ret += "&lt;"
-				end
-			end
-		end
-
-		if(ret.has('>')) then
-			var parts = ret.split_with(">")
-			ret = ""
-
-			for i in [0..parts.length[ do
-				ret += parts[i]
-
-				if(i < parts.length - 1) then
-					ret += "&gt;"
-				end
-			end
-		end
-		
-		return ret
-	end
 end
 
 redef class MMSrcModule
