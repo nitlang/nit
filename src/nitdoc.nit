@@ -243,11 +243,11 @@ class DocContext
 	do
 		var s = opt_source.value
 		if s == null then
-			add("in #{l.file.filename}")
+			add("in #{l.file.filename.simplify_path}")
 		else
 			# THIS IS JUST UGLY ! (but there is no replace yet)
 			var x = s.split_with("%f")
-			s = x.join(l.file.filename)
+			s = x.join(l.file.filename.simplify_path)
 			x = s.split_with("%l")
 			s = x.join(l.line_start.to_s)
 			x = s.split_with("%L")
@@ -295,6 +295,25 @@ class DocContext
 			return # We just accept, so one in impls is arbitrary inherited
 		end
 		super
+	end
+end
+
+redef class String
+	# Remove "/./", "//" and "bla/../"
+	fun simplify_path: String
+	do
+		var a = self.split_with("/")
+		var a2 = new Array[String]
+		for x in a do
+			if x == "." then continue
+			if x == "" and not a2.is_empty then continue
+			if x == ".." and not a2.is_empty then
+				a2.pop
+				continue
+			end
+			a2.push(x)
+		end
+		return a2.join("/")
 	end
 end
 
