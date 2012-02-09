@@ -11,5 +11,7 @@ usage: nitdoc [options] file...
   --version               Show version and exit
   -v, --verbose           Verbose
   --public                Generate only the public API
+  --private               Generate the private API
   -d, --dir               Directory where doc is generated
   --source                What link for source (%f for filename, %l for first line, %L for last line)
+  --no-dot                Do not generate graphes with graphviz
