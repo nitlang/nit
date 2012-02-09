@@ -36,7 +36,7 @@ doc/stdlib/index.html: bin/nitdoc
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc lib/*.nit -d doc/stdlib
+	bin/nitdoc lib/*.nit -d doc/stdlib --public
 
 c_src/nitc: c_src/*.c c_src/*.h c_src/nitc._build.sh c_src/Makefile
 	@echo '***************************************************************'
