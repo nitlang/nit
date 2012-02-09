@@ -252,6 +252,16 @@ redef class String
 			path.to_s.to_cstring.file_mkdir
 		end
 	end
+
+	fun file_extension : nullable String
+	do
+		var last_slash = last_index_of('.')
+		if last_slash >= 0 then
+			return substring( last_slash+1, length )
+		else
+			return null
+		end
+	end
 end
 
 redef class NativeString
