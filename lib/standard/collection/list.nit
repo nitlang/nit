@@ -76,8 +76,6 @@ class List[E]
 		return nb
 	end
 
-	redef fun has_key(index) do return get_node(index) != null
-
 # Add elements
 
 	# O(1)

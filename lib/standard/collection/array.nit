@@ -47,8 +47,6 @@ class AbstractArrayRead[E]
 		return true
 	end
 
-	redef fun has_key(index) do return index >= 0 and index < length
-
 	redef fun count(item)
 	do
 		var res = 0

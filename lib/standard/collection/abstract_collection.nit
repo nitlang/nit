@@ -295,7 +295,7 @@ end
 # Indexed collection are ordoned collections.
 # The first item is 0. The last is `length'-1.
 interface SequenceRead[E]
-	super MapRead[Int, E]
+	super Collection[E]
 	# Get the first item.
 	# Is equivalent with `self'[0].
 	redef fun first
@@ -303,7 +303,9 @@ interface SequenceRead[E]
 		assert not_empty: not is_empty
 		return self[0]
 	end
-	
+
+	fun [](index: Int): E is abstract
+
 	# Get the last item.
 	# Is equivalent with `self'[`length'-1].
 	fun last: E
@@ -331,7 +333,6 @@ end
 # The first item is 0. The last is `length'-1.
 interface Sequence[E]
 	super SequenceRead[E]
-	super Map[Int, E]
 	super SimpleCollection[E]
 	# Set the first item.
 	# Is equivalent with `self'[0] = `item'.
@@ -369,16 +370,18 @@ interface Sequence[E]
 	# The second item become the first.
 	fun shift: E is abstract
 
+	# Set the`item' at `index'.
+	fun []=(index: Int, item: E) is abstract
+
+	# Remove the item at `index' and shift all following elements
+	fun remove_at(index: Int) is abstract
 end
 
 # Iterators on indexed collections.
 interface IndexedIterator[E]
-	super MapIterator[Int, E]
+	super Iterator[E]
 	# The index of the current item.
 	fun index: Int is abstract
-
-	# A synonym of index.
-	redef fun key do return index
 end
 
 # Associatives arrays that internally uses couples to represent each (key, value) pairs.
