@@ -14,7 +14,6 @@
 package sdl
 
 extern SDL_Surface
-	super Pointer
 	fun width: Int is extern "sdl_surface_width"
 	fun height: Int is extern "sdl_surface_height"
 	
