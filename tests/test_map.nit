@@ -118,7 +118,7 @@ do
 	print(m.has_key("blue"))
 	print(not m.has_key("green"))
 	print(not m.has_key("vert"))
-	print(m.join(", "))
+	print(m.values.join(", "))
 
 	print("* remove:")
 	print(m.count("rose") == 1)
@@ -131,7 +131,7 @@ do
 	m.remove_at("blue")
 	print(m.length == 5)
 	print(m.count("bleu") == 0)
-	print(m.join(", "))
+	print(m.values.join(", "))
 	m.clear
 	print(m.is_empty)
 end

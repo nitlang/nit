@@ -210,8 +210,6 @@ class HashMap[K: Object, V]
 		end
 	end
 
-	redef fun has_key(key) do return node_at(key) != null
-
 	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
 
 	redef fun iterate
@@ -224,46 +222,9 @@ class HashMap[K: Object, V]
 		end
 	end
 
-	redef fun first
-	do
-		assert _length > 0
-		return _first_item._value
-	end
-
 	redef fun length do return _length
 
 	redef fun is_empty do return _length == 0
-
-	redef fun count(item)
-	do
-		var nb = 0
-		var c = _first_item
-		while c != null do
-			if c._value == item then nb += 1
-			c = c._next_item
-		end
-		return nb
-	end
-
-	redef fun has(item)
-	do
-		var c = _first_item
-		while c != null do
-			if c._value == item then return true
-			c = c._next_item
-		end
-		return false
-	end
-
-	redef fun has_only(item)
-	do
-		var c = _first_item
-		while c != null do
-			if c._value != item then return false
-			c = c._next_item
-		end
-		return true
-	end
 
 	redef fun []=(key, v)
 	do
@@ -299,6 +260,67 @@ class HashMap[K: Object, V]
 		_length = 0
 		enlarge(0)
 	end
+
+	redef var keys: HashMapKeys[K, V] = new HashMapKeys[K, V](self)
+	redef var values: HashMapValues[K, V] = new HashMapValues[K, V](self)
+end
+
+class HashMapKeys[K: Object, V]
+	super NaiveCollection[K]
+	# The original map
+	var map: HashMap[K, V]
+
+	redef fun count(k) do if self.has(k) then return 1 else return 0
+	redef fun first do return self.map._first_item._key
+	redef fun has(k) do return self.map.node_at(k) != null
+	redef fun has_only(k) do return (self.has(k) and self.length == 1) or self.is_empty
+	redef fun is_empty do return self.map.is_empty
+	redef fun length do return self.map.length
+
+	redef fun iterator do return new MapKeysIterator[K, V](self.map.iterator)
+end
+
+class HashMapValues[K: Object, V]
+	super NaiveCollection[V]
+	# The original map
+	var map: HashMap[K, V]
+
+	redef fun count(item)
+	do
+		var nb = 0
+		var c = self.map._first_item
+		while c != null do
+			if c._value == item then nb += 1
+			c = c._next_item
+		end
+		return nb
+	end
+	redef fun first do return self.map._first_item._value
+
+	redef fun has(item)
+	do
+		var c = self.map._first_item
+		while c != null do
+			if c._value == item then return true
+			c = c._next_item
+		end
+		return false
+	end
+
+	redef fun has_only(item)
+	do
+		var c = self.map._first_item
+		while c != null do
+			if c._value != item then return false
+			c = c._next_item
+		end
+		return true
+	end
+
+	redef fun is_empty do return self.map.is_empty
+	redef fun length do return self.map.length
+
+	redef fun iterator do return new MapValuesIterator[K, V](self.map.iterator)
 end
 
 class HashMapNode[K: Object, V]

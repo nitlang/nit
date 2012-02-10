@@ -242,8 +242,8 @@ interface MapRead[K: Object, E]
 	# Get the item at `key'.
 	fun [](key: K): E is abstract
 
-	# Is there an item at `key'.
-	fun has_key(key: K): Bool is abstract
+	# Depreciated alias for `keys.has'
+	fun has_key(key: K): Bool do return self.keys.has(key)
 
 	# Get a new iterator on the map.
 	fun iterator: MapIterator[K, E] is abstract
@@ -259,27 +259,29 @@ interface MapRead[K: Object, E]
 		end
 	end
 
+	# Return the point of view of self on the values only
+	fun values: Collection[E] is abstract
+
+	# Return the point of view of self on the keys only
+	fun keys: Collection[E] is abstract
+
 	# Is there no item in the collection ?
 	fun is_empty: Bool is abstract 
 
 	# Number of items in the collection.
 	fun length: Int is abstract
 
-	# Is `item' in the collection ?
-	# Comparaisons are done with ==
-	fun has(item: E): Bool is abstract
+	# Depreciated alias for `values.has'
+	fun has(item: E): Bool do return self.values.has(item)
 
-	# Is the collection contain only `item' ?
-	# Comparaisons are done with ==
-	# Return true if the collection is empty.
-	fun has_only(item: E): Bool is abstract
+	# Depreciated alias for `values.has_only'
+	fun has_only(item: E): Bool do return self.values.has_only(item)
 
-	# How many occurences of `item' are in the collection ?
-	# Comparaisons are done with ==
-	fun count(item: E): Int is abstract
+	# Depreciated alias for `values.count'
+	fun count(item: E): Int do return self.values.count(item)
 
-	# Return one the item of the collection
-	fun first: E is abstract
+	# Depreciated alias for `values.first'
+	fun first: E do return self.values.first
 end
 
 # Maps are associative collections: `key' -> `item'.
@@ -342,6 +344,28 @@ interface MapIterator[K: Object, E]
 
 	# Set a new `item' at `key'.
 	#fun item=(item: E) is abstract
+end
+
+# Iterator on a 'keys' point of view of a map
+class MapKeysIterator[K: Object, V]
+	super Iterator[K]
+	# The original iterator
+	var iterator: MapIterator[K, V]
+
+	redef fun is_ok do return self.iterator.is_ok
+	redef fun next do self.iterator.next
+	redef fun item do return self.iterator.key
+end
+
+# Iterator on a 'values' point of view of a map
+class MapValuesIterator[K: Object, V]
+	super Iterator[K]
+	# The original iterator
+	var iterator: MapIterator[K, V]
+
+	redef fun is_ok do return self.iterator.is_ok
+	redef fun next do self.iterator.next
+	redef fun item do return self.iterator.item
 end
 
 # Indexed collection are ordoned collections.
@@ -452,8 +476,6 @@ interface CoupleMap[K: Object, E]
 			return c.second
 		end
 	end
-
-	redef fun has_key(key) do return couple_at(key) != null
 end
 
 # Iterator on CoupleMap

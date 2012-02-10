@@ -77,6 +77,6 @@ test_coll(init_seq(new ArraySet[Int]), "ArraySet")
 test_coll(init_seq(new HashSet[Int]), "HashSet")
 test_coll([0..5[, "ORange")
 test_coll([0..4], "CRange")
-test_coll(init_map(new ArrayMap[Int, Int]), "ArrayMap")
-test_coll(init_map(new HashMap[Int, Int]), "HashMap")
+test_coll(init_map(new ArrayMap[Int, Int]).values, "ArrayMap")
+test_coll(init_map(new HashMap[Int, Int]).values, "HashMap")
 

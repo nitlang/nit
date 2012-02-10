@@ -500,35 +500,11 @@ class ArrayMap[K: Object, E]
 		end
 	end
 
-	# O(n)
-	redef fun has_key(key) do return index(key) >= 0
-
-	# O(n)
-	redef fun has(item)
-	do
-		for i in _items do if i.second == item then return true
-		return false
-	end
-
-	# O(n)
-	redef fun has_only(item)
-	do
-		for i in _items do if i.second != item then return false
-		return true
-	end
+	redef var keys: ArrayMapKeys[K, E] = new ArrayMapKeys[K, E](self)
+	redef var values: ArrayMapValues[K, E] = new ArrayMapValues[K, E](self)
 
 	# O(1)
 	redef fun length do return _items.length
-
-	redef fun first do return _items.first.second
-
-	# O(n)
-	redef fun count(item)
-	do
-		var nb = 0
-		for i in _items do if i.second == item then nb += 1
-		return nb
-	end
 
 	redef fun iterator: CoupleMapIterator[K, E] do return new CoupleMapIterator[K, E](_items.iterator)
 
@@ -615,6 +591,53 @@ class ArrayMap[K: Object, E]
 		_items = new Array[Couple[K,E]]
 	end
 end
+
+class ArrayMapKeys[K: Object, E]
+	super Collection[K]
+	# The original map
+	var map: ArrayMap[K, E]
+	redef fun count(k) do if self.has(k) then return 1 else return 0
+	redef fun first do return self.map._items.first.first
+	redef fun has(k) do return self.map.index(k) >= 0
+	redef fun has_only(k) do return (self.has(k) and self.length == 1) or self.is_empty
+	redef fun is_empty do return self.map.is_empty
+	redef fun length do return self.map.length
+	redef fun iterator do return new MapKeysIterator[K, E](self.map.iterator)
+end
+
+class ArrayMapValues[K: Object, E]
+	super Collection[K]
+	# The original map
+	var map: ArrayMap[K, E]
+	redef fun first do return self.map._items.first.first
+	redef fun is_empty do return self.map.is_empty
+	redef fun length do return self.map.length
+	redef fun iterator do return new MapValuesIterator[K, E](self.map.iterator)
+
+	# O(n)
+	redef fun has(item)
+	do
+		for i in self.map._items do if i.second == item then return true
+		return false
+	end
+
+	# O(n)
+	redef fun has_only(item)
+	do
+		for i in self.map._items do if i.second != item then return false
+		return true
+	end
+
+	# O(n)
+	redef fun count(item)
+	do
+		var nb = 0
+		for i in self.map._items do if i.second == item then nb += 1
+		return nb
+	end
+
+end
+
 
 # Others tools ################################################################
 
