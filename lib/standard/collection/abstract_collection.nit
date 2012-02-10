@@ -270,18 +270,6 @@ interface MapRead[K: Object, E]
 
 	# Number of items in the collection.
 	fun length: Int is abstract
-
-	# Depreciated alias for `values.has'
-	fun has(item: E): Bool do return self.values.has(item)
-
-	# Depreciated alias for `values.has_only'
-	fun has_only(item: E): Bool do return self.values.has_only(item)
-
-	# Depreciated alias for `values.count'
-	fun count(item: E): Int do return self.values.count(item)
-
-	# Depreciated alias for `values.first'
-	fun first: E do return self.values.first
 end
 
 # Maps are associative collections: `key' -> `item'.
@@ -301,9 +289,6 @@ interface Map[K: Object, E]
 	# Set the`item' at `key'.
 	fun []=(key: K, item: E) is abstract
 
-	# Depreciated alias for `keys.remove`
-	fun remove_at(key: K) do keys.remove(key)
-
 	# Add each (key,value) of `map' into `self'.
 	# If a same key exists in `map' and `self', then the value in self is discarded.
 	fun recover_with(map: Map[K, E])
@@ -317,12 +302,6 @@ interface Map[K: Object, E]
 
 	# Remove all items
 	fun clear is abstract
-
-	# Depreciated alias for `values.remove`
-	fun remove(item: E) do values.remove(item)
-
-	# Depreciated alias for `values.remove_all`
-	fun remove_all(item: E) do values.remove_all(item)
 
 	redef fun values: RemovableCollection[E] is abstract
 

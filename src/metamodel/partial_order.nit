@@ -40,7 +40,7 @@ class PartialOrder[E: Object]
 
 	redef fun has(e) do return _elements.has_key(e)
 
-	redef fun has_only(e) do return _elements.length == 1 and _elements.first == e
+	redef fun has_only(e) do return _elements.length == 1 and _elements.values.first == e
 
 	redef fun count(e)
 	do
