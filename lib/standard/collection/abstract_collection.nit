@@ -239,14 +239,47 @@ interface Set[E: Object]
 end
 
 interface MapRead[K: Object, E]
-	super Collection[E]
 	# Get the item at `key'.
 	fun [](key: K): E is abstract
 
 	# Is there an item at `key'.
 	fun has_key(key: K): Bool is abstract
 
-	redef fun iterator: MapIterator[K, E] is abstract
+	# Get a new iterator on the map.
+	fun iterator: MapIterator[K, E] is abstract
+
+	# Iterate over each element of the collection
+	fun iterate
+		!each(e: E)
+	do
+		var i = iterator
+		while i.is_ok do
+			each(i.item)
+			i.next
+		end
+	end
+
+	# Is there no item in the collection ?
+	fun is_empty: Bool is abstract 
+
+	# Number of items in the collection.
+	fun length: Int is abstract
+
+	# Is `item' in the collection ?
+	# Comparaisons are done with ==
+	fun has(item: E): Bool is abstract
+
+	# Is the collection contain only `item' ?
+	# Comparaisons are done with ==
+	# Return true if the collection is empty.
+	fun has_only(item: E): Bool is abstract
+
+	# How many occurences of `item' are in the collection ?
+	# Comparaisons are done with ==
+	fun count(item: E): Int is abstract
+
+	# Return one the item of the collection
+	fun first: E is abstract
 end
 
 # Maps are associative collections: `key' -> `item'.
@@ -262,7 +295,6 @@ end
 #     map.has_key(u1)    # -> true
 #     map.has_key(u3)    # -> false
 interface Map[K: Object, E]
-	super RemovableCollection[E]
 	super MapRead[K, E]
 	# Set the`item' at `key'.
 	fun []=(key: K, item: E) is abstract
@@ -280,6 +312,15 @@ interface Map[K: Object, E]
 			i.next
 		end
 	end
+
+	# Remove all items
+	fun clear is abstract
+
+	# Remove an occucence of `item'
+	fun remove(item: E) is abstract
+
+	# Remove all occurences of `item'
+	fun remove_all(item: E) do while has(item) do remove(item)
 end
 
 # Iterators for Map.
