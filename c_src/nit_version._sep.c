@@ -15,9 +15,9 @@ val_t nit_version___Object___nit_version(val_t p0){
   fra.me.REG[0] = p0;
   /* ./nit_version.nit:3 */
   if (!once_value_1) {
-    fra.me.REG[0] = BOX_NativeString("v0.3-198-ga3e8db2_nc3");
-    REGB0 = TAG_Int(21);
-    fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = BOX_NativeString("v0.4-78-gad57336_nc3_dirty");
+    REGB0 = TAG_Int(26);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
     once_value_1 = fra.me.REG[0];
     register_static_object(&once_value_1);
   } else fra.me.REG[0] = once_value_1;

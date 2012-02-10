@@ -80,7 +80,6 @@ static val_t GC_evacuation(obj_t object) {
 	bigint objectSize;
 	val_t newAdress;
 	Nit_NativeArray array;
-	BOX_struct box;
 
 	assert(ISOBJ(object) && !ISNULL(object));
 	if (GET_MARKBIT(object) != (bigint)0) {
@@ -92,7 +91,6 @@ static val_t GC_evacuation(obj_t object) {
 			array = (Nit_NativeArray)object;
 			size = sizeof(struct Nit_NativeArray) + ((array->size - 1) * sizeof(val_t));
 		} else if (OBJ_IS_BOX(object)) {
-			box = (BOX_struct)object;
 			size = sizeof(struct TBOX_struct);
 		} else {
 			objectSize = (bigint)((object)[0].vft[1].i);
