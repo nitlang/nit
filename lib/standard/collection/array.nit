@@ -510,35 +510,6 @@ class ArrayMap[K: Object, E]
 
 	redef fun is_empty do return _items.is_empty
 
-	redef fun remove(item)
-	do
-		var i = _items.length - 1
-		while i >= 0 do
-			if _items[i].second == item then
-				remove_at_index(i)
-				return
-			end
-			i -= 1
-		end
-	end
-
-	redef fun remove_all(item: E)
-	do
-		var i = _items.length - 1
-		while i >= 0 do
-			if _items[i].second == item then
-				remove_at_index(i)
-			end
-			i -= 1
-		end
-	end
-
-	redef fun remove_at(key)
-	do
-		var i = index(key)
-		if i >= 0 then remove_at_index(i)
-	end
-
 	redef fun clear do _items.clear
 
 	# Assume the capacity to be at least `cap'.
@@ -593,7 +564,7 @@ class ArrayMap[K: Object, E]
 end
 
 class ArrayMapKeys[K: Object, E]
-	super Collection[K]
+	super RemovableCollection[K]
 	# The original map
 	var map: ArrayMap[K, E]
 	redef fun count(k) do if self.has(k) then return 1 else return 0
@@ -603,10 +574,17 @@ class ArrayMapKeys[K: Object, E]
 	redef fun is_empty do return self.map.is_empty
 	redef fun length do return self.map.length
 	redef fun iterator do return new MapKeysIterator[K, E](self.map.iterator)
+	redef fun clear do self.map.clear
+	redef fun remove(key)
+	do
+		var i = self.map.index(key)
+		if i >= 0 then self.map.remove_at_index(i)
+	end
+	redef fun remove_all(key) do self.remove(key)
 end
 
 class ArrayMapValues[K: Object, E]
-	super Collection[K]
+	super RemovableCollection[K]
 	# The original map
 	var map: ArrayMap[K, E]
 	redef fun first do return self.map._items.first.first
@@ -636,6 +614,32 @@ class ArrayMapValues[K: Object, E]
 		return nb
 	end
 
+	redef fun clear do self.map.clear
+
+	redef fun remove(item)
+	do
+		var map = self.map
+		var i = map._items.length - 1
+		while i >= 0 do
+			if map._items[i].second == item then
+				map.remove_at_index(i)
+				return
+			end
+			i -= 1
+		end
+	end
+
+	redef fun remove_all(item)
+	do
+		var map = self.map
+		var i = map._items.length - 1
+		while i >= 0 do
+			if map._items[i].second == item then
+				map.remove_at_index(i)
+			end
+			i -= 1
+		end
+	end
 end
 
 

@@ -238,20 +238,6 @@ class HashMap[K: Object, V]
 		end
 	end
 
-	redef fun remove(item)
-	do
-		var c = _first_item
-		while c != null do
-			if c._value == item then
-				remove_node(c._key)
-				return
-			end
-			c = c._next_item
-		end
-	end
-
-	redef fun remove_at(key) do remove_node(key)
-
 	redef fun clear do raz
 
 	init
@@ -266,7 +252,7 @@ class HashMap[K: Object, V]
 end
 
 class HashMapKeys[K: Object, V]
-	super NaiveCollection[K]
+	super RemovableCollection[K]
 	# The original map
 	var map: HashMap[K, V]
 
@@ -278,10 +264,15 @@ class HashMapKeys[K: Object, V]
 	redef fun length do return self.map.length
 
 	redef fun iterator do return new MapKeysIterator[K, V](self.map.iterator)
+
+	redef fun clear do self.map.clear
+
+	redef fun remove(key) do self.map.remove_node(key)
+	redef fun remove_all(key) do self.map.remove_node(key)
 end
 
 class HashMapValues[K: Object, V]
-	super NaiveCollection[V]
+	super RemovableCollection[V]
 	# The original map
 	var map: HashMap[K, V]
 
@@ -321,6 +312,33 @@ class HashMapValues[K: Object, V]
 	redef fun length do return self.map.length
 
 	redef fun iterator do return new MapValuesIterator[K, V](self.map.iterator)
+
+	redef fun clear do self.map.clear
+
+	redef fun remove(item)
+	do
+		var map = self.map
+		var c = map._first_item
+		while c != null do
+			if c._value == item then
+				map.remove_node(c._key)
+				return
+			end
+			c = c._next_item
+		end
+	end
+
+	redef fun remove_all(item)
+	do
+		var map = self.map
+		var c = map._first_item
+		while c != null do
+			if c._value == item then
+				map.remove_node(c._key)
+			end
+			c = c._next_item
+		end
+	end
 end
 
 class HashMapNode[K: Object, V]

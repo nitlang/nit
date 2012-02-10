@@ -301,8 +301,8 @@ interface Map[K: Object, E]
 	# Set the`item' at `key'.
 	fun []=(key: K, item: E) is abstract
 
-	# Remove the item at `key'
-	fun remove_at(key: K) is abstract
+	# Depreciated alias for `keys.remove`
+	fun remove_at(key: K) do keys.remove(key)
 
 	# Add each (key,value) of `map' into `self'.
 	# If a same key exists in `map' and `self', then the value in self is discarded.
@@ -318,11 +318,15 @@ interface Map[K: Object, E]
 	# Remove all items
 	fun clear is abstract
 
-	# Remove an occucence of `item'
-	fun remove(item: E) is abstract
+	# Depreciated alias for `values.remove`
+	fun remove(item: E) do values.remove(item)
 
-	# Remove all occurences of `item'
-	fun remove_all(item: E) do while has(item) do remove(item)
+	# Depreciated alias for `values.remove_all`
+	fun remove_all(item: E) do values.remove_all(item)
+
+	redef fun values: RemovableCollection[E] is abstract
+
+	redef fun keys: RemovableCollection[E] is abstract
 end
 
 # Iterators for Map.
