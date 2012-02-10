@@ -17,12 +17,11 @@ import array
 import hash
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
-private class HashCollection[K: Object, N: HashNode[K], E]
-	super Collection[E]
+private class HashCollection[K: Object, N: HashNode[K]]
 	super ArrayCapable[nullable N]
 	var _array: nullable NativeArray[nullable N] = null # Used to store items
 	var _capacity: Int = 0 # Size of _array
-	redef readable var _length: Int = 0 # Number of items in the map
+	var _length: Int = 0 # Number of items in the map
 
 	readable var _first_item: nullable N = null # First added item (used to visit items in nice order)
 	var _last_item: nullable N = null # Last added item (same)
@@ -199,7 +198,7 @@ end
 
 class HashMap[K: Object, V]
 	super Map[K, V]
-	super HashCollection[K, HashMapNode[K, V], V]
+	super HashCollection[K, HashMapNode[K, V]]
 
 	redef fun [](key)
 	do
@@ -230,6 +229,8 @@ class HashMap[K: Object, V]
 		assert _length > 0
 		return _first_item._value
 	end
+
+	redef fun length do return _length
 
 	redef fun is_empty do return _length == 0
 
@@ -355,7 +356,9 @@ end
 
 class HashSet[E: Object]
 	super Set[E]
-	super HashCollection[E, HashSetNode[E], E]
+	super HashCollection[E, HashSetNode[E]]
+
+	redef fun length do return _length
 
 	redef fun is_empty do return _length == 0
 
