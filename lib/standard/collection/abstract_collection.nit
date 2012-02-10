@@ -325,9 +325,20 @@ end
 
 # Iterators for Map.
 interface MapIterator[K: Object, E]
-	super Iterator[E]
+	# The current item.
+	# Require `is_ok'.
+	fun item: E is abstract
+
 	# The key of the current item.
+	# Require `is_ok'.
 	fun key: K is abstract
+
+	# Jump to the next item.
+	# Require `is_ok'.
+	fun next is abstract
+
+	# Is there a current item ?
+	fun is_ok: Bool is abstract
 
 	# Set a new `item' at `key'.
 	#fun item=(item: E) is abstract
