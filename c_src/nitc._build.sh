@@ -7,94 +7,95 @@ CLIBDIR="clib"
   $CLIBDIR/gc_static_objects_list.c\
   ./abstracttool._sep.c\
   ./syntax._sep.c\
-  ./mmbuilder._sep.c\
-  ./syntax_base._sep.c\
+  ./syntax___mmbuilder._sep.c\
+  ./syntax___syntax_base._sep.c\
   ./parser._sep.c\
-  ./parser_prod._sep.c\
-  ./lexer._sep.c\
-  ./parser_nodes._sep.c\
+  ./parser___parser_prod._sep.c\
+  ./parser___lexer._sep.c\
+  ./parser___parser_nodes._sep.c\
   ./location._sep.c\
   ./standard._sep.c\
   ./environ._nitni.c\
-  ./environ._sep.c\
-  ./symbol._sep.c\
+  ./standard___environ._sep.c\
+  ./standard___symbol._sep.c\
   ./string._nitni.c\
-  ./string._sep.c\
-  ./collection._sep.c\
-  ./range._sep.c\
-  ./abstract_collection._sep.c\
+  ./standard___string._sep.c\
+  ./standard___collection._sep.c\
+  ./standard___collection___range._sep.c\
+  ./standard___collection___abstract_collection._sep.c\
   ./kernel._nitni.c\
-  ./kernel._sep.c\
-  ./list._sep.c\
-  ./sorter._sep.c\
-  ./array._sep.c\
-  ./hash_collection._sep.c\
-  ./hash._sep.c\
+  ./standard___kernel._sep.c\
+  ./standard___collection___list._sep.c\
+  ./standard___collection___sorter._sep.c\
+  ./standard___collection___array._sep.c\
+  ./standard___collection___hash_collection._sep.c\
+  ./standard___hash._sep.c\
   ./time._nitni.c\
-  ./time._sep.c\
+  ./standard___time._sep.c\
   ./file._nitni.c\
   ./file_nit.c\
-  ./file._sep.c\
+  ./standard___file._sep.c\
   ./stream._nitni.c\
   ./stream_nit.c\
-  ./stream._sep.c\
-  ./string_search._sep.c\
+  ./standard___stream._sep.c\
+  ./standard___string_search._sep.c\
   ./exec._nitni.c\
   ./exec_nit.c\
-  ./exec._sep.c\
+  ./standard___exec._sep.c\
   ./math._nitni.c\
-  ./math._sep.c\
+  ./standard___math._sep.c\
   ./tables._nitni.c\
   ./tables_nit.c\
-  ./tables._sep.c\
+  ./parser___tables._sep.c\
   ./mmloader._sep.c\
   ./metamodel._sep.c\
-  ./vararg._sep.c\
-  ./genericity._sep.c\
-  ./type_formal._sep.c\
-  ./inheritance._sep.c\
-  ./static_type._sep.c\
-  ./abstractmetamodel._sep.c\
-  ./partial_order._sep.c\
-  ./virtualtype._sep.c\
+  ./metamodel___vararg._sep.c\
+  ./metamodel___genericity._sep.c\
+  ./metamodel___type_formal._sep.c\
+  ./metamodel___inheritance._sep.c\
+  ./metamodel___static_type._sep.c\
+  ./metamodel___abstractmetamodel._sep.c\
+  ./metamodel___partial_order._sep.c\
+  ./metamodel___virtualtype._sep.c\
   ./opts._sep.c\
-  ./icode_generation._sep.c\
+  ./syntax___icode_generation._sep.c\
   ./icode._sep.c\
-  ./icode_tools._sep.c\
-  ./icode_builder._sep.c\
-  ./icode_base._sep.c\
-  ./typing._sep.c\
-  ./scope._sep.c\
-  ./flow._sep.c\
+  ./icode___icode_tools._sep.c\
+  ./icode___icode_builder._sep.c\
+  ./icode___icode_base._sep.c\
+  ./syntax___typing._sep.c\
+  ./syntax___scope._sep.c\
+  ./syntax___flow._sep.c\
   ./primitive_info._sep.c\
   ./nit_version._sep.c\
+  ./separate_options._sep.c\
   ./native_interface._sep.c\
-  ./frontier._sep.c\
-  ./ni_tools._sep.c\
+  ./native_interface___frontier._sep.c\
+  ./native_interface___ni_tools._sep.c\
   ./compiling._sep.c\
-  ./icode_generator._sep.c\
-  ./compiling_base._sep.c\
+  ./compiling___icode_generator._sep.c\
+  ./compiling___compiling_base._sep.c\
   ./utils._sep.c\
   ./program._sep.c\
-  ./compiling_writer._sep.c\
+  ./compiling___compiling_writer._sep.c\
   ./analysis._sep.c\
-  ./icode_dump._sep.c\
-  ./allocate_iregister_slots._sep.c\
-  ./inline_methods._sep.c\
-  ./cha_analysis._sep.c\
-  ./reachable_method_analysis._sep.c\
-  ./rta_analysis._sep.c\
-  ./instantiated_type_analysis._sep.c\
-  ./reachable_as_init_impl._sep.c\
-  ./reachable_as_init._sep.c\
-  ./reachable_from_init_method_analysis_impl._sep.c\
-  ./reachable_from_init_method_analysis._sep.c\
-  ./dead_method_removal._sep.c\
-  ./inline_get_and_set._sep.c\
-  ./remove_out_of_init_get_test._sep.c\
-  ./compiling_global._sep.c\
-  ./table_computation._sep.c\
-  ./compiling_icode._sep.c\
-  ./ni_metamodel._sep.c\
+  ./analysis___icode_dump._sep.c\
+  ./analysis___allocate_iregister_slots._sep.c\
+  ./analysis___inline_methods._sep.c\
+  ./analysis___cha_analysis._sep.c\
+  ./analysis___reachable_method_analysis._sep.c\
+  ./analysis___rta_analysis._sep.c\
+  ./analysis___instantiated_type_analysis._sep.c\
+  ./analysis___reachable_as_init_impl._sep.c\
+  ./analysis___reachable_as_init._sep.c\
+  ./analysis___reachable_from_init_method_analysis_impl._sep.c\
+  ./analysis___reachable_from_init_method_analysis._sep.c\
+  ./analysis___dead_method_removal._sep.c\
+  ./analysis___inline_get_and_set._sep.c\
+  ./analysis___remove_out_of_init_get_test._sep.c\
+  ./compiling___compiling_global._sep.c\
+  ./compiling___table_computation._sep.c\
+  ./compiling___compiling_icode._sep.c\
+  ./native_interface___ni_metamodel._sep.c\
   ./nitc._sep.c\
   ./nitc._tables.c

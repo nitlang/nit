@@ -230,7 +230,7 @@ void analysis___Program___do_global_analysis(val_t p0){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("cha");
     REGB0 = TAG_Int(3);
-    fra.me.REG[2] = NEW_String_string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -238,17 +238,17 @@ void analysis___Program___do_global_analysis(val_t p0){
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[2]));
   if (UNTAG_Bool(REGB0)) {
   } else {
-    REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+    REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
     /* ./analysis//analysis.nit:61 */
-    fra.me.REG[2] = NEW_ChaBuilder_cha_analysis___ChaBuilder___init(fra.me.REG[0]);
+    fra.me.REG[2] = NEW_ChaBuilder_analysis___cha_analysis___ChaBuilder___init(fra.me.REG[0]);
     /* ./analysis//analysis.nit:62 */
-    CALL_cha_analysis___ChaBuilder___work(fra.me.REG[2])(fra.me.REG[2]);
+    CALL_analysis___cha_analysis___ChaBuilder___work(fra.me.REG[2])(fra.me.REG[2]);
     /* ./analysis//analysis.nit:63 */
-    fra.me.REG[2] = CALL_cha_analysis___ChaBuilder___context(fra.me.REG[2])(fra.me.REG[2]);
-    CALL_reachable_method_analysis___Program___rma__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
+    fra.me.REG[2] = CALL_analysis___cha_analysis___ChaBuilder___context(fra.me.REG[2])(fra.me.REG[2]);
+    CALL_analysis___reachable_method_analysis___Program___rma__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   } else {
     /* ./analysis//analysis.nit:64 */
     fra.me.REG[2] = CALL_program___Program___tc(fra.me.REG[0])(fra.me.REG[0]);
@@ -256,7 +256,7 @@ void analysis___Program___do_global_analysis(val_t p0){
     if (!once_value_2) {
       fra.me.REG[1] = BOX_NativeString("rta");
       REGB0 = TAG_Int(3);
-      fra.me.REG[1] = NEW_String_string___String___with_native(fra.me.REG[1], REGB0);
+      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
       once_value_2 = fra.me.REG[1];
       register_static_object(&once_value_2);
     } else fra.me.REG[1] = once_value_2;
@@ -264,24 +264,24 @@ void analysis___Program___do_global_analysis(val_t p0){
     REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[1]));
     if (UNTAG_Bool(REGB0)) {
     } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
       REGB0 = REGB1;
     }
     if (UNTAG_Bool(REGB0)) {
       /* ./analysis//analysis.nit:65 */
-      fra.me.REG[1] = NEW_RtaBuilder_rta_analysis___RtaBuilder___init(fra.me.REG[0]);
+      fra.me.REG[1] = NEW_RtaBuilder_analysis___rta_analysis___RtaBuilder___init(fra.me.REG[0]);
       /* ./analysis//analysis.nit:66 */
-      CALL_rta_analysis___RtaBuilder___work(fra.me.REG[1])(fra.me.REG[1]);
+      CALL_analysis___rta_analysis___RtaBuilder___work(fra.me.REG[1])(fra.me.REG[1]);
       /* ./analysis//analysis.nit:67 */
-      fra.me.REG[2] = CALL_rta_analysis___RtaBuilder___context(fra.me.REG[1])(fra.me.REG[1]);
-      CALL_reachable_method_analysis___Program___rma__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
+      fra.me.REG[2] = CALL_analysis___rta_analysis___RtaBuilder___context(fra.me.REG[1])(fra.me.REG[1]);
+      CALL_analysis___reachable_method_analysis___Program___rma__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
       /* ./analysis//analysis.nit:68 */
-      fra.me.REG[1] = CALL_rta_analysis___RtaBuilder___context(fra.me.REG[1])(fra.me.REG[1]);
-      CALL_instantiated_type_analysis___Program___ita__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+      fra.me.REG[1] = CALL_analysis___rta_analysis___RtaBuilder___context(fra.me.REG[1])(fra.me.REG[1]);
+      CALL_analysis___instantiated_type_analysis___Program___ita__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     }
   }
   /* ./analysis//analysis.nit:72 */
-  fra.me.REG[1] = CALL_reachable_method_analysis___Program___rma(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[1] = CALL_analysis___reachable_method_analysis___Program___rma(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -290,16 +290,16 @@ void analysis___Program___do_global_analysis(val_t p0){
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
       REGB0 = REGB1;
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    fra.me.REG[1] = NEW_DefaultReachableMethodAnalysis_reachable_method_analysis___DefaultReachableMethodAnalysis___init();
-    CALL_reachable_method_analysis___Program___rma__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+    fra.me.REG[1] = NEW_DefaultReachableMethodAnalysis_analysis___reachable_method_analysis___DefaultReachableMethodAnalysis___init();
+    CALL_analysis___reachable_method_analysis___Program___rma__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   }
   /* ./analysis//analysis.nit:73 */
-  fra.me.REG[1] = CALL_instantiated_type_analysis___Program___ita(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[1] = CALL_analysis___instantiated_type_analysis___Program___ita(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -308,36 +308,36 @@ void analysis___Program___do_global_analysis(val_t p0){
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
       REGB0 = REGB1;
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    fra.me.REG[1] = NEW_DefaultInstantiatedTypeAnalysis_instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___init();
-    CALL_instantiated_type_analysis___Program___ita__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+    fra.me.REG[1] = NEW_DefaultInstantiatedTypeAnalysis_analysis___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___init();
+    CALL_analysis___instantiated_type_analysis___Program___ita__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   }
   /* ./analysis//analysis.nit:75 */
-  fra.me.REG[1] = NEW_ReachableAsInitBuilder_reachable_as_init_impl___ReachableAsInitBuilder___init(fra.me.REG[0]);
+  fra.me.REG[1] = NEW_ReachableAsInitBuilder_analysis___reachable_as_init_impl___ReachableAsInitBuilder___init(fra.me.REG[0]);
   /* ./analysis//analysis.nit:76 */
-  CALL_reachable_as_init_impl___ReachableAsInitBuilder___work(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_analysis___reachable_as_init_impl___ReachableAsInitBuilder___work(fra.me.REG[1])(fra.me.REG[1]);
   /* ./analysis//analysis.nit:77 */
-  fra.me.REG[1] = CALL_reachable_as_init_impl___ReachableAsInitBuilder___context(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_reachable_as_init___Program___rai__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  fra.me.REG[1] = CALL_analysis___reachable_as_init_impl___ReachableAsInitBuilder___context(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_analysis___reachable_as_init___Program___rai__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./analysis//analysis.nit:79 */
   fra.me.REG[1] = CALL_program___Program___tc(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_analysis___ToolContext___no_callgraph_from_init(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     /* ./analysis//analysis.nit:80 */
-    fra.me.REG[1] = NEW_RFIMABuilder_reachable_from_init_method_analysis_impl___RFIMABuilder___init(fra.me.REG[0]);
+    fra.me.REG[1] = NEW_RFIMABuilder_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___init(fra.me.REG[0]);
     /* ./analysis//analysis.nit:81 */
-    CALL_reachable_from_init_method_analysis_impl___RFIMABuilder___work(fra.me.REG[1])(fra.me.REG[1]);
+    CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work(fra.me.REG[1])(fra.me.REG[1]);
     /* ./analysis//analysis.nit:82 */
-    fra.me.REG[1] = CALL_reachable_from_init_method_analysis_impl___RFIMABuilder___context(fra.me.REG[1])(fra.me.REG[1]);
-    CALL_reachable_from_init_method_analysis___Program___rfima__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+    fra.me.REG[1] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___context(fra.me.REG[1])(fra.me.REG[1]);
+    CALL_analysis___reachable_from_init_method_analysis___Program___rfima__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   }
   /* ./analysis//analysis.nit:85 */
-  fra.me.REG[1] = CALL_reachable_from_init_method_analysis___Program___rfima(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[1] = CALL_analysis___reachable_from_init_method_analysis___Program___rfima(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -346,13 +346,13 @@ void analysis___Program___do_global_analysis(val_t p0){
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
       REGB0 = REGB1;
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    fra.me.REG[1] = NEW_DefaultReachableFromInitMethodAnalysis_reachable_from_init_method_analysis___DefaultReachableFromInitMethodAnalysis___init();
-    CALL_reachable_from_init_method_analysis___Program___rfima__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+    fra.me.REG[1] = NEW_DefaultReachableFromInitMethodAnalysis_analysis___reachable_from_init_method_analysis___DefaultReachableFromInitMethodAnalysis___init();
+    CALL_analysis___reachable_from_init_method_analysis___Program___rfima__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   }
   stack_frame_head = fra.me.prev;
   return;
@@ -382,7 +382,7 @@ void analysis___Program___do_global_pre_analysis_optimizations(val_t p0){
   REGB0 = CALL_analysis___ToolContext___no_inline_get_set(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    CALL_inline_get_and_set___Program___inline_get_set(fra.me.REG[0])(fra.me.REG[0]);
+    CALL_analysis___inline_get_and_set___Program___inline_get_set(fra.me.REG[0])(fra.me.REG[0]);
   }
   stack_frame_head = fra.me.prev;
   return;
@@ -412,14 +412,14 @@ void analysis___Program___do_global_post_analysis_optimizations(val_t p0){
   REGB0 = CALL_analysis___ToolContext___no_dead_method_removal(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    CALL_dead_method_removal___Program___optimize_dead_methods(fra.me.REG[0])(fra.me.REG[0]);
+    CALL_analysis___dead_method_removal___Program___optimize_dead_methods(fra.me.REG[0])(fra.me.REG[0]);
   }
   /* ./analysis//analysis.nit:100 */
   fra.me.REG[1] = CALL_program___Program___tc(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_analysis___ToolContext___no_out_of_init_get_test_removal(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    CALL_remove_out_of_init_get_test___Program___optimize_out_of_init_getters(fra.me.REG[0])(fra.me.REG[0]);
+    CALL_analysis___remove_out_of_init_get_test___Program___optimize_out_of_init_getters(fra.me.REG[0])(fra.me.REG[0]);
   }
   stack_frame_head = fra.me.prev;
   return;
@@ -438,11 +438,11 @@ void analysis___Program___dump_global_optimizations_information(val_t p0, val_t 
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   /* ./analysis//analysis.nit:104 */
-  CALL_remove_out_of_init_get_test___Program___dump_out_of_init_information(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_analysis___remove_out_of_init_get_test___Program___dump_out_of_init_information(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./analysis//analysis.nit:105 */
-  CALL_dead_method_removal___Program___dump_dead_method_optimization(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_analysis___dead_method_removal___Program___dump_dead_method_optimization(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./analysis//analysis.nit:106 */
-  CALL_inline_get_and_set___Program___dump_inline_get_set(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_analysis___inline_get_and_set___Program___dump_inline_get_set(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -463,21 +463,21 @@ void analysis___Program___dump_global_analysis_information(val_t p0, val_t p1){
   /* ./analysis//analysis.nit:111 */
   fra.me.REG[2] = CALL_program___Program___tc(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_analysis___ToolContext___global_callgraph(fra.me.REG[2])(fra.me.REG[2]);
-  CALL_reachable_method_analysis___Program___dump_reachable_methods(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
+  CALL_analysis___reachable_method_analysis___Program___dump_reachable_methods(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
   /* ./analysis//analysis.nit:112 */
   fra.me.REG[2] = CALL_program___Program___tc(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_analysis___ToolContext___global_callgraph(fra.me.REG[2])(fra.me.REG[2]);
-  CALL_reachable_method_analysis___Program___dump_unreachable_methods(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
+  CALL_analysis___reachable_method_analysis___Program___dump_unreachable_methods(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
   /* ./analysis//analysis.nit:113 */
-  CALL_instantiated_type_analysis___Program___dump_instantiated_types(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_analysis___instantiated_type_analysis___Program___dump_instantiated_types(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./analysis//analysis.nit:114 */
-  CALL_instantiated_type_analysis___Program___dump_not_instantiated_types(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_analysis___instantiated_type_analysis___Program___dump_not_instantiated_types(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./analysis//analysis.nit:115 */
-  CALL_reachable_as_init___Program___dump_reachable_as_init_methods(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_analysis___reachable_as_init___Program___dump_reachable_as_init_methods(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./analysis//analysis.nit:116 */
-  CALL_reachable_from_init_method_analysis___Program___dump_reachable_methods_from_init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_analysis___reachable_from_init_method_analysis___Program___dump_reachable_methods_from_init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./analysis//analysis.nit:117 */
-  CALL_reachable_from_init_method_analysis___Program___dump_unreachable_methods_from_init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_analysis___reachable_from_init_method_analysis___Program___dump_unreachable_methods_from_init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -495,9 +495,9 @@ void analysis___IRoutine___optimize(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   /* ./analysis//analysis.nit:125 */
-  CALL_inline_methods___IRoutine___inline_methods(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_analysis___inline_methods___IRoutine___inline_methods(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./analysis//analysis.nit:126 */
-  CALL_allocate_iregister_slots___IRoutine___allocate_iregister_slots(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_analysis___allocate_iregister_slots___IRoutine___allocate_iregister_slots(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
 }

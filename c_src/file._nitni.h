@@ -1,5 +1,5 @@
 #include <nit_common.h>
-#include "file._sep.h"
+#include "standard___file._sep.h"
 #ifndef FILE_NITNI_H
 #define FILE_NITNI_H
 

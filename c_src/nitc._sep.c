@@ -6,17 +6,17 @@ val_t nitc___NitCompiler___opt_output(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 30;
+  fra.me.line = 31;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:30 */
+  /* ./nitc.nit:31 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_output(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_output", LOCATE_nitc, 30);
+    nit_abort("Uninitialized attribute %s", "_opt_output", LOCATE_nitc, 31);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_output(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -28,17 +28,17 @@ val_t nitc___NitCompiler___opt_boost(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 31;
+  fra.me.line = 32;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_boost;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:31 */
+  /* ./nitc.nit:32 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_boost(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_boost", LOCATE_nitc, 31);
+    nit_abort("Uninitialized attribute %s", "_opt_boost", LOCATE_nitc, 32);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_boost(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -50,17 +50,17 @@ val_t nitc___NitCompiler___opt_no_cc(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 32;
+  fra.me.line = 33;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_no_cc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:32 */
+  /* ./nitc.nit:33 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_no_cc(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_no_cc", LOCATE_nitc, 32);
+    nit_abort("Uninitialized attribute %s", "_opt_no_cc", LOCATE_nitc, 33);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_no_cc(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -72,85 +72,19 @@ val_t nitc___NitCompiler___opt_cc_no_link(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 33;
+  fra.me.line = 34;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_cc_no_link;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:33 */
+  /* ./nitc.nit:34 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_cc_no_link(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_cc_no_link", LOCATE_nitc, 33);
+    nit_abort("Uninitialized attribute %s", "_opt_cc_no_link", LOCATE_nitc, 34);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_cc_no_link(fra.me.REG[0]);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-val_t nitc___NitCompiler___opt_cc_lib_paths(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_nitc;
-  fra.me.line = 34;
-  fra.me.meth = LOCATE_nitc___NitCompiler___opt_cc_lib_paths;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./nitc.nit:34 */
-  REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_cc_lib_paths(fra.me.REG[0])!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Uninitialized attribute %s", "_opt_cc_lib_paths", LOCATE_nitc, 34);
-  }
-  fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_cc_lib_paths(fra.me.REG[0]);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-val_t nitc___NitCompiler___opt_cc_libs(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_nitc;
-  fra.me.line = 35;
-  fra.me.meth = LOCATE_nitc___NitCompiler___opt_cc_libs;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./nitc.nit:35 */
-  REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_cc_libs(fra.me.REG[0])!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Uninitialized attribute %s", "_opt_cc_libs", LOCATE_nitc, 35);
-  }
-  fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_cc_libs(fra.me.REG[0]);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-val_t nitc___NitCompiler___opt_cc_include_paths(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_nitc;
-  fra.me.line = 36;
-  fra.me.meth = LOCATE_nitc___NitCompiler___opt_cc_include_paths;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./nitc.nit:36 */
-  REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_cc_include_paths(fra.me.REG[0])!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Uninitialized attribute %s", "_opt_cc_include_paths", LOCATE_nitc, 36);
-  }
-  fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_cc_include_paths(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -160,17 +94,17 @@ val_t nitc___NitCompiler___opt_global(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 37;
+  fra.me.line = 35;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_global;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:37 */
+  /* ./nitc.nit:35 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_global(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_global", LOCATE_nitc, 37);
+    nit_abort("Uninitialized attribute %s", "_opt_global", LOCATE_nitc, 35);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_global(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -182,17 +116,17 @@ val_t nitc___NitCompiler___opt_global_no_STF_opt(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 38;
+  fra.me.line = 36;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_global_no_STF_opt;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:38 */
+  /* ./nitc.nit:36 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_global_no_STF_opt(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_global_no_STF_opt", LOCATE_nitc, 38);
+    nit_abort("Uninitialized attribute %s", "_opt_global_no_STF_opt", LOCATE_nitc, 36);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_global_no_STF_opt(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -204,17 +138,17 @@ val_t nitc___NitCompiler___opt_global_no_DMR_opt(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 39;
+  fra.me.line = 37;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_global_no_DMR_opt;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:39 */
+  /* ./nitc.nit:37 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_global_no_DMR_opt(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_global_no_DMR_opt", LOCATE_nitc, 39);
+    nit_abort("Uninitialized attribute %s", "_opt_global_no_DMR_opt", LOCATE_nitc, 37);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_global_no_DMR_opt(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -226,17 +160,17 @@ val_t nitc___NitCompiler___opt_global_no_inline_get_set(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 40;
+  fra.me.line = 38;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_global_no_inline_get_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:40 */
+  /* ./nitc.nit:38 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_global_no_inline_get_set(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_global_no_inline_get_set", LOCATE_nitc, 40);
+    nit_abort("Uninitialized attribute %s", "_opt_global_no_inline_get_set", LOCATE_nitc, 38);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_global_no_inline_get_set(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -248,17 +182,17 @@ val_t nitc___NitCompiler___opt_global_no_out_of_init_get_test_opt(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 41;
+  fra.me.line = 39;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_global_no_out_of_init_get_test_opt;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:41 */
+  /* ./nitc.nit:39 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_global_no_out_of_init_get_test_opt(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_global_no_out_of_init_get_test_opt", LOCATE_nitc, 41);
+    nit_abort("Uninitialized attribute %s", "_opt_global_no_out_of_init_get_test_opt", LOCATE_nitc, 39);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_global_no_out_of_init_get_test_opt(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -270,17 +204,17 @@ val_t nitc___NitCompiler___opt_global_no_RFIMA(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 42;
+  fra.me.line = 40;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_global_no_RFIMA;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:42 */
+  /* ./nitc.nit:40 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_global_no_RFIMA(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_global_no_RFIMA", LOCATE_nitc, 42);
+    nit_abort("Uninitialized attribute %s", "_opt_global_no_RFIMA", LOCATE_nitc, 40);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_global_no_RFIMA(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -292,17 +226,17 @@ val_t nitc___NitCompiler___opt_global_callgraph(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 43;
+  fra.me.line = 41;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_global_callgraph;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:43 */
+  /* ./nitc.nit:41 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_global_callgraph(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_global_callgraph", LOCATE_nitc, 43);
+    nit_abort("Uninitialized attribute %s", "_opt_global_callgraph", LOCATE_nitc, 41);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_global_callgraph(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -314,17 +248,17 @@ val_t nitc___NitCompiler___opt_clibdir(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 44;
+  fra.me.line = 42;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_clibdir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:44 */
+  /* ./nitc.nit:42 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_clibdir(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_clibdir", LOCATE_nitc, 44);
+    nit_abort("Uninitialized attribute %s", "_opt_clibdir", LOCATE_nitc, 42);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_clibdir(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -336,17 +270,17 @@ val_t nitc___NitCompiler___opt_bindir(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 45;
+  fra.me.line = 43;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_bindir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:45 */
+  /* ./nitc.nit:43 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_bindir(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_bindir", LOCATE_nitc, 45);
+    nit_abort("Uninitialized attribute %s", "_opt_bindir", LOCATE_nitc, 43);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_bindir(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -358,17 +292,17 @@ val_t nitc___NitCompiler___opt_compdir(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 46;
+  fra.me.line = 44;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_compdir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:46 */
+  /* ./nitc.nit:44 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_compdir(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_compdir", LOCATE_nitc, 46);
+    nit_abort("Uninitialized attribute %s", "_opt_compdir", LOCATE_nitc, 44);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_compdir(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -380,17 +314,17 @@ val_t nitc___NitCompiler___opt_extension_prefix(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 47;
+  fra.me.line = 45;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_extension_prefix;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:47 */
+  /* ./nitc.nit:45 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_extension_prefix(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_extension_prefix", LOCATE_nitc, 47);
+    nit_abort("Uninitialized attribute %s", "_opt_extension_prefix", LOCATE_nitc, 45);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_extension_prefix(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -402,24 +336,24 @@ val_t nitc___NitCompiler___opt_output_format(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 48;
+  fra.me.line = 46;
   fra.me.meth = LOCATE_nitc___NitCompiler___opt_output_format;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:48 */
+  /* ./nitc.nit:46 */
   REGB0 = TAG_Bool(ATTR_nitc___NitCompiler____opt_output_format(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_opt_output_format", LOCATE_nitc, 48);
+    nit_abort("Uninitialized attribute %s", "_opt_output_format", LOCATE_nitc, 46);
   }
   fra.me.REG[0] = ATTR_nitc___NitCompiler____opt_output_format(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
 void nitc___NitCompiler___init(val_t p0, int* init_table){
-  int itpos0 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_NitCompiler].i;
+  int itpos0 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_nitc___NitCompiler].i;
   struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
   val_t tmp;
@@ -427,7 +361,7 @@ void nitc___NitCompiler___init(val_t p0, int* init_table){
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 50;
+  fra.me.line = 48;
   fra.me.meth = LOCATE_nitc___NitCompiler___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -436,60 +370,60 @@ void nitc___NitCompiler___init(val_t p0, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:50 */
+  /* ./nitc.nit:48 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./nitc.nit:52 */
+  /* ./nitc.nit:50 */
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("nitc");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   CALL_abstracttool___AbstractCompiler___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2], init_table);
-  /* ./nitc.nit:53 */
+  /* ./nitc.nit:51 */
   fra.me.REG[2] = CALL_mmloader___ToolContext___option_context(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Int(18);
-  fra.me.REG[0] = NEW_Array_array___Array___with_capacity(REGB0);
+  fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_output(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_boost(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_no_cc(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_cc_no_link(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-  fra.me.REG[3] = CALL_nitc___NitCompiler___opt_cc_libs(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-  fra.me.REG[3] = CALL_nitc___NitCompiler___opt_cc_lib_paths(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-  fra.me.REG[3] = CALL_nitc___NitCompiler___opt_cc_include_paths(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  fra.me.REG[3] = CALL_separate_options___ToolContext___opt_cc_libs(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  fra.me.REG[3] = CALL_separate_options___ToolContext___opt_cc_lib_paths(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  fra.me.REG[3] = CALL_separate_options___ToolContext___opt_cc_include_paths(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_global(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_clibdir(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_bindir(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_compdir(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_extension_prefix(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_global_no_STF_opt(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_global_no_DMR_opt(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_global_callgraph(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_global_no_inline_get_set(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_global_no_RFIMA(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[3] = CALL_nitc___NitCompiler___opt_global_no_out_of_init_get_test_opt(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[1] = CALL_nitc___NitCompiler___opt_output_format(fra.me.REG[1])(fra.me.REG[1]);
-  CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   CALL_opts___OptionContext___add_option(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -520,7 +454,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       static val_t once_value_18; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 56;
+  fra.me.line = 54;
   fra.me.meth = LOCATE_nitc___NitCompiler___process_options;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -529,43 +463,43 @@ void nitc___NitCompiler___process_options(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:56 */
+  /* ./nitc.nit:54 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./nitc.nit:58 */
+  /* ./nitc.nit:56 */
   CALL_SUPER_nitc___NitCompiler___process_options(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./nitc.nit:59 */
+  /* ./nitc.nit:57 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_output(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
-  CALL_compiling_base___ToolContext___output_file__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:60 */
+  CALL_compiling___compiling_base___ToolContext___output_file__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  /* ./nitc.nit:58 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_boost(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
-  CALL_compiling_base___ToolContext___boost__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:61 */
+  CALL_compiling___compiling_base___ToolContext___boost__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  /* ./nitc.nit:59 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_no_cc(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
-  CALL_compiling_base___ToolContext___no_cc__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:62 */
+  CALL_compiling___compiling_base___ToolContext___no_cc__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  /* ./nitc.nit:60 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_cc_no_link(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(fra.me.REG[0]));
-  CALL_compiling_base___ToolContext___cc_link__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
+  CALL_compiling___compiling_base___ToolContext___cc_link__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
+  /* ./nitc.nit:61 */
+  fra.me.REG[0] = CALL_separate_options___ToolContext___opt_cc_lib_paths(fra.me.REG[1])(fra.me.REG[1]);
+  fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_compiling___compiling_base___ToolContext___cc_lib_paths__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  /* ./nitc.nit:62 */
+  fra.me.REG[0] = CALL_separate_options___ToolContext___opt_cc_libs(fra.me.REG[1])(fra.me.REG[1]);
+  fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_compiling___compiling_base___ToolContext___cc_libs__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   /* ./nitc.nit:63 */
-  fra.me.REG[0] = CALL_nitc___NitCompiler___opt_cc_lib_paths(fra.me.REG[1])(fra.me.REG[1]);
+  fra.me.REG[0] = CALL_separate_options___ToolContext___opt_cc_include_paths(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
-  CALL_compiling_base___ToolContext___cc_lib_paths__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  CALL_compiling___compiling_base___ToolContext___cc_include_paths__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   /* ./nitc.nit:64 */
-  fra.me.REG[0] = CALL_nitc___NitCompiler___opt_cc_libs(fra.me.REG[1])(fra.me.REG[1]);
-  fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
-  CALL_compiling_base___ToolContext___cc_libs__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:65 */
-  fra.me.REG[0] = CALL_nitc___NitCompiler___opt_cc_include_paths(fra.me.REG[1])(fra.me.REG[1]);
-  fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
-  CALL_compiling_base___ToolContext___cc_include_paths__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:66 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_extension_prefix(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./nitc.nit:67 */
+  /* ./nitc.nit:65 */
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -574,59 +508,59 @@ void nitc___NitCompiler___process_options(val_t p0){
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
       REGB0 = REGB1;
     }
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    CALL_compiling_base___ToolContext___ext_prefix__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+    CALL_compiling___compiling_base___ToolContext___ext_prefix__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   } else {
     if (!once_value_1) {
       fra.me.REG[0] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
       once_value_1 = fra.me.REG[0];
       register_static_object(&once_value_1);
     } else fra.me.REG[0] = once_value_1;
     fra.me.REG[0] = fra.me.REG[0];
-    CALL_compiling_base___ToolContext___ext_prefix__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+    CALL_compiling___compiling_base___ToolContext___ext_prefix__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   }
-  /* ./nitc.nit:68 */
+  /* ./nitc.nit:66 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_global(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
   CALL_program___ToolContext___global__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:69 */
+  /* ./nitc.nit:67 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_global_no_STF_opt(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(fra.me.REG[0]));
   CALL_program___ToolContext___use_SFT_optimization__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
-  /* ./nitc.nit:70 */
+  /* ./nitc.nit:68 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_global_no_DMR_opt(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
   CALL_analysis___ToolContext___no_dead_method_removal__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:71 */
+  /* ./nitc.nit:69 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_global_no_inline_get_set(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
   CALL_analysis___ToolContext___no_inline_get_set__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:72 */
+  /* ./nitc.nit:70 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_global_no_RFIMA(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
   CALL_analysis___ToolContext___no_callgraph_from_init__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:73 */
+  /* ./nitc.nit:71 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_global_no_out_of_init_get_test_opt(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
   CALL_analysis___ToolContext___no_out_of_init_get_test_removal__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:74 */
+  /* ./nitc.nit:72 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_global_callgraph(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___OptionEnum___value_name(fra.me.REG[0])(fra.me.REG[0]);
   CALL_analysis___ToolContext___global_callgraph__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:75 */
+  /* ./nitc.nit:73 */
   fra.me.REG[0] = CALL_nitc___NitCompiler___opt_compdir(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_opts___Option___value(fra.me.REG[0])(fra.me.REG[0]);
-  CALL_compiling_base___ToolContext___compdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./nitc.nit:76 */
-  fra.me.REG[0] = CALL_compiling_base___ToolContext___compdir(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_compiling___compiling_base___ToolContext___compdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  /* ./nitc.nit:74 */
+  fra.me.REG[0] = CALL_compiling___compiling_base___ToolContext___compdir(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -635,36 +569,36 @@ void nitc___NitCompiler___process_options(val_t p0){
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
       REGB0 = REGB1;
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./nitc.nit:77 */
+    /* ./nitc.nit:75 */
     if (!once_value_2) {
       if (!once_value_3) {
         fra.me.REG[0] = BOX_NativeString("NIT_COMPDIR");
         REGB0 = TAG_Int(11);
-        fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
         once_value_3 = fra.me.REG[0];
         register_static_object(&once_value_3);
       } else fra.me.REG[0] = once_value_3;
       fra.me.REG[0] = fra.me.REG[0];
-      fra.me.REG[0] = CALL_symbol___String___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
-      fra.me.REG[0] = CALL_environ___Symbol___environ(fra.me.REG[0])(fra.me.REG[0]);
+      fra.me.REG[0] = CALL_standard___symbol___String___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
+      fra.me.REG[0] = CALL_standard___environ___Symbol___environ(fra.me.REG[0])(fra.me.REG[0]);
       once_value_2 = fra.me.REG[0];
       register_static_object(&once_value_2);
     } else fra.me.REG[0] = once_value_2;
     fra.me.REG[0] = fra.me.REG[0];
-    /* ./nitc.nit:78 */
-    REGB0 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[0])(fra.me.REG[0]);
+    /* ./nitc.nit:76 */
+    REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./nitc.nit:79 */
-      CALL_compiling_base___ToolContext___compdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+      /* ./nitc.nit:77 */
+      CALL_compiling___compiling_base___ToolContext___compdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
     }
-    /* ./nitc.nit:81 */
-    fra.me.REG[0] = CALL_compiling_base___ToolContext___compdir(fra.me.REG[1])(fra.me.REG[1]);
+    /* ./nitc.nit:79 */
+    fra.me.REG[0] = CALL_compiling___compiling_base___ToolContext___compdir(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -673,34 +607,34 @@ void nitc___NitCompiler___process_options(val_t p0){
         REGB1 = TAG_Bool(false);
         REGB0 = REGB1;
       } else {
-        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
+        REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
         REGB0 = REGB1;
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./nitc.nit:82 */
+      /* ./nitc.nit:80 */
       if (!once_value_4) {
         fra.me.REG[0] = BOX_NativeString(".nit_compile");
         REGB0 = TAG_Int(12);
-        fra.me.REG[0] = NEW_String_string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
         once_value_4 = fra.me.REG[0];
         register_static_object(&once_value_4);
       } else fra.me.REG[0] = once_value_4;
       fra.me.REG[0] = fra.me.REG[0];
-      CALL_compiling_base___ToolContext___compdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+      CALL_compiling___compiling_base___ToolContext___compdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
     }
   }
+  /* ./nitc.nit:83 */
+  fra.me.REG[0] = CALL_compiling___compiling_base___ToolContext___compdir(fra.me.REG[1])(fra.me.REG[1]);
+  fra.me.REG[2] = CALL_compiling___compiling_base___ToolContext___ext_prefix(fra.me.REG[1])(fra.me.REG[1]);
+  fra.me.REG[2] = CALL_standard___string___String_____plus(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
+  CALL_compiling___compiling_base___ToolContext___compdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   /* ./nitc.nit:85 */
-  fra.me.REG[0] = CALL_compiling_base___ToolContext___compdir(fra.me.REG[1])(fra.me.REG[1]);
-  fra.me.REG[2] = CALL_compiling_base___ToolContext___ext_prefix(fra.me.REG[1])(fra.me.REG[1]);
-  fra.me.REG[2] = CALL_string___String_____plus(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-  CALL_compiling_base___ToolContext___compdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./nitc.nit:87 */
   fra.me.REG[2] = CALL_nitc___NitCompiler___opt_clibdir(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_opts___Option___value(fra.me.REG[2])(fra.me.REG[2]);
-  CALL_compiling_base___ToolContext___clibdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./nitc.nit:88 */
-  fra.me.REG[2] = CALL_compiling_base___ToolContext___clibdir(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_compiling___compiling_base___ToolContext___clibdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  /* ./nitc.nit:86 */
+  fra.me.REG[2] = CALL_compiling___compiling_base___ToolContext___clibdir(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -709,95 +643,95 @@ void nitc___NitCompiler___process_options(val_t p0){
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
       REGB0 = REGB1;
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./nitc.nit:89 */
+    /* ./nitc.nit:87 */
     if (!once_value_5) {
       if (!once_value_6) {
         fra.me.REG[2] = BOX_NativeString("NIT_DIR");
         REGB0 = TAG_Int(7);
-        fra.me.REG[2] = NEW_String_string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
         once_value_6 = fra.me.REG[2];
         register_static_object(&once_value_6);
       } else fra.me.REG[2] = once_value_6;
       fra.me.REG[2] = fra.me.REG[2];
-      fra.me.REG[2] = CALL_symbol___String___to_symbol(fra.me.REG[2])(fra.me.REG[2]);
-      fra.me.REG[2] = CALL_environ___Symbol___environ(fra.me.REG[2])(fra.me.REG[2]);
+      fra.me.REG[2] = CALL_standard___symbol___String___to_symbol(fra.me.REG[2])(fra.me.REG[2]);
+      fra.me.REG[2] = CALL_standard___environ___Symbol___environ(fra.me.REG[2])(fra.me.REG[2]);
       once_value_5 = fra.me.REG[2];
       register_static_object(&once_value_5);
     } else fra.me.REG[2] = once_value_5;
     fra.me.REG[2] = fra.me.REG[2];
-    /* ./nitc.nit:90 */
-    REGB0 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[2])(fra.me.REG[2]);
+    /* ./nitc.nit:88 */
+    REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[2])(fra.me.REG[2]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./nitc.nit:91 */
+      /* ./nitc.nit:89 */
       REGB0 = TAG_Int(3);
-      fra.me.REG[0] = NEW_Array_array___Array___with_capacity(REGB0);
+      fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_7) {
         fra.me.REG[3] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[3] = NEW_String_string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
         once_value_7 = fra.me.REG[3];
         register_static_object(&once_value_7);
       } else fra.me.REG[3] = once_value_7;
       fra.me.REG[3] = fra.me.REG[3];
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      fra.me.REG[3] = CALL_kernel___Object___sys(fra.me.REG[1])(fra.me.REG[1]);
-      fra.me.REG[3] = CALL_string___Sys___program_name(fra.me.REG[3])(fra.me.REG[3]);
-      fra.me.REG[3] = CALL_file___String___dirname(fra.me.REG[3])(fra.me.REG[3]);
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      fra.me.REG[3] = CALL_standard___kernel___Object___sys(fra.me.REG[1])(fra.me.REG[1]);
+      fra.me.REG[3] = CALL_standard___string___Sys___program_name(fra.me.REG[3])(fra.me.REG[3]);
+      fra.me.REG[3] = CALL_standard___file___String___dirname(fra.me.REG[3])(fra.me.REG[3]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
       if (!once_value_8) {
         fra.me.REG[3] = BOX_NativeString("/../clib");
         REGB0 = TAG_Int(8);
-        fra.me.REG[3] = NEW_String_string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
         once_value_8 = fra.me.REG[3];
         register_static_object(&once_value_8);
       } else fra.me.REG[3] = once_value_8;
       fra.me.REG[3] = fra.me.REG[3];
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[2] = fra.me.REG[0];
-      /* ./nitc.nit:92 */
-      REGB0 = CALL_file___String___file_exists(fra.me.REG[2])(fra.me.REG[2]);
+      /* ./nitc.nit:90 */
+      REGB0 = CALL_standard___file___String___file_exists(fra.me.REG[2])(fra.me.REG[2]);
       if (UNTAG_Bool(REGB0)) {
-        CALL_compiling_base___ToolContext___clibdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+        CALL_compiling___compiling_base___ToolContext___clibdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
       }
     } else {
-      /* ./nitc.nit:94 */
+      /* ./nitc.nit:92 */
       REGB0 = TAG_Int(3);
-      fra.me.REG[0] = NEW_Array_array___Array___with_capacity(REGB0);
+      fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_9) {
         fra.me.REG[3] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[3] = NEW_String_string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
         once_value_9 = fra.me.REG[3];
         register_static_object(&once_value_9);
       } else fra.me.REG[3] = once_value_9;
       fra.me.REG[3] = fra.me.REG[3];
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
       if (!once_value_10) {
         fra.me.REG[3] = BOX_NativeString("/clib");
         REGB0 = TAG_Int(5);
-        fra.me.REG[3] = NEW_String_string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
         once_value_10 = fra.me.REG[3];
         register_static_object(&once_value_10);
       } else fra.me.REG[3] = once_value_10;
       fra.me.REG[3] = fra.me.REG[3];
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[2] = fra.me.REG[0];
-      /* ./nitc.nit:95 */
-      REGB0 = CALL_file___String___file_exists(fra.me.REG[2])(fra.me.REG[2]);
+      /* ./nitc.nit:93 */
+      REGB0 = CALL_standard___file___String___file_exists(fra.me.REG[2])(fra.me.REG[2]);
       if (UNTAG_Bool(REGB0)) {
-        CALL_compiling_base___ToolContext___clibdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+        CALL_compiling___compiling_base___ToolContext___clibdir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
       }
     }
-    /* ./nitc.nit:97 */
-    fra.me.REG[2] = CALL_compiling_base___ToolContext___clibdir(fra.me.REG[1])(fra.me.REG[1]);
+    /* ./nitc.nit:95 */
+    fra.me.REG[2] = CALL_compiling___compiling_base___ToolContext___clibdir(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -806,16 +740,16 @@ void nitc___NitCompiler___process_options(val_t p0){
         REGB1 = TAG_Bool(false);
         REGB0 = REGB1;
       } else {
-        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+        REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
         REGB0 = REGB1;
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./nitc.nit:98 */
+      /* ./nitc.nit:96 */
       if (!once_value_11) {
         fra.me.REG[2] = BOX_NativeString("Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR.");
         REGB0 = TAG_Int(79);
-        fra.me.REG[2] = NEW_String_string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
         once_value_11 = fra.me.REG[2];
         register_static_object(&once_value_11);
       } else fra.me.REG[2] = once_value_11;
@@ -823,12 +757,12 @@ void nitc___NitCompiler___process_options(val_t p0){
       CALL_mmloader___ToolContext___fatal_error(fra.me.REG[1])(fra.me.REG[1], NIT_NULL, fra.me.REG[2]);
     }
   }
-  /* ./nitc.nit:101 */
+  /* ./nitc.nit:99 */
   fra.me.REG[2] = CALL_nitc___NitCompiler___opt_bindir(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_opts___Option___value(fra.me.REG[2])(fra.me.REG[2]);
-  CALL_compiling_base___ToolContext___bindir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./nitc.nit:103 */
-  fra.me.REG[2] = CALL_compiling_base___ToolContext___bindir(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_compiling___compiling_base___ToolContext___bindir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  /* ./nitc.nit:101 */
+  fra.me.REG[2] = CALL_compiling___compiling_base___ToolContext___bindir(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -837,95 +771,95 @@ void nitc___NitCompiler___process_options(val_t p0){
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
       REGB0 = REGB1;
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./nitc.nit:104 */
+    /* ./nitc.nit:102 */
     if (!once_value_12) {
       if (!once_value_13) {
         fra.me.REG[2] = BOX_NativeString("NIT_DIR");
         REGB0 = TAG_Int(7);
-        fra.me.REG[2] = NEW_String_string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
         once_value_13 = fra.me.REG[2];
         register_static_object(&once_value_13);
       } else fra.me.REG[2] = once_value_13;
       fra.me.REG[2] = fra.me.REG[2];
-      fra.me.REG[2] = CALL_symbol___String___to_symbol(fra.me.REG[2])(fra.me.REG[2]);
-      fra.me.REG[2] = CALL_environ___Symbol___environ(fra.me.REG[2])(fra.me.REG[2]);
+      fra.me.REG[2] = CALL_standard___symbol___String___to_symbol(fra.me.REG[2])(fra.me.REG[2]);
+      fra.me.REG[2] = CALL_standard___environ___Symbol___environ(fra.me.REG[2])(fra.me.REG[2]);
       once_value_12 = fra.me.REG[2];
       register_static_object(&once_value_12);
     } else fra.me.REG[2] = once_value_12;
     fra.me.REG[2] = fra.me.REG[2];
-    /* ./nitc.nit:105 */
-    REGB0 = CALL_abstract_collection___Collection___is_empty(fra.me.REG[2])(fra.me.REG[2]);
+    /* ./nitc.nit:103 */
+    REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[2])(fra.me.REG[2]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./nitc.nit:106 */
+      /* ./nitc.nit:104 */
       REGB0 = TAG_Int(3);
-      fra.me.REG[0] = NEW_Array_array___Array___with_capacity(REGB0);
+      fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_14) {
         fra.me.REG[3] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[3] = NEW_String_string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
         once_value_14 = fra.me.REG[3];
         register_static_object(&once_value_14);
       } else fra.me.REG[3] = once_value_14;
       fra.me.REG[3] = fra.me.REG[3];
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      fra.me.REG[3] = CALL_kernel___Object___sys(fra.me.REG[1])(fra.me.REG[1]);
-      fra.me.REG[3] = CALL_string___Sys___program_name(fra.me.REG[3])(fra.me.REG[3]);
-      fra.me.REG[3] = CALL_file___String___dirname(fra.me.REG[3])(fra.me.REG[3]);
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      fra.me.REG[3] = CALL_standard___kernel___Object___sys(fra.me.REG[1])(fra.me.REG[1]);
+      fra.me.REG[3] = CALL_standard___string___Sys___program_name(fra.me.REG[3])(fra.me.REG[3]);
+      fra.me.REG[3] = CALL_standard___file___String___dirname(fra.me.REG[3])(fra.me.REG[3]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
       if (!once_value_15) {
         fra.me.REG[3] = BOX_NativeString("/../bin");
         REGB0 = TAG_Int(7);
-        fra.me.REG[3] = NEW_String_string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
         once_value_15 = fra.me.REG[3];
         register_static_object(&once_value_15);
       } else fra.me.REG[3] = once_value_15;
       fra.me.REG[3] = fra.me.REG[3];
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[2] = fra.me.REG[0];
-      /* ./nitc.nit:107 */
-      REGB0 = CALL_file___String___file_exists(fra.me.REG[2])(fra.me.REG[2]);
+      /* ./nitc.nit:105 */
+      REGB0 = CALL_standard___file___String___file_exists(fra.me.REG[2])(fra.me.REG[2]);
       if (UNTAG_Bool(REGB0)) {
-        CALL_compiling_base___ToolContext___bindir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+        CALL_compiling___compiling_base___ToolContext___bindir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
       }
     } else {
-      /* ./nitc.nit:109 */
+      /* ./nitc.nit:107 */
       REGB0 = TAG_Int(3);
-      fra.me.REG[0] = NEW_Array_array___Array___with_capacity(REGB0);
+      fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_16) {
         fra.me.REG[3] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[3] = NEW_String_string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
         once_value_16 = fra.me.REG[3];
         register_static_object(&once_value_16);
       } else fra.me.REG[3] = once_value_16;
       fra.me.REG[3] = fra.me.REG[3];
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
       if (!once_value_17) {
         fra.me.REG[3] = BOX_NativeString("/bin");
         REGB0 = TAG_Int(4);
-        fra.me.REG[3] = NEW_String_string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
         once_value_17 = fra.me.REG[3];
         register_static_object(&once_value_17);
       } else fra.me.REG[3] = once_value_17;
       fra.me.REG[3] = fra.me.REG[3];
-      CALL_abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      fra.me.REG[0] = CALL_string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
+      CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
+      fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[2] = fra.me.REG[0];
-      /* ./nitc.nit:110 */
-      REGB0 = CALL_file___String___file_exists(fra.me.REG[2])(fra.me.REG[2]);
+      /* ./nitc.nit:108 */
+      REGB0 = CALL_standard___file___String___file_exists(fra.me.REG[2])(fra.me.REG[2]);
       if (UNTAG_Bool(REGB0)) {
-        CALL_compiling_base___ToolContext___bindir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+        CALL_compiling___compiling_base___ToolContext___bindir__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
       }
     }
-    /* ./nitc.nit:112 */
-    fra.me.REG[2] = CALL_compiling_base___ToolContext___bindir(fra.me.REG[1])(fra.me.REG[1]);
+    /* ./nitc.nit:110 */
+    fra.me.REG[2] = CALL_compiling___compiling_base___ToolContext___bindir(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -934,16 +868,16 @@ void nitc___NitCompiler___process_options(val_t p0){
         REGB1 = TAG_Bool(false);
         REGB0 = REGB1;
       } else {
-        REGB1 = CALL_kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+        REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
         REGB0 = REGB1;
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./nitc.nit:113 */
+      /* ./nitc.nit:111 */
       if (!once_value_18) {
         fra.me.REG[2] = BOX_NativeString("Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR.");
         REGB0 = TAG_Int(74);
-        fra.me.REG[2] = NEW_String_string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
         once_value_18 = fra.me.REG[2];
         register_static_object(&once_value_18);
       } else fra.me.REG[2] = once_value_18;
@@ -961,7 +895,7 @@ void nitc___NitCompiler___perform_work(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 118;
+  fra.me.line = 116;
   fra.me.meth = LOCATE_nitc___NitCompiler___perform_work;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -975,72 +909,72 @@ void nitc___NitCompiler___perform_work(val_t p0, val_t p1){
   /* ./../lib/standard//collection//array.nit:234 */
   REGB0 = TAG_Int(0);
   /* ./../lib/standard//collection//array.nit:235 */
-  REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
+  REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 235);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
   }
-  REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[1]);
+  REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
   /* ./../lib/standard//collection//array.nit:236 */
-  fra.me.REG[2] = ATTR_array___Array____items(fra.me.REG[1]);
+  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[1]);
   /* ./../lib/standard//collection//array.nit:237 */
   while(1) {
     /* ./../lib/standard//collection//array.nit:23 */
-    REGB1 = TAG_Bool(ATTR_array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
+    REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_array, 23);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
     }
-    REGB1 = ATTR_array___AbstractArrayRead____length(fra.me.REG[1]);
-    /* ./../lib/standard//kernel.nit:212 */
+    REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
+    /* ./../lib/standard//kernel.nit:215 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
     /* ./../lib/standard//collection//array.nit:237 */
     if (UNTAG_Bool(REGB1)) {
       /* ./../lib/standard//collection//array.nit:238 */
       REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_array, 238);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
       }
       /* ./../lib/standard//collection//array.nit:654 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-      /* ./nitc.nit:121 */
+      /* ./nitc.nit:119 */
       fra.me.REG[3] = NEW_Program_program___Program___init(fra.me.REG[3], fra.me.REG[0]);
-      /* ./nitc.nit:122 */
+      /* ./nitc.nit:120 */
       fra.me.REG[4] = CALL_nitc___NitCompiler___opt_output_format(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[4] = CALL_opts___OptionEnum___value_name(fra.me.REG[4])(fra.me.REG[4]);
       CALL_compiling___Program___output_format__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-      /* ./nitc.nit:123 */
+      /* ./nitc.nit:121 */
       CALL_program___Program___compute_main_method(fra.me.REG[3])(fra.me.REG[3]);
-      /* ./nitc.nit:124 */
+      /* ./nitc.nit:122 */
       CALL_program___Program___generate_allocation_iroutines(fra.me.REG[3])(fra.me.REG[3]);
-      /* ./nitc.nit:125 */
+      /* ./nitc.nit:123 */
       REGB1 = CALL_program___ToolContext___global(fra.me.REG[0])(fra.me.REG[0]);
       if (UNTAG_Bool(REGB1)) {
-        /* ./nitc.nit:126 */
+        /* ./nitc.nit:124 */
         CALL_analysis___Program___do_global_pre_analysis_optimizations(fra.me.REG[3])(fra.me.REG[3]);
-        /* ./nitc.nit:127 */
+        /* ./nitc.nit:125 */
         CALL_analysis___Program___do_global_analysis(fra.me.REG[3])(fra.me.REG[3]);
-        /* ./nitc.nit:128 */
+        /* ./nitc.nit:126 */
         CALL_analysis___Program___do_global_post_analysis_optimizations(fra.me.REG[3])(fra.me.REG[3]);
-        /* ./nitc.nit:129 */
+        /* ./nitc.nit:127 */
         fra.me.REG[4] = CALL_mmloader___ToolContext___opt_log(fra.me.REG[0])(fra.me.REG[0]);
         fra.me.REG[4] = CALL_opts___Option___value(fra.me.REG[4])(fra.me.REG[4]);
         if (UNTAG_Bool(fra.me.REG[4])) {
-          /* ./nitc.nit:130 */
+          /* ./nitc.nit:128 */
           fra.me.REG[4] = CALL_mmloader___ToolContext___log_directory(fra.me.REG[0])(fra.me.REG[0]);
           CALL_analysis___Program___dump_global_optimizations_information(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-          /* ./nitc.nit:131 */
+          /* ./nitc.nit:129 */
           fra.me.REG[4] = CALL_mmloader___ToolContext___log_directory(fra.me.REG[0])(fra.me.REG[0]);
           CALL_analysis___Program___dump_global_analysis_information(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
         }
       }
-      /* ./nitc.nit:134 */
-      CALL_table_computation___Program___do_table_computation(fra.me.REG[3])(fra.me.REG[3]);
-      /* ./nitc.nit:135 */
+      /* ./nitc.nit:132 */
+      CALL_compiling___table_computation___Program___do_table_computation(fra.me.REG[3])(fra.me.REG[3]);
+      /* ./nitc.nit:133 */
       CALL_compiling___Program___compile_prog(fra.me.REG[3])(fra.me.REG[3]);
       /* ./../lib/standard//collection//array.nit:239 */
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:215 */
+      /* ./../lib/standard//kernel.nit:218 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
       /* ./../lib/standard//collection//array.nit:239 */
       REGB0 = REGB1;
@@ -1058,15 +992,15 @@ void nitc___Sys___main(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_nitc;
-  fra.me.line = 140;
+  fra.me.line = 138;
   fra.me.meth = LOCATE_nitc___Sys___main;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./nitc.nit:140 */
+  /* ./nitc.nit:138 */
   fra.me.REG[0] = NEW_NitCompiler_nitc___NitCompiler___init();
-  /* ./nitc.nit:141 */
+  /* ./nitc.nit:139 */
   CALL_abstracttool___AbstractCompiler___exec_cmd_line(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;

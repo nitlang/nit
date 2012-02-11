@@ -1,5 +1,5 @@
 #include <nit_common.h>
-#include "string._sep.h"
+#include "standard___string._sep.h"
 #ifndef STRING_NITNI_H
 #define STRING_NITNI_H
 

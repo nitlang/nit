@@ -1,5 +1,5 @@
 #include <nit_common.h>
-#include "environ._sep.h"
+#include "standard___environ._sep.h"
 #ifndef ENVIRON_NITNI_H
 #define ENVIRON_NITNI_H
 

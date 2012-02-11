@@ -1,5 +1,5 @@
 #include <nit_common.h>
-#include "tables._sep.h"
+#include "parser___tables._sep.h"
 #ifndef TABLES_NITNI_H
 #define TABLES_NITNI_H
 
@@ -10,7 +10,7 @@ typedef struct s_TablesCapable{
 } TablesCapable;
 #endif
 
-#include "tables_nit.h"
+#include "../src/parser//tables_nit.h"
 
 /* out/indirect function for tables::TablesCapable::lexer_goto */
 val_t TablesCapable_lexer_goto___out( val_t recv, val_t i, val_t j );

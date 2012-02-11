@@ -1,5 +1,5 @@
 #include "tables._nitni.h"
-#include "tables_nit.h"
+#include "../src/parser//tables_nit.h"
 /* out/indirect function for tables::TablesCapable::lexer_goto */
 val_t TablesCapable_lexer_goto___out( val_t recv, val_t i, val_t j )
 {

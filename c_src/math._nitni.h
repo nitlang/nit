@@ -1,5 +1,5 @@
 #include <nit_common.h>
-#include "math._sep.h"
+#include "standard___math._sep.h"
 #ifndef MATH_NITNI_H
 #define MATH_NITNI_H
 

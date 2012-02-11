@@ -1,5 +1,5 @@
 #include <nit_common.h>
-#include "time._sep.h"
+#include "standard___time._sep.h"
 #ifndef TIME_NITNI_H
 #define TIME_NITNI_H
 

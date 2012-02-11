@@ -1,5 +1,5 @@
 #include <nit_common.h>
-#include "stream._sep.h"
+#include "standard___stream._sep.h"
 #ifndef STREAM_NITNI_H
 #define STREAM_NITNI_H
 
