@@ -451,7 +451,7 @@ redef class MMType
 	# To be nested within a condition.
 	fun compile_condition_isa( var_name : String ) : String
 	do
-		return "( ISOBJ( {var_name} ) ? OBJISA( {var_name}, {local_class} ): VALISA( {var_name}, {local_class} ) )"
+		return "( ISOBJ( {var_name} ) ? OBJISA( {var_name}, {local_class.cname} ): VALISA( {var_name}, {local_class.cname} ) )"
 	end
 
 	# Defines a friendly type in C for a given Nit type.
