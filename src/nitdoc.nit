@@ -85,6 +85,8 @@ class DocContext
 	readable var _opt_public: OptionBool = new OptionBool("Generate only the public API", "--public")
 	readable var _opt_private: OptionBool = new OptionBool("Generate the private API", "--private")
 	readable var _opt_nodot: OptionBool = new OptionBool("Do not generate graphes with graphviz", "--no-dot")
+	readable var _opt_sharedir: OptionString = new OptionString("Directory containing the nitdoc files", "--sharedir")
+	var sharedir: nullable String
 
 	fun public_only: Bool
 	do
@@ -109,6 +111,8 @@ class DocContext
 		mainmod = new MMVirtualModule(self, mods)
 
 		dir.mkdir
+
+		sys.system("cp -r '{sharedir.to_s}'/* {dir}/")
 
 		# Compute the set of direct owned nested modules
 		var owns = new HashMap[MMModule, Array[MMModule]]
@@ -151,9 +155,9 @@ class DocContext
 		end
 
 		var head = "<meta charset=\"utf-8\">" +
-			"<script type=\"text/javascript\" src=\"http://moz-concept.com/nitdoc/scripts/jquery-1.7.1.min.js\"></script>\n" + 
-			"<script type=\"text/javascript\" src=\"http://moz-concept.com/nitdoc/scripts/js-facilities.js\"></script>\n" +
-			"<link rel=\"stylesheet\" href=\"http://moz-concept.com/nitdoc/styles/main.css\" type=\"text/css\"  media=\"screen\" />"
+			"<script type=\"text/javascript\" src=\"scripts/jquery-1.7.1.min.js\"></script>\n" + 
+			"<script type=\"text/javascript\" src=\"scripts/js-facilities.js\"></script>\n" +
+			"<link rel=\"stylesheet\" href=\"styles/main.css\" type=\"text/css\"  media=\"screen\" />"
 
 		var action_bar = "<header><nav class='main'><ul><li class=\"current\">Overview</li><li><a href='full-index.html'>Full Index</a></li></ul></nav></header>\n"
 
@@ -290,6 +294,7 @@ class DocContext
 		option_context.add_option(opt_dir)
 		option_context.add_option(opt_source)
 		option_context.add_option(opt_nodot)
+		option_context.add_option(opt_sharedir)
 	end
 
 	redef fun process_options
@@ -305,6 +310,26 @@ class DocContext
 				stderr.write "--no-dot implied since `dot' is not available. Try to install graphviz.\n"
 				opt_nodot.value = true
 			end
+		end
+		
+		sharedir = opt_sharedir.value
+		if sharedir == null then
+			var dir = once ("NIT_DIR".to_symbol).environ
+			if dir.is_empty then
+				dir = "{sys.program_name.dirname}/../share/nitdoc"
+				if dir.file_exists then sharedir = dir
+			else
+				dir = "{dir}/share/nitdoc"
+				if dir.file_exists then sharedir = dir
+			end
+			if sharedir == null then
+				fatal_error(null, "Error: Cannot locate nitdoc shared files. Uses --sharedir or envvar NIT_DIR.")
+			end
+			dir = "{sharedir.to_s}/scripts/js-facilities.js"
+			if sharedir == null then
+				fatal_error(null, "Error: Invalid nitdoc shared files. Check --sharedir or envvar NIT_DIR.")
+			end
+
 		end
 	end
 
