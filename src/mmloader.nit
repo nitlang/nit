@@ -252,7 +252,7 @@ class ToolContext
 	private fun try_to_load(module_name: Symbol, dir: MMDirectory): nullable MMModule
 	do
 		# Look in the module directory
-		for m in dir.modules do
+		for m in dir.modules.values do
 			if m.name == module_name then return m
 		end
 

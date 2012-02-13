@@ -1134,7 +1134,7 @@ redef class MMSrcLocalClass
 		if global.intro == self then
 			return true
 		end
-		for p in src_local_properties do
+		for p in src_local_properties.values do
 			if p.need_doc(dctx) then
 				return true
 			end

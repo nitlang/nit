@@ -213,11 +213,11 @@ class HashMap[K: Object, V]
 	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
 
 	redef fun iterate
-		!each(e: V)
+		!each(k: K, v: V)
 	do
 		var c = _first_item
 		while c != null do
-			each(c._value)
+			each(c._key, c._value)
 			c = c._next_item
 		end
 	end

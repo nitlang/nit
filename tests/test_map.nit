@@ -31,7 +31,7 @@ do
 	print(h.has(20))
 	print(h.length)
 	var s = 24
-	for x in h do
+	for x in h.values do
 		s = s - x
 	end
 	print(s)

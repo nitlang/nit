@@ -250,11 +250,11 @@ interface MapRead[K: Object, E]
 
 	# Iterate over each element of the collection
 	fun iterate
-		!each(e: E)
+		!each(k: K, v: E)
 	do
 		var i = iterator
 		while i.is_ok do
-			each(i.item)
+			each(i.key, i.item)
 			i.next
 		end
 	end

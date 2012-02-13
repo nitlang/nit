@@ -182,7 +182,7 @@ class Program
 				if iroutine != null then
 					action(iroutine, m)
 				end
-				for i in c.new_instance_iroutine do
+				for i in c.new_instance_iroutine.values do
 					action(i, m)
 				end
 			end

@@ -180,8 +180,8 @@ redef class MMSrcModule
 	fun generate_icode(tc: ToolContext)
 	do
 		var v = new A2IVisitor(tc, self)
-		for c in src_local_classes do
-			for p in c.src_local_properties do
+		for c in src_local_classes.values do
+			for p in c.src_local_properties.values do
 				if p isa MMSrcMethod then
 					p.generate_iroutine(v)
 				else if p isa MMSrcAttribute then
