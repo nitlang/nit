@@ -1461,14 +1461,14 @@ redef class MMSignature
 		var res = new Buffer
 		if arity > 0 then
 			res.append("(")
-			res.append(self.params[0].name.to_s)
-			res.append(": ")
-			res.append(self[0].html_link(dctx))
-			for i in [1..arity[ do
-				res.append(", ")
+			for i in [0..arity[ do
+				if i > 0 then res.append(", ")
 				res.append(self.params[i].name.to_s)
 				res.append(": ")
 				res.append(self[i].html_link(dctx))
+				if self.vararg_rank == i then
+					res.append("...")
+				end
 			end
 			res.append(")")
 		end
