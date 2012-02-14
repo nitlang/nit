@@ -689,7 +689,7 @@ redef class INative
 		v.add_location(location)
 		if method.is_intern then
 			compile_intern_method_to_c(v)
-		else if not method.is_init then
+		else if not method.global.is_init then
 			compile_extern_method_to_c(v)
 		end
 	end

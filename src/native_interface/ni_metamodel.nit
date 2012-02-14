@@ -99,7 +99,7 @@ redef class MMMethod
 	do
 		var params = new List[String]
 
-		if not is_init then
+		if not global.is_init then
 			params.add( "{local_class.get_type.friendly_extern_name} recv" )
 		end
 
@@ -124,7 +124,7 @@ redef class MMMethod
 		# return type
 		if signature.return_type != null then
 			s.append( "{signature.return_type.friendly_extern_name} " )
-		else if is_init then
+		else if global.is_init then
 			s.append( "{local_class.get_type.friendly_extern_name} " )
 		else
 			s.append( "void " )
@@ -175,7 +175,7 @@ redef class MMMethod
 	do
 		var params = new List[String]
 
-		if not is_init then
+		if not global.is_init then
 			params.add( "val_t recv" )
 		end
 
@@ -191,14 +191,14 @@ redef class MMMethod
 		var s = new Buffer
 
 		# return type
-		if signature.return_type != null or is_init then
+		if signature.return_type != null or global.is_init then
 			s.append( "val_t " )
 		else
 			s.append( "void " )
 		end
 
 		# function name
-		if is_init then
+		if global.is_init then
 			s.append( "NEW_{local_class}_{cname}" )
 		else
 			s.append( "{friendly_extern_name(local_class)}___out" )
