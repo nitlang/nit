@@ -274,6 +274,12 @@ redef class MMLocalClass
 			return _local_property_by_global[glob]
 		else if has_global_property(glob) then
 			return inherit_local_property(glob)
+		else if not computed_super_classes then
+			compute_super_classes
+			computed_ancestors
+			inherit_global_properties
+			assert has_global_property(glob)
+			return inherit_local_property(glob)
 		else
 			abort
 		end
