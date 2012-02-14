@@ -22,6 +22,8 @@ import metamodel
 import ni_tools
 import ni_metamodel
 
+import syntax # FIXME: to remove since it breaks modularity
+
 redef class MMSrcModule
 	fun compile_frontier( v : FrontierVisitor )
 	do
