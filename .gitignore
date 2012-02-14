@@ -5,6 +5,7 @@
 *.orig
 nitc
 nitdoc
+nits
 doc/stdlib
 
 *.aux
