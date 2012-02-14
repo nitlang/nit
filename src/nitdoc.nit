@@ -159,7 +159,7 @@ class DocContext
 			"<script type=\"text/javascript\" src=\"scripts/js-facilities.js\"></script>\n" +
 			"<link rel=\"stylesheet\" href=\"styles/main.css\" type=\"text/css\"  media=\"screen\" />"
 
-		var action_bar = "<header><nav class='main'><ul><li class=\"current\">Overview</li><li><a href='full-index.html'>Full Index</a></li></ul></nav></header>\n"
+		var action_bar = "<header><nav class='main'><ul><li class=\"current\">Overview</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
 
 		# generate the index
 		self.filename = "index.html"
@@ -206,7 +206,7 @@ class DocContext
 			assert mod isa MMSrcModule
 			if not mod.require_doc(self) then continue
 			self.filename = mod.html_name
-			action_bar = "<header><nav class='main'><ul><li><a href='./index.html'>Overview</a></li><li class=\"current\">{mod.name}</li><li><a href='full-index.html'>Full Index</a></li></ul></nav></header>\n"
+			action_bar = "<header><nav class='main'><ul><li><a href='./index.html'>Overview</a></li><li class=\"current\">{mod.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
 			clear
 			add("<!DOCTYPE html>")
 			add("<html><head>{head}<title>Module {mod.name}</title></head><body>\n")
@@ -222,7 +222,7 @@ class DocContext
 		for c in mainmod.local_classes do
 			if not c.require_doc(self) then continue
 			self.filename = c.html_name
-			action_bar = "<header><nav class='main'><ul><li><a href='./index.html'>Overview</a></li><li>{c.global.intro.mmmodule.toplevel_owner.html_link(self)}</li><li class=\"current\">{c.name}</li><li><a href='full-index.html'>Full Index</a></li></ul></nav></header>\n"
+			action_bar = "<header><nav class='main'><ul><li><a href='./index.html'>Overview</a></li><li>{c.global.intro.mmmodule.toplevel_owner.html_link(self)}</li><li class=\"current\">{c.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
 			clear
 			add("<!DOCTYPE html>")
 			add("<html><head>{head}<title>Class {c.name}</title></head><body>\n")
@@ -235,7 +235,7 @@ class DocContext
 		end
 
 		self.filename = "fullindex"
-		action_bar = "<header><nav class='main'><ul><li><a href='./index.html'>Overview</a></li><li class=\"current\">Full Index</li></ul></nav></header>\n"
+		action_bar = "<header><nav class='main'><ul><li><a href='./index.html'>Overview</a></li><li class=\"current\">Full Index</li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
 		clear
 		add("<!DOCTYPE html>")
 		add("<html><head>{head}<title>Full Index</title></head><body>\n")
