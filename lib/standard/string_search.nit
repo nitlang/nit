@@ -27,7 +27,7 @@ interface Pattern
 	# Return null if not found.
 	fun search_in(s: String, from: Int): nullable Match is abstract
 
-	# Search all `self' occucences into `s'.
+	# Search all `self' occurrences into `s'.
 	fun search_all_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
@@ -64,9 +64,10 @@ end
 # see also http://www.cs.utexas.edu/users/moore/best-ideas/string-searching/index.html
 class BM_Pattern
 	super Pattern
+
 	redef fun to_s do return _motif
 
-	# boyer-moore search gives the position of the first occurence of a pattern starting at position `from'
+	# boyer-moore search gives the position of the first occurrence of a pattern starting at position `from'
 	redef fun search_index_in(s, from)
 	do
 		assert from >= 0
@@ -207,14 +208,14 @@ class Match
 	# The starting position in the string
 	readable var _from: Int
 
-	# The length of the mathching part
+	# The length of the matching part
 	readable var _length: Int
 
 	# The position of the first character just after the matching part.
 	# May be out of the base string
 	fun after: Int do return _from + _length
 
-	# The contents of the mathing part
+	# The contents of the matching part
 	redef fun to_s do return _string.substring(_from, _length)
 
 	# Matches `len' characters of `s' from `f'.
@@ -231,6 +232,7 @@ end
 
 redef class Char
 	super Pattern
+
 	redef fun search_index_in(s, from)
 	do
 		var stop = s.length
@@ -254,6 +256,7 @@ end
 
 redef class String
 	super Pattern
+
 	redef fun search_index_in(s, from)
 	do
 		assert from >= 0
@@ -279,7 +282,7 @@ redef class String
 		end
 	end
 
-	# Like `search_from' but from the first chararter.
+	# Like `search_from' but from the first character.
 	fun search(p: Pattern): nullable Match do return p.search_in(self, 0)
 
 	# Search the given pattern into self from a.
@@ -287,7 +290,7 @@ redef class String
 	# Return null if not found.
 	fun search_from(p: Pattern, from: Int): nullable Match do return p.search_in(self, from)
 
-	# Search all occurences of p into self.
+	# Search all occurrences of p into self.
 	#
 	#   var a = new Array[Int]
 	#   for i in "hello world".searches('o') do

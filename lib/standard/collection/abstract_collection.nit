@@ -10,7 +10,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module define several abtract collection classes.
+# This module define several abstract collection classes.
 package abstract_collection
 
 import kernel
@@ -19,7 +19,7 @@ import kernel
 #
 # Instances of this class offers an iterator method.
 #
-# Colections instances can use the "for" structure:
+# Collections instances can use the "for" structure:
 #	  var x: Collection[U]
 #         ...
 #         for u in x do
@@ -60,16 +60,16 @@ interface Collection[E]
 	fun length: Int is abstract
 
 	# Is `item' in the collection ?
-	# Comparaisons are done with ==
+	# Comparisons are done with ==
 	fun has(item: E): Bool is abstract
 
 	# Is the collection contain only `item' ?
-	# Comparaisons are done with ==
+	# Comparisons are done with ==
 	# Return true if the collection is empty.
 	fun has_only(item: E): Bool is abstract
 
-	# How many occurences of `item' are in the collection ?
-	# Comparaisons are done with ==
+	# How many occurrences of `item' are in the collection ?
+	# Comparisons are done with ==
 	fun count(item: E): Int is abstract
 
 	# Return one the item of the collection
@@ -202,10 +202,10 @@ end
 
 # Abstract sets.
 #
-# Set contains contains only one element with the same value (according to =).
-#    var s : Set[E]
+# Set contains contains only one element with the same value (according to ==).
+#    var s: Set[E]
 #    var a = "Hello"
-#    var b = "Hello"
+#    var b = "Hel" + "lo"
 #    ...
 #    s.add(a)
 #    s.has(b) # --> true
@@ -238,6 +238,7 @@ interface Set[E: Object]
 	redef fun remove_all(item) do remove(item)
 end
 
+# MapRead are abstract associative collections: `key' -> `item'.
 interface MapRead[K: Object, E]
 	# Get the item at `key'.
 	fun [](key: K): E is abstract
@@ -259,13 +260,17 @@ interface MapRead[K: Object, E]
 		end
 	end
 
-	# Return the point of view of self on the values only
+	# Return the point of view of self on the values only.
+	# Note that `self' and `values' are views on the same data;
+	# therefore any modification of one is visible on the other.
 	fun values: Collection[E] is abstract
 
-	# Return the point of view of self on the keys only
+	# Return the point of view of self on the keys only.
+	# Note that `self' and `keys' are views on the same data;
+	# therefore any modification of one is visible on the other.
 	fun keys: Collection[E] is abstract
 
-	# Is there no item in the collection ?
+	# Is there no item in the collection?
 	fun is_empty: Bool is abstract 
 
 	# Number of items in the collection.
@@ -282,8 +287,18 @@ end
 #     map[u2] = v2      # Associate 'v2' to 'u2'
 #     map[u1]            # -> v1
 #     map[u2]            # -> v2
-#     map.has_key(u1)    # -> true
-#     map.has_key(u3)    # -> false
+#
+# Instances of maps can be used with the for structure
+#
+#     for key, value in map do ..
+#
+# The keys and values in the map can also be manipulated directly with the `keys' and `values' methods.
+#
+#     map.keys.has(u1)   # -> true
+#     map.keys.has(u3)   # -> false
+#     map.values.has(v1)   # -> true
+#     map.values.has(v3)   # -> false
+#
 interface Map[K: Object, E]
 	super MapRead[K, E]
 	# Set the`item' at `key'.
@@ -351,7 +366,7 @@ class MapValuesIterator[K: Object, V]
 	redef fun item do return self.iterator.item
 end
 
-# Indexed collection are ordoned collections.
+# Sequences are indexed collections.
 # The first item is 0. The last is `length'-1.
 interface SequenceRead[E]
 	super Collection[E]
@@ -363,6 +378,9 @@ interface SequenceRead[E]
 		return self[0]
 	end
 
+	# Return the index=th element of the sequence.
+	# The first element is 0 and the last if `length-1'
+	# If index is invalid, the program aborts
 	fun [](index: Int): E is abstract
 
 	# Get the last item.
@@ -373,8 +391,9 @@ interface SequenceRead[E]
 		return self[length-1]
 	end
 
-	# Return the index of the first occurence of `item'.
+	# Return the index of the first occurrence of `item'.
 	# Return -1 if `item' is not found
+	# Comparison is done with ==
 	fun index_of(item: E): Int
 	do
 		var i = iterator
@@ -388,11 +407,12 @@ interface SequenceRead[E]
 	redef fun iterator: IndexedIterator[E] is abstract
 end
 
-# Indexed collection are ordoned collections.
+# Sequence are indexed collection.
 # The first item is 0. The last is `length'-1.
 interface Sequence[E]
 	super SequenceRead[E]
 	super SimpleCollection[E]
+
 	# Set the first item.
 	# Is equivalent with `self'[0] = `item'.
 	fun first=(item: E)
@@ -443,7 +463,7 @@ interface IndexedIterator[E]
 	fun index: Int is abstract
 end
 
-# Associatives arrays that internally uses couples to represent each (key, value) pairs.
+# Associative arrays that internally uses couples to represent each (key, value) pairs.
 interface CoupleMap[K: Object, E]
 	super Map[K, E]
 	# Return the couple of the corresponding key

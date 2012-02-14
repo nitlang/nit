@@ -17,10 +17,10 @@ package array
 
 import abstract_collection
 
-# One dimention array of objects.
+# One dimension array of objects.
 class AbstractArrayRead[E]
 	super SequenceRead[E]
-	# The current length
+
 	redef readable var _length: Int = 0
 
 	redef fun is_empty do return _length == 0
@@ -61,8 +61,12 @@ class AbstractArrayRead[E]
 
 	redef fun index_of(item) do return index_of_from(item, 0)
 
+	# The index of the last occurrence of an element.
+	# Return -1 if not found.
 	fun last_index_of(item: E): Int do return last_index_of_from(item, length-1)
 
+	# The index of the first occurrence of an element starting from pos.
+	# Return -1 if not found.
 	fun index_of_from(item: E, pos: Int): Int
 	do
 		var i = pos
@@ -76,6 +80,8 @@ class AbstractArrayRead[E]
 		return -1
 	end
 
+	# The index of the last occurrence of an element starting from pos.
+	# Return -1 if not found.
 	fun last_index_of_from(item: E, pos: Int): Int
 	do
 		var i = pos
@@ -89,6 +95,9 @@ class AbstractArrayRead[E]
 		return -1
 	end
 
+	# Return a new array that is the reverse of `self'
+	#
+	#     [1,2,3].reversed # -> [3, 2, 1]
 	fun reversed: Array[E]
 	do
 		var cmp = _length
@@ -100,6 +109,12 @@ class AbstractArrayRead[E]
 		return result
 	end
 
+	# Copy a portion of `self' to an other array.
+	#
+	#     var a = [1, 2, 3, 4]
+	#     var b = [10, 20, 30, 40, 50]
+	#     a.copy_to(1, 2, b, 2)
+	#     b # -> [10, 20, 2, 3, 50]
 	protected fun copy_to(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
 	do
 		# TODO native one
@@ -138,10 +153,14 @@ class AbstractArrayRead[E]
 	end
 end
 
-# Resizeable one dimention array of objects.
+# Resizable one dimension array of objects.
 class AbstractArray[E]
 	super AbstractArrayRead[E]
 	super Sequence[E]
+
+	# Force the capacity to be at least `cap'.
+	# The capacity of the array is an internal information.
+	# However, this method can be used to prepare a large amount of add
 	fun enlarge(cap: Int) is abstract
 
 	redef fun push(item) do add(item)
@@ -178,6 +197,11 @@ class AbstractArray[E]
 		self[0] = item
 	end
 
+	# Insert an element at a given position, following elements are shifted.
+	#
+	#     var a= [10, 20, 30, 40]
+	#     a.insert(100, 2)
+	#     a # -> [10, 20, 100, 30, 40]
 	fun insert(item: E, pos: Int)
 	do
 		enlarge(length + 1)
@@ -213,7 +237,12 @@ class AbstractArray[E]
 		end
 	end
 
-	fun swap_at( a : Int, b : Int )
+	# Invert two elements in the array
+	#
+	#     var a = [10, 20, 30, 40]
+	#     a.swap_at(1, 3)
+	#     a # -> [10, 40, 30, 20]
+	fun swap_at(a: Int,b: Int)
 	do
 	    var e = self[a]
 	    self[a] = b
@@ -221,7 +250,7 @@ class AbstractArray[E]
 	end
 end
 
-# Resizeable one dimention array of objects.
+# Resizable one dimension array of objects.
 #
 # Arrays have a literal representation.
 #     a = [12, 32, 8]
@@ -233,6 +262,7 @@ end
 class Array[E]
 	super AbstractArray[E]
 	super ArrayCapable[E]
+
 	redef fun iterate
 		!each(e: E)
 	do
@@ -397,6 +427,7 @@ end
 # An `Iterator' on `AbstractArray'
 class ArrayIterator[E]
 	super IndexedIterator[E]
+
 	redef fun item do return _array[_index]
 
 	# redef fun item=(e) do _array[_index] = e
@@ -420,6 +451,7 @@ end
 # A set implemented with an Array.
 class ArraySet[E: Object]
 	super Set[E]
+
 	# The stored elements.
 	var _array: Array[E]
 
@@ -449,7 +481,7 @@ class ArraySet[E: Object]
 
 	redef fun iterator do return new ArraySetIterator[E](_array.iterator)
 
-	# Assume the capacitydd is at least `cap'.
+	# Assume the capacity is at least `cap'.
 	fun enlarge(cap: Int) do _array.enlarge(cap)
 
 	private fun remove_at(i: Int)

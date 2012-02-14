@@ -19,6 +19,7 @@ import hash
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
 private class HashCollection[K: Object, N: HashNode[K]]
 	super ArrayCapable[nullable N]
+
 	var _array: nullable NativeArray[nullable N] = null # Used to store items
 	var _capacity: Int = 0 # Size of _array
 	var _length: Int = 0 # Number of items in the map
@@ -134,6 +135,7 @@ private class HashCollection[K: Object, N: HashNode[K]]
 		_last_accessed_key = null
 	end
 
+	# Clear the whole structure
 	fun raz
 	do
 		var i = _capacity - 1
@@ -147,6 +149,7 @@ private class HashCollection[K: Object, N: HashNode[K]]
 		_last_accessed_key = null
 	end
 
+	# Force a capacity
 	fun enlarge(cap: Int)
 	do
 		var old_cap = _capacity
@@ -196,6 +199,8 @@ private class HashNode[K: Object]
 	end
 end
 
+# A map implemented with a hash table.
+# Keys of such a map cannot be null and require a working `hash' method
 class HashMap[K: Object, V]
 	super Map[K, V]
 	super HashCollection[K, HashMapNode[K, V]]
@@ -251,6 +256,7 @@ class HashMap[K: Object, V]
 	redef var values: HashMapValues[K, V] = new HashMapValues[K, V](self)
 end
 
+# View of the keys of a HashMap
 class HashMapKeys[K: Object, V]
 	super RemovableCollection[K]
 	# The original map
@@ -271,6 +277,7 @@ class HashMapKeys[K: Object, V]
 	redef fun remove_all(key) do self.map.remove_node(key)
 end
 
+# View of the values of a Map
 class HashMapValues[K: Object, V]
 	super RemovableCollection[V]
 	# The original map
@@ -341,7 +348,7 @@ class HashMapValues[K: Object, V]
 	end
 end
 
-class HashMapNode[K: Object, V]
+private class HashMapNode[K: Object, V]
 	super HashNode[K]
 	redef type N: HashMapNode[K, V]
 	var _value: V
@@ -394,6 +401,8 @@ class HashMapIterator[K: Object, V]
 	end
 end
 
+# A `Set' implemented with a hash table.
+# Keys of such a map cannot be null and require a working `hash' method
 class HashSet[E: Object]
 	super Set[E]
 	super HashCollection[E, HashSetNode[E]]
@@ -438,7 +447,7 @@ class HashSet[E: Object]
 	end
 end
 
-class HashSetNode[E: Object]
+private class HashSetNode[E: Object]
 	super HashNode[E]
 	redef type N: HashSetNode[E]
 

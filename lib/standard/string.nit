@@ -21,8 +21,10 @@ import hash
 # String                                                                      #
 ###############################################################################
 
+# Common subclass for String and Buffer
 abstract class AbstractString
 	super AbstractArrayRead[Char]
+
 	readable private var _items: NativeString
 
 	redef fun [](index) do return _items[index]
@@ -162,6 +164,7 @@ end
 class String
 	super Comparable
 	super AbstractString
+
 	redef type OTHER: String
 
 	# Create a new string from a given char *.
@@ -395,7 +398,7 @@ end
 redef class Object
 	#   fun class_name: String is extern intern # The name of the class
 
-	# User redeable representation of `self'.
+	# User readable representation of `self'.
 	fun to_s: String do return inspect
 
 	# The class name of the object in NativeString format.
@@ -405,7 +408,7 @@ redef class Object
 	# FIXME: real type information is not available at runtime. Therefore, for instance, an instance of List[Bool] has just "List" for classname
 	fun class_name: String do return new String.from_cstring(native_class_name)
 
-	# Developper readable representation of `self'.
+	# Developer readable representation of `self'.
 	# Usualy, it uses the form "<CLASSNAME:#OBJECTID bla bla bla>"
 	fun inspect: String
 	do
@@ -413,7 +416,7 @@ redef class Object
 	end
 
 	# Return "CLASSNAME:#OBJECTID".
-	# This fuction is mainly used with the redefinition of the inspect method
+	# This function is mainly used with the redefinition of the inspect method
 	protected fun inspect_head: String
 	do
 		return "{class_name}:#{object_id.to_hex}"
@@ -556,7 +559,7 @@ end
 
 redef class Map[K,V]
 	# Concatenate couple of 'key value' separate by 'couple_sep' and separate each couple with `sep'. 
-	fun map_join(sep: String, couple_sep: String): String
+	fun join(sep: String, couple_sep: String): String
 	do
 		if is_empty then return ""
 		
@@ -582,7 +585,7 @@ redef class Map[K,V]
 end
 
 ###############################################################################
-# Native classe                                                               #
+# Native classes                                                              #
 ###############################################################################
 
 # Native strings are simple C char *

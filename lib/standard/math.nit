@@ -38,6 +38,7 @@ redef class Float
 end
 
 redef class Collection[ E ]
+	# Return a random element in the collection
 	fun rand : nullable E
 	do
 		if is_empty then return null
