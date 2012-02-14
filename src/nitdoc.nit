@@ -343,42 +343,6 @@ class DocContext
 	end
 end
 
-redef class String
-	# Replace all occurence of pattern ith string
-	fun replace(p: Pattern, string: String): String
-	do
-		return self.split_with(p).join(string)
-	end
-
-	# Escape the following characters < > & and " with their html counterpart
-	fun html_escape: String
-	do
-		var ret = self
-		if ret.has('&') then ret = ret.replace('&', "&amp;")
-		if ret.has('<') then ret = ret.replace('<', "&lt;")
-		if ret.has('>') then ret = ret.replace('>', "&gt;")
-		if ret.has('"') then ret = ret.replace('"', "&quot;")
-		return ret
-	end
-
-	# Remove "/./", "//" and "bla/../"
-	fun simplify_path: String
-	do
-		var a = self.split_with("/")
-		var a2 = new Array[String]
-		for x in a do
-			if x == "." then continue
-			if x == "" and not a2.is_empty then continue
-			if x == ".." and not a2.is_empty then
-				a2.pop
-				continue
-			end
-			a2.push(x)
-		end
-		return a2.join("/")
-	end
-end
-
 # A virtual module is used to work as an implicit main module that combine unrelated modules
 # Since conflict may arrise in a virtual module (the main method for instance) conflicts are disabled
 class MMVirtualModule
