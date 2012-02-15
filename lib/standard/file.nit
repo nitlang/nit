@@ -68,6 +68,8 @@ class IFStream
 	super BufferedIStream
 	# Misc
 
+	# Open the same file again.
+	# The original path is reused, therefore the reopened file can be a different file.
 	fun reopen
 	do
 		if not eof then close
@@ -83,7 +85,6 @@ class IFStream
 		_end_reached = true
 	end
 
-	# Fill the internal read buffer. Needed by read operations.
 	redef fun fill_buffer
 	do
 		var nb = _file.io_read(_buffer._items, _buffer._capacity)
@@ -116,7 +117,6 @@ class OFStream
 	super FStream
 	super OStream
 	
-	# Write a string.
 	redef fun write(s)
 	do
 		assert _writable
@@ -195,8 +195,10 @@ redef class String
 
 	fun file_stat: FileStat do return to_cstring.file_stat
 
+	# Remove a file, return true if success
 	fun file_delete: Bool do return to_cstring.file_delete
 
+	# remove the trailing extension "ext"
 	fun strip_extension(ext: String): String
 	do
 		if has_suffix(ext) then
@@ -205,6 +207,7 @@ redef class String
 		return self
 	end
 
+	# Extract the basename of a path and remove the extension
 	fun basename(ext: String): String
 	do
 		var pos = last_index_of_from('/', _length - 1)
@@ -215,6 +218,7 @@ redef class String
 		return n.strip_extension(ext)
 	end
 
+	# Extract the dirname of a path
 	fun dirname: String
 	do
 		var pos = last_index_of_from('/', _length - 1)
@@ -223,16 +227,6 @@ redef class String
 		else
 			return "."
 		end
-	end
-
-	fun file_path: String
-	do
-		var l = _length
-		var pos = last_index_of_from('/', l - 1)
-		if pos >= 0 then
-			return substring(0, pos)
-		end
-		return "."
 	end
 
 	# Create a directory (and all intermediate directories if needed)
@@ -250,6 +244,17 @@ redef class String
 			path.append(d)
 			path.add('/')
 			path.to_s.to_cstring.file_mkdir
+		end
+	end
+
+	# Return right-most extension (without the dot)
+	fun file_extension : nullable String
+	do
+		var last_slash = last_index_of('.')
+		if last_slash >= 0 then
+			return substring( last_slash+1, length )
+		else
+			return null
 		end
 	end
 end

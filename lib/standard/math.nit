@@ -14,6 +14,7 @@
 package math
 
 import kernel
+import collection
 
 redef class Int
 	fun rand: Int is extern "kernel_Int_Int_rand_0"
@@ -33,6 +34,30 @@ redef class Float
 	fun exp: Float is extern "kernel_Float_Float_exp_0"
 	
 	fun rand: Float is extern "kernel_Float_Float_rand_0"
+	fun hypot_with( b : Float ) : Float is extern "hypotf"
+end
+
+redef class Collection[ E ]
+	# Return a random element in the collection
+	fun rand : nullable E
+	do
+		if is_empty then return null
+
+		var rand_index = length.rand
+		var picked : nullable E = null
+
+		iterate !each( e ) do
+			if rand_index == 0
+			then
+				picked = e
+				break
+			else
+				rand_index -= 1
+			end
+		end
+
+		return picked
+	end
 end
 
 fun atan2(x: Float, y: Float): Float is extern "kernel_Any_Any_atan2_2"

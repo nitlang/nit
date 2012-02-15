@@ -17,7 +17,8 @@ import symbol
 # TODO prevoir une structure pour recup tout un environ, le modifier et le passer a process
 
 redef class Symbol
-	# Return environement valued for this symbol
+	# Return environement value for this symbol
+	# If there is no such environement value, then return ""
 	fun environ: String
 	do
 		var res = to_s.to_cstring.get_environ
@@ -32,6 +33,5 @@ redef class Symbol
 end
 
 redef class NativeString
-# Refinned to add environement bindings
 	private fun get_environ: NativeString is extern "string_NativeString_NativeString_get_environ_0"
 end

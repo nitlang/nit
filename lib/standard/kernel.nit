@@ -21,25 +21,32 @@ import end # Mark this module is a top level one. (must be only one)
 ###############################################################################
 
 # The root of the class hierarchy.
-# Each class implicitely specialize Object.
+# Each class implicitly specialize Object.
+#
+# Currently, Object is also used to collect all top-level methods.
 interface Object
-	# The unique object identifier in the class
+	# The unique object identifier in the class.
+	# Unless specific code, you should not use this method.
+	# The identifier is used internally to provide a hash value.
 	fun object_id: Int is intern
 
-	# Return true is `self' and `other' have the same dynamic type
+	# Return true is `self' and `other' have the same dynamic type.
+	# Unless specific code, you should not use this method.
 	fun is_same_type(other: Object): Bool is intern
 
 	# Have `self' and `other' the same value?
 	##
-	# Implicitely, the default implementation, is ==
+	# The exact meaning of "same value" is let to the subclasses.
+	# Implicitly, the default implementation, is ==
 	fun ==(other: nullable Object): Bool do return self is other
 
 	# Have `self' and `other' different values?
 	##
-	# != is equivament with "not =".
+	# != is equivalent with "not =".
 	fun !=(other: nullable Object): Bool do return not (self == other)
 
 	# Display self on stdout (debug only).
+	# This method MUST not be used by programs, it is here for debugging only and can be removed without any notice
 	fun output
 	do
 		'<'.output
@@ -48,15 +55,21 @@ interface Object
 	end
 
 	# Display class name on stdout (debug only).
+	# This method MUST not be used by programs, it is here for debugging only and can be removed without any notice
 	fun output_class_name is intern	
 
-	protected fun exit(exit_value: Int) is intern # Quit the program.
-	protected fun sys: Sys is intern # The global sys object
+	# Quit the program with a specific return code
+	protected fun exit(exit_value: Int) is intern
+
+	# Return the global sys object, the only instance of the `Sys' class.
+	protected fun sys: Sys is intern
 end
 
 # The main class of the program.
+# `Sys' is a singleton class, its only instance is `sys' defined in `Object'.
+# `sys' is used to invoke methods on the program on the system.
 class Sys
-	# Instructions outside classes implicetely redefine this method.
+	# Instructions outside classes implicitly redefine this method.
 	fun main do end
 end
 
@@ -67,21 +80,25 @@ end
 # The ancestor of class where objects are in a total order.
 # In order to work, the method '<' has to be redefined.
 interface Comparable
+	# What `self' can be compared to?
 	type OTHER: Comparable
 
-	# Is `self' lesser than `other'
+	# Is `self' lesser than `other'?
 	fun <(other: OTHER): Bool is abstract 
 
 	# not `other' < `self'
+	# Note, the implementation must ensure that: (x<=y) == (x<y or x==y)
 	fun <=(other: OTHER): Bool do return not other < self
 
 	# not `self' < `other' 
+	# Note, the implementation must ensure that: (x>=y) == (x>y or x==y)
 	fun >=(other: OTHER): Bool do return not self < other
 
 	# `other' < `self'
 	fun >(other: OTHER): Bool do return other < self
 
 	# -1 if <, +1 if > and 0 otherwise
+	# Note, the implementation must ensure that: (x<=>y == 0) == (x==y)
 	fun <=>(other: OTHER): Int
 	do
 		if self < other then
@@ -168,9 +185,9 @@ end
 # Native classes                                                              #
 ###############################################################################
 
-# Native booleans.
+# Native Booleans.
 # `true' and `false' are the only instances.
-# Boolean are manipulated trought three special operators:
+# Boolean are manipulated trough three special operators:
 #	 `and', `or', `not'.
 # Booleans are mainly used by conditional statement and loops.
 universal Bool
@@ -280,7 +297,7 @@ universal Int
 	# The character whose ASCII value is `self'.
 	fun ascii: Char is intern
 
-	# Number of digits of an integer in base `b' plus one if negative)
+	# Number of digits of an integer in base `b' (plus one if negative)
 	fun digit_count(b: Int): Int
 	do
 		var d: Int # number of digits
@@ -298,7 +315,7 @@ universal Int
 		# count digits
 		while n > 0 do
 			d += 1
-			n = n / b  	# euclidian division /		
+			n = n / b  	# euclidian division /
 		end
 		return d
 	end
@@ -316,7 +333,7 @@ universal Int
 		end
 	end
 
-	# Executre 'each' for each integer in [self..last]
+	# Execute 'each' for each integer in [self..last]
 	fun enumerate_to(last: Int)
 		!each(i: Int)
 	do
@@ -327,7 +344,7 @@ universal Int
 		end
 	end
 
-	# Executre 'each' for each integer in [self..after[
+	# Execute 'each' for each integer in [self..after[
 	fun enumerate_before(after: Int)
 		!each(i: Int)
 	do
@@ -336,6 +353,17 @@ universal Int
 			each(cur)
 			cur += 1
 		end
+	end
+
+	# The absolute value of self
+	fun abs: Int
+	do
+	    if self >= 0
+	    then
+	        return self
+	    else
+	        return -1 * self
+	    end
 	end
 end
 
@@ -369,7 +397,7 @@ universal Char
 		end
 	end
 
-	# If `self' is a digit then return this digit.
+	# If `self' is a digit then return this digit else return -1.
 	fun to_i: Int
 	do
 
@@ -388,8 +416,9 @@ universal Char
 	redef fun +(i) is intern
 	redef fun -(i) is intern
 
-	# Char to lower case
-	fun to_lower : Char
+	# Return the lower case version of self.
+	# If self is not a letter, then return self
+	fun to_lower: Char
 	do
 		if is_upper then
 			return (ascii + ('a'.distance('A'))).ascii
@@ -398,8 +427,9 @@ universal Char
 		end
 	end
 
-	# Char to upper case
-	fun to_upper : Char
+	# Return the upper case version of self.
+	# If self is not a letter, then return self
+	fun to_upper: Char
 	do
 		if is_lower then
 			return (ascii - ('a'.distance('A'))).ascii
@@ -408,21 +438,25 @@ universal Char
 		end
 	end
 	
+	# Is self a digit? (from '0' to '9')
 	fun is_digit : Bool
 	do
 		return self >= '0' and self <= '9'
 	end
 	
+	# Is self a lower case letter? (from 'a' to 'z')
 	fun is_lower : Bool
 	do
 		return self >= 'a' and self <= 'z'
 	end
 	
+	# Is self a upper case letter? (from 'A' to 'Z')
 	fun is_upper : Bool
 	do
 		return self >= 'A' and self <= 'Z'
 	end
 	
+	# Is self a letter? (from 'A' to 'Z' and 'a' to 'z')
 	fun is_letter : Bool
 	do
 		return is_lower or is_upper

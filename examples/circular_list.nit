@@ -124,7 +124,7 @@ end
 private class CircularListIterator[E]
 	super IndexedIterator[E]
 
-	redef var key: Int
+	redef var index: Int
 
 	# The current node pointed.
 	# Is null if the list is empty.
@@ -137,13 +137,13 @@ private class CircularListIterator[E]
 	do
 		# Empty lists are not OK.
 		# Pointing again the first node is not OK.
-		return self.node != null and (self.key == 0 or self.node != self.list.node)
+		return self.node != null and (self.index == 0 or self.node != self.list.node)
 	end
 
 	redef fun next
 	do
 		self.node = self.node.next
-		self.key += 1
+		self.index += 1
 	end
 
 	redef fun item do return self.node.item
@@ -152,7 +152,7 @@ private class CircularListIterator[E]
 	do
 		self.node = list.node
 		self.list = list
-		self.key = 0
+		self.index = 0
 	end
 end
 

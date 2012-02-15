@@ -26,12 +26,12 @@ do
 	print(h.has_key(1))
 	print(h.has_key(2))
 	print(not h.has_key(3))
-	print(not h.has(2))
-	print(h.has(4))
-	print(h.has(20))
+	print(not h.values.has(2))
+	print(h.values.has(4))
+	print(h.values.has(20))
 	print(h.length)
 	var s = 24
-	for x in h do
+	for x in h.values do
 		s = s - x
 	end
 	print(s)
@@ -61,7 +61,7 @@ do
 	i = nb * 2
 	while i >= 0 do
 		if (i % 3 != 0) then
-			h.remove(i)
+			h.values.remove(i)
 		end
 		i = i - 1
 	end
@@ -89,14 +89,14 @@ do
 	print("* start:")
 	print(m.is_empty)
 	print(m.length == 0)
-	print(m.has_only("vert"))
-	print(m.count("vert") == 0)
+	print(m.values.has_only("vert"))
+	print(m.values.count("vert") == 0)
 	m["blue"] = "vert"
 	print(not m.is_empty)
-	print(m.has_only("vert"))
-	print(m.count("vert") == 1)
+	print(m.values.has_only("vert"))
+	print(m.values.count("vert") == 1)
 	m["red"] = "rouge"
-	print(not m.has_only("vert"))
+	print(not m.values.has_only("vert"))
 	m["blue"] = "bleu"
 	print(m.length == 2)
 
@@ -109,29 +109,29 @@ do
 	m["grey"] = "gris"
 	m["white"] = "blanc"
 	print(m.length == 9)
-	print(m.count("vert") == 0)
-	print(m.count("gris") == 2)
+	print(m.values.count("vert") == 0)
+	print(m.values.count("gris") == 2)
 	print(m["blue"] == "bleu")
-	print(not m.has("vert"))
-	print(m.has("bleu"))
-	print(not m.has("blue"))
+	print(not m.values.has("vert"))
+	print(m.values.has("bleu"))
+	print(not m.values.has("blue"))
 	print(m.has_key("blue"))
 	print(not m.has_key("green"))
 	print(not m.has_key("vert"))
-	print(m.join(", "))
+	print(m.values.join(", "))
 
 	print("* remove:")
-	print(m.count("rose") == 1)
-	m.remove("rose")
+	print(m.values.count("rose") == 1)
+	m.values.remove("rose")
 	print(m.length == 8)
-	print(m.count("rose") == 0)
-	m.remove_all("gris")
+	print(m.values.count("rose") == 0)
+	m.values.remove_all("gris")
 	print(m.length == 6)
-	print(m.count("gris") == 0)
-	m.remove_at("blue")
+	print(m.values.count("gris") == 0)
+	m.keys.remove("blue")
 	print(m.length == 5)
-	print(m.count("bleu") == 0)
-	print(m.join(", "))
+	print(m.values.count("bleu") == 0)
+	print(m.values.join(", "))
 	m.clear
 	print(m.is_empty)
 end

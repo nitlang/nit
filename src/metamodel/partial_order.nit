@@ -40,7 +40,7 @@ class PartialOrder[E: Object]
 
 	redef fun has(e) do return _elements.has_key(e)
 
-	redef fun has_only(e) do return _elements.length == 1 and _elements.first == e
+	redef fun has_only(e) do return _elements.length == 1 and _elements.values.first == e
 
 	redef fun count(e)
 	do
@@ -66,7 +66,7 @@ class PartialOrder[E: Object]
 	do
 		var s = new Buffer
 		s.append(to_dot_header)
-		for e in _elements do
+		for e in _elements.values do
 			s.append(to_dot_node(e.value))
 			for d in e.direct_greaters do
 				s.append(to_dot_edge(e.value, d))
@@ -171,7 +171,7 @@ class PartialOrder[E: Object]
 	protected fun compute_smallers_for(poe: PartialOrderElement[E], set: Set[E])
 	do
 		var e = poe.value
-		for s in _elements do
+		for s in _elements.values do
 			if s < e then
 				set.add(s.value)
 			end

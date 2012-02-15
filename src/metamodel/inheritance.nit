@@ -96,7 +96,7 @@ redef class MMLocalClass
 		var ancestors = group_ancestors(build_ancestors)
 		_ancestors = new HashMap[MMLocalClass, MMAncestor]
 
-		for set in ancestors do
+		for set in ancestors.values do
 			if set.length == 1 then
 				add_ancestor(set.first)
 			else
@@ -447,7 +447,7 @@ redef class MMAncestor
 	do
 		tab.add(self)
 		stype.local_class.compute_ancestors
-		for anc in stype.local_class.ancestors.as(not null) do
+		for anc in stype.local_class.ancestors.values do
 			var aaa = anc.stype.for_module(stype.mmmodule)
 			var a = aaa.adapt_to(stype).for_module(inheriter.mmmodule)
 			if a.local_class != inheriter.local_class then

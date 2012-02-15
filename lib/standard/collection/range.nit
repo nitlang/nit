@@ -15,7 +15,7 @@ package range
 
 import abstract_collection
 
-# Range of discrete objects. 
+# Range of discrete objects.
 class Range[E: Discrete]
 	super Collection[E]
 
@@ -87,7 +87,7 @@ end
 class IteratorRange[E: Discrete]
 	# Iterator on ranges.
 	super Iterator[E]
-	var _range: Range[E]	
+	var _range: Range[E]
 	redef readable var _item: E
 
 	redef fun is_ok do return _item < _range.after

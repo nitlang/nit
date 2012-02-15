@@ -17,12 +17,12 @@ import array
 import hash
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
-private class HashCollection[K: Object, N: HashNode[K], E]
-	super Collection[E]
+private class HashCollection[K: Object, N: HashNode[K]]
 	super ArrayCapable[nullable N]
+
 	var _array: nullable NativeArray[nullable N] = null # Used to store items
 	var _capacity: Int = 0 # Size of _array
-	redef readable var _length: Int = 0 # Number of items in the map
+	var _length: Int = 0 # Number of items in the map
 
 	readable var _first_item: nullable N = null # First added item (used to visit items in nice order)
 	var _last_item: nullable N = null # Last added item (same)
@@ -135,6 +135,7 @@ private class HashCollection[K: Object, N: HashNode[K], E]
 		_last_accessed_key = null
 	end
 
+	# Clear the whole structure
 	fun raz
 	do
 		var i = _capacity - 1
@@ -148,6 +149,7 @@ private class HashCollection[K: Object, N: HashNode[K], E]
 		_last_accessed_key = null
 	end
 
+	# Force a capacity
 	fun enlarge(cap: Int)
 	do
 		var old_cap = _capacity
@@ -197,9 +199,11 @@ private class HashNode[K: Object]
 	end
 end
 
+# A map implemented with a hash table.
+# Keys of such a map cannot be null and require a working `hash' method
 class HashMap[K: Object, V]
 	super Map[K, V]
-	super HashCollection[K, HashMapNode[K, V], V]
+	super HashCollection[K, HashMapNode[K, V]]
 
 	redef fun [](key)
 	do
@@ -211,58 +215,21 @@ class HashMap[K: Object, V]
 		end
 	end
 
-	redef fun has_key(key) do return node_at(key) != null
-
 	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
 
 	redef fun iterate
-		!each(e: V)
+		!each(k: K, v: V)
 	do
 		var c = _first_item
 		while c != null do
-			each(c._value)
+			each(c._key, c._value)
 			c = c._next_item
 		end
 	end
 
-	redef fun first
-	do
-		assert _length > 0
-		return _first_item._value
-	end
+	redef fun length do return _length
 
 	redef fun is_empty do return _length == 0
-
-	redef fun count(item)
-	do
-		var nb = 0
-		var c = _first_item
-		while c != null do
-			if c._value == item then nb += 1
-			c = c._next_item
-		end
-		return nb
-	end
-
-	redef fun has(item)
-	do
-		var c = _first_item
-		while c != null do
-			if c._value == item then return true
-			c = c._next_item
-		end
-		return false
-	end
-
-	redef fun has_only(item)
-	do
-		var c = _first_item
-		while c != null do
-			if c._value != item then return false
-			c = c._next_item
-		end
-		return true
-	end
 
 	redef fun []=(key, v)
 	do
@@ -276,20 +243,6 @@ class HashMap[K: Object, V]
 		end
 	end
 
-	redef fun remove(item)
-	do
-		var c = _first_item
-		while c != null do
-			if c._value == item then
-				remove_node(c._key)
-				return
-			end
-			c = c._next_item
-		end
-	end
-
-	redef fun remove_at(key) do remove_node(key)
-
 	redef fun clear do raz
 
 	init
@@ -298,9 +251,104 @@ class HashMap[K: Object, V]
 		_length = 0
 		enlarge(0)
 	end
+
+	redef var keys: HashMapKeys[K, V] = new HashMapKeys[K, V](self)
+	redef var values: HashMapValues[K, V] = new HashMapValues[K, V](self)
 end
 
-class HashMapNode[K: Object, V]
+# View of the keys of a HashMap
+class HashMapKeys[K: Object, V]
+	super RemovableCollection[K]
+	# The original map
+	var map: HashMap[K, V]
+
+	redef fun count(k) do if self.has(k) then return 1 else return 0
+	redef fun first do return self.map._first_item._key
+	redef fun has(k) do return self.map.node_at(k) != null
+	redef fun has_only(k) do return (self.has(k) and self.length == 1) or self.is_empty
+	redef fun is_empty do return self.map.is_empty
+	redef fun length do return self.map.length
+
+	redef fun iterator do return new MapKeysIterator[K, V](self.map.iterator)
+
+	redef fun clear do self.map.clear
+
+	redef fun remove(key) do self.map.remove_node(key)
+	redef fun remove_all(key) do self.map.remove_node(key)
+end
+
+# View of the values of a Map
+class HashMapValues[K: Object, V]
+	super RemovableCollection[V]
+	# The original map
+	var map: HashMap[K, V]
+
+	redef fun count(item)
+	do
+		var nb = 0
+		var c = self.map._first_item
+		while c != null do
+			if c._value == item then nb += 1
+			c = c._next_item
+		end
+		return nb
+	end
+	redef fun first do return self.map._first_item._value
+
+	redef fun has(item)
+	do
+		var c = self.map._first_item
+		while c != null do
+			if c._value == item then return true
+			c = c._next_item
+		end
+		return false
+	end
+
+	redef fun has_only(item)
+	do
+		var c = self.map._first_item
+		while c != null do
+			if c._value != item then return false
+			c = c._next_item
+		end
+		return true
+	end
+
+	redef fun is_empty do return self.map.is_empty
+	redef fun length do return self.map.length
+
+	redef fun iterator do return new MapValuesIterator[K, V](self.map.iterator)
+
+	redef fun clear do self.map.clear
+
+	redef fun remove(item)
+	do
+		var map = self.map
+		var c = map._first_item
+		while c != null do
+			if c._value == item then
+				map.remove_node(c._key)
+				return
+			end
+			c = c._next_item
+		end
+	end
+
+	redef fun remove_all(item)
+	do
+		var map = self.map
+		var c = map._first_item
+		while c != null do
+			if c._value == item then
+				map.remove_node(c._key)
+			end
+			c = c._next_item
+		end
+	end
+end
+
+private class HashMapNode[K: Object, V]
 	super HashNode[K]
 	redef type N: HashMapNode[K, V]
 	var _value: V
@@ -353,9 +401,13 @@ class HashMapIterator[K: Object, V]
 	end
 end
 
+# A `Set' implemented with a hash table.
+# Keys of such a map cannot be null and require a working `hash' method
 class HashSet[E: Object]
 	super Set[E]
-	super HashCollection[E, HashSetNode[E], E]
+	super HashCollection[E, HashSetNode[E]]
+
+	redef fun length do return _length
 
 	redef fun is_empty do return _length == 0
 
@@ -395,7 +447,7 @@ class HashSet[E: Object]
 	end
 end
 
-class HashSetNode[E: Object]
+private class HashSetNode[E: Object]
 	super HashNode[E]
 	redef type N: HashSetNode[E]
 
