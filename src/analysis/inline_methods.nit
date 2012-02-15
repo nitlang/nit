@@ -26,7 +26,7 @@ private class InlineMethodVisitor
 
 	redef fun visit_icode(ic)
 	do
-		if ic isa ICall then
+		if ic isa ICall and not ic.is_explicit_from_extern then
 			var m = ic.property
 			var ir = m.iroutine
 			if ir != null and ic.is_inlinable then

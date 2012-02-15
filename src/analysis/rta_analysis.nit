@@ -207,10 +207,12 @@ class RtaVisitor
 			# FIXME: take only the last property on the redef. hierarchie
 			var t = ic.stype
 			var cls = t.for_module(builder.program.main_module).local_class
-			var m = cls[ic.property.global].as(MMMethod)
-			var r = cls.new_instance_iroutine[m]
+			if not cls.global.is_extern then
+				var m = cls[ic.property.global].as(MMMethod)
+				var r = cls.new_instance_iroutine[m]
+				builder.add_reachable_iroutine(r)
+			end
 			builder.add_instantiated_class(cls)
-			builder.add_reachable_iroutine(r)
 		else if ic isa ISuper then
 			# Add every parents ...
 			for p in ic.property.prhe.greaters_and_self do

@@ -52,7 +52,7 @@ private class InlineGetSetVisitor
 	redef fun visit_icode(ic)
 	do
 		# Algo mostly from inline_methods.nit, by Jean Privat
-		if ic isa ICall then
+		if ic isa ICall and not ic.is_explicit_from_extern then
 			var m = ic.property
 			var ir = m.iroutine
 			if ir != null and m isa MMAttrImplementationMethod then
