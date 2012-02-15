@@ -267,7 +267,7 @@ class DocContext
 	do
 		var s = opt_source.value
 		if s == null then
-			add("in #{l.file.filename.simplify_path}")
+			add("in {l.file.filename.simplify_path}")
 		else
 			# THIS IS JUST UGLY ! (but there is no replace yet)
 			var x = s.split_with("%f")
