@@ -18,6 +18,9 @@ NITCOPT=
 
 all: bin/nitc bin/nitdoc doc/stdlib/index.html
 
+docs: doc/stdlib/index.html doc/nitc/index.html
+
+
 bin/nitc: c_src/nitc src/parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile nitc from NIT source files                          *'
@@ -36,7 +39,10 @@ doc/stdlib/index.html: bin/nitdoc
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc lib/*.nit -d doc/stdlib
+	bin/nitdoc lib/*.nit -d doc/stdlib --public --overview-text '<p>Documentation for the standard library of Nit</p>' --footer-text 'Nit standard library. Version '`git describe -- lib`'.'
+
+doc/nitc/index.html: bin/nitdoc
+	bin/nitdoc src/nitc.nit src/nitdoc.nit -d doc/nitc --overview-text '<p>Documentation for the nit compiler</p>' --footer-text 'Nit compiler. Version '`git describe`'.'
 
 c_src/nitc: c_src/*.c c_src/*.h c_src/nitc._build.sh c_src/Makefile
 	@echo '***************************************************************'

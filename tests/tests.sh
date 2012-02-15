@@ -220,7 +220,7 @@ for ii in "$@"; do
 			if [ -f "$ff.write" ]; then
 				cat "$ff.write" >> "$ff.res"
 			elif [ -d "$ff.write" ]; then
-				ls -F $ff.write >> "$ff.res"
+				LANG=C /bin/ls -F $ff.write >> "$ff.res"
 			fi
 			if [ -s "$ff.err" ]; then
 				cat "$ff.err" >> "$ff.res"
@@ -234,6 +234,7 @@ for ii in "$@"; do
 					((cptr=cptr+1))
 					args=$line
 					fff=$ff"_args"$cptr
+					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
 						echo ""
 						echo "NIT_NO_STACK=1 ./$ff.bin" $args
@@ -251,7 +252,7 @@ for ii in "$@"; do
 					if [ -f "$fff.write" ]; then
 						cat "$fff.write" >> "$fff.res"
 					elif [ -d "$fff.write" ]; then
-						ls -F $fff.write >> "$fff.res"
+						LANG=C /bin/ls -F $fff.write >> "$fff.res"
 					fi
 					if [ -s "$fff.err" ]; then
 						cat "$fff.err" >> "$fff.res"

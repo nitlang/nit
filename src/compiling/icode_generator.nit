@@ -17,9 +17,10 @@
 # Generates ICode as an output format
 package icode_generator
 
-import compiling_base
+private import compiling_base
 import program
-import analysis
+private import analysis
+private import primitive_info
 
 redef class Program
 	# Generates ICode for the whole program

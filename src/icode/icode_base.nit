@@ -18,7 +18,6 @@
 package icode_base
 
 import metamodel
-import mmloader
 
 ## UTILITY CLASSES ##
 

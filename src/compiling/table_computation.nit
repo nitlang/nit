@@ -19,7 +19,7 @@
 package table_computation
 
 import mmloader
-import primitive_info
+private import primitive_info
 import program
 
 # Something that store color of table elements

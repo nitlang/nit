@@ -24,25 +24,25 @@ import icode_dump
 import program
 
 # Local Analysis/Optimization
-import allocate_iregister_slots
-import inline_methods
+private import allocate_iregister_slots
+private import inline_methods
 
 # Global Analysis types
-import instantiated_type_analysis
-import reachable_method_analysis
-import reachable_as_init
-import reachable_from_init_method_analysis
+private import instantiated_type_analysis
+private import reachable_method_analysis
+private import reachable_as_init
+private import reachable_from_init_method_analysis
 
 # Global Analysis implementation
-import cha_analysis
-import rta_analysis
-import reachable_as_init_impl
-import reachable_from_init_method_analysis_impl
+private import cha_analysis
+private import rta_analysis
+private import reachable_as_init_impl
+private import reachable_from_init_method_analysis_impl
 
 # Global Optimizations
-import dead_method_removal
-import inline_get_and_set
-import remove_out_of_init_get_test
+private import dead_method_removal
+private import inline_get_and_set
+private import remove_out_of_init_get_test
 
 redef class ToolContext
 	readable writable var _global_callgraph: String = "rta"

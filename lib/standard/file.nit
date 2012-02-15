@@ -229,6 +229,35 @@ redef class String
 		end
 	end
 
+	# Simplify a file path by remove useless ".", removing "//", and resolving ".."
+	# ".." are not resolved if they start the path
+	# starting "/" is not removed
+	# trainling "/" is removed
+	#
+	# Note that the method only wonrk on the string:
+	#  * no I/O access is performed
+	#  * the validity of the path is not checked
+	#
+	#     "some/./complex/../../path/from/../to/a////file//".simplify_path	# -> "path/to/a/file"
+	#     "../dir/file" # -> "../dir/file"
+	#     "dir/../../" # -> ".."
+	#     "//absolute//path/" # -> "/absolute/path"
+	fun simplify_path: String
+	do
+		var a = self.split_with("/")
+		var a2 = new Array[String]
+		for x in a do
+			if x == "." then continue
+			if x == "" and not a2.is_empty then continue
+			if x == ".." and not a2.is_empty then
+				a2.pop
+				continue
+			end
+			a2.push(x)
+		end
+		return a2.join("/")
+	end
+
 	# Create a directory (and all intermediate directories if needed)
 	fun mkdir
 	do

@@ -312,4 +312,26 @@ redef class String
 	# Split self using '\n' is separator.
 	#   "hello\nworld".split     # -> ["hello","world"]
 	fun split: Array[String] do return split_with('\n')
+
+	# Replace all occurences of a pattern with a string
+	#
+	#   "hlelo".replace("le", "el")	# -> "hello"
+	#   "hello".replace('l', "")	# -> "heo"
+	fun replace(p: Pattern, string: String): String
+	do
+		return self.split_with(p).join(string)
+	end
+
+	# Escape the four characters < > & and " with their html counterpart
+	#
+	#    "a&b->\"x\"".html_escape # -> "a&amp;b-&gt;&quot;x&quot;"
+	fun html_escape: String
+	do
+		var ret = self
+		if ret.has('&') then ret = ret.replace('&', "&amp;")
+		if ret.has('<') then ret = ret.replace('<', "&lt;")
+		if ret.has('>') then ret = ret.replace('>', "&gt;")
+		if ret.has('"') then ret = ret.replace('"', "&quot;")
+		return ret
+	end
 end

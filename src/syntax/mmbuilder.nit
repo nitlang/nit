@@ -21,6 +21,23 @@ package mmbuilder
 
 import syntax_base
 
+redef class ToolContext
+	redef fun handle_property_conflict(lc, impls)
+	do
+		var location: nullable Location = null
+		if lc isa MMSrcLocalClass then
+			var node = lc.node
+			if node != null then node.location
+		end
+		#if location == null then location = lc.mmmodule.location
+		var clas = new Array[MMLocalClass]
+		for i in impls do
+			clas.add(i.local_class)
+		end
+		self.fatal_error(location, "Property inheritance conflict in class {lc} for `{impls.first.name}': conflicting properties are defined in {clas.join(", ")}")
+	end
+end
+
 # Class specialization hierarchy sorter
 private class CSHSorter
 	super AbstractSorter[MMLocalClass]
@@ -302,7 +319,11 @@ redef class MMImplicitInit
 		for a in unassigned_attributes do
 			var sig = a.signature
 			if sig == null then return # Broken attribute definition
-			params.add( new MMParam( sig.return_type.as(not null), once "recv".to_symbol))
+			var name = a.name
+			if name.to_s.first == '_' or name.to_s.first == '@' then
+				name = a.to_s.substring_from(1).to_symbol
+			end
+			params.add(new MMParam(sig.return_type.as(not null), name))
 		end
 		signature = new MMSignature(params, null, local_class.get_type)
 	end
