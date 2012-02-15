@@ -82,6 +82,13 @@ header nav ul li a:hover {
 	color: #0D8921;
 }
 
+footer {
+	text-align: center;
+	padding: 20px 10px;
+	margin: 10px 100px;
+	color: #CCC;
+}
+
 /* Main menu */
 
 header nav.main {

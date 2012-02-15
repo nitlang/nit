@@ -86,6 +86,8 @@ class DocContext
 	readable var _opt_private: OptionBool = new OptionBool("Generate the private API", "--private")
 	readable var _opt_nodot: OptionBool = new OptionBool("Do not generate graphes with graphviz", "--no-dot")
 	readable var _opt_sharedir: OptionString = new OptionString("Directory containing the nitdoc files", "--sharedir")
+	readable var _opt_overview_text: OptionString = new OptionString("Text displayed as introduction of Overview page", "--overview-text")
+	readable var _opt_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--footer-text")
 	var sharedir: nullable String
 
 	fun public_only: Bool
@@ -161,6 +163,12 @@ class DocContext
 
 		var action_bar = "<header><nav class='main'><ul><li class=\"current\">Overview</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
 
+		var overview_text = ""
+		if self._opt_overview_text.value != null then overview_text = self._opt_overview_text.value.as(not null)
+
+		var footer_text = ""
+		if self._opt_footer_text.value != null then footer_text = self._opt_footer_text.value.as(not null)
+
 		# generate the index
 		self.filename = "index.html"
 		clear
@@ -169,7 +177,7 @@ class DocContext
 		add(action_bar)
 		add("<div class=\"page\">")
 		add("<div class=\"content fullpage\">")
-		add("<h1>Modules</h1>\n<article class='overview'><ul>")
+		add("<h1>Modules</h1>\n<article class='overview'>{overview_text}<ul>")
 		var modss = mainmod.mhe.greaters_and_self.to_a
 		sort(modss)
 		for mod in modss do
@@ -197,6 +205,7 @@ class DocContext
 		add("</article></div>")
 		add("<div class='clear'></div>")
 		add("</div>")
+		add("<footer>{footer_text}</footer>")
 		add("</body></html>\n")
 		write_to("{dir}/index.html")
 
@@ -214,6 +223,7 @@ class DocContext
 			add("<div class=\"page\">")
 			mod.file_page_doc(self)
 			add("</div>")
+			add("<footer>{footer_text}</footer>")
 			add("</body></html>\n")
 			write_to("{dir}/{mod.html_name}.html")
 		end
@@ -230,6 +240,7 @@ class DocContext
 			add("<div class=\"page\">")
 			c.file_page_doc(self)
 			add("</div>")
+			add("<footer>{footer_text}</footer>")
 			add("</body></html>\n")
 			write_to("{dir}/{c.html_name}.html")
 		end
@@ -245,6 +256,7 @@ class DocContext
 		mainmod.file_index_page_doc(self)
 		add("</div>")
 		add("</div>")
+		add("<footer>{footer_text}</footer>")
 		add("</body></html>\n")
 		write_to("{dir}/full-index.html")
 	end
@@ -295,6 +307,8 @@ class DocContext
 		option_context.add_option(opt_source)
 		option_context.add_option(opt_nodot)
 		option_context.add_option(opt_sharedir)
+		option_context.add_option(opt_overview_text)
+		option_context.add_option(opt_footer_text)
 	end
 
 	redef fun process_options
