@@ -234,6 +234,7 @@ for ii in "$@"; do
 					((cptr=cptr+1))
 					args=$line
 					fff=$ff"_args"$cptr
+					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
 						echo ""
 						echo "NIT_NO_STACK=1 ./$ff.bin" $args
