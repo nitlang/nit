@@ -1014,7 +1014,7 @@ redef class MMLocalProperty
 				if lp == tlp then continue
 				dctx.add(" {lp.mmmodule.html_link(dctx)}")
 				if lp.local_class.global != lc.global then
-					dctx.add(" for {lp.local_class.html_link(dctx)}")
+					dctx.add(" for {lp.local_class.html_link(dctx)} ")
 				end
 
 				n = lp.node
@@ -1334,7 +1334,7 @@ redef class MMLocalClass
 			dctx.stage(". Definition in:")
 			for lc in crhe.greaters do
 				if lc.mmmodule.toplevel_owner != m then continue
-				dctx.add(" {lc.mmmodule.html_link(dctx)}")
+				dctx.add(" {lc.mmmodule.html_link(dctx)} ")
 				assert lc isa MMSrcLocalClass
 				var n = lc.node
 				if n != null then
