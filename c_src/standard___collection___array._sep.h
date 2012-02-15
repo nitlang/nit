@@ -103,6 +103,9 @@ typedef val_t (*standard___collection___array___AbstractArrayRead___has_t)(val_t
 static const char * const LOCATE_standard___collection___array___AbstractArrayRead___has_only = "array::AbstractArrayRead::(abstract_collection::Collection::has_only)";
 val_t standard___collection___array___AbstractArrayRead___has_only(val_t p0, val_t p1);
 typedef val_t (*standard___collection___array___AbstractArrayRead___has_only_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___AbstractArrayRead___has_key = "array::AbstractArrayRead::(abstract_collection::MapRead::has_key)";
+val_t standard___collection___array___AbstractArrayRead___has_key(val_t p0, val_t p1);
+typedef val_t (*standard___collection___array___AbstractArrayRead___has_key_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___array___AbstractArrayRead___count = "array::AbstractArrayRead::(abstract_collection::Collection::count)";
 val_t standard___collection___array___AbstractArrayRead___count(val_t p0, val_t p1);
 typedef val_t (*standard___collection___array___AbstractArrayRead___count_t)(val_t p0, val_t p1);
@@ -167,7 +170,7 @@ typedef void (*standard___collection___array___AbstractArray___remove_t)(val_t p
 static const char * const LOCATE_standard___collection___array___AbstractArray___remove_all = "array::AbstractArray::(abstract_collection::RemovableCollection::remove_all)";
 void standard___collection___array___AbstractArray___remove_all(val_t p0, val_t p1);
 typedef void (*standard___collection___array___AbstractArray___remove_all_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___AbstractArray___remove_at = "array::AbstractArray::(abstract_collection::Sequence::remove_at)";
+static const char * const LOCATE_standard___collection___array___AbstractArray___remove_at = "array::AbstractArray::(abstract_collection::Map::remove_at)";
 void standard___collection___array___AbstractArray___remove_at(val_t p0, val_t p1);
 typedef void (*standard___collection___array___AbstractArray___remove_at_t)(val_t p0, val_t p1);
 val_t NEW_AbstractArray_standard___collection___array___AbstractArrayRead___init();
@@ -175,10 +178,10 @@ typedef void (*CLOS_standard___collection___array___Array___iterate_0)(struct st
 static const char * const LOCATE_standard___collection___array___Array___iterate = "array::Array::(abstract_collection::Collection::iterate)";
 void standard___collection___array___Array___iterate(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 typedef void (*standard___collection___array___Array___iterate_t)(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-static const char * const LOCATE_standard___collection___array___Array_____bra = "array::Array::(abstract_collection::SequenceRead::[])";
+static const char * const LOCATE_standard___collection___array___Array_____bra = "array::Array::(abstract_collection::MapRead::[])";
 val_t standard___collection___array___Array_____bra(val_t p0, val_t p1);
 typedef val_t (*standard___collection___array___Array_____bra_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___Array_____braeq = "array::Array::(abstract_collection::Sequence::[]=)";
+static const char * const LOCATE_standard___collection___array___Array_____braeq = "array::Array::(abstract_collection::Map::[]=)";
 void standard___collection___array___Array_____braeq(val_t p0, val_t p1, val_t p2);
 typedef void (*standard___collection___array___Array_____braeq_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_standard___collection___array___Array___add = "array::Array::(abstract_collection::SimpleCollection::add)";

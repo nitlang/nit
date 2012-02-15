@@ -147,6 +147,7 @@ end
 class MMSrcMethod
 	super MMMethod
 	redef fun is_intern do return false
+	redef fun is_extern do return false
 	redef fun is_abstract do return false
 	redef fun extern_name do return null
 end
@@ -185,17 +186,25 @@ class MMMethSrcMethod
 	super MMSrcMethod
 	redef readable var _is_init: Bool
 	redef readable var _is_intern: Bool
+	redef readable var _is_extern: Bool
 	redef readable var _is_abstract: Bool
 	redef readable writable var _extern_name: nullable String # Will be computed during MMBuilder
+	redef readable var _explicit_casts : Set[MMImportedCast] = new HashSet[MMImportedCast]
+	redef readable var _explicit_imports : Set[MMExplicitImport] = new HashSet[MMExplicitImport]
 	redef fun node: nullable AMethPropdef do return mmmodule.nodes(self).as(nullable AMethPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: nullable AMethPropdef)
 	do
 		super(name, cla)
 		cla.mmmodule.nodes(self) = n
-		_is_init = node isa AConcreteInitPropdef
+		_is_init = node isa AInitPropdef
 		_is_intern = node isa AInternMethPropdef
+		_is_extern = node isa AExternPropdef
 		_is_abstract = node isa ADeferredMethPropdef
 		_extern_name = null
+
+		if is_extern then
+			mmmodule.is_extern_hybrid = true
+		end
 	end
 end
 

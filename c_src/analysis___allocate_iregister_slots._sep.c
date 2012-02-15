@@ -296,7 +296,6 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___defe
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t REGB1;
-  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_analysis___allocate_iregister_slots;
@@ -336,11 +335,6 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___defe
         nit_abort("Uninitialized attribute %s", "_born_rank", LOCATE_analysis___allocate_iregister_slots, 102);
       }
       REGB1 = ATTR_analysis___allocate_iregister_slots___IRegister____born_rank(fra.me.REG[2]);
-      REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
-      if (UNTAG_Bool(REGB2)) {
-      } else {
-        nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-      }
       /* ./../lib/standard//kernel.nit:216 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
       /* ./analysis//allocate_iregister_slots.nit:102 */
@@ -829,7 +823,6 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t REGB1;
-  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_analysis___allocate_iregister_slots;
@@ -875,11 +868,6 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
     nit_abort("Uninitialized attribute %s", "_current_rank", LOCATE_analysis___allocate_iregister_slots, 209);
   }
   REGB1 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[0]);
-  REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
-  if (UNTAG_Bool(REGB2)) {
-  } else {
-    nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-  }
   /* ./../lib/standard//kernel.nit:215 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
   /* ./analysis//allocate_iregister_slots.nit:209 */
@@ -1092,7 +1080,7 @@ void analysis___allocate_iregister_slots___SlotGroup___register(val_t p0, val_t 
   return;
 }
 void analysis___allocate_iregister_slots___SlotGroup___free(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -1100,28 +1088,25 @@ void analysis___allocate_iregister_slots___SlotGroup___free(val_t p0, val_t p1){
   fra.me.line = 259;
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___SlotGroup___free;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:259 */
-  fra.me.REG[2] = fra.me.REG[0];
   /* ./analysis//allocate_iregister_slots.nit:262 */
-  REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[2])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_free", LOCATE_analysis___allocate_iregister_slots, 262);
   }
-  fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[2]);
+  fra.me.REG[0] = ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[0]);
   fra.me.REG[1] = ATTR_analysis___allocate_iregister_slots___IRegister____slot_index(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_analysis___allocate_iregister_slots, 262);
   }
-  CALL_standard___collection___abstract_collection___Sequence___push(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+  CALL_standard___collection___abstract_collection___Sequence___push(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
 }

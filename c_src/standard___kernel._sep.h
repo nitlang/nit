@@ -2,6 +2,7 @@
 #ifndef standard___kernel_sep
 #define standard___kernel_sep
 #include <nit_common.h>
+#include "kernel._nitni.h"
 
 extern const classtable_elt_t VFT_standard___kernel___Object[];
 
@@ -47,16 +48,14 @@ extern const int SFT_standard___kernel[];
 #define ID_standard___kernel___Comparable (SFT_standard___kernel[6])
 #define COLOR_standard___kernel___Comparable (SFT_standard___kernel[7])
 #define INIT_TABLE_POS_standard___kernel___Comparable (SFT_standard___kernel[8] + 0)
-#define VTID_standard___kernel___Comparable___OTHER(recv) (VAL2VFT(recv)[SFT_standard___kernel[8] + 1].i)
-#define VTCOLOR_standard___kernel___Comparable___OTHER(recv) (VAL2VFT(recv)[SFT_standard___kernel[8] + 2].i)
-#define CALL_standard___kernel___Comparable_____l(recv) ((standard___kernel___Comparable_____l_t)CALL((recv), (SFT_standard___kernel[8] + 3)))
-#define CALL_standard___kernel___Comparable_____leq(recv) ((standard___kernel___Comparable_____leq_t)CALL((recv), (SFT_standard___kernel[8] + 4)))
-#define CALL_standard___kernel___Comparable_____geq(recv) ((standard___kernel___Comparable_____geq_t)CALL((recv), (SFT_standard___kernel[8] + 5)))
-#define CALL_standard___kernel___Comparable_____g(recv) ((standard___kernel___Comparable_____g_t)CALL((recv), (SFT_standard___kernel[8] + 6)))
-#define CALL_standard___kernel___Comparable_____leqg(recv) ((standard___kernel___Comparable_____leqg_t)CALL((recv), (SFT_standard___kernel[8] + 7)))
-#define CALL_standard___kernel___Comparable___is_between(recv) ((standard___kernel___Comparable___is_between_t)CALL((recv), (SFT_standard___kernel[8] + 8)))
-#define CALL_standard___kernel___Comparable___max(recv) ((standard___kernel___Comparable___max_t)CALL((recv), (SFT_standard___kernel[8] + 9)))
-#define CALL_standard___kernel___Comparable___min(recv) ((standard___kernel___Comparable___min_t)CALL((recv), (SFT_standard___kernel[8] + 10)))
+#define CALL_standard___kernel___Comparable_____l(recv) ((standard___kernel___Comparable_____l_t)CALL((recv), (SFT_standard___kernel[8] + 1)))
+#define CALL_standard___kernel___Comparable_____leq(recv) ((standard___kernel___Comparable_____leq_t)CALL((recv), (SFT_standard___kernel[8] + 2)))
+#define CALL_standard___kernel___Comparable_____geq(recv) ((standard___kernel___Comparable_____geq_t)CALL((recv), (SFT_standard___kernel[8] + 3)))
+#define CALL_standard___kernel___Comparable_____g(recv) ((standard___kernel___Comparable_____g_t)CALL((recv), (SFT_standard___kernel[8] + 4)))
+#define CALL_standard___kernel___Comparable_____leqg(recv) ((standard___kernel___Comparable_____leqg_t)CALL((recv), (SFT_standard___kernel[8] + 5)))
+#define CALL_standard___kernel___Comparable___is_between(recv) ((standard___kernel___Comparable___is_between_t)CALL((recv), (SFT_standard___kernel[8] + 6)))
+#define CALL_standard___kernel___Comparable___max(recv) ((standard___kernel___Comparable___max_t)CALL((recv), (SFT_standard___kernel[8] + 7)))
+#define CALL_standard___kernel___Comparable___min(recv) ((standard___kernel___Comparable___min_t)CALL((recv), (SFT_standard___kernel[8] + 8)))
 #define ID_standard___kernel___Discrete (SFT_standard___kernel[9])
 #define COLOR_standard___kernel___Discrete (SFT_standard___kernel[10])
 #define INIT_TABLE_POS_standard___kernel___Discrete (SFT_standard___kernel[11] + 0)

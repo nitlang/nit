@@ -100,9 +100,11 @@ class ChaVisitor
 			# FIXME: take only the last property on the redef. hierarchie
 			var t = ic.stype
 			var cls = t.for_module(builder.program.main_module).local_class
-			var m = cls[ic.property.global].as(MMMethod)
-			var r = cls.new_instance_iroutine[m]
-			builder.add_search(ic.property, r, false, false)
+			if not cls.global.is_extern then
+				var m = cls[ic.property.global].as(MMMethod)
+				var r = cls.new_instance_iroutine[m]
+				builder.add_search(ic.property, r, false, false)
+			end
 		else if ic isa ISuper then
 			builder.add_search(ic.property, ic.property.iroutine, false, true)
 		else if ic isa ICall then

@@ -5290,7 +5290,7 @@ void parser___lexer___Lexer___init(val_t p0, val_t p1, int* init_table){
   return;
 }
 val_t parser___lexer___Lexer___peek(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t REGB1;
   val_t tmp;
@@ -5299,32 +5299,29 @@ val_t parser___lexer___Lexer___peek(val_t p0){
   fra.me.line = 1234;
   fra.me.meth = LOCATE_parser___lexer___Lexer___peek;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1234 */
-  fra.me.REG[1] = fra.me.REG[0];
   /* ./parser//lexer.nit:1237 */
   while(1) {
-    fra.me.REG[2] = ATTR_parser___lexer___Lexer____token(fra.me.REG[1]);
-    REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+    fra.me.REG[1] = ATTR_parser___lexer___Lexer____token(fra.me.REG[0]);
+    REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+      REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
         REGB1 = TAG_Bool(false);
         REGB0 = REGB1;
       } else {
-        REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+        REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
         REGB0 = REGB1;
       }
     }
     if (UNTAG_Bool(REGB0)) {
       /* ./parser//lexer.nit:1238 */
-      fra.me.REG[2] = CALL_parser___lexer___Lexer___get_token(fra.me.REG[1])(fra.me.REG[1]);
-      ATTR_parser___lexer___Lexer____token(fra.me.REG[1]) = fra.me.REG[2];
+      fra.me.REG[1] = CALL_parser___lexer___Lexer___get_token(fra.me.REG[0])(fra.me.REG[0]);
+      ATTR_parser___lexer___Lexer____token(fra.me.REG[0]) = fra.me.REG[1];
     } else {
       /* ./parser//lexer.nit:1237 */
       goto label1;
@@ -5332,8 +5329,8 @@ val_t parser___lexer___Lexer___peek(val_t p0){
   }
   label1: while(0);
   /* ./parser//lexer.nit:1240 */
-  fra.me.REG[1] = ATTR_parser___lexer___Lexer____token(fra.me.REG[1]);
-  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
+  fra.me.REG[0] = ATTR_parser___lexer___Lexer____token(fra.me.REG[0]);
+  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_parser___lexer, 1240);
@@ -5341,7 +5338,7 @@ val_t parser___lexer___Lexer___peek(val_t p0){
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[1];
+  return fra.me.REG[0];
 }
 val_t parser___lexer___Lexer___next(val_t p0){
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
@@ -5415,7 +5412,6 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
   val_t REGB18;
   val_t REGB19;
   val_t REGB20;
-  val_t REGB21;
   val_t tmp;
           static val_t once_value_4; /* Once value */
           static val_t once_value_5; /* Once value */
@@ -5495,11 +5491,6 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
   REGB10 = TAG_Int(-UNTAG_Int(REGB10));
   /* ./parser//lexer.nit:1272 */
   while(1) {
-    REGB11 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
-    if (UNTAG_Bool(REGB11)) {
-    } else {
-      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-    }
     /* ./../lib/standard//kernel.nit:216 */
     REGB11 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB5));
     /* ./parser//lexer.nit:1273 */
@@ -5512,7 +5503,7 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
       REGB0 = REGB11;
     } else {
       /* ./parser//lexer.nit:1276 */
-      REGB11 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB1);
+      REGB11 = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB1);
       /* ./../lib/standard//kernel.nit:385 */
       REGB11 = TAG_Int((unsigned char)UNTAG_Char(REGB11));
       /* ./parser//lexer.nit:1277 */
@@ -5566,7 +5557,7 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
           }
           fra.me.REG[2] = ATTR_parser___lexer___Lexer____file(fra.me.REG[0]);
           fra.me.REG[2] = CALL_location___SourceFile___line_starts(fra.me.REG[2])(fra.me.REG[2]);
-          CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB13, REGB1);
+          CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB13, REGB1);
         } else {
           /* ./parser//lexer.nit:1287 */
           REGB16 = TAG_Int(1);
@@ -5585,7 +5576,7 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
           }
           fra.me.REG[2] = ATTR_parser___lexer___Lexer____file(fra.me.REG[0]);
           fra.me.REG[2] = CALL_location___SourceFile___line_starts(fra.me.REG[2])(fra.me.REG[2]);
-          CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB13, REGB1);
+          CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB13, REGB1);
         }
       } else {
         /* ./parser//lexer.nit:1291 */
@@ -5619,7 +5610,7 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
           }
           fra.me.REG[2] = ATTR_parser___lexer___Lexer____file(fra.me.REG[0]);
           fra.me.REG[2] = CALL_location___SourceFile___line_starts(fra.me.REG[2])(fra.me.REG[2]);
-          CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB13, REGB1);
+          CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB13, REGB1);
         } else {
           /* ./parser//lexer.nit:1297 */
           REGB15 = TAG_Int(1);
@@ -5640,11 +5631,6 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
         REGB16 = TAG_Int(1);
         /* ./../lib/standard//kernel.nit:219 */
         REGB16 = TAG_Int(-UNTAG_Int(REGB16));
-        REGB17 = TAG_Bool(VAL_ISA(REGB16, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
-        if (UNTAG_Bool(REGB17)) {
-        } else {
-          nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-        }
         /* ./../lib/standard//kernel.nit:215 */
         REGB16 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB16));
         /* ./parser//lexer.nit:1303 */
@@ -5674,22 +5660,12 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
         REGB18 = TAG_Int(UNTAG_Int(REGB17)-UNTAG_Int(REGB18));
         /* ./parser//lexer.nit:1312 */
         REGB17 = TAG_Int(0);
-        REGB19 = TAG_Bool(VAL_ISA(REGB17, VTCOLOR_standard___kernel___Comparable___OTHER(REGB18), VTID_standard___kernel___Comparable___OTHER(REGB18))) /*cast OTHER*/;
-        if (UNTAG_Bool(REGB19)) {
-        } else {
-          nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-        }
         /* ./../lib/standard//kernel.nit:216 */
         REGB17 = TAG_Bool(UNTAG_Int(REGB18)>=UNTAG_Int(REGB17));
         /* ./parser//lexer.nit:1312 */
         if (UNTAG_Bool(REGB17)) {
           /* ./parser//lexer.nit:1313 */
           while(1) {
-            REGB17 = TAG_Bool(VAL_ISA(REGB18, VTCOLOR_standard___kernel___Comparable___OTHER(REGB16), VTID_standard___kernel___Comparable___OTHER(REGB16))) /*cast OTHER*/;
-            if (UNTAG_Bool(REGB17)) {
-            } else {
-              nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-            }
             /* ./../lib/standard//kernel.nit:214 */
             REGB17 = TAG_Bool(UNTAG_Int(REGB16)<=UNTAG_Int(REGB18));
             /* ./parser//lexer.nit:1313 */
@@ -5710,11 +5686,6 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
               REGB20 = TAG_Int(UNTAG_Int(REGB17)+UNTAG_Int(REGB20));
               /* ./parser//lexer.nit:1317 */
               REGB17 = CALL_parser___tables___TablesCapable___lexer_goto(fra.me.REG[0])(fra.me.REG[0], REGB15, REGB20);
-              REGB21 = TAG_Bool(VAL_ISA(REGB17, VTCOLOR_standard___kernel___Comparable___OTHER(REGB11), VTID_standard___kernel___Comparable___OTHER(REGB11))) /*cast OTHER*/;
-              if (UNTAG_Bool(REGB21)) {
-              } else {
-		nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-              }
               /* ./../lib/standard//kernel.nit:215 */
               REGB17 = TAG_Bool(UNTAG_Int(REGB11)<UNTAG_Int(REGB17));
               /* ./parser//lexer.nit:1317 */
@@ -5732,11 +5703,6 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
 		REGB17 = TAG_Int(UNTAG_Int(REGB20)+UNTAG_Int(REGB17));
 		/* ./parser//lexer.nit:1319 */
 		REGB17 = CALL_parser___tables___TablesCapable___lexer_goto(fra.me.REG[0])(fra.me.REG[0], REGB15, REGB17);
-		REGB21 = TAG_Bool(VAL_ISA(REGB17, VTCOLOR_standard___kernel___Comparable___OTHER(REGB11), VTID_standard___kernel___Comparable___OTHER(REGB11))) /*cast OTHER*/;
-		if (UNTAG_Bool(REGB21)) {
-		} else {
-		nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-		}
 		/* ./../lib/standard//kernel.nit:217 */
 		REGB17 = TAG_Bool(UNTAG_Int(REGB11)>UNTAG_Int(REGB17));
 		/* ./parser//lexer.nit:1319 */
@@ -5770,11 +5736,6 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
         REGB15 = TAG_Int(2);
         /* ./../lib/standard//kernel.nit:219 */
         REGB15 = TAG_Int(-UNTAG_Int(REGB15));
-        REGB16 = TAG_Bool(VAL_ISA(REGB15, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
-        if (UNTAG_Bool(REGB16)) {
-        } else {
-          nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-        }
         /* ./../lib/standard//kernel.nit:217 */
         REGB15 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB15));
         /* ./parser//lexer.nit:1327 */
@@ -5792,11 +5753,6 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
     }
     /* ./parser//lexer.nit:1335 */
     REGB14 = TAG_Int(0);
-    REGB13 = TAG_Bool(VAL_ISA(REGB14, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
-    if (UNTAG_Bool(REGB13)) {
-    } else {
-      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-    }
     /* ./../lib/standard//kernel.nit:216 */
     REGB14 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB14));
     /* ./parser//lexer.nit:1335 */
@@ -7381,11 +7337,6 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
         REGB11 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB11));
         /* ./parser//lexer.nit:1636 */
         fra.me.REG[2] = NEW_Location_location___Location___init(fra.me.REG[2], REGB13, REGB14, REGB12, REGB11);
-        REGB11 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
-        if (UNTAG_Bool(REGB11)) {
-        } else {
-          nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-        }
         /* ./../lib/standard//kernel.nit:217 */
         REGB11 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
         /* ./parser//lexer.nit:1637 */

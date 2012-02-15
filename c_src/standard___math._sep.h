@@ -3,7 +3,7 @@
 #define standard___math_sep
 #include "standard___kernel._sep.h"
 #include <nit_common.h>
-#include <math_nit.h>
+#include "math._nitni.h"
 extern const char *LOCATE_standard___math;
 extern const int SFT_standard___math[];
 #define CALL_standard___math___Int___rand(recv) ((standard___math___Int___rand_t)CALL((recv), (SFT_standard___math[0] + 0)))

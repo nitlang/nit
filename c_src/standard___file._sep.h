@@ -4,7 +4,7 @@
 #include "standard___stream._sep.h"
 #include "standard___string_search._sep.h"
 #include <nit_common.h>
-#include <file_nit.h>
+#include "file._nitni.h"
 
 extern const classtable_elt_t VFT_standard___file___FStream[];
 

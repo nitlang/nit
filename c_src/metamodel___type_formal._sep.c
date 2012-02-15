@@ -85,7 +85,7 @@ val_t metamodel___type_formal___MMTypeFormal___name(val_t p0){
   return fra.me.REG[0];
 }
 val_t metamodel___type_formal___MMTypeFormal___bound(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -93,15 +93,12 @@ val_t metamodel___type_formal___MMTypeFormal___bound(val_t p0){
   fra.me.line = 36;
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal___bound;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
+  fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//type_formal.nit:36 */
-  fra.me.REG[1] = fra.me.REG[0];
   /* ./metamodel//type_formal.nit:37 */
-  fra.me.REG[1] = ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[1]);
-  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
+  fra.me.REG[0] = ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[0]);
+  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_metamodel___type_formal, 37);
@@ -109,7 +106,7 @@ val_t metamodel___type_formal___MMTypeFormal___bound(val_t p0){
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[1];
+  return fra.me.REG[0];
 }
 val_t metamodel___type_formal___MMTypeFormal_____l(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;

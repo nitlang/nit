@@ -12,7 +12,7 @@ val_t standard___math___Int___rand(val_t p0){
   fra.me.REG_size = 0;
   REGB0 = p0;
   /* ./../lib/standard//math.nit:19 */
-  REGB0 = TAG_Int(kernel_Int_Int_rand_0(UNTAG_Int(REGB0)));
+  REGB0 = Int_rand___out(REGB0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
@@ -28,7 +28,7 @@ val_t standard___math___Float___sqrt(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:23 */
-  fra.me.REG[0] = BOX_Float(kernel_Float_Float_sqrt_0(UNBOX_Float(fra.me.REG[0])));
+  fra.me.REG[0] = Float_sqrt___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -44,7 +44,7 @@ val_t standard___math___Float___cos(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:24 */
-  fra.me.REG[0] = BOX_Float(kernel_Float_Float_cos_0(UNBOX_Float(fra.me.REG[0])));
+  fra.me.REG[0] = Float_cos___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -60,7 +60,7 @@ val_t standard___math___Float___sin(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:25 */
-  fra.me.REG[0] = BOX_Float(kernel_Float_Float_sin_0(UNBOX_Float(fra.me.REG[0])));
+  fra.me.REG[0] = Float_sin___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -76,7 +76,7 @@ val_t standard___math___Float___tan(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:26 */
-  fra.me.REG[0] = BOX_Float(kernel_Float_Float_tan_0(UNBOX_Float(fra.me.REG[0])));
+  fra.me.REG[0] = Float_tan___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -92,7 +92,7 @@ val_t standard___math___Float___acos(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:27 */
-  fra.me.REG[0] = BOX_Float(kernel_Float_Float_acos_0(UNBOX_Float(fra.me.REG[0])));
+  fra.me.REG[0] = Float_acos___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -108,7 +108,7 @@ val_t standard___math___Float___asin(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:28 */
-  fra.me.REG[0] = BOX_Float(kernel_Float_Float_asin_0(UNBOX_Float(fra.me.REG[0])));
+  fra.me.REG[0] = Float_asin___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -124,7 +124,7 @@ val_t standard___math___Float___atan(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:29 */
-  fra.me.REG[0] = BOX_Float(kernel_Float_Float_atan_0(UNBOX_Float(fra.me.REG[0])));
+  fra.me.REG[0] = Float_atan___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -142,7 +142,7 @@ val_t standard___math___Float___pow(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   /* ./../lib/standard//math.nit:31 */
-  fra.me.REG[1] = BOX_Float(kernel_Float_Float_pow_1(UNBOX_Float(fra.me.REG[0]), UNBOX_Float(fra.me.REG[1])));
+  fra.me.REG[1] = Float_pow___out(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
 }
@@ -158,7 +158,7 @@ val_t standard___math___Float___log(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:32 */
-  fra.me.REG[0] = BOX_Float(kernel_Float_Float_log_0(UNBOX_Float(fra.me.REG[0])));
+  fra.me.REG[0] = Float_log___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -174,7 +174,7 @@ val_t standard___math___Float___exp(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:33 */
-  fra.me.REG[0] = BOX_Float(kernel_Float_Float_exp_0(UNBOX_Float(fra.me.REG[0])));
+  fra.me.REG[0] = Float_exp___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -190,7 +190,7 @@ val_t standard___math___Float___rand(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:35 */
-  fra.me.REG[0] = BOX_Float(kernel_Float_Float_rand_0(UNBOX_Float(fra.me.REG[0])));
+  fra.me.REG[0] = Float_rand___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -210,7 +210,7 @@ val_t standard___math___Object___atan2(val_t p0, val_t p1, val_t p2){
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   /* ./../lib/standard//math.nit:38 */
-  fra.me.REG[2] = BOX_Float(kernel_Any_Any_atan2_2(fra.me.REG[0], UNBOX_Float(fra.me.REG[1]), UNBOX_Float(fra.me.REG[2])));
+  fra.me.REG[2] = Object_atan2___out(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[2];
 }
@@ -226,7 +226,7 @@ val_t standard___math___Object___pi(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:39 */
-  fra.me.REG[0] = BOX_Float(kernel_Any_Any_pi_0(fra.me.REG[0]));
+  fra.me.REG[0] = Object_pi___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -244,7 +244,7 @@ void standard___math___Object___srand_from(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   REGB0 = p1;
   /* ./../lib/standard//math.nit:40 */
-  kernel_Any_Any_srand_from_1(fra.me.REG[0], UNTAG_Int(REGB0));
+  Object_srand_from___out(fra.me.REG[0], REGB0);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -260,7 +260,7 @@ void standard___math___Object___srand(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:41 */
-  kernel_Any_Any_srand_0(fra.me.REG[0]);
+  Object_srand___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
 }

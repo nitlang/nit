@@ -246,6 +246,17 @@ class MMSignature
 	end
 end
 
+
+redef class MMExplicitImport
+	var signature : MMSignature
+
+	redef init( local_class : MMLocalClass, meth : MMMethod )
+	do
+		super
+		signature = meth.signature.adaptation_to( local_class.get_type )
+	end
+end
+
 # A closure in a signature
 class MMClosure
 	# The name of the closure (without the !)
@@ -528,4 +539,38 @@ redef class MMModule
 	do
 		return class_by_name(once ("Bool".to_symbol)).get_type
 	end
+end
+
+# Explicitly imported cast
+class MMImportedCast
+	readable var _from : MMType
+	readable var _to : MMType
+
+	fun is_about_nullable_only : Bool
+	do
+	    return ( _from.is_nullable and _to.as_nullable == _from ) or
+	           ( _to.is_nullable and _from.as_nullable == _to )
+	end
+
+	fun is_not_null_to_nullable : Bool
+	do
+	    return not _from.is_nullable and _to.is_nullable
+	end
+
+	fun is_nullable_to_not_null : Bool
+	do
+	    return _from.is_nullable and not _to.is_nullable
+	end
+
+	redef fun == ( o )
+	do
+		return o isa MMImportedCast and
+			o.from == from and o.to == to
+	end
+end
+
+# Method local properties
+redef class MMMethod
+	# casts explicitely imported to be available from native implementation
+	fun explicit_casts : Set[ MMImportedCast ] is abstract
 end

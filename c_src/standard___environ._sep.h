@@ -3,7 +3,7 @@
 #define standard___environ_sep
 #include "standard___symbol._sep.h"
 #include <nit_common.h>
-#include <environ_nit.h>
+#include "environ._nitni.h"
 extern const char *LOCATE_standard___environ;
 extern const int SFT_standard___environ[];
 #define CALL_standard___environ___Symbol___environ(recv) ((standard___environ___Symbol___environ_t)CALL((recv), (SFT_standard___environ[0] + 0)))

@@ -44,7 +44,6 @@ val_t metamodel___vararg___MMSignature___has_vararg(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t REGB1;
-  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___vararg;
@@ -62,11 +61,6 @@ val_t metamodel___vararg___MMSignature___has_vararg(val_t p0){
   }
   REGB0 = ATTR_metamodel___vararg___MMSignature____vararg_rank(fra.me.REG[0]);
   REGB1 = TAG_Int(0);
-  REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
-  if (UNTAG_Bool(REGB2)) {
-  } else {
-    nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
-  }
   /* ./../lib/standard//kernel.nit:216 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
   /* ./metamodel//vararg.nit:30 */

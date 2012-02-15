@@ -6,14 +6,14 @@ val_t standard___time___Object___get_time(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___time;
-  fra.me.line = 19;
+  fra.me.line = 18;
   fra.me.meth = LOCATE_standard___time___Object___get_time;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//time.nit:19 */
-  REGB0 = TAG_Int(kernel_Any_Any_get_time_0(fra.me.REG[0]));
+  /* ./../lib/standard//time.nit:18 */
+  REGB0 = Object_get_time___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }

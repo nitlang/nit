@@ -13,6 +13,7 @@
  * another product.
  */
 
+#define _POSIX_C_SOURCE 1
 #include <stdlib.h>
 
 #define string_NativeString_NativeString_get_environ_0(self) getenv(self)

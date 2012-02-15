@@ -43,10 +43,10 @@ extern const int SFT_standard___collection___list[];
 #define CALL_standard___collection___list___ListNode___next__eq(recv) ((standard___collection___list___ListNode___next__eq_t)CALL((recv), (SFT_standard___collection___list[11] + 3)))
 #define CALL_standard___collection___list___ListNode___prev(recv) ((standard___collection___list___ListNode___prev_t)CALL((recv), (SFT_standard___collection___list[11] + 4)))
 #define CALL_standard___collection___list___ListNode___prev__eq(recv) ((standard___collection___list___ListNode___prev__eq_t)CALL((recv), (SFT_standard___collection___list[11] + 5)))
-static const char * const LOCATE_standard___collection___list___List_____bra = "list::List::(abstract_collection::SequenceRead::[])";
+static const char * const LOCATE_standard___collection___list___List_____bra = "list::List::(abstract_collection::MapRead::[])";
 val_t standard___collection___list___List_____bra(val_t p0, val_t p1);
 typedef val_t (*standard___collection___list___List_____bra_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___list___List_____braeq = "list::List::(abstract_collection::Sequence::[]=)";
+static const char * const LOCATE_standard___collection___list___List_____braeq = "list::List::(abstract_collection::Map::[]=)";
 void standard___collection___list___List_____braeq(val_t p0, val_t p1, val_t p2);
 typedef void (*standard___collection___list___List_____braeq_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_standard___collection___list___List___first = "list::List::(abstract_collection::Collection::first)";
@@ -76,6 +76,9 @@ typedef val_t (*standard___collection___list___List___has_only_t)(val_t p0, val_
 static const char * const LOCATE_standard___collection___list___List___count = "list::List::(abstract_collection::Collection::count)";
 val_t standard___collection___list___List___count(val_t p0, val_t p1);
 typedef val_t (*standard___collection___list___List___count_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___list___List___has_key = "list::List::(abstract_collection::MapRead::has_key)";
+val_t standard___collection___list___List___has_key(val_t p0, val_t p1);
+typedef val_t (*standard___collection___list___List___has_key_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___list___List___push = "list::List::(abstract_collection::Sequence::push)";
 void standard___collection___list___List___push(val_t p0, val_t p1);
 typedef void (*standard___collection___list___List___push_t)(val_t p0, val_t p1);
@@ -94,7 +97,7 @@ typedef val_t (*standard___collection___list___List___shift_t)(val_t p0);
 static const char * const LOCATE_standard___collection___list___List___remove = "list::List::(abstract_collection::RemovableCollection::remove)";
 void standard___collection___list___List___remove(val_t p0, val_t p1);
 typedef void (*standard___collection___list___List___remove_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___list___List___remove_at = "list::List::(abstract_collection::Sequence::remove_at)";
+static const char * const LOCATE_standard___collection___list___List___remove_at = "list::List::(abstract_collection::Map::remove_at)";
 void standard___collection___list___List___remove_at(val_t p0, val_t p1);
 typedef void (*standard___collection___list___List___remove_at_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___list___List___clear = "list::List::(abstract_collection::RemovableCollection::clear)";

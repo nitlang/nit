@@ -104,9 +104,8 @@ extern const int SFT_standard___collection___abstract_collection[];
 #define ID_standard___collection___abstract_collection___SequenceRead (SFT_standard___collection___abstract_collection[35])
 #define COLOR_standard___collection___abstract_collection___SequenceRead (SFT_standard___collection___abstract_collection[36])
 #define INIT_TABLE_POS_standard___collection___abstract_collection___SequenceRead (SFT_standard___collection___abstract_collection[37] + 0)
-#define CALL_standard___collection___abstract_collection___SequenceRead_____bra(recv) ((standard___collection___abstract_collection___SequenceRead_____bra_t)CALL((recv), (SFT_standard___collection___abstract_collection[37] + 1)))
-#define CALL_standard___collection___abstract_collection___SequenceRead___last(recv) ((standard___collection___abstract_collection___SequenceRead___last_t)CALL((recv), (SFT_standard___collection___abstract_collection[37] + 2)))
-#define CALL_standard___collection___abstract_collection___SequenceRead___index_of(recv) ((standard___collection___abstract_collection___SequenceRead___index_of_t)CALL((recv), (SFT_standard___collection___abstract_collection[37] + 3)))
+#define CALL_standard___collection___abstract_collection___SequenceRead___last(recv) ((standard___collection___abstract_collection___SequenceRead___last_t)CALL((recv), (SFT_standard___collection___abstract_collection[37] + 1)))
+#define CALL_standard___collection___abstract_collection___SequenceRead___index_of(recv) ((standard___collection___abstract_collection___SequenceRead___index_of_t)CALL((recv), (SFT_standard___collection___abstract_collection[37] + 2)))
 #define ID_standard___collection___abstract_collection___Sequence (SFT_standard___collection___abstract_collection[38])
 #define COLOR_standard___collection___abstract_collection___Sequence (SFT_standard___collection___abstract_collection[39])
 #define INIT_TABLE_POS_standard___collection___abstract_collection___Sequence (SFT_standard___collection___abstract_collection[40] + 0)
@@ -117,8 +116,6 @@ extern const int SFT_standard___collection___abstract_collection[];
 #define CALL_standard___collection___abstract_collection___Sequence___pop(recv) ((standard___collection___abstract_collection___Sequence___pop_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 5)))
 #define CALL_standard___collection___abstract_collection___Sequence___unshift(recv) ((standard___collection___abstract_collection___Sequence___unshift_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 6)))
 #define CALL_standard___collection___abstract_collection___Sequence___shift(recv) ((standard___collection___abstract_collection___Sequence___shift_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 7)))
-#define CALL_standard___collection___abstract_collection___Sequence_____braeq(recv) ((standard___collection___abstract_collection___Sequence_____braeq_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 8)))
-#define CALL_standard___collection___abstract_collection___Sequence___remove_at(recv) ((standard___collection___abstract_collection___Sequence___remove_at_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 9)))
 #define ID_standard___collection___abstract_collection___IndexedIterator (SFT_standard___collection___abstract_collection[41])
 #define COLOR_standard___collection___abstract_collection___IndexedIterator (SFT_standard___collection___abstract_collection[42])
 #define INIT_TABLE_POS_standard___collection___abstract_collection___IndexedIterator (SFT_standard___collection___abstract_collection[43] + 0)
@@ -301,9 +298,6 @@ typedef val_t (*standard___collection___abstract_collection___MapIterator___key_
 static const char * const LOCATE_standard___collection___abstract_collection___SequenceRead___first = "abstract_collection::SequenceRead::(abstract_collection::Collection::first)";
 val_t standard___collection___abstract_collection___SequenceRead___first(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___SequenceRead___first_t)(val_t p0);
-static const char * const LOCATE_standard___collection___abstract_collection___SequenceRead_____bra = "abstract_collection::SequenceRead::[]";
-val_t standard___collection___abstract_collection___SequenceRead_____bra(val_t p0, val_t p1);
-typedef val_t (*standard___collection___abstract_collection___SequenceRead_____bra_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___abstract_collection___SequenceRead___last = "abstract_collection::SequenceRead::last";
 val_t standard___collection___abstract_collection___SequenceRead___last(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___SequenceRead___last_t)(val_t p0);
@@ -340,15 +334,12 @@ typedef void (*standard___collection___abstract_collection___Sequence___unshift_
 static const char * const LOCATE_standard___collection___abstract_collection___Sequence___shift = "abstract_collection::Sequence::shift";
 val_t standard___collection___abstract_collection___Sequence___shift(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___Sequence___shift_t)(val_t p0);
-static const char * const LOCATE_standard___collection___abstract_collection___Sequence_____braeq = "abstract_collection::Sequence::[]=";
-void standard___collection___abstract_collection___Sequence_____braeq(val_t p0, val_t p1, val_t p2);
-typedef void (*standard___collection___abstract_collection___Sequence_____braeq_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_standard___collection___abstract_collection___Sequence___remove_at = "abstract_collection::Sequence::remove_at";
-void standard___collection___abstract_collection___Sequence___remove_at(val_t p0, val_t p1);
-typedef void (*standard___collection___abstract_collection___Sequence___remove_at_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___abstract_collection___IndexedIterator___index = "abstract_collection::IndexedIterator::index";
 val_t standard___collection___abstract_collection___IndexedIterator___index(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___IndexedIterator___index_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___IndexedIterator___key = "abstract_collection::IndexedIterator::(abstract_collection::MapIterator::key)";
+val_t standard___collection___abstract_collection___IndexedIterator___key(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___IndexedIterator___key_t)(val_t p0);
 static const char * const LOCATE_standard___collection___abstract_collection___CoupleMap___couple_at = "abstract_collection::CoupleMap::couple_at";
 val_t standard___collection___abstract_collection___CoupleMap___couple_at(val_t p0, val_t p1);
 typedef val_t (*standard___collection___abstract_collection___CoupleMap___couple_at_t)(val_t p0, val_t p1);

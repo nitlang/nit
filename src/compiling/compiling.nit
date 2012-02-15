@@ -91,21 +91,31 @@ end
 
 redef class MMModule
 	# Compile the sep or glob files (of the current module only)
-	private fun compile_separate_module(cprogram: CProgram)
+	fun compile_separate_module(cprogram: CProgram)
 	do
 		var tc = cprogram.program.tc
 		tc.info("Generating C code for module: {full_name}",2)
 		var v = new CompilerVisitor(self, cprogram)
 		v.add_decl("#include <nit_common.h>")
 
-		var native_name = location.file.filename.strip_extension(".nit")
-		var native_header = native_name + "_nit.h"
-		if native_header.file_exists then
-			v.add_decl("#include <{native_header.basename("")}>")
-			cprogram.include_dirs.add("-I {native_name.dirname}")
+		if is_extern_hybrid then
+			# adds reference to frontier files
+			# if module uses the native interface
+			var nitni_header_name = "{name}._nitni.h"
+			v.add_decl("#include \"{nitni_header_name}\"")
+			var nitni_body_name = "{name}._nitni.c"
+			cprogram.files.add( "{cprogram.compdir}/{nitni_body_name}" )
+
+			# add reference to extern implementation
+			var native_name = location.file.filename.strip_extension(".nit")
+			var native_body = native_name + ".nit.c"
+			if native_body.file_exists then
+				cprogram.files.add(native_body)
+			else # try old style filename
+				native_body = native_name + "_nit.c"
+				if native_body.file_exists then	cprogram.files.add(native_body)
+			end
 		end
-		var native_body = native_name + "_nit.c"
-		if native_body.file_exists then cprogram.files.add(native_body)
 
 		declare_class_tables_to_c(v)
 		compile_mod_to_c(v)

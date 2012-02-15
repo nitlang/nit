@@ -3,7 +3,7 @@
 #define standard___string_sep
 #include "standard___collection._sep.h"
 #include <nit_common.h>
-#include <string_nit.h>
+#include "string._nitni.h"
 
 extern const classtable_elt_t VFT_standard___string___AbstractString[];
 
@@ -85,7 +85,7 @@ extern const int SFT_standard___string[];
 static const char * const LOCATE_standard___string___AbstractString___items = "string::AbstractString::items";
 val_t standard___string___AbstractString___items(val_t p0);
 typedef val_t (*standard___string___AbstractString___items_t)(val_t p0);
-static const char * const LOCATE_standard___string___AbstractString_____bra = "string::AbstractString::(abstract_collection::SequenceRead::[])";
+static const char * const LOCATE_standard___string___AbstractString_____bra = "string::AbstractString::(abstract_collection::MapRead::[])";
 val_t standard___string___AbstractString_____bra(val_t p0, val_t p1);
 typedef val_t (*standard___string___AbstractString_____bra_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___string___AbstractString___substring = "string::AbstractString::substring";
@@ -160,7 +160,7 @@ typedef val_t (*standard___string___String___to_s_t)(val_t p0);
 static const char * const LOCATE_standard___string___String___hash = "string::String::(hash::Object::hash)";
 val_t standard___string___String___hash(val_t p0);
 typedef val_t (*standard___string___String___hash_t)(val_t p0);
-static const char * const LOCATE_standard___string___Buffer_____braeq = "string::Buffer::(abstract_collection::Sequence::[]=)";
+static const char * const LOCATE_standard___string___Buffer_____braeq = "string::Buffer::(abstract_collection::Map::[]=)";
 void standard___string___Buffer_____braeq(val_t p0, val_t p1, val_t p2);
 typedef void (*standard___string___Buffer_____braeq_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_standard___string___Buffer___add = "string::Buffer::(abstract_collection::SimpleCollection::add)";

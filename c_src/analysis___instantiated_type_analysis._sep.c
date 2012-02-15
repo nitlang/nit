@@ -265,7 +265,7 @@ void analysis___instantiated_type_analysis___Program___dump_not_instantiated_typ
     return;
   }
 void analysis___instantiated_type_analysis___Program___with_each_live_local_classes(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   fun_t CREG[1];
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -273,20 +273,17 @@ void analysis___instantiated_type_analysis___Program___with_each_live_local_clas
   fra.me.line = 47;
   fra.me.meth = LOCATE_analysis___instantiated_type_analysis___Program___with_each_live_local_classes;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
   fra.me.closure_ctx = closctx_param;
   fra.me.closure_funs = CREG;
   fra.me.REG[0] = p0;
   CREG[0] = clos_fun0;
-  /* ./analysis//instantiated_type_analysis.nit:47 */
-  fra.me.REG[1] = fra.me.REG[0];
   /* ./analysis//instantiated_type_analysis.nit:51 */
-  fra.me.REG[2] = CALL_program___Program___main_module(fra.me.REG[1])(fra.me.REG[1]);
-  fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMModule___local_classes(fra.me.REG[2])(fra.me.REG[2]);
-  CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[2])(fra.me.REG[2], (&(fra.me)), ((fun_t)OC_analysis___instantiated_type_analysis___Program___with_each_live_local_classes_1));
+  fra.me.REG[1] = CALL_program___Program___main_module(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMModule___local_classes(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[1])(fra.me.REG[1], (&(fra.me)), ((fun_t)OC_analysis___instantiated_type_analysis___Program___with_each_live_local_classes_1));
   switch ((&(fra.me))->has_broke) {
     case 0: break;
     case 1: (&(fra.me))->has_broke = 0; goto label3;
@@ -314,7 +311,7 @@ void analysis___instantiated_type_analysis___Program___with_each_live_local_clas
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
     /* ./analysis//instantiated_type_analysis.nit:52 */
-    fra.me.REG[1] = CALL_analysis___instantiated_type_analysis___Program___ita(closctx->REG[1])(closctx->REG[1]);
+    fra.me.REG[1] = CALL_analysis___instantiated_type_analysis___Program___ita(closctx->REG[0])(closctx->REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -330,7 +327,7 @@ void analysis___instantiated_type_analysis___Program___with_each_live_local_clas
     if (UNTAG_Bool(REGB0)) {
       REGB0 = TAG_Bool(true);
     } else {
-      fra.me.REG[1] = CALL_analysis___instantiated_type_analysis___Program___ita(closctx->REG[1])(closctx->REG[1]);
+      fra.me.REG[1] = CALL_analysis___instantiated_type_analysis___Program___ita(closctx->REG[0])(closctx->REG[0]);
       REGB1 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {

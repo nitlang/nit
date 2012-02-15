@@ -3,7 +3,7 @@
 #define standard___exec_sep
 #include "standard___stream._sep.h"
 #include <nit_common.h>
-#include <exec_nit.h>
+#include "exec._nitni.h"
 
 extern const classtable_elt_t VFT_standard___exec___Process[];
 

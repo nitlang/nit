@@ -153,6 +153,11 @@ class MMModule
 	# Dictionary of global classes
 	var _global_class_by_name: Map[Symbol, MMGlobalClass] = new HashMap[Symbol, MMGlobalClass]
 
+	# Is a hybrid module partially implemented in extern code
+	# It is if it contains a new extern class or an
+	# extern class declaration
+	var is_extern_hybrid : Bool writable = false
+
 	protected init(name: Symbol, dir: MMDirectory, context: MMContext, loc: Location)
 	do
 		_name = name
@@ -301,6 +306,9 @@ class MMGlobalClass
 
 	# Is the global class a enum class?
 	readable writable var _is_enum: Bool = false
+
+	# Is the global class an extern class?
+	readable writable var _is_extern: Bool = false
 
 	# Visibility of the global class
 	# 1 -> public
@@ -652,6 +660,11 @@ class MMAttribute
 	super MMLocalProperty
 end
 
+class MMExplicitImport
+	var local_class : MMLocalClass
+	var method : MMMethod
+end
+
 # Method local properties
 class MMMethod
 	super MMLocalProperty
@@ -661,8 +674,14 @@ class MMMethod
 	# Is the method abstract
 	fun is_abstract: Bool is abstract
 
-	# Is the method extern, if yes what is the extern_name
+	# Is the method extern
+	fun is_extern: Bool is abstract
+
+	# extern name when specified explicitly in nit code
 	fun extern_name: nullable String is abstract
+
+	# properties explicitly exported to native code
+	fun explicit_imports : Set[ MMExplicitImport ] is abstract
 end
 
 # Concrete local classes

@@ -320,6 +320,8 @@ class AAssignOp super Prod end
 class AClosureDef super Prod end
 class AClosureId super Prod end
 class AModuleName super Prod end
+class AExternCalls super Prod end
+class AExternCall super Prod end
 class AQualified super Prod end
 class ADoc super Prod end
 
@@ -398,6 +400,10 @@ class AEnumClasskind
 	super AClasskind
     readable var _n_kwenum: TKwenum
 end
+class AExternClasskind
+	super AClasskind
+    readable var _n_kwextern: TKwextern
+end
 class AFormaldef
 	super AFormaldef
     readable var _n_id: TClassid
@@ -457,6 +463,7 @@ class AExternMethPropdef
     readable var _n_methid: AMethid
     readable var _n_signature: ASignature
     readable var _n_extern: nullable TString = null
+    readable var _n_extern_calls: nullable AExternCalls = null
 end
 class AConcreteMethPropdef
 	super APropdef
@@ -477,6 +484,17 @@ class AConcreteInitPropdef
     readable var _n_methid: nullable AMethid = null
     readable var _n_signature: ASignature
     readable var _n_block: nullable AExpr = null
+end
+class AExternInitPropdef
+	super APropdef
+    readable var _n_doc: nullable ADoc = null
+    readable var _n_kwredef: nullable TKwredef = null
+    readable var _n_visibility: AVisibility
+    readable var _n_kwnew: TKwnew
+    readable var _n_methid: nullable AMethid = null
+    readable var _n_signature: ASignature
+    readable var _n_extern: nullable TString = null
+    readable var _n_extern_calls: nullable AExternCalls = null
 end
 class AMainMethPropdef
 	super APropdef
@@ -1040,6 +1058,51 @@ class AModuleName
     readable var _n_quad: nullable TQuad = null
     readable var _n_path: List[TId] = new List[TId]
     readable var _n_id: TId
+end
+class AExternCalls
+	super AExternCalls
+    readable var _n_kwimport: TKwimport
+    readable var _n_extern_calls: List[AExternCall] = new List[AExternCall]
+end
+class AExternCall
+	super AExternCall
+end
+class ASuperExternCall
+	super AExternCall
+    readable var _n_kwsuper: TKwsuper
+end
+class ALocalPropExternCall
+	super AExternCall
+    readable var _n_methid: AMethid
+end
+class AFullPropExternCall
+	super AExternCall
+    readable var _n_classid: TClassid
+    readable var _n_quad: nullable TQuad = null
+    readable var _n_methid: AMethid
+end
+class AInitPropExternCall
+	super AExternCall
+    readable var _n_classid: TClassid
+end
+class ACastAsExternCall
+	super AExternCall
+    readable var _n_from_type: AType
+    readable var _n_kwas: TKwas
+    readable var _n_to_type: AType
+end
+class AAsNullableExternCall
+	super AExternCall
+    readable var _n_type: AType
+    readable var _n_kwas: TKwas
+    readable var _n_kwnullable: TKwnullable
+end
+class AAsNotNullableExternCall
+	super AExternCall
+    readable var _n_type: AType
+    readable var _n_kwas: TKwas
+    readable var _n_kwnot: TKwnot
+    readable var _n_kwnullable: TKwnullable
 end
 class AQualified
 	super AQualified

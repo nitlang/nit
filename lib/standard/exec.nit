@@ -161,8 +161,7 @@ redef class NativeString
 	fun system: Int is extern "string_NativeString_NativeString_system_0"
 end
 
-private universal NativeProcess
-	super Pointer
+private extern NativeProcess
 	fun id: Int is extern "exec_NativeProcess_NativeProcess_id_0"
 	fun is_finished: Bool is extern "exec_NativeProcess_NativeProcess_is_finished_0"
 	fun status: Int is extern "exec_NativeProcess_NativeProcess_status_0"

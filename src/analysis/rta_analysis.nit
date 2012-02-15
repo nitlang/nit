@@ -165,8 +165,16 @@ class RtaBuilder
 		end
 
 		for cls in program.main_module.global_classes do
-			if not cls.is_enum then continue
+			if not cls.is_enum and not cls.is_extern then continue
 			add_instantiated_class(program.main_module[cls])
+		end
+
+		# defines all extern classes as used to make sure that static
+		# C functions in frontier compile.
+		program.with_each_methods !action( prop ) do
+			if prop.is_extern then
+				add_reachable_iroutine(prop.iroutine)
+			end
 		end
 	end
 
@@ -207,10 +215,12 @@ class RtaVisitor
 			# FIXME: take only the last property on the redef. hierarchie
 			var t = ic.stype
 			var cls = t.for_module(builder.program.main_module).local_class
-			var m = cls[ic.property.global].as(MMMethod)
-			var r = cls.new_instance_iroutine[m]
+			if not cls.global.is_extern then
+				var m = cls[ic.property.global].as(MMMethod)
+				var r = cls.new_instance_iroutine[m]
+				builder.add_reachable_iroutine(r)
+			end
 			builder.add_instantiated_class(cls)
-			builder.add_reachable_iroutine(r)
 		else if ic isa ISuper then
 			# Add every parents ...
 			for p in ic.property.prhe.greaters_and_self do

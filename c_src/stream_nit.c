@@ -11,9 +11,9 @@
  * another product.
  */
 
-#include <unistd.h>
+#include "stream_nit.h"
 
-int stream_FDStream_FDStream_native_read_char_1(void *s, int fd) {
+int stream_FDStream_FDStream_native_read_char_1(FDStream s, int fd) {
 	int result;
 	char buf;
 	ssize_t r = read(fd, &buf, 1);
@@ -24,7 +24,7 @@ int stream_FDStream_FDStream_native_read_char_1(void *s, int fd) {
 	return result;
 }
 
-void stream_FDStream_FDStream_write_char_1(void *s, int fd, int c) {
+void stream_FDStream_FDStream_write_char_1(FDStream s, int fd, int c) {
 	write(fd, &c, 1);
 }
 

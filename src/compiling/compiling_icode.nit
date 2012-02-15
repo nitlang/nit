@@ -576,6 +576,11 @@ redef class ICall
 	redef fun compile_call_to_c(v, args)
 	do
 		var w = new Writer
+		
+		# do not compile explicit calls from native methods
+		# theses are really manually called in the native implementation
+		if is_explicit_from_extern then return w
+
 		var prop = property
 		if prop.global.is_init then args.add("init_table")
 		w.add(prop.global.meth_call)
@@ -591,6 +596,10 @@ end
 redef class ISuper
 	redef fun compile_call_to_c(v, args)
 	do
+		# do not compile explicit calls from native methods
+		# theses are really manually called in the native implementation
+		if is_explicit_from_extern then return new Writer
+
 		var prop = property
 		if prop.global.is_init then args.add("init_table")
 		var w = new Writer
@@ -608,6 +617,11 @@ redef class INew
 	redef fun compile_call_to_c(v, args)
 	do
 		var w = new Writer
+
+		# do not compile explicit calls from native methods
+		# theses are really manually called in the native implementation
+		if is_explicit_from_extern then return w
+
 		w.add("NEW_")
 		w.add(stype.local_class.to_s)
 		w.add("_")
@@ -676,27 +690,28 @@ redef class INative
 		v.add_location(location)
 		if method.is_intern then
 			compile_intern_method_to_c(v)
-		else
+		else if not method.global.is_init then
 			compile_extern_method_to_c(v)
 		end
 	end
 
 	fun compile_extern_method_to_c(v: I2CCompilerVisitor)
 	do
-		var ename = method.extern_name.as(not null)#"{method.module.name}_{method.local_class.name}_{method.local_class.name}_{method.name}_{method.signature.arity}"
+		var ename = "{method.friendly_extern_name(method.local_class)}___out"
+
 		var sig = method.signature
 		assert exprs.length == sig.arity + 1
 
 		var regs = v.registers(exprs)
 
 		var args = new Array[String]
-		args.add(sig.recv.unboxtype(regs[0]))
+		args.add(regs[0])
 		for i in [0..sig.arity[ do
-			args.add(sig[i].unboxtype(regs[i+1]))
+			args.add(regs[i+1])
 		end
 		var s = "{ename}({args.join(", ")})"
 
-		if need_result then s = sig.return_type.boxtype(s)
+		if need_result then s = s # sig.return_type.boxtype(s)
 		var w = new_result(v)
 		w.add(s)
 	end
