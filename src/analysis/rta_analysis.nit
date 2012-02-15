@@ -168,6 +168,14 @@ class RtaBuilder
 			if not cls.is_enum and not cls.is_extern then continue
 			add_instantiated_class(program.main_module[cls])
 		end
+
+		# defines all extern classes as used to make sure that static
+		# C functions in frontier compile.
+		program.with_each_methods !action( prop ) do
+			if prop.is_extern then
+				add_reachable_iroutine(prop.iroutine)
+			end
+		end
 	end
 
 	# Build the context associated with this builder
