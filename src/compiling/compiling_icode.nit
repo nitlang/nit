@@ -575,6 +575,11 @@ redef class ICall
 	redef fun compile_call_to_c(v, args)
 	do
 		var w = new Writer
+		
+		# do not compile explicit calls from native methods
+		# theses are really manually called in the native implementation
+		if is_explicit_from_extern then return w
+
 		var prop = property
 		if prop.global.is_init then args.add("init_table")
 		w.add(prop.global.meth_call)
@@ -590,6 +595,10 @@ end
 redef class ISuper
 	redef fun compile_call_to_c(v, args)
 	do
+		# do not compile explicit calls from native methods
+		# theses are really manually called in the native implementation
+		if is_explicit_from_extern then return new Writer
+
 		var prop = property
 		if prop.global.is_init then args.add("init_table")
 		var w = new Writer
@@ -607,6 +616,11 @@ redef class INew
 	redef fun compile_call_to_c(v, args)
 	do
 		var w = new Writer
+
+		# do not compile explicit calls from native methods
+		# theses are really manually called in the native implementation
+		if is_explicit_from_extern then return w
+
 		w.add("NEW_")
 		w.add(stype.local_class.to_s)
 		w.add("_")

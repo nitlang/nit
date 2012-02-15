@@ -386,6 +386,25 @@ redef class AConcreteMethPropdef
 	end
 end
 
+redef class AExternPropdef
+	redef fun fill_iroutine(v, method)
+	do
+		# add all explicit extern calls for this extern method
+		for explicit_import in method.as(MMMethSrcMethod).explicit_imports
+		do
+			var prop = explicit_import.method
+			var ic : IAbsCall
+			if prop.is_init then
+				ic = new INew(prop.signature.recv, prop, new List[IRegister])
+			else
+				ic = new ICall(prop, new List[IRegister])
+			end
+			ic.is_explicit_from_extern = true
+			v.stmt(ic)
+		end
+	end
+end
+
 redef class AExternInitPropdef
 	redef fun fill_iroutine(v, method)
 	do
@@ -396,6 +415,8 @@ redef class AExternInitPropdef
 		if rtype != null then
 			v.add_assignment(new IRegister(rtype), v.expr(new INative(method, params), rtype))
 		end
+
+		super
 	end
 end
 
@@ -416,6 +437,8 @@ redef class AExternMethPropdef
 		else
 			v.stmt(new INative(method, params))
 		end
+
+		super
 	end
 end
 

@@ -223,6 +223,9 @@ abstract class IAbsCall
 	# The called method
 	readable var _property: MMMethod
 
+	# if this call is to be made from native code
+	var is_explicit_from_extern : Bool writable = false
+
 	init(p: MMMethod, e: Sequence[IRegister])
 	do
 		super(e)
