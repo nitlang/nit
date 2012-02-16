@@ -62,7 +62,7 @@ extern const int SFT_standard___string[];
 #define CALL_standard___string___Int___to_base(recv) ((standard___string___Int___to_base_t)CALL((recv), (SFT_standard___string[12] + 2)))
 #define CALL_standard___string___Float___to_precision(recv) ((standard___string___Float___to_precision_t)CALL((recv), (SFT_standard___string[13] + 0)))
 #define CALL_standard___string___Collection___join(recv) ((standard___string___Collection___join_t)CALL((recv), (SFT_standard___string[14] + 0)))
-#define CALL_standard___string___Map___map_join(recv) ((standard___string___Map___map_join_t)CALL((recv), (SFT_standard___string[15] + 0)))
+#define CALL_standard___string___Map___join(recv) ((standard___string___Map___join_t)CALL((recv), (SFT_standard___string[15] + 0)))
 #define ID_standard___string___NativeString (SFT_standard___string[16])
 #define COLOR_standard___string___NativeString (SFT_standard___string[17])
 #define INIT_TABLE_POS_standard___string___NativeString (SFT_standard___string[18] + 0)
@@ -85,7 +85,7 @@ extern const int SFT_standard___string[];
 static const char * const LOCATE_standard___string___AbstractString___items = "string::AbstractString::items";
 val_t standard___string___AbstractString___items(val_t p0);
 typedef val_t (*standard___string___AbstractString___items_t)(val_t p0);
-static const char * const LOCATE_standard___string___AbstractString_____bra = "string::AbstractString::(abstract_collection::MapRead::[])";
+static const char * const LOCATE_standard___string___AbstractString_____bra = "string::AbstractString::(abstract_collection::SequenceRead::[])";
 val_t standard___string___AbstractString_____bra(val_t p0, val_t p1);
 typedef val_t (*standard___string___AbstractString_____bra_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___string___AbstractString___substring = "string::AbstractString::substring";
@@ -160,7 +160,7 @@ typedef val_t (*standard___string___String___to_s_t)(val_t p0);
 static const char * const LOCATE_standard___string___String___hash = "string::String::(hash::Object::hash)";
 val_t standard___string___String___hash(val_t p0);
 typedef val_t (*standard___string___String___hash_t)(val_t p0);
-static const char * const LOCATE_standard___string___Buffer_____braeq = "string::Buffer::(abstract_collection::Map::[]=)";
+static const char * const LOCATE_standard___string___Buffer_____braeq = "string::Buffer::(abstract_collection::Sequence::[]=)";
 void standard___string___Buffer_____braeq(val_t p0, val_t p1, val_t p2);
 typedef void (*standard___string___Buffer_____braeq_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_standard___string___Buffer___add = "string::Buffer::(abstract_collection::SimpleCollection::add)";
@@ -255,9 +255,9 @@ val_t NEW_Array_standard___collection___array___Array___init();
 val_t NEW_Array_standard___collection___array___Array___filled_with(val_t p0, val_t p1);
 val_t NEW_Array_standard___collection___array___Array___with_items(val_t p0);
 val_t NEW_Array_standard___collection___array___Array___with_native(val_t p0, val_t p1);
-static const char * const LOCATE_standard___string___Map___map_join = "string::Map::map_join";
-val_t standard___string___Map___map_join(val_t p0, val_t p1, val_t p2);
-typedef val_t (*standard___string___Map___map_join_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_standard___string___Map___join = "string::Map::join";
+val_t standard___string___Map___join(val_t p0, val_t p1, val_t p2);
+typedef val_t (*standard___string___Map___join_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_standard___string___NativeString_____bra = "string::NativeString::[]";
 val_t standard___string___NativeString_____bra(val_t p0, val_t p1);
 typedef val_t (*standard___string___NativeString_____bra_t)(val_t p0, val_t p1);

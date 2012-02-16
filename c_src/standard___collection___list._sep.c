@@ -215,7 +215,7 @@ val_t standard___collection___list___List___length(val_t p0){
     if (UNTAG_Bool(REGB1)) {
       /* ./../lib/standard//collection//list.nit:49 */
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:218 */
+      /* ./../lib/standard//kernel.nit:235 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
       /* ./../lib/standard//collection//list.nit:49 */
       REGB0 = REGB1;
@@ -411,7 +411,7 @@ val_t standard___collection___list___List___count(val_t p0, val_t p1){
       REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
       if (UNTAG_Bool(REGB1)) {
         REGB1 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:218 */
+        /* ./../lib/standard//kernel.nit:235 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
         /* ./../lib/standard//collection//list.nit:73 */
         REGB0 = REGB1;
@@ -435,40 +435,6 @@ val_t standard___collection___list___List___count(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-val_t standard___collection___list___List___has_key(val_t p0, val_t p1){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t REGB1;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 79;
-  fra.me.meth = LOCATE_standard___collection___list___List___has_key;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  REGB0 = p1;
-  /* ./../lib/standard//collection//list.nit:79 */
-  fra.me.REG[0] = CALL_standard___collection___list___List___get_node(fra.me.REG[0])(fra.me.REG[0], REGB0);
-  REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
-    if (UNTAG_Bool(REGB1)) {
-      REGB1 = TAG_Bool(false);
-      REGB0 = REGB1;
-    } else {
-      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
-      REGB0 = REGB1;
-    }
-  }
-  REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
-  goto label1;
-  label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return REGB0;
-}
 void standard___collection___list___List___push(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
@@ -476,7 +442,7 @@ void standard___collection___list___List___push(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 83;
+  fra.me.line = 81;
   fra.me.meth = LOCATE_standard___collection___list___List___push;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -485,9 +451,9 @@ void standard___collection___list___List___push(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:86 */
+  /* ./../lib/standard//collection//list.nit:84 */
   fra.me.REG[1] = NEW_ListNode_standard___collection___list___ListNode___init(fra.me.REG[1]);
-  /* ./../lib/standard//collection//list.nit:87 */
+  /* ./../lib/standard//collection//list.nit:85 */
   fra.me.REG[2] = ATTR_standard___collection___list___List____tail(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -502,21 +468,21 @@ void standard___collection___list___List___push(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//list.nit:88 */
+    /* ./../lib/standard//collection//list.nit:86 */
     ATTR_standard___collection___list___List____head(fra.me.REG[0]) = fra.me.REG[1];
   } else {
-    /* ./../lib/standard//collection//list.nit:90 */
+    /* ./../lib/standard//collection//list.nit:88 */
     fra.me.REG[2] = ATTR_standard___collection___list___List____tail(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 90);
+      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 88);
     }
     CALL_standard___collection___list___ListNode___next__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-    /* ./../lib/standard//collection//list.nit:91 */
+    /* ./../lib/standard//collection//list.nit:89 */
     fra.me.REG[2] = ATTR_standard___collection___list___List____tail(fra.me.REG[0]);
     CALL_standard___collection___list___ListNode___prev__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   }
-  /* ./../lib/standard//collection//list.nit:93 */
+  /* ./../lib/standard//collection//list.nit:91 */
   ATTR_standard___collection___list___List____tail(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -528,7 +494,7 @@ void standard___collection___list___List___unshift(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 96;
+  fra.me.line = 94;
   fra.me.meth = LOCATE_standard___collection___list___List___unshift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -537,9 +503,9 @@ void standard___collection___list___List___unshift(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:99 */
+  /* ./../lib/standard//collection//list.nit:97 */
   fra.me.REG[1] = NEW_ListNode_standard___collection___list___ListNode___init(fra.me.REG[1]);
-  /* ./../lib/standard//collection//list.nit:100 */
+  /* ./../lib/standard//collection//list.nit:98 */
   fra.me.REG[2] = ATTR_standard___collection___list___List____head(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -554,21 +520,21 @@ void standard___collection___list___List___unshift(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//list.nit:101 */
+    /* ./../lib/standard//collection//list.nit:99 */
     ATTR_standard___collection___list___List____tail(fra.me.REG[0]) = fra.me.REG[1];
   } else {
-    /* ./../lib/standard//collection//list.nit:103 */
+    /* ./../lib/standard//collection//list.nit:101 */
     fra.me.REG[2] = ATTR_standard___collection___list___List____head(fra.me.REG[0]);
     CALL_standard___collection___list___ListNode___next__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-    /* ./../lib/standard//collection//list.nit:104 */
+    /* ./../lib/standard//collection//list.nit:102 */
     fra.me.REG[2] = ATTR_standard___collection___list___List____head(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 104);
+      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 102);
     }
     CALL_standard___collection___list___ListNode___prev__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   }
-  /* ./../lib/standard//collection//list.nit:106 */
+  /* ./../lib/standard//collection//list.nit:104 */
   ATTR_standard___collection___list___List____head(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -580,7 +546,7 @@ void standard___collection___list___List___link(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 109;
+  fra.me.line = 107;
   fra.me.meth = LOCATE_standard___collection___list___List___link;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -590,7 +556,7 @@ void standard___collection___list___List___link(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:114 */
+  /* ./../lib/standard//collection//list.nit:112 */
   fra.me.REG[2] = ATTR_standard___collection___list___List____tail(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -605,11 +571,11 @@ void standard___collection___list___List___link(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//list.nit:115 */
+    /* ./../lib/standard//collection//list.nit:113 */
     fra.me.REG[2] = ATTR_standard___collection___list___List____head(fra.me.REG[1]);
     ATTR_standard___collection___list___List____head(fra.me.REG[0]) = fra.me.REG[2];
   } else {
-    /* ./../lib/standard//collection//list.nit:116 */
+    /* ./../lib/standard//collection//list.nit:114 */
     fra.me.REG[2] = ATTR_standard___collection___list___List____head(fra.me.REG[1]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -625,33 +591,33 @@ void standard___collection___list___List___link(val_t p0, val_t p1){
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//list.nit:117 */
+      /* ./../lib/standard//collection//list.nit:115 */
       fra.me.REG[2] = ATTR_standard___collection___list___List____tail(fra.me.REG[0]);
       fra.me.REG[3] = ATTR_standard___collection___list___List____head(fra.me.REG[1]);
       REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 117);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 115);
       }
       CALL_standard___collection___list___ListNode___next__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-      /* ./../lib/standard//collection//list.nit:118 */
+      /* ./../lib/standard//collection//list.nit:116 */
       fra.me.REG[3] = ATTR_standard___collection___list___List____tail(fra.me.REG[0]);
       REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 118);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 116);
       }
       fra.me.REG[3] = CALL_standard___collection___list___ListNode___next(fra.me.REG[3])(fra.me.REG[3]);
       fra.me.REG[2] = ATTR_standard___collection___list___List____tail(fra.me.REG[0]);
       REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 118);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 116);
       }
       CALL_standard___collection___list___ListNode___prev__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
     }
   }
-  /* ./../lib/standard//collection//list.nit:120 */
+  /* ./../lib/standard//collection//list.nit:118 */
   fra.me.REG[2] = ATTR_standard___collection___list___List____tail(fra.me.REG[1]);
   ATTR_standard___collection___list___List____tail(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./../lib/standard//collection//list.nit:121 */
+  /* ./../lib/standard//collection//list.nit:119 */
   CALL_standard___collection___abstract_collection___RemovableCollection___clear(fra.me.REG[1])(fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -663,7 +629,7 @@ val_t standard___collection___list___List___pop(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 126;
+  fra.me.line = 124;
   fra.me.meth = LOCATE_standard___collection___list___List___pop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -671,22 +637,22 @@ val_t standard___collection___list___List___pop(val_t p0){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:129 */
+  /* ./../lib/standard//collection//list.nit:127 */
   fra.me.REG[1] = ATTR_standard___collection___list___List____tail(fra.me.REG[0]);
-  /* ./../lib/standard//collection//list.nit:130 */
+  /* ./../lib/standard//collection//list.nit:128 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 130);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 128);
   }
   fra.me.REG[2] = CALL_standard___collection___list___ListNode___prev(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_standard___collection___list___List____tail(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./../lib/standard//collection//list.nit:131 */
+  /* ./../lib/standard//collection//list.nit:129 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 131);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 129);
   }
   CALL_standard___collection___list___ListNode___prev__eq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
-  /* ./../lib/standard//collection//list.nit:132 */
+  /* ./../lib/standard//collection//list.nit:130 */
   fra.me.REG[2] = ATTR_standard___collection___list___List____tail(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -701,21 +667,21 @@ val_t standard___collection___list___List___pop(val_t p0){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//list.nit:133 */
+    /* ./../lib/standard//collection//list.nit:131 */
     ATTR_standard___collection___list___List____head(fra.me.REG[0]) = NIT_NULL;
   } else {
-    /* ./../lib/standard//collection//list.nit:135 */
+    /* ./../lib/standard//collection//list.nit:133 */
     fra.me.REG[0] = ATTR_standard___collection___list___List____tail(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 135);
+      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 133);
     }
     CALL_standard___collection___list___ListNode___next__eq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
   }
-  /* ./../lib/standard//collection//list.nit:137 */
+  /* ./../lib/standard//collection//list.nit:135 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 137);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 135);
   }
   fra.me.REG[1] = CALL_standard___collection___abstract_collection___Container___item(fra.me.REG[1])(fra.me.REG[1]);
   goto label1;
@@ -730,7 +696,7 @@ val_t standard___collection___list___List___shift(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 140;
+  fra.me.line = 138;
   fra.me.meth = LOCATE_standard___collection___list___List___shift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -738,22 +704,22 @@ val_t standard___collection___list___List___shift(val_t p0){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:143 */
+  /* ./../lib/standard//collection//list.nit:141 */
   fra.me.REG[1] = ATTR_standard___collection___list___List____head(fra.me.REG[0]);
-  /* ./../lib/standard//collection//list.nit:144 */
+  /* ./../lib/standard//collection//list.nit:142 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 144);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 142);
   }
   fra.me.REG[2] = CALL_standard___collection___list___ListNode___next(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_standard___collection___list___List____head(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./../lib/standard//collection//list.nit:145 */
+  /* ./../lib/standard//collection//list.nit:143 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 145);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 143);
   }
   CALL_standard___collection___list___ListNode___next__eq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
-  /* ./../lib/standard//collection//list.nit:146 */
+  /* ./../lib/standard//collection//list.nit:144 */
   fra.me.REG[2] = ATTR_standard___collection___list___List____head(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -768,21 +734,21 @@ val_t standard___collection___list___List___shift(val_t p0){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//list.nit:147 */
+    /* ./../lib/standard//collection//list.nit:145 */
     ATTR_standard___collection___list___List____tail(fra.me.REG[0]) = NIT_NULL;
   } else {
-    /* ./../lib/standard//collection//list.nit:149 */
+    /* ./../lib/standard//collection//list.nit:147 */
     fra.me.REG[0] = ATTR_standard___collection___list___List____head(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 149);
+      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 147);
     }
     CALL_standard___collection___list___ListNode___prev__eq(fra.me.REG[0])(fra.me.REG[0], NIT_NULL);
   }
-  /* ./../lib/standard//collection//list.nit:151 */
+  /* ./../lib/standard//collection//list.nit:149 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 151);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 149);
   }
   fra.me.REG[1] = CALL_standard___collection___abstract_collection___Container___item(fra.me.REG[1])(fra.me.REG[1]);
   goto label1;
@@ -797,7 +763,7 @@ void standard___collection___list___List___remove(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 154;
+  fra.me.line = 152;
   fra.me.meth = LOCATE_standard___collection___list___List___remove;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -806,10 +772,10 @@ void standard___collection___list___List___remove(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:156 */
+  /* ./../lib/standard//collection//list.nit:154 */
   fra.me.REG[2] = ATTR_standard___collection___list___List____head(fra.me.REG[0]);
   fra.me.REG[2] = CALL_standard___collection___list___List___search_node_after(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
-  /* ./../lib/standard//collection//list.nit:157 */
+  /* ./../lib/standard//collection//list.nit:155 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -836,7 +802,7 @@ void standard___collection___list___List___remove_at(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 160;
+  fra.me.line = 158;
   fra.me.meth = LOCATE_standard___collection___list___List___remove_at;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -844,9 +810,9 @@ void standard___collection___list___List___remove_at(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./../lib/standard//collection//list.nit:162 */
+  /* ./../lib/standard//collection//list.nit:160 */
   fra.me.REG[1] = CALL_standard___collection___list___List___get_node(fra.me.REG[0])(fra.me.REG[0], REGB0);
-  /* ./../lib/standard//collection//list.nit:163 */
+  /* ./../lib/standard//collection//list.nit:161 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -871,15 +837,15 @@ void standard___collection___list___List___clear(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 166;
+  fra.me.line = 164;
   fra.me.meth = LOCATE_standard___collection___list___List___clear;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:168 */
+  /* ./../lib/standard//collection//list.nit:166 */
   ATTR_standard___collection___list___List____head(fra.me.REG[0]) = NIT_NULL;
-  /* ./../lib/standard//collection//list.nit:169 */
+  /* ./../lib/standard//collection//list.nit:167 */
   ATTR_standard___collection___list___List____tail(fra.me.REG[0]) = NIT_NULL;
   stack_frame_head = fra.me.prev;
   return;
@@ -889,13 +855,13 @@ val_t standard___collection___list___List___iterator(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 173;
+  fra.me.line = 171;
   fra.me.meth = LOCATE_standard___collection___list___List___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:173 */
+  /* ./../lib/standard//collection//list.nit:171 */
   fra.me.REG[0] = NEW_ListIterator_standard___collection___list___ListIterator___init(fra.me.REG[0]);
   goto label1;
   label1: while(0);
@@ -909,7 +875,7 @@ void standard___collection___list___List___init(val_t p0, int* init_table){
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 175;
+  fra.me.line = 173;
   fra.me.meth = LOCATE_standard___collection___list___List___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
@@ -926,7 +892,7 @@ void standard___collection___list___List___from(val_t p0, val_t p1, int* init_ta
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 178;
+  fra.me.line = 176;
   fra.me.meth = LOCATE_standard___collection___list___List___from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -934,7 +900,7 @@ void standard___collection___list___List___from(val_t p0, val_t p1, int* init_ta
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:179 */
+  /* ./../lib/standard//collection//list.nit:177 */
   CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
@@ -948,7 +914,7 @@ val_t standard___collection___list___List___get_node(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 187;
+  fra.me.line = 185;
   fra.me.meth = LOCATE_standard___collection___list___List___get_node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -957,19 +923,24 @@ val_t standard___collection___list___List___get_node(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./../lib/standard//collection//list.nit:190 */
+  /* ./../lib/standard//collection//list.nit:188 */
   fra.me.REG[0] = ATTR_standard___collection___list___List____head(fra.me.REG[0]);
-  /* ./../lib/standard//collection//list.nit:191 */
+  /* ./../lib/standard//collection//list.nit:189 */
   REGB1 = TAG_Int(0);
-  /* ./../lib/standard//kernel.nit:215 */
+  REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+  if (UNTAG_Bool(REGB2)) {
+  } else {
+    nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+  }
+  /* ./../lib/standard//kernel.nit:232 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//list.nit:191 */
+  /* ./../lib/standard//collection//list.nit:189 */
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//collection//list.nit:192 */
+    /* ./../lib/standard//collection//list.nit:190 */
     fra.me.REG[1] = NIT_NULL;
     goto label1;
   }
-  /* ./../lib/standard//collection//list.nit:194 */
+  /* ./../lib/standard//collection//list.nit:192 */
   while(1) {
     REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
@@ -986,34 +957,39 @@ val_t standard___collection___list___List___get_node(val_t p0, val_t p1){
     REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
     if (UNTAG_Bool(REGB1)) {
       REGB1 = TAG_Int(0);
-      /* ./../lib/standard//kernel.nit:217 */
+      REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+      if (UNTAG_Bool(REGB2)) {
+      } else {
+        nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+      }
+      /* ./../lib/standard//kernel.nit:234 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
     } else {
-      /* ./../lib/standard//collection//list.nit:194 */
+      /* ./../lib/standard//collection//list.nit:192 */
       REGB2 = TAG_Bool(false);
       REGB1 = REGB2;
     }
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//collection//list.nit:195 */
+      /* ./../lib/standard//collection//list.nit:193 */
       REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 195);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 193);
       }
       fra.me.REG[2] = CALL_standard___collection___list___ListNode___next(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[0] = fra.me.REG[2];
-      /* ./../lib/standard//collection//list.nit:196 */
+      /* ./../lib/standard//collection//list.nit:194 */
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:220 */
+      /* ./../lib/standard//kernel.nit:237 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//list.nit:196 */
+      /* ./../lib/standard//collection//list.nit:194 */
       REGB0 = REGB1;
     } else {
-      /* ./../lib/standard//collection//list.nit:194 */
+      /* ./../lib/standard//collection//list.nit:192 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ./../lib/standard//collection//list.nit:198 */
+  /* ./../lib/standard//collection//list.nit:196 */
   fra.me.REG[1] = fra.me.REG[0];
   goto label1;
   label1: while(0);
@@ -1027,7 +1003,7 @@ val_t standard___collection___list___List___search_node_after(val_t p0, val_t p1
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 201;
+  fra.me.line = 199;
   fra.me.meth = LOCATE_standard___collection___list___List___search_node_after;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1037,7 +1013,7 @@ val_t standard___collection___list___List___search_node_after(val_t p0, val_t p1
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./../lib/standard//collection//list.nit:205 */
+  /* ./../lib/standard//collection//list.nit:203 */
   while(1) {
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -1055,7 +1031,7 @@ val_t standard___collection___list___List___search_node_after(val_t p0, val_t p1
     if (UNTAG_Bool(REGB0)) {
       REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 205);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 203);
       }
       fra.me.REG[0] = CALL_standard___collection___abstract_collection___Container___item(fra.me.REG[2])(fra.me.REG[2]);
       REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[0],fra.me.REG[1]));
@@ -1078,7 +1054,7 @@ val_t standard___collection___list___List___search_node_after(val_t p0, val_t p1
     if (UNTAG_Bool(REGB0)) {
       REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 205);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 203);
       }
       fra.me.REG[0] = CALL_standard___collection___list___ListNode___next(fra.me.REG[2])(fra.me.REG[2]);
       fra.me.REG[2] = fra.me.REG[0];
@@ -1087,7 +1063,7 @@ val_t standard___collection___list___List___search_node_after(val_t p0, val_t p1
     }
   }
   label1: while(0);
-  /* ./../lib/standard//collection//list.nit:206 */
+  /* ./../lib/standard//collection//list.nit:204 */
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
@@ -1100,7 +1076,7 @@ void standard___collection___list___List___remove_node(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 209;
+  fra.me.line = 207;
   fra.me.meth = LOCATE_standard___collection___list___List___remove_node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1109,7 +1085,7 @@ void standard___collection___list___List___remove_node(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:212 */
+  /* ./../lib/standard//collection//list.nit:210 */
   fra.me.REG[2] = CALL_standard___collection___list___ListNode___prev(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -1124,10 +1100,10 @@ void standard___collection___list___List___remove_node(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//list.nit:213 */
+    /* ./../lib/standard//collection//list.nit:211 */
     fra.me.REG[2] = CALL_standard___collection___list___ListNode___next(fra.me.REG[1])(fra.me.REG[1]);
     ATTR_standard___collection___list___List____head(fra.me.REG[0]) = fra.me.REG[2];
-    /* ./../lib/standard//collection//list.nit:214 */
+    /* ./../lib/standard//collection//list.nit:212 */
     fra.me.REG[2] = CALL_standard___collection___list___ListNode___next(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -1142,19 +1118,19 @@ void standard___collection___list___List___remove_node(val_t p0, val_t p1){
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//list.nit:215 */
+      /* ./../lib/standard//collection//list.nit:213 */
       ATTR_standard___collection___list___List____tail(fra.me.REG[0]) = NIT_NULL;
     } else {
-      /* ./../lib/standard//collection//list.nit:217 */
+      /* ./../lib/standard//collection//list.nit:215 */
       fra.me.REG[2] = CALL_standard___collection___list___ListNode___next(fra.me.REG[1])(fra.me.REG[1]);
       REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 217);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 215);
       }
       CALL_standard___collection___list___ListNode___prev__eq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
     }
   } else {
-    /* ./../lib/standard//collection//list.nit:219 */
+    /* ./../lib/standard//collection//list.nit:217 */
     fra.me.REG[2] = CALL_standard___collection___list___ListNode___next(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -1169,31 +1145,31 @@ void standard___collection___list___List___remove_node(val_t p0, val_t p1){
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//list.nit:220 */
+      /* ./../lib/standard//collection//list.nit:218 */
       fra.me.REG[2] = CALL_standard___collection___list___ListNode___prev(fra.me.REG[1])(fra.me.REG[1]);
       ATTR_standard___collection___list___List____tail(fra.me.REG[0]) = fra.me.REG[2];
+      /* ./../lib/standard//collection//list.nit:219 */
+      fra.me.REG[2] = CALL_standard___collection___list___ListNode___prev(fra.me.REG[1])(fra.me.REG[1]);
+      REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+      if (UNTAG_Bool(REGB0)) {
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 219);
+      }
+      CALL_standard___collection___list___ListNode___next__eq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
+    } else {
       /* ./../lib/standard//collection//list.nit:221 */
       fra.me.REG[2] = CALL_standard___collection___list___ListNode___prev(fra.me.REG[1])(fra.me.REG[1]);
+      fra.me.REG[0] = CALL_standard___collection___list___ListNode___next(fra.me.REG[1])(fra.me.REG[1]);
       REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 221);
       }
-      CALL_standard___collection___list___ListNode___next__eq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
-    } else {
-      /* ./../lib/standard//collection//list.nit:223 */
-      fra.me.REG[2] = CALL_standard___collection___list___ListNode___prev(fra.me.REG[1])(fra.me.REG[1]);
-      fra.me.REG[0] = CALL_standard___collection___list___ListNode___next(fra.me.REG[1])(fra.me.REG[1]);
-      REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
-      if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 223);
-      }
       CALL_standard___collection___list___ListNode___next__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
-      /* ./../lib/standard//collection//list.nit:224 */
+      /* ./../lib/standard//collection//list.nit:222 */
       fra.me.REG[0] = CALL_standard___collection___list___ListNode___next(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[1] = CALL_standard___collection___list___ListNode___prev(fra.me.REG[1])(fra.me.REG[1]);
       REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 224);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 222);
       }
       CALL_standard___collection___list___ListNode___prev__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     }
@@ -1208,7 +1184,7 @@ void standard___collection___list___List___insert_before(val_t p0, val_t p1, val
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 228;
+  fra.me.line = 226;
   fra.me.meth = LOCATE_standard___collection___list___List___insert_before;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1219,11 +1195,11 @@ void standard___collection___list___List___insert_before(val_t p0, val_t p1, val
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./../lib/standard//collection//list.nit:230 */
+  /* ./../lib/standard//collection//list.nit:228 */
   fra.me.REG[1] = NEW_ListNode_standard___collection___list___ListNode___init(fra.me.REG[1]);
-  /* ./../lib/standard//collection//list.nit:231 */
+  /* ./../lib/standard//collection//list.nit:229 */
   fra.me.REG[3] = CALL_standard___collection___list___ListNode___prev(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./../lib/standard//collection//list.nit:232 */
+  /* ./../lib/standard//collection//list.nit:230 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1237,21 +1213,21 @@ void standard___collection___list___List___insert_before(val_t p0, val_t p1, val
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//list.nit:233 */
+    /* ./../lib/standard//collection//list.nit:231 */
     ATTR_standard___collection___list___List____head(fra.me.REG[0]) = fra.me.REG[1];
   } else {
-    /* ./../lib/standard//collection//list.nit:235 */
+    /* ./../lib/standard//collection//list.nit:233 */
     REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 235);
+      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 233);
     }
     CALL_standard___collection___list___ListNode___next__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
   }
-  /* ./../lib/standard//collection//list.nit:237 */
+  /* ./../lib/standard//collection//list.nit:235 */
   CALL_standard___collection___list___ListNode___prev__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* ./../lib/standard//collection//list.nit:238 */
+  /* ./../lib/standard//collection//list.nit:236 */
   CALL_standard___collection___list___ListNode___next__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./../lib/standard//collection//list.nit:239 */
+  /* ./../lib/standard//collection//list.nit:237 */
   CALL_standard___collection___list___ListNode___prev__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -1262,17 +1238,17 @@ val_t standard___collection___list___ListIterator___item(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 246;
+  fra.me.line = 244;
   fra.me.meth = LOCATE_standard___collection___list___ListIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:246 */
+  /* ./../lib/standard//collection//list.nit:244 */
   fra.me.REG[0] = ATTR_standard___collection___list___ListIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 246);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 244);
   }
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___Container___item(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1286,7 +1262,7 @@ void standard___collection___list___ListIterator___item__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 248;
+  fra.me.line = 246;
   fra.me.meth = LOCATE_standard___collection___list___ListIterator___item__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1294,11 +1270,11 @@ void standard___collection___list___ListIterator___item__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:248 */
+  /* ./../lib/standard//collection//list.nit:246 */
   fra.me.REG[0] = ATTR_standard___collection___list___ListIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 248);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 246);
   }
   CALL_standard___collection___abstract_collection___Container___item__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
@@ -1311,13 +1287,13 @@ val_t standard___collection___list___ListIterator___is_ok(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 250;
+  fra.me.line = 248;
   fra.me.meth = LOCATE_standard___collection___list___ListIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:250 */
+  /* ./../lib/standard//collection//list.nit:248 */
   fra.me.REG[0] = ATTR_standard___collection___list___ListIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -1344,27 +1320,27 @@ void standard___collection___list___ListIterator___next(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 252;
+  fra.me.line = 250;
   fra.me.meth = LOCATE_standard___collection___list___ListIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:254 */
+  /* ./../lib/standard//collection//list.nit:252 */
   fra.me.REG[1] = ATTR_standard___collection___list___ListIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 254);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___list, 252);
   }
   fra.me.REG[1] = CALL_standard___collection___list___ListNode___next(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_standard___collection___list___ListIterator____node(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//list.nit:255 */
+  /* ./../lib/standard//collection//list.nit:253 */
   REGB0 = ATTR_standard___collection___list___ListIterator____index(fra.me.REG[0]);
   REGB1 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:218 */
+  /* ./../lib/standard//kernel.nit:235 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//list.nit:255 */
+  /* ./../lib/standard//collection//list.nit:253 */
   ATTR_standard___collection___list___ListIterator____index(fra.me.REG[0]) = REGB1;
   stack_frame_head = fra.me.prev;
   return;
@@ -1377,7 +1353,7 @@ void standard___collection___list___ListIterator___init(val_t p0, val_t p1, int*
   if (init_table[itpos2]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 258;
+  fra.me.line = 256;
   fra.me.meth = LOCATE_standard___collection___list___ListIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1385,12 +1361,12 @@ void standard___collection___list___ListIterator___init(val_t p0, val_t p1, int*
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:261 */
+  /* ./../lib/standard//collection//list.nit:259 */
   ATTR_standard___collection___list___ListIterator____list(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//list.nit:262 */
+  /* ./../lib/standard//collection//list.nit:260 */
   fra.me.REG[1] = ATTR_standard___collection___list___List____head(fra.me.REG[1]);
   ATTR_standard___collection___list___ListIterator____node(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//list.nit:263 */
+  /* ./../lib/standard//collection//list.nit:261 */
   REGB0 = TAG_Int(0);
   ATTR_standard___collection___list___ListIterator____index(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -1403,81 +1379,87 @@ val_t standard___collection___list___ListIterator___index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 272;
+  fra.me.line = 270;
   fra.me.meth = LOCATE_standard___collection___list___ListIterator___index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:272 */
+  /* ./../lib/standard//collection//list.nit:270 */
   REGB0 = TAG_Bool(ATTR_standard___collection___list___ListIterator____index(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_index", LOCATE_standard___collection___list, 272);
+    nit_abort("Uninitialized attribute %s", "_index", LOCATE_standard___collection___list, 270);
   }
   REGB0 = ATTR_standard___collection___list___ListIterator____index(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void standard___collection___list___ListIterator___delete(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 275;
-  fra.me.meth = LOCATE_standard___collection___list___ListIterator___delete;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:278 */
-  REGB0 = TAG_Bool(ATTR_standard___collection___list___ListIterator____list(fra.me.REG[0])!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Uninitialized attribute %s", "_list", LOCATE_standard___collection___list, 278);
-  }
-  fra.me.REG[1] = ATTR_standard___collection___list___ListIterator____list(fra.me.REG[0]);
-  fra.me.REG[0] = ATTR_standard___collection___list___ListIterator____node(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Cast failed", NULL, LOCATE_standard___collection___list, 278);
-  }
-  CALL_standard___collection___list___List___remove_node(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  stack_frame_head = fra.me.prev;
-  return;
-}
-void standard___collection___list___ListIterator___insert_before(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 281;
-  fra.me.meth = LOCATE_standard___collection___list___ListIterator___insert_before;
+  fra.me.line = 273;
+  fra.me.meth = LOCATE_standard___collection___list___ListIterator___delete;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./../lib/standard//collection//list.nit:273 */
+  fra.me.REG[1] = fra.me.REG[0];
+  /* ./../lib/standard//collection//list.nit:276 */
+  REGB0 = TAG_Bool(ATTR_standard___collection___list___ListIterator____list(fra.me.REG[1])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_list", LOCATE_standard___collection___list, 276);
+  }
+  fra.me.REG[2] = ATTR_standard___collection___list___ListIterator____list(fra.me.REG[1]);
+  fra.me.REG[1] = ATTR_standard___collection___list___ListIterator____node(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Cast failed", NULL, LOCATE_standard___collection___list, 276);
+  }
+  CALL_standard___collection___list___List___remove_node(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+  stack_frame_head = fra.me.prev;
+  return;
+}
+void standard___collection___list___ListIterator___insert_before(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_standard___collection___list;
+  fra.me.line = 279;
+  fra.me.meth = LOCATE_standard___collection___list___ListIterator___insert_before;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 4;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
+  fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:284 */
-  REGB0 = TAG_Bool(ATTR_standard___collection___list___ListIterator____list(fra.me.REG[0])!=NIT_NULL);
+  /* ./../lib/standard//collection//list.nit:279 */
+  fra.me.REG[2] = fra.me.REG[0];
+  /* ./../lib/standard//collection//list.nit:282 */
+  REGB0 = TAG_Bool(ATTR_standard___collection___list___ListIterator____list(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_list", LOCATE_standard___collection___list, 284);
+    nit_abort("Uninitialized attribute %s", "_list", LOCATE_standard___collection___list, 282);
   }
-  fra.me.REG[2] = ATTR_standard___collection___list___ListIterator____list(fra.me.REG[0]);
-  fra.me.REG[0] = ATTR_standard___collection___list___ListIterator____node(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  fra.me.REG[3] = ATTR_standard___collection___list___ListIterator____list(fra.me.REG[2]);
+  fra.me.REG[2] = ATTR_standard___collection___list___ListIterator____node(fra.me.REG[2]);
+  REGB0 = TAG_Bool(fra.me.REG[2]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_standard___collection___list, 284);
+    nit_abort("Cast failed", NULL, LOCATE_standard___collection___list, 282);
   }
-  CALL_standard___collection___list___List___insert_before(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[0]);
+  CALL_standard___collection___list___List___insert_before(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -1488,7 +1470,7 @@ void standard___collection___list___ListNode___init(val_t p0, val_t p1, int* ini
   if (init_table[itpos3]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 291;
+  fra.me.line = 289;
   fra.me.meth = LOCATE_standard___collection___list___ListNode___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1498,11 +1480,11 @@ void standard___collection___list___ListNode___init(val_t p0, val_t p1, int* ini
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:291 */
+  /* ./../lib/standard//collection//list.nit:289 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
   CALL_standard___collection___abstract_collection___Container___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
-  /* ./../lib/standard//collection//list.nit:293 */
+  /* ./../lib/standard//collection//list.nit:291 */
   CALL_standard___collection___abstract_collection___Container___item__eq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   stack_frame_head = fra.me.prev;
   init_table[itpos3] = 1;
@@ -1513,13 +1495,13 @@ val_t standard___collection___list___ListNode___next(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 296;
+  fra.me.line = 294;
   fra.me.meth = LOCATE_standard___collection___list___ListNode___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:296 */
+  /* ./../lib/standard//collection//list.nit:294 */
   fra.me.REG[0] = ATTR_standard___collection___list___ListNode____next(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1529,7 +1511,7 @@ void standard___collection___list___ListNode___next__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 296;
+  fra.me.line = 294;
   fra.me.meth = LOCATE_standard___collection___list___ListNode___next__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1537,7 +1519,7 @@ void standard___collection___list___ListNode___next__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:296 */
+  /* ./../lib/standard//collection//list.nit:294 */
   ATTR_standard___collection___list___ListNode____next(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1547,13 +1529,13 @@ val_t standard___collection___list___ListNode___prev(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 299;
+  fra.me.line = 297;
   fra.me.meth = LOCATE_standard___collection___list___ListNode___prev;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//list.nit:299 */
+  /* ./../lib/standard//collection//list.nit:297 */
   fra.me.REG[0] = ATTR_standard___collection___list___ListNode____prev(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1563,7 +1545,7 @@ void standard___collection___list___ListNode___prev__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___list;
-  fra.me.line = 299;
+  fra.me.line = 297;
   fra.me.meth = LOCATE_standard___collection___list___ListNode___prev__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1571,7 +1553,7 @@ void standard___collection___list___ListNode___prev__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//list.nit:299 */
+  /* ./../lib/standard//collection//list.nit:297 */
   ATTR_standard___collection___list___ListNode____prev(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;

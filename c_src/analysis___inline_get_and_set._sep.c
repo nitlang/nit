@@ -132,7 +132,7 @@ void analysis___inline_get_and_set___Program___inline_get_set(val_t p0){
     /* ./analysis//inline_get_and_set.nit:42 */
     REGB0 = ATTR_analysis___inline_get_and_set___Program____number_getter_setter_inlined(closctx->REG[0]);
     REGB1 = CALL_analysis___inline_get_and_set___InlineGetSetVisitor___number_inlined(fra.me.REG[1])(fra.me.REG[1]);
-    /* ./../lib/standard//kernel.nit:218 */
+    /* ./../lib/standard//kernel.nit:235 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
     /* ./analysis//inline_get_and_set.nit:42 */
     ATTR_analysis___inline_get_and_set___Program____number_getter_setter_inlined(closctx->REG[0]) = REGB1;
@@ -189,6 +189,17 @@ void analysis___inline_get_and_set___InlineGetSetVisitor___visit_icode(val_t p0,
   fra.me.REG[3] = fra.me.REG[1];
   /* ./analysis//inline_get_and_set.nit:55 */
   REGB0 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___ICall, ID_icode___icode_base___ICall)) /*cast ICall*/;
+  if (UNTAG_Bool(REGB0)) {
+    REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+    if (UNTAG_Bool(REGB0)) {
+      nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_get_and_set, 55);
+    }
+    REGB0 = CALL_icode___icode_base___IAbsCall___is_explicit_from_extern(fra.me.REG[3])(fra.me.REG[3]);
+    REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+  } else {
+    REGB1 = TAG_Bool(false);
+    REGB0 = REGB1;
+  }
   if (UNTAG_Bool(REGB0)) {
     /* ./analysis//inline_get_and_set.nit:56 */
     REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
@@ -311,7 +322,7 @@ void analysis___inline_get_and_set___InlineGetSetVisitor___visit_icode(val_t p0,
       /* ./analysis//inline_get_and_set.nit:72 */
       REGB0 = ATTR_analysis___inline_get_and_set___InlineGetSetVisitor____number_inlined(fra.me.REG[2]);
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:218 */
+      /* ./../lib/standard//kernel.nit:235 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
       /* ./analysis//inline_get_and_set.nit:72 */
       ATTR_analysis___inline_get_and_set___InlineGetSetVisitor____number_inlined(fra.me.REG[2]) = REGB1;

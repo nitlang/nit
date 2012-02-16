@@ -210,6 +210,7 @@ void separate_options___ToolContext___integrate_separate_options(val_t p0, val_t
   struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
   val_t tmp;
     static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
@@ -235,16 +236,21 @@ void separate_options___ToolContext___integrate_separate_options(val_t p0, val_t
   /* ./separate_options.nit:28 */
   fra.me.REG[1] = CALL_separate_options___ToolContext___separate_options(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_opts___OptionContext___rest(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./../lib/standard//collection//array.nit:23 */
+  /* ./../lib/standard//collection//array.nit:24 */
   REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
   /* ./separate_options.nit:28 */
   REGB1 = TAG_Int(0);
-  /* ./../lib/standard//kernel.nit:217 */
+  REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+  if (UNTAG_Bool(REGB2)) {
+  } else {
+    nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+  }
+  /* ./../lib/standard//kernel.nit:234 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
   /* ./separate_options.nit:28 */
   if (UNTAG_Bool(REGB1)) {

@@ -48,14 +48,16 @@ extern const int SFT_standard___kernel[];
 #define ID_standard___kernel___Comparable (SFT_standard___kernel[6])
 #define COLOR_standard___kernel___Comparable (SFT_standard___kernel[7])
 #define INIT_TABLE_POS_standard___kernel___Comparable (SFT_standard___kernel[8] + 0)
-#define CALL_standard___kernel___Comparable_____l(recv) ((standard___kernel___Comparable_____l_t)CALL((recv), (SFT_standard___kernel[8] + 1)))
-#define CALL_standard___kernel___Comparable_____leq(recv) ((standard___kernel___Comparable_____leq_t)CALL((recv), (SFT_standard___kernel[8] + 2)))
-#define CALL_standard___kernel___Comparable_____geq(recv) ((standard___kernel___Comparable_____geq_t)CALL((recv), (SFT_standard___kernel[8] + 3)))
-#define CALL_standard___kernel___Comparable_____g(recv) ((standard___kernel___Comparable_____g_t)CALL((recv), (SFT_standard___kernel[8] + 4)))
-#define CALL_standard___kernel___Comparable_____leqg(recv) ((standard___kernel___Comparable_____leqg_t)CALL((recv), (SFT_standard___kernel[8] + 5)))
-#define CALL_standard___kernel___Comparable___is_between(recv) ((standard___kernel___Comparable___is_between_t)CALL((recv), (SFT_standard___kernel[8] + 6)))
-#define CALL_standard___kernel___Comparable___max(recv) ((standard___kernel___Comparable___max_t)CALL((recv), (SFT_standard___kernel[8] + 7)))
-#define CALL_standard___kernel___Comparable___min(recv) ((standard___kernel___Comparable___min_t)CALL((recv), (SFT_standard___kernel[8] + 8)))
+#define VTID_standard___kernel___Comparable___OTHER(recv) (VAL2VFT(recv)[SFT_standard___kernel[8] + 1].i)
+#define VTCOLOR_standard___kernel___Comparable___OTHER(recv) (VAL2VFT(recv)[SFT_standard___kernel[8] + 2].i)
+#define CALL_standard___kernel___Comparable_____l(recv) ((standard___kernel___Comparable_____l_t)CALL((recv), (SFT_standard___kernel[8] + 3)))
+#define CALL_standard___kernel___Comparable_____leq(recv) ((standard___kernel___Comparable_____leq_t)CALL((recv), (SFT_standard___kernel[8] + 4)))
+#define CALL_standard___kernel___Comparable_____geq(recv) ((standard___kernel___Comparable_____geq_t)CALL((recv), (SFT_standard___kernel[8] + 5)))
+#define CALL_standard___kernel___Comparable_____g(recv) ((standard___kernel___Comparable_____g_t)CALL((recv), (SFT_standard___kernel[8] + 6)))
+#define CALL_standard___kernel___Comparable_____leqg(recv) ((standard___kernel___Comparable_____leqg_t)CALL((recv), (SFT_standard___kernel[8] + 7)))
+#define CALL_standard___kernel___Comparable___is_between(recv) ((standard___kernel___Comparable___is_between_t)CALL((recv), (SFT_standard___kernel[8] + 8)))
+#define CALL_standard___kernel___Comparable___max(recv) ((standard___kernel___Comparable___max_t)CALL((recv), (SFT_standard___kernel[8] + 9)))
+#define CALL_standard___kernel___Comparable___min(recv) ((standard___kernel___Comparable___min_t)CALL((recv), (SFT_standard___kernel[8] + 10)))
 #define ID_standard___kernel___Discrete (SFT_standard___kernel[9])
 #define COLOR_standard___kernel___Discrete (SFT_standard___kernel[10])
 #define INIT_TABLE_POS_standard___kernel___Discrete (SFT_standard___kernel[11] + 0)
@@ -95,6 +97,7 @@ extern const int SFT_standard___kernel[];
 #define CALL_standard___kernel___Int___to_c(recv) ((standard___kernel___Int___to_c_t)CALL((recv), (SFT_standard___kernel[20] + 10)))
 #define CALL_standard___kernel___Int___enumerate_to(recv) ((standard___kernel___Int___enumerate_to_t)CALL((recv), (SFT_standard___kernel[20] + 11)))
 #define CALL_standard___kernel___Int___enumerate_before(recv) ((standard___kernel___Int___enumerate_before_t)CALL((recv), (SFT_standard___kernel[20] + 12)))
+#define CALL_standard___kernel___Int___abs(recv) ((standard___kernel___Int___abs_t)CALL((recv), (SFT_standard___kernel[20] + 13)))
 #define ID_standard___kernel___Char (SFT_standard___kernel[21])
 #define COLOR_standard___kernel___Char (SFT_standard___kernel[22])
 #define INIT_TABLE_POS_standard___kernel___Char (SFT_standard___kernel[23] + 0)
@@ -316,6 +319,9 @@ typedef void (*CLOS_standard___kernel___Int___enumerate_before_0)(struct stack_f
 static const char * const LOCATE_standard___kernel___Int___enumerate_before = "kernel::Int::enumerate_before";
 void standard___kernel___Int___enumerate_before(val_t p0, val_t p1, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 typedef void (*standard___kernel___Int___enumerate_before_t)(val_t p0, val_t p1, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_standard___kernel___Int___abs = "kernel::Int::abs";
+val_t standard___kernel___Int___abs(val_t p0);
+typedef val_t (*standard___kernel___Int___abs_t)(val_t p0);
 static const char * const LOCATE_standard___kernel___Char___object_id = "kernel::Char::(kernel::Object::object_id)";
 val_t standard___kernel___Char___object_id(val_t p0);
 typedef val_t (*standard___kernel___Char___object_id_t)(val_t p0);

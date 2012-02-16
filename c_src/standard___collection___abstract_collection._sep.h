@@ -26,6 +26,10 @@ extern const classtable_elt_t VFT_standard___collection___abstract_collection___
 
 extern const classtable_elt_t VFT_standard___collection___abstract_collection___MapIterator[];
 
+extern const classtable_elt_t VFT_standard___collection___abstract_collection___MapKeysIterator[];
+
+extern const classtable_elt_t VFT_standard___collection___abstract_collection___MapValuesIterator[];
+
 extern const classtable_elt_t VFT_standard___collection___abstract_collection___SequenceRead[];
 
 extern const classtable_elt_t VFT_standard___collection___abstract_collection___Sequence[];
@@ -91,54 +95,80 @@ extern const int SFT_standard___collection___abstract_collection[];
 #define INIT_TABLE_POS_standard___collection___abstract_collection___MapRead (SFT_standard___collection___abstract_collection[28] + 0)
 #define CALL_standard___collection___abstract_collection___MapRead_____bra(recv) ((standard___collection___abstract_collection___MapRead_____bra_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 1)))
 #define CALL_standard___collection___abstract_collection___MapRead___has_key(recv) ((standard___collection___abstract_collection___MapRead___has_key_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 2)))
+#define CALL_standard___collection___abstract_collection___MapRead___iterator(recv) ((standard___collection___abstract_collection___MapRead___iterator_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 3)))
+#define CALL_standard___collection___abstract_collection___MapRead___iterate(recv) ((standard___collection___abstract_collection___MapRead___iterate_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 4)))
+#define CALL_standard___collection___abstract_collection___MapRead___values(recv) ((standard___collection___abstract_collection___MapRead___values_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 5)))
+#define CALL_standard___collection___abstract_collection___MapRead___keys(recv) ((standard___collection___abstract_collection___MapRead___keys_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 6)))
+#define CALL_standard___collection___abstract_collection___MapRead___is_empty(recv) ((standard___collection___abstract_collection___MapRead___is_empty_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 7)))
+#define CALL_standard___collection___abstract_collection___MapRead___length(recv) ((standard___collection___abstract_collection___MapRead___length_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 8)))
 #define ID_standard___collection___abstract_collection___Map (SFT_standard___collection___abstract_collection[29])
 #define COLOR_standard___collection___abstract_collection___Map (SFT_standard___collection___abstract_collection[30])
 #define INIT_TABLE_POS_standard___collection___abstract_collection___Map (SFT_standard___collection___abstract_collection[31] + 0)
 #define CALL_standard___collection___abstract_collection___Map_____braeq(recv) ((standard___collection___abstract_collection___Map_____braeq_t)CALL((recv), (SFT_standard___collection___abstract_collection[31] + 1)))
-#define CALL_standard___collection___abstract_collection___Map___remove_at(recv) ((standard___collection___abstract_collection___Map___remove_at_t)CALL((recv), (SFT_standard___collection___abstract_collection[31] + 2)))
-#define CALL_standard___collection___abstract_collection___Map___recover_with(recv) ((standard___collection___abstract_collection___Map___recover_with_t)CALL((recv), (SFT_standard___collection___abstract_collection[31] + 3)))
+#define CALL_standard___collection___abstract_collection___Map___recover_with(recv) ((standard___collection___abstract_collection___Map___recover_with_t)CALL((recv), (SFT_standard___collection___abstract_collection[31] + 2)))
+#define CALL_standard___collection___abstract_collection___Map___clear(recv) ((standard___collection___abstract_collection___Map___clear_t)CALL((recv), (SFT_standard___collection___abstract_collection[31] + 3)))
 #define ID_standard___collection___abstract_collection___MapIterator (SFT_standard___collection___abstract_collection[32])
 #define COLOR_standard___collection___abstract_collection___MapIterator (SFT_standard___collection___abstract_collection[33])
 #define INIT_TABLE_POS_standard___collection___abstract_collection___MapIterator (SFT_standard___collection___abstract_collection[34] + 0)
-#define CALL_standard___collection___abstract_collection___MapIterator___key(recv) ((standard___collection___abstract_collection___MapIterator___key_t)CALL((recv), (SFT_standard___collection___abstract_collection[34] + 1)))
-#define ID_standard___collection___abstract_collection___SequenceRead (SFT_standard___collection___abstract_collection[35])
-#define COLOR_standard___collection___abstract_collection___SequenceRead (SFT_standard___collection___abstract_collection[36])
-#define INIT_TABLE_POS_standard___collection___abstract_collection___SequenceRead (SFT_standard___collection___abstract_collection[37] + 0)
-#define CALL_standard___collection___abstract_collection___SequenceRead___last(recv) ((standard___collection___abstract_collection___SequenceRead___last_t)CALL((recv), (SFT_standard___collection___abstract_collection[37] + 1)))
-#define CALL_standard___collection___abstract_collection___SequenceRead___index_of(recv) ((standard___collection___abstract_collection___SequenceRead___index_of_t)CALL((recv), (SFT_standard___collection___abstract_collection[37] + 2)))
-#define ID_standard___collection___abstract_collection___Sequence (SFT_standard___collection___abstract_collection[38])
-#define COLOR_standard___collection___abstract_collection___Sequence (SFT_standard___collection___abstract_collection[39])
-#define INIT_TABLE_POS_standard___collection___abstract_collection___Sequence (SFT_standard___collection___abstract_collection[40] + 0)
-#define CALL_standard___collection___abstract_collection___Sequence___first__eq(recv) ((standard___collection___abstract_collection___Sequence___first__eq_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 1)))
-#define CALL_standard___collection___abstract_collection___Sequence___last__eq(recv) ((standard___collection___abstract_collection___Sequence___last__eq_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 2)))
-#define CALL_standard___collection___abstract_collection___Sequence___push(recv) ((standard___collection___abstract_collection___Sequence___push_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 3)))
-#define CALL_standard___collection___abstract_collection___Sequence___append(recv) ((standard___collection___abstract_collection___Sequence___append_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 4)))
-#define CALL_standard___collection___abstract_collection___Sequence___pop(recv) ((standard___collection___abstract_collection___Sequence___pop_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 5)))
-#define CALL_standard___collection___abstract_collection___Sequence___unshift(recv) ((standard___collection___abstract_collection___Sequence___unshift_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 6)))
-#define CALL_standard___collection___abstract_collection___Sequence___shift(recv) ((standard___collection___abstract_collection___Sequence___shift_t)CALL((recv), (SFT_standard___collection___abstract_collection[40] + 7)))
-#define ID_standard___collection___abstract_collection___IndexedIterator (SFT_standard___collection___abstract_collection[41])
-#define COLOR_standard___collection___abstract_collection___IndexedIterator (SFT_standard___collection___abstract_collection[42])
-#define INIT_TABLE_POS_standard___collection___abstract_collection___IndexedIterator (SFT_standard___collection___abstract_collection[43] + 0)
-#define CALL_standard___collection___abstract_collection___IndexedIterator___index(recv) ((standard___collection___abstract_collection___IndexedIterator___index_t)CALL((recv), (SFT_standard___collection___abstract_collection[43] + 1)))
-#define ID_standard___collection___abstract_collection___CoupleMap (SFT_standard___collection___abstract_collection[44])
-#define COLOR_standard___collection___abstract_collection___CoupleMap (SFT_standard___collection___abstract_collection[45])
-#define INIT_TABLE_POS_standard___collection___abstract_collection___CoupleMap (SFT_standard___collection___abstract_collection[46] + 0)
-#define CALL_standard___collection___abstract_collection___CoupleMap___couple_at(recv) ((standard___collection___abstract_collection___CoupleMap___couple_at_t)CALL((recv), (SFT_standard___collection___abstract_collection[46] + 1)))
-#define ID_standard___collection___abstract_collection___CoupleMapIterator (SFT_standard___collection___abstract_collection[47])
-#define COLOR_standard___collection___abstract_collection___CoupleMapIterator (SFT_standard___collection___abstract_collection[48])
-#define ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(recv) ATTR(recv, (SFT_standard___collection___abstract_collection[49] + 0))
-#define INIT_TABLE_POS_standard___collection___abstract_collection___CoupleMapIterator (SFT_standard___collection___abstract_collection[50] + 0)
-#define CALL_standard___collection___abstract_collection___CoupleMapIterator___init(recv) ((standard___collection___abstract_collection___CoupleMapIterator___init_t)CALL((recv), (SFT_standard___collection___abstract_collection[50] + 1)))
-#define ID_standard___collection___abstract_collection___Couple (SFT_standard___collection___abstract_collection[51])
-#define COLOR_standard___collection___abstract_collection___Couple (SFT_standard___collection___abstract_collection[52])
-#define ATTR_standard___collection___abstract_collection___Couple____first(recv) ATTR(recv, (SFT_standard___collection___abstract_collection[53] + 0))
-#define ATTR_standard___collection___abstract_collection___Couple____second(recv) ATTR(recv, (SFT_standard___collection___abstract_collection[53] + 1))
-#define INIT_TABLE_POS_standard___collection___abstract_collection___Couple (SFT_standard___collection___abstract_collection[54] + 0)
-#define CALL_standard___collection___abstract_collection___Couple___first(recv) ((standard___collection___abstract_collection___Couple___first_t)CALL((recv), (SFT_standard___collection___abstract_collection[54] + 1)))
-#define CALL_standard___collection___abstract_collection___Couple___first__eq(recv) ((standard___collection___abstract_collection___Couple___first__eq_t)CALL((recv), (SFT_standard___collection___abstract_collection[54] + 2)))
-#define CALL_standard___collection___abstract_collection___Couple___second(recv) ((standard___collection___abstract_collection___Couple___second_t)CALL((recv), (SFT_standard___collection___abstract_collection[54] + 3)))
-#define CALL_standard___collection___abstract_collection___Couple___second__eq(recv) ((standard___collection___abstract_collection___Couple___second__eq_t)CALL((recv), (SFT_standard___collection___abstract_collection[54] + 4)))
-#define CALL_standard___collection___abstract_collection___Couple___init(recv) ((standard___collection___abstract_collection___Couple___init_t)CALL((recv), (SFT_standard___collection___abstract_collection[54] + 5)))
+#define CALL_standard___collection___abstract_collection___MapIterator___item(recv) ((standard___collection___abstract_collection___MapIterator___item_t)CALL((recv), (SFT_standard___collection___abstract_collection[34] + 1)))
+#define CALL_standard___collection___abstract_collection___MapIterator___key(recv) ((standard___collection___abstract_collection___MapIterator___key_t)CALL((recv), (SFT_standard___collection___abstract_collection[34] + 2)))
+#define CALL_standard___collection___abstract_collection___MapIterator___next(recv) ((standard___collection___abstract_collection___MapIterator___next_t)CALL((recv), (SFT_standard___collection___abstract_collection[34] + 3)))
+#define CALL_standard___collection___abstract_collection___MapIterator___is_ok(recv) ((standard___collection___abstract_collection___MapIterator___is_ok_t)CALL((recv), (SFT_standard___collection___abstract_collection[34] + 4)))
+#define ID_standard___collection___abstract_collection___MapKeysIterator (SFT_standard___collection___abstract_collection[35])
+#define COLOR_standard___collection___abstract_collection___MapKeysIterator (SFT_standard___collection___abstract_collection[36])
+#define ATTR_standard___collection___abstract_collection___MapKeysIterator_____atiterator(recv) ATTR(recv, (SFT_standard___collection___abstract_collection[37] + 0))
+#define INIT_TABLE_POS_standard___collection___abstract_collection___MapKeysIterator (SFT_standard___collection___abstract_collection[38] + 0)
+#define CALL_standard___collection___abstract_collection___MapKeysIterator___iterator(recv) ((standard___collection___abstract_collection___MapKeysIterator___iterator_t)CALL((recv), (SFT_standard___collection___abstract_collection[38] + 1)))
+#define CALL_standard___collection___abstract_collection___MapKeysIterator___iterator__eq(recv) ((standard___collection___abstract_collection___MapKeysIterator___iterator__eq_t)CALL((recv), (SFT_standard___collection___abstract_collection[38] + 2)))
+#define CALL_standard___collection___abstract_collection___MapKeysIterator___init(recv) ((standard___collection___abstract_collection___MapKeysIterator___init_t)CALL((recv), (SFT_standard___collection___abstract_collection[38] + 3)))
+#define ID_standard___collection___abstract_collection___MapValuesIterator (SFT_standard___collection___abstract_collection[39])
+#define COLOR_standard___collection___abstract_collection___MapValuesIterator (SFT_standard___collection___abstract_collection[40])
+#define ATTR_standard___collection___abstract_collection___MapValuesIterator_____atiterator(recv) ATTR(recv, (SFT_standard___collection___abstract_collection[41] + 0))
+#define INIT_TABLE_POS_standard___collection___abstract_collection___MapValuesIterator (SFT_standard___collection___abstract_collection[42] + 0)
+#define CALL_standard___collection___abstract_collection___MapValuesIterator___iterator(recv) ((standard___collection___abstract_collection___MapValuesIterator___iterator_t)CALL((recv), (SFT_standard___collection___abstract_collection[42] + 1)))
+#define CALL_standard___collection___abstract_collection___MapValuesIterator___iterator__eq(recv) ((standard___collection___abstract_collection___MapValuesIterator___iterator__eq_t)CALL((recv), (SFT_standard___collection___abstract_collection[42] + 2)))
+#define CALL_standard___collection___abstract_collection___MapValuesIterator___init(recv) ((standard___collection___abstract_collection___MapValuesIterator___init_t)CALL((recv), (SFT_standard___collection___abstract_collection[42] + 3)))
+#define ID_standard___collection___abstract_collection___SequenceRead (SFT_standard___collection___abstract_collection[43])
+#define COLOR_standard___collection___abstract_collection___SequenceRead (SFT_standard___collection___abstract_collection[44])
+#define INIT_TABLE_POS_standard___collection___abstract_collection___SequenceRead (SFT_standard___collection___abstract_collection[45] + 0)
+#define CALL_standard___collection___abstract_collection___SequenceRead_____bra(recv) ((standard___collection___abstract_collection___SequenceRead_____bra_t)CALL((recv), (SFT_standard___collection___abstract_collection[45] + 1)))
+#define CALL_standard___collection___abstract_collection___SequenceRead___last(recv) ((standard___collection___abstract_collection___SequenceRead___last_t)CALL((recv), (SFT_standard___collection___abstract_collection[45] + 2)))
+#define CALL_standard___collection___abstract_collection___SequenceRead___index_of(recv) ((standard___collection___abstract_collection___SequenceRead___index_of_t)CALL((recv), (SFT_standard___collection___abstract_collection[45] + 3)))
+#define ID_standard___collection___abstract_collection___Sequence (SFT_standard___collection___abstract_collection[46])
+#define COLOR_standard___collection___abstract_collection___Sequence (SFT_standard___collection___abstract_collection[47])
+#define INIT_TABLE_POS_standard___collection___abstract_collection___Sequence (SFT_standard___collection___abstract_collection[48] + 0)
+#define CALL_standard___collection___abstract_collection___Sequence___first__eq(recv) ((standard___collection___abstract_collection___Sequence___first__eq_t)CALL((recv), (SFT_standard___collection___abstract_collection[48] + 1)))
+#define CALL_standard___collection___abstract_collection___Sequence___last__eq(recv) ((standard___collection___abstract_collection___Sequence___last__eq_t)CALL((recv), (SFT_standard___collection___abstract_collection[48] + 2)))
+#define CALL_standard___collection___abstract_collection___Sequence___push(recv) ((standard___collection___abstract_collection___Sequence___push_t)CALL((recv), (SFT_standard___collection___abstract_collection[48] + 3)))
+#define CALL_standard___collection___abstract_collection___Sequence___append(recv) ((standard___collection___abstract_collection___Sequence___append_t)CALL((recv), (SFT_standard___collection___abstract_collection[48] + 4)))
+#define CALL_standard___collection___abstract_collection___Sequence___pop(recv) ((standard___collection___abstract_collection___Sequence___pop_t)CALL((recv), (SFT_standard___collection___abstract_collection[48] + 5)))
+#define CALL_standard___collection___abstract_collection___Sequence___unshift(recv) ((standard___collection___abstract_collection___Sequence___unshift_t)CALL((recv), (SFT_standard___collection___abstract_collection[48] + 6)))
+#define CALL_standard___collection___abstract_collection___Sequence___shift(recv) ((standard___collection___abstract_collection___Sequence___shift_t)CALL((recv), (SFT_standard___collection___abstract_collection[48] + 7)))
+#define CALL_standard___collection___abstract_collection___Sequence_____braeq(recv) ((standard___collection___abstract_collection___Sequence_____braeq_t)CALL((recv), (SFT_standard___collection___abstract_collection[48] + 8)))
+#define CALL_standard___collection___abstract_collection___Sequence___remove_at(recv) ((standard___collection___abstract_collection___Sequence___remove_at_t)CALL((recv), (SFT_standard___collection___abstract_collection[48] + 9)))
+#define ID_standard___collection___abstract_collection___IndexedIterator (SFT_standard___collection___abstract_collection[49])
+#define COLOR_standard___collection___abstract_collection___IndexedIterator (SFT_standard___collection___abstract_collection[50])
+#define INIT_TABLE_POS_standard___collection___abstract_collection___IndexedIterator (SFT_standard___collection___abstract_collection[51] + 0)
+#define CALL_standard___collection___abstract_collection___IndexedIterator___index(recv) ((standard___collection___abstract_collection___IndexedIterator___index_t)CALL((recv), (SFT_standard___collection___abstract_collection[51] + 1)))
+#define ID_standard___collection___abstract_collection___CoupleMap (SFT_standard___collection___abstract_collection[52])
+#define COLOR_standard___collection___abstract_collection___CoupleMap (SFT_standard___collection___abstract_collection[53])
+#define INIT_TABLE_POS_standard___collection___abstract_collection___CoupleMap (SFT_standard___collection___abstract_collection[54] + 0)
+#define CALL_standard___collection___abstract_collection___CoupleMap___couple_at(recv) ((standard___collection___abstract_collection___CoupleMap___couple_at_t)CALL((recv), (SFT_standard___collection___abstract_collection[54] + 1)))
+#define ID_standard___collection___abstract_collection___CoupleMapIterator (SFT_standard___collection___abstract_collection[55])
+#define COLOR_standard___collection___abstract_collection___CoupleMapIterator (SFT_standard___collection___abstract_collection[56])
+#define ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(recv) ATTR(recv, (SFT_standard___collection___abstract_collection[57] + 0))
+#define INIT_TABLE_POS_standard___collection___abstract_collection___CoupleMapIterator (SFT_standard___collection___abstract_collection[58] + 0)
+#define CALL_standard___collection___abstract_collection___CoupleMapIterator___init(recv) ((standard___collection___abstract_collection___CoupleMapIterator___init_t)CALL((recv), (SFT_standard___collection___abstract_collection[58] + 1)))
+#define ID_standard___collection___abstract_collection___Couple (SFT_standard___collection___abstract_collection[59])
+#define COLOR_standard___collection___abstract_collection___Couple (SFT_standard___collection___abstract_collection[60])
+#define ATTR_standard___collection___abstract_collection___Couple____first(recv) ATTR(recv, (SFT_standard___collection___abstract_collection[61] + 0))
+#define ATTR_standard___collection___abstract_collection___Couple____second(recv) ATTR(recv, (SFT_standard___collection___abstract_collection[61] + 1))
+#define INIT_TABLE_POS_standard___collection___abstract_collection___Couple (SFT_standard___collection___abstract_collection[62] + 0)
+#define CALL_standard___collection___abstract_collection___Couple___first(recv) ((standard___collection___abstract_collection___Couple___first_t)CALL((recv), (SFT_standard___collection___abstract_collection[62] + 1)))
+#define CALL_standard___collection___abstract_collection___Couple___first__eq(recv) ((standard___collection___abstract_collection___Couple___first__eq_t)CALL((recv), (SFT_standard___collection___abstract_collection[62] + 2)))
+#define CALL_standard___collection___abstract_collection___Couple___second(recv) ((standard___collection___abstract_collection___Couple___second_t)CALL((recv), (SFT_standard___collection___abstract_collection[62] + 3)))
+#define CALL_standard___collection___abstract_collection___Couple___second__eq(recv) ((standard___collection___abstract_collection___Couple___second__eq_t)CALL((recv), (SFT_standard___collection___abstract_collection[62] + 4)))
+#define CALL_standard___collection___abstract_collection___Couple___init(recv) ((standard___collection___abstract_collection___Couple___init_t)CALL((recv), (SFT_standard___collection___abstract_collection[62] + 5)))
 static const char * const LOCATE_standard___collection___abstract_collection___Collection___iterator = "abstract_collection::Collection::iterator";
 val_t standard___collection___abstract_collection___Collection___iterator(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___Collection___iterator_t)(val_t p0);
@@ -280,24 +310,96 @@ typedef val_t (*standard___collection___abstract_collection___MapRead_____bra_t)
 static const char * const LOCATE_standard___collection___abstract_collection___MapRead___has_key = "abstract_collection::MapRead::has_key";
 val_t standard___collection___abstract_collection___MapRead___has_key(val_t p0, val_t p1);
 typedef val_t (*standard___collection___abstract_collection___MapRead___has_key_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___abstract_collection___MapRead___iterator = "abstract_collection::MapRead::(abstract_collection::Collection::iterator)";
+static const char * const LOCATE_standard___collection___abstract_collection___MapRead___iterator = "abstract_collection::MapRead::iterator";
 val_t standard___collection___abstract_collection___MapRead___iterator(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___MapRead___iterator_t)(val_t p0);
+typedef void (*CLOS_standard___collection___abstract_collection___MapRead___iterate_0)(struct stack_frame_t *, val_t, val_t);
+static const char * const LOCATE_standard___collection___abstract_collection___MapRead___iterate = "abstract_collection::MapRead::iterate";
+void standard___collection___abstract_collection___MapRead___iterate(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+typedef void (*standard___collection___abstract_collection___MapRead___iterate_t)(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapRead___values = "abstract_collection::MapRead::values";
+val_t standard___collection___abstract_collection___MapRead___values(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapRead___values_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapRead___keys = "abstract_collection::MapRead::keys";
+val_t standard___collection___abstract_collection___MapRead___keys(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapRead___keys_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapRead___is_empty = "abstract_collection::MapRead::is_empty";
+val_t standard___collection___abstract_collection___MapRead___is_empty(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapRead___is_empty_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapRead___length = "abstract_collection::MapRead::length";
+val_t standard___collection___abstract_collection___MapRead___length(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapRead___length_t)(val_t p0);
 static const char * const LOCATE_standard___collection___abstract_collection___Map_____braeq = "abstract_collection::Map::[]=";
 void standard___collection___abstract_collection___Map_____braeq(val_t p0, val_t p1, val_t p2);
 typedef void (*standard___collection___abstract_collection___Map_____braeq_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_standard___collection___abstract_collection___Map___remove_at = "abstract_collection::Map::remove_at";
-void standard___collection___abstract_collection___Map___remove_at(val_t p0, val_t p1);
-typedef void (*standard___collection___abstract_collection___Map___remove_at_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___abstract_collection___Map___recover_with = "abstract_collection::Map::recover_with";
 void standard___collection___abstract_collection___Map___recover_with(val_t p0, val_t p1);
 typedef void (*standard___collection___abstract_collection___Map___recover_with_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___abstract_collection___Map___clear = "abstract_collection::Map::clear";
+void standard___collection___abstract_collection___Map___clear(val_t p0);
+typedef void (*standard___collection___abstract_collection___Map___clear_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___Map___values = "abstract_collection::Map::(abstract_collection::MapRead::values)";
+val_t standard___collection___abstract_collection___Map___values(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___Map___values_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___Map___keys = "abstract_collection::Map::(abstract_collection::MapRead::keys)";
+val_t standard___collection___abstract_collection___Map___keys(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___Map___keys_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapIterator___item = "abstract_collection::MapIterator::item";
+val_t standard___collection___abstract_collection___MapIterator___item(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapIterator___item_t)(val_t p0);
 static const char * const LOCATE_standard___collection___abstract_collection___MapIterator___key = "abstract_collection::MapIterator::key";
 val_t standard___collection___abstract_collection___MapIterator___key(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___MapIterator___key_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapIterator___next = "abstract_collection::MapIterator::next";
+void standard___collection___abstract_collection___MapIterator___next(val_t p0);
+typedef void (*standard___collection___abstract_collection___MapIterator___next_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapIterator___is_ok = "abstract_collection::MapIterator::is_ok";
+val_t standard___collection___abstract_collection___MapIterator___is_ok(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapIterator___is_ok_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapKeysIterator___iterator = "abstract_collection::MapKeysIterator::iterator";
+val_t standard___collection___abstract_collection___MapKeysIterator___iterator(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapKeysIterator___iterator_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapKeysIterator___iterator__eq = "abstract_collection::MapKeysIterator::iterator=";
+void standard___collection___abstract_collection___MapKeysIterator___iterator__eq(val_t p0, val_t p1);
+typedef void (*standard___collection___abstract_collection___MapKeysIterator___iterator__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___abstract_collection___MapKeysIterator___is_ok = "abstract_collection::MapKeysIterator::(abstract_collection::Iterator::is_ok)";
+val_t standard___collection___abstract_collection___MapKeysIterator___is_ok(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapKeysIterator___is_ok_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapKeysIterator___next = "abstract_collection::MapKeysIterator::(abstract_collection::Iterator::next)";
+void standard___collection___abstract_collection___MapKeysIterator___next(val_t p0);
+typedef void (*standard___collection___abstract_collection___MapKeysIterator___next_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapKeysIterator___item = "abstract_collection::MapKeysIterator::(abstract_collection::Iterator::item)";
+val_t standard___collection___abstract_collection___MapKeysIterator___item(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapKeysIterator___item_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapKeysIterator___init = "abstract_collection::MapKeysIterator::init";
+void standard___collection___abstract_collection___MapKeysIterator___init(val_t p0, val_t p1, int* init_table);
+typedef void (*standard___collection___abstract_collection___MapKeysIterator___init_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_MapKeysIterator_standard___collection___abstract_collection___MapKeysIterator___init(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapValuesIterator___iterator = "abstract_collection::MapValuesIterator::iterator";
+val_t standard___collection___abstract_collection___MapValuesIterator___iterator(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapValuesIterator___iterator_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapValuesIterator___iterator__eq = "abstract_collection::MapValuesIterator::iterator=";
+void standard___collection___abstract_collection___MapValuesIterator___iterator__eq(val_t p0, val_t p1);
+typedef void (*standard___collection___abstract_collection___MapValuesIterator___iterator__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___abstract_collection___MapValuesIterator___is_ok = "abstract_collection::MapValuesIterator::(abstract_collection::Iterator::is_ok)";
+val_t standard___collection___abstract_collection___MapValuesIterator___is_ok(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapValuesIterator___is_ok_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapValuesIterator___next = "abstract_collection::MapValuesIterator::(abstract_collection::Iterator::next)";
+void standard___collection___abstract_collection___MapValuesIterator___next(val_t p0);
+typedef void (*standard___collection___abstract_collection___MapValuesIterator___next_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapValuesIterator___item = "abstract_collection::MapValuesIterator::(abstract_collection::Iterator::item)";
+val_t standard___collection___abstract_collection___MapValuesIterator___item(val_t p0);
+typedef val_t (*standard___collection___abstract_collection___MapValuesIterator___item_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___MapValuesIterator___init = "abstract_collection::MapValuesIterator::init";
+void standard___collection___abstract_collection___MapValuesIterator___init(val_t p0, val_t p1, int* init_table);
+typedef void (*standard___collection___abstract_collection___MapValuesIterator___init_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_MapValuesIterator_standard___collection___abstract_collection___MapValuesIterator___init(val_t p0);
 static const char * const LOCATE_standard___collection___abstract_collection___SequenceRead___first = "abstract_collection::SequenceRead::(abstract_collection::Collection::first)";
 val_t standard___collection___abstract_collection___SequenceRead___first(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___SequenceRead___first_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___SequenceRead_____bra = "abstract_collection::SequenceRead::[]";
+val_t standard___collection___abstract_collection___SequenceRead_____bra(val_t p0, val_t p1);
+typedef val_t (*standard___collection___abstract_collection___SequenceRead_____bra_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___abstract_collection___SequenceRead___last = "abstract_collection::SequenceRead::last";
 val_t standard___collection___abstract_collection___SequenceRead___last(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___SequenceRead___last_t)(val_t p0);
@@ -334,31 +436,31 @@ typedef void (*standard___collection___abstract_collection___Sequence___unshift_
 static const char * const LOCATE_standard___collection___abstract_collection___Sequence___shift = "abstract_collection::Sequence::shift";
 val_t standard___collection___abstract_collection___Sequence___shift(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___Sequence___shift_t)(val_t p0);
+static const char * const LOCATE_standard___collection___abstract_collection___Sequence_____braeq = "abstract_collection::Sequence::[]=";
+void standard___collection___abstract_collection___Sequence_____braeq(val_t p0, val_t p1, val_t p2);
+typedef void (*standard___collection___abstract_collection___Sequence_____braeq_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_standard___collection___abstract_collection___Sequence___remove_at = "abstract_collection::Sequence::remove_at";
+void standard___collection___abstract_collection___Sequence___remove_at(val_t p0, val_t p1);
+typedef void (*standard___collection___abstract_collection___Sequence___remove_at_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___abstract_collection___IndexedIterator___index = "abstract_collection::IndexedIterator::index";
 val_t standard___collection___abstract_collection___IndexedIterator___index(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___IndexedIterator___index_t)(val_t p0);
-static const char * const LOCATE_standard___collection___abstract_collection___IndexedIterator___key = "abstract_collection::IndexedIterator::(abstract_collection::MapIterator::key)";
-val_t standard___collection___abstract_collection___IndexedIterator___key(val_t p0);
-typedef val_t (*standard___collection___abstract_collection___IndexedIterator___key_t)(val_t p0);
 static const char * const LOCATE_standard___collection___abstract_collection___CoupleMap___couple_at = "abstract_collection::CoupleMap::couple_at";
 val_t standard___collection___abstract_collection___CoupleMap___couple_at(val_t p0, val_t p1);
 typedef val_t (*standard___collection___abstract_collection___CoupleMap___couple_at_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___abstract_collection___CoupleMap_____bra = "abstract_collection::CoupleMap::(abstract_collection::MapRead::[])";
 val_t standard___collection___abstract_collection___CoupleMap_____bra(val_t p0, val_t p1);
 typedef val_t (*standard___collection___abstract_collection___CoupleMap_____bra_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___abstract_collection___CoupleMap___has_key = "abstract_collection::CoupleMap::(abstract_collection::MapRead::has_key)";
-val_t standard___collection___abstract_collection___CoupleMap___has_key(val_t p0, val_t p1);
-typedef val_t (*standard___collection___abstract_collection___CoupleMap___has_key_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___abstract_collection___CoupleMapIterator___item = "abstract_collection::CoupleMapIterator::(abstract_collection::Iterator::item)";
+static const char * const LOCATE_standard___collection___abstract_collection___CoupleMapIterator___item = "abstract_collection::CoupleMapIterator::(abstract_collection::MapIterator::item)";
 val_t standard___collection___abstract_collection___CoupleMapIterator___item(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___CoupleMapIterator___item_t)(val_t p0);
 static const char * const LOCATE_standard___collection___abstract_collection___CoupleMapIterator___key = "abstract_collection::CoupleMapIterator::(abstract_collection::MapIterator::key)";
 val_t standard___collection___abstract_collection___CoupleMapIterator___key(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___CoupleMapIterator___key_t)(val_t p0);
-static const char * const LOCATE_standard___collection___abstract_collection___CoupleMapIterator___is_ok = "abstract_collection::CoupleMapIterator::(abstract_collection::Iterator::is_ok)";
+static const char * const LOCATE_standard___collection___abstract_collection___CoupleMapIterator___is_ok = "abstract_collection::CoupleMapIterator::(abstract_collection::MapIterator::is_ok)";
 val_t standard___collection___abstract_collection___CoupleMapIterator___is_ok(val_t p0);
 typedef val_t (*standard___collection___abstract_collection___CoupleMapIterator___is_ok_t)(val_t p0);
-static const char * const LOCATE_standard___collection___abstract_collection___CoupleMapIterator___next = "abstract_collection::CoupleMapIterator::(abstract_collection::Iterator::next)";
+static const char * const LOCATE_standard___collection___abstract_collection___CoupleMapIterator___next = "abstract_collection::CoupleMapIterator::(abstract_collection::MapIterator::next)";
 void standard___collection___abstract_collection___CoupleMapIterator___next(val_t p0);
 typedef void (*standard___collection___abstract_collection___CoupleMapIterator___next_t)(val_t p0);
 static const char * const LOCATE_standard___collection___abstract_collection___CoupleMapIterator___init = "abstract_collection::CoupleMapIterator::init";

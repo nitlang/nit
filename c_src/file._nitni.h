@@ -10,7 +10,7 @@ typedef struct s_NativeFileCapable{
 } NativeFileCapable;
 #endif
 
-#include "file_nit.h"
+#include ".././../lib/standard//file_nit.h"
 
 /* out/indirect function for file::NativeString::file_exists */
 val_t NativeString_file_exists___out( val_t recv );

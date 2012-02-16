@@ -113,7 +113,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:210 */
+    /* ./../lib/standard//kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* ./analysis//allocate_iregister_slots.nit:53 */
     REGB2 = REGB1;
@@ -131,7 +131,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     REGB1 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB2));
     if (UNTAG_Bool(REGB1)) {
     } else {
-      /* ./../lib/standard//kernel.nit:210 */
+      /* ./../lib/standard//kernel.nit:227 */
       REGB2 = TAG_Bool((REGB0)==(REGB2));
       /* ./analysis//allocate_iregister_slots.nit:57 */
       REGB1 = REGB2;
@@ -193,7 +193,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:210 */
+    /* ./../lib/standard//kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* ./analysis//allocate_iregister_slots.nit:65 */
     REGB2 = REGB1;
@@ -244,7 +244,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     REGB1 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB2));
     if (UNTAG_Bool(REGB1)) {
     } else {
-      /* ./../lib/standard//kernel.nit:210 */
+      /* ./../lib/standard//kernel.nit:227 */
       REGB2 = TAG_Bool((REGB0)==(REGB2));
       /* ./analysis//allocate_iregister_slots.nit:72 */
       REGB1 = REGB2;
@@ -296,6 +296,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___defe
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_analysis___allocate_iregister_slots;
@@ -335,7 +336,12 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___defe
         nit_abort("Uninitialized attribute %s", "_born_rank", LOCATE_analysis___allocate_iregister_slots, 102);
       }
       REGB1 = ATTR_analysis___allocate_iregister_slots___IRegister____born_rank(fra.me.REG[2]);
-      /* ./../lib/standard//kernel.nit:216 */
+      REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
+      if (UNTAG_Bool(REGB2)) {
+      } else {
+        nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+      }
+      /* ./../lib/standard//kernel.nit:233 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
       /* ./analysis//allocate_iregister_slots.nit:102 */
       if (UNTAG_Bool(REGB1)) {
@@ -387,7 +393,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:210 */
+    /* ./../lib/standard//kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* ./analysis//allocate_iregister_slots.nit:112 */
     REGB2 = REGB1;
@@ -409,7 +415,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     /* ./analysis//allocate_iregister_slots.nit:114 */
     REGB1 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2]);
     REGB0 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:218 */
+    /* ./../lib/standard//kernel.nit:235 */
     REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
     /* ./analysis//allocate_iregister_slots.nit:114 */
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2]) = REGB0;
@@ -464,7 +470,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:210 */
+    /* ./../lib/standard//kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* ./analysis//allocate_iregister_slots.nit:126 */
     REGB2 = REGB1;
@@ -480,7 +486,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     /* ./analysis//allocate_iregister_slots.nit:128 */
     REGB1 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2]);
     REGB0 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:218 */
+    /* ./../lib/standard//kernel.nit:235 */
     REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
     /* ./analysis//allocate_iregister_slots.nit:128 */
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2]) = REGB0;
@@ -543,7 +549,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:210 */
+    /* ./../lib/standard//kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* ./analysis//allocate_iregister_slots.nit:145 */
     REGB2 = REGB1;
@@ -753,7 +759,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___regi
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      /* ./../lib/standard//kernel.nit:210 */
+      /* ./../lib/standard//kernel.nit:227 */
       REGB1 = TAG_Bool((fra.me.REG[2])==(NIT_NULL));
       /* ./analysis//allocate_iregister_slots.nit:191 */
       REGB0 = REGB1;
@@ -823,6 +829,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_analysis___allocate_iregister_slots;
@@ -846,7 +853,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      /* ./../lib/standard//kernel.nit:210 */
+      /* ./../lib/standard//kernel.nit:227 */
       REGB1 = TAG_Bool((fra.me.REG[2])==(NIT_NULL));
       /* ./analysis//allocate_iregister_slots.nit:208 */
       REGB0 = REGB1;
@@ -868,7 +875,12 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
     nit_abort("Uninitialized attribute %s", "_current_rank", LOCATE_analysis___allocate_iregister_slots, 209);
   }
   REGB1 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[0]);
-  /* ./../lib/standard//kernel.nit:215 */
+  REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+  if (UNTAG_Bool(REGB2)) {
+  } else {
+    nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+  }
+  /* ./../lib/standard//kernel.nit:232 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
   /* ./analysis//allocate_iregister_slots.nit:209 */
   if (UNTAG_Bool(REGB1)) {
@@ -1061,7 +1073,7 @@ void analysis___allocate_iregister_slots___SlotGroup___register(val_t p0, val_t 
     /* ./analysis//allocate_iregister_slots.nit:253 */
     REGB0 = ATTR_analysis___allocate_iregister_slots___SlotGroup____next_index(fra.me.REG[0]);
     REGB1 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:218 */
+    /* ./../lib/standard//kernel.nit:235 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
     /* ./analysis//allocate_iregister_slots.nit:253 */
     ATTR_analysis___allocate_iregister_slots___SlotGroup____next_index(fra.me.REG[0]) = REGB1;
@@ -1080,7 +1092,7 @@ void analysis___allocate_iregister_slots___SlotGroup___register(val_t p0, val_t 
   return;
 }
 void analysis___allocate_iregister_slots___SlotGroup___free(val_t p0, val_t p1){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -1088,25 +1100,28 @@ void analysis___allocate_iregister_slots___SlotGroup___free(val_t p0, val_t p1){
   fra.me.line = 259;
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___SlotGroup___free;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
+  fra.me.REG_size = 3;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
+  /* ./analysis//allocate_iregister_slots.nit:259 */
+  fra.me.REG[2] = fra.me.REG[0];
   /* ./analysis//allocate_iregister_slots.nit:262 */
-  REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_free", LOCATE_analysis___allocate_iregister_slots, 262);
   }
-  fra.me.REG[0] = ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[0]);
+  fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[2]);
   fra.me.REG[1] = ATTR_analysis___allocate_iregister_slots___IRegister____slot_index(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_analysis___allocate_iregister_slots, 262);
   }
-  CALL_standard___collection___abstract_collection___Sequence___push(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  CALL_standard___collection___abstract_collection___Sequence___push(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
 }

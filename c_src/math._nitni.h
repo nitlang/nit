@@ -10,7 +10,7 @@ typedef struct s_Object{
 } Object;
 #endif
 
-#include "math_nit.h"
+#include ".././../lib/standard//math_nit.h"
 
 /* out/indirect function for math::Int::rand */
 val_t Int_rand___out( val_t recv );
@@ -47,6 +47,9 @@ val_t Float_exp___out( val_t recv );
 
 /* out/indirect function for math::Float::rand */
 val_t Float_rand___out( val_t recv );
+
+/* out/indirect function for math::Float::hypot_with */
+val_t Float_hypot_with___out( val_t recv, val_t b );
 
 /* out/indirect function for math::Object::atan2 */
 val_t Object_atan2___out( val_t recv, val_t x, val_t y );

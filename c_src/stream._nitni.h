@@ -10,7 +10,7 @@ typedef struct s_FDStream{
 } FDStream;
 #endif
 
-#include "stream_nit.h"
+#include ".././../lib/standard//stream_nit.h"
 
 /* out/indirect function for stream::FDStream::native_close */
 val_t FDStream_native_close___out( val_t recv, val_t i );

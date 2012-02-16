@@ -41,7 +41,7 @@ val_t metamodel___partial_order___PartialOrder___is_empty(val_t p0){
     nit_abort("Uninitialized attribute %s", "_elements", LOCATE_metamodel___partial_order, 35);
   }
   fra.me.REG[0] = ATTR_metamodel___partial_order___PartialOrder____elements(fra.me.REG[0]);
-  REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[0])(fra.me.REG[0]);
+  REGB0 = CALL_standard___collection___abstract_collection___MapRead___is_empty(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -66,7 +66,7 @@ val_t metamodel___partial_order___PartialOrder___length(val_t p0){
     nit_abort("Uninitialized attribute %s", "_elements", LOCATE_metamodel___partial_order, 37);
   }
   fra.me.REG[0] = ATTR_metamodel___partial_order___PartialOrder____elements(fra.me.REG[0]);
-  REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
+  REGB0 = CALL_standard___collection___abstract_collection___MapRead___length(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -148,12 +148,12 @@ val_t metamodel___partial_order___PartialOrder___has_only(val_t p0, val_t p1){
     nit_abort("Uninitialized attribute %s", "_elements", LOCATE_metamodel___partial_order, 43);
   }
   fra.me.REG[2] = ATTR_metamodel___partial_order___PartialOrder____elements(fra.me.REG[0]);
-  REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[2])(fra.me.REG[2]);
+  REGB0 = CALL_standard___collection___abstract_collection___MapRead___length(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = TAG_Int(1);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:210 */
+    /* ./../lib/standard//kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* ./metamodel//partial_order.nit:43 */
     REGB2 = REGB1;
@@ -165,6 +165,7 @@ val_t metamodel___partial_order___PartialOrder___has_only(val_t p0, val_t p1){
       nit_abort("Uninitialized attribute %s", "_elements", LOCATE_metamodel___partial_order, 43);
     }
     fra.me.REG[0] = ATTR_metamodel___partial_order___PartialOrder____elements(fra.me.REG[0]);
+    fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapRead___values(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[0] = CALL_standard___collection___abstract_collection___Collection___first(fra.me.REG[0])(fra.me.REG[0]);
     REGB2 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[1],fra.me.REG[0]));
     if (UNTAG_Bool(REGB2)) {
@@ -297,6 +298,7 @@ val_t metamodel___partial_order___PartialOrder___to_dot(val_t p0){
     nit_abort("Uninitialized attribute %s", "_elements", LOCATE_metamodel___partial_order, 69);
   }
   fra.me.REG[2] = ATTR_metamodel___partial_order___PartialOrder____elements(fra.me.REG[0]);
+  fra.me.REG[2] = CALL_standard___collection___abstract_collection___MapRead___values(fra.me.REG[2])(fra.me.REG[2]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[2])(fra.me.REG[2], (&(fra.me)), ((fun_t)OC_metamodel___partial_order___PartialOrder___to_dot_1));
   /* ./metamodel//partial_order.nit:75 */
   if (!once_value_3) {
@@ -319,6 +321,7 @@ val_t metamodel___partial_order___PartialOrder___to_dot(val_t p0){
     struct {struct stack_frame_t me; val_t MORE_REG[4];} fra;
     val_t REGB0;
     val_t REGB1;
+    val_t REGB2;
     fun_t CREG[1];
     val_t tmp;
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -342,49 +345,54 @@ val_t metamodel___partial_order___PartialOrder___to_dot(val_t p0){
     CALL_standard___collection___abstract_collection___Sequence___append(closctx->REG[1])(closctx->REG[1], fra.me.REG[1]);
     /* ./metamodel//partial_order.nit:71 */
     fra.me.REG[1] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[0])(fra.me.REG[0]);
-    /* ./../lib/standard//collection//array.nit:234 */
+    /* ./../lib/standard//collection//array.nit:269 */
     REGB0 = TAG_Int(0);
-    /* ./../lib/standard//collection//array.nit:235 */
+    /* ./../lib/standard//collection//array.nit:270 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
     }
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-    /* ./../lib/standard//collection//array.nit:236 */
+    /* ./../lib/standard//collection//array.nit:271 */
     fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[1]);
-    /* ./../lib/standard//collection//array.nit:237 */
+    /* ./../lib/standard//collection//array.nit:272 */
     while(1) {
-      /* ./../lib/standard//collection//array.nit:23 */
+      /* ./../lib/standard//collection//array.nit:24 */
       REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
       }
       REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-      /* ./../lib/standard//kernel.nit:215 */
+      REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+      if (UNTAG_Bool(REGB2)) {
+      } else {
+        nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+      }
+      /* ./../lib/standard//kernel.nit:232 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:237 */
+      /* ./../lib/standard//collection//array.nit:272 */
       if (UNTAG_Bool(REGB1)) {
-        /* ./../lib/standard//collection//array.nit:238 */
+        /* ./../lib/standard//collection//array.nit:273 */
         REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ./../lib/standard//collection//array.nit:654 */
+        /* ./../lib/standard//collection//array.nit:718 */
         fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
         /* ./metamodel//partial_order.nit:72 */
         fra.me.REG[4] = CALL_metamodel___partial_order___PartialOrderElement___value(fra.me.REG[0])(fra.me.REG[0]);
         fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrder___to_dot_edge(closctx->REG[0])(closctx->REG[0], fra.me.REG[4], fra.me.REG[3]);
         CALL_standard___collection___abstract_collection___Sequence___append(closctx->REG[1])(closctx->REG[1], fra.me.REG[3]);
-        /* ./../lib/standard//collection//array.nit:239 */
+        /* ./../lib/standard//collection//array.nit:274 */
         REGB1 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:218 */
+        /* ./../lib/standard//kernel.nit:235 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-        /* ./../lib/standard//collection//array.nit:239 */
+        /* ./../lib/standard//collection//array.nit:274 */
         REGB0 = REGB1;
       } else {
-        /* ./../lib/standard//collection//array.nit:237 */
+        /* ./../lib/standard//collection//array.nit:272 */
         goto label2;
       }
     }
@@ -837,36 +845,41 @@ val_t metamodel___partial_order___PartialOrder___add_to_smallests(val_t p0, val_
   CALL_standard___collection___abstract_collection___RemovableCollection___clear(fra.me.REG[3])(fra.me.REG[3]);
   /* ./metamodel//partial_order.nit:158 */
   fra.me.REG[0] = CALL_metamodel___partial_order___PartialOrder_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./../lib/standard//collection//array.nit:234 */
+  /* ./../lib/standard//collection//array.nit:269 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//array.nit:235 */
+  /* ./../lib/standard//collection//array.nit:270 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-  /* ./../lib/standard//collection//array.nit:236 */
+  /* ./../lib/standard//collection//array.nit:271 */
   fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
-  /* ./../lib/standard//collection//array.nit:237 */
+  /* ./../lib/standard//collection//array.nit:272 */
   while(1) {
-    /* ./../lib/standard//collection//array.nit:23 */
+    /* ./../lib/standard//collection//array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-    /* ./../lib/standard//kernel.nit:215 */
+    REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB2)) {
+    } else {
+      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+    }
+    /* ./../lib/standard//kernel.nit:232 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:237 */
+    /* ./../lib/standard//collection//array.nit:272 */
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//collection//array.nit:238 */
+      /* ./../lib/standard//collection//array.nit:273 */
       REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ./../lib/standard//collection//array.nit:654 */
+      /* ./../lib/standard//collection//array.nit:718 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* ./metamodel//partial_order.nit:160 */
       REGB1 = CALL_metamodel___partial_order___PartialOrderElement_____g(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);
@@ -882,14 +895,14 @@ val_t metamodel___partial_order___PartialOrder___add_to_smallests(val_t p0, val_
         /* ./metamodel//partial_order.nit:164 */
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[5]);
       }
-      /* ./../lib/standard//collection//array.nit:239 */
+      /* ./../lib/standard//collection//array.nit:274 */
       REGB2 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:218 */
+      /* ./../lib/standard//kernel.nit:235 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ./../lib/standard//collection//array.nit:239 */
+      /* ./../lib/standard//collection//array.nit:274 */
       REGB0 = REGB2;
     } else {
-      /* ./../lib/standard//collection//array.nit:237 */
+      /* ./../lib/standard//collection//array.nit:272 */
       goto label2;
     }
   }
@@ -929,6 +942,7 @@ void metamodel___partial_order___PartialOrder___compute_smallers_for(val_t p0, v
     nit_abort("Uninitialized attribute %s", "_elements", LOCATE_metamodel___partial_order, 174);
   }
   fra.me.REG[0] = ATTR_metamodel___partial_order___PartialOrder____elements(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapRead___values(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_metamodel___partial_order___PartialOrder___compute_smallers_for_1));
   stack_frame_head = fra.me.prev;
   return;
@@ -1119,7 +1133,7 @@ val_t metamodel___partial_order___PartialOrderElement___greaters(val_t p0){
   return fra.me.REG[0];
 }
 val_t metamodel___partial_order___PartialOrderElement___greaters_and_self(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
   val_t REGB1;
   val_t tmp;
@@ -1128,52 +1142,55 @@ val_t metamodel___partial_order___PartialOrderElement___greaters_and_self(val_t 
   fra.me.line = 214;
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___greaters_and_self;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 4;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//partial_order.nit:214 */
+  fra.me.REG[1] = fra.me.REG[0];
   /* ./metamodel//partial_order.nit:217 */
-  fra.me.REG[1] = ATTR_metamodel___partial_order___PartialOrderElement____greaters_and_self_cache(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+  fra.me.REG[2] = ATTR_metamodel___partial_order___PartialOrderElement____greaters_and_self_cache(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+    REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
       REGB0 = REGB1;
     }
   }
   if (UNTAG_Bool(REGB0)) {
     /* ./metamodel//partial_order.nit:218 */
-    REGB0 = TAG_Bool(ATTR_metamodel___partial_order___PartialOrderElement____greaters(fra.me.REG[0])!=NIT_NULL);
+    REGB0 = TAG_Bool(ATTR_metamodel___partial_order___PartialOrderElement____greaters(fra.me.REG[1])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
       nit_abort("Uninitialized attribute %s", "_greaters", LOCATE_metamodel___partial_order, 218);
     }
-    fra.me.REG[1] = ATTR_metamodel___partial_order___PartialOrderElement____greaters(fra.me.REG[0]);
-    fra.me.REG[1] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[1])(fra.me.REG[1]);
-    ATTR_metamodel___partial_order___PartialOrderElement____greaters_and_self_cache(fra.me.REG[0]) = fra.me.REG[1];
+    fra.me.REG[2] = ATTR_metamodel___partial_order___PartialOrderElement____greaters(fra.me.REG[1]);
+    fra.me.REG[2] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[2])(fra.me.REG[2]);
+    ATTR_metamodel___partial_order___PartialOrderElement____greaters_and_self_cache(fra.me.REG[1]) = fra.me.REG[2];
     /* ./metamodel//partial_order.nit:219 */
-    fra.me.REG[1] = ATTR_metamodel___partial_order___PartialOrderElement____greaters_and_self_cache(fra.me.REG[0]);
-    REGB0 = TAG_Bool(ATTR_metamodel___partial_order___PartialOrderElement____value(fra.me.REG[0])!=NIT_NULL);
+    fra.me.REG[2] = ATTR_metamodel___partial_order___PartialOrderElement____greaters_and_self_cache(fra.me.REG[1]);
+    REGB0 = TAG_Bool(ATTR_metamodel___partial_order___PartialOrderElement____value(fra.me.REG[1])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
       nit_abort("Uninitialized attribute %s", "_value", LOCATE_metamodel___partial_order, 219);
     }
-    fra.me.REG[2] = ATTR_metamodel___partial_order___PartialOrderElement____value(fra.me.REG[0]);
-    REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+    fra.me.REG[3] = ATTR_metamodel___partial_order___PartialOrderElement____value(fra.me.REG[1]);
+    REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
       nit_abort("Reciever is null", NULL, LOCATE_metamodel___partial_order, 219);
     }
-    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   }
   /* ./metamodel//partial_order.nit:221 */
-  fra.me.REG[0] = ATTR_metamodel___partial_order___PartialOrderElement____greaters_and_self_cache(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  fra.me.REG[1] = ATTR_metamodel___partial_order___PartialOrderElement____greaters_and_self_cache(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_metamodel___partial_order, 221);
@@ -1181,12 +1198,13 @@ val_t metamodel___partial_order___PartialOrderElement___greaters_and_self(val_t 
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return fra.me.REG[1];
 }
 val_t metamodel___partial_order___PartialOrderElement___smallers(val_t p0){
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___partial_order;
@@ -1212,7 +1230,12 @@ val_t metamodel___partial_order___PartialOrderElement___smallers(val_t p0){
   }
   fra.me.REG[1] = ATTR_metamodel___partial_order___PartialOrderElement____order(fra.me.REG[0]);
   REGB1 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./../lib/standard//kernel.nit:215 */
+  REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+  if (UNTAG_Bool(REGB2)) {
+  } else {
+    nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+  }
+  /* ./../lib/standard//kernel.nit:232 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
   /* ./metamodel//partial_order.nit:233 */
   if (UNTAG_Bool(REGB1)) {
@@ -1253,17 +1276,18 @@ val_t metamodel___partial_order___PartialOrderElement___smallers(val_t p0){
   return fra.me.REG[0];
 }
 val_t metamodel___partial_order___PartialOrderElement___linear_extension(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[8];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[9];} fra;
   val_t REGB0;
   val_t REGB1;
   val_t REGB2;
+  val_t REGB3;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___partial_order;
   fra.me.line = 243;
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___linear_extension;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 9;
+  fra.me.REG_size = 10;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1273,145 +1297,158 @@ val_t metamodel___partial_order___PartialOrderElement___linear_extension(val_t p
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[7] = NIT_NULL;
   fra.me.REG[8] = NIT_NULL;
+  fra.me.REG[9] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//partial_order.nit:243 */
+  fra.me.REG[1] = fra.me.REG[0];
   /* ./metamodel//partial_order.nit:247 */
-  fra.me.REG[1] = ATTR_metamodel___partial_order___PartialOrderElement____linear_extension_cache(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+  fra.me.REG[2] = ATTR_metamodel___partial_order___PartialOrderElement____linear_extension_cache(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+    REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
       REGB0 = REGB1;
     }
   }
   if (UNTAG_Bool(REGB0)) {
     /* ./metamodel//partial_order.nit:248 */
-    fra.me.REG[1] = NEW_Array_standard___collection___array___Array___init();
-    /* ./metamodel//partial_order.nit:249 */
     fra.me.REG[2] = NEW_Array_standard___collection___array___Array___init();
+    /* ./metamodel//partial_order.nit:249 */
+    fra.me.REG[3] = NEW_Array_standard___collection___array___Array___init();
     /* ./metamodel//partial_order.nit:250 */
-    fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrderElement___value(fra.me.REG[0])(fra.me.REG[0]);
-    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
+    fra.me.REG[4] = CALL_metamodel___partial_order___PartialOrderElement___value(fra.me.REG[1])(fra.me.REG[1]);
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
     /* ./metamodel//partial_order.nit:251 */
-    fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[0])(fra.me.REG[0]);
-    /* ./../lib/standard//collection//array.nit:234 */
+    fra.me.REG[4] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[1])(fra.me.REG[1]);
+    /* ./../lib/standard//collection//array.nit:269 */
     REGB0 = TAG_Int(0);
-    /* ./../lib/standard//collection//array.nit:235 */
-    REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
+    /* ./../lib/standard//collection//array.nit:270 */
+    REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
     }
-    REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
-    /* ./../lib/standard//collection//array.nit:236 */
-    fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
-    /* ./../lib/standard//collection//array.nit:237 */
+    REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
+    /* ./../lib/standard//collection//array.nit:271 */
+    fra.me.REG[5] = ATTR_standard___collection___array___Array____items(fra.me.REG[4]);
+    /* ./../lib/standard//collection//array.nit:272 */
     while(1) {
-      /* ./../lib/standard//collection//array.nit:23 */
-      REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
+      /* ./../lib/standard//collection//array.nit:24 */
+      REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
       }
-      REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
-      /* ./../lib/standard//kernel.nit:215 */
+      REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
+      REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+      if (UNTAG_Bool(REGB2)) {
+      } else {
+        nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+      }
+      /* ./../lib/standard//kernel.nit:232 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:237 */
+      /* ./../lib/standard//collection//array.nit:272 */
       if (UNTAG_Bool(REGB1)) {
-        /* ./../lib/standard//collection//array.nit:238 */
-        REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
+        /* ./../lib/standard//collection//array.nit:273 */
+        REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ./../lib/standard//collection//array.nit:654 */
-        fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
+        /* ./../lib/standard//collection//array.nit:718 */
+        fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
         /* ./metamodel//partial_order.nit:252 */
-        fra.me.REG[6] = CALL_metamodel___partial_order___PartialOrderElement___order(fra.me.REG[0])(fra.me.REG[0]);
-        fra.me.REG[5] = CALL_metamodel___partial_order___PartialOrder_____bra(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[5]);
-        fra.me.REG[5] = CALL_metamodel___partial_order___PartialOrderElement___linear_extension(fra.me.REG[5])(fra.me.REG[5]);
+        fra.me.REG[7] = CALL_metamodel___partial_order___PartialOrderElement___order(fra.me.REG[1])(fra.me.REG[1]);
+        fra.me.REG[6] = CALL_metamodel___partial_order___PartialOrder_____bra(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[6]);
+        fra.me.REG[6] = CALL_metamodel___partial_order___PartialOrderElement___linear_extension(fra.me.REG[6])(fra.me.REG[6]);
         /* ./metamodel//partial_order.nit:253 */
-        CALL_standard___collection___abstract_collection___RemovableCollection___clear(fra.me.REG[2])(fra.me.REG[2]);
-        /* ./../lib/standard//collection//array.nit:231 */
-        fra.me.REG[6] = fra.me.REG[1];
-        /* ./../lib/standard//collection//array.nit:234 */
+        CALL_standard___collection___abstract_collection___RemovableCollection___clear(fra.me.REG[3])(fra.me.REG[3]);
+        /* ./../lib/standard//collection//array.nit:266 */
+        fra.me.REG[7] = fra.me.REG[2];
+        /* ./../lib/standard//collection//array.nit:269 */
         REGB1 = TAG_Int(0);
-        /* ./../lib/standard//collection//array.nit:235 */
-        REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6])!=NIT_NULL);
+        /* ./../lib/standard//collection//array.nit:270 */
+        REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[7])!=NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
         }
-        REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6]);
-        /* ./../lib/standard//collection//array.nit:236 */
-        fra.me.REG[7] = ATTR_standard___collection___array___Array____items(fra.me.REG[6]);
-        /* ./../lib/standard//collection//array.nit:237 */
+        REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[7]);
+        /* ./../lib/standard//collection//array.nit:271 */
+        fra.me.REG[8] = ATTR_standard___collection___array___Array____items(fra.me.REG[7]);
+        /* ./../lib/standard//collection//array.nit:272 */
         while(1) {
-          /* ./../lib/standard//collection//array.nit:23 */
-          REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6])!=NIT_NULL);
+          /* ./../lib/standard//collection//array.nit:24 */
+          REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[7])!=NIT_NULL);
           if (UNTAG_Bool(REGB2)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
           }
-          REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6]);
-          /* ./../lib/standard//kernel.nit:215 */
+          REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[7]);
+          REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
+          if (UNTAG_Bool(REGB3)) {
+          } else {
+            nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+          }
+          /* ./../lib/standard//kernel.nit:232 */
           REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-          /* ./../lib/standard//collection//array.nit:237 */
+          /* ./../lib/standard//collection//array.nit:272 */
           if (UNTAG_Bool(REGB2)) {
-            /* ./../lib/standard//collection//array.nit:238 */
-            REGB2 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
+            /* ./../lib/standard//collection//array.nit:273 */
+            REGB2 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
             if (UNTAG_Bool(REGB2)) {
-              nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
+              nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ./../lib/standard//collection//array.nit:654 */
-            fra.me.REG[8] = ((Nit_NativeArray)fra.me.REG[7])->val[UNTAG_Int(REGB1)];
+            /* ./../lib/standard//collection//array.nit:718 */
+            fra.me.REG[9] = ((Nit_NativeArray)fra.me.REG[8])->val[UNTAG_Int(REGB1)];
             /* ./metamodel//partial_order.nit:255 */
-            REGB2 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[8]);
+            REGB2 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[9]);
             REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
             if (UNTAG_Bool(REGB2)) {
-              CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[8]);
+              CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[9]);
             }
-            /* ./../lib/standard//collection//array.nit:239 */
+            /* ./../lib/standard//collection//array.nit:274 */
             REGB2 = TAG_Int(1);
-            /* ./../lib/standard//kernel.nit:218 */
+            /* ./../lib/standard//kernel.nit:235 */
             REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-            /* ./../lib/standard//collection//array.nit:239 */
+            /* ./../lib/standard//collection//array.nit:274 */
             REGB1 = REGB2;
           } else {
-            /* ./../lib/standard//collection//array.nit:237 */
+            /* ./../lib/standard//collection//array.nit:272 */
             goto label1;
           }
         }
         label1: while(0);
         /* ./metamodel//partial_order.nit:257 */
-        CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[5]);
+        CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[6]);
         /* ./metamodel//partial_order.nit:259 */
-        fra.me.REG[5] = fra.me.REG[1];
+        fra.me.REG[6] = fra.me.REG[2];
         /* ./metamodel//partial_order.nit:260 */
-        fra.me.REG[1] = fra.me.REG[2];
+        fra.me.REG[2] = fra.me.REG[3];
         /* ./metamodel//partial_order.nit:261 */
-        fra.me.REG[2] = fra.me.REG[5];
-        /* ./../lib/standard//collection//array.nit:239 */
+        fra.me.REG[3] = fra.me.REG[6];
+        /* ./../lib/standard//collection//array.nit:274 */
         REGB1 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:218 */
+        /* ./../lib/standard//kernel.nit:235 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-        /* ./../lib/standard//collection//array.nit:239 */
+        /* ./../lib/standard//collection//array.nit:274 */
         REGB0 = REGB1;
       } else {
-        /* ./../lib/standard//collection//array.nit:237 */
+        /* ./../lib/standard//collection//array.nit:272 */
         goto label2;
       }
     }
     label2: while(0);
     /* ./metamodel//partial_order.nit:263 */
-    ATTR_metamodel___partial_order___PartialOrderElement____linear_extension_cache(fra.me.REG[0]) = fra.me.REG[1];
+    ATTR_metamodel___partial_order___PartialOrderElement____linear_extension_cache(fra.me.REG[1]) = fra.me.REG[2];
   }
   /* ./metamodel//partial_order.nit:265 */
-  fra.me.REG[0] = ATTR_metamodel___partial_order___PartialOrderElement____linear_extension_cache(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  fra.me.REG[1] = ATTR_metamodel___partial_order___PartialOrderElement____linear_extension_cache(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_metamodel___partial_order, 265);
@@ -1419,104 +1456,113 @@ val_t metamodel___partial_order___PartialOrderElement___linear_extension(val_t p
   goto label3;
   label3: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return fra.me.REG[1];
 }
 val_t metamodel___partial_order___PartialOrderElement___reverse_linear_extension(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[5];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[6];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___partial_order;
   fra.me.line = 271;
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___reverse_linear_extension;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 6;
+  fra.me.REG_size = 7;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[5] = NIT_NULL;
+  fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//partial_order.nit:271 */
+  fra.me.REG[1] = fra.me.REG[0];
   /* ./metamodel//partial_order.nit:275 */
-  fra.me.REG[1] = ATTR_metamodel___partial_order___PartialOrderElement____reverse_linear_extension_cache(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+  fra.me.REG[2] = ATTR_metamodel___partial_order___PartialOrderElement____reverse_linear_extension_cache(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+    REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[2])(fra.me.REG[2], NIT_NULL);
       REGB0 = REGB1;
     }
   }
   if (UNTAG_Bool(REGB0)) {
     /* ./metamodel//partial_order.nit:276 */
-    fra.me.REG[1] = NEW_HashSet_standard___collection___hash_collection___HashSet___init();
+    fra.me.REG[2] = NEW_HashSet_standard___collection___hash_collection___HashSet___init();
     /* ./metamodel//partial_order.nit:277 */
-    fra.me.REG[2] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[0])(fra.me.REG[0]);
-    /* ./../lib/standard//collection//array.nit:234 */
+    fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[1])(fra.me.REG[1]);
+    /* ./../lib/standard//collection//array.nit:269 */
     REGB0 = TAG_Int(0);
-    /* ./../lib/standard//collection//array.nit:235 */
-    REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
+    /* ./../lib/standard//collection//array.nit:270 */
+    REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
     }
-    REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-    /* ./../lib/standard//collection//array.nit:236 */
-    fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
-    /* ./../lib/standard//collection//array.nit:237 */
+    REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
+    /* ./../lib/standard//collection//array.nit:271 */
+    fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
+    /* ./../lib/standard//collection//array.nit:272 */
     while(1) {
-      /* ./../lib/standard//collection//array.nit:23 */
-      REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
+      /* ./../lib/standard//collection//array.nit:24 */
+      REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
       }
-      REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-      /* ./../lib/standard//kernel.nit:215 */
+      REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
+      REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+      if (UNTAG_Bool(REGB2)) {
+      } else {
+        nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+      }
+      /* ./../lib/standard//kernel.nit:232 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:237 */
+      /* ./../lib/standard//collection//array.nit:272 */
       if (UNTAG_Bool(REGB1)) {
-        /* ./../lib/standard//collection//array.nit:238 */
-        REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+        /* ./../lib/standard//collection//array.nit:273 */
+        REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ./../lib/standard//collection//array.nit:654 */
-        fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
+        /* ./../lib/standard//collection//array.nit:718 */
+        fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
         /* ./metamodel//partial_order.nit:278 */
-        fra.me.REG[5] = CALL_metamodel___partial_order___PartialOrderElement___order(fra.me.REG[0])(fra.me.REG[0]);
-        fra.me.REG[4] = CALL_metamodel___partial_order___PartialOrder_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
-        fra.me.REG[4] = CALL_metamodel___partial_order___PartialOrderElement___linear_extension(fra.me.REG[4])(fra.me.REG[4]);
+        fra.me.REG[6] = CALL_metamodel___partial_order___PartialOrderElement___order(fra.me.REG[1])(fra.me.REG[1]);
+        fra.me.REG[5] = CALL_metamodel___partial_order___PartialOrder_____bra(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[5]);
+        fra.me.REG[5] = CALL_metamodel___partial_order___PartialOrderElement___linear_extension(fra.me.REG[5])(fra.me.REG[5]);
         /* ./metamodel//partial_order.nit:279 */
-        CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-        /* ./../lib/standard//collection//array.nit:239 */
+        CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[5]);
+        /* ./../lib/standard//collection//array.nit:274 */
         REGB1 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:218 */
+        /* ./../lib/standard//kernel.nit:235 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-        /* ./../lib/standard//collection//array.nit:239 */
+        /* ./../lib/standard//collection//array.nit:274 */
         REGB0 = REGB1;
       } else {
-        /* ./../lib/standard//collection//array.nit:237 */
+        /* ./../lib/standard//collection//array.nit:272 */
         goto label1;
       }
     }
     label1: while(0);
     /* ./metamodel//partial_order.nit:281 */
-    fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrderElement___value(fra.me.REG[0])(fra.me.REG[0]);
-    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
+    fra.me.REG[4] = CALL_metamodel___partial_order___PartialOrderElement___value(fra.me.REG[1])(fra.me.REG[1]);
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
     /* ./metamodel//partial_order.nit:282 */
-    fra.me.REG[1] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[1])(fra.me.REG[1]);
-    ATTR_metamodel___partial_order___PartialOrderElement____linear_extension_cache(fra.me.REG[0]) = fra.me.REG[1];
+    fra.me.REG[2] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[2])(fra.me.REG[2]);
+    ATTR_metamodel___partial_order___PartialOrderElement____linear_extension_cache(fra.me.REG[1]) = fra.me.REG[2];
   }
   /* ./metamodel//partial_order.nit:284 */
-  fra.me.REG[0] = ATTR_metamodel___partial_order___PartialOrderElement____linear_extension_cache(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  fra.me.REG[1] = ATTR_metamodel___partial_order___PartialOrderElement____linear_extension_cache(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_metamodel___partial_order, 284);
@@ -1524,7 +1570,7 @@ val_t metamodel___partial_order___PartialOrderElement___reverse_linear_extension
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return fra.me.REG[1];
 }
 val_t metamodel___partial_order___PartialOrderElement_____l(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
@@ -1762,36 +1808,41 @@ void metamodel___partial_order___PartialOrderElement___init(val_t p0, val_t p1, 
   fra.me.REG[1] = ATTR_metamodel___partial_order___PartialOrderElement____greaters(fra.me.REG[0]);
   /* ./metamodel//partial_order.nit:327 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//array.nit:234 */
+  /* ./../lib/standard//collection//array.nit:269 */
   REGB1 = TAG_Int(0);
-  /* ./../lib/standard//collection//array.nit:235 */
+  /* ./../lib/standard//collection//array.nit:270 */
   REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
   }
   REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
-  /* ./../lib/standard//collection//array.nit:236 */
+  /* ./../lib/standard//collection//array.nit:271 */
   fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
-  /* ./../lib/standard//collection//array.nit:237 */
+  /* ./../lib/standard//collection//array.nit:272 */
   while(1) {
-    /* ./../lib/standard//collection//array.nit:23 */
+    /* ./../lib/standard//collection//array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
-    /* ./../lib/standard//kernel.nit:215 */
+    REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB3)) {
+    } else {
+      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+    }
+    /* ./../lib/standard//kernel.nit:232 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-    /* ./../lib/standard//collection//array.nit:237 */
+    /* ./../lib/standard//collection//array.nit:272 */
     if (UNTAG_Bool(REGB2)) {
-      /* ./../lib/standard//collection//array.nit:238 */
+      /* ./../lib/standard//collection//array.nit:273 */
       REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ./../lib/standard//collection//array.nit:654 */
+      /* ./../lib/standard//collection//array.nit:718 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB1)];
       /* ./metamodel//partial_order.nit:329 */
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
@@ -1805,14 +1856,19 @@ void metamodel___partial_order___PartialOrderElement___init(val_t p0, val_t p1, 
       fra.me.REG[5] = CALL_metamodel___partial_order___PartialOrder_____bra(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[5]);
       /* ./metamodel//partial_order.nit:331 */
       REGB2 = CALL_metamodel___partial_order___PartialOrderElement___rank(fra.me.REG[5])(fra.me.REG[5]);
-      /* ./../lib/standard//kernel.nit:216 */
+      REGB3 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
+      if (UNTAG_Bool(REGB3)) {
+      } else {
+        nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+      }
+      /* ./../lib/standard//kernel.nit:233 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB0));
       /* ./metamodel//partial_order.nit:331 */
       if (UNTAG_Bool(REGB2)) {
         /* ./metamodel//partial_order.nit:332 */
         REGB2 = CALL_metamodel___partial_order___PartialOrderElement___rank(fra.me.REG[5])(fra.me.REG[5]);
         REGB3 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:218 */
+        /* ./../lib/standard//kernel.nit:235 */
         REGB3 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB3));
         /* ./metamodel//partial_order.nit:332 */
         REGB0 = REGB3;
@@ -1822,14 +1878,14 @@ void metamodel___partial_order___PartialOrderElement___init(val_t p0, val_t p1, 
       /* ./metamodel//partial_order.nit:335 */
       fra.me.REG[5] = CALL_metamodel___partial_order___PartialOrderElement___greaters(fra.me.REG[5])(fra.me.REG[5]);
       CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[5])(fra.me.REG[5], (&(fra.me)), ((fun_t)OC_metamodel___partial_order___PartialOrderElement___init_1));
-      /* ./../lib/standard//collection//array.nit:239 */
+      /* ./../lib/standard//collection//array.nit:274 */
       REGB3 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:218 */
+      /* ./../lib/standard//kernel.nit:235 */
       REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
-      /* ./../lib/standard//collection//array.nit:239 */
+      /* ./../lib/standard//collection//array.nit:274 */
       REGB1 = REGB3;
     } else {
-      /* ./../lib/standard//collection//array.nit:237 */
+      /* ./../lib/standard//collection//array.nit:272 */
       goto label2;
     }
   }

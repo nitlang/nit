@@ -18,6 +18,10 @@ extern const classtable_elt_t VFT_standard___collection___array___ArraySetIterat
 
 extern const classtable_elt_t VFT_standard___collection___array___ArrayMap[];
 
+extern const classtable_elt_t VFT_standard___collection___array___ArrayMapKeys[];
+
+extern const classtable_elt_t VFT_standard___collection___array___ArrayMapValues[];
+
 extern const classtable_elt_t VFT_standard___collection___array___ArrayCapable[];
 
 extern const classtable_elt_t VFT_standard___collection___array___NativeArray[];
@@ -38,6 +42,7 @@ extern const int SFT_standard___collection___array[];
 #define INIT_TABLE_POS_standard___collection___array___AbstractArray (SFT_standard___collection___array[6] + 0)
 #define CALL_standard___collection___array___AbstractArray___enlarge(recv) ((standard___collection___array___AbstractArray___enlarge_t)CALL((recv), (SFT_standard___collection___array[6] + 1)))
 #define CALL_standard___collection___array___AbstractArray___insert(recv) ((standard___collection___array___AbstractArray___insert_t)CALL((recv), (SFT_standard___collection___array[6] + 2)))
+#define CALL_standard___collection___array___AbstractArray___swap_at(recv) ((standard___collection___array___AbstractArray___swap_at_t)CALL((recv), (SFT_standard___collection___array[6] + 3)))
 #define ID_standard___collection___array___Array (SFT_standard___collection___array[7])
 #define COLOR_standard___collection___array___Array (SFT_standard___collection___array[8])
 #define ATTR_standard___collection___array___Array____items(recv) ATTR(recv, (SFT_standard___collection___array[9] + 0))
@@ -72,25 +77,43 @@ extern const int SFT_standard___collection___array[];
 #define CALL_standard___collection___array___ArraySetIterator___init(recv) ((standard___collection___array___ArraySetIterator___init_t)CALL((recv), (SFT_standard___collection___array[22] + 1)))
 #define ID_standard___collection___array___ArrayMap (SFT_standard___collection___array[23])
 #define COLOR_standard___collection___array___ArrayMap (SFT_standard___collection___array[24])
-#define ATTR_standard___collection___array___ArrayMap____items(recv) ATTR(recv, (SFT_standard___collection___array[25] + 0))
-#define ATTR_standard___collection___array___ArrayMap____last_index(recv) ATTR(recv, (SFT_standard___collection___array[25] + 1))
+#define ATTR_standard___collection___array___ArrayMap_____atkeys(recv) ATTR(recv, (SFT_standard___collection___array[25] + 0))
+#define ATTR_standard___collection___array___ArrayMap_____atvalues(recv) ATTR(recv, (SFT_standard___collection___array[25] + 1))
+#define ATTR_standard___collection___array___ArrayMap____items(recv) ATTR(recv, (SFT_standard___collection___array[25] + 2))
+#define ATTR_standard___collection___array___ArrayMap____last_index(recv) ATTR(recv, (SFT_standard___collection___array[25] + 3))
 #define INIT_TABLE_POS_standard___collection___array___ArrayMap (SFT_standard___collection___array[26] + 0)
-#define CALL_standard___collection___array___ArrayMap___enlarge(recv) ((standard___collection___array___ArrayMap___enlarge_t)CALL((recv), (SFT_standard___collection___array[26] + 1)))
-#define CALL_standard___collection___array___ArrayMap___remove_at_index(recv) ((standard___collection___array___ArrayMap___remove_at_index_t)CALL((recv), (SFT_standard___collection___array[26] + 2)))
-#define CALL_standard___collection___array___ArrayMap___index(recv) ((standard___collection___array___ArrayMap___index_t)CALL((recv), (SFT_standard___collection___array[26] + 3)))
-#define CALL_standard___collection___array___ArrayMap___init(recv) ((standard___collection___array___ArrayMap___init_t)CALL((recv), (SFT_standard___collection___array[26] + 4)))
-#define CALL_standard___collection___array___Iterator___to_a(recv) ((standard___collection___array___Iterator___to_a_t)CALL((recv), (SFT_standard___collection___array[27] + 0)))
-#define CALL_standard___collection___array___Collection___to_a(recv) ((standard___collection___array___Collection___to_a_t)CALL((recv), (SFT_standard___collection___array[28] + 0)))
-#define ID_standard___collection___array___ArrayCapable (SFT_standard___collection___array[29])
-#define COLOR_standard___collection___array___ArrayCapable (SFT_standard___collection___array[30])
-#define INIT_TABLE_POS_standard___collection___array___ArrayCapable (SFT_standard___collection___array[31] + 0)
-#define CALL_standard___collection___array___ArrayCapable___calloc_array(recv) ((standard___collection___array___ArrayCapable___calloc_array_t)CALL((recv), (SFT_standard___collection___array[31] + 1)))
-#define ID_standard___collection___array___NativeArray (SFT_standard___collection___array[32])
-#define COLOR_standard___collection___array___NativeArray (SFT_standard___collection___array[33])
-#define INIT_TABLE_POS_standard___collection___array___NativeArray (SFT_standard___collection___array[34] + 0)
-#define CALL_standard___collection___array___NativeArray_____bra(recv) ((standard___collection___array___NativeArray_____bra_t)CALL((recv), (SFT_standard___collection___array[34] + 1)))
-#define CALL_standard___collection___array___NativeArray_____braeq(recv) ((standard___collection___array___NativeArray_____braeq_t)CALL((recv), (SFT_standard___collection___array[34] + 2)))
-#define CALL_standard___collection___array___NativeArray___copy_to(recv) ((standard___collection___array___NativeArray___copy_to_t)CALL((recv), (SFT_standard___collection___array[34] + 3)))
+#define CALL_standard___collection___array___ArrayMap___keys__eq(recv) ((standard___collection___array___ArrayMap___keys__eq_t)CALL((recv), (SFT_standard___collection___array[26] + 1)))
+#define CALL_standard___collection___array___ArrayMap___values__eq(recv) ((standard___collection___array___ArrayMap___values__eq_t)CALL((recv), (SFT_standard___collection___array[26] + 2)))
+#define CALL_standard___collection___array___ArrayMap___enlarge(recv) ((standard___collection___array___ArrayMap___enlarge_t)CALL((recv), (SFT_standard___collection___array[26] + 3)))
+#define CALL_standard___collection___array___ArrayMap___remove_at_index(recv) ((standard___collection___array___ArrayMap___remove_at_index_t)CALL((recv), (SFT_standard___collection___array[26] + 4)))
+#define CALL_standard___collection___array___ArrayMap___index(recv) ((standard___collection___array___ArrayMap___index_t)CALL((recv), (SFT_standard___collection___array[26] + 5)))
+#define CALL_standard___collection___array___ArrayMap___init(recv) ((standard___collection___array___ArrayMap___init_t)CALL((recv), (SFT_standard___collection___array[26] + 6)))
+#define ID_standard___collection___array___ArrayMapKeys (SFT_standard___collection___array[27])
+#define COLOR_standard___collection___array___ArrayMapKeys (SFT_standard___collection___array[28])
+#define ATTR_standard___collection___array___ArrayMapKeys_____atmap(recv) ATTR(recv, (SFT_standard___collection___array[29] + 0))
+#define INIT_TABLE_POS_standard___collection___array___ArrayMapKeys (SFT_standard___collection___array[30] + 0)
+#define CALL_standard___collection___array___ArrayMapKeys___map(recv) ((standard___collection___array___ArrayMapKeys___map_t)CALL((recv), (SFT_standard___collection___array[30] + 1)))
+#define CALL_standard___collection___array___ArrayMapKeys___map__eq(recv) ((standard___collection___array___ArrayMapKeys___map__eq_t)CALL((recv), (SFT_standard___collection___array[30] + 2)))
+#define CALL_standard___collection___array___ArrayMapKeys___init(recv) ((standard___collection___array___ArrayMapKeys___init_t)CALL((recv), (SFT_standard___collection___array[30] + 3)))
+#define ID_standard___collection___array___ArrayMapValues (SFT_standard___collection___array[31])
+#define COLOR_standard___collection___array___ArrayMapValues (SFT_standard___collection___array[32])
+#define ATTR_standard___collection___array___ArrayMapValues_____atmap(recv) ATTR(recv, (SFT_standard___collection___array[33] + 0))
+#define INIT_TABLE_POS_standard___collection___array___ArrayMapValues (SFT_standard___collection___array[34] + 0)
+#define CALL_standard___collection___array___ArrayMapValues___map(recv) ((standard___collection___array___ArrayMapValues___map_t)CALL((recv), (SFT_standard___collection___array[34] + 1)))
+#define CALL_standard___collection___array___ArrayMapValues___map__eq(recv) ((standard___collection___array___ArrayMapValues___map__eq_t)CALL((recv), (SFT_standard___collection___array[34] + 2)))
+#define CALL_standard___collection___array___ArrayMapValues___init(recv) ((standard___collection___array___ArrayMapValues___init_t)CALL((recv), (SFT_standard___collection___array[34] + 3)))
+#define CALL_standard___collection___array___Iterator___to_a(recv) ((standard___collection___array___Iterator___to_a_t)CALL((recv), (SFT_standard___collection___array[35] + 0)))
+#define CALL_standard___collection___array___Collection___to_a(recv) ((standard___collection___array___Collection___to_a_t)CALL((recv), (SFT_standard___collection___array[36] + 0)))
+#define ID_standard___collection___array___ArrayCapable (SFT_standard___collection___array[37])
+#define COLOR_standard___collection___array___ArrayCapable (SFT_standard___collection___array[38])
+#define INIT_TABLE_POS_standard___collection___array___ArrayCapable (SFT_standard___collection___array[39] + 0)
+#define CALL_standard___collection___array___ArrayCapable___calloc_array(recv) ((standard___collection___array___ArrayCapable___calloc_array_t)CALL((recv), (SFT_standard___collection___array[39] + 1)))
+#define ID_standard___collection___array___NativeArray (SFT_standard___collection___array[40])
+#define COLOR_standard___collection___array___NativeArray (SFT_standard___collection___array[41])
+#define INIT_TABLE_POS_standard___collection___array___NativeArray (SFT_standard___collection___array[42] + 0)
+#define CALL_standard___collection___array___NativeArray_____bra(recv) ((standard___collection___array___NativeArray_____bra_t)CALL((recv), (SFT_standard___collection___array[42] + 1)))
+#define CALL_standard___collection___array___NativeArray_____braeq(recv) ((standard___collection___array___NativeArray_____braeq_t)CALL((recv), (SFT_standard___collection___array[42] + 2)))
+#define CALL_standard___collection___array___NativeArray___copy_to(recv) ((standard___collection___array___NativeArray___copy_to_t)CALL((recv), (SFT_standard___collection___array[42] + 3)))
 static const char * const LOCATE_standard___collection___array___AbstractArrayRead___length = "array::AbstractArrayRead::(abstract_collection::Collection::length)";
 val_t standard___collection___array___AbstractArrayRead___length(val_t p0);
 typedef val_t (*standard___collection___array___AbstractArrayRead___length_t)(val_t p0);
@@ -103,9 +126,6 @@ typedef val_t (*standard___collection___array___AbstractArrayRead___has_t)(val_t
 static const char * const LOCATE_standard___collection___array___AbstractArrayRead___has_only = "array::AbstractArrayRead::(abstract_collection::Collection::has_only)";
 val_t standard___collection___array___AbstractArrayRead___has_only(val_t p0, val_t p1);
 typedef val_t (*standard___collection___array___AbstractArrayRead___has_only_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___AbstractArrayRead___has_key = "array::AbstractArrayRead::(abstract_collection::MapRead::has_key)";
-val_t standard___collection___array___AbstractArrayRead___has_key(val_t p0, val_t p1);
-typedef val_t (*standard___collection___array___AbstractArrayRead___has_key_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___array___AbstractArrayRead___count = "array::AbstractArrayRead::(abstract_collection::Collection::count)";
 val_t standard___collection___array___AbstractArrayRead___count(val_t p0, val_t p1);
 typedef val_t (*standard___collection___array___AbstractArrayRead___count_t)(val_t p0, val_t p1);
@@ -170,18 +190,21 @@ typedef void (*standard___collection___array___AbstractArray___remove_t)(val_t p
 static const char * const LOCATE_standard___collection___array___AbstractArray___remove_all = "array::AbstractArray::(abstract_collection::RemovableCollection::remove_all)";
 void standard___collection___array___AbstractArray___remove_all(val_t p0, val_t p1);
 typedef void (*standard___collection___array___AbstractArray___remove_all_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___AbstractArray___remove_at = "array::AbstractArray::(abstract_collection::Map::remove_at)";
+static const char * const LOCATE_standard___collection___array___AbstractArray___remove_at = "array::AbstractArray::(abstract_collection::Sequence::remove_at)";
 void standard___collection___array___AbstractArray___remove_at(val_t p0, val_t p1);
 typedef void (*standard___collection___array___AbstractArray___remove_at_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___AbstractArray___swap_at = "array::AbstractArray::swap_at";
+void standard___collection___array___AbstractArray___swap_at(val_t p0, val_t p1, val_t p2);
+typedef void (*standard___collection___array___AbstractArray___swap_at_t)(val_t p0, val_t p1, val_t p2);
 val_t NEW_AbstractArray_standard___collection___array___AbstractArrayRead___init();
 typedef void (*CLOS_standard___collection___array___Array___iterate_0)(struct stack_frame_t *, val_t);
 static const char * const LOCATE_standard___collection___array___Array___iterate = "array::Array::(abstract_collection::Collection::iterate)";
 void standard___collection___array___Array___iterate(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 typedef void (*standard___collection___array___Array___iterate_t)(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-static const char * const LOCATE_standard___collection___array___Array_____bra = "array::Array::(abstract_collection::MapRead::[])";
+static const char * const LOCATE_standard___collection___array___Array_____bra = "array::Array::(abstract_collection::SequenceRead::[])";
 val_t standard___collection___array___Array_____bra(val_t p0, val_t p1);
 typedef val_t (*standard___collection___array___Array_____bra_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___Array_____braeq = "array::Array::(abstract_collection::Map::[]=)";
+static const char * const LOCATE_standard___collection___array___Array_____braeq = "array::Array::(abstract_collection::Sequence::[]=)";
 void standard___collection___array___Array_____braeq(val_t p0, val_t p1, val_t p2);
 typedef void (*standard___collection___array___Array_____braeq_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_standard___collection___array___Array___add = "array::Array::(abstract_collection::SimpleCollection::add)";
@@ -303,40 +326,28 @@ typedef val_t (*standard___collection___array___ArrayMap_____bra_t)(val_t p0, va
 static const char * const LOCATE_standard___collection___array___ArrayMap_____braeq = "array::ArrayMap::(abstract_collection::Map::[]=)";
 void standard___collection___array___ArrayMap_____braeq(val_t p0, val_t p1, val_t p2);
 typedef void (*standard___collection___array___ArrayMap_____braeq_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_standard___collection___array___ArrayMap___has_key = "array::ArrayMap::(abstract_collection::MapRead::has_key)";
-val_t standard___collection___array___ArrayMap___has_key(val_t p0, val_t p1);
-typedef val_t (*standard___collection___array___ArrayMap___has_key_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___ArrayMap___has = "array::ArrayMap::(abstract_collection::Collection::has)";
-val_t standard___collection___array___ArrayMap___has(val_t p0, val_t p1);
-typedef val_t (*standard___collection___array___ArrayMap___has_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___ArrayMap___has_only = "array::ArrayMap::(abstract_collection::Collection::has_only)";
-val_t standard___collection___array___ArrayMap___has_only(val_t p0, val_t p1);
-typedef val_t (*standard___collection___array___ArrayMap___has_only_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___ArrayMap___length = "array::ArrayMap::(abstract_collection::Collection::length)";
+static const char * const LOCATE_standard___collection___array___ArrayMap___keys = "array::ArrayMap::(abstract_collection::MapRead::keys)";
+val_t standard___collection___array___ArrayMap___keys(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMap___keys_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMap___keys__eq = "array::ArrayMap::keys=";
+void standard___collection___array___ArrayMap___keys__eq(val_t p0, val_t p1);
+typedef void (*standard___collection___array___ArrayMap___keys__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMap___values = "array::ArrayMap::(abstract_collection::MapRead::values)";
+val_t standard___collection___array___ArrayMap___values(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMap___values_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMap___values__eq = "array::ArrayMap::values=";
+void standard___collection___array___ArrayMap___values__eq(val_t p0, val_t p1);
+typedef void (*standard___collection___array___ArrayMap___values__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMap___length = "array::ArrayMap::(abstract_collection::MapRead::length)";
 val_t standard___collection___array___ArrayMap___length(val_t p0);
 typedef val_t (*standard___collection___array___ArrayMap___length_t)(val_t p0);
-static const char * const LOCATE_standard___collection___array___ArrayMap___first = "array::ArrayMap::(abstract_collection::Collection::first)";
-val_t standard___collection___array___ArrayMap___first(val_t p0);
-typedef val_t (*standard___collection___array___ArrayMap___first_t)(val_t p0);
-static const char * const LOCATE_standard___collection___array___ArrayMap___count = "array::ArrayMap::(abstract_collection::Collection::count)";
-val_t standard___collection___array___ArrayMap___count(val_t p0, val_t p1);
-typedef val_t (*standard___collection___array___ArrayMap___count_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___ArrayMap___iterator = "array::ArrayMap::(abstract_collection::Collection::iterator)";
+static const char * const LOCATE_standard___collection___array___ArrayMap___iterator = "array::ArrayMap::(abstract_collection::MapRead::iterator)";
 val_t standard___collection___array___ArrayMap___iterator(val_t p0);
 typedef val_t (*standard___collection___array___ArrayMap___iterator_t)(val_t p0);
-static const char * const LOCATE_standard___collection___array___ArrayMap___is_empty = "array::ArrayMap::(abstract_collection::Collection::is_empty)";
+static const char * const LOCATE_standard___collection___array___ArrayMap___is_empty = "array::ArrayMap::(abstract_collection::MapRead::is_empty)";
 val_t standard___collection___array___ArrayMap___is_empty(val_t p0);
 typedef val_t (*standard___collection___array___ArrayMap___is_empty_t)(val_t p0);
-static const char * const LOCATE_standard___collection___array___ArrayMap___remove = "array::ArrayMap::(abstract_collection::RemovableCollection::remove)";
-void standard___collection___array___ArrayMap___remove(val_t p0, val_t p1);
-typedef void (*standard___collection___array___ArrayMap___remove_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___ArrayMap___remove_all = "array::ArrayMap::(abstract_collection::RemovableCollection::remove_all)";
-void standard___collection___array___ArrayMap___remove_all(val_t p0, val_t p1);
-typedef void (*standard___collection___array___ArrayMap___remove_all_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___ArrayMap___remove_at = "array::ArrayMap::(abstract_collection::Map::remove_at)";
-void standard___collection___array___ArrayMap___remove_at(val_t p0, val_t p1);
-typedef void (*standard___collection___array___ArrayMap___remove_at_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___array___ArrayMap___clear = "array::ArrayMap::(abstract_collection::RemovableCollection::clear)";
+static const char * const LOCATE_standard___collection___array___ArrayMap___clear = "array::ArrayMap::(abstract_collection::Map::clear)";
 void standard___collection___array___ArrayMap___clear(val_t p0);
 typedef void (*standard___collection___array___ArrayMap___clear_t)(val_t p0);
 static const char * const LOCATE_standard___collection___array___ArrayMap___enlarge = "array::ArrayMap::enlarge";
@@ -355,6 +366,86 @@ static const char * const LOCATE_standard___collection___array___ArrayMap___init
 void standard___collection___array___ArrayMap___init(val_t p0, int* init_table);
 typedef void (*standard___collection___array___ArrayMap___init_t)(val_t p0, int* init_table);
 val_t NEW_ArrayMap_standard___collection___array___ArrayMap___init();
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___map = "array::ArrayMapKeys::map";
+val_t standard___collection___array___ArrayMapKeys___map(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMapKeys___map_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___map__eq = "array::ArrayMapKeys::map=";
+void standard___collection___array___ArrayMapKeys___map__eq(val_t p0, val_t p1);
+typedef void (*standard___collection___array___ArrayMapKeys___map__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___count = "array::ArrayMapKeys::(abstract_collection::Collection::count)";
+val_t standard___collection___array___ArrayMapKeys___count(val_t p0, val_t p1);
+typedef val_t (*standard___collection___array___ArrayMapKeys___count_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___first = "array::ArrayMapKeys::(abstract_collection::Collection::first)";
+val_t standard___collection___array___ArrayMapKeys___first(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMapKeys___first_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___has = "array::ArrayMapKeys::(abstract_collection::Collection::has)";
+val_t standard___collection___array___ArrayMapKeys___has(val_t p0, val_t p1);
+typedef val_t (*standard___collection___array___ArrayMapKeys___has_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___has_only = "array::ArrayMapKeys::(abstract_collection::Collection::has_only)";
+val_t standard___collection___array___ArrayMapKeys___has_only(val_t p0, val_t p1);
+typedef val_t (*standard___collection___array___ArrayMapKeys___has_only_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___is_empty = "array::ArrayMapKeys::(abstract_collection::Collection::is_empty)";
+val_t standard___collection___array___ArrayMapKeys___is_empty(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMapKeys___is_empty_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___length = "array::ArrayMapKeys::(abstract_collection::Collection::length)";
+val_t standard___collection___array___ArrayMapKeys___length(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMapKeys___length_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___iterator = "array::ArrayMapKeys::(abstract_collection::Collection::iterator)";
+val_t standard___collection___array___ArrayMapKeys___iterator(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMapKeys___iterator_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___clear = "array::ArrayMapKeys::(abstract_collection::RemovableCollection::clear)";
+void standard___collection___array___ArrayMapKeys___clear(val_t p0);
+typedef void (*standard___collection___array___ArrayMapKeys___clear_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___remove = "array::ArrayMapKeys::(abstract_collection::RemovableCollection::remove)";
+void standard___collection___array___ArrayMapKeys___remove(val_t p0, val_t p1);
+typedef void (*standard___collection___array___ArrayMapKeys___remove_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___remove_all = "array::ArrayMapKeys::(abstract_collection::RemovableCollection::remove_all)";
+void standard___collection___array___ArrayMapKeys___remove_all(val_t p0, val_t p1);
+typedef void (*standard___collection___array___ArrayMapKeys___remove_all_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapKeys___init = "array::ArrayMapKeys::init";
+void standard___collection___array___ArrayMapKeys___init(val_t p0, val_t p1, int* init_table);
+typedef void (*standard___collection___array___ArrayMapKeys___init_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_ArrayMapKeys_standard___collection___array___ArrayMapKeys___init(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___map = "array::ArrayMapValues::map";
+val_t standard___collection___array___ArrayMapValues___map(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMapValues___map_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___map__eq = "array::ArrayMapValues::map=";
+void standard___collection___array___ArrayMapValues___map__eq(val_t p0, val_t p1);
+typedef void (*standard___collection___array___ArrayMapValues___map__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___first = "array::ArrayMapValues::(abstract_collection::Collection::first)";
+val_t standard___collection___array___ArrayMapValues___first(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMapValues___first_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___is_empty = "array::ArrayMapValues::(abstract_collection::Collection::is_empty)";
+val_t standard___collection___array___ArrayMapValues___is_empty(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMapValues___is_empty_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___length = "array::ArrayMapValues::(abstract_collection::Collection::length)";
+val_t standard___collection___array___ArrayMapValues___length(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMapValues___length_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___iterator = "array::ArrayMapValues::(abstract_collection::Collection::iterator)";
+val_t standard___collection___array___ArrayMapValues___iterator(val_t p0);
+typedef val_t (*standard___collection___array___ArrayMapValues___iterator_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___has = "array::ArrayMapValues::(abstract_collection::Collection::has)";
+val_t standard___collection___array___ArrayMapValues___has(val_t p0, val_t p1);
+typedef val_t (*standard___collection___array___ArrayMapValues___has_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___has_only = "array::ArrayMapValues::(abstract_collection::Collection::has_only)";
+val_t standard___collection___array___ArrayMapValues___has_only(val_t p0, val_t p1);
+typedef val_t (*standard___collection___array___ArrayMapValues___has_only_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___count = "array::ArrayMapValues::(abstract_collection::Collection::count)";
+val_t standard___collection___array___ArrayMapValues___count(val_t p0, val_t p1);
+typedef val_t (*standard___collection___array___ArrayMapValues___count_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___clear = "array::ArrayMapValues::(abstract_collection::RemovableCollection::clear)";
+void standard___collection___array___ArrayMapValues___clear(val_t p0);
+typedef void (*standard___collection___array___ArrayMapValues___clear_t)(val_t p0);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___remove = "array::ArrayMapValues::(abstract_collection::RemovableCollection::remove)";
+void standard___collection___array___ArrayMapValues___remove(val_t p0, val_t p1);
+typedef void (*standard___collection___array___ArrayMapValues___remove_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___remove_all = "array::ArrayMapValues::(abstract_collection::RemovableCollection::remove_all)";
+void standard___collection___array___ArrayMapValues___remove_all(val_t p0, val_t p1);
+typedef void (*standard___collection___array___ArrayMapValues___remove_all_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___array___ArrayMapValues___init = "array::ArrayMapValues::init";
+void standard___collection___array___ArrayMapValues___init(val_t p0, val_t p1, int* init_table);
+typedef void (*standard___collection___array___ArrayMapValues___init_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_ArrayMapValues_standard___collection___array___ArrayMapValues___init(val_t p0);
 static const char * const LOCATE_standard___collection___array___Iterator___to_a = "array::Iterator::to_a";
 val_t standard___collection___array___Iterator___to_a(val_t p0);
 typedef val_t (*standard___collection___array___Iterator___to_a_t)(val_t p0);

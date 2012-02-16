@@ -16,7 +16,7 @@ val_t standard___hash___Object___hash(val_t p0){
   /* ./../lib/standard//hash.nit:24 */
   REGB0 = CALL_standard___kernel___Object___object_id(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Int(8);
-  /* ./../lib/standard//kernel.nit:222 */
+  /* ./../lib/standard//kernel.nit:239 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)/UNTAG_Int(REGB1));
   /* ./../lib/standard//hash.nit:24 */
   goto label1;
@@ -52,7 +52,7 @@ val_t standard___hash___Char___hash(val_t p0){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:385 */
+  /* ./../lib/standard//kernel.nit:413 */
   REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
   /* ./../lib/standard//hash.nit:32 */
   goto label1;

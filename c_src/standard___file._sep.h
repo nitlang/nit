@@ -79,8 +79,9 @@ extern const int SFT_standard___file[];
 #define CALL_standard___file___String___strip_extension(recv) ((standard___file___String___strip_extension_t)CALL((recv), (SFT_standard___file[22] + 3)))
 #define CALL_standard___file___String___basename(recv) ((standard___file___String___basename_t)CALL((recv), (SFT_standard___file[22] + 4)))
 #define CALL_standard___file___String___dirname(recv) ((standard___file___String___dirname_t)CALL((recv), (SFT_standard___file[22] + 5)))
-#define CALL_standard___file___String___file_path(recv) ((standard___file___String___file_path_t)CALL((recv), (SFT_standard___file[22] + 6)))
+#define CALL_standard___file___String___simplify_path(recv) ((standard___file___String___simplify_path_t)CALL((recv), (SFT_standard___file[22] + 6)))
 #define CALL_standard___file___String___mkdir(recv) ((standard___file___String___mkdir_t)CALL((recv), (SFT_standard___file[22] + 7)))
+#define CALL_standard___file___String___file_extension(recv) ((standard___file___String___file_extension_t)CALL((recv), (SFT_standard___file[22] + 8)))
 #define CALL_standard___file___NativeString___file_exists(recv) ((standard___file___NativeString___file_exists_t)CALL((recv), (SFT_standard___file[23] + 0)))
 #define CALL_standard___file___NativeString___file_stat(recv) ((standard___file___NativeString___file_stat_t)CALL((recv), (SFT_standard___file[23] + 1)))
 #define CALL_standard___file___NativeString___file_mkdir(recv) ((standard___file___NativeString___file_mkdir_t)CALL((recv), (SFT_standard___file[23] + 2)))
@@ -214,12 +215,15 @@ typedef val_t (*standard___file___String___basename_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___file___String___dirname = "file::String::dirname";
 val_t standard___file___String___dirname(val_t p0);
 typedef val_t (*standard___file___String___dirname_t)(val_t p0);
-static const char * const LOCATE_standard___file___String___file_path = "file::String::file_path";
-val_t standard___file___String___file_path(val_t p0);
-typedef val_t (*standard___file___String___file_path_t)(val_t p0);
+static const char * const LOCATE_standard___file___String___simplify_path = "file::String::simplify_path";
+val_t standard___file___String___simplify_path(val_t p0);
+typedef val_t (*standard___file___String___simplify_path_t)(val_t p0);
 static const char * const LOCATE_standard___file___String___mkdir = "file::String::mkdir";
 void standard___file___String___mkdir(val_t p0);
 typedef void (*standard___file___String___mkdir_t)(val_t p0);
+static const char * const LOCATE_standard___file___String___file_extension = "file::String::file_extension";
+val_t standard___file___String___file_extension(val_t p0);
+typedef val_t (*standard___file___String___file_extension_t)(val_t p0);
 val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1);
 val_t NEW_String_standard___string___String___from_cstring(val_t p0);
 static const char * const LOCATE_standard___file___NativeString___file_exists = "file::NativeString::file_exists";

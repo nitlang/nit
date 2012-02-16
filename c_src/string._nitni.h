@@ -10,7 +10,7 @@ typedef struct s_Sys{
 } Sys;
 #endif
 
-#include "string_nit.h"
+#include ".././../lib/standard//string_nit.h"
 
 /* out/indirect function for string::Sys::native_argc */
 val_t Sys_native_argc___out( val_t recv );

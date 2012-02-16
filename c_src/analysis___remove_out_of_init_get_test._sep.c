@@ -69,7 +69,7 @@ void analysis___remove_out_of_init_get_test___Program___optimize_out_of_init_get
       /* ./analysis//remove_out_of_init_get_test.nit:34 */
       REGB0 = CALL_analysis___remove_out_of_init_get_test___Program___nb_optimized_isset(closctx->REG[0])(closctx->REG[0]);
       REGB1 = CALL_analysis___remove_out_of_init_get_test___GetterTestRemover___nb_optimized_isset(fra.me.REG[1])(fra.me.REG[1]);
-      /* ./../lib/standard//kernel.nit:218 */
+      /* ./../lib/standard//kernel.nit:235 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
       /* ./analysis//remove_out_of_init_get_test.nit:34 */
       ATTR_analysis___remove_out_of_init_get_test___Program____nb_optimized_isset(closctx->REG[0]) = REGB1;
@@ -219,7 +219,7 @@ void analysis___remove_out_of_init_get_test___Program___dump_out_of_init_informa
     CALL_icode___icode_tools___ICodeVisitor___visit_iroutine(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
     /* ./analysis//remove_out_of_init_get_test.nit:47 */
     REGB0 = CALL_analysis___remove_out_of_init_get_test___IssetCounter___nb_isset(fra.me.REG[1])(fra.me.REG[1]);
-    /* ./../lib/standard//kernel.nit:218 */
+    /* ./../lib/standard//kernel.nit:235 */
     REGB0 = TAG_Int(UNTAG_Int(closctx->REG[1])+UNTAG_Int(REGB0));
     /* ./analysis//remove_out_of_init_get_test.nit:47 */
     closctx->REG[1] = REGB0;
@@ -274,7 +274,7 @@ void analysis___remove_out_of_init_get_test___IssetCounter___visit_icode(val_t p
     /* ./analysis//remove_out_of_init_get_test.nit:64 */
     REGB0 = CALL_analysis___remove_out_of_init_get_test___IssetCounter___nb_isset(fra.me.REG[2])(fra.me.REG[2]);
     REGB1 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:218 */
+    /* ./../lib/standard//kernel.nit:235 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
     /* ./analysis//remove_out_of_init_get_test.nit:64 */
     ATTR_analysis___remove_out_of_init_get_test___IssetCounter____nb_isset(fra.me.REG[2]) = REGB1;
@@ -376,7 +376,7 @@ void analysis___remove_out_of_init_get_test___GetterTestRemover___visit_icode(va
     /* ./analysis//remove_out_of_init_get_test.nit:85 */
     REGB0 = CALL_analysis___remove_out_of_init_get_test___GetterTestRemover___nb_optimized_isset(fra.me.REG[2])(fra.me.REG[2]);
     REGB1 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:218 */
+    /* ./../lib/standard//kernel.nit:235 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
     /* ./analysis//remove_out_of_init_get_test.nit:85 */
     ATTR_analysis___remove_out_of_init_get_test___GetterTestRemover____nb_optimized_isset(fra.me.REG[2]) = REGB1;

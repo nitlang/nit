@@ -11,6 +11,10 @@ extern const classtable_elt_t VFT_standard___collection___hash_collection___Hash
 
 extern const classtable_elt_t VFT_standard___collection___hash_collection___HashMap[];
 
+extern const classtable_elt_t VFT_standard___collection___hash_collection___HashMapKeys[];
+
+extern const classtable_elt_t VFT_standard___collection___hash_collection___HashMapValues[];
+
 extern const classtable_elt_t VFT_standard___collection___hash_collection___HashMapNode[];
 
 extern const classtable_elt_t VFT_standard___collection___hash_collection___HashMapIterator[];
@@ -49,43 +53,60 @@ extern const int SFT_standard___collection___hash_collection[];
 #define ATTR_standard___collection___hash_collection___HashNode____prev_in_bucklet(recv) ATTR(recv, (SFT_standard___collection___hash_collection[6] + 3))
 #define ATTR_standard___collection___hash_collection___HashNode____next_in_bucklet(recv) ATTR(recv, (SFT_standard___collection___hash_collection[6] + 4))
 #define INIT_TABLE_POS_standard___collection___hash_collection___HashNode (SFT_standard___collection___hash_collection[7] + 0)
-#define CALL_standard___collection___hash_collection___HashNode___next_item(recv) ((standard___collection___hash_collection___HashNode___next_item_t)CALL((recv), (SFT_standard___collection___hash_collection[7] + 1)))
-#define CALL_standard___collection___hash_collection___HashNode___next_item__eq(recv) ((standard___collection___hash_collection___HashNode___next_item__eq_t)CALL((recv), (SFT_standard___collection___hash_collection[7] + 2)))
-#define CALL_standard___collection___hash_collection___HashNode___prev_item(recv) ((standard___collection___hash_collection___HashNode___prev_item_t)CALL((recv), (SFT_standard___collection___hash_collection[7] + 3)))
-#define CALL_standard___collection___hash_collection___HashNode___prev_item__eq(recv) ((standard___collection___hash_collection___HashNode___prev_item__eq_t)CALL((recv), (SFT_standard___collection___hash_collection[7] + 4)))
-#define CALL_standard___collection___hash_collection___HashNode___init(recv) ((standard___collection___hash_collection___HashNode___init_t)CALL((recv), (SFT_standard___collection___hash_collection[7] + 5)))
+#define VTID_standard___collection___hash_collection___HashNode___N(recv) (VAL2VFT(recv)[SFT_standard___collection___hash_collection[7] + 1].i)
+#define VTCOLOR_standard___collection___hash_collection___HashNode___N(recv) (VAL2VFT(recv)[SFT_standard___collection___hash_collection[7] + 2].i)
+#define CALL_standard___collection___hash_collection___HashNode___next_item(recv) ((standard___collection___hash_collection___HashNode___next_item_t)CALL((recv), (SFT_standard___collection___hash_collection[7] + 3)))
+#define CALL_standard___collection___hash_collection___HashNode___next_item__eq(recv) ((standard___collection___hash_collection___HashNode___next_item__eq_t)CALL((recv), (SFT_standard___collection___hash_collection[7] + 4)))
+#define CALL_standard___collection___hash_collection___HashNode___prev_item(recv) ((standard___collection___hash_collection___HashNode___prev_item_t)CALL((recv), (SFT_standard___collection___hash_collection[7] + 5)))
+#define CALL_standard___collection___hash_collection___HashNode___prev_item__eq(recv) ((standard___collection___hash_collection___HashNode___prev_item__eq_t)CALL((recv), (SFT_standard___collection___hash_collection[7] + 6)))
+#define CALL_standard___collection___hash_collection___HashNode___init(recv) ((standard___collection___hash_collection___HashNode___init_t)CALL((recv), (SFT_standard___collection___hash_collection[7] + 7)))
 #define ID_standard___collection___hash_collection___HashMap (SFT_standard___collection___hash_collection[8])
 #define COLOR_standard___collection___hash_collection___HashMap (SFT_standard___collection___hash_collection[9])
-#define INIT_TABLE_POS_standard___collection___hash_collection___HashMap (SFT_standard___collection___hash_collection[10] + 0)
-#define CALL_standard___collection___hash_collection___HashMap___init(recv) ((standard___collection___hash_collection___HashMap___init_t)CALL((recv), (SFT_standard___collection___hash_collection[10] + 1)))
-#define ID_standard___collection___hash_collection___HashMapNode (SFT_standard___collection___hash_collection[11])
-#define COLOR_standard___collection___hash_collection___HashMapNode (SFT_standard___collection___hash_collection[12])
-#define ATTR_standard___collection___hash_collection___HashMapNode____value(recv) ATTR(recv, (SFT_standard___collection___hash_collection[13] + 0))
-#define INIT_TABLE_POS_standard___collection___hash_collection___HashMapNode (SFT_standard___collection___hash_collection[14] + 0)
-#define CALL_standard___collection___hash_collection___HashMapNode___init(recv) ((standard___collection___hash_collection___HashMapNode___init_t)CALL((recv), (SFT_standard___collection___hash_collection[14] + 1)))
-#define ID_standard___collection___hash_collection___HashMapIterator (SFT_standard___collection___hash_collection[15])
-#define COLOR_standard___collection___hash_collection___HashMapIterator (SFT_standard___collection___hash_collection[16])
-#define ATTR_standard___collection___hash_collection___HashMapIterator____map(recv) ATTR(recv, (SFT_standard___collection___hash_collection[17] + 0))
-#define ATTR_standard___collection___hash_collection___HashMapIterator____node(recv) ATTR(recv, (SFT_standard___collection___hash_collection[17] + 1))
-#define INIT_TABLE_POS_standard___collection___hash_collection___HashMapIterator (SFT_standard___collection___hash_collection[18] + 0)
-#define CALL_standard___collection___hash_collection___HashMapIterator___init(recv) ((standard___collection___hash_collection___HashMapIterator___init_t)CALL((recv), (SFT_standard___collection___hash_collection[18] + 1)))
-#define ID_standard___collection___hash_collection___HashSet (SFT_standard___collection___hash_collection[19])
-#define COLOR_standard___collection___hash_collection___HashSet (SFT_standard___collection___hash_collection[20])
-#define INIT_TABLE_POS_standard___collection___hash_collection___HashSet (SFT_standard___collection___hash_collection[21] + 0)
-#define CALL_standard___collection___hash_collection___HashSet___init(recv) ((standard___collection___hash_collection___HashSet___init_t)CALL((recv), (SFT_standard___collection___hash_collection[21] + 1)))
-#define ID_standard___collection___hash_collection___HashSetNode (SFT_standard___collection___hash_collection[22])
-#define COLOR_standard___collection___hash_collection___HashSetNode (SFT_standard___collection___hash_collection[23])
-#define INIT_TABLE_POS_standard___collection___hash_collection___HashSetNode (SFT_standard___collection___hash_collection[24] + 0)
-#define CALL_standard___collection___hash_collection___HashSetNode___init(recv) ((standard___collection___hash_collection___HashSetNode___init_t)CALL((recv), (SFT_standard___collection___hash_collection[24] + 1)))
-#define ID_standard___collection___hash_collection___HashSetIterator (SFT_standard___collection___hash_collection[25])
-#define COLOR_standard___collection___hash_collection___HashSetIterator (SFT_standard___collection___hash_collection[26])
-#define ATTR_standard___collection___hash_collection___HashSetIterator____set(recv) ATTR(recv, (SFT_standard___collection___hash_collection[27] + 0))
-#define ATTR_standard___collection___hash_collection___HashSetIterator____node(recv) ATTR(recv, (SFT_standard___collection___hash_collection[27] + 1))
-#define INIT_TABLE_POS_standard___collection___hash_collection___HashSetIterator (SFT_standard___collection___hash_collection[28] + 0)
-#define CALL_standard___collection___hash_collection___HashSetIterator___init(recv) ((standard___collection___hash_collection___HashSetIterator___init_t)CALL((recv), (SFT_standard___collection___hash_collection[28] + 1)))
-static const char * const LOCATE_standard___collection___hash_collection___HashCollection___length = "hash_collection::HashCollection::(abstract_collection::Collection::length)";
-val_t standard___collection___hash_collection___HashCollection___length(val_t p0);
-typedef val_t (*standard___collection___hash_collection___HashCollection___length_t)(val_t p0);
+#define ATTR_standard___collection___hash_collection___HashMap_____atkeys(recv) ATTR(recv, (SFT_standard___collection___hash_collection[10] + 0))
+#define ATTR_standard___collection___hash_collection___HashMap_____atvalues(recv) ATTR(recv, (SFT_standard___collection___hash_collection[10] + 1))
+#define INIT_TABLE_POS_standard___collection___hash_collection___HashMap (SFT_standard___collection___hash_collection[11] + 0)
+#define CALL_standard___collection___hash_collection___HashMap___init(recv) ((standard___collection___hash_collection___HashMap___init_t)CALL((recv), (SFT_standard___collection___hash_collection[11] + 1)))
+#define CALL_standard___collection___hash_collection___HashMap___keys__eq(recv) ((standard___collection___hash_collection___HashMap___keys__eq_t)CALL((recv), (SFT_standard___collection___hash_collection[11] + 2)))
+#define CALL_standard___collection___hash_collection___HashMap___values__eq(recv) ((standard___collection___hash_collection___HashMap___values__eq_t)CALL((recv), (SFT_standard___collection___hash_collection[11] + 3)))
+#define ID_standard___collection___hash_collection___HashMapKeys (SFT_standard___collection___hash_collection[12])
+#define COLOR_standard___collection___hash_collection___HashMapKeys (SFT_standard___collection___hash_collection[13])
+#define ATTR_standard___collection___hash_collection___HashMapKeys_____atmap(recv) ATTR(recv, (SFT_standard___collection___hash_collection[14] + 0))
+#define INIT_TABLE_POS_standard___collection___hash_collection___HashMapKeys (SFT_standard___collection___hash_collection[15] + 0)
+#define CALL_standard___collection___hash_collection___HashMapKeys___map(recv) ((standard___collection___hash_collection___HashMapKeys___map_t)CALL((recv), (SFT_standard___collection___hash_collection[15] + 1)))
+#define CALL_standard___collection___hash_collection___HashMapKeys___map__eq(recv) ((standard___collection___hash_collection___HashMapKeys___map__eq_t)CALL((recv), (SFT_standard___collection___hash_collection[15] + 2)))
+#define CALL_standard___collection___hash_collection___HashMapKeys___init(recv) ((standard___collection___hash_collection___HashMapKeys___init_t)CALL((recv), (SFT_standard___collection___hash_collection[15] + 3)))
+#define ID_standard___collection___hash_collection___HashMapValues (SFT_standard___collection___hash_collection[16])
+#define COLOR_standard___collection___hash_collection___HashMapValues (SFT_standard___collection___hash_collection[17])
+#define ATTR_standard___collection___hash_collection___HashMapValues_____atmap(recv) ATTR(recv, (SFT_standard___collection___hash_collection[18] + 0))
+#define INIT_TABLE_POS_standard___collection___hash_collection___HashMapValues (SFT_standard___collection___hash_collection[19] + 0)
+#define CALL_standard___collection___hash_collection___HashMapValues___map(recv) ((standard___collection___hash_collection___HashMapValues___map_t)CALL((recv), (SFT_standard___collection___hash_collection[19] + 1)))
+#define CALL_standard___collection___hash_collection___HashMapValues___map__eq(recv) ((standard___collection___hash_collection___HashMapValues___map__eq_t)CALL((recv), (SFT_standard___collection___hash_collection[19] + 2)))
+#define CALL_standard___collection___hash_collection___HashMapValues___init(recv) ((standard___collection___hash_collection___HashMapValues___init_t)CALL((recv), (SFT_standard___collection___hash_collection[19] + 3)))
+#define ID_standard___collection___hash_collection___HashMapNode (SFT_standard___collection___hash_collection[20])
+#define COLOR_standard___collection___hash_collection___HashMapNode (SFT_standard___collection___hash_collection[21])
+#define ATTR_standard___collection___hash_collection___HashMapNode____value(recv) ATTR(recv, (SFT_standard___collection___hash_collection[22] + 0))
+#define INIT_TABLE_POS_standard___collection___hash_collection___HashMapNode (SFT_standard___collection___hash_collection[23] + 0)
+#define CALL_standard___collection___hash_collection___HashMapNode___init(recv) ((standard___collection___hash_collection___HashMapNode___init_t)CALL((recv), (SFT_standard___collection___hash_collection[23] + 1)))
+#define ID_standard___collection___hash_collection___HashMapIterator (SFT_standard___collection___hash_collection[24])
+#define COLOR_standard___collection___hash_collection___HashMapIterator (SFT_standard___collection___hash_collection[25])
+#define ATTR_standard___collection___hash_collection___HashMapIterator____map(recv) ATTR(recv, (SFT_standard___collection___hash_collection[26] + 0))
+#define ATTR_standard___collection___hash_collection___HashMapIterator____node(recv) ATTR(recv, (SFT_standard___collection___hash_collection[26] + 1))
+#define INIT_TABLE_POS_standard___collection___hash_collection___HashMapIterator (SFT_standard___collection___hash_collection[27] + 0)
+#define CALL_standard___collection___hash_collection___HashMapIterator___init(recv) ((standard___collection___hash_collection___HashMapIterator___init_t)CALL((recv), (SFT_standard___collection___hash_collection[27] + 1)))
+#define ID_standard___collection___hash_collection___HashSet (SFT_standard___collection___hash_collection[28])
+#define COLOR_standard___collection___hash_collection___HashSet (SFT_standard___collection___hash_collection[29])
+#define INIT_TABLE_POS_standard___collection___hash_collection___HashSet (SFT_standard___collection___hash_collection[30] + 0)
+#define CALL_standard___collection___hash_collection___HashSet___init(recv) ((standard___collection___hash_collection___HashSet___init_t)CALL((recv), (SFT_standard___collection___hash_collection[30] + 1)))
+#define ID_standard___collection___hash_collection___HashSetNode (SFT_standard___collection___hash_collection[31])
+#define COLOR_standard___collection___hash_collection___HashSetNode (SFT_standard___collection___hash_collection[32])
+#define INIT_TABLE_POS_standard___collection___hash_collection___HashSetNode (SFT_standard___collection___hash_collection[33] + 0)
+#define CALL_standard___collection___hash_collection___HashSetNode___init(recv) ((standard___collection___hash_collection___HashSetNode___init_t)CALL((recv), (SFT_standard___collection___hash_collection[33] + 1)))
+#define ID_standard___collection___hash_collection___HashSetIterator (SFT_standard___collection___hash_collection[34])
+#define COLOR_standard___collection___hash_collection___HashSetIterator (SFT_standard___collection___hash_collection[35])
+#define ATTR_standard___collection___hash_collection___HashSetIterator____set(recv) ATTR(recv, (SFT_standard___collection___hash_collection[36] + 0))
+#define ATTR_standard___collection___hash_collection___HashSetIterator____node(recv) ATTR(recv, (SFT_standard___collection___hash_collection[36] + 1))
+#define INIT_TABLE_POS_standard___collection___hash_collection___HashSetIterator (SFT_standard___collection___hash_collection[37] + 0)
+#define CALL_standard___collection___hash_collection___HashSetIterator___init(recv) ((standard___collection___hash_collection___HashSetIterator___init_t)CALL((recv), (SFT_standard___collection___hash_collection[37] + 1)))
 static const char * const LOCATE_standard___collection___hash_collection___HashCollection___first_item = "hash_collection::HashCollection::first_item";
 val_t standard___collection___hash_collection___HashCollection___first_item(val_t p0);
 typedef val_t (*standard___collection___hash_collection___HashCollection___first_item_t)(val_t p0);
@@ -133,67 +154,144 @@ val_t NEW_HashNode_standard___collection___hash_collection___HashNode___init(val
 static const char * const LOCATE_standard___collection___hash_collection___HashMap_____bra = "hash_collection::HashMap::(abstract_collection::MapRead::[])";
 val_t standard___collection___hash_collection___HashMap_____bra(val_t p0, val_t p1);
 typedef val_t (*standard___collection___hash_collection___HashMap_____bra_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___has_key = "hash_collection::HashMap::(abstract_collection::MapRead::has_key)";
-val_t standard___collection___hash_collection___HashMap___has_key(val_t p0, val_t p1);
-typedef val_t (*standard___collection___hash_collection___HashMap___has_key_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___iterator = "hash_collection::HashMap::(abstract_collection::Collection::iterator)";
+static const char * const LOCATE_standard___collection___hash_collection___HashMap___iterator = "hash_collection::HashMap::(abstract_collection::MapRead::iterator)";
 val_t standard___collection___hash_collection___HashMap___iterator(val_t p0);
 typedef val_t (*standard___collection___hash_collection___HashMap___iterator_t)(val_t p0);
-typedef void (*CLOS_standard___collection___hash_collection___HashMap___iterate_0)(struct stack_frame_t *, val_t);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___iterate = "hash_collection::HashMap::(abstract_collection::Collection::iterate)";
+typedef void (*CLOS_standard___collection___hash_collection___HashMap___iterate_0)(struct stack_frame_t *, val_t, val_t);
+static const char * const LOCATE_standard___collection___hash_collection___HashMap___iterate = "hash_collection::HashMap::(abstract_collection::MapRead::iterate)";
 void standard___collection___hash_collection___HashMap___iterate(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 typedef void (*standard___collection___hash_collection___HashMap___iterate_t)(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___first = "hash_collection::HashMap::(abstract_collection::Collection::first)";
-val_t standard___collection___hash_collection___HashMap___first(val_t p0);
-typedef val_t (*standard___collection___hash_collection___HashMap___first_t)(val_t p0);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___is_empty = "hash_collection::HashMap::(abstract_collection::Collection::is_empty)";
+static const char * const LOCATE_standard___collection___hash_collection___HashMap___length = "hash_collection::HashMap::(abstract_collection::MapRead::length)";
+val_t standard___collection___hash_collection___HashMap___length(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMap___length_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMap___is_empty = "hash_collection::HashMap::(abstract_collection::MapRead::is_empty)";
 val_t standard___collection___hash_collection___HashMap___is_empty(val_t p0);
 typedef val_t (*standard___collection___hash_collection___HashMap___is_empty_t)(val_t p0);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___count = "hash_collection::HashMap::(abstract_collection::Collection::count)";
-val_t standard___collection___hash_collection___HashMap___count(val_t p0, val_t p1);
-typedef val_t (*standard___collection___hash_collection___HashMap___count_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___has = "hash_collection::HashMap::(abstract_collection::Collection::has)";
-val_t standard___collection___hash_collection___HashMap___has(val_t p0, val_t p1);
-typedef val_t (*standard___collection___hash_collection___HashMap___has_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___has_only = "hash_collection::HashMap::(abstract_collection::Collection::has_only)";
-val_t standard___collection___hash_collection___HashMap___has_only(val_t p0, val_t p1);
-typedef val_t (*standard___collection___hash_collection___HashMap___has_only_t)(val_t p0, val_t p1);
 static const char * const LOCATE_standard___collection___hash_collection___HashMap_____braeq = "hash_collection::HashMap::(abstract_collection::Map::[]=)";
 void standard___collection___hash_collection___HashMap_____braeq(val_t p0, val_t p1, val_t p2);
 typedef void (*standard___collection___hash_collection___HashMap_____braeq_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___remove = "hash_collection::HashMap::(abstract_collection::RemovableCollection::remove)";
-void standard___collection___hash_collection___HashMap___remove(val_t p0, val_t p1);
-typedef void (*standard___collection___hash_collection___HashMap___remove_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___remove_at = "hash_collection::HashMap::(abstract_collection::Map::remove_at)";
-void standard___collection___hash_collection___HashMap___remove_at(val_t p0, val_t p1);
-typedef void (*standard___collection___hash_collection___HashMap___remove_at_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___hash_collection___HashMap___clear = "hash_collection::HashMap::(abstract_collection::RemovableCollection::clear)";
+static const char * const LOCATE_standard___collection___hash_collection___HashMap___clear = "hash_collection::HashMap::(abstract_collection::Map::clear)";
 void standard___collection___hash_collection___HashMap___clear(val_t p0);
 typedef void (*standard___collection___hash_collection___HashMap___clear_t)(val_t p0);
 static const char * const LOCATE_standard___collection___hash_collection___HashMap___init = "hash_collection::HashMap::init";
 void standard___collection___hash_collection___HashMap___init(val_t p0, int* init_table);
 typedef void (*standard___collection___hash_collection___HashMap___init_t)(val_t p0, int* init_table);
 val_t NEW_HashMap_standard___collection___hash_collection___HashMap___init();
+static const char * const LOCATE_standard___collection___hash_collection___HashMap___keys = "hash_collection::HashMap::(abstract_collection::MapRead::keys)";
+val_t standard___collection___hash_collection___HashMap___keys(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMap___keys_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMap___keys__eq = "hash_collection::HashMap::keys=";
+void standard___collection___hash_collection___HashMap___keys__eq(val_t p0, val_t p1);
+typedef void (*standard___collection___hash_collection___HashMap___keys__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMap___values = "hash_collection::HashMap::(abstract_collection::MapRead::values)";
+val_t standard___collection___hash_collection___HashMap___values(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMap___values_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMap___values__eq = "hash_collection::HashMap::values=";
+void standard___collection___hash_collection___HashMap___values__eq(val_t p0, val_t p1);
+typedef void (*standard___collection___hash_collection___HashMap___values__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___map = "hash_collection::HashMapKeys::map";
+val_t standard___collection___hash_collection___HashMapKeys___map(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMapKeys___map_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___map__eq = "hash_collection::HashMapKeys::map=";
+void standard___collection___hash_collection___HashMapKeys___map__eq(val_t p0, val_t p1);
+typedef void (*standard___collection___hash_collection___HashMapKeys___map__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___count = "hash_collection::HashMapKeys::(abstract_collection::Collection::count)";
+val_t standard___collection___hash_collection___HashMapKeys___count(val_t p0, val_t p1);
+typedef val_t (*standard___collection___hash_collection___HashMapKeys___count_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___first = "hash_collection::HashMapKeys::(abstract_collection::Collection::first)";
+val_t standard___collection___hash_collection___HashMapKeys___first(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMapKeys___first_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___has = "hash_collection::HashMapKeys::(abstract_collection::Collection::has)";
+val_t standard___collection___hash_collection___HashMapKeys___has(val_t p0, val_t p1);
+typedef val_t (*standard___collection___hash_collection___HashMapKeys___has_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___has_only = "hash_collection::HashMapKeys::(abstract_collection::Collection::has_only)";
+val_t standard___collection___hash_collection___HashMapKeys___has_only(val_t p0, val_t p1);
+typedef val_t (*standard___collection___hash_collection___HashMapKeys___has_only_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___is_empty = "hash_collection::HashMapKeys::(abstract_collection::Collection::is_empty)";
+val_t standard___collection___hash_collection___HashMapKeys___is_empty(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMapKeys___is_empty_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___length = "hash_collection::HashMapKeys::(abstract_collection::Collection::length)";
+val_t standard___collection___hash_collection___HashMapKeys___length(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMapKeys___length_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___iterator = "hash_collection::HashMapKeys::(abstract_collection::Collection::iterator)";
+val_t standard___collection___hash_collection___HashMapKeys___iterator(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMapKeys___iterator_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___clear = "hash_collection::HashMapKeys::(abstract_collection::RemovableCollection::clear)";
+void standard___collection___hash_collection___HashMapKeys___clear(val_t p0);
+typedef void (*standard___collection___hash_collection___HashMapKeys___clear_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___remove = "hash_collection::HashMapKeys::(abstract_collection::RemovableCollection::remove)";
+void standard___collection___hash_collection___HashMapKeys___remove(val_t p0, val_t p1);
+typedef void (*standard___collection___hash_collection___HashMapKeys___remove_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___remove_all = "hash_collection::HashMapKeys::(abstract_collection::RemovableCollection::remove_all)";
+void standard___collection___hash_collection___HashMapKeys___remove_all(val_t p0, val_t p1);
+typedef void (*standard___collection___hash_collection___HashMapKeys___remove_all_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapKeys___init = "hash_collection::HashMapKeys::init";
+void standard___collection___hash_collection___HashMapKeys___init(val_t p0, val_t p1, int* init_table);
+typedef void (*standard___collection___hash_collection___HashMapKeys___init_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_HashMapKeys_standard___collection___hash_collection___HashMapKeys___init(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___map = "hash_collection::HashMapValues::map";
+val_t standard___collection___hash_collection___HashMapValues___map(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMapValues___map_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___map__eq = "hash_collection::HashMapValues::map=";
+void standard___collection___hash_collection___HashMapValues___map__eq(val_t p0, val_t p1);
+typedef void (*standard___collection___hash_collection___HashMapValues___map__eq_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___count = "hash_collection::HashMapValues::(abstract_collection::Collection::count)";
+val_t standard___collection___hash_collection___HashMapValues___count(val_t p0, val_t p1);
+typedef val_t (*standard___collection___hash_collection___HashMapValues___count_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___first = "hash_collection::HashMapValues::(abstract_collection::Collection::first)";
+val_t standard___collection___hash_collection___HashMapValues___first(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMapValues___first_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___has = "hash_collection::HashMapValues::(abstract_collection::Collection::has)";
+val_t standard___collection___hash_collection___HashMapValues___has(val_t p0, val_t p1);
+typedef val_t (*standard___collection___hash_collection___HashMapValues___has_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___has_only = "hash_collection::HashMapValues::(abstract_collection::Collection::has_only)";
+val_t standard___collection___hash_collection___HashMapValues___has_only(val_t p0, val_t p1);
+typedef val_t (*standard___collection___hash_collection___HashMapValues___has_only_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___is_empty = "hash_collection::HashMapValues::(abstract_collection::Collection::is_empty)";
+val_t standard___collection___hash_collection___HashMapValues___is_empty(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMapValues___is_empty_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___length = "hash_collection::HashMapValues::(abstract_collection::Collection::length)";
+val_t standard___collection___hash_collection___HashMapValues___length(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMapValues___length_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___iterator = "hash_collection::HashMapValues::(abstract_collection::Collection::iterator)";
+val_t standard___collection___hash_collection___HashMapValues___iterator(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashMapValues___iterator_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___clear = "hash_collection::HashMapValues::(abstract_collection::RemovableCollection::clear)";
+void standard___collection___hash_collection___HashMapValues___clear(val_t p0);
+typedef void (*standard___collection___hash_collection___HashMapValues___clear_t)(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___remove = "hash_collection::HashMapValues::(abstract_collection::RemovableCollection::remove)";
+void standard___collection___hash_collection___HashMapValues___remove(val_t p0, val_t p1);
+typedef void (*standard___collection___hash_collection___HashMapValues___remove_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___remove_all = "hash_collection::HashMapValues::(abstract_collection::RemovableCollection::remove_all)";
+void standard___collection___hash_collection___HashMapValues___remove_all(val_t p0, val_t p1);
+typedef void (*standard___collection___hash_collection___HashMapValues___remove_all_t)(val_t p0, val_t p1);
+static const char * const LOCATE_standard___collection___hash_collection___HashMapValues___init = "hash_collection::HashMapValues::init";
+void standard___collection___hash_collection___HashMapValues___init(val_t p0, val_t p1, int* init_table);
+typedef void (*standard___collection___hash_collection___HashMapValues___init_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_HashMapValues_standard___collection___hash_collection___HashMapValues___init(val_t p0);
 static const char * const LOCATE_standard___collection___hash_collection___HashMapNode___init = "hash_collection::HashMapNode::init";
 void standard___collection___hash_collection___HashMapNode___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*standard___collection___hash_collection___HashMapNode___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_HashMapNode_standard___collection___hash_collection___HashMapNode___init(val_t p0, val_t p1);
-static const char * const LOCATE_standard___collection___hash_collection___HashMapIterator___is_ok = "hash_collection::HashMapIterator::(abstract_collection::Iterator::is_ok)";
+static const char * const LOCATE_standard___collection___hash_collection___HashMapIterator___is_ok = "hash_collection::HashMapIterator::(abstract_collection::MapIterator::is_ok)";
 val_t standard___collection___hash_collection___HashMapIterator___is_ok(val_t p0);
 typedef val_t (*standard___collection___hash_collection___HashMapIterator___is_ok_t)(val_t p0);
-static const char * const LOCATE_standard___collection___hash_collection___HashMapIterator___item = "hash_collection::HashMapIterator::(abstract_collection::Iterator::item)";
+static const char * const LOCATE_standard___collection___hash_collection___HashMapIterator___item = "hash_collection::HashMapIterator::(abstract_collection::MapIterator::item)";
 val_t standard___collection___hash_collection___HashMapIterator___item(val_t p0);
 typedef val_t (*standard___collection___hash_collection___HashMapIterator___item_t)(val_t p0);
 static const char * const LOCATE_standard___collection___hash_collection___HashMapIterator___key = "hash_collection::HashMapIterator::(abstract_collection::MapIterator::key)";
 val_t standard___collection___hash_collection___HashMapIterator___key(val_t p0);
 typedef val_t (*standard___collection___hash_collection___HashMapIterator___key_t)(val_t p0);
-static const char * const LOCATE_standard___collection___hash_collection___HashMapIterator___next = "hash_collection::HashMapIterator::(abstract_collection::Iterator::next)";
+static const char * const LOCATE_standard___collection___hash_collection___HashMapIterator___next = "hash_collection::HashMapIterator::(abstract_collection::MapIterator::next)";
 void standard___collection___hash_collection___HashMapIterator___next(val_t p0);
 typedef void (*standard___collection___hash_collection___HashMapIterator___next_t)(val_t p0);
 static const char * const LOCATE_standard___collection___hash_collection___HashMapIterator___init = "hash_collection::HashMapIterator::init";
 void standard___collection___hash_collection___HashMapIterator___init(val_t p0, val_t p1, int* init_table);
 typedef void (*standard___collection___hash_collection___HashMapIterator___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_HashMapIterator_standard___collection___hash_collection___HashMapIterator___init(val_t p0);
+static const char * const LOCATE_standard___collection___hash_collection___HashSet___length = "hash_collection::HashSet::(abstract_collection::Collection::length)";
+val_t standard___collection___hash_collection___HashSet___length(val_t p0);
+typedef val_t (*standard___collection___hash_collection___HashSet___length_t)(val_t p0);
 static const char * const LOCATE_standard___collection___hash_collection___HashSet___is_empty = "hash_collection::HashSet::(abstract_collection::Collection::is_empty)";
 val_t standard___collection___hash_collection___HashSet___is_empty(val_t p0);
 typedef val_t (*standard___collection___hash_collection___HashSet___is_empty_t)(val_t p0);

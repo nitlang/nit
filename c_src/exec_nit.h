@@ -14,7 +14,6 @@
  * another product.
  */
 
-#define _POSIX_C_SOURCE 1
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>

@@ -166,6 +166,7 @@ void metamodel___abstractmetamodel___MMContext___add_local_class(val_t p0, val_t
   val_t REGB0;
   val_t REGB1;
   val_t REGB2;
+  val_t REGB3;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___abstractmetamodel;
@@ -186,36 +187,41 @@ void metamodel___abstractmetamodel___MMContext___add_local_class(val_t p0, val_t
   fra.me.REG[2] = p2;
   /* ./metamodel//abstractmetamodel.nit:56 */
   fra.me.REG[3] = NEW_Array_standard___collection___array___Array___init();
-  /* ./../lib/standard//collection//array.nit:234 */
+  /* ./../lib/standard//collection//array.nit:269 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//array.nit:235 */
+  /* ./../lib/standard//collection//array.nit:270 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-  /* ./../lib/standard//collection//array.nit:236 */
+  /* ./../lib/standard//collection//array.nit:271 */
   fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
-  /* ./../lib/standard//collection//array.nit:237 */
+  /* ./../lib/standard//collection//array.nit:272 */
   while(1) {
-    /* ./../lib/standard//collection//array.nit:23 */
+    /* ./../lib/standard//collection//array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-    /* ./../lib/standard//kernel.nit:215 */
+    REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB2)) {
+    } else {
+      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+    }
+    /* ./../lib/standard//kernel.nit:232 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:237 */
+    /* ./../lib/standard//collection//array.nit:272 */
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//collection//array.nit:238 */
+      /* ./../lib/standard//collection//array.nit:273 */
       REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ./../lib/standard//collection//array.nit:654 */
+      /* ./../lib/standard//collection//array.nit:718 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* ./metamodel//abstractmetamodel.nit:58 */
       REGB1 = TAG_Bool(VAL_ISA(fra.me.REG[5], COLOR_metamodel___abstractmetamodel___MMConcreteClass, ID_metamodel___abstractmetamodel___MMConcreteClass)) /*cast MMConcreteClass*/;
@@ -226,36 +232,41 @@ void metamodel___abstractmetamodel___MMContext___add_local_class(val_t p0, val_t
         /* ./metamodel//abstractmetamodel.nit:61 */
         fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalClass___che(fra.me.REG[5])(fra.me.REG[5]);
         fra.me.REG[5] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[5])(fra.me.REG[5]);
-        /* ./../lib/standard//collection//array.nit:234 */
+        /* ./../lib/standard//collection//array.nit:269 */
         REGB1 = TAG_Int(0);
-        /* ./../lib/standard//collection//array.nit:235 */
+        /* ./../lib/standard//collection//array.nit:270 */
         REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
         }
         REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5]);
-        /* ./../lib/standard//collection//array.nit:236 */
+        /* ./../lib/standard//collection//array.nit:271 */
         fra.me.REG[6] = ATTR_standard___collection___array___Array____items(fra.me.REG[5]);
-        /* ./../lib/standard//collection//array.nit:237 */
+        /* ./../lib/standard//collection//array.nit:272 */
         while(1) {
-          /* ./../lib/standard//collection//array.nit:23 */
+          /* ./../lib/standard//collection//array.nit:24 */
           REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
           if (UNTAG_Bool(REGB2)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
           }
           REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5]);
-          /* ./../lib/standard//kernel.nit:215 */
+          REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
+          if (UNTAG_Bool(REGB3)) {
+          } else {
+            nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+          }
+          /* ./../lib/standard//kernel.nit:232 */
           REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-          /* ./../lib/standard//collection//array.nit:237 */
+          /* ./../lib/standard//collection//array.nit:272 */
           if (UNTAG_Bool(REGB2)) {
-            /* ./../lib/standard//collection//array.nit:238 */
+            /* ./../lib/standard//collection//array.nit:273 */
             REGB2 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
             if (UNTAG_Bool(REGB2)) {
-              nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
+              nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ./../lib/standard//collection//array.nit:654 */
+            /* ./../lib/standard//collection//array.nit:718 */
             fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB1)];
             /* ./metamodel//abstractmetamodel.nit:62 */
             REGB2 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[7]);
@@ -265,27 +276,27 @@ void metamodel___abstractmetamodel___MMContext___add_local_class(val_t p0, val_t
             /* ./metamodel//abstractmetamodel.nit:63 */
             CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[7]);
             label1: while(0);
-            /* ./../lib/standard//collection//array.nit:239 */
+            /* ./../lib/standard//collection//array.nit:274 */
             REGB2 = TAG_Int(1);
-            /* ./../lib/standard//kernel.nit:218 */
+            /* ./../lib/standard//kernel.nit:235 */
             REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-            /* ./../lib/standard//collection//array.nit:239 */
+            /* ./../lib/standard//collection//array.nit:274 */
             REGB1 = REGB2;
           } else {
-            /* ./../lib/standard//collection//array.nit:237 */
+            /* ./../lib/standard//collection//array.nit:272 */
             goto label2;
           }
         }
         label2: while(0);
       }
-      /* ./../lib/standard//collection//array.nit:239 */
+      /* ./../lib/standard//collection//array.nit:274 */
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:218 */
+      /* ./../lib/standard//kernel.nit:235 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:239 */
+      /* ./../lib/standard//collection//array.nit:274 */
       REGB0 = REGB1;
     } else {
-      /* ./../lib/standard//collection//array.nit:237 */
+      /* ./../lib/standard//collection//array.nit:272 */
       goto label3;
     }
   }
@@ -873,7 +884,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:210 */
+    /* ./../lib/standard//kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* ./metamodel//abstractmetamodel.nit:177 */
     REGB2 = REGB1;
@@ -935,7 +946,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
     REGB1 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB2));
     if (UNTAG_Bool(REGB1)) {
     } else {
-      /* ./../lib/standard//kernel.nit:210 */
+      /* ./../lib/standard//kernel.nit:227 */
       REGB2 = TAG_Bool((REGB0)==(REGB2));
       /* ./metamodel//abstractmetamodel.nit:182 */
       REGB1 = REGB2;
@@ -1839,7 +1850,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___mmmodule(val_t p0){
   return fra.me.REG[0];
 }
 val_t metamodel___abstractmetamodel___MMLocalClass___global(val_t p0){
-  struct {struct stack_frame_t me;} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -1847,12 +1858,15 @@ val_t metamodel___abstractmetamodel___MMLocalClass___global(val_t p0){
   fra.me.line = 344;
   fra.me.meth = LOCATE_metamodel___abstractmetamodel___MMLocalClass___global;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//abstractmetamodel.nit:344 */
+  fra.me.REG[1] = fra.me.REG[0];
   /* ./metamodel//abstractmetamodel.nit:345 */
-  fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMLocalClass____global(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalClass____global(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_metamodel___abstractmetamodel, 345);
@@ -1860,10 +1874,10 @@ val_t metamodel___abstractmetamodel___MMLocalClass___global(val_t p0){
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return fra.me.REG[1];
 }
 val_t metamodel___abstractmetamodel___MMLocalClass___crhe(val_t p0){
-  struct {struct stack_frame_t me;} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -1871,12 +1885,15 @@ val_t metamodel___abstractmetamodel___MMLocalClass___crhe(val_t p0){
   fra.me.line = 348;
   fra.me.meth = LOCATE_metamodel___abstractmetamodel___MMLocalClass___crhe;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//abstractmetamodel.nit:348 */
+  fra.me.REG[1] = fra.me.REG[0];
   /* ./metamodel//abstractmetamodel.nit:349 */
-  fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMLocalClass____crhe(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalClass____crhe(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_metamodel___abstractmetamodel, 349);
@@ -1884,10 +1901,10 @@ val_t metamodel___abstractmetamodel___MMLocalClass___crhe(val_t p0){
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return fra.me.REG[1];
 }
 val_t metamodel___abstractmetamodel___MMLocalClass___cshe(val_t p0){
-  struct {struct stack_frame_t me;} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -1895,12 +1912,15 @@ val_t metamodel___abstractmetamodel___MMLocalClass___cshe(val_t p0){
   fra.me.line = 352;
   fra.me.meth = LOCATE_metamodel___abstractmetamodel___MMLocalClass___cshe;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//abstractmetamodel.nit:352 */
+  fra.me.REG[1] = fra.me.REG[0];
   /* ./metamodel//abstractmetamodel.nit:353 */
-  fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMLocalClass____cshe(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalClass____cshe(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_metamodel___abstractmetamodel, 353);
@@ -1908,10 +1928,10 @@ val_t metamodel___abstractmetamodel___MMLocalClass___cshe(val_t p0){
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return fra.me.REG[1];
 }
 val_t metamodel___abstractmetamodel___MMLocalClass___che(val_t p0){
-  struct {struct stack_frame_t me;} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -1919,12 +1939,15 @@ val_t metamodel___abstractmetamodel___MMLocalClass___che(val_t p0){
   fra.me.line = 356;
   fra.me.meth = LOCATE_metamodel___abstractmetamodel___MMLocalClass___che;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./metamodel//abstractmetamodel.nit:356 */
+  fra.me.REG[1] = fra.me.REG[0];
   /* ./metamodel//abstractmetamodel.nit:357 */
-  fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMLocalClass____che(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalClass____che(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_metamodel___abstractmetamodel, 357);
@@ -1932,7 +1955,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___che(val_t p0){
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return fra.me.REG[1];
 }
 val_t metamodel___abstractmetamodel___MMLocalClass___global_properties(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -2158,11 +2181,11 @@ val_t metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name
     if (UNTAG_Bool(REGB0)) {
       nit_abort("Reciever is null", NULL, LOCATE_metamodel___abstractmetamodel, 410);
     }
-    /* ./../lib/standard//collection//array.nit:23 */
+    /* ./../lib/standard//collection//array.nit:24 */
     REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
     /* ./metamodel//abstractmetamodel.nit:410 */
@@ -2170,7 +2193,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name
     REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
     if (UNTAG_Bool(REGB2)) {
     } else {
-      /* ./../lib/standard//kernel.nit:210 */
+      /* ./../lib/standard//kernel.nit:227 */
       REGB1 = TAG_Bool((REGB0)==(REGB1));
       /* ./metamodel//abstractmetamodel.nit:410 */
       REGB2 = REGB1;
@@ -2335,6 +2358,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___super_methods_named(val_t p
   struct {struct stack_frame_t me; val_t MORE_REG[5];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___abstractmetamodel;
@@ -2363,50 +2387,55 @@ val_t metamodel___abstractmetamodel___MMLocalClass___super_methods_named(val_t p
   fra.me.REG[2] = fra.me.REG[0];
   /* ./metamodel//abstractmetamodel.nit:465 */
   fra.me.REG[0] = NEW_Array_standard___collection___array___Array___init();
-  /* ./../lib/standard//collection//array.nit:234 */
+  /* ./../lib/standard//collection//array.nit:269 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//array.nit:235 */
+  /* ./../lib/standard//collection//array.nit:270 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-  /* ./../lib/standard//collection//array.nit:236 */
+  /* ./../lib/standard//collection//array.nit:271 */
   fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
-  /* ./../lib/standard//collection//array.nit:237 */
+  /* ./../lib/standard//collection//array.nit:272 */
   while(1) {
-    /* ./../lib/standard//collection//array.nit:23 */
+    /* ./../lib/standard//collection//array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-    /* ./../lib/standard//kernel.nit:215 */
+    REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB2)) {
+    } else {
+      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+    }
+    /* ./../lib/standard//kernel.nit:232 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:237 */
+    /* ./../lib/standard//collection//array.nit:272 */
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//collection//array.nit:238 */
+      /* ./../lib/standard//collection//array.nit:273 */
       REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ./../lib/standard//collection//array.nit:654 */
+      /* ./../lib/standard//collection//array.nit:718 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* ./metamodel//abstractmetamodel.nit:467 */
       fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalClass___method(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
       /* ./metamodel//abstractmetamodel.nit:469 */
       fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);
-      /* ./../lib/standard//collection//array.nit:239 */
+      /* ./../lib/standard//collection//array.nit:274 */
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:218 */
+      /* ./../lib/standard//kernel.nit:235 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:239 */
+      /* ./../lib/standard//collection//array.nit:274 */
       REGB0 = REGB1;
     } else {
-      /* ./../lib/standard//collection//array.nit:237 */
+      /* ./../lib/standard//collection//array.nit:272 */
       goto label2;
     }
   }
@@ -2714,7 +2743,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___total_order_compare(val_t p
       if (UNTAG_Bool(REGB1)) {
         /* ./metamodel//abstractmetamodel.nit:526 */
         REGB1 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:219 */
+        /* ./../lib/standard//kernel.nit:236 */
         REGB1 = TAG_Int(-UNTAG_Int(REGB1));
         /* ./metamodel//abstractmetamodel.nit:526 */
         REGB0 = REGB1;
@@ -2728,7 +2757,12 @@ val_t metamodel___abstractmetamodel___MMLocalClass___total_order_compare(val_t p
   /* ./metamodel//abstractmetamodel.nit:529 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___cshe(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = CALL_metamodel___partial_order___PartialOrderElement___rank(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./../lib/standard//kernel.nit:217 */
+  REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
+  if (UNTAG_Bool(REGB3)) {
+  } else {
+    nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+  }
+  /* ./../lib/standard//kernel.nit:234 */
   REGB3 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
   /* ./metamodel//abstractmetamodel.nit:530 */
   if (UNTAG_Bool(REGB3)) {
@@ -2737,13 +2771,18 @@ val_t metamodel___abstractmetamodel___MMLocalClass___total_order_compare(val_t p
     REGB0 = REGB3;
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:217 */
+    REGB3 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB3)) {
+    } else {
+      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+    }
+    /* ./../lib/standard//kernel.nit:234 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB2)>UNTAG_Int(REGB1));
     /* ./metamodel//abstractmetamodel.nit:532 */
     if (UNTAG_Bool(REGB1)) {
       /* ./metamodel//abstractmetamodel.nit:533 */
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:219 */
+      /* ./../lib/standard//kernel.nit:236 */
       REGB1 = TAG_Int(-UNTAG_Int(REGB1));
       /* ./metamodel//abstractmetamodel.nit:533 */
       REGB0 = REGB1;
@@ -2899,7 +2938,7 @@ void metamodel___abstractmetamodel___MMGlobalProperty___add_local_property(val_t
   return;
 }
 val_t metamodel___abstractmetamodel___MMGlobalProperty___is_attribute(val_t p0){
-  struct {struct stack_frame_t me;} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -2907,19 +2946,20 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___is_attribute(val_t p0){
   fra.me.line = 571;
   fra.me.meth = LOCATE_metamodel___abstractmetamodel___MMGlobalProperty___is_attribute;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//abstractmetamodel.nit:572 */
-  fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
-  REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
+  fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
+  REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 val_t metamodel___abstractmetamodel___MMGlobalProperty___is_method(val_t p0){
-  struct {struct stack_frame_t me;} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -2927,12 +2967,13 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___is_method(val_t p0){
   fra.me.line = 574;
   fra.me.meth = LOCATE_metamodel___abstractmetamodel___MMGlobalProperty___is_method;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//abstractmetamodel.nit:575 */
-  fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
-  REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
+  fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
+  REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -3115,7 +3156,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___local_class(val_t p0){
   return fra.me.REG[0];
 }
 val_t metamodel___abstractmetamodel___MMLocalProperty___global(val_t p0){
-  struct {struct stack_frame_t me;} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -3123,12 +3164,14 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___global(val_t p0){
   fra.me.line = 607;
   fra.me.meth = LOCATE_metamodel___abstractmetamodel___MMLocalProperty___global;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//abstractmetamodel.nit:607 */
-  fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  fra.me.REG[1] = fra.me.REG[0];
+  fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalProperty____global(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_metamodel___abstractmetamodel, 607);
@@ -3136,7 +3179,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___global(val_t p0){
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return fra.me.REG[1];
 }
 val_t metamodel___abstractmetamodel___MMLocalProperty___is_global_set(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -3172,7 +3215,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___is_global_set(val_t p0){
   return REGB0;
 }
 val_t metamodel___abstractmetamodel___MMLocalProperty___prhe(val_t p0){
-  struct {struct stack_frame_t me;} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -3180,12 +3223,14 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___prhe(val_t p0){
   fra.me.line = 613;
   fra.me.meth = LOCATE_metamodel___abstractmetamodel___MMLocalProperty___prhe;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
+  fra.me.REG_size = 2;
   fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//abstractmetamodel.nit:613 */
-  fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMLocalProperty____prhe(fra.me.REG[0]);
-  REGB0 = TAG_Bool(fra.me.REG[0]!=NIT_NULL);
+  fra.me.REG[1] = fra.me.REG[0];
+  fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalProperty____prhe(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_metamodel___abstractmetamodel, 613);
@@ -3193,7 +3238,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___prhe(val_t p0){
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return fra.me.REG[1];
 }
 val_t metamodel___abstractmetamodel___MMLocalProperty___mmmodule(val_t p0){
   struct {struct stack_frame_t me;} fra;

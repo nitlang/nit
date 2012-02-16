@@ -66,20 +66,23 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___init(v
   return;
 }
 void analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_analysis___reachable_from_init_method_analysis_impl;
   fra.me.line = 32;
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
+  fra.me.REG_size = 3;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
+  /* ./analysis//reachable_from_init_method_analysis_impl.nit:32 */
+  fra.me.REG[1] = fra.me.REG[0];
   /* ./analysis//reachable_from_init_method_analysis_impl.nit:33 */
-  fra.me.REG[1] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___program(fra.me.REG[0])(fra.me.REG[0]);
-  CALL_program___Program___with_each_live_local_classes(fra.me.REG[1])(fra.me.REG[1], (&(fra.me)), ((fun_t)OC_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work_1));
+  fra.me.REG[2] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___program(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_program___Program___with_each_live_local_classes(fra.me.REG[2])(fra.me.REG[2], (&(fra.me)), ((fun_t)OC_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work_1));
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -94,9 +97,9 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work(v
     fra.me.REG_size = 1;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[0] = p0;
-    closctx->REG[1] = fra.me.REG[0];
+    closctx->REG[2] = fra.me.REG[0];
     /* ./analysis//reachable_from_init_method_analysis_impl.nit:35 */
-    fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___global_properties(closctx->REG[1])(closctx->REG[1]);
+    fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___global_properties(closctx->REG[2])(closctx->REG[2]);
     CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], closctx, ((fun_t)OC_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work_2));
     stack_frame_head = fra.me.prev;
     return;
@@ -120,10 +123,10 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work(v
       fra.me.REG[0] = p0;
       CREG[0] = clos_fun0;
       /* ./analysis//reachable_from_init_method_analysis_impl.nit:36 */
-      fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(closctx->REG[1])(closctx->REG[1], fra.me.REG[0]);
+      fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
       /* ./analysis//reachable_from_init_method_analysis_impl.nit:37 */
       fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
-      REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init_for(fra.me.REG[1])(fra.me.REG[1], closctx->REG[1]);
+      REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init_for(fra.me.REG[1])(fra.me.REG[1], closctx->REG[2]);
       REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
       if (UNTAG_Bool(REGB0)) {
         goto label3;
@@ -135,7 +138,7 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work(v
         nit_abort("Assert failed", NULL, LOCATE_analysis___reachable_from_init_method_analysis_impl, 38);
       }
       /* ./analysis//reachable_from_init_method_analysis_impl.nit:39 */
-      fra.me.REG[1] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___program(closctx->REG[0])(closctx->REG[0]);
+      fra.me.REG[1] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___program(closctx->REG[1])(closctx->REG[1]);
       fra.me.REG[1] = CALL_analysis___reachable_method_analysis___Program___rma(fra.me.REG[1])(fra.me.REG[1]);
       REGB0 = TAG_Bool((fra.me.REG[1]!=NIT_NULL) && VAL_ISA(fra.me.REG[1], COLOR_analysis___reachable_method_analysis___ReachableMethodAnalysis, ID_analysis___reachable_method_analysis___ReachableMethodAnalysis)) /*cast ReachableMethodAnalysis*/;
       if (UNTAG_Bool(REGB0)) {
@@ -152,22 +155,22 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work(v
         goto label3;
       }
       /* ./analysis//reachable_from_init_method_analysis_impl.nit:40 */
-      fra.me.REG[1] = CALL_program___MMLocalClass___new_instance_iroutine(closctx->REG[1])(closctx->REG[1]);
+      fra.me.REG[1] = CALL_program___MMLocalClass___new_instance_iroutine(closctx->REG[2])(closctx->REG[2]);
       REGB0 = CALL_standard___collection___abstract_collection___MapRead___has_key(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
       REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
       if (UNTAG_Bool(REGB0)) {
         goto label3;
       }
       /* ./analysis//reachable_from_init_method_analysis_impl.nit:41 */
-      fra.me.REG[1] = CALL_program___MMLocalClass___new_instance_iroutine(closctx->REG[1])(closctx->REG[1]);
+      fra.me.REG[1] = CALL_program___MMLocalClass___new_instance_iroutine(closctx->REG[2])(closctx->REG[2]);
       fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
       /* ./analysis//reachable_from_init_method_analysis_impl.nit:44 */
-      fra.me.REG[1] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___context(closctx->REG[0])(closctx->REG[0]);
+      fra.me.REG[1] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___context(closctx->REG[1])(closctx->REG[1]);
       fra.me.REG[1] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMAContext___reachable_from_init_iroutines(fra.me.REG[1])(fra.me.REG[1]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
       /* ./analysis//reachable_from_init_method_analysis_impl.nit:45 */
-      fra.me.REG[1] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___context(closctx->REG[0])(closctx->REG[0]);
-      fra.me.REG[2] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___program(closctx->REG[0])(closctx->REG[0]);
+      fra.me.REG[1] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___context(closctx->REG[1])(closctx->REG[1]);
+      fra.me.REG[2] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___program(closctx->REG[1])(closctx->REG[1]);
       fra.me.REG[2] = NEW_RFIMAVisitor_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___init(fra.me.REG[1], fra.me.REG[2]);
       CALL_icode___icode_tools___ICodeVisitor___visit_iroutine(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
       label3: while(0);

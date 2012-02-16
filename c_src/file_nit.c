@@ -13,7 +13,6 @@
  * another product.
  */
 
-#define _POSIX_C_SOURCE 1
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/stat.h>

@@ -113,7 +113,7 @@ val_t standard___exec___Process___status(val_t p0){
 }
 void standard___exec___Process___init(val_t p0, val_t p1, val_t p2, int* init_table){
   int itpos0 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_standard___exec___Process].i;
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
   val_t tmp;
   if (init_table[itpos0]) return;
@@ -122,14 +122,16 @@ void standard___exec___Process___init(val_t p0, val_t p1, val_t p2, int* init_ta
   fra.me.line = 43;
   fra.me.meth = LOCATE_standard___exec___Process___init;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 4;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   /* ./../lib/standard//exec.nit:43 */
+  fra.me.REG[3] = fra.me.REG[0];
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[2], COLOR_standard___collection___array___Array, ID_standard___collection___array___Array)) /*cast Array[String]*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -137,7 +139,7 @@ void standard___exec___Process___init(val_t p0, val_t p1, val_t p2, int* init_ta
   }
   /* ./../lib/standard//exec.nit:46 */
   REGB0 = TAG_Int(0);
-  CALL_standard___exec___Process___execute(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], REGB0, init_table);
+  CALL_standard___exec___Process___execute(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1], fra.me.REG[2], REGB0, init_table);
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
   return;
@@ -172,6 +174,7 @@ void standard___exec___Process___execute(val_t p0, val_t p1, val_t p2, val_t p3,
   val_t REGB1;
   val_t REGB2;
   val_t REGB3;
+  val_t REGB4;
   val_t tmp;
   if (init_table[itpos2]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -217,52 +220,57 @@ void standard___exec___Process___execute(val_t p0, val_t p1, val_t p2, val_t p3,
     if (UNTAG_Bool(REGB2)) {
       nit_abort("Reciever is null", NULL, LOCATE_standard___exec, 62);
     }
-    /* ./../lib/standard//collection//array.nit:231 */
+    /* ./../lib/standard//collection//array.nit:266 */
     fra.me.REG[4] = fra.me.REG[2];
-    /* ./../lib/standard//collection//array.nit:234 */
+    /* ./../lib/standard//collection//array.nit:269 */
     REGB2 = TAG_Int(0);
-    /* ./../lib/standard//collection//array.nit:235 */
+    /* ./../lib/standard//collection//array.nit:270 */
     REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
     if (UNTAG_Bool(REGB3)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 235);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
     }
     REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
-    /* ./../lib/standard//collection//array.nit:236 */
+    /* ./../lib/standard//collection//array.nit:271 */
     fra.me.REG[5] = ATTR_standard___collection___array___Array____items(fra.me.REG[4]);
-    /* ./../lib/standard//collection//array.nit:237 */
+    /* ./../lib/standard//collection//array.nit:272 */
     while(1) {
-      /* ./../lib/standard//collection//array.nit:23 */
+      /* ./../lib/standard//collection//array.nit:24 */
       REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
       }
       REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
-      /* ./../lib/standard//kernel.nit:215 */
+      REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
+      if (UNTAG_Bool(REGB4)) {
+      } else {
+        nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+      }
+      /* ./../lib/standard//kernel.nit:232 */
       REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB3));
-      /* ./../lib/standard//collection//array.nit:237 */
+      /* ./../lib/standard//collection//array.nit:272 */
       if (UNTAG_Bool(REGB3)) {
-        /* ./../lib/standard//collection//array.nit:238 */
+        /* ./../lib/standard//collection//array.nit:273 */
         REGB3 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
         if (UNTAG_Bool(REGB3)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 238);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ./../lib/standard//collection//array.nit:654 */
+        /* ./../lib/standard//collection//array.nit:718 */
         fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB2)];
         /* ./../lib/standard//exec.nit:63 */
         REGB3 = TAG_Char('\0');
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], REGB3);
         /* ./../lib/standard//exec.nit:64 */
         CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[6]);
-        /* ./../lib/standard//collection//array.nit:239 */
+        /* ./../lib/standard//collection//array.nit:274 */
         REGB3 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:218 */
+        /* ./../lib/standard//kernel.nit:235 */
         REGB3 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB3));
-        /* ./../lib/standard//collection//array.nit:239 */
+        /* ./../lib/standard//collection//array.nit:274 */
         REGB2 = REGB3;
       } else {
-        /* ./../lib/standard//collection//array.nit:237 */
+        /* ./../lib/standard//collection//array.nit:272 */
         goto label1;
       }
     }
@@ -272,14 +280,14 @@ void standard___exec___Process___execute(val_t p0, val_t p1, val_t p2, val_t p3,
     if (UNTAG_Bool(REGB2)) {
       nit_abort("Reciever is null", NULL, LOCATE_standard___exec, 66);
     }
-    /* ./../lib/standard//collection//array.nit:23 */
+    /* ./../lib/standard//collection//array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 23);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-    /* ./../lib/standard//kernel.nit:218 */
+    /* ./../lib/standard//kernel.nit:235 */
     REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
     /* ./../lib/standard//exec.nit:66 */
     REGB1 = REGB2;
@@ -393,7 +401,7 @@ val_t standard___exec___IProcess___eof(val_t p0){
 }
 void standard___exec___IProcess___init(val_t p0, val_t p1, val_t p2, int* init_table){
   int itpos3 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_standard___exec___IProcess].i;
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
   val_t tmp;
   if (init_table[itpos3]) return;
@@ -402,14 +410,16 @@ void standard___exec___IProcess___init(val_t p0, val_t p1, val_t p2, int* init_t
   fra.me.line = 87;
   fra.me.meth = LOCATE_standard___exec___IProcess___init;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 4;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   /* ./../lib/standard//exec.nit:87 */
+  fra.me.REG[3] = fra.me.REG[0];
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[2], COLOR_standard___collection___array___Array, ID_standard___collection___array___Array)) /*cast Array[String]*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -417,17 +427,17 @@ void standard___exec___IProcess___init(val_t p0, val_t p1, val_t p2, int* init_t
   }
   /* ./../lib/standard//exec.nit:89 */
   REGB0 = TAG_Int(2);
-  CALL_standard___exec___Process___execute(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], REGB0, init_table);
+  CALL_standard___exec___Process___execute(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1], fra.me.REG[2], REGB0, init_table);
   /* ./../lib/standard//exec.nit:90 */
-  REGB0 = TAG_Bool(ATTR_standard___exec___Process____data(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_standard___exec___Process____data(fra.me.REG[3])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_data", LOCATE_standard___exec, 90);
   }
-  fra.me.REG[2] = ATTR_standard___exec___Process____data(fra.me.REG[0]);
+  fra.me.REG[2] = ATTR_standard___exec___Process____data(fra.me.REG[3]);
   REGB0 = CALL_standard___exec___NativeProcess___out_fd(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[2] = NEW_FDIStream_standard___stream___FDIStream___init(REGB0);
-  ATTR_standard___exec___IProcess____in(fra.me.REG[0]) = fra.me.REG[2];
+  ATTR_standard___exec___IProcess____in(fra.me.REG[3]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos3] = 1;
   return;
@@ -540,7 +550,7 @@ void standard___exec___OProcess___write(val_t p0, val_t p1){
 }
 void standard___exec___OProcess___init(val_t p0, val_t p1, val_t p2, int* init_table){
   int itpos5 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_standard___exec___OProcess].i;
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
   val_t tmp;
   if (init_table[itpos5]) return;
@@ -549,14 +559,16 @@ void standard___exec___OProcess___init(val_t p0, val_t p1, val_t p2, int* init_t
   fra.me.line = 112;
   fra.me.meth = LOCATE_standard___exec___OProcess___init;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
+  fra.me.REG_size = 4;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   /* ./../lib/standard//exec.nit:112 */
+  fra.me.REG[3] = fra.me.REG[0];
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[2], COLOR_standard___collection___array___Array, ID_standard___collection___array___Array)) /*cast Array[String]*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -564,17 +576,17 @@ void standard___exec___OProcess___init(val_t p0, val_t p1, val_t p2, int* init_t
   }
   /* ./../lib/standard//exec.nit:114 */
   REGB0 = TAG_Int(1);
-  CALL_standard___exec___Process___execute(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], REGB0, init_table);
+  CALL_standard___exec___Process___execute(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1], fra.me.REG[2], REGB0, init_table);
   /* ./../lib/standard//exec.nit:115 */
-  REGB0 = TAG_Bool(ATTR_standard___exec___Process____data(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_standard___exec___Process____data(fra.me.REG[3])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_data", LOCATE_standard___exec, 115);
   }
-  fra.me.REG[2] = ATTR_standard___exec___Process____data(fra.me.REG[0]);
+  fra.me.REG[2] = ATTR_standard___exec___Process____data(fra.me.REG[3]);
   REGB0 = CALL_standard___exec___NativeProcess___in_fd(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[2] = NEW_FDOStream_standard___stream___FDOStream___init(REGB0);
-  ATTR_standard___exec___OProcess____out(fra.me.REG[0]) = fra.me.REG[2];
+  ATTR_standard___exec___OProcess____out(fra.me.REG[3]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos5] = 1;
   return;
@@ -798,13 +810,13 @@ val_t standard___exec___NativeProcess___id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___exec;
-  fra.me.line = 166;
+  fra.me.line = 165;
   fra.me.meth = LOCATE_standard___exec___NativeProcess___id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//exec.nit:166 */
+  /* ./../lib/standard//exec.nit:165 */
   REGB0 = NativeProcess_id___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -815,13 +827,13 @@ val_t standard___exec___NativeProcess___is_finished(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___exec;
-  fra.me.line = 167;
+  fra.me.line = 166;
   fra.me.meth = LOCATE_standard___exec___NativeProcess___is_finished;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//exec.nit:167 */
+  /* ./../lib/standard//exec.nit:166 */
   REGB0 = NativeProcess_is_finished___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -832,13 +844,13 @@ val_t standard___exec___NativeProcess___status(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___exec;
-  fra.me.line = 168;
+  fra.me.line = 167;
   fra.me.meth = LOCATE_standard___exec___NativeProcess___status;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//exec.nit:168 */
+  /* ./../lib/standard//exec.nit:167 */
   REGB0 = NativeProcess_status___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -848,13 +860,13 @@ void standard___exec___NativeProcess___wait(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___exec;
-  fra.me.line = 169;
+  fra.me.line = 168;
   fra.me.meth = LOCATE_standard___exec___NativeProcess___wait;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//exec.nit:169 */
+  /* ./../lib/standard//exec.nit:168 */
   NativeProcess_wait___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
@@ -865,13 +877,13 @@ val_t standard___exec___NativeProcess___in_fd(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___exec;
-  fra.me.line = 171;
+  fra.me.line = 170;
   fra.me.meth = LOCATE_standard___exec___NativeProcess___in_fd;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//exec.nit:171 */
+  /* ./../lib/standard//exec.nit:170 */
   REGB0 = NativeProcess_in_fd___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -882,13 +894,13 @@ val_t standard___exec___NativeProcess___out_fd(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___exec;
-  fra.me.line = 172;
+  fra.me.line = 171;
   fra.me.meth = LOCATE_standard___exec___NativeProcess___out_fd;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//exec.nit:172 */
+  /* ./../lib/standard//exec.nit:171 */
   REGB0 = NativeProcess_out_fd___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -899,13 +911,13 @@ val_t standard___exec___NativeProcess___err_fd(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___exec;
-  fra.me.line = 173;
+  fra.me.line = 172;
   fra.me.meth = LOCATE_standard___exec___NativeProcess___err_fd;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//exec.nit:173 */
+  /* ./../lib/standard//exec.nit:172 */
   REGB0 = NativeProcess_err_fd___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;

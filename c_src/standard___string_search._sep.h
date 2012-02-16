@@ -46,6 +46,8 @@ extern const int SFT_standard___string_search[];
 #define CALL_standard___string_search___String___search_all(recv) ((standard___string_search___String___search_all_t)CALL((recv), (SFT_standard___string_search[11] + 2)))
 #define CALL_standard___string_search___String___split_with(recv) ((standard___string_search___String___split_with_t)CALL((recv), (SFT_standard___string_search[11] + 3)))
 #define CALL_standard___string_search___String___split(recv) ((standard___string_search___String___split_t)CALL((recv), (SFT_standard___string_search[11] + 4)))
+#define CALL_standard___string_search___String___replace(recv) ((standard___string_search___String___replace_t)CALL((recv), (SFT_standard___string_search[11] + 5)))
+#define CALL_standard___string_search___String___html_escape(recv) ((standard___string_search___String___html_escape_t)CALL((recv), (SFT_standard___string_search[11] + 6)))
 static const char * const LOCATE_standard___string_search___Pattern___search_index_in = "string_search::Pattern::search_index_in";
 val_t standard___string_search___Pattern___search_index_in(val_t p0, val_t p1, val_t p2);
 typedef val_t (*standard___string_search___Pattern___search_index_in_t)(val_t p0, val_t p1, val_t p2);
@@ -129,6 +131,12 @@ typedef val_t (*standard___string_search___String___split_with_t)(val_t p0, val_
 static const char * const LOCATE_standard___string_search___String___split = "string_search::String::split";
 val_t standard___string_search___String___split(val_t p0);
 typedef val_t (*standard___string_search___String___split_t)(val_t p0);
+static const char * const LOCATE_standard___string_search___String___replace = "string_search::String::replace";
+val_t standard___string_search___String___replace(val_t p0, val_t p1, val_t p2);
+typedef val_t (*standard___string_search___String___replace_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_standard___string_search___String___html_escape = "string_search::String::html_escape";
+val_t standard___string_search___String___html_escape(val_t p0);
+typedef val_t (*standard___string_search___String___html_escape_t)(val_t p0);
 val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1);
 val_t NEW_String_standard___string___String___from_cstring(val_t p0);
 #endif

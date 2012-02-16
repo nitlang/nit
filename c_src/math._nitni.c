@@ -134,6 +134,19 @@ return___nitni = kernel_Float_Float_rand_0( recv___nitni );
 return___nit = BOX_Float(return___nitni);
 return return___nit;
 }
+/* out/indirect function for math::Float::hypot_with */
+val_t Float_hypot_with___out( val_t recv, val_t b )
+{
+float recv___nitni;
+float b___nitni;
+float return___nitni;
+val_t return___nit;
+recv___nitni = UNBOX_Float(recv);
+b___nitni = UNBOX_Float(b);
+return___nitni = hypotf( recv___nitni, b___nitni );
+return___nit = BOX_Float(return___nitni);
+return return___nit;
+}
 /* out/indirect function for math::Object::atan2 */
 val_t Object_atan2___out( val_t recv, val_t x, val_t y )
 {

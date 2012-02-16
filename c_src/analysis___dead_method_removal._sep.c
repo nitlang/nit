@@ -90,7 +90,7 @@ void analysis___dead_method_removal___Program___optimize_dead_methods(val_t p0){
       /* ./analysis//dead_method_removal.nit:32 */
       REGB0 = CALL_analysis___dead_method_removal___Program___nb_removed_iroutines(closctx->REG[0])(closctx->REG[0]);
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:218 */
+      /* ./../lib/standard//kernel.nit:235 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
       /* ./analysis//dead_method_removal.nit:32 */
       ATTR_analysis___dead_method_removal___Program____nb_removed_iroutines(closctx->REG[0]) = REGB1;
@@ -98,7 +98,7 @@ void analysis___dead_method_removal___Program___optimize_dead_methods(val_t p0){
       /* ./analysis//dead_method_removal.nit:34 */
       REGB1 = CALL_analysis___dead_method_removal___Program___nb_not_removed_iroutines(closctx->REG[0])(closctx->REG[0]);
       REGB0 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:218 */
+      /* ./../lib/standard//kernel.nit:235 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
       /* ./analysis//dead_method_removal.nit:34 */
       ATTR_analysis___dead_method_removal___Program____nb_not_removed_iroutines(closctx->REG[0]) = REGB0;

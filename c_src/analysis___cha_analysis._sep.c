@@ -483,45 +483,51 @@ void analysis___cha_analysis___ChaVisitor___visit_icode(val_t p0, val_t p1){
       fra.me.REG[5] = CALL_metamodel___static_type___MMType___for_module(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[5]);
       fra.me.REG[5] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[5])(fra.me.REG[5]);
       /* ./analysis//cha_analysis.nit:103 */
-      REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+      fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[5])(fra.me.REG[5]);
+      REGB1 = CALL_metamodel___abstractmetamodel___MMGlobalClass___is_extern(fra.me.REG[6])(fra.me.REG[6]);
+      REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 103);
+        /* ./analysis//cha_analysis.nit:104 */
+        REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+        if (UNTAG_Bool(REGB1)) {
+          nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 104);
+        }
+        fra.me.REG[6] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
+        fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[6])(fra.me.REG[6]);
+        fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
+        REGB1 = TAG_Bool(VAL_ISA(fra.me.REG[6], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
+        if (UNTAG_Bool(REGB1)) {
+        } else {
+          nit_abort("Cast failed", NULL, LOCATE_analysis___cha_analysis, 104);
+        }
+        /* ./analysis//cha_analysis.nit:105 */
+        fra.me.REG[5] = CALL_program___MMLocalClass___new_instance_iroutine(fra.me.REG[5])(fra.me.REG[5]);
+        fra.me.REG[6] = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
+        /* ./analysis//cha_analysis.nit:106 */
+        fra.me.REG[5] = CALL_analysis___cha_analysis___ChaVisitor___builder(fra.me.REG[2])(fra.me.REG[2]);
+        REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
+        if (UNTAG_Bool(REGB1)) {
+          nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 106);
+        }
+        fra.me.REG[4] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
+        REGB1 = TAG_Bool(false);
+        REGB0 = TAG_Bool(false);
+        CALL_analysis___cha_analysis___ChaBuilder___add_search(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4], fra.me.REG[6], REGB1, REGB0);
       }
-      fra.me.REG[6] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
-      fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[6])(fra.me.REG[6]);
-      fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
-      REGB1 = TAG_Bool(VAL_ISA(fra.me.REG[6], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
-      if (UNTAG_Bool(REGB1)) {
-      } else {
-        nit_abort("Cast failed", NULL, LOCATE_analysis___cha_analysis, 103);
-      }
-      /* ./analysis//cha_analysis.nit:104 */
-      fra.me.REG[5] = CALL_program___MMLocalClass___new_instance_iroutine(fra.me.REG[5])(fra.me.REG[5]);
-      fra.me.REG[6] = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
-      /* ./analysis//cha_analysis.nit:105 */
-      fra.me.REG[5] = CALL_analysis___cha_analysis___ChaVisitor___builder(fra.me.REG[2])(fra.me.REG[2]);
-      REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
-      if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 105);
-      }
-      fra.me.REG[4] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
-      REGB1 = TAG_Bool(false);
-      REGB0 = TAG_Bool(false);
-      CALL_analysis___cha_analysis___ChaBuilder___add_search(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4], fra.me.REG[6], REGB1, REGB0);
     } else {
-      /* ./analysis//cha_analysis.nit:106 */
+      /* ./analysis//cha_analysis.nit:108 */
       REGB0 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___ISuper, ID_icode___icode_base___ISuper)) /*cast ISuper*/;
       if (UNTAG_Bool(REGB0)) {
-        /* ./analysis//cha_analysis.nit:107 */
+        /* ./analysis//cha_analysis.nit:109 */
         fra.me.REG[6] = CALL_analysis___cha_analysis___ChaVisitor___builder(fra.me.REG[2])(fra.me.REG[2]);
         REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
-          nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 107);
+          nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 109);
         }
         fra.me.REG[4] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
         REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
-          nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 107);
+          nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 109);
         }
         fra.me.REG[5] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
         fra.me.REG[5] = CALL_icode___icode_base___MMMethod___iroutine(fra.me.REG[5])(fra.me.REG[5]);
@@ -529,19 +535,19 @@ void analysis___cha_analysis___ChaVisitor___visit_icode(val_t p0, val_t p1){
         REGB1 = TAG_Bool(true);
         CALL_analysis___cha_analysis___ChaBuilder___add_search(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[4], fra.me.REG[5], REGB0, REGB1);
       } else {
-        /* ./analysis//cha_analysis.nit:108 */
+        /* ./analysis//cha_analysis.nit:110 */
         REGB1 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___ICall, ID_icode___icode_base___ICall)) /*cast ICall*/;
         if (UNTAG_Bool(REGB1)) {
-          /* ./analysis//cha_analysis.nit:109 */
+          /* ./analysis//cha_analysis.nit:111 */
           fra.me.REG[5] = CALL_analysis___cha_analysis___ChaVisitor___builder(fra.me.REG[2])(fra.me.REG[2]);
           REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
           if (UNTAG_Bool(REGB1)) {
-            nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 109);
+            nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 111);
           }
           fra.me.REG[4] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
           REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
           if (UNTAG_Bool(REGB1)) {
-            nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 109);
+            nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 111);
           }
           fra.me.REG[6] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
           fra.me.REG[6] = CALL_icode___icode_base___MMMethod___iroutine(fra.me.REG[6])(fra.me.REG[6]);
@@ -549,47 +555,47 @@ void analysis___cha_analysis___ChaVisitor___visit_icode(val_t p0, val_t p1){
           REGB0 = TAG_Bool(false);
           CALL_analysis___cha_analysis___ChaBuilder___add_search(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4], fra.me.REG[6], REGB1, REGB0);
         } else {
-          /* ./analysis//cha_analysis.nit:110 */
+          /* ./analysis//cha_analysis.nit:112 */
           REGB0 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___ICheckInstance, ID_icode___icode_base___ICheckInstance)) /*cast ICheckInstance*/;
           if (UNTAG_Bool(REGB0)) {
-            /* ./analysis//cha_analysis.nit:111 */
+            /* ./analysis//cha_analysis.nit:113 */
             REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
             if (UNTAG_Bool(REGB0)) {
-              nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 111);
+              nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 113);
             }
             fra.me.REG[6] = CALL_icode___icode_base___ICheckInstance___stype(fra.me.REG[3])(fra.me.REG[3]);
-            /* ./analysis//cha_analysis.nit:112 */
+            /* ./analysis//cha_analysis.nit:114 */
             fra.me.REG[4] = CALL_analysis___cha_analysis___ChaVisitor___builder(fra.me.REG[2])(fra.me.REG[2]);
             fra.me.REG[4] = CALL_analysis___cha_analysis___ChaBuilder___program(fra.me.REG[4])(fra.me.REG[4]);
             fra.me.REG[4] = CALL_program___Program___main_module(fra.me.REG[4])(fra.me.REG[4]);
             fra.me.REG[4] = CALL_metamodel___static_type___MMType___for_module(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[4]);
             fra.me.REG[4] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[4])(fra.me.REG[4]);
-            /* ./analysis//cha_analysis.nit:113 */
+            /* ./analysis//cha_analysis.nit:115 */
             fra.me.REG[4] = CALL_program___MMLocalClass___checknew_iroutine(fra.me.REG[4])(fra.me.REG[4]);
-            /* ./analysis//cha_analysis.nit:114 */
+            /* ./analysis//cha_analysis.nit:116 */
             fra.me.REG[6] = CALL_analysis___cha_analysis___ChaVisitor___builder(fra.me.REG[2])(fra.me.REG[2]);
             REGB0 = TAG_Bool(true);
             REGB1 = TAG_Bool(false);
             CALL_analysis___cha_analysis___ChaBuilder___add_search(fra.me.REG[6])(fra.me.REG[6], NIT_NULL, fra.me.REG[4], REGB0, REGB1);
           } else {
-            /* ./analysis//cha_analysis.nit:115 */
+            /* ./analysis//cha_analysis.nit:117 */
             REGB1 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___IInitAttributes, ID_icode___icode_base___IInitAttributes)) /*cast IInitAttributes*/;
             if (UNTAG_Bool(REGB1)) {
-              /* ./analysis//cha_analysis.nit:116 */
+              /* ./analysis//cha_analysis.nit:118 */
               REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
               if (UNTAG_Bool(REGB1)) {
-		nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 116);
+		nit_abort("Reciever is null", NULL, LOCATE_analysis___cha_analysis, 118);
               }
               fra.me.REG[3] = CALL_icode___icode_base___IInitAttributes___stype(fra.me.REG[3])(fra.me.REG[3]);
-              /* ./analysis//cha_analysis.nit:117 */
+              /* ./analysis//cha_analysis.nit:119 */
               fra.me.REG[4] = CALL_analysis___cha_analysis___ChaVisitor___builder(fra.me.REG[2])(fra.me.REG[2]);
               fra.me.REG[4] = CALL_analysis___cha_analysis___ChaBuilder___program(fra.me.REG[4])(fra.me.REG[4]);
               fra.me.REG[4] = CALL_program___Program___main_module(fra.me.REG[4])(fra.me.REG[4]);
               fra.me.REG[4] = CALL_metamodel___static_type___MMType___for_module(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
               fra.me.REG[4] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[4])(fra.me.REG[4]);
-              /* ./analysis//cha_analysis.nit:118 */
+              /* ./analysis//cha_analysis.nit:120 */
               fra.me.REG[4] = CALL_program___MMLocalClass___init_var_iroutine(fra.me.REG[4])(fra.me.REG[4]);
-              /* ./analysis//cha_analysis.nit:119 */
+              /* ./analysis//cha_analysis.nit:121 */
               fra.me.REG[2] = CALL_analysis___cha_analysis___ChaVisitor___builder(fra.me.REG[2])(fra.me.REG[2]);
               REGB1 = TAG_Bool(true);
               REGB0 = TAG_Bool(false);
@@ -600,7 +606,7 @@ void analysis___cha_analysis___ChaVisitor___visit_icode(val_t p0, val_t p1){
       }
     }
   }
-  /* ./analysis//cha_analysis.nit:121 */
+  /* ./analysis//cha_analysis.nit:123 */
   CALL_SUPER_analysis___cha_analysis___ChaVisitor___visit_icode(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -612,7 +618,7 @@ void analysis___cha_analysis___ChaVisitor___init(val_t p0, val_t p1, int* init_t
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_analysis___cha_analysis;
-  fra.me.line = 124;
+  fra.me.line = 126;
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -621,10 +627,10 @@ void analysis___cha_analysis___ChaVisitor___init(val_t p0, val_t p1, int* init_t
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//cha_analysis.nit:124 */
+  /* ./analysis//cha_analysis.nit:126 */
   fra.me.REG[2] = fra.me.REG[0];
   CALL_icode___icode_tools___ICodeVisitor___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./analysis//cha_analysis.nit:126 */
+  /* ./analysis//cha_analysis.nit:128 */
   ATTR_analysis___cha_analysis___ChaVisitor____builder(fra.me.REG[2]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;

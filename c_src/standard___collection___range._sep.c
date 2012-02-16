@@ -265,6 +265,7 @@ val_t standard___collection___range___Range___length(val_t p0){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t REGB1;
+  val_t REGB2;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___range;
@@ -291,7 +292,12 @@ val_t standard___collection___range___Range___length(val_t p0){
   REGB0 = CALL_standard___kernel___Discrete___distance(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   /* ./../lib/standard//collection//range.nit:59 */
   REGB1 = TAG_Int(0);
-  /* ./../lib/standard//kernel.nit:217 */
+  REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+  if (UNTAG_Bool(REGB2)) {
+  } else {
+    nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+  }
+  /* ./../lib/standard//kernel.nit:234 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
   /* ./../lib/standard//collection//range.nit:59 */
   if (UNTAG_Bool(REGB1)) {
