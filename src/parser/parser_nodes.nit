@@ -34,6 +34,11 @@ end
 # Ancestor of all tokens
 abstract class Token
 	super ANode
+	fun text: String is abstract
+
+	redef fun to_s: String do
+		return "'{text}'"
+	end
 end
 
 # Ancestor of all productions
@@ -43,156 +48,167 @@ abstract class Prod
 end
 class TEol
 	super Token
+	redef fun to_s
+	do
+		return "end of line"
+	end
 end
 class TComment
 	super Token
 end
-class TKwmodule
+class TokenKeyword
 	super Token
+	redef fun to_s
+	do
+		return "keyword '{text}'"
+	end
+end
+class TKwmodule
+	super TokenKeyword
 end
 class TKwimport
-	super Token
+	super TokenKeyword
 end
 class TKwclass
-	super Token
+	super TokenKeyword
 end
 class TKwabstract
-	super Token
+	super TokenKeyword
 end
 class TKwinterface
-	super Token
+	super TokenKeyword
 end
 class TKwenum
-	super Token
+	super TokenKeyword
 end
 class TKwspecial
-	super Token
+	super TokenKeyword
 end
 class TKwend
-	super Token
+	super TokenKeyword
 end
 class TKwmeth
-	super Token
+	super TokenKeyword
 end
 class TKwtype
-	super Token
+	super TokenKeyword
 end
 class TKwinit
-	super Token
+	super TokenKeyword
 end
 class TKwredef
-	super Token
+	super TokenKeyword
 end
 class TKwis
-	super Token
+	super TokenKeyword
 end
 class TKwdo
-	super Token
+	super TokenKeyword
 end
 class TKwreadable
-	super Token
+	super TokenKeyword
 end
 class TKwwritable
-	super Token
+	super TokenKeyword
 end
 class TKwvar
-	super Token
+	super TokenKeyword
 end
 class TKwintern
-	super Token
+	super TokenKeyword
 end
 class TKwextern
-	super Token
+	super TokenKeyword
 end
 class TKwprotected
-	super Token
+	super TokenKeyword
 end
 class TKwprivate
-	super Token
+	super TokenKeyword
 end
 class TKwintrude
-	super Token
+	super TokenKeyword
 end
 class TKwif
-	super Token
+	super TokenKeyword
 end
 class TKwthen
-	super Token
+	super TokenKeyword
 end
 class TKwelse
-	super Token
+	super TokenKeyword
 end
 class TKwwhile
-	super Token
+	super TokenKeyword
 end
 class TKwloop
-	super Token
+	super TokenKeyword
 end
 class TKwfor
-	super Token
+	super TokenKeyword
 end
 class TKwin
-	super Token
+	super TokenKeyword
 end
 class TKwand
-	super Token
+	super TokenKeyword
 end
 class TKwor
-	super Token
+	super TokenKeyword
 end
 class TKwnot
-	super Token
+	super TokenKeyword
 end
 class TKwreturn
-	super Token
+	super TokenKeyword
 end
 class TKwcontinue
-	super Token
+	super TokenKeyword
 end
 class TKwbreak
-	super Token
+	super TokenKeyword
 end
 class TKwabort
-	super Token
+	super TokenKeyword
 end
 class TKwassert
-	super Token
+	super TokenKeyword
 end
 class TKwnew
-	super Token
+	super TokenKeyword
 end
 class TKwisa
-	super Token
+	super TokenKeyword
 end
 class TKwonce
-	super Token
+	super TokenKeyword
 end
 class TKwsuper
-	super Token
+	super TokenKeyword
 end
 class TKwself
-	super Token
+	super TokenKeyword
 end
 class TKwtrue
-	super Token
+	super TokenKeyword
 end
 class TKwfalse
-	super Token
+	super TokenKeyword
 end
 class TKwnull
-	super Token
+	super TokenKeyword
 end
 class TKwas
-	super Token
+	super TokenKeyword
 end
 class TKwnullable
-	super Token
+	super TokenKeyword
 end
 class TKwisset
-	super Token
+	super TokenKeyword
 end
 class TKwlabel
-	super Token
+	super TokenKeyword
 end
 class TOpar
 	super Token
@@ -218,92 +234,118 @@ end
 class TAssign
 	super Token
 end
-class TPluseq
+class TokenOperator
 	super Token
+	redef fun to_s
+	do
+		return "operator '{text}'"
+	end
+end
+class TPluseq
+	super TokenOperator
 end
 class TMinuseq
-	super Token
+	super TokenOperator
 end
 class TDotdotdot
-	super Token
+	super TokenOperator
 end
 class TDotdot
-	super Token
+	super TokenOperator
 end
 class TDot
-	super Token
+	super TokenOperator
 end
 class TPlus
-	super Token
+	super TokenOperator
 end
 class TMinus
-	super Token
+	super TokenOperator
 end
 class TStar
-	super Token
+	super TokenOperator
 end
 class TSlash
-	super Token
+	super TokenOperator
 end
 class TPercent
-	super Token
+	super TokenOperator
 end
 class TEq
-	super Token
+	super TokenOperator
 end
 class TNe
-	super Token
+	super TokenOperator
 end
 class TLt
-	super Token
+	super TokenOperator
 end
 class TLe
-	super Token
+	super TokenOperator
 end
 class TLl
-	super Token
+	super TokenOperator
 end
 class TGt
-	super Token
+	super TokenOperator
 end
 class TGe
-	super Token
+	super TokenOperator
 end
 class TGg
-	super Token
+	super TokenOperator
 end
 class TStarship
-	super Token
+	super TokenOperator
 end
 class TBang
-	super Token
+	super TokenOperator
 end
 class TClassid
 	super Token
+	redef fun to_s
+	do
+		do return "type identifier '{text}'"
+	end
 end
 class TId
 	super Token
+	redef fun to_s
+	do
+		do return "identifier '{text}'"
+	end
 end
 class TAttrid
 	super Token
+	redef fun to_s
+	do
+		do return "attribute '{text}'"
+	end
+end
+class TokenLiteral
+	super Token
+	redef fun to_s
+	do
+		do return "literal value '{text}'"
+	end
 end
 class TNumber
-	super Token
+	super TokenLiteral
 end
 class TFloat
-	super Token
+	super TokenLiteral
 end
 class TChar
-	super Token
+	super TokenLiteral
 end
 class TString
-	super Token
+	super TokenLiteral
 end
 class TStartString
-	super Token
+	super TokenLiteral
 end
 class TMidString
-	super Token
+	super TokenLiteral
 end
 class TEndString
 	super Token
@@ -311,6 +353,10 @@ end
 class EOF
 	super Token
 private init noinit do end
+	redef fun to_s
+	do
+		return "end of file"
+	end
 end
 class AError
 	super EOF

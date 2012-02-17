@@ -6,13 +6,9 @@ intrude import parser_nodes
 private import tables
 
 redef class Token
-    readable var _text: String
+    redef readable var _text: String
 
     fun parser_index: Int is abstract
-
-    redef fun to_s: String do
-        return "'{_text}'"
-    end
 end
 
 redef class TEol
