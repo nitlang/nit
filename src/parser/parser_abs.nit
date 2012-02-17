@@ -374,6 +374,7 @@ class AStdClassdef
     readable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
     readable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
     readable var _n_propdefs: List[APropdef] = new List[APropdef]
+    readable var _n_kwend: TKwend
 end
 class ATopClassdef
 	super AClassdef
@@ -631,6 +632,7 @@ end
 class ABlockExpr
 	super AExpr
     readable var _n_expr: List[AExpr] = new List[AExpr]
+    readable var _n_kwend: nullable TKwend = null
 end
 class AVardeclExpr
 	super AExpr

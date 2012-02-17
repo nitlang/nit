@@ -185,7 +185,7 @@ implicit_main_meth {-> propdef}
 
 /* CLASSES *******************************************************************/
 classdef
-	= [doc]:no redef visibility classkind no classid formaldefs? [specials]:special* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], [specials.superclass], [propdefs.propdef])};
+	= [doc]:no redef visibility classkind no classid formaldefs? [specials]:special* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], [specials.superclass], [propdefs.propdef], kwend)};
 redef {-> kwredef?}
 	= kwredef? {-> kwredef};
 classkind
@@ -332,15 +332,17 @@ typing {-> type}
 
 /* STATMENTS *****************************************************************/
 stmtso~withelse~withend {-> expr?}
-	= {block} n stmtsn kwend {-> stmtsn.expr}
-	| {emptyblock} n kwend {-> New expr.block([])}
-	| {emptyoneline} kwend {-> New expr.block([])}
+	= {block} n stmtsnend {-> stmtsnend.expr}
+	| {emptyblock} n kwend {-> New expr.block([], kwend)}
+	| {emptyoneline} kwend {-> New expr.block([], kwend)}
 !withend| {oneline} stmt~withelse {-> stmt~withelse.expr}
 	;
 stmts {-> expr}
-	= stmt stmts_tail* {-> New expr.block([stmt.expr, stmts_tail.expr])};
+	= stmt stmts_tail* {-> New expr.block([stmt.expr, stmts_tail.expr], Null)};
 stmtsn {-> expr}
-	= stmt stmts_tail* n {-> New expr.block([stmt.expr, stmts_tail.expr])};
+	= stmt stmts_tail* n {-> New expr.block([stmt.expr, stmts_tail.expr], Null)};
+stmtsnend {-> expr}
+	= stmt stmts_tail* n kwend {-> New expr.block([stmt.expr, stmts_tail.expr], kwend)};
 stmts_tail {-> expr}
 	= n stmt {-> stmt.expr};
 stmt~withelse {-> expr}
@@ -418,7 +420,7 @@ if~withelse {-> expr}
 	;
 elsepartblock {-> expr?}
 	= {else} kwelse stmtso {-> stmtso.expr}
-	| {empty} kwend {-> Null}
+	| {empty} kwend {-> New expr.block([], kwend)}
 	;
 
 loop~withelse {-> expr}
@@ -625,7 +627,7 @@ visibility
 	| {intrude} kwintrude
 	;
 
-classdef= {std} doc? kwredef? visibility classkind [id]:classid? [formaldefs]:formaldef* [superclasses]:superclass* [propdefs]:propdef*
+classdef= {std} doc? kwredef? visibility classkind [id]:classid? [formaldefs]:formaldef* [superclasses]:superclass* [propdefs]:propdef* kwend
 	| {top} [propdefs]:propdef*
 	| {main} [propdefs]:propdef*
 	;
@@ -670,7 +672,7 @@ type	= kwnullable? [id]:classid [types]:type*;
 
 label = kwlabel id;
 
-expr	= {block} expr* 
+expr	= {block} expr* kwend? 
 	| {vardecl} kwvar id type? assign? expr? 
 	| {return} kwreturn? expr?
 	| {break} kwbreak label? expr?

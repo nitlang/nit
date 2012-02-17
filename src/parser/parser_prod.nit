@@ -445,7 +445,8 @@ redef class AStdClassdef
             n_id: nullable TClassid,
             n_formaldefs: Collection[Object], # Should be Collection[AFormaldef]
             n_superclasses: Collection[Object], # Should be Collection[ASuperclass]
-            n_propdefs: Collection[Object] # Should be Collection[APropdef]
+            n_propdefs: Collection[Object], # Should be Collection[APropdef]
+            n_kwend: nullable TKwend
     )
     do
         empty_init
@@ -480,6 +481,8 @@ redef class AStdClassdef
 		_n_propdefs.add(n)
 		n.parent = self
 	end
+        _n_kwend = n_kwend.as(not null)
+	n_kwend.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -570,6 +573,16 @@ redef class AStdClassdef
                 return
             end
         end
+        if _n_kwend == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwend
+                _n_kwend = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -594,6 +607,7 @@ redef class AStdClassdef
             for n in _n_propdefs do
                 v.enter_visit(n)
 	    end
+        v.enter_visit(_n_kwend)
     end
 end
 redef class ATopClassdef
@@ -3261,7 +3275,8 @@ redef class ABlockExpr
     private init empty_init do end
 
     init init_ablockexpr (
-            n_expr: Collection[Object] # Should be Collection[AExpr]
+            n_expr: Collection[Object], # Should be Collection[AExpr]
+            n_kwend: nullable TKwend
     )
     do
         empty_init
@@ -3269,6 +3284,10 @@ redef class ABlockExpr
 		assert n isa AExpr
 		_n_expr.add(n)
 		n.parent = self
+	end
+        _n_kwend = n_kwend
+	if n_kwend != null then
+		n_kwend.parent = self
 	end
     end
 
@@ -3286,6 +3305,16 @@ redef class ABlockExpr
                 return
             end
         end
+        if _n_kwend == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwend
+                _n_kwend = new_child
+	    else
+		_n_kwend = null
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -3293,6 +3322,9 @@ redef class ABlockExpr
             for n in _n_expr do
                 v.enter_visit(n)
 	    end
+        if _n_kwend != null then
+            v.enter_visit(_n_kwend.as(not null))
+        end
     end
 end
 redef class AVardeclExpr

@@ -1,1 +1,1 @@
-alt/base_for_custom_alt5.nit:37,1--39,9: Error: 'iterate' incompatible with 'for': require one procedural closure.
+alt/base_for_custom_alt5.nit:37,1--40,3: Error: 'iterate' incompatible with 'for': require one procedural closure.
