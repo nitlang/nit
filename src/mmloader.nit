@@ -244,7 +244,7 @@ class ToolContext
 		end
 
 		var libname = "{sys.program_name.dirname}/../lib"
-		if libname.file_exists then paths.add(libname)
+		if libname.file_exists then paths.add(libname.simplify_path)
 
 		if opt_log_dir.value != null then _log_directory = opt_log_dir.value.as(not null)
 		if _opt_log.value then
@@ -379,7 +379,7 @@ class ModuleLoader
 	# Try to load a new module directory
 	fun try_to_load_dir(dirname: Symbol, parent_dir: MMDirectory): nullable MMDirectory
 	do
-		var fname = "{parent_dir.path}/{dirname}/"
+		var fname = "{parent_dir.path}/{dirname}"
 		if not fname.file_exists then return null
 
 		var dir = new MMDirectory(parent_dir.full_name_for(dirname), fname, parent_dir)
@@ -399,7 +399,7 @@ class ModuleLoader
 	# filename is the result of can_handle
 	fun load_and_process_module(context: ToolContext, module_name: Symbol, dir: MMDirectory): MODULE
 	do
-		var filename = "{dir.path}/{module_name}.{file_type}"
+		var filename = "{dir.path}/{module_name}.{file_type}".simplify_path
 		var m = load_module(context, module_name, dir, filename)
 		if not context.opt_only_parse.value then process_metamodel(context, m)
 		return m

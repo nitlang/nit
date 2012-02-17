@@ -45,8 +45,9 @@ redef class MMSrcModule
 			native_header = "{directory.path}/{name}_nit.h"
 		end
 		if native_header.file_exists then
-			v.body.add( "#include \"{native_header.path_from_parent}\"\n" )
-			v.header.add( "#include \"{native_header.path_from_parent}\"\n" )
+			var path = "..".join_path(native_header).simplify_path
+			v.body.add( "#include \"{path}\"\n" )
+			v.header.add( "#include \"{path}\"\n" )
 		end
 
 		for local_class in local_classes do
@@ -309,21 +310,6 @@ class FrontierVisitor
 		stream = new OFStream.open( path )
 		body.write_to_stream( stream )
 		stream.close
-	end
-end
-
-redef class String
-	# return path from one level deeper
-	# could be moved to stdlib.file
-	fun path_from_parent : String
-	do
-		if self[0] == '/' # is_absolute
-		then
-			return self
-		else
-			return "../{self}"
-		end
-
 	end
 end
 

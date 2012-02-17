@@ -73,7 +73,7 @@ class NitCompiler
 		compdir = opt_compdir.value
 		if compdir == null then
 			var dir = once ("NIT_COMPDIR".to_symbol).environ
-			if not dir.is_empty then 
+			if not dir.is_empty then
 				compdir = dir
 			end
 			if compdir == null then
@@ -81,11 +81,12 @@ class NitCompiler
 			end
 		end
 		compdir += ext_prefix
+		compdir = compdir.simplify_path
 
 		clibdir = opt_clibdir.value
 		if clibdir == null then
 			var dir = once ("NIT_DIR".to_symbol).environ
-			if dir.is_empty then 
+			if dir.is_empty then
 				dir = "{sys.program_name.dirname}/../clib"
 				if dir.file_exists then clibdir = dir
 			else
@@ -96,11 +97,12 @@ class NitCompiler
 				fatal_error(null, "Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR.")
 			end
 		end
-		bindir = opt_bindir.value
+		clibdir = clibdir.simplify_path
 
+		bindir = opt_bindir.value
 		if bindir == null then
 			var dir = once ("NIT_DIR".to_symbol).environ
-			if dir.is_empty then 
+			if dir.is_empty then
 				dir = "{sys.program_name.dirname}/../bin"
 				if dir.file_exists then bindir = dir
 			else
@@ -111,6 +113,7 @@ class NitCompiler
 				fatal_error(null, "Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR.")
 			end
 		end
+		bindir = bindir.simplify_path
 	end
 
 	redef fun perform_work(mods)
