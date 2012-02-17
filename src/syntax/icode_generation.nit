@@ -693,7 +693,7 @@ redef class AAssertExpr
 		if id == null then
 			v.add_abort("Assert failed")
 		else
-			v.add_abort("Assert %s  failed", id.to_s)
+			v.add_abort("Assert '%s' failed", id.text.to_s)
 		end
 		v.seq = seq_old
 		return null
