@@ -76,8 +76,15 @@ class Message
 			else
 				cend = location.column_end
 			end
-			var lmid = string.substring(line_start + location.column_start - 1, cend - location.column_start + 1)
-			var lend = string.substring(line_start + cend, line_end - line_start - cend + 1)
+			var lmid
+			var lend
+			if line_start + cend <= string.length then
+				lmid = string.substring(line_start + location.column_start - 1, cend - location.column_start + 1)
+				lend = string.substring(line_start + cend, line_end - line_start - cend + 1)
+			else
+				lmid = ""
+				lend = ""
+			end
 			var indent = new Buffer
 			for j in [line_start..line_start+location.column_start-1[ do
 				if string[j] == '\t' then
