@@ -249,7 +249,7 @@ redef class String
 		for x in a do
 			if x == "." then continue
 			if x == "" and not a2.is_empty then continue
-			if x == ".." and not a2.is_empty then
+			if x == ".." and not a2.is_empty and a2.last != ".." then
 				a2.pop
 				continue
 			end
