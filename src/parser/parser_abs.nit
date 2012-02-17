@@ -290,6 +290,12 @@ end
 class TEndString
 	super Token
 end
+class TBadChar
+	super Token
+end
+class TBadString
+	super Token
+end
 class EOF
 	super Token
 private init noinit do end

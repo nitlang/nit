@@ -350,6 +350,20 @@ end
 class TEndString
 	super Token
 end
+class TBadString
+	super Token
+	redef fun to_s
+	do
+		do return "malformed string {text}"
+	end
+end
+class TBadChar
+	super Token
+	redef fun to_s
+	do
+		do return "malformed character {text}"
+	end
+end
 class EOF
 	super Token
 private init noinit do end

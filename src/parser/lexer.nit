@@ -1168,11 +1168,37 @@ redef class TEndString
     end
 end
 
+redef class TBadChar
+    redef fun parser_index: Int
+    do
+	return 89
+    end
+
+    init init_tk(text: String, loc: Location)
+    do
+        _text = text
+		_location = loc
+    end
+end
+
+redef class TBadString
+    redef fun parser_index: Int
+    do
+	return 90
+    end
+
+    init init_tk(text: String, loc: Location)
+    do
+        _text = text
+		_location = loc
+    end
+end
+
 
 redef class EOF
     redef fun parser_index: Int
     do
-	return 89
+	return 91
     end
 
     init(loc: Location)
@@ -1626,6 +1652,14 @@ class Lexer
 					if accept_token == 89 then
 						var token_text = string.substring(start_stream_pos, accept_length)
 						return new TEndString.init_tk(token_text, location)
+					end
+					if accept_token == 90 then
+						var token_text = string.substring(start_stream_pos, accept_length)
+						return new TBadChar.init_tk(token_text, location)
+					end
+					if accept_token == 91 then
+						var token_text = string.substring(start_stream_pos, accept_length)
+						return new TBadString.init_tk(token_text, location)
 					end
 				else
 					_stream_pos = sp

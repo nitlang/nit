@@ -142,11 +142,13 @@ attrid = '_' lowercase letter*;
 
 number = digit+;
 float = digit* '.' digit+;
-char = ''' [any - ''']* ''';
+char = (''' [[any - '''] - '\'] ''') | (''' '\' any ''');
 string = '"' str_body '"';
 start_string = '"' str_body '{';
 mid_string = '}' str_body '{';
 end_string = '}' str_body '"';
+bad_char = ''' '\'? any;
+bad_string = ('"'|'}') str_body;
 
 
 /*****************************************************************************/
