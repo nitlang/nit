@@ -16,60 +16,33 @@
 
 NITCOPT=
 
-all: bin/nitc bin/nitdoc doc/stdlib/index.html bin/nits
+all: tools doc/stdlib/index.html
 
 docs: doc/stdlib/index.html doc/nitc/index.html
+	cd doc; make
 
+tools:
+	cd src; make
 
-bin/nitc: c_src/nitc src/parser/parser.nit
-	@echo '***************************************************************'
-	@echo '* Compile nitc from NIT source files                          *'
-	@echo '***************************************************************'
-	src/git-gen-version.sh
-	cd src; ../c_src/nitc ${NITCOPT} --clibdir ../c_src/clib -o ../bin/nitc -O -v nitc.nit
-
-bin/nitdoc: bin/nitc
-	@echo '***************************************************************'
-	@echo '* Compile nitdoc from NIT source files                        *'
-	@echo '***************************************************************'
-	src/git-gen-version.sh
-	cd src; ../bin/nitc ${NITCOPT} -o ../bin/nitdoc -O -v nitdoc.nit
-
-bin/nits: bin/nitc
-	@echo '***************************************************************'
-	@echo '* Compile nits from NIT source files                        *'
-	@echo '***************************************************************'
-	bin/nitc ${NITCOPT} -o bin/nits -O -v src/nits.nit
-
-doc/stdlib/index.html: bin/nitdoc
+doc/stdlib/index.html: tools
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
 	bin/nitdoc lib/*.nit -d doc/stdlib --public --overview-text '<p>Documentation for the standard library of Nit</p>' --footer-text 'Nit standard library. Version '`git describe -- lib`'.'
 
-doc/nitc/index.html: bin/nitdoc
+doc/nitc/index.html: tools
 	bin/nitdoc src/nitc.nit src/nitdoc.nit -d doc/nitc --overview-text '<p>Documentation for the nit compiler</p>' --footer-text 'Nit compiler. Version '`git describe`'.'
-
-c_src/nitc: c_src/*.c c_src/*.h c_src/nitc._build.sh c_src/Makefile
-	@echo '***************************************************************'
-	@echo '* Compile nitc from C source files                            *'
-	@echo '***************************************************************'
-	cd c_src; make
-
-src/parser/parser.nit:
-	@echo '***************************************************************'
-	@echo '* Generate nit parser                                         *'
-	@echo '***************************************************************'
-	cd src/parser; make
 
 clean:
 	rm -rf -- .nit_compile 2> /dev/null || true
-	cd c_src; make clean 
-	cd src/parser; make clean 
-	cd tests; make clean 
+	cd c_src; make clean
+	cd src; make clean
+	cd doc; make clean
+	cd tests; make clean
 
-dist-clean: clean
-	cd c_src; make dist-clean
-	cd src/parser; make dist-clean
-	rm -rf -- bin/nitc bin/nitdoc doc/stdlib
-
+distclean: clean
+	rm -rf -- bin/nitc bin/nitdoc bin/nits doc/stdlib doc/nitc/ 2> /dev/null || true
+	cd c_src; make distclean
+	cd src/parser; make distclean
+	cd doc; make distclean
+	cd tests; make distclean

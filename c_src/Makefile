@@ -18,7 +18,7 @@ all:
 	sh nitc._build.sh -vv -O -o nitc
 
 clean:
-	rm -f -- *._sav[oi].* *._sav.* || true
+	rm -f -- *._sav[oi].* *._sav.* *.o 2> /dev/null || true
 
-dist-clean: clean
-	rm -f -- nitc || true
+distclean: clean
+	rm -f -- nitc 2> /dev/null || true
