@@ -258,6 +258,29 @@ redef class String
 		return a2.join("/")
 	end
 
+	# Correctly join two path using the directory separator.
+	#
+	# Using a standard "{self}/{path}" does not work when `self' is the empty string.
+	# This method ensure that the join is valid.
+	#
+	#     "hello".join_path("world") # -> "hello/world"
+	#     "hel/lo".join_path("wor/ld") # -> "hel/lo/wor/ld"
+	#     "".join_path("world") # -> "world"
+	#     "/hello".join_path("/world") # -> "/world"
+	#
+	# Note: you may want to use `simplify_path' on the result
+	#
+	# Note: I you want to join a great number of path, you can write
+	#
+	#     [p1, p2, p3, p4].join("/")
+	fun join_path(path: String): String
+	do
+		if path.is_empty then return self
+		if self.is_empty then return path
+		if path[0] == '/' then return path
+		return "{self}/{path}"
+	end
+
 	# Create a directory (and all intermediate directories if needed)
 	fun mkdir
 	do
