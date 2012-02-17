@@ -1055,6 +1055,7 @@ class AClosureDef
     readable var _n_ids: List[TId] = new List[TId]
     readable var _n_kwdo: nullable TKwdo = null
     readable var _n_expr: nullable AExpr = null
+    redef fun hot_location do return n_id.location
 end
 class AClosureId
 	super Prod
