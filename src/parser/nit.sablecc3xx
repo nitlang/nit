@@ -55,7 +55,7 @@ Tokens
 blank = (' ' | tab)+;
 
 eol = eol_helper;
-comment = '#' any* eol_helper;
+comment = '#' any* eol_helper?;
 
 kwmodule = 'package'|'module';
 kwimport = 'import';
