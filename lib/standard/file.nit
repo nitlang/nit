@@ -51,7 +51,6 @@ end
 # File Abstract Stream
 class FStream
 	super IOS
-	super NativeFileCapable
 	# The path of the file.
 	readable var _path: nullable String = null
 
@@ -73,7 +72,7 @@ class IFStream
 	fun reopen
 	do
 		if not eof then close
-		_file = io_open_read(_path.to_cstring)
+		_file = new NativeFile.io_open_read(_path.to_cstring)
 		_end_reached = false
 		_buffer_pos = 0
 		_buffer.clear
@@ -104,7 +103,7 @@ class IFStream
 	do
 		_path = path
 		prepare_buffer(10)
-		_file = io_open_read(_path.to_cstring)
+		_file = new NativeFile.io_open_read(_path.to_cstring)
 		assert cant_open_file: _file != null
 	end
 
@@ -148,7 +147,7 @@ class OFStream
 	# Open the file at `path' for writing.
 	init open(path: String)
 	do
-		_file = io_open_write(path.to_cstring)
+		_file = new NativeFile.io_open_write(path.to_cstring)
 		assert cant_open_file: _file != null
 		_path = path
 		_writable = true
@@ -163,7 +162,7 @@ end
 class Stdin
 	super IFStream
 	private init do
-		_file = native_stdin
+		_file = new NativeFile.native_stdin
 		_path = "/dev/stdin"
 		prepare_buffer(1)
 	end
@@ -172,7 +171,7 @@ end
 class Stdout
 	super OFStream
 	private init do
-		_file = native_stdout
+		_file = new NativeFile.native_stdout
 		_path = "/dev/stdout"
 		_writable = true
 	end
@@ -181,7 +180,7 @@ end
 class Stderr
 	super OFStream
 	private init do
-		_file = native_stderr
+		_file = new NativeFile.native_stderr
 		_path = "/dev/stderr"
 		_writable = true
 	end
@@ -333,14 +332,12 @@ private extern NativeFile
 	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
 	fun file_stat: FileStat is extern "file_NativeFile_NativeFile_file_stat_0"
-end
 
-private interface NativeFileCapable
-	fun io_open_read(path: NativeString): NativeFile is extern "file_NativeFileCapable_NativeFileCapable_io_open_read_1"
-	fun io_open_write(path: NativeString): NativeFile is extern "file_NativeFileCapable_NativeFileCapable_io_open_write_1"
-	fun native_stdin: NativeFile is extern "file_NativeFileCapable_NativeFileCapable_native_stdin_0"
-	fun native_stdout: NativeFile is extern "file_NativeFileCapable_NativeFileCapable_native_stdout_0"
-	fun native_stderr: NativeFile is extern "file_NativeFileCapable_NativeFileCapable_native_stderr_0"
+	new io_open_read(path: NativeString) is extern "file_NativeFileCapable_NativeFileCapable_io_open_read_1"
+	new io_open_write(path: NativeString) is extern "file_NativeFileCapable_NativeFileCapable_io_open_write_1"
+	new native_stdin is extern "file_NativeFileCapable_NativeFileCapable_native_stdin_0"
+	new native_stdout is extern "file_NativeFileCapable_NativeFileCapable_native_stdout_0"
+	new native_stderr is extern "file_NativeFileCapable_NativeFileCapable_native_stderr_0"
 end
 
 # Standard input.
