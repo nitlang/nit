@@ -19,6 +19,7 @@ package nitc
 
 import abstracttool
 import analysis
+import global
 import program
 import compiling
 import syntax
