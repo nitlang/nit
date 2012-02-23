@@ -21,6 +21,7 @@ package global
 # Global imports
 import icode
 import program
+import abstracttool
 
 # Global Analysis types
 private import instantiated_type_analysis
@@ -41,16 +42,39 @@ private import remove_out_of_init_get_test
 
 redef class ToolContext
 	readable writable var _global_callgraph: String = "rta"
-	readable writable var _no_dead_method_removal: Bool = false
-	readable writable var _no_inline_get_set: Bool = false
-	readable writable var _no_callgraph_from_init: Bool = false
-	readable writable var _no_out_of_init_get_test_removal: Bool = false
+
+	readable var _opt_global: OptionBool = new OptionBool("Use global compilation", "--global")
+	readable var _opt_global_no_STF_opt: OptionBool = new OptionBool("Do not use SFT optimization", "--no-global-SFT-optimization")
+	readable var _opt_global_no_DMR_opt: OptionBool = new OptionBool("Do not use dead method removal optimization", "--no-global-DMR-optimization")
+	readable var _opt_global_no_inline_get_set: OptionBool = new OptionBool("Do not automatically inline getters/setters", "--no-global-get-set-inlining")
+	readable var _opt_global_no_out_of_init_get_test_opt: OptionBool = new OptionBool("Do not remove get tests outside object initialization", "--no-global-OOIT-optimization")
+	readable var _opt_global_no_RFIMA: OptionBool = new OptionBool("Do not use a specialized algorithm to find reachable methods from initializers", "--no-global-RFIM-analysis")
+	readable var _opt_global_callgraph: OptionEnum = new OptionEnum(["none", "cha", "rta"], "The algorithm to use to build the callgraph", 2, "--global-callgraph")
+
+	redef init
+	do
+		super
+		option_context.add_option(opt_global, opt_global_no_STF_opt, opt_global_no_DMR_opt, opt_global_callgraph, opt_global_no_inline_get_set, opt_global_no_RFIMA, opt_global_no_out_of_init_get_test_opt)
+	end
+end
+
+redef class AbstractCompiler
+	redef fun process_options
+	do
+		# FIXME: for some reason (a bug in the metamodel obviously) redefining process_options in ToolContext does not work: the compilation goes fine but the caal-mext-method skips it.
+		super
+		global = opt_global.value
+		use_SFT_optimization = not opt_global_no_STF_opt.value
+		global_callgraph = opt_global_callgraph.value_name
+	end
 end
 
 redef class Program
 	# This method will analyse the program and store results (in global compilation only)
 	fun do_global_analysis do
 		assert tc.global
+		# Pre optimizations:
+		if not tc.opt_global_no_inline_get_set.value then inline_get_set
 
 		if tc.global_callgraph == "cha" then
 			var cha = new ChaBuilder(self)
@@ -71,28 +95,23 @@ redef class Program
 		rai_builder.work
 		rai = rai_builder.context
 
-		if not tc.no_callgraph_from_init then
+		if not tc.opt_global_no_RFIMA.value then
 			var b = new RFIMABuilder(self)
 			b.work
 			rfima = b.context
 		end
 
 		if rfima == null then rfima = new DefaultReachableFromInitMethodAnalysis
-	end
 
-	# This method will optimize the program (in global compilation only)
-	# Those are done before analysis
-	fun do_global_pre_analysis_optimizations do
-		assert tc.global
-		if not tc.no_inline_get_set then inline_get_set
-	end
+		# Post optimizations
+		if not tc.opt_global_no_DMR_opt.value then optimize_dead_methods
+		if not tc.opt_global_no_out_of_init_get_test_opt.value then optimize_out_of_init_getters
 
-	# This method will optimize the program (in global compilation only)
-	# Those are done after analysis
-	fun do_global_post_analysis_optimizations do
-		assert tc.global
-		if not tc.no_dead_method_removal then optimize_dead_methods
-		if not tc.no_out_of_init_get_test_removal then optimize_out_of_init_getters
+		# LOG
+		if tc.opt_log.value then
+			dump_global_optimizations_information(tc.log_directory)
+			dump_global_analysis_information(tc.log_directory)
+		end
 	end
 
 	fun dump_global_optimizations_information(directory_name: String) do
