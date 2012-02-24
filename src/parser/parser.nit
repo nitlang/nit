@@ -6859,8 +6859,7 @@ private class ReduceAction166
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
-					var pvisibilitynode1: nullable APublicVisibility = new APublicVisibility.init_apublicvisibility(
-					)
+					var pvisibilitynode1: nullable APublicVisibility = new APublicVisibility.init_apublicvisibility
 					node_list = pvisibilitynode1
 					p.push(p.go_to(_goto), node_list)
 	end
@@ -8606,8 +8605,7 @@ private class ReduceAction266
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
 					var tidnode3 = nodearraylist1
 					assert tidnode3 isa nullable TId
 					var pexprsnode4 = nodearraylist2
@@ -8662,8 +8660,7 @@ private class ReduceAction268
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
-					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
 					var tidnode3 = nodearraylist1
 					assert tidnode3 isa nullable TId
 					var pexprsnode4 = nodearraylist2
@@ -8756,8 +8753,7 @@ private class ReduceAction272
 					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
 					var tkwinitnode3 = nodearraylist1
 					assert tkwinitnode3 isa nullable TKwinit
 					var pexprsnode4 = nodearraylist2
@@ -9519,8 +9515,7 @@ private class ReduceAction299
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
 					var tattridnode3 = nodearraylist1
 					assert tattridnode3 isa nullable TAttrid
 					var tassignnode4 = nodearraylist2
@@ -9579,8 +9574,7 @@ private class ReduceAction301
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
 					var tidnode3 = nodearraylist1
 					assert tidnode3 isa nullable TId
 					var pexprsnode4 = nodearraylist2
@@ -9664,8 +9658,7 @@ private class ReduceAction304
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
 					var tattridnode3 = nodearraylist1
 					assert tattridnode3 isa nullable TAttrid
 					var passignopnode4 = nodearraylist2
@@ -9724,8 +9717,7 @@ private class ReduceAction306
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
 					var tidnode3 = nodearraylist1
 					assert tidnode3 isa nullable TId
 					var pexprsnode4 = nodearraylist2
@@ -10955,8 +10947,7 @@ private class ReduceAction369
 					var nodearraylist1 = p.pop
 					var tkwissetnode2 = nodearraylist1
 					assert tkwissetnode2 isa nullable TKwisset
-					var pexprnode3: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
+					var pexprnode3: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
 					var tattridnode4 = nodearraylist2
 					assert tattridnode4 isa nullable TAttrid
 					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
@@ -10995,8 +10986,7 @@ private class ReduceAction371
 	do
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
 					var tattridnode3 = nodearraylist1
 					assert tattridnode3 isa nullable TAttrid
 					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
@@ -12030,8 +12020,7 @@ private class ReduceAction708
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
-					var pexprnode1: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
-					)
+					var pexprnode1: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
 	end

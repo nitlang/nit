@@ -49,7 +49,7 @@ class RtaBuilder
 	readable var _called_methods: HashSet[MMMethod] = new HashSet[MMMethod]
 
 	init (p: Program) do
-		_context = new RtaContext()
+		_context = new RtaContext
 		_program = p
 	end
 
