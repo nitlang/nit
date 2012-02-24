@@ -2071,7 +2071,13 @@ redef class AProxyExpr
 		_is_typed = true
 		if n_expr.is_statement then return
 		_stype = n_expr.stype
+		_if_true_flow_ctx = n_expr._if_true_flow_ctx
+		_if_false_flow_ctx = n_expr._if_false_flow_ctx
 	end
+
+	redef fun is_self do return n_expr.is_self
+
+	redef fun its_variable do return n_expr.its_variable
 end
 
 redef class AOnceExpr
