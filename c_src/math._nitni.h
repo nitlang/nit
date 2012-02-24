@@ -10,7 +10,7 @@ typedef struct s_Object{
 } Object;
 #endif
 
-#include ".././../lib/standard//math_nit.h"
+#include "math_nit.h"
 
 /* out/indirect function for math::Int::rand */
 val_t Int_rand___out( val_t recv );
