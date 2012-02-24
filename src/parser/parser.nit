@@ -11292,7 +11292,17 @@ private class ReduceAction392
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode1 = nodearraylist2
+					var toparnode2 = nodearraylist1
+					assert toparnode2 isa nullable TOpar
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa nullable AExpr
+					var tcparnode4 = nodearraylist3
+					assert tcparnode4 isa nullable TCpar
+					var pexprnode1: nullable AParExpr = new AParExpr.init_aparexpr(
+						toparnode2,
+						pexprnode3,
+						tcparnode4
+					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
 	end
@@ -11316,12 +11326,18 @@ private class ReduceAction393
 					assert pexprnode2 isa nullable AExpr
 					var tkwasnode3 = nodearraylist4
 					assert tkwasnode3 isa nullable TKwas
-					var ptypenode4 = nodearraylist8
-					assert ptypenode4 isa nullable AType
+					var toparnode4 = nodearraylist6
+					assert toparnode4 isa nullable TOpar
+					var ptypenode5 = nodearraylist8
+					assert ptypenode5 isa nullable AType
+					var tcparnode6 = nodearraylist10
+					assert tcparnode6 isa nullable TCpar
 					var pexprnode1: nullable AAsCastExpr = new AAsCastExpr.init_aascastexpr(
 						pexprnode2,
 						tkwasnode3,
-						ptypenode4
+						toparnode4,
+						ptypenode5,
+						tcparnode6
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -11348,15 +11364,21 @@ private class ReduceAction394
 					assert pexprnode2 isa nullable AExpr
 					var tkwasnode3 = nodearraylist4
 					assert tkwasnode3 isa nullable TKwas
-					var tkwnotnode4 = nodearraylist8
-					assert tkwnotnode4 isa nullable TKwnot
-					var tkwnullnode5 = nodearraylist10
-					assert tkwnullnode5 isa nullable TKwnull
+					var toparnode4 = nodearraylist6
+					assert toparnode4 isa nullable TOpar
+					var tkwnotnode5 = nodearraylist8
+					assert tkwnotnode5 isa nullable TKwnot
+					var tkwnullnode6 = nodearraylist10
+					assert tkwnullnode6 isa nullable TKwnull
+					var tcparnode7 = nodearraylist12
+					assert tcparnode7 isa nullable TCpar
 					var pexprnode1: nullable AAsNotnullExpr = new AAsNotnullExpr.init_aasnotnullexpr(
 						pexprnode2,
 						tkwasnode3,
-						tkwnotnode4,
-						tkwnullnode5
+						toparnode4,
+						tkwnotnode5,
+						tkwnullnode6,
+						tcparnode7
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)

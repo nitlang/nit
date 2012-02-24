@@ -531,9 +531,9 @@ expr_atom~nopar~nobra {-> expr}
 	| {char} char  {-> New expr.char(char)}
 	| {string} string  {-> New expr.string(string)}
 	| {superstring} superstring  {-> superstring.expr}
-!nopar	| {par} opar expr cpar {-> expr}
-        | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, type)}
-        | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, kwnot, kwnull)}
+!nopar	| {par} opar expr cpar {-> New expr.par(opar, expr, cpar)}
+        | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
+        | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
 	;
 
 superstring {-> expr} 
@@ -744,9 +744,9 @@ expr	= {block} expr* kwend?
 	| {mid_string} [string]:mid_string 
 	| {end_string} [string]:end_string 
 	| {superstring} [exprs]:expr*
-	| {par} expr 
-        | {as_cast} expr kwas type
-        | {as_notnull} expr kwas kwnot kwnull
+	| {par} opar expr cpar
+        | {as_cast} expr kwas opar type cpar
+        | {as_notnull} expr kwas opar kwnot kwnull cpar
 	| {isset_attr} kwisset expr [id]:attrid
 	;
 assign_op

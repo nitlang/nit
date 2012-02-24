@@ -7035,16 +7035,32 @@ redef class AParExpr
     private init empty_init do end
 
     init init_aparexpr (
-            n_expr: nullable AExpr
+            n_opar: nullable TOpar,
+            n_expr: nullable AExpr,
+            n_cpar: nullable TCpar
     )
     do
         empty_init
+        _n_opar = n_opar.as(not null)
+	n_opar.parent = self
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
+        _n_cpar = n_cpar.as(not null)
+	n_cpar.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
+        if _n_opar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TOpar
+                _n_opar = new_child
+	    else
+		abort
+            end
+            return
+	end
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -7055,11 +7071,23 @@ redef class AParExpr
             end
             return
 	end
+        if _n_cpar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCpar
+                _n_cpar = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
+        v.enter_visit(_n_opar)
         v.enter_visit(_n_expr)
+        v.enter_visit(_n_cpar)
     end
 end
 redef class AAsCastExpr
@@ -7068,7 +7096,9 @@ redef class AAsCastExpr
     init init_aascastexpr (
             n_expr: nullable AExpr,
             n_kwas: nullable TKwas,
-            n_type: nullable AType
+            n_opar: nullable TOpar,
+            n_type: nullable AType,
+            n_cpar: nullable TCpar
     )
     do
         empty_init
@@ -7076,8 +7106,12 @@ redef class AAsCastExpr
 	n_expr.parent = self
         _n_kwas = n_kwas.as(not null)
 	n_kwas.parent = self
+        _n_opar = n_opar.as(not null)
+	n_opar.parent = self
         _n_type = n_type.as(not null)
 	n_type.parent = self
+        _n_cpar = n_cpar.as(not null)
+	n_cpar.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7097,6 +7131,16 @@ redef class AAsCastExpr
                 new_child.parent = self
 		assert new_child isa TKwas
                 _n_kwas = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_opar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TOpar
+                _n_opar = new_child
 	    else
 		abort
             end
@@ -7112,13 +7156,25 @@ redef class AAsCastExpr
             end
             return
 	end
+        if _n_cpar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCpar
+                _n_cpar = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
         v.enter_visit(_n_kwas)
+        v.enter_visit(_n_opar)
         v.enter_visit(_n_type)
+        v.enter_visit(_n_cpar)
     end
 end
 redef class AAsNotnullExpr
@@ -7127,8 +7183,10 @@ redef class AAsNotnullExpr
     init init_aasnotnullexpr (
             n_expr: nullable AExpr,
             n_kwas: nullable TKwas,
+            n_opar: nullable TOpar,
             n_kwnot: nullable TKwnot,
-            n_kwnull: nullable TKwnull
+            n_kwnull: nullable TKwnull,
+            n_cpar: nullable TCpar
     )
     do
         empty_init
@@ -7136,10 +7194,14 @@ redef class AAsNotnullExpr
 	n_expr.parent = self
         _n_kwas = n_kwas.as(not null)
 	n_kwas.parent = self
+        _n_opar = n_opar.as(not null)
+	n_opar.parent = self
         _n_kwnot = n_kwnot.as(not null)
 	n_kwnot.parent = self
         _n_kwnull = n_kwnull.as(not null)
 	n_kwnull.parent = self
+        _n_cpar = n_cpar.as(not null)
+	n_cpar.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7159,6 +7221,16 @@ redef class AAsNotnullExpr
                 new_child.parent = self
 		assert new_child isa TKwas
                 _n_kwas = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_opar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TOpar
+                _n_opar = new_child
 	    else
 		abort
             end
@@ -7184,14 +7256,26 @@ redef class AAsNotnullExpr
             end
             return
 	end
+        if _n_cpar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCpar
+                _n_cpar = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
         v.enter_visit(_n_kwas)
+        v.enter_visit(_n_opar)
         v.enter_visit(_n_kwnot)
         v.enter_visit(_n_kwnull)
+        v.enter_visit(_n_cpar)
     end
 end
 redef class AIssetAttrExpr

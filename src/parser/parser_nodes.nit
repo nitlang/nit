@@ -1079,6 +1079,8 @@ class ASuperstringExpr
 end
 class AParExpr
 	super AProxyExpr
+    readable var _n_opar: TOpar
+    readable var _n_cpar: TCpar
 end
 class AProxyExpr
 	super AExpr
@@ -1088,14 +1090,18 @@ class AAsCastExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwas: TKwas
+    readable var _n_opar: TOpar
     readable var _n_type: AType
+    readable var _n_cpar: TCpar
 end
 class AAsNotnullExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwas: TKwas
+    readable var _n_opar: TOpar
     readable var _n_kwnot: TKwnot
     readable var _n_kwnull: TKwnull
+    readable var _n_cpar: TCpar
 end
 class AIssetAttrExpr
 	super AAttrFormExpr
