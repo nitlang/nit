@@ -32,7 +32,7 @@ class B
 		if not a isa B then
 			return false
 		end
-		assert a isa B
+
 		return a.a is _a
 	end
 

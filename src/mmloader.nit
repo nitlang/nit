@@ -153,11 +153,7 @@ class ToolContext
 	do
 		if _opt_warn.value == 0 then return
 		_messages.add(new Message(l,s))
-		if _opt_warn.value == 1 then
-			_warning_count = _warning_count + 1
-		else
-			_error_count = _error_count + 1
-		end
+		_warning_count = _warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
 	end
 
@@ -180,6 +176,9 @@ class ToolContext
 
 	# Option --warn
 	readable var _opt_warn: OptionCount = new OptionCount("Show warnings", "-W", "--warn")
+
+	# Option --quiet
+	readable var _opt_quiet: OptionBool = new OptionBool("Do not show warnings", "-q", "--quiet")
 
 	# Option --path
 	readable var _opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
@@ -217,17 +216,21 @@ class ToolContext
 	init
 	do
 		super
-		option_context.add_option(opt_warn, opt_stop_on_first_error, opt_no_color, opt_path, opt_log, opt_log_dir, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
+		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_path, opt_log, opt_log_dir, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
 	end
 
 	# Parse and process the options given on the command line
 	fun process_options
 	do
+		self.opt_warn.value = 1
+
 		# init options
 		option_context.parse(args)
 
 		# Set verbose level
 		_verbose_level = opt_verbose.value
+
+		if self.opt_quiet.value then self.opt_warn.value = 0
 
 		# Setup the paths value
 		paths.append(opt_path.value)

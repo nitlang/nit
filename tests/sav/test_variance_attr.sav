@@ -1,3 +1,5 @@
+test_variance_attr.nit:28,15--18: Redef warning: Expected nullable Object, as in A::_foo.
+test_variance_attr.nit:29,15--18: Redef warning: Expected nullable A, as in A::_bar.
 AB1
 AB1
 1

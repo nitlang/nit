@@ -41,7 +41,7 @@ end
 if not a isa B then
 	#alt4#a.foo(-4)
 	a = new B
-	assert a isa B
+
 	a.foo(3)
 end
 a.foo(4)
@@ -56,7 +56,7 @@ end
 while not a isa B do
 	#alt7#a.foo(-7)
 	a = new B
-	assert a isa B
+
 	a.foo(6)
 end
 #alt8#a.foo(7)

@@ -27,7 +27,7 @@ class A
 			#alt6# break
 			#alt7# break 1
 			end
-			continue (i * 10) #!alt5#
+			continue  i * 10 #!alt5#
 		end
 	do
 		1.output

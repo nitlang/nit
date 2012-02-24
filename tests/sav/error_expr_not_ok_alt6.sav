@@ -24,6 +24,7 @@ alt/error_expr_not_ok_alt6.nit:63,7--30: Type error: expected A, got nullable In
 alt/error_expr_not_ok_alt6.nit:64,7--33: Type error: expected A, got null
 alt/error_expr_not_ok_alt6.nit:66,7--10: Type error: expected Bool, got null
 alt/error_expr_not_ok_alt6.nit:66,21: Type error: expected A, got Int
+alt/error_expr_not_ok_alt6.nit:67,1--18: Warning: use 'loop' instead of 'while true do'.
 alt/error_expr_not_ok_alt6.nit:69,10--13: Type error: 'for' on a nullable expression.
 alt/error_expr_not_ok_alt6.nit:69,24: Type error: expected A, got Int
 alt/error_expr_not_ok_alt6.nit:71,8--11: Type error: expected Bool, got null
@@ -47,10 +48,14 @@ alt/error_expr_not_ok_alt6.nit:79,11--14: Type error: expected Bool, got null
 alt/error_expr_not_ok_alt6.nit:79,7--14: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:80,7--15: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:81,7--15: Type error: expected A, got Bool
+alt/error_expr_not_ok_alt6.nit:81,7--15: Warning: comparaison between null and a non nullable value.
 alt/error_expr_not_ok_alt6.nit:82,7--18: Type error: expected A, got Bool
+alt/error_expr_not_ok_alt6.nit:82,7--18: Warning: comparaison between two null values.
 alt/error_expr_not_ok_alt6.nit:83,7--15: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:84,7--15: Type error: expected A, got Bool
+alt/error_expr_not_ok_alt6.nit:84,7--15: Warning: comparaison between null and a non nullable value.
 alt/error_expr_not_ok_alt6.nit:85,7--18: Type error: expected A, got Bool
+alt/error_expr_not_ok_alt6.nit:85,7--18: Warning: comparaison between two null values.
 alt/error_expr_not_ok_alt6.nit:86,7--15: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:87,7--15: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:88,7--18: Type error: expected A, got Bool
@@ -120,6 +125,8 @@ alt/error_expr_not_ok_alt6.nit:146,7--15: Type error: expected A, got Array[null
 alt/error_expr_not_ok_alt6.nit:147,7--18: Type error: expected A, got Array[null]
 alt/error_expr_not_ok_alt6.nit:149,14--17: Type error: expected Object, got null
 alt/error_expr_not_ok_alt6.nit:149,7--24: Type error: expected A, got String
+alt/error_expr_not_ok_alt6.nit:150,7--18: Warning: Expression is null therefore cannot be a Int.
 alt/error_expr_not_ok_alt6.nit:150,7--18: Type error: expected A, got Int
 alt/error_expr_not_ok_alt6.nit:151,7--10: Type error: 'as(not null)' on 'null' value.
+alt/error_expr_not_ok_alt6.nit:152,7--18: Warning: Expression is null therefore cannot be a Int.
 alt/error_expr_not_ok_alt6.nit:152,7--18: Type error: expected A, got Bool

@@ -201,6 +201,7 @@ for ii in "$@"; do
 			cp "$ff.cmp.err" "$ff.res"
 			process_result $ff
 		elif [ -x "./$ff.bin" ]; then
+			cp "$ff.cmp.err" "$ff.res"
 			echo -n ". "
 			# Execute
 			args=""
@@ -209,9 +210,9 @@ for ii in "$@"; do
 				echo "NIT_NO_STACK=1 ./$ff.bin" $args
 			fi
 			if [ -f "$f.inputs" ]; then
-				NIT_NO_STACK=1 "./$ff.bin" $args < "$f.inputs" > "$ff.res" 2>"$ff.err"
+				NIT_NO_STACK=1 "./$ff.bin" $args < "$f.inputs" >> "$ff.res" 2>"$ff.err"
 			else
-				NIT_NO_STACK=1 "./$ff.bin" $args > "$ff.res" 2>"$ff.err"
+				NIT_NO_STACK=1 "./$ff.bin" $args >> "$ff.res" 2>"$ff.err"
 			fi
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.res"

@@ -52,7 +52,7 @@ do
 
 	i = nb
 	while i >= 0 do
-		if (h[i*31+13] != i * 2) then
+		if h[i*31+13] != i * 2 then
 			print("{i}: {i*31+13} != {h[i]}")
 		end
 		i = i - 1
@@ -60,7 +60,7 @@ do
 
 	i = nb * 2
 	while i >= 0 do
-		if (i % 3 != 0) then
+		if i % 3 != 0 then
 			h.values.remove(i)
 		end
 		i = i - 1
@@ -75,7 +75,7 @@ do
 			if h.has_key(j) then
 				print("{i}: {j} should be removed")
 			end
-		else if (h[j] != i * 2) then
+		else if h[j] != i * 2 then
 			print("{i}: {j} != {h[i]}")
 		end
 		i = i - 1
