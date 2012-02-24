@@ -976,6 +976,8 @@ redef class APropdef
 						t = v.type_array(t)
 					end
 					p.variable.stype = t
+
+					isig.params[p.position].name = p.variable.name
 				end
 				s = isig
 				prop.signature = s

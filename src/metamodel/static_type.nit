@@ -68,13 +68,13 @@ redef class MMLocalProperty
 end
 
 class MMParam
-	readable var _mmtype: MMType
-	readable var _name: Symbol
+	var mmtype: MMType
+	var name: Symbol writable
 
 	init ( t  : MMType, n : Symbol )
 	do
-	    _mmtype = t
-	    _name = n
+	    mmtype = t
+	    name = n
 	end
 
 	redef fun to_s do return "{name}: {mmtype}"
