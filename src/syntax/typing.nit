@@ -1849,7 +1849,7 @@ redef class ACallFormExpr
 					n = new AClosureCallExpr.init_aclosurecallexpr(n_id, n_args, n_closure_defs)
 					n._variable = variable
 				else
-					if not n_args.n_exprs.is_empty then
+					if not n_args.n_exprs.is_empty or n_args isa AParExprs then
 						v.error(self, "Error: {name} is variable, not a function.")
 						return
 					end
