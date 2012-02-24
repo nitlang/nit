@@ -87,6 +87,16 @@ redef class MMType
 	end
 
 	fun uses_nitni_ref : Bool do return local_class.primitive_info == null or is_nullable
+
+	fun friendly_null_getter : String
+	do
+		return "null_{as_notnull.mangled_name}"
+	end
+	
+	fun local_friendly_null_getter_from( m : MMModule ) : String
+	do
+		return "{m.to_s}_{friendly_null_getter}"
+	end
 end
 
 redef class MMMethod

@@ -481,9 +481,15 @@ redef class MMType
 
 			# add null version, as a struct
 			if is_nullable then
-				var null_getter = "null_{as_notnull.mangled_name}"
-				var fc = new FunctionCompiler( "{name} {null_getter}()" )
-				v.header_top.add( "{name} {null_getter}();\n" )
+				var local_null_getter = local_friendly_null_getter_from( mmmodule )
+
+				v.header_top.add( "#ifndef {friendly_null_getter}\n" )
+				v.header_top.add( "#define {friendly_null_getter} {local_null_getter}\n" )
+				v.header_top.add( "#endif\n" )
+
+				v.header_top.add( "{name} {local_null_getter}();\n" )
+
+				var fc = new FunctionCompiler( "{name} {local_null_getter}()" )
 				compile_new_local_ref( "n", fc, true )
 				fc.exprs.add( "return n;\n" )
 				v.body.append( fc.to_writer )
