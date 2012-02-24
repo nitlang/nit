@@ -6512,19 +6512,35 @@ redef class ACrangeExpr
     private init empty_init do end
 
     init init_acrangeexpr (
+            n_obra: nullable TObra,
             n_expr: nullable AExpr,
-            n_expr2: nullable AExpr
+            n_expr2: nullable AExpr,
+            n_cbra: nullable TCbra
     )
     do
         empty_init
+        _n_obra = n_obra.as(not null)
+	n_obra.parent = self
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
         _n_expr2 = n_expr2.as(not null)
 	n_expr2.parent = self
+        _n_cbra = n_cbra.as(not null)
+	n_cbra.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
+        if _n_obra == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TObra
+                _n_obra = new_child
+	    else
+		abort
+            end
+            return
+	end
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -6545,31 +6561,59 @@ redef class ACrangeExpr
             end
             return
 	end
+        if _n_cbra == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCbra
+                _n_cbra = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
+        v.enter_visit(_n_obra)
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
+        v.enter_visit(_n_cbra)
     end
 end
 redef class AOrangeExpr
     private init empty_init do end
 
     init init_aorangeexpr (
+            n_obra: nullable TObra,
             n_expr: nullable AExpr,
-            n_expr2: nullable AExpr
+            n_expr2: nullable AExpr,
+            n_cbra: nullable TObra
     )
     do
         empty_init
+        _n_obra = n_obra.as(not null)
+	n_obra.parent = self
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
         _n_expr2 = n_expr2.as(not null)
 	n_expr2.parent = self
+        _n_cbra = n_cbra.as(not null)
+	n_cbra.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
+        if _n_obra == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TObra
+                _n_obra = new_child
+	    else
+		abort
+            end
+            return
+	end
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -6590,12 +6634,24 @@ redef class AOrangeExpr
             end
             return
 	end
+        if _n_cbra == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TObra
+                _n_cbra = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
+        v.enter_visit(_n_obra)
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
+        v.enter_visit(_n_cbra)
     end
 end
 redef class AArrayExpr

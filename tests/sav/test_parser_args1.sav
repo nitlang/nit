@@ -4449,7 +4449,8 @@
           ../src/syntax/typing.nit:756,3--758,5
             keyword 'for' ... ../src/syntax/typing.nit:756,3--5
             identifier 'i' ... ../src/syntax/typing.nit:756,7
-            ../src/syntax/typing.nit:756,13--25
+            ../src/syntax/typing.nit:756,12--26
+              '[' ... ../src/syntax/typing.nit:756,12
               ../src/syntax/typing.nit:756,13
                 literal value '0' ... ../src/syntax/typing.nit:756,13
               ../src/syntax/typing.nit:756,16--25
@@ -4457,6 +4458,7 @@
                   ../src/syntax/typing.nit:756,16
                   identifier 'vas' ... ../src/syntax/typing.nit:756,16--18
                 identifier 'length' ... ../src/syntax/typing.nit:756,20--25
+              '[' ... ../src/syntax/typing.nit:756,26
             keyword 'do' ... ../src/syntax/typing.nit:756,28--29
             ../src/syntax/typing.nit:757,4--758,5
               ../src/syntax/typing.nit:757,4--24
@@ -8711,12 +8713,14 @@
           ../src/syntax/typing.nit:1437,3--1451,5
             keyword 'for' ... ../src/syntax/typing.nit:1437,3--5
             identifier 'par_idx' ... ../src/syntax/typing.nit:1437,7--13
-            ../src/syntax/typing.nit:1437,19--30
+            ../src/syntax/typing.nit:1437,18--31
+              '[' ... ../src/syntax/typing.nit:1437,18
               ../src/syntax/typing.nit:1437,19
                 literal value '0' ... ../src/syntax/typing.nit:1437,19
               ../src/syntax/typing.nit:1437,22--30
                 ../src/syntax/typing.nit:1437,22
                 identifier 'par_arity' ... ../src/syntax/typing.nit:1437,22--30
+              '[' ... ../src/syntax/typing.nit:1437,31
             keyword 'do' ... ../src/syntax/typing.nit:1437,33--34
             ../src/syntax/typing.nit:1438,4--1451,5
               ../src/syntax/typing.nit:1438,4--15
@@ -8748,7 +8752,8 @@
                   ../src/syntax/typing.nit:1441,5--1445,7
                     keyword 'for' ... ../src/syntax/typing.nit:1441,5--7
                     identifier 'i' ... ../src/syntax/typing.nit:1441,9
-                    ../src/syntax/typing.nit:1441,15--38
+                    ../src/syntax/typing.nit:1441,14--39
+                      '[' ... ../src/syntax/typing.nit:1441,14
                       ../src/syntax/typing.nit:1441,15
                         literal value '0' ... ../src/syntax/typing.nit:1441,15
                       ../src/syntax/typing.nit:1441,18--38
@@ -8761,6 +8766,7 @@
                             ../src/syntax/typing.nit:1441,29
                             identifier 'par_arity' ... ../src/syntax/typing.nit:1441,29--37
                         ')' ... ../src/syntax/typing.nit:1441,38
+                      ']' ... ../src/syntax/typing.nit:1441,39
                     keyword 'do' ... ../src/syntax/typing.nit:1441,41--42
                     ../src/syntax/typing.nit:1442,6--1445,7
                       ../src/syntax/typing.nit:1442,6--25
@@ -9100,12 +9106,14 @@
                     ../src/syntax/typing.nit:1480,5--1498,7
                       keyword 'for' ... ../src/syntax/typing.nit:1480,5--7
                       identifier 'i' ... ../src/syntax/typing.nit:1480,9
-                      ../src/syntax/typing.nit:1480,15--22
+                      ../src/syntax/typing.nit:1480,14--23
+                        '[' ... ../src/syntax/typing.nit:1480,14
                         ../src/syntax/typing.nit:1480,15
                           literal value '0' ... ../src/syntax/typing.nit:1480,15
                         ../src/syntax/typing.nit:1480,18--22
                           ../src/syntax/typing.nit:1480,18
                           identifier 'arity' ... ../src/syntax/typing.nit:1480,18--22
+                        '[' ... ../src/syntax/typing.nit:1480,23
                       keyword 'do' ... ../src/syntax/typing.nit:1480,25--26
                       ../src/syntax/typing.nit:1481,6--1498,7
                         ../src/syntax/typing.nit:1481,6--19
@@ -13013,7 +13021,8 @@
           ../src/syntax/typing.nit:2000,3--2005,5
             keyword 'for' ... ../src/syntax/typing.nit:2000,3--5
             identifier 'i' ... ../src/syntax/typing.nit:2000,7
-            ../src/syntax/typing.nit:2000,13--27
+            ../src/syntax/typing.nit:2000,12--28
+              '[' ... ../src/syntax/typing.nit:2000,12
               ../src/syntax/typing.nit:2000,13
                 literal value '0' ... ../src/syntax/typing.nit:2000,13
               ../src/syntax/typing.nit:2000,16--27
@@ -13021,6 +13030,7 @@
                   ../src/syntax/typing.nit:2000,16
                   identifier 'n_ids' ... ../src/syntax/typing.nit:2000,16--20
                 identifier 'length' ... ../src/syntax/typing.nit:2000,22--27
+              '[' ... ../src/syntax/typing.nit:2000,28
             keyword 'do' ... ../src/syntax/typing.nit:2000,30--31
             ../src/syntax/typing.nit:2001,4--2005,5
               ../src/syntax/typing.nit:2001,4--56

@@ -92,12 +92,12 @@ alt/error_expr_not_ok_alt5.nit:134,7--12: Error: Method '[]' doesn't exists in I
 alt/error_expr_not_ok_alt5.nit:135,1--11: Error: Method '[]=' doesn't exists in Int.
 alt/error_expr_not_ok_alt5.nit:136,1--12: Error: Method '[]' doesn't exists in Int.
 alt/error_expr_not_ok_alt5.nit:137,1--17: Error: Method '[]=' doesn't exists in Int.
-alt/error_expr_not_ok_alt5.nit:139,8--14: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt5.nit:140,8--14: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt5.nit:141,8--17: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt5.nit:142,8--14: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt5.nit:143,8--14: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt5.nit:144,8--17: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt5.nit:139,7--15: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt5.nit:140,7--15: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt5.nit:141,7--18: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt5.nit:142,7--15: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt5.nit:143,7--15: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt5.nit:144,7--18: Type error: expected A, got Range[Int]
 alt/error_expr_not_ok_alt5.nit:145,8--14: Type error: expected A, got Array[Int]
 alt/error_expr_not_ok_alt5.nit:146,8--14: Type error: expected A, got Array[Int]
 alt/error_expr_not_ok_alt5.nit:147,8--17: Type error: expected A, got Array[Int]

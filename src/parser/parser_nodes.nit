@@ -1015,9 +1015,13 @@ class ARangeExpr
 end
 class ACrangeExpr
 	super ARangeExpr
+	readable var _n_obra: TObra
+	readable var _n_cbra: TCbra
 end
 class AOrangeExpr
 	super ARangeExpr
+	readable var _n_obra: TObra
+	readable var _n_cbra: TObra
 end
 class AArrayExpr
 	super AExpr

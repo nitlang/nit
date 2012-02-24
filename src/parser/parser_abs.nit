@@ -950,13 +950,17 @@ class ARangeExpr
 end
 class ACrangeExpr
 	super AExpr
+    readable var _n_obra: TObra
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
+    readable var _n_cbra: TCbra
 end
 class AOrangeExpr
 	super AExpr
+    readable var _n_obra: TObra
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
+    readable var _n_cbra: TObra
 end
 class AArrayExpr
 	super AExpr

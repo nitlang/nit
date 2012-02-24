@@ -519,8 +519,8 @@ expr_atom~nopar~nobra {-> expr}
 !nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, [braargs.expr], [])}
 	| {new} kwnew no type~nobra dot [n2]:no id args {-> New expr.new(kwnew, type~nobra.type, id, [args.expr])}
 // !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
-!nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra {-> New expr.crange(expr, expr2.expr)}
-!nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra  {-> New expr.orange(expr, expr2.expr)}
+!nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra {-> New expr.crange(obra, expr, expr2.expr, cbra)}
+!nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra  {-> New expr.orange(obra, expr, expr2.expr, cbra)}
 !nobra!nopar	| {array} braargs {-> New expr.array([braargs.expr])}
 	| {self} kwself {-> New expr.self(kwself)}
 	| {true} kwtrue {-> New expr.true(kwtrue)}
@@ -728,8 +728,8 @@ expr	= {block} expr* kwend?
 	| {var_assign} id assign [value]:expr 
 	| {var_reassign} id assign_op [value]:expr 
 	| {range} expr [expr2]:expr 
-	| {crange} expr [expr2]:expr 
-	| {orange} expr [expr2]:expr 
+	| {crange} obra expr [expr2]:expr cbra
+	| {orange} obra expr [expr2]:expr [cbra]:obra
 	| {array} [exprs]:expr*
 	| {self} kwself 
 	| {implicit_self} 

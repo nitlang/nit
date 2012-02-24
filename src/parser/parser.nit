@@ -11109,13 +11109,19 @@ private class ReduceAction380
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2 = nodearraylist3
-					assert pexprnode2 isa nullable AExpr
-					var pexprnode3 = nodearraylist7
+					var tobranode2 = nodearraylist1
+					assert tobranode2 isa nullable TObra
+					var pexprnode3 = nodearraylist3
 					assert pexprnode3 isa nullable AExpr
+					var pexprnode4 = nodearraylist7
+					assert pexprnode4 isa nullable AExpr
+					var tcbranode5 = nodearraylist9
+					assert tcbranode5 isa nullable TCbra
 					var pexprnode1: nullable ACrangeExpr = new ACrangeExpr.init_acrangeexpr(
-						pexprnode2,
-						pexprnode3
+						tobranode2,
+						pexprnode3,
+						pexprnode4,
+						tcbranode5
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -11135,13 +11141,19 @@ private class ReduceAction381
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2 = nodearraylist3
-					assert pexprnode2 isa nullable AExpr
-					var pexprnode3 = nodearraylist7
+					var tobranode2 = nodearraylist1
+					assert tobranode2 isa nullable TObra
+					var pexprnode3 = nodearraylist3
 					assert pexprnode3 isa nullable AExpr
+					var pexprnode4 = nodearraylist7
+					assert pexprnode4 isa nullable AExpr
+					var tobranode5 = nodearraylist9
+					assert tobranode5 isa nullable TObra
 					var pexprnode1: nullable AOrangeExpr = new AOrangeExpr.init_aorangeexpr(
-						pexprnode2,
-						pexprnode3
+						tobranode2,
+						pexprnode3,
+						pexprnode4,
+						tobranode5
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
