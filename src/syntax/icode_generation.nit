@@ -417,9 +417,7 @@ redef class AExternInitPropdef
 		var sig = method.signature
 		assert params.length == sig.arity + 1
 		var rtype = sig.recv # sig.return_type
-		if rtype != null then
-			v.add_assignment(new IRegister(rtype), v.expr(new INative(method, params), rtype))
-		end
+		v.add_assignment(new IRegister(rtype), v.expr(new INative(method, params), rtype))
 
 		super
 	end

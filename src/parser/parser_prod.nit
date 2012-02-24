@@ -22,7 +22,7 @@ redef class ANode
 	# Replace itself with an other node in the AST
 	fun replace_with(node: ANode)
 	do
-		if (_parent != null) then
+		if _parent != null then
 			_parent.replace_child(self, node)
 		end
 	end
