@@ -1025,7 +1025,7 @@ redef class AOrElseExpr
 		# Consider the type of the left operand
 		var t = n_expr.stype
 		if not t.is_nullable then
-			v.warning(n_expr, "Warning: left operant of a 'or else' is not a nullable type.")
+			v.warning(n_expr, "Warning: left operand of a 'or else' is not a nullable type.")
 		else
 			t = t.as_notnull
 		end
@@ -1737,7 +1737,7 @@ redef class AEqExpr
 
 		if n_expr.stype isa MMTypeNone then
 			if n_expr2.stype isa MMTypeNone then
-				v.warning(self, "Warning: comparaison between 2 null values.")
+				v.warning(self, "Warning: comparaison between two null values.")
 			else
 				try_to_isa(v, n_expr2)
 			end
@@ -1768,7 +1768,7 @@ redef class ANeExpr
 
 		if n_expr.stype isa MMTypeNone then
 			if n_expr2.stype isa MMTypeNone then
-				v.warning(self, "Warning: comparaison between 2 null values.")
+				v.warning(self, "Warning: comparaison between two null values.")
 			else
 				try_to_isa(v, n_expr2)
 			end
