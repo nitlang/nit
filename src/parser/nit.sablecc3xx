@@ -360,9 +360,9 @@ stmt~withelse {-> expr}
 	| {loop} loop~withelse {-> loop~withelse.expr}
 	| {for} for~withelse {-> for~withelse.expr}
 	| {assert} assert~withelse {-> assert~withelse.expr}
-	| {call} recv id args_nopar closure_defs~withelse? {-> New expr.call(recv.expr, id, [args_nopar.expr], [closure_defs~withelse.closure_def])}
-	| {super} qualified? kwsuper args_nopar {-> New expr.super(qualified, kwsuper, [args_nopar.expr])}
-	| {init} recv kwinit args_nopar {-> New expr.init(recv.expr, kwinit, [args_nopar.expr])}
+	| {call} recv id args_nopar closure_defs~withelse? {-> New expr.call(recv.expr, id, args_nopar.exprs, [closure_defs~withelse.closure_def])}
+	| {super} qualified? kwsuper args_nopar {-> New expr.super(qualified, kwsuper, args_nopar.exprs)}
+	| {init} recv kwinit args_nopar {-> New expr.init(recv.expr, kwinit, args_nopar.exprs)}
 	;
 
 label= kwlabel id;
@@ -398,11 +398,11 @@ vardecl~withelse{-> expr}
 
 assignment~withelse {-> expr}
 	= {attr} recv attrid assign expr_final~withelse {-> New expr.attr_assign(recv.expr, attrid, assign, expr_final~withelse.expr)}
-	| {call} recv id args assign expr_final~withelse {-> New expr.call_assign(recv.expr, id, [args.expr], assign,  expr_final~withelse.expr)}
-	| {bra} expr_atom braargs assign expr_final~withelse {-> New expr.bra_assign(expr_atom.expr, [braargs.expr], assign,  expr_final~withelse.expr)}
+	| {call} recv id args assign expr_final~withelse {-> New expr.call_assign(recv.expr, id, args.exprs, assign,  expr_final~withelse.expr)}
+	| {bra} expr_atom braargs assign expr_final~withelse {-> New expr.bra_assign(expr_atom.expr, braargs.exprs, assign,  expr_final~withelse.expr)}
 	| {attr_re} recv attrid assign_op expr_final~withelse {-> New expr.attr_reassign(recv.expr, attrid, assign_op,  expr_final~withelse.expr)}
-	| {call_re} recv id args assign_op expr_final~withelse {-> New expr.call_reassign(recv.expr, id, [args.expr], assign_op,  expr_final~withelse.expr)}
-	| {bra_re} expr_atom braargs assign_op expr_final~withelse {-> New expr.bra_reassign(expr_atom.expr, [braargs.expr], assign_op,  expr_final~withelse.expr)}
+	| {call_re} recv id args assign_op expr_final~withelse {-> New expr.call_reassign(recv.expr, id, args.exprs, assign_op,  expr_final~withelse.expr)}
+	| {bra_re} expr_atom braargs assign_op expr_final~withelse {-> New expr.bra_reassign(expr_atom.expr, braargs.exprs, assign_op,  expr_final~withelse.expr)}
 	;
 assign_op
 	= {plus} pluseq
@@ -450,8 +450,8 @@ assertid {-> id}
 /* EXPRESSIONS ***************************************************************/
 expr_final~nopar~withelse~nobra {-> expr}
 	= expr~nopar~nobra {-> expr~nopar~nobra.expr}
-	| {closure_call} recv~nobra id args closure_defs~withelse {-> New expr.call(recv~nobra.expr, id, [args.expr], [closure_defs~withelse.closure_def])}
-!nobra!nopar	| {closure_bra} expr_atom braargs closure_defs~withelse {-> New expr.bra(expr_atom.expr, [braargs.expr], [closure_defs~withelse.closure_def])}
+	| {closure_call} recv~nobra id args closure_defs~withelse {-> New expr.call(recv~nobra.expr, id, args.exprs, [closure_defs~withelse.closure_def])}
+!nobra!nopar	| {closure_bra} expr_atom braargs closure_defs~withelse {-> New expr.bra(expr_atom.expr, braargs.exprs, [closure_defs~withelse.closure_def])}
 	;
 
 expr~nopar~nobra {-> expr}
@@ -507,21 +507,21 @@ expr_minus~nopar~nobra {-> expr}
 
 expr_new~nopar~nobra {-> expr}
 	= expr_atom~nopar~nobra {-> expr_atom~nopar~nobra.expr}
-	| {new} kwnew no type~nobra args {-> New expr.new(kwnew, type~nobra.type, Null, [args.expr])}
+	| {new} kwnew no type~nobra args {-> New expr.new(kwnew, type~nobra.type, Null, args.exprs)}
 	| {isset_attr} kwisset recv~nopar~nobra attrid {-> New expr.isset_attr(kwisset, recv~nopar~nobra.expr, attrid)}
 	;
 
 expr_atom~nopar~nobra {-> expr}
 	= {attr} recv~nopar~nobra attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
-	| {call} recv~nopar~nobra id args {-> New expr.call(recv~nopar~nobra.expr, id, [args.expr], [])}
-	| {super} qualified? kwsuper args {-> New expr.super(qualified, kwsuper, [args.expr])}
-	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, [args.expr])}
-!nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, [braargs.expr], [])}
-	| {new} kwnew no type~nobra dot [n2]:no id args {-> New expr.new(kwnew, type~nobra.type, id, [args.expr])}
+	| {call} recv~nopar~nobra id args {-> New expr.call(recv~nopar~nobra.expr, id, args.exprs, [])}
+	| {super} qualified? kwsuper args {-> New expr.super(qualified, kwsuper, args.exprs)}
+	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, args.exprs)}
+!nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, braargs.exprs, [])}
+	| {new} kwnew no type~nobra dot [n2]:no id args {-> New expr.new(kwnew, type~nobra.type, id, args.exprs)}
 // !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
 !nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra {-> New expr.crange(obra, expr, expr2.expr, cbra)}
 !nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra  {-> New expr.orange(obra, expr, expr2.expr, cbra)}
-!nobra!nopar	| {array} braargs {-> New expr.array([braargs.expr])}
+!nobra!nopar	| {array} braargs {-> New expr.array(braargs.exprs)}
 	| {self} kwself {-> New expr.self(kwself)}
 	| {true} kwtrue {-> New expr.true(kwtrue)}
 	| {false} kwfalse {-> New expr.false(kwfalse)}
@@ -556,20 +556,22 @@ recv~nopar~nobra {-> expr}
 	| {implicit} {-> New expr.implicit_self()}
 	;
 
-args {-> expr*}
-	= opar no expr [n2]:no args_tail* cpar {-> [expr, args_tail.expr]}
-	| {emptypar} opar no cpar {-> []}
-	| {empty} {-> []}
+args {-> exprs}
+	= opar no expr_list cpar {-> New exprs.par(opar, [expr_list.expr], cpar) }
+	| {emptypar} opar no cpar {-> New exprs.par(opar, [], cpar) }
+	| {empty} {-> New exprs.list([])}
 	;
-args_nopar {-> expr*}
-	= opar no expr [n2]:no args_tail* cpar {-> [expr, args_tail.expr]}
-	| {onearg} expr_nopar {-> [expr_nopar.expr]}
-	| {emptypar} opar no cpar {-> []}
-	| {empty} {-> []}
+args_nopar {-> exprs}
+	= opar no expr_list cpar {-> New exprs.par(opar, [expr_list.expr], cpar) }
+	| {onearg} expr_nopar {-> New exprs.list([expr_nopar.expr])}
+	| {emptypar} opar no cpar {-> New exprs.par(opar, [], cpar) }
+	| {empty} {-> New exprs.list([])}
 	;
-braargs	{-> expr*}
-	= obra no expr [n2]:no args_tail* cbra {-> [expr, args_tail.expr]};
-args_tail {-> expr} 
+braargs	{-> exprs}
+	= obra no expr_list cbra {-> New exprs.bra(obra, [expr_list.expr], cbra)};
+expr_list {-> expr*}
+	= expr [n2]:no expr_tail* {-> [expr, expr_tail.expr]};
+expr_tail {-> expr} 
 	= comma no expr [n2]:no {-> expr};
 idlist {-> id*}
 	= opar idlist_nopar cpar {-> [idlist_nopar.id]}
@@ -711,26 +713,26 @@ expr	= {block} expr* kwend?
 	| {slash} expr [expr2]:expr 
 	| {percent} expr [expr2]:expr 
 	| {uminus} minus expr 
-	| {new} kwnew type id? [args]:expr*
+	| {new} kwnew type id? [args]:exprs
 	| {attr} expr [id]:attrid 
 	| {attr_assign} expr [id]:attrid assign [value]:expr 
 	| {attr_reassign} expr [id]:attrid assign_op [value]:expr 
-	| {call} expr id [args]:expr* [closure_defs]:closure_def*
-	| {call_assign} expr id [args]:expr* assign [value]:expr 
-	| {call_reassign} expr id [args]:expr* assign_op [value]:expr 
-	| {super} qualified? kwsuper [args]:expr*
-	| {init} expr kwinit [args]:expr* 
-	| {bra} expr [args]:expr* [closure_defs]:closure_def* 
-	| {bra_assign} expr [args]:expr* assign [value]:expr 
-	| {bra_reassign} expr [args]:expr* assign_op [value]:expr 
-	| {closure_call} id [args]:expr* [closure_defs]:closure_def*
+	| {call} expr id [args]:exprs [closure_defs]:closure_def*
+	| {call_assign} expr id [args]:exprs assign [value]:expr 
+	| {call_reassign} expr id [args]:exprs assign_op [value]:expr 
+	| {super} qualified? kwsuper [args]:exprs
+	| {init} expr kwinit [args]:exprs 
+	| {bra} expr [args]:exprs [closure_defs]:closure_def* 
+	| {bra_assign} expr [args]:exprs assign [value]:expr 
+	| {bra_reassign} expr [args]:exprs assign_op [value]:expr 
+	| {closure_call} id [args]:exprs [closure_defs]:closure_def*
 	| {var} id
 	| {var_assign} id assign [value]:expr 
 	| {var_reassign} id assign_op [value]:expr 
 	| {range} expr [expr2]:expr 
 	| {crange} obra expr [expr2]:expr cbra
 	| {orange} obra expr [expr2]:expr [cbra]:obra
-	| {array} [exprs]:expr*
+	| {array} [exprs]:exprs
 	| {self} kwself 
 	| {implicit_self} 
 	| {true} kwtrue 
@@ -748,6 +750,11 @@ expr	= {block} expr* kwend?
         | {as_cast} expr kwas opar type cpar
         | {as_notnull} expr kwas opar kwnot kwnull cpar
 	| {isset_attr} kwisset expr [id]:attrid
+	;
+exprs
+	= {list} [exprs]:expr*
+	| {par} opar [exprs]:expr* cpar
+	| {bra} obra [exprs]:expr* cbra
 	;
 assign_op
 	= {plus} pluseq

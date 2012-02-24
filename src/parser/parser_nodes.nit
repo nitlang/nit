@@ -925,7 +925,7 @@ class ANewExpr
     readable var _n_kwnew: TKwnew
     readable var _n_type: AType
     readable var _n_id: nullable TId = null
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
 end
 class AAttrFormExpr
 	super AExpr
@@ -942,7 +942,7 @@ end
 class ACallFormExpr
 	super ASendExpr
     readable var _n_id: TId
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
 end
 class AAttrReassignExpr
 	super AExpr
@@ -965,16 +965,16 @@ class ASuperExpr
 	super AExpr
     readable var _n_qualified: nullable AQualified = null
     readable var _n_kwsuper: TKwsuper
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
 end
 class AInitExpr
 	super ASendExpr
     readable var _n_kwinit: TKwinit
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
 end
 class ABraFormExpr
 	super ASendExpr
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
 end
 class ABraExpr
 	super ABraFormExpr
@@ -994,7 +994,7 @@ end
 class AClosureCallExpr
 	super AExpr
     readable var _n_id: TId
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
     readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
 end
 class AVarExpr
@@ -1025,7 +1025,7 @@ class AOrangeExpr
 end
 class AArrayExpr
 	super AExpr
-    readable var _n_exprs: List[AExpr] = new List[AExpr]
+    readable var _n_exprs: AExprs
 end
 class ASelfExpr
 	super AExpr
@@ -1110,6 +1110,23 @@ end
 class AIssetAttrExpr
 	super AAttrFormExpr
     readable var _n_kwisset: TKwisset
+end
+class AExprs
+	super Prod 
+    readable var _n_exprs: List[AExpr] = new List[AExpr]
+end
+class AListExprs
+	super AExprs
+end
+class AParExprs
+	super AExprs
+    readable var _n_opar: TOpar
+    readable var _n_cpar: TCpar
+end
+class ABraExprs
+	super AExprs
+    readable var _n_obra: TObra
+    readable var _n_cbra: TCbra
 end
 class AAssignOp super Prod end
 class APlusAssignOp

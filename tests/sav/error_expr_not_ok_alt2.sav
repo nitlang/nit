@@ -83,8 +83,8 @@ alt/error_expr_not_ok_alt2.nit:124,1--14: Error: Attribute _fail doesn't exists 
 alt/error_expr_not_ok_alt2.nit:126,7--13: Error: Attribute _x doesn't exists in Int.
 alt/error_expr_not_ok_alt2.nit:127,1--11: Error: Attribute _x doesn't exists in Int.
 alt/error_expr_not_ok_alt2.nit:128,1--12: Error: Attribute _x doesn't exists in Int.
-alt/error_expr_not_ok_alt2.nit:131,7--14: Type error: expected A, got Int
-alt/error_expr_not_ok_alt2.nit:134,7--12: Error: Method '[]' doesn't exists in Int.
+alt/error_expr_not_ok_alt2.nit:131,7--15: Type error: expected A, got Int
+alt/error_expr_not_ok_alt2.nit:134,7--13: Error: Method '[]' doesn't exists in Int.
 alt/error_expr_not_ok_alt2.nit:135,1--11: Error: Method '[]=' doesn't exists in Int.
 alt/error_expr_not_ok_alt2.nit:136,1--12: Error: Method '[]' doesn't exists in Int.
 alt/error_expr_not_ok_alt2.nit:137,1--17: Error: Method '[]=' doesn't exists in Int.
@@ -94,9 +94,9 @@ alt/error_expr_not_ok_alt2.nit:141,7--18: Type error: expected A, got Range[Int]
 alt/error_expr_not_ok_alt2.nit:142,7--15: Type error: expected A, got Range[Int]
 alt/error_expr_not_ok_alt2.nit:143,7--15: Type error: expected A, got Range[Int]
 alt/error_expr_not_ok_alt2.nit:144,7--18: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt2.nit:145,8--14: Type error: expected A, got Array[Int]
-alt/error_expr_not_ok_alt2.nit:146,8--14: Type error: expected A, got Array[Int]
-alt/error_expr_not_ok_alt2.nit:147,8--17: Type error: expected A, got Array[Int]
+alt/error_expr_not_ok_alt2.nit:145,7--15: Type error: expected A, got Array[Int]
+alt/error_expr_not_ok_alt2.nit:146,7--15: Type error: expected A, got Array[Int]
+alt/error_expr_not_ok_alt2.nit:147,7--18: Type error: expected A, got Array[Int]
 alt/error_expr_not_ok_alt2.nit:149,7--24: Type error: expected A, got String
 alt/error_expr_not_ok_alt2.nit:150,7--18: Type error: expected A, got Int
 alt/error_expr_not_ok_alt2.nit:151,7--23: Type error: expected A, got Int

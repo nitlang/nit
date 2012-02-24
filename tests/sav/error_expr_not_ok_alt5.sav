@@ -3,7 +3,7 @@ alt/error_expr_not_ok_alt5.nit:21,11--14: Error: Method or variable 'fail' unkno
 alt/error_expr_not_ok_alt5.nit:22,26--29: Error: Method or variable 'fail' unknown in A.
 alt/error_expr_not_ok_alt5.nit:24,8--11: Error: Method or variable 'fail' unknown in A.
 alt/error_expr_not_ok_alt5.nit:25,9--12: Error: Method or variable 'fail' unknown in A.
-alt/error_expr_not_ok_alt5.nit:37,8--14: Error: Method or variable 'fail2' unknown in Sys.
+alt/error_expr_not_ok_alt5.nit:37,8--15: Error: Method or variable 'fail2' unknown in Sys.
 alt/error_expr_not_ok_alt5.nit:40,1--7: Error: Method 'fail' doesn't exists in Int.
 alt/error_expr_not_ok_alt5.nit:41,16--19: Type error: expected Int, got Object
 alt/error_expr_not_ok_alt5.nit:42,7--9: Type error: expected A, got Int
@@ -87,8 +87,8 @@ alt/error_expr_not_ok_alt5.nit:124,1--14: Error: Attribute _fail doesn't exists 
 alt/error_expr_not_ok_alt5.nit:126,7--13: Error: Attribute _x doesn't exists in Int.
 alt/error_expr_not_ok_alt5.nit:127,1--11: Error: Attribute _x doesn't exists in Int.
 alt/error_expr_not_ok_alt5.nit:128,1--12: Error: Attribute _x doesn't exists in Int.
-alt/error_expr_not_ok_alt5.nit:131,7--14: Type error: expected A, got Int
-alt/error_expr_not_ok_alt5.nit:134,7--12: Error: Method '[]' doesn't exists in Int.
+alt/error_expr_not_ok_alt5.nit:131,7--15: Type error: expected A, got Int
+alt/error_expr_not_ok_alt5.nit:134,7--13: Error: Method '[]' doesn't exists in Int.
 alt/error_expr_not_ok_alt5.nit:135,1--11: Error: Method '[]=' doesn't exists in Int.
 alt/error_expr_not_ok_alt5.nit:136,1--12: Error: Method '[]' doesn't exists in Int.
 alt/error_expr_not_ok_alt5.nit:137,1--17: Error: Method '[]=' doesn't exists in Int.
@@ -98,9 +98,9 @@ alt/error_expr_not_ok_alt5.nit:141,7--18: Type error: expected A, got Range[Int]
 alt/error_expr_not_ok_alt5.nit:142,7--15: Type error: expected A, got Range[Int]
 alt/error_expr_not_ok_alt5.nit:143,7--15: Type error: expected A, got Range[Int]
 alt/error_expr_not_ok_alt5.nit:144,7--18: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt5.nit:145,8--14: Type error: expected A, got Array[Int]
-alt/error_expr_not_ok_alt5.nit:146,8--14: Type error: expected A, got Array[Int]
-alt/error_expr_not_ok_alt5.nit:147,8--17: Type error: expected A, got Array[Int]
+alt/error_expr_not_ok_alt5.nit:145,7--15: Type error: expected A, got Array[Int]
+alt/error_expr_not_ok_alt5.nit:146,7--15: Type error: expected A, got Array[Int]
+alt/error_expr_not_ok_alt5.nit:147,7--18: Type error: expected A, got Array[Int]
 alt/error_expr_not_ok_alt5.nit:149,7--24: Type error: expected A, got String
 alt/error_expr_not_ok_alt5.nit:150,7--18: Type error: expected A, got Int
 alt/error_expr_not_ok_alt5.nit:151,7--23: Type error: expected A, got Int

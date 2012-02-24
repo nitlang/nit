@@ -1110,7 +1110,7 @@ end
 redef class AArrayExpr
 	redef fun after_typing(v)
 	do
-		var stype = v.check_conform_multiexpr(null, n_exprs)
+		var stype = v.check_conform_multiexpr(null, n_exprs.n_exprs)
 		if stype != null then do_typing(v, stype)
 	end
 
@@ -1168,7 +1168,7 @@ redef class ASuperExpr
 			assert p isa MMMethod
 			_init_in_superclass = p
 			register_super_init_call(v, p)
-			if n_args.length > 0 then
+			if n_args.n_exprs.length > 0 then
 				var signature = get_signature(v, v.self_var.stype.as(not null), p, true)
 				process_signature(v, signature, p.name, compute_raw_arguments)
 			end
@@ -1840,7 +1840,7 @@ redef class ACallFormExpr
 					n = new AClosureCallExpr.init_aclosurecallexpr(n_id, n_args, n_closure_defs)
 					n._variable = variable
 				else
-					if not n_args.is_empty then
+					if not n_args.n_exprs.is_empty then
 						v.error(self, "Error: {name} is variable, not a function.")
 						return
 					end

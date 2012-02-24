@@ -127,7 +127,7 @@ error_expr_not_ok.nit:126,7--10: Error: Method or variable 'fail' unknown in Sys
 error_expr_not_ok.nit:127,1--4: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:128,1--4: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:131,11--14: Error: Method or variable 'fail' unknown in Sys.
-error_expr_not_ok.nit:131,7--14: Type error: expected A, got Int
+error_expr_not_ok.nit:131,7--15: Type error: expected A, got Int
 error_expr_not_ok.nit:132,10--13: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:133,11--14: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:134,7--10: Error: Method or variable 'fail' unknown in Sys.
