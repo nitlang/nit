@@ -403,6 +403,15 @@ redef class AParExpr
 	end
 end
 
+redef class AParExprs
+	redef fun after_typing(v)
+	do
+		if n_exprs.is_empty then
+			v.warning(self, "Warning: superfluous parentheses.")
+		end
+	end
+end
+
 redef class AVardeclExpr
 	var _variable: nullable VarVariable
 	redef fun variable do return _variable.as(not null)
