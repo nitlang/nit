@@ -10,7 +10,7 @@ typedef struct s_Object{
 } Object;
 #endif
 
-#include ".././../lib/standard//time_nit.h"
+#include "time_nit.h"
 
 /* out/indirect function for time::Object::get_time */
 val_t Object_get_time___out( val_t recv );

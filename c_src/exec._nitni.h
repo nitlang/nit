@@ -10,7 +10,7 @@ typedef struct s_Process{
 } Process;
 #endif
 
-#include ".././../lib/standard//exec_nit.h"
+#include "exec_nit.h"
 
 /* out/indirect function for exec::Process::basic_exec_execute */
 val_t Process_basic_exec_execute___out( val_t recv, val_t p, val_t av, val_t ac, val_t pf );
