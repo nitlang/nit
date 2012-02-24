@@ -389,6 +389,18 @@ redef class AExpr
 
 	# The control flow information if current boolean expression is false
 	readable private var _if_false_flow_ctx: nullable FlowContext
+
+	# Wharn in case of superfluous parentheses
+	private fun warn_parentheses(v: AbsSyntaxVisitor)
+	do
+	end
+end
+
+redef class AParExpr
+	redef fun warn_parentheses(v)
+	do
+		v.warning(self, "Warning: superfluous parentheses.")
+	end
 end
 
 redef class AVardeclExpr
@@ -454,6 +466,9 @@ redef class AReturnExpr
 		else if e != null and t != null then
 			v.check_conform_expr(e, t)
 		end
+		if e != null then
+			e.warn_parentheses(v)
+		end
 		_is_typed = true
 	end
 end
@@ -471,12 +486,16 @@ redef class AContinueExpr
 		end
 
 		var t = esc.continue_stype
-		if n_expr == null and t != null then
+		var e = n_expr
+		if e == null and t != null then
 			v.error(self, "Error: continue with a value required in this block.")
-		else if n_expr != null and t == null then
+		else if e != null and t == null then
 			v.error(self, "Error: continue without value required in this block.")
-		else if n_expr != null and t != null then
-			v.check_conform_expr(n_expr.as(not null), t)
+		else if e != null and t != null then
+			v.check_conform_expr(e, t)
+		end
+		if e != null then
+			e.warn_parentheses(v)
 		end
 		_is_typed = true
 	end
@@ -493,13 +512,17 @@ redef class ABreakExpr
 		esc.break_flow_contexts.add(old_flow_ctx)
 
 		var bl = esc.break_list
-		if n_expr == null and bl != null then
+		var e = n_expr
+		if e == null and bl != null then
 			v.error(self, "Error: break with a value required in this block.")
-		else if n_expr != null and bl == null then
+		else if e != null and bl == null then
 			v.error(self, "Error: break without value required in this block.")
-		else if n_expr != null and bl != null then
+		else if e != null and bl != null then
 			# Typing check can only be done later
-			bl.add(n_expr.as(not null))
+			bl.add(e)
+		end
+		if e != null then
+			e.warn_parentheses(v)
 		end
 		_is_typed = true
 	end
@@ -575,6 +598,8 @@ redef class AIfExpr
 		v.enter_visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
 
+		n_expr.warn_parentheses(v)
+
 		# Prepare 'then' context
 		var old_flow_ctx = v.flow_ctx
 		v.use_if_true_flow_ctx(n_expr)
@@ -615,6 +640,8 @@ redef class AWhileExpr
 
 		if n_expr isa ATrueExpr then
 			v.warning(self, "Warning: use 'loop' instead of 'while true do'.")
+		else
+			n_expr.warn_parentheses(v)
 		end
 
 		# Prepare inside context (assert cond)
@@ -692,6 +719,7 @@ redef class AForExpr
 			v.error(n_expr, "Type error: 'for' on a nullable expression.")
 			return
 		end
+		n_expr.warn_parentheses(v)
 
 		# Get iterate
 		var iterate_name = once "iterate".to_symbol
@@ -737,6 +765,7 @@ redef class AAssertExpr
 		# Process condition
 		v.enter_visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
+		n_expr.warn_parentheses(v)
 
 		# Process optional 'else' part
 		if n_else != null then
