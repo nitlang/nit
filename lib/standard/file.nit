@@ -286,6 +286,9 @@ redef class String
 			return null
 		end
 	end
+
+	# returns files contained within the directory represented by self
+	fun files : Set[ String ] is extern import HashSet, HashSet::add, String::from_cstring, String::to_cstring, HashSet[String] as( Set[String] ), String as( Object )
 end
 
 redef class NativeString
