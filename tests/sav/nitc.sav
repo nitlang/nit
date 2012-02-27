@@ -11,6 +11,13 @@ usage: nitc [options] file...
   -h, -?, --help                  Show Help (This screen)
   --version                       Show version and exit
   -v, --verbose                   Verbose
+  --global                        Use global compilation
+  --no-global-SFT-optimization    Do not use SFT optimization
+  --no-global-DMR-optimization    Do not use dead method removal optimization
+  --global-callgraph              The algorithm to use to build the callgraph <none, cha, rta>
+  --no-global-get-set-inlining    Do not automatically inline getters/setters
+  --no-global-RFIM-analysis       Do not use a specialized algorithm to find reachable methods from initializers
+  --no-global-OOIT-optimization   Do not remove get tests outside object initialization
   -o, --output                    Output file
   -O, --boost                     Optimize compilation
   --no-cc                         Do not invoke C compiler
@@ -18,15 +25,8 @@ usage: nitc [options] file...
   --cc-lib-name                   Name of library to use for C compiler
   --cc-lib-path                   Path to libraries for C compiler
   --cc-header-path                Path to .h files for C compiler
-  --global                        Use global compilation
   --clibdir                       NIT C library directory
   --bindir                        NIT tools directory
   --compdir                       Intermediate compilation directory
   -p, --extension-prefix          Append prefix to file extension
-  --no-global-SFT-optimization    Do not use SFT optimization
-  --no-global-DMR-optimization    Do not use dead method removal optimization
-  --global-callgraph              The algorithm to use to build the callgraph <none, cha, rta>
-  --no-global-get-set-inlining    Do not automatically inline getters/setters
-  --no-global-RFIM-analysis       Do not use a specialized algorithm to find reachable methods from initializers
-  --no-global-OOIT-optimization   Do not remove get tests outside object initialization
   --output-format                 The type of code we want to be generated <none, C, icode>

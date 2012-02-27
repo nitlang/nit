@@ -1,8 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2009 Jean Privat <jean@pryen.org>
-# Copyright 2009 Jean-Sebastien Gelinas <calestar@gmail.com>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -15,23 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Intermediate code local analysis and optimizations
-package analysis
-
-# Global imports
-import icode
-import icode_dump
-import program
-
-# Local Analysis/Optimization
-private import allocate_iregister_slots
-private import inline_methods
-
-redef class IRoutine
-	# Perfom all local optimizations
-	fun optimize(m: MMModule)
+import base_polymorphic_init
+redef class A
+	redef init foo
 	do
-		inline_methods(m)
-		allocate_iregister_slots
+		super
+		10.output
+	end
+	redef init bar
+	do
+		super
+		30.output
 	end
 end

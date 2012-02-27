@@ -79,6 +79,7 @@ redef class MMLocalClass
 				if not pg.is_init_for(self) then continue
 				var p = self[pg]
 				assert p isa MMMethod
+				if not new_instance_iroutine.has_key(p) then continue
 				var icd = new FileICodeDumper(file)
 				icd.indent
 				file.write("New instance:: {p.full_name}\n")
