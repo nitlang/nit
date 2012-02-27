@@ -289,6 +289,15 @@ redef class AExternInitPropdef
 	end
 end
 
+redef class ASignature
+	redef fun after_typing(v)
+	do
+		if self.n_opar != null and self.n_params.is_empty then
+			v.warning(self, "Warning: superfluous parentheses.")
+		end
+	end
+end
+
 redef class AParam
 	redef fun after_typing(v)
 	do
