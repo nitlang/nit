@@ -1,14 +1,16 @@
 
+PROGS=*.nit ../examples/*.nit ../lib/*.nit ../src/nitdoc.nit ../src/nits.nit ../src/nitc.nit ../src/test_parser.nit
+
 all: separate global icode
 
 separate:
-	./tests.sh *.nit ../examples/*.nit ../lib/*.nit ../src/nitdoc.nit ../src/nitc.nit ../src/test_parser.nit
+	./tests.sh ${PROGS}
 
 some:
 	./tests.sh base_compile.nit base_attr.nit base_gen.nit test_gen_inh.nit bench_fib.nit example_objet.nit
 
 global:
-	./tests.sh -o --global *.nit ../examples/*.nit ../lib/*.nit ../src/nitdoc.nit ../src/nitc.nit../src/nits.nit ../src/test_parser.nit
+	./tests.sh -o --global ${PROGS}
 
 icode:
 	./tests_icode.sh icode*.nit
