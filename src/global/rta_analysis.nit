@@ -114,18 +114,9 @@ class RtaBuilder
 		if called_methods.has(m) then return
 		if call_sites.has(call) then return
 
-		if m.global.is_init then
-			called_methods.add(m)
-			add_reachable_iroutine(m.iroutine)
-
-			# No need to add the call site or to process other
-			# call sites when it is an initializer: we know
-			# exactly which one will get called
-		else
-			call_sites.add(call)
-			called_methods.add(m)
-			check_call_sites
-		end
+		call_sites.add(call)
+		called_methods.add(m)
+		check_call_sites
 	end
 
 	fun add_reachable_iroutine(ir: nullable IRoutine) do
