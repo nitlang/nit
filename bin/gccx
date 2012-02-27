@@ -69,7 +69,7 @@ return $res
 }
 
 cache=true
-if ccache -V 2>/dev/null >/dev/null; then
+if ( ccache -V ) 2>/dev/null >/dev/null; then
 	cache=ccache
 fi
 
