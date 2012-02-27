@@ -39,6 +39,16 @@ redef class MMType
 		end
 	end
 
+	fun mangled_name: String
+	do
+		var pi = local_class.primitive_info
+		if is_nullable then
+			return "nullable_{local_class.name.to_s}"
+		else
+			return local_class.name.to_s
+		end
+	end
+
 	# Return the expression to convert this type from its native version.
 	fun from_native( name : String ) : String
 	do
@@ -72,7 +82,7 @@ redef class MMType
 			not is_nullable then # int, float, point/void* ...
 			return "{nit_name} = {boxtype(native_name)}"
 		else
-			return "{nit_name} = {"{native_name}.v"}"
+			return "{nit_name} = {native_name}.v"
 		end
 	end
 end
@@ -219,16 +229,16 @@ redef class MMImportedCast
 		if is_about_nullable_only then
 			if is_not_null_to_nullable  then # to null
 				# nullable_Object Object_as_nullable( Object o )
-				return "{from.friendly_extern_name}_as_nullable"
+				return "{from.mangled_name}_as_nullable"
 			else if is_nullable_to_not_null then # from null
 				# Object Object_as_not_null( nullable_Object o )
-				return "{to.friendly_extern_name}_as_not_null"
+				return "{to.mangled_name}_as_not_null"
 			else
 				abort
 			end
 		else # inter types
 			# String Object_as_String( Object o )
-			return "{from.friendly_extern_name}_as_{to.friendly_extern_name}"
+			return "{from.mangled_name}_as_{to.mangled_name}"
 		end
 	end
 
@@ -253,13 +263,13 @@ redef class MMImportedCast
 			else if is_nullable_to_not_null then # from null
 				# Object_is_null( nullable_Object o )
 				# is opposite from others
-				return "{to.local_class}_is_null"
+				return "{to.mangled_name}_is_null"
 			else
 				abort
 			end
 		else # inter types
 			# Object_is_a_String( Object o )
-			return "{from.friendly_extern_name}_is_a_{to.friendly_extern_name}"
+			return "{from.mangled_name}_is_a_{to.mangled_name}"
 		end
 	end
 

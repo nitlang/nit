@@ -461,7 +461,7 @@ redef class MMType
 
 			# add null version, as a struct
 			if is_nullable then
-				var null_getter = "null_{as_notnull.friendly_extern_name}"
+				var null_getter = "null_{as_notnull.mangled_name}"
 				var null_getter_local = "{mmmodule.to_s}_{null_getter}"
 
 				v.header.add( "{name} {null_getter_local}();\n" )
