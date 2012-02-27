@@ -88,8 +88,10 @@ class RFIMAVisitor
 			var t = ic.stype
 			var cls = t.for_module(program.main_module).local_class
 			var m = cls[ic.property.global].as(MMMethod)
-			var r = cls.new_instance_iroutine[m]
-			process_call(r)
+			if not m.is_extern then
+				var r = cls.new_instance_iroutine[m]
+				process_call(r)
+			end
 		else if ic isa ISuper then
 			# Process possible calls
 			var method = ic.property
