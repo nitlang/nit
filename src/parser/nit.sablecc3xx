@@ -266,18 +266,19 @@ methid {-> methid}
 	;
 
 signature~withret {-> signature}
-	= params? typing closure_decls {-> New signature([params.param], typing.type, [closure_decls.closure_decl])}
-	| {noclosures} params? typing no {-> New signature([params.param], typing.type, [])}
-!withret| {noret} params? closure_decls {-> New signature([params.param], Null, [closure_decls.closure_decl])}
-!withret| {noretnoclosures} params? no {-> New signature([params.param], Null, [])}
+	= opar no params? cpar typing [no2]:no closure_decls? {-> New signature(opar, [params.param], cpar, typing.type, [closure_decls.closure_decl])}
+!withret| {noret} opar no params? cpar [no2]:no closure_decls? {-> New signature(opar, [params.param], cpar, Null, [closure_decls.closure_decl])}
+	| {nopar} typing no closure_decls? {-> New signature(Null, [], Null, typing.type, [closure_decls.closure_decl])}
+!withret| {noparnoret} no closure_decls? {-> New signature(Null, [], Null, Null, [closure_decls.closure_decl])}
 	;
 
 signature_noclosures {-> signature}
-	= params? typing? {-> New signature([params.param], typing.type, [])};
+	= opar no params? cpar typing? {-> New signature(opar, [params.param], cpar, typing.type, [])}
+	| {nopar} typing? {-> New signature(Null, [], Null, typing.type, [])}
+	;
 
 params {-> param*} 
-	= opar no param params_tail* [n2]:no cpar {-> [param, params_tail.param]}
-	| {empty} opar no cpar {-> []}
+	= param params_tail* [n2]:no {-> [param, params_tail.param] }
 	;
 params_tail {-> param}
 	= comma no param {-> param};
@@ -287,7 +288,7 @@ param
 	;
 
 closure_decls {->closure_decl*}
-	= no closure_decl+ {-> [closure_decl]};
+	= closure_decl+ {-> [closure_decl]};
 closure_decl
 	= kwbreak? bang id signature_noclosures n {-> New closure_decl(kwbreak, bang, id, signature_noclosures.signature, Null)}
 	| {optionnal} kwbreak? bang id signature_noclosures kwdo stmtso n {-> New closure_decl(kwbreak, bang, id, signature_noclosures.signature, stmtso.expr)}
@@ -664,7 +665,7 @@ able	= {read} kwredef? kwreadable
 
 methid = {id} id | {plus} plus | {minus} minus | {star} star | {slash} slash | {percent} percent | {eq} eq | {ne} ne | {le} le | {ge} ge | {lt} lt | {gt} gt |  {ll} ll | {gg} gg | {bra} obra cbra | {starship} starship | {assign} id assign | {braassign} obra cbra assign;
 
-signature = [params]:param* type? [closure_decls]:closure_decl*;
+signature = opar? [params]:param* cpar? type? [closure_decls]:closure_decl*;
 
 param	= id type? dotdotdot?
 	;

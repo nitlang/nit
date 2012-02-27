@@ -607,7 +607,9 @@ class ABraassignMethid
 end
 class ASignature
 	super ASignature
+    readable var _n_opar: nullable TOpar = null
     readable var _n_params: List[AParam] = new List[AParam]
+    readable var _n_cpar: nullable TCpar = null
     readable var _n_type: nullable AType = null
     readable var _n_closure_decls: List[AClosureDecl] = new List[AClosureDecl]
 end

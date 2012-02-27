@@ -2921,16 +2921,26 @@ redef class ASignature
     private init empty_init do end
 
     init init_asignature (
+            n_opar: nullable TOpar,
             n_params: Collection[Object], # Should be Collection[AParam]
+            n_cpar: nullable TCpar,
             n_type: nullable AType,
             n_closure_decls: Collection[Object] # Should be Collection[AClosureDecl]
     )
     do
         empty_init
+        _n_opar = n_opar
+	if n_opar != null then
+		n_opar.parent = self
+	end
 	for n in n_params do
 		assert n isa AParam
 		_n_params.add(n)
 		n.parent = self
+	end
+        _n_cpar = n_cpar
+	if n_cpar != null then
+		n_cpar.parent = self
 	end
         _n_type = n_type
 	if n_type != null then
@@ -2945,6 +2955,16 @@ redef class ASignature
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
+        if _n_opar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TOpar
+                _n_opar = new_child
+	    else
+		_n_opar = null
+            end
+            return
+	end
         for i in [0.._n_params.length[ do
             if _n_params[i] == old_child then
                 if new_child != null then
@@ -2957,6 +2977,16 @@ redef class ASignature
                 return
             end
         end
+        if _n_cpar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCpar
+                _n_cpar = new_child
+	    else
+		_n_cpar = null
+            end
+            return
+	end
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -2983,9 +3013,15 @@ redef class ASignature
 
     redef fun visit_all(v: Visitor)
     do
+        if _n_opar != null then
+            v.enter_visit(_n_opar.as(not null))
+        end
             for n in _n_params do
                 v.enter_visit(n)
 	    end
+        if _n_cpar != null then
+            v.enter_visit(_n_cpar.as(not null))
+        end
         if _n_type != null then
             v.enter_visit(_n_type.as(not null))
         end

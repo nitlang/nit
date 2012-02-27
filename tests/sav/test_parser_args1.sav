@@ -33,12 +33,14 @@
         keyword 'fun' ... ../src/test_parser.nit:25,8--10
         ../src/test_parser.nit:25,12--16
           identifier 'visit' ... ../src/test_parser.nit:25,12--16
-        ../src/test_parser.nit:25,18--34
+        ../src/test_parser.nit:25,17--35
+          '(' ... ../src/test_parser.nit:25,17
           ../src/test_parser.nit:25,18--34
             identifier 'n' ... ../src/test_parser.nit:25,18
             ../src/test_parser.nit:25,21--34
               keyword 'nullable' ... ../src/test_parser.nit:25,21--28
               type identifier 'ANode' ... ../src/test_parser.nit:25,30--34
+          ')' ... ../src/test_parser.nit:25,35
         ../src/test_parser.nit:27,3--36,4
           ../src/test_parser.nit:27,3--26
             keyword 'if' ... ../src/test_parser.nit:27,3--4
