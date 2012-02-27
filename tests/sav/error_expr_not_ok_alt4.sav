@@ -19,6 +19,7 @@ alt/error_expr_not_ok_alt4.nit:63,7--30: Type error: expected A, got Int
 alt/error_expr_not_ok_alt4.nit:64,7--33: Type error: expected A, got Int
 alt/error_expr_not_ok_alt4.nit:66,7--10: Type error: expected Bool, got Int
 alt/error_expr_not_ok_alt4.nit:66,21: Type error: expected A, got Int
+alt/error_expr_not_ok_alt4.nit:67,1--18: Warning: use 'loop' instead of 'while true do'.
 alt/error_expr_not_ok_alt4.nit:69,10--13: Type error: Expected a type with an 'iterate' method. Found Int.
 alt/error_expr_not_ok_alt4.nit:69,24: Type error: expected A, got Int
 alt/error_expr_not_ok_alt4.nit:71,8--11: Type error: expected Bool, got Int
@@ -86,21 +87,24 @@ alt/error_expr_not_ok_alt4.nit:124,1--14: Error: Attribute _fail doesn't exists 
 alt/error_expr_not_ok_alt4.nit:126,7--13: Error: Attribute _x doesn't exists in Int.
 alt/error_expr_not_ok_alt4.nit:127,1--11: Error: Attribute _x doesn't exists in Int.
 alt/error_expr_not_ok_alt4.nit:128,1--12: Error: Attribute _x doesn't exists in Int.
-alt/error_expr_not_ok_alt4.nit:131,7--14: Type error: expected A, got Int
-alt/error_expr_not_ok_alt4.nit:134,7--12: Error: Method '[]' doesn't exists in Int.
+alt/error_expr_not_ok_alt4.nit:131,7--15: Type error: expected A, got Int
+alt/error_expr_not_ok_alt4.nit:134,7--13: Error: Method '[]' doesn't exists in Int.
 alt/error_expr_not_ok_alt4.nit:135,1--11: Error: Method '[]=' doesn't exists in Int.
 alt/error_expr_not_ok_alt4.nit:136,1--12: Error: Method '[]' doesn't exists in Int.
 alt/error_expr_not_ok_alt4.nit:137,1--17: Error: Method '[]=' doesn't exists in Int.
-alt/error_expr_not_ok_alt4.nit:139,8--14: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt4.nit:140,8--14: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt4.nit:141,8--17: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt4.nit:142,8--14: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt4.nit:143,8--14: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt4.nit:144,8--17: Type error: expected A, got Range[Int]
-alt/error_expr_not_ok_alt4.nit:145,8--14: Type error: expected A, got Array[Int]
-alt/error_expr_not_ok_alt4.nit:146,8--14: Type error: expected A, got Array[Int]
-alt/error_expr_not_ok_alt4.nit:147,8--17: Type error: expected A, got Array[Int]
+alt/error_expr_not_ok_alt4.nit:139,7--15: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt4.nit:140,7--15: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt4.nit:141,7--18: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt4.nit:142,7--15: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt4.nit:143,7--15: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt4.nit:144,7--18: Type error: expected A, got Range[Int]
+alt/error_expr_not_ok_alt4.nit:145,7--15: Type error: expected A, got Array[Int]
+alt/error_expr_not_ok_alt4.nit:146,7--15: Type error: expected A, got Array[Int]
+alt/error_expr_not_ok_alt4.nit:147,7--18: Type error: expected A, got Array[Int]
 alt/error_expr_not_ok_alt4.nit:149,7--24: Type error: expected A, got String
-alt/error_expr_not_ok_alt4.nit:150,7--17: Type error: expected A, got Int
-alt/error_expr_not_ok_alt4.nit:151,7--22: Type error: expected A, got Int
+alt/error_expr_not_ok_alt4.nit:150,7--18: Warning: Expression is already a Int.
+alt/error_expr_not_ok_alt4.nit:150,7--18: Type error: expected A, got Int
+alt/error_expr_not_ok_alt4.nit:151,7--10: Warning: 'as(not null)' on non nullable type.
+alt/error_expr_not_ok_alt4.nit:151,7--23: Type error: expected A, got Int
+alt/error_expr_not_ok_alt4.nit:152,7--18: Warning: Expression is already a Int.
 alt/error_expr_not_ok_alt4.nit:152,7--18: Type error: expected A, got Bool

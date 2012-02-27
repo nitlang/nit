@@ -78,7 +78,7 @@ class BM_Pattern
 		while j < n - m + 1 do
 			var i = m - 1 # Cursor in the pattern
 			while i >= 0 and _motif[i] == s[i + j] do i -= 1
-			if (i < 0) then
+			if i < 0 then
 				return j
 			else
 				var gs = _gs[i] # Good shift

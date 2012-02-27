@@ -40,7 +40,7 @@ end
 #alt1#a.foo(1)
 
 a = new B
-assert a isa B
+
 a.foo(2)
 if maybe then
 else
@@ -49,7 +49,7 @@ end
 #alt2#a.foo(2)
 
 a = new B
-assert a isa B
+
 a.foo(3)
 if maybe then
 	a = new A
@@ -58,7 +58,7 @@ end
 #alt3#a.foo(3)
 
 a = new B
-assert a isa B
+
 a.foo(4)
 if maybe then
 else
@@ -66,7 +66,7 @@ end
 a.foo(4)
 
 a = new B
-assert a isa B
+
 a.foo(5)
 if maybe then
 	a = new A
@@ -74,14 +74,14 @@ end
 #alt4#a.foo(5)
 
 a = new B
-assert a isa B
+
 a.foo(6)
 if maybe then
 end
 a.foo(6)
 
 a = new B
-assert a isa B
+
 a.foo(7)
 while not maybe do
 	#alt5#a = new A
@@ -89,7 +89,7 @@ end
 a.foo(7)
 
 a = new B
-assert a isa B
+
 a.foo(8)
 while not maybe do
 end

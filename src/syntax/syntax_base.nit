@@ -848,3 +848,8 @@ redef class AMethid
 	# Name of method
 	fun name: nullable Symbol is abstract
 end
+
+redef class AExprs
+	# Return an array made of each expr
+	fun to_a: Array[AExpr] do return self.n_exprs.to_a
+end

@@ -311,6 +311,7 @@ $     when {@cmd='MAKELIST'}
 					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = new Array[Object]
 $     end
 $     when {@cmd='MAKENODE'}
+$      if {count(arg)!=0}
 					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}: nullable @etype = new @etype.init_${translate(@etype,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}(
 $       foreach {arg}
 $           if @null
@@ -320,6 +321,9 @@ $           else
 $           end
 $       end foreach
 					)
+$      else
+					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}: nullable @etype = new @etype.init_${translate(@etype,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
+$      end
 $     end
 $     when {@cmd='RETURNNODE'}
 $       if @null

@@ -1,2 +1,2 @@
-../src/syntax/typing.nit
--l ../src/syntax/typing.nit
+../src/test_parser.nit
+-l ../src/test_parser.nit

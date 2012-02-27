@@ -20,7 +20,7 @@ class A
 
 	fun get_nstr_from_str( str : String ) : NativeString is extern import String::to_cstring
 
-	fun get_something() : String is extern import String::from_cstring
+	fun get_something : String is extern import String::from_cstring
 end
 
 var a = new A
@@ -29,6 +29,6 @@ print a.get_str_from_nstr_with_len( "hello world?".to_cstring )
 print new String.from_cstring( a.get_nstr_from_str( "hello world!" ) )
 
 
-var something = a.get_something() # expects "something"
+var something = a.get_something # expects "something"
 print something
 print something.length

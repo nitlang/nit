@@ -417,9 +417,7 @@ redef class AExternInitPropdef
 		var sig = method.signature
 		assert params.length == sig.arity + 1
 		var rtype = sig.recv # sig.return_type
-		if rtype != null then
-			v.add_assignment(new IRegister(rtype), v.expr(new INative(method, params), rtype))
-		end
+		v.add_assignment(new IRegister(rtype), v.expr(new INative(method, params), rtype))
 
 		super
 	end
@@ -1001,8 +999,9 @@ end
 redef class AArrayExpr
 	redef fun generate_icode(v)
 	do
-		var recv = v.add_new_array(stype, n_exprs.length)
-		for ne in n_exprs do
+		var nes = n_exprs.n_exprs
+		var recv = v.add_new_array(stype, nes.length)
+		for ne in nes do
 			var e = v.generate_expr(ne)
 			v.add_call_array_add(recv, e)
 		end
@@ -1039,12 +1038,13 @@ redef class ASuperExpr
 		end
 		var args = new Array[IRegister].with_capacity(arity + 1)
 		args.add(v.iroutine.params[0])
-		if n_args.length != arity then
+		var nas = n_args.n_exprs
+		if nas.length != arity then
 			for i in [0..arity[ do
 				args.add(v.iroutine.params[i + 1])
 			end
 		else
-			for na in n_args do
+			for na in nas do
 				args.add(v.generate_expr(na))
 			end
 		end

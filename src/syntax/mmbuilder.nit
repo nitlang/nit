@@ -544,7 +544,7 @@ redef class AClassdef
 		var local_class: MMSrcLocalClass
 		var mod = v.mmmodule
 		var local_classes = mod.src_local_classes
-		if (local_classes.has_key(name)) then
+		if local_classes.has_key(name) then
 			local_class = local_classes[name]
 			_local_class = local_class
 			if self isa AStdClassdef then

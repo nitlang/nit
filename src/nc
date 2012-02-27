@@ -19,12 +19,6 @@ NITC="../c_src/nitc"
 NITCOPTS="-v -W"
 CSRC=$` (cd ../c_src; pwd) `
 
-trap_action() {
-	test -n "$sub_command" && kill $sub_command
-	test -e "$pipe" && rm -f $pipe
-	exit 1
-}
-
 name=`basename $0`
 case $name in
 	nc) opts="--clibdir ../c_src/clib";;
@@ -37,15 +31,5 @@ esac
 
 ./git-gen-version.sh "$name"
 
-trap trap_action INT TERM
 echo ${NITC} ${NITCOPTS} ${opts} "$@"
-pipe=`mktemp nc.stderr.XXXXX`
-rm "$pipe" 2>/dev/null
-mkfifo "$pipe"
-./showerr.sh <"$pipe" &
-sub_command=$!
-${NITC} ${NITCOPTS} ${opts} "$@" 2>"$pipe"
-err=$?
-rm "$pipe"
-wait
-exit $err
+${NITC} ${NITCOPTS} ${opts} "$@"

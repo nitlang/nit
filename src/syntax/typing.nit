@@ -289,6 +289,15 @@ redef class AExternInitPropdef
 	end
 end
 
+redef class ASignature
+	redef fun after_typing(v)
+	do
+		if self.n_opar != null and self.n_params.is_empty then
+			v.warning(self, "Warning: superfluous parentheses.")
+		end
+	end
+end
+
 redef class AParam
 	redef fun after_typing(v)
 	do
@@ -389,6 +398,27 @@ redef class AExpr
 
 	# The control flow information if current boolean expression is false
 	readable private var _if_false_flow_ctx: nullable FlowContext
+
+	# Wharn in case of superfluous parentheses
+	private fun warn_parentheses(v: AbsSyntaxVisitor)
+	do
+	end
+end
+
+redef class AParExpr
+	redef fun warn_parentheses(v)
+	do
+		v.warning(self, "Warning: superfluous parentheses.")
+	end
+end
+
+redef class AParExprs
+	redef fun after_typing(v)
+	do
+		if n_exprs.is_empty then
+			v.warning(self, "Warning: superfluous parentheses.")
+		end
+	end
 end
 
 redef class AVardeclExpr
@@ -454,6 +484,9 @@ redef class AReturnExpr
 		else if e != null and t != null then
 			v.check_conform_expr(e, t)
 		end
+		if e != null then
+			e.warn_parentheses(v)
+		end
 		_is_typed = true
 	end
 end
@@ -471,12 +504,16 @@ redef class AContinueExpr
 		end
 
 		var t = esc.continue_stype
-		if n_expr == null and t != null then
+		var e = n_expr
+		if e == null and t != null then
 			v.error(self, "Error: continue with a value required in this block.")
-		else if n_expr != null and t == null then
+		else if e != null and t == null then
 			v.error(self, "Error: continue without value required in this block.")
-		else if n_expr != null and t != null then
-			v.check_conform_expr(n_expr.as(not null), t)
+		else if e != null and t != null then
+			v.check_conform_expr(e, t)
+		end
+		if e != null then
+			e.warn_parentheses(v)
 		end
 		_is_typed = true
 	end
@@ -493,13 +530,17 @@ redef class ABreakExpr
 		esc.break_flow_contexts.add(old_flow_ctx)
 
 		var bl = esc.break_list
-		if n_expr == null and bl != null then
+		var e = n_expr
+		if e == null and bl != null then
 			v.error(self, "Error: break with a value required in this block.")
-		else if n_expr != null and bl == null then
+		else if e != null and bl == null then
 			v.error(self, "Error: break without value required in this block.")
-		else if n_expr != null and bl != null then
+		else if e != null and bl != null then
 			# Typing check can only be done later
-			bl.add(n_expr.as(not null))
+			bl.add(e)
+		end
+		if e != null then
+			e.warn_parentheses(v)
 		end
 		_is_typed = true
 	end
@@ -575,6 +616,8 @@ redef class AIfExpr
 		v.enter_visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
 
+		n_expr.warn_parentheses(v)
+
 		# Prepare 'then' context
 		var old_flow_ctx = v.flow_ctx
 		v.use_if_true_flow_ctx(n_expr)
@@ -615,6 +658,8 @@ redef class AWhileExpr
 
 		if n_expr isa ATrueExpr then
 			v.warning(self, "Warning: use 'loop' instead of 'while true do'.")
+		else
+			n_expr.warn_parentheses(v)
 		end
 
 		# Prepare inside context (assert cond)
@@ -692,6 +737,7 @@ redef class AForExpr
 			v.error(n_expr, "Type error: 'for' on a nullable expression.")
 			return
 		end
+		n_expr.warn_parentheses(v)
 
 		# Get iterate
 		var iterate_name = once "iterate".to_symbol
@@ -737,6 +783,7 @@ redef class AAssertExpr
 		# Process condition
 		v.enter_visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
+		n_expr.warn_parentheses(v)
 
 		# Process optional 'else' part
 		if n_else != null then
@@ -996,7 +1043,7 @@ redef class AOrElseExpr
 		# Consider the type of the left operand
 		var t = n_expr.stype
 		if not t.is_nullable then
-			v.warning(n_expr, "Warning: left operant of a 'or else' is not a nullable type.")
+			v.warning(n_expr, "Warning: left operand of a 'or else' is not a nullable type.")
 		else
 			t = t.as_notnull
 		end
@@ -1081,7 +1128,7 @@ end
 redef class AArrayExpr
 	redef fun after_typing(v)
 	do
-		var stype = v.check_conform_multiexpr(null, n_exprs)
+		var stype = v.check_conform_multiexpr(null, n_exprs.n_exprs)
 		if stype != null then do_typing(v, stype)
 	end
 
@@ -1139,7 +1186,7 @@ redef class ASuperExpr
 			assert p isa MMMethod
 			_init_in_superclass = p
 			register_super_init_call(v, p)
-			if n_args.length > 0 then
+			if n_args.n_exprs.length > 0 then
 				var signature = get_signature(v, v.self_var.stype.as(not null), p, true)
 				process_signature(v, signature, p.name, compute_raw_arguments)
 			end
@@ -1708,7 +1755,7 @@ redef class AEqExpr
 
 		if n_expr.stype isa MMTypeNone then
 			if n_expr2.stype isa MMTypeNone then
-				v.warning(self, "Warning: comparaison between 2 null values.")
+				v.warning(self, "Warning: comparaison between two null values.")
 			else
 				try_to_isa(v, n_expr2)
 			end
@@ -1739,7 +1786,7 @@ redef class ANeExpr
 
 		if n_expr.stype isa MMTypeNone then
 			if n_expr2.stype isa MMTypeNone then
-				v.warning(self, "Warning: comparaison between 2 null values.")
+				v.warning(self, "Warning: comparaison between two null values.")
 			else
 				try_to_isa(v, n_expr2)
 			end
@@ -1811,7 +1858,7 @@ redef class ACallFormExpr
 					n = new AClosureCallExpr.init_aclosurecallexpr(n_id, n_args, n_closure_defs)
 					n._variable = variable
 				else
-					if not n_args.is_empty then
+					if not n_args.n_exprs.is_empty or n_args isa AParExprs then
 						v.error(self, "Error: {name} is variable, not a function.")
 						return
 					end
@@ -2071,7 +2118,13 @@ redef class AProxyExpr
 		_is_typed = true
 		if n_expr.is_statement then return
 		_stype = n_expr.stype
+		_if_true_flow_ctx = n_expr._if_true_flow_ctx
+		_if_false_flow_ctx = n_expr._if_false_flow_ctx
 	end
+
+	redef fun is_self do return n_expr.is_self
+
+	redef fun its_variable do return n_expr.its_variable
 end
 
 redef class AOnceExpr

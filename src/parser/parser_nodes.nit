@@ -698,7 +698,9 @@ class ABraassignMethid
 end
 class ASignature
 	super Prod
+    readable var _n_opar: nullable TOpar = null
     readable var _n_params: List[AParam] = new List[AParam]
+    readable var _n_cpar: nullable TCpar = null
     readable var _n_type: nullable AType = null
     readable var _n_closure_decls: List[AClosureDecl] = new List[AClosureDecl]
 end
@@ -925,7 +927,7 @@ class ANewExpr
     readable var _n_kwnew: TKwnew
     readable var _n_type: AType
     readable var _n_id: nullable TId = null
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
 end
 class AAttrFormExpr
 	super AExpr
@@ -942,7 +944,7 @@ end
 class ACallFormExpr
 	super ASendExpr
     readable var _n_id: TId
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
 end
 class AAttrReassignExpr
 	super AExpr
@@ -965,16 +967,16 @@ class ASuperExpr
 	super AExpr
     readable var _n_qualified: nullable AQualified = null
     readable var _n_kwsuper: TKwsuper
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
 end
 class AInitExpr
 	super ASendExpr
     readable var _n_kwinit: TKwinit
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
 end
 class ABraFormExpr
 	super ASendExpr
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
 end
 class ABraExpr
 	super ABraFormExpr
@@ -994,7 +996,7 @@ end
 class AClosureCallExpr
 	super AExpr
     readable var _n_id: TId
-    readable var _n_args: List[AExpr] = new List[AExpr]
+    readable var _n_args: AExprs
     readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
 end
 class AVarExpr
@@ -1015,13 +1017,17 @@ class ARangeExpr
 end
 class ACrangeExpr
 	super ARangeExpr
+	readable var _n_obra: TObra
+	readable var _n_cbra: TCbra
 end
 class AOrangeExpr
 	super ARangeExpr
+	readable var _n_obra: TObra
+	readable var _n_cbra: TObra
 end
 class AArrayExpr
 	super AExpr
-    readable var _n_exprs: List[AExpr] = new List[AExpr]
+    readable var _n_exprs: AExprs
 end
 class ASelfExpr
 	super AExpr
@@ -1079,6 +1085,8 @@ class ASuperstringExpr
 end
 class AParExpr
 	super AProxyExpr
+    readable var _n_opar: TOpar
+    readable var _n_cpar: TCpar
 end
 class AProxyExpr
 	super AExpr
@@ -1088,18 +1096,39 @@ class AAsCastExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwas: TKwas
+    readable var _n_opar: TOpar
     readable var _n_type: AType
+    readable var _n_cpar: TCpar
 end
 class AAsNotnullExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_kwas: TKwas
+    readable var _n_opar: TOpar
     readable var _n_kwnot: TKwnot
     readable var _n_kwnull: TKwnull
+    readable var _n_cpar: TCpar
 end
 class AIssetAttrExpr
 	super AAttrFormExpr
     readable var _n_kwisset: TKwisset
+end
+class AExprs
+	super Prod 
+    readable var _n_exprs: List[AExpr] = new List[AExpr]
+end
+class AListExprs
+	super AExprs
+end
+class AParExprs
+	super AExprs
+    readable var _n_opar: TOpar
+    readable var _n_cpar: TCpar
+end
+class ABraExprs
+	super AExprs
+    readable var _n_obra: TObra
+    readable var _n_cbra: TCbra
 end
 class AAssignOp super Prod end
 class APlusAssignOp

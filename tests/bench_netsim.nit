@@ -41,7 +41,6 @@ class NodeSource
 	# Add the sink `n' the the connected nodes
 	# Do nothing if `n' is already connected
 	do
-		assert n != null
 		# Create the collection if needed
 		if _nexts == null then
 			_nexts = new ArraySet[NodeSink]
@@ -53,7 +52,6 @@ class NodeSource
 	# Remove the sink `n' from the connected nodes
 	# Do nothing if `n' is not connected
 	do
-		assert n != null
 		_nexts.remove(n)
 	end
 
@@ -109,7 +107,7 @@ class Scheduler
 
 	fun run_for(time_limit: Int)
 	do
-		while true do
+		loop
 			var node = next_event 
 			if _time > time_limit then
 				print("Time limit.")

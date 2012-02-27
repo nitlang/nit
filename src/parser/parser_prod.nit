@@ -22,7 +22,7 @@ redef class ANode
 	# Replace itself with an other node in the AST
 	fun replace_with(node: ANode)
 	do
-		if (_parent != null) then
+		if _parent != null then
 			_parent.replace_child(self, node)
 		end
 	end
@@ -2921,16 +2921,26 @@ redef class ASignature
     private init empty_init do end
 
     init init_asignature (
+            n_opar: nullable TOpar,
             n_params: Collection[Object], # Should be Collection[AParam]
+            n_cpar: nullable TCpar,
             n_type: nullable AType,
             n_closure_decls: Collection[Object] # Should be Collection[AClosureDecl]
     )
     do
         empty_init
+        _n_opar = n_opar
+	if n_opar != null then
+		n_opar.parent = self
+	end
 	for n in n_params do
 		assert n isa AParam
 		_n_params.add(n)
 		n.parent = self
+	end
+        _n_cpar = n_cpar
+	if n_cpar != null then
+		n_cpar.parent = self
 	end
         _n_type = n_type
 	if n_type != null then
@@ -2945,6 +2955,16 @@ redef class ASignature
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
+        if _n_opar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TOpar
+                _n_opar = new_child
+	    else
+		_n_opar = null
+            end
+            return
+	end
         for i in [0.._n_params.length[ do
             if _n_params[i] == old_child then
                 if new_child != null then
@@ -2957,6 +2977,16 @@ redef class ASignature
                 return
             end
         end
+        if _n_cpar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCpar
+                _n_cpar = new_child
+	    else
+		_n_cpar = null
+            end
+            return
+	end
         if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -2983,9 +3013,15 @@ redef class ASignature
 
     redef fun visit_all(v: Visitor)
     do
+        if _n_opar != null then
+            v.enter_visit(_n_opar.as(not null))
+        end
             for n in _n_params do
                 v.enter_visit(n)
 	    end
+        if _n_cpar != null then
+            v.enter_visit(_n_cpar.as(not null))
+        end
         if _n_type != null then
             v.enter_visit(_n_type.as(not null))
         end
@@ -5329,7 +5365,7 @@ redef class ANewExpr
             n_kwnew: nullable TKwnew,
             n_type: nullable AType,
             n_id: nullable TId,
-            n_args: Collection[Object] # Should be Collection[AExpr]
+            n_args: nullable AExprs
     )
     do
         empty_init
@@ -5341,11 +5377,8 @@ redef class ANewExpr
 	if n_id != null then
 		n_id.parent = self
 	end
-	for n in n_args do
-		assert n isa AExpr
-		_n_args.add(n)
-		n.parent = self
-	end
+        _n_args = n_args.as(not null)
+	n_args.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5380,18 +5413,16 @@ redef class ANewExpr
             end
             return
 	end
-        for i in [0.._n_args.length[ do
-            if _n_args[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_args[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_args.remove_at(i)
-                end
-                return
+        if _n_args == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_args = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -5401,9 +5432,7 @@ redef class ANewExpr
         if _n_id != null then
             v.enter_visit(_n_id.as(not null))
         end
-            for n in _n_args do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_args)
     end
 end
 redef class AAttrExpr
@@ -5603,7 +5632,7 @@ redef class ACallExpr
     init init_acallexpr (
             n_expr: nullable AExpr,
             n_id: nullable TId,
-            n_args: Collection[Object], # Should be Collection[AExpr]
+            n_args: nullable AExprs,
             n_closure_defs: Collection[Object] # Should be Collection[AClosureDef]
     )
     do
@@ -5612,11 +5641,8 @@ redef class ACallExpr
 	n_expr.parent = self
         _n_id = n_id.as(not null)
 	n_id.parent = self
-	for n in n_args do
-		assert n isa AExpr
-		_n_args.add(n)
-		n.parent = self
-	end
+        _n_args = n_args.as(not null)
+	n_args.parent = self
 	for n in n_closure_defs do
 		assert n isa AClosureDef
 		_n_closure_defs.add(n)
@@ -5646,18 +5672,16 @@ redef class ACallExpr
             end
             return
 	end
-        for i in [0.._n_args.length[ do
-            if _n_args[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_args[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_args.remove_at(i)
-                end
-                return
+        if _n_args == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_args = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
         for i in [0.._n_closure_defs.length[ do
             if _n_closure_defs[i] == old_child then
                 if new_child != null then
@@ -5676,9 +5700,7 @@ redef class ACallExpr
     do
         v.enter_visit(_n_expr)
         v.enter_visit(_n_id)
-            for n in _n_args do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_args)
             for n in _n_closure_defs do
                 v.enter_visit(n)
 	    end
@@ -5690,7 +5712,7 @@ redef class ACallAssignExpr
     init init_acallassignexpr (
             n_expr: nullable AExpr,
             n_id: nullable TId,
-            n_args: Collection[Object], # Should be Collection[AExpr]
+            n_args: nullable AExprs,
             n_assign: nullable TAssign,
             n_value: nullable AExpr
     )
@@ -5700,11 +5722,8 @@ redef class ACallAssignExpr
 	n_expr.parent = self
         _n_id = n_id.as(not null)
 	n_id.parent = self
-	for n in n_args do
-		assert n isa AExpr
-		_n_args.add(n)
-		n.parent = self
-	end
+        _n_args = n_args.as(not null)
+	n_args.parent = self
         _n_assign = n_assign.as(not null)
 	n_assign.parent = self
         _n_value = n_value.as(not null)
@@ -5733,18 +5752,16 @@ redef class ACallAssignExpr
             end
             return
 	end
-        for i in [0.._n_args.length[ do
-            if _n_args[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_args[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_args.remove_at(i)
-                end
-                return
+        if _n_args == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_args = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
         if _n_assign == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -5771,9 +5788,7 @@ redef class ACallAssignExpr
     do
         v.enter_visit(_n_expr)
         v.enter_visit(_n_id)
-            for n in _n_args do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_args)
         v.enter_visit(_n_assign)
         v.enter_visit(_n_value)
     end
@@ -5784,7 +5799,7 @@ redef class ACallReassignExpr
     init init_acallreassignexpr (
             n_expr: nullable AExpr,
             n_id: nullable TId,
-            n_args: Collection[Object], # Should be Collection[AExpr]
+            n_args: nullable AExprs,
             n_assign_op: nullable AAssignOp,
             n_value: nullable AExpr
     )
@@ -5794,11 +5809,8 @@ redef class ACallReassignExpr
 	n_expr.parent = self
         _n_id = n_id.as(not null)
 	n_id.parent = self
-	for n in n_args do
-		assert n isa AExpr
-		_n_args.add(n)
-		n.parent = self
-	end
+        _n_args = n_args.as(not null)
+	n_args.parent = self
         _n_assign_op = n_assign_op.as(not null)
 	n_assign_op.parent = self
         _n_value = n_value.as(not null)
@@ -5827,18 +5839,16 @@ redef class ACallReassignExpr
             end
             return
 	end
-        for i in [0.._n_args.length[ do
-            if _n_args[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_args[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_args.remove_at(i)
-                end
-                return
+        if _n_args == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_args = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
         if _n_assign_op == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -5865,9 +5875,7 @@ redef class ACallReassignExpr
     do
         v.enter_visit(_n_expr)
         v.enter_visit(_n_id)
-            for n in _n_args do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_args)
         v.enter_visit(_n_assign_op)
         v.enter_visit(_n_value)
     end
@@ -5878,7 +5886,7 @@ redef class ASuperExpr
     init init_asuperexpr (
             n_qualified: nullable AQualified,
             n_kwsuper: nullable TKwsuper,
-            n_args: Collection[Object] # Should be Collection[AExpr]
+            n_args: nullable AExprs
     )
     do
         empty_init
@@ -5888,11 +5896,8 @@ redef class ASuperExpr
 	end
         _n_kwsuper = n_kwsuper.as(not null)
 	n_kwsuper.parent = self
-	for n in n_args do
-		assert n isa AExpr
-		_n_args.add(n)
-		n.parent = self
-	end
+        _n_args = n_args.as(not null)
+	n_args.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5917,18 +5922,16 @@ redef class ASuperExpr
             end
             return
 	end
-        for i in [0.._n_args.length[ do
-            if _n_args[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_args[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_args.remove_at(i)
-                end
-                return
+        if _n_args == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_args = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -5937,9 +5940,7 @@ redef class ASuperExpr
             v.enter_visit(_n_qualified.as(not null))
         end
         v.enter_visit(_n_kwsuper)
-            for n in _n_args do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_args)
     end
 end
 redef class AInitExpr
@@ -5948,7 +5949,7 @@ redef class AInitExpr
     init init_ainitexpr (
             n_expr: nullable AExpr,
             n_kwinit: nullable TKwinit,
-            n_args: Collection[Object] # Should be Collection[AExpr]
+            n_args: nullable AExprs
     )
     do
         empty_init
@@ -5956,11 +5957,8 @@ redef class AInitExpr
 	n_expr.parent = self
         _n_kwinit = n_kwinit.as(not null)
 	n_kwinit.parent = self
-	for n in n_args do
-		assert n isa AExpr
-		_n_args.add(n)
-		n.parent = self
-	end
+        _n_args = n_args.as(not null)
+	n_args.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -5985,27 +5983,23 @@ redef class AInitExpr
             end
             return
 	end
-        for i in [0.._n_args.length[ do
-            if _n_args[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_args[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_args.remove_at(i)
-                end
-                return
+        if _n_args == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_args = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
         v.enter_visit(_n_kwinit)
-            for n in _n_args do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_args)
     end
 end
 redef class ABraExpr
@@ -6013,18 +6007,15 @@ redef class ABraExpr
 
     init init_abraexpr (
             n_expr: nullable AExpr,
-            n_args: Collection[Object], # Should be Collection[AExpr]
+            n_args: nullable AExprs,
             n_closure_defs: Collection[Object] # Should be Collection[AClosureDef]
     )
     do
         empty_init
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
-	for n in n_args do
-		assert n isa AExpr
-		_n_args.add(n)
-		n.parent = self
-	end
+        _n_args = n_args.as(not null)
+	n_args.parent = self
 	for n in n_closure_defs do
 		assert n isa AClosureDef
 		_n_closure_defs.add(n)
@@ -6044,18 +6035,16 @@ redef class ABraExpr
             end
             return
 	end
-        for i in [0.._n_args.length[ do
-            if _n_args[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_args[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_args.remove_at(i)
-                end
-                return
+        if _n_args == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_args = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
         for i in [0.._n_closure_defs.length[ do
             if _n_closure_defs[i] == old_child then
                 if new_child != null then
@@ -6073,9 +6062,7 @@ redef class ABraExpr
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
-            for n in _n_args do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_args)
             for n in _n_closure_defs do
                 v.enter_visit(n)
 	    end
@@ -6086,7 +6073,7 @@ redef class ABraAssignExpr
 
     init init_abraassignexpr (
             n_expr: nullable AExpr,
-            n_args: Collection[Object], # Should be Collection[AExpr]
+            n_args: nullable AExprs,
             n_assign: nullable TAssign,
             n_value: nullable AExpr
     )
@@ -6094,11 +6081,8 @@ redef class ABraAssignExpr
         empty_init
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
-	for n in n_args do
-		assert n isa AExpr
-		_n_args.add(n)
-		n.parent = self
-	end
+        _n_args = n_args.as(not null)
+	n_args.parent = self
         _n_assign = n_assign.as(not null)
 	n_assign.parent = self
         _n_value = n_value.as(not null)
@@ -6117,18 +6101,16 @@ redef class ABraAssignExpr
             end
             return
 	end
-        for i in [0.._n_args.length[ do
-            if _n_args[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_args[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_args.remove_at(i)
-                end
-                return
+        if _n_args == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_args = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
         if _n_assign == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -6154,9 +6136,7 @@ redef class ABraAssignExpr
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
-            for n in _n_args do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_args)
         v.enter_visit(_n_assign)
         v.enter_visit(_n_value)
     end
@@ -6166,7 +6146,7 @@ redef class ABraReassignExpr
 
     init init_abrareassignexpr (
             n_expr: nullable AExpr,
-            n_args: Collection[Object], # Should be Collection[AExpr]
+            n_args: nullable AExprs,
             n_assign_op: nullable AAssignOp,
             n_value: nullable AExpr
     )
@@ -6174,11 +6154,8 @@ redef class ABraReassignExpr
         empty_init
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
-	for n in n_args do
-		assert n isa AExpr
-		_n_args.add(n)
-		n.parent = self
-	end
+        _n_args = n_args.as(not null)
+	n_args.parent = self
         _n_assign_op = n_assign_op.as(not null)
 	n_assign_op.parent = self
         _n_value = n_value.as(not null)
@@ -6197,18 +6174,16 @@ redef class ABraReassignExpr
             end
             return
 	end
-        for i in [0.._n_args.length[ do
-            if _n_args[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_args[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_args.remove_at(i)
-                end
-                return
+        if _n_args == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_args = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
         if _n_assign_op == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -6234,9 +6209,7 @@ redef class ABraReassignExpr
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
-            for n in _n_args do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_args)
         v.enter_visit(_n_assign_op)
         v.enter_visit(_n_value)
     end
@@ -6246,18 +6219,15 @@ redef class AClosureCallExpr
 
     init init_aclosurecallexpr (
             n_id: nullable TId,
-            n_args: Collection[Object], # Should be Collection[AExpr]
+            n_args: nullable AExprs,
             n_closure_defs: Collection[Object] # Should be Collection[AClosureDef]
     )
     do
         empty_init
         _n_id = n_id.as(not null)
 	n_id.parent = self
-	for n in n_args do
-		assert n isa AExpr
-		_n_args.add(n)
-		n.parent = self
-	end
+        _n_args = n_args.as(not null)
+	n_args.parent = self
 	for n in n_closure_defs do
 		assert n isa AClosureDef
 		_n_closure_defs.add(n)
@@ -6277,18 +6247,16 @@ redef class AClosureCallExpr
             end
             return
 	end
-        for i in [0.._n_args.length[ do
-            if _n_args[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_args[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_args.remove_at(i)
-                end
-                return
+        if _n_args == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_args = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
         for i in [0.._n_closure_defs.length[ do
             if _n_closure_defs[i] == old_child then
                 if new_child != null then
@@ -6306,9 +6274,7 @@ redef class AClosureCallExpr
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_id)
-            for n in _n_args do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_args)
             for n in _n_closure_defs do
                 v.enter_visit(n)
 	    end
@@ -6512,19 +6478,35 @@ redef class ACrangeExpr
     private init empty_init do end
 
     init init_acrangeexpr (
+            n_obra: nullable TObra,
             n_expr: nullable AExpr,
-            n_expr2: nullable AExpr
+            n_expr2: nullable AExpr,
+            n_cbra: nullable TCbra
     )
     do
         empty_init
+        _n_obra = n_obra.as(not null)
+	n_obra.parent = self
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
         _n_expr2 = n_expr2.as(not null)
 	n_expr2.parent = self
+        _n_cbra = n_cbra.as(not null)
+	n_cbra.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
+        if _n_obra == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TObra
+                _n_obra = new_child
+	    else
+		abort
+            end
+            return
+	end
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -6545,31 +6527,59 @@ redef class ACrangeExpr
             end
             return
 	end
+        if _n_cbra == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCbra
+                _n_cbra = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
+        v.enter_visit(_n_obra)
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
+        v.enter_visit(_n_cbra)
     end
 end
 redef class AOrangeExpr
     private init empty_init do end
 
     init init_aorangeexpr (
+            n_obra: nullable TObra,
             n_expr: nullable AExpr,
-            n_expr2: nullable AExpr
+            n_expr2: nullable AExpr,
+            n_cbra: nullable TObra
     )
     do
         empty_init
+        _n_obra = n_obra.as(not null)
+	n_obra.parent = self
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
         _n_expr2 = n_expr2.as(not null)
 	n_expr2.parent = self
+        _n_cbra = n_cbra.as(not null)
+	n_cbra.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
+        if _n_obra == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TObra
+                _n_obra = new_child
+	    else
+		abort
+            end
+            return
+	end
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -6590,50 +6600,55 @@ redef class AOrangeExpr
             end
             return
 	end
+        if _n_cbra == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TObra
+                _n_cbra = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
+        v.enter_visit(_n_obra)
         v.enter_visit(_n_expr)
         v.enter_visit(_n_expr2)
+        v.enter_visit(_n_cbra)
     end
 end
 redef class AArrayExpr
     private init empty_init do end
 
     init init_aarrayexpr (
-            n_exprs: Collection[Object] # Should be Collection[AExpr]
+            n_exprs: nullable AExprs
     )
     do
         empty_init
-	for n in n_exprs do
-		assert n isa AExpr
-		_n_exprs.add(n)
-		n.parent = self
-	end
+        _n_exprs = n_exprs.as(not null)
+	n_exprs.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
-        for i in [0.._n_exprs.length[ do
-            if _n_exprs[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AExpr
-                    _n_exprs[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_exprs.remove_at(i)
-                end
-                return
+        if _n_exprs == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExprs
+                _n_exprs = new_child
+	    else
+		abort
             end
-        end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
-            for n in _n_exprs do
-                v.enter_visit(n)
-	    end
+        v.enter_visit(_n_exprs)
     end
 end
 redef class ASelfExpr
@@ -7035,16 +7050,32 @@ redef class AParExpr
     private init empty_init do end
 
     init init_aparexpr (
-            n_expr: nullable AExpr
+            n_opar: nullable TOpar,
+            n_expr: nullable AExpr,
+            n_cpar: nullable TCpar
     )
     do
         empty_init
+        _n_opar = n_opar.as(not null)
+	n_opar.parent = self
         _n_expr = n_expr.as(not null)
 	n_expr.parent = self
+        _n_cpar = n_cpar.as(not null)
+	n_cpar.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
+        if _n_opar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TOpar
+                _n_opar = new_child
+	    else
+		abort
+            end
+            return
+	end
         if _n_expr == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -7055,11 +7086,23 @@ redef class AParExpr
             end
             return
 	end
+        if _n_cpar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCpar
+                _n_cpar = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
+        v.enter_visit(_n_opar)
         v.enter_visit(_n_expr)
+        v.enter_visit(_n_cpar)
     end
 end
 redef class AAsCastExpr
@@ -7068,7 +7111,9 @@ redef class AAsCastExpr
     init init_aascastexpr (
             n_expr: nullable AExpr,
             n_kwas: nullable TKwas,
-            n_type: nullable AType
+            n_opar: nullable TOpar,
+            n_type: nullable AType,
+            n_cpar: nullable TCpar
     )
     do
         empty_init
@@ -7076,8 +7121,12 @@ redef class AAsCastExpr
 	n_expr.parent = self
         _n_kwas = n_kwas.as(not null)
 	n_kwas.parent = self
+        _n_opar = n_opar.as(not null)
+	n_opar.parent = self
         _n_type = n_type.as(not null)
 	n_type.parent = self
+        _n_cpar = n_cpar.as(not null)
+	n_cpar.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7097,6 +7146,16 @@ redef class AAsCastExpr
                 new_child.parent = self
 		assert new_child isa TKwas
                 _n_kwas = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_opar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TOpar
+                _n_opar = new_child
 	    else
 		abort
             end
@@ -7112,13 +7171,25 @@ redef class AAsCastExpr
             end
             return
 	end
+        if _n_cpar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCpar
+                _n_cpar = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
         v.enter_visit(_n_kwas)
+        v.enter_visit(_n_opar)
         v.enter_visit(_n_type)
+        v.enter_visit(_n_cpar)
     end
 end
 redef class AAsNotnullExpr
@@ -7127,8 +7198,10 @@ redef class AAsNotnullExpr
     init init_aasnotnullexpr (
             n_expr: nullable AExpr,
             n_kwas: nullable TKwas,
+            n_opar: nullable TOpar,
             n_kwnot: nullable TKwnot,
-            n_kwnull: nullable TKwnull
+            n_kwnull: nullable TKwnull,
+            n_cpar: nullable TCpar
     )
     do
         empty_init
@@ -7136,10 +7209,14 @@ redef class AAsNotnullExpr
 	n_expr.parent = self
         _n_kwas = n_kwas.as(not null)
 	n_kwas.parent = self
+        _n_opar = n_opar.as(not null)
+	n_opar.parent = self
         _n_kwnot = n_kwnot.as(not null)
 	n_kwnot.parent = self
         _n_kwnull = n_kwnull.as(not null)
 	n_kwnull.parent = self
+        _n_cpar = n_cpar.as(not null)
+	n_cpar.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7159,6 +7236,16 @@ redef class AAsNotnullExpr
                 new_child.parent = self
 		assert new_child isa TKwas
                 _n_kwas = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_opar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TOpar
+                _n_opar = new_child
 	    else
 		abort
             end
@@ -7184,14 +7271,26 @@ redef class AAsNotnullExpr
             end
             return
 	end
+        if _n_cpar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCpar
+                _n_cpar = new_child
+	    else
+		abort
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
         v.enter_visit(_n_kwas)
+        v.enter_visit(_n_opar)
         v.enter_visit(_n_kwnot)
         v.enter_visit(_n_kwnull)
+        v.enter_visit(_n_cpar)
     end
 end
 redef class AIssetAttrExpr
@@ -7251,6 +7350,176 @@ redef class AIssetAttrExpr
         v.enter_visit(_n_kwisset)
         v.enter_visit(_n_expr)
         v.enter_visit(_n_id)
+    end
+end
+redef class AListExprs
+    private init empty_init do end
+
+    init init_alistexprs (
+            n_exprs: Collection[Object] # Should be Collection[AExpr]
+    )
+    do
+        empty_init
+	for n in n_exprs do
+		assert n isa AExpr
+		_n_exprs.add(n)
+		n.parent = self
+	end
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        for i in [0.._n_exprs.length[ do
+            if _n_exprs[i] == old_child then
+                if new_child != null then
+		    assert new_child isa AExpr
+                    _n_exprs[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_exprs.remove_at(i)
+                end
+                return
+            end
+        end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+            for n in _n_exprs do
+                v.enter_visit(n)
+	    end
+    end
+end
+redef class AParExprs
+    private init empty_init do end
+
+    init init_aparexprs (
+            n_opar: nullable TOpar,
+            n_exprs: Collection[Object], # Should be Collection[AExpr]
+            n_cpar: nullable TCpar
+    )
+    do
+        empty_init
+        _n_opar = n_opar.as(not null)
+	n_opar.parent = self
+	for n in n_exprs do
+		assert n isa AExpr
+		_n_exprs.add(n)
+		n.parent = self
+	end
+        _n_cpar = n_cpar.as(not null)
+	n_cpar.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_opar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TOpar
+                _n_opar = new_child
+	    else
+		abort
+            end
+            return
+	end
+        for i in [0.._n_exprs.length[ do
+            if _n_exprs[i] == old_child then
+                if new_child != null then
+		    assert new_child isa AExpr
+                    _n_exprs[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_exprs.remove_at(i)
+                end
+                return
+            end
+        end
+        if _n_cpar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCpar
+                _n_cpar = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_opar)
+            for n in _n_exprs do
+                v.enter_visit(n)
+	    end
+        v.enter_visit(_n_cpar)
+    end
+end
+redef class ABraExprs
+    private init empty_init do end
+
+    init init_abraexprs (
+            n_obra: nullable TObra,
+            n_exprs: Collection[Object], # Should be Collection[AExpr]
+            n_cbra: nullable TCbra
+    )
+    do
+        empty_init
+        _n_obra = n_obra.as(not null)
+	n_obra.parent = self
+	for n in n_exprs do
+		assert n isa AExpr
+		_n_exprs.add(n)
+		n.parent = self
+	end
+        _n_cbra = n_cbra.as(not null)
+	n_cbra.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_obra == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TObra
+                _n_obra = new_child
+	    else
+		abort
+            end
+            return
+	end
+        for i in [0.._n_exprs.length[ do
+            if _n_exprs[i] == old_child then
+                if new_child != null then
+		    assert new_child isa AExpr
+                    _n_exprs[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_exprs.remove_at(i)
+                end
+                return
+            end
+        end
+        if _n_cbra == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TCbra
+                _n_cbra = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_obra)
+            for n in _n_exprs do
+                v.enter_visit(n)
+	    end
+        v.enter_visit(_n_cbra)
     end
 end
 redef class APlusAssignOp

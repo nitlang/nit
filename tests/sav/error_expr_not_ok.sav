@@ -30,6 +30,7 @@ error_expr_not_ok.nit:64,30--33: Error: Method or variable 'fail' unknown in Sys
 error_expr_not_ok.nit:66,7--10: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:66,21: Type error: expected A, got Int
 error_expr_not_ok.nit:67,15--18: Error: Method or variable 'fail' unknown in Sys.
+error_expr_not_ok.nit:67,1--18: Warning: use 'loop' instead of 'while true do'.
 error_expr_not_ok.nit:69,10--13: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:69,24: Type error: expected A, got Int
 error_expr_not_ok.nit:70,20--23: Error: Method or variable 'fail' unknown in Sys.
@@ -127,7 +128,7 @@ error_expr_not_ok.nit:126,7--10: Error: Method or variable 'fail' unknown in Sys
 error_expr_not_ok.nit:127,1--4: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:128,1--4: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:131,11--14: Error: Method or variable 'fail' unknown in Sys.
-error_expr_not_ok.nit:131,7--14: Type error: expected A, got Int
+error_expr_not_ok.nit:131,7--15: Type error: expected A, got Int
 error_expr_not_ok.nit:132,10--13: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:133,11--14: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:134,7--10: Error: Method or variable 'fail' unknown in Sys.
@@ -151,7 +152,7 @@ error_expr_not_ok.nit:147,14--17: Error: Method or variable 'fail' unknown in Sy
 error_expr_not_ok.nit:149,14--17: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:149,7--24: Type error: expected A, got String
 error_expr_not_ok.nit:150,7--10: Error: Method or variable 'fail' unknown in Sys.
-error_expr_not_ok.nit:150,7--17: Type error: expected A, got Int
+error_expr_not_ok.nit:150,7--18: Type error: expected A, got Int
 error_expr_not_ok.nit:151,7--10: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:152,7--10: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:152,7--18: Type error: expected A, got Bool
