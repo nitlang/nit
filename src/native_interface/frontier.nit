@@ -92,8 +92,8 @@ redef class MMSrcMethod
 		for cast in explicit_casts do
 			v.casts.add( cast )
 
-			v.types.add( cast.from )
-			v.types.add( cast.to )
+			v.types.add( cast.from.direct_type )
+			v.types.add( cast.to.direct_type )
 		end
 
 		# adds super
@@ -253,15 +253,15 @@ redef class MMSignature
 	fun compile_frontier( v : FrontierVisitor )
 	do
 		# receiver
-		v.types.add( recv )
+		v.types.add( recv.direct_type )
 
 		# params
-		for p in params do v.types.add( p.mmtype )
+		for p in params do v.types.add( p.mmtype.direct_type )
 
 		# return
 		var rt = return_type
 		if rt != null then
-			v.types.add( rt )
+			v.types.add( rt.direct_type )
 		end
 	end
 end
