@@ -21,15 +21,15 @@ import stream
 class Process
 
 	# The pid of the processus
-	fun id: Int do return _data.id
+	fun id: Int do return data.id
 
 	# Is the processus finished?
-	fun is_finished: Bool do return _data.is_finished
+	fun is_finished: Bool do return data.is_finished
 
 	# wait the terminaison of the process
 	fun wait
 	do
-		_data.wait
+		data.wait
 		assert is_finished
 	end
 	
@@ -37,7 +37,7 @@ class Process
 	fun status: Int
 	do
 		assert is_finished
-		return _data.status
+		return data.status
 	end
 
 	# launch a command with some arguments
@@ -65,10 +65,10 @@ class Process
 			end
 			l += arguments.length
 		end
-		_data = basic_exec_execute(command.to_cstring, args.to_s.to_cstring, l, pipeflags)
+		data = basic_exec_execute(command.to_cstring, args.to_s.to_cstring, l, pipeflags)
 	end
 	
-	var _data: NativeProcess
+	private var data: NativeProcess
 	private fun basic_exec_execute(p: NativeString, av: NativeString, ac: Int, pf: Int): NativeProcess is extern "exec_Process_Process_basic_exec_execute_4"
 end
 
@@ -76,24 +76,24 @@ end
 class IProcess
 	super Process
 	super IStream
-	var _in: FDIStream
+	var stream_in: FDIStream
 	
-	redef fun close do _in.close
+	redef fun close do stream_in.close
 	
-	redef fun read_char do return _in.read_char
+	redef fun read_char do return stream_in.read_char
 
-	redef fun eof do return _in.eof
+	redef fun eof do return stream_in.eof
 
 	init(command: String, arguments: String...)
 	do
 		execute(command, arguments, 2)
-		_in = new FDIStream(_data.out_fd)
+		stream_in = new FDIStream(data.out_fd)
 	end
 	
 	init init_(command: String)
 	do
 		execute(command, null, 2)
-		_in = new FDIStream(_data.out_fd)
+		stream_in = new FDIStream(data.out_fd)
 	end
 end
 
@@ -101,24 +101,24 @@ end
 class OProcess
 	super Process
 	super OStream
-	var _out: OStream
+	var stream_out: OStream
 
-	redef fun close do _out.close
+	redef fun close do stream_out.close
 
-	redef fun is_writable do return _out.is_writable
+	redef fun is_writable do return stream_out.is_writable
 
-	redef fun write(s) do _out.write(s)
+	redef fun write(s) do stream_out.write(s)
 	
 	init(command: String, arguments: String...)
 	do
 		execute(command, arguments, 1)
-		_out = new FDOStream(_data.in_fd)
+		stream_out = new FDOStream(data.in_fd)
 	end
 	
 	init init_(command: String)
 	do
 		execute(command, null, 1)
-		_out = new FDOStream(_data.in_fd)
+		stream_out = new FDOStream(data.in_fd)
 	end
 end
 
@@ -130,22 +130,22 @@ class IOProcess
 
 	redef fun close
 	do
-		_in.close
-		_out.close
+		stream_in.close
+		stream_out.close
 	end
 
 	init(command: String, arguments: String...)
 	do
 		execute(command, arguments, 3)
-		_in = new FDIStream(_data.out_fd)
-		_out = new FDOStream(_data.in_fd)
+		stream_in = new FDIStream(data.out_fd)
+		stream_out = new FDOStream(data.in_fd)
 	end
 	
 	init init_(command: String)
 	do
 		execute(command, null, 3)
-		_in = new FDIStream(_data.out_fd)
-		_out = new FDOStream(_data.in_fd)
+		stream_in = new FDIStream(data.out_fd)
+		stream_out = new FDOStream(data.in_fd)
 	end
 end
 
