@@ -23,6 +23,7 @@ src/nit_version.nit
 src/callgrind.*
 src/*.log
 src/*.dot
+src/doc
 
 c_src/*.o
 c_src/*.cksum
