@@ -213,27 +213,27 @@ end
 class FDStream
 	super IOS
 	# File description
-	var _fd: Int
+	var fd: Int
 
-	redef fun close do native_close(_fd)
+	redef fun close do native_close(fd)
 
 	private fun native_close(i: Int): Int is extern "stream_FDStream_FDStream_native_close_1"
 	private fun native_read_char(i: Int): Int is extern "stream_FDStream_FDStream_native_read_char_1"
 	private fun native_read(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_read_3"
 	private fun native_write(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_write_3"
 
-	init(fd: Int) do _fd = fd
+	init(fd: Int) do self.fd = fd
 end
 
 class FDIStream
 	super FDStream
 	super IStream
-	redef readable var _eof: Bool = false
+	redef var eof: Bool = false
 	
 	redef fun read_char
 	do
-		var nb = native_read_char(_fd)
-		if nb == -1 then _eof = true
+		var nb = native_read_char(fd)
+		if nb == -1 then eof = true
 		return nb
 	end
 
@@ -243,17 +243,17 @@ end
 class FDOStream
 	super FDStream
 	super OStream
-	redef readable var _is_writable: Bool
+	redef var is_writable: Bool
 
 	redef fun write(s)
 	do
-		var nb = native_write(_fd, s.to_cstring, s.length)
-		if nb < s.length then _is_writable = false
+		var nb = native_write(fd, s.to_cstring, s.length)
+		if nb < s.length then is_writable = false
 	end
 
 	init(fd: Int)
 	do
-		_is_writable = true
+		is_writable = true
 	end
 end
 
@@ -263,7 +263,7 @@ class FDIOStream
 	super IOStream
 	init(fd: Int)
 	do
-		_fd = fd
-		_is_writable = true
+		self.fd = fd
+		is_writable = true
 	end
 end
