@@ -267,3 +267,31 @@ class FDIOStream
 		is_writable = true
 	end
 end
+
+redef interface Object
+	# returns first available stream to read or write to
+	# return null on interruption (possibly a signal)
+	protected fun poll( streams : Sequence[FDStream] ) : nullable FDStream
+	do
+		var in_fds = new Array[Int]
+		var out_fds = new Array[Int]
+		var fd_to_stream = new HashMap[Int,FDStream]
+		for s in streams do
+			var fd = s.fd
+			if s isa FDIStream then in_fds.add( fd )
+			if s isa FDOStream then out_fds.add( fd )
+
+			fd_to_stream[fd] = s
+		end
+
+		var polled_fd = intern_poll( in_fds, out_fds )
+
+		if polled_fd == null then
+			return null
+		else
+			return fd_to_stream[polled_fd]
+		end
+	end
+
+	private fun intern_poll( in_fds : Array[Int], out_fds : Array[Int] ) : nullable Int is extern import Array::length, Array::[], nullable Object as ( Int ), Int as nullable
+end
