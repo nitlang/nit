@@ -489,6 +489,14 @@ redef class MMType
 				v.body.append( fc.to_writer )
 			end
 
+			# reference incr
+			var incr_name = "{as_notnull.mangled_name}_incr_ref"
+			v.header_top.add( "#define {incr_name}( x ) nitni_global_ref_incr( (struct nitni_ref*)(x) )\n" )
+
+			# reference decr
+			var decr_name = "{as_notnull.mangled_name}_decr_ref"
+			v.header_top.add( "#define {decr_name}( x ) nitni_global_ref_decr( (struct nitni_ref*)(x) )\n" )
+
 			v.header_top.add( "#endif\n" )
 		end
 	end
@@ -501,6 +509,7 @@ redef class MMType
 		if uses_nitni_ref then
 			fc.exprs.add( "{var_name} = malloc( sizeof( struct s_{type_name} ) );\n" )
 			fc.exprs.add( "{var_name}->ref.val = NIT_NULL;\n" )
+			fc.exprs.add( "{var_name}->ref.count = 0;\n" )
 			if stack_it then
 				fc.exprs.add( "nitni_local_ref_add( (struct nitni_ref *){var_name} );\n" )
 			end

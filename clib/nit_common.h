@@ -127,6 +127,8 @@ extern char ** glob_argv;
 /* This structure is used to represent every Nit type in extern methods and custom C code. */
 struct nitni_ref {
 	val_t val; /* reference to the real Nit object, is kept up-to-date by GC */
+	struct nitni_ref *next, *prev; /* adjacent global references in global list */
+	int count; /* number of time this global reference has been marked */
 };
 
 /* This structure is used by extern methods to keep track of local references to Nit objects */
@@ -145,6 +147,28 @@ extern void nitni_local_ref_add( struct nitni_ref *ref );
 
 /* Clean all references associated to the current (but returning) extern method. */
 extern void nitni_local_ref_clean( void );
+
+/* List of global references from C code to Nit objects */
+/* Instanciated empty at init of Nit system and filled explicitly by user in C code */
+struct nitni_global_ref_list_t {
+	struct nitni_ref *head, *tail;
+};
+extern struct nitni_global_ref_list_t *nitni_global_ref_list;
+
+/* Initializer of global reference list */
+extern void nitni_global_ref_list_init();
+
+/* Intern function to add a global reference to the list */
+extern void nitni_global_ref_add( struct nitni_ref *ref );
+
+/* Intern function to remove a global reference from the list */
+extern void nitni_global_ref_remove( struct nitni_ref *ref );
+
+/* Increase count on an existing global reference */
+extern void nitni_global_ref_incr( struct nitni_ref *ref );
+
+/* Decrease count on an existing global reference */
+extern void nitni_global_ref_decr( struct nitni_ref *ref );
 
 /* Stack frames.
  * Are used to:
