@@ -10,6 +10,7 @@ val_t compiling___Program___output_format(val_t p0){
   fra.me.meth = LOCATE_compiling___Program___output_format;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling.nit:28 */
@@ -31,6 +32,7 @@ void compiling___Program___output_format__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___Program___output_format__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -54,6 +56,7 @@ void compiling___Program___compile_prog(val_t p0){
   fra.me.meth = LOCATE_compiling___Program___compile_prog;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -132,6 +135,7 @@ void compiling___Program___compile_prog(val_t p0){
       fra.me.meth = LOCATE_compiling___Program___compile_prog;
       fra.me.has_broke = 0;
       fra.me.REG_size = 2;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.REG[1] = NIT_NULL;
       fra.me.REG[0] = p0;
@@ -155,6 +159,7 @@ void compiling___Program___compile_prog_to_c(val_t p0){
   fra.me.meth = LOCATE_compiling___Program___compile_prog_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -255,6 +260,7 @@ void compiling___Program___compile_prog_to_c(val_t p0){
     fra.me.meth = LOCATE_compiling___Program___compile_prog_to_c;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -280,6 +286,7 @@ void compiling___Program___compile_main(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___Program___compile_main;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -405,6 +412,7 @@ void compiling___Program___compile_main(val_t p0, val_t p1){
     fra.me.meth = LOCATE_compiling___Program___compile_main;
     fra.me.has_broke = 0;
     fra.me.REG_size = 3;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -491,6 +499,7 @@ void compiling___MMModule___compile_separate_module(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___MMModule___compile_separate_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

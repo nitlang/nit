@@ -5,11 +5,13 @@
 
 #ifndef PROCESS_TYPE
 #define PROCESS_TYPE
-typedef struct s_Process{
-	val_t v;
-} Process;
+struct s_Process{
+		struct nitni_ref ref; /* real ref struct, must be first */
+};
+typedef struct s_Process *Process;
+#define Process_incr_ref( x ) nitni_global_ref_incr( (struct nitni_ref*)(x) )
+#define Process_decr_ref( x ) nitni_global_ref_decr( (struct nitni_ref*)(x) )
 #endif
-
 #include "exec_nit.h"
 
 /* out/indirect function for exec::Process::basic_exec_execute */

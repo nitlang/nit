@@ -52,6 +52,7 @@ extern const int SFT_native_interface___frontier[];
 #define CALL_native_interface___frontier___MMType___compile_check_isa(recv) ((native_interface___frontier___MMType___compile_check_isa_t)CALL((recv), (SFT_native_interface___frontier[10] + 0)))
 #define CALL_native_interface___frontier___MMType___compile_condition_isa(recv) ((native_interface___frontier___MMType___compile_condition_isa_t)CALL((recv), (SFT_native_interface___frontier[10] + 1)))
 #define CALL_native_interface___frontier___MMType___compile_to_frontier(recv) ((native_interface___frontier___MMType___compile_to_frontier_t)CALL((recv), (SFT_native_interface___frontier[10] + 2)))
+#define CALL_native_interface___frontier___MMType___compile_new_local_ref(recv) ((native_interface___frontier___MMType___compile_new_local_ref_t)CALL((recv), (SFT_native_interface___frontier[10] + 3)))
 #define CALL_native_interface___frontier___MMExplicitImport___compile_friendly_to_frontier(recv) ((native_interface___frontier___MMExplicitImport___compile_friendly_to_frontier_t)CALL((recv), (SFT_native_interface___frontier[11] + 0)))
 static const char * const LOCATE_native_interface___frontier___MMSrcModule___compile_frontier = "frontier::MMSrcModule::compile_frontier";
 void native_interface___frontier___MMSrcModule___compile_frontier(val_t p0, val_t p1);
@@ -187,6 +188,9 @@ typedef val_t (*native_interface___frontier___MMType___compile_condition_isa_t)(
 static const char * const LOCATE_native_interface___frontier___MMType___compile_to_frontier = "frontier::MMType::compile_to_frontier";
 void native_interface___frontier___MMType___compile_to_frontier(val_t p0, val_t p1);
 typedef void (*native_interface___frontier___MMType___compile_to_frontier_t)(val_t p0, val_t p1);
+static const char * const LOCATE_native_interface___frontier___MMType___compile_new_local_ref = "frontier::MMType::compile_new_local_ref";
+void native_interface___frontier___MMType___compile_new_local_ref(val_t p0, val_t p1, val_t p2, val_t p3);
+typedef void (*native_interface___frontier___MMType___compile_new_local_ref_t)(val_t p0, val_t p1, val_t p2, val_t p3);
 val_t NEW_MMType_metamodel___static_type___MMType___init();
 static const char * const LOCATE_native_interface___frontier___MMExplicitImport___compile_friendly_to_frontier = "frontier::MMExplicitImport::compile_friendly_to_frontier";
 void native_interface___frontier___MMExplicitImport___compile_friendly_to_frontier(val_t p0, val_t p1);

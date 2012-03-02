@@ -7,10 +7,15 @@ FDStream recv___nitni;
 bigint i___nitni;
 bigint return___nitni;
 val_t return___nit;
-recv___nitni.v = recv;
+recv___nitni = malloc( sizeof( struct s_FDStream ) );
+recv___nitni->ref.val = NIT_NULL;
+recv___nitni->ref.count = 0;
+nitni_local_ref_add( (struct nitni_ref *)recv___nitni );
+recv___nitni->ref.val = recv;
 i___nitni = UNTAG_Int(i);
 return___nitni = stream_FDStream_FDStream_native_close_1( recv___nitni, i___nitni );
 return___nit = TAG_Int(return___nitni);
+nitni_local_ref_clean(  );
 return return___nit;
 }
 /* out/indirect function for stream::FDStream::native_read_char */
@@ -20,10 +25,15 @@ FDStream recv___nitni;
 bigint i___nitni;
 bigint return___nitni;
 val_t return___nit;
-recv___nitni.v = recv;
+recv___nitni = malloc( sizeof( struct s_FDStream ) );
+recv___nitni->ref.val = NIT_NULL;
+recv___nitni->ref.count = 0;
+nitni_local_ref_add( (struct nitni_ref *)recv___nitni );
+recv___nitni->ref.val = recv;
 i___nitni = UNTAG_Int(i);
 return___nitni = stream_FDStream_FDStream_native_read_char_1( recv___nitni, i___nitni );
 return___nit = TAG_Int(return___nitni);
+nitni_local_ref_clean(  );
 return return___nit;
 }
 /* out/indirect function for stream::FDStream::native_read */
@@ -35,12 +45,17 @@ char * buf___nitni;
 bigint len___nitni;
 bigint return___nitni;
 val_t return___nit;
-recv___nitni.v = recv;
+recv___nitni = malloc( sizeof( struct s_FDStream ) );
+recv___nitni->ref.val = NIT_NULL;
+recv___nitni->ref.count = 0;
+nitni_local_ref_add( (struct nitni_ref *)recv___nitni );
+recv___nitni->ref.val = recv;
 i___nitni = UNTAG_Int(i);
 buf___nitni = UNBOX_NativeString(buf);
 len___nitni = UNTAG_Int(len);
 return___nitni = stream_FDStream_FDStream_native_read_3( recv___nitni, i___nitni, buf___nitni, len___nitni );
 return___nit = TAG_Int(return___nitni);
+nitni_local_ref_clean(  );
 return return___nit;
 }
 /* out/indirect function for stream::FDStream::native_write */
@@ -52,11 +67,16 @@ char * buf___nitni;
 bigint len___nitni;
 bigint return___nitni;
 val_t return___nit;
-recv___nitni.v = recv;
+recv___nitni = malloc( sizeof( struct s_FDStream ) );
+recv___nitni->ref.val = NIT_NULL;
+recv___nitni->ref.count = 0;
+nitni_local_ref_add( (struct nitni_ref *)recv___nitni );
+recv___nitni->ref.val = recv;
 i___nitni = UNTAG_Int(i);
 buf___nitni = UNBOX_NativeString(buf);
 len___nitni = UNTAG_Int(len);
 return___nitni = stream_FDStream_FDStream_native_write_3( recv___nitni, i___nitni, buf___nitni, len___nitni );
 return___nit = TAG_Int(return___nitni);
+nitni_local_ref_clean(  );
 return return___nit;
 }

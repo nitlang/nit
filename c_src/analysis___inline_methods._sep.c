@@ -11,6 +11,7 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
   fra.me.meth = LOCATE_analysis___inline_methods___InlineMethodVisitor___visit_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -240,6 +241,7 @@ void analysis___inline_methods___InlineMethodVisitor___init(val_t p0, val_t p1, 
   fra.me.meth = LOCATE_analysis___inline_methods___InlineMethodVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -294,6 +296,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
   fra.me.meth = LOCATE_analysis___inline_methods___ICall___is_inlinable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -635,6 +638,7 @@ void analysis___inline_methods___IRoutine___inline_methods(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___inline_methods___IRoutine___inline_methods;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

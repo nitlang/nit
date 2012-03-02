@@ -11,6 +11,7 @@ void abstracttool___AbstractCompiler___init(val_t p0, val_t p1, int* init_table)
   fra.me.meth = LOCATE_abstracttool___AbstractCompiler___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -39,6 +40,7 @@ val_t abstracttool___AbstractCompiler___tool_name(val_t p0){
   fra.me.meth = LOCATE_abstracttool___AbstractCompiler___tool_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./abstracttool.nit:36 */
@@ -73,6 +75,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
   fra.me.meth = LOCATE_abstracttool___AbstractCompiler___exec_cmd_line;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -355,6 +358,7 @@ void abstracttool___AbstractCompiler___perform_work(val_t p0, val_t p1){
   fra.me.meth = LOCATE_abstracttool___AbstractCompiler___perform_work;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./abstracttool.nit:77 */
   nit_abort("Deferred method called", NULL, LOCATE_abstracttool, 77);
   stack_frame_head = fra.me.prev;
@@ -377,6 +381,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   fra.me.meth = LOCATE_abstracttool___AbstractCompiler___dump_context_info;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -499,6 +504,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
     fra.me.meth = LOCATE_abstracttool___AbstractCompiler___dump_context_info;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -528,6 +534,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   fra.me.meth = LOCATE_abstracttool___MMModule___dump_module_info;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -645,6 +652,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
     fra.me.meth = LOCATE_abstracttool___MMModule___dump_module_info;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -683,6 +691,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
   fra.me.meth = LOCATE_abstracttool___MMLocalClass___dump_properties;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -825,6 +834,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
         fra.me.meth = LOCATE_abstracttool___MMLocalClass___dump_properties;
         fra.me.has_broke = 0;
         fra.me.REG_size = 3;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[1] = NIT_NULL;
         fra.me.REG[2] = NIT_NULL;

@@ -10,6 +10,7 @@ val_t native_interface___ni_tools___FunctionCompiler___signature(val_t p0){
   fra.me.meth = LOCATE_native_interface___ni_tools___FunctionCompiler___signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./native_interface//ni_tools.nit:23 */
@@ -31,6 +32,7 @@ void native_interface___ni_tools___FunctionCompiler___signature__eq(val_t p0, va
   fra.me.meth = LOCATE_native_interface___ni_tools___FunctionCompiler___signature__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -50,6 +52,7 @@ val_t native_interface___ni_tools___FunctionCompiler___decls(val_t p0){
   fra.me.meth = LOCATE_native_interface___ni_tools___FunctionCompiler___decls;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./native_interface//ni_tools.nit:25 */
@@ -71,6 +74,7 @@ void native_interface___ni_tools___FunctionCompiler___decls__eq(val_t p0, val_t 
   fra.me.meth = LOCATE_native_interface___ni_tools___FunctionCompiler___decls__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -90,6 +94,7 @@ val_t native_interface___ni_tools___FunctionCompiler___exprs(val_t p0){
   fra.me.meth = LOCATE_native_interface___ni_tools___FunctionCompiler___exprs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./native_interface//ni_tools.nit:26 */
@@ -111,6 +116,7 @@ void native_interface___ni_tools___FunctionCompiler___exprs__eq(val_t p0, val_t 
   fra.me.meth = LOCATE_native_interface___ni_tools___FunctionCompiler___exprs__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -133,6 +139,7 @@ val_t native_interface___ni_tools___FunctionCompiler___to_writer(val_t p0){
   fra.me.meth = LOCATE_native_interface___ni_tools___FunctionCompiler___to_writer;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -198,6 +205,7 @@ void native_interface___ni_tools___FunctionCompiler___init(val_t p0, val_t p1, i
   fra.me.meth = LOCATE_native_interface___ni_tools___FunctionCompiler___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

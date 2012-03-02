@@ -10,6 +10,7 @@ val_t parser___lexer___Token___text(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___Token___text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:9 */
@@ -31,6 +32,7 @@ val_t parser___lexer___Token___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___Token___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./parser//lexer.nit:11 */
   nit_abort("Deferred method called", NULL, LOCATE_parser___lexer, 11);
   stack_frame_head = fra.me.prev;
@@ -48,6 +50,7 @@ val_t parser___lexer___Token___to_s(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___Token___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -96,6 +99,7 @@ val_t parser___lexer___TEol___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TEol___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:21 */
@@ -116,6 +120,7 @@ void parser___lexer___TEol___init_tk(val_t p0, val_t p1, val_t p2, int* init_tab
   fra.me.meth = LOCATE_parser___lexer___TEol___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -140,6 +145,7 @@ val_t parser___lexer___TComment___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TComment___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:34 */
@@ -160,6 +166,7 @@ void parser___lexer___TComment___init_tk(val_t p0, val_t p1, val_t p2, int* init
   fra.me.meth = LOCATE_parser___lexer___TComment___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -184,6 +191,7 @@ val_t parser___lexer___TKwmodule___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwmodule___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:47 */
@@ -204,6 +212,7 @@ void parser___lexer___TKwmodule___init_tk(val_t p0, val_t p1, val_t p2, int* ini
   fra.me.meth = LOCATE_parser___lexer___TKwmodule___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -228,6 +237,7 @@ val_t parser___lexer___TKwimport___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwimport___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:60 */
@@ -251,6 +261,7 @@ void parser___lexer___TKwimport___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwimport___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -287,6 +298,7 @@ val_t parser___lexer___TKwclass___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwclass___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:73 */
@@ -310,6 +322,7 @@ void parser___lexer___TKwclass___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwclass___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -346,6 +359,7 @@ val_t parser___lexer___TKwabstract___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwabstract___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:86 */
@@ -369,6 +383,7 @@ void parser___lexer___TKwabstract___init_tk(val_t p0, val_t p1, int* init_table)
   fra.me.meth = LOCATE_parser___lexer___TKwabstract___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -405,6 +420,7 @@ val_t parser___lexer___TKwinterface___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwinterface___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:99 */
@@ -428,6 +444,7 @@ void parser___lexer___TKwinterface___init_tk(val_t p0, val_t p1, int* init_table
   fra.me.meth = LOCATE_parser___lexer___TKwinterface___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -464,6 +481,7 @@ val_t parser___lexer___TKwenum___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwenum___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:112 */
@@ -484,6 +502,7 @@ void parser___lexer___TKwenum___init_tk(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.meth = LOCATE_parser___lexer___TKwenum___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -508,6 +527,7 @@ val_t parser___lexer___TKwspecial___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwspecial___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:125 */
@@ -531,6 +551,7 @@ void parser___lexer___TKwspecial___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwspecial___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -567,6 +588,7 @@ val_t parser___lexer___TKwend___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwend___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:138 */
@@ -590,6 +612,7 @@ void parser___lexer___TKwend___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwend___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -626,6 +649,7 @@ val_t parser___lexer___TKwmeth___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwmeth___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:151 */
@@ -649,6 +673,7 @@ void parser___lexer___TKwmeth___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwmeth___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -685,6 +710,7 @@ val_t parser___lexer___TKwtype___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwtype___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:164 */
@@ -708,6 +734,7 @@ void parser___lexer___TKwtype___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwtype___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -744,6 +771,7 @@ val_t parser___lexer___TKwinit___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwinit___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:177 */
@@ -767,6 +795,7 @@ void parser___lexer___TKwinit___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwinit___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -803,6 +832,7 @@ val_t parser___lexer___TKwredef___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwredef___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:190 */
@@ -826,6 +856,7 @@ void parser___lexer___TKwredef___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwredef___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -862,6 +893,7 @@ val_t parser___lexer___TKwis___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwis___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:203 */
@@ -885,6 +917,7 @@ void parser___lexer___TKwis___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwis___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -921,6 +954,7 @@ val_t parser___lexer___TKwdo___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwdo___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:216 */
@@ -944,6 +978,7 @@ void parser___lexer___TKwdo___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwdo___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -980,6 +1015,7 @@ val_t parser___lexer___TKwreadable___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwreadable___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:229 */
@@ -1003,6 +1039,7 @@ void parser___lexer___TKwreadable___init_tk(val_t p0, val_t p1, int* init_table)
   fra.me.meth = LOCATE_parser___lexer___TKwreadable___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1039,6 +1076,7 @@ val_t parser___lexer___TKwwritable___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwwritable___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:242 */
@@ -1062,6 +1100,7 @@ void parser___lexer___TKwwritable___init_tk(val_t p0, val_t p1, int* init_table)
   fra.me.meth = LOCATE_parser___lexer___TKwwritable___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1098,6 +1137,7 @@ val_t parser___lexer___TKwvar___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwvar___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:255 */
@@ -1121,6 +1161,7 @@ void parser___lexer___TKwvar___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwvar___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1157,6 +1198,7 @@ val_t parser___lexer___TKwintern___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwintern___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:268 */
@@ -1180,6 +1222,7 @@ void parser___lexer___TKwintern___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwintern___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1216,6 +1259,7 @@ val_t parser___lexer___TKwextern___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwextern___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:281 */
@@ -1239,6 +1283,7 @@ void parser___lexer___TKwextern___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwextern___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1275,6 +1320,7 @@ val_t parser___lexer___TKwprotected___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwprotected___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:294 */
@@ -1298,6 +1344,7 @@ void parser___lexer___TKwprotected___init_tk(val_t p0, val_t p1, int* init_table
   fra.me.meth = LOCATE_parser___lexer___TKwprotected___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1334,6 +1381,7 @@ val_t parser___lexer___TKwprivate___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwprivate___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:307 */
@@ -1357,6 +1405,7 @@ void parser___lexer___TKwprivate___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwprivate___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1393,6 +1442,7 @@ val_t parser___lexer___TKwintrude___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwintrude___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:320 */
@@ -1416,6 +1466,7 @@ void parser___lexer___TKwintrude___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwintrude___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1452,6 +1503,7 @@ val_t parser___lexer___TKwif___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwif___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:333 */
@@ -1475,6 +1527,7 @@ void parser___lexer___TKwif___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwif___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1511,6 +1564,7 @@ val_t parser___lexer___TKwthen___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwthen___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:346 */
@@ -1534,6 +1588,7 @@ void parser___lexer___TKwthen___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwthen___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1570,6 +1625,7 @@ val_t parser___lexer___TKwelse___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwelse___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:359 */
@@ -1593,6 +1649,7 @@ void parser___lexer___TKwelse___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwelse___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1629,6 +1686,7 @@ val_t parser___lexer___TKwwhile___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwwhile___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:372 */
@@ -1652,6 +1710,7 @@ void parser___lexer___TKwwhile___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwwhile___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1688,6 +1747,7 @@ val_t parser___lexer___TKwloop___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwloop___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:385 */
@@ -1711,6 +1771,7 @@ void parser___lexer___TKwloop___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwloop___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1747,6 +1808,7 @@ val_t parser___lexer___TKwfor___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwfor___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:398 */
@@ -1770,6 +1832,7 @@ void parser___lexer___TKwfor___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwfor___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1806,6 +1869,7 @@ val_t parser___lexer___TKwin___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwin___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:411 */
@@ -1829,6 +1893,7 @@ void parser___lexer___TKwin___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwin___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1865,6 +1930,7 @@ val_t parser___lexer___TKwand___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwand___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:424 */
@@ -1888,6 +1954,7 @@ void parser___lexer___TKwand___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwand___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1924,6 +1991,7 @@ val_t parser___lexer___TKwor___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwor___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:437 */
@@ -1947,6 +2015,7 @@ void parser___lexer___TKwor___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwor___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1983,6 +2052,7 @@ val_t parser___lexer___TKwnot___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwnot___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:450 */
@@ -2006,6 +2076,7 @@ void parser___lexer___TKwnot___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwnot___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2042,6 +2113,7 @@ val_t parser___lexer___TKwreturn___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwreturn___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:463 */
@@ -2065,6 +2137,7 @@ void parser___lexer___TKwreturn___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwreturn___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2101,6 +2174,7 @@ val_t parser___lexer___TKwcontinue___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwcontinue___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:476 */
@@ -2124,6 +2198,7 @@ void parser___lexer___TKwcontinue___init_tk(val_t p0, val_t p1, int* init_table)
   fra.me.meth = LOCATE_parser___lexer___TKwcontinue___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2160,6 +2235,7 @@ val_t parser___lexer___TKwbreak___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwbreak___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:489 */
@@ -2183,6 +2259,7 @@ void parser___lexer___TKwbreak___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwbreak___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2219,6 +2296,7 @@ val_t parser___lexer___TKwabort___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwabort___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:502 */
@@ -2242,6 +2320,7 @@ void parser___lexer___TKwabort___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwabort___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2278,6 +2357,7 @@ val_t parser___lexer___TKwassert___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwassert___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:515 */
@@ -2301,6 +2381,7 @@ void parser___lexer___TKwassert___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwassert___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2337,6 +2418,7 @@ val_t parser___lexer___TKwnew___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwnew___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:528 */
@@ -2360,6 +2442,7 @@ void parser___lexer___TKwnew___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwnew___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2396,6 +2479,7 @@ val_t parser___lexer___TKwisa___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwisa___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:541 */
@@ -2419,6 +2503,7 @@ void parser___lexer___TKwisa___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwisa___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2455,6 +2540,7 @@ val_t parser___lexer___TKwonce___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwonce___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:554 */
@@ -2478,6 +2564,7 @@ void parser___lexer___TKwonce___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwonce___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2514,6 +2601,7 @@ val_t parser___lexer___TKwsuper___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwsuper___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:567 */
@@ -2537,6 +2625,7 @@ void parser___lexer___TKwsuper___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwsuper___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2573,6 +2662,7 @@ val_t parser___lexer___TKwself___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwself___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:580 */
@@ -2596,6 +2686,7 @@ void parser___lexer___TKwself___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwself___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2632,6 +2723,7 @@ val_t parser___lexer___TKwtrue___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwtrue___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:593 */
@@ -2655,6 +2747,7 @@ void parser___lexer___TKwtrue___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwtrue___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2691,6 +2784,7 @@ val_t parser___lexer___TKwfalse___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwfalse___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:606 */
@@ -2714,6 +2808,7 @@ void parser___lexer___TKwfalse___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwfalse___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2750,6 +2845,7 @@ val_t parser___lexer___TKwnull___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwnull___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:619 */
@@ -2773,6 +2869,7 @@ void parser___lexer___TKwnull___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwnull___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2809,6 +2906,7 @@ val_t parser___lexer___TKwas___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwas___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:632 */
@@ -2832,6 +2930,7 @@ void parser___lexer___TKwas___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwas___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2868,6 +2967,7 @@ val_t parser___lexer___TKwnullable___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwnullable___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:645 */
@@ -2891,6 +2991,7 @@ void parser___lexer___TKwnullable___init_tk(val_t p0, val_t p1, int* init_table)
   fra.me.meth = LOCATE_parser___lexer___TKwnullable___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2927,6 +3028,7 @@ val_t parser___lexer___TKwisset___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwisset___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:658 */
@@ -2950,6 +3052,7 @@ void parser___lexer___TKwisset___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwisset___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2986,6 +3089,7 @@ val_t parser___lexer___TKwlabel___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TKwlabel___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:671 */
@@ -3009,6 +3113,7 @@ void parser___lexer___TKwlabel___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TKwlabel___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3045,6 +3150,7 @@ val_t parser___lexer___TOpar___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TOpar___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:684 */
@@ -3068,6 +3174,7 @@ void parser___lexer___TOpar___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TOpar___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3104,6 +3211,7 @@ val_t parser___lexer___TCpar___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TCpar___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:697 */
@@ -3127,6 +3235,7 @@ void parser___lexer___TCpar___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TCpar___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3163,6 +3272,7 @@ val_t parser___lexer___TObra___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TObra___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:710 */
@@ -3186,6 +3296,7 @@ void parser___lexer___TObra___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TObra___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3222,6 +3333,7 @@ val_t parser___lexer___TCbra___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TCbra___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:723 */
@@ -3245,6 +3357,7 @@ void parser___lexer___TCbra___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TCbra___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3281,6 +3394,7 @@ val_t parser___lexer___TComma___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TComma___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:736 */
@@ -3304,6 +3418,7 @@ void parser___lexer___TComma___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TComma___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3340,6 +3455,7 @@ val_t parser___lexer___TColumn___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TColumn___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:749 */
@@ -3363,6 +3479,7 @@ void parser___lexer___TColumn___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TColumn___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3399,6 +3516,7 @@ val_t parser___lexer___TQuad___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TQuad___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:762 */
@@ -3422,6 +3540,7 @@ void parser___lexer___TQuad___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TQuad___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3458,6 +3577,7 @@ val_t parser___lexer___TAssign___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TAssign___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:775 */
@@ -3481,6 +3601,7 @@ void parser___lexer___TAssign___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TAssign___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3517,6 +3638,7 @@ val_t parser___lexer___TPluseq___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TPluseq___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:788 */
@@ -3540,6 +3662,7 @@ void parser___lexer___TPluseq___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TPluseq___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3576,6 +3699,7 @@ val_t parser___lexer___TMinuseq___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TMinuseq___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:801 */
@@ -3599,6 +3723,7 @@ void parser___lexer___TMinuseq___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TMinuseq___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3635,6 +3760,7 @@ val_t parser___lexer___TDotdotdot___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TDotdotdot___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:814 */
@@ -3658,6 +3784,7 @@ void parser___lexer___TDotdotdot___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TDotdotdot___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3694,6 +3821,7 @@ val_t parser___lexer___TDotdot___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TDotdot___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:827 */
@@ -3717,6 +3845,7 @@ void parser___lexer___TDotdot___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TDotdot___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3753,6 +3882,7 @@ val_t parser___lexer___TDot___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TDot___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:840 */
@@ -3776,6 +3906,7 @@ void parser___lexer___TDot___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TDot___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3812,6 +3943,7 @@ val_t parser___lexer___TPlus___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TPlus___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:853 */
@@ -3835,6 +3967,7 @@ void parser___lexer___TPlus___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TPlus___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3871,6 +4004,7 @@ val_t parser___lexer___TMinus___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TMinus___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:866 */
@@ -3894,6 +4028,7 @@ void parser___lexer___TMinus___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TMinus___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3930,6 +4065,7 @@ val_t parser___lexer___TStar___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TStar___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:879 */
@@ -3953,6 +4089,7 @@ void parser___lexer___TStar___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TStar___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3989,6 +4126,7 @@ val_t parser___lexer___TSlash___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TSlash___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:892 */
@@ -4012,6 +4150,7 @@ void parser___lexer___TSlash___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TSlash___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4048,6 +4187,7 @@ val_t parser___lexer___TPercent___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TPercent___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:905 */
@@ -4071,6 +4211,7 @@ void parser___lexer___TPercent___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TPercent___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4107,6 +4248,7 @@ val_t parser___lexer___TEq___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TEq___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:918 */
@@ -4130,6 +4272,7 @@ void parser___lexer___TEq___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TEq___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4166,6 +4309,7 @@ val_t parser___lexer___TNe___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TNe___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:931 */
@@ -4189,6 +4333,7 @@ void parser___lexer___TNe___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TNe___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4225,6 +4370,7 @@ val_t parser___lexer___TLt___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TLt___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:944 */
@@ -4248,6 +4394,7 @@ void parser___lexer___TLt___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TLt___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4284,6 +4431,7 @@ val_t parser___lexer___TLe___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TLe___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:957 */
@@ -4307,6 +4455,7 @@ void parser___lexer___TLe___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TLe___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4343,6 +4492,7 @@ val_t parser___lexer___TLl___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TLl___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:970 */
@@ -4366,6 +4516,7 @@ void parser___lexer___TLl___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TLl___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4402,6 +4553,7 @@ val_t parser___lexer___TGt___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TGt___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:983 */
@@ -4425,6 +4577,7 @@ void parser___lexer___TGt___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TGt___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4461,6 +4614,7 @@ val_t parser___lexer___TGe___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TGe___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:996 */
@@ -4484,6 +4638,7 @@ void parser___lexer___TGe___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TGe___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4520,6 +4675,7 @@ val_t parser___lexer___TGg___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TGg___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1009 */
@@ -4543,6 +4699,7 @@ void parser___lexer___TGg___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TGg___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4579,6 +4736,7 @@ val_t parser___lexer___TStarship___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TStarship___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1022 */
@@ -4602,6 +4760,7 @@ void parser___lexer___TStarship___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TStarship___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4638,6 +4797,7 @@ val_t parser___lexer___TBang___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TBang___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1035 */
@@ -4661,6 +4821,7 @@ void parser___lexer___TBang___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___TBang___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4697,6 +4858,7 @@ val_t parser___lexer___TClassid___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TClassid___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1048 */
@@ -4717,6 +4879,7 @@ void parser___lexer___TClassid___init_tk(val_t p0, val_t p1, val_t p2, int* init
   fra.me.meth = LOCATE_parser___lexer___TClassid___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4741,6 +4904,7 @@ val_t parser___lexer___TId___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TId___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1061 */
@@ -4761,6 +4925,7 @@ void parser___lexer___TId___init_tk(val_t p0, val_t p1, val_t p2, int* init_tabl
   fra.me.meth = LOCATE_parser___lexer___TId___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4785,6 +4950,7 @@ val_t parser___lexer___TAttrid___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TAttrid___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1074 */
@@ -4805,6 +4971,7 @@ void parser___lexer___TAttrid___init_tk(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.meth = LOCATE_parser___lexer___TAttrid___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4829,6 +4996,7 @@ val_t parser___lexer___TNumber___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TNumber___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1087 */
@@ -4849,6 +5017,7 @@ void parser___lexer___TNumber___init_tk(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.meth = LOCATE_parser___lexer___TNumber___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4873,6 +5042,7 @@ val_t parser___lexer___TFloat___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TFloat___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1100 */
@@ -4893,6 +5063,7 @@ void parser___lexer___TFloat___init_tk(val_t p0, val_t p1, val_t p2, int* init_t
   fra.me.meth = LOCATE_parser___lexer___TFloat___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4917,6 +5088,7 @@ val_t parser___lexer___TChar___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TChar___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1113 */
@@ -4937,6 +5109,7 @@ void parser___lexer___TChar___init_tk(val_t p0, val_t p1, val_t p2, int* init_ta
   fra.me.meth = LOCATE_parser___lexer___TChar___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4961,6 +5134,7 @@ val_t parser___lexer___TString___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TString___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1126 */
@@ -4981,6 +5155,7 @@ void parser___lexer___TString___init_tk(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.meth = LOCATE_parser___lexer___TString___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5005,6 +5180,7 @@ val_t parser___lexer___TStartString___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TStartString___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1139 */
@@ -5025,6 +5201,7 @@ void parser___lexer___TStartString___init_tk(val_t p0, val_t p1, val_t p2, int* 
   fra.me.meth = LOCATE_parser___lexer___TStartString___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5049,6 +5226,7 @@ val_t parser___lexer___TMidString___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TMidString___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1152 */
@@ -5069,6 +5247,7 @@ void parser___lexer___TMidString___init_tk(val_t p0, val_t p1, val_t p2, int* in
   fra.me.meth = LOCATE_parser___lexer___TMidString___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5093,6 +5272,7 @@ val_t parser___lexer___TEndString___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___TEndString___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1165 */
@@ -5113,6 +5293,7 @@ void parser___lexer___TEndString___init_tk(val_t p0, val_t p1, val_t p2, int* in
   fra.me.meth = LOCATE_parser___lexer___TEndString___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5137,6 +5318,7 @@ val_t parser___lexer___EOF___parser_index(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___EOF___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1179 */
@@ -5159,6 +5341,7 @@ void parser___lexer___EOF___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___EOF___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5190,6 +5373,7 @@ val_t parser___lexer___AError___message(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___AError___message;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1190 */
@@ -5213,6 +5397,7 @@ void parser___lexer___AError___init_error(val_t p0, val_t p1, val_t p2, int* ini
   fra.me.meth = LOCATE_parser___lexer___AError___init_error;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5237,6 +5422,7 @@ val_t parser___lexer___Lexer___file(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___Lexer___file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1210 */
@@ -5259,6 +5445,7 @@ val_t parser___lexer___Lexer___state_initial(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___Lexer___state_initial;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//lexer.nit:1226 */
@@ -5279,6 +5466,7 @@ void parser___lexer___Lexer___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___lexer___Lexer___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -5300,6 +5488,7 @@ val_t parser___lexer___Lexer___peek(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___Lexer___peek;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5354,6 +5543,7 @@ val_t parser___lexer___Lexer___next(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___Lexer___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5425,6 +5615,7 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
   fra.me.meth = LOCATE_parser___lexer___Lexer___get_token;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

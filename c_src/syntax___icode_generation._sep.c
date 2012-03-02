@@ -11,6 +11,7 @@ void syntax___icode_generation___A2IContext___stmt(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___stmt;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -90,6 +91,7 @@ val_t syntax___icode_generation___A2IContext___add_new_array(val_t p0, val_t p1,
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___add_new_array;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -144,6 +146,7 @@ void syntax___icode_generation___A2IContext___add_call_array_add(val_t p0, val_t
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___add_call_array_add;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -192,6 +195,7 @@ val_t syntax___icode_generation___A2IContext___variable(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -254,6 +258,7 @@ val_t syntax___icode_generation___A2IContext___closurevariables(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___closurevariables;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:70 */
@@ -276,6 +281,7 @@ val_t syntax___icode_generation___A2IContext___visitor(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___visitor;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:73 */
@@ -297,6 +303,7 @@ val_t syntax___icode_generation___A2IContext___return_seq(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___return_seq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:76 */
@@ -313,6 +320,7 @@ void syntax___icode_generation___A2IContext___return_seq__eq(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___return_seq__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -331,6 +339,7 @@ val_t syntax___icode_generation___A2IContext___return_value(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___return_value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:79 */
@@ -347,6 +356,7 @@ void syntax___icode_generation___A2IContext___return_value__eq(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___return_value__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -365,6 +375,7 @@ val_t syntax___icode_generation___A2IContext___method(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:82 */
@@ -381,6 +392,7 @@ val_t syntax___icode_generation___A2IContext___selfreg(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___selfreg;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:85 */
@@ -397,6 +409,7 @@ void syntax___icode_generation___A2IContext___selfreg__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___selfreg__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -417,6 +430,7 @@ void syntax___icode_generation___A2IContext___init(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -460,6 +474,7 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___invoke_super_init_calls_after;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -912,6 +927,7 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
           fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___invoke_super_init_calls_after;
           fra.me.has_broke = 0;
           fra.me.REG_size = 1;
+          fra.me.nitni_local_ref_head = NULL;
           fra.me.REG[0] = NIT_NULL;
           fra.me.closure_ctx = closctx_param;
           fra.me.closure_funs = CREG;
@@ -933,6 +949,7 @@ void syntax___icode_generation___A2IContext___generate_stmt(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___generate_stmt;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -980,6 +997,7 @@ val_t syntax___icode_generation___A2IContext___generate_expr(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___icode_generation___A2IContext___generate_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1016,6 +1034,7 @@ val_t syntax___icode_generation___EscapableBlock___break_seq(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___EscapableBlock___break_seq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:165 */
@@ -1032,6 +1051,7 @@ void syntax___icode_generation___EscapableBlock___break_seq__eq(val_t p0, val_t 
   fra.me.meth = LOCATE_syntax___icode_generation___EscapableBlock___break_seq__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1050,6 +1070,7 @@ val_t syntax___icode_generation___EscapableBlock___continue_seq(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___EscapableBlock___continue_seq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:168 */
@@ -1066,6 +1087,7 @@ void syntax___icode_generation___EscapableBlock___continue_seq__eq(val_t p0, val
   fra.me.meth = LOCATE_syntax___icode_generation___EscapableBlock___continue_seq__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1084,6 +1106,7 @@ val_t syntax___icode_generation___EscapableBlock___break_value(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___EscapableBlock___break_value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:171 */
@@ -1100,6 +1123,7 @@ void syntax___icode_generation___EscapableBlock___break_value__eq(val_t p0, val_
   fra.me.meth = LOCATE_syntax___icode_generation___EscapableBlock___break_value__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1118,6 +1142,7 @@ val_t syntax___icode_generation___EscapableBlock___continue_value(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___EscapableBlock___continue_value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:174 */
@@ -1134,6 +1159,7 @@ void syntax___icode_generation___EscapableBlock___continue_value__eq(val_t p0, v
   fra.me.meth = LOCATE_syntax___icode_generation___EscapableBlock___continue_value__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1152,6 +1178,7 @@ void syntax___icode_generation___MMSrcModule___generate_icode(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___MMSrcModule___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1176,6 +1203,7 @@ void syntax___icode_generation___MMSrcModule___generate_icode(val_t p0, val_t p1
     fra.me.meth = LOCATE_syntax___icode_generation___MMSrcModule___generate_icode;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -1199,6 +1227,7 @@ void syntax___icode_generation___MMSrcModule___generate_icode(val_t p0, val_t p1
       fra.me.meth = LOCATE_syntax___icode_generation___MMSrcModule___generate_icode;
       fra.me.has_broke = 0;
       fra.me.REG_size = 1;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.closure_ctx = closctx_param;
       fra.me.closure_funs = CREG;
@@ -1229,6 +1258,7 @@ val_t syntax___icode_generation___MMSrcAttribute___iroutine(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___MMSrcAttribute___iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:196 */
@@ -1245,6 +1275,7 @@ void syntax___icode_generation___MMSrcAttribute___iroutine__eq(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___icode_generation___MMSrcAttribute___iroutine__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1265,6 +1296,7 @@ void syntax___icode_generation___MMSrcAttribute___generate_iroutine(val_t p0, va
   fra.me.meth = LOCATE_syntax___icode_generation___MMSrcAttribute___generate_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1331,6 +1363,7 @@ val_t syntax___icode_generation___MMSrcMethod___iroutine(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___MMSrcMethod___iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//icode_generation.nit:214 */
@@ -1347,6 +1380,7 @@ void syntax___icode_generation___MMSrcMethod___iroutine__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___MMSrcMethod___iroutine__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1367,6 +1401,7 @@ void syntax___icode_generation___MMSrcMethod___generate_iroutine(val_t p0, val_t
   fra.me.meth = LOCATE_syntax___icode_generation___MMSrcMethod___generate_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1427,6 +1462,7 @@ void syntax___icode_generation___MMSrcMethod___inner_generate_iroutine(val_t p0,
   fra.me.meth = LOCATE_syntax___icode_generation___MMSrcMethod___inner_generate_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//icode_generation.nit:230 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___icode_generation, 230);
   stack_frame_head = fra.me.prev;
@@ -1442,6 +1478,7 @@ void syntax___icode_generation___MMReadImplementationMethod___inner_generate_iro
   fra.me.meth = LOCATE_syntax___icode_generation___MMReadImplementationMethod___inner_generate_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1473,6 +1510,7 @@ void syntax___icode_generation___MMWriteImplementationMethod___inner_generate_ir
   fra.me.meth = LOCATE_syntax___icode_generation___MMWriteImplementationMethod___inner_generate_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1507,6 +1545,7 @@ void syntax___icode_generation___MMMethSrcMethod___inner_generate_iroutine(val_t
   fra.me.meth = LOCATE_syntax___icode_generation___MMMethSrcMethod___inner_generate_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1534,6 +1573,7 @@ void syntax___icode_generation___MMImplicitInit___inner_generate_iroutine(val_t 
   fra.me.meth = LOCATE_syntax___icode_generation___MMImplicitInit___inner_generate_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1769,6 +1809,7 @@ void syntax___icode_generation___A2IVisitor___icode_ctx__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IVisitor___icode_ctx__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1788,6 +1829,7 @@ val_t syntax___icode_generation___A2IVisitor___icode_ctx(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IVisitor___icode_ctx;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1814,6 +1856,7 @@ void syntax___icode_generation___A2IVisitor___visit(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___A2IVisitor___visit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1838,6 +1881,7 @@ void syntax___icode_generation___A2IVisitor___init(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_syntax___icode_generation___A2IVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1859,6 +1903,7 @@ void syntax___icode_generation___ANode___accept_icode_generation(val_t p0, val_t
   fra.me.meth = LOCATE_syntax___icode_generation___ANode___accept_icode_generation;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1879,6 +1924,7 @@ void syntax___icode_generation___AAttrPropdef___accept_icode_generation(val_t p0
   fra.me.meth = LOCATE_syntax___icode_generation___AAttrPropdef___accept_icode_generation;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1943,6 +1989,7 @@ void syntax___icode_generation___AMethPropdef___accept_icode_generation(val_t p0
   fra.me.meth = LOCATE_syntax___icode_generation___AMethPropdef___accept_icode_generation;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1970,6 +2017,7 @@ void syntax___icode_generation___AMethPropdef___fill_iroutine(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___AMethPropdef___fill_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//icode_generation.nit:319 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___icode_generation, 319);
   stack_frame_head = fra.me.prev;
@@ -1988,6 +2036,7 @@ void syntax___icode_generation___ASignature___fill_iroutine_parameters(val_t p0,
   fra.me.meth = LOCATE_syntax___icode_generation___ASignature___fill_iroutine_parameters;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2060,6 +2109,7 @@ void syntax___icode_generation___ASignature___fill_iroutine_parameters(val_t p0,
     fra.me.meth = LOCATE_syntax___icode_generation___ASignature___fill_iroutine_parameters;
     fra.me.has_broke = 0;
     fra.me.REG_size = 4;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -2110,6 +2160,7 @@ void syntax___icode_generation___AClosureDecl___accept_icode_generation(val_t p0
   fra.me.meth = LOCATE_syntax___icode_generation___AClosureDecl___accept_icode_generation;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2256,6 +2307,7 @@ void syntax___icode_generation___AConcreteMethPropdef___fill_iroutine(val_t p0, 
   fra.me.meth = LOCATE_syntax___icode_generation___AConcreteMethPropdef___fill_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2405,6 +2457,7 @@ void syntax___icode_generation___AExternPropdef___fill_iroutine(val_t p0, val_t 
   fra.me.meth = LOCATE_syntax___icode_generation___AExternPropdef___fill_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2433,6 +2486,7 @@ void syntax___icode_generation___AExternPropdef___fill_iroutine(val_t p0, val_t 
     fra.me.meth = LOCATE_syntax___icode_generation___AExternPropdef___fill_iroutine;
     fra.me.has_broke = 0;
     fra.me.REG_size = 3;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -2480,6 +2534,7 @@ void syntax___icode_generation___AExternInitPropdef___fill_iroutine(val_t p0, va
   fra.me.meth = LOCATE_syntax___icode_generation___AExternInitPropdef___fill_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2559,6 +2614,7 @@ void syntax___icode_generation___ADeferredMethPropdef___fill_iroutine(val_t p0, 
   fra.me.meth = LOCATE_syntax___icode_generation___ADeferredMethPropdef___fill_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2592,6 +2648,7 @@ void syntax___icode_generation___AExternMethPropdef___fill_iroutine(val_t p0, va
   fra.me.meth = LOCATE_syntax___icode_generation___AExternMethPropdef___fill_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2656,6 +2713,7 @@ void syntax___icode_generation___AInternMethPropdef___fill_iroutine(val_t p0, va
   fra.me.meth = LOCATE_syntax___icode_generation___AInternMethPropdef___fill_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2710,6 +2768,7 @@ void syntax___icode_generation___AExpr___accept_icode_generation(val_t p0, val_t
   fra.me.meth = LOCATE_syntax___icode_generation___AExpr___accept_icode_generation;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2726,6 +2785,7 @@ val_t syntax___icode_generation___AExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___AExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//icode_generation.nit:468 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___icode_generation, 468);
   stack_frame_head = fra.me.prev;
@@ -2742,6 +2802,7 @@ val_t syntax___icode_generation___AVardeclExpr___generate_icode(val_t p0, val_t 
   fra.me.meth = LOCATE_syntax___icode_generation___AVardeclExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2787,6 +2848,7 @@ val_t syntax___icode_generation___ABlockExpr___generate_icode(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___ABlockExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2811,6 +2873,7 @@ val_t syntax___icode_generation___ABlockExpr___generate_icode(val_t p0, val_t p1
     fra.me.meth = LOCATE_syntax___icode_generation___ABlockExpr___generate_icode;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -2830,6 +2893,7 @@ val_t syntax___icode_generation___ADoExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___ADoExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2875,6 +2939,7 @@ val_t syntax___icode_generation___AReturnExpr___generate_icode(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___icode_generation___AReturnExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2936,6 +3001,7 @@ val_t syntax___icode_generation___ABreakExpr___generate_icode(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___ABreakExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3008,6 +3074,7 @@ val_t syntax___icode_generation___AContinueExpr___generate_icode(val_t p0, val_t
   fra.me.meth = LOCATE_syntax___icode_generation___AContinueExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3080,6 +3147,7 @@ val_t syntax___icode_generation___AAbortExpr___generate_icode(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___AAbortExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3116,6 +3184,7 @@ val_t syntax___icode_generation___AIfExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___AIfExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3197,6 +3266,7 @@ val_t syntax___icode_generation___AWhileExpr___generate_icode(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___AWhileExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3283,6 +3353,7 @@ val_t syntax___icode_generation___ALoopExpr___generate_icode(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___icode_generation___ALoopExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3368,6 +3439,7 @@ val_t syntax___icode_generation___AForExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___AForExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3663,6 +3735,7 @@ val_t syntax___icode_generation___AAssertExpr___generate_icode(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___icode_generation___AAssertExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3753,6 +3826,7 @@ val_t syntax___icode_generation___AVarExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___AVarExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3774,6 +3848,7 @@ val_t syntax___icode_generation___AVarAssignExpr___generate_icode(val_t p0, val_
   fra.me.meth = LOCATE_syntax___icode_generation___AVarAssignExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3803,6 +3878,7 @@ val_t syntax___icode_generation___AVarReassignExpr___generate_icode(val_t p0, va
   fra.me.meth = LOCATE_syntax___icode_generation___AVarReassignExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3858,6 +3934,7 @@ val_t syntax___icode_generation___ASelfExpr___generate_icode(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___icode_generation___ASelfExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3879,6 +3956,7 @@ val_t syntax___icode_generation___AIfexprExpr___generate_icode(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___icode_generation___AIfexprExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3929,6 +4007,7 @@ val_t syntax___icode_generation___AEeExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___AEeExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3959,6 +4038,7 @@ val_t syntax___icode_generation___AOrExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___AOrExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4008,6 +4088,7 @@ val_t syntax___icode_generation___AAndExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___AAndExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4057,6 +4138,7 @@ val_t syntax___icode_generation___ANotExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___ANotExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4083,6 +4165,7 @@ val_t syntax___icode_generation___AOrElseExpr___generate_icode(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___icode_generation___AOrElseExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4141,6 +4224,7 @@ val_t syntax___icode_generation___AIsaExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___AIsaExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4179,6 +4263,7 @@ val_t syntax___icode_generation___AAsCastExpr___generate_icode(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___icode_generation___AAsCastExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4205,6 +4290,7 @@ val_t syntax___icode_generation___AAsNotnullExpr___generate_icode(val_t p0, val_
   fra.me.meth = LOCATE_syntax___icode_generation___AAsNotnullExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4231,6 +4317,7 @@ val_t syntax___icode_generation___ATrueExpr___generate_icode(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___icode_generation___ATrueExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4251,6 +4338,7 @@ val_t syntax___icode_generation___AFalseExpr___generate_icode(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___AFalseExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4271,6 +4359,7 @@ val_t syntax___icode_generation___AIntExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___AIntExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4296,6 +4385,7 @@ val_t syntax___icode_generation___AFloatExpr___generate_icode(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___AFloatExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4321,6 +4411,7 @@ val_t syntax___icode_generation___ACharExpr___generate_icode(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___icode_generation___ACharExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4349,6 +4440,7 @@ val_t syntax___icode_generation___AStringFormExpr___generate_icode(val_t p0, val
   fra.me.meth = LOCATE_syntax___icode_generation___AStringFormExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4442,6 +4534,7 @@ val_t syntax___icode_generation___AStringFormExpr___string_text(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___AStringFormExpr___string_text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//icode_generation.nit:930 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___icode_generation, 930);
   stack_frame_head = fra.me.prev;
@@ -4462,6 +4555,7 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
   fra.me.meth = LOCATE_syntax___icode_generation___AStringFormExpr___compute_string_infos;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4586,6 +4680,7 @@ val_t syntax___icode_generation___AStringExpr___string_text(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___AStringExpr___string_text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4625,6 +4720,7 @@ val_t syntax___icode_generation___AStartStringExpr___string_text(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___AStartStringExpr___string_text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4664,6 +4760,7 @@ val_t syntax___icode_generation___AMidStringExpr___string_text(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___AMidStringExpr___string_text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4703,6 +4800,7 @@ val_t syntax___icode_generation___AEndStringExpr___string_text(val_t p0){
   fra.me.meth = LOCATE_syntax___icode_generation___AEndStringExpr___string_text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4742,6 +4840,7 @@ val_t syntax___icode_generation___ASuperstringExpr___generate_icode(val_t p0, va
   fra.me.meth = LOCATE_syntax___icode_generation___ASuperstringExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4801,6 +4900,7 @@ val_t syntax___icode_generation___ASuperstringExpr___generate_icode(val_t p0, va
     fra.me.meth = LOCATE_syntax___icode_generation___ASuperstringExpr___generate_icode;
     fra.me.has_broke = 0;
     fra.me.REG_size = 3;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -4844,6 +4944,7 @@ val_t syntax___icode_generation___ANullExpr___generate_icode(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___icode_generation___ANullExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4865,6 +4966,7 @@ val_t syntax___icode_generation___AArrayExpr___generate_icode(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___AArrayExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4895,6 +4997,7 @@ val_t syntax___icode_generation___AArrayExpr___generate_icode(val_t p0, val_t p1
     fra.me.meth = LOCATE_syntax___icode_generation___AArrayExpr___generate_icode;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -4919,6 +5022,7 @@ val_t syntax___icode_generation___ACrangeExpr___generate_icode(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___icode_generation___ACrangeExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4978,6 +5082,7 @@ val_t syntax___icode_generation___AOrangeExpr___generate_icode(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___icode_generation___AOrangeExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5038,6 +5143,7 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___ASuperExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5261,6 +5367,7 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
       fra.me.meth = LOCATE_syntax___icode_generation___ASuperExpr___generate_icode;
       fra.me.has_broke = 0;
       fra.me.REG_size = 1;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.closure_ctx = closctx_param;
       fra.me.closure_funs = CREG;
@@ -5282,6 +5389,7 @@ val_t syntax___icode_generation___AAttrExpr___generate_icode(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___icode_generation___AAttrExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5316,6 +5424,7 @@ val_t syntax___icode_generation___AAttrAssignExpr___generate_icode(val_t p0, val
   fra.me.meth = LOCATE_syntax___icode_generation___AAttrAssignExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5356,6 +5465,7 @@ val_t syntax___icode_generation___AAttrReassignExpr___generate_icode(val_t p0, v
   fra.me.meth = LOCATE_syntax___icode_generation___AAttrReassignExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5413,6 +5523,7 @@ val_t syntax___icode_generation___AIssetAttrExpr___generate_icode(val_t p0, val_
   fra.me.meth = LOCATE_syntax___icode_generation___AIssetAttrExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5459,6 +5570,7 @@ void syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_
   fra.me.meth = LOCATE_syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5695,6 +5807,7 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___icode_generation___ASendExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 16;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6070,6 +6183,7 @@ val_t syntax___icode_generation___ASendReassignExpr___generate_icode(val_t p0, v
   fra.me.meth = LOCATE_syntax___icode_generation___ASendReassignExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6169,6 +6283,7 @@ val_t syntax___icode_generation___ANewExpr___generate_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___icode_generation___ANewExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6209,6 +6324,7 @@ val_t syntax___icode_generation___AProxyExpr___generate_icode(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___icode_generation___AProxyExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -6230,6 +6346,7 @@ val_t syntax___icode_generation___AOnceExpr___generate_icode(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___icode_generation___AOnceExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6275,6 +6392,7 @@ val_t syntax___icode_generation___AClosureDef___generate_iclosuredef(val_t p0, v
   fra.me.meth = LOCATE_syntax___icode_generation___AClosureDef___generate_iclosuredef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6535,6 +6653,7 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
   fra.me.meth = LOCATE_syntax___icode_generation___AClosureCallExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

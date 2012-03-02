@@ -10,6 +10,7 @@ val_t standard___collection___range___Range___first(val_t p0){
   fra.me.meth = LOCATE_standard___collection___range___Range___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//range.nit:22 */
@@ -32,6 +33,7 @@ val_t standard___collection___range___Range___last(val_t p0){
   fra.me.meth = LOCATE_standard___collection___range___Range___last;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//range.nit:24 */
@@ -54,6 +56,7 @@ val_t standard___collection___range___Range___after(val_t p0){
   fra.me.meth = LOCATE_standard___collection___range___Range___after;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//range.nit:27 */
@@ -77,6 +80,7 @@ val_t standard___collection___range___Range___has(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___collection___range___Range___has;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -118,6 +122,7 @@ val_t standard___collection___range___Range___has_only(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___collection___range___Range___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -169,6 +174,7 @@ val_t standard___collection___range___Range___count(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___collection___range___Range___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -198,6 +204,7 @@ val_t standard___collection___range___Range___iterator(val_t p0){
   fra.me.meth = LOCATE_standard___collection___range___Range___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//range.nit:43 */
@@ -218,6 +225,7 @@ void standard___collection___range___Range___iterate(val_t p0, struct stack_fram
   fra.me.meth = LOCATE_standard___collection___range___Range___iterate;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -273,6 +281,7 @@ val_t standard___collection___range___Range___length(val_t p0){
   fra.me.meth = LOCATE_standard___collection___range___Range___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -323,6 +332,7 @@ val_t standard___collection___range___Range___is_empty(val_t p0){
   fra.me.meth = LOCATE_standard___collection___range___Range___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -356,6 +366,7 @@ void standard___collection___range___Range___init(val_t p0, val_t p1, val_t p2, 
   fra.me.meth = LOCATE_standard___collection___range___Range___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -384,6 +395,7 @@ void standard___collection___range___Range___without_last(val_t p0, val_t p1, va
   fra.me.meth = LOCATE_standard___collection___range___Range___without_last;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -411,6 +423,7 @@ val_t standard___collection___range___IteratorRange___item(val_t p0){
   fra.me.meth = LOCATE_standard___collection___range___IteratorRange___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//range.nit:91 */
@@ -433,6 +446,7 @@ val_t standard___collection___range___IteratorRange___is_ok(val_t p0){
   fra.me.meth = LOCATE_standard___collection___range___IteratorRange___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -466,6 +480,7 @@ void standard___collection___range___IteratorRange___next(val_t p0){
   fra.me.meth = LOCATE_standard___collection___range___IteratorRange___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -492,6 +507,7 @@ void standard___collection___range___IteratorRange___init(val_t p0, val_t p1, in
   fra.me.meth = LOCATE_standard___collection___range___IteratorRange___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

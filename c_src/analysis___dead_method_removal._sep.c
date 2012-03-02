@@ -10,6 +10,7 @@ val_t analysis___dead_method_removal___Program___nb_removed_iroutines(val_t p0){
   fra.me.meth = LOCATE_analysis___dead_method_removal___Program___nb_removed_iroutines;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//dead_method_removal.nit:23 */
@@ -32,6 +33,7 @@ val_t analysis___dead_method_removal___Program___nb_not_removed_iroutines(val_t 
   fra.me.meth = LOCATE_analysis___dead_method_removal___Program___nb_not_removed_iroutines;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//dead_method_removal.nit:24 */
@@ -53,6 +55,7 @@ void analysis___dead_method_removal___Program___optimize_dead_methods(val_t p0){
   fra.me.meth = LOCATE_analysis___dead_method_removal___Program___optimize_dead_methods;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   CALL_program___Program___with_each_iroutines(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_analysis___dead_method_removal___Program___optimize_dead_methods_1));
@@ -71,6 +74,7 @@ void analysis___dead_method_removal___Program___optimize_dead_methods(val_t p0){
     fra.me.meth = LOCATE_analysis___dead_method_removal___Program___optimize_dead_methods;
     fra.me.has_broke = 0;
     fra.me.REG_size = 3;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -123,6 +127,7 @@ void analysis___dead_method_removal___Program___dump_dead_method_optimization(va
   fra.me.meth = LOCATE_analysis___dead_method_removal___Program___dump_dead_method_optimization;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -234,6 +239,7 @@ void analysis___dead_method_removal___IRoutine___set_not_reachable(val_t p0, val
   fra.me.meth = LOCATE_analysis___dead_method_removal___IRoutine___set_not_reachable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

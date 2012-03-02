@@ -11,6 +11,7 @@ val_t standard___symbol___String___to_symbol(val_t p0){
   fra.me.meth = LOCATE_standard___symbol___String___to_symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -52,6 +53,7 @@ val_t standard___symbol___Symbol___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___symbol___Symbol___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//symbol.nit:37 */
@@ -78,6 +80,7 @@ void standard___symbol___Symbol___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___symbol___Symbol___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

@@ -14,6 +14,7 @@ val_t standard___environ___Symbol___environ(val_t p0){
   fra.me.meth = LOCATE_standard___environ___Symbol___environ;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -75,6 +76,7 @@ val_t standard___environ___NativeString___get_environ(val_t p0){
   fra.me.meth = LOCATE_standard___environ___NativeString___get_environ;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//environ.nit:36 */

@@ -10,6 +10,7 @@ val_t location___SourceFile___filename(val_t p0){
   fra.me.meth = LOCATE_location___SourceFile___filename;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./location.nit:22 */
@@ -31,6 +32,7 @@ void location___SourceFile___filename__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_location___SourceFile___filename__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -50,6 +52,7 @@ val_t location___SourceFile___string(val_t p0){
   fra.me.meth = LOCATE_location___SourceFile___string;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./location.nit:25 */
@@ -71,6 +74,7 @@ void location___SourceFile___string__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_location___SourceFile___string__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -93,6 +97,7 @@ void location___SourceFile___init(val_t p0, val_t p1, val_t p2, int* init_table)
   fra.me.meth = LOCATE_location___SourceFile___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -123,6 +128,7 @@ val_t location___SourceFile___line_starts(val_t p0){
   fra.me.meth = LOCATE_location___SourceFile___line_starts;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./location.nit:36 */
@@ -144,6 +150,7 @@ void location___SourceFile___line_starts__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_location___SourceFile___line_starts__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -162,6 +169,7 @@ val_t location___Location___file(val_t p0){
   fra.me.meth = LOCATE_location___Location___file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./location.nit:45 */
@@ -179,6 +187,7 @@ val_t location___Location___line_start(val_t p0){
   fra.me.meth = LOCATE_location___Location___line_start;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./location.nit:46 */
@@ -201,6 +210,7 @@ val_t location___Location___line_end(val_t p0){
   fra.me.meth = LOCATE_location___Location___line_end;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./location.nit:47 */
@@ -223,6 +233,7 @@ val_t location___Location___column_start(val_t p0){
   fra.me.meth = LOCATE_location___Location___column_start;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./location.nit:48 */
@@ -245,6 +256,7 @@ val_t location___Location___column_end(val_t p0){
   fra.me.meth = LOCATE_location___Location___column_end;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./location.nit:49 */
@@ -272,6 +284,7 @@ void location___Location___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4
   fra.me.meth = LOCATE_location___Location___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -309,6 +322,7 @@ void location___Location___with_file(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_location___Location___with_file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -336,6 +350,7 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_location___Location_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -497,6 +512,7 @@ val_t location___Location___located_in(val_t p0, val_t p1){
   fra.me.meth = LOCATE_location___Location___located_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -711,6 +727,7 @@ val_t location___Location___to_s(val_t p0){
   fra.me.meth = LOCATE_location___Location___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1014,6 +1031,7 @@ val_t location___Location___relative_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_location___Location___relative_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1093,6 +1111,7 @@ val_t location___Location_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_location___Location_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

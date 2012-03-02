@@ -23,6 +23,7 @@ void metamodel___inheritance___MMContext___handle_property_conflict(val_t p0, va
   fra.me.meth = LOCATE_metamodel___inheritance___MMContext___handle_property_conflict;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -244,6 +245,7 @@ val_t metamodel___inheritance___MMModule___type_any(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMModule___type_any;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -282,6 +284,7 @@ val_t metamodel___inheritance___MMModule___type_any_extern(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMModule___type_any_extern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -320,6 +323,7 @@ void metamodel___inheritance___MMModule___import_global_classes(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMModule___import_global_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -417,6 +421,7 @@ void metamodel___inheritance___MMModule___import_global_classes(val_t p0){
         fra.me.meth = LOCATE_metamodel___inheritance___MMModule___import_global_classes;
         fra.me.has_broke = 0;
         fra.me.REG_size = 3;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[1] = NIT_NULL;
         fra.me.REG[2] = NIT_NULL;
@@ -458,6 +463,7 @@ void metamodel___inheritance___MMModule___import_local_classes(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMModule___import_local_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -483,6 +489,7 @@ void metamodel___inheritance___MMModule___import_local_classes(val_t p0){
     fra.me.meth = LOCATE_metamodel___inheritance___MMModule___import_local_classes;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -519,6 +526,7 @@ void metamodel___inheritance___MMLocalClass___compute_super_classes(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___compute_super_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -646,6 +654,7 @@ void metamodel___inheritance___MMLocalClass___compute_ancestors(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___compute_ancestors;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -687,6 +696,7 @@ void metamodel___inheritance___MMLocalClass___compute_ancestors(val_t p0){
     fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___compute_ancestors;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -730,6 +740,7 @@ void metamodel___inheritance___MMLocalClass___inherit_global_properties(val_t p0
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___inherit_global_properties;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -833,6 +844,7 @@ void metamodel___inheritance___MMLocalClass___inherit_global_properties(val_t p0
         fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___inherit_global_properties;
         fra.me.has_broke = 0;
         fra.me.REG_size = 3;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[1] = NIT_NULL;
         fra.me.REG[2] = NIT_NULL;
@@ -900,6 +912,7 @@ val_t metamodel___inheritance___MMLocalClass___global_properties(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___global_properties;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -953,6 +966,7 @@ val_t metamodel___inheritance___MMLocalClass___has_global_property(val_t p0, val
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___has_global_property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1064,6 +1078,7 @@ val_t metamodel___inheritance___MMLocalClass___has_global_property_by_name(val_t
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___has_global_property_by_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1323,6 +1338,7 @@ void metamodel___inheritance___MMLocalClass___make_visible_an_inherited_global_p
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___make_visible_an_inherited_global_property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1367,6 +1383,7 @@ void metamodel___inheritance___MMLocalClass___add_direct_parent(val_t p0, val_t 
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___add_direct_parent;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1393,6 +1410,7 @@ val_t metamodel___inheritance___MMLocalClass___computed_super_classes(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___computed_super_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1446,6 +1464,7 @@ val_t metamodel___inheritance___MMLocalClass___computed_ancestors(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___computed_ancestors;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//inheritance.nit:252 */
@@ -1479,6 +1498,7 @@ val_t metamodel___inheritance___MMLocalClass___ancestor_for(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___ancestor_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1594,6 +1614,7 @@ val_t metamodel___inheritance___MMLocalClass_____bra(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1674,6 +1695,7 @@ void metamodel___inheritance___MMLocalClass___add_default_any_class(val_t p0, va
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___add_default_any_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1855,6 +1877,7 @@ void metamodel___inheritance___MMLocalClass___add_super_classes(val_t p0, val_t 
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___add_super_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2015,6 +2038,7 @@ void metamodel___inheritance___MMLocalClass___add_explicit_classes(val_t p0, val
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___add_explicit_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2094,6 +2118,7 @@ void metamodel___inheritance___MMLocalClass___compute_super_parents(val_t p0, va
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___compute_super_parents;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2164,6 +2189,7 @@ val_t metamodel___inheritance___MMLocalClass___build_ancestors(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___build_ancestors;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2351,6 +2377,7 @@ val_t metamodel___inheritance___MMLocalClass___group_ancestors(val_t p0, val_t p
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___group_ancestors;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2450,6 +2477,7 @@ val_t metamodel___inheritance___MMLocalClass___merge_ancestors(val_t p0, val_t p
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___merge_ancestors;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2551,6 +2579,7 @@ val_t metamodel___inheritance___MMLocalClass___merge_ancestors(val_t p0, val_t p
     fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___merge_ancestors;
     fra.me.has_broke = 0;
     fra.me.REG_size = 4;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -2661,6 +2690,7 @@ val_t metamodel___inheritance___MMLocalClass___inherit_local_property(val_t p0, 
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalClass___inherit_local_property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2844,6 +2874,7 @@ void metamodel___inheritance___MMLocalProperty___inherit_global(val_t p0, val_t 
   fra.me.meth = LOCATE_metamodel___inheritance___MMLocalProperty___inherit_global;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2933,6 +2964,7 @@ void metamodel___inheritance___MMAncestor___add_in(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___inheritance___MMAncestor___add_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2970,6 +3002,7 @@ void metamodel___inheritance___MMAncestor___add_in(val_t p0, val_t p1){
     fra.me.meth = LOCATE_metamodel___inheritance___MMAncestor___add_in;
     fra.me.has_broke = 0;
     fra.me.REG_size = 4;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -3079,6 +3112,7 @@ void metamodel___inheritance___MMImplicitLocalClass___init(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_metamodel___inheritance___MMImplicitLocalClass___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3112,6 +3146,7 @@ val_t metamodel___inheritance___MMRefineAncestor___local_class(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMRefineAncestor___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//inheritance.nit:527 */
@@ -3136,6 +3171,7 @@ void metamodel___inheritance___MMRefineAncestor___init(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_metamodel___inheritance___MMRefineAncestor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3173,6 +3209,7 @@ val_t metamodel___inheritance___MMSpecAncestor___local_class(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMSpecAncestor___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//inheritance.nit:540 */
@@ -3194,6 +3231,7 @@ void metamodel___inheritance___MMSpecAncestor___init(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_metamodel___inheritance___MMSpecAncestor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3221,6 +3259,7 @@ val_t metamodel___inheritance___MMDefaultAncestor___local_class(val_t p0){
   fra.me.meth = LOCATE_metamodel___inheritance___MMDefaultAncestor___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//inheritance.nit:551 */
@@ -3242,6 +3281,7 @@ void metamodel___inheritance___MMDefaultAncestor___init(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_metamodel___inheritance___MMDefaultAncestor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

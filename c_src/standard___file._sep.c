@@ -10,6 +10,7 @@ void standard___file___Object___printn(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___file___Object___printn;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -40,6 +41,7 @@ void standard___file___Object___print(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___file___Object___print;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -73,6 +75,7 @@ val_t standard___file___Object___getc(val_t p0){
   fra.me.meth = LOCATE_standard___file___Object___getc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:41 */
@@ -95,6 +98,7 @@ val_t standard___file___Object___gets(val_t p0){
   fra.me.meth = LOCATE_standard___file___Object___gets;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:47 */
@@ -115,6 +119,7 @@ val_t standard___file___Object___stdin(val_t p0){
   fra.me.meth = LOCATE_standard___file___Object___stdin;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:324 */
@@ -139,6 +144,7 @@ val_t standard___file___Object___stdout(val_t p0){
   fra.me.meth = LOCATE_standard___file___Object___stdout;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:327 */
@@ -163,6 +169,7 @@ val_t standard___file___Object___stderr(val_t p0){
   fra.me.meth = LOCATE_standard___file___Object___stderr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:330 */
@@ -186,6 +193,7 @@ val_t standard___file___FStream___path(val_t p0){
   fra.me.meth = LOCATE_standard___file___FStream___path;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:55 */
@@ -203,6 +211,7 @@ val_t standard___file___FStream___file_stat(val_t p0){
   fra.me.meth = LOCATE_standard___file___FStream___file_stat;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:62 */
@@ -227,6 +236,7 @@ void standard___file___IFStream___reopen(val_t p0){
   fra.me.meth = LOCATE_standard___file___IFStream___reopen;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -271,6 +281,7 @@ void standard___file___IFStream___close(val_t p0){
   fra.me.meth = LOCATE_standard___file___IFStream___close;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -299,6 +310,7 @@ void standard___file___IFStream___fill_buffer(val_t p0){
   fra.me.meth = LOCATE_standard___file___IFStream___fill_buffer;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -374,6 +386,7 @@ val_t standard___file___IFStream___end_reached(val_t p0){
   fra.me.meth = LOCATE_standard___file___IFStream___end_reached;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:99 */
@@ -399,6 +412,7 @@ void standard___file___IFStream___open(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___file___IFStream___open;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -451,6 +465,7 @@ void standard___file___IFStream___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___file___IFStream___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -468,6 +483,7 @@ void standard___file___IFStream___without_file(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___file___IFStream___without_file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -484,6 +500,7 @@ void standard___file___OFStream___write(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___file___OFStream___write;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -524,6 +541,7 @@ val_t standard___file___OFStream___is_writable(val_t p0){
   fra.me.meth = LOCATE_standard___file___OFStream___is_writable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:126 */
@@ -548,6 +566,7 @@ void standard___file___OFStream___close(val_t p0){
   fra.me.meth = LOCATE_standard___file___OFStream___close;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -580,6 +599,7 @@ void standard___file___OFStream___write_native(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___file___OFStream___write_native;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -665,6 +685,7 @@ void standard___file___OFStream___open(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___file___OFStream___open;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -713,6 +734,7 @@ void standard___file___OFStream___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___file___OFStream___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -730,6 +752,7 @@ void standard___file___OFStream___without_file(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___file___OFStream___without_file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -749,6 +772,7 @@ void standard___file___Stdin___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___file___Stdin___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -788,6 +812,7 @@ void standard___file___Stdout___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___file___Stdout___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -827,6 +852,7 @@ void standard___file___Stderr___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___file___Stderr___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -863,6 +889,7 @@ val_t standard___file___String___file_exists(val_t p0){
   fra.me.meth = LOCATE_standard___file___String___file_exists;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:194 */
@@ -882,6 +909,7 @@ val_t standard___file___String___file_stat(val_t p0){
   fra.me.meth = LOCATE_standard___file___String___file_stat;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:196 */
@@ -902,6 +930,7 @@ val_t standard___file___String___file_delete(val_t p0){
   fra.me.meth = LOCATE_standard___file___String___file_delete;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:199 */
@@ -924,6 +953,7 @@ val_t standard___file___String___strip_extension(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___file___String___strip_extension;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -971,6 +1001,7 @@ val_t standard___file___String___basename(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___file___String___basename;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1030,6 +1061,7 @@ val_t standard___file___String___dirname(val_t p0){
   fra.me.meth = LOCATE_standard___file___String___dirname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1095,6 +1127,7 @@ val_t standard___file___String___simplify_path(val_t p0){
   fra.me.meth = LOCATE_standard___file___String___simplify_path;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1263,6 +1296,7 @@ void standard___file___String___mkdir(val_t p0){
   fra.me.meth = LOCATE_standard___file___String___mkdir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1423,6 +1457,7 @@ val_t standard___file___String___file_extension(val_t p0){
   fra.me.meth = LOCATE_standard___file___String___file_extension;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:282 */
@@ -1472,6 +1507,7 @@ val_t standard___file___NativeString___file_exists(val_t p0){
   fra.me.meth = LOCATE_standard___file___NativeString___file_exists;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:292 */
@@ -1488,6 +1524,7 @@ val_t standard___file___NativeString___file_stat(val_t p0){
   fra.me.meth = LOCATE_standard___file___NativeString___file_stat;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:293 */
@@ -1505,6 +1542,7 @@ val_t standard___file___NativeString___file_mkdir(val_t p0){
   fra.me.meth = LOCATE_standard___file___NativeString___file_mkdir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:294 */
@@ -1522,6 +1560,7 @@ val_t standard___file___NativeString___file_delete(val_t p0){
   fra.me.meth = LOCATE_standard___file___NativeString___file_delete;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:295 */
@@ -1539,6 +1578,7 @@ val_t standard___file___FileStat___mode(val_t p0){
   fra.me.meth = LOCATE_standard___file___FileStat___mode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:299 */
@@ -1556,6 +1596,7 @@ val_t standard___file___FileStat___atime(val_t p0){
   fra.me.meth = LOCATE_standard___file___FileStat___atime;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:301 */
@@ -1573,6 +1614,7 @@ val_t standard___file___FileStat___ctime(val_t p0){
   fra.me.meth = LOCATE_standard___file___FileStat___ctime;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:302 */
@@ -1590,6 +1632,7 @@ val_t standard___file___FileStat___mtime(val_t p0){
   fra.me.meth = LOCATE_standard___file___FileStat___mtime;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:303 */
@@ -1607,6 +1650,7 @@ val_t standard___file___FileStat___size(val_t p0){
   fra.me.meth = LOCATE_standard___file___FileStat___size;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:304 */
@@ -1624,6 +1668,7 @@ val_t standard___file___NativeFile___io_read(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___file___NativeFile___io_read;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1644,6 +1689,7 @@ val_t standard___file___NativeFile___io_write(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___file___NativeFile___io_write;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1664,6 +1710,7 @@ val_t standard___file___NativeFile___io_close(val_t p0){
   fra.me.meth = LOCATE_standard___file___NativeFile___io_close;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:311 */
@@ -1680,6 +1727,7 @@ val_t standard___file___NativeFile___file_stat(val_t p0){
   fra.me.meth = LOCATE_standard___file___NativeFile___file_stat;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:312 */
@@ -1696,6 +1744,7 @@ val_t standard___file___NativeFileCapable___io_open_read(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___file___NativeFileCapable___io_open_read;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1714,6 +1763,7 @@ val_t standard___file___NativeFileCapable___io_open_write(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___file___NativeFileCapable___io_open_write;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1732,6 +1782,7 @@ val_t standard___file___NativeFileCapable___native_stdin(val_t p0){
   fra.me.meth = LOCATE_standard___file___NativeFileCapable___native_stdin;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:318 */
@@ -1748,6 +1799,7 @@ val_t standard___file___NativeFileCapable___native_stdout(val_t p0){
   fra.me.meth = LOCATE_standard___file___NativeFileCapable___native_stdout;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:319 */
@@ -1764,6 +1816,7 @@ val_t standard___file___NativeFileCapable___native_stderr(val_t p0){
   fra.me.meth = LOCATE_standard___file___NativeFileCapable___native_stderr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//file.nit:320 */

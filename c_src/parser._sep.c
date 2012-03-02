@@ -10,6 +10,7 @@ val_t parser___State___state(val_t p0){
   fra.me.meth = LOCATE_parser___State___state;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser.nit:9 */
@@ -32,6 +33,7 @@ void parser___State___state__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___State___state__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -49,6 +51,7 @@ val_t parser___State___nodes(val_t p0){
   fra.me.meth = LOCATE_parser___State___nodes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser.nit:12 */
@@ -65,6 +68,7 @@ void parser___State___nodes__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___State___nodes__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -86,6 +90,7 @@ void parser___State___init(val_t p0, val_t p1, val_t p2, int* init_table){
   fra.me.meth = LOCATE_parser___State___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -111,6 +116,7 @@ void parser___Parser___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___Parser___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -149,6 +155,7 @@ val_t parser___Parser___go_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___Parser___go_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -258,6 +265,7 @@ void parser___Parser___push(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_parser___Parser___push;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -380,6 +388,7 @@ val_t parser___Parser___state(val_t p0){
   fra.me.meth = LOCATE_parser___Parser___state;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -463,6 +472,7 @@ val_t parser___Parser___pop(val_t p0){
   fra.me.meth = LOCATE_parser___Parser___pop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -566,6 +576,7 @@ val_t parser___Parser___parse(val_t p0){
   fra.me.meth = LOCATE_parser___Parser___parse;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -865,6 +876,7 @@ void parser___Parser___build_reduce_table(val_t p0){
   fra.me.meth = LOCATE_parser___Parser___build_reduce_table;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4621,6 +4633,7 @@ void parser___ComputeProdLocationVisitor___visit(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ComputeProdLocationVisitor___visit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5153,6 +5166,7 @@ void parser___ComputeProdLocationVisitor___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___ComputeProdLocationVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser.nit:997 */
@@ -5170,6 +5184,7 @@ void parser___ReduceAction___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./parser//parser.nit:1002 */
   nit_abort("Deferred method called", NULL, LOCATE_parser, 1002);
   stack_frame_head = fra.me.prev;
@@ -5185,6 +5200,7 @@ val_t parser___ReduceAction___concat(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_parser___ReduceAction___concat;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5218,6 +5234,7 @@ void parser___ReduceAction___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_parser___ReduceAction___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -5237,6 +5254,7 @@ void parser___ReduceAction0___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction0___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5276,6 +5294,7 @@ void parser___ReduceAction1___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction1___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5324,6 +5343,7 @@ void parser___ReduceAction2___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction2___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5375,6 +5395,7 @@ void parser___ReduceAction3___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction3___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5435,6 +5456,7 @@ void parser___ReduceAction4___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction4___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5486,6 +5508,7 @@ void parser___ReduceAction5___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction5___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5546,6 +5569,7 @@ void parser___ReduceAction6___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction6___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5609,6 +5633,7 @@ void parser___ReduceAction7___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction7___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5682,6 +5707,7 @@ void parser___ReduceAction8___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction8___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5757,6 +5783,7 @@ void parser___ReduceAction9___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction9___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5841,6 +5868,7 @@ void parser___ReduceAction10___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction10___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5927,6 +5955,7 @@ void parser___ReduceAction11___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction11___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6022,6 +6051,7 @@ void parser___ReduceAction12___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction12___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6109,6 +6139,7 @@ void parser___ReduceAction13___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction13___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6205,6 +6236,7 @@ void parser___ReduceAction14___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction14___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6303,6 +6335,7 @@ void parser___ReduceAction15___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction15___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6410,6 +6443,7 @@ void parser___ReduceAction16___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction16___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6477,6 +6511,7 @@ void parser___ReduceAction17___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction17___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6553,6 +6588,7 @@ void parser___ReduceAction18___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction18___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6632,6 +6668,7 @@ void parser___ReduceAction19___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction19___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6720,6 +6757,7 @@ void parser___ReduceAction20___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction20___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6799,6 +6837,7 @@ void parser___ReduceAction21___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction21___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6887,6 +6926,7 @@ void parser___ReduceAction22___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction22___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6978,6 +7018,7 @@ void parser___ReduceAction23___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction23___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7078,6 +7119,7 @@ void parser___ReduceAction24___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction24___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7180,6 +7222,7 @@ void parser___ReduceAction25___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction25___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7291,6 +7334,7 @@ void parser___ReduceAction26___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction26___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7404,6 +7448,7 @@ void parser___ReduceAction27___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction27___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7526,6 +7571,7 @@ void parser___ReduceAction28___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction28___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7640,6 +7686,7 @@ void parser___ReduceAction29___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction29___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7763,6 +7810,7 @@ void parser___ReduceAction30___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction30___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7888,6 +7936,7 @@ void parser___ReduceAction31___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction31___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8021,6 +8070,7 @@ void parser___ReduceAction32___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction32___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8085,6 +8135,7 @@ void parser___ReduceAction33___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction33___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8152,6 +8203,7 @@ void parser___ReduceAction34___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction34___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8220,6 +8272,7 @@ void parser___ReduceAction35___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction35___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8283,6 +8336,7 @@ void parser___ReduceAction36___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction36___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8317,6 +8371,7 @@ void parser___ReduceAction37___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction37___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8362,6 +8417,7 @@ void parser___ReduceAction39___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction39___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8446,6 +8502,7 @@ void parser___ReduceAction40___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction40___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8539,6 +8596,7 @@ void parser___ReduceAction41___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction41___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8635,6 +8693,7 @@ void parser___ReduceAction42___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction42___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 12;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8740,6 +8799,7 @@ void parser___ReduceAction43___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction43___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8836,6 +8896,7 @@ void parser___ReduceAction44___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction44___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 12;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8941,6 +9002,7 @@ void parser___ReduceAction45___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction45___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 12;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9049,6 +9111,7 @@ void parser___ReduceAction46___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction46___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 13;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9166,6 +9229,7 @@ void parser___ReduceAction47___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction47___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9262,6 +9326,7 @@ void parser___ReduceAction48___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction48___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 12;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9367,6 +9432,7 @@ void parser___ReduceAction49___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction49___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 12;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9475,6 +9541,7 @@ void parser___ReduceAction50___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction50___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 13;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9592,6 +9659,7 @@ void parser___ReduceAction51___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction51___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 12;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9700,6 +9768,7 @@ void parser___ReduceAction52___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction52___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 13;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9817,6 +9886,7 @@ void parser___ReduceAction53___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction53___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 13;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9937,6 +10007,7 @@ void parser___ReduceAction54___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction54___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 14;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10066,6 +10137,7 @@ void parser___ReduceAction55___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction55___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10108,6 +10180,7 @@ void parser___ReduceAction56___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction56___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10159,6 +10232,7 @@ void parser___ReduceAction57___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction57___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10201,6 +10275,7 @@ void parser___ReduceAction58___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction58___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10243,6 +10318,7 @@ void parser___ReduceAction59___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction59___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10286,6 +10362,7 @@ void parser___ReduceAction60___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction60___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10350,6 +10427,7 @@ void parser___ReduceAction61___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction61___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10425,6 +10503,7 @@ void parser___ReduceAction62___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction62___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10464,6 +10543,7 @@ void parser___ReduceAction63___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction63___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10506,6 +10586,7 @@ void parser___ReduceAction64___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction64___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10557,6 +10638,7 @@ void parser___ReduceAction65___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction65___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10613,6 +10695,7 @@ void parser___ReduceAction66___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction66___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10669,6 +10752,7 @@ void parser___ReduceAction67___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction67___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10705,6 +10789,7 @@ void parser___ReduceAction68___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction68___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10794,6 +10879,7 @@ void parser___ReduceAction69___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction69___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10892,6 +10978,7 @@ void parser___ReduceAction70___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction70___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10983,6 +11070,7 @@ void parser___ReduceAction71___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction71___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11083,6 +11171,7 @@ void parser___ReduceAction72___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction72___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11174,6 +11263,7 @@ void parser___ReduceAction73___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction73___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11274,6 +11364,7 @@ void parser___ReduceAction74___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction74___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11356,6 +11447,7 @@ void parser___ReduceAction75___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction75___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11447,6 +11539,7 @@ void parser___ReduceAction76___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction76___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11529,6 +11622,7 @@ void parser___ReduceAction77___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction77___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11620,6 +11714,7 @@ void parser___ReduceAction78___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction78___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11702,6 +11797,7 @@ void parser___ReduceAction79___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction79___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11793,6 +11889,7 @@ void parser___ReduceAction80___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction80___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11884,6 +11981,7 @@ void parser___ReduceAction81___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction81___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11984,6 +12082,7 @@ void parser___ReduceAction82___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction82___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12075,6 +12174,7 @@ void parser___ReduceAction83___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction83___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12175,6 +12275,7 @@ void parser___ReduceAction84___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction84___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12275,6 +12376,7 @@ void parser___ReduceAction85___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction85___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12384,6 +12486,7 @@ void parser___ReduceAction86___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction86___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12453,6 +12556,7 @@ void parser___ReduceAction87___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction87___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12531,6 +12635,7 @@ void parser___ReduceAction88___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction88___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12609,6 +12714,7 @@ void parser___ReduceAction89___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction89___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12696,6 +12802,7 @@ void parser___ReduceAction90___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction90___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12774,6 +12881,7 @@ void parser___ReduceAction91___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction91___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12861,6 +12969,7 @@ void parser___ReduceAction92___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction92___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12948,6 +13057,7 @@ void parser___ReduceAction93___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction93___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13044,6 +13154,7 @@ void parser___ReduceAction94___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction94___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13122,6 +13233,7 @@ void parser___ReduceAction95___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction95___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13209,6 +13321,7 @@ void parser___ReduceAction96___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction96___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13296,6 +13409,7 @@ void parser___ReduceAction97___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction97___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13392,6 +13506,7 @@ void parser___ReduceAction98___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction98___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13479,6 +13594,7 @@ void parser___ReduceAction99___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction99___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13575,6 +13691,7 @@ void parser___ReduceAction100___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction100___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13671,6 +13788,7 @@ void parser___ReduceAction101___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction101___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13776,6 +13894,7 @@ void parser___ReduceAction102___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction102___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13858,6 +13977,7 @@ void parser___ReduceAction103___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction103___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13949,6 +14069,7 @@ void parser___ReduceAction104___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction104___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14040,6 +14161,7 @@ void parser___ReduceAction105___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction105___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14140,6 +14262,7 @@ void parser___ReduceAction106___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction106___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14231,6 +14354,7 @@ void parser___ReduceAction107___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction107___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14331,6 +14455,7 @@ void parser___ReduceAction108___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction108___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14431,6 +14556,7 @@ void parser___ReduceAction109___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction109___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14540,6 +14666,7 @@ void parser___ReduceAction110___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction110___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14631,6 +14758,7 @@ void parser___ReduceAction111___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction111___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14731,6 +14859,7 @@ void parser___ReduceAction112___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction112___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14831,6 +14960,7 @@ void parser___ReduceAction113___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction113___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14940,6 +15070,7 @@ void parser___ReduceAction114___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction114___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15040,6 +15171,7 @@ void parser___ReduceAction115___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction115___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15149,6 +15281,7 @@ void parser___ReduceAction116___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction116___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15258,6 +15391,7 @@ void parser___ReduceAction117___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction117___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 12;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15376,6 +15510,7 @@ void parser___ReduceAction118___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction118___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15445,6 +15580,7 @@ void parser___ReduceAction119___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction119___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15523,6 +15659,7 @@ void parser___ReduceAction120___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction120___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15601,6 +15738,7 @@ void parser___ReduceAction121___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction121___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15688,6 +15826,7 @@ void parser___ReduceAction122___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction122___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15766,6 +15905,7 @@ void parser___ReduceAction123___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction123___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15853,6 +15993,7 @@ void parser___ReduceAction124___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction124___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15940,6 +16081,7 @@ void parser___ReduceAction125___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction125___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16036,6 +16178,7 @@ void parser___ReduceAction126___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction126___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16118,6 +16261,7 @@ void parser___ReduceAction127___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction127___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16209,6 +16353,7 @@ void parser___ReduceAction128___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction128___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16300,6 +16445,7 @@ void parser___ReduceAction129___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction129___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16400,6 +16546,7 @@ void parser___ReduceAction130___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction130___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16491,6 +16638,7 @@ void parser___ReduceAction131___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction131___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16591,6 +16739,7 @@ void parser___ReduceAction132___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction132___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16691,6 +16840,7 @@ void parser___ReduceAction133___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction133___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16800,6 +16950,7 @@ void parser___ReduceAction134___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction134___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16880,6 +17031,7 @@ void parser___ReduceAction135___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction135___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16969,6 +17121,7 @@ void parser___ReduceAction136___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction136___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17058,6 +17211,7 @@ void parser___ReduceAction137___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction137___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17156,6 +17310,7 @@ void parser___ReduceAction138___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction138___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17238,6 +17393,7 @@ void parser___ReduceAction139___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction139___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17329,6 +17485,7 @@ void parser___ReduceAction140___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction140___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17420,6 +17577,7 @@ void parser___ReduceAction141___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction141___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17520,6 +17678,7 @@ void parser___ReduceAction142___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction142___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17598,6 +17757,7 @@ void parser___ReduceAction143___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction143___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17685,6 +17845,7 @@ void parser___ReduceAction144___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction144___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17758,6 +17919,7 @@ void parser___ReduceAction145___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction145___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17840,6 +18002,7 @@ void parser___ReduceAction146___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction146___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17922,6 +18085,7 @@ void parser___ReduceAction147___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction147___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18013,6 +18177,7 @@ void parser___ReduceAction148___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction148___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18095,6 +18260,7 @@ void parser___ReduceAction149___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction149___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18186,6 +18352,7 @@ void parser___ReduceAction150___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction150___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18277,6 +18444,7 @@ void parser___ReduceAction151___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction151___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18377,6 +18545,7 @@ void parser___ReduceAction152___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction152___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18459,6 +18628,7 @@ void parser___ReduceAction153___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction153___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18550,6 +18720,7 @@ void parser___ReduceAction154___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction154___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18641,6 +18812,7 @@ void parser___ReduceAction155___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction155___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18741,6 +18913,7 @@ void parser___ReduceAction156___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction156___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18832,6 +19005,7 @@ void parser___ReduceAction157___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction157___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18932,6 +19106,7 @@ void parser___ReduceAction158___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction158___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19032,6 +19207,7 @@ void parser___ReduceAction159___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction159___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19141,6 +19317,7 @@ void parser___ReduceAction160___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction160___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19183,6 +19360,7 @@ void parser___ReduceAction161___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction161___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19234,6 +19412,7 @@ void parser___ReduceAction162___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction162___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19276,6 +19455,7 @@ void parser___ReduceAction163___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction163___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19327,6 +19507,7 @@ void parser___ReduceAction164___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction164___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19378,6 +19559,7 @@ void parser___ReduceAction165___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction165___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19438,6 +19620,7 @@ void parser___ReduceAction166___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction166___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19472,6 +19655,7 @@ void parser___ReduceAction167___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction167___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19516,6 +19700,7 @@ void parser___ReduceAction168___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction168___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19560,6 +19745,7 @@ void parser___ReduceAction169___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction169___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19604,6 +19790,7 @@ void parser___ReduceAction170___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction170___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19646,6 +19833,7 @@ void parser___ReduceAction171___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction171___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19688,6 +19876,7 @@ void parser___ReduceAction172___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction172___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19730,6 +19919,7 @@ void parser___ReduceAction173___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction173___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19772,6 +19962,7 @@ void parser___ReduceAction174___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction174___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19814,6 +20005,7 @@ void parser___ReduceAction175___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction175___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19856,6 +20048,7 @@ void parser___ReduceAction176___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction176___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19898,6 +20091,7 @@ void parser___ReduceAction177___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction177___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19940,6 +20134,7 @@ void parser___ReduceAction178___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction178___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19982,6 +20177,7 @@ void parser___ReduceAction179___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction179___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20024,6 +20220,7 @@ void parser___ReduceAction180___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction180___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20066,6 +20263,7 @@ void parser___ReduceAction181___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction181___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20108,6 +20306,7 @@ void parser___ReduceAction182___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction182___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20150,6 +20349,7 @@ void parser___ReduceAction183___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction183___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20192,6 +20392,7 @@ void parser___ReduceAction184___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction184___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20243,6 +20444,7 @@ void parser___ReduceAction185___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction185___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20285,6 +20487,7 @@ void parser___ReduceAction186___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction186___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20336,6 +20539,7 @@ void parser___ReduceAction187___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction187___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20396,6 +20600,7 @@ void parser___ReduceAction188___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction188___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20456,6 +20661,7 @@ void parser___ReduceAction189___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction189___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20528,6 +20734,7 @@ void parser___ReduceAction190___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction190___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20578,6 +20785,7 @@ void parser___ReduceAction191___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction191___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20640,6 +20848,7 @@ void parser___ReduceAction192___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction192___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20691,6 +20900,7 @@ void parser___ReduceAction193___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction193___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20754,6 +20964,7 @@ void parser___ReduceAction194___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction194___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20795,6 +21006,7 @@ void parser___ReduceAction195___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction195___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20848,6 +21060,7 @@ void parser___ReduceAction196___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction196___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20887,6 +21100,7 @@ void parser___ReduceAction197___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction197___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20938,6 +21152,7 @@ void parser___ReduceAction198___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction198___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20986,6 +21201,7 @@ void parser___ReduceAction199___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction199___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21047,6 +21263,7 @@ void parser___ReduceAction200___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction200___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21111,6 +21328,7 @@ void parser___ReduceAction201___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction201___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21186,6 +21404,7 @@ void parser___ReduceAction202___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction202___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21226,6 +21445,7 @@ void parser___ReduceAction203___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction203___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21265,6 +21485,7 @@ void parser___ReduceAction204___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction204___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21307,6 +21528,7 @@ void parser___ReduceAction205___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction205___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21358,6 +21580,7 @@ void parser___ReduceAction206___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction206___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21418,6 +21641,7 @@ void parser___ReduceAction207___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction207___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21466,6 +21690,7 @@ void parser___ReduceAction208___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction208___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21528,6 +21753,7 @@ void parser___ReduceAction209___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction209___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21599,6 +21825,7 @@ void parser___ReduceAction210___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction210___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21672,6 +21899,7 @@ void parser___ReduceAction211___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction211___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21754,6 +21982,7 @@ void parser___ReduceAction212___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction212___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21829,6 +22058,7 @@ void parser___ReduceAction213___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction213___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21913,6 +22143,7 @@ void parser___ReduceAction214___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction214___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21956,6 +22187,7 @@ void parser___ReduceAction215___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction215___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22031,6 +22263,7 @@ void parser___ReduceAction216___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction216___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22117,6 +22350,7 @@ void parser___ReduceAction217___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction217___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22156,6 +22390,7 @@ void parser___ReduceAction218___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction218___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22190,6 +22425,7 @@ void parser___ReduceAction220___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction220___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22232,6 +22468,7 @@ void parser___ReduceAction221___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction221___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22274,6 +22511,7 @@ void parser___ReduceAction222___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction222___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22334,6 +22572,7 @@ void parser___ReduceAction223___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction223___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22376,6 +22615,7 @@ void parser___ReduceAction224___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction224___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22446,6 +22686,7 @@ void parser___ReduceAction225___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction225___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22508,6 +22749,7 @@ void parser___ReduceAction226___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction226___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22581,6 +22823,7 @@ void parser___ReduceAction227___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction227___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22626,6 +22869,7 @@ void parser___ReduceAction228___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction228___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22680,6 +22924,7 @@ void parser___ReduceAction229___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction229___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22745,6 +22990,7 @@ void parser___ReduceAction230___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction230___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22820,6 +23066,7 @@ void parser___ReduceAction231___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction231___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22876,6 +23123,7 @@ void parser___ReduceAction232___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction232___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22943,6 +23191,7 @@ void parser___ReduceAction233___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction233___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22982,6 +23231,7 @@ void parser___ReduceAction235___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction235___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23021,6 +23271,7 @@ void parser___ReduceAction236___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction236___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23061,6 +23312,7 @@ void parser___ReduceAction237___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction237___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23099,6 +23351,7 @@ void parser___ReduceAction238___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction238___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23134,6 +23387,7 @@ void parser___ReduceAction239___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction239___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23198,6 +23452,7 @@ void parser___ReduceAction240___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction240___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23274,6 +23529,7 @@ void parser___ReduceAction241___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction241___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23340,6 +23596,7 @@ void parser___ReduceAction242___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction242___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23417,6 +23674,7 @@ void parser___ReduceAction243___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction243___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23454,6 +23712,7 @@ void parser___ReduceAction246___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction246___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23496,6 +23755,7 @@ void parser___ReduceAction247___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction247___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23547,6 +23807,7 @@ void parser___ReduceAction248___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction248___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23589,6 +23850,7 @@ void parser___ReduceAction249___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction249___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23640,6 +23902,7 @@ void parser___ReduceAction250___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction250___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23691,6 +23954,7 @@ void parser___ReduceAction251___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction251___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23751,6 +24015,7 @@ void parser___ReduceAction252___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction252___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23793,6 +24058,7 @@ void parser___ReduceAction253___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction253___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23835,6 +24101,7 @@ void parser___ReduceAction254___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction254___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23886,6 +24153,7 @@ void parser___ReduceAction255___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction255___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23937,6 +24205,7 @@ void parser___ReduceAction256___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction256___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23997,6 +24266,7 @@ void parser___ReduceAction263___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction263___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24070,6 +24340,7 @@ void parser___ReduceAction264___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction264___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24133,6 +24404,7 @@ void parser___ReduceAction265___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction265___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24218,6 +24490,7 @@ void parser___ReduceAction266___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction266___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24293,6 +24566,7 @@ void parser___ReduceAction267___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction267___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24350,6 +24624,7 @@ void parser___ReduceAction268___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction268___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24416,6 +24691,7 @@ void parser___ReduceAction269___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction269___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24486,6 +24762,7 @@ void parser___ReduceAction270___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction270___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24546,6 +24823,7 @@ void parser___ReduceAction271___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction271___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24598,6 +24876,7 @@ void parser___ReduceAction272___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction272___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24654,6 +24933,7 @@ void parser___ReduceAction273___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction273___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24721,6 +25001,7 @@ void parser___ReduceAction274___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction274___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24802,6 +25083,7 @@ void parser___ReduceAction275___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction275___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24899,6 +25181,7 @@ void parser___ReduceAction276___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction276___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24992,6 +25275,7 @@ void parser___ReduceAction277___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction277___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25064,6 +25348,7 @@ void parser___ReduceAction278___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction278___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25152,6 +25437,7 @@ void parser___ReduceAction279___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction279___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25236,6 +25522,7 @@ void parser___ReduceAction280___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction280___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25303,6 +25590,7 @@ void parser___ReduceAction281___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction281___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25386,6 +25674,7 @@ void parser___ReduceAction282___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction282___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25465,6 +25754,7 @@ void parser___ReduceAction283___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction283___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25539,6 +25829,7 @@ void parser___ReduceAction284___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction284___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25629,6 +25920,7 @@ void parser___ReduceAction285___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction285___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25715,6 +26007,7 @@ void parser___ReduceAction286___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction286___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25780,6 +26073,7 @@ void parser___ReduceAction287___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction287___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25861,6 +26155,7 @@ void parser___ReduceAction288___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction288___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25938,6 +26233,7 @@ void parser___ReduceAction289___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction289___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25980,6 +26276,7 @@ void parser___ReduceAction290___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction290___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26022,6 +26319,7 @@ void parser___ReduceAction291___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction291___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26064,6 +26362,7 @@ void parser___ReduceAction292___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction292___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26115,6 +26414,7 @@ void parser___ReduceAction293___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction293___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26175,6 +26475,7 @@ void parser___ReduceAction294___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction294___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26246,6 +26547,7 @@ void parser___ReduceAction295___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction295___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26326,6 +26628,7 @@ void parser___ReduceAction296___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction296___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26399,6 +26702,7 @@ void parser___ReduceAction297___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction297___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26462,6 +26766,7 @@ void parser___ReduceAction298___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction298___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26550,6 +26855,7 @@ void parser___ReduceAction299___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction299___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26628,6 +26934,7 @@ void parser___ReduceAction300___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction300___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26703,6 +27010,7 @@ void parser___ReduceAction301___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction301___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26776,6 +27084,7 @@ void parser___ReduceAction302___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction302___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26839,6 +27148,7 @@ void parser___ReduceAction303___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction303___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26927,6 +27237,7 @@ void parser___ReduceAction304___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction304___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27005,6 +27316,7 @@ void parser___ReduceAction305___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction305___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27080,6 +27392,7 @@ void parser___ReduceAction306___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction306___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27122,6 +27435,7 @@ void parser___ReduceAction307___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction307___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27164,6 +27478,7 @@ void parser___ReduceAction308___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction308___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27224,6 +27539,7 @@ void parser___ReduceAction309___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction309___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27275,6 +27591,7 @@ void parser___ReduceAction310___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction310___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27352,6 +27669,7 @@ void parser___ReduceAction311___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction311___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27418,6 +27736,7 @@ void parser___ReduceAction312___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction312___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27495,6 +27814,7 @@ void parser___ReduceAction313___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction313___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27561,6 +27881,7 @@ void parser___ReduceAction314___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction314___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27629,6 +27950,7 @@ void parser___ReduceAction317___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction317___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27689,6 +28011,7 @@ void parser___ReduceAction318___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction318___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27740,6 +28063,7 @@ void parser___ReduceAction319___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction319___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27822,6 +28146,7 @@ void parser___ReduceAction320___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction320___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27895,6 +28220,7 @@ void parser___ReduceAction321___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction321___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28002,6 +28328,7 @@ void parser___ReduceAction322___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction322___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28105,6 +28432,7 @@ void parser___ReduceAction323___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction323___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28203,6 +28531,7 @@ void parser___ReduceAction324___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction324___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28297,6 +28626,7 @@ void parser___ReduceAction325___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction325___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28359,6 +28689,7 @@ void parser___ReduceAction326___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction326___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28430,6 +28761,7 @@ void parser___ReduceAction327___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction327___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28481,6 +28813,7 @@ void parser___ReduceAction328___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction328___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28541,6 +28874,7 @@ void parser___ReduceAction329___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction329___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28577,6 +28911,7 @@ void parser___ReduceAction333___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction333___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28649,6 +28984,7 @@ void parser___ReduceAction335___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction335___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28746,6 +29082,7 @@ void parser___ReduceAction337___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction337___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28801,6 +29138,7 @@ void parser___ReduceAction338___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction338___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28856,6 +29194,7 @@ void parser___ReduceAction339___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction339___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28913,6 +29252,7 @@ void parser___ReduceAction341___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction341___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28966,6 +29306,7 @@ void parser___ReduceAction343___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction343___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29021,6 +29362,7 @@ void parser___ReduceAction344___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction344___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29076,6 +29418,7 @@ void parser___ReduceAction345___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction345___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29131,6 +29474,7 @@ void parser___ReduceAction346___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction346___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29186,6 +29530,7 @@ void parser___ReduceAction347___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction347___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29241,6 +29586,7 @@ void parser___ReduceAction348___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction348___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29296,6 +29642,7 @@ void parser___ReduceAction349___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction349___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29351,6 +29698,7 @@ void parser___ReduceAction350___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction350___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29406,6 +29754,7 @@ void parser___ReduceAction351___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction351___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29461,6 +29810,7 @@ void parser___ReduceAction352___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction352___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29516,6 +29866,7 @@ void parser___ReduceAction353___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction353___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29571,6 +29922,7 @@ void parser___ReduceAction355___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction355___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29626,6 +29978,7 @@ void parser___ReduceAction356___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction356___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29681,6 +30034,7 @@ void parser___ReduceAction358___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction358___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29736,6 +30090,7 @@ void parser___ReduceAction359___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction359___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29791,6 +30146,7 @@ void parser___ReduceAction360___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction360___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29846,6 +30202,7 @@ void parser___ReduceAction362___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction362___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29899,6 +30256,7 @@ void parser___ReduceAction363___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction363___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29952,6 +30310,7 @@ void parser___ReduceAction365___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction365___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30020,6 +30379,7 @@ void parser___ReduceAction366___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction366___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30084,6 +30444,7 @@ void parser___ReduceAction367___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction367___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30138,6 +30499,7 @@ void parser___ReduceAction368___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction368___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30193,6 +30555,7 @@ void parser___ReduceAction369___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction369___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30238,6 +30601,7 @@ void parser___ReduceAction376___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction376___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30298,6 +30662,7 @@ void parser___ReduceAction377___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction377___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30379,6 +30744,7 @@ void parser___ReduceAction378___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction378___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30445,6 +30811,7 @@ void parser___ReduceAction379___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction379___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30511,6 +30878,7 @@ void parser___ReduceAction380___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction380___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30559,6 +30927,7 @@ void parser___ReduceAction381___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction381___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30601,6 +30970,7 @@ void parser___ReduceAction382___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction382___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30643,6 +31013,7 @@ void parser___ReduceAction383___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction383___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30685,6 +31056,7 @@ void parser___ReduceAction384___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction384___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30727,6 +31099,7 @@ void parser___ReduceAction385___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction385___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30769,6 +31142,7 @@ void parser___ReduceAction386___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction386___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30811,6 +31185,7 @@ void parser___ReduceAction387___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction387___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30853,6 +31228,7 @@ void parser___ReduceAction388___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction388___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30895,6 +31271,7 @@ void parser___ReduceAction391___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction391___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30969,6 +31346,7 @@ void parser___ReduceAction392___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction392___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31055,6 +31433,7 @@ void parser___ReduceAction393___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction393___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31131,6 +31510,7 @@ void parser___ReduceAction394___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction394___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31219,6 +31599,7 @@ void parser___ReduceAction395___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction395___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31299,6 +31680,7 @@ void parser___ReduceAction396___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction396___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31341,6 +31723,7 @@ void parser___ReduceAction398___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction398___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31383,6 +31766,7 @@ void parser___ReduceAction399___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction399___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31426,6 +31810,7 @@ void parser___ReduceAction400___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction400___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31490,6 +31875,7 @@ void parser___ReduceAction401___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction401___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31565,6 +31951,7 @@ void parser___ReduceAction403___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction403___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31600,6 +31987,7 @@ void parser___ReduceAction406___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction406___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31655,6 +32043,7 @@ void parser___ReduceAction411___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction411___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31697,6 +32086,7 @@ void parser___ReduceAction412___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction412___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31753,6 +32143,7 @@ void parser___ReduceAction413___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction413___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31826,6 +32217,7 @@ void parser___ReduceAction414___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction414___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31871,6 +32263,7 @@ void parser___ReduceAction415___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction415___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31928,6 +32321,7 @@ void parser___ReduceAction416___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction416___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31984,6 +32378,7 @@ void parser___ReduceAction417___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction417___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32052,6 +32447,7 @@ void parser___ReduceAction418___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction418___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32097,6 +32493,7 @@ void parser___ReduceAction419___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction419___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32154,6 +32551,7 @@ void parser___ReduceAction420___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction420___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32202,6 +32600,7 @@ void parser___ReduceAction421___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction421___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32240,6 +32639,7 @@ void parser___ReduceAction422___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction422___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32278,6 +32678,7 @@ void parser___ReduceAction423___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction423___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32310,6 +32711,7 @@ void parser___ReduceAction425___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction425___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32358,6 +32760,7 @@ void parser___ReduceAction426___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction426___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32408,6 +32811,7 @@ void parser___ReduceAction428___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction428___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32439,6 +32843,7 @@ void parser___ReduceAction429___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction429___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32473,6 +32878,7 @@ void parser___ReduceAction430___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction430___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32507,6 +32913,7 @@ void parser___ReduceAction431___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction431___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32543,6 +32950,7 @@ void parser___ReduceAction688___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction688___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32603,6 +33011,7 @@ void parser___ReduceAction689___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction689___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32654,6 +33063,7 @@ void parser___ReduceAction690___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction690___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32723,6 +33133,7 @@ void parser___ReduceAction693___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction693___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32789,6 +33200,7 @@ void parser___ReduceAction706___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction706___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32827,6 +33239,7 @@ void parser___ReduceAction707___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction707___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32862,6 +33275,7 @@ void parser___ReduceAction714___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction714___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32918,6 +33332,7 @@ void parser___ReduceAction715___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction715___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32986,6 +33401,7 @@ void parser___ReduceAction716___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction716___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33042,6 +33458,7 @@ void parser___ReduceAction717___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction717___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33110,6 +33527,7 @@ void parser___ReduceAction718___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction718___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33166,6 +33584,7 @@ void parser___ReduceAction719___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction719___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33234,6 +33653,7 @@ void parser___ReduceAction720___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction720___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33290,6 +33710,7 @@ void parser___ReduceAction721___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction721___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33358,6 +33779,7 @@ void parser___ReduceAction724___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction724___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33414,6 +33836,7 @@ void parser___ReduceAction725___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction725___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33482,6 +33905,7 @@ void parser___ReduceAction726___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction726___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33538,6 +33962,7 @@ void parser___ReduceAction727___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction727___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33606,6 +34031,7 @@ void parser___ReduceAction728___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction728___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33662,6 +34088,7 @@ void parser___ReduceAction729___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction729___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33730,6 +34157,7 @@ void parser___ReduceAction730___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction730___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33786,6 +34214,7 @@ void parser___ReduceAction731___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction731___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33854,6 +34283,7 @@ void parser___ReduceAction733___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction733___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33922,6 +34352,7 @@ void parser___ReduceAction735___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction735___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33989,6 +34420,7 @@ void parser___ReduceAction736___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction736___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34035,6 +34467,7 @@ void parser___ReduceAction737___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction737___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34094,6 +34527,7 @@ void parser___ReduceAction741___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction741___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34162,6 +34596,7 @@ void parser___ReduceAction742___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction742___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34218,6 +34653,7 @@ void parser___ReduceAction743___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction743___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34286,6 +34722,7 @@ void parser___ReduceAction744___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction744___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34342,6 +34779,7 @@ void parser___ReduceAction745___action(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___ReduceAction745___action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

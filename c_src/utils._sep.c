@@ -13,6 +13,7 @@ val_t utils___Object___cmangle(val_t p0, val_t p1){
   fra.me.meth = LOCATE_utils___Object___cmangle;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -130,6 +131,7 @@ val_t utils___Object___cmangle(val_t p0, val_t p1){
         fra.me.meth = LOCATE_utils___Object___cmangle;
         fra.me.has_broke = 0;
         fra.me.REG_size = 1;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[0] = p0;
         REGB0 = fra.me.REG[0];
@@ -299,6 +301,7 @@ val_t utils___Object___cmangle_table(val_t p0){
   fra.me.meth = LOCATE_utils___Object___cmangle_table;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

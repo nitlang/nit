@@ -5,11 +5,13 @@
 
 #ifndef FDSTREAM_TYPE
 #define FDSTREAM_TYPE
-typedef struct s_FDStream{
-	val_t v;
-} FDStream;
+struct s_FDStream{
+		struct nitni_ref ref; /* real ref struct, must be first */
+};
+typedef struct s_FDStream *FDStream;
+#define FDStream_incr_ref( x ) nitni_global_ref_incr( (struct nitni_ref*)(x) )
+#define FDStream_decr_ref( x ) nitni_global_ref_decr( (struct nitni_ref*)(x) )
 #endif
-
 #include "stream_nit.h"
 
 /* out/indirect function for stream::FDStream::native_close */

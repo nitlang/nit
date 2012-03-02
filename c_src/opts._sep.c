@@ -10,6 +10,7 @@ val_t opts___Option___names(val_t p0){
   fra.me.meth = LOCATE_opts___Option___names;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/opts.nit:19 */
@@ -32,6 +33,7 @@ val_t opts___Option___helptext(val_t p0){
   fra.me.meth = LOCATE_opts___Option___helptext;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/opts.nit:25 */
@@ -54,6 +56,7 @@ val_t opts___Option___mandatory(val_t p0){
   fra.me.meth = LOCATE_opts___Option___mandatory;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/opts.nit:28 */
@@ -76,6 +79,7 @@ void opts___Option___mandatory__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___Option___mandatory__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -93,6 +97,7 @@ void opts___Option___value__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___Option___value__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -112,6 +117,7 @@ val_t opts___Option___value(val_t p0){
   fra.me.meth = LOCATE_opts___Option___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -138,6 +144,7 @@ val_t opts___Option___default_value(val_t p0){
   fra.me.meth = LOCATE_opts___Option___default_value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/opts.nit:37 */
@@ -154,6 +161,7 @@ void opts___Option___default_value__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___Option___default_value__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -176,6 +184,7 @@ void opts___Option___init_opt(val_t p0, val_t p1, val_t p2, val_t p3, int* init_
   fra.me.meth = LOCATE_opts___Option___init_opt;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -234,6 +243,7 @@ void opts___Option___add_aliases(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___Option___add_aliases;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -267,6 +277,7 @@ val_t opts___Option___to_s(val_t p0){
   fra.me.meth = LOCATE_opts___Option___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/opts.nit:58 */
@@ -293,6 +304,7 @@ val_t opts___Option___pretty(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___Option___pretty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -391,6 +403,7 @@ val_t opts___Option___pretty_default(val_t p0){
   fra.me.meth = LOCATE_opts___Option___pretty_default;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -461,6 +474,7 @@ void opts___Option___read_param(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___Option___read_param;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/opts.nit:80 */
   nit_abort("Deferred method called", NULL, LOCATE_opts, 80);
   stack_frame_head = fra.me.prev;
@@ -477,6 +491,7 @@ void opts___OptionText___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_opts___OptionText___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -497,6 +512,7 @@ val_t opts___OptionText___pretty(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionText___pretty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -516,6 +532,7 @@ val_t opts___OptionText___to_s(val_t p0){
   fra.me.meth = LOCATE_opts___OptionText___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/opts.nit:90 */
@@ -537,6 +554,7 @@ void opts___OptionBool___init(val_t p0, val_t p1, val_t p2, int* init_table){
   fra.me.meth = LOCATE_opts___OptionBool___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -567,6 +585,7 @@ void opts___OptionBool___read_param(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionBool___read_param;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -589,6 +608,7 @@ void opts___OptionCount___init(val_t p0, val_t p1, val_t p2, int* init_table){
   fra.me.meth = LOCATE_opts___OptionCount___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -619,6 +639,7 @@ void opts___OptionCount___read_param(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionCount___read_param;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -642,6 +663,7 @@ val_t opts___OptionParameter___convert(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionParameter___convert;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/opts.nit:114 */
   nit_abort("Deferred method called", NULL, LOCATE_opts, 114);
   stack_frame_head = fra.me.prev;
@@ -657,6 +679,7 @@ void opts___OptionParameter___read_param(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionParameter___read_param;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -686,6 +709,7 @@ void opts___OptionParameter___init_opt(val_t p0, val_t p1, val_t p2, val_t p3, i
   fra.me.meth = LOCATE_opts___OptionParameter___init_opt;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -712,6 +736,7 @@ void opts___OptionString___init(val_t p0, val_t p1, val_t p2, int* init_table){
   fra.me.meth = LOCATE_opts___OptionString___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -740,6 +765,7 @@ val_t opts___OptionString___convert(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionString___convert;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -769,6 +795,7 @@ void opts___OptionEnum___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, 
   fra.me.meth = LOCATE_opts___OptionEnum___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -868,6 +895,7 @@ val_t opts___OptionEnum___convert(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionEnum___convert;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -898,6 +926,7 @@ val_t opts___OptionEnum___value_name(val_t p0){
   fra.me.meth = LOCATE_opts___OptionEnum___value_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -976,6 +1005,7 @@ val_t opts___OptionEnum___pretty_default(val_t p0){
   fra.me.meth = LOCATE_opts___OptionEnum___pretty_default;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1114,6 +1144,7 @@ void opts___OptionInt___init(val_t p0, val_t p1, val_t p2, val_t p3, int* init_t
   fra.me.meth = LOCATE_opts___OptionInt___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1144,6 +1175,7 @@ val_t opts___OptionInt___convert(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionInt___convert;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1167,6 +1199,7 @@ void opts___OptionArray___init(val_t p0, val_t p1, val_t p2, int* init_table){
   fra.me.meth = LOCATE_opts___OptionArray___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1206,6 +1239,7 @@ val_t opts___OptionArray___convert(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionArray___convert;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1241,6 +1275,7 @@ val_t opts___OptionContext___options(val_t p0){
   fra.me.meth = LOCATE_opts___OptionContext___options;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/opts.nit:196 */
@@ -1263,6 +1298,7 @@ val_t opts___OptionContext___rest(val_t p0){
   fra.me.meth = LOCATE_opts___OptionContext___rest;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/opts.nit:197 */
@@ -1290,6 +1326,7 @@ void opts___OptionContext___usage(val_t p0){
   fra.me.meth = LOCATE_opts___OptionContext___usage;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1501,6 +1538,7 @@ void opts___OptionContext___parse(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionContext___parse;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1525,6 +1563,7 @@ void opts___OptionContext___parse_intern(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionContext___parse_intern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1629,6 +1668,7 @@ void opts___OptionContext___add_option(val_t p0, val_t p1){
   fra.me.meth = LOCATE_opts___OptionContext___add_option;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1713,6 +1753,7 @@ void opts___OptionContext___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_opts___OptionContext___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1742,6 +1783,7 @@ void opts___OptionContext___build(val_t p0){
   fra.me.meth = LOCATE_opts___OptionContext___build;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

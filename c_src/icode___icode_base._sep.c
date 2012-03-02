@@ -10,6 +10,7 @@ val_t icode___icode_base___IRegister___stype(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IRegister___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:26 */
@@ -33,6 +34,7 @@ void icode___icode_base___IRegister___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___IRegister___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -54,6 +56,7 @@ void icode___icode_base___IEscapeMark___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___IEscapeMark___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
   return;
@@ -68,6 +71,7 @@ val_t icode___icode_base___IClosureDecl___closure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IClosureDecl___closure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:40 */
@@ -89,6 +93,7 @@ val_t icode___icode_base___IClosureDecl___default(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IClosureDecl___default;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:43 */
@@ -105,6 +110,7 @@ void icode___icode_base___IClosureDecl___default__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_icode___icode_base___IClosureDecl___default__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -125,6 +131,7 @@ void icode___icode_base___IClosureDecl___init(val_t p0, val_t p1, int* init_tabl
   fra.me.meth = LOCATE_icode___icode_base___IClosureDecl___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -145,6 +152,7 @@ val_t icode___icode_base___IRoutine___params(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IRoutine___params;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:51 */
@@ -166,6 +174,7 @@ val_t icode___icode_base___IRoutine___closure_decls(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IRoutine___closure_decls;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:54 */
@@ -182,6 +191,7 @@ void icode___icode_base___IRoutine___closure_decls__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_icode___icode_base___IRoutine___closure_decls__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -201,6 +211,7 @@ val_t icode___icode_base___IRoutine___registers(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IRoutine___registers;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:57 */
@@ -222,6 +233,7 @@ val_t icode___icode_base___IRoutine___result(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IRoutine___result;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:60 */
@@ -239,6 +251,7 @@ val_t icode___icode_base___IRoutine___escape_marks(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IRoutine___escape_marks;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:63 */
@@ -261,6 +274,7 @@ val_t icode___icode_base___IRoutine___body(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IRoutine___body;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:66 */
@@ -282,6 +296,7 @@ val_t icode___icode_base___IRoutine___location(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IRoutine___location;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:69 */
@@ -298,6 +313,7 @@ void icode___icode_base___IRoutine___location__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_icode___icode_base___IRoutine___location__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -318,6 +334,7 @@ void icode___icode_base___IRoutine___init(val_t p0, val_t p1, val_t p2, int* ini
   fra.me.meth = LOCATE_icode___icode_base___IRoutine___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -344,6 +361,7 @@ void icode___icode_base___IClosureDef___init(val_t p0, val_t p1, val_t p2, int* 
   fra.me.meth = LOCATE_icode___icode_base___IClosureDef___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -365,6 +383,7 @@ val_t icode___icode_base___ICode___arity(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICode___arity;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./icode//icode_base.nit:92 */
   nit_abort("Deferred method called", NULL, LOCATE_icode___icode_base, 92);
   stack_frame_head = fra.me.prev;
@@ -379,6 +398,7 @@ val_t icode___icode_base___ICode___result(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICode___result;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:95 */
@@ -395,6 +415,7 @@ void icode___icode_base___ICode___result__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_icode___icode_base___ICode___result__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -413,6 +434,7 @@ val_t icode___icode_base___ICode___location(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICode___location;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:98 */
@@ -429,6 +451,7 @@ void icode___icode_base___ICode___location__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_icode___icode_base___ICode___location__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -448,6 +471,7 @@ val_t icode___icode_base___ICode___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICode___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:102 */
@@ -468,6 +492,7 @@ void icode___icode_base___ICode___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___ICode___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos5] = 1;
   return;
@@ -482,6 +507,7 @@ val_t icode___icode_base___ICode0___arity(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICode0___arity;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:108 */
@@ -501,6 +527,7 @@ val_t icode___icode_base___ICode1___arity(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICode1___arity;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:114 */
@@ -520,6 +547,7 @@ val_t icode___icode_base___ICode1___expr(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICode1___expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:116 */
@@ -543,6 +571,7 @@ void icode___icode_base___ICode1___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___ICode1___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -566,6 +595,7 @@ val_t icode___icode_base___ICode2___arity(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICode2___arity;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:125 */
@@ -585,6 +615,7 @@ val_t icode___icode_base___ICode2___expr1(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICode2___expr1;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:127 */
@@ -607,6 +638,7 @@ val_t icode___icode_base___ICode2___expr2(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICode2___expr2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:130 */
@@ -630,6 +662,7 @@ void icode___icode_base___ICode2___init(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.meth = LOCATE_icode___icode_base___ICode2___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -658,6 +691,7 @@ val_t icode___icode_base___ICodeN___arity(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICodeN___arity;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:143 */
@@ -683,6 +717,7 @@ val_t icode___icode_base___ICodeN___exprs(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICodeN___exprs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:145 */
@@ -704,6 +739,7 @@ val_t icode___icode_base___ICodeN___closure_defs(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICodeN___closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:148 */
@@ -720,6 +756,7 @@ void icode___icode_base___ICodeN___closure_defs__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_icode___icode_base___ICodeN___closure_defs__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -742,6 +779,7 @@ void icode___icode_base___ICodeN___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___ICodeN___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -785,6 +823,7 @@ val_t icode___icode_base___ISeq___icodes(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ISeq___icodes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:166 */
@@ -806,6 +845,7 @@ val_t icode___icode_base___ISeq___iescape_mark(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ISeq___iescape_mark;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:169 */
@@ -822,6 +862,7 @@ void icode___icode_base___ISeq___iescape_mark__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_icode___icode_base___ISeq___iescape_mark__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -842,6 +883,7 @@ void icode___icode_base___ISeq___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___ISeq___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -859,6 +901,7 @@ void icode___icode_base___ILoop___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___ILoop___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:179 */
@@ -877,6 +920,7 @@ val_t icode___icode_base___IIf___then_seq(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IIf___then_seq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:186 */
@@ -899,6 +943,7 @@ val_t icode___icode_base___IIf___else_seq(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IIf___else_seq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:188 */
@@ -922,6 +967,7 @@ void icode___icode_base___IIf___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___IIf___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -942,6 +988,7 @@ val_t icode___icode_base___IEscape___iescape_mark(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IEscape___iescape_mark;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:196 */
@@ -965,6 +1012,7 @@ void icode___icode_base___IEscape___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___IEscape___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -985,6 +1033,7 @@ val_t icode___icode_base___IAbort___texts(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IAbort___texts;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:205 */
@@ -1007,6 +1056,7 @@ val_t icode___icode_base___IAbort___module_location(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IAbort___module_location;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:208 */
@@ -1030,6 +1080,7 @@ void icode___icode_base___IAbort___init(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.meth = LOCATE_icode___icode_base___IAbort___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1054,6 +1105,7 @@ val_t icode___icode_base___IAbsCall___property(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IAbsCall___property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:222 */
@@ -1076,6 +1128,7 @@ val_t icode___icode_base___IAbsCall___is_explicit_from_extern(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IAbsCall___is_explicit_from_extern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:225 */
@@ -1098,6 +1151,7 @@ void icode___icode_base___IAbsCall___is_explicit_from_extern__eq(val_t p0, val_t
   fra.me.meth = LOCATE_icode___icode_base___IAbsCall___is_explicit_from_extern__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -1117,6 +1171,7 @@ void icode___icode_base___IAbsCall___init(val_t p0, val_t p1, val_t p2, int* ini
   fra.me.meth = LOCATE_icode___icode_base___IAbsCall___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1145,6 +1200,7 @@ void icode___icode_base___ICall___init(val_t p0, val_t p1, val_t p2, int* init_t
   fra.me.meth = LOCATE_icode___icode_base___ICall___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1168,6 +1224,7 @@ void icode___icode_base___ISuper___init(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.meth = LOCATE_icode___icode_base___ISuper___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1190,6 +1247,7 @@ val_t icode___icode_base___INew___stype(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___INew___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:258 */
@@ -1213,6 +1271,7 @@ void icode___icode_base___INew___init(val_t p0, val_t p1, val_t p2, val_t p3, in
   fra.me.meth = LOCATE_icode___icode_base___INew___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1242,6 +1301,7 @@ val_t icode___icode_base___IAllocateInstance___stype(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IAllocateInstance___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:272 */
@@ -1265,6 +1325,7 @@ void icode___icode_base___IAllocateInstance___init(val_t p0, val_t p1, int* init
   fra.me.meth = LOCATE_icode___icode_base___IAllocateInstance___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1286,6 +1347,7 @@ void icode___icode_base___IStaticCall___init(val_t p0, val_t p1, val_t p2, int* 
   fra.me.meth = LOCATE_icode___icode_base___IStaticCall___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1308,6 +1370,7 @@ val_t icode___icode_base___ICheckInstance___stype(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICheckInstance___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:289 */
@@ -1331,6 +1394,7 @@ void icode___icode_base___ICheckInstance___init(val_t p0, val_t p1, val_t p2, in
   fra.me.meth = LOCATE_icode___icode_base___ICheckInstance___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1358,6 +1422,7 @@ val_t icode___icode_base___IInitAttributes___stype(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IInitAttributes___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:301 */
@@ -1381,6 +1446,7 @@ void icode___icode_base___IInitAttributes___init(val_t p0, val_t p1, val_t p2, i
   fra.me.meth = LOCATE_icode___icode_base___IInitAttributes___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1408,6 +1474,7 @@ val_t icode___icode_base___IClosCall___closure_decl(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IClosCall___closure_decl;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:314 */
@@ -1429,6 +1496,7 @@ val_t icode___icode_base___IClosCall___break_seq(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IClosCall___break_seq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:317 */
@@ -1445,6 +1513,7 @@ void icode___icode_base___IClosCall___break_seq__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_icode___icode_base___IClosCall___break_seq__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1465,6 +1534,7 @@ void icode___icode_base___IClosCall___init(val_t p0, val_t p1, val_t p2, int* in
   fra.me.meth = LOCATE_icode___icode_base___IClosCall___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1492,6 +1562,7 @@ val_t icode___icode_base___INative___method(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___INative___method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:332 */
@@ -1518,6 +1589,7 @@ void icode___icode_base___INative___init(val_t p0, val_t p1, val_t p2, int* init
   fra.me.meth = LOCATE_icode___icode_base___INative___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1574,6 +1646,7 @@ val_t icode___icode_base___INative___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___INative___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:344 */
@@ -1596,6 +1669,7 @@ void icode___icode_base___INative___is_pure__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_icode___icode_base___INative___is_pure__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -1614,6 +1688,7 @@ val_t icode___icode_base___IIntValue___value(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IIntValue___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:350 */
@@ -1637,6 +1712,7 @@ void icode___icode_base___IIntValue___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___IIntValue___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1657,6 +1733,7 @@ val_t icode___icode_base___IIntValue___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IIntValue___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:355 */
@@ -1676,6 +1753,7 @@ val_t icode___icode_base___IBoolValue___value(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IBoolValue___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:361 */
@@ -1700,6 +1778,7 @@ void icode___icode_base___IBoolValue___init(val_t p0, val_t p1, int* init_table)
   fra.me.meth = LOCATE_icode___icode_base___IBoolValue___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -1719,6 +1798,7 @@ val_t icode___icode_base___IBoolValue___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IBoolValue___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:366 */
@@ -1738,6 +1818,7 @@ val_t icode___icode_base___IStringValue___value(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IStringValue___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:372 */
@@ -1761,6 +1842,7 @@ void icode___icode_base___IStringValue___init(val_t p0, val_t p1, int* init_tabl
   fra.me.meth = LOCATE_icode___icode_base___IStringValue___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1781,6 +1863,7 @@ val_t icode___icode_base___IStringValue___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IStringValue___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:377 */
@@ -1800,6 +1883,7 @@ val_t icode___icode_base___IFloatValue___value(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IFloatValue___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:383 */
@@ -1823,6 +1907,7 @@ void icode___icode_base___IFloatValue___init(val_t p0, val_t p1, int* init_table
   fra.me.meth = LOCATE_icode___icode_base___IFloatValue___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1843,6 +1928,7 @@ val_t icode___icode_base___IFloatValue___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IFloatValue___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:388 */
@@ -1862,6 +1948,7 @@ val_t icode___icode_base___ICharValue___value(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICharValue___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:394 */
@@ -1885,6 +1972,7 @@ void icode___icode_base___ICharValue___init(val_t p0, val_t p1, int* init_table)
   fra.me.meth = LOCATE_icode___icode_base___ICharValue___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1905,6 +1993,7 @@ val_t icode___icode_base___ICharValue___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ICharValue___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:399 */
@@ -1925,6 +2014,7 @@ void icode___icode_base___IMove___init(val_t p0, val_t p1, val_t p2, int* init_t
   fra.me.meth = LOCATE_icode___icode_base___IMove___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1952,6 +2042,7 @@ val_t icode___icode_base___IMove___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IMove___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:413 */
@@ -1971,6 +2062,7 @@ val_t icode___icode_base___IAttrRead___property(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IAttrRead___property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:420 */
@@ -1994,6 +2086,7 @@ void icode___icode_base___IAttrRead___init(val_t p0, val_t p1, val_t p2, int* in
   fra.me.meth = LOCATE_icode___icode_base___IAttrRead___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2021,6 +2114,7 @@ val_t icode___icode_base___IAttrRead___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IAttrRead___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:429 */
@@ -2040,6 +2134,7 @@ val_t icode___icode_base___IAttrWrite___property(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IAttrWrite___property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:436 */
@@ -2063,6 +2158,7 @@ void icode___icode_base___IAttrWrite___init(val_t p0, val_t p1, val_t p2, val_t 
   fra.me.meth = LOCATE_icode___icode_base___IAttrWrite___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2092,6 +2188,7 @@ val_t icode___icode_base___IAttrIsset___property(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IAttrIsset___property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:451 */
@@ -2115,6 +2212,7 @@ void icode___icode_base___IAttrIsset___init(val_t p0, val_t p1, val_t p2, int* i
   fra.me.meth = LOCATE_icode___icode_base___IAttrIsset___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2142,6 +2240,7 @@ val_t icode___icode_base___IAttrIsset___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IAttrIsset___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:460 */
@@ -2161,6 +2260,7 @@ val_t icode___icode_base___ITypeCheck___stype(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ITypeCheck___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:468 */
@@ -2184,6 +2284,7 @@ void icode___icode_base___ITypeCheck___init(val_t p0, val_t p1, val_t p2, val_t 
   fra.me.meth = LOCATE_icode___icode_base___ITypeCheck___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2213,6 +2314,7 @@ val_t icode___icode_base___ITypeCheck___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___ITypeCheck___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:477 */
@@ -2233,6 +2335,7 @@ void icode___icode_base___IIs___init(val_t p0, val_t p1, val_t p2, int* init_tab
   fra.me.meth = LOCATE_icode___icode_base___IIs___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2255,6 +2358,7 @@ val_t icode___icode_base___IIs___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IIs___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:489 */
@@ -2275,6 +2379,7 @@ void icode___icode_base___INot___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___INot___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2295,6 +2400,7 @@ val_t icode___icode_base___INot___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___INot___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:501 */
@@ -2314,6 +2420,7 @@ val_t icode___icode_base___IOnce___body(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IOnce___body;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:508 */
@@ -2337,6 +2444,7 @@ void icode___icode_base___IOnce___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___IOnce___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -2353,6 +2461,7 @@ val_t icode___icode_base___IHasClos___closure_decl(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IHasClos___closure_decl;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:515 */
@@ -2376,6 +2485,7 @@ void icode___icode_base___IHasClos___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_icode___icode_base___IHasClos___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2396,6 +2506,7 @@ val_t icode___icode_base___IHasClos___is_pure(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___IHasClos___is_pure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./icode//icode_base.nit:523 */
@@ -2414,6 +2525,7 @@ val_t icode___icode_base___MMAttribute___iroutine(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___MMAttribute___iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./icode//icode_base.nit:529 */
   nit_abort("Deferred method called", NULL, LOCATE_icode___icode_base, 529);
   stack_frame_head = fra.me.prev;
@@ -2428,6 +2540,7 @@ val_t icode___icode_base___MMMethod___iroutine(val_t p0){
   fra.me.meth = LOCATE_icode___icode_base___MMMethod___iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./icode//icode_base.nit:535 */
   nit_abort("Deferred method called", NULL, LOCATE_icode___icode_base, 535);
   stack_frame_head = fra.me.prev;

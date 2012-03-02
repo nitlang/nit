@@ -9,6 +9,7 @@ val_t standard___collection___sorter___AbstractSorter___compare(val_t p0, val_t 
   fra.me.meth = LOCATE_standard___collection___sorter___AbstractSorter___compare;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//sorter.nit:22 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___sorter, 22);
   stack_frame_head = fra.me.prev;
@@ -26,6 +27,7 @@ void standard___collection___sorter___AbstractSorter___sort(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___collection___sorter___AbstractSorter___sort;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -61,6 +63,7 @@ void standard___collection___sorter___AbstractSorter___sub_sort(val_t p0, val_t 
   fra.me.meth = LOCATE_standard___collection___sorter___AbstractSorter___sub_sort;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -119,6 +122,7 @@ void standard___collection___sorter___AbstractSorter___quick_sort(val_t p0, val_
   fra.me.meth = LOCATE_standard___collection___sorter___AbstractSorter___quick_sort;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -557,6 +561,7 @@ void standard___collection___sorter___AbstractSorter___bubble_sort(val_t p0, val
   fra.me.meth = LOCATE_standard___collection___sorter___AbstractSorter___bubble_sort;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -850,6 +855,7 @@ void standard___collection___sorter___AbstractSorter___init(val_t p0, int* init_
   fra.me.meth = LOCATE_standard___collection___sorter___AbstractSorter___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
   return;
@@ -864,6 +870,7 @@ val_t standard___collection___sorter___ComparableSorter___compare(val_t p0, val_
   fra.me.meth = LOCATE_standard___collection___sorter___ComparableSorter___compare;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -888,6 +895,7 @@ void standard___collection___sorter___ComparableSorter___init(val_t p0, int* ini
   fra.me.meth = LOCATE_standard___collection___sorter___ComparableSorter___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//sorter.nit:96 */

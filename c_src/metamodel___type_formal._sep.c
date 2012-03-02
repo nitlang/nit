@@ -9,6 +9,7 @@ val_t metamodel___type_formal___MMType___direct_type(val_t p0){
   fra.me.meth = LOCATE_metamodel___type_formal___MMType___direct_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//type_formal.nit:25 */
@@ -28,6 +29,7 @@ val_t metamodel___type_formal___MMTypeFormal___is_valid(val_t p0){
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal___is_valid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -72,6 +74,7 @@ val_t metamodel___type_formal___MMTypeFormal___name(val_t p0){
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//type_formal.nit:33 */
@@ -94,6 +97,7 @@ val_t metamodel___type_formal___MMTypeFormal___bound(val_t p0){
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal___bound;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -122,6 +126,7 @@ val_t metamodel___type_formal___MMTypeFormal_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -155,6 +160,7 @@ val_t metamodel___type_formal___MMTypeFormal___is_supertype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal___is_supertype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -181,6 +187,7 @@ val_t metamodel___type_formal___MMTypeFormal___is_nullable(val_t p0){
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal___is_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//type_formal.nit:42 */
@@ -205,6 +212,7 @@ val_t metamodel___type_formal___MMTypeFormal___direct_type(val_t p0){
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal___direct_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//type_formal.nit:43 */
@@ -229,6 +237,7 @@ val_t metamodel___type_formal___MMTypeFormal___local_class(val_t p0){
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//type_formal.nit:44 */
@@ -253,6 +262,7 @@ val_t metamodel___type_formal___MMTypeFormal___to_s(val_t p0){
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//type_formal.nit:46 */
@@ -279,6 +289,7 @@ void metamodel___type_formal___MMTypeFormal___init(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_metamodel___type_formal___MMTypeFormal___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

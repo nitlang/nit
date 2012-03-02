@@ -10,6 +10,7 @@ val_t standard___exec___Process___id(val_t p0){
   fra.me.meth = LOCATE_standard___exec___Process___id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:24 */
@@ -35,6 +36,7 @@ val_t standard___exec___Process___is_finished(val_t p0){
   fra.me.meth = LOCATE_standard___exec___Process___is_finished;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:27 */
@@ -60,6 +62,7 @@ void standard___exec___Process___wait(val_t p0){
   fra.me.meth = LOCATE_standard___exec___Process___wait;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -90,6 +93,7 @@ val_t standard___exec___Process___status(val_t p0){
   fra.me.meth = LOCATE_standard___exec___Process___status;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:39 */
@@ -123,6 +127,7 @@ void standard___exec___Process___init(val_t p0, val_t p1, val_t p2, int* init_ta
   fra.me.meth = LOCATE_standard___exec___Process___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -156,6 +161,7 @@ void standard___exec___Process___init_(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___exec___Process___init_;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -183,6 +189,7 @@ void standard___exec___Process___execute(val_t p0, val_t p1, val_t p2, val_t p3,
   fra.me.meth = LOCATE_standard___exec___Process___execute;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -313,6 +320,7 @@ val_t standard___exec___Process___basic_exec_execute(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_standard___exec___Process___basic_exec_execute;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -336,6 +344,7 @@ void standard___exec___IProcess___close(val_t p0){
   fra.me.meth = LOCATE_standard___exec___IProcess___close;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:81 */
@@ -359,6 +368,7 @@ val_t standard___exec___IProcess___read_char(val_t p0){
   fra.me.meth = LOCATE_standard___exec___IProcess___read_char;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:83 */
@@ -384,6 +394,7 @@ val_t standard___exec___IProcess___eof(val_t p0){
   fra.me.meth = LOCATE_standard___exec___IProcess___eof;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:85 */
@@ -411,6 +422,7 @@ void standard___exec___IProcess___init(val_t p0, val_t p1, val_t p2, int* init_t
   fra.me.meth = LOCATE_standard___exec___IProcess___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -454,6 +466,7 @@ void standard___exec___IProcess___init_(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___exec___IProcess___init_;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -485,6 +498,7 @@ void standard___exec___OProcess___close(val_t p0){
   fra.me.meth = LOCATE_standard___exec___OProcess___close;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:106 */
@@ -508,6 +522,7 @@ val_t standard___exec___OProcess___is_writable(val_t p0){
   fra.me.meth = LOCATE_standard___exec___OProcess___is_writable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:108 */
@@ -533,6 +548,7 @@ void standard___exec___OProcess___write(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___exec___OProcess___write;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -560,6 +576,7 @@ void standard___exec___OProcess___init(val_t p0, val_t p1, val_t p2, int* init_t
   fra.me.meth = LOCATE_standard___exec___OProcess___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -603,6 +620,7 @@ void standard___exec___OProcess___init_(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___exec___OProcess___init_;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -634,6 +652,7 @@ void standard___exec___IOProcess___close(val_t p0){
   fra.me.meth = LOCATE_standard___exec___IOProcess___close;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -668,6 +687,7 @@ void standard___exec___IOProcess___init(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.meth = LOCATE_standard___exec___IOProcess___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -727,6 +747,7 @@ void standard___exec___IOProcess___init_(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___exec___IOProcess___init_;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -775,6 +796,7 @@ val_t standard___exec___Sys___system(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___exec___Sys___system;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -797,6 +819,7 @@ val_t standard___exec___NativeString___system(val_t p0){
   fra.me.meth = LOCATE_standard___exec___NativeString___system;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:161 */
@@ -814,6 +837,7 @@ val_t standard___exec___NativeProcess___id(val_t p0){
   fra.me.meth = LOCATE_standard___exec___NativeProcess___id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:165 */
@@ -831,6 +855,7 @@ val_t standard___exec___NativeProcess___is_finished(val_t p0){
   fra.me.meth = LOCATE_standard___exec___NativeProcess___is_finished;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:166 */
@@ -848,6 +873,7 @@ val_t standard___exec___NativeProcess___status(val_t p0){
   fra.me.meth = LOCATE_standard___exec___NativeProcess___status;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:167 */
@@ -864,6 +890,7 @@ void standard___exec___NativeProcess___wait(val_t p0){
   fra.me.meth = LOCATE_standard___exec___NativeProcess___wait;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:168 */
@@ -881,6 +908,7 @@ val_t standard___exec___NativeProcess___in_fd(val_t p0){
   fra.me.meth = LOCATE_standard___exec___NativeProcess___in_fd;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:170 */
@@ -898,6 +926,7 @@ val_t standard___exec___NativeProcess___out_fd(val_t p0){
   fra.me.meth = LOCATE_standard___exec___NativeProcess___out_fd;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:171 */
@@ -915,6 +944,7 @@ val_t standard___exec___NativeProcess___err_fd(val_t p0){
   fra.me.meth = LOCATE_standard___exec___NativeProcess___err_fd;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//exec.nit:172 */

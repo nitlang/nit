@@ -10,6 +10,7 @@ val_t standard___string___AbstractString___items(val_t p0){
   fra.me.meth = LOCATE_standard___string___AbstractString___items;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:28 */
@@ -33,6 +34,7 @@ val_t standard___string___AbstractString_____bra(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___AbstractString_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -65,6 +67,7 @@ val_t standard___string___AbstractString___substring(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_standard___string___AbstractString___substring;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -208,6 +211,7 @@ val_t standard___string___AbstractString___substring_from(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___AbstractString___substring_from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -261,6 +265,7 @@ val_t standard___string___AbstractString___has_substring(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_standard___string___AbstractString___has_substring;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -392,6 +397,7 @@ val_t standard___string___AbstractString___has_prefix(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___AbstractString___has_prefix;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -415,6 +421,7 @@ val_t standard___string___AbstractString___has_suffix(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___AbstractString___has_suffix;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -451,6 +458,7 @@ val_t standard___string___AbstractString___to_i(val_t p0){
   fra.me.meth = LOCATE_standard___string___AbstractString___to_i;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:102 */
@@ -474,6 +482,7 @@ val_t standard___string___AbstractString___to_hex(val_t p0){
   fra.me.meth = LOCATE_standard___string___AbstractString___to_hex;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:106 */
@@ -494,6 +503,7 @@ val_t standard___string___AbstractString___a_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___AbstractString___a_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -543,6 +553,7 @@ val_t standard___string___AbstractString___a_to(val_t p0, val_t p1){
     fra.me.meth = LOCATE_standard___string___AbstractString___a_to;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -612,6 +623,7 @@ val_t standard___string___AbstractString___to_upper(val_t p0){
   fra.me.meth = LOCATE_standard___string___AbstractString___to_upper;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -644,6 +656,7 @@ val_t standard___string___AbstractString___to_upper(val_t p0){
     fra.me.meth = LOCATE_standard___string___AbstractString___to_upper;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -665,6 +678,7 @@ val_t standard___string___AbstractString___to_lower(val_t p0){
   fra.me.meth = LOCATE_standard___string___AbstractString___to_lower;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -697,6 +711,7 @@ val_t standard___string___AbstractString___to_lower(val_t p0){
     fra.me.meth = LOCATE_standard___string___AbstractString___to_lower;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -720,6 +735,7 @@ void standard___string___AbstractString___output(val_t p0){
   fra.me.meth = LOCATE_standard___string___AbstractString___output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -783,6 +799,7 @@ void standard___string___String___with_native(val_t p0, val_t p1, val_t p2, int*
   fra.me.meth = LOCATE_standard___string___String___with_native;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -822,6 +839,7 @@ void standard___string___String___from_cstring(val_t p0, val_t p1, int* init_tab
   fra.me.meth = LOCATE_standard___string___String___from_cstring;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -846,6 +864,7 @@ val_t standard___string___String___to_cstring(val_t p0){
   fra.me.meth = LOCATE_standard___string___String___to_cstring;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:189 */
@@ -875,6 +894,7 @@ val_t standard___string___String_____eqeq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___String_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1007,6 +1027,7 @@ val_t standard___string___String_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___String_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1151,6 +1172,7 @@ val_t standard___string___String_____plus(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___String_____plus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1196,6 +1218,7 @@ val_t standard___string___String_____star(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___String_____star;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1267,6 +1290,7 @@ val_t standard___string___String___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string___String___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:252 */
@@ -1288,6 +1312,7 @@ val_t standard___string___String___hash(val_t p0){
   fra.me.meth = LOCATE_standard___string___String___hash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:257 */
@@ -1366,6 +1391,7 @@ void standard___string___Buffer_____braeq(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___string___Buffer_____braeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -1452,6 +1478,7 @@ void standard___string___Buffer___add(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___Buffer___add;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1532,6 +1559,7 @@ void standard___string___Buffer___enlarge(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___Buffer___enlarge;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1626,6 +1654,7 @@ void standard___string___Buffer___append(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___Buffer___append;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1726,6 +1755,7 @@ val_t standard___string___Buffer___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string___Buffer___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1795,6 +1825,7 @@ val_t standard___string___Buffer_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___Buffer_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1926,6 +1957,7 @@ void standard___string___Buffer___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___string___Buffer___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:355 */
@@ -1949,6 +1981,7 @@ void standard___string___Buffer___from(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___string___Buffer___from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2026,6 +2059,7 @@ void standard___string___Buffer___with_capacity(val_t p0, val_t p1, int* init_ta
   fra.me.meth = LOCATE_standard___string___Buffer___with_capacity;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2079,6 +2113,7 @@ val_t standard___string___Buffer_____eqeq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___Buffer_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2205,6 +2240,7 @@ val_t standard___string___Buffer___capacity(val_t p0){
   fra.me.meth = LOCATE_standard___string___Buffer___capacity;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:391 */
@@ -2226,6 +2262,7 @@ val_t standard___string___Object___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string___Object___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:402 */
@@ -2244,6 +2281,7 @@ val_t standard___string___Object___native_class_name(val_t p0){
   fra.me.meth = LOCATE_standard___string___Object___native_class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:404 */
@@ -2260,6 +2298,7 @@ val_t standard___string___Object___class_name(val_t p0){
   fra.me.meth = LOCATE_standard___string___Object___class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:409 */
@@ -2282,6 +2321,7 @@ val_t standard___string___Object___inspect(val_t p0){
   fra.me.meth = LOCATE_standard___string___Object___inspect;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2328,6 +2368,7 @@ val_t standard___string___Object___inspect_head(val_t p0){
   fra.me.meth = LOCATE_standard___string___Object___inspect_head;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2382,6 +2423,7 @@ val_t standard___string___Object___args(val_t p0){
   fra.me.meth = LOCATE_standard___string___Object___args;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:427 */
@@ -2406,6 +2448,7 @@ val_t standard___string___Bool___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string___Bool___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   REGB0 = p0;
@@ -2462,6 +2505,7 @@ void standard___string___Int___fill_buffer(val_t p0, val_t p1, val_t p2, val_t p
   fra.me.meth = LOCATE_standard___string___Int___fill_buffer;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
@@ -2575,6 +2619,7 @@ val_t standard___string___Int___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string___Int___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   /* ./../lib/standard//string.nit:468 */
@@ -2598,6 +2643,7 @@ val_t standard___string___Int___to_hex(val_t p0){
   fra.me.meth = LOCATE_standard___string___Int___to_hex;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   /* ./../lib/standard//string.nit:471 */
@@ -2624,6 +2670,7 @@ val_t standard___string___Int___to_base(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___string___Int___to_base;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   REGB1 = p1;
@@ -2660,6 +2707,7 @@ val_t standard___string___Float___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string___Float___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:484 */
@@ -2686,6 +2734,7 @@ val_t standard___string___Float___to_precision(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___Float___to_precision;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2803,6 +2852,7 @@ val_t standard___string___Char___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string___Char___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   /* ./../lib/standard//string.nit:505 */
@@ -2827,6 +2877,7 @@ val_t standard___string___Collection___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string___Collection___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2853,6 +2904,7 @@ val_t standard___string___Collection___to_s(val_t p0){
     fra.me.meth = LOCATE_standard___string___Collection___to_s;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -2894,6 +2946,7 @@ val_t standard___string___Collection___join(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___Collection___join;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3006,6 +3059,7 @@ val_t standard___string___Array___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string___Array___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3140,6 +3194,7 @@ val_t standard___string___Map___join(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___string___Map___join;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3335,6 +3390,7 @@ val_t standard___string___NativeString_____bra(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___NativeString_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -3354,6 +3410,7 @@ void standard___string___NativeString_____braeq(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___string___NativeString_____braeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -3375,6 +3432,7 @@ void standard___string___NativeString___copy_to(val_t p0, val_t p1, val_t p2, va
   fra.me.meth = LOCATE_standard___string___NativeString___copy_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3400,6 +3458,7 @@ val_t standard___string___NativeString___cstring_length(val_t p0){
   fra.me.meth = LOCATE_standard___string___NativeString___cstring_length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:600 */
@@ -3446,6 +3505,7 @@ val_t standard___string___NativeString___atoi(val_t p0){
   fra.me.meth = LOCATE_standard___string___NativeString___atoi;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:604 */
@@ -3464,6 +3524,7 @@ void standard___string___NativeString___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___string___NativeString___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos5] = 1;
   return;
@@ -3478,6 +3539,7 @@ val_t standard___string___StringCapable___calloc_string(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___StringCapable___calloc_string;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -3497,6 +3559,7 @@ void standard___string___StringCapable___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___string___StringCapable___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos6] = 1;
   return;
@@ -3512,6 +3575,7 @@ val_t standard___string___Sys___args(val_t p0){
   fra.me.meth = LOCATE_standard___string___Sys___args;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3557,6 +3621,7 @@ val_t standard___string___Sys___program_name(val_t p0){
   fra.me.meth = LOCATE_standard___string___Sys___program_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:624 */
@@ -3580,6 +3645,7 @@ void standard___string___Sys___init_args(val_t p0){
   fra.me.meth = LOCATE_standard___string___Sys___init_args;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3637,6 +3703,7 @@ val_t standard___string___Sys___native_argc(val_t p0){
   fra.me.meth = LOCATE_standard___string___Sys___native_argc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string.nit:640 */
@@ -3654,6 +3721,7 @@ val_t standard___string___Sys___native_argv(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string___Sys___native_argv;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;

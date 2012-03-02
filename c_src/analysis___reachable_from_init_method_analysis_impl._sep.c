@@ -10,6 +10,7 @@ val_t analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___progr
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___program;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_from_init_method_analysis_impl.nit:25 */
@@ -32,6 +33,7 @@ val_t analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___conte
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___context;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_from_init_method_analysis_impl.nit:26 */
@@ -55,6 +57,7 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___init(v
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -74,6 +77,7 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work(v
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -95,6 +99,7 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work(v
     fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[0] = p0;
     closctx->REG[2] = fra.me.REG[0];
@@ -115,6 +120,7 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work(v
       fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMABuilder___work;
       fra.me.has_broke = 0;
       fra.me.REG_size = 3;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.REG[1] = NIT_NULL;
       fra.me.REG[2] = NIT_NULL;
@@ -187,6 +193,7 @@ val_t analysis___reachable_from_init_method_analysis_impl___RFIMAContext___reach
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMAContext___reachable_from_init_iroutines;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_from_init_method_analysis_impl.nit:53 */
@@ -210,6 +217,7 @@ val_t analysis___reachable_from_init_method_analysis_impl___RFIMAContext___is_ir
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMAContext___is_iroutine_reachable_from_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -250,6 +258,7 @@ val_t analysis___reachable_from_init_method_analysis_impl___RFIMAContext___is_me
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMAContext___is_method_reachable_from_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -272,6 +281,7 @@ val_t analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___conte
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___context;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_from_init_method_analysis_impl.nit:66 */
@@ -294,6 +304,7 @@ val_t analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___progr
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___program;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_from_init_method_analysis_impl.nit:67 */
@@ -317,6 +328,7 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___init(v
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -345,6 +357,7 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___proces
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___process_call;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -377,6 +390,7 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -444,37 +458,42 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_
         nit_abort("Cast failed", NULL, LOCATE_analysis___reachable_from_init_method_analysis_impl, 90);
       }
       /* ./analysis//reachable_from_init_method_analysis_impl.nit:91 */
-      fra.me.REG[5] = CALL_program___MMLocalClass___new_instance_iroutine(fra.me.REG[5])(fra.me.REG[5]);
-      fra.me.REG[4] = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
-      /* ./analysis//reachable_from_init_method_analysis_impl.nit:92 */
-      CALL_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___process_call(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
+      REGB0 = CALL_metamodel___abstractmetamodel___MMMethod___is_extern(fra.me.REG[4])(fra.me.REG[4]);
+      REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+      if (UNTAG_Bool(REGB0)) {
+        /* ./analysis//reachable_from_init_method_analysis_impl.nit:92 */
+        fra.me.REG[5] = CALL_program___MMLocalClass___new_instance_iroutine(fra.me.REG[5])(fra.me.REG[5]);
+        fra.me.REG[4] = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
+        /* ./analysis//reachable_from_init_method_analysis_impl.nit:93 */
+        CALL_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___process_call(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
+      }
     } else {
-      /* ./analysis//reachable_from_init_method_analysis_impl.nit:93 */
+      /* ./analysis//reachable_from_init_method_analysis_impl.nit:95 */
       REGB0 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___ISuper, ID_icode___icode_base___ISuper)) /*cast ISuper*/;
       if (UNTAG_Bool(REGB0)) {
-        /* ./analysis//reachable_from_init_method_analysis_impl.nit:95 */
+        /* ./analysis//reachable_from_init_method_analysis_impl.nit:97 */
         REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
-          nit_abort("Reciever is null", NULL, LOCATE_analysis___reachable_from_init_method_analysis_impl, 95);
+          nit_abort("Reciever is null", NULL, LOCATE_analysis___reachable_from_init_method_analysis_impl, 97);
         }
         fra.me.REG[4] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
-        /* ./analysis//reachable_from_init_method_analysis_impl.nit:96 */
+        /* ./analysis//reachable_from_init_method_analysis_impl.nit:98 */
         fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___prhe(fra.me.REG[4])(fra.me.REG[4]);
         fra.me.REG[4] = CALL_metamodel___partial_order___PartialOrderElement___greaters_and_self(fra.me.REG[4])(fra.me.REG[4]);
         CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[4])(fra.me.REG[4], (&(fra.me)), ((fun_t)OC_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode_1));
       } else {
-        /* ./analysis//reachable_from_init_method_analysis_impl.nit:102 */
+        /* ./analysis//reachable_from_init_method_analysis_impl.nit:104 */
         REGB0 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___ICall, ID_icode___icode_base___ICall)) /*cast ICall*/;
         if (UNTAG_Bool(REGB0)) {
-          /* ./analysis//reachable_from_init_method_analysis_impl.nit:104 */
+          /* ./analysis//reachable_from_init_method_analysis_impl.nit:106 */
           REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
           if (UNTAG_Bool(REGB0)) {
-            nit_abort("Reciever is null", NULL, LOCATE_analysis___reachable_from_init_method_analysis_impl, 104);
+            nit_abort("Reciever is null", NULL, LOCATE_analysis___reachable_from_init_method_analysis_impl, 106);
           }
           fra.me.REG[4] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
-          /* ./analysis//reachable_from_init_method_analysis_impl.nit:105 */
+          /* ./analysis//reachable_from_init_method_analysis_impl.nit:107 */
           fra.me.REG[5] = CALL_icode___icode_base___MMMethod___iroutine(fra.me.REG[4])(fra.me.REG[4]);
-          /* ./analysis//reachable_from_init_method_analysis_impl.nit:106 */
+          /* ./analysis//reachable_from_init_method_analysis_impl.nit:108 */
           REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
           if (UNTAG_Bool(REGB0)) {
           } else {
@@ -491,28 +510,28 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_
           if (UNTAG_Bool(REGB0)) {
             CALL_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___process_call(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[5]);
           }
-          /* ./analysis//reachable_from_init_method_analysis_impl.nit:107 */
+          /* ./analysis//reachable_from_init_method_analysis_impl.nit:109 */
           fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___prhe(fra.me.REG[4])(fra.me.REG[4]);
           fra.me.REG[4] = CALL_metamodel___partial_order___PartialOrderElement___smallers(fra.me.REG[4])(fra.me.REG[4]);
           CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[4])(fra.me.REG[4], (&(fra.me)), ((fun_t)OC_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode_2));
         } else {
-          /* ./analysis//reachable_from_init_method_analysis_impl.nit:113 */
+          /* ./analysis//reachable_from_init_method_analysis_impl.nit:115 */
           REGB0 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___ICheckInstance, ID_icode___icode_base___ICheckInstance)) /*cast ICheckInstance*/;
           if (UNTAG_Bool(REGB0)) {
-            /* ./analysis//reachable_from_init_method_analysis_impl.nit:114 */
+            /* ./analysis//reachable_from_init_method_analysis_impl.nit:116 */
             REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
             if (UNTAG_Bool(REGB0)) {
-              nit_abort("Reciever is null", NULL, LOCATE_analysis___reachable_from_init_method_analysis_impl, 114);
+              nit_abort("Reciever is null", NULL, LOCATE_analysis___reachable_from_init_method_analysis_impl, 116);
             }
             fra.me.REG[5] = CALL_icode___icode_base___ICheckInstance___stype(fra.me.REG[3])(fra.me.REG[3]);
-            /* ./analysis//reachable_from_init_method_analysis_impl.nit:115 */
+            /* ./analysis//reachable_from_init_method_analysis_impl.nit:117 */
             fra.me.REG[4] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___program(fra.me.REG[2])(fra.me.REG[2]);
             fra.me.REG[4] = CALL_program___Program___main_module(fra.me.REG[4])(fra.me.REG[4]);
             fra.me.REG[4] = CALL_metamodel___static_type___MMType___for_module(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
             fra.me.REG[4] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[4])(fra.me.REG[4]);
-            /* ./analysis//reachable_from_init_method_analysis_impl.nit:116 */
+            /* ./analysis//reachable_from_init_method_analysis_impl.nit:118 */
             fra.me.REG[4] = CALL_program___MMLocalClass___checknew_iroutine(fra.me.REG[4])(fra.me.REG[4]);
-            /* ./analysis//reachable_from_init_method_analysis_impl.nit:117 */
+            /* ./analysis//reachable_from_init_method_analysis_impl.nit:119 */
             REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
             if (UNTAG_Bool(REGB0)) {
             } else {
@@ -530,23 +549,23 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_
               CALL_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___process_call(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
             }
           } else {
-            /* ./analysis//reachable_from_init_method_analysis_impl.nit:118 */
+            /* ./analysis//reachable_from_init_method_analysis_impl.nit:120 */
             REGB0 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___IInitAttributes, ID_icode___icode_base___IInitAttributes)) /*cast IInitAttributes*/;
             if (UNTAG_Bool(REGB0)) {
-              /* ./analysis//reachable_from_init_method_analysis_impl.nit:119 */
+              /* ./analysis//reachable_from_init_method_analysis_impl.nit:121 */
               REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
               if (UNTAG_Bool(REGB0)) {
-		nit_abort("Reciever is null", NULL, LOCATE_analysis___reachable_from_init_method_analysis_impl, 119);
+		nit_abort("Reciever is null", NULL, LOCATE_analysis___reachable_from_init_method_analysis_impl, 121);
               }
               fra.me.REG[3] = CALL_icode___icode_base___IInitAttributes___stype(fra.me.REG[3])(fra.me.REG[3]);
-              /* ./analysis//reachable_from_init_method_analysis_impl.nit:120 */
+              /* ./analysis//reachable_from_init_method_analysis_impl.nit:122 */
               fra.me.REG[4] = CALL_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___program(fra.me.REG[2])(fra.me.REG[2]);
               fra.me.REG[4] = CALL_program___Program___main_module(fra.me.REG[4])(fra.me.REG[4]);
               fra.me.REG[4] = CALL_metamodel___static_type___MMType___for_module(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
               fra.me.REG[4] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[4])(fra.me.REG[4]);
-              /* ./analysis//reachable_from_init_method_analysis_impl.nit:121 */
+              /* ./analysis//reachable_from_init_method_analysis_impl.nit:123 */
               fra.me.REG[4] = CALL_program___MMLocalClass___init_var_iroutine(fra.me.REG[4])(fra.me.REG[4]);
-              /* ./analysis//reachable_from_init_method_analysis_impl.nit:122 */
+              /* ./analysis//reachable_from_init_method_analysis_impl.nit:124 */
               REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
               if (UNTAG_Bool(REGB0)) {
               } else {
@@ -569,7 +588,7 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_
       }
     }
   }
-  /* ./analysis//reachable_from_init_method_analysis_impl.nit:124 */
+  /* ./analysis//reachable_from_init_method_analysis_impl.nit:126 */
   CALL_SUPER_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -586,17 +605,18 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_
           fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode;
           fra.me.has_broke = 0;
           fra.me.REG_size = 1;
+          fra.me.nitni_local_ref_head = NULL;
           fra.me.REG[0] = NIT_NULL;
           fra.me.closure_ctx = closctx_param;
           fra.me.closure_funs = CREG;
           fra.me.REG[0] = p0;
           CREG[0] = clos_fun0;
-          /* ./analysis//reachable_from_init_method_analysis_impl.nit:97 */
+          /* ./analysis//reachable_from_init_method_analysis_impl.nit:99 */
           REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
           if (UNTAG_Bool(REGB0)) {
-            /* ./analysis//reachable_from_init_method_analysis_impl.nit:98 */
+            /* ./analysis//reachable_from_init_method_analysis_impl.nit:100 */
             fra.me.REG[0] = CALL_icode___icode_base___MMMethod___iroutine(fra.me.REG[0])(fra.me.REG[0]);
-            /* ./analysis//reachable_from_init_method_analysis_impl.nit:99 */
+            /* ./analysis//reachable_from_init_method_analysis_impl.nit:101 */
             REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
             if (UNTAG_Bool(REGB0)) {
             } else {
@@ -629,18 +649,19 @@ void analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_
             fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode;
             fra.me.has_broke = 0;
             fra.me.REG_size = 1;
+            fra.me.nitni_local_ref_head = NULL;
             fra.me.REG[0] = NIT_NULL;
             fra.me.closure_ctx = closctx_param;
             fra.me.closure_funs = CREG;
             fra.me.REG[0] = p0;
             CREG[0] = clos_fun0;
-            /* ./analysis//reachable_from_init_method_analysis_impl.nit:108 */
+            /* ./analysis//reachable_from_init_method_analysis_impl.nit:110 */
             REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
             if (UNTAG_Bool(REGB0)) {
-              /* ./analysis//reachable_from_init_method_analysis_impl.nit:109 */
+              /* ./analysis//reachable_from_init_method_analysis_impl.nit:111 */
               fra.me.REG[0] = CALL_icode___icode_base___MMMethod___iroutine(fra.me.REG[0])(fra.me.REG[0]);
               closctx->REG[5] = fra.me.REG[0];
-              /* ./analysis//reachable_from_init_method_analysis_impl.nit:110 */
+              /* ./analysis//reachable_from_init_method_analysis_impl.nit:112 */
               REGB0 = TAG_Bool(closctx->REG[5]==NIT_NULL);
               if (UNTAG_Bool(REGB0)) {
               } else {

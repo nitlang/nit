@@ -12,6 +12,7 @@ val_t metamodel___genericity___MMLocalClass___get_formal(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___genericity___MMLocalClass___get_formal;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -79,6 +80,7 @@ void metamodel___genericity___MMLocalClass___register_formal(val_t p0, val_t p1)
   fra.me.meth = LOCATE_metamodel___genericity___MMLocalClass___register_formal;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -147,6 +149,7 @@ val_t metamodel___genericity___MMLocalClass___get_instantiate_type(val_t p0, val
   fra.me.meth = LOCATE_metamodel___genericity___MMLocalClass___get_instantiate_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -245,6 +248,7 @@ val_t metamodel___genericity___MMLocalClass___formals_types(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMLocalClass___formals_types;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -415,6 +419,7 @@ val_t metamodel___genericity___MMLocalClass___get_type(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMLocalClass___get_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -476,6 +481,7 @@ val_t metamodel___genericity___MMLocalClass___is_generic(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMLocalClass___is_generic;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//genericity.nit:91 */
@@ -503,6 +509,7 @@ val_t metamodel___genericity___MMType___is_generic(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMType___is_generic;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./metamodel//genericity.nit:95 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___genericity, 95);
   stack_frame_head = fra.me.prev;
@@ -518,6 +525,7 @@ val_t metamodel___genericity___MMTypeFormal___is_generic(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormal___is_generic;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//genericity.nit:100 */
@@ -542,6 +550,7 @@ val_t metamodel___genericity___MMTypeSimpleClass___is_generic(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeSimpleClass___is_generic;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//genericity.nit:104 */
@@ -561,6 +570,7 @@ val_t metamodel___genericity___MMTypeGeneric___params(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___params;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//genericity.nit:109 */
@@ -583,6 +593,7 @@ val_t metamodel___genericity___MMTypeGeneric___is_generic(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___is_generic;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//genericity.nit:112 */
@@ -603,6 +614,7 @@ val_t metamodel___genericity___MMTypeGeneric___is_supertype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___is_supertype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -655,6 +667,7 @@ val_t metamodel___genericity___MMTypeGeneric___upcast_for(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -695,6 +708,7 @@ val_t metamodel___genericity___MMTypeGeneric___for_module(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -806,6 +820,7 @@ val_t metamodel___genericity___MMTypeGeneric___adapt_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -904,6 +919,7 @@ val_t metamodel___genericity___MMTypeGeneric___params_equals(val_t p0, val_t p1)
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___params_equals;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1121,6 +1137,7 @@ val_t metamodel___genericity___MMTypeGeneric___to_s(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1197,6 +1214,7 @@ val_t metamodel___genericity___MMTypeGeneric___is_subtype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___is_subtype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1373,6 +1391,7 @@ void metamodel___genericity___MMTypeGeneric___init(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1400,6 +1419,7 @@ val_t metamodel___genericity___MMTypeFormalParameter___def_class(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___def_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//genericity.nit:198 */
@@ -1422,6 +1442,7 @@ val_t metamodel___genericity___MMTypeFormalParameter___position(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___position;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//genericity.nit:201 */
@@ -1444,6 +1465,7 @@ val_t metamodel___genericity___MMTypeFormalParameter___mmmodule(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//genericity.nit:204 */
@@ -1470,6 +1492,7 @@ val_t metamodel___genericity___MMTypeFormalParameter___for_module(val_t p0, val_
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1517,6 +1540,7 @@ val_t metamodel___genericity___MMTypeFormalParameter___upcast_for(val_t p0, val_
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1544,6 +1568,7 @@ void metamodel___genericity___MMTypeFormalParameter___bound__eq(val_t p0, val_t 
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___bound__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1584,6 +1609,7 @@ val_t metamodel___genericity___MMTypeFormalParameter___adapt_to(val_t p0, val_t 
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1666,6 +1692,7 @@ void metamodel___genericity___MMTypeFormalParameter___with_bound(val_t p0, val_t
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___with_bound;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1695,6 +1722,7 @@ void metamodel___genericity___MMTypeFormalParameter___init(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1725,6 +1753,7 @@ val_t metamodel___genericity___MMTypeNone___is_generic(val_t p0){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeNone___is_generic;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//genericity.nit:251 */
@@ -1743,6 +1772,7 @@ val_t metamodel___genericity___MMTypeNone___for_module(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeNone___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1762,6 +1792,7 @@ val_t metamodel___genericity___MMTypeNone___adapt_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeNone___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

@@ -10,6 +10,7 @@ val_t metamodel___partial_order___PartialOrder___roots(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___roots;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:30 */
@@ -32,6 +33,7 @@ val_t metamodel___partial_order___PartialOrder___is_empty(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:35 */
@@ -57,6 +59,7 @@ val_t metamodel___partial_order___PartialOrder___length(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:37 */
@@ -82,6 +85,7 @@ val_t metamodel___partial_order___PartialOrder___first(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:39 */
@@ -107,6 +111,7 @@ val_t metamodel___partial_order___PartialOrder___has(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___has;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -136,6 +141,7 @@ val_t metamodel___partial_order___PartialOrder___has_only(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -199,6 +205,7 @@ val_t metamodel___partial_order___PartialOrder___count(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -229,6 +236,7 @@ val_t metamodel___partial_order___PartialOrder___iterator(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:54 */
@@ -254,6 +262,7 @@ val_t metamodel___partial_order___PartialOrder_____bra(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -282,6 +291,7 @@ val_t metamodel___partial_order___PartialOrder___to_dot(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___to_dot;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -330,6 +340,7 @@ val_t metamodel___partial_order___PartialOrder___to_dot(val_t p0){
     fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___to_dot;
     fra.me.has_broke = 0;
     fra.me.REG_size = 5;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -411,6 +422,7 @@ val_t metamodel___partial_order___PartialOrder___to_dot_header(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___to_dot_header;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:82 */
@@ -439,6 +451,7 @@ val_t metamodel___partial_order___PartialOrder___to_dot_node(val_t p0, val_t p1)
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___to_dot_node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -486,6 +499,7 @@ val_t metamodel___partial_order___PartialOrder___to_dot_edge(val_t p0, val_t p1,
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___to_dot_edge;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -544,6 +558,7 @@ val_t metamodel___partial_order___PartialOrder___select_smallests(val_t p0, val_
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___select_smallests;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -612,6 +627,7 @@ val_t metamodel___partial_order___PartialOrder___select_smallests(val_t p0, val_
     fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___select_smallests;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -642,6 +658,7 @@ val_t metamodel___partial_order___PartialOrder___add(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___add;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -749,6 +766,7 @@ val_t metamodel___partial_order___PartialOrder___has_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___has_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -778,6 +796,7 @@ val_t metamodel___partial_order___PartialOrder___has_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___has_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -806,6 +825,7 @@ val_t metamodel___partial_order___PartialOrder___new_poe(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___new_poe;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -831,6 +851,7 @@ val_t metamodel___partial_order___PartialOrder___add_to_smallests(val_t p0, val_
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___add_to_smallests;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -927,6 +948,7 @@ void metamodel___partial_order___PartialOrder___compute_smallers_for(val_t p0, v
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___compute_smallers_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -958,6 +980,7 @@ void metamodel___partial_order___PartialOrder___compute_smallers_for(val_t p0, v
     fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___compute_smallers_for;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -984,6 +1007,7 @@ void metamodel___partial_order___PartialOrder___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrder___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1010,6 +1034,7 @@ val_t metamodel___partial_order___PartialOrderElement___order(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___order;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:190 */
@@ -1032,6 +1057,7 @@ val_t metamodel___partial_order___PartialOrderElement___value(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:193 */
@@ -1054,6 +1080,7 @@ val_t metamodel___partial_order___PartialOrderElement___rank(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___rank;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:196 */
@@ -1076,6 +1103,7 @@ val_t metamodel___partial_order___PartialOrderElement___direct_greaters(val_t p0
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___direct_greaters;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:202 */
@@ -1098,6 +1126,7 @@ val_t metamodel___partial_order___PartialOrderElement___direct_smallers(val_t p0
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___direct_smallers;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:205 */
@@ -1120,6 +1149,7 @@ val_t metamodel___partial_order___PartialOrderElement___greaters(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___greaters;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//partial_order.nit:208 */
@@ -1143,6 +1173,7 @@ val_t metamodel___partial_order___PartialOrderElement___greaters_and_self(val_t 
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___greaters_and_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1212,6 +1243,7 @@ val_t metamodel___partial_order___PartialOrderElement___smallers(val_t p0){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___smallers;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1288,6 +1320,7 @@ val_t metamodel___partial_order___PartialOrderElement___linear_extension(val_t p
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___linear_extension;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1470,6 +1503,7 @@ val_t metamodel___partial_order___PartialOrderElement___reverse_linear_extension
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___reverse_linear_extension;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1582,6 +1616,7 @@ val_t metamodel___partial_order___PartialOrderElement_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1610,6 +1645,7 @@ val_t metamodel___partial_order___PartialOrderElement_____leq(val_t p0, val_t p1
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement_____leq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1655,6 +1691,7 @@ val_t metamodel___partial_order___PartialOrderElement_____g(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement_____g;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1691,6 +1728,7 @@ val_t metamodel___partial_order___PartialOrderElement_____geq(val_t p0, val_t p1
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement_____geq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1743,6 +1781,7 @@ void metamodel___partial_order___PartialOrderElement___register_direct_smallers(
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___register_direct_smallers;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1773,6 +1812,7 @@ void metamodel___partial_order___PartialOrderElement___init(val_t p0, val_t p1, 
   fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1905,6 +1945,7 @@ void metamodel___partial_order___PartialOrderElement___init(val_t p0, val_t p1, 
         fra.me.meth = LOCATE_metamodel___partial_order___PartialOrderElement___init;
         fra.me.has_broke = 0;
         fra.me.REG_size = 1;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[0] = p0;
         /* ./metamodel//partial_order.nit:336 */

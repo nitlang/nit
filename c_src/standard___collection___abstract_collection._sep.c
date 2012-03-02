@@ -9,6 +9,7 @@ val_t standard___collection___abstract_collection___Collection___iterator(val_t 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:42 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 42);
   stack_frame_head = fra.me.prev;
@@ -25,6 +26,7 @@ void standard___collection___abstract_collection___Collection___iterate(val_t p0
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___iterate;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.closure_ctx = closctx_param;
@@ -64,6 +66,7 @@ val_t standard___collection___abstract_collection___Collection___is_empty(val_t 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:56 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 56);
   stack_frame_head = fra.me.prev;
@@ -78,6 +81,7 @@ val_t standard___collection___abstract_collection___Collection___length(val_t p0
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:59 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 59);
   stack_frame_head = fra.me.prev;
@@ -92,6 +96,7 @@ val_t standard___collection___abstract_collection___Collection___has(val_t p0, v
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___has;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:62 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 62);
   stack_frame_head = fra.me.prev;
@@ -106,6 +111,7 @@ val_t standard___collection___abstract_collection___Collection___has_only(val_t 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:66 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 66);
   stack_frame_head = fra.me.prev;
@@ -120,6 +126,7 @@ val_t standard___collection___abstract_collection___Collection___count(val_t p0,
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:71 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 71);
   stack_frame_head = fra.me.prev;
@@ -134,6 +141,7 @@ val_t standard___collection___abstract_collection___Collection___first(val_t p0)
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:75 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 75);
   stack_frame_head = fra.me.prev;
@@ -151,6 +159,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___is_empty(v
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:83 */
@@ -179,6 +188,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___length(val
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -205,6 +215,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___length(val
     fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___length;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -228,6 +239,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___has(val_t 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___has;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -258,6 +270,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___has(val_t 
     fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___has;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -295,6 +308,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___has_only(v
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -325,6 +339,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___has_only(v
     fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___has_only;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -363,6 +378,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___count(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -392,6 +408,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___count(val_
     fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___count;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -431,6 +448,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___first(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:113 */
@@ -465,6 +483,7 @@ val_t standard___collection___abstract_collection___Iterator___item(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Iterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:121 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 121);
   stack_frame_head = fra.me.prev;
@@ -479,6 +498,7 @@ void standard___collection___abstract_collection___Iterator___next(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Iterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:125 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 125);
   stack_frame_head = fra.me.prev;
@@ -493,6 +513,7 @@ val_t standard___collection___abstract_collection___Iterator___is_ok(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Iterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:129 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 129);
   stack_frame_head = fra.me.prev;
@@ -507,6 +528,7 @@ val_t standard___collection___abstract_collection___Container___first(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:137 */
@@ -526,6 +548,7 @@ val_t standard___collection___abstract_collection___Container___is_empty(val_t p
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:139 */
@@ -545,6 +568,7 @@ val_t standard___collection___abstract_collection___Container___length(val_t p0)
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:141 */
@@ -565,6 +589,7 @@ val_t standard___collection___abstract_collection___Container___has(val_t p0, va
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___has;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -599,6 +624,7 @@ val_t standard___collection___abstract_collection___Container___has_only(val_t p
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -633,6 +659,7 @@ val_t standard___collection___abstract_collection___Container___count(val_t p0, 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -674,6 +701,7 @@ val_t standard___collection___abstract_collection___Container___iterator(val_t p
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:156 */
@@ -694,6 +722,7 @@ void standard___collection___abstract_collection___Container___init(val_t p0, va
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -713,6 +742,7 @@ val_t standard___collection___abstract_collection___Container___item(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:161 */
@@ -729,6 +759,7 @@ void standard___collection___abstract_collection___Container___item__eq(val_t p0
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___item__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -748,6 +779,7 @@ val_t standard___collection___abstract_collection___ContainerIterator___item(val
   fra.me.meth = LOCATE_standard___collection___abstract_collection___ContainerIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:168 */
@@ -773,6 +805,7 @@ void standard___collection___abstract_collection___ContainerIterator___next(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___ContainerIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:170 */
@@ -792,6 +825,7 @@ void standard___collection___abstract_collection___ContainerIterator___init(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___ContainerIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -812,6 +846,7 @@ val_t standard___collection___abstract_collection___ContainerIterator___is_ok(va
   fra.me.meth = LOCATE_standard___collection___abstract_collection___ContainerIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:174 */
@@ -833,6 +868,7 @@ void standard___collection___abstract_collection___RemovableCollection___clear(v
   fra.me.meth = LOCATE_standard___collection___abstract_collection___RemovableCollection___clear;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:182 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 182);
   stack_frame_head = fra.me.prev;
@@ -847,6 +883,7 @@ void standard___collection___abstract_collection___RemovableCollection___remove(
   fra.me.meth = LOCATE_standard___collection___abstract_collection___RemovableCollection___remove;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:185 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 185);
   stack_frame_head = fra.me.prev;
@@ -862,6 +899,7 @@ void standard___collection___abstract_collection___RemovableCollection___remove_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___RemovableCollection___remove_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -888,6 +926,7 @@ void standard___collection___abstract_collection___SimpleCollection___add(val_t 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SimpleCollection___add;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:195 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 195);
   stack_frame_head = fra.me.prev;
@@ -902,6 +941,7 @@ void standard___collection___abstract_collection___SimpleCollection___add_all(va
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SimpleCollection___add_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -921,6 +961,7 @@ void standard___collection___abstract_collection___SimpleCollection___add_all(va
     fra.me.meth = LOCATE_standard___collection___abstract_collection___SimpleCollection___add_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -943,6 +984,7 @@ val_t standard___collection___abstract_collection___Set___has_only(val_t p0, val
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Set___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1001,6 +1043,7 @@ val_t standard___collection___abstract_collection___Set___count(val_t p0, val_t 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Set___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1030,6 +1073,7 @@ void standard___collection___abstract_collection___Set___remove_all(val_t p0, va
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Set___remove_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1048,6 +1092,7 @@ val_t standard___collection___abstract_collection___MapRead_____bra(val_t p0, va
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:243 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 243);
   stack_frame_head = fra.me.prev;
@@ -1063,6 +1108,7 @@ val_t standard___collection___abstract_collection___MapRead___has_key(val_t p0, 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___has_key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1084,6 +1130,7 @@ val_t standard___collection___abstract_collection___MapRead___iterator(val_t p0)
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:249 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 249);
   stack_frame_head = fra.me.prev;
@@ -1100,6 +1147,7 @@ void standard___collection___abstract_collection___MapRead___iterate(val_t p0, s
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___iterate;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1141,6 +1189,7 @@ val_t standard___collection___abstract_collection___MapRead___values(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___values;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:263 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 263);
   stack_frame_head = fra.me.prev;
@@ -1155,6 +1204,7 @@ val_t standard___collection___abstract_collection___MapRead___keys(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___keys;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:268 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 268);
   stack_frame_head = fra.me.prev;
@@ -1169,6 +1219,7 @@ val_t standard___collection___abstract_collection___MapRead___is_empty(val_t p0)
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:273 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 273);
   stack_frame_head = fra.me.prev;
@@ -1183,6 +1234,7 @@ val_t standard___collection___abstract_collection___MapRead___length(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:276 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 276);
   stack_frame_head = fra.me.prev;
@@ -1197,6 +1249,7 @@ void standard___collection___abstract_collection___Map_____braeq(val_t p0, val_t
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Map_____braeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:304 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 304);
   stack_frame_head = fra.me.prev;
@@ -1212,6 +1265,7 @@ void standard___collection___abstract_collection___Map___recover_with(val_t p0, 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Map___recover_with;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1248,6 +1302,7 @@ void standard___collection___abstract_collection___Map___clear(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Map___clear;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:318 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 318);
   stack_frame_head = fra.me.prev;
@@ -1262,6 +1317,7 @@ val_t standard___collection___abstract_collection___Map___values(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Map___values;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:321 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 321);
   stack_frame_head = fra.me.prev;
@@ -1276,6 +1332,7 @@ val_t standard___collection___abstract_collection___Map___keys(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Map___keys;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:323 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 323);
   stack_frame_head = fra.me.prev;
@@ -1290,6 +1347,7 @@ val_t standard___collection___abstract_collection___MapIterator___item(val_t p0)
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:328 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 328);
   stack_frame_head = fra.me.prev;
@@ -1304,6 +1362,7 @@ val_t standard___collection___abstract_collection___MapIterator___key(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapIterator___key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:332 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 332);
   stack_frame_head = fra.me.prev;
@@ -1318,6 +1377,7 @@ void standard___collection___abstract_collection___MapIterator___next(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:336 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 336);
   stack_frame_head = fra.me.prev;
@@ -1332,6 +1392,7 @@ val_t standard___collection___abstract_collection___MapIterator___is_ok(val_t p0
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:340 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 340);
   stack_frame_head = fra.me.prev;
@@ -1347,6 +1408,7 @@ val_t standard___collection___abstract_collection___MapKeysIterator___iterator(v
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:350 */
@@ -1368,6 +1430,7 @@ void standard___collection___abstract_collection___MapKeysIterator___iterator__e
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___iterator__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1387,6 +1450,7 @@ val_t standard___collection___abstract_collection___MapKeysIterator___is_ok(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:353 */
@@ -1406,6 +1470,7 @@ void standard___collection___abstract_collection___MapKeysIterator___next(val_t 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:354 */
@@ -1423,6 +1488,7 @@ val_t standard___collection___abstract_collection___MapKeysIterator___item(val_t
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:355 */
@@ -1444,6 +1510,7 @@ void standard___collection___abstract_collection___MapKeysIterator___init(val_t 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1463,6 +1530,7 @@ val_t standard___collection___abstract_collection___MapValuesIterator___iterator
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:361 */
@@ -1484,6 +1552,7 @@ void standard___collection___abstract_collection___MapValuesIterator___iterator_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___iterator__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1503,6 +1572,7 @@ val_t standard___collection___abstract_collection___MapValuesIterator___is_ok(va
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:364 */
@@ -1522,6 +1592,7 @@ void standard___collection___abstract_collection___MapValuesIterator___next(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:365 */
@@ -1539,6 +1610,7 @@ val_t standard___collection___abstract_collection___MapValuesIterator___item(val
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:366 */
@@ -1560,6 +1632,7 @@ void standard___collection___abstract_collection___MapValuesIterator___init(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1579,6 +1652,7 @@ val_t standard___collection___abstract_collection___SequenceRead___first(val_t p
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SequenceRead___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:377 */
@@ -1605,6 +1679,7 @@ val_t standard___collection___abstract_collection___SequenceRead_____bra(val_t p
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SequenceRead_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:381 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 381);
   stack_frame_head = fra.me.prev;
@@ -1621,6 +1696,7 @@ val_t standard___collection___abstract_collection___SequenceRead___last(val_t p0
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SequenceRead___last;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:390 */
@@ -1653,6 +1729,7 @@ val_t standard___collection___abstract_collection___SequenceRead___index_of(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SequenceRead___index_of;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1710,6 +1787,7 @@ val_t standard___collection___abstract_collection___SequenceRead___iterator(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SequenceRead___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:407 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 407);
   stack_frame_head = fra.me.prev;
@@ -1725,6 +1803,7 @@ void standard___collection___abstract_collection___Sequence___first__eq(val_t p0
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___first__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1747,6 +1826,7 @@ void standard___collection___abstract_collection___Sequence___last__eq(val_t p0,
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___last__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1787,6 +1867,7 @@ void standard___collection___abstract_collection___Sequence___add(val_t p0, val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___add;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1805,6 +1886,7 @@ void standard___collection___abstract_collection___Sequence___push(val_t p0, val
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___push;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:436 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 436);
   stack_frame_head = fra.me.prev;
@@ -1819,6 +1901,7 @@ void standard___collection___abstract_collection___Sequence___append(val_t p0, v
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___append;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1838,6 +1921,7 @@ void standard___collection___abstract_collection___Sequence___append(val_t p0, v
     fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___append;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -1856,6 +1940,7 @@ val_t standard___collection___abstract_collection___Sequence___pop(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___pop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:442 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 442);
   stack_frame_head = fra.me.prev;
@@ -1870,6 +1955,7 @@ void standard___collection___abstract_collection___Sequence___unshift(val_t p0, 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___unshift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:445 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 445);
   stack_frame_head = fra.me.prev;
@@ -1884,6 +1970,7 @@ val_t standard___collection___abstract_collection___Sequence___shift(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___shift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:448 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 448);
   stack_frame_head = fra.me.prev;
@@ -1898,6 +1985,7 @@ void standard___collection___abstract_collection___Sequence_____braeq(val_t p0, 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence_____braeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:452 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 452);
   stack_frame_head = fra.me.prev;
@@ -1912,6 +2000,7 @@ void standard___collection___abstract_collection___Sequence___remove_at(val_t p0
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___remove_at;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:455 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 455);
   stack_frame_head = fra.me.prev;
@@ -1926,6 +2015,7 @@ val_t standard___collection___abstract_collection___IndexedIterator___index(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___IndexedIterator___index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:462 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 462);
   stack_frame_head = fra.me.prev;
@@ -1940,6 +2030,7 @@ val_t standard___collection___abstract_collection___CoupleMap___couple_at(val_t 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMap___couple_at;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//collection//abstract_collection.nit:469 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 469);
   stack_frame_head = fra.me.prev;
@@ -1956,6 +2047,7 @@ val_t standard___collection___abstract_collection___CoupleMap_____bra(val_t p0, 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMap_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2001,6 +2093,7 @@ val_t standard___collection___abstract_collection___CoupleMapIterator___item(val
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMapIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:489 */
@@ -2031,6 +2124,7 @@ val_t standard___collection___abstract_collection___CoupleMapIterator___key(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMapIterator___key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:493 */
@@ -2061,6 +2155,7 @@ val_t standard___collection___abstract_collection___CoupleMapIterator___is_ok(va
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMapIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:495 */
@@ -2086,6 +2181,7 @@ void standard___collection___abstract_collection___CoupleMapIterator___next(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMapIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:499 */
@@ -2110,6 +2206,7 @@ void standard___collection___abstract_collection___CoupleMapIterator___init(val_
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMapIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2129,6 +2226,7 @@ val_t standard___collection___abstract_collection___Couple___first(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Couple___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:512 */
@@ -2145,6 +2243,7 @@ void standard___collection___abstract_collection___Couple___first__eq(val_t p0, 
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Couple___first__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2163,6 +2262,7 @@ val_t standard___collection___abstract_collection___Couple___second(val_t p0){
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Couple___second;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//collection//abstract_collection.nit:515 */
@@ -2179,6 +2279,7 @@ void standard___collection___abstract_collection___Couple___second__eq(val_t p0,
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Couple___second__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2199,6 +2300,7 @@ void standard___collection___abstract_collection___Couple___init(val_t p0, val_t
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Couple___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

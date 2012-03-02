@@ -10,6 +10,7 @@ val_t standard___math___Int___rand(val_t p0){
   fra.me.meth = LOCATE_standard___math___Int___rand;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//math.nit:20 */
   REGB0 = Int_rand___out(REGB0);
@@ -25,6 +26,7 @@ val_t standard___math___Float___sqrt(val_t p0){
   fra.me.meth = LOCATE_standard___math___Float___sqrt;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:24 */
@@ -41,6 +43,7 @@ val_t standard___math___Float___cos(val_t p0){
   fra.me.meth = LOCATE_standard___math___Float___cos;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:25 */
@@ -57,6 +60,7 @@ val_t standard___math___Float___sin(val_t p0){
   fra.me.meth = LOCATE_standard___math___Float___sin;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:26 */
@@ -73,6 +77,7 @@ val_t standard___math___Float___tan(val_t p0){
   fra.me.meth = LOCATE_standard___math___Float___tan;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:27 */
@@ -89,6 +94,7 @@ val_t standard___math___Float___acos(val_t p0){
   fra.me.meth = LOCATE_standard___math___Float___acos;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:28 */
@@ -105,6 +111,7 @@ val_t standard___math___Float___asin(val_t p0){
   fra.me.meth = LOCATE_standard___math___Float___asin;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:29 */
@@ -121,6 +128,7 @@ val_t standard___math___Float___atan(val_t p0){
   fra.me.meth = LOCATE_standard___math___Float___atan;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:30 */
@@ -137,6 +145,7 @@ val_t standard___math___Float___pow(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___math___Float___pow;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -155,6 +164,7 @@ val_t standard___math___Float___log(val_t p0){
   fra.me.meth = LOCATE_standard___math___Float___log;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:33 */
@@ -171,6 +181,7 @@ val_t standard___math___Float___exp(val_t p0){
   fra.me.meth = LOCATE_standard___math___Float___exp;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:34 */
@@ -187,6 +198,7 @@ val_t standard___math___Float___rand(val_t p0){
   fra.me.meth = LOCATE_standard___math___Float___rand;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:36 */
@@ -203,6 +215,7 @@ val_t standard___math___Float___hypot_with(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___math___Float___hypot_with;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -222,6 +235,7 @@ val_t standard___math___Collection___rand(val_t p0){
   fra.me.meth = LOCATE_standard___math___Collection___rand;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -264,6 +278,7 @@ val_t standard___math___Collection___rand(val_t p0){
     fra.me.meth = LOCATE_standard___math___Collection___rand;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[0] = p0;
     /* ./../lib/standard//math.nit:50 */
@@ -303,6 +318,7 @@ val_t standard___math___Object___atan2(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___math___Object___atan2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -323,6 +339,7 @@ val_t standard___math___Object___pi(val_t p0){
   fra.me.meth = LOCATE_standard___math___Object___pi;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:64 */
@@ -340,6 +357,7 @@ void standard___math___Object___srand_from(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___math___Object___srand_from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -357,6 +375,7 @@ void standard___math___Object___srand(val_t p0){
   fra.me.meth = LOCATE_standard___math___Object___srand;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//math.nit:66 */

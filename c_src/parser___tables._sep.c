@@ -11,6 +11,7 @@ val_t parser___tables___TablesCapable___lexer_goto(val_t p0, val_t p1, val_t p2)
   fra.me.meth = LOCATE_parser___tables___TablesCapable___lexer_goto;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -30,6 +31,7 @@ val_t parser___tables___TablesCapable___lexer_accept(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___tables___TablesCapable___lexer_accept;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -49,6 +51,7 @@ val_t parser___tables___TablesCapable___parser_goto(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___tables___TablesCapable___parser_goto;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -69,6 +72,7 @@ val_t parser___tables___TablesCapable___parser_action(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___tables___TablesCapable___parser_action;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;

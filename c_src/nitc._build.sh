@@ -44,6 +44,7 @@ CLIBDIR="clib"
   ./standard___exec._sep.c\
   ./math._nitni.c\
   ./standard___math._sep.c\
+  ./standard___gc._sep.c\
   ./tables._nitni.c\
   ./tables_nit.c\
   ./parser___tables._sep.c\

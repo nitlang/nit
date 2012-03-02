@@ -9,6 +9,7 @@ val_t analysis___instantiated_type_analysis___Program___ita(val_t p0){
   fra.me.meth = LOCATE_analysis___instantiated_type_analysis___Program___ita;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//instantiated_type_analysis.nit:23 */
@@ -25,6 +26,7 @@ void analysis___instantiated_type_analysis___Program___ita__eq(val_t p0, val_t p
   fra.me.meth = LOCATE_analysis___instantiated_type_analysis___Program___ita__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -47,6 +49,7 @@ void analysis___instantiated_type_analysis___Program___dump_instantiated_types(v
   fra.me.meth = LOCATE_analysis___instantiated_type_analysis___Program___dump_instantiated_types;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -109,6 +112,7 @@ void analysis___instantiated_type_analysis___Program___dump_instantiated_types(v
     fra.me.meth = LOCATE_analysis___instantiated_type_analysis___Program___dump_instantiated_types;
     fra.me.has_broke = 0;
     fra.me.REG_size = 3;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -154,6 +158,7 @@ void analysis___instantiated_type_analysis___Program___dump_not_instantiated_typ
   fra.me.meth = LOCATE_analysis___instantiated_type_analysis___Program___dump_not_instantiated_types;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -219,6 +224,7 @@ void analysis___instantiated_type_analysis___Program___dump_not_instantiated_typ
     fra.me.meth = LOCATE_analysis___instantiated_type_analysis___Program___dump_not_instantiated_types;
     fra.me.has_broke = 0;
     fra.me.REG_size = 3;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -274,6 +280,7 @@ void analysis___instantiated_type_analysis___Program___with_each_live_local_clas
   fra.me.meth = LOCATE_analysis___instantiated_type_analysis___Program___with_each_live_local_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -307,6 +314,7 @@ void analysis___instantiated_type_analysis___Program___with_each_live_local_clas
     fra.me.meth = LOCATE_analysis___instantiated_type_analysis___Program___with_each_live_local_classes;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -363,6 +371,7 @@ val_t analysis___instantiated_type_analysis___InstantiatedTypeAnalysis___is_clas
   fra.me.meth = LOCATE_analysis___instantiated_type_analysis___InstantiatedTypeAnalysis___is_class_instantiated;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./analysis//instantiated_type_analysis.nit:61 */
   nit_abort("Deferred method called", NULL, LOCATE_analysis___instantiated_type_analysis, 61);
   stack_frame_head = fra.me.prev;
@@ -379,6 +388,7 @@ void analysis___instantiated_type_analysis___InstantiatedTypeAnalysis___init(val
   fra.me.meth = LOCATE_analysis___instantiated_type_analysis___InstantiatedTypeAnalysis___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
   return;
@@ -393,6 +403,7 @@ val_t analysis___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___
   fra.me.meth = LOCATE_analysis___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___is_class_instantiated;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -415,6 +426,7 @@ void analysis___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___i
   fra.me.meth = LOCATE_analysis___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//instantiated_type_analysis.nit:69 */

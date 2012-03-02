@@ -11,6 +11,7 @@ val_t compiling___compiling_writer___Writer___add(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___compiling_writer___Writer___add;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -68,6 +69,7 @@ val_t compiling___compiling_writer___Writer___add_all(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_compiling___compiling_writer___Writer___add_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -158,6 +160,7 @@ val_t compiling___compiling_writer___Writer___append(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___compiling_writer___Writer___append;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -191,6 +194,7 @@ void compiling___compiling_writer___Writer___internal_append(val_t p0, val_t p1)
   fra.me.meth = LOCATE_compiling___compiling_writer___Writer___internal_append;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -246,6 +250,7 @@ val_t compiling___compiling_writer___Writer___sub(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_writer___Writer___sub;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -270,6 +275,7 @@ void compiling___compiling_writer___Writer___write_to_stream(val_t p0, val_t p1)
   fra.me.meth = LOCATE_compiling___compiling_writer___Writer___write_to_stream;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -340,6 +346,7 @@ val_t compiling___compiling_writer___Writer___is_frozen(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_writer___Writer___is_frozen;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_writer.nit:97 */
@@ -362,6 +369,7 @@ void compiling___compiling_writer___Writer___freeze(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_writer___Writer___freeze;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_writer.nit:103 */
@@ -387,6 +395,7 @@ void compiling___compiling_writer___Writer___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_compiling___compiling_writer___Writer___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -402,6 +411,7 @@ void compiling___compiling_writer___WriterNode___internal_write_to_stream(val_t 
   fra.me.meth = LOCATE_compiling___compiling_writer___WriterNode___internal_write_to_stream;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./compiling//compiling_writer.nit:115 */
   nit_abort("Deferred method called", NULL, LOCATE_compiling___compiling_writer, 115);
   stack_frame_head = fra.me.prev;
@@ -418,6 +428,7 @@ void compiling___compiling_writer___WriterNode___init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_compiling___compiling_writer___WriterNode___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
   return;
@@ -432,6 +443,7 @@ void compiling___compiling_writer___WriterCoreNode___internal_write_to_stream(va
   fra.me.meth = LOCATE_compiling___compiling_writer___WriterCoreNode___internal_write_to_stream;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -458,6 +470,7 @@ void compiling___compiling_writer___WriterCoreNode___init(val_t p0, val_t p1, in
   fra.me.meth = LOCATE_compiling___compiling_writer___WriterCoreNode___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -482,6 +495,7 @@ void compiling___compiling_writer___WriterStrings___init(val_t p0, val_t p1, int
   fra.me.meth = LOCATE_compiling___compiling_writer___WriterStrings___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -507,6 +521,7 @@ void compiling___compiling_writer___WriterStrings___internal_write_to_stream(val
   fra.me.meth = LOCATE_compiling___compiling_writer___WriterStrings___internal_write_to_stream;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

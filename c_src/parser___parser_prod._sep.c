@@ -9,6 +9,7 @@ val_t parser___parser_prod___ANode___parent(val_t p0){
   fra.me.meth = LOCATE_parser___parser_prod___ANode___parent;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser_prod.nit:10 */
@@ -25,6 +26,7 @@ void parser___parser_prod___ANode___parent__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ANode___parent__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -43,6 +45,7 @@ void parser___parser_prod___ANode___remove_child(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ANode___remove_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -61,6 +64,7 @@ void parser___parser_prod___ANode___replace_child(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_parser___parser_prod___ANode___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./parser//parser_prod.nit:19 */
   nit_abort("Deferred method called", NULL, LOCATE_parser___parser_prod, 19);
   stack_frame_head = fra.me.prev;
@@ -77,6 +81,7 @@ void parser___parser_prod___ANode___replace_with(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ANode___replace_with;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -118,6 +123,7 @@ void parser___parser_prod___ANode___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ANode___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./parser//parser_prod.nit:30 */
   nit_abort("Deferred method called", NULL, LOCATE_parser___parser_prod, 30);
   stack_frame_head = fra.me.prev;
@@ -132,6 +138,7 @@ void parser___parser_prod___Token___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___Token___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -148,6 +155,7 @@ void parser___parser_prod___Token___replace_child(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_parser___parser_prod___Token___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -167,6 +175,7 @@ void parser___parser_prod___Prod___replace_with(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___Prod___replace_with;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -199,6 +208,7 @@ void parser___parser_prod___Visitor___visit(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___Visitor___visit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./parser//parser_prod.nit:51 */
   nit_abort("Deferred method called", NULL, LOCATE_parser___parser_prod, 51);
   stack_frame_head = fra.me.prev;
@@ -213,6 +223,7 @@ void parser___parser_prod___Visitor___enter_visit(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___Visitor___enter_visit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -238,6 +249,7 @@ val_t parser___parser_prod___Visitor___current_node(val_t p0){
   fra.me.meth = LOCATE_parser___parser_prod___Visitor___current_node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser_prod.nit:66 */
@@ -256,6 +268,7 @@ void parser___parser_prod___Visitor___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___Visitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
   return;
@@ -271,6 +284,7 @@ void parser___parser_prod___AModule___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AModule___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -290,6 +304,7 @@ void parser___parser_prod___AModule___init_amodule(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___AModule___init_amodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -342,6 +357,7 @@ void parser___parser_prod___AModule___init_amodule(val_t p0, val_t p1, val_t p2,
     fra.me.meth = LOCATE_parser___parser_prod___AModule___init_amodule;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -379,6 +395,7 @@ void parser___parser_prod___AModule___init_amodule(val_t p0, val_t p1, val_t p2,
     fra.me.meth = LOCATE_parser___parser_prod___AModule___init_amodule;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -418,6 +435,7 @@ void parser___parser_prod___AModule___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___AModule___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -697,6 +715,7 @@ void parser___parser_prod___AModule___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AModule___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -759,6 +778,7 @@ void parser___parser_prod___AModule___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AModule___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -779,6 +799,7 @@ void parser___parser_prod___AModule___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AModule___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -800,6 +821,7 @@ void parser___parser_prod___AModuledecl___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AModuledecl___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -819,6 +841,7 @@ void parser___parser_prod___AModuledecl___init_amoduledecl(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AModuledecl___init_amoduledecl;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -897,6 +920,7 @@ void parser___parser_prod___AModuledecl___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AModuledecl___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1070,6 +1094,7 @@ void parser___parser_prod___AModuledecl___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AModuledecl___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1133,6 +1158,7 @@ void parser___parser_prod___AStdImport___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AStdImport___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -1151,6 +1177,7 @@ void parser___parser_prod___AStdImport___init_astdimport(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AStdImport___init_astdimport;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1218,6 +1245,7 @@ void parser___parser_prod___AStdImport___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AStdImport___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1389,6 +1417,7 @@ void parser___parser_prod___AStdImport___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AStdImport___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1432,6 +1461,7 @@ void parser___parser_prod___ANoImport___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ANoImport___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -1450,6 +1480,7 @@ void parser___parser_prod___ANoImport___init_anoimport(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ANoImport___init_anoimport;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1517,6 +1548,7 @@ void parser___parser_prod___ANoImport___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ANoImport___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1688,6 +1720,7 @@ void parser___parser_prod___ANoImport___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ANoImport___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1731,6 +1764,7 @@ void parser___parser_prod___APublicVisibility___empty_init(val_t p0, int* init_t
   fra.me.meth = LOCATE_parser___parser_prod___APublicVisibility___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -1748,6 +1782,7 @@ void parser___parser_prod___APublicVisibility___init_apublicvisibility(val_t p0,
   fra.me.meth = LOCATE_parser___parser_prod___APublicVisibility___init_apublicvisibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser_prod.nit:333 */
@@ -1765,6 +1800,7 @@ void parser___parser_prod___APublicVisibility___replace_child(val_t p0, val_t p1
   fra.me.meth = LOCATE_parser___parser_prod___APublicVisibility___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1783,6 +1819,7 @@ void parser___parser_prod___APublicVisibility___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___APublicVisibility___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1801,6 +1838,7 @@ void parser___parser_prod___APrivateVisibility___empty_init(val_t p0, int* init_
   fra.me.meth = LOCATE_parser___parser_prod___APrivateVisibility___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -1819,6 +1857,7 @@ void parser___parser_prod___APrivateVisibility___init_aprivatevisibility(val_t p
   fra.me.meth = LOCATE_parser___parser_prod___APrivateVisibility___init_aprivatevisibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1856,6 +1895,7 @@ void parser___parser_prod___APrivateVisibility___replace_child(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___APrivateVisibility___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1927,6 +1967,7 @@ void parser___parser_prod___APrivateVisibility___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___APrivateVisibility___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1953,6 +1994,7 @@ void parser___parser_prod___AProtectedVisibility___empty_init(val_t p0, int* ini
   fra.me.meth = LOCATE_parser___parser_prod___AProtectedVisibility___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -1971,6 +2013,7 @@ void parser___parser_prod___AProtectedVisibility___init_aprotectedvisibility(val
   fra.me.meth = LOCATE_parser___parser_prod___AProtectedVisibility___init_aprotectedvisibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2008,6 +2051,7 @@ void parser___parser_prod___AProtectedVisibility___replace_child(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AProtectedVisibility___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2079,6 +2123,7 @@ void parser___parser_prod___AProtectedVisibility___visit_all(val_t p0, val_t p1)
   fra.me.meth = LOCATE_parser___parser_prod___AProtectedVisibility___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2105,6 +2150,7 @@ void parser___parser_prod___AIntrudeVisibility___empty_init(val_t p0, int* init_
   fra.me.meth = LOCATE_parser___parser_prod___AIntrudeVisibility___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -2123,6 +2169,7 @@ void parser___parser_prod___AIntrudeVisibility___init_aintrudevisibility(val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AIntrudeVisibility___init_aintrudevisibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2160,6 +2207,7 @@ void parser___parser_prod___AIntrudeVisibility___replace_child(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AIntrudeVisibility___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2231,6 +2279,7 @@ void parser___parser_prod___AIntrudeVisibility___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AIntrudeVisibility___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2257,6 +2306,7 @@ void parser___parser_prod___AStdClassdef___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___AStdClassdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -2276,6 +2326,7 @@ void parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AStdClassdef___init_astdclassdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2416,6 +2467,7 @@ void parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1,
     fra.me.meth = LOCATE_parser___parser_prod___AStdClassdef___init_astdclassdef;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -2453,6 +2505,7 @@ void parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1,
     fra.me.meth = LOCATE_parser___parser_prod___AStdClassdef___init_astdclassdef;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -2490,6 +2543,7 @@ void parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1,
     fra.me.meth = LOCATE_parser___parser_prod___AStdClassdef___init_astdclassdef;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -2529,6 +2583,7 @@ void parser___parser_prod___AStdClassdef___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AStdClassdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3113,6 +3168,7 @@ void parser___parser_prod___AStdClassdef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AStdClassdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3249,6 +3305,7 @@ void parser___parser_prod___AStdClassdef___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AStdClassdef___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -3269,6 +3326,7 @@ void parser___parser_prod___AStdClassdef___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AStdClassdef___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -3289,6 +3347,7 @@ void parser___parser_prod___AStdClassdef___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AStdClassdef___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -3310,6 +3369,7 @@ void parser___parser_prod___ATopClassdef___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___ATopClassdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -3327,6 +3387,7 @@ void parser___parser_prod___ATopClassdef___init_atopclassdef(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___ATopClassdef___init_atopclassdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3350,6 +3411,7 @@ void parser___parser_prod___ATopClassdef___init_atopclassdef(val_t p0, val_t p1,
     fra.me.meth = LOCATE_parser___parser_prod___ATopClassdef___init_atopclassdef;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -3389,6 +3451,7 @@ void parser___parser_prod___ATopClassdef___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___ATopClassdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3513,6 +3576,7 @@ void parser___parser_prod___ATopClassdef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ATopClassdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3538,6 +3602,7 @@ void parser___parser_prod___ATopClassdef___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ATopClassdef___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -3559,6 +3624,7 @@ void parser___parser_prod___AMainClassdef___empty_init(val_t p0, int* init_table
   fra.me.meth = LOCATE_parser___parser_prod___AMainClassdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -3576,6 +3642,7 @@ void parser___parser_prod___AMainClassdef___init_amainclassdef(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AMainClassdef___init_amainclassdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3599,6 +3666,7 @@ void parser___parser_prod___AMainClassdef___init_amainclassdef(val_t p0, val_t p
     fra.me.meth = LOCATE_parser___parser_prod___AMainClassdef___init_amainclassdef;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -3638,6 +3706,7 @@ void parser___parser_prod___AMainClassdef___replace_child(val_t p0, val_t p1, va
   fra.me.meth = LOCATE_parser___parser_prod___AMainClassdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3762,6 +3831,7 @@ void parser___parser_prod___AMainClassdef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AMainClassdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3787,6 +3857,7 @@ void parser___parser_prod___AMainClassdef___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AMainClassdef___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -3808,6 +3879,7 @@ void parser___parser_prod___AConcreteClasskind___empty_init(val_t p0, int* init_
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteClasskind___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -3826,6 +3898,7 @@ void parser___parser_prod___AConcreteClasskind___init_aconcreteclasskind(val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteClasskind___init_aconcreteclasskind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3863,6 +3936,7 @@ void parser___parser_prod___AConcreteClasskind___replace_child(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteClasskind___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3934,6 +4008,7 @@ void parser___parser_prod___AConcreteClasskind___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteClasskind___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3960,6 +4035,7 @@ void parser___parser_prod___AAbstractClasskind___empty_init(val_t p0, int* init_
   fra.me.meth = LOCATE_parser___parser_prod___AAbstractClasskind___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -3978,6 +4054,7 @@ void parser___parser_prod___AAbstractClasskind___init_aabstractclasskind(val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AAbstractClasskind___init_aabstractclasskind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4030,6 +4107,7 @@ void parser___parser_prod___AAbstractClasskind___replace_child(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AAbstractClasskind___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4151,6 +4229,7 @@ void parser___parser_prod___AAbstractClasskind___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAbstractClasskind___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4186,6 +4265,7 @@ void parser___parser_prod___AInterfaceClasskind___empty_init(val_t p0, int* init
   fra.me.meth = LOCATE_parser___parser_prod___AInterfaceClasskind___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -4204,6 +4284,7 @@ void parser___parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(val_t
   fra.me.meth = LOCATE_parser___parser_prod___AInterfaceClasskind___init_ainterfaceclasskind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4241,6 +4322,7 @@ void parser___parser_prod___AInterfaceClasskind___replace_child(val_t p0, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AInterfaceClasskind___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4312,6 +4394,7 @@ void parser___parser_prod___AInterfaceClasskind___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AInterfaceClasskind___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4338,6 +4421,7 @@ void parser___parser_prod___AEnumClasskind___empty_init(val_t p0, int* init_tabl
   fra.me.meth = LOCATE_parser___parser_prod___AEnumClasskind___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -4356,6 +4440,7 @@ void parser___parser_prod___AEnumClasskind___init_aenumclasskind(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AEnumClasskind___init_aenumclasskind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4393,6 +4478,7 @@ void parser___parser_prod___AEnumClasskind___replace_child(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AEnumClasskind___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4464,6 +4550,7 @@ void parser___parser_prod___AEnumClasskind___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AEnumClasskind___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4490,6 +4577,7 @@ void parser___parser_prod___AExternClasskind___empty_init(val_t p0, int* init_ta
   fra.me.meth = LOCATE_parser___parser_prod___AExternClasskind___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -4508,6 +4596,7 @@ void parser___parser_prod___AExternClasskind___init_aexternclasskind(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___AExternClasskind___init_aexternclasskind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4545,6 +4634,7 @@ void parser___parser_prod___AExternClasskind___replace_child(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AExternClasskind___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4616,6 +4706,7 @@ void parser___parser_prod___AExternClasskind___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AExternClasskind___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4642,6 +4733,7 @@ void parser___parser_prod___AFormaldef___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AFormaldef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -4661,6 +4753,7 @@ void parser___parser_prod___AFormaldef___init_aformaldef(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AFormaldef___init_aformaldef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4724,6 +4817,7 @@ void parser___parser_prod___AFormaldef___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AFormaldef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4847,6 +4941,7 @@ void parser___parser_prod___AFormaldef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AFormaldef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4902,6 +4997,7 @@ void parser___parser_prod___ASuperclass___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ASuperclass___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -4921,6 +5017,7 @@ void parser___parser_prod___ASuperclass___init_asuperclass(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___ASuperclass___init_asuperclass;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5010,6 +5107,7 @@ void parser___parser_prod___ASuperclass___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___ASuperclass___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5184,6 +5282,7 @@ void parser___parser_prod___ASuperclass___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ASuperclass___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5264,6 +5363,7 @@ void parser___parser_prod___AAttrPropdef___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___AAttrPropdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -5283,6 +5383,7 @@ void parser___parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AAttrPropdef___init_aattrpropdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 12;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5543,6 +5644,7 @@ void parser___parser_prod___AAttrPropdef___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AAttrPropdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6073,6 +6175,7 @@ void parser___parser_prod___AAttrPropdef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAttrPropdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6311,6 +6414,7 @@ void parser___parser_prod___AMethPropdef___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___AMethPropdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -6330,6 +6434,7 @@ void parser___parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AMethPropdef___init_amethpropdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6449,6 +6554,7 @@ void parser___parser_prod___AMethPropdef___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AMethPropdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6726,6 +6832,7 @@ void parser___parser_prod___AMethPropdef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AMethPropdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6807,6 +6914,7 @@ void parser___parser_prod___ADeferredMethPropdef___empty_init(val_t p0, int* ini
   fra.me.meth = LOCATE_parser___parser_prod___ADeferredMethPropdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -6826,6 +6934,7 @@ void parser___parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(val
   fra.me.meth = LOCATE_parser___parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6960,6 +7069,7 @@ void parser___parser_prod___ADeferredMethPropdef___replace_child(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ADeferredMethPropdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7287,6 +7397,7 @@ void parser___parser_prod___ADeferredMethPropdef___visit_all(val_t p0, val_t p1)
   fra.me.meth = LOCATE_parser___parser_prod___ADeferredMethPropdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7376,6 +7487,7 @@ void parser___parser_prod___AInternMethPropdef___empty_init(val_t p0, int* init_
   fra.me.meth = LOCATE_parser___parser_prod___AInternMethPropdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -7395,6 +7507,7 @@ void parser___parser_prod___AInternMethPropdef___init_ainternmethpropdef(val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AInternMethPropdef___init_ainternmethpropdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7529,6 +7642,7 @@ void parser___parser_prod___AInternMethPropdef___replace_child(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AInternMethPropdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7856,6 +7970,7 @@ void parser___parser_prod___AInternMethPropdef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AInternMethPropdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7945,6 +8060,7 @@ void parser___parser_prod___AExternMethPropdef___empty_init(val_t p0, int* init_
   fra.me.meth = LOCATE_parser___parser_prod___AExternMethPropdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -7964,6 +8080,7 @@ void parser___parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AExternMethPropdef___init_aexternmethpropdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8150,6 +8267,7 @@ void parser___parser_prod___AExternMethPropdef___replace_child(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AExternMethPropdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8579,6 +8697,7 @@ void parser___parser_prod___AExternMethPropdef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AExternMethPropdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8718,6 +8837,7 @@ void parser___parser_prod___AConcreteMethPropdef___empty_init(val_t p0, int* ini
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteMethPropdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -8737,6 +8857,7 @@ void parser___parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8897,6 +9018,7 @@ void parser___parser_prod___AConcreteMethPropdef___replace_child(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteMethPropdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9276,6 +9398,7 @@ void parser___parser_prod___AConcreteMethPropdef___visit_all(val_t p0, val_t p1)
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteMethPropdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9385,6 +9508,7 @@ void parser___parser_prod___AConcreteInitPropdef___empty_init(val_t p0, int* ini
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteInitPropdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser_prod.nit:1735 */
@@ -9406,6 +9530,7 @@ void parser___parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9577,6 +9702,7 @@ void parser___parser_prod___AConcreteInitPropdef___replace_child(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteInitPropdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9955,6 +10081,7 @@ void parser___parser_prod___AConcreteInitPropdef___visit_all(val_t p0, val_t p1)
   fra.me.meth = LOCATE_parser___parser_prod___AConcreteInitPropdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10091,6 +10218,7 @@ void parser___parser_prod___AExternInitPropdef___empty_init(val_t p0, int* init_
   fra.me.meth = LOCATE_parser___parser_prod___AExternInitPropdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser_prod.nit:1866 */
@@ -10112,6 +10240,7 @@ void parser___parser_prod___AExternInitPropdef___init_aexterninitpropdef(val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AExternInitPropdef___init_aexterninitpropdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10309,6 +10438,7 @@ void parser___parser_prod___AExternInitPropdef___replace_child(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AExternInitPropdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10738,6 +10868,7 @@ void parser___parser_prod___AExternInitPropdef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AExternInitPropdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10899,6 +11030,7 @@ void parser___parser_prod___AMainMethPropdef___empty_init(val_t p0, int* init_ta
   fra.me.meth = LOCATE_parser___parser_prod___AMainMethPropdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -10918,6 +11050,7 @@ void parser___parser_prod___AMainMethPropdef___init_amainmethpropdef(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___AMainMethPropdef___init_amainmethpropdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10989,6 +11122,7 @@ void parser___parser_prod___AMainMethPropdef___replace_child(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AMainMethPropdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11113,6 +11247,7 @@ void parser___parser_prod___AMainMethPropdef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AMainMethPropdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11185,6 +11320,7 @@ void parser___parser_prod___ATypePropdef___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___ATypePropdef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -11204,6 +11340,7 @@ void parser___parser_prod___ATypePropdef___init_atypepropdef(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___ATypePropdef___init_atypepropdef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11338,6 +11475,7 @@ void parser___parser_prod___ATypePropdef___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___ATypePropdef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11662,6 +11800,7 @@ void parser___parser_prod___ATypePropdef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ATypePropdef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11766,6 +11905,7 @@ void parser___parser_prod___AReadAble___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AReadAble___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -11785,6 +11925,7 @@ void parser___parser_prod___AReadAble___init_areadable(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AReadAble___init_areadable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11848,6 +11989,7 @@ void parser___parser_prod___AReadAble___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AReadAble___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11971,6 +12113,7 @@ void parser___parser_prod___AReadAble___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AReadAble___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12026,6 +12169,7 @@ void parser___parser_prod___AWriteAble___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AWriteAble___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -12045,6 +12189,7 @@ void parser___parser_prod___AWriteAble___init_awriteable(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AWriteAble___init_awriteable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12134,6 +12279,7 @@ void parser___parser_prod___AWriteAble___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AWriteAble___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12308,6 +12454,7 @@ void parser___parser_prod___AWriteAble___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AWriteAble___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12388,6 +12535,7 @@ void parser___parser_prod___AIdMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AIdMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -12406,6 +12554,7 @@ void parser___parser_prod___AIdMethid___init_aidmethid(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___AIdMethid___init_aidmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12443,6 +12592,7 @@ void parser___parser_prod___AIdMethid___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AIdMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12514,6 +12664,7 @@ void parser___parser_prod___AIdMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AIdMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -12540,6 +12691,7 @@ void parser___parser_prod___APlusMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___APlusMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -12558,6 +12710,7 @@ void parser___parser_prod___APlusMethid___init_aplusmethid(val_t p0, val_t p1, i
   fra.me.meth = LOCATE_parser___parser_prod___APlusMethid___init_aplusmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12595,6 +12748,7 @@ void parser___parser_prod___APlusMethid___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___APlusMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12666,6 +12820,7 @@ void parser___parser_prod___APlusMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___APlusMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -12692,6 +12847,7 @@ void parser___parser_prod___AMinusMethid___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___AMinusMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -12710,6 +12866,7 @@ void parser___parser_prod___AMinusMethid___init_aminusmethid(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AMinusMethid___init_aminusmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12747,6 +12904,7 @@ void parser___parser_prod___AMinusMethid___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AMinusMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12818,6 +12976,7 @@ void parser___parser_prod___AMinusMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AMinusMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -12844,6 +13003,7 @@ void parser___parser_prod___AStarMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AStarMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -12862,6 +13022,7 @@ void parser___parser_prod___AStarMethid___init_astarmethid(val_t p0, val_t p1, i
   fra.me.meth = LOCATE_parser___parser_prod___AStarMethid___init_astarmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12899,6 +13060,7 @@ void parser___parser_prod___AStarMethid___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AStarMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12970,6 +13132,7 @@ void parser___parser_prod___AStarMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AStarMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -12996,6 +13159,7 @@ void parser___parser_prod___ASlashMethid___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___ASlashMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -13014,6 +13178,7 @@ void parser___parser_prod___ASlashMethid___init_aslashmethid(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___ASlashMethid___init_aslashmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13051,6 +13216,7 @@ void parser___parser_prod___ASlashMethid___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___ASlashMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13122,6 +13288,7 @@ void parser___parser_prod___ASlashMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ASlashMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -13148,6 +13315,7 @@ void parser___parser_prod___APercentMethid___empty_init(val_t p0, int* init_tabl
   fra.me.meth = LOCATE_parser___parser_prod___APercentMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -13166,6 +13334,7 @@ void parser___parser_prod___APercentMethid___init_apercentmethid(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___APercentMethid___init_apercentmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13203,6 +13372,7 @@ void parser___parser_prod___APercentMethid___replace_child(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___APercentMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13274,6 +13444,7 @@ void parser___parser_prod___APercentMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___APercentMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -13300,6 +13471,7 @@ void parser___parser_prod___AEqMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AEqMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -13318,6 +13490,7 @@ void parser___parser_prod___AEqMethid___init_aeqmethid(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___AEqMethid___init_aeqmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13355,6 +13528,7 @@ void parser___parser_prod___AEqMethid___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AEqMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13426,6 +13600,7 @@ void parser___parser_prod___AEqMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AEqMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -13452,6 +13627,7 @@ void parser___parser_prod___ANeMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ANeMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -13470,6 +13646,7 @@ void parser___parser_prod___ANeMethid___init_anemethid(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___ANeMethid___init_anemethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13507,6 +13684,7 @@ void parser___parser_prod___ANeMethid___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ANeMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13578,6 +13756,7 @@ void parser___parser_prod___ANeMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ANeMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -13604,6 +13783,7 @@ void parser___parser_prod___ALeMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ALeMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -13622,6 +13802,7 @@ void parser___parser_prod___ALeMethid___init_alemethid(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___ALeMethid___init_alemethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13659,6 +13840,7 @@ void parser___parser_prod___ALeMethid___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ALeMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13730,6 +13912,7 @@ void parser___parser_prod___ALeMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ALeMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -13756,6 +13939,7 @@ void parser___parser_prod___AGeMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AGeMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -13774,6 +13958,7 @@ void parser___parser_prod___AGeMethid___init_agemethid(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___AGeMethid___init_agemethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13811,6 +13996,7 @@ void parser___parser_prod___AGeMethid___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AGeMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13882,6 +14068,7 @@ void parser___parser_prod___AGeMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AGeMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -13908,6 +14095,7 @@ void parser___parser_prod___ALtMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ALtMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -13926,6 +14114,7 @@ void parser___parser_prod___ALtMethid___init_altmethid(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___ALtMethid___init_altmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -13963,6 +14152,7 @@ void parser___parser_prod___ALtMethid___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ALtMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14034,6 +14224,7 @@ void parser___parser_prod___ALtMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ALtMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -14060,6 +14251,7 @@ void parser___parser_prod___AGtMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AGtMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -14078,6 +14270,7 @@ void parser___parser_prod___AGtMethid___init_agtmethid(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___AGtMethid___init_agtmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14115,6 +14308,7 @@ void parser___parser_prod___AGtMethid___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AGtMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14186,6 +14380,7 @@ void parser___parser_prod___AGtMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AGtMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -14212,6 +14407,7 @@ void parser___parser_prod___ALlMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ALlMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -14230,6 +14426,7 @@ void parser___parser_prod___ALlMethid___init_allmethid(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___ALlMethid___init_allmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14267,6 +14464,7 @@ void parser___parser_prod___ALlMethid___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ALlMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14338,6 +14536,7 @@ void parser___parser_prod___ALlMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ALlMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -14364,6 +14563,7 @@ void parser___parser_prod___AGgMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AGgMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -14382,6 +14582,7 @@ void parser___parser_prod___AGgMethid___init_aggmethid(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___AGgMethid___init_aggmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14419,6 +14620,7 @@ void parser___parser_prod___AGgMethid___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AGgMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14490,6 +14692,7 @@ void parser___parser_prod___AGgMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AGgMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -14516,6 +14719,7 @@ void parser___parser_prod___ABraMethid___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ABraMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -14534,6 +14738,7 @@ void parser___parser_prod___ABraMethid___init_abramethid(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___ABraMethid___init_abramethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14586,6 +14791,7 @@ void parser___parser_prod___ABraMethid___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ABraMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14707,6 +14913,7 @@ void parser___parser_prod___ABraMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ABraMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14742,6 +14949,7 @@ void parser___parser_prod___AStarshipMethid___empty_init(val_t p0, int* init_tab
   fra.me.meth = LOCATE_parser___parser_prod___AStarshipMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -14760,6 +14968,7 @@ void parser___parser_prod___AStarshipMethid___init_astarshipmethid(val_t p0, val
   fra.me.meth = LOCATE_parser___parser_prod___AStarshipMethid___init_astarshipmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14797,6 +15006,7 @@ void parser___parser_prod___AStarshipMethid___replace_child(val_t p0, val_t p1, 
   fra.me.meth = LOCATE_parser___parser_prod___AStarshipMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14868,6 +15078,7 @@ void parser___parser_prod___AStarshipMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AStarshipMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -14894,6 +15105,7 @@ void parser___parser_prod___AAssignMethid___empty_init(val_t p0, int* init_table
   fra.me.meth = LOCATE_parser___parser_prod___AAssignMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -14912,6 +15124,7 @@ void parser___parser_prod___AAssignMethid___init_aassignmethid(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AAssignMethid___init_aassignmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -14964,6 +15177,7 @@ void parser___parser_prod___AAssignMethid___replace_child(val_t p0, val_t p1, va
   fra.me.meth = LOCATE_parser___parser_prod___AAssignMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15085,6 +15299,7 @@ void parser___parser_prod___AAssignMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAssignMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15120,6 +15335,7 @@ void parser___parser_prod___ABraassignMethid___empty_init(val_t p0, int* init_ta
   fra.me.meth = LOCATE_parser___parser_prod___ABraassignMethid___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -15138,6 +15354,7 @@ void parser___parser_prod___ABraassignMethid___init_abraassignmethid(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___ABraassignMethid___init_abraassignmethid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15205,6 +15422,7 @@ void parser___parser_prod___ABraassignMethid___replace_child(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___ABraassignMethid___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15376,6 +15594,7 @@ void parser___parser_prod___ABraassignMethid___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ABraassignMethid___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15419,6 +15638,7 @@ void parser___parser_prod___ASignature___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ASignature___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -15438,6 +15658,7 @@ void parser___parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___ASignature___init_asignature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15490,6 +15711,7 @@ void parser___parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val
     fra.me.meth = LOCATE_parser___parser_prod___ASignature___init_asignature;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -15527,6 +15749,7 @@ void parser___parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val
     fra.me.meth = LOCATE_parser___parser_prod___ASignature___init_asignature;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -15566,6 +15789,7 @@ void parser___parser_prod___ASignature___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ASignature___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15845,6 +16069,7 @@ void parser___parser_prod___ASignature___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ASignature___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -15907,6 +16132,7 @@ void parser___parser_prod___ASignature___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ASignature___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -15927,6 +16153,7 @@ void parser___parser_prod___ASignature___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ASignature___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -15948,6 +16175,7 @@ void parser___parser_prod___AParam___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AParam___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -15967,6 +16195,7 @@ void parser___parser_prod___AParam___init_aparam(val_t p0, val_t p1, val_t p2, v
   fra.me.meth = LOCATE_parser___parser_prod___AParam___init_aparam;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16056,6 +16285,7 @@ void parser___parser_prod___AParam___replace_child(val_t p0, val_t p1, val_t p2)
   fra.me.meth = LOCATE_parser___parser_prod___AParam___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16230,6 +16460,7 @@ void parser___parser_prod___AParam___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AParam___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16310,6 +16541,7 @@ void parser___parser_prod___AClosureDecl___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___AClosureDecl___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -16329,6 +16561,7 @@ void parser___parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AClosureDecl___init_aclosuredecl;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16448,6 +16681,7 @@ void parser___parser_prod___AClosureDecl___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AClosureDecl___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16722,6 +16956,7 @@ void parser___parser_prod___AClosureDecl___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AClosureDecl___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16818,6 +17053,7 @@ void parser___parser_prod___AType___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AType___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -16837,6 +17073,7 @@ void parser___parser_prod___AType___init_atype(val_t p0, val_t p1, val_t p2, val
   fra.me.meth = LOCATE_parser___parser_prod___AType___init_atype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -16904,6 +17141,7 @@ void parser___parser_prod___AType___init_atype(val_t p0, val_t p1, val_t p2, val
     fra.me.meth = LOCATE_parser___parser_prod___AType___init_atype;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -16943,6 +17181,7 @@ void parser___parser_prod___AType___replace_child(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_parser___parser_prod___AType___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17169,6 +17408,7 @@ void parser___parser_prod___AType___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AType___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17231,6 +17471,7 @@ void parser___parser_prod___AType___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AType___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -17252,6 +17493,7 @@ void parser___parser_prod___ALabel___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ALabel___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -17270,6 +17512,7 @@ void parser___parser_prod___ALabel___init_alabel(val_t p0, val_t p1, val_t p2, i
   fra.me.meth = LOCATE_parser___parser_prod___ALabel___init_alabel;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17322,6 +17565,7 @@ void parser___parser_prod___ALabel___replace_child(val_t p0, val_t p1, val_t p2)
   fra.me.meth = LOCATE_parser___parser_prod___ALabel___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17443,6 +17687,7 @@ void parser___parser_prod___ALabel___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ALabel___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17478,6 +17723,7 @@ void parser___parser_prod___ABlockExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ABlockExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -17495,6 +17741,7 @@ void parser___parser_prod___ABlockExpr___init_ablockexpr(val_t p0, val_t p1, int
   fra.me.meth = LOCATE_parser___parser_prod___ABlockExpr___init_ablockexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -17518,6 +17765,7 @@ void parser___parser_prod___ABlockExpr___init_ablockexpr(val_t p0, val_t p1, int
     fra.me.meth = LOCATE_parser___parser_prod___ABlockExpr___init_ablockexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -17557,6 +17805,7 @@ void parser___parser_prod___ABlockExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ABlockExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17681,6 +17930,7 @@ void parser___parser_prod___ABlockExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ABlockExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -17706,6 +17956,7 @@ void parser___parser_prod___ABlockExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ABlockExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -17727,6 +17978,7 @@ void parser___parser_prod___AVardeclExpr___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___AVardeclExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -17746,6 +17998,7 @@ void parser___parser_prod___AVardeclExpr___init_avardeclexpr(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AVardeclExpr___init_avardeclexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -17876,6 +18129,7 @@ void parser___parser_prod___AVardeclExpr___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AVardeclExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18151,6 +18405,7 @@ void parser___parser_prod___AVardeclExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AVardeclExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18264,6 +18519,7 @@ void parser___parser_prod___AReturnExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AReturnExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -18283,6 +18539,7 @@ void parser___parser_prod___AReturnExpr___init_areturnexpr(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AReturnExpr___init_areturnexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18354,6 +18611,7 @@ void parser___parser_prod___AReturnExpr___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AReturnExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18478,6 +18736,7 @@ void parser___parser_prod___AReturnExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AReturnExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18550,6 +18809,7 @@ void parser___parser_prod___ABreakExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ABreakExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -18569,6 +18829,7 @@ void parser___parser_prod___ABreakExpr___init_abreakexpr(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___ABreakExpr___init_abreakexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18658,6 +18919,7 @@ void parser___parser_prod___ABreakExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ABreakExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18832,6 +19094,7 @@ void parser___parser_prod___ABreakExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ABreakExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18912,6 +19175,7 @@ void parser___parser_prod___AAbortExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AAbortExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -18930,6 +19194,7 @@ void parser___parser_prod___AAbortExpr___init_aabortexpr(val_t p0, val_t p1, int
   fra.me.meth = LOCATE_parser___parser_prod___AAbortExpr___init_aabortexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -18967,6 +19232,7 @@ void parser___parser_prod___AAbortExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AAbortExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19038,6 +19304,7 @@ void parser___parser_prod___AAbortExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAbortExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -19064,6 +19331,7 @@ void parser___parser_prod___AContinueExpr___empty_init(val_t p0, int* init_table
   fra.me.meth = LOCATE_parser___parser_prod___AContinueExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -19083,6 +19351,7 @@ void parser___parser_prod___AContinueExpr___init_acontinueexpr(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AContinueExpr___init_acontinueexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19180,6 +19449,7 @@ void parser___parser_prod___AContinueExpr___replace_child(val_t p0, val_t p1, va
   fra.me.meth = LOCATE_parser___parser_prod___AContinueExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19355,6 +19625,7 @@ void parser___parser_prod___AContinueExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AContinueExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19452,6 +19723,7 @@ void parser___parser_prod___ADoExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ADoExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -19471,6 +19743,7 @@ void parser___parser_prod___ADoExpr___init_adoexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___ADoExpr___init_adoexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19560,6 +19833,7 @@ void parser___parser_prod___ADoExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___ADoExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19734,6 +20008,7 @@ void parser___parser_prod___ADoExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ADoExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19814,6 +20089,7 @@ void parser___parser_prod___AIfExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AIfExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -19833,6 +20109,7 @@ void parser___parser_prod___AIfExpr___init_aifexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___AIfExpr___init_aifexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -19937,6 +20214,7 @@ void parser___parser_prod___AIfExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___AIfExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20161,6 +20439,7 @@ void parser___parser_prod___AIfExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AIfExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20249,6 +20528,7 @@ void parser___parser_prod___AIfexprExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AIfexprExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -20267,6 +20547,7 @@ void parser___parser_prod___AIfexprExpr___init_aifexprexpr(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AIfexprExpr___init_aifexprexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20379,6 +20660,7 @@ void parser___parser_prod___AIfexprExpr___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AIfexprExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20700,6 +20982,7 @@ void parser___parser_prod___AIfexprExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AIfexprExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20767,6 +21050,7 @@ void parser___parser_prod___AWhileExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AWhileExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -20786,6 +21070,7 @@ void parser___parser_prod___AWhileExpr___init_awhileexpr(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AWhileExpr___init_awhileexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -20905,6 +21190,7 @@ void parser___parser_prod___AWhileExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AWhileExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21179,6 +21465,7 @@ void parser___parser_prod___AWhileExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AWhileExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21275,6 +21562,7 @@ void parser___parser_prod___ALoopExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ALoopExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -21294,6 +21582,7 @@ void parser___parser_prod___ALoopExpr___init_aloopexpr(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ALoopExpr___init_aloopexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21383,6 +21672,7 @@ void parser___parser_prod___ALoopExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ALoopExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21557,6 +21847,7 @@ void parser___parser_prod___ALoopExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ALoopExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21637,6 +21928,7 @@ void parser___parser_prod___AForExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AForExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -21656,6 +21948,7 @@ void parser___parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AForExpr___init_aforexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -21779,6 +22072,7 @@ void parser___parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p
     fra.me.meth = LOCATE_parser___parser_prod___AForExpr___init_aforexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -21818,6 +22112,7 @@ void parser___parser_prod___AForExpr___replace_child(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AForExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22195,6 +22490,7 @@ void parser___parser_prod___AForExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AForExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22298,6 +22594,7 @@ void parser___parser_prod___AForExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AForExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -22319,6 +22616,7 @@ void parser___parser_prod___AAssertExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AAssertExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -22338,6 +22636,7 @@ void parser___parser_prod___AAssertExpr___init_aassertexpr(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AAssertExpr___init_aassertexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22442,6 +22741,7 @@ void parser___parser_prod___AAssertExpr___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AAssertExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22666,6 +22966,7 @@ void parser___parser_prod___AAssertExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAssertExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22754,6 +23055,7 @@ void parser___parser_prod___AOnceExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AOnceExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -22772,6 +23074,7 @@ void parser___parser_prod___AOnceExpr___init_aonceexpr(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AOnceExpr___init_aonceexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22824,6 +23127,7 @@ void parser___parser_prod___AOnceExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AOnceExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22945,6 +23249,7 @@ void parser___parser_prod___AOnceExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AOnceExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -22980,6 +23285,7 @@ void parser___parser_prod___ASendExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ASendExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -22998,6 +23304,7 @@ void parser___parser_prod___ASendExpr___init_asendexpr(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___ASendExpr___init_asendexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23035,6 +23342,7 @@ void parser___parser_prod___ASendExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ASendExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23106,6 +23414,7 @@ void parser___parser_prod___ASendExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ASendExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -23132,6 +23441,7 @@ void parser___parser_prod___ABinopExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ABinopExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -23150,6 +23460,7 @@ void parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___ABinopExpr___init_abinopexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23202,6 +23513,7 @@ void parser___parser_prod___ABinopExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ABinopExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23323,6 +23635,7 @@ void parser___parser_prod___ABinopExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ABinopExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23358,6 +23671,7 @@ void parser___parser_prod___AOrExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AOrExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -23376,6 +23690,7 @@ void parser___parser_prod___AOrExpr___init_aorexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___AOrExpr___init_aorexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23428,6 +23743,7 @@ void parser___parser_prod___AOrExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___AOrExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23549,6 +23865,7 @@ void parser___parser_prod___AOrExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AOrExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23584,6 +23901,7 @@ void parser___parser_prod___AAndExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AAndExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -23602,6 +23920,7 @@ void parser___parser_prod___AAndExpr___init_aandexpr(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AAndExpr___init_aandexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23654,6 +23973,7 @@ void parser___parser_prod___AAndExpr___replace_child(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AAndExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23775,6 +24095,7 @@ void parser___parser_prod___AAndExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAndExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23810,6 +24131,7 @@ void parser___parser_prod___AOrElseExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AOrElseExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -23828,6 +24150,7 @@ void parser___parser_prod___AOrElseExpr___init_aorelseexpr(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AOrElseExpr___init_aorelseexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -23880,6 +24203,7 @@ void parser___parser_prod___AOrElseExpr___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AOrElseExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24001,6 +24325,7 @@ void parser___parser_prod___AOrElseExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AOrElseExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24036,6 +24361,7 @@ void parser___parser_prod___ANotExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ANotExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -24054,6 +24380,7 @@ void parser___parser_prod___ANotExpr___init_anotexpr(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___ANotExpr___init_anotexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24106,6 +24433,7 @@ void parser___parser_prod___ANotExpr___replace_child(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___ANotExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24227,6 +24555,7 @@ void parser___parser_prod___ANotExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ANotExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24262,6 +24591,7 @@ void parser___parser_prod___AEqExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AEqExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -24280,6 +24610,7 @@ void parser___parser_prod___AEqExpr___init_aeqexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___AEqExpr___init_aeqexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24332,6 +24663,7 @@ void parser___parser_prod___AEqExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___AEqExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24453,6 +24785,7 @@ void parser___parser_prod___AEqExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AEqExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24488,6 +24821,7 @@ void parser___parser_prod___AEeExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AEeExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -24506,6 +24840,7 @@ void parser___parser_prod___AEeExpr___init_aeeexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___AEeExpr___init_aeeexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24558,6 +24893,7 @@ void parser___parser_prod___AEeExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___AEeExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24679,6 +25015,7 @@ void parser___parser_prod___AEeExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AEeExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24714,6 +25051,7 @@ void parser___parser_prod___ANeExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ANeExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -24732,6 +25070,7 @@ void parser___parser_prod___ANeExpr___init_aneexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___ANeExpr___init_aneexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24784,6 +25123,7 @@ void parser___parser_prod___ANeExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___ANeExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24905,6 +25245,7 @@ void parser___parser_prod___ANeExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ANeExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -24940,6 +25281,7 @@ void parser___parser_prod___ALtExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ALtExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -24958,6 +25300,7 @@ void parser___parser_prod___ALtExpr___init_altexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___ALtExpr___init_altexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25010,6 +25353,7 @@ void parser___parser_prod___ALtExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___ALtExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25131,6 +25475,7 @@ void parser___parser_prod___ALtExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ALtExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25166,6 +25511,7 @@ void parser___parser_prod___ALeExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ALeExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -25184,6 +25530,7 @@ void parser___parser_prod___ALeExpr___init_aleexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___ALeExpr___init_aleexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25236,6 +25583,7 @@ void parser___parser_prod___ALeExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___ALeExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25357,6 +25705,7 @@ void parser___parser_prod___ALeExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ALeExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25392,6 +25741,7 @@ void parser___parser_prod___ALlExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ALlExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -25410,6 +25760,7 @@ void parser___parser_prod___ALlExpr___init_allexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___ALlExpr___init_allexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25462,6 +25813,7 @@ void parser___parser_prod___ALlExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___ALlExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25583,6 +25935,7 @@ void parser___parser_prod___ALlExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ALlExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25618,6 +25971,7 @@ void parser___parser_prod___AGtExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AGtExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -25636,6 +25990,7 @@ void parser___parser_prod___AGtExpr___init_agtexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___AGtExpr___init_agtexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25688,6 +26043,7 @@ void parser___parser_prod___AGtExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___AGtExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25809,6 +26165,7 @@ void parser___parser_prod___AGtExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AGtExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25844,6 +26201,7 @@ void parser___parser_prod___AGeExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AGeExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -25862,6 +26220,7 @@ void parser___parser_prod___AGeExpr___init_ageexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___AGeExpr___init_ageexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -25914,6 +26273,7 @@ void parser___parser_prod___AGeExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___AGeExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26035,6 +26395,7 @@ void parser___parser_prod___AGeExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AGeExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26070,6 +26431,7 @@ void parser___parser_prod___AGgExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AGgExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -26088,6 +26450,7 @@ void parser___parser_prod___AGgExpr___init_aggexpr(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_parser___parser_prod___AGgExpr___init_aggexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26140,6 +26503,7 @@ void parser___parser_prod___AGgExpr___replace_child(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_parser___parser_prod___AGgExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26261,6 +26625,7 @@ void parser___parser_prod___AGgExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AGgExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26296,6 +26661,7 @@ void parser___parser_prod___AIsaExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AIsaExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -26314,6 +26680,7 @@ void parser___parser_prod___AIsaExpr___init_aisaexpr(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AIsaExpr___init_aisaexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26366,6 +26733,7 @@ void parser___parser_prod___AIsaExpr___replace_child(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AIsaExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26487,6 +26855,7 @@ void parser___parser_prod___AIsaExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AIsaExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26522,6 +26891,7 @@ void parser___parser_prod___APlusExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___APlusExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -26540,6 +26910,7 @@ void parser___parser_prod___APlusExpr___init_aplusexpr(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___APlusExpr___init_aplusexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26592,6 +26963,7 @@ void parser___parser_prod___APlusExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___APlusExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26713,6 +27085,7 @@ void parser___parser_prod___APlusExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___APlusExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26748,6 +27121,7 @@ void parser___parser_prod___AMinusExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AMinusExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -26766,6 +27140,7 @@ void parser___parser_prod___AMinusExpr___init_aminusexpr(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AMinusExpr___init_aminusexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26818,6 +27193,7 @@ void parser___parser_prod___AMinusExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AMinusExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26939,6 +27315,7 @@ void parser___parser_prod___AMinusExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AMinusExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -26974,6 +27351,7 @@ void parser___parser_prod___AStarshipExpr___empty_init(val_t p0, int* init_table
   fra.me.meth = LOCATE_parser___parser_prod___AStarshipExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -26992,6 +27370,7 @@ void parser___parser_prod___AStarshipExpr___init_astarshipexpr(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AStarshipExpr___init_astarshipexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27044,6 +27423,7 @@ void parser___parser_prod___AStarshipExpr___replace_child(val_t p0, val_t p1, va
   fra.me.meth = LOCATE_parser___parser_prod___AStarshipExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27165,6 +27545,7 @@ void parser___parser_prod___AStarshipExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AStarshipExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27200,6 +27581,7 @@ void parser___parser_prod___AStarExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AStarExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -27218,6 +27600,7 @@ void parser___parser_prod___AStarExpr___init_astarexpr(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AStarExpr___init_astarexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27270,6 +27653,7 @@ void parser___parser_prod___AStarExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AStarExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27391,6 +27775,7 @@ void parser___parser_prod___AStarExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AStarExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27426,6 +27811,7 @@ void parser___parser_prod___ASlashExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ASlashExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -27444,6 +27830,7 @@ void parser___parser_prod___ASlashExpr___init_aslashexpr(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___ASlashExpr___init_aslashexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27496,6 +27883,7 @@ void parser___parser_prod___ASlashExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ASlashExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27617,6 +28005,7 @@ void parser___parser_prod___ASlashExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ASlashExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27652,6 +28041,7 @@ void parser___parser_prod___APercentExpr___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___APercentExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -27670,6 +28060,7 @@ void parser___parser_prod___APercentExpr___init_apercentexpr(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___APercentExpr___init_apercentexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27722,6 +28113,7 @@ void parser___parser_prod___APercentExpr___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___APercentExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27843,6 +28235,7 @@ void parser___parser_prod___APercentExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___APercentExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27878,6 +28271,7 @@ void parser___parser_prod___AUminusExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AUminusExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -27896,6 +28290,7 @@ void parser___parser_prod___AUminusExpr___init_auminusexpr(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AUminusExpr___init_auminusexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -27948,6 +28343,7 @@ void parser___parser_prod___AUminusExpr___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AUminusExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28069,6 +28465,7 @@ void parser___parser_prod___AUminusExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AUminusExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28104,6 +28501,7 @@ void parser___parser_prod___ANewExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ANewExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -28123,6 +28521,7 @@ void parser___parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___ANewExpr___init_anewexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28205,6 +28604,7 @@ void parser___parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p
     fra.me.meth = LOCATE_parser___parser_prod___ANewExpr___init_anewexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -28244,6 +28644,7 @@ void parser___parser_prod___ANewExpr___replace_child(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___ANewExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28520,6 +28921,7 @@ void parser___parser_prod___ANewExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ANewExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28590,6 +28992,7 @@ void parser___parser_prod___ANewExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ANewExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -28611,6 +29014,7 @@ void parser___parser_prod___AAttrExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AAttrExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -28629,6 +29033,7 @@ void parser___parser_prod___AAttrExpr___init_aattrexpr(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AAttrExpr___init_aattrexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28681,6 +29086,7 @@ void parser___parser_prod___AAttrExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AAttrExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28802,6 +29208,7 @@ void parser___parser_prod___AAttrExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAttrExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28837,6 +29244,7 @@ void parser___parser_prod___AAttrAssignExpr___empty_init(val_t p0, int* init_tab
   fra.me.meth = LOCATE_parser___parser_prod___AAttrAssignExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -28855,6 +29263,7 @@ void parser___parser_prod___AAttrAssignExpr___init_aattrassignexpr(val_t p0, val
   fra.me.meth = LOCATE_parser___parser_prod___AAttrAssignExpr___init_aattrassignexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -28937,6 +29346,7 @@ void parser___parser_prod___AAttrAssignExpr___replace_child(val_t p0, val_t p1, 
   fra.me.meth = LOCATE_parser___parser_prod___AAttrAssignExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29158,6 +29568,7 @@ void parser___parser_prod___AAttrAssignExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAttrAssignExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29209,6 +29620,7 @@ void parser___parser_prod___AAttrReassignExpr___empty_init(val_t p0, int* init_t
   fra.me.meth = LOCATE_parser___parser_prod___AAttrReassignExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -29227,6 +29639,7 @@ void parser___parser_prod___AAttrReassignExpr___init_aattrreassignexpr(val_t p0,
   fra.me.meth = LOCATE_parser___parser_prod___AAttrReassignExpr___init_aattrreassignexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29309,6 +29722,7 @@ void parser___parser_prod___AAttrReassignExpr___replace_child(val_t p0, val_t p1
   fra.me.meth = LOCATE_parser___parser_prod___AAttrReassignExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29530,6 +29944,7 @@ void parser___parser_prod___AAttrReassignExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAttrReassignExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29581,6 +29996,7 @@ void parser___parser_prod___ACallExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ACallExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -29599,6 +30015,7 @@ void parser___parser_prod___ACallExpr___init_acallexpr(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ACallExpr___init_acallexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -29658,6 +30075,7 @@ void parser___parser_prod___ACallExpr___init_acallexpr(val_t p0, val_t p1, val_t
     fra.me.meth = LOCATE_parser___parser_prod___ACallExpr___init_acallexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -29695,6 +30113,7 @@ void parser___parser_prod___ACallExpr___init_acallexpr(val_t p0, val_t p1, val_t
     fra.me.meth = LOCATE_parser___parser_prod___ACallExpr___init_acallexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -29734,6 +30153,7 @@ void parser___parser_prod___ACallExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ACallExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30061,6 +30481,7 @@ void parser___parser_prod___ACallExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ACallExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30111,6 +30532,7 @@ void parser___parser_prod___ACallExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ACallExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -30131,6 +30553,7 @@ void parser___parser_prod___ACallExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ACallExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -30152,6 +30575,7 @@ void parser___parser_prod___ACallAssignExpr___empty_init(val_t p0, int* init_tab
   fra.me.meth = LOCATE_parser___parser_prod___ACallAssignExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -30170,6 +30594,7 @@ void parser___parser_prod___ACallAssignExpr___init_acallassignexpr(val_t p0, val
   fra.me.meth = LOCATE_parser___parser_prod___ACallAssignExpr___init_acallassignexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30256,6 +30681,7 @@ void parser___parser_prod___ACallAssignExpr___init_acallassignexpr(val_t p0, val
     fra.me.meth = LOCATE_parser___parser_prod___ACallAssignExpr___init_acallassignexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -30295,6 +30721,7 @@ void parser___parser_prod___ACallAssignExpr___replace_child(val_t p0, val_t p1, 
   fra.me.meth = LOCATE_parser___parser_prod___ACallAssignExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30619,6 +31046,7 @@ void parser___parser_prod___ACallAssignExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ACallAssignExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30677,6 +31105,7 @@ void parser___parser_prod___ACallAssignExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ACallAssignExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -30698,6 +31127,7 @@ void parser___parser_prod___ACallReassignExpr___empty_init(val_t p0, int* init_t
   fra.me.meth = LOCATE_parser___parser_prod___ACallReassignExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -30716,6 +31146,7 @@ void parser___parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t p0,
   fra.me.meth = LOCATE_parser___parser_prod___ACallReassignExpr___init_acallreassignexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -30802,6 +31233,7 @@ void parser___parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t p0,
     fra.me.meth = LOCATE_parser___parser_prod___ACallReassignExpr___init_acallreassignexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -30841,6 +31273,7 @@ void parser___parser_prod___ACallReassignExpr___replace_child(val_t p0, val_t p1
   fra.me.meth = LOCATE_parser___parser_prod___ACallReassignExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31165,6 +31598,7 @@ void parser___parser_prod___ACallReassignExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ACallReassignExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31223,6 +31657,7 @@ void parser___parser_prod___ACallReassignExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ACallReassignExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -31244,6 +31679,7 @@ void parser___parser_prod___ASuperExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ASuperExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -31263,6 +31699,7 @@ void parser___parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___ASuperExpr___init_asuperexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31330,6 +31767,7 @@ void parser___parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val
     fra.me.meth = LOCATE_parser___parser_prod___ASuperExpr___init_asuperexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -31369,6 +31807,7 @@ void parser___parser_prod___ASuperExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ASuperExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31595,6 +32034,7 @@ void parser___parser_prod___ASuperExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ASuperExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31657,6 +32097,7 @@ void parser___parser_prod___ASuperExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ASuperExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -31678,6 +32119,7 @@ void parser___parser_prod___AInitExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AInitExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -31696,6 +32138,7 @@ void parser___parser_prod___AInitExpr___init_ainitexpr(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AInitExpr___init_ainitexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -31752,6 +32195,7 @@ void parser___parser_prod___AInitExpr___init_ainitexpr(val_t p0, val_t p1, val_t
     fra.me.meth = LOCATE_parser___parser_prod___AInitExpr___init_ainitexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -31791,6 +32235,7 @@ void parser___parser_prod___AInitExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AInitExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32015,6 +32460,7 @@ void parser___parser_prod___AInitExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AInitExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32057,6 +32503,7 @@ void parser___parser_prod___AInitExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AInitExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -32078,6 +32525,7 @@ void parser___parser_prod___ABraExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ABraExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -32096,6 +32544,7 @@ void parser___parser_prod___ABraExpr___init_abraexpr(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___ABraExpr___init_abraexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32140,6 +32589,7 @@ void parser___parser_prod___ABraExpr___init_abraexpr(val_t p0, val_t p1, val_t p
     fra.me.meth = LOCATE_parser___parser_prod___ABraExpr___init_abraexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -32177,6 +32627,7 @@ void parser___parser_prod___ABraExpr___init_abraexpr(val_t p0, val_t p1, val_t p
     fra.me.meth = LOCATE_parser___parser_prod___ABraExpr___init_abraexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -32216,6 +32667,7 @@ void parser___parser_prod___ABraExpr___replace_child(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___ABraExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32493,6 +32945,7 @@ void parser___parser_prod___ABraExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ABraExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32535,6 +32988,7 @@ void parser___parser_prod___ABraExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ABraExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -32555,6 +33009,7 @@ void parser___parser_prod___ABraExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ABraExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -32576,6 +33031,7 @@ void parser___parser_prod___ABraAssignExpr___empty_init(val_t p0, int* init_tabl
   fra.me.meth = LOCATE_parser___parser_prod___ABraAssignExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -32594,6 +33050,7 @@ void parser___parser_prod___ABraAssignExpr___init_abraassignexpr(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ABraAssignExpr___init_abraassignexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32665,6 +33122,7 @@ void parser___parser_prod___ABraAssignExpr___init_abraassignexpr(val_t p0, val_t
     fra.me.meth = LOCATE_parser___parser_prod___ABraAssignExpr___init_abraassignexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -32704,6 +33162,7 @@ void parser___parser_prod___ABraAssignExpr___replace_child(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___ABraAssignExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -32978,6 +33437,7 @@ void parser___parser_prod___ABraAssignExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ABraAssignExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33028,6 +33488,7 @@ void parser___parser_prod___ABraAssignExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ABraAssignExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -33049,6 +33510,7 @@ void parser___parser_prod___ABraReassignExpr___empty_init(val_t p0, int* init_ta
   fra.me.meth = LOCATE_parser___parser_prod___ABraReassignExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -33067,6 +33529,7 @@ void parser___parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___ABraReassignExpr___init_abrareassignexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33138,6 +33601,7 @@ void parser___parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t p0, v
     fra.me.meth = LOCATE_parser___parser_prod___ABraReassignExpr___init_abrareassignexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -33177,6 +33641,7 @@ void parser___parser_prod___ABraReassignExpr___replace_child(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___ABraReassignExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33451,6 +33916,7 @@ void parser___parser_prod___ABraReassignExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ABraReassignExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33501,6 +33967,7 @@ void parser___parser_prod___ABraReassignExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ABraReassignExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -33522,6 +33989,7 @@ void parser___parser_prod___AClosureCallExpr___empty_init(val_t p0, int* init_ta
   fra.me.meth = LOCATE_parser___parser_prod___AClosureCallExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -33540,6 +34008,7 @@ void parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33584,6 +34053,7 @@ void parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, v
     fra.me.meth = LOCATE_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -33621,6 +34091,7 @@ void parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, v
     fra.me.meth = LOCATE_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -33660,6 +34131,7 @@ void parser___parser_prod___AClosureCallExpr___replace_child(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AClosureCallExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33937,6 +34409,7 @@ void parser___parser_prod___AClosureCallExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AClosureCallExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -33979,6 +34452,7 @@ void parser___parser_prod___AClosureCallExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AClosureCallExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -33999,6 +34473,7 @@ void parser___parser_prod___AClosureCallExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AClosureCallExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -34020,6 +34495,7 @@ void parser___parser_prod___AVarExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AVarExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -34038,6 +34514,7 @@ void parser___parser_prod___AVarExpr___init_avarexpr(val_t p0, val_t p1, int* in
   fra.me.meth = LOCATE_parser___parser_prod___AVarExpr___init_avarexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34075,6 +34552,7 @@ void parser___parser_prod___AVarExpr___replace_child(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AVarExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34146,6 +34624,7 @@ void parser___parser_prod___AVarExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AVarExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -34172,6 +34651,7 @@ void parser___parser_prod___AVarAssignExpr___empty_init(val_t p0, int* init_tabl
   fra.me.meth = LOCATE_parser___parser_prod___AVarAssignExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -34190,6 +34670,7 @@ void parser___parser_prod___AVarAssignExpr___init_avarassignexpr(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AVarAssignExpr___init_avarassignexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34257,6 +34738,7 @@ void parser___parser_prod___AVarAssignExpr___replace_child(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AVarAssignExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34428,6 +34910,7 @@ void parser___parser_prod___AVarAssignExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AVarAssignExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34471,6 +34954,7 @@ void parser___parser_prod___AVarReassignExpr___empty_init(val_t p0, int* init_ta
   fra.me.meth = LOCATE_parser___parser_prod___AVarReassignExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -34489,6 +34973,7 @@ void parser___parser_prod___AVarReassignExpr___init_avarreassignexpr(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___AVarReassignExpr___init_avarreassignexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34556,6 +35041,7 @@ void parser___parser_prod___AVarReassignExpr___replace_child(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AVarReassignExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34727,6 +35213,7 @@ void parser___parser_prod___AVarReassignExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AVarReassignExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34770,6 +35257,7 @@ void parser___parser_prod___ARangeExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ARangeExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -34788,6 +35276,7 @@ void parser___parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___ARangeExpr___init_arangeexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34840,6 +35329,7 @@ void parser___parser_prod___ARangeExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ARangeExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34961,6 +35451,7 @@ void parser___parser_prod___ARangeExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ARangeExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -34996,6 +35487,7 @@ void parser___parser_prod___ACrangeExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ACrangeExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -35014,6 +35506,7 @@ void parser___parser_prod___ACrangeExpr___init_acrangeexpr(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___ACrangeExpr___init_acrangeexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35066,6 +35559,7 @@ void parser___parser_prod___ACrangeExpr___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___ACrangeExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35187,6 +35681,7 @@ void parser___parser_prod___ACrangeExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ACrangeExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35222,6 +35717,7 @@ void parser___parser_prod___AOrangeExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AOrangeExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -35240,6 +35736,7 @@ void parser___parser_prod___AOrangeExpr___init_aorangeexpr(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AOrangeExpr___init_aorangeexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35292,6 +35789,7 @@ void parser___parser_prod___AOrangeExpr___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AOrangeExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35413,6 +35911,7 @@ void parser___parser_prod___AOrangeExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AOrangeExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35448,6 +35947,7 @@ void parser___parser_prod___AArrayExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AArrayExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -35465,6 +35965,7 @@ void parser___parser_prod___AArrayExpr___init_aarrayexpr(val_t p0, val_t p1, int
   fra.me.meth = LOCATE_parser___parser_prod___AArrayExpr___init_aarrayexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -35488,6 +35989,7 @@ void parser___parser_prod___AArrayExpr___init_aarrayexpr(val_t p0, val_t p1, int
     fra.me.meth = LOCATE_parser___parser_prod___AArrayExpr___init_aarrayexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -35527,6 +36029,7 @@ void parser___parser_prod___AArrayExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AArrayExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35651,6 +36154,7 @@ void parser___parser_prod___AArrayExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AArrayExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -35676,6 +36180,7 @@ void parser___parser_prod___AArrayExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AArrayExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -35697,6 +36202,7 @@ void parser___parser_prod___ASelfExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ASelfExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -35715,6 +36221,7 @@ void parser___parser_prod___ASelfExpr___init_aselfexpr(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___ASelfExpr___init_aselfexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35752,6 +36259,7 @@ void parser___parser_prod___ASelfExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ASelfExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35823,6 +36331,7 @@ void parser___parser_prod___ASelfExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ASelfExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -35844,6 +36353,7 @@ void parser___parser_prod___AImplicitSelfExpr___empty_init(val_t p0, int* init_t
   fra.me.meth = LOCATE_parser___parser_prod___AImplicitSelfExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -35861,6 +36371,7 @@ void parser___parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(val_t p0,
   fra.me.meth = LOCATE_parser___parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser_prod.nit:6643 */
@@ -35878,6 +36389,7 @@ void parser___parser_prod___AImplicitSelfExpr___replace_child(val_t p0, val_t p1
   fra.me.meth = LOCATE_parser___parser_prod___AImplicitSelfExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35896,6 +36408,7 @@ void parser___parser_prod___AImplicitSelfExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AImplicitSelfExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -35914,6 +36427,7 @@ void parser___parser_prod___ATrueExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ATrueExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -35932,6 +36446,7 @@ void parser___parser_prod___ATrueExpr___init_atrueexpr(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___ATrueExpr___init_atrueexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -35969,6 +36484,7 @@ void parser___parser_prod___ATrueExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ATrueExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36040,6 +36556,7 @@ void parser___parser_prod___ATrueExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ATrueExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -36066,6 +36583,7 @@ void parser___parser_prod___AFalseExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AFalseExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -36084,6 +36602,7 @@ void parser___parser_prod___AFalseExpr___init_afalseexpr(val_t p0, val_t p1, int
   fra.me.meth = LOCATE_parser___parser_prod___AFalseExpr___init_afalseexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36121,6 +36640,7 @@ void parser___parser_prod___AFalseExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AFalseExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36192,6 +36712,7 @@ void parser___parser_prod___AFalseExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AFalseExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -36218,6 +36739,7 @@ void parser___parser_prod___ANullExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ANullExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -36236,6 +36758,7 @@ void parser___parser_prod___ANullExpr___init_anullexpr(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___ANullExpr___init_anullexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36273,6 +36796,7 @@ void parser___parser_prod___ANullExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ANullExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36344,6 +36868,7 @@ void parser___parser_prod___ANullExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ANullExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -36370,6 +36895,7 @@ void parser___parser_prod___AIntExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AIntExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -36388,6 +36914,7 @@ void parser___parser_prod___AIntExpr___init_aintexpr(val_t p0, val_t p1, int* in
   fra.me.meth = LOCATE_parser___parser_prod___AIntExpr___init_aintexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36425,6 +36952,7 @@ void parser___parser_prod___AIntExpr___replace_child(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AIntExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36496,6 +37024,7 @@ void parser___parser_prod___AIntExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AIntExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -36522,6 +37051,7 @@ void parser___parser_prod___AFloatExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AFloatExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -36540,6 +37070,7 @@ void parser___parser_prod___AFloatExpr___init_afloatexpr(val_t p0, val_t p1, int
   fra.me.meth = LOCATE_parser___parser_prod___AFloatExpr___init_afloatexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36577,6 +37108,7 @@ void parser___parser_prod___AFloatExpr___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AFloatExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36648,6 +37180,7 @@ void parser___parser_prod___AFloatExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AFloatExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -36674,6 +37207,7 @@ void parser___parser_prod___ACharExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ACharExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -36692,6 +37226,7 @@ void parser___parser_prod___ACharExpr___init_acharexpr(val_t p0, val_t p1, int* 
   fra.me.meth = LOCATE_parser___parser_prod___ACharExpr___init_acharexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36729,6 +37264,7 @@ void parser___parser_prod___ACharExpr___replace_child(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___ACharExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36800,6 +37336,7 @@ void parser___parser_prod___ACharExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ACharExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -36826,6 +37363,7 @@ void parser___parser_prod___AStringExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AStringExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -36844,6 +37382,7 @@ void parser___parser_prod___AStringExpr___init_astringexpr(val_t p0, val_t p1, i
   fra.me.meth = LOCATE_parser___parser_prod___AStringExpr___init_astringexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36881,6 +37420,7 @@ void parser___parser_prod___AStringExpr___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AStringExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -36952,6 +37492,7 @@ void parser___parser_prod___AStringExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AStringExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -36978,6 +37519,7 @@ void parser___parser_prod___AStartStringExpr___empty_init(val_t p0, int* init_ta
   fra.me.meth = LOCATE_parser___parser_prod___AStartStringExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -36996,6 +37538,7 @@ void parser___parser_prod___AStartStringExpr___init_astartstringexpr(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___AStartStringExpr___init_astartstringexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -37033,6 +37576,7 @@ void parser___parser_prod___AStartStringExpr___replace_child(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AStartStringExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -37104,6 +37648,7 @@ void parser___parser_prod___AStartStringExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AStartStringExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -37130,6 +37675,7 @@ void parser___parser_prod___AMidStringExpr___empty_init(val_t p0, int* init_tabl
   fra.me.meth = LOCATE_parser___parser_prod___AMidStringExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -37148,6 +37694,7 @@ void parser___parser_prod___AMidStringExpr___init_amidstringexpr(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AMidStringExpr___init_amidstringexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -37185,6 +37732,7 @@ void parser___parser_prod___AMidStringExpr___replace_child(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AMidStringExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -37256,6 +37804,7 @@ void parser___parser_prod___AMidStringExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AMidStringExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -37282,6 +37831,7 @@ void parser___parser_prod___AEndStringExpr___empty_init(val_t p0, int* init_tabl
   fra.me.meth = LOCATE_parser___parser_prod___AEndStringExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -37300,6 +37850,7 @@ void parser___parser_prod___AEndStringExpr___init_aendstringexpr(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AEndStringExpr___init_aendstringexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -37337,6 +37888,7 @@ void parser___parser_prod___AEndStringExpr___replace_child(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AEndStringExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -37408,6 +37960,7 @@ void parser___parser_prod___AEndStringExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AEndStringExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -37434,6 +37987,7 @@ void parser___parser_prod___ASuperstringExpr___empty_init(val_t p0, int* init_ta
   fra.me.meth = LOCATE_parser___parser_prod___ASuperstringExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -37451,6 +38005,7 @@ void parser___parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___ASuperstringExpr___init_asuperstringexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -37474,6 +38029,7 @@ void parser___parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t p0, v
     fra.me.meth = LOCATE_parser___parser_prod___ASuperstringExpr___init_asuperstringexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -37513,6 +38069,7 @@ void parser___parser_prod___ASuperstringExpr___replace_child(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___ASuperstringExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -37637,6 +38194,7 @@ void parser___parser_prod___ASuperstringExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ASuperstringExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -37662,6 +38220,7 @@ void parser___parser_prod___ASuperstringExpr___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ASuperstringExpr___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -37683,6 +38242,7 @@ void parser___parser_prod___AParExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AParExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -37701,6 +38261,7 @@ void parser___parser_prod___AParExpr___init_aparexpr(val_t p0, val_t p1, int* in
   fra.me.meth = LOCATE_parser___parser_prod___AParExpr___init_aparexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -37738,6 +38299,7 @@ void parser___parser_prod___AParExpr___replace_child(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___AParExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -37809,6 +38371,7 @@ void parser___parser_prod___AParExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AParExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -37835,6 +38398,7 @@ void parser___parser_prod___AAsCastExpr___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AAsCastExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -37853,6 +38417,7 @@ void parser___parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AAsCastExpr___init_aascastexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -37920,6 +38485,7 @@ void parser___parser_prod___AAsCastExpr___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AAsCastExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -38091,6 +38657,7 @@ void parser___parser_prod___AAsCastExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAsCastExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -38134,6 +38701,7 @@ void parser___parser_prod___AAsNotnullExpr___empty_init(val_t p0, int* init_tabl
   fra.me.meth = LOCATE_parser___parser_prod___AAsNotnullExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -38152,6 +38720,7 @@ void parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -38234,6 +38803,7 @@ void parser___parser_prod___AAsNotnullExpr___replace_child(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AAsNotnullExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -38455,6 +39025,7 @@ void parser___parser_prod___AAsNotnullExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AAsNotnullExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -38506,6 +39077,7 @@ void parser___parser_prod___AIssetAttrExpr___empty_init(val_t p0, int* init_tabl
   fra.me.meth = LOCATE_parser___parser_prod___AIssetAttrExpr___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -38524,6 +39096,7 @@ void parser___parser_prod___AIssetAttrExpr___init_aissetattrexpr(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AIssetAttrExpr___init_aissetattrexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -38591,6 +39164,7 @@ void parser___parser_prod___AIssetAttrExpr___replace_child(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AIssetAttrExpr___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -38762,6 +39336,7 @@ void parser___parser_prod___AIssetAttrExpr___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AIssetAttrExpr___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -38805,6 +39380,7 @@ void parser___parser_prod___APlusAssignOp___empty_init(val_t p0, int* init_table
   fra.me.meth = LOCATE_parser___parser_prod___APlusAssignOp___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -38823,6 +39399,7 @@ void parser___parser_prod___APlusAssignOp___init_aplusassignop(val_t p0, val_t p
   fra.me.meth = LOCATE_parser___parser_prod___APlusAssignOp___init_aplusassignop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -38860,6 +39437,7 @@ void parser___parser_prod___APlusAssignOp___replace_child(val_t p0, val_t p1, va
   fra.me.meth = LOCATE_parser___parser_prod___APlusAssignOp___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -38931,6 +39509,7 @@ void parser___parser_prod___APlusAssignOp___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___APlusAssignOp___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -38957,6 +39536,7 @@ void parser___parser_prod___AMinusAssignOp___empty_init(val_t p0, int* init_tabl
   fra.me.meth = LOCATE_parser___parser_prod___AMinusAssignOp___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -38975,6 +39555,7 @@ void parser___parser_prod___AMinusAssignOp___init_aminusassignop(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AMinusAssignOp___init_aminusassignop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -39012,6 +39593,7 @@ void parser___parser_prod___AMinusAssignOp___replace_child(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AMinusAssignOp___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -39083,6 +39665,7 @@ void parser___parser_prod___AMinusAssignOp___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AMinusAssignOp___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -39109,6 +39692,7 @@ void parser___parser_prod___AClosureDef___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AClosureDef___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -39128,6 +39712,7 @@ void parser___parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AClosureDef___init_aclosuredef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -39262,6 +39847,7 @@ void parser___parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, v
     fra.me.meth = LOCATE_parser___parser_prod___AClosureDef___init_aclosuredef;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -39301,6 +39887,7 @@ void parser___parser_prod___AClosureDef___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AClosureDef___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -39679,6 +40266,7 @@ void parser___parser_prod___AClosureDef___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AClosureDef___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -39799,6 +40387,7 @@ void parser___parser_prod___AClosureDef___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AClosureDef___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -39820,6 +40409,7 @@ void parser___parser_prod___ASimpleClosureId___empty_init(val_t p0, int* init_ta
   fra.me.meth = LOCATE_parser___parser_prod___ASimpleClosureId___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -39838,6 +40428,7 @@ void parser___parser_prod___ASimpleClosureId___init_asimpleclosureid(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___ASimpleClosureId___init_asimpleclosureid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -39875,6 +40466,7 @@ void parser___parser_prod___ASimpleClosureId___replace_child(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___ASimpleClosureId___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -39946,6 +40538,7 @@ void parser___parser_prod___ASimpleClosureId___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ASimpleClosureId___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -39972,6 +40565,7 @@ void parser___parser_prod___ABreakClosureId___empty_init(val_t p0, int* init_tab
   fra.me.meth = LOCATE_parser___parser_prod___ABreakClosureId___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -39990,6 +40584,7 @@ void parser___parser_prod___ABreakClosureId___init_abreakclosureid(val_t p0, val
   fra.me.meth = LOCATE_parser___parser_prod___ABreakClosureId___init_abreakclosureid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -40027,6 +40622,7 @@ void parser___parser_prod___ABreakClosureId___replace_child(val_t p0, val_t p1, 
   fra.me.meth = LOCATE_parser___parser_prod___ABreakClosureId___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -40098,6 +40694,7 @@ void parser___parser_prod___ABreakClosureId___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ABreakClosureId___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -40124,6 +40721,7 @@ void parser___parser_prod___AModuleName___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AModuleName___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -40143,6 +40741,7 @@ void parser___parser_prod___AModuleName___init_amodulename(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_parser___parser_prod___AModuleName___init_amodulename;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -40210,6 +40809,7 @@ void parser___parser_prod___AModuleName___init_amodulename(val_t p0, val_t p1, v
     fra.me.meth = LOCATE_parser___parser_prod___AModuleName___init_amodulename;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -40249,6 +40849,7 @@ void parser___parser_prod___AModuleName___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AModuleName___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -40475,6 +41076,7 @@ void parser___parser_prod___AModuleName___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AModuleName___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -40537,6 +41139,7 @@ void parser___parser_prod___AModuleName___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AModuleName___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -40558,6 +41161,7 @@ void parser___parser_prod___AExternCalls___empty_init(val_t p0, int* init_table)
   fra.me.meth = LOCATE_parser___parser_prod___AExternCalls___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -40576,6 +41180,7 @@ void parser___parser_prod___AExternCalls___init_aexterncalls(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___AExternCalls___init_aexterncalls;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -40617,6 +41222,7 @@ void parser___parser_prod___AExternCalls___init_aexterncalls(val_t p0, val_t p1,
     fra.me.meth = LOCATE_parser___parser_prod___AExternCalls___init_aexterncalls;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -40656,6 +41262,7 @@ void parser___parser_prod___AExternCalls___replace_child(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AExternCalls___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -40830,6 +41437,7 @@ void parser___parser_prod___AExternCalls___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AExternCalls___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -40864,6 +41472,7 @@ void parser___parser_prod___AExternCalls___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AExternCalls___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -40885,6 +41494,7 @@ void parser___parser_prod___AExternCall___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AExternCall___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -40902,6 +41512,7 @@ void parser___parser_prod___AExternCall___init_aexterncall(val_t p0, int* init_t
   fra.me.meth = LOCATE_parser___parser_prod___AExternCall___init_aexterncall;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./parser//parser_prod.nit:7595 */
@@ -40919,6 +41530,7 @@ void parser___parser_prod___AExternCall___replace_child(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_parser___parser_prod___AExternCall___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -40937,6 +41549,7 @@ void parser___parser_prod___AExternCall___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AExternCall___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -40955,6 +41568,7 @@ void parser___parser_prod___ASuperExternCall___empty_init(val_t p0, int* init_ta
   fra.me.meth = LOCATE_parser___parser_prod___ASuperExternCall___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -40973,6 +41587,7 @@ void parser___parser_prod___ASuperExternCall___init_asuperexterncall(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___ASuperExternCall___init_asuperexterncall;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -41010,6 +41625,7 @@ void parser___parser_prod___ASuperExternCall___replace_child(val_t p0, val_t p1,
   fra.me.meth = LOCATE_parser___parser_prod___ASuperExternCall___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -41081,6 +41697,7 @@ void parser___parser_prod___ASuperExternCall___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ASuperExternCall___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -41107,6 +41724,7 @@ void parser___parser_prod___ALocalPropExternCall___empty_init(val_t p0, int* ini
   fra.me.meth = LOCATE_parser___parser_prod___ALocalPropExternCall___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -41125,6 +41743,7 @@ void parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall(val
   fra.me.meth = LOCATE_parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -41162,6 +41781,7 @@ void parser___parser_prod___ALocalPropExternCall___replace_child(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___ALocalPropExternCall___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -41233,6 +41853,7 @@ void parser___parser_prod___ALocalPropExternCall___visit_all(val_t p0, val_t p1)
   fra.me.meth = LOCATE_parser___parser_prod___ALocalPropExternCall___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -41259,6 +41880,7 @@ void parser___parser_prod___AFullPropExternCall___empty_init(val_t p0, int* init
   fra.me.meth = LOCATE_parser___parser_prod___AFullPropExternCall___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -41278,6 +41900,7 @@ void parser___parser_prod___AFullPropExternCall___init_afullpropexterncall(val_t
   fra.me.meth = LOCATE_parser___parser_prod___AFullPropExternCall___init_afullpropexterncall;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -41356,6 +41979,7 @@ void parser___parser_prod___AFullPropExternCall___replace_child(val_t p0, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AFullPropExternCall___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -41529,6 +42153,7 @@ void parser___parser_prod___AFullPropExternCall___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AFullPropExternCall___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -41592,6 +42217,7 @@ void parser___parser_prod___AInitPropExternCall___empty_init(val_t p0, int* init
   fra.me.meth = LOCATE_parser___parser_prod___AInitPropExternCall___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -41610,6 +42236,7 @@ void parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall(val_t
   fra.me.meth = LOCATE_parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -41647,6 +42274,7 @@ void parser___parser_prod___AInitPropExternCall___replace_child(val_t p0, val_t 
   fra.me.meth = LOCATE_parser___parser_prod___AInitPropExternCall___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -41718,6 +42346,7 @@ void parser___parser_prod___AInitPropExternCall___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AInitPropExternCall___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -41744,6 +42373,7 @@ void parser___parser_prod___ACastAsExternCall___empty_init(val_t p0, int* init_t
   fra.me.meth = LOCATE_parser___parser_prod___ACastAsExternCall___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -41762,6 +42392,7 @@ void parser___parser_prod___ACastAsExternCall___init_acastasexterncall(val_t p0,
   fra.me.meth = LOCATE_parser___parser_prod___ACastAsExternCall___init_acastasexterncall;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -41829,6 +42460,7 @@ void parser___parser_prod___ACastAsExternCall___replace_child(val_t p0, val_t p1
   fra.me.meth = LOCATE_parser___parser_prod___ACastAsExternCall___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -42000,6 +42632,7 @@ void parser___parser_prod___ACastAsExternCall___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ACastAsExternCall___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -42043,6 +42676,7 @@ void parser___parser_prod___AAsNullableExternCall___empty_init(val_t p0, int* in
   fra.me.meth = LOCATE_parser___parser_prod___AAsNullableExternCall___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -42061,6 +42695,7 @@ void parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall(v
   fra.me.meth = LOCATE_parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -42128,6 +42763,7 @@ void parser___parser_prod___AAsNullableExternCall___replace_child(val_t p0, val_
   fra.me.meth = LOCATE_parser___parser_prod___AAsNullableExternCall___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -42299,6 +42935,7 @@ void parser___parser_prod___AAsNullableExternCall___visit_all(val_t p0, val_t p1
   fra.me.meth = LOCATE_parser___parser_prod___AAsNullableExternCall___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -42342,6 +42979,7 @@ void parser___parser_prod___AAsNotNullableExternCall___empty_init(val_t p0, int*
   fra.me.meth = LOCATE_parser___parser_prod___AAsNotNullableExternCall___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -42360,6 +42998,7 @@ void parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableextern
   fra.me.meth = LOCATE_parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -42442,6 +43081,7 @@ void parser___parser_prod___AAsNotNullableExternCall___replace_child(val_t p0, v
   fra.me.meth = LOCATE_parser___parser_prod___AAsNotNullableExternCall___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -42663,6 +43303,7 @@ void parser___parser_prod___AAsNotNullableExternCall___visit_all(val_t p0, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AAsNotNullableExternCall___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -42714,6 +43355,7 @@ void parser___parser_prod___AQualified___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___AQualified___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -42733,6 +43375,7 @@ void parser___parser_prod___AQualified___init_aqualified(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_parser___parser_prod___AQualified___init_aqualified;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -42782,6 +43425,7 @@ void parser___parser_prod___AQualified___init_aqualified(val_t p0, val_t p1, val
     fra.me.meth = LOCATE_parser___parser_prod___AQualified___init_aqualified;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -42821,6 +43465,7 @@ void parser___parser_prod___AQualified___replace_child(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_parser___parser_prod___AQualified___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -42997,6 +43642,7 @@ void parser___parser_prod___AQualified___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___AQualified___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -43051,6 +43697,7 @@ void parser___parser_prod___AQualified___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___AQualified___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -43072,6 +43719,7 @@ void parser___parser_prod___ADoc___empty_init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_parser___parser_prod___ADoc___empty_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -43089,6 +43737,7 @@ void parser___parser_prod___ADoc___init_adoc(val_t p0, val_t p1, int* init_table
   fra.me.meth = LOCATE_parser___parser_prod___ADoc___init_adoc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -43112,6 +43761,7 @@ void parser___parser_prod___ADoc___init_adoc(val_t p0, val_t p1, int* init_table
     fra.me.meth = LOCATE_parser___parser_prod___ADoc___init_adoc;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -43151,6 +43801,7 @@ void parser___parser_prod___ADoc___replace_child(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_parser___parser_prod___ADoc___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -43275,6 +43926,7 @@ void parser___parser_prod___ADoc___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___ADoc___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -43300,6 +43952,7 @@ void parser___parser_prod___ADoc___visit_all(val_t p0, val_t p1){
     fra.me.meth = LOCATE_parser___parser_prod___ADoc___visit_all;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -43321,6 +43974,7 @@ void parser___parser_prod___Start___init(val_t p0, val_t p1, val_t p2, int* init
   fra.me.meth = LOCATE_parser___parser_prod___Start___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -43346,6 +44000,7 @@ void parser___parser_prod___Start___replace_child(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_parser___parser_prod___Start___replace_child;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -43418,6 +44073,7 @@ void parser___parser_prod___Start___visit_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_parser___parser_prod___Start___visit_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

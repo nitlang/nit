@@ -10,6 +10,7 @@ val_t analysis___cha_analysis___ChaContext___reachable_iroutines(val_t p0){
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaContext___reachable_iroutines;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//cha_analysis.nit:26 */
@@ -33,6 +34,7 @@ val_t analysis___cha_analysis___ChaContext___is_iroutine_reachable(val_t p0, val
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaContext___is_iroutine_reachable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -73,6 +75,7 @@ val_t analysis___cha_analysis___ChaContext___is_method_reachable(val_t p0, val_t
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaContext___is_method_reachable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -95,6 +98,7 @@ val_t analysis___cha_analysis___ChaBuilder___iroutine_to_search(val_t p0){
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaBuilder___iroutine_to_search;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//cha_analysis.nit:38 */
@@ -117,6 +121,7 @@ val_t analysis___cha_analysis___ChaBuilder___context(val_t p0){
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaBuilder___context;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//cha_analysis.nit:39 */
@@ -139,6 +144,7 @@ val_t analysis___cha_analysis___ChaBuilder___program(val_t p0){
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaBuilder___program;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//cha_analysis.nit:40 */
@@ -162,6 +168,7 @@ void analysis___cha_analysis___ChaBuilder___init(val_t p0, val_t p1, int* init_t
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaBuilder___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -188,6 +195,7 @@ void analysis___cha_analysis___ChaBuilder___add_search(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaBuilder___add_search;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -287,6 +295,7 @@ void analysis___cha_analysis___ChaBuilder___add_search(val_t p0, val_t p1, val_t
         fra.me.meth = LOCATE_analysis___cha_analysis___ChaBuilder___add_search;
         fra.me.has_broke = 0;
         fra.me.REG_size = 2;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[1] = NIT_NULL;
         fra.me.closure_ctx = closctx_param;
@@ -317,6 +326,7 @@ void analysis___cha_analysis___ChaBuilder___add_search(val_t p0, val_t p1, val_t
         fra.me.meth = LOCATE_analysis___cha_analysis___ChaBuilder___add_search;
         fra.me.has_broke = 0;
         fra.me.REG_size = 2;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[1] = NIT_NULL;
         fra.me.closure_ctx = closctx_param;
@@ -346,6 +356,7 @@ void analysis___cha_analysis___ChaBuilder___work(val_t p0){
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaBuilder___work;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -412,6 +423,7 @@ val_t analysis___cha_analysis___ChaVisitor___builder(val_t p0){
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaVisitor___builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//cha_analysis.nit:92 */
@@ -435,6 +447,7 @@ void analysis___cha_analysis___ChaVisitor___visit_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaVisitor___visit_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -622,6 +635,7 @@ void analysis___cha_analysis___ChaVisitor___init(val_t p0, val_t p1, int* init_t
   fra.me.meth = LOCATE_analysis___cha_analysis___ChaVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
