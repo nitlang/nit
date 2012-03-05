@@ -62,38 +62,7 @@ class Message
 		else if l.file == null then
 			return "{yellow}{l}{def}: {text}"
 		else
-			var i = location.line_start
-			var line_start = l.file.line_starts[i-1]
-			var line_end = line_start
-			var string = l.file.string
-			while line_end+1 < string.length and string[line_end+1] != '\n' and string[line_end+1] != '\r' do
-				line_end += 1
-			end
-			var lstart = string.substring(line_start, location.column_start - 1)
-			var cend
-			if i != location.line_end then
-				cend = line_end - line_start + 1
-			else
-				cend = location.column_end
-			end
-			var lmid
-			var lend
-			if line_start + cend <= string.length then
-				lmid = string.substring(line_start + location.column_start - 1, cend - location.column_start + 1)
-				lend = string.substring(line_start + cend, line_end - line_start - cend + 1)
-			else
-				lmid = ""
-				lend = ""
-			end
-			var indent = new Buffer
-			for j in [line_start..line_start+location.column_start-1[ do
-				if string[j] == '\t' then
-					indent.add '\t'
-				else
-					indent.add ' '
-				end
-			end
-			return "{yellow}{l}{def}: {text}\n\t{lstart}{bred}{lmid}{def}{lend}\n\t{indent}^"
+			return "{yellow}{l}{def}: {text}\n{l.colored_line("1;31")}"
 		end
 	end
 end

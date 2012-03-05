@@ -128,5 +128,51 @@ class Location
 
 		return column_end < other.column_end
 	end
+
+	# Return the associated line with the location highlihted with color and a carret under the starting position
+	# `color' must be and terminal escape sequence used as "{escape}[{color}m;"
+	# "0;31" for red
+	# "1;31" for bright red
+	# "0;32" for green
+	fun colored_line(color: String): String
+	do
+		var esc = 27.ascii
+		var def = "{esc}[0m"
+		var col = "{esc}[{color}m"
+
+		var l = self
+		var i = l.line_start
+		var line_start = l.file.line_starts[i-1]
+		var line_end = line_start
+		var string = l.file.string
+		while line_end+1 < string.length and string[line_end+1] != '\n' and string[line_end+1] != '\r' do
+			line_end += 1
+		end
+		var lstart = string.substring(line_start, l.column_start - 1)
+		var cend
+		if i != l.line_end then
+			cend = line_end - line_start + 1
+		else
+			cend = l.column_end
+		end
+		var lmid
+		var lend
+		if line_start + cend <= string.length then
+			lmid = string.substring(line_start + l.column_start - 1, cend - l.column_start + 1)
+			lend = string.substring(line_start + cend, line_end - line_start - cend + 1)
+		else
+			lmid = ""
+			lend = ""
+		end
+		var indent = new Buffer
+		for j in [line_start..line_start+l.column_start-1[ do
+			if string[j] == '\t' then
+				indent.add '\t'
+			else
+				indent.add ' '
+			end
+		end
+		return "\t{lstart}{col}{lmid}{def}{lend}\n\t{indent}^"
+	end
 end
 
