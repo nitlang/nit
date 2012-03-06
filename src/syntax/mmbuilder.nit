@@ -1090,11 +1090,15 @@ redef class AAttrPropdef
 	redef fun accept_property_verifier(v)
 	do
 		super
-		var t: MMType
+		var t: nullable MMType = null
 		if n_type != null then
 			var t0 = n_type.get_stype(v)
 			if t0 != null then t = t0 else return
-		else
+		else if n_expr != null then
+			t = n_expr.get_easy_stype(v)
+		end
+
+		if t == null then
 			v.error(self, "Not yet implemented: Attribute definition {prop.local_class}::{prop} requires an explicit type.")
 			return
 		end
@@ -1108,7 +1112,7 @@ redef class AAttrPropdef
 			var m = _readmethod.as(not null)
 			m.signature = signature
 			process_and_check(v, m, (n_readable != null and n_readable.n_kwredef != null) or (n_id == null and n_kwredef != null), visibility_level)
-			n_type.check_visibility(v, m)
+			if n_type != null then n_type.check_visibility(v, m)
 		end
 		if n_writable != null or n_id == null then
 			var m = _writemethod.as(not null)
@@ -1118,7 +1122,7 @@ redef class AAttrPropdef
 				if n_writable == null then vl = 3 else vl = n_writable.n_visibility.level # write accessor has a specific visibility
 			end
 			process_and_check(v, m, n_writable != null and n_writable.n_kwredef != null, vl)
-			n_type.check_visibility(v, m)
+			if n_type != null then n_type.check_visibility(v, m)
 		end
 	end
 
@@ -1420,4 +1424,30 @@ redef class AExpr
 	redef fun accept_class_builder(v) do end
 	redef fun accept_property_builder(v) do end
 	redef fun accept_property_verifier(v) do end
+
+	private fun get_easy_stype(v:PropertyVerifierVisitor) : nullable MMType do return null
+end
+
+redef class ABoolExpr
+	redef fun get_easy_stype(v) do return v.type_bool
+end
+
+redef class AStringExpr
+	redef fun get_easy_stype(v) do return v.type_string
+end
+
+redef class ACharExpr
+	redef fun get_easy_stype(v) do return v.type_char
+end
+
+redef class AIntExpr
+	redef fun get_easy_stype(v) do return v.type_int
+end
+
+redef class AFloatExpr
+	redef fun get_easy_stype(v) do return v.type_float
+end
+
+redef class ANewExpr
+	redef fun get_easy_stype(v) do return n_type.get_stype(v)
 end
