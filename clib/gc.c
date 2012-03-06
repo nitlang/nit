@@ -245,3 +245,7 @@ void GC_add_static_object(val_t *pointer) {
 	GC_List_Push(&staticObjects, pointer);
 }
 
+/* Is invoked by intern method Sys:force_garbage_collection */
+void Nit_gc_force_garbage_collection( void ) {
+	GC_enlarge_and_collect( 0 );
+}
