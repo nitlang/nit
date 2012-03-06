@@ -418,7 +418,9 @@ class AIntrudeVisibility
 	super AVisibility
     readable var _n_kwintrude: TKwintrude
 end
-class AClassdef super Prod end
+class AClassdef super Prod
+    readable var _n_propdefs: List[APropdef] = new List[APropdef]
+end
 class AStdClassdef
 	super AClassdef
     readable var _n_doc: nullable ADoc = null
@@ -428,17 +430,14 @@ class AStdClassdef
     readable var _n_id: nullable TClassid = null
     readable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
     readable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
-    readable var _n_propdefs: List[APropdef] = new List[APropdef]
     readable var _n_kwend: TKwend
     redef fun hot_location do return n_id.location
 end
 class ATopClassdef
 	super AClassdef
-    readable var _n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AMainClassdef
 	super AClassdef
-    readable var _n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AClasskind super Prod end
 class AConcreteClasskind
