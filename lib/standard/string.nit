@@ -264,6 +264,8 @@ class String
 		return h
 
 	end
+
+	fun to_f : Float is extern import String::to_cstring
 end
 
 # Strings are arrays of characters.
