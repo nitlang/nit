@@ -945,6 +945,10 @@ class ACallFormExpr
     readable var _n_id: TId
     readable var _n_args: AExprs
 end
+class ASendReassignFormExpr
+	super ASendExpr
+	super AReassignFormExpr
+end
 class AAttrReassignExpr
 	super AExpr
 	super AAttrFormExpr
@@ -960,7 +964,7 @@ end
 class ACallReassignExpr
 	super AExpr
 	super ACallFormExpr
-	super AReassignFormExpr
+	super ASendReassignFormExpr
 end
 class ASuperExpr
 	super AExpr
@@ -990,7 +994,7 @@ class AVarFormExpr
 end
 class ABraReassignExpr
 	super ABraFormExpr
-	super AReassignFormExpr
+	super ASendReassignFormExpr
 end
 class AClosureCallExpr
 	super AExpr
