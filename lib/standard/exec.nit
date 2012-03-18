@@ -19,7 +19,6 @@ import stream
 
 # Simple sub-processus
 class Process
-
 	# The pid of the processus
 	fun id: Int do return _data.id
 

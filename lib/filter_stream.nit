@@ -14,7 +14,7 @@
 class FilterIStream
 	super IStream
 	# Filter readed elements
-	readable var _stream: nullable IStream
+	readable var _stream: nullable IStream = null
 
 	redef fun eof: Bool
 	do
@@ -31,7 +31,7 @@ end
 class FilterOStream
 	super OStream
 	# Filter outputed elements
-	readable var _stream: nullable OStream
+	readable var _stream: nullable OStream = null
 
 	# Can the stream be used to write
 	redef fun is_writable: Bool

@@ -23,7 +23,7 @@ import mmloader
 import syntax
 private import nit_version
 
-class AbstractCompiler
+abstract class AbstractCompiler
 	super ToolContext
 
 	init(tool_name: String)

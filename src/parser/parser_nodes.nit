@@ -56,7 +56,7 @@ end
 class TComment
 	super Token
 end
-class TokenKeyword
+abstract class TokenKeyword
 	super Token
 	redef fun to_s
 	do
@@ -234,7 +234,7 @@ end
 class TAssign
 	super Token
 end
-class TokenOperator
+abstract class TokenOperator
 	super Token
 	redef fun to_s
 	do
@@ -322,7 +322,7 @@ class TAttrid
 		do return "attribute '{text}'"
 	end
 end
-class TokenLiteral
+abstract class TokenLiteral
 	super Token
 	redef fun to_s
 	do
@@ -389,7 +389,7 @@ class AModuledecl
     readable var _n_kwmodule: TKwmodule
     readable var _n_name: AModuleName
 end
-class AImport super Prod end
+abstract class AImport super Prod end
 class AStdImport
 	super AImport
     readable var _n_visibility: AVisibility
@@ -402,7 +402,7 @@ class ANoImport
     readable var _n_kwimport: TKwimport
     readable var _n_kwend: TKwend
 end
-class AVisibility super Prod end
+abstract class AVisibility super Prod end
 class APublicVisibility
 	super AVisibility
 end
@@ -418,7 +418,7 @@ class AIntrudeVisibility
 	super AVisibility
     readable var _n_kwintrude: TKwintrude
 end
-class AClassdef super Prod
+abstract class AClassdef super Prod
     readable var _n_propdefs: List[APropdef] = new List[APropdef]
 end
 class AStdClassdef
@@ -439,7 +439,7 @@ end
 class AMainClassdef
 	super AClassdef
 end
-class AClasskind super Prod end
+abstract class AClasskind super Prod end
 class AConcreteClasskind
 	super AClasskind
     readable var _n_kwclass: TKwclass
@@ -472,7 +472,7 @@ class ASuperclass
     readable var _n_kwsuper: nullable TKwsuper = null
     readable var _n_type: AType
 end
-class APropdef super Prod
+abstract class APropdef super Prod
     readable var _n_doc: nullable ADoc = null
 end
 class AAttrPropdef
@@ -491,7 +491,7 @@ class AAttrPropdef
 	    if n_id != null then return n_id.location else return n_id2.location
     end
 end
-class AMethPropdef
+abstract class AMethPropdef
 	super APropdef
     readable var _n_kwredef: nullable TKwredef = null
     readable var _n_visibility: nullable AVisibility
@@ -514,7 +514,7 @@ class AInternMethPropdef
 	super AMethPropdef
     readable var _n_kwmeth: TKwmeth
 end
-class AExternPropdef
+abstract class AExternPropdef
 	super AMethPropdef
     readable var _n_extern: nullable TString = null
     readable var _n_extern_calls: nullable AExternCalls = null
@@ -529,7 +529,8 @@ class AConcreteMethPropdef
     readable var _n_kwmeth: nullable TKwmeth
     readable var _n_block: nullable AExpr = null
 end
-class AInitPropdef
+abstract class AInitPropdef
+	super AMethPropdef
 end
 class AConcreteInitPropdef
 	super AConcreteMethPropdef
@@ -552,10 +553,10 @@ class AExternCalls
     readable var _n_kwimport: TKwimport
     readable var _n_extern_calls: List[AExternCall] = new List[AExternCall]
 end
-class AExternCall
+abstract class AExternCall
 	super Prod
 end
-class APropExternCall
+abstract class APropExternCall
 special AExternCall
 end
 class ALocalPropExternCall
@@ -576,7 +577,7 @@ class ASuperExternCall
 special AExternCall
     readable var _n_kwsuper: TKwsuper
 end
-class ACastExternCall
+abstract class ACastExternCall
 special AExternCall
 end
 class ACastAsExternCall
@@ -606,7 +607,7 @@ class ATypePropdef
     readable var _n_id: TClassid
     readable var _n_type: AType
 end
-class AAble super Prod
+abstract class AAble super Prod
     readable var _n_visibility: nullable AVisibility = null
     readable var _n_kwredef: nullable TKwredef = null
 end
@@ -618,7 +619,7 @@ class AWriteAble
 	super AAble
     readable var _n_kwwritable: TKwwritable
 end
-class AMethid super Prod end
+abstract class AMethid super Prod end
 class AIdMethid
 	super AMethid
     readable var _n_id: TId
@@ -728,7 +729,7 @@ class ALabel
     readable var _n_kwlabel: TKwlabel
     readable var _n_id: TId
 end
-class AExpr super Prod end
+abstract class AExpr super Prod end
 class ABlockExpr
 	super AExpr
     readable var _n_expr: List[AExpr] = new List[AExpr]
@@ -747,7 +748,7 @@ class AReturnExpr
     readable var _n_kwreturn: nullable TKwreturn = null
     readable var _n_expr: nullable AExpr = null
 end
-class ALabelable
+abstract class ALabelable
 	super Prod
     readable var _n_label: nullable ALabel = null
 end
@@ -819,12 +820,12 @@ class AAssertExpr
     readable var _n_expr: AExpr
     readable var _n_else: nullable AExpr = null
 end
-class AAssignFormExpr
+abstract class AAssignFormExpr
 	super AExpr
     readable var _n_assign: TAssign
     readable var _n_value: AExpr
 end
-class AReassignFormExpr
+abstract class AReassignFormExpr
 	super AExpr
     readable var _n_assign_op: AAssignOp
     readable var _n_value: AExpr
@@ -833,16 +834,16 @@ class AOnceExpr
 	super AProxyExpr
     readable var _n_kwonce: TKwonce
 end
-class ASendExpr
+abstract class ASendExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
 end
-class ABinopExpr
+abstract class ABinopExpr
 	super ASendExpr
     readable var _n_expr2: AExpr
 end
-class ABoolExpr
+abstract class ABoolExpr
 	super AExpr
 end
 class AOrExpr
@@ -928,7 +929,7 @@ class ANewExpr
     readable var _n_id: nullable TId = null
     readable var _n_args: AExprs
 end
-class AAttrFormExpr
+abstract class AAttrFormExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_id: TAttrid
@@ -940,12 +941,12 @@ class AAttrAssignExpr
 	super AAttrFormExpr
 	super AAssignFormExpr
 end
-class ACallFormExpr
+abstract class ACallFormExpr
 	super ASendExpr
     readable var _n_id: TId
     readable var _n_args: AExprs
 end
-class ASendReassignFormExpr
+abstract class ASendReassignFormExpr
 	super ASendExpr
 	super AReassignFormExpr
 end
@@ -977,7 +978,7 @@ class AInitExpr
     readable var _n_kwinit: TKwinit
     readable var _n_args: AExprs
 end
-class ABraFormExpr
+abstract class ABraFormExpr
 	super ASendExpr
     readable var _n_args: AExprs
 end
@@ -988,7 +989,7 @@ class ABraAssignExpr
 	super ABraFormExpr
 	super AAssignFormExpr
 end
-class AVarFormExpr
+abstract class AVarFormExpr
 	super AExpr
     readable var _n_id: TId
 end
@@ -1013,7 +1014,7 @@ class AVarReassignExpr
 	super AVarFormExpr
 	super AReassignFormExpr
 end
-class ARangeExpr
+abstract class ARangeExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
@@ -1063,7 +1064,7 @@ class ACharExpr
 	super AExpr
     readable var _n_char: TChar
 end
-class AStringFormExpr
+abstract class AStringFormExpr
 	super AExpr
 end
 class AStringExpr
@@ -1091,7 +1092,7 @@ class AParExpr
     readable var _n_opar: TOpar
     readable var _n_cpar: TCpar
 end
-class AProxyExpr
+abstract class AProxyExpr
 	super AExpr
     readable var _n_expr: AExpr
 end
@@ -1116,7 +1117,7 @@ class AIssetAttrExpr
 	super AAttrFormExpr
     readable var _n_kwisset: TKwisset
 end
-class AExprs
+abstract class AExprs
 	super Prod 
     readable var _n_exprs: List[AExpr] = new List[AExpr]
 end
@@ -1133,7 +1134,7 @@ class ABraExprs
     readable var _n_obra: TObra
     readable var _n_cbra: TCbra
 end
-class AAssignOp super Prod end
+abstract class AAssignOp super Prod end
 class APlusAssignOp
 	super AAssignOp
     readable var _n_pluseq: TPluseq
@@ -1151,7 +1152,7 @@ class AClosureDef
     readable var _n_expr: nullable AExpr = null
     redef fun hot_location do return n_id.location
 end
-class AClosureId
+abstract class AClosureId
 	super Prod
 end
 class ASimpleClosureId

@@ -427,7 +427,7 @@ class AlphaSorter[E: Object]
 end
 
 # Generalization of metamodel entities
-class MMEntity
+interface MMEntity
 	# Return a link to
 	fun html_link(dctx: DocContext): String is abstract
 

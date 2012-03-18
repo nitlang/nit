@@ -57,7 +57,7 @@ end
 # Subclasses of this class would represent an analysis that produces
 # at least a way of knowing if a class is instantiated somewhere in a
 # method that is reachable from the entry point of the program
-class InstantiatedTypeAnalysis
+interface InstantiatedTypeAnalysis
 	fun is_class_instantiated(local_class: MMLocalClass): Bool is abstract
 end
 

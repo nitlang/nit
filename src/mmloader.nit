@@ -186,7 +186,7 @@ redef class ToolContext
 end
 
 # A load handler know how to load a specific module type
-class ModuleLoader
+interface ModuleLoader
 	# Type of module loaded by the loader
 	type MODULE: MMModule
 

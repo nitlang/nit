@@ -18,7 +18,7 @@ package array
 import abstract_collection
 
 # One dimension array of objects.
-class AbstractArrayRead[E]
+abstract class AbstractArrayRead[E]
 	super SequenceRead[E]
 
 	redef readable var _length: Int = 0
@@ -154,7 +154,7 @@ class AbstractArrayRead[E]
 end
 
 # Resizable one dimension array of objects.
-class AbstractArray[E]
+abstract class AbstractArray[E]
 	super AbstractArrayRead[E]
 	super Sequence[E]
 

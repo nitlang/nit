@@ -49,7 +49,7 @@ redef class Object
 end
 
 # File Abstract Stream
-class FStream
+abstract class FStream
 	super IOS
 	# The path of the file.
 	readable var _path: nullable String = null

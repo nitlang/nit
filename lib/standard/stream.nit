@@ -16,13 +16,13 @@ package stream
 import string
 
 # Abstract stream class
-class IOS
+interface IOS
 	# close the stream
 	fun close is abstract
 end
 
 # Abstract input streams
-class IStream
+interface IStream
 	super IOS
 	# Read a character. Return its ASCII value, -1 on EOF or timeout
 	fun read_char: Int is abstract
@@ -81,7 +81,7 @@ class IStream
 end
 
 # Abstract output stream
-class OStream
+interface OStream
 	super IOS
 	# write a string
 	fun write(s: String) is abstract
@@ -91,7 +91,7 @@ class OStream
 end
 
 # Input streams with a buffer
-class BufferedIStream
+abstract class BufferedIStream
 	super IStream
 	redef fun read_char
 	do
@@ -203,14 +203,14 @@ class BufferedIStream
 	end
 end
 
-class IOStream
+interface IOStream
 	super IStream
 	super OStream
 end
 
 ##############################################################"
 
-class FDStream
+abstract class FDStream
 	super IOS
 	# File description
 	var _fd: Int

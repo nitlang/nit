@@ -144,7 +144,7 @@ class MMSrcAttribute
 end
 
 # Concrete NIT source method
-class MMSrcMethod
+abstract class MMSrcMethod
 	super MMMethod
 	redef fun is_intern do return false
 	redef fun is_extern do return false
@@ -153,7 +153,7 @@ class MMSrcMethod
 end
 
 # Concrete NIT source method for an automatic accesor
-class MMAttrImplementationMethod
+abstract class MMAttrImplementationMethod
 	super MMSrcMethod
 	redef fun node: nullable AAttrPropdef do return mmmodule.nodes(self).as(nullable AAttrPropdef)
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
@@ -295,7 +295,7 @@ end
 ###############################################################################
 
 # Visitor used during the syntax analysis
-class AbsSyntaxVisitor
+abstract class AbsSyntaxVisitor
 	super Visitor
 	fun get_type_by_name(clsname: Symbol): MMType
 	do
@@ -739,7 +739,7 @@ redef class AExpr
 	fun stype: MMType is abstract
 end
 
-class AAbsAbsSendExpr
+abstract class AAbsAbsSendExpr
 	super AExpr
 	# The signature of the called property (require is_typed)
 	fun prop_signature: MMSignature is abstract
@@ -748,7 +748,7 @@ class AAbsAbsSendExpr
 	fun raw_arguments: Array[AExpr] is abstract
 end
 
-class AAbsSendExpr
+abstract class AAbsSendExpr
 	super AAbsAbsSendExpr
 	# The invoked method (require is_typed)
 	fun prop: MMMethod is abstract
@@ -757,7 +757,7 @@ class AAbsSendExpr
 	fun return_type: nullable MMType is abstract
 end
 
-class ASuperInitCall
+abstract class ASuperInitCall
 	super AAbsSendExpr
 end
 
@@ -781,7 +781,7 @@ redef class AReassignFormExpr
 	fun assign_method: MMMethod is abstract
 end
 
-class ASendReassignExpr
+abstract class ASendReassignExpr
 	super ASendExpr
 	super AReassignFormExpr
 	# The invoked method used to read (require is_typed)

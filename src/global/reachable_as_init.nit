@@ -45,7 +45,7 @@ end
 # at least a way of knowing if an initializer is called at least once
 # as an initializer (and not as part of another initializer)
 # in a specific class
-class ReachableAsInitAnalysis
+interface ReachableAsInitAnalysis
 	fun is_method_reachable_as_init(method: MMMethod, c: MMLocalClass): Bool is abstract
 end
 

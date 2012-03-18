@@ -47,7 +47,7 @@ redef class Prod
 end
 
 # Abstract standard visitor
-class Visitor
+abstract class Visitor
 	# What the visitor do when a node is visited
         # Concrete visitors should redefine this method.
         protected fun visit(e: nullable ANode) is abstract
