@@ -29,6 +29,7 @@ abstract class ANode
 	fun location: Location do return _location.as(not null)
 	# The location of the important part of the node (identifier or whatever)
 	fun hot_location: Location do return location
+	init do end
 end
 
 # Ancestor of all tokens
@@ -535,14 +536,12 @@ end
 class AConcreteInitPropdef
 	super AConcreteMethPropdef
 	super AInitPropdef
-    init do end
     readable var _n_kwinit: TKwinit
     redef fun hot_location do return n_kwinit.location
 end
 class AExternInitPropdef
 	super AExternPropdef
 	super AInitPropdef
-    init do end
     readable var _n_kwnew: TKwnew
 end
 class AMainMethPropdef
@@ -1184,4 +1183,9 @@ class Start
 	super Prod
     readable var _n_base: nullable AModule
     readable var _n_eof: EOF
+    init(n_base: nullable AModule, n_eof: EOF)
+    do
+	    self._n_base = n_base
+	    self._n_eof = n_eof
+    end
 end

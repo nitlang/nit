@@ -8347,14 +8347,6 @@ redef class ADoc
 end
 
 redef class Start
-    init(
-        n_base: nullable AModule,
-        n_eof: EOF)
-    do
-        _n_base = n_base
-        _n_eof = n_eof
-    end
-
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_base == old_child then
