@@ -41,16 +41,16 @@ class NitStubGenerator
 		for mod in mods do
 			assert mod isa MMSrcModule
 
-			# TODO check if extern hybrid
+			if mod.is_extern_hybrid then
+				var visitor = new StubVisitor( opt_in_place.value )
 
-			var visitor = new StubVisitor( opt_in_place.value )
+				# actually compile stub
+				mod.generate_stub( visitor )
 
-			# actually compil stub
-			mod.generate_stub( visitor )
-
-			# write to file
-			var mod_base_path = "{mod.directory.path}/{mod.name}"
-			visitor.write_to_files( mod_base_path )
+				# write to file
+				var mod_base_path = "{mod.directory.path}/{mod.name}"
+				visitor.write_to_files( mod_base_path )
+			end
 		end
 	end
 end
@@ -138,7 +138,7 @@ redef class MMSrcMethod
 			imported_signatures.add( "\t{cast.as_friendly_csignature} to cast from {cast.from} to {cast.to}" )
 		end
 
-		# explicit extern casts
+		# explicit extern super
 		if need_super then
 			imported_signatures.add( "\t{friendly_super_csignature} to call super" )
 		end
