@@ -295,6 +295,7 @@ redef class IRoutine
 		v.add_instr("fra.me.meth = LOCATE_{v.basecname};")
 		v.add_instr("fra.me.has_broke = 0;")
 		v.add_instr("fra.me.REG_size = {std_slots_nb};")
+		v.add_instr("fra.me.nitni_local_ref_head = NULL;")
 
 		# Declare/initialize local variables
 		for i in [0..std_slots_nb[ do

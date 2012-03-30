@@ -159,3 +159,56 @@ void nit_abort(const char* s, const char* msg, const char* loc, int line) {
 	fprintf(stderr, ")\n");
 	nit_exit(1);
 }
+
+/* Register reference to Nit object with the latest extern method called. */
+void nitni_local_ref_add( struct nitni_ref *ref ) {
+	struct nitni_ref_array_link **link_p;
+	struct nitni_ref_array_link * link = NULL;
+
+	/* find usable link or link to create */
+	link_p = &( stack_frame_head->nitni_local_ref_head );
+	while ( (*link_p) != NULL &&
+			(*link_p)->count >= NITNI_REF_ARRAY_LINK_SIZE ) {
+		link_p = &((*link_p)->next);
+	}
+
+	/* create link if needed */
+	if ( *link_p == NULL ) {
+		link = malloc( sizeof(struct nitni_ref_array_link) );
+		link->count = 0;
+		link->next = NULL;
+
+		(*link_p) = link;
+	} else {
+		link = *link_p;
+	}
+
+	/* add to link */
+	link->reg[ link->count ] = ref;
+	link->count ++;
+}
+
+/* Clean all references associated to the current (but returning) extern method. */
+void nitni_local_ref_clean( void ) {
+	struct nitni_ref_array_link * link,
+		* last_link;
+	int i;
+
+	link = stack_frame_head->nitni_local_ref_head;
+	while ( link != NULL )
+	{
+		for ( i = 0; i < link->count; i ++ ) {
+			free( link->reg[ i ] );
+		}
+
+		last_link = link;
+		if ( link->count == NITNI_REF_ARRAY_LINK_SIZE )
+			link = link->next;
+		else
+			link = NULL;
+
+		free(last_link);
+	}
+
+	stack_frame_head->nitni_local_ref_head = NULL;
+}

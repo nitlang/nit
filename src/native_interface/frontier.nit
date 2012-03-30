@@ -150,7 +150,7 @@ redef class MMSrcMethod
 
 		var s = new Buffer
 		if return_type != null then
-			fc.decls.add( "{return_type.friendly_extern_name} return___nitni;\n" )
+			return_type.compile_new_local_ref( "return___nitni", fc, true )
 			fc.decls.add( "val_t return___nit;\n" )
 			s.append( "return___nit = " )
 		end
@@ -189,14 +189,14 @@ redef class MMSrcMethod
 
 		if not is_init then
 			var name_for_impl = "recv___nitni"
-			fc.decls.add( "{signature.recv.friendly_extern_name} {name_for_impl};\n" )
+			signature.recv.compile_new_local_ref( name_for_impl, fc, true )
 			fc.exprs.add( "{signature.recv.assign_to_friendly( name_for_impl, "recv" )};\n" )
 			params.add( name_for_impl )
 		end
 
 		for p in signature.params do
 			var name_for_impl = "{p.name}___nitni"
-			fc.decls.add( "{p.mmtype.friendly_extern_name} {name_for_impl};\n" )
+			p.mmtype.compile_new_local_ref( name_for_impl, fc, true )
 			fc.exprs.add( "{p.mmtype.assign_to_friendly( name_for_impl, p.name.to_s )};\n" )
 			params.add( name_for_impl )
 		end
@@ -212,7 +212,8 @@ redef class MMSrcMethod
 
 		var s = new Buffer
 		if return_type != null then
-			fc.decls.add( "{return_type.friendly_extern_name} return___nitni;\n" )
+			# prepare to receive return but do not stack it here
+			return_type.compile_new_local_ref( "return___nitni", fc, false )
 			fc.decls.add( "val_t return___nit;\n" )
 			s.append( "return___nitni = " )
 		end
@@ -221,9 +222,14 @@ redef class MMSrcMethod
 
 		fc.exprs.add( s.to_s )
 
-		# return
 		if return_type != null then
 			fc.exprs.add( "{return_type.assign_from_friendly( "return___nit", "return___nitni" )};\n" )
+		end
+
+		fc.exprs.add( "nitni_local_ref_clean(  );\n" )
+
+		# return
+		if return_type != null then
 			fc.exprs.add( "return return___nit;\n" )
 		end
 
@@ -366,7 +372,7 @@ redef class MMImportedCast
 		var temp_name = "temp"
 
 		fc.decls.add( "val_t {temp_name};\n" )
-		fc.decls.add( "{to.friendly_extern_name} {out_name};\n" )
+		to.compile_new_local_ref( out_name, fc, true )
 
 		fc.exprs.add( "{from.assign_from_friendly(temp_name, in_name)};\n" )
 
@@ -443,10 +449,10 @@ redef class MMType
 	# Is to be nested within another function.
 	fun compile_check_isa( fc : FunctionCompiler, name : String )
 	do
-		fc.exprs.add( "if ( ! {compile_condition_isa( name )} )\{" )
+		fc.exprs.add( "if ( ! {compile_condition_isa( name )} )\{\n" )
 		fc.exprs.add( "\tfprintf( stderr, \"Casting to {self} failed because value is not a {self}.\" );\n" )
 		fc.exprs.add( "\tabort();\n" )
-		fc.exprs.add( "\}" )
+		fc.exprs.add( "\}\n" )
 	end
 
 	# Compiles an expression to verify if an object is of the given type.
@@ -468,28 +474,35 @@ redef class MMType
 			# defines struct
 			v.header_top.add( "#ifndef {guard}\n" )
 			v.header_top.add( "#define {guard}\n" )
-			v.header_top.add( "typedef struct s_{name}\{\n" )
-			v.header_top.add( "\tval_t v;\n" )
-			v.header_top.add( "\} {name};\n" )
-			v.header_top.add( "#endif\n\n" )
+			v.header_top.add( "struct s_{name}\{\n" )
+			v.header_top.add( "\t\tstruct nitni_ref ref; /* real ref struct, must be first */\n" )
+			v.header_top.add( "\};\n" )
+			v.header_top.add( "typedef struct s_{name} *{name};\n" )
 
 			# add null version, as a struct
 			if is_nullable then
 				var null_getter = "null_{as_notnull.mangled_name}"
-				var null_getter_local = "{mmmodule.to_s}_{null_getter}"
+				var fc = new FunctionCompiler( "{name} {null_getter}()" )
+				v.header_top.add( "{name} {null_getter}();\n" )
+				compile_new_local_ref( "n", fc, true )
+				fc.exprs.add( "return n;\n" )
+				v.body.append( fc.to_writer )
+			end
 
-				v.header.add( "{name} {null_getter_local}();\n" )
+			v.header_top.add( "#endif\n" )
+		end
+	end
 
-				v.header.add( "#ifndef {null_getter}\n" )
-				v.header.add( "#define {null_getter} {null_getter_local}\n" )
-				v.header.add( "#endif\n\n" )
+	fun compile_new_local_ref( var_name : String, fc : FunctionCompiler, stack_it : Bool )
+	do
+		var type_name = friendly_extern_name
 
-				v.body.add( "{name} {null_getter_local}()\n" )
-				v.body.add( "\{\n" )
-				v.body.add( "\t{name} n;\n" )
-				v.body.add( "\tn.v = NIT_NULL;\n" )
-				v.body.add( "\treturn n;\n" )
-				v.body.add( "\}\n\n" )
+		fc.decls.add( "{type_name} {var_name};\n" )
+		if uses_nitni_ref then
+			fc.exprs.add( "{var_name} = malloc( sizeof( struct s_{type_name} ) );\n" )
+			fc.exprs.add( "{var_name}->ref.val = NIT_NULL;\n" )
+			if stack_it then
+				fc.exprs.add( "nitni_local_ref_add( (struct nitni_ref *){var_name} );\n" )
 			end
 		end
 	end
@@ -543,7 +556,7 @@ redef class MMExplicitImport
 
 		var s = new Buffer
 		if return_type != null then
-			fc.decls.add( "{return_type.friendly_extern_name} result___nitni;\n" )
+			return_type.compile_new_local_ref( "result___nitni", fc, true )
 			fc.decls.add( "val_t result___nit;\n" )
 			s.append( "result___nit = " )
 		end
