@@ -217,7 +217,7 @@ for ii in "$@"; do
 		egrep '^[A-Z0-9_]*$' "$ff.compile.log" > "$ff.res"
 		if [ "$ERR" != 0 ]; then
 			echo -n "! "
-			cp "$ff.cmp.err" "$ff.res"
+			cat "$ff.cmp.err" "$ff.compile.log" > "$ff.res"
 			process_result $bf
 		elif [ -x "./$ff.bin" ]; then
 			cp "$ff.cmp.err" "$ff.res"
@@ -283,7 +283,8 @@ for ii in "$@"; do
 			fi
 		else
 			echo -n "! "
-			echo "Compilation error" > "$ff.res"
+			cat "$ff.cmp.err" "$ff.compile.log" > "$ff.res"
+			#echo "Compilation error" > "$ff.res"
 			process_result $bf
 		fi
 	done
