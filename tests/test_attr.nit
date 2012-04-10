@@ -15,8 +15,8 @@
 # limitations under the License.
 
 redef class Sys
-	var _i: Int
-	var _j: Int
+	var _i: Int = 0
+	var _j: Int = 0
 	redef fun main
 	do
 		printn(5)
