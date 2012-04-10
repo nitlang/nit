@@ -17,8 +17,8 @@
 
 import filter_stream
 
-var filename_1 = "test_filterstream_tmp1.write"
-var filename_2 = "test_filterstream_tmp2.write"
+var filename_1 = "out/test_filterstream_tmp1.write"
+var filename_2 = "out/test_filterstream_tmp2.write"
 
 var output_file_1 = new OFStream.open(filename_1)
 var output_file_2 = new OFStream.open(filename_2)

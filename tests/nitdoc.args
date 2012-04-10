@@ -1,1 +1,1 @@
-../lib/*.nit -d nitdoc_args1.write
+../lib/*.nit -d out/nitdoc_args1.write

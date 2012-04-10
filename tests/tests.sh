@@ -39,7 +39,7 @@ function process_result()
 	SAV=""
 	FAIL=""
 	if [ -r "sav/$pattern.sav" ]; then
-		diff -u "$pattern.res" "sav/$pattern.sav" > "$pattern.diff.sav.log"
+		diff -u "out/$pattern.res" "sav/$pattern.sav" > "out/$pattern.diff.sav.log"
 		if [ "$?" == 0 ]; then
 			SAV=OK
 		else
@@ -47,7 +47,7 @@ function process_result()
 		fi
 	fi
 	if [ -r "sav/$pattern.fail" ]; then
-		diff -u "$pattern.res" "sav/$pattern.fail" > "$pattern.diff.fail.log"
+		diff -u "out/$pattern.res" "sav/$pattern.fail" > "out/$pattern.diff.fail.log"
 		if [ "$?" == 0 ]; then
 			FAIL=OK
 		else
@@ -56,24 +56,24 @@ function process_result()
 	fi
 	if [ "x$SAV" = "xOK" ]; then
 		if [ "x$FAIL" = "x" ]; then
-			echo "[ok] $pattern.res"
+			echo "[ok] out/$pattern.res"
 		else
-			echo "[ok] $pattern.res - but sav/$pattern.fail remains!"
+			echo "[ok] out/$pattern.res - but sav/$pattern.fail remains!"
 		fi
 		ok="$ok $pattern"
 	elif [ "x$FAIL" = "xOK" ]; then
-		echo "[fail] $pattern.res"
+		echo "[fail] out/$pattern.res"
 		ok="$ok $pattern"
 	elif [ "x$SAV" = "xNOK" ]; then
-		echo "[======= fail $pattern.res sav/$pattern.sav =======]"
-		nok="$nok $ff"
+		echo "[======= fail out/$pattern.res sav/$pattern.sav =======]"
+		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ "x$FAIL" = "xNOK" ]; then
-		echo "[======= changed $pattern.res sav/$pattern.fail ======]"
-		nok="$nok $ff"
+		echo "[======= changed out/$pattern.res sav/$pattern.fail ======]"
+		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	else
-		echo "[=== no sav ===] $pattern.res"
+		echo "[=== no sav ===] out/$pattern.res"
 		nos="$nos $pattern"
 	fi
 }
@@ -128,6 +128,9 @@ make_alts()
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
 
+# Set NIT_DIR if needed
+[ -z "$NIT_DIR" ] && export NIT_DIR=..
+
 verbose=false
 stop=false
 while [ $stop = false ]; do
@@ -163,6 +166,9 @@ fi
 ok=""
 nok=""
 
+# CLEAN the out directory
+rm -rf out/ 2>/dev/null
+mkdir out 2>/dev/null
 
 for ii in "$@"; do
 	if [ ! -f $ii ]; then
@@ -179,10 +185,9 @@ for ii in "$@"; do
 
 	f=`basename "$ii" .nit`
 	for i in `make_alts $ii`; do
-		ff=`basename $i .nit`
-		echo -n "=> $ff: "
-
-		rm -rf "$ff.res" "$ff.err" "$ff.write" "$ff.bin" 2> /dev/null
+		bf=`basename $i .nit`
+		ff="out/$bf"
+		echo -n "=> $bf: "
 
 		# Compile
 		if [ "x$verbose" = "xtrue" ]; then
@@ -199,7 +204,7 @@ for ii in "$@"; do
 		if [ "$ERR" != 0 ]; then
 			echo -n "! "
 			cp "$ff.cmp.err" "$ff.res"
-			process_result $ff
+			process_result $bf
 		elif [ -x "./$ff.bin" ]; then
 			cp "$ff.cmp.err" "$ff.res"
 			echo -n ". "
@@ -226,7 +231,7 @@ for ii in "$@"; do
 			if [ -s "$ff.err" ]; then
 				cat "$ff.err" >> "$ff.res"
 			fi
-			process_result $ff
+			process_result $bf
 
 			if [ -f "$f.args" ]; then
 				fargs=$f.args
@@ -234,6 +239,7 @@ for ii in "$@"; do
 				while read line; do
 					((cptr=cptr+1))
 					args=$line
+					bff=$bf"_args"$cptr
 					fff=$ff"_args"$cptr
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
@@ -258,13 +264,13 @@ for ii in "$@"; do
 					if [ -s "$fff.err" ]; then
 						cat "$fff.err" >> "$fff.res"
 					fi
-					process_result $fff
+					process_result $bff
 				done < $fargs
 			fi
 		else
 			echo -n "! "
 			echo "Compilation error" > "$ff.res"
-			process_result $ff
+			process_result $bf
 		fi
 	done
 done

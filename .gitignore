@@ -40,5 +40,6 @@ tests/alt
 tests/errlist
 tests/test_nitc_logs
 tests/hello_world
+tests/out
 
 *.stub.nit.[ch]
