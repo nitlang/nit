@@ -674,10 +674,23 @@ redef class TKwlabel
     end
 end
 
-redef class TOpar
+redef class TKwdebug
     redef fun parser_index: Int
     do
 	return 51
+    end
+
+    init init_tk(loc: Location)
+    do
+        _text = once "__debug__"
+		_location = loc
+    end
+end
+
+redef class TOpar
+    redef fun parser_index: Int
+    do
+	return 52
     end
 
     init init_tk(loc: Location)
@@ -690,7 +703,7 @@ end
 redef class TCpar
     redef fun parser_index: Int
     do
-	return 52
+	return 53
     end
 
     init init_tk(loc: Location)
@@ -703,7 +716,7 @@ end
 redef class TObra
     redef fun parser_index: Int
     do
-	return 53
+	return 54
     end
 
     init init_tk(loc: Location)
@@ -716,7 +729,7 @@ end
 redef class TCbra
     redef fun parser_index: Int
     do
-	return 54
+	return 55
     end
 
     init init_tk(loc: Location)
@@ -729,7 +742,7 @@ end
 redef class TComma
     redef fun parser_index: Int
     do
-	return 55
+	return 56
     end
 
     init init_tk(loc: Location)
@@ -742,7 +755,7 @@ end
 redef class TColumn
     redef fun parser_index: Int
     do
-	return 56
+	return 57
     end
 
     init init_tk(loc: Location)
@@ -755,7 +768,7 @@ end
 redef class TQuad
     redef fun parser_index: Int
     do
-	return 57
+	return 58
     end
 
     init init_tk(loc: Location)
@@ -768,7 +781,7 @@ end
 redef class TAssign
     redef fun parser_index: Int
     do
-	return 58
+	return 59
     end
 
     init init_tk(loc: Location)
@@ -781,7 +794,7 @@ end
 redef class TPluseq
     redef fun parser_index: Int
     do
-	return 59
+	return 60
     end
 
     init init_tk(loc: Location)
@@ -794,7 +807,7 @@ end
 redef class TMinuseq
     redef fun parser_index: Int
     do
-	return 60
+	return 61
     end
 
     init init_tk(loc: Location)
@@ -807,7 +820,7 @@ end
 redef class TDotdotdot
     redef fun parser_index: Int
     do
-	return 61
+	return 62
     end
 
     init init_tk(loc: Location)
@@ -820,7 +833,7 @@ end
 redef class TDotdot
     redef fun parser_index: Int
     do
-	return 62
+	return 63
     end
 
     init init_tk(loc: Location)
@@ -833,7 +846,7 @@ end
 redef class TDot
     redef fun parser_index: Int
     do
-	return 63
+	return 64
     end
 
     init init_tk(loc: Location)
@@ -846,7 +859,7 @@ end
 redef class TPlus
     redef fun parser_index: Int
     do
-	return 64
+	return 65
     end
 
     init init_tk(loc: Location)
@@ -859,7 +872,7 @@ end
 redef class TMinus
     redef fun parser_index: Int
     do
-	return 65
+	return 66
     end
 
     init init_tk(loc: Location)
@@ -872,7 +885,7 @@ end
 redef class TStar
     redef fun parser_index: Int
     do
-	return 66
+	return 67
     end
 
     init init_tk(loc: Location)
@@ -885,7 +898,7 @@ end
 redef class TSlash
     redef fun parser_index: Int
     do
-	return 67
+	return 68
     end
 
     init init_tk(loc: Location)
@@ -898,7 +911,7 @@ end
 redef class TPercent
     redef fun parser_index: Int
     do
-	return 68
+	return 69
     end
 
     init init_tk(loc: Location)
@@ -911,7 +924,7 @@ end
 redef class TEq
     redef fun parser_index: Int
     do
-	return 69
+	return 70
     end
 
     init init_tk(loc: Location)
@@ -924,7 +937,7 @@ end
 redef class TNe
     redef fun parser_index: Int
     do
-	return 70
+	return 71
     end
 
     init init_tk(loc: Location)
@@ -937,7 +950,7 @@ end
 redef class TLt
     redef fun parser_index: Int
     do
-	return 71
+	return 72
     end
 
     init init_tk(loc: Location)
@@ -950,7 +963,7 @@ end
 redef class TLe
     redef fun parser_index: Int
     do
-	return 72
+	return 73
     end
 
     init init_tk(loc: Location)
@@ -963,7 +976,7 @@ end
 redef class TLl
     redef fun parser_index: Int
     do
-	return 73
+	return 74
     end
 
     init init_tk(loc: Location)
@@ -976,7 +989,7 @@ end
 redef class TGt
     redef fun parser_index: Int
     do
-	return 74
+	return 75
     end
 
     init init_tk(loc: Location)
@@ -989,7 +1002,7 @@ end
 redef class TGe
     redef fun parser_index: Int
     do
-	return 75
+	return 76
     end
 
     init init_tk(loc: Location)
@@ -1002,7 +1015,7 @@ end
 redef class TGg
     redef fun parser_index: Int
     do
-	return 76
+	return 77
     end
 
     init init_tk(loc: Location)
@@ -1015,7 +1028,7 @@ end
 redef class TStarship
     redef fun parser_index: Int
     do
-	return 77
+	return 78
     end
 
     init init_tk(loc: Location)
@@ -1028,7 +1041,7 @@ end
 redef class TBang
     redef fun parser_index: Int
     do
-	return 78
+	return 79
     end
 
     init init_tk(loc: Location)
@@ -1041,7 +1054,7 @@ end
 redef class TClassid
     redef fun parser_index: Int
     do
-	return 79
+	return 80
     end
 
     init init_tk(text: String, loc: Location)
@@ -1054,7 +1067,7 @@ end
 redef class TId
     redef fun parser_index: Int
     do
-	return 80
+	return 81
     end
 
     init init_tk(text: String, loc: Location)
@@ -1067,7 +1080,7 @@ end
 redef class TAttrid
     redef fun parser_index: Int
     do
-	return 81
+	return 82
     end
 
     init init_tk(text: String, loc: Location)
@@ -1080,7 +1093,7 @@ end
 redef class TNumber
     redef fun parser_index: Int
     do
-	return 82
+	return 83
     end
 
     init init_tk(text: String, loc: Location)
@@ -1093,7 +1106,7 @@ end
 redef class TFloat
     redef fun parser_index: Int
     do
-	return 83
+	return 84
     end
 
     init init_tk(text: String, loc: Location)
@@ -1106,7 +1119,7 @@ end
 redef class TChar
     redef fun parser_index: Int
     do
-	return 84
+	return 85
     end
 
     init init_tk(text: String, loc: Location)
@@ -1119,7 +1132,7 @@ end
 redef class TString
     redef fun parser_index: Int
     do
-	return 85
+	return 86
     end
 
     init init_tk(text: String, loc: Location)
@@ -1132,7 +1145,7 @@ end
 redef class TStartString
     redef fun parser_index: Int
     do
-	return 86
+	return 87
     end
 
     init init_tk(text: String, loc: Location)
@@ -1145,7 +1158,7 @@ end
 redef class TMidString
     redef fun parser_index: Int
     do
-	return 87
+	return 88
     end
 
     init init_tk(text: String, loc: Location)
@@ -1158,7 +1171,7 @@ end
 redef class TEndString
     redef fun parser_index: Int
     do
-	return 88
+	return 89
     end
 
     init init_tk(text: String, loc: Location)
@@ -1171,7 +1184,7 @@ end
 redef class TBadChar
     redef fun parser_index: Int
     do
-	return 89
+	return 90
     end
 
     init init_tk(text: String, loc: Location)
@@ -1184,7 +1197,7 @@ end
 redef class TBadString
     redef fun parser_index: Int
     do
-	return 90
+	return 91
     end
 
     init init_tk(text: String, loc: Location)
@@ -1198,7 +1211,7 @@ end
 redef class EOF
     redef fun parser_index: Int
     do
-	return 91
+	return 92
     end
 
     init(loc: Location)
@@ -1530,134 +1543,137 @@ class Lexer
 						return new TKwlabel.init_tk(location)
 					end
 					if accept_token == 52 then
-						return new TOpar.init_tk(location)
+						return new TKwdebug.init_tk(location)
 					end
 					if accept_token == 53 then
-						return new TCpar.init_tk(location)
+						return new TOpar.init_tk(location)
 					end
 					if accept_token == 54 then
-						return new TObra.init_tk(location)
+						return new TCpar.init_tk(location)
 					end
 					if accept_token == 55 then
-						return new TCbra.init_tk(location)
+						return new TObra.init_tk(location)
 					end
 					if accept_token == 56 then
-						return new TComma.init_tk(location)
+						return new TCbra.init_tk(location)
 					end
 					if accept_token == 57 then
-						return new TColumn.init_tk(location)
+						return new TComma.init_tk(location)
 					end
 					if accept_token == 58 then
-						return new TQuad.init_tk(location)
+						return new TColumn.init_tk(location)
 					end
 					if accept_token == 59 then
-						return new TAssign.init_tk(location)
+						return new TQuad.init_tk(location)
 					end
 					if accept_token == 60 then
-						return new TPluseq.init_tk(location)
+						return new TAssign.init_tk(location)
 					end
 					if accept_token == 61 then
-						return new TMinuseq.init_tk(location)
+						return new TPluseq.init_tk(location)
 					end
 					if accept_token == 62 then
-						return new TDotdotdot.init_tk(location)
+						return new TMinuseq.init_tk(location)
 					end
 					if accept_token == 63 then
-						return new TDotdot.init_tk(location)
+						return new TDotdotdot.init_tk(location)
 					end
 					if accept_token == 64 then
-						return new TDot.init_tk(location)
+						return new TDotdot.init_tk(location)
 					end
 					if accept_token == 65 then
-						return new TPlus.init_tk(location)
+						return new TDot.init_tk(location)
 					end
 					if accept_token == 66 then
-						return new TMinus.init_tk(location)
+						return new TPlus.init_tk(location)
 					end
 					if accept_token == 67 then
-						return new TStar.init_tk(location)
+						return new TMinus.init_tk(location)
 					end
 					if accept_token == 68 then
-						return new TSlash.init_tk(location)
+						return new TStar.init_tk(location)
 					end
 					if accept_token == 69 then
-						return new TPercent.init_tk(location)
+						return new TSlash.init_tk(location)
 					end
 					if accept_token == 70 then
-						return new TEq.init_tk(location)
+						return new TPercent.init_tk(location)
 					end
 					if accept_token == 71 then
-						return new TNe.init_tk(location)
+						return new TEq.init_tk(location)
 					end
 					if accept_token == 72 then
-						return new TLt.init_tk(location)
+						return new TNe.init_tk(location)
 					end
 					if accept_token == 73 then
-						return new TLe.init_tk(location)
+						return new TLt.init_tk(location)
 					end
 					if accept_token == 74 then
-						return new TLl.init_tk(location)
+						return new TLe.init_tk(location)
 					end
 					if accept_token == 75 then
-						return new TGt.init_tk(location)
+						return new TLl.init_tk(location)
 					end
 					if accept_token == 76 then
-						return new TGe.init_tk(location)
+						return new TGt.init_tk(location)
 					end
 					if accept_token == 77 then
-						return new TGg.init_tk(location)
+						return new TGe.init_tk(location)
 					end
 					if accept_token == 78 then
-						return new TStarship.init_tk(location)
+						return new TGg.init_tk(location)
 					end
 					if accept_token == 79 then
-						return new TBang.init_tk(location)
+						return new TStarship.init_tk(location)
 					end
 					if accept_token == 80 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TClassid.init_tk(token_text, location)
+						return new TBang.init_tk(location)
 					end
 					if accept_token == 81 then
 						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TId.init_tk(token_text, location)
+						return new TClassid.init_tk(token_text, location)
 					end
 					if accept_token == 82 then
 						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TAttrid.init_tk(token_text, location)
+						return new TId.init_tk(token_text, location)
 					end
 					if accept_token == 83 then
 						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TNumber.init_tk(token_text, location)
+						return new TAttrid.init_tk(token_text, location)
 					end
 					if accept_token == 84 then
 						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TFloat.init_tk(token_text, location)
+						return new TNumber.init_tk(token_text, location)
 					end
 					if accept_token == 85 then
 						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TChar.init_tk(token_text, location)
+						return new TFloat.init_tk(token_text, location)
 					end
 					if accept_token == 86 then
 						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TString.init_tk(token_text, location)
+						return new TChar.init_tk(token_text, location)
 					end
 					if accept_token == 87 then
 						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TStartString.init_tk(token_text, location)
+						return new TString.init_tk(token_text, location)
 					end
 					if accept_token == 88 then
 						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TMidString.init_tk(token_text, location)
+						return new TStartString.init_tk(token_text, location)
 					end
 					if accept_token == 89 then
 						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TEndString.init_tk(token_text, location)
+						return new TMidString.init_tk(token_text, location)
 					end
 					if accept_token == 90 then
 						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TBadChar.init_tk(token_text, location)
+						return new TEndString.init_tk(token_text, location)
 					end
 					if accept_token == 91 then
+						var token_text = string.substring(start_stream_pos, accept_length)
+						return new TBadChar.init_tk(token_text, location)
+					end
+					if accept_token == 92 then
 						var token_text = string.substring(start_stream_pos, accept_length)
 						return new TBadString.init_tk(token_text, location)
 					end

@@ -176,6 +176,9 @@ end
 class TKwlabel
 	super Token
 end
+class TKwdebug
+	super Token
+end
 class TOpar
 	super Token
 end
@@ -1049,6 +1052,13 @@ class AIssetAttrExpr
     readable var _n_expr: AExpr
     readable var _n_id: TAttrid
 end
+class ADebugTypeExpr
+	super AExpr
+    readable var _n_kwdebug: TKwdebug
+    readable var _n_kwtype: TKwtype
+    readable var _n_expr: AExpr
+    readable var _n_type: AType
+end
 class AListExprs
 	super AExprs
     readable var _n_exprs: List[AExpr] = new List[AExpr]
@@ -1155,4 +1165,12 @@ class Start
 	super Prod
     readable var _n_base: nullable AModule
     readable var _n_eof: EOF
+    init(
+        n_base: nullable AModule,
+        n_eof: EOF)
+    do
+        _n_base = n_base
+        _n_eof = n_eof
+    end
+
 end

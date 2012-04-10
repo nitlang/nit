@@ -217,6 +217,9 @@ end
 class TKwlabel
 	super TokenKeyword
 end
+class TKwdebug
+	super Token
+end
 class TOpar
 	super Token
 end
@@ -1125,6 +1128,13 @@ end
 abstract class AExprs
 	super Prod 
     readable var _n_exprs: List[AExpr] = new List[AExpr]
+end
+class ADebugTypeExpr
+	super AExpr
+    readable var _n_kwdebug: TKwdebug
+    readable var _n_kwtype: TKwtype
+    readable var _n_expr: AExpr
+    readable var _n_type: AType
 end
 class AListExprs
 	super AExprs
