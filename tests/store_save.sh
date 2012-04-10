@@ -19,24 +19,24 @@
 
 [ $# = 0 ] && exit 0;
 
-f=`echo $1 | cut -f1 -d.`
+f=`basename "$1" .res`
 shift
 
 echo -n "=> $f: "
 
-if [ -r $f.res ]; then
-	# Result	
+if [ -r out/$f.res ]; then
+	# Result
 	if [ -r sav/$f.sav ]; then
-		diff -q $f.res sav/$f.sav > /dev/null;
+		diff -q out/$f.res sav/$f.sav > /dev/null;
 		if [ $? == 0 ]; then
 			echo "[ok] $f"
 		else
 			echo "======== [update] sav/$f.sav ========="
-			cp $f.res sav/$f.sav
+			cp out/$f.res sav/$f.sav
 		fi
 	else
 		echo "======== [new] sav/$f.sav ========="
-		cp $f.res sav/$f.sav
+		cp out/$f.res sav/$f.sav
 	fi
 else
 	if [ -r sav/$f.sav ]; then
