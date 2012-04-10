@@ -12,6 +12,8 @@
 # another product.
 
 # Acces of the environement variables of the process
+module environ
+
 import symbol
 
 # TODO prevoir une structure pour recup tout un environ, le modifier et le passer a process
