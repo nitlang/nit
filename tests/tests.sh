@@ -203,12 +203,18 @@ for ii in "$@"; do
 		ff="out/$bf"
 		echo -n "=> $bf: "
 
+		if [ -f "$f.inputs" ]; then
+			inputs="$f.inputs"
+		else
+			inputs=/dev/null
+		fi
+
 		# Compile
 		if [ "x$verbose" = "xtrue" ]; then
 			echo ""
 			echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
 		fi
-		$NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+		$NITC --no-color $OPT -o "$ff.bin" "$i" $includes <"$inputs" 2> "$ff.cmp.err" > "$ff.compile.log"
 		ERR=$?
 		if [ "x$verbose" = "xtrue" ]; then
 			cat "$ff.compile.log"
@@ -228,11 +234,7 @@ for ii in "$@"; do
 				echo ""
 				echo "NIT_NO_STACK=1 ./$ff.bin" $args
 			fi
-			if [ -f "$f.inputs" ]; then
-				NIT_NO_STACK=1 "./$ff.bin" $args < "$f.inputs" >> "$ff.res" 2>"$ff.err"
-			else
-				NIT_NO_STACK=1 "./$ff.bin" $args >> "$ff.res" 2>"$ff.err"
-			fi
+			NIT_NO_STACK=1 "./$ff.bin" $args < "$inputs" >> "$ff.res" 2>"$ff.err"
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.res"
 				cat >&2 "$ff.err"
@@ -252,7 +254,7 @@ for ii in "$@"; do
 				cptr=0
 				while read line; do
 					((cptr=cptr+1))
-					args=$line
+					args="$line"
 					bff=$bf"_args"$cptr
 					fff=$ff"_args"$cptr
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
@@ -261,11 +263,7 @@ for ii in "$@"; do
 						echo "NIT_NO_STACK=1 ./$ff.bin" $args
 					fi
 					echo -n "==> args #"$cptr " "
-					if [ -f "$f.inputs" ]; then
-						NIT_NO_STACK=1 "./$ff.bin" $args < "$f.inputs" > "$fff.res" 2>"$fff.err"
-					else
-						sh -c "NIT_NO_STACK=1 ./$ff.bin  ''$args > $fff.res 2>$fff.err"
-					fi
+					sh -c "NIT_NO_STACK=1 ./$ff.bin  ''$args < $inputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
