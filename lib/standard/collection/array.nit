@@ -623,7 +623,7 @@ class ArrayMapKeys[K: Object, E]
 end
 
 class ArrayMapValues[K: Object, E]
-	super RemovableCollection[K]
+	super RemovableCollection[E]
 	# The original map
 	var map: ArrayMap[K, E]
 	redef fun first do return self.map._items.first.first
