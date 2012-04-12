@@ -71,6 +71,7 @@ $ output 'parser.nit'
 package parser
 
 intrude import parser_prod
+import tables
 $ call make_parser()
 $ end output
 
