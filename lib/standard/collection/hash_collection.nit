@@ -17,7 +17,7 @@ import array
 import hash
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
-private class HashCollection[K: Object, N: HashNode[K]]
+private abstract class HashCollection[K: Object, N: HashNode[Object]]
 	super ArrayCapable[nullable N]
 
 	var _array: nullable NativeArray[nullable N] = null # Used to store items
@@ -186,7 +186,7 @@ private class HashCollection[K: Object, N: HashNode[K]]
 	end
 end
 
-private class HashNode[K: Object]
+private abstract class HashNode[K: Object]
 	var _key: K
 	type N: HashNode[K]
 	readable writable var _next_item: nullable N = null

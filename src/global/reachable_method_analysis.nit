@@ -50,7 +50,7 @@ end
 # Subclasses of this class would represent an analysis that produces
 # at least a way of knowing if a property is reachable from the entry
 # point of the program
-class ReachableMethodAnalysis
+interface ReachableMethodAnalysis
 	fun is_iroutine_reachable(ir: nullable IRoutine): Bool is abstract
 	fun is_method_reachable(method: MMMethod): Bool is abstract
 end

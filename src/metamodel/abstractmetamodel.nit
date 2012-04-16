@@ -22,7 +22,7 @@ import partial_order
 import location
 
 # The main singleton which knows everything
-class MMContext
+abstract class MMContext
 
 	init do end
 
@@ -107,7 +107,7 @@ class MMDirectory
 end
 
 # A module is a Nit file
-class MMModule
+abstract class MMModule
 	# Global context
 	readable var _context: MMContext 
 
@@ -330,7 +330,7 @@ class MMGlobalClass
 end
 
 # Local classes are classes defined, refined or imported in a module
-class MMLocalClass
+abstract class MMLocalClass
 	# The name of the local class
 	readable var _name: Symbol
 
@@ -594,7 +594,7 @@ class MMGlobalProperty
 end
 
 # Local properties are properties defined (explicitely or not) in a local class
-class MMLocalProperty
+abstract class MMLocalProperty
 	# The name of the property
 	readable var _name: Symbol
 
@@ -656,7 +656,7 @@ class MMLocalProperty
 end
 
 # Attribute local properties
-class MMAttribute
+abstract class MMAttribute
 	super MMLocalProperty
 end
 
@@ -666,7 +666,7 @@ class MMExplicitImport
 end
 
 # Method local properties
-class MMMethod
+abstract class MMMethod
 	super MMLocalProperty
 	# Is the method defined with intern
 	fun is_intern: Bool is abstract
@@ -685,7 +685,7 @@ class MMMethod
 end
 
 # Concrete local classes
-class MMConcreteClass
+abstract class MMConcreteClass
 	super MMLocalClass
 end
 

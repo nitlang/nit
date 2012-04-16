@@ -21,173 +21,19 @@ package mmloader
 
 import metamodel
 import opts
-import location
+import toolcontext
 
-class Message
-	super Comparable
-	redef type OTHER: Message
-
-	readable var _location: nullable Location
-	readable var _text: String
-
-	redef fun <(other: OTHER): Bool do
-		if location == null then return true
-		if other.location == null then return false
-
-		return location.as(not null) < other.location.as(not null)
-	end
-
-	redef fun to_s: String
-	do
-		var l = location
-		if l == null then
-			return text
-		else
-			return "{l}: {text}"
-		end
-	end
-
-	fun to_color_string: String
-	do
-		var esc = 27.ascii
-		var red = "{esc}[0;31m"
-		var bred = "{esc}[1;31m"
-		var green = "{esc}[0;32m"
-		var yellow = "{esc}[0;33m"
-		var def = "{esc}[0m"
-
-		var l = location
-		if l == null then
-			return text
-		else if l.file == null then
-			return "{yellow}{l}{def}: {text}"
-		else
-			var i = location.line_start
-			var line_start = l.file.line_starts[i-1]
-			var line_end = line_start
-			var string = l.file.string
-			while line_end+1 < string.length and string[line_end+1] != '\n' and string[line_end+1] != '\r' do
-				line_end += 1
-			end
-			var lstart = string.substring(line_start, location.column_start - 1)
-			var cend
-			if i != location.line_end then
-				cend = line_end - line_start + 1
-			else
-				cend = location.column_end
-			end
-			var lmid
-			var lend
-			if line_start + cend <= string.length then
-				lmid = string.substring(line_start + location.column_start - 1, cend - location.column_start + 1)
-				lend = string.substring(line_start + cend, line_end - line_start - cend + 1)
-			else
-				lmid = ""
-				lend = ""
-			end
-			var indent = new Buffer
-			for j in [line_start..line_start+location.column_start-1[ do
-				if string[j] == '\t' then
-					indent.add '\t'
-				else
-					indent.add ' '
-				end
-			end
-			return "{yellow}{l}{def}: {text}\n\t{lstart}{bred}{lmid}{def}{lend}\n\t{indent}^"
-		end
-	end
-end
-
-# Global context for tools
-class ToolContext
+redef class ToolContext
 	super MMContext
-	# Number of errors
-	readable var _error_count: Int = 0
-
-	# Number of warnings
-	readable var _warning_count: Int = 0
-
-	# Directory where to generate log files
-	readable var _log_directory: String = "logs"
-
-	# Messages
-	var _messages: Array[Message] = new Array[Message]
-	var _message_sorter: ComparableSorter[Message] = new ComparableSorter[Message]
-
-	fun check_errors
-	do
-		if _messages.length > 0 then
-			_message_sorter.sort(_messages)
-
-			for m in _messages do
-				if opt_no_color.value then
-					stderr.write("{m}\n")
-				else
-					stderr.write("{m.to_color_string}\n")
-				end
-			end
-
-			_messages.clear
-		end
-
-		if error_count > 0 then exit(1)
-	end
-
-	# Display an error
-	fun error(l: nullable Location, s: String)
-	do
-		_messages.add(new Message(l,s))
-		_error_count = _error_count + 1
-		if opt_stop_on_first_error.value then check_errors
-	end
-
-	# Add an error, show errors and quit
-	fun fatal_error(l: nullable Location, s: String)
-	do
-		error(l,s)
-		check_errors
-	end
-
-	# Display a warning
-	fun warning(l: nullable Location, s: String)
-	do
-		if _opt_warn.value == 0 then return
-		_messages.add(new Message(l,s))
-		_warning_count = _warning_count + 1
-		if opt_stop_on_first_error.value then check_errors
-	end
-
-	# Display an info
-	fun info(s: String, level: Int)
-	do
-		if level <= verbose_level then
-			print "{s}"
-		end
-	end
 
 	# Paths where to locate modules files
 	readable var _paths: Array[String] = new Array[String]
 
 	# List of module loaders
 	var _loaders: Array[ModuleLoader] = new Array[ModuleLoader]
-	
-	# Global OptionContext
-	readable var _option_context: OptionContext = new OptionContext
-
-	# Option --warn
-	readable var _opt_warn: OptionCount = new OptionCount("Show warnings", "-W", "--warn")
-
-	# Option --quiet
-	readable var _opt_quiet: OptionBool = new OptionBool("Do not show warnings", "-q", "--quiet")
 
 	# Option --path
 	readable var _opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
-
-	# Option --log
-	readable var _opt_log: OptionBool = new OptionBool("Generate various log files", "--log")
-
-	# Option --log-dir
-	readable var _opt_log_dir: OptionString = new OptionString("Directory where to generate log files", "--log-dir")
 
 	# Option --only-metamodel
 	readable var _opt_only_metamodel: OptionBool = new OptionBool("Stop after meta-model processing", "--only-metamodel")
@@ -195,65 +41,33 @@ class ToolContext
 	# Option --only-parse
 	readable var _opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
 
-	# Option --help
-	readable var _opt_help: OptionBool = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
-
-	# Option --version
-	readable var _opt_version: OptionBool = new OptionBool("Show version and exit", "--version")
-
-	# Option --verbose
-	readable var _opt_verbose: OptionCount = new OptionCount("Verbose", "-v", "--verbose")
-
-	# Option --stop-on-first-error
-	readable var _opt_stop_on_first_error: OptionBool = new OptionBool("Stop on first error", "--stop-on-first-error")
-
-	# Option --no-color
-	readable var _opt_no_color: OptionBool = new OptionBool("Do not use color to display errors and warnings", "--no-color")
-
-	# Verbose level
-	readable var _verbose_level: Int = 0
-
-	init
+	redef init
 	do
 		super
-		option_context.add_option(opt_warn, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_path, opt_log, opt_log_dir, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
+		option_context.add_option(opt_path, opt_only_parse, opt_only_metamodel)
 	end
 
 	# Parse and process the options given on the command line
-	fun process_options
+	redef fun process_options
 	do
-		self.opt_warn.value = 1
-
-		# init options
-		option_context.parse(args)
-
-		# Set verbose level
-		_verbose_level = opt_verbose.value
-
-		if self.opt_quiet.value then self.opt_warn.value = 0
+		super
 
 		# Setup the paths value
 		paths.append(opt_path.value)
 
 		var path_env = once ("NIT_PATH".to_symbol).environ
-		if not path_env.is_empty then 
+		if not path_env.is_empty then
 			paths.append(path_env.split_with(':'))
 		end
 
 		path_env = once ("NIT_DIR".to_symbol).environ
-		if not path_env.is_empty then 
+		if not path_env.is_empty then
 			var libname = "{path_env}/lib"
 			if libname.file_exists then paths.add(libname)
 		end
 
 		var libname = "{sys.program_name.dirname}/../lib"
 		if libname.file_exists then paths.add(libname.simplify_path)
-
-		if opt_log_dir.value != null then _log_directory = opt_log_dir.value.as(not null)
-		if _opt_log.value then
-			# Make sure the output directory exists
-			log_directory.mkdir
-		end
 	end
 
 	# Load and process a module in a directory (or a parent directory).
@@ -372,7 +186,7 @@ class ToolContext
 end
 
 # A load handler know how to load a specific module type
-class ModuleLoader
+interface ModuleLoader
 	# Type of module loaded by the loader
 	type MODULE: MMModule
 

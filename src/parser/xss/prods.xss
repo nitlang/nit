@@ -43,6 +43,14 @@ class Start
 	super Prod
     readable var _n_base: nullable $baseprod
     readable var _n_eof: EOF
+    init(
+        n_base: nullable $baseprod,
+        n_eof: EOF)
+    do
+        _n_base = n_base
+        _n_eof = n_eof
+    end
+
 end
 $ end template
 
@@ -145,14 +153,6 @@ end
 $ end foreach
 
 redef class Start
-    init(
-        n_base: nullable $baseprod,
-        n_eof: EOF)
-    do
-        _n_base = n_base
-        _n_eof = n_eof
-    end
-
     redef fun replace_child(old_child: PNode, new_child: nullable PNode)
     do
         if _n_base == old_child then

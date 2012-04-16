@@ -1361,3 +1361,11 @@ redef class AClosureCallExpr
 		return r
 	end
 end
+
+redef class ADebugTypeExpr
+	redef fun generate_icode(v)
+	do
+		# Do nothing.
+		return null
+	end
+end

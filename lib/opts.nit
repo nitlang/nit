@@ -15,7 +15,7 @@
 module opts
 
 # Super class of all option's class
-class Option
+abstract class Option
 	# Names for the option (including long and short ones)
 	readable var _names: Array[String]
 
@@ -109,7 +109,7 @@ class OptionCount
 end
 
 # Option with one mandatory parameter
-class OptionParameter
+abstract class OptionParameter
 	super Option
 	protected fun convert(str: String): VALUE is abstract
 

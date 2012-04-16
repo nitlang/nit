@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"test_directory_create.write/tmp_dir".mkdir
-var f =  new OFStream.open("test_directory_create.write/tmp_file")
+"out/test_directory_create.write/tmp_dir".mkdir
+var f =  new OFStream.open("out/test_directory_create.write/tmp_file")
 f.write("test")
 f.close
-f =  new OFStream.open("test_directory_create.write/tmp_dir/tmp_file_2")
+f =  new OFStream.open("out/test_directory_create.write/tmp_dir/tmp_file_2")
 f.write("other test")
 f.close

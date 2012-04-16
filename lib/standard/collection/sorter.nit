@@ -18,7 +18,7 @@ package sorter
 import array
 
 # This abstract class generalizes ways to sort an array
-class AbstractSorter[E: Object]
+interface AbstractSorter[E: Object]
 	# Compare `a' and `b'.
 	# Returns:
 	# 	-1 if a < b

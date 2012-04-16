@@ -23,7 +23,7 @@ private import primitive_info
 import program
 
 # Something that store color of table elements
-class ColorContext
+abstract class ColorContext
 	var _colors: HashMap[TableElt, Int] = new HashMap[TableElt, Int]
 
 	# The color of a table element.
@@ -411,12 +411,12 @@ end
 ###############################################################################
 
 # An element of a class, an instance or a module table
-abstract class AbsTableElt
+interface AbsTableElt
 end
 
 # An element of a class or an instance table
 # Such an elements represent method function pointers, attribute values, etc.
-abstract class TableElt
+interface TableElt
 	super AbsTableElt
 	# Is the element conflict to class `c' (used for coloring)
 	fun is_related_to(c: MMLocalClass): Bool is abstract
@@ -430,7 +430,7 @@ end
 
 # An element of a module table
 # Such an elements represent colors or identifiers
-abstract class ModuleTableElt
+interface ModuleTableElt
 	super AbsTableElt
 end
 
@@ -477,7 +477,7 @@ class TableEltAttr
 end
 
 # An element representing a class information
-class AbsTableEltClass
+abstract class AbsTableEltClass
 	super AbsTableElt
 	# The local class where the information comes from
 	readable var _local_class: MMLocalClass
@@ -489,7 +489,7 @@ class AbsTableEltClass
 end
 
 # An element of a class table representing a class information
-class TableEltClass
+abstract class TableEltClass
 	super TableElt
 	super AbsTableEltClass
 	redef fun is_related_to(c)

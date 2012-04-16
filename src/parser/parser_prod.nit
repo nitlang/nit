@@ -47,7 +47,7 @@ redef class Prod
 end
 
 # Abstract standard visitor
-class Visitor
+abstract class Visitor
 	# What the visitor do when a node is visited
         # Concrete visitors should redefine this method.
         protected fun visit(e: nullable ANode) is abstract
@@ -7352,6 +7352,79 @@ redef class AIssetAttrExpr
         v.enter_visit(_n_id)
     end
 end
+redef class ADebugTypeExpr
+    private init empty_init do end
+
+    init init_adebugtypeexpr (
+            n_kwdebug: nullable TKwdebug,
+            n_kwtype: nullable TKwtype,
+            n_expr: nullable AExpr,
+            n_type: nullable AType
+    )
+    do
+        empty_init
+        _n_kwdebug = n_kwdebug.as(not null)
+	n_kwdebug.parent = self
+        _n_kwtype = n_kwtype.as(not null)
+	n_kwtype.parent = self
+        _n_expr = n_expr.as(not null)
+	n_expr.parent = self
+        _n_type = n_type.as(not null)
+	n_type.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_kwdebug == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwdebug
+                _n_kwdebug = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_kwtype == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwtype
+                _n_kwtype = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_expr == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExpr
+                _n_expr = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_type == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AType
+                _n_type = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_kwdebug)
+        v.enter_visit(_n_kwtype)
+        v.enter_visit(_n_expr)
+        v.enter_visit(_n_type)
+    end
+end
 redef class AListExprs
     private init empty_init do end
 
@@ -8347,14 +8420,6 @@ redef class ADoc
 end
 
 redef class Start
-    init(
-        n_base: nullable AModule,
-        n_eof: EOF)
-    do
-        _n_base = n_base
-        _n_eof = n_eof
-    end
-
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
         if _n_base == old_child then

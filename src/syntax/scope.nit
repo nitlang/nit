@@ -229,7 +229,7 @@ end
 
 ###############################################################################
 
-class AEscapeExpr
+abstract class AEscapeExpr
 	super ALabelable
 	# The associated escapable block
 	readable var _escapable: nullable EscapableBlock

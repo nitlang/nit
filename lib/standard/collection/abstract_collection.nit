@@ -357,7 +357,7 @@ end
 
 # Iterator on a 'values' point of view of a map
 class MapValuesIterator[K: Object, V]
-	super Iterator[K]
+	super Iterator[V]
 	# The original iterator
 	var iterator: MapIterator[K, V]
 

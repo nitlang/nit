@@ -555,7 +555,7 @@ redef class AAbortExpr
 end
 
 # An abstract control structure with feature escapable block
-class AAbsControl
+abstract class AAbsControl
 	super AExpr
 	# The corresponding escapable block
 	readable var _escapable: nullable EscapableBlock
@@ -2038,7 +2038,7 @@ redef class AClosureDef
 	end
 end
 
-class ATypeCheckExpr
+abstract class ATypeCheckExpr
 	super AExpr
 	private fun check_expr_cast(v: TypingVisitor, n_expr: AExpr, n_type: AType)
 	do
@@ -2141,3 +2141,15 @@ redef class AOnceExpr
 	end
 end
 
+redef class ADebugTypeExpr
+	redef fun after_typing(v)
+	do
+		if not v.check_expr(n_expr) then return
+		if not n_type.is_typed then return
+		var etype = n_expr.stype
+		var ttype = n_type.stype
+		if etype != ttype then
+			v.warning(self, "Warning: Expression is a {etype}, expected {ttype}.")
+		end
+	end
+end

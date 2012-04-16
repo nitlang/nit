@@ -19,7 +19,7 @@ module icode_tools
 import icode_builder
 
 # A simple visitor to visit icode structures
-class ICodeVisitor
+abstract class ICodeVisitor
 	# Called when a iregister is read in a icode
 	fun visit_iregister_read(ic: ICode, r: IRegister) do end
 

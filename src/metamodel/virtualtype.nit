@@ -26,7 +26,7 @@ redef class MMGlobalProperty
 end
 
 # Virtual type properties
-class MMTypeProperty
+abstract class MMTypeProperty
 	super MMLocalProperty
 	# The virtual static type associated
 	fun stype_for(recv: MMType): nullable MMVirtualType

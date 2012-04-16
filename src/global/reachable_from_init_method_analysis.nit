@@ -53,7 +53,7 @@ end
 # Subclasses of this class would represent an analysis that produces
 # at least a way of knowing if a property is reachable from at least
 # one init in the program
-class ReachableFromInitMethodAnalysis
+interface ReachableFromInitMethodAnalysis
 	fun is_iroutine_reachable_from_init(ir: nullable IRoutine): Bool is abstract
 	fun is_method_reachable_from_init(method: MMMethod): Bool is abstract
 end

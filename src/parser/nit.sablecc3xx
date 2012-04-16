@@ -106,6 +106,7 @@ kwas = 'as';
 kwnullable = 'nullable';
 kwisset = 'isset';
 kwlabel = 'label';
+kwdebug = '__debug__';
 
 opar = '(';
 cpar = ')';
@@ -364,6 +365,7 @@ stmt~withelse {-> expr}
 	| {call} recv id args_nopar closure_defs~withelse? {-> New expr.call(recv.expr, id, args_nopar.exprs, [closure_defs~withelse.closure_def])}
 	| {super} qualified? kwsuper args_nopar {-> New expr.super(qualified, kwsuper, args_nopar.exprs)}
 	| {init} recv kwinit args_nopar {-> New expr.init(recv.expr, kwinit, args_nopar.exprs)}
+	| {debug_type_is} kwdebug kwtype type column expr_final~withelse {-> New expr.debug_type(kwdebug, kwtype, expr_final~withelse.expr, type) }
 	;
 
 label= kwlabel id;
@@ -751,6 +753,7 @@ expr	= {block} expr* kwend?
         | {as_cast} expr kwas opar type cpar
         | {as_notnull} expr kwas opar kwnot kwnull cpar
 	| {isset_attr} kwisset expr [id]:attrid
+	| {debug_type} kwdebug kwtype expr type
 	;
 exprs
 	= {list} [exprs]:expr*

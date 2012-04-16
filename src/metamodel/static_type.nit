@@ -464,7 +464,7 @@ class MMNullableType
 	end
 end
 
-class MMTypeClass 
+abstract class MMTypeClass
 	super MMType
 	redef readable var _local_class: MMLocalClass
 	redef fun mmmodule do return _local_class.mmmodule end
