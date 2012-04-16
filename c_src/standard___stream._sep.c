@@ -9,6 +9,7 @@ void standard___stream___IOS___close(val_t p0){
   fra.me.meth = LOCATE_standard___stream___IOS___close;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//stream.nit:20 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___stream, 20);
   stack_frame_head = fra.me.prev;
@@ -25,6 +26,7 @@ void standard___stream___IOS___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___stream___IOS___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
   return;
@@ -38,6 +40,7 @@ val_t standard___stream___IStream___read_char(val_t p0){
   fra.me.meth = LOCATE_standard___stream___IStream___read_char;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//stream.nit:27 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___stream, 27);
   stack_frame_head = fra.me.prev;
@@ -56,6 +59,7 @@ val_t standard___stream___IStream___read(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___stream___IStream___read;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -128,6 +132,7 @@ val_t standard___stream___IStream___read_line(val_t p0){
   fra.me.meth = LOCATE_standard___stream___IStream___read_line;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -161,6 +166,7 @@ val_t standard___stream___IStream___read_all(val_t p0){
   fra.me.meth = LOCATE_standard___stream___IStream___read_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -214,6 +220,7 @@ void standard___stream___IStream___append_line_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___stream___IStream___append_line_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -274,6 +281,7 @@ val_t standard___stream___IStream___eof(val_t p0){
   fra.me.meth = LOCATE_standard___stream___IStream___eof;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//stream.nit:79 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___stream, 79);
   stack_frame_head = fra.me.prev;
@@ -288,6 +296,7 @@ void standard___stream___OStream___write(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___stream___OStream___write;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//stream.nit:86 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___stream, 86);
   stack_frame_head = fra.me.prev;
@@ -302,6 +311,7 @@ val_t standard___stream___OStream___is_writable(val_t p0){
   fra.me.meth = LOCATE_standard___stream___OStream___is_writable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//stream.nit:89 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___stream, 89);
   stack_frame_head = fra.me.prev;
@@ -320,6 +330,7 @@ val_t standard___stream___BufferedIStream___read_char(val_t p0){
   fra.me.meth = LOCATE_standard___stream___BufferedIStream___read_char;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -439,6 +450,7 @@ val_t standard___stream___BufferedIStream___read(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___stream___BufferedIStream___read;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -599,6 +611,7 @@ val_t standard___stream___BufferedIStream___read_all(val_t p0){
   fra.me.meth = LOCATE_standard___stream___BufferedIStream___read_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -691,6 +704,7 @@ void standard___stream___BufferedIStream___append_line_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___stream___BufferedIStream___append_line_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -894,6 +908,7 @@ val_t standard___stream___BufferedIStream___eof(val_t p0){
   fra.me.meth = LOCATE_standard___stream___BufferedIStream___eof;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -944,6 +959,7 @@ void standard___stream___BufferedIStream___fill_buffer(val_t p0){
   fra.me.meth = LOCATE_standard___stream___BufferedIStream___fill_buffer;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//stream.nit:192 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___stream, 192);
   stack_frame_head = fra.me.prev;
@@ -958,6 +974,7 @@ val_t standard___stream___BufferedIStream___end_reached(val_t p0){
   fra.me.meth = LOCATE_standard___stream___BufferedIStream___end_reached;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//stream.nit:195 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___stream, 195);
   stack_frame_head = fra.me.prev;
@@ -973,6 +990,7 @@ void standard___stream___BufferedIStream___prepare_buffer(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___stream___BufferedIStream___prepare_buffer;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -996,6 +1014,7 @@ void standard___stream___FDStream___close(val_t p0){
   fra.me.meth = LOCATE_standard___stream___FDStream___close;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//stream.nit:218 */
@@ -1019,6 +1038,7 @@ val_t standard___stream___FDStream___native_close(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___stream___FDStream___native_close;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -1037,6 +1057,7 @@ val_t standard___stream___FDStream___native_read_char(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___stream___FDStream___native_read_char;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -1056,6 +1077,7 @@ val_t standard___stream___FDStream___native_read(val_t p0, val_t p1, val_t p2, v
   fra.me.meth = LOCATE_standard___stream___FDStream___native_read;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1078,6 +1100,7 @@ val_t standard___stream___FDStream___native_write(val_t p0, val_t p1, val_t p2, 
   fra.me.meth = LOCATE_standard___stream___FDStream___native_write;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1101,6 +1124,7 @@ void standard___stream___FDStream___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___stream___FDStream___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1123,6 +1147,7 @@ val_t standard___stream___FDIStream___eof(val_t p0){
   fra.me.meth = LOCATE_standard___stream___FDIStream___eof;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//stream.nit:231 */
@@ -1147,6 +1172,7 @@ val_t standard___stream___FDIStream___read_char(val_t p0){
   fra.me.meth = LOCATE_standard___stream___FDIStream___read_char;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//stream.nit:235 */
@@ -1192,6 +1218,7 @@ void standard___stream___FDIStream___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___stream___FDIStream___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -1211,6 +1238,7 @@ val_t standard___stream___FDOStream___is_writable(val_t p0){
   fra.me.meth = LOCATE_standard___stream___FDOStream___is_writable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//stream.nit:246 */
@@ -1235,6 +1263,7 @@ void standard___stream___FDOStream___write(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___stream___FDOStream___write;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1291,6 +1320,7 @@ void standard___stream___FDOStream___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___stream___FDOStream___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1318,6 +1348,7 @@ void standard___stream___FDIOStream___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_standard___stream___FDIOStream___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

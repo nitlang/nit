@@ -5,11 +5,13 @@
 
 #ifndef SYS_TYPE
 #define SYS_TYPE
-typedef struct s_Sys{
-	val_t v;
-} Sys;
+struct s_Sys{
+		struct nitni_ref ref; /* real ref struct, must be first */
+};
+typedef struct s_Sys *Sys;
+#define Sys_incr_ref( x ) nitni_global_ref_incr( (struct nitni_ref*)(x) )
+#define Sys_decr_ref( x ) nitni_global_ref_decr( (struct nitni_ref*)(x) )
 #endif
-
 #include "string_nit.h"
 
 /* out/indirect function for string::Sys::native_argc */

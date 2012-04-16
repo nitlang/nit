@@ -10,6 +10,7 @@ val_t program___ToolContext___global(val_t p0){
   fra.me.meth = LOCATE_program___ToolContext___global;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./program.nit:26 */
@@ -32,6 +33,7 @@ void program___ToolContext___global__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_program___ToolContext___global__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -50,6 +52,7 @@ void program___ToolContext___use_SFT_optimization__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_program___ToolContext___use_SFT_optimization__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -69,6 +72,7 @@ val_t program___ToolContext___use_SFT_optimization(val_t p0){
   fra.me.meth = LOCATE_program___ToolContext___use_SFT_optimization;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./program.nit:31 */
@@ -99,6 +103,7 @@ val_t program___Program___tc(val_t p0){
   fra.me.meth = LOCATE_program___Program___tc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./program.nit:37 */
@@ -121,6 +126,7 @@ val_t program___Program___main_module(val_t p0){
   fra.me.meth = LOCATE_program___Program___main_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./program.nit:41 */
@@ -142,6 +148,7 @@ val_t program___Program___main_method(val_t p0){
   fra.me.meth = LOCATE_program___Program___main_method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./program.nit:44 */
@@ -158,6 +165,7 @@ val_t program___Program___main_class(val_t p0){
   fra.me.meth = LOCATE_program___Program___main_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./program.nit:48 */
@@ -177,6 +185,7 @@ void program___Program___finish_processing_classes(val_t p0){
   fra.me.meth = LOCATE_program___Program___finish_processing_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -250,6 +259,7 @@ void program___Program___finish_processing_classes(val_t p0){
     fra.me.meth = LOCATE_program___Program___finish_processing_classes;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -276,6 +286,7 @@ void program___Program___compute_main_method(val_t p0){
   fra.me.meth = LOCATE_program___Program___compute_main_method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -344,6 +355,7 @@ void program___Program___generate_allocation_iroutines(val_t p0){
   fra.me.meth = LOCATE_program___Program___generate_allocation_iroutines;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -372,6 +384,7 @@ void program___Program___generate_allocation_iroutines(val_t p0){
     fra.me.meth = LOCATE_program___Program___generate_allocation_iroutines;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -467,6 +480,7 @@ void program___Program___generate_allocation_iroutines(val_t p0){
         fra.me.meth = LOCATE_program___Program___generate_allocation_iroutines;
         fra.me.has_broke = 0;
         fra.me.REG_size = 2;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[1] = NIT_NULL;
         fra.me.closure_ctx = closctx_param;
@@ -555,6 +569,7 @@ void program___Program___generate_allocation_iroutines(val_t p0){
         fra.me.meth = LOCATE_program___Program___generate_allocation_iroutines;
         fra.me.has_broke = 0;
         fra.me.REG_size = 2;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[1] = NIT_NULL;
         fra.me.closure_ctx = closctx_param;
@@ -630,6 +645,7 @@ void program___Program___generate_allocation_iroutines(val_t p0){
         fra.me.meth = LOCATE_program___Program___generate_allocation_iroutines;
         fra.me.has_broke = 0;
         fra.me.REG_size = 6;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[1] = NIT_NULL;
         fra.me.REG[2] = NIT_NULL;
@@ -755,6 +771,7 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
   fra.me.meth = LOCATE_program___Program___with_each_iroutines;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -789,6 +806,7 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
     fra.me.meth = LOCATE_program___Program___with_each_iroutines;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -818,6 +836,7 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
       fra.me.meth = LOCATE_program___Program___with_each_iroutines;
       fra.me.has_broke = 0;
       fra.me.REG_size = 2;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.REG[1] = NIT_NULL;
       fra.me.closure_ctx = closctx_param;
@@ -907,6 +926,7 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
         fra.me.meth = LOCATE_program___Program___with_each_iroutines;
         fra.me.has_broke = 0;
         fra.me.REG_size = 2;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[1] = NIT_NULL;
         fra.me.closure_ctx = closctx_param;
@@ -964,6 +984,7 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
         fra.me.meth = LOCATE_program___Program___with_each_iroutines;
         fra.me.has_broke = 0;
         fra.me.REG_size = 1;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.closure_ctx = closctx_param;
         fra.me.closure_funs = CREG;
@@ -990,6 +1011,7 @@ void program___Program___with_each_methods(val_t p0, struct stack_frame_t *closc
   fra.me.meth = LOCATE_program___Program___with_each_methods;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.closure_ctx = closctx_param;
@@ -1023,6 +1045,7 @@ void program___Program___with_each_methods(val_t p0, struct stack_frame_t *closc
     fra.me.meth = LOCATE_program___Program___with_each_methods;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -1049,6 +1072,7 @@ void program___Program___with_each_methods(val_t p0, struct stack_frame_t *closc
       fra.me.meth = LOCATE_program___Program___with_each_methods;
       fra.me.has_broke = 0;
       fra.me.REG_size = 1;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.closure_ctx = closctx_param;
       fra.me.closure_funs = CREG;
@@ -1076,6 +1100,7 @@ void program___Program___with_each_methods(val_t p0, struct stack_frame_t *closc
         fra.me.meth = LOCATE_program___Program___with_each_methods;
         fra.me.has_broke = 0;
         fra.me.REG_size = 1;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.closure_ctx = closctx_param;
         fra.me.closure_funs = CREG;
@@ -1105,6 +1130,7 @@ void program___Program___with_each_live_local_classes(val_t p0, struct stack_fra
   fra.me.meth = LOCATE_program___Program___with_each_live_local_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.closure_ctx = closctx_param;
   fra.me.closure_funs = CREG;
@@ -1132,6 +1158,7 @@ void program___Program___with_each_live_local_classes(val_t p0, struct stack_fra
     fra.me.meth = LOCATE_program___Program___with_each_live_local_classes;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -1158,6 +1185,7 @@ void program___Program___init(val_t p0, val_t p1, val_t p2, int* init_table){
   fra.me.meth = LOCATE_program___Program___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1183,6 +1211,7 @@ val_t program___MMLocalClass___init_var_iroutine(val_t p0){
   fra.me.meth = LOCATE_program___MMLocalClass___init_var_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./program.nit:227 */
@@ -1199,6 +1228,7 @@ void program___MMLocalClass___init_var_iroutine__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_program___MMLocalClass___init_var_iroutine__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1217,6 +1247,7 @@ val_t program___MMLocalClass___checknew_iroutine(val_t p0){
   fra.me.meth = LOCATE_program___MMLocalClass___checknew_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./program.nit:229 */
@@ -1233,6 +1264,7 @@ void program___MMLocalClass___checknew_iroutine__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_program___MMLocalClass___checknew_iroutine__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1252,6 +1284,7 @@ val_t program___MMLocalClass___new_instance_iroutine(val_t p0){
   fra.me.meth = LOCATE_program___MMLocalClass___new_instance_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./program.nit:231 */

@@ -213,27 +213,27 @@ end
 class FDStream
 	super IOS
 	# File description
-	var _fd: Int
+	var fd: Int
 
-	redef fun close do native_close(_fd)
+	redef fun close do native_close(fd)
 
 	private fun native_close(i: Int): Int is extern "stream_FDStream_FDStream_native_close_1"
 	private fun native_read_char(i: Int): Int is extern "stream_FDStream_FDStream_native_read_char_1"
 	private fun native_read(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_read_3"
 	private fun native_write(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_write_3"
 
-	init(fd: Int) do _fd = fd
+	init(fd: Int) do self.fd = fd
 end
 
 class FDIStream
 	super FDStream
 	super IStream
-	redef readable var _eof: Bool = false
+	redef var eof: Bool = false
 	
 	redef fun read_char
 	do
-		var nb = native_read_char(_fd)
-		if nb == -1 then _eof = true
+		var nb = native_read_char(fd)
+		if nb == -1 then eof = true
 		return nb
 	end
 
@@ -243,17 +243,17 @@ end
 class FDOStream
 	super FDStream
 	super OStream
-	redef readable var _is_writable: Bool
+	redef var is_writable: Bool
 
 	redef fun write(s)
 	do
-		var nb = native_write(_fd, s.to_cstring, s.length)
-		if nb < s.length then _is_writable = false
+		var nb = native_write(fd, s.to_cstring, s.length)
+		if nb < s.length then is_writable = false
 	end
 
 	init(fd: Int)
 	do
-		_is_writable = true
+		is_writable = true
 	end
 end
 
@@ -263,7 +263,35 @@ class FDIOStream
 	super IOStream
 	init(fd: Int)
 	do
-		_fd = fd
-		_is_writable = true
+		self.fd = fd
+		is_writable = true
 	end
+end
+
+redef interface Object
+	# returns first available stream to read or write to
+	# return null on interruption (possibly a signal)
+	protected fun poll( streams : Sequence[FDStream] ) : nullable FDStream
+	do
+		var in_fds = new Array[Int]
+		var out_fds = new Array[Int]
+		var fd_to_stream = new HashMap[Int,FDStream]
+		for s in streams do
+			var fd = s.fd
+			if s isa FDIStream then in_fds.add( fd )
+			if s isa FDOStream then out_fds.add( fd )
+
+			fd_to_stream[fd] = s
+		end
+
+		var polled_fd = intern_poll( in_fds, out_fds )
+
+		if polled_fd == null then
+			return null
+		else
+			return fd_to_stream[polled_fd]
+		end
+	end
+
+	private fun intern_poll( in_fds : Array[Int], out_fds : Array[Int] ) : nullable Int is extern import Array::length, Array::[], nullable Object as ( Int ), Int as nullable
 end

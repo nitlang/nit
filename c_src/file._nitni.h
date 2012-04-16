@@ -5,11 +5,13 @@
 
 #ifndef NATIVEFILECAPABLE_TYPE
 #define NATIVEFILECAPABLE_TYPE
-typedef struct s_NativeFileCapable{
-	val_t v;
-} NativeFileCapable;
+struct s_NativeFileCapable{
+		struct nitni_ref ref; /* real ref struct, must be first */
+};
+typedef struct s_NativeFileCapable *NativeFileCapable;
+#define NativeFileCapable_incr_ref( x ) nitni_global_ref_incr( (struct nitni_ref*)(x) )
+#define NativeFileCapable_decr_ref( x ) nitni_global_ref_decr( (struct nitni_ref*)(x) )
 #endif
-
 #include "file_nit.h"
 
 /* out/indirect function for file::NativeString::file_exists */

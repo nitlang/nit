@@ -24,9 +24,12 @@ redef class ToolContext
 
 	fun integrate_separate_options( options : String )
 	do
-		separate_options.parse( options.split_with( ' ' ) )
-		if separate_options.rest.length > 0 then
-			warning( null, "module {self} args file has unknown args: {separate_options.rest.join(", ")}" )
+		for line in options.split do
+			line = line.strip_extension( "\n" )
+			separate_options.parse( line.split_with( ' ' ) )
+			if separate_options.rest.length > 0 then
+				warning( null, "module {self} args file has unknown args: {separate_options.rest.join(", ")}" )
+			end
 		end
 
 		cc_lib_paths.append( opt_cc_lib_paths.value )

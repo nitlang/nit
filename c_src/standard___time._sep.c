@@ -10,6 +10,7 @@ val_t standard___time___Object___get_time(val_t p0){
   fra.me.meth = LOCATE_standard___time___Object___get_time;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//time.nit:19 */

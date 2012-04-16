@@ -10,6 +10,7 @@ void compiling___icode_generator___Program___generate_icode_files(val_t p0){
   fra.me.meth = LOCATE_compiling___icode_generator___Program___generate_icode_files;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -39,6 +40,7 @@ void compiling___icode_generator___Program___generate_icode_files(val_t p0){
     fra.me.meth = LOCATE_compiling___icode_generator___Program___generate_icode_files;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[0] = p0;
@@ -67,6 +69,7 @@ void compiling___icode_generator___FileICodeDumper___init(val_t p0, val_t p1, in
   fra.me.meth = LOCATE_compiling___icode_generator___FileICodeDumper___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -98,6 +101,7 @@ void compiling___icode_generator___FileICodeDumper___write(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___icode_generator___FileICodeDumper___write;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -191,6 +195,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
   fra.me.meth = LOCATE_compiling___icode_generator___MMLocalClass___generate_icode_file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -369,6 +374,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
       fra.me.meth = LOCATE_compiling___icode_generator___MMLocalClass___generate_icode_file;
       fra.me.has_broke = 0;
       fra.me.REG_size = 4;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.REG[1] = NIT_NULL;
       fra.me.REG[2] = NIT_NULL;
@@ -454,6 +460,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
     fra.me.meth = LOCATE_compiling___icode_generator___MMLocalClass___generate_icode_file;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -496,6 +503,7 @@ void compiling___icode_generator___MMMethod___generate_icode(val_t p0, val_t p1)
   fra.me.meth = LOCATE_compiling___icode_generator___MMMethod___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

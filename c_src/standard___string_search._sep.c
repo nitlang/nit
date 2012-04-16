@@ -9,6 +9,7 @@ val_t standard___string_search___Pattern___search_index_in(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_standard___string_search___Pattern___search_index_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//string_search.nit:21 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___string_search, 21);
   stack_frame_head = fra.me.prev;
@@ -23,6 +24,7 @@ val_t standard___string_search___Pattern___search_in(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_standard___string_search___Pattern___search_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//string_search.nit:26 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___string_search, 26);
   stack_frame_head = fra.me.prev;
@@ -39,6 +41,7 @@ val_t standard___string_search___Pattern___search_all_in(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string_search___Pattern___search_all_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -101,6 +104,7 @@ val_t standard___string_search___Pattern___split_in(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string_search___Pattern___split_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -186,6 +190,7 @@ val_t standard___string_search___BM_Pattern___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___BM_Pattern___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string_search.nit:68 */
@@ -217,6 +222,7 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
   fra.me.meth = LOCATE_standard___string_search___BM_Pattern___search_index_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -449,6 +455,7 @@ val_t standard___string_search___BM_Pattern___search_in(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_standard___string_search___BM_Pattern___search_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -499,6 +506,7 @@ void standard___string_search___BM_Pattern___init(val_t p0, val_t p1, int* init_
   fra.me.meth = LOCATE_standard___string_search___BM_Pattern___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -545,6 +553,7 @@ val_t standard___string_search___BM_Pattern___bc(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string_search___BM_Pattern___bc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -597,6 +606,7 @@ void standard___string_search___BM_Pattern___compute_bc(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___BM_Pattern___compute_bc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -678,6 +688,7 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___BM_Pattern___suffixes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -955,6 +966,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___BM_Pattern___compute_gs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1346,6 +1358,7 @@ val_t standard___string_search___Match___string(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___Match___string;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string_search.nit:205 */
@@ -1368,6 +1381,7 @@ val_t standard___string_search___Match___from(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___Match___from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string_search.nit:208 */
@@ -1390,6 +1404,7 @@ val_t standard___string_search___Match___length(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___Match___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string_search.nit:211 */
@@ -1413,6 +1428,7 @@ val_t standard___string_search___Match___after(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___Match___after;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string_search.nit:216 */
@@ -1447,6 +1463,7 @@ val_t standard___string_search___Match___to_s(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___Match___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1491,6 +1508,7 @@ void standard___string_search___Match___init(val_t p0, val_t p1, val_t p2, val_t
   fra.me.meth = LOCATE_standard___string_search___Match___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1570,6 +1588,7 @@ val_t standard___string_search___Char___search_index_in(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_standard___string_search___Char___search_index_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
@@ -1641,6 +1660,7 @@ val_t standard___string_search___Char___search_in(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___string_search___Char___search_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   REGB0 = p0;
@@ -1688,6 +1708,7 @@ val_t standard___string_search___String___search_index_in(val_t p0, val_t p1, va
   fra.me.meth = LOCATE_standard___string_search___String___search_index_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1837,6 +1858,7 @@ val_t standard___string_search___String___search_in(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_standard___string_search___String___search_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1886,6 +1908,7 @@ val_t standard___string_search___String___search(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string_search___String___search;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1908,6 +1931,7 @@ val_t standard___string_search___String___search_from(val_t p0, val_t p1, val_t 
   fra.me.meth = LOCATE_standard___string_search___String___search_from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1929,6 +1953,7 @@ val_t standard___string_search___String___search_all(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string_search___String___search_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1952,6 +1977,7 @@ val_t standard___string_search___String___split_with(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___string_search___String___split_with;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2036,6 +2062,7 @@ val_t standard___string_search___String___split(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___String___split;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//string_search.nit:314 */
@@ -2055,6 +2082,7 @@ val_t standard___string_search___String___replace(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___string_search___String___replace;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2084,6 +2112,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
   fra.me.meth = LOCATE_standard___string_search___String___html_escape;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

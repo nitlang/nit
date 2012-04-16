@@ -10,6 +10,7 @@ val_t analysis___reachable_as_init_impl___ReachableAsInitBuilder___context(val_t
   fra.me.meth = LOCATE_analysis___reachable_as_init_impl___ReachableAsInitBuilder___context;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_as_init_impl.nit:24 */
@@ -32,6 +33,7 @@ val_t analysis___reachable_as_init_impl___ReachableAsInitBuilder___program(val_t
   fra.me.meth = LOCATE_analysis___reachable_as_init_impl___ReachableAsInitBuilder___program;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_as_init_impl.nit:25 */
@@ -53,6 +55,7 @@ void analysis___reachable_as_init_impl___ReachableAsInitBuilder___work(val_t p0)
   fra.me.meth = LOCATE_analysis___reachable_as_init_impl___ReachableAsInitBuilder___work;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -72,6 +75,7 @@ void analysis___reachable_as_init_impl___ReachableAsInitBuilder___work(val_t p0)
     fra.me.meth = LOCATE_analysis___reachable_as_init_impl___ReachableAsInitBuilder___work;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[0] = p0;
@@ -104,6 +108,7 @@ void analysis___reachable_as_init_impl___ReachableAsInitBuilder___init(val_t p0,
   fra.me.meth = LOCATE_analysis___reachable_as_init_impl___ReachableAsInitBuilder___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -125,6 +130,7 @@ val_t analysis___reachable_as_init_impl___ReachableAsInitAnalysisImpl___is_metho
   fra.me.meth = LOCATE_analysis___reachable_as_init_impl___ReachableAsInitAnalysisImpl___is_method_reachable_as_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -174,6 +180,7 @@ void analysis___reachable_as_init_impl___ReachableAsInitAnalysisImpl___init(val_
   fra.me.meth = LOCATE_analysis___reachable_as_init_impl___ReachableAsInitAnalysisImpl___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_as_init_impl.nit:52 */
@@ -192,6 +199,7 @@ val_t analysis___reachable_as_init_impl___RAIVisitor___builder(val_t p0){
   fra.me.meth = LOCATE_analysis___reachable_as_init_impl___RAIVisitor___builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_as_init_impl.nit:57 */
@@ -214,6 +222,7 @@ void analysis___reachable_as_init_impl___RAIVisitor___visit_icode(val_t p0, val_
   fra.me.meth = LOCATE_analysis___reachable_as_init_impl___RAIVisitor___visit_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -333,6 +342,7 @@ void analysis___reachable_as_init_impl___RAIVisitor___init(val_t p0, val_t p1, i
   fra.me.meth = LOCATE_analysis___reachable_as_init_impl___RAIVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

@@ -56,7 +56,7 @@ redef class MMType
 			not is_nullable then
 			return boxtype( name )
 		else
-			var getter = "{name}.v"
+			var getter = "{name}->ref.val"
 
 			return boxtype( getter )
 		end
@@ -70,7 +70,7 @@ redef class MMType
 			not is_nullable then
 			return "{native_name} = {unboxtype( nit_name )}"
 		else
-			return "{native_name}.v = {unboxtype( nit_name )}"
+			return "{native_name}->ref.val = {unboxtype( nit_name )}"
 		end
 	end
 
@@ -82,8 +82,20 @@ redef class MMType
 			not is_nullable then # int, float, point/void* ...
 			return "{nit_name} = {boxtype(native_name)}"
 		else
-			return "{nit_name} = {native_name}.v"
+			return "{nit_name} = {native_name}->ref.val"
 		end
+	end
+
+	fun uses_nitni_ref : Bool do return local_class.primitive_info == null or is_nullable
+
+	fun friendly_null_getter : String
+	do
+		return "null_{as_notnull.mangled_name}"
+	end
+	
+	fun local_friendly_null_getter_from( m : MMModule ) : String
+	do
+		return "{m.to_s}_{friendly_null_getter}"
 	end
 end
 

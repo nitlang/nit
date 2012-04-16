@@ -11,6 +11,7 @@ void analysis___rta_analysis___RtaContext___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaContext___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//rta_analysis.nit:28 */
@@ -30,6 +31,7 @@ val_t analysis___rta_analysis___RtaContext___instanciated_classes(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaContext___instanciated_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//rta_analysis.nit:29 */
@@ -52,6 +54,7 @@ val_t analysis___rta_analysis___RtaContext___is_class_instantiated(val_t p0, val
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaContext___is_class_instantiated;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -74,6 +77,7 @@ val_t analysis___rta_analysis___RtaContext___reachable_iroutines(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaContext___reachable_iroutines;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//rta_analysis.nit:33 */
@@ -97,6 +101,7 @@ val_t analysis___rta_analysis___RtaContext___is_iroutine_reachable(val_t p0, val
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaContext___is_iroutine_reachable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -137,6 +142,7 @@ val_t analysis___rta_analysis___RtaContext___is_method_reachable(val_t p0, val_t
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaContext___is_method_reachable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -159,6 +165,7 @@ val_t analysis___rta_analysis___RtaBuilder___context(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___context;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//rta_analysis.nit:45 */
@@ -181,6 +188,7 @@ val_t analysis___rta_analysis___RtaBuilder___program(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___program;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//rta_analysis.nit:46 */
@@ -203,6 +211,7 @@ val_t analysis___rta_analysis___RtaBuilder___iroutine_to_search(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___iroutine_to_search;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//rta_analysis.nit:47 */
@@ -225,6 +234,7 @@ val_t analysis___rta_analysis___RtaBuilder___call_sites(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___call_sites;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//rta_analysis.nit:48 */
@@ -247,6 +257,7 @@ val_t analysis___rta_analysis___RtaBuilder___called_methods(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___called_methods;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//rta_analysis.nit:49 */
@@ -270,6 +281,7 @@ void analysis___rta_analysis___RtaBuilder___init(val_t p0, val_t p1, int* init_t
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -294,6 +306,7 @@ val_t analysis___rta_analysis___RtaBuilder___check_method(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___check_method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -341,6 +354,7 @@ val_t analysis___rta_analysis___RtaBuilder___check_method(val_t p0, val_t p1){
     fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___check_method;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -382,6 +396,7 @@ void analysis___rta_analysis___RtaBuilder___check_call_sites(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___check_call_sites;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -406,6 +421,7 @@ void analysis___rta_analysis___RtaBuilder___check_call_sites(val_t p0){
     fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___check_call_sites;
     fra.me.has_broke = 0;
     fra.me.REG_size = 3;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -451,6 +467,7 @@ void analysis___rta_analysis___RtaBuilder___check_call_sites(val_t p0){
       fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___check_call_sites;
       fra.me.has_broke = 0;
       fra.me.REG_size = 1;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.closure_ctx = closctx_param;
       fra.me.closure_funs = CREG;
@@ -488,6 +505,7 @@ void analysis___rta_analysis___RtaBuilder___check_call_sites(val_t p0){
     fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___check_call_sites;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -510,6 +528,7 @@ void analysis___rta_analysis___RtaBuilder___add_instantiated_class(val_t p0, val
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___add_instantiated_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -541,6 +560,7 @@ void analysis___rta_analysis___RtaBuilder___add_reachable_call(val_t p0, val_t p
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___add_reachable_call;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -596,6 +616,7 @@ void analysis___rta_analysis___RtaBuilder___add_reachable_iroutine(val_t p0, val
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___add_reachable_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -661,6 +682,7 @@ void analysis___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___force_some_type_analysis;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -911,6 +933,7 @@ void analysis___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
       fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___force_some_type_analysis;
       fra.me.has_broke = 0;
       fra.me.REG_size = 1;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.closure_ctx = closctx_param;
       fra.me.closure_funs = CREG;
@@ -931,6 +954,7 @@ void analysis___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
       fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___force_some_type_analysis;
       fra.me.has_broke = 0;
       fra.me.REG_size = 1;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.closure_ctx = closctx_param;
       fra.me.closure_funs = CREG;
@@ -953,6 +977,7 @@ void analysis___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
     fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___force_some_type_analysis;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -991,6 +1016,7 @@ void analysis___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
     fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___force_some_type_analysis;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[0] = p0;
     /* ./analysis//rta_analysis.nit:175 */
@@ -1018,6 +1044,7 @@ void analysis___rta_analysis___RtaBuilder___work(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaBuilder___work;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1197,6 +1224,7 @@ val_t analysis___rta_analysis___RtaVisitor___builder(val_t p0){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaVisitor___builder;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//rta_analysis.nit:207 */
@@ -1219,6 +1247,7 @@ void analysis___rta_analysis___RtaVisitor___visit_icode(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaVisitor___visit_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1371,6 +1400,7 @@ void analysis___rta_analysis___RtaVisitor___visit_icode(val_t p0, val_t p1){
           fra.me.meth = LOCATE_analysis___rta_analysis___RtaVisitor___visit_icode;
           fra.me.has_broke = 0;
           fra.me.REG_size = 2;
+          fra.me.nitni_local_ref_head = NULL;
           fra.me.REG[0] = NIT_NULL;
           fra.me.REG[1] = NIT_NULL;
           fra.me.closure_ctx = closctx_param;
@@ -1399,6 +1429,7 @@ void analysis___rta_analysis___RtaVisitor___init(val_t p0, val_t p1, int* init_t
   fra.me.meth = LOCATE_analysis___rta_analysis___RtaVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

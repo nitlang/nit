@@ -11,6 +11,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -94,6 +95,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_read;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -174,6 +176,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iregister_write;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -304,6 +307,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___defe
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -373,6 +377,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -452,6 +457,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -523,6 +529,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -684,6 +691,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
       fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine;
       fra.me.has_broke = 0;
       fra.me.REG_size = 1;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.closure_ctx = closctx_param;
       fra.me.closure_funs = CREG;
@@ -706,6 +714,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
       fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine;
       fra.me.has_broke = 0;
       fra.me.REG_size = 1;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.closure_ctx = closctx_param;
       fra.me.closure_funs = CREG;
@@ -727,6 +736,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___regi
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___register;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -837,6 +847,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -971,6 +982,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___irou
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___iroutine_slot_allocation;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1015,6 +1027,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___init
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1048,6 +1061,7 @@ void analysis___allocate_iregister_slots___SlotGroup___register(val_t p0, val_t 
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___SlotGroup___register;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1101,6 +1115,7 @@ void analysis___allocate_iregister_slots___SlotGroup___free(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___SlotGroup___free;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1136,6 +1151,7 @@ void analysis___allocate_iregister_slots___SlotGroup___init(val_t p0, int* init_
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___SlotGroup___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
   return;
@@ -1150,6 +1166,7 @@ val_t analysis___allocate_iregister_slots___IRoutine___std_slots_nb(val_t p0){
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRoutine___std_slots_nb;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//allocate_iregister_slots.nit:267 */
@@ -1172,6 +1189,7 @@ val_t analysis___allocate_iregister_slots___IRoutine___tag_slots_nb(val_t p0){
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRoutine___tag_slots_nb;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//allocate_iregister_slots.nit:270 */
@@ -1193,6 +1211,7 @@ void analysis___allocate_iregister_slots___IRoutine___allocate_iregister_slots(v
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRoutine___allocate_iregister_slots;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//allocate_iregister_slots.nit:275 */
@@ -1211,6 +1230,7 @@ val_t analysis___allocate_iregister_slots___IRegister___slot_index(val_t p0){
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegister___slot_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//allocate_iregister_slots.nit:281 */
@@ -1227,6 +1247,7 @@ void analysis___allocate_iregister_slots___IRegister___slot_index__eq(val_t p0, 
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegister___slot_index__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1246,6 +1267,7 @@ val_t analysis___allocate_iregister_slots___IRegister___is_local(val_t p0){
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegister___is_local;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//allocate_iregister_slots.nit:286 */
@@ -1268,6 +1290,7 @@ void analysis___allocate_iregister_slots___IRegister___is_local__eq(val_t p0, va
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegister___is_local__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -1285,6 +1308,7 @@ val_t analysis___allocate_iregister_slots___IRegister___local_iroutine(val_t p0)
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegister___local_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//allocate_iregister_slots.nit:289 */
@@ -1301,6 +1325,7 @@ void analysis___allocate_iregister_slots___IRegister___local_iroutine__eq(val_t 
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegister___local_iroutine__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1320,6 +1345,7 @@ val_t analysis___allocate_iregister_slots___IRegister___in_tag_slots(val_t p0){
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegister___in_tag_slots;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//allocate_iregister_slots.nit:292 */
@@ -1342,6 +1368,7 @@ void analysis___allocate_iregister_slots___IRegister___in_tag_slots__eq(val_t p0
   fra.me.meth = LOCATE_analysis___allocate_iregister_slots___IRegister___in_tag_slots__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;

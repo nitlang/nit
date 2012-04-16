@@ -11,6 +11,7 @@ val_t standard___hash___Object___hash(val_t p0){
   fra.me.meth = LOCATE_standard___hash___Object___hash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//hash.nit:24 */
@@ -34,6 +35,7 @@ val_t standard___hash___Int___hash(val_t p0){
   fra.me.meth = LOCATE_standard___hash___Int___hash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//hash.nit:28 */
   goto label1;
@@ -51,6 +53,7 @@ val_t standard___hash___Char___hash(val_t p0){
   fra.me.meth = LOCATE_standard___hash___Char___hash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:413 */
   REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
@@ -71,6 +74,7 @@ val_t standard___hash___Bool___hash(val_t p0){
   fra.me.meth = LOCATE_standard___hash___Bool___hash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//hash.nit:38 */
   if (UNTAG_Bool(REGB0)) {

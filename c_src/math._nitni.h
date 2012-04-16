@@ -5,11 +5,13 @@
 
 #ifndef OBJECT_TYPE
 #define OBJECT_TYPE
-typedef struct s_Object{
-	val_t v;
-} Object;
+struct s_Object{
+		struct nitni_ref ref; /* real ref struct, must be first */
+};
+typedef struct s_Object *Object;
+#define Object_incr_ref( x ) nitni_global_ref_incr( (struct nitni_ref*)(x) )
+#define Object_decr_ref( x ) nitni_global_ref_decr( (struct nitni_ref*)(x) )
 #endif
-
 #include "math_nit.h"
 
 /* out/indirect function for math::Int::rand */

@@ -9,6 +9,7 @@ void syntax___typing___MMSrcModule___do_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___MMSrcModule___do_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -32,6 +33,7 @@ void syntax___typing___TypingVisitor___visit(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___visit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -70,6 +72,7 @@ val_t syntax___typing___TypingVisitor___scope_ctx(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___scope_ctx;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:46 */
@@ -92,6 +95,7 @@ val_t syntax___typing___TypingVisitor___flow_ctx(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___flow_ctx;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -118,6 +122,7 @@ void syntax___typing___TypingVisitor___flow_ctx__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___flow_ctx__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -137,6 +142,7 @@ void syntax___typing___TypingVisitor___mark_is_set(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___mark_is_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -165,6 +171,7 @@ void syntax___typing___TypingVisitor___mark_unreash(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___mark_unreash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -188,6 +195,7 @@ void syntax___typing___TypingVisitor___enter_visit_block(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___enter_visit_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -231,6 +239,7 @@ val_t syntax___typing___TypingVisitor___base_flow_ctx(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___base_flow_ctx;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -257,6 +266,7 @@ void syntax___typing___TypingVisitor___base_flow_ctx__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___base_flow_ctx__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -276,6 +286,7 @@ val_t syntax___typing___TypingVisitor___self_var(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___self_var;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -302,6 +313,7 @@ void syntax___typing___TypingVisitor___self_var__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___self_var__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -320,6 +332,7 @@ val_t syntax___typing___TypingVisitor___top_block(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___top_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:83 */
@@ -336,6 +349,7 @@ void syntax___typing___TypingVisitor___top_block__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___top_block__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -354,6 +368,7 @@ val_t syntax___typing___TypingVisitor___explicit_super_init_calls(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___explicit_super_init_calls;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:86 */
@@ -370,6 +385,7 @@ void syntax___typing___TypingVisitor___explicit_super_init_calls__eq(val_t p0, v
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___explicit_super_init_calls__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -389,6 +405,7 @@ val_t syntax___typing___TypingVisitor___explicit_other_init_call(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___explicit_other_init_call;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:89 */
@@ -411,6 +428,7 @@ void syntax___typing___TypingVisitor___explicit_other_init_call__eq(val_t p0, va
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___explicit_other_init_call__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -430,6 +448,7 @@ void syntax___typing___TypingVisitor___use_if_true_flow_ctx(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___use_if_true_flow_ctx;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -467,6 +486,7 @@ void syntax___typing___TypingVisitor___use_if_false_flow_ctx(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___use_if_false_flow_ctx;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -503,6 +523,7 @@ val_t syntax___typing___TypingVisitor___is_default_closure_definition(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___is_default_closure_definition;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:106 */
@@ -525,6 +546,7 @@ void syntax___typing___TypingVisitor___is_default_closure_definition__eq(val_t p
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___is_default_closure_definition__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -543,6 +565,7 @@ val_t syntax___typing___TypingVisitor___once_count(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___once_count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:109 */
@@ -565,6 +588,7 @@ void syntax___typing___TypingVisitor___once_count__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___once_count__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -584,6 +608,7 @@ void syntax___typing___TypingVisitor___init(val_t p0, val_t p1, val_t p2, int* i
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -624,6 +649,7 @@ val_t syntax___typing___TypingVisitor___get_default_constructor_for(val_t p0, va
   fra.me.meth = LOCATE_syntax___typing___TypingVisitor___get_default_constructor_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 12;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1053,6 +1079,7 @@ val_t syntax___typing___TypingVisitor___get_default_constructor_for(val_t p0, va
     fra.me.meth = LOCATE_syntax___typing___TypingVisitor___get_default_constructor_for;
     fra.me.has_broke = 0;
     fra.me.REG_size = 4;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -1193,6 +1220,7 @@ void syntax___typing___ANode___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ANode___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1213,6 +1241,7 @@ void syntax___typing___ANode___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ANode___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1231,6 +1260,7 @@ void syntax___typing___AClassdef___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AClassdef___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1273,6 +1303,7 @@ val_t syntax___typing___APropdef___self_var(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___APropdef___self_var;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1300,6 +1331,7 @@ void syntax___typing___AAttrPropdef___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAttrPropdef___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1376,6 +1408,7 @@ void syntax___typing___AMethPropdef___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AMethPropdef___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1418,6 +1451,7 @@ void syntax___typing___AConcreteMethPropdef___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AConcreteMethPropdef___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1483,6 +1517,7 @@ void syntax___typing___AConcreteInitPropdef___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AConcreteInitPropdef___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1522,6 +1557,7 @@ void syntax___typing___AConcreteInitPropdef___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AConcreteInitPropdef___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1936,6 +1972,7 @@ void syntax___typing___AExternInitPropdef___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AExternInitPropdef___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1960,6 +1997,7 @@ void syntax___typing___AExternInitPropdef___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AExternInitPropdef___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1978,6 +2016,7 @@ void syntax___typing___AParam___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AParam___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1998,6 +2037,7 @@ val_t syntax___typing___AClosureDecl___escapable(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AClosureDecl___escapable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:300 */
@@ -2019,6 +2059,7 @@ void syntax___typing___AClosureDecl___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AClosureDecl___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2277,6 +2318,7 @@ val_t syntax___typing___AType___stype(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AType___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2304,6 +2346,7 @@ val_t syntax___typing___AType___is_typed(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AType___is_typed;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:346 */
@@ -2335,6 +2378,7 @@ void syntax___typing___AType___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AType___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2355,6 +2399,7 @@ val_t syntax___typing___AExpr___is_typed(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AExpr___is_typed;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:356 */
@@ -2378,6 +2423,7 @@ val_t syntax___typing___AExpr___is_statement(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AExpr___is_statement;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:357 */
@@ -2413,6 +2459,7 @@ val_t syntax___typing___AExpr___stype(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AExpr___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2507,6 +2554,7 @@ void syntax___typing___AExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2527,6 +2575,7 @@ val_t syntax___typing___AExpr___is_implicit_self(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AExpr___is_implicit_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:379 */
@@ -2546,6 +2595,7 @@ val_t syntax___typing___AExpr___is_self(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AExpr___is_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:382 */
@@ -2564,6 +2614,7 @@ val_t syntax___typing___AExpr___its_variable(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AExpr___its_variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:385 */
@@ -2582,6 +2633,7 @@ val_t syntax___typing___AExpr___if_true_flow_ctx(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AExpr___if_true_flow_ctx;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:387 */
@@ -2598,6 +2650,7 @@ val_t syntax___typing___AExpr___if_false_flow_ctx(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AExpr___if_false_flow_ctx;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:390 */
@@ -2615,6 +2668,7 @@ val_t syntax___typing___AVardeclExpr___variable(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AVardeclExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2642,6 +2696,7 @@ void syntax___typing___AVardeclExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AVardeclExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2785,6 +2840,7 @@ void syntax___typing___ABlockExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ABlockExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2811,6 +2867,7 @@ void syntax___typing___ABlockExpr___accept_typing(val_t p0, val_t p1){
     fra.me.meth = LOCATE_syntax___typing___ABlockExpr___accept_typing;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -2863,6 +2920,7 @@ void syntax___typing___AReturnExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AReturnExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3043,6 +3101,7 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AContinueExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3252,6 +3311,7 @@ void syntax___typing___ABreakExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ABreakExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3452,6 +3512,7 @@ void syntax___typing___AAbortExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAbortExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3473,6 +3534,7 @@ val_t syntax___typing___AAbsControl___escapable(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAbsControl___escapable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:519 */
@@ -3491,6 +3553,7 @@ void syntax___typing___AAbsControl___process_control(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_syntax___typing___AAbsControl___process_control;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3565,6 +3628,7 @@ void syntax___typing___AAbsControl___process_control_inside(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAbsControl___process_control_inside;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//typing.nit:555 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 555);
   stack_frame_head = fra.me.prev;
@@ -3580,6 +3644,7 @@ void syntax___typing___ADoExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ADoExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3603,6 +3668,7 @@ void syntax___typing___ADoExpr___process_control_inside(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ADoExpr___process_control_inside;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3623,6 +3689,7 @@ void syntax___typing___AIfExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AIfExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3676,6 +3743,7 @@ void syntax___typing___AWhileExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AWhileExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3701,6 +3769,7 @@ void syntax___typing___AWhileExpr___process_control_inside(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AWhileExpr___process_control_inside;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3765,6 +3834,7 @@ void syntax___typing___ALoopExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ALoopExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3788,6 +3858,7 @@ void syntax___typing___ALoopExpr___process_control_inside(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ALoopExpr___process_control_inside;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3811,6 +3882,7 @@ val_t syntax___typing___AForExpr___variables(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AForExpr___variables;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3837,6 +3909,7 @@ void syntax___typing___AForExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AForExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3860,6 +3933,7 @@ void syntax___typing___AForExpr___process_control_inside(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AForExpr___process_control_inside;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3914,6 +3988,7 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AForExpr___do_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4378,6 +4453,7 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     fra.me.meth = LOCATE_syntax___typing___AForExpr___do_typing;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -4406,6 +4482,7 @@ void syntax___typing___AAssertExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAssertExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4465,6 +4542,7 @@ val_t syntax___typing___AVarFormExpr___variable(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AVarFormExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4490,6 +4568,7 @@ val_t syntax___typing___AVarExpr___its_variable(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AVarExpr___its_variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:761 */
@@ -4510,6 +4589,7 @@ void syntax___typing___AVarExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AVarExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4555,6 +4635,7 @@ void syntax___typing___AVarAssignExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AVarAssignExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4631,6 +4712,7 @@ val_t syntax___typing___AReassignFormExpr___do_rvalue_typing(val_t p0, val_t p1,
   fra.me.meth = LOCATE_syntax___typing___AReassignFormExpr___do_rvalue_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4790,6 +4872,7 @@ val_t syntax___typing___AReassignFormExpr___assign_method(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AReassignFormExpr___assign_method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4817,6 +4900,7 @@ void syntax___typing___AVarReassignExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AVarReassignExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4910,6 +4994,7 @@ val_t syntax___typing___AAssignOp___method_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAssignOp___method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//typing.nit:841 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 841);
   stack_frame_head = fra.me.prev;
@@ -4927,6 +5012,7 @@ val_t syntax___typing___APlusAssignOp___method_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___APlusAssignOp___method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:844 */
@@ -4961,6 +5047,7 @@ val_t syntax___typing___AMinusAssignOp___method_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AMinusAssignOp___method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:847 */
@@ -4993,6 +5080,7 @@ val_t syntax___typing___ASelfExpr___variable(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASelfExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -5018,6 +5106,7 @@ val_t syntax___typing___ASelfExpr___its_variable(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASelfExpr___its_variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:854 */
@@ -5037,6 +5126,7 @@ void syntax___typing___ASelfExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ASelfExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5066,6 +5156,7 @@ val_t syntax___typing___ASelfExpr___is_self(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASelfExpr___is_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:863 */
@@ -5085,6 +5176,7 @@ val_t syntax___typing___AImplicitSelfExpr___is_implicit_self(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AImplicitSelfExpr___is_implicit_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:867 */
@@ -5105,6 +5197,7 @@ void syntax___typing___AIfexprExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AIfexprExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5185,6 +5278,7 @@ void syntax___typing___ABoolExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ABoolExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -5209,6 +5303,7 @@ void syntax___typing___AOrExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AOrExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5284,6 +5379,7 @@ void syntax___typing___AAndExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAndExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5356,6 +5452,7 @@ void syntax___typing___ANotExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ANotExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5395,6 +5492,7 @@ void syntax___typing___AOrElseExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AOrElseExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5507,6 +5605,7 @@ void syntax___typing___AIntExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AIntExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -5530,6 +5629,7 @@ void syntax___typing___AFloatExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AFloatExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -5553,6 +5653,7 @@ void syntax___typing___ACharExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ACharExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -5576,6 +5677,7 @@ void syntax___typing___AStringFormExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AStringFormExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -5599,6 +5701,7 @@ val_t syntax___typing___ASuperstringExpr___atype(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASuperstringExpr___atype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -5625,6 +5728,7 @@ void syntax___typing___ASuperstringExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ASuperstringExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5661,6 +5765,7 @@ void syntax___typing___ASuperstringExpr___after_typing(val_t p0, val_t p1){
     fra.me.meth = LOCATE_syntax___typing___ASuperstringExpr___after_typing;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -5680,6 +5785,7 @@ void syntax___typing___ANullExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ANullExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -5704,6 +5810,7 @@ void syntax___typing___AArrayExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AArrayExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5742,6 +5849,7 @@ void syntax___typing___AArrayExpr___do_typing(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_syntax___typing___AArrayExpr___do_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5771,6 +5879,7 @@ void syntax___typing___ARangeExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ARangeExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -5886,6 +5995,7 @@ val_t syntax___typing___ASuperExpr___init_in_superclass(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASuperExpr___init_in_superclass;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1115 */
@@ -5902,6 +6012,7 @@ val_t syntax___typing___ASuperExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASuperExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1116 */
@@ -5935,6 +6046,7 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ASuperExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6467,6 +6579,7 @@ val_t syntax___typing___AExternCall___target_class_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AExternCall___target_class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1175 */
@@ -6485,6 +6598,7 @@ val_t syntax___typing___AExternCall___target_method_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AExternCall___target_method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//typing.nit:1176 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1176);
   stack_frame_head = fra.me.prev;
@@ -6507,6 +6621,7 @@ void syntax___typing___AExternCall___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AExternCall___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6681,6 +6796,7 @@ val_t syntax___typing___ALocalPropExternCall___target_class_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ALocalPropExternCall___target_class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1222 */
@@ -6700,6 +6816,7 @@ val_t syntax___typing___ALocalPropExternCall___target_method_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ALocalPropExternCall___target_method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -6729,6 +6846,7 @@ void syntax___typing___ASuperExternCall___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ASuperExternCall___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6790,6 +6908,7 @@ val_t syntax___typing___AFullPropExternCall___target_class_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AFullPropExternCall___target_class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1240 */
@@ -6810,6 +6929,7 @@ val_t syntax___typing___AFullPropExternCall___target_method_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AFullPropExternCall___target_method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -6836,6 +6956,7 @@ val_t syntax___typing___AInitPropExternCall___target_class_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AInitPropExternCall___target_class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1245 */
@@ -6857,6 +6978,7 @@ val_t syntax___typing___AInitPropExternCall___target_method_name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AInitPropExternCall___target_method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1246 */
@@ -6883,6 +7005,7 @@ val_t syntax___typing___ACastExternCall___from_type(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACastExternCall___from_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//typing.nit:1250 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1250);
   stack_frame_head = fra.me.prev;
@@ -6897,6 +7020,7 @@ val_t syntax___typing___ACastExternCall___to_type(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACastExternCall___to_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//typing.nit:1251 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1251);
   stack_frame_head = fra.me.prev;
@@ -6914,6 +7038,7 @@ void syntax___typing___ACastExternCall___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ACastExternCall___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -6968,6 +7093,7 @@ val_t syntax___typing___ACastAsExternCall___from_type(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACastAsExternCall___from_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1268 */
@@ -6987,6 +7113,7 @@ val_t syntax___typing___ACastAsExternCall___to_type(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACastAsExternCall___to_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1269 */
@@ -7006,6 +7133,7 @@ val_t syntax___typing___AAsNullableExternCall___from_type(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAsNullableExternCall___from_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1273 */
@@ -7025,6 +7153,7 @@ val_t syntax___typing___AAsNullableExternCall___to_type(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAsNullableExternCall___to_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1274 */
@@ -7046,6 +7175,7 @@ val_t syntax___typing___AAsNotNullableExternCall___from_type(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAsNotNullableExternCall___from_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -7077,6 +7207,7 @@ val_t syntax___typing___AAsNotNullableExternCall___to_type(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAsNotNullableExternCall___to_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1288 */
@@ -7098,6 +7229,7 @@ val_t syntax___typing___AAttrFormExpr___prop(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAttrFormExpr___prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -7124,6 +7256,7 @@ val_t syntax___typing___AAttrFormExpr___attr_type(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAttrFormExpr___attr_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -7161,6 +7294,7 @@ void syntax___typing___AAttrFormExpr___do_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAttrFormExpr___do_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7363,6 +7497,7 @@ void syntax___typing___AAttrExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAttrExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -7407,6 +7542,7 @@ void syntax___typing___AAttrAssignExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAttrAssignExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7458,6 +7594,7 @@ void syntax___typing___AAttrReassignExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAttrReassignExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7525,6 +7662,7 @@ void syntax___typing___AIssetAttrExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AIssetAttrExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7584,6 +7722,7 @@ val_t syntax___typing___AAbsAbsSendExpr___prop_signature(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAbsAbsSendExpr___prop_signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -7612,6 +7751,7 @@ val_t syntax___typing___AAbsAbsSendExpr___raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAbsAbsSendExpr___raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7680,6 +7820,7 @@ val_t syntax___typing___AAbsAbsSendExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAbsAbsSendExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -7741,6 +7882,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
   fra.me.meth = LOCATE_syntax___typing___AAbsAbsSendExpr___process_signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8104,6 +8246,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_syntax___typing___AAbsAbsSendExpr___process_closures;
   fra.me.has_broke = 0;
   fra.me.REG_size = 17;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -8901,6 +9044,7 @@ void syntax___typing___AAbsSendExpr___do_typing(val_t p0, val_t p1, val_t p2, va
   fra.me.meth = LOCATE_syntax___typing___AAbsSendExpr___do_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9028,6 +9172,7 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_syntax___typing___AAbsSendExpr___get_property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9376,6 +9521,7 @@ val_t syntax___typing___AAbsSendExpr___get_signature(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_syntax___typing___AAbsSendExpr___get_signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9415,6 +9561,7 @@ val_t syntax___typing___AAbsSendExpr___prop(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAbsSendExpr___prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -9441,6 +9588,7 @@ val_t syntax___typing___AAbsSendExpr___return_type(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AAbsSendExpr___return_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1548 */
@@ -9471,6 +9619,7 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
   fra.me.meth = LOCATE_syntax___typing___ASuperInitCall___register_super_init_call;
   fra.me.has_broke = 0;
   fra.me.REG_size = 11;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -9815,6 +9964,7 @@ val_t syntax___typing___ANewExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ANewExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1591 */
@@ -9842,6 +9992,7 @@ void syntax___typing___ANewExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ANewExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10008,6 +10159,7 @@ val_t syntax___typing___ASendExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASendExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//typing.nit:1621 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1621);
   stack_frame_head = fra.me.prev;
@@ -10022,6 +10174,7 @@ val_t syntax___typing___ASendExpr___closure_defs(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASendExpr___closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1625 */
@@ -10040,6 +10193,7 @@ void syntax___typing___ASendExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ASendExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -10064,6 +10218,7 @@ void syntax___typing___ASendExpr___do_all_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ASendExpr___do_all_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10209,6 +10364,7 @@ val_t syntax___typing___ASendReassignExpr___read_prop(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASendReassignExpr___read_prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -10247,6 +10403,7 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ASendReassignExpr___do_all_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10542,6 +10699,7 @@ val_t syntax___typing___ABinopExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ABinopExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -10567,6 +10725,7 @@ val_t syntax___typing___AEqExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AEqExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1699 */
@@ -10602,6 +10761,7 @@ void syntax___typing___AEqExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AEqExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10725,6 +10885,7 @@ void syntax___typing___AEqExpr___try_to_isa(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_syntax___typing___AEqExpr___try_to_isa;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10784,6 +10945,7 @@ val_t syntax___typing___ANeExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ANeExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1730 */
@@ -10819,6 +10981,7 @@ void syntax___typing___ANeExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ANeExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -10942,6 +11105,7 @@ void syntax___typing___ANeExpr___try_to_isa(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_syntax___typing___ANeExpr___try_to_isa;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11001,6 +11165,7 @@ val_t syntax___typing___ALtExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ALtExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1761 */
@@ -11035,6 +11200,7 @@ val_t syntax___typing___ALeExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ALeExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1764 */
@@ -11069,6 +11235,7 @@ val_t syntax___typing___ALlExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ALlExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1767 */
@@ -11103,6 +11270,7 @@ val_t syntax___typing___AGtExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AGtExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1770 */
@@ -11137,6 +11305,7 @@ val_t syntax___typing___AGeExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AGeExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1773 */
@@ -11171,6 +11340,7 @@ val_t syntax___typing___AGgExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AGgExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1776 */
@@ -11205,6 +11375,7 @@ val_t syntax___typing___APlusExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___APlusExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1779 */
@@ -11239,6 +11410,7 @@ val_t syntax___typing___AMinusExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AMinusExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1782 */
@@ -11273,6 +11445,7 @@ val_t syntax___typing___AStarshipExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AStarshipExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1785 */
@@ -11307,6 +11480,7 @@ val_t syntax___typing___AStarExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AStarExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1788 */
@@ -11341,6 +11515,7 @@ val_t syntax___typing___ASlashExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASlashExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1791 */
@@ -11375,6 +11550,7 @@ val_t syntax___typing___APercentExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___APercentExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1794 */
@@ -11409,6 +11585,7 @@ val_t syntax___typing___AUminusExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AUminusExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1798 */
@@ -11440,6 +11617,7 @@ val_t syntax___typing___AUminusExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AUminusExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1799 */
@@ -11462,6 +11640,7 @@ void syntax___typing___ACallFormExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ACallFormExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11575,6 +11754,7 @@ val_t syntax___typing___ACallFormExpr___closure_defs(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACallFormExpr___closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -11605,6 +11785,7 @@ val_t syntax___typing___ACallFormExpr___variable_create(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ACallFormExpr___variable_create;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//typing.nit:1839 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1839);
   stack_frame_head = fra.me.prev;
@@ -11619,6 +11800,7 @@ val_t syntax___typing___ACallExpr___variable_create(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ACallExpr___variable_create;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -11640,6 +11822,7 @@ val_t syntax___typing___ACallExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACallExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1849 */
@@ -11659,6 +11842,7 @@ val_t syntax___typing___ACallExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACallExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1850 */
@@ -11678,6 +11862,7 @@ val_t syntax___typing___ACallAssignExpr___variable_create(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ACallAssignExpr___variable_create;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11704,6 +11889,7 @@ val_t syntax___typing___ACallAssignExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACallAssignExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -11734,6 +11920,7 @@ val_t syntax___typing___ACallAssignExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACallAssignExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -11758,6 +11945,7 @@ val_t syntax___typing___ACallReassignExpr___variable_create(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___ACallReassignExpr___variable_create;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -11782,6 +11970,7 @@ val_t syntax___typing___ACallReassignExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACallReassignExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1873 */
@@ -11801,6 +11990,7 @@ val_t syntax___typing___ACallReassignExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ACallReassignExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1874 */
@@ -11823,6 +12013,7 @@ val_t syntax___typing___ABraExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ABraExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1878 */
@@ -11854,6 +12045,7 @@ val_t syntax___typing___ABraExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ABraExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1879 */
@@ -11874,6 +12066,7 @@ val_t syntax___typing___ABraExpr___closure_defs(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ABraExpr___closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -11907,6 +12100,7 @@ val_t syntax___typing___ABraAssignExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ABraAssignExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1891 */
@@ -11938,6 +12132,7 @@ val_t syntax___typing___ABraAssignExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ABraAssignExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -11965,6 +12160,7 @@ val_t syntax___typing___ABraReassignExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ABraReassignExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1900 */
@@ -11996,6 +12192,7 @@ val_t syntax___typing___ABraReassignExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ABraReassignExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1901 */
@@ -12018,6 +12215,7 @@ val_t syntax___typing___AInitExpr___name(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AInitExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1905 */
@@ -12049,6 +12247,7 @@ val_t syntax___typing___AInitExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AInitExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1906 */
@@ -12069,6 +12268,7 @@ val_t syntax___typing___AClosureCallExpr___variable(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AClosureCallExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -12094,6 +12294,7 @@ val_t syntax___typing___AClosureCallExpr___compute_raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AClosureCallExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1912 */
@@ -12115,6 +12316,7 @@ void syntax___typing___AClosureCallExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AClosureCallExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12176,6 +12378,7 @@ val_t syntax___typing___AClosureId___to_symbol(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AClosureId___to_symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//typing.nit:1931 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1931);
   stack_frame_head = fra.me.prev;
@@ -12190,6 +12393,7 @@ val_t syntax___typing___ASimpleClosureId___to_symbol(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ASimpleClosureId___to_symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1934 */
@@ -12209,6 +12413,7 @@ val_t syntax___typing___ABreakClosureId___to_symbol(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___ABreakClosureId___to_symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1937 */
@@ -12229,6 +12434,7 @@ val_t syntax___typing___AClosureDef___closure(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AClosureDef___closure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -12254,6 +12460,7 @@ val_t syntax___typing___AClosureDef___escapable(val_t p0){
   fra.me.meth = LOCATE_syntax___typing___AClosureDef___escapable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//typing.nit:1944 */
@@ -12271,6 +12478,7 @@ void syntax___typing___AClosureDef___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AClosureDef___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12309,6 +12517,7 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_syntax___typing___AClosureDef___accept_typing2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12564,6 +12773,7 @@ void syntax___typing___ATypeCheckExpr___check_expr_cast(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_syntax___typing___ATypeCheckExpr___check_expr_cast;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12764,6 +12974,7 @@ void syntax___typing___AIsaExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AIsaExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12828,6 +13039,7 @@ void syntax___typing___AAsCastExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAsCastExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12881,6 +13093,7 @@ void syntax___typing___AAsNotnullExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AAsNotnullExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -12954,6 +13167,7 @@ void syntax___typing___AProxyExpr___after_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AProxyExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -12995,6 +13209,7 @@ void syntax___typing___AOnceExpr___accept_typing(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___typing___AOnceExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

@@ -15,6 +15,7 @@ void analysis___inline_get_and_set___Program___dump_inline_get_set(val_t p0, val
   fra.me.meth = LOCATE_analysis___inline_get_and_set___Program___dump_inline_get_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -103,6 +104,7 @@ void analysis___inline_get_and_set___Program___inline_get_set(val_t p0){
   fra.me.meth = LOCATE_analysis___inline_get_and_set___Program___inline_get_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   CALL_program___Program___with_each_iroutines(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_analysis___inline_get_and_set___Program___inline_get_set_1));
@@ -121,6 +123,7 @@ void analysis___inline_get_and_set___Program___inline_get_set(val_t p0){
     fra.me.meth = LOCATE_analysis___inline_get_and_set___Program___inline_get_set;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[0] = p0;
@@ -149,6 +152,7 @@ val_t analysis___inline_get_and_set___InlineGetSetVisitor___number_inlined(val_t
   fra.me.meth = LOCATE_analysis___inline_get_and_set___InlineGetSetVisitor___number_inlined;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//inline_get_and_set.nit:50 */
@@ -172,6 +176,7 @@ void analysis___inline_get_and_set___InlineGetSetVisitor___visit_icode(val_t p0,
   fra.me.meth = LOCATE_analysis___inline_get_and_set___InlineGetSetVisitor___visit_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -346,6 +351,7 @@ void analysis___inline_get_and_set___InlineGetSetVisitor___init(val_t p0, val_t 
   fra.me.meth = LOCATE_analysis___inline_get_and_set___InlineGetSetVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

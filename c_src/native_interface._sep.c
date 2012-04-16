@@ -13,6 +13,7 @@ void native_interface___MMSrcModule___compile_separate_module(val_t p0, val_t p1
   fra.me.meth = LOCATE_native_interface___MMSrcModule___compile_separate_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

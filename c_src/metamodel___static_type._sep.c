@@ -11,6 +11,7 @@ val_t metamodel___static_type___MMLocalClass___get_type(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMLocalClass___get_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -58,6 +59,7 @@ void metamodel___static_type___MMLocalClass___add_ancestor(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMLocalClass___add_ancestor;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -110,6 +112,7 @@ val_t metamodel___static_type___MMLocalClass___ancestors(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMLocalClass___ancestors;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:42 */
@@ -127,6 +130,7 @@ val_t metamodel___static_type___MMLocalClass___ancestor(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMLocalClass___ancestor;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -157,6 +161,7 @@ val_t metamodel___static_type___MMLocalProperty___signature(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMLocalProperty___signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:53 */
@@ -173,6 +178,7 @@ void metamodel___static_type___MMLocalProperty___signature__eq(val_t p0, val_t p
   fra.me.meth = LOCATE_metamodel___static_type___MMLocalProperty___signature__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -193,6 +199,7 @@ val_t metamodel___static_type___MMLocalProperty___signature_for(val_t p0, val_t 
   fra.me.meth = LOCATE_metamodel___static_type___MMLocalProperty___signature_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -270,17 +277,37 @@ val_t metamodel___static_type___MMParam___mmtype(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMParam___mmtype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:71 */
-  REGB0 = TAG_Bool(ATTR_metamodel___static_type___MMParam____mmtype(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_metamodel___static_type___MMParam_____atmmtype(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_mmtype", LOCATE_metamodel___static_type, 71);
+    nit_abort("Uninitialized attribute %s", "@mmtype", LOCATE_metamodel___static_type, 71);
   }
-  fra.me.REG[0] = ATTR_metamodel___static_type___MMParam____mmtype(fra.me.REG[0]);
+  fra.me.REG[0] = ATTR_metamodel___static_type___MMParam_____atmmtype(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
+}
+void metamodel___static_type___MMParam___mmtype__eq(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_metamodel___static_type;
+  fra.me.line = 71;
+  fra.me.meth = LOCATE_metamodel___static_type___MMParam___mmtype__eq;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:71 */
+  ATTR_metamodel___static_type___MMParam_____atmmtype(fra.me.REG[0]) = fra.me.REG[1];
+  stack_frame_head = fra.me.prev;
+  return;
 }
 val_t metamodel___static_type___MMParam___name(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -292,17 +319,37 @@ val_t metamodel___static_type___MMParam___name(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMParam___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:72 */
-  REGB0 = TAG_Bool(ATTR_metamodel___static_type___MMParam____name(fra.me.REG[0])!=NIT_NULL);
+  REGB0 = TAG_Bool(ATTR_metamodel___static_type___MMParam_____atname(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_name", LOCATE_metamodel___static_type, 72);
+    nit_abort("Uninitialized attribute %s", "@name", LOCATE_metamodel___static_type, 72);
   }
-  fra.me.REG[0] = ATTR_metamodel___static_type___MMParam____name(fra.me.REG[0]);
+  fra.me.REG[0] = ATTR_metamodel___static_type___MMParam_____atname(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
+}
+void metamodel___static_type___MMParam___name__eq(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_metamodel___static_type;
+  fra.me.line = 72;
+  fra.me.meth = LOCATE_metamodel___static_type___MMParam___name__eq;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./metamodel//static_type.nit:72 */
+  ATTR_metamodel___static_type___MMParam_____atname(fra.me.REG[0]) = fra.me.REG[1];
+  stack_frame_head = fra.me.prev;
+  return;
 }
 void metamodel___static_type___MMParam___init(val_t p0, val_t p1, val_t p2, int* init_table){
   int itpos0 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_metamodel___static_type___MMParam].i;
@@ -315,6 +362,7 @@ void metamodel___static_type___MMParam___init(val_t p0, val_t p1, val_t p2, int*
   fra.me.meth = LOCATE_metamodel___static_type___MMParam___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -322,9 +370,9 @@ void metamodel___static_type___MMParam___init(val_t p0, val_t p1, val_t p2, int*
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   /* ./metamodel//static_type.nit:76 */
-  ATTR_metamodel___static_type___MMParam____mmtype(fra.me.REG[0]) = fra.me.REG[1];
+  CALL_metamodel___static_type___MMParam___mmtype__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   /* ./metamodel//static_type.nit:77 */
-  ATTR_metamodel___static_type___MMParam____name(fra.me.REG[0]) = fra.me.REG[2];
+  CALL_metamodel___static_type___MMParam___name__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
   return;
@@ -342,6 +390,7 @@ val_t metamodel___static_type___MMParam___to_s(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMParam___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -398,6 +447,7 @@ val_t metamodel___static_type___MMSignature___recv(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature___recv;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:85 */
@@ -420,6 +470,7 @@ val_t metamodel___static_type___MMSignature___params(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature___params;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:88 */
@@ -441,6 +492,7 @@ val_t metamodel___static_type___MMSignature___return_type(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature___return_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:91 */
@@ -458,6 +510,7 @@ val_t metamodel___static_type___MMSignature___closures(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature___closures;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:94 */
@@ -482,6 +535,7 @@ val_t metamodel___static_type___MMSignature___closure_named(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature___closure_named;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -572,6 +626,7 @@ val_t metamodel___static_type___MMSignature___arity(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature___arity;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:109 */
@@ -610,6 +665,7 @@ val_t metamodel___static_type___MMSignature_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -979,6 +1035,7 @@ val_t metamodel___static_type___MMSignature_____bra(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1090,6 +1147,7 @@ val_t metamodel___static_type___MMSignature___to_s(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1328,6 +1386,7 @@ val_t metamodel___static_type___MMSignature___adaptation_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature___adaptation_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1547,6 +1606,7 @@ val_t metamodel___static_type___MMSignature___not_for_self(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature___not_for_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1821,6 +1881,7 @@ void metamodel___static_type___MMSignature___init(val_t p0, val_t p1, val_t p2, 
   fra.me.meth = LOCATE_metamodel___static_type___MMSignature___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1849,6 +1910,7 @@ val_t metamodel___static_type___MMExplicitImport___signature(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMExplicitImport___signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:251 */
@@ -1870,6 +1932,7 @@ void metamodel___static_type___MMExplicitImport___signature__eq(val_t p0, val_t 
   fra.me.meth = LOCATE_metamodel___static_type___MMExplicitImport___signature__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1891,6 +1954,7 @@ void metamodel___static_type___MMExplicitImport___init(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_metamodel___static_type___MMExplicitImport___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1929,6 +1993,7 @@ val_t metamodel___static_type___MMClosure___name(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMClosure___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:262 */
@@ -1951,6 +2016,7 @@ val_t metamodel___static_type___MMClosure___signature(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMClosure___signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:265 */
@@ -1973,6 +2039,7 @@ val_t metamodel___static_type___MMClosure___is_break(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMClosure___is_break;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:268 */
@@ -1995,6 +2062,7 @@ val_t metamodel___static_type___MMClosure___is_optional(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMClosure___is_optional;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:272 */
@@ -2018,6 +2086,7 @@ val_t metamodel___static_type___MMClosure___adaptation_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMClosure___adaptation_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2069,6 +2138,7 @@ void metamodel___static_type___MMClosure___init(val_t p0, val_t p1, val_t p2, va
   fra.me.meth = LOCATE_metamodel___static_type___MMClosure___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2100,6 +2170,7 @@ val_t metamodel___static_type___MMClosure___not_for_self(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMClosure___not_for_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2169,6 +2240,7 @@ val_t metamodel___static_type___MMClosure_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMClosure_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2219,6 +2291,7 @@ void metamodel___static_type___MMAncestor___stype__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMAncestor___stype__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2238,6 +2311,7 @@ val_t metamodel___static_type___MMAncestor___stype(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMAncestor___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2264,6 +2338,7 @@ void metamodel___static_type___MMAncestor___inheriter__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMAncestor___inheriter__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2283,6 +2358,7 @@ val_t metamodel___static_type___MMAncestor___inheriter(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMAncestor___inheriter;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2311,6 +2387,7 @@ val_t metamodel___static_type___MMAncestor___is_reffinement(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMAncestor___is_reffinement;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2342,6 +2419,7 @@ val_t metamodel___static_type___MMAncestor___is_specialisation(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMAncestor___is_specialisation;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2373,6 +2451,7 @@ val_t metamodel___static_type___MMAncestor___local_class(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMAncestor___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./metamodel//static_type.nit:330 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___static_type, 330);
   stack_frame_head = fra.me.prev;
@@ -2389,6 +2468,7 @@ val_t metamodel___static_type___MMAncestor___to_s(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMAncestor___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2433,6 +2513,7 @@ void metamodel___static_type___MMAncestor___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_metamodel___static_type___MMAncestor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos4] = 1;
   return;
@@ -2446,6 +2527,7 @@ val_t metamodel___static_type___MMType___mmmodule(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./metamodel//static_type.nit:346 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___static_type, 346);
   stack_frame_head = fra.me.prev;
@@ -2460,6 +2542,7 @@ val_t metamodel___static_type___MMType___local_class(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./metamodel//static_type.nit:349 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___static_type, 349);
   stack_frame_head = fra.me.prev;
@@ -2475,6 +2558,7 @@ val_t metamodel___static_type___MMType___is_valid(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___is_valid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:354 */
@@ -2493,6 +2577,7 @@ val_t metamodel___static_type___MMType_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMType_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./metamodel//static_type.nit:356 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___static_type, 356);
   stack_frame_head = fra.me.prev;
@@ -2507,6 +2592,7 @@ val_t metamodel___static_type___MMType___is_supertype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___is_supertype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./metamodel//static_type.nit:359 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___static_type, 359);
   stack_frame_head = fra.me.prev;
@@ -2521,6 +2607,7 @@ val_t metamodel___static_type___MMType___for_module(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./metamodel//static_type.nit:364 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___static_type, 364);
   stack_frame_head = fra.me.prev;
@@ -2535,6 +2622,7 @@ val_t metamodel___static_type___MMType___adapt_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./metamodel//static_type.nit:367 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___static_type, 367);
   stack_frame_head = fra.me.prev;
@@ -2549,6 +2637,7 @@ val_t metamodel___static_type___MMType___upcast_for(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./metamodel//static_type.nit:371 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___static_type, 371);
   stack_frame_head = fra.me.prev;
@@ -2563,6 +2652,7 @@ val_t metamodel___static_type___MMType___not_for_self(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___not_for_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:395 */
@@ -2581,6 +2671,7 @@ val_t metamodel___static_type___MMType___is_nullable(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___is_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:401 */
@@ -2601,6 +2692,7 @@ val_t metamodel___static_type___MMType___as_nullable(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___as_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2644,6 +2736,7 @@ val_t metamodel___static_type___MMType___as_notnull(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___as_notnull;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:415 */
@@ -2663,6 +2756,7 @@ void metamodel___static_type___MMType___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_metamodel___static_type___MMType___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos5] = 1;
   return;
@@ -2677,6 +2771,7 @@ val_t metamodel___static_type___MMNullableType___is_valid(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___is_valid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:421 */
@@ -2702,6 +2797,7 @@ val_t metamodel___static_type___MMNullableType___is_nullable(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___is_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:422 */
@@ -2721,6 +2817,7 @@ val_t metamodel___static_type___MMNullableType___as_notnull(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___as_notnull;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:423 */
@@ -2744,6 +2841,7 @@ val_t metamodel___static_type___MMNullableType___as_nullable(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___as_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:424 */
@@ -2763,6 +2861,7 @@ void metamodel___static_type___MMNullableType___init(val_t p0, val_t p1, int* in
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2786,6 +2885,7 @@ val_t metamodel___static_type___MMNullableType___mmmodule(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:427 */
@@ -2811,6 +2911,7 @@ val_t metamodel___static_type___MMNullableType___local_class(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:429 */
@@ -2837,6 +2938,7 @@ val_t metamodel___static_type___MMNullableType_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2873,6 +2975,7 @@ val_t metamodel___static_type___MMNullableType___to_s(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2922,6 +3025,7 @@ val_t metamodel___static_type___MMNullableType___is_supertype(val_t p0, val_t p1
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___is_supertype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2949,6 +3053,7 @@ val_t metamodel___static_type___MMNullableType___for_module(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2977,6 +3082,7 @@ val_t metamodel___static_type___MMNullableType___adapt_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3005,6 +3111,7 @@ val_t metamodel___static_type___MMNullableType___upcast_for(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3032,6 +3139,7 @@ val_t metamodel___static_type___MMNullableType___not_for_self(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___not_for_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:463 */
@@ -3058,6 +3166,7 @@ val_t metamodel___static_type___MMTypeClass___local_class(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeClass___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:469 */
@@ -3080,6 +3189,7 @@ val_t metamodel___static_type___MMTypeClass___mmmodule(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeClass___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:470 */
@@ -3105,6 +3215,7 @@ val_t metamodel___static_type___MMTypeClass_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeClass_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3126,6 +3237,7 @@ val_t metamodel___static_type___MMTypeClass___to_s(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeClass___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:475 */
@@ -3152,6 +3264,7 @@ val_t metamodel___static_type___MMTypeClass___upcast_for(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeClass___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3202,6 +3315,7 @@ void metamodel___static_type___MMTypeClass___init(val_t p0, val_t p1, int* init_
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeClass___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3226,6 +3340,7 @@ val_t metamodel___static_type___MMTypeSimpleClass___is_supertype(val_t p0, val_t
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeSimpleClass___is_supertype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3256,6 +3371,7 @@ val_t metamodel___static_type___MMTypeSimpleClass___for_module(val_t p0, val_t p
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeSimpleClass___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3300,6 +3416,7 @@ val_t metamodel___static_type___MMTypeSimpleClass___adapt_to(val_t p0, val_t p1)
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeSimpleClass___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3321,6 +3438,7 @@ void metamodel___static_type___MMTypeSimpleClass___init(val_t p0, val_t p1, int*
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeSimpleClass___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3341,6 +3459,7 @@ val_t metamodel___static_type___MMTypeNone___mmmodule(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeNone___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:520 */
@@ -3363,6 +3482,7 @@ val_t metamodel___static_type___MMTypeNone___is_nullable(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeNone___is_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:521 */
@@ -3383,6 +3503,7 @@ val_t metamodel___static_type___MMTypeNone_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeNone_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3411,6 +3532,7 @@ val_t metamodel___static_type___MMTypeNone___to_s(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeNone___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:523 */
@@ -3437,6 +3559,7 @@ val_t metamodel___static_type___MMTypeNone___is_supertype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeNone___is_supertype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3457,6 +3580,7 @@ val_t metamodel___static_type___MMTypeNone___local_class(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeNone___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:525 */
@@ -3473,6 +3597,7 @@ val_t metamodel___static_type___MMTypeNone___upcast_for(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeNone___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3491,6 +3616,7 @@ val_t metamodel___static_type___MMTypeNone___as_nullable(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeNone___as_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:527 */
@@ -3508,6 +3634,7 @@ val_t metamodel___static_type___MMTypeNone___as_notnull(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeNone___as_notnull;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:528 */
@@ -3526,6 +3653,7 @@ void metamodel___static_type___MMTypeNone___init(val_t p0, val_t p1, int* init_t
   fra.me.meth = LOCATE_metamodel___static_type___MMTypeNone___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3549,6 +3677,7 @@ val_t metamodel___static_type___MMModule___type_none(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMModule___type_none;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:534 */
@@ -3573,6 +3702,7 @@ val_t metamodel___static_type___MMModule___type_bool(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMModule___type_bool;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3608,6 +3738,7 @@ val_t metamodel___static_type___MMImportedCast___from(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMImportedCast___from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:546 */
@@ -3630,6 +3761,7 @@ val_t metamodel___static_type___MMImportedCast___to(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMImportedCast___to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//static_type.nit:547 */
@@ -3654,6 +3786,7 @@ val_t metamodel___static_type___MMImportedCast___is_about_nullable_only(val_t p0
   fra.me.meth = LOCATE_metamodel___static_type___MMImportedCast___is_about_nullable_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3744,6 +3877,7 @@ val_t metamodel___static_type___MMImportedCast___is_not_null_to_nullable(val_t p
   fra.me.meth = LOCATE_metamodel___static_type___MMImportedCast___is_not_null_to_nullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3784,6 +3918,7 @@ val_t metamodel___static_type___MMImportedCast___is_nullable_to_not_null(val_t p
   fra.me.meth = LOCATE_metamodel___static_type___MMImportedCast___is_nullable_to_not_null;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3824,6 +3959,7 @@ val_t metamodel___static_type___MMImportedCast_____eqeq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___static_type___MMImportedCast_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3886,6 +4022,7 @@ void metamodel___static_type___MMImportedCast___init(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_metamodel___static_type___MMImportedCast___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3907,6 +4044,7 @@ val_t metamodel___static_type___MMMethod___explicit_casts(val_t p0){
   fra.me.meth = LOCATE_metamodel___static_type___MMMethod___explicit_casts;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./metamodel//static_type.nit:574 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___static_type, 574);
   stack_frame_head = fra.me.prev;

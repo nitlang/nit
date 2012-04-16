@@ -163,9 +163,9 @@ typedef val_t (*compiling___compiling_icode___IRoutine___compile_signature_to_c_
 static const char * const LOCATE_compiling___compiling_icode___IRoutine___compile_inside_to_c = "compiling_icode::IRoutine::compile_inside_to_c";
 val_t compiling___compiling_icode___IRoutine___compile_inside_to_c(val_t p0, val_t p1, val_t p2);
 typedef val_t (*compiling___compiling_icode___IRoutine___compile_inside_to_c_t)(val_t p0, val_t p1, val_t p2);
-  typedef void (*CLOS_OC_compiling___compiling_icode___IRoutine___compile_inside_to_c_24_0)(struct stack_frame_t *);
-  void OC_compiling___compiling_icode___IRoutine___compile_inside_to_c_24(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_compiling___compiling_icode___IRoutine___compile_inside_to_c_24_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*CLOS_OC_compiling___compiling_icode___IRoutine___compile_inside_to_c_25_0)(struct stack_frame_t *);
+  void OC_compiling___compiling_icode___IRoutine___compile_inside_to_c_25(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_compiling___compiling_icode___IRoutine___compile_inside_to_c_25_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 static const char * const LOCATE_compiling___compiling_icode___IRoutine___compile_to_c = "compiling_icode::IRoutine::compile_to_c";
 val_t compiling___compiling_icode___IRoutine___compile_to_c(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (*compiling___compiling_icode___IRoutine___compile_to_c_t)(val_t p0, val_t p1, val_t p2, val_t p3);

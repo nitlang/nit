@@ -125,6 +125,9 @@ void initialize_gc_option(void) {
 		case nitgc: Nit_gc_init(); break;
 		default: break; /* Nothing */
 	}
+
+	/* Initialize global references list */
+	nitni_global_ref_list_init();
 }
 void prepare_signals(void) {
 	initialize_gc_option();
@@ -158,4 +161,114 @@ void nit_abort(const char* s, const char* msg, const char* loc, int line) {
 	if (line != 0) fprintf(stderr, ":%d", line);
 	fprintf(stderr, ")\n");
 	nit_exit(1);
+}
+
+/* Register reference to Nit object with the latest extern method called. */
+void nitni_local_ref_add( struct nitni_ref *ref ) {
+	struct nitni_ref_array_link **link_p;
+	struct nitni_ref_array_link * link = NULL;
+
+	/* find usable link or link to create */
+	link_p = &( stack_frame_head->nitni_local_ref_head );
+	while ( (*link_p) != NULL &&
+			(*link_p)->count >= NITNI_REF_ARRAY_LINK_SIZE ) {
+		link_p = &((*link_p)->next);
+	}
+
+	/* create link if needed */
+	if ( *link_p == NULL ) {
+		link = malloc( sizeof(struct nitni_ref_array_link) );
+		link->count = 0;
+		link->next = NULL;
+
+		(*link_p) = link;
+	} else {
+		link = *link_p;
+	}
+
+	/* add to link */
+	link->reg[ link->count ] = ref;
+	link->count ++;
+}
+
+/* Clean all references associated to the current (but returning) extern method. */
+void nitni_local_ref_clean( void ) {
+	struct nitni_ref_array_link * link,
+		* last_link;
+	int i;
+
+	link = stack_frame_head->nitni_local_ref_head;
+	while ( link != NULL )
+	{
+		for ( i = 0; i < link->count; i ++ ) {
+			if ( link->reg[i]->count == 0 ) { /* not registered globally */
+				free( link->reg[ i ] );
+			}
+		}
+
+		last_link = link;
+		if ( link->count == NITNI_REF_ARRAY_LINK_SIZE )
+			link = link->next;
+		else
+			link = NULL;
+
+		free(last_link);
+	}
+
+	stack_frame_head->nitni_local_ref_head = NULL;
+}
+
+struct nitni_global_ref_list_t *nitni_global_ref_list;
+void nitni_global_ref_list_init() {
+	nitni_global_ref_list = (struct nitni_global_ref_list_t*)malloc(sizeof(struct nitni_global_ref_list_t));
+	nitni_global_ref_list->head = NULL;
+	nitni_global_ref_list->tail = NULL;
+}
+
+void nitni_global_ref_add( struct nitni_ref *ref ) {
+	if ( nitni_global_ref_list->head == NULL ) {
+		nitni_global_ref_list->head = ref;
+		nitni_global_ref_list->tail = ref;
+
+		ref->prev = NULL;
+	} else {
+		nitni_global_ref_list->tail->next = ref;
+		ref->prev = nitni_global_ref_list->tail;
+	}
+
+	ref->next = NULL;
+}
+
+void nitni_global_ref_remove( struct nitni_ref *ref ) {
+	if ( ref->prev == NULL ) {
+		nitni_global_ref_list->head = ref->next;
+	} else {
+		ref->prev->next = ref->next;
+	}
+
+	if ( ref->next == NULL ) {
+		nitni_global_ref_list->tail = ref->prev;
+	} else {
+		ref->next->prev = ref->prev;
+	}
+}
+
+extern void nitni_global_ref_incr( struct nitni_ref *ref ) {
+	if ( ref->count == 0 ) /* not registered */
+	{
+		/* add to list */
+		nitni_global_ref_add( ref );
+	}
+
+	ref->count ++;
+}
+
+extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
+	if ( ref->count == 1 ) /* was last reference */
+	{
+		/* remove from list */
+		nitni_global_ref_remove( ref );
+	}
+
+	ref->count --;
 }

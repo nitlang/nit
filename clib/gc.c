@@ -146,6 +146,8 @@ static void GC_collect(void) {
 	struct stack_frame_t *frame = stack_frame_head;
 	GC_static_object *staticObject = staticObjects.top;
 	val_t object;
+	struct nitni_ref *global_ref;
+	struct nitni_ref_array_link *local_ref_array_link; /* for native interface */
 
 	gc_allocation_pointer = gc_heap_pointer;
 	gc_scavenging_pointer = gc_heap_pointer;
@@ -159,6 +161,16 @@ static void GC_collect(void) {
 		staticObject = staticObject->next;
 	}
 
+	/* Process global reference to Nit objects from C code */
+	global_ref = nitni_global_ref_list->head;
+	while (global_ref != NULL) {
+		object = global_ref->val;
+		if (!ISNULL(object) && ISOBJ(object)) {
+			global_ref->val = GC_evacuation((obj_t)object);
+		}
+		global_ref = global_ref->next;
+	}
+
 	/* Process function frames (local variables) */
 	while (frame != NULL) {
 		for (j = 0; j < frame->REG_size; j++) {
@@ -167,6 +179,20 @@ static void GC_collect(void) {
 				frame->REG[j] = GC_evacuation((obj_t)object);
 			}
 		}
+
+		/* Process C references to Nit objects */
+		local_ref_array_link = frame->nitni_local_ref_head;
+		while ( local_ref_array_link != NULL )
+		{
+			for (j = 0; j < local_ref_array_link->count; j++) {
+				object = local_ref_array_link->reg[j]->val;
+				if (!ISNULL(object) && ISOBJ(object)) {
+					local_ref_array_link->reg[j]->val = GC_evacuation((obj_t)object);
+				}
+			}
+			local_ref_array_link = local_ref_array_link->next;
+		}
+
 		if (frame == frame->prev) break;
 		frame = frame->prev;
 	}
@@ -245,3 +271,7 @@ void GC_add_static_object(val_t *pointer) {
 	GC_List_Push(&staticObjects, pointer);
 }
 
+/* Is invoked by intern method Sys:force_garbage_collection */
+void Nit_gc_force_garbage_collection( void ) {
+	GC_enlarge_and_collect( 0 );
+}

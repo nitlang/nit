@@ -13,6 +13,7 @@ val_t primitive_info___MMLocalClass___primitive_info(val_t p0){
   fra.me.meth = LOCATE_primitive_info___MMLocalClass___primitive_info;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -138,6 +139,7 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
   fra.me.meth = LOCATE_primitive_info___MMLocalClass___primitive_ctypes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -477,6 +479,7 @@ val_t primitive_info___PrimitiveInfo___name(val_t p0){
   fra.me.meth = LOCATE_primitive_info___PrimitiveInfo___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./primitive_info.nit:78 */
@@ -499,6 +502,7 @@ val_t primitive_info___PrimitiveInfo___tagged(val_t p0){
   fra.me.meth = LOCATE_primitive_info___PrimitiveInfo___tagged;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./primitive_info.nit:81 */
@@ -521,6 +525,7 @@ val_t primitive_info___PrimitiveInfo___cname(val_t p0){
   fra.me.meth = LOCATE_primitive_info___PrimitiveInfo___cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./primitive_info.nit:84 */
@@ -545,6 +550,7 @@ void primitive_info___PrimitiveInfo___init(val_t p0, val_t p1, val_t p2, val_t p
   fra.me.meth = LOCATE_primitive_info___PrimitiveInfo___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -574,6 +580,7 @@ val_t primitive_info___MMType___cname(val_t p0){
   fra.me.meth = LOCATE_primitive_info___MMType___cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -630,6 +637,7 @@ val_t primitive_info___MMType___is_tagged(val_t p0){
   fra.me.meth = LOCATE_primitive_info___MMType___is_tagged;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./primitive_info.nit:110 */
@@ -686,6 +694,7 @@ val_t primitive_info___MMType___default_cvalue(val_t p0){
   fra.me.meth = LOCATE_primitive_info___MMType___default_cvalue;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -795,6 +804,7 @@ val_t primitive_info___MMType___boxtype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_primitive_info___MMType___boxtype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -936,6 +946,7 @@ val_t primitive_info___MMType___unboxtype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_primitive_info___MMType___unboxtype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1072,6 +1083,7 @@ val_t primitive_info___MMMethod___default_extern_name(val_t p0){
   fra.me.meth = LOCATE_primitive_info___MMMethod___default_extern_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1162,6 +1174,7 @@ val_t primitive_info___MMMethod___friendly_extern_name(val_t p0, val_t p1){
   fra.me.meth = LOCATE_primitive_info___MMMethod___friendly_extern_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

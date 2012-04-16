@@ -11,6 +11,7 @@ val_t syntax___SrcModuleLoader___file_type(val_t p0){
   fra.me.meth = LOCATE_syntax___SrcModuleLoader___file_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax.nit:31 */
@@ -42,6 +43,7 @@ val_t syntax___SrcModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t 
   fra.me.meth = LOCATE_syntax___SrcModuleLoader___parse_file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -211,6 +213,7 @@ val_t syntax___SrcModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t 
     fra.me.meth = LOCATE_syntax___SrcModuleLoader___parse_file;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -265,6 +268,7 @@ void syntax___SrcModuleLoader___process_metamodel(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_syntax___SrcModuleLoader___process_metamodel;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -322,6 +326,7 @@ void syntax___SrcModuleLoader___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_syntax___SrcModuleLoader___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax.nit:68 */
@@ -339,6 +344,7 @@ void syntax___MMSrcModule___process_supermodules(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___MMSrcModule___process_supermodules;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -360,6 +366,7 @@ void syntax___MMSrcModule___process_syntax(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___MMSrcModule___process_syntax;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -395,6 +402,7 @@ val_t syntax___ToolContext___keep_ast(val_t p0){
   fra.me.meth = LOCATE_syntax___ToolContext___keep_ast;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax.nit:96 */
@@ -417,6 +425,7 @@ void syntax___ToolContext___keep_ast__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___ToolContext___keep_ast__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;

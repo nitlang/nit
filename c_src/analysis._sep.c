@@ -10,6 +10,7 @@ val_t analysis___ToolContext___global_callgraph(val_t p0){
   fra.me.meth = LOCATE_analysis___ToolContext___global_callgraph;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//analysis.nit:48 */
@@ -31,6 +32,7 @@ void analysis___ToolContext___global_callgraph__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___ToolContext___global_callgraph__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -50,6 +52,7 @@ val_t analysis___ToolContext___no_dead_method_removal(val_t p0){
   fra.me.meth = LOCATE_analysis___ToolContext___no_dead_method_removal;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//analysis.nit:49 */
@@ -72,6 +75,7 @@ void analysis___ToolContext___no_dead_method_removal__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___ToolContext___no_dead_method_removal__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -90,6 +94,7 @@ val_t analysis___ToolContext___no_inline_get_set(val_t p0){
   fra.me.meth = LOCATE_analysis___ToolContext___no_inline_get_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//analysis.nit:50 */
@@ -112,6 +117,7 @@ void analysis___ToolContext___no_inline_get_set__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___ToolContext___no_inline_get_set__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -130,6 +136,7 @@ val_t analysis___ToolContext___no_callgraph_from_init(val_t p0){
   fra.me.meth = LOCATE_analysis___ToolContext___no_callgraph_from_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//analysis.nit:51 */
@@ -152,6 +159,7 @@ void analysis___ToolContext___no_callgraph_from_init__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___ToolContext___no_callgraph_from_init__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -170,6 +178,7 @@ val_t analysis___ToolContext___no_out_of_init_get_test_removal(val_t p0){
   fra.me.meth = LOCATE_analysis___ToolContext___no_out_of_init_get_test_removal;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//analysis.nit:52 */
@@ -192,6 +201,7 @@ void analysis___ToolContext___no_out_of_init_get_test_removal__eq(val_t p0, val_
   fra.me.meth = LOCATE_analysis___ToolContext___no_out_of_init_get_test_removal__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -213,6 +223,7 @@ void analysis___Program___do_global_analysis(val_t p0){
   fra.me.meth = LOCATE_analysis___Program___do_global_analysis;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -367,6 +378,7 @@ void analysis___Program___do_global_pre_analysis_optimizations(val_t p0){
   fra.me.meth = LOCATE_analysis___Program___do_global_pre_analysis_optimizations;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -397,6 +409,7 @@ void analysis___Program___do_global_post_analysis_optimizations(val_t p0){
   fra.me.meth = LOCATE_analysis___Program___do_global_post_analysis_optimizations;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -433,6 +446,7 @@ void analysis___Program___dump_global_optimizations_information(val_t p0, val_t 
   fra.me.meth = LOCATE_analysis___Program___dump_global_optimizations_information;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -455,6 +469,7 @@ void analysis___Program___dump_global_analysis_information(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___Program___dump_global_analysis_information;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -490,6 +505,7 @@ void analysis___IRoutine___optimize(val_t p0, val_t p1){
   fra.me.meth = LOCATE_analysis___IRoutine___optimize;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

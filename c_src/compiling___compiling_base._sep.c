@@ -9,6 +9,7 @@ val_t compiling___compiling_base___ToolContext___compdir(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___compdir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:27 */
@@ -25,6 +26,7 @@ void compiling___compiling_base___ToolContext___compdir__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___compdir__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -43,6 +45,7 @@ val_t compiling___compiling_base___ToolContext___clibdir(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___clibdir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:28 */
@@ -59,6 +62,7 @@ void compiling___compiling_base___ToolContext___clibdir__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___clibdir__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -77,6 +81,7 @@ val_t compiling___compiling_base___ToolContext___bindir(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___bindir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:29 */
@@ -93,6 +98,7 @@ void compiling___compiling_base___ToolContext___bindir__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___bindir__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -111,6 +117,7 @@ val_t compiling___compiling_base___ToolContext___output_file(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___output_file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:30 */
@@ -127,6 +134,7 @@ void compiling___compiling_base___ToolContext___output_file__eq(val_t p0, val_t 
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___output_file__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -146,6 +154,7 @@ val_t compiling___compiling_base___ToolContext___boost(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___boost;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:31 */
@@ -168,6 +177,7 @@ void compiling___compiling_base___ToolContext___boost__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___boost__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -186,6 +196,7 @@ val_t compiling___compiling_base___ToolContext___no_cc(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___no_cc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:32 */
@@ -208,6 +219,7 @@ void compiling___compiling_base___ToolContext___no_cc__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___no_cc__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -226,6 +238,7 @@ val_t compiling___compiling_base___ToolContext___cc_link(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___cc_link;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:33 */
@@ -248,6 +261,7 @@ void compiling___compiling_base___ToolContext___cc_link__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___cc_link__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -266,6 +280,7 @@ val_t compiling___compiling_base___ToolContext___cc_libs(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___cc_libs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:34 */
@@ -287,6 +302,7 @@ void compiling___compiling_base___ToolContext___cc_libs__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___cc_libs__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -306,6 +322,7 @@ val_t compiling___compiling_base___ToolContext___cc_lib_paths(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___cc_lib_paths;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:35 */
@@ -327,6 +344,7 @@ void compiling___compiling_base___ToolContext___cc_lib_paths__eq(val_t p0, val_t
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___cc_lib_paths__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -346,6 +364,7 @@ val_t compiling___compiling_base___ToolContext___cc_include_paths(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___cc_include_paths;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:36 */
@@ -367,6 +386,7 @@ void compiling___compiling_base___ToolContext___cc_include_paths__eq(val_t p0, v
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___cc_include_paths__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -386,6 +406,7 @@ val_t compiling___compiling_base___ToolContext___ext_prefix(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___ext_prefix;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:37 */
@@ -407,6 +428,7 @@ void compiling___compiling_base___ToolContext___ext_prefix__eq(val_t p0, val_t p
   fra.me.meth = LOCATE_compiling___compiling_base___ToolContext___ext_prefix__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -431,6 +453,7 @@ void compiling___compiling_base___CProgram___init(val_t p0, val_t p1, int* init_
   fra.me.meth = LOCATE_compiling___compiling_base___CProgram___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -501,6 +524,7 @@ val_t compiling___compiling_base___CProgram___program(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CProgram___program;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:49 */
@@ -523,6 +547,7 @@ val_t compiling___compiling_base___CProgram___files(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CProgram___files;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:52 */
@@ -545,6 +570,7 @@ val_t compiling___compiling_base___CProgram___include_dirs(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CProgram___include_dirs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:55 */
@@ -567,6 +593,7 @@ val_t compiling___compiling_base___CProgram___build_file(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CProgram___build_file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:58 */
@@ -589,6 +616,7 @@ val_t compiling___compiling_base___CProgram___compdir(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CProgram___compdir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:61 */
@@ -614,6 +642,7 @@ val_t compiling___compiling_base___CProgram___module_header_name(val_t p0, val_t
   fra.me.meth = LOCATE_compiling___compiling_base___CProgram___module_header_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -702,6 +731,7 @@ val_t compiling___compiling_base___CProgram___get_file_ending(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CProgram___get_file_ending;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -780,6 +810,7 @@ void compiling___compiling_base___CProgram___generate_build_file(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CProgram___generate_build_file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1445,6 +1476,7 @@ void compiling___compiling_base___CProgram___run_c_compiler(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CProgram___run_c_compiler;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1507,6 +1539,7 @@ void compiling___compiling_base___CompilerVisitor___add_decl(val_t p0, val_t p1)
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___add_decl;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1533,6 +1566,7 @@ void compiling___compiling_base___CompilerVisitor___add_instr(val_t p0, val_t p1
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___add_instr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1563,6 +1597,7 @@ void compiling___compiling_base___CompilerVisitor___add_indent(val_t p0, val_t p
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___add_indent;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1652,6 +1687,7 @@ void compiling___compiling_base___CompilerVisitor___add_line_to(val_t p0, val_t 
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___add_line_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1688,6 +1724,7 @@ void compiling___compiling_base___CompilerVisitor___add_assignment(val_t p0, val
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___add_assignment;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1752,6 +1789,7 @@ val_t compiling___compiling_base___CompilerVisitor___new_number(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___new_number;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:179 */
@@ -1784,6 +1822,7 @@ void compiling___compiling_base___CompilerVisitor___indent(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___indent;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:188 */
@@ -1808,6 +1847,7 @@ void compiling___compiling_base___CompilerVisitor___unindent(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___unindent;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:193 */
@@ -1850,6 +1890,7 @@ val_t compiling___compiling_base___CompilerVisitor___mmmodule(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:197 */
@@ -1872,6 +1913,7 @@ val_t compiling___compiling_base___CompilerVisitor___header_writer(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___header_writer;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:200 */
@@ -1893,6 +1935,7 @@ void compiling___compiling_base___CompilerVisitor___header_writer__eq(val_t p0, 
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___header_writer__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1912,6 +1955,7 @@ val_t compiling___compiling_base___CompilerVisitor___writer(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___writer;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:203 */
@@ -1933,6 +1977,7 @@ void compiling___compiling_base___CompilerVisitor___writer__eq(val_t p0, val_t p
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___writer__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1952,6 +1997,7 @@ val_t compiling___compiling_base___CompilerVisitor___decl_writer(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___decl_writer;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:206 */
@@ -1973,6 +2019,7 @@ void compiling___compiling_base___CompilerVisitor___decl_writer__eq(val_t p0, va
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___decl_writer__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1992,6 +2039,7 @@ val_t compiling___compiling_base___CompilerVisitor___top_writer(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___top_writer;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:209 */
@@ -2013,6 +2061,7 @@ void compiling___compiling_base___CompilerVisitor___top_writer__eq(val_t p0, val
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___top_writer__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2032,6 +2081,7 @@ val_t compiling___compiling_base___CompilerVisitor___top_decl_writer(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___top_decl_writer;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:212 */
@@ -2053,6 +2103,7 @@ void compiling___compiling_base___CompilerVisitor___top_decl_writer__eq(val_t p0
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___top_decl_writer__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2072,6 +2123,7 @@ val_t compiling___compiling_base___CompilerVisitor___indent_level(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___indent_level;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:215 */
@@ -2094,6 +2146,7 @@ void compiling___compiling_base___CompilerVisitor___indent_level__eq(val_t p0, v
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___indent_level__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -2112,6 +2165,7 @@ val_t compiling___compiling_base___CompilerVisitor___program(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___program;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:218 */
@@ -2134,6 +2188,7 @@ val_t compiling___compiling_base___CompilerVisitor___cprogram(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___cprogram;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:221 */
@@ -2157,6 +2212,7 @@ void compiling___compiling_base___CompilerVisitor___init(val_t p0, val_t p1, val
   fra.me.meth = LOCATE_compiling___compiling_base___CompilerVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2202,6 +2258,7 @@ val_t compiling___compiling_base___MMGlobalProperty___meth_call(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMGlobalProperty___meth_call;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2248,6 +2305,7 @@ val_t compiling___compiling_base___MMGlobalProperty___attr_access(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMGlobalProperty___attr_access;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2294,6 +2352,7 @@ val_t compiling___compiling_base___MMGlobalProperty___vt_class_color(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMGlobalProperty___vt_class_color;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2340,6 +2399,7 @@ val_t compiling___compiling_base___MMGlobalProperty___vt_class_id(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMGlobalProperty___vt_class_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2386,6 +2446,7 @@ val_t compiling___compiling_base___MMGlobalClass___cname(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMGlobalClass___cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2450,6 +2511,7 @@ val_t compiling___compiling_base___MMGlobalClass___id_id(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMGlobalClass___id_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2495,6 +2557,7 @@ val_t compiling___compiling_base___MMGlobalClass___color_id(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMGlobalClass___color_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2540,6 +2603,7 @@ val_t compiling___compiling_base___MMGlobalClass___init_table_pos_id(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMGlobalClass___init_table_pos_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2585,6 +2649,7 @@ val_t compiling___compiling_base___MMModule___cname(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMModule___cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2753,6 +2818,7 @@ val_t compiling___compiling_base___MMLocalClass___cname(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMLocalClass___cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_base.nit:327 */
@@ -2775,6 +2841,7 @@ val_t compiling___compiling_base___MMLocalProperty___cname(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMLocalProperty___cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2840,6 +2907,7 @@ val_t compiling___compiling_base___MMLocalProperty___super_meth_call(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_base___MMLocalProperty___super_meth_call;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

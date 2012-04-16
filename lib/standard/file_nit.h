@@ -20,6 +20,10 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+#include <file._nitni.h>
+
+Set String_files___impl( String recv );
+
 extern int string_NativeString_NativeString_file_exists_0(char *f);
 extern void *string_NativeString_NativeString_file_stat_0(char *f);
 extern void *file_NativeFile_NativeFile_file_stat_0(FILE *f);

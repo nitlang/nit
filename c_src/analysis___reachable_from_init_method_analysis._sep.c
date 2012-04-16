@@ -9,6 +9,7 @@ val_t analysis___reachable_from_init_method_analysis___Program___rfima(val_t p0)
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___Program___rfima;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_from_init_method_analysis.nit:25 */
@@ -25,6 +26,7 @@ void analysis___reachable_from_init_method_analysis___Program___rfima__eq(val_t 
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___Program___rfima__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -47,6 +49,7 @@ void analysis___reachable_from_init_method_analysis___Program___dump_reachable_m
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___Program___dump_reachable_methods_from_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -109,6 +112,7 @@ void analysis___reachable_from_init_method_analysis___Program___dump_reachable_m
     fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___Program___dump_reachable_methods_from_init;
     fra.me.has_broke = 0;
     fra.me.REG_size = 3;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -163,6 +167,7 @@ void analysis___reachable_from_init_method_analysis___Program___dump_unreachable
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___Program___dump_unreachable_methods_from_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -226,6 +231,7 @@ void analysis___reachable_from_init_method_analysis___Program___dump_unreachable
     fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___Program___dump_unreachable_methods_from_init;
     fra.me.has_broke = 0;
     fra.me.REG_size = 3;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -288,6 +294,7 @@ val_t analysis___reachable_from_init_method_analysis___ReachableFromInitMethodAn
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___ReachableFromInitMethodAnalysis___is_iroutine_reachable_from_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./analysis//reachable_from_init_method_analysis.nit:57 */
   nit_abort("Deferred method called", NULL, LOCATE_analysis___reachable_from_init_method_analysis, 57);
   stack_frame_head = fra.me.prev;
@@ -302,6 +309,7 @@ val_t analysis___reachable_from_init_method_analysis___ReachableFromInitMethodAn
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___ReachableFromInitMethodAnalysis___is_method_reachable_from_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./analysis//reachable_from_init_method_analysis.nit:58 */
   nit_abort("Deferred method called", NULL, LOCATE_analysis___reachable_from_init_method_analysis, 58);
   stack_frame_head = fra.me.prev;
@@ -318,6 +326,7 @@ void analysis___reachable_from_init_method_analysis___ReachableFromInitMethodAna
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___ReachableFromInitMethodAnalysis___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
   return;
@@ -332,6 +341,7 @@ val_t analysis___reachable_from_init_method_analysis___DefaultReachableFromInitM
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___DefaultReachableFromInitMethodAnalysis___is_iroutine_reachable_from_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -353,6 +363,7 @@ val_t analysis___reachable_from_init_method_analysis___DefaultReachableFromInitM
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___DefaultReachableFromInitMethodAnalysis___is_method_reachable_from_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -375,6 +386,7 @@ void analysis___reachable_from_init_method_analysis___DefaultReachableFromInitMe
   fra.me.meth = LOCATE_analysis___reachable_from_init_method_analysis___DefaultReachableFromInitMethodAnalysis___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//reachable_from_init_method_analysis.nit:68 */

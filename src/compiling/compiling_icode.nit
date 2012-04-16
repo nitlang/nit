@@ -295,6 +295,7 @@ redef class IRoutine
 		v.add_instr("fra.me.meth = LOCATE_{v.basecname};")
 		v.add_instr("fra.me.has_broke = 0;")
 		v.add_instr("fra.me.REG_size = {std_slots_nb};")
+		v.add_instr("fra.me.nitni_local_ref_head = NULL;")
 
 		# Declare/initialize local variables
 		for i in [0..std_slots_nb[ do
@@ -867,6 +868,10 @@ redef class INative
 				s = "UNBOX_NativeString({regs[0]})[UNTAG_Int({regs[1]})]=UNTAG_Char({regs[2]});"
 			else if n == once "copy_to".to_symbol then
 				s = "(void)memcpy(UNBOX_NativeString({regs[1]})+UNTAG_Int({regs[4]}), UNBOX_NativeString({regs[0]})+UNTAG_Int({regs[3]}), UNTAG_Int({regs[2]}));"
+			end
+		else if c == once "Sys".to_symbol then
+			if n == once "force_garbage_collection".to_symbol then
+				s = "Nit_gc_force_garbage_collection()"
 			end
 		else if n == once "object_id".to_symbol then
 			s = "TAG_Int((bigint)((obj_t){regs[0]})[1].object_id)"

@@ -10,6 +10,7 @@ val_t analysis___remove_out_of_init_get_test___Program___nb_optimized_isset(val_
   fra.me.meth = LOCATE_analysis___remove_out_of_init_get_test___Program___nb_optimized_isset;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//remove_out_of_init_get_test.nit:24 */
@@ -31,6 +32,7 @@ void analysis___remove_out_of_init_get_test___Program___optimize_out_of_init_get
   fra.me.meth = LOCATE_analysis___remove_out_of_init_get_test___Program___optimize_out_of_init_getters;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   CALL_program___Program___with_each_iroutines(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_analysis___remove_out_of_init_get_test___Program___optimize_out_of_init_getters_1));
@@ -49,6 +51,7 @@ void analysis___remove_out_of_init_get_test___Program___optimize_out_of_init_get
     fra.me.meth = LOCATE_analysis___remove_out_of_init_get_test___Program___optimize_out_of_init_getters;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[0] = p0;
@@ -94,6 +97,7 @@ void analysis___remove_out_of_init_get_test___Program___dump_out_of_init_informa
   fra.me.meth = LOCATE_analysis___remove_out_of_init_get_test___Program___dump_out_of_init_information;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -209,6 +213,7 @@ void analysis___remove_out_of_init_get_test___Program___dump_out_of_init_informa
     fra.me.meth = LOCATE_analysis___remove_out_of_init_get_test___Program___dump_out_of_init_information;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[0] = p0;
@@ -236,6 +241,7 @@ val_t analysis___remove_out_of_init_get_test___IssetCounter___nb_isset(val_t p0)
   fra.me.meth = LOCATE_analysis___remove_out_of_init_get_test___IssetCounter___nb_isset;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//remove_out_of_init_get_test.nit:59 */
@@ -259,6 +265,7 @@ void analysis___remove_out_of_init_get_test___IssetCounter___visit_icode(val_t p
   fra.me.meth = LOCATE_analysis___remove_out_of_init_get_test___IssetCounter___visit_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -294,6 +301,7 @@ val_t analysis___remove_out_of_init_get_test___GetterTestRemover___nb_optimized_
   fra.me.meth = LOCATE_analysis___remove_out_of_init_get_test___GetterTestRemover___nb_optimized_isset;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./analysis//remove_out_of_init_get_test.nit:73 */
@@ -317,6 +325,7 @@ void analysis___remove_out_of_init_get_test___GetterTestRemover___visit_icode(va
   fra.me.meth = LOCATE_analysis___remove_out_of_init_get_test___GetterTestRemover___visit_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

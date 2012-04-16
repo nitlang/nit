@@ -38,12 +38,14 @@ extern const int SFT_metamodel___static_type[];
 #define CALL_metamodel___static_type___MMLocalProperty___signature_for(recv) ((metamodel___static_type___MMLocalProperty___signature_for_t)CALL((recv), (SFT_metamodel___static_type[3] + 2)))
 #define ID_metamodel___static_type___MMParam (SFT_metamodel___static_type[4])
 #define COLOR_metamodel___static_type___MMParam (SFT_metamodel___static_type[5])
-#define ATTR_metamodel___static_type___MMParam____mmtype(recv) ATTR(recv, (SFT_metamodel___static_type[6] + 0))
-#define ATTR_metamodel___static_type___MMParam____name(recv) ATTR(recv, (SFT_metamodel___static_type[6] + 1))
+#define ATTR_metamodel___static_type___MMParam_____atmmtype(recv) ATTR(recv, (SFT_metamodel___static_type[6] + 0))
+#define ATTR_metamodel___static_type___MMParam_____atname(recv) ATTR(recv, (SFT_metamodel___static_type[6] + 1))
 #define INIT_TABLE_POS_metamodel___static_type___MMParam (SFT_metamodel___static_type[7] + 0)
 #define CALL_metamodel___static_type___MMParam___mmtype(recv) ((metamodel___static_type___MMParam___mmtype_t)CALL((recv), (SFT_metamodel___static_type[7] + 1)))
-#define CALL_metamodel___static_type___MMParam___name(recv) ((metamodel___static_type___MMParam___name_t)CALL((recv), (SFT_metamodel___static_type[7] + 2)))
-#define CALL_metamodel___static_type___MMParam___init(recv) ((metamodel___static_type___MMParam___init_t)CALL((recv), (SFT_metamodel___static_type[7] + 3)))
+#define CALL_metamodel___static_type___MMParam___mmtype__eq(recv) ((metamodel___static_type___MMParam___mmtype__eq_t)CALL((recv), (SFT_metamodel___static_type[7] + 2)))
+#define CALL_metamodel___static_type___MMParam___name(recv) ((metamodel___static_type___MMParam___name_t)CALL((recv), (SFT_metamodel___static_type[7] + 3)))
+#define CALL_metamodel___static_type___MMParam___name__eq(recv) ((metamodel___static_type___MMParam___name__eq_t)CALL((recv), (SFT_metamodel___static_type[7] + 4)))
+#define CALL_metamodel___static_type___MMParam___init(recv) ((metamodel___static_type___MMParam___init_t)CALL((recv), (SFT_metamodel___static_type[7] + 5)))
 #define ID_metamodel___static_type___MMSignature (SFT_metamodel___static_type[8])
 #define COLOR_metamodel___static_type___MMSignature (SFT_metamodel___static_type[9])
 #define ATTR_metamodel___static_type___MMSignature____recv(recv) ATTR(recv, (SFT_metamodel___static_type[10] + 0))
@@ -172,9 +174,15 @@ val_t NEW_MMLocalProperty_metamodel___abstractmetamodel___MMLocalProperty___init
 static const char * const LOCATE_metamodel___static_type___MMParam___mmtype = "static_type::MMParam::mmtype";
 val_t metamodel___static_type___MMParam___mmtype(val_t p0);
 typedef val_t (*metamodel___static_type___MMParam___mmtype_t)(val_t p0);
+static const char * const LOCATE_metamodel___static_type___MMParam___mmtype__eq = "static_type::MMParam::mmtype=";
+void metamodel___static_type___MMParam___mmtype__eq(val_t p0, val_t p1);
+typedef void (*metamodel___static_type___MMParam___mmtype__eq_t)(val_t p0, val_t p1);
 static const char * const LOCATE_metamodel___static_type___MMParam___name = "static_type::MMParam::name";
 val_t metamodel___static_type___MMParam___name(val_t p0);
 typedef val_t (*metamodel___static_type___MMParam___name_t)(val_t p0);
+static const char * const LOCATE_metamodel___static_type___MMParam___name__eq = "static_type::MMParam::name=";
+void metamodel___static_type___MMParam___name__eq(val_t p0, val_t p1);
+typedef void (*metamodel___static_type___MMParam___name__eq_t)(val_t p0, val_t p1);
 static const char * const LOCATE_metamodel___static_type___MMParam___init = "static_type::MMParam::init";
 void metamodel___static_type___MMParam___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*metamodel___static_type___MMParam___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);

@@ -52,9 +52,9 @@ class NitCompiler
 		boost = opt_boost.value
 		no_cc = opt_no_cc.value
 		cc_link = not opt_cc_no_link.value
-		cc_lib_paths = opt_cc_lib_paths.value
-		cc_libs = opt_cc_libs.value
-		cc_include_paths = opt_cc_include_paths.value
+		cc_lib_paths.add_all( opt_cc_lib_paths.value )
+		cc_libs.add_all( opt_cc_libs.value )
+		cc_include_paths.add_all( opt_cc_include_paths.value )
 		var ext = opt_extension_prefix.value
 		if ext != null then ext_prefix = ext else ext_prefix = ""
 		compdir = opt_compdir.value

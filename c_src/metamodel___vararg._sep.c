@@ -10,6 +10,7 @@ val_t metamodel___vararg___MMSignature___vararg_rank(val_t p0){
   fra.me.meth = LOCATE_metamodel___vararg___MMSignature___vararg_rank;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//vararg.nit:24 */
@@ -32,6 +33,7 @@ void metamodel___vararg___MMSignature___vararg_rank__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___vararg___MMSignature___vararg_rank__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -52,6 +54,7 @@ val_t metamodel___vararg___MMSignature___has_vararg(val_t p0){
   fra.me.meth = LOCATE_metamodel___vararg___MMSignature___has_vararg;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//vararg.nit:30 */
@@ -85,6 +88,7 @@ val_t metamodel___vararg___MMSignature___adaptation_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___vararg___MMSignature___adaptation_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -118,6 +122,7 @@ val_t metamodel___vararg___MMSignature___not_for_self(val_t p0){
   fra.me.meth = LOCATE_metamodel___vararg___MMSignature___not_for_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -151,6 +156,7 @@ void metamodel___vararg___MMSignature___init(val_t p0, val_t p1, val_t p2, val_t
   fra.me.meth = LOCATE_metamodel___vararg___MMSignature___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

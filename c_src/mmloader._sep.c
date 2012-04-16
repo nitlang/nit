@@ -9,6 +9,7 @@ val_t mmloader___Message___location(val_t p0){
   fra.me.meth = LOCATE_mmloader___Message___location;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:30 */
@@ -26,6 +27,7 @@ val_t mmloader___Message___text(val_t p0){
   fra.me.meth = LOCATE_mmloader___Message___text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:31 */
@@ -50,6 +52,7 @@ val_t mmloader___Message_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_mmloader___Message_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -138,6 +141,7 @@ val_t mmloader___Message___to_s(val_t p0){
   fra.me.meth = LOCATE_mmloader___Message___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -247,6 +251,7 @@ val_t mmloader___Message___to_color_string(val_t p0){
   fra.me.meth = LOCATE_mmloader___Message___to_color_string;
   fra.me.has_broke = 0;
   fra.me.REG_size = 12;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -919,6 +924,7 @@ void mmloader___Message___init(val_t p0, val_t p1, val_t p2, int* init_table){
   fra.me.meth = LOCATE_mmloader___Message___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -941,6 +947,7 @@ val_t mmloader___ToolContext___error_count(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___error_count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:97 */
@@ -963,6 +970,7 @@ val_t mmloader___ToolContext___warning_count(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___warning_count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:100 */
@@ -985,6 +993,7 @@ val_t mmloader___ToolContext___log_directory(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___log_directory;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:103 */
@@ -1013,6 +1022,7 @@ void mmloader___ToolContext___check_errors(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___check_errors;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1211,6 +1221,7 @@ void mmloader___ToolContext___error(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_mmloader___ToolContext___error;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1257,6 +1268,7 @@ void mmloader___ToolContext___fatal_error(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_mmloader___ToolContext___fatal_error;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1282,6 +1294,7 @@ void mmloader___ToolContext___warning(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_mmloader___ToolContext___warning;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1398,6 +1411,7 @@ void mmloader___ToolContext___info(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_mmloader___ToolContext___info;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1454,6 +1468,7 @@ val_t mmloader___ToolContext___paths(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___paths;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:165 */
@@ -1476,6 +1491,7 @@ val_t mmloader___ToolContext___option_context(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___option_context;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:171 */
@@ -1498,6 +1514,7 @@ val_t mmloader___ToolContext___opt_warn(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_warn;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:174 */
@@ -1520,6 +1537,7 @@ val_t mmloader___ToolContext___opt_path(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_path;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:177 */
@@ -1542,6 +1560,7 @@ val_t mmloader___ToolContext___opt_log(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_log;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:180 */
@@ -1564,6 +1583,7 @@ val_t mmloader___ToolContext___opt_log_dir(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_log_dir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:183 */
@@ -1586,6 +1606,7 @@ val_t mmloader___ToolContext___opt_only_metamodel(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_only_metamodel;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:186 */
@@ -1608,6 +1629,7 @@ val_t mmloader___ToolContext___opt_only_parse(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_only_parse;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:189 */
@@ -1630,6 +1652,7 @@ val_t mmloader___ToolContext___opt_help(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_help;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:192 */
@@ -1652,6 +1675,7 @@ val_t mmloader___ToolContext___opt_version(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_version;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:195 */
@@ -1674,6 +1698,7 @@ val_t mmloader___ToolContext___opt_verbose(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_verbose;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:198 */
@@ -1696,6 +1721,7 @@ val_t mmloader___ToolContext___opt_stop_on_first_error(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_stop_on_first_error;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:201 */
@@ -1718,6 +1744,7 @@ val_t mmloader___ToolContext___opt_no_color(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___opt_no_color;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:204 */
@@ -1740,6 +1767,7 @@ val_t mmloader___ToolContext___verbose_level(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___verbose_level;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./mmloader.nit:207 */
@@ -1764,6 +1792,7 @@ void mmloader___ToolContext___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_mmloader___ToolContext___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1823,6 +1852,7 @@ void mmloader___ToolContext___process_options(val_t p0){
   fra.me.meth = LOCATE_mmloader___ToolContext___process_options;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2009,6 +2039,7 @@ val_t mmloader___ToolContext___try_to_load(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_mmloader___ToolContext___try_to_load;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2215,6 +2246,7 @@ val_t mmloader___ToolContext___try_to_load(val_t p0, val_t p1, val_t p2){
     fra.me.meth = LOCATE_mmloader___ToolContext___try_to_load;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -2254,6 +2286,7 @@ val_t mmloader___ToolContext___get_module_from_filename(val_t p0, val_t p1){
   fra.me.meth = LOCATE_mmloader___ToolContext___get_module_from_filename;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2406,6 +2439,7 @@ val_t mmloader___ToolContext___get_module(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_mmloader___ToolContext___get_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2597,6 +2631,7 @@ val_t mmloader___ToolContext___directory_for(val_t p0, val_t p1){
   fra.me.meth = LOCATE_mmloader___ToolContext___directory_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2649,6 +2684,7 @@ void mmloader___ToolContext___register_loader(val_t p0, val_t p1){
   fra.me.meth = LOCATE_mmloader___ToolContext___register_loader;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2673,6 +2709,7 @@ val_t mmloader___ModuleLoader___file_type(val_t p0){
   fra.me.meth = LOCATE_mmloader___ModuleLoader___file_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./mmloader.nit:369 */
   nit_abort("Deferred method called", NULL, LOCATE_mmloader, 369);
   stack_frame_head = fra.me.prev;
@@ -2691,6 +2728,7 @@ val_t mmloader___ModuleLoader___try_to_load_dir(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_mmloader___ModuleLoader___try_to_load_dir;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2765,6 +2803,7 @@ val_t mmloader___ModuleLoader___can_handle(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_mmloader___ModuleLoader___can_handle;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2847,6 +2886,7 @@ val_t mmloader___ModuleLoader___load_and_process_module(val_t p0, val_t p1, val_
   fra.me.meth = LOCATE_mmloader___ModuleLoader___load_and_process_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2932,6 +2972,7 @@ val_t mmloader___ModuleLoader___load_module(val_t p0, val_t p1, val_t p2, val_t 
   fra.me.meth = LOCATE_mmloader___ModuleLoader___load_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3026,6 +3067,7 @@ val_t mmloader___ModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t p
   fra.me.meth = LOCATE_mmloader___ModuleLoader___parse_file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./mmloader.nit:419 */
   nit_abort("Deferred method called", NULL, LOCATE_mmloader, 419);
   stack_frame_head = fra.me.prev;
@@ -3041,6 +3083,7 @@ void mmloader___ModuleLoader___process_metamodel(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_mmloader___ModuleLoader___process_metamodel;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3066,6 +3109,7 @@ void mmloader___ModuleLoader___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_mmloader___ModuleLoader___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos2] = 1;
   return;

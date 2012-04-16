@@ -10,6 +10,7 @@ val_t metamodel___virtualtype___MMGlobalProperty___is_virtual_type(val_t p0){
   fra.me.meth = LOCATE_metamodel___virtualtype___MMGlobalProperty___is_virtual_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -31,6 +32,7 @@ val_t metamodel___virtualtype___MMTypeProperty___stype_for(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___virtualtype___MMTypeProperty___stype_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -65,6 +67,7 @@ val_t metamodel___virtualtype___MMTypeProperty___real_stype_for(val_t p0, val_t 
   fra.me.meth = LOCATE_metamodel___virtualtype___MMTypeProperty___real_stype_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -135,6 +138,7 @@ val_t metamodel___virtualtype___MMVirtualType___property(val_t p0){
   fra.me.meth = LOCATE_metamodel___virtualtype___MMVirtualType___property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//virtualtype.nit:58 */
@@ -157,6 +161,7 @@ val_t metamodel___virtualtype___MMVirtualType___recv(val_t p0){
   fra.me.meth = LOCATE_metamodel___virtualtype___MMVirtualType___recv;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//virtualtype.nit:61 */
@@ -180,6 +185,7 @@ void metamodel___virtualtype___MMVirtualType___init(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_metamodel___virtualtype___MMVirtualType___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -214,6 +220,7 @@ val_t metamodel___virtualtype___MMVirtualType___mmmodule(val_t p0){
   fra.me.meth = LOCATE_metamodel___virtualtype___MMVirtualType___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//virtualtype.nit:71 */
@@ -240,6 +247,7 @@ val_t metamodel___virtualtype___MMVirtualType___for_module(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___virtualtype___MMVirtualType___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -277,6 +285,7 @@ val_t metamodel___virtualtype___MMVirtualType___not_for_self(val_t p0){
   fra.me.meth = LOCATE_metamodel___virtualtype___MMVirtualType___not_for_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./metamodel//virtualtype.nit:81 */
@@ -297,6 +306,7 @@ val_t metamodel___virtualtype___MMVirtualType___adapt_to(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___virtualtype___MMVirtualType___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -327,6 +337,7 @@ val_t metamodel___virtualtype___MMLocalClass___virtual_type(val_t p0, val_t p1){
   fra.me.meth = LOCATE_metamodel___virtualtype___MMLocalClass___virtual_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -355,6 +366,7 @@ val_t metamodel___virtualtype___MMLocalClass___select_virtual_type(val_t p0, val
   fra.me.meth = LOCATE_metamodel___virtualtype___MMLocalClass___select_virtual_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;

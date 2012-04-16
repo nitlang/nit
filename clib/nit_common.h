@@ -123,6 +123,53 @@ extern val_t G_sys;
 extern int glob_argc;
 extern char ** glob_argv;
 
+/* Native reference to Nit objects */
+/* This structure is used to represent every Nit type in extern methods and custom C code. */
+struct nitni_ref {
+	val_t val; /* reference to the real Nit object, is kept up-to-date by GC */
+	struct nitni_ref *next, *prev; /* adjacent global references in global list */
+	int count; /* number of time this global reference has been marked */
+};
+
+/* This structure is used by extern methods to keep track of local references to Nit objects */
+/* These references make sure an object is not collected by the GC while
+ * this extern methods is on the call stack. */
+/* This takes the form of an array link, each link of size 8 to avoid multiple mallocs. */
+#define NITNI_REF_ARRAY_LINK_SIZE 8
+struct nitni_ref_array_link {
+	struct nitni_ref *reg[ NITNI_REF_ARRAY_LINK_SIZE ];
+	int count; /* nubmer of elements in this link */
+	struct nitni_ref_array_link *next; /* next link in the list */
+};
+
+/* Register reference to Nit object with the latest extern method called. */
+extern void nitni_local_ref_add( struct nitni_ref *ref );
+
+/* Clean all references associated to the current (but returning) extern method. */
+extern void nitni_local_ref_clean( void );
+
+/* List of global references from C code to Nit objects */
+/* Instanciated empty at init of Nit system and filled explicitly by user in C code */
+struct nitni_global_ref_list_t {
+	struct nitni_ref *head, *tail;
+};
+extern struct nitni_global_ref_list_t *nitni_global_ref_list;
+
+/* Initializer of global reference list */
+extern void nitni_global_ref_list_init();
+
+/* Intern function to add a global reference to the list */
+extern void nitni_global_ref_add( struct nitni_ref *ref );
+
+/* Intern function to remove a global reference from the list */
+extern void nitni_global_ref_remove( struct nitni_ref *ref );
+
+/* Increase count on an existing global reference */
+extern void nitni_global_ref_incr( struct nitni_ref *ref );
+
+/* Decrease count on an existing global reference */
+extern void nitni_global_ref_decr( struct nitni_ref *ref );
+
 /* Stack frames.
  * Are used to:
  * - store local variables (REGS) of functions
@@ -137,8 +184,9 @@ struct stack_frame_t {
 	struct stack_frame_t *closure_ctx; /* closure context (for functions that have closure parameters) */
 	fun_t *closure_funs; /* closure functions (for functions that have closure parameters) */
 	int has_broke; /* has an escape occured? 0 if false, label_idx (>0) if true */
+	struct nitni_ref_array_link *nitni_local_ref_head; /* points to head of array link contaning local variables used via nitni */
 	int REG_size; /* number of local variables */
-	val_t REG[1]; /* local variables (flexible array) */
+	val_t REG[1]; /* local variables (flexible array, this must be the last variable is extended in fra struct */
 };
 extern struct stack_frame_t *stack_frame_head;
 

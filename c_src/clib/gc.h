@@ -25,4 +25,6 @@ void *Nit_gc_malloc(size_t size);
 
 void GC_add_static_object(val_t *pointer);
 
+void Nit_gc_force_garbage_collection( void );
+
 #endif

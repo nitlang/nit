@@ -13,6 +13,7 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___scope___ScopeContext_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -153,6 +154,7 @@ void syntax___scope___ScopeContext___add_variable(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___scope___ScopeContext___add_variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -274,6 +276,7 @@ void syntax___scope___ScopeContext___push(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___scope___ScopeContext___push;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -306,6 +309,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_syntax___scope___ScopeContext___push_escapable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -506,6 +510,7 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___ScopeContext___head;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -638,6 +643,7 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___scope___ScopeContext___get_by_label;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -810,6 +816,7 @@ void syntax___scope___ScopeContext___pop(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___ScopeContext___pop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:125 */
@@ -833,6 +840,7 @@ val_t syntax___scope___ScopeContext___visitor(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___ScopeContext___visitor;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:128 */
@@ -856,6 +864,7 @@ void syntax___scope___ScopeContext___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_syntax___scope___ScopeContext___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -876,6 +885,7 @@ val_t syntax___scope___ScopeBlock___node(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___ScopeBlock___node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:140 */
@@ -899,6 +909,7 @@ void syntax___scope___ScopeBlock___add_variable(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___scope___ScopeBlock___add_variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -948,6 +959,7 @@ val_t syntax___scope___ScopeBlock___get_variable(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___scope___ScopeBlock___get_variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1006,6 +1018,7 @@ void syntax___scope___ScopeBlock___init(val_t p0, val_t p1, int* init_table){
   fra.me.meth = LOCATE_syntax___scope___ScopeBlock___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1025,6 +1038,7 @@ val_t syntax___scope___EscapableBlock___lab(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___EscapableBlock___lab;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:178 */
@@ -1042,6 +1056,7 @@ val_t syntax___scope___EscapableBlock___is_break_block(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___EscapableBlock___is_break_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:183 */
@@ -1060,6 +1075,7 @@ val_t syntax___scope___EscapableBlock___break_list(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___EscapableBlock___break_list;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:188 */
@@ -1078,6 +1094,7 @@ val_t syntax___scope___EscapableBlock___continue_stype(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___EscapableBlock___continue_stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:191 */
@@ -1097,6 +1114,7 @@ val_t syntax___scope___EscapableBlock___break_flow_contexts(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___EscapableBlock___break_flow_contexts;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:193 */
@@ -1120,6 +1138,7 @@ void syntax___scope___EscapableBlock___init(val_t p0, val_t p1, int* init_table)
   fra.me.meth = LOCATE_syntax___scope___EscapableBlock___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1140,6 +1159,7 @@ val_t syntax___scope___BreakOnlyEscapableBlock___is_break_block(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___BreakOnlyEscapableBlock___is_break_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:205 */
@@ -1160,6 +1180,7 @@ void syntax___scope___BreakOnlyEscapableBlock___init(val_t p0, val_t p1, int* in
   fra.me.meth = LOCATE_syntax___scope___BreakOnlyEscapableBlock___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1180,6 +1201,7 @@ val_t syntax___scope___EscapableClosure___closure(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___EscapableClosure___closure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:213 */
@@ -1202,6 +1224,7 @@ val_t syntax___scope___EscapableClosure___is_break_block(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___EscapableClosure___is_break_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:216 */
@@ -1226,6 +1249,7 @@ val_t syntax___scope___EscapableClosure___break_list(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___EscapableClosure___break_list;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:218 */
@@ -1243,6 +1267,7 @@ val_t syntax___scope___EscapableClosure___continue_stype(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___EscapableClosure___continue_stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:220 */
@@ -1270,6 +1295,7 @@ void syntax___scope___EscapableClosure___init(val_t p0, val_t p1, val_t p2, val_
   fra.me.meth = LOCATE_syntax___scope___EscapableClosure___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1300,6 +1326,7 @@ val_t syntax___scope___AEscapeExpr___escapable(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___AEscapeExpr___escapable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:234 */
@@ -1316,6 +1343,7 @@ val_t syntax___scope___AEscapeExpr___kwname(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___AEscapeExpr___kwname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//scope.nit:237 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___scope, 237);
   stack_frame_head = fra.me.prev;
@@ -1334,6 +1362,7 @@ val_t syntax___scope___AEscapeExpr___compute_escapable_block(val_t p0, val_t p1)
   fra.me.meth = LOCATE_syntax___scope___AEscapeExpr___compute_escapable_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1425,6 +1454,7 @@ val_t syntax___scope___AContinueExpr___kwname(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___AContinueExpr___kwname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:260 */
@@ -1452,6 +1482,7 @@ val_t syntax___scope___ABreakExpr___kwname(val_t p0){
   fra.me.meth = LOCATE_syntax___scope___ABreakExpr___kwname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//scope.nit:265 */

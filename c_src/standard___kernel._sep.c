@@ -10,6 +10,7 @@ val_t standard___kernel___Object___object_id(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Object___object_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//kernel.nit:28 */
@@ -27,6 +28,7 @@ val_t standard___kernel___Object___is_same_type(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Object___is_same_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -46,6 +48,7 @@ val_t standard___kernel___Object_____eqeq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Object_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -68,6 +71,7 @@ val_t standard___kernel___Object_____neq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Object_____neq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -95,6 +99,7 @@ void standard___kernel___Object___output(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Object___output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//kernel.nit:52 */
@@ -121,6 +126,7 @@ void standard___kernel___Object___output_class_name(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Object___output_class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//kernel.nit:57 */
@@ -138,6 +144,7 @@ void standard___kernel___Object___exit(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Object___exit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -155,6 +162,7 @@ val_t standard___kernel___Object___sys(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Object___sys;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//kernel.nit:64 */
@@ -171,6 +179,7 @@ void standard___kernel___Sys___main(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Sys___main;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   stack_frame_head = fra.me.prev;
@@ -187,6 +196,7 @@ void standard___kernel___Sys___init(val_t p0, int* init_table){
   fra.me.meth = LOCATE_standard___kernel___Sys___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
   return;
@@ -201,6 +211,7 @@ val_t standard___kernel___Comparable_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Comparable_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -225,6 +236,7 @@ val_t standard___kernel___Comparable_____leq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Comparable_____leq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -252,6 +264,7 @@ val_t standard___kernel___Comparable_____geq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Comparable_____geq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -279,6 +292,7 @@ val_t standard___kernel___Comparable_____g(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Comparable_____g;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -306,6 +320,7 @@ val_t standard___kernel___Comparable_____leqg(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Comparable_____leqg;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -354,6 +369,7 @@ val_t standard___kernel___Comparable___is_between(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___kernel___Comparable___is_between;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -393,6 +409,7 @@ val_t standard___kernel___Comparable___max(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Comparable___max;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -426,6 +443,7 @@ val_t standard___kernel___Comparable___min(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Comparable___min;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -459,6 +477,7 @@ val_t standard___kernel___Discrete___succ(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Discrete___succ;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//kernel.nit:147 */
@@ -479,6 +498,7 @@ val_t standard___kernel___Discrete___prec(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Discrete___prec;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//kernel.nit:150 */
@@ -498,6 +518,7 @@ val_t standard___kernel___Discrete_____plus(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Discrete_____plus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//kernel.nit:152 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___kernel, 152);
   stack_frame_head = fra.me.prev;
@@ -512,6 +533,7 @@ val_t standard___kernel___Discrete_____minus(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Discrete_____minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./../lib/standard//kernel.nit:155 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___kernel, 155);
   stack_frame_head = fra.me.prev;
@@ -529,6 +551,7 @@ val_t standard___kernel___Discrete___distance(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Discrete___distance;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -599,6 +622,7 @@ val_t standard___kernel___Bool___object_id(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Bool___object_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:194 */
   REGB0 = TAG_Int(UNTAG_Bool(REGB0));
@@ -615,6 +639,7 @@ val_t standard___kernel___Bool_____eqeq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Bool_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
@@ -633,6 +658,7 @@ val_t standard___kernel___Bool_____neq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Bool_____neq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
@@ -651,6 +677,7 @@ void standard___kernel___Bool___output(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Bool___output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:197 */
   (void)printf(UNTAG_Bool(REGB0)?"true\n":"false\n");;
@@ -667,6 +694,7 @@ val_t standard___kernel___Float___object_id(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Float___object_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//kernel.nit:203 */
@@ -683,6 +711,7 @@ void standard___kernel___Float___output(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Float___output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//kernel.nit:204 */
@@ -700,6 +729,7 @@ val_t standard___kernel___Float_____leq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Float_____leq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -719,6 +749,7 @@ val_t standard___kernel___Float_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Float_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -738,6 +769,7 @@ val_t standard___kernel___Float_____geq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Float_____geq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -757,6 +789,7 @@ val_t standard___kernel___Float_____g(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Float_____g;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -775,6 +808,7 @@ val_t standard___kernel___Float_____plus(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Float_____plus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -793,6 +827,7 @@ val_t standard___kernel___Float___unary__minus(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Float___unary__minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//kernel.nit:211 */
@@ -809,6 +844,7 @@ val_t standard___kernel___Float_____minus(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Float_____minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -827,6 +863,7 @@ val_t standard___kernel___Float_____star(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Float_____star;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -845,6 +882,7 @@ val_t standard___kernel___Float_____slash(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Float_____slash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -864,6 +902,7 @@ val_t standard___kernel___Float___to_i(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Float___to_i;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./../lib/standard//kernel.nit:216 */
@@ -881,6 +920,7 @@ val_t standard___kernel___Int___object_id(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Int___object_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:226 */
   REGB0 = REGB0;
@@ -897,6 +937,7 @@ val_t standard___kernel___Int_____eqeq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
@@ -915,6 +956,7 @@ val_t standard___kernel___Int_____neq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____neq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
@@ -933,6 +975,7 @@ void standard___kernel___Int___output(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Int___output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:229 */
   printf("%ld\n", UNTAG_Int(REGB0));;
@@ -951,6 +994,7 @@ val_t standard___kernel___Int_____leq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____leq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -975,6 +1019,7 @@ val_t standard___kernel___Int_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -999,6 +1044,7 @@ val_t standard___kernel___Int_____geq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____geq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1023,6 +1069,7 @@ val_t standard___kernel___Int_____g(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____g;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1046,6 +1093,7 @@ val_t standard___kernel___Int_____plus(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____plus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   /* ./../lib/standard//kernel.nit:235 */
@@ -1063,6 +1111,7 @@ val_t standard___kernel___Int___unary__minus(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Int___unary__minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:236 */
   REGB0 = TAG_Int(-UNTAG_Int(REGB0));
@@ -1080,6 +1129,7 @@ val_t standard___kernel___Int_____minus(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   /* ./../lib/standard//kernel.nit:237 */
@@ -1098,6 +1148,7 @@ val_t standard___kernel___Int_____star(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____star;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   /* ./../lib/standard//kernel.nit:238 */
@@ -1116,6 +1167,7 @@ val_t standard___kernel___Int_____slash(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____slash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   /* ./../lib/standard//kernel.nit:239 */
@@ -1134,6 +1186,7 @@ val_t standard___kernel___Int_____percent(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____percent;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   /* ./../lib/standard//kernel.nit:240 */
@@ -1152,6 +1205,7 @@ val_t standard___kernel___Int___lshift(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int___lshift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   /* ./../lib/standard//kernel.nit:241 */
@@ -1170,6 +1224,7 @@ val_t standard___kernel___Int___rshift(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int___rshift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   /* ./../lib/standard//kernel.nit:242 */
@@ -1187,6 +1242,7 @@ val_t standard___kernel___Int___to_f(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Int___to_f;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:244 */
@@ -1204,6 +1260,7 @@ val_t standard___kernel___Int___succ(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Int___succ;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:247 */
   REGB0 = TAG_Int(UNTAG_Int(REGB0)+1);
@@ -1220,6 +1277,7 @@ val_t standard___kernel___Int___prec(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Int___prec;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:248 */
   REGB0 = TAG_Int(UNTAG_Int(REGB0)-1);
@@ -1238,6 +1296,7 @@ val_t standard___kernel___Int___distance(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int___distance;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1285,6 +1344,7 @@ val_t standard___kernel___Int_____leqg(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int_____leqg;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1345,6 +1405,7 @@ val_t standard___kernel___Int___is_between(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_standard___kernel___Int___is_between;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = p2;
@@ -1405,6 +1466,7 @@ val_t standard___kernel___Int___max(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int___max;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1444,6 +1506,7 @@ val_t standard___kernel___Int___min(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int___min;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1481,6 +1544,7 @@ val_t standard___kernel___Int___ascii(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Int___ascii;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:297 */
   REGB0 = TAG_Char(UNTAG_Int(REGB0));
@@ -1502,6 +1566,7 @@ val_t standard___kernel___Int___digit_count(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Int___digit_count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   /* ./../lib/standard//kernel.nit:306 */
@@ -1590,6 +1655,7 @@ val_t standard___kernel___Int___to_c(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Int___to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:328 */
   REGB1 = TAG_Int(0);
@@ -1674,6 +1740,7 @@ void standard___kernel___Int___enumerate_to(val_t p0, val_t p1, struct stack_fra
   fra.me.meth = LOCATE_standard___kernel___Int___enumerate_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.closure_ctx = closctx_param;
   fra.me.closure_funs = CREG;
   REGB0 = p0;
@@ -1724,6 +1791,7 @@ void standard___kernel___Int___enumerate_before(val_t p0, val_t p1, struct stack
   fra.me.meth = LOCATE_standard___kernel___Int___enumerate_before;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.closure_ctx = closctx_param;
   fra.me.closure_funs = CREG;
   REGB0 = p0;
@@ -1773,6 +1841,7 @@ val_t standard___kernel___Int___abs(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Int___abs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:361 */
   REGB1 = TAG_Int(0);
@@ -1813,6 +1882,7 @@ val_t standard___kernel___Char___object_id(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___object_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:377 */
   REGB0 = TAG_Int(UNTAG_Char(REGB0));
@@ -1829,6 +1899,7 @@ val_t standard___kernel___Char_____eqeq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Char_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
@@ -1847,6 +1918,7 @@ val_t standard___kernel___Char_____neq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Char_____neq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
@@ -1865,6 +1937,7 @@ void standard___kernel___Char___output(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:380 */
   printf("%c", (unsigned char)UNTAG_Char(REGB0));;
@@ -1883,6 +1956,7 @@ val_t standard___kernel___Char_____leq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Char_____leq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1907,6 +1981,7 @@ val_t standard___kernel___Char_____l(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Char_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1931,6 +2006,7 @@ val_t standard___kernel___Char_____geq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Char_____geq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1955,6 +2031,7 @@ val_t standard___kernel___Char_____g(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Char_____g;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1977,6 +2054,7 @@ val_t standard___kernel___Char___succ(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___succ;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:387 */
   REGB0 = TAG_Char(UNTAG_Char(REGB0)+1);
@@ -1993,6 +2071,7 @@ val_t standard___kernel___Char___prec(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___prec;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:388 */
   REGB0 = TAG_Char(UNTAG_Char(REGB0)-1);
@@ -2011,6 +2090,7 @@ val_t standard___kernel___Char___distance(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Char___distance;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -2061,6 +2141,7 @@ val_t standard___kernel___Char___to_i(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___to_i;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:404 */
   REGB1 = TAG_Char('-');
@@ -2128,6 +2209,7 @@ val_t standard___kernel___Char___ascii(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___ascii;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:413 */
   REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
@@ -2145,6 +2227,7 @@ val_t standard___kernel___Char_____plus(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Char_____plus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   /* ./../lib/standard//kernel.nit:416 */
@@ -2163,6 +2246,7 @@ val_t standard___kernel___Char_____minus(val_t p0, val_t p1){
   fra.me.meth = LOCATE_standard___kernel___Char_____minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
   /* ./../lib/standard//kernel.nit:417 */
@@ -2183,6 +2267,7 @@ val_t standard___kernel___Char___to_lower(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___to_lower;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:423 */
   REGB1 = CALL_standard___kernel___Char___is_upper(REGB0)(REGB0);
@@ -2221,6 +2306,7 @@ val_t standard___kernel___Char___to_upper(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___to_upper;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:434 */
   REGB1 = CALL_standard___kernel___Char___is_lower(REGB0)(REGB0);
@@ -2258,6 +2344,7 @@ val_t standard___kernel___Char___is_digit(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___is_digit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:444 */
   REGB1 = TAG_Char('0');
@@ -2300,6 +2387,7 @@ val_t standard___kernel___Char___is_lower(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___is_lower;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:450 */
   REGB1 = TAG_Char('a');
@@ -2342,6 +2430,7 @@ val_t standard___kernel___Char___is_upper(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___is_upper;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:456 */
   REGB1 = TAG_Char('A');
@@ -2383,6 +2472,7 @@ val_t standard___kernel___Char___is_letter(val_t p0){
   fra.me.meth = LOCATE_standard___kernel___Char___is_letter;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   /* ./../lib/standard//kernel.nit:462 */
   REGB1 = CALL_standard___kernel___Char___is_lower(REGB0)(REGB0);

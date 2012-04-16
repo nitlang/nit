@@ -13,6 +13,7 @@ void syntax___flow___FlowContext___check_is_set(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___check_is_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -75,6 +76,7 @@ val_t syntax___flow___FlowContext___stype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -96,6 +98,7 @@ val_t syntax___flow___FlowContext___sub_setvariable(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___sub_setvariable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -128,6 +131,7 @@ val_t syntax___flow___FlowContext___sub_unreash(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___sub_unreash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -152,6 +156,7 @@ val_t syntax___flow___FlowContext___sub_with(val_t p0, val_t p1, val_t p2, val_t
   fra.me.meth = LOCATE_syntax___flow___FlowContext___sub_with;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -179,6 +184,7 @@ val_t syntax___flow___FlowContext___merge(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___merge;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -286,6 +292,7 @@ val_t syntax___flow___FlowContext___merge_reash(val_t p0, val_t p1, val_t p2, va
   fra.me.meth = LOCATE_syntax___flow___FlowContext___merge_reash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -355,6 +362,7 @@ val_t syntax___flow___FlowContext___node(val_t p0){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//flow.nit:111 */
@@ -378,6 +386,7 @@ void syntax___flow___FlowContext___init(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.meth = LOCATE_syntax___flow___FlowContext___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -402,6 +411,7 @@ val_t syntax___flow___FlowContext___unreash(val_t p0){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___unreash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//flow.nit:120 */
@@ -424,6 +434,7 @@ val_t syntax___flow___FlowContext___already_unreash(val_t p0){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___already_unreash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//flow.nit:123 */
@@ -446,6 +457,7 @@ void syntax___flow___FlowContext___already_unreash__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___already_unreash__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
@@ -464,6 +476,7 @@ val_t syntax___flow___FlowContext___set_variables(val_t p0){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___set_variables;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//flow.nit:127 */
@@ -486,6 +499,7 @@ val_t syntax___flow___FlowContext___is_set(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___FlowContext___is_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -514,6 +528,7 @@ void syntax___flow___RootFlowContext___init(val_t p0, val_t p1, val_t p2, int* i
   fra.me.meth = LOCATE_syntax___flow___RootFlowContext___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -536,6 +551,7 @@ val_t syntax___flow___SubFlowContext___prev(val_t p0){
   fra.me.meth = LOCATE_syntax___flow___SubFlowContext___prev;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//flow.nit:149 */
@@ -559,6 +575,7 @@ val_t syntax___flow___SubFlowContext___is_set(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___SubFlowContext___is_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -598,6 +615,7 @@ val_t syntax___flow___SubFlowContext___stype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___SubFlowContext___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -622,6 +640,7 @@ void syntax___flow___SubFlowContext___with_prev(val_t p0, val_t p1, val_t p2, in
   fra.me.meth = LOCATE_syntax___flow___SubFlowContext___with_prev;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -654,6 +673,7 @@ val_t syntax___flow___CastFlowContext___stype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___CastFlowContext___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -698,6 +718,7 @@ void syntax___flow___CastFlowContext___init(val_t p0, val_t p1, val_t p2, val_t 
   fra.me.meth = LOCATE_syntax___flow___CastFlowContext___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -730,6 +751,7 @@ void syntax___flow___MergeFlowContext___init(val_t p0, val_t p1, val_t p2, val_t
   fra.me.meth = LOCATE_syntax___flow___MergeFlowContext___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -768,6 +790,7 @@ val_t syntax___flow___MergeFlowContext___stype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___MergeFlowContext___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -824,6 +847,7 @@ val_t syntax___flow___MergeFlowContext___merge_stype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___MergeFlowContext___merge_stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1173,6 +1197,7 @@ val_t syntax___flow___MergeFlowContext___is_set(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___flow___MergeFlowContext___is_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1284,6 +1309,7 @@ val_t syntax___flow___Variable___must_be_set(val_t p0){
   fra.me.meth = LOCATE_syntax___flow___Variable___must_be_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//flow.nit:289 */
@@ -1303,6 +1329,7 @@ val_t syntax___flow___VarVariable___must_be_set(val_t p0){
   fra.me.meth = LOCATE_syntax___flow___VarVariable___must_be_set;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//flow.nit:293 */

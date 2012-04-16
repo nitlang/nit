@@ -20,6 +20,7 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
   fra.me.meth = LOCATE_compiling___compiling_global___Program___compile_tables_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -200,6 +201,7 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
     fra.me.meth = LOCATE_compiling___compiling_global___Program___compile_tables_to_c;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -222,6 +224,7 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
     fra.me.meth = LOCATE_compiling___compiling_global___Program___compile_tables_to_c;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[0] = p0;
@@ -266,6 +269,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
   fra.me.meth = LOCATE_compiling___compiling_global___Program___compile_main_part;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -439,6 +443,7 @@ void compiling___compiling_global___MMModule___declare_class_tables_to_c(val_t p
   fra.me.meth = LOCATE_compiling___compiling_global___MMModule___declare_class_tables_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -462,6 +467,7 @@ void compiling___compiling_global___MMModule___declare_class_tables_to_c(val_t p
     fra.me.meth = LOCATE_compiling___compiling_global___MMModule___declare_class_tables_to_c;
     fra.me.has_broke = 0;
     fra.me.REG_size = 2;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
@@ -506,6 +512,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
   fra.me.meth = LOCATE_compiling___compiling_global___MMModule___compile_mod_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -718,6 +725,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
     fra.me.meth = LOCATE_compiling___compiling_global___MMModule___compile_mod_to_c;
     fra.me.has_broke = 0;
     fra.me.REG_size = 1;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
@@ -758,6 +766,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
       fra.me.meth = LOCATE_compiling___compiling_global___MMModule___compile_mod_to_c;
       fra.me.has_broke = 0;
       fra.me.REG_size = 4;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.REG[1] = NIT_NULL;
       fra.me.REG[2] = NIT_NULL;
@@ -930,6 +939,7 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
   fra.me.meth = LOCATE_compiling___compiling_global___MMModule___compile_local_table_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1129,6 +1139,7 @@ void compiling___compiling_global___AbsTableElt___compile_macros(val_t p0, val_t
   fra.me.meth = LOCATE_compiling___compiling_global___AbsTableElt___compile_macros;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./compiling//compiling_global.nit:140 */
   nit_abort("Deferred method called", NULL, LOCATE_compiling___compiling_global, 140);
   stack_frame_head = fra.me.prev;
@@ -1143,6 +1154,7 @@ val_t compiling___compiling_global___TableElt___compile_to_c(val_t p0, val_t p1,
   fra.me.meth = LOCATE_compiling___compiling_global___TableElt___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./compiling//compiling_global.nit:145 */
   nit_abort("Deferred method called", NULL, LOCATE_compiling___compiling_global, 145);
   stack_frame_head = fra.me.prev;
@@ -1157,6 +1169,7 @@ val_t compiling___compiling_global___ModuleTableElt___value(val_t p0, val_t p1){
   fra.me.meth = LOCATE_compiling___compiling_global___ModuleTableElt___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./compiling//compiling_global.nit:150 */
   nit_abort("Deferred method called", NULL, LOCATE_compiling___compiling_global, 150);
   stack_frame_head = fra.me.prev;
@@ -1174,6 +1187,7 @@ val_t compiling___compiling_global___ModuleTableEltGroup___value(val_t p0, val_t
   fra.me.meth = LOCATE_compiling___compiling_global___ModuleTableEltGroup___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1229,6 +1243,7 @@ void compiling___compiling_global___ModuleTableEltGroup___compile_macros(val_t p
   fra.me.meth = LOCATE_compiling___compiling_global___ModuleTableEltGroup___compile_macros;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1349,6 +1364,7 @@ void compiling___compiling_global___TableEltMeth___compile_macros(val_t p0, val_
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltMeth___compile_macros;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1419,6 +1435,7 @@ val_t compiling___compiling_global___TableEltMeth___compile_to_c(val_t p0, val_t
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltMeth___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1450,6 +1467,7 @@ void compiling___compiling_global___TableEltSuper___compile_macros(val_t p0, val
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltSuper___compile_macros;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1522,6 +1540,7 @@ val_t compiling___compiling_global___TableEltSuper___compile_to_c(val_t p0, val_
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltSuper___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1641,6 +1660,7 @@ void compiling___compiling_global___TableEltVTClassColor___compile_macros(val_t 
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltVTClassColor___compile_macros;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1706,6 +1726,7 @@ val_t compiling___compiling_global___TableEltVTClassColor___compile_to_c(val_t p
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltVTClassColor___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1833,6 +1854,7 @@ void compiling___compiling_global___TableEltVTClassId___compile_macros(val_t p0,
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltVTClassId___compile_macros;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1898,6 +1920,7 @@ val_t compiling___compiling_global___TableEltVTClassId___compile_to_c(val_t p0, 
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltVTClassId___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2019,6 +2042,7 @@ void compiling___compiling_global___TableEltAttr___compile_macros(val_t p0, val_
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltAttr___compile_macros;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2082,6 +2106,7 @@ val_t compiling___compiling_global___TableEltAttr___compile_to_c(val_t p0, val_t
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltAttr___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2159,6 +2184,7 @@ val_t compiling___compiling_global___AbsTableEltClass___symbol(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_global___AbsTableEltClass___symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./compiling//compiling_global.nit:258 */
   nit_abort("Deferred method called", NULL, LOCATE_compiling___compiling_global, 258);
   stack_frame_head = fra.me.prev;
@@ -2177,6 +2203,7 @@ void compiling___compiling_global___AbsTableEltClass___compile_macros(val_t p0, 
   fra.me.meth = LOCATE_compiling___compiling_global___AbsTableEltClass___compile_macros;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2232,6 +2259,7 @@ val_t compiling___compiling_global___TableEltClassId___symbol(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltClassId___symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_global.nit:268 */
@@ -2256,6 +2284,7 @@ val_t compiling___compiling_global___TableEltClassId___value(val_t p0, val_t p1)
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltClassId___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2321,6 +2350,7 @@ val_t compiling___compiling_global___TableEltClassInitTable___symbol(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltClassInitTable___symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_global.nit:277 */
@@ -2350,6 +2380,7 @@ val_t compiling___compiling_global___TableEltClassInitTable___compile_to_c(val_t
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltClassInitTable___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2523,6 +2554,7 @@ val_t compiling___compiling_global___TableEltClassColor___symbol(val_t p0){
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltClassColor___symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./compiling//compiling_global.nit:293 */
@@ -2547,6 +2579,7 @@ val_t compiling___compiling_global___TableEltClassColor___value(val_t p0, val_t 
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltClassColor___value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2611,6 +2644,7 @@ val_t compiling___compiling_global___TableEltClassColor___compile_to_c(val_t p0,
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltClassColor___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2702,6 +2736,7 @@ val_t compiling___compiling_global___TableEltComposite___compile_to_c(val_t p0, 
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltComposite___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2726,6 +2761,7 @@ val_t compiling___compiling_global___TableEltClassSelfId___compile_to_c(val_t p0
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltClassSelfId___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2799,6 +2835,7 @@ val_t compiling___compiling_global___TableEltClassSelfName___compile_to_c(val_t 
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltClassSelfName___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2870,6 +2907,7 @@ val_t compiling___compiling_global___TableEltClassObjectSize___compile_to_c(val_
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltClassObjectSize___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3022,6 +3060,7 @@ val_t compiling___compiling_global___TableEltObjectId___compile_to_c(val_t p0, v
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltObjectId___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3074,6 +3113,7 @@ val_t compiling___compiling_global___TableEltVftPointer___compile_to_c(val_t p0,
   fra.me.meth = LOCATE_compiling___compiling_global___TableEltVftPointer___compile_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3139,6 +3179,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
   fra.me.meth = LOCATE_compiling___compiling_global___MMLocalClass___declare_tables_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3428,6 +3469,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
   fra.me.meth = LOCATE_compiling___compiling_global___MMLocalClass___compile_tables_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4522,6 +4564,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         fra.me.meth = LOCATE_compiling___compiling_global___MMLocalClass___compile_tables_to_c;
         fra.me.has_broke = 0;
         fra.me.REG_size = 5;
+        fra.me.nitni_local_ref_head = NULL;
         fra.me.REG[0] = NIT_NULL;
         fra.me.REG[1] = NIT_NULL;
         fra.me.REG[2] = NIT_NULL;
@@ -4714,6 +4757,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
   fra.me.meth = LOCATE_compiling___compiling_global___MMMethod___compile_property_to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;

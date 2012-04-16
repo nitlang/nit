@@ -13,6 +13,7 @@ val_t native_interface___ni_metamodel___MMType___friendly_extern_name(val_t p0){
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMType___friendly_extern_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -100,6 +101,68 @@ val_t native_interface___ni_metamodel___MMType___friendly_extern_name(val_t p0){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[2];
 }
+val_t native_interface___ni_metamodel___MMType___mangled_name(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+    static val_t once_value_1; /* Once value */
+    static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_native_interface___ni_metamodel;
+  fra.me.line = 42;
+  fra.me.meth = LOCATE_native_interface___ni_metamodel___MMType___mangled_name;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./native_interface//ni_metamodel.nit:44 */
+  fra.me.REG[1] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[1] = CALL_primitive_info___MMLocalClass___primitive_info(fra.me.REG[1])(fra.me.REG[1]);
+  /* ./native_interface//ni_metamodel.nit:45 */
+  REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[0])(fra.me.REG[0]);
+  if (UNTAG_Bool(REGB0)) {
+    /* ./native_interface//ni_metamodel.nit:46 */
+    REGB0 = TAG_Int(3);
+    fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+    if (!once_value_1) {
+      fra.me.REG[2] = BOX_NativeString("nullable_");
+      REGB0 = TAG_Int(9);
+      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      once_value_1 = fra.me.REG[2];
+      register_static_object(&once_value_1);
+    } else fra.me.REG[2] = once_value_1;
+    fra.me.REG[2] = fra.me.REG[2];
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+    fra.me.REG[2] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___name(fra.me.REG[2])(fra.me.REG[2]);
+    fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+    if (!once_value_2) {
+      fra.me.REG[2] = BOX_NativeString("");
+      REGB0 = TAG_Int(0);
+      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      once_value_2 = fra.me.REG[2];
+      register_static_object(&once_value_2);
+    } else fra.me.REG[2] = once_value_2;
+    fra.me.REG[2] = fra.me.REG[2];
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+    fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+    goto label3;
+  } else {
+    /* ./native_interface//ni_metamodel.nit:48 */
+    fra.me.REG[0] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___name(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[1] = fra.me.REG[0];
+    goto label3;
+  }
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
 val_t native_interface___ni_metamodel___MMType___from_native(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[4];} fra;
   val_t REGB0;
@@ -109,10 +172,11 @@ val_t native_interface___ni_metamodel___MMType___from_native(val_t p0, val_t p1)
     static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 42;
+  fra.me.line = 52;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMType___from_native;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -120,7 +184,7 @@ val_t native_interface___ni_metamodel___MMType___from_native(val_t p0, val_t p1)
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_metamodel.nit:45 */
+  /* ./native_interface//ni_metamodel.nit:55 */
   fra.me.REG[2] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_primitive_info___MMLocalClass___primitive_info(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
@@ -145,20 +209,20 @@ val_t native_interface___ni_metamodel___MMType___from_native(val_t p0, val_t p1)
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:46 */
+    /* ./native_interface//ni_metamodel.nit:56 */
     REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   } else {
-    /* ./native_interface//ni_metamodel.nit:45 */
+    /* ./native_interface//ni_metamodel.nit:55 */
     REGB1 = TAG_Bool(false);
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:47 */
+    /* ./native_interface//ni_metamodel.nit:57 */
     fra.me.REG[2] = CALL_primitive_info___MMType___boxtype(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     goto label1;
   } else {
-    /* ./native_interface//ni_metamodel.nit:49 */
+    /* ./native_interface//ni_metamodel.nit:59 */
     REGB0 = TAG_Int(3);
     fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_2) {
@@ -172,8 +236,8 @@ val_t native_interface___ni_metamodel___MMType___from_native(val_t p0, val_t p1)
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
     if (!once_value_3) {
-      fra.me.REG[1] = BOX_NativeString(".v");
-      REGB0 = TAG_Int(2);
+      fra.me.REG[1] = BOX_NativeString("->ref.val");
+      REGB0 = TAG_Int(9);
       fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
       once_value_3 = fra.me.REG[1];
       register_static_object(&once_value_3);
@@ -181,7 +245,7 @@ val_t native_interface___ni_metamodel___MMType___from_native(val_t p0, val_t p1)
     fra.me.REG[1] = fra.me.REG[1];
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
     fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
-    /* ./native_interface//ni_metamodel.nit:51 */
+    /* ./native_interface//ni_metamodel.nit:61 */
     fra.me.REG[3] = CALL_primitive_info___MMType___boxtype(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
     fra.me.REG[2] = fra.me.REG[3];
     goto label1;
@@ -203,10 +267,11 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
     static val_t once_value_7; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 55;
+  fra.me.line = 65;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMType___assign_to_friendly;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -216,7 +281,7 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./native_interface//ni_metamodel.nit:59 */
+  /* ./native_interface//ni_metamodel.nit:69 */
   fra.me.REG[3] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_primitive_info___MMLocalClass___primitive_info(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
@@ -241,16 +306,16 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:60 */
+    /* ./native_interface//ni_metamodel.nit:70 */
     REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   } else {
-    /* ./native_interface//ni_metamodel.nit:59 */
+    /* ./native_interface//ni_metamodel.nit:69 */
     REGB1 = TAG_Bool(false);
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:61 */
+    /* ./native_interface//ni_metamodel.nit:71 */
     REGB0 = TAG_Int(5);
     fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -286,7 +351,7 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
     fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
     goto label4;
   } else {
-    /* ./native_interface//ni_metamodel.nit:63 */
+    /* ./native_interface//ni_metamodel.nit:73 */
     REGB0 = TAG_Int(5);
     fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_5) {
@@ -300,8 +365,8 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
     if (!once_value_6) {
-      fra.me.REG[1] = BOX_NativeString(".v = ");
-      REGB0 = TAG_Int(5);
+      fra.me.REG[1] = BOX_NativeString("->ref.val = ");
+      REGB0 = TAG_Int(12);
       fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
       once_value_6 = fra.me.REG[1];
       register_static_object(&once_value_6);
@@ -338,14 +403,13 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
     static val_t once_value_5; /* Once value */
     static val_t once_value_6; /* Once value */
     static val_t once_value_7; /* Once value */
-    static val_t once_value_8; /* Once value */
-    static val_t once_value_9; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 67;
+  fra.me.line = 77;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMType___assign_from_friendly;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -354,7 +418,7 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./native_interface//ni_metamodel.nit:71 */
+  /* ./native_interface//ni_metamodel.nit:81 */
   fra.me.REG[3] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_primitive_info___MMLocalClass___primitive_info(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
@@ -379,16 +443,16 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:72 */
+    /* ./native_interface//ni_metamodel.nit:82 */
     REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   } else {
-    /* ./native_interface//ni_metamodel.nit:71 */
+    /* ./native_interface//ni_metamodel.nit:81 */
     REGB1 = TAG_Bool(false);
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:73 */
+    /* ./native_interface//ni_metamodel.nit:83 */
     REGB0 = TAG_Int(5);
     fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -424,7 +488,7 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
     fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
     goto label4;
   } else {
-    /* ./native_interface//ni_metamodel.nit:75 */
+    /* ./native_interface//ni_metamodel.nit:85 */
     REGB0 = TAG_Int(5);
     fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_5) {
@@ -446,38 +510,16 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
     } else fra.me.REG[1] = once_value_6;
     fra.me.REG[1] = fra.me.REG[1];
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-    REGB0 = TAG_Int(3);
-    fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
     if (!once_value_7) {
-      fra.me.REG[4] = BOX_NativeString("");
-      REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
-      once_value_7 = fra.me.REG[4];
-      register_static_object(&once_value_7);
-    } else fra.me.REG[4] = once_value_7;
-    fra.me.REG[4] = fra.me.REG[4];
-    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-    if (!once_value_8) {
-      fra.me.REG[2] = BOX_NativeString(".v");
-      REGB0 = TAG_Int(2);
+      fra.me.REG[2] = BOX_NativeString("->ref.val");
+      REGB0 = TAG_Int(9);
       fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
-      once_value_8 = fra.me.REG[2];
-      register_static_object(&once_value_8);
-    } else fra.me.REG[2] = once_value_8;
+      once_value_7 = fra.me.REG[2];
+      register_static_object(&once_value_7);
+    } else fra.me.REG[2] = once_value_7;
     fra.me.REG[2] = fra.me.REG[2];
-    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-    fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
-    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-    if (!once_value_9) {
-      fra.me.REG[1] = BOX_NativeString("");
-      REGB0 = TAG_Int(0);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
-      once_value_9 = fra.me.REG[1];
-      register_static_object(&once_value_9);
-    } else fra.me.REG[1] = once_value_9;
-    fra.me.REG[1] = fra.me.REG[1];
-    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
     fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[3] = fra.me.REG[0];
     goto label4;
@@ -485,6 +527,154 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
   label4: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[3];
+}
+val_t native_interface___ni_metamodel___MMType___uses_nitni_ref(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_native_interface___ni_metamodel;
+  fra.me.line = 89;
+  fra.me.meth = LOCATE_native_interface___ni_metamodel___MMType___uses_nitni_ref;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./native_interface//ni_metamodel.nit:89 */
+  fra.me.REG[1] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[1] = CALL_primitive_info___MMLocalClass___primitive_info(fra.me.REG[1])(fra.me.REG[1]);
+  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+      REGB1 = TAG_Bool(false);
+      REGB0 = REGB1;
+    } else {
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+      REGB0 = REGB1;
+    }
+  }
+  if (UNTAG_Bool(REGB0)) {
+    REGB0 = TAG_Bool(true);
+  } else {
+    REGB1 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[0])(fra.me.REG[0]);
+    REGB0 = REGB1;
+  }
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
+val_t native_interface___ni_metamodel___MMType___friendly_null_getter(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_native_interface___ni_metamodel;
+  fra.me.line = 91;
+  fra.me.meth = LOCATE_native_interface___ni_metamodel___MMType___friendly_null_getter;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ./native_interface//ni_metamodel.nit:93 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("null_");
+    REGB0 = TAG_Int(5);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  fra.me.REG[0] = CALL_metamodel___static_type___MMType___as_notnull(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_native_interface___ni_metamodel___MMType___mangled_name(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("");
+    REGB0 = TAG_Int(0);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
+val_t native_interface___ni_metamodel___MMType___local_friendly_null_getter_from(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  static val_t once_value_3; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_native_interface___ni_metamodel;
+  fra.me.line = 96;
+  fra.me.meth = LOCATE_native_interface___ni_metamodel___MMType___local_friendly_null_getter_from;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ./native_interface//ni_metamodel.nit:98 */
+  REGB0 = TAG_Int(5);
+  fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[3] = BOX_NativeString("");
+    REGB0 = TAG_Int(0);
+    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    once_value_1 = fra.me.REG[3];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[3] = once_value_1;
+  fra.me.REG[3] = fra.me.REG[3];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+  if (!once_value_2) {
+    fra.me.REG[1] = BOX_NativeString("_");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    once_value_2 = fra.me.REG[1];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[1] = once_value_2;
+  fra.me.REG[1] = fra.me.REG[1];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+  fra.me.REG[0] = CALL_native_interface___ni_metamodel___MMType___friendly_null_getter(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
+  if (!once_value_3) {
+    fra.me.REG[0] = BOX_NativeString("");
+    REGB0 = TAG_Int(0);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_3 = fra.me.REG[0];
+    register_static_object(&once_value_3);
+  } else fra.me.REG[0] = once_value_3;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
+  fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
+  goto label4;
+  label4: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[2];
 }
 val_t native_interface___ni_metamodel___MMMethod___local_friendly_name_from(val_t p0, val_t p1, val_t p2){
   struct {struct stack_frame_t me; val_t MORE_REG[4];} fra;
@@ -495,10 +685,11 @@ val_t native_interface___ni_metamodel___MMMethod___local_friendly_name_from(val_
   static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 81;
+  fra.me.line = 103;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___local_friendly_name_from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -507,7 +698,7 @@ val_t native_interface___ni_metamodel___MMMethod___local_friendly_name_from(val_
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./native_interface//ni_metamodel.nit:85 */
+  /* ./native_interface//ni_metamodel.nit:107 */
   REGB0 = TAG_Int(5);
   fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -555,15 +746,16 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_super_cname(val_t p0
   static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 88;
+  fra.me.line = 110;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___friendly_super_cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:90 */
+  /* ./native_interface//ni_metamodel.nit:112 */
   REGB0 = TAG_Int(3);
   fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -602,17 +794,18 @@ val_t native_interface___ni_metamodel___MMMethod___local_friendly_super_name_fro
   static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 93;
+  fra.me.line = 115;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___local_friendly_super_name_from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_metamodel.nit:95 */
+  /* ./native_interface//ni_metamodel.nit:117 */
   REGB0 = TAG_Int(5);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -665,10 +858,11 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
       static val_t once_value_5; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 98;
+  fra.me.line = 120;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___friendly_cparams;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -677,14 +871,14 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_metamodel.nit:100 */
+  /* ./native_interface//ni_metamodel.nit:122 */
   fra.me.REG[2] = NEW_List_standard___collection___list___List___init();
-  /* ./native_interface//ni_metamodel.nit:102 */
+  /* ./native_interface//ni_metamodel.nit:124 */
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:103 */
+    /* ./native_interface//ni_metamodel.nit:125 */
     REGB0 = TAG_Int(3);
     fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -711,11 +905,11 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
     fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   }
-  /* ./native_interface//ni_metamodel.nit:106 */
+  /* ./native_interface//ni_metamodel.nit:128 */
   fra.me.REG[0] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 106);
+    nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 128);
   }
   fra.me.REG[0] = CALL_metamodel___static_type___MMSignature___params(fra.me.REG[0])(fra.me.REG[0]);
   /* ./../lib/standard//collection//array.nit:269 */
@@ -754,7 +948,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
       }
       /* ./../lib/standard//collection//array.nit:718 */
       fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
-      /* ./native_interface//ni_metamodel.nit:107 */
+      /* ./native_interface//ni_metamodel.nit:129 */
       REGB1 = TAG_Int(5);
       fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
       if (!once_value_3) {
@@ -804,7 +998,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
     }
   }
   label6: while(0);
-  /* ./native_interface//ni_metamodel.nit:110 */
+  /* ./native_interface//ni_metamodel.nit:132 */
   goto label7;
   label7: while(0);
   stack_frame_head = fra.me.prev;
@@ -819,10 +1013,11 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_suffix(val_t 
   static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 113;
+  fra.me.line = 135;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___csignature_with_suffix;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -831,7 +1026,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_suffix(val_t 
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./native_interface//ni_metamodel.nit:115 */
+  /* ./native_interface//ni_metamodel.nit:137 */
   REGB0 = TAG_Int(5);
   fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -865,7 +1060,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_suffix(val_t 
   fra.me.REG[1] = fra.me.REG[1];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
   fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
-  /* ./native_interface//ni_metamodel.nit:117 */
+  /* ./native_interface//ni_metamodel.nit:139 */
   fra.me.REG[2] = CALL_native_interface___ni_metamodel___MMMethod___csignature_with_name(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3], fra.me.REG[2]);
   goto label4;
   label4: while(0);
@@ -887,10 +1082,11 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
   static val_t once_value_8; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 120;
+  fra.me.line = 142;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___csignature_with_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -900,13 +1096,13 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./native_interface//ni_metamodel.nit:122 */
+  /* ./native_interface//ni_metamodel.nit:144 */
   fra.me.REG[3] = NEW_Buffer_standard___string___Buffer___init();
-  /* ./native_interface//ni_metamodel.nit:125 */
+  /* ./native_interface//ni_metamodel.nit:147 */
   fra.me.REG[4] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 125);
+    nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 147);
   }
   fra.me.REG[4] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[4])(fra.me.REG[4]);
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
@@ -923,7 +1119,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:126 */
+    /* ./native_interface//ni_metamodel.nit:148 */
     REGB0 = TAG_Int(3);
     fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -938,12 +1134,12 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
     fra.me.REG[5] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 126);
+      nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 148);
     }
     fra.me.REG[5] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[5])(fra.me.REG[5]);
     REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 126);
+      nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 148);
     }
     fra.me.REG[5] = CALL_native_interface___ni_metamodel___MMType___friendly_extern_name(fra.me.REG[5])(fra.me.REG[5]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
@@ -959,11 +1155,11 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
     fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
     CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
   } else {
-    /* ./native_interface//ni_metamodel.nit:127 */
+    /* ./native_interface//ni_metamodel.nit:149 */
     fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[4])(fra.me.REG[4]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./native_interface//ni_metamodel.nit:128 */
+      /* ./native_interface//ni_metamodel.nit:150 */
       REGB0 = TAG_Int(3);
       fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_3) {
@@ -990,7 +1186,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
       fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
       CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
     } else {
-      /* ./native_interface//ni_metamodel.nit:130 */
+      /* ./native_interface//ni_metamodel.nit:152 */
       if (!once_value_5) {
         fra.me.REG[4] = BOX_NativeString("void ");
         REGB0 = TAG_Int(5);
@@ -1002,7 +1198,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
       CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
     }
   }
-  /* ./native_interface//ni_metamodel.nit:134 */
+  /* ./native_interface//ni_metamodel.nit:156 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1016,16 +1212,16 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:135 */
+    /* ./native_interface//ni_metamodel.nit:157 */
     fra.me.REG[4] = CALL_primitive_info___MMMethod___friendly_extern_name(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
     CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
   } else {
-    /* ./native_interface//ni_metamodel.nit:137 */
+    /* ./native_interface//ni_metamodel.nit:159 */
     CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
   }
-  /* ./native_interface//ni_metamodel.nit:141 */
+  /* ./native_interface//ni_metamodel.nit:163 */
   fra.me.REG[2] = CALL_native_interface___ni_metamodel___MMMethod___friendly_cparams(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-  /* ./native_interface//ni_metamodel.nit:143 */
+  /* ./native_interface//ni_metamodel.nit:165 */
   REGB0 = TAG_Int(3);
   fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_6) {
@@ -1058,7 +1254,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[0]);
-  /* ./native_interface//ni_metamodel.nit:145 */
+  /* ./native_interface//ni_metamodel.nit:167 */
   fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
   goto label9;
   label9: while(0);
@@ -1070,15 +1266,16 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_csignature(val_t p0,
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 148;
+  fra.me.line = 170;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___friendly_csignature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_metamodel.nit:150 */
+  /* ./native_interface//ni_metamodel.nit:172 */
   fra.me.REG[1] = CALL_native_interface___ni_metamodel___MMMethod___csignature_with_name(fra.me.REG[0])(fra.me.REG[0], NIT_NULL, fra.me.REG[1]);
   goto label1;
   label1: while(0);
@@ -1090,17 +1287,18 @@ val_t native_interface___ni_metamodel___MMMethod___frontier_csignature_from(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 153;
+  fra.me.line = 175;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___frontier_csignature_from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./native_interface//ni_metamodel.nit:155 */
+  /* ./native_interface//ni_metamodel.nit:177 */
   fra.me.REG[1] = CALL_native_interface___ni_metamodel___MMMethod___local_friendly_name_from(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
   fra.me.REG[2] = CALL_native_interface___ni_metamodel___MMMethod___csignature_with_name(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
   goto label1;
@@ -1115,15 +1313,16 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_super_csignature(val
   static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 158;
+  fra.me.line = 180;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___friendly_super_csignature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:160 */
+  /* ./native_interface//ni_metamodel.nit:182 */
   if (!once_value_1) {
     fra.me.REG[1] = BOX_NativeString("___super");
     REGB0 = TAG_Int(8);
@@ -1144,16 +1343,17 @@ val_t native_interface___ni_metamodel___MMMethod___frontier_super_csignature_fro
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 163;
+  fra.me.line = 185;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___frontier_super_csignature_from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_metamodel.nit:165 */
+  /* ./native_interface//ni_metamodel.nit:187 */
   fra.me.REG[1] = CALL_native_interface___ni_metamodel___MMMethod___local_friendly_super_name_from(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_native_interface___ni_metamodel___MMMethod___csignature_with_name(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
@@ -1169,15 +1369,16 @@ val_t native_interface___ni_metamodel___MMMethod___impl_csignature(val_t p0){
   static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 168;
+  fra.me.line = 190;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___impl_csignature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:170 */
+  /* ./native_interface//ni_metamodel.nit:192 */
   if (!once_value_1) {
     fra.me.REG[1] = BOX_NativeString("___impl");
     REGB0 = TAG_Int(7);
@@ -1204,10 +1405,11 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
       static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 173;
+  fra.me.line = 195;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___cparams;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1215,14 +1417,14 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:176 */
+  /* ./native_interface//ni_metamodel.nit:198 */
   fra.me.REG[1] = NEW_List_standard___collection___list___List___init();
-  /* ./native_interface//ni_metamodel.nit:178 */
+  /* ./native_interface//ni_metamodel.nit:200 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:179 */
+    /* ./native_interface//ni_metamodel.nit:201 */
     if (!once_value_1) {
       fra.me.REG[2] = BOX_NativeString("val_t recv");
       REGB0 = TAG_Int(10);
@@ -1233,11 +1435,11 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
     fra.me.REG[2] = fra.me.REG[2];
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   }
-  /* ./native_interface//ni_metamodel.nit:182 */
+  /* ./native_interface//ni_metamodel.nit:204 */
   fra.me.REG[0] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 182);
+    nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 204);
   }
   fra.me.REG[0] = CALL_metamodel___static_type___MMSignature___params(fra.me.REG[0])(fra.me.REG[0]);
   /* ./../lib/standard//collection//array.nit:269 */
@@ -1276,7 +1478,7 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
       }
       /* ./../lib/standard//collection//array.nit:718 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-      /* ./native_interface//ni_metamodel.nit:183 */
+      /* ./native_interface//ni_metamodel.nit:205 */
       REGB1 = TAG_Int(3);
       fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
       if (!once_value_2) {
@@ -1314,7 +1516,7 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
     }
   }
   label4: while(0);
-  /* ./native_interface//ni_metamodel.nit:186 */
+  /* ./native_interface//ni_metamodel.nit:208 */
   goto label5;
   label5: while(0);
   stack_frame_head = fra.me.prev;
@@ -1337,22 +1539,23 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
   static val_t once_value_10; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 189;
+  fra.me.line = 211;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMMethod___out_csignature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:191 */
+  /* ./native_interface//ni_metamodel.nit:213 */
   fra.me.REG[1] = NEW_Buffer_standard___string___Buffer___init();
-  /* ./native_interface//ni_metamodel.nit:194 */
+  /* ./native_interface//ni_metamodel.nit:216 */
   fra.me.REG[2] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 194);
+    nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 216);
   }
   fra.me.REG[2] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
@@ -1376,7 +1579,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:195 */
+    /* ./native_interface//ni_metamodel.nit:217 */
     if (!once_value_1) {
       fra.me.REG[2] = BOX_NativeString("val_t ");
       REGB0 = TAG_Int(6);
@@ -1387,7 +1590,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     fra.me.REG[2] = fra.me.REG[2];
     CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   } else {
-    /* ./native_interface//ni_metamodel.nit:197 */
+    /* ./native_interface//ni_metamodel.nit:219 */
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("void ");
       REGB0 = TAG_Int(5);
@@ -1398,11 +1601,11 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     fra.me.REG[2] = fra.me.REG[2];
     CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   }
-  /* ./native_interface//ni_metamodel.nit:201 */
+  /* ./native_interface//ni_metamodel.nit:223 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[2])(fra.me.REG[2]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:202 */
+    /* ./native_interface//ni_metamodel.nit:224 */
     REGB0 = TAG_Int(5);
     fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_3) {
@@ -1440,7 +1643,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
     CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   } else {
-    /* ./native_interface//ni_metamodel.nit:204 */
+    /* ./native_interface//ni_metamodel.nit:226 */
     REGB0 = TAG_Int(3);
     fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_6) {
@@ -1467,7 +1670,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
     CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   }
-  /* ./native_interface//ni_metamodel.nit:208 */
+  /* ./native_interface//ni_metamodel.nit:230 */
   REGB0 = TAG_Int(3);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_8) {
@@ -1501,7 +1704,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
   CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./native_interface//ni_metamodel.nit:210 */
+  /* ./native_interface//ni_metamodel.nit:232 */
   fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
   goto label11;
   label11: while(0);
@@ -1514,17 +1717,18 @@ val_t native_interface___ni_metamodel___MMImportedCast___in_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 216;
+  fra.me.line = 238;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___in_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:216 */
+  /* ./native_interface//ni_metamodel.nit:238 */
   REGB0 = TAG_Bool(ATTR_native_interface___ni_metamodel___MMImportedCast_____atin_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "@in_name", LOCATE_native_interface___ni_metamodel, 216);
+    nit_abort("Uninitialized attribute %s", "@in_name", LOCATE_native_interface___ni_metamodel, 238);
   }
   fra.me.REG[0] = ATTR_native_interface___ni_metamodel___MMImportedCast_____atin_name(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1535,15 +1739,16 @@ void native_interface___ni_metamodel___MMImportedCast___in_name__eq(val_t p0, va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 216;
+  fra.me.line = 238;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___in_name__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_metamodel.nit:216 */
+  /* ./native_interface//ni_metamodel.nit:238 */
   ATTR_native_interface___ni_metamodel___MMImportedCast_____atin_name(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1561,22 +1766,23 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
     static val_t once_value_8; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 218;
+  fra.me.line = 240;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:219 */
+  /* ./native_interface//ni_metamodel.nit:241 */
   REGB0 = CALL_metamodel___static_type___MMImportedCast___is_about_nullable_only(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:220 */
+    /* ./native_interface//ni_metamodel.nit:242 */
     REGB0 = CALL_metamodel___static_type___MMImportedCast___is_not_null_to_nullable(fra.me.REG[0])(fra.me.REG[0]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./native_interface//ni_metamodel.nit:222 */
+      /* ./native_interface//ni_metamodel.nit:244 */
       REGB0 = TAG_Int(3);
       fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_1) {
@@ -1589,7 +1795,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
       fra.me.REG[2] = fra.me.REG[2];
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
       fra.me.REG[2] = CALL_metamodel___static_type___MMImportedCast___from(fra.me.REG[0])(fra.me.REG[0]);
-      fra.me.REG[2] = CALL_native_interface___ni_metamodel___MMType___friendly_extern_name(fra.me.REG[2])(fra.me.REG[2]);
+      fra.me.REG[2] = CALL_native_interface___ni_metamodel___MMType___mangled_name(fra.me.REG[2])(fra.me.REG[2]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
       if (!once_value_2) {
         fra.me.REG[2] = BOX_NativeString("_as_nullable");
@@ -1603,10 +1809,10 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
       fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
       goto label3;
     } else {
-      /* ./native_interface//ni_metamodel.nit:223 */
+      /* ./native_interface//ni_metamodel.nit:245 */
       REGB0 = CALL_metamodel___static_type___MMImportedCast___is_nullable_to_not_null(fra.me.REG[0])(fra.me.REG[0]);
       if (UNTAG_Bool(REGB0)) {
-        /* ./native_interface//ni_metamodel.nit:225 */
+        /* ./native_interface//ni_metamodel.nit:247 */
         REGB0 = TAG_Int(3);
         fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
         if (!once_value_4) {
@@ -1619,7 +1825,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
         fra.me.REG[3] = fra.me.REG[3];
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
         fra.me.REG[3] = CALL_metamodel___static_type___MMImportedCast___to(fra.me.REG[0])(fra.me.REG[0]);
-        fra.me.REG[3] = CALL_native_interface___ni_metamodel___MMType___friendly_extern_name(fra.me.REG[3])(fra.me.REG[3]);
+        fra.me.REG[3] = CALL_native_interface___ni_metamodel___MMType___mangled_name(fra.me.REG[3])(fra.me.REG[3]);
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
         if (!once_value_5) {
           fra.me.REG[3] = BOX_NativeString("_as_not_null");
@@ -1634,12 +1840,12 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
         fra.me.REG[1] = fra.me.REG[2];
         goto label3;
       } else {
-        /* ./native_interface//ni_metamodel.nit:227 */
-        nit_abort("Aborted", NULL, LOCATE_native_interface___ni_metamodel, 227);
+        /* ./native_interface//ni_metamodel.nit:249 */
+        nit_abort("Aborted", NULL, LOCATE_native_interface___ni_metamodel, 249);
       }
     }
   } else {
-    /* ./native_interface//ni_metamodel.nit:231 */
+    /* ./native_interface//ni_metamodel.nit:253 */
     REGB0 = TAG_Int(5);
     fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_6) {
@@ -1652,7 +1858,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
     fra.me.REG[3] = fra.me.REG[3];
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     fra.me.REG[3] = CALL_metamodel___static_type___MMImportedCast___from(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[3] = CALL_native_interface___ni_metamodel___MMType___friendly_extern_name(fra.me.REG[3])(fra.me.REG[3]);
+    fra.me.REG[3] = CALL_native_interface___ni_metamodel___MMType___mangled_name(fra.me.REG[3])(fra.me.REG[3]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     if (!once_value_7) {
       fra.me.REG[3] = BOX_NativeString("_as_");
@@ -1664,7 +1870,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
     fra.me.REG[3] = fra.me.REG[3];
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     fra.me.REG[0] = CALL_metamodel___static_type___MMImportedCast___to(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[0] = CALL_native_interface___ni_metamodel___MMType___friendly_extern_name(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[0] = CALL_native_interface___ni_metamodel___MMType___mangled_name(fra.me.REG[0])(fra.me.REG[0]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
     if (!once_value_8) {
       fra.me.REG[0] = BOX_NativeString("");
@@ -1692,17 +1898,18 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_local_cname(val_t p0
   static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 235;
+  fra.me.line = 257;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___as_local_cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_metamodel.nit:236 */
+  /* ./native_interface//ni_metamodel.nit:258 */
   REGB0 = TAG_Int(5);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -1753,17 +1960,18 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_local_csignature(val
   static val_t once_value_5; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 239;
+  fra.me.line = 261;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___as_local_csignature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_metamodel.nit:241 */
+  /* ./native_interface//ni_metamodel.nit:263 */
   REGB0 = TAG_Int(9);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -1838,15 +2046,16 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_csignature(
   static val_t once_value_5; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 244;
+  fra.me.line = 266;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___as_friendly_csignature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:246 */
+  /* ./native_interface//ni_metamodel.nit:268 */
   REGB0 = TAG_Int(9);
   fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -1921,28 +2130,29 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_na
     static val_t once_value_6; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 249;
+  fra.me.line = 271;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:250 */
+  /* ./native_interface//ni_metamodel.nit:272 */
   REGB0 = CALL_metamodel___static_type___MMImportedCast___is_about_nullable_only(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./native_interface//ni_metamodel.nit:251 */
+    /* ./native_interface//ni_metamodel.nit:273 */
     REGB0 = CALL_metamodel___static_type___MMImportedCast___is_not_null_to_nullable(fra.me.REG[0])(fra.me.REG[0]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./native_interface//ni_metamodel.nit:252 */
-      nit_abort("Aborted", NULL, LOCATE_native_interface___ni_metamodel, 252);
+      /* ./native_interface//ni_metamodel.nit:274 */
+      nit_abort("Aborted", NULL, LOCATE_native_interface___ni_metamodel, 274);
     } else {
-      /* ./native_interface//ni_metamodel.nit:253 */
+      /* ./native_interface//ni_metamodel.nit:275 */
       REGB0 = CALL_metamodel___static_type___MMImportedCast___is_nullable_to_not_null(fra.me.REG[0])(fra.me.REG[0]);
       if (UNTAG_Bool(REGB0)) {
-        /* ./native_interface//ni_metamodel.nit:256 */
+        /* ./native_interface//ni_metamodel.nit:278 */
         REGB0 = TAG_Int(3);
         fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
         if (!once_value_1) {
@@ -1955,8 +2165,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_na
         fra.me.REG[2] = fra.me.REG[2];
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
         fra.me.REG[2] = CALL_metamodel___static_type___MMImportedCast___to(fra.me.REG[0])(fra.me.REG[0]);
-        fra.me.REG[2] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[2])(fra.me.REG[2]);
-        fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
+        fra.me.REG[2] = CALL_native_interface___ni_metamodel___MMType___mangled_name(fra.me.REG[2])(fra.me.REG[2]);
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
         if (!once_value_2) {
           fra.me.REG[2] = BOX_NativeString("_is_null");
@@ -1970,12 +2179,12 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_na
         fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
         goto label3;
       } else {
-        /* ./native_interface//ni_metamodel.nit:258 */
-        nit_abort("Aborted", NULL, LOCATE_native_interface___ni_metamodel, 258);
+        /* ./native_interface//ni_metamodel.nit:280 */
+        nit_abort("Aborted", NULL, LOCATE_native_interface___ni_metamodel, 280);
       }
     }
   } else {
-    /* ./native_interface//ni_metamodel.nit:262 */
+    /* ./native_interface//ni_metamodel.nit:284 */
     REGB0 = TAG_Int(5);
     fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_4) {
@@ -1988,7 +2197,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_na
     fra.me.REG[3] = fra.me.REG[3];
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     fra.me.REG[3] = CALL_metamodel___static_type___MMImportedCast___from(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[3] = CALL_native_interface___ni_metamodel___MMType___friendly_extern_name(fra.me.REG[3])(fra.me.REG[3]);
+    fra.me.REG[3] = CALL_native_interface___ni_metamodel___MMType___mangled_name(fra.me.REG[3])(fra.me.REG[3]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     if (!once_value_5) {
       fra.me.REG[3] = BOX_NativeString("_is_a_");
@@ -2000,7 +2209,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_na
     fra.me.REG[3] = fra.me.REG[3];
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     fra.me.REG[0] = CALL_metamodel___static_type___MMImportedCast___to(fra.me.REG[0])(fra.me.REG[0]);
-    fra.me.REG[0] = CALL_native_interface___ni_metamodel___MMType___friendly_extern_name(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[0] = CALL_native_interface___ni_metamodel___MMType___mangled_name(fra.me.REG[0])(fra.me.REG[0]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
     if (!once_value_6) {
       fra.me.REG[0] = BOX_NativeString("");
@@ -2028,17 +2237,18 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_local_cname(val_t 
   static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 266;
+  fra.me.line = 288;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___is_a_local_cname;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_metamodel.nit:267 */
+  /* ./native_interface//ni_metamodel.nit:289 */
   REGB0 = TAG_Int(5);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -2088,17 +2298,18 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_local_csignature(v
   static val_t once_value_4; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 270;
+  fra.me.line = 292;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___is_a_local_csignature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_metamodel.nit:274 */
+  /* ./native_interface//ni_metamodel.nit:296 */
   REGB0 = TAG_Int(7);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -2160,15 +2371,16 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_csignatur
   static val_t once_value_4; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 277;
+  fra.me.line = 299;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___is_a_friendly_csignature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:279 */
+  /* ./native_interface//ni_metamodel.nit:301 */
   REGB0 = TAG_Int(7);
   fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -2227,21 +2439,22 @@ val_t native_interface___ni_metamodel___MMImportedCast___hash(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___ni_metamodel;
-  fra.me.line = 282;
+  fra.me.line = 304;
   fra.me.meth = LOCATE_native_interface___ni_metamodel___MMImportedCast___hash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_metamodel.nit:284 */
+  /* ./native_interface//ni_metamodel.nit:306 */
   fra.me.REG[1] = CALL_metamodel___static_type___MMImportedCast___from(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___hash___Object___hash(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_metamodel___static_type___MMImportedCast___to(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = CALL_standard___hash___Object___hash(fra.me.REG[0])(fra.me.REG[0]);
   /* ./../lib/standard//kernel.nit:235 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-  /* ./native_interface//ni_metamodel.nit:284 */
+  /* ./native_interface//ni_metamodel.nit:306 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;

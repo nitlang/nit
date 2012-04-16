@@ -6,9 +6,13 @@
 extern const char *LOCATE_native_interface___ni_metamodel;
 extern const int SFT_native_interface___ni_metamodel[];
 #define CALL_native_interface___ni_metamodel___MMType___friendly_extern_name(recv) ((native_interface___ni_metamodel___MMType___friendly_extern_name_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 0)))
-#define CALL_native_interface___ni_metamodel___MMType___from_native(recv) ((native_interface___ni_metamodel___MMType___from_native_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 1)))
-#define CALL_native_interface___ni_metamodel___MMType___assign_to_friendly(recv) ((native_interface___ni_metamodel___MMType___assign_to_friendly_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 2)))
-#define CALL_native_interface___ni_metamodel___MMType___assign_from_friendly(recv) ((native_interface___ni_metamodel___MMType___assign_from_friendly_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 3)))
+#define CALL_native_interface___ni_metamodel___MMType___mangled_name(recv) ((native_interface___ni_metamodel___MMType___mangled_name_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 1)))
+#define CALL_native_interface___ni_metamodel___MMType___from_native(recv) ((native_interface___ni_metamodel___MMType___from_native_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 2)))
+#define CALL_native_interface___ni_metamodel___MMType___assign_to_friendly(recv) ((native_interface___ni_metamodel___MMType___assign_to_friendly_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 3)))
+#define CALL_native_interface___ni_metamodel___MMType___assign_from_friendly(recv) ((native_interface___ni_metamodel___MMType___assign_from_friendly_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 4)))
+#define CALL_native_interface___ni_metamodel___MMType___uses_nitni_ref(recv) ((native_interface___ni_metamodel___MMType___uses_nitni_ref_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 5)))
+#define CALL_native_interface___ni_metamodel___MMType___friendly_null_getter(recv) ((native_interface___ni_metamodel___MMType___friendly_null_getter_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 6)))
+#define CALL_native_interface___ni_metamodel___MMType___local_friendly_null_getter_from(recv) ((native_interface___ni_metamodel___MMType___local_friendly_null_getter_from_t)CALL((recv), (SFT_native_interface___ni_metamodel[0] + 7)))
 #define CALL_native_interface___ni_metamodel___MMMethod___local_friendly_name_from(recv) ((native_interface___ni_metamodel___MMMethod___local_friendly_name_from_t)CALL((recv), (SFT_native_interface___ni_metamodel[1] + 0)))
 #define CALL_native_interface___ni_metamodel___MMMethod___friendly_super_cname(recv) ((native_interface___ni_metamodel___MMMethod___friendly_super_cname_t)CALL((recv), (SFT_native_interface___ni_metamodel[1] + 1)))
 #define CALL_native_interface___ni_metamodel___MMMethod___local_friendly_super_name_from(recv) ((native_interface___ni_metamodel___MMMethod___local_friendly_super_name_from_t)CALL((recv), (SFT_native_interface___ni_metamodel[1] + 2)))
@@ -36,6 +40,9 @@ extern const int SFT_native_interface___ni_metamodel[];
 static const char * const LOCATE_native_interface___ni_metamodel___MMType___friendly_extern_name = "ni_metamodel::MMType::friendly_extern_name";
 val_t native_interface___ni_metamodel___MMType___friendly_extern_name(val_t p0);
 typedef val_t (*native_interface___ni_metamodel___MMType___friendly_extern_name_t)(val_t p0);
+static const char * const LOCATE_native_interface___ni_metamodel___MMType___mangled_name = "ni_metamodel::MMType::mangled_name";
+val_t native_interface___ni_metamodel___MMType___mangled_name(val_t p0);
+typedef val_t (*native_interface___ni_metamodel___MMType___mangled_name_t)(val_t p0);
 static const char * const LOCATE_native_interface___ni_metamodel___MMType___from_native = "ni_metamodel::MMType::from_native";
 val_t native_interface___ni_metamodel___MMType___from_native(val_t p0, val_t p1);
 typedef val_t (*native_interface___ni_metamodel___MMType___from_native_t)(val_t p0, val_t p1);
@@ -45,6 +52,15 @@ typedef val_t (*native_interface___ni_metamodel___MMType___assign_to_friendly_t)
 static const char * const LOCATE_native_interface___ni_metamodel___MMType___assign_from_friendly = "ni_metamodel::MMType::assign_from_friendly";
 val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, val_t p1, val_t p2);
 typedef val_t (*native_interface___ni_metamodel___MMType___assign_from_friendly_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_native_interface___ni_metamodel___MMType___uses_nitni_ref = "ni_metamodel::MMType::uses_nitni_ref";
+val_t native_interface___ni_metamodel___MMType___uses_nitni_ref(val_t p0);
+typedef val_t (*native_interface___ni_metamodel___MMType___uses_nitni_ref_t)(val_t p0);
+static const char * const LOCATE_native_interface___ni_metamodel___MMType___friendly_null_getter = "ni_metamodel::MMType::friendly_null_getter";
+val_t native_interface___ni_metamodel___MMType___friendly_null_getter(val_t p0);
+typedef val_t (*native_interface___ni_metamodel___MMType___friendly_null_getter_t)(val_t p0);
+static const char * const LOCATE_native_interface___ni_metamodel___MMType___local_friendly_null_getter_from = "ni_metamodel::MMType::local_friendly_null_getter_from";
+val_t native_interface___ni_metamodel___MMType___local_friendly_null_getter_from(val_t p0, val_t p1);
+typedef val_t (*native_interface___ni_metamodel___MMType___local_friendly_null_getter_from_t)(val_t p0, val_t p1);
 val_t NEW_MMType_metamodel___static_type___MMType___init();
 static const char * const LOCATE_native_interface___ni_metamodel___MMMethod___local_friendly_name_from = "ni_metamodel::MMMethod::local_friendly_name_from";
 val_t native_interface___ni_metamodel___MMMethod___local_friendly_name_from(val_t p0, val_t p1, val_t p2);

@@ -9,6 +9,7 @@ void syntax___syntax_base___MMSrcModule___clear_ast(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcModule___clear_ast;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:32 */
@@ -26,6 +27,7 @@ val_t syntax___syntax_base___MMSrcModule___node(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcModule___node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -53,6 +55,7 @@ val_t syntax___syntax_base___MMSrcModule___src_local_classes(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcModule___src_local_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:37 */
@@ -76,6 +79,7 @@ void syntax___syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcModule___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -113,6 +117,7 @@ val_t syntax___syntax_base___MMSrcModule___nodes(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcModule___nodes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -170,6 +175,7 @@ void syntax___syntax_base___MMSrcModule___nodes__eq(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcModule___nodes__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -208,6 +214,7 @@ val_t syntax___syntax_base___MMModule___nodes(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___MMModule___nodes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -228,6 +235,7 @@ void syntax___syntax_base___MMModule___nodes__eq(val_t p0, val_t p1, val_t p2){
   fra.me.meth = LOCATE_syntax___syntax_base___MMModule___nodes__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -257,6 +265,7 @@ val_t syntax___syntax_base___MMGlobalClass___check_visibility(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___syntax_base___MMGlobalClass___check_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -407,6 +416,7 @@ val_t syntax___syntax_base___MMSrcLocalClass___node(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcLocalClass___node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -436,6 +446,7 @@ val_t syntax___syntax_base___MMSrcLocalClass___formal_dict(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcLocalClass___formal_dict;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:90 */
@@ -458,6 +469,7 @@ val_t syntax___syntax_base___MMSrcLocalClass___src_local_properties(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcLocalClass___src_local_properties;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:93 */
@@ -482,6 +494,7 @@ void syntax___syntax_base___MMSrcLocalClass___init(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcLocalClass___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -526,6 +539,7 @@ val_t syntax___syntax_base___MMGlobalProperty___check_visibility(val_t p0, val_t
   fra.me.meth = LOCATE_syntax___syntax_base___MMGlobalProperty___check_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -725,6 +739,7 @@ val_t syntax___syntax_base___MMLocalProperty___node(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMLocalProperty___node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:129 */
@@ -744,6 +759,7 @@ val_t syntax___syntax_base___MMLocalProperty___is_init(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMLocalProperty___is_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:132 */
@@ -763,6 +779,7 @@ val_t syntax___syntax_base___MMSrcAttribute___node(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcAttribute___node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -792,6 +809,7 @@ void syntax___syntax_base___MMSrcAttribute___init(val_t p0, val_t p1, val_t p2, 
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcAttribute___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -822,6 +840,7 @@ val_t syntax___syntax_base___MMSrcMethod___is_intern(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcMethod___is_intern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:149 */
@@ -841,6 +860,7 @@ val_t syntax___syntax_base___MMSrcMethod___is_extern(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcMethod___is_extern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:150 */
@@ -860,6 +880,7 @@ val_t syntax___syntax_base___MMSrcMethod___is_abstract(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcMethod___is_abstract;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:151 */
@@ -878,6 +899,7 @@ val_t syntax___syntax_base___MMSrcMethod___extern_name(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcMethod___extern_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:152 */
@@ -897,6 +919,7 @@ val_t syntax___syntax_base___MMAttrImplementationMethod___node(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMAttrImplementationMethod___node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -926,6 +949,7 @@ void syntax___syntax_base___MMAttrImplementationMethod___init(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___syntax_base___MMAttrImplementationMethod___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -957,6 +981,7 @@ void syntax___syntax_base___MMReadImplementationMethod___init(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___syntax_base___MMReadImplementationMethod___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -982,6 +1007,7 @@ void syntax___syntax_base___MMWriteImplementationMethod___init(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___syntax_base___MMWriteImplementationMethod___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1006,6 +1032,7 @@ val_t syntax___syntax_base___MMMethSrcMethod___is_init(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMMethSrcMethod___is_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:187 */
@@ -1028,6 +1055,7 @@ val_t syntax___syntax_base___MMMethSrcMethod___is_intern(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMMethSrcMethod___is_intern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:188 */
@@ -1050,6 +1078,7 @@ val_t syntax___syntax_base___MMMethSrcMethod___is_extern(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMMethSrcMethod___is_extern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:189 */
@@ -1072,6 +1101,7 @@ val_t syntax___syntax_base___MMMethSrcMethod___is_abstract(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMMethSrcMethod___is_abstract;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:190 */
@@ -1093,6 +1123,7 @@ val_t syntax___syntax_base___MMMethSrcMethod___extern_name(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMMethSrcMethod___extern_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:191 */
@@ -1109,6 +1140,7 @@ void syntax___syntax_base___MMMethSrcMethod___extern_name__eq(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___syntax_base___MMMethSrcMethod___extern_name__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1128,6 +1160,7 @@ val_t syntax___syntax_base___MMMethSrcMethod___explicit_casts(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMMethSrcMethod___explicit_casts;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:192 */
@@ -1150,6 +1183,7 @@ val_t syntax___syntax_base___MMMethSrcMethod___explicit_imports(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMMethSrcMethod___explicit_imports;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:193 */
@@ -1172,6 +1206,7 @@ val_t syntax___syntax_base___MMMethSrcMethod___node(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMMethSrcMethod___node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1202,6 +1237,7 @@ void syntax___syntax_base___MMMethSrcMethod___init(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_syntax___syntax_base___MMMethSrcMethod___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1259,6 +1295,7 @@ void syntax___syntax_base___MMSrcTypeProperty___init(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_syntax___syntax_base___MMSrcTypeProperty___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1282,6 +1319,7 @@ val_t syntax___syntax_base___MMImplicitInit___super_init(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMImplicitInit___super_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:224 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 224);
   stack_frame_head = fra.me.prev;
@@ -1297,6 +1335,7 @@ val_t syntax___syntax_base___MMImplicitInit___is_init(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMImplicitInit___is_init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:225 */
@@ -1316,6 +1355,7 @@ val_t syntax___syntax_base___MMImplicitInit___unassigned_attributes(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMImplicitInit___unassigned_attributes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:226 */
@@ -1338,6 +1378,7 @@ val_t syntax___syntax_base___MMImplicitInit___super_inits(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___MMImplicitInit___super_inits;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:227 */
@@ -1364,6 +1405,7 @@ void syntax___syntax_base___MMImplicitInit___init(val_t p0, val_t p1, val_t p2, 
   fra.me.meth = LOCATE_syntax___syntax_base___MMImplicitInit___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1410,6 +1452,7 @@ val_t syntax___syntax_base___Variable___name(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___Variable___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:238 */
@@ -1431,6 +1474,7 @@ val_t syntax___syntax_base___Variable___decl(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___Variable___decl;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:241 */
@@ -1447,6 +1491,7 @@ val_t syntax___syntax_base___Variable___stype(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___Variable___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:244 */
@@ -1463,6 +1508,7 @@ void syntax___syntax_base___Variable___stype__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___Variable___stype__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -1482,6 +1528,7 @@ val_t syntax___syntax_base___Variable___to_s(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___Variable___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:247 */
@@ -1506,6 +1553,7 @@ val_t syntax___syntax_base___Variable___kind(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___Variable___kind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:249 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 249);
   stack_frame_head = fra.me.prev;
@@ -1522,6 +1570,7 @@ void syntax___syntax_base___Variable___init(val_t p0, val_t p1, val_t p2, int* i
   fra.me.meth = LOCATE_syntax___syntax_base___Variable___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1548,6 +1597,7 @@ val_t syntax___syntax_base___VarVariable___kind(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___VarVariable___kind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:261 */
@@ -1580,6 +1630,7 @@ void syntax___syntax_base___VarVariable___init(val_t p0, val_t p1, val_t p2, int
   fra.me.meth = LOCATE_syntax___syntax_base___VarVariable___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1604,6 +1655,7 @@ val_t syntax___syntax_base___ParamVariable___kind(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___ParamVariable___kind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:268 */
@@ -1636,6 +1688,7 @@ void syntax___syntax_base___ParamVariable___init(val_t p0, val_t p1, val_t p2, i
   fra.me.meth = LOCATE_syntax___syntax_base___ParamVariable___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1660,6 +1713,7 @@ val_t syntax___syntax_base___AutoVariable___kind(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AutoVariable___kind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:275 */
@@ -1692,6 +1746,7 @@ void syntax___syntax_base___AutoVariable___init(val_t p0, val_t p1, val_t p2, in
   fra.me.meth = LOCATE_syntax___syntax_base___AutoVariable___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1716,6 +1771,7 @@ val_t syntax___syntax_base___ClosureVariable___kind(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___ClosureVariable___kind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:283 */
@@ -1747,6 +1803,7 @@ val_t syntax___syntax_base___ClosureVariable___closure(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___ClosureVariable___closure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:285 */
@@ -1770,6 +1827,7 @@ void syntax___syntax_base___ClosureVariable___init(val_t p0, val_t p1, val_t p2,
   fra.me.meth = LOCATE_syntax___syntax_base___ClosureVariable___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1801,6 +1859,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___get_type_by_name(val_t p0, val_t
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___get_type_by_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1884,6 +1943,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___get_instantiated_type_by_name(va
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___get_instantiated_type_by_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -1969,6 +2029,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_object(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_object;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2005,6 +2066,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_bool(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_bool;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2041,6 +2103,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_int(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_int;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2077,6 +2140,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_float(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_float;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2113,6 +2177,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_char(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_char;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2149,6 +2214,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_string(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_string;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2185,6 +2251,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_nativestring(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_nativestring;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2221,6 +2288,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_array(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_array;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2263,6 +2331,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_discrete(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_discrete;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2299,6 +2368,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_range(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_range;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2339,6 +2409,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___type_none(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___type_none;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:377 */
@@ -2367,6 +2438,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___get_method(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___get_method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2437,6 +2509,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___mmmodule(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:388 */
@@ -2459,6 +2532,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___local_class(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2485,6 +2559,7 @@ void syntax___syntax_base___AbsSyntaxVisitor___local_class__eq(val_t p0, val_t p
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___local_class__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2504,6 +2579,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___local_property(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___local_property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2530,6 +2606,7 @@ void syntax___syntax_base___AbsSyntaxVisitor___local_property__eq(val_t p0, val_
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___local_property__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -2549,6 +2626,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___tc(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___tc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:399 */
@@ -2572,6 +2650,7 @@ void syntax___syntax_base___AbsSyntaxVisitor___error(val_t p0, val_t p1, val_t p
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___error;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2623,6 +2702,7 @@ void syntax___syntax_base___AbsSyntaxVisitor___fatal_error(val_t p0, val_t p1, v
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___fatal_error;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2674,6 +2754,7 @@ void syntax___syntax_base___AbsSyntaxVisitor___warning(val_t p0, val_t p1, val_t
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___warning;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2729,6 +2810,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___check_conform(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___check_conform;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2845,6 +2927,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___check_expr(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___check_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2939,6 +3022,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(val_t p0, val
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -2990,6 +3074,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(val_t p0
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___check_conform_multiexpr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3049,6 +3134,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(val_t p0
     fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___check_conform_multiexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 3;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -3165,6 +3251,7 @@ val_t syntax___syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(val_t p0
     fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___check_conform_multiexpr;
     fra.me.has_broke = 0;
     fra.me.REG_size = 4;
+    fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
     fra.me.REG[2] = NIT_NULL;
@@ -3305,6 +3392,7 @@ void syntax___syntax_base___AbsSyntaxVisitor___init(val_t p0, val_t p1, val_t p2
   fra.me.meth = LOCATE_syntax___syntax_base___AbsSyntaxVisitor___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3332,6 +3420,7 @@ void syntax___syntax_base___ANode___accept_abs_syntax_visitor(val_t p0, val_t p1
   fra.me.meth = LOCATE_syntax___syntax_base___ANode___accept_abs_syntax_visitor;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3352,6 +3441,7 @@ val_t syntax___syntax_base___Token___to_symbol(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___Token___to_symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3394,6 +3484,7 @@ val_t syntax___syntax_base___AClassdef___local_class(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AClassdef___local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:530 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 530);
   stack_frame_head = fra.me.prev;
@@ -3408,6 +3499,7 @@ val_t syntax___syntax_base___AClassdef___next_node(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AClassdef___next_node;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:533 */
@@ -3424,6 +3516,7 @@ void syntax___syntax_base___AClassdef___next_node__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___AClassdef___next_node__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -3442,6 +3535,7 @@ val_t syntax___syntax_base___APropdef___self_var(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___APropdef___self_var;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:538 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 538);
   stack_frame_head = fra.me.prev;
@@ -3456,6 +3550,7 @@ val_t syntax___syntax_base___AAttrPropdef___prop(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AAttrPropdef___prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:543 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 543);
   stack_frame_head = fra.me.prev;
@@ -3470,6 +3565,7 @@ val_t syntax___syntax_base___AAttrPropdef___readmethod(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AAttrPropdef___readmethod;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:546 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 546);
   stack_frame_head = fra.me.prev;
@@ -3484,6 +3580,7 @@ val_t syntax___syntax_base___AAttrPropdef___writemethod(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AAttrPropdef___writemethod;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:549 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 549);
   stack_frame_head = fra.me.prev;
@@ -3499,6 +3596,7 @@ val_t syntax___syntax_base___AConcreteInitPropdef___super_init_calls(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AConcreteInitPropdef___super_init_calls;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:554 */
@@ -3521,6 +3619,7 @@ val_t syntax___syntax_base___AConcreteInitPropdef___explicit_super_init_calls(va
   fra.me.meth = LOCATE_syntax___syntax_base___AConcreteInitPropdef___explicit_super_init_calls;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:555 */
@@ -3542,6 +3641,7 @@ val_t syntax___syntax_base___AMethPropdef___method(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AMethPropdef___method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:559 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 559);
   stack_frame_head = fra.me.prev;
@@ -3556,6 +3656,7 @@ val_t syntax___syntax_base___ATypePropdef___prop(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___ATypePropdef___prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:564 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 564);
   stack_frame_head = fra.me.prev;
@@ -3570,6 +3671,7 @@ val_t syntax___syntax_base___AParam___position(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AParam___position;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:569 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 569);
   stack_frame_head = fra.me.prev;
@@ -3584,6 +3686,7 @@ val_t syntax___syntax_base___AParam___variable(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AParam___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:572 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 572);
   stack_frame_head = fra.me.prev;
@@ -3598,6 +3701,7 @@ val_t syntax___syntax_base___AClosureDecl___position(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AClosureDecl___position;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:577 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 577);
   stack_frame_head = fra.me.prev;
@@ -3612,6 +3716,7 @@ val_t syntax___syntax_base___AClosureDecl___variable(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AClosureDecl___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:580 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 580);
   stack_frame_head = fra.me.prev;
@@ -3626,6 +3731,7 @@ val_t syntax___syntax_base___AType___is_typed(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AType___is_typed;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:585 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 585);
   stack_frame_head = fra.me.prev;
@@ -3640,6 +3746,7 @@ val_t syntax___syntax_base___AType___stype(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AType___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:590 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 590);
   stack_frame_head = fra.me.prev;
@@ -3661,6 +3768,7 @@ val_t syntax___syntax_base___AType___get_local_class(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___AType___get_local_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -3808,6 +3916,7 @@ val_t syntax___syntax_base___AType___get_unchecked_stype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___AType___get_unchecked_stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4296,6 +4405,7 @@ val_t syntax___syntax_base___AType___get_unchecked_stype(val_t p0, val_t p1){
       fra.me.meth = LOCATE_syntax___syntax_base___AType___get_unchecked_stype;
       fra.me.has_broke = 0;
       fra.me.REG_size = 1;
+      fra.me.nitni_local_ref_head = NULL;
       fra.me.REG[0] = NIT_NULL;
       fra.me.closure_ctx = closctx_param;
       fra.me.closure_funs = CREG;
@@ -4338,6 +4448,7 @@ val_t syntax___syntax_base___AType___get_stype(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___AType___get_stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4395,6 +4506,7 @@ void syntax___syntax_base___AType___check_conform(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___AType___check_conform;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
@@ -4504,6 +4616,7 @@ val_t syntax___syntax_base___AExpr___is_typed(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AExpr___is_typed;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:728 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 728);
   stack_frame_head = fra.me.prev;
@@ -4518,6 +4631,7 @@ val_t syntax___syntax_base___AExpr___is_statement(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AExpr___is_statement;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:733 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 733);
   stack_frame_head = fra.me.prev;
@@ -4532,6 +4646,7 @@ val_t syntax___syntax_base___AExpr___stype(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AExpr___stype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:737 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 737);
   stack_frame_head = fra.me.prev;
@@ -4546,6 +4661,7 @@ val_t syntax___syntax_base___AAbsAbsSendExpr___prop_signature(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AAbsAbsSendExpr___prop_signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:744 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 744);
   stack_frame_head = fra.me.prev;
@@ -4560,6 +4676,7 @@ val_t syntax___syntax_base___AAbsAbsSendExpr___raw_arguments(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AAbsAbsSendExpr___raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:747 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 747);
   stack_frame_head = fra.me.prev;
@@ -4574,6 +4691,7 @@ val_t syntax___syntax_base___AAbsSendExpr___prop(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AAbsSendExpr___prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:753 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 753);
   stack_frame_head = fra.me.prev;
@@ -4588,6 +4706,7 @@ val_t syntax___syntax_base___AAbsSendExpr___return_type(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AAbsSendExpr___return_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:756 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 756);
   stack_frame_head = fra.me.prev;
@@ -4602,6 +4721,7 @@ val_t syntax___syntax_base___ASuperExpr___init_in_superclass(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___ASuperExpr___init_in_superclass;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:766 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 766);
   stack_frame_head = fra.me.prev;
@@ -4616,6 +4736,7 @@ val_t syntax___syntax_base___ASendExpr___closure_defs(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___ASendExpr___closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:775 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 775);
   stack_frame_head = fra.me.prev;
@@ -4630,6 +4751,7 @@ val_t syntax___syntax_base___AReassignFormExpr___assign_method(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AReassignFormExpr___assign_method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:780 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 780);
   stack_frame_head = fra.me.prev;
@@ -4644,6 +4766,7 @@ val_t syntax___syntax_base___ASendReassignExpr___read_prop(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___ASendReassignExpr___read_prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:787 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 787);
   stack_frame_head = fra.me.prev;
@@ -4658,6 +4781,7 @@ val_t syntax___syntax_base___AAttrFormExpr___prop(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AAttrFormExpr___prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:801 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 801);
   stack_frame_head = fra.me.prev;
@@ -4672,6 +4796,7 @@ val_t syntax___syntax_base___AAttrFormExpr___attr_type(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AAttrFormExpr___attr_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:804 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 804);
   stack_frame_head = fra.me.prev;
@@ -4686,6 +4811,7 @@ val_t syntax___syntax_base___ASuperstringExpr___atype(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___ASuperstringExpr___atype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:809 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 809);
   stack_frame_head = fra.me.prev;
@@ -4700,6 +4826,7 @@ val_t syntax___syntax_base___AVardeclExpr___variable(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AVardeclExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:813 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 813);
   stack_frame_head = fra.me.prev;
@@ -4714,6 +4841,7 @@ val_t syntax___syntax_base___AForExpr___variables(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AForExpr___variables;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:819 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 819);
   stack_frame_head = fra.me.prev;
@@ -4728,6 +4856,7 @@ val_t syntax___syntax_base___ASelfExpr___variable(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___ASelfExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:824 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 824);
   stack_frame_head = fra.me.prev;
@@ -4742,6 +4871,7 @@ val_t syntax___syntax_base___AVarFormExpr___variable(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AVarFormExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:829 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 829);
   stack_frame_head = fra.me.prev;
@@ -4756,6 +4886,7 @@ val_t syntax___syntax_base___AClosureCallExpr___variable(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AClosureCallExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:835 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 835);
   stack_frame_head = fra.me.prev;
@@ -4770,6 +4901,7 @@ val_t syntax___syntax_base___AClosureDef___closure(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AClosureDef___closure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:840 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 840);
   stack_frame_head = fra.me.prev;
@@ -4784,6 +4916,7 @@ val_t syntax___syntax_base___AClosureDef___variables(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AClosureDef___variables;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* ./syntax//syntax_base.nit:843 */
@@ -4800,6 +4933,7 @@ void syntax___syntax_base___AClosureDef___variables__eq(val_t p0, val_t p1){
   fra.me.meth = LOCATE_syntax___syntax_base___AClosureDef___variables__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
@@ -4818,6 +4952,7 @@ val_t syntax___syntax_base___AMethid___name(val_t p0){
   fra.me.meth = LOCATE_syntax___syntax_base___AMethid___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
   /* ./syntax//syntax_base.nit:848 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___syntax_base, 848);
   stack_frame_head = fra.me.prev;
