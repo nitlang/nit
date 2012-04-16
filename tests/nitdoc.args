@@ -1,1 +1,1 @@
-../lib/*.nit -d nitdoc_args1.write
+module_1 -d nitdoc_args1.write
