@@ -17,6 +17,10 @@ Requirement:
 	
 	* gcc		http://gcc.gnu.org/
 
+Optionals tools:
+
+	* ccache	http://ccache.samba.org/	to improve recompilation
+	* dot		http://www.graphviz.org/	to enable graphes with the nitdoc tool
 
 Important files and directory:
 
