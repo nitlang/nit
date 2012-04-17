@@ -377,6 +377,9 @@ redef class APropdef
 	fun do_typing(modelbuilder: ModelBuilder)
 	do
 	end
+
+	# The variable associated to the reciever (if any)
+	var selfvariable: nullable Variable
 end
 
 redef class AConcreteMethPropdef
@@ -385,6 +388,7 @@ redef class AConcreteMethPropdef
 		var nclassdef = self.parent.as(AClassdef)
 		var mpropdef = self.mpropdef.as(not null)
 		var v = new TypeVisitor(modelbuilder, nclassdef, mpropdef)
+		self.selfvariable = v.selfvariable
 
 		var nblock = self.n_block
 		if nblock == null then return
@@ -415,6 +419,7 @@ redef class AAttrPropdef
 	do
 		var nclassdef = self.parent.as(AClassdef)
 		var v = new TypeVisitor(modelbuilder, nclassdef, self.mpropdef.as(not null))
+		self.selfvariable = v.selfvariable
 
 		var nexpr = self.n_expr
 		if nexpr != null then
@@ -479,7 +484,7 @@ redef class AVardeclExpr
 		end
 
 		if mtype == null then
-			mtype = v.get_mclass(self, "Object").mclass_type
+			mtype = v.get_mclass(self, "Object").mclass_type.as_nullable
 		end
 
 		variable.declared_type = mtype
