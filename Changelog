@@ -1,5 +1,14 @@
 version 0.4.1-git
  * Devel version
+ * General 'for' that works with more that one automatic variable (eg. Map)
+ * Better error messages with colored location on the original line
+ * Better compatibility with cc on various unixes (from SunOS to Ubuntu)
+ * New class_name method to ease debugging (for those who debug with print)
+ * Hardened Virtual Type checks (but generics are still unsafe...)
+ * New nitdoc, more fancy and more readable
+ * New native interface to bind Nit and C code
+ * New tool, nits, the native interface stub generator
+ * Many improvements in the standard library (especially Map)
 
 version 0.4
  * New style attributes
