@@ -45,11 +45,26 @@ fi
 rm -r c_src 2> /dev/null
 mkdir c_src
 
-sed -n '/^ *.nit_compile/{s!\\$!!;p}' .nit_compile3/nitc._build.sh | while read -r file; do
+# Copy sources
+sed -n '/^  /{s!\\$!!;p}' .nit_compile${p}/nitc._build.sh | while read -r file; do
+	[ -f $file ] || continue
 	cp $file c_src
 	[ -r ${file%.c}.h ] && cp ${file%.c}.h c_src
+	# Copy included files
+	sed -ne 's|^#include "\(.*\)".*|\1|p' $file | while read -r subfile; do
+		cp "$(dirname "$file")/$subfile" c_src
+	done
 done
-sed -e "s|.nit_compile${p}|.|g;s|/\[a-z\]+/../|/|g;s|nitc_${p}|nitc|" -e 's/^CLIBDIR=.*/CLIBDIR="clib"/' .nit_compile${p}/nitc._build.sh > c_src/nitc._build.sh
+sed -i -e 's|include ".*/|include "|' c_src/*[ch] # Cleanup includes
+
+# Prepare the build script
+cp .nit_compile${p}/nitc._build.sh c_src/nitc._build.sh
 chmod +x c_src/nitc._build.sh
+sed -i -e "s|^  [^$].*/|  |g" c_src/nitc._build.sh # Cleanup file paths
+sed -i -e "s|.nit_compile${p}|.|g" c_src/nitc._build.sh # Cleanup remaining work dirs
+sed -i -e "s|nitc_${p}|nitc|" c_src/nitc._build.sh # Cleanup exec name
+sed -i -e 's/^CLIBDIR=.*/CLIBDIR="clib"/' c_src/nitc._build.sh # Cleanup CLIB PATH
+
+# Copy remaining files
 cp -r ../c_src/Makefile ../c_src/README ../clib c_src
 
