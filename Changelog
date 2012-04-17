@@ -1,3 +1,6 @@
+version 0.5.1-git
+ * Devel version
+
 version 0.5
  * General 'for' that works with more that one automatic variable (eg. Map)
  * Better error messages with colored location on the original line
