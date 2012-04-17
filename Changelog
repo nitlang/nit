@@ -1,5 +1,4 @@
-version 0.4.1-git
- * Devel version
+version 0.5
  * General 'for' that works with more that one automatic variable (eg. Map)
  * Better error messages with colored location on the original line
  * Better compatibility with cc on various unixes (from SunOS to Ubuntu)
@@ -9,6 +8,8 @@ version 0.4.1-git
  * New native interface to bind Nit and C code
  * New tool, nits, the native interface stub generator
  * Many improvements in the standard library (especially Map)
+
+ -- Tue, 17 Apr 2012 16:46:45 -0400
 
 version 0.4
  * New style attributes
