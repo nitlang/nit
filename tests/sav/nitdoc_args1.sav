@@ -557,6 +557,7 @@ opts.html
 opts.map
 opts.png
 opts.s.dot
+quicksearch-list.js
 range.dot
 range.html
 range.map

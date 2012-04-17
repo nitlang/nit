@@ -157,7 +157,8 @@ class DocContext
 		end
 
 		var head = "<meta charset=\"utf-8\">" +
-			"<script type=\"text/javascript\" src=\"scripts/jquery-1.7.1.min.js\"></script>\n" + 
+			"<script type=\"text/javascript\" src=\"scripts/jquery-1.7.1.min.js\"></script>\n" +
+			"<script type=\"text/javascript\" src=\"quicksearch-list.js\"></script>\n" +
 			"<script type=\"text/javascript\" src=\"scripts/js-facilities.js\"></script>\n" +
 			"<link rel=\"stylesheet\" href=\"styles/main.css\" type=\"text/css\"  media=\"screen\" />"
 
@@ -259,6 +260,11 @@ class DocContext
 		add("<footer>{footer_text}</footer>")
 		add("</body></html>\n")
 		write_to("{dir}/full-index.html")
+
+		self.filename = "quicksearch-list"
+		clear
+		mainmod.file_quicksearch_list_doc(self)
+		write_to("{dir}/quicksearch-list.js")
 	end
 
 
@@ -437,12 +443,32 @@ class MMEntity
 	# The doc node from the AST
 	# Return null is none
 	fun doc: nullable ADoc do return null
+
+	# Return a jason entry for quicksearch list JSON Object
+	fun json_entry(dctx: DocContext): String is abstract
+
+	# Return the qualified name as string
+	fun qualified_name: String is abstract
+		
 end
 
 redef class MMModule
 	super MMEntity
 	redef fun html_link(dctx) do 
 		return "<a href=\"{html_name}.html\" title=\"{short_doc}\">{self}</a>"
+	end
+
+	redef fun json_entry(dctx) do
+		return "\{txt:\"{self.qualified_name}\",url:\"{html_name}.html\"\},"
+	end
+
+	redef fun qualified_name do
+		var buffer = new Buffer
+		for m in mnhe.smallers do
+			buffer.append("{m.html_name}::")
+		end
+		buffer.append("{self.name}")
+		return buffer.to_s
 	end
 
 	fun require_doc(dctx: DocContext): Bool
@@ -787,7 +813,65 @@ redef class MMModule
 		dctx.stage("</ul></article>\n")
 		dctx.close_stage
 	end
+
+	# Fill the quicksearch list JSON object
+	fun file_quicksearch_list_doc(dctx: DocContext)
+	do
+		var entities = new HashMap[String, Array[MMEntity]]
+		var props = new HashMap[MMGlobalProperty, Array[MMLocalProperty]]
+		for m in mhe.greaters_and_self do
+			if not m.require_doc(dctx) then continue
+			var a = new Array[MMEntity]
+			a.add(m)
+			entities[m.html_name] = a
+		end
+		for g in global_classes do
+			var lc = self[g]
+			if not lc.require_doc(dctx) then continue
+			var a = new Array[MMEntity]
+			a.add(lc)
+			entities[lc.html_name] = a
+			for gp in lc.global_properties do
+				var lp = lc[gp]
+				if not lp.require_doc(dctx) then continue
+				if props.has_key(lp.global) then
+					if not props[lp.global].has(lp) then
+						props[lp.global].add(lp)
+					end
+				else
+					props[lp.global] = [lp]
+				end
+			end
+		end
+
+		for k, v in props do
+			entities[k.short_name] = v
+		end
+
+		var keys = entities.keys.to_a
+		var sorter = new AlphaSorter[String]
+		sorter.sort(keys)
+		
+		dctx.open_stage
+		dctx.stage("var entries = \{")
+		for key in keys do
+			dctx.add("\"{key}\": [")
+			for entity in entities[key] do
+				dctx.add(entity.json_entry(dctx))
+			end
+			dctx.add("],")
+		end
+		dctx.stage("\};")
+		dctx.close_stage
+	end
 end
+
+redef class MMGlobalProperty
+	# Return the short name of the property
+	fun short_name: String do
+		return self.intro.html_name
+	end
+end 
 
 redef class MMLocalProperty
 	super MMEntity
@@ -795,6 +879,14 @@ redef class MMLocalProperty
 	fun html_anchor: String
 	do
 		return "PROP_{local_class}_{cmangle(name)}"
+	end
+
+	redef fun json_entry(dctx) do
+		return "\{txt:\"{qualified_name}\",url:\"{local_class.html_name}.html#{html_anchor}\"\},"
+	end
+
+	redef fun qualified_name do
+		return "{intro_module.qualified_name}::{local_class.html_name}::{html_name}"
 	end
 
 	fun html_open_link(dctx: DocContext): String
@@ -1105,6 +1197,14 @@ redef class MMLocalClass
 	do
 		if not require_doc(dctx) then print "{dctx.filename}: not required {self}"
 		return "<a href=\"{html_name}.html\" title=\"{short_doc}\">{self}</a>"
+	end
+
+	redef fun json_entry(dctx) do
+		return "\{txt:\"{qualified_name}\",url:\"{html_name}.html\"\},"
+	end
+
+	redef fun qualified_name do
+		return "{intro_module.qualified_name}::{html_name}"
 	end
 
 	redef fun short_doc do return global.intro.short_doc

@@ -5,6 +5,16 @@ $.expr[':'].icontains = function(obj, index, meta, stack){
 	return (obj.textContent.replace(/\[[0-9]+\]/g, "") || obj.innerText.replace(/\[[0-9]+\]/g, "") || jQuery(obj).text().replace(/\[[0-9]+\]/g, "") || '').toLowerCase().indexOf(meta[3].toLowerCase()) >= 0;
 };
 
+/*
+ *	Quick Search global vars
+ */
+ 
+// Current search results preview table
+var currentTable = null;
+
+//Hightlighted index in search result preview table
+var currentIndex = -1;
+
 
 /*
 * Add folding and filtering facilities to class description page.
@@ -37,48 +47,166 @@ $(document).ready(function() {
 			$(this).nextAll().toggle();
 	})
 	
-	// Instert search field
-	 $("nav.main ul")
-	 .append(
-	 		$(document.createElement("li"))
-	 		.append(
-	 			$(document.createElement("form"))
-	 			.append(
-			 		$(document.createElement("input"))
-					.attr({
-						id: "search",
-						type:	"text",
-						value: "quick search..."
-					})
-					.addClass("notUsed")
-					.keyup(function() {
-						$(this).parent().parent().find("ul li:not(:icontains('" + $(this).val() + "'))").addClass("hide");
-						$(this).parent().parent().find("ul li:icontains('" + $(this).val() + "')").removeClass("hide");
-					})
-					.focusout(function() {
-						if($(this).val() == "") {
-							$(this).addClass("notUsed");
-							$(this).val("quick search...");
-						}
-					})
-					.focusin(function() {
-						if($(this).val() == "quick search...") {
-							$(this).removeClass("notUsed");
-							$(this).val("");
-						}
-					})
-				)
-				.submit( function() {
-					if($("#search").val().length == 0)
-						return false
-					
-					window.location = "full-index.html#q=" + $("#search").val();
-					if(window.location.href.indexOf("full-index.html") > -1) {
-						location.reload();
-					}				
-					return false;
+	// Insert search field
+	$("nav.main ul")
+	.append(
+		$(document.createElement("li"))
+		.append(
+			$(document.createElement("form"))
+			.append(
+				$(document.createElement("input"))
+				.attr({
+					id: "search",
+					type:	"text",
+					autocomplete: "off",
+					value: "quick search..."
+				})
+				.addClass("notUsed")
+
+				// Key management
+				.keyup(function(e) {
+					switch(e.keyCode) {
+
+						// Select previous result on "Up"
+						case 38:
+							// If already on first result, focus search input
+							if(currentIndex == 0) {
+								$("#search").val($(currentTable.find("tr")[currentIndex]).data("searchDetails").name);
+								$("#search").focus();
+							// Else select previous result
+							} else if(currentIndex > 0) {
+								$(currentTable.find("tr")[currentIndex]).removeClass("activeSearchResult");
+								currentIndex--;
+								$(currentTable.find("tr")[currentIndex]).addClass("activeSearchResult");
+								$("#search").val($(currentTable.find("tr")[currentIndex]).data("searchDetails").name);
+								$("#search").focus();
+							}
+						break;
+
+						// Select next result on "Down"
+						case 40:
+							if(currentIndex < currentTable.find("tr").length - 1) {
+								$(currentTable.find("tr")[currentIndex]).removeClass("activeSearchResult");
+								currentIndex++;
+								$(currentTable.find("tr")[currentIndex]).addClass("activeSearchResult");
+								$("#search").val($(currentTable.find("tr")[currentIndex]).data("searchDetails").name);
+								$("#search").focus();
+							}
+						break;
+						// Go to url on "Enter"
+						case 13:
+							if(currentIndex > -1) {
+								window.location = $(currentTable.find("tr")[currentIndex]).data("searchDetails").url;
+								return false;
+							}
+							if($("#search").val().length == 0)
+								return false
+				
+							window.location = "full-index.html#q=" + $("#search").val();
+							if(window.location.href.indexOf("full-index.html") > -1) {
+								location.reload();
+							}				
+							return false;
+						break;
+
+						// Hide results preview on "Escape"
+						case 27:
+							$(this).blur();
+							if(currentTable != null) {
+								currentTable.remove();
+								currentTable = null;
+							}
+						break;
+
+						default:
+							if($("#search").val().length == 0) {
+								return false;
+							}
+						
+							// Remove previous table
+							if(currentTable != null) {
+								currentTable.remove();
+							}
+
+							// Build results table
+							currentIndex = -1;
+							currentTable = $(document.createElement("table"));
+
+							// Escape regexp related characters in query
+							var query = $("#search").val();
+							query = query.replace(/\[/gi, "\\[");
+							query = query.replace(/\|/gi, "\\|");
+							query = query.replace(/\*/gi, "\\*");
+							query = query.replace(/\+/gi, "\\+");
+							query = query.replace(/\\/gi, "\\\\");
+							query = query.replace(/\?/gi, "\\?");
+							query = query.replace(/\(/gi, "\\(");
+							query = query.replace(/\)/gi, "\\)");
+
+							var index = 0;
+							var regexp = new RegExp("^" + query, "i");
+							for(var entry in entries) {
+								if(index > 10) {
+									break;
+								}
+								var result = entry.match(regexp);
+								if(result != null && result.toString().toUpperCase() == $("#search").val().toUpperCase()) {
+									for(var i = 0; i < entries[entry].length; i++) {
+										if(index > 10) {
+											break;
+										}
+										currentTable.append(
+											$(document.createElement("tr"))
+											.data("searchDetails", {name: entry, url: entries[entry][i]["url"]})
+											.data("index", index)
+											.append($(document.createElement("td")).html(entry))
+											.append(
+												$(document.createElement("td"))
+													.addClass("entryInfo")
+													.html(entries[entry][i]["txt"] + "&nbsp;&raquo;"))
+											.mouseover( function() {
+												$(currentTable.find("tr")[currentIndex]).removeClass("activeSearchResult");
+												$(this).addClass("activeSearchResult");
+												currentIndex = $(this).data("index");
+											})
+											.mouseout( function() {
+												$(this).removeClass("activeSearchResult");
+											 })
+											.click( function() {
+												window.location = $(this).data("searchDetails")["url"];
+											})
+										);
+										index++;
+									}
+								}
+							}
+							
+							// Initialize table properties
+							currentTable.attr("id", "searchTable");
+							currentTable.css("position", "absolute");
+							currentTable.width($("#search").outerWidth());
+							$("header").append(currentTable);
+							currentTable.offset({left: $("#search").offset().left + ($("#search").outerWidth() - currentTable.outerWidth()), top: $("#search").offset().top + $("#search").outerHeight()});
+						break;
+					}
+				})
+				.focusout(function() {
+					if($(this).val() == "") {
+						$(this).addClass("notUsed");
+						$(this).val("quick search...");
+					}
+				})
+				.focusin(function() {
+					if($(this).val() == "quick search...") {
+						$(this).removeClass("notUsed");
+						$(this).val("");
+					}
 				})
 			)
+			.submit( function() {
+				return false;
+			})
+		)
 	 );
 	
 	/*
