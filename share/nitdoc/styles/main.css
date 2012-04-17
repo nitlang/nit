@@ -256,7 +256,6 @@ article .info .code {
 input[type=text] {
 	width: 150px;
 	border: 1px solid #CCC;
-	border-radius: 5px;
 	margin-right: 5px;
 	padding: 1px 2px;
 }
@@ -322,3 +321,35 @@ nav h3 a.fold {
 .fun.public { background-image: url('../resources/icons/meth_public.png')}
 .fun.protected { background-image: url('../resources/icons/meth_protected.png')}
 .fun.private { background-image: url('../resources/icons/meth_private.png')}
+
+/* Quick Search */
+
+#search {
+	width: 300px;
+}
+
+#searchTable {
+	background-color: #FFFFFF;
+	border: 1px solid #E0E0E0;
+	border-spacing: 0px;
+}
+
+#searchTable .activeSearchResult {
+	cursor: pointer;
+	background: #EEE;
+}
+
+#searchTable td {
+	white-space: nowrap;
+	overflow: hidden;
+	line-height: 22px;
+	padding: 2px;
+	width: 25%;
+}
+
+#searchTable td.entryInfo {
+	color: #0D8921;
+	font-size: small;
+	width: 75%;
+	text-align: right;
+}
