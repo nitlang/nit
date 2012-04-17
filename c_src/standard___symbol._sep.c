@@ -17,25 +17,25 @@ val_t standard___symbol___String___to_symbol(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//symbol.nit:23 */
+  /* ../lib/standard/symbol.nit:23 */
   if (!once_value_1) {
     fra.me.REG[1] = NEW_HashMap_standard___collection___hash_collection___HashMap___init();
     once_value_1 = fra.me.REG[1];
     register_static_object(&once_value_1);
   } else fra.me.REG[1] = once_value_1;
   fra.me.REG[1] = fra.me.REG[1];
-  /* ./../lib/standard//symbol.nit:24 */
+  /* ../lib/standard/symbol.nit:24 */
   REGB0 = CALL_standard___collection___abstract_collection___MapRead___has_key(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//symbol.nit:25 */
+    /* ../lib/standard/symbol.nit:25 */
     fra.me.REG[2] = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
     goto label2;
   } else {
-    /* ./../lib/standard//symbol.nit:27 */
+    /* ../lib/standard/symbol.nit:27 */
     fra.me.REG[3] = NEW_Symbol_standard___symbol___Symbol___init(fra.me.REG[0]);
-    /* ./../lib/standard//symbol.nit:28 */
+    /* ../lib/standard/symbol.nit:28 */
     CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
-    /* ./../lib/standard//symbol.nit:29 */
+    /* ../lib/standard/symbol.nit:29 */
     fra.me.REG[2] = fra.me.REG[3];
     goto label2;
   }
@@ -56,7 +56,7 @@ val_t standard___symbol___Symbol___to_s(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//symbol.nit:37 */
+  /* ../lib/standard/symbol.nit:37 */
   REGB0 = TAG_Bool(ATTR_standard___symbol___Symbol____string(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -85,7 +85,7 @@ void standard___symbol___Symbol___init(val_t p0, val_t p1, int* init_table){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//symbol.nit:40 */
+  /* ../lib/standard/symbol.nit:40 */
   ATTR_standard___symbol___Symbol____string(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;

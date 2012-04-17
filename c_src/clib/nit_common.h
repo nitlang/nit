@@ -131,10 +131,10 @@ struct nitni_ref {
 	int count; /* number of time this global reference has been marked */
 };
 
-/* This structure is used by extern methods to keep track of references to Nit objects */
+/* This structure is used by extern methods to keep track of local references to Nit objects */
 /* These references make sure an object is not collected by the GC while
  * this extern methods is on the call stack. */
-/* This takes the form of an array link. */
+/* This takes the form of an array link, each link of size 8 to avoid multiple mallocs. */
 #define NITNI_REF_ARRAY_LINK_SIZE 8
 struct nitni_ref_array_link {
 	struct nitni_ref *reg[ NITNI_REF_ARRAY_LINK_SIZE ];
@@ -189,7 +189,6 @@ struct stack_frame_t {
 	val_t REG[1]; /* local variables (flexible array, this must be the last variable is extended in fra struct */
 };
 extern struct stack_frame_t *stack_frame_head;
-
 
 
 typedef enum {true = (1==1),false = (0==1)} bool;

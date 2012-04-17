@@ -13,7 +13,7 @@ val_t metamodel___vararg___MMSignature___vararg_rank(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//vararg.nit:24 */
+  /* metamodel/vararg.nit:24 */
   REGB0 = TAG_Bool(ATTR_metamodel___vararg___MMSignature____vararg_rank(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -37,7 +37,7 @@ void metamodel___vararg___MMSignature___vararg_rank__eq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//vararg.nit:24 */
+  /* metamodel/vararg.nit:24 */
   ATTR_metamodel___vararg___MMSignature____vararg_rank(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -57,7 +57,7 @@ val_t metamodel___vararg___MMSignature___has_vararg(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//vararg.nit:30 */
+  /* metamodel/vararg.nit:30 */
   REGB0 = TAG_Bool(ATTR_metamodel___vararg___MMSignature____vararg_rank(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -70,9 +70,9 @@ val_t metamodel___vararg___MMSignature___has_vararg(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:233 */
+  /* ../lib/standard/kernel.nit:233 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ./metamodel//vararg.nit:30 */
+  /* metamodel/vararg.nit:30 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -94,11 +94,11 @@ val_t metamodel___vararg___MMSignature___adaptation_to(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//vararg.nit:33 */
+  /* metamodel/vararg.nit:33 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./metamodel//vararg.nit:35 */
+  /* metamodel/vararg.nit:35 */
   fra.me.REG[1] = CALL_SUPER_metamodel___vararg___MMSignature___adaptation_to(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//vararg.nit:36 */
+  /* metamodel/vararg.nit:36 */
   REGB0 = TAG_Bool(ATTR_metamodel___vararg___MMSignature____vararg_rank(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -106,7 +106,7 @@ val_t metamodel___vararg___MMSignature___adaptation_to(val_t p0, val_t p1){
   }
   REGB0 = ATTR_metamodel___vararg___MMSignature____vararg_rank(fra.me.REG[2]);
   CALL_metamodel___vararg___MMSignature___vararg_rank__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
-  /* ./metamodel//vararg.nit:37 */
+  /* metamodel/vararg.nit:37 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -126,11 +126,11 @@ val_t metamodel___vararg___MMSignature___not_for_self(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//vararg.nit:40 */
+  /* metamodel/vararg.nit:40 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./metamodel//vararg.nit:42 */
+  /* metamodel/vararg.nit:42 */
   fra.me.REG[0] = CALL_SUPER_metamodel___vararg___MMSignature___not_for_self(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./metamodel//vararg.nit:43 */
+  /* metamodel/vararg.nit:43 */
   REGB0 = TAG_Bool(ATTR_metamodel___vararg___MMSignature____vararg_rank(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -138,7 +138,7 @@ val_t metamodel___vararg___MMSignature___not_for_self(val_t p0){
   }
   REGB0 = ATTR_metamodel___vararg___MMSignature____vararg_rank(fra.me.REG[1]);
   CALL_metamodel___vararg___MMSignature___vararg_rank__eq(fra.me.REG[0])(fra.me.REG[0], REGB0);
-  /* ./metamodel//vararg.nit:44 */
+  /* metamodel/vararg.nit:44 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -166,15 +166,15 @@ void metamodel___vararg___MMSignature___init(val_t p0, val_t p1, val_t p2, val_t
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
-  /* ./metamodel//vararg.nit:47 */
+  /* metamodel/vararg.nit:47 */
   fra.me.REG[4] = fra.me.REG[0];
-  /* ./metamodel//vararg.nit:49 */
+  /* metamodel/vararg.nit:49 */
   CALL_SUPER_metamodel___vararg___MMSignature___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[3], init_table);
-  /* ./metamodel//vararg.nit:50 */
+  /* metamodel/vararg.nit:50 */
   REGB0 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:236 */
   REGB0 = TAG_Int(-UNTAG_Int(REGB0));
-  /* ./metamodel//vararg.nit:50 */
+  /* metamodel/vararg.nit:50 */
   ATTR_metamodel___vararg___MMSignature____vararg_rank(fra.me.REG[4]) = REGB0;
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;

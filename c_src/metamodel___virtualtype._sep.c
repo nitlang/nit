@@ -14,7 +14,7 @@ val_t metamodel___virtualtype___MMGlobalProperty___is_virtual_type(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//virtualtype.nit:25 */
+  /* metamodel/virtualtype.nit:25 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___virtualtype___MMTypeProperty, ID_metamodel___virtualtype___MMTypeProperty)) /*cast MMTypeProperty*/;
   goto label1;
@@ -39,17 +39,17 @@ val_t metamodel___virtualtype___MMTypeProperty___stype_for(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//virtualtype.nit:34 */
+  /* metamodel/virtualtype.nit:34 */
   fra.me.REG[2] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-  /* ./metamodel//virtualtype.nit:35 */
+  /* metamodel/virtualtype.nit:35 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[3], COLOR_metamodel___virtualtype___MMTypeProperty, ID_metamodel___virtualtype___MMTypeProperty)) /*cast MMTypeProperty*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_metamodel___virtualtype, 35);
   }
-  /* ./metamodel//virtualtype.nit:36 */
+  /* metamodel/virtualtype.nit:36 */
   fra.me.REG[1] = CALL_metamodel___virtualtype___MMTypeProperty___real_stype_for(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
   goto label1;
   label1: while(0);
@@ -74,7 +74,7 @@ val_t metamodel___virtualtype___MMTypeProperty___real_stype_for(val_t p0, val_t 
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//virtualtype.nit:45 */
+  /* metamodel/virtualtype.nit:45 */
   fra.me.REG[2] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -92,7 +92,7 @@ val_t metamodel___virtualtype___MMTypeProperty___real_stype_for(val_t p0, val_t 
     fra.me.REG[2] = NIT_NULL;
     goto label1;
   }
-  /* ./metamodel//virtualtype.nit:47 */
+  /* metamodel/virtualtype.nit:47 */
   REGB0 = TAG_Bool(ATTR_metamodel___virtualtype___MMTypeProperty____stypes_cache(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -111,9 +111,9 @@ val_t metamodel___virtualtype___MMTypeProperty___real_stype_for(val_t p0, val_t 
     fra.me.REG[2] = fra.me.REG[3];
     goto label1;
   }
-  /* ./metamodel//virtualtype.nit:49 */
+  /* metamodel/virtualtype.nit:49 */
   fra.me.REG[3] = NEW_MMVirtualType_metamodel___virtualtype___MMVirtualType___init(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//virtualtype.nit:50 */
+  /* metamodel/virtualtype.nit:50 */
   REGB0 = TAG_Bool(ATTR_metamodel___virtualtype___MMTypeProperty____stypes_cache(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -121,7 +121,7 @@ val_t metamodel___virtualtype___MMTypeProperty___real_stype_for(val_t p0, val_t 
   }
   fra.me.REG[0] = ATTR_metamodel___virtualtype___MMTypeProperty____stypes_cache(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[3]);
-  /* ./metamodel//virtualtype.nit:52 */
+  /* metamodel/virtualtype.nit:52 */
   fra.me.REG[2] = fra.me.REG[3];
   goto label1;
   label1: while(0);
@@ -141,7 +141,7 @@ val_t metamodel___virtualtype___MMVirtualType___property(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//virtualtype.nit:58 */
+  /* metamodel/virtualtype.nit:58 */
   REGB0 = TAG_Bool(ATTR_metamodel___virtualtype___MMVirtualType____property(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -164,7 +164,7 @@ val_t metamodel___virtualtype___MMVirtualType___recv(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//virtualtype.nit:61 */
+  /* metamodel/virtualtype.nit:61 */
   REGB0 = TAG_Bool(ATTR_metamodel___virtualtype___MMVirtualType____recv(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -195,16 +195,16 @@ void metamodel___virtualtype___MMVirtualType___init(val_t p0, val_t p1, val_t p2
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./metamodel//virtualtype.nit:64 */
+  /* metamodel/virtualtype.nit:64 */
   fra.me.REG[3] = fra.me.REG[0];
-  /* ./metamodel//virtualtype.nit:66 */
+  /* metamodel/virtualtype.nit:66 */
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___name(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[5] = CALL_metamodel___static_type___MMLocalProperty___signature_for(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   fra.me.REG[5] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[5])(fra.me.REG[5]);
   CALL_metamodel___type_formal___MMTypeFormal___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4], fra.me.REG[5], init_table);
-  /* ./metamodel//virtualtype.nit:67 */
+  /* metamodel/virtualtype.nit:67 */
   ATTR_metamodel___virtualtype___MMVirtualType____property(fra.me.REG[3]) = fra.me.REG[1];
-  /* ./metamodel//virtualtype.nit:68 */
+  /* metamodel/virtualtype.nit:68 */
   ATTR_metamodel___virtualtype___MMVirtualType____recv(fra.me.REG[3]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -223,7 +223,7 @@ val_t metamodel___virtualtype___MMVirtualType___mmmodule(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//virtualtype.nit:71 */
+  /* metamodel/virtualtype.nit:71 */
   REGB0 = TAG_Bool(ATTR_metamodel___virtualtype___MMVirtualType____recv(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -254,7 +254,7 @@ val_t metamodel___virtualtype___MMVirtualType___for_module(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//virtualtype.nit:75 */
+  /* metamodel/virtualtype.nit:75 */
   fra.me.REG[2] = CALL_metamodel___static_type___MMType___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[2]));
   if (UNTAG_Bool(REGB0)) {
@@ -266,7 +266,7 @@ val_t metamodel___virtualtype___MMVirtualType___for_module(val_t p0, val_t p1){
     fra.me.REG[2] = fra.me.REG[0];
     goto label1;
   }
-  /* ./metamodel//virtualtype.nit:76 */
+  /* metamodel/virtualtype.nit:76 */
   fra.me.REG[3] = CALL_metamodel___virtualtype___MMVirtualType___recv(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_metamodel___static_type___MMType___for_module(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
   fra.me.REG[1] = CALL_metamodel___static_type___MMType___adapt_to(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
@@ -288,7 +288,7 @@ val_t metamodel___virtualtype___MMVirtualType___not_for_self(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//virtualtype.nit:81 */
+  /* metamodel/virtualtype.nit:81 */
   fra.me.REG[0] = CALL_metamodel___type_formal___MMTypeFormal___bound(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___static_type___MMType___not_for_self(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -312,9 +312,9 @@ val_t metamodel___virtualtype___MMVirtualType___adapt_to(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//virtualtype.nit:84 */
+  /* metamodel/virtualtype.nit:84 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./metamodel//virtualtype.nit:86 */
+  /* metamodel/virtualtype.nit:86 */
   fra.me.REG[2] = CALL_metamodel___virtualtype___MMVirtualType___property(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[1] = CALL_metamodel___virtualtype___MMTypeProperty___stype_for(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
@@ -342,15 +342,15 @@ val_t metamodel___virtualtype___MMLocalClass___virtual_type(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//virtualtype.nit:93 */
+  /* metamodel/virtualtype.nit:93 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___get_property_by_name(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//virtualtype.nit:94 */
+  /* metamodel/virtualtype.nit:94 */
   REGB0 = CALL_metamodel___virtualtype___MMGlobalProperty___is_virtual_type(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./metamodel//virtualtype.nit:95 */
+    /* metamodel/virtualtype.nit:95 */
     goto label1;
   }
-  /* ./metamodel//virtualtype.nit:97 */
+  /* metamodel/virtualtype.nit:97 */
   nit_abort("Aborted", NULL, LOCATE_metamodel___virtualtype, 97);
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -371,17 +371,17 @@ val_t metamodel___virtualtype___MMLocalClass___select_virtual_type(val_t p0, val
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//virtualtype.nit:103 */
+  /* metamodel/virtualtype.nit:103 */
   fra.me.REG[1] = CALL_metamodel___virtualtype___MMLocalClass___virtual_type(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//virtualtype.nit:104 */
+  /* metamodel/virtualtype.nit:104 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//virtualtype.nit:105 */
+  /* metamodel/virtualtype.nit:105 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___virtualtype___MMTypeProperty, ID_metamodel___virtualtype___MMTypeProperty)) /*cast MMTypeProperty*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_metamodel___virtualtype, 105);
   }
-  /* ./metamodel//virtualtype.nit:106 */
+  /* metamodel/virtualtype.nit:106 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;

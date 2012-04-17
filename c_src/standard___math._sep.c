@@ -12,7 +12,7 @@ val_t standard___math___Int___rand(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//math.nit:20 */
+  /* ../lib/standard/math.nit:20 */
   REGB0 = Int_rand___out(REGB0);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -29,7 +29,7 @@ val_t standard___math___Float___sqrt(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:24 */
+  /* ../lib/standard/math.nit:24 */
   fra.me.REG[0] = Float_sqrt___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -46,7 +46,7 @@ val_t standard___math___Float___cos(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:25 */
+  /* ../lib/standard/math.nit:25 */
   fra.me.REG[0] = Float_cos___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -63,7 +63,7 @@ val_t standard___math___Float___sin(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:26 */
+  /* ../lib/standard/math.nit:26 */
   fra.me.REG[0] = Float_sin___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -80,7 +80,7 @@ val_t standard___math___Float___tan(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:27 */
+  /* ../lib/standard/math.nit:27 */
   fra.me.REG[0] = Float_tan___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -97,7 +97,7 @@ val_t standard___math___Float___acos(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:28 */
+  /* ../lib/standard/math.nit:28 */
   fra.me.REG[0] = Float_acos___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -114,7 +114,7 @@ val_t standard___math___Float___asin(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:29 */
+  /* ../lib/standard/math.nit:29 */
   fra.me.REG[0] = Float_asin___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -131,7 +131,7 @@ val_t standard___math___Float___atan(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:30 */
+  /* ../lib/standard/math.nit:30 */
   fra.me.REG[0] = Float_atan___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -150,7 +150,7 @@ val_t standard___math___Float___pow(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//math.nit:32 */
+  /* ../lib/standard/math.nit:32 */
   fra.me.REG[1] = Float_pow___out(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
@@ -167,7 +167,7 @@ val_t standard___math___Float___log(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:33 */
+  /* ../lib/standard/math.nit:33 */
   fra.me.REG[0] = Float_log___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -184,7 +184,7 @@ val_t standard___math___Float___exp(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:34 */
+  /* ../lib/standard/math.nit:34 */
   fra.me.REG[0] = Float_exp___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -201,7 +201,7 @@ val_t standard___math___Float___rand(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:36 */
+  /* ../lib/standard/math.nit:36 */
   fra.me.REG[0] = Float_rand___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -220,7 +220,7 @@ val_t standard___math___Float___hypot_with(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//math.nit:37 */
+  /* ../lib/standard/math.nit:37 */
   fra.me.REG[1] = Float_hypot_with___out(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
@@ -241,17 +241,17 @@ val_t standard___math___Collection___rand(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:44 */
+  /* ../lib/standard/math.nit:44 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
     fra.me.REG[1] = NIT_NULL;
     goto label1;
   }
-  /* ./../lib/standard//math.nit:46 */
+  /* ../lib/standard/math.nit:46 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___math___Int___rand(REGB0)(REGB0);
   fra.me.REG[2] = REGB0;
-  /* ./../lib/standard//math.nit:47 */
+  /* ../lib/standard/math.nit:47 */
   fra.me.REG[3] = NIT_NULL;
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_standard___math___Collection___rand_2));
   switch ((&(fra.me))->has_broke) {
@@ -259,7 +259,7 @@ val_t standard___math___Collection___rand(val_t p0){
     case 1: (&(fra.me))->has_broke = 0; goto label4;
   }
   label4: while(0);
-  /* ./../lib/standard//math.nit:59 */
+  /* ../lib/standard/math.nit:59 */
   fra.me.REG[1] = fra.me.REG[3];
   goto label1;
   label1: while(0);
@@ -271,7 +271,7 @@ val_t standard___math___Collection___rand(val_t p0){
     val_t REGB0;
     val_t REGB1;
     val_t tmp;
-    /* ./../lib/standard//math.nit:49 */
+    /* ../lib/standard/math.nit:49 */
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
     fra.me.file = LOCATE_standard___math;
     fra.me.line = 49;
@@ -281,28 +281,28 @@ val_t standard___math___Collection___rand(val_t p0){
     fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[0] = p0;
-    /* ./../lib/standard//math.nit:50 */
+    /* ../lib/standard/math.nit:50 */
     REGB0 = TAG_Int(0);
     REGB1 = TAG_Bool(IS_EQUAL_OO(closctx->REG[2],REGB0));
     if (UNTAG_Bool(REGB1)) {
     } else {
-      /* ./../lib/standard//kernel.nit:227 */
+      /* ../lib/standard/kernel.nit:227 */
       REGB0 = TAG_Bool((closctx->REG[2])==(REGB0));
-      /* ./../lib/standard//math.nit:50 */
+      /* ../lib/standard/math.nit:50 */
       REGB1 = REGB0;
     }
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//math.nit:52 */
+      /* ../lib/standard/math.nit:52 */
       closctx->REG[3] = fra.me.REG[0];
-      /* ./../lib/standard//math.nit:53 */
+      /* ../lib/standard/math.nit:53 */
       closctx->has_broke = 1;
       goto label3;
     } else {
-      /* ./../lib/standard//math.nit:55 */
+      /* ../lib/standard/math.nit:55 */
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:237 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB1 = TAG_Int(UNTAG_Int(closctx->REG[2])-UNTAG_Int(REGB1));
-      /* ./../lib/standard//math.nit:55 */
+      /* ../lib/standard/math.nit:55 */
       closctx->REG[2] = REGB1;
     }
     label3: while(0);
@@ -325,7 +325,7 @@ val_t standard___math___Object___atan2(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./../lib/standard//math.nit:63 */
+  /* ../lib/standard/math.nit:63 */
   fra.me.REG[2] = Object_atan2___out(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[2];
@@ -342,7 +342,7 @@ val_t standard___math___Object___pi(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:64 */
+  /* ../lib/standard/math.nit:64 */
   fra.me.REG[0] = Object_pi___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -361,7 +361,7 @@ void standard___math___Object___srand_from(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./../lib/standard//math.nit:65 */
+  /* ../lib/standard/math.nit:65 */
   Object_srand_from___out(fra.me.REG[0], REGB0);
   stack_frame_head = fra.me.prev;
   return;
@@ -378,7 +378,7 @@ void standard___math___Object___srand(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//math.nit:66 */
+  /* ../lib/standard/math.nit:66 */
   Object_srand___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;

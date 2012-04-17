@@ -13,7 +13,7 @@ val_t parser___lexer___Token___text(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:9 */
+  /* parser/lexer.nit:9 */
   REGB0 = TAG_Bool(ATTR_parser___lexer___Token____text(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -33,61 +33,10 @@ val_t parser___lexer___Token___parser_index(val_t p0){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./parser//lexer.nit:11 */
+  /* parser/lexer.nit:11 */
   nit_abort("Deferred method called", NULL, LOCATE_parser___lexer, 11);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
-}
-val_t parser___lexer___Token___to_s(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
-  val_t REGB0;
-  val_t tmp;
-  static val_t once_value_1; /* Once value */
-  static val_t once_value_2; /* Once value */
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 13;
-  fra.me.meth = LOCATE_parser___lexer___Token___to_s;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 3;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
-  fra.me.REG[2] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:14 */
-  REGB0 = TAG_Int(3);
-  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
-  if (!once_value_1) {
-    fra.me.REG[2] = BOX_NativeString("'");
-    REGB0 = TAG_Int(1);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
-    once_value_1 = fra.me.REG[2];
-    register_static_object(&once_value_1);
-  } else fra.me.REG[2] = once_value_1;
-  fra.me.REG[2] = fra.me.REG[2];
-  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  REGB0 = TAG_Bool(ATTR_parser___lexer___Token____text(fra.me.REG[0])!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Uninitialized attribute %s", "_text", LOCATE_parser___lexer, 14);
-  }
-  fra.me.REG[0] = ATTR_parser___lexer___Token____text(fra.me.REG[0]);
-  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  if (!once_value_2) {
-    fra.me.REG[0] = BOX_NativeString("'");
-    REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
-    once_value_2 = fra.me.REG[0];
-    register_static_object(&once_value_2);
-  } else fra.me.REG[0] = once_value_2;
-  fra.me.REG[0] = fra.me.REG[0];
-  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
-  goto label3;
-  label3: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[1];
 }
 val_t parser___lexer___TEol___parser_index(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -95,14 +44,14 @@ val_t parser___lexer___TEol___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 19;
+  fra.me.line = 15;
   fra.me.meth = LOCATE_parser___lexer___TEol___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:21 */
+  /* parser/lexer.nit:17 */
   REGB0 = TAG_Int(0);
   goto label1;
   label1: while(0);
@@ -116,7 +65,7 @@ void parser___lexer___TEol___init_tk(val_t p0, val_t p1, val_t p2, int* init_tab
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 24;
+  fra.me.line = 20;
   fra.me.meth = LOCATE_parser___lexer___TEol___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -127,9 +76,9 @@ void parser___lexer___TEol___init_tk(val_t p0, val_t p1, val_t p2, int* init_tab
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:26 */
+  /* parser/lexer.nit:22 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:27 */
+  /* parser/lexer.nit:23 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -141,14 +90,14 @@ val_t parser___lexer___TComment___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 32;
+  fra.me.line = 28;
   fra.me.meth = LOCATE_parser___lexer___TComment___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:34 */
+  /* parser/lexer.nit:30 */
   REGB0 = TAG_Int(1);
   goto label1;
   label1: while(0);
@@ -162,7 +111,7 @@ void parser___lexer___TComment___init_tk(val_t p0, val_t p1, val_t p2, int* init
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 37;
+  fra.me.line = 33;
   fra.me.meth = LOCATE_parser___lexer___TComment___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -173,9 +122,9 @@ void parser___lexer___TComment___init_tk(val_t p0, val_t p1, val_t p2, int* init
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:39 */
+  /* parser/lexer.nit:35 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:40 */
+  /* parser/lexer.nit:36 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
@@ -187,14 +136,14 @@ val_t parser___lexer___TKwmodule___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 45;
+  fra.me.line = 41;
   fra.me.meth = LOCATE_parser___lexer___TKwmodule___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:47 */
+  /* parser/lexer.nit:43 */
   REGB0 = TAG_Int(2);
   goto label1;
   label1: while(0);
@@ -208,7 +157,7 @@ void parser___lexer___TKwmodule___init_tk(val_t p0, val_t p1, val_t p2, int* ini
   if (init_table[itpos2]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 50;
+  fra.me.line = 46;
   fra.me.meth = LOCATE_parser___lexer___TKwmodule___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -219,9 +168,9 @@ void parser___lexer___TKwmodule___init_tk(val_t p0, val_t p1, val_t p2, int* ini
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:52 */
+  /* parser/lexer.nit:48 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:53 */
+  /* parser/lexer.nit:49 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos2] = 1;
@@ -233,14 +182,14 @@ val_t parser___lexer___TKwimport___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 58;
+  fra.me.line = 54;
   fra.me.meth = LOCATE_parser___lexer___TKwimport___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:60 */
+  /* parser/lexer.nit:56 */
   REGB0 = TAG_Int(3);
   goto label1;
   label1: while(0);
@@ -257,7 +206,7 @@ void parser___lexer___TKwimport___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos3]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 63;
+  fra.me.line = 59;
   fra.me.meth = LOCATE_parser___lexer___TKwimport___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -267,7 +216,7 @@ void parser___lexer___TKwimport___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:65 */
+  /* parser/lexer.nit:61 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("import");
@@ -282,7 +231,7 @@ void parser___lexer___TKwimport___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:66 */
+  /* parser/lexer.nit:62 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos3] = 1;
@@ -294,14 +243,14 @@ val_t parser___lexer___TKwclass___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 71;
+  fra.me.line = 67;
   fra.me.meth = LOCATE_parser___lexer___TKwclass___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:73 */
+  /* parser/lexer.nit:69 */
   REGB0 = TAG_Int(4);
   goto label1;
   label1: while(0);
@@ -318,7 +267,7 @@ void parser___lexer___TKwclass___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos4]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 76;
+  fra.me.line = 72;
   fra.me.meth = LOCATE_parser___lexer___TKwclass___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -328,7 +277,7 @@ void parser___lexer___TKwclass___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:78 */
+  /* parser/lexer.nit:74 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("class");
@@ -343,7 +292,7 @@ void parser___lexer___TKwclass___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:79 */
+  /* parser/lexer.nit:75 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos4] = 1;
@@ -355,14 +304,14 @@ val_t parser___lexer___TKwabstract___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 84;
+  fra.me.line = 80;
   fra.me.meth = LOCATE_parser___lexer___TKwabstract___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:86 */
+  /* parser/lexer.nit:82 */
   REGB0 = TAG_Int(5);
   goto label1;
   label1: while(0);
@@ -379,7 +328,7 @@ void parser___lexer___TKwabstract___init_tk(val_t p0, val_t p1, int* init_table)
   if (init_table[itpos5]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 89;
+  fra.me.line = 85;
   fra.me.meth = LOCATE_parser___lexer___TKwabstract___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -389,7 +338,7 @@ void parser___lexer___TKwabstract___init_tk(val_t p0, val_t p1, int* init_table)
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:91 */
+  /* parser/lexer.nit:87 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("abstract");
@@ -404,7 +353,7 @@ void parser___lexer___TKwabstract___init_tk(val_t p0, val_t p1, int* init_table)
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:92 */
+  /* parser/lexer.nit:88 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos5] = 1;
@@ -416,14 +365,14 @@ val_t parser___lexer___TKwinterface___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 97;
+  fra.me.line = 93;
   fra.me.meth = LOCATE_parser___lexer___TKwinterface___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:99 */
+  /* parser/lexer.nit:95 */
   REGB0 = TAG_Int(6);
   goto label1;
   label1: while(0);
@@ -440,7 +389,7 @@ void parser___lexer___TKwinterface___init_tk(val_t p0, val_t p1, int* init_table
   if (init_table[itpos6]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 102;
+  fra.me.line = 98;
   fra.me.meth = LOCATE_parser___lexer___TKwinterface___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -450,7 +399,7 @@ void parser___lexer___TKwinterface___init_tk(val_t p0, val_t p1, int* init_table
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:104 */
+  /* parser/lexer.nit:100 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("interface");
@@ -465,7 +414,7 @@ void parser___lexer___TKwinterface___init_tk(val_t p0, val_t p1, int* init_table
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:105 */
+  /* parser/lexer.nit:101 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos6] = 1;
@@ -477,14 +426,14 @@ val_t parser___lexer___TKwenum___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 110;
+  fra.me.line = 106;
   fra.me.meth = LOCATE_parser___lexer___TKwenum___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:112 */
+  /* parser/lexer.nit:108 */
   REGB0 = TAG_Int(7);
   goto label1;
   label1: while(0);
@@ -498,7 +447,7 @@ void parser___lexer___TKwenum___init_tk(val_t p0, val_t p1, val_t p2, int* init_
   if (init_table[itpos7]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 115;
+  fra.me.line = 111;
   fra.me.meth = LOCATE_parser___lexer___TKwenum___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -509,9 +458,9 @@ void parser___lexer___TKwenum___init_tk(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:117 */
+  /* parser/lexer.nit:113 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:118 */
+  /* parser/lexer.nit:114 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos7] = 1;
@@ -523,14 +472,14 @@ val_t parser___lexer___TKwspecial___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 123;
+  fra.me.line = 119;
   fra.me.meth = LOCATE_parser___lexer___TKwspecial___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:125 */
+  /* parser/lexer.nit:121 */
   REGB0 = TAG_Int(8);
   goto label1;
   label1: while(0);
@@ -547,7 +496,7 @@ void parser___lexer___TKwspecial___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos8]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 128;
+  fra.me.line = 124;
   fra.me.meth = LOCATE_parser___lexer___TKwspecial___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -557,7 +506,7 @@ void parser___lexer___TKwspecial___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:130 */
+  /* parser/lexer.nit:126 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("special");
@@ -572,7 +521,7 @@ void parser___lexer___TKwspecial___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:131 */
+  /* parser/lexer.nit:127 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos8] = 1;
@@ -584,14 +533,14 @@ val_t parser___lexer___TKwend___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 136;
+  fra.me.line = 132;
   fra.me.meth = LOCATE_parser___lexer___TKwend___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:138 */
+  /* parser/lexer.nit:134 */
   REGB0 = TAG_Int(9);
   goto label1;
   label1: while(0);
@@ -608,7 +557,7 @@ void parser___lexer___TKwend___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos9]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 141;
+  fra.me.line = 137;
   fra.me.meth = LOCATE_parser___lexer___TKwend___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -618,7 +567,7 @@ void parser___lexer___TKwend___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:143 */
+  /* parser/lexer.nit:139 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("end");
@@ -633,7 +582,7 @@ void parser___lexer___TKwend___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:144 */
+  /* parser/lexer.nit:140 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos9] = 1;
@@ -645,14 +594,14 @@ val_t parser___lexer___TKwmeth___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 149;
+  fra.me.line = 145;
   fra.me.meth = LOCATE_parser___lexer___TKwmeth___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:151 */
+  /* parser/lexer.nit:147 */
   REGB0 = TAG_Int(10);
   goto label1;
   label1: while(0);
@@ -669,7 +618,7 @@ void parser___lexer___TKwmeth___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos10]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 154;
+  fra.me.line = 150;
   fra.me.meth = LOCATE_parser___lexer___TKwmeth___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -679,7 +628,7 @@ void parser___lexer___TKwmeth___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:156 */
+  /* parser/lexer.nit:152 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("fun");
@@ -694,7 +643,7 @@ void parser___lexer___TKwmeth___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:157 */
+  /* parser/lexer.nit:153 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos10] = 1;
@@ -706,14 +655,14 @@ val_t parser___lexer___TKwtype___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 162;
+  fra.me.line = 158;
   fra.me.meth = LOCATE_parser___lexer___TKwtype___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:164 */
+  /* parser/lexer.nit:160 */
   REGB0 = TAG_Int(11);
   goto label1;
   label1: while(0);
@@ -730,7 +679,7 @@ void parser___lexer___TKwtype___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos11]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 167;
+  fra.me.line = 163;
   fra.me.meth = LOCATE_parser___lexer___TKwtype___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -740,7 +689,7 @@ void parser___lexer___TKwtype___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:169 */
+  /* parser/lexer.nit:165 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("type");
@@ -755,7 +704,7 @@ void parser___lexer___TKwtype___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:170 */
+  /* parser/lexer.nit:166 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos11] = 1;
@@ -767,14 +716,14 @@ val_t parser___lexer___TKwinit___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 175;
+  fra.me.line = 171;
   fra.me.meth = LOCATE_parser___lexer___TKwinit___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:177 */
+  /* parser/lexer.nit:173 */
   REGB0 = TAG_Int(12);
   goto label1;
   label1: while(0);
@@ -791,7 +740,7 @@ void parser___lexer___TKwinit___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos12]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 180;
+  fra.me.line = 176;
   fra.me.meth = LOCATE_parser___lexer___TKwinit___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -801,7 +750,7 @@ void parser___lexer___TKwinit___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:182 */
+  /* parser/lexer.nit:178 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("init");
@@ -816,7 +765,7 @@ void parser___lexer___TKwinit___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:183 */
+  /* parser/lexer.nit:179 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos12] = 1;
@@ -828,14 +777,14 @@ val_t parser___lexer___TKwredef___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 188;
+  fra.me.line = 184;
   fra.me.meth = LOCATE_parser___lexer___TKwredef___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:190 */
+  /* parser/lexer.nit:186 */
   REGB0 = TAG_Int(13);
   goto label1;
   label1: while(0);
@@ -852,7 +801,7 @@ void parser___lexer___TKwredef___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos13]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 193;
+  fra.me.line = 189;
   fra.me.meth = LOCATE_parser___lexer___TKwredef___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -862,7 +811,7 @@ void parser___lexer___TKwredef___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:195 */
+  /* parser/lexer.nit:191 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("redef");
@@ -877,7 +826,7 @@ void parser___lexer___TKwredef___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:196 */
+  /* parser/lexer.nit:192 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos13] = 1;
@@ -889,14 +838,14 @@ val_t parser___lexer___TKwis___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 201;
+  fra.me.line = 197;
   fra.me.meth = LOCATE_parser___lexer___TKwis___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:203 */
+  /* parser/lexer.nit:199 */
   REGB0 = TAG_Int(14);
   goto label1;
   label1: while(0);
@@ -913,7 +862,7 @@ void parser___lexer___TKwis___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos14]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 206;
+  fra.me.line = 202;
   fra.me.meth = LOCATE_parser___lexer___TKwis___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -923,7 +872,7 @@ void parser___lexer___TKwis___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:208 */
+  /* parser/lexer.nit:204 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("is");
@@ -938,7 +887,7 @@ void parser___lexer___TKwis___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:209 */
+  /* parser/lexer.nit:205 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos14] = 1;
@@ -950,14 +899,14 @@ val_t parser___lexer___TKwdo___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 214;
+  fra.me.line = 210;
   fra.me.meth = LOCATE_parser___lexer___TKwdo___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:216 */
+  /* parser/lexer.nit:212 */
   REGB0 = TAG_Int(15);
   goto label1;
   label1: while(0);
@@ -974,7 +923,7 @@ void parser___lexer___TKwdo___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos15]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 219;
+  fra.me.line = 215;
   fra.me.meth = LOCATE_parser___lexer___TKwdo___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -984,7 +933,7 @@ void parser___lexer___TKwdo___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:221 */
+  /* parser/lexer.nit:217 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("do");
@@ -999,7 +948,7 @@ void parser___lexer___TKwdo___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:222 */
+  /* parser/lexer.nit:218 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos15] = 1;
@@ -1011,14 +960,14 @@ val_t parser___lexer___TKwreadable___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 227;
+  fra.me.line = 223;
   fra.me.meth = LOCATE_parser___lexer___TKwreadable___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:229 */
+  /* parser/lexer.nit:225 */
   REGB0 = TAG_Int(16);
   goto label1;
   label1: while(0);
@@ -1035,7 +984,7 @@ void parser___lexer___TKwreadable___init_tk(val_t p0, val_t p1, int* init_table)
   if (init_table[itpos16]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 232;
+  fra.me.line = 228;
   fra.me.meth = LOCATE_parser___lexer___TKwreadable___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1045,7 +994,7 @@ void parser___lexer___TKwreadable___init_tk(val_t p0, val_t p1, int* init_table)
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:234 */
+  /* parser/lexer.nit:230 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("readable");
@@ -1060,7 +1009,7 @@ void parser___lexer___TKwreadable___init_tk(val_t p0, val_t p1, int* init_table)
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:235 */
+  /* parser/lexer.nit:231 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos16] = 1;
@@ -1072,14 +1021,14 @@ val_t parser___lexer___TKwwritable___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 240;
+  fra.me.line = 236;
   fra.me.meth = LOCATE_parser___lexer___TKwwritable___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:242 */
+  /* parser/lexer.nit:238 */
   REGB0 = TAG_Int(17);
   goto label1;
   label1: while(0);
@@ -1096,7 +1045,7 @@ void parser___lexer___TKwwritable___init_tk(val_t p0, val_t p1, int* init_table)
   if (init_table[itpos17]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 245;
+  fra.me.line = 241;
   fra.me.meth = LOCATE_parser___lexer___TKwwritable___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1106,7 +1055,7 @@ void parser___lexer___TKwwritable___init_tk(val_t p0, val_t p1, int* init_table)
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:247 */
+  /* parser/lexer.nit:243 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("writable");
@@ -1121,7 +1070,7 @@ void parser___lexer___TKwwritable___init_tk(val_t p0, val_t p1, int* init_table)
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:248 */
+  /* parser/lexer.nit:244 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos17] = 1;
@@ -1133,14 +1082,14 @@ val_t parser___lexer___TKwvar___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 253;
+  fra.me.line = 249;
   fra.me.meth = LOCATE_parser___lexer___TKwvar___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:255 */
+  /* parser/lexer.nit:251 */
   REGB0 = TAG_Int(18);
   goto label1;
   label1: while(0);
@@ -1157,7 +1106,7 @@ void parser___lexer___TKwvar___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos18]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 258;
+  fra.me.line = 254;
   fra.me.meth = LOCATE_parser___lexer___TKwvar___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1167,7 +1116,7 @@ void parser___lexer___TKwvar___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:260 */
+  /* parser/lexer.nit:256 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("var");
@@ -1182,7 +1131,7 @@ void parser___lexer___TKwvar___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:261 */
+  /* parser/lexer.nit:257 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos18] = 1;
@@ -1194,14 +1143,14 @@ val_t parser___lexer___TKwintern___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 266;
+  fra.me.line = 262;
   fra.me.meth = LOCATE_parser___lexer___TKwintern___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:268 */
+  /* parser/lexer.nit:264 */
   REGB0 = TAG_Int(19);
   goto label1;
   label1: while(0);
@@ -1218,7 +1167,7 @@ void parser___lexer___TKwintern___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos19]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 271;
+  fra.me.line = 267;
   fra.me.meth = LOCATE_parser___lexer___TKwintern___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1228,7 +1177,7 @@ void parser___lexer___TKwintern___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:273 */
+  /* parser/lexer.nit:269 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("intern");
@@ -1243,7 +1192,7 @@ void parser___lexer___TKwintern___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:274 */
+  /* parser/lexer.nit:270 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos19] = 1;
@@ -1255,14 +1204,14 @@ val_t parser___lexer___TKwextern___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 279;
+  fra.me.line = 275;
   fra.me.meth = LOCATE_parser___lexer___TKwextern___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:281 */
+  /* parser/lexer.nit:277 */
   REGB0 = TAG_Int(20);
   goto label1;
   label1: while(0);
@@ -1279,7 +1228,7 @@ void parser___lexer___TKwextern___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos20]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 284;
+  fra.me.line = 280;
   fra.me.meth = LOCATE_parser___lexer___TKwextern___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1289,7 +1238,7 @@ void parser___lexer___TKwextern___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:286 */
+  /* parser/lexer.nit:282 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("extern");
@@ -1304,7 +1253,7 @@ void parser___lexer___TKwextern___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:287 */
+  /* parser/lexer.nit:283 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos20] = 1;
@@ -1316,14 +1265,14 @@ val_t parser___lexer___TKwprotected___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 292;
+  fra.me.line = 288;
   fra.me.meth = LOCATE_parser___lexer___TKwprotected___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:294 */
+  /* parser/lexer.nit:290 */
   REGB0 = TAG_Int(21);
   goto label1;
   label1: while(0);
@@ -1340,7 +1289,7 @@ void parser___lexer___TKwprotected___init_tk(val_t p0, val_t p1, int* init_table
   if (init_table[itpos21]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 297;
+  fra.me.line = 293;
   fra.me.meth = LOCATE_parser___lexer___TKwprotected___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1350,7 +1299,7 @@ void parser___lexer___TKwprotected___init_tk(val_t p0, val_t p1, int* init_table
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:299 */
+  /* parser/lexer.nit:295 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("protected");
@@ -1365,7 +1314,7 @@ void parser___lexer___TKwprotected___init_tk(val_t p0, val_t p1, int* init_table
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:300 */
+  /* parser/lexer.nit:296 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos21] = 1;
@@ -1377,14 +1326,14 @@ val_t parser___lexer___TKwprivate___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 305;
+  fra.me.line = 301;
   fra.me.meth = LOCATE_parser___lexer___TKwprivate___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:307 */
+  /* parser/lexer.nit:303 */
   REGB0 = TAG_Int(22);
   goto label1;
   label1: while(0);
@@ -1401,7 +1350,7 @@ void parser___lexer___TKwprivate___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos22]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 310;
+  fra.me.line = 306;
   fra.me.meth = LOCATE_parser___lexer___TKwprivate___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1411,7 +1360,7 @@ void parser___lexer___TKwprivate___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:312 */
+  /* parser/lexer.nit:308 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("private");
@@ -1426,7 +1375,7 @@ void parser___lexer___TKwprivate___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:313 */
+  /* parser/lexer.nit:309 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos22] = 1;
@@ -1438,14 +1387,14 @@ val_t parser___lexer___TKwintrude___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 318;
+  fra.me.line = 314;
   fra.me.meth = LOCATE_parser___lexer___TKwintrude___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:320 */
+  /* parser/lexer.nit:316 */
   REGB0 = TAG_Int(23);
   goto label1;
   label1: while(0);
@@ -1462,7 +1411,7 @@ void parser___lexer___TKwintrude___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos23]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 323;
+  fra.me.line = 319;
   fra.me.meth = LOCATE_parser___lexer___TKwintrude___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1472,7 +1421,7 @@ void parser___lexer___TKwintrude___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:325 */
+  /* parser/lexer.nit:321 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("intrude");
@@ -1487,7 +1436,7 @@ void parser___lexer___TKwintrude___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:326 */
+  /* parser/lexer.nit:322 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos23] = 1;
@@ -1499,14 +1448,14 @@ val_t parser___lexer___TKwif___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 331;
+  fra.me.line = 327;
   fra.me.meth = LOCATE_parser___lexer___TKwif___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:333 */
+  /* parser/lexer.nit:329 */
   REGB0 = TAG_Int(24);
   goto label1;
   label1: while(0);
@@ -1523,7 +1472,7 @@ void parser___lexer___TKwif___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos24]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 336;
+  fra.me.line = 332;
   fra.me.meth = LOCATE_parser___lexer___TKwif___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1533,7 +1482,7 @@ void parser___lexer___TKwif___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:338 */
+  /* parser/lexer.nit:334 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("if");
@@ -1548,7 +1497,7 @@ void parser___lexer___TKwif___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:339 */
+  /* parser/lexer.nit:335 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos24] = 1;
@@ -1560,14 +1509,14 @@ val_t parser___lexer___TKwthen___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 344;
+  fra.me.line = 340;
   fra.me.meth = LOCATE_parser___lexer___TKwthen___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:346 */
+  /* parser/lexer.nit:342 */
   REGB0 = TAG_Int(25);
   goto label1;
   label1: while(0);
@@ -1584,7 +1533,7 @@ void parser___lexer___TKwthen___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos25]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 349;
+  fra.me.line = 345;
   fra.me.meth = LOCATE_parser___lexer___TKwthen___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1594,7 +1543,7 @@ void parser___lexer___TKwthen___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:351 */
+  /* parser/lexer.nit:347 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("then");
@@ -1609,7 +1558,7 @@ void parser___lexer___TKwthen___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:352 */
+  /* parser/lexer.nit:348 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos25] = 1;
@@ -1621,14 +1570,14 @@ val_t parser___lexer___TKwelse___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 357;
+  fra.me.line = 353;
   fra.me.meth = LOCATE_parser___lexer___TKwelse___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:359 */
+  /* parser/lexer.nit:355 */
   REGB0 = TAG_Int(26);
   goto label1;
   label1: while(0);
@@ -1645,7 +1594,7 @@ void parser___lexer___TKwelse___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos26]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 362;
+  fra.me.line = 358;
   fra.me.meth = LOCATE_parser___lexer___TKwelse___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1655,7 +1604,7 @@ void parser___lexer___TKwelse___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:364 */
+  /* parser/lexer.nit:360 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("else");
@@ -1670,7 +1619,7 @@ void parser___lexer___TKwelse___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:365 */
+  /* parser/lexer.nit:361 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos26] = 1;
@@ -1682,14 +1631,14 @@ val_t parser___lexer___TKwwhile___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 370;
+  fra.me.line = 366;
   fra.me.meth = LOCATE_parser___lexer___TKwwhile___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:372 */
+  /* parser/lexer.nit:368 */
   REGB0 = TAG_Int(27);
   goto label1;
   label1: while(0);
@@ -1706,7 +1655,7 @@ void parser___lexer___TKwwhile___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos27]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 375;
+  fra.me.line = 371;
   fra.me.meth = LOCATE_parser___lexer___TKwwhile___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1716,7 +1665,7 @@ void parser___lexer___TKwwhile___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:377 */
+  /* parser/lexer.nit:373 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("while");
@@ -1731,7 +1680,7 @@ void parser___lexer___TKwwhile___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:378 */
+  /* parser/lexer.nit:374 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos27] = 1;
@@ -1743,14 +1692,14 @@ val_t parser___lexer___TKwloop___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 383;
+  fra.me.line = 379;
   fra.me.meth = LOCATE_parser___lexer___TKwloop___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:385 */
+  /* parser/lexer.nit:381 */
   REGB0 = TAG_Int(28);
   goto label1;
   label1: while(0);
@@ -1767,7 +1716,7 @@ void parser___lexer___TKwloop___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos28]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 388;
+  fra.me.line = 384;
   fra.me.meth = LOCATE_parser___lexer___TKwloop___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1777,7 +1726,7 @@ void parser___lexer___TKwloop___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:390 */
+  /* parser/lexer.nit:386 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("loop");
@@ -1792,7 +1741,7 @@ void parser___lexer___TKwloop___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:391 */
+  /* parser/lexer.nit:387 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos28] = 1;
@@ -1804,14 +1753,14 @@ val_t parser___lexer___TKwfor___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 396;
+  fra.me.line = 392;
   fra.me.meth = LOCATE_parser___lexer___TKwfor___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:398 */
+  /* parser/lexer.nit:394 */
   REGB0 = TAG_Int(29);
   goto label1;
   label1: while(0);
@@ -1828,7 +1777,7 @@ void parser___lexer___TKwfor___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos29]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 401;
+  fra.me.line = 397;
   fra.me.meth = LOCATE_parser___lexer___TKwfor___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1838,7 +1787,7 @@ void parser___lexer___TKwfor___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:403 */
+  /* parser/lexer.nit:399 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("for");
@@ -1853,7 +1802,7 @@ void parser___lexer___TKwfor___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:404 */
+  /* parser/lexer.nit:400 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos29] = 1;
@@ -1865,14 +1814,14 @@ val_t parser___lexer___TKwin___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 409;
+  fra.me.line = 405;
   fra.me.meth = LOCATE_parser___lexer___TKwin___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:411 */
+  /* parser/lexer.nit:407 */
   REGB0 = TAG_Int(30);
   goto label1;
   label1: while(0);
@@ -1889,7 +1838,7 @@ void parser___lexer___TKwin___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos30]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 414;
+  fra.me.line = 410;
   fra.me.meth = LOCATE_parser___lexer___TKwin___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1899,7 +1848,7 @@ void parser___lexer___TKwin___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:416 */
+  /* parser/lexer.nit:412 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("in");
@@ -1914,7 +1863,7 @@ void parser___lexer___TKwin___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:417 */
+  /* parser/lexer.nit:413 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos30] = 1;
@@ -1926,14 +1875,14 @@ val_t parser___lexer___TKwand___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 422;
+  fra.me.line = 418;
   fra.me.meth = LOCATE_parser___lexer___TKwand___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:424 */
+  /* parser/lexer.nit:420 */
   REGB0 = TAG_Int(31);
   goto label1;
   label1: while(0);
@@ -1950,7 +1899,7 @@ void parser___lexer___TKwand___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos31]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 427;
+  fra.me.line = 423;
   fra.me.meth = LOCATE_parser___lexer___TKwand___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1960,7 +1909,7 @@ void parser___lexer___TKwand___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:429 */
+  /* parser/lexer.nit:425 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("and");
@@ -1975,7 +1924,7 @@ void parser___lexer___TKwand___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:430 */
+  /* parser/lexer.nit:426 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos31] = 1;
@@ -1987,14 +1936,14 @@ val_t parser___lexer___TKwor___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 435;
+  fra.me.line = 431;
   fra.me.meth = LOCATE_parser___lexer___TKwor___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:437 */
+  /* parser/lexer.nit:433 */
   REGB0 = TAG_Int(32);
   goto label1;
   label1: while(0);
@@ -2011,7 +1960,7 @@ void parser___lexer___TKwor___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos32]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 440;
+  fra.me.line = 436;
   fra.me.meth = LOCATE_parser___lexer___TKwor___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2021,7 +1970,7 @@ void parser___lexer___TKwor___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:442 */
+  /* parser/lexer.nit:438 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("or");
@@ -2036,7 +1985,7 @@ void parser___lexer___TKwor___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:443 */
+  /* parser/lexer.nit:439 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos32] = 1;
@@ -2048,14 +1997,14 @@ val_t parser___lexer___TKwnot___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 448;
+  fra.me.line = 444;
   fra.me.meth = LOCATE_parser___lexer___TKwnot___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:450 */
+  /* parser/lexer.nit:446 */
   REGB0 = TAG_Int(33);
   goto label1;
   label1: while(0);
@@ -2072,7 +2021,7 @@ void parser___lexer___TKwnot___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos33]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 453;
+  fra.me.line = 449;
   fra.me.meth = LOCATE_parser___lexer___TKwnot___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2082,7 +2031,7 @@ void parser___lexer___TKwnot___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:455 */
+  /* parser/lexer.nit:451 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("not");
@@ -2097,7 +2046,7 @@ void parser___lexer___TKwnot___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:456 */
+  /* parser/lexer.nit:452 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos33] = 1;
@@ -2109,14 +2058,14 @@ val_t parser___lexer___TKwreturn___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 461;
+  fra.me.line = 457;
   fra.me.meth = LOCATE_parser___lexer___TKwreturn___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:463 */
+  /* parser/lexer.nit:459 */
   REGB0 = TAG_Int(34);
   goto label1;
   label1: while(0);
@@ -2133,7 +2082,7 @@ void parser___lexer___TKwreturn___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos34]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 466;
+  fra.me.line = 462;
   fra.me.meth = LOCATE_parser___lexer___TKwreturn___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2143,7 +2092,7 @@ void parser___lexer___TKwreturn___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:468 */
+  /* parser/lexer.nit:464 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("return");
@@ -2158,7 +2107,7 @@ void parser___lexer___TKwreturn___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:469 */
+  /* parser/lexer.nit:465 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos34] = 1;
@@ -2170,14 +2119,14 @@ val_t parser___lexer___TKwcontinue___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 474;
+  fra.me.line = 470;
   fra.me.meth = LOCATE_parser___lexer___TKwcontinue___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:476 */
+  /* parser/lexer.nit:472 */
   REGB0 = TAG_Int(35);
   goto label1;
   label1: while(0);
@@ -2194,7 +2143,7 @@ void parser___lexer___TKwcontinue___init_tk(val_t p0, val_t p1, int* init_table)
   if (init_table[itpos35]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 479;
+  fra.me.line = 475;
   fra.me.meth = LOCATE_parser___lexer___TKwcontinue___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2204,7 +2153,7 @@ void parser___lexer___TKwcontinue___init_tk(val_t p0, val_t p1, int* init_table)
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:481 */
+  /* parser/lexer.nit:477 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("continue");
@@ -2219,7 +2168,7 @@ void parser___lexer___TKwcontinue___init_tk(val_t p0, val_t p1, int* init_table)
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:482 */
+  /* parser/lexer.nit:478 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos35] = 1;
@@ -2231,14 +2180,14 @@ val_t parser___lexer___TKwbreak___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 487;
+  fra.me.line = 483;
   fra.me.meth = LOCATE_parser___lexer___TKwbreak___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:489 */
+  /* parser/lexer.nit:485 */
   REGB0 = TAG_Int(36);
   goto label1;
   label1: while(0);
@@ -2255,7 +2204,7 @@ void parser___lexer___TKwbreak___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos36]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 492;
+  fra.me.line = 488;
   fra.me.meth = LOCATE_parser___lexer___TKwbreak___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2265,7 +2214,7 @@ void parser___lexer___TKwbreak___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:494 */
+  /* parser/lexer.nit:490 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("break");
@@ -2280,7 +2229,7 @@ void parser___lexer___TKwbreak___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:495 */
+  /* parser/lexer.nit:491 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos36] = 1;
@@ -2292,14 +2241,14 @@ val_t parser___lexer___TKwabort___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 500;
+  fra.me.line = 496;
   fra.me.meth = LOCATE_parser___lexer___TKwabort___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:502 */
+  /* parser/lexer.nit:498 */
   REGB0 = TAG_Int(37);
   goto label1;
   label1: while(0);
@@ -2316,7 +2265,7 @@ void parser___lexer___TKwabort___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos37]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 505;
+  fra.me.line = 501;
   fra.me.meth = LOCATE_parser___lexer___TKwabort___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2326,7 +2275,7 @@ void parser___lexer___TKwabort___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:507 */
+  /* parser/lexer.nit:503 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("abort");
@@ -2341,7 +2290,7 @@ void parser___lexer___TKwabort___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:508 */
+  /* parser/lexer.nit:504 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos37] = 1;
@@ -2353,14 +2302,14 @@ val_t parser___lexer___TKwassert___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 513;
+  fra.me.line = 509;
   fra.me.meth = LOCATE_parser___lexer___TKwassert___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:515 */
+  /* parser/lexer.nit:511 */
   REGB0 = TAG_Int(38);
   goto label1;
   label1: while(0);
@@ -2377,7 +2326,7 @@ void parser___lexer___TKwassert___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos38]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 518;
+  fra.me.line = 514;
   fra.me.meth = LOCATE_parser___lexer___TKwassert___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2387,7 +2336,7 @@ void parser___lexer___TKwassert___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:520 */
+  /* parser/lexer.nit:516 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("assert");
@@ -2402,7 +2351,7 @@ void parser___lexer___TKwassert___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:521 */
+  /* parser/lexer.nit:517 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos38] = 1;
@@ -2414,14 +2363,14 @@ val_t parser___lexer___TKwnew___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 526;
+  fra.me.line = 522;
   fra.me.meth = LOCATE_parser___lexer___TKwnew___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:528 */
+  /* parser/lexer.nit:524 */
   REGB0 = TAG_Int(39);
   goto label1;
   label1: while(0);
@@ -2438,7 +2387,7 @@ void parser___lexer___TKwnew___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos39]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 531;
+  fra.me.line = 527;
   fra.me.meth = LOCATE_parser___lexer___TKwnew___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2448,7 +2397,7 @@ void parser___lexer___TKwnew___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:533 */
+  /* parser/lexer.nit:529 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("new");
@@ -2463,7 +2412,7 @@ void parser___lexer___TKwnew___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:534 */
+  /* parser/lexer.nit:530 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos39] = 1;
@@ -2475,14 +2424,14 @@ val_t parser___lexer___TKwisa___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 539;
+  fra.me.line = 535;
   fra.me.meth = LOCATE_parser___lexer___TKwisa___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:541 */
+  /* parser/lexer.nit:537 */
   REGB0 = TAG_Int(40);
   goto label1;
   label1: while(0);
@@ -2499,7 +2448,7 @@ void parser___lexer___TKwisa___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos40]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 544;
+  fra.me.line = 540;
   fra.me.meth = LOCATE_parser___lexer___TKwisa___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2509,7 +2458,7 @@ void parser___lexer___TKwisa___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:546 */
+  /* parser/lexer.nit:542 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("isa");
@@ -2524,7 +2473,7 @@ void parser___lexer___TKwisa___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:547 */
+  /* parser/lexer.nit:543 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos40] = 1;
@@ -2536,14 +2485,14 @@ val_t parser___lexer___TKwonce___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 552;
+  fra.me.line = 548;
   fra.me.meth = LOCATE_parser___lexer___TKwonce___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:554 */
+  /* parser/lexer.nit:550 */
   REGB0 = TAG_Int(41);
   goto label1;
   label1: while(0);
@@ -2560,7 +2509,7 @@ void parser___lexer___TKwonce___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos41]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 557;
+  fra.me.line = 553;
   fra.me.meth = LOCATE_parser___lexer___TKwonce___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2570,7 +2519,7 @@ void parser___lexer___TKwonce___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:559 */
+  /* parser/lexer.nit:555 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("once");
@@ -2585,7 +2534,7 @@ void parser___lexer___TKwonce___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:560 */
+  /* parser/lexer.nit:556 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos41] = 1;
@@ -2597,14 +2546,14 @@ val_t parser___lexer___TKwsuper___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 565;
+  fra.me.line = 561;
   fra.me.meth = LOCATE_parser___lexer___TKwsuper___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:567 */
+  /* parser/lexer.nit:563 */
   REGB0 = TAG_Int(42);
   goto label1;
   label1: while(0);
@@ -2621,7 +2570,7 @@ void parser___lexer___TKwsuper___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos42]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 570;
+  fra.me.line = 566;
   fra.me.meth = LOCATE_parser___lexer___TKwsuper___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2631,7 +2580,7 @@ void parser___lexer___TKwsuper___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:572 */
+  /* parser/lexer.nit:568 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("super");
@@ -2646,7 +2595,7 @@ void parser___lexer___TKwsuper___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:573 */
+  /* parser/lexer.nit:569 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos42] = 1;
@@ -2658,14 +2607,14 @@ val_t parser___lexer___TKwself___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 578;
+  fra.me.line = 574;
   fra.me.meth = LOCATE_parser___lexer___TKwself___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:580 */
+  /* parser/lexer.nit:576 */
   REGB0 = TAG_Int(43);
   goto label1;
   label1: while(0);
@@ -2682,7 +2631,7 @@ void parser___lexer___TKwself___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos43]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 583;
+  fra.me.line = 579;
   fra.me.meth = LOCATE_parser___lexer___TKwself___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2692,7 +2641,7 @@ void parser___lexer___TKwself___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:585 */
+  /* parser/lexer.nit:581 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("self");
@@ -2707,7 +2656,7 @@ void parser___lexer___TKwself___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:586 */
+  /* parser/lexer.nit:582 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos43] = 1;
@@ -2719,14 +2668,14 @@ val_t parser___lexer___TKwtrue___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 591;
+  fra.me.line = 587;
   fra.me.meth = LOCATE_parser___lexer___TKwtrue___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:593 */
+  /* parser/lexer.nit:589 */
   REGB0 = TAG_Int(44);
   goto label1;
   label1: while(0);
@@ -2743,7 +2692,7 @@ void parser___lexer___TKwtrue___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos44]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 596;
+  fra.me.line = 592;
   fra.me.meth = LOCATE_parser___lexer___TKwtrue___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2753,7 +2702,7 @@ void parser___lexer___TKwtrue___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:598 */
+  /* parser/lexer.nit:594 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("true");
@@ -2768,7 +2717,7 @@ void parser___lexer___TKwtrue___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:599 */
+  /* parser/lexer.nit:595 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos44] = 1;
@@ -2780,14 +2729,14 @@ val_t parser___lexer___TKwfalse___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 604;
+  fra.me.line = 600;
   fra.me.meth = LOCATE_parser___lexer___TKwfalse___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:606 */
+  /* parser/lexer.nit:602 */
   REGB0 = TAG_Int(45);
   goto label1;
   label1: while(0);
@@ -2804,7 +2753,7 @@ void parser___lexer___TKwfalse___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos45]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 609;
+  fra.me.line = 605;
   fra.me.meth = LOCATE_parser___lexer___TKwfalse___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2814,7 +2763,7 @@ void parser___lexer___TKwfalse___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:611 */
+  /* parser/lexer.nit:607 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("false");
@@ -2829,7 +2778,7 @@ void parser___lexer___TKwfalse___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:612 */
+  /* parser/lexer.nit:608 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos45] = 1;
@@ -2841,14 +2790,14 @@ val_t parser___lexer___TKwnull___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 617;
+  fra.me.line = 613;
   fra.me.meth = LOCATE_parser___lexer___TKwnull___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:619 */
+  /* parser/lexer.nit:615 */
   REGB0 = TAG_Int(46);
   goto label1;
   label1: while(0);
@@ -2865,7 +2814,7 @@ void parser___lexer___TKwnull___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos46]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 622;
+  fra.me.line = 618;
   fra.me.meth = LOCATE_parser___lexer___TKwnull___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2875,7 +2824,7 @@ void parser___lexer___TKwnull___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:624 */
+  /* parser/lexer.nit:620 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("null");
@@ -2890,7 +2839,7 @@ void parser___lexer___TKwnull___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:625 */
+  /* parser/lexer.nit:621 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos46] = 1;
@@ -2902,14 +2851,14 @@ val_t parser___lexer___TKwas___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 630;
+  fra.me.line = 626;
   fra.me.meth = LOCATE_parser___lexer___TKwas___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:632 */
+  /* parser/lexer.nit:628 */
   REGB0 = TAG_Int(47);
   goto label1;
   label1: while(0);
@@ -2926,7 +2875,7 @@ void parser___lexer___TKwas___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos47]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 635;
+  fra.me.line = 631;
   fra.me.meth = LOCATE_parser___lexer___TKwas___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2936,7 +2885,7 @@ void parser___lexer___TKwas___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:637 */
+  /* parser/lexer.nit:633 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("as");
@@ -2951,7 +2900,7 @@ void parser___lexer___TKwas___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:638 */
+  /* parser/lexer.nit:634 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos47] = 1;
@@ -2963,14 +2912,14 @@ val_t parser___lexer___TKwnullable___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 643;
+  fra.me.line = 639;
   fra.me.meth = LOCATE_parser___lexer___TKwnullable___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:645 */
+  /* parser/lexer.nit:641 */
   REGB0 = TAG_Int(48);
   goto label1;
   label1: while(0);
@@ -2987,7 +2936,7 @@ void parser___lexer___TKwnullable___init_tk(val_t p0, val_t p1, int* init_table)
   if (init_table[itpos48]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 648;
+  fra.me.line = 644;
   fra.me.meth = LOCATE_parser___lexer___TKwnullable___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2997,7 +2946,7 @@ void parser___lexer___TKwnullable___init_tk(val_t p0, val_t p1, int* init_table)
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:650 */
+  /* parser/lexer.nit:646 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("nullable");
@@ -3012,7 +2961,7 @@ void parser___lexer___TKwnullable___init_tk(val_t p0, val_t p1, int* init_table)
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:651 */
+  /* parser/lexer.nit:647 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos48] = 1;
@@ -3024,14 +2973,14 @@ val_t parser___lexer___TKwisset___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 656;
+  fra.me.line = 652;
   fra.me.meth = LOCATE_parser___lexer___TKwisset___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:658 */
+  /* parser/lexer.nit:654 */
   REGB0 = TAG_Int(49);
   goto label1;
   label1: while(0);
@@ -3048,7 +2997,7 @@ void parser___lexer___TKwisset___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos49]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 661;
+  fra.me.line = 657;
   fra.me.meth = LOCATE_parser___lexer___TKwisset___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3058,7 +3007,7 @@ void parser___lexer___TKwisset___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:663 */
+  /* parser/lexer.nit:659 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("isset");
@@ -3073,7 +3022,7 @@ void parser___lexer___TKwisset___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:664 */
+  /* parser/lexer.nit:660 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos49] = 1;
@@ -3085,14 +3034,14 @@ val_t parser___lexer___TKwlabel___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 669;
+  fra.me.line = 665;
   fra.me.meth = LOCATE_parser___lexer___TKwlabel___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:671 */
+  /* parser/lexer.nit:667 */
   REGB0 = TAG_Int(50);
   goto label1;
   label1: while(0);
@@ -3109,7 +3058,7 @@ void parser___lexer___TKwlabel___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos50]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 674;
+  fra.me.line = 670;
   fra.me.meth = LOCATE_parser___lexer___TKwlabel___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3119,7 +3068,7 @@ void parser___lexer___TKwlabel___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:676 */
+  /* parser/lexer.nit:672 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("label");
@@ -3134,34 +3083,34 @@ void parser___lexer___TKwlabel___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:677 */
+  /* parser/lexer.nit:673 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos50] = 1;
   return;
 }
-val_t parser___lexer___TOpar___parser_index(val_t p0){
+val_t parser___lexer___TKwdebug___parser_index(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 682;
-  fra.me.meth = LOCATE_parser___lexer___TOpar___parser_index;
+  fra.me.line = 678;
+  fra.me.meth = LOCATE_parser___lexer___TKwdebug___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:684 */
+  /* parser/lexer.nit:680 */
   REGB0 = TAG_Int(51);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
-void parser___lexer___TOpar___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos51 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TOpar].i;
+void parser___lexer___TKwdebug___init_tk(val_t p0, val_t p1, int* init_table){
+  int itpos51 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TKwdebug].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
@@ -3170,7 +3119,68 @@ void parser___lexer___TOpar___init_tk(val_t p0, val_t p1, int* init_table){
   if (init_table[itpos51]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 687;
+  fra.me.line = 683;
+  fra.me.meth = LOCATE_parser___lexer___TKwdebug___init_tk;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* parser/lexer.nit:685 */
+  if (!once_value_1) {
+    if (!once_value_2) {
+      fra.me.REG[2] = BOX_NativeString("__debug__");
+      REGB0 = TAG_Int(9);
+      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      once_value_2 = fra.me.REG[2];
+      register_static_object(&once_value_2);
+    } else fra.me.REG[2] = once_value_2;
+    fra.me.REG[2] = fra.me.REG[2];
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
+  /* parser/lexer.nit:686 */
+  ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
+  stack_frame_head = fra.me.prev;
+  init_table[itpos51] = 1;
+  return;
+}
+val_t parser___lexer___TOpar___parser_index(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___lexer;
+  fra.me.line = 691;
+  fra.me.meth = LOCATE_parser___lexer___TOpar___parser_index;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/lexer.nit:693 */
+  REGB0 = TAG_Int(52);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
+void parser___lexer___TOpar___init_tk(val_t p0, val_t p1, int* init_table){
+  int itpos52 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TOpar].i;
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+    static val_t once_value_2; /* Once value */
+  if (init_table[itpos52]) return;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___lexer;
+  fra.me.line = 696;
   fra.me.meth = LOCATE_parser___lexer___TOpar___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3180,7 +3190,7 @@ void parser___lexer___TOpar___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:689 */
+  /* parser/lexer.nit:698 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("(");
@@ -3195,10 +3205,10 @@ void parser___lexer___TOpar___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:690 */
+  /* parser/lexer.nit:699 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos51] = 1;
+  init_table[itpos52] = 1;
   return;
 }
 val_t parser___lexer___TCpar___parser_index(val_t p0){
@@ -3207,31 +3217,31 @@ val_t parser___lexer___TCpar___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 695;
+  fra.me.line = 704;
   fra.me.meth = LOCATE_parser___lexer___TCpar___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:697 */
-  REGB0 = TAG_Int(52);
+  /* parser/lexer.nit:706 */
+  REGB0 = TAG_Int(53);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TCpar___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos52 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TCpar].i;
+  int itpos53 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TCpar].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos52]) return;
+  if (init_table[itpos53]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 700;
+  fra.me.line = 709;
   fra.me.meth = LOCATE_parser___lexer___TCpar___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3241,7 +3251,7 @@ void parser___lexer___TCpar___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:702 */
+  /* parser/lexer.nit:711 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString(")");
@@ -3256,10 +3266,10 @@ void parser___lexer___TCpar___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:703 */
+  /* parser/lexer.nit:712 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos52] = 1;
+  init_table[itpos53] = 1;
   return;
 }
 val_t parser___lexer___TObra___parser_index(val_t p0){
@@ -3268,31 +3278,31 @@ val_t parser___lexer___TObra___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 708;
+  fra.me.line = 717;
   fra.me.meth = LOCATE_parser___lexer___TObra___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:710 */
-  REGB0 = TAG_Int(53);
+  /* parser/lexer.nit:719 */
+  REGB0 = TAG_Int(54);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TObra___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos53 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TObra].i;
+  int itpos54 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TObra].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos53]) return;
+  if (init_table[itpos54]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 713;
+  fra.me.line = 722;
   fra.me.meth = LOCATE_parser___lexer___TObra___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3302,7 +3312,7 @@ void parser___lexer___TObra___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:715 */
+  /* parser/lexer.nit:724 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("[");
@@ -3317,10 +3327,10 @@ void parser___lexer___TObra___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:716 */
+  /* parser/lexer.nit:725 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos53] = 1;
+  init_table[itpos54] = 1;
   return;
 }
 val_t parser___lexer___TCbra___parser_index(val_t p0){
@@ -3329,31 +3339,31 @@ val_t parser___lexer___TCbra___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 721;
+  fra.me.line = 730;
   fra.me.meth = LOCATE_parser___lexer___TCbra___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:723 */
-  REGB0 = TAG_Int(54);
+  /* parser/lexer.nit:732 */
+  REGB0 = TAG_Int(55);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TCbra___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos54 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TCbra].i;
+  int itpos55 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TCbra].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos54]) return;
+  if (init_table[itpos55]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 726;
+  fra.me.line = 735;
   fra.me.meth = LOCATE_parser___lexer___TCbra___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3363,7 +3373,7 @@ void parser___lexer___TCbra___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:728 */
+  /* parser/lexer.nit:737 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("]");
@@ -3378,10 +3388,10 @@ void parser___lexer___TCbra___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:729 */
+  /* parser/lexer.nit:738 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos54] = 1;
+  init_table[itpos55] = 1;
   return;
 }
 val_t parser___lexer___TComma___parser_index(val_t p0){
@@ -3390,31 +3400,31 @@ val_t parser___lexer___TComma___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 734;
+  fra.me.line = 743;
   fra.me.meth = LOCATE_parser___lexer___TComma___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:736 */
-  REGB0 = TAG_Int(55);
+  /* parser/lexer.nit:745 */
+  REGB0 = TAG_Int(56);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TComma___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos55 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TComma].i;
+  int itpos56 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TComma].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos55]) return;
+  if (init_table[itpos56]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 739;
+  fra.me.line = 748;
   fra.me.meth = LOCATE_parser___lexer___TComma___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3424,7 +3434,7 @@ void parser___lexer___TComma___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:741 */
+  /* parser/lexer.nit:750 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString(",");
@@ -3439,10 +3449,10 @@ void parser___lexer___TComma___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:742 */
+  /* parser/lexer.nit:751 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos55] = 1;
+  init_table[itpos56] = 1;
   return;
 }
 val_t parser___lexer___TColumn___parser_index(val_t p0){
@@ -3451,31 +3461,31 @@ val_t parser___lexer___TColumn___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 747;
+  fra.me.line = 756;
   fra.me.meth = LOCATE_parser___lexer___TColumn___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:749 */
-  REGB0 = TAG_Int(56);
+  /* parser/lexer.nit:758 */
+  REGB0 = TAG_Int(57);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TColumn___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos56 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TColumn].i;
+  int itpos57 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TColumn].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos56]) return;
+  if (init_table[itpos57]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 752;
+  fra.me.line = 761;
   fra.me.meth = LOCATE_parser___lexer___TColumn___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3485,7 +3495,7 @@ void parser___lexer___TColumn___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:754 */
+  /* parser/lexer.nit:763 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString(":");
@@ -3500,10 +3510,10 @@ void parser___lexer___TColumn___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:755 */
+  /* parser/lexer.nit:764 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos56] = 1;
+  init_table[itpos57] = 1;
   return;
 }
 val_t parser___lexer___TQuad___parser_index(val_t p0){
@@ -3512,31 +3522,31 @@ val_t parser___lexer___TQuad___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 760;
+  fra.me.line = 769;
   fra.me.meth = LOCATE_parser___lexer___TQuad___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:762 */
-  REGB0 = TAG_Int(57);
+  /* parser/lexer.nit:771 */
+  REGB0 = TAG_Int(58);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TQuad___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos57 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TQuad].i;
+  int itpos58 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TQuad].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos57]) return;
+  if (init_table[itpos58]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 765;
+  fra.me.line = 774;
   fra.me.meth = LOCATE_parser___lexer___TQuad___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3546,7 +3556,7 @@ void parser___lexer___TQuad___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:767 */
+  /* parser/lexer.nit:776 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("::");
@@ -3561,10 +3571,10 @@ void parser___lexer___TQuad___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:768 */
+  /* parser/lexer.nit:777 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos57] = 1;
+  init_table[itpos58] = 1;
   return;
 }
 val_t parser___lexer___TAssign___parser_index(val_t p0){
@@ -3573,31 +3583,31 @@ val_t parser___lexer___TAssign___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 773;
+  fra.me.line = 782;
   fra.me.meth = LOCATE_parser___lexer___TAssign___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:775 */
-  REGB0 = TAG_Int(58);
+  /* parser/lexer.nit:784 */
+  REGB0 = TAG_Int(59);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TAssign___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos58 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TAssign].i;
+  int itpos59 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TAssign].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos58]) return;
+  if (init_table[itpos59]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 778;
+  fra.me.line = 787;
   fra.me.meth = LOCATE_parser___lexer___TAssign___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3607,7 +3617,7 @@ void parser___lexer___TAssign___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:780 */
+  /* parser/lexer.nit:789 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("=");
@@ -3622,10 +3632,10 @@ void parser___lexer___TAssign___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:781 */
+  /* parser/lexer.nit:790 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos58] = 1;
+  init_table[itpos59] = 1;
   return;
 }
 val_t parser___lexer___TPluseq___parser_index(val_t p0){
@@ -3634,31 +3644,31 @@ val_t parser___lexer___TPluseq___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 786;
+  fra.me.line = 795;
   fra.me.meth = LOCATE_parser___lexer___TPluseq___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:788 */
-  REGB0 = TAG_Int(59);
+  /* parser/lexer.nit:797 */
+  REGB0 = TAG_Int(60);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TPluseq___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos59 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TPluseq].i;
+  int itpos60 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TPluseq].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos59]) return;
+  if (init_table[itpos60]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 791;
+  fra.me.line = 800;
   fra.me.meth = LOCATE_parser___lexer___TPluseq___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3668,7 +3678,7 @@ void parser___lexer___TPluseq___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:793 */
+  /* parser/lexer.nit:802 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("+=");
@@ -3683,10 +3693,10 @@ void parser___lexer___TPluseq___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:794 */
+  /* parser/lexer.nit:803 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos59] = 1;
+  init_table[itpos60] = 1;
   return;
 }
 val_t parser___lexer___TMinuseq___parser_index(val_t p0){
@@ -3695,31 +3705,31 @@ val_t parser___lexer___TMinuseq___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 799;
+  fra.me.line = 808;
   fra.me.meth = LOCATE_parser___lexer___TMinuseq___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:801 */
-  REGB0 = TAG_Int(60);
+  /* parser/lexer.nit:810 */
+  REGB0 = TAG_Int(61);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TMinuseq___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos60 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TMinuseq].i;
+  int itpos61 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TMinuseq].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos60]) return;
+  if (init_table[itpos61]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 804;
+  fra.me.line = 813;
   fra.me.meth = LOCATE_parser___lexer___TMinuseq___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3729,7 +3739,7 @@ void parser___lexer___TMinuseq___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:806 */
+  /* parser/lexer.nit:815 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("-=");
@@ -3744,10 +3754,10 @@ void parser___lexer___TMinuseq___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:807 */
+  /* parser/lexer.nit:816 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos60] = 1;
+  init_table[itpos61] = 1;
   return;
 }
 val_t parser___lexer___TDotdotdot___parser_index(val_t p0){
@@ -3756,31 +3766,31 @@ val_t parser___lexer___TDotdotdot___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 812;
+  fra.me.line = 821;
   fra.me.meth = LOCATE_parser___lexer___TDotdotdot___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:814 */
-  REGB0 = TAG_Int(61);
+  /* parser/lexer.nit:823 */
+  REGB0 = TAG_Int(62);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TDotdotdot___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos61 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TDotdotdot].i;
+  int itpos62 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TDotdotdot].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos61]) return;
+  if (init_table[itpos62]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 817;
+  fra.me.line = 826;
   fra.me.meth = LOCATE_parser___lexer___TDotdotdot___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3790,7 +3800,7 @@ void parser___lexer___TDotdotdot___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:819 */
+  /* parser/lexer.nit:828 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("...");
@@ -3805,10 +3815,10 @@ void parser___lexer___TDotdotdot___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:820 */
+  /* parser/lexer.nit:829 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos61] = 1;
+  init_table[itpos62] = 1;
   return;
 }
 val_t parser___lexer___TDotdot___parser_index(val_t p0){
@@ -3817,31 +3827,31 @@ val_t parser___lexer___TDotdot___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 825;
+  fra.me.line = 834;
   fra.me.meth = LOCATE_parser___lexer___TDotdot___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:827 */
-  REGB0 = TAG_Int(62);
+  /* parser/lexer.nit:836 */
+  REGB0 = TAG_Int(63);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TDotdot___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos62 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TDotdot].i;
+  int itpos63 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TDotdot].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos62]) return;
+  if (init_table[itpos63]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 830;
+  fra.me.line = 839;
   fra.me.meth = LOCATE_parser___lexer___TDotdot___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3851,7 +3861,7 @@ void parser___lexer___TDotdot___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:832 */
+  /* parser/lexer.nit:841 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("..");
@@ -3866,10 +3876,10 @@ void parser___lexer___TDotdot___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:833 */
+  /* parser/lexer.nit:842 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos62] = 1;
+  init_table[itpos63] = 1;
   return;
 }
 val_t parser___lexer___TDot___parser_index(val_t p0){
@@ -3878,31 +3888,31 @@ val_t parser___lexer___TDot___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 838;
+  fra.me.line = 847;
   fra.me.meth = LOCATE_parser___lexer___TDot___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:840 */
-  REGB0 = TAG_Int(63);
+  /* parser/lexer.nit:849 */
+  REGB0 = TAG_Int(64);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TDot___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos63 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TDot].i;
+  int itpos64 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TDot].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos63]) return;
+  if (init_table[itpos64]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 843;
+  fra.me.line = 852;
   fra.me.meth = LOCATE_parser___lexer___TDot___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3912,7 +3922,7 @@ void parser___lexer___TDot___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:845 */
+  /* parser/lexer.nit:854 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString(".");
@@ -3927,10 +3937,10 @@ void parser___lexer___TDot___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:846 */
+  /* parser/lexer.nit:855 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos63] = 1;
+  init_table[itpos64] = 1;
   return;
 }
 val_t parser___lexer___TPlus___parser_index(val_t p0){
@@ -3939,31 +3949,31 @@ val_t parser___lexer___TPlus___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 851;
+  fra.me.line = 860;
   fra.me.meth = LOCATE_parser___lexer___TPlus___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:853 */
-  REGB0 = TAG_Int(64);
+  /* parser/lexer.nit:862 */
+  REGB0 = TAG_Int(65);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TPlus___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos64 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TPlus].i;
+  int itpos65 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TPlus].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos64]) return;
+  if (init_table[itpos65]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 856;
+  fra.me.line = 865;
   fra.me.meth = LOCATE_parser___lexer___TPlus___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3973,7 +3983,7 @@ void parser___lexer___TPlus___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:858 */
+  /* parser/lexer.nit:867 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("+");
@@ -3988,10 +3998,10 @@ void parser___lexer___TPlus___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:859 */
+  /* parser/lexer.nit:868 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos64] = 1;
+  init_table[itpos65] = 1;
   return;
 }
 val_t parser___lexer___TMinus___parser_index(val_t p0){
@@ -4000,31 +4010,31 @@ val_t parser___lexer___TMinus___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 864;
+  fra.me.line = 873;
   fra.me.meth = LOCATE_parser___lexer___TMinus___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:866 */
-  REGB0 = TAG_Int(65);
+  /* parser/lexer.nit:875 */
+  REGB0 = TAG_Int(66);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TMinus___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos65 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TMinus].i;
+  int itpos66 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TMinus].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos65]) return;
+  if (init_table[itpos66]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 869;
+  fra.me.line = 878;
   fra.me.meth = LOCATE_parser___lexer___TMinus___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4034,7 +4044,7 @@ void parser___lexer___TMinus___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:871 */
+  /* parser/lexer.nit:880 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("-");
@@ -4049,10 +4059,10 @@ void parser___lexer___TMinus___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:872 */
+  /* parser/lexer.nit:881 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos65] = 1;
+  init_table[itpos66] = 1;
   return;
 }
 val_t parser___lexer___TStar___parser_index(val_t p0){
@@ -4061,31 +4071,31 @@ val_t parser___lexer___TStar___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 877;
+  fra.me.line = 886;
   fra.me.meth = LOCATE_parser___lexer___TStar___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:879 */
-  REGB0 = TAG_Int(66);
+  /* parser/lexer.nit:888 */
+  REGB0 = TAG_Int(67);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TStar___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos66 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TStar].i;
+  int itpos67 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TStar].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos66]) return;
+  if (init_table[itpos67]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 882;
+  fra.me.line = 891;
   fra.me.meth = LOCATE_parser___lexer___TStar___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4095,7 +4105,7 @@ void parser___lexer___TStar___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:884 */
+  /* parser/lexer.nit:893 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("*");
@@ -4110,10 +4120,10 @@ void parser___lexer___TStar___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:885 */
+  /* parser/lexer.nit:894 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos66] = 1;
+  init_table[itpos67] = 1;
   return;
 }
 val_t parser___lexer___TSlash___parser_index(val_t p0){
@@ -4122,31 +4132,31 @@ val_t parser___lexer___TSlash___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 890;
+  fra.me.line = 899;
   fra.me.meth = LOCATE_parser___lexer___TSlash___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:892 */
-  REGB0 = TAG_Int(67);
+  /* parser/lexer.nit:901 */
+  REGB0 = TAG_Int(68);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TSlash___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos67 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TSlash].i;
+  int itpos68 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TSlash].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos67]) return;
+  if (init_table[itpos68]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 895;
+  fra.me.line = 904;
   fra.me.meth = LOCATE_parser___lexer___TSlash___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4156,7 +4166,7 @@ void parser___lexer___TSlash___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:897 */
+  /* parser/lexer.nit:906 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("/");
@@ -4171,10 +4181,10 @@ void parser___lexer___TSlash___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:898 */
+  /* parser/lexer.nit:907 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos67] = 1;
+  init_table[itpos68] = 1;
   return;
 }
 val_t parser___lexer___TPercent___parser_index(val_t p0){
@@ -4183,31 +4193,31 @@ val_t parser___lexer___TPercent___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 903;
+  fra.me.line = 912;
   fra.me.meth = LOCATE_parser___lexer___TPercent___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:905 */
-  REGB0 = TAG_Int(68);
+  /* parser/lexer.nit:914 */
+  REGB0 = TAG_Int(69);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TPercent___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos68 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TPercent].i;
+  int itpos69 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TPercent].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos68]) return;
+  if (init_table[itpos69]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 908;
+  fra.me.line = 917;
   fra.me.meth = LOCATE_parser___lexer___TPercent___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4217,7 +4227,7 @@ void parser___lexer___TPercent___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:910 */
+  /* parser/lexer.nit:919 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("%");
@@ -4232,10 +4242,10 @@ void parser___lexer___TPercent___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:911 */
+  /* parser/lexer.nit:920 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos68] = 1;
+  init_table[itpos69] = 1;
   return;
 }
 val_t parser___lexer___TEq___parser_index(val_t p0){
@@ -4244,31 +4254,31 @@ val_t parser___lexer___TEq___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 916;
+  fra.me.line = 925;
   fra.me.meth = LOCATE_parser___lexer___TEq___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:918 */
-  REGB0 = TAG_Int(69);
+  /* parser/lexer.nit:927 */
+  REGB0 = TAG_Int(70);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TEq___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos69 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TEq].i;
+  int itpos70 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TEq].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos69]) return;
+  if (init_table[itpos70]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 921;
+  fra.me.line = 930;
   fra.me.meth = LOCATE_parser___lexer___TEq___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4278,7 +4288,7 @@ void parser___lexer___TEq___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:923 */
+  /* parser/lexer.nit:932 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("==");
@@ -4293,10 +4303,10 @@ void parser___lexer___TEq___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:924 */
+  /* parser/lexer.nit:933 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos69] = 1;
+  init_table[itpos70] = 1;
   return;
 }
 val_t parser___lexer___TNe___parser_index(val_t p0){
@@ -4305,31 +4315,31 @@ val_t parser___lexer___TNe___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 929;
+  fra.me.line = 938;
   fra.me.meth = LOCATE_parser___lexer___TNe___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:931 */
-  REGB0 = TAG_Int(70);
+  /* parser/lexer.nit:940 */
+  REGB0 = TAG_Int(71);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TNe___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos70 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TNe].i;
+  int itpos71 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TNe].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos70]) return;
+  if (init_table[itpos71]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 934;
+  fra.me.line = 943;
   fra.me.meth = LOCATE_parser___lexer___TNe___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4339,7 +4349,7 @@ void parser___lexer___TNe___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:936 */
+  /* parser/lexer.nit:945 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("!=");
@@ -4354,10 +4364,10 @@ void parser___lexer___TNe___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:937 */
+  /* parser/lexer.nit:946 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos70] = 1;
+  init_table[itpos71] = 1;
   return;
 }
 val_t parser___lexer___TLt___parser_index(val_t p0){
@@ -4366,31 +4376,31 @@ val_t parser___lexer___TLt___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 942;
+  fra.me.line = 951;
   fra.me.meth = LOCATE_parser___lexer___TLt___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:944 */
-  REGB0 = TAG_Int(71);
+  /* parser/lexer.nit:953 */
+  REGB0 = TAG_Int(72);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TLt___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos71 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TLt].i;
+  int itpos72 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TLt].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos71]) return;
+  if (init_table[itpos72]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 947;
+  fra.me.line = 956;
   fra.me.meth = LOCATE_parser___lexer___TLt___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4400,7 +4410,7 @@ void parser___lexer___TLt___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:949 */
+  /* parser/lexer.nit:958 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("<");
@@ -4415,10 +4425,10 @@ void parser___lexer___TLt___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:950 */
+  /* parser/lexer.nit:959 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos71] = 1;
+  init_table[itpos72] = 1;
   return;
 }
 val_t parser___lexer___TLe___parser_index(val_t p0){
@@ -4427,31 +4437,31 @@ val_t parser___lexer___TLe___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 955;
+  fra.me.line = 964;
   fra.me.meth = LOCATE_parser___lexer___TLe___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:957 */
-  REGB0 = TAG_Int(72);
+  /* parser/lexer.nit:966 */
+  REGB0 = TAG_Int(73);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TLe___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos72 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TLe].i;
+  int itpos73 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TLe].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos72]) return;
+  if (init_table[itpos73]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 960;
+  fra.me.line = 969;
   fra.me.meth = LOCATE_parser___lexer___TLe___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4461,7 +4471,7 @@ void parser___lexer___TLe___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:962 */
+  /* parser/lexer.nit:971 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("<=");
@@ -4476,10 +4486,10 @@ void parser___lexer___TLe___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:963 */
+  /* parser/lexer.nit:972 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos72] = 1;
+  init_table[itpos73] = 1;
   return;
 }
 val_t parser___lexer___TLl___parser_index(val_t p0){
@@ -4488,31 +4498,31 @@ val_t parser___lexer___TLl___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 968;
+  fra.me.line = 977;
   fra.me.meth = LOCATE_parser___lexer___TLl___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:970 */
-  REGB0 = TAG_Int(73);
+  /* parser/lexer.nit:979 */
+  REGB0 = TAG_Int(74);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TLl___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos73 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TLl].i;
+  int itpos74 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TLl].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos73]) return;
+  if (init_table[itpos74]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 973;
+  fra.me.line = 982;
   fra.me.meth = LOCATE_parser___lexer___TLl___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4522,7 +4532,7 @@ void parser___lexer___TLl___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:975 */
+  /* parser/lexer.nit:984 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("<<");
@@ -4537,10 +4547,10 @@ void parser___lexer___TLl___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:976 */
+  /* parser/lexer.nit:985 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos73] = 1;
+  init_table[itpos74] = 1;
   return;
 }
 val_t parser___lexer___TGt___parser_index(val_t p0){
@@ -4549,31 +4559,31 @@ val_t parser___lexer___TGt___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 981;
+  fra.me.line = 990;
   fra.me.meth = LOCATE_parser___lexer___TGt___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:983 */
-  REGB0 = TAG_Int(74);
+  /* parser/lexer.nit:992 */
+  REGB0 = TAG_Int(75);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TGt___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos74 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TGt].i;
+  int itpos75 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TGt].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos74]) return;
+  if (init_table[itpos75]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 986;
+  fra.me.line = 995;
   fra.me.meth = LOCATE_parser___lexer___TGt___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4583,7 +4593,7 @@ void parser___lexer___TGt___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:988 */
+  /* parser/lexer.nit:997 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString(">");
@@ -4598,10 +4608,10 @@ void parser___lexer___TGt___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:989 */
+  /* parser/lexer.nit:998 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos74] = 1;
+  init_table[itpos75] = 1;
   return;
 }
 val_t parser___lexer___TGe___parser_index(val_t p0){
@@ -4610,31 +4620,31 @@ val_t parser___lexer___TGe___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 994;
+  fra.me.line = 1003;
   fra.me.meth = LOCATE_parser___lexer___TGe___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:996 */
-  REGB0 = TAG_Int(75);
+  /* parser/lexer.nit:1005 */
+  REGB0 = TAG_Int(76);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TGe___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos75 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TGe].i;
+  int itpos76 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TGe].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos75]) return;
+  if (init_table[itpos76]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 999;
+  fra.me.line = 1008;
   fra.me.meth = LOCATE_parser___lexer___TGe___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4644,7 +4654,7 @@ void parser___lexer___TGe___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:1001 */
+  /* parser/lexer.nit:1010 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString(">=");
@@ -4659,10 +4669,10 @@ void parser___lexer___TGe___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:1002 */
+  /* parser/lexer.nit:1011 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos75] = 1;
+  init_table[itpos76] = 1;
   return;
 }
 val_t parser___lexer___TGg___parser_index(val_t p0){
@@ -4671,31 +4681,31 @@ val_t parser___lexer___TGg___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1007;
+  fra.me.line = 1016;
   fra.me.meth = LOCATE_parser___lexer___TGg___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1009 */
-  REGB0 = TAG_Int(76);
+  /* parser/lexer.nit:1018 */
+  REGB0 = TAG_Int(77);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TGg___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos76 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TGg].i;
+  int itpos77 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TGg].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos76]) return;
+  if (init_table[itpos77]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1012;
+  fra.me.line = 1021;
   fra.me.meth = LOCATE_parser___lexer___TGg___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4705,7 +4715,7 @@ void parser___lexer___TGg___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:1014 */
+  /* parser/lexer.nit:1023 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString(">>");
@@ -4720,10 +4730,10 @@ void parser___lexer___TGg___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:1015 */
+  /* parser/lexer.nit:1024 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos76] = 1;
+  init_table[itpos77] = 1;
   return;
 }
 val_t parser___lexer___TStarship___parser_index(val_t p0){
@@ -4732,31 +4742,31 @@ val_t parser___lexer___TStarship___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1020;
+  fra.me.line = 1029;
   fra.me.meth = LOCATE_parser___lexer___TStarship___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1022 */
-  REGB0 = TAG_Int(77);
+  /* parser/lexer.nit:1031 */
+  REGB0 = TAG_Int(78);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TStarship___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos77 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TStarship].i;
+  int itpos78 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TStarship].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos77]) return;
+  if (init_table[itpos78]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1025;
+  fra.me.line = 1034;
   fra.me.meth = LOCATE_parser___lexer___TStarship___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4766,7 +4776,7 @@ void parser___lexer___TStarship___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:1027 */
+  /* parser/lexer.nit:1036 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("<=>");
@@ -4781,10 +4791,10 @@ void parser___lexer___TStarship___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:1028 */
+  /* parser/lexer.nit:1037 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos77] = 1;
+  init_table[itpos78] = 1;
   return;
 }
 val_t parser___lexer___TBang___parser_index(val_t p0){
@@ -4793,31 +4803,31 @@ val_t parser___lexer___TBang___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1033;
+  fra.me.line = 1042;
   fra.me.meth = LOCATE_parser___lexer___TBang___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1035 */
-  REGB0 = TAG_Int(78);
+  /* parser/lexer.nit:1044 */
+  REGB0 = TAG_Int(79);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TBang___init_tk(val_t p0, val_t p1, int* init_table){
-  int itpos78 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TBang].i;
+  int itpos79 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TBang].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
     static val_t once_value_2; /* Once value */
-  if (init_table[itpos78]) return;
+  if (init_table[itpos79]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1038;
+  fra.me.line = 1047;
   fra.me.meth = LOCATE_parser___lexer___TBang___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4827,7 +4837,7 @@ void parser___lexer___TBang___init_tk(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:1040 */
+  /* parser/lexer.nit:1049 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("!");
@@ -4842,10 +4852,10 @@ void parser___lexer___TBang___init_tk(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:1041 */
+  /* parser/lexer.nit:1050 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos78] = 1;
+  init_table[itpos79] = 1;
   return;
 }
 val_t parser___lexer___TClassid___parser_index(val_t p0){
@@ -4854,28 +4864,28 @@ val_t parser___lexer___TClassid___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1046;
+  fra.me.line = 1055;
   fra.me.meth = LOCATE_parser___lexer___TClassid___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1048 */
-  REGB0 = TAG_Int(79);
+  /* parser/lexer.nit:1057 */
+  REGB0 = TAG_Int(80);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TClassid___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos79 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TClassid].i;
+  int itpos80 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TClassid].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos79]) return;
+  if (init_table[itpos80]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1051;
+  fra.me.line = 1060;
   fra.me.meth = LOCATE_parser___lexer___TClassid___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4886,12 +4896,12 @@ void parser___lexer___TClassid___init_tk(val_t p0, val_t p1, val_t p2, int* init
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1053 */
+  /* parser/lexer.nit:1062 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:1054 */
+  /* parser/lexer.nit:1063 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
-  init_table[itpos79] = 1;
+  init_table[itpos80] = 1;
   return;
 }
 val_t parser___lexer___TId___parser_index(val_t p0){
@@ -4900,28 +4910,28 @@ val_t parser___lexer___TId___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1059;
+  fra.me.line = 1068;
   fra.me.meth = LOCATE_parser___lexer___TId___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1061 */
-  REGB0 = TAG_Int(80);
+  /* parser/lexer.nit:1070 */
+  REGB0 = TAG_Int(81);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TId___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos80 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TId].i;
+  int itpos81 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TId].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos80]) return;
+  if (init_table[itpos81]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1064;
+  fra.me.line = 1073;
   fra.me.meth = LOCATE_parser___lexer___TId___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4932,12 +4942,12 @@ void parser___lexer___TId___init_tk(val_t p0, val_t p1, val_t p2, int* init_tabl
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1066 */
+  /* parser/lexer.nit:1075 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:1067 */
+  /* parser/lexer.nit:1076 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
-  init_table[itpos80] = 1;
+  init_table[itpos81] = 1;
   return;
 }
 val_t parser___lexer___TAttrid___parser_index(val_t p0){
@@ -4946,28 +4956,28 @@ val_t parser___lexer___TAttrid___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1072;
+  fra.me.line = 1081;
   fra.me.meth = LOCATE_parser___lexer___TAttrid___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1074 */
-  REGB0 = TAG_Int(81);
+  /* parser/lexer.nit:1083 */
+  REGB0 = TAG_Int(82);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TAttrid___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos81 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TAttrid].i;
+  int itpos82 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TAttrid].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos81]) return;
+  if (init_table[itpos82]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1077;
+  fra.me.line = 1086;
   fra.me.meth = LOCATE_parser___lexer___TAttrid___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4978,12 +4988,12 @@ void parser___lexer___TAttrid___init_tk(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1079 */
+  /* parser/lexer.nit:1088 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:1080 */
+  /* parser/lexer.nit:1089 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
-  init_table[itpos81] = 1;
+  init_table[itpos82] = 1;
   return;
 }
 val_t parser___lexer___TNumber___parser_index(val_t p0){
@@ -4992,28 +5002,28 @@ val_t parser___lexer___TNumber___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1085;
+  fra.me.line = 1094;
   fra.me.meth = LOCATE_parser___lexer___TNumber___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1087 */
-  REGB0 = TAG_Int(82);
+  /* parser/lexer.nit:1096 */
+  REGB0 = TAG_Int(83);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TNumber___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos82 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TNumber].i;
+  int itpos83 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TNumber].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos82]) return;
+  if (init_table[itpos83]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1090;
+  fra.me.line = 1099;
   fra.me.meth = LOCATE_parser___lexer___TNumber___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5024,12 +5034,12 @@ void parser___lexer___TNumber___init_tk(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1092 */
+  /* parser/lexer.nit:1101 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:1093 */
+  /* parser/lexer.nit:1102 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
-  init_table[itpos82] = 1;
+  init_table[itpos83] = 1;
   return;
 }
 val_t parser___lexer___TFloat___parser_index(val_t p0){
@@ -5038,28 +5048,28 @@ val_t parser___lexer___TFloat___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1098;
+  fra.me.line = 1107;
   fra.me.meth = LOCATE_parser___lexer___TFloat___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1100 */
-  REGB0 = TAG_Int(83);
+  /* parser/lexer.nit:1109 */
+  REGB0 = TAG_Int(84);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TFloat___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos83 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TFloat].i;
+  int itpos84 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TFloat].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos83]) return;
+  if (init_table[itpos84]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1103;
+  fra.me.line = 1112;
   fra.me.meth = LOCATE_parser___lexer___TFloat___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5070,12 +5080,12 @@ void parser___lexer___TFloat___init_tk(val_t p0, val_t p1, val_t p2, int* init_t
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1105 */
+  /* parser/lexer.nit:1114 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:1106 */
+  /* parser/lexer.nit:1115 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
-  init_table[itpos83] = 1;
+  init_table[itpos84] = 1;
   return;
 }
 val_t parser___lexer___TChar___parser_index(val_t p0){
@@ -5084,28 +5094,28 @@ val_t parser___lexer___TChar___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1111;
+  fra.me.line = 1120;
   fra.me.meth = LOCATE_parser___lexer___TChar___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1113 */
-  REGB0 = TAG_Int(84);
+  /* parser/lexer.nit:1122 */
+  REGB0 = TAG_Int(85);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TChar___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos84 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TChar].i;
+  int itpos85 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TChar].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos84]) return;
+  if (init_table[itpos85]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1116;
+  fra.me.line = 1125;
   fra.me.meth = LOCATE_parser___lexer___TChar___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5116,12 +5126,12 @@ void parser___lexer___TChar___init_tk(val_t p0, val_t p1, val_t p2, int* init_ta
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1118 */
+  /* parser/lexer.nit:1127 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:1119 */
+  /* parser/lexer.nit:1128 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
-  init_table[itpos84] = 1;
+  init_table[itpos85] = 1;
   return;
 }
 val_t parser___lexer___TString___parser_index(val_t p0){
@@ -5130,28 +5140,28 @@ val_t parser___lexer___TString___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1124;
+  fra.me.line = 1133;
   fra.me.meth = LOCATE_parser___lexer___TString___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1126 */
-  REGB0 = TAG_Int(85);
+  /* parser/lexer.nit:1135 */
+  REGB0 = TAG_Int(86);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TString___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos85 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TString].i;
+  int itpos86 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TString].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos85]) return;
+  if (init_table[itpos86]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1129;
+  fra.me.line = 1138;
   fra.me.meth = LOCATE_parser___lexer___TString___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5162,12 +5172,12 @@ void parser___lexer___TString___init_tk(val_t p0, val_t p1, val_t p2, int* init_
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1131 */
+  /* parser/lexer.nit:1140 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:1132 */
+  /* parser/lexer.nit:1141 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
-  init_table[itpos85] = 1;
+  init_table[itpos86] = 1;
   return;
 }
 val_t parser___lexer___TStartString___parser_index(val_t p0){
@@ -5176,28 +5186,28 @@ val_t parser___lexer___TStartString___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1137;
+  fra.me.line = 1146;
   fra.me.meth = LOCATE_parser___lexer___TStartString___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1139 */
-  REGB0 = TAG_Int(86);
+  /* parser/lexer.nit:1148 */
+  REGB0 = TAG_Int(87);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TStartString___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos86 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TStartString].i;
+  int itpos87 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TStartString].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos86]) return;
+  if (init_table[itpos87]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1142;
+  fra.me.line = 1151;
   fra.me.meth = LOCATE_parser___lexer___TStartString___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5208,12 +5218,12 @@ void parser___lexer___TStartString___init_tk(val_t p0, val_t p1, val_t p2, int* 
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1144 */
+  /* parser/lexer.nit:1153 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:1145 */
+  /* parser/lexer.nit:1154 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
-  init_table[itpos86] = 1;
+  init_table[itpos87] = 1;
   return;
 }
 val_t parser___lexer___TMidString___parser_index(val_t p0){
@@ -5222,28 +5232,28 @@ val_t parser___lexer___TMidString___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1150;
+  fra.me.line = 1159;
   fra.me.meth = LOCATE_parser___lexer___TMidString___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1152 */
-  REGB0 = TAG_Int(87);
+  /* parser/lexer.nit:1161 */
+  REGB0 = TAG_Int(88);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TMidString___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos87 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TMidString].i;
+  int itpos88 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TMidString].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos87]) return;
+  if (init_table[itpos88]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1155;
+  fra.me.line = 1164;
   fra.me.meth = LOCATE_parser___lexer___TMidString___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5254,12 +5264,12 @@ void parser___lexer___TMidString___init_tk(val_t p0, val_t p1, val_t p2, int* in
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1157 */
+  /* parser/lexer.nit:1166 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:1158 */
+  /* parser/lexer.nit:1167 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
-  init_table[itpos87] = 1;
+  init_table[itpos88] = 1;
   return;
 }
 val_t parser___lexer___TEndString___parser_index(val_t p0){
@@ -5268,28 +5278,28 @@ val_t parser___lexer___TEndString___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1163;
+  fra.me.line = 1172;
   fra.me.meth = LOCATE_parser___lexer___TEndString___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1165 */
-  REGB0 = TAG_Int(88);
+  /* parser/lexer.nit:1174 */
+  REGB0 = TAG_Int(89);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___TEndString___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos88 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TEndString].i;
+  int itpos89 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TEndString].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos88]) return;
+  if (init_table[itpos89]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1168;
+  fra.me.line = 1177;
   fra.me.meth = LOCATE_parser___lexer___TEndString___init_tk;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5300,12 +5310,104 @@ void parser___lexer___TEndString___init_tk(val_t p0, val_t p1, val_t p2, int* in
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1170 */
+  /* parser/lexer.nit:1179 */
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./parser//lexer.nit:1171 */
+  /* parser/lexer.nit:1180 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
-  init_table[itpos88] = 1;
+  init_table[itpos89] = 1;
+  return;
+}
+val_t parser___lexer___TBadChar___parser_index(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___lexer;
+  fra.me.line = 1185;
+  fra.me.meth = LOCATE_parser___lexer___TBadChar___parser_index;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/lexer.nit:1187 */
+  REGB0 = TAG_Int(90);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
+void parser___lexer___TBadChar___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
+  int itpos90 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TBadChar].i;
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t tmp;
+  if (init_table[itpos90]) return;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___lexer;
+  fra.me.line = 1190;
+  fra.me.meth = LOCATE_parser___lexer___TBadChar___init_tk;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  fra.me.REG[2] = p2;
+  /* parser/lexer.nit:1192 */
+  ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
+  /* parser/lexer.nit:1193 */
+  ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
+  stack_frame_head = fra.me.prev;
+  init_table[itpos90] = 1;
+  return;
+}
+val_t parser___lexer___TBadString___parser_index(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___lexer;
+  fra.me.line = 1198;
+  fra.me.meth = LOCATE_parser___lexer___TBadString___parser_index;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/lexer.nit:1200 */
+  REGB0 = TAG_Int(91);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
+void parser___lexer___TBadString___init_tk(val_t p0, val_t p1, val_t p2, int* init_table){
+  int itpos91 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___TBadString].i;
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t tmp;
+  if (init_table[itpos91]) return;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___lexer;
+  fra.me.line = 1203;
+  fra.me.meth = LOCATE_parser___lexer___TBadString___init_tk;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  fra.me.REG[2] = p2;
+  /* parser/lexer.nit:1205 */
+  ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[1];
+  /* parser/lexer.nit:1206 */
+  ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[2];
+  stack_frame_head = fra.me.prev;
+  init_table[itpos91] = 1;
   return;
 }
 val_t parser___lexer___EOF___parser_index(val_t p0){
@@ -5314,30 +5416,30 @@ val_t parser___lexer___EOF___parser_index(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1177;
+  fra.me.line = 1212;
   fra.me.meth = LOCATE_parser___lexer___EOF___parser_index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1179 */
-  REGB0 = TAG_Int(89);
+  /* parser/lexer.nit:1214 */
+  REGB0 = TAG_Int(92);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return REGB0;
 }
 void parser___lexer___EOF___init(val_t p0, val_t p1, int* init_table){
-  int itpos89 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___EOF].i;
+  int itpos92 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___EOF].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t REGB0;
   val_t tmp;
   static val_t once_value_1; /* Once value */
-  if (init_table[itpos89]) return;
+  if (init_table[itpos92]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1182;
+  fra.me.line = 1217;
   fra.me.meth = LOCATE_parser___lexer___EOF___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5347,7 +5449,7 @@ void parser___lexer___EOF___init(val_t p0, val_t p1, int* init_table){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:1184 */
+  /* parser/lexer.nit:1219 */
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
@@ -5357,10 +5459,10 @@ void parser___lexer___EOF___init(val_t p0, val_t p1, int* init_table){
   } else fra.me.REG[2] = once_value_1;
   fra.me.REG[2] = fra.me.REG[2];
   ATTR_parser___lexer___Token____text(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./parser//lexer.nit:1185 */
+  /* parser/lexer.nit:1220 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos89] = 1;
+  init_table[itpos92] = 1;
   return;
 }
 val_t parser___lexer___AError___message(val_t p0){
@@ -5369,31 +5471,31 @@ val_t parser___lexer___AError___message(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1190;
+  fra.me.line = 1225;
   fra.me.meth = LOCATE_parser___lexer___AError___message;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1190 */
+  /* parser/lexer.nit:1225 */
   REGB0 = TAG_Bool(ATTR_parser___lexer___AError____message(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_message", LOCATE_parser___lexer, 1190);
+    nit_abort("Uninitialized attribute %s", "_message", LOCATE_parser___lexer, 1225);
   }
   fra.me.REG[0] = ATTR_parser___lexer___AError____message(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
 void parser___lexer___AError___init_error(val_t p0, val_t p1, val_t p2, int* init_table){
-  int itpos90 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___AError].i;
+  int itpos93 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___AError].i;
   struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
   val_t tmp;
-  if (init_table[itpos90]) return;
+  if (init_table[itpos93]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1192;
+  fra.me.line = 1227;
   fra.me.meth = LOCATE_parser___lexer___AError___init_error;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5404,12 +5506,12 @@ void parser___lexer___AError___init_error(val_t p0, val_t p1, val_t p2, int* ini
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./parser//lexer.nit:1194 */
+  /* parser/lexer.nit:1229 */
   CALL_parser___lexer___EOF___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2], init_table);
-  /* ./parser//lexer.nit:1195 */
+  /* parser/lexer.nit:1230 */
   ATTR_parser___lexer___AError____message(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos90] = 1;
+  init_table[itpos93] = 1;
   return;
 }
 val_t parser___lexer___Lexer___file(val_t p0){
@@ -5418,18 +5520,18 @@ val_t parser___lexer___Lexer___file(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1210;
+  fra.me.line = 1245;
   fra.me.meth = LOCATE_parser___lexer___Lexer___file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1210 */
+  /* parser/lexer.nit:1245 */
   REGB0 = TAG_Bool(ATTR_parser___lexer___Lexer____file(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1210);
+    nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1245);
   }
   fra.me.REG[0] = ATTR_parser___lexer___Lexer____file(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5441,14 +5543,14 @@ val_t parser___lexer___Lexer___state_initial(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1225;
+  fra.me.line = 1260;
   fra.me.meth = LOCATE_parser___lexer___Lexer___state_initial;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1226 */
+  /* parser/lexer.nit:1261 */
   REGB0 = TAG_Int(0);
   goto label1;
   label1: while(0);
@@ -5456,13 +5558,13 @@ val_t parser___lexer___Lexer___state_initial(val_t p0){
   return REGB0;
 }
 void parser___lexer___Lexer___init(val_t p0, val_t p1, int* init_table){
-  int itpos91 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___lexer___Lexer].i;
+  int itpos94 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___lexer___Lexer].i;
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;
-  if (init_table[itpos91]) return;
+  if (init_table[itpos94]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1228;
+  fra.me.line = 1263;
   fra.me.meth = LOCATE_parser___lexer___Lexer___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -5471,10 +5573,10 @@ void parser___lexer___Lexer___init(val_t p0, val_t p1, int* init_table){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//lexer.nit:1231 */
+  /* parser/lexer.nit:1266 */
   ATTR_parser___lexer___Lexer____file(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos91] = 1;
+  init_table[itpos94] = 1;
   return;
 }
 val_t parser___lexer___Lexer___peek(val_t p0){
@@ -5484,7 +5586,7 @@ val_t parser___lexer___Lexer___peek(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1234;
+  fra.me.line = 1269;
   fra.me.meth = LOCATE_parser___lexer___Lexer___peek;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5493,9 +5595,9 @@ val_t parser___lexer___Lexer___peek(val_t p0){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1234 */
+  /* parser/lexer.nit:1269 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./parser//lexer.nit:1237 */
+  /* parser/lexer.nit:1272 */
   while(1) {
     fra.me.REG[2] = ATTR_parser___lexer___Lexer____token(fra.me.REG[1]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
@@ -5511,21 +5613,21 @@ val_t parser___lexer___Lexer___peek(val_t p0){
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./parser//lexer.nit:1238 */
+      /* parser/lexer.nit:1273 */
       fra.me.REG[2] = CALL_parser___lexer___Lexer___get_token(fra.me.REG[1])(fra.me.REG[1]);
       ATTR_parser___lexer___Lexer____token(fra.me.REG[1]) = fra.me.REG[2];
     } else {
-      /* ./parser//lexer.nit:1237 */
+      /* parser/lexer.nit:1272 */
       goto label1;
     }
   }
   label1: while(0);
-  /* ./parser//lexer.nit:1240 */
+  /* parser/lexer.nit:1275 */
   fra.me.REG[1] = ATTR_parser___lexer___Lexer____token(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_parser___lexer, 1240);
+    nit_abort("Cast failed", NULL, LOCATE_parser___lexer, 1275);
   }
   goto label2;
   label2: while(0);
@@ -5539,7 +5641,7 @@ val_t parser___lexer___Lexer___next(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1243;
+  fra.me.line = 1278;
   fra.me.meth = LOCATE_parser___lexer___Lexer___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5548,9 +5650,9 @@ val_t parser___lexer___Lexer___next(val_t p0){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1246 */
+  /* parser/lexer.nit:1281 */
   fra.me.REG[1] = ATTR_parser___lexer___Lexer____token(fra.me.REG[0]);
-  /* ./parser//lexer.nit:1247 */
+  /* parser/lexer.nit:1282 */
   while(1) {
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -5565,18 +5667,18 @@ val_t parser___lexer___Lexer___next(val_t p0){
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./parser//lexer.nit:1248 */
+      /* parser/lexer.nit:1283 */
       fra.me.REG[2] = CALL_parser___lexer___Lexer___get_token(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[1] = fra.me.REG[2];
     } else {
-      /* ./parser//lexer.nit:1247 */
+      /* parser/lexer.nit:1282 */
       goto label1;
     }
   }
   label1: while(0);
-  /* ./parser//lexer.nit:1250 */
+  /* parser/lexer.nit:1285 */
   ATTR_parser___lexer___Lexer____token(fra.me.REG[0]) = NIT_NULL;
-  /* ./parser//lexer.nit:1251 */
+  /* parser/lexer.nit:1286 */
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
@@ -5611,7 +5713,7 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
           static val_t once_value_5; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___lexer;
-  fra.me.line = 1254;
+  fra.me.line = 1289;
   fra.me.meth = LOCATE_parser___lexer___Lexer___get_token;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -5624,1968 +5726,2020 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//lexer.nit:1257 */
+  /* parser/lexer.nit:1292 */
   REGB0 = TAG_Int(0);
-  /* ./parser//lexer.nit:1259 */
+  /* parser/lexer.nit:1294 */
   REGB1 = TAG_Bool(ATTR_parser___lexer___Lexer____stream_pos(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_stream_pos", LOCATE_parser___lexer, 1259);
+    nit_abort("Uninitialized attribute %s", "_stream_pos", LOCATE_parser___lexer, 1294);
   }
   REGB1 = ATTR_parser___lexer___Lexer____stream_pos(fra.me.REG[0]);
-  /* ./parser//lexer.nit:1260 */
+  /* parser/lexer.nit:1295 */
   REGB2 = REGB1;
-  /* ./parser//lexer.nit:1261 */
+  /* parser/lexer.nit:1296 */
   REGB3 = TAG_Bool(ATTR_parser___lexer___Lexer____pos(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB3)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_pos", LOCATE_parser___lexer, 1261);
+    nit_abort("Uninitialized attribute %s", "_pos", LOCATE_parser___lexer, 1296);
   }
   REGB3 = ATTR_parser___lexer___Lexer____pos(fra.me.REG[0]);
-  /* ./parser//lexer.nit:1262 */
+  /* parser/lexer.nit:1297 */
   REGB4 = TAG_Bool(ATTR_parser___lexer___Lexer____line(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB4)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_line", LOCATE_parser___lexer, 1262);
+    nit_abort("Uninitialized attribute %s", "_line", LOCATE_parser___lexer, 1297);
   }
   REGB4 = ATTR_parser___lexer___Lexer____line(fra.me.REG[0]);
-  /* ./parser//lexer.nit:1263 */
+  /* parser/lexer.nit:1298 */
   REGB5 = TAG_Bool(ATTR_parser___lexer___Lexer____file(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB5)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1263);
+    nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1298);
   }
   fra.me.REG[1] = ATTR_parser___lexer___Lexer____file(fra.me.REG[0]);
   fra.me.REG[1] = CALL_location___SourceFile___string(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./../lib/standard//collection//array.nit:24 */
+  /* ../lib/standard/collection/array.nit:24 */
   REGB5 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB5)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB5 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ./parser//lexer.nit:1266 */
+  /* parser/lexer.nit:1301 */
   REGB6 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:236 */
   REGB6 = TAG_Int(-UNTAG_Int(REGB6));
-  /* ./parser//lexer.nit:1267 */
+  /* parser/lexer.nit:1302 */
   REGB7 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:236 */
   REGB7 = TAG_Int(-UNTAG_Int(REGB7));
-  /* ./parser//lexer.nit:1268 */
+  /* parser/lexer.nit:1303 */
   REGB8 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:236 */
   REGB8 = TAG_Int(-UNTAG_Int(REGB8));
-  /* ./parser//lexer.nit:1269 */
+  /* parser/lexer.nit:1304 */
   REGB9 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:236 */
   REGB9 = TAG_Int(-UNTAG_Int(REGB9));
-  /* ./parser//lexer.nit:1270 */
+  /* parser/lexer.nit:1305 */
   REGB10 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:236 */
   REGB10 = TAG_Int(-UNTAG_Int(REGB10));
-  /* ./parser//lexer.nit:1272 */
+  /* parser/lexer.nit:1307 */
   while(1) {
     REGB11 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB11)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:233 */
+    /* ../lib/standard/kernel.nit:233 */
     REGB11 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB5));
-    /* ./parser//lexer.nit:1273 */
+    /* parser/lexer.nit:1308 */
     if (UNTAG_Bool(REGB11)) {
-      /* ./parser//lexer.nit:1274 */
+      /* parser/lexer.nit:1309 */
       REGB11 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:236 */
       REGB11 = TAG_Int(-UNTAG_Int(REGB11));
-      /* ./parser//lexer.nit:1274 */
+      /* parser/lexer.nit:1309 */
       REGB0 = REGB11;
     } else {
-      /* ./parser//lexer.nit:1276 */
+      /* parser/lexer.nit:1311 */
       REGB11 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB1);
-      /* ./../lib/standard//kernel.nit:413 */
+      /* ../lib/standard/kernel.nit:413 */
       REGB11 = TAG_Int((unsigned char)UNTAG_Char(REGB11));
-      /* ./parser//lexer.nit:1277 */
+      /* parser/lexer.nit:1312 */
       REGB12 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:235 */
       REGB12 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB12));
-      /* ./parser//lexer.nit:1277 */
+      /* parser/lexer.nit:1312 */
       REGB1 = REGB12;
-      /* ./parser//lexer.nit:1279 */
+      /* parser/lexer.nit:1314 */
       REGB12 = TAG_Bool(ATTR_parser___lexer___Lexer____cr(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB12)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_cr", LOCATE_parser___lexer, 1279);
+        nit_abort("Uninitialized attribute %s", "_cr", LOCATE_parser___lexer, 1314);
       }
       REGB12 = ATTR_parser___lexer___Lexer____cr(fra.me.REG[0]);
-      /* ./parser//lexer.nit:1280 */
+      /* parser/lexer.nit:1315 */
       REGB13 = TAG_Bool(ATTR_parser___lexer___Lexer____line(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB13)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_line", LOCATE_parser___lexer, 1280);
+        nit_abort("Uninitialized attribute %s", "_line", LOCATE_parser___lexer, 1315);
       }
       REGB13 = ATTR_parser___lexer___Lexer____line(fra.me.REG[0]);
-      /* ./parser//lexer.nit:1281 */
+      /* parser/lexer.nit:1316 */
       REGB14 = TAG_Bool(ATTR_parser___lexer___Lexer____pos(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB14)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_pos", LOCATE_parser___lexer, 1281);
+        nit_abort("Uninitialized attribute %s", "_pos", LOCATE_parser___lexer, 1316);
       }
       REGB14 = ATTR_parser___lexer___Lexer____pos(fra.me.REG[0]);
-      /* ./parser//lexer.nit:1282 */
+      /* parser/lexer.nit:1317 */
       REGB15 = TAG_Int(10);
       REGB16 = TAG_Bool(IS_EQUAL_OO(REGB11,REGB15));
       if (UNTAG_Bool(REGB16)) {
       } else {
-        /* ./../lib/standard//kernel.nit:227 */
+        /* ../lib/standard/kernel.nit:227 */
         REGB15 = TAG_Bool((REGB11)==(REGB15));
-        /* ./parser//lexer.nit:1282 */
+        /* parser/lexer.nit:1317 */
         REGB16 = REGB15;
       }
       if (UNTAG_Bool(REGB16)) {
-        /* ./parser//lexer.nit:1283 */
+        /* parser/lexer.nit:1318 */
         if (UNTAG_Bool(REGB12)) {
-          /* ./parser//lexer.nit:1284 */
+          /* parser/lexer.nit:1319 */
           REGB16 = TAG_Bool(false);
           REGB12 = REGB16;
-          /* ./parser//lexer.nit:1285 */
+          /* parser/lexer.nit:1320 */
           REGB16 = TAG_Bool(ATTR_parser___lexer___Lexer____file(fra.me.REG[0])!=NIT_NULL);
           if (UNTAG_Bool(REGB16)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1285);
+            nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1320);
           }
           fra.me.REG[2] = ATTR_parser___lexer___Lexer____file(fra.me.REG[0]);
           fra.me.REG[2] = CALL_location___SourceFile___line_starts(fra.me.REG[2])(fra.me.REG[2]);
           CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB13, REGB1);
         } else {
-          /* ./parser//lexer.nit:1287 */
+          /* parser/lexer.nit:1322 */
           REGB16 = TAG_Int(1);
-          /* ./../lib/standard//kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:235 */
           REGB16 = TAG_Int(UNTAG_Int(REGB13)+UNTAG_Int(REGB16));
-          /* ./parser//lexer.nit:1287 */
+          /* parser/lexer.nit:1322 */
           REGB13 = REGB16;
-          /* ./parser//lexer.nit:1288 */
+          /* parser/lexer.nit:1323 */
           REGB16 = TAG_Int(0);
           REGB14 = REGB16;
-          /* ./parser//lexer.nit:1289 */
+          /* parser/lexer.nit:1324 */
           REGB16 = TAG_Bool(ATTR_parser___lexer___Lexer____file(fra.me.REG[0])!=NIT_NULL);
           if (UNTAG_Bool(REGB16)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1289);
+            nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1324);
           }
           fra.me.REG[2] = ATTR_parser___lexer___Lexer____file(fra.me.REG[0]);
           fra.me.REG[2] = CALL_location___SourceFile___line_starts(fra.me.REG[2])(fra.me.REG[2]);
           CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB13, REGB1);
         }
       } else {
-        /* ./parser//lexer.nit:1291 */
+        /* parser/lexer.nit:1326 */
         REGB16 = TAG_Int(13);
         REGB15 = TAG_Bool(IS_EQUAL_OO(REGB11,REGB16));
         if (UNTAG_Bool(REGB15)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB16 = TAG_Bool((REGB11)==(REGB16));
-          /* ./parser//lexer.nit:1291 */
+          /* parser/lexer.nit:1326 */
           REGB15 = REGB16;
         }
         if (UNTAG_Bool(REGB15)) {
-          /* ./parser//lexer.nit:1292 */
+          /* parser/lexer.nit:1327 */
           REGB15 = TAG_Int(1);
-          /* ./../lib/standard//kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:235 */
           REGB15 = TAG_Int(UNTAG_Int(REGB13)+UNTAG_Int(REGB15));
-          /* ./parser//lexer.nit:1292 */
+          /* parser/lexer.nit:1327 */
           REGB13 = REGB15;
-          /* ./parser//lexer.nit:1293 */
+          /* parser/lexer.nit:1328 */
           REGB15 = TAG_Int(0);
           REGB14 = REGB15;
-          /* ./parser//lexer.nit:1294 */
+          /* parser/lexer.nit:1329 */
           REGB15 = TAG_Bool(true);
           REGB12 = REGB15;
-          /* ./parser//lexer.nit:1295 */
+          /* parser/lexer.nit:1330 */
           REGB15 = TAG_Bool(ATTR_parser___lexer___Lexer____file(fra.me.REG[0])!=NIT_NULL);
           if (UNTAG_Bool(REGB15)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1295);
+            nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1330);
           }
           fra.me.REG[2] = ATTR_parser___lexer___Lexer____file(fra.me.REG[0]);
           fra.me.REG[2] = CALL_location___SourceFile___line_starts(fra.me.REG[2])(fra.me.REG[2]);
           CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB13, REGB1);
         } else {
-          /* ./parser//lexer.nit:1297 */
+          /* parser/lexer.nit:1332 */
           REGB15 = TAG_Int(1);
-          /* ./../lib/standard//kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:235 */
           REGB15 = TAG_Int(UNTAG_Int(REGB14)+UNTAG_Int(REGB15));
-          /* ./parser//lexer.nit:1297 */
+          /* parser/lexer.nit:1332 */
           REGB14 = REGB15;
-          /* ./parser//lexer.nit:1298 */
+          /* parser/lexer.nit:1333 */
           REGB15 = TAG_Bool(false);
           REGB12 = REGB15;
         }
       }
-      /* ./parser//lexer.nit:1301 */
+      /* parser/lexer.nit:1336 */
       while(1) {
-        /* ./parser//lexer.nit:1302 */
+        /* parser/lexer.nit:1337 */
         REGB15 = REGB0;
-        /* ./parser//lexer.nit:1303 */
+        /* parser/lexer.nit:1338 */
         REGB16 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:236 */
         REGB16 = TAG_Int(-UNTAG_Int(REGB16));
         REGB17 = TAG_Bool(VAL_ISA(REGB16, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB17)) {
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ./../lib/standard//kernel.nit:232 */
+        /* ../lib/standard/kernel.nit:232 */
         REGB16 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB16));
-        /* ./parser//lexer.nit:1303 */
+        /* parser/lexer.nit:1338 */
         if (UNTAG_Bool(REGB16)) {
-          /* ./parser//lexer.nit:1304 */
+          /* parser/lexer.nit:1339 */
           REGB16 = TAG_Int(2);
-          /* ./../lib/standard//kernel.nit:236 */
+          /* ../lib/standard/kernel.nit:236 */
           REGB16 = TAG_Int(-UNTAG_Int(REGB16));
-          /* ./../lib/standard//kernel.nit:237 */
+          /* ../lib/standard/kernel.nit:237 */
           REGB16 = TAG_Int(UNTAG_Int(REGB16)-UNTAG_Int(REGB0));
-          /* ./parser//lexer.nit:1304 */
+          /* parser/lexer.nit:1339 */
           REGB15 = REGB16;
         }
-        /* ./parser//lexer.nit:1307 */
+        /* parser/lexer.nit:1342 */
         REGB16 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:236 */
         REGB16 = TAG_Int(-UNTAG_Int(REGB16));
-        /* ./parser//lexer.nit:1307 */
+        /* parser/lexer.nit:1342 */
         REGB0 = REGB16;
-        /* ./parser//lexer.nit:1309 */
+        /* parser/lexer.nit:1344 */
         REGB16 = TAG_Int(0);
-        /* ./parser//lexer.nit:1310 */
+        /* parser/lexer.nit:1345 */
         REGB17 = TAG_Int(0);
         REGB17 = CALL_parser___tables___TablesCapable___lexer_goto(fra.me.REG[0])(fra.me.REG[0], REGB15, REGB17);
         REGB18 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:237 */
+        /* ../lib/standard/kernel.nit:237 */
         REGB18 = TAG_Int(UNTAG_Int(REGB17)-UNTAG_Int(REGB18));
-        /* ./parser//lexer.nit:1312 */
+        /* parser/lexer.nit:1347 */
         REGB17 = TAG_Int(0);
         REGB19 = TAG_Bool(VAL_ISA(REGB17, VTCOLOR_standard___kernel___Comparable___OTHER(REGB18), VTID_standard___kernel___Comparable___OTHER(REGB18))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB19)) {
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ./../lib/standard//kernel.nit:233 */
+        /* ../lib/standard/kernel.nit:233 */
         REGB17 = TAG_Bool(UNTAG_Int(REGB18)>=UNTAG_Int(REGB17));
-        /* ./parser//lexer.nit:1312 */
+        /* parser/lexer.nit:1347 */
         if (UNTAG_Bool(REGB17)) {
-          /* ./parser//lexer.nit:1313 */
+          /* parser/lexer.nit:1348 */
           while(1) {
             REGB17 = TAG_Bool(VAL_ISA(REGB18, VTCOLOR_standard___kernel___Comparable___OTHER(REGB16), VTID_standard___kernel___Comparable___OTHER(REGB16))) /*cast OTHER*/;
             if (UNTAG_Bool(REGB17)) {
             } else {
               nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
             }
-            /* ./../lib/standard//kernel.nit:231 */
+            /* ../lib/standard/kernel.nit:231 */
             REGB17 = TAG_Bool(UNTAG_Int(REGB16)<=UNTAG_Int(REGB18));
-            /* ./parser//lexer.nit:1313 */
+            /* parser/lexer.nit:1348 */
             if (UNTAG_Bool(REGB17)) {
-              /* ./../lib/standard//kernel.nit:235 */
+              /* ../lib/standard/kernel.nit:235 */
               REGB17 = TAG_Int(UNTAG_Int(REGB16)+UNTAG_Int(REGB18));
-              /* ./parser//lexer.nit:1314 */
+              /* parser/lexer.nit:1349 */
               REGB19 = TAG_Int(2);
-              /* ./../lib/standard//kernel.nit:239 */
+              /* ../lib/standard/kernel.nit:239 */
               REGB19 = TAG_Int(UNTAG_Int(REGB17)/UNTAG_Int(REGB19));
-              /* ./parser//lexer.nit:1315 */
+              /* parser/lexer.nit:1350 */
               REGB17 = TAG_Int(3);
-              /* ./../lib/standard//kernel.nit:238 */
+              /* ../lib/standard/kernel.nit:238 */
               REGB17 = TAG_Int(UNTAG_Int(REGB19)*UNTAG_Int(REGB17));
-              /* ./parser//lexer.nit:1315 */
+              /* parser/lexer.nit:1350 */
               REGB20 = TAG_Int(1);
-              /* ./../lib/standard//kernel.nit:235 */
+              /* ../lib/standard/kernel.nit:235 */
               REGB20 = TAG_Int(UNTAG_Int(REGB17)+UNTAG_Int(REGB20));
-              /* ./parser//lexer.nit:1317 */
+              /* parser/lexer.nit:1352 */
               REGB17 = CALL_parser___tables___TablesCapable___lexer_goto(fra.me.REG[0])(fra.me.REG[0], REGB15, REGB20);
               REGB21 = TAG_Bool(VAL_ISA(REGB17, VTCOLOR_standard___kernel___Comparable___OTHER(REGB11), VTID_standard___kernel___Comparable___OTHER(REGB11))) /*cast OTHER*/;
               if (UNTAG_Bool(REGB21)) {
               } else {
 		nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
               }
-              /* ./../lib/standard//kernel.nit:232 */
+              /* ../lib/standard/kernel.nit:232 */
               REGB17 = TAG_Bool(UNTAG_Int(REGB11)<UNTAG_Int(REGB17));
-              /* ./parser//lexer.nit:1317 */
+              /* parser/lexer.nit:1352 */
               if (UNTAG_Bool(REGB17)) {
-		/* ./parser//lexer.nit:1318 */
+		/* parser/lexer.nit:1353 */
 		REGB17 = TAG_Int(1);
-		/* ./../lib/standard//kernel.nit:237 */
+		/* ../lib/standard/kernel.nit:237 */
 		REGB17 = TAG_Int(UNTAG_Int(REGB19)-UNTAG_Int(REGB17));
-		/* ./parser//lexer.nit:1318 */
+		/* parser/lexer.nit:1353 */
 		REGB18 = REGB17;
               } else {
-		/* ./parser//lexer.nit:1319 */
+		/* parser/lexer.nit:1354 */
 		REGB17 = TAG_Int(1);
-		/* ./../lib/standard//kernel.nit:235 */
+		/* ../lib/standard/kernel.nit:235 */
 		REGB17 = TAG_Int(UNTAG_Int(REGB20)+UNTAG_Int(REGB17));
-		/* ./parser//lexer.nit:1319 */
+		/* parser/lexer.nit:1354 */
 		REGB17 = CALL_parser___tables___TablesCapable___lexer_goto(fra.me.REG[0])(fra.me.REG[0], REGB15, REGB17);
 		REGB21 = TAG_Bool(VAL_ISA(REGB17, VTCOLOR_standard___kernel___Comparable___OTHER(REGB11), VTID_standard___kernel___Comparable___OTHER(REGB11))) /*cast OTHER*/;
 		if (UNTAG_Bool(REGB21)) {
 		} else {
 		nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
 		}
-		/* ./../lib/standard//kernel.nit:234 */
+		/* ../lib/standard/kernel.nit:234 */
 		REGB17 = TAG_Bool(UNTAG_Int(REGB11)>UNTAG_Int(REGB17));
-		/* ./parser//lexer.nit:1319 */
+		/* parser/lexer.nit:1354 */
 		if (UNTAG_Bool(REGB17)) {
-		/* ./parser//lexer.nit:1320 */
+		/* parser/lexer.nit:1355 */
 		REGB17 = TAG_Int(1);
-		/* ./../lib/standard//kernel.nit:235 */
+		/* ../lib/standard/kernel.nit:235 */
 		REGB17 = TAG_Int(UNTAG_Int(REGB19)+UNTAG_Int(REGB17));
-		/* ./parser//lexer.nit:1320 */
+		/* parser/lexer.nit:1355 */
 		REGB16 = REGB17;
 		} else {
-		/* ./parser//lexer.nit:1322 */
+		/* parser/lexer.nit:1357 */
 		REGB17 = TAG_Int(2);
-		/* ./../lib/standard//kernel.nit:235 */
+		/* ../lib/standard/kernel.nit:235 */
 		REGB17 = TAG_Int(UNTAG_Int(REGB20)+UNTAG_Int(REGB17));
-		/* ./parser//lexer.nit:1322 */
+		/* parser/lexer.nit:1357 */
 		REGB17 = CALL_parser___tables___TablesCapable___lexer_goto(fra.me.REG[0])(fra.me.REG[0], REGB15, REGB17);
 		REGB0 = REGB17;
-		/* ./parser//lexer.nit:1323 */
+		/* parser/lexer.nit:1358 */
 		goto label1;
 		}
               }
             } else {
-              /* ./parser//lexer.nit:1313 */
+              /* parser/lexer.nit:1348 */
               goto label1;
             }
           }
           label1: while(0);
         }
-        /* ./parser//lexer.nit:1327 */
+        /* parser/lexer.nit:1362 */
         REGB15 = TAG_Int(2);
-        /* ./../lib/standard//kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:236 */
         REGB15 = TAG_Int(-UNTAG_Int(REGB15));
         REGB16 = TAG_Bool(VAL_ISA(REGB15, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB16)) {
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ./../lib/standard//kernel.nit:234 */
+        /* ../lib/standard/kernel.nit:234 */
         REGB15 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB15));
-        /* ./parser//lexer.nit:1327 */
+        /* parser/lexer.nit:1362 */
         if (UNTAG_Bool(REGB15)) {
           goto label2;
         }
       }
       label2: while(0);
-      /* ./parser//lexer.nit:1330 */
+      /* parser/lexer.nit:1365 */
       ATTR_parser___lexer___Lexer____cr(fra.me.REG[0]) = REGB12;
-      /* ./parser//lexer.nit:1331 */
+      /* parser/lexer.nit:1366 */
       ATTR_parser___lexer___Lexer____line(fra.me.REG[0]) = REGB13;
-      /* ./parser//lexer.nit:1332 */
+      /* parser/lexer.nit:1367 */
       ATTR_parser___lexer___Lexer____pos(fra.me.REG[0]) = REGB14;
     }
-    /* ./parser//lexer.nit:1335 */
+    /* parser/lexer.nit:1370 */
     REGB14 = TAG_Int(0);
     REGB13 = TAG_Bool(VAL_ISA(REGB14, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB13)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:233 */
+    /* ../lib/standard/kernel.nit:233 */
     REGB14 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB14));
-    /* ./parser//lexer.nit:1335 */
+    /* parser/lexer.nit:1370 */
     if (UNTAG_Bool(REGB14)) {
-      /* ./parser//lexer.nit:1336 */
+      /* parser/lexer.nit:1371 */
       REGB14 = CALL_parser___tables___TablesCapable___lexer_accept(fra.me.REG[0])(fra.me.REG[0], REGB0);
-      /* ./parser//lexer.nit:1337 */
+      /* parser/lexer.nit:1372 */
       REGB13 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:236 */
       REGB13 = TAG_Int(-UNTAG_Int(REGB13));
-      /* ./parser//lexer.nit:1337 */
+      /* parser/lexer.nit:1372 */
       REGB12 = TAG_Bool(IS_EQUAL_OO(REGB14,REGB13));
       if (UNTAG_Bool(REGB12)) {
       } else {
-        /* ./../lib/standard//kernel.nit:227 */
+        /* ../lib/standard/kernel.nit:227 */
         REGB13 = TAG_Bool((REGB14)==(REGB13));
-        /* ./parser//lexer.nit:1337 */
+        /* parser/lexer.nit:1372 */
         REGB12 = REGB13;
       }
       REGB12 = TAG_Bool(!UNTAG_Bool(REGB12));
       if (UNTAG_Bool(REGB12)) {
-        /* ./parser//lexer.nit:1338 */
+        /* parser/lexer.nit:1373 */
         REGB6 = REGB0;
-        /* ./parser//lexer.nit:1339 */
+        /* parser/lexer.nit:1374 */
         REGB7 = REGB14;
-        /* ./../lib/standard//kernel.nit:237 */
+        /* ../lib/standard/kernel.nit:237 */
         REGB14 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-        /* ./parser//lexer.nit:1340 */
+        /* parser/lexer.nit:1375 */
         REGB8 = REGB14;
-        /* ./parser//lexer.nit:1341 */
+        /* parser/lexer.nit:1376 */
         REGB14 = TAG_Bool(ATTR_parser___lexer___Lexer____pos(fra.me.REG[0])!=NIT_NULL);
         if (UNTAG_Bool(REGB14)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_pos", LOCATE_parser___lexer, 1341);
+          nit_abort("Uninitialized attribute %s", "_pos", LOCATE_parser___lexer, 1376);
         }
         REGB14 = ATTR_parser___lexer___Lexer____pos(fra.me.REG[0]);
         REGB9 = REGB14;
-        /* ./parser//lexer.nit:1342 */
+        /* parser/lexer.nit:1377 */
         REGB14 = TAG_Bool(ATTR_parser___lexer___Lexer____line(fra.me.REG[0])!=NIT_NULL);
         if (UNTAG_Bool(REGB14)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_line", LOCATE_parser___lexer, 1342);
+          nit_abort("Uninitialized attribute %s", "_line", LOCATE_parser___lexer, 1377);
         }
         REGB14 = ATTR_parser___lexer___Lexer____line(fra.me.REG[0]);
         REGB10 = REGB14;
       }
     } else {
-      /* ./parser//lexer.nit:1345 */
+      /* parser/lexer.nit:1380 */
       REGB14 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:236 */
       REGB14 = TAG_Int(-UNTAG_Int(REGB14));
-      /* ./parser//lexer.nit:1345 */
+      /* parser/lexer.nit:1380 */
       REGB12 = TAG_Bool(IS_EQUAL_OO(REGB6,REGB14));
       if (UNTAG_Bool(REGB12)) {
       } else {
-        /* ./../lib/standard//kernel.nit:227 */
+        /* ../lib/standard/kernel.nit:227 */
         REGB14 = TAG_Bool((REGB6)==(REGB14));
-        /* ./parser//lexer.nit:1345 */
+        /* parser/lexer.nit:1380 */
         REGB12 = REGB14;
       }
       REGB12 = TAG_Bool(!UNTAG_Bool(REGB12));
       if (UNTAG_Bool(REGB12)) {
-        /* ./parser//lexer.nit:1346 */
+        /* parser/lexer.nit:1381 */
         REGB12 = TAG_Bool(ATTR_parser___lexer___Lexer____file(fra.me.REG[0])!=NIT_NULL);
         if (UNTAG_Bool(REGB12)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1346);
+          nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1381);
         }
         fra.me.REG[2] = ATTR_parser___lexer___Lexer____file(fra.me.REG[0]);
         REGB12 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:235 */
         REGB12 = TAG_Int(UNTAG_Int(REGB4)+UNTAG_Int(REGB12));
-        /* ./parser//lexer.nit:1346 */
+        /* parser/lexer.nit:1381 */
         REGB14 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:235 */
         REGB14 = TAG_Int(UNTAG_Int(REGB10)+UNTAG_Int(REGB14));
-        /* ./parser//lexer.nit:1346 */
+        /* parser/lexer.nit:1381 */
         REGB13 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:235 */
         REGB13 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB13));
-        /* ./parser//lexer.nit:1346 */
+        /* parser/lexer.nit:1381 */
         fra.me.REG[2] = NEW_Location_location___Location___init(fra.me.REG[2], REGB12, REGB14, REGB13, REGB9);
-        /* ./parser//lexer.nit:1347 */
+        /* parser/lexer.nit:1382 */
         ATTR_parser___lexer___Lexer____pos(fra.me.REG[0]) = REGB9;
-        /* ./parser//lexer.nit:1348 */
+        /* parser/lexer.nit:1383 */
         ATTR_parser___lexer___Lexer____line(fra.me.REG[0]) = REGB10;
-        /* ./../lib/standard//kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:235 */
         REGB13 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB8));
-        /* ./parser//lexer.nit:1349 */
+        /* parser/lexer.nit:1384 */
         ATTR_parser___lexer___Lexer____stream_pos(fra.me.REG[0]) = REGB13;
-        /* ./parser//lexer.nit:1350 */
+        /* parser/lexer.nit:1385 */
         REGB13 = TAG_Int(0);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1350 */
+          /* parser/lexer.nit:1385 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1351 */
+          /* parser/lexer.nit:1386 */
           fra.me.REG[3] = NIT_NULL;
           goto label3;
         }
-        /* ./parser//lexer.nit:1353 */
+        /* parser/lexer.nit:1388 */
         REGB14 = TAG_Int(1);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1353 */
+          /* parser/lexer.nit:1388 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1354 */
+          /* parser/lexer.nit:1389 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1355 */
+          /* parser/lexer.nit:1390 */
           fra.me.REG[4] = NEW_TEol_parser___lexer___TEol___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1357 */
+        /* parser/lexer.nit:1392 */
         REGB13 = TAG_Int(2);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1357 */
+          /* parser/lexer.nit:1392 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1358 */
+          /* parser/lexer.nit:1393 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1359 */
+          /* parser/lexer.nit:1394 */
           fra.me.REG[4] = NEW_TComment_parser___lexer___TComment___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1361 */
+        /* parser/lexer.nit:1396 */
         REGB14 = TAG_Int(3);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1361 */
+          /* parser/lexer.nit:1396 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1362 */
+          /* parser/lexer.nit:1397 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1363 */
+          /* parser/lexer.nit:1398 */
           fra.me.REG[4] = NEW_TKwmodule_parser___lexer___TKwmodule___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1365 */
+        /* parser/lexer.nit:1400 */
         REGB13 = TAG_Int(4);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1365 */
+          /* parser/lexer.nit:1400 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1366 */
+          /* parser/lexer.nit:1401 */
           fra.me.REG[4] = NEW_TKwimport_parser___lexer___TKwimport___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1368 */
+        /* parser/lexer.nit:1403 */
         REGB14 = TAG_Int(5);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1368 */
+          /* parser/lexer.nit:1403 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1369 */
+          /* parser/lexer.nit:1404 */
           fra.me.REG[4] = NEW_TKwclass_parser___lexer___TKwclass___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1371 */
+        /* parser/lexer.nit:1406 */
         REGB13 = TAG_Int(6);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1371 */
+          /* parser/lexer.nit:1406 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1372 */
+          /* parser/lexer.nit:1407 */
           fra.me.REG[4] = NEW_TKwabstract_parser___lexer___TKwabstract___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1374 */
+        /* parser/lexer.nit:1409 */
         REGB14 = TAG_Int(7);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1374 */
+          /* parser/lexer.nit:1409 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1375 */
+          /* parser/lexer.nit:1410 */
           fra.me.REG[4] = NEW_TKwinterface_parser___lexer___TKwinterface___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1377 */
+        /* parser/lexer.nit:1412 */
         REGB13 = TAG_Int(8);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1377 */
+          /* parser/lexer.nit:1412 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1378 */
+          /* parser/lexer.nit:1413 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1379 */
+          /* parser/lexer.nit:1414 */
           fra.me.REG[4] = NEW_TKwenum_parser___lexer___TKwenum___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1381 */
+        /* parser/lexer.nit:1416 */
         REGB14 = TAG_Int(9);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1381 */
+          /* parser/lexer.nit:1416 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1382 */
+          /* parser/lexer.nit:1417 */
           fra.me.REG[4] = NEW_TKwspecial_parser___lexer___TKwspecial___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1384 */
+        /* parser/lexer.nit:1419 */
         REGB13 = TAG_Int(10);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1384 */
+          /* parser/lexer.nit:1419 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1385 */
+          /* parser/lexer.nit:1420 */
           fra.me.REG[4] = NEW_TKwend_parser___lexer___TKwend___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1387 */
+        /* parser/lexer.nit:1422 */
         REGB14 = TAG_Int(11);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1387 */
+          /* parser/lexer.nit:1422 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1388 */
+          /* parser/lexer.nit:1423 */
           fra.me.REG[4] = NEW_TKwmeth_parser___lexer___TKwmeth___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1390 */
+        /* parser/lexer.nit:1425 */
         REGB13 = TAG_Int(12);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1390 */
+          /* parser/lexer.nit:1425 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1391 */
+          /* parser/lexer.nit:1426 */
           fra.me.REG[4] = NEW_TKwtype_parser___lexer___TKwtype___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1393 */
+        /* parser/lexer.nit:1428 */
         REGB14 = TAG_Int(13);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1393 */
+          /* parser/lexer.nit:1428 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1394 */
+          /* parser/lexer.nit:1429 */
           fra.me.REG[4] = NEW_TKwinit_parser___lexer___TKwinit___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1396 */
+        /* parser/lexer.nit:1431 */
         REGB13 = TAG_Int(14);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1396 */
+          /* parser/lexer.nit:1431 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1397 */
+          /* parser/lexer.nit:1432 */
           fra.me.REG[4] = NEW_TKwredef_parser___lexer___TKwredef___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1399 */
+        /* parser/lexer.nit:1434 */
         REGB14 = TAG_Int(15);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1399 */
+          /* parser/lexer.nit:1434 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1400 */
+          /* parser/lexer.nit:1435 */
           fra.me.REG[4] = NEW_TKwis_parser___lexer___TKwis___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1402 */
+        /* parser/lexer.nit:1437 */
         REGB13 = TAG_Int(16);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1402 */
+          /* parser/lexer.nit:1437 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1403 */
+          /* parser/lexer.nit:1438 */
           fra.me.REG[4] = NEW_TKwdo_parser___lexer___TKwdo___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1405 */
+        /* parser/lexer.nit:1440 */
         REGB14 = TAG_Int(17);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1405 */
+          /* parser/lexer.nit:1440 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1406 */
+          /* parser/lexer.nit:1441 */
           fra.me.REG[4] = NEW_TKwreadable_parser___lexer___TKwreadable___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1408 */
+        /* parser/lexer.nit:1443 */
         REGB13 = TAG_Int(18);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1408 */
+          /* parser/lexer.nit:1443 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1409 */
+          /* parser/lexer.nit:1444 */
           fra.me.REG[4] = NEW_TKwwritable_parser___lexer___TKwwritable___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1411 */
+        /* parser/lexer.nit:1446 */
         REGB14 = TAG_Int(19);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1411 */
+          /* parser/lexer.nit:1446 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1412 */
+          /* parser/lexer.nit:1447 */
           fra.me.REG[4] = NEW_TKwvar_parser___lexer___TKwvar___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1414 */
+        /* parser/lexer.nit:1449 */
         REGB13 = TAG_Int(20);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1414 */
+          /* parser/lexer.nit:1449 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1415 */
+          /* parser/lexer.nit:1450 */
           fra.me.REG[4] = NEW_TKwintern_parser___lexer___TKwintern___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1417 */
+        /* parser/lexer.nit:1452 */
         REGB14 = TAG_Int(21);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1417 */
+          /* parser/lexer.nit:1452 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1418 */
+          /* parser/lexer.nit:1453 */
           fra.me.REG[4] = NEW_TKwextern_parser___lexer___TKwextern___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1420 */
+        /* parser/lexer.nit:1455 */
         REGB13 = TAG_Int(22);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1420 */
+          /* parser/lexer.nit:1455 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1421 */
+          /* parser/lexer.nit:1456 */
           fra.me.REG[4] = NEW_TKwprotected_parser___lexer___TKwprotected___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1423 */
+        /* parser/lexer.nit:1458 */
         REGB14 = TAG_Int(23);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1423 */
+          /* parser/lexer.nit:1458 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1424 */
+          /* parser/lexer.nit:1459 */
           fra.me.REG[4] = NEW_TKwprivate_parser___lexer___TKwprivate___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1426 */
+        /* parser/lexer.nit:1461 */
         REGB13 = TAG_Int(24);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1426 */
+          /* parser/lexer.nit:1461 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1427 */
+          /* parser/lexer.nit:1462 */
           fra.me.REG[4] = NEW_TKwintrude_parser___lexer___TKwintrude___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1429 */
+        /* parser/lexer.nit:1464 */
         REGB14 = TAG_Int(25);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1429 */
+          /* parser/lexer.nit:1464 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1430 */
+          /* parser/lexer.nit:1465 */
           fra.me.REG[4] = NEW_TKwif_parser___lexer___TKwif___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1432 */
+        /* parser/lexer.nit:1467 */
         REGB13 = TAG_Int(26);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1432 */
+          /* parser/lexer.nit:1467 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1433 */
+          /* parser/lexer.nit:1468 */
           fra.me.REG[4] = NEW_TKwthen_parser___lexer___TKwthen___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1435 */
+        /* parser/lexer.nit:1470 */
         REGB14 = TAG_Int(27);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1435 */
+          /* parser/lexer.nit:1470 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1436 */
+          /* parser/lexer.nit:1471 */
           fra.me.REG[4] = NEW_TKwelse_parser___lexer___TKwelse___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1438 */
+        /* parser/lexer.nit:1473 */
         REGB13 = TAG_Int(28);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1438 */
+          /* parser/lexer.nit:1473 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1439 */
+          /* parser/lexer.nit:1474 */
           fra.me.REG[4] = NEW_TKwwhile_parser___lexer___TKwwhile___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1441 */
+        /* parser/lexer.nit:1476 */
         REGB14 = TAG_Int(29);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1441 */
+          /* parser/lexer.nit:1476 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1442 */
+          /* parser/lexer.nit:1477 */
           fra.me.REG[4] = NEW_TKwloop_parser___lexer___TKwloop___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1444 */
+        /* parser/lexer.nit:1479 */
         REGB13 = TAG_Int(30);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1444 */
+          /* parser/lexer.nit:1479 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1445 */
+          /* parser/lexer.nit:1480 */
           fra.me.REG[4] = NEW_TKwfor_parser___lexer___TKwfor___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1447 */
+        /* parser/lexer.nit:1482 */
         REGB14 = TAG_Int(31);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1447 */
+          /* parser/lexer.nit:1482 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1448 */
+          /* parser/lexer.nit:1483 */
           fra.me.REG[4] = NEW_TKwin_parser___lexer___TKwin___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1450 */
+        /* parser/lexer.nit:1485 */
         REGB13 = TAG_Int(32);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1450 */
+          /* parser/lexer.nit:1485 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1451 */
+          /* parser/lexer.nit:1486 */
           fra.me.REG[4] = NEW_TKwand_parser___lexer___TKwand___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1453 */
+        /* parser/lexer.nit:1488 */
         REGB14 = TAG_Int(33);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1453 */
+          /* parser/lexer.nit:1488 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1454 */
+          /* parser/lexer.nit:1489 */
           fra.me.REG[4] = NEW_TKwor_parser___lexer___TKwor___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1456 */
+        /* parser/lexer.nit:1491 */
         REGB13 = TAG_Int(34);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1456 */
+          /* parser/lexer.nit:1491 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1457 */
+          /* parser/lexer.nit:1492 */
           fra.me.REG[4] = NEW_TKwnot_parser___lexer___TKwnot___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1459 */
+        /* parser/lexer.nit:1494 */
         REGB14 = TAG_Int(35);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1459 */
+          /* parser/lexer.nit:1494 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1460 */
+          /* parser/lexer.nit:1495 */
           fra.me.REG[4] = NEW_TKwreturn_parser___lexer___TKwreturn___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1462 */
+        /* parser/lexer.nit:1497 */
         REGB13 = TAG_Int(36);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1462 */
+          /* parser/lexer.nit:1497 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1463 */
+          /* parser/lexer.nit:1498 */
           fra.me.REG[4] = NEW_TKwcontinue_parser___lexer___TKwcontinue___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1465 */
+        /* parser/lexer.nit:1500 */
         REGB14 = TAG_Int(37);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1465 */
+          /* parser/lexer.nit:1500 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1466 */
+          /* parser/lexer.nit:1501 */
           fra.me.REG[4] = NEW_TKwbreak_parser___lexer___TKwbreak___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1468 */
+        /* parser/lexer.nit:1503 */
         REGB13 = TAG_Int(38);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1468 */
+          /* parser/lexer.nit:1503 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1469 */
+          /* parser/lexer.nit:1504 */
           fra.me.REG[4] = NEW_TKwabort_parser___lexer___TKwabort___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1471 */
+        /* parser/lexer.nit:1506 */
         REGB14 = TAG_Int(39);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1471 */
+          /* parser/lexer.nit:1506 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1472 */
+          /* parser/lexer.nit:1507 */
           fra.me.REG[4] = NEW_TKwassert_parser___lexer___TKwassert___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1474 */
+        /* parser/lexer.nit:1509 */
         REGB13 = TAG_Int(40);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1474 */
+          /* parser/lexer.nit:1509 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1475 */
+          /* parser/lexer.nit:1510 */
           fra.me.REG[4] = NEW_TKwnew_parser___lexer___TKwnew___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1477 */
+        /* parser/lexer.nit:1512 */
         REGB14 = TAG_Int(41);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1477 */
+          /* parser/lexer.nit:1512 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1478 */
+          /* parser/lexer.nit:1513 */
           fra.me.REG[4] = NEW_TKwisa_parser___lexer___TKwisa___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1480 */
+        /* parser/lexer.nit:1515 */
         REGB13 = TAG_Int(42);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1480 */
+          /* parser/lexer.nit:1515 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1481 */
+          /* parser/lexer.nit:1516 */
           fra.me.REG[4] = NEW_TKwonce_parser___lexer___TKwonce___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1483 */
+        /* parser/lexer.nit:1518 */
         REGB14 = TAG_Int(43);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1483 */
+          /* parser/lexer.nit:1518 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1484 */
+          /* parser/lexer.nit:1519 */
           fra.me.REG[4] = NEW_TKwsuper_parser___lexer___TKwsuper___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1486 */
+        /* parser/lexer.nit:1521 */
         REGB13 = TAG_Int(44);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1486 */
+          /* parser/lexer.nit:1521 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1487 */
+          /* parser/lexer.nit:1522 */
           fra.me.REG[4] = NEW_TKwself_parser___lexer___TKwself___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1489 */
+        /* parser/lexer.nit:1524 */
         REGB14 = TAG_Int(45);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1489 */
+          /* parser/lexer.nit:1524 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1490 */
+          /* parser/lexer.nit:1525 */
           fra.me.REG[4] = NEW_TKwtrue_parser___lexer___TKwtrue___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1492 */
+        /* parser/lexer.nit:1527 */
         REGB13 = TAG_Int(46);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1492 */
+          /* parser/lexer.nit:1527 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1493 */
+          /* parser/lexer.nit:1528 */
           fra.me.REG[4] = NEW_TKwfalse_parser___lexer___TKwfalse___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1495 */
+        /* parser/lexer.nit:1530 */
         REGB14 = TAG_Int(47);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1495 */
+          /* parser/lexer.nit:1530 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1496 */
+          /* parser/lexer.nit:1531 */
           fra.me.REG[4] = NEW_TKwnull_parser___lexer___TKwnull___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1498 */
+        /* parser/lexer.nit:1533 */
         REGB13 = TAG_Int(48);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1498 */
+          /* parser/lexer.nit:1533 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1499 */
+          /* parser/lexer.nit:1534 */
           fra.me.REG[4] = NEW_TKwas_parser___lexer___TKwas___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1501 */
+        /* parser/lexer.nit:1536 */
         REGB14 = TAG_Int(49);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1501 */
+          /* parser/lexer.nit:1536 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1502 */
+          /* parser/lexer.nit:1537 */
           fra.me.REG[4] = NEW_TKwnullable_parser___lexer___TKwnullable___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1504 */
+        /* parser/lexer.nit:1539 */
         REGB13 = TAG_Int(50);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1504 */
+          /* parser/lexer.nit:1539 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1505 */
+          /* parser/lexer.nit:1540 */
           fra.me.REG[4] = NEW_TKwisset_parser___lexer___TKwisset___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1507 */
+        /* parser/lexer.nit:1542 */
         REGB14 = TAG_Int(51);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1507 */
+          /* parser/lexer.nit:1542 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1508 */
+          /* parser/lexer.nit:1543 */
           fra.me.REG[4] = NEW_TKwlabel_parser___lexer___TKwlabel___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1510 */
+        /* parser/lexer.nit:1545 */
         REGB13 = TAG_Int(52);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1510 */
+          /* parser/lexer.nit:1545 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1511 */
-          fra.me.REG[4] = NEW_TOpar_parser___lexer___TOpar___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1546 */
+          fra.me.REG[4] = NEW_TKwdebug_parser___lexer___TKwdebug___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1513 */
+        /* parser/lexer.nit:1548 */
         REGB14 = TAG_Int(53);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1513 */
+          /* parser/lexer.nit:1548 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1514 */
-          fra.me.REG[4] = NEW_TCpar_parser___lexer___TCpar___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1549 */
+          fra.me.REG[4] = NEW_TOpar_parser___lexer___TOpar___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1516 */
+        /* parser/lexer.nit:1551 */
         REGB13 = TAG_Int(54);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1516 */
+          /* parser/lexer.nit:1551 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1517 */
-          fra.me.REG[4] = NEW_TObra_parser___lexer___TObra___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1552 */
+          fra.me.REG[4] = NEW_TCpar_parser___lexer___TCpar___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1519 */
+        /* parser/lexer.nit:1554 */
         REGB14 = TAG_Int(55);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1519 */
+          /* parser/lexer.nit:1554 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1520 */
-          fra.me.REG[4] = NEW_TCbra_parser___lexer___TCbra___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1555 */
+          fra.me.REG[4] = NEW_TObra_parser___lexer___TObra___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1522 */
+        /* parser/lexer.nit:1557 */
         REGB13 = TAG_Int(56);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1522 */
+          /* parser/lexer.nit:1557 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1523 */
-          fra.me.REG[4] = NEW_TComma_parser___lexer___TComma___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1558 */
+          fra.me.REG[4] = NEW_TCbra_parser___lexer___TCbra___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1525 */
+        /* parser/lexer.nit:1560 */
         REGB14 = TAG_Int(57);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1525 */
+          /* parser/lexer.nit:1560 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1526 */
-          fra.me.REG[4] = NEW_TColumn_parser___lexer___TColumn___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1561 */
+          fra.me.REG[4] = NEW_TComma_parser___lexer___TComma___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1528 */
+        /* parser/lexer.nit:1563 */
         REGB13 = TAG_Int(58);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1528 */
+          /* parser/lexer.nit:1563 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1529 */
-          fra.me.REG[4] = NEW_TQuad_parser___lexer___TQuad___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1564 */
+          fra.me.REG[4] = NEW_TColumn_parser___lexer___TColumn___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1531 */
+        /* parser/lexer.nit:1566 */
         REGB14 = TAG_Int(59);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1531 */
+          /* parser/lexer.nit:1566 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1532 */
-          fra.me.REG[4] = NEW_TAssign_parser___lexer___TAssign___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1567 */
+          fra.me.REG[4] = NEW_TQuad_parser___lexer___TQuad___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1534 */
+        /* parser/lexer.nit:1569 */
         REGB13 = TAG_Int(60);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1534 */
+          /* parser/lexer.nit:1569 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1535 */
-          fra.me.REG[4] = NEW_TPluseq_parser___lexer___TPluseq___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1570 */
+          fra.me.REG[4] = NEW_TAssign_parser___lexer___TAssign___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1537 */
+        /* parser/lexer.nit:1572 */
         REGB14 = TAG_Int(61);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1537 */
+          /* parser/lexer.nit:1572 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1538 */
-          fra.me.REG[4] = NEW_TMinuseq_parser___lexer___TMinuseq___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1573 */
+          fra.me.REG[4] = NEW_TPluseq_parser___lexer___TPluseq___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1540 */
+        /* parser/lexer.nit:1575 */
         REGB13 = TAG_Int(62);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1540 */
+          /* parser/lexer.nit:1575 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1541 */
-          fra.me.REG[4] = NEW_TDotdotdot_parser___lexer___TDotdotdot___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1576 */
+          fra.me.REG[4] = NEW_TMinuseq_parser___lexer___TMinuseq___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1543 */
+        /* parser/lexer.nit:1578 */
         REGB14 = TAG_Int(63);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1543 */
+          /* parser/lexer.nit:1578 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1544 */
-          fra.me.REG[4] = NEW_TDotdot_parser___lexer___TDotdot___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1579 */
+          fra.me.REG[4] = NEW_TDotdotdot_parser___lexer___TDotdotdot___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1546 */
+        /* parser/lexer.nit:1581 */
         REGB13 = TAG_Int(64);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1546 */
+          /* parser/lexer.nit:1581 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1547 */
-          fra.me.REG[4] = NEW_TDot_parser___lexer___TDot___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1582 */
+          fra.me.REG[4] = NEW_TDotdot_parser___lexer___TDotdot___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1549 */
+        /* parser/lexer.nit:1584 */
         REGB14 = TAG_Int(65);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1549 */
+          /* parser/lexer.nit:1584 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1550 */
-          fra.me.REG[4] = NEW_TPlus_parser___lexer___TPlus___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1585 */
+          fra.me.REG[4] = NEW_TDot_parser___lexer___TDot___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1552 */
+        /* parser/lexer.nit:1587 */
         REGB13 = TAG_Int(66);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1552 */
+          /* parser/lexer.nit:1587 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1553 */
-          fra.me.REG[4] = NEW_TMinus_parser___lexer___TMinus___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1588 */
+          fra.me.REG[4] = NEW_TPlus_parser___lexer___TPlus___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1555 */
+        /* parser/lexer.nit:1590 */
         REGB14 = TAG_Int(67);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1555 */
+          /* parser/lexer.nit:1590 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1556 */
-          fra.me.REG[4] = NEW_TStar_parser___lexer___TStar___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1591 */
+          fra.me.REG[4] = NEW_TMinus_parser___lexer___TMinus___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1558 */
+        /* parser/lexer.nit:1593 */
         REGB13 = TAG_Int(68);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1558 */
+          /* parser/lexer.nit:1593 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1559 */
-          fra.me.REG[4] = NEW_TSlash_parser___lexer___TSlash___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1594 */
+          fra.me.REG[4] = NEW_TStar_parser___lexer___TStar___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1561 */
+        /* parser/lexer.nit:1596 */
         REGB14 = TAG_Int(69);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1561 */
+          /* parser/lexer.nit:1596 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1562 */
-          fra.me.REG[4] = NEW_TPercent_parser___lexer___TPercent___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1597 */
+          fra.me.REG[4] = NEW_TSlash_parser___lexer___TSlash___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1564 */
+        /* parser/lexer.nit:1599 */
         REGB13 = TAG_Int(70);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1564 */
+          /* parser/lexer.nit:1599 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1565 */
-          fra.me.REG[4] = NEW_TEq_parser___lexer___TEq___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1600 */
+          fra.me.REG[4] = NEW_TPercent_parser___lexer___TPercent___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1567 */
+        /* parser/lexer.nit:1602 */
         REGB14 = TAG_Int(71);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1567 */
+          /* parser/lexer.nit:1602 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1568 */
-          fra.me.REG[4] = NEW_TNe_parser___lexer___TNe___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1603 */
+          fra.me.REG[4] = NEW_TEq_parser___lexer___TEq___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1570 */
+        /* parser/lexer.nit:1605 */
         REGB13 = TAG_Int(72);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1570 */
+          /* parser/lexer.nit:1605 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1571 */
-          fra.me.REG[4] = NEW_TLt_parser___lexer___TLt___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1606 */
+          fra.me.REG[4] = NEW_TNe_parser___lexer___TNe___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1573 */
+        /* parser/lexer.nit:1608 */
         REGB14 = TAG_Int(73);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1573 */
+          /* parser/lexer.nit:1608 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1574 */
-          fra.me.REG[4] = NEW_TLe_parser___lexer___TLe___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1609 */
+          fra.me.REG[4] = NEW_TLt_parser___lexer___TLt___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1576 */
+        /* parser/lexer.nit:1611 */
         REGB13 = TAG_Int(74);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1576 */
+          /* parser/lexer.nit:1611 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1577 */
-          fra.me.REG[4] = NEW_TLl_parser___lexer___TLl___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1612 */
+          fra.me.REG[4] = NEW_TLe_parser___lexer___TLe___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1579 */
+        /* parser/lexer.nit:1614 */
         REGB14 = TAG_Int(75);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1579 */
+          /* parser/lexer.nit:1614 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1580 */
-          fra.me.REG[4] = NEW_TGt_parser___lexer___TGt___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1615 */
+          fra.me.REG[4] = NEW_TLl_parser___lexer___TLl___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1582 */
+        /* parser/lexer.nit:1617 */
         REGB13 = TAG_Int(76);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1582 */
+          /* parser/lexer.nit:1617 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1583 */
-          fra.me.REG[4] = NEW_TGe_parser___lexer___TGe___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1618 */
+          fra.me.REG[4] = NEW_TGt_parser___lexer___TGt___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1585 */
+        /* parser/lexer.nit:1620 */
         REGB14 = TAG_Int(77);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1585 */
+          /* parser/lexer.nit:1620 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1586 */
-          fra.me.REG[4] = NEW_TGg_parser___lexer___TGg___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1621 */
+          fra.me.REG[4] = NEW_TGe_parser___lexer___TGe___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1588 */
+        /* parser/lexer.nit:1623 */
         REGB13 = TAG_Int(78);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1588 */
+          /* parser/lexer.nit:1623 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1589 */
-          fra.me.REG[4] = NEW_TStarship_parser___lexer___TStarship___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1624 */
+          fra.me.REG[4] = NEW_TGg_parser___lexer___TGg___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1591 */
+        /* parser/lexer.nit:1626 */
         REGB14 = TAG_Int(79);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1591 */
+          /* parser/lexer.nit:1626 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1592 */
-          fra.me.REG[4] = NEW_TBang_parser___lexer___TBang___init_tk(fra.me.REG[2]);
+          /* parser/lexer.nit:1627 */
+          fra.me.REG[4] = NEW_TStarship_parser___lexer___TStarship___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1594 */
+        /* parser/lexer.nit:1629 */
         REGB13 = TAG_Int(80);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1594 */
+          /* parser/lexer.nit:1629 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1595 */
-          fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1596 */
-          fra.me.REG[4] = NEW_TClassid_parser___lexer___TClassid___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          /* parser/lexer.nit:1630 */
+          fra.me.REG[4] = NEW_TBang_parser___lexer___TBang___init_tk(fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1598 */
+        /* parser/lexer.nit:1632 */
         REGB14 = TAG_Int(81);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1598 */
+          /* parser/lexer.nit:1632 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1599 */
+          /* parser/lexer.nit:1633 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1600 */
-          fra.me.REG[4] = NEW_TId_parser___lexer___TId___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          /* parser/lexer.nit:1634 */
+          fra.me.REG[4] = NEW_TClassid_parser___lexer___TClassid___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1602 */
+        /* parser/lexer.nit:1636 */
         REGB13 = TAG_Int(82);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1602 */
+          /* parser/lexer.nit:1636 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1603 */
+          /* parser/lexer.nit:1637 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1604 */
-          fra.me.REG[4] = NEW_TAttrid_parser___lexer___TAttrid___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          /* parser/lexer.nit:1638 */
+          fra.me.REG[4] = NEW_TId_parser___lexer___TId___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1606 */
+        /* parser/lexer.nit:1640 */
         REGB14 = TAG_Int(83);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1606 */
+          /* parser/lexer.nit:1640 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1607 */
+          /* parser/lexer.nit:1641 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1608 */
-          fra.me.REG[4] = NEW_TNumber_parser___lexer___TNumber___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          /* parser/lexer.nit:1642 */
+          fra.me.REG[4] = NEW_TAttrid_parser___lexer___TAttrid___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1610 */
+        /* parser/lexer.nit:1644 */
         REGB13 = TAG_Int(84);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1610 */
+          /* parser/lexer.nit:1644 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1611 */
+          /* parser/lexer.nit:1645 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1612 */
-          fra.me.REG[4] = NEW_TFloat_parser___lexer___TFloat___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          /* parser/lexer.nit:1646 */
+          fra.me.REG[4] = NEW_TNumber_parser___lexer___TNumber___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1614 */
+        /* parser/lexer.nit:1648 */
         REGB14 = TAG_Int(85);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1614 */
+          /* parser/lexer.nit:1648 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1615 */
+          /* parser/lexer.nit:1649 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1616 */
-          fra.me.REG[4] = NEW_TChar_parser___lexer___TChar___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          /* parser/lexer.nit:1650 */
+          fra.me.REG[4] = NEW_TFloat_parser___lexer___TFloat___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1618 */
+        /* parser/lexer.nit:1652 */
         REGB13 = TAG_Int(86);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1618 */
+          /* parser/lexer.nit:1652 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1619 */
+          /* parser/lexer.nit:1653 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1620 */
-          fra.me.REG[4] = NEW_TString_parser___lexer___TString___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          /* parser/lexer.nit:1654 */
+          fra.me.REG[4] = NEW_TChar_parser___lexer___TChar___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1622 */
+        /* parser/lexer.nit:1656 */
         REGB14 = TAG_Int(87);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1622 */
+          /* parser/lexer.nit:1656 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1623 */
+          /* parser/lexer.nit:1657 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1624 */
-          fra.me.REG[4] = NEW_TStartString_parser___lexer___TStartString___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          /* parser/lexer.nit:1658 */
+          fra.me.REG[4] = NEW_TString_parser___lexer___TString___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1626 */
+        /* parser/lexer.nit:1660 */
         REGB13 = TAG_Int(88);
         REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
         if (UNTAG_Bool(REGB14)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB13 = TAG_Bool((REGB7)==(REGB13));
-          /* ./parser//lexer.nit:1626 */
+          /* parser/lexer.nit:1660 */
           REGB14 = REGB13;
         }
         if (UNTAG_Bool(REGB14)) {
-          /* ./parser//lexer.nit:1627 */
+          /* parser/lexer.nit:1661 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1628 */
-          fra.me.REG[4] = NEW_TMidString_parser___lexer___TMidString___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          /* parser/lexer.nit:1662 */
+          fra.me.REG[4] = NEW_TStartString_parser___lexer___TStartString___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[4];
           goto label3;
         }
-        /* ./parser//lexer.nit:1630 */
+        /* parser/lexer.nit:1664 */
         REGB14 = TAG_Int(89);
         REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
         if (UNTAG_Bool(REGB13)) {
         } else {
-          /* ./../lib/standard//kernel.nit:227 */
+          /* ../lib/standard/kernel.nit:227 */
           REGB14 = TAG_Bool((REGB7)==(REGB14));
-          /* ./parser//lexer.nit:1630 */
+          /* parser/lexer.nit:1664 */
           REGB13 = REGB14;
         }
         if (UNTAG_Bool(REGB13)) {
-          /* ./parser//lexer.nit:1631 */
+          /* parser/lexer.nit:1665 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
-          /* ./parser//lexer.nit:1632 */
-          fra.me.REG[2] = NEW_TEndString_parser___lexer___TEndString___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          /* parser/lexer.nit:1666 */
+          fra.me.REG[4] = NEW_TMidString_parser___lexer___TMidString___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          fra.me.REG[3] = fra.me.REG[4];
+          goto label3;
+        }
+        /* parser/lexer.nit:1668 */
+        REGB13 = TAG_Int(90);
+        REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
+        if (UNTAG_Bool(REGB14)) {
+        } else {
+          /* ../lib/standard/kernel.nit:227 */
+          REGB13 = TAG_Bool((REGB7)==(REGB13));
+          /* parser/lexer.nit:1668 */
+          REGB14 = REGB13;
+        }
+        if (UNTAG_Bool(REGB14)) {
+          /* parser/lexer.nit:1669 */
+          fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
+          /* parser/lexer.nit:1670 */
+          fra.me.REG[4] = NEW_TEndString_parser___lexer___TEndString___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          fra.me.REG[3] = fra.me.REG[4];
+          goto label3;
+        }
+        /* parser/lexer.nit:1672 */
+        REGB14 = TAG_Int(91);
+        REGB13 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB14));
+        if (UNTAG_Bool(REGB13)) {
+        } else {
+          /* ../lib/standard/kernel.nit:227 */
+          REGB14 = TAG_Bool((REGB7)==(REGB14));
+          /* parser/lexer.nit:1672 */
+          REGB13 = REGB14;
+        }
+        if (UNTAG_Bool(REGB13)) {
+          /* parser/lexer.nit:1673 */
+          fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
+          /* parser/lexer.nit:1674 */
+          fra.me.REG[4] = NEW_TBadChar_parser___lexer___TBadChar___init_tk(fra.me.REG[4], fra.me.REG[2]);
+          fra.me.REG[3] = fra.me.REG[4];
+          goto label3;
+        }
+        /* parser/lexer.nit:1676 */
+        REGB13 = TAG_Int(92);
+        REGB14 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB13));
+        if (UNTAG_Bool(REGB14)) {
+        } else {
+          /* ../lib/standard/kernel.nit:227 */
+          REGB13 = TAG_Bool((REGB7)==(REGB13));
+          /* parser/lexer.nit:1676 */
+          REGB14 = REGB13;
+        }
+        if (UNTAG_Bool(REGB14)) {
+          /* parser/lexer.nit:1677 */
+          fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB8);
+          /* parser/lexer.nit:1678 */
+          fra.me.REG[2] = NEW_TBadString_parser___lexer___TBadString___init_tk(fra.me.REG[4], fra.me.REG[2]);
           fra.me.REG[3] = fra.me.REG[2];
           goto label3;
         }
       } else {
-        /* ./parser//lexer.nit:1635 */
+        /* parser/lexer.nit:1681 */
         ATTR_parser___lexer___Lexer____stream_pos(fra.me.REG[0]) = REGB1;
-        /* ./parser//lexer.nit:1636 */
-        REGB13 = TAG_Bool(ATTR_parser___lexer___Lexer____file(fra.me.REG[0])!=NIT_NULL);
-        if (UNTAG_Bool(REGB13)) {
+        /* parser/lexer.nit:1682 */
+        REGB14 = TAG_Bool(ATTR_parser___lexer___Lexer____file(fra.me.REG[0])!=NIT_NULL);
+        if (UNTAG_Bool(REGB14)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1636);
+          nit_abort("Uninitialized attribute %s", "_file", LOCATE_parser___lexer, 1682);
         }
         fra.me.REG[2] = ATTR_parser___lexer___Lexer____file(fra.me.REG[0]);
-        REGB13 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:235 */
-        REGB13 = TAG_Int(UNTAG_Int(REGB4)+UNTAG_Int(REGB13));
-        /* ./parser//lexer.nit:1636 */
         REGB14 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:235 */
         REGB14 = TAG_Int(UNTAG_Int(REGB4)+UNTAG_Int(REGB14));
-        /* ./parser//lexer.nit:1636 */
+        /* parser/lexer.nit:1682 */
+        REGB13 = TAG_Int(1);
+        /* ../lib/standard/kernel.nit:235 */
+        REGB13 = TAG_Int(UNTAG_Int(REGB4)+UNTAG_Int(REGB13));
+        /* parser/lexer.nit:1682 */
         REGB12 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:235 */
         REGB12 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB12));
-        /* ./parser//lexer.nit:1636 */
+        /* parser/lexer.nit:1682 */
         REGB11 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:235 */
         REGB11 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB11));
-        /* ./parser//lexer.nit:1636 */
-        fra.me.REG[2] = NEW_Location_location___Location___init(fra.me.REG[2], REGB13, REGB14, REGB12, REGB11);
+        /* parser/lexer.nit:1682 */
+        fra.me.REG[2] = NEW_Location_location___Location___init(fra.me.REG[2], REGB14, REGB13, REGB12, REGB11);
         REGB11 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB11)) {
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ./../lib/standard//kernel.nit:234 */
+        /* ../lib/standard/kernel.nit:234 */
         REGB11 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
-        /* ./parser//lexer.nit:1637 */
+        /* parser/lexer.nit:1683 */
         if (UNTAG_Bool(REGB11)) {
-          /* ./../lib/standard//kernel.nit:237 */
+          /* ../lib/standard/kernel.nit:237 */
           REGB11 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-          /* ./parser//lexer.nit:1638 */
+          /* parser/lexer.nit:1684 */
           fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB11);
-          /* ./parser//lexer.nit:1639 */
+          /* parser/lexer.nit:1685 */
           REGB11 = TAG_Int(3);
           fra.me.REG[5] = NEW_Array_standard___collection___array___Array___with_capacity(REGB11);
           if (!once_value_4) {
@@ -7609,13 +7763,13 @@ val_t parser___lexer___Lexer___get_token(val_t p0){
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
           fra.me.REG[5] = CALL_standard___string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
           fra.me.REG[5] = NEW_AError_parser___lexer___AError___init_error(fra.me.REG[5], fra.me.REG[2]);
-          /* ./parser//lexer.nit:1640 */
+          /* parser/lexer.nit:1686 */
           fra.me.REG[3] = fra.me.REG[5];
           goto label3;
         } else {
-          /* ./parser//lexer.nit:1642 */
+          /* parser/lexer.nit:1688 */
           fra.me.REG[2] = NEW_EOF_parser___lexer___EOF___init(fra.me.REG[2]);
-          /* ./parser//lexer.nit:1643 */
+          /* parser/lexer.nit:1689 */
           fra.me.REG[3] = fra.me.REG[2];
           goto label3;
         }

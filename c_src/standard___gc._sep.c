@@ -12,7 +12,7 @@ void standard___gc___Sys___force_garbage_collection(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//gc.nit:4 */
+  /* ../lib/standard/gc.nit:4 */
   Nit_gc_force_garbage_collection();
   stack_frame_head = fra.me.prev;
   return;

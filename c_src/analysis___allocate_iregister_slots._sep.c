@@ -18,7 +18,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:39 */
+  /* analysis/allocate_iregister_slots.nit:39 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegister____is_local(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -51,7 +51,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./analysis//allocate_iregister_slots.nit:40 */
+    /* analysis/allocate_iregister_slots.nit:40 */
     fra.me.REG[3] = ATTR_analysis___allocate_iregister_slots___IRegister____local_iroutine(fra.me.REG[1]);
     REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -66,7 +66,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./analysis//allocate_iregister_slots.nit:41 */
+      /* analysis/allocate_iregister_slots.nit:41 */
       REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -75,7 +75,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark
       fra.me.REG[0] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(fra.me.REG[0]);
       ATTR_analysis___allocate_iregister_slots___IRegister____local_iroutine(fra.me.REG[1]) = fra.me.REG[0];
     } else {
-      /* ./analysis//allocate_iregister_slots.nit:43 */
+      /* analysis/allocate_iregister_slots.nit:43 */
       REGB0 = TAG_Bool(false);
       ATTR_analysis___allocate_iregister_slots___IRegister____is_local(fra.me.REG[1]) = REGB0;
     }
@@ -103,39 +103,39 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./analysis//allocate_iregister_slots.nit:52 */
+  /* analysis/allocate_iregister_slots.nit:52 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____pass(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_pass", LOCATE_analysis___allocate_iregister_slots, 52);
   }
   REGB0 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____pass(fra.me.REG[0]);
-  /* ./analysis//allocate_iregister_slots.nit:53 */
+  /* analysis/allocate_iregister_slots.nit:53 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:227 */
+    /* ../lib/standard/kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./analysis//allocate_iregister_slots.nit:53 */
+    /* analysis/allocate_iregister_slots.nit:53 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./analysis//allocate_iregister_slots.nit:54 */
+    /* analysis/allocate_iregister_slots.nit:54 */
     CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-    /* ./analysis//allocate_iregister_slots.nit:55 */
+    /* analysis/allocate_iregister_slots.nit:55 */
     ATTR_analysis___allocate_iregister_slots___IRegister____last(fra.me.REG[2]) = fra.me.REG[1];
-    /* ./analysis//allocate_iregister_slots.nit:56 */
+    /* analysis/allocate_iregister_slots.nit:56 */
     ATTR_analysis___allocate_iregister_slots___IRegister____slot_index(fra.me.REG[2]) = NIT_NULL;
   } else {
-    /* ./analysis//allocate_iregister_slots.nit:57 */
+    /* analysis/allocate_iregister_slots.nit:57 */
     REGB2 = TAG_Int(1);
     REGB1 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB2));
     if (UNTAG_Bool(REGB1)) {
     } else {
-      /* ./../lib/standard//kernel.nit:227 */
+      /* ../lib/standard/kernel.nit:227 */
       REGB2 = TAG_Bool((REGB0)==(REGB2));
-      /* ./analysis//allocate_iregister_slots.nit:57 */
+      /* analysis/allocate_iregister_slots.nit:57 */
       REGB1 = REGB2;
     }
     if (UNTAG_Bool(REGB1)) {
@@ -157,7 +157,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
       REGB1 = REGB2;
     }
     if (UNTAG_Bool(REGB1)) {
-      /* ./analysis//allocate_iregister_slots.nit:58 */
+      /* analysis/allocate_iregister_slots.nit:58 */
       CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
     }
   }
@@ -184,29 +184,29 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./analysis//allocate_iregister_slots.nit:64 */
+  /* analysis/allocate_iregister_slots.nit:64 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____pass(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_pass", LOCATE_analysis___allocate_iregister_slots, 64);
   }
   REGB0 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____pass(fra.me.REG[0]);
-  /* ./analysis//allocate_iregister_slots.nit:65 */
+  /* analysis/allocate_iregister_slots.nit:65 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:227 */
+    /* ../lib/standard/kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./analysis//allocate_iregister_slots.nit:65 */
+    /* analysis/allocate_iregister_slots.nit:65 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./analysis//allocate_iregister_slots.nit:66 */
+    /* analysis/allocate_iregister_slots.nit:66 */
     CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-    /* ./analysis//allocate_iregister_slots.nit:67 */
+    /* analysis/allocate_iregister_slots.nit:67 */
     ATTR_analysis___allocate_iregister_slots___IRegister____slot_index(fra.me.REG[2]) = NIT_NULL;
-    /* ./analysis//allocate_iregister_slots.nit:69 */
+    /* analysis/allocate_iregister_slots.nit:69 */
     fra.me.REG[3] = ATTR_analysis___allocate_iregister_slots___IRegister____first(fra.me.REG[2]);
     REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
@@ -223,7 +223,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     if (UNTAG_Bool(REGB2)) {
       ATTR_analysis___allocate_iregister_slots___IRegister____first(fra.me.REG[2]) = fra.me.REG[1];
     }
-    /* ./analysis//allocate_iregister_slots.nit:71 */
+    /* analysis/allocate_iregister_slots.nit:71 */
     fra.me.REG[3] = ATTR_analysis___allocate_iregister_slots___IRegister____last(fra.me.REG[2]);
     REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
@@ -242,18 +242,18 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
       ATTR_analysis___allocate_iregister_slots___IRegister____last(fra.me.REG[2]) = fra.me.REG[1];
     }
   } else {
-    /* ./analysis//allocate_iregister_slots.nit:72 */
+    /* analysis/allocate_iregister_slots.nit:72 */
     REGB2 = TAG_Int(1);
     REGB1 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB2));
     if (UNTAG_Bool(REGB1)) {
     } else {
-      /* ./../lib/standard//kernel.nit:227 */
+      /* ../lib/standard/kernel.nit:227 */
       REGB2 = TAG_Bool((REGB0)==(REGB2));
-      /* ./analysis//allocate_iregister_slots.nit:72 */
+      /* analysis/allocate_iregister_slots.nit:72 */
       REGB1 = REGB2;
     }
     if (UNTAG_Bool(REGB1)) {
-      /* ./analysis//allocate_iregister_slots.nit:73 */
+      /* analysis/allocate_iregister_slots.nit:73 */
       fra.me.REG[3] = ATTR_analysis___allocate_iregister_slots___IRegister____first(fra.me.REG[2]);
       REGB1 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[1],fra.me.REG[3]));
       if (UNTAG_Bool(REGB1)) {
@@ -268,10 +268,10 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
         }
       }
       if (UNTAG_Bool(REGB1)) {
-        /* ./analysis//allocate_iregister_slots.nit:74 */
+        /* analysis/allocate_iregister_slots.nit:74 */
         CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___register(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
       } else {
-        /* ./analysis//allocate_iregister_slots.nit:75 */
+        /* analysis/allocate_iregister_slots.nit:75 */
         fra.me.REG[3] = ATTR_analysis___allocate_iregister_slots___IRegister____last(fra.me.REG[2]);
         REGB1 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[1],fra.me.REG[3]));
         if (UNTAG_Bool(REGB1)) {
@@ -286,7 +286,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
           }
         }
         if (UNTAG_Bool(REGB1)) {
-          /* ./analysis//allocate_iregister_slots.nit:76 */
+          /* analysis/allocate_iregister_slots.nit:76 */
           CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
         }
       }
@@ -312,7 +312,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___defe
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./analysis//allocate_iregister_slots.nit:98 */
+  /* analysis/allocate_iregister_slots.nit:98 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____deferred_list(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -320,20 +320,20 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___defe
   }
   fra.me.REG[1] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____deferred_list(fra.me.REG[0]);
   fra.me.REG[1] = CALL_standard___collection___abstract_collection___Collection___iterator(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./analysis//allocate_iregister_slots.nit:99 */
+  /* analysis/allocate_iregister_slots.nit:99 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_current_rank", LOCATE_analysis___allocate_iregister_slots, 99);
   }
   REGB0 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[0]);
-  /* ./analysis//allocate_iregister_slots.nit:100 */
+  /* analysis/allocate_iregister_slots.nit:100 */
   while(1) {
     REGB1 = CALL_standard___collection___abstract_collection___Iterator___is_ok(fra.me.REG[1])(fra.me.REG[1]);
     if (UNTAG_Bool(REGB1)) {
-      /* ./analysis//allocate_iregister_slots.nit:101 */
+      /* analysis/allocate_iregister_slots.nit:101 */
       fra.me.REG[2] = CALL_standard___collection___abstract_collection___Iterator___item(fra.me.REG[1])(fra.me.REG[1]);
-      /* ./analysis//allocate_iregister_slots.nit:102 */
+      /* analysis/allocate_iregister_slots.nit:102 */
       REGB1 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegister____born_rank(fra.me.REG[2])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -345,19 +345,19 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___defe
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ./../lib/standard//kernel.nit:233 */
+      /* ../lib/standard/kernel.nit:233 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-      /* ./analysis//allocate_iregister_slots.nit:102 */
+      /* analysis/allocate_iregister_slots.nit:102 */
       if (UNTAG_Bool(REGB1)) {
-        /* ./analysis//allocate_iregister_slots.nit:103 */
+        /* analysis/allocate_iregister_slots.nit:103 */
         CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-        /* ./analysis//allocate_iregister_slots.nit:104 */
+        /* analysis/allocate_iregister_slots.nit:104 */
         CALL_standard___collection___list___ListIterator___delete(fra.me.REG[1])(fra.me.REG[1]);
       }
-      /* ./analysis//allocate_iregister_slots.nit:106 */
+      /* analysis/allocate_iregister_slots.nit:106 */
       CALL_standard___collection___abstract_collection___Iterator___next(fra.me.REG[1])(fra.me.REG[1]);
     } else {
-      /* ./analysis//allocate_iregister_slots.nit:100 */
+      /* analysis/allocate_iregister_slots.nit:100 */
       goto label1;
     }
   }
@@ -384,10 +384,10 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:110 */
+  /* analysis/allocate_iregister_slots.nit:110 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./analysis//allocate_iregister_slots.nit:112 */
+  /* analysis/allocate_iregister_slots.nit:112 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____pass(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -398,9 +398,9 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:227 */
+    /* ../lib/standard/kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./analysis//allocate_iregister_slots.nit:112 */
+    /* analysis/allocate_iregister_slots.nit:112 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
@@ -410,21 +410,21 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./analysis//allocate_iregister_slots.nit:113 */
+    /* analysis/allocate_iregister_slots.nit:113 */
     REGB2 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Uninitialized attribute %s", "_current_rank", LOCATE_analysis___allocate_iregister_slots, 113);
     }
     REGB2 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[2]);
-    /* ./analysis//allocate_iregister_slots.nit:114 */
+    /* analysis/allocate_iregister_slots.nit:114 */
     REGB1 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2]);
     REGB0 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:235 */
     REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
-    /* ./analysis//allocate_iregister_slots.nit:114 */
+    /* analysis/allocate_iregister_slots.nit:114 */
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2]) = REGB0;
-    /* ./analysis//allocate_iregister_slots.nit:115 */
+    /* analysis/allocate_iregister_slots.nit:115 */
     REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -432,14 +432,14 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     }
     REGB0 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2]);
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[2]) = REGB0;
-    /* ./analysis//allocate_iregister_slots.nit:116 */
+    /* analysis/allocate_iregister_slots.nit:116 */
     CALL_SUPER_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_icode(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-    /* ./analysis//allocate_iregister_slots.nit:117 */
+    /* analysis/allocate_iregister_slots.nit:117 */
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[2]) = REGB2;
-    /* ./analysis//allocate_iregister_slots.nit:118 */
+    /* analysis/allocate_iregister_slots.nit:118 */
     CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free(fra.me.REG[2])(fra.me.REG[2]);
   } else {
-    /* ./analysis//allocate_iregister_slots.nit:120 */
+    /* analysis/allocate_iregister_slots.nit:120 */
     CALL_SUPER_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_icode(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   }
   stack_frame_head = fra.me.prev;
@@ -463,9 +463,9 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:124 */
+  /* analysis/allocate_iregister_slots.nit:124 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./analysis//allocate_iregister_slots.nit:126 */
+  /* analysis/allocate_iregister_slots.nit:126 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____pass(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -476,27 +476,27 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:227 */
+    /* ../lib/standard/kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./analysis//allocate_iregister_slots.nit:126 */
+    /* analysis/allocate_iregister_slots.nit:126 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./analysis//allocate_iregister_slots.nit:127 */
+    /* analysis/allocate_iregister_slots.nit:127 */
     REGB2 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Uninitialized attribute %s", "_current_rank", LOCATE_analysis___allocate_iregister_slots, 127);
     }
     REGB2 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[2]);
-    /* ./analysis//allocate_iregister_slots.nit:128 */
+    /* analysis/allocate_iregister_slots.nit:128 */
     REGB1 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2]);
     REGB0 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:235 */
     REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
-    /* ./analysis//allocate_iregister_slots.nit:128 */
+    /* analysis/allocate_iregister_slots.nit:128 */
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2]) = REGB0;
-    /* ./analysis//allocate_iregister_slots.nit:129 */
+    /* analysis/allocate_iregister_slots.nit:129 */
     REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -504,14 +504,14 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     }
     REGB0 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____max_rank(fra.me.REG[2]);
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[2]) = REGB0;
-    /* ./analysis//allocate_iregister_slots.nit:130 */
+    /* analysis/allocate_iregister_slots.nit:130 */
     CALL_SUPER_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_closure_defs(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-    /* ./analysis//allocate_iregister_slots.nit:131 */
+    /* analysis/allocate_iregister_slots.nit:131 */
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[2]) = REGB2;
-    /* ./analysis//allocate_iregister_slots.nit:132 */
+    /* analysis/allocate_iregister_slots.nit:132 */
     CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___deferred_free(fra.me.REG[2])(fra.me.REG[2]);
   } else {
-    /* ./analysis//allocate_iregister_slots.nit:134 */
+    /* analysis/allocate_iregister_slots.nit:134 */
     CALL_SUPER_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_closure_defs(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   }
   stack_frame_head = fra.me.prev;
@@ -540,12 +540,12 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   fra.me.REG[7] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:142 */
+  /* analysis/allocate_iregister_slots.nit:142 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./analysis//allocate_iregister_slots.nit:144 */
+  /* analysis/allocate_iregister_slots.nit:144 */
   fra.me.REG[4] = CALL_icode___icode_base___IRoutine___result(fra.me.REG[3])(fra.me.REG[3]);
-  /* ./analysis//allocate_iregister_slots.nit:145 */
+  /* analysis/allocate_iregister_slots.nit:145 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____pass(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -556,27 +556,27 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:227 */
+    /* ../lib/standard/kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./analysis//allocate_iregister_slots.nit:145 */
+    /* analysis/allocate_iregister_slots.nit:145 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./analysis//allocate_iregister_slots.nit:146 */
+    /* analysis/allocate_iregister_slots.nit:146 */
     REGB2 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Uninitialized attribute %s", "_current_ir", LOCATE_analysis___allocate_iregister_slots, 146);
     }
     fra.me.REG[5] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(fra.me.REG[2]);
-    /* ./analysis//allocate_iregister_slots.nit:147 */
+    /* analysis/allocate_iregister_slots.nit:147 */
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(fra.me.REG[2]) = fra.me.REG[3];
-    /* ./analysis//allocate_iregister_slots.nit:148 */
+    /* analysis/allocate_iregister_slots.nit:148 */
     fra.me.REG[6] = CALL_icode___icode_base___IRoutine___params(fra.me.REG[3])(fra.me.REG[3]);
     CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[6])(fra.me.REG[6], (&(fra.me)), ((fun_t)OC_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine_1));
-    /* ./analysis//allocate_iregister_slots.nit:152 */
+    /* analysis/allocate_iregister_slots.nit:152 */
     CALL_SUPER_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-    /* ./analysis//allocate_iregister_slots.nit:153 */
+    /* analysis/allocate_iregister_slots.nit:153 */
     REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -591,44 +591,44 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     }
     REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
     if (UNTAG_Bool(REGB2)) {
-      /* ./analysis//allocate_iregister_slots.nit:154 */
+      /* analysis/allocate_iregister_slots.nit:154 */
       ATTR_analysis___allocate_iregister_slots___IRegister____last(fra.me.REG[4]) = fra.me.REG[2];
-      /* ./analysis//allocate_iregister_slots.nit:155 */
+      /* analysis/allocate_iregister_slots.nit:155 */
       CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
     }
-    /* ./analysis//allocate_iregister_slots.nit:157 */
+    /* analysis/allocate_iregister_slots.nit:157 */
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(fra.me.REG[2]) = fra.me.REG[5];
   } else {
-    /* ./analysis//allocate_iregister_slots.nit:159 */
+    /* analysis/allocate_iregister_slots.nit:159 */
     REGB2 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Uninitialized attribute %s", "_tag_slots", LOCATE_analysis___allocate_iregister_slots, 159);
     }
     fra.me.REG[5] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(fra.me.REG[2]);
-    /* ./analysis//allocate_iregister_slots.nit:160 */
+    /* analysis/allocate_iregister_slots.nit:160 */
     fra.me.REG[6] = NEW_SlotGroup_analysis___allocate_iregister_slots___SlotGroup___init();
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(fra.me.REG[2]) = fra.me.REG[6];
-    /* ./analysis//allocate_iregister_slots.nit:161 */
+    /* analysis/allocate_iregister_slots.nit:161 */
     REGB2 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____std_slots(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Uninitialized attribute %s", "_std_slots", LOCATE_analysis___allocate_iregister_slots, 161);
     }
     fra.me.REG[6] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____std_slots(fra.me.REG[2]);
-    /* ./analysis//allocate_iregister_slots.nit:162 */
+    /* analysis/allocate_iregister_slots.nit:162 */
     REGB2 = TAG_Bool(VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___IClosureDef, ID_icode___icode_base___IClosureDef)) /*cast IClosureDef*/;
     if (UNTAG_Bool(REGB2)) {
-      /* ./analysis//allocate_iregister_slots.nit:163 */
+      /* analysis/allocate_iregister_slots.nit:163 */
       fra.me.REG[7] = NEW_SlotGroup_analysis___allocate_iregister_slots___SlotGroup___init();
       ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____std_slots(fra.me.REG[2]) = fra.me.REG[7];
     }
-    /* ./analysis//allocate_iregister_slots.nit:165 */
+    /* analysis/allocate_iregister_slots.nit:165 */
     fra.me.REG[7] = CALL_icode___icode_base___IRoutine___params(fra.me.REG[3])(fra.me.REG[3]);
     CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[7])(fra.me.REG[7], (&(fra.me)), ((fun_t)OC_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine_2));
-    /* ./analysis//allocate_iregister_slots.nit:168 */
+    /* analysis/allocate_iregister_slots.nit:168 */
     CALL_SUPER_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visit_iroutine(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-    /* ./analysis//allocate_iregister_slots.nit:169 */
+    /* analysis/allocate_iregister_slots.nit:169 */
     REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -645,7 +645,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     if (UNTAG_Bool(REGB2)) {
       CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
     }
-    /* ./analysis//allocate_iregister_slots.nit:170 */
+    /* analysis/allocate_iregister_slots.nit:170 */
     REGB2 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -659,9 +659,9 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     }
     REGB2 = ATTR_analysis___allocate_iregister_slots___SlotGroup____next_index(fra.me.REG[4]);
     ATTR_analysis___allocate_iregister_slots___IRoutine____tag_slots_nb(fra.me.REG[3]) = REGB2;
-    /* ./analysis//allocate_iregister_slots.nit:171 */
+    /* analysis/allocate_iregister_slots.nit:171 */
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(fra.me.REG[2]) = fra.me.REG[5];
-    /* ./analysis//allocate_iregister_slots.nit:172 */
+    /* analysis/allocate_iregister_slots.nit:172 */
     REGB2 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____std_slots(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -675,7 +675,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
     }
     REGB2 = ATTR_analysis___allocate_iregister_slots___SlotGroup____next_index(fra.me.REG[5]);
     ATTR_analysis___allocate_iregister_slots___IRoutine____std_slots_nb(fra.me.REG[3]) = REGB2;
-    /* ./analysis//allocate_iregister_slots.nit:173 */
+    /* analysis/allocate_iregister_slots.nit:173 */
     ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____std_slots(fra.me.REG[2]) = fra.me.REG[6];
   }
   stack_frame_head = fra.me.prev;
@@ -697,9 +697,9 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
       fra.me.closure_funs = CREG;
       fra.me.REG[0] = p0;
       CREG[0] = clos_fun0;
-      /* ./analysis//allocate_iregister_slots.nit:149 */
+      /* analysis/allocate_iregister_slots.nit:149 */
       ATTR_analysis___allocate_iregister_slots___IRegister____first(fra.me.REG[0]) = closctx->REG[2];
-      /* ./analysis//allocate_iregister_slots.nit:150 */
+      /* analysis/allocate_iregister_slots.nit:150 */
       CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___mark_locality(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
       stack_frame_head = fra.me.prev;
       return;
@@ -720,7 +720,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___visi
       fra.me.closure_funs = CREG;
       fra.me.REG[0] = p0;
       CREG[0] = clos_fun0;
-      /* ./analysis//allocate_iregister_slots.nit:166 */
+      /* analysis/allocate_iregister_slots.nit:166 */
       CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___register(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
       stack_frame_head = fra.me.prev;
       return;
@@ -742,7 +742,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___regi
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:190 */
+  /* analysis/allocate_iregister_slots.nit:190 */
   fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___IRegister____last(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -759,7 +759,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___regi
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* ./analysis//allocate_iregister_slots.nit:191 */
+  /* analysis/allocate_iregister_slots.nit:191 */
   fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___IRegister____slot_index(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -769,9 +769,9 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___regi
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      /* ./../lib/standard//kernel.nit:227 */
+      /* ../lib/standard/kernel.nit:227 */
       REGB1 = TAG_Bool((fra.me.REG[2])==(NIT_NULL));
-      /* ./analysis//allocate_iregister_slots.nit:191 */
+      /* analysis/allocate_iregister_slots.nit:191 */
       REGB0 = REGB1;
     }
   }
@@ -779,7 +779,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___regi
   } else {
     nit_abort("Assert failed", NULL, LOCATE_analysis___allocate_iregister_slots, 191);
   }
-  /* ./analysis//allocate_iregister_slots.nit:192 */
+  /* analysis/allocate_iregister_slots.nit:192 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -787,7 +787,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___regi
   }
   REGB0 = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_rank(fra.me.REG[0]);
   ATTR_analysis___allocate_iregister_slots___IRegister____born_rank(fra.me.REG[1]) = REGB0;
-  /* ./analysis//allocate_iregister_slots.nit:193 */
+  /* analysis/allocate_iregister_slots.nit:193 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegister____is_local(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -796,7 +796,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___regi
   REGB0 = ATTR_analysis___allocate_iregister_slots___IRegister____is_local(fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./analysis//allocate_iregister_slots.nit:194 */
+    /* analysis/allocate_iregister_slots.nit:194 */
     REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____global_slots(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -805,14 +805,14 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___regi
     fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____global_slots(fra.me.REG[0]);
     CALL_analysis___allocate_iregister_slots___SlotGroup___register(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   } else {
-    /* ./analysis//allocate_iregister_slots.nit:195 */
+    /* analysis/allocate_iregister_slots.nit:195 */
     fra.me.REG[2] = CALL_icode___icode_base___IRegister___stype(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = CALL_primitive_info___MMType___is_tagged(fra.me.REG[2])(fra.me.REG[2]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./analysis//allocate_iregister_slots.nit:196 */
+      /* analysis/allocate_iregister_slots.nit:196 */
       REGB0 = TAG_Bool(true);
       ATTR_analysis___allocate_iregister_slots___IRegister____in_tag_slots(fra.me.REG[1]) = REGB0;
-      /* ./analysis//allocate_iregister_slots.nit:197 */
+      /* analysis/allocate_iregister_slots.nit:197 */
       REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -821,7 +821,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___regi
       fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(fra.me.REG[0]);
       CALL_analysis___allocate_iregister_slots___SlotGroup___register(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
     } else {
-      /* ./analysis//allocate_iregister_slots.nit:199 */
+      /* analysis/allocate_iregister_slots.nit:199 */
       REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____std_slots(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -853,9 +853,9 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:207 */
+  /* analysis/allocate_iregister_slots.nit:207 */
   fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___IRegister____slot_index(fra.me.REG[1]);
-  /* ./analysis//allocate_iregister_slots.nit:208 */
+  /* analysis/allocate_iregister_slots.nit:208 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -864,16 +864,16 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
       REGB1 = TAG_Bool(false);
       REGB0 = REGB1;
     } else {
-      /* ./../lib/standard//kernel.nit:227 */
+      /* ../lib/standard/kernel.nit:227 */
       REGB1 = TAG_Bool((fra.me.REG[2])==(NIT_NULL));
-      /* ./analysis//allocate_iregister_slots.nit:208 */
+      /* analysis/allocate_iregister_slots.nit:208 */
       REGB0 = REGB1;
     }
   }
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* ./analysis//allocate_iregister_slots.nit:209 */
+  /* analysis/allocate_iregister_slots.nit:209 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegister____born_rank(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -891,11 +891,11 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:232 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ./analysis//allocate_iregister_slots.nit:209 */
+  /* analysis/allocate_iregister_slots.nit:209 */
   if (UNTAG_Bool(REGB1)) {
-    /* ./analysis//allocate_iregister_slots.nit:210 */
+    /* analysis/allocate_iregister_slots.nit:210 */
     REGB1 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____deferred_list(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
@@ -904,7 +904,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
     fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____deferred_list(fra.me.REG[0]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   } else {
-    /* ./analysis//allocate_iregister_slots.nit:211 */
+    /* analysis/allocate_iregister_slots.nit:211 */
     fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___IRegister____last(fra.me.REG[1]);
     REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
@@ -920,7 +920,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
     }
     REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
     if (UNTAG_Bool(REGB1)) {
-      /* ./analysis//allocate_iregister_slots.nit:212 */
+      /* analysis/allocate_iregister_slots.nit:212 */
       REGB1 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegister____in_tag_slots(fra.me.REG[1])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -928,7 +928,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
       }
       REGB1 = ATTR_analysis___allocate_iregister_slots___IRegister____in_tag_slots(fra.me.REG[1]);
       if (UNTAG_Bool(REGB1)) {
-        /* ./analysis//allocate_iregister_slots.nit:213 */
+        /* analysis/allocate_iregister_slots.nit:213 */
         REGB1 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(fra.me.REG[0])!=NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
         } else {
@@ -937,7 +937,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
         fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____tag_slots(fra.me.REG[0]);
         CALL_analysis___allocate_iregister_slots___SlotGroup___free(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
       } else {
-        /* ./analysis//allocate_iregister_slots.nit:214 */
+        /* analysis/allocate_iregister_slots.nit:214 */
         REGB1 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegister____is_local(fra.me.REG[1])!=NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
         } else {
@@ -945,7 +945,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
         }
         REGB1 = ATTR_analysis___allocate_iregister_slots___IRegister____is_local(fra.me.REG[1]);
         if (UNTAG_Bool(REGB1)) {
-          /* ./analysis//allocate_iregister_slots.nit:215 */
+          /* analysis/allocate_iregister_slots.nit:215 */
           REGB1 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____std_slots(fra.me.REG[0])!=NIT_NULL);
           if (UNTAG_Bool(REGB1)) {
           } else {
@@ -954,7 +954,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
           fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____std_slots(fra.me.REG[0]);
           CALL_analysis___allocate_iregister_slots___SlotGroup___free(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
         } else {
-          /* ./analysis//allocate_iregister_slots.nit:217 */
+          /* analysis/allocate_iregister_slots.nit:217 */
           REGB1 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____global_slots(fra.me.REG[0])!=NIT_NULL);
           if (UNTAG_Bool(REGB1)) {
           } else {
@@ -964,7 +964,7 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___free
           CALL_analysis___allocate_iregister_slots___SlotGroup___free(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
         }
       }
-      /* ./analysis//allocate_iregister_slots.nit:219 */
+      /* analysis/allocate_iregister_slots.nit:219 */
       ATTR_analysis___allocate_iregister_slots___IRegister____last(fra.me.REG[1]) = NIT_NULL;
     }
   }
@@ -986,21 +986,21 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___irou
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./analysis//allocate_iregister_slots.nit:226 */
+  /* analysis/allocate_iregister_slots.nit:226 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_current_ir", LOCATE_analysis___allocate_iregister_slots, 226);
   }
   fra.me.REG[1] = ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(fra.me.REG[0]);
-  /* ./analysis//allocate_iregister_slots.nit:227 */
+  /* analysis/allocate_iregister_slots.nit:227 */
   CALL_icode___icode_tools___ICodeVisitor___visit_iroutine(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./analysis//allocate_iregister_slots.nit:228 */
+  /* analysis/allocate_iregister_slots.nit:228 */
   REGB0 = TAG_Int(1);
   ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____pass(fra.me.REG[0]) = REGB0;
-  /* ./analysis//allocate_iregister_slots.nit:229 */
+  /* analysis/allocate_iregister_slots.nit:229 */
   CALL_icode___icode_tools___ICodeVisitor___visit_iroutine(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./analysis//allocate_iregister_slots.nit:230 */
+  /* analysis/allocate_iregister_slots.nit:230 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____deferred_list(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1033,12 +1033,12 @@ void analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___init
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:233 */
+  /* analysis/allocate_iregister_slots.nit:233 */
   fra.me.REG[2] = fra.me.REG[0];
   CALL_icode___icode_tools___ICodeVisitor___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./analysis//allocate_iregister_slots.nit:235 */
+  /* analysis/allocate_iregister_slots.nit:235 */
   ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____current_ir(fra.me.REG[2]) = fra.me.REG[1];
-  /* ./analysis//allocate_iregister_slots.nit:236 */
+  /* analysis/allocate_iregister_slots.nit:236 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor____global_slots(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1067,7 +1067,7 @@ void analysis___allocate_iregister_slots___SlotGroup___register(val_t p0, val_t 
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:251 */
+  /* analysis/allocate_iregister_slots.nit:251 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1076,7 +1076,7 @@ void analysis___allocate_iregister_slots___SlotGroup___register(val_t p0, val_t 
   fra.me.REG[2] = ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[2])(fra.me.REG[2]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./analysis//allocate_iregister_slots.nit:252 */
+    /* analysis/allocate_iregister_slots.nit:252 */
     REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___SlotGroup____next_index(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -1084,15 +1084,15 @@ void analysis___allocate_iregister_slots___SlotGroup___register(val_t p0, val_t 
     }
     REGB0 = ATTR_analysis___allocate_iregister_slots___SlotGroup____next_index(fra.me.REG[0]);
     ATTR_analysis___allocate_iregister_slots___IRegister____slot_index(fra.me.REG[1]) = REGB0;
-    /* ./analysis//allocate_iregister_slots.nit:253 */
+    /* analysis/allocate_iregister_slots.nit:253 */
     REGB0 = ATTR_analysis___allocate_iregister_slots___SlotGroup____next_index(fra.me.REG[0]);
     REGB1 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:235 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-    /* ./analysis//allocate_iregister_slots.nit:253 */
+    /* analysis/allocate_iregister_slots.nit:253 */
     ATTR_analysis___allocate_iregister_slots___SlotGroup____next_index(fra.me.REG[0]) = REGB1;
   } else {
-    /* ./analysis//allocate_iregister_slots.nit:255 */
+    /* analysis/allocate_iregister_slots.nit:255 */
     REGB1 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
@@ -1121,9 +1121,9 @@ void analysis___allocate_iregister_slots___SlotGroup___free(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:259 */
+  /* analysis/allocate_iregister_slots.nit:259 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./analysis//allocate_iregister_slots.nit:262 */
+  /* analysis/allocate_iregister_slots.nit:262 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___SlotGroup____free(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1169,7 +1169,7 @@ val_t analysis___allocate_iregister_slots___IRoutine___std_slots_nb(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./analysis//allocate_iregister_slots.nit:267 */
+  /* analysis/allocate_iregister_slots.nit:267 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRoutine____std_slots_nb(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1192,7 +1192,7 @@ val_t analysis___allocate_iregister_slots___IRoutine___tag_slots_nb(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./analysis//allocate_iregister_slots.nit:270 */
+  /* analysis/allocate_iregister_slots.nit:270 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRoutine____tag_slots_nb(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1214,9 +1214,9 @@ void analysis___allocate_iregister_slots___IRoutine___allocate_iregister_slots(v
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./analysis//allocate_iregister_slots.nit:275 */
+  /* analysis/allocate_iregister_slots.nit:275 */
   fra.me.REG[0] = NEW_IRegisterSlotAllocationVisitor_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___init(fra.me.REG[0]);
-  /* ./analysis//allocate_iregister_slots.nit:276 */
+  /* analysis/allocate_iregister_slots.nit:276 */
   CALL_analysis___allocate_iregister_slots___IRegisterSlotAllocationVisitor___iroutine_slot_allocation(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
@@ -1233,7 +1233,7 @@ val_t analysis___allocate_iregister_slots___IRegister___slot_index(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./analysis//allocate_iregister_slots.nit:281 */
+  /* analysis/allocate_iregister_slots.nit:281 */
   fra.me.REG[0] = ATTR_analysis___allocate_iregister_slots___IRegister____slot_index(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1252,7 +1252,7 @@ void analysis___allocate_iregister_slots___IRegister___slot_index__eq(val_t p0, 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:281 */
+  /* analysis/allocate_iregister_slots.nit:281 */
   ATTR_analysis___allocate_iregister_slots___IRegister____slot_index(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1270,7 +1270,7 @@ val_t analysis___allocate_iregister_slots___IRegister___is_local(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./analysis//allocate_iregister_slots.nit:286 */
+  /* analysis/allocate_iregister_slots.nit:286 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegister____is_local(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1294,7 +1294,7 @@ void analysis___allocate_iregister_slots___IRegister___is_local__eq(val_t p0, va
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./analysis//allocate_iregister_slots.nit:286 */
+  /* analysis/allocate_iregister_slots.nit:286 */
   ATTR_analysis___allocate_iregister_slots___IRegister____is_local(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -1311,7 +1311,7 @@ val_t analysis___allocate_iregister_slots___IRegister___local_iroutine(val_t p0)
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./analysis//allocate_iregister_slots.nit:289 */
+  /* analysis/allocate_iregister_slots.nit:289 */
   fra.me.REG[0] = ATTR_analysis___allocate_iregister_slots___IRegister____local_iroutine(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1330,7 +1330,7 @@ void analysis___allocate_iregister_slots___IRegister___local_iroutine__eq(val_t 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//allocate_iregister_slots.nit:289 */
+  /* analysis/allocate_iregister_slots.nit:289 */
   ATTR_analysis___allocate_iregister_slots___IRegister____local_iroutine(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1348,7 +1348,7 @@ val_t analysis___allocate_iregister_slots___IRegister___in_tag_slots(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./analysis//allocate_iregister_slots.nit:292 */
+  /* analysis/allocate_iregister_slots.nit:292 */
   REGB0 = TAG_Bool(ATTR_analysis___allocate_iregister_slots___IRegister____in_tag_slots(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1372,7 +1372,7 @@ void analysis___allocate_iregister_slots___IRegister___in_tag_slots__eq(val_t p0
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./analysis//allocate_iregister_slots.nit:292 */
+  /* analysis/allocate_iregister_slots.nit:292 */
   ATTR_analysis___allocate_iregister_slots___IRegister____in_tag_slots(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;

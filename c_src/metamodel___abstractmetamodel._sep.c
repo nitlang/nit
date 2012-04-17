@@ -31,7 +31,7 @@ val_t metamodel___abstractmetamodel___MMContext___module_hierarchy(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:29 */
+  /* metamodel/abstractmetamodel.nit:29 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMContext____module_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -54,7 +54,7 @@ val_t metamodel___abstractmetamodel___MMContext___class_hierarchy(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:32 */
+  /* metamodel/abstractmetamodel.nit:32 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMContext____class_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -77,7 +77,7 @@ val_t metamodel___abstractmetamodel___MMContext___modules(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:39 */
+  /* metamodel/abstractmetamodel.nit:39 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMContext____modules(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -106,7 +106,7 @@ void metamodel___abstractmetamodel___MMContext___add_module(val_t p0, val_t p1, 
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./metamodel//abstractmetamodel.nit:45 */
+  /* metamodel/abstractmetamodel.nit:45 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMContext____module_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -121,7 +121,7 @@ void metamodel___abstractmetamodel___MMContext___add_module(val_t p0, val_t p1, 
   fra.me.REG[4] = ATTR_metamodel___abstractmetamodel___MMContext____module_hierarchy(fra.me.REG[0]);
   fra.me.REG[2] = CALL_metamodel___partial_order___PartialOrder___select_smallests(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[2]);
   CALL_metamodel___partial_order___PartialOrder___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1], fra.me.REG[2]);
-  /* ./metamodel//abstractmetamodel.nit:46 */
+  /* metamodel/abstractmetamodel.nit:46 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMContext____modules(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -129,7 +129,7 @@ void metamodel___abstractmetamodel___MMContext___add_module(val_t p0, val_t p1, 
   }
   fra.me.REG[2] = ATTR_metamodel___abstractmetamodel___MMContext____modules(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:47 */
+  /* metamodel/abstractmetamodel.nit:47 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMContext____module_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -156,7 +156,7 @@ void metamodel___abstractmetamodel___MMContext___add_global_class(val_t p0, val_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:51 */
+  /* metamodel/abstractmetamodel.nit:51 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMContext____global_classes(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -192,22 +192,22 @@ void metamodel___abstractmetamodel___MMContext___add_local_class(val_t p0, val_t
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./metamodel//abstractmetamodel.nit:56 */
+  /* metamodel/abstractmetamodel.nit:56 */
   fra.me.REG[3] = NEW_Array_standard___collection___array___Array___init();
-  /* ./../lib/standard//collection//array.nit:269 */
+  /* ../lib/standard/collection/array.nit:269 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//array.nit:270 */
+  /* ../lib/standard/collection/array.nit:270 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-  /* ./../lib/standard//collection//array.nit:271 */
+  /* ../lib/standard/collection/array.nit:271 */
   fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
-  /* ./../lib/standard//collection//array.nit:272 */
+  /* ../lib/standard/collection/array.nit:272 */
   while(1) {
-    /* ./../lib/standard//collection//array.nit:24 */
+    /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
@@ -219,40 +219,40 @@ void metamodel___abstractmetamodel___MMContext___add_local_class(val_t p0, val_t
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:232 */
+    /* ../lib/standard/kernel.nit:232 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:272 */
+    /* ../lib/standard/collection/array.nit:272 */
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//collection//array.nit:273 */
+      /* ../lib/standard/collection/array.nit:273 */
       REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ./../lib/standard//collection//array.nit:718 */
+      /* ../lib/standard/collection/array.nit:718 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
-      /* ./metamodel//abstractmetamodel.nit:58 */
+      /* metamodel/abstractmetamodel.nit:58 */
       REGB1 = TAG_Bool(VAL_ISA(fra.me.REG[5], COLOR_metamodel___abstractmetamodel___MMConcreteClass, ID_metamodel___abstractmetamodel___MMConcreteClass)) /*cast MMConcreteClass*/;
       if (UNTAG_Bool(REGB1)) {
-        /* ./metamodel//abstractmetamodel.nit:59 */
+        /* metamodel/abstractmetamodel.nit:59 */
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[5]);
       } else {
-        /* ./metamodel//abstractmetamodel.nit:61 */
+        /* metamodel/abstractmetamodel.nit:61 */
         fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalClass___che(fra.me.REG[5])(fra.me.REG[5]);
         fra.me.REG[5] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[5])(fra.me.REG[5]);
-        /* ./../lib/standard//collection//array.nit:269 */
+        /* ../lib/standard/collection/array.nit:269 */
         REGB1 = TAG_Int(0);
-        /* ./../lib/standard//collection//array.nit:270 */
+        /* ../lib/standard/collection/array.nit:270 */
         REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
         } else {
           nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
         }
         REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5]);
-        /* ./../lib/standard//collection//array.nit:271 */
+        /* ../lib/standard/collection/array.nit:271 */
         fra.me.REG[6] = ATTR_standard___collection___array___Array____items(fra.me.REG[5]);
-        /* ./../lib/standard//collection//array.nit:272 */
+        /* ../lib/standard/collection/array.nit:272 */
         while(1) {
-          /* ./../lib/standard//collection//array.nit:24 */
+          /* ../lib/standard/collection/array.nit:24 */
           REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
           if (UNTAG_Bool(REGB2)) {
           } else {
@@ -264,51 +264,51 @@ void metamodel___abstractmetamodel___MMContext___add_local_class(val_t p0, val_t
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ./../lib/standard//kernel.nit:232 */
+          /* ../lib/standard/kernel.nit:232 */
           REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-          /* ./../lib/standard//collection//array.nit:272 */
+          /* ../lib/standard/collection/array.nit:272 */
           if (UNTAG_Bool(REGB2)) {
-            /* ./../lib/standard//collection//array.nit:273 */
+            /* ../lib/standard/collection/array.nit:273 */
             REGB2 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
             if (UNTAG_Bool(REGB2)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ./../lib/standard//collection//array.nit:718 */
+            /* ../lib/standard/collection/array.nit:718 */
             fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB1)];
-            /* ./metamodel//abstractmetamodel.nit:62 */
+            /* metamodel/abstractmetamodel.nit:62 */
             REGB2 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[7]);
             if (UNTAG_Bool(REGB2)) {
               goto label1;
             }
-            /* ./metamodel//abstractmetamodel.nit:63 */
+            /* metamodel/abstractmetamodel.nit:63 */
             CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[7]);
             label1: while(0);
-            /* ./../lib/standard//collection//array.nit:274 */
+            /* ../lib/standard/collection/array.nit:274 */
             REGB2 = TAG_Int(1);
-            /* ./../lib/standard//kernel.nit:235 */
+            /* ../lib/standard/kernel.nit:235 */
             REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-            /* ./../lib/standard//collection//array.nit:274 */
+            /* ../lib/standard/collection/array.nit:274 */
             REGB1 = REGB2;
           } else {
-            /* ./../lib/standard//collection//array.nit:272 */
+            /* ../lib/standard/collection/array.nit:272 */
             goto label2;
           }
         }
         label2: while(0);
       }
-      /* ./../lib/standard//collection//array.nit:274 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:235 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:274 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB0 = REGB1;
     } else {
-      /* ./../lib/standard//collection//array.nit:272 */
+      /* ../lib/standard/collection/array.nit:272 */
       goto label3;
     }
   }
   label3: while(0);
-  /* ./metamodel//abstractmetamodel.nit:67 */
+  /* metamodel/abstractmetamodel.nit:67 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMContext____class_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -316,7 +316,7 @@ void metamodel___abstractmetamodel___MMContext___add_local_class(val_t p0, val_t
   }
   fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMContext____class_hierarchy(fra.me.REG[0]);
   fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrder___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[3]);
-  /* ./metamodel//abstractmetamodel.nit:68 */
+  /* metamodel/abstractmetamodel.nit:68 */
   ATTR_metamodel___abstractmetamodel___MMLocalClass____che(fra.me.REG[1]) = fra.me.REG[3];
   stack_frame_head = fra.me.prev;
   return;
@@ -334,7 +334,7 @@ val_t metamodel___abstractmetamodel___MMDirectory___name(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:74 */
+  /* metamodel/abstractmetamodel.nit:74 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMDirectory____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -357,7 +357,7 @@ val_t metamodel___abstractmetamodel___MMDirectory___path(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:77 */
+  /* metamodel/abstractmetamodel.nit:77 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMDirectory____path(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -379,7 +379,7 @@ val_t metamodel___abstractmetamodel___MMDirectory___parent(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:80 */
+  /* metamodel/abstractmetamodel.nit:80 */
   fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMDirectory____parent(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -396,7 +396,7 @@ val_t metamodel___abstractmetamodel___MMDirectory___owner(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:84 */
+  /* metamodel/abstractmetamodel.nit:84 */
   fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMDirectory____owner(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -415,7 +415,7 @@ void metamodel___abstractmetamodel___MMDirectory___owner__eq(val_t p0, val_t p1)
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:84 */
+  /* metamodel/abstractmetamodel.nit:84 */
   ATTR_metamodel___abstractmetamodel___MMDirectory____owner(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -433,7 +433,7 @@ val_t metamodel___abstractmetamodel___MMDirectory___modules(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:87 */
+  /* metamodel/abstractmetamodel.nit:87 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMDirectory____modules(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -460,7 +460,7 @@ void metamodel___abstractmetamodel___MMDirectory___add_module(val_t p0, val_t p1
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:93 */
+  /* metamodel/abstractmetamodel.nit:93 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMDirectory____modules(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -474,7 +474,7 @@ void metamodel___abstractmetamodel___MMDirectory___add_module(val_t p0, val_t p1
   } else {
     nit_abort("Assert failed", NULL, LOCATE_metamodel___abstractmetamodel, 93);
   }
-  /* ./metamodel//abstractmetamodel.nit:94 */
+  /* metamodel/abstractmetamodel.nit:94 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMDirectory____modules(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -506,11 +506,11 @@ void metamodel___abstractmetamodel___MMDirectory___init(val_t p0, val_t p1, val_
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
-  /* ./metamodel//abstractmetamodel.nit:98 */
+  /* metamodel/abstractmetamodel.nit:98 */
   ATTR_metamodel___abstractmetamodel___MMDirectory____name(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:99 */
+  /* metamodel/abstractmetamodel.nit:99 */
   ATTR_metamodel___abstractmetamodel___MMDirectory____path(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./metamodel//abstractmetamodel.nit:100 */
+  /* metamodel/abstractmetamodel.nit:100 */
   ATTR_metamodel___abstractmetamodel___MMDirectory____parent(fra.me.REG[0]) = fra.me.REG[3];
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
@@ -536,7 +536,7 @@ val_t metamodel___abstractmetamodel___MMDirectory___full_name_for(val_t p0, val_
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:105 */
+  /* metamodel/abstractmetamodel.nit:105 */
   REGB0 = TAG_Int(5);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -591,7 +591,7 @@ val_t metamodel___abstractmetamodel___MMModule___context(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:111 */
+  /* metamodel/abstractmetamodel.nit:111 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____context(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -614,7 +614,7 @@ val_t metamodel___abstractmetamodel___MMModule___name(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:114 */
+  /* metamodel/abstractmetamodel.nit:114 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -637,7 +637,7 @@ val_t metamodel___abstractmetamodel___MMModule___full_name(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:117 */
+  /* metamodel/abstractmetamodel.nit:117 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____full_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -660,7 +660,7 @@ val_t metamodel___abstractmetamodel___MMModule___directory(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:120 */
+  /* metamodel/abstractmetamodel.nit:120 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____directory(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -683,7 +683,7 @@ val_t metamodel___abstractmetamodel___MMModule___location(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:123 */
+  /* metamodel/abstractmetamodel.nit:123 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____location(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -705,7 +705,7 @@ val_t metamodel___abstractmetamodel___MMModule___mhe(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:126 */
+  /* metamodel/abstractmetamodel.nit:126 */
   fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMModule____mhe(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -723,7 +723,7 @@ val_t metamodel___abstractmetamodel___MMModule___global_classes(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:129 */
+  /* metamodel/abstractmetamodel.nit:129 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____global_classes(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -746,7 +746,7 @@ val_t metamodel___abstractmetamodel___MMModule___local_classes(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:132 */
+  /* metamodel/abstractmetamodel.nit:132 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____local_classes(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -769,7 +769,7 @@ val_t metamodel___abstractmetamodel___MMModule___class_specialization_hierarchy(
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:135 */
+  /* metamodel/abstractmetamodel.nit:135 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____class_specialization_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -792,7 +792,7 @@ val_t metamodel___abstractmetamodel___MMModule___explicit_imported_modules(val_t
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:147 */
+  /* metamodel/abstractmetamodel.nit:147 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____explicit_imported_modules(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -815,7 +815,7 @@ val_t metamodel___abstractmetamodel___MMModule___is_extern_hybrid(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:156 */
+  /* metamodel/abstractmetamodel.nit:156 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule_____atis_extern_hybrid(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -839,7 +839,7 @@ void metamodel___abstractmetamodel___MMModule___is_extern_hybrid__eq(val_t p0, v
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:156 */
+  /* metamodel/abstractmetamodel.nit:156 */
   ATTR_metamodel___abstractmetamodel___MMModule_____atis_extern_hybrid(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -866,16 +866,16 @@ void metamodel___abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
   fra.me.REG[4] = p4;
-  /* ./metamodel//abstractmetamodel.nit:163 */
+  /* metamodel/abstractmetamodel.nit:163 */
   ATTR_metamodel___abstractmetamodel___MMModule____name(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:164 */
+  /* metamodel/abstractmetamodel.nit:164 */
   ATTR_metamodel___abstractmetamodel___MMModule____directory(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./metamodel//abstractmetamodel.nit:165 */
+  /* metamodel/abstractmetamodel.nit:165 */
   ATTR_metamodel___abstractmetamodel___MMModule____context(fra.me.REG[0]) = fra.me.REG[3];
-  /* ./metamodel//abstractmetamodel.nit:166 */
+  /* metamodel/abstractmetamodel.nit:166 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMDirectory___full_name_for(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   ATTR_metamodel___abstractmetamodel___MMModule____full_name(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:167 */
+  /* metamodel/abstractmetamodel.nit:167 */
   ATTR_metamodel___abstractmetamodel___MMModule____location(fra.me.REG[0]) = fra.me.REG[4];
   stack_frame_head = fra.me.prev;
   init_table[itpos2] = 1;
@@ -901,7 +901,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   REGB0 = p2;
-  /* ./metamodel//abstractmetamodel.nit:176 */
+  /* metamodel/abstractmetamodel.nit:176 */
   REGB1 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____explicit_imported_modules(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -909,18 +909,18 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
   }
   fra.me.REG[2] = ATTR_metamodel___abstractmetamodel___MMModule____explicit_imported_modules(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:177 */
+  /* metamodel/abstractmetamodel.nit:177 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:227 */
+    /* ../lib/standard/kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./metamodel//abstractmetamodel.nit:177 */
+    /* metamodel/abstractmetamodel.nit:177 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./metamodel//abstractmetamodel.nit:178 */
+    /* metamodel/abstractmetamodel.nit:178 */
     REGB2 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____intrude_modules(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -928,7 +928,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
     }
     fra.me.REG[2] = ATTR_metamodel___abstractmetamodel___MMModule____intrude_modules(fra.me.REG[0]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-    /* ./metamodel//abstractmetamodel.nit:179 */
+    /* metamodel/abstractmetamodel.nit:179 */
     REGB2 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____intrude_modules(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -942,7 +942,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
     }
     fra.me.REG[3] = ATTR_metamodel___abstractmetamodel___MMModule____intrude_modules(fra.me.REG[1]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-    /* ./metamodel//abstractmetamodel.nit:180 */
+    /* metamodel/abstractmetamodel.nit:180 */
     REGB2 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____public_modules(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -956,7 +956,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
     }
     fra.me.REG[2] = ATTR_metamodel___abstractmetamodel___MMModule____public_modules(fra.me.REG[1]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-    /* ./metamodel//abstractmetamodel.nit:181 */
+    /* metamodel/abstractmetamodel.nit:181 */
     REGB2 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____private_modules(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -971,18 +971,18 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
     fra.me.REG[3] = ATTR_metamodel___abstractmetamodel___MMModule____private_modules(fra.me.REG[1]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   } else {
-    /* ./metamodel//abstractmetamodel.nit:182 */
+    /* metamodel/abstractmetamodel.nit:182 */
     REGB2 = TAG_Int(1);
     REGB1 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB2));
     if (UNTAG_Bool(REGB1)) {
     } else {
-      /* ./../lib/standard//kernel.nit:227 */
+      /* ../lib/standard/kernel.nit:227 */
       REGB2 = TAG_Bool((REGB0)==(REGB2));
-      /* ./metamodel//abstractmetamodel.nit:182 */
+      /* metamodel/abstractmetamodel.nit:182 */
       REGB1 = REGB2;
     }
     if (UNTAG_Bool(REGB1)) {
-      /* ./metamodel//abstractmetamodel.nit:183 */
+      /* metamodel/abstractmetamodel.nit:183 */
       REGB1 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____public_modules(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -990,7 +990,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
       }
       fra.me.REG[3] = ATTR_metamodel___abstractmetamodel___MMModule____public_modules(fra.me.REG[0]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
-      /* ./metamodel//abstractmetamodel.nit:184 */
+      /* metamodel/abstractmetamodel.nit:184 */
       REGB1 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____public_modules(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -1004,7 +1004,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
       }
       fra.me.REG[2] = ATTR_metamodel___abstractmetamodel___MMModule____intrude_modules(fra.me.REG[1]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-      /* ./metamodel//abstractmetamodel.nit:185 */
+      /* metamodel/abstractmetamodel.nit:185 */
       REGB1 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____public_modules(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -1019,7 +1019,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
       fra.me.REG[3] = ATTR_metamodel___abstractmetamodel___MMModule____public_modules(fra.me.REG[1]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     } else {
-      /* ./metamodel//abstractmetamodel.nit:187 */
+      /* metamodel/abstractmetamodel.nit:187 */
       REGB1 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____private_modules(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -1027,7 +1027,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
       }
       fra.me.REG[3] = ATTR_metamodel___abstractmetamodel___MMModule____private_modules(fra.me.REG[0]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
-      /* ./metamodel//abstractmetamodel.nit:188 */
+      /* metamodel/abstractmetamodel.nit:188 */
       REGB1 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____private_modules(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -1041,7 +1041,7 @@ void metamodel___abstractmetamodel___MMModule___add_super_module(val_t p0, val_t
       }
       fra.me.REG[2] = ATTR_metamodel___abstractmetamodel___MMModule____intrude_modules(fra.me.REG[1]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-      /* ./metamodel//abstractmetamodel.nit:189 */
+      /* metamodel/abstractmetamodel.nit:189 */
       REGB1 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____private_modules(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -1077,7 +1077,7 @@ val_t metamodel___abstractmetamodel___MMModule___visibility_for(val_t p0, val_t 
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:201 */
+  /* metamodel/abstractmetamodel.nit:201 */
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[0]));
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1097,11 +1097,11 @@ val_t metamodel___abstractmetamodel___MMModule___visibility_for(val_t p0, val_t 
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./metamodel//abstractmetamodel.nit:202 */
+    /* metamodel/abstractmetamodel.nit:202 */
     REGB0 = TAG_Int(3);
     goto label1;
   } else {
-    /* ./metamodel//abstractmetamodel.nit:203 */
+    /* metamodel/abstractmetamodel.nit:203 */
     REGB1 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____public_modules(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
@@ -1110,12 +1110,12 @@ val_t metamodel___abstractmetamodel___MMModule___visibility_for(val_t p0, val_t 
     fra.me.REG[2] = ATTR_metamodel___abstractmetamodel___MMModule____public_modules(fra.me.REG[0]);
     REGB1 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
     if (UNTAG_Bool(REGB1)) {
-      /* ./metamodel//abstractmetamodel.nit:204 */
+      /* metamodel/abstractmetamodel.nit:204 */
       REGB1 = TAG_Int(2);
       REGB0 = REGB1;
       goto label1;
     } else {
-      /* ./metamodel//abstractmetamodel.nit:205 */
+      /* metamodel/abstractmetamodel.nit:205 */
       REGB1 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____private_modules(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -1124,12 +1124,12 @@ val_t metamodel___abstractmetamodel___MMModule___visibility_for(val_t p0, val_t 
       fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMModule____private_modules(fra.me.REG[0]);
       REGB1 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
       if (UNTAG_Bool(REGB1)) {
-        /* ./metamodel//abstractmetamodel.nit:206 */
+        /* metamodel/abstractmetamodel.nit:206 */
         REGB1 = TAG_Int(1);
         REGB0 = REGB1;
         goto label1;
       } else {
-        /* ./metamodel//abstractmetamodel.nit:208 */
+        /* metamodel/abstractmetamodel.nit:208 */
         REGB1 = TAG_Int(0);
         REGB0 = REGB1;
         goto label1;
@@ -1155,7 +1155,7 @@ val_t metamodel___abstractmetamodel___MMModule_____bra(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:216 */
+  /* metamodel/abstractmetamodel.nit:216 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____local_class_by_global(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1184,7 +1184,7 @@ val_t metamodel___abstractmetamodel___MMModule___class_by_name(val_t p0, val_t p
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:222 */
+  /* metamodel/abstractmetamodel.nit:222 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____global_class_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1213,7 +1213,7 @@ val_t metamodel___abstractmetamodel___MMModule___has_global_class_named(val_t p0
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:228 */
+  /* metamodel/abstractmetamodel.nit:228 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____global_class_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1241,7 +1241,7 @@ val_t metamodel___abstractmetamodel___MMModule___global_class_named(val_t p0, va
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:235 */
+  /* metamodel/abstractmetamodel.nit:235 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____global_class_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1266,7 +1266,7 @@ val_t metamodel___abstractmetamodel___MMModule___to_s(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:238 */
+  /* metamodel/abstractmetamodel.nit:238 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMModule___name(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1292,7 +1292,7 @@ void metamodel___abstractmetamodel___MMModule___set_supers_class(val_t p0, val_t
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./metamodel//abstractmetamodel.nit:243 */
+  /* metamodel/abstractmetamodel.nit:243 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____class_specialization_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1300,7 +1300,7 @@ void metamodel___abstractmetamodel___MMModule___set_supers_class(val_t p0, val_t
   }
   fra.me.REG[3] = ATTR_metamodel___abstractmetamodel___MMModule____class_specialization_hierarchy(fra.me.REG[0]);
   fra.me.REG[2] = CALL_metamodel___partial_order___PartialOrder___select_smallests(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-  /* ./metamodel//abstractmetamodel.nit:244 */
+  /* metamodel/abstractmetamodel.nit:244 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____class_specialization_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1309,13 +1309,13 @@ void metamodel___abstractmetamodel___MMModule___set_supers_class(val_t p0, val_t
   fra.me.REG[3] = ATTR_metamodel___abstractmetamodel___MMModule____class_specialization_hierarchy(fra.me.REG[0]);
   fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrder___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1], fra.me.REG[2]);
   ATTR_metamodel___abstractmetamodel___MMLocalClass____cshe(fra.me.REG[1]) = fra.me.REG[3];
-  /* ./metamodel//abstractmetamodel.nit:245 */
+  /* metamodel/abstractmetamodel.nit:245 */
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___crhe(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[3] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[3])(fra.me.REG[3]);
-  /* ./metamodel//abstractmetamodel.nit:246 */
+  /* metamodel/abstractmetamodel.nit:246 */
   CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-  /* ./metamodel//abstractmetamodel.nit:247 */
+  /* metamodel/abstractmetamodel.nit:247 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMModule___context(fra.me.REG[0])(fra.me.REG[0]);
   CALL_metamodel___abstractmetamodel___MMContext___add_local_class(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[3]);
   stack_frame_head = fra.me.prev;
@@ -1337,7 +1337,7 @@ void metamodel___abstractmetamodel___MMModule___register_global_class(val_t p0, 
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:253 */
+  /* metamodel/abstractmetamodel.nit:253 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____local_class_by_global(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1362,7 +1362,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___intro(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:258 */
+  /* metamodel/abstractmetamodel.nit:258 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalClass____intro(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1385,7 +1385,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___class_refinement_hierarchy
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:261 */
+  /* metamodel/abstractmetamodel.nit:261 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalClass____class_refinement_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1411,9 +1411,9 @@ void metamodel___abstractmetamodel___MMGlobalClass___init(val_t p0, val_t p1, in
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:268 */
+  /* metamodel/abstractmetamodel.nit:268 */
   ATTR_metamodel___abstractmetamodel___MMGlobalClass____intro(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:269 */
+  /* metamodel/abstractmetamodel.nit:269 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___context(fra.me.REG[1])(fra.me.REG[1]);
   CALL_metamodel___abstractmetamodel___MMContext___add_global_class(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1432,7 +1432,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___name(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:275 */
+  /* metamodel/abstractmetamodel.nit:275 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMGlobalClass___intro(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___name(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1452,7 +1452,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___mmmodule(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:281 */
+  /* metamodel/abstractmetamodel.nit:281 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMGlobalClass___intro(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1472,7 +1472,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___to_s(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:286 */
+  /* metamodel/abstractmetamodel.nit:286 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMGlobalClass___intro(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1497,12 +1497,12 @@ void metamodel___abstractmetamodel___MMGlobalClass___register_local_class(val_t 
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:292 */
+  /* metamodel/abstractmetamodel.nit:292 */
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___init();
-  /* ./metamodel//abstractmetamodel.nit:293 */
+  /* metamodel/abstractmetamodel.nit:293 */
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMGlobalClass___class_refinement_hierarchy(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[3])(fra.me.REG[3], (&(fra.me)), ((fun_t)OC_metamodel___abstractmetamodel___MMGlobalClass___register_local_class_1));
-  /* ./metamodel//abstractmetamodel.nit:298 */
+  /* metamodel/abstractmetamodel.nit:298 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalClass____class_refinement_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1534,7 +1534,7 @@ void metamodel___abstractmetamodel___MMGlobalClass___register_local_class(val_t 
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* ./metamodel//abstractmetamodel.nit:294 */
+    /* metamodel/abstractmetamodel.nit:294 */
     fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___mmmodule(closctx->REG[1])(closctx->REG[1]);
     fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMModule___mhe(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
@@ -1550,7 +1550,7 @@ void metamodel___abstractmetamodel___MMGlobalClass___register_local_class(val_t 
       REGB0 = REGB1;
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./metamodel//abstractmetamodel.nit:295 */
+      /* metamodel/abstractmetamodel.nit:295 */
       CALL_standard___collection___abstract_collection___SimpleCollection___add(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
     }
     stack_frame_head = fra.me.prev;
@@ -1569,7 +1569,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___is_interface(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:301 */
+  /* metamodel/abstractmetamodel.nit:301 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalClass____is_interface(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1593,7 +1593,7 @@ void metamodel___abstractmetamodel___MMGlobalClass___is_interface__eq(val_t p0, 
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:301 */
+  /* metamodel/abstractmetamodel.nit:301 */
   ATTR_metamodel___abstractmetamodel___MMGlobalClass____is_interface(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -1611,7 +1611,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___is_abstract(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:304 */
+  /* metamodel/abstractmetamodel.nit:304 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalClass____is_abstract(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1635,7 +1635,7 @@ void metamodel___abstractmetamodel___MMGlobalClass___is_abstract__eq(val_t p0, v
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:304 */
+  /* metamodel/abstractmetamodel.nit:304 */
   ATTR_metamodel___abstractmetamodel___MMGlobalClass____is_abstract(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -1653,7 +1653,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___is_enum(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:307 */
+  /* metamodel/abstractmetamodel.nit:307 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalClass____is_enum(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1677,7 +1677,7 @@ void metamodel___abstractmetamodel___MMGlobalClass___is_enum__eq(val_t p0, val_t
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:307 */
+  /* metamodel/abstractmetamodel.nit:307 */
   ATTR_metamodel___abstractmetamodel___MMGlobalClass____is_enum(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -1695,7 +1695,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___is_extern(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:310 */
+  /* metamodel/abstractmetamodel.nit:310 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalClass____is_extern(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1719,7 +1719,7 @@ void metamodel___abstractmetamodel___MMGlobalClass___is_extern__eq(val_t p0, val
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:310 */
+  /* metamodel/abstractmetamodel.nit:310 */
   ATTR_metamodel___abstractmetamodel___MMGlobalClass____is_extern(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -1737,7 +1737,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___visibility_level(val_t p0)
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:313 */
+  /* metamodel/abstractmetamodel.nit:313 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalClass____visibility_level(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1761,7 +1761,7 @@ void metamodel___abstractmetamodel___MMGlobalClass___visibility_level__eq(val_t 
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:313 */
+  /* metamodel/abstractmetamodel.nit:313 */
   ATTR_metamodel___abstractmetamodel___MMGlobalClass____visibility_level(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -1781,7 +1781,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___is_mixin(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:322 */
+  /* metamodel/abstractmetamodel.nit:322 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalClass____mixin_of(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1813,7 +1813,7 @@ val_t metamodel___abstractmetamodel___MMGlobalClass___mixin_of(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:325 */
+  /* metamodel/abstractmetamodel.nit:325 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalClass____mixin_of(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1837,7 +1837,7 @@ void metamodel___abstractmetamodel___MMGlobalClass___mixin_of__eq(val_t p0, val_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:325 */
+  /* metamodel/abstractmetamodel.nit:325 */
   ATTR_metamodel___abstractmetamodel___MMGlobalClass____mixin_of(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1855,7 +1855,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___name(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:334 */
+  /* metamodel/abstractmetamodel.nit:334 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1878,7 +1878,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___arity(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:337 */
+  /* metamodel/abstractmetamodel.nit:337 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____arity(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1901,7 +1901,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___mmmodule(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:341 */
+  /* metamodel/abstractmetamodel.nit:341 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1925,9 +1925,9 @@ val_t metamodel___abstractmetamodel___MMLocalClass___global(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:344 */
+  /* metamodel/abstractmetamodel.nit:344 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./metamodel//abstractmetamodel.nit:345 */
+  /* metamodel/abstractmetamodel.nit:345 */
   fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalClass____global(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -1953,9 +1953,9 @@ val_t metamodel___abstractmetamodel___MMLocalClass___crhe(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:348 */
+  /* metamodel/abstractmetamodel.nit:348 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./metamodel//abstractmetamodel.nit:349 */
+  /* metamodel/abstractmetamodel.nit:349 */
   fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalClass____crhe(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -1981,9 +1981,9 @@ val_t metamodel___abstractmetamodel___MMLocalClass___cshe(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:352 */
+  /* metamodel/abstractmetamodel.nit:352 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./metamodel//abstractmetamodel.nit:353 */
+  /* metamodel/abstractmetamodel.nit:353 */
   fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalClass____cshe(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2009,9 +2009,9 @@ val_t metamodel___abstractmetamodel___MMLocalClass___che(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:356 */
+  /* metamodel/abstractmetamodel.nit:356 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./metamodel//abstractmetamodel.nit:357 */
+  /* metamodel/abstractmetamodel.nit:357 */
   fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalClass____che(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2036,7 +2036,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___global_properties(val_t p0)
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:363 */
+  /* metamodel/abstractmetamodel.nit:363 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____global_properties(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2059,7 +2059,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___local_local_properties(val_
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:366 */
+  /* metamodel/abstractmetamodel.nit:366 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____local_local_properties(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2089,13 +2089,13 @@ void metamodel___abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   REGB0 = p3;
-  /* ./metamodel//abstractmetamodel.nit:375 */
+  /* metamodel/abstractmetamodel.nit:375 */
   ATTR_metamodel___abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:376 */
+  /* metamodel/abstractmetamodel.nit:376 */
   ATTR_metamodel___abstractmetamodel___MMLocalClass____name(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./metamodel//abstractmetamodel.nit:377 */
+  /* metamodel/abstractmetamodel.nit:377 */
   ATTR_metamodel___abstractmetamodel___MMLocalClass____arity(fra.me.REG[0]) = REGB0;
-  /* ./metamodel//abstractmetamodel.nit:378 */
+  /* metamodel/abstractmetamodel.nit:378 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMModule____local_classes(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2121,7 +2121,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___for_module(val_t p0, val_t 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:384 */
+  /* metamodel/abstractmetamodel.nit:384 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMModule_____bra(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   goto label1;
@@ -2145,9 +2145,9 @@ void metamodel___abstractmetamodel___MMLocalClass___new_global(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:390 */
+  /* metamodel/abstractmetamodel.nit:390 */
   fra.me.REG[1] = NEW_MMGlobalClass_metamodel___abstractmetamodel___MMGlobalClass___init(fra.me.REG[0]);
-  /* ./metamodel//abstractmetamodel.nit:391 */
+  /* metamodel/abstractmetamodel.nit:391 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2161,7 +2161,7 @@ void metamodel___abstractmetamodel___MMLocalClass___new_global(val_t p0){
   }
   fra.me.REG[2] = ATTR_metamodel___abstractmetamodel___MMModule____global_classes(fra.me.REG[2]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:392 */
+  /* metamodel/abstractmetamodel.nit:392 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2176,7 +2176,7 @@ void metamodel___abstractmetamodel___MMLocalClass___new_global(val_t p0){
   fra.me.REG[2] = ATTR_metamodel___abstractmetamodel___MMModule____global_class_by_name(fra.me.REG[2]);
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___name(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:393 */
+  /* metamodel/abstractmetamodel.nit:393 */
   CALL_metamodel___abstractmetamodel___MMLocalClass___set_global(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -2196,16 +2196,16 @@ void metamodel___abstractmetamodel___MMLocalClass___set_global(val_t p0, val_t p
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:401 */
+  /* metamodel/abstractmetamodel.nit:401 */
   ATTR_metamodel___abstractmetamodel___MMLocalClass____global(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:402 */
+  /* metamodel/abstractmetamodel.nit:402 */
   fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalClass____global(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
     nit_abort("Reciever is null", NULL, LOCATE_metamodel___abstractmetamodel, 402);
   }
   CALL_metamodel___abstractmetamodel___MMGlobalClass___register_local_class(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./metamodel//abstractmetamodel.nit:403 */
+  /* metamodel/abstractmetamodel.nit:403 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2234,7 +2234,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:410 */
+  /* metamodel/abstractmetamodel.nit:410 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2254,21 +2254,21 @@ val_t metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name
     if (UNTAG_Bool(REGB0)) {
       nit_abort("Reciever is null", NULL, LOCATE_metamodel___abstractmetamodel, 410);
     }
-    /* ./../lib/standard//collection//array.nit:24 */
+    /* ../lib/standard/collection/array.nit:24 */
     REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-    /* ./metamodel//abstractmetamodel.nit:410 */
+    /* metamodel/abstractmetamodel.nit:410 */
     REGB1 = TAG_Int(1);
     REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
     if (UNTAG_Bool(REGB2)) {
     } else {
-      /* ./../lib/standard//kernel.nit:227 */
+      /* ../lib/standard/kernel.nit:227 */
       REGB1 = TAG_Bool((REGB0)==(REGB1));
-      /* ./metamodel//abstractmetamodel.nit:410 */
+      /* metamodel/abstractmetamodel.nit:410 */
       REGB2 = REGB1;
     }
   } else {
@@ -2295,13 +2295,13 @@ val_t metamodel___abstractmetamodel___MMLocalClass___get_property_by_name(val_t 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:417 */
+  /* metamodel/abstractmetamodel.nit:417 */
   REGB0 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     nit_abort("Aborted", NULL, LOCATE_metamodel___abstractmetamodel, 417);
   }
-  /* ./metamodel//abstractmetamodel.nit:418 */
+  /* metamodel/abstractmetamodel.nit:418 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2309,7 +2309,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___get_property_by_name(val_t 
   }
   fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0]);
   fra.me.REG[1] = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:419 */
+  /* metamodel/abstractmetamodel.nit:419 */
   fra.me.REG[1] = CALL_standard___collection___abstract_collection___Collection___first(fra.me.REG[1])(fra.me.REG[1]);
   goto label1;
   label1: while(0);
@@ -2330,7 +2330,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___attribute(val_t p0, val_t p
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:426 */
+  /* metamodel/abstractmetamodel.nit:426 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___get_property_by_name(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   goto label1;
   label1: while(0);
@@ -2352,7 +2352,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___method(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:433 */
+  /* metamodel/abstractmetamodel.nit:433 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2385,17 +2385,17 @@ val_t metamodel___abstractmetamodel___MMLocalClass___select_method(val_t p0, val
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:440 */
+  /* metamodel/abstractmetamodel.nit:440 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___method(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:441 */
+  /* metamodel/abstractmetamodel.nit:441 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:442 */
+  /* metamodel/abstractmetamodel.nit:442 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_metamodel___abstractmetamodel, 442);
   }
-  /* ./metamodel//abstractmetamodel.nit:443 */
+  /* metamodel/abstractmetamodel.nit:443 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2416,17 +2416,17 @@ val_t metamodel___abstractmetamodel___MMLocalClass___select_attribute(val_t p0, 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:450 */
+  /* metamodel/abstractmetamodel.nit:450 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___attribute(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:451 */
+  /* metamodel/abstractmetamodel.nit:451 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:452 */
+  /* metamodel/abstractmetamodel.nit:452 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_metamodel___abstractmetamodel, 452);
   }
-  /* ./metamodel//abstractmetamodel.nit:453 */
+  /* metamodel/abstractmetamodel.nit:453 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -2453,33 +2453,33 @@ val_t metamodel___abstractmetamodel___MMLocalClass___super_methods_named(val_t p
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:460 */
+  /* metamodel/abstractmetamodel.nit:460 */
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___init();
-  /* ./metamodel//abstractmetamodel.nit:461 */
+  /* metamodel/abstractmetamodel.nit:461 */
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___cshe(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrderElement___greaters(fra.me.REG[3])(fra.me.REG[3]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[3])(fra.me.REG[3], (&(fra.me)), ((fun_t)OC_metamodel___abstractmetamodel___MMLocalClass___super_methods_named_1));
-  /* ./metamodel//abstractmetamodel.nit:464 */
+  /* metamodel/abstractmetamodel.nit:464 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___cshe(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___partial_order___PartialOrderElement___order(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___partial_order___PartialOrder___select_smallests(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./metamodel//abstractmetamodel.nit:465 */
+  /* metamodel/abstractmetamodel.nit:465 */
   fra.me.REG[0] = NEW_Array_standard___collection___array___Array___init();
-  /* ./../lib/standard//collection//array.nit:269 */
+  /* ../lib/standard/collection/array.nit:269 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//array.nit:270 */
+  /* ../lib/standard/collection/array.nit:270 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-  /* ./../lib/standard//collection//array.nit:271 */
+  /* ../lib/standard/collection/array.nit:271 */
   fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
-  /* ./../lib/standard//collection//array.nit:272 */
+  /* ../lib/standard/collection/array.nit:272 */
   while(1) {
-    /* ./../lib/standard//collection//array.nit:24 */
+    /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
@@ -2491,35 +2491,35 @@ val_t metamodel___abstractmetamodel___MMLocalClass___super_methods_named(val_t p
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:232 */
+    /* ../lib/standard/kernel.nit:232 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//array.nit:272 */
+    /* ../lib/standard/collection/array.nit:272 */
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//collection//array.nit:273 */
+      /* ../lib/standard/collection/array.nit:273 */
       REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ./../lib/standard//collection//array.nit:718 */
+      /* ../lib/standard/collection/array.nit:718 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
-      /* ./metamodel//abstractmetamodel.nit:467 */
+      /* metamodel/abstractmetamodel.nit:467 */
       fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalClass___method(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
-      /* ./metamodel//abstractmetamodel.nit:469 */
+      /* metamodel/abstractmetamodel.nit:469 */
       fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);
-      /* ./../lib/standard//collection//array.nit:274 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:235 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:274 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB0 = REGB1;
     } else {
-      /* ./../lib/standard//collection//array.nit:272 */
+      /* ../lib/standard/collection/array.nit:272 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ./metamodel//abstractmetamodel.nit:471 */
+  /* metamodel/abstractmetamodel.nit:471 */
   goto label3;
   label3: while(0);
   stack_frame_head = fra.me.prev;
@@ -2542,7 +2542,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___super_methods_named(val_t p
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* ./metamodel//abstractmetamodel.nit:462 */
+    /* metamodel/abstractmetamodel.nit:462 */
     REGB0 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name(fra.me.REG[0])(fra.me.REG[0], closctx->REG[1]);
     if (UNTAG_Bool(REGB0)) {
       CALL_standard___collection___abstract_collection___SimpleCollection___add(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
@@ -2568,7 +2568,7 @@ void metamodel___abstractmetamodel___MMLocalClass___register_local_property(val_
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:477 */
+  /* metamodel/abstractmetamodel.nit:477 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____local_property_by_global(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2577,7 +2577,7 @@ void metamodel___abstractmetamodel___MMLocalClass___register_local_property(val_
   fra.me.REG[2] = ATTR_metamodel___abstractmetamodel___MMLocalClass____local_property_by_global(fra.me.REG[0]);
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[1])(fra.me.REG[1]);
   CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:478 */
+  /* metamodel/abstractmetamodel.nit:478 */
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[0]));
   if (UNTAG_Bool(REGB0)) {
@@ -2586,7 +2586,7 @@ void metamodel___abstractmetamodel___MMLocalClass___register_local_property(val_
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./metamodel//abstractmetamodel.nit:479 */
+    /* metamodel/abstractmetamodel.nit:479 */
     REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____local_local_properties(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -2617,11 +2617,11 @@ void metamodel___abstractmetamodel___MMLocalClass___register_global_property(val
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:486 */
+  /* metamodel/abstractmetamodel.nit:486 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:487 */
+  /* metamodel/abstractmetamodel.nit:487 */
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalProperty___name(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./metamodel//abstractmetamodel.nit:488 */
+  /* metamodel/abstractmetamodel.nit:488 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2630,7 +2630,7 @@ void metamodel___abstractmetamodel___MMLocalClass___register_global_property(val
   fra.me.REG[4] = ATTR_metamodel___abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___MapRead___has_key(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./metamodel//abstractmetamodel.nit:489 */
+    /* metamodel/abstractmetamodel.nit:489 */
     REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -2644,7 +2644,7 @@ void metamodel___abstractmetamodel___MMLocalClass___register_global_property(val
     }
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
   } else {
-    /* ./metamodel//abstractmetamodel.nit:491 */
+    /* metamodel/abstractmetamodel.nit:491 */
     REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____properties_by_name(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -2656,7 +2656,7 @@ void metamodel___abstractmetamodel___MMLocalClass___register_global_property(val
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1]);
     CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3], fra.me.REG[5]);
   }
-  /* ./metamodel//abstractmetamodel.nit:493 */
+  /* metamodel/abstractmetamodel.nit:493 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____global_properties(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2664,7 +2664,7 @@ void metamodel___abstractmetamodel___MMLocalClass___register_global_property(val
   }
   fra.me.REG[5] = ATTR_metamodel___abstractmetamodel___MMLocalClass____global_properties(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1]);
-  /* ./metamodel//abstractmetamodel.nit:494 */
+  /* metamodel/abstractmetamodel.nit:494 */
   CALL_metamodel___abstractmetamodel___MMLocalClass___register_local_property(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
   return;
@@ -2684,7 +2684,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___has_global_property(val_t p
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:500 */
+  /* metamodel/abstractmetamodel.nit:500 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____global_properties(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2712,7 +2712,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass_____bra(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:506 */
+  /* metamodel/abstractmetamodel.nit:506 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____local_property_by_global(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2737,7 +2737,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___context(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:510 */
+  /* metamodel/abstractmetamodel.nit:510 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMModule___context(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -2758,7 +2758,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___to_s(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:514 */
+  /* metamodel/abstractmetamodel.nit:514 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2791,7 +2791,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___total_order_compare(val_t p
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:521 */
+  /* metamodel/abstractmetamodel.nit:521 */
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[0],fra.me.REG[1]));
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2799,11 +2799,11 @@ val_t metamodel___abstractmetamodel___MMLocalClass___total_order_compare(val_t p
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./metamodel//abstractmetamodel.nit:522 */
+    /* metamodel/abstractmetamodel.nit:522 */
     REGB0 = TAG_Int(0);
     goto label1;
   } else {
-    /* ./metamodel//abstractmetamodel.nit:523 */
+    /* metamodel/abstractmetamodel.nit:523 */
     fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMModule___mhe(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
@@ -2813,12 +2813,12 @@ val_t metamodel___abstractmetamodel___MMLocalClass___total_order_compare(val_t p
     }
     REGB1 = CALL_metamodel___partial_order___PartialOrderElement_____l(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     if (UNTAG_Bool(REGB1)) {
-      /* ./metamodel//abstractmetamodel.nit:524 */
+      /* metamodel/abstractmetamodel.nit:524 */
       REGB1 = TAG_Int(1);
       REGB0 = REGB1;
       goto label1;
     } else {
-      /* ./metamodel//abstractmetamodel.nit:525 */
+      /* metamodel/abstractmetamodel.nit:525 */
       fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMModule___mhe(fra.me.REG[3])(fra.me.REG[3]);
       fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
@@ -2828,20 +2828,20 @@ val_t metamodel___abstractmetamodel___MMLocalClass___total_order_compare(val_t p
       }
       REGB1 = CALL_metamodel___partial_order___PartialOrderElement_____l(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
       if (UNTAG_Bool(REGB1)) {
-        /* ./metamodel//abstractmetamodel.nit:526 */
+        /* metamodel/abstractmetamodel.nit:526 */
         REGB1 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:236 */
         REGB1 = TAG_Int(-UNTAG_Int(REGB1));
-        /* ./metamodel//abstractmetamodel.nit:526 */
+        /* metamodel/abstractmetamodel.nit:526 */
         REGB0 = REGB1;
         goto label1;
       }
     }
   }
-  /* ./metamodel//abstractmetamodel.nit:528 */
+  /* metamodel/abstractmetamodel.nit:528 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___cshe(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = CALL_metamodel___partial_order___PartialOrderElement___rank(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./metamodel//abstractmetamodel.nit:529 */
+  /* metamodel/abstractmetamodel.nit:529 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___cshe(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = CALL_metamodel___partial_order___PartialOrderElement___rank(fra.me.REG[2])(fra.me.REG[2]);
   REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -2849,11 +2849,11 @@ val_t metamodel___abstractmetamodel___MMLocalClass___total_order_compare(val_t p
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:234 */
+  /* ../lib/standard/kernel.nit:234 */
   REGB3 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
-  /* ./metamodel//abstractmetamodel.nit:530 */
+  /* metamodel/abstractmetamodel.nit:530 */
   if (UNTAG_Bool(REGB3)) {
-    /* ./metamodel//abstractmetamodel.nit:531 */
+    /* metamodel/abstractmetamodel.nit:531 */
     REGB3 = TAG_Int(1);
     REGB0 = REGB3;
     goto label1;
@@ -2863,19 +2863,19 @@ val_t metamodel___abstractmetamodel___MMLocalClass___total_order_compare(val_t p
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:234 */
+    /* ../lib/standard/kernel.nit:234 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB2)>UNTAG_Int(REGB1));
-    /* ./metamodel//abstractmetamodel.nit:532 */
+    /* metamodel/abstractmetamodel.nit:532 */
     if (UNTAG_Bool(REGB1)) {
-      /* ./metamodel//abstractmetamodel.nit:533 */
+      /* metamodel/abstractmetamodel.nit:533 */
       REGB1 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:236 */
       REGB1 = TAG_Int(-UNTAG_Int(REGB1));
-      /* ./metamodel//abstractmetamodel.nit:533 */
+      /* metamodel/abstractmetamodel.nit:533 */
       REGB0 = REGB1;
       goto label1;
     } else {
-      /* ./metamodel//abstractmetamodel.nit:535 */
+      /* metamodel/abstractmetamodel.nit:535 */
       fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___name(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___name(fra.me.REG[0])(fra.me.REG[0]);
@@ -2902,7 +2902,7 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___intro(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:544 */
+  /* metamodel/abstractmetamodel.nit:544 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalProperty____intro(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2924,7 +2924,7 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___local_class(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:550 */
+  /* metamodel/abstractmetamodel.nit:550 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -2945,7 +2945,7 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___property_hierarchy(val_
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:553 */
+  /* metamodel/abstractmetamodel.nit:553 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalProperty____property_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2972,9 +2972,9 @@ void metamodel___abstractmetamodel___MMGlobalProperty___init(val_t p0, val_t p1,
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:559 */
+  /* metamodel/abstractmetamodel.nit:559 */
   ATTR_metamodel___abstractmetamodel___MMGlobalProperty____intro(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:560 */
+  /* metamodel/abstractmetamodel.nit:560 */
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___init();
   CALL_metamodel___abstractmetamodel___MMGlobalProperty___add_local_property(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
@@ -2993,7 +2993,7 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___to_s(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:563 */
+  /* metamodel/abstractmetamodel.nit:563 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalProperty___full_name(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -3018,7 +3018,7 @@ void metamodel___abstractmetamodel___MMGlobalProperty___add_local_property(val_t
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./metamodel//abstractmetamodel.nit:568 */
+  /* metamodel/abstractmetamodel.nit:568 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalProperty____property_hierarchy(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3044,7 +3044,7 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___is_attribute(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:572 */
+  /* metamodel/abstractmetamodel.nit:572 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
   goto label1;
@@ -3066,7 +3066,7 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___is_method(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:575 */
+  /* metamodel/abstractmetamodel.nit:575 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
   goto label1;
@@ -3087,7 +3087,7 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___is_init(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:577 */
+  /* metamodel/abstractmetamodel.nit:577 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalProperty____is_init(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3111,7 +3111,7 @@ void metamodel___abstractmetamodel___MMGlobalProperty___is_init__eq(val_t p0, va
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:577 */
+  /* metamodel/abstractmetamodel.nit:577 */
   ATTR_metamodel___abstractmetamodel___MMGlobalProperty____is_init(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -3134,17 +3134,17 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___is_init_for(val_t p0, v
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:583 */
+  /* metamodel/abstractmetamodel.nit:583 */
   REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(false);
     goto label1;
   }
-  /* ./metamodel//abstractmetamodel.nit:584 */
+  /* metamodel/abstractmetamodel.nit:584 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./metamodel//abstractmetamodel.nit:585 */
+  /* metamodel/abstractmetamodel.nit:585 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___che(fra.me.REG[1])(fra.me.REG[1]);
   REGB1 = CALL_metamodel___partial_order___PartialOrderElement_____leq(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
   if (UNTAG_Bool(REGB1)) {
@@ -3162,7 +3162,7 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___is_init_for(val_t p0, v
     REGB2 = TAG_Bool(false);
     REGB1 = REGB2;
   }
-  /* ./metamodel//abstractmetamodel.nit:586 */
+  /* metamodel/abstractmetamodel.nit:586 */
   REGB0 = REGB1;
   goto label1;
   label1: while(0);
@@ -3182,7 +3182,7 @@ val_t metamodel___abstractmetamodel___MMGlobalProperty___visibility_level(val_t 
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:589 */
+  /* metamodel/abstractmetamodel.nit:589 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMGlobalProperty____visibility_level(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3206,7 +3206,7 @@ void metamodel___abstractmetamodel___MMGlobalProperty___visibility_level__eq(val
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:589 */
+  /* metamodel/abstractmetamodel.nit:589 */
   ATTR_metamodel___abstractmetamodel___MMGlobalProperty____visibility_level(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -3224,7 +3224,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___name(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:598 */
+  /* metamodel/abstractmetamodel.nit:598 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalProperty____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3247,7 +3247,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___local_class(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:601 */
+  /* metamodel/abstractmetamodel.nit:601 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3271,7 +3271,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___global(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:607 */
+  /* metamodel/abstractmetamodel.nit:607 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalProperty____global(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
@@ -3298,7 +3298,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___is_global_set(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:608 */
+  /* metamodel/abstractmetamodel.nit:608 */
   fra.me.REG[0] = ATTR_metamodel___abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -3332,7 +3332,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___prhe(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:613 */
+  /* metamodel/abstractmetamodel.nit:613 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalProperty____prhe(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
@@ -3358,7 +3358,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___mmmodule(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:616 */
+  /* metamodel/abstractmetamodel.nit:616 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3400,7 +3400,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___full_name(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:621 */
+  /* metamodel/abstractmetamodel.nit:621 */
   fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -3415,7 +3415,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___full_name(val_t p0){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./metamodel//abstractmetamodel.nit:622 */
+    /* metamodel/abstractmetamodel.nit:622 */
     REGB0 = TAG_Int(7);
     fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -3467,7 +3467,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___full_name(val_t p0){
     fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
     goto label5;
   } else {
-    /* ./metamodel//abstractmetamodel.nit:623 */
+    /* metamodel/abstractmetamodel.nit:623 */
     fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[0]));
@@ -3477,7 +3477,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___full_name(val_t p0){
       REGB0 = REGB1;
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./metamodel//abstractmetamodel.nit:624 */
+      /* metamodel/abstractmetamodel.nit:624 */
       REGB0 = TAG_Int(7);
       fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_6) {
@@ -3530,7 +3530,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___full_name(val_t p0){
       fra.me.REG[1] = fra.me.REG[2];
       goto label5;
     } else {
-      /* ./metamodel//abstractmetamodel.nit:626 */
+      /* metamodel/abstractmetamodel.nit:626 */
       REGB0 = TAG_Int(7);
       fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_10) {
@@ -3604,9 +3604,9 @@ void metamodel___abstractmetamodel___MMLocalProperty___set_global(val_t p0, val_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:633 */
+  /* metamodel/abstractmetamodel.nit:633 */
   ATTR_metamodel___abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:634 */
+  /* metamodel/abstractmetamodel.nit:634 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3632,7 +3632,7 @@ void metamodel___abstractmetamodel___MMLocalProperty___new_global(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:640 */
+  /* metamodel/abstractmetamodel.nit:640 */
   fra.me.REG[1] = ATTR_metamodel___abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -3650,11 +3650,11 @@ void metamodel___abstractmetamodel___MMLocalProperty___new_global(val_t p0){
   } else {
     nit_abort("Assert failed", NULL, LOCATE_metamodel___abstractmetamodel, 640);
   }
-  /* ./metamodel//abstractmetamodel.nit:641 */
+  /* metamodel/abstractmetamodel.nit:641 */
   fra.me.REG[1] = NEW_MMGlobalProperty_metamodel___abstractmetamodel___MMGlobalProperty___init(fra.me.REG[0]);
-  /* ./metamodel//abstractmetamodel.nit:642 */
+  /* metamodel/abstractmetamodel.nit:642 */
   ATTR_metamodel___abstractmetamodel___MMLocalProperty____global(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:643 */
+  /* metamodel/abstractmetamodel.nit:643 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3677,7 +3677,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___to_s(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:646 */
+  /* metamodel/abstractmetamodel.nit:646 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalProperty___name(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -3698,7 +3698,7 @@ val_t metamodel___abstractmetamodel___MMLocalProperty___need_super(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:648 */
+  /* metamodel/abstractmetamodel.nit:648 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalProperty____need_super(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3722,7 +3722,7 @@ void metamodel___abstractmetamodel___MMLocalProperty___need_super__eq(val_t p0, 
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./metamodel//abstractmetamodel.nit:648 */
+  /* metamodel/abstractmetamodel.nit:648 */
   ATTR_metamodel___abstractmetamodel___MMLocalProperty____need_super(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -3745,9 +3745,9 @@ void metamodel___abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1, 
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./metamodel//abstractmetamodel.nit:653 */
+  /* metamodel/abstractmetamodel.nit:653 */
   ATTR_metamodel___abstractmetamodel___MMLocalProperty____name(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./metamodel//abstractmetamodel.nit:654 */
+  /* metamodel/abstractmetamodel.nit:654 */
   ATTR_metamodel___abstractmetamodel___MMLocalProperty____local_class(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos6] = 1;
@@ -3766,7 +3766,7 @@ val_t metamodel___abstractmetamodel___MMExplicitImport___local_class(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:664 */
+  /* metamodel/abstractmetamodel.nit:664 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMExplicitImport_____atlocal_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3790,7 +3790,7 @@ void metamodel___abstractmetamodel___MMExplicitImport___local_class__eq(val_t p0
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:664 */
+  /* metamodel/abstractmetamodel.nit:664 */
   ATTR_metamodel___abstractmetamodel___MMExplicitImport_____atlocal_class(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -3808,7 +3808,7 @@ val_t metamodel___abstractmetamodel___MMExplicitImport___method(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//abstractmetamodel.nit:665 */
+  /* metamodel/abstractmetamodel.nit:665 */
   REGB0 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMExplicitImport_____atmethod(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3832,7 +3832,7 @@ void metamodel___abstractmetamodel___MMExplicitImport___method__eq(val_t p0, val
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//abstractmetamodel.nit:665 */
+  /* metamodel/abstractmetamodel.nit:665 */
   ATTR_metamodel___abstractmetamodel___MMExplicitImport_____atmethod(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -3871,7 +3871,7 @@ val_t metamodel___abstractmetamodel___MMMethod___is_intern(val_t p0){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./metamodel//abstractmetamodel.nit:671 */
+  /* metamodel/abstractmetamodel.nit:671 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___abstractmetamodel, 671);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
@@ -3886,7 +3886,7 @@ val_t metamodel___abstractmetamodel___MMMethod___is_abstract(val_t p0){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./metamodel//abstractmetamodel.nit:674 */
+  /* metamodel/abstractmetamodel.nit:674 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___abstractmetamodel, 674);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
@@ -3901,7 +3901,7 @@ val_t metamodel___abstractmetamodel___MMMethod___is_extern(val_t p0){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./metamodel//abstractmetamodel.nit:677 */
+  /* metamodel/abstractmetamodel.nit:677 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___abstractmetamodel, 677);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
@@ -3916,7 +3916,7 @@ val_t metamodel___abstractmetamodel___MMMethod___extern_name(val_t p0){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./metamodel//abstractmetamodel.nit:680 */
+  /* metamodel/abstractmetamodel.nit:680 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___abstractmetamodel, 680);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
@@ -3931,7 +3931,7 @@ val_t metamodel___abstractmetamodel___MMMethod___explicit_imports(val_t p0){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./metamodel//abstractmetamodel.nit:683 */
+  /* metamodel/abstractmetamodel.nit:683 */
   nit_abort("Deferred method called", NULL, LOCATE_metamodel___abstractmetamodel, 683);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;

@@ -14,12 +14,12 @@ val_t standard___hash___Object___hash(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//hash.nit:24 */
+  /* ../lib/standard/hash.nit:24 */
   REGB0 = CALL_standard___kernel___Object___object_id(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Int(8);
-  /* ./../lib/standard//kernel.nit:239 */
+  /* ../lib/standard/kernel.nit:239 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)/UNTAG_Int(REGB1));
-  /* ./../lib/standard//hash.nit:24 */
+  /* ../lib/standard/hash.nit:24 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -37,7 +37,7 @@ val_t standard___hash___Int___hash(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//hash.nit:28 */
+  /* ../lib/standard/hash.nit:28 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -55,9 +55,9 @@ val_t standard___hash___Char___hash(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:413 */
+  /* ../lib/standard/kernel.nit:413 */
   REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
-  /* ./../lib/standard//hash.nit:32 */
+  /* ../lib/standard/hash.nit:32 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -76,13 +76,13 @@ val_t standard___hash___Bool___hash(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//hash.nit:38 */
+  /* ../lib/standard/hash.nit:38 */
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//hash.nit:39 */
+    /* ../lib/standard/hash.nit:39 */
     REGB0 = TAG_Int(1);
     goto label1;
   } else {
-    /* ./../lib/standard//hash.nit:41 */
+    /* ../lib/standard/hash.nit:41 */
     REGB1 = TAG_Int(0);
     REGB0 = REGB1;
     goto label1;

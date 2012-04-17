@@ -24,10 +24,10 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
   fra.me.REG[9] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//inline_methods.nit:27 */
+  /* analysis/inline_methods.nit:27 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./analysis//inline_methods.nit:29 */
+  /* analysis/inline_methods.nit:29 */
   REGB0 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_icode___icode_base___ICall, ID_icode___icode_base___ICall)) /*cast ICall*/;
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
@@ -41,15 +41,15 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./analysis//inline_methods.nit:30 */
+    /* analysis/inline_methods.nit:30 */
     REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
       nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_methods, 30);
     }
     fra.me.REG[4] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[3])(fra.me.REG[3]);
-    /* ./analysis//inline_methods.nit:31 */
+    /* analysis/inline_methods.nit:31 */
     fra.me.REG[4] = CALL_icode___icode_base___MMMethod___iroutine(fra.me.REG[4])(fra.me.REG[4]);
-    /* ./analysis//inline_methods.nit:32 */
+    /* analysis/inline_methods.nit:32 */
     REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -74,14 +74,14 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
       REGB0 = REGB1;
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./analysis//inline_methods.nit:33 */
+      /* analysis/inline_methods.nit:33 */
       REGB0 = TAG_Bool(ATTR_analysis___inline_methods___InlineMethodVisitor____icb(fra.me.REG[2])!=NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
         nit_abort("Uninitialized attribute %s", "_icb", LOCATE_analysis___inline_methods, 33);
       }
       fra.me.REG[5] = ATTR_analysis___inline_methods___InlineMethodVisitor____icb(fra.me.REG[2]);
-      /* ./analysis//inline_methods.nit:34 */
+      /* analysis/inline_methods.nit:34 */
       fra.me.REG[6] = CALL_icode___icode_builder___ICodeBuilder___iroutine(fra.me.REG[5])(fra.me.REG[5]);
       REGB0 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[6],fra.me.REG[4]));
       if (UNTAG_Bool(REGB0)) {
@@ -90,14 +90,14 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
         REGB0 = REGB1;
       }
       if (UNTAG_Bool(REGB0)) {
-        /* ./analysis//inline_methods.nit:37 */
+        /* analysis/inline_methods.nit:37 */
         fra.me.REG[6] = CALL_icode___icode_tools___ICodeVisitor___current_icode(fra.me.REG[2])(fra.me.REG[2]);
         REGB0 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
           nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_methods, 37);
         }
         CALL_standard___collection___list___ListIterator___delete(fra.me.REG[6])(fra.me.REG[6]);
-        /* ./analysis//inline_methods.nit:38 */
+        /* analysis/inline_methods.nit:38 */
         REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
           nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_methods, 38);
@@ -109,28 +109,28 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
         }
         fra.me.REG[7] = CALL_icode___icode_base___ICodeN___exprs(fra.me.REG[3])(fra.me.REG[3]);
         fra.me.REG[7] = NEW_IStaticCall_icode___icode_base___IStaticCall___init(fra.me.REG[6], fra.me.REG[7]);
-        /* ./analysis//inline_methods.nit:39 */
+        /* analysis/inline_methods.nit:39 */
         REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
           nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_methods, 39);
         }
         fra.me.REG[6] = CALL_icode___icode_base___ICodeN___closure_defs(fra.me.REG[3])(fra.me.REG[3]);
         CALL_icode___icode_base___ICodeN___closure_defs__eq(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[6]);
-        /* ./analysis//inline_methods.nit:40 */
+        /* analysis/inline_methods.nit:40 */
         REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
           nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_methods, 40);
         }
         fra.me.REG[6] = CALL_icode___icode_base___ICode___result(fra.me.REG[3])(fra.me.REG[3]);
         CALL_icode___icode_base___ICode___result__eq(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[6]);
-        /* ./analysis//inline_methods.nit:41 */
+        /* analysis/inline_methods.nit:41 */
         fra.me.REG[6] = CALL_icode___icode_tools___ICodeVisitor___current_icode(fra.me.REG[2])(fra.me.REG[2]);
         REGB0 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
           nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_methods, 41);
         }
         CALL_standard___collection___list___ListIterator___insert_before(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
-        /* ./analysis//inline_methods.nit:42 */
+        /* analysis/inline_methods.nit:42 */
         fra.me.REG[7] = CALL_icode___icode_tools___ICodeVisitor___current_icode(fra.me.REG[2])(fra.me.REG[2]);
         REGB0 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
@@ -138,20 +138,20 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
         }
         CALL_standard___collection___list___ListIterator___delete(fra.me.REG[7])(fra.me.REG[7]);
       } else {
-        /* ./analysis//inline_methods.nit:44 */
+        /* analysis/inline_methods.nit:44 */
         fra.me.REG[7] = NEW_ISeq_icode___icode_base___ISeq___init();
-        /* ./analysis//inline_methods.nit:45 */
+        /* analysis/inline_methods.nit:45 */
         fra.me.REG[6] = CALL_icode___icode_builder___ICodeBuilder___seq(fra.me.REG[5])(fra.me.REG[5]);
-        /* ./analysis//inline_methods.nit:46 */
+        /* analysis/inline_methods.nit:46 */
         CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[7]);
-        /* ./analysis//inline_methods.nit:47 */
+        /* analysis/inline_methods.nit:47 */
         fra.me.REG[8] = CALL_icode___icode_tools___ICodeVisitor___current_icode(fra.me.REG[2])(fra.me.REG[2]);
         REGB0 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
           nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_methods, 47);
         }
         CALL_standard___collection___list___ListIterator___insert_before(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[7]);
-        /* ./analysis//inline_methods.nit:48 */
+        /* analysis/inline_methods.nit:48 */
         REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
           nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_methods, 48);
@@ -163,13 +163,13 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
         }
         fra.me.REG[9] = CALL_icode___icode_base___ICodeN___closure_defs(fra.me.REG[3])(fra.me.REG[3]);
         fra.me.REG[9] = CALL_icode___icode_tools___ICodeBuilder___inline_routine(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4], fra.me.REG[8], fra.me.REG[9]);
-        /* ./analysis//inline_methods.nit:49 */
+        /* analysis/inline_methods.nit:49 */
         REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
           nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_methods, 49);
         }
         fra.me.REG[3] = CALL_icode___icode_base___ICode___result(fra.me.REG[3])(fra.me.REG[3]);
-        /* ./analysis//inline_methods.nit:50 */
+        /* analysis/inline_methods.nit:50 */
         REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
         } else {
@@ -184,7 +184,7 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
         }
         REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
         if (UNTAG_Bool(REGB0)) {
-          /* ./analysis//inline_methods.nit:51 */
+          /* analysis/inline_methods.nit:51 */
           REGB0 = TAG_Bool(fra.me.REG[9]==NIT_NULL);
           if (UNTAG_Bool(REGB0)) {
           } else {
@@ -202,7 +202,7 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
           } else {
             nit_abort("Assert failed", NULL, LOCATE_analysis___inline_methods, 51);
           }
-          /* ./analysis//inline_methods.nit:52 */
+          /* analysis/inline_methods.nit:52 */
           fra.me.REG[8] = CALL_icode___icode_tools___ICodeVisitor___current_icode(fra.me.REG[2])(fra.me.REG[2]);
           fra.me.REG[9] = NEW_IMove_icode___icode_base___IMove___init(fra.me.REG[3], fra.me.REG[9]);
           REGB0 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
@@ -211,21 +211,21 @@ void analysis___inline_methods___InlineMethodVisitor___visit_icode(val_t p0, val
           }
           CALL_standard___collection___list___ListIterator___insert_before(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[9]);
         }
-        /* ./analysis//inline_methods.nit:54 */
+        /* analysis/inline_methods.nit:54 */
         fra.me.REG[9] = CALL_icode___icode_tools___ICodeVisitor___current_icode(fra.me.REG[2])(fra.me.REG[2]);
         REGB0 = TAG_Bool(fra.me.REG[9]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
           nit_abort("Reciever is null", NULL, LOCATE_analysis___inline_methods, 54);
         }
         CALL_standard___collection___list___ListIterator___delete(fra.me.REG[9])(fra.me.REG[9]);
-        /* ./analysis//inline_methods.nit:55 */
+        /* analysis/inline_methods.nit:55 */
         CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
-        /* ./analysis//inline_methods.nit:56 */
+        /* analysis/inline_methods.nit:56 */
         CALL_icode___icode_tools___ICodeVisitor___visit_icode(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[7]);
       }
     }
   }
-  /* ./analysis//inline_methods.nit:60 */
+  /* analysis/inline_methods.nit:60 */
   CALL_SUPER_analysis___inline_methods___InlineMethodVisitor___visit_icode(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -249,10 +249,10 @@ void analysis___inline_methods___InlineMethodVisitor___init(val_t p0, val_t p1, 
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./analysis//inline_methods.nit:63 */
+  /* analysis/inline_methods.nit:63 */
   fra.me.REG[3] = fra.me.REG[0];
   CALL_icode___icode_tools___ICodeVisitor___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./analysis//inline_methods.nit:65 */
+  /* analysis/inline_methods.nit:65 */
   fra.me.REG[2] = NEW_ICodeBuilder_icode___icode_builder___ICodeBuilder___init(fra.me.REG[1], fra.me.REG[2]);
   ATTR_analysis___inline_methods___InlineMethodVisitor____icb(fra.me.REG[3]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
@@ -302,14 +302,14 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./analysis//inline_methods.nit:72 */
+  /* analysis/inline_methods.nit:72 */
   fra.me.REG[0] = CALL_icode___icode_base___IAbsCall___property(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./analysis//inline_methods.nit:73 */
+  /* analysis/inline_methods.nit:73 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalProperty___name(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./analysis//inline_methods.nit:74 */
+  /* analysis/inline_methods.nit:74 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___name(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./analysis//inline_methods.nit:75 */
+  /* analysis/inline_methods.nit:75 */
   REGB0 = CALL_metamodel___abstractmetamodel___MMMethod___is_intern(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
     if (!once_value_1) {
@@ -340,7 +340,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(true);
   } else {
-    /* ./analysis//inline_methods.nit:76 */
+    /* analysis/inline_methods.nit:76 */
     if (!once_value_3) {
       if (!once_value_4) {
         fra.me.REG[3] = BOX_NativeString("Int");
@@ -411,13 +411,13 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
       REGB2 = TAG_Bool(false);
       REGB1 = REGB2;
     }
-    /* ./analysis//inline_methods.nit:75 */
+    /* analysis/inline_methods.nit:75 */
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(true);
   } else {
-    /* ./analysis//inline_methods.nit:77 */
+    /* analysis/inline_methods.nit:77 */
     if (!once_value_9) {
       if (!once_value_10) {
         fra.me.REG[3] = BOX_NativeString("Array");
@@ -513,13 +513,13 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
       REGB2 = TAG_Bool(false);
       REGB1 = REGB2;
     }
-    /* ./analysis//inline_methods.nit:75 */
+    /* analysis/inline_methods.nit:75 */
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(true);
   } else {
-    /* ./analysis//inline_methods.nit:78 */
+    /* analysis/inline_methods.nit:78 */
     if (!once_value_17) {
       if (!once_value_18) {
         fra.me.REG[3] = BOX_NativeString("AbstractArrayRead");
@@ -590,13 +590,13 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
       REGB2 = TAG_Bool(false);
       REGB1 = REGB2;
     }
-    /* ./analysis//inline_methods.nit:75 */
+    /* analysis/inline_methods.nit:75 */
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(true);
   } else {
-    /* ./analysis//inline_methods.nit:79 */
+    /* analysis/inline_methods.nit:79 */
     fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[0])(fra.me.REG[0]);
@@ -621,7 +621,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
       REGB2 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
       REGB1 = REGB2;
     }
-    /* ./analysis//inline_methods.nit:75 */
+    /* analysis/inline_methods.nit:75 */
     REGB0 = REGB1;
   }
   goto label25;
@@ -643,9 +643,9 @@ void analysis___inline_methods___IRoutine___inline_methods(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./analysis//inline_methods.nit:86 */
+  /* analysis/inline_methods.nit:86 */
   fra.me.REG[1] = NEW_InlineMethodVisitor_analysis___inline_methods___InlineMethodVisitor___init(fra.me.REG[1], fra.me.REG[0]);
-  /* ./analysis//inline_methods.nit:87 */
+  /* analysis/inline_methods.nit:87 */
   CALL_icode___icode_tools___ICodeVisitor___visit_iroutine(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;

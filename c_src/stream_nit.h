@@ -24,4 +24,6 @@ void stream_FDStream_FDStream_write_char_1(FDStream s, int fd, int c);
 #define stream_FDStream_FDStream_native_read_3(s, i, b, l) read((i), ((b)), ((l)))
 #define stream_FDStream_FDStream_native_write_3(s, i, b, l) write((i), ((b)), ((l)))
 
+nullable_Int Object_intern_poll___impl( Object recv, Array in_fds, Array out_fds );
+
 #endif

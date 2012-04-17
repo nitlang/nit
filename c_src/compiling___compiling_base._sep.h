@@ -181,7 +181,7 @@ typedef val_t (*compiling___compiling_base___ToolContext___ext_prefix_t)(val_t p
 static const char * const LOCATE_compiling___compiling_base___ToolContext___ext_prefix__eq = "compiling_base::ToolContext::ext_prefix=";
 void compiling___compiling_base___ToolContext___ext_prefix__eq(val_t p0, val_t p1);
 typedef void (*compiling___compiling_base___ToolContext___ext_prefix__eq_t)(val_t p0, val_t p1);
-val_t NEW_ToolContext_mmloader___ToolContext___init();
+val_t NEW_ToolContext_toolcontext___ToolContext___init();
 static const char * const LOCATE_compiling___compiling_base___CProgram___init = "compiling_base::CProgram::init";
 void compiling___compiling_base___CProgram___init(val_t p0, val_t p1, int* init_table);
 typedef void (*compiling___compiling_base___CProgram___init_t)(val_t p0, val_t p1, int* init_table);

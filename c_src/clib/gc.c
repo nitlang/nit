@@ -146,8 +146,8 @@ static void GC_collect(void) {
 	struct stack_frame_t *frame = stack_frame_head;
 	GC_static_object *staticObject = staticObjects.top;
 	val_t object;
-	struct nitni_ref *ref;
-	struct nitni_ref_array_link *local_ref_array_link;
+	struct nitni_ref *global_ref;
+	struct nitni_ref_array_link *local_ref_array_link; /* for native interface */
 
 	gc_allocation_pointer = gc_heap_pointer;
 	gc_scavenging_pointer = gc_heap_pointer;
@@ -161,14 +161,14 @@ static void GC_collect(void) {
 		staticObject = staticObject->next;
 	}
 
-	/* Process global referenced Nit objects from C code */
-	ref = nitni_global_ref_list->head;
-	while (ref != NULL) {
-		object = ref->val;
+	/* Process global reference to Nit objects from C code */
+	global_ref = nitni_global_ref_list->head;
+	while (global_ref != NULL) {
+		object = global_ref->val;
 		if (!ISNULL(object) && ISOBJ(object)) {
-			ref->val = GC_evacuation((obj_t)object);
+			global_ref->val = GC_evacuation((obj_t)object);
 		}
-		ref = ref->next;
+		global_ref = global_ref->next;
 	}
 
 	/* Process function frames (local variables) */

@@ -17,18 +17,18 @@ val_t compiling___compiling_writer___Writer___add(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./compiling//compiling_writer.nit:26 */
+  /* compiling/compiling_writer.nit:26 */
   REGB0 = CALL_compiling___compiling_writer___Writer___is_frozen(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_compiling___compiling_writer, 26);
   }
-  /* ./compiling//compiling_writer.nit:27 */
+  /* compiling/compiling_writer.nit:27 */
   fra.me.REG[2] = ATTR_compiling___compiling_writer___Writer____last_string(fra.me.REG[0]);
-  /* ./compiling//compiling_writer.nit:28 */
+  /* compiling/compiling_writer.nit:28 */
   fra.me.REG[1] = NEW_WriterStrings_compiling___compiling_writer___WriterStrings___init(fra.me.REG[1]);
-  /* ./compiling//compiling_writer.nit:29 */
+  /* compiling/compiling_writer.nit:29 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -42,15 +42,15 @@ val_t compiling___compiling_writer___Writer___add(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./compiling//compiling_writer.nit:30 */
+    /* compiling/compiling_writer.nit:30 */
     CALL_compiling___compiling_writer___Writer___internal_append(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   } else {
-    /* ./compiling//compiling_writer.nit:32 */
+    /* compiling/compiling_writer.nit:32 */
     ATTR_compiling___compiling_writer___WriterStrings____next(fra.me.REG[2]) = fra.me.REG[1];
   }
-  /* ./compiling//compiling_writer.nit:34 */
+  /* compiling/compiling_writer.nit:34 */
   ATTR_compiling___compiling_writer___Writer____last_string(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./compiling//compiling_writer.nit:35 */
+  /* compiling/compiling_writer.nit:35 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -78,29 +78,29 @@ val_t compiling___compiling_writer___Writer___add_all(val_t p0, val_t p1, val_t 
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./compiling//compiling_writer.nit:41 */
+  /* compiling/compiling_writer.nit:41 */
   REGB0 = CALL_compiling___compiling_writer___Writer___is_frozen(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_compiling___compiling_writer, 41);
   }
-  /* ./compiling//compiling_writer.nit:42 */
+  /* compiling/compiling_writer.nit:42 */
   REGB0 = TAG_Bool(true);
-  /* ./../lib/standard//collection//array.nit:269 */
+  /* ../lib/standard/collection/array.nit:269 */
   REGB1 = TAG_Int(0);
-  /* ./../lib/standard//collection//array.nit:270 */
+  /* ../lib/standard/collection/array.nit:270 */
   REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
   }
   REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ./../lib/standard//collection//array.nit:271 */
+  /* ../lib/standard/collection/array.nit:271 */
   fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[1]);
-  /* ./../lib/standard//collection//array.nit:272 */
+  /* ../lib/standard/collection/array.nit:272 */
   while(1) {
-    /* ./../lib/standard//collection//array.nit:24 */
+    /* ../lib/standard/collection/array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -112,39 +112,39 @@ val_t compiling___compiling_writer___Writer___add_all(val_t p0, val_t p1, val_t 
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:232 */
+    /* ../lib/standard/kernel.nit:232 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-    /* ./../lib/standard//collection//array.nit:272 */
+    /* ../lib/standard/collection/array.nit:272 */
     if (UNTAG_Bool(REGB2)) {
-      /* ./../lib/standard//collection//array.nit:273 */
+      /* ../lib/standard/collection/array.nit:273 */
       REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ./../lib/standard//collection//array.nit:718 */
+      /* ../lib/standard/collection/array.nit:718 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB1)];
-      /* ./compiling//compiling_writer.nit:44 */
+      /* compiling/compiling_writer.nit:44 */
       if (UNTAG_Bool(REGB0)) {
         REGB2 = TAG_Bool(false);
         REGB0 = REGB2;
       } else {
         CALL_compiling___compiling_writer___Writer___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
       }
-      /* ./compiling//compiling_writer.nit:45 */
+      /* compiling/compiling_writer.nit:45 */
       CALL_compiling___compiling_writer___Writer___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
-      /* ./../lib/standard//collection//array.nit:274 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB2 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:235 */
       REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-      /* ./../lib/standard//collection//array.nit:274 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = REGB2;
     } else {
-      /* ./../lib/standard//collection//array.nit:272 */
+      /* ../lib/standard/collection/array.nit:272 */
       goto label1;
     }
   }
   label1: while(0);
-  /* ./compiling//compiling_writer.nit:47 */
+  /* compiling/compiling_writer.nit:47 */
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
@@ -165,19 +165,19 @@ val_t compiling___compiling_writer___Writer___append(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./compiling//compiling_writer.nit:59 */
+  /* compiling/compiling_writer.nit:59 */
   REGB0 = CALL_compiling___compiling_writer___Writer___is_frozen(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_compiling___compiling_writer, 59);
   }
-  /* ./compiling//compiling_writer.nit:60 */
+  /* compiling/compiling_writer.nit:60 */
   fra.me.REG[1] = NEW_WriterCoreNode_compiling___compiling_writer___WriterCoreNode___init(fra.me.REG[1]);
   CALL_compiling___compiling_writer___Writer___internal_append(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./compiling//compiling_writer.nit:61 */
+  /* compiling/compiling_writer.nit:61 */
   ATTR_compiling___compiling_writer___Writer____last_string(fra.me.REG[0]) = NIT_NULL;
-  /* ./compiling//compiling_writer.nit:62 */
+  /* compiling/compiling_writer.nit:62 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -200,7 +200,7 @@ void compiling___compiling_writer___Writer___internal_append(val_t p0, val_t p1)
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./compiling//compiling_writer.nit:68 */
+  /* compiling/compiling_writer.nit:68 */
   fra.me.REG[2] = ATTR_compiling___compiling_writer___Writer____first_sub_writer(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -217,9 +217,9 @@ void compiling___compiling_writer___Writer___internal_append(val_t p0, val_t p1)
   if (UNTAG_Bool(REGB0)) {
     ATTR_compiling___compiling_writer___Writer____first_sub_writer(fra.me.REG[0]) = fra.me.REG[1];
   }
-  /* ./compiling//compiling_writer.nit:69 */
+  /* compiling/compiling_writer.nit:69 */
   fra.me.REG[2] = ATTR_compiling___compiling_writer___Writer____last_sub_writer(fra.me.REG[0]);
-  /* ./compiling//compiling_writer.nit:70 */
+  /* compiling/compiling_writer.nit:70 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -236,7 +236,7 @@ void compiling___compiling_writer___Writer___internal_append(val_t p0, val_t p1)
   if (UNTAG_Bool(REGB0)) {
     ATTR_compiling___compiling_writer___WriterNode____next_writer(fra.me.REG[2]) = fra.me.REG[1];
   }
-  /* ./compiling//compiling_writer.nit:71 */
+  /* compiling/compiling_writer.nit:71 */
   ATTR_compiling___compiling_writer___Writer____last_sub_writer(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -254,11 +254,11 @@ val_t compiling___compiling_writer___Writer___sub(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./compiling//compiling_writer.nit:77 */
+  /* compiling/compiling_writer.nit:77 */
   fra.me.REG[1] = NEW_Writer_compiling___compiling_writer___Writer___init();
-  /* ./compiling//compiling_writer.nit:78 */
+  /* compiling/compiling_writer.nit:78 */
   CALL_compiling___compiling_writer___Writer___append(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./compiling//compiling_writer.nit:79 */
+  /* compiling/compiling_writer.nit:79 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -282,7 +282,7 @@ void compiling___compiling_writer___Writer___write_to_stream(val_t p0, val_t p1)
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./compiling//compiling_writer.nit:87 */
+  /* compiling/compiling_writer.nit:87 */
   REGB0 = TAG_Bool(ATTR_compiling___compiling_writer___Writer____is_writing(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -294,12 +294,12 @@ void compiling___compiling_writer___Writer___write_to_stream(val_t p0, val_t p1)
   } else {
     nit_abort("Assert failed", NULL, LOCATE_compiling___compiling_writer, 87);
   }
-  /* ./compiling//compiling_writer.nit:88 */
+  /* compiling/compiling_writer.nit:88 */
   REGB0 = TAG_Bool(true);
   ATTR_compiling___compiling_writer___Writer____is_writing(fra.me.REG[0]) = REGB0;
-  /* ./compiling//compiling_writer.nit:89 */
+  /* compiling/compiling_writer.nit:89 */
   fra.me.REG[2] = ATTR_compiling___compiling_writer___Writer____first_sub_writer(fra.me.REG[0]);
-  /* ./compiling//compiling_writer.nit:90 */
+  /* compiling/compiling_writer.nit:90 */
   while(1) {
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -315,22 +315,22 @@ void compiling___compiling_writer___Writer___write_to_stream(val_t p0, val_t p1)
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./compiling//compiling_writer.nit:91 */
+      /* compiling/compiling_writer.nit:91 */
       REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
         nit_abort("Reciever is null", NULL, LOCATE_compiling___compiling_writer, 91);
       }
       CALL_compiling___compiling_writer___WriterNode___internal_write_to_stream(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-      /* ./compiling//compiling_writer.nit:92 */
+      /* compiling/compiling_writer.nit:92 */
       fra.me.REG[3] = ATTR_compiling___compiling_writer___WriterNode____next_writer(fra.me.REG[2]);
       fra.me.REG[2] = fra.me.REG[3];
     } else {
-      /* ./compiling//compiling_writer.nit:90 */
+      /* compiling/compiling_writer.nit:90 */
       goto label1;
     }
   }
   label1: while(0);
-  /* ./compiling//compiling_writer.nit:94 */
+  /* compiling/compiling_writer.nit:94 */
   REGB0 = TAG_Bool(false);
   ATTR_compiling___compiling_writer___Writer____is_writing(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -349,7 +349,7 @@ val_t compiling___compiling_writer___Writer___is_frozen(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./compiling//compiling_writer.nit:97 */
+  /* compiling/compiling_writer.nit:97 */
   REGB0 = TAG_Bool(ATTR_compiling___compiling_writer___Writer____is_frozen(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -372,12 +372,12 @@ void compiling___compiling_writer___Writer___freeze(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./compiling//compiling_writer.nit:103 */
+  /* compiling/compiling_writer.nit:103 */
   REGB0 = CALL_compiling___compiling_writer___Writer___is_frozen(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* ./compiling//compiling_writer.nit:104 */
+  /* compiling/compiling_writer.nit:104 */
   REGB0 = TAG_Bool(true);
   ATTR_compiling___compiling_writer___Writer____is_frozen(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -412,7 +412,7 @@ void compiling___compiling_writer___WriterNode___internal_write_to_stream(val_t 
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./compiling//compiling_writer.nit:115 */
+  /* compiling/compiling_writer.nit:115 */
   nit_abort("Deferred method called", NULL, LOCATE_compiling___compiling_writer, 115);
   stack_frame_head = fra.me.prev;
   return;
@@ -448,7 +448,7 @@ void compiling___compiling_writer___WriterCoreNode___internal_write_to_stream(va
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./compiling//compiling_writer.nit:124 */
+  /* compiling/compiling_writer.nit:124 */
   REGB0 = TAG_Bool(ATTR_compiling___compiling_writer___WriterCoreNode____writer(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -476,7 +476,7 @@ void compiling___compiling_writer___WriterCoreNode___init(val_t p0, val_t p1, in
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./compiling//compiling_writer.nit:126 */
+  /* compiling/compiling_writer.nit:126 */
   fra.me.REG[2] = fra.me.REG[0];
   CALL_compiling___compiling_writer___WriterNode___init(fra.me.REG[0])(fra.me.REG[0], init_table);
   ATTR_compiling___compiling_writer___WriterCoreNode____writer(fra.me.REG[2]) = fra.me.REG[1];
@@ -501,10 +501,10 @@ void compiling___compiling_writer___WriterStrings___init(val_t p0, val_t p1, int
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./compiling//compiling_writer.nit:138 */
+  /* compiling/compiling_writer.nit:138 */
   fra.me.REG[2] = fra.me.REG[0];
   CALL_compiling___compiling_writer___WriterNode___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./compiling//compiling_writer.nit:140 */
+  /* compiling/compiling_writer.nit:140 */
   ATTR_compiling___compiling_writer___WriterStrings____string(fra.me.REG[2]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos3] = 1;
@@ -527,7 +527,7 @@ void compiling___compiling_writer___WriterStrings___internal_write_to_stream(val
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./compiling//compiling_writer.nit:146 */
+  /* compiling/compiling_writer.nit:146 */
   while(1) {
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -543,7 +543,7 @@ void compiling___compiling_writer___WriterStrings___internal_write_to_stream(val
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./compiling//compiling_writer.nit:147 */
+      /* compiling/compiling_writer.nit:147 */
       REGB0 = TAG_Bool(ATTR_compiling___compiling_writer___WriterStrings____string(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -551,11 +551,11 @@ void compiling___compiling_writer___WriterStrings___internal_write_to_stream(val
       }
       fra.me.REG[2] = ATTR_compiling___compiling_writer___WriterStrings____string(fra.me.REG[0]);
       CALL_standard___stream___OStream___write(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-      /* ./compiling//compiling_writer.nit:148 */
+      /* compiling/compiling_writer.nit:148 */
       fra.me.REG[2] = ATTR_compiling___compiling_writer___WriterStrings____next(fra.me.REG[0]);
       fra.me.REG[0] = fra.me.REG[2];
     } else {
-      /* ./compiling//compiling_writer.nit:146 */
+      /* compiling/compiling_writer.nit:146 */
       goto label1;
     }
   }

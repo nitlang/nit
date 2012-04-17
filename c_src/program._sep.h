@@ -53,7 +53,7 @@ typedef void (*program___ToolContext___use_SFT_optimization__eq_t)(val_t p0, val
 static const char * const LOCATE_program___ToolContext___use_SFT_optimization = "program::ToolContext::use_SFT_optimization";
 val_t program___ToolContext___use_SFT_optimization(val_t p0);
 typedef val_t (*program___ToolContext___use_SFT_optimization_t)(val_t p0);
-val_t NEW_ToolContext_mmloader___ToolContext___init();
+val_t NEW_ToolContext_toolcontext___ToolContext___init();
 static const char * const LOCATE_program___Program___tc = "program::Program::tc";
 val_t program___Program___tc(val_t p0);
 typedef val_t (*program___Program___tc_t)(val_t p0);

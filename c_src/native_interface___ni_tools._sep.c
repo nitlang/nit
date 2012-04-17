@@ -13,7 +13,7 @@ val_t native_interface___ni_tools___FunctionCompiler___signature(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_tools.nit:23 */
+  /* native_interface/ni_tools.nit:23 */
   REGB0 = TAG_Bool(ATTR_native_interface___ni_tools___FunctionCompiler_____atsignature(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -37,7 +37,7 @@ void native_interface___ni_tools___FunctionCompiler___signature__eq(val_t p0, va
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_tools.nit:23 */
+  /* native_interface/ni_tools.nit:23 */
   ATTR_native_interface___ni_tools___FunctionCompiler_____atsignature(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -55,7 +55,7 @@ val_t native_interface___ni_tools___FunctionCompiler___decls(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_tools.nit:25 */
+  /* native_interface/ni_tools.nit:25 */
   REGB0 = TAG_Bool(ATTR_native_interface___ni_tools___FunctionCompiler_____atdecls(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -79,7 +79,7 @@ void native_interface___ni_tools___FunctionCompiler___decls__eq(val_t p0, val_t 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_tools.nit:25 */
+  /* native_interface/ni_tools.nit:25 */
   ATTR_native_interface___ni_tools___FunctionCompiler_____atdecls(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -97,7 +97,7 @@ val_t native_interface___ni_tools___FunctionCompiler___exprs(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_tools.nit:26 */
+  /* native_interface/ni_tools.nit:26 */
   REGB0 = TAG_Bool(ATTR_native_interface___ni_tools___FunctionCompiler_____atexprs(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -121,7 +121,7 @@ void native_interface___ni_tools___FunctionCompiler___exprs__eq(val_t p0, val_t 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./native_interface//ni_tools.nit:26 */
+  /* native_interface/ni_tools.nit:26 */
   ATTR_native_interface___ni_tools___FunctionCompiler_____atexprs(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -145,9 +145,9 @@ val_t native_interface___ni_tools___FunctionCompiler___to_writer(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./native_interface//ni_tools.nit:30 */
+  /* native_interface/ni_tools.nit:30 */
   fra.me.REG[1] = NEW_Writer_compiling___compiling_writer___Writer___init();
-  /* ./native_interface//ni_tools.nit:32 */
+  /* native_interface/ni_tools.nit:32 */
   REGB0 = TAG_Int(3);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -172,13 +172,13 @@ val_t native_interface___ni_tools___FunctionCompiler___to_writer(val_t p0){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
   CALL_compiling___compiling_writer___Writer___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./native_interface//ni_tools.nit:34 */
+  /* native_interface/ni_tools.nit:34 */
   fra.me.REG[2] = CALL_native_interface___ni_tools___FunctionCompiler___decls(fra.me.REG[0])(fra.me.REG[0]);
   CALL_compiling___compiling_writer___Writer___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./native_interface//ni_tools.nit:35 */
+  /* native_interface/ni_tools.nit:35 */
   fra.me.REG[0] = CALL_native_interface___ni_tools___FunctionCompiler___exprs(fra.me.REG[0])(fra.me.REG[0]);
   CALL_compiling___compiling_writer___Writer___append(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./native_interface//ni_tools.nit:37 */
+  /* native_interface/ni_tools.nit:37 */
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString("}\n");
     REGB0 = TAG_Int(2);
@@ -188,7 +188,7 @@ val_t native_interface___ni_tools___FunctionCompiler___to_writer(val_t p0){
   } else fra.me.REG[0] = once_value_3;
   fra.me.REG[0] = fra.me.REG[0];
   CALL_compiling___compiling_writer___Writer___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./native_interface//ni_tools.nit:39 */
+  /* native_interface/ni_tools.nit:39 */
   goto label4;
   label4: while(0);
   stack_frame_head = fra.me.prev;

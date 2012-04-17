@@ -12,7 +12,7 @@ val_t metamodel___type_formal___MMType___direct_type(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//type_formal.nit:25 */
+  /* metamodel/type_formal.nit:25 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -33,7 +33,7 @@ val_t metamodel___type_formal___MMTypeFormal___is_valid(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//type_formal.nit:31 */
+  /* metamodel/type_formal.nit:31 */
   fra.me.REG[1] = ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -77,7 +77,7 @@ val_t metamodel___type_formal___MMTypeFormal___name(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//type_formal.nit:33 */
+  /* metamodel/type_formal.nit:33 */
   REGB0 = TAG_Bool(ATTR_metamodel___type_formal___MMTypeFormal____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -101,9 +101,9 @@ val_t metamodel___type_formal___MMTypeFormal___bound(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//type_formal.nit:36 */
+  /* metamodel/type_formal.nit:36 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./metamodel//type_formal.nit:37 */
+  /* metamodel/type_formal.nit:37 */
   fra.me.REG[1] = ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -131,7 +131,7 @@ val_t metamodel___type_formal___MMTypeFormal_____l(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//type_formal.nit:40 */
+  /* metamodel/type_formal.nit:40 */
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[0]));
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -165,7 +165,7 @@ val_t metamodel___type_formal___MMTypeFormal___is_supertype(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./metamodel//type_formal.nit:41 */
+  /* metamodel/type_formal.nit:41 */
   fra.me.REG[0] = ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -190,7 +190,7 @@ val_t metamodel___type_formal___MMTypeFormal___is_nullable(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//type_formal.nit:42 */
+  /* metamodel/type_formal.nit:42 */
   fra.me.REG[0] = ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -215,7 +215,7 @@ val_t metamodel___type_formal___MMTypeFormal___direct_type(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//type_formal.nit:43 */
+  /* metamodel/type_formal.nit:43 */
   fra.me.REG[0] = ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -240,7 +240,7 @@ val_t metamodel___type_formal___MMTypeFormal___local_class(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//type_formal.nit:44 */
+  /* metamodel/type_formal.nit:44 */
   fra.me.REG[0] = ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -265,7 +265,7 @@ val_t metamodel___type_formal___MMTypeFormal___to_s(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./metamodel//type_formal.nit:46 */
+  /* metamodel/type_formal.nit:46 */
   REGB0 = TAG_Bool(ATTR_metamodel___type_formal___MMTypeFormal____name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -297,12 +297,12 @@ void metamodel___type_formal___MMTypeFormal___init(val_t p0, val_t p1, val_t p2,
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./metamodel//type_formal.nit:48 */
+  /* metamodel/type_formal.nit:48 */
   fra.me.REG[3] = fra.me.REG[0];
   CALL_metamodel___static_type___MMType___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./metamodel//type_formal.nit:50 */
+  /* metamodel/type_formal.nit:50 */
   ATTR_metamodel___type_formal___MMTypeFormal____name(fra.me.REG[3]) = fra.me.REG[1];
-  /* ./metamodel//type_formal.nit:51 */
+  /* metamodel/type_formal.nit:51 */
   ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[3]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;

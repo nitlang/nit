@@ -3,6 +3,7 @@
 #define native_interface___frontier_sep
 #include "native_interface___ni_tools._sep.h"
 #include "native_interface___ni_metamodel._sep.h"
+#include "syntax._sep.h"
 #include <nit_common.h>
 
 extern const classtable_elt_t VFT_native_interface___frontier___FrontierVisitor[];
@@ -44,25 +45,24 @@ extern const int SFT_native_interface___frontier[];
 #define CALL_native_interface___frontier___FrontierVisitor___compile_cached(recv) ((native_interface___frontier___FrontierVisitor___compile_cached_t)CALL((recv), (SFT_native_interface___frontier[7] + 17)))
 #define CALL_native_interface___frontier___FrontierVisitor___write_to_files(recv) ((native_interface___frontier___FrontierVisitor___write_to_files_t)CALL((recv), (SFT_native_interface___frontier[7] + 18)))
 #define CALL_native_interface___frontier___FrontierVisitor___init(recv) ((native_interface___frontier___FrontierVisitor___init_t)CALL((recv), (SFT_native_interface___frontier[7] + 19)))
-#define CALL_native_interface___frontier___String___path_from_parent(recv) ((native_interface___frontier___String___path_from_parent_t)CALL((recv), (SFT_native_interface___frontier[8] + 0)))
-#define CALL_native_interface___frontier___MMImportedCast___compile_to_frontier(recv) ((native_interface___frontier___MMImportedCast___compile_to_frontier_t)CALL((recv), (SFT_native_interface___frontier[9] + 0)))
-#define CALL_native_interface___frontier___MMImportedCast___compile_as(recv) ((native_interface___frontier___MMImportedCast___compile_as_t)CALL((recv), (SFT_native_interface___frontier[9] + 1)))
-#define CALL_native_interface___frontier___MMImportedCast___compile_is(recv) ((native_interface___frontier___MMImportedCast___compile_is_t)CALL((recv), (SFT_native_interface___frontier[9] + 2)))
-#define CALL_native_interface___frontier___MMImportedCast___compile_check_is_not_null(recv) ((native_interface___frontier___MMImportedCast___compile_check_is_not_null_t)CALL((recv), (SFT_native_interface___frontier[9] + 3)))
-#define CALL_native_interface___frontier___MMType___compile_check_isa(recv) ((native_interface___frontier___MMType___compile_check_isa_t)CALL((recv), (SFT_native_interface___frontier[10] + 0)))
-#define CALL_native_interface___frontier___MMType___compile_condition_isa(recv) ((native_interface___frontier___MMType___compile_condition_isa_t)CALL((recv), (SFT_native_interface___frontier[10] + 1)))
-#define CALL_native_interface___frontier___MMType___compile_to_frontier(recv) ((native_interface___frontier___MMType___compile_to_frontier_t)CALL((recv), (SFT_native_interface___frontier[10] + 2)))
-#define CALL_native_interface___frontier___MMType___compile_new_local_ref(recv) ((native_interface___frontier___MMType___compile_new_local_ref_t)CALL((recv), (SFT_native_interface___frontier[10] + 3)))
-#define CALL_native_interface___frontier___MMExplicitImport___compile_friendly_to_frontier(recv) ((native_interface___frontier___MMExplicitImport___compile_friendly_to_frontier_t)CALL((recv), (SFT_native_interface___frontier[11] + 0)))
+#define CALL_native_interface___frontier___MMImportedCast___compile_to_frontier(recv) ((native_interface___frontier___MMImportedCast___compile_to_frontier_t)CALL((recv), (SFT_native_interface___frontier[8] + 0)))
+#define CALL_native_interface___frontier___MMImportedCast___compile_as(recv) ((native_interface___frontier___MMImportedCast___compile_as_t)CALL((recv), (SFT_native_interface___frontier[8] + 1)))
+#define CALL_native_interface___frontier___MMImportedCast___compile_is(recv) ((native_interface___frontier___MMImportedCast___compile_is_t)CALL((recv), (SFT_native_interface___frontier[8] + 2)))
+#define CALL_native_interface___frontier___MMImportedCast___compile_check_is_not_null(recv) ((native_interface___frontier___MMImportedCast___compile_check_is_not_null_t)CALL((recv), (SFT_native_interface___frontier[8] + 3)))
+#define CALL_native_interface___frontier___MMType___compile_check_isa(recv) ((native_interface___frontier___MMType___compile_check_isa_t)CALL((recv), (SFT_native_interface___frontier[9] + 0)))
+#define CALL_native_interface___frontier___MMType___compile_condition_isa(recv) ((native_interface___frontier___MMType___compile_condition_isa_t)CALL((recv), (SFT_native_interface___frontier[9] + 1)))
+#define CALL_native_interface___frontier___MMType___compile_to_frontier(recv) ((native_interface___frontier___MMType___compile_to_frontier_t)CALL((recv), (SFT_native_interface___frontier[9] + 2)))
+#define CALL_native_interface___frontier___MMType___compile_new_local_ref(recv) ((native_interface___frontier___MMType___compile_new_local_ref_t)CALL((recv), (SFT_native_interface___frontier[9] + 3)))
+#define CALL_native_interface___frontier___MMExplicitImport___compile_friendly_to_frontier(recv) ((native_interface___frontier___MMExplicitImport___compile_friendly_to_frontier_t)CALL((recv), (SFT_native_interface___frontier[10] + 0)))
 static const char * const LOCATE_native_interface___frontier___MMSrcModule___compile_frontier = "frontier::MMSrcModule::compile_frontier";
 void native_interface___frontier___MMSrcModule___compile_frontier(val_t p0, val_t p1);
 typedef void (*native_interface___frontier___MMSrcModule___compile_frontier_t)(val_t p0, val_t p1);
-  typedef void (*CLOS_OC_native_interface___frontier___MMSrcModule___compile_frontier_22_0)(struct stack_frame_t *);
-  void OC_native_interface___frontier___MMSrcModule___compile_frontier_22(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_native_interface___frontier___MMSrcModule___compile_frontier_22_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-    typedef void (*CLOS_OC_native_interface___frontier___MMSrcModule___compile_frontier_23_0)(struct stack_frame_t *);
-    void OC_native_interface___frontier___MMSrcModule___compile_frontier_23(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-    typedef void (*OC_native_interface___frontier___MMSrcModule___compile_frontier_23_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*CLOS_OC_native_interface___frontier___MMSrcModule___compile_frontier_23_0)(struct stack_frame_t *);
+  void OC_native_interface___frontier___MMSrcModule___compile_frontier_23(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_native_interface___frontier___MMSrcModule___compile_frontier_23_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*CLOS_OC_native_interface___frontier___MMSrcModule___compile_frontier_24_0)(struct stack_frame_t *);
+    void OC_native_interface___frontier___MMSrcModule___compile_frontier_24(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+    typedef void (*OC_native_interface___frontier___MMSrcModule___compile_frontier_24_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_MMSrcModule_syntax___syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 static const char * const LOCATE_native_interface___frontier___MMSrcMethod___compile_extern_to_frontier = "frontier::MMSrcMethod::compile_extern_to_frontier";
 void native_interface___frontier___MMSrcMethod___compile_extern_to_frontier(val_t p0, val_t p1);
@@ -155,11 +155,6 @@ static const char * const LOCATE_native_interface___frontier___FrontierVisitor__
 void native_interface___frontier___FrontierVisitor___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*native_interface___frontier___FrontierVisitor___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_FrontierVisitor_native_interface___frontier___FrontierVisitor___init(val_t p0, val_t p1);
-static const char * const LOCATE_native_interface___frontier___String___path_from_parent = "frontier::String::path_from_parent";
-val_t native_interface___frontier___String___path_from_parent(val_t p0);
-typedef val_t (*native_interface___frontier___String___path_from_parent_t)(val_t p0);
-val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1);
-val_t NEW_String_standard___string___String___from_cstring(val_t p0);
 static const char * const LOCATE_native_interface___frontier___MMImportedCast___compile_to_frontier = "frontier::MMImportedCast::compile_to_frontier";
 void native_interface___frontier___MMImportedCast___compile_to_frontier(val_t p0, val_t p1);
 typedef void (*native_interface___frontier___MMImportedCast___compile_to_frontier_t)(val_t p0, val_t p1);

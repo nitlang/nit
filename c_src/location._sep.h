@@ -39,6 +39,7 @@ extern const int SFT_location[];
 #define CALL_location___Location___with_file(recv) ((location___Location___with_file_t)CALL((recv), (SFT_location[7] + 7)))
 #define CALL_location___Location___located_in(recv) ((location___Location___located_in_t)CALL((recv), (SFT_location[7] + 8)))
 #define CALL_location___Location___relative_to(recv) ((location___Location___relative_to_t)CALL((recv), (SFT_location[7] + 9)))
+#define CALL_location___Location___colored_line(recv) ((location___Location___colored_line_t)CALL((recv), (SFT_location[7] + 10)))
 static const char * const LOCATE_location___SourceFile___filename = "location::SourceFile::filename";
 val_t location___SourceFile___filename(val_t p0);
 typedef val_t (*location___SourceFile___filename_t)(val_t p0);
@@ -99,4 +100,7 @@ typedef val_t (*location___Location___relative_to_t)(val_t p0, val_t p1);
 static const char * const LOCATE_location___Location_____l = "location::Location::(kernel::Comparable::<)";
 val_t location___Location_____l(val_t p0, val_t p1);
 typedef val_t (*location___Location_____l_t)(val_t p0, val_t p1);
+static const char * const LOCATE_location___Location___colored_line = "location::Location::colored_line";
+val_t location___Location___colored_line(val_t p0, val_t p1);
+typedef val_t (*location___Location___colored_line_t)(val_t p0, val_t p1);
 #endif

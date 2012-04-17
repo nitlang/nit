@@ -12,7 +12,7 @@ typedef struct s_TablesCapable *TablesCapable;
 #define TablesCapable_incr_ref( x ) nitni_global_ref_incr( (struct nitni_ref*)(x) )
 #define TablesCapable_decr_ref( x ) nitni_global_ref_decr( (struct nitni_ref*)(x) )
 #endif
-#include "../src/parser//tables_nit.h"
+#include "tables_nit.h"
 
 /* out/indirect function for tables::TablesCapable::lexer_goto */
 val_t TablesCapable_lexer_goto___out( val_t recv, val_t i, val_t j );

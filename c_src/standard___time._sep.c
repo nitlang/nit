@@ -13,7 +13,7 @@ val_t standard___time___Object___get_time(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//time.nit:19 */
+  /* ../lib/standard/time.nit:19 */
   REGB0 = Object_get_time___out(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return REGB0;

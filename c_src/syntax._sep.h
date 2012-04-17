@@ -46,5 +46,5 @@ typedef val_t (*syntax___ToolContext___keep_ast_t)(val_t p0);
 static const char * const LOCATE_syntax___ToolContext___keep_ast__eq = "syntax::ToolContext::keep_ast=";
 void syntax___ToolContext___keep_ast__eq(val_t p0, val_t p1);
 typedef void (*syntax___ToolContext___keep_ast__eq_t)(val_t p0, val_t p1);
-val_t NEW_ToolContext_mmloader___ToolContext___init();
+val_t NEW_ToolContext_toolcontext___ToolContext___init();
 #endif

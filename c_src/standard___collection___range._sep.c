@@ -13,7 +13,7 @@ val_t standard___collection___range___Range___first(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//range.nit:22 */
+  /* ../lib/standard/collection/range.nit:22 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___Range____first(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -36,7 +36,7 @@ val_t standard___collection___range___Range___last(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//range.nit:24 */
+  /* ../lib/standard/collection/range.nit:24 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___Range____last(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -59,7 +59,7 @@ val_t standard___collection___range___Range___after(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//range.nit:27 */
+  /* ../lib/standard/collection/range.nit:27 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___Range____after(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -86,7 +86,7 @@ val_t standard___collection___range___Range___has(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//range.nit:30 */
+  /* ../lib/standard/collection/range.nit:30 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___Range____first(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -128,7 +128,7 @@ val_t standard___collection___range___Range___has_only(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//range.nit:32 */
+  /* ../lib/standard/collection/range.nit:32 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___Range____first(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -179,14 +179,14 @@ val_t standard___collection___range___Range___count(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//range.nit:36 */
+  /* ../lib/standard/collection/range.nit:36 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//range.nit:37 */
+    /* ../lib/standard/collection/range.nit:37 */
     REGB0 = TAG_Int(1);
     goto label1;
   } else {
-    /* ./../lib/standard//collection//range.nit:39 */
+    /* ../lib/standard/collection/range.nit:39 */
     REGB1 = TAG_Int(0);
     REGB0 = REGB1;
     goto label1;
@@ -207,7 +207,7 @@ val_t standard___collection___range___Range___iterator(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//range.nit:43 */
+  /* ../lib/standard/collection/range.nit:43 */
   fra.me.REG[0] = NEW_IteratorRange_standard___collection___range___IteratorRange___init(fra.me.REG[0]);
   goto label1;
   label1: while(0);
@@ -233,34 +233,34 @@ void standard___collection___range___Range___iterate(val_t p0, struct stack_fram
   fra.me.closure_funs = CREG;
   fra.me.REG[0] = p0;
   CREG[0] = clos_fun0;
-  /* ./../lib/standard//collection//range.nit:48 */
+  /* ../lib/standard/collection/range.nit:48 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___Range____first(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_first", LOCATE_standard___collection___range, 48);
   }
   fra.me.REG[1] = ATTR_standard___collection___range___Range____first(fra.me.REG[0]);
-  /* ./../lib/standard//collection//range.nit:49 */
+  /* ../lib/standard/collection/range.nit:49 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___Range____last(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_last", LOCATE_standard___collection___range, 49);
   }
   fra.me.REG[0] = ATTR_standard___collection___range___Range____last(fra.me.REG[0]);
-  /* ./../lib/standard//collection//range.nit:50 */
+  /* ../lib/standard/collection/range.nit:50 */
   while(1) {
     REGB0 = CALL_standard___kernel___Comparable_____leq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//range.nit:51 */
+      /* ../lib/standard/collection/range.nit:51 */
       ((void (*)(struct stack_frame_t *, val_t))(CREG[0]))(closctx_param, fra.me.REG[1]);
       if (closctx_param->has_broke) {
         goto label1;
       }
-      /* ./../lib/standard//collection//range.nit:52 */
+      /* ../lib/standard/collection/range.nit:52 */
       fra.me.REG[2] = CALL_standard___kernel___Discrete___succ(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[1] = fra.me.REG[2];
     } else {
-      /* ./../lib/standard//collection//range.nit:50 */
+      /* ../lib/standard/collection/range.nit:50 */
       goto label2;
     }
   }
@@ -285,7 +285,7 @@ val_t standard___collection___range___Range___length(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//range.nit:58 */
+  /* ../lib/standard/collection/range.nit:58 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___Range____first(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -299,21 +299,21 @@ val_t standard___collection___range___Range___length(val_t p0){
   }
   fra.me.REG[0] = ATTR_standard___collection___range___Range____after(fra.me.REG[0]);
   REGB0 = CALL_standard___kernel___Discrete___distance(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./../lib/standard//collection//range.nit:59 */
+  /* ../lib/standard/collection/range.nit:59 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:234 */
+  /* ../lib/standard/kernel.nit:234 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//range.nit:59 */
+  /* ../lib/standard/collection/range.nit:59 */
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//collection//range.nit:60 */
+    /* ../lib/standard/collection/range.nit:60 */
     goto label1;
   } else {
-    /* ./../lib/standard//collection//range.nit:62 */
+    /* ../lib/standard/collection/range.nit:62 */
     REGB1 = TAG_Int(0);
     REGB0 = REGB1;
     goto label1;
@@ -336,7 +336,7 @@ val_t standard___collection___range___Range___is_empty(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//range.nit:66 */
+  /* ../lib/standard/collection/range.nit:66 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___Range____first(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -373,11 +373,11 @@ void standard___collection___range___Range___init(val_t p0, val_t p1, val_t p2, 
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./../lib/standard//collection//range.nit:72 */
+  /* ../lib/standard/collection/range.nit:72 */
   ATTR_standard___collection___range___Range____first(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//range.nit:73 */
+  /* ../lib/standard/collection/range.nit:73 */
   ATTR_standard___collection___range___Range____last(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./../lib/standard//collection//range.nit:74 */
+  /* ../lib/standard/collection/range.nit:74 */
   fra.me.REG[2] = CALL_standard___kernel___Discrete___succ(fra.me.REG[2])(fra.me.REG[2]);
   ATTR_standard___collection___range___Range____after(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
@@ -402,12 +402,12 @@ void standard___collection___range___Range___without_last(val_t p0, val_t p1, va
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./../lib/standard//collection//range.nit:81 */
+  /* ../lib/standard/collection/range.nit:81 */
   ATTR_standard___collection___range___Range____first(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//range.nit:82 */
+  /* ../lib/standard/collection/range.nit:82 */
   fra.me.REG[1] = CALL_standard___kernel___Discrete___prec(fra.me.REG[2])(fra.me.REG[2]);
   ATTR_standard___collection___range___Range____last(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//range.nit:83 */
+  /* ../lib/standard/collection/range.nit:83 */
   ATTR_standard___collection___range___Range____after(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
@@ -426,7 +426,7 @@ val_t standard___collection___range___IteratorRange___item(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//range.nit:91 */
+  /* ../lib/standard/collection/range.nit:91 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___IteratorRange____item(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -450,7 +450,7 @@ val_t standard___collection___range___IteratorRange___is_ok(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//range.nit:93 */
+  /* ../lib/standard/collection/range.nit:93 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___IteratorRange____item(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -484,7 +484,7 @@ void standard___collection___range___IteratorRange___next(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//range.nit:95 */
+  /* ../lib/standard/collection/range.nit:95 */
   REGB0 = TAG_Bool(ATTR_standard___collection___range___IteratorRange____item(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -512,9 +512,9 @@ void standard___collection___range___IteratorRange___init(val_t p0, val_t p1, in
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//range.nit:99 */
+  /* ../lib/standard/collection/range.nit:99 */
   ATTR_standard___collection___range___IteratorRange____range(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//range.nit:100 */
+  /* ../lib/standard/collection/range.nit:100 */
   fra.me.REG[1] = CALL_standard___collection___abstract_collection___Collection___first(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_standard___collection___range___IteratorRange____item(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;

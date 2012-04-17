@@ -14,9 +14,9 @@ val_t parser___parser_nodes___ANode___location(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:27 */
+  /* parser/parser_nodes.nit:27 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ./parser//parser_nodes.nit:29 */
+  /* parser/parser_nodes.nit:29 */
   fra.me.REG[1] = ATTR_parser___parser_nodes___ANode____location(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -40,40 +40,191 @@ val_t parser___parser_nodes___ANode___hot_location(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:31 */
+  /* parser/parser_nodes.nit:31 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ANode___location(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-void parser___parser_nodes___ANode___init(val_t p0, val_t p1, int* init_table){
+void parser___parser_nodes___ANode___init(val_t p0, int* init_table){
   int itpos0 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___ANode].i;
-  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  struct {struct stack_frame_t me;} fra;
   val_t tmp;
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 0;
+  fra.me.line = 32;
   fra.me.meth = LOCATE_parser___parser_nodes___ANode___init;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 2;
+  fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  fra.me.REG[1] = p1;
-  ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
   return;
+}
+void parser___parser_nodes___ANode___debug(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  static val_t once_value_3; /* Once value */
+  static val_t once_value_4; /* Once value */
+  static val_t once_value_5; /* Once value */
+  static val_t once_value_6; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 34;
+  fra.me.meth = LOCATE_parser___parser_nodes___ANode___debug;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 4;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[3] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* parser/parser_nodes.nit:37 */
+  REGB0 = TAG_Int(9);
+  fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[3] = BOX_NativeString("");
+    REGB0 = TAG_Int(0);
+    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    once_value_1 = fra.me.REG[3];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[3] = once_value_1;
+  fra.me.REG[3] = fra.me.REG[3];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+  fra.me.REG[3] = CALL_parser___parser_nodes___ANode___hot_location(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+  if (!once_value_2) {
+    fra.me.REG[3] = BOX_NativeString(" ");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    once_value_2 = fra.me.REG[3];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[3] = once_value_2;
+  fra.me.REG[3] = fra.me.REG[3];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+  fra.me.REG[3] = CALL_standard___string___Object___class_name(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+  if (!once_value_3) {
+    fra.me.REG[3] = BOX_NativeString(": ");
+    REGB0 = TAG_Int(2);
+    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    once_value_3 = fra.me.REG[3];
+    register_static_object(&once_value_3);
+  } else fra.me.REG[3] = once_value_3;
+  fra.me.REG[3] = fra.me.REG[3];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+  if (!once_value_4) {
+    fra.me.REG[1] = BOX_NativeString("\n");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    once_value_4 = fra.me.REG[1];
+    register_static_object(&once_value_4);
+  } else fra.me.REG[1] = once_value_4;
+  fra.me.REG[1] = fra.me.REG[1];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+  fra.me.REG[1] = CALL_parser___parser_nodes___ANode___hot_location(fra.me.REG[0])(fra.me.REG[0]);
+  if (!once_value_5) {
+    fra.me.REG[3] = BOX_NativeString("0;32");
+    REGB0 = TAG_Int(4);
+    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    once_value_5 = fra.me.REG[3];
+    register_static_object(&once_value_5);
+  } else fra.me.REG[3] = once_value_5;
+  fra.me.REG[3] = fra.me.REG[3];
+  fra.me.REG[3] = CALL_location___Location___colored_line(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+  if (!once_value_6) {
+    fra.me.REG[3] = BOX_NativeString("");
+    REGB0 = TAG_Int(0);
+    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    once_value_6 = fra.me.REG[3];
+    register_static_object(&once_value_6);
+  } else fra.me.REG[3] = once_value_6;
+  fra.me.REG[3] = fra.me.REG[3];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+  fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
+  CALL_standard___file___Object___print(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
+  stack_frame_head = fra.me.prev;
+  return;
+}
+val_t parser___parser_nodes___Token___text(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 44;
+  fra.me.meth = LOCATE_parser___parser_nodes___Token___text;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
+  /* parser/parser_nodes.nit:44 */
+  nit_abort("Deferred method called", NULL, LOCATE_parser___parser_nodes, 44);
+  stack_frame_head = fra.me.prev;
+  return NIT_NULL;
+}
+val_t parser___parser_nodes___Token___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 46;
+  fra.me.meth = LOCATE_parser___parser_nodes___Token___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:47 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("'");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  fra.me.REG[0] = CALL_parser___parser_nodes___Token___text(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("'");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
 }
 void parser___parser_nodes___Prod___location__eq(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 42;
+  fra.me.line = 54;
   fra.me.meth = LOCATE_parser___parser_nodes___Prod___location__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -82,10 +233,406 @@ void parser___parser_nodes___Prod___location__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//parser_nodes.nit:42 */
+  /* parser/parser_nodes.nit:54 */
   ATTR_parser___parser_nodes___ANode____location(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
+}
+val_t parser___parser_nodes___TEol___to_s(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 58;
+  fra.me.meth = LOCATE_parser___parser_nodes___TEol___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:60 */
+  if (!once_value_1) {
+    fra.me.REG[0] = BOX_NativeString("end of line");
+    REGB0 = TAG_Int(11);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_1 = fra.me.REG[0];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[0] = once_value_1;
+  fra.me.REG[0] = fra.me.REG[0];
+  goto label2;
+  label2: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___TokenKeyword___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 68;
+  fra.me.meth = LOCATE_parser___parser_nodes___TokenKeyword___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:70 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("keyword '");
+    REGB0 = TAG_Int(9);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  fra.me.REG[0] = CALL_parser___parser_nodes___Token___text(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("'");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
+val_t parser___parser_nodes___TokenOperator___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 249;
+  fra.me.meth = LOCATE_parser___parser_nodes___TokenOperator___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:251 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("operator '");
+    REGB0 = TAG_Int(10);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  fra.me.REG[0] = CALL_parser___parser_nodes___Token___text(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("'");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
+val_t parser___parser_nodes___TClassid___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 316;
+  fra.me.meth = LOCATE_parser___parser_nodes___TClassid___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:318 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("type identifier '");
+    REGB0 = TAG_Int(17);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  fra.me.REG[0] = CALL_parser___parser_nodes___Token___text(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("'");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
+val_t parser___parser_nodes___TId___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 323;
+  fra.me.meth = LOCATE_parser___parser_nodes___TId___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:325 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("identifier '");
+    REGB0 = TAG_Int(12);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  fra.me.REG[0] = CALL_parser___parser_nodes___Token___text(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("'");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
+val_t parser___parser_nodes___TAttrid___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 330;
+  fra.me.meth = LOCATE_parser___parser_nodes___TAttrid___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:332 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("attribute '");
+    REGB0 = TAG_Int(11);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  fra.me.REG[0] = CALL_parser___parser_nodes___Token___text(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("'");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
+val_t parser___parser_nodes___TokenLiteral___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 337;
+  fra.me.meth = LOCATE_parser___parser_nodes___TokenLiteral___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:339 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("literal value '");
+    REGB0 = TAG_Int(15);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  fra.me.REG[0] = CALL_parser___parser_nodes___Token___text(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("'");
+    REGB0 = TAG_Int(1);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
+val_t parser___parser_nodes___TBadString___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 365;
+  fra.me.meth = LOCATE_parser___parser_nodes___TBadString___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:367 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("malformed string ");
+    REGB0 = TAG_Int(17);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  fra.me.REG[0] = CALL_parser___parser_nodes___Token___text(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("");
+    REGB0 = TAG_Int(0);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
+}
+val_t parser___parser_nodes___TBadChar___to_s(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  static val_t once_value_2; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 372;
+  fra.me.meth = LOCATE_parser___parser_nodes___TBadChar___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:374 */
+  REGB0 = TAG_Int(3);
+  fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  if (!once_value_1) {
+    fra.me.REG[2] = BOX_NativeString("malformed character ");
+    REGB0 = TAG_Int(20);
+    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    once_value_1 = fra.me.REG[2];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[2] = once_value_1;
+  fra.me.REG[2] = fra.me.REG[2];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
+  fra.me.REG[0] = CALL_parser___parser_nodes___Token___text(fra.me.REG[0])(fra.me.REG[0]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  if (!once_value_2) {
+    fra.me.REG[0] = BOX_NativeString("");
+    REGB0 = TAG_Int(0);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_2 = fra.me.REG[0];
+    register_static_object(&once_value_2);
+  } else fra.me.REG[0] = once_value_2;
+  fra.me.REG[0] = fra.me.REG[0];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
+  goto label3;
+  label3: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
 }
 void parser___parser_nodes___EOF___noinit(val_t p0, int* init_table){
   int itpos1 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___EOF].i;
@@ -94,7 +641,7 @@ void parser___parser_nodes___EOF___noinit(val_t p0, int* init_table){
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 313;
+  fra.me.line = 379;
   fra.me.meth = LOCATE_parser___parser_nodes___EOF___noinit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
@@ -105,6 +652,34 @@ void parser___parser_nodes___EOF___noinit(val_t p0, int* init_table){
   init_table[itpos1] = 1;
   return;
 }
+val_t parser___parser_nodes___EOF___to_s(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  static val_t once_value_1; /* Once value */
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 380;
+  fra.me.meth = LOCATE_parser___parser_nodes___EOF___to_s;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:382 */
+  if (!once_value_1) {
+    fra.me.REG[0] = BOX_NativeString("end of file");
+    REGB0 = TAG_Int(11);
+    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    once_value_1 = fra.me.REG[0];
+    register_static_object(&once_value_1);
+  } else fra.me.REG[0] = once_value_1;
+  fra.me.REG[0] = fra.me.REG[0];
+  goto label2;
+  label2: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
 void parser___parser_nodes___AError___noinit(val_t p0, int* init_table){
   int itpos2 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___AError].i;
   struct {struct stack_frame_t me;} fra;
@@ -112,14 +687,14 @@ void parser___parser_nodes___AError___noinit(val_t p0, int* init_table){
   if (init_table[itpos2]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 317;
+  fra.me.line = 387;
   fra.me.meth = LOCATE_parser___parser_nodes___AError___noinit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:317 */
+  /* parser/parser_nodes.nit:387 */
   CALL_parser___parser_nodes___EOF___noinit(fra.me.REG[0])(fra.me.REG[0], init_table);
   stack_frame_head = fra.me.prev;
   init_table[itpos2] = 1;
@@ -130,14 +705,14 @@ val_t parser___parser_nodes___AModule___n_moduledecl(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 322;
+  fra.me.line = 392;
   fra.me.meth = LOCATE_parser___parser_nodes___AModule___n_moduledecl;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:322 */
+  /* parser/parser_nodes.nit:392 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AModule____n_moduledecl(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -148,18 +723,18 @@ val_t parser___parser_nodes___AModule___n_imports(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 323;
+  fra.me.line = 393;
   fra.me.meth = LOCATE_parser___parser_nodes___AModule___n_imports;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:323 */
+  /* parser/parser_nodes.nit:393 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AModule____n_imports(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_imports", LOCATE_parser___parser_nodes, 323);
+    nit_abort("Uninitialized attribute %s", "_n_imports", LOCATE_parser___parser_nodes, 393);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AModule____n_imports(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -171,18 +746,18 @@ val_t parser___parser_nodes___AModule___n_classdefs(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 324;
+  fra.me.line = 394;
   fra.me.meth = LOCATE_parser___parser_nodes___AModule___n_classdefs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:324 */
+  /* parser/parser_nodes.nit:394 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AModule____n_classdefs(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_classdefs", LOCATE_parser___parser_nodes, 324);
+    nit_abort("Uninitialized attribute %s", "_n_classdefs", LOCATE_parser___parser_nodes, 394);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AModule____n_classdefs(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -193,14 +768,14 @@ val_t parser___parser_nodes___AModuledecl___n_doc(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 328;
+  fra.me.line = 398;
   fra.me.meth = LOCATE_parser___parser_nodes___AModuledecl___n_doc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:328 */
+  /* parser/parser_nodes.nit:398 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AModuledecl____n_doc(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -211,18 +786,18 @@ val_t parser___parser_nodes___AModuledecl___n_kwmodule(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 329;
+  fra.me.line = 399;
   fra.me.meth = LOCATE_parser___parser_nodes___AModuledecl___n_kwmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:329 */
+  /* parser/parser_nodes.nit:399 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AModuledecl____n_kwmodule(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwmodule", LOCATE_parser___parser_nodes, 329);
+    nit_abort("Uninitialized attribute %s", "_n_kwmodule", LOCATE_parser___parser_nodes, 399);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AModuledecl____n_kwmodule(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -234,18 +809,18 @@ val_t parser___parser_nodes___AModuledecl___n_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 330;
+  fra.me.line = 400;
   fra.me.meth = LOCATE_parser___parser_nodes___AModuledecl___n_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:330 */
+  /* parser/parser_nodes.nit:400 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AModuledecl____n_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_name", LOCATE_parser___parser_nodes, 330);
+    nit_abort("Uninitialized attribute %s", "_n_name", LOCATE_parser___parser_nodes, 400);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AModuledecl____n_name(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -257,18 +832,18 @@ val_t parser___parser_nodes___AStdImport___n_visibility(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 335;
+  fra.me.line = 405;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdImport___n_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:335 */
+  /* parser/parser_nodes.nit:405 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStdImport____n_visibility(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_visibility", LOCATE_parser___parser_nodes, 335);
+    nit_abort("Uninitialized attribute %s", "_n_visibility", LOCATE_parser___parser_nodes, 405);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStdImport____n_visibility(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -280,18 +855,18 @@ val_t parser___parser_nodes___AStdImport___n_kwimport(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 336;
+  fra.me.line = 406;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdImport___n_kwimport;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:336 */
+  /* parser/parser_nodes.nit:406 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStdImport____n_kwimport(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwimport", LOCATE_parser___parser_nodes, 336);
+    nit_abort("Uninitialized attribute %s", "_n_kwimport", LOCATE_parser___parser_nodes, 406);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStdImport____n_kwimport(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -303,18 +878,18 @@ val_t parser___parser_nodes___AStdImport___n_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 337;
+  fra.me.line = 407;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdImport___n_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:337 */
+  /* parser/parser_nodes.nit:407 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStdImport____n_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_name", LOCATE_parser___parser_nodes, 337);
+    nit_abort("Uninitialized attribute %s", "_n_name", LOCATE_parser___parser_nodes, 407);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStdImport____n_name(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -326,18 +901,18 @@ val_t parser___parser_nodes___ANoImport___n_visibility(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 341;
+  fra.me.line = 411;
   fra.me.meth = LOCATE_parser___parser_nodes___ANoImport___n_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:341 */
+  /* parser/parser_nodes.nit:411 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ANoImport____n_visibility(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_visibility", LOCATE_parser___parser_nodes, 341);
+    nit_abort("Uninitialized attribute %s", "_n_visibility", LOCATE_parser___parser_nodes, 411);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANoImport____n_visibility(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -349,18 +924,18 @@ val_t parser___parser_nodes___ANoImport___n_kwimport(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 342;
+  fra.me.line = 412;
   fra.me.meth = LOCATE_parser___parser_nodes___ANoImport___n_kwimport;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:342 */
+  /* parser/parser_nodes.nit:412 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ANoImport____n_kwimport(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwimport", LOCATE_parser___parser_nodes, 342);
+    nit_abort("Uninitialized attribute %s", "_n_kwimport", LOCATE_parser___parser_nodes, 412);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANoImport____n_kwimport(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -372,18 +947,18 @@ val_t parser___parser_nodes___ANoImport___n_kwend(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 343;
+  fra.me.line = 413;
   fra.me.meth = LOCATE_parser___parser_nodes___ANoImport___n_kwend;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:343 */
+  /* parser/parser_nodes.nit:413 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ANoImport____n_kwend(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwend", LOCATE_parser___parser_nodes, 343);
+    nit_abort("Uninitialized attribute %s", "_n_kwend", LOCATE_parser___parser_nodes, 413);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANoImport____n_kwend(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -395,18 +970,18 @@ val_t parser___parser_nodes___APrivateVisibility___n_kwprivate(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 351;
+  fra.me.line = 421;
   fra.me.meth = LOCATE_parser___parser_nodes___APrivateVisibility___n_kwprivate;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:351 */
+  /* parser/parser_nodes.nit:421 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___APrivateVisibility____n_kwprivate(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwprivate", LOCATE_parser___parser_nodes, 351);
+    nit_abort("Uninitialized attribute %s", "_n_kwprivate", LOCATE_parser___parser_nodes, 421);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___APrivateVisibility____n_kwprivate(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -418,18 +993,18 @@ val_t parser___parser_nodes___AProtectedVisibility___n_kwprotected(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 355;
+  fra.me.line = 425;
   fra.me.meth = LOCATE_parser___parser_nodes___AProtectedVisibility___n_kwprotected;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:355 */
+  /* parser/parser_nodes.nit:425 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AProtectedVisibility____n_kwprotected(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwprotected", LOCATE_parser___parser_nodes, 355);
+    nit_abort("Uninitialized attribute %s", "_n_kwprotected", LOCATE_parser___parser_nodes, 425);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AProtectedVisibility____n_kwprotected(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -441,20 +1016,43 @@ val_t parser___parser_nodes___AIntrudeVisibility___n_kwintrude(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 359;
+  fra.me.line = 429;
   fra.me.meth = LOCATE_parser___parser_nodes___AIntrudeVisibility___n_kwintrude;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:359 */
+  /* parser/parser_nodes.nit:429 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIntrudeVisibility____n_kwintrude(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwintrude", LOCATE_parser___parser_nodes, 359);
+    nit_abort("Uninitialized attribute %s", "_n_kwintrude", LOCATE_parser___parser_nodes, 429);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIntrudeVisibility____n_kwintrude(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AClassdef___n_propdefs(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 432;
+  fra.me.meth = LOCATE_parser___parser_nodes___AClassdef___n_propdefs;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:432 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AClassdef____n_propdefs(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_propdefs", LOCATE_parser___parser_nodes, 432);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AClassdef____n_propdefs(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -463,14 +1061,14 @@ val_t parser___parser_nodes___AStdClassdef___n_doc(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 364;
+  fra.me.line = 436;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdClassdef___n_doc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:364 */
+  /* parser/parser_nodes.nit:436 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStdClassdef____n_doc(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -480,14 +1078,14 @@ val_t parser___parser_nodes___AStdClassdef___n_kwredef(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 365;
+  fra.me.line = 437;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdClassdef___n_kwredef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:365 */
+  /* parser/parser_nodes.nit:437 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStdClassdef____n_kwredef(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -498,18 +1096,18 @@ val_t parser___parser_nodes___AStdClassdef___n_visibility(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 366;
+  fra.me.line = 438;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdClassdef___n_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:366 */
+  /* parser/parser_nodes.nit:438 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStdClassdef____n_visibility(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_visibility", LOCATE_parser___parser_nodes, 366);
+    nit_abort("Uninitialized attribute %s", "_n_visibility", LOCATE_parser___parser_nodes, 438);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStdClassdef____n_visibility(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -521,18 +1119,18 @@ val_t parser___parser_nodes___AStdClassdef___n_classkind(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 367;
+  fra.me.line = 439;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdClassdef___n_classkind;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:367 */
+  /* parser/parser_nodes.nit:439 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStdClassdef____n_classkind(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_classkind", LOCATE_parser___parser_nodes, 367);
+    nit_abort("Uninitialized attribute %s", "_n_classkind", LOCATE_parser___parser_nodes, 439);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStdClassdef____n_classkind(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -543,14 +1141,14 @@ val_t parser___parser_nodes___AStdClassdef___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 368;
+  fra.me.line = 440;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdClassdef___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:368 */
+  /* parser/parser_nodes.nit:440 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStdClassdef____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -561,18 +1159,18 @@ val_t parser___parser_nodes___AStdClassdef___n_formaldefs(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 369;
+  fra.me.line = 441;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdClassdef___n_formaldefs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:369 */
+  /* parser/parser_nodes.nit:441 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStdClassdef____n_formaldefs(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_formaldefs", LOCATE_parser___parser_nodes, 369);
+    nit_abort("Uninitialized attribute %s", "_n_formaldefs", LOCATE_parser___parser_nodes, 441);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStdClassdef____n_formaldefs(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -584,43 +1182,43 @@ val_t parser___parser_nodes___AStdClassdef___n_superclasses(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 370;
+  fra.me.line = 442;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdClassdef___n_superclasses;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:370 */
+  /* parser/parser_nodes.nit:442 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStdClassdef____n_superclasses(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_superclasses", LOCATE_parser___parser_nodes, 370);
+    nit_abort("Uninitialized attribute %s", "_n_superclasses", LOCATE_parser___parser_nodes, 442);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStdClassdef____n_superclasses(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-val_t parser___parser_nodes___AStdClassdef___n_propdefs(val_t p0){
+val_t parser___parser_nodes___AStdClassdef___n_kwend(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 371;
-  fra.me.meth = LOCATE_parser___parser_nodes___AStdClassdef___n_propdefs;
+  fra.me.line = 443;
+  fra.me.meth = LOCATE_parser___parser_nodes___AStdClassdef___n_kwend;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:371 */
-  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStdClassdef____n_propdefs(fra.me.REG[0])!=NIT_NULL);
+  /* parser/parser_nodes.nit:443 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStdClassdef____n_kwend(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_propdefs", LOCATE_parser___parser_nodes, 371);
+    nit_abort("Uninitialized attribute %s", "_n_kwend", LOCATE_parser___parser_nodes, 443);
   }
-  fra.me.REG[0] = ATTR_parser___parser_nodes___AStdClassdef____n_propdefs(fra.me.REG[0]);
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AStdClassdef____n_kwend(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -630,68 +1228,22 @@ val_t parser___parser_nodes___AStdClassdef___hot_location(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 372;
+  fra.me.line = 444;
   fra.me.meth = LOCATE_parser___parser_nodes___AStdClassdef___hot_location;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:372 */
+  /* parser/parser_nodes.nit:444 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AStdClassdef___n_id(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_parser___parser_nodes, 372);
+    nit_abort("Reciever is null", NULL, LOCATE_parser___parser_nodes, 444);
   }
   fra.me.REG[0] = CALL_parser___parser_nodes___ANode___location(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
   label1: while(0);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-val_t parser___parser_nodes___ATopClassdef___n_propdefs(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 376;
-  fra.me.meth = LOCATE_parser___parser_nodes___ATopClassdef___n_propdefs;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:376 */
-  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ATopClassdef____n_propdefs(fra.me.REG[0])!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Uninitialized attribute %s", "_n_propdefs", LOCATE_parser___parser_nodes, 376);
-  }
-  fra.me.REG[0] = ATTR_parser___parser_nodes___ATopClassdef____n_propdefs(fra.me.REG[0]);
-  stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
-}
-val_t parser___parser_nodes___AMainClassdef___n_propdefs(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
-  val_t tmp;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 380;
-  fra.me.meth = LOCATE_parser___parser_nodes___AMainClassdef___n_propdefs;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:380 */
-  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AMainClassdef____n_propdefs(fra.me.REG[0])!=NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-  } else {
-    nit_abort("Uninitialized attribute %s", "_n_propdefs", LOCATE_parser___parser_nodes, 380);
-  }
-  fra.me.REG[0] = ATTR_parser___parser_nodes___AMainClassdef____n_propdefs(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -701,18 +1253,18 @@ val_t parser___parser_nodes___AConcreteClasskind___n_kwclass(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 385;
+  fra.me.line = 455;
   fra.me.meth = LOCATE_parser___parser_nodes___AConcreteClasskind___n_kwclass;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:385 */
+  /* parser/parser_nodes.nit:455 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AConcreteClasskind____n_kwclass(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwclass", LOCATE_parser___parser_nodes, 385);
+    nit_abort("Uninitialized attribute %s", "_n_kwclass", LOCATE_parser___parser_nodes, 455);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AConcreteClasskind____n_kwclass(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -724,18 +1276,18 @@ val_t parser___parser_nodes___AAbstractClasskind___n_kwabstract(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 389;
+  fra.me.line = 459;
   fra.me.meth = LOCATE_parser___parser_nodes___AAbstractClasskind___n_kwabstract;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:389 */
+  /* parser/parser_nodes.nit:459 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAbstractClasskind____n_kwabstract(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwabstract", LOCATE_parser___parser_nodes, 389);
+    nit_abort("Uninitialized attribute %s", "_n_kwabstract", LOCATE_parser___parser_nodes, 459);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAbstractClasskind____n_kwabstract(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -747,18 +1299,18 @@ val_t parser___parser_nodes___AAbstractClasskind___n_kwclass(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 390;
+  fra.me.line = 460;
   fra.me.meth = LOCATE_parser___parser_nodes___AAbstractClasskind___n_kwclass;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:390 */
+  /* parser/parser_nodes.nit:460 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAbstractClasskind____n_kwclass(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwclass", LOCATE_parser___parser_nodes, 390);
+    nit_abort("Uninitialized attribute %s", "_n_kwclass", LOCATE_parser___parser_nodes, 460);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAbstractClasskind____n_kwclass(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -770,18 +1322,18 @@ val_t parser___parser_nodes___AInterfaceClasskind___n_kwinterface(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 394;
+  fra.me.line = 464;
   fra.me.meth = LOCATE_parser___parser_nodes___AInterfaceClasskind___n_kwinterface;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:394 */
+  /* parser/parser_nodes.nit:464 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AInterfaceClasskind____n_kwinterface(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwinterface", LOCATE_parser___parser_nodes, 394);
+    nit_abort("Uninitialized attribute %s", "_n_kwinterface", LOCATE_parser___parser_nodes, 464);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AInterfaceClasskind____n_kwinterface(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -793,18 +1345,18 @@ val_t parser___parser_nodes___AEnumClasskind___n_kwenum(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 398;
+  fra.me.line = 468;
   fra.me.meth = LOCATE_parser___parser_nodes___AEnumClasskind___n_kwenum;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:398 */
+  /* parser/parser_nodes.nit:468 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AEnumClasskind____n_kwenum(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwenum", LOCATE_parser___parser_nodes, 398);
+    nit_abort("Uninitialized attribute %s", "_n_kwenum", LOCATE_parser___parser_nodes, 468);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AEnumClasskind____n_kwenum(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -816,18 +1368,18 @@ val_t parser___parser_nodes___AExternClasskind___n_kwextern(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 402;
+  fra.me.line = 472;
   fra.me.meth = LOCATE_parser___parser_nodes___AExternClasskind___n_kwextern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:402 */
+  /* parser/parser_nodes.nit:472 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AExternClasskind____n_kwextern(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwextern", LOCATE_parser___parser_nodes, 402);
+    nit_abort("Uninitialized attribute %s", "_n_kwextern", LOCATE_parser___parser_nodes, 472);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AExternClasskind____n_kwextern(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -839,18 +1391,18 @@ val_t parser___parser_nodes___AFormaldef___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 406;
+  fra.me.line = 476;
   fra.me.meth = LOCATE_parser___parser_nodes___AFormaldef___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:406 */
+  /* parser/parser_nodes.nit:476 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AFormaldef____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 406);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 476);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AFormaldef____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -861,14 +1413,14 @@ val_t parser___parser_nodes___AFormaldef___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 407;
+  fra.me.line = 477;
   fra.me.meth = LOCATE_parser___parser_nodes___AFormaldef___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:407 */
+  /* parser/parser_nodes.nit:477 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AFormaldef____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -878,14 +1430,14 @@ val_t parser___parser_nodes___ASuperclass___n_kwspecial(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 411;
+  fra.me.line = 481;
   fra.me.meth = LOCATE_parser___parser_nodes___ASuperclass___n_kwspecial;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:411 */
+  /* parser/parser_nodes.nit:481 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASuperclass____n_kwspecial(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -895,14 +1447,14 @@ val_t parser___parser_nodes___ASuperclass___n_kwsuper(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 412;
+  fra.me.line = 482;
   fra.me.meth = LOCATE_parser___parser_nodes___ASuperclass___n_kwsuper;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:412 */
+  /* parser/parser_nodes.nit:482 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASuperclass____n_kwsuper(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -913,18 +1465,18 @@ val_t parser___parser_nodes___ASuperclass___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 413;
+  fra.me.line = 483;
   fra.me.meth = LOCATE_parser___parser_nodes___ASuperclass___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:413 */
+  /* parser/parser_nodes.nit:483 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASuperclass____n_type(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 413);
+    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 483);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASuperclass____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -935,14 +1487,14 @@ val_t parser___parser_nodes___APropdef___n_doc(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 416;
+  fra.me.line = 486;
   fra.me.meth = LOCATE_parser___parser_nodes___APropdef___n_doc;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:416 */
+  /* parser/parser_nodes.nit:486 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___APropdef____n_doc(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -952,14 +1504,14 @@ val_t parser___parser_nodes___AAttrPropdef___n_kwredef(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 420;
+  fra.me.line = 490;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrPropdef___n_kwredef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:420 */
+  /* parser/parser_nodes.nit:490 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrPropdef____n_kwredef(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -970,18 +1522,18 @@ val_t parser___parser_nodes___AAttrPropdef___n_visibility(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 421;
+  fra.me.line = 491;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrPropdef___n_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:421 */
+  /* parser/parser_nodes.nit:491 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAttrPropdef____n_visibility(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_visibility", LOCATE_parser___parser_nodes, 421);
+    nit_abort("Uninitialized attribute %s", "_n_visibility", LOCATE_parser___parser_nodes, 491);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrPropdef____n_visibility(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -993,18 +1545,18 @@ val_t parser___parser_nodes___AAttrPropdef___n_kwvar(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 422;
+  fra.me.line = 492;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrPropdef___n_kwvar;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:422 */
+  /* parser/parser_nodes.nit:492 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAttrPropdef____n_kwvar(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwvar", LOCATE_parser___parser_nodes, 422);
+    nit_abort("Uninitialized attribute %s", "_n_kwvar", LOCATE_parser___parser_nodes, 492);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrPropdef____n_kwvar(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1015,14 +1567,14 @@ val_t parser___parser_nodes___AAttrPropdef___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 423;
+  fra.me.line = 493;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrPropdef___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:423 */
+  /* parser/parser_nodes.nit:493 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrPropdef____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1032,14 +1584,14 @@ val_t parser___parser_nodes___AAttrPropdef___n_id2(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 424;
+  fra.me.line = 494;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrPropdef___n_id2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:424 */
+  /* parser/parser_nodes.nit:494 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrPropdef____n_id2(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1049,14 +1601,14 @@ val_t parser___parser_nodes___AAttrPropdef___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 425;
+  fra.me.line = 495;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrPropdef___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:425 */
+  /* parser/parser_nodes.nit:495 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrPropdef____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1066,14 +1618,14 @@ val_t parser___parser_nodes___AAttrPropdef___n_readable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 426;
+  fra.me.line = 496;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrPropdef___n_readable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:426 */
+  /* parser/parser_nodes.nit:496 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrPropdef____n_readable(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1083,14 +1635,14 @@ val_t parser___parser_nodes___AAttrPropdef___n_writable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 427;
+  fra.me.line = 497;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrPropdef___n_writable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:427 */
+  /* parser/parser_nodes.nit:497 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrPropdef____n_writable(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1100,14 +1652,14 @@ val_t parser___parser_nodes___AAttrPropdef___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 428;
+  fra.me.line = 498;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrPropdef___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:428 */
+  /* parser/parser_nodes.nit:498 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrPropdef____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1119,7 +1671,7 @@ val_t parser___parser_nodes___AAttrPropdef___hot_location(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 429;
+  fra.me.line = 499;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrPropdef___hot_location;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1127,7 +1679,7 @@ val_t parser___parser_nodes___AAttrPropdef___hot_location(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:431 */
+  /* parser/parser_nodes.nit:501 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AAttrPropdef___n_id(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -1146,7 +1698,7 @@ val_t parser___parser_nodes___AAttrPropdef___hot_location(val_t p0){
     fra.me.REG[1] = CALL_parser___parser_nodes___AAttrPropdef___n_id(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_parser___parser_nodes, 431);
+      nit_abort("Reciever is null", NULL, LOCATE_parser___parser_nodes, 501);
     }
     fra.me.REG[1] = CALL_parser___parser_nodes___ANode___location(fra.me.REG[1])(fra.me.REG[1]);
     goto label1;
@@ -1154,7 +1706,7 @@ val_t parser___parser_nodes___AAttrPropdef___hot_location(val_t p0){
     fra.me.REG[0] = CALL_parser___parser_nodes___AAttrPropdef___n_id2(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_parser___parser_nodes, 431);
+      nit_abort("Reciever is null", NULL, LOCATE_parser___parser_nodes, 501);
     }
     fra.me.REG[0] = CALL_parser___parser_nodes___ANode___location(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[1] = fra.me.REG[0];
@@ -1169,14 +1721,14 @@ val_t parser___parser_nodes___AMethPropdef___n_kwredef(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 436;
+  fra.me.line = 506;
   fra.me.meth = LOCATE_parser___parser_nodes___AMethPropdef___n_kwredef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:436 */
+  /* parser/parser_nodes.nit:506 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AMethPropdef____n_kwredef(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1186,14 +1738,14 @@ val_t parser___parser_nodes___AMethPropdef___n_visibility(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 437;
+  fra.me.line = 507;
   fra.me.meth = LOCATE_parser___parser_nodes___AMethPropdef___n_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:437 */
+  /* parser/parser_nodes.nit:507 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AMethPropdef____n_visibility(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1203,14 +1755,14 @@ val_t parser___parser_nodes___AMethPropdef___n_methid(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 438;
+  fra.me.line = 508;
   fra.me.meth = LOCATE_parser___parser_nodes___AMethPropdef___n_methid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:438 */
+  /* parser/parser_nodes.nit:508 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AMethPropdef____n_methid(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1220,14 +1772,14 @@ val_t parser___parser_nodes___AMethPropdef___n_signature(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 439;
+  fra.me.line = 509;
   fra.me.meth = LOCATE_parser___parser_nodes___AMethPropdef___n_signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:439 */
+  /* parser/parser_nodes.nit:509 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AMethPropdef____n_signature(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1239,7 +1791,7 @@ val_t parser___parser_nodes___AMethPropdef___hot_location(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 440;
+  fra.me.line = 510;
   fra.me.meth = LOCATE_parser___parser_nodes___AMethPropdef___hot_location;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1247,7 +1799,7 @@ val_t parser___parser_nodes___AMethPropdef___hot_location(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:442 */
+  /* parser/parser_nodes.nit:512 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AMethPropdef___n_methid(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -1263,16 +1815,16 @@ val_t parser___parser_nodes___AMethPropdef___hot_location(val_t p0){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./parser//parser_nodes.nit:443 */
+    /* parser/parser_nodes.nit:513 */
     fra.me.REG[1] = CALL_parser___parser_nodes___AMethPropdef___n_methid(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_parser___parser_nodes, 443);
+      nit_abort("Reciever is null", NULL, LOCATE_parser___parser_nodes, 513);
     }
     fra.me.REG[1] = CALL_parser___parser_nodes___ANode___location(fra.me.REG[1])(fra.me.REG[1]);
     goto label1;
   } else {
-    /* ./parser//parser_nodes.nit:445 */
+    /* parser/parser_nodes.nit:515 */
     fra.me.REG[0] = CALL_parser___parser_nodes___ANode___location(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[1] = fra.me.REG[0];
     goto label1;
@@ -1287,18 +1839,18 @@ val_t parser___parser_nodes___ADeferredMethPropdef___n_kwmeth(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 451;
+  fra.me.line = 521;
   fra.me.meth = LOCATE_parser___parser_nodes___ADeferredMethPropdef___n_kwmeth;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:451 */
+  /* parser/parser_nodes.nit:521 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ADeferredMethPropdef____n_kwmeth(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwmeth", LOCATE_parser___parser_nodes, 451);
+    nit_abort("Uninitialized attribute %s", "_n_kwmeth", LOCATE_parser___parser_nodes, 521);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ADeferredMethPropdef____n_kwmeth(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1310,18 +1862,18 @@ val_t parser___parser_nodes___AInternMethPropdef___n_kwmeth(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 455;
+  fra.me.line = 525;
   fra.me.meth = LOCATE_parser___parser_nodes___AInternMethPropdef___n_kwmeth;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:455 */
+  /* parser/parser_nodes.nit:525 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AInternMethPropdef____n_kwmeth(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwmeth", LOCATE_parser___parser_nodes, 455);
+    nit_abort("Uninitialized attribute %s", "_n_kwmeth", LOCATE_parser___parser_nodes, 525);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AInternMethPropdef____n_kwmeth(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1332,14 +1884,14 @@ val_t parser___parser_nodes___AExternPropdef___n_extern(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 459;
+  fra.me.line = 529;
   fra.me.meth = LOCATE_parser___parser_nodes___AExternPropdef___n_extern;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:459 */
+  /* parser/parser_nodes.nit:529 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AExternPropdef____n_extern(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1349,14 +1901,14 @@ val_t parser___parser_nodes___AExternPropdef___n_extern_calls(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 460;
+  fra.me.line = 530;
   fra.me.meth = LOCATE_parser___parser_nodes___AExternPropdef___n_extern_calls;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:460 */
+  /* parser/parser_nodes.nit:530 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AExternPropdef____n_extern_calls(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1367,18 +1919,18 @@ val_t parser___parser_nodes___AExternMethPropdef___n_kwmeth(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 465;
+  fra.me.line = 535;
   fra.me.meth = LOCATE_parser___parser_nodes___AExternMethPropdef___n_kwmeth;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:465 */
+  /* parser/parser_nodes.nit:535 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AExternMethPropdef____n_kwmeth(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwmeth", LOCATE_parser___parser_nodes, 465);
+    nit_abort("Uninitialized attribute %s", "_n_kwmeth", LOCATE_parser___parser_nodes, 535);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AExternMethPropdef____n_kwmeth(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1389,14 +1941,14 @@ val_t parser___parser_nodes___AConcreteMethPropdef___n_kwmeth(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 469;
+  fra.me.line = 539;
   fra.me.meth = LOCATE_parser___parser_nodes___AConcreteMethPropdef___n_kwmeth;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:469 */
+  /* parser/parser_nodes.nit:539 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AConcreteMethPropdef____n_kwmeth(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1406,53 +1958,17 @@ val_t parser___parser_nodes___AConcreteMethPropdef___n_block(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 470;
+  fra.me.line = 540;
   fra.me.meth = LOCATE_parser___parser_nodes___AConcreteMethPropdef___n_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:470 */
+  /* parser/parser_nodes.nit:540 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AConcreteMethPropdef____n_block(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
-}
-void parser___parser_nodes___AInitPropdef___init(val_t p0, int* init_table){
-  int itpos3 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___AInitPropdef].i;
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  if (init_table[itpos3]) return;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 0;
-  fra.me.meth = LOCATE_parser___parser_nodes___AInitPropdef___init;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 0;
-  fra.me.nitni_local_ref_head = NULL;
-  stack_frame_head = fra.me.prev;
-  init_table[itpos3] = 1;
-  return;
-}
-void parser___parser_nodes___AConcreteInitPropdef___init(val_t p0, int* init_table){
-  int itpos4 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___AConcreteInitPropdef].i;
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  if (init_table[itpos4]) return;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 477;
-  fra.me.meth = LOCATE_parser___parser_nodes___AConcreteInitPropdef___init;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:477 */
-  CALL_parser___parser_nodes___AInitPropdef___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  stack_frame_head = fra.me.prev;
-  init_table[itpos4] = 1;
-  return;
 }
 val_t parser___parser_nodes___AConcreteInitPropdef___n_kwinit(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -1460,18 +1976,18 @@ val_t parser___parser_nodes___AConcreteInitPropdef___n_kwinit(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 478;
+  fra.me.line = 548;
   fra.me.meth = LOCATE_parser___parser_nodes___AConcreteInitPropdef___n_kwinit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:478 */
+  /* parser/parser_nodes.nit:548 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AConcreteInitPropdef____n_kwinit(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwinit", LOCATE_parser___parser_nodes, 478);
+    nit_abort("Uninitialized attribute %s", "_n_kwinit", LOCATE_parser___parser_nodes, 548);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AConcreteInitPropdef____n_kwinit(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1482,14 +1998,14 @@ val_t parser___parser_nodes___AConcreteInitPropdef___hot_location(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 479;
+  fra.me.line = 549;
   fra.me.meth = LOCATE_parser___parser_nodes___AConcreteInitPropdef___hot_location;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:479 */
+  /* parser/parser_nodes.nit:549 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AConcreteInitPropdef___n_kwinit(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_parser___parser_nodes___ANode___location(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1497,44 +2013,24 @@ val_t parser___parser_nodes___AConcreteInitPropdef___hot_location(val_t p0){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-void parser___parser_nodes___AExternInitPropdef___init(val_t p0, int* init_table){
-  int itpos5 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___AExternInitPropdef].i;
-  struct {struct stack_frame_t me;} fra;
-  val_t tmp;
-  if (init_table[itpos5]) return;
-  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-  fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 484;
-  fra.me.meth = LOCATE_parser___parser_nodes___AExternInitPropdef___init;
-  fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
-  fra.me.nitni_local_ref_head = NULL;
-  fra.me.REG[0] = NIT_NULL;
-  fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:484 */
-  CALL_parser___parser_nodes___AInitPropdef___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  stack_frame_head = fra.me.prev;
-  init_table[itpos5] = 1;
-  return;
-}
 val_t parser___parser_nodes___AExternInitPropdef___n_kwnew(val_t p0){
   struct {struct stack_frame_t me;} fra;
   val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 485;
+  fra.me.line = 554;
   fra.me.meth = LOCATE_parser___parser_nodes___AExternInitPropdef___n_kwnew;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:485 */
+  /* parser/parser_nodes.nit:554 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AExternInitPropdef____n_kwnew(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwnew", LOCATE_parser___parser_nodes, 485);
+    nit_abort("Uninitialized attribute %s", "_n_kwnew", LOCATE_parser___parser_nodes, 554);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AExternInitPropdef____n_kwnew(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1546,18 +2042,18 @@ val_t parser___parser_nodes___AExternCalls___n_kwimport(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 492;
+  fra.me.line = 561;
   fra.me.meth = LOCATE_parser___parser_nodes___AExternCalls___n_kwimport;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:492 */
+  /* parser/parser_nodes.nit:561 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AExternCalls____n_kwimport(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwimport", LOCATE_parser___parser_nodes, 492);
+    nit_abort("Uninitialized attribute %s", "_n_kwimport", LOCATE_parser___parser_nodes, 561);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AExternCalls____n_kwimport(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1569,18 +2065,18 @@ val_t parser___parser_nodes___AExternCalls___n_extern_calls(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 493;
+  fra.me.line = 562;
   fra.me.meth = LOCATE_parser___parser_nodes___AExternCalls___n_extern_calls;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:493 */
+  /* parser/parser_nodes.nit:562 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AExternCalls____n_extern_calls(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_extern_calls", LOCATE_parser___parser_nodes, 493);
+    nit_abort("Uninitialized attribute %s", "_n_extern_calls", LOCATE_parser___parser_nodes, 562);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AExternCalls____n_extern_calls(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1592,18 +2088,18 @@ val_t parser___parser_nodes___ALocalPropExternCall___n_methid(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 503;
+  fra.me.line = 572;
   fra.me.meth = LOCATE_parser___parser_nodes___ALocalPropExternCall___n_methid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:503 */
+  /* parser/parser_nodes.nit:572 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ALocalPropExternCall____n_methid(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_methid", LOCATE_parser___parser_nodes, 503);
+    nit_abort("Uninitialized attribute %s", "_n_methid", LOCATE_parser___parser_nodes, 572);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ALocalPropExternCall____n_methid(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1615,18 +2111,18 @@ val_t parser___parser_nodes___AFullPropExternCall___n_classid(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 507;
+  fra.me.line = 576;
   fra.me.meth = LOCATE_parser___parser_nodes___AFullPropExternCall___n_classid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:507 */
+  /* parser/parser_nodes.nit:576 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AFullPropExternCall____n_classid(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_classid", LOCATE_parser___parser_nodes, 507);
+    nit_abort("Uninitialized attribute %s", "_n_classid", LOCATE_parser___parser_nodes, 576);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AFullPropExternCall____n_classid(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1637,14 +2133,14 @@ val_t parser___parser_nodes___AFullPropExternCall___n_quad(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 508;
+  fra.me.line = 577;
   fra.me.meth = LOCATE_parser___parser_nodes___AFullPropExternCall___n_quad;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:508 */
+  /* parser/parser_nodes.nit:577 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AFullPropExternCall____n_quad(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1655,18 +2151,18 @@ val_t parser___parser_nodes___AFullPropExternCall___n_methid(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 509;
+  fra.me.line = 578;
   fra.me.meth = LOCATE_parser___parser_nodes___AFullPropExternCall___n_methid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:509 */
+  /* parser/parser_nodes.nit:578 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AFullPropExternCall____n_methid(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_methid", LOCATE_parser___parser_nodes, 509);
+    nit_abort("Uninitialized attribute %s", "_n_methid", LOCATE_parser___parser_nodes, 578);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AFullPropExternCall____n_methid(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1678,18 +2174,18 @@ val_t parser___parser_nodes___AInitPropExternCall___n_classid(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 513;
+  fra.me.line = 582;
   fra.me.meth = LOCATE_parser___parser_nodes___AInitPropExternCall___n_classid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:513 */
+  /* parser/parser_nodes.nit:582 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AInitPropExternCall____n_classid(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_classid", LOCATE_parser___parser_nodes, 513);
+    nit_abort("Uninitialized attribute %s", "_n_classid", LOCATE_parser___parser_nodes, 582);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AInitPropExternCall____n_classid(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1701,18 +2197,18 @@ val_t parser___parser_nodes___ASuperExternCall___n_kwsuper(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 517;
+  fra.me.line = 586;
   fra.me.meth = LOCATE_parser___parser_nodes___ASuperExternCall___n_kwsuper;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:517 */
+  /* parser/parser_nodes.nit:586 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASuperExternCall____n_kwsuper(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwsuper", LOCATE_parser___parser_nodes, 517);
+    nit_abort("Uninitialized attribute %s", "_n_kwsuper", LOCATE_parser___parser_nodes, 586);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASuperExternCall____n_kwsuper(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1724,18 +2220,18 @@ val_t parser___parser_nodes___ACastAsExternCall___n_from_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 524;
+  fra.me.line = 593;
   fra.me.meth = LOCATE_parser___parser_nodes___ACastAsExternCall___n_from_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:524 */
+  /* parser/parser_nodes.nit:593 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ACastAsExternCall____n_from_type(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_from_type", LOCATE_parser___parser_nodes, 524);
+    nit_abort("Uninitialized attribute %s", "_n_from_type", LOCATE_parser___parser_nodes, 593);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ACastAsExternCall____n_from_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1747,18 +2243,18 @@ val_t parser___parser_nodes___ACastAsExternCall___n_kwas(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 525;
+  fra.me.line = 594;
   fra.me.meth = LOCATE_parser___parser_nodes___ACastAsExternCall___n_kwas;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:525 */
+  /* parser/parser_nodes.nit:594 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ACastAsExternCall____n_kwas(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwas", LOCATE_parser___parser_nodes, 525);
+    nit_abort("Uninitialized attribute %s", "_n_kwas", LOCATE_parser___parser_nodes, 594);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ACastAsExternCall____n_kwas(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1770,18 +2266,18 @@ val_t parser___parser_nodes___ACastAsExternCall___n_to_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 526;
+  fra.me.line = 595;
   fra.me.meth = LOCATE_parser___parser_nodes___ACastAsExternCall___n_to_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:526 */
+  /* parser/parser_nodes.nit:595 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ACastAsExternCall____n_to_type(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_to_type", LOCATE_parser___parser_nodes, 526);
+    nit_abort("Uninitialized attribute %s", "_n_to_type", LOCATE_parser___parser_nodes, 595);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ACastAsExternCall____n_to_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1793,18 +2289,18 @@ val_t parser___parser_nodes___AAsNullableExternCall___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 530;
+  fra.me.line = 599;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNullableExternCall___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:530 */
+  /* parser/parser_nodes.nit:599 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNullableExternCall____n_type(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 530);
+    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 599);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNullableExternCall____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1816,18 +2312,18 @@ val_t parser___parser_nodes___AAsNullableExternCall___n_kwas(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 531;
+  fra.me.line = 600;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNullableExternCall___n_kwas;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:531 */
+  /* parser/parser_nodes.nit:600 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNullableExternCall____n_kwas(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwas", LOCATE_parser___parser_nodes, 531);
+    nit_abort("Uninitialized attribute %s", "_n_kwas", LOCATE_parser___parser_nodes, 600);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNullableExternCall____n_kwas(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1839,18 +2335,18 @@ val_t parser___parser_nodes___AAsNullableExternCall___n_kwnullable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 532;
+  fra.me.line = 601;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNullableExternCall___n_kwnullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:532 */
+  /* parser/parser_nodes.nit:601 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNullableExternCall____n_kwnullable(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwnullable", LOCATE_parser___parser_nodes, 532);
+    nit_abort("Uninitialized attribute %s", "_n_kwnullable", LOCATE_parser___parser_nodes, 601);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNullableExternCall____n_kwnullable(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1862,18 +2358,18 @@ val_t parser___parser_nodes___AAsNotNullableExternCall___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 536;
+  fra.me.line = 605;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNotNullableExternCall___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:536 */
+  /* parser/parser_nodes.nit:605 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNotNullableExternCall____n_type(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 536);
+    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 605);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNotNullableExternCall____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1885,18 +2381,18 @@ val_t parser___parser_nodes___AAsNotNullableExternCall___n_kwas(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 537;
+  fra.me.line = 606;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNotNullableExternCall___n_kwas;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:537 */
+  /* parser/parser_nodes.nit:606 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNotNullableExternCall____n_kwas(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwas", LOCATE_parser___parser_nodes, 537);
+    nit_abort("Uninitialized attribute %s", "_n_kwas", LOCATE_parser___parser_nodes, 606);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNotNullableExternCall____n_kwas(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1908,18 +2404,18 @@ val_t parser___parser_nodes___AAsNotNullableExternCall___n_kwnot(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 538;
+  fra.me.line = 607;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNotNullableExternCall___n_kwnot;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:538 */
+  /* parser/parser_nodes.nit:607 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNotNullableExternCall____n_kwnot(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwnot", LOCATE_parser___parser_nodes, 538);
+    nit_abort("Uninitialized attribute %s", "_n_kwnot", LOCATE_parser___parser_nodes, 607);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNotNullableExternCall____n_kwnot(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1931,18 +2427,18 @@ val_t parser___parser_nodes___AAsNotNullableExternCall___n_kwnullable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 539;
+  fra.me.line = 608;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNotNullableExternCall___n_kwnullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:539 */
+  /* parser/parser_nodes.nit:608 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNotNullableExternCall____n_kwnullable(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwnullable", LOCATE_parser___parser_nodes, 539);
+    nit_abort("Uninitialized attribute %s", "_n_kwnullable", LOCATE_parser___parser_nodes, 608);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNotNullableExternCall____n_kwnullable(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1953,14 +2449,14 @@ val_t parser___parser_nodes___ATypePropdef___n_kwredef(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 543;
+  fra.me.line = 612;
   fra.me.meth = LOCATE_parser___parser_nodes___ATypePropdef___n_kwredef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:543 */
+  /* parser/parser_nodes.nit:612 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ATypePropdef____n_kwredef(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1971,18 +2467,18 @@ val_t parser___parser_nodes___ATypePropdef___n_visibility(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 544;
+  fra.me.line = 613;
   fra.me.meth = LOCATE_parser___parser_nodes___ATypePropdef___n_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:544 */
+  /* parser/parser_nodes.nit:613 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ATypePropdef____n_visibility(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_visibility", LOCATE_parser___parser_nodes, 544);
+    nit_abort("Uninitialized attribute %s", "_n_visibility", LOCATE_parser___parser_nodes, 613);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ATypePropdef____n_visibility(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1994,18 +2490,18 @@ val_t parser___parser_nodes___ATypePropdef___n_kwtype(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 545;
+  fra.me.line = 614;
   fra.me.meth = LOCATE_parser___parser_nodes___ATypePropdef___n_kwtype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:545 */
+  /* parser/parser_nodes.nit:614 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ATypePropdef____n_kwtype(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwtype", LOCATE_parser___parser_nodes, 545);
+    nit_abort("Uninitialized attribute %s", "_n_kwtype", LOCATE_parser___parser_nodes, 614);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ATypePropdef____n_kwtype(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2017,18 +2513,18 @@ val_t parser___parser_nodes___ATypePropdef___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 546;
+  fra.me.line = 615;
   fra.me.meth = LOCATE_parser___parser_nodes___ATypePropdef___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:546 */
+  /* parser/parser_nodes.nit:615 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ATypePropdef____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 546);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 615);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ATypePropdef____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2040,18 +2536,18 @@ val_t parser___parser_nodes___ATypePropdef___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 547;
+  fra.me.line = 616;
   fra.me.meth = LOCATE_parser___parser_nodes___ATypePropdef___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:547 */
+  /* parser/parser_nodes.nit:616 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ATypePropdef____n_type(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 547);
+    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 616);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ATypePropdef____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2062,14 +2558,14 @@ val_t parser___parser_nodes___AAble___n_visibility(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 550;
+  fra.me.line = 619;
   fra.me.meth = LOCATE_parser___parser_nodes___AAble___n_visibility;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:550 */
+  /* parser/parser_nodes.nit:619 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAble____n_visibility(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -2079,14 +2575,14 @@ val_t parser___parser_nodes___AAble___n_kwredef(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 551;
+  fra.me.line = 620;
   fra.me.meth = LOCATE_parser___parser_nodes___AAble___n_kwredef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:551 */
+  /* parser/parser_nodes.nit:620 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAble____n_kwredef(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -2097,18 +2593,18 @@ val_t parser___parser_nodes___AReadAble___n_kwreadable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 555;
+  fra.me.line = 624;
   fra.me.meth = LOCATE_parser___parser_nodes___AReadAble___n_kwreadable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:555 */
+  /* parser/parser_nodes.nit:624 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AReadAble____n_kwreadable(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwreadable", LOCATE_parser___parser_nodes, 555);
+    nit_abort("Uninitialized attribute %s", "_n_kwreadable", LOCATE_parser___parser_nodes, 624);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AReadAble____n_kwreadable(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2120,18 +2616,18 @@ val_t parser___parser_nodes___AWriteAble___n_kwwritable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 559;
+  fra.me.line = 628;
   fra.me.meth = LOCATE_parser___parser_nodes___AWriteAble___n_kwwritable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:559 */
+  /* parser/parser_nodes.nit:628 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AWriteAble____n_kwwritable(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwwritable", LOCATE_parser___parser_nodes, 559);
+    nit_abort("Uninitialized attribute %s", "_n_kwwritable", LOCATE_parser___parser_nodes, 628);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AWriteAble____n_kwwritable(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2143,18 +2639,18 @@ val_t parser___parser_nodes___AIdMethid___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 564;
+  fra.me.line = 633;
   fra.me.meth = LOCATE_parser___parser_nodes___AIdMethid___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:564 */
+  /* parser/parser_nodes.nit:633 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIdMethid____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 564);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 633);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIdMethid____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2166,18 +2662,18 @@ val_t parser___parser_nodes___APlusMethid___n_plus(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 568;
+  fra.me.line = 637;
   fra.me.meth = LOCATE_parser___parser_nodes___APlusMethid___n_plus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:568 */
+  /* parser/parser_nodes.nit:637 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___APlusMethid____n_plus(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_plus", LOCATE_parser___parser_nodes, 568);
+    nit_abort("Uninitialized attribute %s", "_n_plus", LOCATE_parser___parser_nodes, 637);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___APlusMethid____n_plus(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2189,18 +2685,18 @@ val_t parser___parser_nodes___AMinusMethid___n_minus(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 572;
+  fra.me.line = 641;
   fra.me.meth = LOCATE_parser___parser_nodes___AMinusMethid___n_minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:572 */
+  /* parser/parser_nodes.nit:641 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AMinusMethid____n_minus(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_minus", LOCATE_parser___parser_nodes, 572);
+    nit_abort("Uninitialized attribute %s", "_n_minus", LOCATE_parser___parser_nodes, 641);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AMinusMethid____n_minus(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2212,18 +2708,18 @@ val_t parser___parser_nodes___AStarMethid___n_star(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 576;
+  fra.me.line = 645;
   fra.me.meth = LOCATE_parser___parser_nodes___AStarMethid___n_star;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:576 */
+  /* parser/parser_nodes.nit:645 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStarMethid____n_star(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_star", LOCATE_parser___parser_nodes, 576);
+    nit_abort("Uninitialized attribute %s", "_n_star", LOCATE_parser___parser_nodes, 645);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStarMethid____n_star(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2235,18 +2731,18 @@ val_t parser___parser_nodes___ASlashMethid___n_slash(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 580;
+  fra.me.line = 649;
   fra.me.meth = LOCATE_parser___parser_nodes___ASlashMethid___n_slash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:580 */
+  /* parser/parser_nodes.nit:649 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASlashMethid____n_slash(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_slash", LOCATE_parser___parser_nodes, 580);
+    nit_abort("Uninitialized attribute %s", "_n_slash", LOCATE_parser___parser_nodes, 649);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASlashMethid____n_slash(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2258,18 +2754,18 @@ val_t parser___parser_nodes___APercentMethid___n_percent(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 584;
+  fra.me.line = 653;
   fra.me.meth = LOCATE_parser___parser_nodes___APercentMethid___n_percent;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:584 */
+  /* parser/parser_nodes.nit:653 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___APercentMethid____n_percent(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_percent", LOCATE_parser___parser_nodes, 584);
+    nit_abort("Uninitialized attribute %s", "_n_percent", LOCATE_parser___parser_nodes, 653);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___APercentMethid____n_percent(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2281,18 +2777,18 @@ val_t parser___parser_nodes___AEqMethid___n_eq(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 588;
+  fra.me.line = 657;
   fra.me.meth = LOCATE_parser___parser_nodes___AEqMethid___n_eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:588 */
+  /* parser/parser_nodes.nit:657 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AEqMethid____n_eq(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_eq", LOCATE_parser___parser_nodes, 588);
+    nit_abort("Uninitialized attribute %s", "_n_eq", LOCATE_parser___parser_nodes, 657);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AEqMethid____n_eq(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2304,18 +2800,18 @@ val_t parser___parser_nodes___ANeMethid___n_ne(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 592;
+  fra.me.line = 661;
   fra.me.meth = LOCATE_parser___parser_nodes___ANeMethid___n_ne;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:592 */
+  /* parser/parser_nodes.nit:661 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ANeMethid____n_ne(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_ne", LOCATE_parser___parser_nodes, 592);
+    nit_abort("Uninitialized attribute %s", "_n_ne", LOCATE_parser___parser_nodes, 661);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANeMethid____n_ne(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2327,18 +2823,18 @@ val_t parser___parser_nodes___ALeMethid___n_le(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 596;
+  fra.me.line = 665;
   fra.me.meth = LOCATE_parser___parser_nodes___ALeMethid___n_le;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:596 */
+  /* parser/parser_nodes.nit:665 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ALeMethid____n_le(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_le", LOCATE_parser___parser_nodes, 596);
+    nit_abort("Uninitialized attribute %s", "_n_le", LOCATE_parser___parser_nodes, 665);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ALeMethid____n_le(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2350,18 +2846,18 @@ val_t parser___parser_nodes___AGeMethid___n_ge(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 600;
+  fra.me.line = 669;
   fra.me.meth = LOCATE_parser___parser_nodes___AGeMethid___n_ge;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:600 */
+  /* parser/parser_nodes.nit:669 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AGeMethid____n_ge(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_ge", LOCATE_parser___parser_nodes, 600);
+    nit_abort("Uninitialized attribute %s", "_n_ge", LOCATE_parser___parser_nodes, 669);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AGeMethid____n_ge(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2373,18 +2869,18 @@ val_t parser___parser_nodes___ALtMethid___n_lt(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 604;
+  fra.me.line = 673;
   fra.me.meth = LOCATE_parser___parser_nodes___ALtMethid___n_lt;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:604 */
+  /* parser/parser_nodes.nit:673 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ALtMethid____n_lt(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_lt", LOCATE_parser___parser_nodes, 604);
+    nit_abort("Uninitialized attribute %s", "_n_lt", LOCATE_parser___parser_nodes, 673);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ALtMethid____n_lt(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2396,18 +2892,18 @@ val_t parser___parser_nodes___AGtMethid___n_gt(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 608;
+  fra.me.line = 677;
   fra.me.meth = LOCATE_parser___parser_nodes___AGtMethid___n_gt;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:608 */
+  /* parser/parser_nodes.nit:677 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AGtMethid____n_gt(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_gt", LOCATE_parser___parser_nodes, 608);
+    nit_abort("Uninitialized attribute %s", "_n_gt", LOCATE_parser___parser_nodes, 677);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AGtMethid____n_gt(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2419,18 +2915,18 @@ val_t parser___parser_nodes___ALlMethid___n_ll(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 612;
+  fra.me.line = 681;
   fra.me.meth = LOCATE_parser___parser_nodes___ALlMethid___n_ll;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:612 */
+  /* parser/parser_nodes.nit:681 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ALlMethid____n_ll(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_ll", LOCATE_parser___parser_nodes, 612);
+    nit_abort("Uninitialized attribute %s", "_n_ll", LOCATE_parser___parser_nodes, 681);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ALlMethid____n_ll(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2441,7 +2937,7 @@ void parser___parser_nodes___ALlMethid___n_ll__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 612;
+  fra.me.line = 681;
   fra.me.meth = LOCATE_parser___parser_nodes___ALlMethid___n_ll__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2450,7 +2946,7 @@ void parser___parser_nodes___ALlMethid___n_ll__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//parser_nodes.nit:612 */
+  /* parser/parser_nodes.nit:681 */
   ATTR_parser___parser_nodes___ALlMethid____n_ll(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -2461,18 +2957,18 @@ val_t parser___parser_nodes___AGgMethid___n_gg(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 616;
+  fra.me.line = 685;
   fra.me.meth = LOCATE_parser___parser_nodes___AGgMethid___n_gg;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:616 */
+  /* parser/parser_nodes.nit:685 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AGgMethid____n_gg(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_gg", LOCATE_parser___parser_nodes, 616);
+    nit_abort("Uninitialized attribute %s", "_n_gg", LOCATE_parser___parser_nodes, 685);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AGgMethid____n_gg(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2483,7 +2979,7 @@ void parser___parser_nodes___AGgMethid___n_gg__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 616;
+  fra.me.line = 685;
   fra.me.meth = LOCATE_parser___parser_nodes___AGgMethid___n_gg__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2492,7 +2988,7 @@ void parser___parser_nodes___AGgMethid___n_gg__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./parser//parser_nodes.nit:616 */
+  /* parser/parser_nodes.nit:685 */
   ATTR_parser___parser_nodes___AGgMethid____n_gg(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -2503,18 +2999,18 @@ val_t parser___parser_nodes___ABraMethid___n_obra(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 620;
+  fra.me.line = 689;
   fra.me.meth = LOCATE_parser___parser_nodes___ABraMethid___n_obra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:620 */
+  /* parser/parser_nodes.nit:689 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABraMethid____n_obra(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_obra", LOCATE_parser___parser_nodes, 620);
+    nit_abort("Uninitialized attribute %s", "_n_obra", LOCATE_parser___parser_nodes, 689);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABraMethid____n_obra(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2526,18 +3022,18 @@ val_t parser___parser_nodes___ABraMethid___n_cbra(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 621;
+  fra.me.line = 690;
   fra.me.meth = LOCATE_parser___parser_nodes___ABraMethid___n_cbra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:621 */
+  /* parser/parser_nodes.nit:690 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABraMethid____n_cbra(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_cbra", LOCATE_parser___parser_nodes, 621);
+    nit_abort("Uninitialized attribute %s", "_n_cbra", LOCATE_parser___parser_nodes, 690);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABraMethid____n_cbra(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2549,18 +3045,18 @@ val_t parser___parser_nodes___AStarshipMethid___n_starship(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 625;
+  fra.me.line = 694;
   fra.me.meth = LOCATE_parser___parser_nodes___AStarshipMethid___n_starship;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:625 */
+  /* parser/parser_nodes.nit:694 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStarshipMethid____n_starship(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_starship", LOCATE_parser___parser_nodes, 625);
+    nit_abort("Uninitialized attribute %s", "_n_starship", LOCATE_parser___parser_nodes, 694);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStarshipMethid____n_starship(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2572,18 +3068,18 @@ val_t parser___parser_nodes___AAssignMethid___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 629;
+  fra.me.line = 698;
   fra.me.meth = LOCATE_parser___parser_nodes___AAssignMethid___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:629 */
+  /* parser/parser_nodes.nit:698 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAssignMethid____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 629);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 698);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAssignMethid____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2595,18 +3091,18 @@ val_t parser___parser_nodes___AAssignMethid___n_assign(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 630;
+  fra.me.line = 699;
   fra.me.meth = LOCATE_parser___parser_nodes___AAssignMethid___n_assign;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:630 */
+  /* parser/parser_nodes.nit:699 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAssignMethid____n_assign(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_assign", LOCATE_parser___parser_nodes, 630);
+    nit_abort("Uninitialized attribute %s", "_n_assign", LOCATE_parser___parser_nodes, 699);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAssignMethid____n_assign(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2618,18 +3114,18 @@ val_t parser___parser_nodes___ABraassignMethid___n_obra(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 634;
+  fra.me.line = 703;
   fra.me.meth = LOCATE_parser___parser_nodes___ABraassignMethid___n_obra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:634 */
+  /* parser/parser_nodes.nit:703 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABraassignMethid____n_obra(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_obra", LOCATE_parser___parser_nodes, 634);
+    nit_abort("Uninitialized attribute %s", "_n_obra", LOCATE_parser___parser_nodes, 703);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABraassignMethid____n_obra(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2641,18 +3137,18 @@ val_t parser___parser_nodes___ABraassignMethid___n_cbra(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 635;
+  fra.me.line = 704;
   fra.me.meth = LOCATE_parser___parser_nodes___ABraassignMethid___n_cbra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:635 */
+  /* parser/parser_nodes.nit:704 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABraassignMethid____n_cbra(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_cbra", LOCATE_parser___parser_nodes, 635);
+    nit_abort("Uninitialized attribute %s", "_n_cbra", LOCATE_parser___parser_nodes, 704);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABraassignMethid____n_cbra(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2664,20 +3160,37 @@ val_t parser___parser_nodes___ABraassignMethid___n_assign(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 636;
+  fra.me.line = 705;
   fra.me.meth = LOCATE_parser___parser_nodes___ABraassignMethid___n_assign;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:636 */
+  /* parser/parser_nodes.nit:705 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABraassignMethid____n_assign(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_assign", LOCATE_parser___parser_nodes, 636);
+    nit_abort("Uninitialized attribute %s", "_n_assign", LOCATE_parser___parser_nodes, 705);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABraassignMethid____n_assign(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ASignature___n_opar(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 709;
+  fra.me.meth = LOCATE_parser___parser_nodes___ASignature___n_opar;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:709 */
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ASignature____n_opar(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -2687,20 +3200,37 @@ val_t parser___parser_nodes___ASignature___n_params(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 640;
+  fra.me.line = 710;
   fra.me.meth = LOCATE_parser___parser_nodes___ASignature___n_params;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:640 */
+  /* parser/parser_nodes.nit:710 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASignature____n_params(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_params", LOCATE_parser___parser_nodes, 640);
+    nit_abort("Uninitialized attribute %s", "_n_params", LOCATE_parser___parser_nodes, 710);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASignature____n_params(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ASignature___n_cpar(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 711;
+  fra.me.meth = LOCATE_parser___parser_nodes___ASignature___n_cpar;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:711 */
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ASignature____n_cpar(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -2709,14 +3239,14 @@ val_t parser___parser_nodes___ASignature___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 641;
+  fra.me.line = 712;
   fra.me.meth = LOCATE_parser___parser_nodes___ASignature___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:641 */
+  /* parser/parser_nodes.nit:712 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASignature____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -2727,18 +3257,18 @@ val_t parser___parser_nodes___ASignature___n_closure_decls(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 642;
+  fra.me.line = 713;
   fra.me.meth = LOCATE_parser___parser_nodes___ASignature___n_closure_decls;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:642 */
+  /* parser/parser_nodes.nit:713 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASignature____n_closure_decls(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_closure_decls", LOCATE_parser___parser_nodes, 642);
+    nit_abort("Uninitialized attribute %s", "_n_closure_decls", LOCATE_parser___parser_nodes, 713);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASignature____n_closure_decls(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2750,18 +3280,18 @@ val_t parser___parser_nodes___AParam___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 646;
+  fra.me.line = 717;
   fra.me.meth = LOCATE_parser___parser_nodes___AParam___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:646 */
+  /* parser/parser_nodes.nit:717 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AParam____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 646);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 717);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AParam____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2772,14 +3302,14 @@ val_t parser___parser_nodes___AParam___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 647;
+  fra.me.line = 718;
   fra.me.meth = LOCATE_parser___parser_nodes___AParam___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:647 */
+  /* parser/parser_nodes.nit:718 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AParam____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -2789,14 +3319,14 @@ val_t parser___parser_nodes___AParam___n_dotdotdot(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 648;
+  fra.me.line = 719;
   fra.me.meth = LOCATE_parser___parser_nodes___AParam___n_dotdotdot;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:648 */
+  /* parser/parser_nodes.nit:719 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AParam____n_dotdotdot(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -2806,14 +3336,14 @@ val_t parser___parser_nodes___AClosureDecl___n_kwbreak(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 652;
+  fra.me.line = 723;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureDecl___n_kwbreak;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:652 */
+  /* parser/parser_nodes.nit:723 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureDecl____n_kwbreak(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -2824,18 +3354,18 @@ val_t parser___parser_nodes___AClosureDecl___n_bang(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 653;
+  fra.me.line = 724;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureDecl___n_bang;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:653 */
+  /* parser/parser_nodes.nit:724 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AClosureDecl____n_bang(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_bang", LOCATE_parser___parser_nodes, 653);
+    nit_abort("Uninitialized attribute %s", "_n_bang", LOCATE_parser___parser_nodes, 724);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureDecl____n_bang(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2847,18 +3377,18 @@ val_t parser___parser_nodes___AClosureDecl___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 654;
+  fra.me.line = 725;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureDecl___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:654 */
+  /* parser/parser_nodes.nit:725 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AClosureDecl____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 654);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 725);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureDecl____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2870,18 +3400,18 @@ val_t parser___parser_nodes___AClosureDecl___n_signature(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 655;
+  fra.me.line = 726;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureDecl___n_signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:655 */
+  /* parser/parser_nodes.nit:726 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AClosureDecl____n_signature(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_signature", LOCATE_parser___parser_nodes, 655);
+    nit_abort("Uninitialized attribute %s", "_n_signature", LOCATE_parser___parser_nodes, 726);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureDecl____n_signature(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2892,14 +3422,14 @@ val_t parser___parser_nodes___AClosureDecl___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 656;
+  fra.me.line = 727;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureDecl___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:656 */
+  /* parser/parser_nodes.nit:727 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureDecl____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -2909,14 +3439,14 @@ val_t parser___parser_nodes___AType___n_kwnullable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 660;
+  fra.me.line = 731;
   fra.me.meth = LOCATE_parser___parser_nodes___AType___n_kwnullable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:660 */
+  /* parser/parser_nodes.nit:731 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AType____n_kwnullable(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -2927,18 +3457,18 @@ val_t parser___parser_nodes___AType___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 661;
+  fra.me.line = 732;
   fra.me.meth = LOCATE_parser___parser_nodes___AType___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:661 */
+  /* parser/parser_nodes.nit:732 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AType____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 661);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 732);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AType____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2950,18 +3480,18 @@ val_t parser___parser_nodes___AType___n_types(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 662;
+  fra.me.line = 733;
   fra.me.meth = LOCATE_parser___parser_nodes___AType___n_types;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:662 */
+  /* parser/parser_nodes.nit:733 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AType____n_types(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_types", LOCATE_parser___parser_nodes, 662);
+    nit_abort("Uninitialized attribute %s", "_n_types", LOCATE_parser___parser_nodes, 733);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AType____n_types(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2973,18 +3503,18 @@ val_t parser___parser_nodes___ALabel___n_kwlabel(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 666;
+  fra.me.line = 737;
   fra.me.meth = LOCATE_parser___parser_nodes___ALabel___n_kwlabel;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:666 */
+  /* parser/parser_nodes.nit:737 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ALabel____n_kwlabel(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwlabel", LOCATE_parser___parser_nodes, 666);
+    nit_abort("Uninitialized attribute %s", "_n_kwlabel", LOCATE_parser___parser_nodes, 737);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ALabel____n_kwlabel(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -2996,18 +3526,18 @@ val_t parser___parser_nodes___ALabel___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 667;
+  fra.me.line = 738;
   fra.me.meth = LOCATE_parser___parser_nodes___ALabel___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:667 */
+  /* parser/parser_nodes.nit:738 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ALabel____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 667);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 738);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ALabel____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3019,20 +3549,37 @@ val_t parser___parser_nodes___ABlockExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 672;
+  fra.me.line = 743;
   fra.me.meth = LOCATE_parser___parser_nodes___ABlockExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:672 */
+  /* parser/parser_nodes.nit:743 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABlockExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 672);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 743);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABlockExpr____n_expr(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ABlockExpr___n_kwend(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 744;
+  fra.me.meth = LOCATE_parser___parser_nodes___ABlockExpr___n_kwend;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:744 */
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ABlockExpr____n_kwend(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -3042,18 +3589,18 @@ val_t parser___parser_nodes___AVardeclExpr___n_kwvar(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 676;
+  fra.me.line = 748;
   fra.me.meth = LOCATE_parser___parser_nodes___AVardeclExpr___n_kwvar;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:676 */
+  /* parser/parser_nodes.nit:748 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AVardeclExpr____n_kwvar(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwvar", LOCATE_parser___parser_nodes, 676);
+    nit_abort("Uninitialized attribute %s", "_n_kwvar", LOCATE_parser___parser_nodes, 748);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AVardeclExpr____n_kwvar(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3065,18 +3612,18 @@ val_t parser___parser_nodes___AVardeclExpr___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 677;
+  fra.me.line = 749;
   fra.me.meth = LOCATE_parser___parser_nodes___AVardeclExpr___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:677 */
+  /* parser/parser_nodes.nit:749 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AVardeclExpr____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 677);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 749);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AVardeclExpr____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3087,14 +3634,14 @@ val_t parser___parser_nodes___AVardeclExpr___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 678;
+  fra.me.line = 750;
   fra.me.meth = LOCATE_parser___parser_nodes___AVardeclExpr___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:678 */
+  /* parser/parser_nodes.nit:750 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AVardeclExpr____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3104,14 +3651,14 @@ val_t parser___parser_nodes___AVardeclExpr___n_assign(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 679;
+  fra.me.line = 751;
   fra.me.meth = LOCATE_parser___parser_nodes___AVardeclExpr___n_assign;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:679 */
+  /* parser/parser_nodes.nit:751 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AVardeclExpr____n_assign(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3121,14 +3668,14 @@ val_t parser___parser_nodes___AVardeclExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 680;
+  fra.me.line = 752;
   fra.me.meth = LOCATE_parser___parser_nodes___AVardeclExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:680 */
+  /* parser/parser_nodes.nit:752 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AVardeclExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3138,14 +3685,14 @@ val_t parser___parser_nodes___AReturnExpr___n_kwreturn(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 684;
+  fra.me.line = 756;
   fra.me.meth = LOCATE_parser___parser_nodes___AReturnExpr___n_kwreturn;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:684 */
+  /* parser/parser_nodes.nit:756 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AReturnExpr____n_kwreturn(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3155,14 +3702,14 @@ val_t parser___parser_nodes___AReturnExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 685;
+  fra.me.line = 757;
   fra.me.meth = LOCATE_parser___parser_nodes___AReturnExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:685 */
+  /* parser/parser_nodes.nit:757 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AReturnExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3172,14 +3719,14 @@ val_t parser___parser_nodes___ALabelable___n_label(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 689;
+  fra.me.line = 761;
   fra.me.meth = LOCATE_parser___parser_nodes___ALabelable___n_label;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:689 */
+  /* parser/parser_nodes.nit:761 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ALabelable____n_label(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3190,18 +3737,18 @@ val_t parser___parser_nodes___ABreakExpr___n_kwbreak(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 694;
+  fra.me.line = 766;
   fra.me.meth = LOCATE_parser___parser_nodes___ABreakExpr___n_kwbreak;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:694 */
+  /* parser/parser_nodes.nit:766 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABreakExpr____n_kwbreak(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwbreak", LOCATE_parser___parser_nodes, 694);
+    nit_abort("Uninitialized attribute %s", "_n_kwbreak", LOCATE_parser___parser_nodes, 766);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABreakExpr____n_kwbreak(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3212,14 +3759,14 @@ val_t parser___parser_nodes___ABreakExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 695;
+  fra.me.line = 767;
   fra.me.meth = LOCATE_parser___parser_nodes___ABreakExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:695 */
+  /* parser/parser_nodes.nit:767 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABreakExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3230,18 +3777,18 @@ val_t parser___parser_nodes___AAbortExpr___n_kwabort(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 699;
+  fra.me.line = 771;
   fra.me.meth = LOCATE_parser___parser_nodes___AAbortExpr___n_kwabort;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:699 */
+  /* parser/parser_nodes.nit:771 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAbortExpr____n_kwabort(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwabort", LOCATE_parser___parser_nodes, 699);
+    nit_abort("Uninitialized attribute %s", "_n_kwabort", LOCATE_parser___parser_nodes, 771);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAbortExpr____n_kwabort(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3252,14 +3799,14 @@ val_t parser___parser_nodes___AContinueExpr___n_kwcontinue(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 704;
+  fra.me.line = 776;
   fra.me.meth = LOCATE_parser___parser_nodes___AContinueExpr___n_kwcontinue;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:704 */
+  /* parser/parser_nodes.nit:776 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AContinueExpr____n_kwcontinue(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3269,14 +3816,14 @@ val_t parser___parser_nodes___AContinueExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 705;
+  fra.me.line = 777;
   fra.me.meth = LOCATE_parser___parser_nodes___AContinueExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:705 */
+  /* parser/parser_nodes.nit:777 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AContinueExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3287,18 +3834,18 @@ val_t parser___parser_nodes___ADoExpr___n_kwdo(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 710;
+  fra.me.line = 782;
   fra.me.meth = LOCATE_parser___parser_nodes___ADoExpr___n_kwdo;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:710 */
+  /* parser/parser_nodes.nit:782 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ADoExpr____n_kwdo(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwdo", LOCATE_parser___parser_nodes, 710);
+    nit_abort("Uninitialized attribute %s", "_n_kwdo", LOCATE_parser___parser_nodes, 782);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ADoExpr____n_kwdo(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3309,14 +3856,14 @@ val_t parser___parser_nodes___ADoExpr___n_block(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 711;
+  fra.me.line = 783;
   fra.me.meth = LOCATE_parser___parser_nodes___ADoExpr___n_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:711 */
+  /* parser/parser_nodes.nit:783 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ADoExpr____n_block(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3327,18 +3874,18 @@ val_t parser___parser_nodes___AIfExpr___n_kwif(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 715;
+  fra.me.line = 787;
   fra.me.meth = LOCATE_parser___parser_nodes___AIfExpr___n_kwif;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:715 */
+  /* parser/parser_nodes.nit:787 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIfExpr____n_kwif(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwif", LOCATE_parser___parser_nodes, 715);
+    nit_abort("Uninitialized attribute %s", "_n_kwif", LOCATE_parser___parser_nodes, 787);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIfExpr____n_kwif(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3350,18 +3897,18 @@ val_t parser___parser_nodes___AIfExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 716;
+  fra.me.line = 788;
   fra.me.meth = LOCATE_parser___parser_nodes___AIfExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:716 */
+  /* parser/parser_nodes.nit:788 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIfExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 716);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 788);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIfExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3372,14 +3919,14 @@ val_t parser___parser_nodes___AIfExpr___n_then(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 717;
+  fra.me.line = 789;
   fra.me.meth = LOCATE_parser___parser_nodes___AIfExpr___n_then;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:717 */
+  /* parser/parser_nodes.nit:789 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIfExpr____n_then(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3389,14 +3936,14 @@ val_t parser___parser_nodes___AIfExpr___n_else(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 718;
+  fra.me.line = 790;
   fra.me.meth = LOCATE_parser___parser_nodes___AIfExpr___n_else;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:718 */
+  /* parser/parser_nodes.nit:790 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIfExpr____n_else(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3407,18 +3954,18 @@ val_t parser___parser_nodes___AIfexprExpr___n_kwif(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 722;
+  fra.me.line = 794;
   fra.me.meth = LOCATE_parser___parser_nodes___AIfexprExpr___n_kwif;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:722 */
+  /* parser/parser_nodes.nit:794 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIfexprExpr____n_kwif(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwif", LOCATE_parser___parser_nodes, 722);
+    nit_abort("Uninitialized attribute %s", "_n_kwif", LOCATE_parser___parser_nodes, 794);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIfexprExpr____n_kwif(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3430,18 +3977,18 @@ val_t parser___parser_nodes___AIfexprExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 723;
+  fra.me.line = 795;
   fra.me.meth = LOCATE_parser___parser_nodes___AIfexprExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:723 */
+  /* parser/parser_nodes.nit:795 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIfexprExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 723);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 795);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIfexprExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3453,18 +4000,18 @@ val_t parser___parser_nodes___AIfexprExpr___n_kwthen(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 724;
+  fra.me.line = 796;
   fra.me.meth = LOCATE_parser___parser_nodes___AIfexprExpr___n_kwthen;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:724 */
+  /* parser/parser_nodes.nit:796 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIfexprExpr____n_kwthen(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwthen", LOCATE_parser___parser_nodes, 724);
+    nit_abort("Uninitialized attribute %s", "_n_kwthen", LOCATE_parser___parser_nodes, 796);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIfexprExpr____n_kwthen(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3476,18 +4023,18 @@ val_t parser___parser_nodes___AIfexprExpr___n_then(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 725;
+  fra.me.line = 797;
   fra.me.meth = LOCATE_parser___parser_nodes___AIfexprExpr___n_then;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:725 */
+  /* parser/parser_nodes.nit:797 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIfexprExpr____n_then(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_then", LOCATE_parser___parser_nodes, 725);
+    nit_abort("Uninitialized attribute %s", "_n_then", LOCATE_parser___parser_nodes, 797);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIfexprExpr____n_then(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3499,18 +4046,18 @@ val_t parser___parser_nodes___AIfexprExpr___n_kwelse(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 726;
+  fra.me.line = 798;
   fra.me.meth = LOCATE_parser___parser_nodes___AIfexprExpr___n_kwelse;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:726 */
+  /* parser/parser_nodes.nit:798 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIfexprExpr____n_kwelse(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwelse", LOCATE_parser___parser_nodes, 726);
+    nit_abort("Uninitialized attribute %s", "_n_kwelse", LOCATE_parser___parser_nodes, 798);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIfexprExpr____n_kwelse(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3522,18 +4069,18 @@ val_t parser___parser_nodes___AIfexprExpr___n_else(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 727;
+  fra.me.line = 799;
   fra.me.meth = LOCATE_parser___parser_nodes___AIfexprExpr___n_else;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:727 */
+  /* parser/parser_nodes.nit:799 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIfexprExpr____n_else(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_else", LOCATE_parser___parser_nodes, 727);
+    nit_abort("Uninitialized attribute %s", "_n_else", LOCATE_parser___parser_nodes, 799);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIfexprExpr____n_else(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3545,18 +4092,18 @@ val_t parser___parser_nodes___AWhileExpr___n_kwwhile(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 732;
+  fra.me.line = 804;
   fra.me.meth = LOCATE_parser___parser_nodes___AWhileExpr___n_kwwhile;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:732 */
+  /* parser/parser_nodes.nit:804 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AWhileExpr____n_kwwhile(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwwhile", LOCATE_parser___parser_nodes, 732);
+    nit_abort("Uninitialized attribute %s", "_n_kwwhile", LOCATE_parser___parser_nodes, 804);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AWhileExpr____n_kwwhile(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3568,18 +4115,18 @@ val_t parser___parser_nodes___AWhileExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 733;
+  fra.me.line = 805;
   fra.me.meth = LOCATE_parser___parser_nodes___AWhileExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:733 */
+  /* parser/parser_nodes.nit:805 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AWhileExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 733);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 805);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AWhileExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3591,18 +4138,18 @@ val_t parser___parser_nodes___AWhileExpr___n_kwdo(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 734;
+  fra.me.line = 806;
   fra.me.meth = LOCATE_parser___parser_nodes___AWhileExpr___n_kwdo;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:734 */
+  /* parser/parser_nodes.nit:806 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AWhileExpr____n_kwdo(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwdo", LOCATE_parser___parser_nodes, 734);
+    nit_abort("Uninitialized attribute %s", "_n_kwdo", LOCATE_parser___parser_nodes, 806);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AWhileExpr____n_kwdo(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3613,14 +4160,14 @@ val_t parser___parser_nodes___AWhileExpr___n_block(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 735;
+  fra.me.line = 807;
   fra.me.meth = LOCATE_parser___parser_nodes___AWhileExpr___n_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:735 */
+  /* parser/parser_nodes.nit:807 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AWhileExpr____n_block(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3631,18 +4178,18 @@ val_t parser___parser_nodes___ALoopExpr___n_kwloop(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 740;
+  fra.me.line = 812;
   fra.me.meth = LOCATE_parser___parser_nodes___ALoopExpr___n_kwloop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:740 */
+  /* parser/parser_nodes.nit:812 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ALoopExpr____n_kwloop(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwloop", LOCATE_parser___parser_nodes, 740);
+    nit_abort("Uninitialized attribute %s", "_n_kwloop", LOCATE_parser___parser_nodes, 812);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ALoopExpr____n_kwloop(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3653,14 +4200,14 @@ val_t parser___parser_nodes___ALoopExpr___n_block(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 741;
+  fra.me.line = 813;
   fra.me.meth = LOCATE_parser___parser_nodes___ALoopExpr___n_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:741 */
+  /* parser/parser_nodes.nit:813 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ALoopExpr____n_block(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3671,18 +4218,18 @@ val_t parser___parser_nodes___AForExpr___n_kwfor(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 746;
+  fra.me.line = 818;
   fra.me.meth = LOCATE_parser___parser_nodes___AForExpr___n_kwfor;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:746 */
+  /* parser/parser_nodes.nit:818 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AForExpr____n_kwfor(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwfor", LOCATE_parser___parser_nodes, 746);
+    nit_abort("Uninitialized attribute %s", "_n_kwfor", LOCATE_parser___parser_nodes, 818);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AForExpr____n_kwfor(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3694,18 +4241,18 @@ val_t parser___parser_nodes___AForExpr___n_ids(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 747;
+  fra.me.line = 819;
   fra.me.meth = LOCATE_parser___parser_nodes___AForExpr___n_ids;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:747 */
+  /* parser/parser_nodes.nit:819 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AForExpr____n_ids(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_ids", LOCATE_parser___parser_nodes, 747);
+    nit_abort("Uninitialized attribute %s", "_n_ids", LOCATE_parser___parser_nodes, 819);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AForExpr____n_ids(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3717,18 +4264,18 @@ val_t parser___parser_nodes___AForExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 748;
+  fra.me.line = 820;
   fra.me.meth = LOCATE_parser___parser_nodes___AForExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:748 */
+  /* parser/parser_nodes.nit:820 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AForExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 748);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 820);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AForExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3740,18 +4287,18 @@ val_t parser___parser_nodes___AForExpr___n_kwdo(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 749;
+  fra.me.line = 821;
   fra.me.meth = LOCATE_parser___parser_nodes___AForExpr___n_kwdo;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:749 */
+  /* parser/parser_nodes.nit:821 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AForExpr____n_kwdo(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwdo", LOCATE_parser___parser_nodes, 749);
+    nit_abort("Uninitialized attribute %s", "_n_kwdo", LOCATE_parser___parser_nodes, 821);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AForExpr____n_kwdo(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3762,14 +4309,14 @@ val_t parser___parser_nodes___AForExpr___n_block(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 750;
+  fra.me.line = 822;
   fra.me.meth = LOCATE_parser___parser_nodes___AForExpr___n_block;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:750 */
+  /* parser/parser_nodes.nit:822 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AForExpr____n_block(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3780,18 +4327,18 @@ val_t parser___parser_nodes___AAssertExpr___n_kwassert(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 754;
+  fra.me.line = 826;
   fra.me.meth = LOCATE_parser___parser_nodes___AAssertExpr___n_kwassert;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:754 */
+  /* parser/parser_nodes.nit:826 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAssertExpr____n_kwassert(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwassert", LOCATE_parser___parser_nodes, 754);
+    nit_abort("Uninitialized attribute %s", "_n_kwassert", LOCATE_parser___parser_nodes, 826);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAssertExpr____n_kwassert(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3802,14 +4349,14 @@ val_t parser___parser_nodes___AAssertExpr___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 755;
+  fra.me.line = 827;
   fra.me.meth = LOCATE_parser___parser_nodes___AAssertExpr___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:755 */
+  /* parser/parser_nodes.nit:827 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAssertExpr____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3820,18 +4367,18 @@ val_t parser___parser_nodes___AAssertExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 756;
+  fra.me.line = 828;
   fra.me.meth = LOCATE_parser___parser_nodes___AAssertExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:756 */
+  /* parser/parser_nodes.nit:828 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAssertExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 756);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 828);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAssertExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3842,14 +4389,14 @@ val_t parser___parser_nodes___AAssertExpr___n_else(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 757;
+  fra.me.line = 829;
   fra.me.meth = LOCATE_parser___parser_nodes___AAssertExpr___n_else;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:757 */
+  /* parser/parser_nodes.nit:829 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAssertExpr____n_else(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3860,18 +4407,18 @@ val_t parser___parser_nodes___AAssignFormExpr___n_assign(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 761;
+  fra.me.line = 833;
   fra.me.meth = LOCATE_parser___parser_nodes___AAssignFormExpr___n_assign;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:761 */
+  /* parser/parser_nodes.nit:833 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAssignFormExpr____n_assign(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_assign", LOCATE_parser___parser_nodes, 761);
+    nit_abort("Uninitialized attribute %s", "_n_assign", LOCATE_parser___parser_nodes, 833);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAssignFormExpr____n_assign(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3883,18 +4430,18 @@ val_t parser___parser_nodes___AAssignFormExpr___n_value(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 762;
+  fra.me.line = 834;
   fra.me.meth = LOCATE_parser___parser_nodes___AAssignFormExpr___n_value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:762 */
+  /* parser/parser_nodes.nit:834 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAssignFormExpr____n_value(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_value", LOCATE_parser___parser_nodes, 762);
+    nit_abort("Uninitialized attribute %s", "_n_value", LOCATE_parser___parser_nodes, 834);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAssignFormExpr____n_value(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3906,18 +4453,18 @@ val_t parser___parser_nodes___AReassignFormExpr___n_assign_op(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 766;
+  fra.me.line = 838;
   fra.me.meth = LOCATE_parser___parser_nodes___AReassignFormExpr___n_assign_op;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:766 */
+  /* parser/parser_nodes.nit:838 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AReassignFormExpr____n_assign_op(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_assign_op", LOCATE_parser___parser_nodes, 766);
+    nit_abort("Uninitialized attribute %s", "_n_assign_op", LOCATE_parser___parser_nodes, 838);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AReassignFormExpr____n_assign_op(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3929,18 +4476,18 @@ val_t parser___parser_nodes___AReassignFormExpr___n_value(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 767;
+  fra.me.line = 839;
   fra.me.meth = LOCATE_parser___parser_nodes___AReassignFormExpr___n_value;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:767 */
+  /* parser/parser_nodes.nit:839 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AReassignFormExpr____n_value(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_value", LOCATE_parser___parser_nodes, 767);
+    nit_abort("Uninitialized attribute %s", "_n_value", LOCATE_parser___parser_nodes, 839);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AReassignFormExpr____n_value(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3952,18 +4499,18 @@ val_t parser___parser_nodes___AOnceExpr___n_kwonce(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 771;
+  fra.me.line = 843;
   fra.me.meth = LOCATE_parser___parser_nodes___AOnceExpr___n_kwonce;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:771 */
+  /* parser/parser_nodes.nit:843 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AOnceExpr____n_kwonce(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwonce", LOCATE_parser___parser_nodes, 771);
+    nit_abort("Uninitialized attribute %s", "_n_kwonce", LOCATE_parser___parser_nodes, 843);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AOnceExpr____n_kwonce(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3975,18 +4522,18 @@ val_t parser___parser_nodes___ASendExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 775;
+  fra.me.line = 847;
   fra.me.meth = LOCATE_parser___parser_nodes___ASendExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:775 */
+  /* parser/parser_nodes.nit:847 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASendExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 775);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 847);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASendExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3998,18 +4545,18 @@ val_t parser___parser_nodes___ASendExpr___n_closure_defs(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 776;
+  fra.me.line = 848;
   fra.me.meth = LOCATE_parser___parser_nodes___ASendExpr___n_closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:776 */
+  /* parser/parser_nodes.nit:848 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASendExpr____n_closure_defs(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_closure_defs", LOCATE_parser___parser_nodes, 776);
+    nit_abort("Uninitialized attribute %s", "_n_closure_defs", LOCATE_parser___parser_nodes, 848);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASendExpr____n_closure_defs(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4021,18 +4568,18 @@ val_t parser___parser_nodes___ABinopExpr___n_expr2(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 780;
+  fra.me.line = 852;
   fra.me.meth = LOCATE_parser___parser_nodes___ABinopExpr___n_expr2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:780 */
+  /* parser/parser_nodes.nit:852 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABinopExpr____n_expr2(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 780);
+    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 852);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABinopExpr____n_expr2(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4044,18 +4591,18 @@ val_t parser___parser_nodes___AOrExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 787;
+  fra.me.line = 859;
   fra.me.meth = LOCATE_parser___parser_nodes___AOrExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:787 */
+  /* parser/parser_nodes.nit:859 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AOrExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 787);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 859);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AOrExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4067,18 +4614,18 @@ val_t parser___parser_nodes___AOrExpr___n_expr2(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 788;
+  fra.me.line = 860;
   fra.me.meth = LOCATE_parser___parser_nodes___AOrExpr___n_expr2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:788 */
+  /* parser/parser_nodes.nit:860 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AOrExpr____n_expr2(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 788);
+    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 860);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AOrExpr____n_expr2(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4090,18 +4637,18 @@ val_t parser___parser_nodes___AAndExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 792;
+  fra.me.line = 864;
   fra.me.meth = LOCATE_parser___parser_nodes___AAndExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:792 */
+  /* parser/parser_nodes.nit:864 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAndExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 792);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 864);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAndExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4113,18 +4660,18 @@ val_t parser___parser_nodes___AAndExpr___n_expr2(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 793;
+  fra.me.line = 865;
   fra.me.meth = LOCATE_parser___parser_nodes___AAndExpr___n_expr2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:793 */
+  /* parser/parser_nodes.nit:865 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAndExpr____n_expr2(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 793);
+    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 865);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAndExpr____n_expr2(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4136,18 +4683,18 @@ val_t parser___parser_nodes___AOrElseExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 797;
+  fra.me.line = 869;
   fra.me.meth = LOCATE_parser___parser_nodes___AOrElseExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:797 */
+  /* parser/parser_nodes.nit:869 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AOrElseExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 797);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 869);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AOrElseExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4159,18 +4706,18 @@ val_t parser___parser_nodes___AOrElseExpr___n_expr2(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 798;
+  fra.me.line = 870;
   fra.me.meth = LOCATE_parser___parser_nodes___AOrElseExpr___n_expr2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:798 */
+  /* parser/parser_nodes.nit:870 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AOrElseExpr____n_expr2(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 798);
+    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 870);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AOrElseExpr____n_expr2(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4182,18 +4729,18 @@ val_t parser___parser_nodes___ANotExpr___n_kwnot(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 802;
+  fra.me.line = 874;
   fra.me.meth = LOCATE_parser___parser_nodes___ANotExpr___n_kwnot;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:802 */
+  /* parser/parser_nodes.nit:874 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ANotExpr____n_kwnot(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwnot", LOCATE_parser___parser_nodes, 802);
+    nit_abort("Uninitialized attribute %s", "_n_kwnot", LOCATE_parser___parser_nodes, 874);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANotExpr____n_kwnot(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4205,18 +4752,18 @@ val_t parser___parser_nodes___ANotExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 803;
+  fra.me.line = 875;
   fra.me.meth = LOCATE_parser___parser_nodes___ANotExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:803 */
+  /* parser/parser_nodes.nit:875 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ANotExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 803);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 875);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANotExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4228,18 +4775,18 @@ val_t parser___parser_nodes___AEeExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 810;
+  fra.me.line = 882;
   fra.me.meth = LOCATE_parser___parser_nodes___AEeExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:810 */
+  /* parser/parser_nodes.nit:882 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AEeExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 810);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 882);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AEeExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4251,18 +4798,18 @@ val_t parser___parser_nodes___AEeExpr___n_expr2(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 811;
+  fra.me.line = 883;
   fra.me.meth = LOCATE_parser___parser_nodes___AEeExpr___n_expr2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:811 */
+  /* parser/parser_nodes.nit:883 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AEeExpr____n_expr2(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 811);
+    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 883);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AEeExpr____n_expr2(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4274,18 +4821,18 @@ val_t parser___parser_nodes___AIsaExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 836;
+  fra.me.line = 908;
   fra.me.meth = LOCATE_parser___parser_nodes___AIsaExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:836 */
+  /* parser/parser_nodes.nit:908 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIsaExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 836);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 908);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIsaExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4297,18 +4844,18 @@ val_t parser___parser_nodes___AIsaExpr___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 837;
+  fra.me.line = 909;
   fra.me.meth = LOCATE_parser___parser_nodes___AIsaExpr___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:837 */
+  /* parser/parser_nodes.nit:909 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIsaExpr____n_type(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 837);
+    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 909);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIsaExpr____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4320,18 +4867,18 @@ val_t parser___parser_nodes___AUminusExpr___n_minus(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 859;
+  fra.me.line = 931;
   fra.me.meth = LOCATE_parser___parser_nodes___AUminusExpr___n_minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:859 */
+  /* parser/parser_nodes.nit:931 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AUminusExpr____n_minus(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_minus", LOCATE_parser___parser_nodes, 859);
+    nit_abort("Uninitialized attribute %s", "_n_minus", LOCATE_parser___parser_nodes, 931);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AUminusExpr____n_minus(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4343,18 +4890,18 @@ val_t parser___parser_nodes___ANewExpr___n_kwnew(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 863;
+  fra.me.line = 935;
   fra.me.meth = LOCATE_parser___parser_nodes___ANewExpr___n_kwnew;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:863 */
+  /* parser/parser_nodes.nit:935 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ANewExpr____n_kwnew(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwnew", LOCATE_parser___parser_nodes, 863);
+    nit_abort("Uninitialized attribute %s", "_n_kwnew", LOCATE_parser___parser_nodes, 935);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANewExpr____n_kwnew(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4366,18 +4913,18 @@ val_t parser___parser_nodes___ANewExpr___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 864;
+  fra.me.line = 936;
   fra.me.meth = LOCATE_parser___parser_nodes___ANewExpr___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:864 */
+  /* parser/parser_nodes.nit:936 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ANewExpr____n_type(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 864);
+    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 936);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANewExpr____n_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4388,14 +4935,14 @@ val_t parser___parser_nodes___ANewExpr___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 865;
+  fra.me.line = 937;
   fra.me.meth = LOCATE_parser___parser_nodes___ANewExpr___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:865 */
+  /* parser/parser_nodes.nit:937 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANewExpr____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -4406,18 +4953,18 @@ val_t parser___parser_nodes___ANewExpr___n_args(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 866;
+  fra.me.line = 938;
   fra.me.meth = LOCATE_parser___parser_nodes___ANewExpr___n_args;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:866 */
+  /* parser/parser_nodes.nit:938 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ANewExpr____n_args(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 866);
+    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 938);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANewExpr____n_args(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4429,18 +4976,18 @@ val_t parser___parser_nodes___AAttrFormExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 870;
+  fra.me.line = 942;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrFormExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:870 */
+  /* parser/parser_nodes.nit:942 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAttrFormExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 870);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 942);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrFormExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4452,18 +4999,18 @@ val_t parser___parser_nodes___AAttrFormExpr___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 871;
+  fra.me.line = 943;
   fra.me.meth = LOCATE_parser___parser_nodes___AAttrFormExpr___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:871 */
+  /* parser/parser_nodes.nit:943 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAttrFormExpr____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 871);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 943);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAttrFormExpr____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4475,18 +5022,18 @@ val_t parser___parser_nodes___ACallFormExpr___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 882;
+  fra.me.line = 954;
   fra.me.meth = LOCATE_parser___parser_nodes___ACallFormExpr___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:882 */
+  /* parser/parser_nodes.nit:954 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ACallFormExpr____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 882);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 954);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ACallFormExpr____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4498,18 +5045,18 @@ val_t parser___parser_nodes___ACallFormExpr___n_args(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 883;
+  fra.me.line = 955;
   fra.me.meth = LOCATE_parser___parser_nodes___ACallFormExpr___n_args;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:883 */
+  /* parser/parser_nodes.nit:955 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ACallFormExpr____n_args(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 883);
+    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 955);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ACallFormExpr____n_args(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4520,14 +5067,14 @@ val_t parser___parser_nodes___ASuperExpr___n_qualified(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 904;
+  fra.me.line = 980;
   fra.me.meth = LOCATE_parser___parser_nodes___ASuperExpr___n_qualified;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:904 */
+  /* parser/parser_nodes.nit:980 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASuperExpr____n_qualified(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -4538,18 +5085,18 @@ val_t parser___parser_nodes___ASuperExpr___n_kwsuper(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 905;
+  fra.me.line = 981;
   fra.me.meth = LOCATE_parser___parser_nodes___ASuperExpr___n_kwsuper;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:905 */
+  /* parser/parser_nodes.nit:981 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASuperExpr____n_kwsuper(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwsuper", LOCATE_parser___parser_nodes, 905);
+    nit_abort("Uninitialized attribute %s", "_n_kwsuper", LOCATE_parser___parser_nodes, 981);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASuperExpr____n_kwsuper(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4561,18 +5108,18 @@ val_t parser___parser_nodes___ASuperExpr___n_args(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 906;
+  fra.me.line = 982;
   fra.me.meth = LOCATE_parser___parser_nodes___ASuperExpr___n_args;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:906 */
+  /* parser/parser_nodes.nit:982 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASuperExpr____n_args(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 906);
+    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 982);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASuperExpr____n_args(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4584,18 +5131,18 @@ val_t parser___parser_nodes___AInitExpr___n_kwinit(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 910;
+  fra.me.line = 986;
   fra.me.meth = LOCATE_parser___parser_nodes___AInitExpr___n_kwinit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:910 */
+  /* parser/parser_nodes.nit:986 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AInitExpr____n_kwinit(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwinit", LOCATE_parser___parser_nodes, 910);
+    nit_abort("Uninitialized attribute %s", "_n_kwinit", LOCATE_parser___parser_nodes, 986);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AInitExpr____n_kwinit(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4607,18 +5154,18 @@ val_t parser___parser_nodes___AInitExpr___n_args(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 911;
+  fra.me.line = 987;
   fra.me.meth = LOCATE_parser___parser_nodes___AInitExpr___n_args;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:911 */
+  /* parser/parser_nodes.nit:987 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AInitExpr____n_args(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 911);
+    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 987);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AInitExpr____n_args(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4630,18 +5177,18 @@ val_t parser___parser_nodes___ABraFormExpr___n_args(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 915;
+  fra.me.line = 991;
   fra.me.meth = LOCATE_parser___parser_nodes___ABraFormExpr___n_args;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:915 */
+  /* parser/parser_nodes.nit:991 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABraFormExpr____n_args(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 915);
+    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 991);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABraFormExpr____n_args(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4653,18 +5200,18 @@ val_t parser___parser_nodes___AVarFormExpr___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 926;
+  fra.me.line = 1002;
   fra.me.meth = LOCATE_parser___parser_nodes___AVarFormExpr___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:926 */
+  /* parser/parser_nodes.nit:1002 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AVarFormExpr____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 926);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 1002);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AVarFormExpr____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4676,18 +5223,18 @@ val_t parser___parser_nodes___AClosureCallExpr___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 934;
+  fra.me.line = 1010;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureCallExpr___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:934 */
+  /* parser/parser_nodes.nit:1010 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AClosureCallExpr____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 934);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 1010);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureCallExpr____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4699,18 +5246,18 @@ val_t parser___parser_nodes___AClosureCallExpr___n_args(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 935;
+  fra.me.line = 1011;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureCallExpr___n_args;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:935 */
+  /* parser/parser_nodes.nit:1011 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AClosureCallExpr____n_args(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 935);
+    nit_abort("Uninitialized attribute %s", "_n_args", LOCATE_parser___parser_nodes, 1011);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureCallExpr____n_args(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4722,18 +5269,18 @@ val_t parser___parser_nodes___AClosureCallExpr___n_closure_defs(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 936;
+  fra.me.line = 1012;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureCallExpr___n_closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:936 */
+  /* parser/parser_nodes.nit:1012 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AClosureCallExpr____n_closure_defs(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_closure_defs", LOCATE_parser___parser_nodes, 936);
+    nit_abort("Uninitialized attribute %s", "_n_closure_defs", LOCATE_parser___parser_nodes, 1012);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureCallExpr____n_closure_defs(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4745,18 +5292,18 @@ val_t parser___parser_nodes___ARangeExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 951;
+  fra.me.line = 1027;
   fra.me.meth = LOCATE_parser___parser_nodes___ARangeExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:951 */
+  /* parser/parser_nodes.nit:1027 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ARangeExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 951);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 1027);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ARangeExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4768,20 +5315,112 @@ val_t parser___parser_nodes___ARangeExpr___n_expr2(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 952;
+  fra.me.line = 1028;
   fra.me.meth = LOCATE_parser___parser_nodes___ARangeExpr___n_expr2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:952 */
+  /* parser/parser_nodes.nit:1028 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ARangeExpr____n_expr2(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 952);
+    nit_abort("Uninitialized attribute %s", "_n_expr2", LOCATE_parser___parser_nodes, 1028);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ARangeExpr____n_expr2(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ACrangeExpr___n_obra(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1032;
+  fra.me.meth = LOCATE_parser___parser_nodes___ACrangeExpr___n_obra;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1032 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ACrangeExpr____n_obra(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_obra", LOCATE_parser___parser_nodes, 1032);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ACrangeExpr____n_obra(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ACrangeExpr___n_cbra(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1033;
+  fra.me.meth = LOCATE_parser___parser_nodes___ACrangeExpr___n_cbra;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1033 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ACrangeExpr____n_cbra(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_cbra", LOCATE_parser___parser_nodes, 1033);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ACrangeExpr____n_cbra(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AOrangeExpr___n_obra(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1037;
+  fra.me.meth = LOCATE_parser___parser_nodes___AOrangeExpr___n_obra;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1037 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AOrangeExpr____n_obra(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_obra", LOCATE_parser___parser_nodes, 1037);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AOrangeExpr____n_obra(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AOrangeExpr___n_cbra(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1038;
+  fra.me.meth = LOCATE_parser___parser_nodes___AOrangeExpr___n_cbra;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1038 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AOrangeExpr____n_cbra(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_cbra", LOCATE_parser___parser_nodes, 1038);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AOrangeExpr____n_cbra(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -4791,18 +5430,18 @@ val_t parser___parser_nodes___AArrayExpr___n_exprs(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 962;
+  fra.me.line = 1042;
   fra.me.meth = LOCATE_parser___parser_nodes___AArrayExpr___n_exprs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:962 */
+  /* parser/parser_nodes.nit:1042 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AArrayExpr____n_exprs(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_exprs", LOCATE_parser___parser_nodes, 962);
+    nit_abort("Uninitialized attribute %s", "_n_exprs", LOCATE_parser___parser_nodes, 1042);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AArrayExpr____n_exprs(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4813,14 +5452,14 @@ val_t parser___parser_nodes___ASelfExpr___n_kwself(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 966;
+  fra.me.line = 1046;
   fra.me.meth = LOCATE_parser___parser_nodes___ASelfExpr___n_kwself;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:966 */
+  /* parser/parser_nodes.nit:1046 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASelfExpr____n_kwself(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -4831,18 +5470,18 @@ val_t parser___parser_nodes___ATrueExpr___n_kwtrue(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 973;
+  fra.me.line = 1053;
   fra.me.meth = LOCATE_parser___parser_nodes___ATrueExpr___n_kwtrue;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:973 */
+  /* parser/parser_nodes.nit:1053 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ATrueExpr____n_kwtrue(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwtrue", LOCATE_parser___parser_nodes, 973);
+    nit_abort("Uninitialized attribute %s", "_n_kwtrue", LOCATE_parser___parser_nodes, 1053);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ATrueExpr____n_kwtrue(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4854,18 +5493,18 @@ val_t parser___parser_nodes___AFalseExpr___n_kwfalse(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 977;
+  fra.me.line = 1057;
   fra.me.meth = LOCATE_parser___parser_nodes___AFalseExpr___n_kwfalse;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:977 */
+  /* parser/parser_nodes.nit:1057 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AFalseExpr____n_kwfalse(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwfalse", LOCATE_parser___parser_nodes, 977);
+    nit_abort("Uninitialized attribute %s", "_n_kwfalse", LOCATE_parser___parser_nodes, 1057);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AFalseExpr____n_kwfalse(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4877,18 +5516,18 @@ val_t parser___parser_nodes___ANullExpr___n_kwnull(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 981;
+  fra.me.line = 1061;
   fra.me.meth = LOCATE_parser___parser_nodes___ANullExpr___n_kwnull;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:981 */
+  /* parser/parser_nodes.nit:1061 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ANullExpr____n_kwnull(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwnull", LOCATE_parser___parser_nodes, 981);
+    nit_abort("Uninitialized attribute %s", "_n_kwnull", LOCATE_parser___parser_nodes, 1061);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ANullExpr____n_kwnull(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4900,18 +5539,18 @@ val_t parser___parser_nodes___AIntExpr___n_number(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 985;
+  fra.me.line = 1065;
   fra.me.meth = LOCATE_parser___parser_nodes___AIntExpr___n_number;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:985 */
+  /* parser/parser_nodes.nit:1065 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIntExpr____n_number(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_number", LOCATE_parser___parser_nodes, 985);
+    nit_abort("Uninitialized attribute %s", "_n_number", LOCATE_parser___parser_nodes, 1065);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIntExpr____n_number(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4923,18 +5562,18 @@ val_t parser___parser_nodes___AFloatExpr___n_float(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 989;
+  fra.me.line = 1069;
   fra.me.meth = LOCATE_parser___parser_nodes___AFloatExpr___n_float;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:989 */
+  /* parser/parser_nodes.nit:1069 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AFloatExpr____n_float(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_float", LOCATE_parser___parser_nodes, 989);
+    nit_abort("Uninitialized attribute %s", "_n_float", LOCATE_parser___parser_nodes, 1069);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AFloatExpr____n_float(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4946,18 +5585,18 @@ val_t parser___parser_nodes___ACharExpr___n_char(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 993;
+  fra.me.line = 1073;
   fra.me.meth = LOCATE_parser___parser_nodes___ACharExpr___n_char;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:993 */
+  /* parser/parser_nodes.nit:1073 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ACharExpr____n_char(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_char", LOCATE_parser___parser_nodes, 993);
+    nit_abort("Uninitialized attribute %s", "_n_char", LOCATE_parser___parser_nodes, 1073);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ACharExpr____n_char(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4969,18 +5608,18 @@ val_t parser___parser_nodes___AStringExpr___n_string(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1000;
+  fra.me.line = 1080;
   fra.me.meth = LOCATE_parser___parser_nodes___AStringExpr___n_string;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1000 */
+  /* parser/parser_nodes.nit:1080 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStringExpr____n_string(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_string", LOCATE_parser___parser_nodes, 1000);
+    nit_abort("Uninitialized attribute %s", "_n_string", LOCATE_parser___parser_nodes, 1080);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStringExpr____n_string(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -4992,18 +5631,18 @@ val_t parser___parser_nodes___AStartStringExpr___n_string(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1004;
+  fra.me.line = 1084;
   fra.me.meth = LOCATE_parser___parser_nodes___AStartStringExpr___n_string;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1004 */
+  /* parser/parser_nodes.nit:1084 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AStartStringExpr____n_string(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_string", LOCATE_parser___parser_nodes, 1004);
+    nit_abort("Uninitialized attribute %s", "_n_string", LOCATE_parser___parser_nodes, 1084);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AStartStringExpr____n_string(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5015,18 +5654,18 @@ val_t parser___parser_nodes___AMidStringExpr___n_string(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1008;
+  fra.me.line = 1088;
   fra.me.meth = LOCATE_parser___parser_nodes___AMidStringExpr___n_string;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1008 */
+  /* parser/parser_nodes.nit:1088 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AMidStringExpr____n_string(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_string", LOCATE_parser___parser_nodes, 1008);
+    nit_abort("Uninitialized attribute %s", "_n_string", LOCATE_parser___parser_nodes, 1088);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AMidStringExpr____n_string(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5038,18 +5677,18 @@ val_t parser___parser_nodes___AEndStringExpr___n_string(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1012;
+  fra.me.line = 1092;
   fra.me.meth = LOCATE_parser___parser_nodes___AEndStringExpr___n_string;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1012 */
+  /* parser/parser_nodes.nit:1092 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AEndStringExpr____n_string(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_string", LOCATE_parser___parser_nodes, 1012);
+    nit_abort("Uninitialized attribute %s", "_n_string", LOCATE_parser___parser_nodes, 1092);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AEndStringExpr____n_string(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5061,20 +5700,66 @@ val_t parser___parser_nodes___ASuperstringExpr___n_exprs(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1016;
+  fra.me.line = 1096;
   fra.me.meth = LOCATE_parser___parser_nodes___ASuperstringExpr___n_exprs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1016 */
+  /* parser/parser_nodes.nit:1096 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASuperstringExpr____n_exprs(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_exprs", LOCATE_parser___parser_nodes, 1016);
+    nit_abort("Uninitialized attribute %s", "_n_exprs", LOCATE_parser___parser_nodes, 1096);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASuperstringExpr____n_exprs(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AParExpr___n_opar(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1100;
+  fra.me.meth = LOCATE_parser___parser_nodes___AParExpr___n_opar;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1100 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AParExpr____n_opar(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_opar", LOCATE_parser___parser_nodes, 1100);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AParExpr____n_opar(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AParExpr___n_cpar(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1101;
+  fra.me.meth = LOCATE_parser___parser_nodes___AParExpr___n_cpar;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1101 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AParExpr____n_cpar(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_cpar", LOCATE_parser___parser_nodes, 1101);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AParExpr____n_cpar(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -5084,18 +5769,18 @@ val_t parser___parser_nodes___AProxyExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1023;
+  fra.me.line = 1105;
   fra.me.meth = LOCATE_parser___parser_nodes___AProxyExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1023 */
+  /* parser/parser_nodes.nit:1105 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AProxyExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 1023);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 1105);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AProxyExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5107,18 +5792,18 @@ val_t parser___parser_nodes___AAsCastExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1027;
+  fra.me.line = 1109;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsCastExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1027 */
+  /* parser/parser_nodes.nit:1109 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsCastExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 1027);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 1109);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsCastExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5130,20 +5815,43 @@ val_t parser___parser_nodes___AAsCastExpr___n_kwas(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1028;
+  fra.me.line = 1110;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsCastExpr___n_kwas;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1028 */
+  /* parser/parser_nodes.nit:1110 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsCastExpr____n_kwas(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwas", LOCATE_parser___parser_nodes, 1028);
+    nit_abort("Uninitialized attribute %s", "_n_kwas", LOCATE_parser___parser_nodes, 1110);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsCastExpr____n_kwas(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AAsCastExpr___n_opar(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1111;
+  fra.me.meth = LOCATE_parser___parser_nodes___AAsCastExpr___n_opar;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1111 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsCastExpr____n_opar(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_opar", LOCATE_parser___parser_nodes, 1111);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AAsCastExpr____n_opar(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -5153,20 +5861,43 @@ val_t parser___parser_nodes___AAsCastExpr___n_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1029;
+  fra.me.line = 1112;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsCastExpr___n_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1029 */
+  /* parser/parser_nodes.nit:1112 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsCastExpr____n_type(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 1029);
+    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 1112);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsCastExpr____n_type(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AAsCastExpr___n_cpar(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1113;
+  fra.me.meth = LOCATE_parser___parser_nodes___AAsCastExpr___n_cpar;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1113 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsCastExpr____n_cpar(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_cpar", LOCATE_parser___parser_nodes, 1113);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AAsCastExpr____n_cpar(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -5176,18 +5907,18 @@ val_t parser___parser_nodes___AAsNotnullExpr___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1033;
+  fra.me.line = 1117;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNotnullExpr___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1033 */
+  /* parser/parser_nodes.nit:1117 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNotnullExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 1033);
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 1117);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNotnullExpr____n_expr(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5199,20 +5930,43 @@ val_t parser___parser_nodes___AAsNotnullExpr___n_kwas(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1034;
+  fra.me.line = 1118;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNotnullExpr___n_kwas;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1034 */
+  /* parser/parser_nodes.nit:1118 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNotnullExpr____n_kwas(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwas", LOCATE_parser___parser_nodes, 1034);
+    nit_abort("Uninitialized attribute %s", "_n_kwas", LOCATE_parser___parser_nodes, 1118);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNotnullExpr____n_kwas(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AAsNotnullExpr___n_opar(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1119;
+  fra.me.meth = LOCATE_parser___parser_nodes___AAsNotnullExpr___n_opar;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1119 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNotnullExpr____n_opar(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_opar", LOCATE_parser___parser_nodes, 1119);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNotnullExpr____n_opar(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -5222,18 +5976,18 @@ val_t parser___parser_nodes___AAsNotnullExpr___n_kwnot(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1035;
+  fra.me.line = 1120;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNotnullExpr___n_kwnot;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1035 */
+  /* parser/parser_nodes.nit:1120 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNotnullExpr____n_kwnot(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwnot", LOCATE_parser___parser_nodes, 1035);
+    nit_abort("Uninitialized attribute %s", "_n_kwnot", LOCATE_parser___parser_nodes, 1120);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNotnullExpr____n_kwnot(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5245,20 +5999,43 @@ val_t parser___parser_nodes___AAsNotnullExpr___n_kwnull(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1036;
+  fra.me.line = 1121;
   fra.me.meth = LOCATE_parser___parser_nodes___AAsNotnullExpr___n_kwnull;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1036 */
+  /* parser/parser_nodes.nit:1121 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNotnullExpr____n_kwnull(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwnull", LOCATE_parser___parser_nodes, 1036);
+    nit_abort("Uninitialized attribute %s", "_n_kwnull", LOCATE_parser___parser_nodes, 1121);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNotnullExpr____n_kwnull(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AAsNotnullExpr___n_cpar(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1122;
+  fra.me.meth = LOCATE_parser___parser_nodes___AAsNotnullExpr___n_cpar;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1122 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AAsNotnullExpr____n_cpar(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_cpar", LOCATE_parser___parser_nodes, 1122);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AAsNotnullExpr____n_cpar(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -5268,20 +6045,227 @@ val_t parser___parser_nodes___AIssetAttrExpr___n_kwisset(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1040;
+  fra.me.line = 1126;
   fra.me.meth = LOCATE_parser___parser_nodes___AIssetAttrExpr___n_kwisset;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1040 */
+  /* parser/parser_nodes.nit:1126 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AIssetAttrExpr____n_kwisset(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwisset", LOCATE_parser___parser_nodes, 1040);
+    nit_abort("Uninitialized attribute %s", "_n_kwisset", LOCATE_parser___parser_nodes, 1126);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AIssetAttrExpr____n_kwisset(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AExprs___n_exprs(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1130;
+  fra.me.meth = LOCATE_parser___parser_nodes___AExprs___n_exprs;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1130 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AExprs____n_exprs(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_exprs", LOCATE_parser___parser_nodes, 1130);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AExprs____n_exprs(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ADebugTypeExpr___n_kwdebug(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1134;
+  fra.me.meth = LOCATE_parser___parser_nodes___ADebugTypeExpr___n_kwdebug;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1134 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ADebugTypeExpr____n_kwdebug(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_kwdebug", LOCATE_parser___parser_nodes, 1134);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ADebugTypeExpr____n_kwdebug(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ADebugTypeExpr___n_kwtype(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1135;
+  fra.me.meth = LOCATE_parser___parser_nodes___ADebugTypeExpr___n_kwtype;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1135 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ADebugTypeExpr____n_kwtype(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_kwtype", LOCATE_parser___parser_nodes, 1135);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ADebugTypeExpr____n_kwtype(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ADebugTypeExpr___n_expr(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1136;
+  fra.me.meth = LOCATE_parser___parser_nodes___ADebugTypeExpr___n_expr;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1136 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ADebugTypeExpr____n_expr(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_expr", LOCATE_parser___parser_nodes, 1136);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ADebugTypeExpr____n_expr(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ADebugTypeExpr___n_type(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1137;
+  fra.me.meth = LOCATE_parser___parser_nodes___ADebugTypeExpr___n_type;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1137 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ADebugTypeExpr____n_type(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_type", LOCATE_parser___parser_nodes, 1137);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ADebugTypeExpr____n_type(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AParExprs___n_opar(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1144;
+  fra.me.meth = LOCATE_parser___parser_nodes___AParExprs___n_opar;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1144 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AParExprs____n_opar(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_opar", LOCATE_parser___parser_nodes, 1144);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AParExprs____n_opar(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AParExprs___n_cpar(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1145;
+  fra.me.meth = LOCATE_parser___parser_nodes___AParExprs___n_cpar;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1145 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AParExprs____n_cpar(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_cpar", LOCATE_parser___parser_nodes, 1145);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___AParExprs____n_cpar(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ABraExprs___n_obra(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1149;
+  fra.me.meth = LOCATE_parser___parser_nodes___ABraExprs___n_obra;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1149 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABraExprs____n_obra(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_obra", LOCATE_parser___parser_nodes, 1149);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ABraExprs____n_obra(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___ABraExprs___n_cbra(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1150;
+  fra.me.meth = LOCATE_parser___parser_nodes___ABraExprs___n_cbra;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1150 */
+  REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABraExprs____n_cbra(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_n_cbra", LOCATE_parser___parser_nodes, 1150);
+  }
+  fra.me.REG[0] = ATTR_parser___parser_nodes___ABraExprs____n_cbra(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -5291,18 +6275,18 @@ val_t parser___parser_nodes___APlusAssignOp___n_pluseq(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1045;
+  fra.me.line = 1155;
   fra.me.meth = LOCATE_parser___parser_nodes___APlusAssignOp___n_pluseq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1045 */
+  /* parser/parser_nodes.nit:1155 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___APlusAssignOp____n_pluseq(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_pluseq", LOCATE_parser___parser_nodes, 1045);
+    nit_abort("Uninitialized attribute %s", "_n_pluseq", LOCATE_parser___parser_nodes, 1155);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___APlusAssignOp____n_pluseq(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5314,18 +6298,18 @@ val_t parser___parser_nodes___AMinusAssignOp___n_minuseq(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1049;
+  fra.me.line = 1159;
   fra.me.meth = LOCATE_parser___parser_nodes___AMinusAssignOp___n_minuseq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1049 */
+  /* parser/parser_nodes.nit:1159 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AMinusAssignOp____n_minuseq(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_minuseq", LOCATE_parser___parser_nodes, 1049);
+    nit_abort("Uninitialized attribute %s", "_n_minuseq", LOCATE_parser___parser_nodes, 1159);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AMinusAssignOp____n_minuseq(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5337,18 +6321,18 @@ val_t parser___parser_nodes___AClosureDef___n_bang(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1053;
+  fra.me.line = 1163;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureDef___n_bang;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1053 */
+  /* parser/parser_nodes.nit:1163 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AClosureDef____n_bang(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_bang", LOCATE_parser___parser_nodes, 1053);
+    nit_abort("Uninitialized attribute %s", "_n_bang", LOCATE_parser___parser_nodes, 1163);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureDef____n_bang(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5360,18 +6344,18 @@ val_t parser___parser_nodes___AClosureDef___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1054;
+  fra.me.line = 1164;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureDef___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1054 */
+  /* parser/parser_nodes.nit:1164 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AClosureDef____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 1054);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 1164);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureDef____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5383,18 +6367,18 @@ val_t parser___parser_nodes___AClosureDef___n_ids(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1055;
+  fra.me.line = 1165;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureDef___n_ids;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1055 */
+  /* parser/parser_nodes.nit:1165 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AClosureDef____n_ids(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_ids", LOCATE_parser___parser_nodes, 1055);
+    nit_abort("Uninitialized attribute %s", "_n_ids", LOCATE_parser___parser_nodes, 1165);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureDef____n_ids(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5405,14 +6389,14 @@ val_t parser___parser_nodes___AClosureDef___n_kwdo(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1056;
+  fra.me.line = 1166;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureDef___n_kwdo;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1056 */
+  /* parser/parser_nodes.nit:1166 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureDef____n_kwdo(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -5422,15 +6406,35 @@ val_t parser___parser_nodes___AClosureDef___n_expr(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1057;
+  fra.me.line = 1167;
   fra.me.meth = LOCATE_parser___parser_nodes___AClosureDef___n_expr;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1057 */
+  /* parser/parser_nodes.nit:1167 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AClosureDef____n_expr(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
+}
+val_t parser___parser_nodes___AClosureDef___hot_location(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1168;
+  fra.me.meth = LOCATE_parser___parser_nodes___AClosureDef___hot_location;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* parser/parser_nodes.nit:1168 */
+  fra.me.REG[0] = CALL_parser___parser_nodes___AClosureDef___n_id(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[0] = CALL_parser___parser_nodes___ANode___location(fra.me.REG[0])(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
@@ -5440,18 +6444,18 @@ val_t parser___parser_nodes___ASimpleClosureId___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1064;
+  fra.me.line = 1175;
   fra.me.meth = LOCATE_parser___parser_nodes___ASimpleClosureId___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1064 */
+  /* parser/parser_nodes.nit:1175 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ASimpleClosureId____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 1064);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 1175);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ASimpleClosureId____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5463,18 +6467,18 @@ val_t parser___parser_nodes___ABreakClosureId___n_kwbreak(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1068;
+  fra.me.line = 1179;
   fra.me.meth = LOCATE_parser___parser_nodes___ABreakClosureId___n_kwbreak;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1068 */
+  /* parser/parser_nodes.nit:1179 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ABreakClosureId____n_kwbreak(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_kwbreak", LOCATE_parser___parser_nodes, 1068);
+    nit_abort("Uninitialized attribute %s", "_n_kwbreak", LOCATE_parser___parser_nodes, 1179);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ABreakClosureId____n_kwbreak(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5485,14 +6489,14 @@ val_t parser___parser_nodes___AModuleName___n_quad(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1072;
+  fra.me.line = 1183;
   fra.me.meth = LOCATE_parser___parser_nodes___AModuleName___n_quad;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1072 */
+  /* parser/parser_nodes.nit:1183 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AModuleName____n_quad(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -5503,18 +6507,18 @@ val_t parser___parser_nodes___AModuleName___n_path(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1073;
+  fra.me.line = 1184;
   fra.me.meth = LOCATE_parser___parser_nodes___AModuleName___n_path;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1073 */
+  /* parser/parser_nodes.nit:1184 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AModuleName____n_path(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_path", LOCATE_parser___parser_nodes, 1073);
+    nit_abort("Uninitialized attribute %s", "_n_path", LOCATE_parser___parser_nodes, 1184);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AModuleName____n_path(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5526,18 +6530,18 @@ val_t parser___parser_nodes___AModuleName___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1074;
+  fra.me.line = 1185;
   fra.me.meth = LOCATE_parser___parser_nodes___AModuleName___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1074 */
+  /* parser/parser_nodes.nit:1185 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AModuleName____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 1074);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 1185);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AModuleName____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5548,14 +6552,14 @@ val_t parser___parser_nodes___AQualified___n_quad(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1078;
+  fra.me.line = 1189;
   fra.me.meth = LOCATE_parser___parser_nodes___AQualified___n_quad;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1078 */
+  /* parser/parser_nodes.nit:1189 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AQualified____n_quad(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -5566,18 +6570,18 @@ val_t parser___parser_nodes___AQualified___n_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1079;
+  fra.me.line = 1190;
   fra.me.meth = LOCATE_parser___parser_nodes___AQualified___n_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1079 */
+  /* parser/parser_nodes.nit:1190 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___AQualified____n_id(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 1079);
+    nit_abort("Uninitialized attribute %s", "_n_id", LOCATE_parser___parser_nodes, 1190);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___AQualified____n_id(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5588,14 +6592,14 @@ val_t parser___parser_nodes___AQualified___n_classid(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1080;
+  fra.me.line = 1191;
   fra.me.meth = LOCATE_parser___parser_nodes___AQualified___n_classid;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1080 */
+  /* parser/parser_nodes.nit:1191 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___AQualified____n_classid(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -5606,18 +6610,18 @@ val_t parser___parser_nodes___ADoc___n_comment(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1084;
+  fra.me.line = 1195;
   fra.me.meth = LOCATE_parser___parser_nodes___ADoc___n_comment;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1084 */
+  /* parser/parser_nodes.nit:1195 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___ADoc____n_comment(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_comment", LOCATE_parser___parser_nodes, 1084);
+    nit_abort("Uninitialized attribute %s", "_n_comment", LOCATE_parser___parser_nodes, 1195);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___ADoc____n_comment(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -5628,14 +6632,14 @@ val_t parser___parser_nodes___Start___n_base(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1089;
+  fra.me.line = 1200;
   fra.me.meth = LOCATE_parser___parser_nodes___Start___n_base;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1089 */
+  /* parser/parser_nodes.nit:1200 */
   fra.me.REG[0] = ATTR_parser___parser_nodes___Start____n_base(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -5646,20 +6650,46 @@ val_t parser___parser_nodes___Start___n_eof(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_parser___parser_nodes;
-  fra.me.line = 1090;
+  fra.me.line = 1201;
   fra.me.meth = LOCATE_parser___parser_nodes___Start___n_eof;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./parser//parser_nodes.nit:1090 */
+  /* parser/parser_nodes.nit:1201 */
   REGB0 = TAG_Bool(ATTR_parser___parser_nodes___Start____n_eof(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_n_eof", LOCATE_parser___parser_nodes, 1090);
+    nit_abort("Uninitialized attribute %s", "_n_eof", LOCATE_parser___parser_nodes, 1201);
   }
   fra.me.REG[0] = ATTR_parser___parser_nodes___Start____n_eof(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
+}
+void parser___parser_nodes___Start___init(val_t p0, val_t p1, val_t p2, int* init_table){
+  int itpos3 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_parser___parser_nodes___Start].i;
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t tmp;
+  if (init_table[itpos3]) return;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_parser___parser_nodes;
+  fra.me.line = 1202;
+  fra.me.meth = LOCATE_parser___parser_nodes___Start___init;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  fra.me.REG[2] = p2;
+  /* parser/parser_nodes.nit:1204 */
+  ATTR_parser___parser_nodes___Start____n_base(fra.me.REG[0]) = fra.me.REG[1];
+  /* parser/parser_nodes.nit:1205 */
+  ATTR_parser___parser_nodes___Start____n_eof(fra.me.REG[0]) = fra.me.REG[2];
+  stack_frame_head = fra.me.prev;
+  init_table[itpos3] = 1;
+  return;
 }

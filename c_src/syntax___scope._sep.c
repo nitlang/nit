@@ -19,25 +19,25 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:48 */
+  /* syntax/scope.nit:48 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_stack", LOCATE_syntax___scope, 48);
   }
   fra.me.REG[2] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
-  /* ./../lib/standard//collection//array.nit:24 */
+  /* ../lib/standard/collection/array.nit:24 */
   REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-  /* ./syntax//scope.nit:48 */
+  /* syntax/scope.nit:48 */
   REGB1 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:237 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* ./syntax//scope.nit:49 */
+  /* syntax/scope.nit:49 */
   while(1) {
     REGB0 = TAG_Int(0);
     REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -45,29 +45,29 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:233 */
+    /* ../lib/standard/kernel.nit:233 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-    /* ./syntax//scope.nit:49 */
+    /* syntax/scope.nit:49 */
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//scope.nit:50 */
+      /* syntax/scope.nit:50 */
       REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
         nit_abort("Uninitialized attribute %s", "_stack", LOCATE_syntax___scope, 50);
       }
       fra.me.REG[2] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
-      /* ./../lib/standard//collection//array.nit:278 */
+      /* ../lib/standard/collection/array.nit:278 */
       REGB0 = REGB1;
-      /* ./../lib/standard//collection//array.nit:280 */
+      /* ../lib/standard/collection/array.nit:280 */
       REGB2 = TAG_Int(0);
       REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB3)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ./../lib/standard//kernel.nit:233 */
+      /* ../lib/standard/kernel.nit:233 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB2));
-      /* ./../lib/standard//collection//array.nit:280 */
+      /* ../lib/standard/collection/array.nit:280 */
       if (UNTAG_Bool(REGB2)) {
         REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
@@ -80,31 +80,31 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ./../lib/standard//kernel.nit:232 */
+        /* ../lib/standard/kernel.nit:232 */
         REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
       } else {
-        /* ./../lib/standard//collection//array.nit:280 */
+        /* ../lib/standard/collection/array.nit:280 */
         REGB3 = TAG_Bool(false);
         REGB2 = REGB3;
       }
       if (UNTAG_Bool(REGB2)) {
       } else {
-        nit_abort("Assert %s  failed", "'index'", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
       }
-      /* ./../lib/standard//collection//array.nit:281 */
+      /* ../lib/standard/collection/array.nit:281 */
       fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
       REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ./../lib/standard//collection//array.nit:718 */
+      /* ../lib/standard/collection/array.nit:718 */
       fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-      /* ./../lib/standard//collection//array.nit:281 */
+      /* ../lib/standard/collection/array.nit:281 */
       goto label1;
       label1: while(0);
-      /* ./syntax//scope.nit:51 */
+      /* syntax/scope.nit:51 */
       fra.me.REG[2] = CALL_syntax___scope___ScopeBlock___get_variable(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
-      /* ./syntax//scope.nit:52 */
+      /* syntax/scope.nit:52 */
       REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -121,19 +121,19 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB0)) {
         goto label2;
       }
-      /* ./syntax//scope.nit:53 */
+      /* syntax/scope.nit:53 */
       REGB0 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:237 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
-      /* ./syntax//scope.nit:53 */
+      /* syntax/scope.nit:53 */
       REGB1 = REGB0;
     } else {
-      /* ./syntax//scope.nit:49 */
+      /* syntax/scope.nit:49 */
       goto label3;
     }
   }
   label3: while(0);
-  /* ./syntax//scope.nit:55 */
+  /* syntax/scope.nit:55 */
   fra.me.REG[2] = NIT_NULL;
   goto label2;
   label2: while(0);
@@ -164,10 +164,10 @@ void syntax___scope___ScopeContext___add_variable(val_t p0, val_t p1){
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:62 */
+  /* syntax/scope.nit:62 */
   fra.me.REG[2] = CALL_syntax___syntax_base___Variable___name(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_syntax___scope___ScopeContext_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-  /* ./syntax//scope.nit:63 */
+  /* syntax/scope.nit:63 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -182,7 +182,7 @@ void syntax___scope___ScopeContext___add_variable(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//scope.nit:64 */
+    /* syntax/scope.nit:64 */
     REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____visitor(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -242,7 +242,7 @@ void syntax___scope___ScopeContext___add_variable(val_t p0, val_t p1){
     fra.me.REG[5] = CALL_standard___string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4], fra.me.REG[5]);
   }
-  /* ./syntax//scope.nit:66 */
+  /* syntax/scope.nit:66 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -255,7 +255,7 @@ void syntax___scope___ScopeContext___add_variable(val_t p0, val_t p1){
     nit_abort("Reciever is null", NULL, LOCATE_syntax___scope, 66);
   }
   CALL_syntax___scope___ScopeBlock___add_variable(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1]);
-  /* ./syntax//scope.nit:67 */
+  /* syntax/scope.nit:67 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____variables(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -281,9 +281,9 @@ void syntax___scope___ScopeContext___push(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:73 */
+  /* syntax/scope.nit:73 */
   fra.me.REG[1] = NEW_ScopeBlock_syntax___scope___ScopeBlock___init(fra.me.REG[1]);
-  /* ./syntax//scope.nit:74 */
+  /* syntax/scope.nit:74 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -323,7 +323,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./syntax//scope.nit:81 */
+  /* syntax/scope.nit:81 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -331,7 +331,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
   }
   fra.me.REG[3] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Sequence___push(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
-  /* ./syntax//scope.nit:82 */
+  /* syntax/scope.nit:82 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -346,34 +346,34 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//scope.nit:83 */
+    /* syntax/scope.nit:83 */
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
       nit_abort("Reciever is null", NULL, LOCATE_syntax___scope, 83);
     }
     fra.me.REG[3] = CALL_parser___parser_nodes___ALabel___n_id(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[3] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[3])(fra.me.REG[3]);
-    /* ./syntax//scope.nit:84 */
+    /* syntax/scope.nit:84 */
     REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____labels(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
       nit_abort("Uninitialized attribute %s", "_labels", LOCATE_syntax___scope, 84);
     }
     fra.me.REG[4] = ATTR_syntax___scope___ScopeContext____labels(fra.me.REG[0]);
-    /* ./../lib/standard//collection//array.nit:269 */
+    /* ../lib/standard/collection/array.nit:269 */
     REGB0 = TAG_Int(0);
-    /* ./../lib/standard//collection//array.nit:270 */
+    /* ../lib/standard/collection/array.nit:270 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
     }
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
-    /* ./../lib/standard//collection//array.nit:271 */
+    /* ../lib/standard/collection/array.nit:271 */
     fra.me.REG[5] = ATTR_standard___collection___array___Array____items(fra.me.REG[4]);
-    /* ./../lib/standard//collection//array.nit:272 */
+    /* ../lib/standard/collection/array.nit:272 */
     while(1) {
-      /* ./../lib/standard//collection//array.nit:24 */
+      /* ../lib/standard/collection/array.nit:24 */
       REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -385,18 +385,18 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ./../lib/standard//kernel.nit:232 */
+      /* ../lib/standard/kernel.nit:232 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-      /* ./../lib/standard//collection//array.nit:272 */
+      /* ../lib/standard/collection/array.nit:272 */
       if (UNTAG_Bool(REGB1)) {
-        /* ./../lib/standard//collection//array.nit:273 */
+        /* ../lib/standard/collection/array.nit:273 */
         REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ./../lib/standard//collection//array.nit:718 */
+        /* ../lib/standard/collection/array.nit:718 */
         fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
-        /* ./syntax//scope.nit:85 */
+        /* syntax/scope.nit:85 */
         REGB1 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[6],fra.me.REG[2]));
         if (UNTAG_Bool(REGB1)) {
         } else {
@@ -424,7 +424,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
           REGB1 = REGB2;
         }
         if (UNTAG_Bool(REGB1)) {
-          /* ./syntax//scope.nit:86 */
+          /* syntax/scope.nit:86 */
           fra.me.REG[7] = CALL_syntax___scope___ScopeContext___visitor(fra.me.REG[0])(fra.me.REG[0]);
           REGB1 = TAG_Int(5);
           fra.me.REG[8] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
@@ -467,22 +467,22 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[9]);
           fra.me.REG[8] = CALL_standard___string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
           CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[2], fra.me.REG[8]);
-          /* ./syntax//scope.nit:87 */
+          /* syntax/scope.nit:87 */
           goto label4;
         }
-        /* ./../lib/standard//collection//array.nit:274 */
+        /* ../lib/standard/collection/array.nit:274 */
         REGB1 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:235 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-        /* ./../lib/standard//collection//array.nit:274 */
+        /* ../lib/standard/collection/array.nit:274 */
         REGB0 = REGB1;
       } else {
-        /* ./../lib/standard//collection//array.nit:272 */
+        /* ../lib/standard/collection/array.nit:272 */
         goto label5;
       }
     }
     label5: while(0);
-    /* ./syntax//scope.nit:90 */
+    /* syntax/scope.nit:90 */
     REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____labels(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -490,7 +490,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
     }
     fra.me.REG[0] = ATTR_syntax___scope___ScopeContext____labels(fra.me.REG[0]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-    /* ./syntax//scope.nit:91 */
+    /* syntax/scope.nit:91 */
     ATTR_syntax___scope___EscapableBlock____lab(fra.me.REG[1]) = fra.me.REG[3];
   }
   label4: while(0);
@@ -514,25 +514,25 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:98 */
+  /* syntax/scope.nit:98 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_stack", LOCATE_syntax___scope, 98);
   }
   fra.me.REG[1] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
-  /* ./../lib/standard//collection//array.nit:24 */
+  /* ../lib/standard/collection/array.nit:24 */
   REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ./syntax//scope.nit:98 */
+  /* syntax/scope.nit:98 */
   REGB1 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:237 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* ./syntax//scope.nit:99 */
+  /* syntax/scope.nit:99 */
   while(1) {
     REGB0 = TAG_Int(0);
     REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -540,29 +540,29 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:233 */
+    /* ../lib/standard/kernel.nit:233 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-    /* ./syntax//scope.nit:99 */
+    /* syntax/scope.nit:99 */
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//scope.nit:100 */
+      /* syntax/scope.nit:100 */
       REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
         nit_abort("Uninitialized attribute %s", "_stack", LOCATE_syntax___scope, 100);
       }
       fra.me.REG[1] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
-      /* ./../lib/standard//collection//array.nit:278 */
+      /* ../lib/standard/collection/array.nit:278 */
       REGB0 = REGB1;
-      /* ./../lib/standard//collection//array.nit:280 */
+      /* ../lib/standard/collection/array.nit:280 */
       REGB2 = TAG_Int(0);
       REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB3)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ./../lib/standard//kernel.nit:233 */
+      /* ../lib/standard/kernel.nit:233 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB2));
-      /* ./../lib/standard//collection//array.nit:280 */
+      /* ../lib/standard/collection/array.nit:280 */
       if (UNTAG_Bool(REGB2)) {
         REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
@@ -575,29 +575,29 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ./../lib/standard//kernel.nit:232 */
+        /* ../lib/standard/kernel.nit:232 */
         REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
       } else {
-        /* ./../lib/standard//collection//array.nit:280 */
+        /* ../lib/standard/collection/array.nit:280 */
         REGB3 = TAG_Bool(false);
         REGB2 = REGB3;
       }
       if (UNTAG_Bool(REGB2)) {
       } else {
-        nit_abort("Assert %s  failed", "'index'", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
       }
-      /* ./../lib/standard//collection//array.nit:281 */
+      /* ../lib/standard/collection/array.nit:281 */
       fra.me.REG[1] = ATTR_standard___collection___array___Array____items(fra.me.REG[1]);
       REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ./../lib/standard//collection//array.nit:718 */
+      /* ../lib/standard/collection/array.nit:718 */
       fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)];
-      /* ./../lib/standard//collection//array.nit:281 */
+      /* ../lib/standard/collection/array.nit:281 */
       goto label1;
       label1: while(0);
-      /* ./syntax//scope.nit:101 */
+      /* syntax/scope.nit:101 */
       REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_syntax___scope___EscapableBlock, ID_syntax___scope___EscapableBlock)) /*cast EscapableBlock*/;
       if (UNTAG_Bool(REGB0)) {
         REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_syntax___scope___BreakOnlyEscapableBlock, ID_syntax___scope___BreakOnlyEscapableBlock)) /*cast BreakOnlyEscapableBlock*/;
@@ -609,19 +609,19 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
       if (UNTAG_Bool(REGB0)) {
         goto label2;
       }
-      /* ./syntax//scope.nit:102 */
+      /* syntax/scope.nit:102 */
       REGB0 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:237 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
-      /* ./syntax//scope.nit:102 */
+      /* syntax/scope.nit:102 */
       REGB1 = REGB0;
     } else {
-      /* ./syntax//scope.nit:99 */
+      /* syntax/scope.nit:99 */
       goto label3;
     }
   }
   label3: while(0);
-  /* ./syntax//scope.nit:104 */
+  /* syntax/scope.nit:104 */
   fra.me.REG[1] = NIT_NULL;
   goto label2;
   label2: while(0);
@@ -652,28 +652,28 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:111 */
+  /* syntax/scope.nit:111 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_stack", LOCATE_syntax___scope, 111);
   }
   fra.me.REG[2] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
-  /* ./../lib/standard//collection//array.nit:24 */
+  /* ../lib/standard/collection/array.nit:24 */
   REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-  /* ./syntax//scope.nit:111 */
+  /* syntax/scope.nit:111 */
   REGB1 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:237 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* ./syntax//scope.nit:112 */
+  /* syntax/scope.nit:112 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ALabel___n_id(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./syntax//scope.nit:113 */
+  /* syntax/scope.nit:113 */
   while(1) {
     REGB0 = TAG_Int(0);
     REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -681,29 +681,29 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:233 */
+    /* ../lib/standard/kernel.nit:233 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-    /* ./syntax//scope.nit:113 */
+    /* syntax/scope.nit:113 */
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//scope.nit:114 */
+      /* syntax/scope.nit:114 */
       REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
         nit_abort("Uninitialized attribute %s", "_stack", LOCATE_syntax___scope, 114);
       }
       fra.me.REG[3] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
-      /* ./../lib/standard//collection//array.nit:278 */
+      /* ../lib/standard/collection/array.nit:278 */
       REGB0 = REGB1;
-      /* ./../lib/standard//collection//array.nit:280 */
+      /* ../lib/standard/collection/array.nit:280 */
       REGB2 = TAG_Int(0);
       REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB3)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ./../lib/standard//kernel.nit:233 */
+      /* ../lib/standard/kernel.nit:233 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB2));
-      /* ./../lib/standard//collection//array.nit:280 */
+      /* ../lib/standard/collection/array.nit:280 */
       if (UNTAG_Bool(REGB2)) {
         REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
@@ -716,29 +716,29 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ./../lib/standard//kernel.nit:232 */
+        /* ../lib/standard/kernel.nit:232 */
         REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
       } else {
-        /* ./../lib/standard//collection//array.nit:280 */
+        /* ../lib/standard/collection/array.nit:280 */
         REGB3 = TAG_Bool(false);
         REGB2 = REGB3;
       }
       if (UNTAG_Bool(REGB2)) {
       } else {
-        nit_abort("Assert %s  failed", "'index'", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
       }
-      /* ./../lib/standard//collection//array.nit:281 */
+      /* ../lib/standard/collection/array.nit:281 */
       fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
       REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ./../lib/standard//collection//array.nit:718 */
+      /* ../lib/standard/collection/array.nit:718 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
-      /* ./../lib/standard//collection//array.nit:281 */
+      /* ../lib/standard/collection/array.nit:281 */
       goto label1;
       label1: while(0);
-      /* ./syntax//scope.nit:115 */
+      /* syntax/scope.nit:115 */
       REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[3], COLOR_syntax___scope___EscapableBlock, ID_syntax___scope___EscapableBlock)) /*cast EscapableBlock*/;
       if (UNTAG_Bool(REGB0)) {
         fra.me.REG[4] = CALL_syntax___scope___EscapableBlock___lab(fra.me.REG[3])(fra.me.REG[3]);
@@ -761,19 +761,19 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB0)) {
         goto label2;
       }
-      /* ./syntax//scope.nit:116 */
+      /* syntax/scope.nit:116 */
       REGB0 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:237 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
-      /* ./syntax//scope.nit:116 */
+      /* syntax/scope.nit:116 */
       REGB1 = REGB0;
     } else {
-      /* ./syntax//scope.nit:113 */
+      /* syntax/scope.nit:113 */
       goto label3;
     }
   }
   label3: while(0);
-  /* ./syntax//scope.nit:118 */
+  /* syntax/scope.nit:118 */
   fra.me.REG[0] = CALL_syntax___scope___ScopeContext___visitor(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Int(3);
   fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
@@ -799,7 +799,7 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[2]);
   fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[4]);
-  /* ./syntax//scope.nit:119 */
+  /* syntax/scope.nit:119 */
   fra.me.REG[3] = NIT_NULL;
   goto label2;
   label2: while(0);
@@ -819,7 +819,7 @@ void syntax___scope___ScopeContext___pop(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:125 */
+  /* syntax/scope.nit:125 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -843,7 +843,7 @@ val_t syntax___scope___ScopeContext___visitor(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:128 */
+  /* syntax/scope.nit:128 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeContext____visitor(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -869,7 +869,7 @@ void syntax___scope___ScopeContext___init(val_t p0, val_t p1, int* init_table){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:131 */
+  /* syntax/scope.nit:131 */
   ATTR_syntax___scope___ScopeContext____visitor(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -888,7 +888,7 @@ val_t syntax___scope___ScopeBlock___node(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:140 */
+  /* syntax/scope.nit:140 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___ScopeBlock____node(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -916,9 +916,9 @@ void syntax___scope___ScopeBlock___add_variable(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:149 */
+  /* syntax/scope.nit:149 */
   fra.me.REG[2] = ATTR_syntax___scope___ScopeBlock____dico(fra.me.REG[0]);
-  /* ./syntax//scope.nit:150 */
+  /* syntax/scope.nit:150 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -932,13 +932,13 @@ void syntax___scope___ScopeBlock___add_variable(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//scope.nit:151 */
+    /* syntax/scope.nit:151 */
     fra.me.REG[3] = NEW_HashMap_standard___collection___hash_collection___HashMap___init();
     fra.me.REG[2] = fra.me.REG[3];
-    /* ./syntax//scope.nit:152 */
+    /* syntax/scope.nit:152 */
     ATTR_syntax___scope___ScopeBlock____dico(fra.me.REG[0]) = fra.me.REG[2];
   }
-  /* ./syntax//scope.nit:154 */
+  /* syntax/scope.nit:154 */
   fra.me.REG[0] = CALL_syntax___syntax_base___Variable___name(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -965,9 +965,9 @@ val_t syntax___scope___ScopeBlock___get_variable(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:159 */
+  /* syntax/scope.nit:159 */
   fra.me.REG[0] = ATTR_syntax___scope___ScopeBlock____dico(fra.me.REG[0]);
-  /* ./syntax//scope.nit:160 */
+  /* syntax/scope.nit:160 */
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -984,7 +984,7 @@ val_t syntax___scope___ScopeBlock___get_variable(val_t p0, val_t p1){
     fra.me.REG[2] = NIT_NULL;
     goto label1;
   }
-  /* ./syntax//scope.nit:161 */
+  /* syntax/scope.nit:161 */
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
     nit_abort("Reciever is null", NULL, LOCATE_syntax___scope, 161);
@@ -995,7 +995,7 @@ val_t syntax___scope___ScopeBlock___get_variable(val_t p0, val_t p1){
     fra.me.REG[2] = NIT_NULL;
     goto label1;
   }
-  /* ./syntax//scope.nit:162 */
+  /* syntax/scope.nit:162 */
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
     nit_abort("Reciever is null", NULL, LOCATE_syntax___scope, 162);
@@ -1023,7 +1023,7 @@ void syntax___scope___ScopeBlock___init(val_t p0, val_t p1, int* init_table){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:167 */
+  /* syntax/scope.nit:167 */
   ATTR_syntax___scope___ScopeBlock____node(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
@@ -1041,7 +1041,7 @@ val_t syntax___scope___EscapableBlock___lab(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:178 */
+  /* syntax/scope.nit:178 */
   fra.me.REG[0] = ATTR_syntax___scope___EscapableBlock____lab(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1059,7 +1059,7 @@ val_t syntax___scope___EscapableBlock___is_break_block(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:183 */
+  /* syntax/scope.nit:183 */
   REGB0 = TAG_Bool(false);
   goto label1;
   label1: while(0);
@@ -1078,7 +1078,7 @@ val_t syntax___scope___EscapableBlock___break_list(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:188 */
+  /* syntax/scope.nit:188 */
   fra.me.REG[0] = NIT_NULL;
   goto label1;
   label1: while(0);
@@ -1097,7 +1097,7 @@ val_t syntax___scope___EscapableBlock___continue_stype(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:191 */
+  /* syntax/scope.nit:191 */
   fra.me.REG[0] = NIT_NULL;
   goto label1;
   label1: while(0);
@@ -1117,7 +1117,7 @@ val_t syntax___scope___EscapableBlock___break_flow_contexts(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:193 */
+  /* syntax/scope.nit:193 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___EscapableBlock____break_flow_contexts(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1143,7 +1143,7 @@ void syntax___scope___EscapableBlock___init(val_t p0, val_t p1, int* init_table)
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:198 */
+  /* syntax/scope.nit:198 */
   CALL_syntax___scope___ScopeBlock___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
   stack_frame_head = fra.me.prev;
   init_table[itpos2] = 1;
@@ -1162,7 +1162,7 @@ val_t syntax___scope___BreakOnlyEscapableBlock___is_break_block(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:205 */
+  /* syntax/scope.nit:205 */
   REGB0 = TAG_Bool(true);
   goto label1;
   label1: while(0);
@@ -1185,7 +1185,7 @@ void syntax___scope___BreakOnlyEscapableBlock___init(val_t p0, val_t p1, int* in
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:207 */
+  /* syntax/scope.nit:207 */
   CALL_syntax___scope___EscapableBlock___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
   stack_frame_head = fra.me.prev;
   init_table[itpos3] = 1;
@@ -1204,7 +1204,7 @@ val_t syntax___scope___EscapableClosure___closure(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:213 */
+  /* syntax/scope.nit:213 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___EscapableClosure____closure(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1227,7 +1227,7 @@ val_t syntax___scope___EscapableClosure___is_break_block(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:216 */
+  /* syntax/scope.nit:216 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___EscapableClosure____closure(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1252,7 +1252,7 @@ val_t syntax___scope___EscapableClosure___break_list(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:218 */
+  /* syntax/scope.nit:218 */
   fra.me.REG[0] = ATTR_syntax___scope___EscapableClosure____break_list(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1270,7 +1270,7 @@ val_t syntax___scope___EscapableClosure___continue_stype(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:220 */
+  /* syntax/scope.nit:220 */
   REGB0 = TAG_Bool(ATTR_syntax___scope___EscapableClosure____closure(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1305,13 +1305,13 @@ void syntax___scope___EscapableClosure___init(val_t p0, val_t p1, val_t p2, val_
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
-  /* ./syntax//scope.nit:222 */
+  /* syntax/scope.nit:222 */
   fra.me.REG[4] = fra.me.REG[0];
-  /* ./syntax//scope.nit:224 */
+  /* syntax/scope.nit:224 */
   CALL_syntax___scope___EscapableBlock___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
-  /* ./syntax//scope.nit:225 */
+  /* syntax/scope.nit:225 */
   ATTR_syntax___scope___EscapableClosure____closure(fra.me.REG[4]) = fra.me.REG[2];
-  /* ./syntax//scope.nit:226 */
+  /* syntax/scope.nit:226 */
   ATTR_syntax___scope___EscapableClosure____break_list(fra.me.REG[4]) = fra.me.REG[3];
   stack_frame_head = fra.me.prev;
   init_table[itpos4] = 1;
@@ -1329,7 +1329,7 @@ val_t syntax___scope___AEscapeExpr___escapable(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:234 */
+  /* syntax/scope.nit:234 */
   fra.me.REG[0] = ATTR_syntax___scope___AEscapeExpr____escapable(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1344,7 +1344,7 @@ val_t syntax___scope___AEscapeExpr___kwname(val_t p0){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./syntax//scope.nit:237 */
+  /* syntax/scope.nit:237 */
   nit_abort("Deferred method called", NULL, LOCATE_syntax___scope, 237);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
@@ -1370,9 +1370,9 @@ val_t syntax___scope___AEscapeExpr___compute_escapable_block(val_t p0, val_t p1)
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./syntax//scope.nit:244 */
+  /* syntax/scope.nit:244 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ALabelable___n_label(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./syntax//scope.nit:245 */
+  /* syntax/scope.nit:245 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1387,13 +1387,13 @@ val_t syntax___scope___AEscapeExpr___compute_escapable_block(val_t p0, val_t p1)
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./syntax//scope.nit:246 */
+    /* syntax/scope.nit:246 */
     fra.me.REG[2] = CALL_syntax___scope___ScopeContext___get_by_label(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   } else {
-    /* ./syntax//scope.nit:248 */
+    /* syntax/scope.nit:248 */
     fra.me.REG[3] = CALL_syntax___scope___ScopeContext___head(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[2] = fra.me.REG[3];
-    /* ./syntax//scope.nit:249 */
+    /* syntax/scope.nit:249 */
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -1407,7 +1407,7 @@ val_t syntax___scope___AEscapeExpr___compute_escapable_block(val_t p0, val_t p1)
       }
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./syntax//scope.nit:250 */
+      /* syntax/scope.nit:250 */
       fra.me.REG[1] = CALL_syntax___scope___ScopeContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
       REGB0 = TAG_Int(3);
       fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
@@ -1435,9 +1435,9 @@ val_t syntax___scope___AEscapeExpr___compute_escapable_block(val_t p0, val_t p1)
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
     }
   }
-  /* ./syntax//scope.nit:253 */
+  /* syntax/scope.nit:253 */
   ATTR_syntax___scope___AEscapeExpr____escapable(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./syntax//scope.nit:254 */
+  /* syntax/scope.nit:254 */
   goto label3;
   label3: while(0);
   stack_frame_head = fra.me.prev;
@@ -1457,7 +1457,7 @@ val_t syntax___scope___AContinueExpr___kwname(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:260 */
+  /* syntax/scope.nit:260 */
   if (!once_value_1) {
     fra.me.REG[0] = BOX_NativeString("continue");
     REGB0 = TAG_Int(8);
@@ -1485,7 +1485,7 @@ val_t syntax___scope___ABreakExpr___kwname(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./syntax//scope.nit:265 */
+  /* syntax/scope.nit:265 */
   if (!once_value_1) {
     fra.me.REG[0] = BOX_NativeString("break");
     REGB0 = TAG_Int(5);

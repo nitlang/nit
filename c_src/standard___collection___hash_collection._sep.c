@@ -12,7 +12,7 @@ val_t standard___collection___hash_collection___HashCollection___first_item(val_
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:27 */
+  /* ../lib/standard/collection/hash_collection.nit:27 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -34,7 +34,7 @@ val_t standard___collection___hash_collection___HashCollection___index_at(val_t 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:39 */
+  /* ../lib/standard/collection/hash_collection.nit:39 */
   REGB0 = CALL_standard___hash___Object___hash(fra.me.REG[1])(fra.me.REG[1]);
   REGB1 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -42,25 +42,25 @@ val_t standard___collection___hash_collection___HashCollection___index_at(val_t 
     nit_abort("Uninitialized attribute %s", "_capacity", LOCATE_standard___collection___hash_collection, 39);
   }
   REGB1 = ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0]);
-  /* ./../lib/standard//kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:240 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)%UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:40 */
+  /* ../lib/standard/collection/hash_collection.nit:40 */
   REGB0 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:232 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
-  /* ./../lib/standard//collection//hash_collection.nit:40 */
+  /* ../lib/standard/collection/hash_collection.nit:40 */
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:236 */
     REGB0 = TAG_Int(-UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//hash_collection.nit:40 */
+    /* ../lib/standard/collection/hash_collection.nit:40 */
     REGB1 = REGB0;
   }
-  /* ./../lib/standard//collection//hash_collection.nit:41 */
+  /* ../lib/standard/collection/hash_collection.nit:41 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -83,21 +83,21 @@ val_t standard___collection___hash_collection___HashCollection___node_at(val_t p
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:48 */
+  /* ../lib/standard/collection/hash_collection.nit:48 */
   fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[1],fra.me.REG[2]));
   if (UNTAG_Bool(REGB0)) {
     fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashCollection____last_accessed_node(fra.me.REG[0]);
     goto label1;
   }
-  /* ./../lib/standard//collection//hash_collection.nit:50 */
+  /* ../lib/standard/collection/hash_collection.nit:50 */
   REGB0 = CALL_standard___collection___hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   fra.me.REG[3] = CALL_standard___collection___hash_collection___HashCollection___node_at_idx(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:51 */
+  /* ../lib/standard/collection/hash_collection.nit:51 */
   ATTR_standard___collection___hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//hash_collection.nit:52 */
+  /* ../lib/standard/collection/hash_collection.nit:52 */
   ATTR_standard___collection___hash_collection___HashCollection____last_accessed_node(fra.me.REG[0]) = fra.me.REG[3];
-  /* ./../lib/standard//collection//hash_collection.nit:53 */
+  /* ../lib/standard/collection/hash_collection.nit:53 */
   fra.me.REG[2] = fra.me.REG[3];
   goto label1;
   label1: while(0);
@@ -123,15 +123,15 @@ val_t standard___collection___hash_collection___HashCollection___node_at_idx(val
   fra.me.REG[0] = p0;
   REGB0 = p1;
   fra.me.REG[1] = p2;
-  /* ./../lib/standard//collection//hash_collection.nit:59 */
+  /* ../lib/standard/collection/hash_collection.nit:59 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashCollection____array(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 59);
   }
-  /* ./../lib/standard//collection//array.nit:718 */
+  /* ../lib/standard/collection/array.nit:718 */
   fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
-  /* ./../lib/standard//collection//hash_collection.nit:60 */
+  /* ../lib/standard/collection/hash_collection.nit:60 */
   while(1) {
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -147,14 +147,14 @@ val_t standard___collection___hash_collection___HashCollection___node_at_idx(val
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//hash_collection.nit:61 */
+      /* ../lib/standard/collection/hash_collection.nit:61 */
       REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
         nit_abort("Uninitialized attribute %s", "_key", LOCATE_standard___collection___hash_collection, 61);
       }
       fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[0]);
-      /* ./../lib/standard//collection//hash_collection.nit:62 */
+      /* ../lib/standard/collection/hash_collection.nit:62 */
       REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[1]));
       if (UNTAG_Bool(REGB0)) {
         REGB0 = TAG_Bool(true);
@@ -168,19 +168,19 @@ val_t standard___collection___hash_collection___HashCollection___node_at_idx(val
         REGB0 = REGB1;
       }
       if (UNTAG_Bool(REGB0)) {
-        /* ./../lib/standard//collection//hash_collection.nit:63 */
+        /* ../lib/standard/collection/hash_collection.nit:63 */
         goto label1;
       }
-      /* ./../lib/standard//collection//hash_collection.nit:65 */
+      /* ../lib/standard/collection/hash_collection.nit:65 */
       fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashNode____next_in_bucklet(fra.me.REG[0]);
       fra.me.REG[0] = fra.me.REG[2];
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:60 */
+      /* ../lib/standard/collection/hash_collection.nit:60 */
       goto label1;
     }
   }
   label1: while(0);
-  /* ./../lib/standard//collection//hash_collection.nit:67 */
+  /* ../lib/standard/collection/hash_collection.nit:67 */
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
@@ -206,7 +206,7 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
   fra.me.REG[0] = p0;
   REGB0 = p1;
   fra.me.REG[1] = p2;
-  /* ./../lib/standard//collection//hash_collection.nit:74 */
+  /* ../lib/standard/collection/hash_collection.nit:74 */
   fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -221,10 +221,10 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
     }
   }
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//collection//hash_collection.nit:75 */
+    /* ../lib/standard/collection/hash_collection.nit:75 */
     ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]) = fra.me.REG[1];
   } else {
-    /* ./../lib/standard//collection//hash_collection.nit:77 */
+    /* ../lib/standard/collection/hash_collection.nit:77 */
     fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashCollection____last_item(fra.me.REG[0]);
     REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
@@ -232,32 +232,32 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
     }
     ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[2]) = fra.me.REG[1];
   }
-  /* ./../lib/standard//collection//hash_collection.nit:79 */
+  /* ../lib/standard/collection/hash_collection.nit:79 */
   fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashCollection____last_item(fra.me.REG[0]);
   ATTR_standard___collection___hash_collection___HashNode____prev_item(fra.me.REG[1]) = fra.me.REG[2];
-  /* ./../lib/standard//collection//hash_collection.nit:80 */
+  /* ../lib/standard/collection/hash_collection.nit:80 */
   ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[1]) = NIT_NULL;
-  /* ./../lib/standard//collection//hash_collection.nit:81 */
+  /* ../lib/standard/collection/hash_collection.nit:81 */
   ATTR_standard___collection___hash_collection___HashCollection____last_item(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//hash_collection.nit:84 */
+  /* ../lib/standard/collection/hash_collection.nit:84 */
   fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashCollection____array(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 84);
   }
-  /* ./../lib/standard//collection//array.nit:718 */
+  /* ../lib/standard/collection/array.nit:718 */
   fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-  /* ./../lib/standard//collection//hash_collection.nit:85 */
+  /* ../lib/standard/collection/hash_collection.nit:85 */
   fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashCollection____array(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 85);
   }
-  /* ./../lib/standard//collection//array.nit:719 */
+  /* ../lib/standard/collection/array.nit:719 */
   ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)]=fra.me.REG[1];
-  /* ./../lib/standard//collection//hash_collection.nit:86 */
+  /* ../lib/standard/collection/hash_collection.nit:86 */
   ATTR_standard___collection___hash_collection___HashNode____next_in_bucklet(fra.me.REG[1]) = fra.me.REG[2];
-  /* ./../lib/standard//collection//hash_collection.nit:87 */
+  /* ../lib/standard/collection/hash_collection.nit:87 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -274,7 +274,7 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
   if (UNTAG_Bool(REGB0)) {
     ATTR_standard___collection___hash_collection___HashNode____prev_in_bucklet(fra.me.REG[2]) = fra.me.REG[1];
   }
-  /* ./../lib/standard//collection//hash_collection.nit:89 */
+  /* ../lib/standard/collection/hash_collection.nit:89 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -282,36 +282,36 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
   }
   fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[1]);
   ATTR_standard___collection___hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = fra.me.REG[2];
-  /* ./../lib/standard//collection//hash_collection.nit:90 */
+  /* ../lib/standard/collection/hash_collection.nit:90 */
   ATTR_standard___collection___hash_collection___HashCollection____last_accessed_node(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//hash_collection.nit:93 */
+  /* ../lib/standard/collection/hash_collection.nit:93 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___hash_collection, 93);
   }
   REGB0 = ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:94 */
+  /* ../lib/standard/collection/hash_collection.nit:94 */
   REGB1 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:235 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:94 */
+  /* ../lib/standard/collection/hash_collection.nit:94 */
   ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]) = REGB1;
-  /* ./../lib/standard//collection//hash_collection.nit:95 */
+  /* ../lib/standard/collection/hash_collection.nit:95 */
   REGB1 = TAG_Int(5);
-  /* ./../lib/standard//kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:235 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:95 */
+  /* ../lib/standard/collection/hash_collection.nit:95 */
   REGB2 = TAG_Int(3);
-  /* ./../lib/standard//kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:238 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)*UNTAG_Int(REGB2));
-  /* ./../lib/standard//collection//hash_collection.nit:95 */
+  /* ../lib/standard/collection/hash_collection.nit:95 */
   REGB1 = TAG_Int(2);
-  /* ./../lib/standard//kernel.nit:239 */
+  /* ../lib/standard/kernel.nit:239 */
   REGB1 = TAG_Int(UNTAG_Int(REGB2)/UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:95 */
+  /* ../lib/standard/collection/hash_collection.nit:95 */
   REGB0 = REGB1;
-  /* ./../lib/standard//collection//hash_collection.nit:96 */
+  /* ../lib/standard/collection/hash_collection.nit:96 */
   REGB1 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -323,15 +323,15 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:233 */
+  /* ../lib/standard/kernel.nit:233 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:96 */
+  /* ../lib/standard/collection/hash_collection.nit:96 */
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//collection//hash_collection.nit:97 */
+    /* ../lib/standard/collection/hash_collection.nit:97 */
     REGB1 = TAG_Int(2);
-    /* ./../lib/standard//kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:238 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)*UNTAG_Int(REGB1));
-    /* ./../lib/standard//collection//hash_collection.nit:97 */
+    /* ../lib/standard/collection/hash_collection.nit:97 */
     CALL_standard___collection___hash_collection___HashCollection___enlarge(fra.me.REG[0])(fra.me.REG[0], REGB1);
   }
   stack_frame_head = fra.me.prev;
@@ -357,11 +357,11 @@ void standard___collection___hash_collection___HashCollection___remove_node(val_
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:104 */
+  /* ../lib/standard/collection/hash_collection.nit:104 */
   REGB0 = CALL_standard___collection___hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:105 */
+  /* ../lib/standard/collection/hash_collection.nit:105 */
   fra.me.REG[1] = CALL_standard___collection___hash_collection___HashCollection___node_at_idx(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:106 */
+  /* ../lib/standard/collection/hash_collection.nit:106 */
   REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -377,11 +377,11 @@ void standard___collection___hash_collection___HashCollection___remove_node(val_
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* ./../lib/standard//collection//hash_collection.nit:109 */
+  /* ../lib/standard/collection/hash_collection.nit:109 */
   fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashNode____prev_item(fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:110 */
+  /* ../lib/standard/collection/hash_collection.nit:110 */
   fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:111 */
+  /* ../lib/standard/collection/hash_collection.nit:111 */
   REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -396,13 +396,13 @@ void standard___collection___hash_collection___HashCollection___remove_node(val_
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//collection//hash_collection.nit:112 */
+    /* ../lib/standard/collection/hash_collection.nit:112 */
     ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[2]) = fra.me.REG[3];
   } else {
-    /* ./../lib/standard//collection//hash_collection.nit:114 */
+    /* ../lib/standard/collection/hash_collection.nit:114 */
     ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]) = fra.me.REG[3];
   }
-  /* ./../lib/standard//collection//hash_collection.nit:116 */
+  /* ../lib/standard/collection/hash_collection.nit:116 */
   REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -417,26 +417,26 @@ void standard___collection___hash_collection___HashCollection___remove_node(val_
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//collection//hash_collection.nit:117 */
+    /* ../lib/standard/collection/hash_collection.nit:117 */
     ATTR_standard___collection___hash_collection___HashNode____prev_item(fra.me.REG[3]) = fra.me.REG[2];
   } else {
-    /* ./../lib/standard//collection//hash_collection.nit:119 */
+    /* ../lib/standard/collection/hash_collection.nit:119 */
     ATTR_standard___collection___hash_collection___HashCollection____last_item(fra.me.REG[0]) = fra.me.REG[2];
   }
-  /* ./../lib/standard//collection//hash_collection.nit:123 */
+  /* ../lib/standard/collection/hash_collection.nit:123 */
   REGB1 = ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]);
   REGB2 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:237 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-  /* ./../lib/standard//collection//hash_collection.nit:123 */
+  /* ../lib/standard/collection/hash_collection.nit:123 */
   ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]) = REGB2;
-  /* ./../lib/standard//collection//hash_collection.nit:124 */
+  /* ../lib/standard/collection/hash_collection.nit:124 */
   fra.me.REG[4] = ATTR_standard___collection___hash_collection___HashNode____prev_in_bucklet(fra.me.REG[1]);
   fra.me.REG[2] = fra.me.REG[4];
-  /* ./../lib/standard//collection//hash_collection.nit:125 */
+  /* ../lib/standard/collection/hash_collection.nit:125 */
   fra.me.REG[1] = ATTR_standard___collection___hash_collection___HashNode____next_in_bucklet(fra.me.REG[1]);
   fra.me.REG[3] = fra.me.REG[1];
-  /* ./../lib/standard//collection//hash_collection.nit:126 */
+  /* ../lib/standard/collection/hash_collection.nit:126 */
   REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
@@ -451,19 +451,19 @@ void standard___collection___hash_collection___HashCollection___remove_node(val_
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
-    /* ./../lib/standard//collection//hash_collection.nit:127 */
+    /* ../lib/standard/collection/hash_collection.nit:127 */
     ATTR_standard___collection___hash_collection___HashNode____next_in_bucklet(fra.me.REG[2]) = fra.me.REG[3];
   } else {
-    /* ./../lib/standard//collection//hash_collection.nit:129 */
+    /* ../lib/standard/collection/hash_collection.nit:129 */
     fra.me.REG[1] = ATTR_standard___collection___hash_collection___HashCollection____array(fra.me.REG[0]);
     REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
       nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 129);
     }
-    /* ./../lib/standard//collection//array.nit:719 */
+    /* ../lib/standard/collection/array.nit:719 */
     ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)]=fra.me.REG[3];
   }
-  /* ./../lib/standard//collection//hash_collection.nit:131 */
+  /* ../lib/standard/collection/hash_collection.nit:131 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -478,10 +478,10 @@ void standard___collection___hash_collection___HashCollection___remove_node(val_
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//hash_collection.nit:132 */
+    /* ../lib/standard/collection/hash_collection.nit:132 */
     ATTR_standard___collection___hash_collection___HashNode____prev_in_bucklet(fra.me.REG[3]) = fra.me.REG[2];
   }
-  /* ./../lib/standard//collection//hash_collection.nit:135 */
+  /* ../lib/standard/collection/hash_collection.nit:135 */
   ATTR_standard___collection___hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = NIT_NULL;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -503,7 +503,7 @@ void standard___collection___hash_collection___HashCollection___raz(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:141 */
+  /* ../lib/standard/collection/hash_collection.nit:141 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -511,9 +511,9 @@ void standard___collection___hash_collection___HashCollection___raz(val_t p0){
   }
   REGB0 = ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0]);
   REGB1 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:237 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:142 */
+  /* ../lib/standard/collection/hash_collection.nit:142 */
   while(1) {
     REGB0 = TAG_Int(0);
     REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -521,38 +521,38 @@ void standard___collection___hash_collection___HashCollection___raz(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:233 */
+    /* ../lib/standard/kernel.nit:233 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-    /* ./../lib/standard//collection//hash_collection.nit:142 */
+    /* ../lib/standard/collection/hash_collection.nit:142 */
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//hash_collection.nit:143 */
+      /* ../lib/standard/collection/hash_collection.nit:143 */
       fra.me.REG[1] = ATTR_standard___collection___hash_collection___HashCollection____array(fra.me.REG[0]);
       REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 143);
       }
-      /* ./../lib/standard//collection//array.nit:719 */
+      /* ../lib/standard/collection/array.nit:719 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)]=NIT_NULL;
-      /* ./../lib/standard//collection//hash_collection.nit:144 */
+      /* ../lib/standard/collection/hash_collection.nit:144 */
       REGB0 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:237 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
-      /* ./../lib/standard//collection//hash_collection.nit:144 */
+      /* ../lib/standard/collection/hash_collection.nit:144 */
       REGB1 = REGB0;
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:142 */
+      /* ../lib/standard/collection/hash_collection.nit:142 */
       goto label1;
     }
   }
   label1: while(0);
-  /* ./../lib/standard//collection//hash_collection.nit:146 */
+  /* ../lib/standard/collection/hash_collection.nit:146 */
   REGB1 = TAG_Int(0);
   ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]) = REGB1;
-  /* ./../lib/standard//collection//hash_collection.nit:147 */
+  /* ../lib/standard/collection/hash_collection.nit:147 */
   ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]) = NIT_NULL;
-  /* ./../lib/standard//collection//hash_collection.nit:148 */
+  /* ../lib/standard/collection/hash_collection.nit:148 */
   ATTR_standard___collection___hash_collection___HashCollection____last_item(fra.me.REG[0]) = NIT_NULL;
-  /* ./../lib/standard//collection//hash_collection.nit:149 */
+  /* ../lib/standard/collection/hash_collection.nit:149 */
   ATTR_standard___collection___hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = NIT_NULL;
   stack_frame_head = fra.me.prev;
   return;
@@ -577,14 +577,14 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:155 */
+  /* ../lib/standard/collection/hash_collection.nit:155 */
   REGB1 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_capacity", LOCATE_standard___collection___hash_collection, 155);
   }
   REGB1 = ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:157 */
+  /* ../lib/standard/collection/hash_collection.nit:157 */
   REGB2 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
@@ -592,16 +592,16 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
   }
   REGB2 = ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]);
   REGB3 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:235 */
   REGB3 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB3));
   REGB2 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:232 */
   REGB3 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB3));
-  /* ./../lib/standard//collection//hash_collection.nit:157 */
+  /* ../lib/standard/collection/hash_collection.nit:157 */
   if (UNTAG_Bool(REGB3)) {
     REGB3 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB3)) {
@@ -610,12 +610,12 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
     }
     REGB3 = ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]);
     REGB2 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:235 */
     REGB2 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB2));
-    /* ./../lib/standard//collection//hash_collection.nit:157 */
+    /* ../lib/standard/collection/hash_collection.nit:157 */
     REGB0 = REGB2;
   }
-  /* ./../lib/standard//collection//hash_collection.nit:158 */
+  /* ../lib/standard/collection/hash_collection.nit:158 */
   REGB2 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
@@ -627,25 +627,25 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:231 */
+  /* ../lib/standard/kernel.nit:231 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB2));
-  /* ./../lib/standard//collection//hash_collection.nit:158 */
+  /* ../lib/standard/collection/hash_collection.nit:158 */
   if (UNTAG_Bool(REGB2)) {
     goto label1;
   }
-  /* ./../lib/standard//collection//hash_collection.nit:159 */
+  /* ../lib/standard/collection/hash_collection.nit:159 */
   ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0]) = REGB0;
-  /* ./../lib/standard//collection//hash_collection.nit:160 */
+  /* ../lib/standard/collection/hash_collection.nit:160 */
   ATTR_standard___collection___hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = NIT_NULL;
-  /* ./../lib/standard//collection//array.nit:712 */
+  /* ../lib/standard/collection/array.nit:712 */
   fra.me.REG[1] = NEW_NativeArray(UNTAG_Int(REGB0), sizeof(val_t));
-  /* ./../lib/standard//collection//hash_collection.nit:164 */
+  /* ../lib/standard/collection/hash_collection.nit:164 */
   ATTR_standard___collection___hash_collection___HashCollection____array(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//hash_collection.nit:167 */
+  /* ../lib/standard/collection/hash_collection.nit:167 */
   REGB2 = TAG_Int(1);
-  /* ./../lib/standard//kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:237 */
   REGB2 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB2));
-  /* ./../lib/standard//collection//hash_collection.nit:168 */
+  /* ../lib/standard/collection/hash_collection.nit:168 */
   while(1) {
     REGB0 = TAG_Int(0);
     REGB3 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
@@ -653,25 +653,25 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:233 */
+    /* ../lib/standard/kernel.nit:233 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB0));
-    /* ./../lib/standard//collection//hash_collection.nit:168 */
+    /* ../lib/standard/collection/hash_collection.nit:168 */
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//array.nit:719 */
+      /* ../lib/standard/collection/array.nit:719 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB2)]=NIT_NULL;
-      /* ./../lib/standard//collection//hash_collection.nit:170 */
+      /* ../lib/standard/collection/hash_collection.nit:170 */
       REGB0 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:237 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB0 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB0));
-      /* ./../lib/standard//collection//hash_collection.nit:170 */
+      /* ../lib/standard/collection/hash_collection.nit:170 */
       REGB2 = REGB0;
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:168 */
+      /* ../lib/standard/collection/hash_collection.nit:168 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ./../lib/standard//collection//hash_collection.nit:173 */
+  /* ../lib/standard/collection/hash_collection.nit:173 */
   REGB2 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
@@ -683,15 +683,15 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:231 */
+  /* ../lib/standard/kernel.nit:231 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB2)<=UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:173 */
+  /* ../lib/standard/collection/hash_collection.nit:173 */
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* ./../lib/standard//collection//hash_collection.nit:176 */
+  /* ../lib/standard/collection/hash_collection.nit:176 */
   fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:177 */
+  /* ../lib/standard/collection/hash_collection.nit:177 */
   while(1) {
     REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
@@ -707,7 +707,7 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
     }
     REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//collection//hash_collection.nit:178 */
+      /* ../lib/standard/collection/hash_collection.nit:178 */
       REGB1 = TAG_Bool(ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2])!=NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -715,13 +715,13 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
       }
       fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2]);
       REGB1 = CALL_standard___collection___hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      /* ./../lib/standard//collection//array.nit:718 */
+      /* ../lib/standard/collection/array.nit:718 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
-      /* ./../lib/standard//collection//array.nit:719 */
+      /* ../lib/standard/collection/array.nit:719 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)]=fra.me.REG[2];
-      /* ./../lib/standard//collection//hash_collection.nit:182 */
+      /* ../lib/standard/collection/hash_collection.nit:182 */
       ATTR_standard___collection___hash_collection___HashNode____next_in_bucklet(fra.me.REG[2]) = fra.me.REG[3];
-      /* ./../lib/standard//collection//hash_collection.nit:183 */
+      /* ../lib/standard/collection/hash_collection.nit:183 */
       REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
       } else {
@@ -738,11 +738,11 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
       if (UNTAG_Bool(REGB1)) {
         ATTR_standard___collection___hash_collection___HashNode____prev_in_bucklet(fra.me.REG[3]) = fra.me.REG[2];
       }
-      /* ./../lib/standard//collection//hash_collection.nit:184 */
+      /* ../lib/standard/collection/hash_collection.nit:184 */
       fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[2]);
       fra.me.REG[2] = fra.me.REG[3];
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:177 */
+      /* ../lib/standard/collection/hash_collection.nit:177 */
       goto label3;
     }
   }
@@ -779,7 +779,7 @@ val_t standard___collection___hash_collection___HashNode___next_item(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:192 */
+  /* ../lib/standard/collection/hash_collection.nit:192 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -798,7 +798,7 @@ void standard___collection___hash_collection___HashNode___next_item__eq(val_t p0
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:192 */
+  /* ../lib/standard/collection/hash_collection.nit:192 */
   ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -815,7 +815,7 @@ val_t standard___collection___hash_collection___HashNode___prev_item(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:193 */
+  /* ../lib/standard/collection/hash_collection.nit:193 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashNode____prev_item(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -834,7 +834,7 @@ void standard___collection___hash_collection___HashNode___prev_item__eq(val_t p0
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:193 */
+  /* ../lib/standard/collection/hash_collection.nit:193 */
   ATTR_standard___collection___hash_collection___HashNode____prev_item(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -855,7 +855,7 @@ void standard___collection___hash_collection___HashNode___init(val_t p0, val_t p
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:198 */
+  /* ../lib/standard/collection/hash_collection.nit:198 */
   ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
@@ -877,9 +877,9 @@ val_t standard___collection___hash_collection___HashMap_____bra(val_t p0, val_t 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:210 */
+  /* ../lib/standard/collection/hash_collection.nit:210 */
   fra.me.REG[1] = CALL_standard___collection___hash_collection___HashCollection___node_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:211 */
+  /* ../lib/standard/collection/hash_collection.nit:211 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -893,10 +893,10 @@ val_t standard___collection___hash_collection___HashMap_____bra(val_t p0, val_t 
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//collection//hash_collection.nit:212 */
+    /* ../lib/standard/collection/hash_collection.nit:212 */
     nit_abort("Aborted", NULL, LOCATE_standard___collection___hash_collection, 212);
   } else {
-    /* ./../lib/standard//collection//hash_collection.nit:214 */
+    /* ../lib/standard/collection/hash_collection.nit:214 */
     fra.me.REG[1] = ATTR_standard___collection___hash_collection___HashMapNode____value(fra.me.REG[1]);
     goto label1;
   }
@@ -916,7 +916,7 @@ val_t standard___collection___hash_collection___HashMap___iterator(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:218 */
+  /* ../lib/standard/collection/hash_collection.nit:218 */
   fra.me.REG[0] = NEW_HashMapIterator_standard___collection___hash_collection___HashMapIterator___init(fra.me.REG[0]);
   goto label1;
   label1: while(0);
@@ -943,9 +943,9 @@ void standard___collection___hash_collection___HashMap___iterate(val_t p0, struc
   fra.me.closure_funs = CREG;
   fra.me.REG[0] = p0;
   CREG[0] = clos_fun0;
-  /* ./../lib/standard//collection//hash_collection.nit:223 */
+  /* ../lib/standard/collection/hash_collection.nit:223 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:224 */
+  /* ../lib/standard/collection/hash_collection.nit:224 */
   while(1) {
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -961,7 +961,7 @@ void standard___collection___hash_collection___HashMap___iterate(val_t p0, struc
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//hash_collection.nit:225 */
+      /* ../lib/standard/collection/hash_collection.nit:225 */
       REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[0])!=NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -973,11 +973,11 @@ void standard___collection___hash_collection___HashMap___iterate(val_t p0, struc
       if (closctx_param->has_broke) {
         goto label1;
       }
-      /* ./../lib/standard//collection//hash_collection.nit:226 */
+      /* ../lib/standard/collection/hash_collection.nit:226 */
       fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[0]);
       fra.me.REG[0] = fra.me.REG[2];
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:224 */
+      /* ../lib/standard/collection/hash_collection.nit:224 */
       goto label2;
     }
   }
@@ -999,7 +999,7 @@ val_t standard___collection___hash_collection___HashMap___length(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:230 */
+  /* ../lib/standard/collection/hash_collection.nit:230 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1026,7 +1026,7 @@ val_t standard___collection___hash_collection___HashMap___is_empty(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:232 */
+  /* ../lib/standard/collection/hash_collection.nit:232 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1037,9 +1037,9 @@ val_t standard___collection___hash_collection___HashMap___is_empty(val_t p0){
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:227 */
+    /* ../lib/standard/kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./../lib/standard//collection//hash_collection.nit:232 */
+    /* ../lib/standard/collection/hash_collection.nit:232 */
     REGB2 = REGB1;
   }
   goto label1;
@@ -1067,11 +1067,11 @@ void standard___collection___hash_collection___HashMap_____braeq(val_t p0, val_t
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./../lib/standard//collection//hash_collection.nit:236 */
+  /* ../lib/standard/collection/hash_collection.nit:236 */
   REGB0 = CALL_standard___collection___hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:237 */
+  /* ../lib/standard/collection/hash_collection.nit:237 */
   fra.me.REG[3] = CALL_standard___collection___hash_collection___HashCollection___node_at_idx(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:238 */
+  /* ../lib/standard/collection/hash_collection.nit:238 */
   REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -1086,12 +1086,12 @@ void standard___collection___hash_collection___HashMap_____braeq(val_t p0, val_t
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//collection//hash_collection.nit:239 */
+    /* ../lib/standard/collection/hash_collection.nit:239 */
     ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[3]) = fra.me.REG[1];
-    /* ./../lib/standard//collection//hash_collection.nit:240 */
+    /* ../lib/standard/collection/hash_collection.nit:240 */
     ATTR_standard___collection___hash_collection___HashMapNode____value(fra.me.REG[3]) = fra.me.REG[2];
   } else {
-    /* ./../lib/standard//collection//hash_collection.nit:242 */
+    /* ../lib/standard/collection/hash_collection.nit:242 */
     fra.me.REG[2] = NEW_HashMapNode_standard___collection___hash_collection___HashMapNode___init(fra.me.REG[1], fra.me.REG[2]);
     CALL_standard___collection___hash_collection___HashCollection___store(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[2]);
   }
@@ -1110,7 +1110,7 @@ void standard___collection___hash_collection___HashMap___clear(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:246 */
+  /* ../lib/standard/collection/hash_collection.nit:246 */
   CALL_standard___collection___hash_collection___HashCollection___raz(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
@@ -1131,16 +1131,16 @@ void standard___collection___hash_collection___HashMap___init(val_t p0, int* ini
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:248 */
+  /* ../lib/standard/collection/hash_collection.nit:248 */
   fra.me.REG[1] = fra.me.REG[0];
   CALL_standard___collection___hash_collection___HashCollection___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./../lib/standard//collection//hash_collection.nit:250 */
+  /* ../lib/standard/collection/hash_collection.nit:250 */
   REGB0 = TAG_Int(0);
   ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[1]) = REGB0;
-  /* ./../lib/standard//collection//hash_collection.nit:251 */
+  /* ../lib/standard/collection/hash_collection.nit:251 */
   REGB0 = TAG_Int(0);
   ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[1]) = REGB0;
-  /* ./../lib/standard//collection//hash_collection.nit:252 */
+  /* ../lib/standard/collection/hash_collection.nit:252 */
   REGB0 = TAG_Int(0);
   CALL_standard___collection___hash_collection___HashCollection___enlarge(fra.me.REG[1])(fra.me.REG[1], REGB0);
   stack_frame_head = fra.me.prev;
@@ -1160,7 +1160,7 @@ val_t standard___collection___hash_collection___HashMap___keys(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:255 */
+  /* ../lib/standard/collection/hash_collection.nit:255 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashMap_____atkeys(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1184,7 +1184,7 @@ void standard___collection___hash_collection___HashMap___keys__eq(val_t p0, val_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:255 */
+  /* ../lib/standard/collection/hash_collection.nit:255 */
   ATTR_standard___collection___hash_collection___HashMap_____atkeys(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1202,7 +1202,7 @@ val_t standard___collection___hash_collection___HashMap___values(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:256 */
+  /* ../lib/standard/collection/hash_collection.nit:256 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashMap_____atvalues(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1226,7 +1226,7 @@ void standard___collection___hash_collection___HashMap___values__eq(val_t p0, va
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:256 */
+  /* ../lib/standard/collection/hash_collection.nit:256 */
   ATTR_standard___collection___hash_collection___HashMap_____atvalues(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1244,7 +1244,7 @@ val_t standard___collection___hash_collection___HashMapKeys___map(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:262 */
+  /* ../lib/standard/collection/hash_collection.nit:262 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashMapKeys_____atmap(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1268,7 +1268,7 @@ void standard___collection___hash_collection___HashMapKeys___map__eq(val_t p0, v
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:262 */
+  /* ../lib/standard/collection/hash_collection.nit:262 */
   ATTR_standard___collection___hash_collection___HashMapKeys_____atmap(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1289,7 +1289,7 @@ val_t standard___collection___hash_collection___HashMapKeys___count(val_t p0, va
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:265 */
+  /* ../lib/standard/collection/hash_collection.nit:265 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Int(1);
@@ -1316,7 +1316,7 @@ val_t standard___collection___hash_collection___HashMapKeys___first(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:266 */
+  /* ../lib/standard/collection/hash_collection.nit:266 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapKeys___map(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
@@ -1350,7 +1350,7 @@ val_t standard___collection___hash_collection___HashMapKeys___has(val_t p0, val_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:267 */
+  /* ../lib/standard/collection/hash_collection.nit:267 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapKeys___map(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_standard___collection___hash_collection___HashCollection___node_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -1388,7 +1388,7 @@ val_t standard___collection___hash_collection___HashMapKeys___has_only(val_t p0,
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:268 */
+  /* ../lib/standard/collection/hash_collection.nit:268 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
     REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
@@ -1396,9 +1396,9 @@ val_t standard___collection___hash_collection___HashMapKeys___has_only(val_t p0,
     REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
     if (UNTAG_Bool(REGB2)) {
     } else {
-      /* ./../lib/standard//kernel.nit:227 */
+      /* ../lib/standard/kernel.nit:227 */
       REGB1 = TAG_Bool((REGB0)==(REGB1));
-      /* ./../lib/standard//collection//hash_collection.nit:268 */
+      /* ../lib/standard/collection/hash_collection.nit:268 */
       REGB2 = REGB1;
     }
   } else {
@@ -1429,7 +1429,7 @@ val_t standard___collection___hash_collection___HashMapKeys___is_empty(val_t p0)
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:269 */
+  /* ../lib/standard/collection/hash_collection.nit:269 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapKeys___map(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___MapRead___is_empty(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1450,7 +1450,7 @@ val_t standard___collection___hash_collection___HashMapKeys___length(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:270 */
+  /* ../lib/standard/collection/hash_collection.nit:270 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapKeys___map(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___MapRead___length(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1470,7 +1470,7 @@ val_t standard___collection___hash_collection___HashMapKeys___iterator(val_t p0)
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:272 */
+  /* ../lib/standard/collection/hash_collection.nit:272 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapKeys___map(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapRead___iterator(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = NEW_MapKeysIterator_standard___collection___abstract_collection___MapKeysIterator___init(fra.me.REG[0]);
@@ -1491,7 +1491,7 @@ void standard___collection___hash_collection___HashMapKeys___clear(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:274 */
+  /* ../lib/standard/collection/hash_collection.nit:274 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapKeys___map(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Map___clear(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1511,7 +1511,7 @@ void standard___collection___hash_collection___HashMapKeys___remove(val_t p0, va
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:276 */
+  /* ../lib/standard/collection/hash_collection.nit:276 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapKeys___map(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___hash_collection___HashCollection___remove_node(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
@@ -1531,7 +1531,7 @@ void standard___collection___hash_collection___HashMapKeys___remove_all(val_t p0
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:277 */
+  /* ../lib/standard/collection/hash_collection.nit:277 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapKeys___map(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___hash_collection___HashCollection___remove_node(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
@@ -1571,7 +1571,7 @@ val_t standard___collection___hash_collection___HashMapValues___map(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:283 */
+  /* ../lib/standard/collection/hash_collection.nit:283 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashMapValues_____atmap(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1595,7 +1595,7 @@ void standard___collection___hash_collection___HashMapValues___map__eq(val_t p0,
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:283 */
+  /* ../lib/standard/collection/hash_collection.nit:283 */
   ATTR_standard___collection___hash_collection___HashMapValues_____atmap(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1618,12 +1618,12 @@ val_t standard___collection___hash_collection___HashMapValues___count(val_t p0, 
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:288 */
+  /* ../lib/standard/collection/hash_collection.nit:288 */
   REGB0 = TAG_Int(0);
-  /* ./../lib/standard//collection//hash_collection.nit:289 */
+  /* ../lib/standard/collection/hash_collection.nit:289 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapValues___map(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:290 */
+  /* ../lib/standard/collection/hash_collection.nit:290 */
   while(1) {
     REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
@@ -1639,7 +1639,7 @@ val_t standard___collection___hash_collection___HashMapValues___count(val_t p0, 
     }
     REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//collection//hash_collection.nit:291 */
+      /* ../lib/standard/collection/hash_collection.nit:291 */
       fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashMapNode____value(fra.me.REG[0]);
       REGB1 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
       if (UNTAG_Bool(REGB1)) {
@@ -1655,21 +1655,21 @@ val_t standard___collection___hash_collection___HashMapValues___count(val_t p0, 
       }
       if (UNTAG_Bool(REGB1)) {
         REGB1 = TAG_Int(1);
-        /* ./../lib/standard//kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:235 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-        /* ./../lib/standard//collection//hash_collection.nit:291 */
+        /* ../lib/standard/collection/hash_collection.nit:291 */
         REGB0 = REGB1;
       }
-      /* ./../lib/standard//collection//hash_collection.nit:292 */
+      /* ../lib/standard/collection/hash_collection.nit:292 */
       fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[0]);
       fra.me.REG[0] = fra.me.REG[2];
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:290 */
+      /* ../lib/standard/collection/hash_collection.nit:290 */
       goto label1;
     }
   }
   label1: while(0);
-  /* ./../lib/standard//collection//hash_collection.nit:294 */
+  /* ../lib/standard/collection/hash_collection.nit:294 */
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
@@ -1688,7 +1688,7 @@ val_t standard___collection___hash_collection___HashMapValues___first(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:296 */
+  /* ../lib/standard/collection/hash_collection.nit:296 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapValues___map(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
@@ -1718,10 +1718,10 @@ val_t standard___collection___hash_collection___HashMapValues___has(val_t p0, va
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:300 */
+  /* ../lib/standard/collection/hash_collection.nit:300 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapValues___map(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:301 */
+  /* ../lib/standard/collection/hash_collection.nit:301 */
   while(1) {
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -1737,7 +1737,7 @@ val_t standard___collection___hash_collection___HashMapValues___has(val_t p0, va
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//hash_collection.nit:302 */
+      /* ../lib/standard/collection/hash_collection.nit:302 */
       fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashMapNode____value(fra.me.REG[0]);
       REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
       if (UNTAG_Bool(REGB0)) {
@@ -1755,16 +1755,16 @@ val_t standard___collection___hash_collection___HashMapValues___has(val_t p0, va
         REGB0 = TAG_Bool(true);
         goto label1;
       }
-      /* ./../lib/standard//collection//hash_collection.nit:303 */
+      /* ../lib/standard/collection/hash_collection.nit:303 */
       fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[0]);
       fra.me.REG[0] = fra.me.REG[2];
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:301 */
+      /* ../lib/standard/collection/hash_collection.nit:301 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ./../lib/standard//collection//hash_collection.nit:305 */
+  /* ../lib/standard/collection/hash_collection.nit:305 */
   REGB1 = TAG_Bool(false);
   REGB0 = REGB1;
   goto label1;
@@ -1789,10 +1789,10 @@ val_t standard___collection___hash_collection___HashMapValues___has_only(val_t p
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:310 */
+  /* ../lib/standard/collection/hash_collection.nit:310 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapValues___map(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:311 */
+  /* ../lib/standard/collection/hash_collection.nit:311 */
   while(1) {
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -1808,7 +1808,7 @@ val_t standard___collection___hash_collection___HashMapValues___has_only(val_t p
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//hash_collection.nit:312 */
+      /* ../lib/standard/collection/hash_collection.nit:312 */
       fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashMapNode____value(fra.me.REG[0]);
       REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
       if (UNTAG_Bool(REGB0)) {
@@ -1827,16 +1827,16 @@ val_t standard___collection___hash_collection___HashMapValues___has_only(val_t p
         REGB0 = TAG_Bool(false);
         goto label1;
       }
-      /* ./../lib/standard//collection//hash_collection.nit:313 */
+      /* ../lib/standard/collection/hash_collection.nit:313 */
       fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[0]);
       fra.me.REG[0] = fra.me.REG[2];
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:311 */
+      /* ../lib/standard/collection/hash_collection.nit:311 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ./../lib/standard//collection//hash_collection.nit:315 */
+  /* ../lib/standard/collection/hash_collection.nit:315 */
   REGB1 = TAG_Bool(true);
   REGB0 = REGB1;
   goto label1;
@@ -1857,7 +1857,7 @@ val_t standard___collection___hash_collection___HashMapValues___is_empty(val_t p
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:318 */
+  /* ../lib/standard/collection/hash_collection.nit:318 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapValues___map(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___MapRead___is_empty(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1878,7 +1878,7 @@ val_t standard___collection___hash_collection___HashMapValues___length(val_t p0)
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:319 */
+  /* ../lib/standard/collection/hash_collection.nit:319 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapValues___map(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___MapRead___length(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1898,7 +1898,7 @@ val_t standard___collection___hash_collection___HashMapValues___iterator(val_t p
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:321 */
+  /* ../lib/standard/collection/hash_collection.nit:321 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapValues___map(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapRead___iterator(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = NEW_MapValuesIterator_standard___collection___abstract_collection___MapValuesIterator___init(fra.me.REG[0]);
@@ -1919,7 +1919,7 @@ void standard___collection___hash_collection___HashMapValues___clear(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:323 */
+  /* ../lib/standard/collection/hash_collection.nit:323 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapValues___map(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Map___clear(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1943,11 +1943,11 @@ void standard___collection___hash_collection___HashMapValues___remove(val_t p0, 
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:327 */
+  /* ../lib/standard/collection/hash_collection.nit:327 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapValues___map(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:328 */
+  /* ../lib/standard/collection/hash_collection.nit:328 */
   fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:329 */
+  /* ../lib/standard/collection/hash_collection.nit:329 */
   while(1) {
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -1963,7 +1963,7 @@ void standard___collection___hash_collection___HashMapValues___remove(val_t p0, 
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//hash_collection.nit:330 */
+      /* ../lib/standard/collection/hash_collection.nit:330 */
       fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashMapNode____value(fra.me.REG[2]);
       REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[3],fra.me.REG[1]));
       if (UNTAG_Bool(REGB0)) {
@@ -1978,7 +1978,7 @@ void standard___collection___hash_collection___HashMapValues___remove(val_t p0, 
         }
       }
       if (UNTAG_Bool(REGB0)) {
-        /* ./../lib/standard//collection//hash_collection.nit:331 */
+        /* ../lib/standard/collection/hash_collection.nit:331 */
         REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2])!=NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
         } else {
@@ -1986,14 +1986,14 @@ void standard___collection___hash_collection___HashMapValues___remove(val_t p0, 
         }
         fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2]);
         CALL_standard___collection___hash_collection___HashCollection___remove_node(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-        /* ./../lib/standard//collection//hash_collection.nit:332 */
+        /* ../lib/standard/collection/hash_collection.nit:332 */
         goto label1;
       }
-      /* ./../lib/standard//collection//hash_collection.nit:334 */
+      /* ../lib/standard/collection/hash_collection.nit:334 */
       fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[2]);
       fra.me.REG[2] = fra.me.REG[3];
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:329 */
+      /* ../lib/standard/collection/hash_collection.nit:329 */
       goto label2;
     }
   }
@@ -2020,11 +2020,11 @@ void standard___collection___hash_collection___HashMapValues___remove_all(val_t 
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:340 */
+  /* ../lib/standard/collection/hash_collection.nit:340 */
   fra.me.REG[0] = CALL_standard___collection___hash_collection___HashMapValues___map(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:341 */
+  /* ../lib/standard/collection/hash_collection.nit:341 */
   fra.me.REG[2] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
-  /* ./../lib/standard//collection//hash_collection.nit:342 */
+  /* ../lib/standard/collection/hash_collection.nit:342 */
   while(1) {
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -2040,7 +2040,7 @@ void standard___collection___hash_collection___HashMapValues___remove_all(val_t 
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//collection//hash_collection.nit:343 */
+      /* ../lib/standard/collection/hash_collection.nit:343 */
       fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashMapNode____value(fra.me.REG[2]);
       REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[3],fra.me.REG[1]));
       if (UNTAG_Bool(REGB0)) {
@@ -2055,7 +2055,7 @@ void standard___collection___hash_collection___HashMapValues___remove_all(val_t 
         }
       }
       if (UNTAG_Bool(REGB0)) {
-        /* ./../lib/standard//collection//hash_collection.nit:344 */
+        /* ../lib/standard/collection/hash_collection.nit:344 */
         REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2])!=NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
         } else {
@@ -2064,11 +2064,11 @@ void standard___collection___hash_collection___HashMapValues___remove_all(val_t 
         fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2]);
         CALL_standard___collection___hash_collection___HashCollection___remove_node(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
       }
-      /* ./../lib/standard//collection//hash_collection.nit:346 */
+      /* ../lib/standard/collection/hash_collection.nit:346 */
       fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[2]);
       fra.me.REG[2] = fra.me.REG[3];
     } else {
-      /* ./../lib/standard//collection//hash_collection.nit:342 */
+      /* ../lib/standard/collection/hash_collection.nit:342 */
       goto label1;
     }
   }
@@ -2116,11 +2116,11 @@ void standard___collection___hash_collection___HashMapNode___init(val_t p0, val_
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ./../lib/standard//collection//hash_collection.nit:356 */
+  /* ../lib/standard/collection/hash_collection.nit:356 */
   fra.me.REG[3] = fra.me.REG[0];
-  /* ./../lib/standard//collection//hash_collection.nit:358 */
+  /* ../lib/standard/collection/hash_collection.nit:358 */
   CALL_standard___collection___hash_collection___HashNode___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
-  /* ./../lib/standard//collection//hash_collection.nit:359 */
+  /* ../lib/standard/collection/hash_collection.nit:359 */
   ATTR_standard___collection___hash_collection___HashMapNode____value(fra.me.REG[3]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos5] = 1;
@@ -2140,7 +2140,7 @@ val_t standard___collection___hash_collection___HashMapIterator___is_ok(val_t p0
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:365 */
+  /* ../lib/standard/collection/hash_collection.nit:365 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashMapIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2173,13 +2173,13 @@ val_t standard___collection___hash_collection___HashMapIterator___item(val_t p0)
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:369 */
+  /* ../lib/standard/collection/hash_collection.nit:369 */
   REGB0 = CALL_standard___collection___abstract_collection___MapIterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_standard___collection___hash_collection, 369);
   }
-  /* ./../lib/standard//collection//hash_collection.nit:370 */
+  /* ../lib/standard/collection/hash_collection.nit:370 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashMapIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2204,13 +2204,13 @@ val_t standard___collection___hash_collection___HashMapIterator___key(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:381 */
+  /* ../lib/standard/collection/hash_collection.nit:381 */
   REGB0 = CALL_standard___collection___abstract_collection___MapIterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_standard___collection___hash_collection, 381);
   }
-  /* ./../lib/standard//collection//hash_collection.nit:382 */
+  /* ../lib/standard/collection/hash_collection.nit:382 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashMapIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2241,13 +2241,13 @@ void standard___collection___hash_collection___HashMapIterator___next(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:387 */
+  /* ../lib/standard/collection/hash_collection.nit:387 */
   REGB0 = CALL_standard___collection___abstract_collection___MapIterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_standard___collection___hash_collection, 387);
   }
-  /* ./../lib/standard//collection//hash_collection.nit:388 */
+  /* ../lib/standard/collection/hash_collection.nit:388 */
   fra.me.REG[1] = ATTR_standard___collection___hash_collection___HashMapIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2274,9 +2274,9 @@ void standard___collection___hash_collection___HashMapIterator___init(val_t p0, 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:399 */
+  /* ../lib/standard/collection/hash_collection.nit:399 */
   ATTR_standard___collection___hash_collection___HashMapIterator____map(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//hash_collection.nit:400 */
+  /* ../lib/standard/collection/hash_collection.nit:400 */
   fra.me.REG[1] = CALL_standard___collection___hash_collection___HashCollection___first_item(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_standard___collection___hash_collection___HashMapIterator____node(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
@@ -2296,7 +2296,7 @@ val_t standard___collection___hash_collection___HashSet___length(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:410 */
+  /* ../lib/standard/collection/hash_collection.nit:410 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2323,7 +2323,7 @@ val_t standard___collection___hash_collection___HashSet___is_empty(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:412 */
+  /* ../lib/standard/collection/hash_collection.nit:412 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2334,9 +2334,9 @@ val_t standard___collection___hash_collection___HashSet___is_empty(val_t p0){
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:227 */
+    /* ../lib/standard/kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./../lib/standard//collection//hash_collection.nit:412 */
+    /* ../lib/standard/collection/hash_collection.nit:412 */
     REGB2 = REGB1;
   }
   goto label1;
@@ -2359,7 +2359,7 @@ val_t standard___collection___hash_collection___HashSet___first(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:416 */
+  /* ../lib/standard/collection/hash_collection.nit:416 */
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2372,14 +2372,14 @@ val_t standard___collection___hash_collection___HashSet___first(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:234 */
+  /* ../lib/standard/kernel.nit:234 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-  /* ./../lib/standard//collection//hash_collection.nit:416 */
+  /* ../lib/standard/collection/hash_collection.nit:416 */
   if (UNTAG_Bool(REGB1)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_standard___collection___hash_collection, 416);
   }
-  /* ./../lib/standard//collection//hash_collection.nit:417 */
+  /* ../lib/standard/collection/hash_collection.nit:417 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -2412,7 +2412,7 @@ val_t standard___collection___hash_collection___HashSet___has(val_t p0, val_t p1
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:422 */
+  /* ../lib/standard/collection/hash_collection.nit:422 */
   fra.me.REG[1] = CALL_standard___collection___hash_collection___HashCollection___node_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2450,11 +2450,11 @@ void standard___collection___hash_collection___HashSet___add(val_t p0, val_t p1)
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:427 */
+  /* ../lib/standard/collection/hash_collection.nit:427 */
   REGB0 = CALL_standard___collection___hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:428 */
+  /* ../lib/standard/collection/hash_collection.nit:428 */
   fra.me.REG[2] = CALL_standard___collection___hash_collection___HashCollection___node_at_idx(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
-  /* ./../lib/standard//collection//hash_collection.nit:429 */
+  /* ../lib/standard/collection/hash_collection.nit:429 */
   REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -2469,10 +2469,10 @@ void standard___collection___hash_collection___HashSet___add(val_t p0, val_t p1)
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//collection//hash_collection.nit:430 */
+    /* ../lib/standard/collection/hash_collection.nit:430 */
     ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2]) = fra.me.REG[1];
   } else {
-    /* ./../lib/standard//collection//hash_collection.nit:432 */
+    /* ../lib/standard/collection/hash_collection.nit:432 */
     fra.me.REG[1] = NEW_HashSetNode_standard___collection___hash_collection___HashSetNode___init(fra.me.REG[1]);
     CALL_standard___collection___hash_collection___HashCollection___store(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
   }
@@ -2493,7 +2493,7 @@ void standard___collection___hash_collection___HashSet___remove(val_t p0, val_t 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:436 */
+  /* ../lib/standard/collection/hash_collection.nit:436 */
   CALL_standard___collection___hash_collection___HashCollection___remove_node(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -2510,7 +2510,7 @@ void standard___collection___hash_collection___HashSet___clear(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:438 */
+  /* ../lib/standard/collection/hash_collection.nit:438 */
   CALL_standard___collection___hash_collection___HashCollection___raz(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
@@ -2527,7 +2527,7 @@ val_t standard___collection___hash_collection___HashSet___iterator(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:440 */
+  /* ../lib/standard/collection/hash_collection.nit:440 */
   fra.me.REG[0] = NEW_HashSetIterator_standard___collection___hash_collection___HashSetIterator___init(fra.me.REG[0]);
   goto label1;
   label1: while(0);
@@ -2550,16 +2550,16 @@ void standard___collection___hash_collection___HashSet___init(val_t p0, int* ini
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:442 */
+  /* ../lib/standard/collection/hash_collection.nit:442 */
   fra.me.REG[1] = fra.me.REG[0];
   CALL_standard___collection___hash_collection___HashCollection___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./../lib/standard//collection//hash_collection.nit:444 */
+  /* ../lib/standard/collection/hash_collection.nit:444 */
   REGB0 = TAG_Int(0);
   ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[1]) = REGB0;
-  /* ./../lib/standard//collection//hash_collection.nit:445 */
+  /* ../lib/standard/collection/hash_collection.nit:445 */
   REGB0 = TAG_Int(0);
   ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[1]) = REGB0;
-  /* ./../lib/standard//collection//hash_collection.nit:446 */
+  /* ../lib/standard/collection/hash_collection.nit:446 */
   REGB0 = TAG_Int(0);
   CALL_standard___collection___hash_collection___HashCollection___enlarge(fra.me.REG[1])(fra.me.REG[1], REGB0);
   stack_frame_head = fra.me.prev;
@@ -2584,11 +2584,11 @@ void standard___collection___hash_collection___HashSetNode___init(val_t p0, val_
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:454 */
+  /* ../lib/standard/collection/hash_collection.nit:454 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
   CALL_standard___collection___hash_collection___HashNode___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
-  /* ./../lib/standard//collection//hash_collection.nit:456 */
+  /* ../lib/standard/collection/hash_collection.nit:456 */
   ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2]) = fra.me.REG[3];
   stack_frame_head = fra.me.prev;
   init_table[itpos8] = 1;
@@ -2608,7 +2608,7 @@ val_t standard___collection___hash_collection___HashSetIterator___is_ok(val_t p0
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:462 */
+  /* ../lib/standard/collection/hash_collection.nit:462 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashSetIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2641,13 +2641,13 @@ val_t standard___collection___hash_collection___HashSetIterator___item(val_t p0)
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:466 */
+  /* ../lib/standard/collection/hash_collection.nit:466 */
   REGB0 = CALL_standard___collection___abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_standard___collection___hash_collection, 466);
   }
-  /* ./../lib/standard//collection//hash_collection.nit:467 */
+  /* ../lib/standard/collection/hash_collection.nit:467 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashSetIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2678,13 +2678,13 @@ void standard___collection___hash_collection___HashSetIterator___next(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//collection//hash_collection.nit:472 */
+  /* ../lib/standard/collection/hash_collection.nit:472 */
   REGB0 = CALL_standard___collection___abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Assert failed", NULL, LOCATE_standard___collection___hash_collection, 472);
   }
-  /* ./../lib/standard//collection//hash_collection.nit:473 */
+  /* ../lib/standard/collection/hash_collection.nit:473 */
   fra.me.REG[1] = ATTR_standard___collection___hash_collection___HashSetIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2711,9 +2711,9 @@ void standard___collection___hash_collection___HashSetIterator___init(val_t p0, 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//collection//hash_collection.nit:484 */
+  /* ../lib/standard/collection/hash_collection.nit:484 */
   ATTR_standard___collection___hash_collection___HashSetIterator____set(fra.me.REG[0]) = fra.me.REG[1];
-  /* ./../lib/standard//collection//hash_collection.nit:485 */
+  /* ../lib/standard/collection/hash_collection.nit:485 */
   fra.me.REG[1] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[1]);
   ATTR_standard___collection___hash_collection___HashSetIterator____node(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;

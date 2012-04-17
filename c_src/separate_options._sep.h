@@ -44,10 +44,10 @@ typedef val_t (*separate_options___ToolContext___opt_cc_include_paths_t)(val_t p
 static const char * const LOCATE_separate_options___ToolContext___opt_cc_include_paths__eq = "separate_options::ToolContext::opt_cc_include_paths=";
 void separate_options___ToolContext___opt_cc_include_paths__eq(val_t p0, val_t p1);
 typedef void (*separate_options___ToolContext___opt_cc_include_paths__eq_t)(val_t p0, val_t p1);
-static const char * const LOCATE_separate_options___ToolContext___init = "separate_options::ToolContext::(mmloader::ToolContext::init)";
+static const char * const LOCATE_separate_options___ToolContext___init = "separate_options::ToolContext::(toolcontext::ToolContext::init)";
 void separate_options___ToolContext___init(val_t p0, int* init_table);
 typedef void (*separate_options___ToolContext___init_t)(val_t p0, int* init_table);
-val_t NEW_ToolContext_mmloader___ToolContext___init();
+val_t NEW_ToolContext_toolcontext___ToolContext___init();
 static const char * const LOCATE_separate_options___ToolContext___integrate_separate_options = "separate_options::ToolContext::integrate_separate_options";
 void separate_options___ToolContext___integrate_separate_options(val_t p0, val_t p1);
 typedef void (*separate_options___ToolContext___integrate_separate_options_t)(val_t p0, val_t p1);

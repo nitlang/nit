@@ -277,41 +277,48 @@ extern const int SFT_parser___parser_prod[];
 #define CALL_parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr(recv) ((parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr_t)CALL((recv), (SFT_parser___parser_prod[132] + 1)))
 #define CALL_parser___parser_prod___AIssetAttrExpr___empty_init(recv) ((parser___parser_prod___AIssetAttrExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[133] + 0)))
 #define CALL_parser___parser_prod___AIssetAttrExpr___init_aissetattrexpr(recv) ((parser___parser_prod___AIssetAttrExpr___init_aissetattrexpr_t)CALL((recv), (SFT_parser___parser_prod[133] + 1)))
-#define CALL_parser___parser_prod___APlusAssignOp___empty_init(recv) ((parser___parser_prod___APlusAssignOp___empty_init_t)CALL((recv), (SFT_parser___parser_prod[134] + 0)))
-#define CALL_parser___parser_prod___APlusAssignOp___init_aplusassignop(recv) ((parser___parser_prod___APlusAssignOp___init_aplusassignop_t)CALL((recv), (SFT_parser___parser_prod[134] + 1)))
-#define CALL_parser___parser_prod___AMinusAssignOp___empty_init(recv) ((parser___parser_prod___AMinusAssignOp___empty_init_t)CALL((recv), (SFT_parser___parser_prod[135] + 0)))
-#define CALL_parser___parser_prod___AMinusAssignOp___init_aminusassignop(recv) ((parser___parser_prod___AMinusAssignOp___init_aminusassignop_t)CALL((recv), (SFT_parser___parser_prod[135] + 1)))
-#define CALL_parser___parser_prod___AClosureDef___empty_init(recv) ((parser___parser_prod___AClosureDef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[136] + 0)))
-#define CALL_parser___parser_prod___AClosureDef___init_aclosuredef(recv) ((parser___parser_prod___AClosureDef___init_aclosuredef_t)CALL((recv), (SFT_parser___parser_prod[136] + 1)))
-#define CALL_parser___parser_prod___ASimpleClosureId___empty_init(recv) ((parser___parser_prod___ASimpleClosureId___empty_init_t)CALL((recv), (SFT_parser___parser_prod[137] + 0)))
-#define CALL_parser___parser_prod___ASimpleClosureId___init_asimpleclosureid(recv) ((parser___parser_prod___ASimpleClosureId___init_asimpleclosureid_t)CALL((recv), (SFT_parser___parser_prod[137] + 1)))
-#define CALL_parser___parser_prod___ABreakClosureId___empty_init(recv) ((parser___parser_prod___ABreakClosureId___empty_init_t)CALL((recv), (SFT_parser___parser_prod[138] + 0)))
-#define CALL_parser___parser_prod___ABreakClosureId___init_abreakclosureid(recv) ((parser___parser_prod___ABreakClosureId___init_abreakclosureid_t)CALL((recv), (SFT_parser___parser_prod[138] + 1)))
-#define CALL_parser___parser_prod___AModuleName___empty_init(recv) ((parser___parser_prod___AModuleName___empty_init_t)CALL((recv), (SFT_parser___parser_prod[139] + 0)))
-#define CALL_parser___parser_prod___AModuleName___init_amodulename(recv) ((parser___parser_prod___AModuleName___init_amodulename_t)CALL((recv), (SFT_parser___parser_prod[139] + 1)))
-#define CALL_parser___parser_prod___AExternCalls___empty_init(recv) ((parser___parser_prod___AExternCalls___empty_init_t)CALL((recv), (SFT_parser___parser_prod[140] + 0)))
-#define CALL_parser___parser_prod___AExternCalls___init_aexterncalls(recv) ((parser___parser_prod___AExternCalls___init_aexterncalls_t)CALL((recv), (SFT_parser___parser_prod[140] + 1)))
-#define CALL_parser___parser_prod___AExternCall___empty_init(recv) ((parser___parser_prod___AExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[141] + 0)))
-#define CALL_parser___parser_prod___AExternCall___init_aexterncall(recv) ((parser___parser_prod___AExternCall___init_aexterncall_t)CALL((recv), (SFT_parser___parser_prod[141] + 1)))
-#define CALL_parser___parser_prod___ASuperExternCall___empty_init(recv) ((parser___parser_prod___ASuperExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[142] + 0)))
-#define CALL_parser___parser_prod___ASuperExternCall___init_asuperexterncall(recv) ((parser___parser_prod___ASuperExternCall___init_asuperexterncall_t)CALL((recv), (SFT_parser___parser_prod[142] + 1)))
-#define CALL_parser___parser_prod___ALocalPropExternCall___empty_init(recv) ((parser___parser_prod___ALocalPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[143] + 0)))
-#define CALL_parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall(recv) ((parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[143] + 1)))
-#define CALL_parser___parser_prod___AFullPropExternCall___empty_init(recv) ((parser___parser_prod___AFullPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[144] + 0)))
-#define CALL_parser___parser_prod___AFullPropExternCall___init_afullpropexterncall(recv) ((parser___parser_prod___AFullPropExternCall___init_afullpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[144] + 1)))
-#define CALL_parser___parser_prod___AInitPropExternCall___empty_init(recv) ((parser___parser_prod___AInitPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[145] + 0)))
-#define CALL_parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall(recv) ((parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[145] + 1)))
-#define CALL_parser___parser_prod___ACastAsExternCall___empty_init(recv) ((parser___parser_prod___ACastAsExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[146] + 0)))
-#define CALL_parser___parser_prod___ACastAsExternCall___init_acastasexterncall(recv) ((parser___parser_prod___ACastAsExternCall___init_acastasexterncall_t)CALL((recv), (SFT_parser___parser_prod[146] + 1)))
-#define CALL_parser___parser_prod___AAsNullableExternCall___empty_init(recv) ((parser___parser_prod___AAsNullableExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[147] + 0)))
-#define CALL_parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall(recv) ((parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall_t)CALL((recv), (SFT_parser___parser_prod[147] + 1)))
-#define CALL_parser___parser_prod___AAsNotNullableExternCall___empty_init(recv) ((parser___parser_prod___AAsNotNullableExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[148] + 0)))
-#define CALL_parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall(recv) ((parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall_t)CALL((recv), (SFT_parser___parser_prod[148] + 1)))
-#define CALL_parser___parser_prod___AQualified___empty_init(recv) ((parser___parser_prod___AQualified___empty_init_t)CALL((recv), (SFT_parser___parser_prod[149] + 0)))
-#define CALL_parser___parser_prod___AQualified___init_aqualified(recv) ((parser___parser_prod___AQualified___init_aqualified_t)CALL((recv), (SFT_parser___parser_prod[149] + 1)))
-#define CALL_parser___parser_prod___ADoc___empty_init(recv) ((parser___parser_prod___ADoc___empty_init_t)CALL((recv), (SFT_parser___parser_prod[150] + 0)))
-#define CALL_parser___parser_prod___ADoc___init_adoc(recv) ((parser___parser_prod___ADoc___init_adoc_t)CALL((recv), (SFT_parser___parser_prod[150] + 1)))
-#define CALL_parser___parser_prod___Start___init(recv) ((parser___parser_prod___Start___init_t)CALL((recv), (SFT_parser___parser_prod[151] + 0)))
+#define CALL_parser___parser_prod___ADebugTypeExpr___empty_init(recv) ((parser___parser_prod___ADebugTypeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[134] + 0)))
+#define CALL_parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr(recv) ((parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr_t)CALL((recv), (SFT_parser___parser_prod[134] + 1)))
+#define CALL_parser___parser_prod___AListExprs___empty_init(recv) ((parser___parser_prod___AListExprs___empty_init_t)CALL((recv), (SFT_parser___parser_prod[135] + 0)))
+#define CALL_parser___parser_prod___AListExprs___init_alistexprs(recv) ((parser___parser_prod___AListExprs___init_alistexprs_t)CALL((recv), (SFT_parser___parser_prod[135] + 1)))
+#define CALL_parser___parser_prod___AParExprs___empty_init(recv) ((parser___parser_prod___AParExprs___empty_init_t)CALL((recv), (SFT_parser___parser_prod[136] + 0)))
+#define CALL_parser___parser_prod___AParExprs___init_aparexprs(recv) ((parser___parser_prod___AParExprs___init_aparexprs_t)CALL((recv), (SFT_parser___parser_prod[136] + 1)))
+#define CALL_parser___parser_prod___ABraExprs___empty_init(recv) ((parser___parser_prod___ABraExprs___empty_init_t)CALL((recv), (SFT_parser___parser_prod[137] + 0)))
+#define CALL_parser___parser_prod___ABraExprs___init_abraexprs(recv) ((parser___parser_prod___ABraExprs___init_abraexprs_t)CALL((recv), (SFT_parser___parser_prod[137] + 1)))
+#define CALL_parser___parser_prod___APlusAssignOp___empty_init(recv) ((parser___parser_prod___APlusAssignOp___empty_init_t)CALL((recv), (SFT_parser___parser_prod[138] + 0)))
+#define CALL_parser___parser_prod___APlusAssignOp___init_aplusassignop(recv) ((parser___parser_prod___APlusAssignOp___init_aplusassignop_t)CALL((recv), (SFT_parser___parser_prod[138] + 1)))
+#define CALL_parser___parser_prod___AMinusAssignOp___empty_init(recv) ((parser___parser_prod___AMinusAssignOp___empty_init_t)CALL((recv), (SFT_parser___parser_prod[139] + 0)))
+#define CALL_parser___parser_prod___AMinusAssignOp___init_aminusassignop(recv) ((parser___parser_prod___AMinusAssignOp___init_aminusassignop_t)CALL((recv), (SFT_parser___parser_prod[139] + 1)))
+#define CALL_parser___parser_prod___AClosureDef___empty_init(recv) ((parser___parser_prod___AClosureDef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[140] + 0)))
+#define CALL_parser___parser_prod___AClosureDef___init_aclosuredef(recv) ((parser___parser_prod___AClosureDef___init_aclosuredef_t)CALL((recv), (SFT_parser___parser_prod[140] + 1)))
+#define CALL_parser___parser_prod___ASimpleClosureId___empty_init(recv) ((parser___parser_prod___ASimpleClosureId___empty_init_t)CALL((recv), (SFT_parser___parser_prod[141] + 0)))
+#define CALL_parser___parser_prod___ASimpleClosureId___init_asimpleclosureid(recv) ((parser___parser_prod___ASimpleClosureId___init_asimpleclosureid_t)CALL((recv), (SFT_parser___parser_prod[141] + 1)))
+#define CALL_parser___parser_prod___ABreakClosureId___empty_init(recv) ((parser___parser_prod___ABreakClosureId___empty_init_t)CALL((recv), (SFT_parser___parser_prod[142] + 0)))
+#define CALL_parser___parser_prod___ABreakClosureId___init_abreakclosureid(recv) ((parser___parser_prod___ABreakClosureId___init_abreakclosureid_t)CALL((recv), (SFT_parser___parser_prod[142] + 1)))
+#define CALL_parser___parser_prod___AModuleName___empty_init(recv) ((parser___parser_prod___AModuleName___empty_init_t)CALL((recv), (SFT_parser___parser_prod[143] + 0)))
+#define CALL_parser___parser_prod___AModuleName___init_amodulename(recv) ((parser___parser_prod___AModuleName___init_amodulename_t)CALL((recv), (SFT_parser___parser_prod[143] + 1)))
+#define CALL_parser___parser_prod___AExternCalls___empty_init(recv) ((parser___parser_prod___AExternCalls___empty_init_t)CALL((recv), (SFT_parser___parser_prod[144] + 0)))
+#define CALL_parser___parser_prod___AExternCalls___init_aexterncalls(recv) ((parser___parser_prod___AExternCalls___init_aexterncalls_t)CALL((recv), (SFT_parser___parser_prod[144] + 1)))
+#define CALL_parser___parser_prod___AExternCall___empty_init(recv) ((parser___parser_prod___AExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[145] + 0)))
+#define CALL_parser___parser_prod___AExternCall___init_aexterncall(recv) ((parser___parser_prod___AExternCall___init_aexterncall_t)CALL((recv), (SFT_parser___parser_prod[145] + 1)))
+#define CALL_parser___parser_prod___ASuperExternCall___empty_init(recv) ((parser___parser_prod___ASuperExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[146] + 0)))
+#define CALL_parser___parser_prod___ASuperExternCall___init_asuperexterncall(recv) ((parser___parser_prod___ASuperExternCall___init_asuperexterncall_t)CALL((recv), (SFT_parser___parser_prod[146] + 1)))
+#define CALL_parser___parser_prod___ALocalPropExternCall___empty_init(recv) ((parser___parser_prod___ALocalPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[147] + 0)))
+#define CALL_parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall(recv) ((parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[147] + 1)))
+#define CALL_parser___parser_prod___AFullPropExternCall___empty_init(recv) ((parser___parser_prod___AFullPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[148] + 0)))
+#define CALL_parser___parser_prod___AFullPropExternCall___init_afullpropexterncall(recv) ((parser___parser_prod___AFullPropExternCall___init_afullpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[148] + 1)))
+#define CALL_parser___parser_prod___AInitPropExternCall___empty_init(recv) ((parser___parser_prod___AInitPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[149] + 0)))
+#define CALL_parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall(recv) ((parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[149] + 1)))
+#define CALL_parser___parser_prod___ACastAsExternCall___empty_init(recv) ((parser___parser_prod___ACastAsExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[150] + 0)))
+#define CALL_parser___parser_prod___ACastAsExternCall___init_acastasexterncall(recv) ((parser___parser_prod___ACastAsExternCall___init_acastasexterncall_t)CALL((recv), (SFT_parser___parser_prod[150] + 1)))
+#define CALL_parser___parser_prod___AAsNullableExternCall___empty_init(recv) ((parser___parser_prod___AAsNullableExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[151] + 0)))
+#define CALL_parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall(recv) ((parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall_t)CALL((recv), (SFT_parser___parser_prod[151] + 1)))
+#define CALL_parser___parser_prod___AAsNotNullableExternCall___empty_init(recv) ((parser___parser_prod___AAsNotNullableExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[152] + 0)))
+#define CALL_parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall(recv) ((parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall_t)CALL((recv), (SFT_parser___parser_prod[152] + 1)))
+#define CALL_parser___parser_prod___AQualified___empty_init(recv) ((parser___parser_prod___AQualified___empty_init_t)CALL((recv), (SFT_parser___parser_prod[153] + 0)))
+#define CALL_parser___parser_prod___AQualified___init_aqualified(recv) ((parser___parser_prod___AQualified___init_aqualified_t)CALL((recv), (SFT_parser___parser_prod[153] + 1)))
+#define CALL_parser___parser_prod___ADoc___empty_init(recv) ((parser___parser_prod___ADoc___empty_init_t)CALL((recv), (SFT_parser___parser_prod[154] + 0)))
+#define CALL_parser___parser_prod___ADoc___init_adoc(recv) ((parser___parser_prod___ADoc___init_adoc_t)CALL((recv), (SFT_parser___parser_prod[154] + 1)))
 static const char * const LOCATE_parser___parser_prod___ANode___parent = "parser_prod::ANode::parent";
 val_t parser___parser_prod___ANode___parent(val_t p0);
 typedef val_t (*parser___parser_prod___ANode___parent_t)(val_t p0);
@@ -330,18 +337,18 @@ typedef void (*parser___parser_prod___ANode___replace_with_t)(val_t p0, val_t p1
 static const char * const LOCATE_parser___parser_prod___ANode___visit_all = "parser_prod::ANode::visit_all";
 void parser___parser_prod___ANode___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANode___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ANode_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ANode_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___Token___visit_all = "parser_prod::Token::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___Token___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___Token___visit_all_t)(val_t p0, val_t p1);
 static const char * const LOCATE_parser___parser_prod___Token___replace_child = "parser_prod::Token::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___Token___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___Token___replace_child_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_Token_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_Token_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___Prod___replace_with = "parser_prod::Prod::(parser_prod::ANode::replace_with)";
 void parser___parser_prod___Prod___replace_with(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___Prod___replace_with_t)(val_t p0, val_t p1);
-val_t NEW_Prod_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_Prod_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___Visitor___visit = "parser_prod::Visitor::visit";
 void parser___parser_prod___Visitor___visit(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___Visitor___visit_t)(val_t p0, val_t p1);
@@ -381,7 +388,7 @@ typedef void (*parser___parser_prod___AModule___visit_all_t)(val_t p0, val_t p1)
   typedef void (*CLOS_OC_parser___parser_prod___AModule___visit_all_2_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AModule___visit_all_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AModule___visit_all_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AModule_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AModule_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AModuledecl___empty_init = "parser_prod::AModuledecl::empty_init";
 void parser___parser_prod___AModuledecl___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AModuledecl___empty_init_t)(val_t p0, int* init_table);
@@ -396,7 +403,7 @@ typedef void (*parser___parser_prod___AModuledecl___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___AModuledecl___visit_all = "parser_prod::AModuledecl::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AModuledecl___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AModuledecl___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AModuledecl_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AModuledecl_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AStdImport___empty_init = "parser_prod::AStdImport::empty_init";
 void parser___parser_prod___AStdImport___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AStdImport___empty_init_t)(val_t p0, int* init_table);
@@ -411,7 +418,7 @@ typedef void (*parser___parser_prod___AStdImport___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___AStdImport___visit_all = "parser_prod::AStdImport::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AStdImport___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStdImport___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AStdImport_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AStdImport_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ANoImport___empty_init = "parser_prod::ANoImport::empty_init";
 void parser___parser_prod___ANoImport___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ANoImport___empty_init_t)(val_t p0, int* init_table);
@@ -426,7 +433,7 @@ typedef void (*parser___parser_prod___ANoImport___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ANoImport___visit_all = "parser_prod::ANoImport::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ANoImport___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANoImport___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ANoImport_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ANoImport_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___APublicVisibility___empty_init = "parser_prod::APublicVisibility::empty_init";
 void parser___parser_prod___APublicVisibility___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___APublicVisibility___empty_init_t)(val_t p0, int* init_table);
@@ -441,7 +448,7 @@ typedef void (*parser___parser_prod___APublicVisibility___replace_child_t)(val_t
 static const char * const LOCATE_parser___parser_prod___APublicVisibility___visit_all = "parser_prod::APublicVisibility::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___APublicVisibility___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APublicVisibility___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_APublicVisibility_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_APublicVisibility_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___APrivateVisibility___empty_init = "parser_prod::APrivateVisibility::empty_init";
 void parser___parser_prod___APrivateVisibility___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___APrivateVisibility___empty_init_t)(val_t p0, int* init_table);
@@ -456,7 +463,7 @@ typedef void (*parser___parser_prod___APrivateVisibility___replace_child_t)(val_
 static const char * const LOCATE_parser___parser_prod___APrivateVisibility___visit_all = "parser_prod::APrivateVisibility::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___APrivateVisibility___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APrivateVisibility___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_APrivateVisibility_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_APrivateVisibility_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AProtectedVisibility___empty_init = "parser_prod::AProtectedVisibility::empty_init";
 void parser___parser_prod___AProtectedVisibility___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AProtectedVisibility___empty_init_t)(val_t p0, int* init_table);
@@ -471,7 +478,7 @@ typedef void (*parser___parser_prod___AProtectedVisibility___replace_child_t)(va
 static const char * const LOCATE_parser___parser_prod___AProtectedVisibility___visit_all = "parser_prod::AProtectedVisibility::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AProtectedVisibility___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AProtectedVisibility___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AProtectedVisibility_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AProtectedVisibility_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AIntrudeVisibility___empty_init = "parser_prod::AIntrudeVisibility::empty_init";
 void parser___parser_prod___AIntrudeVisibility___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AIntrudeVisibility___empty_init_t)(val_t p0, int* init_table);
@@ -486,14 +493,14 @@ typedef void (*parser___parser_prod___AIntrudeVisibility___replace_child_t)(val_
 static const char * const LOCATE_parser___parser_prod___AIntrudeVisibility___visit_all = "parser_prod::AIntrudeVisibility::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AIntrudeVisibility___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIntrudeVisibility___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AIntrudeVisibility_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AIntrudeVisibility_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AStdClassdef___empty_init = "parser_prod::AStdClassdef::empty_init";
 void parser___parser_prod___AStdClassdef___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AStdClassdef___empty_init_t)(val_t p0, int* init_table);
 val_t NEW_AStdClassdef_parser___parser_prod___AStdClassdef___empty_init();
 static const char * const LOCATE_parser___parser_prod___AStdClassdef___init_astdclassdef = "parser_prod::AStdClassdef::init_astdclassdef";
-void parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, int* init_table);
-typedef void (*parser___parser_prod___AStdClassdef___init_astdclassdef_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, int* init_table);
+void parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9, int* init_table);
+typedef void (*parser___parser_prod___AStdClassdef___init_astdclassdef_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9, int* init_table);
   typedef void (*CLOS_OC_parser___parser_prod___AStdClassdef___init_astdclassdef_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AStdClassdef___init_astdclassdef_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AStdClassdef___init_astdclassdef_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
@@ -503,7 +510,7 @@ typedef void (*parser___parser_prod___AStdClassdef___init_astdclassdef_t)(val_t 
   typedef void (*CLOS_OC_parser___parser_prod___AStdClassdef___init_astdclassdef_3_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AStdClassdef___init_astdclassdef_3(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AStdClassdef___init_astdclassdef_3_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AStdClassdef_parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7);
+val_t NEW_AStdClassdef_parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
 static const char * const LOCATE_parser___parser_prod___AStdClassdef___replace_child = "parser_prod::AStdClassdef::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___AStdClassdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AStdClassdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
@@ -519,7 +526,7 @@ typedef void (*parser___parser_prod___AStdClassdef___visit_all_t)(val_t p0, val_
   typedef void (*CLOS_OC_parser___parser_prod___AStdClassdef___visit_all_3_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AStdClassdef___visit_all_3(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AStdClassdef___visit_all_3_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AStdClassdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AStdClassdef_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ATopClassdef___empty_init = "parser_prod::ATopClassdef::empty_init";
 void parser___parser_prod___ATopClassdef___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ATopClassdef___empty_init_t)(val_t p0, int* init_table);
@@ -540,7 +547,7 @@ typedef void (*parser___parser_prod___ATopClassdef___visit_all_t)(val_t p0, val_
   typedef void (*CLOS_OC_parser___parser_prod___ATopClassdef___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ATopClassdef___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ATopClassdef___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ATopClassdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ATopClassdef_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AMainClassdef___empty_init = "parser_prod::AMainClassdef::empty_init";
 void parser___parser_prod___AMainClassdef___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AMainClassdef___empty_init_t)(val_t p0, int* init_table);
@@ -561,7 +568,7 @@ typedef void (*parser___parser_prod___AMainClassdef___visit_all_t)(val_t p0, val
   typedef void (*CLOS_OC_parser___parser_prod___AMainClassdef___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AMainClassdef___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AMainClassdef___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AMainClassdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AMainClassdef_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AConcreteClasskind___empty_init = "parser_prod::AConcreteClasskind::empty_init";
 void parser___parser_prod___AConcreteClasskind___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AConcreteClasskind___empty_init_t)(val_t p0, int* init_table);
@@ -576,7 +583,7 @@ typedef void (*parser___parser_prod___AConcreteClasskind___replace_child_t)(val_
 static const char * const LOCATE_parser___parser_prod___AConcreteClasskind___visit_all = "parser_prod::AConcreteClasskind::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AConcreteClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AConcreteClasskind___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AConcreteClasskind_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AConcreteClasskind_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAbstractClasskind___empty_init = "parser_prod::AAbstractClasskind::empty_init";
 void parser___parser_prod___AAbstractClasskind___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAbstractClasskind___empty_init_t)(val_t p0, int* init_table);
@@ -591,7 +598,7 @@ typedef void (*parser___parser_prod___AAbstractClasskind___replace_child_t)(val_
 static const char * const LOCATE_parser___parser_prod___AAbstractClasskind___visit_all = "parser_prod::AAbstractClasskind::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAbstractClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAbstractClasskind___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAbstractClasskind_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAbstractClasskind_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AInterfaceClasskind___empty_init = "parser_prod::AInterfaceClasskind::empty_init";
 void parser___parser_prod___AInterfaceClasskind___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AInterfaceClasskind___empty_init_t)(val_t p0, int* init_table);
@@ -606,7 +613,7 @@ typedef void (*parser___parser_prod___AInterfaceClasskind___replace_child_t)(val
 static const char * const LOCATE_parser___parser_prod___AInterfaceClasskind___visit_all = "parser_prod::AInterfaceClasskind::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AInterfaceClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AInterfaceClasskind___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AInterfaceClasskind_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AInterfaceClasskind_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AEnumClasskind___empty_init = "parser_prod::AEnumClasskind::empty_init";
 void parser___parser_prod___AEnumClasskind___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AEnumClasskind___empty_init_t)(val_t p0, int* init_table);
@@ -621,7 +628,7 @@ typedef void (*parser___parser_prod___AEnumClasskind___replace_child_t)(val_t p0
 static const char * const LOCATE_parser___parser_prod___AEnumClasskind___visit_all = "parser_prod::AEnumClasskind::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AEnumClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AEnumClasskind___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AEnumClasskind_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AEnumClasskind_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AExternClasskind___empty_init = "parser_prod::AExternClasskind::empty_init";
 void parser___parser_prod___AExternClasskind___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AExternClasskind___empty_init_t)(val_t p0, int* init_table);
@@ -636,7 +643,7 @@ typedef void (*parser___parser_prod___AExternClasskind___replace_child_t)(val_t 
 static const char * const LOCATE_parser___parser_prod___AExternClasskind___visit_all = "parser_prod::AExternClasskind::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AExternClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AExternClasskind___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AExternClasskind_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AExternClasskind_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AFormaldef___empty_init = "parser_prod::AFormaldef::empty_init";
 void parser___parser_prod___AFormaldef___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AFormaldef___empty_init_t)(val_t p0, int* init_table);
@@ -651,7 +658,7 @@ typedef void (*parser___parser_prod___AFormaldef___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___AFormaldef___visit_all = "parser_prod::AFormaldef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AFormaldef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AFormaldef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AFormaldef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AFormaldef_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ASuperclass___empty_init = "parser_prod::ASuperclass::empty_init";
 void parser___parser_prod___ASuperclass___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ASuperclass___empty_init_t)(val_t p0, int* init_table);
@@ -666,7 +673,7 @@ typedef void (*parser___parser_prod___ASuperclass___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___ASuperclass___visit_all = "parser_prod::ASuperclass::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ASuperclass___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASuperclass___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ASuperclass_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASuperclass_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAttrPropdef___empty_init = "parser_prod::AAttrPropdef::empty_init";
 void parser___parser_prod___AAttrPropdef___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAttrPropdef___empty_init_t)(val_t p0, int* init_table);
@@ -681,7 +688,7 @@ typedef void (*parser___parser_prod___AAttrPropdef___replace_child_t)(val_t p0, 
 static const char * const LOCATE_parser___parser_prod___AAttrPropdef___visit_all = "parser_prod::AAttrPropdef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAttrPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAttrPropdef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAttrPropdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAttrPropdef_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AMethPropdef___empty_init = "parser_prod::AMethPropdef::empty_init";
 void parser___parser_prod___AMethPropdef___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AMethPropdef___empty_init_t)(val_t p0, int* init_table);
@@ -696,7 +703,7 @@ typedef void (*parser___parser_prod___AMethPropdef___replace_child_t)(val_t p0, 
 static const char * const LOCATE_parser___parser_prod___AMethPropdef___visit_all = "parser_prod::AMethPropdef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMethPropdef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AMethPropdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AMethPropdef_parser___parser_nodes___ANode___init();
 val_t NEW_ADeferredMethPropdef_parser___parser_prod___AMethPropdef___empty_init();
 static const char * const LOCATE_parser___parser_prod___ADeferredMethPropdef___empty_init = "parser_prod::ADeferredMethPropdef::empty_init";
 void parser___parser_prod___ADeferredMethPropdef___empty_init(val_t p0, int* init_table);
@@ -712,7 +719,7 @@ typedef void (*parser___parser_prod___ADeferredMethPropdef___replace_child_t)(va
 static const char * const LOCATE_parser___parser_prod___ADeferredMethPropdef___visit_all = "parser_prod::ADeferredMethPropdef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ADeferredMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ADeferredMethPropdef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ADeferredMethPropdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ADeferredMethPropdef_parser___parser_nodes___ANode___init();
 val_t NEW_ADeferredMethPropdef_parser___parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 val_t NEW_AInternMethPropdef_parser___parser_prod___AMethPropdef___empty_init();
 static const char * const LOCATE_parser___parser_prod___AInternMethPropdef___empty_init = "parser_prod::AInternMethPropdef::empty_init";
@@ -729,7 +736,7 @@ typedef void (*parser___parser_prod___AInternMethPropdef___replace_child_t)(val_
 static const char * const LOCATE_parser___parser_prod___AInternMethPropdef___visit_all = "parser_prod::AInternMethPropdef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AInternMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AInternMethPropdef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AInternMethPropdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AInternMethPropdef_parser___parser_nodes___ANode___init();
 val_t NEW_AInternMethPropdef_parser___parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 val_t NEW_AExternMethPropdef_parser___parser_prod___AMethPropdef___empty_init();
 static const char * const LOCATE_parser___parser_prod___AExternMethPropdef___empty_init = "parser_prod::AExternMethPropdef::empty_init";
@@ -746,7 +753,7 @@ typedef void (*parser___parser_prod___AExternMethPropdef___replace_child_t)(val_
 static const char * const LOCATE_parser___parser_prod___AExternMethPropdef___visit_all = "parser_prod::AExternMethPropdef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AExternMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AExternMethPropdef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AExternMethPropdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AExternMethPropdef_parser___parser_nodes___ANode___init();
 val_t NEW_AExternMethPropdef_parser___parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 val_t NEW_AConcreteMethPropdef_parser___parser_prod___AMethPropdef___empty_init();
 static const char * const LOCATE_parser___parser_prod___AConcreteMethPropdef___empty_init = "parser_prod::AConcreteMethPropdef::empty_init";
@@ -763,8 +770,9 @@ typedef void (*parser___parser_prod___AConcreteMethPropdef___replace_child_t)(va
 static const char * const LOCATE_parser___parser_prod___AConcreteMethPropdef___visit_all = "parser_prod::AConcreteMethPropdef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AConcreteMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AConcreteMethPropdef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AConcreteMethPropdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AConcreteMethPropdef_parser___parser_nodes___ANode___init();
 val_t NEW_AConcreteMethPropdef_parser___parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AConcreteInitPropdef_parser___parser_prod___AConcreteMethPropdef___empty_init();
 static const char * const LOCATE_parser___parser_prod___AConcreteInitPropdef___empty_init = "parser_prod::AConcreteInitPropdef::empty_init";
 void parser___parser_prod___AConcreteInitPropdef___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AConcreteInitPropdef___empty_init_t)(val_t p0, int* init_table);
@@ -779,7 +787,11 @@ typedef void (*parser___parser_prod___AConcreteInitPropdef___replace_child_t)(va
 static const char * const LOCATE_parser___parser_prod___AConcreteInitPropdef___visit_all = "parser_prod::AConcreteInitPropdef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AConcreteInitPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AConcreteInitPropdef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AConcreteInitPropdef_parser___parser_nodes___AConcreteInitPropdef___init();
+val_t NEW_AConcreteInitPropdef_parser___parser_nodes___ANode___init();
+val_t NEW_AConcreteInitPropdef_parser___parser_prod___AMethPropdef___empty_init();
+val_t NEW_AConcreteInitPropdef_parser___parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AConcreteInitPropdef_parser___parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AExternInitPropdef_parser___parser_prod___AMethPropdef___empty_init();
 static const char * const LOCATE_parser___parser_prod___AExternInitPropdef___empty_init = "parser_prod::AExternInitPropdef::empty_init";
 void parser___parser_prod___AExternInitPropdef___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AExternInitPropdef___empty_init_t)(val_t p0, int* init_table);
@@ -794,7 +806,8 @@ typedef void (*parser___parser_prod___AExternInitPropdef___replace_child_t)(val_
 static const char * const LOCATE_parser___parser_prod___AExternInitPropdef___visit_all = "parser_prod::AExternInitPropdef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AExternInitPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AExternInitPropdef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AExternInitPropdef_parser___parser_nodes___AExternInitPropdef___init();
+val_t NEW_AExternInitPropdef_parser___parser_nodes___ANode___init();
+val_t NEW_AExternInitPropdef_parser___parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 val_t NEW_AMainMethPropdef_parser___parser_prod___AConcreteMethPropdef___empty_init();
 static const char * const LOCATE_parser___parser_prod___AMainMethPropdef___empty_init = "parser_prod::AMainMethPropdef::empty_init";
 void parser___parser_prod___AMainMethPropdef___empty_init(val_t p0, int* init_table);
@@ -810,7 +823,7 @@ typedef void (*parser___parser_prod___AMainMethPropdef___replace_child_t)(val_t 
 static const char * const LOCATE_parser___parser_prod___AMainMethPropdef___visit_all = "parser_prod::AMainMethPropdef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AMainMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMainMethPropdef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AMainMethPropdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AMainMethPropdef_parser___parser_nodes___ANode___init();
 val_t NEW_AMainMethPropdef_parser___parser_prod___AMethPropdef___empty_init();
 val_t NEW_AMainMethPropdef_parser___parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
 val_t NEW_AMainMethPropdef_parser___parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
@@ -828,7 +841,7 @@ typedef void (*parser___parser_prod___ATypePropdef___replace_child_t)(val_t p0, 
 static const char * const LOCATE_parser___parser_prod___ATypePropdef___visit_all = "parser_prod::ATypePropdef::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ATypePropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ATypePropdef___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ATypePropdef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ATypePropdef_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AReadAble___empty_init = "parser_prod::AReadAble::empty_init";
 void parser___parser_prod___AReadAble___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AReadAble___empty_init_t)(val_t p0, int* init_table);
@@ -843,7 +856,7 @@ typedef void (*parser___parser_prod___AReadAble___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___AReadAble___visit_all = "parser_prod::AReadAble::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AReadAble___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AReadAble___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AReadAble_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AReadAble_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AWriteAble___empty_init = "parser_prod::AWriteAble::empty_init";
 void parser___parser_prod___AWriteAble___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AWriteAble___empty_init_t)(val_t p0, int* init_table);
@@ -858,7 +871,7 @@ typedef void (*parser___parser_prod___AWriteAble___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___AWriteAble___visit_all = "parser_prod::AWriteAble::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AWriteAble___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AWriteAble___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AWriteAble_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AWriteAble_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AIdMethid___empty_init = "parser_prod::AIdMethid::empty_init";
 void parser___parser_prod___AIdMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AIdMethid___empty_init_t)(val_t p0, int* init_table);
@@ -873,7 +886,7 @@ typedef void (*parser___parser_prod___AIdMethid___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___AIdMethid___visit_all = "parser_prod::AIdMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AIdMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIdMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AIdMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AIdMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___APlusMethid___empty_init = "parser_prod::APlusMethid::empty_init";
 void parser___parser_prod___APlusMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___APlusMethid___empty_init_t)(val_t p0, int* init_table);
@@ -888,7 +901,7 @@ typedef void (*parser___parser_prod___APlusMethid___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___APlusMethid___visit_all = "parser_prod::APlusMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___APlusMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APlusMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_APlusMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_APlusMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AMinusMethid___empty_init = "parser_prod::AMinusMethid::empty_init";
 void parser___parser_prod___AMinusMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AMinusMethid___empty_init_t)(val_t p0, int* init_table);
@@ -903,7 +916,7 @@ typedef void (*parser___parser_prod___AMinusMethid___replace_child_t)(val_t p0, 
 static const char * const LOCATE_parser___parser_prod___AMinusMethid___visit_all = "parser_prod::AMinusMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AMinusMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMinusMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AMinusMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AMinusMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AStarMethid___empty_init = "parser_prod::AStarMethid::empty_init";
 void parser___parser_prod___AStarMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AStarMethid___empty_init_t)(val_t p0, int* init_table);
@@ -918,7 +931,7 @@ typedef void (*parser___parser_prod___AStarMethid___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___AStarMethid___visit_all = "parser_prod::AStarMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AStarMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStarMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AStarMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AStarMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ASlashMethid___empty_init = "parser_prod::ASlashMethid::empty_init";
 void parser___parser_prod___ASlashMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ASlashMethid___empty_init_t)(val_t p0, int* init_table);
@@ -933,7 +946,7 @@ typedef void (*parser___parser_prod___ASlashMethid___replace_child_t)(val_t p0, 
 static const char * const LOCATE_parser___parser_prod___ASlashMethid___visit_all = "parser_prod::ASlashMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ASlashMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASlashMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ASlashMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASlashMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___APercentMethid___empty_init = "parser_prod::APercentMethid::empty_init";
 void parser___parser_prod___APercentMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___APercentMethid___empty_init_t)(val_t p0, int* init_table);
@@ -948,7 +961,7 @@ typedef void (*parser___parser_prod___APercentMethid___replace_child_t)(val_t p0
 static const char * const LOCATE_parser___parser_prod___APercentMethid___visit_all = "parser_prod::APercentMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___APercentMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APercentMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_APercentMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_APercentMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AEqMethid___empty_init = "parser_prod::AEqMethid::empty_init";
 void parser___parser_prod___AEqMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AEqMethid___empty_init_t)(val_t p0, int* init_table);
@@ -963,7 +976,7 @@ typedef void (*parser___parser_prod___AEqMethid___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___AEqMethid___visit_all = "parser_prod::AEqMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AEqMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AEqMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AEqMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AEqMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ANeMethid___empty_init = "parser_prod::ANeMethid::empty_init";
 void parser___parser_prod___ANeMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ANeMethid___empty_init_t)(val_t p0, int* init_table);
@@ -978,7 +991,7 @@ typedef void (*parser___parser_prod___ANeMethid___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ANeMethid___visit_all = "parser_prod::ANeMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ANeMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANeMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ANeMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ANeMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ALeMethid___empty_init = "parser_prod::ALeMethid::empty_init";
 void parser___parser_prod___ALeMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ALeMethid___empty_init_t)(val_t p0, int* init_table);
@@ -993,7 +1006,7 @@ typedef void (*parser___parser_prod___ALeMethid___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ALeMethid___visit_all = "parser_prod::ALeMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ALeMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALeMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ALeMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALeMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AGeMethid___empty_init = "parser_prod::AGeMethid::empty_init";
 void parser___parser_prod___AGeMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AGeMethid___empty_init_t)(val_t p0, int* init_table);
@@ -1008,7 +1021,7 @@ typedef void (*parser___parser_prod___AGeMethid___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___AGeMethid___visit_all = "parser_prod::AGeMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AGeMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGeMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AGeMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AGeMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ALtMethid___empty_init = "parser_prod::ALtMethid::empty_init";
 void parser___parser_prod___ALtMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ALtMethid___empty_init_t)(val_t p0, int* init_table);
@@ -1023,7 +1036,7 @@ typedef void (*parser___parser_prod___ALtMethid___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ALtMethid___visit_all = "parser_prod::ALtMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ALtMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALtMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ALtMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALtMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AGtMethid___empty_init = "parser_prod::AGtMethid::empty_init";
 void parser___parser_prod___AGtMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AGtMethid___empty_init_t)(val_t p0, int* init_table);
@@ -1038,7 +1051,7 @@ typedef void (*parser___parser_prod___AGtMethid___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___AGtMethid___visit_all = "parser_prod::AGtMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AGtMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGtMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AGtMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AGtMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ALlMethid___empty_init = "parser_prod::ALlMethid::empty_init";
 void parser___parser_prod___ALlMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ALlMethid___empty_init_t)(val_t p0, int* init_table);
@@ -1053,7 +1066,7 @@ typedef void (*parser___parser_prod___ALlMethid___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ALlMethid___visit_all = "parser_prod::ALlMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ALlMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALlMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ALlMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALlMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AGgMethid___empty_init = "parser_prod::AGgMethid::empty_init";
 void parser___parser_prod___AGgMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AGgMethid___empty_init_t)(val_t p0, int* init_table);
@@ -1068,7 +1081,7 @@ typedef void (*parser___parser_prod___AGgMethid___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___AGgMethid___visit_all = "parser_prod::AGgMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AGgMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGgMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AGgMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AGgMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ABraMethid___empty_init = "parser_prod::ABraMethid::empty_init";
 void parser___parser_prod___ABraMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ABraMethid___empty_init_t)(val_t p0, int* init_table);
@@ -1083,7 +1096,7 @@ typedef void (*parser___parser_prod___ABraMethid___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___ABraMethid___visit_all = "parser_prod::ABraMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ABraMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABraMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ABraMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ABraMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AStarshipMethid___empty_init = "parser_prod::AStarshipMethid::empty_init";
 void parser___parser_prod___AStarshipMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AStarshipMethid___empty_init_t)(val_t p0, int* init_table);
@@ -1098,7 +1111,7 @@ typedef void (*parser___parser_prod___AStarshipMethid___replace_child_t)(val_t p
 static const char * const LOCATE_parser___parser_prod___AStarshipMethid___visit_all = "parser_prod::AStarshipMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AStarshipMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStarshipMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AStarshipMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AStarshipMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAssignMethid___empty_init = "parser_prod::AAssignMethid::empty_init";
 void parser___parser_prod___AAssignMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAssignMethid___empty_init_t)(val_t p0, int* init_table);
@@ -1113,7 +1126,7 @@ typedef void (*parser___parser_prod___AAssignMethid___replace_child_t)(val_t p0,
 static const char * const LOCATE_parser___parser_prod___AAssignMethid___visit_all = "parser_prod::AAssignMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAssignMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAssignMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAssignMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAssignMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ABraassignMethid___empty_init = "parser_prod::ABraassignMethid::empty_init";
 void parser___parser_prod___ABraassignMethid___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ABraassignMethid___empty_init_t)(val_t p0, int* init_table);
@@ -1128,21 +1141,21 @@ typedef void (*parser___parser_prod___ABraassignMethid___replace_child_t)(val_t 
 static const char * const LOCATE_parser___parser_prod___ABraassignMethid___visit_all = "parser_prod::ABraassignMethid::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ABraassignMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABraassignMethid___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ABraassignMethid_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ABraassignMethid_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ASignature___empty_init = "parser_prod::ASignature::empty_init";
 void parser___parser_prod___ASignature___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ASignature___empty_init_t)(val_t p0, int* init_table);
 val_t NEW_ASignature_parser___parser_prod___ASignature___empty_init();
 static const char * const LOCATE_parser___parser_prod___ASignature___init_asignature = "parser_prod::ASignature::init_asignature";
-void parser___parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
-typedef void (*parser___parser_prod___ASignature___init_asignature_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+void parser___parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
+typedef void (*parser___parser_prod___ASignature___init_asignature_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
   typedef void (*CLOS_OC_parser___parser_prod___ASignature___init_asignature_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ASignature___init_asignature_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ASignature___init_asignature_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*CLOS_OC_parser___parser_prod___ASignature___init_asignature_2_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ASignature___init_asignature_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ASignature___init_asignature_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ASignature_parser___parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val_t p2);
+val_t NEW_ASignature_parser___parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 static const char * const LOCATE_parser___parser_prod___ASignature___replace_child = "parser_prod::ASignature::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ASignature___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASignature___replace_child_t)(val_t p0, val_t p1, val_t p2);
@@ -1155,7 +1168,7 @@ typedef void (*parser___parser_prod___ASignature___visit_all_t)(val_t p0, val_t 
   typedef void (*CLOS_OC_parser___parser_prod___ASignature___visit_all_2_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ASignature___visit_all_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ASignature___visit_all_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ASignature_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASignature_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AParam___empty_init = "parser_prod::AParam::empty_init";
 void parser___parser_prod___AParam___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AParam___empty_init_t)(val_t p0, int* init_table);
@@ -1170,7 +1183,7 @@ typedef void (*parser___parser_prod___AParam___replace_child_t)(val_t p0, val_t 
 static const char * const LOCATE_parser___parser_prod___AParam___visit_all = "parser_prod::AParam::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AParam___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AParam___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AParam_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AParam_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AClosureDecl___empty_init = "parser_prod::AClosureDecl::empty_init";
 void parser___parser_prod___AClosureDecl___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AClosureDecl___empty_init_t)(val_t p0, int* init_table);
@@ -1185,7 +1198,7 @@ typedef void (*parser___parser_prod___AClosureDecl___replace_child_t)(val_t p0, 
 static const char * const LOCATE_parser___parser_prod___AClosureDecl___visit_all = "parser_prod::AClosureDecl::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AClosureDecl___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AClosureDecl___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AClosureDecl_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AClosureDecl_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AType___empty_init = "parser_prod::AType::empty_init";
 void parser___parser_prod___AType___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AType___empty_init_t)(val_t p0, int* init_table);
@@ -1206,7 +1219,7 @@ typedef void (*parser___parser_prod___AType___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AType___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AType___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AType___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AType_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AType_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ALabel___empty_init = "parser_prod::ALabel::empty_init";
 void parser___parser_prod___ALabel___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ALabel___empty_init_t)(val_t p0, int* init_table);
@@ -1221,18 +1234,18 @@ typedef void (*parser___parser_prod___ALabel___replace_child_t)(val_t p0, val_t 
 static const char * const LOCATE_parser___parser_prod___ALabel___visit_all = "parser_prod::ALabel::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ALabel___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALabel___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ALabel_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALabel_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ABlockExpr___empty_init = "parser_prod::ABlockExpr::empty_init";
 void parser___parser_prod___ABlockExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ABlockExpr___empty_init_t)(val_t p0, int* init_table);
 val_t NEW_ABlockExpr_parser___parser_prod___ABlockExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ABlockExpr___init_ablockexpr = "parser_prod::ABlockExpr::init_ablockexpr";
-void parser___parser_prod___ABlockExpr___init_ablockexpr(val_t p0, val_t p1, int* init_table);
-typedef void (*parser___parser_prod___ABlockExpr___init_ablockexpr_t)(val_t p0, val_t p1, int* init_table);
+void parser___parser_prod___ABlockExpr___init_ablockexpr(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*parser___parser_prod___ABlockExpr___init_ablockexpr_t)(val_t p0, val_t p1, val_t p2, int* init_table);
   typedef void (*CLOS_OC_parser___parser_prod___ABlockExpr___init_ablockexpr_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ABlockExpr___init_ablockexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ABlockExpr___init_ablockexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ABlockExpr_parser___parser_prod___ABlockExpr___init_ablockexpr(val_t p0);
+val_t NEW_ABlockExpr_parser___parser_prod___ABlockExpr___init_ablockexpr(val_t p0, val_t p1);
 static const char * const LOCATE_parser___parser_prod___ABlockExpr___replace_child = "parser_prod::ABlockExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ABlockExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABlockExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
@@ -1242,7 +1255,7 @@ typedef void (*parser___parser_prod___ABlockExpr___visit_all_t)(val_t p0, val_t 
   typedef void (*CLOS_OC_parser___parser_prod___ABlockExpr___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ABlockExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ABlockExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ABlockExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ABlockExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AVardeclExpr___empty_init = "parser_prod::AVardeclExpr::empty_init";
 void parser___parser_prod___AVardeclExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AVardeclExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1257,7 +1270,7 @@ typedef void (*parser___parser_prod___AVardeclExpr___replace_child_t)(val_t p0, 
 static const char * const LOCATE_parser___parser_prod___AVardeclExpr___visit_all = "parser_prod::AVardeclExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AVardeclExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AVardeclExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AVardeclExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AVardeclExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AReturnExpr___empty_init = "parser_prod::AReturnExpr::empty_init";
 void parser___parser_prod___AReturnExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AReturnExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1272,7 +1285,7 @@ typedef void (*parser___parser_prod___AReturnExpr___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___AReturnExpr___visit_all = "parser_prod::AReturnExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AReturnExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AReturnExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AReturnExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AReturnExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ABreakExpr___empty_init = "parser_prod::ABreakExpr::empty_init";
 void parser___parser_prod___ABreakExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ABreakExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1287,7 +1300,7 @@ typedef void (*parser___parser_prod___ABreakExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___ABreakExpr___visit_all = "parser_prod::ABreakExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ABreakExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABreakExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ABreakExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ABreakExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAbortExpr___empty_init = "parser_prod::AAbortExpr::empty_init";
 void parser___parser_prod___AAbortExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAbortExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1302,7 +1315,7 @@ typedef void (*parser___parser_prod___AAbortExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___AAbortExpr___visit_all = "parser_prod::AAbortExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAbortExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAbortExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAbortExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAbortExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AContinueExpr___empty_init = "parser_prod::AContinueExpr::empty_init";
 void parser___parser_prod___AContinueExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AContinueExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1317,7 +1330,7 @@ typedef void (*parser___parser_prod___AContinueExpr___replace_child_t)(val_t p0,
 static const char * const LOCATE_parser___parser_prod___AContinueExpr___visit_all = "parser_prod::AContinueExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AContinueExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AContinueExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AContinueExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AContinueExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ADoExpr___empty_init = "parser_prod::ADoExpr::empty_init";
 void parser___parser_prod___ADoExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ADoExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1332,7 +1345,7 @@ typedef void (*parser___parser_prod___ADoExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___ADoExpr___visit_all = "parser_prod::ADoExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ADoExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ADoExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ADoExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ADoExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AIfExpr___empty_init = "parser_prod::AIfExpr::empty_init";
 void parser___parser_prod___AIfExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AIfExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1347,7 +1360,7 @@ typedef void (*parser___parser_prod___AIfExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___AIfExpr___visit_all = "parser_prod::AIfExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AIfExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIfExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AIfExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AIfExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AIfexprExpr___empty_init = "parser_prod::AIfexprExpr::empty_init";
 void parser___parser_prod___AIfexprExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AIfexprExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1362,7 +1375,7 @@ typedef void (*parser___parser_prod___AIfexprExpr___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___AIfexprExpr___visit_all = "parser_prod::AIfexprExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AIfexprExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIfexprExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AIfexprExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AIfexprExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AWhileExpr___empty_init = "parser_prod::AWhileExpr::empty_init";
 void parser___parser_prod___AWhileExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AWhileExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1377,7 +1390,7 @@ typedef void (*parser___parser_prod___AWhileExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___AWhileExpr___visit_all = "parser_prod::AWhileExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AWhileExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AWhileExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AWhileExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AWhileExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ALoopExpr___empty_init = "parser_prod::ALoopExpr::empty_init";
 void parser___parser_prod___ALoopExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ALoopExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1392,7 +1405,7 @@ typedef void (*parser___parser_prod___ALoopExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ALoopExpr___visit_all = "parser_prod::ALoopExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ALoopExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALoopExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ALoopExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALoopExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AForExpr___empty_init = "parser_prod::AForExpr::empty_init";
 void parser___parser_prod___AForExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AForExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1413,7 +1426,7 @@ typedef void (*parser___parser_prod___AForExpr___visit_all_t)(val_t p0, val_t p1
   typedef void (*CLOS_OC_parser___parser_prod___AForExpr___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AForExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AForExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AForExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AForExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAssertExpr___empty_init = "parser_prod::AAssertExpr::empty_init";
 void parser___parser_prod___AAssertExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAssertExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1428,7 +1441,7 @@ typedef void (*parser___parser_prod___AAssertExpr___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___AAssertExpr___visit_all = "parser_prod::AAssertExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAssertExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAssertExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAssertExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAssertExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AOnceExpr___empty_init = "parser_prod::AOnceExpr::empty_init";
 void parser___parser_prod___AOnceExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AOnceExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1443,7 +1456,7 @@ typedef void (*parser___parser_prod___AOnceExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___AOnceExpr___visit_all = "parser_prod::AOnceExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AOnceExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AOnceExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AOnceExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AOnceExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ASendExpr___empty_init = "parser_prod::ASendExpr::empty_init";
 void parser___parser_prod___ASendExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ASendExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1458,7 +1471,7 @@ typedef void (*parser___parser_prod___ASendExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ASendExpr___visit_all = "parser_prod::ASendExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ASendExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASendExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ASendExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASendExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ABinopExpr_parser___parser_prod___ASendExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ABinopExpr___empty_init = "parser_prod::ABinopExpr::empty_init";
 void parser___parser_prod___ABinopExpr___empty_init(val_t p0, int* init_table);
@@ -1474,7 +1487,7 @@ typedef void (*parser___parser_prod___ABinopExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___ABinopExpr___visit_all = "parser_prod::ABinopExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ABinopExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABinopExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ABinopExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ABinopExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ABinopExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
 static const char * const LOCATE_parser___parser_prod___AOrExpr___empty_init = "parser_prod::AOrExpr::empty_init";
 void parser___parser_prod___AOrExpr___empty_init(val_t p0, int* init_table);
@@ -1490,7 +1503,7 @@ typedef void (*parser___parser_prod___AOrExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___AOrExpr___visit_all = "parser_prod::AOrExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AOrExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AOrExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AOrExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AOrExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAndExpr___empty_init = "parser_prod::AAndExpr::empty_init";
 void parser___parser_prod___AAndExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAndExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1505,7 +1518,7 @@ typedef void (*parser___parser_prod___AAndExpr___replace_child_t)(val_t p0, val_
 static const char * const LOCATE_parser___parser_prod___AAndExpr___visit_all = "parser_prod::AAndExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAndExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAndExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAndExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAndExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AOrElseExpr___empty_init = "parser_prod::AOrElseExpr::empty_init";
 void parser___parser_prod___AOrElseExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AOrElseExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1520,7 +1533,7 @@ typedef void (*parser___parser_prod___AOrElseExpr___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___AOrElseExpr___visit_all = "parser_prod::AOrElseExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AOrElseExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AOrElseExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AOrElseExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AOrElseExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ANotExpr___empty_init = "parser_prod::ANotExpr::empty_init";
 void parser___parser_prod___ANotExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ANotExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1535,7 +1548,7 @@ typedef void (*parser___parser_prod___ANotExpr___replace_child_t)(val_t p0, val_
 static const char * const LOCATE_parser___parser_prod___ANotExpr___visit_all = "parser_prod::ANotExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ANotExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANotExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ANotExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ANotExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AEqExpr_parser___parser_prod___ABinopExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___AEqExpr___empty_init = "parser_prod::AEqExpr::empty_init";
 void parser___parser_prod___AEqExpr___empty_init(val_t p0, int* init_table);
@@ -1551,7 +1564,7 @@ typedef void (*parser___parser_prod___AEqExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___AEqExpr___visit_all = "parser_prod::AEqExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AEqExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AEqExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AEqExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AEqExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AEqExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_AEqExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_AEqExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1569,7 +1582,7 @@ typedef void (*parser___parser_prod___AEeExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___AEeExpr___visit_all = "parser_prod::AEeExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AEeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AEeExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AEeExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AEeExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ANeExpr_parser___parser_prod___ABinopExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ANeExpr___empty_init = "parser_prod::ANeExpr::empty_init";
 void parser___parser_prod___ANeExpr___empty_init(val_t p0, int* init_table);
@@ -1585,7 +1598,7 @@ typedef void (*parser___parser_prod___ANeExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___ANeExpr___visit_all = "parser_prod::ANeExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ANeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANeExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ANeExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ANeExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ANeExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_ANeExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_ANeExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1604,7 +1617,7 @@ typedef void (*parser___parser_prod___ALtExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___ALtExpr___visit_all = "parser_prod::ALtExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ALtExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALtExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ALtExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALtExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ALtExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_ALtExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_ALtExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1623,7 +1636,7 @@ typedef void (*parser___parser_prod___ALeExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___ALeExpr___visit_all = "parser_prod::ALeExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ALeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALeExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ALeExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALeExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ALeExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_ALeExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_ALeExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1642,7 +1655,7 @@ typedef void (*parser___parser_prod___ALlExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___ALlExpr___visit_all = "parser_prod::ALlExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ALlExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALlExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ALlExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALlExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ALlExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_ALlExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_ALlExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1661,7 +1674,7 @@ typedef void (*parser___parser_prod___AGtExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___AGtExpr___visit_all = "parser_prod::AGtExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AGtExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGtExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AGtExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AGtExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AGtExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_AGtExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_AGtExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1680,7 +1693,7 @@ typedef void (*parser___parser_prod___AGeExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___AGeExpr___visit_all = "parser_prod::AGeExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AGeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGeExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AGeExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AGeExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AGeExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_AGeExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_AGeExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1699,7 +1712,7 @@ typedef void (*parser___parser_prod___AGgExpr___replace_child_t)(val_t p0, val_t
 static const char * const LOCATE_parser___parser_prod___AGgExpr___visit_all = "parser_prod::AGgExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AGgExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGgExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AGgExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AGgExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AGgExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_AGgExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_AGgExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1717,7 +1730,7 @@ typedef void (*parser___parser_prod___AIsaExpr___replace_child_t)(val_t p0, val_
 static const char * const LOCATE_parser___parser_prod___AIsaExpr___visit_all = "parser_prod::AIsaExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AIsaExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIsaExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AIsaExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AIsaExpr_parser___parser_nodes___ANode___init();
 val_t NEW_APlusExpr_parser___parser_prod___ABinopExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___APlusExpr___empty_init = "parser_prod::APlusExpr::empty_init";
 void parser___parser_prod___APlusExpr___empty_init(val_t p0, int* init_table);
@@ -1733,7 +1746,7 @@ typedef void (*parser___parser_prod___APlusExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___APlusExpr___visit_all = "parser_prod::APlusExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___APlusExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APlusExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_APlusExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_APlusExpr_parser___parser_nodes___ANode___init();
 val_t NEW_APlusExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_APlusExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_APlusExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1752,7 +1765,7 @@ typedef void (*parser___parser_prod___AMinusExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___AMinusExpr___visit_all = "parser_prod::AMinusExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AMinusExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMinusExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AMinusExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AMinusExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AMinusExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_AMinusExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_AMinusExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1771,7 +1784,7 @@ typedef void (*parser___parser_prod___AStarshipExpr___replace_child_t)(val_t p0,
 static const char * const LOCATE_parser___parser_prod___AStarshipExpr___visit_all = "parser_prod::AStarshipExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AStarshipExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStarshipExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AStarshipExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AStarshipExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AStarshipExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_AStarshipExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_AStarshipExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1790,7 +1803,7 @@ typedef void (*parser___parser_prod___AStarExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___AStarExpr___visit_all = "parser_prod::AStarExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AStarExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStarExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AStarExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AStarExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AStarExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_AStarExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_AStarExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1809,7 +1822,7 @@ typedef void (*parser___parser_prod___ASlashExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___ASlashExpr___visit_all = "parser_prod::ASlashExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ASlashExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASlashExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ASlashExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASlashExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ASlashExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_ASlashExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_ASlashExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1828,7 +1841,7 @@ typedef void (*parser___parser_prod___APercentExpr___replace_child_t)(val_t p0, 
 static const char * const LOCATE_parser___parser_prod___APercentExpr___visit_all = "parser_prod::APercentExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___APercentExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APercentExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_APercentExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_APercentExpr_parser___parser_nodes___ANode___init();
 val_t NEW_APercentExpr_parser___parser_prod___ASendExpr___empty_init();
 val_t NEW_APercentExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 val_t NEW_APercentExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -1847,7 +1860,7 @@ typedef void (*parser___parser_prod___AUminusExpr___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___AUminusExpr___visit_all = "parser_prod::AUminusExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AUminusExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AUminusExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AUminusExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AUminusExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AUminusExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
 static const char * const LOCATE_parser___parser_prod___ANewExpr___empty_init = "parser_prod::ANewExpr::empty_init";
 void parser___parser_prod___ANewExpr___empty_init(val_t p0, int* init_table);
@@ -1856,9 +1869,6 @@ val_t NEW_ANewExpr_parser___parser_prod___ANewExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ANewExpr___init_anewexpr = "parser_prod::ANewExpr::init_anewexpr";
 void parser___parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 typedef void (*parser___parser_prod___ANewExpr___init_anewexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
-  typedef void (*CLOS_OC_parser___parser_prod___ANewExpr___init_anewexpr_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ANewExpr___init_anewexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ANewExpr___init_anewexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_ANewExpr_parser___parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 static const char * const LOCATE_parser___parser_prod___ANewExpr___replace_child = "parser_prod::ANewExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ANewExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -1866,10 +1876,7 @@ typedef void (*parser___parser_prod___ANewExpr___replace_child_t)(val_t p0, val_
 static const char * const LOCATE_parser___parser_prod___ANewExpr___visit_all = "parser_prod::ANewExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ANewExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANewExpr___visit_all_t)(val_t p0, val_t p1);
-  typedef void (*CLOS_OC_parser___parser_prod___ANewExpr___visit_all_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ANewExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ANewExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ANewExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ANewExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAttrExpr___empty_init = "parser_prod::AAttrExpr::empty_init";
 void parser___parser_prod___AAttrExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAttrExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1884,7 +1891,7 @@ typedef void (*parser___parser_prod___AAttrExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___AAttrExpr___visit_all = "parser_prod::AAttrExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAttrExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAttrExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAttrExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAttrExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAttrAssignExpr___empty_init = "parser_prod::AAttrAssignExpr::empty_init";
 void parser___parser_prod___AAttrAssignExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAttrAssignExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1899,7 +1906,7 @@ typedef void (*parser___parser_prod___AAttrAssignExpr___replace_child_t)(val_t p
 static const char * const LOCATE_parser___parser_prod___AAttrAssignExpr___visit_all = "parser_prod::AAttrAssignExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAttrAssignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAttrAssignExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAttrAssignExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAttrAssignExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAttrReassignExpr___empty_init = "parser_prod::AAttrReassignExpr::empty_init";
 void parser___parser_prod___AAttrReassignExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAttrReassignExpr___empty_init_t)(val_t p0, int* init_table);
@@ -1914,7 +1921,7 @@ typedef void (*parser___parser_prod___AAttrReassignExpr___replace_child_t)(val_t
 static const char * const LOCATE_parser___parser_prod___AAttrReassignExpr___visit_all = "parser_prod::AAttrReassignExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAttrReassignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAttrReassignExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAttrReassignExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAttrReassignExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ACallExpr_parser___parser_prod___ASendExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ACallExpr___empty_init = "parser_prod::ACallExpr::empty_init";
 void parser___parser_prod___ACallExpr___empty_init(val_t p0, int* init_table);
@@ -1926,9 +1933,6 @@ typedef void (*parser___parser_prod___ACallExpr___init_acallexpr_t)(val_t p0, va
   typedef void (*CLOS_OC_parser___parser_prod___ACallExpr___init_acallexpr_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ACallExpr___init_acallexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ACallExpr___init_acallexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*CLOS_OC_parser___parser_prod___ACallExpr___init_acallexpr_2_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ACallExpr___init_acallexpr_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ACallExpr___init_acallexpr_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_ACallExpr_parser___parser_prod___ACallExpr___init_acallexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 static const char * const LOCATE_parser___parser_prod___ACallExpr___replace_child = "parser_prod::ACallExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ACallExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -1939,10 +1943,7 @@ typedef void (*parser___parser_prod___ACallExpr___visit_all_t)(val_t p0, val_t p
   typedef void (*CLOS_OC_parser___parser_prod___ACallExpr___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ACallExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ACallExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*CLOS_OC_parser___parser_prod___ACallExpr___visit_all_2_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ACallExpr___visit_all_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ACallExpr___visit_all_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ACallExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACallExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ACallExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
 val_t NEW_ACallAssignExpr_parser___parser_prod___ASendExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ACallAssignExpr___empty_init = "parser_prod::ACallAssignExpr::empty_init";
@@ -1952,9 +1953,6 @@ val_t NEW_ACallAssignExpr_parser___parser_prod___ACallAssignExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ACallAssignExpr___init_acallassignexpr = "parser_prod::ACallAssignExpr::init_acallassignexpr";
 void parser___parser_prod___ACallAssignExpr___init_acallassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
 typedef void (*parser___parser_prod___ACallAssignExpr___init_acallassignexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
-  typedef void (*CLOS_OC_parser___parser_prod___ACallAssignExpr___init_acallassignexpr_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ACallAssignExpr___init_acallassignexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ACallAssignExpr___init_acallassignexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_ACallAssignExpr_parser___parser_prod___ACallAssignExpr___init_acallassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 static const char * const LOCATE_parser___parser_prod___ACallAssignExpr___replace_child = "parser_prod::ACallAssignExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ACallAssignExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -1962,10 +1960,7 @@ typedef void (*parser___parser_prod___ACallAssignExpr___replace_child_t)(val_t p
 static const char * const LOCATE_parser___parser_prod___ACallAssignExpr___visit_all = "parser_prod::ACallAssignExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ACallAssignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACallAssignExpr___visit_all_t)(val_t p0, val_t p1);
-  typedef void (*CLOS_OC_parser___parser_prod___ACallAssignExpr___visit_all_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ACallAssignExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ACallAssignExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ACallAssignExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACallAssignExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ACallAssignExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
 val_t NEW_ACallReassignExpr_parser___parser_prod___ASendExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ACallReassignExpr___empty_init = "parser_prod::ACallReassignExpr::empty_init";
@@ -1975,9 +1970,6 @@ val_t NEW_ACallReassignExpr_parser___parser_prod___ACallReassignExpr___empty_ini
 static const char * const LOCATE_parser___parser_prod___ACallReassignExpr___init_acallreassignexpr = "parser_prod::ACallReassignExpr::init_acallreassignexpr";
 void parser___parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
 typedef void (*parser___parser_prod___ACallReassignExpr___init_acallreassignexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
-  typedef void (*CLOS_OC_parser___parser_prod___ACallReassignExpr___init_acallreassignexpr_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ACallReassignExpr___init_acallreassignexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ACallReassignExpr___init_acallreassignexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_ACallReassignExpr_parser___parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 static const char * const LOCATE_parser___parser_prod___ACallReassignExpr___replace_child = "parser_prod::ACallReassignExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ACallReassignExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -1985,10 +1977,7 @@ typedef void (*parser___parser_prod___ACallReassignExpr___replace_child_t)(val_t
 static const char * const LOCATE_parser___parser_prod___ACallReassignExpr___visit_all = "parser_prod::ACallReassignExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ACallReassignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACallReassignExpr___visit_all_t)(val_t p0, val_t p1);
-  typedef void (*CLOS_OC_parser___parser_prod___ACallReassignExpr___visit_all_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ACallReassignExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ACallReassignExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ACallReassignExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACallReassignExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ACallReassignExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
 static const char * const LOCATE_parser___parser_prod___ASuperExpr___empty_init = "parser_prod::ASuperExpr::empty_init";
 void parser___parser_prod___ASuperExpr___empty_init(val_t p0, int* init_table);
@@ -1997,9 +1986,6 @@ val_t NEW_ASuperExpr_parser___parser_prod___ASuperExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ASuperExpr___init_asuperexpr = "parser_prod::ASuperExpr::init_asuperexpr";
 void parser___parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*parser___parser_prod___ASuperExpr___init_asuperexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
-  typedef void (*CLOS_OC_parser___parser_prod___ASuperExpr___init_asuperexpr_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ASuperExpr___init_asuperexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ASuperExpr___init_asuperexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_ASuperExpr_parser___parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___ASuperExpr___replace_child = "parser_prod::ASuperExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ASuperExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -2007,10 +1993,7 @@ typedef void (*parser___parser_prod___ASuperExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___ASuperExpr___visit_all = "parser_prod::ASuperExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ASuperExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASuperExpr___visit_all_t)(val_t p0, val_t p1);
-  typedef void (*CLOS_OC_parser___parser_prod___ASuperExpr___visit_all_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ASuperExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ASuperExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ASuperExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASuperExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AInitExpr_parser___parser_prod___ASendExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___AInitExpr___empty_init = "parser_prod::AInitExpr::empty_init";
 void parser___parser_prod___AInitExpr___empty_init(val_t p0, int* init_table);
@@ -2019,9 +2002,6 @@ val_t NEW_AInitExpr_parser___parser_prod___AInitExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___AInitExpr___init_ainitexpr = "parser_prod::AInitExpr::init_ainitexpr";
 void parser___parser_prod___AInitExpr___init_ainitexpr(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
 typedef void (*parser___parser_prod___AInitExpr___init_ainitexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
-  typedef void (*CLOS_OC_parser___parser_prod___AInitExpr___init_ainitexpr_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___AInitExpr___init_ainitexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___AInitExpr___init_ainitexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_AInitExpr_parser___parser_prod___AInitExpr___init_ainitexpr(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___AInitExpr___replace_child = "parser_prod::AInitExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___AInitExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -2029,10 +2009,7 @@ typedef void (*parser___parser_prod___AInitExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___AInitExpr___visit_all = "parser_prod::AInitExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AInitExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AInitExpr___visit_all_t)(val_t p0, val_t p1);
-  typedef void (*CLOS_OC_parser___parser_prod___AInitExpr___visit_all_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___AInitExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___AInitExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AInitExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AInitExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AInitExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
 val_t NEW_ABraExpr_parser___parser_prod___ASendExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ABraExpr___empty_init = "parser_prod::ABraExpr::empty_init";
@@ -2045,9 +2022,6 @@ typedef void (*parser___parser_prod___ABraExpr___init_abraexpr_t)(val_t p0, val_
   typedef void (*CLOS_OC_parser___parser_prod___ABraExpr___init_abraexpr_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ABraExpr___init_abraexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ABraExpr___init_abraexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*CLOS_OC_parser___parser_prod___ABraExpr___init_abraexpr_2_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ABraExpr___init_abraexpr_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ABraExpr___init_abraexpr_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_ABraExpr_parser___parser_prod___ABraExpr___init_abraexpr(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___ABraExpr___replace_child = "parser_prod::ABraExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ABraExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -2058,10 +2032,7 @@ typedef void (*parser___parser_prod___ABraExpr___visit_all_t)(val_t p0, val_t p1
   typedef void (*CLOS_OC_parser___parser_prod___ABraExpr___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ABraExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ABraExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*CLOS_OC_parser___parser_prod___ABraExpr___visit_all_2_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ABraExpr___visit_all_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ABraExpr___visit_all_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ABraExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ABraExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ABraExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
 val_t NEW_ABraAssignExpr_parser___parser_prod___ASendExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ABraAssignExpr___empty_init = "parser_prod::ABraAssignExpr::empty_init";
@@ -2071,9 +2042,6 @@ val_t NEW_ABraAssignExpr_parser___parser_prod___ABraAssignExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ABraAssignExpr___init_abraassignexpr = "parser_prod::ABraAssignExpr::init_abraassignexpr";
 void parser___parser_prod___ABraAssignExpr___init_abraassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 typedef void (*parser___parser_prod___ABraAssignExpr___init_abraassignexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
-  typedef void (*CLOS_OC_parser___parser_prod___ABraAssignExpr___init_abraassignexpr_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ABraAssignExpr___init_abraassignexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ABraAssignExpr___init_abraassignexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_ABraAssignExpr_parser___parser_prod___ABraAssignExpr___init_abraassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 static const char * const LOCATE_parser___parser_prod___ABraAssignExpr___replace_child = "parser_prod::ABraAssignExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ABraAssignExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -2081,10 +2049,7 @@ typedef void (*parser___parser_prod___ABraAssignExpr___replace_child_t)(val_t p0
 static const char * const LOCATE_parser___parser_prod___ABraAssignExpr___visit_all = "parser_prod::ABraAssignExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ABraAssignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABraAssignExpr___visit_all_t)(val_t p0, val_t p1);
-  typedef void (*CLOS_OC_parser___parser_prod___ABraAssignExpr___visit_all_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ABraAssignExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ABraAssignExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ABraAssignExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ABraAssignExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ABraAssignExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
 val_t NEW_ABraReassignExpr_parser___parser_prod___ASendExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ABraReassignExpr___empty_init = "parser_prod::ABraReassignExpr::empty_init";
@@ -2094,9 +2059,6 @@ val_t NEW_ABraReassignExpr_parser___parser_prod___ABraReassignExpr___empty_init(
 static const char * const LOCATE_parser___parser_prod___ABraReassignExpr___init_abrareassignexpr = "parser_prod::ABraReassignExpr::init_abrareassignexpr";
 void parser___parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
 typedef void (*parser___parser_prod___ABraReassignExpr___init_abrareassignexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
-  typedef void (*CLOS_OC_parser___parser_prod___ABraReassignExpr___init_abrareassignexpr_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ABraReassignExpr___init_abrareassignexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ABraReassignExpr___init_abrareassignexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_ABraReassignExpr_parser___parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 static const char * const LOCATE_parser___parser_prod___ABraReassignExpr___replace_child = "parser_prod::ABraReassignExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ABraReassignExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -2104,10 +2066,7 @@ typedef void (*parser___parser_prod___ABraReassignExpr___replace_child_t)(val_t 
 static const char * const LOCATE_parser___parser_prod___ABraReassignExpr___visit_all = "parser_prod::ABraReassignExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ABraReassignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABraReassignExpr___visit_all_t)(val_t p0, val_t p1);
-  typedef void (*CLOS_OC_parser___parser_prod___ABraReassignExpr___visit_all_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___ABraReassignExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___ABraReassignExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ABraReassignExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ABraReassignExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ABraReassignExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
 static const char * const LOCATE_parser___parser_prod___AClosureCallExpr___empty_init = "parser_prod::AClosureCallExpr::empty_init";
 void parser___parser_prod___AClosureCallExpr___empty_init(val_t p0, int* init_table);
@@ -2119,9 +2078,6 @@ typedef void (*parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr_t
   typedef void (*CLOS_OC_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*CLOS_OC_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr_2_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_AClosureCallExpr_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___AClosureCallExpr___replace_child = "parser_prod::AClosureCallExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___AClosureCallExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -2132,10 +2088,7 @@ typedef void (*parser___parser_prod___AClosureCallExpr___visit_all_t)(val_t p0, 
   typedef void (*CLOS_OC_parser___parser_prod___AClosureCallExpr___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AClosureCallExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AClosureCallExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*CLOS_OC_parser___parser_prod___AClosureCallExpr___visit_all_2_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___AClosureCallExpr___visit_all_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___AClosureCallExpr___visit_all_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AClosureCallExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AClosureCallExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AVarExpr___empty_init = "parser_prod::AVarExpr::empty_init";
 void parser___parser_prod___AVarExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AVarExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2150,7 +2103,7 @@ typedef void (*parser___parser_prod___AVarExpr___replace_child_t)(val_t p0, val_
 static const char * const LOCATE_parser___parser_prod___AVarExpr___visit_all = "parser_prod::AVarExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AVarExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AVarExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AVarExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AVarExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AVarAssignExpr___empty_init = "parser_prod::AVarAssignExpr::empty_init";
 void parser___parser_prod___AVarAssignExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AVarAssignExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2165,7 +2118,7 @@ typedef void (*parser___parser_prod___AVarAssignExpr___replace_child_t)(val_t p0
 static const char * const LOCATE_parser___parser_prod___AVarAssignExpr___visit_all = "parser_prod::AVarAssignExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AVarAssignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AVarAssignExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AVarAssignExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AVarAssignExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AVarReassignExpr___empty_init = "parser_prod::AVarReassignExpr::empty_init";
 void parser___parser_prod___AVarReassignExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AVarReassignExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2180,7 +2133,7 @@ typedef void (*parser___parser_prod___AVarReassignExpr___replace_child_t)(val_t 
 static const char * const LOCATE_parser___parser_prod___AVarReassignExpr___visit_all = "parser_prod::AVarReassignExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AVarReassignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AVarReassignExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AVarReassignExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AVarReassignExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ARangeExpr___empty_init = "parser_prod::ARangeExpr::empty_init";
 void parser___parser_prod___ARangeExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ARangeExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2195,23 +2148,23 @@ typedef void (*parser___parser_prod___ARangeExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___ARangeExpr___visit_all = "parser_prod::ARangeExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ARangeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ARangeExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ARangeExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ARangeExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ACrangeExpr_parser___parser_prod___ARangeExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ACrangeExpr___empty_init = "parser_prod::ACrangeExpr::empty_init";
 void parser___parser_prod___ACrangeExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ACrangeExpr___empty_init_t)(val_t p0, int* init_table);
 val_t NEW_ACrangeExpr_parser___parser_prod___ACrangeExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___ACrangeExpr___init_acrangeexpr = "parser_prod::ACrangeExpr::init_acrangeexpr";
-void parser___parser_prod___ACrangeExpr___init_acrangeexpr(val_t p0, val_t p1, val_t p2, int* init_table);
-typedef void (*parser___parser_prod___ACrangeExpr___init_acrangeexpr_t)(val_t p0, val_t p1, val_t p2, int* init_table);
-val_t NEW_ACrangeExpr_parser___parser_prod___ACrangeExpr___init_acrangeexpr(val_t p0, val_t p1);
+void parser___parser_prod___ACrangeExpr___init_acrangeexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
+typedef void (*parser___parser_prod___ACrangeExpr___init_acrangeexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
+val_t NEW_ACrangeExpr_parser___parser_prod___ACrangeExpr___init_acrangeexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 static const char * const LOCATE_parser___parser_prod___ACrangeExpr___replace_child = "parser_prod::ACrangeExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___ACrangeExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ACrangeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___ACrangeExpr___visit_all = "parser_prod::ACrangeExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ACrangeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACrangeExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ACrangeExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACrangeExpr_parser___parser_nodes___ANode___init();
 val_t NEW_ACrangeExpr_parser___parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
 val_t NEW_AOrangeExpr_parser___parser_prod___ARangeExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___AOrangeExpr___empty_init = "parser_prod::AOrangeExpr::empty_init";
@@ -2219,16 +2172,16 @@ void parser___parser_prod___AOrangeExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AOrangeExpr___empty_init_t)(val_t p0, int* init_table);
 val_t NEW_AOrangeExpr_parser___parser_prod___AOrangeExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___AOrangeExpr___init_aorangeexpr = "parser_prod::AOrangeExpr::init_aorangeexpr";
-void parser___parser_prod___AOrangeExpr___init_aorangeexpr(val_t p0, val_t p1, val_t p2, int* init_table);
-typedef void (*parser___parser_prod___AOrangeExpr___init_aorangeexpr_t)(val_t p0, val_t p1, val_t p2, int* init_table);
-val_t NEW_AOrangeExpr_parser___parser_prod___AOrangeExpr___init_aorangeexpr(val_t p0, val_t p1);
+void parser___parser_prod___AOrangeExpr___init_aorangeexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
+typedef void (*parser___parser_prod___AOrangeExpr___init_aorangeexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
+val_t NEW_AOrangeExpr_parser___parser_prod___AOrangeExpr___init_aorangeexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 static const char * const LOCATE_parser___parser_prod___AOrangeExpr___replace_child = "parser_prod::AOrangeExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___AOrangeExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AOrangeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___AOrangeExpr___visit_all = "parser_prod::AOrangeExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AOrangeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AOrangeExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AOrangeExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AOrangeExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AOrangeExpr_parser___parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
 static const char * const LOCATE_parser___parser_prod___AArrayExpr___empty_init = "parser_prod::AArrayExpr::empty_init";
 void parser___parser_prod___AArrayExpr___empty_init(val_t p0, int* init_table);
@@ -2237,9 +2190,6 @@ val_t NEW_AArrayExpr_parser___parser_prod___AArrayExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___AArrayExpr___init_aarrayexpr = "parser_prod::AArrayExpr::init_aarrayexpr";
 void parser___parser_prod___AArrayExpr___init_aarrayexpr(val_t p0, val_t p1, int* init_table);
 typedef void (*parser___parser_prod___AArrayExpr___init_aarrayexpr_t)(val_t p0, val_t p1, int* init_table);
-  typedef void (*CLOS_OC_parser___parser_prod___AArrayExpr___init_aarrayexpr_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___AArrayExpr___init_aarrayexpr_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___AArrayExpr___init_aarrayexpr_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_AArrayExpr_parser___parser_prod___AArrayExpr___init_aarrayexpr(val_t p0);
 static const char * const LOCATE_parser___parser_prod___AArrayExpr___replace_child = "parser_prod::AArrayExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___AArrayExpr___replace_child(val_t p0, val_t p1, val_t p2);
@@ -2247,10 +2197,7 @@ typedef void (*parser___parser_prod___AArrayExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___AArrayExpr___visit_all = "parser_prod::AArrayExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AArrayExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AArrayExpr___visit_all_t)(val_t p0, val_t p1);
-  typedef void (*CLOS_OC_parser___parser_prod___AArrayExpr___visit_all_1_0)(struct stack_frame_t *);
-  void OC_parser___parser_prod___AArrayExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-  typedef void (*OC_parser___parser_prod___AArrayExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AArrayExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AArrayExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ASelfExpr___empty_init = "parser_prod::ASelfExpr::empty_init";
 void parser___parser_prod___ASelfExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ASelfExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2265,7 +2212,7 @@ typedef void (*parser___parser_prod___ASelfExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ASelfExpr___visit_all = "parser_prod::ASelfExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ASelfExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASelfExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ASelfExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASelfExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AImplicitSelfExpr_parser___parser_prod___ASelfExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___AImplicitSelfExpr___empty_init = "parser_prod::AImplicitSelfExpr::empty_init";
 void parser___parser_prod___AImplicitSelfExpr___empty_init(val_t p0, int* init_table);
@@ -2281,7 +2228,7 @@ typedef void (*parser___parser_prod___AImplicitSelfExpr___replace_child_t)(val_t
 static const char * const LOCATE_parser___parser_prod___AImplicitSelfExpr___visit_all = "parser_prod::AImplicitSelfExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AImplicitSelfExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AImplicitSelfExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AImplicitSelfExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AImplicitSelfExpr_parser___parser_nodes___ANode___init();
 val_t NEW_AImplicitSelfExpr_parser___parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
 static const char * const LOCATE_parser___parser_prod___ATrueExpr___empty_init = "parser_prod::ATrueExpr::empty_init";
 void parser___parser_prod___ATrueExpr___empty_init(val_t p0, int* init_table);
@@ -2297,7 +2244,7 @@ typedef void (*parser___parser_prod___ATrueExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ATrueExpr___visit_all = "parser_prod::ATrueExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ATrueExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ATrueExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ATrueExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ATrueExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AFalseExpr___empty_init = "parser_prod::AFalseExpr::empty_init";
 void parser___parser_prod___AFalseExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AFalseExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2312,7 +2259,7 @@ typedef void (*parser___parser_prod___AFalseExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___AFalseExpr___visit_all = "parser_prod::AFalseExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AFalseExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AFalseExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AFalseExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AFalseExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ANullExpr___empty_init = "parser_prod::ANullExpr::empty_init";
 void parser___parser_prod___ANullExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ANullExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2327,7 +2274,7 @@ typedef void (*parser___parser_prod___ANullExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ANullExpr___visit_all = "parser_prod::ANullExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ANullExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANullExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ANullExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ANullExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AIntExpr___empty_init = "parser_prod::AIntExpr::empty_init";
 void parser___parser_prod___AIntExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AIntExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2342,7 +2289,7 @@ typedef void (*parser___parser_prod___AIntExpr___replace_child_t)(val_t p0, val_
 static const char * const LOCATE_parser___parser_prod___AIntExpr___visit_all = "parser_prod::AIntExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AIntExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIntExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AIntExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AIntExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AFloatExpr___empty_init = "parser_prod::AFloatExpr::empty_init";
 void parser___parser_prod___AFloatExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AFloatExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2357,7 +2304,7 @@ typedef void (*parser___parser_prod___AFloatExpr___replace_child_t)(val_t p0, va
 static const char * const LOCATE_parser___parser_prod___AFloatExpr___visit_all = "parser_prod::AFloatExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AFloatExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AFloatExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AFloatExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AFloatExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ACharExpr___empty_init = "parser_prod::ACharExpr::empty_init";
 void parser___parser_prod___ACharExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ACharExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2372,7 +2319,7 @@ typedef void (*parser___parser_prod___ACharExpr___replace_child_t)(val_t p0, val
 static const char * const LOCATE_parser___parser_prod___ACharExpr___visit_all = "parser_prod::ACharExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ACharExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACharExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ACharExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACharExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AStringExpr___empty_init = "parser_prod::AStringExpr::empty_init";
 void parser___parser_prod___AStringExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AStringExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2387,7 +2334,7 @@ typedef void (*parser___parser_prod___AStringExpr___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___AStringExpr___visit_all = "parser_prod::AStringExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AStringExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStringExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AStringExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AStringExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AStartStringExpr___empty_init = "parser_prod::AStartStringExpr::empty_init";
 void parser___parser_prod___AStartStringExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AStartStringExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2402,7 +2349,7 @@ typedef void (*parser___parser_prod___AStartStringExpr___replace_child_t)(val_t 
 static const char * const LOCATE_parser___parser_prod___AStartStringExpr___visit_all = "parser_prod::AStartStringExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AStartStringExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStartStringExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AStartStringExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AStartStringExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AMidStringExpr___empty_init = "parser_prod::AMidStringExpr::empty_init";
 void parser___parser_prod___AMidStringExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AMidStringExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2417,7 +2364,7 @@ typedef void (*parser___parser_prod___AMidStringExpr___replace_child_t)(val_t p0
 static const char * const LOCATE_parser___parser_prod___AMidStringExpr___visit_all = "parser_prod::AMidStringExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AMidStringExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMidStringExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AMidStringExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AMidStringExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AEndStringExpr___empty_init = "parser_prod::AEndStringExpr::empty_init";
 void parser___parser_prod___AEndStringExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AEndStringExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2432,7 +2379,7 @@ typedef void (*parser___parser_prod___AEndStringExpr___replace_child_t)(val_t p0
 static const char * const LOCATE_parser___parser_prod___AEndStringExpr___visit_all = "parser_prod::AEndStringExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AEndStringExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AEndStringExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AEndStringExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AEndStringExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ASuperstringExpr___empty_init = "parser_prod::ASuperstringExpr::empty_init";
 void parser___parser_prod___ASuperstringExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ASuperstringExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2453,52 +2400,52 @@ typedef void (*parser___parser_prod___ASuperstringExpr___visit_all_t)(val_t p0, 
   typedef void (*CLOS_OC_parser___parser_prod___ASuperstringExpr___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ASuperstringExpr___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ASuperstringExpr___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ASuperstringExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASuperstringExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AParExpr___empty_init = "parser_prod::AParExpr::empty_init";
 void parser___parser_prod___AParExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AParExpr___empty_init_t)(val_t p0, int* init_table);
 val_t NEW_AParExpr_parser___parser_prod___AParExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___AParExpr___init_aparexpr = "parser_prod::AParExpr::init_aparexpr";
-void parser___parser_prod___AParExpr___init_aparexpr(val_t p0, val_t p1, int* init_table);
-typedef void (*parser___parser_prod___AParExpr___init_aparexpr_t)(val_t p0, val_t p1, int* init_table);
-val_t NEW_AParExpr_parser___parser_prod___AParExpr___init_aparexpr(val_t p0);
+void parser___parser_prod___AParExpr___init_aparexpr(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*parser___parser_prod___AParExpr___init_aparexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+val_t NEW_AParExpr_parser___parser_prod___AParExpr___init_aparexpr(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___AParExpr___replace_child = "parser_prod::AParExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___AParExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AParExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___AParExpr___visit_all = "parser_prod::AParExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AParExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AParExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AParExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AParExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAsCastExpr___empty_init = "parser_prod::AAsCastExpr::empty_init";
 void parser___parser_prod___AAsCastExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAsCastExpr___empty_init_t)(val_t p0, int* init_table);
 val_t NEW_AAsCastExpr_parser___parser_prod___AAsCastExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___AAsCastExpr___init_aascastexpr = "parser_prod::AAsCastExpr::init_aascastexpr";
-void parser___parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
-typedef void (*parser___parser_prod___AAsCastExpr___init_aascastexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
-val_t NEW_AAsCastExpr_parser___parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
+typedef void (*parser___parser_prod___AAsCastExpr___init_aascastexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table);
+val_t NEW_AAsCastExpr_parser___parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 static const char * const LOCATE_parser___parser_prod___AAsCastExpr___replace_child = "parser_prod::AAsCastExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___AAsCastExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAsCastExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___AAsCastExpr___visit_all = "parser_prod::AAsCastExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAsCastExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAsCastExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAsCastExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAsCastExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AAsNotnullExpr___empty_init = "parser_prod::AAsNotnullExpr::empty_init";
 void parser___parser_prod___AAsNotnullExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AAsNotnullExpr___empty_init_t)(val_t p0, int* init_table);
 val_t NEW_AAsNotnullExpr_parser___parser_prod___AAsNotnullExpr___empty_init();
 static const char * const LOCATE_parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr = "parser_prod::AAsNotnullExpr::init_aasnotnullexpr";
-void parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
-typedef void (*parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
-val_t NEW_AAsNotnullExpr_parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+void parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, int* init_table);
+typedef void (*parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, int* init_table);
+val_t NEW_AAsNotnullExpr_parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 static const char * const LOCATE_parser___parser_prod___AAsNotnullExpr___replace_child = "parser_prod::AAsNotnullExpr::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___AAsNotnullExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAsNotnullExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___AAsNotnullExpr___visit_all = "parser_prod::AAsNotnullExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAsNotnullExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAsNotnullExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAsNotnullExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAsNotnullExpr_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AIssetAttrExpr___empty_init = "parser_prod::AIssetAttrExpr::empty_init";
 void parser___parser_prod___AIssetAttrExpr___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AIssetAttrExpr___empty_init_t)(val_t p0, int* init_table);
@@ -2513,7 +2460,85 @@ typedef void (*parser___parser_prod___AIssetAttrExpr___replace_child_t)(val_t p0
 static const char * const LOCATE_parser___parser_prod___AIssetAttrExpr___visit_all = "parser_prod::AIssetAttrExpr::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AIssetAttrExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIssetAttrExpr___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AIssetAttrExpr_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AIssetAttrExpr_parser___parser_nodes___ANode___init();
+static const char * const LOCATE_parser___parser_prod___ADebugTypeExpr___empty_init = "parser_prod::ADebugTypeExpr::empty_init";
+void parser___parser_prod___ADebugTypeExpr___empty_init(val_t p0, int* init_table);
+typedef void (*parser___parser_prod___ADebugTypeExpr___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_ADebugTypeExpr_parser___parser_prod___ADebugTypeExpr___empty_init();
+static const char * const LOCATE_parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr = "parser_prod::ADebugTypeExpr::init_adebugtypeexpr";
+void parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
+typedef void (*parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, int* init_table);
+val_t NEW_ADebugTypeExpr_parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+static const char * const LOCATE_parser___parser_prod___ADebugTypeExpr___replace_child = "parser_prod::ADebugTypeExpr::(parser_prod::ANode::replace_child)";
+void parser___parser_prod___ADebugTypeExpr___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser___parser_prod___ADebugTypeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser___parser_prod___ADebugTypeExpr___visit_all = "parser_prod::ADebugTypeExpr::(parser_prod::ANode::visit_all)";
+void parser___parser_prod___ADebugTypeExpr___visit_all(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADebugTypeExpr___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_ADebugTypeExpr_parser___parser_nodes___ANode___init();
+static const char * const LOCATE_parser___parser_prod___AListExprs___empty_init = "parser_prod::AListExprs::empty_init";
+void parser___parser_prod___AListExprs___empty_init(val_t p0, int* init_table);
+typedef void (*parser___parser_prod___AListExprs___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_AListExprs_parser___parser_prod___AListExprs___empty_init();
+static const char * const LOCATE_parser___parser_prod___AListExprs___init_alistexprs = "parser_prod::AListExprs::init_alistexprs";
+void parser___parser_prod___AListExprs___init_alistexprs(val_t p0, val_t p1, int* init_table);
+typedef void (*parser___parser_prod___AListExprs___init_alistexprs_t)(val_t p0, val_t p1, int* init_table);
+  typedef void (*CLOS_OC_parser___parser_prod___AListExprs___init_alistexprs_1_0)(struct stack_frame_t *);
+  void OC_parser___parser_prod___AListExprs___init_alistexprs_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_parser___parser_prod___AListExprs___init_alistexprs_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_AListExprs_parser___parser_prod___AListExprs___init_alistexprs(val_t p0);
+static const char * const LOCATE_parser___parser_prod___AListExprs___replace_child = "parser_prod::AListExprs::(parser_prod::ANode::replace_child)";
+void parser___parser_prod___AListExprs___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser___parser_prod___AListExprs___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser___parser_prod___AListExprs___visit_all = "parser_prod::AListExprs::(parser_prod::ANode::visit_all)";
+void parser___parser_prod___AListExprs___visit_all(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AListExprs___visit_all_t)(val_t p0, val_t p1);
+  typedef void (*CLOS_OC_parser___parser_prod___AListExprs___visit_all_1_0)(struct stack_frame_t *);
+  void OC_parser___parser_prod___AListExprs___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_parser___parser_prod___AListExprs___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_AListExprs_parser___parser_nodes___ANode___init();
+static const char * const LOCATE_parser___parser_prod___AParExprs___empty_init = "parser_prod::AParExprs::empty_init";
+void parser___parser_prod___AParExprs___empty_init(val_t p0, int* init_table);
+typedef void (*parser___parser_prod___AParExprs___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_AParExprs_parser___parser_prod___AParExprs___empty_init();
+static const char * const LOCATE_parser___parser_prod___AParExprs___init_aparexprs = "parser_prod::AParExprs::init_aparexprs";
+void parser___parser_prod___AParExprs___init_aparexprs(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*parser___parser_prod___AParExprs___init_aparexprs_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+  typedef void (*CLOS_OC_parser___parser_prod___AParExprs___init_aparexprs_1_0)(struct stack_frame_t *);
+  void OC_parser___parser_prod___AParExprs___init_aparexprs_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_parser___parser_prod___AParExprs___init_aparexprs_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_AParExprs_parser___parser_prod___AParExprs___init_aparexprs(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser___parser_prod___AParExprs___replace_child = "parser_prod::AParExprs::(parser_prod::ANode::replace_child)";
+void parser___parser_prod___AParExprs___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser___parser_prod___AParExprs___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser___parser_prod___AParExprs___visit_all = "parser_prod::AParExprs::(parser_prod::ANode::visit_all)";
+void parser___parser_prod___AParExprs___visit_all(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParExprs___visit_all_t)(val_t p0, val_t p1);
+  typedef void (*CLOS_OC_parser___parser_prod___AParExprs___visit_all_1_0)(struct stack_frame_t *);
+  void OC_parser___parser_prod___AParExprs___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_parser___parser_prod___AParExprs___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_AParExprs_parser___parser_nodes___ANode___init();
+static const char * const LOCATE_parser___parser_prod___ABraExprs___empty_init = "parser_prod::ABraExprs::empty_init";
+void parser___parser_prod___ABraExprs___empty_init(val_t p0, int* init_table);
+typedef void (*parser___parser_prod___ABraExprs___empty_init_t)(val_t p0, int* init_table);
+val_t NEW_ABraExprs_parser___parser_prod___ABraExprs___empty_init();
+static const char * const LOCATE_parser___parser_prod___ABraExprs___init_abraexprs = "parser_prod::ABraExprs::init_abraexprs";
+void parser___parser_prod___ABraExprs___init_abraexprs(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*parser___parser_prod___ABraExprs___init_abraexprs_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+  typedef void (*CLOS_OC_parser___parser_prod___ABraExprs___init_abraexprs_1_0)(struct stack_frame_t *);
+  void OC_parser___parser_prod___ABraExprs___init_abraexprs_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_parser___parser_prod___ABraExprs___init_abraexprs_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ABraExprs_parser___parser_prod___ABraExprs___init_abraexprs(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser___parser_prod___ABraExprs___replace_child = "parser_prod::ABraExprs::(parser_prod::ANode::replace_child)";
+void parser___parser_prod___ABraExprs___replace_child(val_t p0, val_t p1, val_t p2);
+typedef void (*parser___parser_prod___ABraExprs___replace_child_t)(val_t p0, val_t p1, val_t p2);
+static const char * const LOCATE_parser___parser_prod___ABraExprs___visit_all = "parser_prod::ABraExprs::(parser_prod::ANode::visit_all)";
+void parser___parser_prod___ABraExprs___visit_all(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraExprs___visit_all_t)(val_t p0, val_t p1);
+  typedef void (*CLOS_OC_parser___parser_prod___ABraExprs___visit_all_1_0)(struct stack_frame_t *);
+  void OC_parser___parser_prod___ABraExprs___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_parser___parser_prod___ABraExprs___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t NEW_ABraExprs_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___APlusAssignOp___empty_init = "parser_prod::APlusAssignOp::empty_init";
 void parser___parser_prod___APlusAssignOp___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___APlusAssignOp___empty_init_t)(val_t p0, int* init_table);
@@ -2528,7 +2553,7 @@ typedef void (*parser___parser_prod___APlusAssignOp___replace_child_t)(val_t p0,
 static const char * const LOCATE_parser___parser_prod___APlusAssignOp___visit_all = "parser_prod::APlusAssignOp::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___APlusAssignOp___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APlusAssignOp___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_APlusAssignOp_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_APlusAssignOp_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AMinusAssignOp___empty_init = "parser_prod::AMinusAssignOp::empty_init";
 void parser___parser_prod___AMinusAssignOp___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AMinusAssignOp___empty_init_t)(val_t p0, int* init_table);
@@ -2543,7 +2568,7 @@ typedef void (*parser___parser_prod___AMinusAssignOp___replace_child_t)(val_t p0
 static const char * const LOCATE_parser___parser_prod___AMinusAssignOp___visit_all = "parser_prod::AMinusAssignOp::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AMinusAssignOp___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMinusAssignOp___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AMinusAssignOp_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AMinusAssignOp_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AClosureDef___empty_init = "parser_prod::AClosureDef::empty_init";
 void parser___parser_prod___AClosureDef___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AClosureDef___empty_init_t)(val_t p0, int* init_table);
@@ -2564,7 +2589,7 @@ typedef void (*parser___parser_prod___AClosureDef___visit_all_t)(val_t p0, val_t
   typedef void (*CLOS_OC_parser___parser_prod___AClosureDef___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AClosureDef___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AClosureDef___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AClosureDef_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AClosureDef_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ASimpleClosureId___empty_init = "parser_prod::ASimpleClosureId::empty_init";
 void parser___parser_prod___ASimpleClosureId___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ASimpleClosureId___empty_init_t)(val_t p0, int* init_table);
@@ -2579,7 +2604,7 @@ typedef void (*parser___parser_prod___ASimpleClosureId___replace_child_t)(val_t 
 static const char * const LOCATE_parser___parser_prod___ASimpleClosureId___visit_all = "parser_prod::ASimpleClosureId::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ASimpleClosureId___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASimpleClosureId___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ASimpleClosureId_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASimpleClosureId_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ABreakClosureId___empty_init = "parser_prod::ABreakClosureId::empty_init";
 void parser___parser_prod___ABreakClosureId___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ABreakClosureId___empty_init_t)(val_t p0, int* init_table);
@@ -2594,7 +2619,7 @@ typedef void (*parser___parser_prod___ABreakClosureId___replace_child_t)(val_t p
 static const char * const LOCATE_parser___parser_prod___ABreakClosureId___visit_all = "parser_prod::ABreakClosureId::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ABreakClosureId___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABreakClosureId___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ABreakClosureId_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ABreakClosureId_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AModuleName___empty_init = "parser_prod::AModuleName::empty_init";
 void parser___parser_prod___AModuleName___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AModuleName___empty_init_t)(val_t p0, int* init_table);
@@ -2615,7 +2640,7 @@ typedef void (*parser___parser_prod___AModuleName___visit_all_t)(val_t p0, val_t
   typedef void (*CLOS_OC_parser___parser_prod___AModuleName___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AModuleName___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AModuleName___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AModuleName_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AModuleName_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AExternCalls___empty_init = "parser_prod::AExternCalls::empty_init";
 void parser___parser_prod___AExternCalls___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AExternCalls___empty_init_t)(val_t p0, int* init_table);
@@ -2636,7 +2661,7 @@ typedef void (*parser___parser_prod___AExternCalls___visit_all_t)(val_t p0, val_
   typedef void (*CLOS_OC_parser___parser_prod___AExternCalls___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AExternCalls___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AExternCalls___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AExternCalls_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AExternCalls_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___AExternCall___empty_init = "parser_prod::AExternCall::empty_init";
 void parser___parser_prod___AExternCall___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AExternCall___empty_init_t)(val_t p0, int* init_table);
@@ -2651,7 +2676,7 @@ typedef void (*parser___parser_prod___AExternCall___replace_child_t)(val_t p0, v
 static const char * const LOCATE_parser___parser_prod___AExternCall___visit_all = "parser_prod::AExternCall::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AExternCall___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AExternCall_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AExternCall_parser___parser_nodes___ANode___init();
 val_t NEW_ASuperExternCall_parser___parser_prod___AExternCall___empty_init();
 static const char * const LOCATE_parser___parser_prod___ASuperExternCall___empty_init = "parser_prod::ASuperExternCall::empty_init";
 void parser___parser_prod___ASuperExternCall___empty_init(val_t p0, int* init_table);
@@ -2667,7 +2692,7 @@ typedef void (*parser___parser_prod___ASuperExternCall___replace_child_t)(val_t 
 static const char * const LOCATE_parser___parser_prod___ASuperExternCall___visit_all = "parser_prod::ASuperExternCall::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ASuperExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASuperExternCall___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ASuperExternCall_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ASuperExternCall_parser___parser_nodes___ANode___init();
 val_t NEW_ASuperExternCall_parser___parser_prod___AExternCall___init_aexterncall();
 val_t NEW_ALocalPropExternCall_parser___parser_prod___AExternCall___empty_init();
 static const char * const LOCATE_parser___parser_prod___ALocalPropExternCall___empty_init = "parser_prod::ALocalPropExternCall::empty_init";
@@ -2684,7 +2709,7 @@ typedef void (*parser___parser_prod___ALocalPropExternCall___replace_child_t)(va
 static const char * const LOCATE_parser___parser_prod___ALocalPropExternCall___visit_all = "parser_prod::ALocalPropExternCall::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ALocalPropExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALocalPropExternCall___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ALocalPropExternCall_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ALocalPropExternCall_parser___parser_nodes___ANode___init();
 val_t NEW_ALocalPropExternCall_parser___parser_prod___AExternCall___init_aexterncall();
 val_t NEW_AFullPropExternCall_parser___parser_prod___AExternCall___empty_init();
 static const char * const LOCATE_parser___parser_prod___AFullPropExternCall___empty_init = "parser_prod::AFullPropExternCall::empty_init";
@@ -2701,7 +2726,7 @@ typedef void (*parser___parser_prod___AFullPropExternCall___replace_child_t)(val
 static const char * const LOCATE_parser___parser_prod___AFullPropExternCall___visit_all = "parser_prod::AFullPropExternCall::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AFullPropExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AFullPropExternCall___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AFullPropExternCall_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AFullPropExternCall_parser___parser_nodes___ANode___init();
 val_t NEW_AFullPropExternCall_parser___parser_prod___AExternCall___init_aexterncall();
 val_t NEW_AInitPropExternCall_parser___parser_prod___AExternCall___empty_init();
 static const char * const LOCATE_parser___parser_prod___AInitPropExternCall___empty_init = "parser_prod::AInitPropExternCall::empty_init";
@@ -2718,7 +2743,7 @@ typedef void (*parser___parser_prod___AInitPropExternCall___replace_child_t)(val
 static const char * const LOCATE_parser___parser_prod___AInitPropExternCall___visit_all = "parser_prod::AInitPropExternCall::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AInitPropExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AInitPropExternCall___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AInitPropExternCall_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AInitPropExternCall_parser___parser_nodes___ANode___init();
 val_t NEW_AInitPropExternCall_parser___parser_prod___AExternCall___init_aexterncall();
 val_t NEW_ACastAsExternCall_parser___parser_prod___AExternCall___empty_init();
 static const char * const LOCATE_parser___parser_prod___ACastAsExternCall___empty_init = "parser_prod::ACastAsExternCall::empty_init";
@@ -2735,7 +2760,7 @@ typedef void (*parser___parser_prod___ACastAsExternCall___replace_child_t)(val_t
 static const char * const LOCATE_parser___parser_prod___ACastAsExternCall___visit_all = "parser_prod::ACastAsExternCall::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___ACastAsExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACastAsExternCall___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ACastAsExternCall_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_ACastAsExternCall_parser___parser_nodes___ANode___init();
 val_t NEW_ACastAsExternCall_parser___parser_prod___AExternCall___init_aexterncall();
 val_t NEW_AAsNullableExternCall_parser___parser_prod___AExternCall___empty_init();
 static const char * const LOCATE_parser___parser_prod___AAsNullableExternCall___empty_init = "parser_prod::AAsNullableExternCall::empty_init";
@@ -2752,7 +2777,7 @@ typedef void (*parser___parser_prod___AAsNullableExternCall___replace_child_t)(v
 static const char * const LOCATE_parser___parser_prod___AAsNullableExternCall___visit_all = "parser_prod::AAsNullableExternCall::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAsNullableExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAsNullableExternCall___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAsNullableExternCall_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAsNullableExternCall_parser___parser_nodes___ANode___init();
 val_t NEW_AAsNullableExternCall_parser___parser_prod___AExternCall___init_aexterncall();
 val_t NEW_AAsNotNullableExternCall_parser___parser_prod___AExternCall___empty_init();
 static const char * const LOCATE_parser___parser_prod___AAsNotNullableExternCall___empty_init = "parser_prod::AAsNotNullableExternCall::empty_init";
@@ -2769,7 +2794,7 @@ typedef void (*parser___parser_prod___AAsNotNullableExternCall___replace_child_t
 static const char * const LOCATE_parser___parser_prod___AAsNotNullableExternCall___visit_all = "parser_prod::AAsNotNullableExternCall::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___AAsNotNullableExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAsNotNullableExternCall___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_AAsNotNullableExternCall_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AAsNotNullableExternCall_parser___parser_nodes___ANode___init();
 val_t NEW_AAsNotNullableExternCall_parser___parser_prod___AExternCall___init_aexterncall();
 static const char * const LOCATE_parser___parser_prod___AQualified___empty_init = "parser_prod::AQualified::empty_init";
 void parser___parser_prod___AQualified___empty_init(val_t p0, int* init_table);
@@ -2791,7 +2816,7 @@ typedef void (*parser___parser_prod___AQualified___visit_all_t)(val_t p0, val_t 
   typedef void (*CLOS_OC_parser___parser_prod___AQualified___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___AQualified___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___AQualified___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_AQualified_parser___parser_nodes___ANode___init(val_t p0);
+val_t NEW_AQualified_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___ADoc___empty_init = "parser_prod::ADoc::empty_init";
 void parser___parser_prod___ADoc___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___ADoc___empty_init_t)(val_t p0, int* init_table);
@@ -2812,16 +2837,12 @@ typedef void (*parser___parser_prod___ADoc___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___ADoc___visit_all_1_0)(struct stack_frame_t *);
   void OC_parser___parser_prod___ADoc___visit_all_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_parser___parser_prod___ADoc___visit_all_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-val_t NEW_ADoc_parser___parser_nodes___ANode___init(val_t p0);
-val_t NEW_Start_parser___parser_nodes___ANode___init(val_t p0);
-static const char * const LOCATE_parser___parser_prod___Start___init = "parser_prod::Start::init";
-void parser___parser_prod___Start___init(val_t p0, val_t p1, val_t p2, int* init_table);
-typedef void (*parser___parser_prod___Start___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
-val_t NEW_Start_parser___parser_prod___Start___init(val_t p0, val_t p1);
+val_t NEW_ADoc_parser___parser_nodes___ANode___init();
 static const char * const LOCATE_parser___parser_prod___Start___replace_child = "parser_prod::Start::(parser_prod::ANode::replace_child)";
 void parser___parser_prod___Start___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___Start___replace_child_t)(val_t p0, val_t p1, val_t p2);
 static const char * const LOCATE_parser___parser_prod___Start___visit_all = "parser_prod::Start::(parser_prod::ANode::visit_all)";
 void parser___parser_prod___Start___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___Start___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_Start_parser___parser_nodes___Start___init(val_t p0, val_t p1);
 #endif

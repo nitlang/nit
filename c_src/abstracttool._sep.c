@@ -17,13 +17,13 @@ void abstracttool___AbstractCompiler___init(val_t p0, val_t p1, int* init_table)
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./abstracttool.nit:29 */
+  /* abstracttool.nit:29 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* ./abstracttool.nit:31 */
+  /* abstracttool.nit:31 */
   ATTR_abstracttool___AbstractCompiler____tool_name(fra.me.REG[2]) = fra.me.REG[1];
-  /* ./abstracttool.nit:32 */
-  CALL_mmloader___ToolContext___init(fra.me.REG[0])(fra.me.REG[0], init_table);
-  /* ./abstracttool.nit:33 */
+  /* abstracttool.nit:32 */
+  CALL_toolcontext___ToolContext___init(fra.me.REG[0])(fra.me.REG[0], init_table);
+  /* abstracttool.nit:33 */
   fra.me.REG[0] = NEW_SrcModuleLoader_syntax___SrcModuleLoader___init();
   CALL_mmloader___ToolContext___register_loader(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -43,7 +43,7 @@ val_t abstracttool___AbstractCompiler___tool_name(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./abstracttool.nit:36 */
+  /* abstracttool.nit:36 */
   REGB0 = TAG_Bool(ATTR_abstracttool___AbstractCompiler____tool_name(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -81,13 +81,13 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./abstracttool.nit:42 */
-  CALL_mmloader___ToolContext___process_options(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./abstracttool.nit:44 */
-  fra.me.REG[1] = CALL_mmloader___ToolContext___opt_version(fra.me.REG[0])(fra.me.REG[0]);
+  /* abstracttool.nit:42 */
+  CALL_toolcontext___ToolContext___process_options(fra.me.REG[0])(fra.me.REG[0]);
+  /* abstracttool.nit:44 */
+  fra.me.REG[1] = CALL_toolcontext___ToolContext___opt_version(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_opts___Option___value(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(fra.me.REG[1])) {
-    /* ./abstracttool.nit:45 */
+    /* abstracttool.nit:45 */
     REGB0 = TAG_Int(5);
     fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -123,15 +123,15 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
     fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
     CALL_standard___file___Object___print(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-    /* ./abstracttool.nit:46 */
+    /* abstracttool.nit:46 */
     REGB0 = TAG_Int(0);
     CALL_standard___kernel___Object___exit(fra.me.REG[0])(fra.me.REG[0], REGB0);
   }
-  /* ./abstracttool.nit:49 */
-  fra.me.REG[1] = CALL_mmloader___ToolContext___opt_help(fra.me.REG[0])(fra.me.REG[0]);
+  /* abstracttool.nit:49 */
+  fra.me.REG[1] = CALL_toolcontext___ToolContext___opt_help(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_opts___Option___value(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(fra.me.REG[1])) {
-    /* ./abstracttool.nit:50 */
+    /* abstracttool.nit:50 */
     REGB0 = TAG_Int(3);
     fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_4) {
@@ -156,35 +156,35 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
     fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
     CALL_standard___file___Object___print(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-    /* ./abstracttool.nit:51 */
-    fra.me.REG[1] = CALL_mmloader___ToolContext___option_context(fra.me.REG[0])(fra.me.REG[0]);
+    /* abstracttool.nit:51 */
+    fra.me.REG[1] = CALL_toolcontext___ToolContext___option_context(fra.me.REG[0])(fra.me.REG[0]);
     CALL_opts___OptionContext___usage(fra.me.REG[1])(fra.me.REG[1]);
-    /* ./abstracttool.nit:52 */
+    /* abstracttool.nit:52 */
     REGB0 = TAG_Int(0);
     CALL_standard___kernel___Object___exit(fra.me.REG[0])(fra.me.REG[0], REGB0);
   }
-  /* ./abstracttool.nit:55 */
-  fra.me.REG[1] = CALL_mmloader___ToolContext___option_context(fra.me.REG[0])(fra.me.REG[0]);
+  /* abstracttool.nit:55 */
+  fra.me.REG[1] = CALL_toolcontext___ToolContext___option_context(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_opts___OptionContext___rest(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./../lib/standard//collection//array.nit:24 */
+  /* ../lib/standard/collection/array.nit:24 */
   REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ./abstracttool.nit:55 */
+  /* abstracttool.nit:55 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:227 */
+    /* ../lib/standard/kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./abstracttool.nit:55 */
+    /* abstracttool.nit:55 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./abstracttool.nit:56 */
+    /* abstracttool.nit:56 */
     REGB2 = TAG_Int(3);
     fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB2);
     if (!once_value_6) {
@@ -209,19 +209,19 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
     fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
     CALL_standard___file___Object___print(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-    /* ./abstracttool.nit:57 */
-    fra.me.REG[1] = CALL_mmloader___ToolContext___option_context(fra.me.REG[0])(fra.me.REG[0]);
+    /* abstracttool.nit:57 */
+    fra.me.REG[1] = CALL_toolcontext___ToolContext___option_context(fra.me.REG[0])(fra.me.REG[0]);
     CALL_opts___OptionContext___usage(fra.me.REG[1])(fra.me.REG[1]);
-    /* ./abstracttool.nit:58 */
+    /* abstracttool.nit:58 */
     REGB2 = TAG_Int(1);
     CALL_standard___kernel___Object___exit(fra.me.REG[0])(fra.me.REG[0], REGB2);
   }
-  /* ./abstracttool.nit:61 */
-  fra.me.REG[1] = CALL_mmloader___ToolContext___option_context(fra.me.REG[0])(fra.me.REG[0]);
+  /* abstracttool.nit:61 */
+  fra.me.REG[1] = CALL_toolcontext___ToolContext___option_context(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_opts___OptionContext___rest(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./abstracttool.nit:62 */
+  /* abstracttool.nit:62 */
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___init();
-  /* ./abstracttool.nit:63 */
+  /* abstracttool.nit:63 */
   if (!once_value_8) {
     fra.me.REG[3] = BOX_NativeString("Syntax analysis");
     REGB2 = TAG_Int(15);
@@ -231,41 +231,41 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
   } else fra.me.REG[3] = once_value_8;
   fra.me.REG[3] = fra.me.REG[3];
   REGB2 = TAG_Int(1);
-  CALL_mmloader___ToolContext___info(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3], REGB2);
-  /* ./abstracttool.nit:64 */
+  CALL_toolcontext___ToolContext___info(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3], REGB2);
+  /* abstracttool.nit:64 */
   REGB2 = TAG_Int(0);
-  /* ./../lib/standard//collection//array.nit:24 */
+  /* ../lib/standard/collection/array.nit:24 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ./../lib/standard//kernel.nit:352 */
+  /* ../lib/standard/kernel.nit:352 */
   while(1) {
     REGB0 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB0)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:232 */
+    /* ../lib/standard/kernel.nit:232 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//kernel.nit:352 */
+    /* ../lib/standard/kernel.nit:352 */
     if (UNTAG_Bool(REGB0)) {
-      /* ./abstracttool.nit:64 */
+      /* abstracttool.nit:64 */
       REGB0 = REGB2;
-      /* ./../lib/standard//collection//array.nit:278 */
+      /* ../lib/standard/collection/array.nit:278 */
       fra.me.REG[3] = fra.me.REG[1];
-      /* ./../lib/standard//collection//array.nit:280 */
+      /* ../lib/standard/collection/array.nit:280 */
       REGB3 = TAG_Int(0);
       REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB4)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ./../lib/standard//kernel.nit:233 */
+      /* ../lib/standard/kernel.nit:233 */
       REGB3 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB3));
-      /* ./../lib/standard//collection//array.nit:280 */
+      /* ../lib/standard/collection/array.nit:280 */
       if (UNTAG_Bool(REGB3)) {
         REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
         if (UNTAG_Bool(REGB3)) {
@@ -278,52 +278,52 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ./../lib/standard//kernel.nit:232 */
+        /* ../lib/standard/kernel.nit:232 */
         REGB3 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB3));
       } else {
-        /* ./../lib/standard//collection//array.nit:280 */
+        /* ../lib/standard/collection/array.nit:280 */
         REGB4 = TAG_Bool(false);
         REGB3 = REGB4;
       }
       if (UNTAG_Bool(REGB3)) {
       } else {
-        nit_abort("Assert %s  failed", "'index'", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
       }
-      /* ./../lib/standard//collection//array.nit:281 */
+      /* ../lib/standard/collection/array.nit:281 */
       fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
       REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ./../lib/standard//collection//array.nit:718 */
+      /* ../lib/standard/collection/array.nit:718 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
-      /* ./../lib/standard//collection//array.nit:281 */
+      /* ../lib/standard/collection/array.nit:281 */
       goto label9;
       label9: while(0);
-      /* ./abstracttool.nit:65 */
+      /* abstracttool.nit:65 */
       fra.me.REG[3] = CALL_mmloader___ToolContext___get_module_from_filename(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      /* ./abstracttool.nit:66 */
+      /* abstracttool.nit:66 */
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-      /* ./../lib/standard//kernel.nit:354 */
+      /* ../lib/standard/kernel.nit:354 */
       REGB0 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:235 */
       REGB0 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB0));
-      /* ./../lib/standard//kernel.nit:354 */
+      /* ../lib/standard/kernel.nit:354 */
       REGB2 = REGB0;
     } else {
-      /* ./../lib/standard//kernel.nit:352 */
+      /* ../lib/standard/kernel.nit:352 */
       goto label10;
     }
   }
   label10: while(0);
-  /* ./abstracttool.nit:68 */
-  fra.me.REG[1] = CALL_mmloader___ToolContext___opt_log(fra.me.REG[0])(fra.me.REG[0]);
+  /* abstracttool.nit:68 */
+  fra.me.REG[1] = CALL_toolcontext___ToolContext___opt_log(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_opts___Option___value(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(fra.me.REG[1])) {
-    /* ./abstracttool.nit:69 */
+    /* abstracttool.nit:69 */
     CALL_abstracttool___AbstractCompiler___dump_context_info(fra.me.REG[0])(fra.me.REG[0]);
   }
-  /* ./abstracttool.nit:72 */
+  /* abstracttool.nit:72 */
   REGB2 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[2])(fra.me.REG[2]);
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
@@ -343,7 +343,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./abstracttool.nit:73 */
+    /* abstracttool.nit:73 */
     CALL_abstracttool___AbstractCompiler___perform_work(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
   }
   stack_frame_head = fra.me.prev;
@@ -359,7 +359,7 @@ void abstracttool___AbstractCompiler___perform_work(val_t p0, val_t p1){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./abstracttool.nit:77 */
+  /* abstracttool.nit:77 */
   nit_abort("Deferred method called", NULL, LOCATE_abstracttool, 77);
   stack_frame_head = fra.me.prev;
   return;
@@ -388,15 +388,15 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./abstracttool.nit:81 */
+  /* abstracttool.nit:81 */
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMContext___module_hierarchy(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[1])(fra.me.REG[1], (&(fra.me)), ((fun_t)OC_abstracttool___AbstractCompiler___dump_context_info_1));
-  /* ./abstracttool.nit:84 */
+  /* abstracttool.nit:84 */
   fra.me.REG[1] = NEW_Array_standard___collection___array___Array___init();
-  /* ./abstracttool.nit:85 */
+  /* abstracttool.nit:85 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMContext___module_hierarchy(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./abstracttool.nit:86 */
+  /* abstracttool.nit:86 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMContext___module_hierarchy(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_metamodel___partial_order___PartialOrder___select_smallests(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   if (!once_value_2) {
@@ -408,7 +408,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   } else fra.me.REG[2] = once_value_2;
   fra.me.REG[2] = fra.me.REG[2];
   fra.me.REG[2] = CALL_standard___string___Collection___join(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./abstracttool.nit:88 */
+  /* abstracttool.nit:88 */
   REGB0 = TAG_Int(5);
   fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_3) {
@@ -420,7 +420,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   } else fra.me.REG[3] = once_value_3;
   fra.me.REG[3] = fra.me.REG[3];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  fra.me.REG[3] = CALL_mmloader___ToolContext___log_directory(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[3] = CALL_toolcontext___ToolContext___log_directory(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   if (!once_value_4) {
     fra.me.REG[3] = BOX_NativeString("/");
@@ -443,13 +443,13 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = NEW_OFStream_standard___file___OFStream___open(fra.me.REG[1]);
-  /* ./abstracttool.nit:89 */
+  /* abstracttool.nit:89 */
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMContext___class_hierarchy(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrder___to_dot(fra.me.REG[3])(fra.me.REG[3]);
   CALL_standard___stream___OStream___write(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* ./abstracttool.nit:90 */
+  /* abstracttool.nit:90 */
   CALL_standard___stream___IOS___close(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./abstracttool.nit:92 */
+  /* abstracttool.nit:92 */
   REGB0 = TAG_Int(5);
   fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_6) {
@@ -461,7 +461,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   } else fra.me.REG[4] = once_value_6;
   fra.me.REG[4] = fra.me.REG[4];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-  fra.me.REG[4] = CALL_mmloader___ToolContext___log_directory(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[4] = CALL_toolcontext___ToolContext___log_directory(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
   if (!once_value_7) {
     fra.me.REG[4] = BOX_NativeString("/");
@@ -485,11 +485,11 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[3] = NEW_OFStream_standard___file___OFStream___open(fra.me.REG[3]);
   fra.me.REG[1] = fra.me.REG[3];
-  /* ./abstracttool.nit:93 */
+  /* abstracttool.nit:93 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMContext___module_hierarchy(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___partial_order___PartialOrder___to_dot(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___stream___OStream___write(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* ./abstracttool.nit:94 */
+  /* abstracttool.nit:94 */
   CALL_standard___stream___IOS___close(fra.me.REG[1])(fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -511,8 +511,8 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* ./abstracttool.nit:82 */
-    fra.me.REG[1] = CALL_mmloader___ToolContext___log_directory(closctx->REG[0])(closctx->REG[0]);
+    /* abstracttool.nit:82 */
+    fra.me.REG[1] = CALL_toolcontext___ToolContext___log_directory(closctx->REG[0])(closctx->REG[0]);
     CALL_abstracttool___MMModule___dump_module_info(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     stack_frame_head = fra.me.prev;
     return;
@@ -542,7 +542,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./abstracttool.nit:101 */
+  /* abstracttool.nit:101 */
   REGB0 = TAG_Int(5);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -577,7 +577,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   fra.me.REG[1] = fra.me.REG[1];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
-  /* ./abstracttool.nit:102 */
+  /* abstracttool.nit:102 */
   REGB0 = TAG_Int(3);
   fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_4) {
@@ -601,13 +601,13 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = NEW_OFStream_standard___file___OFStream___open(fra.me.REG[1]);
-  /* ./abstracttool.nit:103 */
+  /* abstracttool.nit:103 */
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMModule___class_specialization_hierarchy(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrder___to_dot(fra.me.REG[3])(fra.me.REG[3]);
   CALL_standard___stream___OStream___write(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* ./abstracttool.nit:104 */
+  /* abstracttool.nit:104 */
   CALL_standard___stream___IOS___close(fra.me.REG[1])(fra.me.REG[1]);
-  /* ./abstracttool.nit:106 */
+  /* abstracttool.nit:106 */
   REGB0 = TAG_Int(3);
   fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_6) {
@@ -632,10 +632,10 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[3] = NEW_OFStream_standard___file___OFStream___open(fra.me.REG[3]);
   fra.me.REG[1] = fra.me.REG[3];
-  /* ./abstracttool.nit:107 */
+  /* abstracttool.nit:107 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMModule___local_classes(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_abstracttool___MMModule___dump_module_info_8));
-  /* ./abstracttool.nit:111 */
+  /* abstracttool.nit:111 */
   CALL_standard___stream___IOS___close(fra.me.REG[1])(fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -658,9 +658,9 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* ./abstracttool.nit:108 */
+    /* abstracttool.nit:108 */
     CALL_abstracttool___MMLocalClass___dump_properties(fra.me.REG[0])(fra.me.REG[0], closctx->REG[1]);
-    /* ./abstracttool.nit:109 */
+    /* abstracttool.nit:109 */
     if (!once_value_9) {
       fra.me.REG[0] = BOX_NativeString("\n");
       REGB0 = TAG_Int(1);
@@ -698,7 +698,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./abstracttool.nit:118 */
+  /* abstracttool.nit:118 */
   REGB0 = TAG_Int(3);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -723,16 +723,16 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
   CALL_standard___stream___OStream___write(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ./abstracttool.nit:119 */
+  /* abstracttool.nit:119 */
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalClass___visibility_level(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = TAG_Int(3);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:227 */
+    /* ../lib/standard/kernel.nit:227 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./abstracttool.nit:119 */
+    /* abstracttool.nit:119 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
@@ -750,7 +750,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./abstracttool.nit:120 */
+    /* abstracttool.nit:120 */
     if (!once_value_3) {
       fra.me.REG[2] = BOX_NativeString("\tclass not visible in this module\n");
       REGB2 = TAG_Int(34);
@@ -761,7 +761,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
     fra.me.REG[2] = fra.me.REG[2];
     CALL_standard___stream___OStream___write(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   } else {
-    /* ./abstracttool.nit:121 */
+    /* abstracttool.nit:121 */
     fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMGlobalClass___mmmodule(fra.me.REG[3])(fra.me.REG[3]);
@@ -770,13 +770,13 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
     REGB0 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB1));
     if (UNTAG_Bool(REGB0)) {
     } else {
-      /* ./../lib/standard//kernel.nit:227 */
+      /* ../lib/standard/kernel.nit:227 */
       REGB1 = TAG_Bool((REGB2)==(REGB1));
-      /* ./abstracttool.nit:121 */
+      /* abstracttool.nit:121 */
       REGB0 = REGB1;
     }
     if (UNTAG_Bool(REGB0)) {
-      /* ./abstracttool.nit:122 */
+      /* abstracttool.nit:122 */
       if (!once_value_4) {
         fra.me.REG[3] = BOX_NativeString("\tclass is defined later in the hierarchy\n");
         REGB0 = TAG_Int(41);
@@ -787,12 +787,12 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
       fra.me.REG[3] = fra.me.REG[3];
       CALL_standard___stream___OStream___write(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
     } else {
-      /* ./abstracttool.nit:124 */
+      /* abstracttool.nit:124 */
       fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___global_properties(fra.me.REG[0])(fra.me.REG[0]);
       CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[3])(fra.me.REG[3], (&(fra.me)), ((fun_t)OC_abstracttool___MMLocalClass___dump_properties_5));
     }
   }
-  /* ./abstracttool.nit:129 */
+  /* abstracttool.nit:129 */
   REGB0 = TAG_Int(3);
   fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_9) {
@@ -842,9 +842,9 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
         fra.me.closure_funs = CREG;
         fra.me.REG[0] = p0;
         CREG[0] = clos_fun0;
-        /* ./abstracttool.nit:125 */
+        /* abstracttool.nit:125 */
         fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(closctx->REG[0])(closctx->REG[0], fra.me.REG[0]);
-        /* ./abstracttool.nit:126 */
+        /* abstracttool.nit:126 */
         REGB0 = TAG_Int(5);
         fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
         if (!once_value_6) {

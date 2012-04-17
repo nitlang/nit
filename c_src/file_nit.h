@@ -20,6 +20,10 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+#include <file._nitni.h>
+
+Set String_files___impl( String recv );
+
 extern int string_NativeString_NativeString_file_exists_0(char *f);
 extern void *string_NativeString_NativeString_file_stat_0(char *f);
 extern void *file_NativeFile_NativeFile_file_stat_0(FILE *f);
@@ -29,12 +33,12 @@ extern int string_NativeString_NativeString_file_delete_0(char *f);
 #define file_NativeFile_NativeFile_io_write_2(p, b, l) fwrite((b), 1, (l), (FILE*)(p))
 #define file_NativeFile_NativeFile_io_close_0(self) fclose((FILE*)(self))
 
-#define file_NativeFileCapable_NativeFileCapable_io_open_read_1(self, p0) fopen((p0), "r")
+#define file_NativeFileCapable_NativeFileCapable_io_open_read_1(p0) fopen((p0), "r")
 
-#define file_NativeFileCapable_NativeFileCapable_io_open_write_1(self, p0) fopen((p0), "w")
-#define file_NativeFileCapable_NativeFileCapable_native_stdin_0(self) stdin
-#define file_NativeFileCapable_NativeFileCapable_native_stdout_0(self) stdout
-#define file_NativeFileCapable_NativeFileCapable_native_stderr_0(self) stderr
+#define file_NativeFileCapable_NativeFileCapable_io_open_write_1(p0) fopen((p0), "w")
+#define file_NativeFileCapable_NativeFileCapable_native_stdin_0() stdin
+#define file_NativeFileCapable_NativeFileCapable_native_stdout_0() stdout
+#define file_NativeFileCapable_NativeFileCapable_native_stderr_0() stderr
 #define file_FileStat_FileStat_mode_0(self) (((struct stat*)self)->st_mode)
 #define file_FileStat_FileStat_atime_0(self) (((struct stat*)self)->st_atime)
 #define file_FileStat_FileStat_ctime_0(self) (((struct stat*)self)->st_ctime)

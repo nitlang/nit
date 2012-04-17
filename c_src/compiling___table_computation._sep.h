@@ -109,7 +109,6 @@ extern const int SFT_compiling___table_computation[];
 #define ID_compiling___table_computation___AbsTableElt (SFT_compiling___table_computation[18])
 #define COLOR_compiling___table_computation___AbsTableElt (SFT_compiling___table_computation[19])
 #define INIT_TABLE_POS_compiling___table_computation___AbsTableElt (SFT_compiling___table_computation[20] + 0)
-#define CALL_compiling___table_computation___AbsTableElt___init(recv) ((compiling___table_computation___AbsTableElt___init_t)CALL((recv), (SFT_compiling___table_computation[20] + 1)))
 #define ID_compiling___table_computation___TableElt (SFT_compiling___table_computation[21])
 #define COLOR_compiling___table_computation___TableElt (SFT_compiling___table_computation[22])
 #define INIT_TABLE_POS_compiling___table_computation___TableElt (SFT_compiling___table_computation[23] + 0)
@@ -124,6 +123,7 @@ extern const int SFT_compiling___table_computation[];
 #define ATTR_compiling___table_computation___ModuleTableEltGroup____elements(recv) ATTR(recv, (SFT_compiling___table_computation[29] + 0))
 #define INIT_TABLE_POS_compiling___table_computation___ModuleTableEltGroup (SFT_compiling___table_computation[30] + 0)
 #define CALL_compiling___table_computation___ModuleTableEltGroup___elements(recv) ((compiling___table_computation___ModuleTableEltGroup___elements_t)CALL((recv), (SFT_compiling___table_computation[30] + 1)))
+#define CALL_compiling___table_computation___ModuleTableEltGroup___init(recv) ((compiling___table_computation___ModuleTableEltGroup___init_t)CALL((recv), (SFT_compiling___table_computation[30] + 2)))
 #define ID_compiling___table_computation___TableEltProp (SFT_compiling___table_computation[31])
 #define COLOR_compiling___table_computation___TableEltProp (SFT_compiling___table_computation[32])
 #define ATTR_compiling___table_computation___TableEltProp____property(recv) ATTR(recv, (SFT_compiling___table_computation[33] + 0))
@@ -174,18 +174,23 @@ extern const int SFT_compiling___table_computation[];
 #define ID_compiling___table_computation___TableEltClassSelfId (SFT_compiling___table_computation[70])
 #define COLOR_compiling___table_computation___TableEltClassSelfId (SFT_compiling___table_computation[71])
 #define INIT_TABLE_POS_compiling___table_computation___TableEltClassSelfId (SFT_compiling___table_computation[72] + 0)
+#define CALL_compiling___table_computation___TableEltClassSelfId___init(recv) ((compiling___table_computation___TableEltClassSelfId___init_t)CALL((recv), (SFT_compiling___table_computation[72] + 1)))
 #define ID_compiling___table_computation___TableEltClassSelfName (SFT_compiling___table_computation[73])
 #define COLOR_compiling___table_computation___TableEltClassSelfName (SFT_compiling___table_computation[74])
 #define INIT_TABLE_POS_compiling___table_computation___TableEltClassSelfName (SFT_compiling___table_computation[75] + 0)
+#define CALL_compiling___table_computation___TableEltClassSelfName___init(recv) ((compiling___table_computation___TableEltClassSelfName___init_t)CALL((recv), (SFT_compiling___table_computation[75] + 1)))
 #define ID_compiling___table_computation___TableEltClassObjectSize (SFT_compiling___table_computation[76])
 #define COLOR_compiling___table_computation___TableEltClassObjectSize (SFT_compiling___table_computation[77])
 #define INIT_TABLE_POS_compiling___table_computation___TableEltClassObjectSize (SFT_compiling___table_computation[78] + 0)
+#define CALL_compiling___table_computation___TableEltClassObjectSize___init(recv) ((compiling___table_computation___TableEltClassObjectSize___init_t)CALL((recv), (SFT_compiling___table_computation[78] + 1)))
 #define ID_compiling___table_computation___TableEltObjectId (SFT_compiling___table_computation[79])
 #define COLOR_compiling___table_computation___TableEltObjectId (SFT_compiling___table_computation[80])
 #define INIT_TABLE_POS_compiling___table_computation___TableEltObjectId (SFT_compiling___table_computation[81] + 0)
+#define CALL_compiling___table_computation___TableEltObjectId___init(recv) ((compiling___table_computation___TableEltObjectId___init_t)CALL((recv), (SFT_compiling___table_computation[81] + 1)))
 #define ID_compiling___table_computation___TableEltVftPointer (SFT_compiling___table_computation[82])
 #define COLOR_compiling___table_computation___TableEltVftPointer (SFT_compiling___table_computation[83])
 #define INIT_TABLE_POS_compiling___table_computation___TableEltVftPointer (SFT_compiling___table_computation[84] + 0)
+#define CALL_compiling___table_computation___TableEltVftPointer___init(recv) ((compiling___table_computation___TableEltVftPointer___init_t)CALL((recv), (SFT_compiling___table_computation[84] + 1)))
 static const char * const LOCATE_compiling___table_computation___ColorContext___color = "table_computation::ColorContext::color";
 val_t compiling___table_computation___ColorContext___color(val_t p0, val_t p1);
 typedef val_t (*compiling___table_computation___ColorContext___color_t)(val_t p0, val_t p1);
@@ -300,10 +305,6 @@ typedef void (*compiling___table_computation___MMModule___local_analysis_t)(val_
   void OC_compiling___table_computation___MMModule___local_analysis_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_compiling___table_computation___MMModule___local_analysis_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_MMModule_metamodel___abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
-static const char * const LOCATE_compiling___table_computation___AbsTableElt___init = "table_computation::AbsTableElt::init";
-void compiling___table_computation___AbsTableElt___init(val_t p0, int* init_table);
-typedef void (*compiling___table_computation___AbsTableElt___init_t)(val_t p0, int* init_table);
-val_t NEW_AbsTableElt_compiling___table_computation___AbsTableElt___init();
 static const char * const LOCATE_compiling___table_computation___TableElt___is_related_to = "table_computation::TableElt::is_related_to";
 val_t compiling___table_computation___TableElt___is_related_to(val_t p0, val_t p1);
 typedef val_t (*compiling___table_computation___TableElt___is_related_to_t)(val_t p0, val_t p1);
@@ -313,12 +314,13 @@ typedef val_t (*compiling___table_computation___TableElt___length_t)(val_t p0);
 static const char * const LOCATE_compiling___table_computation___TableElt___item = "table_computation::TableElt::item";
 val_t compiling___table_computation___TableElt___item(val_t p0, val_t p1);
 typedef val_t (*compiling___table_computation___TableElt___item_t)(val_t p0, val_t p1);
-val_t NEW_TableElt_compiling___table_computation___AbsTableElt___init();
-val_t NEW_ModuleTableElt_compiling___table_computation___AbsTableElt___init();
 static const char * const LOCATE_compiling___table_computation___ModuleTableEltGroup___elements = "table_computation::ModuleTableEltGroup::elements";
 val_t compiling___table_computation___ModuleTableEltGroup___elements(val_t p0);
 typedef val_t (*compiling___table_computation___ModuleTableEltGroup___elements_t)(val_t p0);
-val_t NEW_ModuleTableEltGroup_compiling___table_computation___AbsTableElt___init();
+static const char * const LOCATE_compiling___table_computation___ModuleTableEltGroup___init = "table_computation::ModuleTableEltGroup::init";
+void compiling___table_computation___ModuleTableEltGroup___init(val_t p0, int* init_table);
+typedef void (*compiling___table_computation___ModuleTableEltGroup___init_t)(val_t p0, int* init_table);
+val_t NEW_ModuleTableEltGroup_compiling___table_computation___ModuleTableEltGroup___init();
 static const char * const LOCATE_compiling___table_computation___TableEltProp___property = "table_computation::TableEltProp::property";
 val_t compiling___table_computation___TableEltProp___property(val_t p0);
 typedef val_t (*compiling___table_computation___TableEltProp___property_t)(val_t p0);
@@ -364,21 +366,36 @@ val_t NEW_TableEltComposite_compiling___table_computation___TableEltComposite___
 static const char * const LOCATE_compiling___table_computation___TableEltClassSelfId___is_related_to = "table_computation::TableEltClassSelfId::(table_computation::TableElt::is_related_to)";
 val_t compiling___table_computation___TableEltClassSelfId___is_related_to(val_t p0, val_t p1);
 typedef val_t (*compiling___table_computation___TableEltClassSelfId___is_related_to_t)(val_t p0, val_t p1);
-val_t NEW_TableEltClassSelfId_compiling___table_computation___AbsTableElt___init();
+static const char * const LOCATE_compiling___table_computation___TableEltClassSelfId___init = "table_computation::TableEltClassSelfId::init";
+void compiling___table_computation___TableEltClassSelfId___init(val_t p0, int* init_table);
+typedef void (*compiling___table_computation___TableEltClassSelfId___init_t)(val_t p0, int* init_table);
+val_t NEW_TableEltClassSelfId_compiling___table_computation___TableEltClassSelfId___init();
 static const char * const LOCATE_compiling___table_computation___TableEltClassSelfName___is_related_to = "table_computation::TableEltClassSelfName::(table_computation::TableElt::is_related_to)";
 val_t compiling___table_computation___TableEltClassSelfName___is_related_to(val_t p0, val_t p1);
 typedef val_t (*compiling___table_computation___TableEltClassSelfName___is_related_to_t)(val_t p0, val_t p1);
-val_t NEW_TableEltClassSelfName_compiling___table_computation___AbsTableElt___init();
+static const char * const LOCATE_compiling___table_computation___TableEltClassSelfName___init = "table_computation::TableEltClassSelfName::init";
+void compiling___table_computation___TableEltClassSelfName___init(val_t p0, int* init_table);
+typedef void (*compiling___table_computation___TableEltClassSelfName___init_t)(val_t p0, int* init_table);
+val_t NEW_TableEltClassSelfName_compiling___table_computation___TableEltClassSelfName___init();
 static const char * const LOCATE_compiling___table_computation___TableEltClassObjectSize___is_related_to = "table_computation::TableEltClassObjectSize::(table_computation::TableElt::is_related_to)";
 val_t compiling___table_computation___TableEltClassObjectSize___is_related_to(val_t p0, val_t p1);
 typedef val_t (*compiling___table_computation___TableEltClassObjectSize___is_related_to_t)(val_t p0, val_t p1);
-val_t NEW_TableEltClassObjectSize_compiling___table_computation___AbsTableElt___init();
+static const char * const LOCATE_compiling___table_computation___TableEltClassObjectSize___init = "table_computation::TableEltClassObjectSize::init";
+void compiling___table_computation___TableEltClassObjectSize___init(val_t p0, int* init_table);
+typedef void (*compiling___table_computation___TableEltClassObjectSize___init_t)(val_t p0, int* init_table);
+val_t NEW_TableEltClassObjectSize_compiling___table_computation___TableEltClassObjectSize___init();
 static const char * const LOCATE_compiling___table_computation___TableEltObjectId___is_related_to = "table_computation::TableEltObjectId::(table_computation::TableElt::is_related_to)";
 val_t compiling___table_computation___TableEltObjectId___is_related_to(val_t p0, val_t p1);
 typedef val_t (*compiling___table_computation___TableEltObjectId___is_related_to_t)(val_t p0, val_t p1);
-val_t NEW_TableEltObjectId_compiling___table_computation___AbsTableElt___init();
+static const char * const LOCATE_compiling___table_computation___TableEltObjectId___init = "table_computation::TableEltObjectId::init";
+void compiling___table_computation___TableEltObjectId___init(val_t p0, int* init_table);
+typedef void (*compiling___table_computation___TableEltObjectId___init_t)(val_t p0, int* init_table);
+val_t NEW_TableEltObjectId_compiling___table_computation___TableEltObjectId___init();
 static const char * const LOCATE_compiling___table_computation___TableEltVftPointer___is_related_to = "table_computation::TableEltVftPointer::(table_computation::TableElt::is_related_to)";
 val_t compiling___table_computation___TableEltVftPointer___is_related_to(val_t p0, val_t p1);
 typedef val_t (*compiling___table_computation___TableEltVftPointer___is_related_to_t)(val_t p0, val_t p1);
-val_t NEW_TableEltVftPointer_compiling___table_computation___AbsTableElt___init();
+static const char * const LOCATE_compiling___table_computation___TableEltVftPointer___init = "table_computation::TableEltVftPointer::init";
+void compiling___table_computation___TableEltVftPointer___init(val_t p0, int* init_table);
+typedef void (*compiling___table_computation___TableEltVftPointer___init_t)(val_t p0, int* init_table);
+val_t NEW_TableEltVftPointer_compiling___table_computation___TableEltVftPointer___init();
 #endif

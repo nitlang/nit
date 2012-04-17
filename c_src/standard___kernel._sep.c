@@ -13,7 +13,7 @@ val_t standard___kernel___Object___object_id(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//kernel.nit:28 */
+  /* ../lib/standard/kernel.nit:28 */
   REGB0 = TAG_Int((bigint)((obj_t)fra.me.REG[0])[1].object_id);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -33,7 +33,7 @@ val_t standard___kernel___Object___is_same_type(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:33 */
+  /* ../lib/standard/kernel.nit:33 */
   REGB0 = TAG_Bool((VAL2VFT(fra.me.REG[0])==VAL2VFT(fra.me.REG[1])));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -53,7 +53,7 @@ val_t standard___kernel___Object_____eqeq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:41 */
+  /* ../lib/standard/kernel.nit:41 */
   REGB0 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[0],fra.me.REG[1]));
   goto label1;
   label1: while(0);
@@ -76,7 +76,7 @@ val_t standard___kernel___Object_____neq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:46 */
+  /* ../lib/standard/kernel.nit:46 */
   REGB0 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[0],fra.me.REG[1]));
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -102,17 +102,17 @@ void standard___kernel___Object___output(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//kernel.nit:52 */
+  /* ../lib/standard/kernel.nit:52 */
   REGB0 = TAG_Char('<');
-  /* ./../lib/standard//kernel.nit:380 */
+  /* ../lib/standard/kernel.nit:380 */
   printf("%c", (unsigned char)UNTAG_Char(REGB0));;
-  /* ./../lib/standard//kernel.nit:53 */
+  /* ../lib/standard/kernel.nit:53 */
   REGB0 = CALL_standard___kernel___Object___object_id(fra.me.REG[0])(fra.me.REG[0]);
-  /* ./../lib/standard//kernel.nit:229 */
+  /* ../lib/standard/kernel.nit:229 */
   printf("%ld\n", UNTAG_Int(REGB0));;
-  /* ./../lib/standard//kernel.nit:54 */
+  /* ../lib/standard/kernel.nit:54 */
   REGB0 = TAG_Char('>');
-  /* ./../lib/standard//kernel.nit:380 */
+  /* ../lib/standard/kernel.nit:380 */
   printf("%c", (unsigned char)UNTAG_Char(REGB0));;
   stack_frame_head = fra.me.prev;
   return;
@@ -129,7 +129,7 @@ void standard___kernel___Object___output_class_name(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//kernel.nit:57 */
+  /* ../lib/standard/kernel.nit:57 */
   printf("%s\n", VAL2VFT(fra.me.REG[0])[2].cname);;
   stack_frame_head = fra.me.prev;
   return;
@@ -148,7 +148,7 @@ void standard___kernel___Object___exit(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
   REGB0 = p1;
-  /* ./../lib/standard//kernel.nit:61 */
+  /* ../lib/standard/kernel.nit:61 */
   exit(UNTAG_Int(REGB0));;
   stack_frame_head = fra.me.prev;
   return;
@@ -165,7 +165,7 @@ val_t standard___kernel___Object___sys(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//kernel.nit:64 */
+  /* ../lib/standard/kernel.nit:64 */
   fra.me.REG[0] = (G_sys);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -221,7 +221,7 @@ val_t standard___kernel___Comparable_____l(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:86 */
+  /* ../lib/standard/kernel.nit:86 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___kernel, 86);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
@@ -246,7 +246,7 @@ val_t standard___kernel___Comparable_____leq(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:91 */
+  /* ../lib/standard/kernel.nit:91 */
   REGB0 = CALL_standard___kernel___Comparable_____l(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   goto label1;
@@ -274,7 +274,7 @@ val_t standard___kernel___Comparable_____geq(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:95 */
+  /* ../lib/standard/kernel.nit:95 */
   REGB0 = CALL_standard___kernel___Comparable_____l(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   goto label1;
@@ -302,7 +302,7 @@ val_t standard___kernel___Comparable_____g(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:98 */
+  /* ../lib/standard/kernel.nit:98 */
   REGB0 = CALL_standard___kernel___Comparable_____l(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   goto label1;
   label1: while(0);
@@ -330,25 +330,25 @@ val_t standard___kernel___Comparable_____leqg(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:104 */
+  /* ../lib/standard/kernel.nit:104 */
   REGB0 = CALL_standard___kernel___Comparable_____l(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//kernel.nit:105 */
+    /* ../lib/standard/kernel.nit:105 */
     REGB0 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:236 */
     REGB0 = TAG_Int(-UNTAG_Int(REGB0));
-    /* ./../lib/standard//kernel.nit:105 */
+    /* ../lib/standard/kernel.nit:105 */
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:106 */
+    /* ../lib/standard/kernel.nit:106 */
     REGB1 = CALL_standard___kernel___Comparable_____l(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//kernel.nit:107 */
+      /* ../lib/standard/kernel.nit:107 */
       REGB1 = TAG_Int(1);
       REGB0 = REGB1;
       goto label1;
     } else {
-      /* ./../lib/standard//kernel.nit:109 */
+      /* ../lib/standard/kernel.nit:109 */
       REGB1 = TAG_Int(0);
       REGB0 = REGB1;
       goto label1;
@@ -386,7 +386,7 @@ val_t standard___kernel___Comparable___is_between(val_t p0, val_t p1, val_t p2){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:116 */
+  /* ../lib/standard/kernel.nit:116 */
   REGB0 = CALL_standard___kernel___Comparable_____leq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
     REGB0 = CALL_standard___kernel___Comparable_____leq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
@@ -419,13 +419,13 @@ val_t standard___kernel___Comparable___max(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:122 */
+  /* ../lib/standard/kernel.nit:122 */
   REGB0 = CALL_standard___kernel___Comparable_____l(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//kernel.nit:123 */
+    /* ../lib/standard/kernel.nit:123 */
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:125 */
+    /* ../lib/standard/kernel.nit:125 */
     fra.me.REG[1] = fra.me.REG[0];
     goto label1;
   }
@@ -453,13 +453,13 @@ val_t standard___kernel___Comparable___min(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:132 */
+  /* ../lib/standard/kernel.nit:132 */
   REGB0 = CALL_standard___kernel___Comparable_____l(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//kernel.nit:133 */
+    /* ../lib/standard/kernel.nit:133 */
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:135 */
+    /* ../lib/standard/kernel.nit:135 */
     fra.me.REG[1] = fra.me.REG[0];
     goto label1;
   }
@@ -480,7 +480,7 @@ val_t standard___kernel___Discrete___succ(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//kernel.nit:147 */
+  /* ../lib/standard/kernel.nit:147 */
   REGB0 = TAG_Int(1);
   fra.me.REG[0] = CALL_standard___kernel___Discrete_____plus(fra.me.REG[0])(fra.me.REG[0], REGB0);
   goto label1;
@@ -501,7 +501,7 @@ val_t standard___kernel___Discrete___prec(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//kernel.nit:150 */
+  /* ../lib/standard/kernel.nit:150 */
   REGB0 = TAG_Int(1);
   fra.me.REG[0] = CALL_standard___kernel___Discrete_____minus(fra.me.REG[0])(fra.me.REG[0], REGB0);
   goto label1;
@@ -519,7 +519,7 @@ val_t standard___kernel___Discrete_____plus(val_t p0, val_t p1){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./../lib/standard//kernel.nit:152 */
+  /* ../lib/standard/kernel.nit:152 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___kernel, 152);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
@@ -534,7 +534,7 @@ val_t standard___kernel___Discrete_____minus(val_t p0, val_t p1){
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ./../lib/standard//kernel.nit:155 */
+  /* ../lib/standard/kernel.nit:155 */
   nit_abort("Deferred method called", NULL, LOCATE_standard___kernel, 155);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
@@ -563,49 +563,49 @@ val_t standard___kernel___Discrete___distance(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:165 */
+  /* ../lib/standard/kernel.nit:165 */
   REGB0 = CALL_standard___kernel___Comparable_____l(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//kernel.nit:166 */
+    /* ../lib/standard/kernel.nit:166 */
     fra.me.REG[2] = fra.me.REG[0];
-    /* ./../lib/standard//kernel.nit:167 */
+    /* ../lib/standard/kernel.nit:167 */
     fra.me.REG[3] = fra.me.REG[1];
   } else {
-    /* ./../lib/standard//kernel.nit:168 */
+    /* ../lib/standard/kernel.nit:168 */
     REGB0 = CALL_standard___kernel___Comparable_____g(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//kernel.nit:169 */
+      /* ../lib/standard/kernel.nit:169 */
       fra.me.REG[2] = fra.me.REG[1];
-      /* ./../lib/standard//kernel.nit:170 */
+      /* ../lib/standard/kernel.nit:170 */
       fra.me.REG[3] = fra.me.REG[0];
     } else {
-      /* ./../lib/standard//kernel.nit:172 */
+      /* ../lib/standard/kernel.nit:172 */
       REGB0 = TAG_Int(0);
       goto label1;
     }
   }
-  /* ./../lib/standard//kernel.nit:175 */
+  /* ../lib/standard/kernel.nit:175 */
   REGB1 = TAG_Int(0);
-  /* ./../lib/standard//kernel.nit:176 */
+  /* ../lib/standard/kernel.nit:176 */
   while(1) {
     REGB2 = CALL_standard___kernel___Comparable_____l(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     if (UNTAG_Bool(REGB2)) {
-      /* ./../lib/standard//kernel.nit:177 */
+      /* ../lib/standard/kernel.nit:177 */
       fra.me.REG[0] = CALL_standard___kernel___Discrete___succ(fra.me.REG[2])(fra.me.REG[2]);
       fra.me.REG[2] = fra.me.REG[0];
-      /* ./../lib/standard//kernel.nit:178 */
+      /* ../lib/standard/kernel.nit:178 */
       REGB2 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:235 */
       REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-      /* ./../lib/standard//kernel.nit:178 */
+      /* ../lib/standard/kernel.nit:178 */
       REGB1 = REGB2;
     } else {
-      /* ./../lib/standard//kernel.nit:176 */
+      /* ../lib/standard/kernel.nit:176 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ./../lib/standard//kernel.nit:180 */
+  /* ../lib/standard/kernel.nit:180 */
   REGB0 = REGB1;
   goto label1;
   label1: while(0);
@@ -624,7 +624,7 @@ val_t standard___kernel___Bool___object_id(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:194 */
+  /* ../lib/standard/kernel.nit:194 */
   REGB0 = TAG_Int(UNTAG_Bool(REGB0));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -643,7 +643,7 @@ val_t standard___kernel___Bool_____eqeq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ./../lib/standard//kernel.nit:195 */
+  /* ../lib/standard/kernel.nit:195 */
   REGB0 = TAG_Bool((REGB0)==(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -662,7 +662,7 @@ val_t standard___kernel___Bool_____neq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ./../lib/standard//kernel.nit:196 */
+  /* ../lib/standard/kernel.nit:196 */
   REGB0 = TAG_Bool((REGB0)!=(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -679,7 +679,7 @@ void standard___kernel___Bool___output(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:197 */
+  /* ../lib/standard/kernel.nit:197 */
   (void)printf(UNTAG_Bool(REGB0)?"true\n":"false\n");;
   stack_frame_head = fra.me.prev;
   return;
@@ -697,7 +697,7 @@ val_t standard___kernel___Float___object_id(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//kernel.nit:203 */
+  /* ../lib/standard/kernel.nit:203 */
   REGB0 = TAG_Int((bigint)UNBOX_Float(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -714,7 +714,7 @@ void standard___kernel___Float___output(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//kernel.nit:204 */
+  /* ../lib/standard/kernel.nit:204 */
   printf("%f\n", UNBOX_Float(fra.me.REG[0]));;
   stack_frame_head = fra.me.prev;
   return;
@@ -734,7 +734,7 @@ val_t standard___kernel___Float_____leq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:206 */
+  /* ../lib/standard/kernel.nit:206 */
   REGB0 = TAG_Bool(UNBOX_Float(fra.me.REG[0])<=UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -754,7 +754,7 @@ val_t standard___kernel___Float_____l(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:207 */
+  /* ../lib/standard/kernel.nit:207 */
   REGB0 = TAG_Bool(UNBOX_Float(fra.me.REG[0])<UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -774,7 +774,7 @@ val_t standard___kernel___Float_____geq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:208 */
+  /* ../lib/standard/kernel.nit:208 */
   REGB0 = TAG_Bool(UNBOX_Float(fra.me.REG[0])>=UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -794,7 +794,7 @@ val_t standard___kernel___Float_____g(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:209 */
+  /* ../lib/standard/kernel.nit:209 */
   REGB0 = TAG_Bool(UNBOX_Float(fra.me.REG[0])>UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -813,7 +813,7 @@ val_t standard___kernel___Float_____plus(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:210 */
+  /* ../lib/standard/kernel.nit:210 */
   fra.me.REG[1] = BOX_Float(UNBOX_Float(fra.me.REG[0])+UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
@@ -830,7 +830,7 @@ val_t standard___kernel___Float___unary__minus(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//kernel.nit:211 */
+  /* ../lib/standard/kernel.nit:211 */
   fra.me.REG[0] = BOX_Float(-UNBOX_Float(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -849,7 +849,7 @@ val_t standard___kernel___Float_____minus(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:212 */
+  /* ../lib/standard/kernel.nit:212 */
   fra.me.REG[1] = BOX_Float(UNBOX_Float(fra.me.REG[0])-UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
@@ -868,7 +868,7 @@ val_t standard___kernel___Float_____star(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:213 */
+  /* ../lib/standard/kernel.nit:213 */
   fra.me.REG[1] = BOX_Float(UNBOX_Float(fra.me.REG[0])*UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
@@ -887,7 +887,7 @@ val_t standard___kernel___Float_____slash(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ./../lib/standard//kernel.nit:214 */
+  /* ../lib/standard/kernel.nit:214 */
   fra.me.REG[1] = BOX_Float(UNBOX_Float(fra.me.REG[0])/UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
@@ -905,7 +905,7 @@ val_t standard___kernel___Float___to_i(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ./../lib/standard//kernel.nit:216 */
+  /* ../lib/standard/kernel.nit:216 */
   REGB0 = TAG_Int((bigint)UNBOX_Float(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -922,7 +922,7 @@ val_t standard___kernel___Int___object_id(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:226 */
+  /* ../lib/standard/kernel.nit:226 */
   REGB0 = REGB0;
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -941,7 +941,7 @@ val_t standard___kernel___Int_____eqeq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ./../lib/standard//kernel.nit:227 */
+  /* ../lib/standard/kernel.nit:227 */
   REGB0 = TAG_Bool((REGB0)==(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -960,7 +960,7 @@ val_t standard___kernel___Int_____neq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ./../lib/standard//kernel.nit:228 */
+  /* ../lib/standard/kernel.nit:228 */
   REGB0 = TAG_Bool((REGB0)!=(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -977,7 +977,7 @@ void standard___kernel___Int___output(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:229 */
+  /* ../lib/standard/kernel.nit:229 */
   printf("%ld\n", UNTAG_Int(REGB0));;
   stack_frame_head = fra.me.prev;
   return;
@@ -1002,7 +1002,7 @@ val_t standard___kernel___Int_____leq(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:231 */
+  /* ../lib/standard/kernel.nit:231 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1027,7 +1027,7 @@ val_t standard___kernel___Int_____l(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:232 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1052,7 +1052,7 @@ val_t standard___kernel___Int_____geq(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:233 */
+  /* ../lib/standard/kernel.nit:233 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1077,7 +1077,7 @@ val_t standard___kernel___Int_____g(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:234 */
+  /* ../lib/standard/kernel.nit:234 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1096,7 +1096,7 @@ val_t standard___kernel___Int_____plus(val_t p0, val_t p1){
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ./../lib/standard//kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:235 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1113,7 +1113,7 @@ val_t standard___kernel___Int___unary__minus(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:236 */
   REGB0 = TAG_Int(-UNTAG_Int(REGB0));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1132,7 +1132,7 @@ val_t standard___kernel___Int_____minus(val_t p0, val_t p1){
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ./../lib/standard//kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:237 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1151,7 +1151,7 @@ val_t standard___kernel___Int_____star(val_t p0, val_t p1){
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ./../lib/standard//kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:238 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)*UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1170,7 +1170,7 @@ val_t standard___kernel___Int_____slash(val_t p0, val_t p1){
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ./../lib/standard//kernel.nit:239 */
+  /* ../lib/standard/kernel.nit:239 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)/UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1189,7 +1189,7 @@ val_t standard___kernel___Int_____percent(val_t p0, val_t p1){
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ./../lib/standard//kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:240 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)%UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1208,7 +1208,7 @@ val_t standard___kernel___Int___lshift(val_t p0, val_t p1){
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ./../lib/standard//kernel.nit:241 */
+  /* ../lib/standard/kernel.nit:241 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)<<UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1227,7 +1227,7 @@ val_t standard___kernel___Int___rshift(val_t p0, val_t p1){
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ./../lib/standard//kernel.nit:242 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)>>UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1245,7 +1245,7 @@ val_t standard___kernel___Int___to_f(val_t p0){
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:244 */
+  /* ../lib/standard/kernel.nit:244 */
   fra.me.REG[0] = BOX_Float((float)UNTAG_Int(REGB0));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1262,7 +1262,7 @@ val_t standard___kernel___Int___succ(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:247 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB0 = TAG_Int(UNTAG_Int(REGB0)+1);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1279,7 +1279,7 @@ val_t standard___kernel___Int___prec(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:248 */
+  /* ../lib/standard/kernel.nit:248 */
   REGB0 = TAG_Int(UNTAG_Int(REGB0)-1);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1304,26 +1304,26 @@ val_t standard___kernel___Int___distance(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:237 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* ./../lib/standard//kernel.nit:252 */
+  /* ../lib/standard/kernel.nit:252 */
   REGB0 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:233 */
+  /* ../lib/standard/kernel.nit:233 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-  /* ./../lib/standard//kernel.nit:252 */
+  /* ../lib/standard/kernel.nit:252 */
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//kernel.nit:253 */
+    /* ../lib/standard/kernel.nit:253 */
     REGB0 = REGB1;
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:236 */
     REGB1 = TAG_Int(-UNTAG_Int(REGB1));
-    /* ./../lib/standard//kernel.nit:255 */
+    /* ../lib/standard/kernel.nit:255 */
     REGB0 = REGB1;
     goto label1;
   }
@@ -1357,15 +1357,15 @@ val_t standard___kernel___Int_____leqg(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:232 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ./../lib/standard//kernel.nit:261 */
+  /* ../lib/standard/kernel.nit:261 */
   if (UNTAG_Bool(REGB2)) {
-    /* ./../lib/standard//kernel.nit:262 */
+    /* ../lib/standard/kernel.nit:262 */
     REGB2 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:236 */
     REGB2 = TAG_Int(-UNTAG_Int(REGB2));
-    /* ./../lib/standard//kernel.nit:262 */
+    /* ../lib/standard/kernel.nit:262 */
     goto label1;
   } else {
     REGB3 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -1373,16 +1373,16 @@ val_t standard___kernel___Int_____leqg(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:232 */
+    /* ../lib/standard/kernel.nit:232 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
-    /* ./../lib/standard//kernel.nit:263 */
+    /* ../lib/standard/kernel.nit:263 */
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//kernel.nit:264 */
+      /* ../lib/standard/kernel.nit:264 */
       REGB0 = TAG_Int(1);
       REGB2 = REGB0;
       goto label1;
     } else {
-      /* ./../lib/standard//kernel.nit:266 */
+      /* ../lib/standard/kernel.nit:266 */
       REGB0 = TAG_Int(0);
       REGB2 = REGB0;
       goto label1;
@@ -1424,9 +1424,9 @@ val_t standard___kernel___Int___is_between(val_t p0, val_t p1, val_t p2){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:232 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ./../lib/standard//kernel.nit:272 */
+  /* ../lib/standard/kernel.nit:272 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(true);
   } else {
@@ -1435,17 +1435,17 @@ val_t standard___kernel___Int___is_between(val_t p0, val_t p1, val_t p2){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:232 */
+    /* ../lib/standard/kernel.nit:232 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB0));
-    /* ./../lib/standard//kernel.nit:272 */
+    /* ../lib/standard/kernel.nit:272 */
     REGB1 = REGB0;
   }
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//kernel.nit:273 */
+    /* ../lib/standard/kernel.nit:273 */
     REGB1 = TAG_Bool(false);
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:275 */
+    /* ../lib/standard/kernel.nit:275 */
     REGB0 = TAG_Bool(true);
     REGB1 = REGB0;
     goto label1;
@@ -1479,14 +1479,14 @@ val_t standard___kernel___Int___max(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:232 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ./../lib/standard//kernel.nit:281 */
+  /* ../lib/standard/kernel.nit:281 */
   if (UNTAG_Bool(REGB2)) {
-    /* ./../lib/standard//kernel.nit:282 */
+    /* ../lib/standard/kernel.nit:282 */
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:284 */
+    /* ../lib/standard/kernel.nit:284 */
     REGB1 = REGB0;
     goto label1;
   }
@@ -1519,14 +1519,14 @@ val_t standard___kernel___Int___min(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:232 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
-  /* ./../lib/standard//kernel.nit:290 */
+  /* ../lib/standard/kernel.nit:290 */
   if (UNTAG_Bool(REGB2)) {
-    /* ./../lib/standard//kernel.nit:291 */
+    /* ../lib/standard/kernel.nit:291 */
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:293 */
+    /* ../lib/standard/kernel.nit:293 */
     REGB1 = REGB0;
     goto label1;
   }
@@ -1546,7 +1546,7 @@ val_t standard___kernel___Int___ascii(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:297 */
+  /* ../lib/standard/kernel.nit:297 */
   REGB0 = TAG_Char(UNTAG_Int(REGB0));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1569,45 +1569,45 @@ val_t standard___kernel___Int___digit_count(val_t p0, val_t p1){
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ./../lib/standard//kernel.nit:306 */
+  /* ../lib/standard/kernel.nit:306 */
   REGB2 = TAG_Int(0);
   REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB3)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:232 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
-  /* ./../lib/standard//kernel.nit:306 */
+  /* ../lib/standard/kernel.nit:306 */
   if (UNTAG_Bool(REGB2)) {
-    /* ./../lib/standard//kernel.nit:307 */
+    /* ../lib/standard/kernel.nit:307 */
     REGB2 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:236 */
     REGB3 = TAG_Int(-UNTAG_Int(REGB0));
   } else {
-    /* ./../lib/standard//kernel.nit:309 */
+    /* ../lib/standard/kernel.nit:309 */
     REGB4 = TAG_Int(0);
     REGB5 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB4));
     if (UNTAG_Bool(REGB5)) {
     } else {
-      /* ./../lib/standard//kernel.nit:227 */
+      /* ../lib/standard/kernel.nit:227 */
       REGB4 = TAG_Bool((REGB0)==(REGB4));
-      /* ./../lib/standard//kernel.nit:309 */
+      /* ../lib/standard/kernel.nit:309 */
       REGB5 = REGB4;
     }
     if (UNTAG_Bool(REGB5)) {
-      /* ./../lib/standard//kernel.nit:310 */
+      /* ../lib/standard/kernel.nit:310 */
       REGB5 = TAG_Int(1);
       goto label1;
     } else {
-      /* ./../lib/standard//kernel.nit:312 */
+      /* ../lib/standard/kernel.nit:312 */
       REGB4 = TAG_Int(0);
       REGB2 = REGB4;
-      /* ./../lib/standard//kernel.nit:313 */
+      /* ../lib/standard/kernel.nit:313 */
       REGB3 = REGB0;
     }
   }
-  /* ./../lib/standard//kernel.nit:316 */
+  /* ../lib/standard/kernel.nit:316 */
   while(1) {
     REGB0 = TAG_Int(0);
     REGB4 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
@@ -1615,27 +1615,27 @@ val_t standard___kernel___Int___digit_count(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:234 */
+    /* ../lib/standard/kernel.nit:234 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB3)>UNTAG_Int(REGB0));
-    /* ./../lib/standard//kernel.nit:316 */
+    /* ../lib/standard/kernel.nit:316 */
     if (UNTAG_Bool(REGB0)) {
-      /* ./../lib/standard//kernel.nit:317 */
+      /* ../lib/standard/kernel.nit:317 */
       REGB0 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:235 */
       REGB0 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB0));
-      /* ./../lib/standard//kernel.nit:317 */
+      /* ../lib/standard/kernel.nit:317 */
       REGB2 = REGB0;
-      /* ./../lib/standard//kernel.nit:239 */
+      /* ../lib/standard/kernel.nit:239 */
       REGB0 = TAG_Int(UNTAG_Int(REGB3)/UNTAG_Int(REGB1));
-      /* ./../lib/standard//kernel.nit:318 */
+      /* ../lib/standard/kernel.nit:318 */
       REGB3 = REGB0;
     } else {
-      /* ./../lib/standard//kernel.nit:316 */
+      /* ../lib/standard/kernel.nit:316 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ./../lib/standard//kernel.nit:320 */
+  /* ../lib/standard/kernel.nit:320 */
   REGB5 = REGB2;
   goto label1;
   label1: while(0);
@@ -1657,16 +1657,16 @@ val_t standard___kernel___Int___to_c(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:328 */
+  /* ../lib/standard/kernel.nit:328 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:233 */
+  /* ../lib/standard/kernel.nit:233 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ./../lib/standard//kernel.nit:328 */
+  /* ../lib/standard/kernel.nit:328 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Int(36);
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1674,10 +1674,10 @@ val_t standard___kernel___Int___to_c(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:231 */
+    /* ../lib/standard/kernel.nit:231 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB1));
   } else {
-    /* ./../lib/standard//kernel.nit:328 */
+    /* ../lib/standard/kernel.nit:328 */
     REGB2 = TAG_Bool(false);
     REGB1 = REGB2;
   }
@@ -1685,41 +1685,41 @@ val_t standard___kernel___Int___to_c(val_t p0){
   } else {
     nit_abort("Assert failed", NULL, LOCATE_standard___kernel, 328);
   }
-  /* ./../lib/standard//kernel.nit:329 */
+  /* ../lib/standard/kernel.nit:329 */
   REGB1 = TAG_Int(10);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:232 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ./../lib/standard//kernel.nit:329 */
+  /* ../lib/standard/kernel.nit:329 */
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//kernel.nit:330 */
+    /* ../lib/standard/kernel.nit:330 */
     REGB1 = TAG_Char('0');
-    /* ./../lib/standard//kernel.nit:413 */
+    /* ../lib/standard/kernel.nit:413 */
     REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB1));
-    /* ./../lib/standard//kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:235 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-    /* ./../lib/standard//kernel.nit:297 */
+    /* ../lib/standard/kernel.nit:297 */
     REGB1 = TAG_Char(UNTAG_Int(REGB1));
-    /* ./../lib/standard//kernel.nit:330 */
+    /* ../lib/standard/kernel.nit:330 */
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:332 */
+    /* ../lib/standard/kernel.nit:332 */
     REGB2 = TAG_Char('a');
-    /* ./../lib/standard//kernel.nit:413 */
+    /* ../lib/standard/kernel.nit:413 */
     REGB2 = TAG_Int((unsigned char)UNTAG_Char(REGB2));
-    /* ./../lib/standard//kernel.nit:332 */
+    /* ../lib/standard/kernel.nit:332 */
     REGB3 = TAG_Int(10);
-    /* ./../lib/standard//kernel.nit:237 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB3 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB3));
-    /* ./../lib/standard//kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:235 */
     REGB3 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB3));
-    /* ./../lib/standard//kernel.nit:297 */
+    /* ../lib/standard/kernel.nit:297 */
     REGB3 = TAG_Char(UNTAG_Int(REGB3));
-    /* ./../lib/standard//kernel.nit:332 */
+    /* ../lib/standard/kernel.nit:332 */
     REGB1 = REGB3;
     goto label1;
   }
@@ -1746,30 +1746,30 @@ void standard___kernel___Int___enumerate_to(val_t p0, val_t p1, struct stack_fra
   REGB0 = p0;
   REGB1 = p1;
   CREG[0] = clos_fun0;
-  /* ./../lib/standard//kernel.nit:341 */
+  /* ../lib/standard/kernel.nit:341 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:231 */
+    /* ../lib/standard/kernel.nit:231 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB1));
-    /* ./../lib/standard//kernel.nit:341 */
+    /* ../lib/standard/kernel.nit:341 */
     if (UNTAG_Bool(REGB2)) {
-      /* ./../lib/standard//kernel.nit:342 */
+      /* ../lib/standard/kernel.nit:342 */
       ((void (*)(struct stack_frame_t *, val_t))(CREG[0]))(closctx_param, REGB0);
       if (closctx_param->has_broke) {
         goto label1;
       }
-      /* ./../lib/standard//kernel.nit:343 */
+      /* ../lib/standard/kernel.nit:343 */
       REGB2 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:235 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ./../lib/standard//kernel.nit:343 */
+      /* ../lib/standard/kernel.nit:343 */
       REGB0 = REGB2;
     } else {
-      /* ./../lib/standard//kernel.nit:341 */
+      /* ../lib/standard/kernel.nit:341 */
       goto label2;
     }
   }
@@ -1797,30 +1797,30 @@ void standard___kernel___Int___enumerate_before(val_t p0, val_t p1, struct stack
   REGB0 = p0;
   REGB1 = p1;
   CREG[0] = clos_fun0;
-  /* ./../lib/standard//kernel.nit:352 */
+  /* ../lib/standard/kernel.nit:352 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:232 */
+    /* ../lib/standard/kernel.nit:232 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ./../lib/standard//kernel.nit:352 */
+    /* ../lib/standard/kernel.nit:352 */
     if (UNTAG_Bool(REGB2)) {
-      /* ./../lib/standard//kernel.nit:353 */
+      /* ../lib/standard/kernel.nit:353 */
       ((void (*)(struct stack_frame_t *, val_t))(CREG[0]))(closctx_param, REGB0);
       if (closctx_param->has_broke) {
         goto label1;
       }
-      /* ./../lib/standard//kernel.nit:354 */
+      /* ../lib/standard/kernel.nit:354 */
       REGB2 = TAG_Int(1);
-      /* ./../lib/standard//kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:235 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ./../lib/standard//kernel.nit:354 */
+      /* ../lib/standard/kernel.nit:354 */
       REGB0 = REGB2;
     } else {
-      /* ./../lib/standard//kernel.nit:352 */
+      /* ../lib/standard/kernel.nit:352 */
       goto label2;
     }
   }
@@ -1843,28 +1843,28 @@ val_t standard___kernel___Int___abs(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:361 */
+  /* ../lib/standard/kernel.nit:361 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:233 */
+  /* ../lib/standard/kernel.nit:233 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ./../lib/standard//kernel.nit:361 */
+  /* ../lib/standard/kernel.nit:361 */
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//kernel.nit:363 */
+    /* ../lib/standard/kernel.nit:363 */
     REGB1 = REGB0;
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:365 */
+    /* ../lib/standard/kernel.nit:365 */
     REGB2 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:236 */
     REGB2 = TAG_Int(-UNTAG_Int(REGB2));
-    /* ./../lib/standard//kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:238 */
     REGB0 = TAG_Int(UNTAG_Int(REGB2)*UNTAG_Int(REGB0));
-    /* ./../lib/standard//kernel.nit:365 */
+    /* ../lib/standard/kernel.nit:365 */
     REGB1 = REGB0;
     goto label1;
   }
@@ -1884,7 +1884,7 @@ val_t standard___kernel___Char___object_id(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:377 */
+  /* ../lib/standard/kernel.nit:377 */
   REGB0 = TAG_Int(UNTAG_Char(REGB0));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1903,7 +1903,7 @@ val_t standard___kernel___Char_____eqeq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ./../lib/standard//kernel.nit:378 */
+  /* ../lib/standard/kernel.nit:378 */
   REGB0 = TAG_Bool((REGB0)==(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1922,7 +1922,7 @@ val_t standard___kernel___Char_____neq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ./../lib/standard//kernel.nit:379 */
+  /* ../lib/standard/kernel.nit:379 */
   REGB0 = TAG_Bool((REGB0)!=(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1939,7 +1939,7 @@ void standard___kernel___Char___output(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:380 */
+  /* ../lib/standard/kernel.nit:380 */
   printf("%c", (unsigned char)UNTAG_Char(REGB0));;
   stack_frame_head = fra.me.prev;
   return;
@@ -1964,7 +1964,7 @@ val_t standard___kernel___Char_____leq(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:382 */
+  /* ../lib/standard/kernel.nit:382 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)<=UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1989,7 +1989,7 @@ val_t standard___kernel___Char_____l(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:383 */
+  /* ../lib/standard/kernel.nit:383 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)<UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2014,7 +2014,7 @@ val_t standard___kernel___Char_____geq(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:384 */
+  /* ../lib/standard/kernel.nit:384 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)>=UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2039,7 +2039,7 @@ val_t standard___kernel___Char_____g(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:385 */
+  /* ../lib/standard/kernel.nit:385 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)>UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2056,7 +2056,7 @@ val_t standard___kernel___Char___succ(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:387 */
+  /* ../lib/standard/kernel.nit:387 */
   REGB0 = TAG_Char(UNTAG_Char(REGB0)+1);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -2073,7 +2073,7 @@ val_t standard___kernel___Char___prec(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:388 */
+  /* ../lib/standard/kernel.nit:388 */
   REGB0 = TAG_Char(UNTAG_Char(REGB0)-1);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -2098,29 +2098,29 @@ val_t standard___kernel___Char___distance(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:413 */
+  /* ../lib/standard/kernel.nit:413 */
   REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
   REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB1));
-  /* ./../lib/standard//kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:237 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* ./../lib/standard//kernel.nit:393 */
+  /* ../lib/standard/kernel.nit:393 */
   REGB0 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:233 */
+  /* ../lib/standard/kernel.nit:233 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-  /* ./../lib/standard//kernel.nit:393 */
+  /* ../lib/standard/kernel.nit:393 */
   if (UNTAG_Bool(REGB0)) {
-    /* ./../lib/standard//kernel.nit:394 */
+    /* ../lib/standard/kernel.nit:394 */
     REGB0 = REGB1;
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:236 */
     REGB1 = TAG_Int(-UNTAG_Int(REGB1));
-    /* ./../lib/standard//kernel.nit:396 */
+    /* ../lib/standard/kernel.nit:396 */
     REGB0 = REGB1;
     goto label1;
   }
@@ -2143,54 +2143,54 @@ val_t standard___kernel___Char___to_i(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:404 */
+  /* ../lib/standard/kernel.nit:404 */
   REGB1 = TAG_Char('-');
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ./../lib/standard//kernel.nit:378 */
+    /* ../lib/standard/kernel.nit:378 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ./../lib/standard//kernel.nit:404 */
+    /* ../lib/standard/kernel.nit:404 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ./../lib/standard//kernel.nit:405 */
+    /* ../lib/standard/kernel.nit:405 */
     REGB2 = TAG_Int(1);
-    /* ./../lib/standard//kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:236 */
     REGB2 = TAG_Int(-UNTAG_Int(REGB2));
-    /* ./../lib/standard//kernel.nit:405 */
+    /* ../lib/standard/kernel.nit:405 */
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:406 */
+    /* ../lib/standard/kernel.nit:406 */
     REGB1 = CALL_standard___kernel___Char___is_digit(REGB0)(REGB0);
     if (UNTAG_Bool(REGB1)) {
-      /* ./../lib/standard//kernel.nit:413 */
+      /* ../lib/standard/kernel.nit:413 */
       REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
-      /* ./../lib/standard//kernel.nit:407 */
+      /* ../lib/standard/kernel.nit:407 */
       REGB3 = TAG_Char('0');
-      /* ./../lib/standard//kernel.nit:413 */
+      /* ../lib/standard/kernel.nit:413 */
       REGB3 = TAG_Int((unsigned char)UNTAG_Char(REGB3));
-      /* ./../lib/standard//kernel.nit:237 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB3 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB3));
-      /* ./../lib/standard//kernel.nit:407 */
+      /* ../lib/standard/kernel.nit:407 */
       REGB2 = REGB3;
       goto label1;
     } else {
-      /* ./../lib/standard//kernel.nit:409 */
+      /* ../lib/standard/kernel.nit:409 */
       REGB0 = CALL_standard___kernel___Char___to_lower(REGB0)(REGB0);
-      /* ./../lib/standard//kernel.nit:413 */
+      /* ../lib/standard/kernel.nit:413 */
       REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
-      /* ./../lib/standard//kernel.nit:409 */
+      /* ../lib/standard/kernel.nit:409 */
       REGB3 = TAG_Char('a');
-      /* ./../lib/standard//kernel.nit:413 */
+      /* ../lib/standard/kernel.nit:413 */
       REGB3 = TAG_Int((unsigned char)UNTAG_Char(REGB3));
-      /* ./../lib/standard//kernel.nit:409 */
+      /* ../lib/standard/kernel.nit:409 */
       REGB1 = TAG_Int(10);
-      /* ./../lib/standard//kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:235 */
       REGB1 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB1));
-      /* ./../lib/standard//kernel.nit:237 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-      /* ./../lib/standard//kernel.nit:409 */
+      /* ../lib/standard/kernel.nit:409 */
       REGB2 = REGB1;
       goto label1;
     }
@@ -2211,7 +2211,7 @@ val_t standard___kernel___Char___ascii(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:413 */
+  /* ../lib/standard/kernel.nit:413 */
   REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -2230,7 +2230,7 @@ val_t standard___kernel___Char_____plus(val_t p0, val_t p1){
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ./../lib/standard//kernel.nit:416 */
+  /* ../lib/standard/kernel.nit:416 */
   REGB1 = TAG_Char(UNTAG_Char(REGB0)+UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2249,7 +2249,7 @@ val_t standard___kernel___Char_____minus(val_t p0, val_t p1){
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ./../lib/standard//kernel.nit:417 */
+  /* ../lib/standard/kernel.nit:417 */
   REGB1 = TAG_Char(UNTAG_Char(REGB0)-UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2269,23 +2269,23 @@ val_t standard___kernel___Char___to_lower(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:423 */
+  /* ../lib/standard/kernel.nit:423 */
   REGB1 = CALL_standard___kernel___Char___is_upper(REGB0)(REGB0);
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//kernel.nit:413 */
+    /* ../lib/standard/kernel.nit:413 */
     REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
-    /* ./../lib/standard//kernel.nit:424 */
+    /* ../lib/standard/kernel.nit:424 */
     REGB2 = TAG_Char('a');
     REGB3 = TAG_Char('A');
     REGB3 = CALL_standard___kernel___Discrete___distance(REGB2)(REGB2, REGB3);
-    /* ./../lib/standard//kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:235 */
     REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
-    /* ./../lib/standard//kernel.nit:297 */
+    /* ../lib/standard/kernel.nit:297 */
     REGB3 = TAG_Char(UNTAG_Int(REGB3));
-    /* ./../lib/standard//kernel.nit:424 */
+    /* ../lib/standard/kernel.nit:424 */
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:426 */
+    /* ../lib/standard/kernel.nit:426 */
     REGB3 = REGB0;
     goto label1;
   }
@@ -2308,23 +2308,23 @@ val_t standard___kernel___Char___to_upper(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:434 */
+  /* ../lib/standard/kernel.nit:434 */
   REGB1 = CALL_standard___kernel___Char___is_lower(REGB0)(REGB0);
   if (UNTAG_Bool(REGB1)) {
-    /* ./../lib/standard//kernel.nit:413 */
+    /* ../lib/standard/kernel.nit:413 */
     REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
-    /* ./../lib/standard//kernel.nit:435 */
+    /* ../lib/standard/kernel.nit:435 */
     REGB2 = TAG_Char('a');
     REGB3 = TAG_Char('A');
     REGB3 = CALL_standard___kernel___Discrete___distance(REGB2)(REGB2, REGB3);
-    /* ./../lib/standard//kernel.nit:237 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB3 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB3));
-    /* ./../lib/standard//kernel.nit:297 */
+    /* ../lib/standard/kernel.nit:297 */
     REGB3 = TAG_Char(UNTAG_Int(REGB3));
-    /* ./../lib/standard//kernel.nit:435 */
+    /* ../lib/standard/kernel.nit:435 */
     goto label1;
   } else {
-    /* ./../lib/standard//kernel.nit:437 */
+    /* ../lib/standard/kernel.nit:437 */
     REGB3 = REGB0;
     goto label1;
   }
@@ -2346,16 +2346,16 @@ val_t standard___kernel___Char___is_digit(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:444 */
+  /* ../lib/standard/kernel.nit:444 */
   REGB1 = TAG_Char('0');
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:384 */
+  /* ../lib/standard/kernel.nit:384 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)>=UNTAG_Char(REGB1));
-  /* ./../lib/standard//kernel.nit:444 */
+  /* ../lib/standard/kernel.nit:444 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Char('9');
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -2363,10 +2363,10 @@ val_t standard___kernel___Char___is_digit(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:382 */
+    /* ../lib/standard/kernel.nit:382 */
     REGB1 = TAG_Bool(UNTAG_Char(REGB0)<=UNTAG_Char(REGB1));
   } else {
-    /* ./../lib/standard//kernel.nit:444 */
+    /* ../lib/standard/kernel.nit:444 */
     REGB0 = TAG_Bool(false);
     REGB1 = REGB0;
   }
@@ -2389,16 +2389,16 @@ val_t standard___kernel___Char___is_lower(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:450 */
+  /* ../lib/standard/kernel.nit:450 */
   REGB1 = TAG_Char('a');
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:384 */
+  /* ../lib/standard/kernel.nit:384 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)>=UNTAG_Char(REGB1));
-  /* ./../lib/standard//kernel.nit:450 */
+  /* ../lib/standard/kernel.nit:450 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Char('z');
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -2406,10 +2406,10 @@ val_t standard___kernel___Char___is_lower(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:382 */
+    /* ../lib/standard/kernel.nit:382 */
     REGB1 = TAG_Bool(UNTAG_Char(REGB0)<=UNTAG_Char(REGB1));
   } else {
-    /* ./../lib/standard//kernel.nit:450 */
+    /* ../lib/standard/kernel.nit:450 */
     REGB0 = TAG_Bool(false);
     REGB1 = REGB0;
   }
@@ -2432,16 +2432,16 @@ val_t standard___kernel___Char___is_upper(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:456 */
+  /* ../lib/standard/kernel.nit:456 */
   REGB1 = TAG_Char('A');
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ./../lib/standard//kernel.nit:384 */
+  /* ../lib/standard/kernel.nit:384 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)>=UNTAG_Char(REGB1));
-  /* ./../lib/standard//kernel.nit:456 */
+  /* ../lib/standard/kernel.nit:456 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Char('Z');
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -2449,10 +2449,10 @@ val_t standard___kernel___Char___is_upper(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ./../lib/standard//kernel.nit:382 */
+    /* ../lib/standard/kernel.nit:382 */
     REGB1 = TAG_Bool(UNTAG_Char(REGB0)<=UNTAG_Char(REGB1));
   } else {
-    /* ./../lib/standard//kernel.nit:456 */
+    /* ../lib/standard/kernel.nit:456 */
     REGB0 = TAG_Bool(false);
     REGB1 = REGB0;
   }
@@ -2474,7 +2474,7 @@ val_t standard___kernel___Char___is_letter(val_t p0){
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ./../lib/standard//kernel.nit:462 */
+  /* ../lib/standard/kernel.nit:462 */
   REGB1 = CALL_standard___kernel___Char___is_lower(REGB0)(REGB0);
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(true);
