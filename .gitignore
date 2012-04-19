@@ -43,3 +43,5 @@ tests/hello_world
 tests/out
 
 *.stub.nit.[ch]
+
+.metadata/*
