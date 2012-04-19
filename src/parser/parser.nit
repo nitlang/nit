@@ -3,6 +3,7 @@
 package parser
 
 intrude import parser_prod
+import tables
 
 # State of the parser automata as stored in the parser stack.
 private class State
