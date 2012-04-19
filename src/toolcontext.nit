@@ -29,6 +29,7 @@ class Message
 	readable var _location: nullable Location
 	readable var _text: String
 
+	# Comparisons are made on message locations.
 	redef fun <(other: OTHER): Bool do
 		if location == null then return true
 		if other.location == null then return false

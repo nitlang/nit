@@ -431,7 +431,7 @@ redef class AExpr
 	# null if self is a statement of in case of error
 	var mtype: nullable MType = null
 
-	# Is the statement correctly typed.
+	# Is the statement correctly typed?
 	# Used to distinguish errors and statements when `mtype' == null
 	var is_typed: Bool = false
 

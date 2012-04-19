@@ -19,7 +19,7 @@ module nit
 
 import modelbuilder
 import exprbuilder
-import naiveinterpreter
+import naive_interpreter
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
