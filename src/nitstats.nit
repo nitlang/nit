@@ -14,8 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Program that collect various data about nit programs and libraries
+# A program that collects various data about nit programs and libraries
 module nitstats
+# Collected datas are :
+#  * number of modules
+#  * number of classes  (interface, class, enum, extern, abstract)
+#  * number of class definitions and refinments
+#  * number of properties
+#  * number of used types and runtime classes
 
 import modelbuilder
 import exprbuilder

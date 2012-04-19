@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Interpretation of a Nit program directly on the AST
-module naiveinterpreter
+module naive_interpreter
 
 import literal
 import typing

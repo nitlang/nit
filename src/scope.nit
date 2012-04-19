@@ -35,7 +35,7 @@ class ClosureVariable
 end
 
 # Mark where break and continue will branch.
-# marks are either associated with a label of with a for_loop structure
+# Marks are either associated with a label of with a for_loop structure
 class EscapeMark
 	# The name of the label (unless the mark is an anonymous loop mark)
 	var name: nullable String

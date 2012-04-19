@@ -47,7 +47,7 @@ redef class ToolContext
 	end
 end
 
-# A model builder know how to load nit source files and build the associated model
+# A model builder knows how to load nit source files and build the associated model
 # The important function is `parse_and_build' that does all the job.
 # The others function can be used for specific tasks
 class ModelBuilder

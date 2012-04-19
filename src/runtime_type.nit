@@ -20,11 +20,11 @@
 # Rapid type analysis is an analyse that aproximates the set of live classes
 # and the set of live methods starting from the entry point of the program.
 # These two sets are interdependant and computed together.
-# It is quite efficient but the type set is global such pollute each call site.
+# It is quite efficient but the type set is global and pollutes each call site.
 #
 # Heterogenous generics means that each intancied generic class is associated
 # to a distinct runtime type.
-# Heterogenous generics has the advantage to resolve the the formal generic
+# Heterogenous generics has the advantage to resolve the formal generic
 # parameters types but increase the number of types.
 # More important, heterogenous generics cannot deal with infinite number of runtime
 # types since the analyse tries to list them all (so some programs will be badly refused)
@@ -35,7 +35,7 @@
 #  * `self' is monomorphic
 #  * virtual types are all resolved
 #  * live attributes can be determined on each class
-# But the big disavantage to explode the number of runtime method: each method
+# But has the disadvantage to explode the number of runtime method: each method
 # definition for each runtime type that need it
 module runtime_type
 
@@ -82,6 +82,8 @@ redef class ModelBuilder
 	end
 end
 
+# RuntimeTypeAnalysis looks for alive runtime types in application.
+# The entry point of the analysis is the mainmodule of the application.
 class RuntimeTypeAnalysis
 	var modelbuilder: ModelBuilder
 	var mainmodule: MModule
@@ -152,6 +154,7 @@ class RuntimeTypeAnalysis
 		self.live_cast_types.add(mtype)
 	end
 
+	# Start the analysis.
 	fun run_analysis
 	do
 		while not todo.is_empty do
