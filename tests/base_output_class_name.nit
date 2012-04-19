@@ -14,11 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import kernel
+
 class Test end
 class MyArray[E] end
 
 class Toto
-	redef fun output_class_name do print "TotoToto"
+	redef fun output_class_name do '0'.output
 end
 
 var test1 = new Test
@@ -26,7 +28,7 @@ var test2: Object = new Test
 var test3 = new MyArray[Int]
 var test4 = new Toto
 
-"".output_class_name
+'1'.output_class_name
 1.output_class_name
 test1.output_class_name
 test2.output_class_name
