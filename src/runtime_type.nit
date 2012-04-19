@@ -171,6 +171,10 @@ class RuntimeTypeAnalysis
 	# Start the analysis.
 	fun run_analysis
 	do
+		# Force Bool
+		var classes = self.modelbuilder.model.get_mclasses_by_name("Bool")
+		if classes != null then for c in classes do self.add_type(c.mclass_type)
+
 		while not todo.is_empty do
 			var mr = todo.shift
 			if not self.modelbuilder.mpropdef2npropdef.has_key(mr.mmethoddef) then
@@ -341,6 +345,7 @@ private class RuntimeTypeVisitor
 			if name == "Bool" then
 				var c = new MClass(analysis.mainmodule, name, 0, enum_kind, public_visibility)
 				var cladef = new MClassDef(analysis.mainmodule, c.mclass_type, new Location(null, 0,0,0,0), new Array[String])
+				self.add_type(c.mclass_type)
 				return c
 			end
 			self.current_node.debug("Fatal Error: no primitive class {name}")
