@@ -57,11 +57,7 @@ redef class ModelBuilder
 		var analysis = new RuntimeTypeAnalysis(self, mainmodule)
 		var nmodule = self.nmodules.first
 		var mainclass = self.try_get_mclass_by_name(nmodule, mainmodule, "Sys")
-		assert mainclass != null
-		var props = model.get_mproperties_by_name("main")
-		assert props.length == 1
-		var methods = props.first.lookup_definitions(mainmodule, mainclass.mclass_type)
-		assert methods.length == 1 else print methods.join(", ")
+		if mainclass == null then return analysis # No entry point
 		var maintype = mainclass.mclass_type
 		analysis.add_type(maintype)
 		mainmodule.main_type = maintype
