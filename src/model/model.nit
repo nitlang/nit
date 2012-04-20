@@ -1285,6 +1285,9 @@ class MMethod
 	# therefore, you should use `is_init_for' the verify if the property is a legal constructor for a given class
 	var is_init: Bool writable = false
 
+	# The the property a 'new' contructor?
+	var is_new: Bool writable = false
+
 	# Is the property a legal constructor for a given class?
 	# As usual, visibility is not considered.
 	# FIXME not implemented

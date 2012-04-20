@@ -1000,6 +1000,7 @@ redef class AMethPropdef
 			var mvisibility = new_property_visibility(modelbuilder, nclassdef, self.n_visibility)
 			mprop = new MMethod(mclassdef, name, mvisibility)
 			mprop.is_init = is_init
+			mprop.is_new = self isa AExternInitPropdef
 			self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mprop)
 		else
 			if n_kwredef == null then
