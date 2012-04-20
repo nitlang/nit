@@ -214,6 +214,11 @@ class RuntimeMethod
 	var mmethoddef: MMethodDef
 	var receiver: MClassType
 
+	redef fun to_s
+	do
+		return "{self.mmethoddef}({receiver})"
+	end
+
 	redef fun ==(o)
 	do
 		return o isa RuntimeMethod and o.mmethoddef == self.mmethoddef and o.receiver == self.receiver

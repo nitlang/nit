@@ -519,10 +519,15 @@ do
 
 	print "--- Type Analysis ---"
 	print "Number of live runtime types (instantied resolved type): {analysis.live_types.length}"
+	if analysis.live_types.length < 8 then print "\t{analysis.live_types.join(" ")}"
 	print "Number of live polymorphic method: {analysis.polymorphic_methods.length}"
+	if analysis.polymorphic_methods.length < 8 then print "\t{analysis.polymorphic_methods.join(" ")}"
 	print "Number of live method definitions: {analysis.live_methoddefs.length}"
+	if analysis.live_methoddefs.length < 8 then print "\t{analysis.live_methoddefs.join(" ")}"
 	print "Number of live runtime method definitions (with customization): {analysis.runtime_methods.length}"
+	if analysis.runtime_methods.length < 8 then print "\t{analysis.runtime_methods.join(" ")}"
 	print "Number of live runtime cast types (ie used in as and isa): {analysis.live_cast_types.length}"
+	if analysis.live_cast_types.length < 8 then print "\t{analysis.live_cast_types.join(" ")}"
 
 	for mprop in modelbuilder.model.mproperties do
 		if not mprop isa MMethod then continue
