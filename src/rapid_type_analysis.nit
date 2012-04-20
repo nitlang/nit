@@ -196,6 +196,18 @@ class RapidTypeAnalysis
 
 		while not todo.is_empty do
 			var mr = todo.shift
+
+			var vararg_rank = mr.mmethoddef.msignature.vararg_rank
+			if vararg_rank > -1 then
+				var elttype = mr.mmethoddef.msignature.parameter_mtypes[vararg_rank]
+				elttype = elttype.anchor_to(self.mainmodule, mr.receiver)
+				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
+				self.add_type(vararg)
+				self.add_monomorphic_send(vararg, self.mainmodule.force_get_primitive_method("with_native", vararg))
+				var native = self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype])
+				self.add_type(native)
+			end
+
 			if not self.modelbuilder.mpropdef2npropdef.has_key(mr.mmethoddef) then
 				# It is an init for a class?
 				if mr.mmethoddef.mproperty.name == "init" then

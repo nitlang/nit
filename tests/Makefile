@@ -1,5 +1,5 @@
 
-PROGS=*.nit ../examples/*.nit ../lib/*.nit ../src/nitdoc.nit ../src/nits.nit ../src/nitc.nit ../src/test_parser.nit ../src/nit.nit ../src/nitstats.nit
+PROGS=*.nit ../examples/*.nit ../lib/*.nit ../src/nitdoc.nit ../src/nits.nit ../src/nitc.nit ../src/test_parser.nit ../src/nit.nit ../src/nitstats.nit ../src/nitg.nit
 
 all: separate global icode
 
