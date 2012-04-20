@@ -103,6 +103,20 @@ class RuntimeTypeAnalysis
 		assert not mtype.need_anchor
 		self.live_types.add(mtype)
 
+		# Collect default attributes
+		for cd in mtype.collect_mclassdefs(self.mainmodule)
+		do
+			var nclassdef = self.modelbuilder.mclassdef2nclassdef[cd]
+			for npropdef in nclassdef.n_propdefs do
+				if not npropdef isa AAttrPropdef then continue
+				var nexpr = npropdef.n_expr
+				if nexpr == null then continue
+				var v = new RuntimeTypeVisitor(self, nclassdef, npropdef.mpropdef.as(not null), mtype)
+				v.enter_visit(nexpr)
+			end
+		end
+
+
 		for rss in self.live_send_site do
 			if not mtype.is_subtype(self.mainmodule, null, rss.receiver) then continue
 			if mtype.has_mproperty(self.mainmodule, rss.mmethod) then
@@ -252,15 +266,15 @@ private class RuntimeTypeVisitor
 
 	var nclassdef: AClassdef
 
-	var mmethoddef: MMethodDef
+	var mpropdef: MPropDef
 
 	var receiver: MClassType
 
-	init(analysis: RuntimeTypeAnalysis, nclassdef: AClassdef, mmethoddef: MMethodDef, receiver: MClassType)
+	init(analysis: RuntimeTypeAnalysis, nclassdef: AClassdef, mpropdef: MPropDef, receiver: MClassType)
 	do
 		self.analysis = analysis
 		self.nclassdef = nclassdef
-		self.mmethoddef = mmethoddef
+		self.mpropdef = mpropdef
 		self.receiver = receiver
 	end
 
@@ -534,7 +548,7 @@ redef class ASuperExpr
 		end
 
 		#FIXME: we do not want an ugly static call!
-		var mpropdef = v.mmethoddef
+		var mpropdef = v.mpropdef
 		var mpropdefs = mpropdef.mproperty.lookup_super_definitions(mpropdef.mclassdef.mmodule, mpropdef.mclassdef.bound_mtype)
 		if mpropdefs.length != 1 then
 			debug("MPRODFEFS for super {mpropdef} for {v.receiver}: {mpropdefs.join(", ")}")
