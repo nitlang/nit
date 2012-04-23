@@ -25,7 +25,7 @@ module nitstats
 
 import modelbuilder
 import exprbuilder
-import runtime_type
+import rapid_type_analysis
 
 # The job of this visitor is to resolve all types found
 class ATypeCounterVisitor
@@ -515,28 +515,17 @@ end
 
 fun runtime_type(modelbuilder: ModelBuilder, mainmodule: MModule)
 do
-	var analysis = modelbuilder.do_runtime_type(mainmodule)
+	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 
 	print "--- Type Analysis ---"
 	print "Number of live runtime types (instantied resolved type): {analysis.live_types.length}"
 	if analysis.live_types.length < 8 then print "\t{analysis.live_types.join(" ")}"
-	print "Number of live polymorphic method: {analysis.polymorphic_methods.length}"
-	if analysis.polymorphic_methods.length < 8 then print "\t{analysis.polymorphic_methods.join(" ")}"
 	print "Number of live method definitions: {analysis.live_methoddefs.length}"
 	if analysis.live_methoddefs.length < 8 then print "\t{analysis.live_methoddefs.join(" ")}"
-	print "Number of live runtime method definitions (with customization): {analysis.runtime_methods.length}"
-	if analysis.runtime_methods.length < 8 then print "\t{analysis.runtime_methods.join(" ")}"
+	print "Number of live customized method definitions: {analysis.live_customized_methoddefs.length}"
+	if analysis.live_customized_methoddefs.length < 8 then print "\t{analysis.live_customized_methoddefs.join(" ")}"
 	print "Number of live runtime cast types (ie used in as and isa): {analysis.live_cast_types.length}"
 	if analysis.live_cast_types.length < 8 then print "\t{analysis.live_cast_types.join(" ")}"
-
-	for mprop in modelbuilder.model.mproperties do
-		if not mprop isa MMethod then continue
-		if analysis.polymorphic_methods.has(mprop) then continue
-		for methoddef in mprop.mpropdefs do
-			if analysis.live_methoddefs.has(methoddef) then continue label l
-		end
-		#print "  {mprop.full_name} is dead"
-	end label l
 end
 
 # Create a tool context to handle options and paths
