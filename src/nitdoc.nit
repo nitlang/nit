@@ -86,8 +86,11 @@ class DocContext
 	readable var _opt_private: OptionBool = new OptionBool("Generate the private API", "--private")
 	readable var _opt_nodot: OptionBool = new OptionBool("Do not generate graphes with graphviz", "--no-dot")
 	readable var _opt_sharedir: OptionString = new OptionString("Directory containing the nitdoc files", "--sharedir")
-	readable var _opt_overview_text: OptionString = new OptionString("Text displayed as introduction of Overview page", "--overview-text")
-	readable var _opt_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--footer-text")
+	
+	readable var _opt_custom_menu_items: OptionString = new OptionString("Items displayed in menu before the 'Overview' item (Each item must be enclosed in 'li' tags)", "--custom-menu-items")
+	readable var _opt_custom_title: OptionString = new OptionString("Title displayed in the top of the Overview page and as suffix of all page names", "--custom-title")
+	readable var _opt_custom_overview_text: OptionString = new OptionString("Text displayed as introduction of Overview page before the modules list", "--custom-overview-text")
+	readable var _opt_custom_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--custom-footer-text")
 	var sharedir: nullable String
 
 	fun public_only: Bool
@@ -162,23 +165,29 @@ class DocContext
 			"<script type=\"text/javascript\" src=\"scripts/js-facilities.js\"></script>\n" +
 			"<link rel=\"stylesheet\" href=\"styles/main.css\" type=\"text/css\"  media=\"screen\" />"
 
-		var action_bar = "<header><nav class='main'><ul><li class=\"current\">Overview</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
+		var custom_items = ""
+		if self._opt_custom_menu_items.value != null then custom_items = self._opt_custom_menu_items.value.as(not null)
 
+		var action_bar = "<header><nav class='main'><ul>{custom_items}<li class=\"current\">Overview</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
+							
+		var custom_title = "Nitdoc"
+		if self._opt_custom_title.value != null then custom_title = self._opt_custom_title.value.as(not null)
+		
 		var overview_text = ""
-		if self._opt_overview_text.value != null then overview_text = self._opt_overview_text.value.as(not null)
+		if self._opt_custom_overview_text.value != null then overview_text = self._opt_custom_overview_text.value.as(not null)
 
 		var footer_text = ""
-		if self._opt_footer_text.value != null then footer_text = self._opt_footer_text.value.as(not null)
-
+		if self._opt_custom_footer_text.value != null then footer_text = self._opt_custom_footer_text.value.as(not null)
+		
 		# generate the index
 		self.filename = "index.html"
 		clear
 		add("<!DOCTYPE html>")
-		add("<html><head>{head}<title>Index</title></head><body>\n")
+		add("<html><head>{head}<title>Overview | {custom_title}</title></head><body>\n")
 		add(action_bar)
 		add("<div class=\"page\">")
 		add("<div class=\"content fullpage\">")
-		add("<h1>Modules</h1>\n<article class='overview'>{overview_text}<ul>")
+		add("<h1>{custom_title}</h1>\n<article class='overview'>{overview_text}</article><article class='overview'><h2>Modules</h2><ul>")
 		var modss = mainmod.mhe.greaters_and_self.to_a
 		sort(modss)
 		for mod in modss do
@@ -216,10 +225,10 @@ class DocContext
 			assert mod isa MMSrcModule
 			if not mod.require_doc(self) then continue
 			self.filename = mod.html_name
-			action_bar = "<header><nav class='main'><ul><li><a href='./index.html'>Overview</a></li><li class=\"current\">{mod.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
+			action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li class=\"current\">{mod.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
 			clear
 			add("<!DOCTYPE html>")
-			add("<html><head>{head}<title>Module {mod.name}</title></head><body>\n")
+			add("<html><head>{head}<title>{mod.name} module | {custom_title}</title></head><body>\n")
 			add(action_bar)
 			add("<div class=\"page\">")
 			mod.file_page_doc(self)
@@ -233,10 +242,10 @@ class DocContext
 		for c in mainmod.local_classes do
 			if not c.require_doc(self) then continue
 			self.filename = c.html_name
-			action_bar = "<header><nav class='main'><ul><li><a href='./index.html'>Overview</a></li><li>{c.global.intro.mmmodule.toplevel_owner.html_link(self)}</li><li class=\"current\">{c.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
+			action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li>{c.global.intro.mmmodule.toplevel_owner.html_link(self)}</li><li class=\"current\">{c.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
 			clear
 			add("<!DOCTYPE html>")
-			add("<html><head>{head}<title>Class {c.name}</title></head><body>\n")
+			add("<html><head>{head}<title>{c.name} class | {custom_title}</title></head><body>\n")
 			add(action_bar)
 			add("<div class=\"page\">")
 			c.file_page_doc(self)
@@ -247,10 +256,10 @@ class DocContext
 		end
 
 		self.filename = "fullindex"
-		action_bar = "<header><nav class='main'><ul><li><a href='./index.html'>Overview</a></li><li class=\"current\">Full Index</li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
+		action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li class=\"current\">Full Index</li><li><a href=\"help.html\">Help</a></li></ul></nav></header>\n"
 		clear
 		add("<!DOCTYPE html>")
-		add("<html><head>{head}<title>Full Index</title></head><body>\n")
+		add("<html><head>{head}<title>Full Index | {custom_title}</title></head><body>\n")
 		add(action_bar)
 		add("<div class=\"page\">")
 		add("<div class=\"content fullpage\">")
@@ -313,8 +322,10 @@ class DocContext
 		option_context.add_option(opt_source)
 		option_context.add_option(opt_nodot)
 		option_context.add_option(opt_sharedir)
-		option_context.add_option(opt_overview_text)
-		option_context.add_option(opt_footer_text)
+		option_context.add_option(opt_custom_title)
+		option_context.add_option(opt_custom_menu_items)
+		option_context.add_option(opt_custom_overview_text)
+		option_context.add_option(opt_custom_footer_text)
 	end
 
 	redef fun process_options

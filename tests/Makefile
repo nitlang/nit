@@ -12,6 +12,9 @@ some:
 global:
 	./tests.sh -o --global ${PROGS}
 
+nitdoc:
+	./tests.sh ../src/nitdoc.nit
+
 icode:
 	./tests_icode.sh icode*.nit
 
