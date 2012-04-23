@@ -44,35 +44,23 @@ import modelbuilder
 import typing
 import auto_super_init
 
-redef class MModule
-	var main_type: nullable MClassType
-	var main_init: nullable MMethod
-	var main_method: nullable MMethod
-end
-
 redef class ModelBuilder
 	fun do_rapid_type_analysis(mainmodule: MModule): RapidTypeAnalysis
 	do
 		var model = self.model
 		var analysis = new RapidTypeAnalysis(self, mainmodule)
 		var nmodule = self.nmodules.first
-		var mainclass = self.try_get_mclass_by_name(nmodule, mainmodule, "Sys")
-		if mainclass == null then return analysis # No entry point
-		var maintype = mainclass.mclass_type
+		var maintype = mainmodule.sys_type
+		if maintype == null then return analysis # No entry point
 		analysis.add_type(maintype)
-		mainmodule.main_type = maintype
-		var initprop = self.try_get_mproperty_by_name2(nmodule, mainmodule, maintype, "init")
+		var initprop = mainmodule.try_get_primitive_method("init", maintype)
 		if initprop != null then
-			assert initprop isa MMethod
 			analysis.add_monomorphic_send(maintype, initprop)
 		end
-		mainmodule.main_init = initprop
-		var mainprop = self.try_get_mproperty_by_name2(nmodule, mainmodule, maintype, "main")
+		var mainprop = mainmodule.try_get_primitive_method("main", maintype)
 		if mainprop != null then
-			assert mainprop isa MMethod
 			analysis.add_monomorphic_send(maintype, mainprop)
 		end
-		mainmodule.main_method = mainprop
 		analysis.run_analysis
 		return analysis
 	end
@@ -373,19 +361,7 @@ private class RapidTypeVisitor
 	# Force to get the primitive class named `name' or abort
 	fun get_class(name: String): MClass
 	do
-		var cla = analysis.mainmodule.model.get_mclasses_by_name(name)
-		if cla == null then
-			if name == "Bool" then
-				var c = new MClass(analysis.mainmodule, name, 0, enum_kind, public_visibility)
-				var cladef = new MClassDef(analysis.mainmodule, c.mclass_type, new Location(null, 0,0,0,0), new Array[String])
-				self.add_type(c.mclass_type)
-				return c
-			end
-			self.current_node.debug("Fatal Error: no primitive class {name}")
-			abort
-		end
-		assert cla.length == 1 else print cla.join(", ")
-		return cla.first
+		return self.analysis.mainmodule.get_primitive_class(name)
 	end
 
 	# Force to get the primitive property named `name' in the instance `recv' or abort
@@ -394,28 +370,7 @@ private class RapidTypeVisitor
 		var rapidtype = cleanup_type(recv)
 		if rapidtype == null then abort
 
-		var props = self.analysis.mainmodule.model.get_mproperties_by_name(name)
-		if props == null then
-			self.current_node.debug("Fatal Error: no primitive property {name} on {rapidtype}")
-			abort
-		end
-		var res: nullable MMethod = null
-		for mprop in props do
-			assert mprop isa MMethod
-			if not rapidtype.has_mproperty(self.analysis.mainmodule, mprop) then continue
-			if mprop.is_init and mprop.intro_mclassdef.mclass != rapidtype.mclass then continue
-			if res == null then
-				res = mprop
-			else
-				self.current_node.debug("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
-				abort
-			end
-		end
-		if res == null then
-			self.current_node.debug("Fatal Error: no primitive property {name} on {rapidtype}")
-			abort
-		end
-		return res
+		return self.analysis.mainmodule.force_get_primitive_method(name, rapidtype)
 	end
 end
 

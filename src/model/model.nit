@@ -149,6 +149,85 @@ redef class MModule
 	end
 
 	private var flatten_mclass_hierarchy_cache: nullable POSet[MClass] = null
+
+	# The primitive type Object, the root of the class hierarchy
+	fun object_type: MClassType
+	do
+		var res = self.object_type_cache
+		if res != null then return res
+		res = self.get_primitive_class("Object").mclass_type
+		self.object_type_cache = res
+		return res
+	end
+
+	private var object_type_cache: nullable MClassType
+
+	# The primitive type Bool
+	fun bool_type: MClassType
+	do
+		var res = self.bool_type_cache
+		if res != null then return res
+		res = self.get_primitive_class("Bool").mclass_type
+		self.bool_type_cache = res
+		return res
+	end
+
+	private var bool_type_cache: nullable MClassType
+
+	# The primitive type Sys, the main type of the program, if any
+	fun sys_type: nullable MClassType
+	do
+		var clas = self.model.get_mclasses_by_name("Sys")
+		if clas == null then return null
+		return get_primitive_class("Sys").mclass_type
+	end
+
+	# Force to get the primitive class named `name' or abort
+	fun get_primitive_class(name: String): MClass
+	do
+		var cla = self.model.get_mclasses_by_name(name)
+		if cla == null then
+			if name == "Bool" then
+				var c = new MClass(self, name, 0, enum_kind, public_visibility)
+				var cladef = new MClassDef(self, c.mclass_type, new Location(null, 0,0,0,0), new Array[String])
+				return c
+			end
+			print("Fatal Error: no primitive class {name}")
+			abort
+		end
+		assert cla.length == 1 else print cla.join(", ")
+		return cla.first
+	end
+
+	# Try to get the primitive method named `name' on the type `recv'
+	fun try_get_primitive_method(name: String, recv: MType): nullable MMethod
+	do
+		var props = self.model.get_mproperties_by_name(name)
+		if props == null then return null
+		var res: nullable MMethod = null
+		for mprop in props do
+			assert mprop isa MMethod
+			if not recv.has_mproperty(self, mprop) then continue
+			if res == null then
+				res = mprop
+			else
+				print("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
+				abort
+			end
+		end
+		return res
+	end
+
+	# Force to get the primitive method named `name' on the type `recv' or abort
+	fun force_get_primitive_method(name: String, recv: MType): MMethod
+	do
+		var res = try_get_primitive_method(name, recv)
+		if res == null then
+			print("Fatal Error: no primitive property {name} on {recv}")
+			abort
+		end
+		return res
+	end
 end
 
 # A named class
