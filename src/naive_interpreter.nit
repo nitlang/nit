@@ -34,24 +34,20 @@ redef class ModelBuilder
 		self.toolcontext.info("*** START INTERPRETING ***", 1)
 
 		var interpreter = new NaiveInterpreter(self, mainmodule, arguments)
-		var mainclasses = model.get_mclasses_by_name("Sys")
-		if mainclasses == null then return
-		assert mainclasses.length == 1
-		var mainclass = mainclasses.first
-		var props = model.get_mproperties_by_name("main")
-		assert props.length == 1
-		var methods = props.first.lookup_definitions(mainmodule, mainclass.mclass_type)
-		assert methods.length == 1 else print methods.join(", ")
-		var mainobj = new Instance(mainclass.mclass_type)
+		var sys_type = mainmodule.sys_type
+		if sys_type == null then return # no class Sys
+		var mainobj = new Instance(sys_type)
 		interpreter.mainobj = mainobj
 		interpreter.init_instance(mainobj)
-		var initprop = try_get_mproperty_by_name2(nmodules.first, mainmodule, mainclass.mclass_type, "init")
+		var initprop = mainmodule.try_get_primitive_method("init", sys_type)
 		if initprop != null then
-			assert initprop isa MMethod
 			interpreter.send(initprop, [mainobj])
 		end
 		interpreter.check_init_instance(mainobj)
-		interpreter.send(interpreter.get_property("main", mainobj), [mainobj])
+		var mainprop = mainmodule.try_get_primitive_method("main", sys_type)
+		if mainprop != null then
+			interpreter.send(mainprop, [mainobj])
+		end
 
 		var time1 = get_time
 		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
@@ -78,53 +74,9 @@ private class NaiveInterpreter
 		self.modelbuilder = modelbuilder
 		self.mainmodule = mainmodule
 		self.arguments = arguments
-		self.true_instance = new PrimitiveInstance[Bool](get_class("Bool").mclass_type, true)
-		self.false_instance = new PrimitiveInstance[Bool](get_class("Bool").mclass_type, false)
+		self.true_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, true)
+		self.false_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, false)
 		self.null_instance = new Instance(mainmodule.model.null_type)
-	end
-
-	# Force to get the primitive class named `name' or abort
-	fun get_class(name: String): MClass
-	do
-		var cla = mainmodule.model.get_mclasses_by_name(name)
-		if cla == null then
-			if name == "Bool" then
-				var c = new MClass(mainmodule, name, 0, enum_kind, public_visibility)
-				var cladef = new MClassDef(mainmodule, c.mclass_type, new Location(null, 0,0,0,0), new Array[String])
-				return c
-			end
-			fatal("Fatal Error: no primitive class {name}")
-			abort
-		end
-		assert cla.length == 1 else print cla.join(", ")
-		return cla.first
-	end
-
-	# Force to get the primitive property named `name' in the instance `recv' or abort
-	fun get_property(name: String, recv: Instance): MMethod
-	do
-		var props = self.mainmodule.model.get_mproperties_by_name(name)
-		if props == null then
-			fatal("Fatal Error: no primitive property {name} on {recv}")
-			abort
-		end
-		var mtype = recv.mtype
-		var res: nullable MMethod = null
-		for mprop in props do
-			assert mprop isa MMethod
-			if not mtype.has_mproperty(self.mainmodule, mprop) then continue
-			if res == null then
-				res = mprop
-			else
-				fatal("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
-				abort
-			end
-		end
-		if res == null then
-			fatal("Fatal Error: no primitive property {name} on {recv}")
-			abort
-		end
-		return res
 	end
 
 	# Subtype test in the context of the mainmodule
@@ -221,21 +173,21 @@ private class NaiveInterpreter
 	# Return the integer instance associated with `val'.
 	fun int_instance(val: Int): Instance
 	do
-		var ic = get_class("Int")
+		var ic = self.mainmodule.get_primitive_class("Int")
 		return new PrimitiveInstance[Int](ic.mclass_type, val)
 	end
 
 	# Return the char instance associated with `val'.
 	fun char_instance(val: Char): Instance
 	do
-		var ic = get_class("Char")
+		var ic = self.mainmodule.get_primitive_class("Char")
 		return new PrimitiveInstance[Char](ic.mclass_type, val)
 	end
 
 	# Return the float instance associated with `val'.
 	fun float_instance(val: Float): Instance
 	do
-		var ic = get_class("Float")
+		var ic = self.mainmodule.get_primitive_class("Float")
 		return new PrimitiveInstance[Float](ic.mclass_type, val)
 	end
 
@@ -253,11 +205,11 @@ private class NaiveInterpreter
 	fun array_instance(values: Array[Instance], elttype: MType): Instance
 	do
 		assert not elttype.need_anchor
-		var nat = new PrimitiveInstance[Array[Instance]](self.get_class("NativeArray").get_mtype([elttype]), values)
-		var mtype = self.get_class("Array").get_mtype([elttype])
+		var nat = new PrimitiveInstance[Array[Instance]](self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype]), values)
+		var mtype = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
 		var res = new Instance(mtype)
 		self.init_instance(res)
-		self.send(self.get_property("with_native", res), [res, nat, self.int_instance(values.length)])
+		self.send(self.mainmodule.force_get_primitive_method("with_native", mtype), [res, nat, self.int_instance(values.length)])
 		self.check_init_instance(res)
 		return res
 	end
@@ -266,7 +218,7 @@ private class NaiveInterpreter
 	fun native_string_instance(txt: String): Instance
 	do
 		var val = new Buffer.from(txt)
-		var ic = get_class("NativeString")
+		var ic = self.mainmodule.get_primitive_class("NativeString")
 		return new PrimitiveInstance[Buffer](ic.mclass_type, val)
 	end
 
@@ -699,10 +651,10 @@ redef class AInternMethPropdef
 			end
 		else if pname == "calloc_array" then
 			var recvtype = args.first.mtype.as(MClassType)
-			var mtype: MType = recvtype.supertype_to(v.mainmodule, recvtype, v.get_class("ArrayCapable"))
+			var mtype: MType = recvtype.supertype_to(v.mainmodule, recvtype, v.mainmodule.get_primitive_class("ArrayCapable"))
 			mtype = mtype.as(MGenericType).arguments.first
 			var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
-			return new PrimitiveInstance[Array[Instance]](v.get_class("NativeArray").get_mtype([mtype]), val)
+			return new PrimitiveInstance[Array[Instance]](v.mainmodule.get_primitive_class("NativeArray").get_mtype([mtype]), val)
 		end
 		fatal(v, "Unimplemented intern {mpropdef}")
 		abort
@@ -1024,19 +976,19 @@ redef class AForExpr
 	do
 		var col = v.expr(self.n_expr)
 		#self.debug("col {col}")
-		var iter = v.send(v.get_property("iterator", col), [col]).as(not null)
+		var iter = v.send(v.mainmodule.force_get_primitive_method("iterator", col.mtype), [col]).as(not null)
 		#self.debug("iter {iter}")
 		loop
-			var isok = v.send(v.get_property("is_ok", iter), [iter]).as(not null)
+			var isok = v.send(v.mainmodule.force_get_primitive_method("is_ok", iter.mtype), [iter]).as(not null)
 			if not isok.is_true then return
-			var item = v.send(v.get_property("item", iter), [iter]).as(not null)
+			var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
 			#self.debug("item {item}")
 			v.frame.map[self.variables.first] = item
 			v.stmt(self.n_block)
 			if v.is_break(self.escapemark) then return
 			v.is_continue(self.escapemark) # Clear the break
 			if v.is_escaping then return
-			v.send(v.get_property("next", iter), [iter])
+			v.send(v.mainmodule.force_get_primitive_method("next", iter.mtype), [iter])
 		end
 	end
 end
@@ -1142,9 +1094,9 @@ redef class AStringFormExpr
 	do
 		var txt = self.value.as(not null)
 		var nat = v.native_string_instance(txt)
-		var res = new Instance(v.get_class("String").mclass_type)
+		var res = new Instance(v.mainmodule.get_primitive_class("String").mclass_type)
 		v.init_instance(res)
-		v.send(v.get_property("from_cstring", res), [res, nat])
+		v.send(v.mainmodule.force_get_primitive_method("from_cstring", res.mtype), [res, nat])
 		v.check_init_instance(res)
 		return res
 	end
@@ -1157,8 +1109,8 @@ redef class ASuperstringExpr
 		for nexpr in n_exprs do
 			array.add(v.expr(nexpr))
 		end
-		var i = v.array_instance(array, v.get_class("Object").mclass_type)
-		var res = v.send(v.get_property("to_s", i), [i])
+		var i = v.array_instance(array, v.mainmodule.get_primitive_class("Object").mclass_type)
+		var res = v.send(v.mainmodule.force_get_primitive_method("to_s", i.mtype), [i])
 		assert res != null
 		return res
 	end
@@ -1172,7 +1124,7 @@ redef class ACrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new Instance(mtype)
 		v.init_instance(res)
-		v.send(v.get_property("init", res), [res, e1, e2])
+		v.send(v.mainmodule.force_get_primitive_method("init", mtype), [res, e1, e2])
 		v.check_init_instance(res)
 		return res
 	end
@@ -1186,7 +1138,7 @@ redef class AOrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new Instance(mtype)
 		v.init_instance(res)
-		v.send(v.get_property("without_last", res), [res, e1, e2])
+		v.send(v.mainmodule.force_get_primitive_method("without_last", mtype), [res, e1, e2])
 		v.check_init_instance(res)
 		return res
 	end

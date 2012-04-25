@@ -63,6 +63,8 @@ private class ScopeVisitor
 	# The tool context used to display errors
 	var toolcontext: ToolContext
 
+	var selfvariable: Variable = new Variable("self")
+
 	init(toolcontext: ToolContext)
 	do
 		self.toolcontext = toolcontext
@@ -248,6 +250,16 @@ redef class AVardeclExpr
 		var variable = new Variable(nid.text)
 		v.register_variable(nid, variable)
 		self.variable = variable
+	end
+end
+
+redef class ASelfExpr
+	# The variable associated with the self reciever
+	var variable: nullable Variable
+	redef fun accept_scope_visitor(v)
+	do
+		super
+		self.variable = v.selfvariable
 	end
 end
 

@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2009 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,23 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import kernel
+import file
 
-class Test end
-class MyArray[E] end
-
-class Toto
-	redef fun output_class_name do '0'.output
-end
-
-var test1 = new Test
-var test2: Object = new Test
-var test3 = new MyArray[Int]
-var test4 = new Toto
-
-'1'.output_class_name
-1.output_class_name
-test1.output_class_name
-test2.output_class_name
-test3.output_class_name
-test4.output_class_name
+var out = stdout
+out.output_class_name
+out.write("1\n")
+2.output
