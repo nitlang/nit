@@ -845,6 +845,7 @@ redef class MMModule
 			for gp in lc.global_properties do
 				var lp = lc[gp]
 				if not lp.require_doc(dctx) then continue
+				if lp.kind == "var" then continue
 				if props.has_key(lp.global) then
 					if not props[lp.global].has(lp) then
 						props[lp.global].add(lp)
