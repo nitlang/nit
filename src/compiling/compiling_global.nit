@@ -81,7 +81,7 @@ redef class MMModule
 	# Compile sep files
 	fun compile_mod_to_c(v: CompilerVisitor)
 	do
-		v.add_decl("extern const char *LOCATE_{cname};")
+		v.add_decl("extern const char LOCATE_{cname}[];")
 		if not v.program.tc.use_SFT_optimization then
 			v.add_decl("extern const int SFT_{cname}[];")
 		end
@@ -118,7 +118,7 @@ redef class MMModule
 	# Compile module file for the current module
 	fun compile_local_table_to_c(v: CompilerVisitor)
 	do
-		v.add_instr("const char *LOCATE_{cname} = \"{location.file.filename}\";")
+		v.add_instr("const char LOCATE_{cname}[] = \"{location.file.filename}\";")
 
 		if v.program.tc.use_SFT_optimization or local_table.is_empty then
 			return

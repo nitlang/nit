@@ -267,7 +267,10 @@ redef class IRoutine
 		else
 			p = cparams.join(", ")
 		end
-		if human_name != null then v.add_decl("static const char * const LOCATE_{cname} = \"{human_name}\";")
+		if human_name != null then
+			v.add_decl("static const char LOCATE_{cname}[];")
+			v.add_instr("static const char LOCATE_{cname}[] = \"{human_name}\";")
+		end
 		v.add_decl("{r} {cname}({p});")
 		v.add_decl("typedef {r} (*{cname}_t)({p});")
 		v.add_instr("{r} {cname}({p})\{")
