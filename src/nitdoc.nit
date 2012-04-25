@@ -455,7 +455,7 @@ interface MMEntity
 	# Return null is none
 	fun doc: nullable ADoc do return null
 
-	# Return a jason entry for quicksearch list JSON Object
+	# Return a JSON entry for quicksearch list
 	fun json_entry(dctx: DocContext): String is abstract
 
 	# Return the qualified name as string
