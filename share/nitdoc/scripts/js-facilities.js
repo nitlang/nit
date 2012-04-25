@@ -187,6 +187,13 @@ $(document).ready(function() {
 							currentTable.width($("#search").outerWidth());
 							$("header").append(currentTable);
 							currentTable.offset({left: $("#search").offset().left + ($("#search").outerWidth() - currentTable.outerWidth()), top: $("#search").offset().top + $("#search").outerHeight()});
+
+							// Preselect first entry
+							if(currentTable.find("tr").length > 0) {
+								currentIndex = 0;
+								$(currentTable.find("tr")[currentIndex]).addClass("activeSearchResult");
+								$("#search").focus();
+							}
 						break;
 					}
 				})
@@ -208,6 +215,16 @@ $(document).ready(function() {
 			})
 		)
 	 );
+
+	 // Close quicksearch list on click
+	 $(document).click(function(e) {
+		if(e.target != $("#search")[0] && e.target != $("#searchTable")[0]) {
+			if(currentTable != null) {
+				currentTable.remove();
+				currentTable = null;
+			}
+		}
+	 });
 	
 	/*
 	* Anchors jumps
