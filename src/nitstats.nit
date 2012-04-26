@@ -325,7 +325,7 @@ do
 
 	print ""
 
-	print "Nomber of class definitions: {nbcladef}"
+	print "Number of class definitions: {nbcladef}"
 	print "Number of refined classes: {refined} ({div(refined*100,nbcla)}%)"
 	print "Average number of class refinments by classes: {div(nbcladef-nbcla,nbcla)}"
 	print "Average number of class refinments by refined classes: {div(nbcladef-nbcla,refined)}"
@@ -333,7 +333,28 @@ do
 	print ""
 
 	var nbprop = model.mproperties.length
+	var nbpropdef = 0
+	var redefined = 0
 	print "Number of properties: {model.mproperties.length}"
+	var pkinds = new Counter[String]
+	for p in model.mproperties do
+		nbpropdef += p.mpropdefs.length
+		if p.mpropdefs.length > 1 then
+			redefined += 1
+		end
+		pkinds.inc(p.class_name)
+	end
+	for k in pkinds.sort do
+		var v = pkinds[k]
+		print "  Number of {k}: {v} ({div(v*100,nbprop)}%)"
+	end
+
+	print ""
+
+	print "Number of property definitions: {nbpropdef}"
+	print "Number of redefined properties: {redefined} ({div(redefined*100,nbprop)}%)"
+	print "Average number of property redefinitions by property: {div(nbpropdef-nbprop,nbprop)}"
+	print "Average number of property redefinitions by redefined property: {div(nbpropdef-nbprop,redefined)}"
 end
 
 # Compute class tables for the classes of the program main
