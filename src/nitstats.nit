@@ -92,6 +92,23 @@ class ANewVisitor
 	end
 end
 
+class ASelfVisitor
+	super Visitor
+	var total: Int = 0
+	var implicits: Int = 0
+
+	redef fun visit(n)
+	do
+		if n isa ASelfExpr then
+			self.total += 1
+			if n isa AImplicitSelfExpr then
+				self.implicits += 1
+			end
+		end
+		n.visit_all(self)
+	end
+end
+
 # Visit all `nmodules' of a modelbuilder and compute statistics on the usage of explicit static types
 fun count_ntypes(modelbuilder: ModelBuilder)
 do
@@ -181,6 +198,20 @@ do
 		print "no attributes: {c.full_name}"
 
 	end label classes
+end
+
+fun visit_self(modelbuilder: ModelBuilder)
+do
+	print "--- Explicit vs. Implicit Self ---"
+	# Visit all the source code to collect data
+	var visitor = new ASelfVisitor
+	for nmodule in modelbuilder.nmodules do
+		for nclassdef in nmodule.n_classdefs do
+			visitor.enter_visit(nclassdef)
+		end
+	end
+	print "Total number of self: {visitor.total}"
+	print "Total number of implicit self: {visitor.implicits} ({div(visitor.implicits*100,visitor.total)}%)"
 end
 
 # Compute general statistics on a model
@@ -540,6 +571,7 @@ var modelbuilder = new ModelBuilder(model, toolcontext)
 
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse_and_build(toolcontext.option_context.rest)
+modelbuilder.full_propdef_semantic_analysis
 
 if mmodules.length == 0 then return
 
@@ -559,6 +591,9 @@ print ""
 compute_statistics(model)
 
 print ""
+visit_self(modelbuilder)
+
+print ""
 #visit_news(modelbuilder, mainmodule)
 
 print ""
@@ -573,5 +608,4 @@ print ""
 compute_tables(mainmodule)
 
 print ""
-modelbuilder.full_propdef_semantic_analysis
 runtime_type(modelbuilder, mainmodule)
