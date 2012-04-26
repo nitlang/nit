@@ -6,6 +6,7 @@
 nitc
 nitdoc
 nits
+nitstats
 doc/stdlib
 
 *.aux
