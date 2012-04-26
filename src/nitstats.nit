@@ -27,17 +27,48 @@ import modelbuilder
 import exprbuilder
 import rapid_type_analysis
 
+# A counter counts occurence of things
+# Use this instead of a HashMap[E, Int]
+class Counter[E]
+	# Total number of counted occurences
+	var total: Int = 0
+
+	private var map = new HashMap[E, Int]
+
+	# The number of counted occurences of `e'
+	fun [](e: E): Int
+	do
+		var map = self.map
+		if map.has_key(e) then return map[e]
+		return 0
+	end
+
+	# Count one more occurence of `e'
+	fun inc(e: E)
+	do
+		self.map[e] = self[e] + 1
+		total += 1
+	end
+
+	# Return an array of elements sorted by occurences
+	fun sort: Array[E]
+	do
+		var res = map.keys.to_a
+		res.sort !cmp a, b = map[a] <=> map[b]
+		return res
+	end
+end
+
 # The job of this visitor is to resolve all types found
 class ATypeCounterVisitor
 	super Visitor
 	var modelbuilder: ModelBuilder
 	var nclassdef: AClassdef
 
-	var typecount: HashMap[MType, Int]
-	var total: Int = 0
+	var typecount: Counter[MType]
 
 	# Get a new visitor on a classef to add type count in `typecount'.
-	init(modelbuilder: ModelBuilder, nclassdef: AClassdef, typecount: HashMap[MType, Int])
+	init(modelbuilder: ModelBuilder, nclassdef: AClassdef, typecount: Counter[MType])
 	do
 		self.modelbuilder = modelbuilder
 		self.nclassdef = nclassdef
@@ -49,15 +80,7 @@ class ATypeCounterVisitor
 		if n isa AType then
 			var mtype = modelbuilder.resolve_mtype(self.nclassdef, n)
 			if mtype != null then
-				self.total += 1
-				if self.typecount.has_key(mtype) then
-					self.typecount[mtype] += 1
-				else
-					self.typecount[mtype] = 1
-				end
-				if not mtype.need_anchor then
-					var cldefs = mtype.collect_mclassdefs(nclassdef.mclassdef.mmodule)
-				end
+				self.typecount.inc(mtype)
 			end
 		end
 		n.visit_all(self)
@@ -151,27 +174,23 @@ end
 fun count_ntypes(modelbuilder: ModelBuilder)
 do
 	# Count each occurence of a specific static type
-	var typecount = new HashMap[MType, Int]
-	# Total number of explicit static types
-	var total = 0
+	var typecount = new Counter[MType]
 
 	# Visit all the source code to collect data
 	for nmodule in modelbuilder.nmodules do
 		for nclassdef in nmodule.n_classdefs do
 			var visitor = new ATypeCounterVisitor(modelbuilder, nclassdef, typecount)
 			visitor.enter_visit(nclassdef)
-			total += visitor.total
 		end
 	end
 
 	# Display data
 	print "--- Statistics of the explitic static types ---"
-	print "Total number of explicit static types: {total}"
-	if total == 0 then return
+	print "Total number of explicit static types: {typecount.total}"
+	if typecount.total == 0 then return
 
 	# types sorted by usage
-	var types = typecount.keys.to_a
-	types.sort !cmp a, b = typecount[a] <=> typecount[b]
+	var types = typecount.sort
 
 	# Display most used types (ie the last of `types')
 	print "Most used types: "
@@ -189,7 +208,7 @@ do
 	var limit = 1
 	for t in types do
 		if typecount[t] > limit then
-			print "  <={limit}: {count} ({div(count*100,types.length)}% of types; {div(sum*100,total)}% of usage)"
+			print "  <={limit}: {count} ({div(count*100,types.length)}% of types; {div(sum*100,typecount.total)}% of usage)"
 			count = 0
 			sum = 0
 			while typecount[t] > limit do limit = limit * 2
@@ -197,7 +216,7 @@ do
 		count += 1
 		sum += typecount[t]
 	end
-	print "  <={limit}: {count} ({div(count*100,types.length)}% of types; {div(sum*100,total)}% of usage)"
+	print "  <={limit}: {count} ({div(count*100,types.length)}% of types; {div(sum*100,typecount.total)}% of usage)"
 end
 
 fun visit_news(modelbuilder: ModelBuilder, mainmodule: MModule)
@@ -290,19 +309,16 @@ do
 	# determine the distribution of:
 	#  * class kinds (interface, abstract class, etc.)
 	#  * refinex classes (vs. unrefined ones)
-	var kinds = new HashMap[MClassKind, Int]
+	var kinds = new Counter[MClassKind]
 	var refined = 0
 	for c in model.mclasses do
-		if kinds.has_key(c.kind) then
-			kinds[c.kind] += 1
-		else
-			kinds[c.kind] = 1
-		end
+		kinds.inc(c.kind)
 		if c.mclassdefs.length > 1 then
 			refined += 1
 		end
 	end
-	for k,v in kinds do
+	for k in kinds.sort do
+		var v = kinds[k]
 		print "  Number of {k} kind: {v} ({div(v*100,nbcla)}%)"
 	end
 
