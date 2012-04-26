@@ -59,7 +59,7 @@ class NitCompiler
 		if ext != null then ext_prefix = ext else ext_prefix = ""
 		compdir = opt_compdir.value
 		if compdir == null then
-			var dir = once ("NIT_COMPDIR".to_symbol).environ
+			var dir = "NIT_COMPDIR".environ
 			if not dir.is_empty then
 				compdir = dir
 			end
@@ -72,7 +72,7 @@ class NitCompiler
 
 		clibdir = opt_clibdir.value
 		if clibdir == null then
-			var dir = once ("NIT_DIR".to_symbol).environ
+			var dir = "NIT_DIR".environ
 			if dir.is_empty then
 				dir = "{sys.program_name.dirname}/../clib"
 				if dir.file_exists then clibdir = dir
@@ -88,7 +88,7 @@ class NitCompiler
 
 		bindir = opt_bindir.value
 		if bindir == null then
-			var dir = once ("NIT_DIR".to_symbol).environ
+			var dir = "NIT_DIR".environ
 			if dir.is_empty then
 				dir = "{sys.program_name.dirname}/../bin"
 				if dir.file_exists then bindir = dir

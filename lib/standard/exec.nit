@@ -11,21 +11,21 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module handle simple system calls
-# Standard input and output can be handleb trougth streams.
+# Invocation and management of operating system sub-processes.
+# Standard input and output can be handled through streams.
 package exec 
 
 import stream
 
-# Simple sub-processus
+# Simple sub-process
 class Process
-	# The pid of the processus
+	# The pid of the process
 	fun id: Int do return data.id
 
-	# Is the processus finished?
+	# Is the process finished?
 	fun is_finished: Bool do return data.is_finished
 
-	# wait the terminaison of the process
+	# Wait the termination of the process
 	fun wait
 	do
 		data.wait
@@ -39,19 +39,19 @@ class Process
 		return data.status
 	end
 
-	# launch a command with some arguments
+	# Launch a command with some arguments
 	init(command: String, arguments: String...)
 	do
 		execute(command, arguments, 0)
 	end
 
-	# launch a simple command without arguments
+	# Launch a simple command without arguments
 	init init_(command: String)
 	do
 		execute(command, null, 0)
 	end
 
-	# Internal code to handle execusion
+	# Internal code to handle execution
 	protected init execute(command: String, arguments: nullable Array[String], pipeflags: Int)
 	do
 		var args = new Buffer
@@ -71,7 +71,7 @@ class Process
 	private fun basic_exec_execute(p: NativeString, av: NativeString, ac: Int, pf: Int): NativeProcess is extern "exec_Process_Process_basic_exec_execute_4"
 end
 
-# stdout of the processus is readable
+# stdout of the process is readable
 class IProcess
 	super Process
 	super IStream
@@ -96,7 +96,7 @@ class IProcess
 	end
 end
 
-# stdin of the processus is writable
+# stdin of the process is writable
 class OProcess
 	super Process
 	super OStream
@@ -149,7 +149,7 @@ class IOProcess
 end
 
 redef class Sys
-	# Execute a shell command and return it's error code
+	# Execute a shell command and return its error code
 	fun system(command: String): Int
 	do
 		return command.to_cstring.system	

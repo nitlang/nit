@@ -12,7 +12,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module handle file input and output
+# File manipulations (create, read, write, etc.)
 package file
 
 intrude import stream

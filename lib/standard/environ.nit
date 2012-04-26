@@ -11,19 +11,19 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Acces of the environement variables of the process
+# Access to the environment variables of the process
 module environ
 
-import symbol
+import string
 
 # TODO prevoir une structure pour recup tout un environ, le modifier et le passer a process
 
-redef class Symbol
-	# Return environement value for this symbol
-	# If there is no such environement value, then return ""
+redef class String
+	# Return environment value for this symbol
+	# If there is no such environment value, then return ""
 	fun environ: String
 	do
-		var res = to_s.to_cstring.get_environ
+		var res = self.to_cstring.get_environ
 		# FIXME: There is no proper way to handle NULL C string yet. What a pitty.
 		var nulstr = once ("".to_cstring.get_environ)
 		if res != nulstr then

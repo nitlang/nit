@@ -10,17 +10,17 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module is about hashable things.
-# It introduces an hash funtion in objects.
+# Hashable things.
+# It introduces an hash function in objects.
 package hash
 
 import kernel
 
 redef class Object
 	# The hash code of the object.
-	# Assuming that a = b -> a.hash = b.hash
+	# Assuming that a == b -> a.hash == b.hash
 	##
-	# Without redefinition, it is the `id' of the instance.
+	# Without redefinition, it is based on the `object_id' of the instance.
 	fun hash: Int do return object_id / 8
 end
 

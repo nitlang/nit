@@ -11,7 +11,8 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module is implicitely imported by every module.
+# Standard classes and methods used by default by Nit programs and libraries.
+# This module is implicitly imported by every module.
 package standard
 
 import environ 
@@ -21,7 +22,6 @@ import file
 import exec
 import stream
 import hash
-import symbol
 import string
 import collection
 import math

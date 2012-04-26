@@ -18,6 +18,8 @@
 # Various functions for NIT tools
 package utils
 
+import symbol
+
 # Mangle an array of symbol using only alphanums and underscores
 fun cmangle(symbols: Symbol...): String
 do

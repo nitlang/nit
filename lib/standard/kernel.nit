@@ -11,6 +11,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
+# Most minimal classes and methods.
 # This module is the root of the standard module hierarchy.
 package kernel
 
@@ -30,23 +31,24 @@ interface Object
 	# The identifier is used internally to provide a hash value.
 	fun object_id: Int is intern
 
-	# Return true is `self' and `other' have the same dynamic type.
+	# Return true if `self' and `other' have the same dynamic type.
 	# Unless specific code, you should not use this method.
 	fun is_same_type(other: Object): Bool is intern
 
 	# Have `self' and `other' the same value?
 	##
 	# The exact meaning of "same value" is let to the subclasses.
-	# Implicitly, the default implementation, is ==
+	# Implicitly, the default implementation, is `is'
 	fun ==(other: nullable Object): Bool do return self is other
 
 	# Have `self' and `other' different values?
 	##
-	# != is equivalent with "not =".
+	# != is equivalent with "not ==".
 	fun !=(other: nullable Object): Bool do return not (self == other)
 
 	# Display self on stdout (debug only).
-	# This method MUST not be used by programs, it is here for debugging only and can be removed without any notice
+	# This method MUST not be used by programs, it is here for debugging
+	# only and can be removed without any notice
 	fun output
 	do
 		'<'.output
@@ -55,7 +57,8 @@ interface Object
 	end
 
 	# Display class name on stdout (debug only).
-	# This method MUST not be used by programs, it is here for debugging only and can be removed without any notice
+	# This method MUST not be used by programs, it is here for debugging
+	# only and can be removed without any notice
 	fun output_class_name is intern	
 
 	# Quit the program with a specific return code
@@ -149,10 +152,10 @@ interface Discrete
 	# The previous element.
 	fun prec: OTHER do return self - 1
 
-	# The `i' th successor element.
+	# The `i'-th successor element.
 	fun +(i: Int): OTHER is abstract
 
-	# The `i' th previous element.
+	# The `i'-th previous element.
 	fun -(i: Int): OTHER is abstract
 
 	# The distance between self and d.

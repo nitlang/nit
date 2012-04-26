@@ -20,6 +20,7 @@ package abstractmetamodel
 
 import partial_order
 import location
+import symbol
 
 # The main singleton which knows everything
 abstract class MMContext

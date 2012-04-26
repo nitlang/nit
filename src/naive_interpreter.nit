@@ -720,7 +720,7 @@ redef class AExternMethPropdef
 				recvval.to_s.mkdir
 				return null
 			else if pname == "get_environ" then
-				var txt = args.first.val.as(Buffer).to_s.to_symbol.environ
+				var txt = args.first.val.as(Buffer).to_s.environ
 				return v.native_string_instance(txt)
 			end
 		else if pname == "native_argc" then

@@ -10,7 +10,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module handle abstract input and output streams
+# Input and output streams of characters
 package stream
 
 import string

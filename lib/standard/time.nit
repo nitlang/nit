@@ -10,11 +10,12 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Manage time and dates
+# Management of time and dates
 package time
 
 import kernel
 
 redef class Object
+	# Unix time: the number of seconds elapsed since January 1, 1970
 	protected fun get_time: Int is extern "kernel_Any_Any_get_time_0"
 end
