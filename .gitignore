@@ -45,3 +45,4 @@ tests/out
 *.stub.nit.[ch]
 
 .metadata/*
+.project
