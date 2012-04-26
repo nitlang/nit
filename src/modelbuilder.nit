@@ -67,12 +67,12 @@ class ModelBuilder
 		# Setup the paths value
 		paths.append(toolcontext.opt_path.value)
 
-		var path_env = once ("NIT_PATH".to_symbol).environ
+		var path_env = "NIT_PATH".environ
 		if not path_env.is_empty then
 			paths.append(path_env.split_with(':'))
 		end
 
-		path_env = once ("NIT_DIR".to_symbol).environ
+		path_env = "NIT_DIR".environ
 		if not path_env.is_empty then
 			var libname = "{path_env}/lib"
 			if libname.file_exists then paths.add(libname)

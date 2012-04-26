@@ -334,7 +334,7 @@ class DocContext
 		
 		sharedir = opt_sharedir.value
 		if sharedir == null then
-			var dir = once ("NIT_DIR".to_symbol).environ
+			var dir = "NIT_DIR".environ
 			if dir.is_empty then
 				dir = "{sys.program_name.dirname}/../share/nitdoc"
 				if dir.file_exists then sharedir = dir
