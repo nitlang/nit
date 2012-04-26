@@ -26,13 +26,20 @@ var toolcontext = new ToolContext
 # We do not add other options, so process them now!
 toolcontext.process_options
 
+# Get arguments
+var arguments = toolcontext.option_context.rest
+if arguments.is_empty or toolcontext.opt_help.value then
+	toolcontext.option_context.usage
+	return
+end
+
 # We need a model to collect stufs
 var model = new Model
 # An a model builder to parse files
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 # Here we load an process all modules passed on the command line
-var mmodules = modelbuilder.parse_and_build(toolcontext.option_context.rest)
+var mmodules = modelbuilder.parse_and_build(arguments)
 modelbuilder.full_propdef_semantic_analysis
 
 if mmodules.length == 0 then return
