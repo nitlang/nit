@@ -35,7 +35,7 @@ var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var arguments = toolcontext.option_context.rest
-if arguments.is_empty then
+if arguments.is_empty or toolcontext.opt_help.value then
 	toolcontext.option_context.usage
 	return
 end
