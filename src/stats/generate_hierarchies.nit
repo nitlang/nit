@@ -20,10 +20,12 @@ module generate_hierarchies
 
 import model
 
+private import stats_base
+
 # Create a dot file representing the module hierarchy of a model.
 # Importation relation is represented with arrow
 # Nesting relation is represented with nested boxes
-fun generate_module_hierarchy(model: Model)
+fun generate_module_hierarchy(toolcontext: ToolContext, model: Model)
 do
 	var buf = new Buffer
 	buf.append("digraph \{\n")
@@ -40,7 +42,7 @@ do
 		end
 	end
 	buf.append("\}\n")
-	var f = new OFStream.open("module_hierarchy.dot")
+	var f = new OFStream.open(toolcontext.output_dir.join_path("module_hierarchy.dot"))
 	f.write(buf.to_s)
 	f.close
 end
@@ -62,7 +64,7 @@ do
 end
 
 # Create a dot file representing the class hierarchy of a model.
-fun generate_class_hierarchy(mmodule: MModule)
+fun generate_class_hierarchy(toolcontext: ToolContext, mmodule: MModule)
 do
 	var buf = new Buffer
 	buf.append("digraph \{\n")
@@ -76,14 +78,14 @@ do
 		end
 	end
 	buf.append("\}\n")
-	var f = new OFStream.open("class_hierarchy.dot")
+	var f = new OFStream.open(toolcontext.output_dir.join_path("class_hierarchy.dot"))
 	f.write(buf.to_s)
 	f.close
 end
 
 # Create a dot file representing the classdef hierarchy of a model.
 # For a simple user of the model, the classdef hierarchy is not really usefull, it is more an internal thing.
-fun generate_classdef_hierarchy(model: Model)
+fun generate_classdef_hierarchy(toolcontext: ToolContext, model: Model)
 do
 	var buf = new Buffer
 	buf.append("digraph \{\n")
@@ -98,7 +100,7 @@ do
 		end
 	end
 	buf.append("\}\n")
-	var f = new OFStream.open("classdef_hierarchy.dot")
+	var f = new OFStream.open(toolcontext.output_dir.join_path("classdef_hierarchy.dot"))
 	f.write(buf.to_s)
 	f.close
 end

@@ -18,10 +18,11 @@
 module model_hyperdoc
 
 import model
+import stats_base
 
 # Genetate a HTML file for the model.
 # The generated file contains the description of each entity of the model
-fun generate_model_hyperdoc(model: Model)
+fun generate_model_hyperdoc(toolcontext: ToolContext, model: Model)
 do
 	var buf = new Buffer
 	buf.append("<html>\n<body>\n")
@@ -140,7 +141,7 @@ do
 		end
 	end
 	buf.append("</body></html>\n")
-	var f = new OFStream.open("model.html")
+	var f = new OFStream.open(toolcontext.output_dir.join_path("model.html"))
 	f.write(buf.to_s)
 	f.close
 end

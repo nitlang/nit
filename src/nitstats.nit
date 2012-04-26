@@ -68,10 +68,10 @@ visit_nullable_sends(modelbuilder)
 print ""
 count_ntypes(modelbuilder)
 
-generate_module_hierarchy(model)
-generate_classdef_hierarchy(model)
-generate_class_hierarchy(mainmodule)
-generate_model_hyperdoc(model)
+generate_module_hierarchy(toolcontext, model)
+generate_classdef_hierarchy(toolcontext, model)
+generate_class_hierarchy(toolcontext, mainmodule)
+generate_model_hyperdoc(toolcontext, model)
 
 print ""
 compute_tables(mainmodule)

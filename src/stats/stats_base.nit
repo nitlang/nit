@@ -17,6 +17,30 @@
 # Helpers for various statistics tools.
 module stats_base
 
+import modelbuilder
+
+redef class ToolContext
+	var opt_dir = new OptionString("Directory where some statistics files are generated", "-d", "--dir")
+	var output_dir: String = "."
+
+	redef init
+	do
+		super
+		self.option_context.add_option(opt_dir)
+	end
+
+	redef fun process_options
+	do
+		super
+		var val = self.opt_dir.value
+		if val != null then
+			val = val.simplify_path
+			val.mkdir
+			self.output_dir = val
+		end
+	end
+end
+
 # A counter counts occurence of things
 # Use this instead of a HashMap[E, Int]
 class Counter[E]
