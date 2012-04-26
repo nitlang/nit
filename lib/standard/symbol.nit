@@ -10,7 +10,8 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module introduce the Symbol class
+# Symbol classes
+# FIXME: Should be deprecated soon
 package symbol
 
 import string
@@ -31,7 +32,7 @@ redef class String
 	end
 end
 
-# A symbol is a unique unmutable string
+# A symbol is a unique immutable string
 class Symbol
 	var _string: String
 	redef fun to_s do return _string.to_s

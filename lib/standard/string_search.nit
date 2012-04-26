@@ -10,13 +10,12 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module is about string search and matching.
-# It includes some good features
+# Basic string search, match and replace.
 package string_search
 
 import string
 
-# Patterns are string motifs.
+# Patterns are abstract string motifs (include `String' and `Char').
 interface Pattern
 	# Search `self' into `s' from a certain position.
 	# Return the position of the first character of the matching section.
@@ -58,10 +57,10 @@ interface Pattern
 	end
 end
 
-# BM_Pattern are precompiled string motif for the Boyer-Moore Fast String Searching Algorithm
-# (cf. A Fast String Searching Algorithm, with R.S. Boyer.
-# Communications of the Association for Computing Machinery, 20(10), 1977, pp. 762-772.)
-# see also http://www.cs.utexas.edu/users/moore/best-ideas/string-searching/index.html
+# BM_Pattern are pre-compiled string motif for the Boyer-Moore algorithm.
+# (cf. A Fast String Searching Algorithm, with R.S. Boyer.  Communications
+# of the Association for Computing Machinery, 20(10), 1977, pp. 762-772.)
+# http://www.cs.utexas.edu/users/moore/best-ideas/string-searching/index.html
 class BM_Pattern
 	super Pattern
 

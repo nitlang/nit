@@ -11,7 +11,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# This module is about character strings.
+# Basic manipulations of strings of characters
 package string
 
 intrude import collection # FIXME should be collection::array
@@ -53,7 +53,7 @@ abstract class AbstractString
 		end
 	end
 
-	# Create a substring with the string beginning at the 'from' position
+	# Create a substring from `self' beginning at the 'from' position
 	#
 	# "abcd".substring(1) 	# --> "bcd"
 	# "abcd".substring(-1)	# --> "abcd"
@@ -64,7 +64,7 @@ abstract class AbstractString
 		return substring(from, length - from)
 	end
 
-	# is this string a substring of the 'of' string from pos 'pos'
+	# Is `self' a substring of the `str' string from pos `pos'
 	#
 	# "bc".is_substring("abcd",1) 	# --> true
 	# "bc".is_substring("abcd",2) 	# --> false
@@ -133,7 +133,7 @@ abstract class AbstractString
 		end
 	end
 
-	# String to upper case
+	# A upper case version of `self'
 	fun to_upper: String
 	do
 		var s = new Buffer.with_capacity(length)
@@ -141,7 +141,7 @@ abstract class AbstractString
 		return s.to_s
 	end
 
-	# String to lower case
+	# A lower case version of `self'
 	fun to_lower : String
 	do
 		var s = new Buffer.with_capacity(length)
@@ -160,7 +160,7 @@ abstract class AbstractString
 	end
 end
 
-
+# Immutable strings of characters.
 class String
 	super Comparable
 	super AbstractString
@@ -268,7 +268,7 @@ class String
 	fun to_f : Float is extern import String::to_cstring
 end
 
-# Strings are arrays of characters.
+# Mutable strings of characters.
 class Buffer
 	super AbstractString
 	super Comparable
@@ -398,8 +398,6 @@ end
 ###############################################################################
 
 redef class Object
-	#   fun class_name: String is extern intern # The name of the class
-
 	# User readable representation of `self'.
 	fun to_s: String do return inspect
 
@@ -407,11 +405,13 @@ redef class Object
 	private fun native_class_name: NativeString is intern
 
 	# The class name of the object.
-	# FIXME: real type information is not available at runtime. Therefore, for instance, an instance of List[Bool] has just "List" for classname
+	# FIXME: real type information is not available at runtime.
+	# Therefore, for instance, an instance of List[Bool] has just
+	# "List" for class_name
 	fun class_name: String do return new String.from_cstring(native_class_name)
 
 	# Developer readable representation of `self'.
-	# Usualy, it uses the form "<CLASSNAME:#OBJECTID bla bla bla>"
+	# Usually, it uses the form "<CLASSNAME:#OBJECTID bla bla bla>"
 	fun inspect: String
 	do
 		return "<{inspect_head}>"
@@ -560,7 +560,9 @@ redef class Array[E]
 end
 
 redef class Map[K,V]
-	# Concatenate couple of 'key value' separate by 'couple_sep' and separate each couple with `sep'. 
+	# Concatenate couple of 'key value'.
+	# key and value are separated by 'couple_sep'.
+	# each couple is separated each couple with `sep'.
 	fun join(sep: String, couple_sep: String): String
 	do
 		if is_empty then return ""
