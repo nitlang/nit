@@ -22,7 +22,6 @@ import file
 import exec
 import stream
 import hash
-import symbol
 import string
 import collection
 import math

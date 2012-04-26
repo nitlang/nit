@@ -14,9 +14,6 @@
 # FIXME: Should be deprecated soon
 package symbol
 
-import string
-private import hash
-
 redef class String
 	# Get the unique corresponding to the string
 	fun to_symbol: Symbol
