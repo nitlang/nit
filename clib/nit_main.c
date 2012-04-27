@@ -16,7 +16,12 @@
 #include <stdarg.h>
 #include "gc.h"
 
-#define PRINT_ERROR(...) ((void)fprintf(stderr, __VA_ARGS__))
+#ifdef ANDROID
+	#include <android/log.h>
+	#define PRINT_ERROR(...) ((void)__android_log_print(ANDROID_LOG_WARN, "nit", __VA_ARGS__))
+#else
+	#define PRINT_ERROR(...) ((void)fprintf(stderr, __VA_ARGS__))
+#endif
 
 bigint object_id_counter = 1000000;
 enum gc_option { large, gc_opt_malloc, boehm, nitgc } gc_option;
