@@ -58,6 +58,83 @@ h3 {
 	font-weight: bold;
 }
 
+/* Page display */
+
+body {
+	overflow: hidden;
+	height: 100%;
+}
+
+header {
+}
+
+.page {
+	width: 937px;
+	margin: auto;
+}
+
+.menu {
+	position: fixed;
+	top: 50px;
+	bottom: 2em;
+	width: 250px;
+	overflow-y:	scroll;
+}
+
+.content {
+	position: fixed;
+	top: 50px;
+	bottom: 2em;
+	margin-left: 265px;
+	width: 667px;
+	overflow-y:	scroll;
+	padding-right: 10px;
+}
+
+.content.fullpage {
+	margin-left: 20px;
+	width: 910px;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+/* Webkit scroll bars */
+
+.menu {
+    overflow-y: hidden;
+}
+
+.menu:hover {
+    overflow-y: scroll;
+}
+
+.menu::-webkit-scrollbar, .content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.menu::-webkit-scrollbar-thumb, .content::-webkit-scrollbar-thumb {
+	background: #CCC;
+	-webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10),inset 0 -1px 0 rgba(0,0,0,0.07);
+}
+
+.menu::-webkit-scrollbar-thumb:hover, .content::-webkit-scrollbar-thumb:hover {
+	background: #999;
+}
+
+.menu::-webkit-scrollbar-corner, .content::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+.menu::-webkit-scrollbar-button, .content::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
+	display: none;
+}
+
 /* Header, Footer */
 
 header nav ul {
@@ -84,8 +161,7 @@ header nav ul li a:hover {
 
 footer {
 	text-align: center;
-	padding: 20px 10px;
-	margin: 10px 100px;
+	padding-bottom: 10px;
 	color: #CCC;
 }
 
@@ -101,22 +177,11 @@ header nav.main ul li.current {
 	color: white;
 }
 
-/* Page content */
-
-.page {
-	width: 940px;
-	margin: auto;
-}
-
 /* Latteral Menu */
-
-.menu {
-	width: 250px;
-	float: left;
-}
 
 .menu nav {
 	margin: 20px;
+	width: 208px;
 	border: 1px solid #CCC;
 }
 
@@ -154,14 +219,6 @@ header nav.main ul li.current {
 }
 
 /* Content */
-
-.content {
-	margin: 20px 20px 20px 260px;
-}
-
-.content.fullpage {
-	margin: 20px;
-}
 
 .content section {
 	margin: 20px 0;
@@ -249,7 +306,48 @@ article .info .code {
 	float: right;
 }
 
+.content .concern-doc {
+	border-top: 3px dotted #CCC;
+	padding: 5px 0;
+	color: #999;
+}
 
+.content section.concerns {
+	padding: 10px;
+	background: #EEE;
+}
+
+.content section.concerns h2 {
+	margin-top: 0;
+}
+
+.content section.concerns ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.content section.concerns li {
+    margin-top: 20px;
+}
+
+.content section.concerns ul ul {
+    padding-left: 20px;
+}
+
+.content section.concerns li li {
+    margin-top: 0;
+}
+
+.content section.methods h3.concern-toplevel {
+	border-top: 3px dotted #CCC;
+	padding-top: 0.83em;
+	color: #999;
+}
+
+.show-code {
+	margin: 0;
+}
 
 /* JS facilities */
 
