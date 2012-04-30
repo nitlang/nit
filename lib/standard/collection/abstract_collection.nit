@@ -268,7 +268,7 @@ interface MapRead[K: Object, E]
 	# Return the point of view of self on the keys only.
 	# Note that `self' and `keys' are views on the same data;
 	# therefore any modification of one is visible on the other.
-	fun keys: Collection[E] is abstract
+	fun keys: Collection[K] is abstract
 
 	# Is there no item in the collection?
 	fun is_empty: Bool is abstract 
@@ -320,7 +320,7 @@ interface Map[K: Object, E]
 
 	redef fun values: RemovableCollection[E] is abstract
 
-	redef fun keys: RemovableCollection[E] is abstract
+	redef fun keys: RemovableCollection[K] is abstract
 end
 
 # Iterators for Map.
