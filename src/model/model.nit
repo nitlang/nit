@@ -733,28 +733,31 @@ class MClassType
 	redef fun collect_mclassdefs(mmodule)
 	do
 		assert not self.need_anchor
-		if not collect_mclassdefs_cache.has_key(mmodule) then
+		var cache = self.collect_mclassdefs_cache
+		if not cache.has_key(mmodule) then
 			self.collect_things(mmodule)
 		end
-		return collect_mclassdefs_cache[mmodule]
+		return cache[mmodule]
 	end
 
 	redef fun collect_mclasses(mmodule)
 	do
 		assert not self.need_anchor
-		if not collect_mclasses_cache.has_key(mmodule) then
+		var cache = self.collect_mclasses_cache
+		if not cache.has_key(mmodule) then
 			self.collect_things(mmodule)
 		end
-		return collect_mclasses_cache[mmodule]
+		return cache[mmodule]
 	end
 
 	redef fun collect_mtypes(mmodule)
 	do
 		assert not self.need_anchor
-		if not collect_mtypes_cache.has_key(mmodule) then
+		var cache = self.collect_mtypes_cache
+		if not cache.has_key(mmodule) then
 			self.collect_things(mmodule)
 		end
-		return collect_mtypes_cache[mmodule]
+		return cache[mmodule]
 	end
 
 	# common implementation for `collect_mclassdefs', `collect_mclasses', and `collect_mtypes'.
