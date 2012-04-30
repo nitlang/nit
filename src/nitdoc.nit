@@ -465,7 +465,11 @@ end
 redef class MMModule
 	super MMEntity
 	redef fun html_link(dctx) do 
-		return "<a href=\"{html_name}.html\" title=\"{short_doc}\">{self}</a>"
+		if short_doc == "&nbsp;" then
+			return "<a href=\"{html_name}.html\"\">{self}</a>"
+		else 
+			return "<a href=\"{html_name}.html\" title=\"{short_doc}\">{self}</a>"
+		end
 	end
 
 	redef fun json_entry(dctx) do
@@ -1207,7 +1211,11 @@ redef class MMLocalClass
 	redef fun html_link(dctx)
 	do
 		if not require_doc(dctx) then print "{dctx.filename}: not required {self}"
-		return "<a href=\"{html_name}.html\" title=\"{short_doc}\">{self}</a>"
+		if short_doc == "&nbsp;" then
+			return "<a href=\"{html_name}.html\"\">{self}</a>"
+		else 
+			return "<a href=\"{html_name}.html\" title=\"{short_doc}\">{self}</a>"
+		end
 	end
 
 	redef fun json_entry(dctx) do
