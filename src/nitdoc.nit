@@ -213,7 +213,6 @@ class DocContext
 		op.append("\}\n")
 		self.gen_dot(op.to_s, "dep", "Modules hierarchy")
 		add("</article></div>")
-		add("<div class='clear'></div>")
 		add("</div>")
 		add("<footer>{footer_text}</footer>")
 		add("</body></html>\n")

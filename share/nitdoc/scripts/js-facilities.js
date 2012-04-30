@@ -20,12 +20,12 @@ var currentIndex = -1;
 * Add folding and filtering facilities to class description page.
 */
 $(document).ready(function() {
-
+	
 	/*
 	* Highlight the spoted element
 	*/
 	highlightBlock(currentAnchor());
-	
+
 	/*
 	* Nav block folding
 	*/
@@ -226,14 +226,6 @@ $(document).ready(function() {
 		}
 	 });
 	
-	/*
-	* Anchors jumps
-	*/
-	$("a[href^='#']").click( function() {
-		var a = $(this).attr("href").replace(/#/, "");
-		highlightBlock(a);
-	});
-	
 	// Insert filter field
 	$("article.filterable h2, nav.filterable h3")
 	.after(
@@ -350,6 +342,13 @@ $(document).ready(function() {
 			$(this).toggleClass("hidden");
 		})
 	);
+
+	/*
+	* Anchors jumps
+	*/
+	$("a[href*='#']").click( function() {
+		highlightBlock($(this).attr("href").split(/#/)[1]);
+	});
 	
 	//Preload filter fields with query string
 	preloadFilters();
