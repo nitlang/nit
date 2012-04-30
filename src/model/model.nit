@@ -475,6 +475,10 @@ end
 #
 # FIXME: maybe allways add an anchor with a nullable type (as in is_subtype)
 abstract class MType
+
+	# The model of the type
+	fun model: Model is abstract
+
 	# Return true if `self' is an subtype of `sup'.
 	# The typing is done using the standard typing policy of Nit.
 	#
@@ -705,6 +709,8 @@ class MClassType
 	# The associated class
 	var mclass: MClass
 
+	redef fun model do return self.mclass.intro_mmodule.model
+
 	private init(mclass: MClass)
 	do
 		self.mclass = mclass
@@ -836,6 +842,8 @@ class MVirtualType
 	# Its the definitions of this property that determine the bound or the virtual type.
 	var mproperty: MProperty
 
+	redef fun model do return self.mproperty.intro_mclassdef.mmodule.model
+
 	# Lookup the bound for a given resolved_receiver
 	# The result may be a other virtual type (or a parameter type)
 	#
@@ -915,6 +923,8 @@ class MParameterType
 
 	# The generic class where the parameter belong
 	var mclass: MClass
+
+	redef fun model do return self.mclass.intro_mmodule.model
 
 	# The position of the parameter (0 for the first parameter)
 	# FIXME: is `position' a better name?
@@ -1002,6 +1012,8 @@ class MNullableType
 	# The base type of the nullable type
 	var mtype: MType
 
+	redef fun model do return self.mtype.model
+
 	init(mtype: MType)
 	do
 		self.mtype = mtype
@@ -1041,7 +1053,7 @@ end
 # The is only one null type per model, see `MModel::null_type'.
 class MNullType
 	super MType
-	var model: Model
+	redef var model: Model
 	protected init(model: Model)
 	do
 		self.model = model
