@@ -486,6 +486,7 @@ abstract class MType
 	fun is_subtype(mmodule: MModule, anchor: nullable MClassType, sup: MType): Bool
 	do
 		var sub = self
+		if sub == sup then return true
 		if anchor == null then
 			assert not sub.need_anchor
 			assert not sup.need_anchor
@@ -523,6 +524,8 @@ abstract class MType
 		if sub isa MNullableType or sub isa MNullType then
 			return false
 		end
+
+		if sub == sup then return true
 
 		assert sub isa MClassType # It is the only remaining type
 		if anchor == null then anchor = sub # UGLY: any anchor will work
