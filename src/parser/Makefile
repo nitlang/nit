@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SABLECC=sablecc3
+SABLECC3ALTGEN ?= sablecc3
 
 all: parser.nit
 
@@ -24,7 +24,9 @@ all: parser.nit
 
 # Note that parser_nodes is no more automatically synced with the grammar
 parser.nit: .nit.sablecc3 xss/*.xss
-	${SABLECC} -c .nit.sablecc3.dump -t xss/main.xss -p usermodule parser_nodes .nit.sablecc3
+	@${SABLECC3ALTGEN -license} >/dev/null 2>/dev/null || ( echo "***\n*** sablecc3 altgen version is needed.\n*** Set the environment variable SABLECC3ALTGEN to the executable.\n*** Aborting...\n***" ; exit 1 )
+	@${SABLECC3ALTGEN} | grep altgen >/dev/null 2>/dev/null || ( echo "***\n*** $$SABLECC3ALTGEN is not the sablecc3 altgen version.\n*** Set the environment variable SABLECC3ALTGEN to the executable.\n*** Aborting...\n***"; exit 1 )
+	${SABLECC3ALTGEN} -c .nit.sablecc3.dump -t xss/main.xss -p usermodule parser_nodes .nit.sablecc3
 	mv -f -- parser.nit .parser-nofact.nit
 	./fact_parser.pl .parser-nofact.nit > parser.nit
 	perl -np -i.orig -e 's/([ \[])P([A-Z])/\1A\2/g' parser.nit parser_abs.nit parser_prod.nit lexer.nit
