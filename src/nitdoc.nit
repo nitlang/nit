@@ -281,7 +281,7 @@ class DocContext
 	do
 		var s = opt_source.value
 		if s == null then
-			add("in {l.file.filename.simplify_path}")
+			add("({l.file.filename.simplify_path})")
 		else
 			# THIS IS JUST UGLY ! (but there is no replace yet)
 			var x = s.split_with("%f")
@@ -470,6 +470,14 @@ redef class MMModule
 		else 
 			return "<a href=\"{html_name}.html\" title=\"{short_doc}\">{self}</a>"
 		end
+	end
+	
+	fun html_anchor: String do 
+		return "<a id=\"MOD_{html_name}\"></a>"
+	end
+	
+	fun html_link_to_anchor: String do 
+		return "<a href=\"#MOD_{html_name}\" title=\"Jump to definitions from module {html_name}\">{self}</a>"
 	end
 
 	redef fun json_entry(dctx) do
@@ -893,7 +901,7 @@ redef class MMLocalProperty
 	# Anchor of the property description in the module html file
 	fun html_anchor: String
 	do
-		return "PROP_{local_class}_{cmangle(name)}"
+		return "PROP_{self.mmmodule.toplevel_owner}_{local_class}_{cmangle(name)}"
 	end
 
 	redef fun json_entry(dctx) do
@@ -1042,7 +1050,7 @@ redef class MMLocalProperty
 			dctx.add("::{mmmodule[intro_class.global].html_link(dctx)}")
 		end
 		if is_redef then
-			dctx.add("::{mmmodule[intro_class.global][global].html_link(dctx)}")
+			dctx.add("::{mmmodule[intro_class.global][global].global.intro.html_link(dctx)}")
 		else
 			dctx.add("::{html_name}")
 		end
@@ -1433,7 +1441,12 @@ redef class MMLocalClass
 		end
 		op.append("\}\n")
 		dctx.gen_dot(op.to_s, name.to_s, "Inheritance graph for class {name}")
+		dctx.add("</section>\n")
 
+		# Concerns table
+		dctx.open_stage
+		dctx.stage("<section class=\"concerns\">\n")
+		dctx.stage("<h2 class=\"section-header\">Concerns</h2>\n")
 
 		var mods = new Array[MMModule]
 		mods.add(global.intro.mmmodule.toplevel_owner)
@@ -1442,28 +1455,28 @@ redef class MMLocalClass
 			var m = lc.mmmodule.toplevel_owner
 			if not mods.has(m) then mods.add(m)
 		end
-		dctx.sort(mods)
+		
+		var intro = global.intro.mmmodule
+		var short_doc
+		dctx.add("<ul>\n")
 		for m in mods do
-			if m == global.intro.mmmodule.toplevel_owner then
-				dctx.add("<p>Introduced by {m.html_link(dctx)}")
-			else
-				dctx.add("<p>Refined by {m.html_link(dctx)}")
-			end
-			dctx.open_stage
-			dctx.stage(". Definition in:")
-			for lc in crhe.greaters do
+			short_doc = ""
+			if m.short_doc != "&nbsp;" then short_doc = ": {m.short_doc}"
+			dctx.add("<li>{m.html_link_to_anchor}{short_doc}")
+			dctx.add("<ul>\n")
+			for lc in crhe.linear_extension.reversed do
 				if lc.mmmodule.toplevel_owner != m then continue
-				dctx.add(" {lc.mmmodule.html_link(dctx)} ")
-				assert lc isa MMSrcLocalClass
-				var n = lc.node
-				if n != null then
-					dctx.show_source(n.location)
-				end
+				if lc.mmmodule == m then continue
+				short_doc = ""
+				if lc.mmmodule.short_doc != "&nbsp;" then short_doc = ": {lc.mmmodule.short_doc}"
+				dctx.add("<li>{lc.mmmodule.html_link_to_anchor}{short_doc}</li>")
 			end
-			dctx.close_stage
-			dctx.add("</p>\n")
+			dctx.add("</ul>\n")
+			dctx.add("</li>\n")
 		end
-		dctx.add("</section>\n")
+		dctx.add("</ul>\n")
+		dctx.stage("</section>\n")
+		dctx.close_stage
 
 		dctx.open_stage
 		dctx.stage("<section class=\"types\">\n")
@@ -1492,23 +1505,89 @@ redef class MMLocalClass
 		dctx.open_stage
 		dctx.stage("<section class=\"methods\">\n")
 		dctx.stage("<h2 class=\"section-header\">Methods</h2>\n")
+		var redefs = new HashMap[MMModule, HashMap[MMModule, Array[MMMethod]]]
 		for p in props do
 			if p.global.is_init then continue
 			if p.local_class.global != self.global then continue
 			if not p isa MMMethod then continue
-			p.full_documentation(dctx, self)
+			# Top level module
+			var toplevel_module = p.mmmodule.toplevel_owner
+			if not redefs.has_key(toplevel_module) then
+				redefs[toplevel_module] = new HashMap[MMModule, Array[MMMethod]]
+			end
+			# Nested module
+			var nested_module = p.mmmodule
+			if not redefs[toplevel_module].has_key(nested_module) then
+				redefs[toplevel_module][nested_module] = new Array[MMMethod]
+			end
+			# Props
+			redefs[toplevel_module][nested_module].add(p)
+			
+			# Redefs
+			if p.mmmodule.toplevel_owner != p.intro_module then
+				toplevel_module = p.intro_module
+				nested_module = p.global.intro.mmmodule
+				
+				if not redefs.has_key(toplevel_module) then
+					redefs[toplevel_module] = new HashMap[MMModule, Array[MMMethod]]
+				end
+				if not redefs[toplevel_module].has_key(nested_module) then
+					redefs[toplevel_module][nested_module] = new Array[MMMethod]
+				end
+			
+				redefs[toplevel_module][nested_module].add(p.global.intro.as(MMMethod))
+			end
 		end
+		
+		# Display toplevel blocks		
+		for m in mods do
+			if not redefs.has_key(m) then continue
+			dctx.add(m.html_anchor)
+			if m != global.intro.mmmodule.toplevel_owner then
+				dctx.add("<h3 class=\"concern-toplevel\">Methods refined in {m.html_link(dctx)}</h3>")
+			end
+			
+			# Display nested module blocks
+			for lc in crhe.linear_extension.reversed do
+				if lc.mmmodule.toplevel_owner != m then continue
+				var nm =  lc.mmmodule
+				if not redefs[m].has_key(nm) then continue
+				dctx.add(nm.html_anchor)
+				if nm != global.intro.mmmodule then
+					short_doc = ""
+					if nm.short_doc != "&nbsp;" then short_doc = ": {nm.short_doc}" 
+					dctx.add("<p class=\"concern-doc\">{nm.html_name}{short_doc}</p>\n")
+				end
+			
+				var pps = redefs[m][nm]
+				dctx.sort(pps)
+				for p in pps do
+					p.full_documentation(dctx, self)
+				end					
+			end
+		end
+
 		if not inhs.is_empty then
 			dctx.open_stage
 			dctx.stage("<h3>Inherited Methods</h3>\n")
 			for lc in inhs do
 				dctx.open_stage
 				dctx.stage("<p>Defined in {lc.html_link(dctx)}:")
+				
+				var ims = new Array[MMMethod] 
 				for p in inh[lc] do
 					if p.global.is_init then continue
 					if not p isa MMMethod then continue
-					dctx.add(" {p.html_link(dctx)}")
+					ims.add(p)
 				end
+				
+				var i = 0
+				for p in ims do 
+					dctx.add(" {p.html_link(dctx)}")
+					if i < ims.length - 1 then dctx.add(",")
+					i += 1
+				end
+				
 				dctx.stage("</p>")
 				dctx.close_stage
 			end

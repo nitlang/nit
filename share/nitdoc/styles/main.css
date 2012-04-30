@@ -306,7 +306,48 @@ article .info .code {
 	float: right;
 }
 
+.content .concern-doc {
+	border-top: 3px dotted #CCC;
+	padding: 5px 0;
+	color: #999;
+}
 
+.content section.concerns {
+	padding: 10px;
+	background: #EEE;
+}
+
+.content section.concerns h2 {
+	margin-top: 0;
+}
+
+.content section.concerns ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.content section.concerns li {
+    margin-top: 20px;
+}
+
+.content section.concerns ul ul {
+    padding-left: 20px;
+}
+
+.content section.concerns li li {
+    margin-top: 0;
+}
+
+.content section.methods h3.concern-toplevel {
+	border-top: 3px dotted #CCC;
+	padding-top: 0.83em;
+	color: #999;
+}
+
+.show-code {
+	margin: 0;
+}
 
 /* JS facilities */
 
