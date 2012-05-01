@@ -43,7 +43,7 @@ end
 
 # A counter counts occurence of things
 # Use this instead of a HashMap[E, Int]
-class Counter[E]
+class Counter[E: Object]
 	# Total number of counted occurences
 	var total: Int = 0
 
