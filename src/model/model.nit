@@ -1287,7 +1287,7 @@ abstract class MProperty
 		return res
 	end
 
-	private var lookup_definitions_cache: HashMap2[MModule, MType, Array[MPropDef]] = new HashMap2[MModule, MType, Array[MPropDef]]
+	private var lookup_definitions_cache: HashMap2[MModule, MType, Array[MPROPDEF]] = new HashMap2[MModule, MType, Array[MPROPDEF]]
 
 	# Return the most specific property definitions inherited by a type.
 	# The selection knows that refinement is stronger than specialization;
