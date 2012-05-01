@@ -218,6 +218,7 @@ private class NaiveInterpreter
 	fun native_string_instance(txt: String): Instance
 	do
 		var val = new Buffer.from(txt)
+		val.add('\0')
 		var ic = self.mainmodule.get_primitive_class("NativeString")
 		return new PrimitiveInstance[Buffer](ic.mclass_type, val)
 	end
