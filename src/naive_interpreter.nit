@@ -623,13 +623,37 @@ redef class AInternMethPropdef
 		else if cname == "NativeString" then
 			var recvval = args.first.val.as(Buffer)
 			if pname == "[]" then
-				return v.char_instance(recvval[args[1].to_i])
+				var arg1 = args[1].to_i
+				if arg1 >= recvval.length or arg1 < 0 then
+					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
+				end
+				return v.char_instance(recvval[arg1])
 			else if pname == "[]=" then
-				recvval[args[1].to_i] = args[2].val.as(Char)
+				var arg1 = args[1].to_i
+				if arg1 >= recvval.length or arg1 < 0 then
+					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
+				end
+				recvval[arg1] = args[2].val.as(Char)
 				return null
 			else if pname == "copy_to" then
 				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
-				recvval.copy(args[3].to_i, args[2].to_i, args[1].val.as(Buffer), args[4].to_i)
+				var destval = args[1].val.as(Buffer)
+				var lenval = args[2].to_i
+				var fromval = args[3].to_i
+				var toval = args[4].to_i
+				if fromval < 0 then
+					debug("Illegal access on {recvval} for element {fromval}/{recvval.length}")
+				end
+				if fromval + lenval >= recvval.length then
+					debug("Illegal access on {recvval} for element {fromval}+{lenval}/{recvval.length}")
+				end
+				if toval < 0 then
+					debug("Illegal access on {destval} for element {toval}/{destval.length}")
+				end
+				if toval + lenval >= destval.length then
+					debug("Illegal access on {destval} for element {toval}+{lenval}/{destval.length}")
+				end
+				recvval.copy(fromval, lenval, destval, toval)
 				return null
 			else if pname == "atoi" then
 				return v.int_instance(recvval.to_i)
@@ -639,7 +663,7 @@ redef class AInternMethPropdef
 		else if cname == "NativeArray" then
 			var recvval = args.first.val.as(Array[Instance])
 			if pname == "[]" then
-				if args[1].to_i >= recvval.length then
+				if args[1].to_i >= recvval.length or args[1].to_i < 0 then
 					debug("Illegal access on {recvval} for element {args[1].to_i}/{recvval.length}")
 				end
 				return recvval[args[1].to_i]
