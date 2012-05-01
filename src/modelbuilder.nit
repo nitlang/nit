@@ -1289,9 +1289,38 @@ redef class AAttrPropdef
 		end
 
 		if mtype == null then
-			modelbuilder.warning(self, "Error: Untyped attribute {mpropdef}")
-			return
+			var nexpr = self.n_expr
+			if nexpr != null then
+				if nexpr isa ANewExpr then
+					mtype = modelbuilder.resolve_mtype(nclassdef, nexpr.n_type)
+				else if nexpr isa AIntExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
+					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa AFloatExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Float")
+					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa ACharExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Char")
+					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa ABoolExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bool")
+					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa ASuperstringExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
+					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa AStringFormExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
+					if cla != null then mtype = cla.mclass_type
+				else
+					modelbuilder.error(self, "Error: Untyped attribute {mpropdef}. Implicit typing allowed only for literals and new.")
+				end
+
+			else
+				modelbuilder.error(self, "Error: Untyped attribute {mpropdef}")
+			end
 		end
+
+		if mtype == null then return
 
 		mpropdef.static_mtype = mtype
 
