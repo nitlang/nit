@@ -68,9 +68,17 @@ class Counter[E]
 	fun sort: Array[E]
 	do
 		var res = map.keys.to_a
-		res.sort !cmp a, b = map[a] <=> map[b]
+		var sorter = new CounterSorter[E](self)
+		sorter.sort(res)
+		#res.sort !cmp a, b = map[a] <=> map[b]
 		return res
 	end
+end
+
+private class CounterSorter[E: Object]
+	super AbstractSorter[E]
+	var counter: Counter[E]
+	redef fun compare(a,b) do return self.counter.map[a] <=> self.counter.map[b]
 end
 
 # Helper function to display n/d and handle division by 0
