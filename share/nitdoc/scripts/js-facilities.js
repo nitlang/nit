@@ -20,12 +20,12 @@ var currentIndex = -1;
 * Add folding and filtering facilities to class description page.
 */
 $(document).ready(function() {
-
+	
 	/*
 	* Highlight the spoted element
 	*/
 	highlightBlock(currentAnchor());
-	
+
 	/*
 	* Nav block folding
 	*/
@@ -187,6 +187,13 @@ $(document).ready(function() {
 							currentTable.width($("#search").outerWidth());
 							$("header").append(currentTable);
 							currentTable.offset({left: $("#search").offset().left + ($("#search").outerWidth() - currentTable.outerWidth()), top: $("#search").offset().top + $("#search").outerHeight()});
+
+							// Preselect first entry
+							if(currentTable.find("tr").length > 0) {
+								currentIndex = 0;
+								$(currentTable.find("tr")[currentIndex]).addClass("activeSearchResult");
+								$("#search").focus();
+							}
 						break;
 					}
 				})
@@ -208,14 +215,16 @@ $(document).ready(function() {
 			})
 		)
 	 );
-	
-	/*
-	* Anchors jumps
-	*/
-	$("a[href^='#']").click( function() {
-		var a = $(this).attr("href").replace(/#/, "");
-		highlightBlock(a);
-	});
+
+	 // Close quicksearch list on click
+	 $(document).click(function(e) {
+		if(e.target != $("#search")[0] && e.target != $("#searchTable")[0]) {
+			if(currentTable != null) {
+				currentTable.remove();
+				currentTable = null;
+			}
+		}
+	 });
 	
 	// Insert filter field
 	$("article.filterable h2, nav.filterable h3")
@@ -333,6 +342,13 @@ $(document).ready(function() {
 			$(this).toggleClass("hidden");
 		})
 	);
+
+	/*
+	* Anchors jumps
+	*/
+	$("a[href*='#']").click( function() {
+		highlightBlock($(this).attr("href").split(/#/)[1]);
+	});
 	
 	//Preload filter fields with query string
 	preloadFilters();
