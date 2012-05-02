@@ -28,10 +28,10 @@ doc/stdlib/index.html: tools
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc lib/*.nit -d doc/stdlib --public --overview-text '<p>Documentation for the standard library of Nit</p>' --footer-text 'Nit standard library. Version '`git describe -- lib`'.'
+	bin/nitdoc lib/*.nit -d doc/stdlib --public --custom-overview-text '<p>Documentation for the standard library of Nit</p>' --custom-footer-text 'Nit standard library. Version '`git describe -- lib`'.'
 
 doc/nitc/index.html: tools
-	bin/nitdoc src/nitc.nit src/nitdoc.nit -d doc/nitc --overview-text '<p>Documentation for the nit compiler</p>' --footer-text 'Nit compiler. Version '`git describe`'.'
+	bin/nitdoc src/nitc.nit src/nitdoc.nit -d doc/nitc --custom-overview-text '<p>Documentation for the nit compiler</p>' --custom-footer-text 'Nit compiler. Version '`git describe`'.'
 
 clean:
 	rm -rf -- .nit_compile 2> /dev/null || true
