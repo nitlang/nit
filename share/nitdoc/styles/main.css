@@ -430,6 +430,7 @@ nav h3 a.fold {
 	background-color: #FFFFFF;
 	border: 1px solid #E0E0E0;
 	border-spacing: 0px;
+	z-index: 10; /* the menu must be over the rest of the page. */
 }
 
 #searchTable .activeSearchResult {
