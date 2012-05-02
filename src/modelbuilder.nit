@@ -220,6 +220,8 @@ class ModelBuilder
 		var origmmodule = mmodule
 		var modules = model.get_mmodules_by_name(name)
 
+		var tries = new Array[String]
+
 		var lastmodule = mmodule
 		while mmodule != null do
 			var dirname = mmodule.location.file.filename.dirname
@@ -243,6 +245,7 @@ class ModelBuilder
 
 			# Second, try the directory to find a file
 			var try_file = dirname + "/" + name + ".nit"
+			tries.add try_file
 			if try_file.file_exists then
 				var res = self.load_module(owner, try_file.simplify_path)
 				if res == null then return null # Forward error
@@ -287,6 +290,7 @@ class ModelBuilder
 		var candidate: nullable String = null
 		for dirname in lookpaths do
 			var try_file = (dirname + "/" + name + ".nit").simplify_path
+			tries.add try_file
 			if try_file.file_exists then
 				if candidate == null then
 					candidate = try_file
@@ -305,9 +309,9 @@ class ModelBuilder
 		end
 		if candidate == null then
 			if origmmodule != null then
-				error(anode, "Error: cannot find module {name} from {origmmodule}")
+				error(anode, "Error: cannot find module {name} from {origmmodule}. tried {tries.join(", ")}")
 			else
-				error(anode, "Error: cannot find module {name}")
+				error(anode, "Error: cannot find module {name}. tried {tries.join(", ")}")
 			end
 			return null
 		end
