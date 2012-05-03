@@ -220,6 +220,8 @@ class ModelBuilder
 		var origmmodule = mmodule
 		var modules = model.get_mmodules_by_name(name)
 
+		var tries = new Array[String]
+
 		var lastmodule = mmodule
 		while mmodule != null do
 			var dirname = mmodule.location.file.filename.dirname
@@ -243,6 +245,7 @@ class ModelBuilder
 
 			# Second, try the directory to find a file
 			var try_file = dirname + "/" + name + ".nit"
+			tries.add try_file
 			if try_file.file_exists then
 				var res = self.load_module(owner, try_file.simplify_path)
 				if res == null then return null # Forward error
@@ -287,6 +290,7 @@ class ModelBuilder
 		var candidate: nullable String = null
 		for dirname in lookpaths do
 			var try_file = (dirname + "/" + name + ".nit").simplify_path
+			tries.add try_file
 			if try_file.file_exists then
 				if candidate == null then
 					candidate = try_file
@@ -305,9 +309,9 @@ class ModelBuilder
 		end
 		if candidate == null then
 			if origmmodule != null then
-				error(anode, "Error: cannot find module {name} from {origmmodule}")
+				error(anode, "Error: cannot find module {name} from {origmmodule}. tried {tries.join(", ")}")
 			else
-				error(anode, "Error: cannot find module {name}")
+				error(anode, "Error: cannot find module {name}. tried {tries.join(", ")}")
 			end
 			return null
 		end
@@ -1289,9 +1293,38 @@ redef class AAttrPropdef
 		end
 
 		if mtype == null then
-			modelbuilder.warning(self, "Error: Untyped attribute {mpropdef}")
-			return
+			var nexpr = self.n_expr
+			if nexpr != null then
+				if nexpr isa ANewExpr then
+					mtype = modelbuilder.resolve_mtype(nclassdef, nexpr.n_type)
+				else if nexpr isa AIntExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
+					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa AFloatExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Float")
+					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa ACharExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Char")
+					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa ABoolExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bool")
+					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa ASuperstringExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
+					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa AStringFormExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
+					if cla != null then mtype = cla.mclass_type
+				else
+					modelbuilder.error(self, "Error: Untyped attribute {mpropdef}. Implicit typing allowed only for literals and new.")
+				end
+
+			else
+				modelbuilder.error(self, "Error: Untyped attribute {mpropdef}")
+			end
 		end
+
+		if mtype == null then return
 
 		mpropdef.static_mtype = mtype
 

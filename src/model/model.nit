@@ -475,6 +475,10 @@ end
 #
 # FIXME: maybe allways add an anchor with a nullable type (as in is_subtype)
 abstract class MType
+
+	# The model of the type
+	fun model: Model is abstract
+
 	# Return true if `self' is an subtype of `sup'.
 	# The typing is done using the standard typing policy of Nit.
 	#
@@ -482,6 +486,7 @@ abstract class MType
 	fun is_subtype(mmodule: MModule, anchor: nullable MClassType, sup: MType): Bool
 	do
 		var sub = self
+		if sub == sup then return true
 		if anchor == null then
 			assert not sub.need_anchor
 			assert not sup.need_anchor
@@ -519,6 +524,8 @@ abstract class MType
 		if sub isa MNullableType or sub isa MNullType then
 			return false
 		end
+
+		if sub == sup then return true
 
 		assert sub isa MClassType # It is the only remaining type
 		if anchor == null then anchor = sub # UGLY: any anchor will work
@@ -705,6 +712,8 @@ class MClassType
 	# The associated class
 	var mclass: MClass
 
+	redef fun model do return self.mclass.intro_mmodule.model
+
 	private init(mclass: MClass)
 	do
 		self.mclass = mclass
@@ -724,28 +733,31 @@ class MClassType
 	redef fun collect_mclassdefs(mmodule)
 	do
 		assert not self.need_anchor
-		if not collect_mclassdefs_cache.has_key(mmodule) then
+		var cache = self.collect_mclassdefs_cache
+		if not cache.has_key(mmodule) then
 			self.collect_things(mmodule)
 		end
-		return collect_mclassdefs_cache[mmodule]
+		return cache[mmodule]
 	end
 
 	redef fun collect_mclasses(mmodule)
 	do
 		assert not self.need_anchor
-		if not collect_mclasses_cache.has_key(mmodule) then
+		var cache = self.collect_mclasses_cache
+		if not cache.has_key(mmodule) then
 			self.collect_things(mmodule)
 		end
-		return collect_mclasses_cache[mmodule]
+		return cache[mmodule]
 	end
 
 	redef fun collect_mtypes(mmodule)
 	do
 		assert not self.need_anchor
-		if not collect_mtypes_cache.has_key(mmodule) then
+		var cache = self.collect_mtypes_cache
+		if not cache.has_key(mmodule) then
 			self.collect_things(mmodule)
 		end
-		return collect_mtypes_cache[mmodule]
+		return cache[mmodule]
 	end
 
 	# common implementation for `collect_mclassdefs', `collect_mclasses', and `collect_mtypes'.
@@ -836,6 +848,8 @@ class MVirtualType
 	# Its the definitions of this property that determine the bound or the virtual type.
 	var mproperty: MProperty
 
+	redef fun model do return self.mproperty.intro_mclassdef.mmodule.model
+
 	# Lookup the bound for a given resolved_receiver
 	# The result may be a other virtual type (or a parameter type)
 	#
@@ -915,6 +929,8 @@ class MParameterType
 
 	# The generic class where the parameter belong
 	var mclass: MClass
+
+	redef fun model do return self.mclass.intro_mmodule.model
 
 	# The position of the parameter (0 for the first parameter)
 	# FIXME: is `position' a better name?
@@ -1002,6 +1018,8 @@ class MNullableType
 	# The base type of the nullable type
 	var mtype: MType
 
+	redef fun model do return self.mtype.model
+
 	init(mtype: MType)
 	do
 		self.mtype = mtype
@@ -1041,7 +1059,7 @@ end
 # The is only one null type per model, see `MModel::null_type'.
 class MNullType
 	super MType
-	var model: Model
+	redef var model: Model
 	protected init(model: Model)
 	do
 		self.model = model
@@ -1269,7 +1287,7 @@ abstract class MProperty
 		return res
 	end
 
-	private var lookup_definitions_cache: HashMap2[MModule, MType, Array[MPropDef]] = new HashMap2[MModule, MType, Array[MPropDef]]
+	private var lookup_definitions_cache: HashMap2[MModule, MType, Array[MPROPDEF]] = new HashMap2[MModule, MType, Array[MPROPDEF]]
 
 	# Return the most specific property definitions inherited by a type.
 	# The selection knows that refinement is stronger than specialization;
