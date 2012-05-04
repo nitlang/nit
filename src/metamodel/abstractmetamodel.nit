@@ -501,7 +501,7 @@ abstract class MMLocalClass
 		return _global_properties.has(glob)
 	end
 
-	# Get a local proprty by its global property
+	# Get a local property by its global property
 	fun [](glob: MMGlobalProperty): MMLocalProperty
 	do
 		return _local_property_by_global[glob]

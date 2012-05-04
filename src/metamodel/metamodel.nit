@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# NIT metamodel bottom module (aka metamodel featuring all extentions)
+# NIT metamodel bottom module (aka metamodel featuring all extensions)
 package metamodel
 
 import genericity
