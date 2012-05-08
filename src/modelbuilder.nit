@@ -105,6 +105,11 @@ class ModelBuilder
 
 		self.toolcontext.check_errors
 
+		if self.toolcontext.opt_only_parse.value then
+			self.toolcontext.info("--only-parse: stop processing", 2)
+			return new Array[MModule]
+		end
+
 		# Build the model
 		self.toolcontext.info("*** BUILD MODEL ***", 1)
 		self.build_all_classes
