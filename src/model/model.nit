@@ -1227,7 +1227,7 @@ abstract class MProperty
 	# however, in case of conflict more than one property are returned.
 	# If mtype does not know mproperty then an empty array is returned.
 	#
-	# If you want the really most specific property, then look at `lookup_first_property`
+	# If you want the really most specific property, then look at `lookup_first_definition`
 	fun lookup_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
@@ -1359,7 +1359,7 @@ abstract class MProperty
 	# FIXME: NOT YET IMPLEMENTED
 	#
 	# REQUIRE: not mtype.need_anchor
-	fun lookup_first_property(mmodule: MModule, mtype: MType): nullable MPROPDEF
+	fun lookup_first_definition(mmodule: MModule, mtype: MType): nullable MPROPDEF
 	do
 		assert not mtype.need_anchor
 		return null
