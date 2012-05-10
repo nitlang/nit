@@ -964,6 +964,55 @@ redef class APropdef
 	end
 end
 
+redef class ASignature
+	# Is the model builder has correctly visited the signature
+	var is_visited = false
+	# Names of parameters from the AST
+	# REQUIRE: is_visited
+	var param_names = new Array[String]
+	# Types of parameters from the AST
+	# REQUIRE: is_visited
+	var param_types = new Array[MType]
+	# Rank of the vararg (of -1 if none)
+	# REQUIRE: is_visited
+	var vararg_rank: Int = -1
+	# Return type
+	var ret_type: nullable MType = null
+
+	# Visit and fill information about a signature
+	private fun visit_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef): Bool
+	do
+		var param_names = self.param_names
+		var param_types = self.param_types
+		for np in self.n_params do
+			param_names.add(np.n_id.text)
+			var ntype = np.n_type
+			if ntype != null then
+				var mtype = modelbuilder.resolve_mtype(nclassdef, ntype)
+				if mtype == null then return false # Skip error
+				for i in [0..param_names.length-param_types.length[ do
+					param_types.add(mtype)
+				end
+				if np.n_dotdotdot != null then
+					if self.vararg_rank != -1 then
+						modelbuilder.error(np, "Error: {param_names[self.vararg_rank]} is already a vararg")
+						return false
+					else
+						self.vararg_rank = param_names.length - 1
+					end
+				end
+			end
+		end
+		var ntype = self.n_type
+		if ntype != null then
+			self.ret_type = modelbuilder.resolve_mtype(nclassdef, ntype)
+			if self.ret_type == null then return false # Skip errir
+		end
+		self.is_visited = true
+		return true
+	end
+end
+
 redef class AMethPropdef
 	# The associated MMethodDef once build by a `ModelBuilder'
 	var mpropdef: nullable MMethodDef
@@ -1046,29 +1095,11 @@ redef class AMethPropdef
 		var vararg_rank = -1
 		var ret_type: nullable MType = null # Return type from the AST
 		if nsig != null then
-			for np in nsig.n_params do
-				param_names.add(np.n_id.text)
-				var ntype = np.n_type
-				if ntype != null then
-					var mtype = modelbuilder.resolve_mtype(nclassdef, ntype)
-					if mtype == null then return # Skip error
-					for i in [0..param_names.length-param_types.length[ do
-						param_types.add(mtype)
-					end
-					if np.n_dotdotdot != null then
-						if vararg_rank != -1 then
-							modelbuilder.error(np, "Error: {param_names[vararg_rank]} is already a vararg")
-						else
-							vararg_rank = param_names.length - 1
-						end
-					end
-				end
-			end
-			var ntype = nsig.n_type
-			if ntype != null then
-				ret_type = modelbuilder.resolve_mtype(nclassdef, ntype)
-				if ret_type == null then return # Skip errir
-			end
+			if not nsig.visit_signature(modelbuilder, nclassdef) then return
+			param_names = nsig.param_names
+			param_types = nsig.param_types
+			vararg_rank = nsig.vararg_rank
+			ret_type = nsig.ret_type
 		end
 
 		# Look for some signature to inherit
