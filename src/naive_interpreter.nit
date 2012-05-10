@@ -275,7 +275,7 @@ private class NaiveInterpreter
 				vararg.add(rawargs[i+1])
 			end
 			# FIXME: its it to late to determine the vararg type, this should have been done during a previous analysis
-			var elttype = mpropdef.msignature.parameter_mtypes[vararg_rank].anchor_to(self.mainmodule, args.first.mtype.as(MClassType))
+			var elttype = mpropdef.msignature.mparameters[vararg_rank].mtype.anchor_to(self.mainmodule, args.first.mtype.as(MClassType))
 			args.add(self.array_instance(vararg, elttype))
 
 			for i in [vararg_lastrank+1..rawargs.length-1[ do

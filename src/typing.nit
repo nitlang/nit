@@ -245,12 +245,12 @@ private class TypeVisitor
 			if i > vararg_rank then
 				j = i + vararg_decl
 			end
-			var paramtype = msignature.parameter_mtypes[i]
+			var paramtype = msignature.mparameters[i].mtype
 			self.visit_expr_subtype(args[j], paramtype)
 		end
 		if vararg_rank >= 0 then
 			var varargs = new Array[AExpr]
-			var paramtype = msignature.parameter_mtypes[vararg_rank]
+			var paramtype = msignature.mparameters[vararg_rank].mtype
 			for j in [vararg_rank..vararg_rank+vararg_decl] do
 				varargs.add(args[j])
 				self.visit_expr_subtype(args[j], paramtype)
@@ -395,7 +395,7 @@ redef class AConcreteMethPropdef
 
 		var mmethoddef = self.mpropdef.as(not null)
 		for i in [0..mmethoddef.msignature.arity[ do
-			var mtype = mmethoddef.msignature.parameter_mtypes[i]
+			var mtype = mmethoddef.msignature.mparameters[i].mtype
 			if mmethoddef.msignature.vararg_rank == i then
 				var arrayclass = v.get_mclass(self.n_signature.n_params[i], "Array")
 				if arrayclass == null then return # Skip error
@@ -569,7 +569,7 @@ redef class AReassignFormExpr
 		var rettype = msignature.return_mtype
 		assert msignature.arity == 1 and rettype != null
 
-		var value_type = v.visit_expr_subtype(self.n_value, msignature.parameter_mtypes.first)
+		var value_type = v.visit_expr_subtype(self.n_value, msignature.mparameters.first.mtype)
 		if value_type == null then return null # Skip error
 
 		v.check_subtype(self, rettype, writetype)
@@ -1177,7 +1177,7 @@ redef class ASendReassignFormExpr
 		if wmsignature == null then abort # Forward error
 		wmsignature = v.resolve_signature_for(wmsignature, recvtype, for_self)
 
-		var wtype = self.resolve_reassignment(v, readtype, wmsignature.parameter_mtypes.last)
+		var wtype = self.resolve_reassignment(v, readtype, wmsignature.mparameters.last.mtype)
 		if wtype == null then return
 
 		args.add(self.n_value)

@@ -199,7 +199,7 @@ class RapidTypeAnalysis
 
 			var vararg_rank = mr.mmethoddef.msignature.vararg_rank
 			if vararg_rank > -1 then
-				var elttype = mr.mmethoddef.msignature.parameter_mtypes[vararg_rank]
+				var elttype = mr.mmethoddef.msignature.mparameters[vararg_rank].mtype
 				elttype = elttype.anchor_to(self.mainmodule, mr.receiver)
 				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
 				self.add_type(vararg)

@@ -1080,19 +1080,24 @@ end
 class MSignature
 	super MType
 
-	# The names of each parameter (in order)
-	var parameter_names: Array[String]
-
-	# The types of each parameter (in order)
-	var parameter_mtypes: Array[MType]
+	# The each parameter (in order)
+	var mparameters: Array[MParameter]
 
 	# The return type (null for a procedure)
 	var return_mtype: nullable MType
 
-	init(parameter_names: Array[String], parameter_mtypes: Array[MType], return_mtype: nullable MType, vararg_rank: Int)
+	# REQUIRE: 1 <= mparameters.count p -> p.is_vararg
+	init(mparameters: Array[MParameter], return_mtype: nullable MType)
 	do
-		self.parameter_names = parameter_names
-		self.parameter_mtypes = parameter_mtypes
+		var vararg_rank = -1
+		for i in [0..mparameters.length[ do
+			var parameter = mparameters[i]
+			if parameter.is_vararg then
+				assert vararg_rank == -1
+				vararg_rank = i
+			end
+		end
+		self.mparameters = mparameters
 		self.return_mtype = return_mtype
 		self.vararg_rank = vararg_rank
 	end
@@ -1103,19 +1108,20 @@ class MSignature
 	var vararg_rank: Int
 
 	# The number or parameters
-	fun arity: Int do return parameter_mtypes.length
+	fun arity: Int do return mparameters.length
 
 	redef fun to_s
 	do
 		var b = new Buffer
-		if not parameter_names.is_empty then
+		if not mparameters.is_empty then
 			b.append("(")
-			for i in [0..parameter_names.length[ do
+			for i in [0..mparameters.length[ do
+				var mparameter = mparameters[i]
 				if i > 0 then b.append(", ")
-				b.append(parameter_names[i])
+				b.append(mparameter.name)
 				b.append(": ")
-				b.append(parameter_mtypes[i].to_s)
-				if i == self.vararg_rank then
+				b.append(mparameter.mtype.to_s)
+				if mparameter.is_vararg then
 					b.append("...")
 				end
 			end
@@ -1131,15 +1137,35 @@ class MSignature
 
 	redef fun resolve_for(mtype: MType, anchor: MClassType, mmodule: MModule, cleanup_virtual: Bool): MSignature
 	do
-		var params = new Array[MType]
-		for t in self.parameter_mtypes do
-			params.add(t.resolve_for(mtype, anchor, mmodule, cleanup_virtual))
+		var params = new Array[MParameter]
+		for p in self.mparameters do
+			params.add(p.resolve_for(mtype, anchor, mmodule, cleanup_virtual))
 		end
 		var ret = self.return_mtype
 		if ret != null then
 			ret = ret.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 		end
-		var res = new MSignature(self.parameter_names, params, ret, self.vararg_rank)
+		var res = new MSignature(params, ret)
+		return res
+	end
+end
+
+# A parameter in a signature
+class MParameter
+	# The name of the parameter
+	var name: String
+
+	# The static type of the parameter
+	var mtype: MType
+
+	# Is the parameter a vararg?
+	var is_vararg: Bool
+
+	fun resolve_for(mtype: MType, anchor: MClassType, mmodule: MModule, cleanup_virtual: Bool): MParameter
+	do
+		if not self.mtype.need_anchor then return self
+		var newtype = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
+		var res = new MParameter(self.name, newtype, self.is_vararg)
 		return res
 	end
 end
