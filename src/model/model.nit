@@ -1089,9 +1089,6 @@ class MSignature
 	# The return type (null for a procedure)
 	var return_mtype: nullable MType
 
-	# All closures
-	var mclosures: Array[MClosureDecl] = new Array[MClosureDecl]
-
 	init(parameter_names: Array[String], parameter_mtypes: Array[MType], return_mtype: nullable MType, vararg_rank: Int)
 	do
 		self.parameter_names = parameter_names
@@ -1099,9 +1096,6 @@ class MSignature
 		self.return_mtype = return_mtype
 		self.vararg_rank = vararg_rank
 	end
-
-	# Is there closures in the signature?
-	fun with_mclosure: Bool do return not self.mclosures.is_empty
 
 	# The rank of the ellipsis (...) for vararg (starting from 0).
 	# value is -1 if there is no vararg.
@@ -1148,19 +1142,6 @@ class MSignature
 		var res = new MSignature(self.parameter_names, params, ret, self.vararg_rank)
 		return res
 	end
-end
-
-# A closure declaration is a signature
-# FIXME Stub implementation
-class MClosureDecl
-	# Is the closure optionnal
-	var is_optional: Bool
-	# Has the closure to not continue
-	var is_break: Bool
-	# The name of the closure (exluding the !)
-	var name: String
-	# The signature of the closure
-	var msignature: MSignature
 end
 
 # A service (global property) that generalize method, attribute, etc.
