@@ -722,7 +722,13 @@ redef class AExternMethPropdef
 	do
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
-		if cname == "NativeFile" then
+		if cname == "Int" then
+			var recvval = args.first.val.as(Int)
+			if pname == "rand" then
+				var res = recvval.rand
+				return v.int_instance(res)
+			end
+		else if cname == "NativeFile" then
 			var recvval = args.first.val
 			if pname == "io_write" then
 				var a1 = args[1].val.as(Buffer)
