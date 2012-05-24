@@ -751,8 +751,11 @@ redef class AExternMethPropdef
 				recvval.to_s.mkdir
 				return null
 			else if pname == "get_environ" then
-				var txt = args.first.val.as(Buffer).to_s.environ
+				var txt = recvval.to_s.environ
 				return v.native_string_instance(txt)
+			else if pname == "system" then
+				var res = sys.system(recvval.to_s)
+				return v.int_instance(res)
 			end
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
