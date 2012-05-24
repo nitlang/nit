@@ -1015,9 +1015,18 @@ redef class AForExpr
 		loop
 			var isok = v.send(v.mainmodule.force_get_primitive_method("is_ok", iter.mtype), [iter]).as(not null)
 			if not isok.is_true then return
-			var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
-			#self.debug("item {item}")
-			v.frame.map[self.variables.first] = item
+			if self.variables.length == 1 then
+				var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				#self.debug("item {item}")
+				v.frame.map[self.variables.first] = item
+			else if self.variables.length == 2 then
+				var key = v.send(v.mainmodule.force_get_primitive_method("key", iter.mtype), [iter]).as(not null)
+				v.frame.map[self.variables[0]] = key
+				var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				v.frame.map[self.variables[1]] = item
+			else
+				abort
+			end
 			v.stmt(self.n_block)
 			if v.is_break(self.escapemark) then return
 			v.is_continue(self.escapemark) # Clear the break

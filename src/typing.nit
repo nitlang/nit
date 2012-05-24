@@ -704,6 +704,7 @@ redef class ALoopExpr
 end
 
 redef class AForExpr
+	var coltype: nullable MGenericType
 	redef fun accept_typing(v)
 	do
 		var mtype = v.visit_expr(n_expr)
@@ -713,14 +714,28 @@ redef class AForExpr
 		if colcla == null then return
 		var objcla = v.get_mclass(self, "Object")
 		if objcla == null then return
+		var mapcla = v.get_mclass(self, "Map")
+		if mapcla == null then return
 		if v.is_subtype(mtype, colcla.get_mtype([objcla.mclass_type.as_nullable])) then
 			var coltype = mtype.supertype_to(v.mmodule, v.anchor, colcla)
 			assert coltype isa MGenericType
+			self.coltype = coltype
 			var variables =  self.variables
 			if variables.length != 1 then
 				v.error(self, "Type Error: Expected one variable")
 			else
 				variables.first.declared_type = coltype.arguments.first
+			end
+		else if v.is_subtype(mtype, mapcla.get_mtype([objcla.mclass_type.as_nullable, objcla.mclass_type.as_nullable])) then
+			var coltype = mtype.supertype_to(v.mmodule, v.anchor, mapcla)
+			assert coltype isa MGenericType
+			self.coltype = coltype
+			var variables = self.variables
+			if variables.length != 2 then
+				v.error(self, "Type Error: Expected two variables")
+			else
+				variables[0].declared_type = coltype.arguments[0]
+				variables[1].declared_type = coltype.arguments[1]
 			end
 		else
 			v.modelbuilder.error(self, "TODO: Do 'for' on {mtype}")

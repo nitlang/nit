@@ -1939,9 +1939,20 @@ redef class AForExpr
 		var ok = v.send(v.get_property("is_ok", it.mtype), [it])
 		assert ok != null
 		v.add("if(!{ok}) break;")
-		var i = v.send(v.get_property("item", it.mtype), [it])
-		assert i != null
-		v.assign(v.variable(variables.first), i)
+		if self.variables.length == 1 then
+			var i = v.send(v.get_property("item", it.mtype), [it])
+			assert i != null
+			v.assign(v.variable(variables.first), i)
+		else if self.variables.length == 2 then
+			var i = v.send(v.get_property("key", it.mtype), [it])
+			assert i != null
+			v.assign(v.variable(variables[0]), i)
+			i = v.send(v.get_property("item", it.mtype), [it])
+			assert i != null
+			v.assign(v.variable(variables[1]), i)
+		else
+			abort
+		end
 		v.stmt(self.n_block)
 		v.add("CONTINUE_{escapemark.object_id}: (void)0;")
 		v.send(v.get_property("next", it.mtype), [it])
