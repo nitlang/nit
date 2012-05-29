@@ -55,7 +55,7 @@ function! SyntaxCheckers_nit_GetLocList()
 
 	" possible combinations of error messages
 	let ef_start = [ '%f:%l\,%c--%*[0-9]:', '%f:%l\,%c--%*[0-9]\,%*[0-9]:', '%f:%l\,%c:' ]
-	let ef_type = [ ' %tarning: ', ' %trror: ', ' Syntax %trror: ' ]
+	let ef_type = [ ' %tarning: ', '' ]
 
 	" generate errorformat from combinations
 	let errorformat = ""
