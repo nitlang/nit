@@ -20,9 +20,17 @@ endif
 
 function! SyntaxCheckers_nit_GetLocList()
 	let makeprg = "nitc --no-color --only-metamodel 2>&1 " . shellescape(expand("%"))
-	let errorformat =
-		\'%f:%l\,%c--%*[0-9]: %m,
-		\%f:%l\,%c--%*[0-9]\,0: %m,
-		\%f:%l\,%c: %m'
+	" possible combinations of error messages
+	let ef_start = [ '%f:%l\,%c--%*[0-9]:', '%f:%l\,%c--%*[0-9]\,%*[0-9]:', '%f:%l\,%c:' ]
+	let ef_type = [ ' %tarning: ', ' %trror: ', ' Syntax %trror: ' ]
+
+	" generate errorformat from combinations
+	let errorformat = ""
+	for s in ef_start
+		for t in ef_type
+			let errorformat .= s . t . '%m,'
+		endfor
+	endfor
+
 	return SyntasticMake({ 'makeprg': makeprg, 'errorformat':errorformat })
 endfunction
