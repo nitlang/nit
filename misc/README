@@ -25,6 +25,6 @@ Ensure that your .vimrc contains
 
  * syntax highlighting
  * indentation
+ * syntax checker (require [Syntastic][2]).
 
-# syntastic
-Syntastic is a syntax checker for Vim. To use the Nit checker, install syntastic and copy syntastic/nit.vim in your syntastic/syntax_checkers folder.
+  [2]: https://github.com/scrooloose/syntastic
