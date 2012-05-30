@@ -1,5 +1,30 @@
 # gtksourceview (gedit and other GTK editors)
 To install in your home, just link (or copy) the language definition file in ~/.local/share/gtksourceview-2.0/language-specs
 
-# syntastic
-Syntastic is a syntax checker for Vim. To use the Nit checker, install syntastic and copy syntastic/nit.vim in your syntastic/syntax_checkers folder.
+# vim
+
+vim is a powerful text editor.
+The misc/vim directory contains the support of nit files to vim.
+
+### Install
+
+The simpler way to install nit for vim is with [pathogen][1].
+
+    cd ~/.vim/bundle
+    ln -s /full/path/to/nit/misc/vim nit
+
+Ensure that your .vimrc contains
+
+    call pathogen#infect()
+    syntax on
+    filetype plugin indent on
+
+  [1]: https://github.com/tpope/vim-pathogen
+
+### Features
+
+ * syntax highlighting
+ * indentation
+ * syntax checker (require [Syntastic][2]).
+
+  [2]: https://github.com/scrooloose/syntastic
