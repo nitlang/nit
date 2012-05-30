@@ -38,7 +38,6 @@ function! SyntaxCheckers_nit_GetLocList()
 	" custom NIT_DIR
 	if exists('g:syntastic_nit_dir')
 		let makeprg = "NIT_DIR=" . g:syntastic_nit_dir . " " . makeprg
-		echo makeprg
 	endif
 
 	" custom options for nit compiler
