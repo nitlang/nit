@@ -268,7 +268,6 @@ redef class IRoutine
 			p = cparams.join(", ")
 		end
 		if human_name != null then
-			v.add_decl("static const char LOCATE_{cname}[];")
 			v.add_instr("static const char LOCATE_{cname}[] = \"{human_name}\";")
 		end
 		v.add_decl("{r} {cname}({p});")
@@ -927,7 +926,7 @@ redef class IBoolValue
 		v.add_location(location)
 		var w = new_result(v)
 		w.add("TAG_Bool(")
-		if value then w.add("true") else w.add("false")
+		if value then w.add("1") else w.add("0")
 		w.add(")")
 	end
 end

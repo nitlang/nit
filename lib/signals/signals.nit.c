@@ -53,6 +53,7 @@ Imported methods signatures:
 */
 void SignalHandler_handle_signal___impl( SignalHandler recv, bigint signal, int safely )
 {
+	SignalHandler last_handler;
 	if ( signal < 32 && signal >=0 ) {
 		struct sigaction act;
 		sigemptyset(&act.sa_mask);
@@ -61,7 +62,7 @@ void SignalHandler_handle_signal___impl( SignalHandler recv, bigint signal, int 
 
 		sigaction(signal, &act, NULL);
 
-		SignalHandler last_handler = nit_signals_list[signal].handler;
+		last_handler = nit_signals_list[signal].handler;
 		if ( last_handler != NULL )
 			SignalHandler_decr_ref( last_handler );
 
@@ -77,6 +78,7 @@ C implementation of signals::SignalHandler::ignore_signal
 */
 void SignalHandler_ignore_signal___impl( SignalHandler recv, bigint signal )
 {
+	SignalHandler last_handler;
 	if ( signal < 32 && signal >=0 ) {
 		struct sigaction act;
 		sigemptyset(&act.sa_mask);
@@ -84,7 +86,7 @@ void SignalHandler_ignore_signal___impl( SignalHandler recv, bigint signal )
 		act.sa_handler = SIG_IGN;
 		sigaction(signal, &act, NULL);
 
-		SignalHandler last_handler = nit_signals_list[signal].handler;
+		last_handler = nit_signals_list[signal].handler;
 		if ( last_handler != NULL )
 			SignalHandler_decr_ref( last_handler );
 	}
@@ -95,6 +97,7 @@ C implementation of signals::SignalHandler::default_signal
 */
 void SignalHandler_default_signal___impl( SignalHandler recv, bigint signal )
 {
+	SignalHandler last_handler;
 	if ( signal < 32 && signal >=0 ) {
 		struct sigaction act;
 		sigemptyset(&act.sa_mask);
@@ -102,7 +105,7 @@ void SignalHandler_default_signal___impl( SignalHandler recv, bigint signal )
 		act.sa_handler = SIG_DFL;
 		sigaction(signal, &act, NULL);
 
-		SignalHandler last_handler = nit_signals_list[signal].handler;
+		last_handler = nit_signals_list[signal].handler;
 		if ( last_handler != NULL )
 			SignalHandler_decr_ref( last_handler );
 	}

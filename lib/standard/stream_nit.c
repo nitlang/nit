@@ -59,8 +59,9 @@ nullable_Int Object_intern_poll___impl( Object recv, Array in_fds, Array out_fds
 
 	/* input streams */
 	for ( i=0; i<in_len; i ++ ) {
+		int fd;
 		tmp_nit_obj = Array__index( in_fds, i );
-		int fd = nullable_Object_as_Int( tmp_nit_obj );
+		fd = nullable_Object_as_Int( tmp_nit_obj );
 
 		c_fds[i].fd = fd;
 		c_fds[i].events = POLLIN;
@@ -68,8 +69,9 @@ nullable_Int Object_intern_poll___impl( Object recv, Array in_fds, Array out_fds
 
 	/* output streams */
 	for ( i=0; i<out_len; i ++ ) {
+		int fd;
 		tmp_nit_obj = Array__index( out_fds, i );
-		int fd = nullable_Object_as_Int( tmp_nit_obj );
+		fd = nullable_Object_as_Int( tmp_nit_obj );
 
 		c_fds[i].fd = fd;
 		c_fds[i].events = POLLOUT;
