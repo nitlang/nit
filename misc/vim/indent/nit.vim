@@ -33,6 +33,11 @@ setlocal comments=:#
 setlocal indentkeys+==end,=else,=do,=var,0!,=then,=loop,=special,=class,=interface,=universal
 setlocal sw=8
 
+" Only define the function once.
+if exists("*GetNITIndent")
+	finish
+endif
+
 " Indent after
 let s:relative_indent = '\<\(do\|loop\|then\|else\|if\)\s*\(#\|$\)\|^\s*\(\<\(redef\|private\)\>\s*\)\?\(\<abstract\>\s*\)\?\<\(class\|interface\|universal\|special\)\>'
 " Unindent on them
@@ -51,11 +56,6 @@ function s:Match(lnum, regex)
 	let col = match(getline(a:lnum), a:regex) + 1
 	return col > 0 && !s:IsInStringOrComment(a:lnum, col) ? col : 0
 endfunction
-
-" Only define the function once.
-if exists("*GetNITIndent")
-	finish
-endif
 
 function GetNITIndent()
 	" Find a non-blank line above the current line.
