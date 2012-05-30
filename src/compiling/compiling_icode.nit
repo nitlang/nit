@@ -926,7 +926,7 @@ redef class IBoolValue
 		v.add_location(location)
 		var w = new_result(v)
 		w.add("TAG_Bool(")
-		if value then w.add("true") else w.add("false")
+		if value then w.add("1") else w.add("0")
 		w.add(")")
 	end
 end
