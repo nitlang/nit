@@ -106,7 +106,7 @@ redef class MMModule
 		end
 
 		# header file guard close
-		v.header_head.add( "#endif\n" )
+		v.header_decl.add( "\n#endif\n" )
 	end
 end
 
