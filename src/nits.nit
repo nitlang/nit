@@ -156,9 +156,7 @@ redef class MMSrcMethod
 		### extern method implementation
 		v.header_decl.add( "{impl_csignature};\n" )
 
-		v.body_impl.add( "{impl_csignature} \{" )
-
-		v.body_impl.add( "\}\n" )
+		v.body_impl.add( "{impl_csignature}\n\{\n\}\n" )
 		### end of implementation
 	end
 end
