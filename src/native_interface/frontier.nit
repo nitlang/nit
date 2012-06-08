@@ -24,6 +24,103 @@ import ni_metamodel
 
 import syntax # FIXME: to remove since it breaks modularity
 
+# Transitive variable through the frontier file
+# Represents a variable going from Nit to C or from C to Nit
+abstract class NiVariable
+	fun ni_from_name : String is abstract
+	fun ni_to_name : String is abstract
+	fun ni_type : MMType is abstract
+
+	# needs to be boxed or unboxed
+	# anything using the GC
+	fun needs_preparation : Bool
+	do
+		return ni_type.local_class.primitive_info == null or
+			ni_type.local_class.primitive_info.tagged or
+			ni_type.is_nullable
+	end
+
+	# prepare variable to callback to Nit
+	fun prepare_for_nit( fc : FunctionCompiler )
+	do
+		if needs_preparation then
+			fc.decls.add( "val_t {ni_to_name};\n" )
+			fc.exprs.add( "{ni_type.assign_from_friendly( ni_to_name, ni_from_name )};\n" )
+		end
+	end
+
+	fun prepare_for_c( fc : FunctionCompiler )
+	do
+		if needs_preparation then
+			ni_type.compile_new_local_ref( ni_to_name, fc, not self isa ReturnVariable ) # TODO
+			fc.exprs.add( "{ni_type.assign_to_friendly( ni_to_name, ni_from_name )};\n" )
+		end
+	end
+
+	# format of the variable to callback to Nit
+	fun as_arg_to_nit : String
+	do
+		if needs_preparation then
+			return ni_to_name
+		else if ( ni_type.local_class.primitive_info != null or ni_type.local_class.global.is_extern ) and
+			not ni_type.is_nullable then # int, float, point/void* ...
+			return ni_type.boxtype(ni_from_name)
+		else
+			return "{ni_from_name}->ref.val"
+		end
+	end
+
+	# format of the variable to call C implementation functions
+	fun as_arg_to_c : String
+	do
+		if needs_preparation then
+			return ni_to_name
+		else
+			return ni_type.unboxtype( ni_from_name )
+		end
+	end
+end
+
+redef class MMParam
+	super NiVariable
+
+	redef fun ni_from_name do return name.to_s
+	redef fun ni_to_name do return "trans___{name}"
+	redef fun ni_type do return mmtype
+end
+
+class ReceiverVariable
+	super NiVariable
+
+	redef fun ni_from_name do return "recv"
+	redef fun ni_to_name do return "trans_recv"
+
+	redef var ni_type : MMType
+	init ( t : MMType ) do ni_type = t
+end
+
+class ReturnVariable
+	super NiVariable
+
+	redef fun ni_from_name do return "orig_return"
+	redef fun ni_to_name do return "trans_return"
+
+	redef var ni_type : MMType
+	init ( t : MMType ) do ni_type = t
+
+	# used only by friendly callbacks to Nit
+	redef fun prepare_for_c( fc )
+	do
+		fc.decls.add( "val_t {ni_from_name};\n" )
+		ni_type.compile_new_local_ref( ni_to_name, fc, true )
+	end
+	redef fun prepare_for_nit( fc )
+	do
+		ni_type.compile_new_local_ref( ni_from_name, fc, false )
+		fc.decls.add( "val_t {ni_to_name};\n" )
+	end
+end
+
 redef class MMSrcModule
 	fun compile_frontier( v : FrontierVisitor )
 	do
@@ -126,47 +223,34 @@ redef class MMSrcMethod
 		var fc = new FunctionCompiler( friendly_super_csignature )
 
 		# params
-		var params = new Array[String]
+		var params = new Array[NiVariable]
+		params.add( signature.recv_ni_variable )
+		params.add_all( signature.params )
 
-		# receiver
-		var name_for_sub = "recv___nit"
-		fc.decls.add( "val_t {name_for_sub};\n" )
-		fc.exprs.add( "{signature.recv.assign_from_friendly( name_for_sub, "recv" )};\n" )
-		params.add( name_for_sub )
+		# prepare transition
+		for p in params do p.prepare_for_nit( fc )
 
-		# other params
-		for p in signature.params do
-			name_for_sub = "{p.name}___nit"
-			fc.decls.add( "val_t {name_for_sub};\n" )
-			fc.exprs.add( "{p.mmtype.assign_from_friendly( name_for_sub, p.name.to_s )};\n" )
-			params.add( name_for_sub )
-		end
+		# extract strings
+		var args = new Array[String]
+		for p in params do args.add( p.as_arg_to_nit )
 
 		# hook to generated C
-		var return_type : nullable MMType = null
-
-		if signature.return_type != null then
-			return_type = signature.return_type
-		end
-
+		var rnv = signature.return_ni_variable
 		var s = new Buffer
-		if return_type != null then
-			return_type.compile_new_local_ref( "return___nitni", fc, true )
-			fc.decls.add( "val_t return___nit;\n" )
-			s.append( "return___nit = " )
+		if rnv != null then
+			rnv.prepare_for_c( fc )
+			s.append( "{rnv.ni_from_name} = " )
 		end
 
-		s.append( "{super_meth_call}( recv___nit )" )
-
-		s.append( "( {params.join( ", " )} );\n" )
+		s.append( "{super_meth_call}( {signature.recv_ni_variable.as_arg_to_nit} )" )
+		s.append( "( {args.join( ", " )} );\n" )
 
 		fc.exprs.add( s.to_s )
 
-		# verify and return
-		if return_type != null
-		then
-			fc.exprs.add( "{return_type.assign_to_friendly( "return___nitni", "return___nit" )};\n" )
-			fc.exprs.add( "return return___nitni;\n" )
+		# return
+		if rnv != null then
+			fc.exprs.add( "{rnv.ni_type.assign_to_friendly( rnv.ni_to_name, rnv.ni_from_name )};\n" )
+			fc.exprs.add( "return {rnv.ni_to_name};\n" )
 		end
 
 		v.body.append( fc.to_writer )
@@ -177,6 +261,14 @@ redef class MMSrcMethod
 	# It handles variables conversions and verification
 	fun compile_out_to_frontier( v : FrontierVisitor )
 	do
+		# a simple out method can be optimized
+		# To qualify as simple this method must:
+		#	- have no explicit imports (including super and casts)
+		#	- return nothing or return a primitive to C
+		var is_simple = explicit_imports.is_empty and not need_super and
+			explicit_casts.is_empty and (signature.return_type == null or
+			signature.return_type.local_class.primitive_info != null )
+
 		# header
 		v.header.add( "\n/* out/indirect function for {full_name} */\n" )
 		v.header.add( "{out_csignature};\n" ) # incoming types boxed
@@ -186,52 +278,46 @@ redef class MMSrcMethod
 		var fc = new FunctionCompiler( out_csignature )
 
 		# params
-		var params = new List[String]
+		var params = new List[NiVariable]
+		if not is_init then params.add( signature.recv_ni_variable )
+		params.add_all( signature.params )
 
-		if not is_init then
-			var name_for_impl = "recv___nitni"
-			signature.recv.compile_new_local_ref( name_for_impl, fc, true )
-			fc.exprs.add( "{signature.recv.assign_to_friendly( name_for_impl, "recv" )};\n" )
-			params.add( name_for_impl )
-		end
+		var args = new List[String]
 
-		for p in signature.params do
-			var name_for_impl = "{p.name}___nitni"
-			p.mmtype.compile_new_local_ref( name_for_impl, fc, true )
-			fc.exprs.add( "{p.mmtype.assign_to_friendly( name_for_impl, p.name.to_s )};\n" )
-			params.add( name_for_impl )
+		for nv in params do
+			if not is_simple or nv.ni_type.local_class.primitive_info != null then
+				nv.prepare_for_c( fc )
+				args.add( nv.as_arg_to_c )
+			else
+				args.add( "NULL" )
+			end
 		end
 
 		# call to impl
-		var return_type : nullable MMType = null
-
-		if signature.return_type != null then
-			return_type = signature.return_type
-		else if is_init then
-			return_type = local_class.get_type
+		var rnv = signature.return_ni_variable
+		if rnv == null and is_init then
+			rnv = new ReturnVariable( signature.recv )
 		end
 
 		var s = new Buffer
-		if return_type != null then
-			# prepare to receive return but do not stack it here
-			return_type.compile_new_local_ref( "return___nitni", fc, false )
-			fc.decls.add( "val_t return___nit;\n" )
-			s.append( "return___nitni = " )
+		if rnv != null then
+			rnv.prepare_for_nit( fc )
+			s.append( "{rnv.ni_from_name} = " )
 		end
 
-		s.append( "{extern_name.as(not null)}( {params.join( ", " )} );\n" )
+		s.append( "{extern_name.as(not null)}( {args.join( ", " )} );\n" )
 
 		fc.exprs.add( s.to_s )
 
-		if return_type != null then
-			fc.exprs.add( "{return_type.assign_from_friendly( "return___nit", "return___nitni" )};\n" )
+		if rnv != null then
+			fc.exprs.add( "{rnv.ni_type.assign_from_friendly( rnv.ni_to_name, rnv.ni_from_name )};\n" )
 		end
 
 		fc.exprs.add( "nitni_local_ref_clean(  );\n" )
 
 		# return
-		if return_type != null then
-			fc.exprs.add( "return return___nit;\n" )
+		if rnv != null then
+			fc.exprs.add( "return {rnv.ni_to_name};\n" )
 		end
 
 		v.body.append( fc.to_writer )
@@ -251,6 +337,20 @@ redef class MMLocalClass
 end
 
 redef class MMSignature
+	var recv_ni_variable : ReceiverVariable
+	var return_ni_variable : nullable ReturnVariable
+	redef init( params, return_type, recv_type )
+	do
+		super
+
+		if return_type != null then
+			return_ni_variable = new ReturnVariable( return_type )
+		else
+			return_ni_variable = null
+		end
+		recv_ni_variable = new ReceiverVariable( recv_type )
+	end
+
 	fun compile_frontier( v : FrontierVisitor )
 	do
 		# receiver
@@ -507,6 +607,17 @@ redef class MMType
 			end
 		end
 	end
+
+	# compiles a stub local reference for unused references
+	# allows to maintain static typing but avoids malloc and free
+	fun compile_stub_local_ref( var_name : String, fc : FunctionCompiler )
+	do
+		var type_name = friendly_extern_name
+		fc.decls.add( "{type_name} {var_name};\n" )
+		if uses_nitni_ref then
+			fc.exprs.add( "{var_name} = ({type_name})NULL;\n" )
+		end
+	end
 end
 
 redef class MMExplicitImport
@@ -528,58 +639,41 @@ redef class MMExplicitImport
 		var fc = new FunctionCompiler( method.frontier_csignature_from( v.mmmodule, local_class ) )
 
 		# params
-		var params = new Array[String]
+		var params = new Array[NiVariable]
+		if not method.is_init then params.add( signature.recv_ni_variable )
+		params.add_all( signature.params )
 
-		# if not init, add receiver
-		if not method.is_init then
-			var name_for_sub = "recv___nit"
-			fc.decls.add( "val_t {name_for_sub};\n" )
-			fc.exprs.add( "{signature.recv.assign_from_friendly( name_for_sub, "recv" )};\n" )
-			params.add( name_for_sub )
-		end
-
-		for p in signature.params do
-			var name_for_sub = "{p.name}___nit"
-			fc.decls.add( "val_t {name_for_sub};\n" )
-			fc.exprs.add( "{p.mmtype.assign_from_friendly( name_for_sub, p.name.to_s )};\n" )
-			params.add( name_for_sub )
-		end
-
-		# call to nit
-		var return_type : nullable MMType = null
+		for nv in params do nv.prepare_for_nit( fc )
 
 		# handles return of method or constructor
-		if method.signature.return_type != null then
-			return_type = method.signature.return_type
-		else if method.is_init then
-			return_type = method.local_class.get_type
+		var rnv = signature.return_ni_variable
+		if rnv == null and method.is_init then
+			rnv = new ReturnVariable( signature.recv )
 		end
-
 		var s = new Buffer
-		if return_type != null then
-			return_type.compile_new_local_ref( "result___nitni", fc, true )
-			fc.decls.add( "val_t result___nit;\n" )
-			s.append( "result___nit = " )
+		if rnv != null then
+			rnv.prepare_for_c( fc )
+			s.append( "{rnv.ni_from_name} = " )
 		end
 
 		# hook to generated C code
 		if method.is_init then
 			s.append( "NEW_{local_class}_{method.global.intro.cname}" )
 		else
-			s.append( "{method.global.meth_call}( recv___nit )" )
+			s.append( "{method.global.meth_call}( {signature.recv_ni_variable.as_arg_to_nit} )" )
 		end
 
-		s.append( "( {params.join( ", " )} );\n" )
+		var args = new Array[String]
+		for p in params do args.add( p.as_arg_to_nit )
+
+		s.append( "( {args.join( ", " )} );\n" )
 
 		fc.exprs.add( s.to_s )
 
 		# return
-		if return_type != null then
-			var result_name_nitni = "result___nitni"
-			var result_name_nit = "result___nit"
-
-			fc.exprs.add( "{return_type.assign_to_friendly( result_name_nitni, result_name_nit )};\n" )
-			fc.exprs.add( "return {result_name_nitni};\n" )
+		if rnv != null then
+			fc.exprs.add( "{rnv.ni_type.assign_to_friendly( rnv.ni_to_name, rnv.ni_from_name )};\n" )
+			fc.exprs.add( "return {rnv.ni_to_name};\n" )
 		end
 
 		v.body.append( fc.to_writer )

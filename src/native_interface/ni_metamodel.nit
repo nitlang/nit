@@ -196,15 +196,8 @@ redef class MMMethod
 	private fun cparams : List[ String ]
 	do
 		var params = new List[String]
-
-		if not global.is_init then
-			params.add( "val_t recv" )
-		end
-
-		for p in signature.params do
-			params.add( "val_t {p.name}" )
-		end
-
+		if not global.is_init then params.add( "val_t recv" )
+		for p in signature.params do params.add( "val_t {p.name}" )
 		return params
 	end
 
