@@ -120,23 +120,32 @@ class OptionCount
 	end
 end
 
-# Option with one mandatory parameter
+# Option with one parameter (mandatory by default)
 abstract class OptionParameter
 	super Option
 	protected fun convert(str: String): VALUE is abstract
 
+	# Is the parameter mandatory?
+	readable writable var _parameter_mandatory: Bool
+
 	redef fun read_param(it)
 	do
 		super
-		if it.is_ok then
+		if it.is_ok and it.item.first != '-' then
 			value = convert(it.item)
 			it.next
 		else
-			# TODO: What to do?
+			if _parameter_mandatory then
+        stderr.write("Error: parameter expected for option {names.first}\n")
+        exit(1)
+      end
 		end
 	end
 
-	init init_opt(h, d, n) do super
+	init init_opt(h, d, n) do 
+    super
+    _parameter_mandatory = true
+  end
 end
 
 class OptionString
