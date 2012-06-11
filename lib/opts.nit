@@ -25,6 +25,9 @@ abstract class Option
 	# Human readable description of the option
 	readable var _helptext: String 
 
+	# Gathering errors during parsing
+	readable var _errors: Array[String]
+
 	# Is this option mandatory?
 	readable writable var _mandatory: Bool 
 
@@ -53,6 +56,7 @@ abstract class Option
     _read = false
 		_default_value = default
 		_value = default 
+		_errors = new Array[String]
 	end
 
 	# Add new aliases for this option
@@ -136,8 +140,7 @@ abstract class OptionParameter
 			it.next
 		else
 			if _parameter_mandatory then
-        stderr.write("Error: parameter expected for option {names.first}\n")
-        exit(1)
+				_errors.add("parameter expected for option {names.first}")
       end
 		end
 	end
@@ -173,9 +176,9 @@ class OptionEnum
 	do
 		var id = _values.index_of(str)
 			if id == -1 then
-				stderr.write("Error: unrecognized value for option {_names.join(", ")}.\n")
-     	  stderr.write("Expected values are: {_values.join(", ")}.\n")
-        exit(1)
+				var e = "Unrecognized value for option {_names.join(", ")}.\n"
+				e += "Expected values are: {_values.join(", ")}."
+				_errors.add(e)
     	end
 		return id
 	end
@@ -222,6 +225,7 @@ end
 class OptionContext
 	readable var _options: Array[Option] 
 	readable var _rest: Array[String] 
+	readable var _errors: Array[String]
 
 	var _optmap: Map[String, Option]
 	
@@ -274,10 +278,11 @@ class OptionContext
 	
 		for opt in _options do
 			if opt.mandatory and not opt.read then
-				stderr.write("Error: mandatory option {opt.names.join(", ")} not found\n")
-				exit(1)
+				_errors.add("mandatory option {opt.names.join(", ")} not found")
 			end
 		end
+
+		check_errors
 	end
 
 	fun add_option(opts: Option...)
@@ -292,6 +297,7 @@ class OptionContext
 		_options = new Array[Option]
 		_optmap = new HashMap[String, Option]
 		_rest = new Array[String]
+		_errors = new Array[String]
 	end
 
 	private fun build
@@ -300,6 +306,23 @@ class OptionContext
 			for n in o.names do
 				_optmap[n] = o
 			end
+		end
+	end
+
+	private fun check_errors
+	do
+		for o in _options do
+			for e in o.errors do
+				_errors.add(e)
+			end
+		end
+
+		if _errors.length > 0 then
+			stderr.write("Errors occured during parsing:\n")
+			for e in _errors do
+				stderr.write(" - " + e + "\n")
+			end
+			exit(1)
 		end
 	end
 end
