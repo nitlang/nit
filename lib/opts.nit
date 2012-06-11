@@ -177,6 +177,12 @@ class OptionEnum
 	redef fun convert(str)
 	do
 		var id = _values.index_of(str)
+		if id == -1 then
+			# FIXME exit(1) is not a good way to handle errors
+			stderr.write("Error: unrecognized value for option {_names.join(", ")}.\n")
+			stderr.write("Expected values are: {_values.join(", ")}.\n")
+			exit(1)
+		end
 		return id
 	end
 
