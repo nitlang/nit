@@ -96,7 +96,8 @@ while [ $stop = false ]; do
 done
 
 if [ $nolibgc != true ] && test_libgc; then
-	OPTS="$OPTS -DWITH_LIBGC -lgc"
+	OPTS="$OPTS -DWITH_LIBGC"
+	libs="$libs -lgc"
 fi
 
 if [ $cache = "ccache" ]; then
