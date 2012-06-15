@@ -24,7 +24,7 @@ CC="cc" # Default compiler call
 ext="_savo _sav" # Default flavor to reuse
 out="a.out"  # Default output binary filename
 dir="" # Default tmp dir
-nolibgc="true" # Disable boehm libgc?
+nolibgc="false" # Disable boehm libgc?
 CKSUM="cksum" # Tool that perfors checksum. cksum seems to be very portable
 recompile="false"
 
