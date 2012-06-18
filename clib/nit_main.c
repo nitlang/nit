@@ -82,13 +82,8 @@ void exithandler(int s) {
 void initialize_gc_option(void) {
 	/* GC default */
 	char *def;
-#ifdef WITH_LIBGC
-	gc_option = boehm;
-	def = "boehm";
-#else
 	gc_option = nitgc;
 	def = "nitgc";
-#endif
 
 	/* Process GC runtime selection */
 	if (getenv("NIT_GC_OPTION") != NULL) {
