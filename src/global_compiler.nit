@@ -667,6 +667,12 @@ private class GlobalCompilerVisitor
 		mtype = self.anchor(mtype)
 		if value.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
 			return value
+		end
+
+		var valmtype = value.mtype
+		if valmtype isa MNullableType and valmtype.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
+			var res = new RuntimeVariable(value.name, value.mtype, valmtype.mtype)
+			return res
 		else
 			var res = new RuntimeVariable(value.name, value.mtype, mtype)
 			return res
