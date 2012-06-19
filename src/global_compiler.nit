@@ -1403,6 +1403,9 @@ redef class AInternMethPropdef
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
 		end
+		if pname != "==" and pname != "!=" then
+			v.adapt_signature(mpropdef, arguments)
+		end
 		if cname == "Int" then
 			if pname == "output" then
 				v.add("printf(\"%ld\\n\", {arguments.first});")
