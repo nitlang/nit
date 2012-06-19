@@ -545,7 +545,7 @@ private class RuntimeFunction
 			ret = v.resolve_for(ret, arguments.first)
 		end
 		if self.mmethoddef.can_inline(v) and arguments.first.mtype == self.recv then
-			var frame = new Frame(v, self.mmethoddef, arguments.first, arguments)
+			var frame = new Frame(v, self.mmethoddef, self.recv, arguments)
 			frame.returnlabel = v.get_name("RET_LABEL")
 			if ret != null then
 				frame.returnvar = v.new_var(ret)
@@ -624,7 +624,7 @@ private class GlobalCompilerVisitor
 	do
 		if not mtype.need_anchor then return mtype
 		#debug("anchor {mtype} to {self.reciever.as(not null)}:{self.reciever.mtype}")
-		return mtype.anchor_to(self.compiler.mainmodule, self.frame.receiver.mtype.as(MClassType))
+		return mtype.anchor_to(self.compiler.mainmodule, self.frame.receiver)
 	end
 
 	# Add a line in the main part of the generated C
@@ -839,7 +839,7 @@ private class GlobalCompilerVisitor
 	do
 		if not mtype.need_anchor then return mtype
 		#debug("resolve for {mtype} to {recv}:{recv.mcasttype}(declared as {recv.mtype}) (in {self.reciever.to_s}:{self.reciever.mtype})")
-		var res = mtype.resolve_for(recv.mcasttype, self.frame.receiver.mtype.as(MClassType), self.compiler.mainmodule, true)
+		var res = mtype.resolve_for(recv.mcasttype, self.frame.receiver, self.compiler.mainmodule, true)
 		return res
 	end
 
@@ -1214,7 +1214,7 @@ private class Frame
 	var mpropdef: MPropDef
 
 	# The static type of the receiver
-	var receiver: RuntimeVariable
+	var receiver: MClassType
 
 	# Arguments of the method (the first is the receiver)
 	var arguments: Array[RuntimeVariable]
@@ -1282,7 +1282,7 @@ redef class MMethodDef
 		var v = new GlobalCompilerVisitor(compiler)
 		var selfvar = new RuntimeVariable("self", recv, recv)
 		var arguments = new Array[RuntimeVariable]
-		var frame = new Frame(v, self, selfvar, arguments)
+		var frame = new Frame(v, self, recv, arguments)
 		v.frame = frame
 
 		var sig = new Buffer
@@ -1726,7 +1726,7 @@ redef class AAttrPropdef
 		var nexpr = self.n_expr
 		if nexpr != null then
 			var old_frame = v.frame
-			var frame = new Frame(v, self.mpropdef.as(not null), recv, [recv])
+			var frame = new Frame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
 			v.frame = frame
 			var value = v.expr(nexpr, self.mpropdef.static_mtype)
 			v.write_attribute(self.mpropdef.mproperty, recv, value)
@@ -1843,7 +1843,7 @@ end
 redef class ASelfExpr
 	redef fun expr(v)
 	do
-		return v.frame.receiver
+		return v.frame.arguments.first
 	end
 end
 
