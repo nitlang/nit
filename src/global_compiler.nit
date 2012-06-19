@@ -584,6 +584,8 @@ private class RuntimeVariable
 	var mcasttype: MType
 
 	redef fun to_s do return name
+
+	redef fun inspect do return "<{inspect_head} {name}:{mtype}({mcasttype})>"
 end
 
 # Visit the AST to generate the C code.
