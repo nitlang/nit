@@ -1388,6 +1388,7 @@ redef class AConcreteMethPropdef
 		if self.auto_super_inits != null then return false
 		var nblock = self.n_block
 		if nblock == null then return true
+		if (mpropdef.mproperty.name == "==" or mpropdef.mproperty.name == "!=") and mpropdef.mclassdef.mclass.name == "Object" then return true
 		#if nblock isa ABlockExpr and nblock.n_expr.length == 1 then return true
 		return false
 	end
