@@ -6,7 +6,16 @@ intrude import parser_nodes
 private import tables
 
 redef class Token
-    redef readable var _text: String
+    var _text: nullable String
+
+    redef fun text
+    do
+        var res = _text
+        if res != null then return res
+        res = location.text
+	_text = res
+	return res
+    end
 
     fun parser_index: Int is abstract
 end
@@ -17,9 +26,8 @@ redef class TEol
 	return 0
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -30,9 +38,8 @@ redef class TComment
 	return 1
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -43,9 +50,8 @@ redef class TKwmodule
 	return 2
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -58,7 +64,6 @@ redef class TKwimport
 
     init init_tk(loc: Location)
     do
-        _text = once "import"
 		_location = loc
     end
 end
@@ -71,7 +76,6 @@ redef class TKwclass
 
     init init_tk(loc: Location)
     do
-        _text = once "class"
 		_location = loc
     end
 end
@@ -84,7 +88,6 @@ redef class TKwabstract
 
     init init_tk(loc: Location)
     do
-        _text = once "abstract"
 		_location = loc
     end
 end
@@ -97,7 +100,6 @@ redef class TKwinterface
 
     init init_tk(loc: Location)
     do
-        _text = once "interface"
 		_location = loc
     end
 end
@@ -108,9 +110,8 @@ redef class TKwenum
 	return 7
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -123,7 +124,6 @@ redef class TKwspecial
 
     init init_tk(loc: Location)
     do
-        _text = once "special"
 		_location = loc
     end
 end
@@ -136,7 +136,6 @@ redef class TKwend
 
     init init_tk(loc: Location)
     do
-        _text = once "end"
 		_location = loc
     end
 end
@@ -149,7 +148,6 @@ redef class TKwmeth
 
     init init_tk(loc: Location)
     do
-        _text = once "fun"
 		_location = loc
     end
 end
@@ -162,7 +160,6 @@ redef class TKwtype
 
     init init_tk(loc: Location)
     do
-        _text = once "type"
 		_location = loc
     end
 end
@@ -175,7 +172,6 @@ redef class TKwinit
 
     init init_tk(loc: Location)
     do
-        _text = once "init"
 		_location = loc
     end
 end
@@ -188,7 +184,6 @@ redef class TKwredef
 
     init init_tk(loc: Location)
     do
-        _text = once "redef"
 		_location = loc
     end
 end
@@ -201,7 +196,6 @@ redef class TKwis
 
     init init_tk(loc: Location)
     do
-        _text = once "is"
 		_location = loc
     end
 end
@@ -214,7 +208,6 @@ redef class TKwdo
 
     init init_tk(loc: Location)
     do
-        _text = once "do"
 		_location = loc
     end
 end
@@ -227,7 +220,6 @@ redef class TKwreadable
 
     init init_tk(loc: Location)
     do
-        _text = once "readable"
 		_location = loc
     end
 end
@@ -240,7 +232,6 @@ redef class TKwwritable
 
     init init_tk(loc: Location)
     do
-        _text = once "writable"
 		_location = loc
     end
 end
@@ -253,7 +244,6 @@ redef class TKwvar
 
     init init_tk(loc: Location)
     do
-        _text = once "var"
 		_location = loc
     end
 end
@@ -266,7 +256,6 @@ redef class TKwintern
 
     init init_tk(loc: Location)
     do
-        _text = once "intern"
 		_location = loc
     end
 end
@@ -279,7 +268,6 @@ redef class TKwextern
 
     init init_tk(loc: Location)
     do
-        _text = once "extern"
 		_location = loc
     end
 end
@@ -292,7 +280,6 @@ redef class TKwprotected
 
     init init_tk(loc: Location)
     do
-        _text = once "protected"
 		_location = loc
     end
 end
@@ -305,7 +292,6 @@ redef class TKwprivate
 
     init init_tk(loc: Location)
     do
-        _text = once "private"
 		_location = loc
     end
 end
@@ -318,7 +304,6 @@ redef class TKwintrude
 
     init init_tk(loc: Location)
     do
-        _text = once "intrude"
 		_location = loc
     end
 end
@@ -331,7 +316,6 @@ redef class TKwif
 
     init init_tk(loc: Location)
     do
-        _text = once "if"
 		_location = loc
     end
 end
@@ -344,7 +328,6 @@ redef class TKwthen
 
     init init_tk(loc: Location)
     do
-        _text = once "then"
 		_location = loc
     end
 end
@@ -357,7 +340,6 @@ redef class TKwelse
 
     init init_tk(loc: Location)
     do
-        _text = once "else"
 		_location = loc
     end
 end
@@ -370,7 +352,6 @@ redef class TKwwhile
 
     init init_tk(loc: Location)
     do
-        _text = once "while"
 		_location = loc
     end
 end
@@ -383,7 +364,6 @@ redef class TKwloop
 
     init init_tk(loc: Location)
     do
-        _text = once "loop"
 		_location = loc
     end
 end
@@ -396,7 +376,6 @@ redef class TKwfor
 
     init init_tk(loc: Location)
     do
-        _text = once "for"
 		_location = loc
     end
 end
@@ -409,7 +388,6 @@ redef class TKwin
 
     init init_tk(loc: Location)
     do
-        _text = once "in"
 		_location = loc
     end
 end
@@ -422,7 +400,6 @@ redef class TKwand
 
     init init_tk(loc: Location)
     do
-        _text = once "and"
 		_location = loc
     end
 end
@@ -435,7 +412,6 @@ redef class TKwor
 
     init init_tk(loc: Location)
     do
-        _text = once "or"
 		_location = loc
     end
 end
@@ -448,7 +424,6 @@ redef class TKwnot
 
     init init_tk(loc: Location)
     do
-        _text = once "not"
 		_location = loc
     end
 end
@@ -461,7 +436,6 @@ redef class TKwreturn
 
     init init_tk(loc: Location)
     do
-        _text = once "return"
 		_location = loc
     end
 end
@@ -474,7 +448,6 @@ redef class TKwcontinue
 
     init init_tk(loc: Location)
     do
-        _text = once "continue"
 		_location = loc
     end
 end
@@ -487,7 +460,6 @@ redef class TKwbreak
 
     init init_tk(loc: Location)
     do
-        _text = once "break"
 		_location = loc
     end
 end
@@ -500,7 +472,6 @@ redef class TKwabort
 
     init init_tk(loc: Location)
     do
-        _text = once "abort"
 		_location = loc
     end
 end
@@ -513,7 +484,6 @@ redef class TKwassert
 
     init init_tk(loc: Location)
     do
-        _text = once "assert"
 		_location = loc
     end
 end
@@ -526,7 +496,6 @@ redef class TKwnew
 
     init init_tk(loc: Location)
     do
-        _text = once "new"
 		_location = loc
     end
 end
@@ -539,7 +508,6 @@ redef class TKwisa
 
     init init_tk(loc: Location)
     do
-        _text = once "isa"
 		_location = loc
     end
 end
@@ -552,7 +520,6 @@ redef class TKwonce
 
     init init_tk(loc: Location)
     do
-        _text = once "once"
 		_location = loc
     end
 end
@@ -565,7 +532,6 @@ redef class TKwsuper
 
     init init_tk(loc: Location)
     do
-        _text = once "super"
 		_location = loc
     end
 end
@@ -578,7 +544,6 @@ redef class TKwself
 
     init init_tk(loc: Location)
     do
-        _text = once "self"
 		_location = loc
     end
 end
@@ -591,7 +556,6 @@ redef class TKwtrue
 
     init init_tk(loc: Location)
     do
-        _text = once "true"
 		_location = loc
     end
 end
@@ -604,7 +568,6 @@ redef class TKwfalse
 
     init init_tk(loc: Location)
     do
-        _text = once "false"
 		_location = loc
     end
 end
@@ -617,7 +580,6 @@ redef class TKwnull
 
     init init_tk(loc: Location)
     do
-        _text = once "null"
 		_location = loc
     end
 end
@@ -630,7 +592,6 @@ redef class TKwas
 
     init init_tk(loc: Location)
     do
-        _text = once "as"
 		_location = loc
     end
 end
@@ -643,7 +604,6 @@ redef class TKwnullable
 
     init init_tk(loc: Location)
     do
-        _text = once "nullable"
 		_location = loc
     end
 end
@@ -656,7 +616,6 @@ redef class TKwisset
 
     init init_tk(loc: Location)
     do
-        _text = once "isset"
 		_location = loc
     end
 end
@@ -669,7 +628,6 @@ redef class TKwlabel
 
     init init_tk(loc: Location)
     do
-        _text = once "label"
 		_location = loc
     end
 end
@@ -682,7 +640,6 @@ redef class TKwdebug
 
     init init_tk(loc: Location)
     do
-        _text = once "__debug__"
 		_location = loc
     end
 end
@@ -695,7 +652,6 @@ redef class TOpar
 
     init init_tk(loc: Location)
     do
-        _text = once "("
 		_location = loc
     end
 end
@@ -708,7 +664,6 @@ redef class TCpar
 
     init init_tk(loc: Location)
     do
-        _text = once ")"
 		_location = loc
     end
 end
@@ -721,7 +676,6 @@ redef class TObra
 
     init init_tk(loc: Location)
     do
-        _text = once "["
 		_location = loc
     end
 end
@@ -734,7 +688,6 @@ redef class TCbra
 
     init init_tk(loc: Location)
     do
-        _text = once "]"
 		_location = loc
     end
 end
@@ -747,7 +700,6 @@ redef class TComma
 
     init init_tk(loc: Location)
     do
-        _text = once ","
 		_location = loc
     end
 end
@@ -760,7 +712,6 @@ redef class TColumn
 
     init init_tk(loc: Location)
     do
-        _text = once ":"
 		_location = loc
     end
 end
@@ -773,7 +724,6 @@ redef class TQuad
 
     init init_tk(loc: Location)
     do
-        _text = once "::"
 		_location = loc
     end
 end
@@ -786,7 +736,6 @@ redef class TAssign
 
     init init_tk(loc: Location)
     do
-        _text = once "="
 		_location = loc
     end
 end
@@ -799,7 +748,6 @@ redef class TPluseq
 
     init init_tk(loc: Location)
     do
-        _text = once "+="
 		_location = loc
     end
 end
@@ -812,7 +760,6 @@ redef class TMinuseq
 
     init init_tk(loc: Location)
     do
-        _text = once "-="
 		_location = loc
     end
 end
@@ -825,7 +772,6 @@ redef class TDotdotdot
 
     init init_tk(loc: Location)
     do
-        _text = once "..."
 		_location = loc
     end
 end
@@ -838,7 +784,6 @@ redef class TDotdot
 
     init init_tk(loc: Location)
     do
-        _text = once ".."
 		_location = loc
     end
 end
@@ -851,7 +796,6 @@ redef class TDot
 
     init init_tk(loc: Location)
     do
-        _text = once "."
 		_location = loc
     end
 end
@@ -864,7 +808,6 @@ redef class TPlus
 
     init init_tk(loc: Location)
     do
-        _text = once "+"
 		_location = loc
     end
 end
@@ -877,7 +820,6 @@ redef class TMinus
 
     init init_tk(loc: Location)
     do
-        _text = once "-"
 		_location = loc
     end
 end
@@ -890,7 +832,6 @@ redef class TStar
 
     init init_tk(loc: Location)
     do
-        _text = once "*"
 		_location = loc
     end
 end
@@ -903,7 +844,6 @@ redef class TSlash
 
     init init_tk(loc: Location)
     do
-        _text = once "/"
 		_location = loc
     end
 end
@@ -916,7 +856,6 @@ redef class TPercent
 
     init init_tk(loc: Location)
     do
-        _text = once "%"
 		_location = loc
     end
 end
@@ -929,7 +868,6 @@ redef class TEq
 
     init init_tk(loc: Location)
     do
-        _text = once "=="
 		_location = loc
     end
 end
@@ -942,7 +880,6 @@ redef class TNe
 
     init init_tk(loc: Location)
     do
-        _text = once "!="
 		_location = loc
     end
 end
@@ -955,7 +892,6 @@ redef class TLt
 
     init init_tk(loc: Location)
     do
-        _text = once "<"
 		_location = loc
     end
 end
@@ -968,7 +904,6 @@ redef class TLe
 
     init init_tk(loc: Location)
     do
-        _text = once "<="
 		_location = loc
     end
 end
@@ -981,7 +916,6 @@ redef class TLl
 
     init init_tk(loc: Location)
     do
-        _text = once "<<"
 		_location = loc
     end
 end
@@ -994,7 +928,6 @@ redef class TGt
 
     init init_tk(loc: Location)
     do
-        _text = once ">"
 		_location = loc
     end
 end
@@ -1007,7 +940,6 @@ redef class TGe
 
     init init_tk(loc: Location)
     do
-        _text = once ">="
 		_location = loc
     end
 end
@@ -1020,7 +952,6 @@ redef class TGg
 
     init init_tk(loc: Location)
     do
-        _text = once ">>"
 		_location = loc
     end
 end
@@ -1033,7 +964,6 @@ redef class TStarship
 
     init init_tk(loc: Location)
     do
-        _text = once "<=>"
 		_location = loc
     end
 end
@@ -1046,7 +976,6 @@ redef class TBang
 
     init init_tk(loc: Location)
     do
-        _text = once "!"
 		_location = loc
     end
 end
@@ -1057,9 +986,8 @@ redef class TClassid
 	return 80
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1070,9 +998,8 @@ redef class TId
 	return 81
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1083,9 +1010,8 @@ redef class TAttrid
 	return 82
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1096,9 +1022,8 @@ redef class TNumber
 	return 83
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1109,9 +1034,8 @@ redef class TFloat
 	return 84
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1122,9 +1046,8 @@ redef class TChar
 	return 85
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1135,9 +1058,8 @@ redef class TString
 	return 86
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1148,9 +1070,8 @@ redef class TStartString
 	return 87
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1161,9 +1082,8 @@ redef class TMidString
 	return 88
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1174,9 +1094,8 @@ redef class TEndString
 	return 89
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1187,9 +1106,8 @@ redef class TBadChar
 	return 90
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1200,9 +1118,8 @@ redef class TBadString
 	return 91
     end
 
-    init init_tk(text: String, loc: Location)
+    init init_tk(loc: Location)
     do
-        _text = text
 		_location = loc
     end
 end
@@ -1386,16 +1303,13 @@ class Lexer
 						return null
 					end
 					if accept_token == 1 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TEol.init_tk(token_text, location)
+						return new TEol.init_tk(location)
 					end
 					if accept_token == 2 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TComment.init_tk(token_text, location)
+						return new TComment.init_tk(location)
 					end
 					if accept_token == 3 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TKwmodule.init_tk(token_text, location)
+						return new TKwmodule.init_tk(location)
 					end
 					if accept_token == 4 then
 						return new TKwimport.init_tk(location)
@@ -1410,8 +1324,7 @@ class Lexer
 						return new TKwinterface.init_tk(location)
 					end
 					if accept_token == 8 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TKwenum.init_tk(token_text, location)
+						return new TKwenum.init_tk(location)
 					end
 					if accept_token == 9 then
 						return new TKwspecial.init_tk(location)
@@ -1630,52 +1543,40 @@ class Lexer
 						return new TBang.init_tk(location)
 					end
 					if accept_token == 81 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TClassid.init_tk(token_text, location)
+						return new TClassid.init_tk(location)
 					end
 					if accept_token == 82 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TId.init_tk(token_text, location)
+						return new TId.init_tk(location)
 					end
 					if accept_token == 83 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TAttrid.init_tk(token_text, location)
+						return new TAttrid.init_tk(location)
 					end
 					if accept_token == 84 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TNumber.init_tk(token_text, location)
+						return new TNumber.init_tk(location)
 					end
 					if accept_token == 85 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TFloat.init_tk(token_text, location)
+						return new TFloat.init_tk(location)
 					end
 					if accept_token == 86 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TChar.init_tk(token_text, location)
+						return new TChar.init_tk(location)
 					end
 					if accept_token == 87 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TString.init_tk(token_text, location)
+						return new TString.init_tk(location)
 					end
 					if accept_token == 88 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TStartString.init_tk(token_text, location)
+						return new TStartString.init_tk(location)
 					end
 					if accept_token == 89 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TMidString.init_tk(token_text, location)
+						return new TMidString.init_tk(location)
 					end
 					if accept_token == 90 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TEndString.init_tk(token_text, location)
+						return new TEndString.init_tk(location)
 					end
 					if accept_token == 91 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TBadChar.init_tk(token_text, location)
+						return new TBadChar.init_tk(location)
 					end
 					if accept_token == 92 then
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new TBadString.init_tk(token_text, location)
+						return new TBadString.init_tk(location)
 					end
 				else
 					_stream_pos = sp

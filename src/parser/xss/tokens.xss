@@ -36,7 +36,16 @@ $ end template
 $ template make_tokens()
 
 redef class Token
-    redef readable var _text: String
+    var _text: nullable String
+
+    redef fun text
+    do
+        var res = _text
+        if res != null then return res
+        res = location.text
+	_text = res
+	return res
+    end
 
     fun parser_index: Int is abstract
 end
@@ -49,15 +58,8 @@ redef class @ename
 	return @parser_index
     end
 
-$ if {not(@text)}
-    init init_tk(text: String, loc: Location)
-    do
-        _text = text
-$ else
     init init_tk(loc: Location)
     do
-        _text = once "${sablecc:string2escaped_unicode(@text)}"
-$ end
 		_location = loc
     end
 end
