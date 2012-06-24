@@ -104,6 +104,7 @@ class Parser
 				return new Start(null, token)
 			end
 
+			var state = self.state
 			var index = token.parser_index
 			var action_type = parser_action(state, 2)
 			var action_value = parser_action(state, 3)
