@@ -180,12 +180,7 @@ $        foreach transition in {transition[@from!=@to]}
 $        end
 $    end if
 $    if {@parser_index}
-$        if {not(@text)}
-						var token_text = string.substring(start_stream_pos, accept_length)
-						return new @ename.init_tk(token_text, location)
-$        else
 						return new @ename.init_tk(location)
-$        end
 $    else
 						return null
 $    end

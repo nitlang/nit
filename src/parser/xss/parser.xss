@@ -116,6 +116,7 @@ class Parser
 				return new Start(null, token)
 			end
 
+			var state = self.state
 			var index = token.parser_index
 			var action_type = parser_action(state, 2)
 			var action_value = parser_action(state, 3)
@@ -205,20 +206,24 @@ private class ComputeProdLocationVisitor
 			_last_location = loc
 
 			# Add a first token to productions that need one
-			for no in _need_first_prods do
-				no._first_location = loc
+			if not _need_first_prods.is_empty then
+				for no in _need_first_prods do
+					no._first_location = loc
+				end
+				_need_first_prods.clear
 			end
-			_need_first_prods.clear
 
 			# Find location for already visited epsilon production that need one
-			for no in _need_after_epsilons do
-				# Epsilon production that is in the middle of a non-epsilon production
-				# The epsilon production has both a token before and after it
-				var endl = loc
-				var startl = no._last_location
-				no.location = new Location(endl.file, startl.line_end, endl.line_start, startl.column_end, endl.column_start)
+			if not _need_after_epsilons.is_empty then
+				for no in _need_after_epsilons do
+					# Epsilon production that is in the middle of a non-epsilon production
+					# The epsilon production has both a token before and after it
+					var endl = loc
+					var startl = no._last_location
+					no.location = new Location(endl.file, startl.line_end, endl.line_start, startl.column_end, endl.column_start)
+				end
+				_need_after_epsilons.clear
 			end
-			_need_after_epsilons.clear
 		else
 			assert n isa Prod
 			_need_first_prods.add(n)
@@ -237,19 +242,23 @@ private class ComputeProdLocationVisitor
 
 				n.location = new Location(startl.file, startl.line_start, endl.line_end, startl.column_start, endl.column_end)
 
-				for no in _need_before_epsilons do
-					# Epsilon production that starts the current non-epsilon production
-					#var startl = n.location
-					no.location = new Location(startl.file, startl.line_start, startl.line_start, startl.column_start, startl.column_start)
+				if not _need_before_epsilons.is_empty then
+					var loc = new Location(startl.file, startl.line_start, startl.line_start, startl.column_start, startl.column_start)
+					for no in _need_before_epsilons do
+						# Epsilon production that starts the current non-epsilon production
+						no.location = loc
+					end
+					_need_before_epsilons.clear
 				end
-				_need_before_epsilons.clear
 
-				for no in _need_after_epsilons do
-					# Epsilon production that finishes the current non-epsilon production
-					#var endl = n.location
-					no.location = new Location(endl.file, endl.line_end, endl.line_end, endl.column_end, endl.column_end)
+				if not _need_after_epsilons.is_empty then
+					var loc = new Location(endl.file, endl.line_end, endl.line_end, endl.column_end, endl.column_end)
+					for no in _need_after_epsilons do
+						# Epsilon production that finishes the current non-epsilon production
+						no.location = loc
+					end
+					_need_after_epsilons.clear
 				end
-				_need_after_epsilons.clear
 			else
 				# No first token means epsilon production (or "throw all my tokens" production)
 				# So, it must be located it later
