@@ -35,10 +35,13 @@ redef class ToolContext
 	# --no-cc
 	var opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
 
+	# --hardening
+	var opt_hardening: OptionBool = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
+
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_no_cc)
+		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_hardening)
 	end
 end
 
@@ -221,6 +224,9 @@ private class GlobalCompiler
 
 	# The modeulbuilder used to know the model and the AST
 	var modelbuilder: ModelBuilder
+
+	# Is hardening asked (see --hardening)
+	fun hardening: Bool do return self.modelbuilder.toolcontext.opt_hardening.value
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, modelbuilder: ModelBuilder)
 	do
@@ -902,6 +908,7 @@ private class GlobalCompilerVisitor
 			self.add "\} else"
 		end
 		self.add("switch({args.first}->classid) \{")
+		var last = types.last
 		var defaultpropdef: nullable MMethodDef = null
 		for t in types do
 			var propdefs = m.lookup_definitions(self.compiler.mainmodule, t)
@@ -914,7 +921,11 @@ private class GlobalCompilerVisitor
 				defaultpropdef = propdef
 				continue
 			end
-			self.add("case {self.compiler.classid(t)}: /* test {t} */")
+			if not self.compiler.hardening and t == last and defaultpropdef == null then
+				self.add("default: /* test {t} */")
+			else
+				self.add("case {self.compiler.classid(t)}: /* test {t} */")
+			end
 			var res2 = self.call(propdef, t, args)
 			if res != null then self.assign(res, res2.as(not null))
 			self.add "break;"
@@ -923,7 +934,7 @@ private class GlobalCompilerVisitor
 			self.add("default: /* default is Object */")
 			var res2 = self.call(defaultpropdef, defaultpropdef.mclassdef.bound_mtype, args)
 			if res != null then self.assign(res, res2.as(not null))
-		else
+		else if self.compiler.hardening then
 			self.add("default: /* bug */")
 			self.bugtype(args.first)
 		end
@@ -1017,8 +1028,13 @@ private class GlobalCompilerVisitor
 		end
 		self.add("/* read {a} on {recv.mcasttype} */")
 		self.add("switch({recv}->classid) \{")
+		var last = types.last
 		for t in types do
-			self.add("case {self.compiler.classid(t)}:")
+			if not self.compiler.hardening and t == last then
+				self.add("default: /*{self.compiler.classid(t)}*/")
+			else
+				self.add("case {self.compiler.classid(t)}:")
+			end
 			var recv2 = self.autoadapt(recv, t)
 			var ta = a.intro.static_mtype.as(not null)
 			ta = self.resolve_for(ta, recv2)
@@ -1035,8 +1051,10 @@ private class GlobalCompilerVisitor
 			self.assign(res, res2)
 			self.add("break;")
 		end
-		self.add("default: /* Bug */")
-		self.bugtype(recv)
+		if self.compiler.hardening then
+			self.add("default: /* Bug */")
+			self.bugtype(recv)
+		end
 		self.add("\}")
 
 		return res
@@ -1053,16 +1071,23 @@ private class GlobalCompilerVisitor
 		end
 		self.add("/* write {a} on {recv.mcasttype} */")
 		self.add("switch({recv}->classid) \{")
+		var last = types.last
 		for t in types do
-			self.add("case {self.compiler.classid(t)}:")
+			if not self.compiler.hardening and t == last then
+				self.add("default: /*{self.compiler.classid(t)}*/")
+			else
+				self.add("case {self.compiler.classid(t)}:")
+			end
 			var recv2 = self.autoadapt(recv, t)
 			var ta = a.intro.static_mtype.as(not null)
 			ta = self.resolve_for(ta, recv2)
 			self.add("((struct {t.c_name}*){recv})->{a.intro.c_name} = {self.autobox(value, ta)};")
 			self.add("break;")
 		end
-		self.add("default: /* Bug*/")
-		self.bugtype(recv)
+		if self.compiler.hardening then
+			self.add("default: /* Bug*/")
+			self.bugtype(recv)
+		end
 		self.add("\}")
 	end
 

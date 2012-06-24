@@ -12,3 +12,4 @@
   --only-metamodel        Stop after meta-model processing
   -o, --output            Output file
   --no-cc                 Do not invoke C compiler
+  --hardening             Generate contracts in the C code against bugs in the compiler
