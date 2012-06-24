@@ -56,6 +56,21 @@ class Location
 		_column_end = column_e
 	end
 
+	# The verbatim associated text in the source-file
+	fun text: String
+	do
+		var res = self.text_cache
+		if res != null then return res
+		var l = self
+		var pstart = l.file.line_starts[l.line_start-1] + l.column_start-1
+		var pend = l.file.line_starts[l.line_end-1] + l.column_end-1
+		res = l.file.string.substring(pstart, pend-pstart+1)
+		self.text_cache = res
+		return res
+	end
+
+	private var text_cache: nullable String
+
 	init with_file(f: SourceFile) do init(f,0,0,0,0)
 
 	redef fun ==(other: nullable Object): Bool do
