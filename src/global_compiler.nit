@@ -1251,7 +1251,8 @@ redef class MMethodDef
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
 			return npropdef.can_inline
 		else if self.mproperty.name == "init" then
-			return false
+			# Automatic free init is always inlined since it is empty or contains only attribtes assigments
+			return true
 		else
 			abort
 		end
