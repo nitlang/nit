@@ -590,6 +590,10 @@ private class RuntimeVariable
 	# The current casted type of the variable (as known in Nit)
 	var mcasttype: MType
 
+	# If the variable exaclty a mcasttype?
+	# false (usual value) means that the variable is a mcasttype or a subtype.
+	var is_exact: Bool = false
+
 	redef fun to_s do return name
 
 	redef fun inspect do return "<{inspect_head} {name}:{mtype}({mcasttype})>"
@@ -828,6 +832,12 @@ private class GlobalCompilerVisitor
 	fun collect_types(recv: RuntimeVariable): Array[MClassType]
 	do
 		var mtype = recv.mcasttype
+		if recv.is_exact then
+			assert mtype isa MClassType
+			assert self.compiler.runtime_type_analysis.live_types.has(mtype)
+			var types = [mtype]
+			return types
+		end
 		var cache = self.collect_types_cache
 		if cache.has_key(mtype) then
 			return cache[mtype]
@@ -1099,6 +1109,7 @@ private class GlobalCompilerVisitor
 			debug "problem: {mtype} was detected dead"
 		end
 		var res = self.new_expr("NEW_{mtype.c_name}()", mtype)
+		res.is_exact = true
 		return res
 	end
 
@@ -1193,6 +1204,7 @@ private class GlobalCompilerVisitor
 		var res = self.init_instance(self.get_class("Array").get_mtype([elttype]))
 		self.add("\{ /* {res} = array_instance Array[{elttype}] */")
 		var nat = self.new_var(self.get_class("NativeArray").get_mtype([elttype]))
+		nat.is_exact = true
 		self.add("{nat} = GC_MALLOC({array.length} * sizeof({elttype.ctype}));")
 		for i in [0..array.length[ do
 			var r = self.autobox(array[i], elttype)
