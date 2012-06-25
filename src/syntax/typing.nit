@@ -1622,9 +1622,6 @@ redef class ASuperInitCall
 				if c == prev_class then
 					prev_class = null
 				else if c == cla then
-					if prev_class != null then
-						v.error(self, "Error: Constructor of {c} must be invoked before constructor of {prev_class}")
-					end
 					esic.add(property)
 					break
 				end
