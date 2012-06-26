@@ -140,7 +140,7 @@ abstract class OptionParameter
 			it.next
 		else
 			if _parameter_mandatory then
-				_errors.add("parameter expected for option {names.first}")
+				_errors.add("Parameter expected for option {names.first}.")
       end
 		end
 	end
@@ -294,11 +294,9 @@ class OptionContext
 	
 		for opt in _options do
 			if opt.mandatory and not opt.read then
-				_errors.add("mandatory option {opt.names.join(", ")} not found")
+				_errors.add("Mandatory option {opt.names.join(", ")} not found.")
 			end
 		end
-
-		check_errors
 	end
 
 	fun add_option(opts: Option...)
@@ -325,20 +323,18 @@ class OptionContext
 		end
 	end
 
-	private fun check_errors
+	fun get_errors: Array[String]
 	do
+		var errors: Array[String] = new Array[String]
+
+		errors.add_all(_errors)
+
 		for o in _options do
 			for e in o.errors do
-				_errors.add(e)
+				errors.add(e)
 			end
 		end
 
-		if _errors.length > 0 then
-			stderr.write("Errors occured during parsing:\n")
-			for e in _errors do
-				stderr.write(" - " + e + "\n")
-			end
-			exit(1)
-		end
+		return errors
 	end
 end
