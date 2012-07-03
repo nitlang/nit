@@ -86,8 +86,8 @@ private class NaiveInterpreter
 	end
 
 	# Is a return executed?
-	# Set this mark to skip the evaluation until the end of the current method
-	var returnmark: Bool = false
+	# Set this mark to skip the evaluation until the end of the specified method frame
+	var returnmark: nullable Frame = null
 
 	# Is a break executed?
 	# Set this mark to skip the evaluation until a labeled statement catch it with `is_break'
@@ -99,7 +99,7 @@ private class NaiveInterpreter
 
 	# Is a return or a break or a continue executed?
 	# Use this function to know if you must skip the evaluation of statements
-	fun is_escaping: Bool do return returnmark or breakmark != null or continuemark != null
+	fun is_escaping: Bool do return returnmark != null or breakmark != null or continuemark != null
 
 	# The value associated with the current return/break/continue, if any.
 	# Set the value when you set a escapemark.
@@ -510,10 +510,13 @@ redef class AConcreteMethPropdef
 
 		v.stmt(self.n_block)
 		v.frames.shift
-		v.returnmark = false
-		var res = v.escapevalue
-		v.escapevalue = null
-		return res
+		if v.returnmark == f then
+			v.returnmark = null
+			var res = v.escapevalue
+			v.escapevalue = null
+			return res
+		end
+		return null
 	end
 end
 
@@ -935,7 +938,7 @@ redef class AReturnExpr
 			var i = v.expr(ne)
 			v.escapevalue = i
 		end
-		v.returnmark = true
+		v.returnmark = v.frame
 	end
 end
 
