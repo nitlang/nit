@@ -4,7 +4,6 @@
 */
 
 #include "curses.nit.h"
-#include <time.h>
 #include <poll.h>
 
 /*
@@ -64,14 +63,6 @@ C implementation of curses::Window::endwin
 void Window_endwin___impl( Window recv )
 {
 	endwin();
-}
-
-/*
-C implementation of curses::Sys::nanosleep
-*/
-void Sys_nanosleep___impl( Sys recv, bigint sec, bigint nanosec ) {
-	const struct timespec req = {sec, nanosec};
-	nanosleep(&req, NULL);
 }
 
 /*

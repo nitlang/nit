@@ -30,12 +30,6 @@ extern Window
 	fun endwin is extern
 end
 
-redef class Sys
-	# Wait a specific number of second and nanoseconds
-	# FIXME: should not be in the curses module
-	fun nanosleep(sec, nanosec: Int) is extern
-end
-
 redef class Stdin
 	# Is these something to read? (non blocking)
 	# FIXME: should not be in the curses module

@@ -1,5 +1,3 @@
-#ifndef __TIME_NIT_H
-#define __TIME_NIT_H
 /* This file is part of NIT ( http://www.nitlanguage.org ).
  *
  * Copyright 2008 Floréal Morandat <morandat@lirmm.fr> 
@@ -13,8 +11,9 @@
  * another product.
  */
 
-#include <time.h>
-#define kernel_Any_Any_get_time_0(self) time(NULL)
-#define std_nanosleep(self, sec, nanosec) std_nanosleep_(sec, nanosec);
-void std_nanosleep_(long sec, long nanosec);
-#endif
+#include "time_nit.h"
+
+void std_nanosleep_(long sec,long nanosec) {
+	const struct timespec req = {sec, nanosec};
+	nanosleep(&req, NULL);
+}
