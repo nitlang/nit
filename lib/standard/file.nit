@@ -166,6 +166,10 @@ class Stdin
 		_path = "/dev/stdin"
 		prepare_buffer(1)
 	end
+
+	# Is these something to read? (non blocking)
+	# FIXME: should be generalized
+	fun poll_in: Bool is extern "file_stdin_poll_in"
 end
 
 class Stdout
@@ -344,7 +348,7 @@ private extern NativeFile
 end
 
 # Standard input.
-fun stdin: IFStream do return once new Stdin
+fun stdin: Stdin do return once new Stdin
 
 # Standard output.
 fun stdout: OFStream do return once new Stdout

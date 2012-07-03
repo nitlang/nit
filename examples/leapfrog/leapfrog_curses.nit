@@ -121,7 +121,7 @@ redef class Scene
 		sys.nanosleep(0, 48000000)
 
 		# Keyboard input
-		while stdin.as(Stdin).poll_in do
+		while stdin.poll_in do
 			if stdin.eof then return
 			var c = stdin.read_char
 			if c == 'q'.ascii then

@@ -16,5 +16,4 @@ void Window_refresh___impl( Window recv );
 void Window_wclear___impl( Window recv );
 void Window_delwin___impl( Window recv );
 void Window_endwin___impl( Window recv );
-int Stdin_poll_in___impl( Stdin recv );
 #endif

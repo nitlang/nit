@@ -4,7 +4,6 @@
 */
 
 #include "curses.nit.h"
-#include <poll.h>
 
 /*
 C implementation of curses::Window::init
@@ -63,18 +62,4 @@ C implementation of curses::Window::endwin
 void Window_endwin___impl( Window recv )
 {
 	endwin();
-}
-
-/*
-C implementation of curses::Stdin::poll_in
-*/
-int Stdin_poll_in___impl( Stdin recv ) {
-	struct pollfd fd = {0, POLLIN, 0};
-	int res = poll(&fd, 1, 0);
-	if (res == -1) {
-		endwin();
-		perror("Error poll stdin");
-		exit(EXIT_FAILURE);
-	}
-	return res > 0;
 }

@@ -29,9 +29,3 @@ extern Window
 	fun delwin is extern
 	fun endwin is extern
 end
-
-redef class Stdin
-	# Is these something to read? (non blocking)
-	# FIXME: should not be in the curses module
-	fun poll_in: Bool is extern
-end
