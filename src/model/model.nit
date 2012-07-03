@@ -1083,6 +1083,8 @@ class MSignature
 	# The each parameter (in order)
 	var mparameters: Array[MParameter]
 
+	var mclosures = new Array[MParameter]
+
 	# The return type (null for a procedure)
 	var return_mtype: nullable MType
 
@@ -1146,6 +1148,9 @@ class MSignature
 			ret = ret.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 		end
 		var res = new MSignature(params, ret)
+		for p in self.mclosures do
+			res.mclosures.add(p.resolve_for(mtype, anchor, mmodule, cleanup_virtual))
+		end
 		return res
 	end
 end

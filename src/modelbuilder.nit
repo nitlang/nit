@@ -1008,8 +1008,31 @@ redef class ASignature
 			if self.ret_type == null then return false # Skip errir
 		end
 
+		for nclosure in self.n_closure_decls do
+			if not nclosure.n_signature.visit_signature(modelbuilder, nclassdef) then return false
+		end
+
 		self.is_visited = true
 		return true
+	end
+
+	# Build a visited signature
+	fun build_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef): nullable MSignature
+	do
+		if param_names.length != param_types.length then
+			# Some parameters are typed, other parameters are not typed.
+			modelbuilder.warning(self.n_params[param_types.length], "Error: Untyped parameter `{param_names[param_types.length]}'.")
+			return null
+		end
+
+		var mparameters = new Array[MParameter]
+		for i in [0..param_names.length[ do
+			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
+			mparameters.add(mparameter)
+		end
+
+		var msignature = new MSignature(mparameters, ret_type)
+		return msignature
 	end
 end
 
@@ -1145,8 +1168,19 @@ redef class AMethPropdef
 			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
 			mparameters.add(mparameter)
 		end
+
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
+
+		if nsig != null then
+			for nclosure in nsig.n_closure_decls do
+				var clos_signature = nclosure.n_signature.build_signature(modelbuilder, nclassdef)
+				if clos_signature == null then return
+				var mparameter = new MParameter(nclosure.n_id.text, clos_signature, false)
+				msignature.mclosures.add(mparameter)
+			end
+		end
+
 	end
 
 	redef fun check_signature(modelbuilder, nclassdef)
