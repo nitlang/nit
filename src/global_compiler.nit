@@ -942,10 +942,8 @@ private class GlobalCompilerVisitor
 		if m.mclassdef.mclass.name == "Object" and recvtype.ctype == "val*" then
 			recvtype = m.mclassdef.bound_mtype
 		end
-		var ars = new Array[RuntimeVariable]
 		var recv = self.autobox(args.first, recvtype)
 		recv = self.autoadapt(recv, recvtype)
-		ars.add(recv)
 
 		var vararg_rank = m.msignature.vararg_rank
 		if vararg_rank >= 0 then
@@ -972,19 +970,28 @@ private class GlobalCompilerVisitor
 			for i in [vararg_lastrank+1..rawargs.length-1[ do
 				args.add(rawargs[i+1])
 			end
+		else
+			args = args.to_a
 		end
 		assert args.length == m.msignature.arity + 1 # because of self
 
+		args.first = recv
+		self.adapt_signature(m, args)
+		var rm = new RuntimeFunction(m, recvtype)
+		return rm.call(self, args)
+	end
+
+	fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable])
+	do
+		var recv = args.first
 		for i in [0..m.msignature.arity[ do
 			var t = m.msignature.parameter_mtypes[i]
-			if i == vararg_rank then
+			if i == m.msignature.vararg_rank then
 				t = args[i+1].mtype
 			end
 			t = self.resolve_for(t, recv)
-			ars.add(self.autobox(args[i+1], t))
+			args[i+1] = self.autobox(args[i+1], t)
 		end
-		var rm = new RuntimeFunction(m, recvtype)
-		return rm.call(self, ars)
 	end
 
 	fun bugtype(recv: RuntimeVariable)
