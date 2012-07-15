@@ -959,7 +959,7 @@ private class GlobalCompilerVisitor
 				vararg.add(rawargs[i+1])
 			end
 			# FIXME: its it to late to determine the vararg type, this should have been done during a previous analysis
-			var elttype = m.msignature.parameter_mtypes[vararg_rank]
+			var elttype = m.msignature.mparameters[vararg_rank].mtype
 			elttype = self.resolve_for(elttype, recv)
 			args.add(self.array_instance(vararg, elttype))
 
@@ -970,7 +970,7 @@ private class GlobalCompilerVisitor
 		assert args.length == m.msignature.arity + 1 # because of self
 
 		for i in [0..m.msignature.arity[ do
-			var t = m.msignature.parameter_mtypes[i]
+			var t = m.msignature.mparameters[i].mtype
 			if i == vararg_rank then
 				t = args[i+1].mtype
 			end
@@ -1292,7 +1292,7 @@ redef class MMethodDef
 		comment.append("(self: {recv}")
 		arguments.add(selfvar)
 		for i in [0..self.msignature.arity[ do
-			var mtype = self.msignature.parameter_mtypes[i]
+			var mtype = self.msignature.mparameters[i].mtype
 			if i == self.msignature.vararg_rank then
 				mtype = v.get_class("Array").get_mtype([mtype])
 			end
@@ -1939,9 +1939,20 @@ redef class AForExpr
 		var ok = v.send(v.get_property("is_ok", it.mtype), [it])
 		assert ok != null
 		v.add("if(!{ok}) break;")
-		var i = v.send(v.get_property("item", it.mtype), [it])
-		assert i != null
-		v.assign(v.variable(variables.first), i)
+		if self.variables.length == 1 then
+			var i = v.send(v.get_property("item", it.mtype), [it])
+			assert i != null
+			v.assign(v.variable(variables.first), i)
+		else if self.variables.length == 2 then
+			var i = v.send(v.get_property("key", it.mtype), [it])
+			assert i != null
+			v.assign(v.variable(variables[0]), i)
+			i = v.send(v.get_property("item", it.mtype), [it])
+			assert i != null
+			v.assign(v.variable(variables[1]), i)
+		else
+			abort
+		end
 		v.stmt(self.n_block)
 		v.add("CONTINUE_{escapemark.object_id}: (void)0;")
 		v.send(v.get_property("next", it.mtype), [it])

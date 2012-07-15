@@ -86,8 +86,8 @@ private class NaiveInterpreter
 	end
 
 	# Is a return executed?
-	# Set this mark to skip the evaluation until the end of the current method
-	var returnmark: Bool = false
+	# Set this mark to skip the evaluation until the end of the specified method frame
+	var returnmark: nullable Frame = null
 
 	# Is a break executed?
 	# Set this mark to skip the evaluation until a labeled statement catch it with `is_break'
@@ -99,7 +99,7 @@ private class NaiveInterpreter
 
 	# Is a return or a break or a continue executed?
 	# Use this function to know if you must skip the evaluation of statements
-	fun is_escaping: Bool do return returnmark or breakmark != null or continuemark != null
+	fun is_escaping: Bool do return returnmark != null or breakmark != null or continuemark != null
 
 	# The value associated with the current return/break/continue, if any.
 	# Set the value when you set a escapemark.
@@ -135,12 +135,15 @@ private class NaiveInterpreter
 	# Evaluate `n' as an expression in the current context.
 	# Return the value of the expression.
 	# If `n' cannot be evaluated, then aborts.
-	fun expr(n: AExpr): Instance
+	fun expr(n: AExpr): nullable Instance
 	do
 		var old = self.frame.current_node
 		self.frame.current_node = n
 		#n.debug("IN Execute expr")
-		var i = n.expr(self).as(not null)
+		var i = n.expr(self)
+		if i == null and not self.is_escaping then
+			n.debug("inconsitance: no value and not escaping.")
+		end
 		#n.debug("OUT Execute expr: value is {i}")
 		#if not is_subtype(i.mtype, n.mtype.as(not null)) then n.debug("Expected {n.mtype.as(not null)} got {i}")
 		self.frame.current_node = old
@@ -275,14 +278,14 @@ private class NaiveInterpreter
 				vararg.add(rawargs[i+1])
 			end
 			# FIXME: its it to late to determine the vararg type, this should have been done during a previous analysis
-			var elttype = mpropdef.msignature.parameter_mtypes[vararg_rank].anchor_to(self.mainmodule, args.first.mtype.as(MClassType))
+			var elttype = mpropdef.msignature.mparameters[vararg_rank].mtype.anchor_to(self.mainmodule, args.first.mtype.as(MClassType))
 			args.add(self.array_instance(vararg, elttype))
 
 			for i in [vararg_lastrank+1..rawargs.length-1[ do
 				args.add(rawargs[i+1])
 			end
 		end
-		assert args.length == mpropdef.msignature.arity + 1 # because of self
+		#assert args.length == mpropdef.msignature.arity + 1 # because of self
 
 		# Look for the AST node that implements the property
 		var mproperty = mpropdef.mproperty
@@ -296,6 +299,29 @@ private class NaiveInterpreter
 			fatal("Fatal Error: method {mpropdef} not found in the AST")
 			abort
 		end
+	end
+
+	fun call_closure(closure: ClosureInstance, args: Array[Instance]): nullable Instance
+	do
+		var nclosuredef = closure.nclosuredef
+		var f = closure.frame
+		for i in [0..closure.nclosuredef.mclosure.mtype.as(MSignature).arity[ do
+			var variable = nclosuredef.variables[i]
+			f.map[variable] = args[i]
+		end
+
+		self.frames.unshift(f)
+
+		self.stmt(nclosuredef.n_expr)
+
+		self.frames.shift
+
+		if self.is_continue(nclosuredef.escapemark) then
+			var res = self.escapevalue
+			self.escapevalue = null
+			return res
+		end
+		return null
 	end
 
 	# Execute `mproperty' for a `args' (where args[0] is the receiver).
@@ -445,6 +471,21 @@ class PrimitiveInstance[E: Object]
 	redef fun to_i do return val.as(Int)
 end
 
+private class ClosureInstance
+	super Instance
+
+	var frame: Frame
+
+	var nclosuredef: AClosureDef
+
+	init(mtype: MType, frame: Frame, nclosuredef: AClosureDef)
+	do
+		super(mtype)
+		self.frame = frame
+		self.nclosuredef = nclosuredef
+	end
+end
+
 # Information about local variables in a running method
 private class Frame
 	# The current visited node
@@ -492,6 +533,12 @@ redef class AConcreteMethPropdef
 			assert variable != null
 			f.map[variable] = args[i+1]
 		end
+		for i in [0..mpropdef.msignature.mclosures.length[ do
+			var c = mpropdef.msignature.mclosures[i]
+			var variable = self.n_signature.n_closure_decls[i].variable
+			assert variable != null
+			f.map[variable] = args[i + 1 + mpropdef.msignature.arity]
+		end
 
 		v.frames.unshift(f)
 
@@ -510,10 +557,13 @@ redef class AConcreteMethPropdef
 
 		v.stmt(self.n_block)
 		v.frames.shift
-		v.returnmark = false
-		var res = v.escapevalue
-		v.escapevalue = null
-		return res
+		if v.returnmark == f then
+			v.returnmark = null
+			var res = v.escapevalue
+			v.escapevalue = null
+			return res
+		end
+		return null
 	end
 end
 
@@ -722,7 +772,13 @@ redef class AExternMethPropdef
 	do
 		var pname = mpropdef.mproperty.name
 		var cname = mpropdef.mclassdef.mclass.name
-		if cname == "NativeFile" then
+		if cname == "Int" then
+			var recvval = args.first.val.as(Int)
+			if pname == "rand" then
+				var res = recvval.rand
+				return v.int_instance(res)
+			end
+		else if cname == "NativeFile" then
 			var recvval = args.first.val
 			if pname == "io_write" then
 				var a1 = args[1].val.as(Buffer)
@@ -745,8 +801,11 @@ redef class AExternMethPropdef
 				recvval.to_s.mkdir
 				return null
 			else if pname == "get_environ" then
-				var txt = args.first.val.as(Buffer).to_s.environ
+				var txt = recvval.to_s.environ
 				return v.native_string_instance(txt)
+			else if pname == "system" then
+				var res = sys.system(recvval.to_s)
+				return v.int_instance(res)
 			end
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
@@ -790,6 +849,7 @@ redef class AAttrPropdef
 			var f = new Frame(self, self.mpropdef.as(not null), [recv])
 			v.frames.unshift(f)
 			var val = v.expr(nexpr)
+			assert val != null
 			v.frames.shift
 			assert not v.is_escaping
 			recv.attributes[self.mpropdef.mproperty] = val
@@ -866,6 +926,7 @@ redef class AVardeclExpr
 		var ne = self.n_expr
 		if ne != null then
 			var i = v.expr(ne)
+			if i == null then return
 			v.frame.map[self.variable.as(not null)] = i
 		end
 	end
@@ -882,6 +943,7 @@ redef class AVarAssignExpr
 	redef fun stmt(v)
 	do
 		var i = v.expr(self.n_value)
+		if i == null then return
 		v.frame.map[self.variable.as(not null)] = i
 	end
 end
@@ -891,6 +953,7 @@ redef class AVarReassignExpr
 	do
 		var vari = v.frame.map[self.variable.as(not null)]
 		var value = v.expr(self.n_value)
+		if value == null then return
 		var res = v.send(reassign_property.mproperty, [vari, value])
 		assert res != null
 		v.frame.map[self.variable.as(not null)] = res
@@ -907,6 +970,12 @@ end
 redef class AContinueExpr
 	redef fun stmt(v)
 	do
+		var ne = self.n_expr
+		if ne != null then
+			var i = v.expr(ne)
+			if i == null then return
+			v.escapevalue = i
+		end
 		v.continuemark = self.escapemark
 	end
 end
@@ -914,6 +983,12 @@ end
 redef class ABreakExpr
 	redef fun stmt(v)
 	do
+		var ne = self.n_expr
+		if ne != null then
+			var i = v.expr(ne)
+			if i == null then return
+			v.escapevalue = i
+		end
 		v.breakmark = self.escapemark
 	end
 end
@@ -924,9 +999,10 @@ redef class AReturnExpr
 		var ne = self.n_expr
 		if ne != null then
 			var i = v.expr(ne)
+			if i == null then return
 			v.escapevalue = i
 		end
-		v.returnmark = true
+		v.returnmark = v.frame
 	end
 end
 
@@ -942,6 +1018,7 @@ redef class AIfExpr
 	redef fun stmt(v)
 	do
 		var cond = v.expr(self.n_expr)
+		if cond == null then return
 		if cond.is_true then
 			v.stmt(self.n_then)
 		else
@@ -954,6 +1031,7 @@ redef class AIfexprExpr
 	redef fun expr(v)
 	do
 		var cond = v.expr(self.n_expr)
+		if cond == null then return null
 		if cond.is_true then
 			return v.expr(self.n_then)
 		else
@@ -975,6 +1053,7 @@ redef class AWhileExpr
 	do
 		loop
 			var cond = v.expr(self.n_expr)
+			if cond == null then return
 			if not cond.is_true then return
 			v.stmt(self.n_block)
 			if v.is_break(self.escapemark) then return
@@ -1000,15 +1079,25 @@ redef class AForExpr
 	redef fun stmt(v)
 	do
 		var col = v.expr(self.n_expr)
+		if col == null then return
 		#self.debug("col {col}")
 		var iter = v.send(v.mainmodule.force_get_primitive_method("iterator", col.mtype), [col]).as(not null)
 		#self.debug("iter {iter}")
 		loop
 			var isok = v.send(v.mainmodule.force_get_primitive_method("is_ok", iter.mtype), [iter]).as(not null)
 			if not isok.is_true then return
-			var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
-			#self.debug("item {item}")
-			v.frame.map[self.variables.first] = item
+			if self.variables.length == 1 then
+				var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				#self.debug("item {item}")
+				v.frame.map[self.variables.first] = item
+			else if self.variables.length == 2 then
+				var key = v.send(v.mainmodule.force_get_primitive_method("key", iter.mtype), [iter]).as(not null)
+				v.frame.map[self.variables[0]] = key
+				var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				v.frame.map[self.variables[1]] = item
+			else
+				abort
+			end
 			v.stmt(self.n_block)
 			if v.is_break(self.escapemark) then return
 			v.is_continue(self.escapemark) # Clear the break
@@ -1022,6 +1111,7 @@ redef class AAssertExpr
 	redef fun stmt(v)
 	do
 		var cond = v.expr(self.n_expr)
+		if cond == null then return
 		if not cond.is_true then
 			v.stmt(self.n_else)
 			if v.is_escaping then return
@@ -1040,6 +1130,7 @@ redef class AOrExpr
 	redef fun expr(v)
 	do
 		var cond = v.expr(self.n_expr)
+		if cond == null then return null
 		if cond.is_true then return cond
 		return v.expr(self.n_expr2)
 	end
@@ -1049,6 +1140,7 @@ redef class AAndExpr
 	redef fun expr(v)
 	do
 		var cond = v.expr(self.n_expr)
+		if cond == null then return null
 		if not cond.is_true then return cond
 		return v.expr(self.n_expr2)
 	end
@@ -1058,6 +1150,7 @@ redef class ANotExpr
 	redef fun expr(v)
 	do
 		var cond = v.expr(self.n_expr)
+		if cond == null then return null
 		return v.bool_instance(not cond.is_true)
 	end
 end
@@ -1066,6 +1159,7 @@ redef class AOrElseExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr)
+		if i == null then return null
 		if i != v.null_instance then return i
 		return v.expr(self.n_expr2)
 	end
@@ -1075,7 +1169,9 @@ redef class AEeExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr)
+		if i == null then return null
 		var i2 = v.expr(self.n_expr2)
+		if i2 == null then return null
 		return v.bool_instance(i.eq_is(i2))
 	end
 end
@@ -1106,7 +1202,9 @@ redef class AArrayExpr
 	do
 		var val = new Array[Instance]
 		for nexpr in self.n_exprs.n_exprs do
-			val.add(v.expr(nexpr))
+			var i = v.expr(nexpr)
+			if i == null then return null
+			val.add(i)
 		end
 		var mtype = v.unanchor_type(self.mtype.as(not null)).as(MGenericType)
 		var elttype = mtype.arguments.first
@@ -1132,7 +1230,9 @@ redef class ASuperstringExpr
 	do
 		var array = new Array[Instance]
 		for nexpr in n_exprs do
-			array.add(v.expr(nexpr))
+			var i = v.expr(nexpr)
+			if i == null then return null
+			array.add(i)
 		end
 		var i = v.array_instance(array, v.mainmodule.get_primitive_class("Object").mclass_type)
 		var res = v.send(v.mainmodule.force_get_primitive_method("to_s", i.mtype), [i])
@@ -1145,7 +1245,9 @@ redef class ACrangeExpr
 	redef fun expr(v)
 	do
 		var e1 = v.expr(self.n_expr)
+		if e1 == null then return null
 		var e2 = v.expr(self.n_expr2)
+		if e2 == null then return null
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new Instance(mtype)
 		v.init_instance(res)
@@ -1159,7 +1261,9 @@ redef class AOrangeExpr
 	redef fun expr(v)
 	do
 		var e1 = v.expr(self.n_expr)
+		if e1 == null then return null
 		var e2 = v.expr(self.n_expr2)
+		if e2 == null then return null
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new Instance(mtype)
 		v.init_instance(res)
@@ -1194,6 +1298,7 @@ redef class AIsaExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr)
+		if i == null then return null
 		var mtype = v.unanchor_type(self.cast_type.as(not null))
 		return v.bool_instance(v.is_subtype(i.mtype, mtype))
 	end
@@ -1203,6 +1308,7 @@ redef class AAsCastExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr)
+		if i == null then return null
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		if not v.is_subtype(i.mtype, mtype) then
 			#fatal(v, "Cast failed expected {mtype}, got {i}")
@@ -1216,6 +1322,7 @@ redef class AAsNotnullExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr)
+		if i == null then return null
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		if i.mtype isa MNullType then
 			fatal(v, "Cast failed")
@@ -1238,6 +1345,7 @@ redef class AOnceExpr
 			return v.onces[self]
 		else
 			var res = v.expr(self.n_expr)
+			if res == null then return null
 			v.onces[self] = res
 			return res
 		end
@@ -1248,12 +1356,26 @@ redef class ASendExpr
 	redef fun expr(v)
 	do
 		var recv = v.expr(self.n_expr)
+		if recv == null then return null
 		var args = [recv]
 		for a in compute_raw_arguments do
-			args.add(v.expr(a))
+			var i = v.expr(a)
+			if i == null then return null
+			args.add(i)
+		end
+		for c in self.n_closure_defs do
+			var mtype = c.mclosure.mtype
+			var instance = new ClosureInstance(mtype, v.frame, c)
+			args.add(instance)
 		end
 		var mproperty = self.mproperty.as(not null)
-		return v.send(mproperty, args)
+
+		var res = v.send(mproperty, args)
+		if v.is_break(self.escapemark) then
+			res = v.escapevalue
+			v.escapevalue = null
+		end
+		return res
 	end
 end
 
@@ -1261,11 +1383,15 @@ redef class ASendReassignFormExpr
 	redef fun stmt(v)
 	do
 		var recv = v.expr(self.n_expr)
+		if recv == null then return
 		var args = [recv]
 		for a in compute_raw_arguments do
-			args.add(v.expr(a))
+			var i = v.expr(a)
+			if i == null then return
+			args.add(i)
 		end
 		var value = v.expr(self.n_value)
+		if value == null then return
 
 		var mproperty = self.mproperty.as(not null)
 		var read = v.send(mproperty, args)
@@ -1286,7 +1412,9 @@ redef class ASuperExpr
 		var recv = v.frame.arguments.first
 		var args = [recv]
 		for a in self.n_args.n_exprs do
-			args.add(v.expr(a))
+			var i = v.expr(a)
+			if i == null then return null
+			args.add(i)
 		end
 		if args.length == 1 then
 			args = v.frame.arguments
@@ -1324,7 +1452,9 @@ redef class ANewExpr
 		v.init_instance(recv)
 		var args = [recv]
 		for a in self.n_args.n_exprs do
-			args.add(v.expr(a))
+			var i = v.expr(a)
+			if i == null then return null
+			args.add(i)
 		end
 		var mproperty = self.mproperty.as(not null)
 		var res2 = v.send(mproperty, args)
@@ -1341,6 +1471,7 @@ redef class AAttrExpr
 	redef fun expr(v)
 	do
 		var recv = v.expr(self.n_expr)
+		if recv == null then return null
 		var mproperty = self.mproperty.as(not null)
 		return v.read_attribute(mproperty, recv)
 	end
@@ -1350,7 +1481,9 @@ redef class AAttrAssignExpr
 	redef fun stmt(v)
 	do
 		var recv = v.expr(self.n_expr)
+		if recv == null then return
 		var i = v.expr(self.n_value)
+		if i == null then return
 		var mproperty = self.mproperty.as(not null)
 		recv.attributes[mproperty] = i
 	end
@@ -1360,7 +1493,9 @@ redef class AAttrReassignExpr
 	redef fun stmt(v)
 	do
 		var recv = v.expr(self.n_expr)
+		if recv == null then return
 		var value = v.expr(self.n_value)
+		if value == null then return
 		var mproperty = self.mproperty.as(not null)
 		var attr = v.read_attribute(mproperty, recv)
 		var res = v.send(reassign_property.mproperty, [attr, value])
@@ -1373,8 +1508,25 @@ redef class AIssetAttrExpr
 	redef fun expr(v)
 	do
 		var recv = v.expr(self.n_expr)
+		if recv == null then return null
 		var mproperty = self.mproperty.as(not null)
 		return v.bool_instance(recv.attributes.has_key(mproperty))
+	end
+end
+
+redef class AClosureCallExpr
+	redef fun expr(v)
+	do
+		var args = new Array[Instance]
+		for a in self.n_args.n_exprs do
+			var i = v.expr(a)
+			if i == null then return null
+			args.add(i)
+		end
+		var i = v.frame.map[self.variable.as(not null)]
+		assert i isa ClosureInstance
+		var res = v.call_closure(i, args)
+		return res
 	end
 end
 

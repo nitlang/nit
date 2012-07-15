@@ -700,9 +700,8 @@ class ModelBuilder
 			nclassdef.super_inits = combine
 			var mprop = new MMethod(mclassdef, "init", mclassdef.mclass.visibility)
 			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
-			var param_names = new Array[String]
-			var param_types = new Array[MType]
-			var msignature = new MSignature(param_names, param_types, null, -1)
+			var mparameters = new Array[MParameter]
+			var msignature = new MSignature(mparameters, null)
 			mpropdef.msignature = msignature
 			mprop.is_init = true
 			nclassdef.mfree_init = mpropdef
@@ -711,20 +710,20 @@ class ModelBuilder
 		end
 
 		# Collect undefined attributes
-		var param_names = new Array[String]
-		var param_types = new Array[MType]
+		var mparameters = new Array[MParameter]
 		for npropdef in nclassdef.n_propdefs do
 			if npropdef isa AAttrPropdef and npropdef.n_expr == null then
-				param_names.add(npropdef.mpropdef.mproperty.name.substring_from(1))
+				var paramname = npropdef.mpropdef.mproperty.name.substring_from(1)
 				var ret_type = npropdef.mpropdef.static_mtype
 				if ret_type == null then return
-				param_types.add(ret_type)
+				var mparameter = new MParameter(paramname, ret_type, false)
+				mparameters.add(mparameter)
 			end
 		end
 
 		var mprop = new MMethod(mclassdef, "init", mclassdef.mclass.visibility)
 		var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
-		var msignature = new MSignature(param_names, param_types, null, -1)
+		var msignature = new MSignature(mparameters, null)
 		mpropdef.msignature = msignature
 		mprop.is_init = true
 		nclassdef.mfree_init = mpropdef
@@ -964,6 +963,79 @@ redef class APropdef
 	end
 end
 
+redef class ASignature
+	# Is the model builder has correctly visited the signature
+	var is_visited = false
+	# Names of parameters from the AST
+	# REQUIRE: is_visited
+	var param_names = new Array[String]
+	# Types of parameters from the AST
+	# REQUIRE: is_visited
+	var param_types = new Array[MType]
+	# Rank of the vararg (of -1 if none)
+	# REQUIRE: is_visited
+	var vararg_rank: Int = -1
+	# Return type
+	var ret_type: nullable MType = null
+
+	# Visit and fill information about a signature
+	private fun visit_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef): Bool
+	do
+		var param_names = self.param_names
+		var param_types = self.param_types
+		for np in self.n_params do
+			param_names.add(np.n_id.text)
+			var ntype = np.n_type
+			if ntype != null then
+				var mtype = modelbuilder.resolve_mtype(nclassdef, ntype)
+				if mtype == null then return false # Skip error
+				for i in [0..param_names.length-param_types.length[ do
+					param_types.add(mtype)
+				end
+				if np.n_dotdotdot != null then
+					if self.vararg_rank != -1 then
+						modelbuilder.error(np, "Error: {param_names[self.vararg_rank]} is already a vararg")
+						return false
+					else
+						self.vararg_rank = param_names.length - 1
+					end
+				end
+			end
+		end
+		var ntype = self.n_type
+		if ntype != null then
+			self.ret_type = modelbuilder.resolve_mtype(nclassdef, ntype)
+			if self.ret_type == null then return false # Skip errir
+		end
+
+		for nclosure in self.n_closure_decls do
+			if not nclosure.n_signature.visit_signature(modelbuilder, nclassdef) then return false
+		end
+
+		self.is_visited = true
+		return true
+	end
+
+	# Build a visited signature
+	fun build_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef): nullable MSignature
+	do
+		if param_names.length != param_types.length then
+			# Some parameters are typed, other parameters are not typed.
+			modelbuilder.warning(self.n_params[param_types.length], "Error: Untyped parameter `{param_names[param_types.length]}'.")
+			return null
+		end
+
+		var mparameters = new Array[MParameter]
+		for i in [0..param_names.length[ do
+			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
+			mparameters.add(mparameter)
+		end
+
+		var msignature = new MSignature(mparameters, ret_type)
+		return msignature
+	end
+end
+
 redef class AMethPropdef
 	# The associated MMethodDef once build by a `ModelBuilder'
 	var mpropdef: nullable MMethodDef
@@ -1046,29 +1118,11 @@ redef class AMethPropdef
 		var vararg_rank = -1
 		var ret_type: nullable MType = null # Return type from the AST
 		if nsig != null then
-			for np in nsig.n_params do
-				param_names.add(np.n_id.text)
-				var ntype = np.n_type
-				if ntype != null then
-					var mtype = modelbuilder.resolve_mtype(nclassdef, ntype)
-					if mtype == null then return # Skip error
-					for i in [0..param_names.length-param_types.length[ do
-						param_types.add(mtype)
-					end
-					if np.n_dotdotdot != null then
-						if vararg_rank != -1 then
-							modelbuilder.error(np, "Error: {param_names[vararg_rank]} is already a vararg")
-						else
-							vararg_rank = param_names.length - 1
-						end
-					end
-				end
-			end
-			var ntype = nsig.n_type
-			if ntype != null then
-				ret_type = modelbuilder.resolve_mtype(nclassdef, ntype)
-				if ret_type == null then return # Skip errir
-			end
+			if not nsig.visit_signature(modelbuilder, nclassdef) then return
+			param_names = nsig.param_names
+			param_types = nsig.param_types
+			vararg_rank = nsig.vararg_rank
+			ret_type = nsig.ret_type
 		end
 
 		# Look for some signature to inherit
@@ -1093,7 +1147,10 @@ redef class AMethPropdef
 		# Inherit the signature
 		if msignature != null and param_names.length != param_types.length and param_names.length == msignature.arity and param_types.length == 0 then
 			# Parameters are untyped, thus inherit them
-			param_types = msignature.parameter_mtypes
+			param_types = new Array[MType]
+			for mparameter in msignature.mparameters do
+				param_types.add(mparameter.mtype)
+			end
 			vararg_rank = msignature.vararg_rank
 		end
 		if msignature != null and ret_type == null then
@@ -1106,8 +1163,24 @@ redef class AMethPropdef
 			return
 		end
 
-		msignature = new MSignature(param_names, param_types, ret_type, vararg_rank)
+		var mparameters = new Array[MParameter]
+		for i in [0..param_names.length[ do
+			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
+			mparameters.add(mparameter)
+		end
+
+		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
+
+		if nsig != null then
+			for nclosure in nsig.n_closure_decls do
+				var clos_signature = nclosure.n_signature.build_signature(modelbuilder, nclassdef)
+				if clos_signature == null then return
+				var mparameter = new MParameter(nclosure.n_id.text, clos_signature, false)
+				msignature.mclosures.add(mparameter)
+			end
+		end
+
 	end
 
 	redef fun check_signature(modelbuilder, nclassdef)
@@ -1141,11 +1214,11 @@ redef class AMethPropdef
 			if mysignature.arity > 0 then
 				# Check parameters types
 				for i in [0..mysignature.arity[ do
-					var myt = mysignature.parameter_mtypes[i]
-					var prt = msignature.parameter_mtypes[i]
+					var myt = mysignature.mparameters[i].mtype
+					var prt = msignature.mparameters[i].mtype
 					if not myt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, prt) and
 							not prt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, myt) then
-						modelbuilder.error(nsig.n_params[i], "Redef Error: Wrong type for parameter `{mysignature.parameter_names[i]}'. found {myt}, expected {prt}.")
+						modelbuilder.error(nsig.n_params[i], "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt}.")
 					end
 				end
 			end
@@ -1335,7 +1408,7 @@ redef class AAttrPropdef
 
 		var mreadpropdef = self.mreadpropdef
 		if mreadpropdef != null then
-			var msignature = new MSignature(new Array[String], new Array[MType], mtype, -1)
+			var msignature = new MSignature(new Array[MParameter], mtype)
 			mreadpropdef.msignature = msignature
 		end
 
@@ -1347,7 +1420,8 @@ redef class AAttrPropdef
 			else
 				name = n_id2.text
 			end
-			var msignature = new MSignature([name], [mtype], null, -1)
+			var mparameter = new MParameter(name, mtype, false)
+			var msignature = new MSignature([mparameter], null)
 			mwritepropdef.msignature = msignature
 		end
 	end

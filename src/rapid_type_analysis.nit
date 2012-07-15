@@ -199,7 +199,7 @@ class RapidTypeAnalysis
 
 			var vararg_rank = mr.mmethoddef.msignature.vararg_rank
 			if vararg_rank > -1 then
-				var elttype = mr.mmethoddef.msignature.parameter_mtypes[vararg_rank]
+				var elttype = mr.mmethoddef.msignature.mparameters[vararg_rank].mtype
 				elttype = elttype.anchor_to(self.mainmodule, mr.receiver)
 				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
 				self.add_type(vararg)
@@ -569,12 +569,20 @@ redef class AForExpr
 	redef fun accept_rapid_type_vistor(v)
 	do
 		var recvtype = self.n_expr.mtype.as(not null)
-		var colltype = v.get_class("Collection").mclassdefs.first.bound_mtype
-		v.add_send(recvtype, v.get_method(colltype, "iterator"))
-		var iteratortype = v.get_class("Iterator").mclassdefs.first.bound_mtype
+		var colltype = self.coltype.as(not null)
+		var itmeth = v.get_method(colltype, "iterator")
+		v.add_send(recvtype, itmeth)
+		var iteratortype = itmeth.intro.msignature.return_mtype.as(MClassType).mclass.mclassdefs.first.bound_mtype
 		var objtype = v.get_class("Object").mclass_type
 		v.add_send(objtype, v.get_method(iteratortype, "is_ok"))
-		v.add_send(objtype, v.get_method(iteratortype, "item"))
+		if self.variables.length == 1 then
+			v.add_send(objtype, v.get_method(iteratortype, "item"))
+		else if self.variables.length == 2 then
+			v.add_send(objtype, v.get_method(iteratortype, "key"))
+			v.add_send(objtype, v.get_method(iteratortype, "item"))
+		else
+			abort
+		end
 		v.add_send(objtype, v.get_method(iteratortype, "next"))
 	end
 end

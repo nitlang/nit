@@ -245,12 +245,12 @@ private class TypeVisitor
 			if i > vararg_rank then
 				j = i + vararg_decl
 			end
-			var paramtype = msignature.parameter_mtypes[i]
+			var paramtype = msignature.mparameters[i].mtype
 			self.visit_expr_subtype(args[j], paramtype)
 		end
 		if vararg_rank >= 0 then
 			var varargs = new Array[AExpr]
-			var paramtype = msignature.parameter_mtypes[vararg_rank]
+			var paramtype = msignature.mparameters[vararg_rank].mtype
 			for j in [vararg_rank..vararg_rank+vararg_decl] do
 				varargs.add(args[j])
 				self.visit_expr_subtype(args[j], paramtype)
@@ -395,7 +395,7 @@ redef class AConcreteMethPropdef
 
 		var mmethoddef = self.mpropdef.as(not null)
 		for i in [0..mmethoddef.msignature.arity[ do
-			var mtype = mmethoddef.msignature.parameter_mtypes[i]
+			var mtype = mmethoddef.msignature.mparameters[i].mtype
 			if mmethoddef.msignature.vararg_rank == i then
 				var arrayclass = v.get_mclass(self.n_signature.n_params[i], "Array")
 				if arrayclass == null then return # Skip error
@@ -404,6 +404,12 @@ redef class AConcreteMethPropdef
 			var variable = self.n_signature.n_params[i].variable
 			assert variable != null
 			variable.declared_type = mtype
+		end
+		for i in [0..mmethoddef.msignature.mclosures.length[ do
+			var mclosure = mmethoddef.msignature.mclosures[i]
+			var variable = self.n_signature.n_closure_decls[i].variable
+			assert variable != null
+			variable.declared_type = mclosure.mtype
 		end
 		v.visit_stmt(nblock)
 
@@ -569,7 +575,7 @@ redef class AReassignFormExpr
 		var rettype = msignature.return_mtype
 		assert msignature.arity == 1 and rettype != null
 
-		var value_type = v.visit_expr_subtype(self.n_value, msignature.parameter_mtypes.first)
+		var value_type = v.visit_expr_subtype(self.n_value, msignature.mparameters.first.mtype)
 		if value_type == null then return null # Skip error
 
 		v.check_subtype(self, rettype, writetype)
@@ -704,6 +710,7 @@ redef class ALoopExpr
 end
 
 redef class AForExpr
+	var coltype: nullable MGenericType
 	redef fun accept_typing(v)
 	do
 		var mtype = v.visit_expr(n_expr)
@@ -713,14 +720,28 @@ redef class AForExpr
 		if colcla == null then return
 		var objcla = v.get_mclass(self, "Object")
 		if objcla == null then return
+		var mapcla = v.get_mclass(self, "Map")
+		if mapcla == null then return
 		if v.is_subtype(mtype, colcla.get_mtype([objcla.mclass_type.as_nullable])) then
 			var coltype = mtype.supertype_to(v.mmodule, v.anchor, colcla)
 			assert coltype isa MGenericType
+			self.coltype = coltype
 			var variables =  self.variables
 			if variables.length != 1 then
 				v.error(self, "Type Error: Expected one variable")
 			else
 				variables.first.declared_type = coltype.arguments.first
+			end
+		else if v.is_subtype(mtype, mapcla.get_mtype([objcla.mclass_type.as_nullable, objcla.mclass_type.as_nullable])) then
+			var coltype = mtype.supertype_to(v.mmodule, v.anchor, mapcla)
+			assert coltype isa MGenericType
+			self.coltype = coltype
+			var variables = self.variables
+			if variables.length != 2 then
+				v.error(self, "Type Error: Expected two variables")
+			else
+				variables[0].declared_type = coltype.arguments[0]
+				variables[1].declared_type = coltype.arguments[1]
 			end
 		else
 			v.modelbuilder.error(self, "TODO: Do 'for' on {mtype}")
@@ -1015,6 +1036,14 @@ redef class ASendExpr
 		else
 			self.is_typed = true
 		end
+
+		if self.n_closure_defs.length == msignature.mclosures.length then
+			for i in [0..self.n_closure_defs.length[ do
+				self.n_closure_defs[i].accept_typing(v, msignature.mclosures[i])
+			end
+		else
+			debug("closure: got {self.n_closure_defs.length}, want {msignature.mclosures.length}")
+		end
 	end
 
 	# The name of the property
@@ -1177,7 +1206,7 @@ redef class ASendReassignFormExpr
 		if wmsignature == null then abort # Forward error
 		wmsignature = v.resolve_signature_for(wmsignature, recvtype, for_self)
 
-		var wtype = self.resolve_reassignment(v, readtype, wmsignature.parameter_mtypes.last)
+		var wtype = self.resolve_reassignment(v, readtype, wmsignature.mparameters.last.mtype)
 		if wtype == null then return
 
 		args.add(self.n_value)
@@ -1431,7 +1460,42 @@ end
 redef class AClosureCallExpr
 	redef fun accept_typing(v)
 	do
-		#TODO
+		var variable = self.variable
+		if variable == null then return # Skip error
+
+		var recvtype = v.nclassdef.mclassdef.bound_mtype
+		var msignature = variable.declared_type.as(MSignature)
+		msignature = v.resolve_signature_for(msignature, recvtype, false)
+
+		var args = n_args.to_a
+		v.check_signature(self, args, variable.name, msignature)
+
+		self.is_typed = true
+		self.mtype = msignature.return_mtype
+	end
+end
+
+redef class AClosureDef
+	var mclosure: nullable MParameter
+
+	private fun accept_typing(v: TypeVisitor, mparameter: MParameter)
+	do
+		var variables = self.variables
+		if variables == null then return
+
+		self.mclosure = mparameter
+		var msignature = mparameter.mtype.as(MSignature)
+
+		if msignature.arity != variables.length then
+			v.error(self, "Type error: closure {mparameter.name} expects {msignature.arity} parameters, {variables.length} given")
+			return
+		end
+
+		for i in [0..variables.length[ do
+			variables[i].declared_type = msignature.mparameters[i].mtype
+		end
+
+		v.visit_stmt(self.n_expr)
 	end
 end
 

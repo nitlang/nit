@@ -431,6 +431,20 @@ redef class AClosureCallExpr
 	var variable: nullable ClosureVariable
 end
 
+redef class ASendExpr
+	# The escape mark used with the closures if any
+	var escapemark: nullable EscapeMark
+
+	redef fun accept_scope_visitor(v)
+	do
+		if self.n_closure_defs.length > 0 then
+			var escapemark = v.make_escape_mark(self.n_closure_defs.last.n_label, true)
+			self.escapemark = escapemark
+		end
+		super
+	end
+end
+
 redef class AClosureDef
 	# The automatic variables in order
 	var variables: nullable Array[Variable]
@@ -451,8 +465,7 @@ redef class AClosureDef
 			variables.add(va)
 		end
 
-		var escapemark = v.make_escape_mark(n_label, true)
-		self.escapemark = escapemark
+		self.escapemark = self.parent.as(ASendExpr).escapemark
 		v.enter_visit_block(self.n_expr, escapemark)
 
 		v.scopes.shift
