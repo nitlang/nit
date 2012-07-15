@@ -544,7 +544,7 @@ private class RuntimeFunction
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
 		end
-		if self.mmethoddef.can_inline(v) and arguments.first.mtype == self.recv then
+		if self.mmethoddef.can_inline(v) then
 			var frame = new Frame(v, self.mmethoddef, self.recv, arguments)
 			frame.returnlabel = v.get_name("RET_LABEL")
 			if ret != null then
@@ -559,6 +559,7 @@ private class RuntimeFunction
 			v.frame = old_frame
 			return frame.returnvar
 		end
+		v.adapt_signature(self.mmethoddef, arguments)
 		v.compiler.todo(self)
 		if ret == null then
 			v.add("{self.c_name}({arguments.join(",")});")
@@ -978,7 +979,6 @@ private class GlobalCompilerVisitor
 		assert args.length == m.msignature.arity + 1 # because of self
 
 		args.first = recv
-		self.adapt_signature(m, args)
 		var rm = new RuntimeFunction(m, recvtype)
 		return rm.call(self, args)
 	end
