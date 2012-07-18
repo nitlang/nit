@@ -452,9 +452,13 @@ abstract class Instance
 	# Human readable object identity "Type#number"
 	redef fun to_s do return "{mtype}#{object_id}"
 
-	# Return the integer valur is the instance is an integer.
+	# Return the integer value if the instance is an integer.
 	# else aborts
 	fun to_i: Int do abort
+
+	# Return the integer value if the instance is a float.
+	# else aborts
+	fun to_f: Float do abort
 
 	# The real value encapsulated if the instance is primitive.
 	# Else aborts.
@@ -505,6 +509,8 @@ class PrimitiveInstance[E: Object]
 	redef fun to_s do return "{mtype}#{val.object_id}({val})"
 
 	redef fun to_i do return val.as(Int)
+
+	redef fun to_f do return val.as(Float)
 end
 
 private class ClosureInstance
@@ -696,15 +702,15 @@ redef class AInternMethPropdef
 			end
 		else if cname == "Float" then
 			if pname == "+" then
-				return v.float_instance(args[0].val.as(Float) + args[1].val.as(Float))
+				return v.float_instance(args[0].to_f + args[1].to_f)
 			else if pname == "-" then
-				return v.float_instance(args[0].val.as(Float) - args[1].val.as(Float))
+				return v.float_instance(args[0].to_f - args[1].to_f)
 			else if pname == "*" then
-				return v.float_instance(args[0].val.as(Float) * args[1].val.as(Float))
+				return v.float_instance(args[0].to_f * args[1].to_f)
 			else if pname == "/" then
-				return v.float_instance(args[0].val.as(Float) / args[1].val.as(Float))
+				return v.float_instance(args[0].to_f / args[1].to_f)
 			else if pname == "to_i" then
-				return v.int_instance(args[0].val.as(Float).to_i)
+				return v.int_instance(args[0].to_f.to_i)
 			end
 		else if cname == "NativeString" then
 			var recvval = args.first.val.as(Buffer)
