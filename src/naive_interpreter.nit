@@ -701,7 +701,9 @@ redef class AInternMethPropdef
 				return v.int_instance(recv <=> args[1].val.as(Char))
 			end
 		else if cname == "Float" then
-			if pname == "+" then
+			if pname == "unary -" then
+				return v.float_instance(-args[0].to_f)
+			else if pname == "+" then
 				return v.float_instance(args[0].to_f + args[1].to_f)
 			else if pname == "-" then
 				return v.float_instance(args[0].to_f - args[1].to_f)
@@ -849,6 +851,16 @@ redef class AExternMethPropdef
 				var res = sys.system(recvval.to_s)
 				return v.int_instance(res)
 			end
+		else if cname == "Int" then
+			if pname == "rand" then
+				return v.int_instance(args[0].to_i.rand)
+			end
+		else if cname == "Float" then
+			if pname == "cos" then
+				return v.float_instance(args[0].to_f.cos)
+			else if pname == "sin" then
+				return v.float_instance(args[0].to_f.sin)
+			end
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
 		else if pname == "native_argv" then
@@ -856,6 +868,10 @@ redef class AExternMethPropdef
 			return v.native_string_instance(txt)
 		else if pname == "get_time" then
 			return v.int_instance(get_time)
+		else if pname == "atan2" then
+			return v.float_instance(atan2(args[1].to_f, args[2].to_f))
+		else if pname == "pi" then
+			return v.float_instance(pi)
 		else if pname == "lexer_goto" then
 			return v.int_instance(lexer_goto(args[1].to_i, args[2].to_i))
 		else if pname == "lexer_accept" then
