@@ -137,8 +137,9 @@ private class NaiveInterpreter
 	# If `n' cannot be evaluated, then aborts.
 	fun expr(n: AExpr): nullable Instance
 	do
-		var old = self.frame.current_node
-		self.frame.current_node = n
+		var frame = self.frame
+		var old = frame.current_node
+		frame.current_node = n
 		#n.debug("IN Execute expr")
 		var i = n.expr(self)
 		if i == null and not self.is_escaping then
@@ -146,7 +147,7 @@ private class NaiveInterpreter
 		end
 		#n.debug("OUT Execute expr: value is {i}")
 		#if not is_subtype(i.mtype, n.mtype.as(not null)) then n.debug("Expected {n.mtype.as(not null)} got {i}")
-		self.frame.current_node = old
+		frame.current_node = old
 		return i
 	end
 
@@ -156,11 +157,12 @@ private class NaiveInterpreter
 	fun stmt(n: nullable AExpr)
 	do
 		if n != null then
-			var old = self.frame.current_node
-			self.frame.current_node = n
+			var frame = self.frame
+			var old = frame.current_node
+			frame.current_node = n
 			#n.debug("Execute stmt")
 			n.stmt(self)
-			self.frame.current_node = old
+			frame.current_node = old
 		end
 	end
 
