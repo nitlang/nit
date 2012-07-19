@@ -1020,6 +1020,7 @@ redef class ASendExpr
 		msignature = v.resolve_signature_for(msignature, recvtype, for_self)
 
 		var args = compute_raw_arguments
+		self.raw_arguments = args
 
 		v.check_signature(self, args, name, msignature)
 
@@ -1051,7 +1052,9 @@ redef class ASendExpr
 	private fun property_name: String is abstract
 
 	# An array of all arguments (excluding self)
-	fun compute_raw_arguments: Array[AExpr] is abstract
+	var raw_arguments: nullable Array[AExpr]
+
+	private fun compute_raw_arguments: Array[AExpr] is abstract
 end
 
 redef class ABinopExpr
@@ -1189,6 +1192,7 @@ redef class ASendReassignFormExpr
 		msignature = v.resolve_signature_for(msignature, recvtype, for_self)
 
 		var args = compute_raw_arguments
+		self.raw_arguments = args
 
 		v.check_signature(self, args, name, msignature)
 
@@ -1209,6 +1213,7 @@ redef class ASendReassignFormExpr
 		var wtype = self.resolve_reassignment(v, readtype, wmsignature.mparameters.last.mtype)
 		if wtype == null then return
 
+		args = args.to_a # duplicate so raw_arguments keeps only the getter args
 		args.add(self.n_value)
 		v.check_signature(self, args, name + "=", wmsignature)
 

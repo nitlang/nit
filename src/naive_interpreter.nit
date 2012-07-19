@@ -1360,7 +1360,7 @@ redef class ASendExpr
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
 		var args = [recv]
-		for a in compute_raw_arguments do
+		for a in self.raw_arguments.as(not null) do
 			var i = v.expr(a)
 			if i == null then return null
 			args.add(i)
@@ -1387,7 +1387,7 @@ redef class ASendReassignFormExpr
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
 		var args = [recv]
-		for a in compute_raw_arguments do
+		for a in self.raw_arguments.as(not null) do
 			var i = v.expr(a)
 			if i == null then return
 			args.add(i)
