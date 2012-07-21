@@ -1806,6 +1806,16 @@ redef class AClassdef
 	end
 end
 
+redef class ADeferredMethPropdef
+	redef fun compile_to_c(v, mpropdef, arguments)
+	do
+		v.add("printf(\"Not implemented {class_name} {mpropdef} at {location.to_s}\\n\");")
+		v.add("exit(1);")
+	end
+
+	redef fun can_inline do return true
+end
+
 redef class AExpr
 	# Try to compile self as an expression
 	# Do not call this method directly, use `v.expr' instead
