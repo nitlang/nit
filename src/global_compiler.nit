@@ -1220,12 +1220,22 @@ private class GlobalCompilerVisitor
 	# Generate a string value
 	fun string_instance(string: String): RuntimeVariable
 	do
+		var mtype = self.get_class("String").mclass_type
+		var name = self.get_name("varonce")
+		self.add_decl("static {mtype.ctype} {name};")
+		var res = self.new_var(mtype)
+		self.add("if ({name}) \{")
+		self.add("{res} = {name};")
+		self.add("\} else \{")
 		var nat = self.new_var(self.get_class("NativeString").mclass_type)
 		self.add("{nat} = \"{string.escape_to_c}\";")
-		var res = self.init_instance(self.get_class("String").mclass_type)
+		var res2 = self.init_instance(mtype)
+		self.add("{res} = {res2};")
 		var length = self.int_instance(string.length)
 		self.send(self.get_property("with_native", res.mtype), [res, nat, length])
 		self.check_init_instance(res)
+		self.add("{name} = {res};")
+		self.add("\}")
 		return res
 	end
 
