@@ -1331,6 +1331,9 @@ redef class MMethodDef
 
 		var v = new GlobalCompilerVisitor(compiler)
 		var selfvar = new RuntimeVariable("self", recv, recv)
+		if compiler.runtime_type_analysis.live_types.has(recv) then
+			selfvar.is_exact = true
+		end
 		var arguments = new Array[RuntimeVariable]
 		var frame = new Frame(v, self, recv, arguments)
 		v.frame = frame
