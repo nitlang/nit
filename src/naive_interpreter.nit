@@ -866,6 +866,14 @@ redef class AAttrPropdef
 	end
 end
 
+redef class ADeferredMethPropdef
+	redef fun call(v, mpropdef, args)
+	do
+		fatal(v, "Deferred method called")
+		abort
+	end
+end
+
 redef class AClassdef
 	# Execute an implicit `mpropdef' associated with the current node.
 	private fun call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
