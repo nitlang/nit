@@ -287,7 +287,11 @@ private class NaiveInterpreter
 				args.add(rawargs[i+1])
 			end
 		end
-		#assert args.length == mpropdef.msignature.arity + 1 # because of self
+		assert args.length >= mpropdef.msignature.arity + 1 # because of self
+		assert args.length <= mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length
+		if args.length < mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
+			fatal("NOT YET IMPLEMENTED: default closures")
+		end
 
 		# Look for the AST node that implements the property
 		var mproperty = mpropdef.mproperty
