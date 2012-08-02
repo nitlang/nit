@@ -25,10 +25,11 @@ usage()
 	e=`basename "$0"`
 	cat<<END
 Usage: $e [options] modulenames
--o option   Pass option to nitc
+-o option   Pass option to the engine
 -v          Verbose (show tests steps)
 -h          This help
 --tap       Produce TAP output
+--engine    Use a specific engine (default=nitc)
 END
 }
 
@@ -147,20 +148,21 @@ function process_result()
 find_nitc()
 {
 	((tapcount=tapcount+1))
-	recent=`ls -t ../src/nitc ../src/nitc_[0-9] ../bin/nitc ../c_src/nitc 2>/dev/null | head -1`
+	name="$engine"
+	recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
 		if [ -n "$tap" ]; then
-			echo "not ok - find nitc"
-			echo "Bail out! Could not find nitc, aborting"
+			echo "not ok - find engine $name"
+			echo "Bail out! Could not find engine $name, aborting"
 		else
-			echo 'Could not find nitc, aborting'
+			echo "Could not find engine $name, aborting"
 		fi
 		exit 1
 	fi
 	if [ -n "$tap" ]; then
-		echo "ok - find nitc: $recent"
+		echo "ok - find engine $name: $recent"
 	else
-		echo 'Using nitc from: '$recent
+		echo "Using engine $name from: $recent"
 	fi
 	NITC=$recent
 }
@@ -168,12 +170,14 @@ find_nitc()
 verbose=false
 stop=false
 tapcount=0
+engine=nitc
 while [ $stop = false ]; do
 	case $1 in
 		-o) OPT="$OPT $2"; shift; shift;;
 		-v) verbose=true; shift;;
 		-h) usage; exit;;
 		--tap) tap=true; shift;;
+		--engine) engine="$2"; shift; shift;;
 		*) stop=true
 	esac
 done
