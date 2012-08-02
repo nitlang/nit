@@ -28,14 +28,17 @@ Usage: $e [options] modulenames
 -o option   Pass option to nitc
 -v          Verbose (show tests steps)
 -h          This help
+--tap       Produce TAP output
 END
 }
 
 # As argument: the pattern used for the file
 function process_result()
 {
+	((tapcount=tapcount+1))
 	# Result
 	pattern=$1
+	description=$2
 	SAV=""
 	FAIL=""
 	SOSO=""
@@ -79,48 +82,101 @@ function process_result()
 	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
 	NYI="$?"
 	if [ "x$SAV" = "xOK" ]; then
-		if [ "x$FAIL" = "x" ]; then
+		if [ -n "$tap" ]; then
+			echo "ok - $description"
+		elif [ "x$FAIL" = "x" ]; then
 			echo "[ok] out/$pattern.res"
 		else
 			echo "[ok] out/$pattern.res - but sav/$pattern.fail remains!"
 		fi
 		ok="$ok $pattern"
 	elif [ "x$FAIL" = "xOK" ]; then
-		echo "[fail] out/$pattern.res"
+		if [ -n "$tap" ]; then
+			echo "not ok - $description # TODO expected failure"
+		else
+			echo "[fail] out/$pattern.res"
+		fi
 		ok="$ok $pattern"
 	elif [ "x$SOSO" = "xOK" ]; then
-		echo "[soso] out/$pattern.res sav/$pattern.sav"
+		if [ -n "$tap" ]; then
+			echo "ok - $description # SOSO"
+		else
+			echo "[soso] out/$pattern.res sav/$pattern.sav"
+		fi
 		ok="$ok $pattern"
 	elif [ "x$NYI" = "x0" ]; then
-		echo "[todo] out/$pattern.res -> not yet implemented"
+		if [ -n "$tap" ]; then
+			echo "not ok - $description # TODO not yet implemented"
+		else
+			echo "[todo] out/$pattern.res -> not yet implemented"
+		fi
 		ok="$ok $pattern"
 	elif [ "x$SOSOF" = "xOK" ]; then
-		echo "[fail soso] out/$pattern.res sav/$pattern.fail"
+		if [ -n "$tap" ]; then
+			echo "not ok - $description # TODO SOSO expected failure"
+		else
+			echo "[fail soso] out/$pattern.res sav/$pattern.fail"
+		fi
 		ok="$ok $pattern"
 	elif [ "x$SAV" = "xNOK" ]; then
-		echo "[======= fail out/$pattern.res sav/$pattern.sav =======]"
+		if [ -n "$tap" ]; then
+			echo "not ok - $description"
+		else
+			echo "[======= fail out/$pattern.res sav/$pattern.sav =======]"
+		fi
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ "x$FAIL" = "xNOK" ]; then
-		echo "[======= changed out/$pattern.res sav/$pattern.fail ======]"
+		if [ -n "$tap" ]; then
+			echo "not ok - $description"
+		else
+			echo "[======= changed out/$pattern.res sav/$pattern.fail ======]"
+		fi
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	else
-		echo "[=== no sav ===] out/$pattern.res"
+		if [ -n "$tap" ]; then
+			echo "ok - $description # skip no sav"
+		else
+			echo "[=== no sav ===] out/$pattern.res"
+		fi
 		nos="$nos $pattern"
 	fi
 }
 
 find_nitc()
 {
+	((tapcount=tapcount+1))
 	recent=`ls -t ../src/nitc ../src/nitc_[0-9] ../bin/nitc ../c_src/nitc 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
-		echo 'Could not find nitc, aborting'
+		if [ -n "$tap" ]; then
+			echo "not ok - find nitc"
+			echo "Bail out! Could not find nitc, aborting"
+		else
+			echo 'Could not find nitc, aborting'
+		fi
 		exit 1
 	fi
-	echo 'Using nitc from: '$recent
+	if [ -n "$tap" ]; then
+		echo "ok - find nitc: $recent"
+	else
+		echo 'Using nitc from: '$recent
+	fi
 	NITC=$recent
 }
+
+verbose=false
+stop=false
+tapcount=0
+while [ $stop = false ]; do
+	case $1 in
+		-o) OPT="$OPT $2"; shift; shift;;
+		-v) verbose=true; shift;;
+		-h) usage; exit;;
+		--tap) tap=true; shift;;
+		*) stop=true
+	esac
+done
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
@@ -128,16 +184,6 @@ find_nitc()
 # Set NIT_DIR if needed
 [ -z "$NIT_DIR" ] && export NIT_DIR=..
 
-verbose=false
-stop=false
-while [ $stop = false ]; do
-	case $1 in
-		-o) OPT="$OPT $2"; shift; shift;;
-		-v) verbose=true; shift;;
-		-h) usage; exit;;
-		*) stop=true
-	esac
-done
 
 # Mark to distinguish files among tests
 # MARK=
@@ -184,7 +230,7 @@ for ii in "$@"; do
 	for i in "$ii" `./alterner.pl --start '#' --altsep '_' $ii`; do
 		bf=`basename $i .nit`
 		ff="out/$bf"
-		echo -n "=> $bf: "
+		test -z "$tap" && echo -n "=> $bf: "
 
 		if [ -f "$f.inputs" ]; then
 			inputs="$f.inputs"
@@ -205,12 +251,12 @@ for ii in "$@"; do
 		fi
 		egrep '^[A-Z0-9_]*$' "$ff.compile.log" > "$ff.res"
 		if [ "$ERR" != 0 ]; then
-			echo -n "! "
+			test -z "$tap" && echo -n "! "
 			cat "$ff.cmp.err" "$ff.compile.log" > "$ff.res"
-			process_result $bf
+			process_result $bf $bf
 		elif [ -x "./$ff.bin" ]; then
 			cp "$ff.cmp.err" "$ff.res"
-			echo -n ". "
+			test -z "$tap" && echo -n ". "
 			# Execute
 			args=""
 			if [ "x$verbose" = "xtrue" ]; then
@@ -230,7 +276,7 @@ for ii in "$@"; do
 			if [ -s "$ff.err" ]; then
 				cat "$ff.err" >> "$ff.res"
 			fi
-			process_result $bf
+			process_result $bf $bf
 
 			if [ -f "$f.args" ]; then
 				fargs=$f.args
@@ -245,7 +291,7 @@ for ii in "$@"; do
 						echo ""
 						echo "NIT_NO_STACK=1 ./$ff.bin" $args
 					fi
-					echo -n "==> args #"$cptr " "
+					test -z "$tap" && echo -n "==> args #"$cptr " "
 					sh -c "NIT_NO_STACK=1 ./$ff.bin  ''$args < $inputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
@@ -259,17 +305,25 @@ for ii in "$@"; do
 					if [ -s "$fff.err" ]; then
 						cat "$fff.err" >> "$fff.res"
 					fi
-					process_result $bff
+					process_result $bff "  args #$cptr"
 				done < $fargs
 			fi
 		else
-			echo -n "! "
+			test -z "$tap" && echo -n "! "
 			cat "$ff.cmp.err" "$ff.compile.log" > "$ff.res"
 			#echo "Compilation error" > "$ff.res"
-			process_result $bf
+			process_result $bf "$bf"
 		fi
 	done
 done
+
+if [ -n "$tap" ]; then
+	echo "1..$tapcount"
+	echo "# ok:" `echo $ok | wc -w`
+	echo "# not ok:" `echo $nok | wc -w`
+	echo "# no sav:" `echo $nos | wc -w`
+	exit
+fi
 
 echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos | wc -w`
 
