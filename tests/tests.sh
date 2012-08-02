@@ -242,18 +242,27 @@ for ii in "$@"; do
 			inputs=/dev/null
 		fi
 
-		# Compile
-		if [ "x$verbose" = "xtrue" ]; then
-			echo ""
-			echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
+		if [ "$engine" = "nit" ]; then
+			cat > "./$ff.bin" <<END
+exec $NITC --no-color $OPT "$i" $includes -- "\$@"
+END
+			chmod +x "./$ff.bin"
+			> "$ff.cmp.err"
+			> "$ff.compile.log"
+			ERR=0
+		else
+			# Compile
+			if [ "x$verbose" = "xtrue" ]; then
+				echo ""
+				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
+			fi
+			$NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+			ERR=$?
+			if [ "x$verbose" = "xtrue" ]; then
+				cat "$ff.compile.log"
+				cat >&2 "$ff.cmp.err"
+			fi
 		fi
-		$NITC --no-color $OPT -o "$ff.bin" "$i" $includes <"$inputs" 2> "$ff.cmp.err" > "$ff.compile.log"
-		ERR=$?
-		if [ "x$verbose" = "xtrue" ]; then
-			cat "$ff.compile.log"
-			cat >&2 "$ff.cmp.err"
-		fi
-		egrep '^[A-Z0-9_]*$' "$ff.compile.log" > "$ff.res"
 		if [ "$ERR" != 0 ]; then
 			test -z "$tap" && echo -n "! "
 			cat "$ff.cmp.err" "$ff.compile.log" > "$ff.res"
