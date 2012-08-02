@@ -117,42 +117,6 @@ find_nitc()
 	NITC=$recent
 }
 
-make_alts0()
-{
-	ii="$1"
-	xalt="$2"
-	fs=""
-	for alt in `sed -n "s/.*#!*\($xalt[0-9]*\)#.*/\1/p" "$ii" | sort -u`; do
-		f=`basename "$ii" .nit`
-		d=`dirname "$ii"`
-		ff="$f"
-		i="$ii"
-
-		if [ "x$alt" != "x" ]; then
-			test -d alt || mkdir -p alt
-			i="alt/${f}_$alt.nit"
-			ff="${ff}_$alt"
-			sed "s/^\(\s*\)#$alt#/\\1/g;/\S\s*#$alt#/d;/#!$alt#/d" "$ii" > "$i"
-		fi
-		ff="$ff$MARK"
-		fs="$fs $i"
-	done
-	echo "$fs"
-}
-make_alts()
-{
-	ii="$1"
-	fs="$1"
-	for xalt in `sed -n 's/.*#!*\([0-9]*alt\)[0-9]*#.*/\1/p' "$ii" | sort -u`; do
-		fs2=""
-		for f in $fs; do
-			fs2="$fs2 `make_alts0 $f $xalt`"
-		done
-		fs="$fs $fs2"
-	done
-	echo "$fs"
-}
-
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
 
@@ -212,7 +176,7 @@ for ii in "$@"; do
 	fi
 
 	f=`basename "$ii" .nit`
-	for i in `make_alts $ii`; do
+	for i in "$ii" `./alterner.pl --start '#' --altsep '_' $ii`; do
 		bf=`basename $i .nit`
 		ff="out/$bf"
 		echo -n "=> $bf: "
