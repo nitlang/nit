@@ -1259,7 +1259,7 @@ redef class ASuperExpr
 			v.error(self, "Error: No super method to call for {mproperty}.")
 			return
 		else if superprops.length > 1 then
-			v.modelbuilder.warning(self, "Error: Conflicting super method to call for {mproperty}: {superprops.join(", ")}.")
+			v.modelbuilder.warning(self, "Warning: NOT YET IMPLEMENTED: Conflicting super method to call for {mproperty}: {superprops.join(", ")}.")
 			return
 		end
 		var superprop = superprops.first

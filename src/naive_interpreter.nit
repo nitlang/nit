@@ -519,7 +519,7 @@ redef class APropdef
 	# Execute a `mpropdef' associated with the current node.
 	private fun call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
-		fatal(v, "Unimplemented {mpropdef}")
+		fatal(v, "NOT YET IMPLEMENTED method kind {class_name}. {mpropdef}")
 		abort
 	end
 end
@@ -731,7 +731,7 @@ redef class AInternMethPropdef
 			var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
 			return new PrimitiveInstance[Array[Instance]](v.mainmodule.get_primitive_class("NativeArray").get_mtype([mtype]), val)
 		end
-		fatal(v, "Unimplemented intern {mpropdef}")
+		fatal(v, "NOT YET IMPLEMENTED intern {mpropdef}")
 		abort
 	end
 end
@@ -761,7 +761,7 @@ redef class AExternInitPropdef
 			var a1 = args[1].val.as(Buffer)
 			return new PrimitiveInstance[OStream](mpropdef.mclassdef.mclass.mclass_type, new OFStream.open(a1.to_s))
 		end
-		fatal(v, "Unimplemented extern init {mpropdef}")
+		fatal(v, "NOT YET IMPLEMENTED extern init {mpropdef}")
 		abort
 	end
 end
@@ -823,7 +823,7 @@ redef class AExternMethPropdef
 		else if pname == "parser_action" then
 			return v.int_instance(parser_action(args[1].to_i, args[2].to_i))
 		end
-		fatal(v, "Unimplemented extern {mpropdef}")
+		fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
 		abort
 	end
 end
@@ -896,7 +896,7 @@ redef class AExpr
 	# This method is here to be implemented by subclasses.
 	private fun expr(v: NaiveInterpreter): nullable Instance
 	do
-		fatal(v, "Unimplemented expr {class_name}")
+		fatal(v, "NOT YET IMPLEMENTED expr {class_name}")
 		abort
 	end
 
@@ -1435,7 +1435,7 @@ redef class ASuperExpr
 		# FIXME: we do not want an ugly static call!
 		var mpropdefs = mpropdef.mproperty.lookup_super_definitions(mpropdef.mclassdef.mmodule, mpropdef.mclassdef.bound_mtype)
 		if mpropdefs.length != 1 then
-			debug("MPRODFEFS for super {mpropdef} for {recv}: {mpropdefs.join(", ")}")
+			debug("Warning: NOT YET IMPLEMENTED: multiple MPRODFEFS for super {mpropdef} for {recv}: {mpropdefs.join(", ")}")
 		end
 		mpropdef = mpropdefs.first
 		assert mpropdef isa MMethodDef
