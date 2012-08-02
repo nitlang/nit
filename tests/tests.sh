@@ -148,7 +148,7 @@ function process_result()
 find_nitc()
 {
 	((tapcount=tapcount+1))
-	name="$engine"
+	name="$enginebinname"
 	recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
 		if [ -n "$tap" ]; then
@@ -181,6 +181,12 @@ while [ $stop = false ]; do
 		*) stop=true
 	esac
 done
+enginebinname=$engine
+case $engine in
+	nitc|nitg) ;;
+	nit) engine=niti ;;
+	niti) enginebinname=nit ;;
+esac
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
@@ -242,7 +248,7 @@ for ii in "$@"; do
 			inputs=/dev/null
 		fi
 
-		if [ "$engine" = "nit" ]; then
+		if [ "$engine" = "niti" ]; then
 			cat > "./$ff.bin" <<END
 exec $NITC --no-color $OPT "$i" $includes -- "\$@"
 END
