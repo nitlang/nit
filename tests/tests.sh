@@ -132,7 +132,7 @@ make_alts0()
 			test -d alt || mkdir -p alt
 			i="alt/${f}_$alt.nit"
 			ff="${ff}_$alt"
-			sed "s/#$alt#//g;/#!$alt#/d" "$ii" > "$i"
+			sed "s/^\(\s*\)#$alt#/\\1/g;/\S\s*#$alt#/d;/#!$alt#/d" "$ii" > "$i"
 		fi
 		ff="$ff$MARK"
 		fs="$fs $i"
