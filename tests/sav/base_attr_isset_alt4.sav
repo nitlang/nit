@@ -7,4 +7,4 @@ false
 3
 true
 false
-Uninitialized attribute _a2 (alt/base_attr_isset_alt4.nit)
+Runtime error: Uninitialized attribute _a2 (alt/base_attr_isset_alt4.nit)

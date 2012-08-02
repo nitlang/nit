@@ -8,4 +8,4 @@ true
 false
 1
 2
-Assert failed (alt/base_assert2_alt4.nit:43)
+Runtime error: Assert failed (alt/base_assert2_alt4.nit:43)
