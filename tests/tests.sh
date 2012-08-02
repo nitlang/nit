@@ -76,6 +76,8 @@ function process_result()
 			SOSOF=NOK
 		fi
 	fi
+	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
+	NYI="$?"
 	if [ "x$SAV" = "xOK" ]; then
 		if [ "x$FAIL" = "x" ]; then
 			echo "[ok] out/$pattern.res"
@@ -88,6 +90,9 @@ function process_result()
 		ok="$ok $pattern"
 	elif [ "x$SOSO" = "xOK" ]; then
 		echo "[soso] out/$pattern.res sav/$pattern.sav"
+		ok="$ok $pattern"
+	elif [ "x$NYI" = "x0" ]; then
+		echo "[todo] out/$pattern.res -> not yet implemented"
 		ok="$ok $pattern"
 	elif [ "x$SOSOF" = "xOK" ]; then
 		echo "[fail soso] out/$pattern.res sav/$pattern.fail"
