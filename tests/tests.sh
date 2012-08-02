@@ -30,6 +30,7 @@ Usage: $e [options] modulenames
 -h          This help
 --tap       Produce TAP output
 --engine    Use a specific engine (default=nitc)
+--noskip    Do not skip a test even if the .skip file matches
 END
 }
 
@@ -147,6 +148,7 @@ function process_result()
 
 need_skip()
 {
+	test "$noskip" = true && return 1
 	if grep "$engine" "sav/$1.skip" >/dev/null 2>&1; then
 		((tapcount=tapcount+1))
 		if [ -n "$tap" ]; then
@@ -185,6 +187,7 @@ verbose=false
 stop=false
 tapcount=0
 engine=nitc
+noskip=
 while [ $stop = false ]; do
 	case $1 in
 		-o) OPT="$OPT $2"; shift; shift;;
@@ -192,6 +195,7 @@ while [ $stop = false ]; do
 		-h) usage; exit;;
 		--tap) tap=true; shift;;
 		--engine) engine="$2"; shift; shift;;
+		--noskip) noskip=true; shift;;
 		*) stop=true
 	esac
 done
