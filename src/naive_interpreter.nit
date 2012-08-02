@@ -506,9 +506,9 @@ redef class ANode
 	private fun fatal(v: NaiveInterpreter, message: String)
 	do
 		if v.modelbuilder.toolcontext.opt_no_color.value == true then
-			print("{message} ({location.file.filename}:{location.line_start})")
+			print("Runtime error: {message} ({location.file.filename}:{location.line_start})")
 		else
-			print("{location}: {message}\n{location.colored_line("0;31")}")
+			print("{location}: Runtime error: {message}\n{location.colored_line("0;31")}")
 			print(v.stack_trace)
 		end
 		exit(1)

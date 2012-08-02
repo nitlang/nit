@@ -1182,9 +1182,9 @@ private class GlobalCompilerVisitor
 	fun add_abort(message: String)
 	do
 		if self.current_node != null and self.current_node.location.file != null then
-			self.add("fprintf(stderr, \"%s (%s:%d)\\n\", \"{message.escape_to_c}\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
+			self.add("fprintf(stderr, \"Runtime error: %s (%s:%d)\\n\", \"{message.escape_to_c}\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
 		else
-			self.add("fprintf(stderr, \"%s\\n\", \"{message.escape_to_c}\");")
+			self.add("fprintf(stderr, \"Runtime error: %s\\n\", \"{message.escape_to_c}\");")
 		end
 		self.add("exit(1);")
 	end
