@@ -39,6 +39,7 @@ function process_result()
 	SAV=""
 	FAIL=""
 	SOSO=""
+	SOSOF=""
 	if [ -r "sav/$pattern.sav" ]; then
 		diff -u "out/$pattern.res" "sav/$pattern.sav" > "out/$pattern.diff.sav.log"
 		if [ "$?" == 0 ]; then
@@ -64,6 +65,16 @@ function process_result()
 		else
 			FAIL=NOK
 		fi
+		sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
+		sed '/[Ww]arning/d;/[Ee]rror/d' "sav/$pattern.fail" > "out/$pattern.fail2"
+		grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
+		grep '[Ee]rror' "sav/$pattern.fail" >/dev/null && echo "Error" >> "out/$pattern.fail2"
+		diff -u "out/$pattern.res2" "out/$pattern.fail2" > "out/$pattern.diff.fail2.log"
+		if [ "$?" == 0 ]; then
+			SOSOF=OK
+		else
+			SOSOF=NOK
+		fi
 	fi
 	if [ "x$SAV" = "xOK" ]; then
 		if [ "x$FAIL" = "x" ]; then
@@ -77,6 +88,9 @@ function process_result()
 		ok="$ok $pattern"
 	elif [ "x$SOSO" = "xOK" ]; then
 		echo "[soso] out/$pattern.res sav/$pattern.sav"
+		ok="$ok $pattern"
+	elif [ "x$SOSOF" = "xOK" ]; then
+		echo "[fail soso] out/$pattern.res sav/$pattern.fail"
 		ok="$ok $pattern"
 	elif [ "x$SAV" = "xNOK" ]; then
 		echo "[======= fail out/$pattern.res sav/$pattern.sav =======]"
