@@ -1,8 +1,8 @@
 
-import end#!alt7#
+import end#alt7#
 #alt7#import kernel
-class Object#!alt7#
-end#!alt7#
+class Object#alt7#
+end#alt7#
 
 #alt6#class A
 #alt6#end

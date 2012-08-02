@@ -102,7 +102,7 @@ class D
 		'1'.output
 		' '.output
 #alt4#		init
-		initb #!alt2#
+		initb #alt2#
 		'D'.output
 		'2'.output
 		' '.output

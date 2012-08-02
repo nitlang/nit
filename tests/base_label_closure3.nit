@@ -43,7 +43,7 @@ foo !bar do
 		4.output
 	!baz do
 		40.output
-	end label l2#!alt6#
+	end label l2#alt6#
 	#alt6#end label l1
 	5.output
 !baz do

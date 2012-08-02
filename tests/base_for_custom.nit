@@ -16,9 +16,9 @@ import kernel
 
 class A
 	var v: Int
-	fun iterate #!alt1#
+	fun iterate #alt1#
 	#alt1# fun foo
-		!each(i: Int) #!alt2# #!alt5#
+		!each(i: Int) #alt2# #alt5#
 	        #alt5#!each(i: Int): Int
 	do
 		each(v)
@@ -35,14 +35,14 @@ class B
 end
 
 var a = new A(5)
-for i in a do #!alt3#
+for i in a do #alt3#
 #alt3#for i, j in a do
 	i.output
 end
 
 var b = new B(5)
-for i, j in b do #!alt4#
+for i, j in b do #alt4#
 #alt4#for i in b do
 	i.output
-	j.output #!alt4#
+	j.output #alt4#
 end

@@ -33,7 +33,7 @@ fun eat_b(b: B) do 'B'.output
 var a: nullable Object = null
 a = new B
 if rand then
-	a = null #!alt1#
+	a = null #alt1#
 	#alt2#a = new A
 	#alt3#a = new B
 end

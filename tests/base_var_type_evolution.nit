@@ -67,7 +67,7 @@ if rand then
 	a = new B
 else
 	a = new C
-	abort#!alt6#
+	abort#alt6#
 end
 a.a
 a.b

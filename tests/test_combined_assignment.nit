@@ -15,7 +15,7 @@
 # limitations under the License.
 
 class A
-	readable writable var _a: Int = 0#!alt1#
+	readable writable var _a: Int = 0#alt1#
 	#alt1#readable writable var _a: Object = 0
 	init do end
 	fun foo

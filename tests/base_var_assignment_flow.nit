@@ -40,9 +40,9 @@ b.output
 
 var c: Object
 if maybe then
-	c = 2 #!alt2# #!alt4#
+	c = 2 #alt2# #alt4#
 else
-	c = 2 #!alt3# #!alt4#
+	c = 2 #alt3# #alt4#
 end
 c.output
 

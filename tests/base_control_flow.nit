@@ -28,7 +28,7 @@ do
 	a
 	if true then return 0
 	a
-	return 1#!alt1#
+	return 1#alt1#
 end
 
 fun c: Int
@@ -40,7 +40,7 @@ do
 		return 0
 	end
 	a
-	return 2#!alt1#
+	return 2#alt1#
 end
 
 fun d: Int

@@ -21,7 +21,7 @@ class A
 		!bar: Int
 	do
 		1.output
-		bar.output #!alt1#
+		bar.output #alt1#
 		#alt2#bar(2)
 		#alt3#var x: Char = bar
 		4.output
@@ -33,7 +33,7 @@ fun maybe: Bool do return true
 fun work
 do
 	var a = new A
-	a.foo !bar do #!alt11#
+	a.foo !bar do #alt11#
 	#alt11#a.foo !bar x do
 		2.output
 		if maybe then

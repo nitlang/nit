@@ -29,7 +29,7 @@ class A
 			#alt7# break 1
 			#alt8# break 'x'
 			end
-			break 20#!alt9#
+			break 20#alt9#
 		end
 	do
 		1.output

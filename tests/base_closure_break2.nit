@@ -18,11 +18,11 @@ import kernel
 
 class A
 	fun foo: Int
-		break !bar #!alt12#
+		break !bar #alt12#
 		#alt12#break !bar: Int
 	do
 		1.output
-		if maybe then bar #!alt1#
+		if maybe then bar #alt1#
 		#alt2#if maybe then bar(2)
 		#alt3#if maybe then var x = bar
 		return 4
@@ -34,7 +34,7 @@ fun maybe: Bool do return true
 fun work
 do
 	var a = new A
-	var r = a.foo !bar do #!alt11#
+	var r = a.foo !bar do #alt11#
 		#alt11#var r = a.foo !bar x do
 		2.output
 		if maybe then
@@ -46,7 +46,7 @@ do
 		#alt9#return 'x'
 		end
 		3.output
-		break 4 #!alt13#
+		break 4 #alt13#
 	end
 	r.output
 	#alt10# a.foo
