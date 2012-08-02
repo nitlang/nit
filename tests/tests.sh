@@ -145,6 +145,20 @@ function process_result()
 	fi
 }
 
+need_skip()
+{
+	if grep "$engine" "sav/$1.skip" >/dev/null 2>&1; then
+		((tapcount=tapcount+1))
+		if [ -n "$tap" ]; then
+			echo "ok - $2 # skip"
+		else
+			echo "=> $2: [skip]"
+		fi
+		return 0
+	fi
+	return 1
+}
+
 find_nitc()
 {
 	((tapcount=tapcount+1))
@@ -228,6 +242,10 @@ for ii in "$@"; do
 		echo "File '$ii' does not exist."
 		continue
 	fi
+	f=`basename "$ii" .nit`
+
+	# Sould we skip the file for this engine?
+	need_skip $f $f && continue
 
 	tmp=${ii/../AA}
 	if [ "x$tmp" = "x$ii" ]; then
@@ -236,10 +254,13 @@ for ii in "$@"; do
 		includes="-I alt"
 	fi
 
-	f=`basename "$ii" .nit`
 	for i in "$ii" `./alterner.pl --start '#' --altsep '_' $ii`; do
 		bf=`basename $i .nit`
 		ff="out/$bf"
+
+		# Sould we skip the alternative for this engine?
+		need_skip $bf $bf && continue
+
 		test -z "$tap" && echo -n "=> $bf: "
 
 		if [ -f "$f.inputs" ]; then
@@ -305,6 +326,10 @@ END
 					args="$line"
 					bff=$bf"_args"$cptr
 					fff=$ff"_args"$cptr
+
+					# Sould we skip the input for this engine?
+					need_skip $bff "  args #$cptr" && continue
+
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
 						echo ""
