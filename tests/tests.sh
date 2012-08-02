@@ -323,8 +323,8 @@ END
 			fi
 		else
 			test -z "$tap" && echo -n "! "
-			cat "$ff.cmp.err" "$ff.compile.log" > "$ff.res"
-			#echo "Compilation error" > "$ff.res"
+			cat "$ff.cmp.err" > "$ff.res"
+			echo "Compilation error" > "$ff.res"
 			process_result $bf "$bf"
 		fi
 	done
