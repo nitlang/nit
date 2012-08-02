@@ -1392,7 +1392,7 @@ redef class AClosureDecl
 		var clos = new MMClosure(name, sig, n_kwbreak != null, n_expr != null)
 		for c in old_signature_builder.closure_decls do
 			if c.n_id.to_symbol == name then
-				v.error(n_id, "A closure '!{name}' already defined at {c.n_id.location.relative_to(n_id.location)}.")
+				v.error(n_id, "Error: A closure '!{name}' already defined at {c.n_id.location.relative_to(n_id.location)}.")
 				return
 			end
 		end
