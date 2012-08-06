@@ -1,0 +1,272 @@
+#!/bin/bash
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# This shell script helps running benchmarks
+
+# TODO: cleanup and libify the helper-parts
+
+## CONFIGURATION OPTIONS ##
+
+# Number of times a command must be run with bench_command
+count=5
+
+# FIXME: verbose mode
+#outputopts=">/dev/null 2>&1"
+
+# Do not run commands
+# FIXME: buggy
+#dry_run=true
+
+### HELPER FUNCTIONS ##
+
+function die()
+{
+	echo >&2 "DIE: $*"
+	exit 1
+}
+
+# Run a single command multiple time and store the execution times
+# in the current $res file.
+#
+#  $1: title of the command
+#  $2: long desription of the command
+#  rest: the command to execute
+function bench_command()
+{
+	if [ "$dry_run" = "true" ]; then return; fi
+	title="$1"
+	desc="$2"
+	shift
+	shift
+	timeout="time.out"
+	echo "$title" > "$timeout"
+	echo "# $desc" >> "$timeout"
+	echo "\$ $@" >> "$timeout"
+	echo
+	echo "** [$title] $desc **"
+	echo " $ $@"
+
+	# Execute the commands $count times
+	for i in `seq 1 "$count"`; do
+		/usr/bin/time -f "%U" -o "$timeout" -a "$@" $outputopts # || die "$1: failed"
+		echo -n "$i. "
+		tail -n 1 "$timeout"
+	done
+
+	line=`compute_stats "$timeout"`
+	echo "$line ($res)"
+	echo $line >> "$res"
+}
+
+# Run a simble command witout storing the execution time
+# Used to display command on verbose and skip long executions when dry_run is given
+# $@ command to execute
+function run_command()
+{
+	if [ "$dry_run" = "true" ]; then return; fi
+	echo " $ $@"
+	"$@"
+}
+
+# perl function to compute min/max/avg.
+# used by bench_command
+#
+# $1: file
+# return: first min max avg label
+function compute_stats()
+{
+	file="$1"
+	# Compute statistics
+	perl - "$file" <<'END'
+	@lines = ();
+	$first = undef;
+	chomp($label = <>);
+	while(<>) {
+		chomp;
+		if (/^\d/) {
+			if (defined $first) {
+				push @lines, $_;
+			} else {
+				$first = $_;
+			}
+		}
+	}
+	$len = scalar @lines;
+	if ($len) {
+		@lines = sort {$a <=> $b} @lines;
+		$min = $lines[0];
+		$max = $lines[$#lines];
+		$avg = 0;
+		for $i (@lines) { $avg += $i; }
+		$avg = $avg / $len;
+		print "${first} ${min} ${max} ${avg} \"${label}\"\n";
+	} else {
+		print "${first} ${first} ${first} ${first} \"${label}\"\n";
+	}
+END
+}
+
+# Create a new $res to be used in the next plot
+#
+# $1 = resfile
+# $2 = title
+# $3 = description
+function prepare_res()
+{
+	echo
+	echo "# [$2] $3 #"
+	res=$1
+	if [ "$plots" = "" ]; then
+		plots="plot '$1' using 4:xticlabels(5) ti '$2';"
+	else
+		plots="$plots replot '$1' using 4 ti '$2';"
+	fi
+	if [ "$dry_run" = "true" ]; then return; fi
+	echo "# [$2] $3" > "$res"
+	echo "# first min max avg title" >> "$res"
+}
+
+# Plot the last $res as an histogram
+# $1: plot file (eg toto.gnu)
+function plot()
+{
+	cat >"$1" <<END
+set auto x;
+set yrange [0:];
+set style data histogram;
+set style histogram cluster gap 2;
+set style fill solid border -1;
+set boxwidth 0.9;
+set xtic nomirror rotate by -45 scale 0 font ',8';
+set title "$1"
+set ylabel "time (s)"
+$plots
+END
+	echo "# gnuplot -p $1"
+	gnuplot -p "$1"
+	plots=
+}
+
+## GLOBAL VARIABLES ##
+
+# The current $res (set by prepare_res, used by bench_command)
+res=
+
+# The current stuff to plot (set by prepare_res, used by plot)
+plots=
+
+# HELPER FOR NIT #
+
+# Run standards benchs on a compiler command
+# $1: title
+# rest: command to run (executable + options)
+function run_compiler()
+{
+	title=$1
+	shift
+	run_command "$@" nitg.nit -o "nitg.$title.bin"
+	bench_command "nitg" "nitg test_parser.nit" "./nitg.$title.bin" test_parser.nit
+	run_command "$@" nit.nit -o "nit.$title.bin"
+	bench_command "nit" "nit test_parser.nit test_parser.nit" "./nit.$title.bin" test_parser.nit -- -n rapid_type_analysis.nit
+}
+
+## EFFECTIVE BENCHS ##
+
+function bench_nitg_bootstrap()
+{
+	name="$FUNCNAME"
+	prepare_res "$name.dat" "" "Steps of the bootstrap of nitg by nitc"
+	rm nit?_nit*
+	cp ./nitc_3 ./nitc_nitc
+	bench_command "c/c c" "nitc_nitc nitc.nit -> nitc_nitc (stability)" ./nitc_nitc -O nitc.nit -o nitc_nitc
+	bench_command "c/c g" "nitc_nitc nitg.nit -> nitg_nitc" ./nitc_nitc -O nitg.nit -o nitg_nitc
+	bench_command "g/c g" "nitg_nitc nitg.nit -> nitg_nitg" ./nitg_nitc nitg.nit -o nitg_nitg
+	bench_command "g/g g" "nitg_nitg nitg.nit -> nitg_nitg (stability)" ./nitg_nitg nitg.nit -o nitg_nitg
+
+	plot "$name.gnu"
+}
+bench_nitg_bootstrap
+
+function bench_steps()
+{
+	name="$FUNCNAME"
+	prepare_res "$name-nitc.dat" "nitc" "Various steps of nitc"
+	bench_command "parse" "" ./nitc_3 --only-parse nitg.nit
+	bench_command "metamodel" "" ./nitc_3 --only-metamodel nitg.nit
+	bench_command "generate c" "" ./nitc_3 --no-cc nitg.nit
+	bench_command "full" "" ./nitc_nitc -O nitg.nit
+
+	prepare_res "$name-nitg.dat" "nitg" "Various steps of nitg"
+	bench_command "parse" "" ./nitg --only-parse nitg.nit
+	bench_command "metamodel" "" ./nitg --only-metamodel nitg.nit
+	bench_command "generate c" "" ./nitg --no-cc nitg.nit
+	bench_command "full" "" ./nitg nitg.nit
+
+	plot "$name.gnu"
+}
+bench_steps
+
+# $#: options to compare
+function bench_nitg_options()
+{
+	name="$FUNCNAME"
+	prepare_res "$name.dat" "no options" "nitg without options"
+	run_compiler "nitg" ./nitg
+
+	for opt in "$@"; do
+		prepare_res "$name$opt.dat" "$opt" "nitg with option $opt"
+		run_compiler "nitg$opt" ./nitg $opt
+	done
+
+	plot "$name.gnu"
+}
+bench_nitg_options --hardening
+
+function bench_nitc_gc()
+{
+	name="$FUNCNAME"
+	for gc in nitgc boehm malloc large; do
+		prepare_res "$name-$gc".dat "$gc" "nitc with gc=$gc"
+		export NIT_GC_OPTION="$gc"
+		run_compiler "nitc" ./nitc_3 -O
+	done
+
+	plot "$name.gnu"
+}
+bench_nitc_gc
+
+function bench_nitc_boost()
+{
+	name="$FUNCNAME"
+	prepare_res "$name-slow.dat" "no -O" "nitc without -O"
+	run_compiler "nitc_slow" ./nitc_3
+	prepare_res "$name-fast.dat" "-O" "nitc with -O"
+	run_compiler "nitc" ./nitc_3 -O
+
+	plot "$name.gnu"
+}
+bench_nitc_boost
+
+function bench_engines()
+{
+	name="$FUNCNAME"
+	export NIT_GC_OPTION="$boehm"
+	prepare_res "$name-nitc.dat" "nitc" "nitc"
+	run_compiler "nitc" ./nitc_3 -O
+	prepare_res "$name-nitg.dat" "nitg" "nitg"
+	run_compiler "nitg" ./nitg
+	plot "$name.gnu"
+}
+bench_engines
