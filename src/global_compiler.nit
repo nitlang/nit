@@ -597,7 +597,22 @@ private class RuntimeVariable
 
 	redef fun to_s do return name
 
-	redef fun inspect do return "<{inspect_head} {name}:{mtype}({mcasttype})>"
+	redef fun inspect
+	do
+		var exact_str
+		if self.is_exact then
+			exact_str = " exact"
+		else
+			exact_str = ""
+		end
+		var type_str
+		if self.mtype == self.mcasttype then
+			type_str = "{mtype}{exact_str}"
+		else
+			type_str = "{mtype}({mcasttype}{exact_str})"
+		end
+		return "<{inspect_head} {name}:{type_str}>"
+	end
 end
 
 # Visit the AST to generate the C code.
@@ -881,14 +896,14 @@ private class GlobalCompilerVisitor
 		end
 
 		if types.is_empty then
-			self.add("/*BUG: no live types for {args.first.mtype} . {m}*/")
+			self.add("/*BUG: no live types for {args.first.inspect} . {m}*/")
 			return res
 		end
-		self.add("/* send {m} on {args.first}: {args.first.mcasttype} (declared {args.first.mtype}) */")
+		self.add("/* send {m} on {args.first.inspect} */")
 		if args.first.mtype.ctype != "val*" then
 			var propdefs = m.lookup_definitions(self.compiler.mainmodule, args.first.mtype)
 			if propdefs.length == 0 then
-				self.add("/* skip {args.first.mcasttype}, no method {m} */")
+				self.add("/* skip, no method {m} */")
 				return res
 			end
 			assert propdefs.length == 1
@@ -904,14 +919,14 @@ private class GlobalCompilerVisitor
 				if args[1].mcasttype.ctype == "val*" then
 					self.add("{res} = ({args[1]} == NULL);")
 				else
-					self.add("{res} = 0; /* {args[1]}: {args[1].mcasttype}  cannot be null */")
+					self.add("{res} = 0; /* {args[1].inspect} cannot be null */")
 				end
 			else if m.name == "!=" then
 				assert res != null
 				if args[1].mcasttype.ctype == "val*" then
 					self.add("{res} = ({args[1]} != NULL);")
 				else
-					self.add("{res} = 1; /* {args[1]}: {args[1].mcasttype} cannot be null */")
+					self.add("{res} = 1; /* {args[1].inspect} cannot be null */")
 				end
 			else
 				self.add_abort("Reciever is null")
@@ -1034,10 +1049,10 @@ private class GlobalCompilerVisitor
 		var res = self.new_var(ret)
 
 		if types.is_empty then
-			self.add("/*BUG: no live types for {recv.mtype} . {a}*/")
+			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
 			return res
 		end
-		self.add("/* read {a} on {recv.mcasttype} */")
+		self.add("/* read {a} on {recv.inspect} */")
 		self.add("switch({recv}->classid) \{")
 		var last = types.last
 		for t in types do
@@ -1077,10 +1092,10 @@ private class GlobalCompilerVisitor
 		var types = self.collect_types(recv)
 
 		if types.is_empty then
-			self.add("/*BUG: no live types for {recv.mtype} . {a}*/")
+			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
 			return
 		end
-		self.add("/* write {a} on {recv.mcasttype} */")
+		self.add("/* write {a} on {recv.inspect} */")
 		self.add("switch({recv}->classid) \{")
 		var last = types.last
 		for t in types do
@@ -1122,7 +1137,7 @@ private class GlobalCompilerVisitor
 
 		var res = self.new_var(bool_type)
 
-		self.add("/* isa {mtype} on {value.mcasttype} */")
+		self.add("/* isa {mtype} on {value.inspect} */")
 		if value.mcasttype isa MNullableType then
 			self.add("if ({value} == NULL) \{")
 			if mtype isa MNullableType then
