@@ -319,6 +319,7 @@ private class GlobalCompiler
 		v.add_decl("/* allocate {mtype} */")
 		v.add_decl("{mtype.ctype} NEW_{mtype.c_name}(void) \{")
 		var res = v.new_var(mtype)
+		res.is_exact = true
 		v.add("{res} = GC_MALLOC(sizeof(struct {mtype.c_name}));")
 		v.add("{res}->classid = {self.classid(mtype)};")
 
