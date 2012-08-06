@@ -3,7 +3,7 @@
 # Script to call valgrind with the right options
 
 # Disable GC to avoid unpredictable long news (those that trigger the GC)
-NIT_GC_OPTION=large
+NIT_GC_OPTION=malloc
 export NIT_GC_OPTION
 
 # Skip usual methods with blocks to avoid loops
