@@ -61,21 +61,12 @@ for ii in "$@"; do
 	fi
 
 	# Process each alternatives in the current file
-	for alt in "" `sed -n 's/.*#!*\(alt[0-9]*\)#.*/\1/p' "$ii" | sort -u`; do
+	for alt in "$ii" `./alterner.pl --start '#' "$ii"`; do
 		f=`basename "$ii" .nit`
 		d=`dirname "$ii"`
 		ff="$f"
 		i="$ii"
-		includes="$oincludes"
-
-		if [ "x$alt" != "x" ]; then
-			test -d alt || mkdir -p alt
-			i="alt/${f}_$alt.nit"
-			ff="${ff}_$alt"
-			sed "s/#$alt#//g;/#!$alt#/d" "$ii" > "$i"
-			includes="$includes -I alt"
-		fi
-		ff="$ff$MARK"
+		includes="$oincludes -I alt"
 
 		echo -n "=> $i: "
 

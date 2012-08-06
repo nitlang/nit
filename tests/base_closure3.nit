@@ -31,7 +31,7 @@ fun maybe: Bool do return true
 
 var a = new A
 0.output
-a.foo(1,8) !bar x, y, b do #!alt2#
+a.foo(1,8) !bar x, y, b do #alt2#
 #alt2#a.foo(1,8) !bar x, y do
 	x.output
 	b.foo(x+1, y-1) !bar z, t, c do

@@ -12,6 +12,12 @@ some:
 global:
 	./tests.sh -o --global ${PROGS}
 
+niti:
+	./tests.sh --engine niti ${PROGS}
+
+nitg:
+	./tests.sh --engine nitg ${PROGS}
+
 nitdoc:
 	./tests.sh ../src/nitdoc.nit
 

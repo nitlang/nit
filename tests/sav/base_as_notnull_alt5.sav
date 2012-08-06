@@ -12,4 +12,4 @@ alt/base_as_notnull_alt5.nit:52,6: Warning: 'as(not null)' on non nullable type.
 3
 6
 
-Cast failed (alt/base_as_notnull_alt5.nit:59)
+Runtime error: Cast failed (alt/base_as_notnull_alt5.nit:59)

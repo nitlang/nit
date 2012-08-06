@@ -16,7 +16,7 @@
 
 import array
 
-var a: Array[nullable Int] = [1, 2, 3, null, 5]#!alt1#
+var a: Array[nullable Int] = [1, 2, 3, null, 5]#alt1#
 #alt1#var a = [1, 2, 3, null, 5]
 
 for i in a do

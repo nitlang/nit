@@ -22,4 +22,4 @@ K<Tfalse
 K<Ufalse
 L<Ttrue
 L<Utrue
-Cast failed (alt/base_virtual_type_check_alt8.nit)
+Runtime error: Cast failed (alt/base_virtual_type_check_alt8.nit)

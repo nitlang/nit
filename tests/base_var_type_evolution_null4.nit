@@ -58,7 +58,7 @@ do
 		eat_a(a)
 		break label doblock
 	end
-	abort #!alt4#
+	abort #alt4#
 end label doblock
 eat_na(a)
 eat_a(a)

@@ -1,3 +1,3 @@
 false
 1
-Assert failed (alt/base_assert2_alt3.nit:30)
+Runtime error: Assert failed (alt/base_assert2_alt3.nit:30)

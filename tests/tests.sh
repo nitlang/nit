@@ -25,20 +25,26 @@ usage()
 	e=`basename "$0"`
 	cat<<END
 Usage: $e [options] modulenames
--o option   Pass option to nitc
+-o option   Pass option to the engine
 -v          Verbose (show tests steps)
 -h          This help
+--tap       Produce TAP output
+--engine    Use a specific engine (default=nitc)
+--noskip    Do not skip a test even if the .skip file matches
 END
 }
 
 # As argument: the pattern used for the file
 function process_result()
 {
+	((tapcount=tapcount+1))
 	# Result
 	pattern=$1
+	description=$2
 	SAV=""
 	FAIL=""
 	SOSO=""
+	SOSOF=""
 	if [ -r "sav/$pattern.sav" ]; then
 		diff -u "out/$pattern.res" "sav/$pattern.sav" > "out/$pattern.diff.sav.log"
 		if [ "$?" == 0 ]; then
@@ -64,80 +70,141 @@ function process_result()
 		else
 			FAIL=NOK
 		fi
+		sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
+		sed '/[Ww]arning/d;/[Ee]rror/d' "sav/$pattern.fail" > "out/$pattern.fail2"
+		grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
+		grep '[Ee]rror' "sav/$pattern.fail" >/dev/null && echo "Error" >> "out/$pattern.fail2"
+		diff -u "out/$pattern.res2" "out/$pattern.fail2" > "out/$pattern.diff.fail2.log"
+		if [ "$?" == 0 ]; then
+			SOSOF=OK
+		else
+			SOSOF=NOK
+		fi
 	fi
+	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
+	NYI="$?"
 	if [ "x$SAV" = "xOK" ]; then
-		if [ "x$FAIL" = "x" ]; then
+		if [ -n "$tap" ]; then
+			echo "ok - $description"
+		elif [ "x$FAIL" = "x" ]; then
 			echo "[ok] out/$pattern.res"
 		else
 			echo "[ok] out/$pattern.res - but sav/$pattern.fail remains!"
 		fi
 		ok="$ok $pattern"
 	elif [ "x$FAIL" = "xOK" ]; then
-		echo "[fail] out/$pattern.res"
+		if [ -n "$tap" ]; then
+			echo "not ok - $description # TODO expected failure"
+		else
+			echo "[fail] out/$pattern.res"
+		fi
 		ok="$ok $pattern"
 	elif [ "x$SOSO" = "xOK" ]; then
-		echo "[soso] out/$pattern.res sav/$pattern.sav"
+		if [ -n "$tap" ]; then
+			echo "ok - $description # SOSO"
+		else
+			echo "[soso] out/$pattern.res sav/$pattern.sav"
+		fi
+		ok="$ok $pattern"
+	elif [ "x$NYI" = "x0" ]; then
+		if [ -n "$tap" ]; then
+			echo "not ok - $description # TODO not yet implemented"
+		else
+			echo "[todo] out/$pattern.res -> not yet implemented"
+		fi
+		ok="$ok $pattern"
+	elif [ "x$SOSOF" = "xOK" ]; then
+		if [ -n "$tap" ]; then
+			echo "not ok - $description # TODO SOSO expected failure"
+		else
+			echo "[fail soso] out/$pattern.res sav/$pattern.fail"
+		fi
 		ok="$ok $pattern"
 	elif [ "x$SAV" = "xNOK" ]; then
-		echo "[======= fail out/$pattern.res sav/$pattern.sav =======]"
+		if [ -n "$tap" ]; then
+			echo "not ok - $description"
+		else
+			echo "[======= fail out/$pattern.res sav/$pattern.sav =======]"
+		fi
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ "x$FAIL" = "xNOK" ]; then
-		echo "[======= changed out/$pattern.res sav/$pattern.fail ======]"
+		if [ -n "$tap" ]; then
+			echo "not ok - $description"
+		else
+			echo "[======= changed out/$pattern.res sav/$pattern.fail ======]"
+		fi
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	else
-		echo "[=== no sav ===] out/$pattern.res"
+		if [ -n "$tap" ]; then
+			echo "ok - $description # skip no sav"
+		else
+			echo "[=== no sav ===] out/$pattern.res"
+		fi
 		nos="$nos $pattern"
 	fi
 }
 
+need_skip()
+{
+	test "$noskip" = true && return 1
+	if grep "$engine" "sav/$1.skip" >/dev/null 2>&1; then
+		((tapcount=tapcount+1))
+		if [ -n "$tap" ]; then
+			echo "ok - $2 # skip"
+		else
+			echo "=> $2: [skip]"
+		fi
+		return 0
+	fi
+	return 1
+}
+
 find_nitc()
 {
-	recent=`ls -t ../src/nitc ../src/nitc_[0-9] ../bin/nitc ../c_src/nitc 2>/dev/null | head -1`
+	((tapcount=tapcount+1))
+	name="$enginebinname"
+	recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
-		echo 'Could not find nitc, aborting'
+		if [ -n "$tap" ]; then
+			echo "not ok - find engine $name"
+			echo "Bail out! Could not find engine $name, aborting"
+		else
+			echo "Could not find engine $name, aborting"
+		fi
 		exit 1
 	fi
-	echo 'Using nitc from: '$recent
+	if [ -n "$tap" ]; then
+		echo "ok - find engine $name: $recent"
+	else
+		echo "Using engine $name from: $recent"
+	fi
 	NITC=$recent
 }
 
-make_alts0()
-{
-	ii="$1"
-	xalt="$2"
-	fs=""
-	for alt in `sed -n "s/.*#!*\($xalt[0-9]*\)#.*/\1/p" "$ii" | sort -u`; do
-		f=`basename "$ii" .nit`
-		d=`dirname "$ii"`
-		ff="$f"
-		i="$ii"
-
-		if [ "x$alt" != "x" ]; then
-			test -d alt || mkdir -p alt
-			i="alt/${f}_$alt.nit"
-			ff="${ff}_$alt"
-			sed "s/#$alt#//g;/#!$alt#/d" "$ii" > "$i"
-		fi
-		ff="$ff$MARK"
-		fs="$fs $i"
-	done
-	echo "$fs"
-}
-make_alts()
-{
-	ii="$1"
-	fs="$1"
-	for xalt in `sed -n 's/.*#!*\([0-9]*alt\)[0-9]*#.*/\1/p' "$ii" | sort -u`; do
-		fs2=""
-		for f in $fs; do
-			fs2="$fs2 `make_alts0 $f $xalt`"
-		done
-		fs="$fs $fs2"
-	done
-	echo "$fs"
-}
+verbose=false
+stop=false
+tapcount=0
+engine=nitc
+noskip=
+while [ $stop = false ]; do
+	case $1 in
+		-o) OPT="$OPT $2"; shift; shift;;
+		-v) verbose=true; shift;;
+		-h) usage; exit;;
+		--tap) tap=true; shift;;
+		--engine) engine="$2"; shift; shift;;
+		--noskip) noskip=true; shift;;
+		*) stop=true
+	esac
+done
+enginebinname=$engine
+case $engine in
+	nitc|nitg) ;;
+	nit) engine=niti ;;
+	niti) enginebinname=nit ;;
+esac
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
@@ -145,16 +212,6 @@ make_alts()
 # Set NIT_DIR if needed
 [ -z "$NIT_DIR" ] && export NIT_DIR=..
 
-verbose=false
-stop=false
-while [ $stop = false ]; do
-	case $1 in
-		-o) OPT="$OPT $2"; shift; shift;;
-		-v) verbose=true; shift;;
-		-h) usage; exit;;
-		*) stop=true
-	esac
-done
 
 # Mark to distinguish files among tests
 # MARK=
@@ -189,6 +246,10 @@ for ii in "$@"; do
 		echo "File '$ii' does not exist."
 		continue
 	fi
+	f=`basename "$ii" .nit`
+
+	# Sould we skip the file for this engine?
+	need_skip $f $f && continue
 
 	tmp=${ii/../AA}
 	if [ "x$tmp" = "x$ii" ]; then
@@ -197,11 +258,14 @@ for ii in "$@"; do
 		includes="-I alt"
 	fi
 
-	f=`basename "$ii" .nit`
-	for i in `make_alts $ii`; do
+	for i in "$ii" `./alterner.pl --start '#' --altsep '_' $ii`; do
 		bf=`basename $i .nit`
 		ff="out/$bf"
-		echo -n "=> $bf: "
+
+		# Sould we skip the alternative for this engine?
+		need_skip $bf $bf && continue
+
+		test -z "$tap" && echo -n "=> $bf: "
 
 		if [ -f "$f.inputs" ]; then
 			inputs="$f.inputs"
@@ -209,25 +273,34 @@ for ii in "$@"; do
 			inputs=/dev/null
 		fi
 
-		# Compile
-		if [ "x$verbose" = "xtrue" ]; then
-			echo ""
-			echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
+		if [ "$engine" = "niti" ]; then
+			cat > "./$ff.bin" <<END
+exec $NITC --no-color $OPT "$i" $includes -- "\$@"
+END
+			chmod +x "./$ff.bin"
+			> "$ff.cmp.err"
+			> "$ff.compile.log"
+			ERR=0
+		else
+			# Compile
+			if [ "x$verbose" = "xtrue" ]; then
+				echo ""
+				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
+			fi
+			$NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+			ERR=$?
+			if [ "x$verbose" = "xtrue" ]; then
+				cat "$ff.compile.log"
+				cat >&2 "$ff.cmp.err"
+			fi
 		fi
-		$NITC --no-color $OPT -o "$ff.bin" "$i" $includes <"$inputs" 2> "$ff.cmp.err" > "$ff.compile.log"
-		ERR=$?
-		if [ "x$verbose" = "xtrue" ]; then
-			cat "$ff.compile.log"
-			cat >&2 "$ff.cmp.err"
-		fi
-		egrep '^[A-Z0-9_]*$' "$ff.compile.log" > "$ff.res"
 		if [ "$ERR" != 0 ]; then
-			echo -n "! "
+			test -z "$tap" && echo -n "! "
 			cat "$ff.cmp.err" "$ff.compile.log" > "$ff.res"
-			process_result $bf
+			process_result $bf $bf
 		elif [ -x "./$ff.bin" ]; then
 			cp "$ff.cmp.err" "$ff.res"
-			echo -n ". "
+			test -z "$tap" && echo -n ". "
 			# Execute
 			args=""
 			if [ "x$verbose" = "xtrue" ]; then
@@ -247,7 +320,7 @@ for ii in "$@"; do
 			if [ -s "$ff.err" ]; then
 				cat "$ff.err" >> "$ff.res"
 			fi
-			process_result $bf
+			process_result $bf $bf
 
 			if [ -f "$f.args" ]; then
 				fargs=$f.args
@@ -257,12 +330,16 @@ for ii in "$@"; do
 					args="$line"
 					bff=$bf"_args"$cptr
 					fff=$ff"_args"$cptr
+
+					# Sould we skip the input for this engine?
+					need_skip $bff "  args #$cptr" && continue
+
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
 						echo ""
 						echo "NIT_NO_STACK=1 ./$ff.bin" $args
 					fi
-					echo -n "==> args #"$cptr " "
+					test -z "$tap" && echo -n "==> args #"$cptr " "
 					sh -c "NIT_NO_STACK=1 ./$ff.bin  ''$args < $inputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
@@ -276,17 +353,25 @@ for ii in "$@"; do
 					if [ -s "$fff.err" ]; then
 						cat "$fff.err" >> "$fff.res"
 					fi
-					process_result $bff
+					process_result $bff "  args #$cptr"
 				done < $fargs
 			fi
 		else
-			echo -n "! "
-			cat "$ff.cmp.err" "$ff.compile.log" > "$ff.res"
-			#echo "Compilation error" > "$ff.res"
-			process_result $bf
+			test -z "$tap" && echo -n "! "
+			cat "$ff.cmp.err" > "$ff.res"
+			echo "Compilation error" > "$ff.res"
+			process_result $bf "$bf"
 		fi
 	done
 done
+
+if [ -n "$tap" ]; then
+	echo "1..$tapcount"
+	echo "# ok:" `echo $ok | wc -w`
+	echo "# not ok:" `echo $nok | wc -w`
+	echo "# no sav:" `echo $nos | wc -w`
+	exit
+fi
 
 echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos | wc -w`
 

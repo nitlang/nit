@@ -17,14 +17,14 @@
 import kernel
 
 #alt1#class Object
-redef class Object #!alt1#
+redef class Object #alt1#
 	fun bar: Int do return 10 + baz
 end
 
 class A
 	fun foo: Int do return 100 + bar
 #alt2#	fun foo(c: Char) do (200 + bar).output
-	redef fun bar: Int do return 20 + baz #!alt3#
+	redef fun bar: Int do return 20 + baz #alt3#
 #alt3#	fun bar: Int do return 30 + baz
 #alt4#	fun baz(c: Char) do 2.output
 #alt5#	redef fun baz(c: Char) do 2.output

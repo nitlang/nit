@@ -19,13 +19,13 @@ import base_closure2
 class B
 	super A
 	redef fun foo
-		!bar(i: Int) #!alt13# #!alt14# #!alt15#
+		!bar(i: Int) #alt13# #alt14# #alt15#
 		#alt13# !bar
 		#alt14# !bar(b: Bool)
 		#alt15# !bar(i: Int): Int
 	do
 		10.output
-		bar(20) #!alt1#
+		bar(20) #alt1#
 		#alt2#bar
 		#alt12#bar('x')
 		#alt3#var x = bar(2)
@@ -36,7 +36,7 @@ end
 fun work2
 do
 	var a: A = new B
-	a.foo !bar x do #!alt11#
+	a.foo !bar x do #alt11#
 	#alt11#a.foo !bar do
 		x.output
 		if maybe then

@@ -1182,9 +1182,9 @@ private class GlobalCompilerVisitor
 	fun add_abort(message: String)
 	do
 		if self.current_node != null and self.current_node.location.file != null then
-			self.add("fprintf(stderr, \"%s (%s:%d)\\n\", \"{message.escape_to_c}\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
+			self.add("fprintf(stderr, \"Runtime error: %s (%s:%d)\\n\", \"{message.escape_to_c}\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
 		else
-			self.add("fprintf(stderr, \"%s\\n\", \"{message.escape_to_c}\");")
+			self.add("fprintf(stderr, \"Runtime error: %s\\n\", \"{message.escape_to_c}\");")
 		end
 		self.add("exit(1);")
 	end
@@ -1338,7 +1338,7 @@ end
 redef class APropdef
 	private fun compile_to_c(v: GlobalCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
-		v.add("printf(\"Not implemented {class_name} {mpropdef} at {location.to_s}\\n\");")
+		v.add("printf(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
 		debug("Not yet implemented")
 	end
 
@@ -1638,7 +1638,7 @@ redef class AInternMethPropdef
 			end
 			return
 		end
-		v.add("printf(\"Not implemented {class_name}:{mpropdef} at {location.to_s}\\n\");")
+		v.add("printf(\"NOT IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
 		debug("Not implemented {mpropdef}")
 	end
 end
@@ -1755,7 +1755,7 @@ redef class AExpr
 	private fun expr(v: GlobalCompilerVisitor): nullable RuntimeVariable
 	do
 		debug("Unimplemented expr {class_name}")
-		v.add("printf(\"Not implemented {class_name}:{location.to_s}\\n\");")
+		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{location.to_s}\\n\");")
 		var mtype = self.mtype
 		if mtype == null then
 			return null

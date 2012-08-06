@@ -44,7 +44,7 @@ do
 		#alt7#continue
 		#alt8#continue 'x'
 		end
-		continue 5 #!alt9#
+		continue 5 #alt9#
 	end
 	4.output
 	return i

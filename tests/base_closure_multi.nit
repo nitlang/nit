@@ -17,12 +17,12 @@
 import kernel
 fun a
 	!a1
-	!a2 #!alt1#
+	!a2 #alt1#
 #alt2#	!a3
 #alt6#  !a1
 do
 	a1
-	a2 #!alt1#
+	a2 #alt1#
 #alt2#	a3
 end
 
@@ -54,8 +54,8 @@ end
 a !a1 do
 	b !b1 do
 		1.output
-	!b2 do #!alt3#
-		2.output #!alt3#
+	!b2 do #alt3#
+		2.output #alt3#
 #alt4#	!b3 do
 #alt4#		20.output
 	end

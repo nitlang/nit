@@ -43,7 +43,7 @@ var i = foo !bar do
 		if maybe then break label l1 10
 		4.output
 		break 4
-	end label l2#!alt6#
+	end label l2#alt6#
 	#alt6#end label l1
 	j.output
 	5.output

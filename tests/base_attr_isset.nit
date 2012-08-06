@@ -55,7 +55,7 @@ class Foo
 		show(1)
 		_a1 = new Integer(1)
 		show(2)
-		_a2 = new Integer(_a1.val + 1) #!alt3# #!alt4#
+		_a2 = new Integer(_a1.val + 1) #alt3# #alt4#
 		show(3)
 	end
 		#alt3#
@@ -64,7 +64,7 @@ end
 
 class Bar
 	super Foo
-	var _a3: Integer#!alt1# #!alt2#
+	var _a3: Integer#alt1# #alt2#
 	#alt1#var _a3: Integer = new Integer(9000)
 	#alt2#var _a3: nullable Integer
 	redef fun run

@@ -16,5 +16,5 @@ var o: B
 #alt2#o = new B
 #alt3#o = new B
 #alt3#o.foo
-o = new A#!alt2#
+o = new A#alt2#
 o.foo

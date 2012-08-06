@@ -27,7 +27,7 @@ class A
 			#alt6# break 1
 			end
 			#alt5# break
-			continue 20 #!alt5#
+			continue 20 #alt5#
 		end
 	do
 		1.output

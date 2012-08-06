@@ -3,4 +3,4 @@ alt/base_as_cast_alt3.nit:52,1--12: Warning: Expression is already a Object.
 0
 0
 0
-Cast failed (alt/base_as_cast_alt3.nit:47)
+Runtime error: Cast failed (alt/base_as_cast_alt3.nit:47)

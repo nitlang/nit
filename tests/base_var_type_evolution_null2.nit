@@ -34,7 +34,7 @@ if a == null then
 	eat_na(a)
 	#alt1#eat_a(a)
 	'\n'.output
-	abort#!alt2#
+	abort#alt2#
 end
 eat_na(a)
 eat_a(a)
