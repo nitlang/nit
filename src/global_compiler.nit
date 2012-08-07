@@ -814,6 +814,20 @@ private class GlobalCompilerVisitor
 
 	private var variables: HashMap[Variable, RuntimeVariable] = new HashMap[Variable, RuntimeVariable]
 
+	# Return an unique and stable identifier associated with an escapemark
+	fun escapemark_name(e: nullable EscapeMark): String
+	do
+		assert e != null
+		if escapemark_names.has_key(e) then return escapemark_names[e]
+		var name = e.name
+		if name == null then name = "label"
+		name = get_name(name)
+		escapemark_names[e] = name
+		return name
+	end
+
+	private var escapemark_names = new HashMap[EscapeMark, String]
+
 	# Return a new name based on `s' and unique in the visitor
 	fun get_name(s: String): String
 	do
@@ -1933,14 +1947,14 @@ end
 redef class AContinueExpr
 	redef fun stmt(v)
 	do
-		v.add("goto CONTINUE_{self.escapemark.object_id};")
+		v.add("goto CONTINUE_{v.escapemark_name(self.escapemark)};")
 	end
 end
 
 redef class ABreakExpr
 	redef fun stmt(v)
 	do
-		v.add("goto BREAK_{self.escapemark.object_id};")
+		v.add("goto BREAK_{v.escapemark_name(self.escapemark)};")
 	end
 end
 
@@ -1996,7 +2010,7 @@ redef class ADoExpr
 		v.stmt(self.n_block)
 		var escapemark = self.escapemark
 		if escapemark != null then
-			v.add("BREAK_{escapemark.object_id}: (void)0;")
+			v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 		end
 	end
 end
@@ -2008,9 +2022,9 @@ redef class AWhileExpr
 		var cond = v.expr_bool(self.n_expr)
 		v.add("if (!{cond}) break;")
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{escapemark.object_id}: (void)0;")
+		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
 		v.add("\}")
-		v.add("BREAK_{escapemark.object_id}: (void)0;")
+		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 	end
 end
 
@@ -2019,9 +2033,9 @@ redef class ALoopExpr
 	do
 		v.add("for(;;) \{")
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{escapemark.object_id}: (void)0;")
+		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
 		v.add("\}")
-		v.add("BREAK_{escapemark.object_id}: (void)0;")
+		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 	end
 end
 
@@ -2039,10 +2053,10 @@ redef class AForExpr
 		assert i != null
 		v.assign(v.variable(variables.first), i)
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{escapemark.object_id}: (void)0;")
+		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
 		v.send(v.get_property("next", it.mtype), [it])
 		v.add("\}")
-		v.add("BREAK_{escapemark.object_id}: (void)0;")
+		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 	end
 end
 
