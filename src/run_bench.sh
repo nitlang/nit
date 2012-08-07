@@ -20,7 +20,7 @@
 ## CONFIGURATION OPTIONS ##
 
 # Number of times a command must be run with bench_command
-count=5
+count=3
 
 # FIXME: verbose mode
 #outputopts=">/dev/null 2>&1"
@@ -262,7 +262,6 @@ bench_nitc_boost
 function bench_engines()
 {
 	name="$FUNCNAME"
-	export NIT_GC_OPTION="$boehm"
 	prepare_res "$name-nitc.dat" "nitc" "nitc"
 	run_compiler "nitc" ./nitc_3 -O
 	prepare_res "$name-nitg.dat" "nitg" "nitg"
