@@ -59,8 +59,8 @@ redef class ModelBuilder
 		v.add_decl("#include <string.h>")
 
 		# TODO: Better way to activate the GC
-		#v.add_decl("#include <gc/gc.h>")
-		v.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
+		v.add_decl("#include <gc/gc.h>")
+		#v.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
 
 		# Declare structure for each live type
 
