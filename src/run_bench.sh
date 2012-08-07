@@ -270,3 +270,22 @@ function bench_engines()
 	plot "$name.gnu"
 }
 bench_engines
+
+function bench_compilation_time
+{
+	name="$FUNCNAME"
+	prepare_res "$name-nitc.dat" "nitc" "nitc"
+	for i in ../examples/hello_world.nit test_parser.nit nitg.nit; do
+		bench_command `basename "$i" .nit` "" ./nitc_3 -O "$i" --no-cc
+	done
+	prepare_res "$name-nitg.dat" "nitg" "nitg"
+	for i in ../examples/hello_world.nit test_parser.nit nitg.nit; do
+		bench_command `basename "$i" .nit` "" ./nitg "$i" --no-cc
+	done
+	prepare_res "$name-nitg_g.dat" "nitg/g" "nitg/g"
+	for i in ../examples/hello_world.nit test_parser.nit nitg.nit; do
+		bench_command `basename "$i" .nit` "" ./nitg.bin "$i" --no-cc
+	done
+	plot "$name.gnu"
+}
+bench_compilation_time
