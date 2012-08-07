@@ -46,8 +46,8 @@ function die()
 function bench_command()
 {
 	if [ "$dry_run" = "true" ]; then return; fi
-	title="$1"
-	desc="$2"
+	local title="$1"
+	local desc="$2"
 	shift
 	shift
 	timeout="time.out"
@@ -174,7 +174,7 @@ plots=
 # rest: command to run (executable + options)
 function run_compiler()
 {
-	title=$1
+	local title=$1
 	shift
 	run_command "$@" nitg.nit -o "nitg.$title.bin"
 	bench_command "nitg" "nitg test_parser.nit" "./nitg.$title.bin" test_parser.nit
