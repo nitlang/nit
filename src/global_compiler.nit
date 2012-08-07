@@ -611,7 +611,7 @@ private class RuntimeVariable
 		else
 			type_str = "{mtype}({mcasttype}{exact_str})"
 		end
-		return "<{inspect_head} {name}:{type_str}>"
+		return "<{name}:{type_str}>"
 	end
 end
 
