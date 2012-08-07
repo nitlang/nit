@@ -264,6 +264,8 @@ function bench_engines()
 	name="$FUNCNAME"
 	prepare_res "$name-nitc.dat" "nitc" "nitc"
 	run_compiler "nitc" ./nitc_3 -O
+	prepare_res "$name-nitc-g.dat" "nitc-g" "nitc with --global"
+	run_compiler "nitc-g" ./nitc_3 -O --global
 	prepare_res "$name-nitg.dat" "nitg" "nitg"
 	run_compiler "nitg" ./nitg
 	plot "$name.gnu"
