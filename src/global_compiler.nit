@@ -2170,6 +2170,7 @@ redef class ASuperstringExpr
 	do
 		var array = new Array[RuntimeVariable]
 		for ne in self.n_exprs do
+			if ne isa AStringFormExpr and ne.value == "" then continue # skip empty sub-strings
 			var i = v.expr(ne, null)
 			array.add(i)
 		end
