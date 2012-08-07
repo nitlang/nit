@@ -1033,8 +1033,7 @@ redef class APropdef
 				# Systematic fallback for conformance check
 				v.error(self, "Redef error: Incompatible redefinition of {ip.local_class}::{ip} with {prop.local_class}::{prop}")
 			else if srt != null and isrt != null and srt != isrt and prop isa MMAttribute then
-				# FIXME: To remove
-				v.warning(self, "Redef warning: Expected {isrt}, as in {ip.local_class}::{ip}.")
+				v.error(self, "Redef error: Expected {isrt}, as in {ip.local_class}::{ip}.")
 			end
 		end
 
