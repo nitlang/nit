@@ -372,18 +372,35 @@ private class NaiveInterpreter
 		return recv.attributes[mproperty]
 	end
 
-	# Fill the initial values of the newly created instance `recv'.
-	# `recv.mtype' is used to know what must be filled.
-	fun init_instance(recv: Instance)
+	# Collect attributes of a type in the order of their init
+	fun collect_attr_propdef(mtype: MType): Array[AAttrPropdef]
 	do
-		for cd in recv.mtype.collect_mclassdefs(self.mainmodule)
+		var cache = self.collect_attr_propdef_cache
+		if cache.has_key(mtype) then return cache[mtype]
+
+		var res = new Array[AAttrPropdef]
+		for cd in mtype.collect_mclassdefs(self.mainmodule)
 		do
 			var n = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then
-					npropdef.init_expr(self, recv)
+					res.add(npropdef)
 				end
 			end
+		end
+
+		cache[mtype] = res
+		return res
+	end
+
+	var collect_attr_propdef_cache = new HashMap[MType, Array[AAttrPropdef]]
+
+	# Fill the initial values of the newly created instance `recv'.
+	# `recv.mtype' is used to know what must be filled.
+	fun init_instance(recv: Instance)
+	do
+		for npropdef in collect_attr_propdef(recv.mtype) do
+			npropdef.init_expr(self, recv)
 		end
 	end
 
@@ -393,14 +410,10 @@ private class NaiveInterpreter
 	fun check_init_instance(recv: Instance)
 	do
 		if not recv isa MutableInstance then return
-		for cd in recv.mtype.collect_mclassdefs(self.mainmodule)
-		do
-			var n = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef and npropdef.n_expr == null then
-					# Force read to check the initialization
-					self.read_attribute(npropdef.mpropdef.mproperty, recv)
-				end
+		for npropdef in collect_attr_propdef(recv.mtype) do
+			if npropdef.n_expr == null then
+				# Force read to check the initialization
+				self.read_attribute(npropdef.mpropdef.mproperty, recv)
 			end
 		end
 	end
