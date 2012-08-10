@@ -35,10 +35,13 @@ redef class ToolContext
 	# --no-cc
 	var opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
 
+	# --hardening
+	var opt_hardening: OptionBool = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
+
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_no_cc)
+		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_hardening)
 	end
 end
 
@@ -56,8 +59,8 @@ redef class ModelBuilder
 		v.add_decl("#include <string.h>")
 
 		# TODO: Better way to activate the GC
-		#v.add_decl("#include <gc/gc.h>")
-		v.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
+		v.add_decl("#include <gc/gc.h>")
+		#v.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
 
 		# Declare structure for each live type
 
@@ -222,6 +225,9 @@ private class GlobalCompiler
 	# The modeulbuilder used to know the model and the AST
 	var modelbuilder: ModelBuilder
 
+	# Is hardening asked (see --hardening)
+	fun hardening: Bool do return self.modelbuilder.toolcontext.opt_hardening.value
+
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, modelbuilder: ModelBuilder)
 	do
 		self.mainmodule = mainmodule
@@ -313,6 +319,7 @@ private class GlobalCompiler
 		v.add_decl("/* allocate {mtype} */")
 		v.add_decl("{mtype.ctype} NEW_{mtype.c_name}(void) \{")
 		var res = v.new_var(mtype)
+		res.is_exact = true
 		v.add("{res} = GC_MALLOC(sizeof(struct {mtype.c_name}));")
 		v.add("{res}->classid = {self.classid(mtype)};")
 
@@ -544,8 +551,8 @@ private class RuntimeFunction
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
 		end
-		if self.mmethoddef.can_inline(v) and arguments.first.mtype == self.recv then
-			var frame = new Frame(v, self.mmethoddef, arguments.first, arguments)
+		if self.mmethoddef.can_inline(v) then
+			var frame = new Frame(v, self.mmethoddef, self.recv, arguments)
 			frame.returnlabel = v.get_name("RET_LABEL")
 			if ret != null then
 				frame.returnvar = v.new_var(ret)
@@ -559,6 +566,7 @@ private class RuntimeFunction
 			v.frame = old_frame
 			return frame.returnvar
 		end
+		v.adapt_signature(self.mmethoddef, arguments)
 		v.compiler.todo(self)
 		if ret == null then
 			v.add("{self.c_name}({arguments.join(",")});")
@@ -583,7 +591,28 @@ private class RuntimeVariable
 	# The current casted type of the variable (as known in Nit)
 	var mcasttype: MType
 
+	# If the variable exaclty a mcasttype?
+	# false (usual value) means that the variable is a mcasttype or a subtype.
+	var is_exact: Bool = false
+
 	redef fun to_s do return name
+
+	redef fun inspect
+	do
+		var exact_str
+		if self.is_exact then
+			exact_str = " exact"
+		else
+			exact_str = ""
+		end
+		var type_str
+		if self.mtype == self.mcasttype then
+			type_str = "{mtype}{exact_str}"
+		else
+			type_str = "{mtype}({mcasttype}{exact_str})"
+		end
+		return "<{name}:{type_str}>"
+	end
 end
 
 # Visit the AST to generate the C code.
@@ -624,7 +653,7 @@ private class GlobalCompilerVisitor
 	do
 		if not mtype.need_anchor then return mtype
 		#debug("anchor {mtype} to {self.reciever.as(not null)}:{self.reciever.mtype}")
-		return mtype.anchor_to(self.compiler.mainmodule, self.frame.receiver.mtype.as(MClassType))
+		return mtype.anchor_to(self.compiler.mainmodule, self.frame.receiver)
 	end
 
 	# Add a line in the main part of the generated C
@@ -667,6 +696,12 @@ private class GlobalCompilerVisitor
 		mtype = self.anchor(mtype)
 		if value.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
 			return value
+		end
+
+		var valmtype = value.mtype
+		if valmtype isa MNullableType and valmtype.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
+			var res = new RuntimeVariable(value.name, value.mtype, valmtype.mtype)
+			return res
 		else
 			var res = new RuntimeVariable(value.name, value.mtype, mtype)
 			return res
@@ -779,6 +814,20 @@ private class GlobalCompilerVisitor
 
 	private var variables: HashMap[Variable, RuntimeVariable] = new HashMap[Variable, RuntimeVariable]
 
+	# Return an unique and stable identifier associated with an escapemark
+	fun escapemark_name(e: nullable EscapeMark): String
+	do
+		assert e != null
+		if escapemark_names.has_key(e) then return escapemark_names[e]
+		var name = e.name
+		if name == null then name = "label"
+		name = get_name(name)
+		escapemark_names[e] = name
+		return name
+	end
+
+	private var escapemark_names = new HashMap[EscapeMark, String]
+
 	# Return a new name based on `s' and unique in the visitor
 	fun get_name(s: String): String
 	do
@@ -813,6 +862,12 @@ private class GlobalCompilerVisitor
 	fun collect_types(recv: RuntimeVariable): Array[MClassType]
 	do
 		var mtype = recv.mcasttype
+		if recv.is_exact then
+			assert mtype isa MClassType
+			assert self.compiler.runtime_type_analysis.live_types.has(mtype)
+			var types = [mtype]
+			return types
+		end
 		var cache = self.collect_types_cache
 		if cache.has_key(mtype) then
 			return cache[mtype]
@@ -833,7 +888,7 @@ private class GlobalCompilerVisitor
 	do
 		if not mtype.need_anchor then return mtype
 		#debug("resolve for {mtype} to {recv}:{recv.mcasttype}(declared as {recv.mtype}) (in {self.reciever.to_s}:{self.reciever.mtype})")
-		var res = mtype.resolve_for(recv.mcasttype, self.frame.receiver.mtype.as(MClassType), self.compiler.mainmodule, true)
+		var res = mtype.resolve_for(recv.mcasttype, self.frame.receiver, self.compiler.mainmodule, true)
 		return res
 	end
 
@@ -855,14 +910,14 @@ private class GlobalCompilerVisitor
 		end
 
 		if types.is_empty then
-			self.add("/*BUG: no live types for {args.first.mtype} . {m}*/")
+			self.add("/*BUG: no live types for {args.first.inspect} . {m}*/")
 			return res
 		end
-		self.add("/* send {m} on {args.first}: {args.first.mcasttype} (declared {args.first.mtype}) */")
+		self.add("/* send {m} on {args.first.inspect} */")
 		if args.first.mtype.ctype != "val*" then
 			var propdefs = m.lookup_definitions(self.compiler.mainmodule, args.first.mtype)
 			if propdefs.length == 0 then
-				self.add("/* skip {args.first.mcasttype}, no method {m} */")
+				self.add("/* skip, no method {m} */")
 				return res
 			end
 			assert propdefs.length == 1
@@ -878,14 +933,14 @@ private class GlobalCompilerVisitor
 				if args[1].mcasttype.ctype == "val*" then
 					self.add("{res} = ({args[1]} == NULL);")
 				else
-					self.add("{res} = 0; /* {args[1]}: {args[1].mcasttype}  cannot be null */")
+					self.add("{res} = 0; /* {args[1].inspect} cannot be null */")
 				end
 			else if m.name == "!=" then
 				assert res != null
 				if args[1].mcasttype.ctype == "val*" then
 					self.add("{res} = ({args[1]} != NULL);")
 				else
-					self.add("{res} = 1; /* {args[1]}: {args[1].mcasttype} cannot be null */")
+					self.add("{res} = 1; /* {args[1].inspect} cannot be null */")
 				end
 			else
 				self.add_abort("Reciever is null")
@@ -893,6 +948,7 @@ private class GlobalCompilerVisitor
 			self.add "\} else"
 		end
 		self.add("switch({args.first}->classid) \{")
+		var last = types.last
 		var defaultpropdef: nullable MMethodDef = null
 		for t in types do
 			var propdefs = m.lookup_definitions(self.compiler.mainmodule, t)
@@ -905,7 +961,11 @@ private class GlobalCompilerVisitor
 				defaultpropdef = propdef
 				continue
 			end
-			self.add("case {self.compiler.classid(t)}: /* test {t} */")
+			if not self.compiler.hardening and t == last and defaultpropdef == null then
+				self.add("default: /* test {t} */")
+			else
+				self.add("case {self.compiler.classid(t)}: /* test {t} */")
+			end
 			var res2 = self.call(propdef, t, args)
 			if res != null then self.assign(res, res2.as(not null))
 			self.add "break;"
@@ -914,7 +974,7 @@ private class GlobalCompilerVisitor
 			self.add("default: /* default is Object */")
 			var res2 = self.call(defaultpropdef, defaultpropdef.mclassdef.bound_mtype, args)
 			if res != null then self.assign(res, res2.as(not null))
-		else
+		else if self.compiler.hardening then
 			self.add("default: /* bug */")
 			self.bugtype(args.first)
 		end
@@ -936,10 +996,8 @@ private class GlobalCompilerVisitor
 		if m.mclassdef.mclass.name == "Object" and recvtype.ctype == "val*" then
 			recvtype = m.mclassdef.bound_mtype
 		end
-		var ars = new Array[RuntimeVariable]
 		var recv = self.autobox(args.first, recvtype)
 		recv = self.autoadapt(recv, recvtype)
-		ars.add(recv)
 
 		var vararg_rank = m.msignature.vararg_rank
 		if vararg_rank >= 0 then
@@ -966,19 +1024,27 @@ private class GlobalCompilerVisitor
 			for i in [vararg_lastrank+1..rawargs.length-1[ do
 				args.add(rawargs[i+1])
 			end
+		else
+			args = args.to_a
 		end
 		assert args.length == m.msignature.arity + 1 # because of self
 
+		args.first = recv
+		var rm = new RuntimeFunction(m, recvtype)
+		return rm.call(self, args)
+	end
+
+	fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable])
+	do
+		var recv = args.first
 		for i in [0..m.msignature.arity[ do
 			var t = m.msignature.mparameters[i].mtype
-			if i == vararg_rank then
+			if i == m.msignature.vararg_rank then
 				t = args[i+1].mtype
 			end
 			t = self.resolve_for(t, recv)
-			ars.add(self.autobox(args[i+1], t))
+			args[i+1] = self.autobox(args[i+1], t)
 		end
-		var rm = new RuntimeFunction(m, recvtype)
-		return rm.call(self, ars)
 	end
 
 	fun bugtype(recv: RuntimeVariable)
@@ -997,13 +1063,18 @@ private class GlobalCompilerVisitor
 		var res = self.new_var(ret)
 
 		if types.is_empty then
-			self.add("/*BUG: no live types for {recv.mtype} . {a}*/")
+			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
 			return res
 		end
-		self.add("/* read {a} on {recv.mcasttype} */")
+		self.add("/* read {a} on {recv.inspect} */")
 		self.add("switch({recv}->classid) \{")
+		var last = types.last
 		for t in types do
-			self.add("case {self.compiler.classid(t)}:")
+			if not self.compiler.hardening and t == last then
+				self.add("default: /*{self.compiler.classid(t)}*/")
+			else
+				self.add("case {self.compiler.classid(t)}:")
+			end
 			var recv2 = self.autoadapt(recv, t)
 			var ta = a.intro.static_mtype.as(not null)
 			ta = self.resolve_for(ta, recv2)
@@ -1020,8 +1091,10 @@ private class GlobalCompilerVisitor
 			self.assign(res, res2)
 			self.add("break;")
 		end
-		self.add("default: /* Bug */")
-		self.bugtype(recv)
+		if self.compiler.hardening then
+			self.add("default: /* Bug */")
+			self.bugtype(recv)
+		end
 		self.add("\}")
 
 		return res
@@ -1033,21 +1106,28 @@ private class GlobalCompilerVisitor
 		var types = self.collect_types(recv)
 
 		if types.is_empty then
-			self.add("/*BUG: no live types for {recv.mtype} . {a}*/")
+			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
 			return
 		end
-		self.add("/* write {a} on {recv.mcasttype} */")
+		self.add("/* write {a} on {recv.inspect} */")
 		self.add("switch({recv}->classid) \{")
+		var last = types.last
 		for t in types do
-			self.add("case {self.compiler.classid(t)}:")
+			if not self.compiler.hardening and t == last then
+				self.add("default: /*{self.compiler.classid(t)}*/")
+			else
+				self.add("case {self.compiler.classid(t)}:")
+			end
 			var recv2 = self.autoadapt(recv, t)
 			var ta = a.intro.static_mtype.as(not null)
 			ta = self.resolve_for(ta, recv2)
 			self.add("((struct {t.c_name}*){recv})->{a.intro.c_name} = {self.autobox(value, ta)};")
 			self.add("break;")
 		end
-		self.add("default: /* Bug*/")
-		self.bugtype(recv)
+		if self.compiler.hardening then
+			self.add("default: /* Bug*/")
+			self.bugtype(recv)
+		end
 		self.add("\}")
 	end
 
@@ -1059,6 +1139,7 @@ private class GlobalCompilerVisitor
 			debug "problem: {mtype} was detected dead"
 		end
 		var res = self.new_expr("NEW_{mtype.c_name}()", mtype)
+		res.is_exact = true
 		return res
 	end
 
@@ -1070,7 +1151,7 @@ private class GlobalCompilerVisitor
 
 		var res = self.new_var(bool_type)
 
-		self.add("/* isa {mtype} on {value.mcasttype} */")
+		self.add("/* isa {mtype} on {value.inspect} */")
 		if value.mcasttype isa MNullableType then
 			self.add("if ({value} == NULL) \{")
 			if mtype isa MNullableType then
@@ -1153,6 +1234,7 @@ private class GlobalCompilerVisitor
 		var res = self.init_instance(self.get_class("Array").get_mtype([elttype]))
 		self.add("\{ /* {res} = array_instance Array[{elttype}] */")
 		var nat = self.new_var(self.get_class("NativeArray").get_mtype([elttype]))
+		nat.is_exact = true
 		self.add("{nat} = GC_MALLOC({array.length} * sizeof({elttype.ctype}));")
 		for i in [0..array.length[ do
 			var r = self.autobox(array[i], elttype)
@@ -1168,12 +1250,22 @@ private class GlobalCompilerVisitor
 	# Generate a string value
 	fun string_instance(string: String): RuntimeVariable
 	do
+		var mtype = self.get_class("String").mclass_type
+		var name = self.get_name("varonce")
+		self.add_decl("static {mtype.ctype} {name};")
+		var res = self.new_var(mtype)
+		self.add("if ({name}) \{")
+		self.add("{res} = {name};")
+		self.add("\} else \{")
 		var nat = self.new_var(self.get_class("NativeString").mclass_type)
 		self.add("{nat} = \"{string.escape_to_c}\";")
-		var res = self.init_instance(self.get_class("String").mclass_type)
+		var res2 = self.init_instance(mtype)
+		self.add("{res} = {res2};")
 		var length = self.int_instance(string.length)
 		self.send(self.get_property("with_native", res.mtype), [res, nat, length])
 		self.check_init_instance(res)
+		self.add("{name} = {res};")
+		self.add("\}")
 		return res
 	end
 
@@ -1201,7 +1293,7 @@ private class Frame
 	var mpropdef: MPropDef
 
 	# The static type of the receiver
-	var receiver: RuntimeVariable
+	var receiver: MClassType
 
 	# Arguments of the method (the first is the receiver)
 	var arguments: Array[RuntimeVariable]
@@ -1236,7 +1328,8 @@ redef class MMethodDef
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
 			return npropdef.can_inline
 		else if self.mproperty.name == "init" then
-			return false
+			# Automatic free init is always inlined since it is empty or contains only attribtes assigments
+			return true
 		else
 			abort
 		end
@@ -1268,8 +1361,11 @@ redef class MMethodDef
 
 		var v = new GlobalCompilerVisitor(compiler)
 		var selfvar = new RuntimeVariable("self", recv, recv)
+		if compiler.runtime_type_analysis.live_types.has(recv) then
+			selfvar.is_exact = true
+		end
 		var arguments = new Array[RuntimeVariable]
-		var frame = new Frame(v, self, selfvar, arguments)
+		var frame = new Frame(v, self, recv, arguments)
 		v.frame = frame
 
 		var sig = new Buffer
@@ -1373,7 +1469,8 @@ redef class AConcreteMethPropdef
 		if self.auto_super_inits != null then return false
 		var nblock = self.n_block
 		if nblock == null then return true
-		#if nblock isa ABlockExpr and nblock.n_expr.length == 1 then return true
+		if (mpropdef.mproperty.name == "==" or mpropdef.mproperty.name == "!=") and mpropdef.mclassdef.mclass.name == "Object" then return true
+		if nblock isa ABlockExpr and nblock.n_expr.length == 0 then return true
 		return false
 	end
 end
@@ -1386,6 +1483,9 @@ redef class AInternMethPropdef
 		var ret = mpropdef.msignature.return_mtype
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
+		end
+		if pname != "==" and pname != "!=" then
+			v.adapt_signature(mpropdef, arguments)
 		end
 		if cname == "Int" then
 			if pname == "output" then
@@ -1713,7 +1813,7 @@ redef class AAttrPropdef
 		var nexpr = self.n_expr
 		if nexpr != null then
 			var old_frame = v.frame
-			var frame = new Frame(v, self.mpropdef.as(not null), recv, [recv])
+			var frame = new Frame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
 			v.frame = frame
 			var value = v.expr(nexpr, self.mpropdef.static_mtype)
 			v.write_attribute(self.mpropdef.mproperty, recv, value)
@@ -1747,6 +1847,16 @@ redef class AClassdef
 			abort
 		end
 	end
+end
+
+redef class ADeferredMethPropdef
+	redef fun compile_to_c(v, mpropdef, arguments)
+	do
+		v.add("printf(\"Not implemented {class_name} {mpropdef} at {location.to_s}\\n\");")
+		v.add("exit(1);")
+	end
+
+	redef fun can_inline do return true
 end
 
 redef class AExpr
@@ -1830,21 +1940,21 @@ end
 redef class ASelfExpr
 	redef fun expr(v)
 	do
-		return v.frame.receiver
+		return v.frame.arguments.first
 	end
 end
 
 redef class AContinueExpr
 	redef fun stmt(v)
 	do
-		v.add("goto CONTINUE_{self.escapemark.object_id};")
+		v.add("goto CONTINUE_{v.escapemark_name(self.escapemark)};")
 	end
 end
 
 redef class ABreakExpr
 	redef fun stmt(v)
 	do
-		v.add("goto BREAK_{self.escapemark.object_id};")
+		v.add("goto BREAK_{v.escapemark_name(self.escapemark)};")
 	end
 end
 
@@ -1900,7 +2010,7 @@ redef class ADoExpr
 		v.stmt(self.n_block)
 		var escapemark = self.escapemark
 		if escapemark != null then
-			v.add("BREAK_{escapemark.object_id}: (void)0;")
+			v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 		end
 	end
 end
@@ -1912,9 +2022,9 @@ redef class AWhileExpr
 		var cond = v.expr_bool(self.n_expr)
 		v.add("if (!{cond}) break;")
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{escapemark.object_id}: (void)0;")
+		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
 		v.add("\}")
-		v.add("BREAK_{escapemark.object_id}: (void)0;")
+		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 	end
 end
 
@@ -1923,9 +2033,9 @@ redef class ALoopExpr
 	do
 		v.add("for(;;) \{")
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{escapemark.object_id}: (void)0;")
+		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
 		v.add("\}")
-		v.add("BREAK_{escapemark.object_id}: (void)0;")
+		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 	end
 end
 
@@ -1954,10 +2064,10 @@ redef class AForExpr
 			abort
 		end
 		v.stmt(self.n_block)
-		v.add("CONTINUE_{escapemark.object_id}: (void)0;")
+		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
 		v.send(v.get_property("next", it.mtype), [it])
 		v.add("\}")
-		v.add("BREAK_{escapemark.object_id}: (void)0;")
+		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 	end
 end
 
@@ -2085,6 +2195,7 @@ redef class ASuperstringExpr
 	do
 		var array = new Array[RuntimeVariable]
 		for ne in self.n_exprs do
+			if ne isa AStringFormExpr and ne.value == "" then continue # skip empty sub-strings
 			var i = v.expr(ne, null)
 			array.add(i)
 		end
