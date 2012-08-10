@@ -2204,7 +2204,7 @@ redef class ASendExpr
 	do
 		var recv = v.expr(self.n_expr, null)
 		var args = [recv]
-		for a in compute_raw_arguments do
+		for a in self.raw_arguments.as(not null) do
 			args.add(v.expr(a, null))
 		end
 		var mproperty = self.mproperty.as(not null)
@@ -2217,7 +2217,7 @@ redef class ASendReassignFormExpr
 	do
 		var recv = v.expr(self.n_expr, null)
 		var args = [recv]
-		for a in compute_raw_arguments do
+		for a in self.raw_arguments.as(not null) do
 			args.add(v.expr(a, null))
 		end
 		var value = v.expr(self.n_value, null)

@@ -36,7 +36,7 @@ redef class ModelBuilder
 		var interpreter = new NaiveInterpreter(self, mainmodule, arguments)
 		var sys_type = mainmodule.sys_type
 		if sys_type == null then return # no class Sys
-		var mainobj = new Instance(sys_type)
+		var mainobj = new MutableInstance(sys_type)
 		interpreter.mainobj = mainobj
 		interpreter.init_instance(mainobj)
 		var initprop = mainmodule.try_get_primitive_method("init", sys_type)
@@ -76,7 +76,7 @@ private class NaiveInterpreter
 		self.arguments = arguments
 		self.true_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, true)
 		self.false_instance = new PrimitiveInstance[Bool](mainmodule.bool_type, false)
-		self.null_instance = new Instance(mainmodule.model.null_type)
+		self.null_instance = new MutableInstance(mainmodule.model.null_type)
 	end
 
 	# Subtype test in the context of the mainmodule
@@ -137,8 +137,9 @@ private class NaiveInterpreter
 	# If `n' cannot be evaluated, then aborts.
 	fun expr(n: AExpr): nullable Instance
 	do
-		var old = self.frame.current_node
-		self.frame.current_node = n
+		var frame = self.frame
+		var old = frame.current_node
+		frame.current_node = n
 		#n.debug("IN Execute expr")
 		var i = n.expr(self)
 		if i == null and not self.is_escaping then
@@ -146,7 +147,7 @@ private class NaiveInterpreter
 		end
 		#n.debug("OUT Execute expr: value is {i}")
 		#if not is_subtype(i.mtype, n.mtype.as(not null)) then n.debug("Expected {n.mtype.as(not null)} got {i}")
-		self.frame.current_node = old
+		frame.current_node = old
 		return i
 	end
 
@@ -156,11 +157,12 @@ private class NaiveInterpreter
 	fun stmt(n: nullable AExpr)
 	do
 		if n != null then
-			var old = self.frame.current_node
-			self.frame.current_node = n
+			var frame = self.frame
+			var old = frame.current_node
+			frame.current_node = n
 			#n.debug("Execute stmt")
 			n.stmt(self)
-			self.frame.current_node = old
+			frame.current_node = old
 		end
 	end
 
@@ -210,7 +212,7 @@ private class NaiveInterpreter
 		assert not elttype.need_anchor
 		var nat = new PrimitiveInstance[Array[Instance]](self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype]), values)
 		var mtype = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
-		var res = new Instance(mtype)
+		var res = new MutableInstance(mtype)
 		self.init_instance(res)
 		self.send(self.mainmodule.force_get_primitive_method("with_native", mtype), [res, nat, self.int_instance(values.length)])
 		self.check_init_instance(res)
@@ -285,7 +287,11 @@ private class NaiveInterpreter
 				args.add(rawargs[i+1])
 			end
 		end
-		#assert args.length == mpropdef.msignature.arity + 1 # because of self
+		assert args.length >= mpropdef.msignature.arity + 1 # because of self
+		assert args.length <= mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length
+		if args.length < mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
+			fatal("NOT YET IMPLEMENTED: default closures")
+		end
 
 		# Look for the AST node that implements the property
 		var mproperty = mpropdef.mproperty
@@ -358,6 +364,7 @@ private class NaiveInterpreter
 	# If the attribute in not yet initialized, then aborts with an error message.
 	fun read_attribute(mproperty: MAttribute, recv: Instance): Instance
 	do
+		assert recv isa MutableInstance
 		if not recv.attributes.has_key(mproperty) then
 			fatal("Uninitialized attribute {mproperty.name}")
 			abort
@@ -365,18 +372,35 @@ private class NaiveInterpreter
 		return recv.attributes[mproperty]
 	end
 
-	# Fill the initial values of the newly created instance `recv'.
-	# `recv.mtype' is used to know what must be filled.
-	fun init_instance(recv: Instance)
+	# Collect attributes of a type in the order of their init
+	fun collect_attr_propdef(mtype: MType): Array[AAttrPropdef]
 	do
-		for cd in recv.mtype.collect_mclassdefs(self.mainmodule)
+		var cache = self.collect_attr_propdef_cache
+		if cache.has_key(mtype) then return cache[mtype]
+
+		var res = new Array[AAttrPropdef]
+		for cd in mtype.collect_mclassdefs(self.mainmodule)
 		do
 			var n = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then
-					npropdef.init_expr(self, recv)
+					res.add(npropdef)
 				end
 			end
+		end
+
+		cache[mtype] = res
+		return res
+	end
+
+	var collect_attr_propdef_cache = new HashMap[MType, Array[AAttrPropdef]]
+
+	# Fill the initial values of the newly created instance `recv'.
+	# `recv.mtype' is used to know what must be filled.
+	fun init_instance(recv: Instance)
+	do
+		for npropdef in collect_attr_propdef(recv.mtype) do
+			npropdef.init_expr(self, recv)
 		end
 	end
 
@@ -385,14 +409,11 @@ private class NaiveInterpreter
 	# FIXME: this will work better once there is nullable types
 	fun check_init_instance(recv: Instance)
 	do
-		for cd in recv.mtype.collect_mclassdefs(self.mainmodule)
-		do
-			var n = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef and npropdef.n_expr == null then
-					# Force read to check the initialization
-					self.read_attribute(npropdef.mpropdef.mproperty, recv)
-				end
+		if not recv isa MutableInstance then return
+		for npropdef in collect_attr_propdef(recv.mtype) do
+			if npropdef.n_expr == null then
+				# Force read to check the initialization
+				self.read_attribute(npropdef.mpropdef.mproperty, recv)
 			end
 		end
 	end
@@ -405,13 +426,10 @@ private class NaiveInterpreter
 end
 
 # An instance represents a value of the executed program.
-class Instance
+abstract class Instance
 	# The dynamic type of the instance
 	# ASSERT: not self.mtype.is_anchored
 	var mtype: MType
-
-	# The values of the attributes
-	var attributes: Map[MAttribute, Instance] = new HashMap[MAttribute, Instance]
 
 	# return true if the instance is the true value.
 	# return false if the instance is the true value.
@@ -431,6 +449,14 @@ class Instance
 	# The real value encapsulated if the instance is primitive.
 	# Else aborts.
 	fun val: Object do abort
+end
+
+# A instance with attribute (standards objects)
+class MutableInstance
+	super Instance
+
+	# The values of the attributes
+	var attributes: Map[MAttribute, Instance] = new HashMap[MAttribute, Instance]
 end
 
 # Special instance to handle primitives values (int, bool, etc.)
@@ -831,12 +857,14 @@ end
 redef class AAttrPropdef
 	redef fun call(v, mpropdef, args)
 	do
+		var recv = args.first
+		assert recv isa MutableInstance
 		var attr = self.mpropdef.mproperty
 		if args.length == 1 then
-			return v.read_attribute(attr, args.first)
+			return v.read_attribute(attr, recv)
 		else
 			assert args.length == 2
-			args.first.attributes[attr] = args[1]
+			recv.attributes[attr] = args[1]
 			return null
 		end
 	end
@@ -844,6 +872,7 @@ redef class AAttrPropdef
 	# Evaluate and set the default value of the attribute in `recv'
 	private fun init_expr(v: NaiveInterpreter, recv: Instance)
 	do
+		assert recv isa MutableInstance
 		var nexpr = self.n_expr
 		if nexpr != null then
 			var f = new Frame(self, self.mpropdef.as(not null), [recv])
@@ -864,6 +893,14 @@ redef class AAttrPropdef
 	end
 end
 
+redef class ADeferredMethPropdef
+	redef fun call(v, mpropdef, args)
+	do
+		fatal(v, "Deferred method called")
+		abort
+	end
+end
+
 redef class AClassdef
 	# Execute an implicit `mpropdef' associated with the current node.
 	private fun call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
@@ -877,6 +914,7 @@ redef class AClassdef
 			return null
 		end
 		var recv = args.first
+		assert recv isa MutableInstance
 		var i = 1
 		# Collect undefined attributes
 		for npropdef in self.n_propdefs do
@@ -1217,7 +1255,7 @@ redef class AStringFormExpr
 	do
 		var txt = self.value.as(not null)
 		var nat = v.native_string_instance(txt)
-		var res = new Instance(v.mainmodule.get_primitive_class("String").mclass_type)
+		var res = new MutableInstance(v.mainmodule.get_primitive_class("String").mclass_type)
 		v.init_instance(res)
 		v.send(v.mainmodule.force_get_primitive_method("from_cstring", res.mtype), [res, nat])
 		v.check_init_instance(res)
@@ -1249,7 +1287,7 @@ redef class ACrangeExpr
 		var e2 = v.expr(self.n_expr2)
 		if e2 == null then return null
 		var mtype = v.unanchor_type(self.mtype.as(not null))
-		var res = new Instance(mtype)
+		var res = new MutableInstance(mtype)
 		v.init_instance(res)
 		v.send(v.mainmodule.force_get_primitive_method("init", mtype), [res, e1, e2])
 		v.check_init_instance(res)
@@ -1265,7 +1303,7 @@ redef class AOrangeExpr
 		var e2 = v.expr(self.n_expr2)
 		if e2 == null then return null
 		var mtype = v.unanchor_type(self.mtype.as(not null))
-		var res = new Instance(mtype)
+		var res = new MutableInstance(mtype)
 		v.init_instance(res)
 		v.send(v.mainmodule.force_get_primitive_method("without_last", mtype), [res, e1, e2])
 		v.check_init_instance(res)
@@ -1358,7 +1396,7 @@ redef class ASendExpr
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
 		var args = [recv]
-		for a in compute_raw_arguments do
+		for a in self.raw_arguments.as(not null) do
 			var i = v.expr(a)
 			if i == null then return null
 			args.add(i)
@@ -1385,7 +1423,7 @@ redef class ASendReassignFormExpr
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
 		var args = [recv]
-		for a in compute_raw_arguments do
+		for a in self.raw_arguments.as(not null) do
 			var i = v.expr(a)
 			if i == null then return
 			args.add(i)
@@ -1448,7 +1486,7 @@ redef class ANewExpr
 	redef fun expr(v)
 	do
 		var mtype = v.unanchor_type(self.mtype.as(not null))
-		var recv = new Instance(mtype)
+		var recv: Instance = new MutableInstance(mtype)
 		v.init_instance(recv)
 		var args = [recv]
 		for a in self.n_args.n_exprs do
@@ -1485,6 +1523,7 @@ redef class AAttrAssignExpr
 		var i = v.expr(self.n_value)
 		if i == null then return
 		var mproperty = self.mproperty.as(not null)
+		assert recv isa MutableInstance
 		recv.attributes[mproperty] = i
 	end
 end
@@ -1500,6 +1539,7 @@ redef class AAttrReassignExpr
 		var attr = v.read_attribute(mproperty, recv)
 		var res = v.send(reassign_property.mproperty, [attr, value])
 		assert res != null
+		assert recv isa MutableInstance
 		recv.attributes[mproperty] = res
 	end
 end
@@ -1510,6 +1550,7 @@ redef class AIssetAttrExpr
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
 		var mproperty = self.mproperty.as(not null)
+		assert recv isa MutableInstance
 		return v.bool_instance(recv.attributes.has_key(mproperty))
 	end
 end
