@@ -193,6 +193,8 @@ redef class ModelBuilder
 		end
 		# Link edition
 		makefile.write("{outname}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) $(LDLIBS) -o {outname} {ofiles.join(" ")}\n\n")
+		# Clean
+		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makename}", 2)
 
