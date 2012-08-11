@@ -13,6 +13,7 @@
 
 #include "string_nit.h"
 
+#ifndef NONITCNI
 /*
 C implementation of string::String::to_f
 
@@ -37,3 +38,4 @@ float String_to_f___impl( String recv )
 
     return value;
 }
+#endif

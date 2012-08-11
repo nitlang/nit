@@ -23,7 +23,7 @@
 
 #include "file_nit.h"
 
-
+#ifndef NONITCNI
 /*
 C implementation of file::String::files
 
@@ -65,6 +65,7 @@ Set String_files___impl( String recv )
 		return HashSet_as_Set( results );
 	}
 }
+#endif
 
 int string_NativeString_NativeString_file_exists_0(char *f){
 	FILE *hdl = fopen(f,"r");

@@ -180,11 +180,11 @@ redef class ModelBuilder
 		var ofiles = new Array[String]
 		for f in cfiles do
 			var o = f.strip_extension(".c") + ".o"
-			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -I .nit_compile -I ../clib -c -o {o} {f}\n\n")
+			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
 		end
 
-		makefile.write("{outname}: {ofiles.join(" ")} {compiler.extern_bodies.join(" ")}\n\t$(CC) -Wl,--warn-unresolved-symbols $(CFLAGS) $(LDFLAGS) $(LDLIBS) -I .nit_compile -I ../clib -o {outname} {ofiles.join(" ")} {compiler.extern_bodies.join(" ")}\n\n")
+		makefile.write("{outname}: {ofiles.join(" ")} {compiler.extern_bodies.join(" ")}\n\t$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -D NONITCNI -o {outname} {ofiles.join(" ")} {compiler.extern_bodies.join(" ")}\n\n")
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makename}", 2)
 
@@ -357,7 +357,6 @@ private class GlobalCompiler
 		if tryfile.file_exists then
 			self.extern_bodies.add(tryfile)
 		end
-		#(new OFStream.open("{file.basename("")}._nitni.h")).close
 	end
 end
 
