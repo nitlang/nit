@@ -592,6 +592,10 @@ class ModelBuilder
 			self.build_a_mclassdef(nmodule, nclassdef)
 		end
 
+		for nclassdef in nmodule.n_classdefs do
+			if nclassdef.mclassdef == null then return # forward error
+		end
+
 		# Create inheritance on all classdefs
 		for nclassdef in nmodule.n_classdefs do
 			self.build_a_mclassdef_inheritance(nmodule, nclassdef)
