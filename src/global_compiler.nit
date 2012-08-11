@@ -178,13 +178,21 @@ redef class ModelBuilder
 		makefile.write("all: {outname}\n\n")
 
 		var ofiles = new Array[String]
+		# Compile each generated file
 		for f in cfiles do
 			var o = f.strip_extension(".c") + ".o"
 			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
 		end
-
-		makefile.write("{outname}: {ofiles.join(" ")} {compiler.extern_bodies.join(" ")}\n\t$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -D NONITCNI -o {outname} {ofiles.join(" ")} {compiler.extern_bodies.join(" ")}\n\n")
+		# Compile each required extern body into a specific .o
+		for f in compiler.extern_bodies do
+			i += 1
+			var o = ".nit_compile/{mainmodule.name}.{i}.o"
+			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
+			ofiles.add(o)
+		end
+		# Link edition
+		makefile.write("{outname}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) $(LDLIBS) -o {outname} {ofiles.join(" ")}\n\n")
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makename}", 2)
 
