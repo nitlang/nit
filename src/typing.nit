@@ -171,6 +171,13 @@ private class TypeVisitor
 		return self.modelbuilder.resolve_mtype(self.nclassdef, node)
 	end
 
+	fun try_get_mclass(node: ANode, name: String): nullable MClass
+	do
+		var mmodule = self.nclassdef.mclassdef.mmodule
+		var mclass = modelbuilder.try_get_mclass_by_name(node, mmodule, name)
+		return mclass
+	end
+
 	fun get_mclass(node: ANode, name: String): nullable MClass
 	do
 		var mmodule = self.nclassdef.mclassdef.mmodule
@@ -711,18 +718,14 @@ end
 
 redef class AForExpr
 	var coltype: nullable MGenericType
-	redef fun accept_typing(v)
-	do
-		var mtype = v.visit_expr(n_expr)
-		if mtype == null then return
 
-		var colcla = v.get_mclass(self, "Collection")
-		if colcla == null then return
+	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
+	do
 		var objcla = v.get_mclass(self, "Object")
 		if objcla == null then return
-		var mapcla = v.get_mclass(self, "Map")
-		if mapcla == null then return
-		if v.is_subtype(mtype, colcla.get_mtype([objcla.mclass_type.as_nullable])) then
+
+		var colcla = v.try_get_mclass(self, "Collection")
+		if colcla != null and v.is_subtype(mtype, colcla.get_mtype([objcla.mclass_type.as_nullable])) then
 			var coltype = mtype.supertype_to(v.mmodule, v.anchor, colcla)
 			assert coltype isa MGenericType
 			self.coltype = coltype
@@ -732,7 +735,11 @@ redef class AForExpr
 			else
 				variables.first.declared_type = coltype.arguments.first
 			end
-		else if v.is_subtype(mtype, mapcla.get_mtype([objcla.mclass_type.as_nullable, objcla.mclass_type.as_nullable])) then
+			return
+		end
+
+		var mapcla = v.try_get_mclass(self, "Map")
+		if mapcla != null and v.is_subtype(mtype, mapcla.get_mtype([objcla.mclass_type.as_nullable, objcla.mclass_type.as_nullable])) then
 			var coltype = mtype.supertype_to(v.mmodule, v.anchor, mapcla)
 			assert coltype isa MGenericType
 			self.coltype = coltype
@@ -743,9 +750,18 @@ redef class AForExpr
 				variables[0].declared_type = coltype.arguments[0]
 				variables[1].declared_type = coltype.arguments[1]
 			end
-		else
-			v.modelbuilder.error(self, "TODO: Do 'for' on {mtype}")
+			return
 		end
+
+		v.modelbuilder.error(self, "NOT YET IMPLEMENTED: Do 'for' on {mtype}")
+	end
+
+	redef fun accept_typing(v)
+	do
+		var mtype = v.visit_expr(n_expr)
+		if mtype == null then return
+
+		self.do_type_iterator(v, mtype)
 
 		v.visit_stmt(n_block)
 		self.is_typed = true
