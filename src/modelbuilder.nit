@@ -961,6 +961,7 @@ redef class APropdef
 			end
 		end
 	end
+
 end
 
 redef class ASignature
@@ -1447,7 +1448,65 @@ redef class AAttrPropdef
 			end
 		end
 
-		# FIXME: Check getter ans setter
+		# Check getter and setter
+		var meth = self.mreadpropdef
+		if meth != null then self.check_method_signature(modelbuilder, nclassdef, meth)
+		meth = self.mwritepropdef
+		if meth != null then self.check_method_signature(modelbuilder, nclassdef, meth)
+	end
+
+	private fun check_method_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef, mpropdef: MMethodDef)
+	do
+		var mmodule = mpropdef.mclassdef.mmodule
+		var nsig = self.n_type
+		var mysignature = mpropdef.msignature
+		if mysignature == null then return # Error thus skiped
+
+		# Lookup for signature in the precursor
+		# FIXME all precursors should be considered
+		if not mpropdef.is_intro then
+			var msignature = mpropdef.mproperty.intro.msignature
+			if msignature == null then return
+
+			if mysignature.arity != msignature.arity then
+				var node: ANode
+				if nsig != null then node = nsig else node = self
+				modelbuilder.error(node, "Redef Error: {mysignature.arity} parameters found, {msignature.arity} expected. Signature is {mpropdef}{msignature}")
+				return
+			end
+			var precursor_ret_type = msignature.return_mtype
+			var ret_type = mysignature.return_mtype
+			if ret_type != null and precursor_ret_type == null then
+				var node: ANode
+				if nsig != null then node = nsig else node = self
+				modelbuilder.error(node, "Redef Error: {mpropdef.mproperty} is a procedure, not a function.")
+				return
+			end
+
+			if mysignature.arity > 0 then
+				# Check parameters types
+				for i in [0..mysignature.arity[ do
+					var myt = mysignature.mparameters[i].mtype
+					var prt = msignature.mparameters[i].mtype
+					if not myt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, prt) and
+							not prt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, myt) then
+						var node: ANode
+						if nsig != null then node = nsig else node = self
+						modelbuilder.error(node, "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt}.")
+					end
+				end
+			end
+			if precursor_ret_type != null then
+				if ret_type == null then
+					# Inherit the return type
+					ret_type = precursor_ret_type
+				else if not ret_type.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, precursor_ret_type) then
+					var node: ANode
+					if nsig != null then node = nsig else node = self
+					modelbuilder.error(node, "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type}.")
+				end
+			end
+		end
 	end
 end
 
