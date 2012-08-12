@@ -67,9 +67,7 @@ redef class AFloatExpr
 	var value: nullable Float
 	redef fun accept_literal(v)
 	do
-		# FIXME: no method to_f on string so just go ugly
-		var parts = self.n_float.text.split_with(".")
-		self.value = parts.first.to_i.to_f
+		self.value = self.n_float.text.to_f
 	end
 end
 
