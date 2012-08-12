@@ -31,7 +31,7 @@ void stream_FDStream_FDStream_write_char_1(FDStream s, int fd, int c) {
 	write(fd, &c, 1);
 }
 
-
+#ifndef NONITCNI
 /*
 C implementation of stream::Object::intern_poll
 
@@ -97,3 +97,4 @@ nullable_Int Object_intern_poll___impl( Object recv, Array in_fds, Array out_fds
 
 	return null_Int();
 }
+#endif

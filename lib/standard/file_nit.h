@@ -20,9 +20,11 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+#ifndef NONITCNI
 #include <file._nitni.h>
 
 Set String_files___impl( String recv );
+#endif
 
 extern int string_NativeString_NativeString_file_exists_0(char *f);
 extern void *string_NativeString_NativeString_file_stat_0(char *f);

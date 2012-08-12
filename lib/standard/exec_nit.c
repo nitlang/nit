@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef NONITCNI
 se_exec_data_t* exec_Process_Process_basic_exec_execute_4(Process s, char *prog, char *args, int len, int pipeflag) {
 	se_exec_data_t* result = NULL;
 	int id;
@@ -98,6 +99,7 @@ se_exec_data_t* exec_Process_Process_basic_exec_execute_4(Process s, char *prog,
 	}
 	return result;
 }
+#endif
 
 int exec_NativeProcess_NativeProcess_is_finished_0(void*d) {
 	se_exec_data_t*data = (se_exec_data_t*)d;
