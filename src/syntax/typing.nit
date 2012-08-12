@@ -1644,6 +1644,9 @@ redef class ANewExpr
 			v.error(self, "Error: try to instantiate abstract class {t.local_class}.")
 			return
 		end
+		if t.is_nullable then
+			v.error(self, "Type error: cannot instantiate the nullable type {t}.")
+		end
 		var name: Symbol
 		if n_id == null then
 			name = once "init".to_symbol
