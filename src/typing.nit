@@ -928,8 +928,11 @@ end
 redef class ARangeExpr
 	redef fun accept_typing(v)
 	do
-		var t1 = v.visit_expr(self.n_expr)
-		var t2 = v.visit_expr(self.n_expr2)
+		var discrete_class = v.get_mclass(self, "Discrete")
+		if discrete_class == null then return # Forward error
+		var discrete_type = discrete_class.mclassdefs.first.bound_mtype
+		var t1 = v.visit_expr_subtype(self.n_expr, discrete_type)
+		var t2 = v.visit_expr_subtype(self.n_expr2, discrete_type)
 		if t1 == null or t2 == null then return
 		var mclass = v.get_mclass(self, "Range")
 		if mclass == null then return # Forward error
