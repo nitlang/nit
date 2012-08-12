@@ -212,6 +212,11 @@ private class TypeVisitor
 			return null
 		end
 
+		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility then
+			self.modelbuilder.error(node, "Error: Method '{name}' is protected and can only acceded by self. {mproperty.intro_mclassdef.mmodule.visibility_for(self.mmodule)}")
+			return null
+		end
+
 		var propdefs = mproperty.lookup_definitions(self.mmodule, unsafe_type)
 		if propdefs.length == 0 then
 			self.modelbuilder.error(node, "Type error: no definition found for property {name} in {unsafe_type}")
