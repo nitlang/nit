@@ -125,7 +125,7 @@ redef class ModelBuilder
 		while not compiler.todos.is_empty do
 			var m = compiler.todos.shift
 			self.toolcontext.info("Compile {m} ({compiler.seen.length-compiler.todos.length}/{compiler.seen.length})", 3)
-			m.compile_to_c(compiler, self)
+			m.compile_to_c(compiler)
 		end
 		self.toolcontext.info("Total methods to compile to C: {compiler.visitors.length}", 2)
 
@@ -535,7 +535,7 @@ private abstract class RuntimeFunction
 
 	# Generate the code for the RuntimeFunction
 	# Warning: compile more than once compilation makes CC unhappy
-	fun compile_to_c(compiler: GlobalCompiler, modelbuilder: ModelBuilder) is abstract
+	fun compile_to_c(compiler: GlobalCompiler) is abstract
 end
 
 # A runtime function customized on a specific monomrph receiver type
@@ -593,9 +593,9 @@ private class CustomizedRuntimeFunction
 		end
 	end
 
-	redef fun compile_to_c(compiler, modelbuilder)
+	redef fun compile_to_c(compiler)
 	do
-		self.mmethoddef.compile_to_c(compiler, modelbuilder, self.recv)
+		self.mmethoddef.compile_to_c(compiler, self.recv)
 	end
 
 	redef fun call(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
@@ -1412,7 +1412,7 @@ redef class MMethodDef
 	end
 
 	# Compile the body in a new visitor
-	private fun compile_to_c(compiler: GlobalCompiler, modelbuilder: ModelBuilder, recv: MClassType)
+	private fun compile_to_c(compiler: GlobalCompiler, recv: MClassType)
 	do
 		if not recv.is_subtype(compiler.mainmodule, null, self.mclassdef.bound_mtype) then
 			print("problem: why do we compile {self} for {recv}?")
