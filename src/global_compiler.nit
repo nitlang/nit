@@ -207,13 +207,13 @@ redef class ModelBuilder
 
 		time0 = time1
 		self.toolcontext.info("*** COMPILING C ***", 1)
-		self.toolcontext.info("make -f {makename} -j 4", 2)
+		self.toolcontext.info("make -B -f {makename} -j 4", 2)
 
 		var res
 		if self.toolcontext.verbose_level >= 3 then
-			res = sys.system("make -f {makename} -j 4 2>&1")
+			res = sys.system("make -B -f {makename} -j 4 2>&1")
 		else
-			res = sys.system("make -f {makename} -j 4 2>&1 >/dev/null")
+			res = sys.system("make -B -f {makename} -j 4 2>&1 >/dev/null")
 		end
 		if res != 0 then
 			toolcontext.error(null, "make failed! Error code: {res}.")
