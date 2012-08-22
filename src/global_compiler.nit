@@ -368,6 +368,8 @@ private class GlobalCompiler
 			self.extern_bodies.add(tryfile)
 		end
 	end
+
+	private var collect_types_cache: HashMap[MType, Array[MClassType]] = new HashMap[MType, Array[MClassType]]
 end
 
 redef class String
@@ -877,7 +879,7 @@ private class GlobalCompilerVisitor
 			var types = [mtype]
 			return types
 		end
-		var cache = self.collect_types_cache
+		var cache = self.compiler.collect_types_cache
 		if cache.has_key(mtype) then
 			return cache[mtype]
 		end
@@ -890,8 +892,6 @@ private class GlobalCompilerVisitor
 		cache[mtype] = types
 		return types
 	end
-
-	private var collect_types_cache: HashMap[MType, Array[MClassType]] = new HashMap[MType, Array[MClassType]]
 
 	fun resolve_for(mtype: MType, recv: RuntimeVariable): MType
 	do
