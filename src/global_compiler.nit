@@ -721,6 +721,15 @@ private class RuntimeVariable
 	# false (usual value) means that the variable is a mcasttype or a subtype.
 	var is_exact: Bool = false
 
+	init(name: String, mtype: MType, mcasttype: MType)
+	do
+		self.name = name
+		self.mtype = mtype
+		self.mcasttype = mcasttype
+		assert not mtype.need_anchor
+		assert not mcasttype.need_anchor
+	end
+
 	redef fun to_s do return name
 
 	redef fun inspect
