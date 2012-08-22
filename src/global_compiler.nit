@@ -624,10 +624,7 @@ private class CustomizedRuntimeFunction
 		else
 			sig.append("void ")
 		end
-		sig.append(mmethoddef.c_name)
-		if recv != mmethoddef.mclassdef.bound_mtype then
-			sig.append("__{recv.c_name}")
-		end
+		sig.append(self.c_name)
 		sig.append("({recv.ctype} self")
 		comment.append("(self: {recv}")
 		arguments.add(selfvar)
