@@ -915,11 +915,7 @@ private class GlobalCompilerVisitor
 	# Return a new uninitialized local runtime_variable
 	fun new_var(mtype: MType): RuntimeVariable
 	do
-		if mtype isa MNullType then
-			mtype = self.object_type
-		else
-			mtype = self.anchor(mtype)
-		end
+		mtype = self.anchor(mtype)
 		var name = self.get_name("var")
 		var res = new RuntimeVariable(name, mtype, mtype)
 		self.add_decl("{mtype.ctype} {name} /* : {mtype} */;")
