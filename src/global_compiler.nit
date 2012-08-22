@@ -1473,15 +1473,7 @@ redef class MMethodDef
 		end
 		frame.returnlabel = v.get_name("RET_LABEL")
 
-		if modelbuilder.mpropdef2npropdef.has_key(self) then
-			var npropdef = modelbuilder.mpropdef2npropdef[self]
-			npropdef.compile_to_c(v, self, arguments)
-		else if self.mproperty.name == "init" then
-			var nclassdef = modelbuilder.mclassdef2nclassdef[self.mclassdef]
-			nclassdef.compile_to_c(v, self, arguments)
-		else
-			abort
-		end
+		self.compile_inside_to_c(v, arguments)
 
 		v.add("{frame.returnlabel.as(not null)}:;")
 		if ret != null then
