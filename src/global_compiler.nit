@@ -124,8 +124,8 @@ redef class ModelBuilder
 
 		while not compiler.todos.is_empty do
 			var m = compiler.todos.shift
-			self.toolcontext.info("Compile {m.mmethoddef} for {m.recv} ({compiler.seen.length-compiler.todos.length}/{compiler.seen.length})", 3)
-			m.mmethoddef.compile_to_c(compiler, self, m.recv)
+			self.toolcontext.info("Compile {m} ({compiler.seen.length-compiler.todos.length}/{compiler.seen.length})", 3)
+			m.compile_to_c(compiler, self)
 		end
 		self.toolcontext.info("Total methods to compile to C: {compiler.visitors.length}", 2)
 
@@ -522,16 +522,38 @@ end
 
 # A C function associated to a Nit method
 # Because of customization, a given Nit method can be compiler more that once
-private class RuntimeFunction
+private abstract class RuntimeFunction
 	# The associated Nit method
 	var mmethoddef: MMethodDef
+
+	# The mangled c name of the runtime_function
+	fun c_name: String is abstract
+
+	# Implements a call of the runtime_function
+	# May inline the body or generate a C function call
+	fun call(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
+
+	# Generate the code for the RuntimeFunction
+	# Warning: compile more than once compilation makes CC unhappy
+	fun compile_to_c(compiler: GlobalCompiler, modelbuilder: ModelBuilder) is abstract
+end
+
+# A runtime function customized on a specific monomrph receiver type
+private class CustomizedRuntimeFunction
+	super RuntimeFunction
 
 	# The considered reciever
 	# (usually is a live type but no strong guarantee)
 	var recv: MClassType
 
+	init(mmethoddef: MMethodDef, recv: MClassType)
+	do
+		super(mmethoddef)
+		self.recv = recv
+	end
+
 	# The mangled c name of the runtime_function
-	fun c_name: String
+	redef fun c_name: String
 	do
 		var res = self.c_name_cache
 		if res != null then return res
@@ -549,7 +571,7 @@ private class RuntimeFunction
 	redef fun ==(o)
 	# used in the compiler worklist
 	do
-		if not o isa RuntimeFunction then return false
+		if not o isa CustomizedRuntimeFunction then return false
 		if self.mmethoddef != o.mmethoddef then return false
 		if self.recv != o.recv then return false
 		return true
@@ -571,9 +593,12 @@ private class RuntimeFunction
 		end
 	end
 
-	# Implements a call of the runtime_function
-	# May inline the body or generate a C function call
-	fun call(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
+	redef fun compile_to_c(compiler, modelbuilder)
+	do
+		self.mmethoddef.compile_to_c(compiler, modelbuilder, self.recv)
+	end
+
+	redef fun call(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		var ret = self.mmethoddef.msignature.return_mtype
 		if self.mmethoddef.mproperty.is_new then
@@ -1065,7 +1090,7 @@ private class GlobalCompilerVisitor
 		assert args.length == m.msignature.arity + 1 # because of self
 
 		args.first = recv
-		var rm = new RuntimeFunction(m, recvtype)
+		var rm = new CustomizedRuntimeFunction(m, recvtype)
 		return rm.call(self, args)
 	end
 
