@@ -593,9 +593,77 @@ private class CustomizedRuntimeFunction
 		end
 	end
 
+	# compile the code customized for the reciever
 	redef fun compile_to_c(compiler)
 	do
-		self.mmethoddef.compile_to_c(compiler, self.recv)
+		var recv = self.recv
+		var mmethoddef = self.mmethoddef
+		if not recv.is_subtype(compiler.mainmodule, null, mmethoddef.mclassdef.bound_mtype) then
+			print("problem: why do we compile {self} for {recv}?")
+			abort
+		end
+
+		var v = new GlobalCompilerVisitor(compiler)
+		var selfvar = new RuntimeVariable("self", recv, recv)
+		if compiler.runtime_type_analysis.live_types.has(recv) then
+			selfvar.is_exact = true
+		end
+		var arguments = new Array[RuntimeVariable]
+		var frame = new Frame(v, mmethoddef, recv, arguments)
+		v.frame = frame
+
+		var sig = new Buffer
+		var comment = new Buffer
+		var ret = mmethoddef.msignature.return_mtype
+		if ret != null then
+			ret = v.resolve_for(ret, selfvar)
+			sig.append("{ret.ctype} ")
+		else if mmethoddef.mproperty.is_new then
+			ret = recv
+			sig.append("{ret.ctype} ")
+		else
+			sig.append("void ")
+		end
+		sig.append(mmethoddef.c_name)
+		if recv != mmethoddef.mclassdef.bound_mtype then
+			sig.append("__{recv.c_name}")
+		end
+		sig.append("({recv.ctype} self")
+		comment.append("(self: {recv}")
+		arguments.add(selfvar)
+		for i in [0..mmethoddef.msignature.arity[ do
+			var mtype = mmethoddef.msignature.mparameters[i].mtype
+			if i == mmethoddef.msignature.vararg_rank then
+				mtype = v.get_class("Array").get_mtype([mtype])
+			end
+			mtype = v.resolve_for(mtype, selfvar)
+			comment.append(", {mtype}")
+			sig.append(", {mtype.ctype} p{i}")
+			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
+			arguments.add(argvar)
+		end
+		sig.append(")")
+		comment.append(")")
+		if ret != null then
+			comment.append(": {ret}")
+		end
+		compiler.header.add_decl("{sig};")
+
+		v.add_decl("/* method {self} for {comment} */")
+		v.add_decl("{sig} \{")
+		#v.add("printf(\"method {self} for {comment}\\n\");")
+		if ret != null then
+			frame.returnvar = v.new_var(ret)
+		end
+		frame.returnlabel = v.get_name("RET_LABEL")
+
+		mmethoddef.compile_inside_to_c(v, arguments)
+
+		v.add("{frame.returnlabel.as(not null)}:;")
+		if ret != null then
+			v.add("return {frame.returnvar.as(not null)};")
+		end
+		v.add("\}")
 	end
 
 	redef fun call(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
@@ -1409,77 +1477,6 @@ redef class MMethodDef
 			abort
 		end
 		return null
-	end
-
-	# Compile the body in a new visitor
-	private fun compile_to_c(compiler: GlobalCompiler, recv: MClassType)
-	do
-		if not recv.is_subtype(compiler.mainmodule, null, self.mclassdef.bound_mtype) then
-			print("problem: why do we compile {self} for {recv}?")
-			abort
-		end
-
-		var v = new GlobalCompilerVisitor(compiler)
-		var selfvar = new RuntimeVariable("self", recv, recv)
-		if compiler.runtime_type_analysis.live_types.has(recv) then
-			selfvar.is_exact = true
-		end
-		var arguments = new Array[RuntimeVariable]
-		var frame = new Frame(v, self, recv, arguments)
-		v.frame = frame
-
-		var sig = new Buffer
-		var comment = new Buffer
-		var ret = self.msignature.return_mtype
-		if ret != null then
-			ret = v.resolve_for(ret, selfvar)
-			sig.append("{ret.ctype} ")
-		else if self.mproperty.is_new then
-			ret = recv
-			sig.append("{ret.ctype} ")
-		else
-			sig.append("void ")
-		end
-		sig.append(self.c_name)
-		if recv != self.mclassdef.bound_mtype then
-			sig.append("__{recv.c_name}")
-		end
-		sig.append("({recv.ctype} self")
-		comment.append("(self: {recv}")
-		arguments.add(selfvar)
-		for i in [0..self.msignature.arity[ do
-			var mtype = self.msignature.mparameters[i].mtype
-			if i == self.msignature.vararg_rank then
-				mtype = v.get_class("Array").get_mtype([mtype])
-			end
-			mtype = v.resolve_for(mtype, selfvar)
-			comment.append(", {mtype}")
-			sig.append(", {mtype.ctype} p{i}")
-			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
-			arguments.add(argvar)
-		end
-		sig.append(")")
-		comment.append(")")
-		if ret != null then
-			comment.append(": {ret}")
-		end
-		compiler.header.add_decl("{sig};")
-
-		v.add_decl("/* method {self} for {comment} */")
-		v.add_decl("{sig} \{")
-		#v.add("printf(\"method {self} for {comment}\\n\");")
-		if ret != null then
-			frame.returnvar = v.new_var(ret)
-		end
-		frame.returnlabel = v.get_name("RET_LABEL")
-
-		self.compile_inside_to_c(v, arguments)
-
-		v.add("{frame.returnlabel.as(not null)}:;")
-		if ret != null then
-			v.add("return {frame.returnvar.as(not null)};")
-		end
-		v.add("\}")
 	end
 end
 
