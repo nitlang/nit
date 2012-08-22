@@ -46,6 +46,9 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
+	# Entry point to performs a global compilation on the AST of a complete program.
+	# `mainmodule` is the main module of the program
+	# `runtime_type_analysis` is a already computer type analysis.
 	fun run_global_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		var time0 = get_time
@@ -62,12 +65,17 @@ redef class ModelBuilder
 		v.add_decl("#include <gc/gc.h>")
 		#v.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
 
-		# Declare structure for each live type
+		# Declaration of structures the live Nit types
+		# Each live type is generated as an independent C `struct' type.
+		# They only share a common first field `classid` used to implement the polymorphism.
+		# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val' that contains only the `classid` field.
 
-		v.add_decl("typedef struct \{int classid;\} val;")
+		v.add_decl("typedef struct \{int classid;\} val; /* general C type representing a Nit instance. */")
 		for t in runtime_type_analysis.live_types do
 			compiler.declare_runtimeclass(v, t)
 		end
+
+		# Global variable used by the legacy native interface
 
 		v.add_decl("extern int glob_argc;")
 		v.add_decl("extern char **glob_argv;")
@@ -86,7 +94,7 @@ redef class ModelBuilder
 		# Init instance code (allocate and init-arguments)
 
 		for t in runtime_type_analysis.live_types do
-			if t.ctype != "val*" then continue
+			if t.ctype != "val*" then continue # skip primitive types
 			compiler.generate_init_instance(t)
 		end
 
@@ -122,6 +130,8 @@ redef class ModelBuilder
 		self.toolcontext.info("Total methods to compile to C: {compiler.visitors.length}", 2)
 
 		# Generate the .h and .c files
+		# A single C file regroups many compiled rumtime functions
+		# Note that we do not try to be clever an a small change in a Nit source file may change the content of all the generated .c files
 
 		var outname = self.toolcontext.opt_output.value
 		if outname == null then
@@ -235,7 +245,7 @@ private class GlobalCompiler
 	# The modeulbuilder used to know the model and the AST
 	var modelbuilder: ModelBuilder
 
-	# Is hardening asked (see --hardening)
+	# Is hardening asked? (see --hardening)
 	fun hardening: Bool do return self.modelbuilder.toolcontext.opt_hardening.value
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, modelbuilder: ModelBuilder)
@@ -252,6 +262,7 @@ private class GlobalCompiler
 	end
 
 	# Subset of runtime_type_analysis.live_types that contains only primitive types
+	# Used to implement the equal test
 	var live_primitive_types: Array[MClassType]
 
 	# runtime_functions that need to be compiled
@@ -269,11 +280,12 @@ private class GlobalCompiler
 	# Where global declaration are stored (the main .h)
 	#
 	# FIXME: should not be a vistor but just somewhere to store lines
-	# FIXME: should not have a global .h since its does no helps recompilation
+	# FIXME: should not have a global .h since it does not help recompilations
 	var header: nullable GlobalCompilerVisitor = null
 
 	# The list of all associated visitors
 	# Used to generate .c files
+	# FIXME: should not be vistors but just somewhere to store lines
 	private var visitors: List[GlobalCompilerVisitor] = new List[GlobalCompilerVisitor]
 
 	# List of additional .c files required to compile (native interface)
@@ -302,11 +314,19 @@ private class GlobalCompiler
 		var idname = "ID_" + mtype.c_name
 		self.classids[mtype] = idname
 		v.add_decl("#define {idname} {idnum} /* {mtype} */")
+
 		v.add_decl("struct {mtype.c_name} \{")
 		v.add_decl("int classid; /* must be {idname} */")
+
 		if mtype.ctype != "val*" then
+			# Is the Nit type is native then the struct is a box with two fields:
+			# * the `classid` to be polymorph
+			# * the `value` that contains the native value.
 			v.add_decl("{mtype.ctype} value;")
 		end
+
+		# Collect all attributes and associate them a field in the structure.
+		# Note: we do not try to optimize the order and helps CC to optimize the client code.
 		for cd in mtype.collect_mclassdefs(self.mainmodule) do
 			for p in cd.intro_mproperties do
 				if not p isa MAttribute then continue
@@ -552,7 +572,7 @@ private class RuntimeFunction
 	end
 
 	# Implements a call of the runtime_function
-	# May inline the body
+	# May inline the body or generate a C function call
 	fun call(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		var ret = self.mmethoddef.msignature.return_mtype
@@ -590,8 +610,10 @@ private class RuntimeFunction
 	end
 end
 
-# A runtime variable hold a runtime value in C
-# Runtime variables are associated to local variables and intermediate results
+# A runtime variable hold a runtime value in C.
+# Runtime variables are associated to Nit local variables and intermediate results in Nit expressions.
+#
+# The tricky point is that a single C variable can be associated to more than one RuntimeVariable because the static knowledge of the type of an expression can vary in the C code.
 private class RuntimeVariable
 	# The name of the variable in the C code
 	var name: String
@@ -626,7 +648,7 @@ private class RuntimeVariable
 	end
 end
 
-# Visit the AST to generate the C code.
+# A visitor on the AST of property definition that generate the C code.
 # Because of inlining, a visitor can visit more than one property.
 private class GlobalCompilerVisitor
 	# The associated compiler
@@ -686,7 +708,8 @@ private class GlobalCompilerVisitor
 	# The current visited AST node
 	var current_node: nullable AExpr = null
 
-	# Compile an expression an return its
+	# Compile an expression an return its result
+	# `mtype` is the expected return type, pass null if no specific type is expected.
 	fun expr(nexpr: AExpr, mtype: nullable MType): RuntimeVariable
 	do
 		var old = self.current_node
@@ -701,6 +724,8 @@ private class GlobalCompilerVisitor
 	end
 
 	# Unsafely cast a value to a new type
+	# ie the result share the same C variable but my have a different mcasttype
+	# NOTE: if the adaptation is useless then `value' is returned as it.
 	# ENSURE: return.name == value.name
 	fun autoadapt(value: RuntimeVariable, mtype: MType): RuntimeVariable
 	do
@@ -740,7 +765,7 @@ private class GlobalCompilerVisitor
 			self.add("((struct {valtype.c_name}*){res})->value = {value};")
 			return res
 		else
-			# Bad things will append!
+			# Bad things will appen!
 			var res = self.new_var(mtype)
 			self.add("/* {res} left unintialized (cannot convert {value.mtype} to {mtype}) */")
 			self.add("printf(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); exit(1);")
@@ -763,7 +788,7 @@ private class GlobalCompilerVisitor
 		return expr(nexpr, bool_type)
 	end
 
-	# Compile statement
+	# Compile a statement (if any)
 	fun stmt(nexpr: nullable AExpr)
 	do
 		if nexpr == null then return
@@ -773,7 +798,7 @@ private class GlobalCompilerVisitor
 		self.current_node = old
 	end
 
-	# Safely show a debug message on the current node and repeat the message in the C code
+	# Safely show a debug message on the current node and repeat the message in the C code as a comment
 	fun debug(message: String)
 	do
 		var node = self.current_node
@@ -998,6 +1023,7 @@ private class GlobalCompilerVisitor
 		abort
 	end
 
+	# Generate a static call on a method definition
 	fun call(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		check_valid_reciever(recvtype)
