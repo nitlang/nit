@@ -1056,18 +1056,23 @@ private class GlobalCompilerVisitor
 			return res
 		end
 		if args.first.mcasttype isa MNullableType then
+			# The reciever is potentially null, so we have to 3 cases: ==, != or NullPointerException
 			self.add("if ({args.first} == NULL) \{ /* Special null case */")
 			if m.name == "==" then
 				assert res != null
-				if args[1].mcasttype.ctype == "val*" then
+				if args[1].mcasttype isa MNullableType then
 					self.add("{res} = ({args[1]} == NULL);")
+				else if args[1].mcasttype isa MNullType then
+					self.add("{res} = 1; /* is null */")
 				else
 					self.add("{res} = 0; /* {args[1].inspect} cannot be null */")
 				end
 			else if m.name == "!=" then
 				assert res != null
-				if args[1].mcasttype.ctype == "val*" then
+				if args[1].mcasttype isa MNullableType then
 					self.add("{res} = ({args[1]} != NULL);")
+				else if args[1].mcasttype isa MNullType then
+					self.add("{res} = 0; /* is null */")
 				else
 					self.add("{res} = 1; /* {args[1].inspect} cannot be null */")
 				end
