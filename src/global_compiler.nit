@@ -1090,6 +1090,9 @@ private class GlobalCompilerVisitor
 				self.add("/* skip {t}, no method {m} */")
 				continue
 			end
+			if propdefs.length > 1 then
+				self.debug("NOT YET IMPLEMENTED conflict for {t}.{m}: {propdefs.join(" ")}. choose the first")
+			end
 			var propdef = propdefs.first
 			if propdef.mclassdef.mclass.name == "Object" and t.ctype == "val*" then
 				defaultpropdef = propdef
