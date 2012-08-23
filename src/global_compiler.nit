@@ -118,6 +118,7 @@ redef class ModelBuilder
 		if main_method != null then
 			v.send(main_method, [glob_sys])
 		end
+		v.add("return 0;")
 		v.add("\}")
 
 		# Compile until all runtime_functions are visited
