@@ -94,8 +94,11 @@ redef class ModelBuilder
 		# Init instance code (allocate and init-arguments)
 
 		for t in runtime_type_analysis.live_types do
-			if t.ctype != "val*" then continue # skip primitive types
-			compiler.generate_init_instance(t)
+			if t.ctype == "val*" then
+				compiler.generate_init_instance(t)
+			else
+				compiler.generate_box_instance(t)
+			end
 		end
 
 		# The main function of the C
@@ -365,6 +368,23 @@ private class GlobalCompiler
 		end
 		v.add("return {res};")
 		v.add("\}")
+	end
+
+	fun generate_box_instance(mtype: MClassType)
+	do
+		assert self.runtime_type_analysis.live_types.has(mtype)
+		assert mtype.ctype != "val*"
+		var v = new GlobalCompilerVisitor(self)
+
+		self.header.add_decl("val* BOX_{mtype.c_name}({mtype.ctype});")
+		v.add_decl("/* allocate {mtype} */")
+		v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
+		v.add("struct {mtype.c_name}*res = GC_MALLOC(sizeof(struct {mtype.c_name}));")
+		v.add("res->classid = {self.classid(mtype)};")
+		v.add("res->value = value;")
+		v.add("return (val*)res;")
+		v.add("\}")
+
 	end
 
 	# look for a needed .h and .c file for a given .nit source-file
@@ -860,9 +880,7 @@ private class GlobalCompilerVisitor
 				self.add("printf(\"Dead code executed!\\n\"); exit(1);")
 				return res
 			end
-			self.add("{res} = GC_MALLOC(sizeof(struct {valtype.c_name})); /* autobox from {value.mtype} to {mtype} */")
-			self.add("{res}->classid = {self.compiler.classid(valtype)};")
-			self.add("((struct {valtype.c_name}*){res})->value = {value};")
+			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
 		else
 			# Bad things will appen!
