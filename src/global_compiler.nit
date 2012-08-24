@@ -688,7 +688,7 @@ private class CustomizedRuntimeFunction
 	do
 		var ret = self.mmethoddef.msignature.return_mtype
 		if self.mmethoddef.mproperty.is_new then
-			ret = arguments.first.mtype
+			ret = recv
 		end
 		if ret != null then
 			ret = v.resolve_for(ret, arguments.first)
@@ -1388,7 +1388,8 @@ private class GlobalCompilerVisitor
 	fun array_instance(array: Array[RuntimeVariable], elttype: MType): RuntimeVariable
 	do
 		elttype = self.anchor(elttype)
-		var res = self.init_instance(self.get_class("Array").get_mtype([elttype]))
+		var arraytype = self.get_class("Array").get_mtype([elttype])
+		var res = self.init_instance(arraytype)
 		self.add("\{ /* {res} = array_instance Array[{elttype}] */")
 		var nat = self.new_var(self.get_class("NativeArray").get_mtype([elttype]))
 		nat.is_exact = true
@@ -1398,7 +1399,7 @@ private class GlobalCompilerVisitor
 			self.add("{nat}[{i}] = {r};")
 		end
 		var length = self.int_instance(array.length)
-		self.send(self.get_property("with_native", res.mtype), [res, nat, length])
+		self.send(self.get_property("with_native", arraytype), [res, nat, length])
 		self.check_init_instance(res)
 		self.add("\}")
 		return res
@@ -1419,7 +1420,7 @@ private class GlobalCompilerVisitor
 		var res2 = self.init_instance(mtype)
 		self.add("{res} = {res2};")
 		var length = self.int_instance(string.length)
-		self.send(self.get_property("with_native", res.mtype), [res, nat, length])
+		self.send(self.get_property("with_native", mtype), [res, nat, length])
 		self.check_init_instance(res)
 		self.add("{name} = {res};")
 		self.add("\}")
