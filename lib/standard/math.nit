@@ -18,6 +18,9 @@ import collection
 
 redef class Int
 	fun rand: Int is extern "kernel_Int_Int_rand_0"
+	fun bin_and(i: Int): Int is extern "kernel_Int_Int_binand_0"
+	fun bin_or(i: Int): Int is extern "kernel_Int_Int_binor_0"
+	fun bin_xor(i: Int): Int is extern "kernel_Int_Int_binxor_0"
 end
 
 redef class Float
