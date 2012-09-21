@@ -28,6 +28,9 @@ abstract class Option
 	# Is this option mandatory?
 	readable writable var _mandatory: Bool 
 
+	# Has this option been read?
+	readable var _read:Bool
+
 	# Current value of this option
 	writable var _value: nullable VALUE
 
@@ -47,6 +50,7 @@ abstract class Option
 		end
 		_helptext = help
 		_mandatory = false
+		_read = false
 		_default_value = default
 		_value = default 
 	end
@@ -78,7 +82,10 @@ abstract class Option
 	end
 
 	# Consume parameters for this option
-	protected fun read_param(it: Iterator[String]) is abstract
+	protected fun read_param(it: Iterator[String])
+	do
+		_read = true
+	end
 end
 
 class OptionText
@@ -96,7 +103,11 @@ class OptionBool
 
 	init(help: String, names: String...) do init_opt(help, false, names)
 
-	redef fun read_param(it) do value = true
+	redef fun read_param(it)
+	do
+		super
+		value = true
+	end
 end
 
 class OptionCount
@@ -105,7 +116,11 @@ class OptionCount
 
 	init(help: String, names: String...) do init_opt(help, 0, names)
 
-	redef fun read_param(it) do value += 1
+	redef fun read_param(it)
+	do
+		super
+		value += 1
+	end
 end
 
 # Option with one mandatory parameter
@@ -115,6 +130,7 @@ abstract class OptionParameter
 
 	redef fun read_param(it)
 	do
+		super
 		if it.is_ok then
 			value = convert(it.item)
 			it.next
@@ -242,6 +258,13 @@ class OptionContext
 					rest.add(it.item)
 					it.next
 				end
+			end
+		end
+
+		for opt in _options do
+			if opt.mandatory and not opt.read then
+				stderr.write("Error: mandatory option {opt.names.join(", ")} not found\n")
+				exit(1)
 			end
 		end
 	end
