@@ -21,6 +21,7 @@ import modelbuilder
 import exprbuilder
 import rapid_type_analysis
 import global_compiler
+import separate_compiler
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
