@@ -133,9 +133,19 @@ redef class ModelBuilder
 		end
 		self.toolcontext.info("Total methods to compile to C: {compiler.visitors.length}", 2)
 
+		var time1 = get_time
+		self.toolcontext.info("*** END VISITING: {time1-time0} ***", 2)
+		write_and_make(compiler)
+	end
+
+	private fun write_and_make(compiler: GlobalCompiler)
+	do
+		var mainmodule = compiler.mainmodule
+
 		# Generate the .h and .c files
 		# A single C file regroups many compiled rumtime functions
 		# Note that we do not try to be clever an a small change in a Nit source file may change the content of all the generated .c files
+		var time0 = get_time
 
 		var outname = self.toolcontext.opt_output.value
 		if outname == null then
