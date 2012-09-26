@@ -1148,6 +1148,21 @@ private class GlobalCompilerVisitor
 		return res
 	end
 
+	# Generate a monomorphic send for the method `m', the type `t' and the arguments `args'
+	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		assert t isa MClassType
+		var propdefs = m.lookup_definitions(self.compiler.mainmodule, t)
+		if propdefs.length == 0 then
+			abort
+		end
+		if propdefs.length > 1 then
+			self.debug("NOT YET IMPLEMENTED conflict for {t}.{m}: {propdefs.join(" ")}. choose the first")
+		end
+		var propdef = propdefs.first
+		return self.call(propdef, t, args)
+	end
+
 	fun check_valid_reciever(recvtype: MClassType)
 	do
 		if self.compiler.runtime_type_analysis.live_types.has(recvtype) or recvtype.mclass.name == "Object" then return
