@@ -18,6 +18,9 @@
 #include <time.h>
 
 #define kernel_Int_Int_rand_0(self) ((int)(((double)(self))*rand()/(RAND_MAX+1.0)))
+#define kernel_Int_Int_binand_0(self, p0) (self & p0)
+#define kernel_Int_Int_binor_0(self, p0) (self | p0)
+#define kernel_Int_Int_binxor_0(self, p0) (self ^ p0)
 #define kernel_Float_Float_sqrt_0(self) sqrt(self)
 #define kernel_Float_Float_cos_0(self) cos(self)
 #define kernel_Float_Float_sin_0(self) sin(self)
