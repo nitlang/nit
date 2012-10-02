@@ -10,4 +10,24 @@
   -I, --path              Set include path for loaders (may be used more than once)
   --only-parse            Only proceed to parse step of loaders
   --only-metamodel        Stop after meta-model processing
+  --ic-typing-mode        Incremental typing method. Possible values are:
+				 - BM: binary matrix
+				 - CL: coloration
+				 - PHAND: perfect hashing whith AND
+				 - PHMOD: perfect hashing whith MOD
+  --ic-load-mode          Dynamic loading mode. Possible values are:
+				 - type (default): load only the new type
+				 - module: load the module of new type
+  --ic-bootstrap          Bootstrap typing with standard library (default is no bootstrap)
+  --ic-recompute-mode     When to recompute typing. Possible values are:
+				 - always: recompute for each new type
+				 - never (default):  never recompute, use fallback instead
+				 - threshold:  recompute only when the threshold is reached, use fallback before
+				 - increment: try to update structures instead of recompute
+  --ic-threshold-mode     Threshold mode. Possible values are:
+				 - increment: recompute when the number of new type reach the threshold count
+				 -fallback: recompute when the use number of fallback use reach the threshold count
+  --ic-threshold-count    Threshold count. Take an integer
+  --ic-cache-size         Cache size. Take an integer
+  --ic-show-stats         Show statistics about typing at the end of the interpretation
   -o                      compatibility (does noting)
