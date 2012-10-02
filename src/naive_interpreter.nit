@@ -34,6 +34,13 @@ redef class ModelBuilder
 		self.toolcontext.info("*** START INTERPRETING ***", 1)
 
 		var interpreter = new NaiveInterpreter(self, mainmodule, arguments)
+		init_naive_interpreter(interpreter, mainmodule)
+
+		var time1 = get_time
+		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
+	end
+
+	private fun init_naive_interpreter(interpreter: NaiveInterpreter, mainmodule: MModule) do
 		var sys_type = mainmodule.sys_type
 		if sys_type == null then return # no class Sys
 		var mainobj = new MutableInstance(sys_type)
@@ -48,9 +55,6 @@ redef class ModelBuilder
 		if mainprop != null then
 			interpreter.send(mainprop, [mainobj])
 		end
-
-		var time1 = get_time
-		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
 	end
 end
 
