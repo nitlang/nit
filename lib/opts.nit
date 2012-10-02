@@ -25,8 +25,14 @@ abstract class Option
 	# Human readable description of the option
 	readable var _helptext: String 
 
+	# Gathering errors during parsing
+	readable var _errors: Array[String]
+
 	# Is this option mandatory?
 	readable writable var _mandatory: Bool 
+
+	# Has this option been read?
+	readable var _read:Bool
 
 	# Current value of this option
 	writable var _value: nullable VALUE
@@ -47,8 +53,10 @@ abstract class Option
 		end
 		_helptext = help
 		_mandatory = false
+		_read = false
 		_default_value = default
 		_value = default 
+		_errors = new Array[String]
 	end
 
 	# Add new aliases for this option
@@ -78,7 +86,10 @@ abstract class Option
 	end
 
 	# Consume parameters for this option
-	protected fun read_param(it: Iterator[String]) is abstract
+	protected fun read_param(it: Iterator[String])
+	do
+		_read = true
+	end
 end
 
 class OptionText
@@ -96,7 +107,11 @@ class OptionBool
 
 	init(help: String, names: String...) do init_opt(help, false, names)
 
-	redef fun read_param(it) do value = true
+	redef fun read_param(it)
+	do
+		super
+		value = true
+	end
 end
 
 class OptionCount
@@ -105,25 +120,39 @@ class OptionCount
 
 	init(help: String, names: String...) do init_opt(help, 0, names)
 
-	redef fun read_param(it) do value += 1
+	redef fun read_param(it)
+	do
+		super
+		value += 1
+	end
 end
 
-# Option with one mandatory parameter
+# Option with one parameter (mandatory by default)
 abstract class OptionParameter
 	super Option
 	protected fun convert(str: String): VALUE is abstract
 
+	# Is the parameter mandatory?
+	readable writable var _parameter_mandatory: Bool
+
 	redef fun read_param(it)
 	do
-		if it.is_ok then
+		super
+		if it.is_ok and it.item.first != '-' then
 			value = convert(it.item)
 			it.next
 		else
-			# TODO: What to do?
+			if _parameter_mandatory then
+				_errors.add("Parameter expected for option {names.first}.")
+			end
 		end
 	end
 
-	init init_opt(h, d, n) do super
+	init init_opt(h, d, n)
+	do
+		super
+		_parameter_mandatory = true
+	end
 end
 
 class OptionString
@@ -150,6 +179,11 @@ class OptionEnum
 	redef fun convert(str)
 	do
 		var id = _values.index_of(str)
+		if id == -1 then
+			var e = "Unrecognized value for option {_names.join(", ")}.\n"
+			e += "Expected values are: {_values.join(", ")}."
+			_errors.add(e)
+		end
 		return id
 	end
 
@@ -195,6 +229,7 @@ end
 class OptionContext
 	readable var _options: Array[Option] 
 	readable var _rest: Array[String] 
+	readable var _errors: Array[String]
 
 	var _optmap: Map[String, Option]
 	
@@ -226,22 +261,44 @@ class OptionContext
 		var parseargs = true
 		build
 		var rest = _rest
-		
+
 		while parseargs and it.is_ok do
 			var str = it.item
 			if str == "--" then
-				it.next
 				rest.add_all(it.to_a)
 				parseargs = false
 			else
-				if _optmap.has_key(str) then
-					var opt = _optmap[str]
-					it.next
-					opt.read_param(it)
+				# We're looking for packed short options
+				if str.last_index_of('-') == 0 and str.length > 2 then
+					var next_called = false
+					for i in [1..str.length] do
+						var short_opt = "-" + str[i].to_s
+						if _optmap.has_key(short_opt) then
+							var option = _optmap[short_opt]
+							if option isa OptionParameter then
+								it.next
+								next_called = true
+							end
+							option.read_param(it)
+						end
+					end
+					if not next_called then it.next
 				else
-					rest.add(it.item)
-					it.next
+					if _optmap.has_key(str) then
+						var opt = _optmap[str]
+						it.next
+						opt.read_param(it)
+					else
+						rest.add(it.item)
+						it.next
+					end
 				end
+			end
+		end
+
+		for opt in _options do
+			if opt.mandatory and not opt.read then
+				_errors.add("Mandatory option {opt.names.join(", ")} not found.")
 			end
 		end
 	end
@@ -258,6 +315,7 @@ class OptionContext
 		_options = new Array[Option]
 		_optmap = new HashMap[String, Option]
 		_rest = new Array[String]
+		_errors = new Array[String]
 	end
 
 	private fun build
@@ -267,5 +325,20 @@ class OptionContext
 				_optmap[n] = o
 			end
 		end
+	end
+
+	fun get_errors: Array[String]
+	do
+		var errors: Array[String] = new Array[String]
+
+		errors.add_all(_errors)
+
+		for o in _options do
+			for e in o.errors do
+				errors.add(e)
+			end
+		end
+
+		return errors
 	end
 end
