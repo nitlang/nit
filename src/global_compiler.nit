@@ -216,7 +216,7 @@ redef class ModelBuilder
 			ofiles.add(o)
 		end
 		# Link edition
-		makefile.write("{outname}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) $(LDLIBS) -o {outname} {ofiles.join(" ")}\n\n")
+		makefile.write("{outname}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outname} {ofiles.join(" ")} $(LDLIBS)\n\n")
 		# Clean
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
