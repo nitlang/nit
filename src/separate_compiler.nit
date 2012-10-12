@@ -15,7 +15,7 @@
 # Separate compilation of a Nit program
 module separate_compiler
 
-intrude import global_compiler # TODO better separation of concerns
+intrude import global_vft_computation # TODO better separation of concerns
 
 redef class ToolContext
 	# --separate
@@ -33,6 +33,7 @@ redef class ModelBuilder
 	do
 		# Hijack the run_global_compiler to run the separate one if requested.
 		if self.toolcontext.opt_separate.value then
+			build_vft(mainmodule)
 			run_separate_compiler(mainmodule, runtime_type_analysis)
 		else
 			super
