@@ -420,6 +420,8 @@ class ModelBuilder
 		end
 	end
 
+	private var already_builded_mclasses: Map[String, AClassdef] = new HashMap[String, AClassdef]
+
 	# Visit the AST and create the MClass objects
 	private fun build_a_mclass(nmodule: AModule, nclassdef: AClassdef)
 	do
@@ -453,11 +455,18 @@ class ModelBuilder
 		else
 			abort
 		end
-
 		var mclass = try_get_mclass_by_name(nclassdef, mmodule, name)
 		if mclass == null then
 			mclass = new MClass(mmodule, name, arity, mkind, mvisibility)
 			#print "new class {mclass}"
+		else if nclassdef isa AStdClassdef and already_builded_mclasses.has_key(mclass.name) then
+			if mclass.intro_mmodule == mmodule then
+				error(nclassdef, "Error: A class {name} is already defined at line {already_builded_mclasses[mclass.name].location.line_start}.")
+				return
+			else
+				error(nclassdef, "Error: A class {name} is already refined at line {already_builded_mclasses[mclass.name].location.line_start}.")
+				return
+			end
 		else if nclassdef isa AStdClassdef and nclassdef.n_kwredef == null then
 			error(nclassdef, "Redef error: {name} is an imported class. Add the redef keyword to refine it.")
 			return
@@ -470,6 +479,7 @@ class ModelBuilder
 			error(nvisibility, "Error: refinement changed the visibility from a {mclass.visibility} to a {mvisibility}")
 		end
 		nclassdef.mclass = mclass
+		already_builded_mclasses[mclass.name] = nclassdef
 	end
 
 	# Visit the AST and create the MClassDef objects
@@ -477,7 +487,8 @@ class ModelBuilder
 	do
 		var mmodule = nmodule.mmodule.as(not null)
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
-		var mclass = nclassdef.mclass.as(not null)
+		var mclass = nclassdef.mclass
+		if mclass == null then return # Skip error
 		#var mclassdef = nclassdef.mclassdef.as(not null)
 
 		var names = new Array[String]
@@ -534,7 +545,8 @@ class ModelBuilder
 	do
 		var mmodule = nmodule.mmodule.as(not null)
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
-		var mclass = nclassdef.mclass.as(not null)
+		var mclass = nclassdef.mclass
+		if mclass == null then return # Skip error
 		var mclassdef = nclassdef.mclassdef.as(not null)
 
 		var specobject = true
@@ -583,6 +595,7 @@ class ModelBuilder
 		end
 
 		# Create all classes
+		already_builded_mclasses = new HashMap[String, AClassdef]
 		for nclassdef in nmodule.n_classdefs do
 			self.build_a_mclass(nmodule, nclassdef)
 		end
@@ -624,7 +637,8 @@ class ModelBuilder
 	do
 		# Force building recursively
 		if nclassdef.build_properties_is_done then return
-		var mclassdef = nclassdef.mclassdef.as(not null)
+		var mclassdef = nclassdef.mclassdef
+		if mclassdef == null then return # Skip error
 		if mclassdef.in_hierarchy == null then return # Skip error
 		for superclassdef in mclassdef.in_hierarchy.direct_greaters do
 			build_properties(mclassdef2nclassdef[superclassdef])
