@@ -32,15 +32,8 @@ c_src/*.cksum
 lib/*.log
 lib/*.dot
 
-tests/*.res
-tests/*.log
-tests/*.bin
-tests/*.err
-tests/*.write
 tests/alt
 tests/errlist
-tests/test_nitc_logs
-tests/hello_world
 tests/out
 
 *.stub.nit.[ch]
