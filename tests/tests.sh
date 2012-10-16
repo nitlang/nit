@@ -42,68 +42,76 @@ function process_result()
 	pattern=$1
 	description=$2
 	SAV=""
+	NSAV=""
 	FAIL=""
+	NFAIL=""
 	SOSO=""
+	NSOSO=""
 	SOSOF=""
-	if [ -r "sav/$pattern.sav" ]; then
-		diff -u "out/$pattern.res" "sav/$pattern.sav" > "out/$pattern.diff.sav.log"
-		if [ "$?" == 0 ]; then
-			SAV=OK
-		else
-			SAV=NOK
+	NSOSOF=""
+	for sav in "sav/$engine/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
+		if [ -r "$sav" ]; then
+			diff -u "out/$pattern.res" "$sav" > "out/$pattern.diff.sav.log"
+			if [ "$?" == 0 ]; then
+				SAV="$sav"
+			else
+				NSAV="$sav"
+			fi
+			sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
+			sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
+			grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
+			grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
+			diff -u "out/$pattern.res2" "out/$pattern.sav2" > "out/$pattern.diff.sav2.log"
+			if [ "$?" == 0 ]; then
+				SOSO="$sav"
+			else
+				NSOSO="$sav"
+			fi
 		fi
-		sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
-		sed '/[Ww]arning/d;/[Ee]rror/d' "sav/$pattern.sav" > "out/$pattern.sav2"
-		grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
-		grep '[Ee]rror' "sav/$pattern.sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
-		diff -u "out/$pattern.res2" "out/$pattern.sav2" > "out/$pattern.diff.sav2.log"
-		if [ "$?" == 0 ]; then
-			SOSO=OK
-		else
-			SOSO=NOK
+	done
+	for sav in "sav/$engine/fixme/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.fail"; do
+		if [ -r "$sav" ]; then
+			diff -u "out/$pattern.res" "$sav" > "out/$pattern.diff.fail.log"
+			if [ "$?" == 0 ]; then
+				FAIL="$sav"
+			else
+				NFAIL="$sav"
+			fi
+			sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
+			sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.fail2"
+			grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
+			grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.fail2"
+			diff -u "out/$pattern.res2" "out/$pattern.fail2" > "out/$pattern.diff.fail2.log"
+			if [ "$?" == 0 ]; then
+				SOSOF="$sav"
+			else
+				NSOSOF="$sav"
+			fi
 		fi
-	fi
-	if [ -r "sav/$pattern.fail" ]; then
-		diff -u "out/$pattern.res" "sav/$pattern.fail" > "out/$pattern.diff.fail.log"
-		if [ "$?" == 0 ]; then
-			FAIL=OK
-		else
-			FAIL=NOK
-		fi
-		sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
-		sed '/[Ww]arning/d;/[Ee]rror/d' "sav/$pattern.fail" > "out/$pattern.fail2"
-		grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
-		grep '[Ee]rror' "sav/$pattern.fail" >/dev/null && echo "Error" >> "out/$pattern.fail2"
-		diff -u "out/$pattern.res2" "out/$pattern.fail2" > "out/$pattern.diff.fail2.log"
-		if [ "$?" == 0 ]; then
-			SOSOF=OK
-		else
-			SOSOF=NOK
-		fi
-	fi
+	done
 	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
 	NYI="$?"
-	if [ "x$SAV" = "xOK" ]; then
+	if [ -n "$SAV" ]; then
 		if [ -n "$tap" ]; then
 			echo "ok - $description"
-		elif [ "x$FAIL" = "x" ]; then
-			echo "[ok] out/$pattern.res"
+		elif [ -z "$FAIL" ]; then
+			echo "[ok] out/$pattern.res $SAV"
 		else
-			echo "[ok] out/$pattern.res - but sav/$pattern.fail remains!"
+			echo "[ok] out/$pattern.res $SAV - but $FAIL remains!"
 		fi
 		ok="$ok $pattern"
-	elif [ "x$FAIL" = "xOK" ]; then
+	elif [ -n "$FAIL" ]; then
 		if [ -n "$tap" ]; then
 			echo "not ok - $description # TODO expected failure"
 		else
-			echo "[fail] out/$pattern.res"
+			echo "[fail] out/$pattern.res $FAIL"
 		fi
 		ok="$ok $pattern"
-	elif [ "x$SOSO" = "xOK" ]; then
+	elif [ -n "$SOSO" ]; then
 		if [ -n "$tap" ]; then
 			echo "ok - $description # SOSO"
 		else
-			echo "[soso] out/$pattern.res sav/$pattern.sav"
+			echo "[soso] out/$pattern.res $SOSO"
 		fi
 		ok="$ok $pattern"
 	elif [ "x$NYI" = "x0" ]; then
@@ -113,26 +121,26 @@ function process_result()
 			echo "[todo] out/$pattern.res -> not yet implemented"
 		fi
 		ok="$ok $pattern"
-	elif [ "x$SOSOF" = "xOK" ]; then
+	elif [ -n "$SOSOF" ]; then
 		if [ -n "$tap" ]; then
 			echo "not ok - $description # TODO SOSO expected failure"
 		else
-			echo "[fail soso] out/$pattern.res sav/$pattern.fail"
+			echo "[fail soso] out/$pattern.res $SOSOF"
 		fi
 		ok="$ok $pattern"
-	elif [ "x$SAV" = "xNOK" ]; then
+	elif [ -n "$NSAV" ]; then
 		if [ -n "$tap" ]; then
 			echo "not ok - $description"
 		else
-			echo "[======= fail out/$pattern.res sav/$pattern.sav =======]"
+			echo "[======= fail out/$pattern.res $NSAV =======]"
 		fi
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
-	elif [ "x$FAIL" = "xNOK" ]; then
+	elif [ -n "$NFAIL" ]; then
 		if [ -n "$tap" ]; then
 			echo "not ok - $description"
 		else
-			echo "[======= changed out/$pattern.res sav/$pattern.fail ======]"
+			echo "[======= changed out/$pattern.res $NFAIL ======]"
 		fi
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
