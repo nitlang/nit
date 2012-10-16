@@ -76,7 +76,7 @@ for ii in "$@"; do
 		# Compile
 		# The point of ICode testing is to validate analysis/optimizations
 		# Force '--global' option !
-		$NITC $OPT --global --output-format icode "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+		$NITC $OPT --global --output-format icode "$i" $includes 2> "out/$ff.cmp.err" > "out/$ff.compile.log"
 		ERR=$?
 		if [ "$ERR" != 0 ]; then
 			# Could not compile
