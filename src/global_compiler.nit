@@ -1747,7 +1747,7 @@ redef class AInternMethPropdef
 			end
 			return
 		end
-		v.add("printf(\"NOT IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
+		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
 		debug("Not implemented {mpropdef}")
 	end
 end
