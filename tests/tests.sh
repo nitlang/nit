@@ -31,6 +31,7 @@ Usage: $e [options] modulenames
 --tap       Produce TAP output
 --engine    Use a specific engine (default=nitc)
 --noskip    Do not skip a test even if the .skip file matches
+--[no]soso  Force enable (or disable) SOSO
 END
 }
 
@@ -57,6 +58,7 @@ function process_result()
 			else
 				NSAV="$sav"
 			fi
+			[ -z "$soso" ] && continue
 			sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
 			sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
 			grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
@@ -77,6 +79,7 @@ function process_result()
 			else
 				NFAIL="$sav"
 			fi
+			[ -z "$soso" ] && continue
 			sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
 			sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.fail2"
 			grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
@@ -204,14 +207,19 @@ while [ $stop = false ]; do
 		--tap) tap=true; shift;;
 		--engine) engine="$2"; shift; shift;;
 		--noskip) noskip=true; shift;;
+		--soso) soso=true; shift;;
+		--nososo) nososo=true; shift;;
 		*) stop=true
 	esac
 done
 enginebinname=$engine
 case $engine in
-	nitc|nitg) ;;
-	nit) engine=niti ;;
-	niti) enginebinname=nit ;;
+	nitc) ;;
+	nitg) [ -z "$nososo" ] && soso=true ;;
+	nit) [ -z "$nososo" ] && soso=true
+		engine=niti ;;
+	niti) [ -z "$nososo" ] && soso=true
+		enginebinname=nit ;;
 esac
 
 # The default nitc compiler
