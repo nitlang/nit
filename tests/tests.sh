@@ -149,7 +149,7 @@ function process_result()
 need_skip()
 {
 	test "$noskip" = true && return 1
-	if grep "$engine" "sav/$1.skip" >/dev/null 2>&1; then
+	if grep "$engine" "sav/$1.skip" >/dev/null 2>&1 || echo "$1" | grep -f "$engine.skip" >/dev/null 2>&1; then
 		((tapcount=tapcount+1))
 		if [ -n "$tap" ]; then
 			echo "ok - $2 # skip"
