@@ -1136,6 +1136,14 @@ redef class AMethPropdef
 		if not mpropdef.is_intro then
 			msignature = mpropdef.mproperty.intro.msignature
 			if msignature == null then return # Skip error
+
+			# Check inherited signature arity
+			if param_names.length != msignature.arity then
+				var node: ANode
+				if nsig != null then node = nsig else node = self
+				modelbuilder.error(node, "Redef error: {mpropdef} redefines {mpropdef.mproperty.intro} with {param_names.length} parameter(s), {msignature.arity} expected. Signature is {mpropdef}{msignature}")
+				return
+			end
 		else if mpropdef.mproperty.is_init then
 			# FIXME UGLY: inherit signature from a super-constructor
 			for msupertype in nclassdef.mclassdef.supertypes do
@@ -1148,6 +1156,7 @@ redef class AMethPropdef
 				end
 			end
 		end
+
 
 		# Inherit the signature
 		if msignature != null and param_names.length != param_types.length and param_names.length == msignature.arity and param_types.length == 0 then
@@ -1203,12 +1212,6 @@ redef class AMethPropdef
 			var msignature = mpropdef.mproperty.intro.msignature
 			if msignature == null then return
 
-			if mysignature.arity != msignature.arity then
-				var node: ANode
-				if nsig != null then node = nsig else node = self
-				modelbuilder.error(node, "Redef Error: {mysignature.arity} parameters found, {msignature.arity} expected. Signature is {mpropdef}{msignature}")
-				return
-			end
 			var precursor_ret_type = msignature.return_mtype
 			var ret_type = mysignature.return_mtype
 			if ret_type != null and precursor_ret_type == null then
