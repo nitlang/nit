@@ -303,7 +303,7 @@ END
 				echo ""
 				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
 			fi
-			$NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+			NIT_NO_STACK=1 $NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
