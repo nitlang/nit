@@ -684,7 +684,7 @@ class ModelBuilder
 			if inhc2 == null then inhc2 = c
 			if inhc2 == inhc then continue
 			if inhc != null then
-				self.error(nclassdef, "Cannot provide a defaut constructor: conflict for {inhc} and {c}")
+				self.error(nclassdef, "Error: Cannot provide a defaut constructor: conflict for {inhc} and {c}")
 			else
 				inhc = inhc2
 			end
@@ -696,7 +696,7 @@ class ModelBuilder
 			return
 		end
 		if not combine.is_empty and inhc != null then
-			self.error(nclassdef, "Cannot provide a defaut constructor: conflict for {combine.join(", ")} and {inhc}")
+			self.error(nclassdef, "Error: Cannot provide a defaut constructor: conflict for {combine.join(", ")} and {inhc}")
 			return
 		end
 
@@ -1026,7 +1026,7 @@ redef class ASignature
 	do
 		if param_names.length != param_types.length then
 			# Some parameters are typed, other parameters are not typed.
-			modelbuilder.warning(self.n_params[param_types.length], "Error: Untyped parameter `{param_names[param_types.length]}'.")
+			modelbuilder.error(self.n_params[param_types.length], "Error: Untyped parameter `{param_names[param_types.length]}'.")
 			return null
 		end
 
@@ -1164,7 +1164,7 @@ redef class AMethPropdef
 
 		if param_names.length != param_types.length then
 			# Some parameters are typed, other parameters are not typed.
-			modelbuilder.warning(nsig.n_params[param_types.length], "Error: Untyped parameter `{param_names[param_types.length]}'.")
+			modelbuilder.error(nsig.n_params[param_types.length], "Error: Untyped parameter `{param_names[param_types.length]}'.")
 			return
 		end
 
