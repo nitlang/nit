@@ -215,11 +215,9 @@ done
 enginebinname=$engine
 case $engine in
 	nitc) ;;
-	nitg) [ -z "$nososo" ] && soso=true ;;
-	nit) [ -z "$nososo" ] && soso=true
-		engine=niti ;;
-	niti) [ -z "$nososo" ] && soso=true
-		enginebinname=nit ;;
+	nitg) ;;
+	nit) engine=niti ;;
+	niti) enginebinname=nit ;;
 esac
 
 # The default nitc compiler
