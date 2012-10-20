@@ -312,7 +312,7 @@ END
 		fi
 		if [ "$ERR" != 0 ]; then
 			test -z "$tap" && echo -n "! "
-			cat "$ff.cmp.err" "$ff.compile.log" > "$ff.res"
+			cat "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
 			process_result $bf $bf
 		elif [ -x "./$ff.bin" ]; then
 			cp "$ff.cmp.err" "$ff.res"
