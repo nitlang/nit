@@ -1,0 +1,10 @@
+alt/base_attr3_alt3.nit:80,2--9: Error: Method 'a1=' doesn't exists in A.
+alt/base_attr3_alt3.nit:82,2--9: Error: Method 'a2=' doesn't exists in A.
+alt/base_attr3_alt3.nit:83,2--5: Error: Method 'a3' doesn't exists in A.
+alt/base_attr3_alt3.nit:84,2--9: Error: Method 'a3=' doesn't exists in A.
+alt/base_attr3_alt3.nit:89,2--5: Error: Method 'a6' doesn't exists in A.
+alt/base_attr3_alt3.nit:95,2--5: Error: Method 'a9' doesn't exists in A.
+alt/base_attr3_alt3.nit:98,2--10: Error: Method 'a10=' doesn't exists in A.
+alt/base_attr3_alt3.nit:100,2--10: Error: Method 'a11=' doesn't exists in A.
+alt/base_attr3_alt3.nit:101,2--6: Error: Method 'a12' doesn't exists in A.
+alt/base_attr3_alt3.nit:102,2--10: Error: Method 'a12=' doesn't exists in A.

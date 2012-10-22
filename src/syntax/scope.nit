@@ -37,11 +37,6 @@ class ScopeContext
 	# Used for debuging
 	var _variables: Array[Variable] = new Array[Variable]
 
-	# Known labels
-	# (all labels, even out of scopes ones)
-	# Used to find duplicates
-	var _labels: Array[ALabel] = new Array[ALabel]
-
 	# Return the variable associated with a name
 	fun [](n: Symbol): nullable Variable
 	do
@@ -81,14 +76,17 @@ class ScopeContext
 		_stack.push(block)
 		if n_label != null then
 			var lab = n_label.n_id.to_symbol
-			for nl in _labels do
-				if n_label != nl and lab == nl.n_id.to_symbol then
-					visitor.error(n_label, "Syntax error: label {lab} already defined at {nl.location.relative_to(n_label.location)}.")
+			var i = _stack.length - 1
+			while i >= 0 do
+				var b = _stack[i]
+				if b isa EscapableBlock and b.lab == lab then
+					visitor.error(n_label, "Syntax error: label {lab} already defined at {b.lab_location.relative_to(n_label.location)}.")
 					return
 				end
+				i -= 1
 			end
-			_labels.add(n_label)
 			block._lab = lab
+			block._lab_location = n_label.location
 		end
 	end
 
@@ -178,6 +176,9 @@ class EscapableBlock
 	# The label of the block (if any)
 	# Set by the push in EscapableContext
 	readable var _lab: nullable Symbol
+
+	# The location of the label (if any)
+	readable var _lab_location: nullable Location
 
 	# Is self a break closure ?
 	fun is_break_block: Bool do return false
