@@ -193,7 +193,7 @@ redef class MModule
 				return c
 			end
 			print("Fatal Error: no primitive class {name}")
-			abort
+			exit(1)
 		end
 		assert cla.length == 1 else print cla.join(", ")
 		return cla.first
