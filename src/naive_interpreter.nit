@@ -287,8 +287,9 @@ private class NaiveInterpreter
 				args.add(rawargs[i+1])
 			end
 		end
-		assert args.length >= mpropdef.msignature.arity + 1 # because of self
-		assert args.length <= mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length
+		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
+			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
+		end
 		if args.length < mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
 			fatal("NOT YET IMPLEMENTED: default closures")
 		end

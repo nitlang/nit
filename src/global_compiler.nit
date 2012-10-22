@@ -1036,7 +1036,11 @@ private class GlobalCompilerVisitor
 		else
 			args = args.to_a
 		end
-		assert args.length == m.msignature.arity + 1 # because of self
+		if args.length != m.msignature.arity + 1 then # because of self
+			add("printf(\"NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.\\n\"); exit(1);")
+			debug("NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.")
+			return null
+		end
 
 		args.first = recv
 		var rm = new RuntimeFunction(m, recvtype)
@@ -2381,6 +2385,7 @@ redef class ASuperExpr
 		# FIXME: we do not want an ugly static call!
 		var mpropdefs = mpropdef.mproperty.lookup_super_definitions(mpropdef.mclassdef.mmodule, mpropdef.mclassdef.bound_mtype)
 		if mpropdefs.length != 1 then
+			v.add("printf(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
 			debug("MPRODFEFS for super {mpropdef} for {recv}: {mpropdefs.join(", ")}")
 		end
 		mpropdef = mpropdefs.first
