@@ -477,7 +477,8 @@ class ModelBuilder
 	do
 		var mmodule = nmodule.mmodule.as(not null)
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
-		var mclass = nclassdef.mclass.as(not null)
+		var mclass = nclassdef.mclass
+		if mclass == null then return # Skip error
 		#var mclassdef = nclassdef.mclassdef.as(not null)
 
 		var names = new Array[String]
