@@ -651,7 +651,7 @@ private class GlobalCompilerVisitor
 	# Force to get the primitive property named `name' in the instance `recv' or abort
 	fun get_property(name: String, recv: MType): MMethod
 	do
-		return self.compiler.mainmodule.force_get_primitive_method(name, recv)
+		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, recv, self.compiler.mainmodule)
 	end
 
 	# The current Frame

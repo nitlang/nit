@@ -824,6 +824,17 @@ class ModelBuilder
 	do
 		self.toolcontext.warning(n.hot_location, text)
 	end
+
+	# Force to get the primitive method named `name' on the type `recv' or do a fatal error on `n'
+	fun force_get_primitive_method(n: ANode, name: String, recv: MType, mmodule: MModule): MMethod
+	do
+		var res = mmodule.try_get_primitive_method(name, recv)
+		if res == null then
+			self.toolcontext.fatal_error(n.hot_location, "Fatal Error: {recv} must have a property named {name}.")
+			abort
+		end
+		return res
+	end
 end
 
 redef class AModule

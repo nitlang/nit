@@ -217,17 +217,6 @@ redef class MModule
 		end
 		return res
 	end
-
-	# Force to get the primitive method named `name' on the type `recv' or abort
-	fun force_get_primitive_method(name: String, recv: MType): MMethod
-	do
-		var res = try_get_primitive_method(name, recv)
-		if res == null then
-			print("Fatal Error: no primitive property {name} on {recv}")
-			abort
-		end
-		return res
-	end
 end
 
 # A named class

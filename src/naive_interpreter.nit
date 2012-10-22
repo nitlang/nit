@@ -85,6 +85,11 @@ private class NaiveInterpreter
 		return sub.is_subtype(self.mainmodule, self.frame.arguments.first.mtype.as(MClassType), sup)
 	end
 
+	fun force_get_primitive_method(name: String, recv: MType): MMethod
+	do
+		return self.modelbuilder.force_get_primitive_method(self.frame.current_node, name, recv, self.mainmodule)
+	end
+
 	# Is a return executed?
 	# Set this mark to skip the evaluation until the end of the specified method frame
 	var returnmark: nullable Frame = null
@@ -214,7 +219,7 @@ private class NaiveInterpreter
 		var mtype = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
 		var res = new MutableInstance(mtype)
 		self.init_instance(res)
-		self.send(self.mainmodule.force_get_primitive_method("with_native", mtype), [res, nat, self.int_instance(values.length)])
+		self.send(self.force_get_primitive_method("with_native", mtype), [res, nat, self.int_instance(values.length)])
 		self.check_init_instance(res)
 		return res
 	end
@@ -1120,19 +1125,19 @@ redef class AForExpr
 		var col = v.expr(self.n_expr)
 		if col == null then return
 		#self.debug("col {col}")
-		var iter = v.send(v.mainmodule.force_get_primitive_method("iterator", col.mtype), [col]).as(not null)
+		var iter = v.send(v.force_get_primitive_method("iterator", col.mtype), [col]).as(not null)
 		#self.debug("iter {iter}")
 		loop
-			var isok = v.send(v.mainmodule.force_get_primitive_method("is_ok", iter.mtype), [iter]).as(not null)
+			var isok = v.send(v.force_get_primitive_method("is_ok", iter.mtype), [iter]).as(not null)
 			if not isok.is_true then return
 			if self.variables.length == 1 then
-				var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				var item = v.send(v.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
 				#self.debug("item {item}")
 				v.frame.map[self.variables.first] = item
 			else if self.variables.length == 2 then
-				var key = v.send(v.mainmodule.force_get_primitive_method("key", iter.mtype), [iter]).as(not null)
+				var key = v.send(v.force_get_primitive_method("key", iter.mtype), [iter]).as(not null)
 				v.frame.map[self.variables[0]] = key
-				var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				var item = v.send(v.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
 				v.frame.map[self.variables[1]] = item
 			else
 				abort
@@ -1141,7 +1146,7 @@ redef class AForExpr
 			if v.is_break(self.escapemark) then return
 			v.is_continue(self.escapemark) # Clear the break
 			if v.is_escaping then return
-			v.send(v.mainmodule.force_get_primitive_method("next", iter.mtype), [iter])
+			v.send(v.force_get_primitive_method("next", iter.mtype), [iter])
 		end
 	end
 end
@@ -1258,7 +1263,7 @@ redef class AStringFormExpr
 		var nat = v.native_string_instance(txt)
 		var res = new MutableInstance(v.mainmodule.get_primitive_class("String").mclass_type)
 		v.init_instance(res)
-		v.send(v.mainmodule.force_get_primitive_method("from_cstring", res.mtype), [res, nat])
+		v.send(v.force_get_primitive_method("from_cstring", res.mtype), [res, nat])
 		v.check_init_instance(res)
 		return res
 	end
@@ -1274,7 +1279,7 @@ redef class ASuperstringExpr
 			array.add(i)
 		end
 		var i = v.array_instance(array, v.mainmodule.get_primitive_class("Object").mclass_type)
-		var res = v.send(v.mainmodule.force_get_primitive_method("to_s", i.mtype), [i])
+		var res = v.send(v.force_get_primitive_method("to_s", i.mtype), [i])
 		assert res != null
 		return res
 	end
@@ -1290,7 +1295,7 @@ redef class ACrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
-		v.send(v.mainmodule.force_get_primitive_method("init", mtype), [res, e1, e2])
+		v.send(v.force_get_primitive_method("init", mtype), [res, e1, e2])
 		v.check_init_instance(res)
 		return res
 	end
@@ -1306,7 +1311,7 @@ redef class AOrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
-		v.send(v.mainmodule.force_get_primitive_method("without_last", mtype), [res, e1, e2])
+		v.send(v.force_get_primitive_method("without_last", mtype), [res, e1, e2])
 		v.check_init_instance(res)
 		return res
 	end

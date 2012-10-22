@@ -199,11 +199,12 @@ class RapidTypeAnalysis
 
 			var vararg_rank = mr.mmethoddef.msignature.vararg_rank
 			if vararg_rank > -1 then
+				var node = self.modelbuilder.mpropdef2npropdef[mr.mmethoddef]
 				var elttype = mr.mmethoddef.msignature.mparameters[vararg_rank].mtype
 				elttype = elttype.anchor_to(self.mainmodule, mr.receiver)
 				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
 				self.add_type(vararg)
-				self.add_monomorphic_send(vararg, self.mainmodule.force_get_primitive_method("with_native", vararg))
+				self.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg, self.mainmodule))
 				var native = self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype])
 				self.add_type(native)
 			end
@@ -382,7 +383,7 @@ private class RapidTypeVisitor
 		var rapidtype = cleanup_type(recv)
 		if rapidtype == null then abort
 
-		return self.analysis.mainmodule.force_get_primitive_method(name, rapidtype)
+		return self.analysis.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, rapidtype, self.analysis.mainmodule)
 	end
 end
 
