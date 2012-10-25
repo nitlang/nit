@@ -180,6 +180,8 @@ function run_compiler()
 	bench_command "nitg" "nitg test_parser.nit" "./nitg.$title.bin" test_parser.nit
 	run_command "$@" nit.nit -o "nit.$title.bin"
 	bench_command "nit" "nit test_parser.nit test_parser.nit" "./nit.$title.bin" test_parser.nit -- -n rapid_type_analysis.nit
+	run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
+	bench_command "shoot" "shoot_logic" "./shoot.$title.bin"
 }
 
 ## EFFECTIVE BENCHS ##
