@@ -21,6 +21,17 @@ import literal
 import typing
 import auto_super_init
 
+redef class ToolContext
+	# --discover-call-trace
+	var opt_discover_call_trace: OptionBool = new OptionBool("Trace calls of the first invocation of a method", "--discover-call-trace")
+
+	redef init
+	do
+		super
+		self.option_context.add_option(self.opt_discover_call_trace)
+	end
+end
+
 redef class ModelBuilder
 	# Execute the program from the entry point (Sys::main) of the `mainmodule'
 	# `arguments' are the command-line arguments in order
@@ -266,11 +277,28 @@ private class NaiveInterpreter
 		exit(1)
 	end
 
+	# Debug on the current node
+	fun debug(message: String)
+	do
+		if frames.is_empty then
+			print message
+		else
+			self.frame.current_node.debug(message)
+		end
+	end
+
+	# Store known method, used to trace methods as thez are reached
+	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
+
 	# Execute `mpropdef' for a `args' (where args[0] is the receiver).
 	# Return a falue if `mpropdef' is a function, or null if it is a procedure.
 	# The call is direct/static. There is no message-seding/late-bindng.
 	fun call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
+		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
+			self.discover_call_trace.add mpropdef
+			self.debug("Discovered {mpropdef}")
+		end
 		var vararg_rank = mpropdef.msignature.vararg_rank
 		if vararg_rank >= 0 then
 			assert args.length >= mpropdef.msignature.arity + 1 # because of self
