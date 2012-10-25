@@ -191,11 +191,11 @@ function bench_nitg_bootstrap()
 	name="$FUNCNAME"
 	prepare_res "$name.dat" "" "Steps of the bootstrap of nitg by nitc"
 	rm nit?_nit*
-	cp ./nitc_3 ./nitc_nitc
-	bench_command "c/c c" "nitc_nitc nitc.nit -> nitc_nitc (stability)" ./nitc_nitc -O nitc.nit -o nitc_nitc
-	bench_command "c/c g" "nitc_nitc nitg.nit -> nitg_nitc" ./nitc_nitc -O nitg.nit -o nitg_nitc
-	bench_command "g/c g" "nitg_nitc nitg.nit -> nitg_nitg" ./nitg_nitc nitg.nit -o nitg_nitg
-	bench_command "g/g g" "nitg_nitg nitg.nit -> nitg_nitg (stability)" ./nitg_nitg nitg.nit -o nitg_nitg
+	cp ./nitc_3 ./nitc_nitc.bin
+	bench_command "c/c c" "nitc_nitc nitc.nit -> nitc_nitc (stability)" ./nitc_nitc.bin -O nitc.nit -o nitc_nitc.bin
+	bench_command "c/c g" "nitc_nitc nitg.nit -> nitg_nitc" ./nitc_nitc.bin -O nitg.nit -o nitg_nitc.bin
+	bench_command "g/c g" "nitg_nitc nitg.nit -> nitg_nitg" ./nitg_nitc.bin nitg.nit -o nitg_nitg.bin
+	bench_command "g/g g" "nitg_nitg nitg.nit -> nitg_nitg (stability)" ./nitg_nitg.bin nitg.nit -o nitg_nitg.bin
 
 	plot "$name.gnu"
 }
@@ -208,7 +208,7 @@ function bench_steps()
 	bench_command "parse" "" ./nitc_3 --only-parse nitg.nit
 	bench_command "metamodel" "" ./nitc_3 --only-metamodel nitg.nit
 	bench_command "generate c" "" ./nitc_3 --no-cc nitg.nit
-	bench_command "full" "" ./nitc_nitc -O nitg.nit
+	bench_command "full" "" ./nitc_3 -O nitg.nit
 
 	prepare_res "$name-nitg.dat" "nitg" "Various steps of nitg"
 	bench_command "parse" "" ./nitg --only-parse nitg.nit
