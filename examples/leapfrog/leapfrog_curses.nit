@@ -105,7 +105,7 @@ redef class Duck
 	end
 end
 
-redef class Scene
+redef class PlayScene
 	fun draw_on_curses(view: CursesView)
 	do
 		var window = view.window
@@ -133,7 +133,7 @@ redef class Scene
 	end
 end
 
-var game = new Scene
+var game = new PlayScene
 
 var win = new Window
 var main_view = new CursesView(win)

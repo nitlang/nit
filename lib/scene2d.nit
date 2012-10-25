@@ -14,9 +14,8 @@
 
 # 2D management of game elements
 #
-# FIXME: game is a bad name
 # TODO: collision framework (with quad tree?)
-module game
+module scene2d
 
 # The root class of the living objects (sprites, group of sprites, etc.)
 abstract class LiveObject
@@ -37,10 +36,10 @@ end
 class Sprite
 	super LiveObject
 
-	# x coordinate of the top-left point
+	# x coordinate of the center point
 	var x: Int writable = 0
 
-	# y coordinate of the top-left point
+	# y coordinate of the center point
 	var y: Int writable = 0
 
 	# width of the sprite
@@ -48,6 +47,11 @@ class Sprite
 
 	# height of the sprite
 	var height: Int writable = 100
+
+	fun left: Int do return x - width/2
+	fun right: Int do return x + width/2
+	fun top: Int do return y - height/2
+	fun bottom: Int do return y + height/2
 
 	# x velocity (applied by `update')
 	var vx: Int writable = 0
@@ -67,8 +71,30 @@ class Sprite
 	# `x', `y', `width', and `height' of both sprites are considered
 	fun overlaps(other: Sprite): Bool
 	do
-		return self.x+self.width > other.x and self.x < other.x+other.width and self.y+self.height > other.y and self.y < other.y+other.width
+		return self.right > other.left and self.left < other.right and self.bottom > other.top and self.top < other.bottom
 	end
+
+	# Return the current angle of velocity
+	# Often used to rotate the displayed image with the correct angle
+	fun velocity_angle: Float
+	do
+		return atan2(self.vx.to_f, -self.vy.to_f)
+	end
+
+	# Return the angle to target an other sprite
+	fun angle_to(target: Sprite): Float
+	do
+		return atan2((target.x-self.x).to_f, (self.y-target.y).to_f)
+	end
+
+	# Update of vx and vy toward a given angle and magnitude
+	fun set_velocity(angle: Float, maginude: Int)
+	do
+		var magf = maginude.to_f
+		self.vx = (angle.sin * magf).to_i
+		self.vy = (angle.cos * -magf).to_i
+	end
+
 end
 
 # Organizational class to manage groups of sprites and other live objects.
@@ -86,11 +112,33 @@ class LiveGroup[E: LiveObject]
 		for x in self do if x.exists then x.update
 	end
 
+	# Remove all live Objects that do not exists
+	# Call this to cleanup the live group
+	fun gc
+	do
+		var i = self.iterator
+		while i.is_ok do
+			var e = i.item
+			if not e.exists then
+				i.delete
+			else if e isa LiveGroup[LiveObject] then
+				e.gc
+			end
+			i.next
+		end
+	end
+
 	# Recursively draw each live objects that `exists'
 	redef fun draw(view)
 	do
 		for x in self do if x.exists then x.draw(view)
 	end
+end
+
+# A state in the game logic
+# A scene manage a bunch of live objects
+class Scene
+	super LiveObject
 end
 
 # Abstract view do draw sprites

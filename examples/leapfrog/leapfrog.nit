@@ -17,7 +17,7 @@
 # This module is an example of a simple game using a curses backend
 module leapfrog
 
-import game
+import scene2d
 
 # A falling apple
 # If the sheep grab it, it scores one point.
@@ -116,8 +116,8 @@ class Duck
 	end
 end
 
-class Scene
-	super LiveObject
+class PlayScene
+	super Scene
 
 	var apples = new LiveGroup[Apple]
 	var duck = new Duck
