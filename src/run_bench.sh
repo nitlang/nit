@@ -260,13 +260,25 @@ function bench_steps()
 	bench_command "parse" "" ./nitc_3 --only-parse nitg.nit
 	bench_command "metamodel" "" ./nitc_3 --only-metamodel nitg.nit
 	bench_command "generate c" "" ./nitc_3 --no-cc nitg.nit
-	bench_command "full" "" ./nitc_3 -O nitg.nit
+	bench_command "full" "" ./nitc_3 -O nitg.nit -o "nitg_nitg.bin"
+
+	prepare_res "$name-nitc-g.dat" "nitc-g" "Various steps of nitc --global"
+	bench_command "parse" "" ./nitc_3 --global --only-parse nitg.nit
+	bench_command "metamodel" "" ./nitc_3 --global --only-metamodel nitg.nit
+	bench_command "generate c" "" ./nitc_3 --global --no-cc nitg.nit
+	bench_command "full" "" ./nitc_3 -O --global nitg.nit -o "nitg_nitc-g.bin"
 
 	prepare_res "$name-nitg.dat" "nitg" "Various steps of nitg"
 	bench_command "parse" "" ./nitg --only-parse nitg.nit
 	bench_command "metamodel" "" ./nitg --only-metamodel nitg.nit
 	bench_command "generate c" "" ./nitg --no-cc nitg.nit
-	bench_command "full" "" ./nitg nitg.nit
+	bench_command "full" "" ./nitg nitg.nit -o "nitg_nitg.bin"
+
+	prepare_res "$name-nitg-s.dat" "nitg-s" "Various steps of nitg --separate"
+	bench_command "parse" "" ./nitg --separate --only-parse nitg.nit
+	bench_command "metamodel" "" ./nitg --separate --only-metamodel nitg.nit
+	bench_command "generate c" "" ./nitg --separate --no-cc nitg.nit
+	bench_command "full" "" ./nitg --separate nitg.nit -o "nitg_nitg-s.bin"
 
 	plot "$name.gnu"
 }
