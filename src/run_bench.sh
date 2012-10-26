@@ -19,17 +19,9 @@
 
 ## CONFIGURATION OPTIONS ##
 
-# Number of times a command must be run with bench_command
-count=3
-
-# FIXME: verbose mode
-#outputopts=">/dev/null 2>&1"
-
-# Do not run commands
-# FIXME: buggy
-#dry_run=true
-
-NOTSKIPED="$*"
+# Default number of times a command must be run with bench_command
+# Can be overrided with 'the option -n'
+count=2
 
 ### HELPER FUNCTIONS ##
 
@@ -52,6 +44,7 @@ function bench_command()
 	local desc="$2"
 	shift
 	shift
+	if test "$verbose" = true; then outputopts="/dev/stdout"; else outputopts="/dev/null"; fi
 	timeout="time.out"
 	echo "$title" > "$timeout"
 	echo "# $desc" >> "$timeout"
@@ -62,7 +55,7 @@ function bench_command()
 
 	# Execute the commands $count times
 	for i in `seq 1 "$count"`; do
-		/usr/bin/time -f "%U" -o "$timeout" -a "$@" $outputopts # || die "$1: failed"
+		/usr/bin/time -f "%U" -o "$timeout" -a "$@" > $outputopts 2>&1 || die "$1: failed"
 		echo -n "$i. "
 		tail -n 1 "$timeout"
 	done
@@ -204,12 +197,42 @@ function run_compiler()
 	local title=$1
 	shift
 	run_command "$@" nitg.nit -o "nitg.$title.bin"
-	bench_command "nitg" "nitg test_parser.nit" "./nitg.$title.bin" test_parser.nit
+	bench_command "nitg" "nitg test_parser.nit" "./nitg.$title.bin" -v test_parser.nit
 	run_command "$@" nit.nit -o "nit.$title.bin"
-	bench_command "nit" "nit test_parser.nit test_parser.nit" "./nit.$title.bin" test_parser.nit -- -n rapid_type_analysis.nit
+	bench_command "nit" "nit test_parser.nit test_parser.nit" "./nit.$title.bin" -v test_parser.nit -- -n rapid_type_analysis.nit
 	run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
 	bench_command "shoot" "shoot_logic" "./shoot.$title.bin"
 }
+
+## HANDLE OPTIONS ##
+
+function usage()
+{
+	echo "run_bench: [options]* benchname"
+	echo "  -v: verbose mode"
+	echo "  -n count: number of execution for each bar (default: $count)"
+	echo "  --dry: Do not run the commands, just reuse the data and generate the graph"
+	echo "  -h: this help"
+}
+
+stop=false
+while [ "$stop" = false ]; do
+	case "$1" in
+		-v) verbose=true; shift;;
+		-h) usage; exit;;
+		-n) count="$2"; shift; shift;;
+		--dry) dry_run=true; shift;;
+		*) stop=true
+	esac
+done
+
+NOTSKIPED="$*"
+
+if test -z "$NOTSKIPED"; then
+	usage
+	echo "List of available benches:"
+	echo "* all: run all the benches"
+fi
 
 ## EFFECTIVE BENCHS ##
 
