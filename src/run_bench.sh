@@ -29,6 +29,8 @@ count=3
 # FIXME: buggy
 #dry_run=true
 
+NOTSKIPED="$*"
+
 ### HELPER FUNCTIONS ##
 
 function die()
@@ -159,6 +161,29 @@ END
 	plots=
 }
 
+# Check if the test should be skiped according to its name
+# $1: name of the test
+# $2: description of the test
+# $NOTSKIPED: arguments
+function skip_test()
+{
+	if test -z "$NOTSKIPED"; then
+		echo "* $1"
+		return 0
+	fi
+	if test "$NOTSKIPED" = "all"; then
+		: # Execute anyway
+	elif echo "$1" | grep "$NOTSKIPED" >/dev/null 2>&1; then
+		: # Found one to execute
+	else
+		return 0
+	fi
+	echo "*"
+	echo "* $1 *****"
+	echo "*"
+	return 1
+}
+
 ## GLOBAL VARIABLES ##
 
 # The current $res (set by prepare_res, used by bench_command)
@@ -189,6 +214,7 @@ function run_compiler()
 function bench_nitg_bootstrap()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name.dat" "" "Steps of the bootstrap of nitg by nitc"
 	rm nit?_nit*
 	cp ./nitc_3 ./nitc_nitc.bin
@@ -204,6 +230,7 @@ bench_nitg_bootstrap
 function bench_steps()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name-nitc.dat" "nitc" "Various steps of nitc"
 	bench_command "parse" "" ./nitc_3 --only-parse nitg.nit
 	bench_command "metamodel" "" ./nitc_3 --only-metamodel nitg.nit
@@ -224,6 +251,7 @@ bench_steps
 function bench_nitg_options()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name.dat" "no options" "nitg without options"
 	run_compiler "nitg" ./nitg
 
@@ -239,6 +267,7 @@ bench_nitg_options --hardening
 function bench_nitc_gc()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	for gc in nitgc boehm malloc large; do
 		prepare_res "$name-$gc".dat "$gc" "nitc with gc=$gc"
 		export NIT_GC_OPTION="$gc"
@@ -252,6 +281,7 @@ bench_nitc_gc
 function bench_nitc_boost()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name-slow.dat" "no -O" "nitc without -O"
 	run_compiler "nitc_slow" ./nitc_3
 	prepare_res "$name-fast.dat" "-O" "nitc with -O"
@@ -264,6 +294,7 @@ bench_nitc_boost
 function bench_engines()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name-nitc.dat" "nitc" "nitc"
 	run_compiler "nitc" ./nitc_3 -O
 	prepare_res "$name-nitc-g.dat" "nitc-g" "nitc with --global"
@@ -277,6 +308,7 @@ bench_engines
 function bench_compilation_time
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name-nitc.dat" "nitc" "nitc"
 	for i in ../examples/hello_world.nit test_parser.nit nitg.nit; do
 		bench_command `basename "$i" .nit` "" ./nitc_3 -O "$i" --no-cc
