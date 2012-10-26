@@ -131,9 +131,9 @@ function prepare_res()
 	echo "# [$2] $3 #"
 	res=$1
 	if [ "$plots" = "" ]; then
-		plots="plot '$1' using 4:xticlabels(5) ti '$2';"
+		plots="plot '$1' using 4:2:3:xticlabels(5) ti '$2';"
 	else
-		plots="$plots replot '$1' using 4 ti '$2';"
+		plots="$plots replot '$1' using 4:2:3 ti '$2';"
 	fi
 	if [ "$dry_run" = "true" ]; then return; fi
 	echo "# [$2] $3" > "$res"
@@ -149,7 +149,9 @@ set auto x;
 set yrange [0:];
 set style data histogram;
 set style histogram cluster gap 2;
-set style fill solid border -1;
+set style histogram errorbars linewidth 1;
+set style fill solid 0.3 border -1;
+set bars front;
 set boxwidth 0.9;
 set xtic nomirror rotate by -45 scale 0 font ',8';
 set title "$1"
