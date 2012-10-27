@@ -33,9 +33,7 @@ struct se_exec_data {
 	int err_fd;
 };
 
-#ifndef NONITCNI
-se_exec_data_t* exec_Process_Process_basic_exec_execute_4(Process, char *, char *, int, int);
-#endif
+se_exec_data_t* exec_Process_Process_basic_exec_execute_4(void *, char *, char *, int, int);
 
 #define string_NativeString_NativeString_system_0(self) (system(self))
 
