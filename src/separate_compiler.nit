@@ -15,8 +15,9 @@
 # Separate compilation of a Nit program
 module separate_compiler
 
-intrude import global_vft_computation # TODO better separation of concerns
 
+intrude import global_compiler # TODO better separation of concerns
+intrude import vft_computation
 redef class ToolContext
 	# --separate
 	var opt_separate: OptionBool = new OptionBool("Use separate compilation", "--separate")

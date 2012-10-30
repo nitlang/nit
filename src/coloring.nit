@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2012 Alexandre Terrasa <alexandre@moz-concept.com>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,32 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Building virtual function tables by coloration in closed world
-module global_vft_computation
+# Graph coloring tools
+module coloring
 
-intrude import global_compiler # TODO better separation of concerns
+intrude import modelbuilder
 
 redef class ModelBuilder
 	private var core: OrderedSet[MClass] = new OrderedSet[MClass]
 	private var crown: OrderedSet[MClass] = new OrderedSet[MClass]
 	private var border: OrderedSet[MClass] = new OrderedSet[MClass]
-	 
-
-	fun build_vft(mainmodule: MModule)
-	do
-		self.toolcontext.info("*** BUILDING VFT ***", 1)
+	
+	# Colorize classes and properties
+	fun colorize_model(mainmodule: MModule) do
 		
-		#for mclassdef in model.mclassdef_hierarchy do
-		#	print mclassdef
-		#	for p in mclassdef.mclass.methods do
-		#		print "\t- {p}"
-		#	end
-		#end
-		
+		# compute linear ext of each class and tag each class as core, crown or border 
 		for mclass in model.mclasses do
-			# compute linear ext of each class
 			mclass.compute_linear_ext(mainmodule)
-			# tag each class as core, crown or border
 			tag_class(mclass)
 		end
 		
@@ -52,34 +40,14 @@ redef class ModelBuilder
 		# compute conflicts graph for the whole class hierarchy
 		compute_conflicts_graph
 		
-		# colorize properties
-		colorize_core
-		colorize_crown
-		
-		# fill tables
-		for mclass in model.mclasses do
-			if mclass.is_colorized then
-				mclass.fill_vft
-				mclass.fill_attrs
-			end
-		end
-
-		#print "After coloration of core:"
-		#for mclass in model.mclasses do
-		#	print " - {mclass}"
-		#	for i in [0 .. mclass.vft.length[ do
-		#		var mpropdef = mclass.vft[i]
-		#		if mpropdef == null then
-		#			print "\t- {i}: null"
-		#		else
-		#			print "\t- {i}: {mpropdef.c_name}"
-		#		end
-		#	end
-		#end
-		
-		self.toolcontext.info("*** END OF VFT BUILDING ***", 1)
+		# colorize graph
+		colorize_classes(core)
+		colorize_classes(border)
+		colorize_classes(crown)
+		colorize_core_properties
+		colorize_crown_properties
 	end
-	
+
 	# Tag type as core, crown or border
 	fun tag_class(mclass: MClass) do
 	
@@ -141,7 +109,7 @@ redef class ModelBuilder
 	end
 	
 	# Colorize properties of the core hierarchy
-	private fun colorize_core do
+	private fun colorize_core_properties do
 		var mclasses = core
 		var min_color = 0
 		
@@ -152,8 +120,8 @@ redef class ModelBuilder
 			
 				# If the class is root, get the minimal color
 				if mclass.super_classes.length == 0 then
-					colorize_elements(mclass.methods, color)	# Colorize methods
-					colorize_elements(mclass.attributes, color)	# Colorize attributes
+					colorize_properties(mclass.methods, color)	# Colorize methods
+					colorize_properties(mclass.attributes, color)	# Colorize attributes
 
 					mclass.is_colorized = true
 				else
@@ -166,8 +134,8 @@ redef class ModelBuilder
 					end
 					
 					# Colorize properties
-					colorize_elements(mclass.methods, color)	# Colorize methods
-					colorize_elements(mclass.attributes, color)	# Colorize attributes
+					colorize_properties(mclass.methods, color)	# Colorize methods
+					colorize_properties(mclass.attributes, color)	# Colorize attributes
 					mclass.is_colorized = true
 				end
 			end
@@ -175,20 +143,38 @@ redef class ModelBuilder
 	end
 	
 	# Colorize properties of the crown hierarchy
-	private fun colorize_crown do
+	private fun colorize_crown_properties do
 		for mclass in crown do
-			colorize_elements(mclass.methods, max_color(0, mclass.parents))
-			colorize_elements(mclass.attributes, max_color(0, mclass.parents))
+			colorize_properties(mclass.methods, max_color(0, mclass.parents))
+			colorize_properties(mclass.attributes, max_color(0, mclass.parents))
 			mclass.is_colorized = true
 		end
 	end
 	
-	# Incremantly colorize properties of a class given a start color
-	private fun colorize_elements(elements: Collection[MProperty], start_color: Int) do
+	# Colorize a collection of properties given a starting color
+	private fun colorize_properties(elements: Collection[MProperty], start_color: Int) do
 		for mproperty in elements do
 			if mproperty.is_colorized then continue
 			mproperty.color = start_color
 			start_color += 1
+		end
+	end
+	
+	# Colorize a collection of classes
+	fun colorize_classes(elements: Collection[MClass]) do
+		var min_color = 0
+		var max_color = min_color
+
+		for element in elements do
+			var color = min_color
+			while not color_free(element, color) do
+				color += 1
+			end
+			element.color = color
+			if color > max_color then 
+				max_color = color
+			end
+			color = min_color
 		end
 	end
 	
@@ -203,19 +189,28 @@ redef class ModelBuilder
 		end
 		return max_color
 	end
+	
+	# Check if a related element to the element already use the color
+	fun color_free(element: MClass, color: Int): Bool do
+		if conflicts_graph.has_key(element) then
+			for st in conflicts_graph[element] do if st.color == color then return false
+		end
+		for st in element.linear_ext do
+			if st == element then continue
+			if st.color == color then return false
+		end
+		return true
+	end
 end
 
 redef class MClass
 
+	# The class color
+	var color: nullable Int = null
+
 	# Is the class already colorized
 	private var is_colorized: Bool = false
 	
-	# The vft table
-	private var vft: Array[nullable MMethodDef] = new Array[nullable MMethodDef]
-
-	# The attributes table
-	private var attrs: Array[nullable MAttributeDef] = new Array[nullable MAttributeDef]
-
 	# Linear extension of the class
 	private var linear_ext: OrderedSet[MClass] = new OrderedSet[MClass]
 	
@@ -305,91 +300,17 @@ redef class MClass
 		return internal_attributes.as(not null)
 	end
 	private var internal_attributes: nullable OrderedSet[MAttribute]
-	
-	# Fill the vft 
-	# assert is_colorized = true
-	private fun fill_vft do
-		# first, fill table from parents
-		for parent in super_classes do
-			assert parent_is_colorized: parent.is_colorized
-			for mproperty in parent.methods do
-				var color = mproperty.color.as(not null)
-				if vft.length <= color then
-					for i in [vft.length .. color[ do
-						vft[i] = null
-					end 
-				end
-				for mpropdef in mproperty.mpropdefs do
-					if mpropdef.mclassdef.mclass == parent then
-						vft[color] = mpropdef						
-					end
-				end
-			end
-		end
-	
-		# then override with local methods
-		assert is_colorized: is_colorized 
-		for mproperty in self.methods do
-			var color = mproperty.color.as(not null)
-			if vft.length <= color then
-				for i in [vft.length .. color[ do
-					vft[i] = null
-				end 
-			end
-			for mpropdef in mproperty.mpropdefs do
-				if mpropdef.mclassdef.mclass == self then
-					vft[color] = mpropdef						
-				end
-			end
-		end
-	end
-	
-	# Fill the attrs table
-	# assert is_colorized = true
-	private fun fill_attrs do
-		# first, fill table from parents
-		for parent in super_classes do
-			assert parent_is_colorized: parent.is_colorized
-			for mproperty in parent.attributes do
-				var color = mproperty.color.as(not null)
-				if attrs.length <= color then
-					for i in [attrs.length .. color[ do
-						attrs[i] = null
-					end 
-				end
-				for mpropdef in mproperty.mpropdefs do
-					if mpropdef.mclassdef.mclass == parent then
-						attrs[color] = mpropdef						
-					end
-				end
-			end
-		end
-	
-		# then override with local methods
-		assert is_colorized: is_colorized 
-		for mproperty in self.attributes do
-			var color = mproperty.color.as(not null)
-			if attrs.length <= color then
-				for i in [attrs.length .. color[ do
-					attrs[i] = null
-				end 
-			end
-			for mpropdef in mproperty.mpropdefs do
-				if mpropdef.mclassdef.mclass == self then
-					attrs[color] = mpropdef						
-				end
-			end
-		end
-	end
-	
-	
 end
 
-redef class MProperty 
+
+# Add color index to all properties
+redef class MProperty
+	# The property color
 	var color: nullable Int = null
+	
+	# Is the property already colored ? 
 	fun is_colorized: Bool do return color != null
 end
-
 
 
 #
