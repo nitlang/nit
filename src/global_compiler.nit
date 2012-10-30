@@ -891,7 +891,7 @@ private class GlobalCompilerVisitor
 		if value.mtype.ctype == mtype.ctype then
 			return value
 		else if value.mtype.ctype == "val*" then
-			return self.new_expr("((struct {mtype.c_name}*){value})->value /* autounbox from {value.mtype} to {mtype} */", mtype)
+			return self.new_expr("((struct {mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
 		else if mtype.ctype == "val*" then
 			var valtype = value.mtype.as(MClassType)
 			var res = self.new_var(mtype)
