@@ -124,7 +124,7 @@ class SeparateCompiler
 	fun compile_class_to_c(mclass: MClass)
 	do
 		var mtype = mclass.mclassdefs.first.bound_mtype
-		var c_name = mclass.name
+		var c_name = mclass.mclass_type.c_name
 
 		var v = new SeparateCompilerVisitor(self)
 
@@ -427,7 +427,7 @@ class SeparateCompilerVisitor
 	redef fun init_instance(mtype)
 	do
 		mtype = self.anchor(mtype).as(MClassType)
-		var res = self.new_expr("NEW_{mtype.mclass.name}()", mtype)
+		var res = self.new_expr("NEW_{mtype.c_name}()", mtype)
 		return res
 	end
 
