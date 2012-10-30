@@ -253,7 +253,7 @@ class SeparateRuntimeFunction
 			sig.append("void ")
 		end
 		sig.append(self.c_name)
-		sig.append("({recv.ctype} self")
+		sig.append("({selfvar.mtype.ctype} self")
 		comment.append("(self: {recv}")
 		arguments.add(selfvar)
 		for i in [0..mmethoddef.msignature.arity[ do
