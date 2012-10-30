@@ -515,6 +515,12 @@ class SeparateCompilerVisitor
 		var res = self.new_var(cret)
 		res.mcasttype = ret
 		self.add("{res} = (val*) {recv}->attrs[{a.color.as(not null)}];")
+		if not ret isa MNullableType then
+			self.add("if ({res} == NULL) \{")
+			self.add_abort("Uninitialized attribute {a.name}")
+			self.add("\}")
+		end
+
 		return res
 	end
 
