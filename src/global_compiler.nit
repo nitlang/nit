@@ -280,11 +280,11 @@ private class GlobalCompiler
 	var live_primitive_types: Array[MClassType]
 
 	# runtime_functions that need to be compiled
-	private var todos: List[RuntimeFunction] = new List[RuntimeFunction]
+	private var todos: List[AbstractRuntimeFunction] = new List[AbstractRuntimeFunction]
 
 	# runtime_functions already seen (todo or done)
-	private var seen: HashSet[RuntimeFunction] = new HashSet[RuntimeFunction]
-	fun todo(m: RuntimeFunction)
+	private var seen: HashSet[AbstractRuntimeFunction] = new HashSet[AbstractRuntimeFunction]
+	fun todo(m: AbstractRuntimeFunction)
 	do
 		if seen.has(m) then return
 		todos.add(m)
@@ -553,12 +553,25 @@ end
 
 # A C function associated to a Nit method
 # Because of customization, a given Nit method can be compiler more that once
-private abstract class RuntimeFunction
+private abstract class AbstractRuntimeFunction
 	# The associated Nit method
 	var mmethoddef: MMethodDef
 
 	# The mangled c name of the runtime_function
-	fun c_name: String is abstract
+	# Subclasses should redefine `build_c_name` instead
+	fun c_name: String
+	do
+		var res = self.c_name_cache
+		if res != null then return res
+		res = self.build_c_name
+		self.c_name_cache = res
+		return res
+	end
+
+	# Non cached version of `c_name`
+	protected fun build_c_name: String is abstract
+
+	private var c_name_cache: nullable String = null
 
 	# Implements a call of the runtime_function
 	# May inline the body or generate a C function call
@@ -571,7 +584,7 @@ end
 
 # A runtime function customized on a specific monomrph receiver type
 private class CustomizedRuntimeFunction
-	super RuntimeFunction
+	super AbstractRuntimeFunction
 
 	# The considered reciever
 	# (usually is a live type but no strong guarantee)
@@ -583,8 +596,7 @@ private class CustomizedRuntimeFunction
 		self.recv = recv
 	end
 
-	# The mangled c name of the runtime_function
-	redef fun c_name: String
+	redef fun build_c_name: String
 	do
 		var res = self.c_name_cache
 		if res != null then return res
@@ -596,8 +608,6 @@ private class CustomizedRuntimeFunction
 		self.c_name_cache = res
 		return res
 	end
-
-	private var c_name_cache: nullable String = null
 
 	redef fun ==(o)
 	# used in the compiler worklist
@@ -881,7 +891,7 @@ private class GlobalCompilerVisitor
 		if value.mtype.ctype == mtype.ctype then
 			return value
 		else if value.mtype.ctype == "val*" then
-			return self.new_expr("((struct {mtype.c_name}*){value})->value /* autounbox from {value.mtype} to {mtype} */", mtype)
+			return self.new_expr("((struct {mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
 		else if mtype.ctype == "val*" then
 			var valtype = value.mtype.as(MClassType)
 			var res = self.new_var(mtype)
