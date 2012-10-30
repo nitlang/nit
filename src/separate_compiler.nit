@@ -114,6 +114,10 @@ class SeparateCompiler
 				#print "compile {pd} @ {cd} @ {mmodule}"
 				var r = new SeparateRuntimeFunction(pd)
 				r.compile_to_c(self)
+				if cd.bound_mtype.ctype != "val*" then
+					var r2 = new VirtualRuntimeFunction(pd)
+					r2.compile_to_c(self)
+				end
 			end
 		end
 	end
@@ -165,7 +169,11 @@ class SeparateCompiler
 			if mpropdef == null then
 				v.add_decl("NULL, /* empty */")
 			else
-				v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+				if mpropdef.mclassdef.bound_mtype.ctype != "val*" then
+					v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+				else
+					v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+				end
 			end
 		end
 		v.add_decl("\}")
@@ -236,6 +244,83 @@ class SeparateRuntimeFunction
 		var recv = self.mmethoddef.mclassdef.bound_mtype
 		var v = new SeparateCompilerVisitor(compiler)
 		var selfvar = new RuntimeVariable("self", recv, recv)
+		var arguments = new Array[RuntimeVariable]
+		var frame = new Frame(v, mmethoddef, recv, arguments)
+		v.frame = frame
+
+		var sig = new Buffer
+		var comment = new Buffer
+		var ret = mmethoddef.msignature.return_mtype
+		if ret != null then
+			ret = v.resolve_for(ret, selfvar)
+			sig.append("{ret.ctype} ")
+		else if mmethoddef.mproperty.is_new then
+			ret = recv
+			sig.append("{ret.ctype} ")
+		else
+			sig.append("void ")
+		end
+		sig.append(self.c_name)
+		sig.append("({selfvar.mtype.ctype} self")
+		comment.append("(self: {recv}")
+		arguments.add(selfvar)
+		for i in [0..mmethoddef.msignature.arity[ do
+			var mtype = mmethoddef.msignature.mparameters[i].mtype
+			if i == mmethoddef.msignature.vararg_rank then
+				mtype = v.get_class("Array").get_mtype([mtype])
+			end
+			mtype = v.resolve_for(mtype, selfvar)
+			comment.append(", {mtype}")
+			sig.append(", {mtype.ctype} p{i}")
+			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
+			arguments.add(argvar)
+		end
+		sig.append(")")
+		comment.append(")")
+		if ret != null then
+			comment.append(": {ret}")
+		end
+		compiler.header.add_decl("{sig};")
+
+		v.add_decl("/* method {self} for {comment} */")
+		v.add_decl("{sig} \{")
+		if ret != null then
+			frame.returnvar = v.new_var(ret)
+		end
+		frame.returnlabel = v.get_name("RET_LABEL")
+
+		if recv != arguments.first.mtype then
+			#print "{self} {recv} {arguments.first}"
+		end
+		mmethoddef.compile_inside_to_c(v, arguments)
+
+		v.add("{frame.returnlabel.as(not null)}:;")
+		if ret != null then
+			v.add("return {frame.returnvar.as(not null)};")
+		end
+		v.add("\}")
+	end
+end
+
+# The C function associated to a methoddef on a primitive type, stored into a VFT of a class
+# The first parameter (the reciever) is always typed by val* in order to accept an object value
+class VirtualRuntimeFunction
+	super AbstractRuntimeFunction
+
+	redef fun build_c_name: String
+	do
+		return "VIRTUAL_{mmethoddef.c_name}"
+	end
+
+	redef fun to_s do return self.mmethoddef.to_s
+
+	redef fun compile_to_c(compiler)
+	do
+		var mmethoddef = self.mmethoddef
+
+		var recv = self.mmethoddef.mclassdef.bound_mtype
+		var v = new SeparateCompilerVisitor(compiler)
+		var selfvar = new RuntimeVariable("self", v.object_type, recv)
 		var arguments = new Array[RuntimeVariable]
 		var frame = new Frame(v, mmethoddef, recv, arguments)
 		v.frame = frame
