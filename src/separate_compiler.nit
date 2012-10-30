@@ -171,13 +171,30 @@ class SeparateCompiler
 		v.add_decl("\}")
 		v.add_decl("\};")
 
+		if mtype.ctype != "val*" then
+			#Build instance struct
+			self.header.add_decl("struct instance_{c_name} \{")
+			self.header.add_decl("const struct class_{c_name} *class;")
+			self.header.add_decl("{mtype.ctype} value;")
+			self.header.add_decl("\};")
+
+			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
+			v.add("struct instance_{c_name}*res = GC_MALLOC(sizeof(struct instance_{c_name}));")
+			v.add("res->class = &class_{c_name};")
+			v.add("res->value = value;")
+			v.add("return (val*)res;")
+			v.add("\}")
+			return
+		end
+
 		#Build instance struct
 		v.add_decl("struct instance_{c_name} \{")
 		v.add_decl("const struct class_{c_name} *class;")
 		v.add_decl("nitattribute_t attrs[{mclass.attrs.length}];")
 		v.add_decl("\};")
 
-		if mtype.ctype != "val*" then return
 
 		self.header.add_decl("{mtype.ctype} NEW_{c_name}(void);")
 		v.add_decl("/* allocate {mtype} */")
@@ -309,8 +326,8 @@ class SeparateCompilerVisitor
 	do
 		if value.mtype.ctype == mtype.ctype then
 			return value
-		#else if value.mtype.ctype == "val*" then
-			#return self.new_expr("((struct {mtype.c_name}*){value})->value /* autounbox from {value.mtype} to {mtype} */", mtype)
+		else if value.mtype.ctype == "val*" then
+			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
 		else if mtype.ctype == "val*" then
 			var valtype = value.mtype.as(MClassType)
 			var res = self.new_var(mtype)
@@ -319,11 +336,7 @@ class SeparateCompilerVisitor
 				self.add("printf(\"Dead code executed!\\n\"); exit(1);")
 				return res
 			end
-			# Handles primitives C types
-			if value.mtype.ctype != "val*" then
-				self.add("{res} = (val*) (intptr_t) {value}; /* autobox from {value.mtype} to {mtype} */")	
-			end
-			#self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
+			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
 		else
 			# Bad things will appen!
