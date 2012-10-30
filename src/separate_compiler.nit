@@ -132,16 +132,16 @@ class SeparateCompiler
 		var idnum = classids.length
 		var idname = "ID_" + c_name
 		self.classids[mtype] = idname
-		v.add_decl("#define {idname} {idnum} /* {mtype} */")
+		self.header.add_decl("#define {idname} {idnum} /* {mtype} */")
 
-		v.add_decl("struct class_{c_name} \{")
-		v.add_decl("nitmethod_t vft[{mclass.vft.length}];")
+		self.header.add_decl("struct class_{c_name} \{")
+		self.header.add_decl("nitmethod_t vft[{mclass.vft.length}];")
 
 		if mtype.ctype != "val*" then
 			# Is the Nit type is native then the struct is a box with two fields:
 			# * the `vft` to be polymorph
 			# * the `value` that contains the native value.
-			v.add_decl("{mtype.ctype} value;")
+			self.header.add_decl("{mtype.ctype} value;")
 		end
 
 		# Collect all attributes and associate them a field in the structure.
@@ -151,10 +151,10 @@ class SeparateCompiler
 				if not p isa MAttribute then continue
 				var t = p.intro.static_mtype.as(not null)
 				t = t.anchor_to(self.mainmodule, mtype)
-				v.add_decl("{t.ctype} {p.intro.c_name}; /* {p}: {t} */")
+				self.header.add_decl("{t.ctype} {p.intro.c_name}; /* {p}: {t} */")
 			end
 		end
-		v.add_decl("\};")
+		self.header.add_decl("\};")
 
 		# Build class vft
 		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
