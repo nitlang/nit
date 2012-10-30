@@ -205,17 +205,10 @@ end
 class SeparateRuntimeFunction
 	super AbstractRuntimeFunction
 
-	# The mangled c name of the runtime_function
-	redef fun c_name: String
+	redef fun build_c_name: String
 	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = mmethoddef.c_name
-		self.c_name_cache = res
-		return res
+		return "{mmethoddef.c_name}"
 	end
-
-	private var c_name_cache: nullable String = null
 
 	redef fun to_s do return self.mmethoddef.to_s
 

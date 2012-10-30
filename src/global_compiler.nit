@@ -558,7 +558,20 @@ private abstract class AbstractRuntimeFunction
 	var mmethoddef: MMethodDef
 
 	# The mangled c name of the runtime_function
-	fun c_name: String is abstract
+	# Subclasses should redefine `build_c_name` instead
+	fun c_name: String
+	do
+		var res = self.c_name_cache
+		if res != null then return res
+		res = self.build_c_name
+		self.c_name_cache = res
+		return res
+	end
+
+	# Non cached version of `c_name`
+	protected fun build_c_name: String is abstract
+
+	private var c_name_cache: nullable String = null
 
 	# Implements a call of the runtime_function
 	# May inline the body or generate a C function call
@@ -583,8 +596,7 @@ private class CustomizedRuntimeFunction
 		self.recv = recv
 	end
 
-	# The mangled c name of the runtime_function
-	redef fun c_name: String
+	redef fun build_c_name: String
 	do
 		var res = self.c_name_cache
 		if res != null then return res
@@ -596,8 +608,6 @@ private class CustomizedRuntimeFunction
 		self.c_name_cache = res
 		return res
 	end
-
-	private var c_name_cache: nullable String = null
 
 	redef fun ==(o)
 	# used in the compiler worklist
