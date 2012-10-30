@@ -173,7 +173,7 @@ class SeparateCompiler
 
 		#Build instance struct
 		v.add_decl("struct instance_{c_name} \{")
-		v.add_decl("struct class_{c_name} *vft;")
+		v.add_decl("const struct class_{c_name} *class;")
 		v.add_decl("nitattribute_t attrs[{mclass.attrs.length}];")
 		v.add_decl("\};")
 
