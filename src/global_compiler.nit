@@ -280,11 +280,11 @@ private class GlobalCompiler
 	var live_primitive_types: Array[MClassType]
 
 	# runtime_functions that need to be compiled
-	private var todos: List[RuntimeFunction] = new List[RuntimeFunction]
+	private var todos: List[AbstractRuntimeFunction] = new List[AbstractRuntimeFunction]
 
 	# runtime_functions already seen (todo or done)
-	private var seen: HashSet[RuntimeFunction] = new HashSet[RuntimeFunction]
-	fun todo(m: RuntimeFunction)
+	private var seen: HashSet[AbstractRuntimeFunction] = new HashSet[AbstractRuntimeFunction]
+	fun todo(m: AbstractRuntimeFunction)
 	do
 		if seen.has(m) then return
 		todos.add(m)
@@ -553,7 +553,7 @@ end
 
 # A C function associated to a Nit method
 # Because of customization, a given Nit method can be compiler more that once
-private abstract class RuntimeFunction
+private abstract class AbstractRuntimeFunction
 	# The associated Nit method
 	var mmethoddef: MMethodDef
 
@@ -571,7 +571,7 @@ end
 
 # A runtime function customized on a specific monomrph receiver type
 private class CustomizedRuntimeFunction
-	super RuntimeFunction
+	super AbstractRuntimeFunction
 
 	# The considered reciever
 	# (usually is a live type but no strong guarantee)

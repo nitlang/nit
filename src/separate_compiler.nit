@@ -203,7 +203,7 @@ end
 
 # The C function associated to a methoddef separately compiled
 class SeparateRuntimeFunction
-	super RuntimeFunction
+	super AbstractRuntimeFunction
 
 	# The mangled c name of the runtime_function
 	redef fun c_name: String
