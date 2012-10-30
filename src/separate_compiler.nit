@@ -508,17 +508,20 @@ class SeparateCompilerVisitor
 
 	redef fun read_attribute(a, recv)
 	do
+		# FIXME: Here we inconditionally return boxed primitive attributes
 		var ret = a.intro.static_mtype.as(not null)
 		ret = self.resolve_for(ret, recv)
-		var res = self.new_var(ret)
-		# TODO
+		var cret = self.object_type.as_nullable
+		var res = self.new_var(cret)
+		res.mcasttype = ret
 		self.add("{res} = (val*) {recv}->attrs[{a.color.as(not null)}];")
 		return res
 	end
 
 	redef fun write_attribute(a, recv, value)
 	do
-		# TODO
+		# FIXME: Here we inconditionally box primitive attributes
+		value = self.autobox(value, self.object_type.as_nullable)
 		self.add("{recv}->attrs[{a.color.as(not null)}] = {value};")
 	end
 
