@@ -16,7 +16,7 @@
 module separate_compiler
 
 
-intrude import global_compiler # TODO better separation of concerns
+import global_compiler # TODO better separation of concerns
 intrude import vft_computation
 redef class ToolContext
 	# --separate

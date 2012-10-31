@@ -138,7 +138,7 @@ redef class ModelBuilder
 		write_and_make(compiler)
 	end
 
-	private fun write_and_make(compiler: GlobalCompiler)
+	protected fun write_and_make(compiler: GlobalCompiler)
 	do
 		var mainmodule = compiler.mainmodule
 
@@ -249,7 +249,7 @@ redef class ModelBuilder
 end
 
 # Singleton that store the knowledge about the compilation process
-private class GlobalCompiler
+class GlobalCompiler
 	# The main module of the program
 	var mainmodule: MModule
 
@@ -295,7 +295,7 @@ private class GlobalCompiler
 	#
 	# FIXME: should not be a vistor but just somewhere to store lines
 	# FIXME: should not have a global .h since it does not help recompilations
-	var header: nullable GlobalCompilerVisitor = null
+	var header: nullable GlobalCompilerVisitor writable = null
 
 	# The list of all associated visitors
 	# Used to generate .c files
@@ -317,7 +317,7 @@ private class GlobalCompiler
 	end
 
 	# Cache for classid (computed by declare_runtimeclass)
-	private var classids: HashMap[MClassType, String] = new HashMap[MClassType, String]
+	protected var classids: HashMap[MClassType, String] = new HashMap[MClassType, String]
 
 	# Declare C structures and identifiers for a runtime class
 	fun declare_runtimeclass(v: GlobalCompilerVisitor, mtype: MClassType)
@@ -553,7 +553,7 @@ end
 
 # A C function associated to a Nit method
 # Because of customization, a given Nit method can be compiler more that once
-private abstract class AbstractRuntimeFunction
+abstract class AbstractRuntimeFunction
 	# The associated Nit method
 	var mmethoddef: MMethodDef
 
@@ -745,7 +745,7 @@ end
 # Runtime variables are associated to Nit local variables and intermediate results in Nit expressions.
 #
 # The tricky point is that a single C variable can be associated to more than one RuntimeVariable because the static knowledge of the type of an expression can vary in the C code.
-private class RuntimeVariable
+class RuntimeVariable
 	# The name of the variable in the C code
 	var name: String
 
@@ -753,11 +753,11 @@ private class RuntimeVariable
 	var mtype: MType
 
 	# The current casted type of the variable (as known in Nit)
-	var mcasttype: MType
+	var mcasttype: MType writable
 
 	# If the variable exaclty a mcasttype?
 	# false (usual value) means that the variable is a mcasttype or a subtype.
-	var is_exact: Bool = false
+	var is_exact: Bool writable = false
 
 	init(name: String, mtype: MType, mcasttype: MType)
 	do
@@ -790,7 +790,7 @@ end
 
 # A visitor on the AST of property definition that generate the C code.
 # Because of inlining, a visitor can visit more than one property.
-private class GlobalCompilerVisitor
+class GlobalCompilerVisitor
 	# The associated compiler
 	var compiler: GlobalCompiler
 
@@ -819,7 +819,7 @@ private class GlobalCompilerVisitor
 	end
 
 	# The current Frame
-	var frame: nullable Frame
+	var frame: nullable Frame writable
 
 	# Anchor a type to the main module and the current receiver
 	fun anchor(mtype: MType): MType
@@ -1480,7 +1480,7 @@ private class GlobalCompilerVisitor
 end
 
 # A frame correspond to a visited property in a GlobalCompilerVisitor
-private class Frame
+class Frame
 	# The associated visitor
 
 	var visitor: GlobalCompilerVisitor
@@ -1496,10 +1496,10 @@ private class Frame
 	var arguments: Array[RuntimeVariable]
 
 	# The runtime_variable associated to the return (in a function)
-	var returnvar: nullable RuntimeVariable = null
+	var returnvar: nullable RuntimeVariable writable = null
 
 	# The label at the end of the property
-	var returnlabel: nullable String = null
+	var returnlabel: nullable String writable = null
 end
 
 redef class MPropDef
@@ -1518,7 +1518,7 @@ end
 
 redef class MMethodDef
 	# Can the body be inlined?
-	private fun can_inline(v: GlobalCompilerVisitor): Bool
+	fun can_inline(v: GlobalCompilerVisitor): Bool
 	do
 		var modelbuilder = v.compiler.modelbuilder
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
@@ -1533,7 +1533,7 @@ redef class MMethodDef
 	end
 
 	# Inline the body in another visitor
-	private fun compile_inside_to_c(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
+	fun compile_inside_to_c(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		var modelbuilder = v.compiler.modelbuilder
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
@@ -1550,13 +1550,13 @@ redef class MMethodDef
 end
 
 redef class APropdef
-	private fun compile_to_c(v: GlobalCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
+	fun compile_to_c(v: GlobalCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
 		debug("Not yet implemented")
 	end
 
-	private fun can_inline: Bool do return true
+	fun can_inline: Bool do return true
 end
 
 redef class AConcreteMethPropdef
@@ -1932,7 +1932,7 @@ redef class AAttrPropdef
 		end
 	end
 
-	private fun init_expr(v: GlobalCompilerVisitor, recv: RuntimeVariable)
+	fun init_expr(v: GlobalCompilerVisitor, recv: RuntimeVariable)
 	do
 		var nexpr = self.n_expr
 		if nexpr != null then
