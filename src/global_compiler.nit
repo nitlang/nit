@@ -1372,6 +1372,28 @@ class GlobalCompilerVisitor
 		return res
 	end
 
+	# Generate the code required to dynamically check if 2 objects share the same runtime type
+	fun is_same_type_test(value1, value2: RuntimeVariable): RuntimeVariable
+	do
+		var res = self.new_var(bool_type)
+		if value2.mtype.ctype == "val*" then
+			if value1.mtype.ctype == "val*" then
+				self.add "{res} = {value1}->classid == {value2}->classid;"
+			else
+				self.add "{res} = {self.compiler.classid(value1.mtype.as(MClassType))} == {value2}->classid;"
+			end
+		else
+			if value1.mtype.ctype == "val*" then
+				self.add "{res} = {value1}->classid == {self.compiler.classid(value2.mtype.as(MClassType))};"
+			else if value1.mcasttype == value2.mcasttype then
+				self.add "{res} = 1;"
+			else
+				self.add "{res} = 0;"
+			end
+		end
+		return res
+	end
+
 	# Generate a Nit "is" for two runtime_variables
 	fun equal_test(value1, value2: RuntimeVariable): RuntimeVariable
 	do
@@ -1841,11 +1863,7 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 			return
 		else if pname == "is_same_type" then
-			if arguments[0].mtype.ctype == "val*" then
-				v.ret(v.new_expr("{arguments[0]}->classid == {arguments[1]}->classid", ret.as(not null)))
-			else
-				v.ret(v.new_expr("{v.compiler.classid(arguments[0].mtype.as(MClassType))} == {arguments[1]}->classid", ret.as(not null)))
-			end
+			v.ret(v.is_same_type_test(arguments[0], arguments[1]))
 			return
 		else if pname == "output_class_name" then
 			if arguments[0].mtype.ctype == "val*" then

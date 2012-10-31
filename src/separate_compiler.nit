@@ -545,6 +545,13 @@ class SeparateCompilerVisitor
 		return res
 	end
 
+	redef fun is_same_type_test(value1, value2)
+	do
+		var res = self.new_var(bool_type)
+		# TODO
+		return res
+	end
+
 	redef fun equal_test(value1, value2)
 	do
 		var res = self.new_var(bool_type)
