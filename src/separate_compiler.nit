@@ -552,6 +552,14 @@ class SeparateCompilerVisitor
 		return res
 	end
 
+	redef fun class_name_string(value1)
+	do
+		var res = self.get_name("var_class_name")
+		self.add_decl("const char* {res};")
+		# TODO
+		return res
+	end
+
 	redef fun equal_test(value1, value2)
 	do
 		var res = self.new_var(bool_type)

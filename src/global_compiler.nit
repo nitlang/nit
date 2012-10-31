@@ -1394,6 +1394,20 @@ class GlobalCompilerVisitor
 		return res
 	end
 
+	# Return a "const char*" variable associated to the classname of the dynamic type of an object
+	# NOTE: we do not return a RuntimeVariable "NativeString" as the class may not exist in the module/program
+	fun class_name_string(value: RuntimeVariable): String
+	do
+		var res = self.get_name("var_class_name")
+		self.add_decl("const char* {res};")
+		if value.mtype.ctype == "val*" then
+			self.add "{res} = class_names[{value}->classid];"
+		else
+			self.add "{res} = class_names[{self.compiler.classid(value.mtype.as(MClassType))}];"
+		end
+		return res
+	end
+
 	# Generate a Nit "is" for two runtime_variables
 	fun equal_test(value1, value2: RuntimeVariable): RuntimeVariable
 	do
@@ -1866,18 +1880,12 @@ redef class AInternMethPropdef
 			v.ret(v.is_same_type_test(arguments[0], arguments[1]))
 			return
 		else if pname == "output_class_name" then
-			if arguments[0].mtype.ctype == "val*" then
-				v.add("printf(\"%s\\n\", class_names[{arguments.first}->classid]);")
-			else
-				v.add("printf(\"%s\\n\", class_names[{v.compiler.classid(arguments.first.mtype.as(MClassType))}]);")
-			end
+			var nat = v.class_name_string(arguments.first)
+			v.add("printf(\"%s\\n\", {nat});")
 			return
 		else if pname == "native_class_name" then
-			if arguments[0].mtype.ctype == "val*" then
-				v.ret(v.new_expr("(char*)(void*)class_names[{arguments.first}->classid]", ret.as(not null)))
-			else
-				v.ret(v.new_expr("(char*)(void*)class_names[{v.compiler.classid(arguments.first.mtype.as(MClassType))}]", ret.as(not null)))
-			end
+			var nat = v.class_name_string(arguments.first)
+			v.ret(v.new_expr("(char*){nat}", ret.as(not null)))
 			return
 		end
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
