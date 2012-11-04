@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Statistics on the usage of explicit static types.
-module count_ntypes
+# Metrics on the usage of explicit static types.
+module static_types_metrics
 
 private import metrics_base
 import modelbuilder
@@ -48,8 +48,8 @@ private class ATypeCounterVisitor
 	end
 end
 
-# Visit the AST and print statistics on the usage of explicit static types.
-fun count_ntypes(modelbuilder: ModelBuilder)
+# Visit the AST and print metrics on the usage of explicit static types.
+fun compute_static_types_metrics(modelbuilder: ModelBuilder)
 do
 	# Count each occurence of a specific static type
 	var typecount = new Counter[MType]
@@ -63,7 +63,7 @@ do
 	end
 
 	# Display data
-	print "--- Statistics of the explitic static types ---"
+	print "--- Metrics of the explitic static types ---"
 	print "Total number of explicit static types: {typecount.total}"
 	if typecount.total == 0 then return
 

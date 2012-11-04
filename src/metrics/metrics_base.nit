@@ -21,6 +21,8 @@ import modelbuilder
 
 redef class ToolContext
 
+	# --static-types
+	var opt_static_types = new OptionBool("Compute explicit static types metrics", "--static-types")
 	# --tables
 	var opt_tables = new OptionBool("Compute tables metrics", "--tables")
 	# --rta
@@ -34,6 +36,7 @@ redef class ToolContext
 	redef init
 	do
 		super
+		self.option_context.add_option(opt_static_types)
 		self.option_context.add_option(opt_tables)
 		self.option_context.add_option(opt_rta)
 		self.option_context.add_option(opt_generate_hyperdoc)
