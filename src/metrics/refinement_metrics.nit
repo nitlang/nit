@@ -14,16 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# General statistics on a model
-module model_stats
+# Collect metrics about refinement usage
+module refinement_metrics
 
 import model
 private import metrics_base
 
-# Print general statistics on a model
-fun compute_statistics(model: Model)
+# Print refinement usage metrics
+fun compute_refinement_metrics(model: Model)
 do
-	print "--- Statistics of the model ---"
+	print "--- Metrics of refinement usage ---"
 	var nbmod = model.mmodules.length
 	print "Number of modules: {nbmod}"
 

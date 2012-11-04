@@ -56,8 +56,11 @@ end
 # Now, we just have to play with the model!
 print "*** STATS ***"
 
-print ""
-compute_statistics(model)
+# Refinement usage metrics
+if toolcontext.opt_refinement.value then
+	print ""
+	compute_refinement_metrics(model)
+end
 
 # Self usage metrics
 if toolcontext.opt_self.value then
