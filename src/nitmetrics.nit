@@ -74,7 +74,7 @@ generate_class_hierarchy(toolcontext, mainmodule)
 generate_model_hyperdoc(toolcontext, model)
 
 print ""
-compute_tables(mainmodule)
+compute_tables_metrics(mainmodule)
 
 print ""
 compute_rta_stats(modelbuilder, mainmodule)

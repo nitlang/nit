@@ -25,3 +25,4 @@ import model_stats
 import generate_hierarchies
 import rta_stats
 import model_hyperdoc
+import tables_metrics
