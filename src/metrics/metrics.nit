@@ -20,7 +20,7 @@ module metrics
 import metrics_base
 import static_types_metrics
 import nullables_metrics
-import visit_self
+import self_metrics
 import model_stats
 import generate_hierarchies
 import rta_metrics
