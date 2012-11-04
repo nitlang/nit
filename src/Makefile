@@ -16,7 +16,7 @@
 
 NITCOPT=
 
-all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitstats ../bin/nitg ../bin/nit
+all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/nit
 
 ../bin/nitc: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
@@ -39,12 +39,12 @@ all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitstats ../bin/nitg ../bin/ni
 	./git-gen-version.sh
 	../bin/nitc ${NITCOPT} -o ../bin/nits -O -v nits.nit
 
-../bin/nitstats: ../bin/nitc
+../bin/nitmetrics: ../bin/nitc
 	@echo '***************************************************************'
-	@echo '* Compile nitstats from NIT source files                      *'
+	@echo '* Compile nitmetrics from NIT source files                      *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../bin/nitc ${NITCOPT} -o ../bin/nitstats -O -v nitstats.nit
+	../bin/nitc ${NITCOPT} -o ../bin/nitmetrics -O -v nitmetrics.nit
 
 ../bin/nitg: ../bin/nitc
 	@echo '***************************************************************'

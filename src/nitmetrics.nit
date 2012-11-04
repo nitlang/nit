@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A program that collects various data about nit programs and libraries
-module nitstats
+# A program that collects various metrics on nit programs and libraries
+module nitmetrics
 
 import modelbuilder
 import exprbuilder
-import stats
+import metrics
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
