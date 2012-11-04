@@ -65,8 +65,11 @@ visit_self(modelbuilder)
 print ""
 visit_nullable_sends(modelbuilder)
 
-print ""
-count_ntypes(modelbuilder)
+# Static types metrics
+if toolcontext.opt_static_types.value then
+	print ""
+	compute_static_types_metrics(modelbuilder)
+end
 
 # Tables metrics
 if toolcontext.opt_tables.value then

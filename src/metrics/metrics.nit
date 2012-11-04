@@ -18,7 +18,7 @@
 module metrics
 
 import metrics_base
-import count_ntypes
+import static_types_metrics
 import visit_nullable_sends
 import visit_self
 import model_stats
