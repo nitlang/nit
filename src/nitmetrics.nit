@@ -53,41 +53,43 @@ else
 	mainmodule.set_imported_mmodules(mmodules)
 end
 
-# Now, we just have to play with the model!
-print "*** STATS ***"
+print "*** METRICS ***"
+
+# All metrics computation ?
+var all = toolcontext.opt_all.value
 
 # Refinement usage metrics
-if toolcontext.opt_refinement.value then
+if all or toolcontext.opt_refinement.value then
 	print ""
 	compute_refinement_metrics(model)
 end
 
 # Self usage metrics
-if toolcontext.opt_self.value then
+if all or toolcontext.opt_self.value then
 	print ""
 	compute_self_metrics(modelbuilder)
 end
 
 # Nullables metrics
-if toolcontext.opt_nullables.value then
+if all or toolcontext.opt_nullables.value then
 	print ""
 	compute_nullables_metrics(modelbuilder)
 end
 
 # Static types metrics
-if toolcontext.opt_static_types.value then
+if all or toolcontext.opt_static_types.value then
 	print ""
 	compute_static_types_metrics(modelbuilder)
 end
 
 # Tables metrics
-if toolcontext.opt_tables.value then
+if all or toolcontext.opt_tables.value then
 	print ""
 	compute_tables_metrics(mainmodule)
 end
 
 # RTA metrics
-if toolcontext.opt_rta.value then
+if all or toolcontext.opt_rta.value then
 	print ""
 	compute_rta_metrics(modelbuilder, mainmodule)
 end
