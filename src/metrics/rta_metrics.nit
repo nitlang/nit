@@ -14,18 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Statistics of a RTA
-module rta_stats
+# Metrics from RTA
+module rta_metrics
 
 import modelbuilder
 private import rapid_type_analysis
 
-# Run a runtime type anamysis and print statistics
-fun compute_rta_stats(modelbuilder: ModelBuilder, mainmodule: MModule)
+# Run a runtime type analysis and print metrics
+fun compute_rta_metrics(modelbuilder: ModelBuilder, mainmodule: MModule)
 do
 	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 
-	print "--- Type Analysis ---"
+	print "--- RTA metrics ---"
 	print "Number of live runtime types (instantied resolved type): {analysis.live_types.length}"
 	if analysis.live_types.length < 8 then print "\t{analysis.live_types.join(" ")}"
 	print "Number of live method definitions: {analysis.live_methoddefs.length}"

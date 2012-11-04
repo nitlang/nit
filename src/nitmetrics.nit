@@ -71,8 +71,11 @@ count_ntypes(modelbuilder)
 print ""
 compute_tables_metrics(mainmodule)
 
-print ""
-compute_rta_stats(modelbuilder, mainmodule)
+# RTA metrics
+if toolcontext.opt_rta.value then
+	print ""
+	compute_rta_metrics(modelbuilder, mainmodule)
+end
 
 # Generate Hyperdoc
 if toolcontext.opt_generate_hyperdoc.value then
