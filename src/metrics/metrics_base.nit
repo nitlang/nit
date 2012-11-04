@@ -21,6 +21,9 @@ import modelbuilder
 
 redef class ToolContext
 
+	# --all
+	var opt_all = new OptionBool("Compute all metrics", "--all")
+
 	# --refinement
 	var opt_refinement = new OptionBool("Compute metrics about refinement usage", "--refinement")
 	# --self
@@ -42,6 +45,7 @@ redef class ToolContext
 	redef init
 	do
 		super
+		self.option_context.add_option(opt_all)
 		self.option_context.add_option(opt_refinement)
 		self.option_context.add_option(opt_self)
 		self.option_context.add_option(opt_nullables)
