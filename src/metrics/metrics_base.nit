@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Helpers for various statistics tools.
-module stats_base
+module metrics_base
 
 import modelbuilder
 

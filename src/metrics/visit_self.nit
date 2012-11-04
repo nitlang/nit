@@ -18,7 +18,7 @@
 module visit_self
 
 import modelbuilder
-private import stats_base
+private import metrics_base
 
 private class ASelfVisitor
 	super Visitor
