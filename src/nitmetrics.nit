@@ -68,8 +68,11 @@ visit_nullable_sends(modelbuilder)
 print ""
 count_ntypes(modelbuilder)
 
-print ""
-compute_tables_metrics(mainmodule)
+# Tables metrics
+if toolcontext.opt_tables.value then
+	print ""
+	compute_tables_metrics(mainmodule)
+end
 
 # RTA metrics
 if toolcontext.opt_rta.value then
