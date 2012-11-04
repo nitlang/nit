@@ -21,6 +21,8 @@ import modelbuilder
 
 redef class ToolContext
 
+	# --tables
+	var opt_tables = new OptionBool("Compute tables metrics", "--tables")
 	# --rta
 	var opt_rta = new OptionBool("Compute RTA metrics", "--rta")
 	# --generate_hyperdoc
@@ -32,6 +34,7 @@ redef class ToolContext
 	redef init
 	do
 		super
+		self.option_context.add_option(opt_tables)
 		self.option_context.add_option(opt_rta)
 		self.option_context.add_option(opt_generate_hyperdoc)
 		self.option_context.add_option(opt_dir)

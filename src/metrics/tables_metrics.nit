@@ -20,7 +20,7 @@ module tables_metrics
 import model
 private import metrics_base
 
-# Print class tables statistics for the classes of the program main
+# Print class tables metrics for the classes of the program main
 fun compute_tables_metrics(main: MModule)
 do
 	var model = main.model
