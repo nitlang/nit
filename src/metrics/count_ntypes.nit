@@ -17,7 +17,7 @@
 # Statistics on the usage of explicit static types.
 module count_ntypes
 
-private import stats_base
+private import metrics_base
 import modelbuilder
 
 # The job of this visitor is to resolve all types found

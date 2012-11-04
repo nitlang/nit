@@ -20,7 +20,7 @@ module generate_hierarchies
 
 import model
 
-private import stats_base
+private import metrics_base
 
 # Create a dot file representing the module hierarchy of a model.
 # Importation relation is represented with arrow

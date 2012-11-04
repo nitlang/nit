@@ -19,7 +19,7 @@ module visit_nullable_sends
 
 import modelbuilder
 private import typing
-private import stats_base
+private import metrics_base
 
 private class NullableSends
 	super Visitor
