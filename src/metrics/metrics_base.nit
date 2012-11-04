@@ -20,12 +20,17 @@ module metrics_base
 import modelbuilder
 
 redef class ToolContext
+
+	# --generate_hyperdoc
+	var opt_generate_hyperdoc = new OptionBool("Generate Hyperdoc", "--generate_hyperdoc")
+
 	var opt_dir = new OptionString("Directory where some statistics files are generated", "-d", "--dir")
 	var output_dir: String = "."
 
 	redef init
 	do
 		super
+		self.option_context.add_option(opt_generate_hyperdoc)
 		self.option_context.add_option(opt_dir)
 	end
 
