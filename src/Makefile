@@ -16,7 +16,7 @@
 
 NITCOPT=
 
-all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitstats
+all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitstats ../bin/nitg ../bin/nit
 
 ../bin/nitc: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
@@ -34,17 +34,31 @@ all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitstats
 
 ../bin/nits: ../bin/nitc
 	@echo '***************************************************************'
-	@echo '* Compile nits from NIT source files                        *'
+	@echo '* Compile nits from NIT source files                          *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitc ${NITCOPT} -o ../bin/nits -O -v nits.nit
 
 ../bin/nitstats: ../bin/nitc
 	@echo '***************************************************************'
-	@echo '* Compile nits from NIT source files                        *'
+	@echo '* Compile nitstats from NIT source files                      *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitc ${NITCOPT} -o ../bin/nitstats -O -v nitstats.nit
+
+../bin/nitg: ../bin/nitc
+	@echo '***************************************************************'
+	@echo '* Compile nitg from NIT source files                          *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../bin/nitc ${NITCOPT} -o ../bin/nitg -O -v nitg.nit
+
+../bin/nit: ../bin/nitc
+	@echo '***************************************************************'
+	@echo '* Compile nit from NIT source files                           *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../bin/nitc ${NITCOPT} -o ../bin/nit -O -v nit.nit
 
 ../c_src/nitc: ../c_src/*.c ../c_src/*.h ../c_src/nitc._build.sh ../c_src/Makefile
 	@echo '***************************************************************'

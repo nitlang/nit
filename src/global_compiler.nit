@@ -805,7 +805,7 @@ private class GlobalCompilerVisitor
 	# Force to get the primitive property named `name' in the instance `recv' or abort
 	fun get_property(name: String, recv: MType): MMethod
 	do
-		return self.compiler.mainmodule.force_get_primitive_method(name, recv)
+		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, recv, self.compiler.mainmodule)
 	end
 
 	# The current Frame
@@ -1209,7 +1209,11 @@ private class GlobalCompilerVisitor
 		else
 			args = args.to_a
 		end
-		assert args.length == m.msignature.arity + 1 # because of self
+		if args.length != m.msignature.arity + 1 then # because of self
+			add("printf(\"NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.\\n\"); exit(1);")
+			debug("NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.")
+			return null
+		end
 
 		args.first = recv
 		var rm = new CustomizedRuntimeFunction(m, recvtype)
@@ -1842,7 +1846,7 @@ redef class AInternMethPropdef
 			end
 			return
 		end
-		v.add("printf(\"NOT IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
+		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
 		debug("Not implemented {mpropdef}")
 	end
 end
@@ -2476,6 +2480,7 @@ redef class ASuperExpr
 		# FIXME: we do not want an ugly static call!
 		var mpropdefs = mpropdef.mproperty.lookup_super_definitions(mpropdef.mclassdef.mmodule, mpropdef.mclassdef.bound_mtype)
 		if mpropdefs.length != 1 then
+			v.add("printf(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
 			debug("MPRODFEFS for super {mpropdef} for {recv}: {mpropdefs.join(", ")}")
 		end
 		mpropdef = mpropdefs.first

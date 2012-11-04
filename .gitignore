@@ -25,6 +25,9 @@ src/callgrind.*
 src/*.log
 src/*.dot
 src/doc
+src/*.dat
+src/*.gnu
+src/*.bin
 
 c_src/*.o
 c_src/*.cksum
@@ -32,15 +35,8 @@ c_src/*.cksum
 lib/*.log
 lib/*.dot
 
-tests/*.res
-tests/*.log
-tests/*.bin
-tests/*.err
-tests/*.write
 tests/alt
 tests/errlist
-tests/test_nitc_logs
-tests/hello_world
 tests/out
 
 *.stub.nit.[ch]

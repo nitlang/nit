@@ -1622,9 +1622,6 @@ redef class ASuperInitCall
 				if c == prev_class then
 					prev_class = null
 				else if c == cla then
-					if prev_class != null then
-						v.error(self, "Error: Constructor of {c} must be invoked before constructor of {prev_class}")
-					end
 					esic.add(property)
 					break
 				end
@@ -1643,6 +1640,9 @@ redef class ANewExpr
 		if t.local_class.global.is_abstract then
 			v.error(self, "Error: try to instantiate abstract class {t.local_class}.")
 			return
+		end
+		if t.is_nullable then
+			v.error(self, "Type error: cannot instantiate the nullable type {t}.")
 		end
 		var name: Symbol
 		if n_id == null then

@@ -193,7 +193,7 @@ redef class MModule
 				return c
 			end
 			print("Fatal Error: no primitive class {name}")
-			abort
+			exit(1)
 		end
 		assert cla.length == 1 else print cla.join(", ")
 		return cla.first
@@ -214,17 +214,6 @@ redef class MModule
 				print("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
 				abort
 			end
-		end
-		return res
-	end
-
-	# Force to get the primitive method named `name' on the type `recv' or abort
-	fun force_get_primitive_method(name: String, recv: MType): MMethod
-	do
-		var res = try_get_primitive_method(name, recv)
-		if res == null then
-			print("Fatal Error: no primitive property {name} on {recv}")
-			abort
 		end
 		return res
 	end

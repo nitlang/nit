@@ -28,7 +28,7 @@ doc/stdlib/index.html: tools
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc lib/*.nit -d doc/stdlib --public --custom-overview-text '<p>Documentation for the standard library of Nit</p>' --custom-footer-text 'Nit standard library. Version '`git describe -- lib`'.'
+	bin/nitdoc lib/*.nit -d doc/stdlib --public --custom-overview-text '<p>Documentation for the standard library of Nit</p>' --custom-footer-text 'Nit standard library. Version '`git describe`'.'
 
 doc/nitc/index.html: tools
 	bin/nitdoc src/nitc.nit src/nitdoc.nit -d doc/nitc --custom-overview-text '<p>Documentation for the nit compiler</p>' --custom-footer-text 'Nit compiler. Version '`git describe`'.'

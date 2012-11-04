@@ -265,6 +265,7 @@ class OptionContext
 		while parseargs and it.is_ok do
 			var str = it.item
 			if str == "--" then
+				it.next
 				rest.add_all(it.to_a)
 				parseargs = false
 			else

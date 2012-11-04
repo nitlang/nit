@@ -19,3 +19,8 @@ redef class Object
 	# Unix time: the number of seconds elapsed since January 1, 1970
 	protected fun get_time: Int is extern "kernel_Any_Any_get_time_0"
 end
+
+redef class Sys
+	# Wait a specific number of second and nanoseconds
+	fun nanosleep(sec, nanosec: Int) is extern "std_nanosleep"
+end

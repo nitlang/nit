@@ -21,6 +21,17 @@ import literal
 import typing
 import auto_super_init
 
+redef class ToolContext
+	# --discover-call-trace
+	var opt_discover_call_trace: OptionBool = new OptionBool("Trace calls of the first invocation of a method", "--discover-call-trace")
+
+	redef init
+	do
+		super
+		self.option_context.add_option(self.opt_discover_call_trace)
+	end
+end
+
 redef class ModelBuilder
 	# Execute the program from the entry point (Sys::main) of the `mainmodule'
 	# `arguments' are the command-line arguments in order
@@ -87,6 +98,11 @@ private class NaiveInterpreter
 	fun is_subtype(sub, sup: MType): Bool
 	do
 		return sub.is_subtype(self.mainmodule, self.frame.arguments.first.mtype.as(MClassType), sup)
+	end
+
+	fun force_get_primitive_method(name: String, recv: MType): MMethod
+	do
+		return self.modelbuilder.force_get_primitive_method(self.frame.current_node, name, recv, self.mainmodule)
 	end
 
 	# Is a return executed?
@@ -218,7 +234,7 @@ private class NaiveInterpreter
 		var mtype = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
 		var res = new MutableInstance(mtype)
 		self.init_instance(res)
-		self.send(self.mainmodule.force_get_primitive_method("with_native", mtype), [res, nat, self.int_instance(values.length)])
+		self.send(self.force_get_primitive_method("with_native", mtype), [res, nat, self.int_instance(values.length)])
 		self.check_init_instance(res)
 		return res
 	end
@@ -261,11 +277,28 @@ private class NaiveInterpreter
 		exit(1)
 	end
 
+	# Debug on the current node
+	fun debug(message: String)
+	do
+		if frames.is_empty then
+			print message
+		else
+			self.frame.current_node.debug(message)
+		end
+	end
+
+	# Store known method, used to trace methods as thez are reached
+	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
+
 	# Execute `mpropdef' for a `args' (where args[0] is the receiver).
 	# Return a falue if `mpropdef' is a function, or null if it is a procedure.
 	# The call is direct/static. There is no message-seding/late-bindng.
 	fun call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
+		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
+			self.discover_call_trace.add mpropdef
+			self.debug("Discovered {mpropdef}")
+		end
 		var vararg_rank = mpropdef.msignature.vararg_rank
 		if vararg_rank >= 0 then
 			assert args.length >= mpropdef.msignature.arity + 1 # because of self
@@ -291,8 +324,9 @@ private class NaiveInterpreter
 				args.add(rawargs[i+1])
 			end
 		end
-		assert args.length >= mpropdef.msignature.arity + 1 # because of self
-		assert args.length <= mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length
+		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
+			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
+		end
 		if args.length < mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
 			fatal("NOT YET IMPLEMENTED: default closures")
 		end
@@ -446,9 +480,13 @@ abstract class Instance
 	# Human readable object identity "Type#number"
 	redef fun to_s do return "{mtype}#{object_id}"
 
-	# Return the integer valur is the instance is an integer.
+	# Return the integer value if the instance is an integer.
 	# else aborts
 	fun to_i: Int do abort
+
+	# Return the integer value if the instance is a float.
+	# else aborts
+	fun to_f: Float do abort
 
 	# The real value encapsulated if the instance is primitive.
 	# Else aborts.
@@ -499,6 +537,8 @@ class PrimitiveInstance[E: Object]
 	redef fun to_s do return "{mtype}#{val.object_id}({val})"
 
 	redef fun to_i do return val.as(Int)
+
+	redef fun to_f do return val.as(Float)
 end
 
 private class ClosureInstance
@@ -689,16 +729,18 @@ redef class AInternMethPropdef
 				return v.int_instance(recv <=> args[1].val.as(Char))
 			end
 		else if cname == "Float" then
-			if pname == "+" then
-				return v.float_instance(args[0].val.as(Float) + args[1].val.as(Float))
+			if pname == "unary -" then
+				return v.float_instance(-args[0].to_f)
+			else if pname == "+" then
+				return v.float_instance(args[0].to_f + args[1].to_f)
 			else if pname == "-" then
-				return v.float_instance(args[0].val.as(Float) - args[1].val.as(Float))
+				return v.float_instance(args[0].to_f - args[1].to_f)
 			else if pname == "*" then
-				return v.float_instance(args[0].val.as(Float) * args[1].val.as(Float))
+				return v.float_instance(args[0].to_f * args[1].to_f)
 			else if pname == "/" then
-				return v.float_instance(args[0].val.as(Float) / args[1].val.as(Float))
+				return v.float_instance(args[0].to_f / args[1].to_f)
 			else if pname == "to_i" then
-				return v.int_instance(args[0].val.as(Float).to_i)
+				return v.int_instance(args[0].to_f.to_i)
 			end
 		else if cname == "NativeString" then
 			var recvval = args.first.val.as(Buffer)
@@ -837,6 +879,16 @@ redef class AExternMethPropdef
 				var res = sys.system(recvval.to_s)
 				return v.int_instance(res)
 			end
+		else if cname == "Int" then
+			if pname == "rand" then
+				return v.int_instance(args[0].to_i.rand)
+			end
+		else if cname == "Float" then
+			if pname == "cos" then
+				return v.float_instance(args[0].to_f.cos)
+			else if pname == "sin" then
+				return v.float_instance(args[0].to_f.sin)
+			end
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
 		else if pname == "native_argv" then
@@ -844,6 +896,10 @@ redef class AExternMethPropdef
 			return v.native_string_instance(txt)
 		else if pname == "get_time" then
 			return v.int_instance(get_time)
+		else if pname == "atan2" then
+			return v.float_instance(atan2(args[1].to_f, args[2].to_f))
+		else if pname == "pi" then
+			return v.float_instance(pi)
 		else if pname == "lexer_goto" then
 			return v.int_instance(lexer_goto(args[1].to_i, args[2].to_i))
 		else if pname == "lexer_accept" then
@@ -1123,19 +1179,19 @@ redef class AForExpr
 		var col = v.expr(self.n_expr)
 		if col == null then return
 		#self.debug("col {col}")
-		var iter = v.send(v.mainmodule.force_get_primitive_method("iterator", col.mtype), [col]).as(not null)
+		var iter = v.send(v.force_get_primitive_method("iterator", col.mtype), [col]).as(not null)
 		#self.debug("iter {iter}")
 		loop
-			var isok = v.send(v.mainmodule.force_get_primitive_method("is_ok", iter.mtype), [iter]).as(not null)
+			var isok = v.send(v.force_get_primitive_method("is_ok", iter.mtype), [iter]).as(not null)
 			if not isok.is_true then return
 			if self.variables.length == 1 then
-				var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				var item = v.send(v.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
 				#self.debug("item {item}")
 				v.frame.map[self.variables.first] = item
 			else if self.variables.length == 2 then
-				var key = v.send(v.mainmodule.force_get_primitive_method("key", iter.mtype), [iter]).as(not null)
+				var key = v.send(v.force_get_primitive_method("key", iter.mtype), [iter]).as(not null)
 				v.frame.map[self.variables[0]] = key
-				var item = v.send(v.mainmodule.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
+				var item = v.send(v.force_get_primitive_method("item", iter.mtype), [iter]).as(not null)
 				v.frame.map[self.variables[1]] = item
 			else
 				abort
@@ -1144,7 +1200,7 @@ redef class AForExpr
 			if v.is_break(self.escapemark) then return
 			v.is_continue(self.escapemark) # Clear the break
 			if v.is_escaping then return
-			v.send(v.mainmodule.force_get_primitive_method("next", iter.mtype), [iter])
+			v.send(v.force_get_primitive_method("next", iter.mtype), [iter])
 		end
 	end
 end
@@ -1261,7 +1317,7 @@ redef class AStringFormExpr
 		var nat = v.native_string_instance(txt)
 		var res = new MutableInstance(v.mainmodule.get_primitive_class("String").mclass_type)
 		v.init_instance(res)
-		v.send(v.mainmodule.force_get_primitive_method("from_cstring", res.mtype), [res, nat])
+		v.send(v.force_get_primitive_method("from_cstring", res.mtype), [res, nat])
 		v.check_init_instance(res)
 		return res
 	end
@@ -1277,7 +1333,7 @@ redef class ASuperstringExpr
 			array.add(i)
 		end
 		var i = v.array_instance(array, v.mainmodule.get_primitive_class("Object").mclass_type)
-		var res = v.send(v.mainmodule.force_get_primitive_method("to_s", i.mtype), [i])
+		var res = v.send(v.force_get_primitive_method("to_s", i.mtype), [i])
 		assert res != null
 		return res
 	end
@@ -1293,7 +1349,7 @@ redef class ACrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
-		v.send(v.mainmodule.force_get_primitive_method("init", mtype), [res, e1, e2])
+		v.send(v.force_get_primitive_method("init", mtype), [res, e1, e2])
 		v.check_init_instance(res)
 		return res
 	end
@@ -1309,7 +1365,7 @@ redef class AOrangeExpr
 		var mtype = v.unanchor_type(self.mtype.as(not null))
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
-		v.send(v.mainmodule.force_get_primitive_method("without_last", mtype), [res, e1, e2])
+		v.send(v.force_get_primitive_method("without_last", mtype), [res, e1, e2])
 		v.check_init_instance(res)
 		return res
 	end

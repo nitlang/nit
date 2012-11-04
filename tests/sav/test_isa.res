@@ -1,0 +1,24 @@
+int:
+true
+true
+true
+true
+true
+true
+string:
+true
+true
+true
+true
+true
+true
+null:
+true
+true
+true
+true
+true
+true
+test_isa.nit:25,7--19: Warning: Expression is already a Object.
+test_isa.nit:34,7--19: Warning: Expression is already a Object.
+test_isa.nit:43,7--28: Warning: Expression is already a nullable Object.

@@ -32,8 +32,10 @@ redef class String
 			return ""
 		end
 	end
+	fun setenv( v : String ) do to_cstring.setenv( v.to_cstring )
 end
 
 redef class NativeString
 	private fun get_environ: NativeString is extern "string_NativeString_NativeString_get_environ_0"
+	private fun setenv( v : NativeString ) is extern "string_NativeString_NativeString_setenv_1"
 end

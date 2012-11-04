@@ -10,6 +10,7 @@
   -I, --path              Set include path for loaders (may be used more than once)
   --only-parse            Only proceed to parse step of loaders
   --only-metamodel        Stop after meta-model processing
+  --discover-call-trace   Trace calls of the first invocation of a method
   --ic-typing-mode        Incremental typing method. Possible values are:
 				 - BM: binary matrix
 				 - CL: coloration

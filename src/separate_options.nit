@@ -22,13 +22,15 @@ redef class ToolContext
 		separate_options.add_option( opt_cc_include_paths )
 	end
 
-	fun integrate_separate_options( options : String )
+	fun integrate_separate_options( options : String, mod : MMModule )
 	do
 		for line in options.split do
 			line = line.strip_extension( "\n" )
 			separate_options.parse( line.split_with( ' ' ) )
-			if separate_options.rest.length > 0 then
-				warning( null, "module {self} args file has unknown args: {separate_options.rest.join(", ")}" )
+			var rest = new Array[String]
+			for s in separate_options.rest do if s.length > 0 then rest.add( s )
+			if rest.length > 0 then
+				error( null, "module \"{mod}\" args file has unknown args: {rest.join(", ")}" )
 			end
 		end
 
@@ -51,7 +53,8 @@ redef class MMSrcModule
 			var option_content = option_file.read_all
 			option_file.close
 
-			cprogram.program.tc.integrate_separate_options( option_content )
+			cprogram.program.tc.integrate_separate_options( option_content, self )
+			cprogram.program.tc.check_errors
 		end
 	end
 end

@@ -19,15 +19,9 @@
 
 ## CONFIGURATION OPTIONS ##
 
-# Number of times a command must be run with bench_command
-count=3
-
-# FIXME: verbose mode
-#outputopts=">/dev/null 2>&1"
-
-# Do not run commands
-# FIXME: buggy
-#dry_run=true
+# Default number of times a command must be run with bench_command
+# Can be overrided with 'the option -n'
+count=2
 
 ### HELPER FUNCTIONS ##
 
@@ -50,6 +44,7 @@ function bench_command()
 	local desc="$2"
 	shift
 	shift
+	if test "$verbose" = true; then outputopts="/dev/stdout"; else outputopts="/dev/null"; fi
 	timeout="time.out"
 	echo "$title" > "$timeout"
 	echo "# $desc" >> "$timeout"
@@ -60,7 +55,7 @@ function bench_command()
 
 	# Execute the commands $count times
 	for i in `seq 1 "$count"`; do
-		/usr/bin/time -f "%U" -o "$timeout" -a "$@" $outputopts # || die "$1: failed"
+		/usr/bin/time -f "%U" -o "$timeout" -a "$@" > $outputopts 2>&1 || die "$1: failed"
 		echo -n "$i. "
 		tail -n 1 "$timeout"
 	done
@@ -129,9 +124,9 @@ function prepare_res()
 	echo "# [$2] $3 #"
 	res=$1
 	if [ "$plots" = "" ]; then
-		plots="plot '$1' using 4:xticlabels(5) ti '$2';"
+		plots="plot '$1' using 4:2:3:xticlabels(5) ti '$2';"
 	else
-		plots="$plots replot '$1' using 4 ti '$2';"
+		plots="$plots replot '$1' using 4:2:3 ti '$2';"
 	fi
 	if [ "$dry_run" = "true" ]; then return; fi
 	echo "# [$2] $3" > "$res"
@@ -147,7 +142,9 @@ set auto x;
 set yrange [0:];
 set style data histogram;
 set style histogram cluster gap 2;
-set style fill solid border -1;
+set style histogram errorbars linewidth 1;
+set style fill solid 0.3 border -1;
+set bars front;
 set boxwidth 0.9;
 set xtic nomirror rotate by -45 scale 0 font ',8';
 set title "$1"
@@ -157,6 +154,29 @@ END
 	echo "# gnuplot -p $1"
 	gnuplot -p "$1"
 	plots=
+}
+
+# Check if the test should be skiped according to its name
+# $1: name of the test
+# $2: description of the test
+# $NOTSKIPED: arguments
+function skip_test()
+{
+	if test -z "$NOTSKIPED"; then
+		echo "* $1"
+		return 0
+	fi
+	if test "$NOTSKIPED" = "all"; then
+		: # Execute anyway
+	elif echo "$1" | grep "$NOTSKIPED" >/dev/null 2>&1; then
+		: # Found one to execute
+	else
+		return 0
+	fi
+	echo "*"
+	echo "* $1 *****"
+	echo "*"
+	return 1
 }
 
 ## GLOBAL VARIABLES ##
@@ -177,23 +197,56 @@ function run_compiler()
 	local title=$1
 	shift
 	run_command "$@" nitg.nit -o "nitg.$title.bin"
-	bench_command "nitg" "nitg test_parser.nit" "./nitg.$title.bin" test_parser.nit
+	bench_command "nitg" "nitg test_parser.nit" "./nitg.$title.bin" -v test_parser.nit
 	run_command "$@" nit.nit -o "nit.$title.bin"
-	bench_command "nit" "nit test_parser.nit test_parser.nit" "./nit.$title.bin" test_parser.nit -- -n rapid_type_analysis.nit
+	bench_command "nit" "nit test_parser.nit test_parser.nit" "./nit.$title.bin" -v test_parser.nit -- -n rapid_type_analysis.nit
+	run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
+	bench_command "shoot" "shoot_logic" "./shoot.$title.bin"
 }
+
+## HANDLE OPTIONS ##
+
+function usage()
+{
+	echo "run_bench: [options]* benchname"
+	echo "  -v: verbose mode"
+	echo "  -n count: number of execution for each bar (default: $count)"
+	echo "  --dry: Do not run the commands, just reuse the data and generate the graph"
+	echo "  -h: this help"
+}
+
+stop=false
+while [ "$stop" = false ]; do
+	case "$1" in
+		-v) verbose=true; shift;;
+		-h) usage; exit;;
+		-n) count="$2"; shift; shift;;
+		--dry) dry_run=true; shift;;
+		*) stop=true
+	esac
+done
+
+NOTSKIPED="$*"
+
+if test -z "$NOTSKIPED"; then
+	usage
+	echo "List of available benches:"
+	echo "* all: run all the benches"
+fi
 
 ## EFFECTIVE BENCHS ##
 
 function bench_nitg_bootstrap()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name.dat" "" "Steps of the bootstrap of nitg by nitc"
 	rm nit?_nit*
-	cp ./nitc_3 ./nitc_nitc
-	bench_command "c/c c" "nitc_nitc nitc.nit -> nitc_nitc (stability)" ./nitc_nitc -O nitc.nit -o nitc_nitc
-	bench_command "c/c g" "nitc_nitc nitg.nit -> nitg_nitc" ./nitc_nitc -O nitg.nit -o nitg_nitc
-	bench_command "g/c g" "nitg_nitc nitg.nit -> nitg_nitg" ./nitg_nitc nitg.nit -o nitg_nitg
-	bench_command "g/g g" "nitg_nitg nitg.nit -> nitg_nitg (stability)" ./nitg_nitg nitg.nit -o nitg_nitg
+	cp ./nitc_3 ./nitc_nitc.bin
+	bench_command "c/c c" "nitc_nitc nitc.nit -> nitc_nitc (stability)" ./nitc_nitc.bin -O nitc.nit -o nitc_nitc.bin
+	bench_command "c/c g" "nitc_nitc nitg.nit -> nitg_nitc" ./nitc_nitc.bin -O nitg.nit -o nitg_nitc.bin
+	bench_command "g/c g" "nitg_nitc nitg.nit -> nitg_nitg" ./nitg_nitc.bin nitg.nit -o nitg_nitg.bin
+	bench_command "g/g g" "nitg_nitg nitg.nit -> nitg_nitg (stability)" ./nitg_nitg.bin nitg.nit -o nitg_nitg.bin
 
 	plot "$name.gnu"
 }
@@ -202,17 +255,30 @@ bench_nitg_bootstrap
 function bench_steps()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name-nitc.dat" "nitc" "Various steps of nitc"
 	bench_command "parse" "" ./nitc_3 --only-parse nitg.nit
 	bench_command "metamodel" "" ./nitc_3 --only-metamodel nitg.nit
 	bench_command "generate c" "" ./nitc_3 --no-cc nitg.nit
-	bench_command "full" "" ./nitc_nitc -O nitg.nit
+	bench_command "full" "" ./nitc_3 -O nitg.nit -o "nitg_nitg.bin"
+
+	prepare_res "$name-nitc-g.dat" "nitc-g" "Various steps of nitc --global"
+	bench_command "parse" "" ./nitc_3 --global --only-parse nitg.nit
+	bench_command "metamodel" "" ./nitc_3 --global --only-metamodel nitg.nit
+	bench_command "generate c" "" ./nitc_3 --global --no-cc nitg.nit
+	bench_command "full" "" ./nitc_3 -O --global nitg.nit -o "nitg_nitc-g.bin"
 
 	prepare_res "$name-nitg.dat" "nitg" "Various steps of nitg"
 	bench_command "parse" "" ./nitg --only-parse nitg.nit
 	bench_command "metamodel" "" ./nitg --only-metamodel nitg.nit
 	bench_command "generate c" "" ./nitg --no-cc nitg.nit
-	bench_command "full" "" ./nitg nitg.nit
+	bench_command "full" "" ./nitg nitg.nit -o "nitg_nitg.bin"
+
+	prepare_res "$name-nitg-s.dat" "nitg-s" "Various steps of nitg --separate"
+	bench_command "parse" "" ./nitg --separate --only-parse nitg.nit
+	bench_command "metamodel" "" ./nitg --separate --only-metamodel nitg.nit
+	bench_command "generate c" "" ./nitg --separate --no-cc nitg.nit
+	bench_command "full" "" ./nitg --separate nitg.nit -o "nitg_nitg-s.bin"
 
 	plot "$name.gnu"
 }
@@ -222,6 +288,7 @@ bench_steps
 function bench_nitg_options()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name.dat" "no options" "nitg without options"
 	run_compiler "nitg" ./nitg
 
@@ -237,6 +304,7 @@ bench_nitg_options --hardening
 function bench_nitc_gc()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	for gc in nitgc boehm malloc large; do
 		prepare_res "$name-$gc".dat "$gc" "nitc with gc=$gc"
 		export NIT_GC_OPTION="$gc"
@@ -250,6 +318,7 @@ bench_nitc_gc
 function bench_nitc_boost()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name-slow.dat" "no -O" "nitc without -O"
 	run_compiler "nitc_slow" ./nitc_3
 	prepare_res "$name-fast.dat" "-O" "nitc with -O"
@@ -262,6 +331,7 @@ bench_nitc_boost
 function bench_engines()
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name-nitc.dat" "nitc" "nitc"
 	run_compiler "nitc" ./nitc_3 -O
 	prepare_res "$name-nitc-g.dat" "nitc-g" "nitc with --global"
@@ -275,6 +345,7 @@ bench_engines
 function bench_compilation_time
 {
 	name="$FUNCNAME"
+	skip_test "$name" && return
 	prepare_res "$name-nitc.dat" "nitc" "nitc"
 	for i in ../examples/hello_world.nit test_parser.nit nitg.nit; do
 		bench_command `basename "$i" .nit` "" ./nitc_3 -O "$i" --no-cc

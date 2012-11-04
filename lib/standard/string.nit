@@ -102,6 +102,13 @@ abstract class AbstractString
 		return to_s.to_cstring.atoi
 	end
 
+	# If `self' contains a float, return the corresponding float
+	fun to_f: Float
+	do
+		# Shortcut
+		return to_s.to_cstring.atof
+	end
+
 	# If `self' contains only digits and alpha <= 'f', return the corresponding integer.
 	fun to_hex: Int do return a_to(16)
 
@@ -264,8 +271,6 @@ class String
 		return h
 
 	end
-
-	fun to_f : Float is extern import String::to_cstring
 end
 
 # Mutable strings of characters.
@@ -606,6 +611,7 @@ class NativeString
 		return l
 	end
 	fun atoi: Int is intern
+	fun atof: Float is extern "atof"
 end
 
 # StringCapable objects can create native strings
