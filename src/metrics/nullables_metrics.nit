@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Statistics about the usage of nullables
-module visit_nullable_sends
+module nullables_metrics
 
 import modelbuilder
 private import typing
@@ -59,8 +59,8 @@ private class NullableSends
 	end
 end
 
-# Visit the AST and print statistics about the usage of send on nullable reciever.
-fun visit_nullable_sends(modelbuilder: ModelBuilder)
+# Visit the AST and print metrics about the usage of send on nullable reciever.
+fun compute_nullables_metrics(modelbuilder: ModelBuilder)
 do
 	print "--- Sends on Nullable Reciever ---"
 	var total_sends = 0

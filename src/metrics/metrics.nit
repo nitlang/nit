@@ -19,7 +19,7 @@ module metrics
 
 import metrics_base
 import static_types_metrics
-import visit_nullable_sends
+import nullables_metrics
 import visit_self
 import model_stats
 import generate_hierarchies
