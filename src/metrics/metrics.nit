@@ -23,6 +23,6 @@ import visit_nullable_sends
 import visit_self
 import model_stats
 import generate_hierarchies
-import rta_stats
+import rta_metrics
 import model_hyperdoc
 import tables_metrics
