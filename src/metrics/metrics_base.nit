@@ -21,6 +21,8 @@ import modelbuilder
 
 redef class ToolContext
 
+	# --nullables
+	var opt_nullables = new OptionBool("Compute metrics on nullables send", "--nullables")
 	# --static-types
 	var opt_static_types = new OptionBool("Compute explicit static types metrics", "--static-types")
 	# --tables
@@ -36,6 +38,7 @@ redef class ToolContext
 	redef init
 	do
 		super
+		self.option_context.add_option(opt_nullables)
 		self.option_context.add_option(opt_static_types)
 		self.option_context.add_option(opt_tables)
 		self.option_context.add_option(opt_rta)

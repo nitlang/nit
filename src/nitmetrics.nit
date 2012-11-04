@@ -62,8 +62,11 @@ compute_statistics(model)
 print ""
 visit_self(modelbuilder)
 
-print ""
-visit_nullable_sends(modelbuilder)
+# Nullables metrics
+if toolcontext.opt_nullables.value then
+	print ""
+	compute_nullables_metrics(modelbuilder)
+end
 
 # Static types metrics
 if toolcontext.opt_static_types.value then
