@@ -59,8 +59,11 @@ print "*** STATS ***"
 print ""
 compute_statistics(model)
 
-print ""
-visit_self(modelbuilder)
+# Self usage metrics
+if toolcontext.opt_self.value then
+	print ""
+	compute_self_metrics(modelbuilder)
+end
 
 # Nullables metrics
 if toolcontext.opt_nullables.value then

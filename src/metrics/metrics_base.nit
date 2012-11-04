@@ -21,6 +21,8 @@ import modelbuilder
 
 redef class ToolContext
 
+	# --self
+	var opt_self = new OptionBool("Compute metrics about the usage of explicit and implicit self", "--self")
 	# --nullables
 	var opt_nullables = new OptionBool("Compute metrics on nullables send", "--nullables")
 	# --static-types
@@ -38,6 +40,7 @@ redef class ToolContext
 	redef init
 	do
 		super
+		self.option_context.add_option(opt_self)
 		self.option_context.add_option(opt_nullables)
 		self.option_context.add_option(opt_static_types)
 		self.option_context.add_option(opt_tables)
