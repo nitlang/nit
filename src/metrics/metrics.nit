@@ -18,6 +18,7 @@
 module metrics
 
 import metrics_base
+import inheritance_metrics
 import refinement_metrics
 import static_types_metrics
 import nullables_metrics
