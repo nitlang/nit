@@ -58,6 +58,12 @@ print "*** METRICS ***"
 # All metrics computation ?
 var all = toolcontext.opt_all.value
 
+# Inheritance usage metrics
+if all or toolcontext.opt_inheritance.value then
+	print ""
+	compute_inheritance_metrics(model)
+end
+
 # Refinement usage metrics
 if all or toolcontext.opt_refinement.value then
 	print ""
