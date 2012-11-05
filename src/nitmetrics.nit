@@ -61,7 +61,7 @@ var all = toolcontext.opt_all.value
 # Inheritance usage metrics
 if all or toolcontext.opt_inheritance.value then
 	print ""
-	compute_inheritance_metrics(model)
+	compute_inheritance_metrics(toolcontext, model)
 end
 
 # Refinement usage metrics

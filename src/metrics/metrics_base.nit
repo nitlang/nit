@@ -38,6 +38,8 @@ redef class ToolContext
 	var opt_tables = new OptionBool("Compute tables metrics", "--tables")
 	# --rta
 	var opt_rta = new OptionBool("Compute RTA metrics", "--rta")
+	# --generate-csv
+	var opt_generate_csv = new OptionBool("Generate CVS format metrics", "--generate-csv")
 	# --generate_hyperdoc
 	var opt_generate_hyperdoc = new OptionBool("Generate Hyperdoc", "--generate_hyperdoc")
 
@@ -55,6 +57,7 @@ redef class ToolContext
 		self.option_context.add_option(opt_static_types)
 		self.option_context.add_option(opt_tables)
 		self.option_context.add_option(opt_rta)
+		self.option_context.add_option(opt_generate_csv)
 		self.option_context.add_option(opt_generate_hyperdoc)
 		self.option_context.add_option(opt_dir)
 	end
@@ -109,6 +112,42 @@ private class CounterSorter[E: Object]
 	super AbstractSorter[E]
 	var counter: Counter[E]
 	redef fun compare(a,b) do return self.counter.map[a] <=> self.counter.map[b]
+end
+
+# Helper class to output metrics as CVS formatted files
+class CSVDocument
+	private var file: String
+	private var header: Array[String] = new Array[String]
+	private var lines: Array[Array[String]] = new Array[Array[String]]
+
+	init(file: String) do self.file = file
+
+	fun set_header(values: Object...) do
+		header.clear
+		for value in values do header.add(value.to_s)
+	end
+
+	fun add_line(values: Object...) do
+		if values.length != header.length then
+			print "CSV error: header declares {header.length} columns, line contains {values.length} values"
+			abort
+		end
+		var line = new Array[String]
+		for value in values do line.add(value.to_s)
+		lines.add(line)
+	end
+
+	redef fun to_s do
+		var str = header.join(";") + "\n"
+		for line in lines do str += line.join(";") + "\n"
+		return str
+	end
+
+	fun save do
+		var out = new OFStream.open(self.file)
+		out.write(self.to_s)
+		out.close
+	end
 end
 
 # Helper function to display n/d and handle division by 0
