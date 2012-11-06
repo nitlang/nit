@@ -468,13 +468,13 @@ private abstract class Type
 				else if p.mtype.mclass == sup.mtype.mclass then
 					# found the same class (ie. p.mclass = B[B#0] = sup.mclass)
 					# compare formal types arguments
-					for i in [0..p.mtype.as(MGenericType).arguments.length[ do
+					for i in [0..p.mtype.arguments.length[ do
 						# erase nullable annotation of p arg
-						var sarg = p.mtype.as(MGenericType).arguments[i]
+						var sarg = p.mtype.arguments[i]
 						if sarg isa MNullableType then sarg = sarg.mtype
 						var sft = typing.load_type(sarg.as(MClassType))
 						# erase nullable annotation of super arg
-						var suparg = sup.mtype.as(MGenericType).arguments[i]
+						var suparg = sup.mtype.arguments[i]
 						if suparg isa MNullableType then suparg = suparg.mtype
 						var pft = typing.load_type(suparg.as(MClassType))
 						if not sft.is_subtype_fallback(pft) then

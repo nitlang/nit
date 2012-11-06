@@ -513,7 +513,7 @@ class ModelBuilder
 					bounds.add(objectclass.mclass_type.as_nullable)
 				else
 					# Inherit the bound
-					bounds.add(mclass.mclassdefs.first.bound_mtype.as(MGenericType).arguments[i])
+					bounds.add(mclass.mclassdefs.first.bound_mtype.arguments[i])
 				end
 			end
 		end
@@ -773,7 +773,7 @@ class ModelBuilder
 			end
 			for i in [0..mclassdef.parameter_names.length[ do
 				if mclassdef.parameter_names[i] == name then
-					res = mclassdef.mclass.mclass_type.as(MGenericType).arguments[i]
+					res = mclassdef.mclass.mclass_type.arguments[i]
 					if ntype.n_kwnullable != null then res = res.as_nullable
 					return res
 				end

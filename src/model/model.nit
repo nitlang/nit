@@ -550,7 +550,6 @@ abstract class MType
 		if not sup isa MGenericType then return true
 		var sub2 = sub.supertype_to(mmodule, anchor, sup.mclass)
 		assert sub2.mclass == sup.mclass
-		assert sub2 isa MGenericType
 		for i in [0..sup.mclass.arity[ do
 			var sub_arg = sub2.arguments[i]
 			var sup_arg = sup.arguments[i]
@@ -969,7 +968,6 @@ class MParameterType
 			if t.mclass == goalclass then
 				# Yeah! c specialize goalclass with a "super `t'". So the question is what is the argument of f
 				# FIXME: Here, we stop on the first goal. Should we check others and detect inconsistencies?
-				assert t isa MGenericType
 				var res = t.arguments[self.rank]
 				return res
 			end
@@ -993,7 +991,7 @@ class MParameterType
 		if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		if resolved_receiver isa MParameterType then
 			assert resolved_receiver.mclass == anchor.mclass
-			resolved_receiver = anchor.as(MGenericType).arguments[resolved_receiver.rank]
+			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		end
 		assert resolved_receiver isa MClassType else print "{class_name}: {self}/{mtype}/{anchor}? {resolved_receiver}"
@@ -1001,7 +999,6 @@ class MParameterType
 		# Eh! The parameter is in the current class.
 		# So we return the corresponding argument, no mater what!
 		if resolved_receiver.mclass == self.mclass then
-			assert resolved_receiver isa MGenericType
 			var res = resolved_receiver.arguments[self.rank]
 			#print "{class_name}: {self}/{mtype}/{anchor} -> direct {res}"
 			return res
