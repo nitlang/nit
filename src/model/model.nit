@@ -301,6 +301,15 @@ class MClass
 		return mclassdefs.first
 	end
 
+	# Return the class `self' in the class hierarchy of the module `mmodule'.
+	#
+	# SEE: MModule::flatten_mclass_hierarchy
+	# REQUIRE: mmodule.has_mclass(self)
+	fun in_hierarchy(mmodule: MModule): POSetElement[MClass]
+	do
+		return mmodule.flatten_mclass_hierarchy[self]
+	end
+
 	# The principal static type of the class.
 	#
 	# For non-generic class, mclass_type is the only MClassType based
