@@ -327,7 +327,7 @@ private abstract class Typing
 	# Load compile time known super-types of a type
 	# supertypes are all known super classes at compile time and unresolved generic classes
 	fun load_supertypes(child: MClassType): Array[T] do
-		var parents = interpreter.mainmodule.flatten_mclass_hierarchy[child.mclass].greaters
+		var parents = child.mclass.in_hierarchy(interpreter.mainmodule).greaters
 		var plist = new Array[T]
 
 		# load each parent
@@ -837,7 +837,7 @@ private class CLTyping
 		for st in loaded_types.values do
 			if t.is_subtype_fallback(st) then
 				lin.add(st)
-				t.nb_parents = interpreter.mainmodule.flatten_mclass_hierarchy[t.mtype.mclass].direct_greaters.length
+				t.nb_parents = t.mtype.mclass.in_hierarchy(interpreter.mainmodule).direct_greaters.length
 				if t != st then st.sub_types.add(t)
 			end
 		end
