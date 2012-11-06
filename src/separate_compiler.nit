@@ -566,8 +566,26 @@ class SeparateCompilerVisitor
 	redef fun equal_test(value1, value2)
 	do
 		var res = self.new_var(bool_type)
-		# TODO
-		add("printf(\"NOT YET IMPLEMENTED: equal_test(%s,%s).\\n\", \"{value1.inspect}\", \"{value2.inspect}\"); exit(1);")
+		if value2.mtype.ctype != "val*" and value1.mtype.ctype == "val*" then
+			var tmp = value1
+			value1 = value2
+			value2 = tmp
+		end
+		if value1.mtype.ctype != "val*" then
+			if value2.mtype.ctype == value1.mtype.ctype then
+				self.add("{res} = {value1} == {value2};")
+			else if value2.mtype.ctype != "val*" then
+				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
+			else
+				var mtype1 = value1.mtype.as(MClassType)
+				self.add("{res} = ({value2} != NULL) && ({value2}->class == (struct class*) &class_{mtype1.c_name});")
+				self.add("if ({res}) \{")
+				self.add("{res} = ({self.autobox(value2, value1.mtype)} == {value1});")
+				self.add("\}")
+			end
+		else
+			self.add("{res} = {value1} == {value2};")
+		end
 		return res
 	end
 end
