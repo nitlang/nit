@@ -734,6 +734,10 @@ class MClassType
 		self.mclass = mclass
 	end
 
+	# The formal arguments of the type
+	# ENSURE: return.length == self.mclass.arity
+	var arguments: Array[MType] = new Array[MType]
+
 	redef fun to_s do return mclass.to_s
 
 	redef fun need_anchor do return false
@@ -830,10 +834,6 @@ class MGenericType
 			end
 		end
 	end
-
-	# The formal arguments of the type
-	# ENSURE: return.length == self.mclass.arity
-	var arguments: Array[MType]
 
 	# Recursively print the type of the arguments within brackets.
 	# Example: "Map[String,List[Int]]"
