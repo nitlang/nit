@@ -516,7 +516,6 @@ redef class MClassType
 		else if mclass.name == "NativeString" then
 			return "char*"
 		else if mclass.name == "NativeArray" then
-			assert self isa MGenericType
 			return "{self.arguments.first.ctype}*"
 		else if mclass.kind == extern_kind then
 			return "void*"
@@ -1870,7 +1869,7 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("(char*)GC_MALLOC({arguments[1]})", ret.as(not null)))
 			return
 		else if pname == "calloc_array" then
-			var elttype = arguments.first.mtype.supertype_to(v.compiler.mainmodule,arguments.first.mtype.as(MClassType),v.get_class("ArrayCapable")).as(MGenericType).arguments.first
+			var elttype = arguments.first.mtype.supertype_to(v.compiler.mainmodule,arguments.first.mtype.as(MClassType),v.get_class("ArrayCapable")).arguments.first
 			v.ret(v.new_expr("({elttype.ctype}*)GC_MALLOC({arguments[1]} * sizeof({elttype.ctype}))", ret.as(not null)))
 			return
 		else if pname == "object_id" then
@@ -2323,7 +2322,7 @@ end
 redef class AArrayExpr
 	redef fun expr(v)
 	do
-		var mtype = self.mtype.as(MGenericType).arguments.first
+		var mtype = self.mtype.as(MClassType).arguments.first
 		var array = new Array[RuntimeVariable]
 		for nexpr in self.n_exprs.n_exprs do
 			var i = v.expr(nexpr, mtype)

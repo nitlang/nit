@@ -798,8 +798,9 @@ redef class AInternMethPropdef
 			end
 		else if pname == "calloc_array" then
 			var recvtype = args.first.mtype.as(MClassType)
-			var mtype: MType = recvtype.supertype_to(v.mainmodule, recvtype, v.mainmodule.get_primitive_class("ArrayCapable"))
-			mtype = mtype.as(MGenericType).arguments.first
+			var mtype: MType
+			mtype = recvtype.supertype_to(v.mainmodule, recvtype, v.mainmodule.get_primitive_class("ArrayCapable"))
+			mtype = mtype.arguments.first
 			var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
 			return new PrimitiveInstance[Array[Instance]](v.mainmodule.get_primitive_class("NativeArray").get_mtype([mtype]), val)
 		end
@@ -1304,7 +1305,7 @@ redef class AArrayExpr
 			if i == null then return null
 			val.add(i)
 		end
-		var mtype = v.unanchor_type(self.mtype.as(not null)).as(MGenericType)
+		var mtype = v.unanchor_type(self.mtype.as(not null)).as(MClassType)
 		var elttype = mtype.arguments.first
 		return v.array_instance(val, elttype)
 	end

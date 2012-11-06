@@ -301,6 +301,15 @@ class MClass
 		return mclassdefs.first
 	end
 
+	# Return the class `self' in the class hierarchy of the module `mmodule'.
+	#
+	# SEE: MModule::flatten_mclass_hierarchy
+	# REQUIRE: mmodule.has_mclass(self)
+	fun in_hierarchy(mmodule: MModule): POSetElement[MClass]
+	do
+		return mmodule.flatten_mclass_hierarchy[self]
+	end
+
 	# The principal static type of the class.
 	#
 	# For non-generic class, mclass_type is the only MClassType based
@@ -390,15 +399,15 @@ class MClassDef
 	# FIXME: quite ugly but not better idea yet
 	var supertypes: Array[MClassType] = new Array[MClassType]
 
-	# Register the super-types for the class (ie "super SomeType")
-	# This function can only invoked once by class
+	# Register some super-types for the class (ie "super SomeType")
+	#
+	# The hierarchy must not already be set
+	# REQUIRE: self.in_hierarchy == null
 	fun set_supertypes(supertypes: Array[MClassType])
 	do
 		assert unique_invocation: self.in_hierarchy == null
 		var mmodule = self.mmodule
 		var model = mmodule.model
-		var res = model.mclassdef_hierarchy.add_node(self)
-		self.in_hierarchy = res
 		var mtype = self.bound_mtype
 
 		for supertype in supertypes do
@@ -412,6 +421,23 @@ class MClassDef
 			end
 		end
 
+	end
+
+	# Collect the super-types (set by set_supertypes) to build the hierarchy
+	#
+	# This function can only invoked once by class
+	# REQUIRE: self.in_hierarchy == null
+	# ENSURE: self.in_hierarchy != null
+	fun add_in_hierarchy
+	do
+		assert unique_invocation: self.in_hierarchy == null
+		var model = mmodule.model
+		var res = model.mclassdef_hierarchy.add_node(self)
+		self.in_hierarchy = res
+		var mtype = self.bound_mtype
+
+		# Here we need to connect the mclassdef to its pairs in the mclassdef_hierarchy
+		# The simpliest way is to attach it to collect_mclassdefs
 		for mclassdef in mtype.collect_mclassdefs(mmodule) do
 			res.poset.add_edge(self, mclassdef)
 		end
@@ -524,7 +550,6 @@ abstract class MType
 		if not sup isa MGenericType then return true
 		var sub2 = sub.supertype_to(mmodule, anchor, sup.mclass)
 		assert sub2.mclass == sup.mclass
-		assert sub2 isa MGenericType
 		for i in [0..sup.mclass.arity[ do
 			var sub_arg = sub2.arguments[i]
 			var sup_arg = sup.arguments[i]
@@ -708,6 +733,10 @@ class MClassType
 		self.mclass = mclass
 	end
 
+	# The formal arguments of the type
+	# ENSURE: return.length == self.mclass.arity
+	var arguments: Array[MType] = new Array[MType]
+
 	redef fun to_s do return mclass.to_s
 
 	redef fun need_anchor do return false
@@ -804,10 +833,6 @@ class MGenericType
 			end
 		end
 	end
-
-	# The formal arguments of the type
-	# ENSURE: return.length == self.mclass.arity
-	var arguments: Array[MType]
 
 	# Recursively print the type of the arguments within brackets.
 	# Example: "Map[String,List[Int]]"
@@ -943,7 +968,6 @@ class MParameterType
 			if t.mclass == goalclass then
 				# Yeah! c specialize goalclass with a "super `t'". So the question is what is the argument of f
 				# FIXME: Here, we stop on the first goal. Should we check others and detect inconsistencies?
-				assert t isa MGenericType
 				var res = t.arguments[self.rank]
 				return res
 			end
@@ -967,7 +991,7 @@ class MParameterType
 		if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		if resolved_receiver isa MParameterType then
 			assert resolved_receiver.mclass == anchor.mclass
-			resolved_receiver = anchor.as(MGenericType).arguments[resolved_receiver.rank]
+			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		end
 		assert resolved_receiver isa MClassType else print "{class_name}: {self}/{mtype}/{anchor}? {resolved_receiver}"
@@ -975,7 +999,6 @@ class MParameterType
 		# Eh! The parameter is in the current class.
 		# So we return the corresponding argument, no mater what!
 		if resolved_receiver.mclass == self.mclass then
-			assert resolved_receiver isa MGenericType
 			var res = resolved_receiver.arguments[self.rank]
 			#print "{class_name}: {self}/{mtype}/{anchor} -> direct {res}"
 			return res
