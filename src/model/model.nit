@@ -390,15 +390,15 @@ class MClassDef
 	# FIXME: quite ugly but not better idea yet
 	var supertypes: Array[MClassType] = new Array[MClassType]
 
-	# Register the super-types for the class (ie "super SomeType")
-	# This function can only invoked once by class
+	# Register some super-types for the class (ie "super SomeType")
+	#
+	# The hierarchy must not already be set
+	# REQUIRE: self.in_hierarchy == null
 	fun set_supertypes(supertypes: Array[MClassType])
 	do
 		assert unique_invocation: self.in_hierarchy == null
 		var mmodule = self.mmodule
 		var model = mmodule.model
-		var res = model.mclassdef_hierarchy.add_node(self)
-		self.in_hierarchy = res
 		var mtype = self.bound_mtype
 
 		for supertype in supertypes do
@@ -412,6 +412,23 @@ class MClassDef
 			end
 		end
 
+	end
+
+	# Collect the super-types (set by set_supertypes) to build the hierarchy
+	#
+	# This function can only invoked once by class
+	# REQUIRE: self.in_hierarchy == null
+	# ENSURE: self.in_hierarchy != null
+	fun add_in_hierarchy
+	do
+		assert unique_invocation: self.in_hierarchy == null
+		var model = mmodule.model
+		var res = model.mclassdef_hierarchy.add_node(self)
+		self.in_hierarchy = res
+		var mtype = self.bound_mtype
+
+		# Here we need to connect the mclassdef to its pairs in the mclassdef_hierarchy
+		# The simpliest way is to attach it to collect_mclassdefs
 		for mclassdef in mtype.collect_mclassdefs(mmodule) do
 			res.poset.add_edge(self, mclassdef)
 		end
