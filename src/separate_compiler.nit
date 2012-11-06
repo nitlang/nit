@@ -542,6 +542,7 @@ class SeparateCompilerVisitor
 	do
 		var res = self.new_var(bool_type)
 		# TODO
+		add("printf(\"NOT YET IMPLEMENTED: type_test(%s,%s).\\n\", \"{value.inspect}\", \"{mtype}\"); exit(1);")
 		return res
 	end
 
@@ -549,6 +550,7 @@ class SeparateCompilerVisitor
 	do
 		var res = self.new_var(bool_type)
 		# TODO
+		add("printf(\"NOT YET IMPLEMENTED: is_same_type(%s,%s).\\n\", \"{value1.inspect}\", \"{value2.inspect}\"); exit(1);")
 		return res
 	end
 
@@ -557,6 +559,7 @@ class SeparateCompilerVisitor
 		var res = self.get_name("var_class_name")
 		self.add_decl("const char* {res};")
 		# TODO
+		add("printf(\"NOT YET IMPLEMENTED: class_name_string(%s).\\n\", \"{value1.inspect}\"); exit(1);")
 		return res
 	end
 
@@ -564,6 +567,7 @@ class SeparateCompilerVisitor
 	do
 		var res = self.new_var(bool_type)
 		# TODO
+		add("printf(\"NOT YET IMPLEMENTED: equal_test(%s,%s).\\n\", \"{value1.inspect}\", \"{value2.inspect}\"); exit(1);")
 		return res
 	end
 end
