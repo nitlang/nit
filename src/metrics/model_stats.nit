@@ -18,7 +18,7 @@
 module model_stats
 
 import model
-private import stats_base
+private import metrics_base
 
 # Print general statistics on a model
 fun compute_statistics(model: Model)

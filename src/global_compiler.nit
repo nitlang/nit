@@ -539,6 +539,17 @@ redef class MGenericType
 	end
 end
 
+redef class MParameterType
+	redef fun c_name
+	do
+		var res = self.c_name_cache
+		if res != null then return res
+		res = "FT{self.rank}"
+		self.c_name_cache = res
+		return res
+	end
+end
+
 redef class MNullableType
 	redef fun c_name
 	do

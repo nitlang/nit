@@ -18,7 +18,7 @@
 module model_hyperdoc
 
 import model
-import stats_base
+import metrics_base
 
 # Genetate a HTML file for the model.
 # The generated file contains the description of each entity of the model

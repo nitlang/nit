@@ -17,7 +17,7 @@ module separate_compiler
 
 
 import global_compiler # TODO better separation of concerns
-intrude import vft_computation
+intrude import coloring
 redef class ToolContext
 	# --separate
 	var opt_separate: OptionBool = new OptionBool("Use separate compilation", "--separate")
@@ -34,7 +34,6 @@ redef class ModelBuilder
 	do
 		# Hijack the run_global_compiler to run the separate one if requested.
 		if self.toolcontext.opt_separate.value then
-			build_vft(mainmodule)
 			run_separate_compiler(mainmodule, runtime_type_analysis)
 		else
 			super
@@ -55,11 +54,16 @@ redef class ModelBuilder
 		v.add_decl("#include <gc/gc.h>")
 		v.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
 		v.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
+
+		# Class abstract representation
 		v.add_decl("struct class \{ nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
-		v.add_decl("typedef struct \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
+		# Type abstract representation
+		v.add_decl("struct type \{ int id; int color; struct fts_table *fts_table; int type_table[1]; \}; /* general C type representing a Nit type. */")
+		v.add_decl("struct fts_table \{ struct type *fts[1]; \}; /* fts list of a C type representation. */")
+		# Instance abstract representation
+		v.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 
 		# Class names (for the class_name and output_class_name methods)
-
 		v.add_decl("extern const char const * class_names[];")
 		v.add("const char const * class_names[] = \{")
 		for t in runtime_type_analysis.live_types do
@@ -97,6 +101,15 @@ redef class ModelBuilder
 			end
 		end
 
+		# compile live & cast type structures
+		var mtypes = new HashSet[MClassType]
+		mtypes.add_all(runtime_type_analysis.live_types)
+		mtypes.add_all(runtime_type_analysis.live_cast_types)
+
+		for t in mtypes do
+			compiler.compile_type_to_c(t)
+		end
+
 		write_and_make(compiler)
 	end
 end
@@ -104,6 +117,57 @@ end
 # Singleton that store the knowledge about the separate compilation process
 class SeparateCompiler
 	super GlobalCompiler # TODO better separation of concerns
+
+	protected var typeids: HashMap[MClassType, Int] = new HashMap[MClassType, Int]
+
+	private var type_colors: Map[MClassType, Int]
+	private var type_tables: Map[MClassType, Array[nullable MClassType]]
+
+	private var class_colors: Map[MClass, Int]
+
+	private var method_colors: Map[MMethod, Int]
+	private var method_tables: Map[MClass, Array[nullable MMethodDef]]
+
+	private var attr_colors: Map[MAttribute, Int]
+	private var attr_tables: Map[MClass, Array[nullable MAttributeDef]]
+
+	private var ft_colors: Map[MParameterType, Int]
+	private var ft_tables: Map[MClass, Array[nullable MParameterType]]
+
+	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
+
+		# types coloration
+		var mtypes = new HashSet[MClassType]
+		mtypes.add_all(runtime_type_analysis.live_types)
+		mtypes.add_all(runtime_type_analysis.live_cast_types)
+
+		for mtype in mtypes do
+			self.typeids[mtype] = self.typeids.length
+		end
+
+		var type_coloring = new TypeColoring(mainmodule, runtime_type_analysis)
+		self.type_colors = type_coloring.colorize(mtypes)
+		self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
+
+		# classes coloration
+		var class_coloring = new ClassColoring(mainmodule)
+		self.class_colors = class_coloring.colorize(mmbuilder.model.mclasses)
+
+		# methods coloration
+		var method_coloring = new MethodColoring(class_coloring)
+		self.method_colors = method_coloring.colorize
+		self.method_tables = method_coloring.build_property_tables
+
+		# attributes coloration
+		var attribute_coloring = new AttributeColoring(class_coloring)
+		self.attr_colors = attribute_coloring.colorize
+		self.attr_tables = attribute_coloring.build_property_tables
+
+		# fts coloration
+		var ft_coloring = new FTColoring(class_coloring)
+		self.ft_colors = ft_coloring.colorize
+		self.ft_tables = ft_coloring.build_ft_tables
+	end
 
 	# Separately compile all the method definitions of the module
 	fun compile_module_to_c(mmodule: MModule)
@@ -122,6 +186,75 @@ class SeparateCompiler
 		end
 	end
 
+	# Globaly compile the type structure of a live type
+	fun compile_type_to_c(mtype: MClassType)
+	do
+		var c_name = mtype.c_name
+		var v = new SeparateCompilerVisitor(self)
+		v.add_decl("/* runtime type {mtype} */")
+
+		# extern const struct type_X
+		self.header.add_decl("extern const struct type_{c_name} type_{c_name};")
+		self.header.add_decl("struct type_{c_name} \{")
+		self.header.add_decl("int id;")
+		self.header.add_decl("int color;")
+		self.header.add_decl("const struct fts_table_{c_name} *fts_table;")
+		self.header.add_decl("int type_table[{self.type_tables[mtype].length}];")
+		self.header.add_decl("\};")
+
+		# extern const struct fst_table_X fst_table_X
+		self.header.add_decl("extern const struct fts_table_{c_name} fts_table_{c_name};")
+		self.header.add_decl("struct fts_table_{c_name} \{")
+		self.header.add_decl("struct type *fts[{self.ft_tables[mtype.mclass].length}];")
+		self.header.add_decl("\};")
+
+		# const struct type_X
+		v.add_decl("const struct type_{c_name} type_{c_name} = \{")
+		v.add_decl("{self.typeids[mtype]},")
+		v.add_decl("{self.type_colors[mtype]},")
+		v.add_decl("&fts_table_{c_name},")
+		v.add_decl("\{")
+		for stype in self.type_tables[mtype] do
+			if stype == null then
+				v.add_decl("-1, /* empty */")
+			else
+				v.add_decl("{self.typeids[stype]}, /* {stype} */")
+			end
+		end
+		v.add_decl("\},")
+		v.add_decl("\};")
+
+		# const struct fst_table_X fst_table_X
+		v.add_decl("const struct fts_table_{c_name} fts_table_{c_name} = \{")
+		v.add_decl("\{")
+
+		if mtype isa MGenericType then
+			for ft in self.ft_tables[mtype.mclass] do
+				if ft == null then
+					v.add_decl("NULL, /* empty */")
+				else
+					var id = -1
+					var ftype: MClassType
+					if ft.mclass == mtype.mclass then
+						var ntype = mtype.arguments[ft.rank]
+						if ntype isa MNullableType then ntype = ntype.mtype
+						ftype = ntype.as(MClassType)
+					else
+						ftype = ft.anchor_to(self.mainmodule, mtype).as(MClassType)
+					end
+					if self.typeids.has_key(ftype) then
+						v.add_decl("(struct type*)&type_{ftype.c_name}, /* {ft} ({ftype}) */")
+					else
+						v.add_decl("NULL, /* empty ({ft} not a live type) */")
+					end
+				end
+			end
+		end
+
+		v.add_decl("\},")
+		v.add_decl("\};")
+	end
+
 	# Globally compile the table of the class mclass
 	# In a link-time optimisation compiler, tables are globally computed
 	# In a true separate compiler (a with dynamic loading) you cannot do this unfortnally
@@ -129,6 +262,9 @@ class SeparateCompiler
 	do
 		var mtype = mclass.mclassdefs.first.bound_mtype
 		var c_name = mclass.mclass_type.c_name
+
+		var vft = self.method_tables[mclass]
+		var attrs = self.attr_tables[mclass]
 
 		var v = new SeparateCompilerVisitor(self)
 
@@ -139,7 +275,7 @@ class SeparateCompiler
 		self.header.add_decl("#define {idname} {idnum} /* {mtype} */")
 
 		self.header.add_decl("struct class_{c_name} \{")
-		self.header.add_decl("nitmethod_t vft[{mclass.vft.length}];")
+		self.header.add_decl("nitmethod_t vft[{vft.length}];")
 
 		if mtype.ctype != "val*" then
 			# Is the Nit type is native then the struct is a box with two fields:
@@ -164,8 +300,8 @@ class SeparateCompiler
 		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
 		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
 		v.add_decl("\{")
-		for i in [0 .. mclass.vft.length[ do
-			var mpropdef = mclass.vft[i]
+		for i in [0 .. vft.length[ do
+			var mpropdef = vft[i]
 			if mpropdef == null then
 				v.add_decl("NULL, /* empty */")
 			else
@@ -182,6 +318,7 @@ class SeparateCompiler
 		if mtype.ctype != "val*" then
 			#Build instance struct
 			self.header.add_decl("struct instance_{c_name} \{")
+			self.header.add_decl("const struct type_{c_name} *type;")
 			self.header.add_decl("const struct class_{c_name} *class;")
 			self.header.add_decl("{mtype.ctype} value;")
 			self.header.add_decl("\};")
@@ -190,6 +327,11 @@ class SeparateCompiler
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
 			v.add("struct instance_{c_name}*res = GC_MALLOC(sizeof(struct instance_{c_name}));")
+			if self.typeids.has_key(mtype) then
+				v.add("res->type = &type_{c_name};")
+			else
+				v.add("res->type = NULL;")
+			end
 			v.add("res->class = &class_{c_name};")
 			v.add("res->value = value;")
 			v.add("return (val*)res;")
@@ -199,17 +341,19 @@ class SeparateCompiler
 
 		#Build instance struct
 		v.add_decl("struct instance_{c_name} \{")
+		v.add_decl("const struct type_{c_name} *type;")
 		v.add_decl("const struct class_{c_name} *class;")
-		v.add_decl("nitattribute_t attrs[{mclass.attrs.length}];")
+		v.add_decl("nitattribute_t attrs[{attrs.length}];")
 		v.add_decl("\};")
 
 
-		self.header.add_decl("{mtype.ctype} NEW_{c_name}(void);")
+		self.header.add_decl("{mtype.ctype} NEW_{c_name}(struct type *type);")
 		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("{mtype.ctype} NEW_{c_name}(void) \{")
+		v.add_decl("{mtype.ctype} NEW_{c_name}(struct type *type) \{")
 		var res = v.new_var(mtype)
 		res.is_exact = true
 		v.add("{res} = calloc(sizeof(struct instance_{c_name}), 1);")
+		v.add("{res}->type = type;")
 		v.add("{res}->class = (struct class*) &class_{c_name};")
 
 		for cd in mtype.collect_mclassdefs(self.mainmodule)
@@ -465,7 +609,7 @@ class SeparateCompilerVisitor
 			ss.append("{a}")
 		end
 
-		var color = mmethod.color.as(not null)
+		var color = self.compiler.as(SeparateCompiler).method_colors[mmethod]
 		var r
 		if ret == null then r = "void" else r = ret.ctype
 		var call = "(({r} (*)({s}))({arguments.first}->class->vft[{color}]))({ss})"
@@ -514,7 +658,7 @@ class SeparateCompilerVisitor
 		var cret = self.object_type.as_nullable
 		var res = self.new_var(cret)
 		res.mcasttype = ret
-		self.add("{res} = (val*) {recv}->attrs[{a.color.as(not null)}];")
+		self.add("{res} = (val*) {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}];")
 		if not ret isa MNullableType then
 			self.add("if ({res} == NULL) \{")
 			self.add_abort("Uninitialized attribute {a.name}")
@@ -528,21 +672,28 @@ class SeparateCompilerVisitor
 	do
 		# FIXME: Here we inconditionally box primitive attributes
 		value = self.autobox(value, self.object_type.as_nullable)
-		self.add("{recv}->attrs[{a.color.as(not null)}] = {value};")
+		self.add("{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] = {value};")
 	end
 
 	redef fun init_instance(mtype)
 	do
 		mtype = self.anchor(mtype).as(MClassType)
-		var res = self.new_expr("NEW_{mtype.c_name}()", mtype)
+		var res = self.new_expr("NEW_{mtype.mclass.mclass_type.c_name}((struct type*) &type_{mtype.c_name})", mtype)
 		return res
 	end
 
 	redef fun type_test(value, mtype)
 	do
+		var compiler = self.compiler.as(SeparateCompiler)
 		var res = self.new_var(bool_type)
-		# TODO
-		add("printf(\"NOT YET IMPLEMENTED: type_test(%s,%s).\\n\", \"{value.inspect}\", \"{mtype}\"); exit(1);")
+
+		if mtype isa MNullableType then mtype = mtype.mtype
+		if mtype isa MClassType then
+			self.add("{res} = {value}->type->type_table[type_{mtype.c_name}.color] == type_{mtype.c_name}.id;")
+		else if mtype isa MParameterType then
+			var ftcolor = compiler.ft_colors[mtype]
+			self.add("{res} = {value}->type->type_table[self->type->fts_table->fts[{ftcolor}]->color] == self->type->fts_table->fts[{ftcolor}]->id;")
+		end
 		return res
 	end
 
