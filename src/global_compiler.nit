@@ -138,7 +138,7 @@ redef class ModelBuilder
 		write_and_make(compiler)
 	end
 
-	private fun write_and_make(compiler: GlobalCompiler)
+	protected fun write_and_make(compiler: GlobalCompiler)
 	do
 		var mainmodule = compiler.mainmodule
 
@@ -249,7 +249,7 @@ redef class ModelBuilder
 end
 
 # Singleton that store the knowledge about the compilation process
-private class GlobalCompiler
+class GlobalCompiler
 	# The main module of the program
 	var mainmodule: MModule
 
@@ -280,11 +280,11 @@ private class GlobalCompiler
 	var live_primitive_types: Array[MClassType]
 
 	# runtime_functions that need to be compiled
-	private var todos: List[RuntimeFunction] = new List[RuntimeFunction]
+	private var todos: List[AbstractRuntimeFunction] = new List[AbstractRuntimeFunction]
 
 	# runtime_functions already seen (todo or done)
-	private var seen: HashSet[RuntimeFunction] = new HashSet[RuntimeFunction]
-	fun todo(m: RuntimeFunction)
+	private var seen: HashSet[AbstractRuntimeFunction] = new HashSet[AbstractRuntimeFunction]
+	fun todo(m: AbstractRuntimeFunction)
 	do
 		if seen.has(m) then return
 		todos.add(m)
@@ -295,7 +295,7 @@ private class GlobalCompiler
 	#
 	# FIXME: should not be a vistor but just somewhere to store lines
 	# FIXME: should not have a global .h since it does not help recompilations
-	var header: nullable GlobalCompilerVisitor = null
+	var header: nullable GlobalCompilerVisitor writable = null
 
 	# The list of all associated visitors
 	# Used to generate .c files
@@ -317,7 +317,7 @@ private class GlobalCompiler
 	end
 
 	# Cache for classid (computed by declare_runtimeclass)
-	private var classids: HashMap[MClassType, String] = new HashMap[MClassType, String]
+	protected var classids: HashMap[MClassType, String] = new HashMap[MClassType, String]
 
 	# Declare C structures and identifiers for a runtime class
 	fun declare_runtimeclass(v: GlobalCompilerVisitor, mtype: MClassType)
@@ -516,7 +516,6 @@ redef class MClassType
 		else if mclass.name == "NativeString" then
 			return "char*"
 		else if mclass.name == "NativeArray" then
-			assert self isa MGenericType
 			return "{self.arguments.first.ctype}*"
 		else if mclass.kind == extern_kind then
 			return "void*"
@@ -553,12 +552,25 @@ end
 
 # A C function associated to a Nit method
 # Because of customization, a given Nit method can be compiler more that once
-private abstract class RuntimeFunction
+abstract class AbstractRuntimeFunction
 	# The associated Nit method
 	var mmethoddef: MMethodDef
 
 	# The mangled c name of the runtime_function
-	fun c_name: String is abstract
+	# Subclasses should redefine `build_c_name` instead
+	fun c_name: String
+	do
+		var res = self.c_name_cache
+		if res != null then return res
+		res = self.build_c_name
+		self.c_name_cache = res
+		return res
+	end
+
+	# Non cached version of `c_name`
+	protected fun build_c_name: String is abstract
+
+	private var c_name_cache: nullable String = null
 
 	# Implements a call of the runtime_function
 	# May inline the body or generate a C function call
@@ -571,7 +583,7 @@ end
 
 # A runtime function customized on a specific monomrph receiver type
 private class CustomizedRuntimeFunction
-	super RuntimeFunction
+	super AbstractRuntimeFunction
 
 	# The considered reciever
 	# (usually is a live type but no strong guarantee)
@@ -583,8 +595,7 @@ private class CustomizedRuntimeFunction
 		self.recv = recv
 	end
 
-	# The mangled c name of the runtime_function
-	redef fun c_name: String
+	redef fun build_c_name: String
 	do
 		var res = self.c_name_cache
 		if res != null then return res
@@ -596,8 +607,6 @@ private class CustomizedRuntimeFunction
 		self.c_name_cache = res
 		return res
 	end
-
-	private var c_name_cache: nullable String = null
 
 	redef fun ==(o)
 	# used in the compiler worklist
@@ -735,7 +744,7 @@ end
 # Runtime variables are associated to Nit local variables and intermediate results in Nit expressions.
 #
 # The tricky point is that a single C variable can be associated to more than one RuntimeVariable because the static knowledge of the type of an expression can vary in the C code.
-private class RuntimeVariable
+class RuntimeVariable
 	# The name of the variable in the C code
 	var name: String
 
@@ -743,11 +752,11 @@ private class RuntimeVariable
 	var mtype: MType
 
 	# The current casted type of the variable (as known in Nit)
-	var mcasttype: MType
+	var mcasttype: MType writable
 
 	# If the variable exaclty a mcasttype?
 	# false (usual value) means that the variable is a mcasttype or a subtype.
-	var is_exact: Bool = false
+	var is_exact: Bool writable = false
 
 	init(name: String, mtype: MType, mcasttype: MType)
 	do
@@ -780,7 +789,7 @@ end
 
 # A visitor on the AST of property definition that generate the C code.
 # Because of inlining, a visitor can visit more than one property.
-private class GlobalCompilerVisitor
+class GlobalCompilerVisitor
 	# The associated compiler
 	var compiler: GlobalCompiler
 
@@ -809,7 +818,7 @@ private class GlobalCompilerVisitor
 	end
 
 	# The current Frame
-	var frame: nullable Frame
+	var frame: nullable Frame writable
 
 	# Anchor a type to the main module and the current receiver
 	fun anchor(mtype: MType): MType
@@ -881,7 +890,7 @@ private class GlobalCompilerVisitor
 		if value.mtype.ctype == mtype.ctype then
 			return value
 		else if value.mtype.ctype == "val*" then
-			return self.new_expr("((struct {mtype.c_name}*){value})->value /* autounbox from {value.mtype} to {mtype} */", mtype)
+			return self.new_expr("((struct {mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
 		else if mtype.ctype == "val*" then
 			var valtype = value.mtype.as(MClassType)
 			var res = self.new_var(mtype)
@@ -1362,6 +1371,42 @@ private class GlobalCompilerVisitor
 		return res
 	end
 
+	# Generate the code required to dynamically check if 2 objects share the same runtime type
+	fun is_same_type_test(value1, value2: RuntimeVariable): RuntimeVariable
+	do
+		var res = self.new_var(bool_type)
+		if value2.mtype.ctype == "val*" then
+			if value1.mtype.ctype == "val*" then
+				self.add "{res} = {value1}->classid == {value2}->classid;"
+			else
+				self.add "{res} = {self.compiler.classid(value1.mtype.as(MClassType))} == {value2}->classid;"
+			end
+		else
+			if value1.mtype.ctype == "val*" then
+				self.add "{res} = {value1}->classid == {self.compiler.classid(value2.mtype.as(MClassType))};"
+			else if value1.mcasttype == value2.mcasttype then
+				self.add "{res} = 1;"
+			else
+				self.add "{res} = 0;"
+			end
+		end
+		return res
+	end
+
+	# Return a "const char*" variable associated to the classname of the dynamic type of an object
+	# NOTE: we do not return a RuntimeVariable "NativeString" as the class may not exist in the module/program
+	fun class_name_string(value: RuntimeVariable): String
+	do
+		var res = self.get_name("var_class_name")
+		self.add_decl("const char* {res};")
+		if value.mtype.ctype == "val*" then
+			self.add "{res} = class_names[{value}->classid];"
+		else
+			self.add "{res} = class_names[{self.compiler.classid(value.mtype.as(MClassType))}];"
+		end
+		return res
+	end
+
 	# Generate a Nit "is" for two runtime_variables
 	fun equal_test(value1, value2: RuntimeVariable): RuntimeVariable
 	do
@@ -1470,7 +1515,7 @@ private class GlobalCompilerVisitor
 end
 
 # A frame correspond to a visited property in a GlobalCompilerVisitor
-private class Frame
+class Frame
 	# The associated visitor
 
 	var visitor: GlobalCompilerVisitor
@@ -1486,10 +1531,10 @@ private class Frame
 	var arguments: Array[RuntimeVariable]
 
 	# The runtime_variable associated to the return (in a function)
-	var returnvar: nullable RuntimeVariable = null
+	var returnvar: nullable RuntimeVariable writable = null
 
 	# The label at the end of the property
-	var returnlabel: nullable String = null
+	var returnlabel: nullable String writable = null
 end
 
 redef class MPropDef
@@ -1508,7 +1553,7 @@ end
 
 redef class MMethodDef
 	# Can the body be inlined?
-	private fun can_inline(v: GlobalCompilerVisitor): Bool
+	fun can_inline(v: GlobalCompilerVisitor): Bool
 	do
 		var modelbuilder = v.compiler.modelbuilder
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
@@ -1523,7 +1568,7 @@ redef class MMethodDef
 	end
 
 	# Inline the body in another visitor
-	private fun compile_inside_to_c(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
+	fun compile_inside_to_c(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		var modelbuilder = v.compiler.modelbuilder
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
@@ -1540,13 +1585,13 @@ redef class MMethodDef
 end
 
 redef class APropdef
-	private fun compile_to_c(v: GlobalCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
+	fun compile_to_c(v: GlobalCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
 		debug("Not yet implemented")
 	end
 
-	private fun can_inline: Bool do return true
+	fun can_inline: Bool do return true
 end
 
 redef class AConcreteMethPropdef
@@ -1664,6 +1709,12 @@ redef class AInternMethPropdef
 				return
 			else if pname == "object_id" then
 				v.ret(arguments.first)
+				return
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
 				return
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
@@ -1818,32 +1869,22 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("(char*)GC_MALLOC({arguments[1]})", ret.as(not null)))
 			return
 		else if pname == "calloc_array" then
-			var elttype = arguments.first.mtype.supertype_to(v.compiler.mainmodule,arguments.first.mtype.as(MClassType),v.get_class("ArrayCapable")).as(MGenericType).arguments.first
+			var elttype = arguments.first.mtype.supertype_to(v.compiler.mainmodule,arguments.first.mtype.as(MClassType),v.get_class("ArrayCapable")).arguments.first
 			v.ret(v.new_expr("({elttype.ctype}*)GC_MALLOC({arguments[1]} * sizeof({elttype.ctype}))", ret.as(not null)))
 			return
 		else if pname == "object_id" then
 			v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 			return
 		else if pname == "is_same_type" then
-			if arguments[0].mtype.ctype == "val*" then
-				v.ret(v.new_expr("{arguments[0]}->classid == {arguments[1]}->classid", ret.as(not null)))
-			else
-				v.ret(v.new_expr("{v.compiler.classid(arguments[0].mtype.as(MClassType))} == {arguments[1]}->classid", ret.as(not null)))
-			end
+			v.ret(v.is_same_type_test(arguments[0], arguments[1]))
 			return
 		else if pname == "output_class_name" then
-			if arguments[0].mtype.ctype == "val*" then
-				v.add("printf(\"%s\\n\", class_names[{arguments.first}->classid]);")
-			else
-				v.add("printf(\"%s\\n\", class_names[{v.compiler.classid(arguments.first.mtype.as(MClassType))}]);")
-			end
+			var nat = v.class_name_string(arguments.first)
+			v.add("printf(\"%s\\n\", {nat});")
 			return
 		else if pname == "native_class_name" then
-			if arguments[0].mtype.ctype == "val*" then
-				v.ret(v.new_expr("(char*)(void*)class_names[{arguments.first}->classid]", ret.as(not null)))
-			else
-				v.ret(v.new_expr("(char*)(void*)class_names[{v.compiler.classid(arguments.first.mtype.as(MClassType))}]", ret.as(not null)))
-			end
+			var nat = v.class_name_string(arguments.first)
+			v.ret(v.new_expr("(char*){nat}", ret.as(not null)))
 			return
 		end
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
@@ -1916,7 +1957,7 @@ redef class AAttrPropdef
 		end
 	end
 
-	private fun init_expr(v: GlobalCompilerVisitor, recv: RuntimeVariable)
+	fun init_expr(v: GlobalCompilerVisitor, recv: RuntimeVariable)
 	do
 		var nexpr = self.n_expr
 		if nexpr != null then
@@ -2281,7 +2322,7 @@ end
 redef class AArrayExpr
 	redef fun expr(v)
 	do
-		var mtype = self.mtype.as(MGenericType).arguments.first
+		var mtype = self.mtype.as(MClassType).arguments.first
 		var array = new Array[RuntimeVariable]
 		for nexpr in self.n_exprs.n_exprs do
 			var i = v.expr(nexpr, mtype)

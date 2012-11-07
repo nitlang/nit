@@ -123,7 +123,7 @@ function process_result()
 		else
 			echo "[todo] out/$pattern.res -> not yet implemented"
 		fi
-		ok="$ok $pattern"
+		todos="$todos $pattern"
 	elif [ -n "$SOSOF" ]; then
 		if [ -n "$tap" ]; then
 			echo "not ok - $description # TODO SOSO expected failure"
@@ -250,6 +250,7 @@ fi
 
 ok=""
 nok=""
+todos=""
 
 # CLEAN the out directory
 rm -rf out/ 2>/dev/null
@@ -384,10 +385,11 @@ if [ -n "$tap" ]; then
 	echo "# ok:" `echo $ok | wc -w`
 	echo "# not ok:" `echo $nok | wc -w`
 	echo "# no sav:" `echo $nos | wc -w`
+	echo "# todos:" `echo $todos | wc -w`
 	exit
 fi
 
-echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos | wc -w`
+echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos $todos | wc -w`
 
 if [ -n "$nok" ]; then
 	echo "fail: $nok"
@@ -395,6 +397,9 @@ if [ -n "$nok" ]; then
 fi
 if [ -n "$nos" ]; then
 	echo "no sav: $nos"
+fi
+if [ -n "$todos" ]; then
+	echo "todos: $todos"
 fi
 
 # write $ERRLIST

@@ -419,9 +419,9 @@ end
 redef class AArrayExpr
 	redef fun accept_rapid_type_vistor(v)
 	do
-		var mtype = self.mtype.as(not null)
+		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var native = v.get_class("NativeArray").get_mtype([mtype.as(MGenericType).arguments.first])
+		var native = v.get_class("NativeArray").get_mtype([mtype.arguments.first])
 		v.add_type(native)
 		var prop = v.get_method(mtype, "with_native")
 		v.add_monomorphic_send(mtype, prop)

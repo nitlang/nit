@@ -722,7 +722,7 @@ redef class ALoopExpr
 end
 
 redef class AForExpr
-	var coltype: nullable MGenericType
+	var coltype: nullable MClassType
 
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
@@ -732,7 +732,6 @@ redef class AForExpr
 		var colcla = v.try_get_mclass(self, "Collection")
 		if colcla != null and v.is_subtype(mtype, colcla.get_mtype([objcla.mclass_type.as_nullable])) then
 			var coltype = mtype.supertype_to(v.mmodule, v.anchor, colcla)
-			assert coltype isa MGenericType
 			self.coltype = coltype
 			var variables =  self.variables
 			if variables.length != 1 then
@@ -746,7 +745,6 @@ redef class AForExpr
 		var mapcla = v.try_get_mclass(self, "Map")
 		if mapcla != null and v.is_subtype(mtype, mapcla.get_mtype([objcla.mclass_type.as_nullable, objcla.mclass_type.as_nullable])) then
 			var coltype = mtype.supertype_to(v.mmodule, v.anchor, mapcla)
-			assert coltype isa MGenericType
 			self.coltype = coltype
 			var variables = self.variables
 			if variables.length != 2 then

@@ -16,7 +16,7 @@
 #include <poll.h>
 #include <errno.h>
 
-int stream_FDStream_FDStream_native_read_char_1(FDStream s, int fd) {
+int stream_FDStream_FDStream_native_read_char_1(void *s, int fd) {
 	int result;
 	char buf;
 	ssize_t r = read(fd, &buf, 1);
@@ -26,12 +26,11 @@ int stream_FDStream_FDStream_native_read_char_1(FDStream s, int fd) {
 		result = buf;
 	return result;
 }
-
+#ifndef NONITCNI
 void stream_FDStream_FDStream_write_char_1(FDStream s, int fd, int c) {
 	write(fd, &c, 1);
 }
 
-#ifndef NONITCNI
 /*
 C implementation of stream::Object::intern_poll
 

@@ -15,8 +15,9 @@
 # Separate compilation of a Nit program
 module separate_compiler
 
-intrude import global_compiler # TODO better separation of concerns
 
+import global_compiler # TODO better separation of concerns
+intrude import vft_computation
 redef class ToolContext
 	# --separate
 	var opt_separate: OptionBool = new OptionBool("Use separate compilation", "--separate")
@@ -33,6 +34,7 @@ redef class ModelBuilder
 	do
 		# Hijack the run_global_compiler to run the separate one if requested.
 		if self.toolcontext.opt_separate.value then
+			build_vft(mainmodule)
 			run_separate_compiler(mainmodule, runtime_type_analysis)
 		else
 			super
@@ -41,14 +43,29 @@ redef class ModelBuilder
 
 	fun run_separate_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
 	do
+		var time0 = get_time
+		self.toolcontext.info("*** COMPILING TO C ***", 1)
+
 		var compiler = new SeparateCompiler(mainmodule, runtime_type_analysis, self)
 		var v = new SeparateCompilerVisitor(compiler)
 		compiler.header = v
 		v.add_decl("#include <stdlib.h>")
 		v.add_decl("#include <stdio.h>")
 		v.add_decl("#include <string.h>")
+		v.add_decl("#include <gc/gc.h>")
+		v.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
+		v.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
+		v.add_decl("struct class \{ nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
+		v.add_decl("typedef struct \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 
-		v.add_decl("typedef struct \{ void (**vft)(void); \} val; /* general C type representing a Nit instance. */")
+		# Class names (for the class_name and output_class_name methods)
+
+		v.add_decl("extern const char const * class_names[];")
+		v.add("const char const * class_names[] = \{")
+		for t in runtime_type_analysis.live_types do
+			v.add("\"{t}\",")
+		end
+		v.add("\};")
 
 		# The main function of the C
 
@@ -94,9 +111,13 @@ class SeparateCompiler
 		for cd in mmodule.mclassdefs do
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
-				print "compile {pd} @ {cd} @ {mmodule}"
+				#print "compile {pd} @ {cd} @ {mmodule}"
 				var r = new SeparateRuntimeFunction(pd)
 				r.compile_to_c(self)
+				if cd.bound_mtype.ctype != "val*" then
+					var r2 = new VirtualRuntimeFunction(pd)
+					r2.compile_to_c(self)
+				end
 			end
 		end
 	end
@@ -107,7 +128,7 @@ class SeparateCompiler
 	fun compile_class_to_c(mclass: MClass)
 	do
 		var mtype = mclass.mclassdefs.first.bound_mtype
-		var c_name = mclass.name
+		var c_name = mclass.mclass_type.c_name
 
 		var v = new SeparateCompilerVisitor(self)
 
@@ -115,16 +136,16 @@ class SeparateCompiler
 		var idnum = classids.length
 		var idname = "ID_" + c_name
 		self.classids[mtype] = idname
-		v.add_decl("#define {idname} {idnum} /* {mtype} */")
+		self.header.add_decl("#define {idname} {idnum} /* {mtype} */")
 
-		v.add_decl("struct {c_name} \{")
-		v.add_decl("void (**vft)(void); /* must be ??? */")
+		self.header.add_decl("struct class_{c_name} \{")
+		self.header.add_decl("nitmethod_t vft[{mclass.vft.length}];")
 
 		if mtype.ctype != "val*" then
 			# Is the Nit type is native then the struct is a box with two fields:
 			# * the `vft` to be polymorph
 			# * the `value` that contains the native value.
-			v.add_decl("{mtype.ctype} value;")
+			self.header.add_decl("{mtype.ctype} value;")
 		end
 
 		# Collect all attributes and associate them a field in the structure.
@@ -134,20 +155,62 @@ class SeparateCompiler
 				if not p isa MAttribute then continue
 				var t = p.intro.static_mtype.as(not null)
 				t = t.anchor_to(self.mainmodule, mtype)
-				v.add_decl("{t.ctype} {p.intro.c_name}; /* {p}: {t} */")
+				self.header.add_decl("{t.ctype} {p.intro.c_name}; /* {p}: {t} */")
 			end
 		end
+		self.header.add_decl("\};")
+
+		# Build class vft
+		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
+		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
+		v.add_decl("\{")
+		for i in [0 .. mclass.vft.length[ do
+			var mpropdef = mclass.vft[i]
+			if mpropdef == null then
+				v.add_decl("NULL, /* empty */")
+			else
+				if mpropdef.mclassdef.bound_mtype.ctype != "val*" then
+					v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+				else
+					v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+				end
+			end
+		end
+		v.add_decl("\}")
 		v.add_decl("\};")
 
-		if mtype.ctype != "val*" then return
+		if mtype.ctype != "val*" then
+			#Build instance struct
+			self.header.add_decl("struct instance_{c_name} \{")
+			self.header.add_decl("const struct class_{c_name} *class;")
+			self.header.add_decl("{mtype.ctype} value;")
+			self.header.add_decl("\};")
+
+			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
+			v.add("struct instance_{c_name}*res = GC_MALLOC(sizeof(struct instance_{c_name}));")
+			v.add("res->class = &class_{c_name};")
+			v.add("res->value = value;")
+			v.add("return (val*)res;")
+			v.add("\}")
+			return
+		end
+
+		#Build instance struct
+		v.add_decl("struct instance_{c_name} \{")
+		v.add_decl("const struct class_{c_name} *class;")
+		v.add_decl("nitattribute_t attrs[{mclass.attrs.length}];")
+		v.add_decl("\};")
+
 
 		self.header.add_decl("{mtype.ctype} NEW_{c_name}(void);")
 		v.add_decl("/* allocate {mtype} */")
 		v.add_decl("{mtype.ctype} NEW_{c_name}(void) \{")
 		var res = v.new_var(mtype)
 		res.is_exact = true
-		v.add("{res} = calloc(sizeof(struct {c_name}), 1);")
-		v.add("{res}->vft = NULL;") #TODO
+		v.add("{res} = calloc(sizeof(struct instance_{c_name}), 1);")
+		v.add("{res}->class = (struct class*) &class_{c_name};")
 
 		for cd in mtype.collect_mclassdefs(self.mainmodule)
 		do
@@ -165,19 +228,12 @@ end
 
 # The C function associated to a methoddef separately compiled
 class SeparateRuntimeFunction
-	super RuntimeFunction
+	super AbstractRuntimeFunction
 
-	# The mangled c name of the runtime_function
-	redef fun c_name: String
+	redef fun build_c_name: String
 	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = mmethoddef.c_name
-		self.c_name_cache = res
-		return res
+		return "{mmethoddef.c_name}"
 	end
-
-	private var c_name_cache: nullable String = null
 
 	redef fun to_s do return self.mmethoddef.to_s
 
@@ -205,7 +261,7 @@ class SeparateRuntimeFunction
 			sig.append("void ")
 		end
 		sig.append(self.c_name)
-		sig.append("({recv.ctype} self")
+		sig.append("({selfvar.mtype.ctype} self")
 		comment.append("(self: {recv}")
 		arguments.add(selfvar)
 		for i in [0..mmethoddef.msignature.arity[ do
@@ -234,7 +290,84 @@ class SeparateRuntimeFunction
 		frame.returnlabel = v.get_name("RET_LABEL")
 
 		if recv != arguments.first.mtype then
-			print "{self} {recv} {arguments.first}"
+			#print "{self} {recv} {arguments.first}"
+		end
+		mmethoddef.compile_inside_to_c(v, arguments)
+
+		v.add("{frame.returnlabel.as(not null)}:;")
+		if ret != null then
+			v.add("return {frame.returnvar.as(not null)};")
+		end
+		v.add("\}")
+	end
+end
+
+# The C function associated to a methoddef on a primitive type, stored into a VFT of a class
+# The first parameter (the reciever) is always typed by val* in order to accept an object value
+class VirtualRuntimeFunction
+	super AbstractRuntimeFunction
+
+	redef fun build_c_name: String
+	do
+		return "VIRTUAL_{mmethoddef.c_name}"
+	end
+
+	redef fun to_s do return self.mmethoddef.to_s
+
+	redef fun compile_to_c(compiler)
+	do
+		var mmethoddef = self.mmethoddef
+
+		var recv = self.mmethoddef.mclassdef.bound_mtype
+		var v = new SeparateCompilerVisitor(compiler)
+		var selfvar = new RuntimeVariable("self", v.object_type, recv)
+		var arguments = new Array[RuntimeVariable]
+		var frame = new Frame(v, mmethoddef, recv, arguments)
+		v.frame = frame
+
+		var sig = new Buffer
+		var comment = new Buffer
+		var ret = mmethoddef.msignature.return_mtype
+		if ret != null then
+			ret = v.resolve_for(ret, selfvar)
+			sig.append("{ret.ctype} ")
+		else if mmethoddef.mproperty.is_new then
+			ret = recv
+			sig.append("{ret.ctype} ")
+		else
+			sig.append("void ")
+		end
+		sig.append(self.c_name)
+		sig.append("({selfvar.mtype.ctype} self")
+		comment.append("(self: {recv}")
+		arguments.add(selfvar)
+		for i in [0..mmethoddef.msignature.arity[ do
+			var mtype = mmethoddef.msignature.mparameters[i].mtype
+			if i == mmethoddef.msignature.vararg_rank then
+				mtype = v.get_class("Array").get_mtype([mtype])
+			end
+			mtype = v.resolve_for(mtype, selfvar)
+			comment.append(", {mtype}")
+			sig.append(", {mtype.ctype} p{i}")
+			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
+			arguments.add(argvar)
+		end
+		sig.append(")")
+		comment.append(")")
+		if ret != null then
+			comment.append(": {ret}")
+		end
+		compiler.header.add_decl("{sig};")
+
+		v.add_decl("/* method {self} for {comment} */")
+		v.add_decl("{sig} \{")
+		if ret != null then
+			frame.returnvar = v.new_var(ret)
+		end
+		frame.returnlabel = v.get_name("RET_LABEL")
+
+		if recv != arguments.first.mtype then
+			#print "{self} {recv} {arguments.first}"
 		end
 		mmethoddef.compile_inside_to_c(v, arguments)
 
@@ -256,10 +389,47 @@ end
 class SeparateCompilerVisitor
 	super GlobalCompilerVisitor # TODO better separation of concerns
 
-	redef fun autobox(value, mtype)
+	redef fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable])
 	do
-		# TODO?
-		return value
+		var recv = args.first
+		if recv.mtype.ctype != m.mclassdef.mclass.mclass_type.ctype then
+			args.first = self.autobox(args.first, m.mclassdef.mclass.mclass_type)
+		end
+		for i in [0..m.msignature.arity[ do
+			var t = m.msignature.mparameters[i].mtype
+			if i == m.msignature.vararg_rank then
+				t = args[i+1].mtype
+			end
+			t = self.resolve_for(t, recv)
+			args[i+1] = self.autobox(args[i+1], t)
+		end
+	end
+
+	# Box or unbox a value to another type iff a C type conversion is needed
+	# ENSURE: result.mtype.ctype == mtype.ctype
+	redef fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable
+	do
+		if value.mtype.ctype == mtype.ctype then
+			return value
+		else if value.mtype.ctype == "val*" then
+			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
+		else if mtype.ctype == "val*" then
+			var valtype = value.mtype.as(MClassType)
+			var res = self.new_var(mtype)
+			if not compiler.runtime_type_analysis.live_types.has(valtype) then
+				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
+				self.add("printf(\"Dead code executed!\\n\"); exit(1);")
+				return res
+			end
+			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
+			return res
+		else
+			# Bad things will appen!
+			var res = self.new_var(mtype)
+			self.add("/* {res} left unintialized (cannot convert {value.mtype} to {mtype}) */")
+			self.add("printf(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); exit(1);")
+			return res
+		end
 	end
 
 	redef fun send(mmethod, arguments)
@@ -268,7 +438,6 @@ class SeparateCompilerVisitor
 			assert arguments.first.mtype == arguments.first.mcasttype
 			return self.monomorphic_send(mmethod, arguments.first.mtype, arguments)
 		end
-
 
 		var res: nullable RuntimeVariable
 		var ret = mmethod.intro.msignature.return_mtype
@@ -284,19 +453,22 @@ class SeparateCompilerVisitor
 
 		var s = new Buffer
 		var ss = new Buffer
+		var first = true
 		for a in arguments do
-			if a != arguments.first then
+			if not first then
 				s.append(", ")
 				ss.append(", ")
+			else
+				first = false
 			end
 			s.append("{a.mtype.ctype}")
 			ss.append("{a}")
 		end
 
-		var color = 1 # TODO
+		var color = mmethod.color.as(not null)
 		var r
 		if ret == null then r = "void" else r = ret.ctype
-		var call = "(({r} (*)({s}))({arguments.first}->vft[{color}]))({ss})"
+		var call = "(({r} (*)({s}))({arguments.first}->class->vft[{color}]))({ss})"
 
 		if res != null then
 			self.add("{res} = {call};")
@@ -321,11 +493,14 @@ class SeparateCompilerVisitor
 			res = self.new_var(ret)
 		end
 
+		# Autobox arguments
+		self.adapt_signature(mmethoddef, arguments)
+
 		if res == null then
-			self.add("{mmethoddef.c_name}({arguments.join(",")});")
+			self.add("{mmethoddef.c_name}({arguments.join(", ")});")
 			return null
 		else
-			self.add("{res} = {mmethoddef.c_name}({arguments.join(",")});")
+			self.add("{res} = {mmethoddef.c_name}({arguments.join(", ")});")
 		end
 
 		return res
@@ -333,22 +508,33 @@ class SeparateCompilerVisitor
 
 	redef fun read_attribute(a, recv)
 	do
+		# FIXME: Here we inconditionally return boxed primitive attributes
 		var ret = a.intro.static_mtype.as(not null)
 		ret = self.resolve_for(ret, recv)
-		var res = self.new_var(ret)
-		# TODO
+		var cret = self.object_type.as_nullable
+		var res = self.new_var(cret)
+		res.mcasttype = ret
+		self.add("{res} = (val*) {recv}->attrs[{a.color.as(not null)}];")
+		if not ret isa MNullableType then
+			self.add("if ({res} == NULL) \{")
+			self.add_abort("Uninitialized attribute {a.name}")
+			self.add("\}")
+		end
+
 		return res
 	end
 
 	redef fun write_attribute(a, recv, value)
 	do
-		# TODO
+		# FIXME: Here we inconditionally box primitive attributes
+		value = self.autobox(value, self.object_type.as_nullable)
+		self.add("{recv}->attrs[{a.color.as(not null)}] = {value};")
 	end
 
 	redef fun init_instance(mtype)
 	do
 		mtype = self.anchor(mtype).as(MClassType)
-		var res = self.new_expr("NEW_{mtype.mclass.name}()", mtype)
+		var res = self.new_expr("NEW_{mtype.c_name}()", mtype)
 		return res
 	end
 
@@ -356,13 +542,50 @@ class SeparateCompilerVisitor
 	do
 		var res = self.new_var(bool_type)
 		# TODO
+		add("printf(\"NOT YET IMPLEMENTED: type_test(%s,%s).\\n\", \"{value.inspect}\", \"{mtype}\"); exit(1);")
+		return res
+	end
+
+	redef fun is_same_type_test(value1, value2)
+	do
+		var res = self.new_var(bool_type)
+		# TODO
+		add("printf(\"NOT YET IMPLEMENTED: is_same_type(%s,%s).\\n\", \"{value1.inspect}\", \"{value2.inspect}\"); exit(1);")
+		return res
+	end
+
+	redef fun class_name_string(value1)
+	do
+		var res = self.get_name("var_class_name")
+		self.add_decl("const char* {res};")
+		# TODO
+		add("printf(\"NOT YET IMPLEMENTED: class_name_string(%s).\\n\", \"{value1.inspect}\"); exit(1);")
 		return res
 	end
 
 	redef fun equal_test(value1, value2)
 	do
 		var res = self.new_var(bool_type)
-		# TODO
+		if value2.mtype.ctype != "val*" and value1.mtype.ctype == "val*" then
+			var tmp = value1
+			value1 = value2
+			value2 = tmp
+		end
+		if value1.mtype.ctype != "val*" then
+			if value2.mtype.ctype == value1.mtype.ctype then
+				self.add("{res} = {value1} == {value2};")
+			else if value2.mtype.ctype != "val*" then
+				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
+			else
+				var mtype1 = value1.mtype.as(MClassType)
+				self.add("{res} = ({value2} != NULL) && ({value2}->class == (struct class*) &class_{mtype1.c_name});")
+				self.add("if ({res}) \{")
+				self.add("{res} = ({self.autobox(value2, value1.mtype)} == {value1});")
+				self.add("\}")
+			end
+		else
+			self.add("{res} = {value1} == {value2};")
+		end
 		return res
 	end
 end

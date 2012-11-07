@@ -2049,7 +2049,10 @@ abstract class ATypeCheckExpr
 		if etype == ttype then
 			v.warning(self, "Warning: Expression is already a {ttype}.")
 		else if etype < ttype then
-			v.warning(self, "Warning: Expression is already a {ttype} since it is a {etype}.")
+			if not ttype isa MMTypeFormal then
+				# the old metamodel is not that great with formal types
+				v.warning(self, "Warning: Expression is already a {ttype} since it is a {etype}.")
+			end
 		else if etype isa MMTypeNone then
 			# ttype is not nullable because of prevous test
 			v.warning(self, "Warning: Expression is null therefore cannot be a {ttype}.")

@@ -523,7 +523,7 @@ class ModelBuilder
 					bounds.add(objectclass.mclass_type.as_nullable)
 				else
 					# Inherit the bound
-					bounds.add(mclass.mclassdefs.first.bound_mtype.as(MGenericType).arguments[i])
+					bounds.add(mclass.mclassdefs.first.bound_mtype.arguments[i])
 				end
 			end
 		end
@@ -540,8 +540,8 @@ class ModelBuilder
 		end
 	end
 
-	# Visit the AST and set the super-types of the MClass objects (ie compute the inheritance)
-	private fun build_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
+	# Visit the AST and set the super-types of the MClassdef objects
+	private fun collect_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule.as(not null)
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
@@ -611,7 +611,13 @@ class ModelBuilder
 
 		# Create inheritance on all classdefs
 		for nclassdef in nmodule.n_classdefs do
-			self.build_a_mclassdef_inheritance(nmodule, nclassdef)
+			self.collect_a_mclassdef_inheritance(nmodule, nclassdef)
+		end
+
+		# Create the mclassdef hierarchy
+		for nclassdef in nmodule.n_classdefs do
+			var mclassdef = nclassdef.mclassdef.as(not null)
+			mclassdef.add_in_hierarchy
 		end
 
 		# TODO: Check that the super-class is not intrusive
@@ -780,7 +786,7 @@ class ModelBuilder
 			end
 			for i in [0..mclassdef.parameter_names.length[ do
 				if mclassdef.parameter_names[i] == name then
-					res = mclassdef.mclass.mclass_type.as(MGenericType).arguments[i]
+					res = mclassdef.mclass.mclass_type.arguments[i]
 					if ntype.n_kwnullable != null then res = res.as_nullable
 					return res
 				end
