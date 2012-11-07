@@ -58,8 +58,8 @@ redef class ModelBuilder
 		# Class abstract representation
 		v.add_decl("struct class \{ nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 		# Type abstract representation
-		v.add_decl("struct fts_table \{ int fts[1]; \}; /* fts list of a C type representation. */")
-		v.add_decl("struct type \{ int tid; int color; struct fts_table *fts_table; int type_table[1]; \}; /* general C type representing a Nit type. */")
+		v.add_decl("struct type \{ int id; int color; struct fts_table *fts_table; int type_table[1]; \}; /* general C type representing a Nit type. */")
+		v.add_decl("struct fts_table \{ struct type *fts[1]; \}; /* fts list of a C type representation. */")
 		# Instance abstract representation
 		v.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 
@@ -101,8 +101,12 @@ redef class ModelBuilder
 			end
 		end
 
-		# compile live type structures
-		for t in runtime_type_analysis.live_types do
+		# compile live & cast type structures
+		var mtypes = new HashSet[MClassType]
+		mtypes.add_all(runtime_type_analysis.live_types)
+		mtypes.add_all(runtime_type_analysis.live_cast_types)
+
+		for t in mtypes do
 			compiler.compile_type_to_c(t)
 		end
 
@@ -144,11 +148,6 @@ class SeparateCompiler
 		var type_coloring = new TypeColoring(mainmodule, runtime_type_analysis)
 		self.type_colors = type_coloring.colorize(mtypes)
 		self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
-
-		print "types colors: "
-		for k, v in type_colors do
-			print "{k}:{v}"
-		end
 
 		# classes coloration
 		var class_coloring = new ClassColoring(mainmodule)
@@ -197,8 +196,8 @@ class SeparateCompiler
 		# extern const struct type_X
 		self.header.add_decl("extern const struct type_{c_name} type_{c_name};")
 		self.header.add_decl("struct type_{c_name} \{")
-		self.header.add_decl("int tid;")
-		self.header.add_decl("int tcolor;")
+		self.header.add_decl("int id;")
+		self.header.add_decl("int color;")
 		self.header.add_decl("const struct fts_table_{c_name} *fts_table;")
 		self.header.add_decl("int type_table[{self.type_tables[mtype].length}];")
 		self.header.add_decl("\};")
@@ -206,7 +205,7 @@ class SeparateCompiler
 		# extern const struct fst_table_X fst_table_X
 		self.header.add_decl("extern const struct fts_table_{c_name} fts_table_{c_name};")
 		self.header.add_decl("struct fts_table_{c_name} \{")
-		self.header.add_decl("int fts[{self.ft_tables[mtype.mclass].length}];")
+		self.header.add_decl("struct type *fts[{self.ft_tables[mtype.mclass].length}];")
 		self.header.add_decl("\};")
 
 		# const struct type_X
@@ -230,24 +229,24 @@ class SeparateCompiler
 		v.add_decl("\{")
 
 		if mtype isa MGenericType then
-			print "-- for type {mtype}"
 			for ft in self.ft_tables[mtype.mclass] do
 				if ft == null then
-					print "-- ft:null"
-					v.add_decl("-1, /* empty */")
+					v.add_decl("NULL, /* empty */")
 				else
-					print "-- ft:{ft}"
 					var id = -1
 					var ftype: MClassType
 					if ft.mclass == mtype.mclass then
-						ftype = mtype.arguments[ft.rank].as(MClassType)
+						var ntype = mtype.arguments[ft.rank]
+						if ntype isa MNullableType then ntype = ntype.mtype
+						ftype = ntype.as(MClassType)
 					else
 						ftype = ft.anchor_to(self.mainmodule, mtype).as(MClassType)
 					end
 					if self.typeids.has_key(ftype) then
-						id = self.typeids[ftype]
+						v.add_decl("(struct type*)&type_{ftype.c_name}, /* {ft} ({ftype}) */")
+					else
+						v.add_decl("NULL, /* empty ({ft} not a live type) */")
 					end
-					v.add_decl("{id}, /* {ft} ({ftype}) */")
 				end
 			end
 		end
@@ -688,14 +687,12 @@ class SeparateCompilerVisitor
 		var compiler = self.compiler.as(SeparateCompiler)
 		var res = self.new_var(bool_type)
 
+		if mtype isa MNullableType then mtype = mtype.mtype
 		if mtype isa MClassType then
-			var color = compiler.type_colors[mtype]
-			var id = compiler.typeids[mtype]
-			self.add("{res} = {value}->type->type_table[{color}] == {id};")
+			self.add("{res} = {value}->type->type_table[type_{mtype.c_name}.color] == type_{mtype.c_name}.id;")
 		else if mtype isa MParameterType then
 			var ftcolor = compiler.ft_colors[mtype]
-			#TODO
-			self.add("{res} = {value}->type->type_table[{ftcolor}] == self->type->fts_table->fts[{ftcolor}];")
+			self.add("{res} = {value}->type->type_table[self->type->fts_table->fts[{ftcolor}]->color] == self->type->fts_table->fts[{ftcolor}]->id;")
 		end
 
 		return res
