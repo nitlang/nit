@@ -381,6 +381,7 @@ class ModelBuilder
 	private fun build_module_importation(nmodule: AModule)
 	do
 		if nmodule.is_importation_done then return
+		nmodule.is_importation_done = true
 		var mmodule = nmodule.mmodule.as(not null)
 		var stdimport = true
 		var imported_modules = new Array[MModule]
@@ -406,7 +407,6 @@ class ModelBuilder
 		end
 		self.toolcontext.info("{mmodule} imports {imported_modules.join(", ")}", 3)
 		mmodule.set_imported_mmodules(imported_modules)
-		nmodule.is_importation_done = true
 	end
 
 	# All the loaded modules
@@ -578,8 +578,10 @@ class ModelBuilder
 	do
 		# Force building recursively
 		if nmodule.build_classes_is_done then return
+		nmodule.build_classes_is_done = true
 		var mmodule = nmodule.mmodule.as(not null)
 		for imp in mmodule.in_importation.direct_greaters do
+
 			build_classes(mmodule2nmodule[imp])
 		end
 
@@ -615,8 +617,6 @@ class ModelBuilder
 		for nclassdef in nmodule.n_classdefs do
 			self.build_properties(nclassdef)
 		end
-
-		nmodule.build_classes_is_done = true
 	end
 
 	# Register the nmodule associated to each mmodule
@@ -635,6 +635,7 @@ class ModelBuilder
 	do
 		# Force building recursively
 		if nclassdef.build_properties_is_done then return
+		nclassdef.build_properties_is_done = true
 		var mclassdef = nclassdef.mclassdef.as(not null)
 		if mclassdef.in_hierarchy == null then return # Skip error
 		for superclassdef in mclassdef.in_hierarchy.direct_greaters do
@@ -651,7 +652,6 @@ class ModelBuilder
 			npropdef.check_signature(self, nclassdef)
 		end
 		process_default_constructors(nclassdef)
-		nclassdef.build_properties_is_done = true
 	end
 
 	# Introduce or inherit default constructor
