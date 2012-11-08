@@ -17,7 +17,7 @@ module coloring
 
 import rapid_type_analysis # for type coloration
 
-abstract class AbstractColoring[E]
+abstract class AbstractColoring[E: Object]
 
 	private var sorter: AbstractSorter[E]
 	private var reverse_sorter: AbstractSorter[E]
