@@ -458,6 +458,9 @@ class ModelBuilder
 		if mclass == null then
 			mclass = new MClass(mmodule, name, arity, mkind, mvisibility)
 			#print "new class {mclass}"
+		else if nclassdef isa AStdClassdef and nmodule.mclass2nclassdef.has_key(mclass) then
+			error(nclassdef, "Error: A class {name} is already defined at line {nmodule.mclass2nclassdef[mclass].location.line_start}.")
+			return
 		else if nclassdef isa AStdClassdef and nclassdef.n_kwredef == null then
 			error(nclassdef, "Redef error: {name} is an imported class. Add the redef keyword to refine it.")
 			return
@@ -470,6 +473,7 @@ class ModelBuilder
 			error(nvisibility, "Error: refinement changed the visibility from a {mclass.visibility} to a {mvisibility}")
 		end
 		nclassdef.mclass = mclass
+		nmodule.mclass2nclassdef[mclass] = nclassdef
 	end
 
 	# Visit the AST and create the MClassDef objects
@@ -850,6 +854,10 @@ redef class AModule
 	var is_importation_done: Bool = false
 	# Flag that indicate if the class and prop building is already completed
 	var build_classes_is_done: Bool = false
+	# What is the AClassdef associated to a MClass?
+	# Used to check multiple definition of a class.
+	var mclass2nclassdef: Map[MClass, AClassdef] = new HashMap[MClass, AClassdef]
+
 end
 
 redef class MClass
