@@ -879,6 +879,10 @@ redef class AClassdef
 
 	# The free init (implicitely constructed by the class if required)
 	var mfree_init: nullable MMethodDef = null
+
+	# What is the APropdef associated to a MProperty?
+	# Used to check multiple definition of a property.
+	var mprop2npropdef: Map[MProperty, APropdef] = new HashMap[MProperty, APropdef]
 end
 
 redef class AClasskind
@@ -982,6 +986,10 @@ redef class APropdef
 
 	private fun check_redef_keyword(modelbuilder: ModelBuilder, nclassdef: AClassdef, kwredef: nullable Token, need_redef: Bool, mprop: MProperty): Bool
 	do
+		if nclassdef.mprop2npropdef.has_key(mprop) then
+			modelbuilder.error(self, "Error: A property {mprop} is already defined in class {nclassdef.mclassdef.mclass}.")
+			return false
+		end
 		if kwredef == null then
 			if need_redef then
 				modelbuilder.error(self, "Redef error: {nclassdef.mclassdef.mclass}::{mprop.name} is an inherited property. To redefine it, add the redef keyword.")
@@ -1128,6 +1136,7 @@ redef class AMethPropdef
 			end
 			check_redef_property_visibility(modelbuilder, nclassdef, self.n_visibility, mprop)
 		end
+		nclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
 
@@ -1310,6 +1319,8 @@ redef class AAttrPropdef
 				check_redef_property_visibility(modelbuilder, nclassdef, self.n_visibility, mprop)
 				if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, true, mprop) then return
 			end
+			nclassdef.mprop2npropdef[mprop] = self
+
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self
@@ -1326,6 +1337,8 @@ redef class AAttrPropdef
 					if not self.check_redef_keyword(modelbuilder, nclassdef, nreadable.n_kwredef, true, mreadprop) then return
 					check_redef_property_visibility(modelbuilder, nclassdef, nreadable.n_visibility, mreadprop)
 				end
+				nclassdef.mprop2npropdef[mreadprop] = self
+
 				var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 				self.mreadpropdef = mreadpropdef
 				modelbuilder.mpropdef2npropdef[mreadpropdef] = self
@@ -1343,6 +1356,8 @@ redef class AAttrPropdef
 					if not self.check_redef_keyword(modelbuilder, nclassdef, nwritable.n_kwredef, true, mwriteprop) then return
 					check_redef_property_visibility(modelbuilder, nclassdef, nwritable.n_visibility, mwriteprop)
 				end
+				nclassdef.mprop2npropdef[mwriteprop] = self
+
 				var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
 				self.mwritepropdef = mwritepropdef
 				modelbuilder.mpropdef2npropdef[mwritepropdef] = self
@@ -1365,6 +1380,8 @@ redef class AAttrPropdef
 				if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, true, mreadprop) then return
 				check_redef_property_visibility(modelbuilder, nclassdef, self.n_visibility, mreadprop)
 			end
+			nclassdef.mprop2npropdef[mreadprop] = self
+
 			var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 			self.mreadpropdef = mreadpropdef
 			modelbuilder.mpropdef2npropdef[mreadpropdef] = self
@@ -1389,6 +1406,8 @@ redef class AAttrPropdef
 					check_redef_property_visibility(modelbuilder, nclassdef, nwritable.n_visibility, mwriteprop)
 				end
 			end
+			nclassdef.mprop2npropdef[mwriteprop] = self
+
 			var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
 			self.mwritepropdef = mwritepropdef
 			modelbuilder.mpropdef2npropdef[mwritepropdef] = self
@@ -1564,6 +1583,8 @@ redef class ATypePropdef
 			assert mprop isa MVirtualTypeProp
 			check_redef_property_visibility(modelbuilder, nclassdef, self.n_visibility, mprop)
 		end
+		nclassdef.mprop2npropdef[mprop] = self
+
 		var mpropdef = new MVirtualTypeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
 	end
