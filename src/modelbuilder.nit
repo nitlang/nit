@@ -517,7 +517,7 @@ class ModelBuilder
 					bounds.add(objectclass.mclass_type.as_nullable)
 				else
 					# Inherit the bound
-					bounds.add(mclass.mclassdefs.first.bound_mtype.arguments[i])
+					bounds.add(mclass.intro.bound_mtype.arguments[i])
 				end
 			end
 		end

@@ -295,7 +295,7 @@ class MClass
 	# Warning: the introduction is the first `MClassDef' object associated
 	# to self.  If self is just created without having any associated
 	# definition, this method will abort
-	private fun intro: MClassDef
+	fun intro: MClassDef
 	do
 		assert has_a_first_definition: not mclassdefs.is_empty
 		return mclassdefs.first

@@ -116,7 +116,7 @@ do
 					if p.mpropdefs.length == 1 then
 						npas += 1
 					else
-						var sels = p.lookup_definitions(main, c.mclassdefs.first.bound_mtype)
+						var sels = p.lookup_definitions(main, c.intro.bound_mtype)
 						if sels.length > 1 then
 							print "conflict for {p.full_name} in class {c.full_name}: {sels.join(", ")}"
 						else if sels.is_empty then

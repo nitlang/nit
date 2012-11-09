@@ -260,7 +260,7 @@ class SeparateCompiler
 	# In a true separate compiler (a with dynamic loading) you cannot do this unfortnally
 	fun compile_class_to_c(mclass: MClass)
 	do
-		var mtype = mclass.mclassdefs.first.bound_mtype
+		var mtype = mclass.intro.bound_mtype
 		var c_name = mclass.mclass_type.c_name
 
 		var vft = self.method_tables[mclass]

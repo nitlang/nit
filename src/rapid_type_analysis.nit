@@ -573,7 +573,7 @@ redef class AForExpr
 		var colltype = self.coltype.as(not null)
 		var itmeth = v.get_method(colltype, "iterator")
 		v.add_send(recvtype, itmeth)
-		var iteratortype = itmeth.intro.msignature.return_mtype.as(MClassType).mclass.mclassdefs.first.bound_mtype
+		var iteratortype = itmeth.intro.msignature.return_mtype.as(MClassType).mclass.intro.bound_mtype
 		var objtype = v.get_class("Object").mclass_type
 		v.add_send(objtype, v.get_method(iteratortype, "is_ok"))
 		if self.variables.length == 1 then
