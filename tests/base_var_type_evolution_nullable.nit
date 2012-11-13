@@ -15,15 +15,15 @@
 import end
 
 class Object
-	fun ==(o: nullable Object): Bool is intern
-	fun !=(o: nullable Object): Bool is intern
+	fun ==(o: nullable Object): Bool do return self is o
+	fun !=(o: nullable Object): Bool do return not self == o
 end
-
 class A
 end
-
 class Bool
 	fun output is intern
+	redef fun ==(o: nullable Object): Bool is intern
+	redef fun !=(o: nullable Object): Bool is intern
 end
 
 fun test(a: nullable A)
