@@ -332,6 +332,11 @@ class GlobalCompiler
 		v.add_decl("struct {mtype.c_name} \{")
 		v.add_decl("int classid; /* must be {idname} */")
 
+		if mtype.mclass.name == "NativeArray" then
+			# NativeArrays are just a instance header followed by an array of values
+			v.add_decl("{mtype.arguments.first.ctype} values[1];")
+		end
+
 		if mtype.ctype != "val*" then
 			# Is the Nit type is native then the struct is a box with two fields:
 			# * the `classid` to be polymorph
@@ -359,12 +364,26 @@ class GlobalCompiler
 		assert mtype.ctype == "val*"
 		var v = new GlobalCompilerVisitor(self)
 
-		self.header.add_decl("{mtype.ctype} NEW_{mtype.c_name}(void);")
+		var is_native_array = mtype.mclass.name == "NativeArray"
+
+		var sig
+		if is_native_array then
+			sig = "int length"
+		else
+			sig = "void"
+		end
+
+		self.header.add_decl("{mtype.ctype} NEW_{mtype.c_name}({sig});")
 		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("{mtype.ctype} NEW_{mtype.c_name}(void) \{")
+		v.add_decl("{mtype.ctype} NEW_{mtype.c_name}({sig}) \{")
 		var res = v.new_var(mtype)
 		res.is_exact = true
-		v.add("{res} = GC_MALLOC(sizeof(struct {mtype.c_name}));")
+		if is_native_array then
+			var mtype_elt = mtype.arguments.first
+			v.add("{res} = GC_MALLOC(sizeof(struct {mtype.c_name}) + length*sizeof({mtype_elt.ctype}));")
+		else
+			v.add("{res} = GC_MALLOC(sizeof(struct {mtype.c_name}));")
+		end
 		v.add("{res}->classid = {self.classid(mtype)};")
 
 		for cd in mtype.collect_mclassdefs(self.mainmodule)
@@ -516,7 +535,8 @@ redef class MClassType
 		else if mclass.name == "NativeString" then
 			return "char*"
 		else if mclass.name == "NativeArray" then
-			return "{self.arguments.first.ctype}*"
+			#return "{self.arguments.first.ctype}*"
+			return "val*"
 		else if mclass.kind == extern_kind then
 			return "void*"
 		else
@@ -1530,10 +1550,10 @@ class GlobalCompilerVisitor
 		self.add("\{ /* {res} = array_instance Array[{elttype}] */")
 		var nat = self.new_var(self.get_class("NativeArray").get_mtype([elttype]))
 		nat.is_exact = true
-		self.add("{nat} = GC_MALLOC({array.length} * sizeof({elttype.ctype}));")
+		self.add("{nat} = NEW_{nat.mtype.c_name}({array.length});")
 		for i in [0..array.length[ do
 			var r = self.autobox(array[i], elttype)
-			self.add("{nat}[{i}] = {r};")
+			self.add("((struct {nat.mtype.c_name}*) {nat})->values[{i}] = {r};")
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
@@ -1917,14 +1937,20 @@ redef class AInternMethPropdef
 			end
 		else if cname == "NativeArray" then
 			var elttype = arguments.first.mtype
+			#assert arguments[0].is_exact
+			var recv = "((struct {arguments[0].mcasttype.c_name}*){arguments[0]})->values"
 			if pname == "[]" then
-				v.ret(v.new_expr("{arguments[0]}[{arguments[1]}]", ret.as(not null)))
+				v.ret(v.new_expr("{recv}[{arguments[1]}]", ret.as(not null)))
 				return
 			else if pname == "[]=" then
-				v.add("{arguments[0]}[{arguments[1]}]={arguments[2]};")
+				v.add("{recv}[{arguments[1]}]={arguments[2]};")
 				return
 			else if pname == "copy_to" then
-				v.add("memcpy({arguments[1]},{arguments[0]},{arguments[2]}*sizeof({elttype.ctype}));")
+				#assert arguments[1].is_exact
+				#assert arguments[1].mcasttype == arguments[0].mcasttype else print "copy {arguments[0].mcasttype} to {arguments[1].mcasttype} "
+				#assert arguments[1].mcasttype == arguments[0].mcasttype else print "copy {arguments[0].mcasttype} to {arguments[1].mcasttype} "
+				var recv1 = "((struct {arguments[1].mcasttype.c_name}*){arguments[1]})->values"
+				v.add("memcpy({recv1},{recv},{arguments[2]}*sizeof({elttype.ctype}));")
 				return
 			end
 		end
@@ -1938,8 +1964,9 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("(char*)GC_MALLOC({arguments[1]})", ret.as(not null)))
 			return
 		else if pname == "calloc_array" then
-			var elttype = arguments.first.mtype.supertype_to(v.compiler.mainmodule,arguments.first.mtype.as(MClassType),v.get_class("ArrayCapable")).arguments.first
-			v.ret(v.new_expr("({elttype.ctype}*)GC_MALLOC({arguments[1]} * sizeof({elttype.ctype}))", ret.as(not null)))
+			#var elttype = arguments.first.mtype.supertype_to(v.compiler.mainmodule,arguments.first.mtype.as(MClassType),v.get_class("ArrayCapable")).arguments.first
+
+			v.ret(v.new_expr("NEW_{ret.c_name}({arguments[1]})", ret.as(not null)))
 			return
 		else if pname == "object_id" then
 			v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
