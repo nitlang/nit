@@ -1259,6 +1259,48 @@ class GlobalCompilerVisitor
 		self.add("fprintf(stderr, \"BTD BUG: Dynamic type is %s, static type is %s\\n\", class_names[{recv}->classid], \"{recv.mcasttype}\");")
 	end
 
+	# Generate a polymorphic attribute is_set test
+	fun isset_attribute(a: MAttribute, recv: RuntimeVariable): RuntimeVariable
+	do
+		var types = self.collect_types(recv)
+
+		var res = self.new_var(bool_type)
+
+		if types.is_empty then
+			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
+			return res
+		end
+		self.add("/* isset {a} on {recv.inspect} */")
+		self.add("switch({recv}->classid) \{")
+		var last = types.last
+		for t in types do
+			if not self.compiler.hardening and t == last then
+				self.add("default: /*{self.compiler.classid(t)}*/")
+			else
+				self.add("case {self.compiler.classid(t)}:")
+			end
+			var recv2 = self.autoadapt(recv, t)
+			var ta = a.intro.static_mtype.as(not null)
+			ta = self.resolve_for(ta, recv2)
+			var attr = self.new_expr("((struct {t.c_name}*){recv})->{a.intro.c_name}", ta)
+			if not ta isa MNullableType then
+				if ta.ctype == "val*" then
+					self.add("{res} = ({attr} != NULL);")
+				else
+					self.add("{res} = 1; /*NOTYET isset on primitive attributes*/")
+				end
+			end
+			self.add("break;")
+		end
+		if self.compiler.hardening then
+			self.add("default: /* Bug */")
+			self.bugtype(recv)
+		end
+		self.add("\}")
+
+		return res
+	end
+
 	# Generate a polymorphic attribute read
 	fun read_attribute(a: MAttribute, recv: RuntimeVariable): RuntimeVariable
 	do
@@ -1456,9 +1498,19 @@ class GlobalCompilerVisitor
 	end
 
 	# Generate a check-init-instance
-	# TODO: is an empty stub currently
 	fun check_init_instance(recv: RuntimeVariable)
 	do
+		var mtype = self.anchor(recv.mcasttype)
+		for cd in mtype.collect_mclassdefs(self.compiler.mainmodule)
+		do
+			var n = self.compiler.modelbuilder.mclassdef2nclassdef[cd]
+			for npropdef in n.n_propdefs do
+				if npropdef isa AAttrPropdef then
+					# Force read to check the initialization
+					self.read_attribute(npropdef.mpropdef.mproperty, recv)
+				end
+			end
+		end
 	end
 
 	# Generate an integer value
@@ -2604,6 +2656,12 @@ redef class AAttrReassignExpr
 end
 
 redef class AIssetAttrExpr
+	redef fun expr(v)
+	do
+		var recv = v.expr(self.n_expr, null)
+		var mproperty = self.mproperty.as(not null)
+		return v.isset_attribute(mproperty, recv)
+	end
 end
 
 redef class ADebugTypeExpr

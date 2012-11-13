@@ -650,6 +650,14 @@ class SeparateCompilerVisitor
 		return res
 	end
 
+	redef fun isset_attribute(a, recv)
+	do
+		# FIXME: Here we inconditionally return boxed primitive attributes
+		var res = self.new_var(bool_type)
+		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] != NULL;")
+		return res
+	end
+
 	redef fun read_attribute(a, recv)
 	do
 		# FIXME: Here we inconditionally return boxed primitive attributes
