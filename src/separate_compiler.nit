@@ -609,6 +609,36 @@ class SeparateCompilerVisitor
 			ss.append("{a}")
 		end
 
+		var recv = arguments.first
+		var maybenull = recv.mcasttype isa MNullableType
+		if maybenull then
+			self.add("if ({recv} == NULL) \{")
+			if mmethod.name == "==" then
+				assert res != null
+				var arg = arguments[1]
+				if arg.mcasttype isa MNullableType then
+					self.add("{res} = ({arg} == NULL);")
+				else if arg.mcasttype isa MNullType then
+					self.add("{res} = 1; /* is null */")
+				else
+					self.add("{res} = 0; /* {arg.inspect} cannot be null */")
+				end
+			else if mmethod.name == "!=" then
+				assert res != null
+				var arg = arguments[1]
+				if arg.mcasttype isa MNullableType then
+					self.add("{res} = ({arg} != NULL);")
+				else if arg.mcasttype isa MNullType then
+					self.add("{res} = 0; /* is null */")
+				else
+					self.add("{res} = 1; /* {arg.inspect} cannot be null */")
+				end
+			else
+				self.add_abort("Reciever is null")
+			end
+			self.add("\} else \{")
+		end
+
 		var color = self.compiler.as(SeparateCompiler).method_colors[mmethod]
 		var r
 		if ret == null then r = "void" else r = ret.ctype
@@ -618,6 +648,10 @@ class SeparateCompilerVisitor
 			self.add("{res} = {call};")
 		else
 			self.add("{call};")
+		end
+
+		if maybenull then
+			self.add("\}")
 		end
 
 		return res
