@@ -471,7 +471,8 @@ class VirtualRuntimeFunction
 
 		var sig = new Buffer
 		var comment = new Buffer
-		var ret = mmethoddef.msignature.return_mtype
+		var msignature = mmethoddef.mproperty.intro.msignature
+		var ret = msignature.return_mtype
 		if ret != null then
 			ret = v.resolve_for(ret, selfvar)
 			sig.append("{ret.ctype} ")
@@ -485,9 +486,9 @@ class VirtualRuntimeFunction
 		sig.append("({selfvar.mtype.ctype} self")
 		comment.append("(self: {recv}")
 		arguments.add(selfvar)
-		for i in [0..mmethoddef.msignature.arity[ do
-			var mtype = mmethoddef.msignature.mparameters[i].mtype
-			if i == mmethoddef.msignature.vararg_rank then
+		for i in [0..msignature.arity[ do
+			var mtype = msignature.mparameters[i].mtype
+			if i == msignature.vararg_rank then
 				mtype = v.get_class("Array").get_mtype([mtype])
 			end
 			mtype = v.resolve_for(mtype, selfvar)
@@ -584,7 +585,8 @@ class SeparateCompilerVisitor
 		end
 
 		var res: nullable RuntimeVariable
-		var ret = mmethod.intro.msignature.return_mtype
+		var msignature = mmethod.intro.msignature.resolve_for(mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.mmodule, true)
+		var ret = msignature.return_mtype
 		if mmethod.is_new then
 			ret = arguments.first.mtype
 			res = self.new_var(ret)
@@ -597,19 +599,18 @@ class SeparateCompilerVisitor
 
 		var s = new Buffer
 		var ss = new Buffer
-		var first = true
-		for a in arguments do
-			if not first then
-				s.append(", ")
-				ss.append(", ")
-			else
-				first = false
-			end
-			s.append("{a.mtype.ctype}")
-			ss.append("{a}")
-		end
 
 		var recv = arguments.first
+		s.append("val*")
+		ss.append("{recv}")
+		for i in [0..msignature.arity[ do
+			var a = arguments[i+1]
+			var t = msignature.mparameters[i].mtype
+			s.append(", {t.ctype}")
+			a = self.autobox(a, t)
+			ss.append(", {a}")
+		end
+
 		var maybenull = recv.mcasttype isa MNullableType
 		if maybenull then
 			self.add("if ({recv} == NULL) \{")
