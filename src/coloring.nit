@@ -403,8 +403,11 @@ class PropertyColoring
 		for mclass in self.class_coloring.coloration_result.keys do
 			var table = new Array[nullable MPROPDEF]
 
-			# first, fill table from parents
-			for parent in self.class_coloring.super_elements(mclass) do
+			# first, fill table from parents by reverse linearization order
+			var parents = new OrderedSet[MClass]
+			parents.add_all(self.class_coloring.super_elements(mclass))
+			self.class_coloring.reverse_sorter.sort(parents)
+			for parent in parents do
 				for mproperty in self.properties(parent) do
 					var color = self.coloration_result[mproperty]
 					if table.length <= color then
