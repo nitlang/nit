@@ -968,6 +968,15 @@ class GlobalCompilerVisitor
 		return res
 	end
 
+	# Return a new uninitialized named runtime_variable
+	fun new_named_var(mtype: MType, name: String): RuntimeVariable
+	do
+		mtype = self.anchor(mtype)
+		var res = new RuntimeVariable(name, mtype, mtype)
+		self.add_decl("{mtype.ctype} {name} /* : {mtype} */;")
+		return res
+	end
+
 	# Return a new local runtime_variable initialized with the C expression `cexpr'.
 	fun new_expr(cexpr: String, mtype: MType): RuntimeVariable
 	do
