@@ -856,7 +856,7 @@ class GlobalCompilerVisitor
 	private var decl_lines: List[String] = new List[String]
 
 	# The current visited AST node
-	var current_node: nullable AExpr = null
+	var current_node: nullable ANode = null
 
 	# Compile an expression an return its result
 	# `mtype` is the expected return type, pass null if no specific type is expected.
@@ -1636,10 +1636,16 @@ redef class MMethodDef
 		var modelbuilder = v.compiler.modelbuilder
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
+			var oldnode = v.current_node
+			v.current_node = npropdef
 			npropdef.compile_to_c(v, self, arguments)
+			v.current_node = oldnode
 		else if self.mproperty.name == "init" then
 			var nclassdef = modelbuilder.mclassdef2nclassdef[self.mclassdef]
+			var oldnode = v.current_node
+			v.current_node = nclassdef
 			nclassdef.compile_to_c(v, self, arguments)
+			v.current_node = oldnode
 		else
 			abort
 		end
