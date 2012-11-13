@@ -1624,7 +1624,6 @@ redef class AConcreteMethPropdef
 				end
 			end
 		end
-
 		v.stmt(self.n_block)
 	end
 
@@ -2203,21 +2202,31 @@ redef class AForExpr
 	redef fun stmt(v)
 	do
 		var cl = v.expr(self.n_expr, null)
-		var it = v.send(v.get_property("iterator", cl.mtype), [cl])
+		var it_meth = self.method_iterator
+		assert it_meth != null
+		var it = v.send(it_meth, [cl])
 		assert it != null
 		v.add("for(;;) \{")
-		var ok = v.send(v.get_property("is_ok", it.mtype), [it])
+		var isok_meth = self.method_is_ok
+		assert isok_meth != null
+		var ok = v.send(isok_meth, [it])
 		assert ok != null
 		v.add("if(!{ok}) break;")
 		if self.variables.length == 1 then
-			var i = v.send(v.get_property("item", it.mtype), [it])
+			var item_meth = self.method_item
+			assert item_meth != null
+			var i = v.send(item_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables.first), i)
 		else if self.variables.length == 2 then
-			var i = v.send(v.get_property("key", it.mtype), [it])
+			var key_meth = self.method_key
+			assert key_meth != null
+			var i = v.send(key_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables[0]), i)
-			i = v.send(v.get_property("item", it.mtype), [it])
+			var item_meth = self.method_item
+			assert item_meth != null
+			i = v.send(item_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables[1]), i)
 		else
@@ -2225,7 +2234,9 @@ redef class AForExpr
 		end
 		v.stmt(self.n_block)
 		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
-		v.send(v.get_property("next", it.mtype), [it])
+		var next_meth = self.method_next
+		assert next_meth != null
+		v.send(next_meth, [it])
 		v.add("\}")
 		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 	end

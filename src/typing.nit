@@ -724,10 +724,19 @@ end
 redef class AForExpr
 	var coltype: nullable MClassType
 
+	var method_iterator: nullable MMethod
+	var method_is_ok: nullable MMethod
+	var method_item: nullable MMethod
+	var method_next: nullable MMethod
+	var method_key: nullable MMethod
+
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
 		var objcla = v.get_mclass(self, "Object")
 		if objcla == null then return
+
+		var is_col = false
+		var is_map = false
 
 		var colcla = v.try_get_mclass(self, "Collection")
 		if colcla != null and v.is_subtype(mtype, colcla.get_mtype([objcla.mclass_type.as_nullable])) then
@@ -739,7 +748,7 @@ redef class AForExpr
 			else
 				variables.first.declared_type = coltype.arguments.first
 			end
-			return
+			is_col = true
 		end
 
 		var mapcla = v.try_get_mclass(self, "Map")
@@ -752,6 +761,57 @@ redef class AForExpr
 			else
 				variables[0].declared_type = coltype.arguments[0]
 				variables[1].declared_type = coltype.arguments[1]
+			end
+			is_map = true
+		end
+
+		if is_col or is_map then
+			# get iterator method
+			var coltype = self.coltype.as(not null)
+			var itdef = v.get_method(self, coltype, "iterator", true)
+			var itdefsign = itdef.msignature
+			if itdef == null or itdefsign == null then
+				v.error(self, "Type Error: Expected method 'iterator' in type {coltype}")
+				return
+			end
+			self.method_iterator = itdef.mproperty
+
+			# get iterator type
+			var ittype = v.resolve_signature_for(itdefsign, mtype, false).return_mtype
+			if ittype == null then
+				v.error(self, "Type Error: Expected method 'iterator' to return an Iterator type")
+				return
+			end
+
+			# get methods is_ok, next, item
+			var ikdef = v.get_method(self, ittype, "is_ok", false)
+			if ikdef == null then
+				v.error(self, "Type Error: Expected method 'is_ok' in Iterator type {ittype}")
+				return
+			end
+			self.method_is_ok = ikdef.mproperty
+
+			var itemdef = v.get_method(self, ittype, "item", false)
+			if itemdef == null then
+				v.error(self, "Type Error: Expected method 'item' in Iterator type {ittype}")
+				return
+			end
+			self.method_item = itemdef.mproperty
+
+			var nextdef = v.get_method(self, ittype, "next", false)
+			if nextdef == null then
+				v.error(self, "Type Error: Expected method 'next' in Iterator type {ittype}")
+				return
+			end
+			self.method_next = nextdef.mproperty
+
+			if is_map then
+				var keydef = v.get_method(self, ittype, "key", false)
+				if keydef == null then
+					v.error(self, "Type Error: Expected method 'key' in Iterator type {ittype}")
+					return
+				end
+				self.method_key = keydef.mproperty
 			end
 			return
 		end
