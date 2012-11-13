@@ -804,8 +804,8 @@ class SeparateCompilerVisitor
 
 	redef fun init_instance(mtype)
 	do
+		var compiler = self.compiler.as(SeparateCompiler)
 		if mtype isa MGenericType and mtype.need_anchor then
-			var compiler = self.compiler.as(SeparateCompiler)
 			var buff = new Buffer
 			for ft in mtype.mclass.mclass_type.arguments do
 				var ftcolor = compiler.ft_colors[ft.as(MParameterType)]
@@ -814,6 +814,7 @@ class SeparateCompilerVisitor
 			mtype = self.anchor(mtype).as(MClassType)
 			return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) livetypes_{mtype.mclass.c_name}{buff.to_s})", mtype)
 		end
+		compiler.undead_types.add(mtype)
 		return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) &type_{mtype.c_name})", mtype)
 	end
 
