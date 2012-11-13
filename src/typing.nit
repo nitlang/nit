@@ -1096,7 +1096,7 @@ redef class ASendExpr
 		var mproperty = propdef.mproperty
 		self.mproperty = mproperty
 		var msignature = propdef.msignature
-		if msignature == null then abort # Forward error
+		assert msignature != null # msignature should never be null here
 
 		var for_self = self.n_expr isa ASelfExpr
 		msignature = v.resolve_signature_for(msignature, recvtype, for_self)
