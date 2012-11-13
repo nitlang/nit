@@ -68,9 +68,14 @@ private class TypeVisitor
 		return res
 	end
 
-	fun resolve_signature_for(msignature: MSignature, recv: MType, for_self: Bool): MSignature
+	# Retrieve the signature of a MMethodDef resolved for a specific call.
+	# This method is an helper to symplify the query on the model.
+	#
+	# Note: `for_self` indicates if the reciever is self or not.
+	# If yes, virtual types are not resolved.
+	fun resolve_signature_for(mmethoddef: MMethodDef, recv: MType, for_self: Bool): MSignature
 	do
-		return self.resolve_for(msignature, recv, for_self).as(MSignature)
+		return self.resolve_for(mmethoddef.msignature.as(not null), recv, for_self).as(MSignature)
 	end
 
 	fun check_subtype(node: ANode, sub, sup: MType): Bool
@@ -580,9 +585,7 @@ redef class AReassignFormExpr
 
 		self.reassign_property = mpropdef
 
-		var msignature = mpropdef.msignature
-		assert msignature!= null
-		msignature = v.resolve_signature_for(msignature, readtype, false)
+		var msignature = v.resolve_signature_for(mpropdef, readtype, false)
 
 		var rettype = msignature.return_mtype
 		assert msignature.arity == 1 and rettype != null
@@ -1031,15 +1034,11 @@ redef class ASendExpr
 			return
 		end
 
-		var propdef = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
-		if propdef == null then return
-		var mproperty = propdef.mproperty
+		var mpropdef = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
+		if mpropdef == null then return
+		var mproperty = mpropdef.mproperty
 		self.mproperty = mproperty
-		var msignature = propdef.msignature
-		if msignature == null then abort # Forward error
-
-		var for_self = self.n_expr isa ASelfExpr
-		msignature = v.resolve_signature_for(msignature, recvtype, for_self)
+		var msignature = v.resolve_signature_for(mpropdef, recvtype, self.n_expr isa ASelfExpr)
 
 		var args = compute_raw_arguments
 		self.raw_arguments = args
@@ -1204,14 +1203,13 @@ redef class ASendReassignFormExpr
 			return
 		end
 
-		var propdef = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
-		if propdef == null then return
-		var mproperty = propdef.mproperty
-		self.mproperty = mproperty
-		var msignature = propdef.msignature
-		if msignature == null then abort # Forward error
 		var for_self = self.n_expr isa ASelfExpr
-		msignature = v.resolve_signature_for(msignature, recvtype, for_self)
+		var mpropdef = v.get_method(self, recvtype, name, for_self)
+
+		if mpropdef == null then return
+		var mproperty = mpropdef.mproperty
+		self.mproperty = mproperty
+		var msignature = v.resolve_signature_for(mpropdef, recvtype, for_self)
 
 		var args = compute_raw_arguments
 		self.raw_arguments = args
@@ -1228,9 +1226,7 @@ redef class ASendReassignFormExpr
 		if wpropdef == null then return
 		var wmproperty = wpropdef.mproperty
 		self.write_mproperty = wmproperty
-		var wmsignature = wpropdef.msignature
-		if wmsignature == null then abort # Forward error
-		wmsignature = v.resolve_signature_for(wmsignature, recvtype, for_self)
+		var wmsignature = v.resolve_signature_for(wpropdef, recvtype, for_self)
 
 		var wtype = self.resolve_reassignment(v, readtype, wmsignature.mparameters.last.mtype)
 		if wtype == null then return
@@ -1292,8 +1288,7 @@ redef class ASuperExpr
 		var superprop = superprops.first
 		assert superprop isa MMethodDef
 
-		var msignature = superprop.msignature.as(not null)
-		msignature = v.resolve_signature_for(msignature, recvtype, true)
+		var msignature = v.resolve_signature_for(superprop, recvtype, true)
 		var args = self.n_args.to_a
 		if args.length > 0 then
 			v.check_signature(self, args, mproperty.name, msignature)
@@ -1336,8 +1331,7 @@ redef class ASuperExpr
 		self.mproperty = superprop.mproperty
 
 		var args = self.n_args.to_a
-		var msignature = superprop.msignature.as(not null)
-		msignature = v.resolve_signature_for(msignature, recvtype, true)
+		var msignature = v.resolve_signature_for(superprop, recvtype, true)
 		if args.length > 0 then
 			v.check_signature(self, args, mproperty.name, msignature)
 		else
@@ -1387,8 +1381,7 @@ redef class ANewExpr
 			return
 		end
 
-		var msignature = propdef.msignature.as(not null)
-		msignature = v.resolve_signature_for(msignature, recvtype, false)
+		var msignature = v.resolve_signature_for(propdef, recvtype, false)
 
 		var args = n_args.to_a
 		v.check_signature(self, args, name, msignature)
@@ -1491,8 +1484,8 @@ redef class AClosureCallExpr
 		if variable == null then return # Skip error
 
 		var recvtype = v.nclassdef.mclassdef.bound_mtype
-		var msignature = variable.declared_type.as(MSignature)
-		msignature = v.resolve_signature_for(msignature, recvtype, false)
+		var msignature = variable.declared_type.as(not null)
+		msignature = v.resolve_for(msignature, recvtype, false).as(MSignature)
 
 		var args = n_args.to_a
 		v.check_signature(self, args, variable.name, msignature)
