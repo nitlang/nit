@@ -471,10 +471,12 @@ class VirtualRuntimeFunction
 
 		var sig = new Buffer
 		var comment = new Buffer
-		var msignature = mmethoddef.mproperty.intro.msignature
+
+		# Because the function is virtual, the signature must match the one of the original class
+		var intromclassdef = self.mmethoddef.mproperty.intro.mclassdef
+		var msignature = mmethoddef.mproperty.intro.msignature.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
 		var ret = msignature.return_mtype
 		if ret != null then
-			ret = v.resolve_for(ret, selfvar)
 			sig.append("{ret.ctype} ")
 		else if mmethoddef.mproperty.is_new then
 			ret = recv
@@ -491,7 +493,6 @@ class VirtualRuntimeFunction
 			if i == msignature.vararg_rank then
 				mtype = v.get_class("Array").get_mtype([mtype])
 			end
-			mtype = v.resolve_for(mtype, selfvar)
 			comment.append(", {mtype}")
 			sig.append(", {mtype.ctype} p{i}")
 			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
