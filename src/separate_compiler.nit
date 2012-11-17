@@ -405,8 +405,8 @@ class SeparateRuntimeFunction
 			sig.append("void ")
 		end
 		sig.append(self.c_name)
-		sig.append("({selfvar.mtype.ctype} self")
-		comment.append("(self: {recv}")
+		sig.append("({selfvar.mtype.ctype} {selfvar}")
+		comment.append("(self: {selfvar}")
 		arguments.add(selfvar)
 		for i in [0..mmethoddef.msignature.arity[ do
 			var mtype = mmethoddef.msignature.mparameters[i].mtype
@@ -483,8 +483,8 @@ class VirtualRuntimeFunction
 			sig.append("void ")
 		end
 		sig.append(self.c_name)
-		sig.append("({selfvar.mtype.ctype} self")
-		comment.append("(self: {recv}")
+		sig.append("({selfvar.mtype.ctype} {selfvar}")
+		comment.append("(self: {selfvar}")
 		arguments.add(selfvar)
 		for i in [0..msignature.arity[ do
 			var mtype = msignature.mparameters[i].mtype
