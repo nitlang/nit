@@ -471,12 +471,11 @@ class SeparateCompiler
 		v.add_decl("\};")
 
 
-		var res = v.new_named_var(mtype, "self")
-		res.is_exact = true
-
 		self.header.add_decl("{mtype.ctype} NEW_{c_name}(struct type* type);")
 		v.add_decl("/* allocate {mtype} */")
 		v.add_decl("{mtype.ctype} NEW_{c_name}(struct type* type) \{")
+		var res = v.new_named_var(mtype, "self")
+		res.is_exact = true
 		v.add("{res} = calloc(sizeof(struct instance_{c_name}), 1);")
 		v.add("{res}->type = type;")
 		v.add("{res}->class = (struct class*) &class_{c_name};")
