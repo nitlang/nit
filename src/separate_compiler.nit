@@ -644,7 +644,7 @@ class SeparateCompilerVisitor
 		var color = self.compiler.as(SeparateCompiler).method_colors[mmethod]
 		var r
 		if ret == null then r = "void" else r = ret.ctype
-		var call = "(({r} (*)({s}))({arguments.first}->class->vft[{color}]))({ss})"
+		var call = "(({r} (*)({s}))({arguments.first}->class->vft[{color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
 
 		if res != null then
 			self.add("{res} = {call};")
@@ -690,7 +690,7 @@ class SeparateCompilerVisitor
 	do
 		# FIXME: Here we inconditionally return boxed primitive attributes
 		var res = self.new_var(bool_type)
-		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] != NULL;")
+		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] != NULL; /* {a} on {recv.inspect}*/")
 		return res
 	end
 
@@ -702,7 +702,7 @@ class SeparateCompilerVisitor
 		var cret = self.object_type.as_nullable
 		var res = self.new_var(cret)
 		res.mcasttype = ret
-		self.add("{res} = (val*) {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}];")
+		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}]; /* {a} on {recv.inspect} */")
 		if not ret isa MNullableType then
 			self.add("if ({res} == NULL) \{")
 			self.add_abort("Uninitialized attribute {a.name}")
@@ -716,7 +716,7 @@ class SeparateCompilerVisitor
 	do
 		# FIXME: Here we inconditionally box primitive attributes
 		value = self.autobox(value, self.object_type.as_nullable)
-		self.add("{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] = {value};")
+		self.add("{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] = {value}; /* {a} on {recv.inspect} */")
 	end
 
 	redef fun init_instance(mtype)
