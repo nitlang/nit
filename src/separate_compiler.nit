@@ -93,7 +93,6 @@ redef class ModelBuilder
 		end
 		v.add("\}")
 
-
 		for m in mainmodule.in_importation.greaters do
 			compiler.compile_module_to_c(m)
 			for mclass in m.intro_mclasses do
@@ -102,12 +101,13 @@ redef class ModelBuilder
 		end
 
 		# compile live & cast type structures
-		var mtypes = new HashSet[MClassType]
-		mtypes.add_all(runtime_type_analysis.live_types)
-		mtypes.add_all(runtime_type_analysis.live_cast_types)
-
+		var mtypes = compiler.do_global_type_coloring
 		for t in mtypes do
 			compiler.compile_type_to_c(t)
+		end
+
+		for mclass in model.mclasses do
+			compiler.compile_live_gentype_to_c(mclass)
 		end
 
 		write_and_make(compiler)
@@ -118,10 +118,13 @@ end
 class SeparateCompiler
 	super GlobalCompiler # TODO better separation of concerns
 
+	private var undead_types: Set[MClassType] = new HashSet[MClassType]
 	protected var typeids: HashMap[MClassType, Int] = new HashMap[MClassType, Int]
 
-	private var type_colors: Map[MClassType, Int]
-	private var type_tables: Map[MClassType, Array[nullable MClassType]]
+	private var type_colors: Map[MClassType, Int] = typeids
+	private var type_tables: nullable Map[MClassType, Array[nullable MClassType]] = null
+	private var livetypes_tables: nullable Map[MClass, Array[nullable Object]]
+	private var livetypes_tables_sizes: nullable Map[MClass, Array[Int]]
 
 	private var class_colors: Map[MClass, Int]
 
@@ -135,20 +138,6 @@ class SeparateCompiler
 	private var ft_tables: Map[MClass, Array[nullable MParameterType]]
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
-
-		# types coloration
-		var mtypes = new HashSet[MClassType]
-		mtypes.add_all(runtime_type_analysis.live_types)
-		mtypes.add_all(runtime_type_analysis.live_cast_types)
-
-		for mtype in mtypes do
-			self.typeids[mtype] = self.typeids.length
-		end
-
-		var type_coloring = new TypeColoring(mainmodule, runtime_type_analysis)
-		self.type_colors = type_coloring.colorize(mtypes)
-		self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
-
 		# classes coloration
 		var class_coloring = new ClassColoring(mainmodule)
 		self.class_colors = class_coloring.colorize(mmbuilder.model.mclasses)
@@ -167,6 +156,146 @@ class SeparateCompiler
 		var ft_coloring = new FTColoring(class_coloring)
 		self.ft_colors = ft_coloring.colorize
 		self.ft_tables = ft_coloring.build_ft_tables
+	end
+
+	# colorize live types of the program
+	private fun do_global_type_coloring: Set[MClassType] do
+		var mtypes = new HashSet[MClassType]
+		#print "undead types:"
+		#for t in self.undead_types do
+		#	print t
+		#end
+		#print "live types:"
+		#for t in runtime_type_analysis.live_types do
+		#	print t
+		#end
+		#print "cast types:"
+		#for t in runtime_type_analysis.live_cast_types do
+		#	print t
+		#end
+		#print "--"
+		mtypes.add_all(self.runtime_type_analysis.live_types)
+		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
+		mtypes.add_all(self.undead_types)
+
+		# add formal types arguments to mtypes
+		for mtype in mtypes do
+			if mtype isa MGenericType then
+				#TODO do it recursive
+				for ft in mtype.arguments do
+					if ft isa MNullableType then ft = ft.mtype
+					mtypes.add(ft.as(MClassType))
+				end
+			end
+		end
+
+		# set type unique id
+		for mtype in mtypes do
+			self.typeids[mtype] = self.typeids.length
+		end
+
+		# build livetypes tables
+		self.livetypes_tables = new HashMap[MClass, Array[nullable Object]]
+		self.livetypes_tables_sizes = new HashMap[MClass, Array[Int]]
+		for mtype in mtypes do
+			if mtype isa MGenericType then
+				var table: Array[nullable Object]
+				var sizes: Array[Int]
+				if livetypes_tables.has_key(mtype.mclass) then
+					table = livetypes_tables[mtype.mclass]
+				else
+					table = new Array[nullable Object]
+					self.livetypes_tables[mtype.mclass] = table
+				end
+				if livetypes_tables_sizes.has_key(mtype.mclass) then
+					sizes = livetypes_tables_sizes[mtype.mclass]
+				else
+					sizes = new Array[Int]
+					self.livetypes_tables_sizes[mtype.mclass] = sizes
+				end
+				build_livetype_table(mtype, 0, table, sizes)
+			end
+		end
+
+		# colorize
+		var type_coloring = new TypeColoring(self.mainmodule, self.runtime_type_analysis)
+		self.type_colors = type_coloring.colorize(mtypes)
+		self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
+
+		return mtypes
+	end
+
+	# build live gentype table recursively
+	private fun build_livetype_table(mtype: MGenericType, current_rank: Int, table: Array[nullable Object], sizes: Array[Int]) do
+		var ft = mtype.arguments[current_rank]
+		if ft isa MNullableType then ft = ft.mtype
+		var id = self.typeids[ft.as(MClassType)]
+
+		if current_rank >= sizes.length then
+			sizes[current_rank] = id + 1
+		else if id >= sizes[current_rank] then
+			sizes[current_rank] = id + 1
+		end
+
+		if id > table.length then
+			for i in [table.length .. id[ do table[i] = null
+		end
+
+		if current_rank == mtype.arguments.length - 1 then
+			table[id] = mtype
+		else
+			var ft_table = new Array[nullable Object]
+			table[id] = ft_table
+			build_livetype_table(mtype, current_rank + 1, ft_table, sizes)
+		end
+	end
+
+	private fun add_to_livetypes_table(table: Array[nullable Object], ft: MClassType) do
+		var id = self.typeids[ft]
+		for i in [table.length .. id[ do
+			table[i] = null
+		end
+		table[id] = ft
+	end
+
+	private fun compile_livetype_table(table: Array[nullable Object], buffer: Buffer, depth: Int, max: Int) do
+		for obj in table do
+			if obj == null then
+				if depth == max then
+					buffer.append("NULL,\n")
+				else
+					buffer.append("\{\},\n")
+				end
+			else if obj isa MClassType then
+				buffer.append("(struct type*) &type_{obj.c_name}, /* {obj} */\n")
+			else if obj isa Array[nullable Object] then
+				buffer.append("\{\n")
+				compile_livetype_table(obj, buffer, depth + 1, max)
+				buffer.append("\},\n")
+			end
+		end
+	end
+
+	# declare live generic types tables selection
+	private fun compile_live_gentype_to_c(mclass: MClass) do
+		if mclass.arity > 0 then
+			if self.livetypes_tables.has_key(mclass) then
+				var table = self.livetypes_tables[mclass]
+				var sign = self.livetypes_tables_sizes[mclass]
+				var table_buffer = new Buffer.from("const struct type *livetypes_{mclass.c_name}[{sign.join("][")}] = \{\n")
+				compile_livetype_table(table, table_buffer, 1, mclass.arity)
+				table_buffer.append("\};")
+
+				var v = new SeparateCompilerVisitor(self)
+				self.header.add_decl("extern const struct type *livetypes_{mclass.c_name}[{sign.join("][")}];")
+				v.add_decl(table_buffer.to_s)
+			else
+				var sign = new Array[Int].filled_with(0, mclass.arity)
+				var v = new SeparateCompilerVisitor(self)
+				self.header.add_decl("extern const struct type *livetypes_{mclass.c_name}[{sign.join("][")}];")
+				v.add_decl("const struct type *livetypes_{mclass.c_name}[{sign.join("][")}];")
+			end
+		end
 	end
 
 	# Separately compile all the method definitions of the module
@@ -234,14 +363,14 @@ class SeparateCompiler
 					v.add_decl("NULL, /* empty */")
 				else
 					var id = -1
-					var ftype: MClassType
+					var ntype: MType
 					if ft.mclass == mtype.mclass then
-						var ntype = mtype.arguments[ft.rank]
-						if ntype isa MNullableType then ntype = ntype.mtype
-						ftype = ntype.as(MClassType)
+						ntype = mtype.arguments[ft.rank]
 					else
-						ftype = ft.anchor_to(self.mainmodule, mtype).as(MClassType)
+						ntype = ft.anchor_to(self.mainmodule, mtype)
 					end
+					if ntype isa MNullableType then ntype = ntype.mtype
+					var ftype = ntype.as(MClassType)
 					if self.typeids.has_key(ftype) then
 						v.add_decl("(struct type*)&type_{ftype.c_name}, /* {ft} ({ftype}) */")
 					else
@@ -261,18 +390,17 @@ class SeparateCompiler
 	fun compile_class_to_c(mclass: MClass)
 	do
 		var mtype = mclass.intro.bound_mtype
-		var c_name = mclass.mclass_type.c_name
+		var c_name = mclass.c_name
 
 		var vft = self.method_tables[mclass]
 		var attrs = self.attr_tables[mclass]
-
 		var v = new SeparateCompilerVisitor(self)
 
-		v.add_decl("/* runtime class {mtype} */")
+		v.add_decl("/* runtime class {c_name} */")
 		var idnum = classids.length
 		var idname = "ID_" + c_name
 		self.classids[mtype] = idname
-		self.header.add_decl("#define {idname} {idnum} /* {mtype} */")
+		#self.header.add_decl("#define {idname} {idnum} /* {c_name} */")
 
 		self.header.add_decl("struct class_{c_name} \{")
 		self.header.add_decl("nitmethod_t vft[{vft.length}];")
@@ -318,21 +446,17 @@ class SeparateCompiler
 		if mtype.ctype != "val*" then
 			#Build instance struct
 			self.header.add_decl("struct instance_{c_name} \{")
-			self.header.add_decl("const struct type_{c_name} *type;")
-			self.header.add_decl("const struct class_{c_name} *class;")
+			self.header.add_decl("const struct type *type;")
+			self.header.add_decl("const struct class *class;")
 			self.header.add_decl("{mtype.ctype} value;")
 			self.header.add_decl("\};")
 
-			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
+			self.header.add_decl("val* BOX_{c_name}({mtype.ctype}, struct type*);")
 			v.add_decl("/* allocate {mtype} */")
-			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
+			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value, struct type* type) \{")
 			v.add("struct instance_{c_name}*res = GC_MALLOC(sizeof(struct instance_{c_name}));")
-			if self.typeids.has_key(mtype) then
-				v.add("res->type = &type_{c_name};")
-			else
-				v.add("res->type = NULL;")
-			end
-			v.add("res->class = &class_{c_name};")
+			v.add("res->type = type;")
+			v.add("res->class = (struct class*) &class_{c_name};")
 			v.add("res->value = value;")
 			v.add("return (val*)res;")
 			v.add("\}")
@@ -341,17 +465,18 @@ class SeparateCompiler
 
 		#Build instance struct
 		v.add_decl("struct instance_{c_name} \{")
-		v.add_decl("const struct type_{c_name} *type;")
-		v.add_decl("const struct class_{c_name} *class;")
+		v.add_decl("const struct type *type;")
+		v.add_decl("const struct class *class;")
 		v.add_decl("nitattribute_t attrs[{attrs.length}];")
 		v.add_decl("\};")
 
 
-		self.header.add_decl("{mtype.ctype} NEW_{c_name}(struct type *type);")
-		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("{mtype.ctype} NEW_{c_name}(struct type *type) \{")
-		var res = v.new_var(mtype)
+		var res = v.new_named_var(mtype, "self")
 		res.is_exact = true
+
+		self.header.add_decl("{mtype.ctype} NEW_{c_name}(struct type* type);")
+		v.add_decl("/* allocate {mtype} */")
+		v.add_decl("{mtype.ctype} NEW_{c_name}(struct type* type) \{")
 		v.add("{res} = calloc(sizeof(struct instance_{c_name}), 1);")
 		v.add("{res}->type = type;")
 		v.add("{res}->class = (struct class*) &class_{c_name};")
@@ -567,7 +692,9 @@ class SeparateCompilerVisitor
 				self.add("printf(\"Dead code executed!\\n\"); exit(1);")
 				return res
 			end
-			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
+			var totype = value.mtype
+			if totype isa MNullableType then totype = totype.mtype
+			self.add("{res} = BOX_{valtype.c_name}({value}, (struct type*) &type_{totype.c_name}); /* autobox from {value.mtype} to {mtype} */")
 			return res
 		else
 			# Bad things will appen!
@@ -721,18 +848,35 @@ class SeparateCompilerVisitor
 
 	redef fun init_instance(mtype)
 	do
-		mtype = self.anchor(mtype).as(MClassType)
-		var res = self.new_expr("NEW_{mtype.mclass.mclass_type.c_name}((struct type*) &type_{mtype.c_name})", mtype)
-		return res
+		var compiler = self.compiler.as(SeparateCompiler)
+		if mtype isa MGenericType and mtype.need_anchor then
+			var buff = new Buffer
+			for ft in mtype.mclass.mclass_type.arguments do
+				var ftcolor = compiler.ft_colors[ft.as(MParameterType)]
+				buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
+			end
+			mtype = self.anchor(mtype).as(MClassType)
+			return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) livetypes_{mtype.mclass.c_name}{buff.to_s})", mtype)
+		end
+		compiler.undead_types.add(mtype)
+		return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) &type_{mtype.c_name})", mtype)
 	end
 
 	redef fun type_test(value, mtype)
 	do
 		var compiler = self.compiler.as(SeparateCompiler)
 		var res = self.new_var(bool_type)
+		var buff = new Buffer
 
 		if mtype isa MNullableType then mtype = mtype.mtype
-		if mtype isa MClassType then
+		if mtype isa MGenericType and mtype.need_anchor then
+			for ft in mtype.mclass.mclass_type.arguments do
+				var ftcolor = compiler.ft_colors[ft.as(MParameterType)]
+				buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
+			end
+			self.add("{res} = {value}->type->type_table[livetypes_{mtype.mclass.c_name}{buff.to_s}->color] == livetypes_{mtype.mclass.c_name}{buff.to_s}->id;")
+		else if mtype isa MClassType then
+			compiler.undead_types.add(mtype)
 			self.add("{res} = {value}->type->type_table[type_{mtype.c_name}.color] == type_{mtype.c_name}.id;")
 		else if mtype isa MParameterType then
 			var ftcolor = compiler.ft_colors[mtype]
@@ -786,3 +930,14 @@ class SeparateCompilerVisitor
 	end
 end
 
+redef class MClass
+	# Return the name of the C structure associated to a Nit class
+	fun c_name: String do
+		var res = self.c_name_cache
+		if res != null then return res
+		res = "{intro_mmodule.name.to_cmangle}__{name.to_cmangle}"
+		self.c_name_cache = res
+		return res
+	end
+	private var c_name_cache: nullable String
+end
