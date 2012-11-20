@@ -888,8 +888,24 @@ class SeparateCompilerVisitor
 	redef fun is_same_type_test(value1, value2)
 	do
 		var res = self.new_var(bool_type)
-		# TODO
-		add("printf(\"NOT YET IMPLEMENTED: is_same_type(%s,%s).\\n\", \"{value1.inspect}\", \"{value2.inspect}\"); exit(1);")
+		# Swap values to be symetric
+		if value2.mtype.ctype != "val*" and value1.mtype.ctype == "val*" then
+			var tmp = value1
+			value1 = value2
+			value2 = tmp
+		end
+		if value1.mtype.ctype != "val*" then
+			if value2.mtype.ctype == value1.mtype.ctype then
+				self.add("{res} = 1; /* is_same_type_test: compatible types {value1.mtype} vs. {value2.mtype} */")
+			else if value2.mtype.ctype != "val*" then
+				self.add("{res} = 0; /* is_same_type_test: incompatible types {value1.mtype} vs. {value2.mtype}*/")
+			else
+				var mtype1 = value1.mtype.as(MClassType)
+				self.add("{res} = ({value2} != NULL) && ({value2}->class == (struct class*) &class_{mtype1.c_name}); /* is_same_type_test */")
+			end
+		else
+			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {value1}->class == {value2}->class); /* is_same_type_test */")
+		end
 		return res
 	end
 
