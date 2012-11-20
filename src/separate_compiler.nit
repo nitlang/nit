@@ -469,20 +469,39 @@ class SeparateCompiler
 			return
 		end
 
+		var is_native_array = mclass.name == "NativeArray"
+
+		var sig
+		if is_native_array then
+			sig = "int length, struct type* type"
+		else
+			sig = "struct type* type"
+		end
+
 		#Build instance struct
 		v.add_decl("struct instance_{c_name} \{")
 		v.add_decl("const struct type *type;")
 		v.add_decl("const struct class *class;")
 		v.add_decl("nitattribute_t attrs[{attrs.length}];")
+		if is_native_array then
+			# NativeArrays are just a instance header followed by an array of values
+			v.add_decl("val* values[1];")
+		end
 		v.add_decl("\};")
 
 
-		self.header.add_decl("{mtype.ctype} NEW_{c_name}(struct type* type);")
+		self.header.add_decl("{mtype.ctype} NEW_{c_name}({sig});")
 		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("{mtype.ctype} NEW_{c_name}(struct type* type) \{")
+		v.add_decl("{mtype.ctype} NEW_{c_name}({sig}) \{")
 		var res = v.new_named_var(mtype, "self")
 		res.is_exact = true
-		v.add("{res} = calloc(sizeof(struct instance_{c_name}), 1);")
+		if is_native_array then
+			var mtype_elt = mtype.arguments.first
+			v.add("{res} = GC_MALLOC(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
+		else
+			v.add("{res} = GC_MALLOC(sizeof(struct instance_{c_name}));")
+		end
+		#v.add("{res} = calloc(sizeof(struct instance_{c_name}), 1);")
 		v.add("{res}->type = type;")
 		v.add("{res}->class = (struct class*) &class_{c_name};")
 
@@ -932,6 +951,55 @@ class SeparateCompilerVisitor
 			self.add("{res} = {value1} == {value2};")
 		end
 		return res
+	end
+
+	redef fun array_instance(array, elttype)
+	do
+		var compiler = self.compiler.as(SeparateCompiler)
+		var nclass = self.get_class("NativeArray")
+		elttype = self.anchor(elttype)
+		var arraytype = self.get_class("Array").get_mtype([elttype])
+		var res = self.init_instance(arraytype)
+		self.add("\{ /* {res} = array_instance Array[{elttype}] */")
+		var nat = self.new_var(self.get_class("NativeArray").get_mtype([elttype]))
+		nat.is_exact = true
+		compiler.undead_types.add(nat.mtype.as(MClassType))
+		self.add("{nat} = NEW_{nclass.c_name}({array.length}, (struct type *) &type_{nat.mtype.c_name});")
+		for i in [0..array.length[ do
+			var r = self.autobox(array[i], self.object_type)
+			self.add("((struct instance_{nclass.c_name}*){nat})->values[{i}] = (val*) {r};")
+		end
+		var length = self.int_instance(array.length)
+		self.send(self.get_property("with_native", arraytype), [res, nat, length])
+		self.check_init_instance(res)
+		self.add("\}")
+		return res
+	end
+
+	redef fun native_array_def(pname, ret_type, arguments)
+	do
+		var elttype = arguments.first.mtype
+		var nclass = self.get_class("NativeArray")
+		var recv = "((struct instance_{nclass.c_name}*){arguments[0]})->values"
+		if pname == "[]" then
+			self.ret(self.new_expr("{recv}[{arguments[1]}]", ret_type.as(not null)))
+			return
+		else if pname == "[]=" then
+			self.add("{recv}[{arguments[1]}]={arguments[2]};")
+			return
+		else if pname == "copy_to" then
+			var recv1 = "((struct instance_{nclass.c_name}*){arguments[1]})->values"
+			self.add("memcpy({recv1}, {recv}, {arguments[2]}*sizeof({elttype.ctype}));")
+			return
+		end
+	end
+
+	redef fun calloc_array(ret_type, arguments)
+	do
+		var ret = ret_type.as(MClassType)
+		var compiler = self.compiler.as(SeparateCompiler)
+		compiler.undead_types.add(ret)
+		self.ret(self.new_expr("NEW_{ret.mclass.c_name}({arguments[1]}, (struct type*) &type_{ret_type.c_name})", ret_type))
 	end
 end
 
