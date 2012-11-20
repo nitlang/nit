@@ -2016,6 +2016,7 @@ redef class AExternMethPropdef
 			ret = v.resolve_for(ret, arguments.first)
 			res = v.new_var(ret)
 		end
+		v.adapt_signature(mpropdef, arguments)
 
 		if res == null then
 			v.add("{externname}({arguments.join(", ")});")
@@ -2040,6 +2041,7 @@ redef class AExternInitPropdef
 			var file = location.file.filename
 			v.compiler.add_extern(file)
 		end
+		v.adapt_signature(mpropdef, arguments)
 		var ret = arguments.first.mtype
 		var res = v.new_var(ret)
 
