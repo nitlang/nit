@@ -1099,6 +1099,28 @@ class GlobalCompilerVisitor
 		return res
 	end
 
+	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable])
+	do
+		var elttype = arguments.first.mtype
+		var recv = "((struct {arguments[0].mcasttype.c_name}*){arguments[0]})->values"
+		if pname == "[]" then
+			self.ret(self.new_expr("{recv}[{arguments[1]}]", ret_type.as(not null)))
+			return
+		else if pname == "[]=" then
+			self.add("{recv}[{arguments[1]}]={arguments[2]};")
+			return
+		else if pname == "copy_to" then
+			var recv1 = "((struct {arguments[1].mcasttype.c_name}*){arguments[1]})->values"
+			self.add("memcpy({recv1},{recv},{arguments[2]}*sizeof({elttype.ctype}));")
+			return
+		end
+	end
+
+	fun calloc_array(ret_type: MType, arguments: Array[RuntimeVariable])
+	do
+		self.ret(self.new_expr("NEW_{ret_type.c_name}({arguments[1]})", ret_type))
+	end
+
 	# Generate a polymorphic send for the method `m' and the arguments `args'
 	fun send(m: MMethod, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
@@ -1944,23 +1966,8 @@ redef class AInternMethPropdef
 				return
 			end
 		else if cname == "NativeArray" then
-			var elttype = arguments.first.mtype
-			#assert arguments[0].is_exact
-			var recv = "((struct {arguments[0].mcasttype.c_name}*){arguments[0]})->values"
-			if pname == "[]" then
-				v.ret(v.new_expr("{recv}[{arguments[1]}]", ret.as(not null)))
-				return
-			else if pname == "[]=" then
-				v.add("{recv}[{arguments[1]}]={arguments[2]};")
-				return
-			else if pname == "copy_to" then
-				#assert arguments[1].is_exact
-				#assert arguments[1].mcasttype == arguments[0].mcasttype else print "copy {arguments[0].mcasttype} to {arguments[1].mcasttype} "
-				#assert arguments[1].mcasttype == arguments[0].mcasttype else print "copy {arguments[0].mcasttype} to {arguments[1].mcasttype} "
-				var recv1 = "((struct {arguments[1].mcasttype.c_name}*){arguments[1]})->values"
-				v.add("memcpy({recv1},{recv},{arguments[2]}*sizeof({elttype.ctype}));")
-				return
-			end
+			v.native_array_def(pname, ret, arguments)
+			return
 		end
 		if pname == "exit" then
 			v.add("exit({arguments[1]});")
@@ -1972,9 +1979,7 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("(char*)GC_MALLOC({arguments[1]})", ret.as(not null)))
 			return
 		else if pname == "calloc_array" then
-			#var elttype = arguments.first.mtype.supertype_to(v.compiler.mainmodule,arguments.first.mtype.as(MClassType),v.get_class("ArrayCapable")).arguments.first
-
-			v.ret(v.new_expr("NEW_{ret.c_name}({arguments[1]})", ret.as(not null)))
+			v.calloc_array(ret.as(not null), arguments)
 			return
 		else if pname == "object_id" then
 			v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
