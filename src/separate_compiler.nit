@@ -880,6 +880,8 @@ class SeparateCompilerVisitor
 		else if mtype isa MParameterType then
 			var ftcolor = compiler.ft_colors[mtype]
 			self.add("{res} = {value}->type->type_table[self->type->fts_table->fts[{ftcolor}]->color] == self->type->fts_table->fts[{ftcolor}]->id;")
+		else
+			add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{value.inspect}\"); exit(1);")
 		end
 
 		return res
