@@ -93,11 +93,16 @@ redef class ModelBuilder
 		end
 		v.add("\}")
 
+		# compile class structures
 		for m in mainmodule.in_importation.greaters do
-			compiler.compile_module_to_c(m)
 			for mclass in m.intro_mclasses do
 				compiler.compile_class_to_c(mclass)
 			end
+		end
+
+		# compile methods
+		for m in mainmodule.in_importation.greaters do
+			compiler.compile_module_to_c(m)
 		end
 
 		# compile live & cast type structures
@@ -106,6 +111,7 @@ redef class ModelBuilder
 			compiler.compile_type_to_c(t)
 		end
 
+		# compile live generic types selection structures
 		for mclass in model.mclasses do
 			compiler.compile_live_gentype_to_c(mclass)
 		end
