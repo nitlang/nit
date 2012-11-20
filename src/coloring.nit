@@ -402,7 +402,6 @@ class PropertyColoring
 
 		for mclass in self.class_coloring.coloration_result.keys do
 			var table = new Array[nullable MPROPDEF]
-
 			# first, fill table from parents by reverse linearization order
 			var parents = new OrderedSet[MClass]
 			parents.add_all(self.class_coloring.super_elements(mclass))
@@ -460,6 +459,7 @@ class PropertyColoring
 				if self.class_coloring.conflicts_graph.has_key(mclass) then
 					color = max_color(color, self.class_coloring.conflicts_graph[mclass])
 				end
+
 				# colorize
 				colorize_elements(self.properties(mclass), color)
 			end
@@ -500,10 +500,15 @@ class PropertyColoring
 	# properties cache
 	private var properties_cache: Map[MClass, Set[MPROP]] = new HashMap[MClass, Set[MPROP]]
 
-	# All 'mmethod' associated to all 'mclassdefs' of the class
+	# All 'mproperties' associated to all 'mclassdefs' of the class
 	private fun properties(mclass: MClass): Set[MPROP] do
 		if not self.properties_cache.has_key(mclass) then
 			var properties = new HashSet[MPROP]
+			var parents = self.class_coloring.super_elements(mclass)
+			for parent in parents do
+				properties.add_all(self.properties(parent))
+			end
+
 			for mclassdef in mclass.mclassdefs do
 				for mpropdef in mclassdef.mpropdefs do
 					var mproperty = mpropdef.mproperty
