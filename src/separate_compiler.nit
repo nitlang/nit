@@ -867,19 +867,25 @@ class SeparateCompilerVisitor
 		var res = self.new_var(bool_type)
 		var buff = new Buffer
 
-		if mtype isa MNullableType then mtype = mtype.mtype
+		var s: String
+		if mtype isa MNullableType then
+			mtype = mtype.mtype
+			s = "{value} == NULL ||"
+		else
+			s = "{value} != NULL &&"
+		end
 		if mtype isa MGenericType and mtype.need_anchor then
 			for ft in mtype.mclass.mclass_type.arguments do
 				var ftcolor = compiler.ft_colors[ft.as(MParameterType)]
 				buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
 			end
-			self.add("{res} = {value}->type->type_table[livetypes_{mtype.mclass.c_name}{buff.to_s}->color] == livetypes_{mtype.mclass.c_name}{buff.to_s}->id;")
+			self.add("{res} = {s} {value}->type->type_table[livetypes_{mtype.mclass.c_name}{buff.to_s}->color] == livetypes_{mtype.mclass.c_name}{buff.to_s}->id;")
 		else if mtype isa MClassType then
 			compiler.undead_types.add(mtype)
-			self.add("{res} = {value}->type->type_table[type_{mtype.c_name}.color] == type_{mtype.c_name}.id;")
+			self.add("{res} = {s} {value}->type->type_table[type_{mtype.c_name}.color] == type_{mtype.c_name}.id;")
 		else if mtype isa MParameterType then
 			var ftcolor = compiler.ft_colors[mtype]
-			self.add("{res} = {value}->type->type_table[self->type->fts_table->fts[{ftcolor}]->color] == self->type->fts_table->fts[{ftcolor}]->id;")
+			self.add("{res} = {s} {value}->type->type_table[self->type->fts_table->fts[{ftcolor}]->color] == self->type->fts_table->fts[{ftcolor}]->id;")
 		else
 			add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{value.inspect}\"); exit(1);")
 		end
