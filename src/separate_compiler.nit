@@ -923,7 +923,18 @@ class SeparateCompilerVisitor
 				self.add("\}")
 			end
 		else
-			self.add("{res} = {value1} == {value2};")
+			var s = new Array[String]
+			# This is just ugly on so many level. this works but must be rewriten
+			for t in self.compiler.live_primitive_types do
+				if not t.is_subtype(self.compiler.mainmodule, null, value1.mcasttype) then continue
+				if not t.is_subtype(self.compiler.mainmodule, null, value2.mcasttype) then continue
+				s.add "({value1}->class == (struct class*)&class_{t.c_name} && ((struct instance_{t.c_name}*){value1})->value == ((struct instance_{t.c_name}*){value2})->value)"
+			end
+			if s.is_empty then
+				self.add("{res} = {value1} == {value2};")
+			else
+				self.add("{res} = {value1} == {value2} || ({value1} != NULL && {value2} != NULL && {value1}->class == {value2}->class && ({s.join(" || ")}));")
+			end
 		end
 		return res
 	end
