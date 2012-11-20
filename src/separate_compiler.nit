@@ -892,19 +892,27 @@ class SeparateCompilerVisitor
 		var res = self.new_var(bool_type)
 		var buff = new Buffer
 
-		if mtype isa MNullableType then mtype = mtype.mtype
+		var s: String
+		if mtype isa MNullableType then
+			mtype = mtype.mtype
+			s = "{value} == NULL ||"
+		else
+			s = "{value} != NULL &&"
+		end
 		if mtype isa MGenericType and mtype.need_anchor then
 			for ft in mtype.mclass.mclass_type.arguments do
 				var ftcolor = compiler.ft_colors[ft.as(MParameterType)]
 				buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
 			end
-			self.add("{res} = {value}->type->type_table[livetypes_{mtype.mclass.c_name}{buff.to_s}->color] == livetypes_{mtype.mclass.c_name}{buff.to_s}->id;")
+			self.add("{res} = {s} {value}->type->type_table[livetypes_{mtype.mclass.c_name}{buff.to_s}->color] == livetypes_{mtype.mclass.c_name}{buff.to_s}->id;")
 		else if mtype isa MClassType then
 			compiler.undead_types.add(mtype)
-			self.add("{res} = {value}->type->type_table[type_{mtype.c_name}.color] == type_{mtype.c_name}.id;")
+			self.add("{res} = {s} {value}->type->type_table[type_{mtype.c_name}.color] == type_{mtype.c_name}.id;")
 		else if mtype isa MParameterType then
 			var ftcolor = compiler.ft_colors[mtype]
-			self.add("{res} = {value}->type->type_table[self->type->fts_table->fts[{ftcolor}]->color] == self->type->fts_table->fts[{ftcolor}]->id;")
+			self.add("{res} = {s} {value}->type->type_table[self->type->fts_table->fts[{ftcolor}]->color] == self->type->fts_table->fts[{ftcolor}]->id;")
+		else
+			add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{value.inspect}\"); exit(1);")
 		end
 
 		return res
@@ -913,8 +921,24 @@ class SeparateCompilerVisitor
 	redef fun is_same_type_test(value1, value2)
 	do
 		var res = self.new_var(bool_type)
-		# TODO
-		add("printf(\"NOT YET IMPLEMENTED: is_same_type(%s,%s).\\n\", \"{value1.inspect}\", \"{value2.inspect}\"); exit(1);")
+		# Swap values to be symetric
+		if value2.mtype.ctype != "val*" and value1.mtype.ctype == "val*" then
+			var tmp = value1
+			value1 = value2
+			value2 = tmp
+		end
+		if value1.mtype.ctype != "val*" then
+			if value2.mtype.ctype == value1.mtype.ctype then
+				self.add("{res} = 1; /* is_same_type_test: compatible types {value1.mtype} vs. {value2.mtype} */")
+			else if value2.mtype.ctype != "val*" then
+				self.add("{res} = 0; /* is_same_type_test: incompatible types {value1.mtype} vs. {value2.mtype}*/")
+			else
+				var mtype1 = value1.mtype.as(MClassType)
+				self.add("{res} = ({value2} != NULL) && ({value2}->class == (struct class*) &class_{mtype1.c_name}); /* is_same_type_test */")
+			end
+		else
+			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {value1}->class == {value2}->class); /* is_same_type_test */")
+		end
 		return res
 	end
 
@@ -948,7 +972,18 @@ class SeparateCompilerVisitor
 				self.add("\}")
 			end
 		else
-			self.add("{res} = {value1} == {value2};")
+			var s = new Array[String]
+			# This is just ugly on so many level. this works but must be rewriten
+			for t in self.compiler.live_primitive_types do
+				if not t.is_subtype(self.compiler.mainmodule, null, value1.mcasttype) then continue
+				if not t.is_subtype(self.compiler.mainmodule, null, value2.mcasttype) then continue
+				s.add "({value1}->class == (struct class*)&class_{t.c_name} && ((struct instance_{t.c_name}*){value1})->value == ((struct instance_{t.c_name}*){value2})->value)"
+			end
+			if s.is_empty then
+				self.add("{res} = {value1} == {value2};")
+			else
+				self.add("{res} = {value1} == {value2} || ({value1} != NULL && {value2} != NULL && {value1}->class == {value2}->class && ({s.join(" || ")}));")
+			end
 		end
 		return res
 	end
