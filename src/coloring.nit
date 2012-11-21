@@ -307,9 +307,11 @@ class ClassColoring
 	redef fun super_elements(element) do
 		if not self.super_elements_cache.has_key(element) then
 			var supers = new HashSet[T]
-			for sup in self.mmodule.flatten_mclass_hierarchy[element].greaters do
-				if element == sup then continue
-				supers.add(sup)
+			if self.mmodule.flatten_mclass_hierarchy.has(element) then
+				for sup in self.mmodule.flatten_mclass_hierarchy[element].greaters do
+					if element == sup then continue
+					supers.add(sup)
+				end
 			end
 			self.super_elements_cache[element] = supers
 		end
@@ -319,9 +321,11 @@ class ClassColoring
 	private fun parent_elements(element: T): Set[T] do
 		if not self.parent_elements_cache.has_key(element) then
 			var parents = new HashSet[T]
-			for parent in self.mmodule.flatten_mclass_hierarchy[element].direct_greaters do
-				if element == parent then continue
-				parents.add(parent)
+			if self.mmodule.flatten_mclass_hierarchy.has(element) then
+				for parent in self.mmodule.flatten_mclass_hierarchy[element].direct_greaters do
+					if element == parent then continue
+					parents.add(parent)
+				end
 			end
 			self.parent_elements_cache[element] = parents
 		end
@@ -332,8 +336,10 @@ class ClassColoring
 	redef fun sub_elements(element) do
 		if not self.sub_elements_cache.has_key(element) then
 			var subs = new HashSet[T]
-			for sub in self.mmodule.flatten_mclass_hierarchy[element].smallers do
-				subs.add(sub)
+			if self.mmodule.flatten_mclass_hierarchy.has(element) then
+				for sub in self.mmodule.flatten_mclass_hierarchy[element].smallers do
+					subs.add(sub)
+				end
 			end
 			self.sub_elements_cache[element] = subs
 		end
@@ -342,6 +348,7 @@ class ClassColoring
 
 	# Return all direct super elements of an element
 	redef fun is_element_mi(element) do
+		if not self.mmodule.flatten_mclass_hierarchy.has(element) then return false
 		return self.mmodule.flatten_mclass_hierarchy[element].direct_greaters.length > 1
 	end
 end
