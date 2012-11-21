@@ -479,15 +479,16 @@ class SeparateCompiler
 		end
 
 		#Build instance struct
-		v.add_decl("struct instance_{c_name} \{")
-		v.add_decl("const struct type *type;")
-		v.add_decl("const struct class *class;")
-		v.add_decl("nitattribute_t attrs[{attrs.length}];")
+		#extern const struct instance_array__NativeArray instance_array__NativeArray;
+		self.header.add_decl("struct instance_{c_name} \{")
+		self.header.add_decl("const struct type *type;")
+		self.header.add_decl("const struct class *class;")
+		self.header.add_decl("nitattribute_t attrs[{attrs.length}];")
 		if is_native_array then
 			# NativeArrays are just a instance header followed by an array of values
-			v.add_decl("val* values[1];")
+			self.header.add_decl("val* values[0];")
 		end
-		v.add_decl("\};")
+		self.header.add_decl("\};")
 
 
 		self.header.add_decl("{mtype.ctype} NEW_{c_name}({sig});")
