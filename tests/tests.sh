@@ -44,8 +44,8 @@ function process_result()
 	description=$2
 	SAV=""
 	NSAV=""
-	FAIL=""
-	NFAIL=""
+	FIXME=""
+	NFIXME=""
 	SOSO=""
 	NSOSO=""
 	SOSOF=""
@@ -75,9 +75,9 @@ function process_result()
 		if [ -r "$sav" ]; then
 			diff -u "out/$pattern.res" "$sav" > "out/$pattern.diff.fail.log"
 			if [ "$?" == 0 ]; then
-				FAIL="$sav"
+				FIXME="$sav"
 			else
-				NFAIL="$sav"
+				NFIXME="$sav"
 			fi
 			[ -z "$soso" ] && continue
 			sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
@@ -97,17 +97,17 @@ function process_result()
 	if [ -n "$SAV" ]; then
 		if [ -n "$tap" ]; then
 			echo "ok - $description"
-		elif [ -z "$FAIL" ]; then
+		elif [ -z "$FIXME" ]; then
 			echo "[ok] out/$pattern.res $SAV"
 		else
-			echo "[ok] out/$pattern.res $SAV - but $FAIL remains!"
+			echo "[ok] out/$pattern.res $SAV - but $FIXME remains!"
 		fi
 		ok="$ok $pattern"
-	elif [ -n "$FAIL" ]; then
+	elif [ -n "$FIXME" ]; then
 		if [ -n "$tap" ]; then
 			echo "not ok - $description # TODO expected failure"
 		else
-			echo "[fail] out/$pattern.res $FAIL"
+			echo "[fixme] out/$pattern.res $FIXME"
 		fi
 		ok="$ok $pattern"
 	elif [ -n "$SOSO" ]; then
@@ -128,7 +128,7 @@ function process_result()
 		if [ -n "$tap" ]; then
 			echo "not ok - $description # TODO SOSO expected failure"
 		else
-			echo "[fail soso] out/$pattern.res $SOSOF"
+			echo "[fixme soso] out/$pattern.res $SOSOF"
 		fi
 		ok="$ok $pattern"
 	elif [ -n "$NSAV" ]; then
@@ -139,11 +139,11 @@ function process_result()
 		fi
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
-	elif [ -n "$NFAIL" ]; then
+	elif [ -n "$NFIXME" ]; then
 		if [ -n "$tap" ]; then
 			echo "not ok - $description"
 		else
-			echo "[======= changed out/$pattern.res $NFAIL ======]"
+			echo "[======= changed out/$pattern.res $NFIXME ======]"
 		fi
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
