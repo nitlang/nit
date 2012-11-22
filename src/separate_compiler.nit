@@ -313,7 +313,7 @@ class SeparateCompiler
 				#print "compile {pd} @ {cd} @ {mmodule}"
 				var r = new SeparateRuntimeFunction(pd)
 				r.compile_to_c(self)
-				if cd.bound_mtype.ctype != "val*" then
+				if true or cd.bound_mtype.ctype != "val*" then
 					var r2 = new VirtualRuntimeFunction(pd)
 					r2.compile_to_c(self)
 				end
@@ -437,7 +437,7 @@ class SeparateCompiler
 			if mpropdef == null then
 				v.add_decl("NULL, /* empty */")
 			else
-				if mpropdef.mclassdef.bound_mtype.ctype != "val*" then
+				if true or mpropdef.mclassdef.bound_mtype.ctype != "val*" then
 					v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
 				else
 					v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
