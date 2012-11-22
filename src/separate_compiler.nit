@@ -363,25 +363,23 @@ class SeparateCompiler
 		v.add_decl("const struct fts_table_{c_name} fts_table_{c_name} = \{")
 		v.add_decl("\{")
 
-		if mtype isa MGenericType then
-			for ft in self.ft_tables[mtype.mclass] do
-				if ft == null then
-					v.add_decl("NULL, /* empty */")
+		for ft in self.ft_tables[mtype.mclass] do
+			if ft == null then
+				v.add_decl("NULL, /* empty */")
+			else
+				var id = -1
+				var ntype: MType
+				if ft.mclass == mtype.mclass then
+					ntype = mtype.arguments[ft.rank]
 				else
-					var id = -1
-					var ntype: MType
-					if ft.mclass == mtype.mclass then
-						ntype = mtype.arguments[ft.rank]
-					else
-						ntype = ft.anchor_to(self.mainmodule, mtype)
-					end
-					if ntype isa MNullableType then ntype = ntype.mtype
-					var ftype = ntype.as(MClassType)
-					if self.typeids.has_key(ftype) then
-						v.add_decl("(struct type*)&type_{ftype.c_name}, /* {ft} ({ftype}) */")
-					else
-						v.add_decl("NULL, /* empty ({ft} not a live type) */")
-					end
+					ntype = ft.anchor_to(self.mainmodule, mtype)
+				end
+				if ntype isa MNullableType then ntype = ntype.mtype
+				var ftype = ntype.as(MClassType)
+				if self.typeids.has_key(ftype) then
+					v.add_decl("(struct type*)&type_{ftype.c_name}, /* {ft} ({ftype}) */")
+				else
+					v.add_decl("NULL, /* empty ({ft} not a live type) */")
 				end
 			end
 		end
@@ -876,9 +874,20 @@ class SeparateCompilerVisitor
 		var compiler = self.compiler.as(SeparateCompiler)
 		if mtype isa MGenericType and mtype.need_anchor then
 			var buff = new Buffer
-			for ft in mtype.mclass.mclass_type.arguments do
-				var ftcolor = compiler.ft_colors[ft.as(MParameterType)]
-				buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
+			var rank = 0
+			for ft in mtype.arguments do
+				if ft isa MParameterType then
+					var ftcolor = compiler.ft_colors[ft]
+					buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
+				else if ft isa MGenericType and ft.need_anchor then
+					var ft_decl = mtype.mclass.mclass_type.arguments[rank]
+					var ftcolor = compiler.ft_colors[ft_decl.as(MParameterType)]
+					buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
+				else
+					var typecolor = compiler.type_colors[ft.as(MClassType)]
+					buff.append("[{typecolor}]")
+				end
+				rank += 1
 			end
 			mtype = self.anchor(mtype).as(MClassType)
 			return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) livetypes_{mtype.mclass.c_name}{buff.to_s})", mtype)
