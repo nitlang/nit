@@ -683,6 +683,20 @@ abstract class MType
 
 	private var as_nullable_cache: nullable MType = null
 
+
+	# The deph of the type seen as a tree.
+	#
+	# A -> 1
+	# G[A] -> 2
+	# H[A, B] -> 2
+	# H[G[A], B] -> 3
+	#
+	# Formal types have a depth of 1.
+	fun depth: Int
+	do
+		return 1
+	end
+
 	# Compute all the classdefs inherited/imported.
 	# The returned set contains:
 	#  * the class definitions from `mmodule` and its imported modules
@@ -851,6 +865,16 @@ class MGenericType
 			types.add(t.resolve_for(mtype, anchor, mmodule, cleanup_virtual))
 		end
 		return mclass.get_mtype(types)
+	end
+
+	redef fun depth
+	do
+		var dmax = 0
+		for a in self.arguments do
+			var d = a.depth
+			if d > dmax then dmax = d
+		end
+		return dmax + 1
 	end
 end
 
@@ -1047,6 +1071,8 @@ class MNullableType
 		return res.as_nullable
 	end
 
+	redef fun depth do return self.mtype.depth
+
 	redef fun collect_mclassdefs(mmodule)
 	do
 		assert not self.need_anchor
@@ -1099,6 +1125,22 @@ class MSignature
 
 	# The return type (null for a procedure)
 	var return_mtype: nullable MType
+
+	redef fun depth
+	do
+		var dmax = 0
+		var t = self.return_mtype
+		if t != null then dmax = t.depth
+		for p in mparameters do
+			var d = p.mtype.depth
+			if d > dmax then dmax = d
+		end
+		for p in mclosures do
+			var d = p.mtype.depth
+			if d > dmax then dmax = d
+		end
+		return dmax + 1
+	end
 
 	# REQUIRE: 1 <= mparameters.count p -> p.is_vararg
 	init(mparameters: Array[MParameter], return_mtype: nullable MType)

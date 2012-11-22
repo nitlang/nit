@@ -35,6 +35,35 @@ Usage: $e [options] modulenames
 END
 }
 
+# $1 is the pattern of the test
+# $2 is the file to compare to
+# the result is:
+#   0: if the file to compare to do not exists
+#   1: if the file match
+#   2: if the file match with soso
+#   3: if the file do not match
+function compare_to_result()
+{
+	local pattern="$1"
+	local sav="$2"
+	if [ ! -r "$sav" ]; then return 0; fi
+	diff -u "out/$pattern.res" "$sav" > "out/$pattern.diff.sav.log"
+	if [ "$?" == 0 ]; then
+		return 1
+	fi
+	[ -z "$soso" ] && return 3
+	sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
+	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
+	grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
+	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
+	diff -u "out/$pattern.res2" "out/$pattern.sav2" > "out/$pattern.diff.sav2.log"
+	if [ "$?" == 0 ]; then
+		return 2
+	else
+		return 3
+	fi
+}
+
 # As argument: the pattern used for the file
 function process_result()
 {
@@ -44,70 +73,54 @@ function process_result()
 	description=$2
 	SAV=""
 	NSAV=""
-	FAIL=""
-	NFAIL=""
+	FIXME=""
+	NFIXME=""
 	SOSO=""
 	NSOSO=""
 	SOSOF=""
 	NSOSOF=""
 	for sav in "sav/$engine/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
-		if [ -r "$sav" ]; then
-			diff -u "out/$pattern.res" "$sav" > "out/$pattern.diff.sav.log"
-			if [ "$?" == 0 ]; then
-				SAV="$sav"
-			else
-				NSAV="$sav"
-			fi
-			[ -z "$soso" ] && continue
-			sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
-			sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
-			grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
-			grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
-			diff -u "out/$pattern.res2" "out/$pattern.sav2" > "out/$pattern.diff.sav2.log"
-			if [ "$?" == 0 ]; then
-				SOSO="$sav"
-			else
-				NSOSO="$sav"
-			fi
-		fi
+		compare_to_result "$pattern" "$sav"
+		case "$?" in
+			0)
+				;; # no file
+			1)
+				SAV="$sav" ;;
+			2)
+				SOSO="$sav" ;;
+			3)
+				NSAV="$sav";;
+		esac
 	done
 	for sav in "sav/$engine/fixme/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.fail"; do
-		if [ -r "$sav" ]; then
-			diff -u "out/$pattern.res" "$sav" > "out/$pattern.diff.fail.log"
-			if [ "$?" == 0 ]; then
-				FAIL="$sav"
-			else
-				NFAIL="$sav"
-			fi
-			[ -z "$soso" ] && continue
-			sed '/[Ww]arning/d;/[Ee]rror/d' "out/$pattern.res" > "out/$pattern.res2"
-			sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.fail2"
-			grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
-			grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.fail2"
-			diff -u "out/$pattern.res2" "out/$pattern.fail2" > "out/$pattern.diff.fail2.log"
-			if [ "$?" == 0 ]; then
-				SOSOF="$sav"
-			else
-				NSOSOF="$sav"
-			fi
-		fi
+		compare_to_result "$pattern" "$sav"
+		case "$?" in
+			0)
+				;; # no file
+			1)
+				FIXME="$sav" ;;
+			2)
+				SOSOF="$sav" ;;
+			3)
+				NFIXME="$sav";;
+		esac
 	done
 	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
 	NYI="$?"
 	if [ -n "$SAV" ]; then
 		if [ -n "$tap" ]; then
 			echo "ok - $description"
-		elif [ -z "$FAIL" ]; then
+		elif [ -z "$FIXME" ]; then
 			echo "[ok] out/$pattern.res $SAV"
 		else
-			echo "[ok] out/$pattern.res $SAV - but $FAIL remains!"
+			echo "[ok] out/$pattern.res $SAV - but $FIXME remains!"
 		fi
 		ok="$ok $pattern"
-	elif [ -n "$FAIL" ]; then
+	elif [ -n "$FIXME" ]; then
 		if [ -n "$tap" ]; then
 			echo "not ok - $description # TODO expected failure"
 		else
-			echo "[fail] out/$pattern.res $FAIL"
+			echo "[fixme] out/$pattern.res $FIXME"
 		fi
 		ok="$ok $pattern"
 	elif [ -n "$SOSO" ]; then
@@ -128,7 +141,7 @@ function process_result()
 		if [ -n "$tap" ]; then
 			echo "not ok - $description # TODO SOSO expected failure"
 		else
-			echo "[fail soso] out/$pattern.res $SOSOF"
+			echo "[fixme soso] out/$pattern.res $SOSOF"
 		fi
 		ok="$ok $pattern"
 	elif [ -n "$NSAV" ]; then
@@ -139,11 +152,11 @@ function process_result()
 		fi
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
-	elif [ -n "$NFAIL" ]; then
+	elif [ -n "$NFIXME" ]; then
 		if [ -n "$tap" ]; then
 			echo "not ok - $description"
 		else
-			echo "[======= changed out/$pattern.res $NFAIL ======]"
+			echo "[======= changed out/$pattern.res $NFIXME ======]"
 		fi
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
