@@ -778,9 +778,13 @@ class SeparateCompilerVisitor
 		var recv = arguments.first
 		s.append("val*")
 		ss.append("{recv}")
+		self.varargize(msignature, arguments)
 		for i in [0..msignature.arity[ do
 			var a = arguments[i+1]
 			var t = msignature.mparameters[i].mtype
+			if i == msignature.vararg_rank then
+				t = arguments[i+1].mcasttype
+			end
 			s.append(", {t.ctype}")
 			a = self.autobox(a, t)
 			ss.append(", {a}")
