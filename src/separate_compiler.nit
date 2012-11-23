@@ -63,13 +63,14 @@ redef class ModelBuilder
 		# Instance abstract representation
 		v.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 
+		# Global Sys Instance
+		v.add_decl("val *glob_sys;")
 
 		# The main function of the C
 
 		v = new SeparateCompilerVisitor(compiler)
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
-		v.add_decl("val *glob_sys;")
 		v.add_decl("int main(int argc, char** argv) \{")
 		v.add("glob_argc = argc; glob_argv = argv;")
 		var main_type = mainmodule.sys_type
