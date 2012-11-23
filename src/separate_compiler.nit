@@ -937,13 +937,14 @@ class SeparateCompilerVisitor
 		self.add_decl("short int {idtype};")
 
 		var buff = new Buffer
+		var boxed = self.autobox(value, self.object_type)
 
 		var s: String
 		if mtype isa MNullableType then
 			mtype = mtype.mtype
-			s = "{value} == NULL ||"
+			s = "{boxed} == NULL ||"
 		else
-			s = "{value} != NULL &&"
+			s = "{boxed} != NULL &&"
 		end
 		if mtype isa MGenericType and mtype.need_anchor then
 			for ft in mtype.mclass.mclass_type.arguments do
@@ -961,13 +962,13 @@ class SeparateCompilerVisitor
 			self.add("{cltype} = self->type->fts_table->fts[{ftcolor}]->color;")
 			self.add("{idtype} = self->type->fts_table->fts[{ftcolor}]->id;")
 		else
-			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{value.inspect}\"); exit(1);")
+			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{boxed.inspect}\"); exit(1);")
 		end
 
-		self.add("if({value} != NULL && {cltype} >= {value}->type->table_size) \{")
+		self.add("if({boxed} != NULL && {cltype} >= {boxed}->type->table_size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")
-		self.add("{res} = {s} {value}->type->type_table[{cltype}] == {idtype};")
+		self.add("{res} = {s} {boxed}->type->type_table[{cltype}] == {idtype};")
 		self.add("\}")
 
 		return res
