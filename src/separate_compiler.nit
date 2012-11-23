@@ -63,13 +63,6 @@ redef class ModelBuilder
 		# Instance abstract representation
 		v.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 
-		# Class names (for the class_name and output_class_name methods)
-		v.add_decl("extern const char const * class_names[];")
-		v.add("const char const * class_names[] = \{")
-		for t in runtime_type_analysis.live_types do
-			v.add("\"{t}\",")
-		end
-		v.add("\};")
 
 		# The main function of the C
 
@@ -115,6 +108,9 @@ redef class ModelBuilder
 		for mclass in model.mclasses do
 			compiler.compile_live_gentype_to_c(mclass)
 		end
+
+		# for the class_name and output_class_name methods
+		compiler.compile_class_names
 
 		write_and_make(compiler)
 	end
@@ -162,6 +158,30 @@ class SeparateCompiler
 		var ft_coloring = new FTColoring(class_coloring)
 		self.ft_colors = ft_coloring.colorize
 		self.ft_tables = ft_coloring.build_ft_tables
+	end
+
+	private fun compile_class_names do
+
+		# Build type names table
+		var type_array = new Array[nullable MClassType]
+		for t, i in typeids do
+			if i >= type_array.length then
+				type_array[i] = null
+			end
+			type_array[i] = t
+		end
+
+		var v = new SeparateCompilerVisitor(self)
+		self.header.add_decl("extern const char const * class_names[];")
+		v.add("const char const * class_names[] = \{")
+		for t in type_array do
+			if t == null then
+				v.add("NULL,")
+			else
+				v.add("\"{t}\",")
+			end
+		end
+		v.add("\};")
 	end
 
 	# colorize live types of the program
@@ -955,9 +975,7 @@ class SeparateCompilerVisitor
 	redef fun class_name_string(value1)
 	do
 		var res = self.get_name("var_class_name")
-		self.add_decl("const char* {res};")
-		# TODO
-		add("printf(\"NOT YET IMPLEMENTED: class_name_string(%s).\\n\", \"{value1.inspect}\"); exit(1);")
+		self.add_decl("const char* {res} = class_names[self->type->id];")
 		return res
 	end
 
