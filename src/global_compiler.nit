@@ -1252,34 +1252,8 @@ class GlobalCompilerVisitor
 		var recv = self.autobox(args.first, recvtype)
 		recv = self.autoadapt(recv, recvtype)
 
-		var vararg_rank = m.msignature.vararg_rank
-		if vararg_rank >= 0 then
-			assert args.length >= m.msignature.arity + 1 # because of self
-			var rawargs = args
-			args = new Array[RuntimeVariable]
-
-			args.add(rawargs.first) # recv
-
-			for i in [0..vararg_rank[ do
-				args.add(rawargs[i+1])
-			end
-
-			var vararg_lastrank = vararg_rank + rawargs.length-1-m.msignature.arity
-			var vararg = new Array[RuntimeVariable]
-			for i in [vararg_rank..vararg_lastrank] do
-				vararg.add(rawargs[i+1])
-			end
-			# FIXME: its it to late to determine the vararg type, this should have been done during a previous analysis
-			var elttype = m.msignature.mparameters[vararg_rank].mtype
-			elttype = self.resolve_for(elttype, recv)
-			args.add(self.array_instance(vararg, elttype))
-
-			for i in [vararg_lastrank+1..rawargs.length-1[ do
-				args.add(rawargs[i+1])
-			end
-		else
-			args = args.to_a
-		end
+		args = args.to_a
+		self.varargize(m.msignature.as(not null), args)
 		if args.length != m.msignature.arity + 1 then # because of self
 			add("printf(\"NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.\\n\"); exit(1);")
 			debug("NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.")
@@ -1301,6 +1275,42 @@ class GlobalCompilerVisitor
 			end
 			t = self.resolve_for(t, recv)
 			args[i+1] = self.autobox(args[i+1], t)
+		end
+	end
+
+	# Transform varargs, in raw arguments, into a single argument of type Array
+	# Note: this method modify the given `args`
+	# If there is no vararg, then `args` is not modified.
+	fun varargize(msignature: MSignature, args: Array[RuntimeVariable])
+	do
+		var recv = args.first
+		var vararg_rank = msignature.vararg_rank
+		if vararg_rank >= 0 then
+			assert args.length >= msignature.arity + 1 # because of self
+			var rawargs = args
+			args = new Array[RuntimeVariable]
+
+			args.add(rawargs.first) # recv
+
+			for i in [0..vararg_rank[ do
+				args.add(rawargs[i+1])
+			end
+
+			var vararg_lastrank = vararg_rank + rawargs.length-1-msignature.arity
+			var vararg = new Array[RuntimeVariable]
+			for i in [vararg_rank..vararg_lastrank] do
+				vararg.add(rawargs[i+1])
+			end
+			# FIXME: its it to late to determine the vararg type, this should have been done during a previous analysis
+			var elttype = msignature.mparameters[vararg_rank].mtype
+			elttype = self.resolve_for(elttype, recv)
+			args.add(self.array_instance(vararg, elttype))
+
+			for i in [vararg_lastrank+1..rawargs.length-1[ do
+				args.add(rawargs[i+1])
+			end
+			rawargs.clear
+			rawargs.add_all(args)
 		end
 	end
 
