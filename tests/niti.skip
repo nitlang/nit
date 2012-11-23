@@ -3,4 +3,8 @@ init_inherit
 init_linext
 inline
 test_ni_
+test_math
 shoot_logic
+bench_
+nit_args1
+nitc_args1
