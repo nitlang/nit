@@ -955,7 +955,11 @@ class SeparateCompilerVisitor
 		else
 			s = "{boxed} != NULL &&"
 		end
-		if mtype isa MGenericType and mtype.need_anchor then
+		if mtype isa MParameterType then
+			var ftcolor = compiler.ft_colors[mtype]
+			self.add("{cltype} = self->type->fts_table->fts[{ftcolor}]->color;")
+			self.add("{idtype} = self->type->fts_table->fts[{ftcolor}]->id;")
+		else if mtype isa MGenericType and mtype.need_anchor then
 			for ft in mtype.mclass.mclass_type.arguments do
 				var ftcolor = compiler.ft_colors[ft.as(MParameterType)]
 				buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
@@ -966,14 +970,11 @@ class SeparateCompilerVisitor
 			compiler.undead_types.add(mtype)
 			self.add("{cltype} = type_{mtype.c_name}.color;")
 			self.add("{idtype} = type_{mtype.c_name}.id;")
-		else if mtype isa MParameterType then
-			var ftcolor = compiler.ft_colors[mtype]
-			self.add("{cltype} = self->type->fts_table->fts[{ftcolor}]->color;")
-			self.add("{idtype} = self->type->fts_table->fts[{ftcolor}]->id;")
 		else
 			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{boxed.inspect}\"); exit(1);")
 		end
 
+		# check color is in table
 		self.add("if({boxed} != NULL && {cltype} >= {boxed}->type->table_size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")
