@@ -864,9 +864,22 @@ class SeparateCompilerVisitor
 		return res
 	end
 
+	# Add a check and an abort for a null reciever is needed
+	fun check_recv_notnull(recv: RuntimeVariable)
+	do
+		var maybenull = recv.mcasttype isa MNullableType
+		if maybenull then
+			self.add("if ({recv} == NULL) \{")
+			self.add_abort("Reciever is null")
+			self.add("\}")
+		end
+	end
+
+
 	redef fun isset_attribute(a, recv)
 	do
 		# FIXME: Here we inconditionally return boxed primitive attributes
+		self.check_recv_notnull(recv)
 		var res = self.new_var(bool_type)
 		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] != NULL; /* {a} on {recv.inspect}*/")
 		return res
@@ -880,6 +893,9 @@ class SeparateCompilerVisitor
 		var cret = self.object_type.as_nullable
 		var res = self.new_var(cret)
 		res.mcasttype = ret
+
+		self.check_recv_notnull(recv)
+
 		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}]; /* {a} on {recv.inspect} */")
 		if not ret isa MNullableType then
 			self.add("if ({res} == NULL) \{")
@@ -893,6 +909,7 @@ class SeparateCompilerVisitor
 	redef fun write_attribute(a, recv, value)
 	do
 		# FIXME: Here we inconditionally box primitive attributes
+		self.check_recv_notnull(recv)
 		value = self.autobox(value, self.object_type.as_nullable)
 		self.add("{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] = {value}; /* {a} on {recv.inspect} */")
 	end
