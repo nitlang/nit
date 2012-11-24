@@ -899,26 +899,35 @@ class SeparateCompilerVisitor
 		self.add("{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] = {value}; /* {a} on {recv.inspect} */")
 	end
 
+	# Build livetype structure retrieving
+	#ENSURE: mtype.need_anchor
+	fun retrieve_anchored_livetype(mtype: MGenericType, buffer: Buffer) do
+		assert mtype.need_anchor
+
+		var compiler = self.compiler.as(SeparateCompiler)
+		for ft in mtype.arguments do
+			if ft isa MParameterType then
+				var ftcolor = compiler.ft_colors[ft]
+				buffer.append("[self->type->fts_table->fts[{ftcolor}]->id]")
+			else if ft isa MGenericType and ft.need_anchor then
+				var bbuff = new Buffer
+				retrieve_anchored_livetype(ft, bbuff)
+				buffer.append("[livetypes_{ft.mclass.c_name}{bbuff.to_s}->id]")
+			else if ft isa MClassType then
+				var typecolor = compiler.type_colors[ft]
+				buffer.append("[{typecolor}]")
+			else
+				self.add("printf(\"NOT YET IMPLEMENTED: init_instance(%s, {mtype}).\\n\", \"{ft.inspect}\"); exit(1);")
+			end
+		end
+	end
+
 	redef fun init_instance(mtype)
 	do
 		var compiler = self.compiler.as(SeparateCompiler)
 		if mtype isa MGenericType and mtype.need_anchor then
 			var buff = new Buffer
-			var rank = 0
-			for ft in mtype.arguments do
-				if ft isa MParameterType then
-					var ftcolor = compiler.ft_colors[ft]
-					buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
-				else if ft isa MGenericType and ft.need_anchor then
-					var ft_decl = mtype.mclass.mclass_type.arguments[rank]
-					var ftcolor = compiler.ft_colors[ft_decl.as(MParameterType)]
-					buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
-				else
-					var typecolor = compiler.type_colors[ft.as(MClassType)]
-					buff.append("[{typecolor}]")
-				end
-				rank += 1
-			end
+			retrieve_anchored_livetype(mtype, buff)
 			mtype = self.anchor(mtype).as(MClassType)
 			return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) livetypes_{mtype.mclass.c_name}{buff.to_s})", mtype)
 		end
