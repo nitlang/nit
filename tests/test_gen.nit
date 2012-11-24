@@ -24,7 +24,7 @@ class Toto[E]
    redef fun to_s: String
       do return _item.to_s end
 
-   init do end
+   init(e:E) do _item = e
 end
 
 class TestNative
@@ -51,7 +51,7 @@ end
 
 fun test_toto
 do
-	var t = new Toto[Int]
+	var t = new Toto[Int](1)
 	t.set(5)
 	print(t)
 end
