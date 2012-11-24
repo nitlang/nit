@@ -1461,6 +1461,14 @@ class GlobalCompilerVisitor
 		var res = self.new_var(bool_type)
 
 		self.add("/* isa {mtype} on {value.inspect} */")
+		if value.mtype.ctype != "val*" then
+			if value.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
+				self.add("{res} = 1;")
+			else
+				self.add("{res} = 0;")
+			end
+			return res
+		end
 		if value.mcasttype isa MNullableType then
 			self.add("if ({value} == NULL) \{")
 			if mtype isa MNullableType then
