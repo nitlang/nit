@@ -509,7 +509,7 @@ redef class MType
 	# Return the name of the C structure associated to a Nit live type
 	# FIXME: move to GlobalCompiler so we can check that self is a live type
 	fun c_name: String is abstract
-	private var c_name_cache: nullable String
+	protected var c_name_cache: nullable String protected writable
 end
 
 redef class MClassType

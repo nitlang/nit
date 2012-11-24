@@ -58,7 +58,7 @@ redef class ModelBuilder
 		# Class abstract representation
 		v.add_decl("struct class \{ nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 		# Type abstract representation
-		v.add_decl("struct type \{ int id; int color; struct fts_table *fts_table; int type_table[1]; \}; /* general C type representing a Nit type. */")
+		v.add_decl("struct type \{ int id; int color; struct fts_table *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
 		v.add_decl("struct fts_table \{ struct type *fts[1]; \}; /* fts list of a C type representation. */")
 		# Instance abstract representation
 		v.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
@@ -358,6 +358,7 @@ class SeparateCompiler
 		self.header.add_decl("int id;")
 		self.header.add_decl("int color;")
 		self.header.add_decl("const struct fts_table_{c_name} *fts_table;")
+		self.header.add_decl("int table_size;")
 		self.header.add_decl("int type_table[{self.type_tables[mtype].length}];")
 		self.header.add_decl("\};")
 
@@ -372,6 +373,7 @@ class SeparateCompiler
 		v.add_decl("{self.typeids[mtype]},")
 		v.add_decl("{self.type_colors[mtype]},")
 		v.add_decl("&fts_table_{c_name},")
+		v.add_decl("{self.type_tables[mtype].length},")
 		v.add_decl("\{")
 		for stype in self.type_tables[mtype] do
 			if stype == null then
@@ -914,26 +916,35 @@ class SeparateCompilerVisitor
 		self.add("{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] = {value}; /* {a} on {recv.inspect} */")
 	end
 
+	# Build livetype structure retrieving
+	#ENSURE: mtype.need_anchor
+	fun retrieve_anchored_livetype(mtype: MGenericType, buffer: Buffer) do
+		assert mtype.need_anchor
+
+		var compiler = self.compiler.as(SeparateCompiler)
+		for ft in mtype.arguments do
+			if ft isa MParameterType then
+				var ftcolor = compiler.ft_colors[ft]
+				buffer.append("[self->type->fts_table->fts[{ftcolor}]->id]")
+			else if ft isa MGenericType and ft.need_anchor then
+				var bbuff = new Buffer
+				retrieve_anchored_livetype(ft, bbuff)
+				buffer.append("[livetypes_{ft.mclass.c_name}{bbuff.to_s}->id]")
+			else if ft isa MClassType then
+				var typecolor = compiler.type_colors[ft]
+				buffer.append("[{typecolor}]")
+			else
+				self.add("printf(\"NOT YET IMPLEMENTED: init_instance(%s, {mtype}).\\n\", \"{ft.inspect}\"); exit(1);")
+			end
+		end
+	end
+
 	redef fun init_instance(mtype)
 	do
 		var compiler = self.compiler.as(SeparateCompiler)
 		if mtype isa MGenericType and mtype.need_anchor then
 			var buff = new Buffer
-			var rank = 0
-			for ft in mtype.arguments do
-				if ft isa MParameterType then
-					var ftcolor = compiler.ft_colors[ft]
-					buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
-				else if ft isa MGenericType and ft.need_anchor then
-					var ft_decl = mtype.mclass.mclass_type.arguments[rank]
-					var ftcolor = compiler.ft_colors[ft_decl.as(MParameterType)]
-					buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
-				else
-					var typecolor = compiler.type_colors[ft.as(MClassType)]
-					buff.append("[{typecolor}]")
-				end
-				rank += 1
-			end
+			retrieve_anchored_livetype(mtype, buff)
 			mtype = self.anchor(mtype).as(MClassType)
 			return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) livetypes_{mtype.mclass.c_name}{buff.to_s})", mtype)
 		end
@@ -945,30 +956,47 @@ class SeparateCompilerVisitor
 	do
 		var compiler = self.compiler.as(SeparateCompiler)
 		var res = self.new_var(bool_type)
+
+		var cltype = self.get_name("cltype")
+		self.add_decl("short int {cltype};")
+		var idtype = self.get_name("idtype")
+		self.add_decl("short int {idtype};")
+
 		var buff = new Buffer
+		var boxed = self.autobox(value, self.object_type)
 
 		var s: String
 		if mtype isa MNullableType then
 			mtype = mtype.mtype
-			s = "{value} == NULL ||"
+			s = "{boxed} == NULL ||"
 		else
-			s = "{value} != NULL &&"
+			s = "{boxed} != NULL &&"
 		end
-		if mtype isa MGenericType and mtype.need_anchor then
+		if mtype isa MParameterType then
+			var ftcolor = compiler.ft_colors[mtype]
+			self.add("{cltype} = self->type->fts_table->fts[{ftcolor}]->color;")
+			self.add("{idtype} = self->type->fts_table->fts[{ftcolor}]->id;")
+		else if mtype isa MGenericType and mtype.need_anchor then
 			for ft in mtype.mclass.mclass_type.arguments do
 				var ftcolor = compiler.ft_colors[ft.as(MParameterType)]
 				buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
 			end
-			self.add("{res} = {s} {value}->type->type_table[livetypes_{mtype.mclass.c_name}{buff.to_s}->color] == livetypes_{mtype.mclass.c_name}{buff.to_s}->id;")
+			self.add("{cltype} = livetypes_{mtype.mclass.c_name}{buff.to_s}->color;")
+			self.add("{idtype} = livetypes_{mtype.mclass.c_name}{buff.to_s}->id;")
 		else if mtype isa MClassType then
 			compiler.undead_types.add(mtype)
-			self.add("{res} = {s} {value}->type->type_table[type_{mtype.c_name}.color] == type_{mtype.c_name}.id;")
-		else if mtype isa MParameterType then
-			var ftcolor = compiler.ft_colors[mtype]
-			self.add("{res} = {s} {value}->type->type_table[self->type->fts_table->fts[{ftcolor}]->color] == self->type->fts_table->fts[{ftcolor}]->id;")
+			self.add("{cltype} = type_{mtype.c_name}.color;")
+			self.add("{idtype} = type_{mtype.c_name}.id;")
 		else
-			add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{value.inspect}\"); exit(1);")
+			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{boxed.inspect}\"); exit(1);")
 		end
+
+		# check color is in table
+		self.add("if({boxed} != NULL && {cltype} >= {boxed}->type->table_size) \{")
+		self.add("{res} = 0;")
+		self.add("\} else \{")
+		self.add("{res} = {s} {boxed}->type->type_table[{cltype}] == {idtype};")
+		self.add("\}")
 
 		return res
 	end
