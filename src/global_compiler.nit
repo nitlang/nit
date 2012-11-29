@@ -1210,6 +1210,7 @@ class GlobalCompilerVisitor
 		end
 		if types.is_empty then
 			self.add("/*BUG: no live types for {args.first.inspect} . {m}*/")
+			self.bugtype(args.first)
 			return res
 		end
 
@@ -1363,6 +1364,7 @@ class GlobalCompilerVisitor
 
 		if types.is_empty then
 			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
+			self.bugtype(recv)
 			return res
 		end
 		self.add("/* isset {a} on {recv.inspect} */")
@@ -1409,6 +1411,7 @@ class GlobalCompilerVisitor
 
 		if types.is_empty then
 			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
+			self.bugtype(recv)
 			return res
 		end
 		self.add("/* read {a} on {recv.inspect} */")
@@ -1454,6 +1457,7 @@ class GlobalCompilerVisitor
 
 		if types.is_empty then
 			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
+			self.bugtype(recv)
 			return
 		end
 		self.add("/* write {a} on {recv.inspect} */")
