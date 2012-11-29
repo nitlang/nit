@@ -1492,7 +1492,7 @@ class GlobalCompilerVisitor
 			end
 			return res
 		end
-		if value.mcasttype isa MNullableType then
+		if value.mcasttype isa MNullableType or value.mcasttype isa MNullType then
 			self.add("if ({value} == NULL) \{")
 			if mtype isa MNullableType then
 				self.add("{res} = 1; /* isa {mtype} */")
