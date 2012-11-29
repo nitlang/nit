@@ -1136,6 +1136,17 @@ class GlobalCompilerVisitor
 		self.ret(self.new_expr("NEW_{ret_type.c_name}({arguments[1]})", ret_type))
 	end
 
+	# Add a check and an abort for a null reciever is needed
+	fun check_recv_notnull(recv: RuntimeVariable)
+	do
+		var maybenull = recv.mcasttype isa MNullableType
+		if maybenull then
+			self.add("if ({recv} == NULL) \{")
+			self.add_abort("Reciever is null")
+			self.add("\}")
+		end
+	end
+
 	# Generate a polymorphic send for the method `m' and the arguments `args'
 	fun send(m: MMethod, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do

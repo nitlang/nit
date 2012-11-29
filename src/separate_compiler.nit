@@ -849,18 +849,6 @@ class SeparateCompilerVisitor
 		return res
 	end
 
-	# Add a check and an abort for a null reciever is needed
-	fun check_recv_notnull(recv: RuntimeVariable)
-	do
-		var maybenull = recv.mcasttype isa MNullableType
-		if maybenull then
-			self.add("if ({recv} == NULL) \{")
-			self.add_abort("Reciever is null")
-			self.add("\}")
-		end
-	end
-
-
 	redef fun isset_attribute(a, recv)
 	do
 		# FIXME: Here we inconditionally return boxed primitive attributes
