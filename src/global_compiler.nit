@@ -2167,8 +2167,7 @@ end
 redef class ADeferredMethPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
-		v.add("printf(\"Not implemented {class_name} {mpropdef} at {location.to_s}\\n\");")
-		v.add("exit(1);")
+		v.add_abort("Deferred method called")
 	end
 
 	redef fun can_inline do return true
