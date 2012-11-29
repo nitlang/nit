@@ -458,6 +458,8 @@ redef class ASuperstringExpr
 		v.add_type(v.get_class("NativeArray").get_mtype([v.get_class("Object").mclass_type]))
 		var prop = v.get_method(arraytype, "join")
 		v.add_monomorphic_send(arraytype, prop)
+		var prop2 = v.get_method(arraytype, "with_native")
+		v.add_monomorphic_send(arraytype, prop2)
 	end
 end
 
