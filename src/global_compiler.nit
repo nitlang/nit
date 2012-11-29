@@ -102,27 +102,7 @@ redef class ModelBuilder
 		end
 
 		# The main function of the C
-
-		v = new GlobalCompilerVisitor(compiler)
-		v.add_decl("int glob_argc;")
-		v.add_decl("char **glob_argv;")
-		v.add_decl("val *glob_sys;")
-		v.add_decl("int main(int argc, char** argv) \{")
-		v.add("glob_argc = argc; glob_argv = argv;")
-		var main_type = mainmodule.sys_type
-		if main_type == null then return # Nothing to compile
-		var glob_sys = v.init_instance(main_type)
-		v.add("glob_sys = {glob_sys};")
-		var main_init = mainmodule.try_get_primitive_method("init", main_type)
-		if main_init != null then
-			v.send(main_init, [glob_sys])
-		end
-		var main_method = mainmodule.try_get_primitive_method("main", main_type)
-		if main_method != null then
-			v.send(main_method, [glob_sys])
-		end
-		v.add("return 0;")
-		v.add("\}")
+		compiler.compile_main_function
 
 		# Compile until all runtime_functions are visited
 
@@ -437,6 +417,41 @@ class GlobalCompiler
 		if tryfile.file_exists then
 			self.extern_bodies.add(tryfile)
 		end
+	end
+
+	# Initialize a visitor specific for a compiler engine
+	fun new_visitor: GlobalCompilerVisitor do return new GlobalCompilerVisitor(self)
+
+	# Generate the main C function.
+	# This function:
+	# allocate the Sys object if it exists
+	# call init if is exists
+	# call main if it exists
+	fun compile_main_function
+	do
+		var v = self.new_visitor
+		v.add_decl("int glob_argc;")
+		v.add_decl("char **glob_argv;")
+		v.add_decl("val *glob_sys;")
+		v.add_decl("int main(int argc, char** argv) \{")
+		v.add("glob_argc = argc; glob_argv = argv;")
+		var main_type = mainmodule.sys_type
+		if main_type != null then
+			var mainmodule = v.compiler.mainmodule
+			var glob_sys = v.init_instance(main_type)
+			v.add("glob_sys = {glob_sys};")
+			var main_init = mainmodule.try_get_primitive_method("init", main_type)
+			if main_init != null then
+				v.send(main_init, [glob_sys])
+			end
+			var main_method = mainmodule.try_get_primitive_method("main", main_type)
+			if main_method != null then
+				v.send(main_method, [glob_sys])
+			end
+		end
+		v.add("return 0;")
+		v.add("\}")
+
 	end
 
 	private var collect_types_cache: HashMap[MType, Array[MClassType]] = new HashMap[MType, Array[MClassType]]

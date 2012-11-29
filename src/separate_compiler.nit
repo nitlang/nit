@@ -69,26 +69,7 @@ redef class ModelBuilder
 		v.add_decl("extern val *glob_sys;")
 
 		# The main function of the C
-
-		v = new SeparateCompilerVisitor(compiler)
-		v.add_decl("int glob_argc;")
-		v.add_decl("char **glob_argv;")
-		v.add_decl("val *glob_sys;")
-		v.add_decl("int main(int argc, char** argv) \{")
-		v.add("glob_argc = argc; glob_argv = argv;")
-		var main_type = mainmodule.sys_type
-		if main_type == null then return # Nothing to compile
-		var glob_sys = v.init_instance(main_type)
-		v.add("glob_sys = {glob_sys};")
-		var main_init = mainmodule.try_get_primitive_method("init", main_type)
-		if main_init != null then
-			v.send(main_init, [glob_sys])
-		end
-		var main_method = mainmodule.try_get_primitive_method("main", main_type)
-		if main_method != null then
-			v.send(main_method, [glob_sys])
-		end
-		v.add("\}")
+		compiler.compile_main_function
 
 		# compile class structures
 		for m in mainmodule.in_importation.greaters do
@@ -542,6 +523,8 @@ class SeparateCompiler
 		v.add("return {res};")
 		v.add("\}")
 	end
+
+	redef fun new_visitor do return new SeparateCompilerVisitor(self)
 end
 
 # The C function associated to a methoddef separately compiled
