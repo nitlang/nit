@@ -1170,14 +1170,19 @@ class GlobalCompilerVisitor
 		end
 		self.add("/* send {m} on {args.first.inspect} */")
 		if args.first.mtype.ctype != "val*" then
-			var propdefs = m.lookup_definitions(self.compiler.mainmodule, args.first.mtype)
+			var mclasstype = args.first.mtype.as(MClassType)
+			if not self.compiler.runtime_type_analysis.live_types.has(mclasstype) then
+				self.add("/* skip, no method {m} */")
+				return res
+			end
+			var propdefs = m.lookup_definitions(self.compiler.mainmodule, mclasstype)
 			if propdefs.length == 0 then
 				self.add("/* skip, no method {m} */")
 				return res
 			end
 			assert propdefs.length == 1
 			var propdef = propdefs.first
-			var res2 = self.call(propdef, args.first.mtype.as(MClassType), args)
+			var res2 = self.call(propdef, mclasstype, args)
 			if res != null then self.assign(res, res2.as(not null))
 			return res
 		end
