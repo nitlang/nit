@@ -1715,18 +1715,47 @@ redef class MMethodDef
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
 			var oldnode = v.current_node
 			v.current_node = npropdef
+			self.compile_parameter_check(v, arguments)
 			npropdef.compile_to_c(v, self, arguments)
 			v.current_node = oldnode
 		else if self.mproperty.name == "init" then
 			var nclassdef = modelbuilder.mclassdef2nclassdef[self.mclassdef]
 			var oldnode = v.current_node
 			v.current_node = nclassdef
+			self.compile_parameter_check(v, arguments)
 			nclassdef.compile_to_c(v, self, arguments)
 			v.current_node = oldnode
 		else
 			abort
 		end
 		return null
+	end
+
+	# Generate type checks in the C code to check covariant parameters
+	fun compile_parameter_check(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable])
+	do
+		for i in [0..msignature.arity[ do
+			# skip test for vararg since the array is instantiated with the correct polymorphic type
+			if msignature.vararg_rank == i then continue
+
+			# skip if the cast is not required
+			var origmtype =  self.mproperty.intro.msignature.mparameters[i].mtype
+			if not origmtype.need_anchor then continue
+
+			# get the parameter type
+			var mtype = self.msignature.mparameters[i].mtype
+
+			# generate the cast
+			# note that v decides if and how to implements the cast
+			v.add("/* Covariant cast for argument {i} ({self.msignature.mparameters[i].name}) {arguments[i+1].inspect} isa {mtype} */")
+			var cond = v.type_test( arguments[i+1], mtype)
+			v.add("if (!{cond}) \{")
+			#var x = v.class_name_string(arguments[i+1])
+			#var y = v.class_name_string(arguments.first)
+			#v.add("fprintf(stderr, \"expected {mtype} (self is %s), got %s for {arguments[i+1].inspect}\\n\", {y}, {x});")
+			v.add_abort("Cast failed")
+			v.add("\}")
+		end
 	end
 end
 
