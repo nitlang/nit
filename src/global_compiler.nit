@@ -1164,10 +1164,6 @@ class GlobalCompilerVisitor
 			res = self.new_var(ret)
 		end
 
-		if types.is_empty then
-			self.add("/*BUG: no live types for {args.first.inspect} . {m}*/")
-			return res
-		end
 		self.add("/* send {m} on {args.first.inspect} */")
 		if args.first.mtype.ctype != "val*" then
 			var mclasstype = args.first.mtype.as(MClassType)
@@ -1212,6 +1208,11 @@ class GlobalCompilerVisitor
 			end
 			self.add "\} else"
 		end
+		if types.is_empty then
+			self.add("/*BUG: no live types for {args.first.inspect} . {m}*/")
+			return res
+		end
+
 		self.add("switch({args.first}->classid) \{")
 		var last = types.last
 		var defaultpropdef: nullable MMethodDef = null
@@ -1354,6 +1355,8 @@ class GlobalCompilerVisitor
 	# Generate a polymorphic attribute is_set test
 	fun isset_attribute(a: MAttribute, recv: RuntimeVariable): RuntimeVariable
 	do
+		check_recv_notnull(recv)
+
 		var types = self.collect_types(recv)
 
 		var res = self.new_var(bool_type)
@@ -1396,6 +1399,8 @@ class GlobalCompilerVisitor
 	# Generate a polymorphic attribute read
 	fun read_attribute(a: MAttribute, recv: RuntimeVariable): RuntimeVariable
 	do
+		check_recv_notnull(recv)
+
 		var types = self.collect_types(recv)
 
 		var ret = a.intro.static_mtype.as(not null)
@@ -1443,6 +1448,8 @@ class GlobalCompilerVisitor
 	# Generate a polymorphic attribute write
 	fun write_attribute(a: MAttribute, recv: RuntimeVariable, value: RuntimeVariable)
 	do
+		check_recv_notnull(recv)
+
 		var types = self.collect_types(recv)
 
 		if types.is_empty then
