@@ -712,7 +712,7 @@ private class CustomizedRuntimeFunction
 		end
 		sig.append(self.c_name)
 		sig.append("({recv.ctype} {selfvar}")
-		comment.append("(self: {selfvar}")
+		comment.append("(self: {recv}")
 		arguments.add(selfvar)
 		for i in [0..mmethoddef.msignature.arity[ do
 			var mtype = mmethoddef.msignature.mparameters[i].mtype
