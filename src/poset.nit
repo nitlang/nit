@@ -35,6 +35,8 @@ class POSet[E: Object]
 	private var dfroms: HashMap[E, Set[E]] = new HashMap[E, Set[E]]
 	private var elements: HashMap[E, POSetElement[E]] = new HashMap[E, POSetElement[E]]
 
+	redef fun has(e) do return self.nodes.has(e)
+
 	# Add a node (an element) to the posed
 	# The new element is added unconnected to any other nodes (it is both a new root and a new leaf).
 	# Return the POSetElement associated to `e'.
