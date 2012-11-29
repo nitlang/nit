@@ -4,8 +4,6 @@ init_linext
 inline
 test_extern
 test_ni_
-test_signals
-test_stream_poll
 nitc
 nitdoc
 nits
