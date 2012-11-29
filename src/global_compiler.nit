@@ -1139,7 +1139,7 @@ class GlobalCompilerVisitor
 	# Add a check and an abort for a null reciever is needed
 	fun check_recv_notnull(recv: RuntimeVariable)
 	do
-		var maybenull = recv.mcasttype isa MNullableType
+		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
 		if maybenull then
 			self.add("if ({recv} == NULL) \{")
 			self.add_abort("Reciever is null")
@@ -1186,7 +1186,7 @@ class GlobalCompilerVisitor
 			if res != null then self.assign(res, res2.as(not null))
 			return res
 		end
-		if args.first.mcasttype isa MNullableType then
+		if args.first.mcasttype isa MNullableType or args.first.mcasttype isa MNullType then
 			# The reciever is potentially null, so we have to 3 cases: ==, != or NullPointerException
 			self.add("if ({args.first} == NULL) \{ /* Special null case */")
 			if m.name == "==" then
