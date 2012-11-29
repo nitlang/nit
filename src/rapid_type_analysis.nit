@@ -102,6 +102,18 @@ class RapidTypeAnalysis
 	# The customized method definitions that remain to visit
 	private var todo: List[CustomizedMethodDef] = new List[CustomizedMethodDef]
 
+	# Adapt and remove nullable
+	# return null if we got the null type
+	fun cleanup_type(mtype: MType, recvtype: MClassType): nullable MClassType
+	do
+		mtype = mtype.anchor_to(self.mainmodule, recvtype)
+		if mtype isa MNullType then return null
+		if mtype isa MNullableType then mtype = mtype.mtype
+		assert mtype isa MClassType
+		assert not mtype.need_anchor
+		return mtype
+	end
+
 	# Add a live type to the pool
 	#
 	# If the types is already live, then do nothing.
@@ -217,6 +229,14 @@ class RapidTypeAnalysis
 				self.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg, self.mainmodule))
 				var native = self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype])
 				self.add_type(native)
+			end
+
+			for i in [0..mr.mmethoddef.msignature.arity[ do
+				var origtype = mr.mmethoddef.mproperty.intro.msignature.mparameters[i].mtype
+				if not origtype.need_anchor then continue # skip non covariant stuff
+				var paramtype = mr.mmethoddef.msignature.mparameters[i].mtype
+				paramtype = self.cleanup_type(paramtype, mr.receiver).as(not null)
+				self.add_cast_type(paramtype)
 			end
 
 			if not self.modelbuilder.mpropdef2npropdef.has_key(mr.mmethoddef) then
