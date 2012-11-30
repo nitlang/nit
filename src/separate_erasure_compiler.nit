@@ -46,7 +46,7 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new SeparateErasureCompiler(mainmodule, runtime_type_analysis, self)
-		var v = new SeparateErasureCompilerVisitor(compiler)
+		var v = compiler.new_visitor
 		compiler.header = v
 		v.add_decl("#include <stdlib.h>")
 		v.add_decl("#include <stdio.h>")
@@ -65,26 +65,7 @@ redef class ModelBuilder
 		v.add_decl("extern val *glob_sys;")
 
 		# The main function of the C
-
-		v = new SeparateErasureCompilerVisitor(compiler)
-		v.add_decl("int glob_argc;")
-		v.add_decl("char **glob_argv;")
-		v.add_decl("val *glob_sys;")
-		v.add_decl("int main(int argc, char** argv) \{")
-		v.add("glob_argc = argc; glob_argv = argv;")
-		var main_type = mainmodule.sys_type
-		if main_type == null then return # Nothing to compile
-		var glob_sys = v.init_instance(main_type)
-		v.add("glob_sys = {glob_sys};")
-		var main_init = mainmodule.try_get_primitive_method("init", main_type)
-		if main_init != null then
-			v.send(main_init, [glob_sys])
-		end
-		var main_method = mainmodule.try_get_primitive_method("main", main_type)
-		if main_method != null then
-			v.send(main_method, [glob_sys])
-		end
-		v.add("\}")
+		compiler.compile_main_function
 
 		# compile class structures
 		for m in mainmodule.in_importation.greaters do
@@ -143,7 +124,7 @@ class SeparateErasureCompiler
 			type_array[i] = t
 		end
 
-		var v = new SeparateErasureCompilerVisitor(self)
+		var v = self.new_visitor
 		v.add("const char const * class_names[] = \{")
 		for t in type_array do
 			if t == null then
@@ -155,22 +136,6 @@ class SeparateErasureCompiler
 		v.add("\};")
 	end
 
-	redef fun compile_module_to_c(mmodule: MModule)
-	do
-		for cd in mmodule.mclassdefs do
-			for pd in cd.mpropdefs do
-				if not pd isa MMethodDef then continue
-				#print "compile {pd} @ {cd} @ {mmodule}"
-				var r = new SeparateErasureRuntimeFunction(pd)
-				r.compile_to_c(self)
-				if true or cd.bound_mtype.ctype != "val*" then
-					var r2 = new VirtualErasureRuntimeFunction(pd)
-					r2.compile_to_c(self)
-				end
-			end
-		end
-	end
-
 	redef fun compile_class_to_c(mclass: MClass)
 	do
 		var mtype = mclass.intro.bound_mtype
@@ -179,7 +144,7 @@ class SeparateErasureCompiler
 		var vft = self.method_tables[mclass]
 		var attrs = self.attr_tables[mclass]
 		var class_table = self.class_tables[mclass]
-		var v = new SeparateErasureCompilerVisitor(self)
+		var v = self.new_visitor
 
 		v.add_decl("/* runtime class {c_name} */")
 		var idnum = classids.length
@@ -318,151 +283,8 @@ class SeparateErasureCompiler
 		v.add("return {res};")
 		v.add("\}")
 	end
-end
 
-class SeparateErasureRuntimeFunction
-	super SeparateRuntimeFunction
-
-	redef fun compile_to_c(compiler)
-	do
-		var mmethoddef = self.mmethoddef
-
-		var recv = self.mmethoddef.mclassdef.bound_mtype
-		var v = new SeparateErasureCompilerVisitor(compiler)
-		var selfvar = new RuntimeVariable("self", recv, recv)
-		var arguments = new Array[RuntimeVariable]
-		var frame = new Frame(v, mmethoddef, recv, arguments)
-		v.frame = frame
-
-		var sig = new Buffer
-		var comment = new Buffer
-		var ret = mmethoddef.msignature.return_mtype
-		if ret != null then
-			ret = v.resolve_for(ret, selfvar)
-			sig.append("{ret.ctype} ")
-		else if mmethoddef.mproperty.is_new then
-			ret = recv
-			sig.append("{ret.ctype} ")
-		else
-			sig.append("void ")
-		end
-		sig.append(self.c_name)
-		sig.append("({selfvar.mtype.ctype} {selfvar}")
-		comment.append("(self: {selfvar}")
-		arguments.add(selfvar)
-		for i in [0..mmethoddef.msignature.arity[ do
-			var mtype = mmethoddef.msignature.mparameters[i].mtype
-			if i == mmethoddef.msignature.vararg_rank then
-				mtype = v.get_class("Array").get_mtype([mtype])
-			end
-			mtype = v.resolve_for(mtype, selfvar)
-			comment.append(", {mtype}")
-			sig.append(", {mtype.ctype} p{i}")
-			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
-			arguments.add(argvar)
-		end
-		sig.append(")")
-		comment.append(")")
-		if ret != null then
-			comment.append(": {ret}")
-		end
-		compiler.header.add_decl("{sig};")
-
-		v.add_decl("/* method {self} for {comment} */")
-		v.add_decl("{sig} \{")
-		if ret != null then
-			frame.returnvar = v.new_var(ret)
-		end
-		frame.returnlabel = v.get_name("RET_LABEL")
-
-		if recv != arguments.first.mtype then
-			#print "{self} {recv} {arguments.first}"
-		end
-		mmethoddef.compile_inside_to_c(v, arguments)
-
-		v.add("{frame.returnlabel.as(not null)}:;")
-		if ret != null then
-			v.add("return {frame.returnvar.as(not null)};")
-		end
-		v.add("\}")
-	end
-end
-
-class VirtualErasureRuntimeFunction
-	super VirtualRuntimeFunction
-
-	redef fun build_c_name: String
-	do
-		return "VIRTUAL_{mmethoddef.c_name}"
-	end
-
-	redef fun to_s do return self.mmethoddef.to_s
-
-	redef fun compile_to_c(compiler)
-	do
-		var mmethoddef = self.mmethoddef
-
-		var recv = self.mmethoddef.mclassdef.bound_mtype
-		var v = new SeparateErasureCompilerVisitor(compiler)
-		var selfvar = new RuntimeVariable("self", v.object_type, recv)
-		var arguments = new Array[RuntimeVariable]
-		var frame = new Frame(v, mmethoddef, recv, arguments)
-		v.frame = frame
-
-		var sig = new Buffer
-		var comment = new Buffer
-
-		# Because the function is virtual, the signature must match the one of the original class
-		var intromclassdef = self.mmethoddef.mproperty.intro.mclassdef
-		var msignature = mmethoddef.mproperty.intro.msignature.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
-		var ret = msignature.return_mtype
-		if ret != null then
-			sig.append("{ret.ctype} ")
-		else if mmethoddef.mproperty.is_new then
-			ret = recv
-			sig.append("{ret.ctype} ")
-		else
-			sig.append("void ")
-		end
-		sig.append(self.c_name)
-		sig.append("({selfvar.mtype.ctype} {selfvar}")
-		comment.append("(self: {selfvar}")
-		arguments.add(selfvar)
-		for i in [0..msignature.arity[ do
-			var mtype = msignature.mparameters[i].mtype
-			if i == msignature.vararg_rank then
-				mtype = v.get_class("Array").get_mtype([mtype])
-			end
-			comment.append(", {mtype}")
-			sig.append(", {mtype.ctype} p{i}")
-			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
-			arguments.add(argvar)
-		end
-		sig.append(")")
-		comment.append(")")
-		if ret != null then
-			comment.append(": {ret}")
-		end
-		compiler.header.add_decl("{sig};")
-
-		v.add_decl("/* method {self} for {comment} */")
-		v.add_decl("{sig} \{")
-		if ret != null then
-			frame.returnvar = v.new_var(ret)
-		end
-		frame.returnlabel = v.get_name("RET_LABEL")
-
-		if recv != arguments.first.mtype then
-			#print "{self} {recv} {arguments.first}"
-		end
-		mmethoddef.compile_inside_to_c(v, arguments)
-
-		v.add("{frame.returnlabel.as(not null)}:;")
-		if ret != null then
-			v.add("return {frame.returnvar.as(not null)};")
-		end
-		v.add("\}")
-	end
+	redef fun new_visitor do return new SeparateErasureCompilerVisitor(self)
 end
 
 class SeparateErasureCompilerVisitor
@@ -533,30 +355,6 @@ class SeparateErasureCompilerVisitor
 		self.add("{res} = {s} {boxed}->class->type_table->table[{cltype}] == {idtype};")
 		self.add("\}")
 
-		return res
-	end
-
-	redef fun is_same_type_test(value1, value2)
-	do
-		var res = self.new_var(bool_type)
-		# Swap values to be symetric
-		if value2.mtype.ctype != "val*" and value1.mtype.ctype == "val*" then
-			var tmp = value1
-			value1 = value2
-			value2 = tmp
-		end
-		if value1.mtype.ctype != "val*" then
-			if value2.mtype.ctype == value1.mtype.ctype then
-				self.add("{res} = 1; /* is_same_type_test: compatible types {value1.mtype} vs. {value2.mtype} */")
-			else if value2.mtype.ctype != "val*" then
-				self.add("{res} = 0; /* is_same_type_test: incompatible types {value1.mtype} vs. {value2.mtype}*/")
-			else
-				var mtype1 = value1.mtype.as(MClassType)
-				self.add("{res} = ({value2} != NULL) && ({value2}->class == (struct class*) &class_{mtype1.c_name}); /* is_same_type_test */")
-			end
-		else
-			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {value1}->class == {value2}->class); /* is_same_type_test */")
-		end
 		return res
 	end
 
