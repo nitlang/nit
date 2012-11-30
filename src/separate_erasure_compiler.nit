@@ -128,7 +128,7 @@ class SeparateErasureCompiler
 		v.add("const char const * class_names[] = \{")
 		for t in type_array do
 			if t == null then
-				v.add("NULL,")
+				v.add("NULL, /* empty */")
 			else
 				v.add("\"{t}\",")
 			end
@@ -211,7 +211,7 @@ class SeparateErasureCompiler
 		v.add_decl("\{")
 		for msuper in class_table do
 			if msuper == null then
-				v.add_decl("NULL, /* empty */")
+				v.add_decl("0, /* empty */")
 			else
 				v.add_decl("{self.class_ids[msuper]}, /* {msuper} */")
 			end
