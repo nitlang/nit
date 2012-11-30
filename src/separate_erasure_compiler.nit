@@ -334,20 +334,41 @@ class SeparateErasureCompilerVisitor
 		var idtype = self.get_name("idtype")
 		self.add_decl("int {idtype};")
 
-		var s: String
+		var maybe_null = false
 		if mtype isa MNullableType then
 			mtype = mtype.mtype
-			s = "{boxed} == NULL ||"
-		else
-			s = "{boxed} != NULL &&"
+			maybe_null = true
+		end
+		if mtype isa MParameterType then
+			# Here we get the bound of the the formal type (eh, erasure...)
+			mtype = mtype.resolve_for(self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.mmodule, false)
+			if mtype isa MNullableType then
+				mtype = mtype.mtype
+				maybe_null = true
+			end
+		end
+		if mtype isa MVirtualType then
+			# FIXME virtual types should not be erased but got from the class table of the current receiver (self.frame.arguments.first)
+			mtype = mtype.resolve_for(self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.mmodule, true)
+			if mtype isa MNullableType then
+				mtype = mtype.mtype
+				maybe_null = true
+			end
 		end
 		if mtype isa MClassType then
 			self.add("{cltype} = class_{mtype.mclass.c_name}.color;")
 			self.add("{idtype} = class_{mtype.mclass.c_name}.id;")
 		else
-			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{boxed.inspect}\"); exit(1);")
+			self.debug("type_test({value.inspect}, {mtype})")
+			abort
 		end
 
+		var s: String
+		if maybe_null then
+			s = "{boxed} == NULL ||"
+		else
+			s = "{boxed} != NULL &&"
+		end
 		# check color is in table
 		self.add("if({boxed} != NULL && {cltype} >= {boxed}->class->type_table->size) \{")
 		self.add("{res} = 0;")
