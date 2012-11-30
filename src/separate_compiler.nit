@@ -46,7 +46,7 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new SeparateCompiler(mainmodule, runtime_type_analysis, self)
-		var v = new SeparateCompilerVisitor(compiler)
+		var v = compiler.new_visitor
 		compiler.header = v
 		v.add_decl("#include <stdlib.h>")
 		v.add_decl("#include <stdio.h>")
@@ -156,7 +156,7 @@ class SeparateCompiler
 			type_array[i] = t
 		end
 
-		var v = new SeparateCompilerVisitor(self)
+		var v = self.new_visitor
 		self.header.add_decl("extern const char const * class_names[];")
 		v.add("const char const * class_names[] = \{")
 		for t in type_array do
@@ -543,7 +543,7 @@ class SeparateRuntimeFunction
 		var mmethoddef = self.mmethoddef
 
 		var recv = self.mmethoddef.mclassdef.bound_mtype
-		var v = new SeparateCompilerVisitor(compiler)
+		var v = compiler.new_visitor
 		var selfvar = new RuntimeVariable("self", recv, recv)
 		var arguments = new Array[RuntimeVariable]
 		var frame = new Frame(v, mmethoddef, recv, arguments)
@@ -620,7 +620,7 @@ class VirtualRuntimeFunction
 		var mmethoddef = self.mmethoddef
 
 		var recv = self.mmethoddef.mclassdef.bound_mtype
-		var v = new SeparateCompilerVisitor(compiler)
+		var v = compiler.new_visitor
 		var selfvar = new RuntimeVariable("self", v.object_type, recv)
 		var arguments = new Array[RuntimeVariable]
 		var frame = new Frame(v, mmethoddef, recv, arguments)

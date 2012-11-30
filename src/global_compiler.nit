@@ -55,7 +55,7 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new GlobalCompiler(mainmodule, runtime_type_analysis, self)
-		var v = new GlobalCompilerVisitor(compiler)
+		var v = compiler.new_visitor
 
 		v.add_decl("#include <stdlib.h>")
 		v.add_decl("#include <stdio.h>")
@@ -342,7 +342,7 @@ class GlobalCompiler
 	do
 		assert self.runtime_type_analysis.live_types.has(mtype)
 		assert mtype.ctype == "val*"
-		var v = new GlobalCompilerVisitor(self)
+		var v = self.new_visitor
 
 		var is_native_array = mtype.mclass.name == "NativeArray"
 
@@ -383,7 +383,7 @@ class GlobalCompiler
 	do
 		assert self.runtime_type_analysis.live_types.has(mtype)
 		assert mtype.ctype != "val*"
-		var v = new GlobalCompilerVisitor(self)
+		var v = self.new_visitor
 
 		self.header.add_decl("val* BOX_{mtype.c_name}({mtype.ctype});")
 		v.add_decl("/* allocate {mtype} */")
@@ -689,7 +689,7 @@ private class CustomizedRuntimeFunction
 			abort
 		end
 
-		var v = new GlobalCompilerVisitor(compiler)
+		var v = compiler.new_visitor
 		var selfvar = new RuntimeVariable("self", recv, recv)
 		if compiler.runtime_type_analysis.live_types.has(recv) then
 			selfvar.is_exact = true
