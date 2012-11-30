@@ -304,6 +304,29 @@ class ClassColoring
 		self.mmodule = mainmodule
 	end
 
+	# Build type tables
+	private fun build_type_tables(mclasses: Array[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
+		var tables = new HashMap[T, Array[nullable T]]
+
+		for mclasse in mclasses do
+			var table = new Array[nullable T]
+			var supers = new HashSet[T]
+			supers.add_all(self.super_elements(mclasse))
+			supers.add(mclasse)
+			for sup in supers do
+				var color = colors[sup]
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = sup
+			end
+			tables[mclasse] = table
+		end
+		return tables
+	end
+
 	redef fun super_elements(element) do
 		if not self.super_elements_cache.has_key(element) then
 			var supers = new HashSet[T]

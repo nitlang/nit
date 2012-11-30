@@ -125,20 +125,20 @@ class SeparateCompiler
 	super GlobalCompiler # TODO better separation of concerns
 
 	private var undead_types: Set[MClassType] = new HashSet[MClassType]
-	protected var typeids: HashMap[MClassType, Int] = new HashMap[MClassType, Int]
+	protected var typeids: HashMap[MClassType, Int] protected writable = new HashMap[MClassType, Int]
 
 	private var type_colors: Map[MClassType, Int] = typeids
 	private var type_tables: nullable Map[MClassType, Array[nullable MClassType]] = null
 	private var livetypes_tables: nullable Map[MClass, Array[nullable Object]]
 	private var livetypes_tables_sizes: nullable Map[MClass, Array[Int]]
 
-	private var class_colors: Map[MClass, Int]
+	protected var class_colors: Map[MClass, Int] protected writable
 
-	private var method_colors: Map[MMethod, Int]
-	private var method_tables: Map[MClass, Array[nullable MMethodDef]]
+	protected var method_colors: Map[MMethod, Int] protected writable
+	protected var method_tables: Map[MClass, Array[nullable MMethodDef]] protected writable
 
-	private var attr_colors: Map[MAttribute, Int]
-	private var attr_tables: Map[MClass, Array[nullable MAttributeDef]]
+	protected var attr_colors: Map[MAttribute, Int] protected writable
+	protected var attr_tables: Map[MClass, Array[nullable MAttributeDef]] protected writable
 
 	private var ft_colors: Map[MParameterType, Int]
 	private var ft_tables: Map[MClass, Array[nullable MParameterType]]
@@ -164,7 +164,7 @@ class SeparateCompiler
 		self.ft_tables = ft_coloring.build_ft_tables
 	end
 
-	private fun compile_class_names do
+	protected fun compile_class_names do
 
 		# Build type names table
 		var type_array = new Array[nullable MClassType]
