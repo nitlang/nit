@@ -569,6 +569,14 @@ class AttributeColoring
 	redef type MPROPDEF: MAttributeDef
 end
 
+# MVirtualTypeProp coloring
+class VTColoring
+	super PropertyColoring
+
+	redef type MPROP: MVirtualTypeProp
+	redef type MPROPDEF: MVirtualTypeDef
+end
+
 # MParameterType coloring
 class FTColoring
 	private var class_coloring: ClassColoring
