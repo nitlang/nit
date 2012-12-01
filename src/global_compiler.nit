@@ -1209,8 +1209,10 @@ class GlobalCompilerVisitor
 			self.add "\} else"
 		end
 		if types.is_empty then
+			self.add("\{")
 			self.add("/*BUG: no live types for {args.first.inspect} . {m}*/")
 			self.bugtype(args.first)
+			self.add("\}")
 			return res
 		end
 
