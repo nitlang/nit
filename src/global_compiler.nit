@@ -1351,6 +1351,7 @@ class GlobalCompilerVisitor
 	do
 		if recv.mtype.ctype != "val*" then return
 		self.add("fprintf(stderr, \"BTD BUG: Dynamic type is %s, static type is %s\\n\", class_names[{recv}->classid], \"{recv.mcasttype}\");")
+		self.add("exit(1);")
 	end
 
 	# Generate a polymorphic attribute is_set test
