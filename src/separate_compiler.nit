@@ -531,11 +531,12 @@ class SeparateRuntimeFunction
 		var frame = new Frame(v, mmethoddef, recv, arguments)
 		v.frame = frame
 
+		var msignature = mmethoddef.msignature.resolve_for(mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.mmodule, true)
+
 		var sig = new Buffer
 		var comment = new Buffer
-		var ret = mmethoddef.msignature.return_mtype
+		var ret = msignature.return_mtype
 		if ret != null then
-			ret = v.resolve_for(ret, selfvar)
 			sig.append("{ret.ctype} ")
 		else if mmethoddef.mproperty.is_new then
 			ret = recv
@@ -547,12 +548,11 @@ class SeparateRuntimeFunction
 		sig.append("({selfvar.mtype.ctype} {selfvar}")
 		comment.append("(self: {selfvar}")
 		arguments.add(selfvar)
-		for i in [0..mmethoddef.msignature.arity[ do
-			var mtype = mmethoddef.msignature.mparameters[i].mtype
-			if i == mmethoddef.msignature.vararg_rank then
+		for i in [0..msignature.arity[ do
+			var mtype = msignature.mparameters[i].mtype
+			if i == msignature.vararg_rank then
 				mtype = v.get_class("Array").get_mtype([mtype])
 			end
-			mtype = v.resolve_for(mtype, selfvar)
 			comment.append(", {mtype}")
 			sig.append(", {mtype.ctype} p{i}")
 			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
@@ -676,16 +676,16 @@ class SeparateCompilerVisitor
 
 	redef fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable])
 	do
+		var msignature = m.msignature.resolve_for(m.mclassdef.bound_mtype, m.mclassdef.bound_mtype, m.mclassdef.mmodule, true)
 		var recv = args.first
 		if recv.mtype.ctype != m.mclassdef.mclass.mclass_type.ctype then
 			args.first = self.autobox(args.first, m.mclassdef.mclass.mclass_type)
 		end
-		for i in [0..m.msignature.arity[ do
-			var t = m.msignature.mparameters[i].mtype
-			if i == m.msignature.vararg_rank then
+		for i in [0..msignature.arity[ do
+			var t = msignature.mparameters[i].mtype
+			if i == msignature.vararg_rank then
 				t = args[i+1].mtype
 			end
-			t = self.resolve_for(t, recv)
 			args[i+1] = self.autobox(args[i+1], t)
 		end
 	end
@@ -735,7 +735,6 @@ class SeparateCompilerVisitor
 		else if ret == null then
 			res = null
 		else
-			ret = self.resolve_for(ret, arguments.first)
 			res = self.new_var(ret)
 		end
 
@@ -814,7 +813,7 @@ class SeparateCompilerVisitor
 		else if ret == null then
 			res = null
 		else
-			ret = self.resolve_for(ret, arguments.first)
+			ret = ret.resolve_for(mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.mmodule, true)
 			res = self.new_var(ret)
 		end
 
