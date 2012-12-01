@@ -415,24 +415,6 @@ class SeparateCompiler
 
 		self.header.add_decl("struct class_{c_name} \{")
 		self.header.add_decl("nitmethod_t vft[{vft.length}];")
-
-		if mtype.ctype != "val*" then
-			# Is the Nit type is native then the struct is a box with two fields:
-			# * the `vft` to be polymorph
-			# * the `value` that contains the native value.
-			self.header.add_decl("{mtype.ctype} value;")
-		end
-
-		# Collect all attributes and associate them a field in the structure.
-		# Note: we do not try to optimize the order and helps CC to optimize the client code.
-		for cd in mtype.collect_mclassdefs(self.mainmodule) do
-			for p in cd.intro_mproperties do
-				if not p isa MAttribute then continue
-				var t = p.intro.static_mtype.as(not null)
-				t = t.anchor_to(self.mainmodule, mtype)
-				self.header.add_decl("{t.ctype} {p.intro.c_name}; /* {p}: {t} */")
-			end
-		end
 		self.header.add_decl("\};")
 
 		# Build class vft
