@@ -189,12 +189,15 @@ class SeparateCompiler
 		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
 		mtypes.add_all(self.undead_types)
 
-		# add formal types arguments to mtypes
-		for mtype in mtypes do
+		for mtype in self.runtime_type_analysis.live_types do
+			# add formal types arguments to mtypes
 			if mtype isa MGenericType then
-				#TODO do it recursive
 				for ft in mtype.arguments do
 					if ft isa MNullableType then ft = ft.mtype
+					if ft.need_anchor then
+						print("Why do we need anchor here ?")
+						abort
+					end
 					mtypes.add(ft.as(MClassType))
 				end
 			end
@@ -208,7 +211,7 @@ class SeparateCompiler
 		# build livetypes tables
 		self.livetypes_tables = new HashMap[MClass, Array[nullable Object]]
 		self.livetypes_tables_sizes = new HashMap[MClass, Array[Int]]
-		for mtype in mtypes do
+		for mtype in self.runtime_type_analysis.live_types do
 			if mtype isa MGenericType then
 				var table: Array[nullable Object]
 				var sizes: Array[Int]
@@ -255,7 +258,12 @@ class SeparateCompiler
 		if current_rank == mtype.arguments.length - 1 then
 			table[id] = mtype
 		else
-			var ft_table = new Array[nullable Object]
+			var ft_table: Array[nullable Object]
+			if id < table.length and table[id] != null then
+				ft_table = table[id].as(Array[nullable Object])
+			else
+				ft_table = new Array[nullable Object]
+			end
 			table[id] = ft_table
 			build_livetype_table(mtype, current_rank + 1, ft_table, sizes)
 		end
@@ -366,15 +374,17 @@ class SeparateCompiler
 		v.add_decl("\},")
 		v.add_decl("\};")
 
-		# const struct fst_table_X fst_table_X
-		v.add_decl("const struct fts_table_{c_name} fts_table_{c_name} = \{")
-		v.add_decl("\{")
+		build_fts_table(mtype, v)
+	end
 
+	# const struct fst_table_X fst_table_X
+	private fun build_fts_table(mtype: MClassType, v: SeparateCompilerVisitor) do
+		v.add_decl("const struct fts_table_{mtype.c_name} fts_table_{mtype.c_name} = \{")
+		v.add_decl("\{")
 		for ft in self.ft_tables[mtype.mclass] do
 			if ft == null then
 				v.add_decl("NULL, /* empty */")
 			else
-				var id = -1
 				var ntype: MType
 				if ft.mclass == mtype.mclass then
 					ntype = mtype.arguments[ft.rank]
@@ -390,7 +400,6 @@ class SeparateCompiler
 				end
 			end
 		end
-
 		v.add_decl("\},")
 		v.add_decl("\};")
 	end
@@ -914,7 +923,6 @@ class SeparateCompilerVisitor
 		var idtype = self.get_name("idtype")
 		self.add_decl("short int {idtype};")
 
-		var buff = new Buffer
 		var boxed = self.autobox(value, self.object_type)
 
 		var s: String
@@ -929,10 +937,8 @@ class SeparateCompilerVisitor
 			self.add("{cltype} = self->type->fts_table->fts[{ftcolor}]->color;")
 			self.add("{idtype} = self->type->fts_table->fts[{ftcolor}]->id;")
 		else if mtype isa MGenericType and mtype.need_anchor then
-			for ft in mtype.mclass.mclass_type.arguments do
-				var ftcolor = compiler.ft_colors[ft.as(MParameterType)]
-				buff.append("[self->type->fts_table->fts[{ftcolor}]->id]")
-			end
+			var buff = new Buffer
+			retrieve_anchored_livetype(mtype, buff)
 			self.add("{cltype} = livetypes_{mtype.mclass.c_name}{buff.to_s}->color;")
 			self.add("{idtype} = livetypes_{mtype.mclass.c_name}{buff.to_s}->id;")
 		else if mtype isa MClassType then
