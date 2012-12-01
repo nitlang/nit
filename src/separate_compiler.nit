@@ -882,11 +882,14 @@ class SeparateCompilerVisitor
 	fun retrieve_anchored_livetype(mtype: MGenericType, buffer: Buffer) do
 		assert mtype.need_anchor
 
+		var recv = self.frame.arguments.first
+		var recv_boxed = self.autobox(recv, self.object_type)
+
 		var compiler = self.compiler.as(SeparateCompiler)
 		for ft in mtype.arguments do
 			if ft isa MParameterType then
 				var ftcolor = compiler.ft_colors[ft]
-				buffer.append("[self->type->fts_table->fts[{ftcolor}]->id]")
+				buffer.append("[{recv_boxed}->type->fts_table->fts[{ftcolor}]->id]")
 			else if ft isa MGenericType and ft.need_anchor then
 				var bbuff = new Buffer
 				retrieve_anchored_livetype(ft, bbuff)
@@ -916,12 +919,16 @@ class SeparateCompilerVisitor
 	redef fun type_test(value, mtype)
 	do
 		var compiler = self.compiler.as(SeparateCompiler)
+
+		var recv = self.frame.arguments.first
+		var recv_boxed = self.autobox(recv, self.object_type)
+
 		var res = self.new_var(bool_type)
 
 		var cltype = self.get_name("cltype")
-		self.add_decl("short int {cltype};")
+		self.add_decl("int {cltype};")
 		var idtype = self.get_name("idtype")
-		self.add_decl("short int {idtype};")
+		self.add_decl("int {idtype};")
 
 		var boxed = self.autobox(value, self.object_type)
 
@@ -934,8 +941,8 @@ class SeparateCompilerVisitor
 		end
 		if mtype isa MParameterType then
 			var ftcolor = compiler.ft_colors[mtype]
-			self.add("{cltype} = self->type->fts_table->fts[{ftcolor}]->color;")
-			self.add("{idtype} = self->type->fts_table->fts[{ftcolor}]->id;")
+			self.add("{cltype} = {recv_boxed}->type->fts_table->fts[{ftcolor}]->color;")
+			self.add("{idtype} = {recv_boxed}->type->fts_table->fts[{ftcolor}]->id;")
 		else if mtype isa MGenericType and mtype.need_anchor then
 			var buff = new Buffer
 			retrieve_anchored_livetype(mtype, buff)
