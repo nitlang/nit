@@ -309,7 +309,6 @@ class SeparateErasureCompilerVisitor
 	redef fun type_test(value, mtype)
 	do
 		var res = self.new_var(bool_type)
-		var boxed = self.autobox(value, self.object_type)
 
 		var cltype = self.get_name("cltype")
 		self.add_decl("int {cltype};")
@@ -337,6 +336,15 @@ class SeparateErasureCompilerVisitor
 				maybe_null = true
 			end
 		end
+
+		var type_table
+		if value.mtype.ctype == "val*" then
+			type_table = "{value}->class->type_table"
+		else
+			var mclass = value.mtype.as(MClassType).mclass
+			type_table = "type_table_{mclass.c_name}"
+		end
+
 		if mtype isa MClassType then
 			self.add("{cltype} = class_{mtype.mclass.c_name}.color;")
 			self.add("{idtype} = class_{mtype.mclass.c_name}.id;")
@@ -347,15 +355,15 @@ class SeparateErasureCompilerVisitor
 
 		var s: String
 		if maybe_null then
-			s = "{boxed} == NULL ||"
+			s = "{value} == NULL ||"
 		else
-			s = "{boxed} != NULL &&"
+			s = "{value} != NULL &&"
 		end
 		# check color is in table
-		self.add("if({boxed} != NULL && {cltype} >= {boxed}->class->type_table->size) \{")
+		self.add("if({value} != NULL && {cltype} >= {type_table}->size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")
-		self.add("{res} = {s} {boxed}->class->type_table->table[{cltype}] == {idtype};")
+		self.add("{res} = {s} {type_table}->table[{cltype}] == {idtype};")
 		self.add("\}")
 
 		return res
