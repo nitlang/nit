@@ -2224,7 +2224,6 @@ redef class AExpr
 	# Do not call this method directly, use `v.expr' instead
 	private fun expr(v: GlobalCompilerVisitor): nullable RuntimeVariable
 	do
-		debug("Unimplemented expr {class_name}")
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{location.to_s}\\n\");")
 		var mtype = self.mtype
 		if mtype == null then
