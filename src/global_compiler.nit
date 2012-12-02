@@ -2095,6 +2095,9 @@ redef class AInternMethPropdef
 			var nat = v.class_name_string(arguments.first)
 			v.ret(v.new_expr("(char*){nat}", ret.as(not null)))
 			return
+		else if pname == "force_garbage_collection" then
+			v.add("GC_gcollect();")
+			return
 		end
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
 		debug("Not implemented {mpropdef}")
