@@ -53,7 +53,7 @@ redef class ModelBuilder
 		v.add_decl("#include <string.h>")
 		v.add_decl("#include <gc/gc.h>")
 		v.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
-		v.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
+		v.add_decl("typedef val* nitattribute_t; /* general C type representing a Nit attribute. */")
 
 		# Class abstract representation
 		v.add_decl("struct class \{ nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
@@ -831,7 +831,6 @@ class SeparateCompilerVisitor
 
 	redef fun isset_attribute(a, recv)
 	do
-		# FIXME: Here we inconditionally return boxed primitive attributes
 		self.check_recv_notnull(recv)
 		var res = self.new_var(bool_type)
 		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] != NULL; /* {a} on {recv.inspect}*/")
@@ -840,31 +839,57 @@ class SeparateCompilerVisitor
 
 	redef fun read_attribute(a, recv)
 	do
-		# FIXME: Here we inconditionally return boxed primitive attributes
+		self.check_recv_notnull(recv)
+
+		# What is the declared type of the attribute?
 		var ret = a.intro.static_mtype.as(not null)
-		ret = self.resolve_for(ret, recv)
+		var intromclassdef = a.intro.mclassdef
+		ret = ret.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
+
+		# Get the attribute or a box (ie. always a val*)
 		var cret = self.object_type.as_nullable
 		var res = self.new_var(cret)
 		res.mcasttype = ret
-
-		self.check_recv_notnull(recv)
-
 		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}]; /* {a} on {recv.inspect} */")
+
+		# Check for Uninitialized attribute
 		if not ret isa MNullableType then
 			self.add("if ({res} == NULL) \{")
 			self.add_abort("Uninitialized attribute {a.name}")
 			self.add("\}")
 		end
 
-		return res
+		# Return the attribute or its unboxed version
+		# Note: it is mandatory since we reuse the box on write, we do not whant that the box escapes
+		return self.autobox(res, ret)
 	end
 
 	redef fun write_attribute(a, recv, value)
 	do
-		# FIXME: Here we inconditionally box primitive attributes
 		self.check_recv_notnull(recv)
-		value = self.autobox(value, self.object_type.as_nullable)
-		self.add("{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] = {value}; /* {a} on {recv.inspect} */")
+
+		# What is the declared type of the attribute?
+		var mtype = a.intro.static_mtype.as(not null)
+		var intromclassdef = a.intro.mclassdef
+		mtype = mtype.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
+
+		# Adapt the value to the declared type
+		value = self.autobox(value, mtype)
+		var attr = "{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}]"
+		if mtype.ctype != "val*" then
+			assert mtype isa MClassType
+			# The attribute is primitive, thus we store it in a box
+			# The trick is to create the box the first time then resuse the box
+			self.add("if ({attr} != NULL) \{")
+			self.add("((struct instance_{mtype.c_name}*){attr})->value = {value}; /* {a} on {recv.inspect} */")
+			self.add("\} else \{")
+			value = self.autobox(value, self.object_type.as_nullable)
+			self.add("{attr} = {value}; /* {a} on {recv.inspect} */")
+			self.add("\}")
+		else
+			# The attribute is not primitive, thus store it direclty
+			self.add("{attr} = {value}; /* {a} on {recv.inspect} */")
+		end
 	end
 
 	# Build livetype structure retrieving
