@@ -721,9 +721,8 @@ class SeparateCompilerVisitor
 
 	redef fun send(mmethod, arguments)
 	do
-		if arguments.first.mtype.ctype != "val*" then
-			assert arguments.first.mtype == arguments.first.mcasttype
-			return self.monomorphic_send(mmethod, arguments.first.mtype, arguments)
+		if arguments.first.mcasttype.ctype != "val*" then
+			return self.monomorphic_send(mmethod, arguments.first.mcasttype, arguments)
 		end
 
 		var res: nullable RuntimeVariable
