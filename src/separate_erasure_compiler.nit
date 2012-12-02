@@ -337,6 +337,11 @@ class SeparateErasureCompilerVisitor
 			end
 		end
 
+		if value.mcasttype.is_subtype(self.frame.mpropdef.mclassdef.mmodule, self.frame.mpropdef.mclassdef.bound_mtype, mtype) then
+			self.add("{res} = 1; /* easy {value.inspect} isa {mtype}*/")
+			return res
+		end
+
 		var type_table
 		if value.mtype.ctype == "val*" then
 			type_table = "{value}->class->type_table"
