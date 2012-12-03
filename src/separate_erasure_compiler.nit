@@ -272,35 +272,6 @@ end
 class SeparateErasureCompilerVisitor
 	super SeparateCompilerVisitor
 
-	# Box or unbox a value to another type iff a C type conversion is needed
-	# ENSURE: result.mtype.ctype == mtype.ctype
-	redef fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable
-	do
-		if value.mtype.ctype == mtype.ctype then
-			return value
-		else if value.mtype.ctype == "val*" then
-			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
-		else if mtype.ctype == "val*" then
-			var valtype = value.mtype.as(MClassType)
-			var res = self.new_var(mtype)
-			if not compiler.runtime_type_analysis.live_types.has(valtype) then
-				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
-				self.add("printf(\"Dead code executed!\\n\"); exit(1);")
-				return res
-			end
-			var totype = value.mtype
-			if totype isa MNullableType then totype = totype.mtype
-			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
-			return res
-		else
-			# Bad things will appen!
-			var res = self.new_var(mtype)
-			self.add("/* {res} left unintialized (cannot convert {value.mtype} to {mtype}) */")
-			self.add("printf(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); exit(1);")
-			return res
-		end
-	end
-
 	redef fun init_instance(mtype)
 	do
 		return self.new_expr("NEW_{mtype.mclass.c_name}()", mtype)
@@ -309,7 +280,6 @@ class SeparateErasureCompilerVisitor
 	redef fun type_test(value, mtype)
 	do
 		var res = self.new_var(bool_type)
-		var boxed = self.autobox(value, self.object_type)
 
 		var cltype = self.get_name("cltype")
 		self.add_decl("int {cltype};")
@@ -337,6 +307,20 @@ class SeparateErasureCompilerVisitor
 				maybe_null = true
 			end
 		end
+
+		if value.mcasttype.is_subtype(self.frame.mpropdef.mclassdef.mmodule, self.frame.mpropdef.mclassdef.bound_mtype, mtype) then
+			self.add("{res} = 1; /* easy {value.inspect} isa {mtype}*/")
+			return res
+		end
+
+		var type_table
+		if value.mtype.ctype == "val*" then
+			type_table = "{value}->class->type_table"
+		else
+			var mclass = value.mtype.as(MClassType).mclass
+			type_table = "type_table_{mclass.c_name}"
+		end
+
 		if mtype isa MClassType then
 			self.add("{cltype} = class_{mtype.mclass.c_name}.color;")
 			self.add("{idtype} = class_{mtype.mclass.c_name}.id;")
@@ -347,15 +331,15 @@ class SeparateErasureCompilerVisitor
 
 		var s: String
 		if maybe_null then
-			s = "{boxed} == NULL ||"
+			s = "{value} == NULL ||"
 		else
-			s = "{boxed} != NULL &&"
+			s = "{value} != NULL &&"
 		end
 		# check color is in table
-		self.add("if({boxed} != NULL && {cltype} >= {boxed}->class->type_table->size) \{")
+		self.add("if({value} != NULL && {cltype} >= {type_table}->size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")
-		self.add("{res} = {s} {boxed}->class->type_table->table[{cltype}] == {idtype};")
+		self.add("{res} = {s} {type_table}->table[{cltype}] == {idtype};")
 		self.add("\}")
 
 		return res

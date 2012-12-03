@@ -236,6 +236,11 @@ if test -z "$NOTSKIPED"; then
 	echo "* all: run all the benches"
 fi
 
+## COMPILE ENGINES
+
+test -f ./nitc_3 || ./ncall.sh -O
+test -f ./nitg || ./nitc_3 nitg.nit -O -v
+
 ## EFFECTIVE BENCHS ##
 
 function bench_nitg_bootstrap()
@@ -276,11 +281,11 @@ function bench_steps()
 	bench_command "generate c" "" ./nitg --no-cc nitg.nit
 	bench_command "full" "" ./nitg nitg.nit -o "nitg_nitg.bin"
 
-	prepare_res "$name-nitg-s.dat" "nitg-s" "Various steps of nitg --separate"
-	bench_command "parse" "" ./nitg --separate --only-parse nitg.nit
-	bench_command "metamodel" "" ./nitg --separate --only-metamodel nitg.nit
-	bench_command "generate c" "" ./nitg --separate --no-cc nitg.nit
-	bench_command "full" "" ./nitg --separate nitg.nit -o "nitg_nitg-s.bin"
+	prepare_res "$name-nitg-e.dat" "nitg-e" "Various steps of nitg --erasure"
+	bench_command "parse" "" ./nitg --erasure --only-parse nitg.nit
+	bench_command "metamodel" "" ./nitg --erasure --only-metamodel nitg.nit
+	bench_command "generate c" "" ./nitg --erasure --no-cc nitg.nit
+	bench_command "full" "" ./nitg --erasure nitg.nit -o "nitg_nitg-e.bin"
 
 	plot "$name.gnu"
 }
@@ -340,6 +345,8 @@ function bench_engines()
 	run_compiler "nitc-g" ./nitc_3 -O --global
 	prepare_res "$name-nitg.dat" "nitg" "nitg"
 	run_compiler "nitg" ./nitg
+	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
+	run_compiler "nitg-e" ./nitg --erasure
 	plot "$name.gnu"
 }
 bench_engines

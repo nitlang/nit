@@ -1,3 +1,4 @@
+../src/syntax/mmbuilder.nit:998,8--28: Warning: Expression is already a AMethPropdef since it is a AInitPropdef.
 usage: nitdoc [options] file...
   -W, --warn               Show warnings
   -q, --quiet              Do not show warnings
@@ -21,4 +22,3 @@ usage: nitdoc [options] file...
   --custom-menu-items      Items displayed in menu before the 'Overview' item (Each item must be enclosed in 'li' tags)
   --custom-overview-text   Text displayed as introduction of Overview page before the modules list
   --custom-footer-text     Text displayed as footer of all pages
-../src/syntax/mmbuilder.nit:998,8--28: Warning: Expression is already a AMethPropdef since it is a AInitPropdef.

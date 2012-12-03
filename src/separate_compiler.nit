@@ -488,11 +488,13 @@ class SeparateCompiler
 			self.header.add_decl("{mtype.ctype} value;")
 			self.header.add_decl("\};")
 
-			self.header.add_decl("val* BOX_{c_name}({mtype.ctype}, struct type*);")
+			if not self.runtime_type_analysis.live_types.has(mtype) then return
+
+			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
 			v.add_decl("/* allocate {mtype} */")
-			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value, struct type* type) \{")
+			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
 			v.add("struct instance_{c_name}*res = GC_MALLOC(sizeof(struct instance_{c_name}));")
-			v.add("res->type = type;")
+			v.add("res->type = (struct type*) &type_{c_name};")
 			v.add("res->class = (struct class*) &class_{c_name};")
 			v.add("res->value = value;")
 			v.add("return (val*)res;")
@@ -750,9 +752,7 @@ class SeparateCompilerVisitor
 				self.add("printf(\"Dead code executed!\\n\"); exit(1);")
 				return res
 			end
-			var totype = value.mtype
-			if totype isa MNullableType then totype = totype.mtype
-			self.add("{res} = BOX_{valtype.c_name}({value}, (struct type*) &type_{totype.c_name}); /* autobox from {value.mtype} to {mtype} */")
+			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
 		else
 			# Bad things will appen!
@@ -765,9 +765,8 @@ class SeparateCompilerVisitor
 
 	redef fun send(mmethod, arguments)
 	do
-		if arguments.first.mtype.ctype != "val*" then
-			assert arguments.first.mtype == arguments.first.mcasttype
-			return self.monomorphic_send(mmethod, arguments.first.mtype, arguments)
+		if arguments.first.mcasttype.ctype != "val*" then
+			return self.monomorphic_send(mmethod, arguments.first.mcasttype, arguments)
 		end
 
 		var res: nullable RuntimeVariable
@@ -876,7 +875,6 @@ class SeparateCompilerVisitor
 
 	redef fun isset_attribute(a, recv)
 	do
-		# FIXME: Here we inconditionally return boxed primitive attributes
 		self.check_recv_notnull(recv)
 		var res = self.new_var(bool_type)
 		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] != NULL; /* {a} on {recv.inspect}*/")
@@ -885,31 +883,57 @@ class SeparateCompilerVisitor
 
 	redef fun read_attribute(a, recv)
 	do
-		# FIXME: Here we inconditionally return boxed primitive attributes
+		self.check_recv_notnull(recv)
+
+		# What is the declared type of the attribute?
 		var ret = a.intro.static_mtype.as(not null)
-		ret = self.resolve_for(ret, recv)
+		var intromclassdef = a.intro.mclassdef
+		ret = ret.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
+
+		# Get the attribute or a box (ie. always a val*)
 		var cret = self.object_type.as_nullable
 		var res = self.new_var(cret)
 		res.mcasttype = ret
-
-		self.check_recv_notnull(recv)
-
 		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}]; /* {a} on {recv.inspect} */")
+
+		# Check for Uninitialized attribute
 		if not ret isa MNullableType then
 			self.add("if ({res} == NULL) \{")
 			self.add_abort("Uninitialized attribute {a.name}")
 			self.add("\}")
 		end
 
-		return res
+		# Return the attribute or its unboxed version
+		# Note: it is mandatory since we reuse the box on write, we do not whant that the box escapes
+		return self.autobox(res, ret)
 	end
 
 	redef fun write_attribute(a, recv, value)
 	do
-		# FIXME: Here we inconditionally box primitive attributes
 		self.check_recv_notnull(recv)
-		value = self.autobox(value, self.object_type.as_nullable)
-		self.add("{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] = {value}; /* {a} on {recv.inspect} */")
+
+		# What is the declared type of the attribute?
+		var mtype = a.intro.static_mtype.as(not null)
+		var intromclassdef = a.intro.mclassdef
+		mtype = mtype.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
+
+		# Adapt the value to the declared type
+		value = self.autobox(value, mtype)
+		var attr = "{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}]"
+		if mtype.ctype != "val*" then
+			assert mtype isa MClassType
+			# The attribute is primitive, thus we store it in a box
+			# The trick is to create the box the first time then resuse the box
+			self.add("if ({attr} != NULL) \{")
+			self.add("((struct instance_{mtype.c_name}*){attr})->value = {value}; /* {a} on {recv.inspect} */")
+			self.add("\} else \{")
+			value = self.autobox(value, self.object_type.as_nullable)
+			self.add("{attr} = {value}; /* {a} on {recv.inspect} */")
+			self.add("\}")
+		else
+			# The attribute is not primitive, thus store it direclty
+			self.add("{attr} = {value}; /* {a} on {recv.inspect} */")
+		end
 	end
 
 	# Build livetype structure retrieving

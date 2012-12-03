@@ -1,7 +1,7 @@
 
 PROGS=*.nit ../examples/*.nit ../examples/leapfrog/leapfrog.nit ../examples/shoot/shoot_logic.nit ../lib/*.nit ../src/nitdoc.nit ../src/nits.nit ../src/nitc.nit ../src/test_parser.nit ../src/nit.nit ../src/nitstats.nit ../src/nitg.nit
 
-all: separate global niti nitg icode
+all: separate global niti nitg nitg-s nitg-e icode
 
 separate:
 	./tests.sh ${PROGS}
@@ -17,6 +17,12 @@ niti:
 
 nitg:
 	./tests.sh --engine nitg ${PROGS}
+
+nitg-s:
+	./tests.sh --engine nitg-s base_*.nit
+
+nitg-e:
+	./tests.sh --engine nitg-e ${PROGS}
 
 nitdoc:
 	./tests.sh ../src/nitdoc.nit
