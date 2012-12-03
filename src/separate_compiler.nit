@@ -444,11 +444,13 @@ class SeparateCompiler
 			self.header.add_decl("{mtype.ctype} value;")
 			self.header.add_decl("\};")
 
-			self.header.add_decl("val* BOX_{c_name}({mtype.ctype}, struct type*);")
+			if not self.runtime_type_analysis.live_types.has(mtype) then return
+
+			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
 			v.add_decl("/* allocate {mtype} */")
-			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value, struct type* type) \{")
+			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
 			v.add("struct instance_{c_name}*res = GC_MALLOC(sizeof(struct instance_{c_name}));")
-			v.add("res->type = type;")
+			v.add("res->type = (struct type*) &type_{c_name};")
 			v.add("res->class = (struct class*) &class_{c_name};")
 			v.add("res->value = value;")
 			v.add("return (val*)res;")
@@ -706,9 +708,7 @@ class SeparateCompilerVisitor
 				self.add("printf(\"Dead code executed!\\n\"); exit(1);")
 				return res
 			end
-			var totype = value.mtype
-			if totype isa MNullableType then totype = totype.mtype
-			self.add("{res} = BOX_{valtype.c_name}({value}, (struct type*) &type_{totype.c_name}); /* autobox from {value.mtype} to {mtype} */")
+			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
 		else
 			# Bad things will appen!
