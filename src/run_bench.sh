@@ -236,6 +236,11 @@ if test -z "$NOTSKIPED"; then
 	echo "* all: run all the benches"
 fi
 
+## COMPILE ENGINES
+
+test -f ./nitc_3 || ./ncall.sh -O
+test -f ./nitg || ./nitc_3 nitg.nit -O -v
+
 ## EFFECTIVE BENCHS ##
 
 function bench_nitg_bootstrap()
