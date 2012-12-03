@@ -229,6 +229,8 @@ enginebinname=$engine
 case $engine in
 	nitc) ;;
 	nitg) ;;
+	nitg-s) enginebinname=nitg; OPT="--separate $OPT";;
+	nitg-e) enginebinname=nitg; OPT="--erasure $OPT";;
 	nit) engine=niti ;;
 	niti) enginebinname=nit ;;
 esac
