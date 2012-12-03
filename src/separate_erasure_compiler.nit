@@ -272,35 +272,6 @@ end
 class SeparateErasureCompilerVisitor
 	super SeparateCompilerVisitor
 
-	# Box or unbox a value to another type iff a C type conversion is needed
-	# ENSURE: result.mtype.ctype == mtype.ctype
-	redef fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable
-	do
-		if value.mtype.ctype == mtype.ctype then
-			return value
-		else if value.mtype.ctype == "val*" then
-			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
-		else if mtype.ctype == "val*" then
-			var valtype = value.mtype.as(MClassType)
-			var res = self.new_var(mtype)
-			if not compiler.runtime_type_analysis.live_types.has(valtype) then
-				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
-				self.add("printf(\"Dead code executed!\\n\"); exit(1);")
-				return res
-			end
-			var totype = value.mtype
-			if totype isa MNullableType then totype = totype.mtype
-			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
-			return res
-		else
-			# Bad things will appen!
-			var res = self.new_var(mtype)
-			self.add("/* {res} left unintialized (cannot convert {value.mtype} to {mtype}) */")
-			self.add("printf(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); exit(1);")
-			return res
-		end
-	end
-
 	redef fun init_instance(mtype)
 	do
 		return self.new_expr("NEW_{mtype.mclass.c_name}()", mtype)
