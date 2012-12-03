@@ -1161,10 +1161,13 @@ class SeparateCompilerVisitor
 
 	redef fun calloc_array(ret_type, arguments)
 	do
-		var ret = ret_type.as(MClassType)
+		var ret = ret_type.as(MGenericType)
 		var compiler = self.compiler.as(SeparateCompiler)
 		compiler.undead_types.add(ret)
-		self.ret(self.new_expr("NEW_{ret.mclass.c_name}({arguments[1]}, (struct type*) &type_{ret_type.c_name})", ret_type))
+		var mclass = self.get_class("ArrayCapable")
+		var ft = mclass.mclass_type.arguments.first.as(MParameterType)
+		var color = compiler.ft_colors[ft]
+		self.ret(self.new_expr("NEW_{ret.mclass.c_name}({arguments[1]}, (struct type*) livetypes_array__NativeArray[self->type->fts_table->fts[{color}]->livecolor])", ret_type))
 	end
 end
 
