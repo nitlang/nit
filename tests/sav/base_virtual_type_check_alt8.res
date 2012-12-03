@@ -1,3 +1,4 @@
+Runtime error: Cast failed (alt/base_virtual_type_check_alt8.nit:30)
 J<Tfalse
 J<Ufalse
 K<Ttrue
@@ -22,4 +23,3 @@ K<Tfalse
 K<Ufalse
 L<Ttrue
 L<Utrue
-Runtime error: Cast failed (alt/base_virtual_type_check_alt8.nit:30)

@@ -327,7 +327,6 @@ END
 			cat "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
 			process_result $bf $bf
 		elif [ -x "./$ff.bin" ]; then
-			cp "$ff.cmp.err" "$ff.res"
 			test -z "$tap" && echo -n ". "
 			# Execute
 			args=""
@@ -335,7 +334,7 @@ END
 				echo ""
 				echo "NIT_NO_STACK=1 ./$ff.bin" $args
 			fi
-			NIT_NO_STACK=1 "./$ff.bin" $args < "$inputs" >> "$ff.res" 2>"$ff.err"
+			NIT_NO_STACK=1 "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.res"
 				cat >&2 "$ff.err"
@@ -345,9 +344,8 @@ END
 			elif [ -d "$ff.write" ]; then
 				LANG=C /bin/ls -F $ff.write >> "$ff.res"
 			fi
-			if [ -s "$ff.err" ]; then
-				cat "$ff.err" >> "$ff.res"
-			fi
+			cp "$ff.res"  "$ff.res2"
+			cat "$ff.cmp.err" "$ff.err" "$ff.res2" > "$ff.res"
 			process_result $bf $bf
 
 			if [ -f "$f.args" ]; then
@@ -379,7 +377,8 @@ END
 						LANG=C /bin/ls -F $fff.write >> "$fff.res"
 					fi
 					if [ -s "$fff.err" ]; then
-						cat "$fff.err" >> "$fff.res"
+						cp "$fff.res"  "$fff.res2"
+						cat "$fff.err" "$fff.res2" > "$fff.res"
 					fi
 					process_result $bff "  args #$cptr"
 				done < $fargs

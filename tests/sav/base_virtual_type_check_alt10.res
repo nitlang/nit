@@ -1,3 +1,4 @@
+Runtime error: Cast failed (alt/base_virtual_type_check_alt10.nit:37)
 J<Tfalse
 J<Ufalse
 K<Ttrue
@@ -23,4 +24,3 @@ K<Ufalse
 L<Ttrue
 L<Utrue
 L<T
-Runtime error: Cast failed (alt/base_virtual_type_check_alt10.nit:37)
