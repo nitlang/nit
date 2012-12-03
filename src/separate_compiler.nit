@@ -53,7 +53,7 @@ redef class ModelBuilder
 		v.add_decl("#include <string.h>")
 		v.add_decl("#include <gc/gc.h>")
 		v.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
-		v.add_decl("typedef val* nitattribute_t; /* general C type representing a Nit attribute. */")
+		v.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
 
 		# Class abstract representation
 		v.add_decl("struct class \{ nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
