@@ -178,22 +178,21 @@ end
 
 # MClassType coloring
 class TypeColoring
-	super AbstractColoring[MClassType]
+	super AbstractColoring[MType]
 
-	type T: MClassType
+	type T: MType
 
 	private var mmodule: MModule
-	private var mtypes: Set[MClassType] = new HashSet[MClassType]
+	private var mtypes: Set[T]
 
 	# caches
 	private var super_elements_cache: Map[T, Set[T]] = new HashMap[T, Set[T]]
 	private var sub_elements_cache: Map[T, Set[T]] = new HashMap[T, Set[T]]
 
-	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis) do
+	init(mainmodule: MModule, mtypes: Set[T]) do
 		super(new TypeSorter(mainmodule), new ReverseTypeSorter(mainmodule))
 		self.mmodule = mainmodule
-		self.mtypes.add_all(runtime_type_analysis.live_types)
-		self.mtypes.add_all(runtime_type_analysis.live_cast_types)
+		self.mtypes = mtypes
 	end
 
 	# Build type tables
@@ -235,7 +234,7 @@ class TypeColoring
 
 	# Return all direct super elements of an element
 	redef fun is_element_mi(element) do
-		return self.mmodule.flatten_mclass_hierarchy[element.mclass].direct_greaters.length > 1
+		return self.super_elements(element).length > 1
 	end
 
 	# Return all sub elements (directs and indirects) of an element
@@ -256,7 +255,7 @@ end
 
 # A sorter for linearize list of types
 private class TypeSorter
-	super AbstractSorter[MClassType]
+	super AbstractSorter[MType]
 
 	private var mmodule: MModule
 
