@@ -31,15 +31,6 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	redef fun run_global_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
-	do
-		if self.toolcontext.opt_erasure.value then
-			run_separate_erasure_compiler(mainmodule, runtime_type_analysis)
-		else
-			super
-		end
-	end
-
 	fun run_separate_erasure_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		var time0 = get_time

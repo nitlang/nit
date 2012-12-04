@@ -30,16 +30,6 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	redef fun run_global_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
-	do
-		# Hijack the run_global_compiler to run the separate one if requested.
-		if self.toolcontext.opt_separate.value then
-			run_separate_compiler(mainmodule, runtime_type_analysis)
-		else
-			super
-		end
-	end
-
 	fun run_separate_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		var time0 = get_time
