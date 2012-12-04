@@ -54,8 +54,10 @@ redef class ModelBuilder
 		v.add_decl("#include <gc/gc.h>")
 		v.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
 		v.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
-		v.add_decl("struct class \{ int id; int color; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
+		v.add_decl("struct class \{ int id; int color; struct vts_table *vts_table; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 		v.add_decl("struct type_table \{ int size; int table[1]; \}; /* colorized type table. */")
+		v.add_decl("struct vts_entry \{ short int is_nullable; struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
+		v.add_decl("struct vts_table \{ struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
 		v.add_decl("typedef struct \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 		v.add_decl("extern const char const * class_names[];")
 
@@ -88,6 +90,8 @@ class SeparateErasureCompiler
 
 	private var class_ids: HashMap[MClass, Int] = new HashMap[MClass, Int]
 	private var class_tables: nullable Map[MClass, Array[nullable MClass]] = null
+	private var class_vts_colors: Map[MVirtualTypeProp, Int]
+	private var class_vts_tables: Map[MClass, Array[nullable MVirtualTypeDef]]
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
 		# classes coloration
@@ -104,6 +108,11 @@ class SeparateErasureCompiler
 		var attribute_coloring = new AttributeColoring(class_coloring)
 		self.attr_colors = attribute_coloring.colorize
 		self.attr_tables = attribute_coloring.build_property_tables
+
+		# vt coloration
+		var vt_coloring = new VTColoring(class_coloring)
+		self.class_vts_colors = vt_coloring.colorize
+		self.class_vts_tables = vt_coloring.build_property_tables
 
 		# set type unique id
 		for mclass in class_colors.keys do
@@ -156,14 +165,22 @@ class SeparateErasureCompiler
 		self.header.add_decl("struct class_{c_name} \{")
 		self.header.add_decl("int id;")
 		self.header.add_decl("int color;")
+		self.header.add_decl("const struct vts_table *vts_table;")
 		self.header.add_decl("struct type_table *type_table;")
 		self.header.add_decl("nitmethod_t vft[{vft.length}];")
+		self.header.add_decl("\};")
+
+		# extern const struct vts_table_X vts_table_X
+		self.header.add_decl("extern const struct vts_table_{c_name} vts_table_{c_name};")
+		self.header.add_decl("struct vts_table_{c_name} \{")
+		self.header.add_decl("struct vts_entry vts[{self.class_vts_tables[mclass].length}];")
 		self.header.add_decl("\};")
 
 		# Build class vft
 		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
 		v.add_decl("{self.class_ids[mclass]},")
 		v.add_decl("{self.class_colors[mclass]},")
+		v.add_decl("(const struct vts_table*) &vts_table_{c_name},")
 		v.add_decl("(struct type_table*) &type_table_{c_name},")
 		v.add_decl("\{")
 		for i in [0 .. vft.length[ do
@@ -180,6 +197,8 @@ class SeparateErasureCompiler
 		end
 		v.add_decl("\}")
 		v.add_decl("\};")
+
+		build_class_vts_table(mclass, v.as(SeparateErasureCompilerVisitor))
 
 		# Build class type table
 		self.header.add_decl("extern const struct type_table_{c_name} type_table_{c_name};")
@@ -266,6 +285,41 @@ class SeparateErasureCompiler
 		v.add("\}")
 	end
 
+	private fun build_class_vts_table(mclass: MClass, v: SeparateCompilerVisitor) do
+		v.add_decl("const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name} = \{")
+		v.add_decl("\{")
+
+		for vt in self.class_vts_tables[mclass] do
+			if vt == null then
+				v.add_decl("NULL, /* empty */")
+			else
+				var is_null = 0
+				var bound = retrieve_vt_bound(mclass.intro.bound_mtype, vt.bound)
+				if bound isa MNullableType then
+					bound = bound.mtype
+					is_null = 1
+				end
+				v.add_decl("\{{is_null}, (struct class*)&class_{bound.as(MClassType).mclass.c_name}\}, /* {vt} */")
+			end
+		end
+		v.add_decl("\},")
+		v.add_decl("\};")
+	end
+
+	private fun retrieve_vt_bound(anchor: MClassType, mtype: nullable MType): MType do
+		if mtype == null then
+			print "NOT YET IMPLEMENTED: retrieve_vt_bound on null"
+			abort
+		end
+		if mtype isa MVirtualType then
+			return mtype.anchor_to(mainmodule, anchor)
+		else if mtype isa MParameterType then
+			return mtype.anchor_to(mainmodule, anchor)
+		else
+			return mtype
+		end
+	end
+
 	redef fun new_visitor do return new SeparateErasureCompilerVisitor(self)
 end
 
@@ -279,33 +333,41 @@ class SeparateErasureCompilerVisitor
 
 	redef fun type_test(value, mtype)
 	do
+		self.add("/* type test for {value.inspect} isa {mtype} */")
+
 		var res = self.new_var(bool_type)
 
 		var cltype = self.get_name("cltype")
 		self.add_decl("int {cltype};")
 		var idtype = self.get_name("idtype")
 		self.add_decl("int {idtype};")
+		var is_nullable = self.get_name("is_nullable")
+		self.add_decl("short int {is_nullable};")
+		var is_null = self.get_name("is_null")
+		self.add_decl("short int {is_null};")
 
-		var maybe_null = false
+		var maybe_null = 0
 		if mtype isa MNullableType then
 			mtype = mtype.mtype
-			maybe_null = true
+			maybe_null = 1
+			self.add("{is_nullable} = 1;")
 		end
 		if mtype isa MParameterType then
 			# Here we get the bound of the the formal type (eh, erasure...)
 			mtype = mtype.resolve_for(self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.mmodule, false)
 			if mtype isa MNullableType then
 				mtype = mtype.mtype
-				maybe_null = true
+				maybe_null = 1
+				self.add("{is_nullable} = 1;")
 			end
 		end
 		if mtype isa MVirtualType then
 			# FIXME virtual types should not be erased but got from the class table of the current receiver (self.frame.arguments.first)
-			mtype = mtype.resolve_for(self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.mmodule, true)
-			if mtype isa MNullableType then
-				mtype = mtype.mtype
-				maybe_null = true
-			end
+			#mtype = mtype.resolve_for(self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.mmodule, true)
+			#if mtype isa MNullableType then
+			#	mtype = mtype.mtype
+			#	maybe_null = true
+			#end
 		end
 
 		if value.mcasttype.is_subtype(self.frame.mpropdef.mclassdef.mmodule, self.frame.mpropdef.mclassdef.bound_mtype, mtype) then
@@ -313,33 +375,46 @@ class SeparateErasureCompilerVisitor
 			return res
 		end
 
+		var class_ptr
 		var type_table
 		if value.mtype.ctype == "val*" then
-			type_table = "{value}->class->type_table"
+			class_ptr = "{value}->class->"
+			self.add("{is_null} = {value} == NULL;")
 		else
 			var mclass = value.mtype.as(MClassType).mclass
-			type_table = "type_table_{mclass.c_name}"
+			class_ptr = "class_{mclass.c_name}."
+			self.add("{is_null} = 0;")
 		end
 
 		if mtype isa MClassType then
 			self.add("{cltype} = class_{mtype.mclass.c_name}.color;")
 			self.add("{idtype} = class_{mtype.mclass.c_name}.id;")
+			if maybe_null == 0 then
+				self.add("{is_nullable} = 0;")
+			end
+		else if mtype isa MVirtualType then
+			var vtcolor = compiler.as(SeparateErasureCompiler).class_vts_colors[mtype.mproperty.as(MVirtualTypeProp)]
+			var recv = self.frame.arguments.first
+			var recv_boxed = self.autobox(recv, self.object_type)
+			self.add("{cltype} = {recv_boxed}->class->vts_table->vts[{vtcolor}].class->color;")
+			self.add("{idtype} = {recv_boxed}->class->vts_table->vts[{vtcolor}].class->id;")
+			if maybe_null == 0 then
+				self.add("{is_nullable} = {recv_boxed}->class->vts_table->vts[{vtcolor}].is_nullable;")
+			end
 		else
 			self.debug("type_test({value.inspect}, {mtype})")
 			abort
 		end
 
-		var s: String
-		if maybe_null then
-			s = "{value} == NULL ||"
-		else
-			s = "{value} != NULL &&"
-		end
 		# check color is in table
-		self.add("if({value} != NULL && {cltype} >= {type_table}->size) \{")
+		self.add("if({is_null}) \{")
+		self.add("{res} = {is_nullable};")
+		self.add("\} else \{")
+		self.add("if({cltype} >= {class_ptr}type_table->size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")
-		self.add("{res} = {s} {type_table}->table[{cltype}] == {idtype};")
+		self.add("{res} = {class_ptr}type_table->table[{cltype}] == {idtype};")
+		self.add("\}")
 		self.add("\}")
 
 		return res
