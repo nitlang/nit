@@ -849,10 +849,10 @@ class MGenericType
 	end
 
 	# Recursively print the type of the arguments within brackets.
-	# Example: "Map[String,List[Int]]"
+	# Example: "Map[String, List[Int]]"
 	redef fun to_s
 	do
-		return "{mclass}[{arguments.join(",")}]"
+		return "{mclass}[{arguments.join(", ")}]"
 	end
 
 	redef var need_anchor: Bool
