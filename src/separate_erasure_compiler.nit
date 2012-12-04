@@ -336,10 +336,11 @@ class SeparateErasureCompilerVisitor
 		return res
 	end
 
-	redef fun class_name_string(value1)
+	redef fun class_name_string(value)
 	do
 		var res = self.get_name("var_class_name")
-		self.add_decl("const char* {res} = class_names[self->class->id];")
+		self.add_decl("const char *{res};")
+		self.add("{res} = class_names[{value}->class->id];")
 		return res
 	end
 
