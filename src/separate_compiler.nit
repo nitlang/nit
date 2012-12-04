@@ -850,6 +850,21 @@ class SeparateCompilerVisitor
 			res = self.new_var(ret)
 		end
 
+		if self.compiler.modelbuilder.mpropdef2npropdef.has_key(mmethoddef) and
+		self.compiler.modelbuilder.mpropdef2npropdef[mmethoddef] isa AInternMethPropdef then
+			var frame = new Frame(self, mmethoddef, recvtype, arguments)
+			frame.returnlabel = self.get_name("RET_LABEL")
+			frame.returnvar = res
+			var old_frame = self.frame
+			self.frame = frame
+			self.add("\{ /* Inline {mmethoddef} ({arguments.join(",")}) */")
+			mmethoddef.compile_inside_to_c(self, arguments)
+			self.add("{frame.returnlabel.as(not null)}:(void)0;")
+			self.add("\}")
+			self.frame = old_frame
+			return res
+		end
+
 		# Autobox arguments
 		self.adapt_signature(mmethoddef, arguments)
 
