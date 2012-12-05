@@ -2207,12 +2207,15 @@ redef class AAttrPropdef
 	do
 		var nexpr = self.n_expr
 		if nexpr != null then
+			var oldnode = v.current_node
+			v.current_node = self
 			var old_frame = v.frame
 			var frame = new Frame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
 			v.frame = frame
 			var value = v.expr(nexpr, self.mpropdef.static_mtype)
 			v.write_attribute(self.mpropdef.mproperty, recv, value)
 			v.frame = old_frame
+			v.current_node = oldnode
 		end
 	end
 end
