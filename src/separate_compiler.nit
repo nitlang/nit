@@ -764,7 +764,9 @@ class SeparateCompilerVisitor
 	# ENSURE: result.mtype.ctype == mtype.ctype
 	redef fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable
 	do
-		if value.mtype.ctype == mtype.ctype then
+		if value.mtype == mtype then
+			return value
+		else if value.mtype.ctype == "val*" and mtype.ctype == "val*" then
 			return value
 		else if value.mtype.ctype == "val*" then
 			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
@@ -1100,7 +1102,7 @@ class SeparateCompilerVisitor
 			value2 = tmp
 		end
 		if value1.mtype.ctype != "val*" then
-			if value2.mtype.ctype == value1.mtype.ctype then
+			if value2.mtype == value1.mtype then
 				self.add("{res} = 1; /* is_same_type_test: compatible types {value1.mtype} vs. {value2.mtype} */")
 			else if value2.mtype.ctype != "val*" then
 				self.add("{res} = 0; /* is_same_type_test: incompatible types {value1.mtype} vs. {value2.mtype}*/")
@@ -1131,7 +1133,7 @@ class SeparateCompilerVisitor
 			value2 = tmp
 		end
 		if value1.mtype.ctype != "val*" then
-			if value2.mtype.ctype == value1.mtype.ctype then
+			if value2.mtype == value1.mtype then
 				self.add("{res} = {value1} == {value2};")
 			else if value2.mtype.ctype != "val*" then
 				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")

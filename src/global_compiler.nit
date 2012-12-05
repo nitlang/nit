@@ -946,7 +946,9 @@ class GlobalCompilerVisitor
 	# ENSURE: result.mtype.ctype == mtype.ctype
 	fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable
 	do
-		if value.mtype.ctype == mtype.ctype then
+		if value.mtype == mtype then
+			return value
+		else if value.mtype.ctype == "val*" and mtype.ctype == "val*" then
 			return value
 		else if value.mtype.ctype == "val*" then
 			return self.new_expr("((struct {mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
@@ -1608,7 +1610,7 @@ class GlobalCompilerVisitor
 			value2 = tmp
 		end
 		if value1.mtype.ctype != "val*" then
-			if value2.mtype.ctype == value1.mtype.ctype then
+			if value2.mtype == value1.mtype then
 				self.add("{res} = {value1} == {value2};")
 			else if value2.mtype.ctype != "val*" then
 				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
