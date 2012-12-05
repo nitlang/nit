@@ -563,15 +563,7 @@ class SeparateCompiler
 		v.add("{res}->type = type;")
 		v.add("{res}->class = (struct class*) &class_{c_name};")
 
-		for cd in mtype.collect_mclassdefs(self.mainmodule)
-		do
-			var n = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef then
-					npropdef.init_expr(v, res)
-				end
-			end
-		end
+		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
 		v.add("\}")
 	end
