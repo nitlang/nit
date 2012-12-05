@@ -45,7 +45,7 @@ redef class ModelBuilder
 		v.add_decl("#include <gc/gc.h>")
 		v.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
 		v.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
-		v.add_decl("struct class \{ int id; int color; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
+		v.add_decl("struct class \{ int id; int box_kind; int color; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 		v.add_decl("struct type_table \{ int size; int table[1]; \}; /* colorized type table. */")
 		v.add_decl("typedef struct \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 		v.add_decl("extern const char const * class_names[];")
@@ -103,6 +103,7 @@ class SeparateErasureCompiler
 
 		# for the class_name and output_class_name methods
 		self.compile_class_names
+		self.compile_box_kinds
 	end
 
 	redef fun compile_class_names do
@@ -146,6 +147,7 @@ class SeparateErasureCompiler
 		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
 		self.header.add_decl("struct class_{c_name} \{")
 		self.header.add_decl("int id;")
+		self.header.add_decl("int box_kind;")
 		self.header.add_decl("int color;")
 		self.header.add_decl("struct type_table *type_table;")
 		self.header.add_decl("nitmethod_t vft[{vft.length}];")
@@ -154,6 +156,7 @@ class SeparateErasureCompiler
 		# Build class vft
 		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
 		v.add_decl("{self.class_ids[mclass]},")
+		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
 		v.add_decl("{self.class_colors[mclass]},")
 		v.add_decl("(struct type_table*) &type_table_{c_name},")
 		v.add_decl("\{")
