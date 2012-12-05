@@ -1638,11 +1638,14 @@ class GlobalCompilerVisitor
 	end
 
 	# Generate a check-init-instance
-	fun check_init_instance(recv: RuntimeVariable)
+	fun check_init_instance(recv: RuntimeVariable, mtype: MClassType)
 	do
 		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
 
-		var mtype = self.anchor(recv.mcasttype)
+		mtype = self.anchor(mtype).as(MClassType)
+		if not self.compiler.runtime_type_analysis.live_types.has(mtype) then
+			debug "problem: {mtype} was detected dead"
+		end
 		for cd in mtype.collect_mclassdefs(self.compiler.mainmodule)
 		do
 			var n = self.compiler.modelbuilder.mclassdef2nclassdef[cd]
@@ -1679,7 +1682,7 @@ class GlobalCompilerVisitor
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res)
+		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end
@@ -1700,7 +1703,7 @@ class GlobalCompilerVisitor
 		self.add("{res} = {res2};")
 		var length = self.int_instance(string.length)
 		self.send(self.get_property("with_native", mtype), [res, nat, length])
-		self.check_init_instance(res)
+		self.check_init_instance(res, mtype)
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
@@ -2608,9 +2611,10 @@ redef class ACrangeExpr
 	do
 		var i1 = v.expr(self.n_expr, null)
 		var i2 = v.expr(self.n_expr2, null)
-		var res = v.init_instance(self.mtype.as(MClassType))
+		var mtype = self.mtype.as(MClassType)
+		var res = v.init_instance(mtype)
 		var it = v.send(v.get_property("init", res.mtype), [res, i1, i2])
-		v.check_init_instance(res)
+		v.check_init_instance(res, mtype)
 		return res
 	end
 end
@@ -2620,9 +2624,10 @@ redef class AOrangeExpr
 	do
 		var i1 = v.expr(self.n_expr, null)
 		var i2 = v.expr(self.n_expr2, null)
-		var res = v.init_instance(self.mtype.as(MClassType))
+		var mtype = self.mtype.as(MClassType)
+		var res = v.init_instance(mtype)
 		var it = v.send(v.get_property("without_last", res.mtype), [res, i1, i2])
-		v.check_init_instance(res)
+		v.check_init_instance(res, mtype)
 		return res
 	end
 end
@@ -2808,7 +2813,7 @@ redef class ANewExpr
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
 		end
-		v.check_init_instance(recv)
+		v.check_init_instance(recv, mtype)
 		return recv
 	end
 end

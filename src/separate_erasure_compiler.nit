@@ -363,7 +363,7 @@ class SeparateErasureCompilerVisitor
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res)
+		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end
