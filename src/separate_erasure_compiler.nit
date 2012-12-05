@@ -250,6 +250,8 @@ class SeparateErasureCompiler
 		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
 		v.add("\}")
+
+		generate_check_init_instance(mtype)
 	end
 
 	redef fun new_visitor do return new SeparateErasureCompilerVisitor(self)

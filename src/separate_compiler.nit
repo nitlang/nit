@@ -566,6 +566,22 @@ class SeparateCompiler
 		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
 		v.add("\}")
+
+		generate_check_init_instance(mtype)
+	end
+
+	redef fun generate_check_init_instance(mtype)
+	do
+		if self.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+
+		var v = self.new_visitor
+		var c_name = mtype.mclass.c_name
+		var res = new RuntimeVariable("self", mtype, mtype)
+		self.header.add_decl("void CHECK_NEW_{c_name}({mtype.ctype});")
+		v.add_decl("/* allocate {mtype} */")
+		v.add_decl("void CHECK_NEW_{c_name}({mtype.ctype} {res}) \{")
+		self.generate_check_attr(v, res, mtype)
+		v.add("\}")
 	end
 
 	redef fun new_visitor do return new SeparateCompilerVisitor(self)
@@ -1016,6 +1032,13 @@ class SeparateCompilerVisitor
 		compiler.undead_types.add(mtype)
 		return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) &type_{mtype.c_name})", mtype)
 	end
+
+	redef fun check_init_instance(value, mtype)
+	do
+		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+		self.add("CHECK_NEW_{mtype.mclass.c_name}({value});")
+	end
+
 
 	redef fun type_test(value, mtype)
 	do

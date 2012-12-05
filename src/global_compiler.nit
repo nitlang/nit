@@ -109,6 +109,7 @@ redef class ModelBuilder
 		for t in runtime_type_analysis.live_types do
 			if t.ctype == "val*" then
 				compiler.generate_init_instance(t)
+				compiler.generate_check_init_instance(t)
 			else
 				compiler.generate_box_instance(t)
 			end
@@ -384,6 +385,19 @@ class GlobalCompiler
 		v.add("\}")
 	end
 
+	fun generate_check_init_instance(mtype: MClassType)
+	do
+		if self.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+
+		var v = self.new_visitor
+		var res = new RuntimeVariable("self", mtype, mtype)
+		self.header.add_decl("void CHECK_NEW_{mtype.c_name}({mtype.ctype});")
+		v.add_decl("/* allocate {mtype} */")
+		v.add_decl("void CHECK_NEW_{mtype.c_name}({mtype.ctype} {res}) \{")
+		self.generate_check_attr(v, res, mtype)
+		v.add("\}")
+	end
+
 	# Generate code that collect initialize the attributes on a new instance
 	fun generate_init_attr(v: GlobalCompilerVisitor, recv: RuntimeVariable, mtype: MClassType)
 	do
@@ -393,6 +407,20 @@ class GlobalCompiler
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then
 					npropdef.init_expr(v, recv)
+				end
+			end
+		end
+	end
+
+	# Generate a check-init-instance
+	fun generate_check_attr(v: GlobalCompilerVisitor, recv: RuntimeVariable, mtype: MClassType)
+	do
+		for cd in mtype.collect_mclassdefs(self.mainmodule)
+		do
+			var n = self.modelbuilder.mclassdef2nclassdef[cd]
+			for npropdef in n.n_propdefs do
+				if npropdef isa AAttrPropdef then
+					npropdef.check_expr(v, recv)
 				end
 			end
 		end
@@ -1652,16 +1680,8 @@ class GlobalCompilerVisitor
 		if not self.compiler.runtime_type_analysis.live_types.has(mtype) then
 			debug "problem: {mtype} was detected dead"
 		end
-		for cd in mtype.collect_mclassdefs(self.compiler.mainmodule)
-		do
-			var n = self.compiler.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef then
-					# Force read to check the initialization
-					self.read_attribute(npropdef.mpropdef.mproperty, recv)
-				end
-			end
-		end
+
+		self.add("CHECK_NEW_{mtype.c_name}({recv});")
 	end
 
 	# Generate an integer value
@@ -2217,6 +2237,22 @@ redef class AAttrPropdef
 			v.frame = old_frame
 			v.current_node = oldnode
 		end
+	end
+
+	fun check_expr(v: GlobalCompilerVisitor, recv: RuntimeVariable)
+	do
+		var nexpr = self.n_expr
+		if nexpr != null then return
+
+		var oldnode = v.current_node
+		v.current_node = self
+		var old_frame = v.frame
+		var frame = new Frame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
+		v.frame = frame
+		# Force read to check the initialization
+		v.read_attribute(self.mpropdef.mproperty, recv)
+		v.frame = old_frame
+		v.current_node = oldnode
 	end
 end
 
