@@ -379,9 +379,9 @@ function bench_compilation_time
 	for i in ../examples/hello_world.nit test_parser.nit nitg.nit; do
 		bench_command `basename "$i" .nit` "" ./nitg "$i" --no-cc
 	done
-	prepare_res "$name-nitg_g.dat" "nitg/g" "nitg/g"
+	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg --erasure"
 	for i in ../examples/hello_world.nit test_parser.nit nitg.nit; do
-		bench_command `basename "$i" .nit` "" ./nitg.bin "$i" --no-cc
+		bench_command `basename "$i" .nit` "" ./nitg --erasure "$i" --no-cc
 	done
 	plot "$name.gnu"
 }
