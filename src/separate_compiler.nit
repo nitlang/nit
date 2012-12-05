@@ -22,10 +22,14 @@ redef class ToolContext
 	# --separate
 	var opt_separate: OptionBool = new OptionBool("Use separate compilation", "--separate")
 
+	# --no-inline-intern
+	var opt_no_inline_intern: OptionBool = new OptionBool("Do not inline call to intern methods", "--no-inline-intern")
+
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_separate)
+		self.option_context.add_option(self.opt_no_inline_intern)
 	end
 end
 
@@ -851,7 +855,8 @@ class SeparateCompilerVisitor
 		end
 
 		if self.compiler.modelbuilder.mpropdef2npropdef.has_key(mmethoddef) and
-		self.compiler.modelbuilder.mpropdef2npropdef[mmethoddef] isa AInternMethPropdef then
+		self.compiler.modelbuilder.mpropdef2npropdef[mmethoddef] isa AInternMethPropdef and
+		not compiler.modelbuilder.toolcontext.opt_no_inline_intern.value then
 			var frame = new Frame(self, mmethoddef, recvtype, arguments)
 			frame.returnlabel = self.get_name("RET_LABEL")
 			frame.returnvar = res
