@@ -306,7 +306,23 @@ function bench_nitg_options()
 
 	plot "$name.gnu"
 }
-bench_nitg_options --hardening
+bench_nitg_options --hardening --no-check-covariance --no-check-initialization --no-check-assert --no-check-other
+
+function bench_nitg-e_options()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res "$name.dat" "no options" "nitg-e without options"
+	run_compiler "nitg-e" ./nitg --erasure
+
+	for opt in "$@"; do
+		prepare_res "$name$opt.dat" "$opt" "nitg-e with option $opt"
+		run_compiler "nitg-e$opt" ./nitg --erasure $opt
+	done
+
+	plot "$name.gnu"
+}
+bench_nitg-e_options --hardening --no-inline-intern --no-check-covariance --no-check-initialization --no-check-assert --no-check-other
 
 function bench_nitc_gc()
 {

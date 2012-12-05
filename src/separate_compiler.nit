@@ -823,7 +823,8 @@ class SeparateCompilerVisitor
 			ss.append(", {a}")
 		end
 
-		var maybenull = recv.mcasttype isa MNullableType
+		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or mmethod.name == "==" or mmethod.name == "!="
+		var maybenull = recv.mcasttype isa MNullableType and consider_null
 		if maybenull then
 			self.add("if ({recv} == NULL) \{")
 			if mmethod.name == "==" then
@@ -937,7 +938,7 @@ class SeparateCompilerVisitor
 		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}]; /* {a} on {recv.inspect} */")
 
 		# Check for Uninitialized attribute
-		if not ret isa MNullableType then
+		if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
 			self.add("if ({res} == NULL) \{")
 			self.add_abort("Uninitialized attribute {a.name}")
 			self.add("\}")

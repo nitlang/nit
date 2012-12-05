@@ -38,10 +38,23 @@ redef class ToolContext
 	# --hardening
 	var opt_hardening: OptionBool = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
 
+	# --no-check-covariance
+	var opt_no_check_covariance: OptionBool = new OptionBool("Disable type tests of covariant parameters (dangerous)", "--no-check-covariance")
+
+	# --no-check-initialization
+	var opt_no_check_initialization: OptionBool = new OptionBool("Disable isset tests at the end of constructors (dangerous)", "--no-check-initialization")
+
+	# --no-check-assert
+	var opt_no_check_assert: OptionBool = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
+
+	# --no-check-other
+	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
+
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_hardening)
+		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_other)
 	end
 end
 
@@ -1139,6 +1152,8 @@ class GlobalCompilerVisitor
 	# Add a check and an abort for a null reciever is needed
 	fun check_recv_notnull(recv: RuntimeVariable)
 	do
+		if self.compiler.modelbuilder.toolcontext.opt_no_check_other.value then return
+
 		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
 		if maybenull then
 			self.add("if ({recv} == NULL) \{")
@@ -1182,7 +1197,8 @@ class GlobalCompilerVisitor
 			if res != null then self.assign(res, res2.as(not null))
 			return res
 		end
-		if args.first.mcasttype isa MNullableType or args.first.mcasttype isa MNullType then
+		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or m.name == "==" or m.name == "!="
+		if args.first.mcasttype isa MNullableType or args.first.mcasttype isa MNullType and consider_null then
 			# The reciever is potentially null, so we have to 3 cases: ==, != or NullPointerException
 			self.add("if ({args.first} == NULL) \{ /* Special null case */")
 			if m.name == "==" then
@@ -1430,7 +1446,7 @@ class GlobalCompilerVisitor
 			var ta = a.intro.static_mtype.as(not null)
 			ta = self.resolve_for(ta, recv2)
 			var res2 = self.new_expr("((struct {t.c_name}*){recv})->{a.intro.c_name}", ta)
-			if not ta isa MNullableType then
+			if not ta isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value then
 				if ta.ctype == "val*" then
 					self.add("if ({res2} == NULL) \{")
 					self.add_abort("Uninitialized attribute {a.name}")
@@ -1622,6 +1638,8 @@ class GlobalCompilerVisitor
 	# Generate a check-init-instance
 	fun check_init_instance(recv: RuntimeVariable)
 	do
+		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+
 		var mtype = self.anchor(recv.mcasttype)
 		for cd in mtype.collect_mclassdefs(self.compiler.mainmodule)
 		do
@@ -1779,6 +1797,8 @@ redef class MMethodDef
 	# Generate type checks in the C code to check covariant parameters
 	fun compile_parameter_check(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable])
 	do
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_covariance.value then return
+
 		for i in [0..msignature.arity[ do
 			# skip test for vararg since the array is instantiated with the correct polymorphic type
 			if msignature.vararg_rank == i then continue
@@ -2448,6 +2468,8 @@ end
 redef class AAssertExpr
 	redef fun stmt(v)
 	do
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return
+
 		var cond = v.expr_bool(self.n_expr)
 		v.add("if (!{cond}) \{")
 		v.stmt(self.n_else)
@@ -2637,6 +2659,8 @@ redef class AAsCastExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr, null)
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
+
 		var cond = v.type_test(i, self.mtype.as(not null))
 		v.add("if (!{cond}) \{")
 		v.add_abort("Cast failed")
@@ -2649,6 +2673,8 @@ redef class AAsNotnullExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr, null)
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
+
 		v.add("if ({i} == NULL) \{")
 		v.add_abort("Cast failed")
 		v.add("\}")
