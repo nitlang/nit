@@ -28,12 +28,16 @@ redef class ToolContext
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
 
+	# --use-naive-coloring
+	var opt_use_naive_coloring: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--use-naive-coloring")
+
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_inline_coloring_numbers)
+		self.option_context.add_option(self.opt_use_naive_coloring)
 	end
 end
 
@@ -213,8 +217,13 @@ class SeparateCompiler
 
 	# colorize classe properties
 	fun do_property_coloring do
+
 		# classes coloration
-		self.class_coloring = new ClassColoring(mainmodule)
+		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+			self.class_coloring = new NaiveClassColoring(mainmodule)
+		else
+			self.class_coloring = new ClassColoring(mainmodule)
+		end
 		self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
 
 		# methods coloration
@@ -283,7 +292,12 @@ class SeparateCompiler
 		self.livetypes_tables_sizes = entries_coloring.livetypes_tables_sizes
 
 		# colorize types
-		var type_coloring = new TypeColoring(self.mainmodule, mtypes)
+		var type_coloring
+		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+			type_coloring = new NaiveTypeColoring(self.mainmodule, mtypes)
+		else
+			type_coloring = new TypeColoring(self.mainmodule, mtypes)
+		end
 		self.type_colors = type_coloring.colorize(mtypes)
 		self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
 

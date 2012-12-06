@@ -253,6 +253,21 @@ class TypeColoring
 	end
 end
 
+class NaiveTypeColoring
+	super TypeColoring
+
+	init(mainmodule: MModule, mtypes: Set[T]) do
+		super(mainmodule, mtypes)
+	end
+
+	# naive coloring that use incremental coloring
+	redef fun colorize_elements(elements) do
+		for e in elements do
+			self.coloration_result[e] = self.coloration_result.length
+		end
+	end
+end
+
 # A sorter for linearize list of types
 private class TypeSorter
 	super AbstractSorter[MType]
@@ -372,6 +387,22 @@ class ClassColoring
 	redef fun is_element_mi(element) do
 		if not self.mmodule.flatten_mclass_hierarchy.has(element) then return false
 		return self.mmodule.flatten_mclass_hierarchy[element].direct_greaters.length > 1
+	end
+end
+
+# incremental coloring (very naive)
+class NaiveClassColoring
+	super ClassColoring
+
+	init(mainmodule: MModule) do
+		super(mainmodule)
+	end
+
+	# naive coloring that use incremental coloring
+	redef fun colorize_elements(elements: Collection[MClass]) do
+		for e in elements do
+			self.coloration_result[e] = self.coloration_result.length
+		end
 	end
 end
 
