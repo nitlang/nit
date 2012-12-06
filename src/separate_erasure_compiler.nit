@@ -261,7 +261,7 @@ class SeparateErasureCompiler
 
 		for vt in self.vt_tables[mclass] do
 			if vt == null then
-				v.add_decl("NULL, /* empty */")
+				v.add_decl("\{-1, NULL\}, /* empty */")
 			else
 				var is_null = 0
 				var bound = retrieve_vt_bound(mclass.intro.bound_mtype, vt.bound)
