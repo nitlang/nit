@@ -19,4 +19,6 @@
   --no-check-other            Disable implicit tests: unset attribute, null receiver (dangerous)
   --separate                  Use separate compilation
   --no-inline-intern          Do not inline call to intern methods
+  --inline-coloring-numbers   Inline colors and ids
+  --use-naive-coloring        Colorize items incrementaly, used to simulate binary matrix typing
   --erasure                   Erase generic types
