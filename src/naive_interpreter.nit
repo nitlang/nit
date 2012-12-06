@@ -478,7 +478,7 @@ abstract class Instance
 	fun eq_is(o: Instance): Bool do return self is o
 
 	# Human readable object identity "Type#number"
-	redef fun to_s do return "{mtype}#{object_id}"
+	redef fun to_s do return "{mtype}"
 
 	# Return the integer value if the instance is an integer.
 	# else aborts
