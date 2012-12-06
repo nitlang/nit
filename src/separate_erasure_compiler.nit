@@ -31,15 +31,6 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	redef fun run_global_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
-	do
-		if self.toolcontext.opt_erasure.value then
-			run_separate_erasure_compiler(mainmodule, runtime_type_analysis)
-		else
-			super
-		end
-	end
-
 	fun run_separate_erasure_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		var time0 = get_time
@@ -54,7 +45,7 @@ redef class ModelBuilder
 		v.add_decl("#include <gc/gc.h>")
 		v.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
 		v.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
-		v.add_decl("struct class \{ int id; int color; struct vts_table *vts_table; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
+		v.add_decl("struct class \{ int id; int box_kind; int color; struct vts_table *vts_table; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 		v.add_decl("struct type_table \{ int size; int table[1]; \}; /* colorized type table. */")
 		v.add_decl("struct vts_entry \{ short int is_nullable; struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
 		v.add_decl("struct vts_table \{ struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
@@ -121,6 +112,7 @@ class SeparateErasureCompiler
 
 		# for the class_name and output_class_name methods
 		self.compile_class_names
+		self.compile_box_kinds
 	end
 
 	redef fun compile_class_names do
@@ -164,6 +156,7 @@ class SeparateErasureCompiler
 		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
 		self.header.add_decl("struct class_{c_name} \{")
 		self.header.add_decl("int id;")
+		self.header.add_decl("int box_kind;")
 		self.header.add_decl("int color;")
 		self.header.add_decl("const struct vts_table *vts_table;")
 		self.header.add_decl("struct type_table *type_table;")
@@ -179,6 +172,7 @@ class SeparateErasureCompiler
 		# Build class vft
 		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
 		v.add_decl("{self.class_ids[mclass]},")
+		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
 		v.add_decl("{self.class_colors[mclass]},")
 		v.add_decl("(const struct vts_table*) &vts_table_{c_name},")
 		v.add_decl("(struct type_table*) &type_table_{c_name},")
@@ -272,17 +266,11 @@ class SeparateErasureCompiler
 		end
 		v.add("{res}->class = (struct class*) &class_{c_name};")
 
-		for cd in mtype.collect_mclassdefs(self.mainmodule)
-		do
-			var n = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef then
-					npropdef.init_expr(v, res)
-				end
-			end
-		end
+		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
 		v.add("\}")
+
+		generate_check_init_instance(mtype)
 	end
 
 	private fun build_class_vts_table(mclass: MClass, v: SeparateCompilerVisitor) do
@@ -420,10 +408,11 @@ class SeparateErasureCompilerVisitor
 		return res
 	end
 
-	redef fun class_name_string(value1)
+	redef fun class_name_string(value)
 	do
 		var res = self.get_name("var_class_name")
-		self.add_decl("const char* {res} = class_names[self->class->id];")
+		self.add_decl("const char *{res};")
+		self.add("{res} = class_names[{value}->class->id];")
 		return res
 	end
 
@@ -443,7 +432,7 @@ class SeparateErasureCompilerVisitor
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res)
+		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end

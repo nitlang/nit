@@ -22,24 +22,18 @@ redef class ToolContext
 	# --separate
 	var opt_separate: OptionBool = new OptionBool("Use separate compilation", "--separate")
 
+	# --no-inline-intern
+	var opt_no_inline_intern: OptionBool = new OptionBool("Do not inline call to intern methods", "--no-inline-intern")
+
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_separate)
+		self.option_context.add_option(self.opt_no_inline_intern)
 	end
 end
 
 redef class ModelBuilder
-	redef fun run_global_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
-	do
-		# Hijack the run_global_compiler to run the separate one if requested.
-		if self.toolcontext.opt_separate.value then
-			run_separate_compiler(mainmodule, runtime_type_analysis)
-		else
-			super
-		end
-	end
-
 	fun run_separate_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		var time0 = get_time
@@ -56,13 +50,15 @@ redef class ModelBuilder
 		v.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
 
 		# Class abstract representation
-		v.add_decl("struct class \{ nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
+		v.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 		# Type abstract representation
 		v.add_decl("struct type \{ int id; int color; int livecolor; short int is_nullable; struct vts_table *vts_table; struct fts_table *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
 		v.add_decl("struct fts_table \{ struct type *fts[1]; \}; /* fts list of a C type representation. */")
 		v.add_decl("struct vts_table \{ struct type *vts[1]; \}; /* vts list of a C type representation. */")
 		# Instance abstract representation
 		v.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
+
+		compiler.compile_box_kinds
 
 		# Declare global instances
 		v.add_decl("extern int glob_argc;")
@@ -154,6 +150,32 @@ class SeparateCompiler
 		var ft_coloring = new FTColoring(class_coloring)
 		self.ft_colors = ft_coloring.colorize
 		self.ft_tables = ft_coloring.build_ft_tables
+	end
+
+	fun compile_box_kinds
+	do
+		# Collect all bas box class
+		# FIXME: this is not completely fine with a separate compilation scheme
+		for classname in ["Int", "Bool", "Char", "Float", "NativeString", "Pointer"] do
+			var classes = self.mainmodule.model.get_mclasses_by_name(classname)
+			if classes == null then continue
+			assert classes.length == 1 else print classes.join(", ")
+			self.box_kinds[classes.first] = self.box_kinds.length + 1
+		end
+	end
+
+	var box_kinds = new HashMap[MClass, Int]
+
+	fun box_kind_of(mclass: MClass): Int
+	do
+		if mclass.mclass_type.ctype == "val*" then
+			return 0
+		else if mclass.kind == extern_kind then
+			return self.box_kinds[self.mainmodule.get_primitive_class("Pointer")]
+		else
+			return self.box_kinds[mclass]
+		end
+
 	end
 
 	protected fun compile_class_names do
@@ -461,12 +483,14 @@ class SeparateCompiler
 		#self.header.add_decl("#define {idname} {idnum} /* {c_name} */")
 
 		self.header.add_decl("struct class_{c_name} \{")
+		self.header.add_decl("int box_kind;")
 		self.header.add_decl("nitmethod_t vft[{vft.length}];")
 		self.header.add_decl("\};")
 
 		# Build class vft
 		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
 		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
+		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
 		v.add_decl("\{")
 		for i in [0 .. vft.length[ do
 			var mpropdef = vft[i]
@@ -542,16 +566,24 @@ class SeparateCompiler
 		v.add("{res}->type = type;")
 		v.add("{res}->class = (struct class*) &class_{c_name};")
 
-		for cd in mtype.collect_mclassdefs(self.mainmodule)
-		do
-			var n = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef then
-					npropdef.init_expr(v, res)
-				end
-			end
-		end
+		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
+		v.add("\}")
+
+		generate_check_init_instance(mtype)
+	end
+
+	redef fun generate_check_init_instance(mtype)
+	do
+		if self.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+
+		var v = self.new_visitor
+		var c_name = mtype.mclass.c_name
+		var res = new RuntimeVariable("self", mtype, mtype)
+		self.header.add_decl("void CHECK_NEW_{c_name}({mtype.ctype});")
+		v.add_decl("/* allocate {mtype} */")
+		v.add_decl("void CHECK_NEW_{c_name}({mtype.ctype} {res}) \{")
+		self.generate_check_attr(v, res, mtype)
 		v.add("\}")
 	end
 
@@ -743,7 +775,9 @@ class SeparateCompilerVisitor
 	# ENSURE: result.mtype.ctype == mtype.ctype
 	redef fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable
 	do
-		if value.mtype.ctype == mtype.ctype then
+		if value.mtype == mtype then
+			return value
+		else if value.mtype.ctype == "val*" and mtype.ctype == "val*" then
 			return value
 		else if value.mtype.ctype == "val*" then
 			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
@@ -802,7 +836,8 @@ class SeparateCompilerVisitor
 			ss.append(", {a}")
 		end
 
-		var maybenull = recv.mcasttype isa MNullableType
+		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or mmethod.name == "==" or mmethod.name == "!="
+		var maybenull = recv.mcasttype isa MNullableType and consider_null
 		if maybenull then
 			self.add("if ({recv} == NULL) \{")
 			if mmethod.name == "==" then
@@ -863,6 +898,22 @@ class SeparateCompilerVisitor
 			res = self.new_var(ret)
 		end
 
+		if self.compiler.modelbuilder.mpropdef2npropdef.has_key(mmethoddef) and
+		self.compiler.modelbuilder.mpropdef2npropdef[mmethoddef] isa AInternMethPropdef and
+		not compiler.modelbuilder.toolcontext.opt_no_inline_intern.value then
+			var frame = new Frame(self, mmethoddef, recvtype, arguments)
+			frame.returnlabel = self.get_name("RET_LABEL")
+			frame.returnvar = res
+			var old_frame = self.frame
+			self.frame = frame
+			self.add("\{ /* Inline {mmethoddef} ({arguments.join(",")}) */")
+			mmethoddef.compile_inside_to_c(self, arguments)
+			self.add("{frame.returnlabel.as(not null)}:(void)0;")
+			self.add("\}")
+			self.frame = old_frame
+			return res
+		end
+
 		# Autobox arguments
 		self.adapt_signature(mmethoddef, arguments)
 
@@ -900,7 +951,7 @@ class SeparateCompilerVisitor
 		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}]; /* {a} on {recv.inspect} */")
 
 		# Check for Uninitialized attribute
-		if not ret isa MNullableType then
+		if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
 			self.add("if ({res} == NULL) \{")
 			self.add_abort("Uninitialized attribute {a.name}")
 			self.add("\}")
@@ -985,6 +1036,13 @@ class SeparateCompilerVisitor
 		return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) &type_{mtype.c_name})", mtype)
 	end
 
+	redef fun check_init_instance(value, mtype)
+	do
+		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+		self.add("CHECK_NEW_{mtype.mclass.c_name}({value});")
+	end
+
+
 	redef fun type_test(value, mtype)
 	do
 		var compiler = self.compiler.as(SeparateCompiler)
@@ -1062,7 +1120,7 @@ class SeparateCompilerVisitor
 			value2 = tmp
 		end
 		if value1.mtype.ctype != "val*" then
-			if value2.mtype.ctype == value1.mtype.ctype then
+			if value2.mtype == value1.mtype then
 				self.add("{res} = 1; /* is_same_type_test: compatible types {value1.mtype} vs. {value2.mtype} */")
 			else if value2.mtype.ctype != "val*" then
 				self.add("{res} = 0; /* is_same_type_test: incompatible types {value1.mtype} vs. {value2.mtype}*/")
@@ -1093,7 +1151,7 @@ class SeparateCompilerVisitor
 			value2 = tmp
 		end
 		if value1.mtype.ctype != "val*" then
-			if value2.mtype.ctype == value1.mtype.ctype then
+			if value2.mtype == value1.mtype then
 				self.add("{res} = {value1} == {value2};")
 			else if value2.mtype.ctype != "val*" then
 				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
@@ -1104,21 +1162,88 @@ class SeparateCompilerVisitor
 				self.add("{res} = ({self.autobox(value2, value1.mtype)} == {value1});")
 				self.add("\}")
 			end
+			return res
+		end
+		var maybe_null = true
+		var test = new Array[String]
+		var t1 = value1.mcasttype
+		if t1 isa MNullableType then
+			test.add("{value1} != NULL")
+			t1 = t1.mtype
 		else
-			var s = new Array[String]
-			# This is just ugly on so many level. this works but must be rewriten
-			for t in self.compiler.live_primitive_types do
-				if not t.is_subtype(self.compiler.mainmodule, null, value1.mcasttype) then continue
-				if not t.is_subtype(self.compiler.mainmodule, null, value2.mcasttype) then continue
-				s.add "({value1}->class == (struct class*)&class_{t.c_name} && ((struct instance_{t.c_name}*){value1})->value == ((struct instance_{t.c_name}*){value2})->value)"
-			end
-			if s.is_empty then
-				self.add("{res} = {value1} == {value2};")
+			maybe_null = false
+		end
+		var t2 = value2.mcasttype
+		if t2 isa MNullableType then
+			test.add("{value2} != NULL")
+			t2 = t2.mtype
+		else
+			maybe_null = false
+		end
+
+		var incompatible = false
+		var primitive
+		if t1.ctype != "val*" then
+			primitive = t1
+			if t1 == t2 then
+				# No need to compare class
+			else if t2.ctype != "val*" then
+				incompatible = true
+			else if can_be_primitive(value2) then
+				test.add("{value1}->class == {value2}->class")
 			else
-				self.add("{res} = {value1} == {value2} || ({value1} != NULL && {value2} != NULL && {value1}->class == {value2}->class && ({s.join(" || ")}));")
+				incompatible = true
+			end
+		else if t2.ctype != "val*" then
+			primitive = t2
+			if can_be_primitive(value1) then
+				test.add("{value1}->class == {value2}->class")
+			else
+				incompatible = true
+			end
+		else
+			primitive = null
+		end
+
+		if incompatible then
+			if maybe_null then
+				self.add("{res} = {value1} == {value2}; /* incompatible types {t1} vs. {t2}; but may be NULL*/")
+				return res
+			else
+				self.add("{res} = 0; /* incompatible types {t1} vs. {t2}; cannot be NULL */")
+				return res
 			end
 		end
+		if primitive != null then
+			test.add("((struct instance_{primitive.c_name}*){value1})->value == ((struct instance_{primitive.c_name}*){value2})->value")
+		else if can_be_primitive(value1) and can_be_primitive(value2) then
+			test.add("{value1}->class == {value2}->class")
+			var s = new Array[String]
+			for t, v in self.compiler.as(SeparateCompiler).box_kinds do
+				s.add "({value1}->class->box_kind == {v} && ((struct instance_{t.c_name}*){value1})->value == ((struct instance_{t.c_name}*){value2})->value)"
+			end
+			test.add("({s.join(" || ")})")
+		else
+			self.add("{res} = {value1} == {value2};")
+			return res
+		end
+		self.add("{res} = {value1} == {value2} || ({test.join(" && ")});")
 		return res
+	end
+
+	fun can_be_primitive(value: RuntimeVariable): Bool
+	do
+		var t = value.mcasttype
+		if t isa MNullableType then t = t.mtype
+		if not t isa MClassType then return false
+		var k = t.mclass.kind
+		return k == interface_kind or t.ctype != "val*"
+	end
+
+	fun maybe_null(value: RuntimeVariable): Bool
+	do
+		var t = value.mcasttype
+		return t isa MNullableType or t isa MNullType
 	end
 
 	redef fun array_instance(array, elttype)
@@ -1139,7 +1264,7 @@ class SeparateCompilerVisitor
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res)
+		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end

@@ -38,10 +38,23 @@ redef class ToolContext
 	# --hardening
 	var opt_hardening: OptionBool = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
 
+	# --no-check-covariance
+	var opt_no_check_covariance: OptionBool = new OptionBool("Disable type tests of covariant parameters (dangerous)", "--no-check-covariance")
+
+	# --no-check-initialization
+	var opt_no_check_initialization: OptionBool = new OptionBool("Disable isset tests at the end of constructors (dangerous)", "--no-check-initialization")
+
+	# --no-check-assert
+	var opt_no_check_assert: OptionBool = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
+
+	# --no-check-other
+	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
+
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_hardening)
+		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_other)
 	end
 end
 
@@ -96,6 +109,7 @@ redef class ModelBuilder
 		for t in runtime_type_analysis.live_types do
 			if t.ctype == "val*" then
 				compiler.generate_init_instance(t)
+				compiler.generate_check_init_instance(t)
 			else
 				compiler.generate_box_instance(t)
 			end
@@ -366,17 +380,50 @@ class GlobalCompiler
 		end
 		v.add("{res}->classid = {self.classid(mtype)};")
 
+		self.generate_init_attr(v, res, mtype)
+		v.add("return {res};")
+		v.add("\}")
+	end
+
+	fun generate_check_init_instance(mtype: MClassType)
+	do
+		if self.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+
+		var v = self.new_visitor
+		var res = new RuntimeVariable("self", mtype, mtype)
+		self.header.add_decl("void CHECK_NEW_{mtype.c_name}({mtype.ctype});")
+		v.add_decl("/* allocate {mtype} */")
+		v.add_decl("void CHECK_NEW_{mtype.c_name}({mtype.ctype} {res}) \{")
+		self.generate_check_attr(v, res, mtype)
+		v.add("\}")
+	end
+
+	# Generate code that collect initialize the attributes on a new instance
+	fun generate_init_attr(v: GlobalCompilerVisitor, recv: RuntimeVariable, mtype: MClassType)
+	do
 		for cd in mtype.collect_mclassdefs(self.mainmodule)
 		do
 			var n = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then
-					npropdef.init_expr(v, res)
+					npropdef.init_expr(v, recv)
 				end
 			end
 		end
-		v.add("return {res};")
-		v.add("\}")
+	end
+
+	# Generate a check-init-instance
+	fun generate_check_attr(v: GlobalCompilerVisitor, recv: RuntimeVariable, mtype: MClassType)
+	do
+		for cd in mtype.collect_mclassdefs(self.mainmodule)
+		do
+			var n = self.modelbuilder.mclassdef2nclassdef[cd]
+			for npropdef in n.n_propdefs do
+				if npropdef isa AAttrPropdef then
+					npropdef.check_expr(v, recv)
+				end
+			end
+		end
 	end
 
 	fun generate_box_instance(mtype: MClassType)
@@ -933,7 +980,9 @@ class GlobalCompilerVisitor
 	# ENSURE: result.mtype.ctype == mtype.ctype
 	fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable
 	do
-		if value.mtype.ctype == mtype.ctype then
+		if value.mtype == mtype then
+			return value
+		else if value.mtype.ctype == "val*" and mtype.ctype == "val*" then
 			return value
 		else if value.mtype.ctype == "val*" then
 			return self.new_expr("((struct {mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
@@ -1139,6 +1188,8 @@ class GlobalCompilerVisitor
 	# Add a check and an abort for a null reciever is needed
 	fun check_recv_notnull(recv: RuntimeVariable)
 	do
+		if self.compiler.modelbuilder.toolcontext.opt_no_check_other.value then return
+
 		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
 		if maybenull then
 			self.add("if ({recv} == NULL) \{")
@@ -1182,7 +1233,8 @@ class GlobalCompilerVisitor
 			if res != null then self.assign(res, res2.as(not null))
 			return res
 		end
-		if args.first.mcasttype isa MNullableType or args.first.mcasttype isa MNullType then
+		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or m.name == "==" or m.name == "!="
+		if args.first.mcasttype isa MNullableType or args.first.mcasttype isa MNullType and consider_null then
 			# The reciever is potentially null, so we have to 3 cases: ==, != or NullPointerException
 			self.add("if ({args.first} == NULL) \{ /* Special null case */")
 			if m.name == "==" then
@@ -1430,7 +1482,7 @@ class GlobalCompilerVisitor
 			var ta = a.intro.static_mtype.as(not null)
 			ta = self.resolve_for(ta, recv2)
 			var res2 = self.new_expr("((struct {t.c_name}*){recv})->{a.intro.c_name}", ta)
-			if not ta isa MNullableType then
+			if not ta isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value then
 				if ta.ctype == "val*" then
 					self.add("if ({res2} == NULL) \{")
 					self.add_abort("Uninitialized attribute {a.name}")
@@ -1592,7 +1644,7 @@ class GlobalCompilerVisitor
 			value2 = tmp
 		end
 		if value1.mtype.ctype != "val*" then
-			if value2.mtype.ctype == value1.mtype.ctype then
+			if value2.mtype == value1.mtype then
 				self.add("{res} = {value1} == {value2};")
 			else if value2.mtype.ctype != "val*" then
 				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
@@ -1620,19 +1672,16 @@ class GlobalCompilerVisitor
 	end
 
 	# Generate a check-init-instance
-	fun check_init_instance(recv: RuntimeVariable)
+	fun check_init_instance(recv: RuntimeVariable, mtype: MClassType)
 	do
-		var mtype = self.anchor(recv.mcasttype)
-		for cd in mtype.collect_mclassdefs(self.compiler.mainmodule)
-		do
-			var n = self.compiler.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in n.n_propdefs do
-				if npropdef isa AAttrPropdef then
-					# Force read to check the initialization
-					self.read_attribute(npropdef.mpropdef.mproperty, recv)
-				end
-			end
+		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+
+		mtype = self.anchor(mtype).as(MClassType)
+		if not self.compiler.runtime_type_analysis.live_types.has(mtype) then
+			debug "problem: {mtype} was detected dead"
 		end
+
+		self.add("CHECK_NEW_{mtype.c_name}({recv});")
 	end
 
 	# Generate an integer value
@@ -1659,7 +1708,7 @@ class GlobalCompilerVisitor
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res)
+		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end
@@ -1680,7 +1729,7 @@ class GlobalCompilerVisitor
 		self.add("{res} = {res2};")
 		var length = self.int_instance(string.length)
 		self.send(self.get_property("with_native", mtype), [res, nat, length])
-		self.check_init_instance(res)
+		self.check_init_instance(res, mtype)
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
@@ -1779,6 +1828,8 @@ redef class MMethodDef
 	# Generate type checks in the C code to check covariant parameters
 	fun compile_parameter_check(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable])
 	do
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_covariance.value then return
+
 		for i in [0..msignature.arity[ do
 			# skip test for vararg since the array is instantiated with the correct polymorphic type
 			if msignature.vararg_rank == i then continue
@@ -2176,13 +2227,32 @@ redef class AAttrPropdef
 	do
 		var nexpr = self.n_expr
 		if nexpr != null then
+			var oldnode = v.current_node
+			v.current_node = self
 			var old_frame = v.frame
 			var frame = new Frame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
 			v.frame = frame
 			var value = v.expr(nexpr, self.mpropdef.static_mtype)
 			v.write_attribute(self.mpropdef.mproperty, recv, value)
 			v.frame = old_frame
+			v.current_node = oldnode
 		end
+	end
+
+	fun check_expr(v: GlobalCompilerVisitor, recv: RuntimeVariable)
+	do
+		var nexpr = self.n_expr
+		if nexpr != null then return
+
+		var oldnode = v.current_node
+		v.current_node = self
+		var old_frame = v.frame
+		var frame = new Frame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
+		v.frame = frame
+		# Force read to check the initialization
+		v.read_attribute(self.mpropdef.mproperty, recv)
+		v.frame = old_frame
+		v.current_node = oldnode
 	end
 end
 
@@ -2448,6 +2518,8 @@ end
 redef class AAssertExpr
 	redef fun stmt(v)
 	do
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return
+
 		var cond = v.expr_bool(self.n_expr)
 		v.add("if (!{cond}) \{")
 		v.stmt(self.n_else)
@@ -2584,9 +2656,10 @@ redef class ACrangeExpr
 	do
 		var i1 = v.expr(self.n_expr, null)
 		var i2 = v.expr(self.n_expr2, null)
-		var res = v.init_instance(self.mtype.as(MClassType))
+		var mtype = self.mtype.as(MClassType)
+		var res = v.init_instance(mtype)
 		var it = v.send(v.get_property("init", res.mtype), [res, i1, i2])
-		v.check_init_instance(res)
+		v.check_init_instance(res, mtype)
 		return res
 	end
 end
@@ -2596,9 +2669,10 @@ redef class AOrangeExpr
 	do
 		var i1 = v.expr(self.n_expr, null)
 		var i2 = v.expr(self.n_expr2, null)
-		var res = v.init_instance(self.mtype.as(MClassType))
+		var mtype = self.mtype.as(MClassType)
+		var res = v.init_instance(mtype)
 		var it = v.send(v.get_property("without_last", res.mtype), [res, i1, i2])
-		v.check_init_instance(res)
+		v.check_init_instance(res, mtype)
 		return res
 	end
 end
@@ -2637,6 +2711,8 @@ redef class AAsCastExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr, null)
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
+
 		var cond = v.type_test(i, self.mtype.as(not null))
 		v.add("if (!{cond}) \{")
 		v.add_abort("Cast failed")
@@ -2649,6 +2725,8 @@ redef class AAsNotnullExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr, null)
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
+
 		v.add("if ({i} == NULL) \{")
 		v.add_abort("Cast failed")
 		v.add("\}")
@@ -2780,7 +2858,7 @@ redef class ANewExpr
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
 		end
-		v.check_init_instance(recv)
+		v.check_init_instance(recv, mtype)
 		return recv
 	end
 end
