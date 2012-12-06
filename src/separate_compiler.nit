@@ -413,24 +413,27 @@ class SeparateCompiler
 					print "No bound found for virtual type {vt} ?"
 					abort
 				else
-					var ntype = bound
-					if ntype isa MNullableType then ntype = ntype.mtype
-					if ntype isa MVirtualType then
-						bound = ntype.anchor_to(self.mainmodule, mclass_type)
-					else if ntype isa MParameterType then
-						bound = ntype.anchor_to(self.mainmodule, mclass_type)
-					else if ntype isa MGenericType and bound.need_anchor then
-						bound = ntype.anchor_to(self.mainmodule, mclass_type)
-					else if ntype isa MClassType then
+					var is_nullable = ""
+					if bound isa MNullableType then
+						bound = bound.mtype
+						is_nullable = "nullable_"
+					end
+					if bound isa MVirtualType then
+						bound = bound.anchor_to(self.mainmodule, mclass_type)
+					else if bound isa MParameterType then
+						bound = bound.anchor_to(self.mainmodule, mclass_type)
+					else if bound isa MGenericType and bound.need_anchor then
+						bound = bound.anchor_to(self.mainmodule, mclass_type)
+					else if bound isa MClassType then
 					else
-						print "NOT YET IMPLEMENTED: mtype_to_livetype with type: {ntype}"
+						print "NOT YET IMPLEMENTED: mtype_to_livetype with type: {bound}"
 						abort
 					end
 
 					if self.typeids.has_key(bound) then
-						v.add_decl("(struct type*)&type_{bound.c_name}, /* {ntype} */")
+						v.add_decl("(struct type*)&type_{is_nullable}{bound.c_name}, /* {bound} */")
 					else
-						v.add_decl("NULL, /* dead type {ntype} */")
+						v.add_decl("NULL, /* dead type {bound} */")
 					end
 				end
 			end

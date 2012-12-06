@@ -295,8 +295,8 @@ class SeparateErasureCompiler
 			else
 				var is_null = 0
 				var bound = retrieve_vt_bound(mclass.intro.bound_mtype, vt.bound)
-				if bound isa MNullableType then
-					bound = bound.mtype
+				while bound isa MNullableType do
+					bound = retrieve_vt_bound(mclass.intro.bound_mtype, bound.mtype)
 					is_null = 1
 				end
 				v.add_decl("\{{is_null}, (struct class*)&class_{bound.as(MClassType).mclass.c_name}\}, /* {vt} */")
