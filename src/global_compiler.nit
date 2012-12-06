@@ -621,28 +621,6 @@ redef class MGenericType
 	end
 end
 
-redef class MParameterType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "FT{self.rank}"
-		self.c_name_cache = res
-		return res
-	end
-end
-
-redef class MNullableType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "nullable_{self.mtype.c_name}"
-		self.c_name_cache = res
-		return res
-	end
-end
-
 # A C function associated to a Nit method
 # Because of customization, a given Nit method can be compiler more that once
 abstract class AbstractRuntimeFunction

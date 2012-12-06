@@ -1310,3 +1310,24 @@ redef class MClass
 	end
 	private var c_name_cache: nullable String
 end
+redef class MParameterType
+	redef fun c_name
+	do
+		var res = self.c_name_cache
+		if res != null then return res
+		res = "{self.mclass.c_name}_FT{self.rank}"
+		self.c_name_cache = res
+		return res
+	end
+end
+
+redef class MNullableType
+	redef fun c_name
+	do
+		var res = self.c_name_cache
+		if res != null then return res
+		res = "nullable_{self.mtype.c_name}"
+		self.c_name_cache = res
+		return res
+	end
+end
