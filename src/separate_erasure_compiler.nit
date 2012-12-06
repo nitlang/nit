@@ -37,8 +37,7 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new SeparateErasureCompiler(mainmodule, runtime_type_analysis, self)
-		var v = compiler.new_visitor
-		compiler.header = v
+		var v = compiler.header
 		v.add_decl("#include <stdlib.h>")
 		v.add_decl("#include <stdio.h>")
 		v.add_decl("#include <string.h>")
@@ -85,6 +84,7 @@ class SeparateErasureCompiler
 	private var class_vts_tables: Map[MClass, Array[nullable MVirtualTypeDef]]
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
+		self.header = self.new_visitor
 		# classes coloration
 		var class_coloring = new ClassColoring(mainmodule)
 		self.class_colors = class_coloring.colorize(mmbuilder.model.mclasses)
