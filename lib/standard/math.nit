@@ -45,21 +45,13 @@ redef class Collection[ E ]
 	fun rand : nullable E
 	do
 		if is_empty then return null
-
 		var rand_index = length.rand
-		var picked : nullable E = null
 
-		iterate !each( e ) do
-			if rand_index == 0
-			then
-				picked = e
-				break
-			else
-				rand_index -= 1
-			end
+		for e in self do
+			if rand_index == 0 then return e
+			rand_index -= 1
 		end
-
-		return picked
+		abort
 	end
 end
 
