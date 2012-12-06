@@ -25,11 +25,15 @@ redef class ToolContext
 	# --no-inline-intern
 	var opt_no_inline_intern: OptionBool = new OptionBool("Do not inline call to intern methods", "--no-inline-intern")
 
+	# --inline-coloring-numbers
+	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
+
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
+		self.option_context.add_option(self.opt_inline_coloring_numbers)
 	end
 end
 
@@ -190,9 +194,19 @@ class SeparateCompiler
 	fun generate_color_consts(colors: Map[Object, Int]) do
 		for m, c in colors do
 			if m isa MProperty then
-				self.header.add_decl("#define {m.const_color} {c}")
+				if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
+					self.header.add_decl("#define {m.const_color} {c}")
+				else
+					self.header.add_decl("extern const int {m.const_color};")
+					self.header.add("const int {m.const_color} = {c};")
+				end
 			else if m isa MType then
-				self.header.add_decl("#define {m.const_color} {c}")
+				if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
+					self.header.add_decl("#define {m.const_color} {c}")
+				else
+					self.header.add_decl("extern const int {m.const_color};")
+					self.header.add("const int {m.const_color} = {c};")
+				end
 			end
 		end
 	end

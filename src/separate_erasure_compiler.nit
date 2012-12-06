@@ -82,8 +82,7 @@ class SeparateErasureCompiler
 	private var class_tables: nullable Map[MClass, Array[nullable MClass]] = null
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
-		self.header = self.new_visitor
-		self.do_property_coloring
+		super
 
 		# classes coloration
 		self.class_tables = class_coloring.build_type_tables(mmbuilder.model.mclasses, class_colors)
