@@ -80,7 +80,7 @@ redef class ModelBuilder
 		end
 
 		# compile live & cast type structures
-		var mtypes = compiler.do_global_type_coloring
+		var mtypes = compiler.do_type_coloring
 		for t in mtypes do
 			compiler.compile_type_to_c(t)
 		end
@@ -203,7 +203,7 @@ class SeparateCompiler
 	end
 
 	# colorize live types of the program
-	private fun do_global_type_coloring: Set[MType] do
+	private fun do_type_coloring: Set[MType] do
 		var mtypes = new HashSet[MType]
 		mtypes.add_all(self.runtime_type_analysis.live_types)
 		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
