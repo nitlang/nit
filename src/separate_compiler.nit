@@ -111,45 +111,30 @@ class SeparateCompiler
 	private var livetypes_tables: nullable Map[MClass, Array[nullable Object]]
 	private var livetypes_tables_sizes: nullable Map[MClass, Array[Int]]
 
-	protected var class_colors: Map[MClass, Int] protected writable
+	protected var class_coloring: ClassColoring
+	protected var class_colors: Map[MClass, Int]
 
-	protected var method_colors: Map[MMethod, Int] protected writable
-	protected var method_tables: Map[MClass, Array[nullable MMethodDef]] protected writable
+	protected var method_colors: Map[MMethod, Int]
+	protected var method_tables: Map[MClass, Array[nullable MMethodDef]]
 
-	protected var attr_colors: Map[MAttribute, Int] protected writable
-	protected var attr_tables: Map[MClass, Array[nullable MAttributeDef]] protected writable
+	protected var attr_colors: Map[MAttribute, Int]
+	protected var attr_tables: Map[MClass, Array[nullable MAttributeDef]]
 
-	private var vt_colors: Map[MVirtualTypeProp, Int]
-	private var vt_tables: Map[MClass, Array[nullable MVirtualTypeDef]]
+	protected var vt_colors: Map[MVirtualTypeProp, Int]
+	protected var vt_tables: Map[MClass, Array[nullable MVirtualTypeDef]]
 
 	private var ft_colors: Map[MParameterType, Int]
 	private var ft_tables: Map[MClass, Array[nullable MParameterType]]
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
 		self.header = self.new_visitor
-		# classes coloration
-		var class_coloring = new ClassColoring(mainmodule)
-		self.class_colors = class_coloring.colorize(mmbuilder.model.mclasses)
+		self.do_property_coloring
 
-		# methods coloration
-		var method_coloring = new MethodColoring(class_coloring)
-		self.method_colors = method_coloring.colorize
-		self.method_tables = method_coloring.build_property_tables
-
-		# attributes coloration
-		var attribute_coloring = new AttributeColoring(class_coloring)
-		self.attr_colors = attribute_coloring.colorize
-		self.attr_tables = attribute_coloring.build_property_tables
-
-		# vt coloration
-		var vt_coloring = new VTColoring(class_coloring)
-		self.vt_colors = vt_coloring.colorize
-		self.vt_tables = vt_coloring.build_property_tables
-
-		# fts coloration
+		# fts coloration for non-erased compilation
 		var ft_coloring = new FTColoring(class_coloring)
 		self.ft_colors = ft_coloring.colorize
 		self.ft_tables = ft_coloring.build_ft_tables
+		generate_color_consts(self.ft_colors)
 	end
 
 	fun compile_box_kinds
@@ -200,6 +185,41 @@ class SeparateCompiler
 			end
 		end
 		v.add("\};")
+	end
+
+	fun generate_color_consts(colors: Map[Object, Int]) do
+		for m, c in colors do
+			if m isa MProperty then
+				self.header.add_decl("#define {m.const_color} {c}")
+			else if m isa MType then
+				self.header.add_decl("#define {m.const_color} {c}")
+			end
+		end
+	end
+
+	# colorize classe properties
+	fun do_property_coloring do
+		# classes coloration
+		self.class_coloring = new ClassColoring(mainmodule)
+		self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
+
+		# methods coloration
+		var method_coloring = new MethodColoring(self.class_coloring)
+		self.method_colors = method_coloring.colorize
+		self.method_tables = method_coloring.build_property_tables
+		generate_color_consts(self.method_colors)
+
+		# attributes coloration
+		var attribute_coloring = new AttributeColoring(class_coloring)
+		self.attr_colors = attribute_coloring.colorize
+		self.attr_tables = attribute_coloring.build_property_tables
+		generate_color_consts(self.attr_colors)
+
+		# vt coloration
+		var vt_coloring = new VTColoring(class_coloring)
+		self.vt_colors = vt_coloring.colorize
+		self.vt_tables = vt_coloring.build_property_tables
+		generate_color_consts(self.vt_colors)
 	end
 
 	# colorize live types of the program
@@ -866,10 +886,9 @@ class SeparateCompilerVisitor
 			self.add("\} else \{")
 		end
 
-		var color = self.compiler.as(SeparateCompiler).method_colors[mmethod]
 		var r
 		if ret == null then r = "void" else r = ret.ctype
-		var call = "(({r} (*)({s}))({arguments.first}->class->vft[{color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		var call = "(({r} (*)({s}))({arguments.first}->class->vft[{mmethod.const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
 
 		if res != null then
 			self.add("{res} = {call};")
@@ -931,7 +950,7 @@ class SeparateCompilerVisitor
 	do
 		self.check_recv_notnull(recv)
 		var res = self.new_var(bool_type)
-		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}] != NULL; /* {a} on {recv.inspect}*/")
+		self.add("{res} = {recv}->attrs[{a.const_color}] != NULL; /* {a} on {recv.inspect}*/")
 		return res
 	end
 
@@ -948,7 +967,7 @@ class SeparateCompilerVisitor
 		var cret = self.object_type.as_nullable
 		var res = self.new_var(cret)
 		res.mcasttype = ret
-		self.add("{res} = {recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}]; /* {a} on {recv.inspect} */")
+		self.add("{res} = {recv}->attrs[{a.const_color}]; /* {a} on {recv.inspect} */")
 
 		# Check for Uninitialized attribute
 		if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
@@ -973,7 +992,7 @@ class SeparateCompilerVisitor
 
 		# Adapt the value to the declared type
 		value = self.autobox(value, mtype)
-		var attr = "{recv}->attrs[{self.compiler.as(SeparateCompiler).attr_colors[a]}]"
+		var attr = "{recv}->attrs[{a.const_color}]"
 		if mtype.ctype != "val*" then
 			assert mtype isa MClassType
 			# The attribute is primitive, thus we store it in a box
@@ -1005,11 +1024,9 @@ class SeparateCompilerVisitor
 			end
 
 			if ntype isa MParameterType then
-				var ftcolor = compiler.ft_colors[ntype]
-				buffer.append("[self->type->fts_table->fts[{ftcolor}]->livecolor]")
+				buffer.append("[self->type->fts_table->fts[{ntype.const_color}]->livecolor]")
 			else if ntype isa MVirtualType then
-				var vtcolor = compiler.vt_colors[ntype.mproperty.as(MVirtualTypeProp)]
-				buffer.append("[self->type->vts_table->vts[{vtcolor}]->livecolor]")
+				buffer.append("[self->type->vts_table->vts[{ntype.mproperty.const_color}]->livecolor]")
 			else if ntype isa MGenericType and ntype.need_anchor then
 				var bbuff = new Buffer
 				retrieve_anchored_livetype(ntype, bbuff)
@@ -1068,10 +1085,9 @@ class SeparateCompilerVisitor
 		end
 
 		if ntype isa MParameterType then
-			var ftcolor = compiler.ft_colors[ntype]
-			self.add("{cltype} = {recv_boxed}->type->fts_table->fts[{ftcolor}]->color;")
-			self.add("{idtype} = {recv_boxed}->type->fts_table->fts[{ftcolor}]->id;")
-			self.add("{is_nullable} = {recv_boxed}->type->fts_table->fts[{ftcolor}]->is_nullable;")
+			self.add("{cltype} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}]->color;")
+			self.add("{idtype} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}]->id;")
+			self.add("{is_nullable} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}]->is_nullable;")
 		else if ntype isa MGenericType and ntype.need_anchor then
 			var buff = new Buffer
 			retrieve_anchored_livetype(ntype, buff)
@@ -1084,7 +1100,7 @@ class SeparateCompilerVisitor
 			self.add("{idtype} = type_{mtype.c_name}.id;")
 			self.add("{is_nullable} = type_{mtype.c_name}.is_nullable;")
 		else if ntype isa MVirtualType then
-			var vtcolor = compiler.vt_colors[ntype.mproperty.as(MVirtualTypeProp)]
+			var vtcolor = ntype.mproperty.const_color
 			self.add("{cltype} = {recv_boxed}->type->vts_table->vts[{vtcolor}]->color;")
 			self.add("{idtype} = {recv_boxed}->type->vts_table->vts[{vtcolor}]->id;")
 			self.add("{is_nullable} = {recv_boxed}->type->vts_table->vts[{vtcolor}]->is_nullable;")
@@ -1294,8 +1310,7 @@ class SeparateCompilerVisitor
 		compiler.undead_types.add(ret)
 		var mclass = self.get_class("ArrayCapable")
 		var ft = mclass.mclass_type.arguments.first.as(MParameterType)
-		var color = compiler.ft_colors[ft]
-		self.ret(self.new_expr("NEW_{ret.mclass.c_name}({arguments[1]}, (struct type*) livetypes_array__NativeArray[self->type->fts_table->fts[{color}]->livecolor])", ret_type))
+		self.ret(self.new_expr("NEW_{ret.mclass.c_name}({arguments[1]}, (struct type*) livetypes_array__NativeArray[self->type->fts_table->fts[{ft.const_color}]->livecolor])", ret_type))
 	end
 end
 
@@ -1310,6 +1325,11 @@ redef class MClass
 	end
 	private var c_name_cache: nullable String
 end
+
+redef class MType
+	fun const_color: String do return "COLOR_{c_name}"
+end
+
 redef class MParameterType
 	redef fun c_name
 	do
@@ -1330,4 +1350,17 @@ redef class MNullableType
 		self.c_name_cache = res
 		return res
 	end
+end
+
+redef class MProperty
+	fun c_name: String do
+		var res = self.c_name_cache
+		if res != null then return res
+		res = "{self.intro.c_name}"
+		self.c_name_cache = res
+		return res
+	end
+	private var c_name_cache: nullable String
+
+	fun const_color: String do return "COLOR_{c_name}"
 end

@@ -558,6 +558,7 @@ class MethodColoring
 
 	redef type MPROP: MMethod
 	redef type MPROPDEF: MMethodDef
+	init(class_coloring: ClassColoring) do end
 end
 
 # MAttribute coloring
@@ -566,6 +567,7 @@ class AttributeColoring
 
 	redef type MPROP: MAttribute
 	redef type MPROPDEF: MAttributeDef
+	init(class_coloring: ClassColoring) do end
 end
 
 # MVirtualTypeProp coloring
@@ -574,6 +576,7 @@ class VTColoring
 
 	redef type MPROP: MVirtualTypeProp
 	redef type MPROPDEF: MVirtualTypeDef
+	init(class_coloring: ClassColoring) do end
 end
 
 # MParameterType coloring

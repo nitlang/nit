@@ -80,30 +80,13 @@ class SeparateErasureCompiler
 
 	private var class_ids: HashMap[MClass, Int] = new HashMap[MClass, Int]
 	private var class_tables: nullable Map[MClass, Array[nullable MClass]] = null
-	private var class_vts_colors: Map[MVirtualTypeProp, Int]
-	private var class_vts_tables: Map[MClass, Array[nullable MVirtualTypeDef]]
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
 		self.header = self.new_visitor
+		self.do_property_coloring
+
 		# classes coloration
-		var class_coloring = new ClassColoring(mainmodule)
-		self.class_colors = class_coloring.colorize(mmbuilder.model.mclasses)
 		self.class_tables = class_coloring.build_type_tables(mmbuilder.model.mclasses, class_colors)
-
-		# methods coloration
-		var method_coloring = new MethodColoring(class_coloring)
-		self.method_colors = method_coloring.colorize
-		self.method_tables = method_coloring.build_property_tables
-
-		# attributes coloration
-		var attribute_coloring = new AttributeColoring(class_coloring)
-		self.attr_colors = attribute_coloring.colorize
-		self.attr_tables = attribute_coloring.build_property_tables
-
-		# vt coloration
-		var vt_coloring = new VTColoring(class_coloring)
-		self.class_vts_colors = vt_coloring.colorize
-		self.class_vts_tables = vt_coloring.build_property_tables
 
 		# set type unique id
 		for mclass in class_colors.keys do
@@ -166,7 +149,7 @@ class SeparateErasureCompiler
 		# extern const struct vts_table_X vts_table_X
 		self.header.add_decl("extern const struct vts_table_{c_name} vts_table_{c_name};")
 		self.header.add_decl("struct vts_table_{c_name} \{")
-		self.header.add_decl("struct vts_entry vts[{self.class_vts_tables[mclass].length}];")
+		self.header.add_decl("struct vts_entry vts[{self.vt_tables[mclass].length}];")
 		self.header.add_decl("\};")
 
 		# Build class vft
@@ -277,7 +260,7 @@ class SeparateErasureCompiler
 		v.add_decl("const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name} = \{")
 		v.add_decl("\{")
 
-		for vt in self.class_vts_tables[mclass] do
+		for vt in self.vt_tables[mclass] do
 			if vt == null then
 				v.add_decl("NULL, /* empty */")
 			else
@@ -381,13 +364,12 @@ class SeparateErasureCompilerVisitor
 				self.add("{is_nullable} = 0;")
 			end
 		else if mtype isa MVirtualType then
-			var vtcolor = compiler.as(SeparateErasureCompiler).class_vts_colors[mtype.mproperty.as(MVirtualTypeProp)]
 			var recv = self.frame.arguments.first
 			var recv_boxed = self.autobox(recv, self.object_type)
-			self.add("{cltype} = {recv_boxed}->class->vts_table->vts[{vtcolor}].class->color;")
-			self.add("{idtype} = {recv_boxed}->class->vts_table->vts[{vtcolor}].class->id;")
+			self.add("{cltype} = {recv_boxed}->class->vts_table->vts[{mtype.mproperty.const_color}].class->color;")
+			self.add("{idtype} = {recv_boxed}->class->vts_table->vts[{mtype.mproperty.const_color}].class->id;")
 			if maybe_null == 0 then
-				self.add("{is_nullable} = {recv_boxed}->class->vts_table->vts[{vtcolor}].is_nullable;")
+				self.add("{is_nullable} = {recv_boxed}->class->vts_table->vts[{mtype.mproperty.const_color}].is_nullable;")
 			end
 		else
 			self.debug("type_test({value.inspect}, {mtype})")
