@@ -294,10 +294,17 @@ bench_steps
 # $#: options to compare
 function bench_nitg_options()
 {
-	name="$FUNCNAME"
+	tag=$1
+	shift
+	name="$FUNCNAME-$tag"
 	skip_test "$name" && return
 	prepare_res "$name.dat" "no options" "nitg without options"
 	run_compiler "nitg" ./nitg
+
+	if test -n "$2"; then
+		prepare_res "$name-all.dat" "all" "nitg with all options $@"
+		run_compiler "nitg-$tag" ./nitg $@
+	fi
 
 	for opt in "$@"; do
 		prepare_res "$name$opt.dat" "$opt" "nitg with option $opt"
@@ -306,14 +313,22 @@ function bench_nitg_options()
 
 	plot "$name.gnu"
 }
-bench_nitg_options --hardening --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
+bench_nitg_options "hardening" --hardening
+bench_nitg_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
 
 function bench_nitg-e_options()
 {
-	name="$FUNCNAME"
+	tag=$1
+	shift
+	name="$FUNCNAME-$tag"
 	skip_test "$name" && return
 	prepare_res "$name.dat" "no options" "nitg-e without options"
 	run_compiler "nitg-e" ./nitg --erasure
+
+	if test -n "$2"; then
+		prepare_res "$name-all.dat" "all" "nitg-e with all options $@"
+		run_compiler "nitg-e-$tag" ./nitg --erasure $@
+	fi
 
 	for opt in "$@"; do
 		prepare_res "$name$opt.dat" "$opt" "nitg-e with option $opt"
@@ -322,7 +337,8 @@ function bench_nitg-e_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-e_options --hardening --no-inline-intern --no-check-covariance --no-check-initialization --no-check-assert --no-check-other
+bench_nitg-e_options "hardening" --hardening
+bench_nitg-e_options "nocheck" --no-inline-intern --no-check-covariance --no-check-initialization --no-check-assert --no-check-other
 
 function bench_nitc_gc()
 {
