@@ -17,7 +17,6 @@ module separate_erasure_compiler
 
 
 import separate_compiler
-intrude import coloring
 
 redef class ToolContext
 	# --erasure
@@ -37,27 +36,6 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new SeparateErasureCompiler(mainmodule, runtime_type_analysis, self)
-		var v = compiler.header
-		v.add_decl("#include <stdlib.h>")
-		v.add_decl("#include <stdio.h>")
-		v.add_decl("#include <string.h>")
-		v.add_decl("#include <gc/gc.h>")
-		v.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
-		v.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
-		v.add_decl("struct class \{ int id; int box_kind; int color; struct vts_table *vts_table; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
-		v.add_decl("struct type_table \{ int size; int table[1]; \}; /* colorized type table. */")
-		v.add_decl("struct vts_entry \{ short int is_nullable; struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
-		v.add_decl("struct vts_table \{ struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
-		v.add_decl("typedef struct \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
-		v.add_decl("extern const char const * class_names[];")
-
-		# Declare global instances
-		v.add_decl("extern int glob_argc;")
-		v.add_decl("extern char **glob_argv;")
-		v.add_decl("extern val *glob_sys;")
-
-		# The main function of the C
-		compiler.compile_main_function
 
 		# compile class structures
 		for m in mainmodule.in_importation.greaters do
@@ -94,7 +72,17 @@ class SeparateErasureCompiler
 
 		# for the class_name and output_class_name methods
 		self.compile_class_names
-		self.compile_box_kinds
+	end
+
+	redef fun compile_header_structs do
+		self.header.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
+		self.header.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
+		self.header.add_decl("struct class \{ int id; int box_kind; int color; struct vts_table *vts_table; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
+		self.header.add_decl("struct type_table \{ int size; int table[1]; \}; /* colorized type table. */")
+		self.header.add_decl("struct vts_entry \{ short int is_nullable; struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
+		self.header.add_decl("struct vts_table \{ struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
+		self.header.add_decl("typedef struct \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
+		self.header.add_decl("extern const char const * class_names[];")
 	end
 
 	redef fun compile_class_names do

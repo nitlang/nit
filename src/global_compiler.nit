@@ -68,44 +68,15 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new GlobalCompiler(mainmodule, runtime_type_analysis, self)
-		var v = compiler.new_visitor
+		var v = compiler.header
 
-		v.add_decl("#include <stdlib.h>")
-		v.add_decl("#include <stdio.h>")
-		v.add_decl("#include <string.h>")
-
-		# TODO: Better way to activate the GC
-		v.add_decl("#include <gc/gc.h>")
-		#v.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
-
-		# Declaration of structures the live Nit types
-		# Each live type is generated as an independent C `struct' type.
-		# They only share a common first field `classid` used to implement the polymorphism.
-		# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val' that contains only the `classid` field.
-
-		v.add_decl("typedef struct \{int classid;\} val; /* general C type representing a Nit instance. */")
 		for t in runtime_type_analysis.live_types do
 			compiler.declare_runtimeclass(v, t)
 		end
 
-		# Global variable used by the legacy native interface
-
-		v.add_decl("extern int glob_argc;")
-		v.add_decl("extern char **glob_argv;")
-		v.add_decl("extern val *glob_sys;")
-
-		# Class names (for the class_name and output_class_name methods)
-
-		v.add_decl("extern const char const * class_names[];")
-		v.add("const char const * class_names[] = \{")
-		for t in runtime_type_analysis.live_types do
-			v.add("\"{t}\", /* {compiler.classid(t)} */")
-		end
-		v.add("\};")
-		compiler.header = v
+		compiler.compile_class_names
 
 		# Init instance code (allocate and init-arguments)
-
 		for t in runtime_type_analysis.live_types do
 			if t.ctype == "val*" then
 				compiler.generate_init_instance(t)
@@ -114,9 +85,6 @@ redef class ModelBuilder
 				compiler.generate_box_instance(t)
 			end
 		end
-
-		# The main function of the C
-		compiler.compile_main_function
 
 		# Compile until all runtime_functions are visited
 
@@ -258,6 +226,7 @@ class GlobalCompiler
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, modelbuilder: ModelBuilder)
 	do
+		self.header = new_visitor
 		self.mainmodule = mainmodule
 		self.runtime_type_analysis = runtime_type_analysis
 		self.modelbuilder = modelbuilder
@@ -267,6 +236,47 @@ class GlobalCompiler
 				self.live_primitive_types.add(t)
 			end
 		end
+
+		# Header declarations
+		self.compile_header
+
+		# The main function of the C
+		self.compile_main_function
+	end
+
+	protected fun compile_header do
+		var v = self.header
+		self.header.add_decl("#include <stdlib.h>")
+		self.header.add_decl("#include <stdio.h>")
+		self.header.add_decl("#include <string.h>")
+		# TODO: Better way to activate the GC
+		self.header.add_decl("#include <gc/gc.h>")
+		#self.header.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
+
+		compile_header_structs
+
+		# Global variable used by the legacy native interface
+		self.header.add_decl("extern int glob_argc;")
+		self.header.add_decl("extern char **glob_argv;")
+		self.header.add_decl("extern val *glob_sys;")
+	end
+
+	# Class names (for the class_name and output_class_name methods)
+	protected fun compile_class_names do
+		self.header.add_decl("extern const char const * class_names[];")
+		self.header.add("const char const * class_names[] = \{")
+		for t in self.runtime_type_analysis.live_types do
+			self.header.add("\"{t}\", /* {self.classid(t)} */")
+		end
+		self.header.add("\};")
+	end
+
+	# Declaration of structures the live Nit types
+	# Each live type is generated as an independent C `struct' type.
+	# They only share a common first field `classid` used to implement the polymorphism.
+	# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val' that contains only the `classid` field.
+	protected fun compile_header_structs do
+		self.header.add_decl("typedef struct \{int classid;\} val; /* general C type representing a Nit instance. */")
 	end
 
 	# Subset of runtime_type_analysis.live_types that contains only primitive types
@@ -289,7 +299,7 @@ class GlobalCompiler
 	#
 	# FIXME: should not be a vistor but just somewhere to store lines
 	# FIXME: should not have a global .h since it does not help recompilations
-	var header: nullable GlobalCompilerVisitor writable = null
+	var header: GlobalCompilerVisitor writable
 
 	# The list of all associated visitors
 	# Used to generate .c files

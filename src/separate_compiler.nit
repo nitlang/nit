@@ -17,7 +17,8 @@ module separate_compiler
 
 
 import global_compiler # TODO better separation of concerns
-intrude import coloring
+import coloring
+
 redef class ToolContext
 	# --separate
 	var opt_separate: OptionBool = new OptionBool("Use separate compilation", "--separate")
@@ -48,32 +49,6 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new SeparateCompiler(mainmodule, runtime_type_analysis, self)
-		var v = compiler.header
-		v.add_decl("#include <stdlib.h>")
-		v.add_decl("#include <stdio.h>")
-		v.add_decl("#include <string.h>")
-		v.add_decl("#include <gc/gc.h>")
-		v.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
-		v.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
-
-		# Class abstract representation
-		v.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
-		# Type abstract representation
-		v.add_decl("struct type \{ int id; int color; int livecolor; short int is_nullable; struct vts_table *vts_table; struct fts_table *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
-		v.add_decl("struct fts_table \{ struct type *fts[1]; \}; /* fts list of a C type representation. */")
-		v.add_decl("struct vts_table \{ struct type *vts[1]; \}; /* vts list of a C type representation. */")
-		# Instance abstract representation
-		v.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
-
-		compiler.compile_box_kinds
-
-		# Declare global instances
-		v.add_decl("extern int glob_argc;")
-		v.add_decl("extern char **glob_argv;")
-		v.add_decl("extern val *glob_sys;")
-
-		# The main function of the C
-		compiler.compile_main_function
 
 		# compile class structures
 		for m in mainmodule.in_importation.greaters do
@@ -97,9 +72,6 @@ redef class ModelBuilder
 		for mclass in model.mclasses do
 			compiler.compile_live_gentype_to_c(mclass)
 		end
-
-		# for the class_name and output_class_name methods
-		compiler.compile_class_names
 
 		write_and_make(compiler)
 	end
@@ -131,18 +103,45 @@ class SeparateCompiler
 	protected var vt_colors: Map[MVirtualTypeProp, Int]
 	protected var vt_tables: Map[MClass, Array[nullable MVirtualTypeDef]]
 
-	private var ft_colors: Map[MParameterType, Int]
-	private var ft_tables: Map[MClass, Array[nullable MParameterType]]
+	protected var ft_colors: nullable Map[MParameterType, Int]
+	protected var ft_tables: nullable Map[MClass, Array[nullable MParameterType]]
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
-		self.header = self.new_visitor
 		self.do_property_coloring
+		self.compile_box_kinds
+	end
 
-		# fts coloration for non-erased compilation
-		var ft_coloring = new FTColoring(class_coloring)
-		self.ft_colors = ft_coloring.colorize
-		self.ft_tables = ft_coloring.build_ft_tables
-		generate_color_consts(self.ft_colors)
+	redef fun compile_header_structs do
+		self.header.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
+		self.header.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
+		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
+		self.header.add_decl("struct type \{ int id; int color; int livecolor; short int is_nullable; struct vts_table *vts_table; struct fts_table *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
+		self.header.add_decl("struct fts_table \{ struct type *fts[1]; \}; /* fts list of a C type representation. */")
+		self.header.add_decl("struct vts_table \{ struct type *vts[1]; \}; /* vts list of a C type representation. */")
+		self.header.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
+	end
+
+	redef fun compile_class_names do
+		# Build type names table
+		var type_array = new Array[nullable MType]
+		for t, i in typeids do
+			if i >= type_array.length then
+				type_array[i] = null
+			end
+			type_array[i] = t
+		end
+
+		var v = self.new_visitor
+		self.header.add_decl("extern const char const * class_names[];")
+		v.add("const char const * class_names[] = \{")
+		for t in type_array do
+			if t == null then
+				v.add("NULL,")
+			else
+				v.add("\"{t}\",")
+			end
+		end
+		v.add("\};")
 	end
 
 	fun compile_box_kinds
@@ -171,31 +170,7 @@ class SeparateCompiler
 
 	end
 
-	protected fun compile_class_names do
-
-		# Build type names table
-		var type_array = new Array[nullable MType]
-		for t, i in typeids do
-			if i >= type_array.length then
-				type_array[i] = null
-			end
-			type_array[i] = t
-		end
-
-		var v = self.new_visitor
-		self.header.add_decl("extern const char const * class_names[];")
-		v.add("const char const * class_names[] = \{")
-		for t in type_array do
-			if t == null then
-				v.add("NULL,")
-			else
-				v.add("\"{t}\",")
-			end
-		end
-		v.add("\};")
-	end
-
-	fun generate_color_consts(colors: Map[Object, Int]) do
+	fun compile_color_consts(colors: Map[Object, Int]) do
 		for m, c in colors do
 			if m isa MProperty then
 				if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
@@ -230,19 +205,19 @@ class SeparateCompiler
 		var method_coloring = new MethodColoring(self.class_coloring)
 		self.method_colors = method_coloring.colorize
 		self.method_tables = method_coloring.build_property_tables
-		generate_color_consts(self.method_colors)
+		self.compile_color_consts(self.method_colors)
 
 		# attributes coloration
 		var attribute_coloring = new AttributeColoring(class_coloring)
 		self.attr_colors = attribute_coloring.colorize
 		self.attr_tables = attribute_coloring.build_property_tables
-		generate_color_consts(self.attr_colors)
+		self.compile_color_consts(self.attr_colors)
 
 		# vt coloration
 		var vt_coloring = new VTColoring(class_coloring)
 		self.vt_colors = vt_coloring.colorize
 		self.vt_tables = vt_coloring.build_property_tables
-		generate_color_consts(self.vt_colors)
+		self.compile_color_consts(self.vt_colors)
 	end
 
 	# colorize live types of the program
@@ -285,6 +260,12 @@ class SeparateCompiler
 			self.typeids[mtype] = self.typeids.length
 		end
 
+		# fts coloration for non-erased compilation
+		var ft_coloring = new FTColoring(class_coloring)
+		self.ft_colors = ft_coloring.colorize
+		self.ft_tables = ft_coloring.build_ft_tables
+		self.compile_color_consts(self.ft_colors.as(not null))
+
 		# colorize live entries
 		var entries_coloring = new LiveEntryColoring
 		self.livetypes_colors = entries_coloring.colorize(mtypes)
@@ -300,6 +281,9 @@ class SeparateCompiler
 		end
 		self.type_colors = type_coloring.colorize(mtypes)
 		self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
+
+		# for the class_name and output_class_name methods
+		self.compile_class_names
 
 		return mtypes
 	end
@@ -368,13 +352,6 @@ class SeparateCompiler
 		var v = new SeparateCompilerVisitor(self)
 		v.add_decl("/* runtime type {mtype} */")
 
-		var mclass_type: MClassType
-		if mtype isa MNullableType then
-			mclass_type = mtype.mtype.as(MClassType)
-		else
-			mclass_type = mtype.as(MClassType)
-		end
-
 		# extern const struct type_X
 		self.header.add_decl("extern const struct type_{c_name} type_{c_name};")
 		self.header.add_decl("struct type_{c_name} \{")
@@ -386,18 +363,6 @@ class SeparateCompiler
 		self.header.add_decl("const struct fts_table_{c_name} *fts_table;")
 		self.header.add_decl("int table_size;")
 		self.header.add_decl("int type_table[{self.type_tables[mtype].length}];")
-		self.header.add_decl("\};")
-
-		# extern const struct vts_table_X vts_table_X
-		self.header.add_decl("extern const struct vts_table_{c_name} vts_table_{c_name};")
-		self.header.add_decl("struct vts_table_{c_name} \{")
-		self.header.add_decl("struct type *vts[{self.vt_tables[mclass_type.mclass].length}];")
-		self.header.add_decl("\};")
-
-		# extern const struct fst_table_X fst_table_X
-		self.header.add_decl("extern const struct fts_table_{c_name} fts_table_{c_name};")
-		self.header.add_decl("struct fts_table_{c_name} \{")
-		self.header.add_decl("struct type *fts[{self.ft_tables[mclass_type.mclass].length}];")
 		self.header.add_decl("\};")
 
 		# const struct type_X
@@ -424,14 +389,11 @@ class SeparateCompiler
 		v.add_decl("\},")
 		v.add_decl("\};")
 
-		build_fts_table(mtype, v)
-		build_vts_table(mtype, v)
+		compile_type_fts_table(mtype)
+		compile_type_vts_table(mtype)
 	end
 
-	# const struct fst_table_X fst_table_X
-	private fun build_fts_table(mtype: MType, v: SeparateCompilerVisitor) do
-		v.add_decl("const struct fts_table_{mtype.c_name} fts_table_{mtype.c_name} = \{")
-		v.add_decl("\{")
+	protected fun compile_type_fts_table(mtype: MType) do
 
 		var mclass_type: MClassType
 		if mtype isa MNullableType then
@@ -440,6 +402,16 @@ class SeparateCompiler
 			mclass_type = mtype.as(MClassType)
 		end
 
+		# extern const struct fst_table_X fst_table_X
+		self.header.add_decl("extern const struct fts_table_{mtype.c_name} fts_table_{mtype.c_name};")
+		self.header.add_decl("struct fts_table_{mtype.c_name} \{")
+		self.header.add_decl("struct type *fts[{self.ft_tables[mclass_type.mclass].length}];")
+		self.header.add_decl("\};")
+
+		# const struct fts_table_X fts_table_X
+		var v = new_visitor
+		v.add_decl("const struct fts_table_{mtype.c_name} fts_table_{mtype.c_name} = \{")
+		v.add_decl("\{")
 		for ft in self.ft_tables[mclass_type.mclass] do
 			if ft == null then
 				v.add_decl("NULL, /* empty */")
@@ -461,10 +433,7 @@ class SeparateCompiler
 		v.add_decl("\};")
 	end
 
-	# const struct vts_table_X vts_table_X
-	private fun build_vts_table(mtype: MType, v: SeparateCompilerVisitor) do
-		v.add_decl("const struct vts_table_{mtype.c_name} vts_table_{mtype.c_name} = \{")
-		v.add_decl("\{")
+	protected fun compile_type_vts_table(mtype: MType) do
 
 		var mclass_type: MClassType
 		if mtype isa MNullableType then
@@ -472,6 +441,17 @@ class SeparateCompiler
 		else
 			mclass_type = mtype.as(MClassType)
 		end
+
+		# extern const struct vts_table_X vts_table_X
+		self.header.add_decl("extern const struct vts_table_{mtype.c_name} vts_table_{mtype.c_name};")
+		self.header.add_decl("struct vts_table_{mtype.c_name} \{")
+		self.header.add_decl("struct type *vts[{self.vt_tables[mclass_type.mclass].length}];")
+		self.header.add_decl("\};")
+
+		# const struct vts_table_X vts_table_X
+		var v = new_visitor
+		v.add_decl("const struct vts_table_{mtype.c_name} vts_table_{mtype.c_name} = \{")
+		v.add_decl("\{")
 
 		for vt in self.vt_tables[mclass_type.mclass] do
 			if vt == null then
@@ -522,7 +502,7 @@ class SeparateCompiler
 
 		var vft = self.method_tables[mclass]
 		var attrs = self.attr_tables[mclass]
-		var v = new SeparateCompilerVisitor(self)
+		var v = new_visitor
 
 		v.add_decl("/* runtime class {c_name} */")
 		var idnum = classids.length

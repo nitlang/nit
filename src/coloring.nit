@@ -196,7 +196,7 @@ class TypeColoring
 	end
 
 	# Build type tables
-	private fun build_type_tables(mtypes: Set[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
+	fun build_type_tables(mtypes: Set[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
 		var tables = new HashMap[T, Array[nullable T]]
 
 		for mtype in mtypes do
@@ -319,7 +319,7 @@ class ClassColoring
 	end
 
 	# Build type tables
-	private fun build_type_tables(mclasses: Array[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
+	fun build_type_tables(mclasses: Array[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
 		var tables = new HashMap[T, Array[nullable T]]
 
 		for mclasse in mclasses do
@@ -451,13 +451,13 @@ class PropertyColoring
 		self.class_coloring = class_coloring
 	end
 
-	private fun colorize: Map[MPROP, Int] do
+	fun colorize: Map[MPROP, Int] do
 		colorize_core_properties
 		colorize_crown_properties
 		return self.coloration_result
 	end
 
-	private fun build_property_tables: Map[MClass, Array[nullable MPROPDEF]] do
+	fun build_property_tables: Map[MClass, Array[nullable MPROPDEF]] do
 		var tables = new HashMap[MClass, Array[nullable MPROPDEF]]
 
 		for mclass in self.class_coloring.coloration_result.keys do
@@ -619,7 +619,7 @@ class FTColoring
 		self.class_coloring = class_coloring
 	end
 
-	private fun colorize: Map[MParameterType, Int] do
+	fun colorize: Map[MParameterType, Int] do
 		colorize_core_properties
 		colorize_crown_properties
 		return self.coloration_result
@@ -697,7 +697,7 @@ class FTColoring
 		return fts_cache[mclass]
 	end
 
-	private fun build_ft_tables: Map[MClass, Array[nullable MParameterType]] do
+	fun build_ft_tables: Map[MClass, Array[nullable MParameterType]] do
 		var tables = new HashMap[MClass, Array[nullable MParameterType]]
 
 		for mclass in self.class_coloring.coloration_result.keys do
@@ -752,7 +752,7 @@ class LiveEntryColoring
 	end
 
 	# Build type tables
-	private fun build_livetype_tables(mtypes: Set[MType]): Map[MClass, Array[nullable Object]] do
+	fun build_livetype_tables(mtypes: Set[MType]): Map[MClass, Array[nullable Object]] do
 		var livetypes_tables = new HashMap[MClass, Array[nullable Object]]
 		self.livetypes_tables_sizes = new HashMap[MClass, Array[Int]]
 
