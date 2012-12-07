@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import end
-interface Object
-end
+interface Object end
+enum Bool end
 class A
 	type T: A
 	var t: T = self
