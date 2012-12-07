@@ -140,6 +140,9 @@ private class TypeVisitor
 		if sup == null then return null # Forward error
 
 		var res = check_subtype(nexpr, sub, sup)
+		if res != sub then
+			nexpr.implicit_cast_to = res
+		end
 		return res
 	end
 
@@ -468,6 +471,12 @@ redef class AExpr
 	# Is the statement correctly typed?
 	# Used to distinguish errors and statements when `mtype' == null
 	var is_typed: Bool = false
+
+	# If required, the following implicit cast ".as(XXX)"
+	# Such a cast may by required after evaluating the expression when
+	# a unsafe operation is detected (silently accepted by the Nit language).
+	# The attribute is computed by `check_subtype`
+	var implicit_cast_to: nullable MType = null
 
 	# Return the variable read (if any)
 	# Used to perform adaptive typing
