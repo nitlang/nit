@@ -19,7 +19,7 @@ nitg:
 	./tests.sh --engine nitg ${PROGS}
 
 nitg-s:
-	./tests.sh --engine nitg-s base_*.nit
+	./tests.sh --engine nitg-s *.nit
 
 nitg-e:
 	./tests.sh --engine nitg-e ${PROGS}
