@@ -398,6 +398,10 @@ private class RapidTypeVisitor
 	do
 		if node == null then return
 		node.accept_rapid_type_vistor(self)
+		if node isa AExpr then
+			var implicit_cast_to = node.implicit_cast_to
+			if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
+		end
 		node.visit_all(self)
 	end
 
