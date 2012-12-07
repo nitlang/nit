@@ -626,7 +626,7 @@ class ArrayMapValues[K: Object, E]
 	super RemovableCollection[E]
 	# The original map
 	var map: ArrayMap[K, E]
-	redef fun first do return self.map._items.first.first
+	redef fun first do return self.map._items.first.second
 	redef fun is_empty do return self.map.is_empty
 	redef fun length do return self.map.length
 	redef fun iterator do return new MapValuesIterator[K, E](self.map.iterator)
