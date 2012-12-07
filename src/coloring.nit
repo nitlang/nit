@@ -196,7 +196,7 @@ class TypeColoring
 	end
 
 	# Build type tables
-	private fun build_type_tables(mtypes: Set[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
+	fun build_type_tables(mtypes: Set[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
 		var tables = new HashMap[T, Array[nullable T]]
 
 		for mtype in mtypes do
@@ -253,6 +253,21 @@ class TypeColoring
 	end
 end
 
+class NaiveTypeColoring
+	super TypeColoring
+
+	init(mainmodule: MModule, mtypes: Set[T]) do
+		super(mainmodule, mtypes)
+	end
+
+	# naive coloring that use incremental coloring
+	redef fun colorize_elements(elements) do
+		for e in elements do
+			self.coloration_result[e] = self.coloration_result.length
+		end
+	end
+end
+
 # A sorter for linearize list of types
 private class TypeSorter
 	super AbstractSorter[MType]
@@ -304,7 +319,7 @@ class ClassColoring
 	end
 
 	# Build type tables
-	private fun build_type_tables(mclasses: Array[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
+	fun build_type_tables(mclasses: Array[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
 		var tables = new HashMap[T, Array[nullable T]]
 
 		for mclasse in mclasses do
@@ -375,6 +390,22 @@ class ClassColoring
 	end
 end
 
+# incremental coloring (very naive)
+class NaiveClassColoring
+	super ClassColoring
+
+	init(mainmodule: MModule) do
+		super(mainmodule)
+	end
+
+	# naive coloring that use incremental coloring
+	redef fun colorize_elements(elements: Collection[MClass]) do
+		for e in elements do
+			self.coloration_result[e] = self.coloration_result.length
+		end
+	end
+end
+
 # A sorter for linearize list of classes
 private class ClassSorter
 	super AbstractSorter[MClass]
@@ -420,13 +451,13 @@ class PropertyColoring
 		self.class_coloring = class_coloring
 	end
 
-	private fun colorize: Map[MPROP, Int] do
+	fun colorize: Map[MPROP, Int] do
 		colorize_core_properties
 		colorize_crown_properties
 		return self.coloration_result
 	end
 
-	private fun build_property_tables: Map[MClass, Array[nullable MPROPDEF]] do
+	fun build_property_tables: Map[MClass, Array[nullable MPROPDEF]] do
 		var tables = new HashMap[MClass, Array[nullable MPROPDEF]]
 
 		for mclass in self.class_coloring.coloration_result.keys do
@@ -558,6 +589,7 @@ class MethodColoring
 
 	redef type MPROP: MMethod
 	redef type MPROPDEF: MMethodDef
+	init(class_coloring: ClassColoring) do end
 end
 
 # MAttribute coloring
@@ -566,6 +598,7 @@ class AttributeColoring
 
 	redef type MPROP: MAttribute
 	redef type MPROPDEF: MAttributeDef
+	init(class_coloring: ClassColoring) do end
 end
 
 # MVirtualTypeProp coloring
@@ -574,6 +607,7 @@ class VTColoring
 
 	redef type MPROP: MVirtualTypeProp
 	redef type MPROPDEF: MVirtualTypeDef
+	init(class_coloring: ClassColoring) do end
 end
 
 # MParameterType coloring
@@ -585,7 +619,7 @@ class FTColoring
 		self.class_coloring = class_coloring
 	end
 
-	private fun colorize: Map[MParameterType, Int] do
+	fun colorize: Map[MParameterType, Int] do
 		colorize_core_properties
 		colorize_crown_properties
 		return self.coloration_result
@@ -663,7 +697,7 @@ class FTColoring
 		return fts_cache[mclass]
 	end
 
-	private fun build_ft_tables: Map[MClass, Array[nullable MParameterType]] do
+	fun build_ft_tables: Map[MClass, Array[nullable MParameterType]] do
 		var tables = new HashMap[MClass, Array[nullable MParameterType]]
 
 		for mclass in self.class_coloring.coloration_result.keys do
@@ -718,7 +752,7 @@ class LiveEntryColoring
 	end
 
 	# Build type tables
-	private fun build_livetype_tables(mtypes: Set[MType]): Map[MClass, Array[nullable Object]] do
+	fun build_livetype_tables(mtypes: Set[MType]): Map[MClass, Array[nullable Object]] do
 		var livetypes_tables = new HashMap[MClass, Array[nullable Object]]
 		self.livetypes_tables_sizes = new HashMap[MClass, Array[Int]]
 
