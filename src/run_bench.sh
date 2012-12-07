@@ -27,8 +27,8 @@ count=2
 
 function die()
 {
-	echo >&2 "DIE: $*"
-	exit 1
+	echo >&2 "error: $*"
+	died=1
 }
 
 # Run a single command multiple time and store the execution times
@@ -72,7 +72,7 @@ function run_command()
 {
 	if [ "$dry_run" = "true" ]; then return; fi
 	echo " $ $@"
-	"$@"
+	"$@" || die "$@: failed"
 }
 
 # perl function to compute min/max/avg.
@@ -386,3 +386,9 @@ function bench_compilation_time
 	plot "$name.gnu"
 }
 bench_compilation_time
+
+if test -n "$died"; then
+	echo "Some commands failed"
+	exit 1
+fi
+exit 0
