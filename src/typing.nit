@@ -78,16 +78,24 @@ private class TypeVisitor
 		return self.resolve_for(mmethoddef.msignature.as(not null), recv, for_self).as(MSignature)
 	end
 
-	fun check_subtype(node: ANode, sub, sup: MType): Bool
+	# Check that `sub` is a subtype of `sup`.
+	# If `sub` is not a valud suptype, then display an error on `node` an return null.
+	# If `sub` is a safe subtype of `sup` then return `sub`.
+	# If `sun` is an insafe subtype (ie an imlicit cast is required), then return `sup`.
+	#
+	# The point of the return type is to determinate the usable type on an expression:
+	# If the suptype is safe, then the return type is the one on the expression typed by `sub`.
+	# Is the subtype is unsafe, then the return type is the one of an implicit cast on `sup`.
+	fun check_subtype(node: ANode, sub, sup: MType): nullable MType
 	do
-		if self.is_subtype(sub, sup) then return true
+		if self.is_subtype(sub, sup) then return sub
 		if self.is_subtype(sub, self.anchor_to(sup)) then
 			# FIXME workarround to the current unsafe typing policy. To remove once fixed virtual types exists.
 			#node.debug("Unsafe typing: expected {sup}, got {sub}")
-			return true
+			return sup
 		end
 		self.modelbuilder.error(node, "Type error: expected {sup}, got {sub}")
-		return false
+		return null
 	end
 
 	# Visit an expression and do not care about the return value
@@ -131,10 +139,8 @@ private class TypeVisitor
 
 		if sup == null then return null # Forward error
 
-		if not check_subtype(nexpr, sub, sup) then
-			return null
-		end
-		return sub
+		var res = check_subtype(nexpr, sub, sup)
+		return res
 	end
 
 	# Visit an expression and expect its static type is a bool
