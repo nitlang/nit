@@ -1,3 +1,3 @@
-Runtime error: Cast failed (naive_interpreter.nit:539)
+Runtime error: Cast failed (naive_interpreter.nit:545)
 true
 true
