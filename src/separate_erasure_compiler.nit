@@ -57,11 +57,10 @@ class SeparateErasureCompiler
 	super SeparateCompiler
 
 	private var class_ids: HashMap[MClass, Int] = new HashMap[MClass, Int]
-	private var class_tables: nullable Map[MClass, Array[nullable MClass]] = null
+	private var class_colors: Map[MClass, Int]
+	private var class_tables: Map[MClass, Array[nullable MClass]]
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
-		super
-
 		var mclasses = new HashSet[MClass]
 		mclasses.add_all(mmbuilder.model.mclasses)
 
@@ -75,7 +74,7 @@ class SeparateErasureCompiler
 			var class_coloring = new ClassModPerfectHashing(mainmodule)
 			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
 			self.class_tables = class_coloring.hash_type_tables(mclasses, class_ids, class_colors)
-			self.class_coloring = class_coloring
+
 			self.header.add_decl("int HASH(int, int);")
 			var v = new_visitor
 			v.add_decl("int HASH(int mask, int id) \{")
@@ -90,17 +89,24 @@ class SeparateErasureCompiler
 			var class_coloring = new ClassAndPerfectHashing(mainmodule)
 			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
 			self.class_tables = class_coloring.hash_type_tables(mclasses, class_ids, class_colors)
-			self.class_coloring = class_coloring
+
 			self.header.add_decl("int HASH(int, int);")
 			var v = new_visitor
 			v.add_decl("int HASH(int mask, int id) \{")
 			v.add_decl("return mask & id;")
 			v.add_decl("\}")
 		else
+			var class_coloring
+			if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+				class_coloring = new NaiveClassColoring(mainmodule)
+			else
+				class_coloring = new ClassColoring(mainmodule)
+			end
 			# set type unique id
 			for mclass in mclasses do
 				self.class_ids[mclass] = self.class_ids.length + 1
 			end
+			self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
 			self.class_tables = class_coloring.build_type_tables(modelbuilder.model.mclasses, class_colors)
 		end
 

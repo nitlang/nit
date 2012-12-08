@@ -99,8 +99,7 @@ class SeparateCompiler
 	private var livetypes_tables: nullable Map[MClass, Array[nullable Object]]
 	private var livetypes_tables_sizes: nullable Map[MClass, Array[Int]]
 
-	protected var class_coloring: ClassColoring protected writable
-	protected var class_colors: Map[MClass, Int] protected writable
+	protected var class_coloring: ClassColoring
 
 	protected var method_colors: Map[MMethod, Int]
 	protected var method_tables: Map[MClass, Array[nullable MMethodDef]]
@@ -111,8 +110,8 @@ class SeparateCompiler
 	protected var vt_colors: Map[MVirtualTypeProp, Int]
 	protected var vt_tables: Map[MClass, Array[nullable MVirtualTypeDef]]
 
-	protected var ft_colors: nullable Map[MParameterType, Int]
-	protected var ft_tables: nullable Map[MClass, Array[nullable MParameterType]]
+	private var ft_colors: nullable Map[MParameterType, Int]
+	private var ft_tables: nullable Map[MClass, Array[nullable MParameterType]]
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
 		self.do_property_coloring
@@ -204,13 +203,8 @@ class SeparateCompiler
 	fun do_property_coloring do
 
 		# classes coloration
-		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
-			self.class_coloring = new NaiveClassColoring(mainmodule)
-			self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
-		else
-			self.class_coloring = new ClassColoring(mainmodule)
-			self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
-		end
+		self.class_coloring = new ClassColoring(mainmodule)
+		class_coloring.colorize(modelbuilder.model.mclasses)
 
 		# methods coloration
 		var method_coloring = new MethodColoring(self.class_coloring)
@@ -219,11 +213,15 @@ class SeparateCompiler
 		self.compile_color_consts(self.method_colors)
 
 		# attributes coloration
-		var attribute_coloring = new AttributeColoring(class_coloring)
+		var attribute_coloring = new AttributeColoring(self.class_coloring)
 		self.attr_colors = attribute_coloring.colorize
 		self.attr_tables = attribute_coloring.build_property_tables
 		self.compile_color_consts(self.attr_colors)
 
+		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+			self.class_coloring = new NaiveClassColoring(mainmodule)
+			self.class_coloring.colorize(modelbuilder.model.mclasses)
+		end
 		# vt coloration
 		var vt_coloring = new VTColoring(class_coloring)
 		self.vt_colors = vt_coloring.colorize
