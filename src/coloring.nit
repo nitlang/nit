@@ -1319,7 +1319,7 @@ end
 # Utils
 
 # An ordered set
-class OrderedSet[E]
+class OrderedSet[E: Object]
 	super Array[E]
 
 	init do end
