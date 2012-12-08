@@ -1044,6 +1044,109 @@ class NaiveFTColoring
 	end
 end
 
+abstract class FTPerfectHashing
+	super FTColoring
+
+	private var masks: Map[MClass, Int] = new HashMap[MClass, Int]
+
+	init(class_coloring: ClassColoring) do end
+
+	redef fun colorize: Map[MParameterType, Int] do
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all(self.class_coloring.core)
+		mclasses.add_all(self.class_coloring.crown)
+		for mclass in mclasses do
+			for ft in self.fts(mclass) do
+				if coloration_result.has_key(ft) then continue
+				coloration_result[ft] = coloration_result.length + 1
+			end
+		end
+		return self.coloration_result
+	end
+
+	fun compute_masks: Map[MClass, Int] do
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all(self.class_coloring.core)
+		mclasses.add_all(self.class_coloring.crown)
+		for mclass in mclasses do
+			var fts = new HashSet[MParameterType]
+			for parent in self.class_coloring.super_elements(mclass) do
+				fts.add_all(self.fts(parent))
+			end
+			fts.add_all(self.fts(mclass))
+			self.masks[mclass] = compute_mask(fts)
+		end
+		return self.masks
+	end
+
+	private fun compute_mask(fts: Set[MParameterType]): Int do
+		var mask = 0
+		loop
+			var used = new List[Int]
+			for ft in fts do
+				var res = op(mask, self.coloration_result[ft])
+				if used.has(res) then
+					break
+				else
+					used.add(res)
+				end
+			end
+			if used.length == fts.length then break
+			mask += 1
+		end
+		return mask
+	end
+
+	redef fun build_ft_tables do
+		var tables = new HashMap[MClass, Array[nullable MParameterType]]
+
+		for mclass in self.class_coloring.coloration_result.keys do
+			var table = new Array[nullable MParameterType]
+
+			# first, fill table from parents
+			for parent in self.class_coloring.super_elements(mclass) do
+				for ft in self.fts(parent) do
+					var color = phash(self.coloration_result[ft], masks[mclass])
+					if table.length <= color then
+						for i in [table.length .. color[ do
+							table[i] = null
+						end
+					end
+					table[color] = ft
+				end
+			end
+
+			# then override with local properties
+			for ft in self.fts(mclass) do
+				var color = phash(self.coloration_result[ft], masks[mclass])
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = ft
+			end
+			tables[mclass] = table
+		end
+		return tables
+	end
+
+	private fun op(mask: Int, id:Int): Int is abstract
+	private fun phash(id: Int, mask: Int): Int do return op(mask, id)
+end
+
+class FTModPerfectHashing
+	super FTPerfectHashing
+	init(class_coloring: ClassColoring) do end
+	redef fun op(mask, id) do return mask % id
+end
+
+class FTAndPerfectHashing
+	super FTPerfectHashing
+	init(class_coloring: ClassColoring) do end
+	redef fun op(mask, id) do return mask.bin_and(id)
+end
+
 # Live Entries coloring
 class LiveEntryColoring
 
