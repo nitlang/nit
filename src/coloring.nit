@@ -268,8 +268,89 @@ class NaiveTypeColoring
 	end
 end
 
+abstract class TypePerfectHashing
+	super TypeColoring
+
+	init(mainmodule: MModule, mtypes: Set[T]) do
+		super(mainmodule, mtypes)
+	end
+
+	fun compute_masks(elements: Set[T], ids: Map[T, Int]): Map[T, Int] do
+		for e in elements do
+			# Create super type list
+			var supers = new HashSet[T]
+			supers.add_all(self.super_elements(e))
+			supers.add(e)
+			# Compute the hashing 'mask'
+			self.coloration_result[e] = compute_mask(supers, ids)
+		end
+		return self.coloration_result
+	end
+
+	# Build type tables
+	fun hash_type_tables(mtypes: Set[T], ids: Map[T, Int], masks: Map[T, Int]): Map[T, Array[nullable T]] do
+		var tables = new HashMap[T, Array[nullable T]]
+
+		for mtype in mtypes do
+			var table = new Array[nullable T]
+			var supers = new HashSet[T]
+			supers.add_all(self.super_elements(mtype))
+			supers.add(mtype)
+
+			for sup in supers do
+				var color = phash(ids[sup], masks[mtype])
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = sup
+			end
+			tables[mtype] = table
+		end
+		return tables
+	end
+
+	private fun compute_mask(mtypes: Set[T], ids: Map[T, Int]): Int do
+		var mask = 0
+		loop
+			var used = new List[Int]
+			for sup in mtypes do
+				var res = op(mask, ids[sup])
+				if used.has(res) then
+					break
+				else
+					used.add(res)
+				end
+			end
+			if used.length == mtypes.length then break
+			mask += 1
+		end
+		return mask
+	end
+
+	private fun op(mask: Int, id:Int): Int is abstract
+	private fun phash(id: Int, mask: Int): Int do return op(mask, id)
+end
+
+class TypeModPerfectHashing
+	super TypePerfectHashing
+	init(mainmodule: MModule, mtypes: Set[T]) do
+		super(mainmodule, mtypes)
+	end
+	redef fun op(mask, id) do return mask % id
+end
+
+class TypeAndPerfectHashing
+	super TypePerfectHashing
+	init(mainmodule: MModule, mtypes: Set[T]) do
+		super(mainmodule, mtypes)
+	end
+	redef fun op(mask, id) do return mask.bin_and(id)
+end
+
 # A sorter for linearize list of types
-private class TypeSorter
+class TypeSorter
 	super AbstractSorter[MType]
 
 	private var mmodule: MModule
@@ -287,8 +368,10 @@ private class TypeSorter
 end
 
 # A sorter for reverse linearization
-private class ReverseTypeSorter
+class ReverseTypeSorter
 	super TypeSorter
+
+	init(mmodule: MModule) do end
 
 	redef fun compare(a, b) do
 		if a == b then
@@ -404,6 +487,87 @@ class NaiveClassColoring
 			self.coloration_result[e] = self.coloration_result.length
 		end
 	end
+end
+
+abstract class ClassPerfectHashing
+	super ClassColoring
+
+	init(mainmodule: MModule) do
+		super(mainmodule)
+	end
+
+	fun compute_masks(elements: Set[T], ids: Map[T, Int]): Map[T, Int] do
+		for e in elements do
+			# Create super type list
+			var supers = new HashSet[T]
+			supers.add_all(self.super_elements(e))
+			supers.add(e)
+			# Compute the hashing 'mask'
+			self.coloration_result[e] = compute_mask(supers, ids)
+		end
+		return self.coloration_result
+	end
+
+	# Build type tables
+	fun hash_type_tables(mtypes: Set[T], ids: Map[T, Int], masks: Map[T, Int]): Map[T, Array[nullable T]] do
+		var tables = new HashMap[T, Array[nullable T]]
+
+		for mtype in mtypes do
+			var table = new Array[nullable T]
+			var supers = new HashSet[T]
+			supers.add_all(self.super_elements(mtype))
+			supers.add(mtype)
+
+			for sup in supers do
+				var color = phash(ids[sup], masks[mtype])
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = sup
+			end
+			tables[mtype] = table
+		end
+		return tables
+	end
+
+	private fun compute_mask(mtypes: Set[T], ids: Map[T, Int]): Int do
+		var mask = 0
+		loop
+			var used = new List[Int]
+			for sup in mtypes do
+				var res = op(mask, ids[sup])
+				if used.has(res) then
+					break
+				else
+					used.add(res)
+				end
+			end
+			if used.length == mtypes.length then break
+			mask += 1
+		end
+		return mask
+	end
+
+	private fun op(mask: Int, id:Int): Int is abstract
+	private fun phash(id: Int, mask: Int): Int do return op(mask, id)
+end
+
+class ClassModPerfectHashing
+	super ClassPerfectHashing
+	init(mainmodule: MModule) do
+		super(mainmodule)
+	end
+	redef fun op(mask, id) do return mask % id
+end
+
+class ClassAndPerfectHashing
+	super ClassPerfectHashing
+	init(mainmodule: MModule) do
+		super(mainmodule)
+	end
+	redef fun op(mask, id) do return mask.bin_and(id)
 end
 
 # A sorter for linearize list of classes
@@ -889,8 +1053,14 @@ end
 # Utils
 
 # An ordered set
-private class OrderedSet[E]
+class OrderedSet[E]
 	super Array[E]
+
+	init do end
+
+	init from(elements: Set[E]) do
+		self.add_all(elements)
+	end
 
 	redef fun add(e) do
 		if not self.has(e) then
@@ -903,5 +1073,10 @@ private class OrderedSet[E]
 		var res = new OrderedSet[E]
 		for e in self do if not o.has(e) then res.add(e)
 		return res
+	end
+
+	# Linearize a set of elements
+	fun linearize(sorter: AbstractSorter[E]) do
+		sorter.sort(self)
 	end
 end

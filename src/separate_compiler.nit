@@ -32,6 +32,12 @@ redef class ToolContext
 	# --use-naive-coloring
 	var opt_use_naive_coloring: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--use-naive-coloring")
 
+	# --use-mod-perfect-hashing
+	var opt_use_mod_perfect_hashing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--use-mod-perfect-hashing")
+
+	# --use-and-perfect-hashing
+	var opt_use_and_perfect_hashing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--use-and-perfect-hashing")
+
 	redef init
 	do
 		super
@@ -39,6 +45,8 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_inline_coloring_numbers)
 		self.option_context.add_option(self.opt_use_naive_coloring)
+		self.option_context.add_option(self.opt_use_mod_perfect_hashing)
+		self.option_context.add_option(self.opt_use_and_perfect_hashing)
 	end
 end
 
@@ -91,8 +99,8 @@ class SeparateCompiler
 	private var livetypes_tables: nullable Map[MClass, Array[nullable Object]]
 	private var livetypes_tables_sizes: nullable Map[MClass, Array[Int]]
 
-	protected var class_coloring: ClassColoring
-	protected var class_colors: Map[MClass, Int]
+	protected var class_coloring: ClassColoring protected writable
+	protected var class_colors: Map[MClass, Int] protected writable
 
 	protected var method_colors: Map[MMethod, Int]
 	protected var method_tables: Map[MClass, Array[nullable MMethodDef]]
@@ -124,11 +132,13 @@ class SeparateCompiler
 	redef fun compile_class_names do
 		# Build type names table
 		var type_array = new Array[nullable MType]
-		for t, i in typeids do
-			if i >= type_array.length then
-				type_array[i] = null
+		for t, id in typeids do
+			if id >= type_array.length then
+				for i in [type_array.length..id[ do
+					type_array[i] = null
+				end
 			end
-			type_array[i] = t
+			type_array[id] = t
 		end
 
 		var v = self.new_visitor
@@ -196,10 +206,11 @@ class SeparateCompiler
 		# classes coloration
 		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
 			self.class_coloring = new NaiveClassColoring(mainmodule)
+			self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
 		else
 			self.class_coloring = new ClassColoring(mainmodule)
+			self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
 		end
-		self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
 
 		# methods coloration
 		var method_coloring = new MethodColoring(self.class_coloring)
@@ -256,8 +267,16 @@ class SeparateCompiler
 		mtypes.add_all(self.undead_types)
 
 		# set type unique id
-		for mtype in mtypes do
-			self.typeids[mtype] = self.typeids.length
+		if modelbuilder.toolcontext.opt_use_mod_perfect_hashing.value or modelbuilder.toolcontext.opt_use_and_perfect_hashing.value then
+			var sorted_mtypes = new OrderedSet[MType].from(mtypes)
+			sorted_mtypes.linearize(new ReverseTypeSorter(self.mainmodule))
+			for mtype in sorted_mtypes do
+				self.typeids[mtype] = self.typeids.length + 1
+			end
+		else
+			for mtype in mtypes do
+				self.typeids[mtype] = self.typeids.length
+			end
 		end
 
 		# fts coloration for non-erased compilation
@@ -273,14 +292,36 @@ class SeparateCompiler
 		self.livetypes_tables_sizes = entries_coloring.livetypes_tables_sizes
 
 		# colorize types
-		var type_coloring
 		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
-			type_coloring = new NaiveTypeColoring(self.mainmodule, mtypes)
+			var type_coloring = new NaiveTypeColoring(self.mainmodule, mtypes)
+			self.type_colors = type_coloring.colorize(mtypes)
+			self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
+		else if modelbuilder.toolcontext.opt_use_mod_perfect_hashing.value then
+			var type_coloring = new TypeModPerfectHashing(self.mainmodule, mtypes)
+			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
+			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
+
+			self.header.add_decl("int HASH(int, int);")
+			var v = new_visitor
+			v.add_decl("int HASH(int mask, int id) \{")
+			v.add_decl("return mask % id;")
+			v.add_decl("\}")
+		else if modelbuilder.toolcontext.opt_use_and_perfect_hashing.value then
+			var type_coloring = new TypeAndPerfectHashing(self.mainmodule, mtypes)
+			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
+			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
+
+			self.header.add_decl("int HASH(int, int);")
+			var v = new_visitor
+			v.add_decl("int HASH(int mask, int id) \{")
+			v.add_decl("return mask & id;")
+			v.add_decl("\}")
 		else
-			type_coloring = new TypeColoring(self.mainmodule, mtypes)
+			var type_coloring = new TypeColoring(self.mainmodule, mtypes)
+			self.type_colors = type_coloring.colorize(mtypes)
+			self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
 		end
-		self.type_colors = type_coloring.colorize(mtypes)
-		self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
+
 
 		# for the class_name and output_class_name methods
 		self.compile_class_names
@@ -1070,6 +1111,7 @@ class SeparateCompilerVisitor
 
 	redef fun type_test(value, mtype)
 	do
+		self.add("/* {value.inspect} isa {mtype} */")
 		var compiler = self.compiler.as(SeparateCompiler)
 
 		var recv = self.frame.arguments.first
@@ -1124,6 +1166,9 @@ class SeparateCompilerVisitor
 		self.add("if({boxed} == NULL) \{")
 		self.add("{res} = {is_nullable};")
 		self.add("\} else \{")
+		if compiler.modelbuilder.toolcontext.opt_use_mod_perfect_hashing.value or compiler.modelbuilder.toolcontext.opt_use_and_perfect_hashing.value then
+			self.add("{cltype} = HASH({boxed}->type->color, {idtype});")
+		end
 		self.add("if({cltype} >= {boxed}->type->table_size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")

@@ -62,12 +62,46 @@ class SeparateErasureCompiler
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
 		super
 
-		# classes coloration
-		self.class_tables = class_coloring.build_type_tables(mmbuilder.model.mclasses, class_colors)
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all(mmbuilder.model.mclasses)
 
-		# set type unique id
-		for mclass in class_colors.keys do
-			self.class_ids[mclass] = self.class_ids.length
+		# classes coloration
+		if modelbuilder.toolcontext.opt_use_mod_perfect_hashing.value then
+			# set type unique id
+			for mclass in mclasses do
+				self.class_ids[mclass] = self.class_ids.length + 1
+			end
+
+			var class_coloring = new ClassModPerfectHashing(mainmodule)
+			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
+			self.class_tables = class_coloring.hash_type_tables(mclasses, class_ids, class_colors)
+			self.class_coloring = class_coloring
+			self.header.add_decl("int HASH(int, int);")
+			var v = new_visitor
+			v.add_decl("int HASH(int mask, int id) \{")
+			v.add_decl("return mask % id;")
+			v.add_decl("\}")
+		else if modelbuilder.toolcontext.opt_use_and_perfect_hashing.value then
+			# set type unique id
+			for mclass in mclasses do
+				self.class_ids[mclass] = self.class_ids.length + 1
+			end
+
+			var class_coloring = new ClassAndPerfectHashing(mainmodule)
+			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
+			self.class_tables = class_coloring.hash_type_tables(mclasses, class_ids, class_colors)
+			self.class_coloring = class_coloring
+			self.header.add_decl("int HASH(int, int);")
+			var v = new_visitor
+			v.add_decl("int HASH(int mask, int id) \{")
+			v.add_decl("return mask & id;")
+			v.add_decl("\}")
+		else
+			# set type unique id
+			for mclass in mclasses do
+				self.class_ids[mclass] = self.class_ids.length + 1
+			end
+			self.class_tables = class_coloring.build_type_tables(modelbuilder.model.mclasses, class_colors)
 		end
 
 		# for the class_name and output_class_name methods
@@ -88,11 +122,13 @@ class SeparateErasureCompiler
 	redef fun compile_class_names do
 		# Build type names table
 		var type_array = new Array[nullable MClass]
-		for t, i in class_ids do
-			if i >= type_array.length then
-				type_array[i] = null
+		for t, id in class_ids do
+			if id >= type_array.length then
+				for i in [type_array.length..id[ do
+					type_array[i] = null
+				end
 			end
-			type_array[i] = t
+			type_array[id] = t
 		end
 
 		var v = self.new_visitor
@@ -367,6 +403,9 @@ class SeparateErasureCompilerVisitor
 		self.add("if({is_null}) \{")
 		self.add("{res} = {is_nullable};")
 		self.add("\} else \{")
+		if compiler.modelbuilder.toolcontext.opt_use_mod_perfect_hashing.value or compiler.modelbuilder.toolcontext.opt_use_and_perfect_hashing.value then
+			self.add("{cltype} = HASH({class_ptr}color, {idtype});")
+		end
 		self.add("if({cltype} >= {class_ptr}type_table->size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")
