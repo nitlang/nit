@@ -1189,7 +1189,7 @@ class SeparateCompilerVisitor
 
 		var res = self.new_var(bool_type)
 
-		var type_struct = self.get_name("type")
+		var type_struct = self.get_name("type_struct")
 		self.add_decl("struct type* {type_struct};")
 		var cltype = self.get_name("cltype")
 		self.add_decl("int {cltype};")
