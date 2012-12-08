@@ -1134,11 +1134,12 @@ class SeparateCompilerVisitor
 
 		var res = self.new_var(bool_type)
 
+		var type_struct = self.get_name("type")
+		self.add_decl("struct type* {type_struct};")
 		var cltype = self.get_name("cltype")
 		self.add_decl("int {cltype};")
 		var idtype = self.get_name("idtype")
 		self.add_decl("int {idtype};")
-
 		var is_nullable = self.get_name("is_nullable")
 		self.add_decl("short int {is_nullable};")
 
@@ -1150,15 +1151,17 @@ class SeparateCompilerVisitor
 		end
 
 		if ntype isa MParameterType then
-			self.add("{cltype} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}]->color;")
-			self.add("{idtype} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}]->id;")
-			self.add("{is_nullable} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}]->is_nullable;")
+			self.add("{type_struct} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}];")
+			self.add("{cltype} = {type_struct}->color;")
+			self.add("{idtype} = {type_struct}->id;")
+			self.add("{is_nullable} = {type_struct}->is_nullable;")
 		else if ntype isa MGenericType and ntype.need_anchor then
 			var buff = new Buffer
 			retrieve_anchored_livetype(ntype, buff)
-			self.add("{cltype} = livetypes_{ntype.mclass.c_name}{buff.to_s}->color;")
-			self.add("{idtype} = livetypes_{ntype.mclass.c_name}{buff.to_s}->id;")
-			self.add("{is_nullable} = livetypes_{ntype.mclass.c_name}{buff.to_s}->is_nullable;")
+			self.add("{type_struct} = livetypes_{ntype.mclass.c_name}{buff.to_s};")
+			self.add("{cltype} = {type_struct}->color;")
+			self.add("{idtype} = {type_struct}->id;")
+			self.add("{is_nullable} = {type_struct}->is_nullable;")
 		else if ntype isa MClassType then
 			compiler.undead_types.add(mtype)
 			self.add("{cltype} = type_{mtype.c_name}.color;")
@@ -1166,9 +1169,10 @@ class SeparateCompilerVisitor
 			self.add("{is_nullable} = type_{mtype.c_name}.is_nullable;")
 		else if ntype isa MVirtualType then
 			var vtcolor = ntype.mproperty.const_color
-			self.add("{cltype} = {recv_boxed}->type->vts_table->vts[{vtcolor}]->color;")
-			self.add("{idtype} = {recv_boxed}->type->vts_table->vts[{vtcolor}]->id;")
-			self.add("{is_nullable} = {recv_boxed}->type->vts_table->vts[{vtcolor}]->is_nullable;")
+			self.add("{type_struct} = {recv_boxed}->type->vts_table->vts[{vtcolor}];")
+			self.add("{cltype} = {type_struct}->color;")
+			self.add("{idtype} = {type_struct}->id;")
+			self.add("{is_nullable} = {type_struct}->is_nullable;")
 		else
 			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{boxed.inspect}\"); exit(1);")
 		end

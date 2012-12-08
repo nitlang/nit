@@ -395,10 +395,13 @@ class SeparateErasureCompilerVisitor
 		else if mtype isa MVirtualType then
 			var recv = self.frame.arguments.first
 			var recv_boxed = self.autobox(recv, self.object_type)
-			self.add("{cltype} = {recv_boxed}->class->vts_table->vts[{mtype.mproperty.const_color}].class->color;")
-			self.add("{idtype} = {recv_boxed}->class->vts_table->vts[{mtype.mproperty.const_color}].class->id;")
+			var entry = self.get_name("entry")
+			self.add("struct vts_entry {entry};")
+			self.add("{entry} = {recv_boxed}->class->vts_table->vts[{mtype.mproperty.const_color}];")
+			self.add("{cltype} = {entry}.class->color;")
+			self.add("{idtype} = {entry}.class->id;")
 			if maybe_null == 0 then
-				self.add("{is_nullable} = {recv_boxed}->class->vts_table->vts[{mtype.mproperty.const_color}].is_nullable;")
+				self.add("{is_nullable} = {entry}.is_nullable;")
 			end
 		else
 			self.debug("type_test({value.inspect}, {mtype})")
