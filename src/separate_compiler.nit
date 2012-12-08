@@ -1275,25 +1275,36 @@ class SeparateCompilerVisitor
 
 	redef fun array_instance(array, elttype)
 	do
-		var compiler = self.compiler.as(SeparateCompiler)
 		var nclass = self.get_class("NativeArray")
-		elttype = self.anchor(elttype)
-		var arraytype = self.get_class("Array").get_mtype([elttype])
+		var arrayclass = self.get_class("Array")
+		var arraytype = arrayclass.get_mtype([elttype])
 		var res = self.init_instance(arraytype)
 		self.add("\{ /* {res} = array_instance Array[{elttype}] */")
-		var nat = self.new_var(self.get_class("NativeArray").get_mtype([elttype]))
-		nat.is_exact = true
-		compiler.undead_types.add(nat.mtype.as(MClassType))
-		self.add("{nat} = NEW_{nclass.c_name}({array.length}, (struct type *) &type_{nat.mtype.c_name});")
+		var length = self.int_instance(array.length)
+		var nat = native_array_instance(elttype, length)
 		for i in [0..array.length[ do
 			var r = self.autobox(array[i], self.object_type)
 			self.add("((struct instance_{nclass.c_name}*){nat})->values[{i}] = (val*) {r};")
 		end
-		var length = self.int_instance(array.length)
-		self.send(self.get_property("with_native", arraytype), [res, nat, length])
+		self.send(self.get_property("with_native", arrayclass.intro.bound_mtype), [res, nat, length])
 		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
+	end
+
+	fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
+	do
+		var mtype = self.get_class("NativeArray").get_mtype([elttype])
+		assert mtype isa MGenericType
+		var compiler = self.compiler.as(SeparateCompiler)
+		if mtype.need_anchor then
+			var buff = new Buffer
+			retrieve_anchored_livetype(mtype, buff)
+			mtype = self.anchor(mtype).as(MClassType)
+			return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) livetypes_{mtype.mclass.c_name}{buff.to_s})", mtype)
+		end
+		compiler.undead_types.add(mtype)
+		return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) &type_{mtype.c_name})", mtype)
 	end
 
 	redef fun native_array_def(pname, ret_type, arguments)
