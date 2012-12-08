@@ -30,13 +30,13 @@ redef class ToolContext
 	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
 
 	# --use-naive-coloring
-	var opt_use_naive_coloring: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--use-naive-coloring")
+	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
 
 	# --use-mod-perfect-hashing
-	var opt_use_mod_perfect_hashing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--use-mod-perfect-hashing")
+	var opt_phmod_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--phmod-typing")
 
 	# --use-and-perfect-hashing
-	var opt_use_and_perfect_hashing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--use-and-perfect-hashing")
+	var opt_phand_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--phand-typing")
 
 	redef init
 	do
@@ -44,9 +44,9 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_inline_coloring_numbers)
-		self.option_context.add_option(self.opt_use_naive_coloring)
-		self.option_context.add_option(self.opt_use_mod_perfect_hashing)
-		self.option_context.add_option(self.opt_use_and_perfect_hashing)
+		self.option_context.add_option(self.opt_bm_typing)
+		self.option_context.add_option(self.opt_phmod_typing)
+		self.option_context.add_option(self.opt_phand_typing)
 	end
 end
 
@@ -218,14 +218,14 @@ class SeparateCompiler
 		self.attr_tables = attribute_coloring.build_property_tables
 		self.compile_color_consts(self.attr_colors)
 
-		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+		if modelbuilder.toolcontext.opt_bm_typing.value then
 			self.class_coloring = new NaiveClassColoring(mainmodule)
 			self.class_coloring.colorize(modelbuilder.model.mclasses)
 		end
 
 		# vt coloration
 		var vt_coloring
-		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+		if modelbuilder.toolcontext.opt_bm_typing.value then
 			vt_coloring = new NaiveVTColoring(self.class_coloring)
 		else
 			vt_coloring = new VTColoring(self.class_coloring)
@@ -272,7 +272,7 @@ class SeparateCompiler
 		mtypes.add_all(self.undead_types)
 
 		# set type unique id
-		if modelbuilder.toolcontext.opt_use_mod_perfect_hashing.value or modelbuilder.toolcontext.opt_use_and_perfect_hashing.value then
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
 			var sorted_mtypes = new OrderedSet[MType].from(mtypes)
 			sorted_mtypes.linearize(new ReverseTypeSorter(self.mainmodule))
 			for mtype in sorted_mtypes do
@@ -286,7 +286,7 @@ class SeparateCompiler
 
 		# fts coloration for non-erased compilation
 		var ft_coloring
-		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+		if modelbuilder.toolcontext.opt_bm_typing.value then
 			ft_coloring = new NaiveFTColoring(self.class_coloring)
 		else
 			ft_coloring = new FTColoring(self.class_coloring)
@@ -297,7 +297,7 @@ class SeparateCompiler
 
 		# colorize live entries
 		var entries_coloring
-		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+		if modelbuilder.toolcontext.opt_bm_typing.value then
 			entries_coloring = new NaiveLiveEntryColoring
 		else
 			entries_coloring = new LiveEntryColoring
@@ -307,11 +307,11 @@ class SeparateCompiler
 		self.livetypes_tables_sizes = entries_coloring.livetypes_tables_sizes
 
 		# colorize types
-		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+		if modelbuilder.toolcontext.opt_bm_typing.value then
 			var type_coloring = new NaiveTypeColoring(self.mainmodule, mtypes)
 			self.type_colors = type_coloring.colorize(mtypes)
 			self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
-		else if modelbuilder.toolcontext.opt_use_mod_perfect_hashing.value then
+		else if modelbuilder.toolcontext.opt_phmod_typing.value then
 			var type_coloring = new TypeModPerfectHashing(self.mainmodule, mtypes)
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
 			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
@@ -321,7 +321,7 @@ class SeparateCompiler
 			v.add_decl("int HASH(int mask, int id) \{")
 			v.add_decl("return mask % id;")
 			v.add_decl("\}")
-		else if modelbuilder.toolcontext.opt_use_and_perfect_hashing.value then
+		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			var type_coloring = new TypeAndPerfectHashing(self.mainmodule, mtypes)
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
 			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
@@ -1181,7 +1181,7 @@ class SeparateCompilerVisitor
 		self.add("if({boxed} == NULL) \{")
 		self.add("{res} = {is_nullable};")
 		self.add("\} else \{")
-		if compiler.modelbuilder.toolcontext.opt_use_mod_perfect_hashing.value or compiler.modelbuilder.toolcontext.opt_use_and_perfect_hashing.value then
+		if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
 			self.add("{cltype} = HASH({boxed}->type->color, {idtype});")
 		end
 		self.add("if({cltype} >= {boxed}->type->table_size) \{")

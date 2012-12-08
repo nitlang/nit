@@ -65,7 +65,7 @@ class SeparateErasureCompiler
 		mclasses.add_all(mmbuilder.model.mclasses)
 
 		# classes coloration
-		if modelbuilder.toolcontext.opt_use_mod_perfect_hashing.value then
+		if modelbuilder.toolcontext.opt_phmod_typing.value then
 			# set type unique id
 			for mclass in mclasses do
 				self.class_ids[mclass] = self.class_ids.length + 1
@@ -80,7 +80,7 @@ class SeparateErasureCompiler
 			v.add_decl("int HASH(int mask, int id) \{")
 			v.add_decl("return mask % id;")
 			v.add_decl("\}")
-		else if modelbuilder.toolcontext.opt_use_and_perfect_hashing.value then
+		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			# set type unique id
 			for mclass in mclasses do
 				self.class_ids[mclass] = self.class_ids.length + 1
@@ -97,7 +97,7 @@ class SeparateErasureCompiler
 			v.add_decl("\}")
 		else
 			var class_coloring
-			if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+			if modelbuilder.toolcontext.opt_bm_typing.value then
 				class_coloring = new NaiveClassColoring(mainmodule)
 			else
 				class_coloring = new ClassColoring(mainmodule)
@@ -409,7 +409,7 @@ class SeparateErasureCompilerVisitor
 		self.add("if({is_null}) \{")
 		self.add("{res} = {is_nullable};")
 		self.add("\} else \{")
-		if compiler.modelbuilder.toolcontext.opt_use_mod_perfect_hashing.value or compiler.modelbuilder.toolcontext.opt_use_and_perfect_hashing.value then
+		if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
 			self.add("{cltype} = HASH({class_ptr}color, {idtype});")
 		end
 		self.add("if({cltype} >= {class_ptr}type_table->size) \{")
