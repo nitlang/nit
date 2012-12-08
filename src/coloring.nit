@@ -793,6 +793,116 @@ class NaiveVTColoring
 	end
 end
 
+abstract class VTPerfectHashing
+	super VTColoring
+
+	private var masks: Map[MClass, Int] = new HashMap[MClass, Int]
+
+	init(class_coloring: ClassColoring) do end
+
+	redef fun colorize: Map[MPROP, Int] do
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all(self.class_coloring.core)
+		mclasses.add_all(self.class_coloring.crown)
+		for mclass in mclasses do
+			var vts = self.properties(mclass)
+			for vt in vts do
+				if coloration_result.has_key(vt) then continue
+				coloration_result[vt] = coloration_result.length + 1
+			end
+		end
+		return self.coloration_result
+	end
+
+	fun compute_masks: Map[MClass, Int] do
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all(self.class_coloring.core)
+		mclasses.add_all(self.class_coloring.crown)
+		for mclass in mclasses do
+			self.masks[mclass] = compute_mask(self.properties(mclass))
+		end
+		return self.masks
+	end
+
+	private fun compute_mask(vts: Set[MPROP]): Int do
+		var mask = 0
+		loop
+			var used = new List[Int]
+			for vt in vts do
+				var res = op(mask, self.coloration_result[vt])
+				if used.has(res) then
+					break
+				else
+					used.add(res)
+				end
+			end
+			if used.length == vts.length then break
+			mask += 1
+		end
+		return mask
+	end
+
+	redef fun build_property_tables do
+		var tables = new HashMap[MClass, Array[nullable MPROPDEF]]
+
+		for mclass in self.class_coloring.coloration_result.keys do
+			var table = new Array[nullable MPROPDEF]
+			# first, fill table from parents by reverse linearization order
+			var parents = new OrderedSet[MClass]
+			parents.add_all(self.class_coloring.super_elements(mclass))
+			self.class_coloring.reverse_sorter.sort(parents)
+			for parent in parents do
+				for mproperty in self.properties(parent) do
+					var color = phash(self.coloration_result[mproperty], masks[mclass])
+					if table.length <= color then
+						for i in [table.length .. color[ do
+							table[i] = null
+						end
+					end
+					for mpropdef in mproperty.mpropdefs do
+						if mpropdef.mclassdef.mclass == parent then
+							table[color] = mpropdef
+						end
+					end
+				end
+			end
+
+			# then override with local properties
+			for mproperty in self.properties(mclass) do
+				var color = phash(self.coloration_result[mproperty], masks[mclass])
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				for mpropdef in mproperty.mpropdefs do
+					if mpropdef.mclassdef.mclass == mclass then
+						table[color] = mpropdef
+					end
+				end
+			end
+			tables[mclass] = table
+		end
+		return tables
+	end
+
+	private fun op(mask: Int, id:Int): Int is abstract
+	private fun phash(id: Int, mask: Int): Int do return op(mask, id)
+
+end
+
+class VTModPerfectHashing
+	super VTPerfectHashing
+	init(class_coloring: ClassColoring) do end
+	redef fun op(mask, id) do return mask % id
+end
+
+class VTAndPerfectHashing
+	super VTPerfectHashing
+	init(class_coloring: ClassColoring) do end
+	redef fun op(mask, id) do return mask.bin_and(id)
+end
+
 # MParameterType coloring
 class FTColoring
 	private var class_coloring: ClassColoring

@@ -109,6 +109,7 @@ class SeparateCompiler
 
 	protected var vt_colors: Map[MVirtualTypeProp, Int]
 	protected var vt_tables: Map[MClass, Array[nullable MVirtualTypeDef]]
+	protected var vt_masks: nullable Map[MClass, Int]
 
 	private var ft_colors: nullable Map[MParameterType, Int]
 	private var ft_tables: nullable Map[MClass, Array[nullable MParameterType]]
@@ -124,7 +125,14 @@ class SeparateCompiler
 		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 		self.header.add_decl("struct type \{ int id; int color; int livecolor; short int is_nullable; struct vts_table *vts_table; struct fts_table *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
 		self.header.add_decl("struct fts_table \{ struct type *fts[1]; \}; /* fts list of a C type representation. */")
-		self.header.add_decl("struct vts_table \{ struct type *vts[1]; \}; /* vts list of a C type representation. */")
+
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			self.header.add_decl("struct vts_table \{ int mask; struct type *vts[1]; \}; /* vts list of a C type representation. */")
+		else
+			self.header.add_decl("struct vts_table \{ struct type *vts[1]; \}; /* vts list of a C type representation. */")
+		end
+
+
 		self.header.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 	end
 
@@ -224,14 +232,25 @@ class SeparateCompiler
 		end
 
 		# vt coloration
-		var vt_coloring
 		if modelbuilder.toolcontext.opt_bm_typing.value then
-			vt_coloring = new NaiveVTColoring(self.class_coloring)
+			var vt_coloring = new NaiveVTColoring(self.class_coloring)
+			self.vt_colors = vt_coloring.colorize
+			self.vt_tables = vt_coloring.build_property_tables
+		else if modelbuilder.toolcontext.opt_phmod_typing.value then
+			var vt_coloring = new VTModPerfectHashing(self.class_coloring)
+			self.vt_colors = vt_coloring.colorize
+			self.vt_masks = vt_coloring.compute_masks
+			self.vt_tables = vt_coloring.build_property_tables
+		else if modelbuilder.toolcontext.opt_phand_typing.value then
+			var vt_coloring = new VTAndPerfectHashing(self.class_coloring)
+			self.vt_colors = vt_coloring.colorize
+			self.vt_masks = vt_coloring.compute_masks
+			self.vt_tables = vt_coloring.build_property_tables
 		else
-			vt_coloring = new VTColoring(self.class_coloring)
+			var vt_coloring = new VTColoring(self.class_coloring)
+			self.vt_colors = vt_coloring.colorize
+			self.vt_tables = vt_coloring.build_property_tables
 		end
-		self.vt_colors = vt_coloring.colorize
-		self.vt_tables = vt_coloring.build_property_tables
 		self.compile_color_consts(self.vt_colors)
 	end
 
@@ -501,12 +520,18 @@ class SeparateCompiler
 		# extern const struct vts_table_X vts_table_X
 		self.header.add_decl("extern const struct vts_table_{mtype.c_name} vts_table_{mtype.c_name};")
 		self.header.add_decl("struct vts_table_{mtype.c_name} \{")
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			self.header.add_decl("int mask;")
+		end
 		self.header.add_decl("struct type *vts[{self.vt_tables[mclass_type.mclass].length}];")
 		self.header.add_decl("\};")
 
 		# const struct vts_table_X vts_table_X
 		var v = new_visitor
 		v.add_decl("const struct vts_table_{mtype.c_name} vts_table_{mtype.c_name} = \{")
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			v.add_decl("{vt_masks[mclass_type.mclass]},")
+		end
 		v.add_decl("\{")
 
 		for vt in self.vt_tables[mclass_type.mclass] do
@@ -1090,7 +1115,11 @@ class SeparateCompilerVisitor
 			if ntype isa MParameterType then
 				buffer.append("[self->type->fts_table->fts[{ntype.const_color}]->livecolor]")
 			else if ntype isa MVirtualType then
-				buffer.append("[self->type->vts_table->vts[{ntype.mproperty.const_color}]->livecolor]")
+				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+					buffer.append("[self->type->vts_table->vts[HASH(self->type->vts_table->mask, {ntype.mproperty.const_color})]->livecolor]")
+				else
+					buffer.append("[self->type->vts_table->vts[{ntype.mproperty.const_color}]->livecolor]")
+				end
 			else if ntype isa MGenericType and ntype.need_anchor then
 				var bbuff = new Buffer
 				retrieve_anchored_livetype(ntype, bbuff)
@@ -1169,7 +1198,11 @@ class SeparateCompilerVisitor
 			self.add("{is_nullable} = type_{mtype.c_name}.is_nullable;")
 		else if ntype isa MVirtualType then
 			var vtcolor = ntype.mproperty.const_color
-			self.add("{type_struct} = {recv_boxed}->type->vts_table->vts[{vtcolor}];")
+			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+				self.add("{type_struct} = {recv_boxed}->type->vts_table->vts[HASH({recv_boxed}->type->vts_table->mask, {vtcolor})];")
+			else
+				self.add("{type_struct} = {recv_boxed}->type->vts_table->vts[{vtcolor}];")
+			end
 			self.add("{cltype} = {type_struct}->color;")
 			self.add("{idtype} = {type_struct}->id;")
 			self.add("{is_nullable} = {type_struct}->is_nullable;")
