@@ -774,6 +774,25 @@ class VTColoring
 	init(class_coloring: ClassColoring) do end
 end
 
+class NaiveVTColoring
+	super VTColoring
+
+	init(class_coloring: ClassColoring) do end
+
+	redef fun colorize: Map[MPROP, Int] do
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all(self.class_coloring.core)
+		mclasses.add_all(self.class_coloring.crown)
+		var min_color = 0
+
+		for mclass in mclasses do
+			min_color = max_color(min_color, mclasses)
+			colorize_elements(self.properties(mclass), min_color)
+		end
+		return self.coloration_result
+	end
+end
+
 # MParameterType coloring
 class FTColoring
 	private var class_coloring: ClassColoring
@@ -893,6 +912,25 @@ class FTColoring
 			tables[mclass] = table
 		end
 		return tables
+	end
+end
+
+class NaiveFTColoring
+	super FTColoring
+
+	init(class_coloring: ClassColoring) do end
+
+	redef fun colorize: Map[MParameterType, Int] do
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all(self.class_coloring.core)
+		mclasses.add_all(self.class_coloring.crown)
+		var min_color = 0
+
+		for mclass in mclasses do
+			min_color = max_color(min_color, mclasses)
+			colorize_elements(self.fts(mclass), min_color)
+		end
+		return self.coloration_result
 	end
 end
 
@@ -1049,6 +1087,21 @@ class LiveEntryColoring
 	end
 	private fun conflicts_graph: Map[MType, Set[MType]] do return conflicts_graph_cache.as(not null)
 end
+
+class NaiveLiveEntryColoring
+	super LiveEntryColoring
+
+	init do end
+
+	redef fun colorize_elements(elements: Collection[MType]) do
+		var color = 0
+		for element in elements do
+			coloration_result[element] = color
+			color += 1
+		end
+	end
+end
+
 
 # Utils
 

@@ -222,8 +222,14 @@ class SeparateCompiler
 			self.class_coloring = new NaiveClassColoring(mainmodule)
 			self.class_coloring.colorize(modelbuilder.model.mclasses)
 		end
+
 		# vt coloration
-		var vt_coloring = new VTColoring(class_coloring)
+		var vt_coloring
+		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+			vt_coloring = new NaiveVTColoring(self.class_coloring)
+		else
+			vt_coloring = new VTColoring(self.class_coloring)
+		end
 		self.vt_colors = vt_coloring.colorize
 		self.vt_tables = vt_coloring.build_property_tables
 		self.compile_color_consts(self.vt_colors)
@@ -254,6 +260,7 @@ class SeparateCompiler
 			else
 				mclass_type = mtype.as(MClassType)
 			end
+
 			# add virtual types to mtypes
 			for vt in self.vt_tables[mclass_type.mclass] do
 				if vt != null then
@@ -278,13 +285,23 @@ class SeparateCompiler
 		end
 
 		# fts coloration for non-erased compilation
-		var ft_coloring = new FTColoring(class_coloring)
+		var ft_coloring
+		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+			ft_coloring = new NaiveFTColoring(self.class_coloring)
+		else
+			ft_coloring = new FTColoring(self.class_coloring)
+		end
 		self.ft_colors = ft_coloring.colorize
 		self.ft_tables = ft_coloring.build_ft_tables
 		self.compile_color_consts(self.ft_colors.as(not null))
 
 		# colorize live entries
-		var entries_coloring = new LiveEntryColoring
+		var entries_coloring
+		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
+			entries_coloring = new NaiveLiveEntryColoring
+		else
+			entries_coloring = new LiveEntryColoring
+		end
 		self.livetypes_colors = entries_coloring.colorize(mtypes)
 		self.livetypes_tables = entries_coloring.build_livetype_tables(mtypes)
 		self.livetypes_tables_sizes = entries_coloring.livetypes_tables_sizes
