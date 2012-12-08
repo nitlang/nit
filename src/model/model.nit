@@ -506,43 +506,72 @@ abstract class MType
 			assert not sub.need_anchor
 			assert not sup.need_anchor
 		end
-		# First, resolve the types
+
+		# First, resolve the formal types to a common version in the receiver
+		# The trick here is that fixed formal type will be associed to the bound
+		# And unfixed formal types will be associed to a canonical formal type.
 		if sub isa MParameterType or sub isa MVirtualType then
 			assert anchor != null
-			sub = sub.resolve_for(anchor, anchor, mmodule, false)
+			sub = sub.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, false)
 		end
 		if sup isa MParameterType or sup isa MVirtualType then
 			assert anchor != null
-			sup = sup.resolve_for(anchor, anchor, mmodule, false)
+			sup = sup.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, false)
 		end
 
-		if sup isa MParameterType or sup isa MVirtualType or sup isa MNullType then
+		# Does `sup` accept null or not?
+		# Discard the nullable marker if it exists
+		var sup_accept_null = false
+		if sup isa MNullableType then
+			sup_accept_null = true
+			sup = sup.mtype
+		else if sup isa MNullType then
+			sup_accept_null = true
+		end
+
+		# Can `sub` provide null or not?
+		# Thus we can match with `sup_accept_null`
+		# Also discard the nullable marker if it exists
+		if sub isa MNullableType then
+			if not sup_accept_null then return false
+			sub = sub.mtype
+		else if sub isa MNullType then
+			return sup_accept_null
+		end
+		# Now the case of direct null and nullable is over.
+
+		# A unfixed formal type can only accept itself
+		if sup isa MParameterType or sup isa MVirtualType then
 			return sub == sup
 		end
+
+		# If `sub` is a formal type, then it is accepted if its bound is accepted
 		if sub isa MParameterType or sub isa MVirtualType then
 			assert anchor != null
 			sub = sub.anchor_to(mmodule, anchor)
-		end
-		if sup isa MNullableType then
-			if sub isa MNullType then
-				return true
-			else if sub isa MNullableType then
-				return sub.mtype.is_subtype(mmodule, anchor, sup.mtype)
-			else if sub isa MClassType then
-				return sub.is_subtype(mmodule, anchor, sup.mtype)
-			else
-				abort
+
+			# Manage the second layer of null/nullable
+			if sub isa MNullableType then
+				if not sup_accept_null then return false
+				sub = sub.mtype
+			else if sub isa MNullType then
+				return sup_accept_null
 			end
 		end
 
-		assert sup isa MClassType # It is the only remaining type
-		if sub isa MNullableType or sub isa MNullType then
+		assert sub isa MClassType # It is the only remaining type
+
+		if sup isa MNullType then
+			# `sup` accepts only null
 			return false
 		end
 
+		assert sup isa MClassType # It is the only remaining type
+
+		# Now both are MClassType, we need to dig
+
 		if sub == sup then return true
 
-		assert sub isa MClassType # It is the only remaining type
 		if anchor == null then anchor = sub # UGLY: any anchor will work
 		var resolved_sub = sub.anchor_to(mmodule, anchor)
 		var res = resolved_sub.collect_mclasses(mmodule).has(sup.mclass)

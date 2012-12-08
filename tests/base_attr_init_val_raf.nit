@@ -11,28 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import end
-interface Object end
-enum Bool end
-class A
-	type T: A
-	var t: T = self
-	var nt: nullable T = self
 
-	type U: nullable A
-	var u: U = self
-	var nu: nullable U = self
-	fun test
-	do
-		__debug__ type T : self.t
-		__debug__ type nullable T : self.nt
-		__debug__ type U : self.u
-		__debug__ type nullable U : self.nu
-	end
+import base_attr_init_val1
+
+redef class A
+	var j: Int = 2 #alt1# var j: Int #alt2# var j: Int = i
 end
 
+super
+
 var a = new A
-__debug__ type A : a.t
-__debug__ type nullable A : a.nt
-__debug__ type nullable A : a.u
-__debug__ type nullable A : a.nu
+a.j.output

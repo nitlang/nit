@@ -47,6 +47,9 @@ redef class ToolContext
 	# --no-check-assert
 	var opt_no_check_assert: OptionBool = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
 
+	# --no-check-autocast
+	var opt_no_check_autocast: OptionBool = new OptionBool("Disable implicit casts on unsafe expression usage (dangerous)", "--no-check-autocast")
+
 	# --no-check-other
 	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
 
@@ -54,7 +57,7 @@ redef class ToolContext
 	do
 		super
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_hardening)
-		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_other)
+		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 	end
 end
 
@@ -86,8 +89,10 @@ redef class ModelBuilder
 			end
 		end
 
-		# Compile until all runtime_functions are visited
+		# The main function of the C
+		compiler.compile_main_function
 
+		# Compile until all runtime_functions are visited
 		while not compiler.todos.is_empty do
 			var m = compiler.todos.shift
 			self.toolcontext.info("Compile {m} ({compiler.seen.length-compiler.todos.length}/{compiler.seen.length})", 3)
@@ -239,9 +244,6 @@ class GlobalCompiler
 
 		# Header declarations
 		self.compile_header
-
-		# The main function of the C
-		self.compile_main_function
 	end
 
 	protected fun compile_header do
@@ -938,6 +940,13 @@ class GlobalCompilerVisitor
 		if mtype != null then
 			mtype = self.anchor(mtype)
 			res = self.autobox(res, mtype)
+		end
+		var implicit_cast_to = nexpr.implicit_cast_to
+		if implicit_cast_to != null and not self.compiler.modelbuilder.toolcontext.opt_no_check_autocast.value then
+			var castres = self.type_test(res, implicit_cast_to)
+			self.add("if (!{castres}) \{")
+			self.add_abort("Cast failed")
+			self.add("\}")
 		end
 		self.current_node = old
 		return res

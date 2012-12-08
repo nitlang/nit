@@ -11,28 +11,31 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import end
-interface Object end
-enum Bool end
-class A
-	type T: A
-	var t: T = self
-	var nt: nullable T = self
 
-	type U: nullable A
-	var u: U = self
-	var nu: nullable U = self
-	fun test
+import kernel
+
+class G[E]
+	type V: nullable Object
+
+	fun foo
 	do
-		__debug__ type T : self.t
-		__debug__ type nullable T : self.nt
-		__debug__ type U : self.u
-		__debug__ type nullable U : self.nu
+		bar(1)
+		baz(2)
 	end
+
+	fun bar(x: E) do x.output
+	fun baz(x: V) do x.output
 end
 
-var a = new A
-__debug__ type A : a.t
-__debug__ type nullable A : a.nt
-__debug__ type nullable A : a.u
-__debug__ type nullable A : a.nu
+class H
+	super G[Char]
+end
+
+class I
+	super G[nullable Object]
+	redef type V: Char
+end
+
+(new G[Object]).foo
+#alt1#(new H).foo
+#alt2#(new I).foo

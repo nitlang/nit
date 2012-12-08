@@ -1293,9 +1293,9 @@ class LiveEntryColoring
 
 	private fun add_conflict(mtype: MType, otype: MType) do
 		if mtype == otype then return
-		if not self.conflicts_graph_cache.has_key(mtype) then  self.conflicts_graph_cache[mtype] = new HashSet[MClassType]
+		if not self.conflicts_graph_cache.has_key(mtype) then  self.conflicts_graph_cache[mtype] = new HashSet[MType]
 		self.conflicts_graph_cache[mtype].add(otype)
-		if not self.conflicts_graph_cache.has_key(otype) then  self.conflicts_graph_cache[otype] = new HashSet[MClassType]
+		if not self.conflicts_graph_cache.has_key(otype) then  self.conflicts_graph_cache[otype] = new HashSet[MType]
 		self.conflicts_graph_cache[otype].add(mtype)
 	end
 	private fun conflicts_graph: Map[MType, Set[MType]] do return conflicts_graph_cache.as(not null)

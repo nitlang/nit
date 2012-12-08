@@ -16,6 +16,7 @@
   --no-check-covariance       Disable type tests of covariant parameters (dangerous)
   --no-check-initialization   Disable isset tests at the end of constructors (dangerous)
   --no-check-assert           Disable the evaluation of explicit 'assert' and 'as' (dangerous)
+  --no-check-autocast         Disable implicit casts on unsafe expression usage (dangerous)
   --no-check-other            Disable implicit tests: unset attribute, null receiver (dangerous)
   --separate                  Use separate compilation
   --no-inline-intern          Do not inline call to intern methods
