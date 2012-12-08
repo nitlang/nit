@@ -57,6 +57,9 @@ redef class ModelBuilder
 			end
 		end
 
+		# The main function of the C
+		compiler.compile_main_function
+
 		# compile methods
 		for m in mainmodule.in_importation.greaters do
 			compiler.compile_module_to_c(m)

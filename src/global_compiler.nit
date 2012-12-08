@@ -89,8 +89,10 @@ redef class ModelBuilder
 			end
 		end
 
-		# Compile until all runtime_functions are visited
+		# The main function of the C
+		compiler.compile_main_function
 
+		# Compile until all runtime_functions are visited
 		while not compiler.todos.is_empty do
 			var m = compiler.todos.shift
 			self.toolcontext.info("Compile {m} ({compiler.seen.length-compiler.todos.length}/{compiler.seen.length})", 3)
@@ -242,9 +244,6 @@ class GlobalCompiler
 
 		# Header declarations
 		self.compile_header
-
-		# The main function of the C
-		self.compile_main_function
 	end
 
 	protected fun compile_header do
