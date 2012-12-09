@@ -1195,6 +1195,12 @@ class GlobalCompilerVisitor
 		end
 	end
 
+	fun compile_callsite(callsite: CallSite, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		var ret = self.send(callsite.mproperty, args)
+		return ret
+	end
+
 	# Generate a polymorphic send for the method `m' and the arguments `args'
 	fun send(m: MMethod, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
@@ -2360,7 +2366,7 @@ redef class AVarReassignExpr
 		var variable = self.variable.as(not null)
 		var vari = v.variable(variable)
 		var value = v.expr(self.n_value, variable.declared_type)
-		var res = v.send(reassign_property.mproperty, [vari, value])
+		var res = v.compile_callsite(self.reassign_callsite.as(not null), [vari, value])
 		assert res != null
 		v.assign(v.variable(variable), res)
 	end
@@ -2767,8 +2773,7 @@ redef class ASendExpr
 		for a in self.raw_arguments.as(not null) do
 			args.add(v.expr(a, null))
 		end
-		var mproperty = self.mproperty.as(not null)
-		return v.send(mproperty, args)
+		return v.compile_callsite(self.callsite.as(not null), args)
 	end
 end
 
@@ -2782,15 +2787,14 @@ redef class ASendReassignFormExpr
 		end
 		var value = v.expr(self.n_value, null)
 
-		var mproperty = self.mproperty.as(not null)
-		var left = v.send(mproperty, args)
+		var left = v.compile_callsite(self.callsite.as(not null), args)
 		assert left != null
 
-		var res = v.send(reassign_property.mproperty, [left, value])
+		var res = v.compile_callsite(self.reassign_callsite.as(not null), [left, value])
 		assert res != null
 
 		args.add(res)
-		v.send(self.write_mproperty.as(not null), args)
+		v.compile_callsite(self.write_callsite.as(not null), args)
 	end
 end
 
@@ -2834,7 +2838,6 @@ end
 redef class ANewExpr
 	redef fun expr(v)
 	do
-		var mproperty = self.mproperty.as(not null)
 		var mtype = self.mtype.as(MClassType)
 		var recv
 		var ctype = mtype.ctype
@@ -2850,7 +2853,7 @@ redef class ANewExpr
 		for a in self.n_args.n_exprs do
 			args.add(v.expr(a, null))
 		end
-		var res2 = v.send(mproperty, args)
+		var res2 = v.compile_callsite(self.callsite.as(not null), args)
 		if res2 != null then
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
@@ -2886,7 +2889,7 @@ redef class AAttrReassignExpr
 		var value = v.expr(self.n_value, null)
 		var mproperty = self.mproperty.as(not null)
 		var attr = v.read_attribute(mproperty, recv)
-		var res = v.send(reassign_property.mproperty, [attr, value])
+		var res = v.compile_callsite(self.reassign_callsite.as(not null), [attr, value])
 		assert res != null
 		v.write_attribute(mproperty, recv, res)
 	end
