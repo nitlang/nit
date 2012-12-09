@@ -24,4 +24,5 @@
   --bm-typing                 Colorize items incrementaly, used to simulate binary matrix typing
   --phmod-typing              Replace coloration by perfect hashing (with mod operator)
   --phand-typing              Replace coloration by perfect hashing (with and operator)
+  --generic-resolution-tree   Use tree representation for live generic types instead of flattened representation
   --erasure                   Erase generic types
