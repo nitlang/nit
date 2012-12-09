@@ -141,9 +141,9 @@ class SeparateCompiler
 		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 
 		if modelbuilder.toolcontext.opt_generic_tree.value then
-			self.header.add_decl("struct type \{ int id; int color; short int is_nullable; int livecolor; struct types *vts_table; struct types *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
+			self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; int livecolor; struct types *vts_table; struct types *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
 		else
-			self.header.add_decl("struct type \{ int id; int color; short int is_nullable; struct types *unanchored_table; struct types *vts_table; struct types *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
+			self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; struct types *unanchored_table; struct types *vts_table; struct types *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
 		end
 
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
@@ -157,28 +157,7 @@ class SeparateCompiler
 	end
 
 	redef fun compile_class_names do
-		# Build type names table
-		var type_array = new Array[nullable MType]
-		for t, id in typeids do
-			if id >= type_array.length then
-				for i in [type_array.length..id[ do
-					type_array[i] = null
-				end
-			end
-			type_array[id] = t
-		end
-
-		var v = self.new_visitor
-		self.header.add_decl("extern const char const * class_names[];")
-		v.add("const char const * class_names[] = \{")
-		for t in type_array do
-			if t == null then
-				v.add("NULL,")
-			else
-				v.add("\"{t}\",")
-			end
-		end
-		v.add("\};")
+		abort # There is no class name compilation since the name is stored in the type structure
 	end
 
 	fun compile_box_kinds
@@ -358,9 +337,6 @@ class SeparateCompiler
 		end
 
 
-		# for the class_name and output_class_name methods
-		self.compile_class_names
-
 		return mtypes
 	end
 
@@ -527,6 +503,7 @@ class SeparateCompiler
 		self.header.add_decl("extern const struct type_{c_name} type_{c_name};")
 		self.header.add_decl("struct type_{c_name} \{")
 		self.header.add_decl("int id;")
+		self.header.add_decl("const char *name;")
 		self.header.add_decl("int color;")
 		self.header.add_decl("short int is_nullable;")
 		if modelbuilder.toolcontext.opt_generic_tree.value then
@@ -543,6 +520,7 @@ class SeparateCompiler
 		# const struct type_X
 		v.add_decl("const struct type_{c_name} type_{c_name} = \{")
 		v.add_decl("{self.typeids[mtype]},")
+		v.add_decl("\"{mtype}\", /* class_name_string */")
 		v.add_decl("{self.type_colors[mtype]},")
 		if mtype isa MNullableType then
 			v.add_decl("1,")
@@ -1458,8 +1436,12 @@ class SeparateCompilerVisitor
 	redef fun class_name_string(value)
 	do
 		var res = self.get_name("var_class_name")
-		self.add_decl("const char *{res};")
-		self.add("{res} = class_names[{value}->type->id];")
+		self.add_decl("const char* {res};")
+		if value.mtype.ctype == "val*" then
+			self.add "{res} = {value} == NULL ? \"null\" : {value}->type->name;"
+		else
+			self.add "{res} = type_{value.mtype.c_name}.name;"
+		end
 		return res
 	end
 
