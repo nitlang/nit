@@ -93,6 +93,7 @@ class SeparateCompiler
 	super GlobalCompiler # TODO better separation of concerns
 
 	private var undead_types: Set[MType] = new HashSet[MType]
+	private var partial_types: Set[MType] = new HashSet[MType]
 	protected var typeids: HashMap[MType, Int] protected writable = new HashMap[MType, Int]
 
 	private var type_colors: Map[MType, Int] = typeids
@@ -266,34 +267,10 @@ class SeparateCompiler
 		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
 		mtypes.add_all(self.undead_types)
 
-		self.undead_types.clear
 		for mtype in mtypes do
-			# add formal types arguments to mtypes
-			if mtype isa MGenericType then
-				for ft in mtype.arguments do
-					if ft.need_anchor then
-						print("Why do we need anchor here ?")
-						abort
-					end
-					self.undead_types.add(ft)
-				end
-			end
-			var mclass_type: MClassType
-			if mtype isa MNullableType then
-				mclass_type = mtype.mtype.as(MClassType)
-			else
-				mclass_type = mtype.as(MClassType)
-			end
-
-			# add virtual types to mtypes
-			for vt in self.vt_tables[mclass_type.mclass] do
-				if vt != null then
-					var anchored = vt.bound.anchor_to(self.mainmodule, mclass_type)
-					self.undead_types.add(anchored)
-				end
-			end
+			retieve_live_partial_types(mtype)
 		end
-		mtypes.add_all(self.undead_types)
+		mtypes.add_all(self.partial_types)
 
 		# set type unique id
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
@@ -377,6 +354,34 @@ class SeparateCompiler
 		self.compile_class_names
 
 		return mtypes
+	end
+
+	fun retieve_live_partial_types(mtype: MType) do
+		# add formal types arguments to mtypes
+		if mtype isa MGenericType then
+			for ft in mtype.arguments do
+				if ft.need_anchor then
+					print("Why do we need anchor here ?")
+					abort
+				end
+				self.partial_types.add(ft)
+				retieve_live_partial_types(ft)
+			end
+		end
+		var mclass_type: MClassType
+		if mtype isa MNullableType then
+			mclass_type = mtype.mtype.as(MClassType)
+		else
+			mclass_type = mtype.as(MClassType)
+		end
+
+		# add virtual types to mtypes
+		for vt in self.vt_tables[mclass_type.mclass] do
+			if vt != null then
+				var anchored = vt.bound.anchor_to(self.mainmodule, mclass_type)
+				self.partial_types.add(anchored)
+			end
+		end
 	end
 
 	# declare live generic types tables selection
