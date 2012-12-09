@@ -30,7 +30,13 @@ redef class ToolContext
 	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
 
 	# --use-naive-coloring
-	var opt_use_naive_coloring: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--use-naive-coloring")
+	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
+
+	# --use-mod-perfect-hashing
+	var opt_phmod_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--phmod-typing")
+
+	# --use-and-perfect-hashing
+	var opt_phand_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--phand-typing")
 
 	redef init
 	do
@@ -38,7 +44,9 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_inline_coloring_numbers)
-		self.option_context.add_option(self.opt_use_naive_coloring)
+		self.option_context.add_option(self.opt_bm_typing)
+		self.option_context.add_option(self.opt_phmod_typing)
+		self.option_context.add_option(self.opt_phand_typing)
 	end
 end
 
@@ -85,6 +93,7 @@ class SeparateCompiler
 	super GlobalCompiler # TODO better separation of concerns
 
 	private var undead_types: Set[MType] = new HashSet[MType]
+	private var partial_types: Set[MType] = new HashSet[MType]
 	protected var typeids: HashMap[MType, Int] protected writable = new HashMap[MType, Int]
 
 	private var type_colors: Map[MType, Int] = typeids
@@ -95,7 +104,6 @@ class SeparateCompiler
 	private var livetypes_tables_sizes: nullable Map[MClass, Array[Int]]
 
 	protected var class_coloring: ClassColoring
-	protected var class_colors: Map[MClass, Int]
 
 	protected var method_colors: Map[MMethod, Int]
 	protected var method_tables: Map[MClass, Array[nullable MMethodDef]]
@@ -105,9 +113,11 @@ class SeparateCompiler
 
 	protected var vt_colors: Map[MVirtualTypeProp, Int]
 	protected var vt_tables: Map[MClass, Array[nullable MVirtualTypeDef]]
+	protected var vt_masks: nullable Map[MClass, Int]
 
-	protected var ft_colors: nullable Map[MParameterType, Int]
-	protected var ft_tables: nullable Map[MClass, Array[nullable MParameterType]]
+	private var ft_colors: nullable Map[MParameterType, Int]
+	private var ft_tables: nullable Map[MClass, Array[nullable MParameterType]]
+	private var ft_masks: nullable Map[MClass, Int]
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
 		self.do_property_coloring
@@ -119,19 +129,29 @@ class SeparateCompiler
 		self.header.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
 		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 		self.header.add_decl("struct type \{ int id; int color; int livecolor; short int is_nullable; struct vts_table *vts_table; struct fts_table *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
-		self.header.add_decl("struct fts_table \{ struct type *fts[1]; \}; /* fts list of a C type representation. */")
-		self.header.add_decl("struct vts_table \{ struct type *vts[1]; \}; /* vts list of a C type representation. */")
+
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			self.header.add_decl("struct fts_table \{ int mask; struct type *fts[1]; \}; /* fts list of a C type representation. */")
+			self.header.add_decl("struct vts_table \{ int mask; struct type *vts[1]; \}; /* vts list of a C type representation. */")
+		else
+			self.header.add_decl("struct fts_table \{ struct type *fts[1]; \}; /* fts list of a C type representation. */")
+			self.header.add_decl("struct vts_table \{ struct type *vts[1]; \}; /* vts list of a C type representation. */")
+		end
+
+
 		self.header.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 	end
 
 	redef fun compile_class_names do
 		# Build type names table
 		var type_array = new Array[nullable MType]
-		for t, i in typeids do
-			if i >= type_array.length then
-				type_array[i] = null
+		for t, id in typeids do
+			if id >= type_array.length then
+				for i in [type_array.length..id[ do
+					type_array[i] = null
+				end
 			end
-			type_array[i] = t
+			type_array[id] = t
 		end
 
 		var v = self.new_visitor
@@ -197,12 +217,8 @@ class SeparateCompiler
 	fun do_property_coloring do
 
 		# classes coloration
-		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
-			self.class_coloring = new NaiveClassColoring(mainmodule)
-		else
-			self.class_coloring = new ClassColoring(mainmodule)
-		end
-		self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
+		self.class_coloring = new ClassColoring(mainmodule)
+		class_coloring.colorize(modelbuilder.model.mclasses)
 
 		# methods coloration
 		var method_coloring = new MethodColoring(self.class_coloring)
@@ -211,15 +227,36 @@ class SeparateCompiler
 		self.compile_color_consts(self.method_colors)
 
 		# attributes coloration
-		var attribute_coloring = new AttributeColoring(class_coloring)
+		var attribute_coloring = new AttributeColoring(self.class_coloring)
 		self.attr_colors = attribute_coloring.colorize
 		self.attr_tables = attribute_coloring.build_property_tables
 		self.compile_color_consts(self.attr_colors)
 
+		if modelbuilder.toolcontext.opt_bm_typing.value then
+			self.class_coloring = new NaiveClassColoring(mainmodule)
+			self.class_coloring.colorize(modelbuilder.model.mclasses)
+		end
+
 		# vt coloration
-		var vt_coloring = new VTColoring(class_coloring)
-		self.vt_colors = vt_coloring.colorize
-		self.vt_tables = vt_coloring.build_property_tables
+		if modelbuilder.toolcontext.opt_bm_typing.value then
+			var vt_coloring = new NaiveVTColoring(self.class_coloring)
+			self.vt_colors = vt_coloring.colorize
+			self.vt_tables = vt_coloring.build_property_tables
+		else if modelbuilder.toolcontext.opt_phmod_typing.value then
+			var vt_coloring = new VTModPerfectHashing(self.class_coloring)
+			self.vt_colors = vt_coloring.colorize
+			self.vt_masks = vt_coloring.compute_masks
+			self.vt_tables = vt_coloring.build_property_tables
+		else if modelbuilder.toolcontext.opt_phand_typing.value then
+			var vt_coloring = new VTAndPerfectHashing(self.class_coloring)
+			self.vt_colors = vt_coloring.colorize
+			self.vt_masks = vt_coloring.compute_masks
+			self.vt_tables = vt_coloring.build_property_tables
+		else
+			var vt_coloring = new VTColoring(self.class_coloring)
+			self.vt_colors = vt_coloring.colorize
+			self.vt_tables = vt_coloring.build_property_tables
+		end
 		self.compile_color_consts(self.vt_colors)
 	end
 
@@ -230,65 +267,121 @@ class SeparateCompiler
 		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
 		mtypes.add_all(self.undead_types)
 
-		self.undead_types.clear
 		for mtype in mtypes do
-			# add formal types arguments to mtypes
-			if mtype isa MGenericType then
-				for ft in mtype.arguments do
-					if ft.need_anchor then
-						print("Why do we need anchor here ?")
-						abort
-					end
-					self.undead_types.add(ft)
-				end
-			end
-			var mclass_type: MClassType
-			if mtype isa MNullableType then
-				mclass_type = mtype.mtype.as(MClassType)
-			else
-				mclass_type = mtype.as(MClassType)
-			end
-			# add virtual types to mtypes
-			for vt in self.vt_tables[mclass_type.mclass] do
-				if vt != null then
-					var anchored = vt.bound.anchor_to(self.mainmodule, mclass_type)
-					self.undead_types.add(anchored)
-				end
-			end
+			retieve_live_partial_types(mtype)
 		end
-		mtypes.add_all(self.undead_types)
+		mtypes.add_all(self.partial_types)
 
 		# set type unique id
-		for mtype in mtypes do
-			self.typeids[mtype] = self.typeids.length
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			var sorted_mtypes = new OrderedSet[MType].from(mtypes)
+			sorted_mtypes.linearize(new ReverseTypeSorter(self.mainmodule))
+			for mtype in sorted_mtypes do
+				self.typeids[mtype] = self.typeids.length + 1
+			end
+		else
+			for mtype in mtypes do
+				self.typeids[mtype] = self.typeids.length
+			end
 		end
 
 		# fts coloration for non-erased compilation
-		var ft_coloring = new FTColoring(class_coloring)
-		self.ft_colors = ft_coloring.colorize
-		self.ft_tables = ft_coloring.build_ft_tables
+		if modelbuilder.toolcontext.opt_bm_typing.value then
+			var ft_coloring = new NaiveFTColoring(self.class_coloring)
+			self.ft_colors = ft_coloring.colorize
+			self.ft_tables = ft_coloring.build_ft_tables
+		else if modelbuilder.toolcontext.opt_phmod_typing.value then
+			var ft_coloring = new FTModPerfectHashing(self.class_coloring)
+			self.ft_colors = ft_coloring.colorize
+			self.ft_masks = ft_coloring.compute_masks
+			self.ft_tables = ft_coloring.build_ft_tables
+		else if modelbuilder.toolcontext.opt_phand_typing.value then
+			var ft_coloring = new FTAndPerfectHashing(self.class_coloring)
+			self.ft_colors = ft_coloring.colorize
+			self.ft_masks = ft_coloring.compute_masks
+			self.ft_tables = ft_coloring.build_ft_tables
+		else
+			var ft_coloring = new FTColoring(self.class_coloring)
+			self.ft_colors = ft_coloring.colorize
+			self.ft_tables = ft_coloring.build_ft_tables
+		end
 		self.compile_color_consts(self.ft_colors.as(not null))
 
 		# colorize live entries
-		var entries_coloring = new LiveEntryColoring
+		var entries_coloring
+		if modelbuilder.toolcontext.opt_bm_typing.value then
+			entries_coloring = new NaiveLiveEntryColoring
+		else
+			entries_coloring = new LiveEntryColoring
+		end
 		self.livetypes_colors = entries_coloring.colorize(mtypes)
 		self.livetypes_tables = entries_coloring.build_livetype_tables(mtypes)
 		self.livetypes_tables_sizes = entries_coloring.livetypes_tables_sizes
 
 		# colorize types
-		var type_coloring
-		if modelbuilder.toolcontext.opt_use_naive_coloring.value then
-			type_coloring = new NaiveTypeColoring(self.mainmodule, mtypes)
+		if modelbuilder.toolcontext.opt_bm_typing.value then
+			var type_coloring = new NaiveTypeColoring(self.mainmodule, mtypes)
+			self.type_colors = type_coloring.colorize(mtypes)
+			self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
+		else if modelbuilder.toolcontext.opt_phmod_typing.value then
+			var type_coloring = new TypeModPerfectHashing(self.mainmodule, mtypes)
+			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
+			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
+
+			self.header.add_decl("int HASH(int, int);")
+			var v = new_visitor
+			v.add_decl("int HASH(int mask, int id) \{")
+			v.add_decl("return mask % id;")
+			v.add_decl("\}")
+		else if modelbuilder.toolcontext.opt_phand_typing.value then
+			var type_coloring = new TypeAndPerfectHashing(self.mainmodule, mtypes)
+			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
+			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
+
+			self.header.add_decl("int HASH(int, int);")
+			var v = new_visitor
+			v.add_decl("int HASH(int mask, int id) \{")
+			v.add_decl("return mask & id;")
+			v.add_decl("\}")
 		else
-			type_coloring = new TypeColoring(self.mainmodule, mtypes)
+			var type_coloring = new TypeColoring(self.mainmodule, mtypes)
+			self.type_colors = type_coloring.colorize(mtypes)
+			self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
 		end
-		self.type_colors = type_coloring.colorize(mtypes)
-		self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
+
 
 		# for the class_name and output_class_name methods
 		self.compile_class_names
 
 		return mtypes
+	end
+
+	fun retieve_live_partial_types(mtype: MType) do
+		# add formal types arguments to mtypes
+		if mtype isa MGenericType then
+			for ft in mtype.arguments do
+				if ft.need_anchor then
+					print("Why do we need anchor here ?")
+					abort
+				end
+				self.partial_types.add(ft)
+				retieve_live_partial_types(ft)
+			end
+		end
+		var mclass_type: MClassType
+		if mtype isa MNullableType then
+			mclass_type = mtype.mtype.as(MClassType)
+		else
+			mclass_type = mtype.as(MClassType)
+		end
+
+		# add virtual types to mtypes
+		for vt in self.vt_tables[mclass_type.mclass] do
+			if vt != null then
+				var anchored = vt.bound.anchor_to(self.mainmodule, mclass_type)
+				self.partial_types.add(anchored)
+			end
+		end
 	end
 
 	# declare live generic types tables selection
@@ -408,12 +501,18 @@ class SeparateCompiler
 		# extern const struct fst_table_X fst_table_X
 		self.header.add_decl("extern const struct fts_table_{mtype.c_name} fts_table_{mtype.c_name};")
 		self.header.add_decl("struct fts_table_{mtype.c_name} \{")
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			self.header.add_decl("int mask;")
+		end
 		self.header.add_decl("struct type *fts[{self.ft_tables[mclass_type.mclass].length}];")
 		self.header.add_decl("\};")
 
 		# const struct fts_table_X fts_table_X
 		var v = new_visitor
 		v.add_decl("const struct fts_table_{mtype.c_name} fts_table_{mtype.c_name} = \{")
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			v.add_decl("{self.ft_masks[mclass_type.mclass]},")
+		end
 		v.add_decl("\{")
 		for ft in self.ft_tables[mclass_type.mclass] do
 			if ft == null then
@@ -448,12 +547,18 @@ class SeparateCompiler
 		# extern const struct vts_table_X vts_table_X
 		self.header.add_decl("extern const struct vts_table_{mtype.c_name} vts_table_{mtype.c_name};")
 		self.header.add_decl("struct vts_table_{mtype.c_name} \{")
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			self.header.add_decl("int mask;")
+		end
 		self.header.add_decl("struct type *vts[{self.vt_tables[mclass_type.mclass].length}];")
 		self.header.add_decl("\};")
 
 		# const struct vts_table_X vts_table_X
 		var v = new_visitor
 		v.add_decl("const struct vts_table_{mtype.c_name} vts_table_{mtype.c_name} = \{")
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			v.add_decl("{vt_masks[mclass_type.mclass]},")
+		end
 		v.add_decl("\{")
 
 		for vt in self.vt_tables[mclass_type.mclass] do
@@ -1035,9 +1140,17 @@ class SeparateCompilerVisitor
 			end
 
 			if ntype isa MParameterType then
-				buffer.append("[self->type->fts_table->fts[{ntype.const_color}]->livecolor]")
+				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+					buffer.append("[self->type->fts_table->fts[HASH(self->type->fts_table->mask, {ntype.const_color})]->livecolor]")
+				else
+					buffer.append("[self->type->fts_table->fts[{ntype.const_color}]->livecolor]")
+				end
 			else if ntype isa MVirtualType then
-				buffer.append("[self->type->vts_table->vts[{ntype.mproperty.const_color}]->livecolor]")
+				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+					buffer.append("[self->type->vts_table->vts[HASH(self->type->vts_table->mask, {ntype.mproperty.const_color})]->livecolor]")
+				else
+					buffer.append("[self->type->vts_table->vts[{ntype.mproperty.const_color}]->livecolor]")
+				end
 			else if ntype isa MGenericType and ntype.need_anchor then
 				var bbuff = new Buffer
 				retrieve_anchored_livetype(ntype, bbuff)
@@ -1073,6 +1186,7 @@ class SeparateCompilerVisitor
 
 	redef fun type_test(value, mtype)
 	do
+		self.add("/* {value.inspect} isa {mtype} */")
 		var compiler = self.compiler.as(SeparateCompiler)
 
 		var recv = self.frame.arguments.first
@@ -1080,11 +1194,12 @@ class SeparateCompilerVisitor
 
 		var res = self.new_var(bool_type)
 
+		var type_struct = self.get_name("type_struct")
+		self.add_decl("struct type* {type_struct};")
 		var cltype = self.get_name("cltype")
 		self.add_decl("int {cltype};")
 		var idtype = self.get_name("idtype")
 		self.add_decl("int {idtype};")
-
 		var is_nullable = self.get_name("is_nullable")
 		self.add_decl("short int {is_nullable};")
 
@@ -1096,15 +1211,21 @@ class SeparateCompilerVisitor
 		end
 
 		if ntype isa MParameterType then
-			self.add("{cltype} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}]->color;")
-			self.add("{idtype} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}]->id;")
-			self.add("{is_nullable} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}]->is_nullable;")
+			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+				self.add("{type_struct} = {recv_boxed}->type->fts_table->fts[HASH({recv_boxed}->type->fts_table->mask, {ntype.const_color})];")
+			else
+				self.add("{type_struct} = {recv_boxed}->type->fts_table->fts[{ntype.const_color}];")
+			end
+			self.add("{cltype} = {type_struct}->color;")
+			self.add("{idtype} = {type_struct}->id;")
+			self.add("{is_nullable} = {type_struct}->is_nullable;")
 		else if ntype isa MGenericType and ntype.need_anchor then
 			var buff = new Buffer
 			retrieve_anchored_livetype(ntype, buff)
-			self.add("{cltype} = livetypes_{ntype.mclass.c_name}{buff.to_s}->color;")
-			self.add("{idtype} = livetypes_{ntype.mclass.c_name}{buff.to_s}->id;")
-			self.add("{is_nullable} = livetypes_{ntype.mclass.c_name}{buff.to_s}->is_nullable;")
+			self.add("{type_struct} = (struct type*)livetypes_{ntype.mclass.c_name}{buff.to_s};")
+			self.add("{cltype} = {type_struct}->color;")
+			self.add("{idtype} = {type_struct}->id;")
+			self.add("{is_nullable} = {type_struct}->is_nullable;")
 		else if ntype isa MClassType then
 			compiler.undead_types.add(mtype)
 			self.add("{cltype} = type_{mtype.c_name}.color;")
@@ -1112,9 +1233,14 @@ class SeparateCompilerVisitor
 			self.add("{is_nullable} = type_{mtype.c_name}.is_nullable;")
 		else if ntype isa MVirtualType then
 			var vtcolor = ntype.mproperty.const_color
-			self.add("{cltype} = {recv_boxed}->type->vts_table->vts[{vtcolor}]->color;")
-			self.add("{idtype} = {recv_boxed}->type->vts_table->vts[{vtcolor}]->id;")
-			self.add("{is_nullable} = {recv_boxed}->type->vts_table->vts[{vtcolor}]->is_nullable;")
+			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+				self.add("{type_struct} = {recv_boxed}->type->vts_table->vts[HASH({recv_boxed}->type->vts_table->mask, {vtcolor})];")
+			else
+				self.add("{type_struct} = {recv_boxed}->type->vts_table->vts[{vtcolor}];")
+			end
+			self.add("{cltype} = {type_struct}->color;")
+			self.add("{idtype} = {type_struct}->id;")
+			self.add("{is_nullable} = {type_struct}->is_nullable;")
 		else
 			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{boxed.inspect}\"); exit(1);")
 		end
@@ -1127,6 +1253,9 @@ class SeparateCompilerVisitor
 		self.add("if({boxed} == NULL) \{")
 		self.add("{res} = {is_nullable};")
 		self.add("\} else \{")
+		if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+			self.add("{cltype} = HASH({boxed}->type->color, {idtype});")
+		end
 		self.add("if({cltype} >= {boxed}->type->table_size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")

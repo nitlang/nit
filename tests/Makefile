@@ -1,7 +1,7 @@
 
 PROGS=*.nit ../examples/*.nit ../examples/leapfrog/leapfrog.nit ../examples/shoot/shoot_logic.nit ../lib/*.nit ../src/nitdoc.nit ../src/nits.nit ../src/nitc.nit ../src/test_parser.nit ../src/nit.nit ../src/nitstats.nit ../src/nitg.nit
 
-all: separate global niti nitg nitg-s nitg-e icode
+all: separate global niti nitg nitg-s nitg-s-bm nitg-s-phmod nitg-s-phand nitg-e nitg-e-bm nitg-e-phmod nitg-e-phand icode
 
 separate:
 	./tests.sh ${PROGS}
@@ -21,8 +21,26 @@ nitg:
 nitg-s:
 	./tests.sh --engine nitg-s *.nit
 
+nitg-s-bm:
+	./tests.sh --engine nitg-s -o --bm-typing *.nit
+
+nitg-s-phmod:
+	./tests.sh --engine nitg-s -o --phmod-typing *.nit
+
+nitg-s-phand:
+	./tests.sh --engine nitg-s -o --phand-typing *.nit
+
 nitg-e:
 	./tests.sh --engine nitg-e ${PROGS}
+
+nitg-e-bm:
+	./tests.sh --engine nitg-e -o --bm-typing ${PROGS}
+
+nitg-e-phmod:
+	./tests.sh --engine nitg-e -o --phmod-typing ${PROGS}
+
+nitg-e-phand:
+	./tests.sh --engine nitg-e -o --phand-typing ${PROGS}
 
 nitdoc:
 	./tests.sh ../src/nitdoc.nit
