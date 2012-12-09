@@ -141,9 +141,9 @@ class SeparateCompiler
 		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 
 		if modelbuilder.toolcontext.opt_generic_tree.value then
-			self.header.add_decl("struct type \{ int id; int color; int livecolor; short int is_nullable; struct vts_table *vts_table; struct fts_table *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
+			self.header.add_decl("struct type \{ int id; int color; short int is_nullable; int livecolor; struct vts_table *vts_table; struct fts_table *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
 		else
-			self.header.add_decl("struct type \{ int id; int color; struct unanchored_table *unanchored_table; short int is_nullable; struct vts_table *vts_table; struct fts_table *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
+			self.header.add_decl("struct type \{ int id; int color; short int is_nullable; struct unanchored_table *unanchored_table; struct vts_table *vts_table; struct fts_table *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
 		end
 
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
@@ -539,12 +539,12 @@ class SeparateCompiler
 		self.header.add_decl("struct type_{c_name} \{")
 		self.header.add_decl("int id;")
 		self.header.add_decl("int color;")
+		self.header.add_decl("short int is_nullable;")
 		if modelbuilder.toolcontext.opt_generic_tree.value then
 			self.header.add_decl("int livecolor;")
 		else
 			self.header.add_decl("const struct unanchored_table_{c_name} *types;")
 		end
-		self.header.add_decl("short int is_nullable;")
 		self.header.add_decl("const struct vts_table_{c_name} *vts_table;")
 		self.header.add_decl("const struct fts_table_{c_name} *fts_table;")
 		self.header.add_decl("int table_size;")
@@ -555,6 +555,11 @@ class SeparateCompiler
 		v.add_decl("const struct type_{c_name} type_{c_name} = \{")
 		v.add_decl("{self.typeids[mtype]},")
 		v.add_decl("{self.type_colors[mtype]},")
+		if mtype isa MNullableType then
+			v.add_decl("1,")
+		else
+			v.add_decl("0,")
+		end
 		if modelbuilder.toolcontext.opt_generic_tree.value then
 			v.add_decl("{self.livetypes_colors[mtype]},")
 		else
@@ -563,11 +568,6 @@ class SeparateCompiler
 			else
 				v.add_decl("NULL,")
 			end
-		end
-		if mtype isa MNullableType then
-			v.add_decl("1,")
-		else
-			v.add_decl("0,")
 		end
 		v.add_decl("&vts_table_{c_name},")
 		v.add_decl("&fts_table_{c_name},")
