@@ -189,7 +189,11 @@ class SeparateErasureCompiler
 		v.add_decl("{self.class_ids[mclass]},")
 		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
 		v.add_decl("{self.class_colors[mclass]},")
-		v.add_decl("(const struct vts_table*) &vts_table_{c_name},")
+		if build_class_vts_table(mclass) then
+			v.add_decl("(const struct vts_table*) &vts_table_{c_name},")
+		else
+			v.add_decl("NULL,")
+		end
 		v.add_decl("(struct type_table*) &type_table_{c_name},")
 		v.add_decl("\{")
 		for i in [0 .. vft.length[ do
@@ -206,8 +210,6 @@ class SeparateErasureCompiler
 		end
 		v.add_decl("\}")
 		v.add_decl("\};")
-
-		build_class_vts_table(mclass, v.as(SeparateErasureCompilerVisitor))
 
 		# Build class type table
 		self.header.add_decl("extern const struct type_table_{c_name} type_table_{c_name};")
@@ -288,7 +290,9 @@ class SeparateErasureCompiler
 		generate_check_init_instance(mtype)
 	end
 
-	private fun build_class_vts_table(mclass: MClass, v: SeparateCompilerVisitor) do
+	private fun build_class_vts_table(mclass: MClass): Bool do
+		if self.vt_tables[mclass].is_empty then return false
+
 		self.header.add_decl("extern const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name};")
 		self.header.add_decl("struct vts_table_{mclass.c_name} \{")
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
@@ -297,6 +301,7 @@ class SeparateErasureCompiler
 		self.header.add_decl("struct vts_entry vts[{self.vt_tables[mclass].length}];")
 		self.header.add_decl("\};")
 
+		var v = new_visitor
 		v.add_decl("const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name} = \{")
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
 			v.add_decl("{vt_masks[mclass]},")
@@ -318,6 +323,7 @@ class SeparateErasureCompiler
 		end
 		v.add_decl("\},")
 		v.add_decl("\};")
+		return true
 	end
 
 	private fun retrieve_vt_bound(anchor: MClassType, mtype: nullable MType): MType do

@@ -559,14 +559,22 @@ class SeparateCompiler
 		if modelbuilder.toolcontext.opt_generic_tree.value then
 			v.add_decl("{self.livetypes_colors[mtype]},")
 		else
-			if (not mtype isa MNullableType and self.unanchored_types_tables.has_key(mtype.as(MClassType))) or (mtype isa MNullableType and self.unanchored_types_tables.has_key(mtype.mtype.as(MClassType))) then
+			if compile_type_unanchored_table(mtype) then
 				v.add_decl("&unanchored_table_{c_name},")
 			else
 				v.add_decl("NULL,")
 			end
 		end
-		v.add_decl("&vts_table_{c_name},")
-		v.add_decl("&fts_table_{c_name},")
+		if compile_type_vts_table(mtype) then
+			v.add_decl("&vts_table_{c_name},")
+		else
+			v.add_decl("NULL,")
+		end
+		if compile_type_fts_table(mtype) then
+			v.add_decl("&fts_table_{c_name},")
+		else
+			v.add_decl("NULL,")
+		end
 		v.add_decl("{self.type_tables[mtype].length},")
 		v.add_decl("\{")
 		for stype in self.type_tables[mtype] do
@@ -578,13 +586,9 @@ class SeparateCompiler
 		end
 		v.add_decl("\},")
 		v.add_decl("\};")
-
-		compile_type_fts_table(mtype)
-		compile_type_vts_table(mtype)
-		compile_type_unanchored_table(mtype)
 	end
 
-	protected fun compile_type_fts_table(mtype: MType) do
+	protected fun compile_type_fts_table(mtype: MType): Bool do
 
 		var mclass_type: MClassType
 		if mtype isa MNullableType then
@@ -592,6 +596,7 @@ class SeparateCompiler
 		else
 			mclass_type = mtype.as(MClassType)
 		end
+		if self.ft_tables[mclass_type.mclass].is_empty then return false
 
 		# extern const struct fst_table_X fst_table_X
 		self.header.add_decl("extern const struct fts_table_{mtype.c_name} fts_table_{mtype.c_name};")
@@ -628,9 +633,10 @@ class SeparateCompiler
 		end
 		v.add_decl("\},")
 		v.add_decl("\};")
+		return true
 	end
 
-	protected fun compile_type_vts_table(mtype: MType) do
+	protected fun compile_type_vts_table(mtype: MType): Bool do
 
 		var mclass_type: MClassType
 		if mtype isa MNullableType then
@@ -638,6 +644,7 @@ class SeparateCompiler
 		else
 			mclass_type = mtype.as(MClassType)
 		end
+		if self.vt_tables[mclass_type.mclass].is_empty then return false
 
 		# extern const struct vts_table_X vts_table_X
 		self.header.add_decl("extern const struct vts_table_{mtype.c_name} vts_table_{mtype.c_name};")
@@ -693,9 +700,10 @@ class SeparateCompiler
 		end
 		v.add_decl("\},")
 		v.add_decl("\};")
+		return true
 	end
 
-	fun compile_type_unanchored_table(mtype: MType) do
+	fun compile_type_unanchored_table(mtype: MType): Bool do
 
 		var mclass_type: MClassType
 		if mtype isa MNullableType then
@@ -703,6 +711,7 @@ class SeparateCompiler
 		else
 			mclass_type = mtype.as(MClassType)
 		end
+		if not self.unanchored_types_tables.has_key(mclass_type) then return false
 
 		# extern const struct unanchored_table_X unanchored_table_X
 		self.header.add_decl("extern const struct unanchored_table_{mtype.c_name} unanchored_table_{mtype.c_name};")
@@ -711,35 +720,30 @@ class SeparateCompiler
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
 			self.header.add_decl("int mask;")
 		end
-		if not self.unanchored_types_tables.has_key(mclass_type) then
-			self.header.add_decl("struct type *types[0];")
-		else
-			self.header.add_decl("struct type *types[{self.unanchored_types_tables[mclass_type].length}];")
-		end
+		self.header.add_decl("struct type *types[{self.unanchored_types_tables[mclass_type].length}];")
 		self.header.add_decl("\};")
 
-		if self.unanchored_types_tables.has_key(mclass_type) then
-			# const struct fts_table_X fts_table_X
-			var v = new_visitor
-			v.add_decl("const struct unanchored_table_{mtype.c_name} unanchored_table_{mtype.c_name} = \{")
-			if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
-				v.add_decl("{self.unanchored_types_masks[mclass_type]},")
-			end
-			v.add_decl("\{")
-			for t in self.unanchored_types_tables[mclass_type] do
-				if t == null then
-					v.add_decl("NULL, /* empty */")
+		# const struct fts_table_X fts_table_X
+		var v = new_visitor
+		v.add_decl("const struct unanchored_table_{mtype.c_name} unanchored_table_{mtype.c_name} = \{")
+		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			v.add_decl("{self.unanchored_types_masks[mclass_type]},")
+		end
+		v.add_decl("\{")
+		for t in self.unanchored_types_tables[mclass_type] do
+			if t == null then
+				v.add_decl("NULL, /* empty */")
+			else
+				if self.typeids.has_key(t) then
+					v.add_decl("(struct type*)&type_{t.c_name}, /* {t} */")
 				else
-					if self.typeids.has_key(t) then
-						v.add_decl("(struct type*)&type_{t.c_name}, /* {t} */")
-					else
-						v.add_decl("NULL, /* empty ({t} not a live type) */")
-					end
+					v.add_decl("NULL, /* empty ({t} not a live type) */")
 				end
 			end
-			v.add_decl("\},")
-			v.add_decl("\};")
 		end
+		v.add_decl("\},")
+		v.add_decl("\};")
+		return true
 	end
 
 	# Globally compile the table of the class mclass
