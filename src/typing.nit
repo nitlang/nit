@@ -604,8 +604,11 @@ redef class AVarAssignExpr
 end
 
 redef class AReassignFormExpr
+	# @depreciated use `reassign_callsite`
+	fun reassign_property: nullable MMethodDef do return self.reassign_callsite.mpropdef
+
 	# The method designed by the reassign operator.
-	var reassign_property: nullable MMethodDef = null
+	var reassign_callsite: nullable CallSite
 
 	var read_type: nullable MType = null
 
@@ -634,9 +637,7 @@ redef class AReassignFormExpr
 
 		var callsite = v.get_method(self, readtype, reassign_name, false)
 		if callsite == null then return null # Skip error
-		var mpropdef = callsite.mpropdef
-
-		self.reassign_property = mpropdef
+		self.reassign_callsite = callsite
 
 		var msignature = callsite.msignature
 		var rettype = msignature.return_mtype
@@ -1131,8 +1132,11 @@ end
 ## MESSAGE SENDING AND PROPERTY
 
 redef class ASendExpr
+	# @depreciated: use `callsite`
+	fun mproperty: nullable MMethod do return callsite.mproperty
+
 	# The property invoked by the send.
-	var mproperty: nullable MMethod
+	var callsite: nullable CallSite
 
 	redef fun accept_typing(v)
 	do
@@ -1147,8 +1151,7 @@ redef class ASendExpr
 
 		var callsite = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
 		if callsite == null then return
-		var mproperty = callsite.mproperty
-		self.mproperty = mproperty
+		self.callsite = callsite
 		var msignature = callsite.msignature
 
 		var args = compute_raw_arguments
@@ -1156,7 +1159,7 @@ redef class ASendExpr
 
 		callsite.check_signature(v, args)
 
-		if mproperty.is_init then
+		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
 			if not (vmpropdef isa MMethodDef and vmpropdef.mproperty.is_init) then
 				v.error(self, "Can call a init only in another init")
@@ -1300,8 +1303,11 @@ redef class ABraAssignExpr
 end
 
 redef class ASendReassignFormExpr
+	# @depreciated use `write_callsite`
+	fun write_mproperty: nullable MMethod do return write_callsite.mproperty
+
 	# The property invoked for the writing
-	var write_mproperty: nullable MMethod = null
+	var write_callsite: nullable CallSite
 
 	redef fun accept_typing(v)
 	do
@@ -1318,8 +1324,7 @@ redef class ASendReassignFormExpr
 		var callsite = v.get_method(self, recvtype, name, for_self)
 
 		if callsite == null then return
-		var mproperty = callsite.mproperty
-		self.mproperty = mproperty
+		self.callsite = callsite
 
 		var args = compute_raw_arguments
 		self.raw_arguments = args
@@ -1334,8 +1339,7 @@ redef class ASendReassignFormExpr
 
 		var wcallsite = v.get_method(self, recvtype, name + "=", self.n_expr isa ASelfExpr)
 		if wcallsite == null then return
-		var wmproperty = wcallsite.mproperty
-		self.write_mproperty = wmproperty
+		self.write_callsite = wcallsite
 
 		var wtype = self.resolve_reassignment(v, readtype, wcallsite.msignature.mparameters.last.mtype)
 		if wtype == null then return
@@ -1454,8 +1458,11 @@ end
 ####
 
 redef class ANewExpr
+	# @depreciated use `callsite`
+	fun mproperty: nullable MMethod do return self.callsite.mproperty
+
 	# The constructor invoked by the new.
-	var mproperty: nullable MMethod
+	var callsite: nullable CallSite
 
 	redef fun accept_typing(v)
 	do
@@ -1483,7 +1490,7 @@ redef class ANewExpr
 		var callsite = v.get_method(self, recvtype, name, false)
 		if callsite == null then return
 
-		self.mproperty = callsite.mproperty
+		self.callsite = callsite
 
 		if not callsite.mproperty.is_init_for(recvtype.mclass) then
 			v.error(self, "Error: {name} is not a constructor.")
