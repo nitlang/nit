@@ -1217,7 +1217,7 @@ class SeparateCompilerVisitor
 		else if ntype isa MGenericType and ntype.need_anchor then
 			var buff = new Buffer
 			retrieve_anchored_livetype(ntype, buff)
-			self.add("{type_struct} = livetypes_{ntype.mclass.c_name}{buff.to_s};")
+			self.add("{type_struct} = (struct type*)livetypes_{ntype.mclass.c_name}{buff.to_s};")
 			self.add("{cltype} = {type_struct}->color;")
 			self.add("{idtype} = {type_struct}->id;")
 			self.add("{is_nullable} = {type_struct}->is_nullable;")
