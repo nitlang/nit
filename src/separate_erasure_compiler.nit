@@ -107,15 +107,12 @@ class SeparateErasureCompiler
 			self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
 			self.class_tables = class_coloring.build_type_tables(modelbuilder.model.mclasses, class_colors)
 		end
-
-		# for the class_name and output_class_name methods
-		self.compile_class_names
 	end
 
 	redef fun compile_header_structs do
 		self.header.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
 		self.header.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
-		self.header.add_decl("struct class \{ int id; int box_kind; int color; struct vts_table *vts_table; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
+		self.header.add_decl("struct class \{ int id; const char *name; int box_kind; int color; struct vts_table *vts_table; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 		self.header.add_decl("struct type_table \{ int size; int table[1]; \}; /* colorized type table. */")
 		self.header.add_decl("struct vts_entry \{ short int is_nullable; struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
 
@@ -126,31 +123,6 @@ class SeparateErasureCompiler
 		end
 
 		self.header.add_decl("typedef struct \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
-		self.header.add_decl("extern const char const * class_names[];")
-	end
-
-	redef fun compile_class_names do
-		# Build type names table
-		var type_array = new Array[nullable MClass]
-		for t, id in class_ids do
-			if id >= type_array.length then
-				for i in [type_array.length..id[ do
-					type_array[i] = null
-				end
-			end
-			type_array[id] = t
-		end
-
-		var v = self.new_visitor
-		v.add("const char const * class_names[] = \{")
-		for t in type_array do
-			if t == null then
-				v.add("NULL, /* empty */")
-			else
-				v.add("\"{t}\",")
-			end
-		end
-		v.add("\};")
 	end
 
 	redef fun compile_class_to_c(mclass: MClass)
@@ -172,6 +144,7 @@ class SeparateErasureCompiler
 		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
 		self.header.add_decl("struct class_{c_name} \{")
 		self.header.add_decl("int id;")
+		self.header.add_decl("const char *name;")
 		self.header.add_decl("int box_kind;")
 		self.header.add_decl("int color;")
 		self.header.add_decl("const struct vts_table *vts_table;")
@@ -182,6 +155,7 @@ class SeparateErasureCompiler
 		# Build class vft
 		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
 		v.add_decl("{self.class_ids[mclass]},")
+		v.add_decl("\"{mclass.name}\", /* class_name_string */")
 		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
 		v.add_decl("{self.class_colors[mclass]},")
 		if build_class_vts_table(mclass) then
@@ -472,8 +446,12 @@ class SeparateErasureCompilerVisitor
 	redef fun class_name_string(value)
 	do
 		var res = self.get_name("var_class_name")
-		self.add_decl("const char *{res};")
-		self.add("{res} = class_names[{value}->class->id];")
+		self.add_decl("const char* {res};")
+		if value.mtype.ctype == "val*" then
+			self.add "{res} = {value} == NULL ? \"null\" : {value}->class->name;"
+		else
+			self.add "{res} = class_{value.mtype.c_name}.name;"
+		end
 		return res
 	end
 
