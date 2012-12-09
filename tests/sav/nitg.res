@@ -23,3 +23,4 @@
   --inline-coloring-numbers   Inline colors and ids
   --use-naive-coloring        Colorize items incrementaly, used to simulate binary matrix typing
   --erasure                   Erase generic types
+  --no-check-erasure-cast     Disable implicit casts on unsafe return with erasure-typing policy (dangerous)

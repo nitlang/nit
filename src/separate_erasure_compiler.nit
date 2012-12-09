@@ -22,10 +22,13 @@ redef class ToolContext
 	# --erasure
 	var opt_erasure: OptionBool = new OptionBool("Erase generic types", "--erasure")
 
+	# --no-check-erasure-cast
+	var opt_no_check_erasure_cast: OptionBool = new OptionBool("Disable implicit casts on unsafe return with erasure-typing policy (dangerous)", "--no-check-erasure-cast")
+
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_erasure)
+		self.option_context.add_option(self.opt_erasure, self.opt_no_check_erasure_cast)
 	end
 end
 
@@ -290,7 +293,7 @@ class SeparateErasureCompilerVisitor
 	redef fun compile_callsite(callsite, arguments)
 	do
 		var res = super
-		if callsite.erasure_cast then
+		if callsite.erasure_cast and not self.compiler.as(SeparateErasureCompiler).modelbuilder.toolcontext.opt_no_check_erasure_cast.value then
 			assert res != null
 			var mtype = callsite.msignature.return_mtype
 			assert mtype != null
