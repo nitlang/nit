@@ -249,7 +249,19 @@ private class TypeVisitor
 
 		var msignature = self.resolve_signature_for(mpropdef, recvtype, recv_is_self)
 
-		var callsite = new CallSite(node, recvtype, recv_is_self, mproperty, mpropdef, msignature)
+		var erasure_cast = false
+		var rettype = mpropdef.msignature.return_mtype
+		if not recv_is_self and rettype != null then
+			if rettype isa MNullableType then rettype = rettype.mtype
+			if rettype isa MParameterType then
+				var erased_rettype = msignature.return_mtype
+				assert erased_rettype != null
+				#node.debug("Erasure cast: Really a {rettype} but unsafely a {erased_rettype}")
+				erasure_cast = true
+			end
+		end
+
+		var callsite = new CallSite(node, recvtype, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
 		return callsite
 	end
 
@@ -378,6 +390,9 @@ class CallSite
 
 	# The resolved signature for the receiver
 	var msignature: MSignature
+
+	# Is a implicit cast required on erasure typing policy?
+	var erasure_cast: Bool
 
 	private fun check_signature(v: TypeVisitor, args: Array[AExpr]): Bool
 	do
