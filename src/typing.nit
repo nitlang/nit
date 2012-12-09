@@ -209,11 +209,15 @@ private class TypeVisitor
 		return mclass.mclass_type
 	end
 
-	fun get_method(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable MMethodDef
+	fun get_method(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
 	do
 		var unsafe_type = self.anchor_to(recvtype)
 
 		#debug("recv: {recvtype} (aka {unsafe_type})")
+		if recvtype isa MNullType then
+			self.error(node, "Error: Method '{name}' call on 'null'.")
+			return null
+		end
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
 		if mproperty == null then
@@ -226,6 +230,7 @@ private class TypeVisitor
 			return null
 		end
 
+		assert mproperty isa MMethod
 		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility then
 			self.modelbuilder.error(node, "Error: Method '{name}' is protected and can only acceded by self. {mproperty.intro_mclassdef.mmodule.visibility_for(self.mmodule)}")
 			return null
@@ -240,9 +245,24 @@ private class TypeVisitor
 			return null
 		end
 
-		var propdef = propdefs.first
-		assert propdef isa MMethodDef
-		return propdef
+		var mpropdef = propdefs.first
+
+		var msignature = self.resolve_signature_for(mpropdef, recvtype, recv_is_self)
+
+		var erasure_cast = false
+		var rettype = mpropdef.msignature.return_mtype
+		if not recv_is_self and rettype != null then
+			if rettype isa MNullableType then rettype = rettype.mtype
+			if rettype isa MParameterType then
+				var erased_rettype = msignature.return_mtype
+				assert erased_rettype != null
+				#node.debug("Erasure cast: Really a {rettype} but unsafely a {erased_rettype}")
+				erasure_cast = true
+			end
+		end
+
+		var callsite = new CallSite(node, recvtype, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
+		return callsite
 	end
 
 	# Visit the expressions of args and cheik their conformity with the corresponding typi in signature
@@ -345,6 +365,38 @@ private class TypeVisitor
 		end
 		#self.modelbuilder.warning(node, "Type Error: {col.length} conflicting types: <{col.join(", ")}>")
 		return null
+	end
+end
+
+# A specific method call site with its associated informations.
+class CallSite
+	# The assiciated node for location
+	var node: ANode
+
+	# The statis type of the receiver
+	var recv: MType
+
+	# Is the receiver self?
+	# If "for_self", virtual types of the signature are keeped
+	# If "not_for_self", virtual type are erased
+	var recv_is_self: Bool
+
+	# The designated method
+	var mproperty: MMethod
+
+	# The statically designated method definition
+	# The most specif one, it is.
+	var mpropdef: MMethodDef
+
+	# The resolved signature for the receiver
+	var msignature: MSignature
+
+	# Is a implicit cast required on erasure typing policy?
+	var erasure_cast: Bool
+
+	private fun check_signature(v: TypeVisitor, args: Array[AExpr]): Bool
+	do
+		return v.check_signature(self.node, args, self.mproperty.name, self.msignature)
 	end
 end
 
@@ -567,8 +619,11 @@ redef class AVarAssignExpr
 end
 
 redef class AReassignFormExpr
+	# @depreciated use `reassign_callsite`
+	fun reassign_property: nullable MMethodDef do return self.reassign_callsite.mpropdef
+
 	# The method designed by the reassign operator.
-	var reassign_property: nullable MMethodDef = null
+	var reassign_callsite: nullable CallSite
 
 	var read_type: nullable MType = null
 
@@ -595,13 +650,11 @@ redef class AReassignFormExpr
 			return null
 		end
 
-		var mpropdef = v.get_method(self, readtype, reassign_name, false)
-		if mpropdef == null then return null # Skip error
+		var callsite = v.get_method(self, readtype, reassign_name, false)
+		if callsite == null then return null # Skip error
+		self.reassign_callsite = callsite
 
-		self.reassign_property = mpropdef
-
-		var msignature = v.resolve_signature_for(mpropdef, readtype, false)
-
+		var msignature = callsite.msignature
 		var rettype = msignature.return_mtype
 		assert msignature.arity == 1 and rettype != null
 
@@ -794,7 +847,7 @@ redef class AForExpr
 			self.method_iterator = itdef.mproperty
 
 			# get iterator type
-			var ittype = v.resolve_signature_for(itdef, mtype, false).return_mtype
+			var ittype = itdef.msignature.return_mtype
 			if ittype == null then
 				v.error(self, "Type Error: Expected method 'iterator' to return an Iterator type")
 				return
@@ -1094,8 +1147,11 @@ end
 ## MESSAGE SENDING AND PROPERTY
 
 redef class ASendExpr
+	# @depreciated: use `callsite`
+	fun mproperty: nullable MMethod do return callsite.mproperty
+
 	# The property invoked by the send.
-	var mproperty: nullable MMethod
+	var callsite: nullable CallSite
 
 	redef fun accept_typing(v)
 	do
@@ -1108,18 +1164,17 @@ redef class ASendExpr
 			return
 		end
 
-		var mpropdef = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
-		if mpropdef == null then return
-		var mproperty = mpropdef.mproperty
-		self.mproperty = mproperty
-		var msignature = v.resolve_signature_for(mpropdef, recvtype, self.n_expr isa ASelfExpr)
+		var callsite = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
+		if callsite == null then return
+		self.callsite = callsite
+		var msignature = callsite.msignature
 
 		var args = compute_raw_arguments
 		self.raw_arguments = args
 
-		v.check_signature(self, args, name, msignature)
+		callsite.check_signature(v, args)
 
-		if mproperty.is_init then
+		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
 			if not (vmpropdef isa MMethodDef and vmpropdef.mproperty.is_init) then
 				v.error(self, "Can call a init only in another init")
@@ -1263,8 +1318,11 @@ redef class ABraAssignExpr
 end
 
 redef class ASendReassignFormExpr
+	# @depreciated use `write_callsite`
+	fun write_mproperty: nullable MMethod do return write_callsite.mproperty
+
 	# The property invoked for the writing
-	var write_mproperty: nullable MMethod = null
+	var write_callsite: nullable CallSite
 
 	redef fun accept_typing(v)
 	do
@@ -1278,36 +1336,32 @@ redef class ASendReassignFormExpr
 		end
 
 		var for_self = self.n_expr isa ASelfExpr
-		var mpropdef = v.get_method(self, recvtype, name, for_self)
+		var callsite = v.get_method(self, recvtype, name, for_self)
 
-		if mpropdef == null then return
-		var mproperty = mpropdef.mproperty
-		self.mproperty = mproperty
-		var msignature = v.resolve_signature_for(mpropdef, recvtype, for_self)
+		if callsite == null then return
+		self.callsite = callsite
 
 		var args = compute_raw_arguments
 		self.raw_arguments = args
 
-		v.check_signature(self, args, name, msignature)
+		callsite.check_signature(v, args)
 
-		var readtype = msignature.return_mtype
+		var readtype = callsite.msignature.return_mtype
 		if readtype == null then
 			v.error(self, "Error: {name} is not a function")
 			return
 		end
 
-		var wpropdef = v.get_method(self, recvtype, name + "=", self.n_expr isa ASelfExpr)
-		if wpropdef == null then return
-		var wmproperty = wpropdef.mproperty
-		self.write_mproperty = wmproperty
-		var wmsignature = v.resolve_signature_for(wpropdef, recvtype, for_self)
+		var wcallsite = v.get_method(self, recvtype, name + "=", self.n_expr isa ASelfExpr)
+		if wcallsite == null then return
+		self.write_callsite = wcallsite
 
-		var wtype = self.resolve_reassignment(v, readtype, wmsignature.mparameters.last.mtype)
+		var wtype = self.resolve_reassignment(v, readtype, wcallsite.msignature.mparameters.last.mtype)
 		if wtype == null then return
 
 		args = args.to_a # duplicate so raw_arguments keeps only the getter args
 		args.add(self.n_value)
-		v.check_signature(self, args, name + "=", wmsignature)
+		wcallsite.check_signature(v, args)
 
 		self.is_typed = true
 	end
@@ -1419,8 +1473,11 @@ end
 ####
 
 redef class ANewExpr
+	# @depreciated use `callsite`
+	fun mproperty: nullable MMethod do return self.callsite.mproperty
+
 	# The constructor invoked by the new.
-	var mproperty: nullable MMethod
+	var callsite: nullable CallSite
 
 	redef fun accept_typing(v)
 	do
@@ -1445,20 +1502,18 @@ redef class ANewExpr
 		else
 			name = "init"
 		end
-		var propdef = v.get_method(self, recvtype, name, false)
-		if propdef == null then return
+		var callsite = v.get_method(self, recvtype, name, false)
+		if callsite == null then return
 
-		self.mproperty = propdef.mproperty
+		self.callsite = callsite
 
-		if not propdef.mproperty.is_init_for(recvtype.mclass) then
+		if not callsite.mproperty.is_init_for(recvtype.mclass) then
 			v.error(self, "Error: {name} is not a constructor.")
 			return
 		end
 
-		var msignature = v.resolve_signature_for(propdef, recvtype, false)
-
 		var args = n_args.to_a
-		v.check_signature(self, args, name, msignature)
+		callsite.check_signature(v, args)
 	end
 end
 

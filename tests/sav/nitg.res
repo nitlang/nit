@@ -26,3 +26,4 @@
   --phand-typing              Replace coloration by perfect hashing (with and operator)
   --generic-resolution-tree   Use tree representation for live generic types instead of flattened representation
   --erasure                   Erase generic types
+  --no-check-erasure-cast     Disable implicit casts on unsafe return with erasure-typing policy (dangerous)
