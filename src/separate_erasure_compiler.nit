@@ -414,13 +414,19 @@ class SeparateErasureCompilerVisitor
 			end
 		else if mtype isa MVirtualType then
 			var recv = self.frame.arguments.first
-			var recv_boxed = self.autobox(recv, self.object_type)
+			var recv_ptr
+			if recv.mtype.ctype == "val*" then
+				recv_ptr = "{recv}->class->"
+			else
+				var mclass = recv.mtype.as(MClassType).mclass
+				recv_ptr = "class_{mclass.c_name}."
+			end
 			var entry = self.get_name("entry")
 			self.add("struct vts_entry {entry};")
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				self.add("{entry} = {recv_boxed}->class->vts_table->vts[HASH({recv_boxed}->class->vts_table->mask, {mtype.mproperty.const_color})];")
+				self.add("{entry} = {recv_ptr}vts_table->vts[HASH({recv_ptr}vts_table->mask, {mtype.mproperty.const_color})];")
 			else
-				self.add("{entry} = {recv_boxed}->class->vts_table->vts[{mtype.mproperty.const_color}];")
+				self.add("{entry} = {recv_ptr}vts_table->vts[{mtype.mproperty.const_color}];")
 			end
 			self.add("{cltype} = {entry}.class->color;")
 			self.add("{idtype} = {entry}.class->id;")
