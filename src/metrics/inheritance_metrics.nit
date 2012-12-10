@@ -22,6 +22,35 @@ private import metrics_base
 
 redef class Model
 
+	# List of modules in std lib
+	# FIXME this is quite ugly, find a dynamic way...
+	fun std_modules: Set[String] do
+		if self.std_modules_cache == null then
+			self.std_modules_cache = new HashSet[String]
+			self.std_modules_cache.add("collection")
+			self.std_modules_cache.add("abstract_collection")
+			self.std_modules_cache.add("array")
+			self.std_modules_cache.add("hash_collection")
+			self.std_modules_cache.add("list")
+			self.std_modules_cache.add("range")
+			self.std_modules_cache.add("sorter")
+			self.std_modules_cache.add("environ")
+			self.std_modules_cache.add("exec")
+			self.std_modules_cache.add("file")
+			self.std_modules_cache.add("gc")
+			self.std_modules_cache.add("hash")
+			self.std_modules_cache.add("kernel")
+			self.std_modules_cache.add("math")
+			self.std_modules_cache.add("standard")
+			self.std_modules_cache.add("stream")
+			self.std_modules_cache.add("string")
+			self.std_modules_cache.add("string_search")
+			self.std_modules_cache.add("time")
+		end
+		return self.std_modules_cache.as(not null)
+	end
+	private var std_modules_cache: nullable Set[String]
+
 	# Extract the subset of classes from a set of mclass
 	fun extract_classes(mclasses: Collection[MClass]): Set[MClass] do
 		var lst = new HashSet[MClass]
@@ -76,12 +105,6 @@ redef class Model
 		var lst = new HashSet[MModule]
 		for mmodule in mmodules do if not mmodule.is_user_defined then lst.add(mmodule)
 		return lst
-	end
-end
-
-redef class MModule
-	private fun is_user_defined: Bool do
-		return self.public_owner == null or self.public_owner.name != "standard"
 	end
 end
 
@@ -169,8 +192,7 @@ redef class MClass
 	end
 
 	private fun is_user_defined: Bool do
-		var mod = self.intro_mmodule.public_owner
-		return mod == null or mod.name != "standard"
+		return self.intro_mmodule.is_user_defined
 	end
 
 	# Get parents of the class (direct super classes only)
@@ -529,6 +551,12 @@ redef class MClass
 		return false
 	end
 
+end
+
+redef class MModule
+	private fun is_user_defined: Bool do
+		return not self.model.std_modules.has(self.name)
+	end
 end
 
 # Print inheritance usage metrics
