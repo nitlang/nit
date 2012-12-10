@@ -337,12 +337,10 @@ function bench_nitg-e_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-e_options "hardening" --hardening
-bench_nitg-e_options "nocheck" --no-inline-intern --no-check-covariance --no-check-initialization --no-check-assert --no-check-other
-bench_nitg-e_options "inline" --inline-coloring-numbers
-bench_nitg-e_options "binary" --bm-typing
-bench_nitg-e_options "phmod" --phmod-typing
-bench_nitg-e_options "phand" --phand-typing
+bench_nitg-e_options "slower" --hardening --no-inline-intern
+bench_nitg-e_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other --no-check-erasure-cast
+bench_nitg-e_options "faster" --inline-coloring-numbers
+bench_nitg-e_options "typing" --bm-typing --phmod-typing --phand-typing
 
 function bench_nitc_gc()
 {
