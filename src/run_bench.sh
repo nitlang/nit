@@ -316,6 +316,32 @@ function bench_nitg_options()
 bench_nitg_options "hardening" --hardening
 bench_nitg_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
 
+function bench_nitg-s_options()
+{
+	tag=$1
+	shift
+	name="$FUNCNAME-$tag"
+	skip_test "$name" && return
+	prepare_res "$name.dat" "no options" "nitg-s without options"
+	run_compiler "nitg-s" ./nitg --separate
+
+	if test -n "$2"; then
+		prepare_res "$name-all.dat" "all" "nitg-s with all options $@"
+		run_compiler "nitg-s-$tag" ./nitg --separate $@
+	fi
+
+	for opt in "$@"; do
+		prepare_res "$name$opt.dat" "$opt" "nitg-s with option $opt"
+		run_compiler "nitg-s$opt" ./nitg --separate $opt
+	done
+
+	plot "$name.gnu"
+}
+bench_nitg-s_options "slower" --hardening --no-inline-intern --generic-resolution-tree
+bench_nitg-s_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
+bench_nitg-s_options "faster" --inline-coloring-numbers
+bench_nitg-s_options "typing" --bm-typing --phmod-typing --phand-typing
+
 function bench_nitg-e_options()
 {
 	tag=$1
@@ -379,6 +405,8 @@ function bench_engines()
 	run_compiler "nitc-g" ./nitc_3 -O --global
 	prepare_res "$name-nitg.dat" "nitg" "nitg"
 	run_compiler "nitg" ./nitg
+	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg with --separate"
+	run_compiler "nitg-s" ./nitg --separate
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
 	run_compiler "nitg-e" ./nitg --erasure
 	plot "$name.gnu"
