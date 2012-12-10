@@ -509,6 +509,8 @@ class SeparateCompiler
 	# Separately compile all the method definitions of the module
 	fun compile_module_to_c(mmodule: MModule)
 	do
+		var old_module = self.mainmodule
+		self.mainmodule = mmodule
 		for cd in mmodule.mclassdefs do
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
@@ -521,6 +523,7 @@ class SeparateCompiler
 				end
 			end
 		end
+		self.mainmodule = old_module
 	end
 
 	# Globaly compile the type structure of a live type

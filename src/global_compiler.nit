@@ -218,7 +218,7 @@ end
 # Singleton that store the knowledge about the compilation process
 class GlobalCompiler
 	# The main module of the program
-	var mainmodule: MModule
+	var mainmodule: MModule writable
 
 	# The result of the RTA (used to know live types and methods)
 	var runtime_type_analysis: RapidTypeAnalysis
