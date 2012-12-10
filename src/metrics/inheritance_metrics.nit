@@ -143,7 +143,7 @@ redef class MClass
 	private var ditcud: Int = 0		# (DITCUD) Length of longest path to the root hierarchy and consisting only of extends edges
 	private var ditiud: Int = 0		# (DITIUD) Length of longest path to the root hierarchy and consisting only of extends implements
 
-	private fun compute_scalar_metrics(model: Model) do
+	private fun compute_class_inheritance_metrics(model: Model) do
 		# inheritance metrics
 		self.nop = parents.length
 		self.nopc = model.extract_classes(parents).length
@@ -554,6 +554,65 @@ redef class MClass
 end
 
 redef class MModule
+
+	private var nc: Int = 0			# (NC)  Number of Classes
+	private var ni: Int = 0			# (NI)  Number of Interfaces
+	private var nac : Int = 0		# (NAC) Number of Abstract Classes
+	private var ngc : Int = 0		# (NGC) Number of Generic Classes
+	private var ngi : Int = 0		# (NGI) Number of Generic Interfaces
+
+	private var dit = ""			# (DIT) Global Depth in Inheritance Tree
+	private var dui = "" 			# (DUI) Proportion of types that either implement an interface or extend another type other than Object
+	private var ccdui = "" 			# (CCDUI) Proportion of classes that extend some other class.
+	private var cidui = "" 			# (CIDUI) Proportion of classes that implement some other interface.
+	private var iidui = "" 			# (IIDUI) Proportion of interfaces that extend some other interface.
+	private var inhf = ""			# (IF) Proportion of types Inherited From, that is, those types that are either extended or implemented
+	private var ccif = ""			# (CCIF) Proportion of classes extended by some other class.
+	private var icif = ""			# (ICIF) Proportion of interfaces implemented by some other class.
+	private var iiif = ""			# (IIIF) Proportion of interfaces extended by some other interface.
+
+	private fun compute_module_inheritance_metrics(model: Model) do
+		var ditsum = 0
+		var dui_count = 0
+		var ccdui_count = 0
+		var cidui_count = 0
+		var iidui_count = 0
+		var if_count = 0
+		var ccif_count = 0
+		var icif_count = 0
+		var iiif_count = 0
+
+		for mmodule in self.in_nesting.greaters do
+			for mclass in mmodule.intro_mclasses do
+				if mclass.is_class then nc += 1
+				if mclass.is_class and mclass.arity > 0 then ngc += 1
+				if mclass.is_class and mclass.is_abstract then nac += 1
+				if mclass.is_interface then ni += 1
+				if mclass.is_interface and mclass.arity > 0 then ngi += 1
+
+				ditsum += mclass.depth_from_object
+				if mclass.is_dui_eligible then dui_count += 1
+				if mclass.is_ccdui_eligible then ccdui_count += 1
+				if mclass.is_cidui_eligible then cidui_count += 1
+				if mclass.is_iidui_eligible then iidui_count += 1
+				if mclass.is_if_eligible(model) then if_count += 1
+				if mclass.is_ccif_eligible(model) then ccif_count += 1
+				if mclass.is_icif_eligible(model) then icif_count += 1
+				if mclass.is_iiif_eligible(model) then iiif_count += 1
+			end
+		end
+
+		dit = div(ditsum, nc + ni)
+		dui = div(dui_count * 100, nc + ni)
+		ccdui = div(ccdui_count * 100, nc)
+		cidui = div(cidui_count * 100, nc)
+		iidui = div(iidui_count * 100, ni)
+		inhf = div(if_count * 100, nc + ni)
+		ccif = div(ccif_count * 100, nc)
+		icif = div(icif_count * 100, ni)
+		iiif = div(iiif_count * 100, ni)
+	end
+
 	private fun is_user_defined: Bool do
 		return not self.model.std_modules.has(self.name)
 	end
@@ -643,9 +702,14 @@ do
 	var udicifud = ""			# (UDICIFUD) Proportion of UD interfaces implemented by some other UD class.
 	var udiiifud = ""			# (UDIIIFUD) Proportion of UD interfaces extended by some other UD interface.
 
-	# compute scalar metrics
+	# compute modules scalar metrics
+	for mmodule in model.mmodules do
+		mmodule.compute_module_inheritance_metrics(model)
+	end
+
+	# compute class scalar metrics
 	for mclass in model.mclasses do
-		mclass.compute_scalar_metrics(model)
+		mclass.compute_class_inheritance_metrics(model)
 	end
 
 	# compute summary metrics
@@ -862,6 +926,9 @@ do
 		summaryCSV.add_line("global", nmd, nc, ni, nac, ngc, ngi)
 		summaryCSV.add_line("std-lib", nmdsl, ncsl, nisl, nacsl, ngcsl, ngisl)
 		summaryCSV.add_line("user-defined", nmdud, ncud, niud, nacud, ngcud, ngiud)
+		for m in model.mmodules do
+			summaryCSV.add_line(m.name, 1, m.nc, m.ni, m.nac, m.ngc, m.ngi)
+		end
 		summaryCSV.save
 
 		# inheritance metrics
@@ -874,6 +941,10 @@ do
 		inheritanceCSV.add_line("UD -> *", "", uddui, udccdui, udcidui, udiidui, udinhf, udccif, udicif, udiiif)
 		inheritanceCSV.add_line("UD -> SL", "", udduisl, udccduisl, udciduisl, udiiduisl, 0, 0, 0, 0)
 		inheritanceCSV.add_line("UD -> UD", "", udduiud, udccduiud, udciduiud, udiiduiud, udinhfud, udccifud, udicifud, udiiifud)
+		for m in model.mmodules do
+			if m.intro_mclasses.is_empty and m.in_nesting.greaters.length == 1 then continue
+			inheritanceCSV.add_line(m.name, m.dit, m.dui, m.ccdui, m.cidui, m.iidui, m.inhf, m.ccif, m.icif, m.iiif)
+		end
 		inheritanceCSV.save
 
 		# scalar metrics
