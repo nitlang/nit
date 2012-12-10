@@ -345,22 +345,12 @@ class SeparateCompiler
 			var type_coloring = new TypeModPerfectHashing(self.mainmodule, mtypes)
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
 			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
-
-			self.header.add_decl("int HASH(int, int);")
-			var v = new_visitor
-			v.add_decl("int HASH(int mask, int id) \{")
-			v.add_decl("return mask % id;")
-			v.add_decl("\}")
+			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			var type_coloring = new TypeAndPerfectHashing(self.mainmodule, mtypes)
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
 			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
-
-			self.header.add_decl("int HASH(int, int);")
-			var v = new_visitor
-			v.add_decl("int HASH(int mask, int id) \{")
-			v.add_decl("return mask & id;")
-			v.add_decl("\}")
+			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		else
 			var type_coloring = new TypeColoring(self.mainmodule, mtypes)
 			self.type_colors = type_coloring.colorize(mtypes)

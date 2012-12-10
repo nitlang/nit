@@ -81,11 +81,7 @@ class SeparateErasureCompiler
 			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
 			self.class_tables = class_coloring.hash_type_tables(mclasses, class_ids, class_colors)
 
-			self.header.add_decl("int HASH(int, int);")
-			var v = new_visitor
-			v.add_decl("int HASH(int mask, int id) \{")
-			v.add_decl("return mask % id;")
-			v.add_decl("\}")
+			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			# set type unique id
 			for mclass in mclasses do
@@ -96,11 +92,7 @@ class SeparateErasureCompiler
 			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
 			self.class_tables = class_coloring.hash_type_tables(mclasses, class_ids, class_colors)
 
-			self.header.add_decl("int HASH(int, int);")
-			var v = new_visitor
-			v.add_decl("int HASH(int mask, int id) \{")
-			v.add_decl("return mask & id;")
-			v.add_decl("\}")
+			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		else
 			var class_coloring
 			if modelbuilder.toolcontext.opt_bm_typing.value then
