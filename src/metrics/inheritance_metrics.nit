@@ -1050,8 +1050,8 @@ do
 		# scalar metrics
 		var scalarCSV = new CSVDocument(toolcontext.output_dir.join_path("global_scalar_metrics.csv"))
 		var udscalarCSV = new CSVDocument(toolcontext.output_dir.join_path("ud_scalar_metrics.csv"))
-		scalarCSV.set_header("mclass", "type", "DIT", "DITC", "DITI", "NOP", "NOPC", "NOPI", "NOA", "NOAC", "NOAI", "NOC", "NOCC", "NOCI", "NOD", "NODC", "NODI")
-		udscalarCSV.set_header("mclass", "type", "DITUD", "DITCUD", "DITIUD", "NOPUD", "NOPCUD", "NOPIUD", "NOAUD", "NOACUD", "NOAIUD", "NOCUD", "NOCCUD", "NOCIUD", "NODUD", "NODCUD", "NODIUD")
+		scalarCSV.set_header("mclass", "type", "FT", "DIT", "DITC", "DITI", "NOP", "NOPC", "NOPI", "NOA", "NOAC", "NOAI", "NOC", "NOCC", "NOCI", "NOD", "NODC", "NODI")
+		udscalarCSV.set_header("mclass", "type", "FT","DITUD", "DITCUD", "DITIUD", "NOPUD", "NOPCUD", "NOPIUD", "NOAUD", "NOACUD", "NOAIUD", "NOCUD", "NOCCUD", "NOCIUD", "NODUD", "NODCUD", "NODIUD")
 		for mclass in model.mclasses do
 			var name = mclass.name
 			var typ = "class"
