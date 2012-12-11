@@ -825,8 +825,16 @@ class SeparateCompiler
 		else
 			v.add("{res} = GC_MALLOC(sizeof(struct instance_{c_name}));")
 		end
-		#v.add("{res} = calloc(sizeof(struct instance_{c_name}), 1);")
 		v.add("{res}->type = type;")
+		if v.compiler.modelbuilder.toolcontext.opt_hardening.value then
+			v.add("if(type == NULL) \{")
+			v.add_abort("type null")
+			v.add("\}")
+			v.add("if(type->unanchored_table == NULL) \{")
+			v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", type->name);")
+			v.add_abort("type dead")
+			v.add("\}")
+		end
 		v.add("{res}->class = (struct class*) &class_{c_name};")
 
 		self.generate_init_attr(v, res, mtype)
