@@ -1,3 +1,4 @@
+../src/syntax/mmbuilder.nit:998,8--28: Warning: Expression is already a AMethPropdef since it is a AInitPropdef.
 usage: nits [options] file...
   -W, --warn              Show warnings
   -q, --quiet             Do not show warnings
@@ -12,4 +13,3 @@ usage: nits [options] file...
   --only-parse            Only proceed to parse step of loaders
   --only-metamodel        Stop after meta-model processing
   -i, --in-place          Generate stub files as .nit.[ch] instead of .stub.nit.[ch]
-../src/syntax/mmbuilder.nit:998,8--28: Warning: Expression is already a AMethPropdef since it is a AInitPropdef.

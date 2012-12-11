@@ -27,8 +27,8 @@ count=2
 
 function die()
 {
-	echo >&2 "DIE: $*"
-	exit 1
+	echo >&2 "error: $*"
+	died=1
 }
 
 # Run a single command multiple time and store the execution times
@@ -72,7 +72,7 @@ function run_command()
 {
 	if [ "$dry_run" = "true" ]; then return; fi
 	echo " $ $@"
-	"$@"
+	"$@" || die "$@: failed"
 }
 
 # perl function to compute min/max/avg.
@@ -202,6 +202,8 @@ function run_compiler()
 	bench_command "nit" "nit test_parser.nit test_parser.nit" "./nit.$title.bin" -v test_parser.nit -- -n rapid_type_analysis.nit
 	run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
 	bench_command "shoot" "shoot_logic" "./shoot.$title.bin"
+	run_command "$@" ../tests/shootout_binarytrees.nit -o "bintrees.$title.bin"
+	bench_command "bintrees" "shootout_binarytrees" "./bintrees.$title.bin" 17
 }
 
 ## HANDLE OPTIONS ##
@@ -233,6 +235,11 @@ if test -z "$NOTSKIPED"; then
 	echo "List of available benches:"
 	echo "* all: run all the benches"
 fi
+
+## COMPILE ENGINES
+
+test -f ./nitc_3 || ./ncall.sh -O
+test -f ./nitg || ./nitc_3 nitg.nit -O -v
 
 ## EFFECTIVE BENCHS ##
 
@@ -274,11 +281,11 @@ function bench_steps()
 	bench_command "generate c" "" ./nitg --no-cc nitg.nit
 	bench_command "full" "" ./nitg nitg.nit -o "nitg_nitg.bin"
 
-	prepare_res "$name-nitg-s.dat" "nitg-s" "Various steps of nitg --separate"
-	bench_command "parse" "" ./nitg --separate --only-parse nitg.nit
-	bench_command "metamodel" "" ./nitg --separate --only-metamodel nitg.nit
-	bench_command "generate c" "" ./nitg --separate --no-cc nitg.nit
-	bench_command "full" "" ./nitg --separate nitg.nit -o "nitg_nitg-s.bin"
+	prepare_res "$name-nitg-e.dat" "nitg-e" "Various steps of nitg --erasure"
+	bench_command "parse" "" ./nitg --erasure --only-parse nitg.nit
+	bench_command "metamodel" "" ./nitg --erasure --only-metamodel nitg.nit
+	bench_command "generate c" "" ./nitg --erasure --no-cc nitg.nit
+	bench_command "full" "" ./nitg --erasure nitg.nit -o "nitg_nitg-e.bin"
 
 	plot "$name.gnu"
 }
@@ -287,10 +294,17 @@ bench_steps
 # $#: options to compare
 function bench_nitg_options()
 {
-	name="$FUNCNAME"
+	tag=$1
+	shift
+	name="$FUNCNAME-$tag"
 	skip_test "$name" && return
 	prepare_res "$name.dat" "no options" "nitg without options"
 	run_compiler "nitg" ./nitg
+
+	if test -n "$2"; then
+		prepare_res "$name-all.dat" "all" "nitg with all options $@"
+		run_compiler "nitg-$tag" ./nitg $@
+	fi
 
 	for opt in "$@"; do
 		prepare_res "$name$opt.dat" "$opt" "nitg with option $opt"
@@ -299,7 +313,36 @@ function bench_nitg_options()
 
 	plot "$name.gnu"
 }
-bench_nitg_options --hardening
+bench_nitg_options "hardening" --hardening
+bench_nitg_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
+
+function bench_nitg-e_options()
+{
+	tag=$1
+	shift
+	name="$FUNCNAME-$tag"
+	skip_test "$name" && return
+	prepare_res "$name.dat" "no options" "nitg-e without options"
+	run_compiler "nitg-e" ./nitg --erasure
+
+	if test -n "$2"; then
+		prepare_res "$name-all.dat" "all" "nitg-e with all options $@"
+		run_compiler "nitg-e-$tag" ./nitg --erasure $@
+	fi
+
+	for opt in "$@"; do
+		prepare_res "$name$opt.dat" "$opt" "nitg-e with option $opt"
+		run_compiler "nitg-e$opt" ./nitg --erasure $opt
+	done
+
+	plot "$name.gnu"
+}
+bench_nitg-e_options "hardening" --hardening
+bench_nitg-e_options "nocheck" --no-inline-intern --no-check-covariance --no-check-initialization --no-check-assert --no-check-other
+bench_nitg-e_options "inline" --inline-coloring-numbers
+bench_nitg-e_options "binary" --bm-typing
+bench_nitg-e_options "phmod" --phmod-typing
+bench_nitg-e_options "phand" --phand-typing
 
 function bench_nitc_gc()
 {
@@ -338,6 +381,8 @@ function bench_engines()
 	run_compiler "nitc-g" ./nitc_3 -O --global
 	prepare_res "$name-nitg.dat" "nitg" "nitg"
 	run_compiler "nitg" ./nitg
+	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
+	run_compiler "nitg-e" ./nitg --erasure
 	plot "$name.gnu"
 }
 bench_engines
@@ -354,10 +399,16 @@ function bench_compilation_time
 	for i in ../examples/hello_world.nit test_parser.nit nitg.nit; do
 		bench_command `basename "$i" .nit` "" ./nitg "$i" --no-cc
 	done
-	prepare_res "$name-nitg_g.dat" "nitg/g" "nitg/g"
+	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg --erasure"
 	for i in ../examples/hello_world.nit test_parser.nit nitg.nit; do
-		bench_command `basename "$i" .nit` "" ./nitg.bin "$i" --no-cc
+		bench_command `basename "$i" .nit` "" ./nitg --erasure "$i" --no-cc
 	done
 	plot "$name.gnu"
 }
 bench_compilation_time
+
+if test -n "$died"; then
+	echo "Some commands failed"
+	exit 1
+fi
+exit 0

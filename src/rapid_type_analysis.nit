@@ -102,6 +102,18 @@ class RapidTypeAnalysis
 	# The customized method definitions that remain to visit
 	private var todo: List[CustomizedMethodDef] = new List[CustomizedMethodDef]
 
+	# Adapt and remove nullable
+	# return null if we got the null type
+	fun cleanup_type(mtype: MType, recvtype: MClassType): nullable MClassType
+	do
+		mtype = mtype.anchor_to(self.mainmodule, recvtype)
+		if mtype isa MNullType then return null
+		if mtype isa MNullableType then mtype = mtype.mtype
+		assert mtype isa MClassType
+		assert not mtype.need_anchor
+		return mtype
+	end
+
 	# Add a live type to the pool
 	#
 	# If the types is already live, then do nothing.
@@ -113,6 +125,7 @@ class RapidTypeAnalysis
 
 		assert not mtype.need_anchor
 		self.live_types.add(mtype)
+		self.check_depth(mtype)
 
 		# Collect default attributes
 		for cd in mtype.collect_mclassdefs(self.mainmodule)
@@ -185,6 +198,15 @@ class RapidTypeAnalysis
 
 		assert not mtype.need_anchor
 		self.live_cast_types.add(mtype)
+		self.check_depth(mtype)
+	end
+
+	fun check_depth(mtype: MClassType)
+	do
+		var d = mtype.depth
+		if d > 255 then
+			self.modelbuilder.toolcontext.fatal_error(null, "Fatal error: limitation in the rapidtype analysis engine: a type depth of {d} is too important, the problematic type is {mtype}.")
+		end
 	end
 
 	# Run the analysis until all visitable method definitions are visited.
@@ -207,6 +229,14 @@ class RapidTypeAnalysis
 				self.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg, self.mainmodule))
 				var native = self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype])
 				self.add_type(native)
+			end
+
+			for i in [0..mr.mmethoddef.msignature.arity[ do
+				var origtype = mr.mmethoddef.mproperty.intro.msignature.mparameters[i].mtype
+				if not origtype.need_anchor then continue # skip non covariant stuff
+				var paramtype = mr.mmethoddef.msignature.mparameters[i].mtype
+				paramtype = self.cleanup_type(paramtype, mr.receiver).as(not null)
+				self.add_cast_type(paramtype)
 			end
 
 			if not self.modelbuilder.mpropdef2npropdef.has_key(mr.mmethoddef) then
@@ -368,6 +398,10 @@ private class RapidTypeVisitor
 	do
 		if node == null then return
 		node.accept_rapid_type_vistor(self)
+		if node isa AExpr then
+			var implicit_cast_to = node.implicit_cast_to
+			if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
+		end
 		node.visit_all(self)
 	end
 
@@ -419,9 +453,9 @@ end
 redef class AArrayExpr
 	redef fun accept_rapid_type_vistor(v)
 	do
-		var mtype = self.mtype.as(not null)
+		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var native = v.get_class("NativeArray").get_mtype([mtype.as(MGenericType).arguments.first])
+		var native = v.get_class("NativeArray").get_mtype([mtype.arguments.first])
 		v.add_type(native)
 		var prop = v.get_method(mtype, "with_native")
 		v.add_monomorphic_send(mtype, prop)
@@ -448,6 +482,8 @@ redef class ASuperstringExpr
 		v.add_type(v.get_class("NativeArray").get_mtype([v.get_class("Object").mclass_type]))
 		var prop = v.get_method(arraytype, "join")
 		v.add_monomorphic_send(arraytype, prop)
+		var prop2 = v.get_method(arraytype, "with_native")
+		v.add_monomorphic_send(arraytype, prop2)
 	end
 end
 
@@ -573,7 +609,7 @@ redef class AForExpr
 		var colltype = self.coltype.as(not null)
 		var itmeth = v.get_method(colltype, "iterator")
 		v.add_send(recvtype, itmeth)
-		var iteratortype = itmeth.intro.msignature.return_mtype.as(MClassType).mclass.mclassdefs.first.bound_mtype
+		var iteratortype = itmeth.intro.msignature.return_mtype.as(MClassType).mclass.intro.bound_mtype
 		var objtype = v.get_class("Object").mclass_type
 		v.add_send(objtype, v.get_method(iteratortype, "is_ok"))
 		if self.variables.length == 1 then

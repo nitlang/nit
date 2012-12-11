@@ -68,21 +68,34 @@ private class TypeVisitor
 		return res
 	end
 
-	fun resolve_signature_for(msignature: MSignature, recv: MType, for_self: Bool): MSignature
+	# Retrieve the signature of a MMethodDef resolved for a specific call.
+	# This method is an helper to symplify the query on the model.
+	#
+	# Note: `for_self` indicates if the reciever is self or not.
+	# If yes, virtual types are not resolved.
+	fun resolve_signature_for(mmethoddef: MMethodDef, recv: MType, for_self: Bool): MSignature
 	do
-		return self.resolve_for(msignature, recv, for_self).as(MSignature)
+		return self.resolve_for(mmethoddef.msignature.as(not null), recv, for_self).as(MSignature)
 	end
 
-	fun check_subtype(node: ANode, sub, sup: MType): Bool
+	# Check that `sub` is a subtype of `sup`.
+	# If `sub` is not a valud suptype, then display an error on `node` an return null.
+	# If `sub` is a safe subtype of `sup` then return `sub`.
+	# If `sun` is an insafe subtype (ie an imlicit cast is required), then return `sup`.
+	#
+	# The point of the return type is to determinate the usable type on an expression:
+	# If the suptype is safe, then the return type is the one on the expression typed by `sub`.
+	# Is the subtype is unsafe, then the return type is the one of an implicit cast on `sup`.
+	fun check_subtype(node: ANode, sub, sup: MType): nullable MType
 	do
-		if self.is_subtype(sub, sup) then return true
+		if self.is_subtype(sub, sup) then return sub
 		if self.is_subtype(sub, self.anchor_to(sup)) then
 			# FIXME workarround to the current unsafe typing policy. To remove once fixed virtual types exists.
 			#node.debug("Unsafe typing: expected {sup}, got {sub}")
-			return true
+			return sup
 		end
 		self.modelbuilder.error(node, "Type error: expected {sup}, got {sub}")
-		return false
+		return null
 	end
 
 	# Visit an expression and do not care about the return value
@@ -126,10 +139,11 @@ private class TypeVisitor
 
 		if sup == null then return null # Forward error
 
-		if not check_subtype(nexpr, sub, sup) then
-			return null
+		var res = check_subtype(nexpr, sub, sup)
+		if res != sub then
+			nexpr.implicit_cast_to = res
 		end
-		return sub
+		return res
 	end
 
 	# Visit an expression and expect its static type is a bool
@@ -195,11 +209,15 @@ private class TypeVisitor
 		return mclass.mclass_type
 	end
 
-	fun get_method(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable MMethodDef
+	fun get_method(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
 	do
 		var unsafe_type = self.anchor_to(recvtype)
 
 		#debug("recv: {recvtype} (aka {unsafe_type})")
+		if recvtype isa MNullType then
+			self.error(node, "Error: Method '{name}' call on 'null'.")
+			return null
+		end
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
 		if mproperty == null then
@@ -212,6 +230,7 @@ private class TypeVisitor
 			return null
 		end
 
+		assert mproperty isa MMethod
 		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility then
 			self.modelbuilder.error(node, "Error: Method '{name}' is protected and can only acceded by self. {mproperty.intro_mclassdef.mmodule.visibility_for(self.mmodule)}")
 			return null
@@ -226,9 +245,24 @@ private class TypeVisitor
 			return null
 		end
 
-		var propdef = propdefs.first
-		assert propdef isa MMethodDef
-		return propdef
+		var mpropdef = propdefs.first
+
+		var msignature = self.resolve_signature_for(mpropdef, recvtype, recv_is_self)
+
+		var erasure_cast = false
+		var rettype = mpropdef.msignature.return_mtype
+		if not recv_is_self and rettype != null then
+			if rettype isa MNullableType then rettype = rettype.mtype
+			if rettype isa MParameterType then
+				var erased_rettype = msignature.return_mtype
+				assert erased_rettype != null
+				#node.debug("Erasure cast: Really a {rettype} but unsafely a {erased_rettype}")
+				erasure_cast = true
+			end
+		end
+
+		var callsite = new CallSite(node, recvtype, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
+		return callsite
 	end
 
 	# Visit the expressions of args and cheik their conformity with the corresponding typi in signature
@@ -331,6 +365,38 @@ private class TypeVisitor
 		end
 		#self.modelbuilder.warning(node, "Type Error: {col.length} conflicting types: <{col.join(", ")}>")
 		return null
+	end
+end
+
+# A specific method call site with its associated informations.
+class CallSite
+	# The assiciated node for location
+	var node: ANode
+
+	# The statis type of the receiver
+	var recv: MType
+
+	# Is the receiver self?
+	# If "for_self", virtual types of the signature are keeped
+	# If "not_for_self", virtual type are erased
+	var recv_is_self: Bool
+
+	# The designated method
+	var mproperty: MMethod
+
+	# The statically designated method definition
+	# The most specif one, it is.
+	var mpropdef: MMethodDef
+
+	# The resolved signature for the receiver
+	var msignature: MSignature
+
+	# Is a implicit cast required on erasure typing policy?
+	var erasure_cast: Bool
+
+	private fun check_signature(v: TypeVisitor, args: Array[AExpr]): Bool
+	do
+		return v.check_signature(self.node, args, self.mproperty.name, self.msignature)
 	end
 end
 
@@ -458,6 +524,12 @@ redef class AExpr
 	# Used to distinguish errors and statements when `mtype' == null
 	var is_typed: Bool = false
 
+	# If required, the following implicit cast ".as(XXX)"
+	# Such a cast may by required after evaluating the expression when
+	# a unsafe operation is detected (silently accepted by the Nit language).
+	# The attribute is computed by `check_subtype`
+	var implicit_cast_to: nullable MType = null
+
 	# Return the variable read (if any)
 	# Used to perform adaptive typing
 	fun its_variable: nullable Variable do return null
@@ -547,8 +619,11 @@ redef class AVarAssignExpr
 end
 
 redef class AReassignFormExpr
+	# @depreciated use `reassign_callsite`
+	fun reassign_property: nullable MMethodDef do return self.reassign_callsite.mpropdef
+
 	# The method designed by the reassign operator.
-	var reassign_property: nullable MMethodDef = null
+	var reassign_callsite: nullable CallSite
 
 	var read_type: nullable MType = null
 
@@ -575,15 +650,11 @@ redef class AReassignFormExpr
 			return null
 		end
 
-		var mpropdef = v.get_method(self, readtype, reassign_name, false)
-		if mpropdef == null then return null # Skip error
+		var callsite = v.get_method(self, readtype, reassign_name, false)
+		if callsite == null then return null # Skip error
+		self.reassign_callsite = callsite
 
-		self.reassign_property = mpropdef
-
-		var msignature = mpropdef.msignature
-		assert msignature!= null
-		msignature = v.resolve_signature_for(msignature, readtype, false)
-
+		var msignature = callsite.msignature
 		var rettype = msignature.return_mtype
 		assert msignature.arity == 1 and rettype != null
 
@@ -722,17 +793,25 @@ redef class ALoopExpr
 end
 
 redef class AForExpr
-	var coltype: nullable MGenericType
+	var coltype: nullable MClassType
+
+	var method_iterator: nullable MMethod
+	var method_is_ok: nullable MMethod
+	var method_item: nullable MMethod
+	var method_next: nullable MMethod
+	var method_key: nullable MMethod
 
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
 		var objcla = v.get_mclass(self, "Object")
 		if objcla == null then return
 
+		var is_col = false
+		var is_map = false
+
 		var colcla = v.try_get_mclass(self, "Collection")
 		if colcla != null and v.is_subtype(mtype, colcla.get_mtype([objcla.mclass_type.as_nullable])) then
 			var coltype = mtype.supertype_to(v.mmodule, v.anchor, colcla)
-			assert coltype isa MGenericType
 			self.coltype = coltype
 			var variables =  self.variables
 			if variables.length != 1 then
@@ -740,13 +819,12 @@ redef class AForExpr
 			else
 				variables.first.declared_type = coltype.arguments.first
 			end
-			return
+			is_col = true
 		end
 
 		var mapcla = v.try_get_mclass(self, "Map")
 		if mapcla != null and v.is_subtype(mtype, mapcla.get_mtype([objcla.mclass_type.as_nullable, objcla.mclass_type.as_nullable])) then
 			var coltype = mtype.supertype_to(v.mmodule, v.anchor, mapcla)
-			assert coltype isa MGenericType
 			self.coltype = coltype
 			var variables = self.variables
 			if variables.length != 2 then
@@ -754,6 +832,56 @@ redef class AForExpr
 			else
 				variables[0].declared_type = coltype.arguments[0]
 				variables[1].declared_type = coltype.arguments[1]
+			end
+			is_map = true
+		end
+
+		if is_col or is_map then
+			# get iterator method
+			var coltype = self.coltype.as(not null)
+			var itdef = v.get_method(self, coltype, "iterator", true)
+			if itdef == null then
+				v.error(self, "Type Error: Expected method 'iterator' in type {coltype}")
+				return
+			end
+			self.method_iterator = itdef.mproperty
+
+			# get iterator type
+			var ittype = itdef.msignature.return_mtype
+			if ittype == null then
+				v.error(self, "Type Error: Expected method 'iterator' to return an Iterator type")
+				return
+			end
+
+			# get methods is_ok, next, item
+			var ikdef = v.get_method(self, ittype, "is_ok", false)
+			if ikdef == null then
+				v.error(self, "Type Error: Expected method 'is_ok' in Iterator type {ittype}")
+				return
+			end
+			self.method_is_ok = ikdef.mproperty
+
+			var itemdef = v.get_method(self, ittype, "item", false)
+			if itemdef == null then
+				v.error(self, "Type Error: Expected method 'item' in Iterator type {ittype}")
+				return
+			end
+			self.method_item = itemdef.mproperty
+
+			var nextdef = v.get_method(self, ittype, "next", false)
+			if nextdef == null then
+				v.error(self, "Type Error: Expected method 'next' in Iterator type {ittype}")
+				return
+			end
+			self.method_next = nextdef.mproperty
+
+			if is_map then
+				var keydef = v.get_method(self, ittype, "key", false)
+				if keydef == null then
+					v.error(self, "Type Error: Expected method 'key' in Iterator type {ittype}")
+					return
+				end
+				self.method_key = keydef.mproperty
 			end
 			return
 		end
@@ -930,7 +1058,7 @@ redef class ARangeExpr
 	do
 		var discrete_class = v.get_mclass(self, "Discrete")
 		if discrete_class == null then return # Forward error
-		var discrete_type = discrete_class.mclassdefs.first.bound_mtype
+		var discrete_type = discrete_class.intro.bound_mtype
 		var t1 = v.visit_expr_subtype(self.n_expr, discrete_type)
 		var t2 = v.visit_expr_subtype(self.n_expr2, discrete_type)
 		if t1 == null or t2 == null then return
@@ -1019,8 +1147,11 @@ end
 ## MESSAGE SENDING AND PROPERTY
 
 redef class ASendExpr
+	# @depreciated: use `callsite`
+	fun mproperty: nullable MMethod do return callsite.mproperty
+
 	# The property invoked by the send.
-	var mproperty: nullable MMethod
+	var callsite: nullable CallSite
 
 	redef fun accept_typing(v)
 	do
@@ -1033,22 +1164,17 @@ redef class ASendExpr
 			return
 		end
 
-		var propdef = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
-		if propdef == null then return
-		var mproperty = propdef.mproperty
-		self.mproperty = mproperty
-		var msignature = propdef.msignature
-		if msignature == null then abort # Forward error
-
-		var for_self = self.n_expr isa ASelfExpr
-		msignature = v.resolve_signature_for(msignature, recvtype, for_self)
+		var callsite = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
+		if callsite == null then return
+		self.callsite = callsite
+		var msignature = callsite.msignature
 
 		var args = compute_raw_arguments
 		self.raw_arguments = args
 
-		v.check_signature(self, args, name, msignature)
+		callsite.check_signature(v, args)
 
-		if mproperty.is_init then
+		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
 			if not (vmpropdef isa MMethodDef and vmpropdef.mproperty.is_init) then
 				v.error(self, "Can call a init only in another init")
@@ -1192,8 +1318,11 @@ redef class ABraAssignExpr
 end
 
 redef class ASendReassignFormExpr
+	# @depreciated use `write_callsite`
+	fun write_mproperty: nullable MMethod do return write_callsite.mproperty
+
 	# The property invoked for the writing
-	var write_mproperty: nullable MMethod = null
+	var write_callsite: nullable CallSite
 
 	redef fun accept_typing(v)
 	do
@@ -1206,40 +1335,33 @@ redef class ASendReassignFormExpr
 			return
 		end
 
-		var propdef = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
-		if propdef == null then return
-		var mproperty = propdef.mproperty
-		self.mproperty = mproperty
-		var msignature = propdef.msignature
-		if msignature == null then abort # Forward error
 		var for_self = self.n_expr isa ASelfExpr
-		msignature = v.resolve_signature_for(msignature, recvtype, for_self)
+		var callsite = v.get_method(self, recvtype, name, for_self)
+
+		if callsite == null then return
+		self.callsite = callsite
 
 		var args = compute_raw_arguments
 		self.raw_arguments = args
 
-		v.check_signature(self, args, name, msignature)
+		callsite.check_signature(v, args)
 
-		var readtype = msignature.return_mtype
+		var readtype = callsite.msignature.return_mtype
 		if readtype == null then
 			v.error(self, "Error: {name} is not a function")
 			return
 		end
 
-		var wpropdef = v.get_method(self, recvtype, name + "=", self.n_expr isa ASelfExpr)
-		if wpropdef == null then return
-		var wmproperty = wpropdef.mproperty
-		self.write_mproperty = wmproperty
-		var wmsignature = wpropdef.msignature
-		if wmsignature == null then abort # Forward error
-		wmsignature = v.resolve_signature_for(wmsignature, recvtype, for_self)
+		var wcallsite = v.get_method(self, recvtype, name + "=", self.n_expr isa ASelfExpr)
+		if wcallsite == null then return
+		self.write_callsite = wcallsite
 
-		var wtype = self.resolve_reassignment(v, readtype, wmsignature.mparameters.last.mtype)
+		var wtype = self.resolve_reassignment(v, readtype, wcallsite.msignature.mparameters.last.mtype)
 		if wtype == null then return
 
 		args = args.to_a # duplicate so raw_arguments keeps only the getter args
 		args.add(self.n_value)
-		v.check_signature(self, args, name + "=", wmsignature)
+		wcallsite.check_signature(v, args)
 
 		self.is_typed = true
 	end
@@ -1294,8 +1416,7 @@ redef class ASuperExpr
 		var superprop = superprops.first
 		assert superprop isa MMethodDef
 
-		var msignature = superprop.msignature.as(not null)
-		msignature = v.resolve_signature_for(msignature, recvtype, true)
+		var msignature = v.resolve_signature_for(superprop, recvtype, true)
 		var args = self.n_args.to_a
 		if args.length > 0 then
 			v.check_signature(self, args, mproperty.name, msignature)
@@ -1338,8 +1459,7 @@ redef class ASuperExpr
 		self.mproperty = superprop.mproperty
 
 		var args = self.n_args.to_a
-		var msignature = superprop.msignature.as(not null)
-		msignature = v.resolve_signature_for(msignature, recvtype, true)
+		var msignature = v.resolve_signature_for(superprop, recvtype, true)
 		if args.length > 0 then
 			v.check_signature(self, args, mproperty.name, msignature)
 		else
@@ -1353,8 +1473,11 @@ end
 ####
 
 redef class ANewExpr
+	# @depreciated use `callsite`
+	fun mproperty: nullable MMethod do return self.callsite.mproperty
+
 	# The constructor invoked by the new.
-	var mproperty: nullable MMethod
+	var callsite: nullable CallSite
 
 	redef fun accept_typing(v)
 	do
@@ -1379,21 +1502,18 @@ redef class ANewExpr
 		else
 			name = "init"
 		end
-		var propdef = v.get_method(self, recvtype, name, false)
-		if propdef == null then return
+		var callsite = v.get_method(self, recvtype, name, false)
+		if callsite == null then return
 
-		self.mproperty = propdef.mproperty
+		self.callsite = callsite
 
-		if not propdef.mproperty.is_init_for(recvtype.mclass) then
+		if not callsite.mproperty.is_init_for(recvtype.mclass) then
 			v.error(self, "Error: {name} is not a constructor.")
 			return
 		end
 
-		var msignature = propdef.msignature.as(not null)
-		msignature = v.resolve_signature_for(msignature, recvtype, false)
-
 		var args = n_args.to_a
-		v.check_signature(self, args, name, msignature)
+		callsite.check_signature(v, args)
 	end
 end
 
@@ -1493,8 +1613,8 @@ redef class AClosureCallExpr
 		if variable == null then return # Skip error
 
 		var recvtype = v.nclassdef.mclassdef.bound_mtype
-		var msignature = variable.declared_type.as(MSignature)
-		msignature = v.resolve_signature_for(msignature, recvtype, false)
+		var msignature = variable.declared_type.as(not null)
+		msignature = v.resolve_for(msignature, recvtype, false).as(MSignature)
 
 		var args = n_args.to_a
 		v.check_signature(self, args, variable.name, msignature)

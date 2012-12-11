@@ -1,3 +1,4 @@
+Runtime error: Cast failed (alt/base_as_notnull_alt5.nit:59)
 1
 2
 3
@@ -8,4 +9,3 @@
 3
 6
 
-Runtime error: Cast failed (alt/base_as_notnull_alt5.nit:59)

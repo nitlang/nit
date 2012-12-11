@@ -32,3 +32,6 @@ class G[T: A]
 		__debug__ type U: au
 	end
 end
+
+interface Object
+end

@@ -165,6 +165,12 @@ private class NaiveInterpreter
 		if i == null and not self.is_escaping then
 			n.debug("inconsitance: no value and not escaping.")
 		end
+		var implicit_cast_to = n.implicit_cast_to
+		if implicit_cast_to != null then
+			var mtype = self.unanchor_type(implicit_cast_to)
+			if not self.is_subtype(i.mtype, mtype) then n.fatal(self, "Cast failed")
+		end
+
 		#n.debug("OUT Execute expr: value is {i}")
 		#if not is_subtype(i.mtype, n.mtype.as(not null)) then n.debug("Expected {n.mtype.as(not null)} got {i}")
 		frame.current_node = old
@@ -478,7 +484,7 @@ abstract class Instance
 	fun eq_is(o: Instance): Bool do return self is o
 
 	# Human readable object identity "Type#number"
-	redef fun to_s do return "{mtype}#{object_id}"
+	redef fun to_s do return "{mtype}"
 
 	# Return the integer value if the instance is an integer.
 	# else aborts
@@ -576,10 +582,11 @@ redef class ANode
 	private fun fatal(v: NaiveInterpreter, message: String)
 	do
 		if v.modelbuilder.toolcontext.opt_no_color.value == true then
-			print("Runtime error: {message} ({location.file.filename}:{location.line_start})")
+			stderr.write("Runtime error: {message} ({location.file.filename}:{location.line_start})\n")
 		else
-			print("{location}: Runtime error: {message}\n{location.colored_line("0;31")}")
-			print(v.stack_trace)
+			stderr.write("{location}: Runtime error: {message}\n{location.colored_line("0;31")}\n")
+			stderr.write(v.stack_trace)
+			stderr.write("\n")
 		end
 		exit(1)
 	end
@@ -798,8 +805,9 @@ redef class AInternMethPropdef
 			end
 		else if pname == "calloc_array" then
 			var recvtype = args.first.mtype.as(MClassType)
-			var mtype: MType = recvtype.supertype_to(v.mainmodule, recvtype, v.mainmodule.get_primitive_class("ArrayCapable"))
-			mtype = mtype.as(MGenericType).arguments.first
+			var mtype: MType
+			mtype = recvtype.supertype_to(v.mainmodule, recvtype, v.mainmodule.get_primitive_class("ArrayCapable"))
+			mtype = mtype.arguments.first
 			var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
 			return new PrimitiveInstance[Array[Instance]](v.mainmodule.get_primitive_class("NativeArray").get_mtype([mtype]), val)
 		end
@@ -1304,7 +1312,7 @@ redef class AArrayExpr
 			if i == null then return null
 			val.add(i)
 		end
-		var mtype = v.unanchor_type(self.mtype.as(not null)).as(MGenericType)
+		var mtype = v.unanchor_type(self.mtype.as(not null)).as(MClassType)
 		var elttype = mtype.arguments.first
 		return v.array_instance(val, elttype)
 	end

@@ -3,10 +3,7 @@
 
 .nit_compile*
 *.orig
-nitc
-nitdoc
-nits
-nitmetrics
+bin/nit*
 doc/stdlib
 
 *.aux
@@ -31,6 +28,7 @@ src/*.bin
 
 c_src/*.o
 c_src/*.cksum
+c_src/nitc
 
 lib/*.log
 lib/*.dot

@@ -381,6 +381,7 @@ class ModelBuilder
 	private fun build_module_importation(nmodule: AModule)
 	do
 		if nmodule.is_importation_done then return
+		nmodule.is_importation_done = true
 		var mmodule = nmodule.mmodule.as(not null)
 		var stdimport = true
 		var imported_modules = new Array[MModule]
@@ -406,7 +407,6 @@ class ModelBuilder
 		end
 		self.toolcontext.info("{mmodule} imports {imported_modules.join(", ")}", 3)
 		mmodule.set_imported_mmodules(imported_modules)
-		nmodule.is_importation_done = true
 	end
 
 	# All the loaded modules
@@ -459,14 +459,9 @@ class ModelBuilder
 		if mclass == null then
 			mclass = new MClass(mmodule, name, arity, mkind, mvisibility)
 			#print "new class {mclass}"
-		else if nclassdef isa AStdClassdef and already_builded_mclasses.has_key(mclass.name) then
-			if mclass.intro_mmodule == mmodule then
-				error(nclassdef, "Error: A class {name} is already defined at line {already_builded_mclasses[mclass.name].location.line_start}.")
-				return
-			else
-				error(nclassdef, "Error: A class {name} is already refined at line {already_builded_mclasses[mclass.name].location.line_start}.")
-				return
-			end
+		else if nclassdef isa AStdClassdef and nmodule.mclass2nclassdef.has_key(mclass) then
+			error(nclassdef, "Error: A class {name} is already defined at line {nmodule.mclass2nclassdef[mclass].location.line_start}.")
+			return
 		else if nclassdef isa AStdClassdef and nclassdef.n_kwredef == null then
 			error(nclassdef, "Redef error: {name} is an imported class. Add the redef keyword to refine it.")
 			return
@@ -479,7 +474,7 @@ class ModelBuilder
 			error(nvisibility, "Error: refinement changed the visibility from a {mclass.visibility} to a {mvisibility}")
 		end
 		nclassdef.mclass = mclass
-		already_builded_mclasses[mclass.name] = nclassdef
+		nmodule.mclass2nclassdef[mclass] = nclassdef
 	end
 
 	# Visit the AST and create the MClassDef objects
@@ -510,7 +505,7 @@ class ModelBuilder
 				var nfd = nclassdef.n_formaldefs[i]
 				var nfdt = nfd.n_type
 				if nfdt != null then
-					var bound = resolve_mtype(nclassdef, nfdt)
+					var bound = resolve_mtype_unchecked(nclassdef, nfdt)
 					if bound == null then return # Forward error
 					if bound.need_anchor then
 						# No F-bounds!
@@ -523,7 +518,7 @@ class ModelBuilder
 					bounds.add(objectclass.mclass_type.as_nullable)
 				else
 					# Inherit the bound
-					bounds.add(mclass.mclassdefs.first.bound_mtype.as(MGenericType).arguments[i])
+					bounds.add(mclass.intro.bound_mtype.arguments[i])
 				end
 			end
 		end
@@ -540,8 +535,8 @@ class ModelBuilder
 		end
 	end
 
-	# Visit the AST and set the super-types of the MClass objects (ie compute the inheritance)
-	private fun build_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
+	# Visit the AST and set the super-types of the MClassdef objects
+	private fun collect_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule.as(not null)
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
@@ -555,7 +550,7 @@ class ModelBuilder
 			for nsc in nclassdef.n_superclasses do
 				specobject = false
 				var ntype = nsc.n_type
-				var mtype = resolve_mtype(nclassdef, ntype)
+				var mtype = resolve_mtype_unchecked(nclassdef, ntype)
 				if mtype == null then continue # Skip because of error
 				if not mtype isa MClassType then
 					error(ntype, "Error: supertypes cannot be a formal type")
@@ -589,8 +584,10 @@ class ModelBuilder
 	do
 		# Force building recursively
 		if nmodule.build_classes_is_done then return
+		nmodule.build_classes_is_done = true
 		var mmodule = nmodule.mmodule.as(not null)
 		for imp in mmodule.in_importation.direct_greaters do
+
 			build_classes(mmodule2nmodule[imp])
 		end
 
@@ -611,7 +608,36 @@ class ModelBuilder
 
 		# Create inheritance on all classdefs
 		for nclassdef in nmodule.n_classdefs do
-			self.build_a_mclassdef_inheritance(nmodule, nclassdef)
+			self.collect_a_mclassdef_inheritance(nmodule, nclassdef)
+		end
+
+		# Create the mclassdef hierarchy
+		for nclassdef in nmodule.n_classdefs do
+			var mclassdef = nclassdef.mclassdef.as(not null)
+			mclassdef.add_in_hierarchy
+		end
+
+		# Check unchecked ntypes
+		for nclassdef in nmodule.n_classdefs do
+			if nclassdef isa AStdClassdef then
+				# check bound of formal parameter
+				for nfd in  nclassdef.n_formaldefs do
+					var nfdt = nfd.n_type
+					if nfdt != null and nfdt.mtype != null then
+						var bound = resolve_mtype(nclassdef, nfdt)
+						if bound == null then return # Forward error
+					end
+				end
+				# check declared super types
+				for nsc in nclassdef.n_superclasses do
+					var ntype = nsc.n_type
+					if ntype.mtype != null then
+						var mtype = resolve_mtype(nclassdef, ntype)
+						if mtype == null then return # Forward error
+					end
+				end
+			end
+
 		end
 
 		# TODO: Check that the super-class is not intrusive
@@ -621,8 +647,6 @@ class ModelBuilder
 		for nclassdef in nmodule.n_classdefs do
 			self.build_properties(nclassdef)
 		end
-
-		nmodule.build_classes_is_done = true
 	end
 
 	# Register the nmodule associated to each mmodule
@@ -641,8 +665,8 @@ class ModelBuilder
 	do
 		# Force building recursively
 		if nclassdef.build_properties_is_done then return
-		var mclassdef = nclassdef.mclassdef
-		if mclassdef == null then return # Skip error
+		nclassdef.build_properties_is_done = true
+		var mclassdef = nclassdef.mclassdef.as(not null)
 		if mclassdef.in_hierarchy == null then return # Skip error
 		for superclassdef in mclassdef.in_hierarchy.direct_greaters do
 			build_properties(mclassdef2nclassdef[superclassdef])
@@ -658,7 +682,6 @@ class ModelBuilder
 			npropdef.check_signature(self, nclassdef)
 		end
 		process_default_constructors(nclassdef)
-		nclassdef.build_properties_is_done = true
 	end
 
 	# Introduce or inherit default constructor
@@ -731,6 +754,7 @@ class ModelBuilder
 		var mparameters = new Array[MParameter]
 		for npropdef in nclassdef.n_propdefs do
 			if npropdef isa AAttrPropdef and npropdef.n_expr == null then
+				if npropdef.mpropdef == null then return # Skip broken attribute
 				var paramname = npropdef.mpropdef.mproperty.name.substring_from(1)
 				var ret_type = npropdef.mpropdef.static_mtype
 				if ret_type == null then return
@@ -753,7 +777,7 @@ class ModelBuilder
 	# The mmodule used as context is `nclassdef.mmodule'
 	# In case of problem, an error is displayed on `ntype' and null is returned.
 	# FIXME: the name "resolve_mtype" is awful
-	fun resolve_mtype(nclassdef: AClassdef, ntype: AType): nullable MType
+	fun resolve_mtype_unchecked(nclassdef: AClassdef, ntype: AType): nullable MType
 	do
 		var name = ntype.n_id.text
 		var mclassdef = nclassdef.mclassdef
@@ -769,6 +793,7 @@ class ModelBuilder
 				end
 				res = prop.mvirtualtype
 				if ntype.n_kwnullable != null then res = res.as_nullable
+				ntype.mtype = res
 				return res
 			end
 		end
@@ -780,8 +805,9 @@ class ModelBuilder
 			end
 			for i in [0..mclassdef.parameter_names.length[ do
 				if mclassdef.parameter_names[i] == name then
-					res = mclassdef.mclass.mclass_type.as(MGenericType).arguments[i]
+					res = mclassdef.mclass.mclass_type.arguments[i]
 					if ntype.n_kwnullable != null then res = res.as_nullable
+					ntype.mtype = res
 					return res
 				end
 			end
@@ -805,16 +831,18 @@ class ModelBuilder
 			if arity == 0 then
 				res = mclass.mclass_type
 				if ntype.n_kwnullable != null then res = res.as_nullable
+				ntype.mtype = res
 				return res
 			else
 				var mtypes = new Array[MType]
 				for nt in ntype.n_types do
-					var mt = resolve_mtype(nclassdef, nt)
+					var mt = resolve_mtype_unchecked(nclassdef, nt)
 					if mt == null then return null # Forward error
 					mtypes.add(mt)
 				end
 				res = mclass.get_mtype(mtypes)
 				if ntype.n_kwnullable != null then res = res.as_nullable
+				ntype.mtype = res
 				return res
 			end
 		end
@@ -822,6 +850,37 @@ class ModelBuilder
 		# If everything fail, then give up :(
 		error(ntype, "Type error: class {name} not found in module {mmodule}.")
 		return null
+	end
+
+	# Return the static type associated to the node `ntype'.
+	# `classdef' is the context where the call is made (used to understand formal types)
+	# The mmodule used as context is `nclassdef.mmodule'
+	# In case of problem, an error is displayed on `ntype' and null is returned.
+	# FIXME: the name "resolve_mtype" is awful
+	fun resolve_mtype(nclassdef: AClassdef, ntype: AType): nullable MType
+	do
+		var mtype = ntype.mtype
+		if mtype == null then mtype = resolve_mtype_unchecked(nclassdef, ntype)
+		if mtype == null then return null # Forward error
+
+		if ntype.checked_mtype then return mtype
+		if mtype isa MGenericType then
+			var mmodule = nclassdef.parent.as(AModule).mmodule.as(not null)
+			var mclassdef = nclassdef.mclassdef
+			var mclass = mtype.mclass
+			for i in [0..mclass.arity[ do
+				var bound = mclass.intro.bound_mtype.arguments[i]
+				var nt = ntype.n_types[i]
+				var mt = resolve_mtype(nclassdef, nt)
+				if mt == null then return null # forward error
+				if not mt.is_subtype(mmodule, mclassdef.bound_mtype, bound) then
+					error(nt, "Type error: expected {bound}, got {mt}")
+					return null
+				end
+			end
+		end
+		ntype.checked_mtype = true
+		return mtype
 	end
 
 	# Helper function to display an error on a node.
@@ -857,6 +916,10 @@ redef class AModule
 	var is_importation_done: Bool = false
 	# Flag that indicate if the class and prop building is already completed
 	var build_classes_is_done: Bool = false
+	# What is the AClassdef associated to a MClass?
+	# Used to check multiple definition of a class.
+	var mclass2nclassdef: Map[MClass, AClassdef] = new HashMap[MClass, AClassdef]
+
 end
 
 redef class MClass
@@ -877,6 +940,10 @@ redef class AClassdef
 
 	# The free init (implicitely constructed by the class if required)
 	var mfree_init: nullable MMethodDef = null
+
+	# What is the APropdef associated to a MProperty?
+	# Used to check multiple definition of a property.
+	var mprop2npropdef: Map[MProperty, APropdef] = new HashMap[MProperty, APropdef]
 end
 
 redef class AClasskind
@@ -916,6 +983,13 @@ redef class APrivateVisibility
 	redef fun mvisibility do return private_visibility
 end
 
+redef class AType
+	# The mtype associated to the node
+	var mtype: nullable MType = null
+
+	# Is the mtype a valid one?
+	var checked_mtype: Bool = false
+end
 
 #
 
@@ -978,17 +1052,24 @@ redef class APropdef
 		end
 	end
 
-	private fun check_redef_keyword(modelbuilder: ModelBuilder, nclassdef: AClassdef, kwredef: nullable Token, need_redef: Bool, mprop: MProperty)
+	private fun check_redef_keyword(modelbuilder: ModelBuilder, nclassdef: AClassdef, kwredef: nullable Token, need_redef: Bool, mprop: MProperty): Bool
 	do
+		if nclassdef.mprop2npropdef.has_key(mprop) then
+			modelbuilder.error(self, "Error: A property {mprop} is already defined in class {nclassdef.mclassdef.mclass}.")
+			return false
+		end
 		if kwredef == null then
 			if need_redef then
 				modelbuilder.error(self, "Redef error: {nclassdef.mclassdef.mclass}::{mprop.name} is an inherited property. To redefine it, add the redef keyword.")
+				return false
 			end
 		else
 			if not need_redef then
 				modelbuilder.error(self, "Error: No property {nclassdef.mclassdef.mclass}::{mprop.name} is inherited. Remove the redef keyword to define a new property.")
+				return false
 			end
 		end
+		return true
 	end
 
 end
@@ -1112,17 +1193,18 @@ redef class AMethPropdef
 			mprop = new MMethod(mclassdef, name, mvisibility)
 			mprop.is_init = is_init
 			mprop.is_new = self isa AExternInitPropdef
-			self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mprop)
+			if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mprop) then return
 		else
 			if n_kwredef == null then
 				if self isa AMainMethPropdef then
 					# no warning
 				else
-					self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, true, mprop)
+					if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, true, mprop) then return
 				end
 			end
 			check_redef_property_visibility(modelbuilder, nclassdef, self.n_visibility, mprop)
 		end
+		nclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
 
@@ -1299,12 +1381,14 @@ redef class AAttrPropdef
 			if mprop == null then
 				var mvisibility = new_property_visibility(modelbuilder, nclassdef, self.n_visibility)
 				mprop = new MAttribute(mclassdef, name, mvisibility)
-				self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, false, mprop)
+				if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, false, mprop) then return
 			else
 				assert mprop isa MAttribute
 				check_redef_property_visibility(modelbuilder, nclassdef, self.n_visibility, mprop)
-				self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, true, mprop)
+				if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, true, mprop) then return
 			end
+			nclassdef.mprop2npropdef[mprop] = self
+
 			var mpropdef = new MAttributeDef(mclassdef, mprop, self.location)
 			self.mpropdef = mpropdef
 			modelbuilder.mpropdef2npropdef[mpropdef] = self
@@ -1316,11 +1400,13 @@ redef class AAttrPropdef
 				if mreadprop == null then
 					var mvisibility = new_property_visibility(modelbuilder, nclassdef, nreadable.n_visibility)
 					mreadprop = new MMethod(mclassdef, readname, mvisibility)
-					self.check_redef_keyword(modelbuilder, nclassdef, nreadable.n_kwredef, false, mreadprop)
+					if not self.check_redef_keyword(modelbuilder, nclassdef, nreadable.n_kwredef, false, mreadprop) then return
 				else
-					self.check_redef_keyword(modelbuilder, nclassdef, nreadable.n_kwredef, true, mreadprop)
+					if not self.check_redef_keyword(modelbuilder, nclassdef, nreadable.n_kwredef, true, mreadprop) then return
 					check_redef_property_visibility(modelbuilder, nclassdef, nreadable.n_visibility, mreadprop)
 				end
+				nclassdef.mprop2npropdef[mreadprop] = self
+
 				var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 				self.mreadpropdef = mreadpropdef
 				modelbuilder.mpropdef2npropdef[mreadpropdef] = self
@@ -1333,11 +1419,13 @@ redef class AAttrPropdef
 				if mwriteprop == null then
 					var mvisibility = new_property_visibility(modelbuilder, nclassdef, nwritable.n_visibility)
 					mwriteprop = new MMethod(mclassdef, writename, mvisibility)
-					self.check_redef_keyword(modelbuilder, nclassdef, nwritable.n_kwredef, false, mwriteprop)
+					if not self.check_redef_keyword(modelbuilder, nclassdef, nwritable.n_kwredef, false, mwriteprop) then return
 				else
-					self.check_redef_keyword(modelbuilder, nclassdef, nwritable.n_kwredef, true, mwriteprop)
+					if not self.check_redef_keyword(modelbuilder, nclassdef, nwritable.n_kwredef, true, mwriteprop) then return
 					check_redef_property_visibility(modelbuilder, nclassdef, nwritable.n_visibility, mwriteprop)
 				end
+				nclassdef.mprop2npropdef[mwriteprop] = self
+
 				var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
 				self.mwritepropdef = mwritepropdef
 				modelbuilder.mpropdef2npropdef[mwritepropdef] = self
@@ -1355,11 +1443,13 @@ redef class AAttrPropdef
 			if mreadprop == null then
 				var mvisibility = new_property_visibility(modelbuilder, nclassdef, self.n_visibility)
 				mreadprop = new MMethod(mclassdef, readname, mvisibility)
-				self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mreadprop)
+				if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, false, mreadprop) then return
 			else
-				self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, true, mreadprop)
+				if not self.check_redef_keyword(modelbuilder, nclassdef, n_kwredef, true, mreadprop) then return
 				check_redef_property_visibility(modelbuilder, nclassdef, self.n_visibility, mreadprop)
 			end
+			nclassdef.mprop2npropdef[mreadprop] = self
+
 			var mreadpropdef = new MMethodDef(mclassdef, mreadprop, self.location)
 			self.mreadpropdef = mreadpropdef
 			modelbuilder.mpropdef2npropdef[mreadpropdef] = self
@@ -1377,13 +1467,15 @@ redef class AAttrPropdef
 					mvisibility = private_visibility
 				end
 				mwriteprop = new MMethod(mclassdef, writename, mvisibility)
-				self.check_redef_keyword(modelbuilder, nclassdef, nwkwredef, false, mwriteprop)
+				if not self.check_redef_keyword(modelbuilder, nclassdef, nwkwredef, false, mwriteprop) then return
 			else
-				self.check_redef_keyword(modelbuilder, nclassdef, nwkwredef, true, mwriteprop)
+				if not self.check_redef_keyword(modelbuilder, nclassdef, nwkwredef, true, mwriteprop) then return
 				if nwritable != null then
 					check_redef_property_visibility(modelbuilder, nclassdef, nwritable.n_visibility, mwriteprop)
 				end
 			end
+			nclassdef.mprop2npropdef[mwriteprop] = self
+
 			var mwritepropdef = new MMethodDef(mclassdef, mwriteprop, self.location)
 			self.mwritepropdef = mwritepropdef
 			modelbuilder.mpropdef2npropdef[mwritepropdef] = self
@@ -1553,12 +1645,14 @@ redef class ATypePropdef
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, nclassdef, self.n_visibility)
 			mprop = new MVirtualTypeProp(mclassdef, name, mvisibility)
-			self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, false, mprop)
+			if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, false, mprop) then return
 		else
-			self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, true, mprop)
+			if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, true, mprop) then return
 			assert mprop isa MVirtualTypeProp
 			check_redef_property_visibility(modelbuilder, nclassdef, self.n_visibility, mprop)
 		end
+		nclassdef.mprop2npropdef[mprop] = self
+
 		var mpropdef = new MVirtualTypeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
 	end

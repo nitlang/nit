@@ -21,6 +21,7 @@ import modelbuilder
 import exprbuilder
 import rapid_type_analysis
 import global_compiler
+import separate_erasure_compiler
 import separate_compiler
 
 # Create a tool context to handle options and paths
@@ -51,4 +52,11 @@ if toolcontext.opt_only_metamodel.value then exit(0)
 assert mmodules.length == 1
 var mainmodule = mmodules.first
 var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
-modelbuilder.run_global_compiler(mainmodule, analysis)
+
+if toolcontext.opt_erasure.value then
+	modelbuilder.run_separate_erasure_compiler(mainmodule, analysis)
+else if toolcontext.opt_separate.value then
+	modelbuilder.run_separate_compiler(mainmodule, analysis)
+else
+	modelbuilder.run_global_compiler(mainmodule, analysis)
+end

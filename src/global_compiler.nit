@@ -38,10 +38,26 @@ redef class ToolContext
 	# --hardening
 	var opt_hardening: OptionBool = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
 
+	# --no-check-covariance
+	var opt_no_check_covariance: OptionBool = new OptionBool("Disable type tests of covariant parameters (dangerous)", "--no-check-covariance")
+
+	# --no-check-initialization
+	var opt_no_check_initialization: OptionBool = new OptionBool("Disable isset tests at the end of constructors (dangerous)", "--no-check-initialization")
+
+	# --no-check-assert
+	var opt_no_check_assert: OptionBool = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
+
+	# --no-check-autocast
+	var opt_no_check_autocast: OptionBool = new OptionBool("Disable implicit casts on unsafe expression usage (dangerous)", "--no-check-autocast")
+
+	# --no-check-other
+	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
+
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_hardening)
+		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 	end
 end
 
@@ -55,77 +71,28 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new GlobalCompiler(mainmodule, runtime_type_analysis, self)
-		var v = new GlobalCompilerVisitor(compiler)
+		var v = compiler.header
 
-		v.add_decl("#include <stdlib.h>")
-		v.add_decl("#include <stdio.h>")
-		v.add_decl("#include <string.h>")
-
-		# TODO: Better way to activate the GC
-		v.add_decl("#include <gc/gc.h>")
-		#v.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
-
-		# Declaration of structures the live Nit types
-		# Each live type is generated as an independent C `struct' type.
-		# They only share a common first field `classid` used to implement the polymorphism.
-		# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val' that contains only the `classid` field.
-
-		v.add_decl("typedef struct \{int classid;\} val; /* general C type representing a Nit instance. */")
 		for t in runtime_type_analysis.live_types do
 			compiler.declare_runtimeclass(v, t)
 		end
 
-		# Global variable used by the legacy native interface
-
-		v.add_decl("extern int glob_argc;")
-		v.add_decl("extern char **glob_argv;")
-		v.add_decl("extern val *glob_sys;")
-
-		# Class names (for the class_name and output_class_name methods)
-
-		v.add_decl("extern const char const * class_names[];")
-		v.add("const char const * class_names[] = \{")
-		for t in runtime_type_analysis.live_types do
-			v.add("\"{t}\", /* {compiler.classid(t)} */")
-		end
-		v.add("\};")
-		compiler.header = v
+		compiler.compile_class_names
 
 		# Init instance code (allocate and init-arguments)
-
 		for t in runtime_type_analysis.live_types do
 			if t.ctype == "val*" then
 				compiler.generate_init_instance(t)
+				compiler.generate_check_init_instance(t)
 			else
 				compiler.generate_box_instance(t)
 			end
 		end
 
 		# The main function of the C
-
-		v = new GlobalCompilerVisitor(compiler)
-		v.add_decl("int glob_argc;")
-		v.add_decl("char **glob_argv;")
-		v.add_decl("val *glob_sys;")
-		v.add_decl("int main(int argc, char** argv) \{")
-		v.add("glob_argc = argc; glob_argv = argv;")
-		var main_type = mainmodule.sys_type
-		if main_type == null then return # Nothing to compile
-		var glob_sys = v.init_instance(main_type)
-		v.add("glob_sys = {glob_sys};")
-		var main_init = mainmodule.try_get_primitive_method("init", main_type)
-		if main_init != null then
-			v.send(main_init, [glob_sys])
-		end
-		var main_method = mainmodule.try_get_primitive_method("main", main_type)
-		if main_method != null then
-			v.send(main_method, [glob_sys])
-		end
-		v.add("return 0;")
-		v.add("\}")
+		compiler.compile_main_function
 
 		# Compile until all runtime_functions are visited
-
 		while not compiler.todos.is_empty do
 			var m = compiler.todos.shift
 			self.toolcontext.info("Compile {m} ({compiler.seen.length-compiler.todos.length}/{compiler.seen.length})", 3)
@@ -138,7 +105,7 @@ redef class ModelBuilder
 		write_and_make(compiler)
 	end
 
-	private fun write_and_make(compiler: GlobalCompiler)
+	protected fun write_and_make(compiler: GlobalCompiler)
 	do
 		var mainmodule = compiler.mainmodule
 
@@ -249,7 +216,7 @@ redef class ModelBuilder
 end
 
 # Singleton that store the knowledge about the compilation process
-private class GlobalCompiler
+class GlobalCompiler
 	# The main module of the program
 	var mainmodule: MModule
 
@@ -264,6 +231,7 @@ private class GlobalCompiler
 
 	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, modelbuilder: ModelBuilder)
 	do
+		self.header = new_visitor
 		self.mainmodule = mainmodule
 		self.runtime_type_analysis = runtime_type_analysis
 		self.modelbuilder = modelbuilder
@@ -273,6 +241,44 @@ private class GlobalCompiler
 				self.live_primitive_types.add(t)
 			end
 		end
+
+		# Header declarations
+		self.compile_header
+	end
+
+	protected fun compile_header do
+		var v = self.header
+		self.header.add_decl("#include <stdlib.h>")
+		self.header.add_decl("#include <stdio.h>")
+		self.header.add_decl("#include <string.h>")
+		# TODO: Better way to activate the GC
+		self.header.add_decl("#include <gc/gc.h>")
+		#self.header.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
+
+		compile_header_structs
+
+		# Global variable used by the legacy native interface
+		self.header.add_decl("extern int glob_argc;")
+		self.header.add_decl("extern char **glob_argv;")
+		self.header.add_decl("extern val *glob_sys;")
+	end
+
+	# Class names (for the class_name and output_class_name methods)
+	protected fun compile_class_names do
+		self.header.add_decl("extern const char const * class_names[];")
+		self.header.add("const char const * class_names[] = \{")
+		for t in self.runtime_type_analysis.live_types do
+			self.header.add("\"{t}\", /* {self.classid(t)} */")
+		end
+		self.header.add("\};")
+	end
+
+	# Declaration of structures the live Nit types
+	# Each live type is generated as an independent C `struct' type.
+	# They only share a common first field `classid` used to implement the polymorphism.
+	# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val' that contains only the `classid` field.
+	protected fun compile_header_structs do
+		self.header.add_decl("typedef struct \{int classid;\} val; /* general C type representing a Nit instance. */")
 	end
 
 	# Subset of runtime_type_analysis.live_types that contains only primitive types
@@ -280,11 +286,11 @@ private class GlobalCompiler
 	var live_primitive_types: Array[MClassType]
 
 	# runtime_functions that need to be compiled
-	private var todos: List[RuntimeFunction] = new List[RuntimeFunction]
+	private var todos: List[AbstractRuntimeFunction] = new List[AbstractRuntimeFunction]
 
 	# runtime_functions already seen (todo or done)
-	private var seen: HashSet[RuntimeFunction] = new HashSet[RuntimeFunction]
-	fun todo(m: RuntimeFunction)
+	private var seen: HashSet[AbstractRuntimeFunction] = new HashSet[AbstractRuntimeFunction]
+	fun todo(m: AbstractRuntimeFunction)
 	do
 		if seen.has(m) then return
 		todos.add(m)
@@ -295,7 +301,7 @@ private class GlobalCompiler
 	#
 	# FIXME: should not be a vistor but just somewhere to store lines
 	# FIXME: should not have a global .h since it does not help recompilations
-	var header: nullable GlobalCompilerVisitor = null
+	var header: GlobalCompilerVisitor writable
 
 	# The list of all associated visitors
 	# Used to generate .c files
@@ -317,7 +323,7 @@ private class GlobalCompiler
 	end
 
 	# Cache for classid (computed by declare_runtimeclass)
-	private var classids: HashMap[MClassType, String] = new HashMap[MClassType, String]
+	protected var classids: HashMap[MClassType, String] = new HashMap[MClassType, String]
 
 	# Declare C structures and identifiers for a runtime class
 	fun declare_runtimeclass(v: GlobalCompilerVisitor, mtype: MClassType)
@@ -331,6 +337,11 @@ private class GlobalCompiler
 
 		v.add_decl("struct {mtype.c_name} \{")
 		v.add_decl("int classid; /* must be {idname} */")
+
+		if mtype.mclass.name == "NativeArray" then
+			# NativeArrays are just a instance header followed by an array of values
+			v.add_decl("{mtype.arguments.first.ctype} values[1];")
+		end
 
 		if mtype.ctype != "val*" then
 			# Is the Nit type is native then the struct is a box with two fields:
@@ -357,34 +368,81 @@ private class GlobalCompiler
 	do
 		assert self.runtime_type_analysis.live_types.has(mtype)
 		assert mtype.ctype == "val*"
-		var v = new GlobalCompilerVisitor(self)
+		var v = self.new_visitor
 
-		self.header.add_decl("{mtype.ctype} NEW_{mtype.c_name}(void);")
+		var is_native_array = mtype.mclass.name == "NativeArray"
+
+		var sig
+		if is_native_array then
+			sig = "int length"
+		else
+			sig = "void"
+		end
+
+		self.header.add_decl("{mtype.ctype} NEW_{mtype.c_name}({sig});")
 		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("{mtype.ctype} NEW_{mtype.c_name}(void) \{")
+		v.add_decl("{mtype.ctype} NEW_{mtype.c_name}({sig}) \{")
 		var res = v.new_var(mtype)
 		res.is_exact = true
-		v.add("{res} = GC_MALLOC(sizeof(struct {mtype.c_name}));")
+		if is_native_array then
+			var mtype_elt = mtype.arguments.first
+			v.add("{res} = GC_MALLOC(sizeof(struct {mtype.c_name}) + length*sizeof({mtype_elt.ctype}));")
+		else
+			v.add("{res} = GC_MALLOC(sizeof(struct {mtype.c_name}));")
+		end
 		v.add("{res}->classid = {self.classid(mtype)};")
 
+		self.generate_init_attr(v, res, mtype)
+		v.add("return {res};")
+		v.add("\}")
+	end
+
+	fun generate_check_init_instance(mtype: MClassType)
+	do
+		if self.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+
+		var v = self.new_visitor
+		var res = new RuntimeVariable("self", mtype, mtype)
+		self.header.add_decl("void CHECK_NEW_{mtype.c_name}({mtype.ctype});")
+		v.add_decl("/* allocate {mtype} */")
+		v.add_decl("void CHECK_NEW_{mtype.c_name}({mtype.ctype} {res}) \{")
+		self.generate_check_attr(v, res, mtype)
+		v.add("\}")
+	end
+
+	# Generate code that collect initialize the attributes on a new instance
+	fun generate_init_attr(v: GlobalCompilerVisitor, recv: RuntimeVariable, mtype: MClassType)
+	do
 		for cd in mtype.collect_mclassdefs(self.mainmodule)
 		do
 			var n = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then
-					npropdef.init_expr(v, res)
+					npropdef.init_expr(v, recv)
 				end
 			end
 		end
-		v.add("return {res};")
-		v.add("\}")
+	end
+
+	# Generate a check-init-instance
+	fun generate_check_attr(v: GlobalCompilerVisitor, recv: RuntimeVariable, mtype: MClassType)
+	do
+		for cd in mtype.collect_mclassdefs(self.mainmodule)
+		do
+			var n = self.modelbuilder.mclassdef2nclassdef[cd]
+			for npropdef in n.n_propdefs do
+				if npropdef isa AAttrPropdef then
+					npropdef.check_expr(v, recv)
+				end
+			end
+		end
 	end
 
 	fun generate_box_instance(mtype: MClassType)
 	do
 		assert self.runtime_type_analysis.live_types.has(mtype)
 		assert mtype.ctype != "val*"
-		var v = new GlobalCompilerVisitor(self)
+		var v = self.new_visitor
 
 		self.header.add_decl("val* BOX_{mtype.c_name}({mtype.ctype});")
 		v.add_decl("/* allocate {mtype} */")
@@ -418,6 +476,41 @@ private class GlobalCompiler
 		if tryfile.file_exists then
 			self.extern_bodies.add(tryfile)
 		end
+	end
+
+	# Initialize a visitor specific for a compiler engine
+	fun new_visitor: GlobalCompilerVisitor do return new GlobalCompilerVisitor(self)
+
+	# Generate the main C function.
+	# This function:
+	# allocate the Sys object if it exists
+	# call init if is exists
+	# call main if it exists
+	fun compile_main_function
+	do
+		var v = self.new_visitor
+		v.add_decl("int glob_argc;")
+		v.add_decl("char **glob_argv;")
+		v.add_decl("val *glob_sys;")
+		v.add_decl("int main(int argc, char** argv) \{")
+		v.add("glob_argc = argc; glob_argv = argv;")
+		var main_type = mainmodule.sys_type
+		if main_type != null then
+			var mainmodule = v.compiler.mainmodule
+			var glob_sys = v.init_instance(main_type)
+			v.add("glob_sys = {glob_sys};")
+			var main_init = mainmodule.try_get_primitive_method("init", main_type)
+			if main_init != null then
+				v.send(main_init, [glob_sys])
+			end
+			var main_method = mainmodule.try_get_primitive_method("main", main_type)
+			if main_method != null then
+				v.send(main_method, [glob_sys])
+			end
+		end
+		v.add("return 0;")
+		v.add("\}")
+
 	end
 
 	private var collect_types_cache: HashMap[MType, Array[MClassType]] = new HashMap[MType, Array[MClassType]]
@@ -490,7 +583,7 @@ redef class MType
 	# Return the name of the C structure associated to a Nit live type
 	# FIXME: move to GlobalCompiler so we can check that self is a live type
 	fun c_name: String is abstract
-	private var c_name_cache: nullable String
+	protected var c_name_cache: nullable String protected writable
 end
 
 redef class MClassType
@@ -516,8 +609,8 @@ redef class MClassType
 		else if mclass.name == "NativeString" then
 			return "char*"
 		else if mclass.name == "NativeArray" then
-			assert self isa MGenericType
-			return "{self.arguments.first.ctype}*"
+			#return "{self.arguments.first.ctype}*"
+			return "val*"
 		else if mclass.kind == extern_kind then
 			return "void*"
 		else
@@ -540,25 +633,27 @@ redef class MGenericType
 	end
 end
 
-redef class MNullableType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "nullable_{self.mtype.c_name}"
-		self.c_name_cache = res
-		return res
-	end
-end
-
 # A C function associated to a Nit method
 # Because of customization, a given Nit method can be compiler more that once
-private abstract class RuntimeFunction
+abstract class AbstractRuntimeFunction
 	# The associated Nit method
 	var mmethoddef: MMethodDef
 
 	# The mangled c name of the runtime_function
-	fun c_name: String is abstract
+	# Subclasses should redefine `build_c_name` instead
+	fun c_name: String
+	do
+		var res = self.c_name_cache
+		if res != null then return res
+		res = self.build_c_name
+		self.c_name_cache = res
+		return res
+	end
+
+	# Non cached version of `c_name`
+	protected fun build_c_name: String is abstract
+
+	private var c_name_cache: nullable String = null
 
 	# Implements a call of the runtime_function
 	# May inline the body or generate a C function call
@@ -571,7 +666,7 @@ end
 
 # A runtime function customized on a specific monomrph receiver type
 private class CustomizedRuntimeFunction
-	super RuntimeFunction
+	super AbstractRuntimeFunction
 
 	# The considered reciever
 	# (usually is a live type but no strong guarantee)
@@ -583,8 +678,7 @@ private class CustomizedRuntimeFunction
 		self.recv = recv
 	end
 
-	# The mangled c name of the runtime_function
-	redef fun c_name: String
+	redef fun build_c_name: String
 	do
 		var res = self.c_name_cache
 		if res != null then return res
@@ -596,8 +690,6 @@ private class CustomizedRuntimeFunction
 		self.c_name_cache = res
 		return res
 	end
-
-	private var c_name_cache: nullable String = null
 
 	redef fun ==(o)
 	# used in the compiler worklist
@@ -634,7 +726,7 @@ private class CustomizedRuntimeFunction
 			abort
 		end
 
-		var v = new GlobalCompilerVisitor(compiler)
+		var v = compiler.new_visitor
 		var selfvar = new RuntimeVariable("self", recv, recv)
 		if compiler.runtime_type_analysis.live_types.has(recv) then
 			selfvar.is_exact = true
@@ -656,7 +748,7 @@ private class CustomizedRuntimeFunction
 			sig.append("void ")
 		end
 		sig.append(self.c_name)
-		sig.append("({recv.ctype} self")
+		sig.append("({recv.ctype} {selfvar}")
 		comment.append("(self: {recv}")
 		arguments.add(selfvar)
 		for i in [0..mmethoddef.msignature.arity[ do
@@ -735,7 +827,7 @@ end
 # Runtime variables are associated to Nit local variables and intermediate results in Nit expressions.
 #
 # The tricky point is that a single C variable can be associated to more than one RuntimeVariable because the static knowledge of the type of an expression can vary in the C code.
-private class RuntimeVariable
+class RuntimeVariable
 	# The name of the variable in the C code
 	var name: String
 
@@ -743,11 +835,11 @@ private class RuntimeVariable
 	var mtype: MType
 
 	# The current casted type of the variable (as known in Nit)
-	var mcasttype: MType
+	var mcasttype: MType writable
 
 	# If the variable exaclty a mcasttype?
 	# false (usual value) means that the variable is a mcasttype or a subtype.
-	var is_exact: Bool = false
+	var is_exact: Bool writable = false
 
 	init(name: String, mtype: MType, mcasttype: MType)
 	do
@@ -780,7 +872,7 @@ end
 
 # A visitor on the AST of property definition that generate the C code.
 # Because of inlining, a visitor can visit more than one property.
-private class GlobalCompilerVisitor
+class GlobalCompilerVisitor
 	# The associated compiler
 	var compiler: GlobalCompiler
 
@@ -809,7 +901,7 @@ private class GlobalCompilerVisitor
 	end
 
 	# The current Frame
-	var frame: nullable Frame
+	var frame: nullable Frame writable
 
 	# Anchor a type to the main module and the current receiver
 	fun anchor(mtype: MType): MType
@@ -836,7 +928,7 @@ private class GlobalCompilerVisitor
 	private var decl_lines: List[String] = new List[String]
 
 	# The current visited AST node
-	var current_node: nullable AExpr = null
+	var current_node: nullable ANode = null
 
 	# Compile an expression an return its result
 	# `mtype` is the expected return type, pass null if no specific type is expected.
@@ -848,6 +940,13 @@ private class GlobalCompilerVisitor
 		if mtype != null then
 			mtype = self.anchor(mtype)
 			res = self.autobox(res, mtype)
+		end
+		var implicit_cast_to = nexpr.implicit_cast_to
+		if implicit_cast_to != null and not self.compiler.modelbuilder.toolcontext.opt_no_check_autocast.value then
+			var castres = self.type_test(res, implicit_cast_to)
+			self.add("if (!{castres}) \{")
+			self.add_abort("Cast failed")
+			self.add("\}")
 		end
 		self.current_node = old
 		return res
@@ -878,10 +977,12 @@ private class GlobalCompilerVisitor
 	# ENSURE: result.mtype.ctype == mtype.ctype
 	fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable
 	do
-		if value.mtype.ctype == mtype.ctype then
+		if value.mtype == mtype then
+			return value
+		else if value.mtype.ctype == "val*" and mtype.ctype == "val*" then
 			return value
 		else if value.mtype.ctype == "val*" then
-			return self.new_expr("((struct {mtype.c_name}*){value})->value /* autounbox from {value.mtype} to {mtype} */", mtype)
+			return self.new_expr("((struct {mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
 		else if mtype.ctype == "val*" then
 			var valtype = value.mtype.as(MClassType)
 			var res = self.new_var(mtype)
@@ -943,6 +1044,15 @@ private class GlobalCompilerVisitor
 	do
 		mtype = self.anchor(mtype)
 		var name = self.get_name("var")
+		var res = new RuntimeVariable(name, mtype, mtype)
+		self.add_decl("{mtype.ctype} {name} /* : {mtype} */;")
+		return res
+	end
+
+	# Return a new uninitialized named runtime_variable
+	fun new_named_var(mtype: MType, name: String): RuntimeVariable
+	do
+		mtype = self.anchor(mtype)
 		var res = new RuntimeVariable(name, mtype, mtype)
 		self.add_decl("{mtype.ctype} {name} /* : {mtype} */;")
 		return res
@@ -1050,6 +1160,47 @@ private class GlobalCompilerVisitor
 		return res
 	end
 
+	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable])
+	do
+		var elttype = arguments.first.mtype
+		var recv = "((struct {arguments[0].mcasttype.c_name}*){arguments[0]})->values"
+		if pname == "[]" then
+			self.ret(self.new_expr("{recv}[{arguments[1]}]", ret_type.as(not null)))
+			return
+		else if pname == "[]=" then
+			self.add("{recv}[{arguments[1]}]={arguments[2]};")
+			return
+		else if pname == "copy_to" then
+			var recv1 = "((struct {arguments[1].mcasttype.c_name}*){arguments[1]})->values"
+			self.add("memcpy({recv1},{recv},{arguments[2]}*sizeof({elttype.ctype}));")
+			return
+		end
+	end
+
+	fun calloc_array(ret_type: MType, arguments: Array[RuntimeVariable])
+	do
+		self.ret(self.new_expr("NEW_{ret_type.c_name}({arguments[1]})", ret_type))
+	end
+
+	# Add a check and an abort for a null reciever is needed
+	fun check_recv_notnull(recv: RuntimeVariable)
+	do
+		if self.compiler.modelbuilder.toolcontext.opt_no_check_other.value then return
+
+		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
+		if maybenull then
+			self.add("if ({recv} == NULL) \{")
+			self.add_abort("Reciever is null")
+			self.add("\}")
+		end
+	end
+
+	fun compile_callsite(callsite: CallSite, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		var ret = self.send(callsite.mproperty, args)
+		return ret
+	end
+
 	# Generate a polymorphic send for the method `m' and the arguments `args'
 	fun send(m: MMethod, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
@@ -1067,24 +1218,26 @@ private class GlobalCompilerVisitor
 			res = self.new_var(ret)
 		end
 
-		if types.is_empty then
-			self.add("/*BUG: no live types for {args.first.inspect} . {m}*/")
-			return res
-		end
 		self.add("/* send {m} on {args.first.inspect} */")
 		if args.first.mtype.ctype != "val*" then
-			var propdefs = m.lookup_definitions(self.compiler.mainmodule, args.first.mtype)
+			var mclasstype = args.first.mtype.as(MClassType)
+			if not self.compiler.runtime_type_analysis.live_types.has(mclasstype) then
+				self.add("/* skip, no method {m} */")
+				return res
+			end
+			var propdefs = m.lookup_definitions(self.compiler.mainmodule, mclasstype)
 			if propdefs.length == 0 then
 				self.add("/* skip, no method {m} */")
 				return res
 			end
 			assert propdefs.length == 1
 			var propdef = propdefs.first
-			var res2 = self.call(propdef, args.first.mtype.as(MClassType), args)
+			var res2 = self.call(propdef, mclasstype, args)
 			if res != null then self.assign(res, res2.as(not null))
 			return res
 		end
-		if args.first.mcasttype isa MNullableType then
+		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value or m.name == "==" or m.name == "!="
+		if args.first.mcasttype isa MNullableType or args.first.mcasttype isa MNullType and consider_null then
 			# The reciever is potentially null, so we have to 3 cases: ==, != or NullPointerException
 			self.add("if ({args.first} == NULL) \{ /* Special null case */")
 			if m.name == "==" then
@@ -1110,6 +1263,14 @@ private class GlobalCompilerVisitor
 			end
 			self.add "\} else"
 		end
+		if types.is_empty then
+			self.add("\{")
+			self.add("/*BUG: no live types for {args.first.inspect} . {m}*/")
+			self.bugtype(args.first)
+			self.add("\}")
+			return res
+		end
+
 		self.add("switch({args.first}->classid) \{")
 		var last = types.last
 		var defaultpropdef: nullable MMethodDef = null
@@ -1181,34 +1342,8 @@ private class GlobalCompilerVisitor
 		var recv = self.autobox(args.first, recvtype)
 		recv = self.autoadapt(recv, recvtype)
 
-		var vararg_rank = m.msignature.vararg_rank
-		if vararg_rank >= 0 then
-			assert args.length >= m.msignature.arity + 1 # because of self
-			var rawargs = args
-			args = new Array[RuntimeVariable]
-
-			args.add(rawargs.first) # recv
-
-			for i in [0..vararg_rank[ do
-				args.add(rawargs[i+1])
-			end
-
-			var vararg_lastrank = vararg_rank + rawargs.length-1-m.msignature.arity
-			var vararg = new Array[RuntimeVariable]
-			for i in [vararg_rank..vararg_lastrank] do
-				vararg.add(rawargs[i+1])
-			end
-			# FIXME: its it to late to determine the vararg type, this should have been done during a previous analysis
-			var elttype = m.msignature.mparameters[vararg_rank].mtype
-			elttype = self.resolve_for(elttype, recv)
-			args.add(self.array_instance(vararg, elttype))
-
-			for i in [vararg_lastrank+1..rawargs.length-1[ do
-				args.add(rawargs[i+1])
-			end
-		else
-			args = args.to_a
-		end
+		args = args.to_a
+		self.varargize(m.msignature.as(not null), args)
 		if args.length != m.msignature.arity + 1 then # because of self
 			add("printf(\"NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.\\n\"); exit(1);")
 			debug("NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.")
@@ -1233,15 +1368,99 @@ private class GlobalCompilerVisitor
 		end
 	end
 
+	# Transform varargs, in raw arguments, into a single argument of type Array
+	# Note: this method modify the given `args`
+	# If there is no vararg, then `args` is not modified.
+	fun varargize(msignature: MSignature, args: Array[RuntimeVariable])
+	do
+		var recv = args.first
+		var vararg_rank = msignature.vararg_rank
+		if vararg_rank >= 0 then
+			assert args.length >= msignature.arity + 1 # because of self
+			var rawargs = args
+			args = new Array[RuntimeVariable]
+
+			args.add(rawargs.first) # recv
+
+			for i in [0..vararg_rank[ do
+				args.add(rawargs[i+1])
+			end
+
+			var vararg_lastrank = vararg_rank + rawargs.length-1-msignature.arity
+			var vararg = new Array[RuntimeVariable]
+			for i in [vararg_rank..vararg_lastrank] do
+				vararg.add(rawargs[i+1])
+			end
+			# FIXME: its it to late to determine the vararg type, this should have been done during a previous analysis
+			var elttype = msignature.mparameters[vararg_rank].mtype
+			elttype = self.resolve_for(elttype, recv)
+			args.add(self.array_instance(vararg, elttype))
+
+			for i in [vararg_lastrank+1..rawargs.length-1[ do
+				args.add(rawargs[i+1])
+			end
+			rawargs.clear
+			rawargs.add_all(args)
+		end
+	end
+
 	fun bugtype(recv: RuntimeVariable)
 	do
 		if recv.mtype.ctype != "val*" then return
 		self.add("fprintf(stderr, \"BTD BUG: Dynamic type is %s, static type is %s\\n\", class_names[{recv}->classid], \"{recv.mcasttype}\");")
+		self.add("exit(1);")
+	end
+
+	# Generate a polymorphic attribute is_set test
+	fun isset_attribute(a: MAttribute, recv: RuntimeVariable): RuntimeVariable
+	do
+		check_recv_notnull(recv)
+
+		var types = self.collect_types(recv)
+
+		var res = self.new_var(bool_type)
+
+		if types.is_empty then
+			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
+			self.bugtype(recv)
+			return res
+		end
+		self.add("/* isset {a} on {recv.inspect} */")
+		self.add("switch({recv}->classid) \{")
+		var last = types.last
+		for t in types do
+			if not self.compiler.hardening and t == last then
+				self.add("default: /*{self.compiler.classid(t)}*/")
+			else
+				self.add("case {self.compiler.classid(t)}:")
+			end
+			var recv2 = self.autoadapt(recv, t)
+			var ta = a.intro.static_mtype.as(not null)
+			ta = self.resolve_for(ta, recv2)
+			var attr = self.new_expr("((struct {t.c_name}*){recv})->{a.intro.c_name}", ta)
+			if not ta isa MNullableType then
+				if ta.ctype == "val*" then
+					self.add("{res} = ({attr} != NULL);")
+				else
+					self.add("{res} = 1; /*NOTYET isset on primitive attributes*/")
+				end
+			end
+			self.add("break;")
+		end
+		if self.compiler.hardening then
+			self.add("default: /* Bug */")
+			self.bugtype(recv)
+		end
+		self.add("\}")
+
+		return res
 	end
 
 	# Generate a polymorphic attribute read
 	fun read_attribute(a: MAttribute, recv: RuntimeVariable): RuntimeVariable
 	do
+		check_recv_notnull(recv)
+
 		var types = self.collect_types(recv)
 
 		var ret = a.intro.static_mtype.as(not null)
@@ -1250,6 +1469,7 @@ private class GlobalCompilerVisitor
 
 		if types.is_empty then
 			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
+			self.bugtype(recv)
 			return res
 		end
 		self.add("/* read {a} on {recv.inspect} */")
@@ -1265,7 +1485,7 @@ private class GlobalCompilerVisitor
 			var ta = a.intro.static_mtype.as(not null)
 			ta = self.resolve_for(ta, recv2)
 			var res2 = self.new_expr("((struct {t.c_name}*){recv})->{a.intro.c_name}", ta)
-			if not ta isa MNullableType then
+			if not ta isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_other.value then
 				if ta.ctype == "val*" then
 					self.add("if ({res2} == NULL) \{")
 					self.add_abort("Uninitialized attribute {a.name}")
@@ -1289,10 +1509,13 @@ private class GlobalCompilerVisitor
 	# Generate a polymorphic attribute write
 	fun write_attribute(a: MAttribute, recv: RuntimeVariable, value: RuntimeVariable)
 	do
+		check_recv_notnull(recv)
+
 		var types = self.collect_types(recv)
 
 		if types.is_empty then
 			self.add("/*BUG: no live types for {recv.inspect} . {a}*/")
+			self.bugtype(recv)
 			return
 		end
 		self.add("/* write {a} on {recv.inspect} */")
@@ -1333,12 +1556,28 @@ private class GlobalCompilerVisitor
 	fun type_test(value: RuntimeVariable, mtype: MType): RuntimeVariable
 	do
 		mtype = self.anchor(mtype)
+		var mclasstype = mtype
+		if mtype isa MNullableType then mclasstype = mtype.mtype
+		assert mclasstype isa MClassType
+		if not self.compiler.runtime_type_analysis.live_cast_types.has(mclasstype) then
+			debug "problem: {mtype} was detected cast-dead"
+			abort
+		end
+
 		var types = self.collect_types(value)
 
 		var res = self.new_var(bool_type)
 
 		self.add("/* isa {mtype} on {value.inspect} */")
-		if value.mcasttype isa MNullableType then
+		if value.mtype.ctype != "val*" then
+			if value.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
+				self.add("{res} = 1;")
+			else
+				self.add("{res} = 0;")
+			end
+			return res
+		end
+		if value.mcasttype isa MNullableType or value.mcasttype isa MNullType then
 			self.add("if ({value} == NULL) \{")
 			if mtype isa MNullableType then
 				self.add("{res} = 1; /* isa {mtype} */")
@@ -1362,6 +1601,42 @@ private class GlobalCompilerVisitor
 		return res
 	end
 
+	# Generate the code required to dynamically check if 2 objects share the same runtime type
+	fun is_same_type_test(value1, value2: RuntimeVariable): RuntimeVariable
+	do
+		var res = self.new_var(bool_type)
+		if value2.mtype.ctype == "val*" then
+			if value1.mtype.ctype == "val*" then
+				self.add "{res} = {value1}->classid == {value2}->classid;"
+			else
+				self.add "{res} = {self.compiler.classid(value1.mtype.as(MClassType))} == {value2}->classid;"
+			end
+		else
+			if value1.mtype.ctype == "val*" then
+				self.add "{res} = {value1}->classid == {self.compiler.classid(value2.mtype.as(MClassType))};"
+			else if value1.mcasttype == value2.mcasttype then
+				self.add "{res} = 1;"
+			else
+				self.add "{res} = 0;"
+			end
+		end
+		return res
+	end
+
+	# Return a "const char*" variable associated to the classname of the dynamic type of an object
+	# NOTE: we do not return a RuntimeVariable "NativeString" as the class may not exist in the module/program
+	fun class_name_string(value: RuntimeVariable): String
+	do
+		var res = self.get_name("var_class_name")
+		self.add_decl("const char* {res};")
+		if value.mtype.ctype == "val*" then
+			self.add "{res} = class_names[{value}->classid];"
+		else
+			self.add "{res} = class_names[{self.compiler.classid(value.mtype.as(MClassType))}];"
+		end
+		return res
+	end
+
 	# Generate a Nit "is" for two runtime_variables
 	fun equal_test(value1, value2: RuntimeVariable): RuntimeVariable
 	do
@@ -1372,7 +1647,7 @@ private class GlobalCompilerVisitor
 			value2 = tmp
 		end
 		if value1.mtype.ctype != "val*" then
-			if value2.mtype.ctype == value1.mtype.ctype then
+			if value2.mtype == value1.mtype then
 				self.add("{res} = {value1} == {value2};")
 			else if value2.mtype.ctype != "val*" then
 				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
@@ -1400,9 +1675,16 @@ private class GlobalCompilerVisitor
 	end
 
 	# Generate a check-init-instance
-	# TODO: is an empty stub currently
-	fun check_init_instance(recv: RuntimeVariable)
+	fun check_init_instance(recv: RuntimeVariable, mtype: MClassType)
 	do
+		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+
+		mtype = self.anchor(mtype).as(MClassType)
+		if not self.compiler.runtime_type_analysis.live_types.has(mtype) then
+			debug "problem: {mtype} was detected dead"
+		end
+
+		self.add("CHECK_NEW_{mtype.c_name}({recv});")
 	end
 
 	# Generate an integer value
@@ -1422,14 +1704,14 @@ private class GlobalCompilerVisitor
 		self.add("\{ /* {res} = array_instance Array[{elttype}] */")
 		var nat = self.new_var(self.get_class("NativeArray").get_mtype([elttype]))
 		nat.is_exact = true
-		self.add("{nat} = GC_MALLOC({array.length} * sizeof({elttype.ctype}));")
+		self.add("{nat} = NEW_{nat.mtype.c_name}({array.length});")
 		for i in [0..array.length[ do
 			var r = self.autobox(array[i], elttype)
-			self.add("{nat}[{i}] = {r};")
+			self.add("((struct {nat.mtype.c_name}*) {nat})->values[{i}] = {r};")
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res)
+		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end
@@ -1450,7 +1732,7 @@ private class GlobalCompilerVisitor
 		self.add("{res} = {res2};")
 		var length = self.int_instance(string.length)
 		self.send(self.get_property("with_native", mtype), [res, nat, length])
-		self.check_init_instance(res)
+		self.check_init_instance(res, mtype)
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
@@ -1470,7 +1752,7 @@ private class GlobalCompilerVisitor
 end
 
 # A frame correspond to a visited property in a GlobalCompilerVisitor
-private class Frame
+class Frame
 	# The associated visitor
 
 	var visitor: GlobalCompilerVisitor
@@ -1486,10 +1768,10 @@ private class Frame
 	var arguments: Array[RuntimeVariable]
 
 	# The runtime_variable associated to the return (in a function)
-	var returnvar: nullable RuntimeVariable = null
+	var returnvar: nullable RuntimeVariable writable = null
 
 	# The label at the end of the property
-	var returnlabel: nullable String = null
+	var returnlabel: nullable String writable = null
 end
 
 redef class MPropDef
@@ -1508,7 +1790,7 @@ end
 
 redef class MMethodDef
 	# Can the body be inlined?
-	private fun can_inline(v: GlobalCompilerVisitor): Bool
+	fun can_inline(v: GlobalCompilerVisitor): Bool
 	do
 		var modelbuilder = v.compiler.modelbuilder
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
@@ -1523,30 +1805,67 @@ redef class MMethodDef
 	end
 
 	# Inline the body in another visitor
-	private fun compile_inside_to_c(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
+	fun compile_inside_to_c(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		var modelbuilder = v.compiler.modelbuilder
 		if modelbuilder.mpropdef2npropdef.has_key(self) then
 			var npropdef = modelbuilder.mpropdef2npropdef[self]
+			var oldnode = v.current_node
+			v.current_node = npropdef
+			self.compile_parameter_check(v, arguments)
 			npropdef.compile_to_c(v, self, arguments)
+			v.current_node = oldnode
 		else if self.mproperty.name == "init" then
 			var nclassdef = modelbuilder.mclassdef2nclassdef[self.mclassdef]
+			var oldnode = v.current_node
+			v.current_node = nclassdef
+			self.compile_parameter_check(v, arguments)
 			nclassdef.compile_to_c(v, self, arguments)
+			v.current_node = oldnode
 		else
 			abort
 		end
 		return null
 	end
+
+	# Generate type checks in the C code to check covariant parameters
+	fun compile_parameter_check(v: GlobalCompilerVisitor, arguments: Array[RuntimeVariable])
+	do
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_covariance.value then return
+
+		for i in [0..msignature.arity[ do
+			# skip test for vararg since the array is instantiated with the correct polymorphic type
+			if msignature.vararg_rank == i then continue
+
+			# skip if the cast is not required
+			var origmtype =  self.mproperty.intro.msignature.mparameters[i].mtype
+			if not origmtype.need_anchor then continue
+
+			# get the parameter type
+			var mtype = self.msignature.mparameters[i].mtype
+
+			# generate the cast
+			# note that v decides if and how to implements the cast
+			v.add("/* Covariant cast for argument {i} ({self.msignature.mparameters[i].name}) {arguments[i+1].inspect} isa {mtype} */")
+			var cond = v.type_test( arguments[i+1], mtype)
+			v.add("if (!{cond}) \{")
+			#var x = v.class_name_string(arguments[i+1])
+			#var y = v.class_name_string(arguments.first)
+			#v.add("fprintf(stderr, \"expected {mtype} (self is %s), got %s for {arguments[i+1].inspect}\\n\", {y}, {x});")
+			v.add_abort("Cast failed")
+			v.add("\}")
+		end
+	end
 end
 
 redef class APropdef
-	private fun compile_to_c(v: GlobalCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
+	fun compile_to_c(v: GlobalCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
 		debug("Not yet implemented")
 	end
 
-	private fun can_inline: Bool do return true
+	fun can_inline: Bool do return true
 end
 
 redef class AConcreteMethPropdef
@@ -1568,7 +1887,6 @@ redef class AConcreteMethPropdef
 				end
 			end
 		end
-
 		v.stmt(self.n_block)
 	end
 
@@ -1664,6 +1982,12 @@ redef class AInternMethPropdef
 				return
 			else if pname == "object_id" then
 				v.ret(arguments.first)
+				return
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
 				return
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
@@ -1796,17 +2120,8 @@ redef class AInternMethPropdef
 				return
 			end
 		else if cname == "NativeArray" then
-			var elttype = arguments.first.mtype
-			if pname == "[]" then
-				v.ret(v.new_expr("{arguments[0]}[{arguments[1]}]", ret.as(not null)))
-				return
-			else if pname == "[]=" then
-				v.add("{arguments[0]}[{arguments[1]}]={arguments[2]};")
-				return
-			else if pname == "copy_to" then
-				v.add("memcpy({arguments[1]},{arguments[0]},{arguments[2]}*sizeof({elttype.ctype}));")
-				return
-			end
+			v.native_array_def(pname, ret, arguments)
+			return
 		end
 		if pname == "exit" then
 			v.add("exit({arguments[1]});")
@@ -1818,32 +2133,24 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("(char*)GC_MALLOC({arguments[1]})", ret.as(not null)))
 			return
 		else if pname == "calloc_array" then
-			var elttype = arguments.first.mtype.supertype_to(v.compiler.mainmodule,arguments.first.mtype.as(MClassType),v.get_class("ArrayCapable")).as(MGenericType).arguments.first
-			v.ret(v.new_expr("({elttype.ctype}*)GC_MALLOC({arguments[1]} * sizeof({elttype.ctype}))", ret.as(not null)))
+			v.calloc_array(ret.as(not null), arguments)
 			return
 		else if pname == "object_id" then
 			v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 			return
 		else if pname == "is_same_type" then
-			if arguments[0].mtype.ctype == "val*" then
-				v.ret(v.new_expr("{arguments[0]}->classid == {arguments[1]}->classid", ret.as(not null)))
-			else
-				v.ret(v.new_expr("{v.compiler.classid(arguments[0].mtype.as(MClassType))} == {arguments[1]}->classid", ret.as(not null)))
-			end
+			v.ret(v.is_same_type_test(arguments[0], arguments[1]))
 			return
 		else if pname == "output_class_name" then
-			if arguments[0].mtype.ctype == "val*" then
-				v.add("printf(\"%s\\n\", class_names[{arguments.first}->classid]);")
-			else
-				v.add("printf(\"%s\\n\", class_names[{v.compiler.classid(arguments.first.mtype.as(MClassType))}]);")
-			end
+			var nat = v.class_name_string(arguments.first)
+			v.add("printf(\"%s\\n\", {nat});")
 			return
 		else if pname == "native_class_name" then
-			if arguments[0].mtype.ctype == "val*" then
-				v.ret(v.new_expr("(char*)(void*)class_names[{arguments.first}->classid]", ret.as(not null)))
-			else
-				v.ret(v.new_expr("(char*)(void*)class_names[{v.compiler.classid(arguments.first.mtype.as(MClassType))}]", ret.as(not null)))
-			end
+			var nat = v.class_name_string(arguments.first)
+			v.ret(v.new_expr("(char*){nat}", ret.as(not null)))
+			return
+		else if pname == "force_garbage_collection" then
+			v.add("GC_gcollect();")
 			return
 		end
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
@@ -1857,7 +2164,8 @@ redef class AExternMethPropdef
 		var externname
 		var nextern = self.n_extern
 		if nextern == null then
-			debug("{mpropdef} need extern name")
+			v.add("fprintf(stderr, \"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
+			v.add("exit(1);")
 			return
 		end
 		externname = nextern.text.substring(1, nextern.text.length-2)
@@ -1871,6 +2179,7 @@ redef class AExternMethPropdef
 			ret = v.resolve_for(ret, arguments.first)
 			res = v.new_var(ret)
 		end
+		v.adapt_signature(mpropdef, arguments)
 
 		if res == null then
 			v.add("{externname}({arguments.join(", ")});")
@@ -1895,6 +2204,7 @@ redef class AExternInitPropdef
 			var file = location.file.filename
 			v.compiler.add_extern(file)
 		end
+		v.adapt_signature(mpropdef, arguments)
 		var ret = arguments.first.mtype
 		var res = v.new_var(ret)
 
@@ -1916,17 +2226,36 @@ redef class AAttrPropdef
 		end
 	end
 
-	private fun init_expr(v: GlobalCompilerVisitor, recv: RuntimeVariable)
+	fun init_expr(v: GlobalCompilerVisitor, recv: RuntimeVariable)
 	do
 		var nexpr = self.n_expr
 		if nexpr != null then
+			var oldnode = v.current_node
+			v.current_node = self
 			var old_frame = v.frame
 			var frame = new Frame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
 			v.frame = frame
 			var value = v.expr(nexpr, self.mpropdef.static_mtype)
 			v.write_attribute(self.mpropdef.mproperty, recv, value)
 			v.frame = old_frame
+			v.current_node = oldnode
 		end
+	end
+
+	fun check_expr(v: GlobalCompilerVisitor, recv: RuntimeVariable)
+	do
+		var nexpr = self.n_expr
+		if nexpr != null then return
+
+		var oldnode = v.current_node
+		v.current_node = self
+		var old_frame = v.frame
+		var frame = new Frame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
+		v.frame = frame
+		# Force read to check the initialization
+		v.read_attribute(self.mpropdef.mproperty, recv)
+		v.frame = old_frame
+		v.current_node = oldnode
 	end
 end
 
@@ -1960,8 +2289,7 @@ end
 redef class ADeferredMethPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
-		v.add("printf(\"Not implemented {class_name} {mpropdef} at {location.to_s}\\n\");")
-		v.add("exit(1);")
+		v.add_abort("Deferred method called")
 	end
 
 	redef fun can_inline do return true
@@ -1972,7 +2300,6 @@ redef class AExpr
 	# Do not call this method directly, use `v.expr' instead
 	private fun expr(v: GlobalCompilerVisitor): nullable RuntimeVariable
 	do
-		debug("Unimplemented expr {class_name}")
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{location.to_s}\\n\");")
 		var mtype = self.mtype
 		if mtype == null then
@@ -2039,7 +2366,7 @@ redef class AVarReassignExpr
 		var variable = self.variable.as(not null)
 		var vari = v.variable(variable)
 		var value = v.expr(self.n_value, variable.declared_type)
-		var res = v.send(reassign_property.mproperty, [vari, value])
+		var res = v.compile_callsite(self.reassign_callsite.as(not null), [vari, value])
 		assert res != null
 		v.assign(v.variable(variable), res)
 	end
@@ -2151,21 +2478,31 @@ redef class AForExpr
 	redef fun stmt(v)
 	do
 		var cl = v.expr(self.n_expr, null)
-		var it = v.send(v.get_property("iterator", cl.mtype), [cl])
+		var it_meth = self.method_iterator
+		assert it_meth != null
+		var it = v.send(it_meth, [cl])
 		assert it != null
 		v.add("for(;;) \{")
-		var ok = v.send(v.get_property("is_ok", it.mtype), [it])
+		var isok_meth = self.method_is_ok
+		assert isok_meth != null
+		var ok = v.send(isok_meth, [it])
 		assert ok != null
 		v.add("if(!{ok}) break;")
 		if self.variables.length == 1 then
-			var i = v.send(v.get_property("item", it.mtype), [it])
+			var item_meth = self.method_item
+			assert item_meth != null
+			var i = v.send(item_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables.first), i)
 		else if self.variables.length == 2 then
-			var i = v.send(v.get_property("key", it.mtype), [it])
+			var key_meth = self.method_key
+			assert key_meth != null
+			var i = v.send(key_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables[0]), i)
-			i = v.send(v.get_property("item", it.mtype), [it])
+			var item_meth = self.method_item
+			assert item_meth != null
+			i = v.send(item_meth, [it])
 			assert i != null
 			v.assign(v.variable(variables[1]), i)
 		else
@@ -2173,7 +2510,9 @@ redef class AForExpr
 		end
 		v.stmt(self.n_block)
 		v.add("CONTINUE_{v.escapemark_name(escapemark)}: (void)0;")
-		v.send(v.get_property("next", it.mtype), [it])
+		var next_meth = self.method_next
+		assert next_meth != null
+		v.send(next_meth, [it])
 		v.add("\}")
 		v.add("BREAK_{v.escapemark_name(escapemark)}: (void)0;")
 	end
@@ -2182,6 +2521,8 @@ end
 redef class AAssertExpr
 	redef fun stmt(v)
 	do
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return
+
 		var cond = v.expr_bool(self.n_expr)
 		v.add("if (!{cond}) \{")
 		v.stmt(self.n_else)
@@ -2281,7 +2622,7 @@ end
 redef class AArrayExpr
 	redef fun expr(v)
 	do
-		var mtype = self.mtype.as(MGenericType).arguments.first
+		var mtype = self.mtype.as(MClassType).arguments.first
 		var array = new Array[RuntimeVariable]
 		for nexpr in self.n_exprs.n_exprs do
 			var i = v.expr(nexpr, mtype)
@@ -2318,9 +2659,10 @@ redef class ACrangeExpr
 	do
 		var i1 = v.expr(self.n_expr, null)
 		var i2 = v.expr(self.n_expr2, null)
-		var res = v.init_instance(self.mtype.as(MClassType))
+		var mtype = self.mtype.as(MClassType)
+		var res = v.init_instance(mtype)
 		var it = v.send(v.get_property("init", res.mtype), [res, i1, i2])
-		v.check_init_instance(res)
+		v.check_init_instance(res, mtype)
 		return res
 	end
 end
@@ -2330,9 +2672,10 @@ redef class AOrangeExpr
 	do
 		var i1 = v.expr(self.n_expr, null)
 		var i2 = v.expr(self.n_expr2, null)
-		var res = v.init_instance(self.mtype.as(MClassType))
+		var mtype = self.mtype.as(MClassType)
+		var res = v.init_instance(mtype)
 		var it = v.send(v.get_property("without_last", res.mtype), [res, i1, i2])
-		v.check_init_instance(res)
+		v.check_init_instance(res, mtype)
 		return res
 	end
 end
@@ -2371,6 +2714,8 @@ redef class AAsCastExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr, null)
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
+
 		var cond = v.type_test(i, self.mtype.as(not null))
 		v.add("if (!{cond}) \{")
 		v.add_abort("Cast failed")
@@ -2383,6 +2728,8 @@ redef class AAsNotnullExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr, null)
+		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
+
 		v.add("if ({i} == NULL) \{")
 		v.add_abort("Cast failed")
 		v.add("\}")
@@ -2426,8 +2773,7 @@ redef class ASendExpr
 		for a in self.raw_arguments.as(not null) do
 			args.add(v.expr(a, null))
 		end
-		var mproperty = self.mproperty.as(not null)
-		return v.send(mproperty, args)
+		return v.compile_callsite(self.callsite.as(not null), args)
 	end
 end
 
@@ -2441,15 +2787,14 @@ redef class ASendReassignFormExpr
 		end
 		var value = v.expr(self.n_value, null)
 
-		var mproperty = self.mproperty.as(not null)
-		var left = v.send(mproperty, args)
+		var left = v.compile_callsite(self.callsite.as(not null), args)
 		assert left != null
 
-		var res = v.send(reassign_property.mproperty, [left, value])
+		var res = v.compile_callsite(self.reassign_callsite.as(not null), [left, value])
 		assert res != null
 
 		args.add(res)
-		v.send(self.write_mproperty.as(not null), args)
+		v.compile_callsite(self.write_callsite.as(not null), args)
 	end
 end
 
@@ -2493,7 +2838,6 @@ end
 redef class ANewExpr
 	redef fun expr(v)
 	do
-		var mproperty = self.mproperty.as(not null)
 		var mtype = self.mtype.as(MClassType)
 		var recv
 		var ctype = mtype.ctype
@@ -2509,12 +2853,12 @@ redef class ANewExpr
 		for a in self.n_args.n_exprs do
 			args.add(v.expr(a, null))
 		end
-		var res2 = v.send(mproperty, args)
+		var res2 = v.compile_callsite(self.callsite.as(not null), args)
 		if res2 != null then
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
 		end
-		v.check_init_instance(recv)
+		v.check_init_instance(recv, mtype)
 		return recv
 	end
 end
@@ -2545,13 +2889,19 @@ redef class AAttrReassignExpr
 		var value = v.expr(self.n_value, null)
 		var mproperty = self.mproperty.as(not null)
 		var attr = v.read_attribute(mproperty, recv)
-		var res = v.send(reassign_property.mproperty, [attr, value])
+		var res = v.compile_callsite(self.reassign_callsite.as(not null), [attr, value])
 		assert res != null
 		v.write_attribute(mproperty, recv, res)
 	end
 end
 
 redef class AIssetAttrExpr
+	redef fun expr(v)
+	do
+		var recv = v.expr(self.n_expr, null)
+		var mproperty = self.mproperty.as(not null)
+		return v.isset_attribute(mproperty, recv)
+	end
 end
 
 redef class ADebugTypeExpr

@@ -15,15 +15,15 @@
 
 #include <unistd.h>
 
+int stream_FDStream_FDStream_native_read_char_1(void *s, int fd);
+
 #ifndef NONITCNI
 #include <stream._nitni.h>
 nullable_Int Object_intern_poll___impl( Object recv, Array in_fds, Array out_fds );
+void stream_FDStream_FDStream_write_char_1(FDStream s, int fd, int c);
 #endif
 
 #define stream_FDStream_FDStream_native_close_1(self, p0) (close(p0))
-
-int stream_FDStream_FDStream_native_read_char_1(FDStream s, int fd);
-void stream_FDStream_FDStream_write_char_1(FDStream s, int fd, int c);
 #define stream_FDStream_FDStream_native_read_3(s, i, b, l) read((i), ((b)), ((l)))
 #define stream_FDStream_FDStream_native_write_3(s, i, b, l) write((i), ((b)), ((l)))
 

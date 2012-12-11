@@ -18,13 +18,13 @@
 # By Flop
 
 class Gene[T]
-	readable var _a_ : T 
+	readable var _a_ : T
 	fun a: T
 	do
 		return _a_
 	end
 
-	init do end
+	init(a:T) do _a_ = a
 
 end
 class GeneBool
@@ -34,10 +34,10 @@ class GeneBool
 		_a_ = b
 	end
 
-	init do end
+	init(a) do super(a)
 end
 
-var x = new Gene[Bool]
-var g = new GeneBool
+var x = new Gene[Bool](false)
+var g = new GeneBool(false)
 g.a = true
 print(g.a)

@@ -295,10 +295,19 @@ class MClass
 	# Warning: the introduction is the first `MClassDef' object associated
 	# to self.  If self is just created without having any associated
 	# definition, this method will abort
-	private fun intro: MClassDef
+	fun intro: MClassDef
 	do
 		assert has_a_first_definition: not mclassdefs.is_empty
 		return mclassdefs.first
+	end
+
+	# Return the class `self' in the class hierarchy of the module `mmodule'.
+	#
+	# SEE: MModule::flatten_mclass_hierarchy
+	# REQUIRE: mmodule.has_mclass(self)
+	fun in_hierarchy(mmodule: MModule): POSetElement[MClass]
+	do
+		return mmodule.flatten_mclass_hierarchy[self]
 	end
 
 	# The principal static type of the class.
@@ -390,15 +399,15 @@ class MClassDef
 	# FIXME: quite ugly but not better idea yet
 	var supertypes: Array[MClassType] = new Array[MClassType]
 
-	# Register the super-types for the class (ie "super SomeType")
-	# This function can only invoked once by class
+	# Register some super-types for the class (ie "super SomeType")
+	#
+	# The hierarchy must not already be set
+	# REQUIRE: self.in_hierarchy == null
 	fun set_supertypes(supertypes: Array[MClassType])
 	do
 		assert unique_invocation: self.in_hierarchy == null
 		var mmodule = self.mmodule
 		var model = mmodule.model
-		var res = model.mclassdef_hierarchy.add_node(self)
-		self.in_hierarchy = res
 		var mtype = self.bound_mtype
 
 		for supertype in supertypes do
@@ -412,6 +421,23 @@ class MClassDef
 			end
 		end
 
+	end
+
+	# Collect the super-types (set by set_supertypes) to build the hierarchy
+	#
+	# This function can only invoked once by class
+	# REQUIRE: self.in_hierarchy == null
+	# ENSURE: self.in_hierarchy != null
+	fun add_in_hierarchy
+	do
+		assert unique_invocation: self.in_hierarchy == null
+		var model = mmodule.model
+		var res = model.mclassdef_hierarchy.add_node(self)
+		self.in_hierarchy = res
+		var mtype = self.bound_mtype
+
+		# Here we need to connect the mclassdef to its pairs in the mclassdef_hierarchy
+		# The simpliest way is to attach it to collect_mclassdefs
 		for mclassdef in mtype.collect_mclassdefs(mmodule) do
 			res.poset.add_edge(self, mclassdef)
 		end
@@ -480,43 +506,72 @@ abstract class MType
 			assert not sub.need_anchor
 			assert not sup.need_anchor
 		end
-		# First, resolve the types
+
+		# First, resolve the formal types to a common version in the receiver
+		# The trick here is that fixed formal type will be associed to the bound
+		# And unfixed formal types will be associed to a canonical formal type.
 		if sub isa MParameterType or sub isa MVirtualType then
 			assert anchor != null
-			sub = sub.resolve_for(anchor, anchor, mmodule, false)
+			sub = sub.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, false)
 		end
 		if sup isa MParameterType or sup isa MVirtualType then
 			assert anchor != null
-			sup = sup.resolve_for(anchor, anchor, mmodule, false)
+			sup = sup.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, false)
 		end
 
-		if sup isa MParameterType or sup isa MVirtualType or sup isa MNullType then
+		# Does `sup` accept null or not?
+		# Discard the nullable marker if it exists
+		var sup_accept_null = false
+		if sup isa MNullableType then
+			sup_accept_null = true
+			sup = sup.mtype
+		else if sup isa MNullType then
+			sup_accept_null = true
+		end
+
+		# Can `sub` provide null or not?
+		# Thus we can match with `sup_accept_null`
+		# Also discard the nullable marker if it exists
+		if sub isa MNullableType then
+			if not sup_accept_null then return false
+			sub = sub.mtype
+		else if sub isa MNullType then
+			return sup_accept_null
+		end
+		# Now the case of direct null and nullable is over.
+
+		# A unfixed formal type can only accept itself
+		if sup isa MParameterType or sup isa MVirtualType then
 			return sub == sup
 		end
+
+		# If `sub` is a formal type, then it is accepted if its bound is accepted
 		if sub isa MParameterType or sub isa MVirtualType then
 			assert anchor != null
 			sub = sub.anchor_to(mmodule, anchor)
-		end
-		if sup isa MNullableType then
-			if sub isa MNullType then
-				return true
-			else if sub isa MNullableType then
-				return sub.mtype.is_subtype(mmodule, anchor, sup.mtype)
-			else if sub isa MClassType then
-				return sub.is_subtype(mmodule, anchor, sup.mtype)
-			else
-				abort
+
+			# Manage the second layer of null/nullable
+			if sub isa MNullableType then
+				if not sup_accept_null then return false
+				sub = sub.mtype
+			else if sub isa MNullType then
+				return sup_accept_null
 			end
 		end
 
-		assert sup isa MClassType # It is the only remaining type
-		if sub isa MNullableType or sub isa MNullType then
+		assert sub isa MClassType # It is the only remaining type
+
+		if sup isa MNullType then
+			# `sup` accepts only null
 			return false
 		end
 
+		assert sup isa MClassType # It is the only remaining type
+
+		# Now both are MClassType, we need to dig
+
 		if sub == sup then return true
 
-		assert sub isa MClassType # It is the only remaining type
 		if anchor == null then anchor = sub # UGLY: any anchor will work
 		var resolved_sub = sub.anchor_to(mmodule, anchor)
 		var res = resolved_sub.collect_mclasses(mmodule).has(sup.mclass)
@@ -524,7 +579,6 @@ abstract class MType
 		if not sup isa MGenericType then return true
 		var sub2 = sub.supertype_to(mmodule, anchor, sup.mclass)
 		assert sub2.mclass == sup.mclass
-		assert sub2 isa MGenericType
 		for i in [0..sup.mclass.arity[ do
 			var sub_arg = sub2.arguments[i]
 			var sup_arg = sup.arguments[i]
@@ -658,6 +712,20 @@ abstract class MType
 
 	private var as_nullable_cache: nullable MType = null
 
+
+	# The deph of the type seen as a tree.
+	#
+	# A -> 1
+	# G[A] -> 2
+	# H[A, B] -> 2
+	# H[G[A], B] -> 3
+	#
+	# Formal types have a depth of 1.
+	fun depth: Int
+	do
+		return 1
+	end
+
 	# Compute all the classdefs inherited/imported.
 	# The returned set contains:
 	#  * the class definitions from `mmodule` and its imported modules
@@ -707,6 +775,10 @@ class MClassType
 	do
 		self.mclass = mclass
 	end
+
+	# The formal arguments of the type
+	# ENSURE: return.length == self.mclass.arity
+	var arguments: Array[MType] = new Array[MType]
 
 	redef fun to_s do return mclass.to_s
 
@@ -805,15 +877,11 @@ class MGenericType
 		end
 	end
 
-	# The formal arguments of the type
-	# ENSURE: return.length == self.mclass.arity
-	var arguments: Array[MType]
-
 	# Recursively print the type of the arguments within brackets.
-	# Example: "Map[String,List[Int]]"
+	# Example: "Map[String, List[Int]]"
 	redef fun to_s
 	do
-		return "{mclass}[{arguments.join(",")}]"
+		return "{mclass}[{arguments.join(", ")}]"
 	end
 
 	redef var need_anchor: Bool
@@ -826,6 +894,16 @@ class MGenericType
 			types.add(t.resolve_for(mtype, anchor, mmodule, cleanup_virtual))
 		end
 		return mclass.get_mtype(types)
+	end
+
+	redef fun depth
+	do
+		var dmax = 0
+		for a in self.arguments do
+			var d = a.depth
+			if d > dmax then dmax = d
+		end
+		return dmax + 1
 	end
 end
 
@@ -943,7 +1021,6 @@ class MParameterType
 			if t.mclass == goalclass then
 				# Yeah! c specialize goalclass with a "super `t'". So the question is what is the argument of f
 				# FIXME: Here, we stop on the first goal. Should we check others and detect inconsistencies?
-				assert t isa MGenericType
 				var res = t.arguments[self.rank]
 				return res
 			end
@@ -967,7 +1044,7 @@ class MParameterType
 		if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		if resolved_receiver isa MParameterType then
 			assert resolved_receiver.mclass == anchor.mclass
-			resolved_receiver = anchor.as(MGenericType).arguments[resolved_receiver.rank]
+			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		end
 		assert resolved_receiver isa MClassType else print "{class_name}: {self}/{mtype}/{anchor}? {resolved_receiver}"
@@ -975,7 +1052,6 @@ class MParameterType
 		# Eh! The parameter is in the current class.
 		# So we return the corresponding argument, no mater what!
 		if resolved_receiver.mclass == self.mclass then
-			assert resolved_receiver isa MGenericType
 			var res = resolved_receiver.arguments[self.rank]
 			#print "{class_name}: {self}/{mtype}/{anchor} -> direct {res}"
 			return res
@@ -1023,6 +1099,8 @@ class MNullableType
 		var res = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 		return res.as_nullable
 	end
+
+	redef fun depth do return self.mtype.depth
 
 	redef fun collect_mclassdefs(mmodule)
 	do
@@ -1076,6 +1154,22 @@ class MSignature
 
 	# The return type (null for a procedure)
 	var return_mtype: nullable MType
+
+	redef fun depth
+	do
+		var dmax = 0
+		var t = self.return_mtype
+		if t != null then dmax = t.depth
+		for p in mparameters do
+			var d = p.mtype.depth
+			if d > dmax then dmax = d
+		end
+		for p in mclosures do
+			var d = p.mtype.depth
+			if d > dmax then dmax = d
+		end
+		return dmax + 1
+	end
 
 	# REQUIRE: 1 <= mparameters.count p -> p.is_vararg
 	init(mparameters: Array[MParameter], return_mtype: nullable MType)
