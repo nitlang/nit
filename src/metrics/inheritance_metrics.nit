@@ -655,6 +655,7 @@ end
 
 redef class MModule
 
+	private var nm: Int = 0			# (NC)  Number of Modules
 	private var nc: Int = 0			# (NC)  Number of Classes
 	private var ni: Int = 0			# (NI)  Number of Interfaces
 	private var nac : Int = 0		# (NAC) Number of Abstract Classes
@@ -702,6 +703,7 @@ redef class MModule
 			end
 		end
 
+		self.nm = self.in_nesting.greaters.length
 		dit = div(ditsum, nc + ni)
 		dui = div(dui_count * 100, nc + ni)
 		ccdui = div(ccdui_count * 100, nc)
@@ -1027,7 +1029,7 @@ do
 		summaryCSV.add_line("std-lib", nmdsl, ncsl, nisl, nacsl, ngcsl, ngisl)
 		summaryCSV.add_line("user-defined", nmdud, ncud, niud, nacud, ngcud, ngiud)
 		for m in model.mmodules do
-			summaryCSV.add_line(m.name, 1, m.nc, m.ni, m.nac, m.ngc, m.ngi)
+			summaryCSV.add_line(m.name, m.nm, m.nc, m.ni, m.nac, m.ngc, m.ngi)
 		end
 		summaryCSV.save
 
@@ -1056,8 +1058,8 @@ do
 			var name = mclass.name
 			var typ = "class"
 			if mclass.is_interface then typ = "interface"
-			scalarCSV.add_line(name, typ, mclass.dit, mclass.ditc, mclass.diti, mclass.nop, mclass.nopc, mclass.nopi, mclass.noa, mclass.noac, mclass.noai, mclass.noc, mclass.nocc, mclass.noci, mclass.nod, mclass.nodc, mclass.nodi)
-			udscalarCSV.add_line(name, typ, mclass.ditud, mclass.ditcud, mclass.ditiud, mclass.nopud, mclass.nopcud, mclass.nopiud, mclass.noaud, mclass.noacud, mclass.noaiud, mclass.nocud, mclass.noccud, mclass.nociud, mclass.nodud, mclass.nodcud, mclass.nodiud)
+			scalarCSV.add_line(name, typ, mclass.arity, mclass.dit, mclass.ditc, mclass.diti, mclass.nop, mclass.nopc, mclass.nopi, mclass.noa, mclass.noac, mclass.noai, mclass.noc, mclass.nocc, mclass.noci, mclass.nod, mclass.nodc, mclass.nodi)
+			udscalarCSV.add_line(name, typ, mclass.arity, mclass.ditud, mclass.ditcud, mclass.ditiud, mclass.nopud, mclass.nopcud, mclass.nopiud, mclass.noaud, mclass.noacud, mclass.noaiud, mclass.nocud, mclass.noccud, mclass.nociud, mclass.nodud, mclass.nodcud, mclass.nodiud)
 		end
 		scalarCSV.save
 		udscalarCSV.save
