@@ -241,6 +241,13 @@ esac
 # Set NIT_DIR if needed
 [ -z "$NIT_DIR" ] && export NIT_DIR=..
 
+if sh -c "timelimit echo" 1>/dev/null 2>&1; then
+	TIMEOUT="timelimit -t 600"
+elif sh -c "timeout 1 echo" 1>/dev/null 2>&1; then
+	TIMEOUT="timeout 600s"
+else
+	echo "No timelimit or timeout command detected. Tests may hang :("
+fi
 
 # Mark to distinguish files among tests
 # MARK=
@@ -317,7 +324,7 @@ END
 				echo ""
 				echo $NITC --no-color $OPT -o "$ff.bin" "$i" "$includes"
 			fi
-			NIT_NO_STACK=1 $NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
+			NIT_NO_STACK=1 $TIMEOUT $NITC --no-color $OPT -o "$ff.bin" "$i" $includes 2> "$ff.cmp.err" > "$ff.compile.log"
 			ERR=$?
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.compile.log"
@@ -336,7 +343,7 @@ END
 				echo ""
 				echo "NIT_NO_STACK=1 ./$ff.bin" $args
 			fi
-			NIT_NO_STACK=1 "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
+			NIT_NO_STACK=1 $TIMEOUT "./$ff.bin" $args < "$inputs" > "$ff.res" 2>"$ff.err"
 			if [ "x$verbose" = "xtrue" ]; then
 				cat "$ff.res"
 				cat >&2 "$ff.err"
@@ -368,7 +375,7 @@ END
 						echo "NIT_NO_STACK=1 ./$ff.bin" $args
 					fi
 					test -z "$tap" && echo -n "==> args #"$cptr " "
-					sh -c "NIT_NO_STACK=1 ./$ff.bin  ''$args < $inputs > $fff.res 2>$fff.err"
+					sh -c "NIT_NO_STACK=1 $TIMEOUT ./$ff.bin  ''$args < $inputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
