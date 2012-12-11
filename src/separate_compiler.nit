@@ -575,7 +575,7 @@ class SeparateCompiler
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
 			self.header.add_decl("int mask;")
 		end
-		self.header.add_decl("struct type *fts[{self.ft_tables[mclass_type.mclass].length}];")
+		self.header.add_decl("struct type *types[{self.ft_tables[mclass_type.mclass].length}];")
 		self.header.add_decl("\};")
 
 		# const struct fts_table_X fts_table_X
@@ -623,7 +623,7 @@ class SeparateCompiler
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
 			self.header.add_decl("int mask;")
 		end
-		self.header.add_decl("struct type *vts[{self.vt_tables[mclass_type.mclass].length}];")
+		self.header.add_decl("struct type *types[{self.vt_tables[mclass_type.mclass].length}];")
 		self.header.add_decl("\};")
 
 		# const struct vts_table_X vts_table_X
