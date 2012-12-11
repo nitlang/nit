@@ -157,9 +157,9 @@ redef class MClass
 		self.nod = descendants.length
 		self.nodc = model.extract_classes(descendants).length
 		self.nodi = model.extract_interfaces(descendants).length
-		self.dit = depth_from_object
-		self.ditc = model.extract_classes(path_to_object).length
-		self.diti = model.extract_interfaces(path_to_object).length
+		self.dit = path_to_object.length
+		self.ditc = class_path_to_object.length
+		self.diti = interface_path_to_object.length
 
 		# used defined metrics
 		self.nopud = model.extract_user_defined(parents).length
@@ -174,9 +174,9 @@ redef class MClass
 		self.nodud = model.extract_user_defined(descendants).length
 		self.nodcud = model.extract_user_defined(model.extract_classes(descendants)).length
 		self.nodiud = model.extract_user_defined(model.extract_interfaces(descendants)).length
-		self.ditud = model.extract_user_defined(path_to_object).length
-		self.ditcud = model.extract_user_defined(model.extract_classes(path_to_object)).length
-		self.ditiud = model.extract_user_defined(model.extract_interfaces(path_to_object)).length
+		self.ditud = ud_path_to_object.length
+		self.ditcud = ud_class_path_to_object.length
+		self.ditiud = ud_interface_path_to_object.length
 	end
 
 	private fun is_class: Bool do
@@ -243,43 +243,143 @@ redef class MClass
 		return lst
 	end
 
-	# Get the length of the longest path to Object
-	private fun depth_from_object: Int do
-		var max_depth: nullable Int = null
-
-		for parent in self.parents do
-			# direct parent is root
-			if parent.parents.is_empty then
-				return 1
-			else
-				var depth = parent.depth_from_object + 1
-				if max_depth == null then
-					max_depth = depth
-				else
-					if depth > max_depth then max_depth = depth
-				end
-			end
-		end
-		if max_depth == null then
-			return 0
-		else
-			return max_depth
-		end
-	end
-
 	# Return the longest path from class to root hierarchy
-	private fun path_to_object: Array[MClass] do
+	fun path_to_object: Array[MClass] do
 		var path = new Array[MClass]
 		var max_dit: nullable Int = null
 		var max_parent: nullable MClass = null
 		var parent_path: nullable Array[MClass] = null
 
 		for p in parents do
-			var dit = p.depth_from_object
+			var dit = p.path_to_object.length
 			if max_dit == null or dit >= max_dit then
 				max_dit = dit
 				max_parent = p
 				parent_path = p.path_to_object
+			end
+		end
+
+		if max_parent != null and parent_path != null then
+			path.add(max_parent)
+			path.add_all(parent_path)
+		end
+
+		return path
+	end
+	# Return the longest path from class to root hierarchy
+	fun ud_path_to_object: Array[MClass] do
+		var path = new Array[MClass]
+		if not self.is_user_defined then return path
+		var max_dit: nullable Int = null
+		var max_parent: nullable MClass = null
+		var parent_path: nullable Array[MClass] = null
+
+		for p in parents do
+			var dit = p.ud_path_to_object.length
+			if max_dit == null or dit >= max_dit then
+				max_dit = dit
+				max_parent = p
+				parent_path = p.ud_path_to_object
+			end
+		end
+
+		if max_parent != null and parent_path != null then
+			path.add(max_parent)
+			path.add_all(parent_path)
+		end
+
+		return path
+	end
+
+	# Return the longest path from class to root hierarchy following only classes relations
+	fun class_path_to_object: Array[MClass] do
+		var path = new Array[MClass]
+		if not self.is_class then return path
+		var max_dit: nullable Int = null
+		var max_parent: nullable MClass = null
+		var parent_path: nullable Array[MClass] = null
+
+		for p in parents do
+			var dit = p.class_path_to_object.length
+			if max_dit == null or dit >= max_dit then
+				max_dit = dit
+				max_parent = p
+				parent_path = p.class_path_to_object
+			end
+		end
+
+		if max_parent != null and parent_path != null then
+			path.add(max_parent)
+			path.add_all(parent_path)
+		end
+
+		return path
+	end
+
+	# Return the longest path from class to root hierarchy following only interfaces relations
+	fun interface_path_to_object: Array[MClass] do
+		var path = new Array[MClass]
+		if not self.is_interface then return path
+		var max_dit: nullable Int = null
+		var max_parent: nullable MClass = null
+		var parent_path: nullable Array[MClass] = null
+
+		for p in parents do
+			var dit = p.interface_path_to_object.length
+			if max_dit == null or dit >= max_dit then
+				max_dit = dit
+				max_parent = p
+				parent_path = p.interface_path_to_object
+			end
+		end
+
+		if max_parent != null and parent_path != null then
+			path.add(max_parent)
+			path.add_all(parent_path)
+		end
+
+		return path
+	end
+
+	# Return the longest path from class to root hierarchy following only ud classes relations
+	fun ud_class_path_to_object: Array[MClass] do
+		var path = new Array[MClass]
+		if not self.is_class or not self.is_user_defined then return path
+		var max_dit: nullable Int = null
+		var max_parent: nullable MClass = null
+		var parent_path: nullable Array[MClass] = null
+
+		for p in parents do
+			var dit = p.ud_class_path_to_object.length
+			if max_dit == null or dit >= max_dit then
+				max_dit = dit
+				max_parent = p
+				parent_path = p.ud_class_path_to_object
+			end
+		end
+
+		if max_parent != null and parent_path != null then
+			path.add(max_parent)
+			path.add_all(parent_path)
+		end
+
+		return path
+	end
+
+	# Return the longest path from class to root hierarchy following only ud interfaces relations
+	fun ud_interface_path_to_object: Array[MClass] do
+		var path = new Array[MClass]
+		if not self.is_interface or not self.is_user_defined then return path
+		var max_dit: nullable Int = null
+		var max_parent: nullable MClass = null
+		var parent_path: nullable Array[MClass] = null
+
+		for p in parents do
+			var dit = p.ud_interface_path_to_object.length
+			if max_dit == null or dit >= max_dit then
+				max_dit = dit
+				max_parent = p
+				parent_path = p.ud_interface_path_to_object
 			end
 		end
 
@@ -590,7 +690,7 @@ redef class MModule
 				if mclass.is_interface then ni += 1
 				if mclass.is_interface and mclass.arity > 0 then ngi += 1
 
-				ditsum += mclass.depth_from_object
+				ditsum += mclass.path_to_object.length
 				if mclass.is_dui_eligible then dui_count += 1
 				if mclass.is_ccdui_eligible then ccdui_count += 1
 				if mclass.is_cidui_eligible then cidui_count += 1
