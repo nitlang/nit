@@ -1633,26 +1633,10 @@ class SeparateCompilerVisitor
 
 	redef fun calloc_array(ret_type, arguments)
 	do
-		var ret = ret_type.as(MGenericType)
-		var compiler = self.compiler.as(SeparateCompiler)
-		compiler.undead_types.add(ret)
 		var mclass = self.get_class("ArrayCapable")
-		var nclass = self.get_class("NativeArray")
-
-		var recv = self.frame.arguments.first
-		var recv_type_info = self.type_info(recv)
-		if compiler.modelbuilder.toolcontext.opt_generic_tree.value then
-			var ft = mclass.mclass_type.arguments.first.as(MParameterType)
-			self.ret(self.new_expr("NEW_{nclass.c_name}({arguments[1]}, (struct type*) livetypes_array__NativeArray[{recv_type_info}->fts_table->types[{ft.const_color}]->livecolor])", ret_type))
-		else
-			var res = nclass.get_mtype(mclass.mclass_type.arguments)
-			link_unanchored_type(self.frame.mpropdef.mclassdef, res)
-			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				self.ret(self.new_expr("NEW_{nclass.c_name}({arguments[1]}, (struct type *) {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {nclass.mclass_type.const_color})])", ret_type))
-			else
-				self.ret(self.new_expr("NEW_{nclass.c_name}({arguments[1]}, (struct type *) {recv_type_info}->unanchored_table->types[{nclass.mclass_type.const_color}])", ret_type))
-			end
-		end
+		var ft = mclass.mclass_type.arguments.first.as(MParameterType)
+		var res = self.native_array_instance(ft, arguments[1])
+		self.ret(res)
 	end
 
 	fun link_unanchored_type(mclassdef: MClassDef, mtype: MType) do
