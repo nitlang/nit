@@ -1056,6 +1056,17 @@ class SeparateCompilerVisitor
 		end
 	end
 
+	# Return a C expression returning the runtime type structure of the value
+	# The point of the method is to works also with primitives types.
+	fun type_info(value: RuntimeVariable): String
+	do
+		if value.mtype.ctype == "val*" then
+			return "{value}->type"
+		else
+			return "(&type_{value.mtype.c_name})"
+		end
+	end
+
 	redef fun send(mmethod, arguments)
 	do
 		if arguments.first.mcasttype.ctype != "val*" then
@@ -1259,17 +1270,19 @@ class SeparateCompilerVisitor
 				ntype = ntype.mtype
 			end
 
+			var recv = self.frame.arguments.first
+			var recv_type_info = self.type_info(recv)
 			if ntype isa MParameterType then
 				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-					buffer.append("[self->type->fts_table->types[HASH(self->type->fts_table->mask, {ntype.const_color})]->livecolor]")
+					buffer.append("[{recv_type_info}->fts_table->types[HASH({recv_type_info}->fts_table->mask, {ntype.const_color})]->livecolor]")
 				else
-					buffer.append("[self->type->fts_table->types[{ntype.const_color}]->livecolor]")
+					buffer.append("[{recv_type_info}->fts_table->types[{ntype.const_color}]->livecolor]")
 				end
 			else if ntype isa MVirtualType then
 				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-					buffer.append("[self->type->vts_table->types[HASH(self->type->vts_table->mask, {ntype.mproperty.const_color})]->livecolor]")
+					buffer.append("[{recv_type_info}->vts_table->types[HASH({recv_type_info}->vts_table->mask, {ntype.mproperty.const_color})]->livecolor]")
 				else
-					buffer.append("[self->type->vts_table->types[{ntype.mproperty.const_color}]->livecolor]")
+					buffer.append("[{recv_type_info}->vts_table->types[{ntype.mproperty.const_color}]->livecolor]")
 				end
 			else if ntype isa MGenericType and ntype.need_anchor then
 				var bbuff = new Buffer
@@ -1296,11 +1309,11 @@ class SeparateCompilerVisitor
 			else
 				link_unanchored_type(self.frame.mpropdef.mclassdef, mtype)
 				var recv = self.frame.arguments.first
-				var recv_boxed = self.autobox(recv, self.object_type)
+				var recv_type_info = self.type_info(recv)
 				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-					return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_boxed}->type->unanchored_table->types[HASH({recv_boxed}->type->unanchored_table->mask, {mtype.mclass.mclass_type.const_color})])", mtype)
+					return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {mtype.mclass.mclass_type.const_color})])", mtype)
 				else
-					return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_boxed}->type->unanchored_table->types[{mtype.mclass.mclass_type.const_color}])", mtype)
+					return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->unanchored_table->types[{mtype.mclass.mclass_type.const_color}])", mtype)
 				end
 			end
 		end
@@ -1321,7 +1334,7 @@ class SeparateCompilerVisitor
 		var compiler = self.compiler.as(SeparateCompiler)
 
 		var recv = self.frame.arguments.first
-		var recv_boxed = self.autobox(recv, self.object_type)
+		var recv_type_info = self.type_info(recv)
 
 		var res = self.new_var(bool_type)
 
@@ -1334,8 +1347,6 @@ class SeparateCompilerVisitor
 		var is_nullable = self.get_name("is_nullable")
 		self.add_decl("short int {is_nullable};")
 
-		var boxed = self.autobox(value, self.object_type)
-
 		if not compiler.modelbuilder.toolcontext.opt_generic_tree.value and mtype.need_anchor then
 			link_unanchored_type(self.frame.mpropdef.mclassdef, mtype)
 		end
@@ -1347,9 +1358,9 @@ class SeparateCompilerVisitor
 
 		if ntype isa MParameterType then
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				self.add("{type_struct} = {recv_boxed}->type->fts_table->types[HASH({recv_boxed}->type->fts_table->mask, {ntype.const_color})];")
+				self.add("{type_struct} = {recv_type_info}->fts_table->types[HASH({recv_type_info}->fts_table->mask, {ntype.const_color})];")
 			else
-				self.add("{type_struct} = {recv_boxed}->type->fts_table->types[{ntype.const_color}];")
+				self.add("{type_struct} = {recv_type_info}->fts_table->types[{ntype.const_color}];")
 			end
 			self.add("{cltype} = {type_struct}->color;")
 			self.add("{idtype} = {type_struct}->id;")
@@ -1364,9 +1375,9 @@ class SeparateCompilerVisitor
 				self.add("{is_nullable} = {type_struct}->is_nullable;")
 			else
 				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-					self.add("{type_struct} = {recv_boxed}->type->unanchored_table->types[HASH({recv_boxed}->type->unanchored_table->mask, {ntype.mclass.mclass_type.const_color})];")
+					self.add("{type_struct} = {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {ntype.mclass.mclass_type.const_color})];")
 				else
-					self.add("{type_struct} = {recv_boxed}->type->unanchored_table->types[{ntype.mclass.mclass_type.const_color}];")
+					self.add("{type_struct} = {recv_type_info}->unanchored_table->types[{ntype.mclass.mclass_type.const_color}];")
 				end
 				self.add("{cltype} = {type_struct}->color;")
 				self.add("{idtype} = {type_struct}->id;")
@@ -1380,15 +1391,15 @@ class SeparateCompilerVisitor
 		else if ntype isa MVirtualType then
 			var vtcolor = ntype.mproperty.const_color
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				self.add("{type_struct} = {recv_boxed}->type->vts_table->types[HASH({recv_boxed}->type->vts_table->mask, {vtcolor})];")
+				self.add("{type_struct} = {recv_type_info}->vts_table->types[HASH({recv_type_info}->vts_table->mask, {vtcolor})];")
 			else
-				self.add("{type_struct} = {recv_boxed}->type->vts_table->types[{vtcolor}];")
+				self.add("{type_struct} = {recv_type_info}->vts_table->types[{vtcolor}];")
 			end
 			self.add("{cltype} = {type_struct}->color;")
 			self.add("{idtype} = {type_struct}->id;")
 			self.add("{is_nullable} = {type_struct}->is_nullable;")
 		else
-			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{boxed.inspect}\"); exit(1);")
+			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{value.inspect}\"); exit(1);")
 		end
 
 		if mtype isa MNullableType then
@@ -1396,18 +1407,23 @@ class SeparateCompilerVisitor
 		end
 
 		# check color is in table
-		self.add("if({boxed} == NULL) \{")
-		self.add("{res} = {is_nullable};")
-		self.add("\} else \{")
-		if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-			self.add("{cltype} = HASH({boxed}->type->color, {idtype});")
+		if self.maybe_null(value) then
+			self.add("if({value} == NULL) \{")
+			self.add("{res} = {is_nullable};")
+			self.add("\} else \{")
 		end
-		self.add("if({cltype} >= {boxed}->type->table_size) \{")
+		var value_type_info = self.type_info(value)
+		if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+			self.add("{cltype} = HASH({value_type_info}->color, {idtype});")
+		end
+		self.add("if({cltype} >= {value_type_info}->table_size) \{")
 		self.add("{res} = 0;")
 		self.add("\} else \{")
-		self.add("{res} = {boxed}->type->type_table[{cltype}] == {idtype};")
+		self.add("{res} = {value_type_info}->type_table[{cltype}] == {idtype};")
 		self.add("\}")
-		self.add("\}")
+		if self.maybe_null(value) then
+			self.add("\}")
+		end
 
 		return res
 	end
@@ -1585,11 +1601,11 @@ class SeparateCompilerVisitor
 			else
 				link_unanchored_type(self.frame.mpropdef.mclassdef, mtype)
 				var recv = self.frame.arguments.first
-				var recv_boxed = self.autobox(recv, self.object_type)
+				var recv_type_info = self.type_info(recv)
 				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-					return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_boxed}->type->unanchored_table->types[HASH({recv_boxed}->type->unanchored_table->mask, {mtype.mclass.mclass_type.const_color})])", mtype)
+					return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {mtype.mclass.mclass_type.const_color})])", mtype)
 				else
-					return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_boxed}->type->unanchored_table->types[{mtype.mclass.mclass_type.const_color}])", mtype)
+					return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->unanchored_table->types[{mtype.mclass.mclass_type.const_color}])", mtype)
 				end
 			end
 		end
@@ -1623,18 +1639,18 @@ class SeparateCompilerVisitor
 		var mclass = self.get_class("ArrayCapable")
 		var nclass = self.get_class("NativeArray")
 
+		var recv = self.frame.arguments.first
+		var recv_type_info = self.type_info(recv)
 		if compiler.modelbuilder.toolcontext.opt_generic_tree.value then
 			var ft = mclass.mclass_type.arguments.first.as(MParameterType)
-			self.ret(self.new_expr("NEW_{nclass.c_name}({arguments[1]}, (struct type*) livetypes_array__NativeArray[self->type->fts_table->types[{ft.const_color}]->livecolor])", ret_type))
+			self.ret(self.new_expr("NEW_{nclass.c_name}({arguments[1]}, (struct type*) livetypes_array__NativeArray[{recv_type_info}->fts_table->types[{ft.const_color}]->livecolor])", ret_type))
 		else
 			var res = nclass.get_mtype(mclass.mclass_type.arguments)
 			link_unanchored_type(self.frame.mpropdef.mclassdef, res)
-			var recv = self.frame.arguments.first
-			var recv_boxed = self.autobox(recv, self.object_type)
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				self.ret(self.new_expr("NEW_{nclass.c_name}({arguments[1]}, (struct type *) {recv_boxed}->type->unanchored_table->types[HASH({recv_boxed}->type->unanchored_table->mask, {nclass.mclass_type.const_color})])", ret_type))
+				self.ret(self.new_expr("NEW_{nclass.c_name}({arguments[1]}, (struct type *) {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {nclass.mclass_type.const_color})])", ret_type))
 			else
-				self.ret(self.new_expr("NEW_{nclass.c_name}({arguments[1]}, (struct type *) {recv_boxed}->type->unanchored_table->types[{nclass.mclass_type.const_color}])", ret_type))
+				self.ret(self.new_expr("NEW_{nclass.c_name}({arguments[1]}, (struct type *) {recv_type_info}->unanchored_table->types[{nclass.mclass_type.const_color}])", ret_type))
 			end
 		end
 	end
