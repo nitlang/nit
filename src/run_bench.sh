@@ -429,6 +429,20 @@ function bench_nitc_vc_nitg-e()
 }
 bench_nitc_vc_nitg-e
 
+function bench_cc_nitg-e()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	for o in "gcc0:CC=\"ccache gcc\" CFLAGS=-O0" "cl0:CC=\"ccache clang\" CFLAGS=-O0" "gccs:CC=\"ccache gcc\" CFLAGS=-Os" "cls:CC=\"ccache clang\" CFLAGS=-Os" "gcc2:CC=\"ccache gcc\" CFLAGS=-O2" "cl2:CC=\"ccache clang\" CFLAGS=-O2" "gcc3:CC=\"ccache gcc\" CFLAGS=-O3"  "cl3:CC=\"ccache clang\" CFLAGS=-O3"; do
+		f=`echo "$o" | cut -f1 -d:`
+		o=`echo "$o" | cut -f2 -d:`
+		prepare_res "$name-nitg-e-$f.dat" "nitg-e-$f" "nitg with --erasure --make-flags $o"
+		run_compiler "nitg-e-$f" ./nitg --erasure --make-flags "$o"
+	done
+	plot "$name.gnu"
+}
+bench_cc_nitg-e
+
 function bench_compilation_time
 {
 	name="$FUNCNAME"
