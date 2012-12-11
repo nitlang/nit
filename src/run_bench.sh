@@ -419,8 +419,12 @@ function bench_nitc_vc_nitg-e()
 	skip_test "$name" && return
 	prepare_res "$name-nitc.dat" "nitc" "nitc"
 	run_compiler "nitc" ./nitc_3 -O
+	prepare_res "$name-nitc-malloc.dat" "nitc-malloc" "nitc with malloc"
+	NIT_GC_OPTION="malloc" run_compiler "nitc" ./nitc_3 -O
 	prepare_res "$name-nitc-bohem.dat" "nitc-boehm" "nitc with boehm"
 	NIT_GC_OPTION="boehm" run_compiler "nitc" ./nitc_3 -O
+	prepare_res "$name-nitg-e-nockeck-malloc.dat" "nitg-e-nc-malloc" "nitg with --erasure --no-check-autocast --no-check-erasure-cast and malloc"
+	run_compiler "nitg-e-nc-malloc" ./nitg --erasure --no-check-autocast --no-check-erasure-cast --make-flags "CFLAGS=\"-O2 -DNOBOEHM\""
 	prepare_res "$name-nitg-e-nockeck.dat" "nitg-e-nc" "nitg with --erasure --no-check-autocast --no-check-erasure-cast"
 	run_compiler "nitg-e-nc" ./nitg --erasure --no-check-autocast --no-check-erasure-cast
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"

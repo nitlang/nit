@@ -256,9 +256,11 @@ class GlobalCompiler
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
-		# TODO: Better way to activate the GC
+		self.header.add_decl("#ifndef NOBOEHM")
 		self.header.add_decl("#include <gc/gc.h>")
-		#self.header.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
+		self.header.add_decl("#else /*NOBOEHM*/")
+		self.header.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
+		self.header.add_decl("#endif /*NOBOEHM*/")
 
 		compile_header_structs
 
