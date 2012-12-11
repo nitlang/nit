@@ -12,6 +12,7 @@
   --only-metamodel            Stop after meta-model processing
   -o, --output                Output file
   --no-cc                     Do not invoke C compiler
+  --make-flags                Additional options to make
   --hardening                 Generate contracts in the C code against bugs in the compiler
   --no-check-covariance       Disable type tests of covariant parameters (dangerous)
   --no-check-initialization   Disable isset tests at the end of constructors (dangerous)

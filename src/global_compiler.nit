@@ -35,6 +35,9 @@ redef class ToolContext
 	# --no-cc
 	var opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
 
+	# --make-flags
+	var opt_make_flags: OptionString = new OptionString("Additional options to make", "--make-flags")
+
 	# --hardening
 	var opt_hardening: OptionBool = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
 
@@ -56,7 +59,7 @@ redef class ToolContext
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_hardening)
+		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_hardening)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 	end
 end
@@ -198,13 +201,15 @@ redef class ModelBuilder
 
 		time0 = time1
 		self.toolcontext.info("*** COMPILING C ***", 1)
-		self.toolcontext.info("make -B -f {makename} -j 4", 2)
+		var makeflags = self.toolcontext.opt_make_flags.value
+		if makeflags == null then makeflags = ""
+		self.toolcontext.info("make -B -f {makename} -j 4 {makeflags}", 2)
 
 		var res
 		if self.toolcontext.verbose_level >= 3 then
-			res = sys.system("make -B -f {makename} -j 4 2>&1")
+			res = sys.system("make -B -f {makename} -j 4 {makeflags} 2>&1")
 		else
-			res = sys.system("make -B -f {makename} -j 4 2>&1 >/dev/null")
+			res = sys.system("make -B -f {makename} -j 4 {makeflags} 2>&1 >/dev/null")
 		end
 		if res != 0 then
 			toolcontext.error(null, "make failed! Error code: {res}.")
