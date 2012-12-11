@@ -19,19 +19,19 @@ nitg:
 	./tests.sh --engine nitg ${PROGS}
 
 nitg-s:
-	./tests.sh --engine nitg-s *.nit
+	./tests.sh --engine nitg-s ${PROGS}
 
 nitg-s-tree:
 	./tests.sh --engine nitg-s -o --generic-resolution-tree *.nit
 
 nitg-s-bm:
-	./tests.sh --engine nitg-s -o --bm-typing *.nit
+	./tests.sh --engine nitg-s -o --bm-typing ${PROGS}
 
 nitg-s-phmod:
-	./tests.sh --engine nitg-s -o --phmod-typing *.nit
+	./tests.sh --engine nitg-s -o --phmod-typing ${PROGS}
 
 nitg-s-phand:
-	./tests.sh --engine nitg-s -o --phand-typing *.nit
+	./tests.sh --engine nitg-s -o --phand-typing ${PROGS}
 
 nitg-e:
 	./tests.sh --engine nitg-e ${PROGS}
