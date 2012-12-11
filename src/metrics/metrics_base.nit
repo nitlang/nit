@@ -26,6 +26,8 @@ redef class ToolContext
 
 	# --inheritance
 	var opt_inheritance = new OptionBool("Compute metrics about inheritance usage", "--inheritance")
+	# --genericity
+	var opt_genericity = new OptionBool("Compute metrics about genericity usage", "--genericity")
 	# --refinement
 	var opt_refinement = new OptionBool("Compute metrics about refinement usage", "--refinement")
 	# --self
@@ -51,6 +53,7 @@ redef class ToolContext
 		super
 		self.option_context.add_option(opt_all)
 		self.option_context.add_option(opt_inheritance)
+		self.option_context.add_option(opt_genericity)
 		self.option_context.add_option(opt_refinement)
 		self.option_context.add_option(opt_self)
 		self.option_context.add_option(opt_nullables)
