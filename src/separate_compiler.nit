@@ -259,6 +259,9 @@ class SeparateCompiler
 		mtypes.add_all(self.runtime_type_analysis.live_types)
 		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
 		mtypes.add_all(self.undead_types)
+		for c in self.box_kinds.keys do
+			mtypes.add(c.mclass_type)
+		end
 
 		for mtype in mtypes do
 			retieve_live_partial_types(mtype)
