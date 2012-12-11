@@ -64,6 +64,12 @@ if all or toolcontext.opt_inheritance.value then
 	compute_inheritance_metrics(toolcontext, model)
 end
 
+# Genericity usage metrics
+if all or toolcontext.opt_genericity.value then
+	print ""
+	compute_genericity_metrics(toolcontext, model)
+end
+
 # Refinement usage metrics
 if all or toolcontext.opt_refinement.value then
 	print ""
