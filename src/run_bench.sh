@@ -202,8 +202,8 @@ function run_compiler()
 	bench_command "nit" "nit test_parser.nit test_parser.nit" "./nit.$title.bin" -v test_parser.nit -- -n rapid_type_analysis.nit
 	run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
 	bench_command "shoot" "shoot_logic" "./shoot.$title.bin"
-	run_command "$@" ../tests/shootout_binarytrees.nit -o "bintrees.$title.bin"
-	bench_command "bintrees" "shootout_binarytrees" "./bintrees.$title.bin" 17
+	run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
+	bench_command "bintrees" "bench_bintree_gen 17" "./bintrees.$title.bin" 17
 }
 
 ## HANDLE OPTIONS ##
