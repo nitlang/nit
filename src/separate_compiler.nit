@@ -1106,7 +1106,7 @@ class SeparateCompilerVisitor
 		var recv = arguments.first
 		s.append("val*")
 		ss.append("{recv}")
-		self.varargize(msignature, arguments)
+		self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), arguments)
 		for i in [0..msignature.arity[ do
 			var a = arguments[i+1]
 			var t = msignature.mparameters[i].mtype
@@ -1205,6 +1205,25 @@ class SeparateCompilerVisitor
 			self.add("{res} = {mmethoddef.c_name}({arguments.join(", ")});")
 		end
 
+		return res
+	end
+
+	redef fun vararg_instance(mpropdef, recv, varargs, elttype)
+	do
+		# A vararg must be stored into an new array
+		# The trick is that the dymaic type of the array may depends on the receiver
+		# of the method (ie recv) if the static type is unresolved
+		# This is more complex than usual because the unanchored type must not be resolved
+		# with the current receiver (ie self).
+		# Therefore to isolate the resolution from self, a local Frame is created.
+		# One can see this implementation as an inlined method of the receiver whose only
+		# job is to allocate the array
+		var old_frame = self.frame
+		var frame = new Frame(self, mpropdef, mpropdef.mclassdef.bound_mtype, [recv])
+		self.frame = frame
+		#print "required Array[{elttype}] for recv {recv.inspect}. bound=Array[{self.resolve_for(elttype, recv)}]. selfvar={frame.arguments.first.inspect}"
+		var res = self.array_instance(varargs, elttype)
+		self.frame = old_frame
 		return res
 	end
 

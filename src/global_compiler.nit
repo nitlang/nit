@@ -1350,7 +1350,7 @@ class GlobalCompilerVisitor
 		recv = self.autoadapt(recv, recvtype)
 
 		args = args.to_a
-		self.varargize(m.msignature.as(not null), args)
+		self.varargize(m, m.msignature.as(not null), args)
 		if args.length != m.msignature.arity + 1 then # because of self
 			add("printf(\"NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.\\n\"); exit(1);")
 			debug("NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.")
@@ -1378,7 +1378,7 @@ class GlobalCompilerVisitor
 	# Transform varargs, in raw arguments, into a single argument of type Array
 	# Note: this method modify the given `args`
 	# If there is no vararg, then `args` is not modified.
-	fun varargize(msignature: MSignature, args: Array[RuntimeVariable])
+	fun varargize(mpropdef: MPropDef, msignature: MSignature, args: Array[RuntimeVariable])
 	do
 		var recv = args.first
 		var vararg_rank = msignature.vararg_rank
@@ -1398,10 +1398,9 @@ class GlobalCompilerVisitor
 			for i in [vararg_rank..vararg_lastrank] do
 				vararg.add(rawargs[i+1])
 			end
-			# FIXME: its it to late to determine the vararg type, this should have been done during a previous analysis
+
 			var elttype = msignature.mparameters[vararg_rank].mtype
-			elttype = self.resolve_for(elttype, recv)
-			args.add(self.array_instance(vararg, elttype))
+			args.add(self.vararg_instance(mpropdef, recv, vararg, elttype))
 
 			for i in [vararg_lastrank+1..rawargs.length-1[ do
 				args.add(rawargs[i+1])
@@ -1410,6 +1409,16 @@ class GlobalCompilerVisitor
 			rawargs.add_all(args)
 		end
 	end
+
+	# Get an instance of a anny for a vararg
+	fun vararg_instance(mpropdef: MPropDef, recv: RuntimeVariable, varargs: Array[RuntimeVariable], elttype: MType): RuntimeVariable
+	do
+		# FIXME: this is currently buggy since recv is not exact
+
+		elttype = self.resolve_for(elttype, recv)
+		return self.array_instance(varargs, elttype)
+	end
+
 
 	fun bugtype(recv: RuntimeVariable)
 	do
