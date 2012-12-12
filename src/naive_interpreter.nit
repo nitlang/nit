@@ -662,11 +662,11 @@ redef class AInternMethPropdef
 			end
 		else if pname == "output_class_name" then
 			var recv = args.first
-			print recv.mtype.as(MClassType).mclass
+			print recv.mtype
 			return null
 		else if pname == "native_class_name" then
 			var recv = args.first
-			var txt = recv.mtype.as(MClassType).mclass.to_s
+			var txt = recv.mtype.to_s
 			return v.native_string_instance(txt)
 		else if pname == "==" then
 			# == is correclt redefined for instances
