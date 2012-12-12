@@ -21,36 +21,6 @@ import model
 private import metrics_base
 
 redef class Model
-
-	# List of modules in std lib
-	# FIXME this is quite ugly, find a dynamic way...
-	fun std_modules: Set[String] do
-		if self.std_modules_cache == null then
-			self.std_modules_cache = new HashSet[String]
-			self.std_modules_cache.add("collection")
-			self.std_modules_cache.add("abstract_collection")
-			self.std_modules_cache.add("array")
-			self.std_modules_cache.add("hash_collection")
-			self.std_modules_cache.add("list")
-			self.std_modules_cache.add("range")
-			self.std_modules_cache.add("sorter")
-			self.std_modules_cache.add("environ")
-			self.std_modules_cache.add("exec")
-			self.std_modules_cache.add("file")
-			self.std_modules_cache.add("gc")
-			self.std_modules_cache.add("hash")
-			self.std_modules_cache.add("kernel")
-			self.std_modules_cache.add("math")
-			self.std_modules_cache.add("standard")
-			self.std_modules_cache.add("stream")
-			self.std_modules_cache.add("string")
-			self.std_modules_cache.add("string_search")
-			self.std_modules_cache.add("time")
-		end
-		return self.std_modules_cache.as(not null)
-	end
-	private var std_modules_cache: nullable Set[String]
-
 	# Extract the subset of classes from a set of mclass
 	fun extract_classes(mclasses: Collection[MClass]): Set[MClass] do
 		var lst = new HashSet[MClass]
@@ -177,22 +147,6 @@ redef class MClass
 		self.ditud = ud_path_to_object.length
 		self.ditcud = ud_class_path_to_object.length
 		self.ditiud = ud_interface_path_to_object.length
-	end
-
-	fun is_class: Bool do
-		return self.kind == concrete_kind or self.kind == abstract_kind
-	end
-
-	fun is_interface: Bool do
-		return self.kind == interface_kind
-	end
-
-	fun is_abstract: Bool do
-		return self.kind == abstract_kind
-	end
-
-	fun is_user_defined: Bool do
-		return self.intro_mmodule.is_user_defined
 	end
 
 	# Get parents of the class (direct super classes only)
@@ -683,15 +637,15 @@ redef class MModule
 		var ccif_count = 0
 		var icif_count = 0
 		var iiif_count = 0
-
+		var count = 0
 		for mmodule in self.in_nesting.greaters do
 			for mclass in mmodule.intro_mclasses do
+				count += 1
 				if mclass.is_class then nc += 1
 				if mclass.is_class and mclass.arity > 0 then ngc += 1
 				if mclass.is_class and mclass.is_abstract then nac += 1
 				if mclass.is_interface then ni += 1
 				if mclass.is_interface and mclass.arity > 0 then ngi += 1
-
 				ditsum += mclass.path_to_object.length
 				if mclass.is_dui_eligible then dui_count += 1
 				if mclass.is_ccdui_eligible then ccdui_count += 1
@@ -705,19 +659,15 @@ redef class MModule
 		end
 
 		self.nm = self.in_nesting.greaters.length
-		dit = div(ditsum, nc + ni)
-		dui = div(dui_count * 100, nc + ni)
+		dit = div(ditsum, count)
+		dui = div(dui_count * 100, count)
 		ccdui = div(ccdui_count * 100, nc)
 		cidui = div(cidui_count * 100, nc)
 		iidui = div(iidui_count * 100, ni)
-		inhf = div(if_count * 100, nc + ni)
+		inhf = div(if_count * 100, count)
 		ccif = div(ccif_count * 100, nc)
 		icif = div(icif_count * 100, ni)
 		iiif = div(iiif_count * 100, ni)
-	end
-
-	fun is_user_defined: Bool do
-		return not self.model.std_modules.has(self.name)
 	end
 end
 
@@ -796,6 +746,7 @@ do
 	var udiiduisl = "" 			# (UDIIDUISL) Proportion of user-defined interfaces that extend some other SL interface.
 
 	# (UD -> UD) User-defined summary inheritance metrics
+	var ditud = ""
 	var udduiud = "" 			# (UDDUIUD) Proportion user-defined of types that either implement an interface or extend another type user-defined
 	var udccduiud = "" 			# (UDCCDUIUD) Proportion of user-defined classes that extend some other user-defined class.
 	var udciduiud = "" 			# (UDCIDUIUD) Proportion of user-defined classes that implement some other user-defined interface.
@@ -843,6 +794,8 @@ do
 
 	# * -> *
 	var ditsum = 0
+	var ditudsum = 0
+
 	var dui_count = 0
 	var ccdui_count = 0
 	var cidui_count = 0
@@ -902,6 +855,7 @@ do
 
 	for mclass in model.mclasses do
 		ditsum += mclass.dit
+		ditudsum += mclass.ditud
 
 		# * -> *
 		if mclass.is_dui_eligible then dui_count += 1
@@ -964,7 +918,8 @@ do
 
 	# * -> *
 	dit = div(ditsum, model.mclasses.length)
-	dui = div(dui_count * 100, nc + ni)
+	ditud = div(ditudsum, ncud + niud)
+	dui = div(dui_count * 100, model.mclasses.length)
 	ccdui = div(ccdui_count * 100, nc)
 	cidui = div(cidui_count * 100, nc)
 	iidui = div(iidui_count * 100, ni)
@@ -1043,7 +998,7 @@ do
 		inheritanceCSV.add_line("SL -> UD", "", 0, 0, 0, 0, slinhfud, slccifud, slicifud, sliiifud)
 		inheritanceCSV.add_line("UD -> *", "", uddui, udccdui, udcidui, udiidui, udinhf, udccif, udicif, udiiif)
 		inheritanceCSV.add_line("UD -> SL", "", udduisl, udccduisl, udciduisl, udiiduisl, 0, 0, 0, 0)
-		inheritanceCSV.add_line("UD -> UD", "", udduiud, udccduiud, udciduiud, udiiduiud, udinhfud, udccifud, udicifud, udiiifud)
+		inheritanceCSV.add_line("UD -> UD", ditud, udduiud, udccduiud, udciduiud, udiiduiud, udinhfud, udccifud, udicifud, udiiifud)
 		for m in model.mmodules do
 			if m.intro_mclasses.is_empty and m.in_nesting.greaters.length == 1 then continue
 			inheritanceCSV.add_line(m.name, m.dit, m.dui, m.ccdui, m.cidui, m.iidui, m.inhf, m.ccif, m.icif, m.iiif)
