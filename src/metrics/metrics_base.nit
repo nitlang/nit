@@ -77,6 +77,66 @@ redef class ToolContext
 	end
 end
 
+redef class Model
+
+	# List of modules in std lib
+	# FIXME this is quite ugly, find a dynamic way...
+	fun std_modules: Set[String] do
+		if self.std_modules_cache == null then
+			self.std_modules_cache = new HashSet[String]
+			self.std_modules_cache.add("collection")
+			self.std_modules_cache.add("abstract_collection")
+			self.std_modules_cache.add("array")
+			self.std_modules_cache.add("hash_collection")
+			self.std_modules_cache.add("list")
+			self.std_modules_cache.add("range")
+			self.std_modules_cache.add("sorter")
+			self.std_modules_cache.add("environ")
+			self.std_modules_cache.add("exec")
+			self.std_modules_cache.add("file")
+			self.std_modules_cache.add("gc")
+			self.std_modules_cache.add("hash")
+			self.std_modules_cache.add("kernel")
+			self.std_modules_cache.add("math")
+			self.std_modules_cache.add("standard")
+			self.std_modules_cache.add("stream")
+			self.std_modules_cache.add("string")
+			self.std_modules_cache.add("string_search")
+			self.std_modules_cache.add("time")
+		end
+		return self.std_modules_cache.as(not null)
+	end
+	private var std_modules_cache: nullable Set[String]
+end
+
+redef class MClass
+	fun is_class: Bool do
+		return self.kind == concrete_kind or self.kind == abstract_kind
+	end
+
+	fun is_interface: Bool do
+		return self.kind == interface_kind
+	end
+
+	fun is_enum: Bool do
+		return self.kind == enum_kind
+	end
+
+	fun is_abstract: Bool do
+		return self.kind == abstract_kind
+	end
+
+	fun is_user_defined: Bool do
+		return self.intro_mmodule.is_user_defined
+	end
+end
+
+redef class MModule
+	fun is_user_defined: Bool do
+		return not self.model.std_modules.has(self.name)
+	end
+end
+
 # A counter counts occurence of things
 # Use this instead of a HashMap[E, Int]
 class Counter[E: Object]

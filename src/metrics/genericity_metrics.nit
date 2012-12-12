@@ -231,6 +231,105 @@ do
 	for mclass in model.mclasses do
 		mclass.compute_class_genericity_metrics(model)
 	end
+	
+	# global summary metrics
+	var nc: Int = 0				# (NC)  Number of Classes
+	var ni: Int = 0				# (NI)  Number of Interfaces
+	var ncud: Int = 0			# (NCUD) Number of Classes User Defined
+	var niud: Int = 0			# (NIUD) Number of Interfaces User Defined
+		
+	# global summary inheritance metrics
+	var dit = ""				# (DIT) Global Depth in Inheritance Tree
+	var dui = "" 				# (DUI) Proportion of types that either implement an interface or extend another type other than Object
+	var ccdui = "" 				# (CCDUI) Proportion of classes that extend some other class.
+	var cidui = "" 				# (CIDUI) Proportion of classes that implement some other interface.
+	var iidui = "" 				# (IIDUI) Proportion of interfaces that extend some other interface.
+	var inhf = ""				# (IF) Proportion of types Inherited From, that is, those types that are either extended or implemented
+	var ccif = ""				# (CCIF) Proportion of classes extended by some other class.
+	var icif = ""				# (ICIF) Proportion of interfaces implemented by some other class.
+	var iiif = ""				# (IIIF) Proportion of interfaces extended by some other interface.
+	
+	var ditsum = 0
+	var dui_count = 0
+	var ccdui_count = 0
+	var cidui_count = 0
+	var iidui_count = 0
+	var if_count = 0
+	var ccif_count = 0
+	var icif_count = 0
+	var iiif_count = 0
+	
+	# (UD -> UD) User-defined summary inheritance metrics
+	var ditud = ""
+	var uddui = "" 				# (UDDUI) Proportion user-defined of types that either implement an interface or extend another type
+	var udccdui = "" 			# (UDCCDUI) Proportion of user-defined classes that extend some other class.
+	var udcidui = "" 			# (UDCIDUI) Proportion of user-defined classes that implement some other interface.
+	var udiidui = "" 			# (UDIIDUI) Proportion of user-defined interfaces that extend some other interface.
+	var udinhf = ""				# (UDIF) Proportion of UD types Inherited From, that is, those types that are either extended or implemented
+	var udccif = ""				# (UDCCIF) Proportion of UD classes extended by some other class.
+	var udicif = ""				# (UDICIF) Proportion of UD interfaces implemented by some other class.
+	var udiiif = ""				# (UDIIIF) Proportion of UD interfaces extended by some other interface.
+
+	
+	
+	var ditudsum = 0
+	var uddui_count = 0
+	var udccdui_count = 0
+	var udcidui_count = 0
+	var udiidui_count = 0
+	var udif_count = 0
+	var udccif_count = 0
+	var udicif_count = 0
+	var udiiif_count = 0
+	
+	var nb_gen = 0
+	for mclass in model.mclasses do
+		if not mclass.arity > 0 then continue 
+		ditsum += mclass.ditg
+		ditudsum += mclass.ditgud
+
+		# * -> *
+		if mclass.is_dui_eligible then dui_count += 1
+		if mclass.is_ccdui_eligible then ccdui_count += 1
+		if mclass.is_cidui_eligible then cidui_count += 1
+		if mclass.is_iidui_eligible then iidui_count += 1
+		if mclass.is_if_eligible(model) then if_count += 1
+		if mclass.is_ccif_eligible(model) then ccif_count += 1
+		if mclass.is_icif_eligible(model) then icif_count += 1
+		if mclass.is_iiif_eligible(model) then iiif_count += 1
+
+		# UD -> *
+		if mclass.is_uddui_eligible then uddui_count += 1
+		if mclass.is_udccdui_eligible then udccdui_count += 1
+		if mclass.is_udcidui_eligible then udcidui_count += 1
+		if mclass.is_udiidui_eligible then udiidui_count += 1
+		if mclass.is_udif_eligible(model) then udif_count += 1
+		if mclass.is_udccif_eligible(model) then udccif_count += 1
+		if mclass.is_udicif_eligible(model) then udicif_count += 1
+		if mclass.is_udiiif_eligible(model) then udiiif_count += 1
+
+	end
+
+	# * -> *
+	dit = div(ditsum, model.mclasses.length)
+	ditud = div(ditudsum, ncud + niud)
+	dui = div(dui_count * 100, model.mclasses.length)
+	ccdui = div(ccdui_count * 100, nc)
+	cidui = div(cidui_count * 100, nc)
+	iidui = div(iidui_count * 100, ni)
+	inhf = div(if_count * 100, nc + ni)
+	ccif = div(ccif_count * 100, nc)
+	icif = div(icif_count * 100, ni)
+	iiif = div(iiif_count * 100, ni)	
+	
+	uddui = div(uddui_count * 100, ncud + niud)
+	udccdui = div(udccdui_count * 100, ncud)
+	udcidui = div(udcidui_count * 100, ncud)
+	udiidui = div(udiidui_count * 100, niud)
+	udinhf = div(if_count * 100, ncud + niud)
+	udccif = div(ccif_count * 100, ncud)
+	udicif = div(icif_count * 100, niud)
+	udiiif = div(iiif_count * 100, niud)
 
 	#TODO Comment monitorer l'évolution de la signature générique ? C[T, U] <: B <: A[V]
 
@@ -239,6 +338,8 @@ do
 		# inheritance metrics
 		var inheritanceCSV = new CSVDocument(toolcontext.output_dir.join_path("inheritance_genericity_metrics.csv"))
 		inheritanceCSV.set_header("scope", "GDIT", "GDUI", "GCCDUI", "GCIDUI", "GIIDUI", "GIF", "GCCIF", "GICIF", "GIIIF")
+		inheritanceCSV.add_line("global", dit, dui, ccdui, cidui, iidui, inhf, ccif, icif, iiif)
+		inheritanceCSV.add_line("UD -> *", ditud, uddui, udccdui, udcidui, udiidui, udinhf, udccif, udicif, udiiif)
 		for m in model.mmodules do
 			if m.intro_mclasses.is_empty and m.in_nesting.greaters.length == 1 then continue
 			inheritanceCSV.add_line(m.name, m.gdit, m.gdui, m.gccdui, m.gcidui, m.giidui, m.ginhf, m.gccif, m.gicif, m.giiif)
