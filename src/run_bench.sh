@@ -433,6 +433,20 @@ function bench_nitc_vc_nitg-e()
 }
 bench_nitc_vc_nitg-e
 
+function bench_nitg-e_gc()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res "$name-nitg-e-malloc.dat" "nitg-e-malloc" "nitg with --erasure and malloc"
+	run_compiler "nitg-e-malloc" ./nitg --erasure --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	prepare_res "$name-nitg-e-noatomic.dat" "nitg-e-noatomic" "nitg with --erasure and no atomic"
+	run_compiler "nitg-e-noatomic" ./nitg --erasure --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM_ATOMIC\""
+	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
+	run_compiler "nitg-e" ./nitg --erasure
+	plot "$name.gnu"
+}
+bench_nitg-e_gc
+
 function bench_cc_nitg-e()
 {
 	name="$FUNCNAME"

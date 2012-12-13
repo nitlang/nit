@@ -256,8 +256,13 @@ class GlobalCompiler
 		self.header.add_decl("#include <string.h>")
 		self.header.add_decl("#ifndef NOBOEHM")
 		self.header.add_decl("#include <gc/gc.h>")
+		self.header.add_decl("#ifdef NOBOEHM_ATOMIC")
+		self.header.add_decl("#undef GC_MALLOC_ATOMIC")
+		self.header.add_decl("#define GC_MALLOC_ATOMIC(x) GC_MALLOC(x)")
+		self.header.add_decl("#endif /*NOBOEHM_ATOMIC*/")
 		self.header.add_decl("#else /*NOBOEHM*/")
 		self.header.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
+		self.header.add_decl("#define GC_MALLOC_ATOMIC(x) calloc(1, (x))")
 		self.header.add_decl("#endif /*NOBOEHM*/")
 
 		compile_header_structs
@@ -2171,7 +2176,7 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
 			return
 		else if pname == "calloc_string" then
-			v.ret(v.new_expr("(char*)GC_MALLOC({arguments[1]})", ret.as(not null)))
+			v.ret(v.new_expr("(char*)GC_MALLOC_ATOMIC({arguments[1]})", ret.as(not null)))
 			return
 		else if pname == "calloc_array" then
 			v.calloc_array(ret.as(not null), arguments)
